@@ -20,7 +20,7 @@
 
 	project_access_check( $t_bug_id );
 
-	if ( get_bug_field( $t_bug_id, 'status' ) < RESOLVED ) {
+	if ( bug_get_field( $t_bug_id, 'status' ) < RESOLVED ) {
 		if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 			( $t_bugnote_user_id == $t_user_id )) {
 			# do nothing

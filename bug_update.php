@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.32 $
-	# $Author: prescience $
-	# $Date: 2002-08-31 23:31:21 $
+	# $Revision: 1.33 $
+	# $Author: jfitzell $
+	# $Date: 2002-09-16 04:16:58 $
 	#
-	# $Id: bug_update.php,v 1.32 2002-08-31 23:31:21 prescience Exp $
+	# $Id: bug_update.php,v 1.33 2002-09-16 04:16:58 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,14 +24,10 @@
 
 	$c_id = (integer)$f_id;
 
-	# extract current extended information into history variables
-	$result = get_bug_row_ex ( $f_id );
-	if ( 0 == db_num_rows( $result ) ) {
-		# speed is not an issue in this case, so re-use code
-		bug_ensure_exists( $f_id );
-	}
+	bug_ensure_exists( $f_id );
 
-	$row = db_fetch_array( $result );
+	# extract current extended information into history variables
+	$row = bug_get_extended_row( $f_id );
 	extract( $row, EXTR_PREFIX_ALL, 'h' );
 
 	# if bug is private, make sure user can view private bugs
@@ -165,7 +161,7 @@
 	}
 
 	# updated the last_updated date
-	$result = bug_date_update( $f_id );
+	$result = bug_update_date( $f_id );
 
 	# If we should notify and it's in feedback state then send an email
 	switch ( $f_status ) {

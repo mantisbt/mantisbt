@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.6 2002-08-29 19:26:13 jfitzell Exp $
+	# $Id: history_api.php,v 1.7 2002-09-16 04:16:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -39,7 +39,7 @@
 	# log the changes
 	# events should be logged *after* the modification
 	function history_log_event( $p_bug_id, $p_field_name, $p_old_value ) {
-		history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, get_bug_field( $p_bug_id, $p_field_name ) );
+		history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, bug_get_field( $p_bug_id, $p_field_name ) );
 	}
 	# --------------------
 	# log the changes
@@ -186,5 +186,20 @@
 		} # end for loop
 
 		return ( $history );
+	}
+	# --------------------
+	# delete all history associated with a bug
+	function history_delete( $p_bug_id ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
+
+		$t_bug_history_table = config_get( 'mantis_bug_history_table' );
+
+		$query = "DELETE
+				  FROM $t_bug_history_table
+				  WHERE bug_id='$c_bug_id'";
+		db_query($query);
+
+		# db_query() errors on failure so:
+		return true;
 	}
 ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.5 2002-09-03 02:21:01 prescience Exp $
+	# $Id: access_api.php,v 1.6 2002-09-16 04:16:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -51,7 +51,7 @@
 		global $g_private_bug_threshold;
 
 		if ( empty ( $p_view_state ) ) {
-			$t_view_state = get_bug_field( $p_bug_id, 'view_state' );
+			$t_view_state = bug_get_field( $p_bug_id, 'view_state' );
 		} else {
 			$t_view_state = (integer)$p_view_state;
 		}
@@ -184,7 +184,7 @@
 		}
 
 		# access_level check
-		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		$t_project_view_state = project_get_field( $t_project_id, 'view_state' );
 
 		# public project accept all users
@@ -208,7 +208,7 @@
 		global	$g_project_cookie, $g_project_cookie_val, $g_view_all_cookie,
 				$g_cookie_time_length, $g_cookie_path;
 
-		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		if ( $t_project_id != $g_project_cookie_val ) {
 			setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length, $g_cookie_path );
 			setcookie( $g_view_all_cookie, '' );

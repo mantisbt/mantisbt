@@ -6,317 +6,127 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.9 2002-09-16 02:10:52 jfitzell Exp $
+	# $Id: bug_api.php,v 1.10 2002-09-16 04:16:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Bug API
 	###########################################################################
 
-	# --------------------
-	function bug_add() {
-	}
-	# --------------------
-	function bug_update() {
-	}
-	# --------------------
-	# allows bug deletion :
-	# delete the bug, bugtext, bugnote, and bugtexts selected
-	# used in bug_delete.php & mass treatments
-	function bug_delete( $p_id ) {
-		global $g_mantis_bug_file_table, $g_mantis_bug_table, $g_mantis_bug_text_table,
-			   $g_mantis_bugnote_table, $g_mantis_bugnote_text_table, $g_mantis_bug_history_table,
-			   $g_file_upload_method ;
+	#===================================
+	# Caching
+	#===================================
 
-		email_bug_deleted( $p_id );
+	#########################################
+	# SECURITY NOTE: cache globals are initialized here to prevent them
+	#   being spoofed if register_globals is turned on
+	#
+	$g_cache_bug = array();
+	$g_cache_bug_text = array();
+	
+	# Cache a bug row if necessary and return the cached copy
+	#  If the second parameter is true (default), trigger an error
+	#  if the bug can't be found.  If the second parameter is
+	#  false, return false if the bug can't be found.
+	function bug_cache_row( $p_bug_id, $p_trigger_errors=true) {
+		global $g_cache_bug;
 
-		$c_id			= (integer)$p_id;
-		
-		$retval = true;
-
-		$t_bug_text_id = get_bug_field( $p_id, 'bug_text_id' );
-
-		# Delete the bug entry
-		$query = "DELETE
-				FROM $g_mantis_bug_table
-				WHERE id='$c_id'";
-		$result = db_query( $query );
-		$retval = $retval && $result;
-
-		# Delete the corresponding bug text
-		$query = "DELETE
-				FROM $g_mantis_bug_text_table
-				WHERE id='$t_bug_text_id'";
-		$result = db_query( $query );
-		$retval = $retval && $result;
-
-		# Delete the bugnote text items
-		$query = "SELECT bugnote_text_id
-				FROM $g_mantis_bugnote_table
-				WHERE bug_id='$c_id'";
-		$result = db_query($query);
-		$retval = $retval && $result;
-		$bugnote_count = db_num_rows( $result );
-		for ($i=0;$i<$bugnote_count;$i++){
-			$row = db_fetch_array( $result );
-			$t_bugnote_text_id = $row['bugnote_text_id'];
-
-			# Delete the corresponding bugnote texts
-			$query = "DELETE
-					FROM $g_mantis_bugnote_text_table
-					WHERE id='$t_bugnote_text_id'";
-			$result = db_query( $query );
-			$retval = $retval && $result;
-		}
-
-		# Delete the corresponding bugnotes
-		$query = "DELETE
-				FROM $g_mantis_bugnote_table
-				WHERE bug_id='$c_id'";
-		$result = db_query($query);
-		$retval = $retval && $result;
-
-		if ( ( DISK == $g_file_upload_method ) || ( FTP == $g_file_upload_method ) ) {
-			# Delete files from disk
-			$query = "SELECT diskfile, filename
-				FROM $g_mantis_bug_file_table
-				WHERE bug_id='$c_id'";
-			$result = db_query( $query );
-			$retval = $retval && $result;
-			$file_count = db_num_rows( $result );
-
-			# there may be more than one file
-			for ($i=0;$i<$file_count;$i++){
-				$row = db_fetch_array( $result );
-
-				file_delete_local ( $row['diskfile'] );
-
-				if ( FTP == $g_file_upload_method ) {
-					$ftp = file_ftp_connect();
-					file_ftp_delete ( $ftp, $row['filename'] );
-					file_ftp_disconnect( $ftp );
-				}
-			}
-		}
-
-		# Delete the corresponding files
-		$query = "DELETE
-			FROM $g_mantis_bug_file_table
-			WHERE bug_id='$c_id'";
-		$result = db_query($query);
-		$retval = $retval && $result;
-
-		# Delete the bug history
-		$query = "DELETE
-			FROM $g_mantis_bug_history_table
-			WHERE bug_id='$c_id'";
-		$result = db_query($query);
-		$retval = $retval && $result;
-
-		return ($retval);
-	}
-	# --------------------
-	# Delete all bugs associated with a project
-	function bug_delete_all( $p_project_id ) {
-		$c_project_id = db_prepare_int( $p_project_id );
+		$c_bug_id = db_prepare_int( $p_bug_id );
 
 		$t_bug_table = config_get( 'mantis_bug_table' );
 
-		$query = "SELECT id
-				FROM $t_bug_table
-				WHERE project_id='$c_project_id'";
-		$result = db_query( $query );
-
-		$bug_count = db_num_rows( $result );
-
-		for ( $i=0 ; $i < $bug_count ; $i++ ) {	
-			$row = db_fetch_array( $result );
-
-			bug_delete( $row['id'] );
+		if ( isset ( $g_cache_bug[$c_bug_id] ) ) {
+			return $g_cache_bug[$c_bug_id];
 		}
 
-		# @@@ should we check the return value of each bug_delete() and 
-		#  return false if any of them return false? Presumable bug_delete()
-		#  will eventually trigger an error on failure so it won't matter...
+		$query = "SELECT *
+				  FROM $t_bug_table
+				  WHERE id='$c_bug_id'";
+		$result = db_query( $query );
 
-		return true;
-	}
-	# --------------------
-	# This function assigns the bug to the current user
-	function bug_assign( $p_bug_id ) {
-		global $g_mantis_bug_table, $g_auto_set_status_to_assigned;
-
-		# extract current information into history variables
-		$result = get_bug_row ( $p_bug_id );
 		if ( 0 == db_num_rows( $result ) ) {
-			# speed is not an issue in this case, so re-use code
-			bug_ensure_exists( $p_bug_id );
+			if ( $p_trigger_errors ) {
+				trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
+			} else {
+				return false;
+			}
 		}
 
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'h' );
 
-		if ( ON == $g_auto_set_status_to_assigned ) {
-			$t_ass_val = ASSIGNED;
-		} else {
-			$t_ass_val = $h_status;
-		}
+		$g_cache_bug[$c_bug_id] = $row;
 
-		$t_handler_id = current_user_get_field( 'id' );
-
-		if ( ( $t_ass_val != $h_status ) || ( $t_handler_id != $h_handler_id ) ) {
-			$c_id = (integer)$p_bug_id;
-
-			# get user id
-			$query ="UPDATE $g_mantis_bug_table ".
-					"SET handler_id='$t_handler_id', status='$t_ass_val' ".
-					"WHERE id='$c_id'";
-			$result = db_query( $query );
-
-			# updated the last_updated date
-			$result = bug_date_update( $p_bug_id );
-
-			# log changes
-			history_log_event_direct( $c_id, 'status', $h_status, $t_ass_val, $t_handler_id );
-			history_log_event_direct( $c_id, 'handler_id', $h_handler_id, $t_handler_id, $t_handler_id );
-
-			# send assigned to email
-			email_assign( $p_bug_id );
-		}
-		return true;
+		return $row;
 	}
 	# --------------------
-	function bug_close( $p_bug_id, $p_bugnote_text  ) {
-		$h_status = get_bug_field( $p_bug_id, 'status' );
-		$t_status_val = CLOSED;
+	# Clear the bug cache (or just the given id if specified)
+	function bug_clear_cache( $p_bug_id = null ) {
+		global $g_cache_bug;
 
-		# bug is already closed, return error
-		if ( $t_status_val == $h_status ) {
-			return false;
+		if ( null === $p_bug_id ) {
+			$g_cache_bug = array();
+		} else {
+			$c_bug_id = db_prepare_int( $p_bug_id );
+			unset( $g_cache_bug[$c_bug_id] );
 		}
-
-		# Add bugnote if supplied
-		$p_bugnote_text = trim( $p_bugnote_text );
-		if ( !empty( $p_bugnote_text ) ) {
-			# insert bugnote text
-			#@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
-			$result = bugnote_add( $p_bug_id, $p_bugnote_text );
-
-			email_close( $p_bug_id );
-		}
-
-		# Clean variables
-		$c_id = db_prepare_int( $p_bug_id );
-		$t_mantis_bug_table = config_get ( 'mantis_bug_table' );
-
-		# Update fields
-		$query ="UPDATE $t_mantis_bug_table " .
-				"SET status='$t_status_val' " .
-				"WHERE id='$c_id'";
-		$result = db_query( $query );
-
-		# updated the last_updated date
-		$result = bug_date_update( $p_bug_id );
-
-		# log changes
-		history_log_event_direct( $p_bug_id, 'status', $h_status, $t_status_val );
 
 		return true;
 	}
-	# --------------------
-	function bug_get_field() {
-	}
-	# --------------------
-	# Returns the record of the specified bug
-	function get_bug_row( $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-
-		$query ="SELECT * ".
-				"FROM $t_mantis_bug_table ".
-				"WHERE id='$c_bug_id' ".
-				"LIMIT 1";
-		return db_query( $query );
-	}
-	# --------------------
-	# updates the last_updated field
-	function bug_date_update( $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-
-		$query ="UPDATE $t_mantis_bug_table ".
-				"SET last_updated=NOW() ".
-				"WHERE id='$c_bug_id'";
-
-		return ( false !== db_query( $query ) );
-	}
-	# --------------------
-	# Returns the extended record of the specified bug, this includes
-	# the bug text fields
-	# @@@ include reporter name and handler name, the problem is that
-	#      handler can be 0, in this case no corresponding name will be
-	#      found.  Use equivalent of (+) in Oracle.
-	function get_bug_row_ex( $p_bug_id ) {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$t_mantis_bug_text_table = config_get( 'mantis_bug_text_table' );
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
-		$query ="SELECT b.*, bt.*, b.id as id ".
-				"FROM $t_mantis_bug_table b, $t_mantis_bug_text_table bt ".
-				"WHERE b.id='$c_bug_id' AND b.bug_text_id = bt.id ".
-				"LIMIT 1";
-
-		return db_query( $query );
-	}
-	# --------------------
-	# Returns the specified field value of the specified bug
-	function get_bug_field( $p_bug_id, $p_field_name ) {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
-		$query ="SELECT $p_field_name ".
-				"FROM $t_mantis_bug_table ".
-				"WHERE id='$c_bug_id' ".
-				"LIMIT 1";
-		$result = db_query( $query );
-		return db_result( $result, 0 );
-	}
-	# --------------------
-	# Returns the specified field value of the specified bug text
-	function get_bug_text_field( $p_bug_id, $p_field_name ) {
-		global $g_mantis_bug_text_table;
-
-		$t_bug_text_id = get_bug_field( $p_bug_id, 'bug_text_id' );
-
-		$query ="SELECT $p_field_name ".
-				"FROM $g_mantis_bug_text_table ".
-				"WHERE id='$t_bug_text_id' ".
-				"LIMIT 1";
-		$result = db_query( $query );
-		return db_result( $result, 0 );
-	}
-	# --------------------
-	# Returns the number of bugnotes for the given bug_id
-	function bug_bugnote_count( $p_bug_id ) {
-		global $g_mantis_bugnote_table, $g_private_bugnote_threshold;
+	# Cache a bug text row if necessary and return the cached copy
+	#  If the second parameter is true (default), trigger an error
+	#  if the bug text can't be found.  If the second parameter is
+	#  false, return false if the bug text can't be found.
+	function bug_text_cache_row( $p_bug_id, $p_trigger_errors=true) {
+		global $g_cache_bug_text;
 
 		$c_bug_id = db_prepare_int( $p_bug_id );
 
-		if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
-			$t_restriction = 'AND view_state=' . PUBLIC;
-		} else {
-			$t_restriction = '';
+		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+
+		if ( isset ( $g_cache_bug_text[$c_bug_id] ) ) {
+			return $g_cache_bug_text[$c_bug_id];
 		}
 
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bugnote_table ".
-				"WHERE bug_id ='$c_bug_id' $t_restriction";
+		$query = "SELECT bt.*
+				  FROM $t_bug_text_table bt, $t_bug_table b
+				  WHERE b.id='$c_bug_id'
+				    AND b.bug_text_id = bt.id";
 		$result = db_query( $query );
 
-		# @@@ check $result and error or something
+		if ( 0 == db_num_rows( $result ) ) {
+			if ( $p_trigger_errors ) {
+				trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
+			} else {
+				return false;
+			}
+		}
 
-		return db_result( $result, 0 );
+		$row = db_fetch_array( $result );
+
+		$g_cache_bug_text[$c_bug_id] = $row;
+
+		return $row;
 	}
+	# --------------------
+	# Clear the bug text cache (or just the given id if specified)
+	function bug_text_clear_cache( $p_bug_id = null ) {
+		global $g_cache_bug_text;
+
+		if ( null === $p_bug_id ) {
+			$g_cache_bug_text = array();
+		} else {
+			$c_bug_id = db_prepare_int( $p_bug_id );
+			unset( $g_cache_bug_text[$c_bug_id] );
+		}
+
+		return true;
+	}
+
+	#===================================
+	# Boolean queries and ensures
+	#===================================
+
 	# --------------------
 	# check to see if bug exists by id
 	# return true if it does, false otherwise
@@ -345,6 +155,154 @@
 			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
 		}
 	}
+
+	#===================================
+	# Creation / Deletion / Updating
+	#===================================
+
+	# --------------------
+	function bug_create() {
+	}
+	# --------------------
+	# allows bug deletion :
+	# delete the bug, bugtext, bugnote, and bugtexts selected
+	# used in bug_delete.php & mass treatments
+	function bug_delete( $p_bug_id ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
+
+		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+
+		email_bug_deleted( $p_bug_id );
+
+		# Delete bugnotes
+		bugnote_delete_all( $p_bug_id );
+
+		# Delete files
+		file_delete_attachments( $p_bug_id );
+
+		# Delete the bug history
+		history_delete( $p_bug_id );
+
+		# Delete the bugnote text
+		$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
+
+		$query = "DELETE
+				  FROM $t_bug_text_table
+				  WHERE id='$t_bug_text_id'";
+		db_query( $query );
+
+		# Delete the bug entry
+		$query = "DELETE
+				  FROM $t_bug_table
+				  WHERE id='$c_bug_id'";
+		db_query( $query );
+
+		bug_clear_cache( $p_bug_id );
+		bug_text_clear_cache( $p_bug_id );
+
+		# db_query() errors on failure so:
+		return true;
+	}
+	# --------------------
+	# Delete all bugs associated with a project
+	function bug_delete_all( $p_project_id ) {
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_bug_table = config_get( 'mantis_bug_table' );
+
+		$query = "SELECT id
+				  FROM $t_bug_table
+				  WHERE project_id='$c_project_id'";
+		$result = db_query( $query );
+
+		$bug_count = db_num_rows( $result );
+
+		for ( $i=0 ; $i < $bug_count ; $i++ ) {	
+			$row = db_fetch_array( $result );
+
+			bug_delete( $row['id'] );
+		}
+
+		# @@@ should we check the return value of each bug_delete() and 
+		#  return false if any of them return false? Presumable bug_delete()
+		#  will eventually trigger an error on failure so it won't matter...
+
+		return true;
+	}
+	# --------------------
+	function bug_update() {
+	}
+
+	#===================================
+	# Data Access
+	#===================================
+
+	# Returns the extended record of the specified bug, this includes
+	# the bug text fields
+	# @@@ include reporter name and handler name, the problem is that
+	#      handler can be 0, in this case no corresponding name will be
+	#      found.  Use equivalent of (+) in Oracle.
+	function bug_get_extended_row( $p_bug_id ) {
+		$t_base = bug_cache_row( $p_user_id );
+		$t_text = bug_text_cache_row( $p_user_id );
+
+		# merge $t_text first so that the 'id' key has the bug id not the bug text id
+		return array_merge( $t_text, $t_base );
+	}
+	# --------------------
+	# Returns the record of the specified bug
+	function bug_get_row( $p_bug_id ) {
+		return bug_cache_row( $p_bug_id );
+	}
+	# --------------------
+	# return the specified field of the given bug
+	#  if the field does not exist, display a warning and return ''
+	function bug_get_field( $p_bug_id, $p_field_name ) {
+		$row = bug_get_row( $p_bug_id );
+
+		if ( isset( $row[$p_field_name] ) ) {
+			return $row[$p_field_name];
+		} else {
+			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+			return '';
+		}
+	}
+	# --------------------
+	# return the specified text field of the given bug
+	#  if the field does not exist, display a warning and return ''
+	function bug_get_text_field( $p_bug_id, $p_field_name ) {
+		$row = bug_text_cache_row( $p_bug_id );
+
+		if ( isset( $row[$p_field_name] ) ) {
+			return $row[$p_field_name];
+		} else {
+			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+			return '';
+		}
+	}
+	# --------------------
+	# Returns the number of bugnotes for the given bug_id
+	function bug_get_bugnote_count( $p_bug_id ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
+
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+
+		if ( !access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
+			$t_restriction = 'AND view_state=' . PUBLIC;
+		} else {
+			$t_restriction = '';
+		}
+
+		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
+
+		$query = "SELECT COUNT(*)
+				  FROM $t_bugnote_table
+				  WHERE bug_id ='$c_bug_id' $t_restriction";
+		$result = db_query( $query );
+
+		return db_result( $result );
+	}
 	# --------------------
 	# return the timestamp for the most recent time at which a bugnote
 	#  associated wiht the bug was modified
@@ -362,4 +320,104 @@
 		
 		return db_result( $result );
 	}
+
+	#===================================
+	# Data Modification
+	#===================================
+
+	# --------------------
+	# assign the bug to the given user
+	function bug_assign( $p_bug_id, $p_user_id ) {
+		$c_bug_id	= db_prepare_int( $p_bug_id );
+		$c_user_id	= db_prepare_int( $p_user_id );
+
+		# extract current information into history variables
+		$h_status		= bug_get_field ( $p_bug_id, 'status' );
+		$h_handler_id	= bug_get_field ( $p_bug_id, 'handler_id' );
+
+		if ( ON == config_get( 'auto_set_status_to_assigned' ) ) {
+			$t_ass_val = ASSIGNED;
+		} else {
+			$t_ass_val = $h_status;
+		}
+	
+		$t_bug_table = config_get( 'mantis_bug_table' );
+
+		if ( ( $t_ass_val != $h_status ) || ( $t_handler_id != $h_handler_id ) ) {
+
+			# get user id
+			$query = "UPDATE $t_bug_table
+					  SET handler_id='$c_user_id', status='$t_ass_val'
+					  WHERE id='$c_bug_id'";
+			db_query( $query );
+
+			# updated the last_updated date
+			bug_update_date( $p_bug_id );
+
+			# log changes
+			history_log_event_direct( $c_bug_id, 'status', $h_status, $t_ass_val );
+			history_log_event_direct( $c_bug_id, 'handler_id', $h_handler_id, $t_handler_id );
+
+			# send assigned to email
+			email_assign( $p_bug_id );
+		}
+		return true;
+	}
+	# --------------------
+	# close the given bug
+	function bug_close( $p_bug_id, $p_bugnote_text ) {
+		$p_bugnote_text = trim( $p_bugnote_text );
+
+		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$c_bugnote_text		= db_prepare_string( $p_bugnote_text );
+
+		$h_status = bug_get_field( $p_bug_id, 'status' );
+
+		# bug is already closed, return error
+		if ( CLOSED == $h_status ) {
+			return false;
+		}
+
+		# Add bugnote if supplied
+		if ( $p_bugnote_text != '' ) {
+			bugnote_add( $p_bug_id, $p_bugnote_text );
+		}
+
+		# Clean variables
+		$t_bug_table = config_get ( 'mantis_bug_table' );
+
+		$t_status_val = CLOSED;
+
+		# Update fields
+		$query = "UPDATE $t_bug_table
+				  SET status='$t_status_val'
+				  WHERE id='$c_bug_id'";
+		db_query( $query );
+
+		# updated the last_updated date
+		bug_update_date( $p_bug_id );
+
+		# log changes
+		history_log_event_direct( $p_bug_id, 'status', $h_status, CLOSED );
+
+		email_close( $p_bug_id );
+
+		return true;
+	}
+
+	# --------------------
+	# updates the last_updated field
+	function bug_update_date( $p_bug_id ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
+
+		$t_bug_table = config_get( 'mantis_bug_table' );
+
+		$query = "UPDATE $t_bug_table
+				  SET last_updated=NOW()
+				  WHERE id='$c_bug_id'";
+		db_query( $query );
+
+		return true;
+	}
+
 ?>

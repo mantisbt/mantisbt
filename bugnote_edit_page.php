@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.26 2002-09-03 02:41:50 prescience Exp $
+	# $Id: bugnote_edit_page.php,v 1.27 2002-09-16 04:16:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -32,7 +32,7 @@
 	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 	$t_user_id			= current_user_get_field( 'id' );
 
-	if ( get_bug_field( $t_bug_id, 'status' ) < RESOLVED ) {
+	if ( bug_get_field( $t_bug_id, 'status' ) < RESOLVED ) {
 		if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 			( $t_bugnote_user_id == $t_user_id )) {
 			# do nothing

@@ -83,7 +83,7 @@
 		<?php
 			# only admins and the bugnote creator can edit/delete this bugnote
 			# bug must be open to be editable
-			if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
+			if ( bug_get_field( $f_id, 'status' ) < RESOLVED ) {
 				if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 					( $v3_reporter_id == $t_user_id )) {
 					print_bracket_link( 'bugnote_edit_page.php?f_bugnote_id='.$v3_id, $s_bugnote_edit_link );

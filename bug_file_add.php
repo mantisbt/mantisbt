@@ -73,7 +73,7 @@
 		$result = db_query( $query );
 
 		# updated the last_updated date
-		$result = bug_date_update( $f_id );
+		$result = bug_update_date( $f_id );
 
 		# log new file
 		history_log_event_special( $f_id, FILE_ADDED, file_get_display_name( $f_file_name ) );

@@ -25,8 +25,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 
 	# history treatment
 	# extract current extended information into history variables
-	$result = get_bug_row_ex ( $p_id );
-	$row = db_fetch_array( $result );
+	$row = bug_get_extended_row( $p_id );
 	extract( $row, EXTR_PREFIX_ALL, 'h' );
 
 	switch ($p_status) {
@@ -105,7 +104,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	}
 
 	# update bug last updated
-	bug_date_update($p_id);
+	bug_update_date($p_id);
 
    	# notify reporter and handler
 	switch ( $p_status ) {

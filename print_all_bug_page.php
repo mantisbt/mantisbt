@@ -385,7 +385,7 @@
 		$status_color = alternate_colors( $i, '#ffffff', $g_primary_color2 );
 
 		# grab the bugnote count
-		$bugnote_count = bug_bugnote_count( $v_id );
+		$bugnote_count = bug_get_bugnote_count( $v_id );
 
 		# grab the project name
 		$project_name = project_get_field( $v_project_id, 'name' );

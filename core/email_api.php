@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.16 2002-09-06 08:15:06 jfitzell Exp $
+	# $Id: email_api.php,v 1.17 2002-09-16 04:16:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -107,7 +107,7 @@
 
 		# Get Reporter Email
 		if ( ON == get_notify_flag( $p_notify_type, 'reporter' )) {
-			$v_reporter_id = get_bug_field( $p_bug_id, 'reporter_id' );
+			$v_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 			$t_pref_field = 'email_on_' . $p_notify_type;
 			if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
 				$t_notify_reporter = user_get_pref( $v_reporter_id, $t_pref_field );
@@ -121,7 +121,7 @@
 
 		# Get Handler Email
 		if ( ON == get_notify_flag( $p_notify_type, 'handler' )) {
-			$v_handler_id = get_bug_field( $p_bug_id, 'handler_id' );
+			$v_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 			if ( $v_handler_id > 0 ) {
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
@@ -136,7 +136,7 @@
 		}
 
 		# Check if we want to broadcast to all developers on a NEW bug
-		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
 
 		#@@@@@@@

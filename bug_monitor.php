@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.12 $
+	# $Revision: 1.13 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-30 08:36:50 $
+	# $Date: 2002-09-16 04:16:58 $
 	#
-	# $Id: bug_monitor.php,v 1.12 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bug_monitor.php,v 1.13 2002-09-16 04:16:58 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 	project_access_check( $f_id );
 	bug_ensure_exists( $f_id );
 
-	$t_view_state = get_bug_field( $f_id, 'view_state' );
+	$t_view_state = bug_get_field( $f_id, 'view_state' );
 
 	$t_threshold = $g_monitor_bug_threshold;
 	if ( ( PRIVATE == $t_view_state ) && ( $g_private_bug_threshold > $t_threshold ) ) {

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.7 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.8 2002-09-16 04:16:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -20,10 +20,10 @@
 
 		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 
-		$query ="UPDATE $g_mantis_bugnote_table ".
-				"SET last_modified=NOW() ".
-				"WHERE id='$c_bugnote_id'";
-		$result = db_query( $query );
+		$query = "UPDATE $g_mantis_bugnote_table
+				  SET last_modified=NOW()
+				  WHERE id='$c_bugnote_id'";
+		db_query( $query );
 
 		# db_query() errors if there was a problem so:
 		return true;
@@ -97,7 +97,7 @@
 
 			if ( $result ) {
 				# update bug last updated
-				$result = bug_date_update( $p_bug_id );
+				$result = bug_update_date( $p_bug_id );
 
 				if ( $result ) {
 					# get bugnote id
@@ -234,5 +234,40 @@
 
 		return db_result( $result );
 	}
+	# --------------------
+	# delete all bugnotes associated with the given bug
+	function bugnote_delete_all( $p_bug_id ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
 
+		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
+		$t_bugnote_text_table = config_get( 'mantis_bugnote_text_table' );
+
+		# Delete the bugnote text items
+		$query = "SELECT bugnote_text_id
+				FROM $t_bugnote_table
+				WHERE bug_id='$c_bug_id'";
+		$result = db_query($query);
+
+		$bugnote_count = db_num_rows( $result );
+
+		for ( $i = 0 ; $i < $bugnote_count ; $i++ ) {
+			$row = db_fetch_array( $result );
+			$t_bugnote_text_id = $row['bugnote_text_id'];
+
+			# Delete the corresponding bugnote texts
+			$query = "DELETE
+					FROM $t_bugnote_text_table
+					WHERE id='$t_bugnote_text_id'";
+			$result = db_query( $query );
+		}
+
+		# Delete the corresponding bugnotes
+		$query = "DELETE
+				FROM $t_bugnote_table
+				WHERE bug_id='$c_bug_id'";
+		$result = db_query($query);
+
+		# db_query() errors on failure so:
+		return true;
+	}
 ?>

@@ -217,7 +217,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# grab the bugnote count
-		$bugnote_count = bug_bugnote_count( $v_id );
+		$bugnote_count = bug_get_bugnote_count( $v_id );
 
 		# grab the project name
 		$project_name = project_get_field( $v_project_id, 'name' );

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.21 $
+	# $Revision: 1.22 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-30 08:36:50 $
+	# $Date: 2002-09-16 04:16:58 $
 	#
-	# $Id: bug_resolve.php,v 1.21 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.22 2002-09-16 04:16:58 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -39,10 +39,10 @@
 	$c_duplicate_id	= (integer)$f_duplicate_id;
 	$c_id			= (integer)$f_id;
 
-	$h_handler_id	= get_bug_field( $f_id, 'handler_id' );
-	$h_status		= get_bug_field( $f_id, 'status' );
-	$h_resolution	= get_bug_field( $f_id, 'resolution' );
-	$h_duplicate_id	= get_bug_field( $f_id, 'duplicate_id' );
+	$h_handler_id	= bug_get_field( $f_id, 'handler_id' );
+	$h_status		= bug_get_field( $f_id, 'status' );
+	$h_resolution	= bug_get_field( $f_id, 'resolution' );
+	$h_duplicate_id	= bug_get_field( $f_id, 'duplicate_id' );
 
 	$t_handler_id   = current_user_get_field( 'id' );
 
@@ -77,7 +77,7 @@
 		email_resolved( $f_id );
 	} else {
 		# updated the last_updated date
-		$result = bug_date_update( $f_id );
+		$result = bug_update_date( $f_id );
 	}
 
 	# Determine which view page to redirect back to.

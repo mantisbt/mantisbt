@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.18 $
+	# $Revision: 1.19 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-30 08:36:50 $
+	# $Date: 2002-09-16 04:16:58 $
 	#
-	# $Id: bug_reopen.php,v 1.18 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bug_reopen.php,v 1.19 2002-09-16 04:16:58 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,8 +30,8 @@
 	#clean variables
 	$c_id = (integer)$f_id;
 
-	$h_status		= get_bug_field( $f_id, 'status' );
-	$h_resolution	= get_bug_field( $f_id, 'resolution' );
+	$h_status		= bug_get_field( $f_id, 'status' );
+	$h_resolution	= bug_get_field( $f_id, 'resolution' );
 
 	# Update fields
 	$t_status_val = FEEDBACK;

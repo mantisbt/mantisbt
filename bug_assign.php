@@ -10,11 +10,11 @@
 	# Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
 	# --------------------------------------------------------
-	# $Revision: 1.20 $
+	# $Revision: 1.21 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:56 $
+	# $Date: 2002-09-16 04:16:58 $
 	#
-	# $Id: bug_assign.php,v 1.20 2002-08-25 21:04:56 jfitzell Exp $
+	# $Id: bug_assign.php,v 1.21 2002-09-16 04:16:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# Assign bug to user then redirect to viewing page
@@ -25,7 +25,9 @@
 	project_access_check( $f_id );
 	check_access( $g_handle_bug_threshold );
 
-	$result = bug_assign( $f_id );
+	bug_ensure_exists( $p_bug_id );
+
+	$result = bug_assign( $f_id, auth_get_current_user_id() );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
