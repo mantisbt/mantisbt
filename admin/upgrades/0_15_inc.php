@@ -8,54 +8,56 @@
 	# Changes applied to 0.15 database to give us 0.16
 ?>
 <?php
+	require_once( 'db_table_names_inc.php' );
+
 	$upgrades = array();
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-1',
 			'Add file type column to bug file table',
-			"ALTER TABLE mantis_bug_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize"
+			"ALTER TABLE $t_bug_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize"
 		);
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-2',
 			'Add file type column to project file table',
-			"ALTER TABLE mantis_project_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize"
+			"ALTER TABLE $t_project_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize"
 		);
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-3',
 			'',
-			"ALTER TABLE mantis_bug_table CHANGE os_build os_build VARCHAR(32) NOT NULL"
+			"ALTER TABLE $t_bug_table CHANGE os_build os_build VARCHAR(32) NOT NULL"
 		);
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-4',
 			'',
-			"ALTER TABLE mantis_bug_table CHANGE build build VARCHAR(32) NOT NULL"
+			"ALTER TABLE $t_bug_table CHANGE build build VARCHAR(32) NOT NULL"
 		);
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-5',
 			'',
-			"ALTER TABLE mantis_bug_table CHANGE votes votes INT(4) NOT NULL"
+			"ALTER TABLE $t_bug_table CHANGE votes votes INT(4) NOT NULL"
 		);
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-6',
 			'',
-			"ALTER TABLE mantis_user_profile_table CHANGE os_build os_build VARCHAR(32) NOT NULL"
+			"ALTER TABLE $t_user_profile_table CHANGE os_build os_build VARCHAR(32) NOT NULL"
 		);
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-7',
 			'',
-			"ALTER TABLE mantis_user_pref_table CHANGE language language VARCHAR(32) DEFAULT 'english' NOT NULL"
+			"ALTER TABLE $t_user_pref_table CHANGE language language VARCHAR(32) DEFAULT 'english' NOT NULL"
 		);
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-8',
 			'Create bug history table',
-			"CREATE TABLE mantis_bug_history_table (
+			"CREATE TABLE $t_bug_history_table (
 			  user_id int(7) unsigned zerofill NOT NULL default '0000000',
 			  bug_id int(7) unsigned zerofill NOT NULL default '0000000',
 			  date_modified datetime NOT NULL default '1970-01-01 00:00:01',
@@ -70,7 +72,7 @@
 	$upgrades[] = new SQLUpgrade(
 			'0.15-9',
 			'Add order field to project version table',
-			"ALTER TABLE mantis_project_version_table ADD date_order DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL"
+			"ALTER TABLE $t_project_version_table ADD date_order DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL"
 		);
 
 	

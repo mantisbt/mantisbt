@@ -6,10 +6,11 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	require( '../core.php' );
+	require_once( '../core.php' );
+
+	require_once( 'db_table_names_inc.php' );
 
 	# Check if the upgrade table has been created yet
-	$t_upgrade_table = config_get( 'mantis_upgrade_table' );
 	$query = "DESCRIBE $t_upgrade_table";
 	$result = db_query( $query, false );
 
@@ -23,7 +24,7 @@
 		db_query( $query );
 
 		# 0.14.0 upgrades (applied to 0.13 db)
-		if ( admin_check_applied( 'mantis_project_table' ) ) {
+		if ( admin_check_applied( $t_project_table ) ) {
 			$t_upgrades = include( 'upgrades/0_13_inc.php' );
 			
 			foreach ( $t_upgrades as $t_item ) {
@@ -32,7 +33,7 @@
 		}
 
 		# 0.15.0 upgrades (applied to 0.14 db)
-		if ( admin_check_applied( 'mantis_bug_file_table' ) ) {
+		if ( admin_check_applied( $t_bug_file_table ) ) {
 			$t_upgrades = include( 'upgrades/0_14_inc.php' );
 			
 			foreach ( $t_upgrades as $t_item ) {
@@ -41,7 +42,7 @@
 		}
 
 		# 0.16.0 upgrades (applied to 0.15 db)
-		if ( admin_check_applied( 'mantis_bug_history_table' ) ) {
+		if ( admin_check_applied( $t_bug_history_table ) ) {
 			$t_upgrades = include( 'upgrades/0_15_inc.php' );
 			
 			foreach ( $t_upgrades as $t_item ) {
@@ -50,7 +51,7 @@
 		}
 
 		# 0.17.0 upgrades (applied to 0.16 db)
-		if ( admin_check_applied( 'mantis_bug_monitor_table' ) ) {
+		if ( admin_check_applied( $t_bug_monitor_table ) ) {
 			$t_upgrades = include( 'upgrades/0_16_inc.php' );
 			
 			foreach ( $t_upgrades as $t_item ) {
@@ -166,7 +167,9 @@
 			if ( $result ) {
 				$this->set_applied();
 			} else {
-				$this->error = "Function $this->function_name() returned false";
+				$this->error = "Function $this->function_name() returned false<br />";
+				$this->error .= "Last database error (may not be applicable) was: "
+								. db_error_msg();
 			}
 
 			return $result;

@@ -10,11 +10,11 @@
 
 	$upgrade_set = new UpgradeSet();
 
+	$upgrade_set->add_items( include( 'upgrades/0_13_inc.php' ) );
 	$upgrade_set->add_items( include( 'upgrades/0_14_inc.php' ) );
 	$upgrade_set->add_items( include( 'upgrades/0_15_inc.php' ) );
 	$upgrade_set->add_items( include( 'upgrades/0_16_inc.php' ) );
 	$upgrade_set->add_items( include( 'upgrades/0_17_inc.php' ) );
-	$upgrade_set->add_items( include( 'upgrades/0_18_inc.php' ) );
 ?>
 <html>
 <head>
@@ -26,7 +26,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
 		<td class="links">
-			[ <a href="index.php">Back to Administration</a> ]
+			[ <a href="upgrade_list.php">Back to Upgrade List</a> ]
 			[ <a href="upgrade_advanced.php">Refresh view</a> ]
 			[ <a href="upgrade.php">Simple</a> ]
 		</td>

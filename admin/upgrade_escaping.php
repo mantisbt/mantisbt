@@ -10,15 +10,11 @@
 
 	$upgrade_set = new UpgradeSet();
 
-	$upgrade_set->add_items( include( 'upgrades/0_13_inc.php' ) );
-	$upgrade_set->add_items( include( 'upgrades/0_14_inc.php' ) );
-	$upgrade_set->add_items( include( 'upgrades/0_15_inc.php' ) );
-	$upgrade_set->add_items( include( 'upgrades/0_16_inc.php' ) );
-	$upgrade_set->add_items( include( 'upgrades/0_17_inc.php' ) );
+	$upgrade_set->add_items( include( 'upgrades/0_17_escaping_fixes_inc.php' ) );
 ?>
 <html>
 <head>
-<title> Mantis Administration - Database Upgrade </title>
+<title> Mantis Administration - String Escaping Database Fixes </title>
 <link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>
@@ -27,11 +23,10 @@
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="upgrade_list.php">Back to Upgrade List</a> ]
-			[ <a href="upgrade.php">Refresh view</a> ]
-			[ <a href="upgrade_advanced.php">Advanced</a> ]
+			[ <a href="upgrade_escaping.php">Refresh view</a> ]
 		</td>
 		<td class="title">
-			Upgrade Installation
+			String Escaping Database Fixes
 		</td>
 	</tr>
 </table>

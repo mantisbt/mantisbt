@@ -36,7 +36,7 @@
 <div align="center">
 	<table width="80%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
 		<tr bgcolor="#ffffff">
-			<td align="center" nowrap="nowrap"><p>When you have backed up your database click the link below to continue</p>[ <a href="upgrade.php">Upgrade Now</a> ]</td>
+			<td align="center" nowrap="nowrap"><p>When you have backed up your database click the link below to continue</p>[ <a href="upgrade_list.php">Upgrade Now</a> ]</td>
 		</tr>
 	</table>
 </div>
