@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.50 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: manage_user_page.php,v 1.51 2004-04-01 12:15:24 yarick123 Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -180,7 +180,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	} else {
 		$query = "SELECT *, date_created, last_visit
 				FROM $t_user_table
-				WHERE " . db_helper_compare_days(db_now(),"last_visit","< '$days_old'") . ") AND $t_where
+				WHERE (" . db_helper_compare_days(db_now(),"last_visit","< '$days_old'") . ") AND $t_where
 				ORDER BY $c_sort $c_dir";
 	}
 
