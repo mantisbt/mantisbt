@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.212 2004-09-24 08:39:44 bpfennigschmidt Exp $
+	# $Id: config_defaults_inc.php,v 1.213 2004-09-25 14:33:32 prichards Exp $
 	# --------------------------------------------------------
 
 
@@ -1369,4 +1369,63 @@
 	# Enable support for bug relationships where a bug can be a related, dependent on, or duplicate of another.
 	# See relationship_api.php for more details.
 	$g_enable_relationship = ON;
+
+	# --- Relationship Graphs -----------
+	# Show issue relationships using graphs.
+	#
+	# In order to use this feature, you must first install either GraphViz
+	# (all OSs except Windows) or WinGraphviz (only Windows).
+	#
+	# Graphviz homepage:    http://www.research.att.com/sw/tools/graphviz/
+	# WinGraphviz homepage: http://home.so-net.net.tw/oodtsen/wingraphviz/
+	#
+	# Refer to the notes near the top of core/graphviz_api.php and
+	# core/relationship_graph_api.php for more information.
+
+	# Enable relationship graphs support.
+	$g_relationship_graph_enable		= OFF;
+
+	# Font name and size, as required by Graphviz. If Graphviz fails to run
+	# for you, you are probably using a font name that gd can't find. On
+	# Linux, try the name of the font file without the extension.
+	$g_relationship_graph_fontname		= 'Arial';
+	$g_relationship_graph_fontsize		= 8;
+
+	# Local path where the above font is found on your system.
+	# 
+	# You shouldn't care about this on Windows since there is only one system
+	# folder where fonts are installed and Graphviz already knows where it
+	# is. On Linux and other unices, the default font search path is defined
+	# during Graphviz compilation. If you are using a pre-compiled Graphviz
+	# package provided by your distribution, probably the font search path was
+	# already configured by the packager.
+	#
+	# If for any reason, the font file you want to use is not in any directory
+	# listed on the default font search path list, you can either: (1) export
+	# the DOTFONTPATH environment variable in your webserver startup script
+	# or (2) use this config option conveniently available here. If you need
+	# to list more than one directory, use colons to separate them.
+	$g_relationship_graph_fontpath		= '';
+
+	# Default dependency orientation. If you have issues with lots of childs
+	# or parents, leave as 'horizontal', otherwise, if you have lots of
+	# "chained" issue dependencies, change to 'vertical'.
+	$g_relationship_graph_orientation	= 'horizontal';
+
+	# Max depth for relation graphs. This only affects relation graphs,
+	# dependency graphs are drawn to the full depth. A value of 3 is already
+	# enough to show issues really unrelated to the one you are currently
+	# viewing.
+	$g_relationship_graph_max_depth		= 2;
+
+	# If set to ON, clicking on an issue on the relationship graph will open
+	# the bug view page for that issue, otherwise, will navigate to the
+	# relationship graph for that issue.
+	$g_relationship_graph_view_on_click	= OFF;
+
+	# Complete path to dot and neato tools. Your webserver must have execute
+	# permission to these programs in order to generate relationship graphs.
+	# NOTE: These are meaningless under Windows! Just ignore them!
+	$g_dot_tool							= '/usr/bin/dot';
+	$g_neato_tool						= '/usr/bin/neato';
 ?>
