@@ -183,7 +183,6 @@
 </tr>
 </table>
 
-
 <? print_footer() ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>
