@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup.php,v 1.33 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: signup.php,v 1.34 2004-08-01 15:22:11 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,12 +17,12 @@
 	require_once( $t_core_path.'email_api.php' );
 ?>
 <?php
-	$f_username		= gpc_get_string( 'username' );
-	$f_email		= gpc_get_string( 'email' );
+	$f_username		= strip_tags( gpc_get_string( 'username' ) );
+	$f_email		= strip_tags( gpc_get_string( 'email' ) );
 
 	$f_username = trim( $f_username );
 	$f_email	= trim( $f_email );
-	
+
 	# Check to see if signup is allowed
 	if ( OFF == config_get( 'allow_signup' ) ) {
 		print_header_redirect( 'login_page.php' );

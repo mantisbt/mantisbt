@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.31 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: login_select_proj_page.php,v 1.32 2004-08-01 15:22:11 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
-	$f_ref = gpc_get_string( 'ref', '' );
+	$f_ref = strip_tags( gpc_get_string( 'ref', '' ) );
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2a() ?>
