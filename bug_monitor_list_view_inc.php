@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.12 2004-10-04 15:12:11 thraxisp Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.13 2004-11-30 12:17:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -71,13 +71,7 @@
  		for ( $i = 0; $i < $num_users; $i++ ) {
  			$row = db_fetch_array( $result );
 			echo ($i > 0) ? ', ' : '';
-			if ( FALSE == $row['enabled'] ) {
-				echo '<font STYLE="text-decoration: line-through">';
-			} else {
-				echo '<font STYLE="text-decoration: none">';
-			}
 			echo print_user( $row['user_id'] );
-			echo '</font>';
  		}
 ?>
 	</td>

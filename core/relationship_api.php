@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.26 2004-11-08 19:26:47 prichards Exp $
+	# $Id: relationship_api.php,v 1.27 2004-11-30 12:17:04 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -555,7 +555,7 @@
 		# get the handler name of the related bug
 		$t_relationship_info_html .= $t_td;
 		if ( $t_bug->handler_id > 0 )  {
-			$t_relationship_info_html .= '<nobr>' . user_get_name(  $t_bug->handler_id ) . '</nobr>';
+			$t_relationship_info_html .= '<nobr>' . prepare_user_name(  $t_bug->handler_id ) . '</nobr>';
 		}
 		$t_relationship_info_html .= '&nbsp;</td>';
 

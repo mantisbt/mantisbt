@@ -6,13 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.106 2004-10-13 23:35:07 thraxisp Exp $
+	# $Id: print_api.php,v 1.107 2004-11-30 12:17:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
+	require_once( $t_core_dir . 'prepare_api.php' );
 
 	### Print API ###
 
@@ -92,22 +93,7 @@
 	# --------------------
 	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
-		# Catch a user_id of NO_USER (like when a handler hasn't been assigned)
-		if ( NO_USER == $p_user_id ) {
-			return;
-		}
-
-		$t_username = user_get_name( $p_user_id );
-		if ( user_exists( $p_user_id ) ) {
-			$t_email = user_get_email( $p_user_id );
-			if ( !is_blank( $t_email ) ) {
-				print_email_link( $t_email, $t_username );
-			} else {
-				PRINT $t_username;
-			}
-		} else {
-			PRINT $t_username;
-		}
+	    echo prepare_user_name( $p_user_id );
 	}
 	# --------------------
 	# same as print_user() but fills in the subject with the bug summary
@@ -119,11 +105,13 @@
 		}
 
 		$t_username = user_get_name( $p_user_id );
-		if ( user_exists( $p_user_id ) ) {
+		if ( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
 			$t_email = user_get_field( $p_user_id, 'email' );
 			print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 		} else {
-			PRINT $t_username;
+			echo '<font STYLE="text-decoration: line-through">';
+			echo $t_username;
+			echo '</font>';
 		}
 	}
 	# --------------------
@@ -1087,17 +1075,7 @@
 	# --------------------
 	# return the mailto: href string link instead of printing it
 	function get_email_link( $p_email, $p_text ) {
-		if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
-			return $p_text;
-		}
-
-		# If we apply string_url() to the whole mailto: link then the @
-		#  gets turned into a %40 and you can't right click in browsers to
-		#  do Copy Email Address.
-		$t_mailto	= string_attribute( "mailto:$p_email" );
-		$p_text		= string_display( $p_text );
-
-		return "<a href=\"$t_mailto\">$p_text</a>";
+	    return prepare_email_link( $p_email, $p_text );
 	}
 	# --------------------
 	# print a mailto: href link with subject

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.28 2004-11-29 15:45:02 thraxisp Exp $
+	# $Id: print_bugnote_inc.php,v 1.29 2004-11-30 12:17:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,7 @@
 ?>
 <?php
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
@@ -36,7 +36,7 @@
 	$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 	# get the bugnote data
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
-	
+
 	$query = "SELECT *,date_submitted
 			FROM $t_bugnote_table
 			WHERE bug_id='$c_bug_id' $t_restriction
@@ -90,13 +90,8 @@
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">
-				<?php  if ( FALSE == user_get_field( $v3_reporter_id, 'enabled' ) ) {
-					echo '<font STYLE="text-decoration: line-through">';
-				} else {
-					echo '<font STYLE="text-decoration: none">';
-				}
+				<?php
 				echo print_user( $v3_reporter_id );
-				echo '</font>'; 
 				?>&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
@@ -111,7 +106,7 @@
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">
-				<?php 
+				<?php
 					switch ( $v3_note_type ) {
 						case REMINDER:
 							echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';

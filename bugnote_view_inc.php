@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.23 2004-11-22 14:01:01 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.24 2004-11-30 12:17:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,7 @@
 ?>
 <?php
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php
@@ -86,10 +86,10 @@
 			$t_bugnote_modified = true;
 		else
 			$t_bugnote_modified = false;
-		
+
 		$v3_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_submitted ) ) );
 		$v3_last_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_last_modified ) ) );
-		
+
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note
 				FROM $t_bugnote_text_table
@@ -100,7 +100,7 @@
 		$v3_note = $row['note'];
 		$v3_note = string_display_links( $v3_note );
 		$t_bugnote_id_formatted = bugnote_format_id( $v3_id );
-		
+
 		if ( VS_PRIVATE == $v3_view_state ) {
 			$t_bugnote_css		= 'bugnote-private';
 			$t_bugnote_note_css	= 'bugnote-note-private';
@@ -113,13 +113,7 @@
         <td class="<?php echo $t_bugnote_css ?>">
 		<span class="small">(<?php echo $t_bugnote_id_formatted ?>)</span><br />
 		<?php
-			if ( user_exists( $v3_reporter_id ) && ( FALSE == user_get_field( $v3_reporter_id, 'enabled' ) ) ) {
-				echo '<font STYLE="text-decoration: line-through">';
-			} else {
-				echo '<font STYLE="text-decoration: none">';
-			}
 			echo print_user( $v3_reporter_id );
-			echo '</font>'; 
 		?>
 		<?php if ( VS_PRIVATE == $v3_view_state ) { ?>
 		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
@@ -140,7 +134,7 @@
 					( ( $v3_reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
 					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
 					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
-					if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) && 
+					if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) &&
 						access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id ) ) {
 						if ( VS_PRIVATE == $v3_view_state ) {
 							print_bracket_link('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$v3_id, lang_get( 'make_public' ));
@@ -154,14 +148,14 @@
 		</span>
 	</td>
 	<td class="<?php echo $t_bugnote_note_css ?>">
-		<?php 
+		<?php
 			switch ( $v3_note_type ) {
 				case REMINDER:
 					echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';
 					$v3_note_attr = substr( $v3_note_attr, 1, strlen( $v3_note_attr ) - 2 );
 					$t_to = array();
 					foreach ( explode( '|', $v3_note_attr ) as $t_recipient ) {
-						$t_to[] = user_get_name( $t_recipient );
+						$t_to[] = prepare_user_name( $t_recipient );
 					}
 					echo implode( ', ', $t_to ) . '</div><br />';
 				default:
