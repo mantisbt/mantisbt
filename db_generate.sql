@@ -264,4 +264,11 @@ CREATE TABLE mantis_user_table (
    UNIQUE username (username)
 );
 
-INSERT INTO mantis_user_table (id, username, email, password, date_created, last_visit, enabled, protected, access_level, login_count, cookie_string) VALUES( '0000001', 'administrator', 'admin', 'MNYm8SfoJlvIY', NOW(), NOW(), '1', '1', '90', '0', 'MN91uSF/JIhos8bcda8acc2ead8d60749ad019e56b54fadkPGTyoBgNBQf91563adc2f7337f566cc3d2c792bc3c-10728595');
+# replace the 4th argument after VALUES with your chosen method of encryption
+# plain = root
+# crypt = MNYm8SfoJlvIY
+# md5   = 63a9f0ea7bb98050796b649e85481845
+INSERT INTO mantis_user_table
+	(id, username, email, password, date_created, last_visit, enabled, protected, access_level, login_count, cookie_string)
+VALUES
+	( '0000001', 'administrator', 'admin', 'MNYm8SfoJlvIY', NOW(), NOW(), '1', '1', '90', '0', 'MN91uSF/JIhos8bcda8acc2ead8d60749ad019e56b54fadkPGTyoBgNBQf91563adc2f7337f566cc3d2c792bc3c-10728595');
