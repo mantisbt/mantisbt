@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: jlatour $
-	# $Date: 2003-02-19 16:52:09 $
+	# $Date: 2003-02-26 14:25:38 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.32 2003-02-19 16:52:09 jlatour Exp $
+	# $Id: strings_russian_koi8.txt,v 1.33 2003-02-26 14:25:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -395,6 +395,7 @@
 	$s_bug_reminder = 'Send a reminder';
 	$s_reminder_sent_to = 'Reminder sent to';
 	$s_bug_send_button = 'Send';
+	$s_reminder = 'Reminder';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Информация о баге обновлена...';
@@ -792,7 +793,6 @@
 	$s_any = 'любой';
 	$s_show = 'Показать';
 	$s_changed = 'Изменены за (час)';
-	$s_hide_closed = 'Скрыть закрытые';
 	$s_viewing_bugs_title = 'Просмотр багов';
 	$s_updated = 'Обновлен';
 
@@ -820,6 +820,11 @@
 	$s_view_advanced_link = 'Расширенный просмотр';
 	$s_viewing_bug_simple_details_title = 'Простой просмотр';
 
+	# bug_monitor_list_view_inc.php
+	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+	$s_users_monitoring_bug = 'Users monitoring this bug';
+	$s_monitoring_user_list = 'User List';
+
 	# custom field strings
 	$s_add_custom_field_button = 'New Custom Field';
 	$s_delete_custom_field_button = 'Delete Custom Field';
@@ -846,4 +851,8 @@
 	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
 	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
 	$s_field_delete_button = 'Delete Field';
+
+	$s_hide_status = 'Hide Status';
+	$s_filter_closed = "Closed";
+	$s_filter_resolved = "Resolved";
 ?>

@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.49 $
-	# $Author: puklos $
-	# $Date: 2003-02-24 14:27:57 $
+	# $Revision: 1.50 $
+	# $Author: jlatour $
+	# $Date: 2003-02-26 14:25:35 $
 	#
-	# $Id: strings_polish.txt,v 1.49 2003-02-24 14:27:57 puklos Exp $
+	# $Id: strings_polish.txt,v 1.50 2003-02-26 14:25:35 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -396,6 +396,7 @@
 	$s_bug_reminder = 'Wy¶lij przypomnienie';
 	$s_reminder_sent_to = 'Przypomnienie wys³ane do';
 	$s_bug_send_button = 'Wy¶lij';
+	$s_reminder = 'Reminder';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'B³±d zosta³ pomy¶lnie zaktualizowany...';
@@ -793,7 +794,6 @@
 	$s_any = 'dowolny';
 	$s_show = 'Poka¿';
 	$s_changed = 'Zmienione (w godzinach)';
-	$s_hide_closed = 'Ukryj zamkniête';
 	$s_viewing_bugs_title = 'Przegl±danie b³edów';
 	$s_updated = 'Aktualizacja';
 
@@ -821,6 +821,11 @@
 	$s_view_advanced_link = 'Widok zaawansowany';
 	$s_viewing_bug_simple_details_title = 'Widok prosty';
 
+	# bug_monitor_list_view_inc.php
+	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+	$s_users_monitoring_bug = 'Users monitoring this bug';
+	$s_monitoring_user_list = 'User List';
+
 	# custom field strings
 	$s_add_custom_field_button = 'Nowe \'Dodatkowe pole\'';
 	$s_delete_custom_field_button = 'Usuñ \'Dodatkowe pole\'';
@@ -847,4 +852,8 @@
 	$s_confirm_used_custom_field_deletion = 'To pole jest aktualnie po³±czone z co najmniej jednym projektem.  Je¿eli go usunuesz, wszystkie warto¶ci zostan± skasowane. Nie bêdzie te¿ mo¿liwo¶ci odzyskania danych.  Je¿eli nie chcesz usun±æ tego pola, kliknij Wstecz w przegl±darce.  By kontynuowaæ, kliknij przycik poni¿ej';
 	$s_confirm_custom_field_deletion = 'Czy jeste¶ pewien, ¿e chcesz usun±æ to dodatkowe pole i wszystkie powi±zane z nim warto¶ci?';
 	$s_field_delete_button = 'Usuñ pole';
+
+	$s_hide_status = 'Hide Status';
+	$s_filter_closed = "Closed";
+	$s_filter_resolved = "Resolved";
 ?>

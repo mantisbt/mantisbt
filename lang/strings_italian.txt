@@ -10,11 +10,11 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 	#          Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.46 $
+	# $Revision: 1.47 $
 	# $Author: jlatour $
-	# $Date: 2003-02-19 16:52:02 $
+	# $Date: 2003-02-26 14:25:34 $
 	#
-	# $Id: strings_italian.txt,v 1.46 2003-02-19 16:52:02 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.47 2003-02-26 14:25:34 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -398,6 +398,7 @@
 	$s_bug_reminder = "Spedisci una nota";
 	$s_reminder_sent_to = "Spedita nota a";
 	$s_bug_send_button = "Invia";
+	$s_reminder = 'Reminder';
 
 	# bug_update.php
 	$s_bug_updated_msg = "Il Bug è stato aggiornato correttamente...";
@@ -795,7 +796,6 @@
 	$s_any = "Qualsiasi";
 	$s_show = "Visualizza";
 	$s_changed = "Modificato (ore)";
-	$s_hide_closed = "Non mostrare quelli Chiusi";
 	$s_viewing_bugs_title = "Visualizza i Bug";
 	$s_updated = "Aggiornato";
 
@@ -823,6 +823,11 @@
 	$s_view_advanced_link = "Visualizzazione Avanzata";
 	$s_viewing_bug_simple_details_title = "Dettaglio Visualizzazione Semplice del Bug";
 
+	# bug_monitor_list_view_inc.php
+	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+	$s_users_monitoring_bug = 'Users monitoring this bug';
+	$s_monitoring_user_list = 'User List';
+
 	# custom field strings
 	$s_add_custom_field_button = "Nuovo Campo Personalizzato";
 	$s_delete_custom_field_button = "Elimina Campo Personalizzato";
@@ -849,4 +854,8 @@
 	$s_confirm_used_custom_field_deletion = "Questo campo è attualmente utilizzato da almeno un progetto.  Se continui tutti i valori associati a questo campo verranno cancellati.  Si tratta di una azione non reversibile.  Se non desideri eliminare questo campo, clicca sul pulsante Indietro del tuo browser.  Per procedere, clicca sul pulsante qui sotto";
 	$s_confirm_custom_field_deletion = "Sei sicuro di voler eliminare questo Campo Personalizzato e tutti i valori associati?";
 	$s_field_delete_button = "Elimina Campo";
+
+	$s_hide_status = 'Hide Status';
+	$s_filter_closed = "Closed";
+	$s_filter_resolved = "Resolved";
 ?>

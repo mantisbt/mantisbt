@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: jlatour $
-	# $Date: 2003-02-19 16:52:01 $
+	# $Date: 2003-02-26 14:25:32 $
 	#
-	# $Id: strings_dutch.txt,v 1.47 2003-02-19 16:52:01 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.48 2003-02-26 14:25:32 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -398,6 +398,7 @@
 	$s_bug_reminder = 'Send a reminder';
 	$s_reminder_sent_to = 'Reminder sent to';
 	$s_bug_send_button = 'Send';
+	$s_reminder = 'Reminder';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Bug succesvol aangepast...';
@@ -795,7 +796,6 @@
 	$s_any = 'elke';
 	$s_show = 'Laat zien';
 	$s_changed = 'Aangepast (uren)';
-	$s_hide_closed = 'Verberg gesloten bugs';
 	$s_viewing_bugs_title = 'Bekijken bugs';
 	$s_updated = 'Aangepast';
 
@@ -823,6 +823,11 @@
 	$s_view_advanced_link = 'uitgebreid overzicht';
 	$s_viewing_bug_simple_details_title = 'Bekijk bug details';
 
+	# bug_monitor_list_view_inc.php
+	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+	$s_users_monitoring_bug = 'Users monitoring this bug';
+	$s_monitoring_user_list = 'User List';
+
 	# custom field strings
 	$s_add_custom_field_button = 'Nieuw veld';
 	$s_delete_custom_field_button = 'Verwijder veld';
@@ -849,4 +854,8 @@
 	$s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste één project.  Als u doorgaat zullen alle waarden voor dit veld permanent verwijderd worden.  Deze actie kan niet ongedaan worden gemaakt.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk om door te gaan op onderstaande button.';
 	$s_confirm_custom_field_deletion = 'Weet u zeker dat u dit veld en alle bijbehorende waarden wilt verwijderen?';
 	$s_field_delete_button = 'Verwijder veld';
+
+	$s_hide_status = 'Hide Status';
+	$s_filter_closed = "Closed";
+	$s_filter_resolved = "Resolved";
 ?>

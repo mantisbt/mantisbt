@@ -44,6 +44,7 @@ Mantis ChangeLog
  * Fix #3005: custom_field_api.php does not work with PHP 4.0.6.
  * DB Upgrade: Added "id" primary key to bug history table (needed for #2980).
  * Languages: Updated German localisation.
+ * Languages: Synchronised localisations with English
  * Changed config option (default_notify_flags): remove 'admin', 'manager', and 'threshold' categories and add 'threshold_min' and 'threshold_max'
  * New config option (bugnote_allow_user_edit_delete): controls whether users are allowed to edit or delete their own bugnotes.
  * New config option (email_receive_own): controls whether users receive emails for changes they make

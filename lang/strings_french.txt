@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.53 $
+	# $Revision: 1.54 $
 	# $Author: jlatour $
-	# $Date: 2003-02-19 16:52:01 $
+	# $Date: 2003-02-26 14:25:33 $
 	#
-	# $Id: strings_french.txt,v 1.53 2003-02-19 16:52:01 jlatour Exp $
+	# $Id: strings_french.txt,v 1.54 2003-02-26 14:25:33 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -400,6 +400,7 @@
 	$s_bug_reminder = 'Envoyer un rappel';
 	$s_reminder_sent_to = 'Rappel envoyé à';
 	$s_bug_send_button = 'Envoyer';
+	$s_reminder = 'Reminder';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Le bug a été mis à jour...';
@@ -797,7 +798,6 @@
 	$s_any = 'tous';
 	$s_show = 'Afficher';
 	$s_changed = 'Modifiés (heures)';
-	$s_hide_closed = 'Masquer les bugs fermés';
 	$s_viewing_bugs_title = 'Liste des bugs';
 	$s_updated = 'Mis à jour';
 
@@ -825,6 +825,11 @@
 	$s_view_advanced_link = 'Rapport détaillé';
 	$s_viewing_bug_simple_details_title = 'Afficher le rapport simplifié';
 
+	# bug_monitor_list_view_inc.php
+	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+	$s_users_monitoring_bug = 'Users monitoring this bug';
+	$s_monitoring_user_list = 'User List';
+
 	# custom field strings
 	$s_add_custom_field_button = 'Ajouter un champ personnalisé';
 	$s_delete_custom_field_button = 'Supprimer le champ personnalisé';
@@ -851,4 +856,8 @@
 	$s_confirm_used_custom_field_deletion = 'Ce champ est actuellement lié à au moins un projet.  Si vous continuez, toutes les valeurs de ce champ seront supprimées.  Cette action ne peut être annulée.  Si vous ne voulez pas supprimer ce champ, cliquer sur le bouton Retour de votre navigateur.  Sinon pour supprimer ce champ, cliquer sur le bouton ci dessous';
 	$s_confirm_custom_field_deletion = 'Etes vous sûr de vouloir supprimer ce champ personnalisé et toutes les valeurs associées ?';
 	$s_field_delete_button = 'Supprimer le champ';
+
+	$s_hide_status = 'Hide Status';
+	$s_filter_closed = "Closed";
+	$s_filter_resolved = "Resolved";
 ?>

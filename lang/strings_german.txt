@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.61 $
-	# $Author: int2str $
-	# $Date: 2003-02-25 21:21:36 $
+	# $Revision: 1.62 $
+	# $Author: jlatour $
+	# $Date: 2003-02-26 14:25:33 $
 	#
-	# $Id: strings_german.txt,v 1.61 2003-02-25 21:21:36 int2str Exp $
+	# $Id: strings_german.txt,v 1.62 2003-02-26 14:25:33 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -399,6 +399,7 @@
 	$s_bug_reminder = 'Erinnerung senden';
 	$s_reminder_sent_to = 'Erinnerung gesendet an';
 	$s_bug_send_button = 'Absenden';
+	$s_reminder = 'Reminder';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Fehlereintrag erfolgreich aktualisiert...';
@@ -823,6 +824,11 @@
 	$s_view_advanced_link = 'erweiterte Anzeige';
 	$s_viewing_bug_simple_details_title = 'Einfache Fehleransicht anzeigen';
 
+	# bug_monitor_list_view_inc.php
+	$s_no_users_monitoring_bug = 'Keine Benutzer beobachten diesen Fehler.';
+	$s_users_monitoring_bug = 'Benutzer, die diesen Fehler beobachten';
+	$s_monitoring_user_list = 'Benutzer';
+
 	# custom field strings
 	$s_add_custom_field_button = 'Neues Benutzerdefiniertes Feld';
 	$s_delete_custom_field_button = 'Benutzerdefiniertes Feld l&ouml;schen';
@@ -853,9 +859,4 @@
 	$s_hide_status = "Status ausblenden";
 	$s_filter_closed = "Geschlossen";
 	$s_filter_resolved = "Erledigt";
-
-	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'Keine Benutzer beobachten diesen Fehler.';
-	$s_users_monitoring_bug = 'Benutzer, die diesen Fehler beobachten';
-	$s_monitoring_user_list = 'Benutzer';
 ?>
