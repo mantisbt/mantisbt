@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.11 2004-08-28 14:36:48 thraxisp Exp $
+	# $Id: check.php,v 1.12 2004-08-29 04:35:26 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -133,7 +133,7 @@
 <tr>
 	<td bgcolor="#f0f0ff">
 		<span class="title">Version</span>
-		<p>Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION ?></b>.  If you are not running this version you or your administrator will need to upgrade your build of PHP.  We recommend 4.0.6 or 4.1.2 at the moment.</p>
+		<p>Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION ?></b>.  If you are not running this version or above, you or your administrator will need to upgrade your build of PHP.</p>
 		<p>You are running <b>PHP <?php echo $version ?></b></p>
 	</td>
 </tr>
