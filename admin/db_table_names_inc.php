@@ -26,4 +26,5 @@
 	$t_upgrade_table				= config_get( 'mantis_upgrade_table' );
 	$t_filters_table				= config_get( 'mantis_filters_table' );
 	$t_tokens_table					= config_get( 'mantis_tokens_table' );
+	$t_project_hierarchy_table		= config_get( 'mantis_project_hierarchy_table' );
 ?>

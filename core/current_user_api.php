@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.26 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: current_user_api.php,v 1.27 2005-02-13 21:36:37 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -59,10 +59,22 @@
 		return user_set_default_project( auth_get_current_user_id(), $p_project_id );
 	}
 	# --------------------
-	# Return the an array of projects to which the currently logged in user
+	# Return an array of projects to which the currently logged in user
 	#  has access
 	function current_user_get_accessible_projects() {
 		return user_get_accessible_projects( auth_get_current_user_id() );
+	}
+	# --------------------
+	# Return an array of subprojects of the specified project to which the
+	# currently logged in user has access
+	function current_user_get_accessible_subprojects( $p_project_id ) {
+		return user_get_accessible_subprojects( auth_get_current_user_id(), $p_project_id );
+	}
+	# --------------------
+	# Return an array of subprojects of the specified project to which the
+	# currently logged in user has access, including subprojects of subprojects
+	function current_user_get_all_accessible_subprojects( $p_project_id ) {
+		return user_get_all_accessible_subprojects( auth_get_current_user_id(), $p_project_id );
 	}
 	# --------------------
 	# Return true if the currently logged in user is has a role of administrator

@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:04:34 $
+	# $Date: 2005-02-13 21:36:41 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.67 2005-02-13 21:04:34 jlatour Exp $
+	# $Id: strings_japanese_euc.txt,v 1.68 2005-02-13 21:36:41 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -245,6 +245,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = '¥Ñ¥¹¥ï¡¼¥É¤ò¥ê¥»¥Ã¥È¤¹¤
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'ÆþÎÏ¤µ¤ì¤¿¾ðÊó¤ÏÅÐÏ¿ºÑ¤ß¥¢¥«¥¦¥ó¥È¤È°ìÃ×¤·¤Þ¤»¤ó!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '³ÎÇ§ URL ¤ÏÌµ¸ú¤«´û¤Ë»ÈÍÑ¤µ¤ì¤Þ¤·¤¿¡£¤â¤¦°ìÅÙ¥µ¥¤¥ó¥¢¥Ã¥×¤·¤Æ¤¯¤À¤µ¤¤¡£';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'ºÇÂç²ó¿ô¤Î¥ê¥¯¥¨¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤·¤¿¡£¥·¥¹¥Æ¥à´ÉÍý¼Ô¤ËÏ¢Íí¤·¤Æ¤¯¤À¤µ¤¤¡£';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '¥¨¥é¡¼:¥æ¡¼¥¶¡¼Ì¾/¥Ñ¥¹¥ï¡¼¥É¤¬´Ö°ã¤¨¤Æ¤¤¤Þ¤¹¡£';
@@ -654,6 +655,9 @@ $s_update_category_button = '¹¹¿·';
 # manage_proj_category_update.php
 $s_category_updated_msg = '¥«¥Æ¥´¥ê¤¬¹¹¿·¤µ¤ì¤Þ¤·¤¿¡£';
 
+# manage_proj_create_page.php
+$s_add_subproject_title = 'Add Subproject';
+
 # manage_proj_delete.php
 $s_project_deleted_msg = '¥×¥í¥¸¥§¥¯¥È¤¬ºï½ü¤µ¤ì¤Þ¤·¤¿¡£';
 
@@ -680,6 +684,10 @@ $s_actions = 'Áàºî';
 $s_version = '¥Ð¡¼¥¸¥ç¥ó/¥Ó¥ë¥É';
 $s_timestamp = '¥¿¥¤¥à¥¹¥¿¥ó¥×';
 $s_update = '¹¹¿·';
+$s_subprojects = 'Subprojects';
+$s_add_subproject = 'Add as Subproject';
+$s_create_new_subproject_link = 'Create New Subproject';
+$s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
 $s_add_project_title = '¥×¥í¥¸¥§¥¯¥ÈÄÉ²Ã';

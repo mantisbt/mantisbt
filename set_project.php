@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.50 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: set_project.php,v 1.51 2005-02-13 21:36:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,17 +17,21 @@
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php
-	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_make_default	= gpc_get_bool( 'make_default' );
+	$f_project_id	= gpc_get_string( 'project_id' );
+	$f_make_default	= gpc_get_bool  ( 'make_default' );
 	$f_ref			= gpc_get_string( 'ref', '' );
 
-	if ( ALL_PROJECTS != $f_project_id ) {
-		project_ensure_exists( $f_project_id );
+	$t_project = split( ';', $f_project_id );
+	$t_top     = $t_project[0];
+	$t_bottom  = $t_project[ count( $t_project ) ];
+
+	if ( ALL_PROJECTS != $t_bottom ) {
+		project_ensure_exists( $t_bottom );
 	}
 
 	# Set default project
 	if ( $f_make_default ) {
-		current_user_set_default_project( $f_project_id );
+		current_user_set_default_project( $t_top );
 	}
 
 	helper_set_current_project( $f_project_id );

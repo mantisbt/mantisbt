@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.37 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: constant_inc.php,v 1.38 2005-02-13 21:36:37 jlatour Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -198,6 +198,7 @@
 	define( 'ERROR_PROJECT_NOT_FOUND',				700 );
 	define( 'ERROR_PROJECT_NAME_NOT_UNIQUE',		701 );
 	define( 'ERROR_PROJECT_NAME_INVALID',			702 );
+	define( 'ERROR_PROJECT_RECURSIVE_HIERARCHY',	703 );
 
 	# ERROR_USER_*
 	define( 'ERROR_USER_NAME_NOT_UNIQUE',			800 );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.36 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: core.php,v 1.37 2005-02-13 21:36:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -111,6 +111,7 @@
 	}
 
 	require_once( $t_core_path.'project_api.php' );
+	require_once( $t_core_path.'project_hierarchy_api.php' );
 	require_once( $t_core_path.'access_api.php' );
 	require_once( $t_core_path.'print_api.php' );
 	require_once( $t_core_path.'helper_api.php' );

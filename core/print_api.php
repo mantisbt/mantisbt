@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.113 2005-02-11 15:38:16 thraxisp Exp $
+	# $Id: print_api.php,v 1.114 2005-02-13 21:36:38 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -287,7 +287,7 @@
 	}
 	# --------------------
 	# List projects that the current user has access to
-	function print_project_option_list( $p_project_id = null, $p_include_all_projects = true ) {
+	function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false ) {
 		$t_project_ids = current_user_get_accessible_projects();
 		if ( $p_include_all_projects ) {
 			PRINT '<option value="' . ALL_PROJECTS . '"';
@@ -298,9 +298,32 @@
 		$t_project_count = count( $t_project_ids );
 		for ($i=0;$i<$t_project_count;$i++) {
 			$t_id = $t_project_ids[$i];
-			PRINT "<option value=\"$t_id\"";
-			check_selected( $p_project_id, $t_id );
-			PRINT '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+			if ( $t_id != $p_filter_project_id ) {
+				PRINT "<option value=\"$t_id\"";
+				check_selected( $p_project_id, $t_id );
+				PRINT '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+				print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace );
+			}
+		}
+	}
+	# --------------------
+	# List projects that the current user has access to
+	function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array() ) {
+		array_push( $p_parents, $p_parent_id );
+		$t_project_ids = current_user_get_accessible_subprojects( $p_parent_id );
+		$t_project_count = count( $t_project_ids );
+		for ($i=0;$i<$t_project_count;$i++) {
+			$t_full_id = $t_id = $t_project_ids[$i];
+			if ( $t_id != $p_filter_project_id ) {
+				PRINT "<option value=\"";
+				if ( $p_trace ) {
+				  $t_full_id = join( $p_parents, ";") . ';' . $t_id;
+				}
+				PRINT "$t_full_id\"";
+				check_selected( $p_project_id, $t_full_id );
+				PRINT '>' . str_repeat( "&raquo; ", count( $p_parents ) ) . string_display( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+				print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
+			}
 		}
 	}
 	# --------------------

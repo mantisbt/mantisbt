@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.83 2005-02-13 12:52:47 vboctor Exp $
+	# $Id: user_api.php,v 1.84 2005-02-13 21:36:38 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -582,33 +582,49 @@
 		}
 	}
 
+	$g_user_accessible_projects_cache    = null;
+
 	# --------------------
 	# retun an array of project IDs to which the user has access
 	function user_get_accessible_projects( $p_user_id ) {
+		global $g_user_accessible_projects_cache;
+
+		if ( null != $g_user_accessible_projects_cache
+		     && auth_get_current_user_id() == $p_user_id ) {
+			return $g_user_accessible_projects_cache;
+		}
+
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		$t_project_table			= config_get( 'mantis_project_table' );
 		$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
+		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
 
 		$t_public	= VS_PUBLIC;
 		$t_private	= VS_PRIVATE;
 
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-			$query = "SELECT DISTINCT( id ), name
-					  FROM $t_project_table
-					  WHERE enabled=1
-					  ORDER BY name";
+			$query = "SELECT DISTINCT( p.id )
+					  FROM $t_project_table p
+					  LEFT JOIN $t_project_hierarchy_table ph
+					    ON ph.child_id = p.id
+					  WHERE p.enabled = 1
+					    AND ph.child_id IS NULL
+					  ORDER BY p.name";
 		} else {
-			$query = "SELECT DISTINCT( p.id ), p.name
+			$query = "SELECT DISTINCT( p.id )
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id=u.project_id
+					  LEFT JOIN $t_project_hierarchy_table ph
+					    ON ph.child_id = p.id
 					  WHERE ( p.enabled = 1 ) AND
 						( p.view_state='$t_public'
 						    OR (p.view_state='$t_private'
 							    AND
 						        u.user_id='$c_user_id' )
 						)
+					    AND ph.child_id IS NULL
 					  ORDER BY p.name";
 		}
 
@@ -623,7 +639,100 @@
 			array_push( $t_projects, $row['id'] );
 		}
 
+		if ( auth_get_current_user_id() == $p_user_id ) {
+			$g_user_accessible_projects_cache = $t_projects;
+		}
+
 		return $t_projects;
+	}
+
+	$g_user_accessible_subprojects_cache = null;
+
+	# --------------------
+	# retun an array of subproject IDs of a certain project to which the user has access
+	function user_get_accessible_subprojects( $p_user_id, $p_project_id ) {
+		global $g_user_accessible_subprojects_cache;
+
+		if ( null != $g_user_accessible_subprojects_cache
+		     && auth_get_current_user_id() == $p_user_id ) {
+			if ( isset( $g_user_accessible_subprojects_cache[ $p_project_id ] ) ) {
+				return $g_user_accessible_subprojects_cache[ $p_project_id ];
+			} else {
+				return Array();
+			}
+		}
+
+		$c_user_id    = db_prepare_int( $p_user_id );
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_project_table			= config_get( 'mantis_project_table' );
+		$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
+		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
+
+		$t_public	= VS_PUBLIC;
+		$t_private	= VS_PRIVATE;
+
+		if ( user_is_administrator( $p_user_id ) ) {
+			$query = "SELECT p.id, ph.parent_id
+					  FROM $t_project_table p
+					  LEFT JOIN $t_project_hierarchy_table ph
+					    ON ph.child_id = p.id
+					  WHERE p.enabled = 1
+					  	AND ph.parent_id IS NOT NULL
+					  ORDER BY p.name";
+		} else {
+			$query = "SELECT p.id, ph.parent_id
+					  FROM $t_project_table p
+					  LEFT JOIN $t_project_user_list_table u
+					    ON p.id = u.project_id
+					  LEFT JOIN $t_project_hierarchy_table ph
+					    ON ph.child_id = p.id
+					  WHERE ( p.enabled = 1 ) AND
+					  	ph.parent_id IS NOT NULL AND
+						( p.view_state='$t_public'
+						    OR (p.view_state='$t_private'
+							    AND
+						        u.user_id='$c_user_id' )
+						)
+					  ORDER BY p.name";
+		}
+
+		$result = db_query( $query );
+		$row_count = db_num_rows( $result );
+
+		$t_projects = Array();
+
+		for ( $i=0 ; $i < $row_count ; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			if ( !isset( $t_projects[ $row['parent_id'] ] ) ) {
+				$t_projects[ $row['parent_id'] ] = Array();
+			}
+
+			array_push( $t_projects[ $row['parent_id'] ], $row['id'] );
+		}
+
+		if ( auth_get_current_user_id() == $p_user_id ) {
+			$g_user_accessible_subprojects_cache = $t_projects;
+		}
+
+		return $t_projects[ $p_project_id ];
+	}
+
+	# --------------------
+	function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
+		$t_todo        = user_get_accessible_subprojects( $p_user_id, $p_project_id );
+		$t_subprojects = Array();
+
+		while ( $t_todo ) {
+			$t_elem = array_shift( $t_todo );
+			if ( !in_array( $t_elem, $t_subprojects ) ) {
+				array_push( $t_subprojects, $t_elem );
+				$t_todo = array_merge( $t_todo, user_get_accessible_subprojects( $p_user_id, $t_elem ) );
+			}
+		}
+
+		return $t_subprojects;
 	}
 
 	# --------------------

@@ -8,11 +8,11 @@
 	# Slovak: Lubos Magat <lubos@magat.sk>
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.33 $
+	# $Revision: 1.34 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:04:39 $
+	# $Date: 2005-02-13 21:36:43 $
 	#
-	# $Id: strings_slovak.txt,v 1.33 2005-02-13 21:04:39 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.34 2005-02-13 21:36:43 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -244,6 +244,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'CHYBA: Pri objednávke z
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'CHYBA: Udané informacie neodpovedajú ¾iádnemu z registrovaných úètov!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'CHYBA: Potvrdzovacia URL je chybná alebo bola u¾ pou¾ita. Prosím prihláste sa znova.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'CHYBA: Dosiahnete maximum vnútorných procesov. Obra»te sa na správcu systému.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'CHYBA: va¹e konto mô¾e by» vypnuté, alebo pou¾ívatµské meno/heslo ktoré ste zadali nie je správne.';
@@ -653,6 +654,9 @@ $s_update_category_button = 'Aktualizova» kategóriu';
 # manage_proj_category_update.php
 $s_category_updated_msg = 'Kategória bola úspe¹ne aktualizovaná...';
 
+# manage_proj_create_page.php
+$s_add_subproject_title = 'Add Subproject';
+
 # manage_proj_delete.php
 $s_project_deleted_msg = 'Projekt bol úspe¹ne odstránený...';
 
@@ -679,6 +683,10 @@ $s_actions = 'Akcie';
 $s_version = 'Verzia/Build';
 $s_timestamp = 'Èasová znaèka';
 $s_update = 'Aktualizácia';
+$s_subprojects = 'Subprojects';
+$s_add_subproject = 'Add as Subproject';
+$s_create_new_subproject_link = 'Create New Subproject';
+$s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Prida» projekt';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.35 2004-09-26 12:15:26 prichards Exp $
+	# $Id: login_select_proj_page.php,v 1.36 2005-02-13 21:36:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,7 +37,7 @@
 	</td>
 	<td width="60%">
 		<select name="project_id">
-		<?php print_project_option_list( ALL_PROJECTS ) ?>
+		<?php print_project_option_list( ALL_PROJECTS, false, null, true ) ?>
 		</select>
 	</td>
 </tr>

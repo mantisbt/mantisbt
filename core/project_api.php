@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.64 2005-02-12 20:01:18 jlatour Exp $
+	# $Id: project_api.php,v 1.65 2005-02-13 21:36:38 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -254,6 +254,9 @@
 
 		# Delete the project versions
 		version_remove_all( $p_project_id );
+
+		# Delete relations to other projects
+		project_hierarchy_remove_all( $p_project_id );
 
 		# Delete the project files
 		project_delete_all_files( $p_project_id );

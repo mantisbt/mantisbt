@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.12 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: changelog_page.php,v 1.13 2005-02-13 21:36:16 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -35,10 +35,16 @@
 	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
 
 	if ( ALL_PROJECTS == $f_project_id ) {
-		$t_project_ids = user_get_accessible_projects( $t_user_id );
+		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
+		foreach ( $t_topprojects as $t_project ) {
+			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
+		}
+
+		$t_project_ids = array_unique( $t_project_ids );
 	} else {
 		access_ensure_project_level( config_get( 'view_changelog_threshold' ), $f_project_id );
-		$t_project_ids = array( $f_project_id );
+		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $f_project_id );
+		array_unshift( $t_project_ids, $f_project_id );
 	}
 
 	# this page is invalid for the 'All Project' selection

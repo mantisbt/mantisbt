@@ -6,10 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create.php,v 1.6 2004-12-01 12:45:22 vboctor Exp $
+	# $Id: manage_proj_create.php,v 1.7 2005-02-13 21:36:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+
+	$t_core_path = config_get( 'core_path' );
+
+	require_once( $t_core_path.'project_hierarchy_api.php' );
+?>
 <?php
 	access_ensure_global_level( config_get( 'create_project_threshold' ) );
 
@@ -25,6 +31,12 @@
 		$t_access_level = access_get_global_level();
 		$t_current_user_id = auth_get_current_user_id();
 		project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
+	}
+
+	$f_parent_id	= gpc_get_int( 'parent_id', 0 );
+
+	if ( 0 != $f_parent_id ) {
+		project_hierarchy_add( $t_project_id, $f_parent_id );
 	}
 
 	$t_redirect_url = 'manage_proj_page.php';

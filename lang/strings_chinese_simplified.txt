@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.58 $
+	# $Revision: 1.59 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:04:31 $
+	# $Date: 2005-02-13 21:36:39 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.58 2005-02-13 21:04:31 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.59 2005-02-13 21:36:39 jlatour Exp $
 	###########################################################################
 
 	###########################################################################
@@ -261,6 +261,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-m
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '很遗憾，你无法登陆，请确认是否你输错了用户名或密码，并重试，如果仍旧不行请咨询管理员是否你的账号被锁定。';
@@ -670,6 +671,9 @@ $s_update_category_button = "更新分类";
 # manage_proj_category_update.php
 $s_category_updated_msg = "分类已经成功更新...";
 
+# manage_proj_create_page.php
+$s_add_subproject_title = 'Add Subproject';
+
 # manage_proj_delete.php
 $s_project_deleted_msg = "项目已经成功删除...";
 
@@ -696,6 +700,10 @@ $s_actions = '操作';
 $s_version = "版本";
 $s_timestamp = '时间戳';
 $s_update = '更新';
+$s_subprojects = 'Subprojects';
+$s_add_subproject = 'Add as Subproject';
+$s_create_new_subproject_link = 'Create New Subproject';
+$s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
 $s_add_project_title = "添加项目";

@@ -9,11 +9,11 @@
 	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
 	# Translations: Bug, Isssue - Fejl
 	# -------------------------------------------------
-	# $Revision: 1.77 $
+	# $Revision: 1.78 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:04:32 $
+	# $Date: 2005-02-13 21:36:40 $
 	#
-	# $Id: strings_danish.txt,v 1.77 2005-02-13 21:04:32 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.78 2005-02-13 21:36:40 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -245,6 +245,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du skal angive en e-mai
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De angivne oplysninger svarer ikke til nogen eksisterende konto!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekræftigelses-URLen er ugyldig eller har allerede været brugt. Registrer dig igen.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. antal samtidige handlinger nået. Kontakt systemadministratoren';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
@@ -654,6 +655,9 @@ $s_update_category_button = 'Opdater kategori';
 # manage_proj_category_update.php
 $s_category_updated_msg = 'Kategorien er blevet opdateret...';
 
+# manage_proj_create_page.php
+$s_add_subproject_title = 'Add Subproject';
+
 # manage_proj_delete.php
 $s_project_deleted_msg = 'Projektet er fjernet...';
 
@@ -680,6 +684,10 @@ $s_actions = 'Handlinger';
 $s_version = 'Version/Udgave';
 $s_timestamp = 'Tidsstempel';
 $s_update = 'Opdater';
+$s_subprojects = 'Subprojects';
+$s_add_subproject = 'Add as Subproject';
+$s_create_new_subproject_link = 'Create New Subproject';
+$s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Tilføj projekt';

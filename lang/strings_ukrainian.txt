@@ -8,11 +8,11 @@
 	###########################################################################
 	# Ukrainian (Windows1251): Yuri Kirghisov, yuri@apple.com.ua
 	# -------------------------------------------------
-	# $Revision: 1.4 $
+	# $Revision: 1.5 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:04:40 $
+	# $Date: 2005-02-13 21:36:44 $
 	#
-	# $Id: strings_ukrainian.txt,v 1.4 2005-02-13 21:04:40 jlatour Exp $
+	# $Id: strings_ukrainian.txt,v 1.5 2005-02-13 21:36:44 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -244,6 +244,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Вкажіть email, щоб скин
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Вказана інформація не підходить до жодного активного запису!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL підтвердження або хибний, або вже використаний. Зареєструйтесь знову.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Досягнуто максимуму паралельних запитів. Зв\'яжіться з системним адміністратором';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'Ви неправильно ввели ім\'я і пароль або ваш запис був заблокований.';
@@ -653,6 +654,9 @@ $s_update_category_button = 'Оновити категорію';
 # manage_proj_category_update.php
 $s_category_updated_msg = 'Категорію оновлено...';
 
+# manage_proj_create_page.php
+$s_add_subproject_title = 'Add Subproject';
+
 # manage_proj_delete.php
 $s_project_deleted_msg = 'Проект був успішно видалений...';
 
@@ -679,6 +683,10 @@ $s_actions = 'Дії';
 $s_version = 'Версія';
 $s_timestamp = 'Дата';
 $s_update = 'Оновити';
+$s_subprojects = 'Subprojects';
+$s_add_subproject = 'Add as Subproject';
+$s_create_new_subproject_link = 'Create New Subproject';
+$s_unlink_link = 'Unlink';
 
 # manage_proj_menu_page.php
 $s_add_project_title = 'Додати проект';

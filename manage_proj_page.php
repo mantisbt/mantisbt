@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.12 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: manage_proj_page.php,v 1.13 2005-02-13 21:36:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -79,6 +79,10 @@
 
         if ( !access_has_project_level ( config_get( 'manage_project_threshold' ), $v_id ) ) {
 		  continue;
+		}
+
+		if ( !project_hierarchy_is_toplevel( $v_id ) ) {
+			continue;
 		}
 
 ?>

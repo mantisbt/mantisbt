@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.43 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: summary_page.php,v 1.44 2005-02-13 21:36:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,17 +22,27 @@
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 
-	#checking if it's a per project statistic or all projects
 	if ( ALL_PROJECTS == $t_project_id ) {
-		# Only projects to which the user have access
-		$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-		if ( count( $t_accessible_projects_array ) > 0 ) {
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-		} else {
-			$specific_where = '1=1';
+		$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
+		foreach ( $t_topprojects as $t_project ) {
+			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
 		}
+
+		$t_project_ids = array_unique( $t_project_ids );
 	} else {
-		$specific_where = " project_id='$t_project_id'";
+		access_ensure_project_level( config_get( 'view_changelog_threshold' ), $t_project_id );
+		$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
+		array_unshift( $t_project_ids, $t_project_id );
+	}
+
+	$t_project_ids = array_map( 'db_prepare_int', $t_project_ids );
+
+	if ( 0 == count( $t_project_ids ) ) {
+		$specific_where = ' 1 <> 1';
+	} elseif ( 1 == count( $t_project_ids ) ) {
+		$specific_where = ' project_id=' . $t_project_ids[0];
+	} else {
+		$specific_where = ' project_id IN (' . join( ',', $t_project_ids ) . ')';
 	}
 
 	$t_bug_table = config_get( 'mantis_bug_table' );
@@ -119,7 +129,7 @@
 <tr valign="top">
 	<td width="50%">
 		<?php # PROJECT # ?>
-		<?php if ( ALL_PROJECTS == $t_project_id ) { ?>
+		<?php if ( 1 < count( $t_project_ids ) ) { ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">

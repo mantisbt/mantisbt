@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.4 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: 0_19_inc.php,v 1.5 2005-02-13 21:36:37 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -43,6 +43,15 @@
 			'sticky-issues',
 			'Add sticky column to bug table',
 			"ALTER TABLE $t_bug_table ADD sticky TINYINT(1) default '0' NOT NULL" );
+
+
+	$upgrades[] = new SQLUpgrade(
+			'project-hierarchy',
+			'Add project hierarchy table',
+			"CREATE TABLE $t_project_hierarchy_table (
+			  child_id  INT UNSIGNED NOT NULL,
+			  parent_id INT UNSIGNED NOT NULL)"
+			);
 
 	return $upgrades;
 ?>

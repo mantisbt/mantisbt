@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.83 2005-02-12 20:01:11 jlatour Exp $
+	# $Id: filter_api.php,v 1.84 2005-02-13 21:36:37 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -99,7 +99,12 @@
 
 		if ( ALL_PROJECTS == $t_project_id ) {
 			if ( !user_is_administrator( $t_user_id ) ) {
-				$t_projects = user_get_accessible_projects( $t_user_id );
+				$t_topprojects = $t_projects = user_get_accessible_projects( $t_user_id );
+				foreach ( $t_topprojects as $t_project ) {
+					$t_projects = array_merge( $t_projects, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
+				}
+
+				$t_projects = array_unique( $t_projects );
 
 				if ( 0 == count( $t_projects ) ) {
 					return array();  # no accessible projects, return an empty array
@@ -113,7 +118,17 @@
 		} else {
 			access_ensure_project_level( VIEWER, $t_project_id, $t_user_id );
 
-			array_push( $t_where_clauses, "($t_bug_table.project_id='$t_project_id')" );
+			$t_projects = user_get_all_accessible_subprojects( $t_user_id, $t_project_id );
+			$t_projects[] = $t_project_id;
+
+			$t_projects = array_unique( $t_projects );
+
+			if ( 1 == count( $t_projects ) ) {
+				$t_project = $t_projects[0];
+				array_push( $t_where_clauses, "( $t_bug_table.project_id=$t_project )" );
+			} else {
+				array_push( $t_where_clauses, "( $t_bug_table.project_id in (". implode( ', ', $t_projects ) . ") )" );
+			}
 		}
 
 		# private bug selection

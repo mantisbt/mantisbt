@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.35 2005-02-12 20:01:18 jlatour Exp $
+	# $Id: summary_api.php,v 1.36 2005-02-13 21:36:38 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -35,17 +35,9 @@
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 
-		#checking if it's a per project statistic or all projects
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$t_project_filter = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$t_project_filter = '1=1';
-			}
-		} else {
-			$t_project_filter = " project_id='$t_project_id'";
+		$t_project_filter = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $t_project_filter ) {
+			return;
 		}
 
 		$query = "SELECT status, $p_enum
@@ -188,17 +180,9 @@
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 
-		#checking if it's a per project statistic or all projects
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$specific_where = '1=1';
-			}
-		} else {
-			$specific_where = " project_id='$t_project_id'";
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
 		}
 
 		$query = "SELECT COUNT(*)
@@ -233,19 +217,13 @@
 	function summary_print_by_developer() {
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
+
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$specific_where = '1=1';
-			}
-		} else {
-			$specific_where = " project_id='$t_project_id'";
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
 		}
 
 		$query = "SELECT handler_id, status
@@ -335,16 +313,9 @@
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$specific_where = '1=1';
-			}
-		} else {
-			$specific_where = " project_id='$t_project_id'";
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
 		}
 
 		$query = "SELECT reporter_id, COUNT(*) as num
@@ -417,16 +388,9 @@
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
 
-		if ( ALL_PROJECTS == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$specific_where = '1=1';
-			}
-		} else {
-			$specific_where = " project_id='$t_project_id'";
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
 		}
 
 		$query = "SELECT project_id, category, status
@@ -534,82 +498,66 @@
 	}
 	# --------------------
 	# print bug counts by project
-	function summary_print_by_project() {
-		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+	function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = null ) {
+		$t_mantis_bug_table 	= config_get( 'mantis_bug_table' );
 		$t_mantis_project_table = config_get( 'mantis_project_table' );
 
 		$t_project_id = helper_get_current_project();
-		$t_user_id = auth_get_current_user_id();
 
-		# This function only works when "all projects" is selected
-		if ( ALL_PROJECTS != $t_project_id ) {
-			return;
-		}
-
-		# Only projects to which the user have access
-		$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-		if ( count( $t_accessible_projects_array ) > 0 ) {
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-		} else {
-			$specific_where = '1=1';
-		}
-
-		$query = "SELECT project_id, status
-				FROM $t_mantis_bug_table
-				WHERE $specific_where
-				ORDER BY project_id";
-		$result = db_query( $query );
-
-		$t_last_project = -1;
-		$t_bugs_open = 0;
-		$t_bugs_resolved = 0;
-		$t_bugs_closed = 0;
-		$t_bugs_total = 0;
-
-		$t_resolved_val = RESOLVED;
-		$t_closed_val = CLOSED;
-
-		while ( $row = db_fetch_array( $result ) ) {
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-			if ( ( $v_project_id != $t_last_project ) && ( -1 != $t_last_project ) ) {
-				$query = "SELECT name
-						FROM $t_mantis_project_table
-						WHERE id=$t_last_project";
-				$result2 = db_query( $query );
-				$row2 = db_fetch_array( $result2 );
-				summary_helper_print_row( $row2['name'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
-
-				$t_bugs_open = 0;
-				$t_bugs_resolved = 0;
-				$t_bugs_closed = 0;
-				$t_bugs_total = 0;
+		if ( null == $p_projects ) {
+			if ( ALL_PROJECTS == $t_project_id ) {
+				$p_projects = current_user_get_accessible_projects();
+			} else {
+				$p_projects = Array( $t_project_id );
 			}
-
-			$t_bugs_total++;
-
-			switch( $v_status ) {
-				case $t_resolved_val:
-										$t_bugs_resolved++;
-										break;
-				case $t_closed_val:
-										$t_bugs_closed++;
-										break;
-				default:
-										$t_bugs_open++;
-										break;
-			}
-
-			$t_last_project = $v_project_id;
 		}
 
-		if ( 0 < $t_bugs_total ) {
-			$query = "SELECT name
-					FROM $t_mantis_project_table
-					WHERE id=$t_last_project";
-			$result2 = db_query( $query );
-			$row2 = db_fetch_array( $result2 );
-			summary_helper_print_row( $row2['name'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+		# Retrieve statistics one time to improve performance.
+		if ( null == $p_cache ) {
+			$query = "SELECT project_id, status, COUNT( status ) AS count
+					FROM $t_mantis_bug_table
+					GROUP BY project_id, status";
+
+			$result = db_query( $query );
+			$p_cache = Array();
+
+			$t_resolved_val = RESOLVED;
+			$t_closed_val = CLOSED;
+
+			while ( $row = db_fetch_array( $result ) ) {
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
+
+				switch( $v_status ) {
+					case $t_resolved_val:
+										$p_cache[ $v_project_id ][ 'resolved' ]  = $v_count;
+										break;
+					case $t_closed_val:
+										$p_cache[ $v_project_id ][ 'closed'   ]  = $v_count;
+										break;
+					default:
+										$p_cache[ $v_project_id ][ 'open'     ] += $v_count;
+										break;
+				}
+			}
+		}
+
+		foreach ( $p_projects as $t_project ) {
+			$t_name = str_repeat( "» ", $p_level ) . project_get_name( $t_project );
+
+			$t_pdata = $p_cache[ $t_project ];
+
+			$t_bugs_open     = $t_pdata['open'];
+			$t_bugs_resolved = $t_pdata['resolved'];
+			$t_bugs_closed   = $t_pdata['closed'];
+			$t_bugs_total    = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
+
+			summary_helper_print_row( $t_name, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+
+			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
+
+			if ( count( $t_subprojects ) > 0 ) {
+				summary_print_by_project( $t_subprojects, $p_level + 1, $p_cache );
+			}
 		}
 	}
 	# --------------------
@@ -630,17 +578,9 @@
 			$c_res_s[$i] = db_prepare_string( $t_res_s[0] );
 		}
 
-		# Checking if it's a per project statistic or all projects
-		if ( 0 == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$specific_where = '1=1';
-			}
-		} else {
-			$specific_where = " project_id='$t_project_id'";
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
 		}
 
 		$specific_where .= ' AND handler_id > 0';
@@ -744,16 +684,9 @@
 		}
 
 		# Checking if it's a per project statistic or all projects
-		if ( 0 == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$specific_where = '1=1';
-			}
-		} else {
-			$specific_where = " project_id='$t_project_id'";
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
 		}
 
 		# Get all of the bugs and split them up into an array
@@ -886,16 +819,9 @@
 		}
 
 		# Checking if it's a per project statistic or all projects
-		if ( 0 == $t_project_id ) {
-			# Only projects to which the user have access
-			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			if ( count( $t_accessible_projects_array ) > 0 ) {
-				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
-			} else {
-				$specific_where = '1=1';
-			}
-		} else {
-			$specific_where = " project_id='$t_project_id'";
+		$specific_where = helper_project_specific_where( $t_project_id );
+		if ( ' 1<>1' == $specific_where ) {
+			return;
 		}
 
 		# Get all of the bugs and split them up into an array
