@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.24 2002-10-19 04:26:25 jfitzell Exp $
+	# $Id: email_api.php,v 1.25 2002-10-20 22:12:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -108,21 +108,24 @@
 		# Get Reporter Email
 		if ( ON == get_notify_flag( $p_notify_type, 'reporter' )) {
 			$v_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
-			$t_pref_field = 'email_on_' . $p_notify_type;
-			if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-				$t_notify_reporter = user_pref_get_pref( $v_reporter_id, $t_pref_field );
-				if ( ON == $t_notify_reporter ) {
+
+			if ( user_exists( $v_reporter_id ) ) {
+				$t_pref_field = 'email_on_' . $p_notify_type;
+				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
+					$t_notify_reporter = user_pref_get_pref( $v_reporter_id, $t_pref_field );
+					if ( ON == $t_notify_reporter ) {
+						$send_arr[] = user_get_email( $v_reporter_id );
+					}
+				} else {
 					$send_arr[] = user_get_email( $v_reporter_id );
 				}
-			} else {
-				$send_arr[] = user_get_email( $v_reporter_id );
 			}
 		}
 
 		# Get Handler Email
 		if ( ON == get_notify_flag( $p_notify_type, 'handler' )) {
 			$v_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-			if ( $v_handler_id > 0 ) {
+			if ( user_exists( $v_handler_id ) ) {
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
 					$t_notify_handler = user_pref_get_pref( $v_handler_id, $t_pref_field );
@@ -225,12 +228,14 @@
 			for ($i=0;$i<$monitor_user_count;$i++) {
 				$row = db_fetch_array( $result );
 
-				$t_pref_field = 'email_on_' . $p_notify_type;
-				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-					# if the user's notification is on then add to the list
-					$t_notify = user_pref_get_pref( $row['user_id'], $t_pref_field );
-					if ( ON == $t_notify ) {
-						$send_arr[] = $row['email'];
+				if ( user_exists( $row['user_id'] ) ) {
+					$t_pref_field = 'email_on_' . $p_notify_type;
+					if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
+						# if the user's notification is on then add to the list
+						$t_notify = user_pref_get_pref( $row['user_id'], $t_pref_field );
+						if ( ON == $t_notify ) {
+							$send_arr[] = $row['email'];
+						}
 					}
 				}
 			} # end MONITORING
