@@ -207,7 +207,7 @@
 		global $g_mantis_version, $g_show_version;
 
 		if ( $g_show_version==1 ) {
-			PRINT "<i>Mantis $g_mantis_version</i>";
+			PRINT "<span class=\"italic\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
 		}
 	}
 	### --------------------
