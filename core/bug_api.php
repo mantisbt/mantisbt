@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.12 2002-09-16 10:05:04 jfitzell Exp $
+	# $Id: bug_api.php,v 1.13 2002-09-20 20:00:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -358,8 +358,8 @@
 	#      handler can be 0, in this case no corresponding name will be
 	#      found.  Use equivalent of (+) in Oracle.
 	function bug_get_extended_row( $p_bug_id ) {
-		$t_base = bug_cache_row( $p_user_id );
-		$t_text = bug_text_cache_row( $p_user_id );
+		$t_base = bug_cache_row( $p_bug_id );
+		$t_text = bug_text_cache_row( $p_bug_id );
 
 		# merge $t_text first so that the 'id' key has the bug id not the bug text id
 		return array_merge( $t_text, $t_base );
