@@ -1,0 +1,28 @@
+-- Just Ideas (feel free to modify) --
+-- david ulevitch <davidu@everydns.net> --
+-- $id --
+
+Mantis rewrite.
+
+Goals:
+-o 	No loss of current functionality
+-o 	No loss of current ease of use
+-o 	No loss of current ease of setup
+
+Primary:
+-o 	Database abstraction via ADODB (http://php.weblogs.com/ADODB)
+-o 	Designed with security in mind
+\-o	Common functions to deal with INPUT, OUTPUT, STORAGE, etc.
+
+Secondary:
+-o	Source documentation via phpdoc (or similar)
+
+Tertiary:
+-o email2mantis gateway to append to bugs.
+
+
+
+
+
+
+
