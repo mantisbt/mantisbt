@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.21 2002-10-19 04:43:28 jfitzell Exp $
+	# $Id: print_api.php,v 1.22 2002-10-20 08:37:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -108,7 +108,7 @@
 	# --------------------
 	function print_duplicate_id( $p_duplicate_id ) {
 		if ( $p_duplicate_id != '0000000' ) {
-			echo string_get_view_bug_link( $p_duplicate_id );
+			echo string_get_bug_view_link( $p_duplicate_id );
 		}
 	}
 	# --------------------
