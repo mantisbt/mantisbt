@@ -15,6 +15,7 @@ Mantis
  * Updated Russian localization.
  * Updated Romanian localization.
  * Updated German localization.
+ * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
  * Modified input checked variables to be prefixed by $c_.
  * Reworked code formatting for $c_ variables.
  * Modified form elements to be standards compliant.
