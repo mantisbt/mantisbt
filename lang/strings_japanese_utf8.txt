@@ -9,11 +9,11 @@
 	###########################################################################
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.6 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:15 $
+	# $Revision: 1.7 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:44 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.6 2004-08-10 15:03:15 jlatour Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.7 2004-08-16 13:28:44 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -224,7 +224,14 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "これらの2つの改善要
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "後援が見つかりません。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "アクセス拒否: 改善要求 %d はより高いアクセスレベルを要求します。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "改善要求は自分自身に関連付け出来ません。";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'エラー:ユーザー名/パスワードが間違えています。';
 $s_login_cookies_disabled = 'エラー: 使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
 
@@ -255,17 +262,18 @@ $s_projection_enum_string = '10:未定,30:些細な修正,50:小さな修正,70:
 $s_eta_enum_string = '10:即時,20:1日以内,30:2〜3日,40:1週間以内,50:1ヶ月以内,60:1ヶ月以上';
 
 # Email Strings
-$s_new_account_subject = '[mantis] アカウント登録通知';
-$s_new_account_greeting = '改善要求管理システム Mantis にようこそ!次のアカウントを用いてログインして下さい。\n\n';
-$s_new_account_url = 'URL:';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'ユーザー名:';
-$s_new_account_password = 'パスワード:';
-$s_new_account_message = 'ログイン後、すぐにパスワードを変更して下さい。パスワードは、暗号化して記録していますので、スタッフが見る事も出来ません。パスワードを忘れた場合には、リセットするしかありませんので予めご了承下さい。\n\n';
-$s_new_account_do_not_reply = 'このメールにはリプライしないで下さい。\n';
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'パスワードリセットの要求を受け付けました。';
-$s_account_name_msg = 'ユーザー名:';
-$s_news_password_msg = '新しいパスワード:';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = '次の改善要求について、もっと情報が必要です。';
 $s_email_notification_title_for_status_bug_acknowledged = '次の改善要求の内容が確認されました。';
@@ -527,12 +535,14 @@ $s_click_to_login = 'ログイン→';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Mantis にようこそ!';
 $s_login_title = 'ログイン';
 $s_save_login = 'パスワードの保存';
 $s_choose_project = 'プロジェクト選択';
 $s_login_button = 'ログイン';
 $s_signup_link = '新しいユーザーの作成';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = '選択';
@@ -541,6 +551,13 @@ $s_select_project_button = '選択';
 $s_logged_out_title = 'ログアウト中...';
 $s_redirecting = '...次のページ→';
 $s_here = 'Here';
+
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = '私が担当する改善要求';
@@ -671,13 +688,13 @@ $s_confirm_account_pruning = 'ログインされたことのない古いアカ�
 $s_edit_user_title = 'ユーザー情報の編集';
 $s_reset_password_button = 'パスワードのリセット';
 $s_delete_user_button = 'アカウント削除';
-$s_reset_password_msg = 'パスワードのリセットを行うと、ランダムに生成されたパスワードが設定されます。';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = 'パスワードのリセットを行うと、パスワードが無しに設定されます。';
 $s_show_all_users = '全て';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'アカウントが保護されています。パスワードをリセットできません。';
-$s_account_reset_msg = 'パスワードがリセットされました。';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'パスワードが無しに設定されました。';
 
 # manage_user_update.php
@@ -815,15 +832,13 @@ $s_selected_project = '選択したプロジェクト';
 $s_valid_project_msg = 'プロジェクトを正しく選択して下さい。';
 
 # signup.php
-$s_invalid_email = 'メールアドレスが正しく入力されていません。';
-$s_duplicate_username = 'ユーザー名が重複しています。他のユーザー名を入力して下さい。';
-$s_account_create_fail = 'アカウントの作成に失敗しました。';
-$s_account_added = 'アカウントの作成に成功しました。';
-$s_password_emailed_msg = 'パスワードを、メールで送信しました。';
-$s_no_reponse_msg = '1週間以内にログインしなければ、アカウントが削除されます。';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = '希望するユーザー名と正しいメールアドレスを入力して下さい。パスワードは、入力されたメールアドレスに送信されます。';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'ユーザー登録';
 $s_signup_button = '登録';
 

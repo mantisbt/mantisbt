@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.69 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:12 $
+	# $Revision: 1.70 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:41 $
 	#
-	# $Id: strings_dutch.txt,v 1.69 2004-08-10 15:03:12 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.70 2004-08-16 13:28:41 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -224,8 +224,15 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 $s_login_cookies_disabled = 'FOUT: Ofwel uw browser ondersteund geen cookies, of deze zijn uitgeschakeld.';
 
@@ -256,17 +263,18 @@ $s_projection_enum_string         = '10:geen,30:tweak,50:eenvoudige oplossing,70
 $s_eta_enum_string                = '10:geen,20:< 1 dag,30:2-3 dagen,40:< 1 week,50:< 1 maand,60:> 1 maand';
 
 # Email Strings
-$s_new_account_subject = 'Uw nieuwe gebruikers account';
-$s_new_account_greeting = 'Welkom bij het bugtracker systeem. Hier is de informatie die u nodig heeft om in te loggen' . "\n\n";
-$s_new_account_url = 'U kunt hier inloggen op de pagina ';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Gebruikersnaam: ';
-$s_new_account_password = 'Wachtwoord: ';
-$s_new_account_message = 'Verander uw wachtwoord alstublieft na het inloggen op de pagina.  Vergeet niet dat uw wachtwoord versleuteld wordt opgeslagen.  De beheerder kan uw wachtwoord niet achterhalen.  Als u uw wachtwoord vergeet zal het terug worden gezet op de begininstellingen.' . "\n\n";
-$s_new_account_do_not_reply = 'Niet antwoorden op dit bericht alstublieft.' . "\n";
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'Er was een verzoek tot resetten van uw wachtwoord';
-$s_account_name_msg = 'Uw account naam is';
-$s_news_password_msg = 'Hier is uw nieuwe wachtwoord';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'De volgende bug wacht op uw feedback.';
 $s_email_notification_title_for_status_bug_acknowledged = 'De volgende bug is onderkend.';
@@ -528,12 +536,14 @@ $s_click_to_login = 'Klik hier om in te loggen';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Welkom bij de bugtracker.';
 $s_login_title = 'Inloggen';
 $s_save_login = 'Opslaan login';
 $s_choose_project = 'Kies project';
 $s_login_button = 'Inloggen';
 $s_signup_link = 'Schrijf in voor nieuwe account';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Selecteer project';
@@ -542,6 +552,12 @@ $s_select_project_button = 'Selecteer project';
 $s_logged_out_title = 'Uitgelogd.';
 $s_redirecting = '...moment';
 $s_here = 'Hier';
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Open en aan mij toegewezen';
@@ -672,13 +688,13 @@ $s_confirm_account_pruning = 'Weet u zeker dat u oude nooit gebruikte accounts w
 $s_edit_user_title = 'Aanpassen gebruiker';
 $s_reset_password_button = 'Zet wachtwoord terug op begininstellingen';
 $s_delete_user_button = 'Verwijder gebruiker';
-$s_reset_password_msg = 'Terugzetten van het wachtwoord stelt het willekeurig gekozen wachtwoord in';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = 'Zetten van wachtwoord op begininstellingen zet het wachtwoord op blanco.';
 $s_show_all_users = 'ALLE';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Account is beschermd. Wachtwoord kan niet op begininstellingen worden teruggezet.';
-$s_account_reset_msg = 'Account wachtwoord op begin instellingen gezet.';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'Account wachtwoord uitgeschakeld.';
 
 # manage_user_update.php
@@ -816,15 +832,13 @@ $s_selected_project = 'Geselecteerd project';
 $s_valid_project_msg = 'U moet een geldig project kiezen';
 
 # signup.php
-$s_invalid_email = 'is geen geldig e-mail adres';
-$s_duplicate_username = 'De door u opgegeven gebruikersnaam is al in gebruik. Kies een andere gebruikersnaam';
-$s_account_create_fail = 'FOUT: aanmaken account mislukt';
-$s_account_added = 'Account is toegevoegd.';
-$s_password_emailed_msg = 'Uw wachtwoord wordt via e-mail naar u verzonden.';
-$s_no_reponse_msg = 'Als u niet binnen een week antwoord kan uw account verwijderd worden.';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = 'Kies een login naam en vul een geldig e-mail adres in. Een willekeurig gekozen wachtwoord wordt naar u verzonden';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Inschrijven';
 $s_signup_button = 'Inschrijven';
 

@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.61 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:11 $
+	# $Revision: 1.62 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:40 $
 	#
-	# $Id: strings_czech.txt,v 1.61 2004-08-10 15:03:11 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.62 2004-08-16 13:28:40 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -226,10 +226,17 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'CHYBA: Tato akce nemù¾e být 
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
-$s_login_error = 'CHYBA: vá¹ úèet je zablokován nebo jste zadali chybnou kombinaci login/heslo.';
-$s_login_cookies_disabled = 'CHYBA: Vá¹ prohlí¾eè buï neumí nebo odmítá pracovat s cookies.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+$s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
+$s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = 'Zpìt';
@@ -258,19 +265,20 @@ $s_projection_enum_string         = '10:¾ádný,30:slabý,50:malá zmìna,70:velká zm
 $s_eta_enum_string                = '10:¾ádný,20:< 1 den,30:2-3 dny,40:< 1 týden,50:< 1 mìsíc,60:> 1 mìsíc';
 
 # Email Strings
-$s_new_account_subject = 'Vá¹ nový u¾ivatelský úèet';
-$s_new_account_greeting = 'Zdraví a vítá vás Sledovaè problémù. Zde jsou informace nutné k pøihlá¹ení' . "\n\n";
-$s_new_account_url = 'Mù¾ete se pøihlásit zde: ';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'U¾ivatelské jméno: ';
-$s_new_account_password = 'Heslo: ';
-$s_new_account_message = 'Po pøihlá¹ení na tuto stránku si prosím zmìòte Va¹e heslo.  Va¹e heslo je ulo¾eno jednosmìrným za¹ifrováním. Správci nemohou vidìt Va¹e heslo.  Pokud zapomenete heslo, bude muset být znovu nastaveno.' . "\n\n";
-$s_new_account_do_not_reply = 'Na tuto zprávu neodpovídejte!' . "\n";
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = '®ádosti o vynulování Va¹eho hesla bylo vyhovìno';
-$s_account_name_msg = 'Va¹e u¾ivatelské jméno je';
-$s_news_password_msg = 'Zde je Va¹e nové heslo';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
-$s_email_notification_title_for_status_bug_feedback = 'Následující problém vy¾aduje Va¹i ODEZVU.';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Následující problém byl PØIJAT.';
 $s_email_notification_title_for_status_bug_confirmed = 'Následující problém byl POTVRZEN.';
 $s_email_notification_title_for_status_bug_assigned = 'Následující problém byl PØIØAZEN.';
@@ -530,12 +538,14 @@ $s_click_to_login = 'Kliknìte zde pro pøihlá¹ení';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = '<strong>Sledovaè problémù Vás vítá.</strong>';
 $s_login_title = 'Pøihlá¹ení';
 $s_save_login = 'Ulo¾it login';
 $s_choose_project = 'Vybrat projekt';
 $s_login_button = 'Pøihlásit';
 $s_signup_link = 'Vytvoøit nový úèet';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Vyber projekt';
@@ -544,6 +554,12 @@ $s_select_project_button = 'Vyber projekt';
 $s_logged_out_title = 'Odhlá¹ení...';
 $s_redirecting = '...pøesmìrování';
 $s_here = 'zde';
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Moje otevøené a pøiøazené';
@@ -674,13 +690,13 @@ $s_confirm_account_pruning = 'Opravdu chcete odstranit v¹echny staré úèty, na kt
 $s_edit_user_title = 'Úpravy u¹ivatele';
 $s_reset_password_button = 'Vynulovat heslo';
 $s_delete_user_button = 'Smazat u¾ivatele';
-$s_reset_password_msg = 'Nastavit heslo na náhodnì vygenerovanou hodnotu.';
-$s_reset_password_msg2 = 'Nastavit heslo na prázdné.';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
+$s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
 $s_show_all_users = 'v¹ichni';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Úèet je chránìn. Není mo¾né vynulovat heslo.';
-$s_account_reset_msg = 'Heslo k úètu vynulováno...';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'Heslo k úètu bylo nastaveno na prázdné...';
 
 # manage_user_update.php
@@ -818,15 +834,13 @@ $s_selected_project = 'Vyber projekt';
 $s_valid_project_msg = 'Musíte vybrat platný projekt';
 
 # signup.php
-$s_invalid_email = 'EMAILOVÁ ADRESA JE NEPLATNÁ';
-$s_duplicate_username = 'U®IVATELSKÉ JMÉNO JE JI® EXISTUJÍCÍ. VYBERTE JINÉ U®IVATELSKÉ JMÉNO.';
-$s_account_create_fail = 'CHYBA PØI VYTVÁØENÍ U®IVATELSKÉHO ÚÈTU.';
-$s_account_added = 'Úèet byl úspì¹nì pøidán.';
-$s_password_emailed_msg = 'Va¹e heslo vám bude zasláno emailem.';
-$s_no_reponse_msg = 'Pokud neodpovíte do jednoho týdne, Vá¹ úèet bude smazán.';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = 'Vyberte si u¾ivatelské jméno a zadejte platnou emailovou adresu.  Na Va¹i adresu Vám bude zasláno náhodnì vygenerované heslo.';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Vytvoøení u¾ivatele';
 $s_signup_button = 'Vytvoøit';
 

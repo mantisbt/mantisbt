@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.66 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:16 $
+	# $Revision: 1.67 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:45 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.66 2004-08-10 15:03:16 jlatour Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.67 2004-08-16 13:28:45 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -222,10 +222,17 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
-$s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
-$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+$s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
+$s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = 'Anterior';
@@ -254,17 +261,18 @@ $s_projection_enum_string = '10:Nada,30:Ajuste Mínimo,50:Pequenos Consertos,70:R
 $s_eta_enum_string = '10:Nada,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mes,60:> 1 mês';
 
 # Email Strings
-$s_new_account_subject = 'Nova conta de utilizador';
-$s_new_account_greeting = 'Parabéns e bem-vindo ao Bugtracker. Aqui estão as informações para o seu Registo' . "\n\n";
-$s_new_account_url = 'Pode aceder a partir deste site: ';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Utilizador: ';
-$s_new_account_password = 'Senha de acesso: ';
-$s_new_account_message = 'P.f., depois de entrar no site, altere a sua senha. A sua senha é armazenada criptografada. Não pode recuperá-la. Se perder a sua senha ela terá que ser re-iniciada.' . "\n\n";
-$s_new_account_do_not_reply = 'ATENÇÃO : Não Responda a esta Mensagem!' . "\n";
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'Existe um pedido para que a sua senha seja re-iniciada';
-$s_account_name_msg = 'A sua Conta é';
-$s_news_password_msg = 'A sua Senha é';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
@@ -526,12 +534,14 @@ $s_click_to_login = 'Clique aqui para entrar';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Bem-vindo ao BugTracker.';
 $s_login_title = 'Login';
 $s_save_login = 'Guardar Registo de utilizador ?';
 $s_choose_project = 'Escolha um Projecto';
 $s_login_button = 'Entrar';
 $s_signup_link = 'Se é a 1ª vez que nos visita, crie uma nova Conta aqui';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Seleccionar projecto';
@@ -540,6 +550,12 @@ $s_select_project_button = 'Seleccionar projecto';
 $s_logged_out_title = 'Saindo ...';
 $s_redirecting = '...Redireccionando';
 $s_here = 'Aqui';
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Abrir e Atribuir a Mim';
@@ -670,13 +686,13 @@ $s_confirm_account_pruning = 'Tem a certeza de querer APAGAR as contas Antigas q
 $s_edit_user_title = 'Editar Utilizador';
 $s_reset_password_button = 'Limpar Senha';
 $s_delete_user_button = 'Remover Utilizador';
-$s_reset_password_msg = 'Reset Password sets the randomly generated password.';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = 'Limpar Senha configura uma senha em branco.';
 $s_show_all_users = 'TODOS';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Conta Protegida. Não é possível limpar a senha.';
-$s_account_reset_msg = 'Senha da conta foi limpa...';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'Senha da conta em branco...';
 
 # manage_user_update.php
@@ -814,15 +830,13 @@ $s_selected_project = 'Seleccionar Projecto';
 $s_valid_project_msg = 'Deve Selecionar um Projecto Válido';
 
 # signup.php
-$s_invalid_email = 'ENDEREÇO DE E-MAIL INVÁLIDO';
-$s_duplicate_username = 'UTILIZADOR EXISTENTE. ESCOLHA OUTRO';
-$s_account_create_fail = 'FALHA AO CRIAR A CONTA';
-$s_account_added = 'Conta Adicionada com Sucesso.';
-$s_password_emailed_msg = 'A Senha Será Enviada Para o Seu E-Mail.';
-$s_no_reponse_msg = 'Caso Não Volte em Uma Semana, Seu Acesso pode Ser Cortado';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = 'Escolha o Utilizador pretendido e Introduza um e-mail válido. Uma senha gerada automaticamente será enviada para o e-mail indicado.';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Criar Utilizador pela 1ª vez';
 $s_signup_button = 'Criar Utilizador';
 

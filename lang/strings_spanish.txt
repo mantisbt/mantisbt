@@ -11,11 +11,11 @@
 	# Spanish: Bernardo Hernández - b.magno@terra.es
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# -------------------------------------------------
-	# $Revision: 1.70 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:17 $
+	# $Revision: 1.71 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:46 $
 	#
-	# $Id: strings_spanish.txt,v 1.70 2004-08-10 15:03:17 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.71 2004-08-16 13:28:46 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -225,8 +225,15 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña introducidos son incorrectos.';
 $s_login_cookies_disabled = 'ERROR: Su navegador o no soporta cookies, o las ha rechazado.';
 
@@ -257,17 +264,18 @@ $s_projection_enum_string         = '10:ninguna,30:ajuste,50:cambio menor,70:cam
 $s_eta_enum_string                = '10:ninguno,20:< 1 día,30:2-3 días,40:< 1 semana,50:< 1 mes,60:> 1 mes';
 
 # Email Strings
-$s_new_account_subject = 'Su nueva cuenta de usuario';
-$s_new_account_greeting = 'Saludos y bienvenido a Mantis. Por favor, tome nota de la información que necesitara para iniciar una sesión.' . "\n\n";
-$s_new_account_url = 'Puede iniciar una sesión en: ';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Usuario: ';
-$s_new_account_password = 'Contraseña: ';
-$s_new_account_message = 'Cuando se conecte por primera vez por favor cambie su contraseña.  Su contraseña será almacenada en forma encriptada.' . "\n\n";
-$s_new_account_do_not_reply = 'Por favor, no conteste a este mensaje.' . "\n";
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'Se ha solicitado un reestablecimiento de su contraseña.';
-$s_account_name_msg = 'Su nombre de cuenta es';
-$s_news_password_msg = 'Aquí esta su nueva contraseña';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'El siguiente bug requiere su OPINIÓN.';
 $s_email_notification_title_for_status_bug_acknowledged = 'El siguiente bug ha sido NOTIFICADO.';
@@ -529,12 +537,14 @@ $s_click_to_login = 'Click aquí para iniciar la sesión';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Bienvenido al Gestor de Incidencias.';
 $s_login_title = 'Inicio de sesión';
 $s_save_login = 'Guardar datos';
 $s_choose_project = 'Seleccione Proyecto';
 $s_login_button = 'Iniciar sesión';
 $s_signup_link = 'Solicitar una Cuenta Nueva';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Seleccione Proyecto';
@@ -543,6 +553,12 @@ $s_select_project_button = 'Seleccione Proyecto';
 $s_logged_out_title = 'Sesión cerrada...';
 $s_redirecting = '...Redireccionando';
 $s_here = 'Aquí';
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Bugs Abiertos y Asignados a mi';
@@ -673,13 +689,13 @@ $s_confirm_account_pruning = '¿Seguro que desea eliminar las cuentas antiguas qu
 $s_edit_user_title = 'Editar Usuario';
 $s_reset_password_button = 'Reestablecer Contraseña';
 $s_delete_user_button = 'Eliminar Usuario';
-$s_reset_password_msg = 'Reestablecer la contraseña genera una nueva contraseña al azar.';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = 'Reestablecer la contraseña establece una contraseña en blanco.';
 $s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Cuenta Protegida. No es posible reestablecer la contraseña.';
-$s_account_reset_msg = 'Se ha generado una nueva contraseña y se ha enviado al usuario...';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'La contraseña se ha establecido en blanco...';
 
 # manage_user_update.php
@@ -817,15 +833,13 @@ $s_selected_project = 'Proyecto Seleccionado';
 $s_valid_project_msg = 'Debe seleccionar un proyecto válido';
 
 # signup.php
-$s_invalid_email = 'ES UNA DIRECCIÓN DE CORREO NO VÁLIDA';
-$s_duplicate_username = 'ES UN USUARIO DUPLICADO.  SELECCIONE OTRO NOMBRE DE USUARIO';
-$s_account_create_fail = 'FALLA AL CREAR LA CUENTA DE USUARIO';
-$s_account_added = 'Cuenta agregada.';
-$s_password_emailed_msg = 'Se le enviará su contraseña por correo.';
-$s_no_reponse_msg = 'Si no responde en 1 semana, su cuenta sera borrada.';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = 'Introduzca su usuario y un email válido.  Se le enviará por email una contraseña generada al azar.';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Suscribirse';
 $s_signup_button = 'Suscribirse';
 

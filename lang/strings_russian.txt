@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.66 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:16 $
+	# $Revision: 1.67 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:45 $
 	#
-	# $Id: strings_russian.txt,v 1.66 2004-08-10 15:03:16 jlatour Exp $
+	# $Id: strings_russian.txt,v 1.67 2004-08-16 13:28:45 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -70,11 +70,11 @@ $s_bug_relationships = 'Связи';
 $s_empty_password_sure_msg = 'У пользователя пустой пароль. Вы уверены, что хотите этого?';
 $s_empty_password_button = 'Использовать пустой пароль';
 
-$s_duplicate_of = 'дубликат %id';
-$s_has_duplicate = 'имеет дубликат %id';
-$s_related_to = 'связан с %id';
-$s_dependant_on = 'зависит от %id';
-$s_blocks = 'блокирует %id';
+$s_duplicate_of = 'дубликат';
+$s_has_duplicate = 'имеет дубликат';
+$s_related_to = 'связан с';
+$s_dependant_on = 'зависит от';
+$s_blocks = 'блокирует';
 
 $s_new_bug = 'Новое обращение';
 $s_bugnote_added = 'Комментарий добавлен';
@@ -97,8 +97,8 @@ $s_login_link = 'Вход';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'У Вас недостаточно прав для выполнения этой операции со следующими обращениями: ';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_access = 'У Вас недостаточно прав для выполнения этой операции.';
+$s_bug_actiongroup_status = 'Это обращение не может быты изменено в запрошенный статус';
 $s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти обращения?';
 $s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти обращения?';
 $s_move_bugs_conf_msg = 'Перенести обрашения в';
@@ -223,9 +223,16 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Между этими обращениями уже 
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Связь не найдена";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Дрступ запрещен: обращение %d требует большего уровня доступа.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "обращение не может быть связано с собой";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Подтверждающий хэш не совпадает. Повторите ввод.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Возможность \'Восстановление пароля\' недоступна.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Вы дожны предоставить e-mail адрес, для того чтобы сбросить пароль';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Предоставленная информация не совпадает ни с одним зарегистрированным бюджетом!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL подтверждения некорректен или уже был использован.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Достигнуто максимальное число параллельных запросов. Свяжитесь с администратором';
 
-$s_login_error = 'ОШИБКА: Ваш бюджет может быть заблокирован или введенное имя пользователя/пароль неправильны.';
-$s_login_cookies_disabled = 'ОШИБКА: Ваш браузер или не знает как обрабатывать куки, или не принимает их.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+$s_login_error = 'Ваш бюджет может быть заблокирован или введенное имя пользователя/пароль неправильны.';
+$s_login_cookies_disabled = 'Ваш браузер или не знает как обрабатывать куки, или не принимает их.';
 
 # General Strings
 $s_go_back = 'Назад';
@@ -254,17 +261,18 @@ $s_projection_enum_string         = '10:нет,30:мелкие изменения,50:небольшие исп
 $s_eta_enum_string                = '10:нет,20:< 1 дня,30:2-3 дня,40:< 1 недели,50:< 1 месяца,60:> 1 месяца';
 
 # Email Strings
-$s_new_account_subject = 'Ваш новый бюджет';
-$s_new_account_greeting = 'Приветствуем, добро пожаловать в систему регистрации обращений. Информация, которая необходима Вам для прохождения авторизации.' . "\n\n";
-$s_new_account_url = 'Вы можете зайти в систему по следующему адресу: ';
+$s_new_account_subject = 'Новая регистрация';
+$s_new_account_greeting = 'Спасибо за регистрацию. Зарегистрирован ваш бюджет с именем пользователя \'';
+$s_new_account_greeting2 = '\'. Для завершения регистрации, посетите следующий адрес (убедитесь, что он ввведен в одну строку) и установите собственный пароль доступа:';
 $s_new_account_username = 'Пользователь: ';
-$s_new_account_password = 'Пароль: ';
-$s_new_account_message = 'После первого входа в систему, пожалуйста, смените пароль.  Также следует учитывать, что при сохранении пароля используется одностороннее шифрование. Персонал не сможет Вам напомнить пароль.  Если Вы забудете пароль, Вам можно будет его только сменить.' . "\n\n";
-$s_new_account_do_not_reply = 'Это сообщение создано автоматически, не нужно на него отвечать.' . "\n";
+$s_new_account_message = 'Если вы не запрашивали никакой регистрации, проигнорируйте это сообщение.' . "\n\n";
+$s_new_account_do_not_reply = 'НЕ ОТВЕЧАЙТЕ НА ЭТО СООБЩЕНИЕ';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'IP-адрес клиента: ';
+$s_new_account_signup_msg = 'Создан новый бюджет:';
 
-$s_reset_request_msg = 'Был получен запрос на сброс пароля';
-$s_account_name_msg = 'Имя вашего бюджета';
-$s_news_password_msg = 'Ваш новый пароль';
+$s_reset_request_msg = 'Был получен запрос на изменение пароля с помощью e-mail верификации';
+$s_reset_request_in_progress_msg = 'Если вы ввели корректное имя и e-mail вашего бюджета, то вам высылается подтверждающее сообщение на этот адрес. После получения сообщения следуйте инструкциям для смены пароля вашего бюджета.';
 
 $s_email_notification_title_for_status_bug_feedback = 'Это обращение требует Вашего ответа.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Это обращение было ПРИЗНАНО.';
@@ -526,12 +534,14 @@ $s_click_to_login = 'Регистрация - тут';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Добро пожаловать в Систему Регистрации Обращений.';
 $s_login_title = 'Вход';
 $s_save_login = 'Запомнить данные';
 $s_choose_project = 'Выберите проект';
 $s_login_button = 'Войти';
 $s_signup_link = 'Зарегистрировать новый бюджет';
+$s_lost_password_link = 'Забыли пароль?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Выберите проект';
@@ -540,6 +550,12 @@ $s_select_project_button = 'Выберите проект';
 $s_logged_out_title = 'Выход...';
 $s_redirecting = '...Переадресация';
 $s_here = 'здесь';
+# lost_pwd_page.php
+$s_lost_password_title = "Сброс пароля";
+$s_lost_password_done_title = "Сообщение выслано";
+$s_lost_password_subject = "Сброс пароля";
+$s_lost_password_info = "Для восстановления пароля введите имя пользователя и e-mail для вашего бюджета.<br/><br/>Если дата соответствует реальному бюджету, вам будет выслан специальный URL, который содержит код верификации. Используйте этот линк для смены пароля.";
+$s_lost_password_confirm_hash_OK = "Подтверждение принято. Обновите ваш пароль.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Открытых и назначенных мне';
@@ -670,13 +686,13 @@ $s_confirm_account_pruning = 'Вы уверены, что хотите удалить старые неиспользова
 $s_edit_user_title = 'Редактирование пользователя';
 $s_reset_password_button = 'Сбросить пароль';
 $s_delete_user_button = 'Удалить пользователя';
-$s_reset_password_msg = 'Сброс пароля устанавил случайно сгенерированный пароль.';
+$s_reset_password_msg = 'Сьрос пароля высылает URL подтверждения по e-mail.';
 $s_reset_password_msg2 = 'Сброс пароля привел к тому, что сейчас пароль - пустая строка.';
 $s_show_all_users = 'Все';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Бюджет защищен. невозможно обнулить пароль.';
-$s_account_reset_msg = 'Новый пароль сгенерирован и выслан пользователю...';
+$s_account_reset_msg = 'Подтверждающее сообщение выслано на ваш адрес...';
 $s_account_reset_msg2 = 'Пароль к бюджету установлен пустым...';
 
 # manage_user_update.php
@@ -814,15 +830,13 @@ $s_selected_project = 'Выбранный проект';
 $s_valid_project_msg = 'Вы должны выбрать правильный проект';
 
 # signup.php
-$s_invalid_email = 'НЕПРАВИЛЬНЫЙ E-MAIL адрес';
-$s_duplicate_username = 'ТАКОЕ ИМЯ ПОЛЬЗОВАТЕЛЯ УЖЕ ИСПОЛЬЗУЕТСЯ.  ВЫБЕРИТЕ ДРУГОЕ ИМЯ';
-$s_account_create_fail = 'НЕ УДАЛОСЬ СОЗДАТЬ БЮДЖЕТ';
-$s_account_added = 'Бюджет добавлен.';
-$s_password_emailed_msg = 'Ваш пароль будет отправлен Вам по email.';
-$s_no_reponse_msg = 'Если Вы не войдете в систему в течении недели, то Ваш бюджет может быть удален.';
+$s_signup_done_title = 'Регистрация бюджета обработана';
+$s_password_emailed_msg = 'Вы успешно зарегистрированы. Вам выслано подтверждающее сообщение для проверки адреса. Посещение линка, высланного в письме, активирует ваш бюджет.';
+$s_no_reponse_msg = 'У вас есть семь дней для завершения процесса подтверждения бюджета; в случае неподтверждения в течение этого периода, свежезарегистированный бюджет может быть удален.';
 
 # signup_page.php
-$s_signup_info = 'Выберите Ваше имя пользователя и введите правильный email. Сгенерированный пароль будет выслан Вам на Ваш адрес.';
+$s_signup_captcha_request = 'Ввведите код, как он показан в прямоугольнике справа';
+$s_signup_info = 'После заполнения этой формы и проверки ваших ответов, вам будет выслано подтверждающее сообщеение на указанный вами адрес.<br/>Используя это сообщение вы сможете активировать ваш бюджет. Если вы не активируете бюджет в течение 7 дней,он может быть удален.<br/>Вы должны использовать работоспособный e-mail адрес, чтобы получить подтверждающее сообщение.';
 $s_signup_title = 'Регистрация';
 $s_signup_button = 'Зарегистрироваться';
 

@@ -11,11 +11,11 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.49 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:10 $
+	# $Revision: 1.50 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:30 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.49 2004-08-10 15:03:10 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.50 2004-08-16 13:28:30 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
@@ -238,10 +238,17 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
-$s_login_error = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+$s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
+$s_login_cookies_disabled = 'Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 # General Strings
 $s_go_back = '后退';
@@ -270,17 +277,18 @@ $s_projection_enum_string         = "10:无,30:很小的改动,50:较小的修正,70:重要修
 $s_eta_enum_string                = "10:无,20:小于 1 天,30:2-3 天,40:小于 1 星期,50:小于 1 个月,60:超过 1 个月";
 
 # Email Strings
-$s_new_account_subject = "你的新用户帐号";
-$s_new_account_greeting = "欢迎来到 Mantis Bug 跟踪管理系统，这是你需要登录的信息\n\n";
-$s_new_account_url = "你可以在这里登录 Mantis Bug 跟踪管理系统: ";
-$s_new_account_username = "帐号: ";
-$s_new_account_password = "密码: ";
-$s_new_account_message = "在登录系统后，请记得立即更改你的密码! 您的密码是以 MD5 加密方式储存的，所以管理员无法取得您的密码！\n\n";
-$s_new_account_do_not_reply = "本邮件由系统自动生成，请不要回复。\n";
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_username = 'Username: ';
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = "重设密码：";
-$s_account_name_msg = "你的帐户姓名是";
-$s_news_password_msg = "你的新密码";
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = '下列 Bug 需要您的反馈。';
 $s_email_notification_title_for_status_bug_acknowledged = '下列 Bug 已经被公认。';
@@ -542,12 +550,14 @@ $s_click_to_login = "点击这里进入";
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = "欢迎访问Mantis Bug 跟踪管理系统";
 $s_login_title = "登录";
 $s_save_login = "记住此次登录";
 $s_choose_project = "选择项目";
 $s_login_button = "登录";
 $s_signup_link = "注册一个新帐号";
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = "选择项目";
@@ -556,6 +566,12 @@ $s_select_project_button = "选择项目";
 $s_logged_out_title = "正在注销登录...";
 $s_redirecting = "...重定向到...";
 $s_here = "到这里";
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = "指派给我并开放的Bug";
@@ -686,13 +702,13 @@ $s_confirm_account_pruning = '你确定要删除从来没有登录过的旧账号吗？';
 $s_edit_user_title = "编辑使用者";
 $s_reset_password_button = "重设密码";
 $s_delete_user_button = "删除使用者";
-$s_reset_password_msg = "重置密码并设定一个随机产生的密码。";
-$s_reset_password_msg2 = "重设密码并将密码置为空";
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
+$s_reset_password_msg2 = 'Reset Password resets the password to be blank.';
 $s_show_all_users = '全部';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "帐号受保护，不能重置密码。";
-$s_account_reset_msg = "帐号密码重设...";
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = "账号密码已经置为空...";
 
 # manage_user_update.php
@@ -830,15 +846,13 @@ $s_selected_project = "选择项目";
 $s_valid_project_msg = "必须选择一个有效的项目";
 
 # signup.php
-$s_invalid_email = "是一个无效的 EMAIL 地址!!";
-$s_duplicate_username = "帐号名称已经有人使用了. 请选择其他的使用者名称";
-$s_account_create_fail = "创建用户帐号失败";
-$s_account_added = "新用户帐号已成功加入。";
-$s_password_emailed_msg = "密码将通过Email发送给你。";
-$s_no_reponse_msg = "如果你在一周内没有响应，你的帐号将被删除。";
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = "选择你的登录名称和输入您有效的Email位址，一个随机的密码将会送到您的信箱中!";
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = "注册";
 $s_signup_button = "注册";
 

@@ -8,11 +8,11 @@
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.58 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:14 $
+	# $Revision: 1.59 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:44 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.58 2004-08-10 15:03:14 jlatour Exp $
+	# $Id: strings_japanese_euc.txt,v 1.59 2004-08-16 13:28:44 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -223,7 +223,14 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "¤³¤ì¤é¤Î2¤Ä¤Î²þÁ±Í×µá´Ö¤Ë´ØÏ
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "¸å±ç¤¬¸«¤Ä¤«¤ê¤Þ¤»¤ó¡£";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "¥¢¥¯¥»¥¹µñÈÝ: ²þÁ±Í×µá %d ¤Ï¤è¤ê¹â¤¤¥¢¥¯¥»¥¹¥ì¥Ù¥ë¤òÍ×µá¤·¤Þ¤¹¡£";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "²þÁ±Í×µá¤Ï¼«Ê¬¼«¿È¤Ë´ØÏ¢ÉÕ¤±½ÐÍè¤Þ¤»¤ó¡£";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '¥¨¥é¡¼:¥æ¡¼¥¶¡¼Ì¾/¥Ñ¥¹¥ï¡¼¥É¤¬´Ö°ã¤¨¤Æ¤¤¤Þ¤¹¡£';
 $s_login_cookies_disabled = '¥¨¥é¡¼: »ÈÍÑ¤·¤Æ¤¤¤ë¥Ö¥é¥¦¥¶¤¬¥¯¥Ã¥­¡¼¤ËÂÐ±þ¤·¤Æ¤¤¤Ê¤¤¤«¡¢¥¯¥Ã¥­¡¼¤òÌµ¸ú¤Ë¤·¤Æ¤¤¤Þ¤¹¡£';
 
@@ -254,17 +261,18 @@ $s_projection_enum_string = '10:Ì¤Äê,30:º³ºÙ¤Ê½¤Àµ,50:¾®¤µ¤Ê½¤Àµ,70:Âç¤­¤Ê½¤Àµ,9
 $s_eta_enum_string = '10:Â¨»þ,20:1Æü°ÊÆâ,30:2¡Á3Æü,40:1½µ´Ö°ÊÆâ,50:1¥ö·î°ÊÆâ,60:1¥ö·î°Ê¾å';
 
 # Email Strings
-$s_new_account_subject = '[mantis] ¥¢¥«¥¦¥ó¥ÈÅÐÏ¿ÄÌÃÎ';
-$s_new_account_greeting = '²þÁ±Í×µá´ÉÍý¥·¥¹¥Æ¥à Mantis ¤Ë¤è¤¦¤³¤½!¼¡¤Î¥¢¥«¥¦¥ó¥È¤òÍÑ¤¤¤Æ¥í¥°¥¤¥ó¤·¤Æ²¼¤µ¤¤¡£\n\n';
-$s_new_account_url = 'URL:';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = '¥æ¡¼¥¶¡¼Ì¾:';
-$s_new_account_password = '¥Ñ¥¹¥ï¡¼¥É:';
-$s_new_account_message = '¥í¥°¥¤¥ó¸å¡¢¤¹¤°¤Ë¥Ñ¥¹¥ï¡¼¥É¤òÊÑ¹¹¤·¤Æ²¼¤µ¤¤¡£¥Ñ¥¹¥ï¡¼¥É¤Ï¡¢°Å¹æ²½¤·¤Æµ­Ï¿¤·¤Æ¤¤¤Þ¤¹¤Î¤Ç¡¢¥¹¥¿¥Ã¥Õ¤¬¸«¤ë»ö¤â½ÐÍè¤Þ¤»¤ó¡£¥Ñ¥¹¥ï¡¼¥É¤òËº¤ì¤¿¾ì¹ç¤Ë¤Ï¡¢¥ê¥»¥Ã¥È¤¹¤ë¤·¤«¤¢¤ê¤Þ¤»¤ó¤Î¤ÇÍ½¤á¤´Î»¾µ²¼¤µ¤¤¡£\n\n';
-$s_new_account_do_not_reply = '¤³¤Î¥á¡¼¥ë¤Ë¤Ï¥ê¥×¥é¥¤¤·¤Ê¤¤¤Ç²¼¤µ¤¤¡£\n';
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = '¥Ñ¥¹¥ï¡¼¥É¥ê¥»¥Ã¥È¤ÎÍ×µá¤ò¼õ¤±ÉÕ¤±¤Þ¤·¤¿¡£';
-$s_account_name_msg = '¥æ¡¼¥¶¡¼Ì¾:';
-$s_news_password_msg = '¿·¤·¤¤¥Ñ¥¹¥ï¡¼¥É:';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = '¼¡¤Î²þÁ±Í×µá¤Ë¤Ä¤¤¤Æ¡¢¤â¤Ã¤È¾ðÊó¤¬É¬Í×¤Ç¤¹¡£';
 $s_email_notification_title_for_status_bug_acknowledged = '¼¡¤Î²þÁ±Í×µá¤ÎÆâÍÆ¤¬³ÎÇ§¤µ¤ì¤Þ¤·¤¿¡£';
@@ -526,12 +534,14 @@ $s_click_to_login = '¥í¥°¥¤¥ó¢ª';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Mantis ¤Ë¤è¤¦¤³¤½!';
 $s_login_title = '¥í¥°¥¤¥ó';
 $s_save_login = '¥Ñ¥¹¥ï¡¼¥É¤ÎÊÝÂ¸';
 $s_choose_project = '¥×¥í¥¸¥§¥¯¥ÈÁªÂò';
 $s_login_button = '¥í¥°¥¤¥ó';
 $s_signup_link = '¿·¤·¤¤¥æ¡¼¥¶¡¼¤ÎºîÀ®';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'ÁªÂò';
@@ -540,6 +550,13 @@ $s_select_project_button = 'ÁªÂò';
 $s_logged_out_title = '¥í¥°¥¢¥¦¥ÈÃæ...';
 $s_redirecting = '...¼¡¤Î¥Ú¡¼¥¸¢ª';
 $s_here = 'Here';
+
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = '»ä¤¬Ã´Åö¤¹¤ë²þÁ±Í×µá';
@@ -670,13 +687,13 @@ $s_confirm_account_pruning = '¥í¥°¥¤¥ó¤µ¤ì¤¿¤³¤È¤Î¤Ê¤¤¸Å¤¤¥¢¥«¥¦¥ó¥È¤òºï½ü¤·¤Æ¤â
 $s_edit_user_title = '¥æ¡¼¥¶¡¼¾ðÊó¤ÎÊÔ½¸';
 $s_reset_password_button = '¥Ñ¥¹¥ï¡¼¥É¤Î¥ê¥»¥Ã¥È';
 $s_delete_user_button = '¥¢¥«¥¦¥ó¥Èºï½ü';
-$s_reset_password_msg = '¥Ñ¥¹¥ï¡¼¥É¤Î¥ê¥»¥Ã¥È¤ò¹Ô¤¦¤È¡¢¥é¥ó¥À¥à¤ËÀ¸À®¤µ¤ì¤¿¥Ñ¥¹¥ï¡¼¥É¤¬ÀßÄê¤µ¤ì¤Þ¤¹¡£';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = '¥Ñ¥¹¥ï¡¼¥É¤Î¥ê¥»¥Ã¥È¤ò¹Ô¤¦¤È¡¢¥Ñ¥¹¥ï¡¼¥É¤¬Ìµ¤·¤ËÀßÄê¤µ¤ì¤Þ¤¹¡£';
 $s_show_all_users = 'Á´¤Æ';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = '¥¢¥«¥¦¥ó¥È¤¬ÊÝ¸î¤µ¤ì¤Æ¤¤¤Þ¤¹¡£¥Ñ¥¹¥ï¡¼¥É¤ò¥ê¥»¥Ã¥È¤Ç¤­¤Þ¤»¤ó¡£';
-$s_account_reset_msg = '¥Ñ¥¹¥ï¡¼¥É¤¬¥ê¥»¥Ã¥È¤µ¤ì¤Þ¤·¤¿¡£';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = '¥Ñ¥¹¥ï¡¼¥É¤¬Ìµ¤·¤ËÀßÄê¤µ¤ì¤Þ¤·¤¿¡£';
 
 # manage_user_update.php
@@ -814,15 +831,13 @@ $s_selected_project = 'ÁªÂò¤·¤¿¥×¥í¥¸¥§¥¯¥È';
 $s_valid_project_msg = '¥×¥í¥¸¥§¥¯¥È¤òÀµ¤·¤¯ÁªÂò¤·¤Æ²¼¤µ¤¤¡£';
 
 # signup.php
-$s_invalid_email = '¥á¡¼¥ë¥¢¥É¥ì¥¹¤¬Àµ¤·¤¯ÆþÎÏ¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡£';
-$s_duplicate_username = '¥æ¡¼¥¶¡¼Ì¾¤¬½ÅÊ£¤·¤Æ¤¤¤Þ¤¹¡£Â¾¤Î¥æ¡¼¥¶¡¼Ì¾¤òÆþÎÏ¤·¤Æ²¼¤µ¤¤¡£';
-$s_account_create_fail = '¥¢¥«¥¦¥ó¥È¤ÎºîÀ®¤Ë¼ºÇÔ¤·¤Þ¤·¤¿¡£';
-$s_account_added = '¥¢¥«¥¦¥ó¥È¤ÎºîÀ®¤ËÀ®¸ù¤·¤Þ¤·¤¿¡£';
-$s_password_emailed_msg = '¥Ñ¥¹¥ï¡¼¥É¤ò¡¢¥á¡¼¥ë¤ÇÁ÷¿®¤·¤Þ¤·¤¿¡£';
-$s_no_reponse_msg = '1½µ´Ö°ÊÆâ¤Ë¥í¥°¥¤¥ó¤·¤Ê¤±¤ì¤Ð¡¢¥¢¥«¥¦¥ó¥È¤¬ºï½ü¤µ¤ì¤Þ¤¹¡£';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = '´õË¾¤¹¤ë¥æ¡¼¥¶¡¼Ì¾¤ÈÀµ¤·¤¤¥á¡¼¥ë¥¢¥É¥ì¥¹¤òÆþÎÏ¤·¤Æ²¼¤µ¤¤¡£¥Ñ¥¹¥ï¡¼¥É¤Ï¡¢ÆþÎÏ¤µ¤ì¤¿¥á¡¼¥ë¥¢¥É¥ì¥¹¤ËÁ÷¿®¤µ¤ì¤Þ¤¹¡£';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = '¥æ¡¼¥¶¡¼ÅÐÏ¿';
 $s_signup_button = 'ÅÐÏ¿';
 

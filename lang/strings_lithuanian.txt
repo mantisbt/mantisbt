@@ -8,11 +8,11 @@
 	##########################################################################
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# -------------------------------------------------
-	# $Revision: 1.11 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:15 $
+	# $Revision: 1.12 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:44 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.11 2004-08-10 15:03:15 jlatour Exp $
+	# $Id: strings_lithuanian.txt,v 1.12 2004-08-16 13:28:44 bigbadger Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -233,8 +233,15 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'KLAIDA: Jûsø prisijungimas panaikintas arba neteisingas vartotojo vardas arba slaptaþodis.';
 $s_login_cookies_disabled = 'KLAIDA: Jûsø narðyklë nepalaiko slapukø (cookies) arba juos atmeta.';
 
@@ -265,17 +272,18 @@ $s_projection_enum_string         = '10:nëra,30:neþymûs patobulinimai,50:nedidel
 $s_eta_enum_string                = '10:nëra,20:< 1 diena,30:2-3 dienos,40:< 1 savaitë,50:< 1 mënuo,60:> 1 mënuo';
 
 # Email Strings
-$s_new_account_subject = 'Jûsø naujas vartotojo prisijungimas';
-$s_new_account_greeting = 'Sveikiname uþsiregistravus problemø kontrolës puslapyje.  Ðtai informacija, reikalinga Jûsø prisijungimui' . "\n\n";
-$s_new_account_url = 'Jûs galite prisijungti èia: ';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Vartotojo vardas: ';
-$s_new_account_password = 'Slaptaþodis: ';
-$s_new_account_message = 'Po prisijungimo praðome pakeisti slaptaþodá.  Jûsø slaptaþodis bus saugomas uþðifruotas vienakrypèiu algoritmu.  Jo nebus galima atstatyti.  Jei pamirðite savo slaptaþodá, jis bus pakeistas.' . "\n\n";
-$s_new_account_do_not_reply = 'Neatsakykite á ðià þinutæ.' . "\n";
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'Uþklausa pakeisti Jûsø slaptaþodá';
-$s_account_name_msg = 'Jûsø prisijungimo vardas yra';
-$s_news_password_msg = 'Jûsø naujas slaptaþodis';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'Ðiai problemai reikia Jûsø ATSAKYMO.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Ði problema UÞREGISTRUOTA.';
@@ -537,12 +545,14 @@ $s_click_to_login = 'Prisijungimui spauskite èia';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Sveiki atvykæ á problemø kontrolës sistemà.';
 $s_login_title = 'Prisijungimas';
 $s_save_login = 'Iðsaugoti prisijungimà';
 $s_choose_project = 'Pasirinkti projektà';
 $s_login_button = 'Prisijungti';
 $s_signup_link = 'Uþsakyti naujà prisijungimà';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Pasirinkti projektà';
@@ -551,6 +561,12 @@ $s_select_project_button = 'Pasirinkti projektà';
 $s_logged_out_title = 'Atsijungti...';
 $s_redirecting = '...Peradresavimas';
 $s_here = 'Èia';
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Atidaryta ir paskirta man';
@@ -681,13 +697,13 @@ $s_confirm_account_pruning = 'Ar tikrai norite iðtrinti senus niekada nenaudotus
 $s_edit_user_title = 'Redaguoti vartotojà';
 $s_reset_password_button = 'Keisti slaptaþodá';
 $s_delete_user_button = 'Iðtrinti vartotojà';
-$s_reset_password_msg = 'Pakeisti slaptaþodá atsitiktinai sugeneruotu.';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = 'Pakeisti slaptaþodá tuðèiu.';
 $s_show_all_users = 'VISI';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Prisijungimas apsaugotas. Negalima keisti slaptaþodþio.';
-$s_account_reset_msg = 'Naujas slaptaþodis sugeneruotas ir pasiøstas vartotojui...';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'Prisijungimo slaptaþodis nustatytas á tuðèià...';
 
 # manage_user_update.php
@@ -825,15 +841,13 @@ $s_selected_project = 'Pasirinktas projektas';
 $s_valid_project_msg = 'Jûs turite pasirinkti esamà projektà';
 
 # signup.php
-$s_invalid_email = 'NETEISINGAS ELEKTRONINIO PAÐTO ADRESAS';
-$s_duplicate_username = 'TOKS VARTOTOJO VARDAS JAU YRA. PASIRINKITE KITÀ';
-$s_account_create_fail = 'NEGALIMA SUKURTI VARTOTOJO PRISIJUNGIMO';
-$s_account_added = 'Prisijungimas sëkmingai átrauktas.';
-$s_password_emailed_msg = 'Savo slaptaþodá gausite elektroniniu paðtu.';
-$s_no_reponse_msg = 'Jeigu neatsakysite per savaitæ, Jûsø prisijungimas bus iðtrintas.';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = 'Pasirinkite savo prisijungimo vardà ir áveskite teisingà elektroninio paðto adresà.  Sugeneruotas slaptaþodis bus atsiøstas Jûsø nurodytu adresu.';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Patvirtinti';
 $s_signup_button = 'Patvirtinti';
 

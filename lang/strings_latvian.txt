@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.16 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:15 $
+	# $Revision: 1.17 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:44 $
 	#
-	# $Id: strings_latvian.txt,v 1.16 2004-08-10 15:03:15 jlatour Exp $
+	# $Id: strings_latvian.txt,v 1.17 2004-08-16 13:28:44 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -223,8 +223,15 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'KÏÛDA: Jûsu pieeja ir atslçgta vai ievadîts nepareizs lietotâja vârds, parole.';
 $s_login_cookies_disabled = 'KÏÛDA: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
@@ -255,17 +262,18 @@ $s_projection_enum_string         = "10:nav,30:sîkas izmaiòas,50:izmaiòas,70:bût
 $s_eta_enum_string                = "10:nav,20:< 1 dienu,30:2-3 dienas,40:< 1 nedçïu,50:< 1 mçnesi,60:> 1 mçnesi";
 
 # Email Strings
-$s_new_account_subject = "Jûsu jaunais lietotâja vârds";
-$s_new_account_greeting = "Laipni lûdzam kïûdu kontroles sistçmâ (Bugtracker). Izlasiet informâciju, kas nepiecieðama lai pieslçgtos pie sistçmas.\n\n";
-$s_new_account_url = "Lai pieslçgtos sistçmai nepiecieðams izmantot sekojoðu web adresi: ";
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = "Lietotâja vârds: ";
-$s_new_account_password = "Parole: ";
-$s_new_account_message = "Pçc pirmâs pieslçgðanâs lûdzu nomainiet savu paroli.  Òemiet vçrâ, ka parole tiek vienpusçji ðifrçta un glabâjas ðifrçtâ veidâ. Personâls nevarçs Jums atgâdinât paroli, tâdâ gadîjumâ to nâksies nomainît.\n\n";
-$s_new_account_do_not_reply = "Ðî vçstule tika izveidota automâtiski un uz to nav jâatbild.\n";
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = "Tika saòemts pieprasîjums jaunas paroles izveidei";
-$s_account_name_msg = "Jûsu lietotâja vârds:";
-$s_news_password_msg = "Jûsu jaunâ patrole:";
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'Sekojoðam buga pieteikumam nepiecieðama PAPILDINFORMÂCIJA.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Sekojoðs buga pieteikums ir APSTIPRINÂTS(ackn).';
@@ -527,12 +535,14 @@ $s_click_to_login = "Noklikðíiniet, lai pieslçgtos";
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = "Sveicinâti problçmu, kïûdu un jaunas funkcionalitâtes pieprasîjumu uzskaites un kontroles sistçmâ(bugtrack)";
 $s_login_title = "Pieslçgðanâs";
 $s_save_login = "Iegaumçt paroli";
 $s_choose_project = "Izvçlaties projektu";
 $s_login_button = "Pieslçgties";
 $s_signup_link = "Jums nav paroles? Reìistrçties sistçmâ kâ jaunam lietotâjam.";
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = "Izvçlaties projektu";
@@ -541,6 +551,12 @@ $s_select_project_button = "Izvçlaties projektu";
 $s_logged_out_title = "Atslçgðanâs...";
 $s_redirecting = "...pâradresâcija";
 $s_here = "ðeit";
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = "man pieðíirtâs atvçrtâs(neatrisinâtâs) kïûdas/problçmas";
@@ -671,13 +687,13 @@ $s_confirm_account_pruning = 'Vai Jûs esat pârliecinâti, ka vçlaties dzçst lieto
 $s_edit_user_title = "Lietotâja laboðana";
 $s_reset_password_button = "Atcelt paroli";
 $s_delete_user_button = "Dzçst lietotâju";
-$s_reset_password_msg = "Paroles atcelðâna nozîmç jaunas paroles ìenerâciju.";
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = "ðobrîd lietotâjam nav paroles (tukða).";
 $s_show_all_users = 'Visi';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "Lietotâja konts ir aizsargâts. Paroli nevar atcelt.";
-$s_account_reset_msg = "Parole tika atcelta...";
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = "Parole tagad ir tukða...";
 
 # manage_user_update.php
@@ -815,15 +831,13 @@ $s_selected_project = "Izvçlçtais projekts";
 $s_valid_project_msg = "Jums jâizvçlâs pareizs projekts";
 
 # signup.php
-$s_invalid_email = "NEPAREIZA e-pasta adrese";
-$s_duplicate_username = "TÂDS LIETOTÂJA VÂRDS JAU TIEK IZMANTOTS. IZVÇLATIES SEV CITU";
-$s_account_create_fail = "LIETOTÂJS NETIKA IZVEIDOTS";
-$s_account_added = "Lietotâjs tika izveidots.";
-$s_password_emailed_msg = "Jûsu parole tiks nosûtîta pa e-pastu.";
-$s_no_reponse_msg = "Ja nedçïas laikâ Jûs neuzsâksiet lietot sistçmu, Jûsu lietotâja vârds tiks nodzçsts.";
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = "Izvçlaties sev lietotâja vârdu un ievadiet korektu e-pasta adresi. Parole tiks nosûtîta pa e-pastu!";
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = "Lietotâja reìistrâcija";
 $s_signup_button = "Piereìistrçties";
 

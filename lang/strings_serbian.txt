@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.12 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:16 $
+	# $Revision: 1.13 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:46 $
 	#
-	# $Id: strings_serbian.txt,v 1.12 2004-08-10 15:03:16 jlatour Exp $
+	# $Id: strings_serbian.txt,v 1.13 2004-08-16 13:28:46 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -223,8 +223,15 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'GRESKA: vaš nalog je iskljucen ili ste pogrešno uneli korisnicko ime ili lozinku.';
 $s_login_cookies_disabled = 'GRESKA: Vaš internet pretraživac ili ne zna da obradi kukije (cookies) ili odbija da ih prihvati.';
 
@@ -255,17 +262,18 @@ $s_projection_enum_string = '10:nema,30:izmena,50:mala izmena,70:major rework,90
 $s_eta_enum_string = '10:nema,20:< 1 dan,30:2-3 dana,40:< 1 nedelja,50:< 1 mesec,60:> 1 mesec';
 
 # Email Strings
-$s_new_account_subject = 'Vas novi korisnicki nalog';
-$s_new_account_greeting = 'Dobrodošli u sistem za pracenje i prijavljivanje grešaka.  Ovde su informacije koje su vam potrebne za prijavljivanje' . "\n\n";
-$s_new_account_url = 'Mozete se prijaviti na sajt ovde: ';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Korisnicko ime: ';
-$s_new_account_password = 'Lozinka: ';
-$s_new_account_message = 'Nakon prijavljivanja na sajt, molim izmenite svoju lozinku.  Takodje imajte u vidu da vam se lozinka šifruje prilikom zapisivanja. Osoblje zaduženo za sajt nece moci da vam pošalje lozinku. Ukoliko je zaboravite, morace da bude resetovana.' . "\n\n";
-$s_new_account_do_not_reply = 'Molim nemojte odgovoriti na ovu poruku.' . "\n";
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = 'Poslat je zahtev za resetovanjem vase lozinke';
-$s_account_name_msg = 'Vaše korisnicko ime je';
-$s_news_password_msg = 'Ovo je Vaša nova lozinka';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'Sledeca greška zahteva vašu POVRATNU INFORMACIJU.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Sledeca greška je PRIMLJENA.';
@@ -527,12 +535,14 @@ $s_click_to_login = 'Kliknite ovde za prijavljivanje';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Dobrodosli u sistem za pracenje i prijavu grešaka.';
 $s_login_title = 'Operater';
 $s_save_login = 'Zapamti nalog';
 $s_choose_project = 'Izbor projekta';
 $s_login_button = 'Prijava';
 $s_signup_link = 'Prijava novog naloga';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Izbor projekta';
@@ -541,6 +551,12 @@ $s_select_project_button = 'Izbor projekta';
 $s_logged_out_title = 'Odjavljen...';
 $s_redirecting = '...Redirekcija';
 $s_here = 'Ovde';
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Otvoreni i meni dodeljeni';
@@ -671,13 +687,13 @@ $s_confirm_account_pruning = 'Da li ste sigurni da zelite da izbrisete stare nal
 $s_edit_user_title = 'Izmena korisnika';
 $s_reset_password_button = 'Resetovanje lozinke';
 $s_delete_user_button = 'Brisanje korisnika';
-$s_reset_password_msg = 'Po resetovanju lozinke generise se nova slucajno generisana lozinku.';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = 'Po resetovanju lozinke lozinka ostaje prazna.';
 $s_show_all_users = 'SVE';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Nalog je zasticen. Nije moguce resetovanje lozinke.';
-$s_account_reset_msg = 'Nova lozinka je generisana i poslata korisniku...';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = 'Lozinka naloga je ostavljena praznom...';
 
 # manage_user_update.php
@@ -815,15 +831,13 @@ $s_selected_project = 'Izabrani projekat';
 $s_valid_project_msg = 'Morate izabrati projekat';
 
 # signup.php
-$s_invalid_email = 'JE POGRESNA EMAIL ADRESA';
-$s_duplicate_username = 'JE DUPLI NALOG.  MOLIM IZABERITE DRUGO KORISNICKO IME';
-$s_account_create_fail = 'NEUSPELO KREIRANJE KORISNICKOG NALOGA';
-$s_account_added = 'Nalog je uspesno dodat.';
-$s_password_emailed_msg = 'Vasa lozinka ce vam biti poslata putem e-maila.';
-$s_no_reponse_msg = 'Ukoliko u roku od nedelju dana ne odgovorite, nalog ce biti izbrisan.';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = 'Izaberite korisnicko ime i unesite validnu e-mail adresu.  Slucajno genericana lozinka ce biti poslata na vasu e-mail adresu.';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Prijava';
 $s_signup_button = 'Prijava';
 

@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.69 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:15 $
+	# $Revision: 1.70 $
+	# $Author: bigbadger $
+	# $Date: 2004-08-16 13:28:44 $
 	#
-	# $Id: strings_korean.txt,v 1.69 2004-08-10 15:03:15 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.70 2004-08-16 13:28:44 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -222,8 +222,15 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
 
+#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
 $s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
 
@@ -254,17 +261,18 @@ $s_projection_enum_string         = '10:없음,30:조정,50:작은 수정,70:새로 작성,9
 $s_eta_enum_string                = '10:없음,20:< 1 일,30:2-3 일,40:< 1 주,50:< 1 달 ,60:> 1 달';
 
 # Email Strings
-$s_new_account_subject = '당신의 새로운 계정 ';
-$s_new_account_greeting = '이슈 추적시스템에 오신것을 환영합니다. 아래에 당신이 로그인하는데 필요한 몇가지 정보가 있습니다. ' . "\n\n";
-$s_new_account_url = '이 사이트에 로그인 할수 있습니다: ';
+$s_new_account_subject = 'Account registration';
+$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
+$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = '사용자 ID: ';
-$s_new_account_password = '패스 워드: ';
-$s_new_account_message = '로그인 하신후 암호를 변경하십시오. 암호는 단방향암호화됩니다. 시스템 관리자도 암호를 알수 없습니다. 암호를 분실하게 되면,다시 설정되어야 합니다.' . "\n\n";
-$s_new_account_do_not_reply = '이 메세지에 대한 응답을 하지 마십시오.' . "\n";
+$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_email = 'E-mail: ';
+$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_signup_msg = 'The following account has been created:';
 
-$s_reset_request_msg = '암호 초기화에 대한 요청이 있습니다.';
-$s_account_name_msg = '당신의 계정은 ';
-$s_news_password_msg = '당신의 새로운 암호입니다. ';
+$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
@@ -526,12 +534,14 @@ $s_click_to_login = '로그인';
 # login.php
 
 # login_page.php
+#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = '이슈 관리 시스템입니다.';
 $s_login_title = '로그인';
 $s_save_login = '로그인 정보 저장';
 $s_choose_project = '프로젝트 선택';
 $s_login_button = '로그인';
 $s_signup_link = '사용자 신규 등록';
+$s_lost_password_link = 'Lost your password?';
 
 # login_select_proj_page.php
 $s_select_project_button = '프로젝트 선택';
@@ -540,6 +550,12 @@ $s_select_project_button = '프로젝트 선택';
 $s_logged_out_title = '로그 아웃...';
 $s_redirecting = '...리다이렉팅';
 $s_here = '여기';
+# lost_pwd_page.php
+$s_lost_password_title = "Password Reset";
+$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_subject = "Password Reset";
+$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
+$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
 
 # main_page.php
 $s_open_and_assigned_to_me = '나에게 할당되고 진행중인 이슈';
@@ -670,13 +686,13 @@ $s_confirm_account_pruning = '한번도 로그인하지 않은 계정을 삭제하시겠습니까?';
 $s_edit_user_title = '사용자 편집';
 $s_reset_password_button = '암호 초기화';
 $s_delete_user_button = '사용자 삭제';
-$s_reset_password_msg = '임의로 생성된 암호로 암호를 초기화합니다.';
+$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
 $s_reset_password_msg2 = '암호 초기화는 암호를 공백으로 만듭니다.';
 $s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = '보호된 계정입니다. 암호를 초기화할수 없습니다.';
-$s_account_reset_msg = '계정 암호 초기화...';
+$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
 $s_account_reset_msg2 = '계정 암호가 없는 상태로 초기화합니다...';
 
 # manage_user_update.php
@@ -814,15 +830,13 @@ $s_selected_project = '현재 프로젝트';
 $s_valid_project_msg = '올바른 프로젝트를 선택해야 합니다.';
 
 # signup.php
-$s_invalid_email = '이메일 주소가 올바릅니까';
-$s_duplicate_username = '중복된 사용자입니다. 다른 이름을 선택하세요';
-$s_account_create_fail = '사용자 계정생성에 실패했습니다.';
-$s_account_added = '새로운 계정이 추가되었습니다.';
-$s_password_emailed_msg = '암호가 메일로 전송될 것입니다.';
-$s_no_reponse_msg = '만약 1주일안에 응답하지 않으면 계정이 삭제될 것입니다.';
+$s_signup_done_title = 'Account registration processed';
+$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
 
 # signup_page.php
-$s_signup_info = '로그인 이름과 올바른 이메일 주소를 선택하세요. 무작위로 생성된 주소가 당신의 주소로 전송될겁니다.';
+$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = '사인업';
 $s_signup_button = '사인업';
 
