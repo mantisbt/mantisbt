@@ -1,0 +1,865 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# Estonian: Villem Vannas, willu60@hotmail.com
+	###########################################################################
+	# Estonian strings for Mantis
+	# -------------------------------------------------
+	# $Revision: 1.1 $
+	# $Author: vboctor $
+	# $Date: 2003-09-01 14:06:57 $
+	#
+	# $Id: strings_estonian.txt,v 1.1 2003-09-01 14:06:57 vboctor Exp $
+	###########################################################################
+?>
+<?php
+# Charset
+$s_charset = 'Windows-1257';
+
+# Group commands menuitems
+$s_actiongroup_menu_move = 'Liiguta';
+$s_actiongroup_menu_assign = 'Määra';
+$s_actiongroup_menu_close = 'Sulge';
+$s_actiongroup_menu_delete = 'Kustuta';
+$s_actiongroup_menu_resolve = 'Lahenda';
+$s_actiongroup_menu_update_priority = 'Uuenda prioriteet';
+$s_actiongroup_menu_update_status = 'Uuenda olek';
+
+# new strings:
+$s_all_projects = 'Kõik projektid';
+$s_move_bugs = 'Liiguta bugid';
+$s_operation_successful = 'Operatsioon õnnestus.';
+$s_date_order = 'Kuupäeva järgi';
+$s_print_all_bug_page_link = 'Trüki teated';
+$s_csv_export = 'CSV Eksport';
+$s_login_anonymously = 'Logi sisse anonüümselt';
+$s_jump_to_bugnotes = 'Mine bugi märkustesse';
+$s_public_project_msg = 'See projekt on AVALIK.  Kõik kasutajad omavad sellele juurdepääsu.';
+$s_private_project_msg = 'See projekt on PRIVAATNE.  Ainult administraator ja eraldi lisatud kasutajad omavad sellele juurdepääsu.';
+$s_access_level_project = 'Projekti kasutamisõiguste tase';
+$s_view_submitted_bug_link = 'Näita lisatud bugi';
+$s_assigned_projects = 'Määratud projektid';
+$s_unassigned_projects = 'Määramata projektid';
+$s_print = 'Trüki';
+$s_jump = 'Mine';
+$s_copy_users = 'Kopeeri kasutajad';
+$s_copy_categories_from = 'Kopeeri kategooriad siit';
+$s_copy_categories_to = 'Kopeeri kategooriad sinna';
+$s_bug_history = 'Bugi ajalugu';
+$s_field = 'Väli';
+$s_old_value = 'Vana väärtus';
+$s_new_value = 'Uus väärtus';
+$s_date_modified = 'Muudatuse kuupäev';
+$s_bugnote = 'Märkus';
+$s_change = 'Muuda';
+$s_bugnote_view_state = 'Näita märkuse olek';
+$s_bug_monitor = 'Bugiga tegeldakse';
+$s_bug_end_monitor = 'Lõpeta Bugiga tegelemine';
+$s_announcement = 'Teadaanne';
+$s_stays_on_top = 'Püsi pealmisena';
+$s_delete_bugnote_button = 'Kustuta märkus';
+$s_delete_bugnote_sure_msg = 'Oled kindel, et soovid kustutada märkuse?';
+$s_bug_relationships = 'Seosed';
+$s_empty_password_sure_msg = 'Kasutajal on tühi parool.  Oled kindel, et soovid seda?';
+$s_empty_password_button = 'Kasuta tühja parooli';
+
+$s_duplicate_of = 'duplikaatne bugi %id';
+$s_has_duplicate = 'on duplikaat %id';
+$s_related_to = 'sugulane bugiga %id';
+$s_dependant_on = 'sõltub bugist %id';
+$s_blocks = 'blokeerib bugi %id';
+
+$s_new_bug = 'Uus Bugi';
+$s_bugnote_added = 'Märkus lisatud';
+$s_bugnote_edited = 'Märkus redigeeritud';
+$s_bugnote_deleted = 'Märkus kustutatud';
+$s_summary_updated = 'Kokkuvõte uuendatud';
+$s_description_updated = 'Kirjeldus uuendatudd';
+$s_additional_information_updated = 'Lisainformatsioon uuendatud';
+$s_steps_to_reproduce_updated = 'Bugi kordamise sammud uuendatud';
+$s_file_added = 'Fail lisatud';
+$s_file_deleted = 'Fail kustutatud';
+
+$s_make_private = 'Tee privaateseks';
+$s_make_public = 'Tee avalikuks';
+
+$s_create_new_project_link = 'Loo uus projekt';
+
+$s_login_link = 'Login';
+
+# bug_actiongroup_page.php : mass treatment
+$s_bug_actiongroup_failed = 'Sul pole vajalikke õigusi järgmise bugiga tegelemiseks: ';
+$s_close_bugs_conf_msg = 'Oled kindel, et soovid sulgeda need bugid ?';
+$s_delete_bugs_conf_msg = 'Oled kindel, et soovid kustutada need bugid ?';
+$s_move_bugs_conf_msg = 'Liiguta bugid sinna';
+$s_assign_bugs_conf_msg = 'Määra bugid kasutajale';
+$s_resolve_bugs_conf_msg = 'Vali bugi lahendus';
+$s_priority_bugs_conf_msg = 'Vali bugi prioriteet';
+$s_status_bugs_conf_msg = 'Vali bugi olek';
+$s_close_group_bugs_button = 'Sulge bugid' ;
+$s_delete_group_bugs_button = 'Kustuta bugid' ;
+$s_move_group_bugs_button = 'Liiguta bugid' ;
+$s_assign_group_bugs_button = 'Määra bugid' ;
+$s_resolve_group_bugs_button = 'Lahenda bugid' ;
+$s_priority_group_bugs_button = 'Uuenda prioriteeti' ;
+$s_status_group_bugs_button = 'Uuenda olekut' ;
+
+# improved JPgraphs strings
+$s_graph_imp_status_title = 'Graafikute süntees oleku järgi' ;
+$s_graph_imp_priority_title = 'Graafikute süntees prioriteedi järgi' ;
+$s_graph_imp_severity_title = 'Graafikute süntees raskusastme järgi';
+$s_graph_imp_category_title = 'Graafikute süntees kategooria järgi';
+$s_graph_imp_resolution_title = 'Graafikute süntees lahenduse järgi';
+$s_by_status_pct = 'oleku protsendi järgi';
+$s_by_priority_pct = 'prioriteedi protsendi järgi';
+$s_by_severity_pct = 'raskusastme protsendi järgi';
+$s_by_category_pct = 'kategooria protsendi järgi';
+$s_by_resolution_pct = 'lahenduse protsendi järgi';
+$s_by_severity_mix = 'raskusastme ja oleku järgi';
+$s_by_priority_mix = 'prioriteedi ja oleku järgi';
+$s_by_resolution_mix = 'lahenduse ja oleku järgi';
+$s_synthesis_link = 'Süntees';
+$s_status_link = 'Oleku järgi';
+$s_priority_link = 'Prioriteedi järgi';
+$s_severity_link = 'Raskusastme järgi';
+$s_category_link = 'Kategooria järgi';
+$s_resolution_link = 'Lahenduse järgi';
+
+# print_all_bug_page.php : display selected bugs
+$s_hide_button = 'Kuva ainult valitud';
+
+# print_all_bug_options.php : printing preferences
+$s_printing_preferences_title = 'Vali trükitavad väljad';
+$s_printing_options_link = 'Trükise seaded';
+
+# word and excel export
+$s_bugnote_title = 'Märkuste haldamine' ;
+$s_bugnote_date = 'Märkuse kuupäev';
+$s_bugnote_description = 'Märkuse kirjeldus';
+
+$s_error_no_proceed = 'Palun kasuta veebilehitseja "Back" nuppu tagasiminekuks eelmisele lehele.  Seal saad korrigeerida kõiki siin kuvatud probleeme või valida muu tegevuse. Võid vajutada ka mõne muu tegevuse menüüribal ja minna otse uude sektsiooni.';
+
+# ERROR strings
+$MANTIS_ERROR[ERROR_GENERIC] = 'Tegevuse käigus toimus viga.  Võiksid sellest veast teatada oma süsteemihaldurile.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL viga avastatud.  Palun teata sellest.';
+$MANTIS_ERROR[ERROR_REPORT] = 'Teate loomisel esines viga.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Fail pole määratletud';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Failitüüp pole lubatud';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Kataloogi pole olemas. Palun kontrolli projekti seadeid.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'See on korduv fail.  Palun kustuta kõigepealt varasem fail.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Sellise nimega projekt on juba olemas.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Vajalik väli oli tühi.  Palun kontrolli oma sisestust.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'See kasutajakonto on kaitstud.  Saad selle poole pöörduda alles peale kaitse eemaldamist.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Pöördumine keelatud.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Faili üleslaadimine ebaõnnestus. PHP failide üleslaadimine võib olla keelatud.  Palu oma administraatoril käivitada admin_check skript, et leida see probleem.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Faili üleslaadimine ebaõnnestus.  Põhjus on arvatavasti selles, et fail on suurem, kui lubab PHP installatsioon.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Selle lehekülje jaoks kohustuslik parameeter on määramata.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Valitud kasutajanimi on juba kasutusel.  Palun mine tagasi ja vali mõni muu.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfiguratsiooni seadet \'%s\' ei leitud.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Stringi ei leitud.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Märkust ei leitud.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekti ei leitud.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Andmebaasi välja ei leitud.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Ei õnnestu ühenduda FTP serveriga.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Sellise nimega projekt on juba olemas.  Palun mine tagasi ja sisesta mõni teine nimi.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Lubamatu kujuga projekti nimi.  Projekti nimed ei tohi sisaldada tühikuid.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Kasutajat ei leitud.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Sinu veebilehitsaja Logini informatsioon on vigane.  Võib-olla on Su kasutajakonto kustutatud?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Selle kasutaja eelistusi ei leitud.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Uudiseid ei leitud.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Parool ei klapi kontrollparooliga.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Eeldati massiivi, aga vastu võeti string.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eeldati stringi, aga vastu võeti massiiv.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bugi %d ei leitud.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Vigane e-posti aadress.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiili ei leitud.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Faili tüüp pole üleslaadimiseks lubatud.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'See on korduv fail.  Palun kustuta kõigepealt varasem fail.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Vigane failitee.  Kataloog kas puudub või pole veebiserveri poolt kirjutatav';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Pole võimalik määrata bugi iseenda duplikaadiks.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Kasutaja välja ei leitud';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'See on duplikaatne kasutaja väli.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Vähemalt üks projekt kasutab seda välja.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Lubamatu väärtus sellele väljale';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP autentimine ebaõnnestus';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Serveri ühendus ebaõnnestus';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Kirje uuendamine ebaõnnestus.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Kasutaja kirjet ei leitud.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'Toimingut ei saa teostada, sest bugi on juba lahendatud';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Andmebaasi ühendus ebaõnnestus. Andmebaasist tagastatud viga #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Andmebaasi päring ebaõnnestus.  Andmebaasist tagastatud viga #%d: %s päringule: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Andmebaasi valik ebaõnnestus.  Andmebaasist tagastatud viga #%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Sellise nimega kategooria juba eksisteerib.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kopeerimistoimingut pole määratletud.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategooriat ei leitud.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Selle nimega versioon juba eksisteerib.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versiooni ei leitud.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Kasutajanimi on vigane. Kasutajanimi võib sisaldada tähti, numbreid, tühikuid, sidekriipsu ja allkriipsu.';
+
+$s_login_error = 'VIGA: Sinu kasutajakonto võib olla blokeeritud või sisestasid vale kasutajanime/parooli.';
+$s_login_cookies_disabled = 'VIGA: Su veebilehitseja kas ei oska küpsiseid kasutada või on see omadus keelatud.';
+
+# General Strings
+$s_go_back = 'Mine tagasi';
+$s_proceed = 'Jätkamiseks vajuta siia';
+
+$s_switch = 'Vaheta';
+$s_logged_in_as = 'Sisse loginud ';
+
+$s_prefix_for_deleted_users = 'kasutaja';
+
+$s_administrator = 'administraator';
+
+# Enum Strings
+$s_access_levels_enum_string = '10:vaatleja,25:teataja,40:uuendaja,55:arendaja,70:mänedzher,90:administraator';
+$s_project_status_enum_string = '10:arendus,30:väljalase,50:stabiilne,70:aegunud';
+$s_project_view_state_enum_string = '10:avalik,50:privaatne';
+$s_view_state_enum_string = '10:avalik,50:privaatne';
+
+$s_priority_enum_string = '10:pole,20:madal,30:normaalne,40:kõrge,50:kiire,60:otsekohe';
+$s_severity_enum_string = '10:iseärasus,20:triviaalne,30:tekst,40:kohendus,50:väike,60:suur,70:crash,80:block';
+$s_reproducibility_enum_string = '10:alati,30:mõnikord,50:juhuslik,70:pole proovinud,90:pole võimalik korrata,100:N/A';
+$s_status_enum_string = '10:uus,20:tagasiside,30:tunnistatud,40:kinnitatud,50:määratud,80:lahendatud,90:suletud';
+$s_resolution_enum_string = '10:avatud,20:korras,30:uuesti avatud,40:ei kordu,50:võimatu korrastada,60:duplikaatne,70:pole bugi,80:peatataud,90:ei saa korda';
+$s_projection_enum_string = '10:pole,30:lihtne,50:kerge korrastada,70:raske ümbertegemine,90:üle projekteerida';
+$s_eta_enum_string = '10:pole,20:< 1 päev,30:2-3 päeva,40:< 1 nädal,50:< 1 kuu,60:> 1 kuu';
+
+# Email Strings
+$s_new_account_subject = 'Sinu uus kasutajakonto';
+$s_new_account_greeting = 'Tere tulemast MANTIS bugide kõrvaldamise süsteemi.  Siin on informatsioon, mida vajad sisselogimiseks' . "\n\n";
+$s_new_account_url = 'Siit saad sisse logida: ';
+$s_new_account_username = 'Kasutaja: ';
+$s_new_account_password = 'Parool: ';
+$s_new_account_message = 'Palun muuda peale logimist oma parool.  Pea meeles, et Su parool on krüpteeritud ühesuunalise algoritmiga.  Keegi ei saa Su parooli vaadata.  Kui unustad parooli, tuleb see uuesti määrata.' . "\n\n";
+$s_new_account_do_not_reply = 'Ära vasta sellele teatele.' . "\n";
+
+$s_reset_request_msg = 'Esitatud soov parool uuesti määrata';
+$s_account_name_msg = 'Su kasutajakonto kasutajanimi on';
+$s_news_password_msg = 'Siin on ka su uus parool';
+
+$s_new_bug_msg = 'Järgmine UUS bugi on LISATUD.';
+$s_email_bugnote_msg = 'MÄRKUS lisati sellele bugile.';
+$s_email_resolved_msg = 'Järgmine bugi on LAHENDATUD.';
+$s_email_close_msg = 'Järgmine bugi on SULETUD';
+$s_email_feedback_msg = 'Järgmine bugi vajab Sinu TAGASISIDET.';
+$s_email_reopen_msg = 'Järgmine bugi on UUESTI AVATUD.';
+$s_email_assigned_msg = 'Järgmine bugi on MÄÄRATUD.';
+$s_email_bug_deleted_msg = 'Järgmine bugi on KUSTUTATUD.';
+
+$s_email_reporter = 'Teataja';
+$s_email_handler = 'Haldaja';
+$s_email_project = 'Projekt';
+$s_email_bug = 'Bugi ID';
+$s_email_category = 'Kategooria';
+$s_email_reproducibility = 'Korratavus';
+$s_email_severity = 'Raskusaste';
+$s_email_priority = 'Prioriteet';
+$s_email_status = 'Olek';
+$s_email_resolution = 'Lahendus';
+$s_email_duplicate = 'Duplikaatne';
+$s_email_date_submitted = 'Laekumise kuupäev';
+$s_email_last_modified = 'Viimati muudetud';
+$s_email_summary = 'Kokkuvõte';
+$s_email_description = 'Kirjeldus';
+
+# account_delete.php
+$s_account_protected_msg = 'Kasutajakonto on kaitstud. Ei saa muuta seadeid...';
+$s_account_removed_msg = 'Sinu kasutajakonto on eemaldatud...';
+
+# account_delete_page.php
+$s_confirm_delete_msg = 'Oled kindel, et tahad kustutada oma kasutajakonto?';
+$s_delete_account_button = 'Kustuta kasutajakonto';
+
+# account_page.php
+$s_manage_profiles_link = 'Profiilid';
+$s_change_preferences_link = 'Eelistused';
+$s_edit_account_title = 'Redigeeri kasutajakontot';
+$s_username = 'Kasutaja';
+$s_email = 'E-post';
+$s_password = 'Parool';
+$s_confirm_password = 'Kinnita parool';
+$s_access_level = 'Pöördusõiguste tase';
+$s_update_user_button = 'Uuenda kasutaja';
+
+# account_prefs_page.php
+$s_default_account_preferences_title = 'Kasutajakonto eelistused';
+$s_default_project = 'Vaikimisi Projekt';
+$s_advanced_report = 'Näita detailsed teated';
+$s_advanced_view = 'Näita bugide detaile';
+$s_advanced_update = 'Näita bugide detailset uuendust';
+$s_refresh_delay = 'uuenduse viivitus';
+$s_redirect_delay = 'Ümbersuunamise viivitus';
+$s_email_on_new = 'Saada E-mail uue bugi ilmumise kohta';
+$s_email_on_assigned = 'Saada E-mail bugi määramise kohta';
+$s_email_on_feedback = 'Saada E-mail bugile tagasiside andmise kohta';
+$s_email_on_resolved = 'Saada E-mail bugi lahendamise kohta';
+$s_email_on_closed = 'Saada E-mail bugi sulgemise kohta';
+$s_email_on_reopened = 'Saada E-mail bugi taasavamise kohta';
+$s_email_on_bugnote_added = 'Saada E-mail bugile märkuse lisamise kohta';
+$s_email_on_status_change = 'Saada E-mail oleku muutuse kohta';
+$s_email_on_priority_change = 'Saada E-mail prioriteedi muutuse kohta';
+$s_language = 'Keel';
+$s_update_prefs_button = 'Uuenda seaded';
+$s_reset_prefs_button = 'Taasta seadete vaikimisi olek';
+
+# account_prefs_reset.php
+$s_prefs_reset_msg = 'Seaded on taastatud algolekusse...';
+
+# account_prefs_update.php
+$s_prefs_updated_msg = 'Seaded on uuendatud...';
+
+# account_profile_add.php
+$s_profile_added_msg = 'Profiil lisatud...';
+
+# account_profile_delete.php
+$s_profile_deleted_msg = 'Profiil kustutatud...';
+
+# account_profile_edit_page.php
+$s_edit_profile_title = 'Muuda profiili';
+$s_platform = 'Platvorm';
+$s_operating_system = 'Opsüsteem';
+$s_additional_description = 'Lisaandmed';
+$s_update_profile_button = 'Uuenda profiil';
+
+# account_profile_make_default.php
+$s_profile_defaulted_msg = 'Vaikeprofiil uuendatud...';
+
+# account_profile_manage_page.php
+$s_add_profile_title = 'Lisa profiil';
+$s_add_profile_button = 'Lisa profiil';
+$s_edit_or_delete_profiles_title = 'Redigeeri või kustuta profiile';
+$s_edit_profile = 'Redigeeri profiili';
+$s_make_default = 'Muuda vaikeväärtuseks';
+$s_delete_profile = 'Kustuta profiil';
+$s_select_profile = 'Vali profiil';
+$s_submit_button = 'Saada';
+
+# account_profile_update.php
+$s_profile_updated_msg = 'Profiil uuendatud...';
+
+# account_update.php
+$s_account_updated_msg = 'Sinu kasutajakonto on uuendatud...';
+$s_email_updated = 'Sinu E-posti aadress on uuendatud';
+$s_password_updated = 'Sinu parool on vahetatud';
+
+# bug_assign.php
+$s_bug_assign_msg = 'Bugi on määratud...';
+
+# bug_close.php
+$s_bug_close_msg = 'Bugi on suletud...';
+$s_close_immediately = 'Sulge viivitamatult:';
+
+# bug_close_page.php
+$s_close_bug_title = 'Sulge bugi';
+
+# bug_delete.php
+$s_bug_deleted_msg = 'Bugi on kustutatud...';
+
+# bug_delete_page.php
+$s_delete_bug_sure_msg = 'Oled kindel, et soovid selle bugi kustutada?';
+$s_delete_bug_button = 'Kustuta bugi';
+
+# bug_monitor.php
+$s_monitor_bug_button = 'Tegele bugiga';
+$s_unmonitor_bug_button = 'Lõpeta bugiga tegelemine';
+
+# bug_file_add.php
+$s_file_upload_msg = 'Fail üles laaditud';
+
+# bug_file_upload_inc.php
+$s_upload_file = 'Laadi fail üles';
+$s_select_file = 'Vali fail';
+$s_upload_file_button = 'Laadi fail üles';
+$s_max_file_size = 'Max. suurus';
+
+# bug_reopen.php
+$s_bug_reopened_msg = 'Bugi on uuesti avatud...';
+$s_reopen_add_bugnote_title = 'Lisa märkusena bugi taasavamise põhjus';
+$s_bugnote_add_reopen_button = 'Lisa märkus ja ava bugi uuesti';
+
+# bug_resolve_page.php
+$s_resolve_bug_title = 'Lahenda bugi';
+$s_resolve_bug_button = 'Lahenda bugi';
+
+# bug_resolve_page2.php
+$s_bug_resolved_msg = 'Bugi on lahendatud. Lisa märkus...';
+$s_resolve_add_bugnote_title = 'Kanna märkusesse bugi lahendus';
+$s_bugnote_add_resolve_button = 'Lisa märkus';
+
+# bug_reminder_page.php
+$s_from = 'Saatja';
+$s_to = 'Adressaat';
+$s_on = 'Aeg';
+$s_sent_you_this_reminder_about = 'saatis Sulle järgmise meeldetuletuse';
+$s_bug_reminder = 'Saada meeldetuletus';
+$s_reminder_sent_to = 'Meeldetuletus saadetud';
+$s_bug_send_button = 'Saada';
+$s_reminder = 'Meeldetuletus';
+
+# bug_update.php
+$s_bug_updated_msg = 'Bugi on uuendatud...';
+
+# bug_update_advanced_page.php
+$s_back_to_bug_link = 'Tagasi bugi juurde';
+$s_update_simple_link = 'Tavaline uuendus';
+$s_updating_bug_advanced_title = 'Bugi andmete uuendus';
+$s_id = 'ID';
+$s_category = 'Kategooria';
+$s_severity = 'Raskusaste';
+$s_reproducibility = 'Korratavus';
+$s_date_submitted = 'Saatmisaeg';
+$s_last_update = 'Viimati uuendatud';
+$s_reporter = 'Teataja';
+$s_assigned_to = 'Määratud';
+$s_priority = 'Prioriteet';
+$s_resolution = 'Lahendus';
+$s_status = 'Staatus';
+$s_duplicate_id = 'Duplikaadi ID';
+$s_os = 'Opsüsteem';
+$s_projection = 'Projektsioon';
+$s_os_version = 'Opsüsteemi versioon';
+$s_eta = 'ETA';
+$s_product_version = 'Tooteversioon';
+$s_build = 'Järk';
+$s_votes = 'Hääli';
+$s_summary = 'Kokkuvõte';
+$s_description = 'Kirjeldus';
+$s_steps_to_reproduce = 'Kordamise sammud';
+$s_additional = 'Lisainfo';
+$s_information = 'Informatsioon';
+$s_update_information_button = 'Uuenda info';
+
+# bug_update_page.php
+$s_update_advanced_link = 'Spetsiaalne uuendus';
+$s_updating_bug_simple_title = 'Bugi andmete uuendus';
+
+# bug_vote_add.php
+$s_vote_added_msg = 'Hääl lisatud...';
+
+# bugnote_add.php
+$s_bugnote_added_msg = 'Märkus lisatud...';
+
+# bugnote_delete.php
+$s_bugnote_deleted_msg = 'Märkus kustutatud...';
+$s_bug_notes_title = 'Bugi märkused';
+
+# bugnote_edit_page.php
+$s_edit_bugnote_title = 'Redigeeri märkust';
+
+# bugnote_inc.php
+$s_no_bugnotes_msg = 'Sellel bugil pole ühtegi märkust.';
+$s_delete_link = 'Kustuta';
+$s_add_bugnote_title = 'Lisa märkus';
+$s_add_bugnote_button = 'Lisa märkus';
+$s_bugnote_edit_link = 'Redigeeri';
+$s_close_bug_button = 'Sulge bugi';
+
+# bugnote_update.php
+$s_bugnote_updated_msg = 'Märkus uuendatud...';
+$s_edited_on = 'redigeeritud: ';
+
+# index.php
+$s_click_to_login = 'Sisselogimiseks klõpsa siia';
+
+# login.php
+
+# login_page.php
+$s_login_page_info = 'Tere tulemast, Bugide Hirm!';
+$s_login_title = 'Logi sisse';
+$s_save_login = 'Salvesta oma login';
+$s_choose_project = 'Vali projekt';
+$s_login_button = 'Login';
+$s_signup_link = 'Tee endale uus kasutajakonto';
+
+# login_select_proj_page.php
+$s_select_project_button = 'Vali projekt';
+
+# logout_page.php
+$s_logged_out_title = 'Välja logitud...';
+$s_redirecting = '...ümbersuunamine';
+$s_here = 'Siin';
+
+# main_page.php
+$s_open_and_assigned_to_me = 'avatud ja mulle määratud';
+$s_open_and_reported_to_me = 'avatud ja mulle raporteeritud';
+$s_newer_news_link = 'Uuemad uudised';
+$s_older_news_link = 'Vanemad uudised';
+$s_archives = 'Arhiivid';
+
+# manage_create_new_user.php
+$s_created_user_part1 = 'Loodud kasutaja';
+$s_created_user_part2 = 'Kasutajaõiguste tase';
+
+# manage_create_user_page.php
+$s_create_new_account_title = 'Loo uus kasutaja';
+$s_verify_password = 'Kinnita parooli';
+$s_enabled = 'Lubatud';
+$s_protected = 'Kaitstud';
+$s_create_user_button = 'Loo kasutaja';
+
+# manage_page.php
+$s_hide_disabled = 'Peida blokeeritud';
+$s_filter_button = 'Rakenda filter';
+$s_manage_users_link = 'Kasutajate haldus';
+$s_manage_projects_link = 'Projektide haldus';
+$s_manage_custom_field_link = 'Kohandatud väljade haldus';
+$s_create_new_account_link = 'Loo uus kasutaja';
+$s_projects_link = 'Projektid';
+$s_documentation_link = 'Dokumendid';
+$s_new_accounts_title = 'Uued kasutajad';
+$s_1_week_title = '1 nädal';
+$s_never_logged_in_title = 'Pole kunagi sisse loginud';
+$s_prune_accounts = 'Kärbi kasutajaid';
+$s_hide_inactive = 'Peida passiivsed';
+$s_manage_accounts_title = 'Kasutajate haldus';
+$s_p = 'p';
+$s_date_created = 'Loomiskuupäev';
+$s_last_visit = 'Viimane külastus';
+$s_edit_user_link = 'Redigeeri kasutajat';
+
+# manage_proj_add.php
+$s_project_added_msg = 'Projekt lisatud...';
+
+# manage_proj_category_add.php
+$s_category_added_msg = 'Kategooria lisatud...';
+
+# manage_proj_category_delete.php
+$s_category_deleted_msg = 'Kategooria kustutatud...';
+
+# manage_proj_category_delete_page.php
+$s_category_delete_sure_msg = 'Oled kindel, et soovid kustutada selle kategooria?';
+$s_delete_category_button = 'Kustuta kategooria';
+
+# manage_proj_category_edit_page.php
+$s_edit_project_category_title = 'Redigeeri projekti kategooriat';
+$s_update_category_button = 'Uuenda kategooriat';
+
+# manage_proj_category_update.php
+$s_category_updated_msg = 'Kategooria uuendatud...';
+
+# manage_proj_delete.php
+$s_project_deleted_msg = 'Projekt eemaldatud...';
+
+# manage_proj_delete_page.php
+$s_project_delete_msg = 'Oled kindel, et soovid kustutada selle projekti ja kõik sellega seotud bugiteated?';
+$s_project_delete_button = 'Kustuta projekt';
+
+# manage_proj_edit_page.php
+$s_edit_project_title = 'Redigeeri projekti';
+$s_project_name = 'Projekti nimi';
+$s_view_status = 'Staatus';
+$s_public = 'avalik';
+$s_private = 'isiklik';
+$s_update_project_button = 'Uuenda projekt';
+$s_delete_project_button = 'Kustuta projekt';
+$s_categories_and_version_title = 'Kategooriad ja versioonid';
+$s_categories = 'Kategooriad';
+$s_add_category_button = 'Lisa kategooria';
+$s_versions = 'Versioonid';
+$s_add_version_button = 'Lisa versioon';
+$s_edit_link = 'Redigeeri';
+$s_actions = 'Toimingud';
+$s_version = 'Versioon';
+$s_timestamp = 'Ajatempel';
+$s_update = 'Uuenda';
+
+# manage_proj_menu_page.php
+$s_add_project_title = 'Lisa projekt';
+$s_upload_file_path = 'Laadi üles failitee';
+$s_add_project_button = 'Lisa projekt';
+$s_projects_title = 'Projektid';
+$s_name = 'Name';
+
+# manage_proj_update.php
+$s_project_updated_msg = 'Projekt uuendatud...';
+
+# manage_proj_version_add.php
+$s_version_added_msg = 'Versioon lisatud...';
+
+# manage_proj_version_delete.php
+$s_version_deleted_msg = 'Versioon kustutatud...';
+
+# manage_proj_version_delete_page.php
+$s_version_delete_sure = 'Oled kindel, et soovid kustutada selle versiooni?';
+$s_delete_version_button = 'Kustuta versioon';
+
+# manage_proj_version_edit_page.php
+$s_edit_project_version_title = 'Redigeeri projekti versiooni';
+$s_update_version_button = 'Uuenda versioon';
+
+# manage_proj_version_update.php
+$s_version_updated_msg = 'Versioon uuendatud...';
+
+# manage_user_delete.php
+$s_account_delete_protected_msg = 'Kasutajatunnus on kaitstud. Pole võimalik kustutada.';
+$s_account_deleted_msg = 'Kasutaja kustutatud...';
+
+# manage_user_delete_page.php
+$s_delete_account_sure_msg = 'Oled kindel, et soovid kustutada selle kasutaja?';
+
+# manage_user_prune.php
+$s_accounts_pruned_msg = 'Kõik üle 1 nädala vanused kasutajatunnused, millega pole kordagi sisse logitud, kustutatakse';
+$s_prune_accounts_button = 'Kärbi';
+$s_confirm_account_pruning = 'Oled kindel, et soovid kustutada kõik vanad kasutajatunnused, millega pole kordagi sisse logitud?';
+
+# manage_user_page.php
+$s_edit_user_title = 'Kasutaja redigeerimine';
+$s_reset_password_button = 'Taasta parooli algseade';
+$s_delete_user_button = 'Kustuta kasutaja';
+$s_reset_password_msg = 'Parooli algseade taastamine annab kasutajale juhuslikult genereeritud parooli.';
+$s_reset_password_msg2 = 'Parooli algseade taastamine annab kasutajale tühja parooli.';
+$s_show_all_users = 'KÕIK';
+
+# manage_user_reset.php
+$s_account_reset_protected_msg = 'Kasutajatunnus kaitstud. Parooli algseade taastamine pole võimalik.';
+$s_account_reset_msg = 'Uus parool on genereeritud ja saadetud kasutajale...';
+$s_account_reset_msg2 = 'Kasutajale on antud tühi parool...';
+
+# manage_user_update.php
+$s_manage_user_protected_msg = 'Kasutajatunnus kaitstud. Juurdepääsu ja kasutusõiguste tase kaitstud. Teised kasutaja andmed uuendatud...';
+$s_manage_user_updated_msg = 'Kasutaja andmed uuendatud...';
+
+# menu_inc.php
+$s_main_link = 'Pealeht';
+$s_view_bugs_link = 'Bugide vaatamine';
+$s_report_bug_link = 'Bugidest teatamine';
+$s_summary_link = 'Kokkuvõte';
+$s_account_link = 'Minu andmed';
+$s_users_link = 'Kasutajad';
+$s_manage_link = 'Haldus';
+$s_edit_news_link = 'Uudiste redigeerimine';
+$s_docs_link = 'Dokumendid';
+$s_logout_link = 'Logi välja';
+
+# meta_inc.php
+
+# news_add.php
+$s_news_added_msg = 'Lisatud uudised...';
+
+# news_delete.php
+$s_news_deleted_msg = 'Kustutatud uudised...';
+
+# news_delete_page.php
+$s_delete_news_sure_msg = 'Oled kindel, et soovid kustutada selle uudise?';
+$s_delete_news_item_button = 'Kustuta uudis';
+
+# news_edit_page.php
+$s_edit_news_title = 'Redigeeri uudist';
+$s_headline = 'Pealkiri';
+$s_body = 'Põhitekst';
+$s_update_news_button = 'Uuenda uudised';
+
+# news_menu_page.php
+$s_add_news_title = 'Lisa uudised';
+$s_post_to = 'Postita';
+$s_post_news_button = 'Postita uudis';
+$s_edit_or_delete_news_title = 'Uudise redigeerimine või kustutamine';
+$s_edit_post = 'Redigeeri postitust';
+$s_delete_post = 'Kustuta postitus';
+$s_select_post = 'Vali postitus';
+
+# news_update.php
+$s_news_updated_msg = 'Uudised uuendatud...';
+
+# news_view_page.php
+$s_back_link = 'Tagasi';
+
+# proj_doc_add.php
+$s_file_uploaded_msg = 'Fail üles laaditud';
+
+# proj_doc_add_page.php
+$s_upload_file_title = 'Faili üleslaadimine';
+$s_title = 'Pealkiri';
+
+# proj_doc_delete.php
+$s_project_file_deleted_msg = 'Projekti fail kustutatud';
+
+# proj_doc_delete_page.php
+$s_confirm_file_delete_msg = 'Oled kindel, et soovid kustutada selle faili?';
+
+# proj_doc_edit_page.php
+$s_filename = 'Failinimi';
+$s_file_update_button = 'Uuenda fail';
+$s_file_delete_button = 'Kustuta fail';
+
+# proj_doc_page.php
+$s_project_documentation_title = 'Projekti dokumendid';
+$s_user_documentation = 'Kasutaja dokumendid';
+$s_project_documentation = 'Projekti dokumendid';
+$s_add_file = 'Lisa fail';
+
+# proj_doc_update.php
+$s_project_document_updated = 'Projekt uuendatud';
+
+# proj_user_add.php
+$s_project_user_added_msg = 'Kasutaja lisatud projektile';
+
+# proj_user_delete.php
+$s_project_removed_user_msg = 'Kasutaja eemaldatud projektist';
+
+# proj_user_delete_page.php
+$s_remove_user_sure_msg = 'Oled kindel, et soovid eemaldada selle kasutaja?';
+
+# proj_user_menu_page.php
+$s_add_user_title = 'Kasutaja lisamine projektile';
+$s_add_user_button = 'Lisa kasutaja';
+$s_project_selection_title = 'Projekti valik';
+$s_remove_link = 'Eemalda';
+
+# proj_user_update.php
+$s_updated_user_msg = 'Kasutaja uuendatud';
+
+# report_add.php
+$s_must_enter_category = 'Pead valima kategooria';
+$s_must_enter_severity = 'Pead valima raskusastme';
+$s_must_enter_reproducibility = 'Pead valima korratavuse';
+$s_must_enter_summary = 'Pead andma kokkuvõtte';
+$s_must_enter_description = 'Pead andma kirjelduse';
+$s_report_more_bugs = 'Veel bugiteateid!';
+$s_submission_thanks_msg = 'Suured tänud!';
+
+# report_bug_advanced_page.php
+$s_simple_report_link = 'Lihtteade';
+$s_enter_report_details_title = 'Teate detailide sisestus';
+$s_required = 'Vajalik';
+$s_select_category = 'Vali kategooria';
+$s_select_reproducibility = 'Select Reproducibility';
+$s_select_severity = 'Vali raskusaste';
+$s_or_fill_in = 'või täida väljad';
+$s_assign_to = 'Määra';
+$s_additional_information = 'Lisainfo';
+$s_submit_report_button = 'Saada teade';
+$s_check_report_more_bugs = 'Märgi lisabugidest teatamiseks';
+
+# report_bug_page.php
+$s_advanced_report_link = 'Detailne teade';
+$s_report_stay = 'Teade jääb mällu';
+
+# set_project.php
+$s_selected_project = 'Valitud projekt';
+$s_valid_project_msg = 'Vali kehtiv projekt';
+
+# signup.php
+$s_invalid_email = 'VIGANE E-POSTI AADRESS';
+$s_duplicate_username = 'SELLINE KASUTAJA ON JUBA OLEMAS. VALI TEINE KASUTAJATUNNUS';
+$s_account_create_fail = 'KASUTAJA LOOMINE EBAÕNNESTUS';
+$s_account_added = 'Kasutaja lisatud.';
+$s_password_emailed_msg = 'Parool saadetakse Sulle e-postiga.';
+$s_no_reponse_msg = 'Kui Sa ei reageeri nädala jooksul, Sinu kasutajakonto kustutatakse.';
+
+# signup_page.php
+$s_signup_info = 'Sisesta oma kasutajanimi ja kehtiv e-posti aadress. Juhuslikult genereeritud parool saadetakse Sulle e-posti teel.';
+$s_signup_title = 'Registreeru';
+$s_signup_button = 'Registreeru';
+
+# site_settings_edit_page.php
+$s_edit_site_settings_title = 'Redigeeri saidi seadeid';
+$s_save_settings_button = 'Salvesta seaded';
+
+# site_settings_page.php
+$s_site_settings_title = 'Saidi seaded';
+$s_system_info_link = 'Süsteemiinfo';
+$s_site_settings_link = 'Saidi seaded';
+
+# site_settings_update.php
+$s_site_settings_updated_msg = 'Saidi seaded uuendatud';
+
+# summary_page.php
+$s_summary_title = 'Kokkuvõte';
+$s_summary_jpgraph_link = 'Detailne kokkuvõte';
+$s_by_project = 'projekti järgi';
+$s_by_status = 'staatuse järgi';
+$s_by_date = 'päevade järgi';
+$s_by_severity = 'raskusastme järgi';
+$s_by_resolution = 'lahenduse järgi';
+$s_by_category = 'kategooria järgi';
+$s_by_priority = 'prioriteedi järgi';
+$s_by_developer = 'arendaja järgi';
+$s_by_reporter = 'teataja järgi';
+$s_time_stats = 'lahendatud bugide ajaline statistika (päevades)';
+$s_longest_open_bug = 'kõige pikemalt avatud bugi';
+$s_longest_open = 'kõige pikemalt avatud';
+$s_average_time = 'keskmine aeg';
+$s_total_time = 'aeg kokku';
+$s_developer_stats = 'arendaja statistika';
+$s_reporter_stats = 'Teataja statistika';
+$s_orct = '(avatud/lahendatud/suletud/kokku)';
+
+# view_all_bug_page.php
+$s_any = 'mistahes';
+$s_show = 'Näita';
+$s_changed = 'Muudetud (tunnid)';
+$s_viewing_bugs_title = 'Bugide vaatamine';
+$s_updated = 'Uuendatud';
+
+# view_all_inc.php
+$s_none = 'Pole';
+$s_search = 'Otsing';
+$s_view_prev_link = 'Näita eelmisi';
+$s_view_next_link = 'Näita järgmisi';
+$s_prev = 'Eelmine';
+$s_next = 'Järgmine';
+$s_first = 'Esimene';
+$s_last = 'Viimane';
+
+# view_bug_advanced_page.php
+$s_view_simple_link = 'Näita tavalist';
+$s_viewing_bug_advanced_details_title = 'Bugi detailsete andmete vaatamine';
+$s_product_build = 'Toote järk (Build)';
+$s_system_profile = 'Süsteemikirjeldus';
+$s_update_bug_button = 'Uuenda bugi';
+$s_bug_assign_button = 'Määra mulle';
+$s_reopen_bug_button = 'Ava bugi uuesti';
+$s_attached_files = 'Lisatud failid';
+$s_publish = 'Avalda';
+$s_cached = 'Vahemälus';
+
+# view_bug_inc.php
+
+# view_bug_page.php
+$s_view_advanced_link = 'Detailide vaatamine';
+$s_viewing_bug_simple_details_title = 'Bugi tavaandmete vaatamine';
+
+# bug_monitor_list_view_inc.php
+$s_no_users_monitoring_bug = 'Ükski kasutaja ei tegele selle bugiga.';
+$s_users_monitoring_bug = 'Selle bugiga tegelevad kasutajad';
+$s_monitoring_user_list = 'Kasutajate loend';
+
+# custom field strings
+$s_add_custom_field_button = 'Uus kohandatud väli';
+$s_delete_custom_field_button = 'Kustuta kohandatud väli';
+$s_delete_custom_field_everywhere = 'Kustuta kohandatud väli kõikjalt';
+$s_update_custom_field_button = 'Uuenda kohandatud väli';
+$s_add_existing_custom_field = 'Lisa see olemasolev kohandatud väli';
+$s_edit_custom_field_title = 'Redigeeri kohandatud väli';
+$s_custom_field = 'Väli';
+$s_custom_fields_setup = 'Kohandatud väljad';
+$s_custom_field_name = 'Nimi';
+$s_custom_field_project_count = 'Projektide arv';
+$s_custom_field_type = 'Tüüp';
+$s_custom_field_possible_values = 'Võimalikud väärtused';
+$s_custom_field_default_value = 'Vaikimisi antud väärtus';
+$s_custom_field_valid_regexp = 'Tavaline avaldis';
+$s_custom_field_access_level_r = 'Lugemisõigus';
+$s_custom_field_access_level_rw = 'Kirjutamisõigus';
+$s_custom_field_length_min = 'Min. pikkus';
+$s_custom_field_length_max = 'Max. pikkus';
+$s_custom_field_advanced = 'Detailne';
+$s_custom_field_sequence = 'Jada';
+$s_custom_field_type_enum_string = '0:String,1:Numbriline,2:Ujuv,3:Nummerdus,4:E-mail';
+
+$s_confirm_used_custom_field_deletion = 'Antud väli on seotud vähemalt ühe projektiga. Kui jätkad, kustutatakse jäädavalt kõik sellel väljal olevad väärtused. Seda toimingut pole võimalik tagasi võtta. Kui Sa ei soovi seda välja kustutada, vajuta oma brauseri Back-nuppu. Jätkamiseks vajuta allolevat nuppu';
+$s_confirm_custom_field_deletion = 'Oled kindel, et soovid kustutada selle välja ja kõik sellega seonduvad väärtused?';
+$s_field_delete_button = 'Kustuta väli';
+
+$s_hide_status = 'Peida staatus';
+$s_filter_closed = "Suletud";
+$s_filter_resolved = "Lahendatud";
+
+$s_attachments = "Lisa(d)";
+$s_attachment_alt = "A";
+?>
