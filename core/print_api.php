@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.75 2004-04-08 16:46:09 prescience Exp $
+	# $Id: print_api.php,v 1.76 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,11 +14,9 @@
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 
-	###########################################################################
-	# Basic Print API
-	#
+	### Print API ###
+
 	# this file handles printing functions
-	###########################################################################
 
 	# --------------------
 	# Print the headers to cause the page to redirect to $p_url
@@ -26,7 +24,7 @@
 	#  immediately
 	# If we have handled any errors on this page and the 'stop_on_errors' config
 	#  option is turned on, return false and don't redirect.
-	function print_header_redirect( $p_url, $p_die=true ) {
+	function print_header_redirect( $p_url, $p_die = true ) {
 		$t_use_iis = config_get( 'use_iis');
 
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
@@ -74,10 +72,10 @@
 			html_meta_redirect( $p_redirect_to );
 			html_page_top1();
 			html_page_top2();
-			echo '<br /><div class="center">';
-			echo lang_get( 'operation_successful' ) . '<br />';
+			PRINT '<br /><div class="center">';
+			PRINT lang_get( 'operation_successful' ) . '<br />';
 			print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
-			echo '</div>';
+			PRINT '</div>';
 			html_page_bottom1();
 		} else {
 			print_header_redirect( $p_redirect_to );
@@ -108,10 +106,10 @@
 			if ( !is_blank( $t_email ) ) {
 				print_email_link( $t_email, $t_username );
 			} else {
-				echo $t_username;
+				PRINT $t_username;
 			}
 		} else {
-			echo $t_username;
+			PRINT $t_username;
 		}
 	}
 	# --------------------
@@ -128,13 +126,13 @@
 			$t_email = user_get_field( $p_user_id, 'email' );
 			print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 		} else {
-			echo $t_username;
+			PRINT $t_username;
 		}
 	}
 	# --------------------
 	function print_duplicate_id( $p_duplicate_id ) {
 		if ( $p_duplicate_id != 0 ) {
-			echo string_get_bug_view_link( $p_duplicate_id );
+			PRINT string_get_bug_view_link( $p_duplicate_id );
 		}
 	}
 	# --------------------
@@ -144,9 +142,9 @@
 		if ( $t_limit_email_domain ) {
 			# remove the domain part
 			$p_email = eregi_replace( "@$t_limit_email_domain$", '', $p_email );
-			echo '<input type="text" name="'.$p_field_name.'" size="20" maxlength="64" value="'.$p_email.'" />@'.$t_limit_email_domain;
+			PRINT '<input type="text" name="'.$p_field_name.'" size="20" maxlength="64" value="'.$p_email.'" />@'.$t_limit_email_domain;
 		} else {
-			echo '<input type="text" name="'.$p_field_name.'" size="32" maxlength="64" value="'.$p_email.'" />';
+			PRINT '<input type="text" name="'.$p_field_name.'" size="32" maxlength="64" value="'.$p_email.'" />';
 		}
 	}
 	###########################################################################
@@ -223,9 +221,9 @@
 
 		foreach ( $t_users as $t_user ) {
 			$t_user_name = string_attribute( $t_user['username'] );
-			echo '<option value="' . $t_user['id'] . '" ';
+			PRINT '<option value="' . $t_user['id'] . '" ';
 			check_selected( $t_user['id'], $p_user_id );
-			echo '>' . $t_user_name . '</option>';
+			PRINT '>' . $t_user_name . '</option>';
 		}
 	}
 
@@ -294,9 +292,9 @@
 		$entry_count = count( $t_arr );
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = str_replace( '\'', '', $t_arr[$i] );
-			echo "<option value=\"$t_s\"";
+			PRINT "<option value=\"$t_s\"";
 			check_selected( $p_item, $t_s );
-			echo ">$t_s</option>";
+			PRINT ">$t_s</option>";
 		} # end for
 	}
 	# --------------------
@@ -341,9 +339,9 @@
 		}
 
 		foreach ( $t_users as $t_user ) {
-			echo '<option value="' . $t_user['id'] . '" ';
+			PRINT '<option value="' . $t_user['id'] . '" ';
 			check_selected( $t_user['id'], $p_user_id );
-			echo '>' . $t_user['username'] . '</option>';
+			PRINT '>' . $t_user['username'] . '</option>';
 		}
 	}
 	# --------------------
@@ -351,17 +349,17 @@
 	function print_project_option_list( $p_project_id = null, $p_include_all_projects = true ) {
 		$t_project_ids = current_user_get_accessible_projects();
 		if ( $p_include_all_projects ) {
-			echo '<option value="' . ALL_PROJECTS . '"';
+			PRINT '<option value="' . ALL_PROJECTS . '"';
 			check_selected( $p_project_id, ALL_PROJECTS );
-			echo '>' . lang_get( 'all_projects' ) . '</option>';
+			PRINT '>' . lang_get( 'all_projects' ) . '</option>';
 		}
 
 		$t_project_count = count( $t_project_ids );
 		for ($i=0;$i<$t_project_count;$i++) {
 			$t_id = $t_project_ids[$i];
-			echo "<option value=\"$t_id\"";
+			PRINT "<option value=\"$t_id\"";
 			check_selected( $p_project_id, $t_id );
-                        echo '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>';
+                        PRINT '>' . string_display( project_get_field( $t_id, 'name' ) ) . '</option>';
 		}
 	}
 	# --------------------
@@ -394,9 +392,9 @@
 			$v_os		= string_display( $v_os );
 			$v_os_build	= string_display( $v_os_build );
 
-			echo "<option value=\"$v_id\"";
+			PRINT "<option value=\"$v_id\"";
 			check_selected( $v_id, $v_default_profile );
-			echo ">$v_platform $v_os $v_os_build</option>";
+			PRINT ">$v_platform $v_os $v_os_build</option>";
 		}
 	}
 	# --------------------
@@ -422,9 +420,9 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			echo "<option value=\"$v_id\"";
+			PRINT "<option value=\"$v_id\"";
 			check_selected( $v_id, $p_project_id );
-			echo ">$v_name</option>";
+			PRINT ">$v_name</option>";
 		} # end for
 	}
 	# --------------------
@@ -456,9 +454,9 @@
 		$cat_arr = array_unique( $cat_arr );
 
 		foreach( $cat_arr as $t_category ) {
-			echo "<option value=\"$t_category\"";
+			PRINT "<option value=\"$t_category\"";
 			check_selected( $t_category, $p_category );
-			echo ">$t_category</option>";
+			PRINT ">$t_category</option>";
 		}
 	}
 	# --------------------
@@ -503,9 +501,9 @@
 		$cat_arr = array_unique( $cat_arr );
 
 		foreach( $cat_arr as $t_category ) {
-			echo "<option value=\"$t_category\"";
+			PRINT "<option value=\"$t_category\"";
 			check_selected( $t_category, $p_category );
-			echo ">$t_category</option>";
+			PRINT ">$t_category</option>";
 		}
 	}
 	# --------------------
@@ -525,13 +523,13 @@
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
 
-		echo "<option value=\"\">\n";
+		PRINT "<option value=\"\">\n";
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_version = string_attribute( $row['version'] );
-			echo "<option value=\"$t_version\"";
+			PRINT "<option value=\"$t_version\"";
 			check_selected( $t_version, $p_version );
-			echo ">$t_version</option>";
+			PRINT ">$t_version</option>";
 		}
 	}
 	# --------------------
@@ -555,9 +553,9 @@
 		}
 
 		foreach( $t_overall_build_arr as $t_build ) {
-			echo "<option value=\"$t_build\"";
+			PRINT "<option value=\"$t_build\"";
 			check_selected( $t_build, $p_build );
-			echo ">$t_build</option>";
+			PRINT ">$t_build</option>";
 		}
 	}
 
@@ -573,9 +571,9 @@
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
 			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
-			echo "<option value=\"$t_elem[0]\"";
+			PRINT "<option value=\"$t_elem[0]\"";
 			check_selected( $t_elem[0], $p_val );
-			echo ">$t_elem2</option>";
+			PRINT ">$t_elem2</option>";
 		} # end for
 	}
 	# --------------------
@@ -590,7 +588,7 @@
 		foreach ( $t_rows as $t_row ) {
 			$t_user_id = $t_row['id'];
 			$t_username = string_attribute( $t_row['username'] );
-			echo "<option value=\"$t_user_id\">$t_username</option>";
+			PRINT "<option value=\"$t_user_id\">$t_username</option>";
 		}
 	}
 	# --------------------
@@ -609,9 +607,9 @@
 			}
 
 			$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
-			echo "<option value=\"$t_elem[0]\"";
+			PRINT "<option value=\"$t_elem[0]\"";
 			check_selected( $p_val, $t_elem[0] );
-			echo ">$t_access_level</option>";
+			PRINT ">$t_access_level</option>";
 		} # end for
 	}
 	# --------------------
@@ -622,9 +620,9 @@
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_language = string_attribute( $t_arr[$i] );
-			echo "<option value=\"$t_language\"";
+			PRINT "<option value=\"$t_language\"";
 			check_selected( $t_language, $p_language );
-			echo ">$t_language</option>";
+			PRINT ">$t_language</option>";
 		} # end for
 	}
 	# --------------------
@@ -651,7 +649,7 @@
 		if ( null == $p_project_id ) {
 			$p_project_id = helper_get_current_project();
 		}
-		$c_project_id = (integer)$p_project_id;
+		$c_project_id = (int)$p_project_id;
 
 		$t_adm = ADMINISTRATOR;
 		$query = "SELECT DISTINCT u.id, u.username
@@ -733,14 +731,14 @@
 	# prints a link to VIEW a bug given an ID
 	#  account for the user preference and site override
 	function print_bug_link( $p_bug_id ) {
-		echo string_get_bug_view_link( $p_bug_id );
+		PRINT string_get_bug_view_link( $p_bug_id );
 	}
 
 	# --------------------
 	# prints a link to UPDATE a bug given an ID
 	#  account for the user preference and site override
 	function print_bug_update_link( $p_bug_id ) {
-		echo string_get_bug_update_link( $p_bug_id );
+		PRINT string_get_bug_update_link( $p_bug_id );
 	}
 
  	# --------------------
@@ -751,9 +749,9 @@
 
 		if ( ( HIGH <= $p_priority ) &&
 			 ( CLOSED != $p_status ) ) {
-			echo "<span class=\"bold\">$t_pri_str</span>";
+			PRINT "<span class=\"bold\">$t_pri_str</span>";
 		} else {
-			echo $t_pri_str;
+			PRINT $t_pri_str;
 		}
 	}
 
@@ -765,9 +763,9 @@
 
 		if ( ( MAJOR <= $p_severity ) &&
 			 ( CLOSED != $p_status ) ) {
-			echo "<span class=\"bold\">$t_sev_str</span>";
+			PRINT "<span class=\"bold\">$t_sev_str</span>";
 		} else {
-			echo $t_sev_str;
+			PRINT $t_sev_str;
 		}
 	}
 	# --------------------
@@ -840,7 +838,7 @@
 			$t_dir = 'ASC';
 		}
 
-		echo '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
+		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_view_bug_sort_link2( $p_string, $p_sort_field, $p_sort, $p_dir ) {
@@ -855,7 +853,7 @@
 			$t_dir = 'ASC';
 		}
 
-		echo '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
+		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {
@@ -869,7 +867,7 @@
 			$t_dir = 'ASC';
 		}
 
-		echo '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '&amp;save=1&amp;hide=' . $p_hide . '">' . $p_string . '</a>';
+		PRINT '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '&amp;save=1&amp;hide=' . $p_hide . '">' . $p_string . '</a>';
 	}
 	# --------------------
 	function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
@@ -883,7 +881,7 @@
 			$t_dir = 'ASC';
 		}
 
-		echo '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '">' . $p_string . '</a>';
+		PRINT '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '">' . $p_string . '</a>';
 	}
 	# --------------------
 	# print the bracketed links used near the top
@@ -899,29 +897,29 @@
 	# print a HTML link
 	function print_link( $p_link, $p_url_text ) {
 		if (is_blank( $p_link )) {
-			print " $p_url_text ";
+			PRINT " $p_url_text ";
 		} else {
-			print " <a href=\"$p_link\">$p_url_text</a> ";
+			PRINT " <a href=\"$p_link\">$p_url_text</a> ";
 		}
 	}
 	# --------------------
 	# print a HTML page link
-	function print_page_link( $p_page_url, $p_text="", $p_page_no=0, $p_page_cur=0 ) {
+	function print_page_link( $p_page_url, $p_text = '', $p_page_no=0, $p_page_cur=0 ) {
 		if (is_blank( $p_text )) {
 			$p_text = $p_page_no;
 		}
 
 		if ( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
-			print " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";
+			PRINT " <a href=\"$p_page_url?page_number=$p_page_no\">$p_text</a> ";
 		} else {
-			print " $p_text ";
+			PRINT " $p_text ";
 		}
 	}
 	# --------------------
 	# print a list of page number links (eg [1 2 3])
 	function print_page_links( $p_page, $p_start, $p_end, $p_current ) {
 		$t_items = array();
-		$t_link = "";
+		$t_link = '';
 
 		# Check if we have more than one page,
 		#  otherwise return without doing anything.
@@ -964,7 +962,7 @@
 				array_push( $t_items, "<a href=\"$p_page?page_number=$i\">$i</a>" );
 			}
 		}
-		echo implode( '&nbsp;', $t_items );
+		PRINT implode( '&nbsp;', $t_items );
 
 		if ( $t_last_page < $p_end ) {
 			print( " ... " );
@@ -978,12 +976,12 @@
 		}
 		print_page_link( $p_page, $t_last, $p_end, $p_current );
 
-    print( " ]" );
+    	print( " ]" );
 	}
 	# --------------------
 	# print a mailto: href link
 	function print_email_link( $p_email, $p_text ) {
-		echo get_email_link($p_email, $p_text);
+		PRINT get_email_link($p_email, $p_text);
 	}
 	# --------------------
 	# return the mailto: href string link instead of printing it
@@ -1004,7 +1002,7 @@
 	# print a mailto: href link with subject
 	function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
 		$t_subject = email_build_subject( $p_bug_id );
-		echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
+		PRINT get_email_link_with_subject( $p_email, $p_text, $t_subject );
 	}
 	# --------------------
 	# return the mailto: href string link instead of printing it
@@ -1036,11 +1034,11 @@
 			if ( is_array( $val ) ) {
 				foreach ( $val as $val2 ) {
 					$val2 = htmlspecialchars( $val2 );
-					echo "<input type=\"hidden\" name=\"$val\[\]\" value=\"$val2\" />\n";
+					PRINT "<input type=\"hidden\" name=\"$val\[\]\" value=\"$val2\" />\n";
 				}
 			} else {
 				$val = htmlspecialchars( $val );
-				echo "<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
+				PRINT "<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
 			}
 		}
 	}
@@ -1065,7 +1063,7 @@
 		if ( null === $p_hr_width ) {
 			$p_hr_width = config_get( 'hr_width' );
 		}
-		echo "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
+		PRINT "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
 	}
 	# --------------------
 	# prints the signup link
@@ -1130,6 +1128,6 @@
 		}
 
 		$t_name = $g_file_type_icons[$ext];
-		echo '<img src="' . config_get( 'path' ) . 'images/'. $t_name . '" width="16" height="16" border="0" />';
+		PRINT '<img src="' . config_get( 'path' ) . 'images/'. $t_name . '" width="16" height="16" border="0" />';
 	}
 ?>

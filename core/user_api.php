@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.68 2004-04-08 16:46:10 prescience Exp $
+	# $Id: user_api.php,v 1.69 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,9 +14,7 @@
 	require_once( $t_core_dir . 'email_api.php' );
 	require_once( $t_core_dir . 'ldap_api.php' );
 
-	###########################################################################
-	# User API
-	###########################################################################
+	### User API ###
 
 	#===================================
 	# Caching
@@ -25,7 +23,7 @@
 	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
-	#
+
 	$g_cache_user = array();
 
 	# --------------------
@@ -120,7 +118,6 @@
 		$query = "SELECT username
 				FROM $t_user_table
 				WHERE username='$c_username'";
-
 		$result = db_query( $query, 1 );
 
 		if ( db_num_rows( $result ) > 0 ) {
@@ -202,7 +199,11 @@
 	# --------------------
 	# return true is the user account is protected, false otherwise
 	function user_is_protected( $p_user_id ) {
-		return ( ON == user_get_field( $p_user_id, 'protected' ) );
+		if ( ON == user_get_field( $p_user_id, 'protected' ) ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	# --------------------
@@ -216,7 +217,11 @@
 	# --------------------
 	# return true is the user account is enabled, false otherwise
 	function user_is_enabled( $p_user_id ) {
-		return ( ON == user_get_field( $p_user_id, 'enabled' ) );
+		if ( ON == user_get_field( $p_user_id, 'enabled' ) ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	#===================================
@@ -244,10 +249,9 @@
 		user_ensure_name_unique( $p_username );
 		email_ensure_valid( $p_email );
 
-		$t_seed = $p_email.$p_username;
+		$t_seed				= $p_email . $p_username;
 		$t_cookie_string	= auth_generate_unique_cookie_string( $t_seed );
-
-		$t_user_table 						= config_get( 'mantis_user_table' );
+		$t_user_table 		= config_get( 'mantis_user_table' );
 
 		$query = "INSERT INTO $t_user_table
 				    ( username, email, password, date_created, last_visit,
@@ -264,7 +268,7 @@
 		# Users are added with protected set to FALSE in order to be able to update
 		# preferences.  Now set the real value of protected.
 		if ( $c_protected ) {
-			user_set_field( $t_user_id, 'protected', 1);
+			user_set_field( $t_user_id, 'protected', 1 );
 		}
 
 		# Send notification email
@@ -309,7 +313,7 @@
 
 		$p_email = trim( $p_email );
 
-		$t_seed = $p_email.$p_username;
+		$t_seed = $p_email . $p_username;
 		# Create random password
 		$t_password	= auth_generate_random_password( $t_seed );
 
@@ -320,14 +324,13 @@
 	# delete project-specific user access levels.
 	# returns true when successfully deleted
 	function user_delete_project_specific_access_levels( $p_user_id ) {
-		$c_user_id 					= db_prepare_int($p_user_id);
+		$c_user_id = db_prepare_int($p_user_id);
 
 		user_ensure_unprotected( $p_user_id );
 
 		$t_project_user_list_table 	= config_get('mantis_project_user_list_table');
 
-		$query = "DELETE
-				  FROM $t_project_user_list_table
+		$query = "DELETE FROM $t_project_user_list_table
 				  WHERE user_id='$c_user_id'";
 		db_query( $query );
 
@@ -340,22 +343,21 @@
 	# delete profiles for the specified user
 	# returns true when successfully deleted
 	function user_delete_profiles( $p_user_id ) {
-		$c_user_id 					= db_prepare_int($p_user_id);
+		$c_user_id = db_prepare_int($p_user_id);
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_user_profile_table 		= config_get('mantis_user_profile_table');
+		$t_user_profile_table = config_get('mantis_user_profile_table');
 
 		# Remove associated profiles
-		$query = "DELETE
-				  FROM $t_user_profile_table
+		$query = "DELETE FROM $t_user_profile_table
 				  WHERE user_id='$c_user_id'";
 		db_query( $query );
 
 		user_clear_cache( $p_user_id );
 
 		return true;
-        }
+	}
 
 	# --------------------
 	# delete a user account (account, profiles, preferences, project-specific access levels)
@@ -376,11 +378,10 @@
 
 		user_clear_cache( $p_user_id );
 
-		$t_user_table 				= config_get('mantis_user_table');
+		$t_user_table = config_get('mantis_user_table');
 
 		# Remove account
-		$query = "DELETE
-				  FROM $t_user_table
+		$query = "DELETE FROM $t_user_table
 				  WHERE id='$c_user_id'";
 		db_query( $query );
 
@@ -395,9 +396,8 @@
 	# get a user id from a username
 	#  return false if the username does not exist
 	function user_get_id_by_name( $p_username ) {
-		$c_username = db_prepare_string( $p_username );
-
-		$t_user_table = config_get( 'mantis_user_table' );
+		$c_username		= db_prepare_string( $p_username );
+		$t_user_table	= config_get( 'mantis_user_table' );
 
 		$query = "SELECT id
 				  FROM $t_user_table
@@ -454,7 +454,7 @@
 	# --------------------
 	# lookup the user's email in LDAP or the db as appropriate
 	function user_get_email( $p_user_id ) {
-		$t_email = "";
+		$t_email = '';
 		if ( ON == config_get( 'use_ldap_email' ) ) {
 		    $t_email = ldap_email( $p_user_id );
 		}
@@ -471,7 +471,7 @@
 		$row = user_cache_row( $p_user_id, false );
 
 		if ( false == $row ) {
-			return lang_get( 'prefix_for_deleted_users' ) . (integer)$p_user_id;
+			return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
 		} else {
 			return $row['username'];
 		}
@@ -501,11 +501,11 @@
 	function user_get_accessible_projects( $p_user_id ) {
 		$c_user_id = db_prepare_int( $p_user_id );
 
-		$t_project_table = config_get( 'mantis_project_table' );
-		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+		$t_project_table			= config_get( 'mantis_project_table' );
+		$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
 
-		$t_public = VS_PUBLIC;
-		$t_private = VS_PRIVATE;
+		$t_public	= VS_PUBLIC;
+		$t_private	= VS_PRIVATE;
 
 		if ( user_is_administrator( $p_user_id ) ) {
 			$query = "SELECT DISTINCT( id ), name
@@ -560,8 +560,8 @@
 		$query = "SELECT COUNT(*)
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
-				  status<>'$t_resolved' AND status<>'$t_closed' AND
-				  handler_id='$c_user_id'";
+				  		status<>'$t_resolved' AND status<>'$t_closed' AND
+				  		handler_id='$c_user_id'";
 		$result = db_query( $query );
 
 		return db_result( $result );
@@ -587,8 +587,8 @@
 		$query = "SELECT COUNT(*)
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
-				  status<>'$t_resolved' AND status<>'$t_closed' AND
-				  reporter_id='$c_user_id'";
+						  status<>'$t_resolved' AND status<>'$t_closed' AND
+						  reporter_id='$c_user_id'";
 		$result = db_query( $query );
 
 		return db_result( $result );
@@ -604,11 +604,11 @@
 
 		$query = "SELECT *
 				  FROM $t_user_profile_table
-				  WHERE id='$c_profile_id'
-				    AND user_id='$c_user_id'";
+				  WHERE id='$c_profile_id' AND
+				  		user_id='$c_user_id'";
 		$result = db_query( $query );
 
-		if ( db_num_rows( $result ) < 1 ) {
+		if ( 0 == db_num_rows( $result ) ) {
 			trigger_error( ERROR_USER_PROFILE_NOT_FOUND, ERROR );
 		}
 
@@ -700,10 +700,8 @@
 			user_ensure_unprotected( $p_user_id );
 		}
 
-		$t_password = auth_process_plain_password( $p_password );
-
+		$t_password		= auth_process_plain_password( $p_password );
 		$t_user_table	= config_get( 'mantis_user_table' );
-
 		$query = "UPDATE $t_user_table
 				  SET password='$t_password'
 				  WHERE id='$c_user_id'";
@@ -754,9 +752,9 @@
 
 		if ( ON == config_get( 'send_reset_password' ) ) {
 			# Create random password
-			$t_email = user_get_field( $p_user_id, 'email' );
-			$t_password = auth_generate_random_password( $t_email );
-			$t_password2 = auth_process_plain_password( $t_password );
+			$t_email		= user_get_field( $p_user_id, 'email' );
+			$t_password		= auth_generate_random_password( $t_email );
+			$t_password2	= auth_process_plain_password( $t_password );
 
 			user_set_field( $p_user_id, 'password', $t_password2 );
 

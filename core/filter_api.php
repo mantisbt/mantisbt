@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.27 2004-04-08 16:46:09 prescience Exp $
+	# $Id: filter_api.php,v 1.28 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -180,13 +180,13 @@
 			# custom field filtering
 			$t_custom_fields = custom_field_get_ids();
 			$t_first_time = true;
-			$t_custom_where_clause = "";
+			$t_custom_where_clause = '';
 
 			foreach( $t_custom_fields as $t_cfid ) {
-				# Ignore all custom filters that are not set, or that are set to "" or "any"
+				# Ignore all custom filters that are not set, or that are set to '' or "any"
 				if ( isset( $t_filter['custom_fields'][$t_cfid] ) &&
 					( 'any' != strtolower( $t_filter['custom_fields'][$t_cfid] ) ) &&
-					( "" != trim( $t_filter['custom_fields'][$t_cfid] ) ) ) {
+					( !is_blank( trim( $t_filter['custom_fields'][$t_cfid] ) ) ) ) {
 
 					if( $t_first_time ) {
 						$t_first_time = false;
@@ -201,7 +201,7 @@
 					$t_custom_where_clause .= db_prepare_string( trim( $t_filter['custom_fields'][$t_cfid] ) )  . "' )";
 				}
 			}
-			if( $t_custom_where_clause != "" ) {
+			if ( !is_blank( $t_custom_where_clause ) ) {
 				array_push( $t_where_clauses, $t_custom_where_clause . ')' );
 			}
 		}
@@ -371,28 +371,28 @@
 		$t_sort = $t_filter['sort'];
 		$t_dir = $t_filter['dir'];
 
-		$t_tdclass = "small-caption";
-		$t_trclass = "row-category2";
-		$t_action  = "view_all_set.php?f=3";
+		$t_tdclass = 'small-caption';
+		$t_trclass = 'row-category2';
+		$t_action  = 'view_all_set.php?f=3';
 
 		if ( $p_for_screen == false ) {
-			$t_tdclass = "print";
-			$t_trclass = "";
-			$t_action  = "view_all_set.php";
+			$t_tdclass = 'print';
+			$t_trclass = '';
+			$t_action  = 'view_all_set.php';
 		}
 ?>
 		<br />
-		<form method="post" name="filters" action="<?php echo $t_action; ?>">
+		<form method="post" name="filters" action="<?php PRINT $t_action; ?>">
 		<input type="hidden" name="type" value="1" />
 		<?php
 			if ( $p_for_screen == false ) {
-				print '<input type="hidden" name="print" value="1" />';
-				print '<input type="hidden" name="offset" value="0" />';
+				PRINT '<input type="hidden" name="print" value="1" />';
+				PRINT '<input type="hidden" name="offset" value="0" />';
 			}
 		?>
-		<input type="hidden" name="sort" value="<?php echo $t_sort ?>" />
-		<input type="hidden" name="dir" value="<?php echo $t_dir ?>" />
-		<input type="hidden" name="page_number" value="<?php echo $p_page_number ?>" />
+		<input type="hidden" name="sort" value="<?php PRINT $t_sort ?>" />
+		<input type="hidden" name="dir" value="<?php PRINT $t_dir ?>" />
+		<input type="hidden" name="page_number" value="<?php PRINT $p_page_number ?>" />
 		<table class="width100" cellspacing="0">
 
 		<?php
@@ -430,194 +430,194 @@
 			$t_filters_url = config_get( 'path' ) . 'view_filters_page.php?for_screen=' . $p_for_screen . '&amp;target_field=';
 		?>
 
-		<input type="hidden" name="reporter_id" value="<?php echo $t_filter['reporter_id'] ?>">
-		<input type="hidden" name="handler_id" value="<?php echo $t_filter['handler_id'] ?>">
-		<input type="hidden" name="show_category" value="<?php echo $t_filter['show_category'] ?>">
-		<input type="hidden" name="show_severity" value="<?php echo $t_filter['show_severity'] ?>">
-		<input type="hidden" name="show_status" value="<?php echo $t_filter['show_status'] ?>">
-		<input type="hidden" name="per_page" value="<?php echo $t_filter['per_page'] ?>">
-		<input type="hidden" name="highlight_changed" value="<?php echo $t_filter['highlight_changed'] ?>">
-		<input type="hidden" name="hide_resolved" value="<?php echo $t_filter['hide_resolved'] ?>">
-		<input type="hidden" name="hide_closed" value="<?php echo $t_filter['hide_closed'] ?>">
-		<input type="hidden" name="and_not_assigned" value="<?php echo $t_filter['and_not_assigned'] ?>">
-		<input type="hidden" name="show_build" value="<?php echo $t_filter['show_build'] ?>">
-		<input type="hidden" name="show_resolution" value="<?php echo $t_filter['show_resolution'] ?>">
-		<input type="hidden" name="show_version" value="<?php echo $t_filter['show_version'] ?>">
-		<input type="hidden" name="start_month" value="<?php echo $t_filter['start_month'] ?>">
-		<input type="hidden" name="start_day" value="<?php echo $t_filter['start_day'] ?>">
-		<input type="hidden" name="start_year" value="<?php echo $t_filter['start_year'] ?>">
-		<input type="hidden" name="end_month" value="<?php echo $t_filter['end_month'] ?>">
-		<input type="hidden" name="end_day" value="<?php echo $t_filter['end_day'] ?>">
-		<input type="hidden" name="end_year" value="<?php echo $t_filter['end_year'] ?>">
-		<input type="hidden" name="do_filter_by_date" value="<?php echo $t_filter['do_filter_by_date'] ?>">
+		<input type="hidden" name="reporter_id" value="<?php PRINT $t_filter['reporter_id'] ?>">
+		<input type="hidden" name="handler_id" value="<?php PRINT $t_filter['handler_id'] ?>">
+		<input type="hidden" name="show_category" value="<?php PRINT $t_filter['show_category'] ?>">
+		<input type="hidden" name="show_severity" value="<?php PRINT $t_filter['show_severity'] ?>">
+		<input type="hidden" name="show_status" value="<?php PRINT $t_filter['show_status'] ?>">
+		<input type="hidden" name="per_page" value="<?php PRINT $t_filter['per_page'] ?>">
+		<input type="hidden" name="highlight_changed" value="<?php PRINT $t_filter['highlight_changed'] ?>">
+		<input type="hidden" name="hide_resolved" value="<?php PRINT $t_filter['hide_resolved'] ?>">
+		<input type="hidden" name="hide_closed" value="<?php PRINT $t_filter['hide_closed'] ?>">
+		<input type="hidden" name="and_not_assigned" value="<?php PRINT $t_filter['and_not_assigned'] ?>">
+		<input type="hidden" name="show_build" value="<?php PRINT $t_filter['show_build'] ?>">
+		<input type="hidden" name="show_resolution" value="<?php PRINT $t_filter['show_resolution'] ?>">
+		<input type="hidden" name="show_version" value="<?php PRINT $t_filter['show_version'] ?>">
+		<input type="hidden" name="start_month" value="<?php PRINT $t_filter['start_month'] ?>">
+		<input type="hidden" name="start_day" value="<?php PRINT $t_filter['start_day'] ?>">
+		<input type="hidden" name="start_year" value="<?php PRINT $t_filter['start_year'] ?>">
+		<input type="hidden" name="end_month" value="<?php PRINT $t_filter['end_month'] ?>">
+		<input type="hidden" name="end_day" value="<?php PRINT $t_filter['end_day'] ?>">
+		<input type="hidden" name="end_year" value="<?php PRINT $t_filter['end_year'] ?>">
+		<input type="hidden" name="do_filter_by_date" value="<?php PRINT $t_filter['do_filter_by_date'] ?>">
 		<?php
 			for ( $i = 0; $i < sizeof( $t_accessible_custom_fields_ids ); $i++ ) {
-				print '<input type="hidden" name="custom_field_';
-				print $t_accessible_custom_fields_ids[$i];
-				print '" value="';
+				PRINT '<input type="hidden" name="custom_field_';
+				PRINT $t_accessible_custom_fields_ids[$i];
+				PRINT '" value="';
 				if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
 					$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] = 'any';
 				}
-				print $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]];
-				print "\">\n";
+				PRINT $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]];
+				PRINT "\">\n";
 			}
 		?>
-		<tr <?php echo "class=\"" . $t_trclass . "\""; ?>>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'reporter_id'; ?>"><?php echo lang_get( 'reporter' ) ?>:</a>
+		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'reporter_id'; ?>"><?php PRINT lang_get( 'reporter' ) ?>:</a>
 				<?php
 					if ( $t_filter['reporter_id'] == 0 ) {
-						echo lang_get( 'any' );
+						PRINT lang_get( 'any' );
 					} else {
-						echo user_get_field( $t_filter['reporter_id'], 'username' );
+						PRINT user_get_field( $t_filter['reporter_id'], 'username' );
 					}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'handler_id'; ?>"><?php echo lang_get( 'assigned_to' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'handler_id'; ?>"><?php PRINT lang_get( 'assigned_to' ) ?>:</a>
 				<?php
 					if ( $t_filter['handler_id'] == 0 ) {
-						echo lang_get( 'any' );
+						PRINT lang_get( 'any' );
 					} else {
-						echo user_get_field( $t_filter['handler_id'], 'username' );
+						PRINT user_get_field( $t_filter['handler_id'], 'username' );
 					}
 					if ( 'on' == $t_filter['and_not_assigned'] ) {
-						echo ' (' . lang_get( 'or_unassigned' ) . ')';
+						PRINT ' (' . lang_get( 'or_unassigned' ) . ')';
 					}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'show_category'; ?>"><?php echo lang_get( 'category' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 2 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'show_category'; ?>"><?php PRINT lang_get( 'category' ) ?>:</a>
 				<?php
-					if ( $t_filter['show_category'] == '' ) {
-						echo lang_get( 'any' );
+					if ( is_blank( $t_filter['show_category'] ) ) {
+						PRINT lang_get( 'any' );
 					} else {
-						echo $t_filter['show_category'];
+						PRINT $t_filter['show_category'];
 					}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'show_severity'; ?>"><?php echo lang_get( 'severity' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'show_severity'; ?>"><?php PRINT lang_get( 'severity' ) ?>:</a>
 				<?php
-					if ( ( $t_filter['show_severity'] == 'any' ) || ( $t_filter['show_severity'] == '' ) ) {
-						echo lang_get( 'any' );
+					if ( ( $t_filter['show_severity'] == 'any' ) || ( is_blank( $t_filter['show_severity'] ) ) ) {
+						PRINT lang_get( 'any' );
 					} else {
-						print get_enum_element( 'severity', $t_filter['show_severity'] );
+						PRINT get_enum_element( 'severity', $t_filter['show_severity'] );
 					}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'show_status'; ?>"><?php echo lang_get( 'status' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'show_status'; ?>"><?php PRINT lang_get( 'status' ) ?>:</a>
 				<?php
-					if ( ( $t_filter['show_status'] == 'any' ) || ( $t_filter['show_status'] == '' ) ) {
-						echo lang_get( 'any' );
+					if ( ( $t_filter['show_status'] == 'any' ) || ( is_blank( $t_filter['show_status'] ) ) ) {
+						PRINT lang_get( 'any' );
 					} else {
-						print get_enum_element( 'status', $t_filter['show_status'] );
+						PRINT get_enum_element( 'status', $t_filter['show_status'] );
 					}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'show_resolution'; ?>"><?php echo lang_get( 'resolution' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'show_resolution'; ?>"><?php PRINT lang_get( 'resolution' ) ?>:</a>
 				<?php
-					if ( ( $t_filter['show_resolution'] == 'any' ) || ( $t_filter['show_resolution'] == '' ) ) {
-						echo lang_get( 'any' );
+					if ( ( $t_filter['show_resolution'] == 'any' ) || ( is_blank( $t_filter['show_resolution'] ) ) ) {
+						PRINT lang_get( 'any' );
 					} else {
-						print get_enum_element( 'resolution', $t_filter['show_resolution'] );
+						PRINT get_enum_element( 'resolution', $t_filter['show_resolution'] );
 					}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'hide_resolved'; ?>"><?php echo lang_get( 'hide_resolved' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'hide_resolved'; ?>"><?php PRINT lang_get( 'hide_resolved' ) ?>:</a>
 				<?php
 					if ( 'on' == $t_filter['hide_resolved'] ) {
-						echo lang_get( 'yes' );
+						PRINT lang_get( 'yes' );
 					} else {
-						echo lang_get( 'no' );
+						PRINT lang_get( 'no' );
 					}
 				?>
 			</td>
 		</tr>
 
-		<tr <?php echo "class=\"" . $t_trclass . "\""; ?>>
-			<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'do_filter_by_date'; ?>"><?php echo lang_get( 'use_date_filters' ) ?>:</a>
+		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
+			<td class="small-caption" colspan="<?php PRINT ( 2 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'do_filter_by_date'; ?>"><?php PRINT lang_get( 'use_date_filters' ) ?>:</a>
 				<?php
 				if ( 'on' == $t_filter['do_filter_by_date'] ) {
 					$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 					$t_time = mktime( 0, 0, 0, $t_filter['start_month'], $t_filter['start_day'], $t_filter['start_year'] );
 					foreach( $t_chars as $t_char ) {
 						if ( strcasecmp( $t_char, "M" ) == 0 ) {
-							print ' ';
-							print date( 'F', $t_time );
+							PRINT ' ';
+							PRINT date( 'F', $t_time );
 						}
 						if ( strcasecmp( $t_char, "D" ) == 0 ) {
-							print ' ';
-							print date( 'd', $t_time );
+							PRINT ' ';
+							PRINT date( 'd', $t_time );
 						}
 						if ( strcasecmp( $t_char, "Y" ) == 0 ) {
-							print ' ';
-							print date( 'Y', $t_time );
+							PRINT ' ';
+							PRINT date( 'Y', $t_time );
 						}
 					}
 
-					echo ' - ';
+					PRINT ' - ';
 
 					$t_time = mktime( 0, 0, 0, $t_filter['end_month'], $t_filter['end_day'], $t_filter['end_year'] );
 					foreach( $t_chars as $t_char ) {
 						if ( strcasecmp( $t_char, "M" ) == 0 ) {
-							print ' ';
-							print date( 'F', $t_time );
+							PRINT ' ';
+							PRINT date( 'F', $t_time );
 						}
 						if ( strcasecmp( $t_char, "D" ) == 0 ) {
-							print ' ';
-							print date( 'd', $t_time );
+							PRINT ' ';
+							PRINT date( 'd', $t_time );
 						}
 						if ( strcasecmp( $t_char, "Y" ) == 0 ) {
-							print ' ';
-							print date( 'Y', $t_time );
+							PRINT ' ';
+							PRINT date( 'Y', $t_time );
 						}
 					}
 				} else {
-					echo lang_get( 'no' );
+					PRINT lang_get( 'no' );
 				}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'show_build'; ?>"><?php echo lang_get( 'product_build' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'show_build'; ?>"><?php PRINT lang_get( 'product_build' ) ?>:</a>
 				<?php
 				if ( 'any' == $t_filter['show_build'] ) {
-					echo lang_get( 'any' );
+					PRINT lang_get( 'any' );
 				} else {
-					echo $t_filter['show_build'];
+					PRINT $t_filter['show_build'];
 				}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'show_version'; ?>"><?php echo lang_get( 'product_version' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'show_version'; ?>"><?php PRINT lang_get( 'product_version' ) ?>:</a>
 				<?php
 				if ( 'any' == $t_filter['show_version'] ) {
-					echo lang_get( 'any' );
+					PRINT lang_get( 'any' );
 				} else {
-					echo $t_filter['show_version'];
+					PRINT $t_filter['show_version'];
 				}
 				?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'per_page'; ?>"><?php echo lang_get( 'show' ) ?>:</a>
-				<?php echo $t_filter['per_page']; ?>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'per_page'; ?>"><?php PRINT lang_get( 'show' ) ?>:</a>
+				<?php PRINT $t_filter['per_page']; ?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'highlight_changed'; ?>"><?php echo lang_get( 'changed' ) ?>:</a>
-				<?php echo $t_filter['highlight_changed']; ?>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>"><?php PRINT lang_get( 'changed' ) ?>:</a>
+				<?php PRINT $t_filter['highlight_changed']; ?>
 			</td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></td>
-			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php print $t_filters_url . 'hide_closed'; ?>"><?php echo lang_get( 'hide_closed' ) ?>:</a>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>"></td>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<a href="<?php PRINT $t_filters_url . 'hide_closed'; ?>"><?php PRINT lang_get( 'hide_closed' ) ?>:</a>
 				<?php
 					if ( 'on' == $t_filter['hide_closed'] ) {
-						echo lang_get( 'yes' );
+						PRINT lang_get( 'yes' );
 					} else {
-						echo lang_get( 'no' );
+						PRINT lang_get( 'no' );
 					}
 				?>
 			</td>
@@ -634,18 +634,18 @@
 
 				for ( $i = 0; $i < $t_num_rows; $i++ ) {
 					?>
-					<tr <?php echo "class=\"" . $t_trclass . "\""; ?>>
+					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
 					<?php
 					for( $j = 0; $j < $t_per_row; $j++ ) {
-						echo '<td class="small-caption" colspan="' . ( 1 * $t_filter_cols ) . '">';
+						PRINT '<td class="small-caption" colspan="' . ( 1 * $t_filter_cols ) . '">';
 						if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
-							echo "<a href=\"" . $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$t_base + $j] . "\">";
-							echo $t_accessible_custom_fields_names[$t_base + $j] . ":</a> ";
-							echo $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$t_base + $j]];
+							PRINT "<a href=\"" . $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$t_base + $j] . "\">";
+							PRINT $t_accessible_custom_fields_names[$t_base + $j] . ":</a> ";
+							PRINT $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$t_base + $j]];
 						} else {
-							echo '&nbsp;';
+							PRINT '&nbsp;';
 						}
-						echo '</td>';
+						PRINT '</td>';
 					}
 					?>
 					</tr>
@@ -657,13 +657,13 @@
 		?>
 
 		<tr>
-			<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?>: <input type="text" size="16" name="search" value="<?php echo $t_filter['search']; ?>" /></td>
+			<td colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>"><?php PRINT lang_get( 'search' ) ?>: <input type="text" size="16" name="search" value="<?php PRINT $t_filter['search']; ?>" /></td>
 			<!-- SUBMIT button -->
-			<td class="left" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-				<input type="submit" name="filter" value="<?php echo lang_get( 'search' ) ?>" />
+			<td class="left" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+				<input type="submit" name="filter" value="<?php PRINT lang_get( 'search' ) ?>" />
 			</td>
 			</form>
-			<td colspan="<?php echo ( 2 * $t_custom_cols ); ?>"></td>
+			<td colspan="<?php PRINT ( 2 * $t_custom_cols ); ?>"></td>
 
 			<?php
 			$t_stored_queries_arr = array();
@@ -671,32 +671,32 @@
 
 			if ( sizeof( $t_stored_queries_arr ) > 0 ) {
 				?>
-				<td class="right" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
+				<td class="right" colspan="<?php PRINT ( 3 * $t_custom_cols ); ?>">
 					<form method="get" name="list_queries" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
 					<select name="source_query_id">
-					<option value="-1"><?php echo '[' . lang_get( 'reset_query' ) . ']' ?></option>
+					<option value="-1"><?php PRINT '[' . lang_get( 'reset_query' ) . ']' ?></option>
 					<option value="-1"></option>
 					<?php
 					foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
-						print '<option value="' . $t_query_id . '">' . $t_query_name . '</option>';
+						PRINT '<option value="' . $t_query_id . '">' . $t_query_name . '</option>';
 					}
 					?>
 					</select>
-					<input type="submit" name="switch_to_query_button" value="<?php echo lang_get( 'use_query' ) ?>" />
+					<input type="submit" name="switch_to_query_button" value="<?php PRINT lang_get( 'use_query' ) ?>" />
 					</form>
 					<form method="post" name="open_queries" action="query_view_page.php">
-					<input type="submit" name="switch_to_query_button" value="<?php echo lang_get( 'open_queries' ) ?>" />
+					<input type="submit" name="switch_to_query_button" value="<?php PRINT lang_get( 'open_queries' ) ?>" />
 					</form>
 				</td>
 				<?php
 			} else {
 				?>
-				<td class="right" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
+				<td class="right" colspan="<?php PRINT ( 3 * $t_custom_cols ); ?>">
 					<form method="get" name="reset_query" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
 					<input type="hidden" name="source_query_id" value="-1" />
-					<input type="submit" name="reset_query_button" value="<?php echo lang_get( 'reset_query' ) ?>" />
+					<input type="submit" name="reset_query_button" value="<?php PRINT lang_get( 'reset_query' ) ?>" />
 					</form>
 				</td>
 				<?php
@@ -704,15 +704,15 @@
 
 			if ( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
 			?>
-				<td class="left" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+				<td class="left" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
 					<form method="post" name="save_query" action="query_store_page.php">
-					<input type="submit" name="save_query_button" value="<?php echo lang_get( 'save_query' ) ?>" />
+					<input type="submit" name="save_query_button" value="<?php PRINT lang_get( 'save_query' ) ?>" />
 					</form>
 				</td>
 			<?php
 			} else {
 			?>
-				<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+				<td colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
 			<?php
 			}
 			?>

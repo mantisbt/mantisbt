@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.49 2004-04-08 16:46:09 prescience Exp $
+	# $Id: project_api.php,v 1.50 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -16,9 +16,7 @@
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'file_api.php' );
 
-	###########################################################################
-	# Project API
-	###########################################################################
+	### Project API ###
 
 	#===================================
 	# Caching
@@ -27,7 +25,7 @@
 	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
-	#
+
 	$g_cache_project = array();
 	$g_cache_project_missing = array();
 	$g_cache_project_all = false;
@@ -83,9 +81,7 @@
 			$query = "SELECT *
 					  FROM $t_project_table";
 			$result = db_query( $query );
-
 			$count = db_num_rows( $result );
-
 			for ( $i = 0 ; $i < $count ; $i++ ) {
 				$row = db_fetch_array( $result );
 
@@ -202,7 +198,7 @@
 
 	# --------------------
 	# Create a new project
-	function project_create( $p_name, $p_description, $p_status, $p_view_state=VS_PUBLIC, $p_file_path='', $p_enabled=true ) {
+	function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_PUBLIC, $p_file_path = '', $p_enabled = true ) {
 		# Make sure file path has trailing slash
 		$p_file_path = terminate_directory_path( $p_file_path );
 
@@ -225,8 +221,7 @@
 
 		$t_project_table = config_get( 'mantis_project_table' );
 
-		$query = "INSERT
-				  INTO $t_project_table
+		$query = "INSERT INTO $t_project_table
 					( name, status, enabled, view_state, file_path, description )
 				  VALUES
 					( '$c_name', '$c_status', '$c_enabled', '$c_view_state', '$c_file_path', '$c_description' )";
@@ -263,9 +258,8 @@
 		project_remove_all_users( $p_project_id );
 
 		# Delete the project entry
-		$query = "DELETE
-				FROM $t_project_table
-				WHERE id='$c_project_id'";
+		$query = "DELETE FROM $t_project_table
+				  WHERE id='$c_project_id'";
 
 		db_query( $query );
 
@@ -279,7 +273,7 @@
 	# Update a project
 	function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_view_state, $p_file_path, $p_enabled ) {
 		# Make sure file path has trailing slash
-		$p_file_path = terminate_directory_path( $p_file_path );
+		$p_file_path	= terminate_directory_path( $p_file_path );
 
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_name 		= db_prepare_string( $p_name );
@@ -313,7 +307,6 @@
 					file_path='$c_file_path',
 					description='$c_description'
 				  WHERE id='$c_project_id'";
-
 		db_query( $query );
 
 		project_clear_cache( $p_project_id );

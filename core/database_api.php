@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.24 2004-04-08 20:52:50 prescience Exp $
+	# $Id: database_api.php,v 1.25 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -228,7 +228,7 @@
 	# --------------------
 	# prepare an integer before DB insertion
 	function db_prepare_int( $p_int ) {
-		return (integer)$p_int;
+		return (int)$p_int;
 	}
 
 	# --------------------

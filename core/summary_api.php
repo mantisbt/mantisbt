@@ -6,13 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.27 2004-04-08 16:46:10 prescience Exp $
+	# $Id: summary_api.php,v 1.28 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
-	#######################################################################
-	# Summary printing API
-	#######################################################################
+	### Summary printing API ###
 
+	# --------------------
 	function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 		printf( '<tr %s>', helper_alternate_class() );
 		printf( '<td width="50%%">%s</td>', string_display( $p_label ) );
@@ -44,7 +43,8 @@
 
 		$query = "SELECT status, $p_enum
 				FROM $t_mantis_bug_table
-				WHERE $t_project_filter ORDER BY $p_enum";
+				WHERE $t_project_filter
+				ORDER BY $p_enum";
 		$result = db_query( $query );
 
 		$t_last_value = -1;
@@ -77,7 +77,7 @@
 						break;
 				}
 
-				if ( $t_bug_link != '' ) {
+				if ( !is_blank( $t_bug_link ) ) {
 					if ( 0 < $t_bugs_open ) {
 						$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
 					}
@@ -94,10 +94,10 @@
 
 				summary_helper_print_row( get_enum_element( $p_enum, $t_last_value), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
-				$t_bugs_open = 0;
-				$t_bugs_resolved = 0;
-				$t_bugs_closed = 0;
-				$t_bugs_total = 0;
+				$t_bugs_open		= 0;
+				$t_bugs_resolved	= 0;
+				$t_bugs_closed		= 0;
+				$t_bugs_total		= 0;
 			}
 
 			$t_bugs_total++;
@@ -112,7 +112,6 @@
 					$t_bugs_open++;
 					break;
 			}
-
 			$t_last_value = $row[$p_enum];
 		}
 
@@ -135,7 +134,7 @@
 					break;
 			}
 
-			if ( $t_bug_link != '' ) {
+			if ( !is_blank( $t_bug_link ) ) {
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
 				}
@@ -159,7 +158,7 @@
 	function summary_bug_count_by_date( $p_time_length=1 ) {
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 
-		$c_time_length = (integer)$p_time_length;
+		$c_time_length = (int)$p_time_length;
 
 		$t_project_id = helper_get_current_project();
 
@@ -471,7 +470,7 @@
 			}
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . $last_category;
-			if ( $t_bug_link != '' ) {
+			if ( !is_blank( $t_bug_link ) ) {
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
 				}
@@ -614,11 +613,11 @@
 			# users that aren't actually developers...
 
 			if ( $t_arr2['total'] > 0 ) {
-				print '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
+				PRINT '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
 				$t_row_count++;
-				print '<td>';
-				print user_get_name( $t_handler_id );
-				print '</td>';
+				PRINT '<td>';
+				PRINT user_get_name( $t_handler_id );
+				PRINT '</td>';
 
 				# We need to track the percentage of bugs that are considered fix, as well as
 				# those that aren't considered bugs to begin with (when looking at %age)
@@ -631,15 +630,15 @@
 						$res_bug_count = $t_arr2[$c_res_s[$j]];
 					}
 
-					print '<td>';
+					PRINT '<td>';
 					if ( 0 < $res_bug_count ) {
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;handler_id=' . $t_handler_id;
 						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[$j] . '">';
-						print $t_bug_link . $res_bug_count . '</a>';
+						PRINT $t_bug_link . $res_bug_count . '</a>';
 					} else {
-						print $res_bug_count;
+						PRINT $res_bug_count;
 					}
-					print '</td>';
+					PRINT '</td>';
 
 					# These resolutions are considered fixed
 					if ( FIXED == $c_res_s[$j] ) {
@@ -658,9 +657,9 @@
 				if ( ( $t_arr2['total'] - $t_bugs_notbugs ) > 0 ) {
 					$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2['total'] - $t_bugs_notbugs ) );
 				}
-				print '<td>';
+				PRINT '<td>';
 				printf( '% 1.0f%%', ( $t_percent_fixed * 100 ) );
-				print '</td>';
+				PRINT '</td>';
 			}
 		}
 	}
@@ -729,11 +728,11 @@
 			if ( $t_total_user_bugs > 0 ) {
 				$t_arr2 = $t_reporter_res_arr[$t_reporter_id];
 
-				print '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
+				PRINT '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
 				$t_row_count++;
-				print '<td>';
-				print user_get_name( $t_reporter_id );
-				print '</td>';
+				PRINT '<td>';
+				PRINT user_get_name( $t_reporter_id );
+				PRINT '</td>';
 
 				# We need to track the percentage of bugs that are considered fix, as well as
 				# those that aren't considered bugs to begin with (when looking at %age)
@@ -746,15 +745,15 @@
 						$res_bug_count = $t_arr2[$c_res_s[$j]];
 					}
 
-					print '<td>';
+					PRINT '<td>';
 					if ( 0 < $res_bug_count ) {
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;reporter_id=' . $t_reporter_id;
 						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[$j] . '">';
-						print $t_bug_link . $res_bug_count . '</a>';
+						PRINT $t_bug_link . $res_bug_count . '</a>';
 					} else {
-						print $res_bug_count;
+						PRINT $res_bug_count;
 					}
-					print '</td>';
+					PRINT '</td>';
 
 					# These resolutions are considered fixed
 					if ( FIXED == $c_res_s[$j] ) {
@@ -772,9 +771,9 @@
 				if ( $t_total_user_bugs > 0 ) {
 					$t_percent_errors = ( $t_bugs_notbugs / $t_total_user_bugs );
 				}
-				print '<td>';
+				PRINT '<td>';
 				printf( '% 1.0f%%', ( $t_percent_errors * 100 ) );
-				print '</td>';
+				PRINT '</td>';
 			}
 		}
 	}	# --------------------
@@ -870,11 +869,11 @@
 			if ( $t_total_user_bugs > 0 ) {
 				$t_arr2 = $t_reporter_ressev_arr[$t_reporter_id];
 
-				print '<tr ' . helper_alternate_class( $t_row_count ) . '>';
+				PRINT '<tr ' . helper_alternate_class( $t_row_count ) . '>';
 				$t_row_count++;
-				print '<td>';
-				print user_get_name( $t_reporter_id );
-				print '</td>';
+				PRINT '<td>';
+				PRINT user_get_name( $t_reporter_id );
+				PRINT '</td>';
 
 				$t_total_severity = 0;
 				$t_total_errors = 0;
@@ -907,15 +906,15 @@
 						}
 					}
 				}
-				print '<td>';
-				print $t_total_severity;
-				print '</td>';
-				print '<td>';
-				print $t_total_errors;
-				print '</td>';
-				print '<td>';
-				print ( $t_total_severity - $t_total_errors );
-				print '</td>';
+				PRINT '<td>';
+				PRINT $t_total_severity;
+				PRINT '</td>';
+				PRINT '<td>';
+				PRINT $t_total_errors;
+				PRINT '</td>';
+				PRINT '<td>';
+				PRINT ( $t_total_severity - $t_total_errors );
+				PRINT '</td>';
 			}
 		}
 	}

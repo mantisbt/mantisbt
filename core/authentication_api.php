@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.35 2004-04-08 20:52:50 prescience Exp $
+	# $Id: authentication_api.php,v 1.36 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -46,7 +46,7 @@
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
 	function auth_is_user_authenticated() {
-		if ( '' == auth_get_current_user_cookie() ) {
+		if ( is_blank( auth_get_current_user_cookie() ) ) {
 			return false;
 		} else {
 			return true;
@@ -291,7 +291,7 @@
 		$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 		# if cookie not found, and anonymous login enabled, use cookie of anonymous account.
-		if ( '' === $t_cookie ) {
+		if ( is_blank( $t_cookie ) ) {
 			if ( ON == config_get( 'allow_anonymous_login' ) ) {
 				$query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
 						config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );

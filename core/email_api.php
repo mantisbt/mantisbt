@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.78 2004-04-08 16:46:09 prescience Exp $
+	# $Id: email_api.php,v 1.79 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -426,12 +426,12 @@
 		}
 
 		# for debugging only
-		#echo $t_recipient.'<br />'.$t_subject.'<br />'.$t_message.'<br />'.$t_headers;
+		#PRINT $t_recipient.'<br />'.$t_subject.'<br />'.$t_message.'<br />'.$t_headers;
 		#exit;
-		#echo '<br />xxxRecipient ='.$t_recipient.'<br />';
-		#echo 'Headers ='.nl2br($t_headers).'<br />';
-		#echo $t_subject.'<br />';
-		#echo nl2br($t_message).'<br />';
+		#PRINT '<br />xxxRecipient ='.$t_recipient.'<br />';
+		#PRINT 'Headers ='.nl2br($t_headers).'<br />';
+		#PRINT $t_subject.'<br />';
+		#PRINT nl2br($t_message).'<br />';
 		#exit;
 
 		$t_debug_email = config_get('debug_email');
@@ -667,7 +667,7 @@
 			$t_message .= email_format_bug_message(  $p_visible_bug_data );
 
 			# send mail
-			# echo '<br />email_bug_info::Sending email to :'.$t_user_email;
+			# PRINT '<br />email_bug_info::Sending email to :'.$t_user_email;
 			$t_ok = email_send( $t_user_email, $t_subject, $t_message, '', $p_visible_bug_data['set_category'], false );
 
 		}
@@ -784,6 +784,7 @@
 		return $t_message;
 	}
 
+	# --------------------
 	# if $p_visible_bug_data contains specified attribute the function
 	# returns concatenated translated attribute name and original
 	# attribute value. Else return empty string.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.24 2004-04-08 20:52:50 prescience Exp $
+	# $Id: gpc_api.php,v 1.25 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -68,7 +68,7 @@
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 		}
 
-		return (integer)$t_result;
+		return (int)$t_result;
 	}
 	# ------------------
 	# Retrieve a boolean GPC variable. Uses gpc_get().
@@ -126,7 +126,7 @@
 		}
 
 		for ( $i=0 ; $i < sizeof( $t_result ) ; $i++ ) {
-			$t_result[$i] = (integer)$t_result[$i];
+			$t_result[$i] = (int)$t_result[$i];
 		}
 
 		return $t_result;

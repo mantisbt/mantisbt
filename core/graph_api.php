@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.14 2004-04-08 03:31:37 prescience Exp $
+	# $Id: graph_api.php,v 1.15 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -19,24 +19,23 @@
 		require_once( $t_jpgraph_path.'jpgraph_pie3d.php' );
 	}
 
-	###########################################################################
-	# Graph API
-	###########################################################################
+	### Graph API ###
 
+	# --------------------
 	# Function which gives the absolute values according to the status (opened/closed/resolved)
 	function enum_bug_group( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $enum_name, $enum_name_count;
 		#these vars are set global so that the other functions can use them
 		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
 
-		$enum_name = Null;
-		$enum_name_count = Null;
+		$enum_name			= null;
+		$enum_name_count	= null;
 
 		$t_project_id = helper_get_current_project();
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
-		for ($i=0;$i<$enum_count;$i++) {
+		for ( $i=0; $i < $enum_count; $i++) {
 			$t_s = explode( ':', $t_arr[$i] );
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
@@ -49,13 +48,12 @@
 			# Calculates the number of bugs with $p_enum and puts the results in a table
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-						WHERE $p_enum='$t_s[0]' $specific_where";
+					WHERE $p_enum='$t_s[0]' $specific_where";
 			$result = db_query( $query );
 			$enum_name_count[]= db_result( $result, 0);
 
 			$t_res_val = RESOLVED;
 			$t_clo_val = CLOSED;
-
 
 			# Calculates the number of bugs opened and puts the results in a table
 			$query = "SELECT COUNT(*)
@@ -75,7 +73,6 @@
 
 			$closed_bug_count[] = db_result( $result2, 0, 0);
 
-
 			# Calculates the number of bugs resolved and puts the results in a table
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -83,11 +80,10 @@
 						status='$t_res_val' $specific_where";
 			$result2 = db_query( $query );
 			$resolved_bug_count[] = db_result( $result2, 0, 0);
-
-
 		} ### end for
 	}
 
+	# --------------------
 	# Function which displays the charts using the absolute values according to the status (opened/closed/resolved)
 	function graph_group( $p_title='' ){
 		global $enum_name, $enum_name_count;
@@ -138,6 +134,7 @@
 
 	}
 
+	# --------------------
 	# Function which finds the % according to the status
 	function enum_bug_group_pct( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $enum_name, $enum_name_count;
@@ -218,6 +215,7 @@
 		} ### end for
 	}
 
+	# --------------------
 	# Function that displays charts in % according to the status
 	function graph_group_pct( $p_title='' ){
 		global $enum_name, $enum_name_count;
@@ -256,6 +254,7 @@
 		$graph->Stroke();
 	}
 
+	# --------------------
 	# Function which gets the values in %
 	function create_bug_enum_summary_pct( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $enum_name, $enum_name_count, $total;
@@ -296,6 +295,7 @@
 		} ### end for
 	}
 
+	# --------------------
 	# Function that displays pie charts
 	function graph_bug_enum_summary_pct( $p_title=''){
 		global $enum_name, $enum_name_count, $center, $poshorizontal, $posvertical;
@@ -324,6 +324,7 @@
 		$graph->Stroke();
 	}
 
+	# --------------------
 	function create_category_summary_pct() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 				$g_mantis_project_category_table,
@@ -367,6 +368,7 @@
 		} ### end for
 	}
 
+	# --------------------
 	# Pie chart which dispays by categories
 	function graph_category_summary_pct( $p_title=''){
 		global $category_name, $category_bug_count;
@@ -395,6 +397,7 @@
 
 	}
 
+	# --------------------
 	function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $enum_name, $enum_name_count;
 		$enum_name = Null;
@@ -423,7 +426,7 @@
 		} # end for
 	}
 
-
+	# --------------------
 	function graph_bug_enum_summary( $p_title='' ){
 		global $enum_name, $enum_name_count;
 
@@ -448,6 +451,7 @@
 
 	}
 
+	# --------------------
 	function create_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table, $g_mantis_project_user_list_table,
 				$developer_name, $open_bug_count,
@@ -505,6 +509,7 @@
 		} # end for
 	}
 
+	# --------------------
 	function graph_developer_summary( ){
 		global $developer_name, $total_bug_count, $open_bug_count, $resolved_bug_count;
 
@@ -543,6 +548,7 @@
 
 	}
 
+	# --------------------
 	function create_reporter_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 			$reporter_name, $reporter_count;
@@ -579,6 +585,7 @@
 		} # end for
 	}
 
+	# --------------------
 	function graph_reporter_summary( ){
 		global $reporter_name, $reporter_count;
 
@@ -602,6 +609,7 @@
 
 	}
 
+	# --------------------
 	function create_category_summary() {
 		global 	$g_mantis_bug_table,
 				$g_mantis_project_category_table,
@@ -636,6 +644,7 @@
 		} # end for
 	}
 
+	# --------------------
 	function graph_category_summary(){
 		global $category_name, $category_bug_count;
 
@@ -659,6 +668,7 @@
 
 	}
 
+	# --------------------
 	function cmp_dates($a, $b){
 		if ($a[0] == $b[0]) {
 			return 0;
@@ -666,6 +676,7 @@
 		return ( $a[0] < $b[0] ) ? -1 : 1;
 	}
 
+	# --------------------
 	function find_date_in_metrics($aDate){
 		global $metrics;
 		$index = -1;
@@ -678,6 +689,7 @@
 		return $index;
 	}
 
+	# --------------------
 	function create_cumulative_bydate(){
 		global $metrics, $g_mantis_bug_table;
 
@@ -750,6 +762,7 @@
 
 	}
 
+	# --------------------
 	function graph_cumulative_bydate(){
 		global $metrics;
 
@@ -796,5 +809,4 @@
 
 		$graph->Stroke();
 	}
-	# ----------
 ?>

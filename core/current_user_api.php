@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.16 2004-04-08 18:04:53 prescience Exp $
+	# $Id: current_user_api.php,v 1.17 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -100,7 +100,7 @@
 		$t_cookie_detail	= '';
 		$t_filter			= '';
 
-		if ( '' != $f_filter_string ) {
+		if ( !is_blank( $f_filter_string ) ) {
 			$t_filter = unserialize( $f_filter_string );
 		} else {
 			$t_view_all_cookie_id	= gpc_get_cookie( config_get( 'view_all_cookie' ), '' );

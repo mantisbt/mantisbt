@@ -6,16 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.31 2004-04-08 16:46:09 prescience Exp $
+	# $Id: custom_field_api.php,v 1.32 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'bug_api.php' );
 
-	###########################################################################
-	# Custom Fields API
-	###########################################################################
+	### Custom Fields API ###
 
 #*******************************************
 #	TODO
@@ -32,7 +30,7 @@
 	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
-	#
+
 	$g_cache_custom_field = array();
 
 	# Cache a custom field row if necessary and return the cached copy
@@ -103,12 +101,11 @@
 
 		# figure out if this bug_id/field_id combination exists
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
-		$query = "SELECT COUNT(*) FROM
-				  $t_custom_field_project_table
-				  WHERE field_id='$c_field_id'
-					AND project_id='$c_project_id'";
+		$query = "SELECT COUNT(*)
+				FROM $t_custom_field_project_table
+				WHERE field_id='$c_field_id' AND
+					  project_id='$c_project_id'";
 		$result = db_query( $query );
-
 		$count = db_result( $result );
 
 		if ( $count > 0 ) {
@@ -147,18 +144,17 @@
 	#  if an id is specified, then the corresponding record is excluded from the
 	#  uniqueness test.
 	function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
-		$c_name		= db_prepare_string( $p_name );
+		$c_name	= db_prepare_string( $p_name );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT COUNT(*) FROM
-				  $t_custom_field_table
+		$query = "SELECT COUNT(*)
+				  FROM $t_custom_field_table
 				  WHERE name='$c_name'";
 		if ( $p_custom_field_id !== null ) {
 			$c_id = db_prepare_int( $p_custom_field_id );
 			$query .= " AND (id <> $c_id)";
 		}
 		$result = db_query( $query );
-
 		$count = db_result( $result );
 
 		if ( $count > 0 ) {
@@ -245,8 +241,7 @@
 		custom_field_ensure_name_unique( $p_name );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "INSERT INTO
-				  $t_custom_field_table
+		$query = "INSERT INTO $t_custom_field_table
 					( name )
 				  VALUES
 					( '$c_name' )";
@@ -283,11 +278,10 @@
 			trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
 		}
 
-		$query = "UPDATE " .
-				 config_get( 'mantis_custom_field_table' ).
-				 " SET ";
 		$t_update_something = false;
-
+		$t_mantis_custom_field_table = config_get( 'mantis_custom_field_table' );
+		$query = "UPDATE $t_mantis_custom_field_table
+				  SET ";
 		if( array_key_exists( 'name', $p_def_array ) ) {
 			if ( !$t_update_something ) {
 				$t_update_something = true;
@@ -420,8 +414,8 @@
 
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
 		$query = "DELETE FROM $t_custom_field_project_table
-				  WHERE field_id = '$c_field_id'
-					AND project_id = '$c_project_id'";
+				  WHERE field_id = '$c_field_id' AND
+				  		project_id = '$c_project_id'";
 		db_query( $query );
 
 		# db_query() errors on failure so:
@@ -437,22 +431,19 @@
 
 		# delete all values
 		$t_custom_field_string_table = config_get( 'mantis_custom_field_string_table' );
-		$query = "DELETE FROM
-				  $t_custom_field_string_table
+		$query = "DELETE FROM $t_custom_field_string_table
 				  WHERE field_id='$c_field_id'";
 		db_query( $query );
 
 		# delete all project associations
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
-		$query = "DELETE FROM
-				  $t_custom_field_project_table
+		$query = "DELETE FROM $t_custom_field_project_table
 				  WHERE field_id='$c_field_id'";
 		db_query( $query );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		# delete the definition
-		$query = "DELETE FROM
-				  $t_custom_field_table
+		$query = "DELETE FROM $t_custom_field_table
 				  WHERE id='$c_field_id'";
 		db_query( $query );
 
@@ -472,8 +463,7 @@
 
 		# delete all project associations
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
-		$query = "DELETE FROM
-				  $t_custom_field_project_table
+		$query = "DELETE FROM $t_custom_field_project_table
 				  WHERE project_id='$c_project_id'";
 		db_query( $query );
 
@@ -505,23 +495,21 @@
 	# --------------------
 	# Return an array all custom field ids
 	function custom_field_get_ids( $p_project_id = ALL_PROJECTS ) {
-		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
+		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
+		$t_custom_field_project_table	= config_get( 'mantis_custom_field_project_table' );
 
 		if ( ALL_PROJECTS == $p_project_id ) {
-			$query = "SELECT id FROM $t_custom_field_table
-						ORDER BY name ASC";
+			$query = "SELECT id
+					  FROM $t_custom_field_table
+					  ORDER BY name ASC";
 		} else {
-			$query = "SELECT $t_custom_field_table.id FROM
-							$t_custom_field_table, $t_custom_field_project_table
-						WHERE
-							$t_custom_field_project_table.project_id = '$p_project_id' AND
+			$query = "SELECT $t_custom_field_table.id
+					  FROM $t_custom_field_table, $t_custom_field_project_table
+					  WHERE $t_custom_field_project_table.project_id = '$p_project_id' AND
 							$t_custom_field_table.id = $t_custom_field_project_table.field_id
-						ORDER BY name ASC";
+					  ORDER BY name ASC";
 		}
-
 		$result = db_query( $query );
-
 		$t_row_count = db_num_rows( $result );
 		$t_ids = array();
 
@@ -541,15 +529,14 @@
 	function custom_field_get_linked_ids( $p_project_id ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
-		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT field_id FROM
-				  $t_custom_field_project_table p, $t_custom_field_table f
-				  WHERE p.project_id='$c_project_id'
-					AND p.field_id = f.id
+		$t_custom_field_project_table	= config_get( 'mantis_custom_field_project_table' );
+		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
+		$query = "SELECT field_id
+				  FROM $t_custom_field_project_table p, $t_custom_field_table f
+				  WHERE p.project_id='$c_project_id' AND
+				  		p.field_id=f.id
 				  ORDER BY p.sequence ASC, f.name ASC";
 		$result = db_query( $query );
-
 		$t_row_count = db_num_rows( $result );
 		$t_ids = array();
 
@@ -569,8 +556,8 @@
 		$c_field_id = db_prepare_int( $p_field_id );
 
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
-		$query = "SELECT project_id FROM
-					  $t_custom_field_project_table
+		$query = "SELECT project_id
+				  FROM $t_custom_field_project_table
 				  WHERE field_id = '$c_field_id'";
 		$result = db_query( $query );
 
@@ -621,8 +608,8 @@
 		custom_field_ensure_exists( $p_field_id );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT access_level_r, default_value FROM
-				  $t_custom_field_table
+		$query = "SELECT access_level_r, default_value
+				  FROM $t_custom_field_table
 				  WHERE id='$c_field_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
@@ -635,10 +622,10 @@
 		}
 
 		$t_custom_field_string_table = config_get( 'mantis_custom_field_string_table' );
-		$query = "SELECT value FROM
-				  $t_custom_field_string_table
-				  WHERE bug_id='$c_bug_id'
-					AND field_id='$c_field_id'";
+		$query = "SELECT value
+				  FROM $t_custom_field_string_table
+				  WHERE bug_id='$c_bug_id' AND
+				  		field_id='$c_field_id'";
 		$result = db_query( $query );
 
 		if( db_num_rows( $result ) > 0 ) {
@@ -686,16 +673,11 @@
 			$t_custom_field_string_table  = config_get( 'mantis_custom_field_string_table' );
 
 			$query = "SELECT f.name, f.type, f.access_level_r, f.default_value, s.value
-						FROM $t_custom_field_project_table AS p, $t_custom_field_table AS f
-
-						LEFT JOIN $t_custom_field_string_table AS s
-							ON  p.field_id = s.field_id
-							AND s.bug_id = '$c_bug_id'
-
-						WHERE   p.project_id = '$c_project_id'
-							AND p.field_id = f.id
-
-						ORDER BY p.sequence ASC, f.name ASC";
+					FROM $t_custom_field_project_table AS p, $t_custom_field_table AS f
+					LEFT JOIN $t_custom_field_string_table AS s
+						ON  p.field_id=s.field_id AND s.bug_id='$c_bug_id'
+					WHERE   p.project_id = '$c_project_id' AND p.field_id = f.id
+					ORDER BY p.sequence ASC, f.name ASC";
 
 			$result = db_query( $query );
 
@@ -732,10 +714,10 @@
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
-		$query = "SELECT sequence FROM
-				  $t_custom_field_project_table
+		$query = "SELECT sequence
+				  FROM $t_custom_field_project_table
 				  WHERE field_id='$c_field_id' AND
-					project_id='$c_project_id'";
+						project_id='$c_project_id'";
 		$result = db_query( $query, 1 );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -758,14 +740,14 @@
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$query = "SELECT name, type, possible_values, valid_regexp,
-				  access_level_rw, length_min, length_max, default_value
+				  		 access_level_rw, length_min, length_max, default_value
 				  FROM $t_custom_field_table
 				  WHERE id='$c_field_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
 
-		$t_name			= $row['name'];
-		$t_type			= $row['type'];
+		$t_name				= $row['name'];
+		$t_type				= $row['type'];
 		$t_possible_values	= $row['possible_values'];
 		$t_valid_regexp		= $row['valid_regexp'];
 		$t_length_min		= $row['length_min'];
@@ -793,12 +775,14 @@
 	# --------------------
 	# Get All Possible Values for a Field.
 	function custom_field_distinct_values( $p_field_id ) {
-		$c_field_id  = db_prepare_int( $p_field_id );
-		$t_custom_field_string_table = config_get( 'mantis_custom_field_string_table' );
-		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$t_return_arr = array();
+		$c_field_id						= db_prepare_int( $p_field_id );
+		$t_custom_field_string_table	= config_get( 'mantis_custom_field_string_table' );
+		$t_custom_field_table			= config_get( 'mantis_custom_field_table' );
+		$t_return_arr					= array();
 
-		$query = "SELECT type, possible_values FROM $t_custom_field_table WHERE id='$c_field_id'";
+		$query = "SELECT type, possible_values
+				  FROM $t_custom_field_table
+				  WHERE id='$c_field_id'";
 		$result = db_query( $query );
 
 		$t_row_count = db_num_rows( $result );
@@ -816,20 +800,17 @@
 			}
 		} else {
 			$query2 = "SELECT value FROM $t_custom_field_string_table
-						WHERE field_id = '$c_field_id'
+						WHERE field_id='$c_field_id'
 						GROUP BY value";
-
 			$result2 = db_query( $query2 );
-
 			$t_row_count = db_num_rows( $result2 );
-
 			if ( 0 == $t_row_count ) {
 				return false;
 			}
 
 			for ( $i = 0; $i < $t_row_count; $i++ ) {
 				$row = db_fetch_array( $result2 );
-				if( trim( $row['value'] ) != "" ) {
+				if( !is_blank( trim( $row['value'] ) ) ) {
 					array_push( $t_return_arr, $row['value'] );
 				}
 			}
@@ -892,15 +873,15 @@
 		# do I need to update or insert this value?
 		$query = "SELECT value
 				  FROM $t_custom_field_string_table
-				  WHERE field_id='$c_field_id'
-					AND bug_id='$c_bug_id'";
+				  WHERE field_id='$c_field_id' AND
+				  		bug_id='$c_bug_id'";
 		$result = db_query( $query );
 
 		if ( db_num_rows( $result ) > 0 ) {
 			$query = "UPDATE $t_custom_field_string_table
 					  SET value='$c_value'
-					  WHERE field_id='$c_field_id'
-						AND bug_id='$c_bug_id'";
+					  WHERE field_id='$c_field_id' AND
+					  		bug_id='$c_bug_id'";
 			db_query( $query );
 
 			$row = db_fetch_array( $result );
@@ -935,8 +916,8 @@
 
 		$query = "UPDATE $t_custom_field_project_table
 				  SET sequence='$c_sequence'
-				  WHERE field_id='$c_field_id'
-					AND project_id='$c_project_id'";
+				  WHERE field_id='$c_field_id' AND
+				  		project_id='$c_project_id'";
 		$result = db_query( $query );
 
 		custom_field_clear_cache( $p_field_id );
@@ -969,30 +950,28 @@
 
 		switch ($p_field_def['type']) {
 		case CUSTOM_FIELD_TYPE_ENUM:
-			echo "<select name=\"custom_field_$t_id\">";
+			PRINT "<select name=\"custom_field_$t_id\">";
 			$t_values = explode('|', $p_field_def['possible_values']);
 			foreach( $t_values as $t_option ) {
 				if( $t_custom_field_value == $t_option ) {
-					echo "<option value=\"$t_option\" selected>$t_option</option>";
+					PRINT "<option value=\"$t_option\" selected>$t_option</option>";
 				} else {
-					echo "<option value=\"$t_option\">$t_option</option>";
+					PRINT "<option value=\"$t_option\">$t_option</option>";
 				}
 			}
-			echo '</select>';
+			PRINT '</select>';
 			break;
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 		case CUSTOM_FIELD_TYPE_FLOAT:
 		case CUSTOM_FIELD_TYPE_EMAIL:
-		default:
 		case CUSTOM_FIELD_TYPE_STRING:
-			echo "<input type=\"text\" name=\"custom_field_$t_id\" size=\"80\"";
+			PRINT "<input type=\"text\" name=\"custom_field_$t_id\" size=\"80\"";
 			if( 0 < $p_field_def['length_max'] ) {
-				echo ' maxlength="' . $p_field_def['length_max'] . '"';
+				PRINT ' maxlength="' . $p_field_def['length_max'] . '"';
 			} else {
-				echo ' maxlength="255"';
+				PRINT ' maxlength="255"';
 			}
-			echo " value=\"$t_custom_field_value\"></input>";
+			PRINT " value=\"$t_custom_field_value\"></input>";
 		}
 	}
-
 ?>

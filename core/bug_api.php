@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.55 2004-04-08 16:46:09 prescience Exp $
+	# $Id: bug_api.php,v 1.56 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -17,9 +17,7 @@
 	require_once( $t_core_dir . 'file_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 
-	###########################################################################
-	# Bug API
-	###########################################################################
+	### Bug API ###
 
 	#===================================
 	# Bug Data Structure Definition
@@ -64,10 +62,11 @@
 	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
-	#
+
 	$g_cache_bug = array();
 	$g_cache_bug_text = array();
 
+	# --------------------
 	# Cache a bug row if necessary and return the cached copy
 	#  If the second parameter is true (default), trigger an error
 	#  if the bug can't be found.  If the second parameter is
@@ -75,11 +74,10 @@
 	function bug_cache_row( $p_bug_id, $p_trigger_errors=true ) {
 		global $g_cache_bug;
 
-		$c_bug_id = db_prepare_int( $p_bug_id );
+		$c_bug_id		= db_prepare_int( $p_bug_id );
+		$t_bug_table	= config_get( 'mantis_bug_table' );
 
-		$t_bug_table = config_get( 'mantis_bug_table' );
-
-		if ( isset ( $g_cache_bug[$c_bug_id] ) ) {
+		if ( isset( $g_cache_bug[$c_bug_id] ) ) {
 			return $g_cache_bug[$c_bug_id];
 		}
 
@@ -100,9 +98,8 @@
 		}
 
 		$row = db_fetch_array( $result );
-		$row['date_submitted'] = db_unixtimestamp( $row['date_submitted'] );
-		$row['last_updated'] = db_unixtimestamp( $row['last_updated'] );
-
+		$row['date_submitted']	= db_unixtimestamp( $row['date_submitted'] );
+		$row['last_updated']	= db_unixtimestamp( $row['last_updated'] );
 		$g_cache_bug[$c_bug_id] = $row;
 
 		return $row;
@@ -131,10 +128,9 @@
 	function bug_text_cache_row( $p_bug_id, $p_trigger_errors=true ) {
 		global $g_cache_bug_text;
 
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
-		$t_bug_table = config_get( 'mantis_bug_table' );
-		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$t_bug_table		= config_get( 'mantis_bug_table' );
+		$t_bug_text_table	= config_get( 'mantis_bug_text_table' );
 
 		if ( isset ( $g_cache_bug_text[$c_bug_id] ) ) {
 			return $g_cache_bug_text[$c_bug_id];
@@ -142,8 +138,8 @@
 
 		$query = "SELECT bt.*
 				  FROM $t_bug_text_table bt, $t_bug_table b
-				  WHERE b.id='$c_bug_id'
-				    AND b.bug_text_id = bt.id";
+				  WHERE b.id='$c_bug_id' AND
+				  		b.bug_text_id = bt.id";
 		$result = db_query( $query );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -232,7 +228,12 @@
 	# by default a bug becomes readonly when it is resolved, but this can be changed
 	# through the configuration file.
 	function bug_is_readonly( $p_bug_id ) {
-		return ( bug_get_field( $p_bug_id, 'status' ) < config_get( 'bug_resolved_status_threshold' ) );
+		$t_status = bug_get_field( $p_bug_id, 'status' );
+		if ( $t_status < config_get( 'bug_resolved_status_threshold' ) ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	#===================================
@@ -278,13 +279,12 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
-		$t_bug_table = config_get( 'mantis_bug_table' );
-		$t_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_bug_table				= config_get( 'mantis_bug_table' );
+		$t_bug_text_table			= config_get( 'mantis_bug_text_table' );
+		$t_project_category_table	= config_get( 'mantis_project_category_table' );
 
 		# Insert text information
-		$query = "INSERT
-				  INTO $t_bug_text_table
+		$query = "INSERT INTO $t_bug_text_table
 				    ( description, steps_to_reproduce, additional_information )
 				  VALUES
 				    ( '$c_description', '$c_steps_to_reproduce',
@@ -307,7 +307,6 @@
 			$query = "SELECT user_id
 					  FROM $t_project_category_table
 					  WHERE project_id='$c_project_id' AND category='$c_category'";
-
 			$result = db_query( $query );
 
 			if ( db_num_rows( $result ) > 0 ) {
@@ -323,8 +322,7 @@
 		# Insert the rest of the data
 		$t_resolution = OPEN;
 
-		$query = "INSERT
-				  INTO $t_bug_table
+		$query = "INSERT INTO $t_bug_table
 				    ( project_id,
 				      reporter_id, handler_id,
 				      duplicate_id, priority,
@@ -365,10 +363,9 @@
 	# delete the bug, bugtext, bugnote, and bugtexts selected
 	# used in bug_delete.php & mass treatments
 	function bug_delete( $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
-		$t_bug_table = config_get( 'mantis_bug_table' );
-		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$t_bug_table		= config_get( 'mantis_bug_table' );
+		$t_bug_text_table	= config_get( 'mantis_bug_text_table' );
 
 		# log deletion of bug
 		history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
@@ -393,14 +390,12 @@
 		# Delete the bugnote text
 		$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
 
-		$query = "DELETE
-				  FROM $t_bug_text_table
+		$query = "DELETE FROM $t_bug_text_table
 				  WHERE id='$t_bug_text_id'";
 		db_query( $query );
 
 		# Delete the bug entry
-		$query = "DELETE
-				  FROM $t_bug_table
+		$query = "DELETE FROM $t_bug_table
 				  WHERE id='$c_bug_id'";
 		db_query( $query );
 
@@ -492,44 +487,25 @@
 		bug_clear_cache( $p_bug_id );
 
 		# log changes
-		history_log_event_direct( $p_bug_id, 'project_id',
-									$t_old_data->project_id, $p_bug_data->project_id );
-		history_log_event_direct( $p_bug_id, 'reporter_id',
-									$t_old_data->reporter_id, $p_bug_data->reporter_id );
-		history_log_event_direct( $p_bug_id, 'handler_id',
-									$t_old_data->handler_id, $p_bug_data->handler_id );
-		history_log_event_direct( $p_bug_id, 'duplicate_id',
-									$t_old_data->duplicate_id, $p_bug_data->duplicate_id );
-		history_log_event_direct( $p_bug_id, 'priority',
-									$t_old_data->priority, $p_bug_data->priority );
-		history_log_event_direct( $p_bug_id, 'severity',
-									$t_old_data->severity, $p_bug_data->severity );
-		history_log_event_direct( $p_bug_id, 'reproducibility',
-									$t_old_data->reproducibility, $p_bug_data->reproducibility );
-		history_log_event_direct( $p_bug_id, 'status',
-									$t_old_data->status, $p_bug_data->status );
-		history_log_event_direct( $p_bug_id, 'resolution',
-									$t_old_data->resolution, $p_bug_data->resolution );
-		history_log_event_direct( $p_bug_id, 'projection',
-									$t_old_data->projection, $p_bug_data->projection );
-		history_log_event_direct( $p_bug_id, 'category',
-									$t_old_data->category, $p_bug_data->category );
-		history_log_event_direct( $p_bug_id, 'eta',
-									$t_old_data->eta, $p_bug_data->eta );
-		history_log_event_direct( $p_bug_id, 'os',
-									$t_old_data->os, $p_bug_data->os );
-		history_log_event_direct( $p_bug_id, 'os_build',
-									$t_old_data->os_build, $p_bug_data->os_build );
-		history_log_event_direct( $p_bug_id, 'platform',
-									$t_old_data->platform, $p_bug_data->platform );
-		history_log_event_direct( $p_bug_id, 'version',
-									$t_old_data->version, $p_bug_data->version );
-		history_log_event_direct( $p_bug_id, 'build',
-									$t_old_data->build, $p_bug_data->build );
-		history_log_event_direct( $p_bug_id, 'view_state',
-									$t_old_data->view_state, $p_bug_data->view_state );
-		history_log_event_direct( $p_bug_id, 'summary',
-									$t_old_data->summary, $p_bug_data->summary );
+		history_log_event_direct( $p_bug_id, 'project_id', $t_old_data->project_id, $p_bug_data->project_id );
+		history_log_event_direct( $p_bug_id, 'reporter_id', $t_old_data->reporter_id, $p_bug_data->reporter_id );
+		history_log_event_direct( $p_bug_id, 'handler_id', $t_old_data->handler_id, $p_bug_data->handler_id );
+		history_log_event_direct( $p_bug_id, 'duplicate_id', $t_old_data->duplicate_id, $p_bug_data->duplicate_id );
+		history_log_event_direct( $p_bug_id, 'priority', $t_old_data->priority, $p_bug_data->priority );
+		history_log_event_direct( $p_bug_id, 'severity', $t_old_data->severity, $p_bug_data->severity );
+		history_log_event_direct( $p_bug_id, 'reproducibility', $t_old_data->reproducibility, $p_bug_data->reproducibility );
+		history_log_event_direct( $p_bug_id, 'status', $t_old_data->status, $p_bug_data->status );
+		history_log_event_direct( $p_bug_id, 'resolution', $t_old_data->resolution, $p_bug_data->resolution );
+		history_log_event_direct( $p_bug_id, 'projection', $t_old_data->projection, $p_bug_data->projection );
+		history_log_event_direct( $p_bug_id, 'category', $t_old_data->category, $p_bug_data->category );
+		history_log_event_direct( $p_bug_id, 'eta',	$t_old_data->eta, $p_bug_data->eta );
+		history_log_event_direct( $p_bug_id, 'os', $t_old_data->os, $p_bug_data->os );
+		history_log_event_direct( $p_bug_id, 'os_build', $t_old_data->os_build, $p_bug_data->os_build );
+		history_log_event_direct( $p_bug_id, 'platform', $t_old_data->platform, $p_bug_data->platform );
+		history_log_event_direct( $p_bug_id, 'version', $t_old_data->version, $p_bug_data->version );
+		history_log_event_direct( $p_bug_id, 'build', $t_old_data->build, $p_bug_data->build );
+		history_log_event_direct( $p_bug_id, 'view_state', $t_old_data->view_state, $p_bug_data->view_state );
+		history_log_event_direct( $p_bug_id, 'summary', $t_old_data->summary, $p_bug_data->summary );
 
 
 		# Update extended info if requested
@@ -538,11 +514,11 @@
 
 			$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
 
-			$query = "UPDATE $t_bug_text_table ".
-						"SET description='$c_bug_data->description', ".
-						"steps_to_reproduce='$c_bug_data->steps_to_reproduce', ".
-						"additional_information='$c_bug_data->additional_information' ".
-						"WHERE id='$t_bug_text_id'";
+			$query = "UPDATE $t_bug_text_table
+						SET description='$c_bug_data->description',
+							steps_to_reproduce='$c_bug_data->steps_to_reproduce',
+							additional_information='$c_bug_data->additional_information'
+						WHERE id='$t_bug_text_id'";
 			db_query( $query );
 
 			bug_text_clear_cache( $p_bug_id );
@@ -620,9 +596,7 @@
 		}
 
 		$t_bug_data = new BugData;
-
 		$t_row_keys = array_keys( $row );
-
 		$t_vars = get_object_vars( $t_bug_data );
 
 		# Check each variable in the class
@@ -681,7 +655,6 @@
 		}
 
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
-
 		$query = "SELECT COUNT(*)
 				  FROM $t_bugnote_table
 				  WHERE bug_id ='$c_bug_id' $t_restriction";
@@ -694,9 +667,8 @@
 	# return the timestamp for the most recent time at which a bugnote
 	#  associated wiht the bug was modified
 	function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
-		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
+		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$t_bugnote_table	= config_get( 'mantis_bugnote_table' );
 
 		$query = "SELECT last_modified
 				  FROM $t_bugnote_table
@@ -704,7 +676,8 @@
 				  ORDER BY last_modified DESC";
 		$result = db_query( $query, 1 );
 		$row = db_result( $result );
-		if ( $row == false ) {
+
+		if ( false === $row ) {
 			return false;
 		} else {
 			return db_unixtimestamp( $row );
@@ -784,7 +757,7 @@
 			history_log_event_direct( $c_bug_id, 'handler_id', $h_handler_id, $p_user_id );
 
 			# Add bugnote if supplied
-			if ( $p_bugnote_text != '' ) {
+			if ( !is_blank( $p_bugnote_text ) ) {
 				bugnote_add( $p_bug_id, $p_bugnote_text );
 			}
 
@@ -802,13 +775,13 @@
 
 	# --------------------
 	# close the given bug
-	function bug_close( $p_bug_id, $p_bugnote_text='' ) {
+	function bug_close( $p_bug_id, $p_bugnote_text = '' ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
 		bug_set_field( $p_bug_id, 'status', CLOSED );
 
 		# Add bugnote if supplied
-		if ( $p_bugnote_text != '' ) {
+		if ( !is_blank( $p_bugnote_text ) ) {
 			bugnote_add( $p_bug_id, $p_bugnote_text );
 		}
 
@@ -835,7 +808,7 @@
 		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 
 		# Add bugnote if supplied
-		if ( '' != $p_bugnote_text ) {
+		if ( !is_blank( $p_bugnote_text ) ) {
 			bugnote_add( $p_bug_id, $p_bugnote_text );
 		}
 
@@ -853,7 +826,7 @@
 		bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );
 
 		# Add bugnote if supplied
-		if ( '' != $p_bugnote_text ) {
+		if ( !is_blank( $p_bugnote_text ) ) {
 			bugnote_add( $p_bug_id, $p_bugnote_text );
 		}
 

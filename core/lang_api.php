@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.20 2004-04-08 18:04:53 prescience Exp $
+	# $Id: lang_api.php,v 1.21 2004-04-08 22:44:59 prescience Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -100,7 +100,7 @@
 		global $g_loaded_language, $g_current_language;
 
 		# Load the language, if necessary
-		if ( '' == $g_current_language ) {
+		if ( is_blank( $g_current_language ) ) {
 			lang_load_default();
 		}
 		else if ( $g_current_language !== $g_loaded_language ) {
