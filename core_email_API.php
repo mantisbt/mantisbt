@@ -195,7 +195,7 @@
 
 		# chop off the last comma and add a \n
 		if ( strlen( $t_bcc ) > 5 ) {
-			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? '\n' : '');  ## win-bcc-bug
+			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? "\n" : '');  ## win-bcc-bug
 		} else {
 			return '';
 		}
@@ -220,9 +220,9 @@
 
 		# Build Welcome Message
 		$t_message = $s_new_account_greeting.
-						$s_new_account_url.$g_path.'\n'.
-						$s_new_account_username.$v_username.'\n'.
-						$s_new_account_password.$p_password.'\n\n'.
+						$s_new_account_url.$g_path."\n".
+						$s_new_account_username.$v_username."\n".
+						$s_new_account_password.$p_password."\n\n".
 						$s_new_account_message.
 						$s_new_account_do_not_reply;
 
@@ -246,10 +246,10 @@
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		# Build Welcome Message
-		$t_message = $s_reset_request_msg.'\n\n'.
-					$s_account_name_msg.': '.$v_username.'\n'.
-					$s_news_password_msg.': '.$p_password.'\n\n'.
-					$g_path.'\n\n';
+		$t_message = $s_reset_request_msg."\n\n".
+					$s_account_name_msg.': '.$v_username."\n".
+					$s_news_password_msg.': '.$p_password."\n\n".
+					$g_path."\n\n";
 
 		email_send( $v_email, 'New Password', $t_message );
 	}
@@ -364,38 +364,38 @@
 		$t_pri_str = get_enum_element( 'priority', $v_priority );
 		$t_sta_str = get_enum_element( 'status', $v_status );
 		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
-		$t_message = $g_email_separator1.'\n';
+		$t_message = $g_email_separator1."\n";
 		if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == get_current_user_pref_field( 'advanced_view' ) ) ) {
 			$t_message .= $g_view_bug_advanced_page;
 		} else {
 			$t_message .= $g_view_bug_page;
 		}
-		$t_message .= '?f_id='.$p_bug_id.'\n';
-		$t_message .= $g_email_separator1.'\n';
-		$t_message .= str_pd( $s_email_reporter.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name.'\n';
-		$t_message .= str_pd( $s_email_handler.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name.'\n';
-		$t_message .= $g_email_separator1.'\n';
-		$t_message .= str_pd( $s_email_project.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name.'\n';
-		$t_message .= str_pd( $s_email_bug.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_id.'\n';
-		$t_message .= str_pd( $s_email_category.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_category.'\n';
-		$t_message .= str_pd( $s_email_reproducibility.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str.'\n';
-		$t_message .= str_pd( $s_email_severity.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str.'\n';
-		$t_message .= str_pd( $s_email_priority.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str.'\n';
-		$t_message .= str_pd( $s_email_status.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str.'\n';
+		$t_message .= '?f_id='.$p_bug_id."\n";
+		$t_message .= $g_email_separator1."\n";
+		$t_message .= str_pd( $s_email_reporter.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
+		$t_message .= str_pd( $s_email_handler.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
+		$t_message .= $g_email_separator1."\n";
+		$t_message .= str_pd( $s_email_project.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name."\n";
+		$t_message .= str_pd( $s_email_bug.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_id."\n";
+		$t_message .= str_pd( $s_email_category.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_category."\n";
+		$t_message .= str_pd( $s_email_reproducibility.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str."\n";
+		$t_message .= str_pd( $s_email_severity.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
+		$t_message .= str_pd( $s_email_priority.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
+		$t_message .= str_pd( $s_email_status.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
 		if ( RESOLVED == $v_status ) {
 			$t_res_str = get_enum_element( 'resolution', $v_resolution );
-			$t_message .= str_pd( $s_email_resolution.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str.'\n';
+			$t_message .= str_pd( $s_email_resolution.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
 			if ( DUPLICATE == $v_resolution ) {
-				$t_message .= str_pd( $s_email_duplicate.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id.'\n';
+				$t_message .= str_pd( $s_email_duplicate.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";
 			}
 		}
-		$t_message .= $g_email_separator1.'\n';
-		$t_message .= str_pd( $s_email_date_submitted.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted.'\n';
-		$t_message .= str_pd( $s_email_last_modified.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated.'\n';
-		$t_message .= $g_email_separator1.'\n';
-		$t_message .= str_pd( $s_email_summary.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary.'\n';
-		$t_message .= '$s_email_description: \n'.wordwrap( $v2_description ).'\n';
-		$t_message .= $g_email_separator1.'\n\n';
+		$t_message .= $g_email_separator1."\n";
+		$t_message .= str_pd( $s_email_date_submitted.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted."\n";
+		$t_message .= str_pd( $s_email_last_modified.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
+		$t_message .= $g_email_separator1."\n";
+		$t_message .= str_pd( $s_email_summary.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
+		$t_message .= "$s_email_description: \n".wordwrap( $v2_description )."\n";
+		$t_message .= $g_email_separator1."\n\n";
 
 		return $t_message;
 	}
@@ -434,10 +434,10 @@
 			$t_note = string_email( $t_note );
 			$t_last_modified = date( $g_complete_date_format, $t_last_modified );
 			$t_string = ' '.$t_username.' - '.$t_last_modified.' ';
-			$t_message = $t_message.$g_email_separator2.'\n';
-			$t_message = $t_message.$t_string.'\n';
-			$t_message = $t_message.$g_email_separator2.'\n';
-			$t_message = $t_message.wordwrap( $t_note ).'\n\n';
+			$t_message = $t_message.$g_email_separator2."\n";
+			$t_message = $t_message.$t_string."\n";
+			$t_message = $t_message.$g_email_separator2."\n";
+			$t_message = $t_message.wordwrap( $t_note )."\n\n";
 		}
 		return $t_message;
 	}
@@ -451,7 +451,7 @@
 		$p_subject = email_build_subject( $p_bug_id );
 
 		# build message
-		$t_message = $p_message.'\n';
+		$t_message = $p_message."\n";
 		$t_message .= email_build_bug_message( $p_bug_id );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 
@@ -535,7 +535,7 @@
 			}
 
 			$mail->Subject = $t_subject;
-			$mail->Body    = make_lf_crlf( '\n'.$t_message );
+			$mail->Body    = make_lf_crlf( "\n".$t_message );
 
 			if( !$mail->Send() ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
@@ -550,12 +550,12 @@
 			#$t_headers .= "Reply-To: $p_reply_to_email\n";
 
 			$t_headers .= "X-Sender: <$g_from_email>\n";
-			$t_headers .= 'X-Mailer: PHP/'.phpversion().'\n';
+			$t_headers .= 'X-Mailer: PHP/'.phpversion()."\n";
 			if ( ON == $g_use_x_priority ) {
-				$t_headers .= 'X-Priority: 0\n';    # Urgent = 1, Not Urgent = 5, Disable = 0
+				$t_headers .= "X-Priority: 0\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
 			}
 			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
-			$t_headers .= 'Content-Type: text/plain; charset=' . $s_charset . '\n';
+			$t_headers .= 'Content-Type: text/plain; charset=' . $s_charset . "\n";
 
 			$t_headers .= $p_header;
 
@@ -610,8 +610,8 @@
 		global $g_mail_send_crlf;
 
 		if ( ON == $g_mail_send_crlf ) {
-			$p_string = str_replace( '\n', '\r\n', $p_string );
-			return str_replace( '\r\r\n', '\r\n', $p_string );
+			$p_string = str_replace( "\n", "\r\n", $p_string );
+			return str_replace( "\r\r\n", "\r\n", $p_string );
 		} else {
 			return $p_string;
 		}
