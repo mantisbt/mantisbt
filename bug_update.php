@@ -6,11 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.36 $
-	# $Author: jfitzell $
-	# $Date: 2002-10-20 23:59:48 $
-	#
-	# $Id: bug_update.php,v 1.36 2002-10-20 23:59:48 jfitzell Exp $
+	# $Id: bug_update.php,v 1.37 2002-10-27 23:35:40 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,12 +15,14 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bug_id = gpc_get_int( 'f_bug_id' );
+
 	project_access_check( $f_bug_id );
-	check_access( $g_update_bug_threshold );
+	check_access( config_get( 'update_bug_threshold' ) );
+	bug_ensure_exists( $f_bug_id );
 
 	$c_bug_id = (integer)$f_bug_id;
 
-	bug_ensure_exists( $f_bug_id );
 
 	# extract current extended information into history variables
 	$row = bug_get_extended_row( $f_bug_id );
@@ -86,8 +84,10 @@
 	$h_steps_to_reproduce		= string_prepare_textarea( $h_steps_to_reproduce );
 	$h_additional_information	= string_prepare_textarea( $h_additional_information );
 
+	$t_bug_table = config_get( 'mantis_bug_table' );
+
 	# Update all fields
-    $query = "UPDATE $g_mantis_bug_table
+    $query = "UPDATE $t_bug_table
     		SET category='$c_category',
     			severity='$c_severity',
     			reproducibility='$c_reproducibility',
@@ -109,9 +109,11 @@
     		WHERE id='$c_bug_id'";
    	$result = db_query($query);
 
+	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+
 	# These fields are not changed as often as the assigned person, priority, status, etc.
 	if ( ( $c_description != $h_description ) || ( $c_steps_to_reproduce != $h_steps_to_reproduce ) || ( $c_additional_information != $h_additional_information ) ) {
-	    $query = "UPDATE $g_mantis_bug_text_table ".
+	    $query = "UPDATE $t_bug_text_table ".
 					"SET description='$c_description', ".
 					"steps_to_reproduce='$c_steps_to_reproduce', ".
 					"additional_information='$c_additional_information' ".

@@ -6,11 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.2 $
-	# $Author: jfitzell $
-	# $Date: 2002-10-20 23:59:48 $
-	#
-	# $Id: bug_view_inc.php,v 1.2 2002-10-20 23:59:48 jfitzell Exp $
+	# $Id: bug_view_inc.php,v 1.3 2002-10-27 23:35:40 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,17 +15,21 @@
 ?>
 <?php
 	$c_bug_id = (integer)$f_bug_id;
+	$t_bug_table = config_get( 'mantis_bug_table' );
+
 	$query ="SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted, ".
 			"UNIX_TIMESTAMP(last_updated) as last_updated ".
-			"FROM $g_mantis_bug_table ".
+			"FROM $t_bug_table ".
 			"WHERE id='$c_bug_id' ".
 			"LIMIT 1";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
+	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+
 	$query ="SELECT * ".
-			"FROM $g_mantis_bug_text_table ".
+			"FROM $t_bug_text_table ".
 			"WHERE id='$v_bug_text_id' ".
 			"LIMIT 1";
 	$result = db_query( $query );
@@ -49,27 +49,27 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="6">
-		<?php echo $s_viewing_bug_simple_details_title ?>
+		<?php echo lang_get( 'viewing_bug_simple_details_title' ) ?>
 	</td>
 </tr>
 <tr>
 	<td class="category" width="15%">
-		<?php echo $s_id ?>
+		<?php echo lang_get( 'id' ) ?>
 	</td>
 	<td class="category" width="20%">
-		<?php echo $s_category ?>
+		<?php echo lang_get( 'category' ) ?>
 	</td>
 	<td class="category" width="15%">
-		<?php echo $s_severity ?>
+		<?php echo lang_get( 'severity' ) ?>
 	</td>
 	<td class="category" width="20%">
-		<?php echo $s_reproducibility ?>
+		<?php echo lang_get( 'reproducibility' ) ?>
 	</td>
 	<td class="category" width="15%">
-		<?php echo $s_date_submitted ?>
+		<?php echo lang_get( 'date_submitted' ) ?>
 	</td>
 	<td class="category" width="15%">
-		<?php echo $s_last_update ?>
+		<?php echo lang_get( 'last_update' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -99,7 +99,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_reporter ?>
+		<?php echo lang_get( 'reporter' ) ?>
 	</td>
 	<td colspan="5">
 		<?php print_user( $v_reporter_id ) ?>
@@ -107,7 +107,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_assigned_to ?>
+		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td colspan="5">
 		<?php print_user( $v_handler_id ) ?>
@@ -115,13 +115,13 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_priority ?>
+		<?php echo lang_get( 'priority' ) ?>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'priority', $v_priority ) ?>
 	</td>
 	<td class="category">
-		<?php echo $s_resolution ?>
+		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
@@ -132,13 +132,13 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_status ?>
+		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td bgcolor="<?php echo get_status_color( $v_status ) ?>">
 		<?php echo get_enum_element( 'status', $v_status ) ?>
 	</td>
 	<td class="category">
-		<?php echo $s_duplicate_id ?>
+		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
 		<?php print_duplicate_id( $v_duplicate_id ) ?>
@@ -154,7 +154,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_summary ?>
+		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
 		<?php echo $v_summary ?>
@@ -162,7 +162,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_description ?>
+		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
 		<?php echo $v2_description ?>
@@ -170,7 +170,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_additional_information ?>
+		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
 		<?php echo $v2_additional_information ?>

@@ -6,11 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.33 $
-	# $Author: jfitzell $
-	# $Date: 2002-10-20 23:59:48 $
-	#
-	# $Id: bug_update_advanced_page.php,v 1.33 2002-10-20 23:59:48 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.34 2002-10-27 23:35:40 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,31 +15,35 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	if ( SIMPLE_ONLY == $g_show_update ) {
+	if ( SIMPLE_ONLY == config_get( 'show_update' ) ) {
 		print_header_redirect ( 'bug_update_page.php?f_bug_id='.$f_bug_id );
 	}
 
 	$f_bug_id		= gpc_get_int( 'f_bug_id' );
 
 	project_access_check( $f_bug_id );
-	check_access( $g_update_bug_threshold );
+	check_access( config_get( 'update_bug_threshold' ) );
 	bug_ensure_exists( $f_bug_id );
 
 	$c_bug_id = (integer)$f_bug_id;
 
-    $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-    		UNIX_TIMESTAMP(last_updated) as last_updated
-    		FROM $g_mantis_bug_table
-    		WHERE id='$c_bug_id'";
-    $result = db_query( $query );
+	$t_bug_table = config_get( 'mantis_bug_table' );
+
+	$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
+			UNIX_TIMESTAMP(last_updated) as last_updated
+			FROM $t_bug_table
+			WHERE id='$c_bug_id'";
+	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 	# if bug is private, make sure user can view private bugs
 	access_bug_check( $f_bug_id, $v_view_state );
 
-    $query = "SELECT *
-    		FROM $g_mantis_bug_text_table
+	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+
+	$query = "SELECT *
+    		FROM $t_bug_text_table
     		WHERE id='$v_bug_text_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
@@ -69,36 +69,36 @@
 		<input type="hidden" name="f_bug_id" value="<?php echo $v_id ?>" />
 		<input type="hidden" name="f_old_status" value="<?php echo $v_status ?>" />
 		<input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>" />
-		<?php echo $s_updating_bug_advanced_title ?>
+		<?php echo lang_get( 'updating_bug_advanced_title' ) ?>
 	</td>
 	<td class="right" colspan="3">
 <?php
-	print_bracket_link( string_get_bug_view_url( $f_bug_id ), $s_back_to_bug_link );
+	print_bracket_link( string_get_bug_view_url( $f_bug_id ), lang_get( 'back_to_bug_link' ) );
 
-	if ( BOTH == $g_show_update ) {
-		print_bracket_link( 'bug_update_page.php?f_bug_id='.$f_bug_id, $s_update_simple_link );
+	if ( BOTH == config_get( 'show_update' ) ) {
+		print_bracket_link( 'bug_update_page.php?f_bug_id='.$f_bug_id, lang_get( 'update_simple_link' ) );
 	}
 ?>
 	</td>
 </tr>
 <tr class="row-category">
 	<td width="15%">
-		<?php echo $s_id ?>
+		<?php echo lang_get( 'id' ) ?>
 	</td>
 	<td width="20%">
-		<?php echo $s_category ?>
+		<?php echo lang_get( 'category' ) ?>
 	</td>
 	<td width="15%">
-		<?php echo $s_severity ?>
+		<?php echo lang_get( 'severity' ) ?>
 	</td>
 	<td width="20%">
-		<?php echo $s_reproducibility ?>
+		<?php echo lang_get( 'reproducibility' ) ?>
 	</td>
 	<td width="15%">
-		<?php echo $s_date_submitted ?>
+		<?php echo lang_get( 'date_submitted' ) ?>
 	</td>
 	<td width="15%">
-		<?php echo $s_last_update ?>
+		<?php echo lang_get( 'last_update' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -134,7 +134,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_reporter ?>
+		<?php echo lang_get( 'reporter' ) ?>
 	</td>
 	<td>
 		<select name="f_reporter_id">
@@ -142,7 +142,7 @@
 		</select>
 	</td>
 	<td class="category">
-		<?php echo $s_view_status ?>
+		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
 		<select name="f_view_state">
@@ -155,7 +155,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_assigned_to ?>
+		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td colspan="5">
 		<select name="f_handler_id">
@@ -166,7 +166,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_priority ?>
+		<?php echo lang_get( 'priority' ) ?>
 	</td>
 	<td align="left">
 		<select name="f_priority">
@@ -174,13 +174,13 @@
 		</select>
 	</td>
 	<td class="category">
-		<?php echo $s_resolution ?>
+		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
 	<td class="category">
-		<?php echo $s_platform ?>
+		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td>
 		<input type="text" name="f_platform" size="16" maxlength="32" value="<?php echo $v_platform ?>" />
@@ -188,7 +188,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_status ?>
+		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td bgcolor="<?php echo get_status_color( $v_status ) ?>">
 		<select name="f_status">
@@ -196,13 +196,13 @@
 		</select>
 	</td>
 	<td class="category">
-		<?php echo $s_duplicate_id ?>
+		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
 		<?php echo $v_duplicate_id ?>
 	</td>
 	<td class="category">
-		<?php echo $s_os ?>
+		<?php echo lang_get( 'os' ) ?>
 	</td>
 	<td>
 		<input type="text" name="f_os" size="16" maxlength="32" value="<?php echo $v_os ?>" />
@@ -210,7 +210,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_projection ?>
+		<?php echo lang_get( 'projection' ) ?>
 	</td>
 	<td>
 		<select name="f_projection">
@@ -221,7 +221,7 @@
 		&nbsp;
 	</td>
 	<td class="category">
-		<?php echo $s_os_version ?>
+		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
 		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $v_os_build ?>" />
@@ -229,7 +229,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_eta ?>
+		<?php echo lang_get( 'eta' ) ?>
 	</td>
 	<td>
 		<select name="f_eta">
@@ -240,7 +240,7 @@
 		&nbsp;
 	</td>
 	<td class="category">
-		<?php echo $s_product_version ?>
+		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
 		<select name="f_version">
@@ -253,7 +253,7 @@
 		&nbsp;
 	</td>
 	<td class="category">
-		<?php echo $s_build ?>
+		<?php echo lang_get( 'build' ) ?>
 	</td>
 	<td>
 		<input type="text" name="f_build" size="16" maxlength="32" value="<?php echo $v_build ?>" />
@@ -264,7 +264,7 @@
 		&nbsp;
 	</td>
 	<td class="category">
-		<?php echo $s_votes ?>
+		<?php echo lang_get( 'votes' ) ?>
 	</td>
 	<td>
 		<?php echo $v_votes ?>
@@ -277,7 +277,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_summary ?>
+		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
 		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $v_summary ?>" />
@@ -285,7 +285,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_description ?>
+		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
 		<textarea cols="60" rows="5" name="f_description" wrap="virtual"><?php echo $v2_description ?></textarea>
@@ -293,7 +293,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_steps_to_reproduce ?>
+		<?php echo lang_get( 'steps_to_reproduce' ) ?>
 	</td>
 	<td colspan="5">
 		<textarea cols="60" rows="5" name="f_steps_to_reproduce" wrap="virtual"><?php echo $v2_steps_to_reproduce ?></textarea>
@@ -301,7 +301,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_additional_information ?>
+		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
 		<textarea cols="60" rows="5" name="f_additional_information" wrap="virtual"><?php echo $v2_additional_information ?></textarea>
@@ -314,16 +314,16 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_add_bugnote_title ?>
+		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
 	<td colspan="5">
 		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
-<?php if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ) ) ) { ?>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_private ?>
+		<?php echo lang_get( 'private' ) ?>
 	</td>
 	<td>
 		<input type="checkbox" name="f_private" />
@@ -332,7 +332,7 @@
 <?php } ?>
 <tr>
 	<td class="center" colspan="6"">
-		<input type="submit" value="<?php echo $s_update_information_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'update_information_button' ) ?>" />
 	</td>
 </tr>
 </table>

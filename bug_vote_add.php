@@ -4,6 +4,10 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: bug_vote_add.php,v 1.14 2002-10-27 23:35:40 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php die('Not in use.'); ?>
 <?php require_once( 'core.php' ) ?>
@@ -16,7 +20,10 @@
 
 	# increase vote count and update in table
 	$f_vote++;
-    $query = "UPDATE $g_mantis_bug_table
+
+	$t_bug_table = config_get( 'mantis_bug_table' );
+	
+	$query = "UPDATE $t_bug_table
     		SET votes=$c_vote
     		WHERE id='$c_bug_id'";
    	$result = db_query($query);
