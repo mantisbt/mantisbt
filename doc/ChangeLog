@@ -36,6 +36,7 @@ Mantis
  * Modified g_hide_user_email to be g_show_user_email and have different usage modes.
  * Modified phpmailer AddAddress in email sending to allow for multiple to recipients.
  * Added Hungarian translation.
+ * Added Japanese translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
  * Added a global option to control what access levels can delete bugs.
