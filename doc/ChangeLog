@@ -105,6 +105,10 @@ Mantis ChangeLog
  * Added $g_delete_bugnote_threshold.
  * Added $g_update_bug_threshold.
  * Added partial support to "Publish Bugs".  A user can publish a bug by generating a URL for it which includes CRC checksum, this link can then be used to open this bug even if the user is not logged into Mantis or does not even have an account.
+ * Added $g_show_detailed_errors
+ * Added $g_show_notices
+ * Added $g_show_warnings
+ * Fixed bug that let you change your username to that of an already existing user
 
 2002.08.23  -  0.17.5
  * Fixed problem where you could see public bugs if all projects were marked private (#2341)
