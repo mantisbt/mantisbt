@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.63 2004-06-24 03:46:44 narcissus Exp $
+	# $Id: bug_api.php,v 1.64 2004-06-26 10:03:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1036,7 +1036,7 @@
 	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version, $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
-		bug_set_field( $p_bug_id, 'status', config_get( 'bug_readonly_status_threshold' ) );
+		bug_set_field( $p_bug_id, 'status', config_get( 'bug_resolved_status_threshold' ) );
 		bug_set_field( $p_bug_id, 'fixed_in_version', $p_fixed_in_version );
 		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
 
