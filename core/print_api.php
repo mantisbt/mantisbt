@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.123 2005-04-04 21:07:02 jlatour Exp $
+	# $Id: print_api.php,v 1.124 2005-04-04 21:09:46 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -785,7 +785,6 @@
 
 		$c_user_id = db_prepare_int( $p_user_id );
 
-		$t_prv = VS_PRIVATE;
 		$query = "SELECT DISTINCT p.id, p.name
 				FROM $t_mantis_project_table p
 				LEFT JOIN $t_mantis_project_user_list_table u
