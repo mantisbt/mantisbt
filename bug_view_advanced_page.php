@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.64 2004-10-16 00:22:39 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.65 2004-10-16 15:32:26 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,6 +66,7 @@
 	<?php
 		}
 	?>
+	</td>
 		<!-- prev/next links -->
 		<?php if( $t_bugslist = gpc_get_cookie( 'bugslist', false ) ) { ?>
 		<td class="center"><span class="small"> 			
