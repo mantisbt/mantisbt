@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.18 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: history_api.php,v 1.19 2004-03-16 11:29:55 yarick123 Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -80,6 +80,27 @@
 	# The array is indexed from 0 to N-1.  The second dimension is: 'date', 'username',
 	# 'note', 'change'.
 	function history_get_events_array( $p_bug_id ) {
+		$t_normal_date_format = config_get( 'normal_date_format' );
+
+		$raw_history = history_get_raw_events_array( $p_bug_id );
+		$raw_history_count = count( $raw_history );
+		$history = array();
+
+		for ( $i=0; $i < $raw_history_count; $i++ ) {
+			$history[$i] = history_localize_item( $raw_history[$i]['field'], $raw_history[$i]['type'], $raw_history[$i]['old_value'], $raw_history[$i]['new_value'] );
+			$history[$i]['date'] = date( $t_normal_date_format, $raw_history[$i]['date'] );
+			$history[$i]['userid'] = $raw_history[$i]['userid'];
+			$history[$i]['username'] = $raw_history[$i]['username'];
+		}
+
+		return ( $history );
+	}
+
+	# --------------------
+	# Retrieves the raw history events for the specified bug id and returns it in an array
+	# The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
+	# 'field','type','old_value','new_value'
+	function history_get_raw_events_array( $p_bug_id ) {
 		$t_mantis_bug_history_table = config_get( 'mantis_bug_history_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
 		$t_history_order = config_get( 'history_order' );
@@ -93,170 +114,183 @@
 				WHERE bug_id='$c_bug_id'
 				ORDER BY date_modified $t_history_order, field_name ASC";
 		$result = db_query( $query );
-		$history_count = db_num_rows( $result );
-		$history = array();
+		$raw_history_count = db_num_rows( $result );
+		$raw_history = array();
 
-		for ( $i=0; $i < $history_count; $i++ ) {
+		for ( $i=0; $i < $raw_history_count; ++$i ) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$v_date_modified = date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_modified ) );
-
-			switch ( $v_field_name ) {
-			case 'category':
-				$t_field_localized = lang_get( 'category' );
-				break;
-			case 'status':
-				$v_old_value = get_enum_element( 'status', $v_old_value );
-				$v_new_value = get_enum_element( 'status', $v_new_value );
-				$t_field_localized = lang_get( 'status' );
-				break;
-			case 'severity':
-				$v_old_value = get_enum_element( 'severity', $v_old_value );
-				$v_new_value = get_enum_element( 'severity', $v_new_value );
-				$t_field_localized = lang_get( 'severity' );
-				break;
-			case 'reproducibility':
-				$v_old_value = get_enum_element( 'reproducibility', $v_old_value );
-				$v_new_value = get_enum_element( 'reproducibility', $v_new_value );
-				$t_field_localized = lang_get( 'reproducibility' );
-				break;
-			case 'resolution':
-				$v_old_value = get_enum_element( 'resolution', $v_old_value );
-				$v_new_value = get_enum_element( 'resolution', $v_new_value );
-				$t_field_localized = lang_get( 'resolution' );
-				break;
-			case 'priority':
-				$v_old_value = get_enum_element( 'priority', $v_old_value );
-				$v_new_value = get_enum_element( 'priority', $v_new_value );
-				$t_field_localized = lang_get( 'priority' );
-				break;
-			case 'eta':
-				$v_old_value = get_enum_element( 'eta', $v_old_value );
-				$v_new_value = get_enum_element( 'eta', $v_new_value );
-				$t_field_localized = lang_get( 'eta' );
-				break;
-			case 'view_state':
-				$v_old_value = get_enum_element( 'view_state', $v_old_value );
-				$v_new_value = get_enum_element( 'view_state', $v_new_value );
-				$t_field_localized = lang_get( 'view_status' );
-				break;
-			case 'projection':
-				$v_old_value = get_enum_element( 'projection', $v_old_value );
-				$v_new_value = get_enum_element( 'projection', $v_new_value );
-				$t_field_localized = lang_get( 'projection' );
-				break;
-			case 'project_id':
-				if ( project_exists( $v_old_value ) ) {
-					$v_old_value = project_get_field( $v_old_value, 'name' );
-				} else {
-					$v_old_value = '@'.$v_old_value.'@';
-				}
-
-				// Note that the new value maybe an intermediately project and not the 
-				// current one.
-				if ( project_exists( $v_new_value ) ) {
-					$v_new_value = project_get_field( $v_new_value, 'name' );
-				} else {
-					$v_new_value = '@'.$v_new_value.'@';
-				}
-				$t_field_localized = lang_get( 'email_project' );
-				break;
-			case 'handler_id':
-				$t_field_localized = lang_get( 'assigned_to' );
-			case 'reporter_id':
-				if ( 'reporter_id' == $v_field_name ) {
-					$t_field_localized = lang_get( 'reporter' );
-				}
-				if ( 0 == $v_old_value ) {
-					$v_old_value = '';
-				} else {
-					$v_old_value = user_get_name( $v_old_value );
-				}
-
-				if ( 0 == $v_new_value ) {
-					$v_new_value = '';
-				} else {
-					$v_new_value = user_get_name( $v_new_value );
-				}
-				break;
-			default:
-				$t_field_localized = $v_field_name;
-				break;
-			}
-
-			if ( NORMAL_TYPE != $v_type ) {
-				switch ( $v_type ) {
-				case NEW_BUG:
-					$t_note = lang_get( 'new_bug' );
-					break;
-				case BUGNOTE_ADDED:
-					$t_note = lang_get( 'bugnote_added' ) . ": " . $v_old_value;
-					break;
-				case BUGNOTE_UPDATED:
-					$t_note = lang_get( 'bugnote_edited' ) . ": " . $v_old_value;
-					break;
-				case BUGNOTE_DELETED:
-					$t_note = lang_get( 'bugnote_deleted' ) . ": " . $v_old_value;
-					break;
-				case SUMMARY_UPDATED:
-					$t_note = lang_get( 'summary_updated' );
-					break;
-				case DESCRIPTION_UPDATED:
-					$t_note = lang_get( 'description_updated' );
-					break;
-				case ADDITIONAL_INFO_UPDATED:	
-					$t_note = lang_get( 'additional_information_updated' );
-					break;
-				case STEP_TO_REPRODUCE_UPDATED:	
-					$t_note = lang_get( 'steps_to_reproduce_updated' );
-					break;
-				case FILE_ADDED:
-					$t_note = lang_get( 'file_added' ) . ": " . $v_old_value;
-					break;
-				case FILE_DELETED:
-					$t_note = lang_get( 'file_deleted' ) . ": " . $v_old_value;
-					break;
-				case BUGNOTE_STATE_CHANGED:
-					$v_old_value = get_enum_element( 'view_state', $v_old_value );
-					$t_note = lang_get( 'bugnote_view_state' ) . ": " . $v_old_value . ": " . $v_new_value;
-					break;
-				case BUG_MONITOR:
-					$v_old_value = user_get_field( $v_old_value, 'username' );
-					$t_note = lang_get( 'bug_monitor' ) . ": " . $v_old_value;
-					break;
-				case BUG_UNMONITOR:
-					$v_old_value = user_get_field( $v_old_value, 'username' );
-					$t_note = lang_get( 'bug_end_monitor' ) . ": " . $v_old_value;
-					break;
-				case BUG_DELETED:
-					$t_note = lang_get( 'bug_deleted' ) . ": " . $v_old_value;
-					break;
-				}
-			}
-
-			$history[$i]['date'] = $v_date_modified;
-			$history[$i]['userid'] = $v_user_id;
+			$raw_history[$i]['date'] = db_unixtimestamp( $v_date_modified );
+			$raw_history[$i]['userid'] = $v_user_id;
 
 			# $v_username will be empty, if user no longer exists.
 			if ( '' == $v_username ) {
-				$history[$i]['username'] = user_get_name( $v_user_id );
+				$raw_history[$i]['username'] = user_get_name( $v_user_id );
 			} else {
-				$history[$i]['username'] = $v_username;
+				$raw_history[$i]['username'] = $v_username;
 			}
 
-			# output special cases
-			if ( NORMAL_TYPE != $v_type ) {
-				$history[$i]['note'] = $t_note;
-				$history[$i]['change'] = '';
-			} else {   # output normal changes
-				$history[$i]['note'] = $t_field_localized;
-				$history[$i]['change'] = $v_old_value . ' => ' . $v_new_value;
-			} # end if DEFAULT
+			$raw_history[$i]['field'] = $v_field_name;
+			$raw_history[$i]['type']  = $v_type;
+			$raw_history[$i]['old_value'] = $v_old_value;
+			$raw_history[$i]['new_value'] = $v_new_value;
+
 		} # end for loop
 
-		return ( $history );
+		return ( $raw_history );
 	}
+
+	# --------------------
+	# Localizes one raw history item specified by set the next parameters: $p_field_name, $p_type, $p_old_value, $p_new_value
+	# Returns array with two elements indexed as 'note' and 'change'
+	#
+	function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value )
+	{
+		$t_note = '';
+		$t_field_localized = $p_field_name;
+
+		switch ( $p_field_name ) {
+		case 'category':
+			$t_field_localized = lang_get( 'category' );
+			break;
+		case 'status':
+			$p_old_value = get_enum_element( 'status', $p_old_value );
+			$p_new_value = get_enum_element( 'status', $p_new_value );
+			$t_field_localized = lang_get( 'status' );
+			break;
+		case 'severity':
+			$p_old_value = get_enum_element( 'severity', $p_old_value );
+			$p_new_value = get_enum_element( 'severity', $p_new_value );
+			$t_field_localized = lang_get( 'severity' );
+			break;
+		case 'reproducibility':
+			$p_old_value = get_enum_element( 'reproducibility', $p_old_value );
+			$p_new_value = get_enum_element( 'reproducibility', $p_new_value );
+			$t_field_localized = lang_get( 'reproducibility' );
+			break;
+		case 'resolution':
+			$p_old_value = get_enum_element( 'resolution', $p_old_value );
+			$p_new_value = get_enum_element( 'resolution', $p_new_value );
+			$t_field_localized = lang_get( 'resolution' );
+			break;
+		case 'priority':
+			$p_old_value = get_enum_element( 'priority', $p_old_value );
+			$p_new_value = get_enum_element( 'priority', $p_new_value );
+			$t_field_localized = lang_get( 'priority' );
+			break;
+		case 'eta':
+			$p_old_value = get_enum_element( 'eta', $p_old_value );
+			$p_new_value = get_enum_element( 'eta', $p_new_value );
+			$t_field_localized = lang_get( 'eta' );
+			break;
+		case 'view_state':
+			$p_old_value = get_enum_element( 'view_state', $p_old_value );
+			$p_new_value = get_enum_element( 'view_state', $p_new_value );
+			$t_field_localized = lang_get( 'view_status' );
+			break;
+		case 'projection':
+			$p_old_value = get_enum_element( 'projection', $p_old_value );
+			$p_new_value = get_enum_element( 'projection', $p_new_value );
+			$t_field_localized = lang_get( 'projection' );
+			break;
+		case 'project_id':
+			if ( project_exists( $p_old_value ) ) {
+				$p_old_value = project_get_field( $p_old_value, 'name' );
+			} else {
+				$p_old_value = '@'.$p_old_value.'@';
+			}
+
+			// Note that the new value maybe an intermediately project and not the
+			// current one.
+			if ( project_exists( $p_new_value ) ) {
+				$p_new_value = project_get_field( $p_new_value, 'name' );
+			} else {
+				$p_new_value = '@'.$p_new_value.'@';
+			}
+			$t_field_localized = lang_get( 'email_project' );
+			break;
+		case 'handler_id':
+			$t_field_localized = lang_get( 'assigned_to' );
+		case 'reporter_id':
+			if ( 'reporter_id' == $p_field_name ) {
+				$t_field_localized = lang_get( 'reporter' );
+			}
+			if ( 0 == $p_old_value ) {
+				$p_old_value = '';
+			} else {
+				$p_old_value = user_get_name( $p_old_value );
+			}
+
+			if ( 0 == $p_new_value ) {
+				$p_new_value = '';
+			} else {
+				$p_new_value = user_get_name( $p_new_value );
+			}
+			break;
+		}
+
+		if ( NORMAL_TYPE != $p_type ) {
+			switch ( $p_type ) {
+			case NEW_BUG:
+				$t_note = lang_get( 'new_bug' );
+				break;
+			case BUGNOTE_ADDED:
+				$t_note = lang_get( 'bugnote_added' ) . ": " . $p_old_value;
+				break;
+			case BUGNOTE_UPDATED:
+				$t_note = lang_get( 'bugnote_edited' ) . ": " . $p_old_value;
+				break;
+			case BUGNOTE_DELETED:
+				$t_note = lang_get( 'bugnote_deleted' ) . ": " . $p_old_value;
+				break;
+			case SUMMARY_UPDATED:
+				$t_note = lang_get( 'summary_updated' );
+				break;
+			case DESCRIPTION_UPDATED:
+				$t_note = lang_get( 'description_updated' );
+				break;
+			case ADDITIONAL_INFO_UPDATED:	
+				$t_note = lang_get( 'additional_information_updated' );
+				break;
+			case STEP_TO_REPRODUCE_UPDATED:	
+				$t_note = lang_get( 'steps_to_reproduce_updated' );
+				break;
+			case FILE_ADDED:
+				$t_note = lang_get( 'file_added' ) . ": " . $p_old_value;
+				break;
+			case FILE_DELETED:
+				$t_note = lang_get( 'file_deleted' ) . ": " . $p_old_value;
+				break;
+			case BUGNOTE_STATE_CHANGED:
+				$p_old_value = get_enum_element( 'view_state', $p_old_value );
+				$t_note = lang_get( 'bugnote_view_state' ) . ": " . $p_old_value . ": " . $p_new_value;
+				break;
+			case BUG_MONITOR:
+				$p_old_value = user_get_field( $p_old_value, 'username' );
+				$t_note = lang_get( 'bug_monitor' ) . ": " . $p_old_value;
+				break;
+			case BUG_UNMONITOR:
+				$p_old_value = user_get_field( $p_old_value, 'username' );
+				$t_note = lang_get( 'bug_end_monitor' ) . ": " . $p_old_value;
+				break;
+			case BUG_DELETED:
+				$t_note = lang_get( 'bug_deleted' ) . ": " . $p_old_value;
+				break;
+			}
+		}
+
+		# output special cases
+		if ( NORMAL_TYPE != $p_type ) {
+			$t_change = '';
+		} else {   # output normal changes
+			$t_note = $t_field_localized;
+			$t_change = $p_old_value . ' => ' . $p_new_value;
+		} # end if DEFAULT
+		return array( 'note' => $t_note, 'change' => $t_change );
+	}
+
+
 	# --------------------
 	# delete all history associated with a bug
 	function history_delete( $p_bug_id ) {

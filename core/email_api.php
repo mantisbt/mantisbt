@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.70 2004-03-14 02:08:18 vboctor Exp $
+	# $Id: email_api.php,v 1.71 2004-03-16 11:29:55 yarick123 Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -229,6 +229,7 @@
 		#  of user ids so we could pull them all in.  We'll see if it's necessary
 
 		# Check whether users should receive the emails
+		# and put email address to $t_recipients[user_id]
 		foreach ( $t_recipients as $t_id => $t_ignore ) {
 			# Possibly eliminate the current user
 			if ( auth_get_current_user_id() == $t_id &&
@@ -265,33 +266,6 @@
 		}
 
 		return $t_recipients;
-	}
-
-	# --------------------
-	# Build the bcc list
-	function email_build_bcc_list( $p_bug_id, $p_notify_type ) {
-		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type );
-		
-		if ( !$t_recipients ) {
-			return '';
-		}
-
-		$t_use_bcc			= config_get( 'use_bcc' );
-		$t_use_phpMailer	= config_get( 'use_phpMailer' );
-		
-		## win-bcc-bug
-		$t_bcc = ( $t_use_bcc && !$t_use_phpMailer ) ? 'Bcc: ' : '';
-
-		$t_emails = array_values( $t_recipients );
-
-		$t_bcc .= implode( ', ', $t_emails );
-
-		## win-bcc-bug
-		if ( $t_use_bcc ) {
-			$t_bcc .= "\n";
-		}
-
-		return $t_bcc;
 	}
 
 	# --------------------
@@ -348,10 +322,29 @@
 	# send a generic email
 	# $p_notify_type: use check who she get notified of such event.
 	# $p_message_id: message id to be translated and included at the top of the email message.
+	# Return false if it were problems sending email
 	function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, $p_notify_type );
-		email_bug_info( $p_bug_id, $p_message_id, $t_bcc );
+		$t_ok = true;
+		if ( ON === config_get( 'enable_email_notification' ) ) {
+			ignore_user_abort( true );
+
+			# @@@ yarick123: email_collect_recipients(...) will be completely rewritten to provide additional
+			#     information such as language, user access,..
+			$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type );
+
+			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+
+			if ( is_array( $t_recipients ) ) {
+				foreach ( $t_recipients as $t_user_id => $t_user_email ) {
+					$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
+					$t_ok = email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id ) && $t_ok;
+				}
+			}
+		}
+
+		return $t_ok;
 	}
+
 	# --------------------
 	# send notices when a new bug is added
 	function email_new_bug( $p_bug_id ) {
@@ -388,198 +381,9 @@
 		email_generic( $p_bug_id, 'deleted', 'email_notification_title_for_action_bug_deleted' );
 	}
 	# --------------------
-	# Build the bug info part of the message
-	function email_build_bug_message( $p_bug_id, $p_message_id, &$p_category ) {
-		global 	$g_complete_date_format, $g_show_view,
-				$g_bugnote_order,
-				$g_email_separator1, $g_email_padding_length;
-
-		$row = bug_get_extended_row( $p_bug_id );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-		$t_project_name = project_get_field( $v_project_id, 'name' );
-		$t_reporter_name = user_get_name( $v_reporter_id );
-
-		if ( 0 != $v_handler_id ) {
-			$t_handler_name  = user_get_name( $v_handler_id );
-		} else {
-			$t_handler_name  = '';
-		}
-
-		$v_date_submitted = date( $g_complete_date_format, $v_date_submitted );
-		$v_last_updated   = date( $g_complete_date_format, $v_last_updated );
-
-		$t_sev_str = get_enum_element( 'severity', $v_severity );
-		$t_pri_str = get_enum_element( 'priority', $v_priority );
-		$t_sta_str = get_enum_element( 'status', $v_status );
-		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
-		$t_message = $g_email_separator1."\n";
-		if ( $p_message_id !== 'email_notification_title_for_action_bug_deleted' ) {
-			$t_message .= string_get_bug_view_url_with_fqdn( $p_bug_id ) . "\n";
-			$t_message .= $g_email_separator1."\n";
-		}
-		$t_message .= str_pad( lang_get( 'email_reporter' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_reporter_name."\n";
-		$t_message .= str_pad( lang_get( 'email_handler' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_handler_name."\n";
-		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( lang_get( 'email_project' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_project_name."\n";
-		$t_message .= str_pad( lang_get( 'email_bug' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_id."\n";
-		$t_message .= str_pad( lang_get( 'email_category')  . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_category."\n";
-		$t_message .= str_pad( lang_get( 'email_reproducibility' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_rep_str."\n";
-		$t_message .= str_pad( lang_get( 'email_severity' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_sev_str."\n";
-		$t_message .= str_pad( lang_get( 'email_priority' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_pri_str."\n";
-		$t_message .= str_pad( lang_get( 'email_status' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_sta_str."\n";
-
-		# @@@ Add support for access levels, possible only send the ones that are available for access level EVERYBODY
-		$t_related_custom_field_ids = custom_field_get_linked_ids( $v_project_id );
-		foreach( $t_related_custom_field_ids as $t_id ) {
-			$t_def = custom_field_get_definition( $t_id );
-
-			$t_message .= str_pad( lang_get_defaulted( $t_def['name'] ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT );
-
-			$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );
-			if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {
-				$t_message .= "mailto:$t_custom_field_value";
-			} else {
-				$t_message .= $t_custom_field_value;
-			}
-			$t_message .= "\n";
-		}       // foreach
-
-		if ( RESOLVED == $v_status ) {
-			$t_res_str = get_enum_element( 'resolution', $v_resolution );
-			$t_message .= str_pad( lang_get( 'email_resolution' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_res_str."\n";
-			if ( DUPLICATE == $v_resolution ) {
-				$t_message .= str_pad( lang_get( 'email_duplicate' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_duplicate_id."\n";
-			}
-		}
-		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( lang_get( 'email_date_submitted' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_date_submitted."\n";
-		$t_message .= str_pad( lang_get( 'email_last_modified' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_last_updated."\n";
-		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( lang_get( 'email_summary' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_summary."\n";
-		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $v_description )."\n";
-		$t_message .= $g_email_separator1."\n\n";
-
-		$p_category = '';
-		if ( OFF != config_get( 'email_set_category' ) ) {
-			$p_category = '[' . $t_project_name . '] ' . $v_category;
-		}
-
-		return $t_message;
-	}
-	# --------------------
-	# Build the bugnotes part of the message
-	function email_build_bugnote_message( $p_bug_id ) {
-		global 	$g_mantis_bugnote_table, $g_mantis_bugnote_text_table,
-				$g_complete_date_format,
-				$g_bugnote_order, $g_email_separator2;
-
-		$c_bug_id = (integer)$p_bug_id;
-
-		$t_message = '';
-
-		$t_state = VS_PUBLIC;
-
-		$query = "SELECT *, last_modified
-				FROM $g_mantis_bugnote_table
-				WHERE bug_id='$c_bug_id' AND view_state='$t_state'
-				ORDER BY date_submitted $g_bugnote_order";
-		$result = db_query( $query );
-		$bugnote_count = db_num_rows( $result );
-
-		# BUILT MESSAGE
-		for ( $i=0; $i<$bugnote_count; $i++ ) {
-			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, 't' );
-
-			$query = "SELECT note
-					FROM $g_mantis_bugnote_text_table
-					WHERE id='$t_bugnote_text_id'";
-			$result2 = db_query( $query );
-
-			$t_username = user_get_name( $t_reporter_id );
-
-			$t_note = db_result( $result2, 0, 0 );
-			$t_last_modified = date( $g_complete_date_format, db_unixtimestamp( $t_last_modified ) );
-			$t_string = ' '.$t_username.' - '.$t_last_modified.' ';
-			$t_message = $t_message.$g_email_separator2."\n";
-			$t_message = $t_message.$t_string."\n";
-			$t_message = $t_message.$g_email_separator2."\n";
-			$t_message = $t_message.wordwrap( $t_note )."\n\n";
-		}
-		return $t_message;
-	}
-	# --------------------
-	# Builds the bug history portion of the bug e-mail
-	function email_build_history_message( $p_bug_id ) {
-		$history = history_get_events_array( $p_bug_id );
-		$t_message = lang_get( 'bug_history' ) . "\n";
-		$t_message .=	str_pad( lang_get( 'date_modified' ), 15 ) .
-						str_pad( lang_get( 'username' ), 15 ) .
-						str_pad( lang_get( 'field' ), 25 ) .
-						str_pad( lang_get( 'change' ), 20 ). "\n";
-		$t_message .= config_get( 'email_separator1' ) . "\n";
-		for ( $i = 0; $i < count($history); $i++ ) {
-			$t_message .=	str_pad( $history[$i]['date'], 15 ) .
-							str_pad( $history[$i]['username'], 15 ) .
-							str_pad( $history[$i]['note'], 25 ) .
-							str_pad( $history[$i]['change'], 20 ). "\n";
-		}
-
-		$t_message .= config_get( 'email_separator1' ) . "\n\n";
-		return ( $t_message );
-	}
-	# --------------------
-	# Send bug info to reporter and handler
-	function email_bug_info( $p_bug_id, $p_message_id, $p_headers='' ) {
-		global $g_to_email, $g_use_bcc, $g_default_language, $g_lang_current;
-
-		# load default language in order to send all emails with the same language
-		$t_saved_lang_current = $g_lang_current; // save current language before changing to email-language
-		if ( $g_default_language !== $g_lang_current ) {
-			lang_load( $g_default_language );
-		}
-
-		# build subject
-		$t_subject = email_build_subject( $p_bug_id );
-
-		# build message
-		$t_category = '';
-		## default message == '' not to show internal constants like 'email_notification_title_for_status_bug_confirmed' in email
-		$t_message = lang_get_defaulted( $p_message_id, '' );
-		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
-			$t_message .= "\n";
-		}
-		$t_message .= email_build_bug_message( $p_bug_id, $t_message, $t_category );
-		$t_message .= email_build_bugnote_message( $p_bug_id );
-		$t_message .= email_build_history_message( $p_bug_id );
-
-		# send mail
-
-		## win-bcc-bug
-		if ( OFF == $g_use_bcc ) {
-			## list of receivers
-			$to = $g_to_email.( ( is_blank( $p_headers ) || is_blank( $g_to_email ) ) ? '' : ', ').$p_headers;
-			# echo '<br />email_bug_info::Sending email to :'.$to;
-			if( ON == config_get( 'enable_email_notification' ) ) {
-				$res1 = email_send( $to, $t_subject, $t_message, '', $t_category );
-			}
-		} else {
-			# Send Email
-			# echo '<br />email_bug_info::Sending email to : '.$g_to_email;
-			if( ON == config_get( 'enable_email_notification' ) ) {
-				$res1 = email_send( $g_to_email, $t_subject, $t_message, $p_headers, $t_category );
-			}
-		}
-
-		# restore user language after sending email
-		if ( !is_blank( $t_saved_lang_current ) && $t_saved_lang_current !== $g_default_language ) {
-			lang_load( $t_saved_lang_current );
-		}
-	}
-	# --------------------
 	# this function sends the actual email
-	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='' ) {
+	# if $p_exit_on_error == true (default) - calls exit() on errors, else - returns true on success and false on errors
+	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='', $p_exit_on_error=true ) {
 		global $g_from_email,
 				$g_return_path_email, $g_use_x_priority,
 				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host,
@@ -695,7 +499,11 @@
 			if( !$mail->Send() ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
 				PRINT 'Mailer Error: '.$mail->ErrorInfo.'<br />';
-				exit;
+				if ( $p_exit_on_error ) {
+					exit;
+				} else {
+					return false;
+				}
 			}
 		} else {
 			# Visit http://www.php.net/manual/function.mail.php
@@ -737,9 +545,15 @@
 				PRINT htmlspecialchars($t_subject).'<br />';
 				PRINT nl2br(htmlspecialchars($t_headers)).'<br />';
 				PRINT nl2br(htmlspecialchars($t_message)).'<br />';
-				exit;
+				if ( $p_exit_on_error ) {
+					exit;
+				} else {
+					return false;
+				}
+
 			}
 		}
+		return true;
 	}
 	# --------------------
 	# formats the subject correctly
@@ -804,5 +618,237 @@
 			}
 		}
 		return $result;
+	}
+
+	# --------------------
+	# Send bug info to given user
+	# return true on success
+	function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id ) {
+		global $g_lang_current;
+
+		$t_user_email = user_get_email( $p_user_id );
+
+		# check wether email sould be sent
+		# @@@ can be email field empty? if yes - then it should be handled here
+		if ( ON !== config_get( 'enable_email_notification' ) || is_blank( $t_user_email ) ) {
+			return true;
+		}
+
+		$t_prefs = user_pref_get( $p_user_id, $p_project_id );
+		$t_user_language = $t_prefs->language;
+
+
+		# load user language
+		$t_saved_lang_current = $g_lang_current; // save current language before changing to $t_user_language
+		if ( $t_user_language !== $g_lang_current ) {
+			lang_load( $t_user_language );
+		}
+
+		# build subject
+		$t_subject = '['.$p_visible_bug_data['email_project'].' '
+					    .bug_format_id( $p_visible_bug_data['email_bug'] )
+					.']: '.$p_visible_bug_data['email_summary'];
+		
+
+		# build message
+
+		$t_message = lang_get_defaulted( $p_message_id );
+		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
+			$t_message .= "\n";
+		}
+
+		$t_message .= email_format_bug_message(  $p_visible_bug_data );
+
+		# send mail
+		# echo '<br />email_bug_info::Sending email to :'.$t_user_email;
+		$t_ok = email_send( $t_user_email, $t_subject, $t_message, '', $p_visible_bug_data['set_category'], false );
+
+		# restore original language after sending email
+		# @@@ yarick123: theoretically, we should not restore original language after sending every email,
+		#     but, for the first step of implementation I prefer to do it
+		if ( !is_blank( $t_saved_lang_current ) && $t_saved_lang_current !== $t_user_language ) {
+			lang_load( $t_saved_lang_current );
+		}
+		return $t_ok;
+	}
+
+	# --------------------
+	# Build the bug info part of the message
+	function email_format_bug_message( $p_visible_bug_data ) {
+		$t_normal_date_format = config_get( 'normal_date_format' );
+		$t_complete_date_format = config_get( 'complete_date_format' );
+
+		$t_email_separator1 = config_get( 'email_separator1' );
+		$t_email_separator2 = config_get( 'email_separator2' );
+		$t_email_padding_length = config_get( 'email_padding_length' );
+
+		$t_status = $p_visible_bug_data['email_status'];
+
+		$p_visible_bug_data['email_date_submitted'] = date( $t_complete_date_format, $p_visible_bug_data['email_date_submitted'] );
+		$p_visible_bug_data['email_last_modified']   = date( $t_complete_date_format, $p_visible_bug_data['email_last_modified'] );
+
+		$p_visible_bug_data['email_status'] = get_enum_element( 'status', $t_status );
+		$p_visible_bug_data['email_severity'] = get_enum_element( 'severity', $p_visible_bug_data['email_severity'] );
+		$p_visible_bug_data['email_priority'] = get_enum_element( 'priority', $p_visible_bug_data['email_priority'] );
+		$p_visible_bug_data['email_reproducibility'] = get_enum_element( 'reproducibility', $p_visible_bug_data['email_reproducibility'] );
+
+		$t_message = $t_email_separator1."\n";
+
+		if ( $p_visible_bug_data['email_bug_view_url'] ) {
+			$t_message .= $p_visible_bug_data['email_bug_view_url'] . "\n";
+			$t_message .= $t_email_separator1."\n";
+		}
+
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reporter' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_handler' );
+		$t_message .= $t_email_separator1."\n";
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_project' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_bug' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_category' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
+		
+
+		# custom fields formatting
+		foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
+
+			$t_message .= str_pad( lang_get_defaulted( $t_custom_field_name ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
+
+			if ( CUSTOM_FIELD_TYPE_EMAIL === $t_custom_field_data['type'] ) {
+				$t_message .= 'mailto:'.$t_custom_field_data['value'];
+			} else {
+				$t_message .= $t_custom_field_data['value'];
+			}
+			$t_message .= "\n";
+		}       // foreach custom field
+
+
+		if ( RESOLVED == $t_status ) {
+			$p_visible_bug_data['email_resolution'] = get_enum_element( 'resolution', $p_visible_bug_data['email_resolution'] );
+			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
+			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_duplicate' );
+		}
+		$t_message .= $t_email_separator1."\n";
+
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_date_submitted' );
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_last_modified' );
+		$t_message .= $t_email_separator1."\n";
+
+		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
+
+		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $p_visible_bug_data['email_description'] )."\n";
+		$t_message .= $t_email_separator1."\n\n";
+
+
+		# format bugnotes
+		foreach ( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
+			$t_last_modified = date( $t_normal_date_format, $t_bugnote->last_modified );
+			$t_string = ' '.$t_bugnote->reporter_name.' - '.$t_last_modified.' ';
+
+			$t_message .= $t_email_separator2."\n";
+			$t_message .= $t_string."\n";
+			$t_message .= $t_email_separator2."\n";
+			$t_message .= wordwrap( $t_bugnote->note )."\n\n";
+		}
+
+		# format history
+		if ( array_key_exists( 'history', $p_visible_bug_data ) ) {
+			$t_message .=	lang_get( 'bug_history' ) . "\n";
+			$t_message .=	str_pad( lang_get( 'date_modified' ), 15 ) .
+							str_pad( lang_get( 'username' ), 15 ) .
+							str_pad( lang_get( 'field' ), 25 ) .
+							str_pad( lang_get( 'change' ), 20 ). "\n";
+
+			$t_message .= $t_email_separator1."\n";
+
+			foreach ( $p_visible_bug_data[ 'history' ] as $t_raw_history_item ) {
+				$t_localized_item = history_localize_item(	$t_raw_history_item['field'],
+															$t_raw_history_item['type'],
+															$t_raw_history_item['old_value'],
+															$t_raw_history_item['new_value'] );
+
+				$t_message .=	str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 15 ) .
+								str_pad( $t_raw_history_item['username'], 15 ) .
+								str_pad( $t_localized_item['note'], 25 ) .
+								str_pad( $t_localized_item['change'], 20 ). "\n";
+			}
+			$t_message .= $t_email_separator1."\n\n";
+		}
+
+		return $t_message;
+	}
+
+	# if $p_visible_bug_data contains specified attribute the function
+	# returns concatenated translated attribute name and original
+	# attribute value. Else return empty string.
+	function email_format_attribute( $p_visible_bug_data, $attribute_id ) {
+		if ( array_key_exists( $attribute_id, $p_visible_bug_data ) ) {
+			return str_pad( lang_get( $attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ).$p_visible_bug_data [ $attribute_id ]."\n";
+		}
+		return '';
+	}
+
+	# --------------------
+	# Build the bug raw data visible for specified user to be translated and sent by email to the user
+	# (Filter the bug data according to user access level)
+	# return array with bug data. See usage in email_format_bug_message(...)
+	function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		$t_user_access_level = user_get_access_level( $p_user_id, $t_project_id );
+
+		$row = bug_get_extended_row( $p_bug_id );
+		$t_bug_data = array();
+
+		$t_bug_data['email_bug'] = $p_bug_id;
+
+		if ( $p_message_id !== 'email_notification_title_for_action_bug_deleted' ) {
+			$t_bug_data['email_bug_view_url'] = string_get_bug_view_url_with_fqdn( $p_bug_id );
+		}
+
+		if ( $p_user_access_level >= config_get( 'view_handler_threshold' ) ) {
+			if ( 0 != $row['handler_id'] ) {
+				$t_bug_data['email_handler'] = user_get_name( $row['handler_id'] );
+			} else {
+				$t_bug_data['email_handler'] = '';
+			}
+		}
+
+		$t_bug_data['email_reporter'] = user_get_name( $row['reporter_id'] );
+		$t_bug_data['email_project']  = project_get_field( $row['project_id'], 'name' );
+
+		$t_bug_data['email_category'] = $row['category'];
+
+		$t_bug_data['email_date_submitted'] = $row['date_submitted'];
+		$t_bug_data['email_last_modified']   = $row['last_updated'];
+
+		$t_bug_data['email_status'] = $row['status'];
+		$t_bug_data['email_severity'] = $row['severity'];
+		$t_bug_data['email_priority'] = $row['priority'];
+		$t_bug_data['email_reproducibility'] = $row['reproducibility'];
+
+		$t_bug_data['email_resolution'] = $row['resolution'];
+
+		if ( DUPLICATE == $row['resolution'] ) {
+			$t_bug_data['email_duplicate'] = $row['duplicate_id'];
+		}
+
+		$t_bug_data['email_summary'] = $row['summary'];
+		$t_bug_data['email_description'] = $row['description'];
+
+		if ( OFF != config_get( 'email_set_category' ) ) {
+			$t_bug_data['set_category'] = '[' . $t_bug_data['email_project'] . '] ' . $row['category'];
+		}
+
+		$t_bug_data['custom_fields'] = custom_field_get_linked_fields( $p_bug_id, $t_user_access_level );
+		$t_bug_data['bugnotes'] = bugnote_get_all_visible_bugnotes( $p_bug_id, $t_user_access_level );
+
+		# put history data
+		if ( ON == config_get( 'history_default_visible' )  &&  $t_user_access_level >= config_get( 'view_history_threshold' ) ) {
+			$t_bug_data['history']  = history_get_raw_events_array( $p_bug_id );
+		}
+
+		return $t_bug_data;
 	}
 ?>

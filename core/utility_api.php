@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.8 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: utility_api.php,v 1.9 2004-03-16 11:29:55 yarick123 Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -153,5 +153,15 @@
 						"return $t_factor * strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
 		uasort( $p_array, $t_function );
 		return $p_array;
+	}
+
+
+	# --------------------
+	# Copies item with given key from source array to the destination,
+	# if the key exists in the source. If not - does nothing.
+	function copy_array_item_if_exist( &$p_arr_src, &$p_arr_dst, $key ) {
+		if( array_key_exists( $key, $p_arr_src ) ) {
+			$p_arr_dst[ $key ] = $p_arr_src[ $key ];
+		}
 	}
 ?>

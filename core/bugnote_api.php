@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.21 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: bugnote_api.php,v 1.22 2004-03-16 11:29:55 yarick123 Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -19,6 +19,16 @@
 	###########################################################################
 	# Bugnote API
 	###########################################################################
+
+	#===================================
+	# Bugnote Data Structure Definition
+	#===================================
+	class BugnoteData {
+		var $note;
+		var $view_state;
+		var $reporter_name;
+		var $last_modified;
+	}
 
 	#===================================
 	# Boolean queries and ensures
@@ -47,7 +57,7 @@
 
 	# --------------------
 	# Check if a bugnote with the given ID exists
-	# 
+	#
 	# return true if the bugnote exists, raise an error if not
 	function bugnote_ensure_exists( $p_bugnote_id ) {
 		if ( ! bugnote_exists( $p_bugnote_id ) ) {
@@ -227,7 +237,73 @@
 		return db_result( $result );
 	}
 
-	
+	# --------------------
+	# Build the bugnotes array for the given bug_id filtered by specified $p_user_access_level.
+	# Bugnotes are sorted by date_submitted according to 'bugnote_order' configuration setting.
+	#
+	# Return BugnoteData class object with raw values from the tables except the field
+	# last_modified - it is UNIX_TIMESTAMP.
+	function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_access_level ) {
+		$t_all_bugnotes = bugnote_get_all_bugnotes( $p_bug_id );
+		$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
+		$t_private_bugnote_visible = ( $p_user_access_level >= $t_private_bugnote_threshold );
+
+		$t_bugnotes = array();
+
+		foreach ( $t_all_bugnotes as $t_note_index => $t_bugnote ) {
+			if ( $t_private_bugnote_visible || VS_PUBLIC == $t_bugnote->view_state ) {
+				$t_bugnotes[ $t_note_index ] = $t_bugnote;
+			}
+		}
+		return $t_bugnotes;
+	}
+
+	# --------------------
+	# Build the bugnotes array for the given bug_id. Bugnotes are sorted by date_submitted
+	# according to 'bugnote_order' configuration setting.
+	# Return BugnoteData class object with raw values from the tables except the field
+	# last_modified - it is UNIX_TIMESTAMP.
+	# The data is not filtered by VIEW_STATE !!
+	function bugnote_get_all_bugnotes( $p_bug_id ) {
+		global $g_cache_bugnotes;
+
+		if ( ! isset( $g_cache_bugnotes ) )  {
+			$g_cache_bugnotes = array();
+		}
+
+		if ( ! isset( $g_cache_bugnotes[ $p_bug_id ] ) )  {
+			$c_bug_id = db_prepare_int( $p_bug_id );
+
+			$t_bugnote_table = config_get( 'mantis_bugnote_table' );
+			$t_bugnote_text_table = config_get( 'mantis_bugnote_text_table' );
+
+			$t_bugnote_order = config_get( 'bugnote_order' );
+
+			$query = "SELECT b.*, t.note
+						FROM 	  $t_bugnote_table AS b
+						LEFT JOIN $t_bugnote_text_table AS t ON b.bugnote_text_id = t.id
+						WHERE b.bug_id = '$c_bug_id'
+						ORDER BY b.date_submitted $t_bugnote_order";
+
+			$t_bugnotes = array();
+
+			# BUILD bugnotes array
+			for ( $result = db_query( $query ); ! $result->EOF; $result->MoveNext() )  {
+				$t_bugnote = new BugnoteData;
+
+				$t_bugnote->note          = $result->fields['note'];
+				$t_bugnote->view_state    = $result->fields['view_state'];
+				$t_bugnote->reporter_name = user_get_name( $result->fields['reporter_id'] );
+				$t_bugnote->last_modified = db_unixtimestamp( $result->fields['last_modified'] );
+
+				$t_bugnotes[] = $t_bugnote;
+			}
+			$g_cache_bugnotes[ $p_bug_id ] = $t_bugnotes;
+		}
+
+		return $g_cache_bugnotes[ $p_bug_id ];
+	}
+
 	#===================================
 	# Data Modification
 	#===================================

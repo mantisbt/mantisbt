@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.27 2004-03-15 21:47:43 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.28 2004-03-16 11:29:55 yarick123 Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -74,7 +74,9 @@
 	# --------------------
 	# Clear the custom field cache (or just the given id if specified)
 	function custom_field_clear_cache( $p_field_id = null ) {
-		global $g_cache_custom_field;
+		global $g_cache_custom_field, $g_cached_custom_field_lists;
+
+		$g_cached_custom_field_lists = null;
 
 		if ( null === $p_field_id ) {
 			$g_cache_custom_field = array();
@@ -270,7 +272,7 @@
 		$c_length_max		= db_prepare_int(    $p_def_array['length_max']      );
 		$c_advanced			= db_prepare_bool(   $p_def_array['advanced']        );
 
-		if (	( is_blank( $c_name ) ) || 
+		if (	( is_blank( $c_name ) ) ||
 			( $c_access_level_rw < $c_access_level_r ) ||
 			( $c_length_min < 0 ) ||
 			( ( $c_length_max != 0 ) && ( $c_length_min > $c_length_max ) ) ) {
@@ -409,7 +411,7 @@
 	# Remove a custom field from a project
 	#  return true on success, false on failure
 	#
-	# The values for the custom fields are not deleted.  This is to allow for the 
+	# The values for the custom fields are not deleted.  This is to allow for the
 	# case where a bug is moved to another project that has the field, or the
 	# field is linked again to the project.
 	function custom_field_unlink( $p_field_id, $p_project_id ) {
@@ -645,6 +647,82 @@
 			return $t_default_value;
 		}
 	}
+
+	# --------------------
+	# Gets the custom fields array for the given bug readable by specified level.
+	# Array keys are custom field names. Array is sorted by custom field sequence number;
+	# Array items are arrays with the next keys:
+	# 'type', 'value', 'access_level_r'
+	function custom_field_get_linked_fields( $p_bug_id, $p_user_access_level ) {
+		$t_custom_fields = custom_field_get_all_linked_fields( $p_bug_id );
+
+		# removing restricted fields
+		foreach ( $t_custom_fields as $t_custom_field_name => $t_custom_field_data ) {
+			if ( $p_user_access_level < $t_custom_field_data['access_level_r'] ) {
+				unset( $t_custom_fields[ $t_custom_field_name ] );
+			}
+		}
+		return $t_custom_fields;
+	}
+
+	# --------------------
+	# Gets the custom fields array for the given bug. Array keys are custom field names.
+	# Array is sorted by custom field sequence number; Array items are arrays with the next keys:
+	# 'type', 'value', 'access_level_r'
+	function custom_field_get_all_linked_fields( $p_bug_id ) {
+		global $g_cached_custom_field_lists;
+
+		if ( ! is_array( $g_cached_custom_field_lists ) ) {
+			$g_cached_custom_field_lists = array();
+		}
+
+		# is the list in cache ?
+		if( !array_key_exists( $p_bug_id, $g_cached_custom_field_lists ) ) {
+			$c_bug_id     = db_prepare_int( $p_bug_id );
+			$c_project_id = db_prepare_int( bug_get_field( $p_bug_id, 'project_id' ) );
+
+			$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
+			$t_custom_field_table         = config_get( 'mantis_custom_field_table' );
+			$t_custom_field_string_table  = config_get( 'mantis_custom_field_string_table' );
+
+			$query = "SELECT f.name, f.type, f.access_level_r, f.default_value, s.value
+						FROM $t_custom_field_project_table AS p, $t_custom_field_table AS f
+
+						LEFT JOIN $t_custom_field_string_table AS s
+							ON  p.field_id = s.field_id
+							AND s.bug_id = '$c_bug_id'
+
+						WHERE   p.project_id = '$c_project_id'
+							AND p.field_id = f.id
+
+						ORDER BY p.sequence ASC, f.name ASC";
+
+			$result = db_query( $query );
+
+			$t_row_count = db_num_rows( $result );
+
+			$t_custom_fields = array();
+
+			for ( $i=0 ; $i < $t_row_count ; ++$i ) {
+				$row = db_fetch_array( $result );
+
+				if( is_null( $row['value'] ) ) {
+					$t_value = $row['default_value'];
+				} else {
+					$t_value = $row['value'];
+				}
+
+				$t_custom_fields[ $row['name'] ] = array( 'type'  => $row['type'],
+														  'value' => $t_value,
+														  'access_level_r' => $row['access_level_r'] );
+			}
+
+			$g_cached_custom_field_lists[ $p_bug_id ] = $t_custom_fields;
+		}
+
+		return $g_cached_custom_field_lists[ $p_bug_id ];
+	}
+
 
 	# --------------------
 	# Gets the sequence number for the specified custom field for the specified

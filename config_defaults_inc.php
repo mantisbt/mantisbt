@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.148 2004-03-05 02:27:51 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.149 2004-03-16 11:29:56 yarick123 Exp $
 	# --------------------------------------------------------
 
 	
@@ -634,6 +634,14 @@
 
 	# access level needed to view attachments to bugs reported by other users.
 	$g_view_attachments_threshold	= VIEWER;
+
+	# access level needed to view handler in bug reports and notification email
+	# @@@ yarick123: now it is implemented for notification email only
+	$g_view_handler_threshold		= VIEWER;
+
+	# access level needed to view history in bug reports and notification email
+	# @@@ yarick123: now it is implemented for notification email only
+	$g_view_history_threshold		= VIEWER;
 
 	# access level needed to send a reminder from the bug view pages
 	# set to NOBODY to disable the feature
