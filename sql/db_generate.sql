@@ -31,6 +31,7 @@ CREATE TABLE mantis_bug_history_table (
   field_name varchar(32) NOT NULL default '',
   old_value varchar(128) NOT NULL default '',
   new_value varchar(128) NOT NULL default '',
+  type int(2) NOT NULL default '0',
   KEY bug_id (bug_id),
   KEY user_id (user_id)
 );
@@ -154,6 +155,7 @@ CREATE TABLE mantis_news_table (
 
 CREATE TABLE mantis_project_category_table (
   project_id int(7) unsigned zerofill NOT NULL default '0000000',
+  user_id int(7) unsigned zerofill NOT NULL default '0000000',
   category varchar(64) NOT NULL default ''
 );
 
