@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.85 $
+	# $Revision: 1.86 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-06 06:11:53 $
+	# $Date: 2002-09-16 10:12:04 $
 	#
-	# $Id: strings_english.txt,v 1.85 2002-09-06 06:11:53 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.86 2002-09-16 10:12:04 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -180,6 +180,9 @@
 	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
 	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
 	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
+	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
+	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
+	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
 
 	# General Strings
 	$s_go_back = 'Go Back';

@@ -167,6 +167,8 @@
 
 	# ERROR_FILE_*
 	define( 'ERROR_FILE_TOO_BIG',					500 );
+	define( 'ERROR_FILE_NOT_ALLOWED',				501 );
+	define( 'ERROR_FILE_DUPLICATE',					502 );
 
 	# ERROR_BUGNOTE_*
 	define( 'ERROR_BUGNOTE_NOT_FOUND',				600 );
@@ -181,6 +183,7 @@
 	define( 'ERROR_USER_NOT_FOUND',					801 );
 	define( 'ERROR_USER_PREFS_NOT_FOUND',			802 );
 	define( 'ERROR_USER_CREATE_PASSWORD_MISMATCH',	803 );
+	define( 'ERROR_USER_PROFILE_NOT_FOUND',			804 );
 
 	# ERROR_AUTH_*
 	define( 'ERROR_AUTH_INVALID_COOKIE',			900 );
