@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:21 $
+	# $Date: 2003-04-01 15:59:41 $
 	#
-	# $Id: strings_dutch.txt,v 1.50 2003-03-12 18:58:21 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.51 2003-04-01 15:59:41 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -824,9 +824,9 @@
 	$s_viewing_bug_simple_details_title = 'Bekijk bug details';
 
 	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-	$s_users_monitoring_bug = 'Users monitoring this bug';
-	$s_monitoring_user_list = 'User List';
+	$s_no_users_monitoring_bug = 'Niemand monitort deze bug.';
+	$s_users_monitoring_bug = 'Gebruikers die deze bug monitoren';
+	$s_monitoring_user_list = 'Gebruikers';
 
 	# custom field strings
 	$s_add_custom_field_button = 'Nieuw veld';
@@ -842,7 +842,7 @@
 	$s_custom_field_type = 'Type';
 	$s_custom_field_possible_values = 'Mogelijke waarden';
 	$s_custom_field_default_value = 'Standaardwaarde';
-	$s_custom_field_valid_regexp = 'Regular Expression';
+	$s_custom_field_valid_regexp = 'Reguliere Expressie';
 	$s_custom_field_access_level_r = 'Leestoegang';
 	$s_custom_field_access_level_rw = 'Schrijftoegang';
 	$s_custom_field_length_min = 'Min. lengte';
@@ -858,4 +858,7 @@
 	$s_hide_status = 'Verberg Status';
 	$s_filter_closed = 'Gesloten';
 	$s_filter_resolved = 'Afgerond';
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

@@ -8,11 +8,11 @@
 	# Czech: Pavel Loupal, Pavel.Loupal@seznam.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.38 $
+	# $Revision: 1.39 $
 	# $Author: jlatour $
-	# $Date: 2003-03-15 20:45:34 $
+	# $Date: 2003-04-01 15:59:41 $
 	#
-	# $Id: strings_czech.txt,v 1.38 2003-03-15 20:45:34 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.39 2003-04-01 15:59:41 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -856,4 +856,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

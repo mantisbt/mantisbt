@@ -7,11 +7,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:21 $
+	# $Date: 2003-04-01 15:59:43 $
 	#
-	# $Id: strings_norwegian.txt,v 1.49 2003-03-12 18:58:21 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.50 2003-04-01 15:59:43 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -855,4 +855,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

@@ -10,11 +10,11 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 	#          Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.51 $
+	# $Revision: 1.52 $
 	# $Author: jlatour $
-	# $Date: 2003-04-01 15:48:00 $
+	# $Date: 2003-04-01 15:59:41 $
 	#
-	# $Id: strings_italian.txt,v 1.51 2003-04-01 15:48:00 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.52 2003-04-01 15:59:41 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -858,4 +858,7 @@
 	$s_hide_status = "Non mostrare quelli";
 	$s_filter_closed = "Chiusi";
 	$s_filter_resolved = "Risolti";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

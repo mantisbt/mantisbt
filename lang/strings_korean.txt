@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:21 $
+	# $Date: 2003-04-01 15:59:43 $
 	#
-	# $Id: strings_korean.txt,v 1.50 2003-03-12 18:58:21 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.51 2003-04-01 15:59:43 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -856,4 +856,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

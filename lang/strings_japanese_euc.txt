@@ -7,11 +7,11 @@
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# -------------------------------------------------
-	# $Revision: 1.39 $
+	# $Revision: 1.40 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:21 $
+	# $Date: 2003-04-01 15:59:43 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.39 2003-03-12 18:58:21 jlatour Exp $
+	# $Id: strings_japanese_euc.txt,v 1.40 2003-04-01 15:59:43 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -855,4 +855,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

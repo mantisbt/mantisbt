@@ -7,11 +7,11 @@
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # -------------------------------------------------
-  # $Revision: 1.39 $
+  # $Revision: 1.40 $
   # $Author: jlatour $
-  # $Date: 2003-03-12 18:58:21 $
+  # $Date: 2003-04-01 15:59:41 $
   #
-  # $Id: strings_hungarian.txt,v 1.39 2003-03-12 18:58:21 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.40 2003-04-01 15:59:41 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -855,4 +855,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

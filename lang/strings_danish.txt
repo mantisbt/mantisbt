@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:20 $
+	# $Date: 2003-04-01 15:59:41 $
 	#
-	# $Id: strings_danish.txt,v 1.47 2003-03-12 18:58:20 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.48 2003-04-01 15:59:41 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -855,4 +855,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

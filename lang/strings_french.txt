@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.56 $
+	# $Revision: 1.57 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:21 $
+	# $Date: 2003-04-01 15:59:41 $
 	#
-	# $Id: strings_french.txt,v 1.56 2003-03-12 18:58:21 jlatour Exp $
+	# $Id: strings_french.txt,v 1.57 2003-04-01 15:59:41 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -860,4 +860,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

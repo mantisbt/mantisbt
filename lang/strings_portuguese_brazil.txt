@@ -7,11 +7,11 @@
 
 	# Portuguese Brazil: Felipe Tonioli, tonioli@easyline.com.br  V0.2
 	# -------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:22 $
+	# $Date: 2003-04-01 15:59:43 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.47 2003-03-12 18:58:22 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.48 2003-04-01 15:59:43 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -855,4 +855,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>

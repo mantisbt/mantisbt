@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.45 $
+	# $Revision: 1.46 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:20 $
+	# $Date: 2003-04-01 15:59:41 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.45 2003-03-12 18:58:20 jlatour Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.46 2003-04-01 15:59:41 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -855,4 +855,7 @@
 	$s_hide_status = 'Hide Status';
 	$s_filter_closed = "Closed";
 	$s_filter_resolved = "Resolved";
+
+	$s_attachments = "attachment(s)";
+	$s_attachment_alt = "A";
 ?>
