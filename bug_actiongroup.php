@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.25 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_actiongroup.php,v 1.26 2003-02-20 16:12:48 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -67,8 +67,8 @@
 			break;
 
 		case 'RESOLVE':
-			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) &&
-				 access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id )) {
+			if ( access_has_bug_level( max( config_get( 'update_bug_threshold' ), 
+			                                config_get( 'handle_bug_threshold' ) ), $t_bug_id )) {
 				$f_resolution = gpc_get_int( 'resolution' );
 				bug_resolve( $t_bug_id, $f_resolution );
 			} else {
