@@ -129,6 +129,8 @@
 	# Checks for password match using the globally specified login method
 	function is_password_match( $f_username, $p_test_password, $p_password ) {
 		global $g_login_method, $g_allow_anonymous_login, $g_anonymous_account;
+		global $PHP_AUTH_PW;
+
 
 		# allow anonymous logins
 		if ( $g_anonymous_account == $f_username ) {
@@ -159,6 +161,9 @@
 						} else {
 							return false;
 						}
+			case BASIC_AUTH:
+					return ( isset( $PHP_AUTH_PW ) && ( $p_test_password == $PHP_AUTH_PW ) );
+
 		}
 		return false;
 	}
@@ -589,7 +594,6 @@
 	# exception for LDAP email
 	function get_user_info( $p_user_id, $p_field ) {
 		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
-
 		if ( ( ON == $g_use_ldap_email ) && ( "email" == $p_field  ) ) {
 		    # Find out what username belongs to the p_user_id and ask ldap
 		    return ldap_emailaddy("$p_user_id");
@@ -598,6 +602,8 @@
 		$query = "SELECT $p_field
 				FROM $g_mantis_user_table
 				WHERE id='$p_user_id'";
+
+
 		$result =  db_query( $query );
 		return db_result( $result, 0, 0 );
 

@@ -4,6 +4,7 @@ Mantis
 
  * Fixed error in set_project where setting a project would result in a loop.
  * Fixed account profiles to check for blank inputs.
+ * Fixed some problems with BASIC_AUTH.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.

@@ -25,6 +25,16 @@
 	} else {
 		# invalid login
 		$login_result = 0;
+
+		# Login failed, create user if basic authentication
+		if ( BASIC_AUTH == $g_login_method ) {
+			if ( $t_cookie_string = signup_user( $f_username ) ) {
+				$row = get_user_info_by_name_arr( $f_username );
+				$login_result = 1;
+				extract( $row, EXTR_PREFIX_ALL, "u" );
+			}
+		}
+
 	}
 
 	if (( $g_anonymous_account == $f_username ) && ( ON == $g_allow_anonymous_login )) {
@@ -32,6 +42,7 @@
 	}
 
 	$t_project_id = 0;
+
 	if (( 1 == $login_result )&&
 		( ON == $u_enabled )&&
 		is_password_match( $f_username, $f_password, $u_password )) {
@@ -61,7 +72,6 @@
 		# invalid login
 		$login_result = 0;
 	}
-
 	# goto main_page or back to login_page
 	if ( $t_project_id > -1 ) {
 		$t_redirect_url = $g_main_page;
@@ -71,15 +81,6 @@
 		} else {
 			$t_redirect_url = $g_login_select_proj_page;
 		}
-	# Login failed, create user if basic authentication
-	} else if ( BASIC_AUTH == $g_login_method ) { # @@@ ADDED  fix the if assignment problem
-		if ( $t_cookie_string = signup_user( $f_username ) ) {
-			$t_redirect_url = $g_login_select_proj_page;
-			$login_result = 1;
-			setcookie( $g_string_cookie, $t_cookie_string );
- 		} else {
-			$t_redirect_url = $g_login_page."?f_error=1";
- 		}
 	} else {
 		$t_redirect_url = $g_login_page."?f_error=1";
 	}
