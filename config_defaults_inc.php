@@ -718,7 +718,7 @@
 	$g_meta_include_file              = $g_absolute_path."meta_inc".$g_php;
 	#----------------------------------
 	# Internal includes
-	$g_bugnote_include_file           = $g_absolute_path."bugnote_inc.php";
+	$g_bugnote_include_file           = $g_absolute_path."bugnote_inc".$g_php;
 	$g_history_include_file           = $g_absolute_path."history_inc".$g_php;
 	$g_print_bugnote_include_file     = $g_absolute_path."print_bugnote_inc".$g_php;
 	$g_view_all_include_file          = $g_absolute_path."view_all_inc".$g_php;

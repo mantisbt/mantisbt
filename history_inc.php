@@ -24,21 +24,21 @@
 <table class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
-		<?php echo $s_bug_history ?>
+		<?php echo lang_get( 'bug_history' ) ?>
 	</td>
 </tr>
 <tr class="row-category">
 	<td class="small-caption">
-		<?php echo $s_date_modified ?>
+		<?php echo lang_get( 'date_modified' ) ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $s_username ?>
+		<?php echo lang_get( 'username' ) ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $s_field ?>
+		<?php echo lang_get( 'field' ) ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $s_change ?>
+		<?php echo lang_get( 'change' ) ?>
 	</td>
 </tr>
 <?php
@@ -46,9 +46,9 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		$status_color = alternate_colors( $i+1, $g_background_color );
+		$status_color = alternate_colors( $i+1, config_get( 'background_color' ) );
 
-		$v_date_modified = date( $g_complete_date_format, $v_date_modified );
+		$v_date_modified = date( config_get( 'complete_date_format' ), $v_date_modified );
 
 		switch ( $v_field_name ) {
 		case 'status':			$v_old_value = get_enum_element( 'status', $v_old_value );
@@ -86,34 +86,34 @@
 
 		if ( NORMAL_TYPE != $v_type ) {
 			switch ( $v_type ) {
-			case NEW_BUG:					$t_note = $s_new_bug;
+			case NEW_BUG:					$t_note = lang_get( 'new_bug' );
 											break;
-			case BUGNOTE_ADDED:				$t_note = $s_bugnote_added.": ".$v_old_value;
+			case BUGNOTE_ADDED:				$t_note = lang_get( 'bugnote_added' ) . ": " . $v_old_value;
 											break;
-			case BUGNOTE_UPDATED:			$t_note = $s_bugnote_edited.": ".$v_old_value;
+			case BUGNOTE_UPDATED:			$t_note = lang_get( 'bugnote_edited' ) . ": " . $v_old_value;
 											break;
-			case BUGNOTE_DELETED:			$t_note = $s_bugnote_deleted.": ".$v_old_value;
+			case BUGNOTE_DELETED:			$t_note = lang_get( 'bugnote_deleted' ) . ": " . $v_old_value;
 											break;
-			case SUMMARY_UPDATED:			$t_note = $s_summary_updated;
+			case SUMMARY_UPDATED:			$t_note = lang_get( 'summary_updated' );
 											break;
-			case DESCRIPTION_UPDATED:		$t_note = $s_description_updated;
+			case DESCRIPTION_UPDATED:		$t_note = lang_get( 'description_updated' );
 											break;
-			case ADDITIONAL_INFO_UPDATED:	$t_note = $s_additional_information_updated;
+			case ADDITIONAL_INFO_UPDATED:	$t_note = lang_get( 'additional_information_updated' );
 											break;
-			case STEP_TO_REPRODUCE_UPDATED:	$t_note = $s_steps_to_reproduce_updated;
+			case STEP_TO_REPRODUCE_UPDATED:	$t_note = lang_get( 'steps_to_reproduce_updated' );
 											break;
-			case FILE_ADDED:				$t_note = $s_file_added.": ".$v_old_value;
+			case FILE_ADDED:				$t_note = lang_get( 'file_added' ) . ": " . $v_old_value;
 											break;
-			case FILE_DELETED:				$t_note = $s_file_deleted.": ".$v_old_value;
+			case FILE_DELETED:				$t_note = lang_get( 'file_deleted' ) . ": " . $v_old_value;
 											break;
 			case BUGNOTE_STATE_CHANGED:		$v_old_value = get_enum_element( 'view_state', $v_old_value );
-											$t_note = $s_bugnote_view_state.": ".$v_old_value.": ".$v_new_value;
+											$t_note = lang_get( 'bugnote_view_state' ) . ": " . $v_old_value . ": " . $v_new_value;
 											break;
 			case BUG_MONITOR:				$v_old_value = user_get_field( $v_old_value, 'username' );
-											$t_note = $s_bug_monitor.": ".$v_old_value;
+											$t_note = lang_get( 'bug_monitor' ) . ": " . $v_old_value;
 											break;
 			case BUG_UNMONITOR:				$v_old_value = user_get_field( $v_old_value, 'username' );
-											$t_note = $s_bug_end_monitor.": ".$v_old_value;
+											$t_note = lang_get( 'bug_end_monitor' ) . ": " . $v_old_value;
 											break;
 			}
 		}
