@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.35 2004-11-06 18:44:39 prichards Exp $
+	# $Id: database_api.php,v 1.36 2004-11-20 14:06:02 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -247,6 +247,9 @@
 			case 'mysql':
 				return mysql_escape_string( $p_string );
 
+			case 'mysqli':
+				return mysqli_escape_string( $p_string );
+
 			case 'postgres':
 			case 'postgres64':
 			case 'postgres7':
@@ -320,6 +323,7 @@
 				return "(DATEDIFF(day, $p_date2, $p_date1) ". $p_limitstring . ")";
 
 			case 'mysql':
+			case 'mysqli':
 				return "(TO_DAYS($p_date1) - TO_DAYS($p_date2) ". $p_limitstring . ")";
 
 			case 'postgres':
