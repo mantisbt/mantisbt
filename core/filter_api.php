@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.41 2004-06-28 10:13:23 vboctor Exp $
+	# $Id: filter_api.php,v 1.42 2004-06-29 06:38:36 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -51,6 +51,7 @@
 		} else {
 			$t_filter = $custom_filter;
 		}
+		$t_filter = filter_ensure_valid_filter( $t_filter );
 
 		if ( false === $t_filter ) {
 			return false; # signify a need to create a cookie
