@@ -1,4 +1,3 @@
-
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -7,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.12 2003-01-28 04:11:59 jfitzell Exp $
+	# $Id: core.php,v 1.13 2003-01-28 05:27:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
