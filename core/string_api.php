@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.2 2002-08-25 21:48:12 jfitzell Exp $
+	# $Id: string_api.php,v 1.3 2002-08-25 22:09:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -63,8 +63,8 @@
 	# Use this to prepare a string for display to HTML
 	function string_display( $p_string ) {
 		$p_string = stripslashes( $p_string );
-		$p_string = process_bug_link( $p_string );
-		$p_string = process_cvs_link( $p_string );
+		$p_string = string_process_bug_link( $p_string );
+		$p_string = string_process_cvs_link( $p_string );
 		$p_string = nl2br( $p_string );
 		return $p_string;
 	}
@@ -73,8 +73,8 @@
 	function string_email( $p_string ) {
 		$p_string = stripslashes( $p_string );
 		$p_string = unfilter_href_tags( $p_string );
-		$p_string = process_bug_link_email( $p_string );
-		$p_string = process_cvs_link_email( $p_string );
+		$p_string = string_process_bug_link( $p_string, false );
+		$p_string = string_process_cvs_link( $p_string, false );
 		$p_string = str_replace( '&lt;', '<',  $p_string );
 		$p_string = str_replace( '&gt;', '>',  $p_string );
 		$p_string = str_replace( '&quot;', '"',  $p_string );
@@ -108,56 +108,47 @@
 
 	# --------------------	
 	# process the $p_string and convert filenames in the format
-	# cvs:filename.ext or cvs:filename.ext:n.nn to a html link
-	function process_cvs_link( $p_string ) {
-		global $g_cvs_web;
+	#  cvs:filename.ext or cvs:filename.ext:n.nn to a html link
+	# if $p_include_anchor is true, include an <a href="..."> tag,
+	#  otherwise, just insert the URL as text
+	function string_process_cvs_link( $p_string, $p_include_anchor=true ) {
+		$t_cvs_web = config_get( 'cvs_web' );
+
+		if ( $p_include_anchor ) {
+			$t_replace_with = '[CVS] <a href="'.$t_cvs_web.'\\1?rev=\\4" target="_new">\\1</a>\\5';
+		} else {
+			$t_replace_with = '[CVS] '.$t_cvs_web.'\\1?rev=\\4\\5';
+		}
 
 		return preg_replace( '/cvs:([^\.\s:,\?!]+(\.[^\.\s:,\?!]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i',
-							 '[CVS] <a href="'.$g_cvs_web.'\\1?rev=\\4" target="_new">\\1</a>\\5',
-							 $p_string );
-	}
-	### --------------------
-	# process the $p_string and convert filenames in the format
-	# cvs:filename.ext or cvs:filename.ext:n.nn to a html link
-	function process_cvs_link_email( $p_string ) {
-		global $g_cvs_web;
-
-		return preg_replace( '/cvs:([^\.\s:,\?!]+(\.[^\.\s:,\?!]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i',
-							 '[CVS] '.$g_cvs_web.'\\1?rev=\\4\\5',
+							 $t_replace_with,
 							 $p_string );
 	}
 	# --------------------
 	# process the $p_string and create links to bugs if warranted
-	# Uses the $g_bug_link_tag variable to determine the bug link tag
+	# Uses the bug_link_tag config variable to determine the bug link tag
 	# eg. #45  or  bug:76
 	# default is the # symbol.  You may substitue any pattern you want.
-	function process_bug_link( $p_string ) {
-		global $g_bug_link_tag;
+	# if $p_include_anchor is true, include an <a href="..."> tag,
+	#  otherwise, just insert the URL as text
+	function string_process_bug_link( $p_string, $p_include_anchor=true ) {
+		$t_tag = config_get( 'bug_link_tag' );
+		$t_path = config_get( 'path' );
 
 		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"<a href=\"view_bug_advanced_page.php?f_id=\\1\">#\\1</a>",
-								$p_string);
+			$t_page_name = 'view_bug_advanced_page.php';
 		} else {
-			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"<a href=\"view_bug_page.php?f_id=\\1\">#\\1</a>",
-								$p_string);
+			$t_page_name = 'view_bug_page.php';
 		}
-	}
-	# --------------------
-	# process the $p_string and convert bugs in this format #123 to a plain text link
-	function process_bug_link_email( $p_string ) {
-		global	$g_bug_link_tag;
 
-		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"view_bug_advanced_page.php?f_id=\\1",
-								$p_string);
+		if ( $p_include_anchor ) {
+			$t_replace_with = '<a href="'.$t_page_name.'?f_id=\\1">#\\1</a>';
 		} else {
-			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"view_bug_page.php?f_id=\\1",
-								$p_string);
+			$t_replace_with = $t_path.$t_page_name.'?f_id=\\1';
 		}
+		
+		return preg_replace("/$t_tag([0-9]+)/",
+								$t_replace_with,
+								$p_string);
 	}
-
 ?>
