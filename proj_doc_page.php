@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.41 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: proj_doc_page.php,v 1.42 2004-10-08 19:57:46 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,7 +27,7 @@
 	$t_project_id = helper_get_current_project();
 
 	# Select project files
-	$query = "SELECT *, date_added
+	$query = "SELECT *
 			FROM $g_mantis_project_file_table
 			WHERE project_id='$t_project_id'
 			ORDER BY title ASC";

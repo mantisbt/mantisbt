@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add_page.php,v 1.28 2004-04-12 21:04:36 jlatour Exp $
+	# $Id: proj_doc_add_page.php,v 1.29 2004-10-08 19:57:46 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,6 +26,8 @@
 	if ( ! file_allow_project_upload() ) {
 		access_denied();
 	}
+
+	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>

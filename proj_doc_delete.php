@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_delete.php,v 1.21 2004-10-05 14:59:08 thraxisp Exp $
+	# $Id: proj_doc_delete.php,v 1.22 2004-10-08 19:57:46 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -16,8 +16,7 @@
 		access_denied();
 	}
 
-	# @@@ Need to obtain the project_id from the file once we have an API for that	
-	access_ensure_project_level( MANAGER );
+	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
 	$f_file_id = gpc_get_int( 'file_id' );
 

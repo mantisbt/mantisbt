@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_update.php,v 1.22 2004-08-05 17:34:16 jlatour Exp $
+	# $Id: proj_doc_update.php,v 1.23 2004-10-08 19:57:46 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,9 +19,8 @@
 	if ( OFF == config_get( 'enable_project_documentation' ) ) {
 		access_denied();
 	}
-
-	# @@@ Need to obtain the project_id from the file once we have an API for that	
-	access_ensure_project_level( MANAGER );
+	
+	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
 
 	$f_file_id		= gpc_get_int( 'file_id' );
 	$f_title		= gpc_get_string( 'title' );
@@ -36,56 +35,62 @@
 	$c_description 	= db_prepare_string( $f_description );
 
 	$f_file		= gpc_get_file( 'file' );
-	
-	$result = 0;
-	$good_upload = 0;
-	$disallowed = 0;
+	$t_project_file_table = config_get( 'mantis_project_file_table' );
+
+	#@@@ (thraxisp) this code should probably be integrated into file_api to share
+	#  methods used to store files
 
 	extract( $f_file, EXTR_PREFIX_ALL, 'v' );
 
-	if ( !file_type_check( $v_name ) )
-	{
-		$disallowed = 1;
-	}
-	else if ( is_uploaded_file( $v_tmp_name ) )
-	{
-		$good_upload = 1;
+	if ( !file_type_check( $v_name ) ) {
+		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
+	}  
 
+	if ( !is_readable( $v_tmp_name ) && DISK != config_get( 'file_upload_method' ) ) {
+		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
+	}
+
+	if ( is_uploaded_file( $v_tmp_name ) ) {
 		$t_project_id = helper_get_current_project();
 
-		# grab the file path and name
-		$t_file_path = project_get_field( $t_project_id, 'file_path' );
-		$t_prefix = config_get( 'document_files_prefix' );
-		if ( !is_blank( $t_prefix ) ) {
-			$t_prefix .= '-';
-		}
-		$t_file_name = $t_prefix . project_format_id ( $t_project_id ) . '-' . $v_name;
+		# grab the original file path and name
+		$t_disk_file_name = file_get_field( $f_file_id, 'diskfile', 'project' );
+		$t_file_path = 	dirname( $t_disk_file_name );
 
 		# prepare variables for insertion
 		$c_title = db_prepare_string( $f_title );
 		$c_description = db_prepare_string( $f_description );
-		$c_file_path = db_prepare_string( $t_file_path );
-		$c_file_name = db_prepare_string( $t_file_name );
+		$c_file_name = db_prepare_string( $v_name );
 		$c_file_type = db_prepare_string( $v_type );
-		$c_file_size = db_prepare_int( $v_size );
+		if ( is_readable ( $v_tmp_name ) ) { 
+			$t_file_size = filesize( $v_tmp_name );
+		} else {
+				//try to get filesize from 'post' data
+				//@@@ fixme - this should support >1 file ? 
+			global $HTTP_POST_FILES;
+			$t_file_size = $HTTP_POST_FILES['file']['size'];
+		}
+		$c_file_size = db_prepare_int( $t_file_size );
 
 		$t_method = config_get( 'file_upload_method' );		
 		switch ( $t_method ) {
 			case FTP:
-			case DISK:	file_ensure_valid_upload_path( $t_file_path );
+			case DISK:
+						file_ensure_valid_upload_path( $t_file_path );
 
-						if ( !file_exists( $t_file_path.$t_file_name ) ) {
-							if ( FTP == $t_method ) {
-								$conn_id = file_ftp_connect();
-								file_ftp_put ( $conn_id, $t_file_name, $v_tmp_name );
-								file_ftp_disconnect ( $conn_id );
-							}
-							umask( 0333 );  # make read only
-							copy( $v_tmp_name, $t_file_path . $t_file_name );
-							$c_content = '';
-						} else {
-							trigger_error( ERROR_DUPLICATE_FILE, ERROR );
+						if ( FTP == $t_method ) {
+							$conn_id = file_ftp_connect();
+							file_ftp_delete ( $conn_id, $t_disk_file_name );
+							file_ftp_put ( $conn_id, $t_disk_file_name, $v_tmp_name );
+							file_ftp_disconnect ( $conn_id );
 						}
+						if ( file_exists( $t_disk_file_name ) ) {
+							file_delete_local( $t_disk_file_name );
+						}
+						umask( 0333 );  # make read only
+						move_uploaded_file( $v_tmp_name, $t_disk_file_name );
+
+						$c_content = '';
 						break;
 			case DATABASE:
 						$c_content = db_prepare_string( fread ( fopen( $v_tmp_name, 'rb' ), $v_size ) );
@@ -94,21 +99,12 @@
 				# @@@ Such errors should be checked in the admin checks
 				trigger_error( ERROR_GENERIC, ERROR );
 		}
-
-			
-	}
-	
-	$t_project_file_table = config_get( 'mantis_project_file_table' );
-	if ( 1 == $good_upload )
-	{
-		# New file
+		$t_now = db_now();
 		$query = "UPDATE $t_project_file_table
-			SET title='$c_title', description='$c_description', diskfile='$c_file_path$c_file_name',
-			filename='$c_file_name', folder='$c_file_path', filesize=$c_file_size, file_type='$c_file_type', content='$c_content'
-			WHERE id='$c_file_id'";	
-	}
-	else
-	{
+			SET title='$c_title', description='$c_description', date_added=$t_now,
+				filename='$c_file_name', filesize=$c_file_size, file_type='$c_file_type', content='$c_content'
+				WHERE id='$c_file_id'";	
+	}else{
 		$query = "UPDATE $t_project_file_table
 				SET title='$c_title', description='$c_description'
 				WHERE id='$c_file_id'";
@@ -119,6 +115,6 @@
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {
-		print_mantis_error( ERROR_GENERIC );
+		trigger_error( ERROR_GENERIC, ERROR  );
 	}
 ?>

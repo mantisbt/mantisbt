@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add.php,v 1.45 2004-10-05 14:59:08 thraxisp Exp $
+	# $Id: proj_doc_add.php,v 1.46 2004-10-08 19:57:46 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,6 +26,9 @@
 	if ( ! file_allow_project_upload() ) {
 		access_denied();
 	}
+	
+	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
+
 	# @@@@ (thraxisp) this needs a filter for project_id == ALL_PROJECTS
 	#  it fails later when it tries to find the 'filepath' to store the document
 	#  see #4664
@@ -38,7 +41,7 @@
 	$f_description	= gpc_get_string( 'description' );
 	$f_file		= gpc_get_file( 'file' );
 
-		if ( !is_uploaded_file( $f_file['tmp_name'] ) || 0 == $f_file['size'] ) {
+	if ( !is_uploaded_file( $f_file['tmp_name'] ) || 0 == $f_file['size'] ) {
 		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
 	}
 
