@@ -98,7 +98,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value="<? echo $s_submit ?>">
+			<input type=submit value="<? echo $s_submit_button ?>">
 		</td>
 		</form>
 	</tr>

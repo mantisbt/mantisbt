@@ -27,7 +27,7 @@
 	<table width=100%>
 	<tr>
 		<td bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_logged_out ?></b>
+			<b><? echo $s_logged_out_title ?></b>
 		</td>
 	</tr>
 	<tr>

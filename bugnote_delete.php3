@@ -54,7 +54,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_bugnote_deleted<p>";
+		PRINT "$s_bugnote_deleted_msg<p>";
 	}
 	### FAILURE
 	else {

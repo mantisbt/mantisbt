@@ -54,7 +54,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_bug_updated<p>";
+		PRINT "$s_bug_updated_msg<p>";
 	}
 	### FAILURE
 	else {

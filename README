@@ -2,6 +2,9 @@
 Mantis - a php based bugtracking system
 Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
 -------------------------------------------------------------------------------
+
+LICENSE
+
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
@@ -15,15 +18,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 -------------------------------------------------------------------------------
 
-INSTALL          - installation and upgrade instructions
+INSTALL          - installation instructions
+UPGRADING        - upgrade instructions
 CONFIGURATION    - help on custom configuration
 LICENSE          - GPL license
-Changlog         - List of fixes, additions, and todo items
+Changelog        - List of fixes, additions, and todo items
 config_inc.php3  - global configuration options
-db_generate.sql  - SQL tables
 core_API.php3    - core functions
+db_generate.sql  - SQL table statements
+db_upgrade.sql   - SQL upgrade statements
 
 -------------------------------------------------------------------------------
 
@@ -35,25 +41,13 @@ Originally this was written by a friend of mine but he has let me take over the
 project entirely.  In any case I completely rewrote his code.  I attempted to
 make the HTML fairly modular so people could easily dive into customization.
 
-Security exists though I'm not really in a position to judge how secure.  Also
-there are probably some basic checks that I haven't done (because I don't know
-what to check for!).  So, if you're going to use this try to use it in a
-semi-private area until this package has been looked through a few times.
+Security exists though I'm not really in a position to judge how secure.  So,
+if you're going to use this try to use it in a semi-private area until this
+package has been looked through a few times.
 
 You will need to have php, mysql, and a webserver.  You don't need to know too
 much about any of them other than how to set them up and some basic
 administraton commands.
-
-Features:
-
-- Variable controlled appearance
-- Built-in category management
-- Color coded status indicators
-- Integrated news
-- Integrated user management
-- Integrated account management
-- Projection / ETA
-- Items updated since last visit indicators
 
 The release numbering convention I'm using is major.minor.micro.
 Major indicates a large change in the core package, minor a significant

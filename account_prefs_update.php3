@@ -37,7 +37,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_prefs_updated<p>";
+		PRINT "$s_prefs_updated_msg<p>";
 	}
 	### FAILURE
 	else {

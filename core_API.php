@@ -194,7 +194,7 @@
 		}
 	}
 	### --------------------
-	### checks to see whether we need to be displaying the source link
+	### checks to see whether we need to be displaying the version number
 	function print_mantis_version() {
 		global $g_mantis_version, $g_show_version;
 

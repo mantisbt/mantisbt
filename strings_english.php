@@ -7,12 +7,17 @@
 <?
 	# This file is to aid in localization
 
+	### General Strings
+	$s_go_back = "Go Back";
+	$s_proceed = "Click here to proceed";
+	$s_sql_error_detected = "ERROR: SQL error detected.  Please report this to ";
+
 	### account_delete.php3
-	$s_account_protected = "Account protected. Cannot change settings...";
-	$s_account_removed = "Your account has been removed...";
+	$s_account_protected_msg = "Account protected. Cannot change settings...";
+	$s_account_removed_msg = "Your account has been removed...";
 
 	### account_delete_page.php3
-	$s_confirm_delete = "Are you sure you wish to delete your account?";
+	$s_confirm_delete_msg = "Are you sure you wish to delete your account?";
 	$s_delete_account_button = "Delete Account";
 
 	### account_page.php3
@@ -25,26 +30,26 @@
 	$s_confirm_password  = "Confirm Password";
 	$s_access_level = "Access Level";
 	$s_update_user_button = "Update User";
-	$s_delete_account_button = "Delete Account";
+	### $s_delete_account_button # defined above
 
 	### account_prefs_page.php3
-	$s_default_account_preferences = "Default Account Preferences";
+	$s_default_account_preferences_title = "Default Account Preferences";
 	$s_advanced_report = "Advanced Report";
 	$s_advanced_view = "Advanced View";
-	$s_update_prefs = "Update Prefs";
-	$s_reset_prefs = "Reset Prefs";
-
-	### account_prefs_update.php3
-	$s_prefs_updated = "Preferences have been updated...";
+	$s_update_prefs_button = "Update Prefs";
+	$s_reset_prefs_button = "Reset Prefs";
 
 	### account_prefs_reset.php3
-	$s_prefs_reset = "Preferences have been reset...";
+	$s_prefs_reset_msg = "Preferences have been reset...";
+
+	### account_prefs_update.php3
+	$s_prefs_updated_msg = "Preferences have been updated...";
 
 	### account_profile_add.php3
-	$s_profile_added = "Profile added...";
+	$s_profile_added_msg = "Profile added...";
 
 	### account_profile_delete.php3
-	$s_profile_deleted = "Deleted profile...";
+	$s_profile_deleted_msg = "Deleted profile...";
 
 	### account_profile_edit_page.php3
 	$s_edit_profile_title = "Edit Profile";
@@ -55,65 +60,58 @@
 	$s_update_profile_button = "Update Profile";
 
 	### account_profile_make_default.php3
-	$s_profile_defaulted = "Default profile updated...";
+	$s_profile_defaulted_msg = "Default profile updated...";
 
 	### account_profile_manage_page.php3
-	$s_add_profile = "Add Profile";
+	$s_add_profile_msg = "Add Profile";
+	### $s_platform # defined above
+	### $s_operating_system # defined above
+	### $s_verion # defined above
+	### $s_additional_description # defined above
 	$s_add_profile_button = "Add Profile";
-	$s_edit_or_delete_profiles = "Edit or Delete Profiles";
+	$s_edit_or_delete_profiles_title = "Edit or Delete Profiles";
 	$s_edit_profile = "Edit Profile";
 	$s_make_default = "Make Default";
 	$s_delete_profile = "Delete Profile";
 	$s_select_profile = "Select Profile";
-	$s_submit = "Submit";
+	$s_submit_button = "Submit";
 
 	### account_profile_update.php3
-	$s_profile_updated = "Profile updated...";
+	$s_profile_updated_msg = "Profile updated...";
 
 	### account_update.php3
-	$s_account_protected = "Account protected. Cannot change settings...";
-	$s_account_updated = "Your account has been successfully updated...";
+	### $s_account_protected_msg # defined above
+	$s_account_updated_msg = "Your account has been successfully updated...";
 
 	### bug_delete.php3
-	$s_bug_deleted = "Bug has been deleted...";
+	$s_bug_deleted_msg = "Bug has been deleted...";
 
 	### bug_delete_page.php3
-	$s_delete_bug_sure = "Are you sure you wish to delete this bug?";
+	$s_delete_bug_sure_msg = "Are you sure you wish to delete this bug?";
 	$s_delete_bug_button = "Delete Bug";
 
 	### bug_reopen_page.php3
-	$s_bug_reopened = "Bug has been reopened...";
-	$s_bugnote_add_reopen_button = "Add Bugnote and Reopen Bug";
+	$s_bug_reopened_msg = "Bug has been reopened...";
 	$s_reopen_add_bugnote_title = "Add Bugnote Reason For Reopening Bug";
+	$s_bugnote_add_reopen_button = "Add Bugnote and Reopen Bug";
 
 	### bug_resolve_page.php3
 	$s_resolve_bug_title = "Resolve Bug";
+	### $s_resolution # defined above
+	### $s_deuplicate_id # defined above
 	$s_resolve_bug_button = "Resolve Bug";
 
 	### bug_resolve_page2.php3
-	$s_bug_resolved = "Bug has been resolved. Enter bugnote below...";
+	$s_bug_resolved_msg = "Bug has been resolved. Enter bugnote below...";
 	$s_resolve_add_bugnote_title = "Add Bugnote Reason For Resolving Bug";
+	$s_bugnote_add_resolve_button = "Add Bugnote";
 
 	### bug_update.php3
-	$s_bug_updated = "Bug has been successfully updated...";
+	$s_bug_updated_msg = "Bug has been successfully updated...";
 
 	### bug_update_advanced_page.php3
+	$s_back_to_bug_link = "Back To Bug";
 	$s_update_simple_link = "Update Simple";
-	$s_updating_bug_advanced_title = "Updating Bug Information";
-	$s_projection = "Projection";
-	$s_eta = "ETA";
-	$s_os = "OS";
-	$s_os_version = "Version";
-	$s_product_version = "Product Version";
-	$s_build = "Build";
-	$s_votes = "Votes";
-	$s_steps_to = "Steps To";
-	$s_reproduce = "Reproduce";
-
-
-	### bug_update_page.php3
-	$s_back_to_bug = "Back To Bug";
-	$s_update_advanced_link = "Update Advanced";
 	$s_updating_bug_advanced_title = "Updating Bug Information";
 	$s_id = "ID";
 	$s_category = "Category";
@@ -125,34 +123,71 @@
 	$s_assigned_to = "Assigned To";
 	$s_priority = "Priority";
 	$s_resolution = "Resolution";
+	### $s_platform # defined above
 	$s_status = "Status";
 	$s_duplicate_id = "Duplicate ID";
+	$s_os = "OS";
+	$s_projection = "Projection";
+	$s_os_version = "Version";
+	$s_eta = "ETA";
+	$s_product_version = "Product Version";
+	$s_build = "Build";
+	$s_votes = "Votes";
 	$s_summary = "Summary";
 	$s_description = "Description";
+	$s_steps_to = "Steps To";
+	$s_reproduce = "Reproduce";
 	$s_additional = "Additional";
 	$s_information = "Information";
 	$s_update_information_button = "Update Information";
 
+	### bug_update_page.php3
+	### $s_back_to_bug_link # defined above
+	$s_update_advanced_link = "Update Advanced";
+	$s_updating_bug_simple_title = "Updating Bug Information";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	### $s_update_bug_button # defined above
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
+	### $s_reopen_bug_button # defined above
+	### $s_update_information_button # defined above
+
 	### bug_vote_add.php3
-	$s_vote_added = "Vote has been added...";
+	$s_vote_added_msg = "Vote has been added...";
 
 	### bugnote_add.php3
-	$s_bugnote_added = "Bugnote added...";
+	$s_bugnote_added_msg = "Bugnote added...";
 
 	### bugnote_add_inc.php
 	$s_add_bugnote_button = "Add Bugnote";
 
 	### bugnote_add_page.php3
 	$s_add_bugnote_title = "Add Bugnote";
-	$s_add_note_button = "Add Note";
+	### $s_add_bugnote_button # defined above
 
 	### bugnote_delete.php3
-	$s_bugnote_deleted = "Bugnote has been successfully deleted...";
+	$s_bugnote_deleted_msg = "Bugnote has been successfully deleted...";
 	$s_bug_notes_title = "Bug Notes";
 
 	### bugnote_inc.php
-	$s_no_bugnotes = "There are no notes attached to this bug.";
-	$s_delete = "Delete";
+	$s_no_bugnotes_msg = "There are no notes attached to this bug.";
+	### $s_bug_notes_title # defined above
+	$s_delete_link = "Delete";
 
 	### index.php3
 	$s_click_to_login = "Click here to login";
@@ -160,22 +195,28 @@
 	### login.php3
 
 	### login_error_page.php3
-	$s_login_error = "There was an error: your acount may be disabled or the username/password you entered is incorrect.";
+	$s_login_error_msg = "There was an error: your acount may be disabled or the username/password you entered is incorrect.";
 	$s_login_title = "Login";
-	$s_username = "Username";
-	$s_password = "Password";
+	### $s_username # defined above
+	### $s_password # defined above
 	$s_save_login = "Save Login";
 	$s_login_button = "Login";
 
 	### login_page.php3
+	### $s_login_title # defined above
+	### $s_username # defined above
+	### $s_password # defined above
+	### $s_save_login # defined above
+	### $s_login_button # defined above
+
 	### logout_page.php3
-	$s_logged_out = "Logged Out...";
+	$s_logged_out_title = "Logged Out...";
 	$s_redirecting = "...Redirecting";
 	$s_here = "Here";
 
 	### main_page.php3
-	$s_newer_news = "Newer News";
-	$s_older_news = "Older News";
+	$s_newer_news_link = "Newer News";
+	$s_older_news_link = "Older News";
 
 	### manage_category_page.php3
 	$s_edit_categories_title = "Edit Categories";
@@ -183,7 +224,7 @@
 	$s_update_categories_button = "Update Categories";
 
 	### manage_category_update.php3
-	$s_categories_updated = "Cateogries successfully updated...";
+	$s_categories_updated_msg = "Cateogries successfully updated...";
 
 	### manage_create_new_user.php3
 	$s_created_user_part1 = "Created user";
@@ -191,8 +232,11 @@
 
 	### manage_create_user_page.php3
 	$s_create_new_account_title = "Create New Account";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_password # defined above
 	$s_verify_password = "Verify Password";
-	$s_access_level = "Access Level";
+	### $s_access_level # defined above
 	$s_enabled = "Enabled";
 	$s_protected = "Protected";
 	$s_create_user_button = "Create User";
@@ -201,8 +245,13 @@
 	$s_create_new_account_link = "Create New Account";
 	$s_manage_categories_link = "Categories";
 	$s_manage_product_versions_link = "Product Versions";
-	$s_documentation = "Documentation";
+	$s_documentation_link = "Documentation";
 	$s_manage_accounts_title = "Manage Accounts";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_access_level # defined above
+	### $s_enabled # defined above
+	$s_p = "p";
 	$s_date_created = "Date Created";
 	$s_last_visit = "Last Visit";
 	$s_edit_user_link = "Edit User";
@@ -213,30 +262,35 @@
 	$s_update_versions_button = "Update Versions";
 
 	### manage_product_versions_update.php3
-	$s_product_version_updated = "Product versions successfully updated...";
+	$s_product_version_updated_msg = "Product versions successfully updated...";
 
 	### manage_user_delete.php3
-	$s_account_delete_protected = "Account protected. Cannot delete this account.";
-	$s_account_deleted = "Account deleted...";
+	$s_account_delete_protected_msg = "Account protected. Cannot delete this account.";
+	$s_account_deleted_msg = "Account deleted...";
 
 	### manage_user_delete_page.php3
-	$s_delete_account_sure = "Are you sure you wish to delete this account?";
-	$s_delete_account_button = "Delete Account";
+	$s_delete_account_sure_msg = "Are you sure you wish to delete this account?";
+	### $s_delete_account_button # defined above
 
 	### manage_user_page.php3
 	$s_edit_user_title = "Edit User";
-	$s_update_user_button = "Update User";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_access_level # defined above
+	### $s_enabled # defined above
+	### $s_protected # defined above
+	### $s_update_user_button # defined above
 	$s_reset_password_button = "Reset Password";
 	$s_delete_user_button = "Delete User";
 	$s_reset_password_msg = "Reset Password sets the password to be blank.";
 
 	### manage_user_reset.php3
-	$s_account_reset_protected = "Account protected. Cannot reset the password.";
-	$s_account_reset = "Account password reset...";
+	$s_account_reset_protected_msg = "Account protected. Cannot reset the password.";
+	$s_account_reset_msg = "Account password reset...";
 
 	### manage_user_update.php3
-	$s_manage_user_protected = "Account protected. Access level and enabled protected. Otherwise, account has been updated...";
-	$s_manage_user_updated = "Account successfully updated...";
+	$s_manage_user_protected_msg = "Account protected. Access level and enabled protected. Otherwise, account has been updated...";
+	$s_manage_user_updated_msg = "Account successfully updated...";
 
 	### menu_inc.php
 	$s_main_link = "Main";
@@ -252,11 +306,12 @@
 	### meta_inc.php
 	### mysql_error_page.php3
 	### news_add.php3
+
 	### news_delete.php3
-	$s_news_deleted = "Deleted news item...";
+	$s_news_deleted_msg = "Deleted news item...";
 
 	### news_delete_page.php3
-	$s_delete_news_sure = "Are you sure you wish to delete this news item?";
+	$s_delete_news_sure_msg = "Are you sure you wish to delete this news item?";
 	$s_delete_news_item_button = "Delete News Item";
 
 	### news_edit_page.php3
@@ -267,40 +322,63 @@
 
 	### news_menu_page.php3
 	$s_add_news_title = "Add News";
-	$s_headline = "Headline";
+	### $s_headline # defined above
 	$s_do_not_use = "Do not use";
+	### $s_body # defined above
 	$s_post_news_button = "Post News";
-
 	$s_edit_or_delete_news_title = "Edit or Delete News";
 	$s_edit_post = "Edit Post";
 	$s_delete_post = "Delete Post";
 	$s_select_post = "Select Post";
-	$s_submit = "Submit";
+	### $s_submit_button # defined above
 
 	### news_update.php3
-	$s_news_updated = "News item updated...";
+	$s_news_updated_msg = "News item updated...";
 
 	### report_add.php3
-	$s_report_add_error = "ERROR: There was an error in your report.";
-	$s_hit_back = "Please hit back and renter the required fields.";
-	$s_submission_thanks = "Thank you for your submission.";
+	$s_report_add_error_msg = "ERROR: There was an error in your report.";
+	$s_must_enter_category = "You must select a category";
+	$s_must_enter_severity = "You must select a severity";
+	$s_must_enter_reproducibility = "You must select a reproducibility";
+	$s_must_enter_summary = "You must enter a summary";
+	$s_must_enter_description = "You must enter a description";
+	$s_hit_back_msg = "Please hit back and renter the required fields.";
+	$s_submission_thanks_msg = "Thank you for your submission.";
 
 	### report_bug_advanced_page.php3
 	$s_simple_report_link = "Simple Report";
-	$s_select_profile = "Select Profile";
-	$s_or_fill_in = "OR Fill In";
-	$s_steps_to_reproduce = "Steps To Reproduce";
-
-	### report_bug_page.php3
-	$s_advanced_report_link = "Advanced Report";
 	$s_enter_report_details_title = "Enter Report Details";
-	$s_category = "Category";
+	### $s_category
 	$s_required = "required";
+	### $s_reproducibility
+	### $s_severity
+	### $s_select_profile # defined above
+	$s_or_fill_in = "OR Fill In";
+	### $s_platform # defined above
+	### $s_os # defined above
+	### $s_os_version # defined above
+	### $s_product_version # defined above
+	### $s_product_build # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	$s_steps_to_reproduce = "Steps To Reproduce";
 	$s_additional_information = "Additional Information";
 	$s_submit_report_button = "Submit Report";
 
+	### report_bug_page.php3
+	$s_advanced_report_link = "Advanced Report";
+	### $s_enter_report_details_title # defined above
+	### $s_category # defined above
+	### $s_required # defined above
+	### $s_reproducibility
+	### $s_severity
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional_information # defined above
+	### $s_submit_report_button # defined above
+
 	### show_source_page.php3
-	$s_show_source_for = "Showing source for";
+	$s_show_source_for_msg = "Showing source for";
 	$s_not_supported_part1 = "This version";
 	$s_not_supported_part2 = "of php does not support";
 
@@ -321,32 +399,107 @@
 	### view_bug_advanced_page.php3
 	$s_view_simple_link = "View Simple";
 	$s_viewing_bug_advanced_details_title = "Viewing Bug Advanced Details";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_platform # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_os # defined above
+	### $s_projection # defined above
+	### $s_os_version # defined above
+	### $s_eta # defined above
+	### $s_product_version # defined above
 	$s_product_build = "Product Build";
+	### $s_votes # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_steps_to # defined above
+	### $s_reproduce # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	$s_system_profile = "System Description";
 	$s_update_bug_button = "Update Bug";
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
 	$s_reopen_bug_button = "Reopen Bug";
 
 	### view_bug_all_page.php3
 	$s_reported_bugs_link = "Reported Bugs";
 	$s_assigned_bugs_link = "Assigned Bugs";
 	$s_any = "any";
-	$s_viewing_bug_details_title = "Viewing Bug Details";
 	$s_show = "Show";
 	$s_changed = "Changed(hrs)";
 	$s_hide_resolved = "Hide Resolved";
 	$s_filter_button = "Filter";
 	$s_viewing_bugs_title = "Viewing Bugs";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
 	$s_updated = "Updated";
+	### $s_summary # defined above
 
 	### view_bug_page.php3
 	$s_view_advanced_link = "View Advanced";
+	### $s_viewing_bug_details_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	### $s_update_bug_button # defined above
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
+	### $s_reopen_bug_button # defined above
 
 	### view_user_assigned_bug_page.php3
 	$s_all_bugs_link = "All Bugs";
+	### $s_reported_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
 
 	### view_user_reported_bug_page.php3
-
-	### General Strings
-	$s_go_back = "Go Back";
-	$s_proceed = "Click here to proceed";
-	$s_sql_error_detected = "ERROR: SQL error detected.  Please report this to ";
+	### $s_all_bugs_link # defined above
+	### $s_assigned_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
 ?>

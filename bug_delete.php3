@@ -67,7 +67,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_bug_deleted<p>";
+		PRINT "$s_bug_deleted_msg<p>";
 	}
 	### FAILURE
 	else {

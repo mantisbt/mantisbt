@@ -78,7 +78,7 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "$s_bugnote_added<p>";
+		PRINT "$s_bugnote_added_msg<p>";
 	}
 	### OK!!!
 	else {

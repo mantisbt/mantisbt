@@ -40,6 +40,7 @@ Each major section is partitioned via the menu.  Every section is treated as a p
 <li><a href="#editing_bugs">Editing Bugs</a>
 	<ul>
 	<li><a href="#delete_bug">Delete Bug</a>
+	<li><a href="#resolve_bug">Resolve Bug</a>
 	<li><a href="#update_bug_simple">Update Bug Simple</a>
 	<li><a href="#update_bug_advanced">Update Bug Advanced</a>
 	</ul>
@@ -68,6 +69,7 @@ Each major section is partitioned via the menu.  Every section is treated as a p
 	<li><a href="#documentation">Documentation</a>
 	</ul>
 <li><a href="#edit_news">Edit News</a>
+<li><a href="#docs">Docs</a>
 <li><a href="#logout">Logout</a>
 </ul>
 
@@ -233,6 +235,12 @@ These options are only available to Updaters, Developers, and Administrators.
 <p>
 This option on the <a href="#view_bug">View Bugs</a> page allows you to delete an existing bug.  This should only be used on frivolous or test bugs.  A confirmation screen will prompt you if you really want to delete the bug.
 <p>
+
+<h4><a name=resolve_bug>[ Resolve Bug ]</a></h4>
+<p>
+This option on the <a href="#view_bug">View Bugs</a> page allows you to resolve the bug.  It will lead you to a page where you can set the resolution state and a duplicate id (if applicable).  After choosing that the user can choose to enter a bugnote detailing the reason for the closure.
+<p>
+
 <h4><a name=update_bug_simple>[ Update Bug Simple ]</a></h4>
 <p>
 Here you can update various bug fields.  The Category, Severity, and Reproducibility fields are editable but shouldn't be unless there is a gross miscategorization.
@@ -274,7 +282,7 @@ Just click on the Delete link to remove an unwanted bugnote.  There is no confir
 <p>
 <h4><a name=reopen_bug>[ Reopen Bug ]</a></h4>
 <p>
-If the bug is currently resolved you can use this to reopen the bug.  Then you will be allowed to enter bugnotes.  The bug will automatically be put into Feedback status.
+If the bug is currently resolved you can use this to reopen the bug.  Then you will be allowed to enter bugnotes.  You will be sent to a page where you can enter a bugnote for the reason to reopen the bug.  The bug will automatically be put into Feedback status.
 <p>
 </blockquote>
 
@@ -304,18 +312,6 @@ The advanced form has, of course, more fields to fill in than the simple version
 <h3><a name=summary>[ Summary ]</a></h3>
 <p>
 This shows a detailed summary of the state of the bugtracker according to several (hopefully) useful metrics.
-
-<p>
-<i>*** Suggested feature</i>: <u>Show reported/assigned bugs for logged in user</u> :
-<blockquote>
-Display a listing of the bugs that the user has reporter or has had assigned to him/her.
-</blockquote>
-
-<p>
-<i>*** Suggested feature</i>: <u>Show additional metrics</u> :
-<blockquote>
-Average time to close a bug; longest time open.
-</blockquote>
 
 <!-- ---------------------------------------------------------------------- -->
 <p>
@@ -404,6 +400,14 @@ Allow certain HTML tags in news post body.  Specifically &lt;A&gt;, &lt;B&gt;, &
 <h3><a name=logout>[ Logout ]</a></h3>
 <p>
 This deletes the user cookie and redirects the user to a specified page (default is to redirect to the index page which redirects the user to the <a href="#login">Login</a> page)
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=docs>[ Docs ]</a></h3>
+<p>
+This shows this documentation file.
+
+<!-- ---------------------------------------------------------------------- -->
 
 <p>
 <hr size=1>

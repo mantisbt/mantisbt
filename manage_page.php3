@@ -58,7 +58,7 @@
 	[ <a href="<? echo $g_manage_create_user_page ?>"><? echo $s_create_new_account_link ?></a> ]
 	[ <a href="<? echo $g_manage_category_page ?>"><? echo $s_manage_categories_link ?></a> ]
 	[ <a href="<? echo $g_manage_product_versions_page ?>"><? echo $s_manage_product_versions_link ?></a> ]
-	[ <a href="<? echo $g_documentation_page ?>"><? echo $s_documentation ?></a> ]
+	[ <a href="<? echo $g_documentation_page ?>"><? echo $s_documentation_link ?></a> ]
 </div>
 
 <p>
@@ -95,7 +95,7 @@
 		</td>
 		<td>
 			<b>
-				<a href="<? echo $g_manage_page ?>?f_sort=protected&f_dir=<? echo $f_dir?>">p</a>
+				<a href="<? echo $g_manage_page ?>?f_sort=protected&f_dir=<? echo $f_dir?>"><? echo $s_p ?></a>
 			</b>
 		</td>
 		<td>

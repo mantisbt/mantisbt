@@ -88,10 +88,10 @@
 	$f_offset_prev = $f_offset - $g_news_view_limit;
 
 	if ( $f_offset_prev >= 0) {
-		PRINT "[ <a href=\"$g_main_page?f_offset=$f_offset_prev\">$s_newer_news</a> ]";
+		PRINT "[ <a href=\"$g_main_page?f_offset=$f_offset_prev\">$s_newer_news_link</a> ]";
 	}
 	if ( $news_count==$g_news_view_limit ) {
-		PRINT " [ <a href=\"$g_main_page?f_offset=$f_offset_next\">$s_older_news</a> ]";
+		PRINT " [ <a href=\"$g_main_page?f_offset=$f_offset_next\">$s_older_news_link</a> ]";
 	}
 ?>
 </div>

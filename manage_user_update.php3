@@ -55,10 +55,10 @@
 <div align=center>
 <?
 	if ( $f_protected=="on" ) {
-		PRINT "$s_manage_user_protected<p>";
+		PRINT "$s_manage_user_protected_msg<p>";
 	}
 	else if ( $result ) {
-		PRINT "$s_manage_user_updated<p>";
+		PRINT "$s_manage_user_updated_msg<p>";
 	}
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";

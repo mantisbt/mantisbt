@@ -45,7 +45,7 @@
 ?>
 <p>
 <div align=center>
-[ <a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_back_to_bug ?></a> ]
+[ <a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_back_to_bug_link ?></a> ]
 [ <a href="<? echo $g_bug_update_advanced_page ?>?f_id=<? echo $f_id ?>&f_bug_text_id=<? echo $f_bug_text_id ?>"><? echo $s_update_advanced_link ?></a> ]
 </div>
 <?

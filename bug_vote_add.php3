@@ -37,7 +37,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_vote_added<p>";
+		PRINT "$s_vote_added_msg<p>";
 	}
 	### FAILURE
 	else {

@@ -6,6 +6,9 @@
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
+<?
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
@@ -22,7 +25,7 @@
 <div align=center>
 <hr size=1 width=50%>
 
-<? echo $s_delete_news_sure ?>
+<? echo $s_delete_news_sure_msg ?>
 
 <form method=post action="<? echo $g_news_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">

@@ -37,7 +37,7 @@
 	<input type=hidden name=f_user_id value="<? echo get_current_user_field( "id " ) ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_add_profile ?></b>
+			<b><? echo $s_add_profile_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -94,7 +94,7 @@
 	<input type=hidden name=f_user_id value="<? echo get_current_user_field( "id " ) ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_edit_or_delete_profiles ?></b>
+			<b><? echo $s_edit_or_delete_profiles_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -116,7 +116,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value="<? echo $s_submit ?>">
+			<input type=submit value="<? echo $s_submit_button ?>">
 		</td>
 		</form>
 	</tr>

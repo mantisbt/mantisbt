@@ -21,7 +21,7 @@
 <hr size=1 width=50%>
 <p>
 <div align=center>
-<? echo $s_delete_bug_sure ?>
+<? echo $s_delete_bug_sure_msg ?>
 <p>
 <form method=post action="<? echo $g_bug_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">

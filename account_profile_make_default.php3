@@ -49,7 +49,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_profile_defaulted<p>";
+		PRINT "$s_profile_defaulted__msg<p>";
 	}
 	### FAILURE
 	else {

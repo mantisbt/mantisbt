@@ -52,11 +52,11 @@
 <?
 	### PROTECTED
 	if ( $f_protected=="on" ) {
-		PRINT "$s_account_protected<p>";
+		PRINT "$s_account_protected_msg<p>";
 	}
 	### SUCCESS
 	else if ( $result ) {
-		PRINT "$s_account_removed<p>";
+		PRINT "$s_account_removed_msg<p>";
 	}
 	### FAILURE
 	else {

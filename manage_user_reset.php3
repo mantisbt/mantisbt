@@ -44,10 +44,10 @@
 <div align=center>
 <?
 	if ( $f_protected=="on" ) {
-		PRINT "$s_account_reset_protected<p>";
+		PRINT "$s_account_reset_protected_msg<p>";
 	}
 	else if ( $result ) {
-		PRINT "$s_account_reset<p>";
+		PRINT "$s_account_reset_msg<p>";
 	}
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";

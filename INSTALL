@@ -85,7 +85,7 @@ result the crypt() funtion may not work properly.
 -------------------------------------------------------------------------------
 
 http://www.mysql.com/      -  good documentation.
-http://www.phpwizarn.net/  -  an excellent web front end to mysql.
+http://www.phpwizard.net/  -  an excellent web front end to mysql.
 http://www.php.net/        -  excellent documentation.
 http://www.apache.org/     -  you should be able to find what you need, I hope.
 http://www.phpwizard.net/  -  phpMyAdmin: a web based front end to mysql.

@@ -51,7 +51,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_profile_added<p>";
+		PRINT "$s_profile_added_msg<p>";
 	}
 	### FAILURE
 	else {

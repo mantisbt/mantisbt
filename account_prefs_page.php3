@@ -64,7 +64,7 @@
 		<input type=hidden name=f_user_id value="<? echo $u_user_id ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_default_account_preferences ?></b>
+			<b><? echo $s_default_account_preferences_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
@@ -85,13 +85,13 @@
 	</tr>
 	<tr align=center>
 		<td>
-			<input type=submit value="<? echo $s_update_prefs ?>">
+			<input type=submit value="<? echo $s_update_prefs_button ?>">
 		</td>
 		</form>
 		<form method=post action="<? echo $g_account_prefs_reset ?>">
 			<input type=hidden name=f_id value="<? echo $u_id ?>">
 		<td>
-			<input type=submit value="<? echo $s_reset_prefs ?>">
+			<input type=submit value="<? echo $s_reset_prefs_button ?>">
 		</td>
 		</form>
 	</tr>

@@ -68,14 +68,14 @@
 
 	#--------------------
 	# time for coookie to live in seconds
-	$g_time_length              = 30000000;     # 1 year
+	$g_time_length               = 30000000;     # 1 year
 	# time to delay between page redirects
-	$g_wait_time                = 1;            # in seconds
+	$g_wait_time                 = 2;            # in seconds
 	#--------------------
 
 	#--------------------
 	# limit the number of news items to be displayed on the main page
-	$g_news_view_limit      = 5;
+	$g_news_view_limit           = 5;
 	#--------------------
 
 	#--------------------

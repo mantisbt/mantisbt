@@ -25,7 +25,7 @@
 <div align=center>
 <hr size=1 width=50%>
 
-<? echo $s_confirm_delete ?>
+<? echo $s_confirm_delete_msg ?>
 
 <form method=post action="<? echo $g_account_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">

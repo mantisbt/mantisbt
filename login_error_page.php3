@@ -15,7 +15,7 @@
 
 <p>
 <div align=center>
-<? echo $s_login_error ?>
+<? echo $s_login_error_msg ?>
 </div>
 
 <p>

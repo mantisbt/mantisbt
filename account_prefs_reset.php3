@@ -37,7 +37,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_prefs_reset<p>";
+		PRINT "$s_prefs_reset_msg<p>";
 	}
 	### FAILURE
 	else {

@@ -256,7 +256,10 @@
 				FROM $g_mantis_user_profile_table
 				WHERE id='$v_profile_id'";
 		$result = db_query( $query );
-		$t_profile_description = db_result( $result, 0 );
+		$t_profile_description = "";
+		if ( db_num_rows( $result ) > 0 ) {
+			$t_profile_description = db_result( $result, 0 );
+		}
 		$t_profile_description = string_display_with_br( $t_profile_description );
 
 ?>

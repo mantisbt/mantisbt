@@ -1,4 +1,5 @@
-This file contains information to help you customize Mantis.
+This file contains information to help you customize Mantis.  A more
+detailed doc is in the works.
 
 * config_inc.php - this file contains all the site-wide variables.
   It is advisable to rename this to something else then change the
@@ -8,14 +9,17 @@ This file contains information to help you customize Mantis.
 
   NOTE: since the package is still being changed a fair amount I suggest
   the following.  You configure the config_inc.php file but then rename
-  it to something like my_config.php.  Then when you copy a new release
+  it to something like my_config.php.  When you copy a new release
   over it will overwrite the config_inc.php.  Open up that file and
-  at the very bottom put: include ("my_config.php");
+  at the very bottom put: include("my_config.php");
   This way any new varaibles get setup and then your custom settings
   overwrite anything else.  After you get up and running you can go back
   and modify config_inc.php and then repeat the cycle.
 
-* core_API.php - this file contains all the critical functions
+  The file contains several setting variables that you can configure.  Most of
+  it should be self explanatory
+
+* core_API.php - this file contains all the functions
 
 * To add more categories just edit through the manage area.  The format must
   be separated by , and enclosed in ''.
@@ -27,12 +31,7 @@ This file contains information to help you customize Mantis.
 * form variables are prefixed with f_
 * user related variables are prefixed with u_
 * other variables are usually either prefixed with v_ or t_
-* count variables usually have the word count in the variable name
-
-* Each file checks to see if the user is logged in using
-index_login_cookie_check() or login_cookie_check().  This is to prevent
-unauthorized access.  This merely retrieves a cookie and matches it
-against the stored user information.
+* count variables have the word count in the variable name
 
 * The files are split into three basic catgories, viewable pages,
 include files and pure scripts. Examining the viewable pages (suffix _page)
@@ -42,15 +41,19 @@ work into many small files rather than have a small number of really
 large files.
 
 * Most of the action scripts have a confirmation page to make sure the action
-completed sucessfully.  To remove this step just add a
-Header( "Location: <redirect_page_name>" ) command before the HTML begins.
+completed sucessfully.  The pages will automatically redirect you after a
+short amount of time.  You can shorten of lengthen the time by editing
+$g_wait_time in config_inc.php.
 
 * Edit css_inc.php to make your own page formatting.
 
-* All files were editted with TAB SPACES set to 4.  I'm sorry if this causes
-a problem, but I can't stand 8 and tabs are helpful.  I've tried to alleviate
-this in the config file by using spaces for the most part.
+* You can edit the print_header() and print_footer() functions in core_API.php
+  to alter what should be visible at the top and bottom of each page.
 
-****** A note on globals: globals are a rather quirky item in php.  Basically
+* All files were editted with TAB SPACES set to 4.  I'm sorry if this causes
+a problem, but I can't stand 8 (wastes space) and tabs are helpful.  I've
+tried to alleviate this in the config file by using spaces for the most part.
+
+*** A note on globals: globals are a rather quirky item in php.  Basically
 all variables are always local in scope unless declared global.  This is why
 some of the include() files have global deslarations in them.

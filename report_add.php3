@@ -121,24 +121,24 @@
 	### FORM ERROR
 	### required fields not entered
 	if ( $check_failed ) {
-		PRINT "<b>$s_report_add_error</b><br>";
+		PRINT "<b>$s_report_add_error_msg</b><p>";
 		if ( $f_category=="" ) {
-			PRINT "You must select a category<br>";
+			PRINT "$s_must_enter_category<br>";
 		}
 		if ( $f_severity=="" ) {
-			PRINT "You must select a severity<br>";
+			PRINT "$s_must_enter_severity<br>";
 		}
 		if ( $f_reproducibility=="" ) {
-			PRINT "You must select a reproducibility<br>";
+			PRINT "$s_must_enter_reproducibility<br>";
 		}
 		if ( $f_summary=="" ) {
-			PRINT "You must enter a summary<br>";
+			PRINT "$s_must_enter_summary<br>";
 		}
 		if ( $f_description=="" ) {
-			PRINT "You must enter a description<br>";
+			PRINT "$s_must_enter_description<br>";
 		}
 		PRINT "<p>";
-		PRINT "$s_hit_back";
+		PRINT "$s_hit_back_msg";
 	}
 	### MYSQL ERROR
 	else if ( !$result ) {
@@ -147,7 +147,7 @@
 	}
 	### OK!!!
 	else {
-		PRINT "$s_submission_thanks<p>";
+		PRINT "$s_submission_thanks_msg<p>";
 	}
 ?>
 <p>

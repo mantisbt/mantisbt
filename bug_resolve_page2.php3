@@ -45,7 +45,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_bug_resolved<p>";
+		PRINT "$s_bug_resolved_msg<p>";
 	}
 	### FAILURE
 	else {
@@ -71,12 +71,12 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_primary_color_dark ?> align=center>
-			<textarea name=f_bugnote_text cols=80 rows=10>Fixed</textarea>
+			<textarea name=f_bugnote_text cols=80 rows=10></textarea>
 		</td>
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_primary_color_light ?> align=center>
-			<input type=submit value="<? echo $s_bugnote_add_reopen_button ?>">
+			<input type=submit value="<? echo $s_bugnote_add_resolve_button ?>">
 		</td>
 	</tr>
 	</form>

@@ -47,7 +47,7 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "$s_news_updated<p>";
+		PRINT "$s_news_updated_msg<p>";
 	}
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";

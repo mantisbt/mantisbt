@@ -41,7 +41,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_bug_reopened<p>";
+		PRINT "$s_bug_reopened_msg<p>";
 	}
 	### FAILURE
 	else {

@@ -50,7 +50,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "$s_profile_updated<p>";
+		PRINT "$s_profile_updated_msg<p>";
 	}
 	### FAILURE
 	else {

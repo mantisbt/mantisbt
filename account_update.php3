@@ -51,11 +51,11 @@
 <?
 	### PROTECTED
 	if ( $f_protected=="on" ) {
-		PRINT "$s_account_protected<p>";
+		PRINT "$s_account_protected_msg<p>";
 	}
 	### SUCCESS
 	else if ( $result ) {
-		PRINT "$s_account_updated<p>";
+		PRINT "$s_account_updated_msg<p>";
 	}
 	### FAILURE
 	else {

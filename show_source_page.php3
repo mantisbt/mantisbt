@@ -40,7 +40,7 @@
 <p>
 <div align=left>
 <?
-	PRINT "$s_show_source_for: $f_url<p>";
+	PRINT "$s_show_source_for_msg: $f_url<p>";
 	### Print source
 	$t_ver = phpversion();
 	if ( floor( $t_ver )>=4 ) {

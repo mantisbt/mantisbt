@@ -48,7 +48,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_primary_color_light ?> align=center>
-			<input type=submit value="<? echo $s_add_note_button ?>">
+			<input type=submit value="<? echo $s_add_bugnote_button ?>">
 		</td>
 	</tr>
 	</form>
