@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.62 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.63 2004-01-13 13:09:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -188,7 +188,9 @@
 		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
+		<select name="resolution">
+			<?php print_enum_string_option_list( "resolution", $t_bug->resolution ) ?>
+		</select>
 	</td>
 
 	<!-- spacer -->
@@ -214,7 +216,7 @@
 		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
-		<?php echo $t_bug->duplicate_id ?>
+		<input type="text" name="duplicate_id" value="<?php echo $t_bug->duplicate_id ?>" maxlength="7" />
 	</td>
 
 	<!-- spacer -->

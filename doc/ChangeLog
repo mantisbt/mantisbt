@@ -2,12 +2,14 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.1
 
+ * Fix #3400: Reopen a 'closed' bug, the value of 'resolution' is 'reopen' and can't be changed (now resolution / duplicate id can be edited)
  * Fix #3467: Delete user ends up at user not found error.
  * Fix #3475: Reopen bug to custom status possibility.
  * Fix #3479: Reset account preferences of a user results in reset administrators (current) account.
  * Fix #3493: Missing string $s_bug_deleted in German (and some other) translation
  * Fix #3495: Warning even if administrator account is disabled.
  * Fix #3501: No output for print_all_bug_page.php when status=closed, and Hide Status Closed is selected.
+ * Fix #3506: PHP error if "duplicate id" refers to a bug that does not exist.
  * Updated copyright to include 2004
 
 2003.12.08  -  0.18.0
