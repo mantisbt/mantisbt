@@ -16,26 +16,26 @@
 	$s_print_all_bug_page_link = "Drukuj Zg³oszenia";
 	$s_csv_export = "Eksport CSV";
 	$s_login_anonymously = "Logowanie Anonimowe";
-	$s_jump_to_bugnotes = "Jump to Bugnotes";
-	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
-	$s_access_level_project = "Project Access Level";
-	$s_view_submitted_bug_link = "View Submitted Bug";
-	$s_assigned_projects = "Assigned Projects";
-	$s_unassigned_projects = "Unassigned Projects";
+	$s_jump_to_bugnotes = "Przejd¼ do komentarzy";
+	$s_public_project_msg = "Ten projekt jest PUBLICZNY. Wszyscy u¿ytkownicy posiadaj± dostêp do tego projektu.";
+	$s_access_level_project = "Poziom dostêpu";
+	$s_view_submitted_bug_link = "Zobacz zg³oszony b³±d";
+	$s_assigned_projects = "Projekty przypisane";
+	$s_unassigned_projects = "Projekty nieprzypisane";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
+	$MANTIS_ERROR[ERROR_GENERIC] = "B£¡D: Wyst±pi³ b³±d podczas wykonywanej operacji.  Mo¿esz zg³osciæ ten b³±d Twojemu administratorowi.";
 	$MANTIS_ERROR[ERROR_SQL] = "B£¡D: Wykryto b³±d SQL. Proszê o zg³oszenie b³êdu do ";
 	$MANTIS_ERROR[ERROR_LOGIN] = "B£¡D: Twoje konto mo¿e byæ wy³±czone lub nazwa u¿ytkownika/has³o nie s± poprawne.";
 	$MANTIS_ERROR[ERROR_REPORT] = "B£¡D: Wyst±pi³ b³±d w twoim zg³oszeniu.";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "B£¡D: Nie zosta³ podany ¿aden plik.";
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "B£¡D: Typ przesy³anego pliku nie jest dozwolony.";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "B£¡D: Podany katalog nie istnieje. Sprawd¼ ustawienia projektu.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "B£¡D: Podana kategoria ju¿ istnieje.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "B£¡D: Podana wersja ju¿ istnieje.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "B£¡D: Plik o podanej nazwie ju¿ istnieje. Usuñ najpierw istniej±cy plik.";
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "B£¡D: Wymagane pole nie jest wype³nione. Sprawd¼ wprowadzone dane.";
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = "B£¡D: To konto jest zabezpieczone. Nie masz praw dostêpu do tego konta póki zabezpieczenie jest aktywne.";
 
 	# General Strings
 	$s_go_back = "Powrót";
@@ -185,7 +185,7 @@
 	$s_close_immediately   = "Zamknij natychmiast:";
 
 	# bug_close_page.php3
-	$s_close_bug_title = "Close Bug";
+	$s_close_bug_title = "Zamykanie B³êdu";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "B³±d zosta³ usuniêty...";
@@ -261,7 +261,7 @@
 
 	# bugnote_delete.php3
 	$s_bugnote_deleted_msg = "Komentarz zosta³ pomy¶lnie usuniêty...";
-	$s_bug_notes_title = "Komentarz";
+	$s_bug_notes_title = "Komentarze";
 
 	# bugnote_edit_page.php3
 	$s_edit_bugnote_title = "Edytuj Komentarz";
