@@ -15,24 +15,24 @@
 	} else {
 		$specific_where = " project_id='$g_project_cookie_val'";
 	}
-	$t_res_val = RESOLVED;
+	$t_clo_val = CLOSED;
 	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 			UNIX_TIMESTAMP(last_updated) as last_updated
 			FROM $g_mantis_bug_table
-			WHERE $specific_where AND status='$t_res_val'";
+			WHERE $specific_where AND status='$t_clo_val'";
 	$result = db_query( $query );
 	$bug_count = db_num_rows( $result );
 
-	$t_bug_id = 0;
+	$t_bug_id       = 0;
 	$t_largest_diff = 0;
-	$t_total_time = 0;
+	$t_total_time   = 0;
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_date_submitted = ($row["date_submitted"]);
-		$t_last_updated = $row["last_updated"];
+		$t_date_submitted = $row["date_submitted"];
+		$t_last_updated   = $row["last_updated"];
 
 		if ($t_last_updated < $t_date_submitted) {
-			$t_last_updated = 0;
+			$t_last_updated   = 0;
 			$t_date_submitted = 0;
 		}
 
