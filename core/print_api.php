@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.6 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: print_api.php,v 1.7 2002-08-30 13:42:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -17,16 +17,16 @@
 
 	# --------------------
 	function print_header_redirect( $p_url ) {
-		global $g_use_iis;
+		$t_use_iis = config_get( 'use_iis');
 
-		if ( OFF == $g_use_iis ) {
+		if ( OFF == $t_use_iis ) {
 			header( 'Status: 302' );
 		}
 		header( 'Content-Type: text/html' );
 		header( 'Pragma: no-cache' );
 		header( 'Expires: Fri, 01 Jan 1999 00:00:00 GMT' );
 		header( 'Cache-control: no-cache, no-cache="Set-Cookie", private' );
-		if ( ON == $g_use_iis ) {
+		if ( ON == $t_use_iis ) {
 			header( "Refresh: 0;url=$p_url" );
 		} else {
 			header( "Location: $p_url" );
@@ -36,16 +36,14 @@
 	# --------------------
 	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
-		global $g_mantis_user_table, $s_user_no_longer_exists;
-
-		$c_user_id = (integer)$p_user_id;
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		# invalid user
 		if ( '0000000' == $p_user_id ) {
 			return;
 		}
 	    $query = "SELECT username, email
-	    		FROM $g_mantis_user_table
+	    		FROM " . config_get( 'mantis_user_table' ) . "
 	    		WHERE id='$c_user_id'";
 	    $result = db_query( $query );
 	    if ( db_num_rows( $result ) > 0 ) {
@@ -54,21 +52,19 @@
 
 			print_email_link( $t_email, $t_username );
 		} else {
-			PRINT $s_user_no_longer_exists;
+			echo lang_get ( 'user_no_longer_exists' );
 		}
 	}
 	# --------------------
 	# same as print_user() but fills in the subject with the bug summary
 	function print_user_with_subject( $p_user_id, $p_bug_id ) {
-		global $g_mantis_user_table, $s_user_no_longer_exists;
-
-		$c_user_id = (integer)$p_user_id;
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		if ( '0000000' == $p_user_id ) {
 			return;
 		}
 	    $query = "SELECT username, email
-	    		FROM $g_mantis_user_table
+	    		FROM " . config_get( 'mantis_user_table' ) . "
 	    		WHERE id='$c_user_id'";
 	    $result = db_query( $query );
 	    if ( db_num_rows( $result ) > 0 ) {
@@ -77,7 +73,7 @@
 
 			print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 		} else {
-			PRINT $s_user_no_longer_exists;
+			echo lang_get( 'user_no_longer_exists' );
 		}
 	}
 	# --------------------
@@ -205,19 +201,13 @@
 		foreach ( $user_arr as $key => $val ) {
 			$v_id = $val[1];
 			$v_username = $val[0];
-			if ( $v_id == $p_user_id ) {
-				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_username</option>";
-			} else {
-				PRINT "<option value=\"$v_id\">$v_username</option>";
-			}
+			echo "<option value=\"$v_id\"" . check_selected( $v_id, $p_user_id ) . ">$v_username</option>";
 		} # end foreach
 	}
 	# --------------------
 	function print_duplicate_id_option_list() {
-		global $g_mantis_bug_table;
-
 	    $query = "SELECT id
-	    		FROM $g_mantis_bug_table
+	    		FROM " . config_get ( 'mantis_bug_table' ) . "
 	    		ORDER BY id ASC";
 	    $result = db_query( $query );
 	    $duplicate_id_count = db_num_rows( $result );
@@ -233,8 +223,7 @@
 	# --------------------
 	# Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
-		global	$g_mantis_news_table, $g_project_cookie_val,
-				$s_announcement, $s_private;
+		global	$g_mantis_news_table, $g_project_cookie_val;
 
 		if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
 			$query = "SELECT id, headline, announcement, view_state
@@ -257,10 +246,10 @@
 			$t_notes = array();
 			$t_note_string = '';
 			if ( 1 == $v_announcement ) {
-				array_push( $t_notes, $s_announcement );
+				array_push( $t_notes, lang_get( 'announcement' ) );
 			}
 			if ( PRIVATE == $v_view_state ) {
-				array_push( $t_notes, $s_private );
+				array_push( $t_notes, lang_get( 'private' ) );
 			}
 			if ( sizeof( $t_notes ) > 0 ) {
 				$t_note_string = ' ['.implode( ' ', $t_notes ).']';
@@ -278,12 +267,7 @@
 		$entry_count = count( $t_arr );
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = str_replace( '\'', '', $t_arr[$i] );
-			if ( $p_item == $t_s ) {
-				PRINT "<option value=\"$t_s\" selected=\"selected\">$t_s</option>";
-			}
-			else {
-				PRINT "<option value=\"$t_s\">$t_s</option>";
-			}
+			echo "<option value=\"$t_s\"" . check_selected( $p_item, $t_s ) . ">$t_s</option>";
 		} # end for
 	}
 	# --------------------
@@ -383,11 +367,7 @@
 		foreach ( $user_arr as $key => $val ) {
 			$v_id = $val[1];
 			$v_username = $val[0];
-			if ( $v_id == $p_user_id ) {
-				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_username</option>";
-			} else {
-				PRINT "<option value=\"$v_id\">$v_username</option>";
-			}
+			echo "<option value=\"$v_id\"" . check_selected( $v_id, $p_user_id ) . ">$v_username</option>";
 		} # end foreach
 	}
 	# --------------------
@@ -424,11 +404,7 @@
 		for ($i=0;$i<$project_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
-			if ( $p_project_id == $v_id ) {
-				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_name</option>";
-			} else {
-				PRINT "<option value=\"$v_id\">$v_name</option>";
-			}
+			echo "<option value=\"$v_id\"" . check_selected( $p_project_id, $v_id ) . ">$v_name</option>";
 		}
 	}
 	# --------------------
@@ -436,7 +412,7 @@
 	function print_profile_option_list( $p_id, $p_select_id='' ) {
 		global $g_mantis_user_profile_table, $g_mantis_user_pref_table;
 
-		$c_id = (integer)$p_id;
+		$c_id = db_prepare_int( $p_id );
 
 		$query = "SELECT default_profile
 			FROM $g_mantis_user_pref_table
@@ -461,11 +437,7 @@
 			$v_os		= string_display( $v_os );
 			$v_os_build	= string_display( $v_os_build );
 
-			if ( $v_id == $v_default_profile ) {
-				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_platform $v_os $v_os_build</option>";
-			} else {
-				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build</option>";
-			}
+			echo "<option value=\"$v_id\"" . check_selected( $v_id, $v_default_profile ) . ">$v_platform $v_os $v_os_build</option>";
 		}
 	}
 	# --------------------
@@ -491,11 +463,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ( $v_id == $p_id ) {
-				PRINT "<option value=\"$v_id\" selected=\"selected\">$v_name</option>";
-			} else {
-				PRINT "<option value=\"$v_id\">$v_name</option>";
-			}
+			echo "<option value=\"$v_id\"" . check_selected( $v_id, $p_id ) . ">$v_name</option>";
 		} # end for
 	}
 	# --------------------
@@ -521,11 +489,7 @@
 		$cat_arr = array_unique( $cat_arr );
 
 		foreach( $cat_arr as $t_category ) {
-			if ( $t_category == $p_category ) {
-				PRINT "<option value=\"$t_category\" selected=\"selected\">$t_category</option>";
-			} else {
-				PRINT "<option value=\"$t_category\">$t_category</option>";
-			}
+			echo "<option value=\"$t_category\"" . check_selected( $t_category, $p_category ) . ">$t_category</option>";
 		}
 	}
 	# --------------------
@@ -564,11 +528,7 @@
 		$cat_arr = array_unique( $cat_arr );
 
 		foreach( $cat_arr as $t_category ) {
-			if ( $t_category == $p_category ) {
-				PRINT "<option value=\"$t_category\" selected=\"selected\">$t_category</option>";
-			} else {
-				PRINT "<option value=\"$t_category\">$t_category</option>";
-			}
+			echo "<option value=\"$t_category\"" . check_selected( $t_category, $p_category ) . ">$t_category</option>";
 		}
 	}
 	# --------------------
@@ -594,11 +554,7 @@
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_category = $row['category'];
-			if ( $t_category == $p_category ) {
-				PRINT "<option value=\"$t_category\" selected=\"selected\">$t_category</option>";
-			} else {
-				PRINT "<option value=\"$t_category\">$t_category</option>";
-			}
+			echo "<option value=\"$t_category\"" . check_selected( $t_category, $p_category ) . ">$t_category</option>";
 		}
 	}
 	# --------------------
@@ -614,11 +570,7 @@
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_version = $row['version'];
-			if ( $t_version == $p_version ) {
-				PRINT "<option value=\"$t_version\" selected=\"selected\">$t_version</option>";
-			} else {
-				PRINT "<option value=\"$t_version\">$t_version</option>";
-			}
+			echo "<option value=\"$t_version\"" . check_selected( $t_version, $p_version ) . ">$t_version</option>";
 		}
 	}
 	# --------------------
@@ -641,11 +593,7 @@
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
 			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
-			if ( $t_elem[0] == $p_val ) {
-				PRINT "<option value=\"$t_elem[0]\" selected=\"selected\">$t_elem2</option>";
-			} else {
-				PRINT "<option value=\"$t_elem[0]\">$t_elem2</option>";
-			}
+			echo "<option value=\"$t_elem[0]\"" . check_selected( $t_elem[0], $p_val ) . ">$t_elem2</option>";
 		} # end for
 	}
 	# --------------------
@@ -664,11 +612,7 @@
 			}
 
 			$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
-			if ( $p_val == $t_elem[0] ) {
-				PRINT "<option value=\"$t_elem[0]\" selected=\"selected\">$t_access_level</option>";
-			} else {
-				PRINT "<option value=\"$t_elem[0]\">$t_access_level</option>";
-			}
+			echo "<option value=\"$t_elem[0]\"" . check_selected( $p_val, $t_elem[0] ) . ">$t_access_level</option>";
 		} # end for
 	}
 	# --------------------
@@ -678,11 +622,7 @@
 		$t_arr = $g_language_choices_arr;
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
-			if ( $t_arr[$i] == $p_language ) {
-				PRINT "<option value=\"$t_arr[$i]\" selected=\"selected\">$t_arr[$i]</option>";
-			} else {
-				PRINT "<option value=\"$t_arr[$i]\">$t_arr[$i]</option>";
-			}
+			echo "<option value=\"$t_arr[$i]\"" . check_selected( $t_arr[$i], $p_language ) . ">$t_arr[$i]</option>";
 		} # end for
 	}
 	# --------------------
@@ -735,7 +675,7 @@
 	function print_project_user_list_option_list2( $p_user_id ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
 
-		$c_user_id = (integer)$p_user_id;
+		$c_user_id = db_prepare_int( $p_user_id ); 
 
 		$t_prv = PRIVATE;
 		$query = "SELECT DISTINCT p.id, p.name
@@ -758,10 +698,9 @@
 	# --------------------
 	# list of projects that a user is NOT in
 	function print_project_user_list( $p_user_id ) {
-		global	$g_mantis_project_user_list_table, $g_mantis_project_table,
-				$s_remove_link;
+		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
 
-		$c_user_id = (integer)$p_user_id;
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		$query = "SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
 				FROM $g_mantis_project_table p
@@ -780,7 +719,7 @@
 			$t_access_level	= $row['access_level'];
 			$t_access_level	= get_enum_element( 'access_levels', $t_access_level );
 			$t_view_state	= get_enum_element( 'project_view_state', $t_view_state );
-			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="manage_user_proj_delete.php?f_project_id='.$t_project_id.'&amp;f_user_id='.$p_user_id.'">'.$s_remove_link.'</a>]<br />';
+			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="manage_user_proj_delete.php?f_project_id='.$t_project_id.'&amp;f_user_id='.$p_user_id.'">'. lang_get( 'remove_link' ).'</a>]<br />';
 		}
 	}
 	# --------------------
@@ -1079,10 +1018,10 @@
 	# this function should rarely (if ever) be reached.  instead the db_()
 	# functions should trap (although inelegantly).
 	function print_sql_error( $p_query ) {
-		global $MANTIS_ERROR, $g_administrator_email, $s_administrator;
+		global $MANTIS_ERROR, $g_administrator_email;
 
 		PRINT $MANTIS_ERROR[ERROR_SQL];
-		print_email_link( $g_administrator_email, $s_administrator );
+		print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
 		PRINT "<p>$p_query;<p>";
 	}
 	# --------------------
