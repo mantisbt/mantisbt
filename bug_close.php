@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.22 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:56 $
+	# $Revision: 1.23 $
+	# $Author: vboctor $
+	# $Date: 2002-08-28 14:10:11 $
 	#
-	# $Id: bug_close.php,v 1.22 2002-08-25 21:04:56 jfitzell Exp $
+	# $Id: bug_close.php,v 1.23 2002-08-28 14:10:11 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,10 +28,8 @@
 	check_varset( $f_bugnote_text, '' );
 
 	$result = bug_close( $f_id, $f_bugnote_text );
-
-	$t_redirect_url = 'view_all_bug_page.php';
 	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
+		print_header_redirect( 'view_all_bug_page.php' );
 	} else {
 		print_mantis_error( ERROR_GENERIC );
 	}

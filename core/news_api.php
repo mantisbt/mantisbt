@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.4 2002-08-28 09:58:32 jfitzell Exp $
+	# $Id: news_api.php,v 1.5 2002-08-28 14:10:11 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -134,7 +134,7 @@
 		}
 
 		# @@@ shouldn't we order by date_posted ?
-		$query .= "ORDER BY id DESC";
+		$query .= " ORDER BY id DESC";
 
 		return db_query( $query );
 	}
