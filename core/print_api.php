@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.97 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: print_api.php,v 1.98 2004-08-21 13:24:44 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -954,11 +954,16 @@
 	# --------------------
 	# print the bracketed links used near the top
 	# if the $p_link is blank then the text is printed but no link is created
-	function print_bracket_link( $p_link, $p_url_text ) {
+	# if $p_new_window is true, link will open in a new window, default false.
+	function print_bracket_link( $p_link, $p_url_text, $p_new_window = false ) {
 		if (is_blank( $p_link )) {
 			PRINT "[&nbsp;$p_url_text&nbsp;]";
 		} else {
-			PRINT "[&nbsp;<a href=\"$p_link\">$p_url_text</a>&nbsp;]";
+			if( true == $p_new_window ) {
+				PRINT "[&nbsp;<a href=\"$p_link\" target=\"_blank\">$p_url_text</a>&nbsp;]";
+			} else {
+				PRINT "[&nbsp;<a href=\"$p_link\">$p_url_text</a>&nbsp;]";
+			}
 		}
 	}
 	# --------------------
