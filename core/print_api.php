@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.47 2003-02-20 07:30:05 jfitzell Exp $
+	# $Id: print_api.php,v 1.48 2003-02-22 19:20:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -99,17 +99,19 @@
 	# --------------------
 	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
-		$c_user_id = db_prepare_int( $p_user_id );
-
-		# invalid user
+		# Catch a user_id of 0 (like when a handler hasn't been assigned)
 		if ( 0 == $p_user_id ) {
 			return;
 		}
 
 		$t_username = user_get_name( $p_user_id );
 		if ( user_exists( $p_user_id ) ) {
-			$t_email	= user_get_field( $p_user_id, 'email' );
-			print_email_link( $t_email, $t_username );
+			$t_email = user_get_email( $p_user_id );
+			if ( ! is_blank( $t_email ) ) {
+				print_email_link( $t_email, $t_username );
+			} else {
+				echo $t_username;
+			}
 		} else {
 			echo $t_username;
 		}
@@ -908,6 +910,9 @@
 		if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 			return $p_text;
 		}
+		
+		$p_email	= string_url( $p_email );
+		$p_text		= string_display( $p_text );
 
 		return "<a href=\"mailto:$p_email\">$p_text</a>";
 	}
@@ -924,6 +929,10 @@
 		if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 			return $p_text;
 		}
+		
+		$p_email	= string_url( $p_email );
+		$p_text		= string_display( $p_text );
+		$p_summary	= string_url( $p_summary );
 
 		return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
 	}
