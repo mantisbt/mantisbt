@@ -22,6 +22,7 @@
 		$f_description 	= string_prepare_textarea( $f_description );
 
 		$f_file_name = $g_project_cookie_val."-".$f_file_name;
+		umask(0333);  # make read only
 		copy($f_file, $t_file_path.$f_file_name);
 		$t_file_size = filesize( $f_file );
 		$t_content = addslashes(fread(fopen($f_file, "r"), filesize($f_file)));
