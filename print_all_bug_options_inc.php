@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_inc.php,v 1.22 2004-04-12 21:04:36 jlatour Exp $
+	# $Id: print_all_bug_options_inc.php,v 1.23 2004-06-30 13:51:07 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php
@@ -105,7 +105,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 	# putting the query result into an array with the same size as $t_fields_arr
 	$row = db_fetch_array( $result );
-	$t_prefs = $row[0];
+	$t_prefs = $row['print_pref'];
 
 ?>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.39 2004-06-16 04:28:29 robertjf Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.40 2004-06-30 13:53:39 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,9 +16,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'string_api.php' );
@@ -53,7 +53,7 @@
 	$t_per_page = null;
 	$t_bug_count = null;
 	$t_page_count = null;
-	
+
 	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	if ( $result === false ) {
 		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
@@ -73,7 +73,7 @@
 
 	$result3 = db_query( $query3 );
 	$row = db_fetch_array( $result3 );
-	$t_prefs = $row[0];
+	$t_prefs = $row['print_pref'];
 ?>
 
 <html xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -168,7 +168,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		  echo "</td>";
 			}
 	$name_index++;  ?>
-	
+
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
 	<?php echo $v_category;
@@ -350,7 +350,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 					PRINT '&nbsp';
 				} #if
 			} #for loop
-			
+
 			echo "</td>";
 		}# if index
 	$name_index++;
