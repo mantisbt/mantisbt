@@ -13,7 +13,7 @@
 //| Authors: Michael Wimmer <flaimo@gmx.net>                             |
 //+----------------------------------------------------------------------+
 //
-// $Id: class.RSSBuilder.inc.php,v 1.1 2004-02-10 11:37:42 vboctor Exp $
+// $Id: class.RSSBuilder.inc.php,v 1.2 2004-06-16 04:29:09 robertjf Exp $
 
 /**
 * @package RSSBuilder
@@ -1321,19 +1321,15 @@ class RSSBuilder extends RSSBase {
 				break;
 		} // end switch
 	} // end function
-	/**#@-*/
-
-	/**#@+
-	* @return void
-	* @access public
-	* @uses createOutput()
-	*/
 	/**
 	* echos the output
 	*
 	* use this function if you want to directly output the rss stream
 	*
 	* @desc echos the output
+	* @return void
+	* @access public
+	* @uses createOutput()
 	*/
 	function outputRSS($version = '') {
 		if (!isset($this->output)) {
