@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.10 2004-10-08 18:57:51 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.11 2004-11-22 13:25:45 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -112,7 +112,7 @@ if ( $t_resolved > $f_new_status ) { ?>
 <!-- Custom Fields -->
 <?php
 $t_custom_status_label = "update"; # default info to check
-if ( ( $f_new_status == config_get( 'bug_resolved_status_threshold' ) ) &&
+if ( ( $f_new_status == $t_resolved ) &&
 			( CLOSED > $f_new_status ) ) {
 	$t_custom_status_label = "resolved";
 }

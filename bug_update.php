@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.77 2004-11-07 23:18:49 prichards Exp $
+	# $Id: bug_update.php,v 1.78 2004-11-22 13:25:45 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -74,8 +74,10 @@
 
 	helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data, $f_bugnote_text ) );
 
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
 	$t_custom_status_label = "update"; # default info to check
-	if ( $t_bug_data->status == config_get( 'bug_resolved_status_threshold' ) ) {
+	if ( $t_bug_data->status == $t_resolved ) {
 		$t_custom_status_label = "resolved";
 	}
 	if ( $t_bug_data->status == CLOSED ) {
@@ -118,7 +120,7 @@
 		# handle status transitions that come from pages other than bug_*update_page.php
 		# this does the minimum to act on the bug and sends a specific message
 		switch ( $t_bug_data->status ) {
-			case config_get( 'bug_resolved_status_threshold' ):
+			case $t_resolved:
 				# bug_resolve updates the status and bugnote and sends message
 				bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version, 
 						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id);
@@ -128,6 +130,11 @@
 				if ( $f_close_now ) {
 					bug_set_field( $f_bug_id, 'status', CLOSED );
 				}
+
+				// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
+				// in bug_update() call below.
+				$t_bug_data->handler_id = bug_get_field( $f_bug_id, 'handler_id' );
+				$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
 				break;
 
 			case CLOSED:
@@ -135,14 +142,24 @@
 				bug_close( $f_bug_id, $f_bugnote_text );
 				$t_notify = false;
 				$t_bug_note_set = true;
+
+				// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
+				// in bug_update() call below.
+				$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
+				$t_bug_data->resolution = bug_get_field( $f_bug_id, 'resolution' );
 				break;
 
 			case config_get( 'bug_reopen_status' ):
-				if ( $t_old_bug_status >= config_get( 'bug_resolved_status_threshold' ) ) {
+				if ( $t_old_bug_status >= $t_resolved ) {
 					# bug_reopen updates the status and bugnote and sends message
 					bug_reopen( $f_bug_id, $f_bugnote_text );
 					$t_notify = false;
 					$t_bug_note_set = true;
+
+					// update bug data with fields that may be updated inside bug_resolve(), otherwise changes will be overwritten
+					// in bug_update() call below.
+					$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
+					$t_bug_data->resolution = bug_get_field( $f_bug_id, 'resolution' );
 					break;
 				} # else fall through to default
 		}
