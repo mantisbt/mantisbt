@@ -297,11 +297,11 @@
 		$bugnote_count = bug_get_bugnote_count( $v_id );
 
 		# Check for attachments
-		$t_has_attachments = FALSE;
+		$t_attachment_count = 0;
 		if ( ON == $t_show_attachments 
 			&& ( $v_reporter_id == auth_get_current_user_id() 
 				|| access_has_bug_level( config_get( 'view_attachments_threshold' ), $v_id ) ) ) {
-		   $t_has_attachments = file_bug_has_attachments( $v_id );
+		   $t_attachment_count = file_bug_attachment_count( $v_id );
 		}
 
 		# grab the project name
@@ -373,11 +373,11 @@
 	  
 		if ( ON == $t_show_attachments ) {
 		  echo '<td class="center">';
-			if ( FALSE != $t_has_attachments ) {
+			if ( 0 < $t_attachment_count ) {
 				echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
 				echo '<img border="0" src="' . config_get( 'icon_path' ) . 'attachment.png' . '"';
 				echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
-				echo ' title="' . $t_has_attachments . ' ' . lang_get( 'attachments' ) . '"';
+				echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
 				echo ' />';
 				echo '</a>';
 			} else {
