@@ -15,6 +15,9 @@
 	require_once( $t_core_dir.'php_api.php' );
 	require_once( $t_core_dir.'timer_api.php' );
 
+	# load utility functions used by everything else
+	require_once( $t_core_dir.'utility_api.php' );
+
 	# initialize our timer
 	$g_timer = new BC_Timer;
 

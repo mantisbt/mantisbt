@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.18 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: project_api.php,v 1.19 2002-11-27 03:07:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -157,7 +157,7 @@
 	# Create a new project
 	function project_create( $p_name, $p_description, $p_status, $p_view_state=PUBLIC, $p_file_path='', $p_enabled=true ) {
 		# Make sure file path has trailing slash
-		$p_file_path = helper_terminate_directory_path( $p_file_path );
+		$p_file_path = terminate_directory_path( $p_file_path );
 
 		$c_name 		= db_prepare_string( $p_name );
 		$c_description 	= db_prepare_string( $p_description );
@@ -226,7 +226,7 @@
 	# Update a project
 	function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_view_state, $p_file_path, $p_enabled ) {
 		# Make sure file path has trailing slash
-		$p_file_path = helper_terminate_directory_path( $p_file_path );
+		$p_file_path = terminate_directory_path( $p_file_path );
 
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_name 		= db_prepare_string( $p_name );
