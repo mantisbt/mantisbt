@@ -9,6 +9,7 @@ Mantis
  * Fixed database and file to no longer use TIMESTAMPS.
  * Fixed password reset to blank to work for other encryption types.
  * Fixed admin_upgrade.php to honor the $g_php global.
+ * Fixed access checks to see if viewer has permission to view the bug.
  * Modified many files for extensive use of CSS.
  * Modified BLOB field to LONGBLOB.
  * Modified bug action buttons to be more consistent.
