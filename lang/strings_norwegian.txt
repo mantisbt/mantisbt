@@ -13,15 +13,19 @@
 	$s_operation_successful = "Operasjonen var vellykket.";
 	$s_date_order = "Dato sortering";
 	$s_print_all_bug_page_link = "Utskrift rapporter";
+	$s_csv_export = "CSV Export";
+	$s_login_anonymously = "Login Anonymously";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_SQL] = "FEIL: SQL feil oppdagedet. Vennligst rapporter til  ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "FEIL: din konto kan være utilgjengelig eller brukernavn/passord var ugyldig.";
-	$MANTIS_ERROR[ERROR_REPORT] = "FEIL: Det oppstod en feil i rapporten.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "FEIL: Ingen fil angitt";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "FEIL: Katalogen eksisterer ikke. Vennligst sjekk prosjekt innstillinger.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "FEIL: Kategorien finnes fra før.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "FEIL: Versjonen finnes fra før.";
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
 
 	# General Strings
 	$s_go_back = "Tilbake";

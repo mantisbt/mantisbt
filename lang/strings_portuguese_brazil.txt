@@ -13,15 +13,19 @@
 	$s_operation_successful = "Opera&ccedil;&atilde;o realizada com sucesso.";
 	$s_date_order = "Ordem por data";
 	$s_print_all_bug_page_link = "Imprimir lista de bugs";
+	$s_csv_export = "CSV Export";
+	$s_login_anonymously = "Login Anonymously";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_SQL] = "ERRO: Erro SQL detectado. Por favor informe para ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERRO: Sua conta pode ter sido desabilitada ou seu usu&aacute;rio/senha est&atilde;o incorretos.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERRO: Existia um erro no seu relato.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERRO: Arquivo n&atilde;o foi especificado";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: O diret&oacute;rio n&atilde;o existe . Verifique as configura&ccedil;&otilde;es do projeto.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERRO: Categoria Duplicada.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERRO: Vers&atilde;o duplicada.";
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
 
 	# General Strings
 	$s_go_back = "Voltar";
@@ -40,17 +44,11 @@
 	$s_project_view_state_enum_string = "10:Publico,50:Privado";
 
 	$s_priority_enum_string = "10:Nenhuma,20:Baixa,30:Normal,40:Alta,50:Urgente,60:Imediato";
-
 	$s_severity_enum_string = "10:Caracter&iacute;stica,30:Texto,40:Ajuste,50:Irrelevante,60:Relevante,70:Fecha,80:Trava";
-
 	$s_reproducibility_enum_string = "10:Sempre,30:Algumas vezes,50:Esporadicamente,70:N&atilde;o Tentado,90:Imposs&iacute;vel Reproduzir,100:N/A";
-
 	$s_status_enum_string = "10:Novos,20:Respondidos,30:Reconhecidos,40:Confirmados,50:Encaminhados para solu&ccedil;&atilde;o,80:Resolvidos,90:Encerrados";
-
 	$s_resolution_enum_string = "10:Abertos,20:Consertados,30:Reabertos,40:Imposs&iacute;vel Reproduzir,50:N&atilde;o resolvidos,60:Duplicados,70:N&atilde;o &eacute; bug,80:Suspensos,90:N&atilde;o consertados";
-
 	$s_projection_enum_string = "10:Nada,30:Ajuste,50:Pequenos consertos,70:Refeito,90:Redesenhado";
-
 	$s_eta_enum_string = "10:Sem previs&atilde;0,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 m&ecirc;s,60:> 1 m&ecirc;s";
 
 	# Email Strings

@@ -9,10 +9,29 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 ?>
 <?
+	# new strings:
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+	$s_date_order = "Date Order";
+	$s_print_all_bug_page_link = "Print Reports";
+	$s_csv_export = "CSV Export";
+	$s_login_anonymously = "Login Anonymously";
+
+	# ERROR strings
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
+
 	# General Strings
 	$s_go_back = "Zurück";
 	$s_proceed = "Weiter: hier klicken";
-	$s_sql_error_detected = "Fehler: SQL-Fehler entdeckt, Bitte melden an: ";
 
 	$s_switch = "Wechsel";
 	$s_logged_in_as = "angemeldet als";
@@ -172,7 +191,7 @@
 	$s_select_file = "Datei wählen";
 	$s_upload_file_button = "Datei übertragen";
 
-	# bug_reopen_page.php3
+	# bug_reopen.php3
 	$s_bug_reopened_msg = "Fehlermeldung reaktiviert...";
 	$s_reopen_add_bugnote_title = "Notiz für Fehlerreaktivierung hinzufügen";
 	$s_bugnote_add_reopen_button = "Notiz hinzufügen und Fehler reaktivieren";
@@ -252,7 +271,6 @@
 	$s_click_to_login = "Anmeldung: bitte hier klicken";
 
 	# login.php3
-	$s_login_error_msg = "Es ist ein Fehler aufgetreten: Ihr Konto ist gesperrt oder Benutzer/Passwort wurde falsch eingegben.";
 
 	# login_page.php3
 	$s_login_page_info = "<B>BUG TRACKING SYSTEM</B>";
@@ -311,7 +329,6 @@
 	$s_project_added_msg = "Projekt wurde hinzugefügt...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "FEHLER: Doppelte Kategorie.";
 	$s_category_added_msg = "Kategorie wurde hinzugefügt...";
 
 	# manage_project_category_delete.php3
@@ -362,7 +379,6 @@
 	$s_project_updated_msg = "Projekt wurde aktualisiert...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "FEHLER: Doppelte Version.";
 	$s_version_added_msg = "Version wurde hinzugefügt...";
 
 	# manage_project_version_delete.php3
@@ -376,7 +392,7 @@
 	$s_edit_project_version_title = "Projekt-Version editieren";
 	$s_update_version_button = "Version aktualisieren";
 
-	# manage_product_versions_update.php3
+	# manage_project_version_update.php3
 	$s_version_updated_msg = "Produkt-Versionen aktualisiert...";
 
 	# manage_user_delete.php3
@@ -394,6 +410,7 @@
 	$s_reset_password_button = "Passwort zurücksetzen";
 	$s_delete_user_button = "Benutzer löschen";
 	$s_reset_password_msg = "Passwort zurücksetzen löscht das Passwort.";
+	$s_reset_password_msg2 = "Reset Password sets the password to be blank.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Konto geschützt. Passwort-Löschung nicht möglich.";
@@ -456,8 +473,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Datei hochladen";
 	$s_title = "Titel";
-	$s_select_file = "Datei auswählen";
-	$s_upload_file_button = "Datei hochladen";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Projekt-Datei gelöscht";
@@ -466,7 +481,6 @@
 	$s_confirm_file_delete_msg = "Soll diese Datei wirklich gelöscht werden?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Datei hochladen";
 	$s_filename = "Dateiname";
 	$s_file_update_button = "Datei aktualisieren";
 	$s_file_delete_button = "Datei löschen";
@@ -502,7 +516,6 @@
 	$s_updated_user_msg = "Benutzer erfolgreich aktualisiert";
 
 	# report_add.php3
-	$s_report_add_error_msg = "FEHLER: Ihr Eintrag enthält (1) Fehler.";
 	$s_must_enter_category = "Sie müssen eine Kategorie wählen";
 	$s_must_enter_severity = "Wert für Auswirkung muss eingegeben werden";
 	$s_must_enter_reproducibility = "Wert für reproduzierbar eingeben";
@@ -520,14 +533,12 @@
 	$s_select_severity = "Schwere wählen";
 	$s_or_fill_in = "ODER ausfüllen";
 	$s_assign_to = "Zuordnung an ";
-	$s_steps_to_reproduce = "Schritte zur Reproduzierung";
 	$s_additional_information = "Zusätzliche Information";
 	$s_submit_report_button = "Bericht absenden";
 	$s_check_report_more_bugs = "weitere Fehler eintragen";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Erweiterter Bericht";
-	$s_upload_file = "Datei übertragen";
 	$s_report_stay = "Im Eingabemodus bleiben";
 
 	# set_project.php3
@@ -564,7 +575,7 @@
 	# site_settings_update.php3
 	$s_site_settings_updated_msg = "Eigenschaften wurden aktualisiert";
 
-	# summary_page.php3 & summary_page_jpgraph.php3
+	# summary_page.php3
 	$s_summary_title = "Zusammenfassung";
 	$s_summary_jpgraph_link = "Erweiterte Zusammenfassung";
 	$s_by_status = "nach Status";
@@ -583,14 +594,12 @@
 	$s_developer_stats = "Entwicklerstatistik";
 	$s_reporter_stats = "Reporter Statistiken";
 	$s_orct = "(offen/erledigt/geschlossen/gesamt)";
-    $s_summary_prefix="nach";
 
 	# view_all_bug_page.php3
 	$s_any = "alle";
 	$s_show = "Zeige";
 	$s_changed = "geändert (Std.)";
 	$s_hide_closed = "bereinigte ausblenden";
-	$s_filter_button = "filtern";
 	$s_viewing_bugs_title = "Fehler anzeigen";
 	$s_updated = "aktualisiert";
 

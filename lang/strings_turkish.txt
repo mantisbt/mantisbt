@@ -14,6 +14,8 @@
 	$s_operation_successful = "Operation successful.";
 	$s_date_order = "Date Order";
 	$s_print_all_bug_page_link = "Print Reports";
+	$s_csv_export = "CSV Export";
+	$s_login_anonymously = "Login Anonymously";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
@@ -23,6 +25,8 @@
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
 
 	# General Strings
 	$s_go_back = "Geri Git";
