@@ -1,160 +1,19 @@
-# -----------------------------------------------------------------------------
-#    Upgrading
-# -----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+   Upgrading
+-----------------------------------------------------------------------------
 
-# *********************************************
-# *** ALWAYS MAKE A BACKUP OF YOUR DATABASE ***
-# *********************************************
+*********************************************
+*** ALWAYS MAKE A BACKUP OF YOUR DATABASE ***
+*********************************************
 
-# Generally, you can just copy over the current installation.  You may want to
-# backup up your current config_inc.php and any customizations that you may
-# have made.  Usually database modifications will occur only between
-# significant releases (like 0.14.x to 0.15.0).
+Generally, you can just copy over the current installation.  You may want to
+backup up any customizations that you may have made.  
+Database modifications will occur only between significant releases (like 0.14.x to 0.15.0).
 
-# *** NOTE *** : As of 0.17.0 the upgrading process is simplified.  The new
-# config_inc.php is stored in the default/ subdirectory.  You do not have to
-# modify this file.  Mantis will also look in the mantis root directory to
-# see if there is a config_inc.php file located there.
-#
-# mantis/config_inc.php           (your old config_inc.php)
-# mantis/default/config_inc1.php  (the new defaults - part 1)
-# mantis/default/config_inc2.php  (the new defaults - part 2)
-#
-# Mantis will first pull the default values, then pull the site specific values.
-# This way you will gain the new global variables but not have to continually
-# reset your core settings.  It is best to leave the default file alone.
-#
-# I would advise you to take a few minutes and create a minimal config_inc.php
-# file that contains only values that are different from the
-# default/config_inc.php file.  Email values, database settings, path values,
-# and any settings different from the defaults should go in here.
+An automated database upgrade script was added in 0.18.0. This script (which can be found at
+admin/upgrade.php) will keep track of the current state of your database and allow you to
+convert it to the current version. Make a backup of your database, just in case.
 
-# Take a look in db_upgrade.sql to see the actual upgrade commands.
-# Running the admin_upgrade.php script will usually provide a nicer way
-# to upgrade.
-
-# =================
-# 0.16.x to 0.17.0
-# =================
-
-Please run the admin_upgrade.php3 script and click on the 0.17.0 upgrade.
-
-Several new tables were added along with modifications to several fields.
-TIMESTAMPS were removed and replaced with DATETIME fields.
-
-# =================
-# 0.15.x to 0.16.0
-# =================
-
-Please run the admin_upgrade.php3 script and click on the 0.16.0 upgrade.
-
-Several fields were lengthened and a table to prepare for logging added.
-
-# =================
-# 0.15.x to 0.15.8
-# =================
-
-New encryption methods have been added.  Check INSTALL (2a and 2b) for details.
-
-# =================
-# 0.14.x to 0.15.0
-# =================
-
-You may upgrade by opening up admin_upgrade.php3 in your web browser and
-clicking on the 0.15.0 upgrade.
-
-The TIMESTAMP issue should be resolved with this upgrade.
-
-The 0.15.x releases improves localization by removing all ENUM fields from
-the database and replacing them with INT values.  These values can be
-found in constant_inc.php and in *_strings.txt files as "Enum Strings".
-
-Any values that did not get converted over correctly will be displayed as
-@null@.
-
-# =================
-# 0.12.0 to 0.14.0
-# =================
-
-Due to many changes the upgrade procedure is more complicated than before.  I
-will try my best to clearly illustrate the needed steps below.
-
-The primary issue is that you may lose your date stamps for user logins and,
-more importanly, all bug data.  This is due to the time being stored in a
-TIMESTAMP field (which is a design error on my part). Secondarily, all news
-and bugs are associated with the first project_id (0000001).  The first
-project
-defaults  to mantis but feel free to rename it.  DO NOT DELETE IT.  If you
-have
-no projects in your database you will not be able to login.
-
-You will want to run the admin_upgrade.php3 (or admin_upgrade.php file if you
-ran the php4
-filename converter) file. Just type it into the url field.
-
-Hopefully everything goes well with no errors.  If you don't worry about the
-dates being preserved then you can just run the queries in db_upgrade.sql by
-hand instead.
-
-If you have existing categories they will be converted to varchar(32) in each
-bug report.  To make sure that you can index these correctly you will need to
-create categories reflecting this.  So if your original bug table had
-('bugtracker','security','other') then you would need to add these three
-categories to your project.  You can access this from via
-Manage->Projects->Edit.  Same thing goes for versions.
-
-News posts with a project_id=0000000 are sitewide posts (and vice versa)
-
-If you experience problems with emailing you should take a look at this page:
-http://www.php.net/manual/en/function.mail.php
-
-# =================
-# 0.11.x to 0.12.0
-# =================
-
-# Add a new field to store profile descriptions
-
-ALTER TABLE mantis_bug_table ADD profile_id INT UNSIGNED ZEROFILL not null
-AFTER votes
-
-# =================
-# 0.10.2 to 0.11.0
-# =================
-
-# I've added a profile table and inserted feedback into the main bug table.
-# Also modified version to be an enum (edit using the manage section)
-# Run these queries:
-
-ALTER TABLE mantis_bug_table CHANGE status status ENUM ('new','fdeedback',
-	'acknowledged','confirmed','assigned','resolved') DEFAULT 'new' not null;
-
-CREATE TABLE mantis_user_profile_table (
-   id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL auto_increment,
-   user_id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL,
-   platform varchar(32) NOT NULL,
-   os varchar(32) NOT NULL,
-   os_build varchar(16) NOT NULL,
-   description text NOT NULL,
-   default_profile char(3) NOT NULL,
-   PRIMARY KEY (id)
-);
-
-ALTER TABLE mantis_bug_table CHANGE version version ENUM ('none') not null;
-
-CREATE TABLE mantis_user_pref_table (
-   id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL auto_increment,
-   user_id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL,
-   advanced_report char(3) NOT NULL,
-   advanced_view char(3) NOT NULL,
-   PRIMARY KEY (id)
-);
-
-# =================
-# 0.9.x to 0.10.x
-# =================
-
-# You will need to add a 'protected' field in the mantis_user_table.
-# This command will do the trick:
-
-ALTER TABLE mantis_user_table ADD protected VARCHAR (3) not null
-
+If you are converting from 0.17.x or older, you may have escaped quotes in your databases. If you
+see escaped quotes (e.g. \') anywhere in your Mantis installation (after upgrading), run the
+string escaping fix which can be found through admin/index.php.

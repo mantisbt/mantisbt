@@ -57,7 +57,7 @@ mv <directoryname> mantis
 
 If you are upgrading see the UPGRADING document.
 
-2. Next we will create the necessary database tables.  Make sure you have
+3. Next we will create the necessary database tables.  Make sure you have
 created the database ahead of time.  You should know your mysql username and
 password as well.
 
@@ -86,7 +86,7 @@ from being used to trick the package.  It would be even better to rename the
 account or delete it permanently.  REMEMBER: After setting up the package,
 REMOVE the default administrator account.
 
-3. The next part involves configuring the installation to work with your
+4. The next part involves configuring the installation to work with your
 specific setup.
 
 In the installation directory, locate config_inc.php.sample and copy it to 
@@ -106,7 +106,7 @@ with a .php extension and load it up in your web browser.  It will, among a
 multitude of other things, have the correct value of register_globals that you
 are using.
 
-4. Mantis now uses only .php files.
+5. Mantis now uses only .php files.
 
 If your webserver is configured for other extensions (.PHP3, .PHTML) then you
 will have to have the administrator add support for .PHP files.  This should
@@ -114,7 +114,7 @@ be a trivial modification.
 
 Documentation can be found at: http://www.php.net/manual/en/installation.php
 
-5.  Login to your bugtracker and go to the manage section.  Click on the
+6.  Login to your bugtracker and go to the manage section.  Click on the
 projects link.  You will need to ADD a new project.  Then EDIT the new project
 and remember to ADD at least one category.  Otherwise you won't be able to add
 any bug reports.
@@ -126,7 +126,7 @@ of the site please read the CUSTOMIZATION file.
 ### Upgrading ###
 -------------------------------------------------------------------------------
 
-See the files: UPGRADING and admin/upgrade.php
+See the files: UPGRADING and admin/index.php
 
 -------------------------------------------------------------------------------
 ### Troubleshooting ###
