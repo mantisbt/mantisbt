@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.62 2003-03-12 18:27:13 int2str Exp $
+	# $Id: print_api.php,v 1.63 2003-03-20 07:27:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -980,10 +980,13 @@
 			return $p_text;
 		}
 		
-		$p_email	= string_url( $p_email );
+		# If we apply string_url() to the whole mailto: link then the @
+		#  gets turned into a %40 and you can't right click in browsers to
+		#  do Copy Email Address.
+		$t_mailto	= string_attribute( "mailto:$p_email" );
 		$p_text		= string_display( $p_text );
 
-		return "<a href=\"mailto:$p_email\">$p_text</a>";
+		return "<a href=\"$t_mailto\">$p_text</a>";
 	}
 	# --------------------
 	# print a mailto: href link with subject
@@ -999,11 +1002,15 @@
 			return $p_text;
 		}
 		
-		$p_email	= string_url( $p_email );
-		$p_text		= string_display( $p_text );
+		# If we apply string_url() to the whole mailto: link then the @
+		#  gets turned into a %40 and you can't right click in browsers to
+		#  do Copy Email Address.  If we don't apply string_url() to the
+		#  summary text then an ampersand (for example) will truncate the text
 		$p_summary	= string_url( $p_summary );
+		$t_mailto	= string_attribute( "mailto:$p_email?subject=$p_summary" );
+		$p_text		= string_display( $p_text );
 
-		return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
+		return "<a href=\"$t_mailto\">$p_text</a>";
 	}
 	# --------------------
 	# Print a hidden input for each name=>value pair in the array
