@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.20 2005-03-02 00:14:58 jlatour Exp $
+	# $Id: config_api.php,v 1.21 2005-03-18 03:43:35 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -282,7 +282,7 @@
 	function config_eval( $p_value ) {
 		$t_value = $p_value;
 		if ( is_string( $t_value ) && !is_numeric( $t_value ) ) {
-			if ( 0 < preg_match_all( '/%(.*)%/', $t_value, $t_matches ) ) {
+			if ( 0 < preg_match_all( '/%(.*)%/U', $t_value, $t_matches ) ) {
 				for ($i=0; $i< count($t_matches[0]); $i++) {
 					# $t_matches[0][$i] is the matched string including the delimiters
 					# $t_matches[1][$i] is the target parameter string
