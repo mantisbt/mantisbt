@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.33 $
+	# $Revision: 1.34 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:03 $
+	# $Date: 2002-08-18 08:27:23 $
 	#
-	# $Id: view_all_bug_page.php,v 1.33 2002-08-15 20:35:03 jlatour Exp $
+	# $Id: view_all_bug_page.php,v 1.34 2002-08-18 08:27:23 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php include( 'core_API.php' ) ?>
@@ -116,6 +116,7 @@
 			$t_where_clause .= ')';
 		}
 	} else {
+		check_access_to_project($g_project_cookie_val);
 		$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
 	}
 	# end project selection

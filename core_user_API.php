@@ -571,6 +571,30 @@
 		}
 	}
 	# --------------------
+	# Check to see if the current user has access on the specified project
+	function check_access_to_project( $p_project_id ) {
+		$t_project_view_state = get_project_field( $p_project_id, 'view_state' );
+
+		# Administrators ALWAYS pass.
+		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
+			return;
+		}
+
+		# public project accept all users
+		if ( PUBLIC == $t_project_view_state ) {
+			return;
+		} else {
+			# private projects require users to be assigned
+			$t_project_access_level = get_project_access_level( $p_project_id );
+			# -1 means not assigned, kick them out to the project selection screen
+			if ( -1 == $t_project_access_level ) {
+				print_header_redirect( 'login_select_proj_page.php' );
+			} else { # passed
+				return;
+			}
+		}
+	}
+	# --------------------
 	# return the project access level for the current user/project key pair.
 	# use the project_id if supplied.
 	function get_project_access_level( $p_project_id=0 ) {
