@@ -158,7 +158,8 @@
 	}
 
 	# sort array using compare_dates()
-	usort( $metrics, 'compare_dates' );
+	# @@@ causing errors on some systems.  Maybe blank array?
+	#usort( $metrics, 'compare_dates' );
 
 	$metrics_count = count( $metrics );
 	for ($i=1;$i<$metrics_count;$i++) {
@@ -189,7 +190,7 @@
 	<table width="100%" cols="2">
 	<tr>
 		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_summary_title ?></b>
+			<b><? echo $s_summary_title ?></b> <? echo $s_orct ?>
 		</td>
 	</tr>
 	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
@@ -238,7 +239,7 @@
 	</tr>
 	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
 		<td>
-			<b><? echo $s_by_category ?>:</b> (open/resolved/closed/total)
+			<b><? echo $s_by_category ?>:</b>
 		</td>
 		<td>
 			<b><? echo $s_by_priority ?>:</b>
@@ -320,7 +321,7 @@
 			<b><? echo $s_developer_stats ?>:</b>
 		</td>
 		<td>
-			<b>reporter stats (open/resolved/closed/total): </b> <? #@@@ OOPS - localize ?>
+			<b>reporter stats: </b> <? #@@@ OOPS - localize ?>
 		</td>
 	</tr>
 	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
