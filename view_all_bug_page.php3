@@ -174,7 +174,7 @@
 <? include( $g_meta_include_file ) ?>
 <?
 	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
-		print_meta_redirect( $PHP_SELF, get_current_user_pref_field( "refresh_delay" )*60 );
+		print_meta_redirect( $PHP_SELF."?f_offset=".$f_offset, get_current_user_pref_field( "refresh_delay" )*60 );
 	}
 ?>
 <? print_head_bottom() ?>
