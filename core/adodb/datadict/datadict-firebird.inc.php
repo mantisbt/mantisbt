@@ -21,6 +21,7 @@ class ADODB2_firebird15 extends ADODB_DataDict {
 	{
 		switch($meta) {
 		case 'C': return 'VARCHAR';
+		case 'XS':
 		case 'XL':
 		case 'X': return 'VARCHAR(4000)'; 
 		

@@ -23,6 +23,7 @@ class ADODB2_informix extends ADODB_DataDict {
 	{
 		switch($meta) {
 		case 'C': return 'VARCHAR';// 255
+		case 'XS':
 		case 'XL':
 		case 'X': return 'TEXT'; 
 		

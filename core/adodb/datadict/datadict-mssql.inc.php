@@ -49,6 +49,7 @@ class ADODB2_mssql extends ADODB_DataDict {
 		switch(strtoupper($meta)) {
 
 		case 'C': return 'VARCHAR';
+		case 'XS':
 		case 'XL':
 		case 'X': return 'TEXT';
 		

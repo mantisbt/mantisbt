@@ -24,6 +24,7 @@ class ADODB2_access extends ADODB_DataDict {
 		switch($meta) {
 		case 'C': return 'TEXT';
 		case 'XL':
+		case 'XS':
 		case 'X': return 'MEMO'; 
 		
 		case 'C2': return 'TEXT'; // up to 32K
