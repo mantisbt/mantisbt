@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.37 2003-07-23 19:32:26 beerfrick Exp $
+	# $Id: file_api.php,v 1.38 2003-07-25 21:26:53 beerfrick Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -55,7 +55,7 @@
 
 		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
 
-		$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
+		$query = "SELECT id, title, diskfile, filename, filesize, UNIX_TIMESTAMP(date_added) as date_added
 				FROM $t_bug_file_table
 				WHERE bug_id='$c_bug_id'
 				ORDER BY date_added";
