@@ -161,4 +161,11 @@
 </div>
 <?php ### END User to Project Add Form ?>
 
+<?php
+	if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) {
+		include ( 'account_prefs_inc.php' );
+		edit_account_prefs( $u_id, false, false, $g_manage_page );
+	}
+?>
+
 <?php print_page_bot1( __FILE__ ) ?>

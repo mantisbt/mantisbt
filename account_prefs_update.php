@@ -12,13 +12,8 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	# get protected state
-	$t_protected = get_current_user_field( 'protected' );
-
-	# protected account check
-	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
-	}
+	# the check for the protected state is already done in the form, there is
+	# no need to duplicate it here.
 
 	# Clean input
 
@@ -106,7 +101,7 @@
 	$c_refresh_delay = (integer)$f_refresh_delay;
 
 	# get user id
-	$t_user_id = get_current_user_field( 'id' );
+	$t_user_id = $f_user_id;
 
 	# update preferences
 	$query = "UPDATE $g_mantis_user_pref_table
@@ -129,10 +124,19 @@
 			WHERE user_id='$t_user_id'";
 	$result = db_query( $query );
 
-	$t_redirect_url = $g_account_prefs_page;
+	print_page_top1();
+	print_meta_redirect( $f_redirect_url );
+	print_page_top2();
+	PRINT '<p><div align="center">';
+
 	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
+		PRINT $s_operation_successful;
 	} else {
-		print_mantis_error( ERROR_GENERIC );
+		PRINT $MANTIS_ERROR[ERROR_GENERIC];
 	}
+
+	PRINT '<p>';
+	print_bracket_link( $f_redirect_url, $s_proceed );
+	PRINT '<p></div>';
+	print_page_bot1( __FILE__ );
 ?>

@@ -21,6 +21,7 @@ Mantis
  * Added new localization strings.
  * Added support for allowing managers to update project information, change project user list, add/edit/delete categories and versions.
  * Added a remove link next to the edit link in the project categories and project versions to all deleting without going into edit.
+ * Administrators can now modify the preferences for all users that are not protected.  Protected users need to be unprotected first.
  * Quoted various text values retrieved from a database and used in a database query.
  * Updated Hungarian localization.
  * Updated Russian localizations.
