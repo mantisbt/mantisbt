@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.51 2003-02-18 00:41:22 jfitzell Exp $
+	# $Id: html_api.php,v 1.52 2003-02-18 01:58:29 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -151,7 +151,7 @@
 	# --------------------
 	# (7) Ends the <HEAD> section
 	function print_head_bottom() {
-	   PRINT '</head>';
+		PRINT '</head>';
 	}
 	# --------------------
 	# (8) Starts the <BODY> of the page
@@ -288,43 +288,8 @@
 		PRINT '</tr>';
 		PRINT '</table>';
 	}
-	# --------------------
-	# This prints the little [?] link for user help
-	# The $p_a_name is a link into the documentation.html file
-	function print_documentation_link( $p_a_name='' ) {
-		PRINT "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
-	}
-	# --------------------
-	# checks to see whether we need to be displaying the source link
-	# WARNING: displaying source (and the ability to do so) can be a security risk
-	# used in print_footer()
-	function print_source_link( $p_file ) {
-		global $g_show_source, $g_string_cookie_val;
 
-		if (!isset($g_string_cookie_val)) {
-			return;
-		}
 
-		if (( ON == $g_show_source )&&
-			( access_has_project_level( ADMINISTRATOR ) )) {
-				PRINT '<br />';
-				PRINT '<div align="center">';
-				PRINT "<a href=\"show_source_page.php?url=$p_file\">Show Source</a>";
-				PRINT '</div>';
-		}
-	}
- 	# --------------------
-	# print the hr
-	function print_hr( $p_hr_size=null, $p_hr_width=null ) {
-		if ( null === $p_hr_size ) {
-			$p_hr_size = config_get( 'hr_size' );
-		}
-		if ( null === $p_hr_width ) {
-			$p_hr_width = config_get( 'hr_width' );
-		}
-		echo "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
-	}
-	# --------------------
 	###########################################################################
 	# HTML Menu API
 	###########################################################################
@@ -554,40 +519,6 @@
 			print_bracket_link( $t_summary_jpgraph_page, lang_get( 'summary_jpgraph_link' ) );
 		}
 		PRINT '</div>';
-	}
-	# --------------------
-	# prints the signup link
-	function print_signup_link() {
-		global $g_allow_signup;
-
-		if ( $g_allow_signup != 0 ) {
-			PRINT '<br /><div align="center">';
-			print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
-			PRINT '</div>';
-		}
-	}
-	# --------------------
-	function print_proceed( $p_result, $p_query, $p_link ) {
-		PRINT '<br />';
-		PRINT '<div align="center">';
-		if ( $p_result ) {						# SUCCESS
-			PRINT lang_get( 'operation_successful' ) . '<br />';
-		} else {								# FAILURE
-			print_sql_error( $p_query );
-		}
-		print_bracket_link( $p_link, lang_get( 'proceed' ) );
-		PRINT '</div>';
-	}
-	# --------------------
-	# This is our generic error printing function
-	# Errors should terminate the script immediately
-	function print_mantis_error( $p_error_num=0 ) {
-		global $MANTIS_ERROR;
-
-		PRINT '<html><head></head><body>';
-		PRINT $MANTIS_ERROR[$p_error_num];
-		PRINT '</body></html>';
-		exit;
 	}
 	# --------------------
 	# Print the color legend for the colors
