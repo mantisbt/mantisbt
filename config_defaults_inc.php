@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.177 2004-07-15 13:41:27 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.178 2004-07-16 23:16:39 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1231,5 +1231,5 @@
 
 	# Enable support for bug relationships where a bug can be a related, dependent on, or duplicate of another.
 	# See relationship_api.php for more details.
-	$g_enable_relationship = OFF;
+	$g_enable_relationship = ON;
 ?>
