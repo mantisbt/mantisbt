@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.195 $
-	# $Author: prichards $
-	# $Date: 2004-08-03 23:44:47 $
+	# $Revision: 1.196 $
+	# $Author: thraxisp $
+	# $Date: 2004-08-04 01:38:07 $
 	#
-	# $Id: strings_english.txt,v 1.195 2004-08-03 23:44:47 prichards Exp $
+	# $Id: strings_english.txt,v 1.196 2004-08-04 01:38:07 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -511,7 +511,7 @@ $s_delete_link = 'Delete';
 $s_add_bugnote_title = 'Add Note';
 $s_add_bugnote_button = 'Add Note';
 $s_bugnote_edit_link = 'Edit';
-$s_close_bug_button = 'Close Issue';
+$s_closed_bug_button = 'Close Issue';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Note has been successfully updated...';

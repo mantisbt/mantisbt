@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.65 2004-08-02 19:40:38 prichards Exp $
+	# $Id: bug_update.php,v 1.66 2004-08-04 01:38:06 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -63,6 +63,14 @@
 		$t_bug_data->status = config_get( 'bug_assigned_status' );
 	}
 
+	$t_custom_status_label = "update"; # default info to check
+	if ( $t_bug_data->status == config_get( 'bug_resolved_status_threshold' ) ) {
+		$t_custom_status_label = "resolved";
+	}
+	if ( $t_bug_data->status == CLOSED ) {
+		$t_custom_status_label = "closed";
+	}
+	
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
@@ -78,7 +86,7 @@
 			continue;
 		}
 
-		if ( $t_def['require_update'] && ( gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ) == '' ) ) {
+		if ( $t_def['require_' . $t_custom_status_label] && ( gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ) == '' ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}

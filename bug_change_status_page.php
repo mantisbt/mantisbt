@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.1 2004-08-03 13:47:47 vboctor Exp $
+	# $Id: bug_change_status_page.php,v 1.2 2004-08-04 01:38:06 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -105,17 +105,24 @@ if ( ASSIGNED == $f_new_status ) { ?>
 
 <!-- Custom Fields -->
 <?php
-if ( $f_new_status >= $t_resolved ) {
-	$t_custom_fields_found = false;
-	$t_related_custom_field_ids = custom_field_get_linked_ids( bug_get_field( $f_bug_id, 'project_id' ) );
-	foreach( $t_related_custom_field_ids as $t_id ) {
-		$t_def = custom_field_get_definition( $t_id );
-		if( ( $t_def['display_' . $t_status_label] || $t_def['require_' . $t_status_label] ) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
-			$t_custom_fields_found = true;
+$t_custom_status_label = "update"; # default info to check
+if ( $f_new_status == config_get( 'bug_resolved_status_threshold' ) ) {
+	$t_custom_status_label = "resolved";
+}
+if ( $f_new_status == CLOSED ) {
+	$t_custom_status_label = "closed";
+}
+
+$t_custom_fields_found = false;
+$t_related_custom_field_ids = custom_field_get_linked_ids( bug_get_field( $f_bug_id, 'project_id' ) );
+foreach( $t_related_custom_field_ids as $t_id ) {
+	$t_def = custom_field_get_definition( $t_id );
+	if( ( $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] ) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
+		$t_custom_fields_found = true;
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if($t_def['require_'. $t_status_label]) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if($t_def['require_'. $t_custom_status_label]) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
 		<?php
@@ -124,28 +131,20 @@ if ( $f_new_status >= $t_resolved ) {
 	</td>
 </tr>
 <?php
-		} # $t_def['display_' . $t_status_label] || $t_def['require_' . $t_status_label] && custom_field_has_write_access( $t_id, $f_bug_id ) )
-		else if( ( $t_def['display_' . $t_status_label] || $t_def['require_' . $t_status_label] ) && custom_field_has_read_access( $t_id, $f_bug_id ) ) {
+	} # $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] && custom_field_has_write_access( $t_id, $f_bug_id ) )
+	else if( ( $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] ) && custom_field_has_read_access( $t_id, $f_bug_id ) ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 		</td>
 		<td>
-			<?php
-				$t_custom_field_value = custom_field_get_value( $t_id, $f_bug_id );
-				if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {
-					echo "<a href=\"mailto:$t_custom_field_value\">$t_custom_field_value</a>";
-				} else {
-					echo $t_custom_field_value;
-				}
-			?>
+			<?php print_custom_field_value( $t_def, $t_id, $f_bug_id );			?>
 		</td>
 	</tr>
 <?php
-		} # $t_def['display_' . $t_status_label] || $t_def['require_' . $t_status_label] ) && custom_field_has_read_access( $t_id, $f_bug_id ) )
-	} # foreach( $t_related_custom_field_ids as $t_id )
-}
+	} # $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] ) && custom_field_has_read_access( $t_id, $f_bug_id ) )
+} # foreach( $t_related_custom_field_ids as $t_id )
 ?>
 
 <?php
