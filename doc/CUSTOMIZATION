@@ -23,7 +23,7 @@ detailed doc is in the works.
 * config_inc.php
   - You should create this file to change config variable values.  Your
     values from this file will be used instead of the defaults.  This file
-    will not be overwritten when you upgrade, bug config_defaults_inc.php will.
+    will not be overwritten when you upgrade, but config_defaults_inc.php will.
     Look at config_inc.php.sample for an example.
 
 * core/*_api.php - these files contains all the API library functions.
