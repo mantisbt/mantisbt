@@ -189,31 +189,31 @@
 	</tr>
 	<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
 		<td>
-			<? print_manage_user_sort_link(  $g_manage_page, $s_username, "username", $f_dir ) ?>
+			<? print_manage_user_sort_link(  $g_manage_page, $s_username, "username", $f_dir, $f_hide ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "username" ) ?>
 		</td>
 		<td>
-			<? print_manage_user_sort_link(  $g_manage_page, $s_email, "email", $f_dir ) ?>
+			<? print_manage_user_sort_link(  $g_manage_page, $s_email, "email", $f_dir, $f_hide ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "email" ) ?>
 		</td>
 		<td>
-			<? print_manage_user_sort_link(  $g_manage_page, $s_access_level, "access_level", $f_dir ) ?>
+			<? print_manage_user_sort_link(  $g_manage_page, $s_access_level, "access_level", $f_dir, $f_hide ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "access_level" ) ?>
 		</td>
 		<td>
-			<? print_manage_user_sort_link(  $g_manage_page, $s_enabled, "enabled", $f_dir ) ?>
+			<? print_manage_user_sort_link(  $g_manage_page, $s_enabled, "enabled", $f_dir, $f_hide ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "enabled" ) ?>
 		</td>
 		<td>
-			<? print_manage_user_sort_link(  $g_manage_page, $s_p, "protected", $f_dir ) ?>
+			<? print_manage_user_sort_link(  $g_manage_page, $s_p, "protected", $f_dir, $f_hide ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "protected" ) ?>
 		</td>
 		<td>
-			<? print_manage_user_sort_link(  $g_manage_page, $s_date_created, "date_created", $f_dir ) ?>
+			<? print_manage_user_sort_link(  $g_manage_page, $s_date_created, "date_created", $f_dir, $f_hide ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "date_created" ) ?>
 		</td>
 		<td>
-			<? print_manage_user_sort_link(  $g_manage_page, $s_last_visit, "last_visit", $f_dir ) ?>
+			<? print_manage_user_sort_link(  $g_manage_page, $s_last_visit, "last_visit", $f_dir, $f_hide ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "last_visit" ) ?>
 		</td>
 		<td>

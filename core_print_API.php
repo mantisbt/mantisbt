@@ -545,8 +545,8 @@
 		PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir\">$p_string</a></b>";
 	}
 	### --------------------
-	function print_manage_user_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir ) {
-		PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=1\">$p_string</a></b>";
+	function print_manage_user_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir, $p_hide ) {
+		PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=1&f_hide=$p_hide\">$p_string</a></b>";
 	}
 	### --------------------
 	function print_manage_project_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir ) {
