@@ -1,0 +1,1491 @@
+<html>
+<head>
+<title>Mantis User Documentation</title>
+<style>
+body { background-color:  #ffffff; font-family:Verdana, Arial; font-size=10pt }
+td {  font-family:Verdana, Arial; font-size=10pt }
+p {  font-family:Verdana, Arial; font-size=10pt }
+</style>
+</head>
+<body>
+
+<div align=center>
+	<h1>Mantis Configuration Documentation</h1>
+	by Kenzaburo Ito (kenito@300baud.org)
+</div>
+
+<h2>Introduction</h2>
+
+<p>
+This is the Mantis system configuration documentation.
+<p>
+
+<h2>Table of Contents</h2>
+
+<p>
+<ul>
+<li><a href="#database">Database</a>
+<li><a href="#path">Path</a>
+<li><a href="#web_server">Web Server</a>
+<li><a href="#version">Version</a>
+<li><a href="#email">Email</a>
+<li><a href="#language">Language</a>
+<li><a href="#display">Display</a>
+<li><a href="#time">Time</a>
+<li><a href="#jpgraph">JpGraph</a>
+<li><a href="#date">Date</a>
+<li><a href="#news">News</a>
+<li><a href="#default">Default Preferences</a>
+<li><a href="#summary">Summary</a>
+<li><a href="#bugnote">Bugnote</a>
+<li><a href="#file_upload">File Upload</a>
+<li><a href="#html">HTML</a>
+<li><a href="#hr">HR</a>
+<li><a href="#ldap">LDAP</a>
+<li><a href="#misc">Misc</a>
+<li><a href="#colors">Colors</a>
+<li><a href="#cookies">Cookies</a>
+<li><a href="#database_tables">Database Tables</a>
+<li><a href="#enum">Enum</a>
+<li><a href="#page">Page</a>
+</ul>
+
+<p>
+Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off and 1 is On.
+
+<p>
+<hr size=1>
+
+<h2>Content</h2>
+
+<!-- --- DATABASE BEGIN -------------------------------------------------- -->
+<p>
+<a name="database">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Database</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_hostname
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Database hostname (often localhost)
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_port
+	</td>
+	<td bgcolor="#ffffff">
+		Database port (default: 3306)
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_db_username
+	</td>
+	<td bgcolor="#ffffff">
+		Database username
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_db_password
+	</td>
+	<td bgcolor="#ffffff">
+		Database password
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_database_name
+	</td>
+	<td bgcolor="#ffffff">
+		Database name
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		The database settings must be set in order for the package to work properly.  Make sure you verify the settings each time to upgrade.
+	</td>
+</tr>
+</table>
+<!-- --- DATABASE END ---------------------------------------------------- -->
+
+<!-- --- PATH BEGIN ------------------------------------------------------ -->
+<p>
+<a name="path">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Path</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_path
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Path to your installation as seen from the web browser; this is what ayou type into the URL field.  Requires trailing / character.
+		<p>
+		eg. http://mantisbt.sourceforge.net/mantis/
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_icon_path
+	</td>
+	<td bgcolor="#ffffff">
+		This is the path to the icons directory as seen from the web browser.  This is useed for IMG tag usage.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_absolute_path
+	</td>
+	<td bgcolor="#ffffff">
+		This is the absolute path to your installation.  THis is the path that you see when you are telneted or sshed into the server.  You can type pwd to find out.  Symlinks are not allowed.  Requires trailing / character.
+		<p>
+		eg. $g_absolute_path = "/usr/local/share/apache/htdocs/mantis/";
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		These path settings are important for proper linking within your database.<br>
+		The examples are unix style but you can use windows style paths as well (eg. "\\apache\\htdocs\\mantis\\" ).
+	</td>
+</tr>
+</table>
+<!-- --- PATH END -------------------------------------------------------- -->
+
+<!-- --- WEB SERVER BEGIN ------------------------------------------------ -->
+<p>
+<a name="web_server">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Web Server</b>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_use_iis
+	</td>
+	<td bgcolor="#ffffff">
+		You need to set this to 1 if you use Miscrosoft's IIS.  This helps correct a bug in IIS.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		Any web server specific bugs and workarounds can be controled from here.
+	</td>
+</tr>
+</table>
+<!-- --- WEB SERVER END -------------------------------------------------- -->
+
+<!-- --- VERSION BEGIN --------------------------------------------------- -->
+<p>
+<a name="version">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Version</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_version
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		The version of Mantis installed.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_show_version
+	</td>
+	<td bgcolor="#ffffff">
+		Determines wheter to dsiplay the version of Mantis at the bottom of every page.
+	</td>
+</tr>
+</table>
+<!-- --- VERSION END ----------------------------------------------------- -->
+
+<!-- --- EMAIL BEGIN ----------------------------------------------------- -->
+<p>
+<a name="email">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Email</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_administrator_email
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		This is the email that users should notify when problems occur.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_webmaster_email
+	</td>
+	<td bgcolor="#ffffff">
+		This is the webmaster email.  Often, this will be the same as the administrator email.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_from_email
+	</td>
+	<td bgcolor="#ffffff">
+		This is the email address displayed in the "From: " field.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_to_email
+	</td>
+	<td bgcolor="#ffffff">
+		This is the email address displayed in the "To: " field.  The email system sends a email to this email address.  The actually email to users is sent via the "bcc: " field.  This is to help cut down on the number of emails sent per incident.  A good use of this would be to use this as a mailing list or archive email address.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_return_path_email
+	</td>
+	<td bgcolor="#ffffff">
+		This is the email address that the users can reply to.  Usually users should never respond to emails.  This may be used by the administrator to track bounced emails and, thus, invalid email accounts.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_allow_signup
+	</td>
+	<td bgcolor="#ffffff">
+		This variable toggles whether or not to allow users to signup for their own accounts.  Users must enter a valid email address.  A randomnly generated password is sent to that address.  Users cannot gain access without receiving this email.
+		<p>
+		If set to off then administrators must create accounts for users.  Furthermore they must notify users manually.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_enable_email_notification
+	</td>
+	<td bgcolor="#ffffff">
+		Toggle whether the site allows email notification or not.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_notify_developers_on_new
+	</td>
+	<td bgcolor="#ffffff">
+		Toggle to notify Developers, Managers, and Administrator when a new bug comes in.  Users need to turn on their preference (Email on New) as well.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_email_new_address
+	</td>
+	<td bgcolor="#ffffff">
+		NOT ENABLED
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_email_update_address
+	</td>
+	<td bgcolor="#ffffff">
+		NOT ENABLED
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_validate_email
+	</td>
+	<td bgcolor="#ffffff">
+		Toggle to check whether an email is valid before allowing a signup.  This checks for a properly formatted email and a valid MX record.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_check_mx_record
+	</td>
+	<td bgcolor="#ffffff">
+		Disable the MX record check in the email validation routine.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_hide_user_email
+	</td>
+	<td bgcolor="#ffffff">
+		This disables the automatic generation of mailto: links
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_use_x_priority
+	</td>
+	<td bgcolor="#ffffff">
+		This can disable the generation of the X-Priority header.  Apparently Outlook Express treats 0 as high priority.
+	</td>
+</tr>
+
+<tr>
+	<td bgcolor="#ddddff">
+		$g_use_bcc
+	</td>
+	<td bgcolor="#ffffff">
+		Set to 0 as on Windows systems, as long as php-mail-function has its bcc-bug (~PHP 4.0.5/6).
+		See bug numbers <a href="http://www.php.net/bugs.php?id=10136">10136</a>,
+		<a href="http://www.php.net/bugs.php?id=11349">11349</a>,
+		<a href="http://www.php.net/bugs.php?id=11616">11616</a>,
+		<a href="http://www.php.net/bugs.php?id=11797">11797</a>,
+
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_use_phpMailer
+	</td>
+	<td bgcolor="#ffffff">
+		Use phpMailer instead of standard mail() function (REQUIRES PHP 4.x.x)<p>
+		Get the phpMailer-package from <a href="http://phpmailer.sourceforge.net">http://phpmailer.sourceforge.net</a><br>
+		The installation is very simple you only need 2 plain text php-files<br>
+		<ul>
+			<li>class.smtp.php<br>
+			<li>class.phpmailer.php<br>
+		</ul>
+		Copy these files to your php-include-dir (eg: "c:\php\includes" or "/usr/lib/php/includes") and add this path to the "include_path"-entry  in the php.ini file.<br>
+		The installation is described in the readme and there is also a simple example included.
+		<p>
+		PhpMailer comes with a detailed documentation in phpdoc format.  It is distributed under the LGPL.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_phpMailer_method
+	</td>
+	<td bgcolor="#ffffff">
+	select the method to mail by:<br>
+	<li>0 - mail()
+	<li>1 - sendmail
+	<li>2 - SMTP
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_smtp_host
+	</td>
+	<td bgcolor="#ffffff">
+		This option allows you to use a remote SMTP host if you use the phpMailer script in SMTP mode.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		The email system allows the package to notify users when significant events occur.  You should have a working Mail Transport Agent (MTA) on your system.  On unix systems this is usually sendmail and usually nothing needs to be done.  For problems regarding mail then visit the support forums or read up on the user notes in the mail() function at: <a href="http://www.php.net/manual/en/function.mail.php">http://www.php.net/manual/en/function.mail.php</a>
+		<p>
+		Users can also signup for their own accounts.  Emails must be valid!
+		<p>
+		You may now use the phpMailer script to send out emails.  It is recommended if you currently use Windows and PHP 4.0.4 or higher.
+	</td>
+</tr>
+</table>
+<!-- --- EMAIL END ------------------------------------------------------- -->
+
+<!-- --- LANGUAGE BEGIN -------------------------------------------------- -->
+<p>
+<a name="language">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Language</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_default_language
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		The default language for the installation.  T
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_language_choices_arr
+	</td>
+	<td bgcolor="#ffffff">
+		List of the choices that the users are allowed to choose. These must be preserved in array format.  Each corresponds to a certain strings_*.txt file.  "korean" would be strings_korean.txt and so on.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		Each installation has a default language.  This will be used when signing up and is what each new account will be set to.  Users can change their account preferences to use a language that they are more comfortable with.
+		<p>
+		NOTE: There is one current flaw in the system.  If one user is using German and you are using English and that user generates an email event then you will received the email in German.  This should only be a minor inconvenience and may be corrected in the future.
+	</td>
+</tr>
+</table>
+<!-- --- LANGUAGE END ---------------------------------------------------- -->
+
+<!-- --- DISPLAY BEGIN --------------------------------------------------- -->
+<p>
+<a name="display">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Display</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_window_title
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		This is the browser window title (&lt;TITLE&gt; tag).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_page_title
+	</td>
+	<td bgcolor="#ffffff">
+		This title is displayed in the viewing area of the HTML page.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_show_report
+	</td>
+	<td bgcolor="#ffffff">
+		<li>0 - both
+		<li>1 - only simple
+		<li>2 - only advanced
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_show_update
+	</td>
+	<td bgcolor="#ffffff">
+		<li>0 - both
+		<li>1 - only simple
+		<li>2 - only advanced
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_show_view
+	</td>
+	<td bgcolor="#ffffff">
+		<li>0 - both
+		<li>1 - only simple
+		<li>2 - only advanced
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_show_source
+	</td>
+	<td bgcolor="#ffffff">
+		Create a link at the bottom of each page that displays the source for that page.  Only Administrators can view these pages and this should only be used for debug purposes or in a secure environment.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_show_footer_menu
+	</td>
+	<td bgcolor="#ffffff">
+		Show the menu at the bottom of the page as well as at the top.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_show_project_in_title
+	</td>
+	<td bgcolor="#ffffff">
+		<li>0 : no project name, display $g_page_title
+		<li>1 : display project name and display $g_page_title
+		<li>2 : display only project nam, no $g_page_title
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_show_assigned_names
+	</td>
+	<td bgcolor="#ffffff">
+		When a bug is assigned then replace the word "assigned" with the name of the developer in parenthesis.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		Users can set their own default preferences for the show report/update/view preferences but these settings should override those preferences.  These settings affect all projects.
+	</td>
+</tr>
+</table>
+<!-- --- DISPLAY END ----------------------------------------------------- -->
+
+<!-- --- TIME BEGIN ------------------------------------------------------ -->
+<p>
+<a name="time">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Time</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_cookie_time_length
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Time for 'permanent' cookie to live in seconds (1 year).  THis is what is used when people select "save login".
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_wait_time
+	</td>
+	<td bgcolor="#ffffff">
+		Time to delay between page redirects (in seconds).  Users can override this setting in their user preferences.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_content_expire
+	</td>
+	<td bgcolor="#ffffff">
+		Time to wait before document is stale (in minutes).  This is used in meta_inc.php.
+	</td>
+</tr>
+</table>
+<!-- --- TIME END -------------------------------------------------------- -->
+
+<!-- --- JPGRAPH BEGIN---------------------------------------------------- -->
+<p>
+<a name="jpgraph">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>JpGraph</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_use_jpgraph
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Enabled jpgraph use.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_jpgraph_path
+	</td>
+	<td bgcolor="#ffffff">
+		Don't forget to add the trailing /
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		To use the Jpgraph addon you need the <a href="http://www.aditus.nu/jpgraph/index.php">JpGraph package</a>.
+		You can place the package whereever you want, but you have to set the var in jpgraph.php
+		<p>
+		eg. DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");
+	</td>
+</tr>
+</table>
+<!-- --- JPGRAPH END ----------------------------------------------------- -->
+
+<!-- --- DATE BEGIN ------------------------------------------------------ -->
+<p>
+<a name="date">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Date</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_short_date_format
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		This format is used in the bug listing pages (view_all_bug_page.php3, etc.).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_normal_date_format
+	</td>
+	<td bgcolor="#ffffff">
+		This format is used in the view bug, update bug pages, bugnotes, manage section, and news section.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_complete_date_format
+	</td>
+	<td bgcolor="#ffffff">
+		This format is used on the top of each page (current time) and the emails that are sent out.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		These variables control how the date is displayed (default is 'US' formatting).  Go to <a href="http://www.php.net/manual/en/function.date.php">http://www.php.net/manual/en/function.date.php</a> for detailed instructions on alternative date formatting.
+	</td>
+</tr>
+</table>
+<!-- --- DATE END -------------------------------------------------------- -->
+
+<!-- --- NEWS BEGIN ------------------------------------------------------ -->
+<p>
+<a name="news">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>News</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_news_limit_method
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Limit by entry count or date
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_news_view_limit
+	</td>
+	<td bgcolor="#ffffff">
+		Limit the number of news entries displayed at one time.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_news_view_limit_days
+	</td>
+	<td bgcolor="#ffffff">
+		Shows the news entries from the last X days.
+	</td>
+</tr>
+</table>
+<!-- --- NEWS END -------------------------------------------------------- -->
+
+
+<!-- --- DEFAULT BEGIN --------------------------------------------------- -->
+<p>
+<a name="default">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Default Preferences</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_default_new_account_access_level
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		This is the default access level people are given when their account is created by email.  Look in constant_inc.php for other values.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_limit_view
+	</td>
+	<td bgcolor="#ffffff">
+		Site defaults for viewing preferences.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_show_changed
+	</td>
+	<td bgcolor="#ffffff">
+		Site defaults for viewing preferences.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_min_refresh_delay
+	</td>
+	<td bgcolor="#ffffff">
+		Make sure people aren't refreshing too often.  If a user tries to set his user preference to be lower then it is bumped back up to this minimum value.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_advanced_report
+	</td>
+	<td bgcolor="#ffffff">
+		Default advanced report settings.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_advanced_view
+	</td>
+	<td bgcolor="#ffffff">
+		Default advanced view settings.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_advanced_update
+	</td>
+	<td bgcolor="#ffffff">
+		Default advanced update settings.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_refresh_delay
+	</td>
+	<td bgcolor="#ffffff">
+		Default page refresh delay (in minutes).  This is for the bug listing pages.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_redirect_delay
+	</td>
+	<td bgcolor="#ffffff">
+		Default page redirect settings (in seconds).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_new
+	</td>
+	<td bgcolor="#ffffff">
+		Default email setting when a new bug is reported.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_assigned
+	</td>
+	<td bgcolor="#ffffff">
+		Default email setting when a bug is assigned to a user.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_feedback
+	</td>
+	<td bgcolor="#ffffff">
+		Default email setting when a bug is put into feedback status.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_resolved
+	</td>
+	<td bgcolor="#ffffff">
+		Default email setting when a bug is resolved.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_closed
+	</td>
+	<td bgcolor="#ffffff">
+		Default email setting when a bug is closed.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_reopened
+	</td>
+	<td bgcolor="#ffffff">
+		Default email setting when a bug is reopened.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_bugnote
+	</td>
+	<td bgcolor="#ffffff">
+		Default email setting when a bugnote is added.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_status
+	</td>
+	<td bgcolor="#ffffff">
+		NOT ENABLED
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_default_email_on_priority
+	</td>
+	<td bgcolor="#ffffff">
+		NOT ENABLED
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		These are the settings that each new account is initialized with.
+		<p>
+		Default language is set to default site language ($g_default_language).
+	</td>
+</tr>
+</table>
+<!-- --- DEFAULT END ----------------------------------------------------- -->
+
+<!-- --- SUMMARY BEGIN --------------------------------------------------- -->
+<p>
+<a name="summary">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Summary</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_reporter_summary_limit
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Limit how many reporters to show in the summary page. This is useful when there are dozens or hundreds of reporters.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_summary_pad
+	</td>
+	<td bgcolor="#ffffff">
+		Default space padding for the summary numbers.  Increase this when bug count goes over 99,999 (eep!).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_date_partitions
+	</td>
+	<td bgcolor="#ffffff">
+		Date lengths to count bugs by (in days) for the summary by date.
+	</td>
+</tr>
+</table>
+<!-- --- SUMMARY END ----------------------------------------------------- -->
+
+<!-- --- BUGNOTE BEGIN --------------------------------------------------- -->
+<p>
+<a name="bugnote">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Bugnote</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_bugnote_order
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Bugnote ordering: change to ASC or DESC.
+	</td>
+</tr>
+</table>
+<!-- --- BUGNOTE END ----------------------------------------------------- -->
+
+<!-- --- FILE UPLOAD BEGIN ----------------------------------------------- -->
+<p>
+<a name="file_upload">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>File Upload</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_allow_file_upload
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Toggle to allow file attachments and project document uploads.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_store_file_to
+	</td>
+	<td bgcolor="#ffffff">
+		<li>0 = no upload
+		<li>1 = "disk"
+		<li>2 = "database" (currently only disk is supported)
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_max_file_size
+	</td>
+	<td bgcolor="#ffffff">
+		The maximum file size to allow as an attachment.  You may also have to configure your php.ini file to increase the execution time, memory limit, max post size, and max upload size.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		This link may provide more information: <a href="http://www.php.net/manual/en/features.file-upload.php">http://www.php.net/manual/en/features.file-upload.php</a> if you run into problems.
+	</td>
+</tr>
+</table>
+<!-- --- FILE UPLOAD END ------------------------------------------------- -->
+
+<!-- --- HTML BEGIN ------------------------------------------------------ -->
+<p>
+<a name="html">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>HTML</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_allow_html_tags
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Allow specified HTML tags to be used.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_html_tags
+	</td>
+	<td bgcolor="#ffffff">
+		This is the list of HTML tags that are allowed.
+		<p>
+		Do NOT include href or img tags here.<br>
+		Do NOT include tags that have parameters (eg. <font face="arial">)
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_allow_href_tags
+	</td>
+	<td bgcolor="#ffffff">
+		Allow A HREF tags
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_allow_img_tags
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		NOT ENABLED
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_primary_table_tags
+	</td>
+	<td bgcolor="#ffffff">
+		This is inserted into the outermost tables ( tags like border, cellspacing, etc)
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		The HTML code is allowed to enter the database as is.  The $g_allow_href_tags does not have to be enabled to make URL links.  The pacakge will automatically hyperlink properly formatted URLs (eg. http://blah.balh/ or mailto://me@more.com/)
+	</td>
+</tr>
+</table>
+<!-- --- HTML END -------------------------------------------------------- -->
+
+<!-- --- HR BEGIN -------------------------------------------------------- -->
+<p>
+<a name="hr">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>HR</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_hr_size
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		hr size
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_hr_width
+	</td>
+	<td bgcolor="#ffffff">
+		hr width.  Leave off the percentage (%) symbol.
+	</td>
+</tr>
+</table>
+<!-- --- HR END ---------------------------------------------------------- -->
+
+<!-- --- LDAP BEGIN ------------------------------------------------------ -->
+<p>
+<a name="ldap">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>LDAP</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_server
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See <a href="README.LDAP">README.LDAP</a>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_root_dn
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See <a href="README.LDAP">README.LDAP</a>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_organisation
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See <a href="README.LDAP">README.LDAP</a>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_use_ldap_email
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See <a href="README.LDAP">README.LDAP</a>
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		LDAP authentication method.
+	</td>
+</tr>
+</table>
+<!-- --- LDAP END -------------------------------------------------------- -->
+
+<!-- --- MISC BEGIN ------------------------------------------------------ -->
+<p>
+<a name="misc">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Misc</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_reopen_bug_threshold
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		hr size
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_quick_proceed
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See fewer confirmation screens between common actions.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_login_method
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		<ul>
+			<li>PLAIN
+			<li>CRYPT
+			<li>MD5
+		</ul>
+		Some systems (mostly non-unix) do not have crypt support in PHP.  MD5 will accomplish almost the same thing.  PLAIN is plain text and there is no attempt to secure the password in the database.  You will not be able to easily convert between encryption methods so this needs to be chosen at install time.  CRYPT is the default.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_limit_reporters
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Limit reporters to only viewing bugs that they report.
+	</td>
+</tr>
+
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		Access level needed to re-open bugs.  Look in the constant_inc.php file if you want to set a different value.
+	</td>
+</tr>
+</table>
+<!-- --- MISC END -------------------------------------------------------- -->
+
+<!-- --- COLORS END ------------------------------------------------------ -->
+<p>
+<a name="colors">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Colors</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_white_color
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		White.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_primary_color_dark
+	</td>
+	<td bgcolor="#ffffff">
+		Dark Table Color
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_primary_color_light
+	</td>
+	<td bgcolor="#ffffff">
+		Light Table Color
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_primary_border_color
+	</td>
+	<td bgcolor="#ffffff">
+		Table Border Color
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_category_title_color
+	</td>
+	<td bgcolor="#ffffff">
+		Category Color
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_category_title_color2
+	</td>
+	<td bgcolor="#ffffff">
+		Category Color 2
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_table_title_color
+	</td>
+	<td bgcolor="#ffffff">
+		Table Title Color
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_new_color
+	</td>
+	<td bgcolor="#ffffff">
+		New Bug Color (default red).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_feedback_color
+	</td>
+	<td bgcolor="#ffffff">
+		Feedback Bug Color (default purple/magenta).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_confirmed_color
+	</td>
+	<td bgcolor="#ffffff">
+		Confirmed Bug Color (default blue).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_assigned_color
+	</td>
+	<td bgcolor="#ffffff">
+		Assigned Bug Color (default blue).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_resolved_color
+	</td>
+	<td bgcolor="#ffffff">
+		Resolved Bug Color (default bluish-green).
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_closed_color
+	</td>
+	<td bgcolor="#ffffff">
+		Closed Bug Color (default gray).
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		You can change the look and feel by modifying these values.
+	</td>
+</tr>
+</table>
+<!-- --- COLORS BEGIN ---------------------------------------------------- -->
+
+<!-- --- COOKIES BEGIN --------------------------------------------------- -->
+<p>
+<a name="cookies">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Cookies</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_cookie_prefix
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Set this to a unique identifier. Do not use spaces.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_string_cookie
+	</td>
+	<td bgcolor="#ffffff">
+		The name for the users cookie string value.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_project_cookie
+	</td>
+	<td bgcolor="#ffffff">
+		The name for the project id cookie.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_view_all_cookie
+	</td>
+	<td bgcolor="#ffffff">
+		The name for the view all bugs settings cookie.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_view_reported_cookie
+	</td>
+	<td bgcolor="#ffffff">
+		The name for the view all reported bugs settings cookie.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_view_assigned_cookie
+	</td>
+	<td bgcolor="#ffffff">
+		The name for the view all assigned bugs settings cookie.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_view_unassigned_cookie
+	</td>
+	<td bgcolor="#ffffff">
+		The name for the view all unassigned bugs settings cookie.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_string_cookie_val
+	</td>
+	<td bgcolor="#ffffff">
+		The users cookie_string value.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_project_cookie_val
+	</td>
+	<td bgcolor="#ffffff">
+		The users currently active Project ID.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_view_all_cookie_val
+	</td>
+	<td bgcolor="#ffffff">
+		The users view all bugs settings.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_view_reported_cookie_val
+	</td>
+	<td bgcolor="#ffffff">
+		The users view all reported bugs settings.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_view_assigned_cookie_val
+	</td>
+	<td bgcolor="#ffffff">
+		The users view all assigned bugs settings.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_view_unassigned_cookie_val
+	</td>
+	<td bgcolor="#ffffff">
+		The users view all unassigned bugs settings.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		I believe there is a limit of 18 or 20 cookies per domain/directory.
+	</td>
+</tr>
+</table>
+<!-- --- COOKIES END ----------------------------------------------------- -->
+
+<!-- --- DATABASE TABLE BEGIN -------------------------------------------- -->
+<p>
+<a name="database_tables">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Database Tables</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_db_table_prefix
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Change this is if needed but remember to alter all settings in the db_genrate/upgrade files.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		The prefix is used to help make sure table names are unique.  This is useful for users who are limited to one database.
+	</td>
+</tr>
+</table>
+<!-- --- DATABASE TABLE END ---------------------------------------------- -->
+
+<!-- --- ENUM BEGIN ------------------------------------------------------ -->
+<p>
+<a name="enum">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Enum</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_reopen_bug_threshold
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		hr size
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		Access level needed to re-open bugs.  Look in the constant_inc.php file if you want to set a different value.
+	</td>
+</tr>
+</table>
+<!-- --- ENUM END -------------------------------------------------------- -->
+
+<!-- --- PAGE BEGIN ------------------------------------------------------ -->
+<p>
+<a name="page">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Page</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_php
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		File extensions for php 3 and php 4
+		<br>
+		Set this to ".php" for php4 or whatever your webserver is configured for.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_bottom_include_page
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		If this page eixsts it will be displayed at the bottom of every page.  It makes a good company branding include page.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_top_include_page
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		If this page eixsts it will be displayed at the top of every page.  It makes a good company branding include page.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_css_include_file
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Set this to point to the CSS file of your choice.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_meta_include_file
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Set this to point to the META tag file of your choice.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		Remember to run the convertToPHP4 script if you need the .php extensions.
+	</td>
+</tr>
+</table>
+<!-- --- PAGE END -------------------------------------------------------- -->
+
+</body>
+</html>
