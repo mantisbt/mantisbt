@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.2
 
+ * Fix #3118: My Account: after update of password, wrong information is given.
  * Fix #3537: Rewriting custom values with 0 when updating a bug.
  * Fix #3539: Simple view page shows advanced custom fields.
 

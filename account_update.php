@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.33 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_update.php,v 1.34 2004-02-07 12:53:41 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,7 +33,9 @@
 
 	$f_email = email_append_domain( $f_email );
 
-	user_set_email( auth_get_current_user_id(), $f_email );
+	# get the user id once, so that if we decide in the future to enable this for
+	# admins / managers to change details of other users.
+	$t_user_id = auth_get_current_user_id();
 
 	$t_redirect = 'account_page.php';
 
@@ -43,22 +45,26 @@
 
 	echo '<br /><div align="center">';
 
-	echo lang_get( 'operation_successful' );
-	echo '<br /><ul>';
-	echo '<li>' . lang_get( 'email_updated' ) . '</li>';
+	# @@@ Listing what fields were updated is not standard behaviour of Mantis
+	#     it also complicates the code.
+
+	echo lang_get( 'operation_successful' ) . '<br />';
+	if ( $f_email != user_get_email( $t_user_id ) ) {
+		user_set_email( $t_user_id, $f_email );
+		echo lang_get( 'email_updated' ) . '<br />';
+	}
 
 	# Update password if the two match and are not empty
 	if ( !is_blank( $f_password ) ) {
 		if ( $f_password != $f_password_confirm ) {
 			trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 		} else {
-			user_set_password( auth_get_current_user_id(), $f_password );
-
-			echo '<li>' . lang_get( 'password_updated' ) . '</li>';
+			if ( !auth_does_password_match( $t_user_id, $f_password ) ) {
+				user_set_password( $t_user_id, $f_password );
+				echo lang_get( 'password_updated' ) . '<br />';
+			}
 		}
 	}
-
-	echo '</ul>';
 
 	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
 	echo '</div>';
