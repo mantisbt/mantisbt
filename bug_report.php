@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.36 2004-08-17 18:01:17 thraxisp Exp $
+	# $Id: bug_report.php,v 1.37 2004-08-18 13:54:41 narcissus Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -27,7 +27,7 @@
 	$t_bug_data->platform				= gpc_get_string( 'platform', '' );
 	$t_bug_data->os					= gpc_get_string( 'os', '' );
 	$t_bug_data->os_build				= gpc_get_string( 'os_build', '' );
-	$t_bug_data->product_version		= gpc_get_string( 'product_version', '' );
+	$t_bug_data->version			= gpc_get_string( 'product_version', '' );
 	$t_bug_data->profile_id			= gpc_get_int( 'profile_id', 0 );
 	$t_bug_data->handler_id			= gpc_get_int( 'handler_id', 0 );
 	$t_bug_data->view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
@@ -39,7 +39,7 @@
 	$t_bug_data->summary				= gpc_get_string( 'summary' );
 	$t_bug_data->description			= gpc_get_string( 'description' );
 	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
-	$t_bug_data->additional_info		= gpc_get_string( 'additional_info', '' );
+	$t_bug_data->additional_information	= gpc_get_string( 'additional_info', '' );
 
 	$f_file					= gpc_get_file( 'file', null );
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
@@ -166,7 +166,7 @@
 		<input type="hidden" name="platform" 		value="<?php echo $t_bug_data->platform ?>" />
 		<input type="hidden" name="os" 			value="<?php echo $t_bug_data->os ?>" />
 		<input type="hidden" name="os_build" 		value="<?php echo $t_bug_data->os_build ?>" />
-		<input type="hidden" name="product_version" 	value="<?php echo $t_bug_data->product_version ?>" />
+		<input type="hidden" name="product_version" 	value="<?php echo $t_bug_data->version ?>" />
 		<input type="hidden" name="build" 		value="<?php echo $t_bug_data->build ?>" />
 		<input type="hidden" name="report_stay" 	value="1" />
 		<input type="hidden" name="view_state"		value="<?php echo $t_bug_data->view_state ?>" />

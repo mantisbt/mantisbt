@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.79 2004-08-17 12:15:48 thraxisp Exp $
+	# $Id: bug_api.php,v 1.80 2004-08-18 13:54:41 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -313,7 +313,7 @@
 		$c_profile_id			= db_prepare_int( $p_bug_data->profile_id );
 		$c_view_state			= db_prepare_int( $p_bug_data->view_state );
 		$c_steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
-		$c_additional_info		= db_prepare_string( $p_bug_data->additional_info );
+		$c_additional_info		= db_prepare_string( $p_bug_data->additional_information );
 		$c_sponsorship_total = 0;
 
 		# Summary cannot be blank
@@ -436,26 +436,9 @@
 			$t_target_project_id = $t_bug_data->project_id;
 		}
 
-		$t_new_bug_id =  bug_create(
-						/* Change project */
-						$t_target_project_id,
-						$t_bug_data->reporter_id,
-						$t_bug_data->handler_id,
-						$t_bug_data->priority,
-						$t_bug_data->severity,
-						$t_bug_data->reproducibility,
-						$t_bug_data->category,
-						$t_bug_data->os,
-						$t_bug_data->os_build,
-						$t_bug_data->platform,
-						$t_bug_data->version,
-						$t_bug_data->build,
-						bug_get_field( $t_bug_id, 'profile_id' ),
-						$t_bug_data->summary,
-						$t_bug_data->view_state,
-						$t_bug_data->description,
-						$t_bug_data->steps_to_reproduce,
-						$t_bug_data->additional_information );
+		$t_bug_data->project_id = $t_target_project_id;
+		
+		$t_new_bug_id = bug_create( $t_bug_data );
 
 		# MASC ATTENTION: IF THE SOURCE BUG HAS TO HANDLER THE bug_create FUNCTION CAN TRY TO AUTO-ASSIGN THE BUG
 		# WE FORCE HERE TO DUPLICATE THE SAME HANDLER OF THE SOURCE BUG
