@@ -164,7 +164,7 @@
 
 <!-- ====================== BUG LIST ========================= -->
 <?php
-	$col_count = 9;
+	$col_count = 10;
 
 	if ( STATUS_LEGEND_POSITION_TOP == config_get( 'status_legend_position' ) ) {
 		html_status_legend();
