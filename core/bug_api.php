@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.87 2004-10-17 01:58:56 thraxisp Exp $
+	# $Id: bug_api.php,v 1.88 2004-11-30 11:11:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -348,7 +348,7 @@
 
 		# check to see if we want to assign this right off
 		$t_status = config_get( 'bug_submit_status' );
-		
+
 		# if not assigned, check if it should auto-assigned.
 		if ( 0 == $c_handler_id ) {
 			# if a default user is associated with the category and we know at this point
@@ -437,7 +437,7 @@
 		}
 
 		$t_bug_data->project_id = $t_target_project_id;
-		
+
 		$t_new_bug_id = bug_create( $t_bug_data );
 
 		# MASC ATTENTION: IF THE SOURCE BUG HAS TO HANDLER THE bug_create FUNCTION CAN TRY TO AUTO-ASSIGN THE BUG
@@ -803,17 +803,17 @@
 			$t_action_prefix = 'email_notification_title_for_action_bug_';
 			$t_status_prefix = 'email_notification_title_for_status_bug_';
 
-			# bug assigned
-			if ( $t_old_data->handler_id != $p_bug_data->handler_id ) {
-				email_generic( $p_bug_id, 'owner', $t_action_prefix . 'assigned' );
-				return true;
-			}
-
 			# status changed
 			if ( $t_old_data->status != $p_bug_data->status ) {
 				$t_status = get_enum_to_string( config_get( 'status_enum_string' ), $p_bug_data->status );
 				$t_status = str_replace( ' ', '_', $t_status );
 				email_generic( $p_bug_id, $t_status, $t_status_prefix . $t_status );
+				return true;
+			}
+
+			# bug assigned
+			if ( $t_old_data->handler_id != $p_bug_data->handler_id ) {
+				email_generic( $p_bug_id, 'owner', $t_action_prefix . 'assigned' );
 				return true;
 			}
 
@@ -911,7 +911,7 @@
 	function bug_format_summary( $p_bug_id, $p_context ) {
 		return 	helper_call_custom_function( 'format_issue_summary', array( $p_bug_id , $p_context ) );
 	}
-		
+
 
 	# --------------------
 	# Returns the number of bugnotes for the given bug_id
@@ -990,10 +990,10 @@
 		$c_bug_id			= db_prepare_int( $p_bug_id );
 		$c_field_name		= db_prepare_string( $p_field_name );
 		if( $p_prepare ) {
-			$c_status		= '\'' . db_prepare_string( $p_status ) . '\''; #generic, unknown type	
+			$c_status		= '\'' . db_prepare_string( $p_status ) . '\''; #generic, unknown type
 		} else {
 			$c_status		=  $p_status; #generic, unknown type
-		}			
+		}
 
 		$h_status = bug_get_field( $p_bug_id, $p_field_name );
 
