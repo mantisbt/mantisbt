@@ -3,6 +3,7 @@ Mantis ChangeLog
 2003.??.??  -  0.18.0a2
 
  * Behaviour change: Project documentation is now sorted by title
+ * Enhancement: Project name is shown in print_bug_page
  * Fix: #2938: 'Double quotes not handled correctly in manage_custom_field_edit_page' 
  * Fix: handle special characters correctly in the rest of the manage_custom_field_* pages
  * Fix: #2937: 'Double quotes not handled correctly in version names'

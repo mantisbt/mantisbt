@@ -59,6 +59,11 @@
 <br />
 <table class="width100" cellspacing="1">
 <tr>
+	<td class="form-title" colspan="6">
+		<div class="center"><?php echo config_get( 'window_title' ) . ' - ' . project_get_name( $v_project_id ) ?></div>
+	</td>
+</tr>
+<tr>
 	<td class="form-title" colspan="3">
 		<?php echo lang_get( 'viewing_bug_advanced_details_title' ) ?>
 	</td>
