@@ -25,7 +25,7 @@ Mantis ChangeLog
  * Fix #4064: Links are not hyperlinked property if containing () (vboctor)
  * Fix #4065: Issues are not hyperlinked in Changelog if $g_bug_link_tag is not # (vboctor).
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection..
- * Updated German, Italian, and Brazilian Portuguese languages.
+ * Updated German, Italian, Russian, and Brazilian Portuguese languages.
 
 2004.07.07  -  0.19.0a1
 

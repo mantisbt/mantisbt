@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: vboctor $
-	# $Date: 2004-07-09 11:39:45 $
+	# $Date: 2004-07-12 22:11:21 $
 	#
-	# $Id: strings_italian.txt,v 1.67 2004-07-09 11:39:45 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.68 2004-07-12 22:11:21 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -40,7 +40,7 @@ $s_date_order = "Ordina per Data";
 $s_print_all_bug_page_link = "Stampa il report";
 $s_csv_export = "Esporta in formato CSV";
 $s_login_anonymously = "Accedi anonimamente";
-$s_anonymous = "Anonymous";
+$s_anonymous = "Anonimo";
 $s_jump_to_bugnotes = "Vai alle Note";
 $s_public_project_msg = "Questo progetto è PUBBLICO. Tutti gli utenti possono accedervi.";
 $s_private_project_msg = "Questo progetto è PRIVATO. Possono accedervi solo gli amministratori e gli utenti esplicitamente abilitati.";
@@ -81,10 +81,10 @@ $s_new_bug = "Nuova anomalia";
 $s_bugnote_added = "Nota aggiunta";
 $s_bugnote_edited = "Nota modificata";
 $s_bugnote_deleted = "Nota eliminata ";
-$s_summary_updated = "Le statistiche sono state aggiornate";
+$s_summary_updated = "Riassunto modificato";
 $s_description_updated = "Descrizione modificata";
-$s_additional_information_updated = "Modificate le Informazioni Addizionali";
-$s_steps_to_reproduce_updated = "Modificati i Passi per Riprodurlo";
+$s_additional_information_updated = "Informazioni add. modificate";
+$s_steps_to_reproduce_updated = "Passi modificati";
 $s_file_added = "File allegato ";
 $s_file_deleted = "Allegato eliminato";
 $s_bug_deleted = "Anomalia eliminata";
@@ -124,12 +124,12 @@ $s_graph_imp_severity_title = "Grafico di sintesi per severità";
 $s_graph_imp_category_title = "Grafico di sintesi per categoria";
 $s_graph_imp_resolution_title = "Grafico di sintesi per motivazione"; /* MASC */
 $s_by_status_pct = "Per stato (%)";
-$s_by_priority_pct = "Per priorità (%)";
-$s_by_severity_pct = "Per severità (%)";
+$s_by_priority_pct = "Per priorita' (%)";
+$s_by_severity_pct = "Per severita' (%)";
 $s_by_category_pct = "Per categoria (%)";
 $s_by_resolution_pct = "per motivazione (%)";
-$s_by_severity_mix = "Per severità e stato";
-$s_by_priority_mix = "Per priorità e stato";
+$s_by_severity_mix = "Per severita' e stato";
+$s_by_priority_mix = "Per priorita' e stato";
 $s_by_resolution_mix = "Per motivazione e stato";
 $s_synthesis_link = "Sintesi";
 $s_status_link = "Per stato";
@@ -153,69 +153,75 @@ $s_bugnote_description = "Testo della Nota";
 $s_error_no_proceed = "Please use the 'Back' button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.";
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
-$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = "ERROR: A project with that name already exists.";
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = "ERROR: Access Denied.";
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = "ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.";
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = "ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.";
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = "ERROR: A required parameter to this page was not found.";
+$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action.  You may wish to report this error to your local administrator.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.  Please report this to ';
+$MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%s\' was empty.  Please recheck your inputs.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected.  You are not allowed to access this until the account protection is lifted.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = "ERROR: Bugnote not found.";
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = "ERROR: Project not found.";
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = "ERROR: Database field not found.";
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= "ERROR: Unable to connect to FTP server.";
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = "ERROR: A project with that name already exists.  Please go back and enter a different name.";
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= "ERROR: User not found.";
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= "ERROR: News item not found.";
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= "ERROR: An array was expected but a string was received.";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= "ERROR: anomalia not found.";
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= "ERROR: Invalid email.";
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= "ERROR: File type not allowed for uploads.";
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= "ERROR: This is a duplicate file.  Please delete the file first.";
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = "ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver";
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= "ERROR: You cannot set a anomalia as a duplicate of itself.";
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "ERROR: Invalid value for field";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = "Invalid custom field definition";
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= "ERROR: LDAP Authentication Failed";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= "ERROR: LDAP Record Update has failed.";
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= "ERROR: Database connection failed.";
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= "ERROR: Database query failed.";
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= "ERROR: Database selection failed.";
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = "ERROR: This is a duplicate category.";
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = "ERROR: No copy action was specified.";
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = "ERROR: Category not found.";
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "ERROR: This is a duplicate version.";
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = "ERROR: Version not found.";
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = "ERROR: The username is invalid.";
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "User does not have required access level";
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = "Sponsorship support not enabled.";
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = "Sponsorship %d not found.";
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = "Sponsorship (%s) is below minimum amount (%s).";
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = "Handler does not have the required access level to handle sponsored issues.";
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = "Access Denied: Assigning sponsored issues requires higher access level.";
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = "Configuration option \"%s\" has invalid value \"%s\"";
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = "The action cannot be performed because issue \"%d\" is read-only";
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Database query failed.  Error received from database was #%d: %s for the query: %s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
+# MASC RELATIONSHIP
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+# MASC RELATIONSHIP
 
 $s_login_error = "ERRORE: Il tuo account potrebbe essere stato disabilitato oppure puoi aver immesso un nome e/o una password errata.";
 $s_login_cookies_disabled = "ERRORE: Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
@@ -227,10 +233,10 @@ $s_proceed = "Clicca per continuare";
 $s_switch = "Cambia";
 $s_logged_in_as = "Autenticato come ";
 
-$s_prefix_for_deleted_users = "user";
+$s_prefix_for_deleted_users = "utente";
 
 $s_administrator = "Amministratore";
-$s_myself = "Myself";
+$s_myself = "Me stesso";
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:osservatore,25:segnalatore,40:aggiornatore,55:sviluppatore,70:manager,90:amministratore";
@@ -270,11 +276,18 @@ $s_email_notification_title_for_action_bug_submitted = "La seguente anomalia é s
 $s_email_notification_title_for_action_bug_assigned = "La seguente anomalia é stata ASSEGNATA.";
 $s_email_notification_title_for_action_bug_reopened = "La seguente anomalia é stata RIAPERTA.";
 $s_email_notification_title_for_action_bug_deleted = "La seguente anomalia é stata ELIMINATA.";
+$s_email_notification_title_for_action_bug_updated = "La seguente anomalia é stata AGGIORNATA."; #MASC
 $s_email_notification_title_for_action_sponsorship_added = "La seguente anomalia é stata SPONSORIZZATA.";
 $s_email_notification_title_for_action_sponsorship_updated = "Una sponsorizzazione della seguente anomalia é stata modificata.";
 $s_email_notification_title_for_action_sponsorship_deleted = "Una sponsorizzazione della seguente anomalia é stata eliminata.";
 
 $s_email_notification_title_for_action_bugnote_submitted = "Una NOTA é stata aggiunta a questa anomalia.";
+# MASC RELATIONSHIP
+$s_email_notification_title_for_action_relationship_added = "E' stata aggiunta una RELAZIONE alla seguente anomalia.";
+$s_email_notification_title_for_action_relationship_deleted = "E' stata eliminata una RELAZIONE dalla seguente anomalia.";
+$s_email_notification_title_for_action_relationship_child_resolved = "E' stata RISOLTA una anomalia in RELAZIONE con l'anomalia seguente.";
+$s_email_notification_title_for_action_relationship_child_closed = "E' stata CHIUSA una anomalia in RELAZIONE con l'anomalia seguente.";
+# MASC RELATIONSHIP
 
 $s_email_reporter = "Segnalato da";
 $s_email_handler = "In carico a";
@@ -373,7 +386,7 @@ $s_profile_updated_msg = "Profilo Aggiornato...";
 # account_update.php
 $s_account_updated_msg = "Il tuo Account è stato aggiornato con successo...";
 $s_email_updated = "L'indirizzo email è stato aggiornato con successo";
-$s_realname_updated = 'Real name successfully updated';
+$s_realname_updated = 'Nominativo aggiornato con successo';
 $s_password_updated = "La password è stata aggiornata correttamente";
 
 # bug_assign.php
@@ -657,7 +670,7 @@ $s_manage_user_updated_msg = "Account aggiornato correttamente...";
 
 # menu_inc.php
 $s_main_link = "Principale";
-$s_view_bugs_link = "Visualizza anomalia";
+$s_view_bugs_link = "Visualizza anomalie";
 $s_report_bug_link = "Inserisci nuova anomalia";
 $s_changelog_link = "Change Log";
 $s_summary_link = "Statistiche";
@@ -672,12 +685,12 @@ $s_my_view_link = 'My View';
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Unassigned';
-$s_my_view_title_recent_mod = 'Recently Modified';
-$s_my_view_title_reported = 'Reported by Me';
-$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
-$s_my_view_title_resolved = 'Resolved';
-$s_my_view_title_monitored = 'Monitored by Me';
+$s_my_view_title_unassigned = 'Non assegnati';
+$s_my_view_title_recent_mod = 'Modificati recentemente';
+$s_my_view_title_reported = 'Segnalati da me';
+$s_my_view_title_assigned = 'Assegnati a me (Non risolti)';
+$s_my_view_title_resolved = 'Risolti';
+$s_my_view_title_monitored = 'Monitorati da me';
 
 # news_add.php
 $s_news_added_msg = "Notizia Inserita...";
@@ -816,10 +829,10 @@ $s_summary_jpgraph_link = "Grafici";
 $s_by_project = "Per progetto";
 $s_by_status = "Per status";
 $s_by_date = "Per data";
-$s_by_severity = "Per gravità";
+$s_by_severity = "Per severita'";
 $s_by_resolution = "Per motivazione";
 $s_by_category = "Per categoria";
-$s_by_priority = "Per priorità";
+$s_by_priority = "Per priorita'";
 $s_by_developer = "Per sviluppatore";
 $s_by_reporter = "Per segnalatore";
 $s_reporter_by_resolution = "Reporter per motivazione";
@@ -884,7 +897,7 @@ $s_product_build = "Release del Prodotto";
 $s_system_profile = "Descrizione del Sistema";
 $s_update_bug_button = "Aggiorna";
 $s_bug_assign_to_button = "Assegna:";
-$s_reopen_bug_button = "Riapri";
+$s_reopen_bug_button = "Riapre";
 $s_move_bug_button = "Muove";
 $s_attached_files = "File allegati";
 $s_publish = "Rendi Pubblico";
@@ -923,17 +936,17 @@ $s_custom_field_type = "Tipo";
 $s_custom_field_possible_values = "Valori permessi";
 $s_custom_field_default_value = "Valore di default";
 $s_custom_field_valid_regexp = "Espressione regolare";
-$s_custom_field_access_level_r = "Non modificabile";
+$s_custom_field_access_level_r = "Visibile";
 $s_custom_field_access_level_rw = "Modificabile";
 $s_custom_field_length_min = "Lunghezza min.";
 $s_custom_field_length_max = "Lunghezza max.";
 $s_custom_field_advanced = "Avanzato";
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
-$s_custom_field_require_report = 'Required On Report';
-$s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_display_resolve = "Visualizza in 'Risolvi anomalia'";
+$s_custom_field_display_close = "Visualizza in 'Chiudi anomalia'";
+$s_custom_field_require_report = "Obbligatorio nei report";
+$s_custom_field_require_update = "Obbligatorio in 'Aggiorna anomalia'";
+$s_custom_field_require_resolve = "Obbligatorio in 'Risolvi anomalia'";
+$s_custom_field_require_close = "Obbligatorio in 'Chiudi anomalia'";
 
 $s_custom_field_sequence = "Sequenza";
 $s_custom_field_type_enum_string = "0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email";
@@ -975,4 +988,20 @@ $s_changelog = "Change Log";
 
 # Http auth
 $s_http_auth_realm = "Mantis Login";
+
+# MASC RELATIONSHIP
+$s_bug = "anomalia";
+$s_add_new_relationship = "Nuova relazione";
+$s_add_new_relationship_button = "Crea";
+$s_this_bug = "Anomalia corrente";
+$s_relationship_added = "Relazione aggiunta";
+$s_relationship_deleted = "Relazione eliminata";
+$s_delete_relationship_button = "Eliminare";
+$s_delete_relationship_sure_msg = "Sicuro di voler confermare l'eliminazione di questa relazione?";
+$s_relationship_warning_blocking_bugs_not_resolved = "NON ancora tutte le anomalie figlie generate da questa anomalia risultano risolte oppure chiuse.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. NON ancora tutte le anomalie figlie generate da questa anomalia risultano risolte oppure chiuse.<br>Prima di <b>risolvere/chiudere</b> una anomalia padre, tutte le anomalie figlie dovrebbero essere risolte/chiuse.";
+$s_create_child_bug_button = "Genera figlio";
+$s_bug_cloned_to = "Anomalia clonata";
+$s_bug_created_from = "Anomalia generata da";
+
 ?>
