@@ -45,17 +45,15 @@
 <p>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="3">
+	<td class="form-title" colspan="4">
 		<?php echo $s_viewing_bug_advanced_details_title ?>
 		<span class="small"><?php print_bracket_link( "#bugnotes", $s_jump_to_bugnotes ) ?></span>
 	</td>
-	<td class="right" colspan="3">
-<?php
-	if ( BOTH == $g_show_view ) {
-		print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_view_simple_link );
-	}
-	print_bracket_link( $g_print_bug_page."?f_id=".$f_id, $s_print );
-?>
+	<td class="right" colspan="2">
+<?php if ( BOTH == $g_show_view ) { ?>
+		<span class="small"><?php print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_view_simple_link )?></span>
+<?php }?>
+	<span class="small"><?php print_bracket_link( $g_print_bug_page."?f_id=".$f_id, $s_print ) ?></span>
 	</td>
 </tr>
 <tr class="row-category">
