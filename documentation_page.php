@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: documentation_page.php,v 1.20 2004-08-08 13:49:25 prichards Exp $
+	# $Id: documentation_page.php,v 1.21 2004-08-08 13:53:08 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -18,7 +18,7 @@
 
 	# get the phpinfo() content
 	ob_start();
-	phpinfo( 79 );
+	phpinfo( INFO_GENERAL + INFO_CONFIGURATION + INFO_MODULES );
 	$content = ob_get_contents();
 	ob_end_clean();
 
