@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.34 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: summary_page.php,v 1.35 2004-02-10 10:39:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,6 +66,15 @@
 	$t_largest_diff 	= number_format( $t_largest_diff / 86400, 2 );
 	$t_total_time		= number_format( $t_total_time / 86400, 2 );
 	$t_average_time 	= number_format( $t_average_time / 86400, 2 );
+	
+	$t_orct_arr = preg_split( '/[\)\/\(]/', lang_get( 'orct' ), -1, PREG_SPLIT_NO_EMPTY );
+
+	$t_orcttab = "";
+	foreach ( $t_orct_arr as $t_orct_s ) {
+		$t_orcttab .= '<td class="right">';
+		$t_orcttab .= ucwords( $t_orct_s );
+		$t_orcttab .= '</td>';
+	}
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
@@ -78,7 +87,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'summary_title' ) ?> <?php echo lang_get( 'orct' ) ?>
+		<?php echo lang_get( 'summary_title' ) ?>
 	</td>
 </tr>
 <tr valign="top">
@@ -87,9 +96,10 @@
 		<?php if ( ALL_PROJECTS == $t_project_id ) { ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_project' ) ?>:
+			<td class="form-title" colspan="1">
+				<?php echo ucwords( lang_get( 'by_project' ) ) ?>
 			</td>
+			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_project(); ?>
 		</table>
@@ -100,9 +110,10 @@
 		<?php # STATUS # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_status' ) ?>:
+			<td class="form-title" colspan="1">
+				<?php echo ucwords( lang_get( 'by_status' ) ) ?>
 			</td>
+			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_enum( config_get( 'status_enum_string' ), 'status' ) ?>
 		</table>
@@ -112,9 +123,10 @@
 		<?php # SEVERITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_severity' ) ?>:
+			<td class="form-title" colspan="1">
+				<?php echo ucwords( lang_get( 'by_severity' ) ) ?>
 			</td>
+			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_enum( config_get( 'severity_enum_string' ), 'severity' ) ?>
 		</table>
@@ -124,9 +136,10 @@
 		<?php # CATEGORY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_category' ) ?>:
+			<td class="form-title" colspan="1">
+				<?php echo ucwords( lang_get( 'by_category' ) ) ?>
 			</td>
+			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_category() ?>
 		</table>
@@ -136,8 +149,8 @@
 		<?php # MISCELLANEOUS # ?>
 		<table class="width100">
 		<tr>
-			<td class="form-title">
-				<?php echo lang_get( 'time_stats' ) ?>:
+			<td class="form-title" colspan="5">
+				<?php echo ucwords( lang_get( 'time_stats' ) ) ?>
 			</td>
 		</tr>
 		<tr class="row-1">
@@ -183,9 +196,10 @@
 		<?php # DEVELOPER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'developer_stats' ) ?>:
+			<td class="form-title" colspan="1">
+				<?php echo ucwords( lang_get( 'developer_stats' ) ) ?>
 			</td>
+			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_developer() ?>
 		</table>
@@ -197,8 +211,8 @@
 		<?php # DATE # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_date' ) ?>:
+			<td class="form-title" colspan="5">
+				<?php echo ucwords( lang_get( 'by_date' ) ) ?>
 			</td>
 		</tr>
 		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
@@ -209,9 +223,10 @@
 		<?php # RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_resolution' ) ?>:
+			<td class="form-title" colspan="1">
+				<?php echo ucwords( lang_get( 'by_resolution' ) ) ?>
 			</td>
+			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_enum( config_get( 'resolution_enum_string' ), 'resolution' ) ?>
 		</table>
@@ -221,9 +236,10 @@
 		<?php # PRIORITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_priority' ) ?>:
+			<td class="form-title" colspan="1">
+				<?php echo ucwords( lang_get( 'by_priority' ) ) ?>
 			</td>
+			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_enum( config_get( 'priority_enum_string' ), 'priority' ) ?>
 		</table>
@@ -233,9 +249,10 @@
 		<?php # REPORTER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'reporter_stats' ) ?>:
+			<td class="form-title" colspan="1">
+				<?php echo ucwords( lang_get( 'reporter_stats' ) ) ?>
 			</td>
+			<?php echo $t_orcttab ?>
 		</tr>
 		<?php summary_print_by_reporter() ?>
 		</table>
