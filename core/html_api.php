@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.28 2002-12-29 10:26:09 jfitzell Exp $
+	# $Id: html_api.php,v 1.29 2003-01-02 23:10:30 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -192,7 +192,9 @@
 				$g_timer, $g_show_timer,
 				$g_show_queries_count, $g_show_queries_list, $g_queries_array;
 
-		# @@@
+		# @@@ this hack is so the menu doesn't show up in the login page
+		#  we need a less hackish solution - maybe split up the footer into
+		#  more functions so the login page doesn't have to use them all?
 		if (isset($g_string_cookie_val)&&!is_blank($g_string_cookie_val)) {
 			if ( $g_show_footer_menu ) {
 				PRINT '<br />';
