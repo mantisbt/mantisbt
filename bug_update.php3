@@ -22,7 +22,8 @@
     		WHERE id='$f_id'";
    	$result = db_query($query);
 
-   	if ( $f_status=="feedback" ) {
+	### If we should notify and it's in feedback state then send an email
+   	if ( ( $g_enable_email_notification==1 )&&( $f_status=="feedback" ) ) {
    		email_feedback( $f_id );
    	}
 ?>

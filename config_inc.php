@@ -76,6 +76,9 @@
 	# change to language you want... choices are:
 	# english
 	$g_language                  = "english";
+
+	# Allow email
+	$g_enable_email_notification = 1;
 	#--------------------
 
 	#--------------------
@@ -294,6 +297,7 @@
 	$g_manage_project_delete_page     = "manage_project_delete_page".$g_php;
 
 	$g_set_project                    = "set_project".$g_php;
+	$g_choose_project_page            = "choose_project_page".$g_php;
 
 	# manage multiple project users
 	$g_manage_project_user_menu_page    = "manage_project_user_menu_page".$g_php;

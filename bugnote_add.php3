@@ -52,17 +52,20 @@
     		WHERE id='$f_id'";
    	$result = db_query($query);
 
-   	### notify reporter and handler
-   	if ( get_bug_field( "status", $f_id )=="feedback" ) {
-   		if ( get_bug_field( "resolution", $f_id )=="reopened" ) {
-   			email_reopen( $f_id );
-   		} else {
-   			email_feedback( $f_id );
-   		}
-   	} else if ( get_bug_field( "status", $f_id )=="resolved" ) {
-   		email_resolved( $f_id );
-   	} else {
-   		email_bugnote_add( $f_id );
+	### Check if we should be sending emails
+   	if ( $g_enable_email_notification==1 ) {
+	   	### notify reporter and handler
+	   	if ( get_bug_field( "status", $f_id )=="feedback" ) {
+	   		if ( get_bug_field( "resolution", $f_id )=="reopened" ) {
+	   			email_reopen( $f_id );
+	   		} else {
+	   			email_feedback( $f_id );
+	   		}
+	   	} else if ( get_bug_field( "status", $f_id )=="resolved" ) {
+	   		email_resolved( $f_id );
+	   	} else {
+	   		email_bugnote_add( $f_id );
+	   	}
    	}
 ?>
 <? print_html_top() ?>
