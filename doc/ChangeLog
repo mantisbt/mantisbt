@@ -12,15 +12,16 @@ Mantis
  * Added basic private bug functionality
  * Added validation checks for all inputs that are passed on to database queries.
  * Added check_varset() function to replace if isset() else checks.
+ * Added $s_charset to all localization files.
  * Updated Hungarian localization.
  * Updated Russian localization.
  * Updated Romanian localization.
  * Updated German localization.
  * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
  * Removed HTML entities from all localization files.
- * Added $s_charset to all localization files.
- * Modified input checked variables to be prefixed by $c_.
  * Reworked code formatting for $c_ variables.
+ * Reworked !isset() checks to use check_varset().
+ * Modified input checked variables to be prefixed by $c_.
  * Modified form elements to be standards compliant.
  * Modified core_print_API.php to escape double quotes in text fields, instead of replacing them by single quotes.
  * Modified all string files to use single quotes instead of double quotes.

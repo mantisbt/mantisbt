@@ -29,9 +29,7 @@
 
 <?php
 	# Check to see if variable is set
-	if ( !isset( $f_offset ) ) {
-		$f_offset = 0;
-	}
+	check_varset( $f_offset, 0 );
 	$c_offset = (integer)$f_offset;
 
 	# get news count (project plus sitewide posts)

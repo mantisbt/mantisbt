@@ -16,9 +16,7 @@
 		$valid_project = 0;
 	}
 
-	if ( !isset( $f_ref ) ) {
-		$f_ref = '';
-	}
+	check_varset( $f_ref, '' );
 
 	# Set default project
 	if ( isset( $f_make_default ) ) {

@@ -10,9 +10,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	if ( !isset( $f_action ) ) {
-			$f_action = '';
-	}
+	check_varset( $f_action, '' );
 
 	# If Deleteing item redirect to delete script
 	if ( 'delete' == $f_action ) {

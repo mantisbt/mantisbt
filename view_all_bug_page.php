@@ -25,13 +25,8 @@
 		print_header_redirect( $g_print_all_bug_page );
 	}
 
-	if( !isset( $f_search ) ) {
-		$f_search = false;
-	}
-
-	if ( !isset( $f_page_number ) ) {
-		$f_page_number = 1;
-	}
+	check_varset( $f_search, false );
+	check_varset( $f_page_number, 1 );
 
 	# Load preferences
 	$f_show_category 		= $t_setting_arr[1];
@@ -201,9 +196,7 @@
 	$query .= $t_where_clause;
 
 	# Now add the rest of the criteria i.e. sorting, limit.
-	if ( !isset( $f_sort ) ) {
-		$f_sort='last_updated';
-	}
+	check_varset( $f_sort, 'last_updated' );
 	$query = $query." ORDER BY '$f_sort' $f_dir";
 
 	# t_offset = ((f_page_number - 1) * f_per_page)

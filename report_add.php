@@ -32,33 +32,13 @@
 
 	# We check to see if the variable exists to avoid warnings
 
-	if ( !isset( $f_steps_to_reproduce ) ) {
-		$f_steps_to_reproduce = '';
-	}
-
-	if ( !isset( $f_build ) ) {
-		$f_build = '';
-	}
-
-	if ( !isset( $f_platform ) ) {
-		$f_platform = '';
-	}
-
-	if ( !isset( $f_os ) ) {
-		$f_os = '';
-	}
-
-	if ( !isset( $f_os_build ) ) {
-		$f_os_build = '';
-	}
-
-	if ( !isset( $f_product_version ) ) {
-		$f_product_version = '';
-	}
-
-	if ( !isset( $f_profile_id ) ) {
-		$f_profile_id = '';
-	}
+	check_varset( $f_steps_to_reproduce, '' );
+	check_varset( $f_build, '' );
+	check_varset( $f_platform, '' );
+	check_varset( $f_os, '' );
+	check_varset( $f_os_build, '' );
+	check_varset( $f_product_version, '' );
+	check_varset( $f_profile_id, '' );
 
 	# validating input
 	$check_failed = false;
@@ -119,9 +99,7 @@
 
 		$t_id = db_insert_id();
 
-		if ( !isset( $f_priority ) ) {
-			$f_priority = NORMAL;
-		}
+		check_varset( $f_priority, NORMAL );
 
 		$c_assign_id 		= (integer)$f_assign_id;
 		$c_severity 		= (integer)$f_severity;
@@ -173,14 +151,10 @@
 		$t_bug_id = db_insert_id();
 
 		# File Uploaded
-		if ( !isset( $f_file ) ) {
-			$f_file = 'none';
-		}
+		check_varset( $f_file, 'none' );
 		$f_file = trim( $f_file );
 		$disallowed = 0;
-		if ( !isset( $f_file_name ) ) {
-			$f_file_name = '';
-		}
+		check_varset( $f_file_name, '' );
 		if ( !file_type_check( $f_file_name ) ) {
 			$disallowed = 1;
 		} else if ( is_uploaded_file( $f_file ) ) {

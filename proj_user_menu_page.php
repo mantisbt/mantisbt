@@ -15,9 +15,7 @@
 		print_header_redirect( $g_login_select_proj_page );
 	}
 
-	if ( !isset( $f_sort ) ) {
-		$f_sort = 'username';
-	}
+	check_varset( $f_sort, 'username' );
 
 	# basically we toggle between ASC and DESC if the user clicks the
 	# same sort order

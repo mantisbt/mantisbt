@@ -24,33 +24,13 @@
 
 	# We check to see if the variable exists to avoid warnings
 
-	if ( !isset( $f_category ) ) {
-		$f_category = '';
-	}
-
-	if ( !isset( $f_reproducibility ) ) {
-		$f_reproducibility = '';
-	}
-
-	if ( !isset( $f_severity ) ) {
-		$f_severity = '';
-	}
-
-	if ( !isset( $f_priority ) ) {
-		$f_priority = NORMAL;
-	}
-
-	if ( !isset( $f_summary ) ) {
-		$f_summary = '';
-	}
-
-	if ( !isset( $f_description ) ) {
-		$f_description = '';
-	}
-
-	if ( !isset( $f_additional_info ) ) {
-		$f_additional_info = '';
-	}
+	check_varset( $f_category, '' );
+	check_varset( $f_reproducibility, '' );
+	check_varset( $f_severity, '' );
+	check_varset( $f_priority, NORMAL );
+	check_varset( $f_summary, '' );
+	check_varset( $f_description, '' );
+	check_varset( $f_additional_info, '' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

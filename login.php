@@ -12,7 +12,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	if ( BASIC_AUTH == $g_login_method ) {
-		$f_username = isset( $PHP_AUTH_USER ) ? $PHP_AUTH_USER : $REMOTE_USER;
+		check_varset( $f_username, $REMOTE_USER );
 		$f_password = $PHP_AUTH_PW;
  	}
 

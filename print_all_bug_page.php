@@ -20,13 +20,9 @@
 		print_header_redirect( $g_view_all_set.'?f_type=0&f_print=1' );
 	}
 
-	if( !isset( $f_search ) ) {
-		$f_search = false;
-	}
+	check_varset( $f_search, false );
+	check_varset( $f_offset, 0 );
 
-	if ( !isset( $f_offset ) ) {
-		$f_offset = 0;
-	}
 
 	# Load preferences
 	$f_show_category 		= $t_setting_arr[1];

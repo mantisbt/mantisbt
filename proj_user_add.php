@@ -11,9 +11,7 @@
 	check_access( MANAGER );
 
 	# check for no users
-	if ( !isset( $f_user_id ) ) {
-		$f_user_id = '';
-	}
+	check_varset( $f_user_id, '' );
 
 	# Add user(s) to the current project
 	$result = 0;

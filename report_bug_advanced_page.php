@@ -24,66 +24,21 @@
 
 	# We check to see if the variable exists to avoid warnings
 
-	if ( !isset( $f_category ) ) {
-		$f_category = '';
-	}
-
-	if ( !isset( $f_reproducibility ) ) {
-		$f_reproducibility = '';
-	}
-
-	if ( !isset( $f_severity ) ) {
-		$f_severity = '';
-	}
-
-	if ( !isset( $f_priority ) ) {
-		$f_priority = NORMAL;
-	}
-
-	if ( !isset( $f_profile_id ) ) {
-		$f_profile_id = '';
-	}
-
-	if ( !isset( $f_platform ) ) {
-		$f_platform = '';
-	}
-
-	if ( !isset( $f_os ) ) {
-		$f_os = '';
-	}
-
-	if ( !isset( $f_os_build ) ) {
-		$f_os_build = '';
-	}
-
-	if ( !isset( $f_product_version ) ) {
-		$f_product_version = '';
-	}
-
-	if ( !isset( $f_build ) ) {
-		$f_build = '';
-	}
-
-	if ( !isset( $f_assign_id ) ) {
-		$f_assign_id = '';
-	}
-
-	if ( !isset( $f_summary ) ) {
-		$f_summary = '';
-	}
-
-	if ( !isset( $f_description ) ) {
-		$f_description = '';
-	}
-
-
-	if ( !isset( $f_steps_to_reproduce ) ) {
-		$f_steps_to_reproduce = '';
-	}
-
-	if ( !isset( $f_additional_info ) ) {
-		$f_additional_info = '';
-	}
+	check_varset( $f_category, '' );
+	check_varset( $f_reproducibility, '' );
+	check_varset( $f_severity, '' );
+	check_varset( $f_priority, NORMAL );
+	check_varset( $f_profile_id, '' );
+	check_varset( $f_platform, '' );
+	check_varset( $f_os, '' );
+	check_varset( $f_os_build, '' );
+	check_varset( $f_product_version, '' );
+	check_varset( $f_build, '' );
+	check_varset( $f_assign_id, '' );
+	check_varset( $f_summary, '' );
+	check_varset( $f_description, '' );
+	check_varset( $f_steps_to_reproduce, '' );
+	check_varset( $f_additional_info, '' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

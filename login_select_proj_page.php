@@ -12,9 +12,7 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !isset( $f_ref ) ) {
-		$f_ref = '';
-	}
+	check_varset( $f_ref, '' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2a() ?>

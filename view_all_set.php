@@ -24,9 +24,7 @@
 		$g_hide_closed_default = '';
 	}
 
-	if ( !isset( $f_hide_closed ) ) {
-		$f_hide_closed = '';
-	}
+	check_varset( $f_hide_closed, '' );
 
 	# show bugs per page
 	if ( !isset( $f_per_page ) || ( $f_per_page < 0 ) ) {
@@ -34,32 +32,16 @@
 	}
 
 	# sort direction
-	if ( !isset( $f_sort ) ) {
-		$f_sort = 'last_updated';
-	}
-	if ( !isset( $f_dir ) ) {
-		$f_dir = 'DESC';
-	}
+	check_varset( $f_sort, 'last_updated' );
+	check_varset( $f_dir, 'DESC' );
 
 	# date values
-	if ( !isset( $f_start_month ) ) {
-		$f_start_month = date( 'm' );
-	}
-	if ( !isset( $f_end_month ) ) {
-		$f_end_month = date( 'm' );
-	}
-	if ( !isset( $f_start_day ) ) {
-		$f_start_day = 1;
-	}
-	if ( !isset( $f_end_day ) ) {
-		$f_end_day = date( 'd' );
-	}
-	if ( !isset( $f_start_year ) ) {
-		$f_start_year = date( 'Y' );
-	}
-	if ( !isset( $f_end_year ) ) {
-		$f_end_year = date( 'Y' );
-	}
+	check_varset( $f_start_month, date( 'm' ) );
+	check_varset( $f_end_month, date( 'm' ) );
+	check_varset( $f_start_day, 1 );
+	check_varset( $f_end_day, date( 'd' ) );
+	check_varset( $f_start_year, date( 'Y' ) );
+	check_varset( $f_end_year, date( 'Y' ) );
 
 /*   array contents
      --------------

@@ -10,9 +10,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	if ( !isset( $f_sort ) ) {
-		$f_sort = 'name';
-	}
+	check_varset( $f_sort, 'name' );
 	$c_sort = addslashes($f_sort);
 
 	# basically we toggle between ASC and DESC if the user clicks the
@@ -23,8 +21,7 @@
 		} else {
 			$f_dir = 'ASC';
 		}
-	}
-	else {
+	} else {
 		$f_dir = 'ASC';
 	}
 

@@ -17,9 +17,7 @@
 	$c_id = (integer)$f_id;
 
 	# set variable to be valid if necessary
-	if ( !isset( $f_duplicate_id ) ) {
-		$f_duplicate_id = '';
-	}
+	check_varset( $f_duplicate_id, '' );
 
 	# grab the bug_text_id
 	$query = "SELECT bug_text_id
@@ -33,30 +31,19 @@
     }
 
 	# prevent warnings
-	if ( !isset( $f_os ) ) {
-		$f_os = get_bug_field( $f_id, 'os' );
-	}
-	if ( !isset( $f_os_build ) ) {
-		$f_os_build = get_bug_field( $f_id, 'os_build' );
-	}
-	if ( !isset( $f_platform ) ) {
-		$f_platform = get_bug_field( $f_id, 'platform' );
-	}
-	if ( !isset( $f_version ) ) {
-		$f_version = get_bug_field( $f_id, 'version' );
-	}
-	if ( !isset( $f_build ) ) {
-		$f_build = get_bug_field( $f_id, 'build' );
-	}
-	if ( !isset( $f_eta ) ) {
-		$f_eta = get_bug_field( $f_id, 'eta' );
-	}
-	if ( !isset( $f_projection ) ) {
-		$f_projection = get_bug_field( $f_id, 'projection' );
-	}
-	if ( !isset( $f_resolution ) ) {
-		$f_resolution = get_bug_field( $f_id, 'resolution' );
-	}
+	check_varset( $f_os, get_bug_field( $f_id, 'os' ) );
+	check_varset( $f_os_build, get_bug_field( $f_id, 'os_build' ) );
+	check_varset( $f_platform, get_bug_field( $f_id, 'platform' ) );
+	check_varset( $f_version, get_bug_field( $f_id, 'version' ) );
+	check_varset( $f_build, get_bug_field( $f_id, 'build' ) );
+	check_varset( $f_eta, get_bug_field( $f_id, 'eta' ) );
+	check_varset( $f_projection, get_bug_field( $f_id, 'projection' ) );
+	check_varset( $f_resolution, get_bug_field( $f_id, 'resolution' ) );
+	check_varset( $f_os_build, get_bug_field( $f_id, 'os_build' ) );
+	check_varset( $f_os_build, get_bug_field( $f_id, 'os_build' ) );
+	check_varset( $f_os_build, get_bug_field( $f_id, 'os_build' ) );
+	check_varset( $f_os_build, get_bug_field( $f_id, 'os_build' ) );
+
 	if ( !isset( $f_steps_to_reproduce ) ) {
 		$c_steps_to_reproduce = get_bug_text_field( $f_id, 'steps_to_reproduce' );
 	} else {
@@ -73,18 +60,18 @@
 	$c_description 				= string_prepare_textarea( $f_description );
 	$c_additional_information 	= string_prepare_textarea( $f_additional_information );
 
-	$c_status			= (integer)$f_status;
-	$c_category			= addslashes($f_category);
-	$c_severity			= (integer)$f_severity;
-	$c_resolution		= (integer)$f_resolution;
-	$c_projection		= (integer)$f_projection;
-	$c_eta				= (integer)$f_eta;
-	$c_priority			= (integer)$f_priority;
-	$c_reproducibility	= (integer)$f_reproducibility;
-	$c_status			= (integer)$f_status;
-	$c_duplicate_id		= (integer)$f_duplicate_id;
-	$c_handler_id		= (integer)$f_handler_id;
-	$c_view_state		= (integer)$f_view_state;
+	$c_status					= (integer)$f_status;
+	$c_category					= addslashes($f_category);
+	$c_severity					= (integer)$f_severity;
+	$c_resolution				= (integer)$f_resolution;
+	$c_projection				= (integer)$f_projection;
+	$c_eta						= (integer)$f_eta;
+	$c_priority					= (integer)$f_priority;
+	$c_reproducibility			= (integer)$f_reproducibility;
+	$c_status					= (integer)$f_status;
+	$c_duplicate_id				= (integer)$f_duplicate_id;
+	$c_handler_id				= (integer)$f_handler_id;
+	$c_view_state				= (integer)$f_view_state;
 
 	# Update all fields
     $query = "UPDATE $g_mantis_bug_table

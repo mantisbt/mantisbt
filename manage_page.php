@@ -10,12 +10,8 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
 
-	if ( !isset( $f_sort ) ) {
-		$f_sort = '';
-	}
-	if ( !isset( $f_dir ) ) {
-		$f_dir = '';
-	}
+	check_varset( $f_sort, '' );
+	check_varset( $f_dir, '' );
 
 	# set cookie values for hide, sort by, and dir
 	if ( isset( $f_save ) ) {

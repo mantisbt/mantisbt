@@ -13,9 +13,7 @@
 	$c_access_level	= (integer)$f_access_level;
 
 	# check for no projects
-	if ( !isset( $f_project_id ) ) {
-		$f_project_id = '';
-	}
+	check_varset( $f_project_id, '' );
 
 	# Add user to project(s)
 	$result = 0;
