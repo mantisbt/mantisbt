@@ -20,6 +20,7 @@ Mantis ChangeLog
  * Fix #3539: Simple view page shows advanced custom fields.
  * Fix #3541: Link to documentation refers to old website.
  * Fix #3568: Monitor deleted bugs? [monitor records are not deleted on bug deletion]
+ * Fix #3569: Wrong number of search results displayed
  * Fix #3572: The summary_graph_imp_* pages have shortcut PHP tags.
  * Fix #3577: Unselecting custom fields causes undesired break lines in Excel.
  * Fix #3579: In the German localisation, $s_reset_request_msg was incorrectly terminated. 
