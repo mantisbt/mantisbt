@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_edit_page.php,v 1.27 2004-07-11 07:09:52 vboctor Exp $
+	# $Id: manage_proj_ver_edit_page.php,v 1.28 2004-07-27 14:38:34 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -32,7 +32,7 @@
 		<?php echo lang_get( 'edit_project_version_title' ) ?>
 	</td>
 </tr>
-<tr <?php helper_alternate_class() ?>>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'version' ) ?>
 	</td>
@@ -40,7 +40,7 @@
 		<input type="text" name="new_version" size="32" maxlength="64" value="<?php echo string_attribute( $t_version->version ) ?>" />
 	</td>
 </tr>
-<tr <?php helper_alternate_class() ?>>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'date_order' ) ?>
 	</td>
@@ -48,7 +48,7 @@
 		<input type="text" name="date_order" size="32" value="<?php echo string_attribute( $t_version->date_order ) ?>" />
 	</td>
 </tr>
-<tr <?php helper_alternate_class() ?>>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'description' ) ?>
 	</td>
@@ -56,7 +56,7 @@
 		<textarea name="description" cols="60" rows="5" wrap="virtual"><?php echo string_attribute( $t_version->description ) ?></textarea>
 	</td>
 </tr>
-<tr <?php helper_alternate_class() ?>>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'released' ) ?>
 	</td>
