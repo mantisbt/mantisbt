@@ -29,6 +29,7 @@ Mantis
  * Added CSV Export patch.
  * Added Anonymous Login patch.
  * Added CVS linking patch.
+ * Added g_hide_closed_default for filter defaults.
 
 
 01.23.2002  -   0.17.0

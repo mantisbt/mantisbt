@@ -9,10 +9,17 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( ON == $g_hide_closed_default ) {
+		$g_hide_closed_default = "on";
+	} else {
+		$g_hide_closed_default = "";
+	}
+
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
 		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
-							$g_default_show_changed."#0#any#any#last_updated#DESC";
+							$g_default_show_changed."#".$g_hide_closed_default.
+							"#any#any#last_updated#DESC";
 		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
 		print_header_redirect( $g_view_all_bug_page."?f=2" );
 	}
@@ -21,7 +28,8 @@
 	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
 	if ( $t_setting_arr[0] != "v1" ) {
 		$t_settings_string = "v1#any#any#any#".$g_default_limit_view."#".
-							$g_default_show_changed."#0#any#any#last_updated#DESC";
+							$g_default_show_changed."#".$g_hide_closed_default.
+							"#any#any#last_updated#DESC";
 		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
 		print_header_redirect( $g_view_all_bug_page."?f=1" );
 	}
