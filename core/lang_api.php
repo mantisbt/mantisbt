@@ -6,33 +6,43 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.17 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: lang_api.php,v 1.18 2004-04-02 11:22:05 yarick123 Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Language (Internationalization) API
 	###########################################################################
 	
-	# Cache of localization strings in the language specified by the last 
+	# Cache of localization strings in the language specified by the last
 	# lang_load call
 	$g_lang_strings = array();
 	
 	# Currently loaded language
-	$g_lang_current = '';
-	
+	$g_loaded_language = '';
+
+	# Currently used language
+	# if not the same as $g_loaded_language - it will be loaded on the first call of lang_get(...)
+	$g_current_language = '';
+
+	# Languages stack
+	# contains names of languages set by lang_push(...)
+	$g_language_stack = array();
+
 	# ------------------
 	# Loads the specified language and stores it in $g_lang_strings,
 	# to be used by lang_get
 	function lang_load( $p_lang ) {
-		global $g_lang_strings, $g_lang_current;
-		
-		if ( $g_lang_current == $p_lang ) {
+		global $g_lang_strings, $g_loaded_language, $g_current_language;
+
+		$g_current_language = $p_lang;
+
+		if ( $g_loaded_language == $p_lang ) {
 			return;
 		}
 
 		// define current language here so that when custom_strings_inc is
 		// included it knows the current language
-		$g_lang_current = $p_lang;
+		$g_loaded_language = $p_lang;
 
 		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 
@@ -92,11 +102,46 @@
 	# ------------------
 	# Ensures that a language file has been loaded
 	function lang_ensure_loaded() {
-		global $g_lang_current;
+		global $g_loaded_language, $g_current_language;
 		
 		# Load the language, if necessary
-		if ( '' == $g_lang_current ) {
+		if ( '' == $g_current_language ) {
 			lang_load_default();
+		}
+		else if ( $g_current_language !== $g_loaded_language ) {
+			lang_load( $g_current_language );
+		}
+	}
+
+	# ------------------
+	# sets the current language but only loads it on the next call to
+	# lang_get().
+	function lang_set( $p_language ) {
+		global $g_current_language;
+
+		$g_current_language = $p_language;
+	}
+
+	# ------------------
+	# push the current language into an array/stack, and calls lang_set()
+	# on the specified one.
+	function lang_push( $p_language ) {
+		global $g_language_stack;
+
+		$g_language_stack[] = $p_language;
+		lang_set( $p_language );
+	}
+
+	# ------------------
+	# pop last language from the array and calls lang_set() with the
+	# popped value.
+	function lang_pop() {
+		global $g_language_stack;
+
+		$t_last_index = count( $g_language_stack ) - 1;
+		if ( $t_last_index >= 0 ) {
+			lang_set( $g_language_stack[ $t_last_index ] );
+			unset( $g_language_stack[ $t_last_index ] );
 		}
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.14 2004-04-01 18:42:11 narcissus Exp $
+	# $Id: user_pref_api.php,v 1.15 2004-04-02 11:22:05 yarick123 Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -311,7 +311,7 @@
 			# If $row is still false (the user doesn't have default preferences)
 			if ( false === $row ) {
 				# We use an empty array
-				$row = array(); 
+				$row = array();
 			}
 		}
 
@@ -349,6 +349,13 @@
 		}
 	}
 
+	# --------------------
+	# returns user language
+	function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
+		$t_prefs = user_pref_get( $p_user_id, $p_project_id );
+		return $t_prefs->language;
+	}
+
 	#===================================
 	# Data Modification
 	#===================================
@@ -357,7 +364,7 @@
 	# Set a user preference
 	#
 	# By getting the prefs for the project first we deal fairly well with defaults.
-	#  If there are currently no prefs for that project, the ALL_PROJECTS prefs will 
+	#  If there are currently no prefs for that project, the ALL_PROJECTS prefs will
 	#  be returned so we end up storing a new set of prefs for the given project
 	#  based on the prefs for ALL_PROJECTS.  If there isn't even an entry for
 	#  ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.

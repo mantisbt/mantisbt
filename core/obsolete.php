@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.22 2004-03-09 21:05:30 vboctor Exp $
+	# $Id: obsolete.php,v 1.23 2004-04-02 11:22:05 yarick123 Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -16,6 +16,12 @@
 	###########################################################################
 
 	# Check for obsolete variables
+
+	# ==== Changes after 0.18.2 ====
+
+	config_obsolete( 'use_phpMailer', '' );
+	config_obsolete( 'phpMailer_path', '' );
+	config_obsolete( 'use_x_priority', '' );
 
 	# ==== Changes after 0.17.5 ====
 

@@ -1,14 +1,15 @@
 Mantis ChangeLog
 
 2004.xx.xx  -  0.19.0
- * Enh #0000: Generate one email per user. Stage #1 (no send mail optimization).
+ * Enh #0000: Generate one email per user. Stage #2 (minor send mail optimization - used kept alive SMTP connection).
+ * Enh #0000: phpMailer 1.71 has been included to Mantis distribution, all the mails are sent now only by phpMailer.
  * Enh #2200: Add Version to simple bug pages.
  * Enh #3262: CSV export does not export the category column.
  * Enh #3264: CSV export should export the resolution.
  * Enh #3287: Projectname on CSV export.
  * Enh #3300: Add global defaults for priotity and severity of new bugs.
  * Enh #3302: Add global defaults for view state.
- * Enh #3346: CSV extract should output more data, e.g., Date Submitted, other data that would allow better analysis of data trends. 
+ * Enh #3346: CSV extract should output more data, e.g., Date Submitted, other data that would allow better analysis of data trends.
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
@@ -35,6 +36,9 @@ Mantis ChangeLog
  * New Config: default_bug_view_status (default VS_PUBLIC).  Default view status for bugs.
  * New Config: default_bugnote_view_status (default VS_PUBLIC).  Default view status for bugnotes.
  * New Config: default_reminder_view_status (default VS_PUBLIC).  Default view status for reminders.
+ * Removed config option (use_phpMailer): phpMailer has always been used
+ * Removed config option (phpMailer_path): phpMailer has been included to Mantis distribution
+ * Removed config option (use_x_priority): phpMailer always puts X-Priority header
  * Languages: Updated Czech, Danish, Estonian, Japanese (EUC and SJIS), Serbian and Spanish localisations.
 
 2004.03.??  -  0.18.2a

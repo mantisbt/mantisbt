@@ -6,16 +6,21 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.73 2004-04-01 18:42:11 narcissus Exp $
+	# $Id: email_api.php,v 1.74 2004-04-02 11:22:05 yarick123 Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+	define( 'PHPMAILER_PATH', $t_core_dir . 'phpmailer' . DIRECTORY_SEPARATOR );
+
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'custom_field_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'history_api.php' );
+	require_once( PHPMAILER_PATH . 'class.phpmailer.php' );
+
+	# reusable object of class SMTP
+	$g_phpMailer_smtp = null;
 
 	###########################################################################
 	# Email API
@@ -160,6 +165,9 @@
 		return OFF;
 	}
 
+	# @@@ yarick123: email_collect_recipients(...) will be completely rewritten to provide additional
+	#     information such as language, user access,..
+	# @@@ yarick123:sort recipients list by language to reduce switches between different languages
 	function email_collect_recipients( $p_bug_id, $p_notify_type ) {
 		$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -293,17 +301,21 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		# Build Welcome Message
-		$t_message = lang_get( 'new_account_greeting' ).
-						lang_get( 'new_account_url' ) . $g_path . "\n".
-						lang_get( 'new_account_username' ) . $v_username . "\n".
-						lang_get( 'new_account_password' ) . $p_password . "\n\n".
-						lang_get( 'new_account_message' ) .
-						lang_get( 'new_account_do_not_reply' );
-		
-		# Send signup email regardless of mail notification pref
-		# or else users won't be able to sign up
-		email_send( $v_email, lang_get( 'new_account_subject' ), $t_message );
+		lang_push( user_pref_get_language( $p_user_id ) );
+		{
+			# Build Welcome Message
+			$t_message = lang_get( 'new_account_greeting' ).
+							lang_get( 'new_account_url' ) . $g_path . "\n".
+							lang_get( 'new_account_username' ) . $v_username . "\n".
+							lang_get( 'new_account_password' ) . $p_password . "\n\n".
+							lang_get( 'new_account_message' ) .
+							lang_get( 'new_account_do_not_reply' );
+
+			# Send signup email regardless of mail notification pref
+			# or else users won't be able to sign up
+			email_send( $v_email, lang_get( 'new_account_subject' ), $t_message );
+		}
+		lang_pop();
 	}
 	# --------------------
 	# Send new password when user forgets
@@ -319,15 +331,19 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		# Build Welcome Message
-		$t_message = lang_get( 'reset_request_msg' ) . "\n\n".
-					lang_get( 'new_account_username' ) . $v_username."\n".
-					lang_get( 'new_account_password' ) . $p_password."\n\n".
-					$g_path."\n\n";
+		lang_push( user_pref_get_language( $p_user_id ) );
+		{
+			# Build Welcome Message
+			$t_message = lang_get( 'reset_request_msg' ) . "\n\n".
+						lang_get( 'new_account_username' ) . $v_username."\n".
+						lang_get( 'new_account_password' ) . $p_password."\n\n".
+						$g_path."\n\n";
 
-		# Send password reset regardless of mail notification prefs
-		# or else users won't be able to receive their reset pws
-		email_send( $v_email, lang_get( 'news_password_msg' ), $t_message );
+			# Send password reset regardless of mail notification prefs
+			# or else users won't be able to receive their reset pws
+			email_send( $v_email, lang_get( 'news_password_msg' ), $t_message );
+		}
+		lang_pop();
 	}
 	# --------------------
 	# send a generic email
@@ -341,11 +357,13 @@
 
 			# @@@ yarick123: email_collect_recipients(...) will be completely rewritten to provide additional
 			#     information such as language, user access,..
+			# @@@ yarick123:sort recipients list by language to reduce switches between different languages
 			$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type );
 
 			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 			if ( is_array( $t_recipients ) ) {
+				# send email to every recipient
 				foreach ( $t_recipients as $t_user_id => $t_user_email ) {
 					$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
 					$t_ok = email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id ) && $t_ok;
@@ -395,10 +413,7 @@
 	# this function sends the actual email
 	# if $p_exit_on_error == true (default) - calls exit() on errors, else - returns true on success and false on errors
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='', $p_exit_on_error=true ) {
-		global $g_from_email,
-				$g_return_path_email, $g_use_x_priority,
-				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host,
-				$g_smtp_username, $g_smtp_password, $g_mail_priority;
+		global $g_phpMailer_smtp;
 
 		$t_recipient = trim( $p_recipient );
 		$t_subject   = string_email( trim( $p_subject ) );
@@ -420,151 +435,139 @@
 
 		$t_debug_email = config_get('debug_email');
 
-		if ( ON == $g_use_phpMailer )  {
-			# Visit http://phpmailer.sourceforge.net
-			# if you have problems with phpMailer
+		# Visit http://phpmailer.sourceforge.net
+		# if you have problems with phpMailer
 
-			$t_phpMailer_path = config_get( 'phpMailer_path' );
+		$mail = new PHPMailer;
 
-			include_once( $t_phpMailer_path . 'class.phpmailer.php');
-			$mail = new phpmailer;
-			$mail->PluginDir = $t_phpMailer_path;
+		$mail->PluginDir = PHPMAILER_PATH;
+		$mail->SetLanguage( lang_get( 'phpmailer_language' ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
 
-			# Support PHPMailer v1.7x
-			if ( method_exists( $mail, 'SetLanguage' ) ) {
-				$mail->SetLanguage( lang_get( 'phpmailer_language' ), $t_phpMailer_path . 'language' . DIRECTORY_SEPARATOR );
-			}
+		# Select the method to send mail
+		switch ( config_get( 'phpMailer_method' ) ) {
+			case 0: $mail->IsMail();
+					break;
 
-			# Select the method to send mail
-			switch ( $g_phpMailer_method ) {
-				case 0: $mail->IsMail();
-						break;
-				case 1: $mail->IsSendmail();
-						break;
-				case 2: $mail->IsSMTP();
-						break;
-			}
-			$mail->IsHTML(false);              # set email format to plain text
-			$mail->WordWrap = 80;              # set word wrap to 50 characters
-			$mail->Priority = config_get( 'mail_priority' );               # Urgent = 1, Not Urgent = 5, Disable = 0
-			$mail->CharSet = lang_get( 'charset' );
-			$mail->Host     = $g_smtp_host;
-			$mail->From     = $g_from_email;
-			$mail->FromName = '';
-			if ( ! is_blank( $g_smtp_username ) ) {     # Use SMTP Authentication
-				$mail->SMTPAuth = true;
-				$mail->Username = $g_smtp_username;
-				$mail->Password = $g_smtp_password;
-			}
+			case 1: $mail->IsSendmail();
+					break;
 
-			$t_debug_to = '';
-			# add to the Recipient list
-			$t_recipient_list = split(',', $t_recipient);
-			while ( list( , $t_recipient ) = each( $t_recipient_list ) ) {
-				if ( !is_blank( $t_recipient ) ) {
-					if ( OFF === $t_debug_email ) {
-						$mail->AddAddress( $t_recipient, '' );
-					} else {
-						$t_debug_to .= !is_blank( $t_debug_to ) ? ', ' : '';
-						$t_debug_to .= $t_recipient;
+			case 2: $mail->IsSMTP();
+					{
+						# SMTP collection is always kept alive
+						#
+						$mail->SMTPKeepAlive = true;
+						# @@@ yarick123: It is said in phpMailer comments, that phpMailer::smtp has private access.
+						# but there is no common method to reset PHPMailer object, so
+						# I see the smallest evel - to initialize only one 'private'
+						# field phpMailer::smtp in order to reuse smtp connection.
+
+						if( is_null( $g_phpMailer_smtp ) )  {
+							register_shutdown_function( 'email_smtp_close' );
+						} else {
+							$mail->smtp = $g_phpMailer_smtp;
+						}
 					}
-				}
-			}
+					break;
+		}
+		$mail->IsHTML(false);              # set email format to plain text
+		$mail->WordWrap = 80;              # set word wrap to 50 characters
+		$mail->Priority = config_get( 'mail_priority' );               # Urgent = 1, Not Urgent = 5, Disable = 0
+		$mail->CharSet = lang_get( 'charset' );
+		$mail->Host     = config_get( 'smtp_host' );
+		$mail->From     = config_get( 'from_email' );
+		$mail->Sender   = config_get( 'return_path_email' );
+		$mail->FromName = '';
+		if ( ! is_blank( config_get( 'smtp_username' ) ) ) {     # Use SMTP Authentication
+			$mail->SMTPAuth = true;
+			$mail->Username = config_get( 'smtp_username' );
+			$mail->Password = config_get( 'smtp_password' );
+		}
 
-			# add to the BCC list
-			$t_debug_bcc = '';
-			$t_bcc_list = split(',', $p_header);
-			while(list(, $t_bcc) = each($t_bcc_list)) {
-				if ( !is_blank( $t_bcc ) ) {
-					if ( OFF === $t_debug_email ) {
-						$mail->AddBCC( $t_bcc, '' );
-					} else {
-						$t_debug_bcc .= !is_blank( $t_debug_bcc ) ? ', ' : '';
-						$t_debug_bcc .= $t_bcc;
-					}
-				}
-			}
-
-			if ( OFF !== $t_debug_email )
-			{
-				$t_message = "\n" . $t_message;
-
-				if ( !is_blank( $t_debug_bcc ) ) {
-					$t_message = 'Bcc: ' . $t_debug_bcc . "\n" . $t_message;
-				}
-
-				if ( !is_blank( $t_debug_to ) ) {
-					$t_message = 'To: '. $t_debug_to . "\n" . $t_message;
-				}
-
-				$mail->AddAddress( $t_debug_email, '' );
-			}
-
-			$mail->Subject = $t_subject;
-			$mail->Body    = make_lf_crlf( "\n".$t_message );
-			
-			if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) ) {
-				$mail->AddCustomHeader( "Keywords: $p_category" );
-			}
-
-			if( !$mail->Send() ) {
-				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
-				PRINT 'Mailer Error: '.$mail->ErrorInfo.'<br />';
-				if ( $p_exit_on_error ) {
-					exit;
+		$t_debug_to = '';
+		# add to the Recipient list
+		$t_recipient_list = split(',', $t_recipient);
+		while ( list( , $t_recipient ) = each( $t_recipient_list ) ) {
+			if ( !is_blank( $t_recipient ) ) {
+				if ( OFF === $t_debug_email ) {
+					$mail->AddAddress( $t_recipient, '' );
 				} else {
-					return false;
+					$t_debug_to .= !is_blank( $t_debug_to ) ? ', ' : '';
+					$t_debug_to .= $t_recipient;
 				}
-			}
-		} else {
-			# Visit http://www.php.net/manual/function.mail.php
-			# if you have problems with mailing
-
-			$t_headers = "From: $g_from_email\n";
-			#$t_headers .= "Reply-To: $p_reply_to_email\n";
-
-			$t_headers .= "X-Sender: <$g_from_email>\n";
-			$t_headers .= 'X-Mailer: PHP/'.phpversion()."\n";
-			if ( ON == $g_use_x_priority ) {
-				$t_headers .= "X-Priority: $g_mail_priority\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
-			}
-			$t_headers .= 'Content-Type: text/plain; charset=' . lang_get( 'charset' ) . "\n";
-
-			if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) ) {
-				$t_headers .= "Keywords: $p_category\n";
-			}
-
-			if ( OFF === $t_debug_email ) {
-				$t_headers .= $p_header;
-			} else {
-				$t_message = "To: $t_recipient\n$p_header\n\n$t_message";
-				$t_recipient = $t_debug_email;
-			}
-
-			$t_recipient = make_lf_crlf( $t_recipient );
-			$t_subject = make_lf_crlf( $t_subject );
-			$t_message = make_lf_crlf( $t_message );
-			$t_headers = make_lf_crlf( $t_headers );
-
-			# set the SMTP host... only used on window though
-			ini_set( 'SMTP', config_get( 'smtp_host', 'localhost' ) );
-
-			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
-			if ( TRUE != $result ) {
-				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
-				PRINT htmlspecialchars($t_recipient).'<br />';
-				PRINT htmlspecialchars($t_subject).'<br />';
-				PRINT nl2br(htmlspecialchars($t_headers)).'<br />';
-				PRINT nl2br(htmlspecialchars($t_message)).'<br />';
-				if ( $p_exit_on_error ) {
-					exit;
-				} else {
-					return false;
-				}
-
 			}
 		}
+
+		# add to the BCC list
+		$t_debug_bcc = '';
+		$t_bcc_list = split(',', $p_header);
+		while(list(, $t_bcc) = each($t_bcc_list)) {
+			if ( !is_blank( $t_bcc ) ) {
+				if ( OFF === $t_debug_email ) {
+					$mail->AddBCC( $t_bcc, '' );
+				} else {
+					$t_debug_bcc .= !is_blank( $t_debug_bcc ) ? ', ' : '';
+					$t_debug_bcc .= $t_bcc;
+				}
+			}
+		}
+
+		if ( OFF !== $t_debug_email )
+		{
+			$t_message = "\n" . $t_message;
+
+			if ( !is_blank( $t_debug_bcc ) ) {
+				$t_message = 'Bcc: ' . $t_debug_bcc . "\n" . $t_message;
+			}
+
+			if ( !is_blank( $t_debug_to ) ) {
+				$t_message = 'To: '. $t_debug_to . "\n" . $t_message;
+			}
+
+			$mail->AddAddress( $t_debug_email, '' );
+		}
+
+		$mail->Subject = $t_subject;
+		$mail->Body    = make_lf_crlf( "\n".$t_message );
+		
+		if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) )  {
+			$mail->AddCustomHeader( "Keywords: $p_category" );
+		}
+
+		if ( !$mail->Send() ) {
+			PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
+			PRINT 'Mailer Error: '.$mail->ErrorInfo.'<br />';
+			if ( $p_exit_on_error )  {
+				exit;
+			} else {
+				return false;
+			}
+		}
+
+		if ( !is_null( $mail->smtp ) )  {
+			# @@@ yarick123: It is said in phpMailer comments, that phpMailer::smtp has private access.
+			# but there is no common method to reset PHPMailer object, so
+			# I see the smallest evel - to initialize only one 'private'
+			# field phpMailer::smtp in order to reuse smtp connection.
+			$g_phpMailer_smtp = $mail->smtp;
+		}
+
 		return true;
+	}
+
+	# --------------------
+	# closes opened kept alive SMTP connection (if it was opened)
+	function email_smtp_close()  {
+		global $g_phpMailer_smtp;
+
+		if ( !is_null( $g_phpMailer_smtp ) )  {
+			if ( $g_phpMailer_smtp->Connected() )  {
+				$g_phpMailer_smtp->Quit();
+				$g_phpMailer_smtp->Close();
+			}
+
+			$g_phpMailer_smtp->SmtpClose();
+			$g_phpMailer_smtp = null;
+		}
 	}
 	# --------------------
 	# formats the subject correctly
@@ -609,24 +612,29 @@
 			$p_recipients = array( $p_recipients );
 		}
 
-		$t_subject = email_build_subject( $p_bug_id );
-		$t_sender = current_user_get_field( 'username' ) . ' <' .
-					current_user_get_field( 'email' ) . '>' ;
-		$t_date = date( config_get( 'normal_date_format' ) );
-		$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender " .
-					lang_get( 'sent_you_this_reminder_about' ) . ":\n\n";
-
 		$result = array();
 		foreach ( $p_recipients as $t_recipient ) {
-			$t_email = user_get_email( $t_recipient );
-			$result[] = user_get_name( $t_recipient );
-			$t_contents = $t_header .
-							string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) .
-							"\n\n$p_message";
-							
-			if( ON == config_get( 'enable_email_notification' ) ) {
-				email_send( $t_email, $t_subject, $t_contents );
+
+			lang_push( user_pref_get_language( $t_recipient, bug_get_field( $p_bug_id, 'project_id' ) ) );
+			{
+				$t_subject = email_build_subject( $p_bug_id );
+				$t_sender = current_user_get_field( 'username' ) . ' <' .
+							current_user_get_field( 'email' ) . '>' ;
+				$t_date = date( config_get( 'normal_date_format' ) );
+				$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender " .
+							lang_get( 'sent_you_this_reminder_about' ) . ":\n\n";
+
+				$t_email = user_get_email( $t_recipient );
+				$result[] = user_get_name( $t_recipient );
+				$t_contents = $t_header .
+								string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) .
+								"\n\n$p_message";
+								
+				if( ON == config_get( 'enable_email_notification' ) ) {
+					email_send( $t_email, $t_subject, $t_contents );
+				}
 			}
+			lang_pop();
 		}
 		return $result;
 	}
@@ -635,51 +643,38 @@
 	# Send bug info to given user
 	# return true on success
 	function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id ) {
-		global $g_lang_current;
-
 		$t_user_email = user_get_email( $p_user_id );
 
-		# check wether email sould be sent
+		# check wether email should be sent
 		# @@@ can be email field empty? if yes - then it should be handled here
 		if ( ON !== config_get( 'enable_email_notification' ) || is_blank( $t_user_email ) ) {
 			return true;
 		}
 
-		$t_prefs = user_pref_get( $p_user_id, $p_project_id );
-		$t_user_language = $t_prefs->language;
+		# load (push) user language
+		lang_push( user_pref_get_language( $p_user_id, $p_project_id ) );
+		{
+			# build subject
+			$t_subject = '['.$p_visible_bug_data['email_project'].' '
+							.bug_format_id( $p_visible_bug_data['email_bug'] )
+						.']: '.$p_visible_bug_data['email_summary'];
+	
+			# build message
+	
+			$t_message = lang_get_defaulted( $p_message_id );
+			if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
+				$t_message .= "\n";
+			}
 
+			$t_message .= email_format_bug_message(  $p_visible_bug_data );
+	
+			# send mail
+			# echo '<br />email_bug_info::Sending email to :'.$t_user_email;
+			$t_ok = email_send( $t_user_email, $t_subject, $t_message, '', $p_visible_bug_data['set_category'], false );
 
-		# load user language
-		$t_saved_lang_current = $g_lang_current; // save current language before changing to $t_user_language
-		if ( $t_user_language !== $g_lang_current ) {
-			lang_load( $t_user_language );
 		}
+		lang_pop(); # restore original language
 
-		# build subject
-		$t_subject = '['.$p_visible_bug_data['email_project'].' '
-					    .bug_format_id( $p_visible_bug_data['email_bug'] )
-					.']: '.$p_visible_bug_data['email_summary'];
-		
-
-		# build message
-
-		$t_message = lang_get_defaulted( $p_message_id );
-		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
-			$t_message .= "\n";
-		}
-
-		$t_message .= email_format_bug_message(  $p_visible_bug_data );
-
-		# send mail
-		# echo '<br />email_bug_info::Sending email to :'.$t_user_email;
-		$t_ok = email_send( $t_user_email, $t_subject, $t_message, '', $p_visible_bug_data['set_category'], false );
-
-		# restore original language after sending email
-		# @@@ yarick123: theoretically, we should not restore original language after sending every email,
-		#     but, for the first step of implementation I prefer to do it
-		if ( !is_blank( $t_saved_lang_current ) && $t_saved_lang_current !== $t_user_language ) {
-			lang_load( $t_saved_lang_current );
-		}
 		return $t_ok;
 	}
 

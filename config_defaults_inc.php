@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.159 2004-04-01 18:42:10 narcissus Exp $
+	# $Id: config_defaults_inc.php,v 1.160 2004-04-02 11:22:05 yarick123 Exp $
 	# --------------------------------------------------------
 
 	
@@ -205,9 +205,6 @@
 	# This specifies the access level that is needed to get the mailto: links.
 	$g_show_user_email_threshold = NOBODY;
 
-	# Set to OFF to remove X-Priority header
-	$g_use_x_priority		= ON;
-	
 	# If use_x_priority is set to ON, what should the value be?
 	# Urgent = 1, Not Urgent = 5, Disable = 0
 	# Note: some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
@@ -215,27 +212,6 @@
 
 	# Set to OFF on Windows systems, as long as php-mail-function has its bcc-bug (~PHP 4.0.6)
 	$g_use_bcc				= ON;
-
-	# phpMailer instead of standard mail() function (REQUIRES PHP 4.x.x)
-	# Get the phpMailer-package from http://phpmailer.sourceforge.net
-	# The installation is very simple you only need 2 plain text php-files
-	#  class.smtp.php
-	#  class.phpmailer.php
-
-	# Copy these files to your php-include-dir i.e. 'c:\php\includes' or
-	# '/usr/lib/php/includes'
-	# and add this path to the 'include_path'-entry  in the php.ini file.
-	# The installation is described in the readme and there is also a simple
-	# example.
-	# PhpMailer comes with a detailed documentation in phpdoc format.
-
-	$g_use_phpMailer		= OFF;
-
-	# Path to phpMailer directory.  The directory that includes class.phpmailer.hpp
-	# and class.smtp.php.  The empty default should work if the phpMailer directory
-	# is in the include_path.  If a path is specified, it should be terminated by
-	# a directory separator.
-	$g_phpMailer_path		= '';
 
 	# select the method to mail by:
 	# 0 - mail()
