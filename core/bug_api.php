@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.89 2004-12-12 20:33:25 bpfennigschmidt Exp $
+	# $Id: bug_api.php,v 1.90 2004-12-14 15:34:11 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -112,7 +112,7 @@
 
 		return $row;
 	}
-	
+
 	# --------------------
 	# Inject a bug into the bug cache
 	function bug_add_to_cache( $p_bug_row ) {
@@ -261,7 +261,7 @@
 
 		return true;
 	}
-	
+
 	# --------------------
 	# Validate workflow state to see if bug can be moved to requested state
 	function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
@@ -317,7 +317,7 @@
 		$c_steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
 		$c_additional_info		= db_prepare_string( $p_bug_data->additional_information );
 		$c_sponsorship_total 	= 0;
-		$c_sticky 				= 0; 
+		$c_sticky 				= 0;
 
 		# Summary cannot be blank
 		if ( is_blank( $c_summary ) ) {
@@ -745,7 +745,7 @@
 					fixed_in_version='$c_bug_data->fixed_in_version',
 					view_state='$c_bug_data->view_state',
 					summary='$c_bug_data->summary',
-					sponsorship_total='$c_bug_data->sponsorship_total'
+					sponsorship_total='$c_bug_data->sponsorship_total',
 					sticky='$c_bug_data->sticky'
 				WHERE id='$c_bug_id'";
 		db_query( $query );
