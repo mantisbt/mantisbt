@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.58 2004-09-26 15:34:52 vboctor Exp $
+	# $Id: filter_api.php,v 1.59 2004-10-01 02:41:25 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -463,10 +463,14 @@
 							 OR ($t_bug_text_table.description LIKE '%$c_search%')
 							 OR ($t_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
 							 OR ($t_bug_text_table.additional_information LIKE '%$c_search%')
-							 OR ($t_bug_table.id LIKE '%$c_search%'))" );
+							 OR ($t_bug_table.id LIKE '%$c_search%')
+							 OR ($t_bugnote_text_table.note LIKE '%$c_search%'))" );
 			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
 
 			$t_from_clauses = array( $t_bug_text_table, $t_project_table, $t_bug_table );
+
+			array_push( $t_join_clauses, "INNER JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id" );
+			array_push( $t_join_clauses, "INNER JOIN $t_bugnote_text_table ON $t_bugnote_text_table.id = $t_bugnote_table.bugnote_text_id" );
 		} else {
 			$t_from_clauses = array( $t_project_table, $t_bug_table );
 		}
