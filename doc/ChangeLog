@@ -52,6 +52,7 @@ Mantis ChangeLog
 - 0003970: [bugtracker] Reopen issue logic was broken for custom reopen statuses (thraxisp)
 - 0004270: [bugtracker] Change status in mass treatment ignore defined workflow rules (thraxisp)
 - 0004275: [bugtracker] Relationship warning is now missing when a bus is resolved/closed (thraxisp)
+- 0004386: Changelog doesn´t respect user rights (vboctor).
 - 0004255: [localization] Wrong value of $g_language_auto_map (vboctor)
 - 0004293: [localization] Lang variable names broken (thraxisp)
 - 0004164: [news] Announcement news don't remain on top (masc)

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.6 2004-07-11 07:09:52 vboctor Exp $
+	# $Id: changelog_page.php,v 1.7 2004-08-26 23:24:41 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,6 +21,9 @@
 	if ( ALL_PROJECTS == helper_get_current_project() ) {
 		print_header_redirect( 'login_select_proj_page.php?ref=changelog_page.php' );
 	}
+
+	$t_project_id = helper_get_current_project();
+	access_ensure_project_level( config_get( 'view_changelog_threshold' ), $t_project_id );
 
 	html_page_top1( lang_get( 'changelog' ) );  // title
 	html_page_top2();
