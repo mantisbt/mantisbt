@@ -156,6 +156,8 @@
 
 	# ERROR_GPC_*
 	define( 'ERROR_GPC_VAR_NOT_FOUND',				200 );
+	define( 'ERROR_GPC_ARRAY_EXPECTED',				201 );
+	define( 'ERROR_GPC_ARRAY_UNEXPECTED',			202 );
 
 	# ERROR_LANG_*
 	define( 'ERROR_LANG_STRING_NOT_FOUND',			300 );

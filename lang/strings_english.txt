@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.82 $
+	# $Revision: 1.83 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-29 02:56:23 $
+	# $Date: 2002-08-30 08:15:27 $
 	#
-	# $Id: strings_english.txt,v 1.82 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.83 2002-08-30 08:15:27 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -176,6 +176,8 @@
 	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
 	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
 	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
 
 	# General Strings
 	$s_go_back = 'Go Back';
