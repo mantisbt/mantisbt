@@ -55,6 +55,7 @@
 
 		# get bugnote id
 		$t_bugnote_id = db_insert_id();
+		$t_bugnote_id = str_pd( $t_bugnote_id, '0', 7, STR_PAD_LEFT );
 
 		# log new bug
 		history_log_event_special( $f_id, BUGNOTE_ADDED , $t_bugnote_id );

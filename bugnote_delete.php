@@ -15,6 +15,7 @@
 	check_access( REPORTER );
 	check_bugnote_exists( $f_bugnote_id );
 	$c_bugnote_id = (integer)$f_bugnote_id;
+	$f_bugnote_id = str_pd( $c_bugnote_id, '0', 7, STR_PAD_LEFT );
 
 	# grab the bugnote text id
 	$query = "SELECT bugnote_text_id
