@@ -74,7 +74,6 @@
 <div align="center">
 <table class="width75" cellspacing="1">
 <form method="POST" action="bug_actiongroup.php">
-<input type="hidden" name="f_actionconfirmed" value="1" />
 <input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
 <?php foreach( $f_bug_arr as $value ) { ?>
 		<input type="hidden" name="f_bug_arr[]" value="<?php echo $value ?>" />
@@ -120,7 +119,6 @@
 	<?php echo $t_question_title ?>
 
 	<form method="post" action="bug_actiongroup.php">
-		<input type="hidden" name="f_actionconfirmed" value="1" />
 		<input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
 
 	<?php foreach( $f_bug_arr as $value ) { ?>

@@ -308,7 +308,7 @@
 <tr> <?php
 	if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) ) ) { ?>
 		<td bgcolor="<?php echo $status_color ?>">
-			<input type="checkbox" name="f_bug_arr[]" value="<?php echo "$v_id,$v_bug_text_id" ?>" />
+			<input type="checkbox" name="f_bug_arr[]" value="<?php echo "$v_id" ?>" />
 		</td> <?php
 	}
 

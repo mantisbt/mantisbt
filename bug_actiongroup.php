@@ -13,7 +13,6 @@
 <?php
 	
 	$f_action			= gpc_get_string( 'f_action' );
-	$f_actionconfirmed	= gpc_get_bool( 'f_actionconfirmed' );
 	$f_bug_arr			= gpc_get_string_array( 'f_bug_arr', array() );
 
 # the queries
@@ -22,13 +21,11 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	$t_query='';
 	$result = 1;
 
+	bug_ensure_exists( $p_id );
+
 	# history treatment
 	# extract current extended information into history variables
 	$result = get_bug_row_ex ( $p_id );
-	if ( 0 == db_num_rows( $result ) ) {
-		# speed is not an issue in this case, so re-use code
-		bug_ensure_exists( $p_id );
-	}
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'h' );
 
@@ -123,52 +120,44 @@ function updateBugLite($p_id, $p_status, $p_request) {
 
 }//updateBug
 
-# We check to see if the variable exists to avoid warnings
-if ( $f_actionconfirmed ) {
-
 	foreach($f_bug_arr as $value) {
-
-		# get the id and the bug_text_id parameters
-		# the bug_text_id is used only for the delete function
-		$t_id_arr=explode( ',', $value );
 
 		switch ( $f_action ) {
 
 		case 'CLOSE':
-			updateBugLite($t_id_arr[0],CLOSED,'');
+			updateBugLite( $value, CLOSED, '' );
 			break;
 
 		case 'DELETE':
-			bug_delete($t_id_arr[0]);
+			bug_delete( $value );
 			break;
 
 		case 'MOVE':
 			$f_project_id = gpc_get_int( 'f_project_id' );
-			updateBugLite($t_id_arr[0],'MOVED',$f_project_id);
+			updateBugLite( $value, 'MOVED', $f_project_id );
 			break;
 
 		case 'ASSIGN':
 			$f_assign = gpc_get_int( 'f_assign' );
-			updateBugLite($t_id_arr[0],ASSIGNED,$f_assign);
+			updateBugLite( $value, ASSIGNED, $f_assign );
 			break;
 
 		case 'RESOLVE':
 			$f_resolution = gpc_get_int( 'f_resolution' );
-			updateBugLite($t_id_arr[0],RESOLVED,$f_resolution);
+			updateBugLite( $value, RESOLVED, $f_resolution );
 			break;
 
 		case 'UP_PRIOR':
 			$f_priority = gpc_get_int( 'f_priority' );
-			updateBugLite($t_id_arr[0],'UP_PRIOR',$f_priority);
+			updateBugLite( $value, 'UP_PRIOR', $f_priority );
 			break;
 
 		case 'UP_STATUS':
 			$f_status = gpc_get_int( 'f_status' );
-			updateBugLite($t_id_arr[0],'UP_STATUS',$f_status);
+			updateBugLite( $value, 'UP_STATUS', $f_status );
 			break;
 		}
 	}
 
 	print_meta_redirect( 'view_all_bug_page.php',0);
-}
 ?>
