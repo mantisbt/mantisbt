@@ -410,6 +410,9 @@
 	# --- file upload settings --------
 	# This is the master setting to disable *all* file uploading functionality
 	#
+	# If you want to allow file uploads, you must also make sure that they are
+	#  enabled in php.  You may need to add "file_uploads = TRUE" to your php.ini
+	#
 	# See also: $g_upload_project_file_threshold, $g_upload_bug_file_threshold,
 	#   $g_allow_reporter_upload
 	$g_allow_file_upload	= ON;
