@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.36 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: login_page.php,v 1.37 2004-05-16 12:22:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -124,9 +124,9 @@
 	# Check if the admin directory is available and is readable.
 	$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
 	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) ) {
-			echo '<div class="warning" align="center">';
-			echo '<p><font color="red"><strong>WARNING:</strong> Admin directory should be removed.</font></p>';
-			echo '</div>';
+			echo '<div class="warning" align="center">', "\n";
+			echo '<p><font color="red"><strong>WARNING:</strong> Admin directory should be removed.</font></p>', "\n";
+			echo '</div>', "\n";
 	}
 ?>
 

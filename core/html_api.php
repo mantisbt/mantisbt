@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.93 2004-04-12 21:04:36 jlatour Exp $
+	# $Id: html_api.php,v 1.94 2004-05-16 12:22:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -20,10 +20,10 @@
 	#   html_page_top1
 	#     html_begin
 	#     html_head_begin
-	#     html_content_type
-	#     html_title
 	#     html_css
+	#     html_content_type
 	#  (html_meta_redirect)
+	#     html_title
 	#   html_page_top2
 	#     html_page_top2a
 	#       html_head_end
@@ -60,10 +60,10 @@
 	function html_page_top1() {
 		html_begin();
 		html_head_begin();
-		html_content_type();
-		html_title();
 		html_css();
+		html_content_type();
 		include( config_get( 'meta_include_file' ) );
+		html_title();
 	}
 
 	# --------------------
@@ -135,42 +135,42 @@
 	# (1) Print the document type and the opening <html> tag
 	function html_begin() {
 		# @@@ NOTE make this a configurable global.
-		#PRINT '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-		#PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">';
+		#echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">', "\n";
+		#echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">', "\n";
 
-		PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-		PRINT '<html>';
+		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">', "\n";
+		echo '<html>', "\n";
 	}
 
 	# --------------------
 	# (2) Begin the <head> section
 	function html_head_begin() {
-	   PRINT '<head>';
+		echo '<head>', "\n";
 	}
 
 	# --------------------
 	# (3) Print the content-type
 	function html_content_type() {
-		PRINT '<meta http-equiv="Content-type" content="text/html;charset=' . lang_get( 'charset' ) . '" />';
+		echo "\t", '<meta http-equiv="Content-type" content="text/html;charset=', lang_get( 'charset' ), '" />', "\n";
 	}
 
 	# --------------------
 	# (4) Print the window title
 	function html_title() {
 		$t_title = config_get( 'window_title' );
-		PRINT '<title>' . string_display( $t_title ) . "</title>\n";
+		echo "\t", '<title>', string_display( $t_title ), '</title>', "\n";
 	}
 
 	# --------------------
 	# (5) Print the link to include the css file
 	function html_css() {
 		$t_css_url = config_get( 'css_include_file' );
-		PRINT '<link rel="stylesheet" type="text/css" href="' . $t_css_url . '" />';
+		echo "\t", '<link rel="stylesheet" type="text/css" href="', $t_css_url, '" />', "\n";
 
 		# fix for NS 4.x css
-		PRINT '<script type="text/javascript" language="JavaScript">';
-		PRINT 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}';
-		PRINT '</script>';
+		echo "\t", '<script type="text/javascript" language="JavaScript">', "\n";
+		echo "\t\t", 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}', "\n";
+		echo "\t", '</script>', "\n";
 	}
 
 	# --------------------
@@ -188,7 +188,7 @@
 			$p_time = config_get( 'wait_time' );
 		}
 
-		PRINT "<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\" />";
+		echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\" />\n";
 
 		return true;
 	}
@@ -196,20 +196,20 @@
 	# --------------------
 	# (7) End the <head> section
 	function html_head_end() {
-		PRINT '</head>';
+		echo '</head>', "\n";
 	}
 
 	# --------------------
 	# (8) Begin the <body> section
 	function html_body_begin() {
-		PRINT '<body>';
+		echo '<body>', "\n";
 	}
 
 	# --------------------
 	# (9) Print the title displayed at the top of the page
 	function html_header() {
 		$t_title = config_get( 'page_title' );
-		PRINT '<div class="center"><span class="pagetitle">' . string_display( $t_title ) . '</span></div>';
+		echo '<div class="center"><span class="pagetitle">', string_display( $t_title ), '</span></div>', "\n";
 	}
 
 	# --------------------
@@ -296,13 +296,13 @@
 			user_update_last_visit( $t_user_id );
 		}
 
-		PRINT '<br />';
-		PRINT '<hr size="1" />';
+		echo "\t", '<br />', "\n";
+		echo "\t", '<hr size="1" />', "\n";
 		if ( ON == config_get( 'show_version' ) ) {
-			PRINT '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ' . config_get( 'mantis_version' ) . '</a></span>';
+			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a></span>', "\n";
 		}
-		PRINT '<address>Copyright &copy; 2000 - 2004</address>';
-		PRINT '<address><a href="mailto:' . config_get( 'webmaster_email' ) . '">' . config_get( 'webmaster_email' ) . '</a></address>';
+		echo "\t", '<address>Copyright &copy; 2000 - 2004</address>', "\n";
+		echo "\t", '<address><a href="mailto:', config_get( 'webmaster_email' ), '">', config_get( 'webmaster_email' ), '</a></address>', "\n";
 
 		# print timings
 		if ( ON == config_get( 'show_timer' ) ) {
@@ -312,20 +312,20 @@
 		# print db queries that were run
 		if ( ON == config_get( 'show_queries_count' ) ) {
 			$t_count = count( $g_queries_array );
-			PRINT $t_count.' total queries executed.<br />';
-			PRINT count( array_unique ( $g_queries_array ) ).' unique queries executed.<br />';
+			echo "\t",  $t_count, ' total queries executed.<br />', "\n";
+			echo "\t",  count( array_unique ( $g_queries_array ) ).' unique queries executed.<br />', "\n";
 			if ( ON == config_get( 'show_queries_list' ) ) {
-				PRINT '<table>';
+				echo "\t",  '<table>', "\n";
 				$t_shown_queries = array();
 				for ( $i = 0; $i < $t_count; $i++ ) {
 					if ( in_array( $g_queries_array[$i], $t_shown_queries ) ) {
-						PRINT '<tr><td style="color: red">'.($i+1).'</td><td style="color: red">'.htmlspecialchars($g_queries_array[$i]).'</td></tr>';
+						echo "\t",  '<tr><td style="color: red">', ($i+1), '</td><td style="color: red">', htmlspecialchars($g_queries_array[$i]), '</td></tr>', "\n";
 					} else {
 						array_push( $t_shown_queries, $g_queries_array[$i] );
-						PRINT '<tr><td>'.($i+1).'</td><td>'.htmlspecialchars($g_queries_array[$i]) . '</td></tr>';
+						echo "\t",  '<tr><td>', ($i+1), '</td><td>', htmlspecialchars($g_queries_array[$i]), '</td></tr>', "\n";
 					}
 				}
-				PRINT '</table>';
+				echo "\t",  '</table>', "\n";
 			}
 		}
 	}
@@ -333,13 +333,13 @@
 	# --------------------
 	# (14) End the <body> section
 	function html_body_end() {
-		PRINT '</body>';
+		echo '</body>', "\n";
 	}
 
 	# --------------------
 	# (15) Print the closing <html> tag
 	function html_end() {
-		PRINT '</html>';
+		echo '</html>', "\n";
 	}
 
 

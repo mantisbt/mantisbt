@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.46 2004-04-08 20:52:50 prescience Exp $
+	# $Id: string_api.php,v 1.47 2004-05-16 12:22:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -372,5 +372,13 @@
 	#  account for the user preference and site override
 	function string_get_bug_report_page( $p_user_id = null ) {
 		return string_get_bug_page( 'report', $p_user_id );
+	}
+
+	# --------------------
+	# Return a string with the $p_character pattern repeated N times.
+	# $p_character - pattern to repeat
+	# $p_repeats - number of times to repeat.
+	function string_repeat_char( $p_character, $p_repeats ) {
+		return str_pad( '', $p_repeats, $p_character );
 	}
 ?>

@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: meta_inc.php,v 1.15 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: meta_inc.php,v 1.16 2004-05-16 12:22:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	# prevent caching
 	$t_content_expire = config_get('content_expire');
 ?>
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Cache-Control" content="no-cache" />
-<meta http-equiv="Pragma-directive" content="no-cache" />
-<meta http-equiv="Cache-Directive" content="no-cache" />
-<meta http-equiv="Expires" content="<?php echo $t_content_expire ?>" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Pragma-directive" content="no-cache" />
+	<meta http-equiv="Cache-Directive" content="no-cache" />
+	<meta http-equiv="Expires" content="<?php echo $t_content_expire ?>" />
