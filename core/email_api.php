@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.105 2005-01-11 22:13:53 thraxisp Exp $
+	# $Id: email_api.php,v 1.106 2005-01-17 01:40:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -238,13 +238,16 @@
 		# set up to eliminate unwanted users
 		#  get list of status values that are not covered specifically in the prefs
 		#  These are handled by email_on_status generically
+		#  @@@ thraxisp note that email_on_assigned was co-opted to handle change in handler
 		$t_status_change = get_enum_to_array( config_get( 'status_enum_string' ) );
 		unset( $t_status_change[NEW_] );
 		unset( $t_status_change[FEEDBACK] );
-		unset( $t_status_change[ASSIGNED] );
 		unset( $t_status_change[RESOLVED] );
 		unset( $t_status_change[CLOSED] );
-		if ( in_array( $p_notify_type, $t_status_change ) ) {
+		
+		if ( $p_notify_type = 'owner' ) {
+			$t_pref_field = 'email_on_assigned';
+		} else if ( in_array( $p_notify_type, $t_status_change ) ) {
 			$t_pref_field = 'email_on_status';
 		} else {
 			$t_pref_field = 'email_on_' . $p_notify_type;
