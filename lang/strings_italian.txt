@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.65 $
+	# $Revision: 1.66 $
 	# $Author: vboctor $
-	# $Date: 2004-07-07 12:48:57 $
+	# $Date: 2004-07-09 11:32:54 $
 	#
-	# $Id: strings_italian.txt,v 1.65 2004-07-07 12:48:57 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.66 2004-07-09 11:32:54 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -880,7 +880,7 @@ $s_query_delete_msg = "Sicuro di voler eliminare questo filtro?";
 # view_bug_advanced_page.php
 $s_view_simple_link = "Scheda normale";
 $s_viewing_bug_advanced_details_title = "Scheda dettagliata anomalia";
-$s_product_build = "Versione del Prodotto";
+$s_product_build = "Release del Prodotto";
 $s_system_profile = "Descrizione del Sistema";
 $s_update_bug_button = "Aggiorna";
 $s_bug_assign_to_button = "Assegna:";
