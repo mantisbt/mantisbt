@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.48 2004-05-17 15:04:25 vboctor Exp $
+	# $Id: helper_api.php,v 1.49 2004-05-18 19:32:56 narcissus Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -96,15 +96,25 @@
 		return '@' . $p_val . '@';
 	}
 	# --------------------
-	# If $p_var and $p_val are euqal to each other then we PRINT SELECTED
+	# If $p_var is not an array and is equal to $p_val then we PRINT SELECTED.
+	# If $p_var is an array, then if any member is equal to $p_val we PRINT SELECTED.
 	# This is used when we want to know if a variable indicated a certain
 	# option element is selected
 	#
 	# If the second parameter is not given, the first parameter is compared
 	#  to the boolean value true
 	function check_selected( $p_var, $p_val=true ) {
-		if ( $p_var == $p_val ) {
-			PRINT ' selected="selected" ';
+		if ( is_array( $p_var ) ) {
+			foreach( $p_var as $p_this_var ) {
+				if ( $p_this_var == $p_val ) {
+					PRINT ' selected="selected" ';
+					return;
+				}
+			}
+		} else {
+			if ( $p_var == $p_val ) {
+				PRINT ' selected="selected" ';
+			}
 		}
 	}
 	# --------------------

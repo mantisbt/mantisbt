@@ -6,25 +6,94 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.30 2004-05-08 23:25:11 narcissus Exp $
+	# $Id: view_all_set.php,v 1.31 2004-05-18 19:32:58 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_type					= gpc_get_int( 'type', -1 );
+	$f_view_type			= gpc_get_string( 'view_type', 'simple' );
 	$f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 	$f_print				= gpc_get_bool( 'print' );
 	$f_temp_filter			= gpc_get_bool( 'temporary' );
 
-	$f_show_category		= gpc_get_string( 'show_category', 'any' );
-	$f_show_severity		= gpc_get_string( 'show_severity', 'any' );
-	$f_show_status			= gpc_get_string( 'show_status', 'any' );
+	# these are all possibly multiple selections for advanced filtering
+	$f_show_category = array();
+	if ( is_array( gpc_get( 'show_category', null ) ) ) {
+		$f_show_category = gpc_get_string_array( 'show_category', 'any' );
+	} else {
+		$f_show_category = gpc_get_string( 'show_category', 'any' );
+		$f_show_category = array( $f_show_category );
+	}
+
+	$f_show_severity = array();
+	if ( is_array( gpc_get( 'show_severity', null ) ) ) {
+		$f_show_severity = gpc_get_string_array( 'show_severity', 'any' );
+	} else {
+		$f_show_severity = gpc_get_string( 'show_severity', 'any' );
+		$f_show_severity = array( $f_show_severity );
+	}
+
+	$f_show_status = array();
+	if ( is_array( gpc_get( 'show_status', null ) ) ) {
+		$f_show_status = gpc_get_string_array( 'show_status', 'any' );
+	} else {
+		$f_show_status = gpc_get_string( 'show_status', 'any' );
+		$f_show_status = array( $f_show_status );
+	}
+
+	$f_hide_status = array();
+	if ( is_array( gpc_get( 'hide_status', null ) ) ) {
+		$f_hide_status = gpc_get_string_array( 'hide_status', 'none' );
+	} else {
+		$f_hide_status = gpc_get_string( 'hide_status', 'none' );
+		$f_hide_status = array( $f_hide_status );
+	}
+
+	$f_reporter_id = array();
+	if ( is_array( gpc_get( 'reporter_id', null ) ) ) {
+		$f_reporter_id = gpc_get_string_array( 'reporter_id', 'any' );
+	} else {
+		$f_reporter_id = gpc_get_string( 'reporter_id', 'any' );
+		$f_reporter_id = array( $f_reporter_id );
+	}
+
+	$f_handler_id = array();
+	if ( is_array( gpc_get( 'handler_id', null ) ) ) {
+		$f_handler_id = gpc_get_string_array( 'handler_id', 'any' );
+	} else {
+		$f_handler_id = gpc_get_string( 'handler_id', 'any' );
+		$f_handler_id = array( $f_handler_id );
+	}
+
+	$f_show_resolution = array();
+	if ( is_array( gpc_get( 'show_resolution', null ) ) ) {
+		$f_show_resolution = gpc_get_string_array( 'show_resolution', 'any' );
+	} else {
+		$f_show_resolution = gpc_get_string( 'show_resolution', 'any' );
+		$f_show_resolution = array( $f_show_resolution );
+	}
+
+	$f_show_build = array();
+	if ( is_array( gpc_get( 'show_build', null ) ) ) {
+		$f_show_build = gpc_get_string_array( 'show_build', 'any' );
+	} else {
+		$f_show_build = gpc_get_string( 'show_build', 'any' );
+		$f_show_build = array( $f_show_build );
+	}
+
+	$f_show_version = array();
+	if ( is_array( gpc_get( 'show_version', null ) ) ) {
+		$f_show_version = gpc_get_string_array( 'show_version', 'any' );
+	} else {
+		$f_show_version = gpc_get_string( 'show_version', 'any' );
+		$f_show_version = array( $f_show_version );
+	}
+
+	# these are only single values, even when doing advanced filtering
 	$f_per_page				= gpc_get_int( 'per_page', -1 );
 	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
-	$f_hide_status			= gpc_get_string( 'hide_status', 'none' );
-	$f_reporter_id			= gpc_get_string( 'reporter_id', 'any' );
-	$f_handler_id			= gpc_get_string( 'handler_id', 'any' );
 	# sort direction
 	$f_sort					= gpc_get_string( 'sort', 'last_updated' );
 	$f_dir					= gpc_get_string( 'dir', 'DESC' );
@@ -37,16 +106,18 @@
 	$f_end_year				= gpc_get_string( 'end_year', date( 'Y' ) );
 	$f_search				= gpc_get_string( 'search', '' );
 	$f_and_not_assigned		= gpc_get_bool( 'and_not_assigned' );
-	$f_show_resolution		= gpc_get_string( 'show_resolution', 'any' );
-	$f_show_build			= gpc_get_string( 'show_build', 'any' );
-	$f_show_version			= gpc_get_string( 'show_version', 'any' );
 	$f_do_filter_by_date	= gpc_get_bool( 'do_filter_by_date' );
 
 	$t_custom_fields 		= custom_field_get_ids();
 	$f_custom_fields_data 	= array();
 	if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
-			$f_custom_fields_data[$t_cfid] =  gpc_get_string( 'custom_field_' . $t_cfid, 'any' );
+			if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
+				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, 'any' );
+			} else {
+				$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, 'any' );
+				$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
+			}
 		}
 	}
 
@@ -139,40 +210,18 @@
 	switch ( $f_type ) {
 		# New cookie
 		case '0':
-				$t_setting_arr['_version'] = $t_cookie_version;
-				$t_setting_arr['show_category'] = "any";
-				$t_setting_arr['show_severity'] = "any";
-				$t_setting_arr['show_status'] = "any";
-				$t_setting_arr['per_page'] = $f_per_page;
-				$t_setting_arr['highlight_changed'] = $t_default_show_changed;
-				$t_setting_arr['reporter_id'] = "any";
-				$t_setting_arr['handler_id'] = "any";
-				$t_setting_arr['sort'] = "last_updated";
-				$t_setting_arr['dir'] = "DESC";
-				$t_setting_arr['start_month'] = $f_start_month;
-				$t_setting_arr['start_day'] = $f_start_day;
-				$t_setting_arr['start_year'] = $f_start_year;
-				$t_setting_arr['end_month'] = $f_end_month;
-				$t_setting_arr['end_day'] = $f_end_day;
-				$t_setting_arr['end_year'] = $f_end_year;
-				$t_setting_arr['search'] = $f_search;
-				$t_setting_arr['hide_status'] = $t_hide_status_default;
-				$t_setting_arr['and_not_assigned'] = $f_and_not_assigned;
-				$t_setting_arr['show_resolution'] = $f_show_resolution;
-				$t_setting_arr['show_build'] = $f_show_build;
-				$t_setting_arr['show_version'] = $f_show_version;
-				$t_setting_arr['do_filter_by_date'] = $f_do_filter_by_date;
-				$t_setting_arr['custom_fields'] = $f_custom_fields_data;
+				unset( $t_setting_arr );
 
 				break;
 		# Update filters
 		case '1':
 				$t_setting_arr['_version'] = $t_cookie_version;
+				$t_setting_arr['_view_type'] = $f_view_type;
 				$t_setting_arr['show_category'] = $f_show_category;
 				$t_setting_arr['show_severity'] = $f_show_severity;
 				$t_setting_arr['show_status'] = $f_show_status;
 				$t_setting_arr['per_page'] = $f_per_page;
-				$t_setting_arr['highlight_changed'] = $t_default_show_changed;
+				$t_setting_arr['highlight_changed'] = $f_highlight_changed;
 				$t_setting_arr['reporter_id'] = $f_reporter_id;
 				$t_setting_arr['handler_id'] = $f_handler_id;
 				$t_setting_arr['sort'] = $f_sort;
@@ -215,27 +264,107 @@
 			}
 		# Generalise the filter
 		case '4':
-				$t_setting_arr['show_category']	= "any";
-				$t_setting_arr['reporter_id'] 	= "any";
-				$t_setting_arr['handler_id'] 	= "any";
-				$t_setting_arr['show_build'] 	= "any";
-				$t_setting_arr['show_version'] 	= "any";
+				$t_setting_arr['show_category']	= array( "any" );
+				$t_setting_arr['reporter_id'] 	= array( "any" );
+				$t_setting_arr['handler_id'] 	= array( "any" );
+				$t_setting_arr['show_build'] 	= array( "any" );
+				$t_setting_arr['show_version'] 	= array( "any" );
 
 				$t_custom_fields 		= custom_field_get_ids();
 				$t_custom_fields_data 	= array();
 				if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 					foreach( $t_custom_fields as $t_cfid ) {
-						$t_custom_fields_data[$t_cfid] =  "any";
+						$t_custom_fields_data[$t_cfid] =  array( "any" );
 					}
 				}
 				$t_setting_arr['custom_fields'] = $t_custom_fields_data;
 
 				break;
-			
+		# Just set the search string value
+		case '5':
+				$t_setting_arr['search'] = $f_search;
+
+				break;
 		# does nothing. catch all case
 		default:
 				break;
 	}
+
+	# Make sure that our filters are entirely correct and complete (it is possible that they are not).
+	# We need to do this to cover cases where we don't have complete control over the filters given.
+	if ( !isset( $t_setting_arr['_version'] ) ) {
+		$t_setting_arr['_version'] = $t_cookie_version;
+	}
+	if ( !isset( $t_setting_arr['_view_type'] ) ) {
+		$t_setting_arr['_view_type'] = $f_view_type;
+	}
+	if ( !isset( $t_setting_arr['per_page'] ) ) {
+		$t_setting_arr['per_page'] = $f_per_page;
+	}
+	if ( !isset( $t_setting_arr['highlight_changed'] ) ) {
+		$t_setting_arr['highlight_changed'] = $t_default_show_changed;
+	}
+	if ( !isset( $t_setting_arr['sort'] ) ) {
+		$t_setting_arr['sort'] = "last_updated";
+	}
+	if ( !isset( $t_setting_arr['dir'] ) ) {
+		$t_setting_arr['dir'] = "DESC";
+	}
+	if ( !isset( $t_setting_arr['start_month'] ) ) {
+		$t_setting_arr['start_month'] = $f_start_month;
+	}
+	if ( !isset( $t_setting_arr['start_day'] ) ) {
+		$t_setting_arr['start_day'] = $f_start_day;
+	}
+	if ( !isset( $t_setting_arr['start_year'] ) ) {
+		$t_setting_arr['start_year'] = $f_start_year;
+	}
+	if ( !isset( $t_setting_arr['end_month'] ) ) {
+		$t_setting_arr['end_month'] = $f_end_month;
+	}
+	if ( !isset( $t_setting_arr['end_day'] ) ) {
+		$t_setting_arr['end_day'] = $f_end_day;
+	}
+	if ( !isset( $t_setting_arr['end_year'] ) ) {
+		$t_setting_arr['end_year'] = $f_end_year;
+	}
+	if ( !isset( $t_setting_arr['search'] ) ) {
+		$t_setting_arr['search'] = '';
+	}
+	if ( !isset( $t_setting_arr['and_not_assigned'] ) ) {
+		$t_setting_arr['and_not_assigned'] = $f_and_not_assigned;
+	}
+	if ( !isset( $t_setting_arr['do_filter_by_date'] ) ) {
+		$t_setting_arr['do_filter_by_date'] = $f_do_filter_by_date;
+	}
+	$t_multi_select_list = array( 'show_category', 'show_severity', 'show_status', 'reporter_id',
+									'handler_id', 'show_resolution', 'show_build', 'show_version', 'hide_status', 'custom_fields' );
+	foreach( $t_multi_select_list as $t_multi_field_name ) {
+		if ( !isset( $t_setting_arr[$t_multi_field_name] ) ) {
+			if ( 'hide_status' == $t_multi_field_name ) {
+				$t_setting_arr[$t_multi_field_name] = $t_hide_status_default;
+			} else if ( 'custom_fields' == $t_multi_field_name ) {
+				$t_setting_arr[$t_multi_field_name] = $f_custom_fields_data;
+			} else {
+				$t_setting_arr[$t_multi_field_name] = array( "any" );
+			}
+		}
+		if ( !is_array( $t_setting_arr[$t_multi_field_name] ) ) {
+			$t_setting_arr[$t_multi_field_name] = array( $t_setting_arr[$t_multi_field_name] );
+		}
+	}
+
+	if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+		foreach( $t_custom_fields as $t_cfid ) {
+			if ( !isset( $t_setting_arr['custom_fields'][$t_cfid] ) ) {
+				$t_setting_arr['custom_fields'][$t_cfid] = array( "any" );
+			}
+			if ( !is_array( $t_setting_arr['custom_fields'][$t_cfid] ) ) {
+				$t_setting_arr['custom_fields'][$t_cfid] = array( $t_setting_arr['custom_fields'][$t_cfid] );
+			}
+		}
+	}
+	# all of our filter values are now guaranteed to be there, and correct.
 
 	$t_settings_serialized = serialize( $t_setting_arr );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;

@@ -9,6 +9,7 @@ Mantis ChangeLog
  * Enh #3300: Add global defaults for priotity and severity of new bugs.
  * Enh #3302: Add global defaults for view state.
  * Enh #3505: Add a Bugnote to a resolved bug.
+ * Enh #3519: Advanced filtering with multiple selections.
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.79 2004-05-18 12:28:50 vboctor Exp $
+	# $Id: print_api.php,v 1.80 2004-05-18 19:32:56 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -222,7 +222,7 @@
 		foreach ( $t_users as $t_user ) {
 			$t_user_name = string_attribute( $t_user['username'] );
 			PRINT '<option value="' . $t_user['id'] . '" ';
-			check_selected( $t_user['id'], $p_user_id );
+			check_selected( $p_user_id, $t_user['id'] );
 			PRINT '>' . $t_user_name . '</option>';
 		}
 	}
@@ -340,7 +340,7 @@
 
 		foreach ( $t_users as $t_user ) {
 			PRINT '<option value="' . $t_user['id'] . '" ';
-			check_selected( $t_user['id'], $p_user_id );
+			check_selected( $p_user_id, $t_user['id'] );
 			PRINT '>' . $t_user['username'] . '</option>';
 		}
 	}
@@ -502,7 +502,7 @@
 
 		foreach( $cat_arr as $t_category ) {
 			PRINT "<option value=\"$t_category\"";
-			check_selected( $t_category, $p_category );
+			check_selected( $p_category, $t_category );
 			PRINT ">$t_category</option>";
 		}
 	}
@@ -528,7 +528,7 @@
 			$row = db_fetch_array( $result );
 			$t_version = string_attribute( $row['version'] );
 			PRINT "<option value=\"$t_version\"";
-			check_selected( $t_version, $p_version );
+			check_selected( $p_version, $t_version );
 			PRINT ">$t_version</option>";
 		}
 	}
@@ -554,7 +554,7 @@
 
 		foreach( $t_overall_build_arr as $t_build ) {
 			PRINT "<option value=\"$t_build\"";
-			check_selected( $t_build, $p_build );
+			check_selected( $p_build, $t_build );
 			PRINT ">$t_build</option>";
 		}
 	}
@@ -572,7 +572,7 @@
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
 			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
 			PRINT "<option value=\"$t_elem[0]\"";
-			check_selected( $t_elem[0], $p_val );
+			check_selected( $p_val, $t_elem[0] );
 			PRINT ">$t_elem2</option>";
 		} # end for
 	}

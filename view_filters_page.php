@@ -105,11 +105,18 @@
 	{
 		$t_action  = "view_all_set.php";
 	}
+
+	$f_view_type = gpc_get_string( 'view_type', 'simple' );
+	$t_select_modifier = '';
+	if ( 'advanced' == $f_view_type ) {
+		$t_select_modifier = 'multiple="multiple" size="10" ';
+	}
 	
 ?>
 <br />
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
 <input type="hidden" name="type" value="1" />
+<input type="hidden" name="view_type" value="<?php PRINT $f_view_type; ?>" />
 <?php 
 	if ( $f_for_screen == false ) 
 	{
@@ -121,6 +128,19 @@
 <input type="hidden" name="dir" value="<?php echo $t_dir ?>" />
 
 <table class="width100" cellspacing="0">
+<tr>
+	<td class="right" colspan="<?php PRINT ( 8 * $t_custom_cols ); ?>">
+	<?php
+		$f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&amp;view_type=';
+
+		if ( 'advanced' == $f_view_type ) {
+			print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+		} else {
+			print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+		}
+	?>
+	</td>
+</tr>
 <tr class="row-category2">
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'reporter' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'assigned_to' ) ?></td>
@@ -134,7 +154,7 @@
 <tr>
 	<!-- Reporter -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select name="reporter_id">
+		<select <?php PRINT $t_select_modifier;?> name="reporter_id[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php
@@ -149,7 +169,7 @@
 	</td>
 	<!-- Handler -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select name="handler_id">
+		<select <?php PRINT $t_select_modifier;?> name="handler_id[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="none" <?php check_selected( $t_filter['handler_id'], 'none' ); ?>><?php echo lang_get( 'none' ) ?></option>
 			<option value="any"></option>
@@ -162,11 +182,17 @@
 			?>
 			<?php print_assign_to_option_list( $t_filter['handler_id'] ) ?>
 		</select>
-        <input type="checkbox" name="and_not_assigned" <?php check_checked( $t_filter['and_not_assigned'], 'on' ); ?> /> <?php echo lang_get( 'or_unassigned' ) ?>
+		<?php
+			if ( 'simple' == $f_view_type ) {
+			?>
+        		<input type="checkbox" name="and_not_assigned" <?php check_checked( $t_filter['and_not_assigned'], 'on' ); ?> /> <?php echo lang_get( 'or_unassigned' ) ?>
+        	<?php
+        	}
+        ?>
 	</td>
 	<!-- Category -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select name="show_category">
+		<select <?php PRINT $t_select_modifier;?> name="show_category[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php # This shows orphaned categories as well as selectable categories ?>
@@ -175,7 +201,7 @@
 	</td>
     <!-- Severity -->
     <td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-        <select name="show_severity">
+        <select <?php PRINT $t_select_modifier;?> name="show_severity[]">
             <option value="any"><?php echo lang_get( 'any' ) ?></option>
             <option value="any"></option>
             <?php print_enum_string_option_list( 'severity', $t_filter['show_severity'] ) ?>
@@ -183,23 +209,23 @@
     </td>
 	<!-- Status -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select name="show_status">
+		<select <?php PRINT $t_select_modifier;?> name="show_status[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
 		</select>
 	</td>
 	<!-- Number of bugs per page -->
-	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="text" name="per_page" size="3" maxlength="7" value="<?php echo $t_filter['per_page'] ?>" />
 	</td>
 	<!-- Highlight changed bugs -->
-	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $t_filter['highlight_changed'] ?>" />
 	</td>
 	<!-- Hide closed and resolved bugs -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select name="hide_status">
+		<select <?php PRINT $t_select_modifier;?> name="hide_status[]">
 			<option value="none"><?php echo lang_get( 'none' ) ?></option>
 			<option value="none"></option>
 			<?php print_enum_string_option_list( 'status', $t_filter['hide_status'] ) ?>
@@ -218,7 +244,7 @@
 <tr>
 	<!-- Build -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select name="show_build">
+		<select <?php PRINT $t_select_modifier;?> name="show_build[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_build_option_list( $t_filter['show_build'] ) ?>
@@ -226,7 +252,7 @@
 	</td>
 	<!-- Resolution -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select name="show_resolution">
+		<select <?php PRINT $t_select_modifier;?> name="show_resolution[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'resolution', $t_filter['show_resolution'] ) ?>
@@ -234,14 +260,14 @@
 	</td>
 	<!-- Version -->
 	<td colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
-		<select name="show_version">
+		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_version_option_list( $t_filter['show_version'] ) ?>
 		</select>
 	</td>
 	<!-- Start date -->
-	<td class="left" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td class="left" valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<?php
 		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 		foreach( $t_chars as $t_char ) {
@@ -264,7 +290,7 @@
 		?>
 	</td>
 	<!-- End date -->
-	<td class="left" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	<td class="left" valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<?php
 		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 		foreach( $t_chars as $t_char ) {
@@ -318,14 +344,14 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 			for ( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<td colspan="' . ( 1 * $t_filter_cols ) . '">';
 				if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
-					echo '<select name="custom_field_' . $t_accessible_custom_fields_ids[$t_base + $j] .'">';
+					echo '<select ' . $t_select_modifier . ' name="custom_field_' . $t_accessible_custom_fields_ids[$t_base + $j] .'[]">';
 					echo '<option value="any">' . lang_get( 'any' ) .'</option>';
 					echo '<option value=""></option>';
 					foreach( $t_accessible_custom_fields_values[$t_base + $j] as $t_item ) {
 						if ( ( strtolower( $t_item ) != "any" ) && ( trim( $t_item ) != "" ) ) {
 							echo '<option value="' .  htmlentities( $t_item )  . '" ';
 							if ( isset( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[$t_base + $j] ] ) ) {
-								check_selected( $t_item, $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[$t_base + $j] ] );
+								check_selected( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[$t_base + $j] ], $t_item );
 							}
 							echo '>' . $t_item  . '</option>' . "\n";
 						}
