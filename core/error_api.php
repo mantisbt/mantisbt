@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.13 2003-01-04 08:39:26 jfitzell Exp $
+	# $Id: error_api.php,v 1.14 2003-01-23 21:44:43 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -34,7 +34,7 @@
 	#
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		global $g_error_parameters, $g_error_handled;
-
+		
 		# check if errors were disabled with @ somewhere in this call chain
 		if ( 0 == error_reporting() ) {
 			return;

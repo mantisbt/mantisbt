@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.33 2003-01-12 07:40:19 jfitzell Exp $
+	# $Id: html_api.php,v 1.34 2003-01-23 21:44:43 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -31,6 +31,7 @@
 	# --------------------
 	# core part of page top but without login info and menu - used in login pages
 	function print_page_top2a() {
+	return;
 		global $g_page_title, $g_top_include_page;
 
 		print_head_bottom();
@@ -102,12 +103,13 @@
 		global 	$g_show_project_in_title,
 				$g_project_cookie_val;
 
-		if ( 0 == $g_project_cookie_val ) {
+		# Handle the absence of the project API, to allow errors in database queries to be
+		# handled with grace.
+		if ( 0 == $g_project_cookie_val || !function_exists('project_get_field')) {
 			$t_project_name = lang_get( 'all_projects' );
 		} else {
 			$t_project_name = project_get_field( $g_project_cookie_val, 'name' );
 		}
-
 		if ( 1 == $g_show_project_in_title ) {
 			PRINT "<title>$p_title - $t_project_name</title>";
 		} else if ( 2 == $g_show_project_in_title ) {

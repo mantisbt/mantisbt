@@ -17,6 +17,12 @@
 
 	# load utility functions used by everything else
 	require_once( $t_core_dir.'utility_api.php' );
+	
+	# error functions should be loaded to allow database to print errors
+	require_once( $t_core_dir.'html_api.php' );
+	require_once( $t_core_dir.'lang_api.php' );
+	require_once( $t_core_dir.'config_api.php' );
+	require_once( $t_core_dir.'error_api.php' );
 
 	# initialize our timer
 	$g_timer = new BC_Timer;
@@ -29,20 +35,16 @@
 	# OPENED ANYWHERE ELSE.
 	require_once( $t_core_dir.'database_api.php' );
 
-	require_once( $t_core_dir.'config_api.php' );
-
 	# SEND USER-DEFINED HEADERS
 	foreach( config_get( 'custom_headers' ) as $t_header ) {
 		header( $t_header );
 	}
 
+	require_once( $t_core_dir.'project_api.php' );
 	require_once( $t_core_dir.'gpc_api.php' );
-	require_once( $t_core_dir.'error_api.php' );
 	require_once( $t_core_dir.'authentication_api.php' );
 	require_once( $t_core_dir.'access_api.php' );
-	require_once( $t_core_dir.'lang_api.php' );
 	require_once( $t_core_dir.'string_api.php' );
-	require_once( $t_core_dir.'html_api.php' );
 	require_once( $t_core_dir.'print_api.php' );
 	require_once( $t_core_dir.'helper_api.php' );
 	require_once( $t_core_dir.'summary_api.php' );
@@ -63,7 +65,6 @@
 	require_once( $t_core_dir.'file_api.php' );
 	require_once( $t_core_dir.'bugnote_api.php' );
 	require_once( $t_core_dir.'bug_api.php' );
-	require_once( $t_core_dir.'project_api.php' );
 	require_once( $t_core_dir.'filter_api.php' );
 
 	# include the custom_field stuff if the config value is set to ON
