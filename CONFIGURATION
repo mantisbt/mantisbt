@@ -1,0 +1,48 @@
+This file contains information to help you customize and integrate Mantis with
+whatever you need.
+
+* config_inc.php - this file contains all the site-wide variables.
+  It is advisable to rename this to something else then change the
+  require() statement in core_API.php to point to this new file.  This
+  way you can easily upgrade your installations while not having
+  to re-enter all your configuration settings.
+
+* core_API.php - this file contains all the critical functions
+
+* To add more categories just edit through the manage area.  The format must
+  be separated by , and enclosed in ''.
+
+  eg.  'bugtracker','other','display','core','loader'
+
+* global variables are prefixed by g_
+* parameters in functions are prefixed with p_
+* form variables are prefixed with f_
+* user related variables are prefixed with u_
+* other variables are usually either prefixed with v_ or t_
+* count variables usually have the word count in the variable name
+
+* Each file checks to see if the user is logged in using
+index_login_cookie_check() or login_cookie_check().  This is to prevent
+unauthorized access.  This merely retrieves a cookie and matches it
+against the stored user information.
+
+* The files are split into three basic catgories, viewable pages,
+include files and pure scripts. Examining the viewable pages (suffix _page)
+should make the basic file format fairly easy to see.  The file names
+themselves should make their purpose apparent.  I decided to break the
+work into many small files rather than have a small number of really
+large files.
+
+* Most of the action scripts have a confirmation page to make sure the action
+completed sucessfully.  To remove this step just add a
+Header( "Location: <redirect_page_name>" ) command before the HTML begins.
+
+* Edit css_inc.php to make your own page formatting.
+
+* All files were editted with TAB SPACES set to 4.  I'm sorry if this causes
+a problem, but I can't stand 8 and tabs are helpful.  I've tried to alleviate
+this in the config file by using spaces for the most part.
+
+****** A note on globals: globals are a rather quirky item in php.  Basically
+all variables are always local in scope unless declared global.  This is why
+some of the include() files have global deslarations in them.

@@ -1,0 +1,50 @@
+-------------------------------------------------------------------------------
+Mantis - a php based bugtracking system
+Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+-------------------------------------------------------------------------------
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+-------------------------------------------------------------------------------
+
+INSTALL          - installation instructions
+CONFIGURATION    - help on custom configuration
+LICENSE          - GPL license
+db_generate.sql  - SQL tables
+core_API.php3    - core functions
+
+-------------------------------------------------------------------------------
+
+Mantis grew out of my need for a simple and easily adaptable bugtracking
+system.  I took a look at Bugzilla but I didn't like the interface and
+complexity.  Also, I know php but barely know perl.
+
+Originally this was written by a friend of mine but he has let me take over the
+project entirely.  In any case I completely rewrote his code.  I attempted to
+make the HTML fairly modular so people could easily dive into customization.
+
+Security exists though I'm not really in a position to judge how secure.  Also
+there are probably some basic checks that I haven't done (because I don't know
+what to check for!).  So, if you're going to use this try to use it in a
+semi-private area until this package has been looked through a few times.
+
+Features:
+
+- Variable controlled appearance
+- Built-in category management
+- Color coded status indicators
+- Integrated news
+- Integrated user management
+- Integrated account management
+- Projection / ETA
+- Items updated since last visit indicators

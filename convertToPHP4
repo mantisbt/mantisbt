@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Converting all php3 files to php files"
+for filename in $(ls *.php3); do
+	echo "renaming $filename  -->  $(echo $filename | sed -e "s/.php3/.php/")"
+	mv "$filename" "$(echo $filename | sed -e "s/.php3/.php/")"
+done

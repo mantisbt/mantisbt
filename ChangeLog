@@ -1,0 +1,39 @@
+Mantis
+
+To Do:
+
+ * Inspect security
+ * Inspect for unsafe input/output
+ * Add mailing module
+ * Add ip tracking/banning capability
+ * Add file upload module
+ * Force resolution to go through a dialog
+ * Add postgreSQL support and a Database abstraction layer
+ * Refine viewing preferences
+
+12.03.2000	-	0.10.0
+
+ * Moved constant config settings to config_inc.php3
+ * Better news formatting
+ * Added protected flag for accounts
+ * Color values controlled by variables
+ * Page variables controlled by variables
+ * Fixed error with emails not displaying in link on main page
+ * Edit categories from Manage section
+ * Viewing filters
+ * supports php and php3 extensions (php3/php4)
+
+12.01.2000	-	0.9.1 (Quick fixes)
+
+ * Fixed a link
+ * Fixed reporter not showing up properly
+ * Fixed
+ * The "enabled" flag on accounts works
+
+12.01.2000	-	0.9.0
+
+ * User management
+ * Account maintenance
+ * Access levels
+ * News system
+ * Basic functionality
