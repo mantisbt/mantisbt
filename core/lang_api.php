@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.6 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: lang_api.php,v 1.7 2002-12-08 10:54:54 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -25,14 +25,40 @@
 		#  language files actually *contain* English strings if none has been
 		#  defined in the correct language
 
-		if ( isset( $GLOBALS['s_'.$p_string] ) ) {
+		if ( lang_exists( $p_string ) ) {
 			return $GLOBALS['s_'.$p_string];
 		} else {
 			trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
-
 			return '';
 		}
 	}
+
+	# ------------------
+	# Check the language entry, if found return true, otherwise return false.
+	function lang_exists( $p_string ) {
+		return ( isset( $GLOBALS['s_' . $p_string] ) );
+	}
+
+	# ------------------
+	# Get language:
+	# - If found, return the appropriate string (as lang_get()).
+	# - If not found, no default supplied, return the supplied string as is.
+	# - If not found, default supplied, return default.
+	function lang_get_defaulted( $p_string, $p_default = null ) {
+		if ( lang_exists( $p_string) ) {
+			return lang_get( $p_string );
+		} else {
+			if ( null === $p_default ) {
+				return $p_string;
+			} else {
+				return $p_default;
+			}
+		}
+	}
+
+	# ------------------
+	# MAIN CODE
+	# ------------------
 
 	# Nasty code to select the proper language file
 	if ( !is_blank( $g_string_cookie_val ) ) {
@@ -65,5 +91,4 @@
 	if ( file_exists( $t_custom_strings ) ) {
 		require_once( $t_custom_strings );
 	}
-
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.13 2002-12-06 18:48:20 jfitzell Exp $
+	# $Id: bug_view_advanced_page.php,v 1.14 2002-12-08 10:54:53 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -258,7 +258,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo $t_def['name'] ?>
+		<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td colspan="5">
 		<?php
