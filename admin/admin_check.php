@@ -1,4 +1,9 @@
 <?php
+	require( "../constant_inc.php" );
+	require( "../config_inc.php" );
+	require( "../core_database_API.php" );
+?>
+<?php
 	error_reporting( E_ALL );
 
 	# mail test
@@ -59,7 +64,6 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 </style>
 </head>
 <body>
-<?php include( "core_API.php" ) ?>
 
 <h2>Admin Check</h2>
 
