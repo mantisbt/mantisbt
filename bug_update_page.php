@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.76 2004-07-25 21:09:38 thraxisp Exp $
+	# $Id: bug_update_page.php,v 1.77 2004-07-26 13:24:38 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -241,7 +241,7 @@
 <?php
 	$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
 			|| ( ( AUTO == config_get( 'show_product_version' ) ) 
-						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+						&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
 	if ( $t_show_version ) { 
 ?>
 	<!-- Product Version -->
