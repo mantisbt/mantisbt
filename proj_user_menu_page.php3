@@ -32,8 +32,8 @@
 			FROM $g_mantis_project_table
 			WHERE id='$g_project_cookie_val'";
 	$result = db_query( $query );
-	$t_access_min = db_result( $result, 0, 0 );
-	$t_access_min = get_enum_element( $s_access_levels_enum_string, $t_access_min );
+	$t_access_min_val = db_result( $result, 0, 0 );
+	$t_access_min = get_enum_element( $s_access_levels_enum_string, $t_access_min_val );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -160,6 +160,80 @@
 		</td>
 		<td align="center">
 			<? print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_user_id, $s_remove_link ) ?>
+		</td>
+	</tr>
+<?
+	}  ### end for
+?>
+	</table>
+	</td>
+</tr>
+</table>
+</div>
+
+<p>
+<div align="center">
+<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<tr>
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table width="100%">
+	<tr>
+		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
+			<b><? echo $s_automatic_access ?>: (<? echo $t_access_min ?>)</b>
+		</td>
+	</tr>
+	<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
+		<td>
+			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_username, "username", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "username" ) ?>
+		</td>
+		<td>
+			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_email, "email", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "email" ) ?>
+		</td>
+		<td>
+			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_access_level, "access_level", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "access_level" ) ?>
+		</td>
+		<td>
+			&nbsp;
+		</td>
+	</tr>
+<?
+	### Get the user data in $f_sort order
+    $query = "SELECT DISTINCT u.id
+				FROM $g_mantis_user_table u, $g_mantis_project_user_list_table ul
+				WHERE u.access_level>='$t_access_min_val' AND
+					u.id<>ul.user_id";
+    $result = db_query( $query );
+	$user_count = db_num_rows( $result );
+	for ($i=0;$i<$user_count;$i++) {
+		### prefix user data with u_
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, "u" );
+
+		$query2 = "SELECT username, email, access_level
+				FROM $g_mantis_user_table
+				WHERE id='$u_id'";
+		$result2 = db_query( $query2 );
+		$row2 = db_fetch_array( $result2 );
+		extract( $row2, EXTR_PREFIX_ALL, "u" );
+
+		### alternate row colors
+		$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+?>
+	<tr bgcolor="<? echo $t_bgcolor ?>">
+		<td>
+			<? echo $u_username ?>
+		</td>
+		<td>
+			<? print_email_link( $u_email, $u_email ) ?>
+		</td>
+		<td align="center">
+			<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
+		</td>
+		<td align="center">
+			<? print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_id, $s_remove_link ) ?>
 		</td>
 	</tr>
 <?
