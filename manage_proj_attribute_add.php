@@ -76,7 +76,7 @@
 			continue;
 		}
 
-		$t_duplicate = is_duplicate_attribute(  $f_parameter, $f_project_id, $t_attribute );
+		$t_duplicate = attribute_is_duplicate(  $f_parameter, $f_project_id, $t_attribute );
 		if ( !$t_duplicate ) {
 			$t_result = attribute_add( $f_parameter, $f_project_id, $t_attribute);
 			if ($t_status_flag) {

@@ -30,7 +30,7 @@
 		$t_attribute = $t_attribute_arr[$i];
 		$t_attribute = addslashes( $t_attribute );
 
-		if ( !is_duplicate_attribute( $f_parameter, $f_dst_project_id, $t_attribute ) ) {
+		if ( !attribute_is_duplicate( $f_parameter, $f_dst_project_id, $t_attribute ) ) {
 			attribute_add( $f_parameter, $f_dst_project_id, $t_attribute );
 			if ($f_parameter == $s_states) {
 				$t_result2 = attribute_add( 'colors', $f_dst_project_id, $f_color); #colors set to background for the moment

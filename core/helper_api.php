@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.14 2002-08-31 03:32:03 vboctor Exp $
+	# $Id: helper_api.php,v 1.15 2002-09-01 01:23:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -67,8 +67,8 @@
 			$t_project_id = '0000000';
 
 			# insert attriutes for color displaying in viex_bug_page.php
-			insert_attributes( 'status', $t_project_id, 'global' );
-			insert_attributes( 'status', $t_project_id, 'str' ) ;
+			attribute_insert( 'status', $t_project_id, 'global' );
+			attribute_insert( 'status', $t_project_id, 'str' ) ;
 		}
 
 		$t_color_str = 'closed';
@@ -135,8 +135,8 @@
 			$t_project_id = '0000000';
 
 			# custom attributes insertion
-			insert_attributes( $p_enum_name, $t_project_id, 'global' );
-			insert_attributes( $p_enum_name, $t_project_id, 'str' ) ;
+			attribute_insert( $p_enum_name, $t_project_id, 'global' );
+			attribute_insert( $p_enum_name, $t_project_id, 'str' ) ;
 		}
 		# use the global enum string to search
 		$t_arr = explode_enum_string( $config_var );

@@ -1,13 +1,13 @@
 <?php
-require_once( 'core.php' );
+	require_once( 'core.php' );
 
-login_cookie_check();
+	login_cookie_check();
 
-# if user is below view summary threshold, then re-direct to mainpage.
-if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
-	print_header_redirect( 'main_page.php' );
-}
+	# if user is below view summary threshold, then re-direct to mainpage.
+	if ( !access_level_check_greater_or_equal( config_get( 'view_summary_threshold' ) ) ) {
+		access_denied();
+	}
 
-create_developer_summary();
-graph_developer_summary();
+	create_developer_summary();
+	graph_developer_summary();
 ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.8 2002-08-31 03:32:03 vboctor Exp $
+	# $Id: print_api.php,v 1.9 2002-09-01 01:23:24 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -606,7 +606,7 @@
 			$f_project_id = '0000000';
 
 			# custom attributes insertion
-			insert_attributes( $p_enum_name, $f_project_id, 'global' );
+			attribute_insert( $p_enum_name, $f_project_id, 'global' );
 		}
 		$t_arr  = explode_enum_string( $$g_var );
 		$enum_count = count( $t_arr );

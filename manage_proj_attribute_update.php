@@ -27,7 +27,7 @@
 	check_varset( $f_color, ''  ) ;
 	
 	# check for duplicate
-	if ( !is_duplicate_attribute( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute ) ) {
+	if ( !attribute_is_duplicate( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute ) ) {
 		$result = attribute_update( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute, $f_color); 
 		if ( !$result ) {
 			break;
@@ -50,7 +50,7 @@
 <?php
 	if ( $result ) {					# SUCCESS
 		PRINT $s_operation_successful.'<p>';
-	} else if ( is_duplicate_attribute( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute )) {
+	} else if ( attribute_is_duplicate( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute )) {
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p>';
 	} else {							# FAILURE
 		print_sql_error( $query );
