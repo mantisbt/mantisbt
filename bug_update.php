@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.80 2004-12-01 17:40:57 thraxisp Exp $
+	# $Id: bug_update.php,v 1.81 2005-01-13 17:37:34 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -93,7 +93,10 @@
 		$t_custom_field_value = gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], null );
 
 		# Only update the field if it would have been display for editing
-		if( !( $t_def['display_' . $t_custom_status_label] || $t_def['require_' . $t_custom_status_label] ) ) {
+		if( !( $t_def['display_' . $t_custom_status_label] || 
+						$t_def['require_' . $t_custom_status_label] ||
+						( $f_update_mode && $t_def['display_update'] ) ||
+						( $f_update_mode && $t_def['require_update'] ) ) ) {
 			continue;
 		}
 		
