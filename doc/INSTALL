@@ -11,6 +11,9 @@ instructions may seem unix-centric but should work fine on Windows systems.
 Barring complications, it should take you about 10-20 minutes to install,
 configure, and be using Mantis.
 
+Amandeep Jawa has provided an alternative and more detailed installation
+document.  Use a browser and open doc/installation.html.
+
 # --- Requirements ----------
 
 * MySQL database
@@ -123,49 +126,32 @@ config_inc1.php contains most of the options that you would want to configure.
 
 config_inc2.php contains mostly names of files that are required.  You
 probably will not have to override these settings except to specify a top or
-bottom page include.
+bottom page to include.
 
-Create a file called config_inc.php in the mantis directory.  Fill it in with
-the database, email, and path variables that are specific to your
-installation.
+Here are the important files for configuration:
 
-When you are done you will have the following config files (assuming mantis/
-is the root directory):
+mantis/config_inc.php.sample
+mantis/default/config_inc1.php
+mantis/default/config_inc2.php
 
-mantis/config_inc.php          (you made this)
-mantis/default/config_inc1.php (already here)
-mantis/default/config_inc2.php (already here)
+Rename config_inc.php.sample to config_inc.php
 
-eg:
-	$g_hostname      = "localhost";
-	$g_port          = 3306;         # 3306 is default
-	$g_db_username   = "root";
-	$g_db_password   = "";
-	$g_database_name = "bugtracker";
-	$g_path          = "http://192.168.7.1/mantis/";
-	$g_icon_path     = $g_path."images/";
-	$g_absolute_path = "/usr/local/www/data/mantis/";
-	$g_use_iis = OFF;
-	$g_show_version   = ON;
-	$g_administrator_email  = "administrator@nowhere";
-	$g_webmaster_email      = "webmaster@nowhere";
-	$g_from_email           = "noreply@nowhere";
-	$g_to_email             = "nobody@nowhere";
-	$g_return_path_email    = "admin@nowhere";
+Open the file in an editor and edit the values to match your settings.  The
+sample file contains only essential settings.  There are many more that
+you can use to customize your Mantis installation.  See the customization.html
+file for in depth explanations.
 
-This example will overwrite the default values with those necessary for my
-setup.  The default config_inc1.php file has some comments which will make the
-process clear.  You can always add more globals in this file as well.
-
-The reason it is done this way is to facilitate upgrading from one version to
-another with a minimal of hassle.
+The file will overwrite the default values with those necessary for setup.
+The default config_inc1.php file has some comments which will help explain
+the variables.  You can always add/overwrite more globals in this file as
+well.
 
 You can load up admin_check.php3 to see if you set things up correctly.
 
 *** NOTE: admin_check sometimes reports the value of register_globals
 incorrectly.  Create a page with this line in it: <? phpinfo() ?>, save it
 with a ,php extension and load it up in your web browser.  It will, among a
-multitude of other things, have teh correct value of register_globals that you
+multitude of other things, have the correct value of register_globals that you
 are using.
 
 5. Mantis now uses only .php files.
