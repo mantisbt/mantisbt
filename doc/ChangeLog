@@ -13,6 +13,7 @@ Mantis ChangeLog
  * Fix #3396: Database upgrade 0.17-jf-10 failed to upgrade.
  * Fix #3400: Reopen a 'closed' bug, the value of 'resolution' is 'reopen' and can't be changed (now resolution / duplicate id can be edited)
  * Sec #3445: User see all information from all projects (if user has access to 0 projects)
+ * Fix #3449: Database upgrade script fails to detect some existing columns.
  * Fix #3467: Delete user ends up at user not found error.
  * Fix #3475: Reopen bug to custom status possibility.
  * Fix #3479: Reset account preferences of a user results in reset administrators (current) account.

@@ -8,7 +8,7 @@
 	# Changes applied to 0.15 database to give us 0.16
 
 	# --------------------------------------------------------
-	# $Id: 0_15_inc.php,v 1.4 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: 0_15_inc.php,v 1.5 2004-02-06 14:33:25 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,17 +16,47 @@
 
 	$upgrades = array();
 
-	$upgrades[] = new SQLUpgrade(
+	$upgrades[] = new FunctionUpgrade( 
 			'0.15-1',
 			'Add file type column to bug file table',
-			"ALTER TABLE $t_bug_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize"
-		);
+			'upgrade_0_15_1' );
+	
+	function upgrade_0_15_1() {
+		global $t_bug_file_table;
+		
+		if ( !db_field_exists( 'file_type', $t_bug_file_table ) ) {
+			$query = "ALTER TABLE $t_bug_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize";
+	
+			$result = @db_query( $query );
+	
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
-	$upgrades[] = new SQLUpgrade(
+	$upgrades[] = new FunctionUpgrade( 
 			'0.15-2',
 			'Add file type column to project file table',
-			"ALTER TABLE $t_project_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize"
-		);
+			'upgrade_0_15_2' );
+	
+	function upgrade_0_15_2() {
+		global $t_project_file_table;
+		
+		if ( !db_field_exists( 'file_type', $t_project_file_table ) ) {
+			$query = "ALTER TABLE $t_project_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize";
+	
+			$result = @db_query( $query );
+	
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
 	$upgrades[] = new SQLUpgrade(
 			'0.15-3',
@@ -73,12 +103,26 @@
 		);
 
 
-	$upgrades[] = new SQLUpgrade(
+	$upgrades[] = new FunctionUpgrade( 
 			'0.15-9',
 			'Add order field to project version table',
-			"ALTER TABLE $t_project_version_table ADD date_order DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL"
-		);
-
+			'upgrade_0_15_9' );
+	
+	function upgrade_0_15_9() {
+		global $t_project_version_table;
+		
+		if ( !db_field_exists( 'date_order', $t_project_version_table ) ) {
+			$query = "ALTER TABLE $t_project_version_table ADD date_order DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL";
+	
+			$result = @db_query( $query );
+	
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 	
 	return $upgrades;
 ?>
