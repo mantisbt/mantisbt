@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.70 2004-10-17 00:14:27 thraxisp Exp $
+	# $Id: bug_view_page.php,v 1.71 2005-01-15 02:40:51 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -254,12 +254,28 @@
 	?>
 
 	<!-- Product Version -->
+	<?php
+		$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
+			|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
+		if ( $t_show_version ) { 
+	?>
 	<td class="category">
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
 		<?php echo $t_bug->version ?>
 	</td>
+	<?php
+		} else {
+	?>
+	<td>
+	</td>
+	<td>
+	</td>
+	<?php 
+		}
+	?>
 </tr>
 
 
