@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.24 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: history_api.php,v 1.25 2004-07-18 09:58:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -238,6 +238,12 @@
 			case 'last_updated':
 				$t_field_localized = lang_get( 'last_update' );
 				break;
+			case 'summary':
+				$t_field_localized = lang_get( 'summary' );
+				break;
+			case 'duplicate_id':
+				$t_field_localized = lang_get( 'duplicate_id' );
+				break;
 		}
 
 		if ( NORMAL_TYPE != $p_type ) {
@@ -253,9 +259,6 @@
 					break;
 				case BUGNOTE_DELETED:
 					$t_note = lang_get( 'bugnote_deleted' ) . ": " . $p_old_value;
-					break;
-				case SUMMARY_UPDATED:
-					$t_note = lang_get( 'summary_updated' );
 					break;
 				case DESCRIPTION_UPDATED:
 					$t_note = lang_get( 'description_updated' );

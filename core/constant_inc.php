@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.21 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: constant_inc.php,v 1.22 2004-07-18 09:58:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -119,7 +119,6 @@
 	define( 'BUGNOTE_ADDED',				2 );
 	define( 'BUGNOTE_UPDATED',				3 );
 	define( 'BUGNOTE_DELETED',				4 );
-	define( 'SUMMARY_UPDATED',				5 );
 	define( 'DESCRIPTION_UPDATED',			6 );
 	define( 'ADDITIONAL_INFO_UPDATED',		7 );
 	define( 'STEP_TO_REPRODUCE_UPDATED',	8 );
