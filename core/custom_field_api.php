@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.43 2004-11-17 20:01:34 prichards Exp $
+	# $Id: custom_field_api.php,v 1.44 2004-12-15 11:08:32 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -751,12 +751,13 @@
 			$t_custom_field_string_table  = config_get( 'mantis_custom_field_string_table' );
 
 			$query = "SELECT f.name, f.type, f.access_level_r, f.default_value, f.type, s.value
-					FROM $t_custom_field_project_table AS p, $t_custom_field_table AS f
+					FROM $t_custom_field_project_table AS p INNER JOIN $t_custom_field_table AS f
+						ON p.field_id = f.id
 					LEFT JOIN $t_custom_field_string_table AS s
 						ON  p.field_id=s.field_id AND s.bug_id='$c_bug_id'
-					WHERE   p.project_id = '$c_project_id' AND p.field_id = f.id
+					WHERE   p.project_id = '$c_project_id'
 					ORDER BY p.sequence ASC, f.name ASC";
-
+					
 			$result = db_query( $query );
 
 			$t_row_count = db_num_rows( $result );
