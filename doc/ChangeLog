@@ -14,6 +14,7 @@ Mantis
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
+ * Added a global option to control what access levels can delete bugs.
  * Removed access_min and access threshold concepts from the user and project management.
 
 03.15.2002  -   0.17.1

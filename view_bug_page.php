@@ -284,7 +284,7 @@
 	<td>&nbsp;</td>
 <?php } # CLOSE form END ?>
 <?php # DELETE form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_delete_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>">
