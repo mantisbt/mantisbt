@@ -71,6 +71,7 @@
 	require( $t_core_dir . 'custom_attribute_api.php' );
 	require( $t_core_dir . 'bugnote_api.php' );
 	require( $t_core_dir . 'bug_api.php' );
+	require( $t_core_dir . 'project_api.php' );
 
 	if (ON == $g_use_jpgraph) {
 		require( $t_core_dir . 'graph_api.php' );

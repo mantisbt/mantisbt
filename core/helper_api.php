@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: helper_api.php,v 1.3 2002-08-25 20:23:18 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -79,94 +79,6 @@
 		if ( 0 == db_result( $result, 0, 0 ) ) {
 			print_header_redirect( 'main_page.php' );
 		}
-	}
-	# --------------------
-	# check to see if project exists by id
-	# if it doesn't exist then redirect to the main page
-	# otherwise let execution continue undisturbed
-	function check_project_exists( $p_project_id ) {
-		global $g_mantis_project_table;
-
-		$c_project_id = (integer)$p_project_id;
-
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_project_table ".
-				"WHERE id='$c_project_id'";
-		$result = db_query( $query );
-		if ( 0 == db_result( $result, 0, 0 ) ) {
-			print_header_redirect( 'main_page.php' );
-		}
-	}
-	# --------------------
-	# check to see if project exists by name
-	# if it doesn't exist then redirect to the main page
-	# otherwise let execution continue undisturbed
-	function is_duplicate_project( $p_name ) {
-		global $g_mantis_project_table;
-
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_project_table ".
-				"WHERE name='$p_name'";
-		$result = db_query( $query );
-		return ( 0 != db_result( $result, 0, 0 ) );
-	}
-	# --------------------
-	# retrieve the number of open assigned bugs to a user in a project
-	function get_assigned_open_bug_count( $p_project_id, $p_cookie_str ) {
-		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
-
-		$c_project_id	= (integer)$p_project_id;
-		$c_cookie_str	= addslashes($p_cookie_str);
-
-		$query ="SELECT id ".
-				"FROM $g_mantis_user_table ".
-				"WHERE cookie_string='$c_cookie_str'";
-		$result = db_query( $query );
-		$t_id = db_result( $result );
-
-		if ( '0000000' == $g_project_cookie_val ) {
-			$t_where_prj = '';
-		} else {
-			$t_where_prj = "project_id='$c_project_id' AND";
-		}
-		$t_res = RESOLVED;
-		$t_clo = CLOSED;
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bug_table ".
-				"WHERE $t_where_prj ".
-				"status<>'$t_res' AND status<>'$t_clo' AND ".
-				"handler_id='$t_id'";
-		$result = db_query( $query );
-		return db_result( $result, 0, 0 );
-	}
-	# --------------------
-	# retrieve the number of open reported bugs by a user in a project
-	function get_reported_open_bug_count( $p_project_id, $p_cookie_str ) {
-		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
-
-		$c_project_id	= (integer)$p_project_id;
-		$c_cookie_str	= addslashes($p_cookie_str);
-
-		$query ="SELECT id ".
-				"FROM $g_mantis_user_table ".
-				"WHERE cookie_string='$c_cookie_str'";
-		$result = db_query( $query );
-		$t_id = db_result( $result );
-
-		if ( '0000000' == $g_project_cookie_val ) {
-			$t_where_prj = '';
-		} else {
-			$t_where_prj = "project_id='$c_project_id' AND";
-		}
-		$t_res = RESOLVED;
-		$t_clo = CLOSED;
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bug_table ".
-				"WHERE $t_where_prj ".
-				"status<>'$t_res' AND status<>'$t_clo' AND ".
-				"reporter_id='$t_id'";
-		$result = db_query( $query );
-		return db_result( $result, 0, 0 );
 	}
 	### --------------------
 	# process the $p_string and convert filenames in the format

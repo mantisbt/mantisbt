@@ -17,8 +17,8 @@
 	$c_file_path	= addslashes($f_file_path);
 
 	$result = 0;
-	$duplicate = is_duplicate_project( $f_name );
-	if ( !empty( $f_name ) && !$duplicate ) {
+	$t_unique = project_is_unique( $f_name );
+	if ( !empty( $f_name ) && $t_unique ) {
 		# Add item
 		$query = "INSERT
 				INTO $g_mantis_project_table
@@ -43,7 +43,7 @@
 <?php
 	if ( $result ) {					# SUCCESS
 		PRINT $s_operation_successful.'<p>';
-	} else if ( $duplicate ) {			# DUPLICATE
+	} else if ( ! $t_unique ) {			# DUPLICATE
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT].'<p>';
 	} else {							# FAILURE
 		print_sql_error( $query );

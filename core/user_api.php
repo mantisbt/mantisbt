@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.4 2002-08-25 18:55:53 jfitzell Exp $
+	# $Id: user_api.php,v 1.5 2002-08-25 20:23:18 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -904,6 +904,64 @@
 		} else {
 			return $t_access_level2;
 		}
+	}
+	# --------------------
+	# retrieve the number of open assigned bugs to a user in a project
+	function get_assigned_open_bug_count( $p_project_id, $p_cookie_str ) {
+		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
+
+		$c_project_id	= (integer)$p_project_id;
+		$c_cookie_str	= addslashes($p_cookie_str);
+
+		$query ="SELECT id ".
+				"FROM $g_mantis_user_table ".
+				"WHERE cookie_string='$c_cookie_str'";
+		$result = db_query( $query );
+		$t_id = db_result( $result );
+
+		if ( '0000000' == $g_project_cookie_val ) {
+			$t_where_prj = '';
+		} else {
+			$t_where_prj = "project_id='$c_project_id' AND";
+		}
+		$t_res = RESOLVED;
+		$t_clo = CLOSED;
+		$query ="SELECT COUNT(*) ".
+				"FROM $g_mantis_bug_table ".
+				"WHERE $t_where_prj ".
+				"status<>'$t_res' AND status<>'$t_clo' AND ".
+				"handler_id='$t_id'";
+		$result = db_query( $query );
+		return db_result( $result, 0, 0 );
+	}
+	# --------------------
+	# retrieve the number of open reported bugs by a user in a project
+	function get_reported_open_bug_count( $p_project_id, $p_cookie_str ) {
+		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
+
+		$c_project_id	= (integer)$p_project_id;
+		$c_cookie_str	= addslashes($p_cookie_str);
+
+		$query ="SELECT id ".
+				"FROM $g_mantis_user_table ".
+				"WHERE cookie_string='$c_cookie_str'";
+		$result = db_query( $query );
+		$t_id = db_result( $result );
+
+		if ( '0000000' == $g_project_cookie_val ) {
+			$t_where_prj = '';
+		} else {
+			$t_where_prj = "project_id='$c_project_id' AND";
+		}
+		$t_res = RESOLVED;
+		$t_clo = CLOSED;
+		$query ="SELECT COUNT(*) ".
+				"FROM $g_mantis_bug_table ".
+				"WHERE $t_where_prj ".
+				"status<>'$t_res' AND status<>'$t_clo' AND ".
+				"reporter_id='$t_id'";
+		$result = db_query( $query );
+		return db_result( $result, 0, 0 );
 	}
 	# --------------------
 	# returns true if the username is unique, false if there is already a user
