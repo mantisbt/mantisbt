@@ -56,7 +56,7 @@
 	$s_new_account_message = "After logging into the site please change your password.  Also note that your password is stored via one way encryption.  The staff cannot retrieve your password.  If you forget your password it will have to be reset.\n\n";
 	$s_new_account_do_not_reply = "Do not reply to this message.\n";
 
-	$s_reset_request_msg = "There was a request to have your password reset".
+	$s_reset_request_msg = "There was a request to have your password reset";
 	$s_account_name_msg = "Your account name is";
 	$s_news_password_msg = "Here is your new password";
 

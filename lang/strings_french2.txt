@@ -56,7 +56,7 @@
 	$s_new_account_message = "Apr&egrave;s votre identification, veuillez changer votre mot de passe. Celui-ci est stock&eacute; crypt&eacute; aussi l'&eacute;quipe d'administration du syst&egrave;me ne pourra pas vous le transmettre si vous le perdez : il devra &ecirc;tre r&eacute;initialis&eacute;.\n\n";
 	$s_new_account_do_not_reply = "Merci de ne pas r&eacute;pondre &agrave; ce message.\n";
 
-	$s_reset_request_msg = "Une requ&ecirc;te a &eacute;t&eacute; enregistr&eacute;e pour r&eacute;initialiser votre mot de passe".
+	$s_reset_request_msg = "Une requ&ecirc;te a &eacute;t&eacute; enregistr&eacute;e pour r&eacute;initialiser votre mot de passe";
 	$s_account_name_msg = "Votre identifiant est";
 	$s_news_password_msg = "Voici votre nouveau mot de passe";
 

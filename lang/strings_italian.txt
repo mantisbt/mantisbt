@@ -58,7 +58,7 @@
 	$s_new_account_message = "Dopo il login si prega di cambiare la password. Da notare che la password e' salvata in maniera cifrata e neppure lo staff non puo' recuperarla. Nel caso la si dimentichi, e' necessario resettarla.\n\n";
 	$s_new_account_do_not_reply = "Non rispondere a questo messaggio.\n";
 
-	$s_reset_request_msg = "E' stato richiesto un reset della tua password".
+	$s_reset_request_msg = "E' stato richiesto un reset della tua password";
 	$s_account_name_msg = "Il Nome del tuo Acount e'";
 	$s_news_password_msg = "La tua nuova password";
 

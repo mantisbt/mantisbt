@@ -56,7 +56,7 @@
 	$s_new_account_message = "Etter du har logget inn, vennligst bytt passord. Passordet ditt lagres med enveis kryptering. Administrator kan ikke dekryptere passordet ditt. Dersom du glemmer passordet, må passordet genereres på nytt.\n\n";
 	$s_new_account_do_not_reply = "Ikke svar på denne meldingen.\n";
 
-	$s_reset_request_msg = "Det har kommet en forespørsel om å nullstille passordet ditt.".
+	$s_reset_request_msg = "Det har kommet en forespørsel om å nullstille passordet ditt.";
 	$s_account_name_msg = "Kontonavnet ditt er";
 	$s_news_password_msg = "Her er ditt nye passord";
 

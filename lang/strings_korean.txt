@@ -57,7 +57,7 @@
 	$s_new_account_message = "로그인 하신후 패스워드를 변경하십시요. 패스워드는 단방향암호화됩니다. 시스템 관리자도 패스워드를 알수 없습니다. 패스워드를 분실하게 되면,다시 설정되어야 합니다.\n\n";
 	$s_new_account_do_not_reply = "이 메세지에 대한 응답을 하지 마십시요.\n";
 
-	$s_reset_request_msg = "패스워드 초기화에 대한 요청이 있습니다.".
+	$s_reset_request_msg = "패스워드 초기화에 대한 요청이 있습니다.";
 	$s_account_name_msg = "당신의 계정은 ";
 	$s_news_password_msg = "당신의 새로운 패스워드입니다. ";
 

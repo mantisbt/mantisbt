@@ -56,7 +56,7 @@
 	$s_new_account_message = "Depois de entrar no site troque sua senha. Sua senha é armazenada criptografada. Não pode recuperá-la. Se perder a sua senha ela terá que ser re-iniciada.\n\n";
 	$s_new_account_do_not_reply = "Não Responda a esta Mensagem.\n";
 
-	$s_reset_request_msg = "Existe uma solicitação para que sua senha seja re-iniciada".
+	$s_reset_request_msg = "Existe uma solicitação para que sua senha seja re-iniciada";
 	$s_account_name_msg = "Sua Conta é";
 	$s_news_password_msg = "Sua Senha é";
 

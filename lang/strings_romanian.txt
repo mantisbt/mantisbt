@@ -56,7 +56,7 @@
 	$s_new_account_message = "Dupa conectarea pe site va rugam sa va schimbati parola. De remarcat ca parola este stocata cu criptare one way, deci nu poate fi extrasa. Daca o pierdeti, ea va trebui anulata.\n\n";
 	$s_new_account_do_not_reply = "Va rugam sa nu raspundeti la acest mesaj.\n";
 
-	$s_reset_request_msg = "Ati cerut ca parola sa fie anulata".
+	$s_reset_request_msg = "Ati cerut ca parola sa fie anulata";
 	$s_account_name_msg = "Numele de cont este";
 	$s_news_password_msg = "Noua parola este";
 

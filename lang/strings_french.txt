@@ -58,7 +58,7 @@
 	$s_new_account_message = "Après votre identification, veuillez changer votre mot de passe. Celui-ci est stocké crypté aussi l'équipe d'administration du système ne pourra pas vous le transmettre si vous le perdez : il devra être réinitialisé.\n\n";
 	$s_new_account_do_not_reply = "Merci de ne pas répondre à ce message.\n";
 
-	$s_reset_request_msg = "Une requête a été enregistrée pour réinitialiser votre mot de passe".
+	$s_reset_request_msg = "Une requête a été enregistrée pour réinitialiser votre mot de passe";
 	$s_account_name_msg = "Votre identifiant est";
 	$s_news_password_msg = "Voici votre nouveau mot de passe";
 

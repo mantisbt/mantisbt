@@ -57,7 +57,7 @@
 	$s_new_account_message = "Po zalogowaniu siê, prosimy o zmianê swojego has³a. Pamiêtaj, tylko Ty znasz swoje has³o!  Administrator nie mo¿e odzyskaæ twojego has³a. Je¶li zapomnisz has³a, musi byæ przypisane nowe has³o.\n\n";
 	$s_new_account_do_not_reply = "Nie wysy³aj odpowiedzi na ten list.\n";
 
-	$s_reset_request_msg = "To jest odpowied¼ na Twoj± pro¶bê o nowe has³o.".
+	$s_reset_request_msg = "To jest odpowied¼ na Twoj± pro¶bê o nowe has³o.";
 	$s_account_name_msg = "Twoje konto to:";
 	$s_news_password_msg = "To jest twoje nowe has³o";
 

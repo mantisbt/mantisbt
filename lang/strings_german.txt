@@ -57,7 +57,7 @@
 	$s_new_account_message = "Ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.\n\n";
 	$s_new_account_do_not_reply = "Bitte beantworten Sie diese Nachricht nicht.\n";
 
-	$s_reset_request_msg = "Es gab eine Anfrage, Ihr Passwort zurückzusetzen".
+	$s_reset_request_msg = "Es gab eine Anfrage, Ihr Passwort zurückzusetzen";
 	$s_account_name_msg = "Ihr Bnutzername ist";
 	$s_news_password_msg = "Hier ist Ihr neues Passwort";
 

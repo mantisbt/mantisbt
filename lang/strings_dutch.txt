@@ -56,7 +56,7 @@
 	$s_new_account_message = "Verander uw wachtwoord alstublieft na het inloggen op de pagina.  Vergeet ook niet dat uw wachtwoord wordt opgeslagen via one way encryption.  De staf kan u wachtwoord niet achterhalen.  Als u uw wachtwoord vergeet zal het moeten terug gezet op de begininstellingen.\n\n";
 	$s_new_account_do_not_reply = "Niet antwoorden op dit bericht alstublieft.\n";
 
-	$s_reset_request_msg = "Er was een verzoek tot resetten van uw wachtwoord".
+	$s_reset_request_msg = "Er was een verzoek tot resetten van uw wachtwoord";
 	$s_account_name_msg = "Uw account naam is";
 	$s_news_password_msg = "Hier is uw nieuwe wachtwoord";
 

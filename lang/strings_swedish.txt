@@ -56,7 +56,7 @@
 	$s_new_account_message = "Byt lösenord när du har loggat in på sajten.  Ditt lösenord sparas med envägskryptering.  Administratören kan inte se ditt lösenord.  Om du glömmer bort lösenordet måste det nollställas.\n\n";
 	$s_new_account_do_not_reply = "Svara inte på detta meddelande.\n";
 
-	$s_reset_request_msg = "Det har kommet en begäran om att nollställa ditt lösenord".
+	$s_reset_request_msg = "Det har kommet en begäran om att nollställa ditt lösenord";
 	$s_account_name_msg = "Ditt användarnamn är";
 	$s_news_password_msg = "Här är ditt nya lösenord";
 
