@@ -14,7 +14,7 @@
 	# Look in configuration.html for more detailed comments.
 
 	#error_reporting(E_ALL ^ E_NOTICE);
-	#error_reporting(E_ALL);
+	error_reporting(E_ALL);
 
 	################################
 	### Mantis Database Settings ###
@@ -99,6 +99,35 @@
 	# This disables the automatic generation of mailto: links
 	$g_hide_user_email           = 0;
 
+	# Set to 0 as on Windows systems, as long as php-mail-function has its
+	# bcc-bug (~PHP 4.0.6)
+	$g_use_bcc                   = 1;
+
+	# phpMailer instead of standard mail() function (REQUIRES PHP 4.x.x)
+	# Get the phpMailer-package from http://phpmailer.sourceforge.net
+	# The installation is very simple you only need 2 plain text php-files
+	#  class.smtp.php
+	#  class.phpmailer.php
+
+	# Copy these files to your php-include-dir i.e. "c:\php\includes" or
+	# "/usr/lib/php/includes"
+	# and add this path to the "include_path"-entry  in the php.ini file.
+	# The installation is described in the readme and there is also a simple
+	# example.
+	# PhpMailer comes with a detailed documentation in phpdoc format.
+
+	$g_use_phpMailer = 0;
+
+	# select the method to mail by:
+	# 0 - mail()
+	# 1 - sendmail
+	# 2 - SMTP
+	$g_phpMailer_method = 0;
+
+	# This option allows you to use a remote SMTP host.  Must use the phpMailer script
+	# Name of smtp host, needed for phpMailer, taken from php.ini
+	$g_smtp_host     = "localhost";
+
 	################################
 	### Mantis Language Settings ###
 	################################
@@ -152,7 +181,7 @@
 
 	# --- jpgraph settings --- #
 	# Initial Version from Duncan Lisset
-	# 
+	#
 	# To use the Jpgraph addon you need the JPGRAPH package from
 	# http://www.aditus.nu/jpgraph/index.php
 	# You can place the package whereever you want, but you have
@@ -194,7 +223,7 @@
 	############################
 
 	# --- Limit News Items ------------
-	$g_news_view_limit = 5;
+	$g_news_view_limit = 7;
 
 	##################################
 	### Mantis Default Preferences ###
@@ -259,7 +288,7 @@
 
 	# --- file upload settings --------
 	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
-	$g_allow_file_upload    = 0;
+	$g_allow_file_upload    = 1;
 
 	# Upload destination: specify actual location in project settings
 	# 1 = "disk"
@@ -350,13 +379,13 @@
 	$g_manage_cookie           = $g_cookie_prefix."_MANAGE_COOKIE";
 
 	# --- cookie values ---------------
-	$g_string_cookie_val        = "";
-	$g_project_cookie_val       = "";
-	$g_view_all_cookie_val      = "";
-	$g_view_reported_cookie_val = "";
-	$g_view_assigned_cookie_val = "";
-	$g_view_unassigned_cookie_val = "";
-	$g_manage_cookie_val        = "";
+	$g_string_cookie_val           = "";
+	$g_project_cookie_val          = "";
+	$g_view_all_cookie_val         = "";
+	$g_view_reported_cookie_val    = "";
+	$g_view_assigned_cookie_val    = "";
+	$g_view_unassigned_cookie_val  = "";
+	$g_manage_cookie_val           = "";
 
 	if ( isset( $HTTP_COOKIE_VARS[$g_string_cookie] ) ) {
 		$g_string_cookie_val         = $HTTP_COOKIE_VARS[$g_string_cookie];
@@ -653,16 +682,16 @@
 	#----------------------------------
 	# summary
 	$g_summary_page                   = $g_path."summary_page".$g_php;
-        $g_summary_jpgraph_function                    = $g_absolute_path."summary_graph_functions".$g_php;
-        $g_summary_jpgraph_page                        = $g_path."summary_jpgraph_page".$g_php;
-        $g_summary_jpgraph_cumulative_bydate           = "summary_graph_cumulative_bydate".$g_php;
-        $g_summary_jpgraph_bydeveloper            = "summary_graph_bydeveloper".$g_php;
-        $g_summary_jpgraph_byreporter               = "summary_graph_byreporter".$g_php;
-        $g_summary_jpgraph_byseverity                = "summary_graph_byseverity".$g_php;
-        $g_summary_jpgraph_bystatus                   = "summary_graph_bystatus".$g_php;
-        $g_summary_jpgraph_byresolution             = "summary_graph_byresolution".$g_php;
-        $g_summary_jpgraph_bycategory               = "summary_graph_bycategory".$g_php;
-        $g_summary_jpgraph_bypriority                  = "summary_graph_bypriority".$g_php;
+	$g_summary_jpgraph_function                    = $g_absolute_path."summary_graph_functions".$g_php;
+	$g_summary_jpgraph_page                        = $g_path."summary_jpgraph_page".$g_php;
+	$g_summary_jpgraph_cumulative_bydate           = "summary_graph_cumulative_bydate".$g_php;
+	$g_summary_jpgraph_bydeveloper            = "summary_graph_bydeveloper".$g_php;
+	$g_summary_jpgraph_byreporter               = "summary_graph_byreporter".$g_php;
+	$g_summary_jpgraph_byseverity                = "summary_graph_byseverity".$g_php;
+	$g_summary_jpgraph_bystatus                   = "summary_graph_bystatus".$g_php;
+	$g_summary_jpgraph_byresolution             = "summary_graph_byresolution".$g_php;
+	$g_summary_jpgraph_bycategory               = "summary_graph_bycategory".$g_php;
+	$g_summary_jpgraph_bypriority                  = "summary_graph_bypriority".$g_php;
 	#----------------------------------
 
 	#----------------------------------

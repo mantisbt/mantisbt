@@ -55,7 +55,9 @@
 	# build the bcc list
 	function build_bcc_list( $p_bug_id, $p_notify_type ) {
 		global $g_mantis_bug_table, $g_mantis_user_table,
-				$g_mantis_project_user_list_table;
+				$g_mantis_project_user_list_table,
+				$g_notify_developers_on_new,
+				$g_use_bcc, $g_use_phpMailer;
 
 		# setup the array
 		$send_arr = array();
@@ -63,8 +65,8 @@
 
 		### Get Reporter and Handler IDs
 		$query = "SELECT reporter_id, handler_id
-				FROM $g_mantis_bug_table
-				WHERE id='$p_bug_id'";
+		    FROM $g_mantis_bug_table
+		    WHERE id='$p_bug_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v" );
@@ -78,65 +80,76 @@
 
 		### Get Handler Email
 		if ( $v_handler_id > 0 ) {
-			$t_handler_email = get_user_info( $v_handler_id, "email" );
-			$t_notify_handler = get_user_pref_info( $v_handler_id, $p_notify_type );
+			$t_handler_email = get_user_info( $v_handler_id,
+			"email" );
+			$t_notify_handler = get_user_pref_info(
+			$v_handler_id, $p_notify_type );
 
 			if ( $t_notify_handler==1 ) {
-				if ( !check_duplicate($send_arr,$t_handler_email) ) {
+				if (!check_duplicate($send_arr,$t_handler_email) ) {
 					$send_arr[$send_counter++] = $t_handler_email;
 				}
 			}
 		}
 
-		# get the project id
-		$p_project_id = get_bug_project_id( $p_bug_id );
+		### Get Developer Email
+		if ( $g_notify_developers_on_new==1 ) {
+			# get the project id
+			$p_project_id = get_bug_project_id( $p_bug_id );
 
-		$t_dev = DEVELOPER;
-		$query = "SELECT id, email
-				FROM $g_mantis_user_table
-				WHERE access_level>=$t_dev AND
-					enabled='1'";
-		$result = db_query( $query );
+			$t_dev = DEVELOPER;
 
-		# if the user's notification is on then add to the list
-		$user_count = db_num_rows( $result );
-		for ($i=0;$i<$user_count;$i++) {
-			$row = db_fetch_array( $result );
+			### Global developer role
+			$query = "SELECT id, email
+						FROM $g_mantis_user_table
+						WHERE access_level>=$t_dev AND
+								enabled='1'";
+			$result = db_query( $query );
 
-			$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
-			if ( $t_notify==1 ) {
-				if ( !check_duplicate($send_arr,$row["email"]) ) {
-					$send_arr[$send_counter++] = $row["email"];
+			# if the user's notification is on then add to the list
+			$user_count = db_num_rows( $result );
+			for ($i=0;$i<$user_count;$i++) {
+				$row = db_fetch_array( $result );
+
+				$t_notify = get_user_pref_info( $row["id"],
+				$p_notify_type );
+				if ( $t_notify==1 ) {
+					if ( !check_duplicate($send_arr,$row["email"]) ) {
+						$send_arr[$send_counter++] = $row["email"];
+					}
+				}
+			}
+
+			### Project specific developer role
+			$query = "SELECT DISTINCT user_id
+					FROM $g_mantis_project_user_list_table
+					WHERE project_id=$p_project_id AND
+							access_level>=$t_dev";
+			$result = db_query( $query );
+			$user_count = db_num_rows( $result );
+			for ($i=0;$i<$user_count;$i++) {
+				$row = db_fetch_array( $result );
+
+				$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
+
+				if ( $t_notify==1 ) {
+					if ( !check_duplicate($send_arr,get_user_info( $row["user_id"], "email" )) ) {
+						$send_arr[$send_counter++] = get_user_info( $row["user_id"], "email" );
+					}
 				}
 			}
 		}
 
-		$query = "SELECT DISTINCT user_id
-				FROM $g_mantis_project_user_list_table
-				WHERE project_id=$p_project_id AND
-					access_level>=$t_dev";
-		$result = db_query( $query );
-		$user_count = db_num_rows( $result );
-		for ($i=0;$i<$user_count;$i++) {
-			$row = db_fetch_array( $result );
+		$t_bcc = ($g_use_bcc && !$g_use_phpMailer) ? "Bcc: " : "";
+		## win-bcc-bug
 
-			$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
-
-			if ( $t_notify==1 ) {
-				if ( !check_duplicate($send_arr,get_user_info( $row["user_id"], "email" )) ) {
-					$send_arr[$send_counter++] = get_user_info( $row["user_id"], "email" );
-				}
-			}
-		}
-
-		$t_bcc = "Bcc: ";
 		for ($i=0; $i<count($send_arr); $i++) {
 			$t_bcc .= $send_arr[$i].", ";
 		}
 
 		# chop off the last comma and add a \n
 		if ( strlen( $t_bcc )>5 ) {
-			return substr( $t_bcc, 0, strlen( $t_bcc )-2 )."\n";
+			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? "\n" : "");  ## win-bcc-bug
 		} else {
 			return "";
 		}
@@ -403,7 +416,8 @@
 	# --------------------
 	### Send bug info to reporter and handler
 	function email_bug_info( $p_bug_id, $p_message, $p_headers="" ) {
-		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table, $g_to_email;
+		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table,
+				$g_to_email, $g_use_bcc;
 
 		# build subject
 		$p_subject = email_build_subject( $p_bug_id );
@@ -417,8 +431,17 @@
 		$res1 = 1;
 		$res2 = 1;
 
-		### Send Email
-		$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers );
+		## win-bcc-bug
+		if ( $g_use_bcc==0 ) {
+			## list of receivers
+			$to = $g_to_email.(($p_headers && $g_to_email) ? ", " : "").$p_headers;
+			# echo "<br>email_bug_info::Sending email to :" . $to;
+			$res1 = email_send( $to, $p_subject, $t_message, "" );
+		} else {
+			### Send Email
+			# echo "<br>email_bug_info::Sending email to : ".$g_to_email;
+			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers );
+		}
 	}
 	# --------------------
 	# Send to only the id
@@ -454,37 +477,83 @@
 	# --------------------
 	# this function sends the actual email
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
-		global $g_from_email, $g_enable_email_notification, $g_return_path_email;
+		global $g_from_email, $g_enable_email_notification,
+				$g_return_path_email,
+				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host;
 
-		if ( $g_enable_email_notification == 1 ) {
+		# short-circuit if no emails should be sent
+		if ( $g_enable_email_notification == 0 ) {
+			return;
+		}
 
+		$t_recipient = trim( $p_recipient );
+		$t_subject   = trim( $p_subject );
+		$t_message   = trim( $p_message );
+
+		# @@@ for debugging only
+		#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
+		#exit;
+		#echo "<br>xxxRecipient =".$t_recipient."<br>";
+		#echo "Headers =".nl2br($t_headers)."<br>";
+		#echo $t_subject."<br>";
+		#echo nl2br($t_message)."<br>";
+		#exit;
+
+		if ( $g_use_phpMailer==1 )  {
+			# Visit http://phpmailer.sourceforge.net
+			# if you have problems with phpMailer
+
+			include("class.phpmailer.php");
+
+			$mail = new phpmailer;
+
+			# Select the method to send mail
+			switch ( $g_phpMailer_method ) {
+				case 0: $mail->IsMail();
+						break;
+				case 1: $mail->IsSendmail();
+						break;
+				case 2: $mail->IsSMTP();
+						break;
+			}
+			$mail->IsHTML(false);              # set email format to plain text
+			$mail->WordWrap = 80;              # set word wrap to 50 characters
+			$mail->Priority = 0;               # Urgent = 1, Not Urgent = 5, Disable = 0
+			$mail->Host     = $g_smtp_host;
+			$mail->From     = $g_from_email;
+			$mail->FromName = "";
+
+			$mail->AddAddress($t_recipient, "");
+
+			# add to the BCC list
+			$t_bcc_list = split(",", $p_header);
+			while(list(, $t_bcc) = each($t_bcc_list)) {
+				$mail->AddBCC($t_bcc, "");
+			}
+
+			$mail->Subject = $t_subject;
+			$mail->Body    = "\n".$t_message;
+
+			if( !$mail->Send() ) {
+				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br>";
+				PRINT "Mailer Error: ".$mail->ErrorInfo."<br>";
+				exit;
+			}
+		} else {
 			# Visit http://www.php.net/manual/function.mail.php
 			# if you have problems with mailing
 
-			$t_recipient = trim( $p_recipient );
-			$t_subject = trim( $p_subject );
-			$t_message = trim( $p_message );
-
 			$t_headers = "From: $g_from_email\n";
 			#$t_headers .= "Reply-To: $p_reply_to_email\n";
+
 			$t_headers .= "X-Sender: <$g_from_email>\n";
 			$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
-			$t_headers .= "X-Priority: 0\n"; # Urgent = 1, Not Urgent = 5, Disable = 0
-			$t_headers .= "Return-Path: <$g_return_path_email>\n"; # return email if error
+			$t_headers .= "X-Priority: 0\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
+			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
 			# If you want to send foreign charsets
-			#$t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
+			# $t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
 
 			$t_headers .= $p_header;
-
-			# @@@ for debugging only
-			#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
-			#exit;
-			#echo $t_recipient."<br>";
-			#echo nl2br($t_headers)."<br>";
-			#echo $t_subject."<br>";
-			#echo nl2br($t_message)."<br>";
-			#exit;
-
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( !$result ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient";
