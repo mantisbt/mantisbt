@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.114 2004-07-30 12:46:09 vboctor Exp $
+	# $Id: html_api.php,v 1.115 2004-08-01 08:56:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -889,11 +889,9 @@
 			# MOVE button
 			html_button_bug_move( $p_bug_id );
 
-			# MASC RELATIONSHIP
-			# CREATE CHILD button
-			PRINT '</td><td>';
-			html_button_bug_create_child( $p_bug_id );
-			# MASC RELATIONSHIP
+			# # CREATE CHILD button
+			# PRINT '</td><td>';
+			# html_button_bug_create_child( $p_bug_id );
 		} else {
 			# REOPEN button
 			html_button_bug_reopen( $p_bug_id );

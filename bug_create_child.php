@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_create_child.php,v 1.2 2004-07-18 14:40:46 vboctor Exp $
+	# $Id: bug_create_child.php,v 1.3 2004-08-01 08:56:37 vboctor Exp $
 	# --------------------------------------------------------
 
-	# MASC RELATIONSHIP
-
 	require_once( 'core.php' );
+	
+	access_denied();
 
 	$t_core_path = config_get( 'core_path' );
 
@@ -53,6 +53,4 @@
 	bug_update_date( $f_bug_id );
 
 	print_header_redirect_update( $t_new_bug_id );
-
-	# MASC RELATIONSHIP
 ?>
