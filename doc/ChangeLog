@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2005.02.xx  -  0.19.3
+2005.03.xx  -  1.0.0rc1
 
 - Support customizing which fields/custom fields should be shown in the View Issues page via custom functions (vboctor)
 - Support for dynamically populated custom fields (use =versions_enum or =categories_enum or =anyfunc in possible values field) (vboctor)
