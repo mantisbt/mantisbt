@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.82 2004-05-26 05:03:53 int2str Exp $
+	# $Id: print_api.php,v 1.83 2004-05-26 05:25:32 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -749,8 +749,8 @@
 	# --------------------
 	# prints a link to VIEW a bug given an ID
 	#  account for the user preference and site override
-	function print_bug_link( $p_bug_id ) {
-		PRINT string_get_bug_view_link( $p_bug_id );
+	function print_bug_link( $p_bug_id, $p_detail_info = true ) {
+		PRINT string_get_bug_view_link( $p_bug_id, null, $p_detail_info );
 	}
 
 	# --------------------

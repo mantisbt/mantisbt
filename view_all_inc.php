@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.140 2004-05-24 08:20:34 int2str Exp $
+	# $Id: view_all_inc.php,v 1.141 2004-05-26 05:25:18 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -230,10 +230,10 @@
 			print_status_icon( $v_priority );
 		}
 	?> </td>
-	<td> <?php 
+	<td class="center"> <?php 
 		# -- Bug ID and details link -- 
 
-		print_bug_link( $v_id );
+		print_bug_link( $v_id, false );
 	?> </td>
 <?php
 		# -- Sponsorship Amount -- 
@@ -246,7 +246,7 @@
 			echo "</td>\n";
 		}
 ?>
-	<td> <?php
+	<td class="center"> <?php
 		# -- Bugnote count --
 
 		if ( $bugnote_count > 0 ) {
@@ -281,7 +281,7 @@
 			echo "</td>\n";
 		}
 ?>
-	<td> <?php 
+	<td class="center"> <?php 
 		# -- Category -- 
 
 		# type project name if viewing 'all projects'
@@ -294,12 +294,12 @@
 
 		echo string_display( $v_category );
 	?> </td>
-	<td> <?php 
+	<td class="center"> <?php 
 		# -- Severity --
 
 		print_formatted_severity_string( $v_status, $v_severity );
 	?> </td>
-	<td> <?php 
+	<td class="center"> <?php 
 		# -- Status / Handler --
 
 		printf( '<u><a title="%s">%s</a></u>'
@@ -315,7 +315,7 @@
 			echo ')';
 		}
 	?> </td>
-	<td> <?php 
+	<td class="center"> <?php 
 		# -- Last Updated -- 
 	
 		if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {

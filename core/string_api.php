@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.49 2004-05-23 13:50:44 vboctor Exp $
+	# $Id: string_api.php,v 1.50 2004-05-26 05:25:32 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -309,14 +309,22 @@
 	# --------------------
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_view_link( $p_bug_id, $p_user_id = null ) {
+	function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info = true ) {
+		$t_link = "";
+
 		if ( bug_exists( $p_bug_id ) ) {
 			$t_summary	= string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 			$t_status	= string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
-			return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '" title="[' . $t_status . '] ' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
+			$t_link		= '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
+			if ( $p_detail_info ) {
+				$t_link .=  ' title="[' . $t_status . '] ' . $t_summary . '"';
+			}
+			$t_link .= '>' . bug_format_id( $p_bug_id ) . '</a>';
 		} else {
-			return bug_format_id( $p_bug_id );
+			$t_link = bug_format_id( $p_bug_id );
 		}
+
+		return $t_link;
 	}
 
 	# --------------------
