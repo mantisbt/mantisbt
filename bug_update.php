@@ -113,24 +113,24 @@
 
 	# log changes
 	$t_user_id = get_current_user_field( 'id' );
-	history_log_event_direct( $c_id, 'category',        $h_category, $c_category, $t_user_id );
-	history_log_event_direct( $c_id, 'severity',        $h_severity, $c_severity, $t_user_id );
-	history_log_event_direct( $c_id, 'reproducibility', $h_reproducibility, $c_reproducibility, $t_user_id );
-	history_log_event_direct( $c_id, 'priority',        $h_priority, $c_priority, $t_user_id );
-	history_log_event_direct( $c_id, 'status',          $h_status, $c_status, $t_user_id );
-	history_log_event_direct( $c_id, 'projection',      $h_projection, $c_projection, $t_user_id );
-	history_log_event_direct( $c_id, 'duplicate_id',    $h_duplicate_id, $c_duplicate_id, $t_user_id );
-	history_log_event_direct( $c_id, 'resolution',      $h_resolution, $c_resolution, $t_user_id );
-	history_log_event_direct( $c_id, 'handler_id',      $h_handler_id, $c_handler_id, $t_user_id );
-	history_log_event_direct( $c_id, 'reporter_id',     $h_reporter_id, $c_reporter_id, $t_user_id );
-	history_log_event_direct( $c_id, 'eta',             $h_eta, $c_eta, $t_user_id );
-	history_log_event_direct( $c_id, 'summary',         $h_summary, $c_summary, $t_user_id );
-	history_log_event_direct( $c_id, 'os',              $h_os, $c_os, $t_user_id );
-	history_log_event_direct( $c_id, 'os_build',        $h_os_build, $c_os_build, $t_user_id );
-	history_log_event_direct( $c_id, 'platform',        $h_platform, $c_platform, $t_user_id );
-	history_log_event_direct( $c_id, 'build',           $h_build, $c_build, $t_user_id );
-	history_log_event_direct( $c_id, 'version',         $h_version, $c_version, $t_user_id );
-	history_log_event_direct( $c_id, 'view_state',      $h_view_state, $c_view_state, $t_user_id );
+	history_log_event_direct( $c_id, 'category',        $h_category, $f_category, $t_user_id );
+	history_log_event_direct( $c_id, 'severity',        $h_severity, $f_severity, $t_user_id );
+	history_log_event_direct( $c_id, 'reproducibility', $h_reproducibility, $f_reproducibility, $t_user_id );
+	history_log_event_direct( $c_id, 'priority',        $h_priority, $f_priority, $t_user_id );
+	history_log_event_direct( $c_id, 'status',          $h_status, $f_status, $t_user_id );
+	history_log_event_direct( $c_id, 'projection',      $h_projection, $f_projection, $t_user_id );
+	history_log_event_direct( $c_id, 'duplicate_id',    $h_duplicate_id, $f_duplicate_id, $t_user_id );
+	history_log_event_direct( $c_id, 'resolution',      $h_resolution, $f_resolution, $t_user_id );
+	history_log_event_direct( $c_id, 'handler_id',      $h_handler_id, $f_handler_id, $t_user_id );
+	history_log_event_direct( $c_id, 'reporter_id',     $h_reporter_id, $f_reporter_id, $t_user_id );
+	history_log_event_direct( $c_id, 'eta',             $h_eta, $f_eta, $t_user_id );
+	history_log_event_direct( $c_id, 'summary',         $h_summary, $f_summary, $t_user_id );
+	history_log_event_direct( $c_id, 'os',              $h_os, $f_os, $t_user_id );
+	history_log_event_direct( $c_id, 'os_build',        $h_os_build, $f_os_build, $t_user_id );
+	history_log_event_direct( $c_id, 'platform',        $h_platform, $f_platform, $t_user_id );
+	history_log_event_direct( $c_id, 'build',           $h_build, $f_build, $t_user_id );
+	history_log_event_direct( $c_id, 'version',         $h_version, $f_version, $t_user_id );
+	history_log_event_direct( $c_id, 'view_state',      $h_view_state, $f_view_state, $t_user_id );
 
 	if ( $h_description != $c_description ) {
 		history_log_event_special( $c_id, DESCRIPTION_UPDATED );
