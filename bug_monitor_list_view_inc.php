@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.2 2003-02-24 03:22:33 vboctor Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.3 2003-02-24 04:37:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,12 +17,13 @@
 <?php
 	$c_bug_id = db_prepare_int( $f_bug_id );
 	$t_bug_monitor_table = config_get( 'mantis_bug_monitor_table' );
+	$t_user_table = config_get( 'mantis_user_table' );
 
 	# get the bugnote data
-	$query = "SELECT user_id 
-			FROM $t_bug_monitor_table
-			WHERE bug_id=$c_bug_id
-			ORDER BY user_id";
+	$query = "SELECT user_id
+			FROM $t_bug_monitor_table m, $t_user_table u
+			WHERE m.bug_id=$c_bug_id AND m.user_id = u.id
+			ORDER BY u.username";
 	$result = db_query($query);
 	$num_users = db_num_rows($result);
 
