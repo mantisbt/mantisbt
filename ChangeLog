@@ -1,5 +1,9 @@
 Mantis
 
+12.01.2001  -   0.16.1
+
+ * Fixed SQL error when reporting bug in a private project.
+
 11.27.2001  -   0.16.0
 
  * Fixed minor HTML errors in core_html_API.php.

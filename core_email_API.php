@@ -153,7 +153,7 @@
 			if ( PRIVATE == $v_view_state ) {
 				$query = "SELECT id
 							FROM $g_mantis_user_table
-							WHERE access_level>=$v_access_min_val AND
+							WHERE access_level>=$v_access_min AND
 									enabled=1";
 			} else {
 				$query = "SELECT id
