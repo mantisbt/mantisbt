@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.181 2004-07-24 14:04:45 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.182 2004-07-24 15:20:36 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1142,6 +1142,19 @@
 
 	# Whether to start editng a custom field immediately after creating it
 	$g_custom_field_edit_after_create = ON;
+
+
+	#################
+	# Custom Menus
+	#################
+
+	# Add custom options to the main menu.  For example:
+	# $g_main_menu_custom_options = array(	array( "My Link",  MANAGER,       'my_link.php' ),
+	#					array( "My Link2", ADMINISTRATOR, 'my_link2.php' ) );
+	# Note that if the caption is found in custom_strings_inc.php, then it will be replaced by the
+	# translated string.  Options will only be added to the menu if the current logged in user has
+	# the appropriate access level.
+	$g_main_menu_custom_options = array ();
 
 	##########
 	# Icons

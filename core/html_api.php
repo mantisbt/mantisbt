@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.112 2004-07-24 14:17:12 vboctor Exp $
+	# $Id: html_api.php,v 1.113 2004-07-24 15:20:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -369,6 +369,22 @@
 	# HTML Menu API
 	###########################################################################
 
+	function prepare_custom_menu_options( $p_config ) {
+		$t_custom_menu_options = config_get( $p_config );
+		$t_options = array();
+
+		foreach( $t_custom_menu_options as $t_custom_option ) {
+			$t_access_level = $t_custom_option[1];
+			if ( access_has_project_level( $t_access_level ) ) {
+				$t_caption = lang_get_defaulted( $t_custom_option[0] );
+				$t_link = $t_custom_option[2];
+				$t_options[] = "<a href=\"$t_link\">$t_caption</a>";
+			}
+		}
+
+		return $t_options;
+	}
+
 	# --------------------
 	# Print the main menu
 	function print_menu() {
@@ -432,6 +448,10 @@
 				if ( OFF == $t_protected ) {
 					$t_menu_options[] = '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a>';
 				}
+
+				# Add custom options
+				$t_custom_options = prepare_custom_menu_options( 'main_menu_custom_options' );
+				$t_menu_options = array_merge( $t_menu_options, $t_custom_options );
 
 				# Logout (no if anonymously logged in)
 				if ( !current_user_is_anonymous() ) {
