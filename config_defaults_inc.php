@@ -727,7 +727,6 @@
 	###########################
 	#----------------------------------
 	# Use compression of generated html if browser supports it
-	# Only effective if PHP 4.0.4 or later is used.
 	$g_compress_html		= ON;
 	#----------------------------------
 
