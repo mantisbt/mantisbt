@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.213 2004-09-25 14:33:32 prichards Exp $
+	# $Id: config_defaults_inc.php,v 1.214 2004-09-26 09:48:51 prichards Exp $
 	# --------------------------------------------------------
 
 
@@ -32,8 +32,12 @@
 	# --- database variables ---------
 
 	# set these values to match your setup
+	
+	# hostname should be either a hostname or connection string to supply to adodb.
+	# For example, if you would like to connect to a mysql server on the local machine,
+	# set hostname to 'localhost', and db_type to 'mysql'.
+	# If you need to supply a port to connect to, set hostname as 'localhost:3306'.
 	$g_hostname				= 'localhost';
-	$g_port					= 3306;		 # 3306 is default
 	$g_db_username			= 'root';
 	$g_db_password			= '';
 	$g_database_name		= 'bugtracker';

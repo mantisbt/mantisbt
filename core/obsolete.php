@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.27 2004-08-15 23:13:02 thraxisp Exp $
+	# $Id: obsolete.php,v 1.28 2004-09-26 09:49:25 prichards Exp $
 	# --------------------------------------------------------
 
 	### Obsolete API ###
@@ -96,5 +96,7 @@
 	config_obsolete( 'status_pulldown_enum_mask_string', '' );
 	config_obsolete( 'to_email', '' );
 	config_obsolete( 'use_bcc', '' );
-	
+
+#removed in 0.19.1
+	config_obsolete( 'port', 'hostname');
 ?>
