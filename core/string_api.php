@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.42 2004-01-13 13:07:15 vboctor Exp $
+	# $Id: string_api.php,v 1.43 2004-02-22 04:41:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -18,12 +18,33 @@
 	# String Processing API
 	###########################################################################
 
+	### --------------------
+	# Preserve spaces at beginning of lines.
+	# Lines must be separated by \n rather than <br />
+	function string_preserve_spaces_at_bol( $p_string ) {
+		$lines = explode("\n", $p_string);
+		for ( $i = 0; $i < count( $lines ); $i++ ) {
+			$count = 0;
+			$prefix = '';
+			while ( substr($lines[$i], $count, 1) == ' ' ) {
+			  $count++;
+			}
+			for ($j = 0; $j < $count; $j++) {
+			  $prefix .= '&nbsp;';
+			}
+			$lines[$i] = $prefix . substr( $lines[$i], $count );
+
+		}
+		$result = implode( "\n", $lines );
+		return $result;
+	}
 	# --------------------
 	# Prepare a string for display to HTML
 	function string_display( $p_string ) {
 		$p_string = string_strip_hrefs( $p_string );
 		$p_string = htmlspecialchars( $p_string );
 		$p_string = string_restore_valid_html_tags( $p_string );
+		$p_string = string_preserve_spaces_at_bol( $p_string );
 		$p_string = nl2br( $p_string );
 
 		return $p_string;

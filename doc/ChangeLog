@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.2
 
+ * Enh #1088: formatting of text in bugnotes, description areas.
  * Enh #1649: Replace 'Assign to Me' with 'Assign To:' and dropdown of developers.
  * Enh #3362: Generic email notifications.
  * Enh #3548: Support RSS for news syndication.
