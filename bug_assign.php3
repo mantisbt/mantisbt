@@ -14,6 +14,12 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( !access_level_check_greater_or_equal( "developer" ) ) {
+		### need to replace with access error page
+		header( "Location: $g_logout_page" );
+		exit;
+	}
+
     ### get user id
     $t_handler_id = get_current_user_field( "id" );
     $query = "UPDATE $g_mantis_bug_table

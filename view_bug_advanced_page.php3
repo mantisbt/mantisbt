@@ -293,7 +293,9 @@
 		</td>
 		</form>
 
-<?	if ($v_status!='resolved') { ?>
+<?	if ($v_status!='resolved') {
+		if ( access_level_check_greater_or_equal( "updater" ) ) {
+?>
 		<form method=post action="<? echo $g_bug_assign ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 			<input type=hidden name=f_date_submitted value="<? echo $v_date_submitted ?>">
@@ -301,6 +303,10 @@
 			<input type=submit value="<? echo $s_bug_assign_button ?>">
 		</td>
 		</form>
+<?		} else { ?>
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+		</td>
+<?		} ?>
 		<form method=post action="<? echo $g_bug_resolve_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?>>
