@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.121 2003-07-27 03:17:13 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.122 2003-07-30 02:59:59 beerfrick Exp $
 	# --------------------------------------------------------
 
 	
@@ -115,11 +115,13 @@
 	# the return address for bounced mail
 	$g_return_path_email	= 'admin@nowhere';
 
-	# allow users to signup for their own accounts
+	# allow users to signup for their own accounts.
+	# Mail settings must be correctly configured in order for this to work
 	$g_allow_signup			= ON;
 
 	# if ON users will be sent their password when reset.
-	# if OFF the password will be set to blank.
+	# if OFF the password will be set to blank. If set to ON, mail settings must be 
+	# correctly configured.
 	$g_send_reset_password	= ON;
 
 	# allow email notification

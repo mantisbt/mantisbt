@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.60 2003-07-27 03:17:13 vboctor Exp $
+	# $Id: email_api.php,v 1.61 2003-07-30 02:59:59 beerfrick Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -311,7 +311,9 @@
 						lang_get( 'new_account_password' ) . $p_password . "\n\n".
 						lang_get( 'new_account_message' ) .
 						lang_get( 'new_account_do_not_reply' );
-
+		
+		# Send signup email regardless of mail notification pref 
+		# or else users won't be able to sign up
 		email_send( $v_email, lang_get( 'new_account_subject' ), $t_message );
 	}
 	# --------------------
@@ -334,6 +336,8 @@
 					lang_get( 'new_account_password' ) . $p_password."\n\n".
 					$g_path."\n\n";
 
+		# Send password reset regardless of mail notification prefs
+		# or else users won't be able to receive their reset pws
 		email_send( $v_email, lang_get( 'news_password_msg' ), $t_message );
 	}
 	# --------------------
@@ -548,25 +552,24 @@
 			## list of receivers
 			$to = $g_to_email.( ( is_blank( $p_headers ) || is_blank( $g_to_email ) ) ? '' : ', ').$p_headers;
 			# echo '<br />email_bug_info::Sending email to :'.$to;
-			$res1 = email_send( $to, $t_subject, $t_message, '', $t_category );
+			if( ON == config_get( 'enable_email_notification' ) ) {
+				$res1 = email_send( $to, $t_subject, $t_message, '', $t_category );
+			}
 		} else {
 			# Send Email
 			# echo '<br />email_bug_info::Sending email to : '.$g_to_email;
-			$res1 = email_send( $g_to_email, $t_subject, $t_message, $p_headers, $t_category );
+			if( ON == config_get( 'enable_email_notification' ) ) {
+				$res1 = email_send( $g_to_email, $t_subject, $t_message, $p_headers, $t_category );
+			}
 		}
 	}
 	# --------------------
 	# this function sends the actual email
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='' ) {
-		global $g_from_email, $g_enable_email_notification,
+		global $g_from_email,
 				$g_return_path_email, $g_use_x_priority,
 				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host,
 				$g_smtp_username, $g_smtp_password, $g_mail_priority;
-
-		# short-circuit if no emails should be sent
-		if ( OFF ==$g_enable_email_notification ) {
-			return;
-		}
 
 		$t_recipient = trim( $p_recipient );
 		$t_subject   = string_email( trim( $p_subject ) );
@@ -778,7 +781,9 @@
 							string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) .
 							"\n\n$p_message";
 							
-			email_send( $t_email, $t_subject, $t_contents );
+			if( ON == config_get( 'enable_email_notification' ) ) {
+				email_send( $t_email, $t_subject, $t_contents );
+			}
 		}
 		return $result;
 	}
