@@ -186,7 +186,7 @@
 	</td>
 	<td colspan="5">
 <?php
-		$query = "SELECT *
+		$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
 				FROM $g_mantis_bug_file_table
 				WHERE bug_id='$f_id'";
 		$result = db_query( $query );
