@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.21 2002-11-24 20:25:11 jfitzell Exp $
+	# $Id: bug_api.php,v 1.22 2002-11-24 20:43:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -206,7 +206,7 @@
 	# --------------------
 	# Create a new bug and return the bug id
 	#
-	# @@@ pass in a bug object instead of all these params ??
+	# @@@ pass in a bug object instead of all these params
 	function bug_create( $p_project_id,
 				$p_reporter_id, $p_handler_id,
 				$p_priority,
@@ -220,14 +220,6 @@
 
 		$c_summary				= db_prepare_string( $p_summary );
 		$c_description			= db_prepare_string( $p_description );
-
-		# empty( trim( $c_summary ) ) is not accepted by PHP
-		$t_summary = trim( $c_summary );
-		$t_description = trim( $c_description );
-		if ( empty( $t_summary ) || empty( $t_description ) ) {
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
-		}
-
 		$c_project_id			= db_prepare_int( $p_project_id );
 		$c_reporter_id			= db_prepare_int( $p_reporter_id );
 		$c_handler_id			= db_prepare_int( $p_handler_id );
@@ -244,6 +236,11 @@
 		$c_view_state			= db_prepare_int( $p_view_state );
 		$c_steps_to_reproduce	= db_prepare_string( $p_steps_to_reproduce );
 		$c_additional_info		= db_prepare_string( $p_additional_info );
+
+		# Summary and description cannot be blank
+		if ( is_blank( $c_summary ) || is_blank( $c_description ) ) {
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
 
 		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
 		$t_bug_table = config_get( 'mantis_bug_table' );
@@ -405,15 +402,15 @@
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_bug_data		= bug_prepare_db( $p_bug_data );
 
-		$t_summary = trim( $c_bug_data->summary );
-		if ( empty( $t_summary ) ) {
+		# Summary field cannot be empty
+		if ( is_blank( $c_bug_data->summary ) ) {
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
 		if ( $p_update_extended )
 		{
-			$t_description = trim( $c_bug_data->description );
-			if ( empty( $t_description ) ) {
+			# Description field cannot be empty
+			if ( is_blank( $c_bug_data->description ) ) {
 				trigger_error( ERROR_EMPTY_FIELD, ERROR );
 			}
 		}

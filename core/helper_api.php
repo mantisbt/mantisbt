@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.25 2002-11-12 05:19:04 jfitzell Exp $
+	# $Id: helper_api.php,v 1.26 2002-11-24 20:43:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -280,5 +280,15 @@
 	# Print a debug string by generating a notice
 	function debug( $p_string ) {
 		trigger_error( $p_string, NOTICE );
+	}
+
+	function is_blank( $var ) {
+		if ( ! isset( $var ) ) {
+			return TRUE;
+		}
+		if ( strlen( trim( $var ) ) == 0 ) {
+			return TRUE;
+		}
+		return FALSE;
 	}
 ?>
