@@ -20,7 +20,8 @@ CREATE TABLE mantis_bug_file_table (
   file_type varchar(250) NOT NULL default '',
   date_added datetime NOT NULL default '1970-01-01 00:00:01',
   content longblob NOT NULL,
-  PRIMARY KEY  (id)
+  PRIMARY KEY  (id),
+  KEY bug_id (bug_id)
 ) TYPE=MyISAM;
 
 #
@@ -609,6 +610,7 @@ INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-8','Fix double escaped da
 INSERT INTO mantis_upgrade_table VALUES ('0.17-vb-19','Add id field to bug history table');
 INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-9','Fix double escaped data in mantis_bug_history_table');
 INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-10','Remove history entries where type=0 and the old value = new value.  These existed because of escaping errors');
+INSERT INTO mantis_upgrade_table VALUES ('0.18-vb-1','Add index on bug_id field in mantis_bug_file_table.');
 
 #
 # Table structure for table 'mantis_user_pref_table'
@@ -694,8 +696,8 @@ CREATE TABLE mantis_user_table (
   login_count int(11) NOT NULL default '0',
   cookie_string varchar(64) NOT NULL default '',
   PRIMARY KEY  (id),
-  UNIQUE KEY username (username),
-  UNIQUE KEY cookie_string (cookie_string)
+  UNIQUE KEY cookie_string (cookie_string),
+  UNIQUE KEY username (username)
 ) TYPE=MyISAM;
 
 #
