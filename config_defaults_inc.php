@@ -686,7 +686,6 @@
 	#############################
 	#----------------------------------
 	# allow the use of Javascript?
-	# @@@ not yet implemented, but wanted this in config for 0.17.2+ -SC
 	$g_use_javascript		= ON;
 	#----------------------------------
 
@@ -731,6 +730,22 @@
 	# ---------------------------------
 	# Specify where the user should be sent after logging out.
 	$g_logout_redirect_page			= $g_path."login_page".$g_php;
+
+	###########################
+	# Headers
+	###########################
+	# ---------------------------------
+	# An array of headers to be sent with each page.
+	# For example, to allow your mantis installation to be viewed in a frame in IE 6
+	#  when the frameset is not at the same hostname as the mantis install, you need
+	#  to add a P3P header.  You could try something like 'P3P: CP="CUR ADM"' in your
+	#  config file, but make sure to check that the your policy actually matches with
+	#  what you are promising. See
+	#  http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnpriv/html/ie6privacyfeature.asp
+	#  for more information.
+
+	$g_custom_headers				= array();
+	#$g_custom_headers[]			= 'P3P: CP="CUR ADM"';
 
 	###########################
 	# Debugging

@@ -27,6 +27,12 @@
 	require_once( $t_core_dir.'database_api.php' );
 
 	require_once( $t_core_dir.'config_api.php' );
+
+	# SEND USER-DEFINED HEADERS
+	foreach( config_get( 'custom_headers' ) as $t_header ) {
+		header( $t_header );
+	}
+
 	require_once( $t_core_dir.'gpc_api.php' );
 	require_once( $t_core_dir.'error_api.php' );
 	require_once( $t_core_dir.'authentication_api.php' );
