@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.68 2003-07-06 05:20:58 vboctor Exp $
+	# $Id: print_api.php,v 1.69 2003-08-04 14:26:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -217,9 +217,10 @@
 		}
 
 		foreach ( $t_users as $t_user ) {
+			$t_user_name = string_attribute( $t_user['username'] );
 			echo '<option value="' . $t_user['id'] . '" ';
 			check_selected( $t_user['id'], $p_user_id );
-			echo '>' . $t_user['username'] . '</option>';
+			echo '>' . $t_user_name . '</option>';
 		}
 	}
 
@@ -444,7 +445,7 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$cat_arr[] = $row['category'];
+			$cat_arr[] = string_attribute( $row['category'] );
 		}
 		sort( $cat_arr );
 		$cat_arr = array_unique( $cat_arr );
@@ -478,7 +479,7 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$cat_arr[] = $row['category'];
+			$cat_arr[] = string_attribute( $row['category'] );
 		}
 
 		# grab all categories in the bug table
@@ -491,7 +492,7 @@
 
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$cat_arr[] = $row['category'];
+			$cat_arr[] = string_attribute( $row['category'] );
 		}
 		sort( $cat_arr );
 		$cat_arr = array_unique( $cat_arr );
@@ -522,7 +523,7 @@
 		echo "<option value=\"\">\n";
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_version = $row['version'];
+			$t_version = string_attribute( $row['version'] );
 			echo "<option value=\"$t_version\"";
 			check_selected( $t_version, $p_version );
 			echo ">$t_version</option>";
@@ -556,7 +557,7 @@
 		$t_rows = project_get_all_user_rows( $p_project_id );
 		foreach ( $t_rows as $t_row ) {
 			$t_user_id = $t_row['id'];
-			$t_username = $t_row['username'];
+			$t_username = string_attribute( $t_row['username'] );
 			echo "<option value=\"$t_user_id\">$t_username</option>";
 		}
 	}
@@ -588,9 +589,10 @@
 		$t_arr = $g_language_choices_arr;
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
-			echo "<option value=\"$t_arr[$i]\"";
-			check_selected( $t_arr[$i], $p_language );
-			echo ">$t_arr[$i]</option>";
+			$t_language = string_attribute( $t_arr[$i] );
+			echo "<option value=\"$t_language\"";
+			check_selected( $t_language, $p_language );
+			echo ">$t_language</option>";
 		} # end for
 	}
 	# --------------------
@@ -633,7 +635,7 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_username = $row['username'];
+			$t_username = string_attribute(	$row['username'] );
 			$t_user_id = $row['id'];
 			PRINT "<option value=\"$t_user_id\">$t_username</option>";
 		}
@@ -658,7 +660,7 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_project_name	= $row['name'];
+			$t_project_name	= string_attribute( $row['name'] );
 			$t_user_id			= $row['id'];
 			PRINT "<option value=\"$t_user_id\">$t_project_name</option>";
 		}
