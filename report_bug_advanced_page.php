@@ -111,7 +111,7 @@
 	</td>
 	<td>
 		<select name="f_profile_id">
-			<?php print_profile_option_list( get_current_user_field( 'id ' ), $f_profile_id ) ?>
+			<?php print_profile_option_list( get_current_user_field( 'id' ), $f_profile_id ) ?>
 		</select>
 	</td>
 </tr>

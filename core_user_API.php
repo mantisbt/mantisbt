@@ -586,9 +586,10 @@
 		if ( isset( $g_string_cookie_val ) ) {
 			if ( !isset ( $g_current_user_info[ $p_field_name ] ) ) {
 				# get user info
-				$query = "SELECT *
-						FROM $g_mantis_user_table
-						WHERE cookie_string='$g_string_cookie_val'";
+				$query = "SELECT * ".
+						"FROM $g_mantis_user_table ".
+						"WHERE cookie_string='$g_string_cookie_val' ".
+						"LIMIT 1";
 				$result = db_query( $query );
 				$g_current_user_info = db_fetch_array ( $result );
 			}
