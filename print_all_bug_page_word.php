@@ -66,6 +66,7 @@
 	$f_end_month 			= $t_setting_arr[14];
 	$f_end_day				= $t_setting_arr[15];
 	$f_end_year				= $t_setting_arr[16];
+	$f_hide_resolved 			= $t_setting_arr[18];
 
 	# Clean input
 	$c_offset 				= (integer)$f_offset;
@@ -149,6 +150,11 @@
 	$t_clo_val = CLOSED;
 	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status )) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
+	}
+
+	$t_resolved_val = RESOLVED;
+	if ( ( 'on' == $f_hide_resolved  )&&( 'resolved' != $f_show_status )) {
+		$t_where_clause = $t_where_clause." AND status<>'$t_resolved_val'";
 	}
 
 	if ( $f_show_category != 'any' ) {

@@ -58,6 +58,7 @@
 	$f_end_month 			= $t_setting_arr[14];
 	$f_end_day				= $t_setting_arr[15];
 	$f_end_year				= $t_setting_arr[16];
+	$f_hide_resolved 			= $t_setting_arr[18];
 
 	# Clean input
 	$c_offset 				= (integer)$f_offset;
@@ -143,6 +144,11 @@
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
 
+	$t_resolved_val = RESOLVED;
+	if ( ( 'on' == $f_hide_resolved  )&&( 'resolved' != $f_show_status )) {
+		$t_where_clause = $t_where_clause." AND status<>'$t_resolved_val'";
+	}
+
 	if ( $f_show_category != 'any' ) {
 		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
 	}
@@ -198,46 +204,54 @@
 <?php html_head_end() ?>
 <?php html_body_begin() ?>
 
+<table class="width100"><tr><td class="form-title">
+	<div class="center">
+		<?php echo config_get( 'window_title' ) . ' - ' . project_get_name( $t_project_id ); ?>
+	</div>
+</td></tr></table>
+
+<br />
+
 <form method="post" action="view_all_set.php">
+<input type="hidden" name="type" value="1" />
+<input type="hidden" name="print" value="1" />
+<input type="hidden" name="offset" value="0" />
+<input type="hidden" name="sort" value="<?php echo $f_sort ?>" />
+<input type="hidden" name="dir" value="<?php echo $f_dir ?>" />
+
 <table class="width100">
 <tr>
-    <td class="print">
-		<input type="hidden" name="type" value="1" />
-		<input type="hidden" name="print" value="1" />
-		<input type="hidden" name="offset" value="0" />
-		<input type="hidden" name="sort" value="<?php echo $f_sort ?>" />
-		<input type="hidden" name="dir" value="<?php echo $f_dir ?>" />
-        <?php echo lang_get( 'search' ) ?>
-    </td>
-    <td class="print">
+	<td class="print">
+		<?php echo lang_get( 'search' ) ?>
+	</td>
+	<td class="print">
 		<?php echo lang_get( 'reporter' ) ?>
 	</td>
-    <td class="print">
+	<td class="print">
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
-    <td class="print">
+	<td class="print">
 		<?php echo lang_get( 'category' ) ?>
 	</td>
-    <td class="print">
+	<td class="print">
 		<?php echo lang_get( 'severity' ) ?>
 	</td>
-    <td class="print">
+	<td class="print">
 		<?php echo lang_get( 'status' ) ?>
 	</td>
-    <td class="print">
+	<td class="print">
 		<?php echo lang_get( 'show' ) ?>
 	</td>
-    <td class="print">
+	<td class="print">
 		<?php echo lang_get( 'changed' ) ?>
 	</td>
-    <td class="print">
-		<?php echo lang_get( 'hide_closed' ) ?>
+	<td class="print">
+		<?php echo lang_get( 'hide_status' ) ?>
 	</td>
-    <td class="print">&nbsp;</td>
 </tr>
 <tr>
 	<td>
-	    <input type="text" name="search" value="<?php echo $f_search; ?>" />
+	    <input type="text" name="search" size="15" value="<?php echo $f_search; ?>" />
 	</td>
 	<td>
 		<select name="reporter_id">
@@ -282,13 +296,10 @@
 		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>" />
 	</td>
 	<td>
-		<input type="checkbox" name="hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?> />
-	</td>
-	<td>
-		<input type="submit" value="<?php echo lang_get( 'filter_button' ) ?>" />
+		<input type="checkbox" name="hide_resolved" <?php check_checked( $f_hide_resolved, 'on' ); ?> />&nbsp;<?PHP echo lang_get( 'filter_resolved' ); ?>
+		<input type="checkbox" name="hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?> />&nbsp;<?PHP echo lang_get( 'filter_closed' ); ?>
 	</td>
 </tr>
-</form>
 
 <?php
 	#<SQLI> Excel & Print export
@@ -310,7 +321,7 @@
 ?>
 
 <tr>
-	<td>
+	<td colspan="8">
 <?php
 		if ( 'DESC' == $f_dir ) {
 			$t_new_dir = 'ASC';
@@ -339,14 +350,21 @@
 		}
 ?>
 	</td>
+	<td class="right">
+		<input type="submit" value="<?php echo lang_get( 'filter_button' ) ?>" />
+	</td>
 </tr>
 <?php #<SQLI> ?>
 </table>
 
+</form>
+
+<br />
+
 <form method="post" action="print_all_bug_page.php">
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="7">
+	<td class="form-title" colspan="6">
 		<?php echo lang_get( 'viewing_bugs_title' ) ?>
 		<?php
 			if ( $row_count > 0 ) {
@@ -359,14 +377,11 @@
 			PRINT "($v_start - $v_end)";
 		?>
 	</td>
-	<td>
-	</td>
-	<td class="right">
+	<td class="right" colspan="3">
 		<?php print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) ) ?>
 		<?php print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ) ?>
 		<?php print_bracket_link( 'summary_page.php', lang_get( 'summary' ) ) ?>
 	</td>
-<br />
 </tr>
 <tr class="row-category">
 	<td class="center" width="2%">&nbsp;</td>
@@ -403,7 +418,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="spacer" colspan="8">&nbsp;</td>
+	<td class="spacer" colspan="9">&nbsp;</td>
 </tr>
 <?php
 	for($i=0; $i < $row_count; $i++) {
@@ -441,9 +456,6 @@
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_id ?>
-		<?php # type project name if viewing 'all projects'?>
-		<?php if ( 0 == $t_project_id ) {?>
-		<br /><?php print "[$project_name]"; }?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php
@@ -460,6 +472,12 @@
 		?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
+		<?php 
+			# Print project name if viewing 'all projects'
+			if ( 0 == $t_project_id ) {
+				print "[$project_name] <br />"; 
+			} 
+		?>
 		<?php echo $v_category ?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
@@ -495,6 +513,9 @@
 ?>
 <input type="hidden" name="t_show_flag" value="1" />
 </table>
+
+<br />
+
 <input type="submit" value="<?php echo lang_get( 'hide_button' ) ?>" />
 </form>
 

@@ -65,6 +65,7 @@
 	$f_end_month 			= $t_setting_arr[14];
 	$f_end_day				= $t_setting_arr[15];
 	$f_end_year				= $t_setting_arr[16];
+	$f_hide_resolved 			= $t_setting_arr[18];
 
 	# Clean input
 	$c_offset 				= (integer)$f_offset;
@@ -149,6 +150,63 @@
 	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status )) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
+
+	$t_resolved_val = RESOLVED;
+	if ( ( 'on' == $f_hide_resolved  )&&( 'resolved' != $f_show_status )) {
+		$t_where_clause = $t_where_clause." AND status<>'$t_resolved_val'";
+	}
+
+	if ( $f_show_category != 'any' ) {
+		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
+	}
+	if ( $f_show_severity != 'any' ) {
+		$t_where_clause = $t_where_clause." AND severity='$c_show_severity'";
+	}
+	if ( $f_show_status != 'any' ) {
+		$t_where_clause = $t_where_clause." AND status='$c_show_status'";
+	}
+
+	# Simple Text Search - Thnaks to Alan Knowles
+	if ($f_search) {
+		$t_columns_clause = " $g_mantis_bug_table.*";
+
+		$t_where_clause .= " AND ((summary LIKE '%$c_search%')
+							OR (description LIKE '%$c_search%')
+							OR (steps_to_reproduce LIKE '%$c_search%')
+							OR (additional_information LIKE '%$c_search%')
+							OR ($g_mantis_bug_table.id LIKE '%$c_search%')
+							OR ($g_mantis_bugnote_text_table.note LIKE '%$c_search%'))
+							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
+
+		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
+							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
+							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
+	} else {
+		$t_columns_clause = ' *';
+		$t_from_clause = " FROM $g_mantis_bug_table";
+	}
+
+	if ( is_blank( $c_sort ) ) {
+		$c_sort='last_updated';
+	}
+	$query  = 'SELECT DISTINCT '.$t_columns_clause.', UNIX_TIMESTAMP(last_updated) as last_updated, UNIX_TIMESTAMP(date_submitted) as date_submitted';
+	$query .= $t_from_clause;
+	$query .= $t_where_clause;
+
+	$query = $query." ORDER BY '$c_sort' $c_dir";
+	if ( $f_sort != 'priority' ) {
+		$query = $query.', priority DESC';
+	}
+
+	$query = $query." LIMIT $c_offset, $c_per_page";
+
+	# perform query
+    $result = db_query( $query );
+	$row_count = db_num_rows( $result );
+
+	#settings for choosing the fields to print
+	# get the fields list
+	$t_field_name_arr = get_field_names();
 
 	if ( $f_show_category != 'any' ) {
 		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
