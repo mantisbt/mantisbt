@@ -148,7 +148,7 @@
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			if ( $v_id == $p_id ) {
+			if ( $v_id == $p_user_id ) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_username</option>";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_username</option>";
