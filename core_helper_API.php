@@ -170,7 +170,7 @@
 	# --------------------
 	# retrieve the number of open assigned bugs to a user in a project
 	function get_assigned_open_bug_count( $p_project_id, $p_cookie_str ) {
-		global $g_mantis_bug_table, $g_mantis_user_table;
+		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
 
 		$query = "SELECT id
 				FROM $g_mantis_user_table
@@ -178,11 +178,13 @@
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
+		if ( "0000000" == $g_project_cookie_val ) $t_where_prj ="1=1";
+		else $t_where_prj = "project_id='$p_project_id'";
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
-				WHERE 	project_id='$p_project_id' AND
+				WHERE $t_where_prj AND
 						status<>'$t_res' AND status<>'$t_clo' AND
 						handler_id='$t_id'";
 		$result = db_query( $query );
@@ -191,19 +193,21 @@
 	# --------------------
 	# retrieve the number of open reported bugs by a user in a project
 	function get_reported_open_bug_count( $p_project_id, $p_cookie_str ) {
-		global $g_mantis_bug_table, $g_mantis_user_table;
+		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
 
 		$query = "SELECT id
 				FROM $g_mantis_user_table
 				WHERE cookie_string='$p_cookie_str'";
 		$result = db_query( $query );
 		$t_id = db_result( $result );
-
+		
+		if ( "0000000" == $g_project_cookie_val ) $t_where_prj ="1=1";
+		else $t_where_prj = "project_id='$p_project_id'";
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
-				WHERE 	project_id='$p_project_id' AND
+				WHERE $t_where_prj AND
 						status<>'$t_res' AND status<>'$t_clo' AND
 						reporter_id='$t_id'";
 		$result = db_query( $query );
