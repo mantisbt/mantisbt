@@ -89,7 +89,9 @@
 	# set to 0 to disable email check
 	$g_validate_email            = 1;
 	$g_check_mx_record           = 1;
-       $g_hide_user_email              =0;
+
+	# This disables the automatic generation of mailto: links
+	$g_hide_user_email           = 0;
 
 	################################
 	### Mantis Language Settings ###
@@ -235,7 +237,7 @@
 
 	# --- file upload settings --------
 	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
-	$g_allow_file_upload    = 1;
+	$g_allow_file_upload    = 0;
 
 	# Upload destination: specify actual location in project settings
 	# 1 = "disk"
