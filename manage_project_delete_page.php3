@@ -8,6 +8,12 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
+		### need to replace with access error page
+		header( "Location: $g_logout_page" );
+		exit;
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -27,7 +33,7 @@
 
 <? echo $s_project_delete_msg ?>
 
-<form method=post action="<? echo $g_project_delete ?>">
+<form method=post action="<? echo $g_manage_project_delete ?>">
 	<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
 	<input type=submit value="<? echo $s_project_delete_button ?>">
 </form>

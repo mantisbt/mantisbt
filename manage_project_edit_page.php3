@@ -45,7 +45,6 @@
 	[ <a href="<? echo $g_path.$g_manage_project_menu_page ?>"><? echo $s_projects_link ?></a> ]
 </div>
 
-
 <p>
 <div align=center>
 <table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
@@ -103,14 +102,20 @@
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_white_color ?> colspan=6>
+		<td align=left bgcolor=<? echo $g_white_color ?>>
 			<input type=submit value="<? echo $s_update_project_button ?>">
 		</td>
+			</form>
+			<form method=post action="<? echo $g_manage_project_delete_page?>">
+			<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
+		<td align=right bgcolor=<? echo $g_white_color ?>>
+			<input type=submit value="<? echo $s_delete_project_button ?>">
+		</td>
+			</form>
 	</tr>
 	</table>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 
