@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_update.php,v 1.33 2004-05-18 09:19:17 int2str Exp $
+	# $Id: manage_user_update.php,v 1.34 2004-05-25 13:38:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,6 +23,7 @@
 	$f_enabled		= gpc_get_bool( 'enabled' );
 	$f_email		= gpc_get_string( 'email', '' );
 	$f_username		= gpc_get_string( 'username', '' );
+	$f_realname		= gpc_get_string( 'realname', '' );
 	$f_access_level	= gpc_get_int( 'access_level' );
 	$f_user_id		= gpc_get_int( 'user_id' );
 
@@ -42,6 +43,7 @@
 
 	$c_email		= db_prepare_string( $f_email );
 	$c_username		= db_prepare_string( $f_username );
+	$c_realname		= db_prepare_string( $f_realname );
 	$c_protected	= db_prepare_bool( $f_protected );
 	$c_enabled		= db_prepare_bool( $f_enabled );
 	$c_user_id			= db_prepare_int( $f_user_id );
@@ -64,13 +66,13 @@
 	if ( $f_protected && $t_old_protected ) {
 	    $query = "UPDATE $t_user_table
 	    		SET username='$c_username', email='$c_email',
-	    			protected='$c_protected'
+	    			protected='$c_protected', realname='$c_realname'
 	    		WHERE id='$c_user_id'";
 	} else {
 	    $query = "UPDATE $t_user_table
 	    		SET username='$c_username', email='$c_email',
 	    			access_level='$c_access_level', enabled='$c_enabled',
-	    			protected='$c_protected'
+	    			protected='$c_protected', realname='$c_realname'
 	    		WHERE id='$c_user_id'";
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create_page.php,v 1.16 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: manage_user_create_page.php,v 1.17 2004-05-25 13:38:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -33,6 +33,14 @@
 	</td>
 	<td width="75%">
 		<input type="text" name="username" size="32" maxlength="32" />
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category" width="25%">
+		<?php echo lang_get( 'realname' ) ?>
+	</td>
+	<td width="75%">
+		<input type="text" name="realname" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>

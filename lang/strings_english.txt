@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.172 $
+	# $Revision: 1.173 $
 	# $Author: vboctor $
-	# $Date: 2004-05-24 13:50:55 $
+	# $Date: 2004-05-25 13:38:51 $
 	#
-	# $Id: strings_english.txt,v 1.172 2004-05-24 13:50:55 vboctor Exp $
+	# $Id: strings_english.txt,v 1.173 2004-05-25 13:38:51 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -302,6 +302,7 @@ $s_manage_profiles_link = 'Profiles';
 $s_change_preferences_link = 'Preferences';
 $s_edit_account_title = 'Edit Account';
 $s_username = 'Username';
+$s_realname = 'Real Name';
 $s_email = 'Email';
 $s_password = 'Password';
 $s_confirm_password = 'Confirm Password';

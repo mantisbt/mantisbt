@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.98 2004-05-24 13:50:53 vboctor Exp $
+	# $Id: html_api.php,v 1.99 2004-05-25 13:38:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -235,6 +235,7 @@
 		$t_username		= current_user_get_field( 'username' );
 		$t_access_level	= get_enum_element( 'access_levels', current_user_get_access_level() );
 		$t_now			= date( config_get( 'complete_date_format' ) );
+		$t_realname = current_user_get_field( 'realname' );
 
 		PRINT '<table class="hide">';
 		PRINT '<tr>';
@@ -255,7 +256,9 @@
 						PRINT ' | <a href="signup_page.php">' . lang_get( 'signup_link' ) . '</a>';
 					}
 				} else {
-					PRINT lang_get( 'logged_in_as' ) . ": <span class=\"italic\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
+					echo lang_get( 'logged_in_as' ), ": <span class=\"italic\">$t_username</span> <span class=\"small\">";
+					echo is_blank( $t_realname ) ? "($t_access_level)" : "($t_realname - $t_access_level)";
+					echo "</span>";
 				}
 			PRINT '</td>';
 			PRINT '<td class="login-info-middle">';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.71 2004-05-18 03:33:14 int2str Exp $
+	# $Id: user_api.php,v 1.72 2004-05-25 13:38:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -230,7 +230,7 @@
 	# --------------------
 	# Create a user.
 	# returns false if error, the generated cookie string if ok
-	function user_create( $p_username, $p_password, $p_email='', $p_access_level=null, $p_protected=false, $p_enabled=true ) {
+	function user_create( $p_username, $p_password, $p_email='', $p_access_level=null, $p_protected=false, $p_enabled=true, $p_realname='' ) {
 		if ( null === $p_access_level ) {
 			$p_access_level = config_get( 'default_new_account_access_level');
 		}
@@ -238,6 +238,7 @@
 		$t_password = auth_process_plain_password( $p_password );
 
 		$c_username		= db_prepare_string( $p_username );
+		$c_realname		= db_prepare_string( $p_realname );
 		$c_password		= db_prepare_string( $t_password );
 		$c_email		= db_prepare_string( $p_email );
 		$c_access_level	= db_prepare_int( $p_access_level );
@@ -254,10 +255,10 @@
 
 		$query = "INSERT INTO $t_user_table
 				    ( username, email, password, date_created, last_visit,
-				     enabled, access_level, login_count, cookie_string )
+				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
 				    ( '$c_username', '$c_email', '$c_password', " . db_now() . "," . db_now() . ",
-				     $c_enabled, $c_access_level, 0, '$t_cookie_string')";
+				     $c_enabled, $c_access_level, 0, '$t_cookie_string', '$c_realname')";
 		db_query( $query );
 
 		# Create preferences for the user
@@ -471,7 +472,7 @@
 		if ( false == $row ) {
 			return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
 		} else {
-			return $row['username'];
+			return is_blank( $row['realname'] ) ? $row['username'] : $row['realname'];
 		}
 	}
 

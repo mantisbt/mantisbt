@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.7 2004-05-24 12:23:18 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.8 2004-05-25 13:38:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -163,7 +163,7 @@
 	$upgrades[] = new SQLUpgrade( 
 			'sponsorship-1',
 			'Add sponsorships table',
-			"CREATE TABLE mantis_sponsorship_table (
+			"CREATE TABLE IF NOT EXISTS mantis_sponsorship_table (
 				id int(7) NOT NULL auto_increment,
 				bug_id int(7) NOT NULL default '0',
 				user_id int(7) NOT NULL default '0',
@@ -197,6 +197,12 @@
 			'fixed_in_version-2',
 			'Add index on fixed_in_version field in bug table.',
 			"ALTER TABLE mantis_bug_table ADD INDEX ( fixed_in_version )" );
+
+	$upgrades[] = new SQLUpgrade( 
+			'user_realname',
+			'Add real name to user information.',
+			"ALTER TABLE mantis_user_table ADD realname VARCHAR( 64 ) NOT NULL AFTER username" );
+
 
 	return $upgrades;
 ?>

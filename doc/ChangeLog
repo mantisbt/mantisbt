@@ -25,6 +25,7 @@ Mantis ChangeLog
  * Enh #3801: Add "myself" meta filter options.
  * Enh #3808: Ability to sponsor (fund) a bug or feature request.
  * Enh #3811: Allow private flag to be unset on resolved bugs.
+ * Enh #3841: Add real name ability to mantis.
  * Enh #3867: Give the user control whether to open hyperlink in new or current window.
  * Enh #3870: Support for custom functions which provides hooks for customizing behaviour.
  * Fix #3094: Switching projects clears filter values.

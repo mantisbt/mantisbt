@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.52 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: manage_user_page.php,v 1.53 2004-05-25 13:38:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -210,6 +210,10 @@ for ($i=0;$i<$new_user_count;$i++) {
 		<?php print_sort_icon( $c_dir, $c_sort, 'username' ) ?>
 	</td>
 	<td>
+		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'realname' ), 'realname', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'realname' ) ?>
+	</td>
+	<td>
 		<?php print_manage_user_sort_link(  'manage_user_page.php', lang_get( 'email' ), 'email', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'email' ) ?>
 	</td>
@@ -247,6 +251,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	<td>
 		<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
 	</td>
+	<td><?php echo $u_realname ?></td>
 	<td><?php print_email_link( $u_email, $u_email ) ?></td>
 	<td><?php echo get_enum_element( 'access_levels', $u_access_level ) ?></td>
 	<td><?php echo trans_bool( $u_enabled ) ?></td>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.8 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: manage_user_edit_page.php,v 1.9 2004-05-25 13:38:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -45,6 +45,16 @@
 	</td>
 	<td width="70%">
 		<input type="text" size="16" maxlength="32" name="username" value="<?php echo $t_user['username'] ?>" />
+	</td>
+</tr>
+
+<!-- Realname -->
+<tr <?php echo helper_alternate_class( 1 ) ?>>
+	<td class="category" width="30%">
+		<?php echo lang_get( 'realname' ) ?>:
+	</td>
+	<td width="70%">
+		<input type="text" size="16" maxlength="100" name="realname" value="<?php echo $t_user['realname'] ?>" />
 	</td>
 </tr>
 
