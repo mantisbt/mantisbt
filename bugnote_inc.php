@@ -116,7 +116,7 @@
 </table>
 <?php # Bugnotes END ?>
 
-<?php if ( ( ( $v_status < RESOLVED ) ||
+<?php if ( ( ( $t_bug->status < RESOLVED ) ||
 		  ( isset( $f_resolve_note ) ) ) &&
 		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
