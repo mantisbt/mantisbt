@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.7 2002-10-18 21:04:49 jfitzell Exp $
+	# $Id: config_api.php,v 1.8 2002-12-17 11:04:51 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -68,13 +68,23 @@
 	# Checks if an obsolete configuration variable is still in use.  If so, an error
 	# will be generated and the script will exit.  This is called from login_page.php and
 	# admin_check.php.
-	function config_obsolete($var, $replace) {
-		if ( config_is_set( $var ) ) {
-			echo '$g_' . $var . ' is now obsolete';
-			if ($replace != '') {
-				echo ', please use $g_' . $replace;
+	function config_obsolete( $p_var, $p_replace ) {
+		# @@@ we could trigger a WARNING here, once we have errors that can
+		#     have extra data plugged into them (we need to give the old and
+		#     new config option names in the warning text)
+
+		if ( config_is_set( $p_var ) ) {
+			echo '<p>$g_' . $p_var . ' is now obsolete';
+			if ( is_array( $p_replace ) ) {
+				echo ', please see the following options: <ul>';
+				foreach ( $p_replace as $t_option ) {
+					echo '<li>$g_' . $t_option . '</li>';
+				}
+				echo '</li>';
+			} else if ( ! is_blank( $p_replace ) ) {
+				echo ', please use $g_' . $p_replace;
 			}
-			exit;
+			echo '</p>';
 		}
 	}
 ?>
