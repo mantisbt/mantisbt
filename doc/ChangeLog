@@ -5,6 +5,8 @@ Mantis
  * Fixed missing closing span tag in view_bug_*page.php.
  * Fixed advanced summaries (jpgraph) for general statistics for all projects.
  * Fixed small problem in all localization files (for $s_reset_request_msg).
+ * Fixed summary stats for developers when they are assigned with "developer" rights at a project and do not have default profile >"developer".
+ * Fixed summary page for "All projects" option
  * Removed site_settings link in print_manage_doc_menu().
 
 01.23.2002  -   0.17.0
