@@ -3,6 +3,7 @@ Mantis ChangeLog
 2004.xx.xx  -  0.19.0
 
  * Enh #0000: Generate one email per user. Stage #1 (no send mail optimization).
+ * Enh #2200: Add Version to simple bug pages.
  * Enh #3262: CSV export does not export the category column.
  * Enh #3264: CSV export should export the resolution.
  * Enh #3287: Projectname on CSV export.

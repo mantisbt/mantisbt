@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.34 2004-03-26 09:29:06 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.35 2004-03-26 10:06:26 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -124,6 +124,24 @@
 </tr>
 <?php } ?>
 
+
+<!-- spacer -->
+<tr>
+	<td class="spacer" colspan="2">&nbsp;</td>
+</tr>
+
+
+<!-- Product Version -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'product_version' ) ?>
+	</td>
+	<td>
+		<select tabindex="9" name="product_version">
+			<?php print_version_option_list( $f_product_version ) ?>
+		</select>
+	</td>
+</tr>
 
 <!-- spacer -->
 <tr>

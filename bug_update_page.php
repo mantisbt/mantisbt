@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.65 2004-03-26 09:29:07 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.66 2004-03-26 10:06:26 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -231,6 +231,18 @@
 
 </tr>
 
+
+<tr <?php echo helper_alternate_class() ?>>
+	<!-- Product Version -->
+	<td class="category">
+		<?php echo lang_get( 'product_version' ) ?>
+	</td>
+	<td colspan="5">
+		<select name="version">
+			<?php print_version_option_list( $t_bug->version, $t_bug->project_id ) ?>
+		</select>
+	</td>
+</tr>
 
 <!-- spacer -->
 <tr>
