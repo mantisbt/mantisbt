@@ -3,12 +3,12 @@
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details	
+	# See the README and LICENSE files for details
 ?>
 <?php
 	# Bugs to display / print / export can be selected with the checkboxes
 	# A printing Options link allows to choose the fields to export
-	# Export : 
+	# Export :
 	#	- the bugs displayed in print_all_bug_page.php are saved in a .doc or .xls file
 	#   - the IE icons allows to see or directly print the same result
 ?>
@@ -128,7 +128,7 @@
 	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status )) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
-	
+
 	if ( $f_show_category != 'any' ) {
 		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
 	}
@@ -278,12 +278,12 @@
 	</td>
 </tr>
 
-<?php 
-	#<SQLI> Excel & Print export 
+<?php
+	#<SQLI> Excel & Print export
 	#$f_bug_array stores the number of the selected rows
 	#$t_bug_arr_sort is used for displaying
 	#$f_export is a string for the word and excel pages
-	
+
 	$f_bug_arr[$row_count]=-1;
 
 	for($i=0; $i < $row_count; $i++) {
@@ -397,7 +397,7 @@
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 
 		if (isset($t_bug_arr_sort[$i])||($t_show_flag==0)) {
-?>	 
+?>
 
 <tr>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
@@ -410,7 +410,7 @@
 		<?php echo $v_id ?>
 		<?php # type project name if viewing 'all projects'?>
 		<?php if ( '0000000' == $g_project_cookie_val ) {?>
-		<BR><?php print "[$project_name]"; }?>
+		<br /><?php print "[$project_name]"; }?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php
@@ -459,7 +459,7 @@
 	</td>
 </tr>
 <?php
-	} # isset_loop	
+	} # isset_loop
 } # for_loop
 ?>
 <input type="hidden" name="t_show_flag" value="1">
