@@ -113,7 +113,7 @@
 			# grab all DEVELOPERs if the project is public
 			# Otherwise check the project user lists
 			if ( PUBLIC == $t_project_view_state ) {
-				$query = "SELECT DISTINCT id, email
+				$query = "SELECT DISTINCT id as user_id, email
 						FROM $g_mantis_user_table
 						WHERE access_level>=$t_dev";
 			} else {

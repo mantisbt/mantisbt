@@ -440,9 +440,11 @@
 		$t_project_id = get_bug_field( $p_bug_id, "project_id" );
 		$t_project_view_state = get_project_field( $t_project_id, "view_state" );
 
+		# public project accept all users
 		if ( PUBLIC == $t_project_view_state ) {
 			return;
 		} else {
+			# private projects require users to be assigned
 			$t_project_access_level = get_project_access_level( $t_project_id );
 			if ( -1 == $t_project_access_level ) {
 				print_header_redirect( $g_login_select_proj_page );
