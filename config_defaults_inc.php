@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.102 2003-02-25 14:42:47 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.103 2003-02-25 15:48:04 int2str Exp $
 	# --------------------------------------------------------
 
 	
@@ -752,7 +752,7 @@
 	# unused
 	$g_cookie_domain		= '';
 	# cookie version for view_all_page
-	$g_cookie_version		= 'v3';
+	$g_cookie_version		= 'v4';
 
 	# --- cookie prefix ---------------
 	# set this to a unique identifier.  No spaces.

@@ -31,16 +31,14 @@
 <table class="width100" cellspacing="0">
 <!-- Filter Form Header Row -->
 <tr class="row-category2">
-	<td class="small-caption">
-		<?php echo lang_get( 'reporter' ) ?>
-	</td>
+	<td class="small-caption"><?php echo lang_get( 'reporter' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'assigned_to' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'category' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'severity' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'status' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'show' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'changed' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'hide_closed' ) ?></td>
+	<td class="small-caption"><?php echo lang_get( 'hide_status' ) ?></td>
 </tr>
 <!-- Filter Form Fields -->
 <tr>
@@ -104,23 +102,26 @@
 	<!-- Hide closed bugs -->
 	<td>
 		<input type="checkbox" name="hide_closed" <?php check_checked( $t_filter['hide_closed'], 'on' ); ?> />
+		<?php echo lang_get( 'filter_closed' ); ?>
+		<input type="checkbox" name="hide_resolved" <?php check_checked( $t_filter['hide_resolved'], 'on' ); ?> />
+		<?php echo lang_get( 'filter_resolved' ); ?>
 	</td>
 </tr>
 
 
 <!-- Search and Date Header Row -->
 <tr class="row-category2">
-	<td class="small-caption"><?php echo lang_get( 'search' ) ?></td>
+	<td class="small-caption" colspan="2"><?php echo lang_get( 'search' ) ?></td>
 	<td class="small-caption" colspan="2"><!--Start Date--></td>
 	<td class="small-caption" colspan="2"><!--End Date--></td>
-	<td class="small-caption" colspan="7">&nbsp;</td>
+	<td class="small-caption" colspan="2">&nbsp;</td>
 </tr>
 
 
 <!-- Search and Date fields -->
 <tr>
 	<!-- Text search -->
-	<td>
+	<td colspan="2">
 	    <input type="text" size="16" name="search" value="<?php echo $t_filter['search']; ?>" />
 	</td>
 
@@ -155,7 +156,7 @@
 	</td>
 
 	<!-- SUBMIT button -->
-	<td class="right" colspan="7">
+	<td class="right" colspan="2">
 		<input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
 </tr>

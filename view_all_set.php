@@ -17,6 +17,7 @@
 	$f_per_page				= gpc_get_int( 'per_page', -1 );
 	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
 	$f_hide_closed			= gpc_get_bool( 'hide_closed' );
+	$f_hide_resolved			= gpc_get_bool( 'hide_resolved' );
 	$f_reporter_id			= gpc_get_string( 'reporter_id', '' );
 	$f_handler_id			= gpc_get_string( 'handler_id', '' );
 	# sort direction
@@ -33,6 +34,10 @@
 
 	if ( $f_hide_closed ) {
 		$f_hide_closed = 'on';
+	}
+
+	if ( $f_hide_resolved ) {
+		$f_hide_resolved = 'on';
 	}
 
 	if ( $f_type < 0 ) {
@@ -71,6 +76,7 @@
 	15: $f_end_day
 	16: $f_end_year
 	17: $f_search
+	18: $f_hide_resolved
 */
 	# Set new filter values.  These are stored in a cookie
 	$t_view_all_cookie = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
@@ -97,7 +103,7 @@
 									"#$f_start_month#$f_start_day".
 									"#$f_start_year#$f_end_month".
 									"#$f_end_day#$f_end_year".
-									"#$f_search";
+									"#$f_search#$f_hide_resolved";
 				break;
 		# Update filters
 		case '1':
@@ -110,7 +116,7 @@
 									"#$f_start_month#$f_start_day".
 									"#$f_start_year#$f_end_month".
 									"#$f_end_day#$f_end_year".
-									"#$f_search";
+									"#$f_search#$f_hide_resolved";
 				break;
 		# Set the sort order and direction
 		case '2':
@@ -123,7 +129,7 @@
 									"#$t_setting_arr[11]#$t_setting_arr[12]".
 									"#$t_setting_arr[13]#$t_setting_arr[14]".
 									"#$t_setting_arr[15]#$t_setting_arr[16]".
-									"#$t_setting_arr[17]";
+									"#$t_setting_arr[17]#$t_settings_arr[18]";
 				break;
 		# does nothing. catch all case
 		default:
@@ -136,7 +142,7 @@
 									"#$t_setting_arr[11]#$t_setting_arr[12]".
 									"#$t_setting_arr[13]#$t_setting_arr[14]".
 									"#$t_setting_arr[15]#$t_setting_arr[16]".
-									"#$t_setting_arr[17]";
+									"#$t_setting_arr[17]#$t_settings_arr[18]";
 	}
 
 	# set cookie values

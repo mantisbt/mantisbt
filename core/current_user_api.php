@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.10 2003-01-25 18:21:08 jlatour Exp $
+	# $Id: current_user_api.php,v 1.11 2003-02-25 15:48:06 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -121,6 +121,7 @@
 		$t_filter['end_day']			= $t_setting_arr[15];
 		$t_filter['end_year']			= $t_setting_arr[16];
 		$t_filter['search']				= $t_setting_arr[17];
+		$t_filter['hide_resolved'] 		= $t_setting_arr[18];
 
 		return $t_filter;
 	}
