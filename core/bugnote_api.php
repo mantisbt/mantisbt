@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.3 2002-08-25 09:32:44 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.4 2002-08-25 21:48:11 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -97,7 +97,7 @@
 
 				if ( $result ) {
 					# get bugnote id
-					$t_bugnote_id = str_pd( db_insert_id(), '0', 7, STR_PAD_LEFT );
+					$t_bugnote_id = str_pad( db_insert_id(), '0', 7, STR_PAD_LEFT );
 
 					# log new bug
 					history_log_event_special( $p_bug_id, BUGNOTE_ADDED , $t_bugnote_id );
@@ -135,7 +135,7 @@
 
 			if ( $result ) {
 				# log deletion of bug
-				$t_bugnote_id = str_pd( $c_bugnote_id, '0', 7, STR_PAD_LEFT );
+				$t_bugnote_id = str_pad( $c_bugnote_id, '0', 7, STR_PAD_LEFT );
 				history_log_event_special( $t_bug_id, BUGNOTE_DELETED, $t_bugnote_id );
 				return true;
 			}

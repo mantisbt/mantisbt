@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.3 2002-08-25 21:44:48 jfitzell Exp $
+	# $Id: email_api.php,v 1.4 2002-08-25 21:48:12 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -416,28 +416,28 @@
 			$t_message .= '?f_id='.$p_bug_id."\n";
 			$t_message .= $g_email_separator1."\n";
 		}
-		$t_message .= str_pd( $s_email_reporter.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
-		$t_message .= str_pd( $s_email_handler.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
+		$t_message .= str_pad( $s_email_reporter.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
+		$t_message .= str_pad( $s_email_handler.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pd( $s_email_project.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name."\n";
-		$t_message .= str_pd( $s_email_bug.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_id."\n";
-		$t_message .= str_pd( $s_email_category.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_category."\n";
-		$t_message .= str_pd( $s_email_reproducibility.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str."\n";
-		$t_message .= str_pd( $s_email_severity.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
-		$t_message .= str_pd( $s_email_priority.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
-		$t_message .= str_pd( $s_email_status.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
+		$t_message .= str_pad( $s_email_project.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name."\n";
+		$t_message .= str_pad( $s_email_bug.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_id."\n";
+		$t_message .= str_pad( $s_email_category.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_category."\n";
+		$t_message .= str_pad( $s_email_reproducibility.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str."\n";
+		$t_message .= str_pad( $s_email_severity.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
+		$t_message .= str_pad( $s_email_priority.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
+		$t_message .= str_pad( $s_email_status.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
 		if ( RESOLVED == $v_status ) {
 			$t_res_str = get_enum_element( 'resolution', $v_resolution );
-			$t_message .= str_pd( $s_email_resolution.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
+			$t_message .= str_pad( $s_email_resolution.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
 			if ( DUPLICATE == $v_resolution ) {
-				$t_message .= str_pd( $s_email_duplicate.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";
+				$t_message .= str_pad( $s_email_duplicate.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";
 			}
 		}
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pd( $s_email_date_submitted.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted."\n";
-		$t_message .= str_pd( $s_email_last_modified.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
+		$t_message .= str_pad( $s_email_date_submitted.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted."\n";
+		$t_message .= str_pad( $s_email_last_modified.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pd( $s_email_summary.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
+		$t_message .= str_pad( $s_email_summary.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
 		$t_message .= "$s_email_description: \n".wordwrap( $v2_description )."\n";
 		$t_message .= $g_email_separator1."\n\n";
 
@@ -649,7 +649,7 @@
 		$p_subject = string_email( get_bug_summary( $p_bug_id ) );
 
 		# padd the bug id with zeros
-		$p_bug_id = str_pd( $p_bug_id, '0', 7, STR_PAD_LEFT );
+		$p_bug_id = str_pad( $p_bug_id, '0', 7, STR_PAD_LEFT );
 
 		return '['.$p_project_name.' '.$p_bug_id.']: '.$p_subject;
 	}

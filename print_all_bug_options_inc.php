@@ -69,7 +69,7 @@ function edit_printing_prefs($p_user_id = 0, $p_error_if_protected = true, $p_re
 	}
 
 	# get protected state
-	$t_protected = get_user_field( $c_user_id, 'protected' );
+	$t_protected = user_get_field( $c_user_id, 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {

@@ -140,7 +140,7 @@
 				$c_user_id = (integer)$row['user_id'];
 
 				if ( $c_user_id != 0 ) {
-					$c_user_name = get_user_field( $c_user_id, 'username' );
+					$c_user_name = user_get_field( $c_user_id, 'username' );
 				} else {
 					$c_user_name = '';
 				}

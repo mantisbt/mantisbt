@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: summary_api.php,v 1.3 2002-08-25 21:48:12 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -62,10 +62,10 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count		= str_pd( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$resolved_bug_count	= str_pd( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$closed_bug_count	= str_pd( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$t_enum_count		= str_pd( $t_enum_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$open_bug_count		= str_pad( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count	= str_pad( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count	= str_pad( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$t_enum_count		= str_pad( $t_enum_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
@@ -177,10 +177,10 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count		= str_pd( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$resolved_bug_count	= str_pd( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$closed_bug_count	= str_pd( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$total_bug_count	= str_pd( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$open_bug_count		= str_pad( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count	= str_pad( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count	= str_pad( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count	= str_pad( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
@@ -252,10 +252,10 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count		= str_pd( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$resolved_bug_count	= str_pd( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$closed_bug_count	= str_pd( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$total_bug_count	= str_pd( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$open_bug_count		= str_pad( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count	= str_pad( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count	= str_pad( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count	= str_pad( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
@@ -327,10 +327,10 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count		= str_pd( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$resolved_bug_count	= str_pd( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$closed_bug_count	= str_pd( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
-			$total_bug_count	= str_pd( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$open_bug_count		= str_pad( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count	= str_pad( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count	= str_pad( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count	= str_pad( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );

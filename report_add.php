@@ -179,7 +179,7 @@
 		if ( !file_type_check( $f_file_name ) ) {
 			$disallowed = 1;
 		} else if ( is_uploaded_file( $f_file ) ) {
-			$t_bug_id = str_pd( $t_bug_id, '0', 7, STR_PAD_LEFT );
+			$t_bug_id = str_pad( $t_bug_id, '0', 7, STR_PAD_LEFT );
 
 			# grab the file path
 			$t_file_path = get_current_project_field( 'file_path' );
