@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.16 2003-01-29 15:56:42 beerfrick Exp $
+	# $Id: core.php,v 1.17 2003-01-31 07:43:54 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -65,6 +65,9 @@
 	# load utility functions used by everything else
 	require_once( $t_core_path.'utility_api.php' );
 	
+	# Load internationalization functions (needed before database_api, in case database connection fails)
+	require_once( $t_core_path.'lang_api.php' );
+
 	# error functions should be loaded to allow database to print errors
 	require_once( $t_core_path.'html_api.php' );
 	require_once( $t_core_path.'error_api.php' );
@@ -79,9 +82,6 @@
 	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
 	# OPENED ANYWHERE ELSE.
 	require_once( $t_core_path.'database_api.php' );
-
-	# Load internationalization functions
-	require_once( $t_core_path.'lang_api.php' );
 
 	# SEND USER-DEFINED HEADERS
 	foreach( config_get( 'custom_headers' ) as $t_header ) {
