@@ -10,11 +10,11 @@
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
 	# -------------------------------------------------
-	# $Revision: 1.36 $
+	# $Revision: 1.37 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 16:39:54 $
+	# $Date: 2004-02-26 16:42:45 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.36 2004-02-26 16:39:54 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.37 2004-02-26 16:42:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -418,7 +418,6 @@ $s_bug_updated_msg = "Bug 已经被成功更新...";
 $s_back_to_bug_link = "回到 Bug";
 $s_update_simple_link = "简易更新";
 $s_updating_bug_advanced_title = "正在更新Bug信息";
-$s_priority = "优先级";
 $s_id = "编号";
 $s_category = "类别";
 $s_severity = "严重性";

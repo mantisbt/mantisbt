@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 16:39:54 $
+	# $Date: 2004-02-26 16:42:45 $
 	#
-	# $Id: strings_serbian.txt,v 1.1 2004-02-26 16:39:54 jlatour Exp $
+	# $Id: strings_serbian.txt,v 1.2 2004-02-26 16:42:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -37,6 +37,7 @@ $s_date_order = 'Redosled datuma';
 $s_print_all_bug_page_link = '.tampaj izve.taje';
 $s_csv_export = 'CSV Izvoz';
 $s_login_anonymously = 'Anonimna prijava';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Skok na bele.ke o gre.ci';
 $s_public_project_msg = 'Ovaj projekat je JAVAN.  Svi korisnici imaju pristup.';
 $s_private_project_msg = 'Ovaj projekat je PRIVATAN.  Samo administratori i rucno upisani korisnici imaju pristup.';
@@ -83,6 +84,7 @@ $s_additional_information_updated = 'Dodatne informacije su a.urirane';
 $s_steps_to_reproduce_updated = 'Koraci za reprodukciju su a.urirani';
 $s_file_added = 'File Dodat';
 $s_file_deleted = 'Fajl izbrisan';
+$s_bug_deleted = 'Bug Deleted';
 
 $s_make_private = 'Nacini privatnim';
 $s_make_public = 'Nacini javnim';
@@ -185,6 +187,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Koricnicko polje nije pronadjeno'
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ovo je duplo ime.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Najmanje jo. jedan projekat koristi ovo polje.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Pogresna vrednost polja';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentifikacija neuspela';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP konekcija sa serverom neuspe.na';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP a.uriranje sloga nije uspelo.';
@@ -199,6 +202,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija nije pronadjena.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verzija pod tim imenom vec postoji.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Verzija nije pronadjena.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Korisnicko ime je pogre.no. Korisnicko ime mo.e da sadr.i samo slovam brojeve, prazna polja, crtice i donje crte.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'GRESKA: va. nalog je iskljucen ili ste pogre.no uneli korisnicko ime ili lozinku.';
 $s_login_cookies_disabled = 'GRESKA: Va. internet pretra.ivac ili ne zna da obradi kukije (cookies) ili odbija da ih prihvati.';
@@ -213,6 +217,7 @@ $s_logged_in_as = 'prikljuceni ste kao';
 $s_prefix_for_deleted_users = 'korisnik';
 
 $s_administrator = 'administrator';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string = '10:gledalac,25:reporter,40:updater,55:razvoj,70:menadzer,90:administrator';
@@ -241,14 +246,19 @@ $s_reset_request_msg = 'Poslat je zahtev za resetovanjem vase lozinke';
 $s_account_name_msg = 'Va.e korisnicko ime je';
 $s_news_password_msg = 'Ovo je Va.a nova lozinka';
 
-$s_new_bug_msg = 'Sledeci NOVA greska je DODATA.';
-$s_email_bugnote_msg = 'KOMENTAR UZ GRESKU je dodat.';
-$s_email_resolved_msg = 'Sledeca greska je RESENA.';
-$s_email_close_msg = 'SledecA greska je ZATVORENA';
-$s_email_feedback_msg = 'Sledeca greska zahteva Va.u POVRATNU INFORMACIJU.';
-$s_email_reopen_msg = 'Sledeca greska je PONOVO OTVORENA.';
-$s_email_assigned_msg = 'Sledeca greska je DODELJENA.';
-$s_email_bug_deleted_msg = 'Sledeca greska je IZBRISANA.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Prijavljivac';
 $s_email_handler = 'Obradjivac';
@@ -489,6 +499,7 @@ $s_open_and_reported_to_me = 'Otvoreni i licno prijavljeni';
 $s_newer_news_link = 'Nove vesti';
 $s_older_news_link = 'Stare vesti';
 $s_archives = 'Arhiva';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Kreiran je korisnik';
@@ -780,6 +791,13 @@ $s_by_category = 'po kategoriji';
 $s_by_priority = 'po prioritetu';
 $s_by_developer = 'Po programeru';
 $s_by_reporter = 'po prijavljivacu';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'Vremenska statistika za re.ene gre.ke(dani)';
 $s_longest_open_bug = 'najdu.e otvorena gre.ka';
 $s_longest_open = 'najdu.e otvoreno';
@@ -812,7 +830,7 @@ $s_viewing_bug_advanced_details_title = 'Detaljan pregled gre.aka';
 $s_product_build = 'Product Build';
 $s_system_profile = 'Opis sistema';
 $s_update_bug_button = 'Update Bug';
-$s_bug_assign_button = 'Dodeli mi';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Ponovno otvaranje';
 $s_attached_files = 'Prikaceni fajlovi';
 $s_publish = 'Publikuj';
@@ -862,4 +880,7 @@ $s_filter_resolved = "Re.en";
 
 $s_attachments = "Prilozi";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'en';
 ?>

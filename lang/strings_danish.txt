@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.57 $
+	# $Revision: 1.58 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 16:39:54 $
+	# $Date: 2004-02-26 16:42:45 $
 	#
-	# $Id: strings_danish.txt,v 1.57 2004-02-26 16:39:54 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.58 2004-02-26 16:42:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php

@@ -11,11 +11,11 @@
 	# Spanish: Bernardo Hernández - b.magno@terra.es
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 16:39:54 $
+	# $Date: 2004-02-26 16:42:45 $
 	#
-	# $Id: strings_spanish.txt,v 1.60 2004-02-26 16:39:54 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.61 2004-02-26 16:42:45 jlatour Exp $
 	###########################################################################
 ?>
 <?php
