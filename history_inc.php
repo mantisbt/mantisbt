@@ -1,6 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 ?>
@@ -70,7 +71,6 @@
 				break;
 		case 'view_state':		$v_old_value = get_enum_element( 'view_state', $v_old_value );
 								$v_new_value = get_enum_element( 'view_state', $v_new_value );
-
 				break;
 		case 'projection':		$v_old_value = get_enum_element( 'projection', $v_old_value );
 								$v_new_value = get_enum_element( 'projection', $v_new_value );
@@ -128,8 +128,8 @@
 	<td class="small-caption">
 		<?php echo $v_username ?>
 	</td>
-	<td class="small-caption">
-		&nbsp;
+	<td class="small-caption">&nbsp;
+		
 	</td>
 	<td class="small-caption">
 		<?php echo $t_note ?>

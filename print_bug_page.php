@@ -1,6 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -118,8 +119,8 @@
 	<td class="print">
 		<?php echo $v_platform ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -135,8 +136,8 @@
 	<td class="print">
 		<?php echo $v_os ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -152,8 +153,8 @@
 	<td class="print">
 		<?php echo $v_os_build ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -169,8 +170,8 @@
 	<td class="print">
 		<?php echo $v_version ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -186,8 +187,8 @@
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -203,8 +204,8 @@
 	<td class="print">
 		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
-	<td class="print" colspan="2">
-		&nbsp;
+	<td class="print" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr class="print">
@@ -214,8 +215,8 @@
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
-	<td class="print" colspan="4">
-		&nbsp;
+	<td class="print" colspan="4">&nbsp;
+		
 	</td>
 </tr>
 <tr>

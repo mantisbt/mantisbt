@@ -1,12 +1,14 @@
 <?php
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
 	###########################################################################
 	# History API
 	###########################################################################
+
 	# --------------------
 	function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
 		global $g_mantis_bug_relationship_table;

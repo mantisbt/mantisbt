@@ -1,15 +1,16 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.19 $
-	# $Author: vboctor $
-	# $Date: 2002-06-13 10:18:14 $
+	# $Revision: 1.20 $
+	# $Author: jlatour $
+	# $Date: 2002-08-15 20:35:03 $
 	#
-	# $Id: view_bug_inc.php,v 1.19 2002-06-13 10:18:14 vboctor Exp $
+	# $Id: view_bug_inc.php,v 1.20 2002-08-15 20:35:03 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php

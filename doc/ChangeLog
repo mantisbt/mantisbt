@@ -79,6 +79,7 @@ Mantis ChangeLog
  * Reworked !isset() checks to use check_varset().
  * Reworked BCTimer class to be more useful for debugging.
  * Reworked code formatting for $c_ variables.
+ * Early 2002, an extraordinary thing happened. While Kenzaburo Ito had been maintaining Mantis mostly on his own for years, suddenly others started to help with the development. To reflect/celebrate that, copyright on Mantis for the years 2002 and onward is transferred to the 'Mantis Group', consisting of all of Mantis' developers. All files have had their copyright notices changed to reflect this.
  * Updated comments in all localization files to point to correct file names.
  * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
 

@@ -1,17 +1,18 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
 	###########################################################################
 	# Email API
 	# -------------------------------------------------
-	# $Revision: 1.66 $
-	# $Author: jctrosset $
-	# $Date: 2002-08-02 08:28:13 $
+	# $Revision: 1.67 $
+	# $Author: jlatour $
+	# $Date: 2002-08-15 20:35:02 $
 	#
-	# $Id: core_email_API.php,v 1.66 2002-08-02 08:28:13 jctrosset Exp $
+	# $Id: core_email_API.php,v 1.67 2002-08-15 20:35:02 jlatour Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
