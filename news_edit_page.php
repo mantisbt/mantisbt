@@ -44,15 +44,15 @@
 <tr>
 	<td class="form-title">
 		<input type="hidden" name="news_id" value="<?php echo $v_id ?>" />
-		<?php echo $s_headline ?>
+		<?php echo lang_get( 'headline' ) ?>
 	</td>
 	<td class="right">
-		<?php print_bracket_link( 'news_menu_page.php', $s_go_back ) ?>
+		<?php print_bracket_link( 'news_menu_page.php', lang_get( 'go_back' ) ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_headline ?>
+		<?php echo lang_get( 'headline' ) ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" />
@@ -60,7 +60,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_body ?>
+		<?php echo lang_get( 'body' ) ?>
 	</td>
 	<td>
 		<textarea name="body" cols="60" rows="10" wrap="virtual"><?php echo $v_body ?></textarea>
@@ -68,7 +68,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_post_to ?>
+		<?php echo lang_get( 'post_to' ) ?>
 	</td>
 	<td>
 		<select name="project_id">
@@ -84,8 +84,8 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_announcement ?><br />
-		<span class="small"><?php echo $s_stays_on_top ?></span>
+		<?php echo lang_get( 'announcement' ) ?><br />
+		<span class="small"><?php echo lang_get( 'stays_on_top' ) ?></span>
 	</td>
 	<td>
 		<input type="checkbox" name="announcement" <?php check_checked( $v_announcement, 1 ); ?> />
@@ -93,7 +93,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_view_status ?>
+		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td width="75%">
 		<select name="view_state">
@@ -103,7 +103,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_update_news_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'update_news_button' ) ?>" />
 	</td>
 </tr>
 </table>

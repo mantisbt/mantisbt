@@ -56,7 +56,7 @@
 
 <br />
 <div align="center">
-	<?php print_bracket_link( 'news_list_page.php', $s_back_link ) ?>
+	<?php print_bracket_link( 'news_list_page.php', lang_get( 'back_link' ) ) ?>
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

@@ -36,7 +36,7 @@
 
 <br />
 <div align="center">
-	<?php echo $s_operation_successful ?><br />
+	<?php echo lang_get( 'operation_successful' ) ?><br />
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="news-heading">
@@ -51,8 +51,8 @@
 </table>
 <br />
 <?php
-	print_bracket_link( 'news_edit_page.php?news_id='.$f_news_id.'&amp;action=edit', $s_edit_link );
-	print_bracket_link( 'news_menu_page.php', $s_proceed );
+	print_bracket_link( 'news_edit_page.php?news_id='.$f_news_id.'&amp;action=edit', lang_get( 'edit_link' ) );
+	print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
 ?>
 </div>
 

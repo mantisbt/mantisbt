@@ -38,10 +38,10 @@
 		$t_notes = array();
 		$t_note_string = '';
 		if ( 1 == $v_announcement ) {
-			array_push( $t_notes, $s_announcement );
+			array_push( $t_notes, lang_get( 'announcement' ) );
 		}
 		if ( PRIVATE == $v_view_state ) {
-			array_push( $t_notes, $s_private );
+			array_push( $t_notes, lang_get( 'private' ) );
 		}
 		if ( sizeof( $t_notes ) > 0 ) {
 			$t_note_string = '['.implode( ' ', $t_notes ).']';

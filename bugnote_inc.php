@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_inc.php,v 1.81 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bugnote_inc.php,v 1.82 2003-02-17 23:48:31 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,13 +46,13 @@
 ?>
 <tr>
 	<td class="center" colspan="2">
-		<?php echo $s_no_bugnotes_msg ?>
+		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
 	</td>
 </tr>
 <?php } else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo $s_bug_notes_title ?>
+		<?php echo lang_get( 'bug_notes_title' ) ?>
 	</td>
 </tr>
 <?php
@@ -84,7 +84,7 @@
 	<td class="<?php echo $t_bugnote_css ?>">
 		<?php print_user( $v3_reporter_id ) ?>
 		<?php if ( PRIVATE == $v3_view_state ) { ?>
-		<span class="small">[ <?php echo $s_private ?> ]</span>
+		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
 		<?php } ?>
 		<br />
 		<span class="small"><?php echo $v3_date_submitted ?></span><br /><br />
@@ -95,13 +95,13 @@
 			if ( bug_get_field( $f_bug_id, 'status' ) < config_get( 'bug_resolved_status_threshold' ) ) {
 				if (( access_has_project_level( ADMINISTRATOR ) ) ||
 					( $v3_reporter_id == $t_user_id )) {
-					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, $s_bugnote_edit_link );
-					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, $s_delete_link );
+					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
+					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
 					if ( access_has_project_level( $g_private_bugnote_threshold ) ) {
 						if ( PRIVATE == $v3_view_state ) {
-							print_bracket_link('bugnote_set_view_state.php?private=0&bugnote_id='.$v3_id, $s_make_public);
+							print_bracket_link('bugnote_set_view_state.php?private=0&bugnote_id='.$v3_id, lang_get( 'make_public' ));
 						} else {
-							print_bracket_link('bugnote_set_view_state.php?private=1&bugnote_id='.$v3_id, $s_make_private);
+							print_bracket_link('bugnote_set_view_state.php?private=1&bugnote_id='.$v3_id, lang_get( 'make_private' ));
 						}
 					}
 				}
@@ -133,12 +133,12 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-		<?php echo $s_add_bugnote_title ?>
+		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category" width="25%">
-		<?php echo $s_bugnote ?>
+		<?php echo lang_get( 'bugnote' ) ?>
 	</td>
 	<td width="75%">
 		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
@@ -147,7 +147,7 @@
 <?php if ( access_has_project_level( $g_private_bugnote_threshold ) ) { ?>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_private ?>
+		<?php echo lang_get( 'private' ) ?>
 	</td>
 	<td>
 		<input type="checkbox" name="private" />
@@ -156,7 +156,7 @@
 <?php } ?>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_add_bugnote_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
 	</td>
 </tr>
 </table>

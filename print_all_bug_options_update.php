@@ -58,7 +58,7 @@
 	}
 
 	PRINT '<br />';
-	print_bracket_link( $f_redirect_url, $s_proceed );
+	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
 	PRINT '<br /></div>';
 	print_page_bot1( __FILE__ );
 ?>

@@ -14,61 +14,39 @@
 # this function only gets the field names, by appending strings
 function get_field_names()
 {
-	global	$s_printing_preferences_title,
-			$s_id, $s_category, $s_severity, $s_reproducibility,
-			$s_date_submitted, $s_last_update, $s_reporter, $s_assigned_to,
-			$s_priority, $s_resolution, $s_status, $s_duplicate_id,
-			$s_os, $s_projection, $s_os_version, $s_eta, $s_product_version,
-			$s_build, $s_summary, $s_description,
-			$s_steps_to_reproduce, $s_additional, $s_information,
-			$s_platform, $s_attached_files, $s_bugnote_title,
-			$s_bugnote_date, $s_bugnote_description ;
-
 	#currently 27 fields
-	return $t_arr = array (		$s_id,
-							    $s_category,
-							    $s_severity,
-							    $s_reproducibility,
-								$s_date_submitted,
-								$s_last_update,
-								$s_reporter,
-								$s_assigned_to,
-								$s_priority,
-								$s_status,
-								$s_build,
-								$s_projection,
-								$s_eta,
-								$s_platform,
-								$s_os,
-								$s_os_version,
-								$s_product_version,
-								$s_resolution,
-								$s_duplicate_id,
-								$s_summary,
-								$s_description,
-								$s_steps_to_reproduce,
-								$s_additional.'_'.$s_information,
-								$s_attached_files,
-								$s_bugnote_title,
-								$s_bugnote_date,
-								$s_bugnote_description) ;
+	return $t_arr = array (		lang_get( 'id' ),
+							    lang_get( 'category' ),
+							    lang_get( 'severity' ),
+							    lang_get( 'reproducibility' ),
+								lang_get( 'date_submitted' ),
+								lang_get( 'last_update' ),
+								lang_get( 'reporter' ),
+								lang_get( 'assigned_to' ),
+								lang_get( 'priority' ),
+								lang_get( 'status' ),
+								lang_get( 'build' ),
+								lang_get( 'projection' ),
+								lang_get( 'eta' ),
+								lang_get( 'platform' ),
+								lang_get( 'os' ),
+								lang_get( 'os_version' ),
+								lang_get( 'product_version' ),
+								lang_get( 'resolution' ),
+								lang_get( 'duplicate_id' ),
+								lang_get( 'summary' ),
+								lang_get( 'description' ),
+								lang_get( 'steps_to_reproduce' ),
+								lang_get( 'additional' ).'_'.lang_get( 'information' ),
+								lang_get( 'attached_files' ),
+								lang_get( 'bugnote_title' ),
+								lang_get( 'bugnote_date' ),
+								lang_get( 'bugnote_description' )) ;
 }
 
 
 function edit_printing_prefs($p_user_id = 0, $p_error_if_protected = true, $p_redirect_url = '')
 {
-	global	$g_mantis_user_print_pref_table, $g_default_advanced_report,
-			$g_default_advanced_view,
-			$g_enable_email_notification,
-			$s_printing_preferences_title,
-			$s_id, $s_category, $s_severity, $s_reproducibility,
-			$s_date_submitted, $s_last_update, $s_reporter, $s_assigned_to,
-			$s_priority, $s_resolution, $s_status, $s_duplicate_id,
-			$s_os, $s_projection, $s_os_version, $s_eta, $s_product_version,
-			$s_build, $s_summary, $s_description,
-			$s_steps_to_reproduce, $s_additional, $s_information,
-			$s_platform, $s_attached_files, $s_update_prefs_button, $s_reset_prefs_button;
-
 	$c_user_id = (integer)$p_user_id;
 
 	if ($c_user_id == 0) {
@@ -136,7 +114,7 @@ function edit_printing_prefs($p_user_id = 0, $p_error_if_protected = true, $p_re
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo $s_printing_preferences_title ?>
+		<?php echo lang_get( 'printing_preferences_title' ) ?>
 	</td>
 	<td class="right">
 	</td>
@@ -167,7 +145,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="submit" value="<?php echo $s_update_prefs_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -178,7 +156,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 
 <div class="border-center">
 	<form method="post" action="print_all_bug_options_reset.php">
-	<input type="submit" value="<?php echo $s_reset_prefs_button ?>" />
+	<input type="submit" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</form>
 </div>
 

@@ -60,10 +60,10 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<?php echo $s_viewing_bug_advanced_details_title ?>
+		<?php echo lang_get( 'viewing_bug_advanced_details_title' ) ?>
 	</td>
 	<td class="right" colspan="3">
-		<span class="small"><?php print_bracket_link( 'bug_view_page.php?bug_id='.$f_bug_id, $s_go_back ) ?></span>
+		<span class="small"><?php print_bracket_link( 'bug_view_page.php?bug_id='.$f_bug_id, lang_get( 'go_back' ) ) ?></span>
 	</td>
 </tr>
 <tr>
@@ -73,22 +73,22 @@
 </tr>
 <tr class="print-category">
 	<td class="print" width="16%">
-		<?php echo $s_id ?>:
+		<?php echo lang_get( 'id' ) ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo $s_category ?>:
+		<?php echo lang_get( 'category' ) ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo $s_severity ?>:
+		<?php echo lang_get( 'severity' ) ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo $s_reproducibility ?>:
+		<?php echo lang_get( 'reproducibility' ) ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo $s_date_submitted ?>:
+		<?php echo lang_get( 'date_submitted' ) ?>:
 	</td>
 	<td class="print" width="16%">
-		<?php echo $s_last_update ?>:
+		<?php echo lang_get( 'last_update' ) ?>:
 	</td>
 </tr>
 <tr class="print">
@@ -118,13 +118,13 @@
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_reporter ?>:
+		<?php echo lang_get( 'reporter' ) ?>:
 	</td>
 	<td class="print">
 		<?php print_user_with_subject( $v_reporter_id, $f_bug_id ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $s_platform ?>:
+		<?php echo lang_get( 'platform' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo $v_platform ?>
@@ -133,13 +133,13 @@
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_assigned_to ?>:
+		<?php echo lang_get( 'assigned_to' ) ?>:
 	</td>
 	<td class="print">
 		<?php print_user_with_subject( $v_handler_id, $f_bug_id ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $s_os ?>:
+		<?php echo lang_get( 'os' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo $v_os ?>
@@ -148,13 +148,13 @@
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_priority ?>:
+		<?php echo lang_get( 'priority' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'priority', $v_priority ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $s_os_version ?>:
+		<?php echo lang_get( 'os_version' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo $v_os_build ?>
@@ -163,13 +163,13 @@
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_status ?>:
+		<?php echo lang_get( 'status' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'status', $v_status ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $s_product_version ?>:
+		<?php echo lang_get( 'product_version' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo $v_version ?>
@@ -178,13 +178,13 @@
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_product_build ?>:
+		<?php echo lang_get( 'product_build' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo $v_build?>
 	</td>
 	<td class="print-category">
-		<?php echo $s_resolution ?>:
+		<?php echo lang_get( 'resolution' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
@@ -193,13 +193,13 @@
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_projection ?>:
+		<?php echo lang_get( 'projection' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'projection', $v_projection ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $s_duplicate_id ?>:
+		<?php echo lang_get( 'duplicate_id' ) ?>:
 	</td>
 	<td class="print">
 		<?php print_duplicate_id( $v_duplicate_id ) ?>
@@ -208,7 +208,7 @@
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_eta ?>:
+		<?php echo lang_get( 'eta' ) ?>:
 	</td>
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
@@ -242,7 +242,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_summary ?>:
+		<?php echo lang_get( 'summary' ) ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $v_summary ?>
@@ -250,7 +250,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_description ?>:
+		<?php echo lang_get( 'description' ) ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $v2_description ?>
@@ -258,7 +258,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_steps_to_reproduce ?>:
+		<?php echo lang_get( 'steps_to_reproduce' ) ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $v2_steps_to_reproduce ?>
@@ -266,7 +266,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_additional_information ?>:
+		<?php echo lang_get( 'additional_information' ) ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $v2_additional_information ?>
@@ -288,7 +288,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_system_profile ?>:
+		<?php echo lang_get( 'system_profile' ) ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php echo $t_profile_description ?>
@@ -299,7 +299,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $s_attached_files ?>:
+		<?php echo lang_get( 'attached_files' ) ?>:
 	</td>
 	<td class="print" colspan="5">
 		<?php

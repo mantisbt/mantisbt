@@ -203,31 +203,31 @@
 		<input type="hidden" name="offset" value="0" />
 		<input type="hidden" name="sort" value="<?php echo $f_sort ?>" />
 		<input type="hidden" name="dir" value="<?php echo $f_dir ?>" />
-        <?php echo $s_search ?>
+        <?php echo lang_get( 'search' ) ?>
     </td>
     <td class="print">
-		<?php echo $s_reporter ?>
+		<?php echo lang_get( 'reporter' ) ?>
 	</td>
     <td class="print">
-		<?php echo $s_assigned_to ?>
+		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
     <td class="print">
-		<?php echo $s_category ?>
+		<?php echo lang_get( 'category' ) ?>
 	</td>
     <td class="print">
-		<?php echo $s_severity ?>
+		<?php echo lang_get( 'severity' ) ?>
 	</td>
     <td class="print">
-		<?php echo $s_status ?>
+		<?php echo lang_get( 'status' ) ?>
 	</td>
     <td class="print">
-		<?php echo $s_show ?>
+		<?php echo lang_get( 'show' ) ?>
 	</td>
     <td class="print">
-		<?php echo $s_changed ?>
+		<?php echo lang_get( 'changed' ) ?>
 	</td>
     <td class="print">
-		<?php echo $s_hide_closed ?>
+		<?php echo lang_get( 'hide_closed' ) ?>
 	</td>
     <td class="print">&nbsp;</td>
 </tr>
@@ -237,36 +237,36 @@
 	</td>
 	<td>
 		<select name="reporter_id">
-			<option value="any"><?php echo $s_any ?></option>
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_reporter_option_list( $f_reporter_id ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="handler_id">
-			<option value="any"><?php echo $s_any ?></option>
-			<option value="none" <?php check_selected( $f_handler_id, 'none' ); ?>><?php echo $s_none ?></option>
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="none" <?php check_selected( $f_handler_id, 'none' ); ?>><?php echo lang_get( 'none' ) ?></option>
 			<option value="any"></option>
 			<?php print_assign_to_option_list( $f_handler_id ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="show_category">
-			<option value="any"><?php echo $s_any ?></option>
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_category_option_list( $f_show_category ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="show_severity">
-			<option value="any"><?php echo $s_any ?></option>
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'severity', $f_show_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="show_status">
-			<option value="any"><?php echo $s_any ?></option>
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'status', $f_show_status ) ?>
 		</select>
@@ -281,7 +281,7 @@
 		<input type="checkbox" name="hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?> />
 	</td>
 	<td>
-		<input type="submit" value="<?php echo $s_filter_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
 </tr>
 </form>
@@ -343,7 +343,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="7">
-		<?php echo $s_viewing_bugs_title ?>
+		<?php echo lang_get( 'viewing_bugs_title' ) ?>
 		<?php
 			if ( $row_count > 0 ) {
 				$v_start = $f_offset+1;
@@ -358,9 +358,9 @@
 	<td>
 	</td>
 	<td class="right">
-		<?php print_bracket_link( 'print_all_bug_options_page.php', $s_printing_options_link ) ?>
-		<?php print_bracket_link( 'view_all_bug_page.php', $s_view_bugs_link ) ?>
-		<?php print_bracket_link( 'summary_page.php', $s_summary ) ?>
+		<?php print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) ) ?>
+		<?php print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) ) ?>
+		<?php print_bracket_link( 'summary_page.php', lang_get( 'summary' ) ) ?>
 	</td>
 <br />
 </tr>
@@ -371,30 +371,30 @@
 		<?php print_sort_icon( $f_dir, $f_sort, 'priority' ) ?>
 	</td>
 	<td class="center" width="8%">
-		<?php print_view_bug_sort_link2( $s_id, 'id', $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( lang_get( 'id' ), 'id', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'id' ) ?>
 	</td>
 	<td class="center" width="3%">
 		#
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link2( $s_category, 'category', $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( lang_get( 'category' ), 'category', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'category' ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link2( $s_severity, 'severity', $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( lang_get( 'severity' ), 'severity', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'severity' ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link2( $s_status, 'status', $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( lang_get( 'status' ), 'status', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'status' ) ?>
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link2( $s_updated, 'last_updated', $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( lang_get( 'updated' ), 'last_updated', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'last_updated' ) ?>
 	</td>
 	<td class="center" width="37%">
-		<?php print_view_bug_sort_link2( $s_summary, 'summary', $f_sort, $f_dir ) ?>
+		<?php print_view_bug_sort_link2( lang_get( 'summary' ), 'summary', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'summary' ) ?>
 	</td>
 </tr>
@@ -491,7 +491,7 @@
 ?>
 <input type="hidden" name="t_show_flag" value="1" />
 </table>
-<input type="submit" value="<?php echo $s_hide_button ?>" />
+<input type="submit" value="<?php echo lang_get( 'hide_button' ) ?>" />
 </form>
 
 <?php # @@@ BUG ?  Where is the closing FORM tag??? ?>

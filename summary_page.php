@@ -69,7 +69,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo $s_summary_title ?> <?php echo $s_orct ?>
+		<?php echo lang_get( 'summary_title' ) ?> <?php echo lang_get( 'orct' ) ?>
 	</td>
 </tr>
 <tr valign="top">
@@ -78,7 +78,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<?php echo $s_by_status ?>:
+				<?php echo lang_get( 'by_status' ) ?>:
 			</td>
 		</tr>
 		<?php print_bug_enum_summary( $g_status_enum_string, 'status' ) ?>
@@ -89,7 +89,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<?php echo $s_by_date ?>:
+				<?php echo lang_get( 'by_date' ) ?>:
 			</td>
 		</tr>
 		<?php print_bug_date_summary( $g_date_partitions ) ?>
@@ -102,7 +102,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<?php echo $s_by_severity ?>:
+				<?php echo lang_get( 'by_severity' ) ?>:
 			</td>
 		</tr>
 		<?php print_bug_enum_summary( $g_severity_enum_string, 'severity' ) ?>
@@ -113,7 +113,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<?php echo $s_by_resolution ?>:
+				<?php echo lang_get( 'by_resolution' ) ?>:
 			</td>
 		</tr>
 		<?php print_bug_enum_summary( $g_resolution_enum_string, 'resolution' ) ?>
@@ -126,7 +126,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<?php echo $s_by_category ?>:
+				<?php echo lang_get( 'by_category' ) ?>:
 			</td>
 		</tr>
 		<?php print_category_summary() ?>
@@ -137,7 +137,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<?php echo $s_by_priority ?>:
+				<?php echo lang_get( 'by_priority' ) ?>:
 			</td>
 		</tr>
 		<?php print_bug_enum_summary( $g_priority_enum_string, 'priority' ) ?>
@@ -150,12 +150,12 @@
 		<table class="width100">
 		<tr>
 			<td class="form-title">
-				<?php echo $s_time_stats ?>:
+				<?php echo lang_get( 'time_stats' ) ?>:
 			</td>
 		</tr>
 		<tr class="row-1">
 			<td width="50%">
-				<?php echo $s_longest_open_bug ?>
+				<?php echo lang_get( 'longest_open_bug' ) ?>
 			</td>
 			<td width="50%">
 				<?php
@@ -167,7 +167,7 @@
 		</tr>
 		<tr class="row-2">
 			<td>
-				<?php echo $s_longest_open ?>
+				<?php echo lang_get( 'longest_open' ) ?>
 			</td>
 			<td>
 				<?php echo $t_largest_diff ?>
@@ -175,7 +175,7 @@
 		</tr>
 		<tr class="row-1">
 			<td>
-				<?php echo $s_average_time ?>
+				<?php echo lang_get( 'average_time' ) ?>
 			</td>
 			<td>
 				<?php echo $t_average_time ?>
@@ -183,7 +183,7 @@
 		</tr>
 		<tr class="row-2">
 			<td>
-				<?php echo $s_total_time ?>
+				<?php echo lang_get( 'total_time' ) ?>
 			</td>
 			<td>
 				<?php echo $t_total_time ?>
@@ -199,7 +199,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<?php echo $s_developer_stats ?>:
+				<?php echo lang_get( 'developer_stats' ) ?>:
 			</td>
 		</tr>
 		<?php print_developer_summary() ?>
@@ -210,7 +210,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<?php echo $s_reporter_stats ?>:
+				<?php echo lang_get( 'reporter_stats' ) ?>:
 			</td>
 		</tr>
 		<?php print_reporter_summary() ?>

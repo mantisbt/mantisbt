@@ -40,7 +40,7 @@
 <tr>
 	<td class="form-title">
 		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
-		<?php echo $s_upload_file_title ?>
+		<?php echo lang_get( 'upload_file_title' ) ?>
 	</td>
 	<td class="right">
 		<?php print_doc_menu() ?>
@@ -48,7 +48,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="20%">
-		<?php echo $s_title ?>
+		<?php echo lang_get( 'title' ) ?>
 	</td>
 	<td width="80%">
 		<input type="text" name="title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
@@ -56,7 +56,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_description ?>
+		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
 		<textarea name="description" cols="60" rows="7" wrap="virtual"><?php echo $v_description ?></textarea>
@@ -64,7 +64,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_filename ?>
+		<?php echo lang_get( 'filename' ) ?>
 	</td>
 	<td>
 		<?php echo $v_filename ?>
@@ -73,7 +73,7 @@
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="submit" value="<?php echo $s_file_update_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'file_update_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -83,7 +83,7 @@
 
 		<form method="post" action="proj_doc_delete.php">
 		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
-		<input type="submit" value="<?php echo $s_file_delete_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
 		</form>
 
 </div>

@@ -20,12 +20,12 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<input type="hidden" name="poster_id" value="<?php echo auth_get_current_user_id() ?>" />
-		<?php echo $s_add_news_title ?>
+		<?php echo lang_get( 'add_news_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_headline ?>
+		<?php echo lang_get( 'headline' ) ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="headline" size="64" maxlength="64" />
@@ -33,7 +33,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_body ?>
+		<?php echo lang_get( 'body' ) ?>
 	</td>
 	<td>
 		<textarea name="body" cols="60" rows="8" wrap="virtual"></textarea>
@@ -41,8 +41,8 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_announcement ?><br />
-		<span class="small"><?php echo $s_stays_on_top ?></span>
+		<?php echo lang_get( 'announcement' ) ?><br />
+		<span class="small"><?php echo lang_get( 'stays_on_top' ) ?></span>
 	</td>
 	<td>
 		<input type="checkbox" name="announcement" />
@@ -50,7 +50,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_view_status ?>
+		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td width="75%">
 		<select name="view_state">
@@ -60,7 +60,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_post_news_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'post_news_button' ) ?>" />
 	</td>
 </tr>
 </form>
@@ -75,18 +75,18 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo $s_edit_or_delete_news_title ?>
+		<?php echo lang_get( 'edit_or_delete_news_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<input type="radio" name="action" value="edit" checked="checked" /> <?php echo $s_edit_post ?>
-		<input type="radio" name="action" value="delete" /> <?php echo $s_delete_post ?>
+		<input type="radio" name="action" value="edit" checked="checked" /> <?php echo lang_get( 'edit_post' ) ?>
+		<input type="radio" name="action" value="delete" /> <?php echo lang_get( 'delete_post' ) ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category" width="25%">
-		<?php echo $s_select_post ?>
+		<?php echo lang_get( 'select_post' ) ?>
 	</td>
 	<td width="75%">
 		<select name="news_id">
@@ -96,7 +96,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_submit_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'submit_button' ) ?>" />
 	</td>
 </tr>
 </table>

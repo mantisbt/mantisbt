@@ -15,5 +15,5 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	create_category_summary_pct();
-	graph_category_summary_pct($s_by_category_pct);
+	graph_category_summary_pct( lang_get( 'by_category_pct' ) );
 ?>

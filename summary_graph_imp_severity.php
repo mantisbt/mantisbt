@@ -67,7 +67,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo $s_graph_imp_severity_title ?>
+		<?php echo lang_get( 'graph_imp_severity_title' ) ?>
 	</td>
 </tr>
 <tr valign="top">

@@ -31,7 +31,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo $s_project_documentation_title ?>
+		<?php echo lang_get( 'project_documentation_title' ) ?>
 	</td>
 	<td class="right">
 		<?php print_doc_menu( 'proj_doc_page.php' ) ?>

@@ -39,13 +39,13 @@
 ?>
 <tr>
 	<td class="print" colspan="2">
-		<?php echo $s_no_bugnotes_msg ?>
+		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
 	</td>
 </tr>
 <?php } else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo $s_bug_notes_title ?>
+		<?php echo lang_get( 'bug_notes_title' ) ?>
 	</td>
 </tr>
 <?php

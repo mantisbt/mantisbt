@@ -27,7 +27,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo $s_upload_file_title ?>
+		<?php echo lang_get( 'upload_file_title' ) ?>
 	</td>
 	<td class="right">
 		<?php print_doc_menu( 'proj_doc_add_page.php' ) ?>
@@ -35,7 +35,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_title ?>
+		<?php echo lang_get( 'title' ) ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="title" size="70" maxlength="250" />
@@ -43,7 +43,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_description ?>
+		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
 		<textarea name="description" cols="60" rows="7" wrap="virtual"></textarea>
@@ -51,7 +51,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_select_file ?>
+		<?php echo lang_get( 'select_file' ) ?>
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>" />
@@ -60,7 +60,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_upload_file_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
 	</td>
 </tr>
 </table>

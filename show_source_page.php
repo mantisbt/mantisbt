@@ -23,7 +23,7 @@
 <br />
 <div align="left">
 <?php
-	PRINT "$s_show_source_for_msg: $f_url<br />";
+	echo lang_get( 'show_source_for_msg' ) . ": $f_url<br />";
 
 	# Print source
 	show_source( $f_url );
