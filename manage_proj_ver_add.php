@@ -29,13 +29,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<p>';
+		PRINT $s_operation_successful.'<p />';
 	} else if ( version_is_duplicate( $f_project_id, $f_version )) {
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION] . '<p>';
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION] . '<p />';
 	} else {							# FAILURE
 		print_sql_error( $query );
 	}

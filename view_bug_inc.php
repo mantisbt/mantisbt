@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.21 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-28 10:07:56 $
+	# $Revision: 1.22 $
+	# $Author: prescience $
+	# $Date: 2002-09-01 22:00:41 $
 	#
-	# $Id: view_bug_inc.php,v 1.21 2002-08-28 10:07:56 jfitzell Exp $
+	# $Id: view_bug_inc.php,v 1.22 2002-09-01 22:00:41 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -45,7 +45,7 @@
 	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display( $v2_additional_information );
 ?>
-<p>
+<p />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="6">

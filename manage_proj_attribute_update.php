@@ -13,7 +13,7 @@
 	if ( empty( $f_attribute ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
-	
+
 	check_varset( $f_assigned_to, '0' );
 
 	$f_attribute = urldecode( $f_attribute );
@@ -23,17 +23,17 @@
 	$result2 = 0;
 	$query = '';
 	$t_status_flag = 0 ; #for colors
-	
+
 	check_varset( $f_color, ''  ) ;
-	
+
 	# check for duplicate
 	if ( !attribute_is_duplicate( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute ) ) {
-		$result = attribute_update( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute, $f_color); 
+		$result = attribute_update( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute, $f_color);
 		if ( !$result ) {
 			break;
 		}
 	}
-	
+
 	$t_redirect_url = 'manage_proj_menu_page.php';
 	//$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
 ?>
@@ -45,13 +45,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<p>';
+		PRINT $s_operation_successful.'<p />';
 	} else if ( attribute_is_duplicate( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute )) {
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p>';
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p />';
 	} else {							# FAILURE
 		print_sql_error( $query );
 	}

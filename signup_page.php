@@ -21,13 +21,13 @@
 	print_top_page( $g_top_include_page );
 ?>
 
-<p>
+<p />
 <div align="center">
 <?php echo $s_signup_info ?>
 </div>
 
 <?php # Signup form BEGIN ?>
-<p>
+<p />
 <div align="center">
 <table class="width50" cellspacing="1">
 <tr>

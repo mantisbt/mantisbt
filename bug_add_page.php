@@ -35,7 +35,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>

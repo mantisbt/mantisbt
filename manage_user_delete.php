@@ -21,13 +21,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( $t_protected ) {				# PROTECTED
-		PRINT $s_account_delete_protected_msg.'<p>';
+		PRINT $s_account_delete_protected_msg.'<p />';
 	} else {						# SUCCESS
-		PRINT $s_operation_successful.'<p>';
+		PRINT $s_operation_successful.'<p />';
 	}
 
 	print_bracket_link( $t_redirect_url, $s_proceed );

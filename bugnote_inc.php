@@ -29,7 +29,7 @@
 ?>
 
 <?php # Bugnotes BEGIN ?>
-<a name="bugnotes"><p>
+<a name="bugnotes"><p />
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
@@ -120,7 +120,7 @@
 		  ( isset( $f_resolve_note ) ) ) &&
 		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
-<p>
+<p />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">

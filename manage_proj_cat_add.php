@@ -45,13 +45,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		PRINT $s_operation_successful.'<p>';
+		PRINT $s_operation_successful.'<p />';
 	} else if ( $duplicate ) {		# DUPLICATE
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p>';
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p />';
 	} else {						# FAILURE
 		print_sql_error( $query );
 	}

@@ -22,7 +22,7 @@
 
 	# Check for a properly formatted email with valid MX record
 	if ( !is_valid_email( $f_email ) ) {
-		PRINT $f_email.' '.$s_invalid_email.'<p>';
+		PRINT $f_email.' '.$s_invalid_email.'<p />';
 		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
 		exit;
 	}
@@ -34,7 +34,7 @@
 
 	# Passed our checks.  Insert into DB then send email.
 	if ( !user_signup( $f_username, $f_email ) ) {
-		PRINT $s_account_create_fail.'<p>';
+		PRINT $s_account_create_fail.'<p />';
 		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
 		exit;
 	}
@@ -47,10 +47,10 @@
 	print_top_page( $g_top_include_page );
 ?>
 
-<p>
+<p />
 <div align="center">
 <?php
-	PRINT "[$f_username - $f_email] $s_password_emailed_msg<p>$s_no_reponse_msg<p>";
+	PRINT "[$f_username - $f_email] $s_password_emailed_msg<p />$s_no_reponse_msg<p />";
 
 	print_bracket_link( 'login_page.php', $s_proceed );
 ?>

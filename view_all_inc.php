@@ -1,4 +1,4 @@
-<p>
+<p />
 <table class="width100" cellspacing="0">
 <tr class="row-category2">
 	<td class="small-caption">
@@ -138,7 +138,7 @@
 	}
 ?>
 
-<p>
+<p />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="<?php echo $col_count ?>">
@@ -375,7 +375,7 @@
 </table>
 
 <?php # Show NEXT and PREV links as needed ?>
-<p>
+<p />
 <div align="center">
 <?php
 	# print the [ prev ] link

@@ -41,7 +41,7 @@
 	} // end switch
 ?>
 
-<p>
+<p />
 <div align="center">
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $s_attribute_delete_sure_msg ?>

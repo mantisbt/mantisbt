@@ -17,7 +17,7 @@
 <?php print_page_top2a() ?>
 
 <?php # Project Select Form BEGIN ?>
-<p>
+<p />
 <div align="center">
 <table class="width50" cellspacing="1">
 <tr>

@@ -237,13 +237,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	# FORM ERROR
 	# required fields not entered
 	if ( $check_failed ) {
-		PRINT '<span class="bold">'.$MANTIS_ERROR[ERROR_REPORT].'</span><p>';
+		PRINT '<span class="bold">'.$MANTIS_ERROR[ERROR_REPORT].'</span><p />';
 		if ( empty( $f_category ) ) {
 			PRINT $s_must_enter_category.'<br />';
 		}
@@ -260,7 +260,7 @@
 			PRINT $s_must_enter_description.'<br />';
 		}
 ?>
-		<p>
+		<p />
 		<form method="post" action="<?php echo $t_redirect_url ?>">
 			<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>" />
 			<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>" />
@@ -282,7 +282,7 @@
 	} else if ( !$result ) {		# MYSQL ERROR
 		print_sql_error( $query );
 	} else {						# SUCCESS
-		PRINT "$s_operation_successful<p>";
+		PRINT "$s_operation_successful<p />";
 
 		if ( isset( $f_report_stay )) {
 ?>

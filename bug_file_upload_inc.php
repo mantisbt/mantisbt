@@ -16,7 +16,7 @@
 		( $v_status < RESOLVED )&&
 		( access_level_check_greater_or_equal( REPORTER ) ) ) {
 ?>
-<p>
+<p />
 <div align="center">
 <table class="width100" cellspacing="1">
 <tr>

@@ -27,10 +27,10 @@
 	print_page_top2();
 ?>
 
-<p>
+<p />
 <div align="center">
 <?php
-	PRINT $s_operation_successful.'<p>';
+	PRINT $s_operation_successful.'<p />';
 
 	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>

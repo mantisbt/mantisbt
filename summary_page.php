@@ -60,10 +60,10 @@
 <?php print_page_top2() ?>
 
 <?php print_summary_menu( 'summary_page.php' ) ?>
-<p>
+<p />
 <? print_menu_graph() ?>
 
-<p>
+<p />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
@@ -79,9 +79,9 @@
 				<?php echo $s_by_status ?>:
 			</td>
 		</tr>
-		<?php 
+		<?php
 		if ( ON == config_get( 'customize_attributes' ) ) {
-			# to be deleted when moving to manage_project_page.php	
+			# to be deleted when moving to manage_project_page.php
 			$t_project_id = '0000000';
 
 			# custom attributes insertion
@@ -114,7 +114,7 @@
 		</tr>
 		<?php
 		if ( ON == config_get ( 'customize_attributes' ) ) {
-			# to be deleted when moving to manage_project_page.php	
+			# to be deleted when moving to manage_project_page.php
 			$t_project_id = '0000000';
 
 			# custom attributes insertion
@@ -132,9 +132,9 @@
 				<?php echo $s_by_resolution ?>:
 			</td>
 		</tr>
-		<?php 
+		<?php
 		if ( ON == config_get( 'customize_attributes' ) ) {
-			# to be deleted when moving to manage_project_page.php	
+			# to be deleted when moving to manage_project_page.php
 			$t_project_id = '0000000';
 
 			# custom attributes insertion
@@ -165,9 +165,9 @@
 				<?php echo $s_by_priority ?>:
 			</td>
 		</tr>
-		<?php 
+		<?php
 		if ( ON == config_get( 'customize_attributes' ) ) {
-			# to be deleted when moving to manage_project_page.php	
+			# to be deleted when moving to manage_project_page.php
 			$t_project_id = '0000000';
 
 			# custom attributes insertion

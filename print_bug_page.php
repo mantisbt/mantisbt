@@ -46,7 +46,7 @@
 	print_body_top();
 ?>
 
-<p>
+<p />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">

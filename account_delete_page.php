@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.12 $
+	# $Revision: 1.13 $
 	# $Author: prescience $
-	# $Date: 2002-08-31 23:31:20 $
+	# $Date: 2002-09-01 22:00:35 $
 	#
-	# $Id: account_delete_page.php,v 1.12 2002-08-31 23:31:20 prescience Exp $
+	# $Id: account_delete_page.php,v 1.13 2002-09-01 22:00:35 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,7 +36,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $s_confirm_delete_msg ?>

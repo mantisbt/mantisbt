@@ -83,7 +83,7 @@
 <?php  # displays the choices popup menus
 	if ( 1 != $t_finished ) {
 ?>
-<p>
+<p />
 <div align="center">
 <table class="width75" cellspacing="1">
 <form method="POST" action="view_all_bug_update.php">
@@ -127,7 +127,7 @@
 	} else {
 		# else, asks for a simple confirmation to close or delete
 ?>
-<p>
+<p />
 <div align="center">
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $t_question_title ?>

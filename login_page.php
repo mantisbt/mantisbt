@@ -21,15 +21,15 @@
 <?php print_page_top1() ?>
 <?php print_page_top2a() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	# Only echo error message if error variable is set
 	if ( isset( $f_error ) ) {
-		PRINT $MANTIS_ERROR[ERROR_LOGIN].'<p>';
+		PRINT $MANTIS_ERROR[ERROR_LOGIN].'<p />';
 	}
 	if ( isset( $f_cookie_error ) ) {
-		PRINT $MANTIS_ERROR[ERROR_COOKIES_DISABLED] . '<p>';
+		PRINT $MANTIS_ERROR[ERROR_COOKIES_DISABLED] . '<p />';
 	}
 
 	# Display short greeting message
@@ -38,7 +38,7 @@
 </div>
 
 <?php # Login Form BEGIN ?>
-<p>
+<p />
 <div align="center">
 <table class="width50" cellspacing="1">
 <tr>

@@ -14,7 +14,7 @@
 <?php print_page_top2() ?>
 
 <?php # Add News Form BEGIN ?>
-<p>
+<p />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
@@ -86,7 +86,7 @@
 <?php # Add News Form END ?>
 
 <?php # Edit/Delete News Form BEGIN ?>
-<p>
+<p />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>

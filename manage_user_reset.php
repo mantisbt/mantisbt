@@ -58,16 +58,16 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( ON == $f_protected ) {				# PROTECTED
-		PRINT $s_account_reset_protected_msg.'<p>';
+		PRINT $s_account_reset_protected_msg.'<p />';
 	} else if ( $result ) {					# SUCCESS
 		if ( ON == $g_send_reset_password ) {
-			PRINT $s_account_reset_msg.'<p>';
+			PRINT $s_account_reset_msg.'<p />';
 		} else {
-			PRINT $s_account_reset_msg2.'<p>';
+			PRINT $s_account_reset_msg2.'<p />';
 		}
 	} else {								# FAILURE
 		print_sql_error( $query );

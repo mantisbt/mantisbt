@@ -22,9 +22,9 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
-<?php	
+<?php
 	if ( $result ) {
 		print_bracket_link( $t_redirect_url, $s_proceed );
 	} else {

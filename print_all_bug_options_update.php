@@ -25,7 +25,7 @@
 		$t_name='f_print_'.strtolower(str_replace(' ','_',$t_field_name_arr[$i]));
 		if ( !isset( $$t_name ) || ( 1 == ($$t_name) ) ) {
 			$t_prefs_arr[$i] = 0;
-		} 
+		}
 		else {
 			$t_prefs_arr[$i] = 1;
 		}
@@ -35,18 +35,18 @@
 	$t_user_id = $f_user_id;
 
 	$c_export = implode('',$t_prefs_arr);
-	
+
 	# update preferences
 	$query = "UPDATE $g_mantis_user_print_pref_table
 			SET print_pref='$c_export'
 			WHERE user_id='$t_user_id'";
-	
+
 	$result = db_query( $query );
 
 	print_page_top1();
 	print_meta_redirect( $f_redirect_url );
 	print_page_top2();
-	PRINT '<p><div align="center">';
+	PRINT '<p /><div align="center">';
 
 	if ( $result ) {
 		PRINT $s_operation_successful;
@@ -54,8 +54,8 @@
 		PRINT $MANTIS_ERROR[ERROR_GENERIC];
 	}
 
-	PRINT '<p>';
+	PRINT '<p />';
 	print_bracket_link( $f_redirect_url, $s_proceed );
-	PRINT '<p></div>';
+	PRINT '<p /></div>';
 	print_page_bot1( __FILE__ );
 ?>

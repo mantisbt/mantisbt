@@ -23,10 +23,10 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="left">
 <?php
-	PRINT "$s_show_source_for_msg: $f_url<p>";
+	PRINT "$s_show_source_for_msg: $f_url<p />";
 
 	# Print source
 	show_source( $f_url );

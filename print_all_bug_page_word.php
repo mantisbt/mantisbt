@@ -242,7 +242,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		# display the available and selected bugs
 		if (isset($t_bug_arr_sort[$j])||($f_show_flag==0)) {
 ?>
-<p>
+<p />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
@@ -516,7 +516,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 ?>
 
 <?php # Bugnotes BEGIN ?>
-<p>
+<p />
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes

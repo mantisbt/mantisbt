@@ -65,10 +65,10 @@
 
 
 <? print_summary_menu( 'summary_page.php' ) ?>
-<p>
+<p />
 <? print_menu_graph() ?>
 
-<p>
+<p />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">

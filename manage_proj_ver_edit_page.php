@@ -19,7 +19,7 @@
 
 <?php print_manage_menu( 'manage_proj_ver_edit_page.php' ) ?>
 
-<p>
+<p />
 <div align="center">
 <table class="width50" cellspacing="1">
 <tr>

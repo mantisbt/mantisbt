@@ -62,11 +62,11 @@
 ?>
 <?php print_page_top1() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( 1 == $valid_project ) {	# SUCCESS
-		PRINT $s_operation_successful.'<p>';
+		PRINT $s_operation_successful.'<p />';
 	} else {						# FAILURE
 		echo $s_valid_project_msg;
 	}

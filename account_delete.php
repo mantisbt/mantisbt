@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.13 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-29 02:56:22 $
+	# $Revision: 1.14 $
+	# $Author: prescience $
+	# $Date: 2002-09-01 22:00:35 $
 	#
-	# $Id: account_delete.php,v 1.13 2002-08-29 02:56:22 jfitzell Exp $
+	# $Id: account_delete.php,v 1.14 2002-09-01 22:00:35 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,7 +36,7 @@
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
 	$t_user_id = current_user_get_field( 'id' );
-	
+
 	if (user_delete( $t_user_id )) {
 		# delete cookies
 		setcookie( $g_string_cookie );
@@ -52,14 +52,14 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( ON == $t_protected ) {				# PROTECTED
-		PRINT $s_account_protected_msg.'<p>';
+		PRINT $s_account_protected_msg.'<p />';
 		print_bracket_link( 'account_page.php', $s_go_back );
 	} else if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<p>';
+		PRINT $s_operation_successful.'<p />';
 		print_bracket_link( 'login_page.php', $s_proceed );
 	} else {								# FAILURE
 		print_sql_error( $query );

@@ -11,7 +11,7 @@
 	check_access( MANAGER );
 
 	# attribute definition
-	
+
 	$t_status_flag = 0 ; #for colors
 	# complete this switch to add new attributes
 	switch ($f_parameter) {
@@ -42,7 +42,7 @@
 	if ( empty( $f_attribute ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
-	
+
 
 	# Grab the data to test if the table is empty
     $query = "SELECT $f_parameter
@@ -52,19 +52,19 @@
 
     ## OOPS, No entry in the database yet.  Lets make one
     if ( 0 == db_num_rows( $result ) ) {
-		
+
 		# add attribute field and project id
-		$query = "INSERT 
+		$query = "INSERT
 				INTO $g_mantis_project_customization_table
-				(project_id) 
-				VALUES 
-				('$f_project_id')"; 
+				(project_id)
+				VALUES
+				('$f_project_id')";
 
 		$result = db_query($query);
     }
 
 	str_replace(',',' ',$f_attribute); // avoid ',' in the text field, which create multiple entries
-	$t_attributes_array = explode( '|', $f_attribute ); 
+	$t_attributes_array = explode( '|', $f_attribute );
 	$t_count = count( $t_attributes_array );
 	$result = true;
 	$duplicate = false;
@@ -99,13 +99,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		PRINT $s_operation_successful.'<p>';
+		PRINT $s_operation_successful.'<p />';
 	} else if ( $duplicate ) {		# DUPLICATE
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p>';
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p />';
 	} else {						# FAILURE
 		print_sql_error( $query );
 	}

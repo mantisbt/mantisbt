@@ -12,7 +12,7 @@
 	# config_defaults_inc.php
 
 	# This file should not be changed. If you want to override any of the values
-	# defined here, define them in a file called custom_config_inc.php, which will 
+	# defined here, define them in a file called custom_config_inc.php, which will
 	# be loaded after this file.
 
 	# In general a value of OFF means the feature is disabled and ON means the
@@ -43,8 +43,8 @@
 	# requires trailing /
 	if ( isset( $SERVER_NAME ) && isset ( $PHP_SELF ) ) {
 		$g_path = 'http://' . $SERVER_NAME . dirname( $PHP_SELF ) . '/';
-	} else { 
-		$g_path = 'http://yourhostnamehere/mantis/'; 
+	} else {
+		$g_path = 'http://yourhostnamehere/mantis/';
 	}
 
 	# path to your images directory (for icons)
@@ -55,7 +55,7 @@
 	# Symbolic links are allowed since release 0.17.3
 	$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
-	# absolute patch to your core files. The default is usually OK, 
+	# absolute patch to your core files. The default is usually OK,
 	# unless you moved the 'core' directory out of your webroot (recommended).
 	$g_core_path = $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
 
@@ -100,16 +100,16 @@
 	# The list of actions include: new, assigned, resolved, bugnote, reopened, closed, deleted, feedback
 	# In case you need to override the threshold for the 'admin' group in the custom_config_inc.php, use:
 	# $g_default_notify_flags['admin'] = OFF;
-	$g_default_notify_flags = array('reporter' => ON, 
-									'handler'  => ON, 
-									'manager'  => ON, 
+	$g_default_notify_flags = array('reporter' => ON,
+									'handler'  => ON,
+									'manager'  => ON,
 									'monitor'  => ON,
 									'admin'    => ON,
 									'bugnotes' => ON,
 									'threshold' => DEVELOPER);
 
 	# Following is the definition of the differences between the "new" action and the default.
-	# In case you need to override the threshold for the new action in custom_config_inc.php, use: 
+	# In case you need to override the threshold for the new action in custom_config_inc.php, use:
 	# $g_notify_flags['new']['threshold'] = MANAGER;
 	$g_notify_flags['new'] = array(	'bugnotes' => OFF,
 									'monitor'  => OFF);
@@ -281,7 +281,7 @@
 
 	# limit by days
 	$g_news_view_limit_days = 30;
-	
+
 	# threshold for viewing private news
 	$g_private_news_threshold = DEVELOPER;
 
@@ -338,7 +338,7 @@
 	# shows project '[project] category' when 'All Products' is selected
 	# otherwise only 'category name'
 	$g_summary_product_colon_category = OFF;
-	
+
 	# threshold for viewing summary
 	$g_view_summary_threshold = VIEWER;
 
@@ -365,7 +365,7 @@
 	# Upload destination: specify actual location in project settings
 	# DISK, DATABASE, or FTP.
 	$g_file_upload_method   = DATABASE;
-	
+
 	# FTP settings, used if $g_file_upload_method = FTP
 	$g_file_upload_ftp_server = 'ftp.myserver.com';
 	$g_file_upload_ftp_user = 'readwriteuser';
@@ -391,7 +391,7 @@
 
 	# do NOT include href or img tags here
 	# do NOT include tags that have parameters (eg. <font face="arial">)
-	$g_html_tags              = array('<p>','</p>','<li>','</li>','<ul>','</ul>',
+	$g_html_tags              = array('<p />','<p>','</p>','<li>','</li>','<ul>','</ul>',
 									'<ol>','</ol>','<br />','<br>','<pre>','</pre>',
 									'<i>','</i>','<b>','</b>','<u>','</u>');
 
@@ -509,7 +509,7 @@
 	# --- Queries --------------------
 	# Shows the total number/unique number of queries executed to serve the page.
 	$g_show_queries_count = ON;
-	
+
 	# Automatically set status to ASSIGNED whenever a bug is assigned to a person.
 	# This is useful for installations where assigned status is to be used when
 	# the defect is in progress, rather than just put in a person's queue.
@@ -550,29 +550,29 @@
  	# @@@@ Consider changing the values in this array to point to $s_color_<xxxx>.  For example,
  	#      lang_get('color_antique_white') should return 'Antique White' for English language.
 	$g_custom_colors		   = array( '#FAEBD7' => 'ANTIQUEWHITE',
-										'#F5DEB3' =>  'WHEAT',     
-										'#FFD700' => 'GOLD',  
-										'#FFFFF0' => 'IVORY',  
-										'#F0E68C' => 'KHAKI',  
-										'#E6E6FA' => 'LAVENDER',  
-										'#FFF0F5' => 'LAVENDERBLUSH',  
-										'#FFFACD' => 'LEMONCHIFFON',  
-										'#ADD8E6' => 'LIGHTBLUE',     
-										'#90EE90' => 'LIGHTGREEN',  
-										'#D3D3D3' => 'LIGHTGREY',  
-										'#FFB6C1' => 'LIGHTPINK',  
-										'#FFA07A' => 'LIGHTSALMON',  
-										'#20B2AA' => 'LIGHTSEAGREEN',  
-										'#87CEFA' => 'LIGHTSKYBLUE',  
-										'#778899' => 'LIGHTSLATEGRAY',  
-										'#B0C4DE' => 'LIGHTSTEELBLUE',  
-										'#BA55D3' => 'MEDIUMORCHID',  
-										'#D8BFD8' => 'THISTLE', 
-										'#48D1CC' => 'MEDIUMTURQUOISE',        
-										'#C71585' => 'MEDIUMVIOLETRED');   
-	# the 'slots', umber between whic you can insert status. Between 51 and 79 (included)									
+										'#F5DEB3' =>  'WHEAT',
+										'#FFD700' => 'GOLD',
+										'#FFFFF0' => 'IVORY',
+										'#F0E68C' => 'KHAKI',
+										'#E6E6FA' => 'LAVENDER',
+										'#FFF0F5' => 'LAVENDERBLUSH',
+										'#FFFACD' => 'LEMONCHIFFON',
+										'#ADD8E6' => 'LIGHTBLUE',
+										'#90EE90' => 'LIGHTGREEN',
+										'#D3D3D3' => 'LIGHTGREY',
+										'#FFB6C1' => 'LIGHTPINK',
+										'#FFA07A' => 'LIGHTSALMON',
+										'#20B2AA' => 'LIGHTSEAGREEN',
+										'#87CEFA' => 'LIGHTSKYBLUE',
+										'#778899' => 'LIGHTSLATEGRAY',
+										'#B0C4DE' => 'LIGHTSTEELBLUE',
+										'#BA55D3' => 'MEDIUMORCHID',
+										'#D8BFD8' => 'THISTLE',
+										'#48D1CC' => 'MEDIUMTURQUOISE',
+										'#C71585' => 'MEDIUMVIOLETRED');
+	# the 'slots', umber between whic you can insert status. Between 51 and 79 (included)
 	$g_custom_status_slot = array('59','79');
-						
+
 	# --- fonts ----------
 	#
 	$g_fonts                   = 'Verdana, Arial, Helvetica, sans-serif';
@@ -773,7 +773,7 @@
 	#  hide useful information from the user.
 	$g_show_warnings = ON;
 
-	
+
 	# seed to be used to generate CRC checksums for view-only-defects
 	# Assign to this variable a keyword that won't change.  If this value changes
 	# all hyper links to defects will be not work.

@@ -56,13 +56,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <?php
 	if ( ON == $f_protected ) {				# PROTECTED
-		PRINT $s_manage_user_protected_msg.'<p>';
+		PRINT $s_manage_user_protected_msg.'<p />';
 	} else if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<p>';
+		PRINT $s_operation_successful.'<p />';
 	} else {								# FAILURE
 		print_sql_error( $query );
 	}

@@ -126,7 +126,7 @@
 	print_page_top1();
 	print_meta_redirect( $f_redirect_url );
 	print_page_top2();
-	PRINT '<p><div align="center">';
+	PRINT '<p /><div align="center">';
 
 	if ( $result ) {
 		PRINT $s_operation_successful;
@@ -134,8 +134,8 @@
 		PRINT $MANTIS_ERROR[ERROR_GENERIC];
 	}
 
-	PRINT '<p>';
+	PRINT '<p />';
 	print_bracket_link( $f_redirect_url, $s_proceed );
-	PRINT '<p></div>';
+	PRINT '<p /></div>';
 	print_page_bot1( __FILE__ );
 ?>

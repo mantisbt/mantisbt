@@ -19,7 +19,7 @@
 <?php print_meta_redirect( $g_login_page, $g_wait_time ) ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 	<a href="login_page.php"><?php echo $s_click_to_login ?></a>
 </div>

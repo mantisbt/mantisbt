@@ -16,7 +16,7 @@
 <?php print_manage_menu( 'documentation_page.php' ) ?>
 
 <?php print_manage_doc_menu( 'documentation_page.php' ) ?>
-<p>
+<p />
 <?php phpinfo() ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

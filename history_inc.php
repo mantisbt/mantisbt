@@ -9,7 +9,7 @@
 	# This include file prints out the bug history
 ?>
 <?php # Bug History BEGIN ?>
-<a name="history"><p></a>
+<a name="history"><p /></a>
 <?php
 	$history = history_get_events_array( $f_id );
 ?>

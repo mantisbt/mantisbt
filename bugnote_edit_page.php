@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.24 2002-08-31 23:31:21 prescience Exp $
+	# $Id: bugnote_edit_page.php,v 1.25 2002-09-01 22:00:37 prescience Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -51,7 +51,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p>
+<p />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
