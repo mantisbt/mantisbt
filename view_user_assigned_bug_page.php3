@@ -9,12 +9,32 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### grab the user id currently logged in
-	$query = "SELECT id
-			FROM $g_mantis_user_table
-			WHERE cookie_string='$g_string_cookie_val'";
-	$result = db_query( $query );
-	$t_user_id = db_result( $result, 0);
+	if ( isset( $f_save )) {
+		### Save preferences
+		$t_settings_string = $f_assign_id."#".
+							$f_show_category."#".
+							$f_show_severity."#".
+							$f_show_status."#".
+							$f_limit_view."#".
+							$f_show_changed."#".
+							$f_hide_resolved;
+		setcookie( $g_view_assigned_cookie, $t_settings_string, time()+$g_cookie_time_length );
+	}
+	else if ( strlen($g_view_assigned_cookie_val)>6 ) {
+		### Load preferences
+		$t_setting_arr = explode( "#", $g_view_assigned_cookie_val );
+		$f_assign_id = $t_setting_arr[0];
+		$f_show_category = $t_setting_arr[1];
+		$f_show_severity = $t_setting_arr[2];
+		$f_show_status = $t_setting_arr[3];
+		$f_limit_view = $t_setting_arr[4];
+		$f_show_changed = $t_setting_arr[5];
+		$f_hide_resolved = $t_setting_arr[6];
+	}
+
+	if ( !isset( $f_assign_id ) ) {
+		$f_assign_id = get_current_user_field( "id" );
+	}
 
 	if ( !isset( $f_limit_view ) ) {
 		$f_limit_view = $g_default_limit_view;
@@ -79,10 +99,10 @@
 
 	if ( !empty( $t_where_clause ) ) {
 		$t_where_clause = substr( $t_where_clause, 5, strlen( $t_where_clause ) );
-		$t_where_clause = " WHERE handler_id='$t_user_id' AND ".$t_where_clause;
+		$t_where_clause = " WHERE handler_id='$f_assign_id' AND ".$t_where_clause;
 	}
 	else {
-		$t_where_clause = " WHERE handler_id='$t_user_id'";
+		$t_where_clause = " WHERE handler_id='$f_assign_id'";
 	}
 
 	$query = $query.$t_where_clause;
@@ -111,17 +131,22 @@
 <div align=center>
 	[ <a href="<? echo $g_view_bug_all_page ?>"><? echo $s_all_bugs_link ?></a> ]
 	[ <a href="<? echo $g_view_user_reported_bug_page ?>"><? echo $s_reported_bugs_link ?></a> ]
+	[ <? echo $s_assigned_bugs_link ?> ]
 </div>
 
 <p>
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100% cols=7>
+	<table width=100%>
 	<tr>
 		<form method=post action="<? echo $g_view_user_assigned_bug_page ?>">
 		<input type=hidden name=f_offset value="0">
+		<input type=hidden name=f_save value="1">
 		<td align=center>
+		<select name=f_assign_id>
+			<? print_handler_option_list( $f_assign_id ) ?>
+		</select>
 		<select name=f_show_category>
 			<option value="any"><? echo $s_any ?>
 			<option value="any">
@@ -152,7 +177,7 @@
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100% cols=7>
+	<table width=100%>
 	<tr>
 		<td colspan=7 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_viewing_bugs_title ?></b>
@@ -210,7 +235,7 @@
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			$v_summary = string_display( $v_summary );
-			$t_last_updated = date( "m-d", sql_to_unix_time( $v_last_updated ) );
+			$t_last_updated = date( $g_short_date_format, sql_to_unix_time( $v_last_updated ) );
 
 			### alternate row colors
 			if ($i % 2== 0) {
@@ -232,13 +257,32 @@
 
 			### grab the bugnote count
 			$bugnote_count = get_bugnote_count( $v_id );
+
+			$query = "SELECT MAX(last_modified)
+					FROM $g_mantis_bugnote_table
+					WHERE bug_id='$v_id'";
+			$res2 = db_query( $query );
+			$v_bugnote_updated = db_result( $res2, 0, 0 );
 	?>
 	<tr bgcolor=<? echo $status_color ?> align=center>
 		<td>
 			<? print_bug_link( $v_id ) ?>
 		</td>
 		<td>
-			<? if ($bugnote_count > 0) echo $bugnote_count ?>
+			<?
+				if ($bugnote_count > 0){
+					if ( sql_to_unix_time( $v_bugnote_updated ) >
+						strtotime( "-$f_show_changed hours" ) ) {
+						PRINT "<b>$bugnote_count</b>";
+					}
+					else {
+						PRINT "$bugnote_count";
+					}
+				}
+				else {
+					echo "&nbsp;";
+				}
+			?>
 		</td>
 		<td>
 			<? echo $v_category ?>
@@ -261,7 +305,7 @@
 				}
 			?>
 		</td>
-		<td>
+		<td align=left>
 			<? echo $v_summary ?>
 		</td>
 	</tr>
@@ -283,10 +327,10 @@
 	}
 
 	if ( $f_offset_prev >= 0 ) {
- 		PRINT "[ <a href=\"$g_view_user_assigned_bug_page?f_offset=$f_offset_prev&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved\">View Prev $f_limit_view</a> ] ";
+ 		PRINT "[ <a href=\"$g_view_user_assigned_bug_page?f_offset=$f_offset_prev&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved&f_assign_id=$f_assign_id\">View Prev $f_limit_view</a> ] ";
 	}
 	if ( $row_count == $f_limit_view ) {
- 		PRINT "[ <a href=\"$g_view_user_assigned_bug_page?f_offset=$f_offset_next&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved\">View Next $f_limit_view</a> ]";
+ 		PRINT "[ <a href=\"$g_view_user_assigned_bug_page?f_offset=$f_offset_next&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved&f_assign_id=$f_assign_id\">View Next $f_limit_view</a> ]";
 	}
 ?>
 </div>
