@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.12 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: current_user_api.php,v 1.13 2004-03-05 02:27:51 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -98,31 +98,9 @@
 		}
 
 		$t_view_all_cookie = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-
-		$t_setting_arr = explode( '#', $t_view_all_cookie );
-	
-		$t_filter = array();
-
-		# Assign each value to a named key
-		$t_filter['show_category'] 		= $t_setting_arr[1];
-		$t_filter['show_severity']	 	= $t_setting_arr[2];
-		$t_filter['show_status'] 		= $t_setting_arr[3];
-		$t_filter['per_page'] 			= $t_setting_arr[4];
-		$t_filter['highlight_changed'] 	= $t_setting_arr[5];
-		$t_filter['hide_closed'] 		= $t_setting_arr[6];
-		$t_filter['reporter_id']		= $t_setting_arr[7];
-		$t_filter['handler_id'] 		= $t_setting_arr[8];
-		$t_filter['sort'] 				= $t_setting_arr[9];
-		$t_filter['dir']		 		= $t_setting_arr[10];
-		$t_filter['start_month']		= $t_setting_arr[11];
-		$t_filter['start_day'] 			= $t_setting_arr[12];
-		$t_filter['start_year'] 		= $t_setting_arr[13];
-		$t_filter['end_month'] 			= $t_setting_arr[14];
-		$t_filter['end_day']			= $t_setting_arr[15];
-		$t_filter['end_year']			= $t_setting_arr[16];
-		$t_filter['search']				= $t_setting_arr[17];
-		$t_filter['hide_resolved'] 		= $t_setting_arr[18];
-
+		$t_cookie_detail = explode( '#', $t_view_all_cookie, 2 );
+		$t_filter = unserialize( $t_cookie_detail[1] );
+		
 		return $t_filter;
 	}
 ?>

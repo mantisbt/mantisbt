@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.20 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: gpc_api.php,v 1.21 2004-03-05 02:27:52 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -257,6 +257,7 @@
 		if ( 0 == strcasecmp( 'off', $p_string ) ||
 			 0 == strcasecmp( 'no', $p_string ) ||
 			 0 == strcasecmp( 'false', $p_string ) ||
+			 0 == strcasecmp( '', $p_string ) ||
 			 0 == strcasecmp( '0', $p_string ) ) {
 			return false;
 		} else {

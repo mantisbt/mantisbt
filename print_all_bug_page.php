@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.74 2004-02-05 00:43:52 jlatour Exp $
+	# $Id: print_all_bug_page.php,v 1.75 2004-03-05 02:27:51 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -40,13 +40,15 @@
 	}
 
 	# check to see if new cookie is needed
-	$t_setting_arr 			= explode( '#', $t_cookie_value );
-	if ( $t_setting_arr[0] != $g_cookie_version ) {
+	if ( ! filter_is_cookie_valid() ) {
 		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
-	$f_highlight_changed 	= $t_setting_arr[5];
-	$f_sort 				= $t_setting_arr[9];
-	$f_dir		 			= $t_setting_arr[10];
+	$t_setting_arr = explode( '#', $t_cookie_value, 2 );
+	$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
+	
+	$f_highlight_changed 	= $t_filter_cookie_arr['highlight_changed'];
+	$f_sort 				= $t_filter_cookie_arr['sort'];
+	$f_dir		 			= $t_filter_cookie_arr['dir'];
 	$t_project_id 			= helper_get_current_project( );
 
 	# This replaces the actual search that used to be here

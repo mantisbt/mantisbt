@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.25 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: custom_field_api.php,v 1.26 2004-03-05 02:27:52 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -500,11 +500,22 @@
 
 	# --------------------
 	# Return an array all custom field ids
-	function custom_field_get_ids() {
+	function custom_field_get_ids( $p_project_id = ALL_PROJECTS ) {
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT id FROM
-				  $t_custom_field_table
-				  ORDER BY name ASC";
+		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
+
+		if ( ALL_PROJECTS == $p_project_id ) {
+			$query = "SELECT id FROM $t_custom_field_table
+						ORDER BY name ASC";
+		} else {
+			$query = "SELECT $t_custom_field_table.id FROM
+							$t_custom_field_table, $t_custom_field_project_table
+						WHERE
+							$t_custom_field_project_table.project_id = '$p_project_id' AND
+							$t_custom_field_table.id = $t_custom_field_project_table.field_id
+						ORDER BY name ASC";
+		}
+		
 		$result = db_query( $query );
 
 		$t_row_count = db_num_rows( $result );
@@ -696,6 +707,53 @@
 		}
 
 		return true;
+	}
+
+	# --------------------
+	# Get All Possible Values for a Field.
+	function custom_field_distinct_values( $p_field_id ) {
+		$c_field_id  = db_prepare_int( $p_field_id );
+		$t_custom_field_string_table = config_get( 'mantis_custom_field_string_table' );
+		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
+		$t_return_arr = array();
+		
+		$query = "SELECT type, possible_values FROM $t_custom_field_table WHERE id='$c_field_id'";
+		$result = db_query( $query );
+		
+		$t_row_count = db_num_rows( $result );
+		if ( 0 == $t_row_count ) {
+			return false;
+		}
+		$row = db_fetch_array( $result );
+		
+		# If an enumeration type, we get all possible values, not just used values
+		if ( CUSTOM_FIELD_TYPE_ENUM == $row['type'] ) {
+			$t_values_arr = explode( '|', $row['possible_values'] );
+			
+			foreach( $t_values_arr as $t_option ) {
+				array_push( $t_return_arr, $t_option );
+			}
+		} else {
+			$query2 = "SELECT value FROM $t_custom_field_string_table
+						WHERE field_id = '$c_field_id'
+						GROUP BY value";
+			
+			$result2 = db_query( $query2 );
+			
+			$t_row_count = db_num_rows( $result2 );
+			
+			if ( 0 == $t_row_count ) {
+				return false;
+			}
+			
+			for ( $i = 0; $i < $t_row_count; $i++ ) {
+				$row = db_fetch_array( $result2 );
+				if( trim( $row['value'] ) != "" ) {
+					array_push( $t_return_arr, $row['value'] );
+				}
+			}
+		}
+		return $t_return_arr;
 	}
 
 	#===================================

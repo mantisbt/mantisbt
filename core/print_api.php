@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.72 2004-02-05 01:17:13 jlatour Exp $
+	# $Id: print_api.php,v 1.73 2004-03-05 02:27:52 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -534,6 +534,33 @@
 			echo ">$t_version</option>";
 		}
 	}
+	# --------------------
+	function print_build_option_list( $p_build='' ) {
+		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_overall_build_arr = array();
+
+		$t_project_id = helper_get_current_project();
+
+		# Get the "found in" build list
+		$query = "SELECT DISTINCT build
+				FROM $t_bug_table
+				WHERE project_id='$t_project_id'
+				ORDER BY build DESC";
+		$result = db_query( $query );
+		$option_count = db_num_rows( $result );
+		
+		for ( $i = 0; $i < $option_count; $i++ ) {
+			$row = db_fetch_array( $result );
+			$t_overall_build_arr[] = $row['build'];
+		}
+
+		foreach( $t_overall_build_arr as $t_build ) {
+			echo "<option value=\"$t_build\"";
+			check_selected( $t_build, $p_build );
+			echo ">$t_build</option>";
+		}
+	}
+
 	# --------------------
 	# select the proper enum values based on the input parameter
 	# we use variable variables in order to achieve this

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.147 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.148 2004-03-05 02:27:51 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -799,7 +799,7 @@
 	$g_cookie_path			= '/';
 	$g_cookie_domain		= '';
 	# cookie version for view_all_page
-	$g_cookie_version		= 'v4';
+	$g_cookie_version		= 'v5';
 
 	# --- cookie prefix ---------------
 	# set this to a unique identifier.  No spaces.
@@ -810,6 +810,12 @@
 	$g_project_cookie		= $g_cookie_prefix.'_PROJECT_COOKIE';
 	$g_view_all_cookie		= $g_cookie_prefix.'_VIEW_ALL_COOKIE';
 	$g_manage_cookie		= $g_cookie_prefix.'_MANAGE_COOKIE';
+
+	#######################################
+	# Mantis Filter Variables
+	#######################################
+	$g_filter_by_custom_fields = ON;
+	$g_filter_custom_fields_per_row = 10;
 
 	#######################################
 	# Mantis Database Table Variables

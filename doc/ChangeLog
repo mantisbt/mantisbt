@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.19.0
 
+ * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.35 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.36 2004-03-05 02:27:51 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,14 +42,8 @@
 
 	$t_cookie_value = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 
-	# check to see if the cookie does not exist
-	if ( is_blank( $t_cookie_value ) ) {
-		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
-	}
-
 	# check to see if new cookie is needed
-	$t_setting_arr 			= explode( '#', $t_cookie_value );
-	if ( $t_setting_arr[0] != $g_cookie_version ) {
+	if ( ! filter_is_cookie_valid() ) {
 		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
 
