@@ -100,11 +100,18 @@
 </form>
 </table>
 
+<?php
+	$col_count = 7;
+	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) {
+		$col_count = 8;
+	}
+?>
+
 <p>
-<table class="width100" cellspacing="1">
 <form method="post" action="<?php echo $g_view_all_bug_update ?>">
+<table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="8">
+	<td class="form-title" colspan="<?php echo $col_count ?>">
 		<?php echo $s_viewing_bugs_title ?>
 		<?php
 			if ( $row_count > 0 ) {
@@ -137,9 +144,11 @@
 	</td>
 </tr>
 <tr class="row-category">
+<?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
 	<td class="center" width="2%">
 		&nbsp;
 	</td>
+<?php	} ?>
 	<td class="center" width="5%">
 		<?php print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
@@ -214,13 +223,11 @@
 
 ?>
 <tr bgcolor="<?php echo $status_color ?>">
+	<?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
 	<td>
-		<?php	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $v_id ?>">
-		<?php } else { ?>
-			&nbsp;
-		<?php } ?>
 	</td>
+	<?php	} ?>
 	<td class="center">
 		<?php
 			if ( ON == $g_show_priority_text ) {
@@ -289,7 +296,7 @@
 <?php
 	}
 ?>
-<?php	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
+<?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
 <tr>
 	<td colspan="9">
 		<select name="f_project_id">
@@ -304,9 +311,9 @@
 		<input type="submit" value="<?php echo $s_move_bugs ?>">
 	</td>
 </tr>
-</form>
 <?php } ?>
 </table>
+</form>
 
 <?php # Show NEXT and PREV links as needed ?>
 <p>
