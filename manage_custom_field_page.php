@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_page.php,v 1.12 2003-02-16 13:20:04 jlatour Exp $
+	# $Id: manage_custom_field_page.php,v 1.13 2003-02-17 00:29:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -61,7 +61,7 @@
 	?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<a href="manage_custom_field_edit_page.php?field_id=<?php echo $t_field_id ?>"><?php echo $t_desc['name'] ?></a>
+				<a href="manage_custom_field_edit_page.php?field_id=<?php echo $t_field_id ?>"><?php echo string_display( $t_desc['name'] ) ?></a>
 			</td>
 			<td>
 				<?php echo count( custom_field_get_project_ids( $t_field_id ) ) ?>
@@ -70,10 +70,10 @@
 				<?php echo get_enum_element( 'custom_field_type', $t_desc['type'] ) ?>
 			</td>
 			<td>
-				<?php echo $t_desc['possible_values'] ?>
+				<?php echo string_display( $t_desc['possible_values'] ) ?>
 			</td>
 			<td>
-				<?php echo $t_desc['default_value'] ?>
+				<?php echo string_display( $t_desc['default_value'] ) ?>
 			</td>
 			<td align="center">
 				<?php echo trans_bool( $t_desc['advanced'] ) ?>

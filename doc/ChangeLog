@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+0.18.0??
+
+ * Fix: handle quotes and special characters in text fields in manage_custom_field_* pages
+
 2003.02.16  -  0.18.0a1
 
  This release contains literally hundreds, if not thousands, of changes.

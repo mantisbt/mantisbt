@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.13 2003-02-16 23:16:32 vboctor Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.14 2003-02-17 00:29:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,7 +30,6 @@
 	print_manage_menu( 'manage_custom_field_edit_page.php' );
 
 	$t_definition = custom_field_get_definition( $f_field_id );
-	$t_definition['name'] = string_attribute( $t_definition['name'] );
 ?>
 <br />
 <div align="center">
@@ -49,7 +48,7 @@
 				<?php echo lang_get( 'custom_field_name' ) ?>
 			</td>
 			<td>
-				<input type="text" name="name" size="32" maxlength="64" value="<?php echo $t_definition['name'] ?>" />
+				<input type="text" name="name" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -67,7 +66,7 @@
 				<?php echo lang_get( 'custom_field_possible_values' ) ?>
 			</td>
 			<td>
-				<input type="text" name="possible_values" size="32" maxlength="255" value="<?php echo $t_definition['possible_values'] ?>" />
+				<input type="text" name="possible_values" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -75,7 +74,7 @@
 				<?php echo lang_get( 'custom_field_default_value' ) ?>
 			</td>
 			<td>
-				<input type="text" name="default_value" size="32" maxlength="255" value="<?php echo $t_definition['default_value'] ?>" />
+				<input type="text" name="default_value" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -83,7 +82,7 @@
 				<?php echo lang_get( 'custom_field_valid_regexp' ) ?>
 			</td>
 			<td>
-				<input type="text" name="valid_regexp" size="32" maxlength="255" value="<?php echo $t_definition['valid_regexp'] ?>" />
+				<input type="text" name="valid_regexp" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['valid_regexp'] ) ?>" />
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>
@@ -145,7 +144,7 @@
 <div class="border-center">
 	<form method="post" action="manage_custom_field_delete.php">
 		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-		<input type="hidden" name="return" value="<?php echo $f_return ?>" />
+		<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ) ?>" />
 		<input type="submit" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
 	</form>
 </div>
