@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.35 2003-02-15 07:43:49 jfitzell Exp $
+	# $Id: helper_api.php,v 1.36 2003-02-16 10:49:38 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -131,11 +131,11 @@
 
 		if ( null === $t_project_id ) {
 			$t_project_id = current_user_get_pref( 'default_project' );
-			
-			if ( ! project_exists( $t_project_id ) ||
-				 ! access_has_project_level( VIEWER, $t_project_id ) ) {
-				$t_project_id = 0;
-			}
+		}
+
+		if ( ! project_exists( $t_project_id ) ||
+			 ! access_has_project_level( VIEWER, $t_project_id ) ) {
+			$t_project_id = 0;
 		}
 		
 		return (int)$t_project_id;
