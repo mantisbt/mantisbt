@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.73 2004-02-05 00:34:37 jlatour Exp $
+	# $Id: print_all_bug_page.php,v 1.74 2004-02-05 00:43:52 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,7 +47,7 @@
 	$f_highlight_changed 	= $t_setting_arr[5];
 	$f_sort 				= $t_setting_arr[9];
 	$f_dir		 			= $t_setting_arr[10];
-	$t_project_id = helper_get_current_project( );
+	$t_project_id 			= helper_get_current_project( );
 
 	# This replaces the actual search that used to be here
 	$f_page_number = gpc_get_int( 'page_number', 1 );
