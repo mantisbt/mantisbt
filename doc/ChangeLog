@@ -32,6 +32,7 @@ Mantis ChangeLog
  * Fix #3140: attachment.png is corrupt in CVS.
  * Fix #3143: Show a padlock instead of "p".
  * Fix #3155: Field 'date_added' (for attachments) not correctly printed in print_bug_page.php.
+ * Fix #3175: login fails when saved password is PLAIN and login_method is not PLAIN.
  * Fix #3186: $t_protocol not set right  (PHP 4.3.0/Netscape Enterprise 6.1/Linux installation with Mozilla client).
  * Fix #3218: Version vs. Product version confusing (renamed Version to OS Version in advanced pages - English language).
  * Fix #3214: Private projects links get replaced by public project links.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.28 2003-02-26 09:11:19 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.29 2003-07-13 10:27:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -181,7 +181,7 @@
 	#  crypt() will extract the appropriate portion of the stored password as its salt
 	function auth_process_plain_password( $p_password, $p_salt=null, $p_method=null ) {
 		$t_login_method = config_get( 'login_method' );
-		if ( $p_method != null ) {
+		if ( $p_method !== null ) {
 			$t_login_method = $p_method;
 		}
 
