@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.33 2004-06-15 07:27:15 narcissus Exp $
+	# $Id: custom_field_api.php,v 1.34 2004-06-16 00:35:49 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -802,11 +802,13 @@
 			}
 		} else {
 			$t_where = '';
+			$t_from = $t_custom_field_string_table;
 			if ( ALL_PROJECTS != $p_project_id ) {
 				$t_where = " AND $t_mantis_bug_table.id = $t_custom_field_string_table.bug_id AND 
 							$t_mantis_bug_table.project_id = '$p_project_id'";
+				$t_from = $t_from . ", $t_mantis_bug_table";
 			}
-			$query2 = "SELECT $t_custom_field_string_table.value FROM $t_custom_field_string_table, $t_mantis_bug_table
+			$query2 = "SELECT $t_custom_field_string_table.value FROM $t_from
 						WHERE $t_custom_field_string_table.field_id='$c_field_id' $t_where
 						GROUP BY $t_custom_field_string_table.value";
 			$result2 = db_query( $query2 );
