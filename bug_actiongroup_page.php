@@ -15,19 +15,19 @@
 <?php
 	# the pencil shortcut, to directly edit bugs
 	if ( $QUERY_STRING!='' ) {
-	$f_qsValues=split('&', $QUERY_STRING);
-	foreach($f_qsValues as $value) {
-		$val=split('=', $value);	
-		if ( substr($val[0], 0, 6)=='update' ) {
-			print_meta_redirect( 'bug_update_advanced_page.php?f_id='.substr($val[0], 7, strlen($val[0])-9), 0 );
+		$f_qsValues=split('&', $QUERY_STRING);
+		foreach($f_qsValues as $value) {
+			$val=split('=', $value);	
+			if ( substr($val[0], 0, 6)=='update' ) {
+				print_meta_redirect( 'bug_update_advanced_page.php?f_id='.substr($val[0], 7, strlen($val[0])-9), 0 );
+			}
 		}
 	}
-}
 	
 	# redirects to all_bug_page if nothing is selected
 	if (( $f_action=='') or count($f_bug_arr)==0 ) {
-	print_meta_redirect( 'view_all_bug_page.php',0);
-	exit;
+		print_meta_redirect( 'view_all_bug_page.php',0);
+		exit;
 	}
 
 
@@ -104,7 +104,8 @@
 
 <?php
 	foreach($f_bug_arr as $value) {
-	print "<input type=\"hidden\" name=\"f_bug_arr[]\" value=\"$value\">"; }
+		print "<input type=\"hidden\" name=\"f_bug_arr[]\" value=\"$value\">";
+	}
 ?>	 
 
 <tr class="row-1">
@@ -115,17 +116,18 @@
 		<select name="<?php echo $t_form ?>">  
 			<?php 
 				switch ( $f_action ) {
-						case 'MOVE':
-							print_project_option_list(); 
-							break;
+					case 'MOVE':
+						print_project_option_list(); 
+						break;
 	
-						case 'ASSIGN':
-							print_assign_to_option_list();  
-							break;
+					case 'ASSIGN':
+						print_assign_to_option_list();  
+						break;
 				}
 
 				#other forms use the same function to display the list
-				print_enum_string_option_list( $t_request, FIXED ) ?> 
+				print_enum_string_option_list( $t_request, FIXED );
+			?> 
 		</select>
 	</td>
 </tr>
@@ -156,10 +158,10 @@ else {
 		<input type="hidden" name="f_actionconfirmed" value="1">
 		<input type="hidden" name="f_action" value="<?php echo $f_action ?>">
 
-		<?php
+	<?php
 		foreach($f_bug_arr as $value)  
-		print "<input type=\"hidden\" name=\"f_bug_arr[]\" value=\"$value\">"; 
-		?>	
+			print "<input type=\"hidden\" name=\"f_bug_arr[]\" value=\"$value\">"; 
+	?>	
 
 		<input type="submit" value="<?php echo $t_button_title ?>"> 
 	</form>

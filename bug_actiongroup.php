@@ -36,7 +36,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 			break ;
 
 		case RESOLVED :
-			$t_query=" status='$p_status',"." resolution='$p_request'";
+			$t_query=" status='$p_status', resolution='$p_request'";
 			break ;
 
 		case 'UP_PRIOR' :
@@ -49,9 +49,9 @@ function updateBugLite($p_id, $p_status, $p_request) {
 
 	}
 	# Update fields
-	$query = "UPDATE $g_mantis_bug_table
-    		SET handler_id='$t_handler_id',".$t_query."
-			WHERE id='$p_id'";
+	$query = "UPDATE $g_mantis_bug_table ".
+    		"SET handler_id='$t_handler_id', $t_query ".
+			"WHERE id='$p_id'";
 
    	$result = db_query($query);
 
@@ -113,6 +113,5 @@ if ( $f_actionconfirmed=='1' ) {
 	}
 
 	print_meta_redirect( 'view_all_bug_page.php',0);
-	
 } 
 ?>
