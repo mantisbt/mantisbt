@@ -13,7 +13,7 @@
 	$f_title 		= string_prepare_text( $f_title );
 	$f_description 	= string_prepare_textarea( $f_description );
 
-	$query = "UPDATE mantis_project_file_table
+	$query = "UPDATE $g_mantis_project_file_table
 			SET title='$f_title', description='$f_description'
 			WHERE id='$f_id'";
 	$result = db_query( $query );

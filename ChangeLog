@@ -5,6 +5,7 @@ Mantis
  * Fixed minor HTML errors in core_html_API.php.
  * Fixed the view, report, and update pages to honor the forces advanced/simple modes.
  * Fixed problem with extra br tags being inserted in project descriptions
+ * Fixed table names in the proj_doc_* pages to use variables instead of hardcoded names.
  * Modified the mantis_bug_table.build field to be a VARCHAR(32).
  * Modified the mantis_bug_table.votes field to be an INT(4).
  * Modified the mantis_bug_table.os_build field to a VARCHAR(32).

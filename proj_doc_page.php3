@@ -12,7 +12,7 @@
 
 	### Select project files
 	$query = "SELECT *
-			FROM mantis_project_file_table
+			FROM $g_mantis_project_file_table
 			WHERE project_id='$g_project_cookie_val'";
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );

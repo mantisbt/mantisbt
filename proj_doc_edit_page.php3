@@ -12,7 +12,7 @@
 
 
 	$query = "SELECT *
-			FROM mantis_project_file_table
+			FROM $g_mantis_project_file_table
 			WHERE id='$f_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );

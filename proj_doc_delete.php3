@@ -10,7 +10,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );  ### @@@ Need to check that the person is assigned to this project
 
-	$query = "DELETE FROM mantis_project_file_table
+	$query = "DELETE FROM $g_mantis_project_file_table
 			WHERE id='$f_id'";
 	$result = db_query( $query );
 ?>
