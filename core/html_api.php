@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.6 2002-08-31 01:59:34 vboctor Exp $
+	# $Id: html_api.php,v 1.7 2002-08-31 02:54:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -311,7 +311,7 @@
 				if ( access_level_check_greater_or_equal( REPORTER ) ) {
 					if ( "0000000" != $g_project_cookie_val ) {
 						$t_report_url = get_report_redirect_url( 1 );
-						PRINT '<a href="$t_report_url">' . lang_get( 'report_bug_link' ) . '</a> | ';
+						PRINT '<a href="' . $t_report_url . '">' . lang_get( 'report_bug_link' ) . '</a> | ';
 					} else {
 						PRINT '<a href="login_select_proj_page.php?f_ref=' . get_report_redirect_url( 1 ) . '">' . lang_get( 'report_bug_link' ) . '</a> | ';
 					}

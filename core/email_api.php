@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.9 2002-08-31 01:59:34 vboctor Exp $
+	# $Id: email_api.php,v 1.10 2002-08-31 02:54:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -363,7 +363,11 @@
 
 		$t_reporter_name = user_get_name( $v_reporter_id );
 
-		$t_handler_name  = user_get_name( $v_handler_id );
+		if ( 0 != $v_handler_id ) {
+			$t_handler_name  = user_get_name( $v_handler_id );
+		} else {
+			$t_handler_name  = '';
+		}
 
 		$v2_description   = string_email( $v2_description );
 		$v_summary        = string_email( $v_summary );
