@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.34 2002-10-27 23:35:40 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.35 2002-10-29 08:30:21 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,48 +15,20 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bug_id = gpc_get_int( 'f_bug_id' );
+
 	if ( SIMPLE_ONLY == config_get( 'show_update' ) ) {
 		print_header_redirect ( 'bug_update_page.php?f_bug_id='.$f_bug_id );
 	}
-
-	$f_bug_id		= gpc_get_int( 'f_bug_id' );
 
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'update_bug_threshold' ) );
 	bug_ensure_exists( $f_bug_id );
 
-	$c_bug_id = (integer)$f_bug_id;
-
-	$t_bug_table = config_get( 'mantis_bug_table' );
-
-	$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-			UNIX_TIMESTAMP(last_updated) as last_updated
-			FROM $t_bug_table
-			WHERE id='$c_bug_id'";
-	$result = db_query( $query );
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
-
 	# if bug is private, make sure user can view private bugs
-	access_bug_check( $f_bug_id, $v_view_state );
+	access_bug_check( $f_bug_id );
 
-	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
-
-	$query = "SELECT *
-    		FROM $t_bug_text_table
-    		WHERE id='$v_bug_text_id'";
-    $result = db_query( $query );
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v2' );
-
-	$v_os 						= string_display( $v_os );
-	$v_os_build 				= string_display( $v_os_build );
-	$v_platform					= string_display( $v_platform );
-	$v_version 					= string_display( $v_version );
-	$v_summary					= string_edit_text( $v_summary );
-	$v2_description 			= string_edit_textarea( $v2_description );
-	$v2_steps_to_reproduce 		= string_edit_textarea( $v2_steps_to_reproduce );
-	$v2_additional_information 	= string_edit_textarea( $v2_additional_information );
+	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -66,9 +38,9 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<input type="hidden" name="f_bug_id" value="<?php echo $v_id ?>" />
-		<input type="hidden" name="f_old_status" value="<?php echo $v_status ?>" />
-		<input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
+		<input type="hidden" name="f_old_status" value="<?php echo $t_bug->status ?>" />
+		<input type="hidden" name="f_old_handler_id" value="<?php echo $t_bug->handler_id ?>" />
 		<?php echo lang_get( 'updating_bug_advanced_title' ) ?>
 	</td>
 	<td class="right" colspan="3">
@@ -76,7 +48,7 @@
 	print_bracket_link( string_get_bug_view_url( $f_bug_id ), lang_get( 'back_to_bug_link' ) );
 
 	if ( BOTH == config_get( 'show_update' ) ) {
-		print_bracket_link( 'bug_update_page.php?f_bug_id='.$f_bug_id, lang_get( 'update_simple_link' ) );
+		print_bracket_link( 'bug_update_page.php?f_bug_id=' . $f_bug_id, lang_get( 'update_simple_link' ) );
 	}
 ?>
 	</td>
@@ -103,28 +75,28 @@
 </tr>
 <tr class="row-2">
 	<td>
-		<?php echo $v_id ?>
+		<?php echo bug_format_id( $f_bug_id ) ?>
 	</td>
 	<td>
 		<select name="f_category">
-			<?php print_category_option_list( $v_category ) ?>
+			<?php print_category_option_list( $t_bug->category ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_severity">
-			<?php print_enum_string_option_list( 'severity', $v_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_bug->severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_reproducibility">
-			<?php print_enum_string_option_list( 'reproducibility', $v_reproducibility ) ?>
+			<?php print_enum_string_option_list( 'reproducibility', $t_bug->reproducibility ) ?>
 		</select>
 	</td>
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
 	</td>
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -138,7 +110,7 @@
 	</td>
 	<td>
 		<select name="f_reporter_id">
-			<?php print_reporter_option_list( $v_reporter_id ) ?>
+			<?php print_reporter_option_list( $t_bug->reporter_id ) ?>
 		</select>
 	</td>
 	<td class="category">
@@ -146,7 +118,7 @@
 	</td>
 	<td>
 		<select name="f_view_state">
-			<?php print_enum_string_option_list( 'view_state', $v_view_state) ?>
+			<?php print_enum_string_option_list( 'view_state', $t_bug->view_state) ?>
 		</select>
 	</td>
 	<td colspan="2">
@@ -160,7 +132,7 @@
 	<td colspan="5">
 		<select name="f_handler_id">
 			<option value="0"></option>
-			<?php print_assign_to_option_list( $v_handler_id ) ?>
+			<?php print_assign_to_option_list( $t_bug->handler_id ) ?>
 		</select>
 	</td>
 </tr>
@@ -170,42 +142,42 @@
 	</td>
 	<td align="left">
 		<select name="f_priority">
-			<?php print_enum_string_option_list( 'priority', $v_priority ) ?>
+			<?php print_enum_string_option_list( 'priority', $t_bug->priority ) ?>
 		</select>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
+		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_platform" size="16" maxlength="32" value="<?php echo $v_platform ?>" />
+		<input type="text" name="f_platform" size="16" maxlength="32" value="<?php echo $t_bug->platform ?>" />
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'status' ) ?>
 	</td>
-	<td bgcolor="<?php echo get_status_color( $v_status ) ?>">
+	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
 		<select name="f_status">
-			<?php print_enum_string_option_list( 'status', $v_status ) ?>
+			<?php print_enum_string_option_list( 'status', $t_bug->status ) ?>
 		</select>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
-		<?php echo $v_duplicate_id ?>
+		<?php echo $t_bug->duplicate_id ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'os' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_os" size="16" maxlength="32" value="<?php echo $v_os ?>" />
+		<input type="text" name="f_os" size="16" maxlength="32" value="<?php echo $t_bug->os ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -214,7 +186,7 @@
 	</td>
 	<td>
 		<select name="f_projection">
-			<?php print_enum_string_option_list( 'projection', $v_projection ) ?>
+			<?php print_enum_string_option_list( 'projection', $t_bug->projection ) ?>
 		</select>
 	</td>
 	<td colspan="2">
@@ -224,7 +196,7 @@
 		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $v_os_build ?>" />
+		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $t_bug->os_build ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -233,7 +205,7 @@
 	</td>
 	<td>
 		<select name="f_eta">
-			<?php print_enum_string_option_list( 'eta', $v_eta ) ?>
+			<?php print_enum_string_option_list( 'eta', $t_bug->eta ) ?>
 		</select>
 	</td>
 	<td colspan="2">
@@ -244,7 +216,7 @@
 	</td>
 	<td>
 		<select name="f_version">
-			<?php print_version_option_list( $v_version ) ?>
+			<?php print_version_option_list( $t_bug->version ) ?>
 		</select>
 	</td>
 </tr>
@@ -256,7 +228,7 @@
 		<?php echo lang_get( 'build' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_build" size="16" maxlength="32" value="<?php echo $v_build ?>" />
+		<input type="text" name="f_build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -267,7 +239,7 @@
 		<?php echo lang_get( 'votes' ) ?>
 	</td>
 	<td>
-		<?php echo $v_votes ?>
+		<?php echo $t_bug->votes ?>
 	</td>
 </tr>
 <tr>
@@ -280,7 +252,7 @@
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $v_summary ?>" />
+		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $t_bug->summary ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -288,7 +260,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="60" rows="5" name="f_description" wrap="virtual"><?php echo $v2_description ?></textarea>
+		<textarea cols="60" rows="5" name="f_description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
 	</td>
 </tr>
 <tr class="row-1">
@@ -296,7 +268,7 @@
 		<?php echo lang_get( 'steps_to_reproduce' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="60" rows="5" name="f_steps_to_reproduce" wrap="virtual"><?php echo $v2_steps_to_reproduce ?></textarea>
+		<textarea cols="60" rows="5" name="f_steps_to_reproduce" wrap="virtual"><?php echo $t_bug->steps_to_reproduce ?></textarea>
 	</td>
 </tr>
 <tr class="row-2">
@@ -304,7 +276,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="60" rows="5" name="f_additional_information" wrap="virtual"><?php echo $v2_additional_information ?></textarea>
+		<textarea cols="60" rows="5" name="f_additional_information" wrap="virtual"><?php echo $t_bug->additional_information ?></textarea>
 	</td>
 </tr>
 <tr>
@@ -320,6 +292,7 @@
 		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
+
 <?php if ( access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ) ) ) { ?>
 <tr class="row-2">
 	<td class="category">
@@ -330,6 +303,7 @@
 	</td>
 </tr>
 <?php } ?>
+
 <tr>
 	<td class="center" colspan="6"">
 		<input type="submit" value="<?php echo lang_get( 'update_information_button' ) ?>" />

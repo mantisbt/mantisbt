@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.17 2002-10-29 08:03:03 jfitzell Exp $
+	# $Id: bug_api.php,v 1.18 2002-10-29 08:30:22 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -76,7 +76,8 @@
 			return $g_cache_bug[$c_bug_id];
 		}
 
-		$query = "SELECT *
+		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
+			UNIX_TIMESTAMP(last_updated) as last_updated
 				  FROM $t_bug_table
 				  WHERE id='$c_bug_id'";
 		$result = db_query( $query );
@@ -394,13 +395,17 @@
 	#  If the third parameter is true, also update the longer strings table
 	function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false ) {
 		$c_bug_id		= db_prepare_int( $p_bug_id );
-		$c_bug_data		= bug_clean( $p_bug_data );
+		$c_bug_data		= bug_prepare_db( $p_bug_data );
 
 		$t_old_data = bug_get( $p_bug_id, true );
 
 		$t_bug_table = config_get( 'mantis_bug_table' );
 
 		# Update all fields
+		# Ignore date_submitted and last_updated since they are pulled out
+		#  as unix timestamps which could confuse the history log and they
+		#  shouldn't get updated like this anyway.  If you really need to change
+		#  them use bug_set_field()
 		$query = "UPDATE $t_bug_table
 				SET project_id='$c_bug_data->project_id',
 					reporter_id='$c_bug_data->reporter_id',
@@ -413,8 +418,6 @@
 					resolution='$c_bug_data->resolution',
 					projection='$c_bug_data->projection',
 					category='$c_bug_data->category',
-					date_submitted='$c_bug_data->date_submitted',
-					last_updated='$c_bug_data->last_updated',
 					eta='$c_bug_data->eta',
 					os='$c_bug_data->os',
 					os_build='$c_bug_data->os_build',
@@ -450,10 +453,6 @@
 									$t_old_data->projection, $p_bug_data->projection );
 		history_log_event_direct( $p_bug_id, 'category', 
 									$t_old_data->category, $p_bug_data->category );
-		history_log_event_direct( $p_bug_id, 'date_submitted', 
-									$t_old_data->date_submitted, $p_bug_data->date_submitted );
-		history_log_event_direct( $p_bug_id, 'last_updated', 
-									$t_old_data->last_updated, $p_bug_data->last_updated );
 		history_log_event_direct( $p_bug_id, 'eta', 
 									$t_old_data->eta, $p_bug_data->eta );
 		history_log_event_direct( $p_bug_id, 'os', 
@@ -874,37 +873,55 @@
 
 	# --------------------
 	# Return a copy of the bug structure with all the instvars prepared for db insertion
-	function bug_clean( $p_bug_data ) {
-		$c_bug_data = new BugData;
+	function bug_prepare_db( $p_bug_data ) {
+		$p_bug_data->project_id			= db_prepare_int( $p_bug_data->project_id );
+		$p_bug_data->reporter_id		= db_prepare_int( $p_bug_data->reporter_id );
+		$p_bug_data->handler_id			= db_prepare_int( $p_bug_data->handler_id );
+		$p_bug_data->duplicate_id		= db_prepare_int( $p_bug_data->duplicate_id );
+		$p_bug_data->priority			= db_prepare_int( $p_bug_data->priority );
+		$p_bug_data->severity			= db_prepare_int( $p_bug_data->severity );
+		$p_bug_data->reproducibility	= db_prepare_int( $p_bug_data->reproducibility );
+		$p_bug_data->status				= db_prepare_int( $p_bug_data->status );
+		$p_bug_data->resolution			= db_prepare_int( $p_bug_data->resolution );
+		$p_bug_data->projection			= db_prepare_int( $p_bug_data->projection );
+		$p_bug_data->category			= db_prepare_string( $p_bug_data->category );
+		$p_bug_data->date_submitted		= db_prepare_string( $p_bug_data->date_submitted );
+		$p_bug_data->last_updated		= db_prepare_string( $p_bug_data->last_updated );
+		$p_bug_data->eta				= db_prepare_int( $p_bug_data->eta );
+		$p_bug_data->os					= db_prepare_string( $p_bug_data->os );
+		$p_bug_data->os_build			= db_prepare_string( $p_bug_data->os_build );
+		$p_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
+		$p_bug_data->version			= db_prepare_string( $p_bug_data->version );
+		$p_bug_data->build				= db_prepare_string( $p_bug_data->build );
+		$p_bug_data->votes				= db_prepare_int( $p_bug_data->votes );
+		$p_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
+		$p_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
 
-		$c_bug_data->project_id			= db_prepare_int( $p_bug_data->project_id );
-		$c_bug_data->reporter_id		= db_prepare_int( $p_bug_data->reporter_id );
-		$c_bug_data->handler_id			= db_prepare_int( $p_bug_data->handler_id );
-		$c_bug_data->duplicate_id		= db_prepare_int( $p_bug_data->duplicate_id );
-		$c_bug_data->priority			= db_prepare_int( $p_bug_data->priority );
-		$c_bug_data->severity			= db_prepare_int( $p_bug_data->severity );
-		$c_bug_data->reproducibility	= db_prepare_int( $p_bug_data->reproducibility );
-		$c_bug_data->status				= db_prepare_int( $p_bug_data->status );
-		$c_bug_data->resolution			= db_prepare_int( $p_bug_data->resolution );
-		$c_bug_data->projection			= db_prepare_int( $p_bug_data->projection );
-		$c_bug_data->category			= db_prepare_string( $p_bug_data->category );
-		$c_bug_data->date_submitted		= db_prepare_string( $p_bug_data->date_submitted );
-		$c_bug_data->last_updated		= db_prepare_string( $p_bug_data->last_updated );
-		$c_bug_data->eta				= db_prepare_int( $p_bug_data->eta );
-		$c_bug_data->os					= db_prepare_string( $p_bug_data->os );
-		$c_bug_data->os_build			= db_prepare_string( $p_bug_data->os_build );
-		$c_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
-		$c_bug_data->version			= db_prepare_string( $p_bug_data->version );
-		$c_bug_data->build				= db_prepare_string( $p_bug_data->build );
-		$c_bug_data->votes				= db_prepare_int( $p_bug_data->votes );
-		$c_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
-		$c_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
+		$p_bug_data->description		= db_prepare_string( $p_bug_data->description );
+		$p_bug_data->steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
+		$p_bug_data->additional_information	= db_prepare_string( $p_bug_data->additional_information );
 
-		$c_bug_data->description		= db_prepare_string( $p_bug_data->description );
-		$c_bug_data->steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
-		$c_bug_data->additional_information	= db_prepare_string( $p_bug_data->additional_information );
-
-		return $c_bug_data;
+		return $p_bug_data;
 	}
 
+	# --------------------
+	# Return a copy of the bug structure with all the instvars prepared for editing
+	#  in an HTML form
+	function bug_prepare_edit( $p_bug_data ) {
+		$p_bug_data->category			= string_edit_text( $p_bug_data->category );
+		$p_bug_data->date_submitted		= string_edit_text( $p_bug_data->date_submitted );
+		$p_bug_data->last_updated		= string_edit_text( $p_bug_data->last_updated );
+		$p_bug_data->os					= string_edit_text( $p_bug_data->os );
+		$p_bug_data->os_build			= string_edit_text( $p_bug_data->os_build );
+		$p_bug_data->platform			= string_edit_text( $p_bug_data->platform );
+		$p_bug_data->version			= string_edit_text( $p_bug_data->version );
+		$p_bug_data->build				= string_edit_text( $p_bug_data->build );
+		$p_bug_data->summary			= string_edit_text( $p_bug_data->summary );
+
+		$p_bug_data->description		= string_edit_textarea( $p_bug_data->description );
+		$p_bug_data->steps_to_reproduce	= string_edit_textarea( $p_bug_data->steps_to_reproduce );
+		$p_bug_data->additional_information	= string_edit_textarea( $p_bug_data->additional_information );
+
+		return $p_bug_data;
+	}
 ?>
