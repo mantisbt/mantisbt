@@ -40,6 +40,10 @@ there are probably some basic checks that I haven't done (because I don't know
 what to check for!).  So, if you're going to use this try to use it in a
 semi-private area until this package has been looked through a few times.
 
+You will need to have php, mysql, and a webserver.  You don't need to know too
+much about any of them other than how to set them up and some basic
+administraton commands.
+
 Features:
 
 - Variable controlled appearance
