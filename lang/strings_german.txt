@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.91 $
-	# $Author: int2str $
-	# $Date: 2004-05-21 18:46:02 $
+	# $Revision: 1.92 $
+	# $Author: vboctor $
+	# $Date: 2004-07-05 10:14:46 $
 	#
-	# $Id: strings_german.txt,v 1.91 2004-05-21 18:46:02 int2str Exp $
+	# $Id: strings_german.txt,v 1.92 2004-07-05 10:14:46 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -798,7 +798,7 @@ $s_reporter_by_resolution = 'Fehler nach Lösungen';
 $s_reporter_effectiveness = 'Fehler Auswirkung';
 $s_developer_by_resolution = 'Entwickler nach Lösungen';
 $s_percentage_fixed = '% repariert';
-$s_percentage_errors = '% fehlerhafthaft';
+$s_percentage_errors = '% fehlerhaft';
 $s_errors = 'Reporthaft';
 $s_total = 'Gesamt';
 $s_time_stats = 'Zeitwerte für Fehlerbehebung (Tage)';
