@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.37 2004-04-27 00:54:32 narcissus Exp $
+	# $Id: authentication_api.php,v 1.38 2004-05-25 23:43:48 int2str Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -352,5 +352,30 @@
 		$g_cache_current_user_id = $t_user_id;
 
 		return $t_user_id;
+	}
+
+
+	#===================================
+	# HTTP Auth
+	#===================================
+
+	function auth_http_prompt() {
+		header( "HTTP/1.0 401 Authorization Required" );
+		header( "WWW-Authenticate: Basic realm=\"" . lang_get( 'http_auth_realm' ) . "\"" );
+		header( 'status: 401 Unauthorized' );
+
+		echo '<center>';
+		echo '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
+		print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+		echo '</center>';
+
+		exit;
+	}
+
+	function auth_http_logout() {
+		$_SERVER['PHP_AUTH_USER'] = "";
+		$_SERVER['PHP_AUTH_PW'] = "";
+
+		auth_http_prompt();
 	}
 ?>

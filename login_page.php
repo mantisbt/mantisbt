@@ -6,15 +6,35 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.37 2004-05-16 12:22:06 vboctor Exp $
+	# $Id: login_page.php,v 1.38 2004-05-25 23:43:48 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Login page POSTs results to login.php
 	# Check to see if the user is already logged in
-?>
-<?php
+
 	require_once( 'core.php' );
+
+	$f_error		= gpc_get_bool( 'error' );
+	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
+	$f_return		= gpc_get_string( 'return', '' );
+
+	# Check for HTTP_AUTH. HTTP_AUTH is handled in login.php
+
+	if ( HTTP_AUTH == config_get( 'login_method' ) ) {
+		$t_uri = "login.php";
+
+		if ( !$f_return && ON == config_get( 'allow_anonymous_login' ) ) {
+			$t_uri = "login_anon.php";
+		}
+
+		if ( $f_return ) {
+			$t_uri .= "?return=" . $f_return;
+		}
+
+		print_header_redirect( $t_uri );
+		exit;
+	}
 
 	html_page_top1();
 	html_page_top2a();
@@ -23,10 +43,6 @@
 <br />
 <div align="center">
 <?php
-	$f_error		= gpc_get_bool( 'error' );
-	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
-	$f_return		= gpc_get_string( 'return', '' );
-
 	# Only echo error message if error variable is set
 	if ( $f_error ) {
 		echo lang_get( 'login_error' ) . '<br />';

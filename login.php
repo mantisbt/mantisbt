@@ -6,14 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.29 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: login.php,v 1.30 2004-05-25 23:43:48 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
+
 	# Check login then redirect to main_page.php or to login_page.php
-?>
-<?php require_once( 'core.php' ) ?>
-<?php
+
+	require_once( 'core.php' );
+
 	$f_username		= gpc_get_string( 'username', '' );
 	$f_password		= gpc_get_string( 'password', '' );
 	$f_perm_login	= gpc_get_bool( 'perm_login' );
@@ -24,10 +25,22 @@
 		$f_password = $_SERVER['PHP_AUTH_PW'];
  	}
 
+    if ( HTTP_AUTH == config_get( 'login_method' ) ) {
+		if ( isset( $_SERVER['PHP_AUTH_USER'] ) )
+			$f_username = $_SERVER['PHP_AUTH_USER'];
+		if ( isset( $_SERVER['PHP_AUTH_PW'] ) )
+			$f_password = $_SERVER['PHP_AUTH_PW'];
+	}
+
 	if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 		$t_redirect_url = 'login_cookie_test.php?return=' . $f_return;
 	} else {
 		$t_redirect_url = 'login_page.php?error=1';
+
+    	if ( HTTP_AUTH == config_get( 'login_method' ) ) {
+			auth_http_prompt();
+			exit;
+		}
 	}
 
 	print_header_redirect( $t_redirect_url );

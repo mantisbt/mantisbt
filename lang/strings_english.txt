@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.173 $
-	# $Author: vboctor $
-	# $Date: 2004-05-25 13:38:51 $
+	# $Revision: 1.174 $
+	# $Author: int2str $
+	# $Date: 2004-05-25 23:43:48 $
 	#
-	# $Id: strings_english.txt,v 1.173 2004-05-25 13:38:51 vboctor Exp $
+	# $Id: strings_english.txt,v 1.174 2004-05-25 23:43:48 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -949,4 +949,7 @@ $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = 'Change Log';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
 ?>

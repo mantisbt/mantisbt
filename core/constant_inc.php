@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.16 2004-05-17 11:39:07 vboctor Exp $
+	# $Id: constant_inc.php,v 1.17 2004-05-25 23:43:48 int2str Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -89,6 +89,7 @@
 	define( 'MD5',				3 );
 	define( 'LDAP',				4 );
 	define( 'BASIC_AUTH',		5 );
+	define( 'HTTP_AUTH',		6 );
 
 	# file upload methods
 	define( 'DISK',			1 );
