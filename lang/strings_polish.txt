@@ -7,12 +7,13 @@
 
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
+	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# -------------------------------------------------
-	# $Revision: 1.62 $
-	# $Author: jlatour $
-	# $Date: 2004-03-14 20:10:48 $
+	# $Revision: 1.63 $
+	# $Author: vboctor $
+	# $Date: 2004-05-04 22:57:10 $
 	#
-	# $Id: strings_polish.txt,v 1.62 2004-03-14 20:10:48 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.63 2004-05-04 22:57:10 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -216,7 +217,7 @@ $s_logged_in_as = 'Zalogowano jako';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrator';
-$s_myself = "Myself";
+$s_myself = "Ja";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:obserwator,25:zg³aszaj±cy,40:aktualizuj±cy,55:wykonawca,70:zarz±dca,90:administrator';
@@ -248,16 +249,16 @@ $s_news_password_msg = 'To jest twoje nowe has³o';
 $s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
 $s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_assigned = 'Nast-Bêpuj±cy b³±d zosta³ PRZYPISANY.';-A
+$s_email_notification_title_for_status_bug_resolved = 'Nast-Bêpuj±cy b³±d zosta³ ROZWI¡ZANY.';-A
+$s_email_notification_title_for_status_bug_closed = 'Nast-Bêpuj±cy b³±d zosta³ ZAMKNIÊTY.';-A
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'Nast-Bêpuj±cy b³±d zosta³ DODANY.';-A
+$s_email_notification_title_for_action_bug_assigned = 'Nast-Bêpuj±cy b³±d zosta³ PRZYPISANY.';-A
+$s_email_notification_title_for_action_bug_reopened = 'Nast-Bêpuj±cy b³±d zosta³ PONOWNIE OTWARTY.';-A
+$s_email_notification_title_for_action_bug_deleted = 'Nast-Bêpuj±cy b³±d zosta³ SKASOWANY.';-A
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'Do nast-Bêpuj±cy b³êdu DODANO KOMENTARZ.';-A
 
 $s_email_reporter = 'Zg³aszaj±cy';
 $s_email_handler = 'Operator';
@@ -407,7 +408,7 @@ $s_sent_you_this_reminder_about = 'wys³a³ Ci przypomnienie o';
 $s_bug_reminder = 'Wy¶lij przypomnienie';
 $s_reminder_sent_to = 'Przypomnienie wys³ane do';
 $s_bug_send_button = 'Wy¶lij';
-$s_reminder = 'Reminder';
+$s_reminder = 'Przypomnienie';
 
 # bug_update.php
 $s_bug_updated_msg = 'B³±d zosta³ pomy¶lnie zaktualizowany...';
@@ -836,7 +837,7 @@ $s_viewing_bug_advanced_details_title = 'Widok zaawansowany';
 $s_product_build = 'Kompilacja produktu';
 $s_system_profile = 'Opis systemu';
 $s_update_bug_button = 'Aktualizuj B³±d';
-$s_bug_assign_to_button = 'Assign To:';
+$s_bug_assign_to_button = 'Przypisz do:';
 $s_reopen_bug_button = 'Otwórz Ponownie B³±d';
 $s_attached_files = 'Do³±czone Pliki';
 $s_publish = 'Publish';
@@ -849,9 +850,9 @@ $s_view_advanced_link = 'Widok zaawansowany';
 $s_viewing_bug_simple_details_title = 'Widok prosty';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
-$s_monitoring_user_list = 'User List';
+$s_no_users_monitoring_bug = '-B¯aden u¿ytkownik nie monitoruje tego b³êdu.';-A
+$s_users_monitoring_bug = 'U-B¿ytkownicy monitoruj±cy ten b³±d';-A
+$s_monitoring_user_list = 'Lista u-B¿ytkownik-Aów';
 
 # custom field strings
 $s_add_custom_field_button = 'Nowe \'Dodatkowe pole\'';
