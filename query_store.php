@@ -25,7 +25,13 @@
 	
 	$t_query_redirect_url = 'query_store_page.php';
 	
-	# First, check and make sure they don't already have a
+	# We can't have a blank name
+	if ( is_blank( $f_query_name ) ) {	
+		$t_query_redirect_url = $t_query_redirect_url . '?error_msg=' . lang_get( 'query_blank_name' );
+		print_header_redirect( $t_query_redirect_url );
+	}
+
+	# Check and make sure they don't already have a
 	# query with the same name
 	$t_query_arr = filter_db_get_available_queries();
 	foreach( $t_query_arr as $t_id => $t_name )	{

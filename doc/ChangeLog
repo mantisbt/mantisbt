@@ -14,6 +14,7 @@ Mantis ChangeLog
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
+ * Enh #3663: Remember filter settings for each project.
  * Enh #3688: Add threshold for changing the bug/bugnote view status.
  * Enh #3690: Request for directly setting reminders private.
  * Enh #3713: Allow users to set severity levels along with email preferences.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.28 2004-04-14 19:26:46 narcissus Exp $
+	# $Id: view_all_set.php,v 1.29 2004-04-27 00:54:33 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -258,7 +258,9 @@
 	# If only using a temporary filter, don't store it in the database
 	if ( !$f_temp_filter ) {
 		# Store the filter string in the database: its the current filter, so some values won't change
-		$t_row_id = filter_db_set_for_current_user( -1, false, '', $t_settings_string );
+		$t_project_id = helper_get_current_project();
+		$t_project_id = ( $t_project_id * -1 );
+		$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
 	
 		# set cookie values
 		setcookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );

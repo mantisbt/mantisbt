@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.36 2004-04-08 22:44:59 prescience Exp $
+	# $Id: authentication_api.php,v 1.37 2004-04-27 00:54:32 narcissus Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -128,6 +128,7 @@
 	function auth_logout() {
 		auth_clear_cookies();
 		helper_clear_pref_cookies();
+		filter_db_delete_current_filters();
 		return true;
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.45 2004-04-14 19:26:46 narcissus Exp $
+	# $Id: set_project.php,v 1.46 2004-04-27 00:54:33 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -45,7 +45,12 @@
 	} else if ( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
 		$t_redirect_url = 'main_page.php';
 	} else if ( eregi( 'view_all_bug_page.php', $_SERVER['HTTP_REFERER'] ) ){
+		$t_source_filter_id = filter_db_get_project_current( $f_project_id );
 		$t_redirect_url = 'view_all_set.php?type=4';
+
+		if ( $t_source_filter_id != null ) {
+			$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
+		} 
 	} else if ( eregi( 'summary_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url =  'summary_page.php';
 	} else if ( eregi( 'proj_user_menu_page.php', $_SERVER['HTTP_REFERER'] ) ){

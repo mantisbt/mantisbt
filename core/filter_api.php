@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.29 2004-04-12 21:04:36 jlatour Exp $
+	# $Id: filter_api.php,v 1.30 2004-04-27 00:54:32 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -734,7 +734,8 @@
 		$t_filters_table = config_get( 'mantis_filters_table' );
 
 		# check that the user can save non current filters (if required)
-		if ( ( -1 != $c_project_id ) && ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
+		if ( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) && 
+		     ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
 			return -1;
 		}
 
@@ -815,12 +816,34 @@
 			}
 
 			# check that the user has access to non current filters
-			if ( ( -1 != $row['project_id'] ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) ) {
+			if ( ( ALL_PROJECTS <= $row['project_id'] ) && ( !is_blank( $row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) ) {
 				return null;
 			}
 
 			$g_cache_filter_db_filters[$p_filter_id] = $row['filter_string'];
 			return $row['filter_string'];
+		}
+
+		return null;
+	}
+
+	function filter_db_get_project_current( $p_project_id ) {
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		$c_project_id 	= db_prepare_int( $p_project_id );
+		$c_project_id 	= $c_project_id * -1;
+		$t_user_id 		= auth_get_current_user_id();
+
+		# we store current filters for each project with a special project index
+		$query = "SELECT *
+				  FROM $t_filters_table
+				  WHERE user_id='$t_user_id'
+				  	AND project_id='$c_project_id'
+				  	AND name=''";
+		$result = db_query( $query );
+
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
+			return $row['id'];
 		}
 
 		return null;
@@ -894,6 +917,16 @@
 		}
 
 		return false;
+	}
+
+	function filter_db_delete_current_filters( ) {
+		$t_filters_table = config_get( 'mantis_filters_table' );
+		$t_all_id = ALL_PROJECTS;
+
+		$query = "DELETE FROM $t_filters_table
+					WHERE project_id<='$t_all_id' 
+					AND name=''";
+		$result = db_query( $query );
 	}
 
 	function filter_db_get_available_queries( ) {
