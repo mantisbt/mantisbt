@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.14 2002-09-07 07:59:50 jfitzell Exp $
+	# $Id: print_api.php,v 1.15 2002-09-16 10:09:40 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -807,7 +807,7 @@
 				return 'view_bug_page.php';
 			break;
 		case ADVANCED_ONLY:
-				return 'view_bugadvanced_page.php';
+				return 'view_bug_advanced_page.php';
 			break;
 		}
 	}
