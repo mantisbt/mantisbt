@@ -26,7 +26,7 @@
 <div align="center">
 <?php
 	if ( $result ) {
-		print_bracket_link( $t_redirect_url, $s_proceed );
+		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 	} else {
 		print_mantis_error( ERROR_GENERIC );
 	}

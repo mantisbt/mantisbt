@@ -49,14 +49,14 @@
 <div align="center">
 <?php
 	if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<br />';
+		echo lang_get( 'operation_successful' ).'<br />';
 	} else if ( attribute_is_duplicate( $f_parameter, $f_project_id, $f_attribute, $f_orig_attribute )) {
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<br />';
+		echo $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<br />';
 	} else {							# FAILURE
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 

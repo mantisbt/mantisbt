@@ -18,25 +18,25 @@
 	$t_title = '';
 	switch ($f_parameter) {
 		case 'priorities' :
-			$t_title = $s_priority ;
+			$t_title = lang_get( 'priority' ) ;
 			break;
 		case 'severities' :
-			$t_title = $s_severity ;
+			$t_title = lang_get( 'severity' ) ;
 			break;
 		case 'reproducibilities' :
-			$t_title = $s_reproducibility ;
+			$t_title = lang_get( 'reproducibility' ) ;
 			break;
 		case 'states':
-			$t_title = $s_status ;
+			$t_title = lang_get( 'status' ) ;
 			break;
 		case 'resolutions' :
-			$t_title = $s_resolution ;
+			$t_title = lang_get( 'resolution' ) ;
 			break;
 		case 'projections' :
-			$t_title = $s_projections ;
+			$t_title = lang_get( 'projections' ) ;
 			break;
 		case 'etas' :
-			$t_title = $s_eta ;
+			$t_title = lang_get( 'eta' ) ;
 			break;
 	} // end switch
 ?>
@@ -44,13 +44,13 @@
 <br />
 <div align="center">
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
-	<?php echo $s_attribute_delete_sure_msg ?>
+	<?php echo lang_get( 'attribute_delete_sure_msg' ) ?>
 
 	<form method="get" action="manage_proj_attribute_delete.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<input type="hidden" name="f_attribute" value="<?php echo $f_attribute ?>" />
 		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
-		<input type="submit" value="<?php echo $s_delete_button.' '.$t_title ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_button' ).' '.$t_title ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

@@ -25,25 +25,25 @@
 
 	switch ($f_parameter) {
 		case 'priorities' :
-			$t_title = $s_priority ;
+			$t_title = lang_get( 'priority' ) ;
 			break;
 		case 'severities' :
-			$t_title = $s_severity ;
+			$t_title = lang_get( 'severity' ) ;
 			break;
 		case 'reproducibilities' :
-			$t_title = $s_reproducibility ;
+			$t_title = lang_get( 'reproducibility' ) ;
 			break;
 		case 'states':
-			$t_title = $s_status ;
+			$t_title = lang_get( 'status' ) ;
 			break;
 		case 'resolutions' :
-			$t_title = $s_resolution ;
+			$t_title = lang_get( 'resolution' ) ;
 			break;
 		case 'projections' :
-			$t_title = $s_projections ;
+			$t_title = lang_get( 'projections' ) ;
 			break;
 		case 'etas' :
-			$t_title = $s_eta ;
+			$t_title = lang_get( 'eta' ) ;
 			break;
 	} // end switch
 ?>
@@ -53,7 +53,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo $s_edit_project_title.$t_title ?>
+		<?php echo lang_get( 'edit_project_title' ).$t_title ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -68,10 +68,10 @@
 		<input type="text" name="f_attribute" size="32" value="<?php echo urldecode( stripslashes( $f_attribute ) ) ?>" />
 	</td>
 </tr>
-<?php if ($f_parameter == $s_states) { ?>
+<?php if ($f_parameter == lang_get( 'states' )) { ?>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_asso_color ?>
+		<?php echo lang_get( 'asso_color' ) ?>
 	</td>
 	<td>
 		<select name="f_color">
@@ -83,7 +83,7 @@
 
 <tr>
 	<td class="left" width="50%">
-		<input type="submit" value="<?php echo $s_update_button.' '.$t_title ?>" />
+		<input type="submit" value="<?php echo lang_get( 'update_button' ).' '.$t_title ?>" />
 		</form>
 	</td>
 	<td class="right" width="50%">
@@ -91,7 +91,7 @@
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<input type="hidden" name="f_attribute" value="<?php echo $f_attribute ?>" />
 		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
-		<input type="submit" value="<?php echo $s_delete_button.' '.$t_title ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_button' ).' '.$t_title ?>" />
 		</form>
 	</td>
 </tr>

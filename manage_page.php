@@ -70,7 +70,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo $s_new_accounts_title ?> (<?php echo $s_1_week_title ?>) [<?php echo $new_user_count ?>]
+		<?php echo lang_get( 'new_accounts_title' ) ?> (<?php echo lang_get( '1_week_title' ) ?>) [<?php echo $new_user_count ?>]
 	</td>
 </tr>
 <tr class="row-2">
@@ -101,7 +101,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo $s_never_logged_in_title ?> [<?php echo $user_count ?>] <?php print_bracket_link( 'manage_prune.php', $s_prune_accounts ) ?>
+		<?php echo lang_get( 'never_logged_in_title' ) ?> [<?php echo $user_count ?>] <?php print_bracket_link( 'manage_prune.php', lang_get( 'prune_accounts' ) ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -142,45 +142,45 @@ for ($i=0;$i<$new_user_count;$i++) {
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">
-		<?php echo $s_manage_accounts_title ?> [<?php echo $user_count ?>]
+		<?php echo lang_get( 'manage_accounts_title' ) ?> [<?php echo $user_count ?>]
 	</td>
 	<td class="center" colspan="2">
 		<form method="post" action="manage_page.php">
 		<input type="hidden" name="f_sort" value="<?php echo $c_sort ?>" />
 		<input type="hidden" name="f_dir" value="<?php echo $c_dir ?>" />
 		<input type="hidden" name="f_save" value="1" />
-		<input type="checkbox" name="f_hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo $s_hide_inactive ?>
-		<input type="submit" value="<?php echo $s_filter_button ?>" />
+		<input type="checkbox" name="f_hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
+		<input type="submit" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</form>
 	</td>
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_username, 'username', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', lang_get( 'username' ), 'username', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'username' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_email, 'email', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', lang_get( 'email' ), 'email', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'email' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_access_level, 'access_level', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', lang_get( 'access_level' ), 'access_level', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'access_level' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_enabled, 'enabled', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_p, 'protected', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', lang_get( 'p' ), 'protected', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'protected' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_date_created, 'date_created', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', lang_get( 'date_created' ), 'date_created', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'date_created' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_last_visit, 'last_visit', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', lang_get( 'last_visit' ), 'last_visit', $c_dir, $c_sort, $c_hide ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'last_visit' ) ?>
 	</td>
 </tr>

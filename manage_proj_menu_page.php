@@ -34,12 +34,12 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="manage_proj_add.php">
-		<?php echo $s_add_project_title ?>
+		<?php echo lang_get( 'add_project_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_project_name?>
+		<?php echo lang_get( 'project_name' )?>
 	</td>
 	<td width="75%">
 		<input type="text" name="f_name" size="64" maxlength="128" />
@@ -47,7 +47,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_status ?>
+		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td>
 		<select name="f_status">
@@ -57,7 +57,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_view_status ?>
+		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
 		<select name="f_view_state">
@@ -70,7 +70,7 @@
 	?>
 		<tr class="row-2">
 			<td class="category">
-				<?php echo $s_upload_file_path ?>
+				<?php echo lang_get( 'upload_file_path' ) ?>
 			</td>
 			<td>
 				<input type="text" name="f_file_path" size="70" maxlength="250" />
@@ -81,7 +81,7 @@
 ?>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_description ?>
+		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
 		<textarea name="f_description" cols="60" rows="5" wrap="virtual"></textarea>
@@ -89,7 +89,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_add_project_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'add_project_button' ) ?>" />
 		</form>
 	</td>
 </tr>
@@ -102,28 +102,28 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">
-		<?php echo $s_projects_title ?>
+		<?php echo lang_get( 'projects_title' ) ?>
 	</td>
 </tr>
 <tr class="row-category">
 	<td width="20%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_name, 'name', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'name' ), 'name', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'name' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_status, 'status', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'status' ), 'status', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'status' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_enabled, 'enabled', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_view_status, 'view_state', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'view_status' ), 'view_state', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'view_state' ) ?>
 	</td>
 	<td width="40%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_description, 'description', $c_dir, $c_sort ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', lang_get( 'description' ), 'description', $c_dir, $c_sort ) ?>
 		<?php print_sort_icon( $c_dir, $c_sort, 'description' ) ?>
 	</td>
 </tr>
@@ -180,7 +180,7 @@ if (($g_customize_attributes)&&(access_level_check_greater_or_equal( ADMINISTRAT
 	<table class="width75" cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="2">
-			<?php echo $s_attribute_customization_title ?>
+			<?php echo lang_get( 'attribute_customization_title' ) ?>
 		</td>
 	</tr>
 <?php
@@ -188,19 +188,19 @@ if (($g_customize_attributes)&&(access_level_check_greater_or_equal( ADMINISTRAT
 	$t_project_id = '0000000';
 
 	#priorities
-	attribute_display('priorities', $s_priority, $t_project_id) ;
+	attribute_display('priorities', lang_get( 'priority' ), $t_project_id) ;
 	#severities
-	attribute_display('severities', $s_severity, $t_project_id) ;
+	attribute_display('severities', lang_get( 'severity' ), $t_project_id) ;
 	#reproducibilities
-	attribute_display('reproducibilities', $s_reproducibility, $t_project_id) ;
+	attribute_display('reproducibilities', lang_get( 'reproducibility' ), $t_project_id) ;
 	#status
-	attribute_display('states', $s_status, $t_project_id) ;
+	attribute_display('states', lang_get( 'status' ), $t_project_id) ;
 	#resolutions
-	attribute_display('resolutions', $s_resolution, $t_project_id) ;
+	attribute_display('resolutions', lang_get( 'resolution' ), $t_project_id) ;
 	#projections
-	attribute_display('projections', $s_projection, $t_project_id) ;
+	attribute_display('projections', lang_get( 'projection' ), $t_project_id) ;
 	#etas
-	attribute_display('etas', $s_eta, $t_project_id) ;
+	attribute_display('etas', lang_get( 'eta' ), $t_project_id) ;
 }
 ?>
 </table>

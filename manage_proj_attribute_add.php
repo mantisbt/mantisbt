@@ -16,26 +16,26 @@
 	# complete this switch to add new attributes
 	switch ($f_parameter) {
 		case 'priorities' :
-			$t_title = $s_priority ;
+			$t_title = lang_get( 'priority' ) ;
 			break;
 		case 'severities' :
-			$t_title = $s_severity ;
+			$t_title = lang_get( 'severity' ) ;
 			break;
 		case 'reproducibilities' :
-			$t_title = $s_reproducibility ;
+			$t_title = lang_get( 'reproducibility' ) ;
 			break;
 		case 'states':
-			$t_title = $s_status ;
+			$t_title = lang_get( 'status' ) ;
 			$t_status_flag = 1 ;
 			break;
 		case 'resolutions' :
-			$t_title = $s_resolution ;
+			$t_title = lang_get( 'resolution' ) ;
 			break;
 		case 'projections' :
-			$t_title = $s_projection ;
+			$t_title = lang_get( 'projection' ) ;
 			break;
 		case 'etas' :
-			$t_title = $s_eta ;
+			$t_title = lang_get( 'eta' ) ;
 			break;
 	} // end switch
 
@@ -103,14 +103,14 @@
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		PRINT $s_operation_successful.'<br />';
+		echo lang_get( 'operation_successful' ).'<br />';
 	} else if ( $duplicate ) {		# DUPLICATE
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<br />';
+		echo $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<br />';
 	} else {						# FAILURE
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 

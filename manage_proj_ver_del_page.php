@@ -19,12 +19,12 @@
 <br />
 <div align="center">
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
-	<?php echo $s_version_delete_sure ?>
+	<?php echo lang_get( 'version_delete_sure' ) ?>
 
 	<form method="post" action="manage_proj_ver_delete.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<input type="hidden" name="f_version" value="<?php echo $f_version ?>" />
-		<input type="submit" value="<?php echo $s_delete_version_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

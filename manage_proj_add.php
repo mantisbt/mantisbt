@@ -30,9 +30,9 @@
 <br />
 <div align="center">
 <?php
-	PRINT $s_operation_successful.'<br />';
+	PRINT lang_get( 'operation_successful' ).'<br />';
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 

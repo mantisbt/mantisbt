@@ -16,12 +16,12 @@
 <br />
 <div align="center">
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
-	<?php echo $s_category_delete_sure_msg ?>
+	<?php echo lang_get( 'category_delete_sure_msg' ) ?>
 
 	<form method="post" action="manage_proj_cat_delete.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<input type="hidden" name="f_category" value="<?php echo $f_category ?>" />
-		<input type="submit" value="<?php echo $s_delete_category_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

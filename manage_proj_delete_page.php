@@ -18,11 +18,11 @@
 <br />
 <div align="center">
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
-	<?php echo $s_project_delete_msg ?>
+	<?php echo lang_get( 'project_delete_msg' ) ?>
 
 	<form method="post" action="manage_proj_delete.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-		<input type="submit" value="<?php echo $s_project_delete_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'project_delete_button' ) ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

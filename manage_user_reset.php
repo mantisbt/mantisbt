@@ -62,18 +62,18 @@
 <div align="center">
 <?php
 	if ( ON == $f_protected ) {				# PROTECTED
-		PRINT $s_account_reset_protected_msg.'<br />';
+		echo lang_get( 'account_reset_protected_msg' ).'<br />';
 	} else if ( $result ) {					# SUCCESS
 		if ( ON == $g_send_reset_password ) {
-			PRINT $s_account_reset_msg.'<br />';
+			echo lang_get( 'account_reset_msg' ).'<br />';
 		} else {
-			PRINT $s_account_reset_msg2.'<br />';
+			echo lang_get( 'account_reset_msg2' ).'<br />';
 		}
 	} else {								# FAILURE
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 

@@ -24,7 +24,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo $s_edit_project_category_title ?>
+		<?php echo lang_get( 'edit_project_category_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -32,7 +32,7 @@
 		<form method="post" action="manage_proj_cat_update.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>" />
-		<?php echo $s_category ?>
+		<?php echo lang_get( 'category' ) ?>
 	</td>
 	<td>
 		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>" />
@@ -40,7 +40,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_assigned_to ?>
+		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td>
 		<select name="f_assigned_to">
@@ -51,14 +51,14 @@
 </tr>
 <tr>
 	<td class="left" width="50%">
-		<input type="submit" value="<?php echo $s_update_category_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'update_category_button' ) ?>" />
 		</form>
 	</td>
 	<td class="right" width="50%">
 		<form method="post" action="manage_proj_cat_del_page.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<input type="hidden" name="f_category" value="<?php echo $f_category ?>" />
-		<input type="submit" value="<?php echo $s_delete_category_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 		</form>
 	</td>
 </tr>
