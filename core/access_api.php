@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.34 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: access_api.php,v 1.35 2005-03-10 22:12:57 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -215,7 +215,8 @@
 			# If the project is private and the user isn't listed, then they
 			# must have the private_project_threshold access level to get in.
 			if ( VS_PRIVATE == $t_project_view_state ) {
-				return ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) );
+				return ( access_has_global_level( 
+				    config_get( 'private_project_threshold', null, $p_user_id, $p_project_id ), $p_user_id ) );
 			} else {
 				$t_access_level = user_get_field( $p_user_id, 'access_level' );
 			}
