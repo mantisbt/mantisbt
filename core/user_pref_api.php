@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.12 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: user_pref_api.php,v 1.13 2004-03-15 21:47:43 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -325,6 +325,7 @@
 		if ( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
 			return $t_prefs->$p_pref_name;
 		} else {
+			error_parameters( $p_pref_name );
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 			return '';
 		}

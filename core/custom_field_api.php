@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.26 2004-03-05 02:27:52 jlatour Exp $
+	# $Id: custom_field_api.php,v 1.27 2004-03-15 21:47:43 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -57,6 +57,7 @@
 
 		if ( 0 == db_num_rows( $result ) ) {
 			if ( $p_trigger_errors ) {
+				error_parameters( 'Custom ' . $p_field_id );
 				trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
 			} else {
 				return false;
@@ -133,6 +134,7 @@
 		if ( custom_field_exists( $p_field_id ) ) {
 			return true;
 		} else {
+			error_parameters( 'Custom ' . $p_field_id );
 			trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
 		}
 	}
@@ -599,6 +601,7 @@
 		if ( isset( $row[$p_field_name] ) ) {
 			return $row[$p_field_name];
 		} else {
+			error_parameters( $p_field_name );
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 			return '';
 		}

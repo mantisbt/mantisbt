@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.65 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: user_api.php,v 1.66 2004-03-15 21:47:43 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -445,6 +445,7 @@
 		if ( isset( $row[$p_field_name] ) ) {
 			return $row[$p_field_name];
 		} else {
+			error_parameters( $p_field_name );
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 			return '';
 		}
