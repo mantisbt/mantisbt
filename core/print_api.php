@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.105 2004-10-01 18:08:23 thraxisp Exp $
+	# $Id: print_api.php,v 1.106 2004-10-13 23:35:07 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -636,8 +636,8 @@
 	}
 	# --------------------
 	# print the status option list for the bug_update pages
-	function print_status_option_list( $p_select_label, $p_current_value = 0, $p_allow_close = false ) {
-		$t_current_auth = access_get_project_level();
+	function print_status_option_list( $p_select_label, $p_current_value = 0, $p_allow_close = false, $p_project_id = null ) {
+		$t_current_auth = access_get_project_level( $p_project_id );
 
 		$t_enum_list = get_status_option_list( $t_current_auth, $p_current_value, true, $p_allow_close );
 

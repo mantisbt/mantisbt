@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.86 2004-10-02 14:53:02 thraxisp Exp $
+	# $Id: bug_update_page.php,v 1.87 2004-10-13 23:35:07 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -226,9 +226,9 @@
 		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
-		<?php print_status_option_list( 'status', $t_bug->status, true,
+		<?php print_status_option_list( 'status', $t_bug->status, 
 						( $t_bug->reporter_id == auth_get_current_user_id() && 
-								( ON == config_get( 'allow_reporter_close' ) ) ) ) ?>
+								( ON == config_get( 'allow_reporter_close' ) ) ), $t_bug->project_id ) ?>
 	</td>
 
 	<?php
