@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.35 2002-10-29 08:30:22 jfitzell Exp $
+	# $Id: bug_update_page.php,v 1.36 2002-11-12 10:03:09 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,7 +28,7 @@
 	# if bug is private, make sure user can view private bugs
 	access_bug_check( $f_bug_id );
 
-	$t_bug = bug_prepare_edit( bug_get( $f_bug_id ) );
+	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
