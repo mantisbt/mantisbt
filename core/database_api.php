@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.37 2004-11-30 11:00:49 vboctor Exp $
+	# $Id: database_api.php,v 1.38 2004-12-09 18:55:06 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -366,6 +366,19 @@
 		}
 		return $t_unique_queries;
 		}
+
+	# --------------------
+	# get total time for queries
+	function db_time_queries () {
+		global $g_queries_array;
+		$t_count = count( $g_queries_array );
+		$t_total = 0;
+		for ( $i = 0; $i < $t_count; $i++ ) {
+			$t_total += $g_queries_array[$i][1];
+		}
+		return $t_total;
+	}
+
 		
 	# --------------------
 	if ( !isset( $g_skip_open_db ) ) {
