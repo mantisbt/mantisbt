@@ -18,7 +18,7 @@
 	# Either generate a random password and email it or make a blank one.
 
 	### Go with random password and email it to the user
-	if ( $g_allow_signup==1 )
+	if ( $g_allow_signup==1 ) {
 		### Create random password
 		$t_password = create_random_password( $p_email );
 
