@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.59 2004-10-01 02:41:25 narcissus Exp $
+	# $Id: filter_api.php,v 1.60 2004-10-18 05:47:19 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -455,22 +455,27 @@
 			}
 		}
 
+		$t_textsearch_where_clause = '';
+		$t_textsearch_wherejoin_clause = '';
 		# Simple Text Search - Thnaks to Alan Knowles
 		if ( !is_blank( $t_filter['search'] ) ) {
 			$c_search = db_prepare_string( $t_filter['search'] );
-			array_push( $t_where_clauses,
-							"((summary LIKE '%$c_search%')
+			$t_textsearch_where_clause = "((summary LIKE '%$c_search%')
+							 OR ($t_bug_text_table.description LIKE '%$c_search%')
+							 OR ($t_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
+							 OR ($t_bug_text_table.additional_information LIKE '%$c_search%')
+							 OR ($t_bug_table.id LIKE '%$c_search%'))";
+
+			$t_textsearch_wherejoin_clause = "((summary LIKE '%$c_search%')
 							 OR ($t_bug_text_table.description LIKE '%$c_search%')
 							 OR ($t_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
 							 OR ($t_bug_text_table.additional_information LIKE '%$c_search%')
 							 OR ($t_bug_table.id LIKE '%$c_search%')
-							 OR ($t_bugnote_text_table.note LIKE '%$c_search%'))" );
+							 OR ($t_bugnote_text_table.note LIKE '%$c_search%'))";
+							 
 			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
 
 			$t_from_clauses = array( $t_bug_text_table, $t_project_table, $t_bug_table );
-
-			array_push( $t_join_clauses, "INNER JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id" );
-			array_push( $t_join_clauses, "INNER JOIN $t_bugnote_text_table ON $t_bugnote_text_table.id = $t_bugnote_table.bugnote_text_id" );
 		} else {
 			$t_from_clauses = array( $t_project_table, $t_bug_table );
 		}
@@ -485,10 +490,46 @@
 			$t_where	= '';
 		}
 
+		# Possibly do two passes. First time, grab the IDs of issues that match the filters. Second time, grab the IDs of issues that
+		# have bugnotes that match the text search if necessary.
+		$t_id_array = array();
+		for ( $i = 0; $i < 2; $i++ ) {
+			$t_id_where = $t_where;
+			$t_id_join = $t_join;
+			if ( $i == 0 ) {
+				if ( !is_blank( $t_id_where ) && !is_blank( $t_textsearch_where_clause ) ) {
+					$t_id_where = $t_id_where . ' AND ' . $t_textsearch_where_clause;
+				}
+			} else if ( !is_blank( $t_textsearch_wherejoin_clause ) ) {
+				$t_id_where = $t_id_where . ' AND ' . $t_textsearch_wherejoin_clause;
+				$t_id_join = $t_id_join . " INNER JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id";
+				$t_id_join = $t_id_join . " INNER JOIN $t_bugnote_text_table ON $t_bugnote_text_table.id = $t_bugnote_table.bugnote_text_id";
+			}
+			$query  = "SELECT DISTINCT $t_bug_table.id
+						$t_from
+						$t_id_join
+						$t_id_where";
+			if ( ( $i == 0 ) || ( !is_blank( $t_textsearch_wherejoin_clause ) ) ) {
+				$result = db_query( $query );
+				$row_count = db_num_rows( $result );
+
+				for ( $j=0; $j < $row_count; $j++ ) {
+					$row = db_fetch_array( $result );
+					$t_id_array[] = db_prepare_int ( $row['id'] );
+				}
+			}
+		}
+
+		$t_id_array = array_unique( $t_id_array );
+		if ( count( $t_id_array ) > 0 ) {
+			$t_where = "WHERE $t_bug_table.id = " . implode( " OR $t_bug_table.id = ", $t_id_array );
+		} else {
+			$t_where = "WHERE 1 != 1";
+		}
+		$t_from = 'FROM ' . $t_bug_table;
+
 		# Get the total number of bugs that meet the criteria.
-		$query = "SELECT COUNT( DISTINCT $t_bug_table.id ) as count $t_from $t_join $t_where";
-		$result = db_query( $query );
-		$bug_count = db_result( $result );
+		$bug_count = count( $t_id_array );
 
 		# write the value back in case the caller wants to know
 		$p_bug_count = $bug_count;
