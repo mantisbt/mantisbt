@@ -193,12 +193,37 @@
 	}
 	# --------------------
 	# This string is used to use as the login identified for the web cookie
-	# It is not guarranteed to be unique but should be good enough
+	# It is not guarranteed to be unique and should be checked
 	# The string returned should be 64 characters in length
-	function create_cookie_string( $p_email ) {
+	function generate_cookie_string() {
 		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 		$t_val = md5( $t_val ).md5( time() );
 		return substr( $t_val, 0, 64 );
+	}
+	# --------------------
+	# The string returned should be 64 characters in length
+	function create_cookie_string() {
+		$t_cookie_string = generate_cookie_string();
+		while ( check_cookie_string_duplicate( $t_cookie_string ) ) {
+			$t_cookie_string = generate_cookie_string();
+		}
+		return $t_cookie_string;
+	}
+	# --------------------
+	# Check to see that the unique identifier is really unique
+	function check_cookie_string_duplicate( $p_cookie_string ) {
+		global $g_mantis_user_table;
+
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_user_table
+				WHERE cookie_string='$p_cookie_string'";
+		$result = db_query( $query );
+		$t_count = db_result( $result, 0, 0 );
+		if ( $t_count > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	# --------------------
 	###########################################################################
