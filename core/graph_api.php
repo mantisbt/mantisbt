@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.24 2004-12-09 19:08:38 thraxisp Exp $
+	# $Id: graph_api.php,v 1.25 2004-12-10 21:59:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -833,7 +833,8 @@
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
 			# rationalise the timestamp to a day to reduce the amount of data
- 			$t_date = db_unixtimestamp( $row['date_submitted'] ) / 86400;
+ 			$t_date = db_unixtimestamp( $row['date_submitted'] );
+			$t_date = (int) ( $t_date / 86400 );
 
 			if ( isset( $metrics[$t_date] ) ){
 				$metrics[$t_date][0]++;
@@ -847,12 +848,14 @@
 		$query = "SELECT MAX(mantis_bug_history_table.date_modified) as h_last_updated, mantis_bug_table.last_updated as last_updated 
 			FROM mantis_bug_table LEFT JOIN mantis_bug_history_table 
 			ON mantis_bug_table.id = mantis_bug_history_table.bug_id 
-			WHERE ( mantis_bug_history_table.new_value >= '$t_res_val'
-					AND mantis_bug_table.status >= '$t_res_val' 
-					AND mantis_bug_history_table.old_value < '$t_res_val' 
-					AND mantis_bug_history_table.field_name = 'status' )
-				OR mantis_bug_table.status >= '$t_res_val'
-			GROUP BY mantis_bug_table.id "; 
+			WHERE ( ( mantis_bug_table.status >= '$t_res_val'
+						AND mantis_bug_history_table.new_value >= '$t_res_val' 
+						AND mantis_bug_history_table.old_value < '$t_res_val' 
+						AND mantis_bug_history_table.field_name = 'status' )
+					OR mantis_bug_table.status >= '$t_res_val' )
+				AND $specific_where
+			GROUP BY mantis_bug_table.id 
+			ORDER BY h_last_updated ASC"; 
 		$result = db_query( $query );
 		$bug_count = db_num_rows( $result );
 
@@ -862,11 +865,12 @@
 			#  (i.e. pre 0.18 data), use last_updated from bug table instead
 			# rationalise the timestamp to a day to reduce the amount of data
 			if (NULL == $row['h_last_updated']) {
-				$t_date = db_unixtimestamp( $row['last_updated'] ) / 86400;
+				$t_date = db_unixtimestamp( $row['last_updated'] );
 			} else {
-				$t_date = db_unixtimestamp( $row['h_last_updated'] ) / 86400;
+				$t_date = db_unixtimestamp( $row['h_last_updated'] );
 			}
-
+			$t_date = (int) ( $t_date / 86400 );
+			
 			if ( isset( $metrics[$t_date] ) ){
 				$metrics[$t_date][1]++;
 			} else {
