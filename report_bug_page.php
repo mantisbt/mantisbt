@@ -143,7 +143,8 @@
 		<textarea name="f_additional_info" cols="60" rows="5" wrap="virtual"><?php echo $f_additional_info ?></textarea>
 	</td>
 </tr>
-<?php if ( ON == $g_allow_file_upload ) { ?>
+<?php if ( ( ON == $g_allow_file_upload ) &&
+			access_level_check_greater_or_equal( REPORTER ) ) { ?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo $s_upload_file ?>

@@ -11,6 +11,7 @@ Mantis
  * Fixed problem with CSV not downloading.
  * Fixed no colors when using non-English languages (temporary fix).
  * Fixed bug_close to add bugnote.
+ * Fixed file uploads to not show up for VIEWERS.
  * Modified core_API.php to always turn magic_quotes_runtime OFF.
  * Modified disk uploads to use the file_download.php script.
  * Modified bugnote last_modified query slightly.
