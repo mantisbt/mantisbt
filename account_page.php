@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.29 2002-10-05 02:38:31 prescience Exp $
+	# $Id: account_page.php,v 1.30 2002-10-05 03:54:24 prescience Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -56,11 +56,6 @@
 	print_page_top1();
 	print_page_top2();
 ?>
-<div class="c1">
-		<span class="news-headline">alfkhds jfkh</span> -
-		<span class="news-date">09-19 22:13</span> -
-		<a class="news-email" href="mailto:admin">administrator</a>
-</div>
 
 <!-- # Edit Account Form BEGIN -->
 <br />
