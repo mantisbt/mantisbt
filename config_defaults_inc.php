@@ -534,7 +534,7 @@
 
 	# --- Custom attributes --------
 	# Enables custom attributes
-	$g_customize_attributes	= ON;
+	$g_customize_attributes	= OFF;
 
 	################################
 	# Mantis Look and Feel Variables
