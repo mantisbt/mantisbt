@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.38 2003-02-22 18:49:43 jfitzell Exp $
+	# $Id: bug_api.php,v 1.39 2003-03-03 23:29:29 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -44,7 +44,7 @@
 		var $platform = '';
 		var $version = '';
 		var $build = '';
-		var $view_state = PUBLIC;
+		var $view_state = VS_PUBLIC;
 		var $summary = '';
 
 		# omitted:
@@ -680,7 +680,7 @@
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 		if ( !access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
-			$t_restriction = 'AND view_state=' . PUBLIC;
+			$t_restriction = 'AND view_state=' . VS_PUBLIC;
 		} else {
 			$t_restriction = '';
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.41 2003-02-25 21:23:26 int2str Exp $
+	# $Id: main_page.php,v 1.42 2003-03-03 23:29:28 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -88,13 +88,13 @@
 		$v_body 		= string_display_links( $v_body );
 		$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
 
-		# only show PRIVATE posts to configured threshold and above
-		if ( ( PRIVATE == $v_view_state ) &&
+		# only show VS_PRIVATE posts to configured threshold and above
+		if ( ( VS_PRIVATE == $v_view_state ) &&
 			 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
 			continue;
 		}
 
-		if ( PRIVATE == $v_view_state ) {
+		if ( VS_PRIVATE == $v_view_state ) {
 			$t_news_css = 'news-heading-private';
 		} else {
 			$t_news_css = 'news-heading-public';
@@ -115,7 +115,7 @@
 			}
 		?>
 		<?php
-			if ( PRIVATE == $v_view_state ) {
+			if ( VS_PRIVATE == $v_view_state ) {
 				PRINT '[' . lang_get( 'private' ) . ']';
 			}
 		?>

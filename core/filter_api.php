@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.10 2003-02-25 18:15:59 int2str Exp $
+	# $Id: filter_api.php,v 1.11 2003-03-03 23:29:30 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -82,8 +82,8 @@
 
 		# private bug selection
 		if ( ! access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
-			$t_public = PUBLIC;
-			$t_private = PRIVATE;
+			$t_public = VS_PUBLIC;
+			$t_private = VS_PRIVATE;
 			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR ($t_bug_table.view_state='$t_private' AND $t_bug_table.reporter_id='$t_user_id'))" );
 		}
 

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.5 2003-02-27 08:14:48 jfitzell Exp $
+	# $Id: bugnote_view_inc.php,v 1.6 2003-03-03 23:29:28 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 	$t_user_id = auth_get_current_user_id();
 
 	if ( !access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) {
-		$t_restriction = 'AND view_state=' . PUBLIC;
+		$t_restriction = 'AND view_state=' . VS_PUBLIC;
 	} else {
 		$t_restriction = '';
 	}
@@ -76,7 +76,7 @@
 		$v3_note = $row['note'];
 		$v3_note = string_display_links( $v3_note );
 
-		if ( PRIVATE == $v3_view_state ) {
+		if ( VS_PRIVATE == $v3_view_state ) {
 			$t_bugnote_css		= 'bugnote-private';
 			$t_bugnote_note_css	= 'bugnote-note-private';
 		} else {
@@ -87,7 +87,7 @@
 <tr class="bugnote">
 	<td class="<?php echo $t_bugnote_css ?>">
 		<?php print_user( $v3_reporter_id ) ?>
-		<?php if ( PRIVATE == $v3_view_state ) { ?>
+		<?php if ( VS_PRIVATE == $v3_view_state ) { ?>
 		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>
 		<?php } ?>
 		<br />
@@ -102,7 +102,7 @@
 					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
 					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
 					if ( access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) {
-						if ( PRIVATE == $v3_view_state ) {
+						if ( VS_PRIVATE == $v3_view_state ) {
 							print_bracket_link('bugnote_set_view_state.php?private=0&bugnote_id='.$v3_id, lang_get( 'make_public' ));
 						} else {
 							print_bracket_link('bugnote_set_view_state.php?private=1&bugnote_id='.$v3_id, lang_get( 'make_private' ));

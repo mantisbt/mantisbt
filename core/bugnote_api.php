@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.18 2003-03-01 12:11:56 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.19 2003-03-03 23:29:29 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -96,9 +96,9 @@
 
 		# Check for private bugnotes.
 		if ( $p_private && access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) {
-			$t_view_state = PRIVATE;
+			$t_view_state = VS_PRIVATE;
 		} else {
-			$t_view_state = PUBLIC;
+			$t_view_state = VS_PUBLIC;
 		}
 
 		# get user information
@@ -281,9 +281,9 @@
 		$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 
 		if ( $p_private ) {
-			$t_view_state = PRIVATE;
+			$t_view_state = VS_PRIVATE;
 		} else {
-			$t_view_state = PUBLIC;
+			$t_view_state = VS_PUBLIC;
 		}
 
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );

@@ -24,7 +24,7 @@
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 	access_ensure_project_level( VIEWER, $v_project_id );
-	if ( PRIVATE == $v_view_state ) {
+	if ( VS_PRIVATE == $v_view_state ) {
 		access_ensure_project_level( config_get( 'private_news_threshold' ), $v_project_id );
 	}
 

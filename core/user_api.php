@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.53 2003-02-16 19:29:29 jfitzell Exp $
+	# $Id: user_api.php,v 1.54 2003-03-03 23:29:30 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -463,8 +463,8 @@
 		$t_project_table = config_get( 'mantis_project_table' );
 		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 
-		$t_pub = PUBLIC;
-		$t_private = PRIVATE;
+		$t_public = VS_PUBLIC;
+		$t_private = VS_PRIVATE;
 
 		if ( user_is_administrator( $p_user_id ) ) {
 			$query = "SELECT DISTINCT( id )
@@ -476,7 +476,7 @@
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id=u.project_id AND p.enabled=1
-					  WHERE p.view_state='$t_pub'
+					  WHERE p.view_state='$t_public'
 					    OR (p.view_state='$t_private'
 						    AND
 					        u.user_id='$c_user_id')

@@ -27,7 +27,7 @@
     # Loop through results
 	for ( $i=0 ; $i < sizeof( $rows ) ; $i++ ) {
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
-		if ( PRIVATE == $v_view_state &&
+		if ( VS_PRIVATE == $v_view_state &&
 			 ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
 			continue;
 		}
@@ -40,7 +40,7 @@
 		if ( 1 == $v_announcement ) {
 			array_push( $t_notes, lang_get( 'announcement' ) );
 		}
-		if ( PRIVATE == $v_view_state ) {
+		if ( VS_PRIVATE == $v_view_state ) {
 			array_push( $t_notes, lang_get( 'private' ) );
 		}
 		if ( sizeof( $t_notes ) > 0 ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.53 2003-02-28 15:55:12 vboctor Exp $
+	# $Id: email_api.php,v 1.54 2003-03-03 23:29:30 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -476,7 +476,7 @@
 
 		$t_message = '';
 
-		$t_state = PUBLIC;
+		$t_state = VS_PUBLIC;
 
 		$query = "SELECT *, UNIX_TIMESTAMP(last_modified) as last_modified
 				FROM $g_mantis_bugnote_table

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.42 2003-02-26 11:12:08 vboctor Exp $
+	# $Id: project_api.php,v 1.43 2003-03-03 23:29:30 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -202,7 +202,7 @@
 
 	# --------------------
 	# Create a new project
-	function project_create( $p_name, $p_description, $p_status, $p_view_state=PUBLIC, $p_file_path='', $p_enabled=true ) {
+	function project_create( $p_name, $p_description, $p_status, $p_view_state=VS_PUBLIC, $p_file_path='', $p_enabled=true ) {
 		# Make sure file path has trailing slash
 		$p_file_path = terminate_directory_path( $p_file_path );
 
@@ -432,7 +432,7 @@
 
 		$t_access_level = $p_access_level;
 
-		if ( PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
+		if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
 			# @@@ we need to get this logic out somewhere else.
 			#   I was getting access_min from the project but apparently we got
 			#   rid of that in 0.17.2.  The user docs claim developers and higher

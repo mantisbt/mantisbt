@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.24 2003-02-23 14:18:00 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.25 2003-03-03 23:29:28 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -219,8 +219,8 @@
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
-		<input tabindex="9" type="radio" name="view_state" value="<?php echo PUBLIC ?>" <?php check_checked( $f_view_state, PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?>
-		<input tabindex="10" type="radio" name="view_state" value="<?php echo PRIVATE ?>" <?php check_checked( $f_view_state, PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?>
+		<input tabindex="9" type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?>
+		<input tabindex="10" type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?>
 	</td>
 </tr>
 

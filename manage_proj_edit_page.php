@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.67 2003-02-23 13:17:42 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.68 2003-03-03 23:29:28 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -406,7 +406,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 		<tr>
 			<td class="center">
 			<?php
-				if ( PUBLIC == project_get_field( $f_project_id, 'view_state' ) ) {
+				if ( VS_PUBLIC == project_get_field( $f_project_id, 'view_state' ) ) {
 					echo lang_get( 'public_project_msg' );
 				} else {
 					echo lang_get( 'private_project_msg' );

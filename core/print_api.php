@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.56 2003-03-01 12:22:52 vboctor Exp $
+	# $Id: print_api.php,v 1.57 2003-03-03 23:29:30 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -185,8 +185,8 @@
 		if ( 0 == helper_get_current_project() ) {
 			$t_adm = ADMINISTRATOR;
 			$t_rep = config_get( 'report_bug_threshold' );
-			$t_pub = PUBLIC;
-			$t_prv = PRIVATE;
+			$t_pub = VS_PUBLIC;
+			$t_prv = VS_PRIVATE;
 
 			$t_user_table = config_get( 'mantis_user_table' );
 			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
@@ -265,7 +265,7 @@
 			if ( 1 == $v_announcement ) {
 				array_push( $t_notes, lang_get( 'announcement' ) );
 			}
-			if ( PRIVATE == $v_view_state ) {
+			if ( VS_PRIVATE == $v_view_state ) {
 				array_push( $t_notes, lang_get( 'private' ) );
 			}
 			if ( sizeof( $t_notes ) > 0 ) {
@@ -298,8 +298,8 @@
 		if ( 0 == helper_get_current_project() ) {
 			$t_adm = ADMINISTRATOR;
 			$t_dev = config_get( 'handle_bug_threshold' );
-			$t_pub = PUBLIC;
-			$t_prv = PRIVATE;
+			$t_pub = VS_PUBLIC;
+			$t_prv = VS_PRIVATE;
 
 			$t_user_table = config_get( 'mantis_user_table' );
 			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
@@ -342,8 +342,8 @@
 		$t_user_id = auth_get_current_user_id();
 		$t_access_level = current_user_get_field( 'access_level' );
 
-		$t_pub = PUBLIC;
-		$t_prv = PRIVATE;
+		$t_pub = VS_PUBLIC;
+		$t_prv = VS_PRIVATE;
 
 		if ( ADMINISTRATOR == $t_access_level ) {
 			$query = "SELECT DISTINCT( p.id ), p.name
@@ -683,7 +683,7 @@
 
 		$c_user_id = db_prepare_int( $p_user_id );
 
-		$t_prv = PRIVATE;
+		$t_prv = VS_PRIVATE;
 		$query = "SELECT DISTINCT p.id, p.name
 				FROM $g_mantis_project_table p
 				LEFT JOIN $g_mantis_project_user_list_table u

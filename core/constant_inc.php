@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.3 2003-02-19 01:37:21 vboctor Exp $
+	# $Id: constant_inc.php,v 1.4 2003-03-03 23:29:30 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -78,8 +78,8 @@
 	define( 'BLOCK',	80 );
 
 	# project view_state
-	define( 'PUBLIC',	10 );
-	define( 'PRIVATE',	50 );
+	define( 'VS_PUBLIC',	10 );
+	define( 'VS_PRIVATE',	50 );
 
 	# direction
 	define( 'ASC',	101 );

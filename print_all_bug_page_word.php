@@ -104,8 +104,8 @@
 		$t_access_level = current_user_get_field( 'access_level' );
 		$t_user_id = auth_get_current_user_id();
 
-		$t_pub = PUBLIC;
-		$t_prv = PRIVATE;
+		$t_pub = VS_PUBLIC;
+		$t_prv = VS_PRIVATE;
 		$query2 = "SELECT DISTINCT( p.id )
 			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
 			WHERE (p.enabled=1 AND

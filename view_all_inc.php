@@ -397,7 +397,7 @@
 	<td class="left">
 		<?php
 			echo $v_summary;
-			if ( PRIVATE == $v_view_state ) {
+			if ( VS_PRIVATE == $v_view_state ) {
 			  echo '  ['.lang_get( 'private' ).']';
 			}
 		 ?>

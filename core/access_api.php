@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.19 2003-02-19 10:20:06 jfitzell Exp $
+	# $Id: access_api.php,v 1.20 2003-03-03 23:29:29 int2str Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -209,7 +209,7 @@
 			
 			# If the project is private and the user isn't listed, then they
 			#  must be an administrator to get in
-			if ( PRIVATE == $t_project_view_state &&
+			if ( VS_PRIVATE == $t_project_view_state &&
 				 $t_access_level < ADMINISTRATOR ) {
 				return false;
 			}
@@ -247,7 +247,7 @@
 
 		# If the bug is private and the user is not the reporter, then the
 		#  the user must also have higher access than private_bug_threshold
-		if ( PRIVATE == bug_get_field( $p_bug_id, 'view_state' ) &&
+		if ( VS_PRIVATE == bug_get_field( $p_bug_id, 'view_state' ) &&
 			 ! bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() ) ) {
 			$p_access_level = max( $p_access_level, config_get( 'private_bug_threshold' ) );
 		}
@@ -275,7 +275,7 @@
 	function access_has_bugnote_level( $p_access_level, $p_bugnote_id ) {
 		# If the bug is private and the user is not the reporter, then the
 		#  the user must also have higher access than private_bug_threshold
-		if ( PRIVATE == bugnote_get_field( $p_bugnote_id, 'view_state' ) &&
+		if ( VS_PRIVATE == bugnote_get_field( $p_bugnote_id, 'view_state' ) &&
 			 ! bugnote_is_user_reporter( $p_bugnote_id, auth_get_current_user_id() ) ) {
 			$p_access_level = max( $p_access_level, config_get( 'private_bugnote_threshold' ) );
 		}
