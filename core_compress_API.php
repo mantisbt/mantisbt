@@ -1,4 +1,9 @@
 <?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# This program is distributed under the terms and conditions of the GPL
+	# See the files README and LICENSE for details
+
 	# Starts the buffering/compression (only if the compression option is ON)
 	# This method should be called after all possible re-directs and access
 	# level checks.
