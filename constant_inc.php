@@ -112,10 +112,11 @@
 	define( "ERROR_LOGIN",                2 );
 	define( "ERROR_REPORT",               3 );
 	define( "ERROR_NO_FILE_SPECIFIED",    4 );
-	define( "ERROR_NO_DIRECTORY",         5 );
-	define( "ERROR_DUPLICATE_CATEGORY",   6 );
-	define( "ERROR_DUPLICATE_VERSION",    7 );
-	define( "ERROR_DUPLICATE_FILE",       8 );
-	define( "ERROR_EMPTY_FIELD",          9 );
-	define( "ERROR_PROTECTED_ACCOUNT",   10 );
+	define( "ERROR_FILE_DISALLOWED",      5 );
+	define( "ERROR_NO_DIRECTORY",         6 );
+	define( "ERROR_DUPLICATE_CATEGORY",   7 );
+	define( "ERROR_DUPLICATE_VERSION",    8 );
+	define( "ERROR_DUPLICATE_FILE",       9 );
+	define( "ERROR_EMPTY_FIELD",         10 );
+	define( "ERROR_PROTECTED_ACCOUNT",   11 );
 ?>

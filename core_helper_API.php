@@ -382,6 +382,17 @@
 	}
 	# --------------------
 	# Returns the specified field of the project
+	function get_current_project_field( $p_field_name ) {
+		global $g_mantis_project_table, $g_project_cookie_val;
+
+		$query = "SELECT $p_field_name
+				FROM $g_mantis_project_table
+				WHERE id='$g_project_cookie_val'";
+		$result = db_query( $query );
+		return db_result( $result, 0, 0 );
+	}
+	# --------------------
+	# Returns the specified field of the project
 	function get_project_field( $p_project_id, $p_field_name ) {
 		global $g_mantis_project_table;
 

@@ -149,15 +149,16 @@
 			$f_file = "none";
 		}
 		$f_file = trim( $f_file );
-		if ( is_uploaded_file( $f_file ) ) {
+		$disallowed = 0;
+		if ( !file_type_check( $f_file_name ) ) {
+			$disallowed = 1;
+		} else if ( is_uploaded_file( $f_file ) ) {
 			$t_bug_id = str_pd( $t_bug_id, "0", 7, STR_PAD_LEFT );
 
-			$query = "SELECT file_path
-					FROM $g_mantis_project_table
-					WHERE id='$g_project_cookie_val'";
-			$result = db_query( $query );
-			$t_file_path = db_result( $result );
+			# grab the file path
+			$t_file_path = get_current_project_field( "file_path" );
 
+			# prepare variables for insertion
 			$f_file_name = $t_bug_id."-".$f_file_name;
 			$t_file_size = filesize( $f_file );
 
@@ -169,6 +170,8 @@
 										(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 										VALUES
 										(null, $t_bug_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '')";
+							} else {
+								print_mantis_error( ERROR_DUPLICATE_FILE );
 							}
 							break;
 				case DATABASE:

@@ -16,19 +16,14 @@
 
 	$result = 0;
 	$good_upload = 0;
-	if ( is_uploaded_file( $f_file ) ) {
+	$disallowed = 0;
+	if ( !file_type_check( $f_file_name ) ) {
+		$disallowed = 1;
+	} else if ( is_uploaded_file( $f_file ) ) {
 		$good_upload = 1;
-		# grab the file path
-		$query = "SELECT file_path
-				FROM $g_mantis_project_table
-				WHERE id='$g_project_cookie_val'";
-		$result = db_query( $query );
-		$t_file_path = db_result( $result );
 
-		if ( !file_exists( $t_file_path ) ) {
-			echo $MANTIS_ERROR[ERROR_NO_DIRECTORY];
-			exit;
-		}
+		# grab the file path
+		$t_file_path = get_current_project_field( "file_path" );
 
 		# prepare variables for insertion
 		$f_file_name = $f_id."-".$f_file_name;
@@ -43,8 +38,7 @@
 									VALUES
 									(null, $f_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_file_type', NOW(), '')";
 						} else {
-							echo $MANTIS_ERROR[ERROR_DUPLICATE_FILE];
-							exit;
+							print_mantis_error( ERROR_DUPLICATE_FILE );
 						}
 						break;
 			case DATABASE:
@@ -78,7 +72,9 @@
 <p>
 <div align="center">
 <?php
-	if ( 0 == $good_upload ) {
+	if ( 1 == $disallowed ) {
+		PRINT $MANTIS_ERROR[ERROR_FILE_DISALLOWED]."<p>";
+	} else if ( 0 == $good_upload ) {
 		PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]."<p>";
 	} else {
 		print_sql_error( $query );
