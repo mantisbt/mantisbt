@@ -8,7 +8,7 @@
 	# Changes applied to 0.14 database to give us 0.15
 
 	# --------------------------------------------------------
-	# $Id: 0_14_inc.php,v 1.5 2004-02-06 14:13:03 jlatour Exp $
+	# $Id: 0_14_inc.php,v 1.6 2004-12-14 12:44:56 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -785,7 +785,7 @@
 	$upgrades[] = new SQLUpgrade(
 			'0.14-110',
 			'Make new project file table',
-			"CREATE TABLE $t_project_file_table (
+			"CREATE TABLE IF NOT EXISTS $t_project_file_table (
 			  id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
 			  project_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
 			  title varchar(250) NOT NULL,
@@ -804,7 +804,7 @@
 	$upgrades[] = new SQLUpgrade(
 			'0.14-111',
 			'Make new bug file table',
-			"CREATE TABLE $t_bug_file_table (
+			"CREATE TABLE IF NOT EXISTS $t_bug_file_table (
 			  id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
 			  bug_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
 			  title varchar(250) NOT NULL,
@@ -856,6 +856,6 @@
 			"ALTER IGNORE TABLE $t_user_table ADD UNIQUE(cookie_string)"
 		);
 
-	
+
 	return $upgrades;
 ?>
