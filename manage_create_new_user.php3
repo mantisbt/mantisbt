@@ -29,7 +29,7 @@
 
 	### create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
-	$t_password = crypt( $f_password );
+	$t_password = process_plain_password( $f_password );
     $query = "INSERT
     		INTO $g_mantis_user_table
     		( id, username, email, password, date_created, last_visit,

@@ -42,7 +42,7 @@
 	### Use a default access level
 	### create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
-	$t_password2 = crypt( $t_password );
+	$t_password2 = process_plain_password( $t_password );
     $query = "INSERT
     		INTO $g_mantis_user_table
     		( id, username, email, password, date_created, last_visit,

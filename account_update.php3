@@ -29,7 +29,7 @@
 
 		### Update password if the two match and are not empty
 		if (( !empty( $f_password ) )&&( $f_password==$f_password_confirm )) {
-			$t_password = crypt( $f_password );
+			$t_password = process_plain_password( $f_password );
 			$query = "UPDATE $g_mantis_user_table
 					SET password='$t_password'
 					WHERE id='$f_id'";

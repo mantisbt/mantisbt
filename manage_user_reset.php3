@@ -19,7 +19,7 @@
 			$t_password = create_random_password( $f_email );
 
 			### create the almost unique string for each user then insert into the table
-			$t_password2 = crypt( $t_password );
+			$t_password2 = process_plain_password( $t_password );
 		    $query = "UPDATE $g_mantis_user_table
 		    		SET password='$t_password2'
 		    		WHERE id='$f_id'";
