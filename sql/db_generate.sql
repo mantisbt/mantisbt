@@ -1,11 +1,11 @@
 #
 # Table structure for table `mantis_bug_file_table`
 # --------------------------------------------------------
-# $Revision: 1.8 $
-# $Author: vboctor $
-# $Date: 2002-08-27 22:33:07 $
+# $Revision: 1.9 $
+# $Author: jfitzell $
+# $Date: 2002-09-05 22:16:09 $
 #
-# $Id: db_generate.sql,v 1.8 2002-08-27 22:33:07 vboctor Exp $
+# $Id: db_generate.sql,v 1.9 2002-09-05 22:16:09 jfitzell Exp $
 # --------------------------------------------------------
 #
 
@@ -345,6 +345,7 @@ CREATE TABLE mantis_user_table (
   cookie_string varchar(64) NOT NULL default '',
   PRIMARY KEY  (id),
   UNIQUE KEY username (username),
+  UNIQUE KEY cookie_string (cookie_string),
   KEY access_level (access_level)
 ) TYPE=MyISAM;
 

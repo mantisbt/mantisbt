@@ -51,6 +51,14 @@
 							"NULL AUTO_INCREMENT PRIMARY KEY FIRST" );
 	$upgrade_obj->AddItem();
 
+	# @@@ this was added in db_upgrade.sql going from 0.14 to 0.15 but not added to db_generate.sql
+	#  this means that users who installed from versions after 0.15 don't have it but those from before
+	#  do... so users from before upgrading with this will get an error about the key already existing...
+	$upgrade_obj->AddItem( "# Bug relationship support" );
+	$upgrade_obj->AddItem( "ALTER TABLE mantis_user_table ADD UNIQUE cookie_string (cookie_string)" );
+	$upgrade_obj->AddItem();
+
+
 	# END OF UPGRADE SQL STATEMENTS
 
 	if ( !isset ( $f_action ) ) {
