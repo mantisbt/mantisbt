@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.22 2004-03-24 00:30:29 narcissus Exp $
+	# $Id: view_all_set.php,v 1.23 2004-03-26 20:30:26 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -16,15 +16,15 @@
 	$f_source_query_id		= gpc_get_int( 'source_query_id', -1 );
 	$f_print				= gpc_get_bool( 'print' );
 
-	$f_show_category		= gpc_get_string( 'show_category', '' );
-	$f_show_severity		= gpc_get_string( 'show_severity', '' );
-	$f_show_status			= gpc_get_string( 'show_status', '' );
+	$f_show_category		= gpc_get_string( 'show_category', 'any' );
+	$f_show_severity		= gpc_get_string( 'show_severity', 'any' );
+	$f_show_status			= gpc_get_string( 'show_status', 'any' );
 	$f_per_page				= gpc_get_int( 'per_page', -1 );
 	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
 	$f_hide_closed			= gpc_get_bool( 'hide_closed' );
-	$f_hide_resolved			= gpc_get_bool( 'hide_resolved' );
-	$f_reporter_id			= gpc_get_string( 'reporter_id', '' );
-	$f_handler_id			= gpc_get_string( 'handler_id', '' );
+	$f_hide_resolved		= gpc_get_bool( 'hide_resolved' );
+	$f_reporter_id			= gpc_get_string( 'reporter_id', 'any' );
+	$f_handler_id			= gpc_get_string( 'handler_id', 'any' );
 	# sort direction
 	$f_sort					= gpc_get_string( 'sort', 'last_updated' );
 	$f_dir					= gpc_get_string( 'dir', 'DESC' );

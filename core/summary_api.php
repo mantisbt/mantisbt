@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.22 2004-03-24 00:30:28 narcissus Exp $
+	# $Id: summary_api.php,v 1.23 2004-03-26 20:30:26 narcissus Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -16,10 +16,10 @@
 	function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 		printf( '<tr %s>', helper_alternate_class() );
 		printf( '<td width="50%%">%s</td>', string_display( $p_label ) );
-		printf( '<td width="12%%" class="right">%d</td>', $p_open );
-		printf( '<td width="12%%" class="right">%d</td>', $p_resolved );
-		printf( '<td width="12%%" class="right">%d</td>', $p_closed );
-		printf( '<td width="12%%" class="right">%d</td>', $p_total );
+		printf( '<td width="12%%" class="right">%s</td>', $p_open );
+		printf( '<td width="12%%" class="right">%s</td>', $p_resolved );
+		printf( '<td width="12%%" class="right">%s</td>', $p_closed );
+		printf( '<td width="12%%" class="right">%s</td>', $p_total );
 		print( '</tr>' );
 	}
 	# --------------------
@@ -58,6 +58,74 @@
 		while ( $row = db_fetch_array( $result ) ) {
 			if ( $row[$p_enum] != $t_last_value 
 			  && $t_last_value != -1 ) {
+				# Build up the hyperlinks to bug views
+				$t_bug_link = '';
+				switch ( $p_enum ) {
+					case 'status':
+						switch ( $t_last_value ) {
+							case NEW_:
+							case FEEDBACK:
+							case ACKNOWLEDGED:
+							case CONFIRMED:
+							case ASSIGNED:
+							case RESOLVED:
+							case CLOSED:
+								$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;show_status=' . $t_last_value;
+							break;
+						} 
+					break;
+					case 'severity':
+						switch ( $t_last_value ) {
+							case FEATURE:
+							case TRIVIAL:
+							case TEXT:
+							case TWEAK:
+							case MINOR:
+							case MAJOR:
+							case CRASH:
+							case BLOCK:
+								$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;show_severity=' . $t_last_value;
+							break;
+						} 
+					break;
+					case 'resolution':
+						switch ( $t_last_value ) {
+							case OPEN:
+							case FIXED:
+							case REOPENED:
+							case UNABLE_TO_DUPLICATE:
+							case NOT_FIXABLE:
+							case DUPLICATE:
+							case NOT_A_BUG:
+							case SUSPENDED:
+							case WONT_FIX:
+							default:
+								$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;show_resolution=' . $t_last_value;
+							break;
+						} 
+					break;
+					case 'priority':
+						switch ( $t_last_value ) {
+							case NONE:
+							case LOW:
+							case NORMAL:
+							case HIGH:
+							case URGENT:
+							case IMMEDIATE:
+								# Currently no filtering by priority :(
+								$t_bug_link = '';
+							break;
+						} 
+					break;
+				}
+				
+				if ( $t_bug_link != '' ) {
+					if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+					if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+					if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+					if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				}
+			  	
 				summary_helper_print_row( 
 				  get_enum_element( $p_enum, $t_last_value)
 			  	  , $t_bugs_open, $t_bugs_resolved
@@ -87,6 +155,73 @@
 		}
 
 		if ( 0 < $t_bugs_total ) {
+			# Build up the hyperlinks to bug views
+			$t_bug_link = '';
+			switch ( $p_enum ) {
+				case 'status':
+					switch ( $t_last_value ) {
+						case NEW_:
+						case FEEDBACK:
+						case ACKNOWLEDGED:
+						case CONFIRMED:
+						case ASSIGNED:
+						case RESOLVED:
+						case CLOSED:
+							$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;show_status=' . $t_last_value;
+						break;
+					} 
+				break;
+				case 'severity':
+					switch ( $t_last_value ) {
+						case FEATURE:
+						case TRIVIAL:
+						case TEXT:
+						case TWEAK:
+						case MINOR:
+						case MAJOR:
+						case CRASH:
+						case BLOCK:
+							$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;show_severity=' . $t_last_value;
+						break;
+					} 
+				break;
+				case 'resolution':
+					switch ( $t_last_value ) {
+						case OPEN:
+						case FIXED:
+						case REOPENED:
+						case UNABLE_TO_DUPLICATE:
+						case NOT_FIXABLE:
+						case DUPLICATE:
+						case NOT_A_BUG:
+						case SUSPENDED:
+						case WONT_FIX:
+							$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;show_resolution=' . $t_last_value;
+						break;
+					} 
+				break;
+				case 'priority':
+					switch ( $t_last_value ) {
+						case NONE:
+						case LOW:
+						case NORMAL:
+						case HIGH:
+						case URGENT:
+						case IMMEDIATE:
+							# Currently no filtering by priority :(
+							$t_bug_link = '';
+						break;
+					} 
+				break;
+			}
+			
+			if ( $t_bug_link != '' ) {
+				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+			}
+
 			summary_helper_print_row( 
 			  get_enum_element( $p_enum, $t_last_value)
 			  , $t_bugs_open, $t_bugs_resolved
@@ -121,10 +256,17 @@
 		for ($i=0;$i<$arr_count;$i++) {
 			$t_enum_count = summary_bug_count_by_date( $p_date_array[$i] );
 
+			$t_start_date = mktime( 0, 0, 0, date( 'm' ), ( date( 'd' ) - $p_date_array[$i] ), date( 'Y' ) );
+			$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;do_filter_by_date=on&amp;start_year=' . date( 'Y', $t_start_date ) . '&amp;start_month=' . date( 'm', $t_start_date ) . '&amp;start_day=' . date( 'd', $t_start_date ) . '&amp;hide_closed=">';
+
 			printf( '<tr %s>', helper_alternate_class() );
 			printf( '<td width="50%%">%s</td>', $p_date_array[$i] );
-			printf( '<td class="right">%s</td>', $t_enum_count );
-			print(  '</tr>' );
+			if ( 0 < $t_enum_count ) {
+				printf( '<td class="right">%s</td>', $t_bug_link . $t_enum_count . '</a>' );
+			} else {
+				printf( '<td class="right">%s</td>', $t_enum_count );
+			}
+			print( '</tr>' );
 		} # end for
 	}
 	# --------------------
@@ -165,6 +307,13 @@
 						WHERE id=$t_last_handler";
 				$result2 = db_query( $query );
 				$row2 = db_fetch_array( $result2 );
+
+				$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;handler_id=' . $t_last_handler;
+				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+
 				summary_helper_print_row( 
 				  $row2['username']
 			  	  , $t_bugs_open, $t_bugs_resolved
@@ -199,6 +348,13 @@
 					WHERE id=$t_last_handler";
 			$result2 = db_query( $query );
 			$row2 = db_fetch_array( $result2 );
+
+			$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;handler_id=' . $t_last_handler;
+			if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+			if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+			if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+			if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+
 			summary_helper_print_row(
 			  $row2['username']
 			  , $t_bugs_open, $t_bugs_resolved
@@ -263,6 +419,13 @@
 						WHERE id=$v_reporter_id";
 				$result3 = db_query( $query );
 				$row3 = db_fetch_array( $result3 );
+
+				$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;reporter_id=' . $v_reporter_id;
+				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+
 				summary_helper_print_row(
 				$row3['username']
 				, $t_bugs_open, $t_bugs_resolved
@@ -317,6 +480,13 @@
 
 					$label = sprintf( '[%s] %s', $row2['name'], $label );
 				}
+
+				$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;show_category=' . $last_category;
+				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				
 				summary_helper_print_row(
 				string_attribute($label)
 				, $t_bugs_open, $t_bugs_resolved
@@ -358,6 +528,15 @@
 				
 				$label = sprintf( '[%s] %s', $row2['name'], $label );
 			}
+
+			$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;show_category=' . $last_category;
+			if ( $t_bug_link != '' ) {
+				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+			}
+
 			summary_helper_print_row( 
 			  string_attribute($label)
 			  , $t_bugs_open, $t_bugs_resolved
@@ -513,7 +692,13 @@
 					}
 					
 					print '<td>';
-					print $res_bug_count;
+					if ( 0 < $res_bug_count ) {
+						$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;handler_id=' . $t_handler_id;
+						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[ $j ] . '">';
+						print $t_bug_link . $res_bug_count . '</a>';
+					} else {
+						print $res_bug_count;
+					}
 					print '</td>';
 
 					# These resolutions are considered fixed
@@ -622,7 +807,13 @@
 					}
 					
 					print '<td>';
-					print $res_bug_count;
+					if ( 0 < $res_bug_count ) {
+						$t_bug_link = '<a class="subtle" href="view_all_set.php?type=1&amp;reporter_id=' . $t_reporter_id;
+						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[ $j ] . '">';
+						print $t_bug_link . $res_bug_count . '</a>';
+					} else {
+						print $res_bug_count;
+					}
 					print '</td>';
 
 					# These resolutions are considered fixed

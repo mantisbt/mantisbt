@@ -8,6 +8,7 @@ a					{}
 a:active 			{ color: ;    }
 a:link    			{ color: ; }
 a:visited 			{ color: ;   }
+a.subtle			{ color: blue; text-decoration: none; }
 
 form				{ display: inline; }
 input				{}
