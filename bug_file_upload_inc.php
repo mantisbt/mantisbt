@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_upload_inc.php,v 1.35 2004-06-29 08:38:42 int2str Exp $
+	# $Id: bug_file_upload_inc.php,v 1.36 2004-10-24 19:04:36 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 		return false;
 	}
 
-	$t_max_file_size = (int)config_get( 'max_file_size' );
+	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
 <br />
 
@@ -54,7 +54,7 @@
 <tr class="row-1">
 	<td class="category" width="15%">
 		<?php echo lang_get( 'select_file' ) ?><br />
-		<?php echo '(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)'?>
+		<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 	</td>
 	<td width="85%">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />

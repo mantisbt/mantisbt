@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.44 2004-10-05 21:12:41 prichards Exp $
+	# $Id: bug_report_advanced_page.php,v 1.45 2004-10-24 19:04:36 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -386,13 +386,16 @@
 
 
 <!-- File Upload (if enabled) -->
-<?php if ( file_allow_bug_upload() ) { ?>
+<?php if ( file_allow_bug_upload() ) { 
+	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'upload_file' ) ?>
+		<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 	</td>
 	<td>
-		<input type="hidden" name="max_file_size" value="<?php echo config_get( 'max_file_size' ) ?>" />
+		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 		<input tabindex="16" name="file" type="file" size="60" />
 	</td>
 </tr>

@@ -11,3 +11,4 @@ tr.row-2 { background-color: #e8e8e8; color: #000000; }
 table.width100		{ width: 100%; border: solid 1px #000000; }
 table.width50		{ width: 50%; border: solid 1px #000000; }
 td.center			{ text-align: center; }
+.error { background-color: red; color: black; }

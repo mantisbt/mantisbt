@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.15 2004-08-16 02:14:55 thraxisp Exp $
+	# $Id: utility_api.php,v 1.16 2004-10-24 19:04:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Utility API ###
@@ -139,6 +139,23 @@
 			return (bool)$result;
 		}
 	}
+
+	# --------------------
+	# Get the named php ini variable but return it as a number after converting "K" and "M"
+	function ini_get_number( $p_name ) {
+		$t_result = ini_get( $p_name );
+		$t_val = spliti( 'M', $t_result);
+		if ( $t_val[0] != $t_result ) {
+			return $t_val[0] * 1000000;
+		}
+		$t_val = spliti( 'K', $t_result);
+		if ( $t_val[0] != $t_result ) {
+			return $t_val[0] * 1000;
+		}
+		return $t_result;
+	}
+	
+
 
 	# --------------------
 	# Sort a multi-dimensional array by one of its keys
