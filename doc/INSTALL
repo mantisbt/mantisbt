@@ -57,53 +57,23 @@ mv <directoryname> mantis
 
 If you are upgrading see the UPGRADING document.
 
-2a.  Decide what sort of password encryption you will use.  You must do this
-at install time. Currently, you can choose from:
-
-* MD5 (the default method)
-* plain text
-* crypt
-
-Plain is the least secure and passwords are stored without encryptoin.
-
-MD5 should be supported on all installs of PHP.  MD5 is the default method.
-
-Crypt may not be installed on non-Unix operating systems
-
-MD5 and crypt are one-way algorithms: you will not be able to retrive the
-original passwords.  Conversely administrators cannot see what your password
-is.
-
-*** NOTE: crypt was the default format before 0.17.0. MD5 is now the default
-method.  You cannot switch methods in the middle of a working project and
-expect users to still login.
-
-2b.  Once you have chosen whch method to use, you will need to change into the
-sql/ subdirectory and locate the "db_generate.sql" file.  Open up
-"db_generate.sql" and go to the bottom of the file and replace the 4th value
-in the last line with your chosen method. The 3 formats the password is stored
-in are located just above the last few lines of the file.  MD5 is the default
-method.
-
-I'm sorry this is so primitive; a more mature method will soon be found.
-
-3. Next we will create the necessary database tables.  Make sure you have
+2. Next we will create the necessary database tables.  Make sure you have
 created the database ahead of time.  You should know your mysql username and
 password as well.
 
-Run the following command:
+Go into the sql directory and run the following command:
 
 mysql -u<username> -p<password> <databasename> < db_generate.sql
 
 You could also cut and paste the sql statements from db_generate.sql into a
 package like phpMyAdmin or into your terminal window.
 
-eg. Your username is bob, password is mypass, database name is bugtracker.
+e.g. if your username is bob, password is mypass, database name is bugtracker:
 
 mysql -ubob -pmypass bugtracker < db_generate.sql
 
 You may require an additional host parameter if your SQL server is on another
-machine.  eg.  Your server is sqlserver
+machine.  e.g. if your server is sqlserver
 
 mysql -h sqlserver -ubob -pmypass bugtracker < db_generate.sql
 
@@ -116,46 +86,27 @@ from being used to trick the package.  It would be even better to rename the
 account or delete it permanently.  REMEMBER: After setting up the package,
 REMOVE the default administrator account.
 
-4. The next part involves configuring the installtion to work with your
+3. The next part involves configuring the installation to work with your
 specific setup.
 
-In the default/ directory is the config_inc1.php and config_inc2.php files.
-These contains all the global variable settings that you can set.  Do not edit
-these files.  You will be using them as a reference instead.
-
-config_inc1.php contains most of the options that you would want to configure.
-
-config_inc2.php contains mostly names of files that are required.  You
-probably will not have to override these settings except to specify a top or
-bottom page to include.
-
-Here are the important files for configuration:
-
-mantis/config_inc.php.sample
-mantis/default/config_inc1.php
-mantis/default/config_inc2.php
-
-Rename config_inc.php.sample to config_inc.php
-
+In the installation directory, locate config_inc.php.sample and copy it to 
+config_inc.php. 
 Open the file in an editor and edit the values to match your settings.  The
 sample file contains only essential settings.  There are many more that
 you can use to customize your Mantis installation.  See the customization.html
 file for in depth explanations.
 
 The file will overwrite the default values with those necessary for setup.
-The default config_inc1.php file has some comments which will help explain
-the variables.  You can always add/overwrite more globals in this file as
-well.
 
-You can load up admin_check.php to see if you set things up correctly.
+You can load up admin/check.php to see if you set things up correctly.
 
-*** NOTE: admin_check sometimes reports the value of register_globals
+*** NOTE: check.php sometimes reports the value of register_globals
 incorrectly.  Create a page with this line in it: <? phpinfo() ?>, save it
 with a .php extension and load it up in your web browser.  It will, among a
 multitude of other things, have the correct value of register_globals that you
 are using.
 
-5. Mantis now uses only .php files.
+4. Mantis now uses only .php files.
 
 If your webserver is configured for other extensions (.PHP3, .PHTML) then you
 will have to have the administrator add support for .PHP files.  This should
@@ -163,7 +114,7 @@ be a trivial modification.
 
 Documentation can be found at: http://www.php.net/manual/en/installation.php
 
-6.  Login to the bugtracker and go to the manage section.  Click on the
+5.  Login to your bugtracker and go to the manage section.  Click on the
 projects link.  You will need to ADD a new project.  Then EDIT the new project
 and remember to ADD at least one category.  Otherwise you won't be able to add
 any bug reports.
@@ -175,7 +126,7 @@ of the site please read the CUSTOMIZATION file.
 ### Upgrading ###
 -------------------------------------------------------------------------------
 
-See the files: UPGRADING and db_upgrade.sql
+See the files: UPGRADING and admin/upgrade.php
 
 -------------------------------------------------------------------------------
 ### Troubleshooting ###
