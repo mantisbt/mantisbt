@@ -769,7 +769,7 @@
 	 * Copyright 1999 Dominic J. Eidson, use as you wish, but give credit
 	 * where credit due.
 	 */
-	function word_wrap ($string, $cols = 80, $prefix = "") {
+	function word_wrap ($string, $cols = 72, $prefix = "") {
 
 		$t_lines = split( "\n", $string);
 		$outlines = "";

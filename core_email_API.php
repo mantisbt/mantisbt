@@ -343,7 +343,7 @@
 		$t_message .= "$s_email_last_modified:    $v_last_updated\n";
 		$t_message .= "=======================================================================\n";
 		$t_message .= "$s_email_summary:  $v_summary\n\n";
-		$t_message .= "$s_email_description: \n$v2_description\n";
+		$t_message .= "$s_email_description: \n".word_wrap( $v2_description )."\n";
 		$t_message .= "=======================================================================\n\n";
 
 		return $t_message;
@@ -381,9 +381,9 @@
 			$t_last_modified = date( $g_complete_date_format, sql_to_unix_time( $t_last_modified ) );
 			$t_string = " ".$t_username." - ".$t_last_modified." ";
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
-			$t_message = $t_message.$t_string."\n";
+			$t_message = $t_message.word_wrap( $t_string )."\n";
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
-			$t_message = $t_message.$t_note."\n\n";
+			$t_message = $t_message.word_wrap( $t_note )."\n\n";
 		}
 
 		return $t_message;
