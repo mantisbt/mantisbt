@@ -1,8 +1,3 @@
-<?php
-	if ( STATUS_LEGEND_POSITION_TOP == $g_status_legend_position ) {
-		print_status_colors();
-	}
-?>
 <p>
 <table class="width100" cellspacing="0">
 <tr class="row-category2">
@@ -137,6 +132,10 @@
 	$col_count = 7;
 	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) {
 		$col_count = 8;
+	}
+
+	if ( STATUS_LEGEND_POSITION_TOP == $g_status_legend_position ) {
+		print_status_colors();
 	}
 ?>
 
