@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.24 $
+	# $Revision: 1.25 $
 	# $Author: jfitzell $
-	# $Date: 2002-10-20 23:59:48 $
+	# $Date: 2002-10-27 00:02:03 $
 	#
-	# $Id: bug_resolve.php,v 1.24 2002-10-20 23:59:48 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.25 2002-10-27 00:02:03 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,15 +20,15 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bug_id		= gpc_get_int( 'f_bug_id' );
+	$f_bugnote_text	= gpc_get_string( 'f_bugnote_text', '' );
+	$f_resolution	= gpc_get_int( 'f_resolution', FIXED );
+	$f_duplicate_id	= gpc_get_string( 'f_duplicate_id', '' );
+
 	project_access_check( $f_bug_id );
 	check_access( $g_handle_bug_threshold );
 	bug_ensure_exists( $f_bug_id );
 
-	#check variables
-	check_varset( $f_bugnote_text, '' );
-	check_varset( $f_resolution, FIXED );
-	check_varset( $f_duplicate_id, '' );
-	
 	# make sure it is not market as duplicate to itself
 	if ( $f_duplicate_id == $f_bug_id ) {
 		print_mantis_error( ERROR_GENERIC );

@@ -8,6 +8,8 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bug_id = gpc_get_int( 'f_bug_id' );
+
 	project_access_check( $f_bug_id );
 	check_access( $g_handle_bug_threshold );
 	bug_ensure_exists( $f_bug_id );
