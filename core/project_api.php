@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.12 2002-09-06 23:50:37 jfitzell Exp $
+	# $Id: project_api.php,v 1.13 2002-09-06 23:59:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -424,7 +424,7 @@
 		$rows = project_get_all_user_rows( $p_source_id );
 
 		for ( $i = 0 ; $i < sizeof( $rows ) ; $i++ ) {
-			extract( $row[$i], EXTR_PREFIX_ALL, 'v' );
+			extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
 
 			# if there is no duplicate then add a new entry
 			# otherwise just update the access level for the existing entry
