@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.60 2004-10-18 05:47:19 narcissus Exp $
+	# $Id: filter_api.php,v 1.61 2004-10-25 19:55:29 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -460,11 +460,12 @@
 		# Simple Text Search - Thnaks to Alan Knowles
 		if ( !is_blank( $t_filter['search'] ) ) {
 			$c_search = db_prepare_string( $t_filter['search'] );
+			$c_search_int = db_prepare_int( $t_filter['search'] );
 			$t_textsearch_where_clause = "((summary LIKE '%$c_search%')
 							 OR ($t_bug_text_table.description LIKE '%$c_search%')
 							 OR ($t_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
 							 OR ($t_bug_text_table.additional_information LIKE '%$c_search%')
-							 OR ($t_bug_table.id LIKE '%$c_search%'))";
+							 OR ($t_bug_table.id = '$c_search_int'))";
 
 			$t_textsearch_wherejoin_clause = "((summary LIKE '%$c_search%')
 							 OR ($t_bug_text_table.description LIKE '%$c_search%')
