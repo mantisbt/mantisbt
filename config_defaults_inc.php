@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.133 2004-01-26 03:41:33 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.134 2004-02-05 12:45:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -288,13 +288,6 @@
 	# --- sitewide variables ----------
 	$g_window_title			= 'Mantis';	 # browser window title
 	$g_page_title			= 'Mantis';	 # title at top of html page
-
-	# --- project name -----------------
-	# show the project name in the page title
-	# OFF/ON
-	# Previous versions supported a third value that displayed only the project
-	#  name.  If you want this behaviour, simply set the titles above to ''
-	$g_show_project_in_title	= ON;
 
 	# --- advanced views --------------
 	# BOTH, SIMPLE_ONLY, ADVANCED_ONLY

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.80 2004-02-05 12:15:17 vboctor Exp $
+	# $Id: html_api.php,v 1.81 2004-02-05 12:45:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -158,16 +158,6 @@
 	# (4) Print the window title
 	function html_title() {
 		$t_title = config_get( 'window_title' );
-
-		if ( auth_is_user_authenticated() &&
-			 db_is_connected() &&
-			 ON == config_get( 'show_project_in_title' ) ) {
-			if ( ! is_blank( $t_title ) ) {
-				$t_title .= ' - ';
-			}
-			$t_title .= project_get_name( helper_get_current_project() );
-		}
-		
 		echo '<title>' . string_display( $t_title ) . "</title>\n";
 	}
 
@@ -219,16 +209,6 @@
 	# (9) Print the title displayed at the top of the page
 	function html_header() {
 		$t_title = config_get( 'page_title' );
-
-		if ( auth_is_user_authenticated() &&
-			 db_is_connected() &&
-			 ON == config_get( 'show_project_in_title' ) ) {
-			if ( ! is_blank( $t_title ) ) {
-				$t_title .= ' - ';
-			}
-			$t_title .= project_get_name( helper_get_current_project() );
-		}
-
 		echo '<div class="center"><span class="pagetitle">' . string_display( $t_title ) . '</span></div>';
 	}
 

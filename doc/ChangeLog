@@ -7,6 +7,7 @@ Mantis ChangeLog
  * Fix #3069: Proxy server incorrectly caches output of 'View All Bugs'
  * Sec #3137: By default, every installation has an admin account with a known login cookie value. This value is now generated at installation time.
  * Fix #3177: Switching project in advanced summary changes current page.
+ * Fix #3210: bug_view_advanced_page.php (and simple) doesn't show the project name.
  * Fix #3324: Win32: Call to undefined function: getmxrr() [default to OFF].
  * Fix #3400: Reopen a 'closed' bug, the value of 'resolution' is 'reopen' and can't be changed (now resolution / duplicate id can be edited)
  * Sec #3445: User see all information from all projects (if user has access to 0 projects)

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.51 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.52 2004-02-05 12:45:20 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -117,7 +117,10 @@
 
 	<!-- Category -->
 	<td>
-		<?php echo $t_bug->category ?>
+		<?php
+			$t_project_name = project_get_field( $t_bug->project_id, 'name' );
+			echo "[$t_project_name] $t_bug->category";
+		?>
 	</td>
 
 	<!-- Severity -->
