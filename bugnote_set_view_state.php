@@ -14,8 +14,9 @@
 
 	# make sure the user accessing the note is valid and has proper access
 	$t_bugnote_user_id	= get_bugnote_field( $f_bugnote_id, 'reporter_id' );
-	$t_user_id			= get_current_user_field( 'id' );
 	$t_id				= get_bugnote_field( $f_bugnote_id, 'bug_id' );
+	$t_user_id			= get_current_user_field( 'id' );
+	$c_bugnote_id = (integer)$f_bugnote_id;
 
 	project_access_check( $t_id );
 
@@ -32,17 +33,15 @@
 		print_header_redirect( 'logout_page.php' );
 	}
 
-	if ($f_private) {
+	if ( 1 == $f_private ) {
 		$c_view_state = PRIVATE;
 	} else {
 		$c_view_state = PUBLIC;
 	}
 
-	$c_bugnote_id = (integer)$f_bugnote_id;
-	
 	# update view_state
-	$query = "UPDATE $g_mantis_bugnote_table 
-				SET view_state='$c_view_state' 
+	$query = "UPDATE $g_mantis_bugnote_table
+				SET view_state='$c_view_state'
 				WHERE id='$c_bugnote_id'";
 	$result = db_query( $query );
 
