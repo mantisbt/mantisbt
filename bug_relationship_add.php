@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_add.php,v 1.2 2004-07-18 00:07:44 vboctor Exp $
+	# $Id: bug_relationship_add.php,v 1.3 2004-10-05 21:12:41 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,78 +51,39 @@
 		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
 	}
 
-	# there is no other relationship between the same bugs...
-	if ( relationship_exists($f_src_bug_id, $f_dest_bug_id) > 0 ) {
+	# check if there is other relationship between the bugs...
+	$t_old_id_relationship = relationship_same_type_exists( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
+
+	if ( $t_old_id_relationship == -1 ) {
+		# the relationship type is exactly the same of the new one. No sense to proceed
 		trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
 	}
+	else if ( $t_old_id_relationship > 0 ) {
+		# there is already a relationship between them -> we have to update it and not to add a new one
+		helper_ensure_confirmed( lang_get( 'replace_relationship_sure_msg' ), lang_get( 'replace_relationship_button' ) );
 
-	switch ( $f_rel_type ) {
+		# Update the relationship
+		relationship_update( $t_old_id_relationship, $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
 
-		case BUG_BLOCKS:
-			# BUG_BLOCKS -> swap src and dest with relationship BUG_DEPENDANT
+		# Add log line to the history (both bugs)
+		history_log_event_special( $f_src_bug_id, BUG_REPLACE_RELATIONSHIP, $f_rel_type, $f_dest_bug_id );
+		history_log_event_special( $f_dest_bug_id, BUG_REPLACE_RELATIONSHIP, relationship_get_complementary_type( $f_rel_type ), $f_src_bug_id );
+	}
+	else {
+		# Add the new relationship
+		relationship_add( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
 
-			# Add relation to the DB
-			relationship_add( $f_dest_bug_id, $f_src_bug_id, BUG_DEPENDANT );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $f_src_bug_id, BUG_ADD_RELATIONSHIP, BUG_BLOCKS, $f_dest_bug_id );
-			history_log_event_special( $f_dest_bug_id, BUG_ADD_RELATIONSHIP, BUG_DEPENDANT, $f_src_bug_id );
-
-			break;
-
-		case BUG_DEPENDANT:
-			# Add relation to the DB
-			relationship_add( $f_src_bug_id, $f_dest_bug_id, BUG_DEPENDANT );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $f_src_bug_id, BUG_ADD_RELATIONSHIP, BUG_DEPENDANT, $f_dest_bug_id );
-			history_log_event_special( $f_dest_bug_id, BUG_ADD_RELATIONSHIP, BUG_BLOCKS, $f_src_bug_id );
-
-			break;
-
-		case BUG_HAS_DUPLICATE:
-			# BUG_HAS_DUPLICATE -> swap src and dest with relationship BUG_DUPLICATE
-
-			# Add relation to the DB
-			relationship_add( $f_dest_bug_id, $f_src_bug_id, BUG_DUPLICATE );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $f_src_bug_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $f_dest_bug_id );
-			history_log_event_special( $f_dest_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $f_src_bug_id );
-
-			break;
-
-		case BUG_DUPLICATE:
-			# Add relation to the DB
-			relationship_add( $f_src_bug_id, $f_dest_bug_id, BUG_DUPLICATE );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $f_src_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $f_dest_bug_id );
-			history_log_event_special( $f_dest_bug_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $f_src_bug_id );
-
-			break;
-
-		case BUG_RELATED:
-			relationship_add( $f_src_bug_id, $f_dest_bug_id, BUG_RELATED );
-
-			# Add log line to the history (both bugs)
-			history_log_event_special( $f_src_bug_id, BUG_ADD_RELATIONSHIP, BUG_RELATED, $f_dest_bug_id );
-			history_log_event_special( $f_dest_bug_id, BUG_ADD_RELATIONSHIP, BUG_RELATED, $f_src_bug_id );
-
-			break;
-
-		default:
-			trigger_error( ERROR_GENERIC, ERROR );
-
-			break;
+		# Add log line to the history (both bugs)
+		history_log_event_special( $f_src_bug_id, BUG_ADD_RELATIONSHIP, $f_rel_type, $f_dest_bug_id );
+		history_log_event_special( $f_dest_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $f_rel_type ), $f_src_bug_id );
 	}
 
 	# update bug last updated (just for the src bug)
 	bug_update_date( $f_src_bug_id );
 
 	# send email notification to the users addressed by both the bugs
-	email_relationship_added( $f_src_bug_id );
-	email_relationship_added( $f_dest_bug_id );
+	email_relationship_added( $f_src_bug_id, $f_dest_bug_id, $f_rel_type );
+	email_relationship_added( $f_dest_bug_id, $f_src_bug_id, relationship_get_complementary_type( $f_rel_type ) );
 
 	print_header_redirect_view( $f_src_bug_id );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.32 2004-10-05 17:20:33 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.33 2004-10-05 21:10:14 prichards Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -141,6 +141,7 @@
 	define( 'BUG_CLONED_TO', 				20 );
 	define( 'BUG_CREATED_FROM', 			21 );
 	define( 'CHECKIN',				22 );
+	define( 'BUG_REPLACE_RELATIONSHIP', 		23 );
 
 	# bug relationship constants
 	define( 'BUG_DUPLICATE',	0 );

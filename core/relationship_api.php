@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.23 2004-09-25 15:05:07 prichards Exp $
+	# $Id: relationship_api.php,v 1.24 2004-10-05 21:10:14 prichards Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -65,17 +65,52 @@
 	class BugRelationshipData {
 		var $id;
 		var $src_bug_id;
+		var $src_project_id;
 		var $dest_bug_id;
+		var $dest_project_id;
 		var $type;
 	}
 
 	# --------------------
-	function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
-		$c_src_bug_id = db_prepare_int( $p_src_bug_id );
-		$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
-		$c_relationship_type = db_prepare_int( $p_relationship_type );
+	# Return the complementary type of the provided relationship
+	function relationship_get_complementary_type( $p_relationship_type ) {
+		switch ( $p_relationship_type ) {
+			case BUG_BLOCKS:
+				return BUG_DEPENDANT;
+				break;
+			case BUG_DEPENDANT:
+				return BUG_BLOCKS;
+				break;
+			case BUG_HAS_DUPLICATE:
+				return BUG_DUPLICATE;
+				break;
+			case BUG_DUPLICATE:
+				return BUG_HAS_DUPLICATE;
+				break;
+			case BUG_RELATED:
+				return BUG_RELATED;
+				break;
+			default:
+				trigger_error( ERROR_GENERIC, ERROR );
+				break;
+		}
+	}
 
+	# --------------------
+	function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
 		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
+
+		if( $p_relationship_type == BUG_BLOCKS || $p_relationship_type == BUG_HAS_DUPLICATE ) {
+			# BUG_BLOCKS or BUG_HAS_DUPLICATE -> swap src and dest
+			$c_src_bug_id = db_prepare_int( $p_dest_bug_id );
+			$c_dest_bug_id = db_prepare_int( $p_src_bug_id );
+			$c_relationship_type = db_prepare_int( relationship_get_complementary_type( $p_relationship_type ) );
+		}
+		else {
+			$c_src_bug_id = db_prepare_int( $p_src_bug_id );
+			$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
+			$c_relationship_type = db_prepare_int( $p_relationship_type );
+		}
 
 		$query = "INSERT INTO $t_mantis_bug_relationship_table
 				( source_bug_id, destination_bug_id, relationship_type )
@@ -95,12 +130,20 @@
 
 	# --------------------
 	function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
-		$c_relationship_id = db_prepare_int( $p_relationship_id );
-		$c_src_bug_id = db_prepare_int( $p_src_bug_id );
-		$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
-		$c_relationship_type = db_prepare_int( $p_relationship_type );
-
 		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
+
+		if( $p_relationship_type == BUG_BLOCKS || $p_relationship_type == BUG_HAS_DUPLICATE ) {
+			# BUG_BLOCKS or BUG_HAS_DUPLICATE -> swap src and dest
+			$c_src_bug_id = db_prepare_int( $p_dest_bug_id );
+			$c_dest_bug_id = db_prepare_int( $p_src_bug_id );
+			$c_relationship_type = db_prepare_int( relationship_get_complementary_type( $p_relationship_type ) );
+		}
+		else {
+			$c_src_bug_id = db_prepare_int( $p_src_bug_id );
+			$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
+			$c_relationship_type = db_prepare_int( $p_relationship_type );
+		}
+		$c_relationship_id = db_prepare_int( $p_relationship_id );
 
 		$query = "UPDATE $t_mantis_bug_relationship_table
 				SET source_bug_id='$c_src_bug_id',
@@ -200,12 +243,18 @@
 		$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 
 		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 
-		$query = "SELECT *
+		$query = "SELECT $t_mantis_bug_relationship_table.id, $t_mantis_bug_relationship_table.relationship_type,
+				$t_mantis_bug_relationship_table.source_bug_id, $t_mantis_bug_relationship_table.destination_bug_id,
+				$t_mantis_bug_table.project_id
 				FROM $t_mantis_bug_relationship_table
+				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.destination_bug_id = $t_mantis_bug_table.id
 				WHERE source_bug_id='$c_src_bug_id'
-				ORDER BY relationship_type, id";
+				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
 		$result = db_query( $query );
+
+		$t_src_project_id = bug_get_field( $p_src_bug_id, 'project_id' );
 
 		$t_bug_relationship_data = array( new BugRelationshipData );
 		$t_relationship_count = db_num_rows( $result );
@@ -213,7 +262,9 @@
 			$row = db_fetch_array( $result );
 			$t_bug_relationship_data[$i]->id = $row['id'];
 			$t_bug_relationship_data[$i]->src_bug_id = $row['source_bug_id'];
+			$t_bug_relationship_data[$i]->src_project_id = $t_src_project_id;
 			$t_bug_relationship_data[$i]->dest_bug_id = $row['destination_bug_id'];
+			$t_bug_relationship_data[$i]->dest_project_id = $row['project_id'];
 			$t_bug_relationship_data[$i]->type = $row['relationship_type'];
 		}
 		unset( $t_bug_relationship_data[$t_relationship_count] );
@@ -226,12 +277,18 @@
 		$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
 
 		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 
-		$query = "SELECT *
+		$query = "SELECT $t_mantis_bug_relationship_table.id, $t_mantis_bug_relationship_table.relationship_type,
+				$t_mantis_bug_relationship_table.source_bug_id, $t_mantis_bug_relationship_table.destination_bug_id,
+				$t_mantis_bug_table.project_id
 				FROM $t_mantis_bug_relationship_table
+				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.source_bug_id = $t_mantis_bug_table.id
 				WHERE destination_bug_id='$c_dest_bug_id'
-				ORDER BY relationship_type, id";
+				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
 		$result = db_query( $query );
+
+		$t_dest_project_id = bug_get_field( $p_dest_bug_id, 'project_id' );
 
 		$t_bug_relationship_data = array( new BugRelationshipData );
 		$t_relationship_count = db_num_rows( $result );
@@ -239,12 +296,45 @@
 			$row = db_fetch_array( $result );
 			$t_bug_relationship_data[$i]->id = $row['id'];
 			$t_bug_relationship_data[$i]->src_bug_id = $row['source_bug_id'];
+			$t_bug_relationship_data[$i]->src_project_id = $row['project_id'];
 			$t_bug_relationship_data[$i]->dest_bug_id = $row['destination_bug_id'];
+			$t_bug_relationship_data[$i]->dest_project_id = $t_dest_project_id;
 			$t_bug_relationship_data[$i]->type = $row['relationship_type'];
 		}
 		unset( $t_bug_relationship_data[$t_relationship_count] );
 
 		return $t_bug_relationship_data;
+	}
+
+	# --------------------
+	function relationship_get_all( $p_bug_id, &$p_is_different_projects ) {
+		$t_src = relationship_get_all_src( $p_bug_id );
+		$t_dest = relationship_get_all_dest( $p_bug_id );
+		$t_all = array_merge( $t_src, $t_dest );
+
+		$p_is_different_projects = false;
+		for ( $i = 0 ; $i < count( $t_all ) ; $i++ ) {
+			$p_is_different_projects |= ( $t_all[$i]->src_project_id != $t_all[$i]->dest_project_id );
+		}
+		return $t_all;
+	}
+
+	# --------------------
+	# convert the relationship type in the type from the src/dest issues point of view
+	# i.e. issue A  is dependent (BUG_DEPENDANT) on issue B
+	#      passing B, A and this relationship as parameters, the return value will be BUG_BLOCKS
+	#      (issue B blocks issue A)
+	# return the relationship type using the information in the p_rel structure but src/dest issues as indicated
+	function relationship_conv_type_to_this_src_dest( $p_src_bug_id, $p_dest_bug_id, $p_rel ) {
+		if ( $p_rel->src_bug_id == $p_src_bug_id && $p_rel->dest_bug_id == $p_dest_bug_id ) {
+			return $p_rel->type;
+		}
+		else if ( $p_rel->src_bug_id == $p_dest_bug_id && $p_rel->dest_bug_id == $p_src_bug_id ) {
+			return relationship_get_complementary_type( $p_rel->type );
+		}
+		else {
+			trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		}
 	}
 
 	# --------------------
@@ -277,6 +367,32 @@
 			# no relationship found
 			return 0;
 		}
+	}
+
+	# --------------------
+	# check if there is a relationship between two bugs
+	# return:
+	#   0 if the relationship is not found
+	#  -1 if the relationship is found and it's of the same type $p_rel_type
+	#  id if the relationship is found and it's of a different time (this means it can be replaced with the new type $p_rel_type
+	function relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_rel_type ) {
+		# Check if there is already a relationship set between them
+		$t_id_relationship = relationship_exists( $p_src_bug_id, $p_dest_bug_id );
+
+		if ( $t_id_relationship > 0 ) {
+			# if there is...
+
+			# get all the relationship info
+			$t_relationship = relationship_get( $t_id_relationship );
+
+			if ( $t_relationship->src_bug_id == $p_src_bug_id && $t_relationship->dest_bug_id == $p_dest_bug_id ) {
+				if( $t_relationship->type == $p_rel_type ) $t_id_relationship = -1;
+			}
+			else {
+				if( $t_relationship->type == relationship_get_complementary_type( $p_rel_type ) ) $t_id_relationship = -1;
+			}
+		}
+		return $t_id_relationship;
 	}
 
 	# --------------------
@@ -386,21 +502,21 @@
 
 	# --------------------
 	# return formatted string with all the details on the requested relationship
-	function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, $p_html_preview = false, $p_user_id = null ) {
+	function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, $p_html_preview = false, $p_show_project = false ) {
 		$t_summary_wrap_at = strlen( config_get( 'email_separator2' ) ) - 28;
 
-		if ( $p_user_id === null ) {
-			$p_user_id = auth_get_current_user_id();
-		}
+		$p_user_id = auth_get_current_user_id();
 
 		if ( $p_bug_id == $p_relationship->src_bug_id ) {
 			# root bug is in the src side, related bug in the dest side
 			$t_related_bug_id = $p_relationship->dest_bug_id;
+			$t_related_project_name = project_get_name( $p_relationship->dest_project_id );
 			$t_relationship_descr = relationship_get_description_src_side( $p_relationship->type );
 		}
 		else {
 			# root bug is in the dest side, related bug in the src side
 			$t_related_bug_id = $p_relationship->src_bug_id;
+			$t_related_project_name = project_get_name( $p_relationship->src_project_id );
 			$t_relationship_descr = relationship_get_description_dest_side( $p_relationship->type );
 		}
 
@@ -426,26 +542,33 @@
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
 
-		$t_relationship_info_html = '<nobr>' . $t_relationship_descr . '</nobr></td>';
+		$t_relationship_info_html = $t_td . '<nobr>' . $t_relationship_descr . '</nobr>&nbsp;</td>';
 		if ( $p_html_preview == false ) {
 			$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
-			$t_relationship_info_html .= '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>' . $t_td;
+			$t_relationship_info_html .= '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>';
 		}
 		else {
 			$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';
-			$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>' . $t_td;
+			$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>';
 		}
 
 		$t_relationship_info_text = str_pad( $t_relationship_descr, 20 );
 		$t_relationship_info_text .= str_pad( bug_format_id( $t_related_bug_id ), 8 );
 
 		# get the handler name of the related bug
+		$t_relationship_info_html .= $t_td;
 		if ( $t_bug->handler_id > 0 )  {
 			$t_relationship_info_html .= '<nobr>' . user_get_name(  $t_bug->handler_id ) . '</nobr>';
 		}
+		$t_relationship_info_html .= '&nbsp;</td>';
+
+		# add project name
+		if( $p_show_project ) {
+			$t_relationship_info_html .= $t_td . $t_related_project_name . '&nbsp;</td>';
+		}
 
 		# add summary
-		$t_relationship_info_html .= '&nbsp;</td>' . $t_td . $t_bug->summary;
+		$t_relationship_info_html .= $t_td . $t_bug->summary;
 		if( strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
 			$t_relationship_info_text .= $t_bug->summary;
 		}
@@ -460,13 +583,14 @@
 			}
 		}
 
+		$t_relationship_info_html .= '&nbsp;</td>';
 		$t_relationship_info_text .= "\n";
 
 		if ( $p_html_preview == false ) {
-			$t_relationship_info_html = '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">' . $t_td . $t_relationship_info_html . '&nbsp;</td></tr>';
+			$t_relationship_info_html = '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">' . $t_relationship_info_html . '</tr>' . "\n";
 		}
 		else {
-			$t_relationship_info_html = '<tr>' . $t_td . $t_relationship_info_html . '&nbsp;</td></tr>';
+			$t_relationship_info_html = '<tr>' . $t_relationship_info_html . '</tr>';
 		}
 
 		if ( $p_html == true ) {
@@ -482,22 +606,19 @@
 	# print ALL the RELATIONSHIPS OF A SPECIFIC BUG
 	function relationship_get_summary_html( $p_bug_id ) {
 		$t_summary = '';
+		$t_show_project = false;
 
-		$t_relationship = relationship_get_all_src( $p_bug_id );
-		$t_relationship_count = count( $t_relationship );
-		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
-			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship[$i], true, false );
-		}
+		$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
+		$t_relationship_all_count = count( $t_relationship_all );
 
-		$t_relationship = relationship_get_all_dest( $p_bug_id );
-		$t_relationship_count = count( $t_relationship );
-		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
-			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship[$i], true, false );
+		#prepare the relationships table
+		for ( $i = 0 ; $i < $t_relationship_all_count ; $i++ ) {
+			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship_all[$i], true, false, $t_show_project );
 		}
 
 		if ( !is_blank( $t_summary ) ) {
 			if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-				$t_summary .= '<tr class="row-2"><td colspan="5"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+				$t_summary .= '<tr class="row-2"><td colspan=' . (5 + $t_show_project) . '><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
 			}
 			$t_summary = '<table border="0" width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 		}
@@ -509,22 +630,19 @@
 	# print ALL the RELATIONSHIPS OF A SPECIFIC BUG
 	function relationship_get_summary_html_preview( $p_bug_id ) {
 		$t_summary = '';
+		$t_show_project = false;
 
-		$t_relationship = relationship_get_all_src( $p_bug_id );
-		$t_relationship_count = count( $t_relationship );
-		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
-			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship[$i], true, true );
-		}
+		$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
+		$t_relationship_all_count = count( $t_relationship_all );
 
-		$t_relationship = relationship_get_all_dest( $p_bug_id );
-		$t_relationship_count = count( $t_relationship );
-		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
-			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship[$i], true, true );
+		#prepare the relationships table
+		for ( $i = 0 ; $i < $t_relationship_all_count ; $i++ ) {
+			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship_all[$i], true, true, $t_show_project );
 		}
 
 		if ( !is_blank( $t_summary ) ) {
 			if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-				$t_summary .= '<tr class="print"><td class="print" colspan="5"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+				$t_summary .= '<tr class="print"><td class="print" colspan=' . (5 + $t_show_project) . '><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
 			}
 			$t_summary = '<table border="0" width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 		}
@@ -539,17 +657,14 @@
 		$t_email_separator2 = config_get( 'email_separator2' );
 
 		$t_summary = "";
+		$t_show_project = false;
 
-		$t_relationship = relationship_get_all_src( $p_bug_id );
-		$t_relationship_count = count( $t_relationship );
-		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
-			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship[$i], false );
-		}
+		$t_relationship_all = relationship_get_all( $p_bug_id, $t_show_project );
+		$t_relationship_all_count = count( $t_relationship_all );
 
-		$t_relationship = relationship_get_all_dest( $p_bug_id );
-		$t_relationship_count = count( $t_relationship );
-		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
-			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship[$i], false );
+		#prepare the relationships table
+		for ( $i = 0 ; $i < $t_relationship_all_count ; $i++ ) {
+			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship_all[$i], false );
 		}
 
 		if ($t_summary != "") {
@@ -565,6 +680,33 @@
 	}
 
  	# --------------------
+ 	# print HTML relationship listbox
+	function relationship_list_box( $p_default_rel_type = -1 ) {
+?>
+<select name="rel_type">
+<option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
+<option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
+<option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
+<option value="<?php echo BUG_DUPLICATE ?>"<?php echo ( $p_default_rel_type == BUG_DUPLICATE ? ' selected' : '' ) ?>><?php echo lang_get( 'duplicate_of' ) ?></option>
+<option value="<?php echo BUG_HAS_DUPLICATE ?>"<?php echo ( $p_default_rel_type == BUG_HAS_DUPLICATE ? ' selected' : '' ) ?>><?php echo lang_get( 'has_duplicate' ) ?></option>
+</select>
+<?php
+	}
+
+ 	# --------------------
+ 	# print HTML relationship listbox
+	function relationship_list_box_for_cloned_bug( $p_default_rel_type = -1 ) {
+?>
+<select name="rel_type">
+<option value="-1"<?php echo ( $p_default_rel_type == -1 ? ' selected' : '' ) ?>><?php echo lang_get( 'no_relationship' ) ?></option>
+<option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>
+<option value="<?php echo BUG_DEPENDANT ?>"<?php echo ( $p_default_rel_type == BUG_DEPENDANT ? ' selected' : '' ) ?>><?php echo lang_get( 'dependant_on' ) ?></option>
+<option value="<?php echo BUG_BLOCKS ?>" <?php echo ( $p_default_rel_type == BUG_BLOCKS ? ' selected' : '' ) ?>><?php echo lang_get( 'blocks' ) ?></option>
+</select>
+<?php
+	}
+
+ 	# --------------------
  	# print HTML relationship form
 	function relationship_view_box( $p_bug_id ) {
 ?>
@@ -577,7 +719,6 @@
 		<?php
 			collapse_icon( 'relationships' );
 			echo lang_get( 'bug_relationships' );
-
 			if ( ON == config_get( 'relationship_graph_enable' ) ) {
 		?>
 		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) ) ?></span>
@@ -595,19 +736,13 @@
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 ?>
 <tr class="row-1">
-	<td class="category"><?php PRINT lang_get( 'add_new_relationship' ) ?></td>
-	<td><?php PRINT lang_get( 'this_bug' ) ?>
+	<td class="category"><?php echo lang_get( 'add_new_relationship' ) ?></td>
+	<td><?php echo lang_get( 'this_bug' ) ?>
 		<form method="POST" action="bug_relationship_add.php">
-		<input type="hidden" name="src_bug_id" value="<?php PRINT $p_bug_id ?>" size="4" />
-		<select name="rel_type">
-		<option value="<?php PRINT BUG_RELATED ?>"><?php PRINT lang_get( 'related_to' ) ?></option>
-		<option value="<?php PRINT BUG_DEPENDANT ?>"><?php PRINT lang_get( 'dependant_on' ) ?></option>
-		<option value="<?php PRINT BUG_BLOCKS ?>"><?php PRINT lang_get( 'blocks' ) ?></option>
-		<option value="<?php PRINT BUG_DUPLICATE ?>"><?php PRINT lang_get( 'duplicate_of' ) ?></option>
-		<option value="<?php PRINT BUG_HAS_DUPLICATE ?>"><?php PRINT lang_get( 'has_duplicate' ) ?></option>
-		</select>
+		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id ?>" size="4" />
+		<? relationship_list_box( -1 ) ?>
 		<input type="text" name="dest_bug_id" value="" maxlength="7" />
-		<input type="submit" name="add_relationship" class="button" value="<?php PRINT lang_get( 'add_new_relationship_button' ) ?>" />
+		<input type="submit" name="add_relationship" class="button" value="<?php echo lang_get( 'add_new_relationship_button' ) ?>" />
 		</form>
 	</td></tr>
 <?php
@@ -615,7 +750,7 @@
 		}
 ?>
 <tr>
-	<td colspan="2"><?php PRINT relationship_get_summary_html( $p_bug_id ) ?></td>
+	<td colspan="2"><?php echo relationship_get_summary_html( $p_bug_id ) ?></td>
 </tr>
 </table>
 

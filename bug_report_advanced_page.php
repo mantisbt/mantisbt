@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.43 2004-09-22 08:52:37 bpfennigschmidt Exp $
+	# $Id: bug_report_advanced_page.php,v 1.44 2004-10-05 21:12:41 prichards Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -417,6 +417,23 @@
 ?>
 	</td>
 </tr>
+
+<!-- Relationship (in case of cloned bug creation...) -->
+<?php
+	if( $f_master_bug_id > 0 ) {
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'relationship_with_parent' ) ?>
+	</td>
+	<td>
+		<?php relationship_list_box_for_cloned_bug( BUG_BLOCKS ) ?>
+		<?php PRINT '<b>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</b>' ?>
+	</td>
+</tr>
+<?php
+	}
+?>
 
 <!-- Report Stay (report more bugs) -->
 <tr <?php echo helper_alternate_class() ?>>

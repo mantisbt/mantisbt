@@ -8,12 +8,13 @@
 	# Italian: Luca Pescatore, l.pescatore@network.it
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
+	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.81 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:36 $
+	# $Revision: 1.82 $
+	# $Author: prichards $
+	# $Date: 2004-10-05 21:12:13 $
 	#
-	# $Id: strings_italian.txt,v 1.81 2004-10-01 23:03:36 bigbadger Exp $
+	# $Id: strings_italian.txt,v 1.82 2004-10-05 21:12:13 prichards Exp $
 	###########################################################################
 ?>
 <?php
@@ -73,7 +74,7 @@ $s_empty_password_button = "Conferma password vuota";
 
 $s_duplicate_of = "duplicato di";
 $s_has_duplicate = "é duplicata da";
-$s_related_to = "relativa a";
+$s_related_to = "in relazione con";
 $s_dependant_on = "padre di";
 $s_blocks = "figlia di";
 
@@ -298,16 +299,24 @@ $s_email_notification_title_for_action_bug_submitted = "La seguente anomalia é s
 $s_email_notification_title_for_action_bug_assigned = "La seguente anomalia é stata ASSEGNATA.";
 $s_email_notification_title_for_action_bug_reopened = "La seguente anomalia é stata RIAPERTA.";
 $s_email_notification_title_for_action_bug_deleted = "La seguente anomalia é stata ELIMINATA.";
-$s_email_notification_title_for_action_bug_updated = "La seguente anomalia é stata AGGIORNATA."; #MASC
+$s_email_notification_title_for_action_bug_updated = "La seguente anomalia é stata AGGIORNATA.";
 $s_email_notification_title_for_action_sponsorship_added = "La seguente anomalia é stata SPONSORIZZATA.";
 $s_email_notification_title_for_action_sponsorship_updated = "Una sponsorizzazione della seguente anomalia é stata modificata.";
 $s_email_notification_title_for_action_sponsorship_deleted = "Una sponsorizzazione della seguente anomalia é stata eliminata.";
 
 $s_email_notification_title_for_action_bugnote_submitted = "Una NOTA é stata aggiunta a questa anomalia.";
-$s_email_notification_title_for_action_relationship_added = "E' stata aggiunta una RELAZIONE alla seguente anomalia.";
-$s_email_notification_title_for_action_relationship_deleted = "E' stata eliminata una RELAZIONE dalla seguente anomalia.";
-$s_email_notification_title_for_action_relationship_child_resolved = "E' stata RISOLTA una anomalia in RELAZIONE con l'anomalia seguente.";
-$s_email_notification_title_for_action_relationship_child_closed = "E' stata CHIUSA una anomalia in RELAZIONE con l'anomalia seguente.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Nuova relazione: la seguente anomalia é DUPLICATA dall'anomalia %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Nuova relazione: l'anomalia %s DUPLICA la seguente anomalia.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Nuova relazione: la seguente anomalia é IN RELAZIONE con l'anomalia %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Nuova relazione: la seguente anomalia é PADRE dell'anomalia %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Nuova relazione: la seguente anomalia é FIGLIA dell'anomalia %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Eliminata la relazione per cui la seguente anomalia era DUPLICATA dall'anomalia %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Eliminata la relazione per cui l'anomalia %s DUPLICAVA la seguente anomalia.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "Eliminata la relazione per cui la seguente anomalia era IN RELAZIONE con l'anomalia %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Eliminata la relazione per cui la seguente anomalia era PADRE dell'anomalia %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Eliminata la relazione per cui la seguente anomalia era FIGLIA dell'anomalia %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "E' stata RISOLTA l'anomalia %s in RELAZIONE con la seguente anomalia.";
+$s_email_notification_title_for_action_relationship_child_closed = "E' stata CHIUSA l'anomalia %s in RELAZIONE con la seguente anomalia.";
 
 $s_email_reporter = "Segnalato da";
 $s_email_handler = "In carico a";
@@ -424,11 +433,11 @@ $s_feedback_bug_title = 'Poni in discussione anomalia';
 $s_acknowledged_bug_title = 'Riconosci anomalia';
 $s_confirmed_bug_title = 'Conferma anomalia';
 $s_assigned_bug_title = 'Assegna anomalia';
-$s_new_bug_button = 'Nuova anomalia';
-$s_feedback_bug_button = 'Poni in discussione anomalia';
-$s_acknowledged_bug_button = 'Riconosci anomalia';
-$s_confirmed_bug_button = 'Conferma anomalia';
-$s_assigned_bug_button = 'Assegna anomalia';
+$s_new_bug_button = 'Nuova';
+$s_feedback_bug_button = 'Poni in discussione';
+$s_acknowledged_bug_button = 'Riconosci';
+$s_confirmed_bug_button = 'Conferma';
+$s_assigned_bug_button = 'Assegna';
 
 # bug_close.php
 $s_bug_close_msg = "L'anomalia è stata chiusa...";
@@ -1045,11 +1054,16 @@ $s_add_new_relationship_button = "Crea";
 $s_this_bug = "Anomalia corrente";
 $s_relationship_added = "Relazione aggiunta";
 $s_relationship_deleted = "Relazione eliminata";
+$s_no_relationship = "nessuna relazione";
+$s_relationship_replaced = "Relazione aggiornata";
+$s_replace_relationship_button = "Sostituisci";
+$s_replace_relationship_sure_msg = "Esiste già una relazione tra queste anomalie. Confermare la sostituzione?";
+$s_relationship_with_parent = "Relazione con l'anomalia padre";
 $s_delete_relationship_button = "Eliminare";
-$s_delete_relationship_sure_msg = "Sicuro di voler confermare l'eliminazione di questa relazione?";
+$s_delete_relationship_sure_msg = "Confermare l'eliminazione di questa relazione?";
 $s_relationship_warning_blocking_bugs_not_resolved = "NON ancora tutte le anomalie figlie generate da questa anomalia risultano risolte oppure chiuse.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. NON ancora tutte le anomalie figlie generate da questa anomalia risultano risolte oppure chiuse.<br>Prima di <b>risolvere/chiudere</b> una anomalia padre, tutte le anomalie figlie dovrebbero essere risolte/chiuse.";
-$s_create_child_bug_button = "Genera figlio";
+$s_create_child_bug_button = "Genera clone";
 $s_bug_cloned_to = "Anomalia clonata";
 $s_bug_created_from = "Anomalia generata da";
 # Relationship Graphs
@@ -1059,6 +1073,14 @@ $s_dependency_graph = "Dependency Graph";
 $s_vertical = "Vertical";
 $s_horizontal = "Horizontal";
 $s_view_issue = "View Issue";
+
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Grafico delle relazioni";
+$s_relation_graph = "Grafico relazioni";
+$s_dependency_graph = "Grafico dipendenze";
+$s_vertical = "Verticale";
+$s_horizontal = "Orizzontale";
+$s_view_issue = "Dettaglio anomalia";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.29 2004-09-26 22:57:04 thraxisp Exp $
+	# $Id: history_api.php,v 1.30 2004-10-05 21:10:14 prichards Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -303,6 +303,10 @@
 					break;
 				case BUG_ADD_RELATIONSHIP:
 					$t_note = lang_get( 'relationship_added' );
+					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
+					break;
+				case BUG_REPLACE_RELATIONSHIP:
+					$t_note = lang_get( 'relationship_replaced' );
 					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
 					break;
 				case BUG_DEL_RELATIONSHIP:

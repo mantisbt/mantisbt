@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.216 $
-	# $Author: thraxisp $
-	# $Date: 2004-10-05 17:20:34 $
+	# $Revision: 1.217 $
+	# $Author: prichards $
+	# $Date: 2004-10-05 21:12:13 $
 	#
-	# $Id: strings_english.txt,v 1.216 2004-10-05 17:20:34 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.217 2004-10-05 21:12:13 prichards Exp $
 	###########################################################################
 ?>
 <?php
@@ -304,10 +304,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
-$s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
-$s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
-$s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
@@ -1049,11 +1057,16 @@ $s_add_new_relationship_button = "Add";
 $s_this_bug = "Current issue";
 $s_relationship_added = "Relationship added";
 $s_relationship_deleted = "Relationship deleted";
+$s_no_relationship = "no relationship";
+$s_relationship_replaced = "Relationship replaced";
+$s_replace_relationship_button = "Replace";
+$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
+$s_relationship_with_parent = "Relationship with the parent issue";
 $s_delete_relationship_button = "Delete";
 $s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Child";
+$s_create_child_bug_button = "Create Clone";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.38 2004-08-21 13:27:25 prichards Exp $
+	# $Id: bug_report.php,v 1.39 2004-10-05 21:12:41 prichards Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -120,23 +120,27 @@
 	}
 
 	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
+	$f_rel_type = gpc_get_int( 'rel_type', -1 );
 
-	if( $f_master_bug_id > 0 ) {
+	if( $f_master_bug_id > 0 && $f_rel_type >= 0 ) {
 		# it's a child generation... let's create the relationship and add some lines in the history
+
+		# update master bug last updated
+		bug_update_date( $f_master_bug_id );
 
 		# Add log line to record the cloning action
 		history_log_event_special( $t_bug_id, BUG_CREATED_FROM, '', $f_master_bug_id );
 		history_log_event_special( $f_master_bug_id, BUG_CLONED_TO, '', $t_bug_id );
 
-		# Add relation
-		relationship_add( $f_master_bug_id, $t_bug_id, BUG_DEPENDANT );
+		# Add the relationship
+		relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type );
 
-		# Add log line to the history (both bugs)
-		history_log_event_special( $f_master_bug_id, BUG_ADD_RELATIONSHIP, BUG_DEPENDANT, $t_bug_id );
-		history_log_event_special( $t_bug_id, BUG_ADD_RELATIONSHIP, BUG_BLOCKS, $f_master_bug_id );
+		# Add log line to the history (both issues)
+		history_log_event_special( $f_master_bug_id, BUG_ADD_RELATIONSHIP, relationship_get_complementary_type( $f_rel_type ), $t_bug_id );
+		history_log_event_special( $t_bug_id, BUG_ADD_RELATIONSHIP, $f_rel_type, $f_master_bug_id );
 
-		# send email notification to the users addressed by the master bug
-		email_relationship_added( $f_master_bug_id );
+		# Send the email notification
+		email_relationship_added( $f_master_bug_id, $t_bug_id, relationship_get_complementary_type( $f_rel_type ) );
 	}
 
 	email_new_bug( $t_bug_id );

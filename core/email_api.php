@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.101 2004-09-26 02:05:14 thraxisp Exp $
+	# $Id: email_api.php,v 1.102 2004-10-05 21:10:14 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -156,7 +156,6 @@
 	# ON or OFF.
 	function email_notify_flag( $action, $flag ) {
 		global	$g_notify_flags, $g_default_notify_flags;
-
 		if ( isset ( $g_notify_flags[$action][$flag] ) ) {
 			return $g_notify_flags[$action][$flag];
 		} elseif ( isset ( $g_default_notify_flags[$flag] ) ) {
@@ -389,7 +388,7 @@
 	# $p_notify_type: use check who she get notified of such event.
 	# $p_message_id: message id to be translated and included at the top of the email message.
 	# Return false if it were problems sending email
-	function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null ) {
+	function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_header_optional_params = null ) {
 		$t_ok = true;
 		if ( ON === config_get( 'enable_email_notification' ) ) {
 			ignore_user_abort( true );
@@ -405,7 +404,7 @@
 				# send email to every recipient
 				foreach ( $t_recipients as $t_user_id => $t_user_email ) {
 					$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
-					$t_ok = email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id ) && $t_ok;
+					$t_ok = email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params ) && $t_ok;
 				}
 			}
 		}
@@ -416,15 +415,57 @@
 	# --------------------
 	# send notices when a relationship is ADDED
 	# MASC RELATIONSHIP
-	function email_relationship_added( $p_bug_id ) {
-		email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_relationship_added' );
+	function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
+		$t_opt = array();
+		$t_opt[] = bug_format_id( $p_related_bug_id );
+		switch ( $p_rel_type ) {
+			case BUG_BLOCKS:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_blocks_relationship_added', $t_opt );
+				break;
+			case BUG_DEPENDANT:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_dependant_on_relationship_added', $t_opt );
+				break;
+			case BUG_HAS_DUPLICATE:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_has_duplicate_relationship_added', $t_opt );
+				break;
+			case BUG_DUPLICATE:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_duplicate_of_relationship_added', $t_opt );
+				break;
+			case BUG_RELATED:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_related_to_relationship_added', $t_opt );
+				break;
+			default:
+				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+				break;
+			}
 	}
 
 	# --------------------
 	# send notices when a relationship is DELETED
 	# MASC RELATIONSHIP
-	function email_relationship_deleted( $p_bug_id ) {
-		email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_relationship_deleted' );
+	function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
+		$t_opt = array();
+		$t_opt[] = bug_format_id( $p_related_bug_id );
+		switch ( $p_rel_type ) {
+			case BUG_BLOCKS:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_blocks_relationship_deleted', $t_opt );
+				break;
+			case BUG_DEPENDANT:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_dependant_on_relationship_deleted', $t_opt );
+				break;
+			case BUG_HAS_DUPLICATE:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_has_duplicate_relationship_deleted', $t_opt );
+				break;
+			case BUG_DUPLICATE:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_duplicate_of_relationship_deleted', $t_opt );
+				break;
+			case BUG_RELATED:
+				email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_related_to_relationship_deleted', $t_opt );
+				break;
+			default:
+				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+				break;
+			}
 	}
 
 	# --------------------
@@ -460,7 +501,9 @@
 				$t_status = bug_get_field( $t_src_bug_id, 'status' );
 				if ( $t_status < config_get( 'bug_resolved_status_threshold' ) ) {
 					# sent the notification just for parent bugs not resolved/closed
-					email_generic( $t_src_bug_id, 'handler', $p_message_id );
+					$t_opt = array();
+					$t_opt[] = bug_format_id( $p_bug_id );
+					email_generic( $t_src_bug_id, 'handler', $p_message_id, $t_opt );
 				}
 			}
 		}
@@ -755,7 +798,7 @@
 	# --------------------
 	# Send bug info to given user
 	# return true on success
-	function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id ) {
+	function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id, $p_header_optional_params = null ) {
 
 		$t_user_email = user_get_email( $p_user_id );
 
@@ -776,6 +819,11 @@
 		# build message
 
 		$t_message = lang_get_defaulted( $p_message_id, null );
+
+		if ( is_array( $p_header_optional_params ) ) {
+			$t_message = vsprintf( $t_message, $p_header_optional_params );
+		}
+
 		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
 			$t_message .= "\n";
 		}
