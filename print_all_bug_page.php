@@ -21,7 +21,6 @@
 	check_varset( $f_search, false );
 	check_varset( $f_offset, 0 );
 
-
 	# Load preferences
 	$f_show_category 		= $t_setting_arr[1];
 	$f_show_severity	 	= $t_setting_arr[2];
@@ -44,7 +43,7 @@
 	$c_offset 				= (integer)$f_offset;
 	$c_user_id				= (integer)$f_user_id;
 	$c_assign_id			= (integer)$f_assign_id;
-	$c_limit_view			= (integer)$f_limit_view;
+	$c_per_page				= (integer)$f_per_page;
 	$c_show_category		= addslashes($f_show_category);
 	$c_show_severity		= addslashes($f_show_severity);
 	$c_show_status			= addslashes($f_show_status);
@@ -164,9 +163,7 @@
 		$query = $query.', priority DESC';
 	}
 
-	if ( isset( $f_limit_view ) ) {
-		$query = $query." LIMIT $c_offset, $c_limit_view";
-	}
+	$query = $query." LIMIT $c_offset, $c_per_page";
 
 	# perform query
     $result = db_query( $query );
@@ -256,7 +253,7 @@
 		</select>
 	</td>
 	<td>
-		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_limit_view ?>">
+		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>">
 	</td>
 	<td>
 		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
