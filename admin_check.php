@@ -245,12 +245,10 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 					echo get_password( $f_password, PLAIN )."<br />";
 
 					$crypt_pass = get_password( $f_password, CRYPT );
-					echo $crypt_pass."<br />";
-					echo get_password( $crypt_pass, CRYPT )."<br />";
-					echo get_password( $f_password, CRYPT2 )."<br />";
-					echo get_password( $f_password, CRYPT3 )."<br />";
-					echo get_password( $f_password, MD5 )."<br />";
-					echo create_random_password( $f_password )."<br />";
+					echo "CRYPT: ".get_password( $crypt_pass, CRYPT )."<br />";
+					echo "CRYPT2: ".get_password( $f_password, CRYPT2 )."<br />";
+					echo "CRYPT3: ".get_password( $f_password, CRYPT3 )."<br />";
+					echo "MD5: ".get_password( $f_password, MD5 )."<br />";
 				}
 		?>
 	</td>
