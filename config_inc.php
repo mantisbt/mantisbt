@@ -74,6 +74,7 @@
 	$g_view_bug_all_page           = "view_bug_all_page".$g_php;
 	$g_view_bug_page               = "view_bug_page".$g_php;
 	$g_view_bug_yadvanced_page      = "view_bug_advanced_page".$g_php;
+
 	$g_bug_delete_page             = "bug_delete_page".$g_php;
 	$g_bug_delete                  = "bug_delete".$g_php;
 	$g_bug_update_page             = "bug_update_page".$g_php;
