@@ -3,6 +3,14 @@
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Revision: 1.7 $
+	# $Author: vboctor $
+	# $Date: 2002-06-13 10:10:21 $
+	#
+	# $Id: bug_monitor.php,v 1.7 2002-06-13 10:10:21 vboctor Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# This file sets the bug to the chosen resolved state then gives the
@@ -13,57 +21,51 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
-	$c_id = (integer)$f_id;
-
-	$query = "SELECT view_state
-				FROM $g_mantis_bug_table
-				WHERE id='$c_id'";
-	$result = db_query( $query );
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
-	if ( PRIVATE == $v_view_state ) {
-		check_access( $g_private_bug_threshold );
-	}
-	else {
-		check_access( $g_monitor_bug_threshold );
-	}
 	check_bug_exists( $f_id );
+
+	$t_view_state = get_bug_field( $f_id, 'view_state' );
+
+	$t_threshold = $g_monitor_bug_threshold;
+	if ( ( PRIVATE == $t_view_state ) && ( $g_private_bug_threshold > $t_threshold ) ) {
+		$t_threshold = $g_private_bug_threshold;
+	}
+
+	check_access( $t_threshold );
+
+	$c_id = (integer)$f_id;
 
 	# get user information
 	$u_id = get_current_user_field( 'id' );
 
 	if ( 'add' == $f_action ) {
 		# Make sure we aren't already monitoring this bug
- 		$query = "SELECT *
- 		   	FROM $g_mantis_bug_monitor_table
- 		   	WHERE bug_id='$c_id' AND user_id='$u_id'";
+		$query ="SELECT bug_id ".
+				"FROM $g_mantis_bug_monitor_table ".
+				"WHERE bug_id='$c_id' AND user_id='$u_id' ".
+				"LIMIT 1";
  		$result = db_query( $query );
 		$t_num_rows = db_num_rows( $result );
 
 		if ( $t_num_rows == 0 ) {
 			# Insert monitoring record
-			$query = "INSERT
-					INTO $g_mantis_bug_monitor_table
-					( user_id, bug_id )
-					VALUES
-					( '$u_id', '$c_id' )";
+			$query ="INSERT ".
+					"INTO $g_mantis_bug_monitor_table ".
+					"( user_id, bug_id ) ".
+					"VALUES ".
+					"( '$u_id', '$c_id' )";
 			$result = db_query($query);
 
-			# log new bugnote
+			# log new monitoring action
 			history_log_event_special( $f_id, BUG_MONITOR, $u_id );
 		}
-
 	} elseif ( 'delete' == $f_action ) {
 		# Delete monitoring record
-		$query = "DELETE
-				FROM $g_mantis_bug_monitor_table
-				WHERE user_id = '$u_id' AND bug_id = '$c_id'";
+		$query ="DELETE ".
+				"FROM $g_mantis_bug_monitor_table ".
+				"WHERE user_id = '$u_id' AND bug_id = '$c_id'";
 		$result = db_query($query);
 
-		# get bugnote id
-		$t_bugnote_id = db_insert_id();
-
-		# log new bugnote
+		# log new un-monitor action
 		history_log_event_special( $f_id, BUG_UNMONITOR, $u_id );
 	}
 
