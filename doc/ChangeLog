@@ -15,6 +15,7 @@ Mantis ChangeLog
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
  * Enh #3663: Remember filter settings for each project.
+ * Enh #3676: Use status threshold rather than hide resolved/closed in filter.
  * Enh #3688: Add threshold for changing the bug/bugnote view status.
  * Enh #3690: Request for directly setting reminders private.
  * Enh #3713: Allow users to set severity levels along with email preferences.
@@ -48,9 +49,11 @@ Mantis ChangeLog
  * New Config: stored_query_use_threshold (default REPORTER).  Threshold needed to be able to use stored queries.
  * New Config: stored_query_create_threshold (default DEVELOPER).  Threshold needed to be able to create stored queries.
  * New Config: stored_query_create_shared_threshold (default MANAGER).  Threshold needed to be able to create shared stored queries.
+ * New Config: hide_status_default (default CLOSED). Default minimum status to hide in filters.
  * Removed config option (use_phpMailer): phpMailer has always been used
  * Removed config option (phpMailer_path): phpMailer has been included to Mantis distribution
  * Removed config option (use_x_priority): phpMailer always puts X-Priority header
+ * Removed config option (hide_closed_default): Replaced by hide_status_default
  * Languages: Updated Czech, Danish, Estonian, Japanese (EUC and SJIS), Serbian and Spanish localisations.
 
 2004.04.??  -  0.18.3

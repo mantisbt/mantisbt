@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.31 2004-04-30 23:14:55 narcissus Exp $
+	# $Id: filter_api.php,v 1.32 2004-05-08 23:25:12 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -130,16 +130,15 @@
 			}
 		}
 
-		# hide closed
-		if ( ( 'on' == $t_filter['hide_closed'] ) && ( CLOSED != $t_filter['show_status'] ) ) {
-			$t_closed = CLOSED;
-			array_push( $t_where_clauses, "($t_bug_table.status<>'$t_closed')" );
-		}
-
-		# hide resolved
-		if ( ( 'on' == $t_filter['hide_resolved'] ) && ( RESOLVED != $t_filter['show_status'] ) ) {
-			$t_resolved = RESOLVED;
-			array_push( $t_where_clauses, "($t_bug_table.status<>'$t_resolved')" );
+		# hide status
+		if ( ( 'any' != $t_filter['show_status'] ) && ( $t_filter['hide_status'] <= $t_filter['show_status'] ) ) {
+			$t_show_status = $t_filter['show_status'];
+			array_push( $t_where_clauses, "($t_bug_table.status='$t_show_status')" );
+		} else {
+			if ( 'none' != $t_filter['hide_status'] ) {
+				$t_hide_status = $t_filter['hide_status'];
+				array_push( $t_where_clauses, "($t_bug_table.status<'$t_hide_status')" );
+			}
 		}
 
 		# category
@@ -455,8 +454,7 @@
 		<input type="hidden" name="show_status" value="<?php PRINT $t_filter['show_status'] ?>">
 		<input type="hidden" name="per_page" value="<?php PRINT $t_filter['per_page'] ?>">
 		<input type="hidden" name="highlight_changed" value="<?php PRINT $t_filter['highlight_changed'] ?>">
-		<input type="hidden" name="hide_resolved" value="<?php PRINT $t_filter['hide_resolved'] ?>">
-		<input type="hidden" name="hide_closed" value="<?php PRINT $t_filter['hide_closed'] ?>">
+		<input type="hidden" name="hide_status" value="<?php PRINT $t_filter['hide_status'] ?>">
 		<input type="hidden" name="and_not_assigned" value="<?php PRINT $t_filter['and_not_assigned'] ?>">
 		<input type="hidden" name="show_build" value="<?php PRINT $t_filter['show_build'] ?>">
 		<input type="hidden" name="show_resolution" value="<?php PRINT $t_filter['show_resolution'] ?>">
@@ -557,12 +555,13 @@
 				?>
 			</td>
 			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php PRINT $t_filters_url . 'hide_resolved'; ?>"><?php PRINT lang_get( 'hide_resolved' ) ?>:</a>
+				<a href="<?php PRINT $t_filters_url . 'hide_status'; ?>"><?php PRINT lang_get( 'hide_status' ) ?>:</a>
 				<?php
-					if ( 'on' == $t_filter['hide_resolved'] ) {
-						PRINT lang_get( 'yes' );
+					if ( ( $t_filter['hide_status'] == 'none' ) || ( is_blank( $t_filter['hide_status'] ) ) ) {
+						PRINT lang_get( 'none' );
 					} else {
-						PRINT lang_get( 'no' );
+						$t_status_string = get_enum_element( 'status', $t_filter['hide_status'] );
+						PRINT $t_status_string . ' (' . lang_get( 'and_above' ) . ')';
 					}
 				?>
 			</td>
@@ -641,16 +640,7 @@
 				<?php PRINT $t_filter['highlight_changed']; ?>
 			</td>
 			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>"></td>
-			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<a href="<?php PRINT $t_filters_url . 'hide_closed'; ?>"><?php PRINT lang_get( 'hide_closed' ) ?>:</a>
-				<?php
-					if ( 'on' == $t_filter['hide_closed'] ) {
-						PRINT lang_get( 'yes' );
-					} else {
-						PRINT lang_get( 'no' );
-					}
-				?>
-			</td>
+			<td class="small-caption" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>"></td>
 		</tr>
 		<?php
 		if ( ON == config_get( 'filter_by_custom_fields' ) ) {

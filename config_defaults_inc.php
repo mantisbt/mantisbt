@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.162 2004-04-08 17:40:44 prescience Exp $
+	# $Id: config_defaults_inc.php,v 1.163 2004-05-08 23:25:11 narcissus Exp $
 	# --------------------------------------------------------
 
 
@@ -397,7 +397,7 @@
 	# site defaults for viewing preferences
 	$g_default_limit_view	= 50;
 	$g_default_show_changed	= 6;
-	$g_hide_closed_default	= ON;
+	$g_hide_status_default 	= CLOSED;
 
 	# make sure people aren't refreshing too often
 	$g_min_refresh_delay	= 10;    # in minutes

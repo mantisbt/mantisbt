@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.29 2004-04-27 00:54:33 narcissus Exp $
+	# $Id: view_all_set.php,v 1.30 2004-05-08 23:25:11 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -22,8 +22,7 @@
 	$f_show_status			= gpc_get_string( 'show_status', 'any' );
 	$f_per_page				= gpc_get_int( 'per_page', -1 );
 	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
-	$f_hide_closed			= gpc_get_bool( 'hide_closed' );
-	$f_hide_resolved		= gpc_get_bool( 'hide_resolved' );
+	$f_hide_status			= gpc_get_string( 'hide_status', 'none' );
 	$f_reporter_id			= gpc_get_string( 'reporter_id', 'any' );
 	$f_handler_id			= gpc_get_string( 'handler_id', 'any' );
 	# sort direction
@@ -55,14 +54,6 @@
 		$f_type = 1;
 	}
 	
-	if ( $f_hide_closed ) {
-		$f_hide_closed = 'on';
-	}
-
-	if ( $f_hide_resolved ) {
-		$f_hide_resolved = 'on';
-	}
-
 	if ( $f_and_not_assigned ) {
 		$f_and_not_assigned = 'on';
 	}
@@ -75,12 +66,8 @@
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
 
-	if ( ON == config_get( 'hide_closed_default' ) ) {
-		$t_hide_closed_default = 'on';
-	} else {
-		$t_hide_closed_default = '';
-	}
-
+	$t_hide_status_default = config_get( 'hide_status_default' );
+	
 	# show bugs per page
 	if ( $f_per_page < 0 ) {
 		$f_per_page = config_get( 'default_limit_view' );
@@ -158,7 +145,6 @@
 				$t_setting_arr['show_status'] = "any";
 				$t_setting_arr['per_page'] = $f_per_page;
 				$t_setting_arr['highlight_changed'] = $t_default_show_changed;
-				$t_setting_arr['hide_closed'] = $t_hide_closed_default;
 				$t_setting_arr['reporter_id'] = "any";
 				$t_setting_arr['handler_id'] = "any";
 				$t_setting_arr['sort'] = "last_updated";
@@ -170,7 +156,7 @@
 				$t_setting_arr['end_day'] = $f_end_day;
 				$t_setting_arr['end_year'] = $f_end_year;
 				$t_setting_arr['search'] = $f_search;
-				$t_setting_arr['hide_resolved'] = $f_hide_resolved;
+				$t_setting_arr['hide_status'] = $t_hide_status_default;
 				$t_setting_arr['and_not_assigned'] = $f_and_not_assigned;
 				$t_setting_arr['show_resolution'] = $f_show_resolution;
 				$t_setting_arr['show_build'] = $f_show_build;
@@ -187,7 +173,6 @@
 				$t_setting_arr['show_status'] = $f_show_status;
 				$t_setting_arr['per_page'] = $f_per_page;
 				$t_setting_arr['highlight_changed'] = $t_default_show_changed;
-				$t_setting_arr['hide_closed'] = $f_hide_closed;
 				$t_setting_arr['reporter_id'] = $f_reporter_id;
 				$t_setting_arr['handler_id'] = $f_handler_id;
 				$t_setting_arr['sort'] = $f_sort;
@@ -199,7 +184,7 @@
 				$t_setting_arr['end_day'] = $f_end_day;
 				$t_setting_arr['end_year'] = $f_end_year;
 				$t_setting_arr['search'] = $f_search;
-				$t_setting_arr['hide_resolved'] = $f_hide_resolved;
+				$t_setting_arr['hide_status'] = $f_hide_status;
 				$t_setting_arr['and_not_assigned'] = $f_and_not_assigned;
 				$t_setting_arr['show_resolution'] = $f_show_resolution;
 				$t_setting_arr['show_build'] = $f_show_build;

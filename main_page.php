@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.50 2004-03-26 20:30:26 narcissus Exp $
+	# $Id: main_page.php,v 1.51 2004-05-08 23:25:11 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,12 +36,12 @@
 	if ( !current_user_is_anonymous() ) {
 		echo '<div class="quick-summary-left">';
 		echo lang_get( 'open_and_assigned_to_me' ) . ':';
-		echo '<a class="subtle" href="view_all_set.php?type=1&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_closed=on&amp;hide_resolved=on">' . current_user_get_assigned_open_bug_count() . '</a>';
+		echo '<a class="subtle" href="view_all_set.php?type=1&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_status=' . RESOLVED . '">' . current_user_get_assigned_open_bug_count() . '</a>';
 		echo '</div>';
 
 		echo '<div class="quick-summary-right">';
 		echo lang_get( 'open_and_reported_to_me' ) . ':';
-		echo '<a class="subtle" href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;hide_closed=on&amp;hide_resolved=on">' . current_user_get_reported_open_bug_count() . '</a>';
+		echo '<a class="subtle" href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;hide_status=' . RESOLVED . '">' . current_user_get_reported_open_bug_count() . '</a>';
 		echo '</div>';
 
 		echo '<div class="quick-summary-left">';

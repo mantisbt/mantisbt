@@ -199,8 +199,11 @@
 	</td>
 	<!-- Hide closed and resolved bugs -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<input type="checkbox" name="hide_resolved" <?php check_checked( $t_filter['hide_resolved'], 'on' ); ?> />&nbsp;<?php echo lang_get( 'filter_resolved' ); ?>
-		<input type="checkbox" name="hide_closed" <?php check_checked( $t_filter['hide_closed'], 'on' ); ?> />&nbsp;<?php echo lang_get( 'filter_closed' ); ?>
+		<select name="hide_status">
+			<option value="none"><?php echo lang_get( 'none' ) ?></option>
+			<option value="none"></option>
+			<?php print_enum_string_option_list( 'status', $t_filter['hide_status'] ) ?>
+		</select>
 	</td>
 </tr>
 
