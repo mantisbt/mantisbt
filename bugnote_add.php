@@ -16,6 +16,8 @@
 	check_bug_exists( $f_id );
 	$c_id = (integer)$f_id;
 
+	check_varset( $f_private, '0' );
+
 	# get user information
 	$u_id = get_current_user_field( 'id' );
 
