@@ -304,7 +304,13 @@
 				$v2_diskfile = str_replace( $DOCUMENT_ROOT, "", $v2_diskfile );
 				$v2_filesize = round( $v2_filesize / 1024 );
 
-				PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize KB)";
+				switch ( $g_file_upload_method ) {
+					case DISK:	PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize KB)";
+								break;
+					case DATABASE:
+								PRINT "<a href=\"$g_file_download?f_id=$v2_id&f_type=bug\">$v2_filename</a> ($v2_filesize KB)";
+								break;
+				}
 				if ( $i != ($num_files - 1) ) {
 					PRINT "<br>";
 				}
