@@ -8,7 +8,7 @@
 	# This page displays "improved" charts on status : the old one and a 3D Pie
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_status.php,v 1.20 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: summary_graph_imp_status.php,v 1.21 2004-09-23 18:19:11 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -16,10 +16,13 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	$t_project_id = helper_get_current_project();
+	$t_user_id = auth_get_current_user_id();
 
 	#checking if it's a per project statistic or all projects
 	if ( ALL_PROJECTS == $t_project_id ) {
-		$specific_where = ' 1=1';
+		# Only projects to which the user have access
+		$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+		$specific_where = ' AND project_id='. implode( ' OR project_id=', $t_accessible_projects_array );
 	} else {
 		$specific_where = " project_id='$t_project_id'";
 	}

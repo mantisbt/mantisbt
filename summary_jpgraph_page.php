@@ -9,7 +9,7 @@
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 
 	# --------------------------------------------------------
-	# $Id: summary_jpgraph_page.php,v 1.21 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: summary_jpgraph_page.php,v 1.22 2004-09-23 18:19:11 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -17,13 +17,22 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	$t_project_id = helper_get_current_project();
+	$t_user_id = auth_get_current_user_id();
 
 	$t_bug_table = config_get( 'mantis_bug_table' );
-
+	
+	if ( ALL_PROJECTS == $t_project_id ) {
+		# Only projects to which the user have access
+		$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+		$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+	} else {
+		$specific_where = " project_id='$t_project_id'";
+	}
+	
 	$t_res_val = RESOLVED;
 	$query = "SELECT id, date_submitted, last_updated
 			FROM $t_bug_table
-			WHERE project_id='$t_project_id' AND status='$t_res_val'";
+			WHERE $specific_where AND status='$t_res_val'";
 	$result = db_query( $query );
 	$bug_count = db_num_rows( $result );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.20 2004-09-10 00:29:50 thraxisp Exp $
+	# $Id: graph_api.php,v 1.21 2004-09-23 18:19:36 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -17,6 +17,7 @@
 		require_once( $t_jpgraph_path.'jpgraph_bar.php' );
 		require_once( $t_jpgraph_path.'jpgraph_pie.php' );
 		require_once( $t_jpgraph_path.'jpgraph_pie3d.php' );
+		require_once( $t_jpgraph_path.'jpgraph_canvas.php' );
 	}
 
 	### Graph API ###
@@ -33,6 +34,7 @@
 
 		$t_project_id = helper_get_current_project();
 		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_id = auth_get_current_user_id();
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -41,7 +43,9 @@
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
 			if ( ALL_PROJECTS == $t_project_id ) {
-				$specific_where = '';
+				# Only projects to which the user have access
+				$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+				$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 			} else {
 				$specific_where = " AND project_id='$t_project_id'";
 			}
@@ -90,6 +94,8 @@
 		global $enum_name, $enum_name_count;
 		global $open_bug_count, $closed_bug_count, $resolved_bug_count,$height;
 
+		error_check( $open_bug_count + $closed_bug_count + $resolved_bug_count, $p_title );
+
 		#defines margin according to height
 		$graph = new Graph(350,400);
 		$graph->img->SetMargin(35,35,35,$height);
@@ -111,23 +117,23 @@
         $tot->SetWeight(2);
         $tot->mark->SetType(MARK_DIAMOND);
 
-		$tot->SetLegend('Total');
+		$tot->SetLegend( lang_get( 'legend_still_open' ) );
 		$graph->Add($tot);
 
 		$p1 = new BarPlot($open_bug_count);
 		$p1->SetFillColor('yellow');
 		$p1->SetWidth(0.8);
-		$p1->SetLegend('Opened');
+		$p1->SetLegend( lang_get( 'legend_opened' ) );
 
 		$p2 = new BarPlot($closed_bug_count);
 		$p2->SetFillColor('blue');
 		$p2->SetWidth(0.8);
-		$p2->SetLegend('Closed');
+		$p2->SetLegend( lang_get( 'legend_closed' ) );
 
 		$p3 = new BarPlot($resolved_bug_count);
 		$p3->SetFillColor('red');
 		$p3->SetWidth(0.8);
-		$p3->SetLegend('Resolved');
+		$p3->SetLegend( lang_get( 'legend_resolved' ) );
 
 	    $gbplot = new GroupBarPlot(array($p1,$p2,$p3));
         $graph->Add($gbplot);
@@ -148,13 +154,16 @@
 
 		$t_project_id = helper_get_current_project();
 		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_id = auth_get_current_user_id();
 
 		#calculation per status
 		$t_res_val = config_get( 'bug_resolved_status_threshold' );
 		$t_clo_val = CLOSED;
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			$specific_where = '';
+			# Only projects to which the user have access
+			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+			$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 		} else {
 			$specific_where = " AND project_id='$t_project_id'";
 		}
@@ -238,6 +247,8 @@
 		global $enum_name, $enum_name_count;
 		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
 
+		error_check( $open_bug_count + $closed_bug_count + $resolved_bug_count, $p_title );
+
 		$graph = new Graph(250,400);
 		$graph->img->SetMargin(35,35,35,150);
 		$graph->img->SetAntiAliasing();
@@ -253,17 +264,17 @@
 		$p1 = new BarPlot($open_bug_count);
 		$p1->SetFillColor('yellow');
 		$p1->SetWidth(0.8);
-		$p1->SetLegend('Opened');
+		$p1->SetLegend( lang_get( 'legend_opened' ) );
 
 		$p2 = new BarPlot($closed_bug_count);
 		$p2->SetFillColor('blue');
 		$p2->SetWidth(0.8);
-		$p2->SetLegend('Closed');
+		$p2->SetLegend( lang_get( 'legend_closed' ) );
 
 		$p3 = new BarPlot($resolved_bug_count);
 		$p3->SetFillColor('red');
 		$p3->SetWidth(0.8);
-		$p3->SetLegend('Resolved');
+		$p3->SetLegend( lang_get( 'legend_resolved' ) );
 
         $gbplot = new GroupBarPlot(array($p1,$p2,$p3));
 
@@ -283,9 +294,12 @@
 
 		$t_project_id = helper_get_current_project();
 		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_id = auth_get_current_user_id();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			$specific_where = '1=1';
+			# Only projects to which the user have access
+			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -319,6 +333,8 @@
 	function graph_bug_enum_summary_pct( $p_title=''){
 		global $enum_name, $enum_name_count, $center, $poshorizontal, $posvertical;
 
+		error_check( $enum_name_count, $p_title );
+		
 		if ( 0 == count($enum_name) ) {
 			return;
 		}
@@ -356,9 +372,12 @@
 		$t_project_id = helper_get_current_project();
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_cat_table = config_get( 'mantis_project_category_table' );
+		$t_user_id = auth_get_current_user_id();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			$specific_where = '1=1';
+			# Only projects to which the user have access
+			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+			$specific_where = ' (t.project_id='. implode( ' OR t.project_id=', $t_accessible_projects_array ).')';
 		} else {
 			$specific_where = " t.project_id='$t_project_id'";
 		}
@@ -393,6 +412,8 @@
 	function graph_category_summary_pct( $p_title=''){
 		global $category_name, $category_bug_count;
 
+		error_check( $category_bug_count, $p_title );
+			
 		if ( 0 == count( $category_bug_count) ) {
 			return;
 		}
@@ -431,6 +452,7 @@
 
 		$t_project_id = helper_get_current_project();
 		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_id = auth_get_current_user_id();
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -440,7 +462,9 @@
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
 			if ( ALL_PROJECTS == $t_project_id ) {
-				$specific_where = '';
+				# Only projects to which the user have access
+				$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+				$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 			} else {
 				$specific_where = " AND project_id='$t_project_id'";
 			}
@@ -457,6 +481,8 @@
 	function graph_bug_enum_summary( $p_title='' ){
 		global $enum_name, $enum_name_count;
 
+		error_check( $enum_name_count, $p_title );
+		
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
 		$graph->img->SetAntiAliasing();
@@ -489,9 +515,12 @@
 		$t_project_id = helper_get_current_project();
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_id = auth_get_current_user_id();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			$specific_where = '';
+			# Only projects to which the user have access
+			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+			$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 		} else {
 			$specific_where = " AND project_id='$t_project_id'";
 		}
@@ -551,6 +580,8 @@
 	function graph_developer_summary( ){
 		global $developer_name, $total_bug_count, $open_bug_count, $resolved_bug_count;
 
+		error_check( count($developer_name), lang_get( 'by_developer' ) );
+		
 		if ( 0 == count($developer_name) ) {
 			return;
 		}
@@ -566,22 +597,22 @@
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
-		$graph->legend->Pos(0.1,0.8,'right','top');
+		$graph->legend->Pos(0,0.8,'right','top');
 		$graph->legend->SetShadow(false);
 		$graph->legend->SetFillColor('white');
 		$graph->legend->SetLayout(LEGEND_HOR);
 
 		$p1 = new BarPlot($open_bug_count);
 		$p1->SetFillColor('red');
-		$p1->SetLegend('Still Open');
+		$p1->SetLegend( lang_get( 'legend_still_open' ) );
 
 		$p2 = new BarPlot($resolved_bug_count);
 		$p2->SetFillColor('yellow');
-		$p2->SetLegend('Resolved');
+		$p2->SetLegend( lang_get( 'legend_resolved' ) );
 
 		$p3 = new BarPlot($total_bug_count);
 		$p3->SetFillColor('blue');
-		$p3->SetLegend('Assigned');
+		$p3->SetLegend( lang_get( 'legend_assigned' ) );
 
 		$gbplot =  new GroupBarPlot( array($p1, $p2, $p3));
 		$graph->Add($gbplot);
@@ -601,9 +632,12 @@
 		$t_project_id = helper_get_current_project();
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_id = auth_get_current_user_id();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			$specific_where = '';
+			# Only projects to which the user have access
+			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+			$specific_where = ' AND (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 		} else {
 			$specific_where = " AND project_id='$t_project_id'";
 		}
@@ -652,6 +686,8 @@
 	function graph_reporter_summary( ){
 		global $reporter_name, $reporter_count;
 
+		error_check( count($reporter_name), lang_get( 'by_reporter' ) );
+		
 		if ( 0 == count($reporter_name) ) {
 			return;
 		}
@@ -685,9 +721,12 @@
 		$t_project_id = helper_get_current_project();
 		$t_cat_table = config_get( 'mantis_project_category_table' );
 		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_user_id = auth_get_current_user_id();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			$specific_where = ' 1=1';
+			# Only projects to which the user have access
+			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -717,6 +756,8 @@
 	function graph_category_summary(){
 		global $category_name, $category_bug_count;
 
+		error_check( $category_bug_count, lang_get( 'by_category' ) );
+		
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
 		$graph->img->SetAntiAliasing();
@@ -727,7 +768,8 @@
 		$graph->xaxis->SetTickLabels($category_name);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
-
+	
+		
 		$p1 = new BarPlot($category_bug_count);
 		$p1->SetFillColor('yellow');
 		$p1->SetWidth(0.8);
@@ -737,7 +779,6 @@
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique)' );
 		}
 		$graph->Stroke();
-
 	}
 
 	# --------------------
@@ -770,9 +811,12 @@
 		$t_bug_table = config_get( 'mantis_bug_table' );
 
 		$t_project_id = helper_get_current_project();
+		$t_user_id = auth_get_current_user_id();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			$specific_where = ' 1=1';
+			# Only projects to which the user have access
+			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -837,6 +881,8 @@
 	function graph_cumulative_bydate(){
 		global $metrics;
 
+		error_check( count($metrics), lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+		
 		if ( 0 == count($metrics) ) {
 			return;
 		}
@@ -855,8 +901,8 @@
 		$graph->SetScale('linlin');
 		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
-		$graph->title->Set( 'cumulative ' . lang_get( 'by_date' ) );
-		$graph->legend->Pos(0.1,0.8,'right','bottom');
+		$graph->title->Set( lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+		$graph->legend->Pos(0,0.8,'right','bottom');
 		$graph->legend->SetShadow(false);
 		$graph->legend->SetFillColor('white');
 		$graph->legend->SetLayout(LEGEND_HOR);
@@ -868,24 +914,43 @@
 		$p1 = new LinePlot($reported_plot, $plot_date);
 		$p1->SetColor('blue');
 		$p1->SetCenter();
-		$p1->SetLegend('Reported');
+		$p1->SetLegend( lang_get( 'legend_reported' ) );
 		$graph->Add($p1);
 
 		$p3 = new LinePlot($still_open_plot, $plot_date);
 		$p3->SetColor('red');
 		$p3->SetCenter();
-		$p3->SetLegend('Still Open');
+		$p3->SetLegend( lang_get( 'legend_still_open' ) );
 		$graph->Add($p3);
 
 		$p2 = new LinePlot($resolved_plot, $plot_date);
 		$p2->SetColor('black');
 		$p2->SetCenter();
-		$p2->SetLegend('Resolved');
+		$p2->SetLegend( lang_get( 'legend_resolved' ) );
 		$graph->Add($p2);
 
 		if ( ON == config_get( 'show_queries_count' ) ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique)' );
 		}
 		$graph->Stroke();
+	}
+	
+	# ----------------------------------------------------
+	# 
+	# Check that there is enough data to create graph
+	#
+	# ----------------------------------------------------
+	function error_check( $bug_count, $title ) {
+		
+		if ( 0 == $bug_count ) {
+			$graph = new CanvasGraph(300,380);
+				
+			$txt = new Text( lang_get( 'not_enough_data' ), 150, 100);
+			$txt->Align("center","center","center"); 
+			$graph->title->Set( $title );
+			$graph->AddText($txt);
+			$graph->Stroke();
+			die();
+		}
 	}
 ?>

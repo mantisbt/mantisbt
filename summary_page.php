@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.40 2004-07-27 00:22:13 thraxisp Exp $
+	# $Id: summary_page.php,v 1.41 2004-09-23 18:19:11 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,10 +20,13 @@
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	$t_project_id = helper_get_current_project();
+	$t_user_id = auth_get_current_user_id();
 
 	#checking if it's a per project statistic or all projects
 	if ( ALL_PROJECTS == $t_project_id ) {
-		$specific_where = ' 1=1';
+		# Only projects to which the user have access
+		$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+		$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
 	} else {
 		$specific_where = " project_id='$t_project_id'";
 	}
@@ -55,7 +58,7 @@
 			$query2 = "SELECT date_modified
 				FROM " . $t_history_table . "
 				WHERE bug_id=$t_id AND type=" . NORMAL_TYPE . 
-							" AND field_name='status' AND new_value=$t_clo_val
+							" AND field_name='status' AND new_value='$t_clo_val'
 				ORDER BY date_modified DESC";
 			$result2 = db_query( $query2 );
 			if ( db_num_rows( $result2 ) >= 1 ) {
