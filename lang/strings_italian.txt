@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.88 $
+	# $Revision: 1.89 $
 	# $Author: marcelloscata $
-	# $Date: 2004-12-14 20:37:07 $
+	# $Date: 2004-12-15 21:54:24 $
 	#
-	# $Id: strings_italian.txt,v 1.88 2004-12-14 20:37:07 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.89 2004-12-15 21:54:24 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -108,8 +108,8 @@ $s_assign_bugs_conf_msg = "Assegna anomalia a";
 $s_resolve_bugs_conf_msg = "Scegli la risoluzione";
 $s_priority_bugs_conf_msg = "Scegli la priorità";
 $s_status_bugs_conf_msg = "Scegli lo stato";
-$s_view_status_bugs_conf_msg = "seleziona vista priv/pubbl";
-$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
+$s_view_status_bugs_conf_msg = "Seleziona vista priv/pubbl";
+$s_set_sticky_bugs_conf_msg = 'Imposta/resetta anomalie come in primo piano (sticky)?';
 $s_close_group_bugs_button = "Chiudi anomalia";
 $s_delete_group_bugs_button = "Elimina anomalia";
 $s_move_group_bugs_button = "Sposta anomalia";
@@ -119,7 +119,7 @@ $s_resolve_group_bugs_button = "Risolvi anomalia";
 $s_priority_group_bugs_button = "Aggiorna priorità";
 $s_status_group_bugs_button = "Aggiorna stato";
 $s_view_status_group_bugs_button = "Cambia priv/pubbl";
-$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+$s_set_sticky_group_bugs_button = 'Imposta/resetta in primo piano (Sticky)';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = "Grafico di sintesi per stato";
@@ -738,7 +738,7 @@ $s_summary_link = "Statistiche";
 $s_account_link = "Account";
 $s_users_link = "Utenti";
 $s_manage_link = "Amministra";
-$s_edit_news_link = "Modifica Notizie";
+$s_edit_news_link = "Notizie";
 $s_docs_link = "Documentazione";
 $s_logout_link = "Esci";
 $s_my_view_link = "My View";
@@ -785,28 +785,28 @@ $s_news_updated_msg = "Notizia Aggiornata...";
 $s_back_link = "Indietro";
 
 # proj_doc_add.php
-$s_file_uploaded_msg = "File caricato con successo";
+$s_file_uploaded_msg = "File/documento caricato con successo";
 
 # proj_doc_add_page.php
-$s_upload_file_title = "Carica File";
+$s_upload_file_title = "Carica File/documento";
 $s_title = "Titolo";
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = "File del progetto eliminato";
+$s_project_file_deleted_msg = "File/documento eliminato";
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = "Eliminare questo file?";
+$s_confirm_file_delete_msg = "Eliminare questo file/documento?";
 
 # proj_doc_edit_page.php
 $s_filename = "Filename";
-$s_file_update_button = "Aggiorna file";
-$s_file_delete_button = "Eliminae file";
+$s_file_update_button = "Aggiorna file/documento";
+$s_file_delete_button = "Elimina file/documento";
 
 # proj_doc_page.php
 $s_project_documentation_title = "Documentazione Progetto";
 $s_user_documentation = "Documentazione Utente";
 $s_project_documentation = "Documentazione Progetto";
-$s_add_file = "Aggiungi File";
+$s_add_file = "Aggiungi File/documento";
 
 # proj_doc_update.php
 $s_project_document_updated = "Progetto aggiornato con successo";
@@ -1035,9 +1035,6 @@ $s_and_above = "e sopra";
 $s_advanced_filters = "Filtro avanzato";
 $s_simple_filters = "Filtro semplice";
 $s_monitored_by = "Monitorato da";
-$s_advanced_filters = 'Advanced Filters';
-$s_simple_filters = 'Simple Filters';
-$s_monitored_by = 'Monitored By';
 
 $s_attachments = "Allegati";
 $s_attachment_alt = "A";
@@ -1156,6 +1153,6 @@ $s_email_on_relationship_changed = 'Email su variazione delle relazioni';
 
 
 # DHTML filters
-$s_loading = 'Loading...';
+$s_loading = 'In caricamento...';
 
 ?>
