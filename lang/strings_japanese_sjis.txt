@@ -8,635 +8,635 @@
 ?>
 <?php
 	# new strings:
-	$s_all_projects = "全プロジェクト";
-	$s_move_bugs = "バグの移動";
-	$s_operation_successful = "成功しました";
-	$s_date_order = "リリース日付";
-	$s_print_all_bug_page_link = "レポート表示";
-	$s_csv_export = "CSVエクスポート";
-	$s_login_anonymously = "ゲストログオン";
-	$s_jump_to_bugnotes = "Jump to Bugnotes";
-	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
-	$s_private_project_msg = "This project is PRIVATE.  Only administrators and manually added users have access.";
-	$s_access_level_project = "Project Access Level";
-	$s_view_submitted_bug_link = "View Submitted Bug";
-	$s_assigned_projects = "Assigned Projects";
-	$s_unassigned_projects = "Unassigned Projects";
-	$s_print = "Print";
-	$s_jump = "Jump";
-	$s_copy_users = "Copy Users";
-	$s_copy_categories = "Copy Categories";
+	$s_all_projects = '全プロジェクト';
+	$s_move_bugs = 'バグの移動';
+	$s_operation_successful = '成功しました';
+	$s_date_order = 'リリース日付';
+	$s_print_all_bug_page_link = 'レポート表示';
+	$s_csv_export = 'CSVエクスポート';
+	$s_login_anonymously = 'ゲストログオン';
+	$s_jump_to_bugnotes = 'Jump to Bugnotes';
+	$s_public_project_msg = 'This project is PUBLIC.  All users have access to this project.';
+	$s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
+	$s_access_level_project = 'Project Access Level';
+	$s_view_submitted_bug_link = 'View Submitted Bug';
+	$s_assigned_projects = 'Assigned Projects';
+	$s_unassigned_projects = 'Unassigned Projects';
+	$s_print = 'Print';
+	$s_jump = 'Jump';
+	$s_copy_users = 'Copy Users';
+	$s_copy_categories = 'Copy Categories';
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
-	$MANTIS_ERROR[ERROR_SQL] = "エラー：SQLでエラーが起こりました。レポートをお願いします→";
-	$MANTIS_ERROR[ERROR_LOGIN] = "エラー：ユーザ名／パスワードが間違えています。";
-	$MANTIS_ERROR[ERROR_REPORT] = "エラー：レポートに間違いがあります。";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "エラー：ファイルが選択されていません。";
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "エラー：ディレクトリが存在しません。プロジェクトの設定を確認して下さい。";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "エラー：カテゴリが重複しています。";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "エラー：バージョンが重複しています。";
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "エラー：ファイルが重複しています。先にファイルを削除して下さい。";
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "エラー：必須フィールドが入力されていません。入力を確認して下さい。";
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
+	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
+	$MANTIS_ERROR[ERROR_SQL] = 'エラー：SQLでエラーが起こりました。レポートをお願いします→';
+	$MANTIS_ERROR[ERROR_LOGIN] = 'エラー：ユーザ名／パスワードが間違えています。';
+	$MANTIS_ERROR[ERROR_REPORT] = 'エラー：レポートに間違いがあります。';
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'エラー：ファイルが選択されていません。';
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'エラー：ディレクトリが存在しません。プロジェクトの設定を確認して下さい。';
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'エラー：カテゴリが重複しています。';
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'エラー：バージョンが重複しています。';
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'エラー：ファイルが重複しています。先にファイルを削除して下さい。';
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'エラー：必須フィールドが入力されていません。入力を確認して下さい。';
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 
 	# General Strings
-	$s_go_back = "戻る";
-	$s_proceed = "次へ";
+	$s_go_back = '戻る';
+	$s_proceed = '次へ';
 
-	$s_switch = "変更";
-	$s_logged_in_as = "ユーザ名";
+	$s_switch = '変更';
+	$s_logged_in_as = 'ユーザ名';
 
-	$s_user_no_longer_exists = "ユーザが存在しません";
+	$s_user_no_longer_exists = 'ユーザが存在しません';
 
-	$s_administrator = "管理者";
+	$s_administrator = '管理者';
 
 	# Enum Strings
-	$s_access_levels_enum_string      = "10:参照のみ,25:バグ登録,40:バグ編集,55:開発者,70:マネージャ,90:管理者";
-	$s_project_status_enum_string     = "10:開発,30:リリース,50:安定,70:完了";
-	$s_project_view_state_enum_string = "10:公開,50:非公開";
+	$s_access_levels_enum_string      = '10:参照のみ,25:バグ登録,40:バグ編集,55:開発者,70:マネージャ,90:管理者';
+	$s_project_status_enum_string     = '10:開発,30:リリース,50:安定,70:完了';
+	$s_project_view_state_enum_string = '10:公開,50:非公開';
 
-	$s_priority_enum_string           = "10:未定,20:低,30:中,40:高,50:緊急,60:即時";
-	$s_severity_enum_string           = "10:機能,20:しょうもない,30:表示,40:些細,50:マイナー,60:メジャー,70:アプリケーションエラー,80:システム停止";
-	$s_reproducibility_enum_string    = "10:毎回,30:時々,50:不定,70:未実施,90:再現不可,100:不明";
-	$s_status_enum_string             = "10:新規,20:要追加情報,30:バグ確認済,40:バグ再現済,50:担当者決定,80:解決済,90:完了";
-	$s_resolution_enum_string         = "10:不明,20:修正済,30:再登録,40:再現不可,50:修正不可,60:2重登録,70:バグではない,80:保留,90:後回し";
-	$s_projection_enum_string         = "10:未定,30:些細な修正,50:小さな修正,70:大きな修正,90:再設計";
-	$s_eta_enum_string                = "10:即時,20:1日以内,30:2～3日,40:1週間以内,50:1ヶ月以内,60:1ヶ月以上";
+	$s_priority_enum_string           = '10:未定,20:低,30:中,40:高,50:緊急,60:即時';
+	$s_severity_enum_string           = '10:機能,20:しょうもない,30:表示,40:些細,50:マイナー,60:メジャー,70:アプリケーションエラー,80:システム停止';
+	$s_reproducibility_enum_string    = '10:毎回,30:時々,50:不定,70:未実施,90:再現不可,100:不明';
+	$s_status_enum_string             = '10:新規,20:要追加情報,30:バグ確認済,40:バグ再現済,50:担当者決定,80:解決済,90:完了';
+	$s_resolution_enum_string         = '10:不明,20:修正済,30:再登録,40:再現不可,50:修正不可,60:2重登録,70:バグではない,80:保留,90:後回し';
+	$s_projection_enum_string         = '10:未定,30:些細な修正,50:小さな修正,70:大きな修正,90:再設計';
+	$s_eta_enum_string                = '10:即時,20:1日以内,30:2～3日,40:1週間以内,50:1ヶ月以内,60:1ヶ月以上';
 
 	# Email Strings
-	$s_new_account_subject = "[mantis] アカウント登録通知";
-	$s_new_account_greeting = "バグ報告システムにようこそ！次のアカウントを用いてログオンして下さい。\n\n";
-	$s_new_account_url = "URL: ";
-	$s_new_account_username = "ユーザ名: ";
-	$s_new_account_password = "パスワード: ";
-	$s_new_account_message = "ログオン後、すぐにパスワードを変更して下さい。パスワードは、暗号化して記録していますので、スタッフが見る事も出来ません。パスワードを忘れた場合には、リセットするしかありませんので予めご了承ください。\n\n";
-	$s_new_account_do_not_reply = "このメールにはリプライしないで下さい。\n";
+	$s_new_account_subject = '[mantis] アカウント登録通知';
+	$s_new_account_greeting = 'バグ報告システムにようこそ！次のアカウントを用いてログオンして下さい。\n\n';
+	$s_new_account_url = 'URL: ';
+	$s_new_account_username = 'ユーザ名: ';
+	$s_new_account_password = 'パスワード: ';
+	$s_new_account_message = 'ログオン後、すぐにパスワードを変更して下さい。パスワードは、暗号化して記録していますので、スタッフが見る事も出来ません。パスワードを忘れた場合には、リセットするしかありませんので予めご了承ください。\n\n';
+	$s_new_account_do_not_reply = 'このメールにはリプライしないで下さい。\n';
 
-	$s_reset_request_msg = "パスワードリセットの要求を受け付けました。";
-	$s_account_name_msg = "ユーザ名: ";
-	$s_news_password_msg = "新しいパスワード: ";
+	$s_reset_request_msg = 'パスワードリセットの要求を受け付けました。';
+	$s_account_name_msg = 'ユーザ名: ';
+	$s_news_password_msg = '新しいパスワード: ';
 
-	$s_new_bug_msg = "次のバグが新たに登録されました。";
-	$s_email_bugnote_msg = "このバグに対し、新たなバグノートが追加されました。";
-	$s_email_resolved_msg = "次のバグが解決されました。";
-	$s_email_close_msg = "次のバグが終了しました。";
-	$s_email_feedback_msg = "次のバグにつき、追加情報が必要とされています。";
-	$s_email_reopen_msg = "次のバグが再登録されました。";
-	$s_email_assigned_msg = "次のバグが担当者に割り当てられました。";
+	$s_new_bug_msg = '次のバグが新たに登録されました。';
+	$s_email_bugnote_msg = 'このバグに対し、新たなバグノートが追加されました。';
+	$s_email_resolved_msg = '次のバグが解決されました。';
+	$s_email_close_msg = '次のバグが終了しました。';
+	$s_email_feedback_msg = '次のバグにつき、追加情報が必要とされています。';
+	$s_email_reopen_msg = '次のバグが再登録されました。';
+	$s_email_assigned_msg = '次のバグが担当者に割り当てられました。';
 
-	$s_email_reporter = "登録者";
-	$s_email_handler = "ハンドラ";
-	$s_email_project = "プロジェクト";
-	$s_email_bug = "バグID";
-	$s_email_category = "カテゴリ";
-	$s_email_reproducibility = "再現性";
-	$s_email_severity = "重要度";
-	$s_email_priority = "優先度";
-	$s_email_status = "状態";
-	$s_email_resolution = "分析結果";
-	$s_email_duplicate = "2重登録";
-	$s_email_date_submitted = "登録日";
-	$s_email_last_modified = "最終更新日";
-	$s_email_summary =  "要約";
-	$s_email_description = "詳細";
+	$s_email_reporter = '登録者';
+	$s_email_handler = 'ハンドラ';
+	$s_email_project = 'プロジェクト';
+	$s_email_bug = 'バグID';
+	$s_email_category = 'カテゴリ';
+	$s_email_reproducibility = '再現性';
+	$s_email_severity = '重要度';
+	$s_email_priority = '優先度';
+	$s_email_status = '状態';
+	$s_email_resolution = '分析結果';
+	$s_email_duplicate = '2重登録';
+	$s_email_date_submitted = '登録日';
+	$s_email_last_modified = '最終更新日';
+	$s_email_summary =  '要約';
+	$s_email_description = '詳細';
 
 	# account_delete.php3
-	$s_account_protected_msg = "アカウントが保護されています。設定を変更できません。";
-	$s_account_removed_msg = "アカウントが削除されています。";
+	$s_account_protected_msg = 'アカウントが保護されています。設定を変更できません。';
+	$s_account_removed_msg = 'アカウントが削除されています。';
 
 	# account_delete_page.php3
-	$s_confirm_delete_msg = "アカウントを削除しても良いですか？";
-	$s_delete_account_button = "アカウントの削除";
+	$s_confirm_delete_msg = 'アカウントを削除しても良いですか？';
+	$s_delete_account_button = 'アカウントの削除';
 
 	# account_page.php3
-	$s_manage_profiles_link = "プロフィール";
-	$s_change_preferences_link = "表示設定";
-	$s_edit_account_title = "アカウントの編集";
-	$s_username = "ユーザ名";
-	$s_email = "E-mail";
-	$s_password = "パスワード";
-	$s_confirm_password  = "パスワード(確認)";
-	$s_access_level = "アクセス権";
-	$s_update_user_button = "更新";
+	$s_manage_profiles_link = 'プロフィール';
+	$s_change_preferences_link = '表示設定';
+	$s_edit_account_title = 'アカウントの編集';
+	$s_username = 'ユーザ名';
+	$s_email = 'E-mail';
+	$s_password = 'パスワード';
+	$s_confirm_password  = 'パスワード(確認)';
+	$s_access_level = 'アクセス権';
+	$s_update_user_button = '更新';
 
 	# account_prefs_page.php3
-	$s_default_account_preferences_title = "表示設定";
-	$s_default_project = "デフォルトプロジェクト";
-	$s_advanced_report = "高度なレポート";
-	$s_advanced_view = "高度な表示";
-	$s_advanced_update = "高度な更新";
-	$s_refresh_delay = "再表示時間";
-	$s_redirect_delay = "リダイレクト時間";
-	$s_email_on_new = "新規バグ通知メール";
-	$s_email_on_assigned = "担当者決定通知メール";
-	$s_email_on_feedback = "フィードバック通知メール";
-	$s_email_on_resolved = "解決通知メール";
-	$s_email_on_closed = "終了通知メール";
-	$s_email_on_reopened = "再登録通知メール";
-	$s_email_on_bugnote_added = "バグノート追加通知メール";
-	$s_email_on_status_change = "状態変更通知メール";
-	$s_email_on_priority_change = "優先度変更通知メール";
-	$s_language = "言語";
-	$s_update_prefs_button = "更新";
-	$s_reset_prefs_button = "リセット";
+	$s_default_account_preferences_title = '表示設定';
+	$s_default_project = 'デフォルトプロジェクト';
+	$s_advanced_report = '高度なレポート';
+	$s_advanced_view = '高度な表示';
+	$s_advanced_update = '高度な更新';
+	$s_refresh_delay = '再表示時間';
+	$s_redirect_delay = 'リダイレクト時間';
+	$s_email_on_new = '新規バグ通知メール';
+	$s_email_on_assigned = '担当者決定通知メール';
+	$s_email_on_feedback = 'フィードバック通知メール';
+	$s_email_on_resolved = '解決通知メール';
+	$s_email_on_closed = '終了通知メール';
+	$s_email_on_reopened = '再登録通知メール';
+	$s_email_on_bugnote_added = 'バグノート追加通知メール';
+	$s_email_on_status_change = '状態変更通知メール';
+	$s_email_on_priority_change = '優先度変更通知メール';
+	$s_language = '言語';
+	$s_update_prefs_button = '更新';
+	$s_reset_prefs_button = 'リセット';
 
 	# account_prefs_reset.php3
-	$s_prefs_reset_msg = "設定がリセットされました。";
+	$s_prefs_reset_msg = '設定がリセットされました。';
 
 	# account_prefs_update.php3
-	$s_prefs_updated_msg = "設定が更新されました。";
+	$s_prefs_updated_msg = '設定が更新されました。';
 
 	# account_profile_add.php3
-	$s_profile_added_msg = "プロフィールが追加されました。";
+	$s_profile_added_msg = 'プロフィールが追加されました。';
 
 	# account_profile_delete.php3
-	$s_profile_deleted_msg = "プロフィールが削除されました。";
+	$s_profile_deleted_msg = 'プロフィールが削除されました。';
 
 	# account_profile_edit_page.php3
-	$s_edit_profile_title = "プロフィールの編集";
-	$s_platform = "プラットフォーム";
-	$s_operating_system = "OS";
-	$s_version = "バージョン／ビルド";
-	$s_additional_description = "追記事項";
-	$s_update_profile_button = "更新";
+	$s_edit_profile_title = 'プロフィールの編集';
+	$s_platform = 'プラットフォーム';
+	$s_operating_system = 'OS';
+	$s_version = 'バージョン／ビルド';
+	$s_additional_description = '追記事項';
+	$s_update_profile_button = '更新';
 
 	# account_profile_make_default.php3
-	$s_profile_defaulted_msg = "デフォルトプロフィールが更新されました。";
+	$s_profile_defaulted_msg = 'デフォルトプロフィールが更新されました。';
 
 	# account_profile_manage_page.php3
-	$s_add_profile_title = "プロフィールの追加";
-	$s_add_profile_button = "プロフィール追加";
-	$s_edit_or_delete_profiles_title = "プロフィールの追加／削除";
-	$s_edit_profile = "編集";
-	$s_make_default = "デフォルトにする";
-	$s_delete_profile = "削除";
-	$s_select_profile = "プロフィール選択";
-	$s_submit_button = "次へ";
+	$s_add_profile_title = 'プロフィールの追加';
+	$s_add_profile_button = 'プロフィール追加';
+	$s_edit_or_delete_profiles_title = 'プロフィールの追加／削除';
+	$s_edit_profile = '編集';
+	$s_make_default = 'デフォルトにする';
+	$s_delete_profile = '削除';
+	$s_select_profile = 'プロフィール選択';
+	$s_submit_button = '次へ';
 
 	# account_profile_update.php3
-	$s_profile_updated_msg = "プロフィールが更新されました。";
+	$s_profile_updated_msg = 'プロフィールが更新されました。';
 
 	# account_update.php3
-	$s_account_updated_msg = "アカウントが正常に更新されました。";
+	$s_account_updated_msg = 'アカウントが正常に更新されました。';
 
 	# bug_assign.php3
-	$s_bug_assign_msg       = "バグが担当者に割り当てられました。";
+	$s_bug_assign_msg       = 'バグが担当者に割り当てられました。';
 
 	# bug_close.php3
-	$s_bug_close_msg       = "バグが終了しました。";
-	$s_close_immediately   = "すぐに閉じる：";
+	$s_bug_close_msg       = 'バグが終了しました。';
+	$s_close_immediately   = 'すぐに閉じる：';
 
 	# bug_close_page.php3
-	$s_close_bug_title = "Close Bug";
+	$s_close_bug_title = 'Close Bug';
 
 	# bug_delete.php3
-	$s_bug_deleted_msg = "バグが削除されました。";
+	$s_bug_deleted_msg = 'バグが削除されました。';
 
 	# bug_delete_page.php3
-	$s_delete_bug_sure_msg = "本当にこのバグを削除しても良いですか？";
-	$s_delete_bug_button = "削除";
+	$s_delete_bug_sure_msg = '本当にこのバグを削除しても良いですか？';
+	$s_delete_bug_button = '削除';
 
 	# bug_monitor.php3
-	$s_monitor_bug_button = "Monitor Bug";
-	$s_unmonitor_bug_button = "End Monitoring";
+	$s_monitor_bug_button = 'Monitor Bug';
+	$s_unmonitor_bug_button = 'End Monitoring';
 
 	# bug_file_add.php3
-	$s_file_upload_msg = "ファイルが登録されました。";
+	$s_file_upload_msg = 'ファイルが登録されました。';
 
 	# bug_file_upload_inc.php3
-	$s_upload_file = "ファイル登録";
-	$s_select_file = "ファイル選択";
-	$s_upload_file_button = "登録";
+	$s_upload_file = 'ファイル登録';
+	$s_select_file = 'ファイル選択';
+	$s_upload_file_button = '登録';
 
 	# bug_reopen.php3
-	$s_bug_reopened_msg = "バグが再登録されました。";
-	$s_reopen_add_bugnote_title = "再登録の理由";
-	$s_bugnote_add_reopen_button = "バグノートの追加";
+	$s_bug_reopened_msg = 'バグが再登録されました。';
+	$s_reopen_add_bugnote_title = '再登録の理由';
+	$s_bugnote_add_reopen_button = 'バグノートの追加';
 
 	# bug_resolve_page.php3
-	$s_resolve_bug_title = "バグ分析";
-	$s_resolve_bug_button = "バグ分析結果入力";
+	$s_resolve_bug_title = 'バグ分析';
+	$s_resolve_bug_button = 'バグ分析結果入力';
 
 	# bug_resolve_page2.php3
-	$s_bug_resolved_msg = "Bug has been resolved. Enter bugnote below...";
-	$s_resolve_add_bugnote_title = "Add Bugnote Reason For Resolving Bug";
-	$s_bugnote_add_resolve_button = "Add Bugnote";
+	$s_bug_resolved_msg = 'Bug has been resolved. Enter bugnote below...';
+	$s_resolve_add_bugnote_title = 'Add Bugnote Reason For Resolving Bug';
+	$s_bugnote_add_resolve_button = 'Add Bugnote';
 
 	# bug_update.php3
-	$s_bug_updated_msg = "Bug has been successfully updated...";
+	$s_bug_updated_msg = 'Bug has been successfully updated...';
 
 	# bug_update_advanced_page.php3
-	$s_back_to_bug_link = "Back To Bug";
-	$s_update_simple_link = "Update Simple";
-	$s_updating_bug_advanced_title = "Updating Bug Information";
-	$s_id = "ID";
-	$s_category = "カテゴリ";
-	$s_severity = "重要度";
-	$s_reproducibility = "再現性";
-	$s_date_submitted = "登録日";
-	$s_last_update = "最終更新日";
-	$s_reporter = "登録者";
-	$s_assigned_to = "担当者";
-	$s_priority = "優先度";
-	$s_resolution = "分析結果";
-	$s_status = "状態";
-	$s_duplicate_id = "重複しているバグID";
-	$s_os = "OS";
-	$s_projection = "修正方法";
-	$s_os_version = "バージョン";
-	$s_eta = "予定工数";
-	$s_product_version = "製品バージョン";
-	$s_build = "ビルド";
-	$s_votes = "対応希望得票数";
-	$s_summary = "要約";
-	$s_description = "詳細";
-	$s_steps_to_reproduce = "再現方法";
-	$s_additional = "Additional";
-	$s_information = "Information";
-	$s_update_information_button = "更新";
+	$s_back_to_bug_link = 'Back To Bug';
+	$s_update_simple_link = 'Update Simple';
+	$s_updating_bug_advanced_title = 'Updating Bug Information';
+	$s_id = 'ID';
+	$s_category = 'カテゴリ';
+	$s_severity = '重要度';
+	$s_reproducibility = '再現性';
+	$s_date_submitted = '登録日';
+	$s_last_update = '最終更新日';
+	$s_reporter = '登録者';
+	$s_assigned_to = '担当者';
+	$s_priority = '優先度';
+	$s_resolution = '分析結果';
+	$s_status = '状態';
+	$s_duplicate_id = '重複しているバグID';
+	$s_os = 'OS';
+	$s_projection = '修正方法';
+	$s_os_version = 'バージョン';
+	$s_eta = '予定工数';
+	$s_product_version = '製品バージョン';
+	$s_build = 'ビルド';
+	$s_votes = '対応希望得票数';
+	$s_summary = '要約';
+	$s_description = '詳細';
+	$s_steps_to_reproduce = '再現方法';
+	$s_additional = 'Additional';
+	$s_information = 'Information';
+	$s_update_information_button = '更新';
 
 	# bug_update_page.php3
-	$s_update_advanced_link = "Update Advanced";
-	$s_updating_bug_simple_title = "Updating Bug Information";
+	$s_update_advanced_link = 'Update Advanced';
+	$s_updating_bug_simple_title = 'Updating Bug Information';
 
 	# bug_vote_add.php3
-	$s_vote_added_msg = "Vote has been added...";
+	$s_vote_added_msg = 'Vote has been added...';
 
 	# bugnote_add.php3
-	$s_bugnote_added_msg = "バグノートが追加されました。";
+	$s_bugnote_added_msg = 'バグノートが追加されました。';
 
 	# bugnote_delete.php3
-	$s_bugnote_deleted_msg = "バグノートが削除されました。";
-	$s_bug_notes_title = "バグノート";
+	$s_bugnote_deleted_msg = 'バグノートが削除されました。';
+	$s_bug_notes_title = 'バグノート';
 
 	# bugnote_edit_page.php3
-	$s_edit_bugnote_title = "バグノート編集";
+	$s_edit_bugnote_title = 'バグノート編集';
 
 	# bugnote_inc.php
-	$s_no_bugnotes_msg = "このバグに対するバグノートはありません。";
-	$s_delete_link = "削除";
-	$s_add_bugnote_title = "バグノート追加";
-	$s_add_bugnote_button = "追加";
-	$s_bugnote_edit_link = "編集";
-	$s_close_bug_button = "バグを閉じる";
+	$s_no_bugnotes_msg = 'このバグに対するバグノートはありません。';
+	$s_delete_link = '削除';
+	$s_add_bugnote_title = 'バグノート追加';
+	$s_add_bugnote_button = '追加';
+	$s_bugnote_edit_link = '編集';
+	$s_close_bug_button = 'バグを閉じる';
 
 	# bugnote_update.php3
-	$s_bugnote_updated_msg = "バグノートが更新されました。";
-	$s_edited_on = "更新日時：";
+	$s_bugnote_updated_msg = 'バグノートが更新されました。';
+	$s_edited_on = '更新日時：';
 
 	# index.php3
-	$s_click_to_login = "ログオン→";
+	$s_click_to_login = 'ログオン→';
 
 	# login.php3
 
 	# login_page.php3
-	$s_login_page_info = "Bugtracker にようこそ！";
-	$s_login_title = "ログイン";
-	$s_save_login = "パスワードの保存";
-	$s_choose_project = "プロジェクト選択";
-	$s_login_button = "ログイン";
-	$s_signup_link = "新しいユーザの作成";
+	$s_login_page_info = 'Bugtracker にようこそ！';
+	$s_login_title = 'ログイン';
+	$s_save_login = 'パスワードの保存';
+	$s_choose_project = 'プロジェクト選択';
+	$s_login_button = 'ログイン';
+	$s_signup_link = '新しいユーザの作成';
 
 	# login_select_proj_page.php3
-	$s_select_project_button = "選択";
+	$s_select_project_button = '選択';
 
 	# logout_page.php3
-	$s_logged_out_title = "ログアウト中...";
-	$s_redirecting = "...次のページ→";
-	$s_here = "Here";
+	$s_logged_out_title = 'ログアウト中...';
+	$s_redirecting = '...次のページ→';
+	$s_here = 'Here';
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "私が担当するバグ";
-	$s_open_and_reported_to_me = "私がレポートしたバグ";
-	$s_newer_news_link = "新しいニュース";
-	$s_older_news_link = "過去のニュース";
-	$s_archives = "履歴";
+	$s_open_and_assigned_to_me = '私が担当するバグ';
+	$s_open_and_reported_to_me = '私がレポートしたバグ';
+	$s_newer_news_link = '新しいニュース';
+	$s_older_news_link = '過去のニュース';
+	$s_archives = '履歴';
 
 	# manage_create_new_user.php3
-	$s_created_user_part1 = "Created user";
-	$s_created_user_part2 = "with an access level of";
+	$s_created_user_part1 = 'Created user';
+	$s_created_user_part2 = 'with an access level of';
 
 	# manage_create_user_page.php3
-	$s_create_new_account_title = "新規アカウント作成";
-	$s_verify_password = "パスワード(確認)";
-	$s_enabled = "有効";
-	$s_protected = "保護";
-	$s_create_user_button = "登録";
+	$s_create_new_account_title = '新規アカウント作成';
+	$s_verify_password = 'パスワード(確認)';
+	$s_enabled = '有効';
+	$s_protected = '保護';
+	$s_create_user_button = '登録';
 
 	# manage_page.php3
-	$s_hide_disabled = "無効なユーザを隠す";
-	$s_filter_button = "表示";
-	$s_manage_users_link = "ユーザ管理";
-	$s_manage_projects_link = "プロジェクト管理";
-	$s_create_new_account_link = "アカウント作成";
-	$s_projects_link = "プロジェクト";
-	$s_documentation_link = "ドキュメント";
-	$s_new_accounts_title = "新規アカウント";
-	$s_1_week_title = "過去1週間";
-	$s_never_logged_in_title = "未ログイン";
-	$s_prune_accounts = "アカウント削除";
-	$s_hide_inactive = "休止ユーザを隠す";
-	$s_manage_accounts_title = "アカウント管理";
-	$s_p = "保護";
-	$s_date_created = "作成日時";
-	$s_last_visit = "最終訪問日時";
-	$s_edit_user_link = "ユーザ編集";
+	$s_hide_disabled = '無効なユーザを隠す';
+	$s_filter_button = '表示';
+	$s_manage_users_link = 'ユーザ管理';
+	$s_manage_projects_link = 'プロジェクト管理';
+	$s_create_new_account_link = 'アカウント作成';
+	$s_projects_link = 'プロジェクト';
+	$s_documentation_link = 'ドキュメント';
+	$s_new_accounts_title = '新規アカウント';
+	$s_1_week_title = '過去1週間';
+	$s_never_logged_in_title = '未ログイン';
+	$s_prune_accounts = 'アカウント削除';
+	$s_hide_inactive = '休止ユーザを隠す';
+	$s_manage_accounts_title = 'アカウント管理';
+	$s_p = '保護';
+	$s_date_created = '作成日時';
+	$s_last_visit = '最終訪問日時';
+	$s_edit_user_link = 'ユーザ編集';
 
 	# manage_project_add.php3
-	$s_project_added_msg = "プロジェクトが追加されました。";
+	$s_project_added_msg = 'プロジェクトが追加されました。';
 
 	# manage_project_category_add.php3
-	$s_category_added_msg = "カテゴリが追加されました。";
+	$s_category_added_msg = 'カテゴリが追加されました。';
 
 	# manage_project_category_delete.php3
-	$s_category_deleted_msg = "カテゴリが削除されました。";
+	$s_category_deleted_msg = 'カテゴリが削除されました。';
 
 	# manage_project_category_delete_page.php3
-	$s_category_delete_sure_msg = "本当にこのカテゴリを削除しますか？関連する全てのバグが削除されます。";
-	$s_delete_category_button = "削除";
+	$s_category_delete_sure_msg = '本当にこのカテゴリを削除しますか？関連する全てのバグが削除されます。';
+	$s_delete_category_button = '削除';
 
 	# manage_project_category_edit_page.php3
-	$s_edit_project_category_title = "プロジェクトカテゴリの編集";
-	$s_update_category_button = "更新";
+	$s_edit_project_category_title = 'プロジェクトカテゴリの編集';
+	$s_update_category_button = '更新';
 
 	# manage_project_category_update.php3
-	$s_category_updated_msg = "カテゴリが更新されました。";
+	$s_category_updated_msg = 'カテゴリが更新されました。';
 
 	# manage_project_delete.php3
-	$s_project_deleted_msg = "プロジェクトが削除されました。";
+	$s_project_deleted_msg = 'プロジェクトが削除されました。';
 
 	# manage_project_delete_page.php3
-	$s_project_delete_msg = "本当にこのプロジェクトを削除しますか？関連する全てのバグが削除されます。";
-	$s_project_delete_button = "削除";
+	$s_project_delete_msg = '本当にこのプロジェクトを削除しますか？関連する全てのバグが削除されます。';
+	$s_project_delete_button = '削除';
 
 	# manage_project_edit_page.php3
-	$s_edit_project_title = "プロジェクト情報の編集";
-	$s_project_name = "プロジェクト名";
-	$s_view_status = "外部からの参照";
-	$s_public = "公開";
-	$s_private = "非公開";
-	$s_update_project_button = "更新";
-	$s_delete_project_button = "削除";
-	$s_categories_and_version_title = "カテゴリ／バージョン";
-	$s_categories = "カテゴリ";
-	$s_add_category_button = "カテゴリ追加";
-	$s_versions = "バージョン";
-	$s_add_version_button = "バージョン追加";
-	$s_edit_link = "編集";
+	$s_edit_project_title = 'プロジェクト情報の編集';
+	$s_project_name = 'プロジェクト名';
+	$s_view_status = '外部からの参照';
+	$s_public = '公開';
+	$s_private = '非公開';
+	$s_update_project_button = '更新';
+	$s_delete_project_button = '削除';
+	$s_categories_and_version_title = 'カテゴリ／バージョン';
+	$s_categories = 'カテゴリ';
+	$s_add_category_button = 'カテゴリ追加';
+	$s_versions = 'バージョン';
+	$s_add_version_button = 'バージョン追加';
+	$s_edit_link = '編集';
 
 	# manage_project_menu_page.php3
-	$s_add_project_title = "プロジェクト追加";
-	$s_upload_file_path = "ファイルの登録場所";
-	$s_add_project_button = "追加";
-	$s_projects_title = "プロジェクト";
-	$s_name = "名称";
+	$s_add_project_title = 'プロジェクト追加';
+	$s_upload_file_path = 'ファイルの登録場所';
+	$s_add_project_button = '追加';
+	$s_projects_title = 'プロジェクト';
+	$s_name = '名称';
 
 	# manage_project_update.php3
-	$s_project_updated_msg = "プロジェクト情報が更新されました。";
+	$s_project_updated_msg = 'プロジェクト情報が更新されました。';
 
 	# manage_project_version_add.php3
-	$s_version_added_msg = "バージョンが追加されました。";
+	$s_version_added_msg = 'バージョンが追加されました。';
 
 	# manage_project_version_delete.php3
-	$s_version_deleted_msg = "バージョンが削除されました。";
+	$s_version_deleted_msg = 'バージョンが削除されました。';
 
 	# manage_project_version_delete_page.php3
-	$s_version_delete_sure = "本当にこのバージョンを削除しますか？関連するバグが全て削除されます。";
-	$s_delete_version_button = "削除";
+	$s_version_delete_sure = '本当にこのバージョンを削除しますか？関連するバグが全て削除されます。';
+	$s_delete_version_button = '削除';
 
 	# manage_project_version_edit_page.php3
-	$s_edit_project_version_title = "プロジェクトバージョンの編集";
-	$s_update_version_button = "更新";
+	$s_edit_project_version_title = 'プロジェクトバージョンの編集';
+	$s_update_version_button = '更新';
 
 	# manage_project_version_update.php3
-	$s_version_updated_msg = "バージョンが更新されました。";
+	$s_version_updated_msg = 'バージョンが更新されました。';
 
 	# manage_user_delete.php3
-	$s_account_delete_protected_msg = "アカウントが保護されています。削除できません。";
-	$s_account_deleted_msg = "アカウントを削除しました。";
+	$s_account_delete_protected_msg = 'アカウントが保護されています。削除できません。';
+	$s_account_deleted_msg = 'アカウントを削除しました。';
 
 	# manage_user_delete_page.php3
-	$s_delete_account_sure_msg = "本当にこのアカウントを削除しますか？";
+	$s_delete_account_sure_msg = '本当にこのアカウントを削除しますか？';
 
 	# manage_prune.php3
-	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
+	$s_accounts_pruned_msg = 'All accounts that have never logged in and are older than 1 week have been removed';
 
 	# manage_user_page.php3
-	$s_edit_user_title = "ユーザ情報の編集";
-	$s_reset_password_button = "パスワードのリセット";
-	$s_delete_user_button = "アカウント削除";
-	$s_reset_password_msg = "パスワードのリセットを行うと、ランダムに生成されたパスワードが設定されます。";
-	$s_reset_password_msg2 = "パスワードのリセットを行うと、パスワードが無しに設定されます。";
+	$s_edit_user_title = 'ユーザ情報の編集';
+	$s_reset_password_button = 'パスワードのリセット';
+	$s_delete_user_button = 'アカウント削除';
+	$s_reset_password_msg = 'パスワードのリセットを行うと、ランダムに生成されたパスワードが設定されます。';
+	$s_reset_password_msg2 = 'パスワードのリセットを行うと、パスワードが無しに設定されます。';
 
 	# manage_user_reset.php3
-	$s_account_reset_protected_msg = "アカウントが保護されています。パスワードをリセットできません。";
-	$s_account_reset_msg = "パスワードがリセットされました。";
-	$s_account_reset_msg2 = "パスワードが無しに設定されました。";
+	$s_account_reset_protected_msg = 'アカウントが保護されています。パスワードをリセットできません。';
+	$s_account_reset_msg = 'パスワードがリセットされました。';
+	$s_account_reset_msg2 = 'パスワードが無しに設定されました。';
 
 	# manage_user_update.php3
-	$s_manage_user_protected_msg = "アカウントが保護されています。アクセスレベルと有効／無効の設定は変更できません。その他の情報は更新されます。";
-	$s_manage_user_updated_msg = "アカウントが更新されました。";
+	$s_manage_user_protected_msg = 'アカウントが保護されています。アクセスレベルと有効／無効の設定は変更できません。その他の情報は更新されます。';
+	$s_manage_user_updated_msg = 'アカウントが更新されました。';
 
 	# menu_inc.php
-	$s_main_link = "メイン";
-	$s_view_bugs_link = "バグ検索";
-	$s_report_bug_link = "バグ報告";
-	$s_summary_link = "バグ要約";
-	$s_account_link = "アカウント設定";
-	$s_users_link = "プロジェクト設定";
-	$s_manage_link = "システム管理";
-	$s_edit_news_link = "ニュース編集";
-	$s_docs_link = "ドキュメント";
-	$s_logout_link = "ログアウト";
+	$s_main_link = 'メイン';
+	$s_view_bugs_link = 'バグ検索';
+	$s_report_bug_link = 'バグ報告';
+	$s_summary_link = 'バグ要約';
+	$s_account_link = 'アカウント設定';
+	$s_users_link = 'プロジェクト設定';
+	$s_manage_link = 'システム管理';
+	$s_edit_news_link = 'ニュース編集';
+	$s_docs_link = 'ドキュメント';
+	$s_logout_link = 'ログアウト';
 
 	# meta_inc.php
 
 	# news_add.php3
-	$s_news_added_msg = "ニュースが追加されました。";
+	$s_news_added_msg = 'ニュースが追加されました。';
 
 	# news_delete.php3
-	$s_news_deleted_msg = "ニュースが削除されました。";
+	$s_news_deleted_msg = 'ニュースが削除されました。';
 
 	# news_delete_page.php3
-	$s_delete_news_sure_msg = "本当にこのニュースを削除しますか？";
-	$s_delete_news_item_button = "削除";
+	$s_delete_news_sure_msg = '本当にこのニュースを削除しますか？';
+	$s_delete_news_item_button = '削除';
 
 	# news_edit_page.php3
-	$s_edit_news_title = "ニュース編集";
-	$s_headline = "見出し";
-	$s_body = "本文";
-	$s_update_news_button = "更新";
+	$s_edit_news_title = 'ニュース編集';
+	$s_headline = '見出し';
+	$s_body = '本文';
+	$s_update_news_button = '更新';
 
 	# news_menu_page.php3
-	$s_add_news_title = "ニュース追加";
-	$s_do_not_use = "＊使用禁止→";
-	$s_post_to = "投稿先";
-	$s_post_news_button = "投稿";
-	$s_edit_or_delete_news_title = "ニュース編集／削除";
-	$s_edit_post = "編集";
-	$s_delete_post = "削除";
-	$s_select_post = "選択";
+	$s_add_news_title = 'ニュース追加';
+	$s_do_not_use = '＊使用禁止→';
+	$s_post_to = '投稿先';
+	$s_post_news_button = '投稿';
+	$s_edit_or_delete_news_title = 'ニュース編集／削除';
+	$s_edit_post = '編集';
+	$s_delete_post = '削除';
+	$s_select_post = '選択';
 
 	# news_update.php3
-	$s_news_updated_msg = "ニュースが更新されました。";
+	$s_news_updated_msg = 'ニュースが更新されました。';
 
 	# news_view_page.php3
-	$s_back_link = "戻る";
+	$s_back_link = '戻る';
 
 	# proj_doc_add.php3
-	$s_file_uploaded_msg = "ファイル登録が完了しました。";
+	$s_file_uploaded_msg = 'ファイル登録が完了しました。';
 
 	# proj_doc_add_page.php3
-	$s_upload_file_title = "ファイル登録";
-	$s_title = "タイトル";
+	$s_upload_file_title = 'ファイル登録';
+	$s_title = 'タイトル';
 
 	# proj_doc_delete.php3
-	$s_project_file_deleted_msg = "ファイルが削除されました。";
+	$s_project_file_deleted_msg = 'ファイルが削除されました。';
 
 	# proj_doc_delete_page.php3
-	$s_confirm_file_delete_msg = "本当にこのファイルを削除しても良いですか？";
+	$s_confirm_file_delete_msg = '本当にこのファイルを削除しても良いですか？';
 
 	# proj_doc_edit_page.php3
-	$s_filename = "ファイル名";
-	$s_file_update_button = "更新";
-	$s_file_delete_button = "削除";
+	$s_filename = 'ファイル名';
+	$s_file_update_button = '更新';
+	$s_file_delete_button = '削除';
 
 	# proj_doc_page.php3
-	$s_project_documentation_title = "プロジェクトドキュメント";
-	$s_user_documentation = "Mantisユーザマニュアル";
-	$s_project_documentation = "プロジェクトドキュメント";
-	$s_add_file = "ファイル登録";
+	$s_project_documentation_title = 'プロジェクトドキュメント';
+	$s_user_documentation = 'Mantisユーザマニュアル';
+	$s_project_documentation = 'プロジェクトドキュメント';
+	$s_add_file = 'ファイル登録';
 
 	# proj_doc_update.php3
-	$s_project_document_updated = "更新されました。";
+	$s_project_document_updated = '更新されました。';
 
 	# proj_user_add.php3
-	$s_project_user_added_msg = "プロジェクトにユーザを追加しました。";
+	$s_project_user_added_msg = 'プロジェクトにユーザを追加しました。';
 
 	# proj_user_delete.php3
-	$s_project_removed_user_msg = "プロジェクトからユーザを削除しました。";
+	$s_project_removed_user_msg = 'プロジェクトからユーザを削除しました。';
 
 	# proj_user_delete_page.php3
-	$s_remove_user_sure_msg = "ユーザをプロジェクトから削除しますか？";
+	$s_remove_user_sure_msg = 'ユーザをプロジェクトから削除しますか？';
 
 	# proj_user_menu_page.php3
-	$s_add_user_title = "プロジェクトへのユーザ追加";
-	$s_add_user_button = "追加";
-	$s_project_selection_title = "プロジェクト選択";
-	$s_remove_link = "プロジェクトから削除";
+	$s_add_user_title = 'プロジェクトへのユーザ追加';
+	$s_add_user_button = '追加';
+	$s_project_selection_title = 'プロジェクト選択';
+	$s_remove_link = 'プロジェクトから削除';
 
 	# proj_user_update.php3
-	$s_updated_user_msg = "ユーザが更新されました。";
+	$s_updated_user_msg = 'ユーザが更新されました。';
 
 	# report_add.php3
-	$s_must_enter_category = "カテゴリを選択して下さい。";
-	$s_must_enter_severity = "重要度を選択して下さい。";
-	$s_must_enter_reproducibility = "再現性を選択して下さい。";
-	$s_must_enter_summary = "要約を記入して下さい。";
-	$s_must_enter_description = "詳細を記入して下さい。";
-	$s_report_more_bugs = "次のバグ";
-	$s_submission_thanks_msg = "登録、有難うございました。";
+	$s_must_enter_category = 'カテゴリを選択して下さい。';
+	$s_must_enter_severity = '重要度を選択して下さい。';
+	$s_must_enter_reproducibility = '再現性を選択して下さい。';
+	$s_must_enter_summary = '要約を記入して下さい。';
+	$s_must_enter_description = '詳細を記入して下さい。';
+	$s_report_more_bugs = '次のバグ';
+	$s_submission_thanks_msg = '登録、有難うございました。';
 
 	# report_bug_advanced_page.php3
-	$s_simple_report_link = "簡単なレポート";
-	$s_enter_report_details_title = "バグレポートの記入";
-	$s_required = "必須";
-	$s_select_category = "＊カテゴリを選択＊";
-	$s_select_reproducibility = "＊再現性を選択＊";
-	$s_select_severity = "＊重要度を選択＊";
-	$s_or_fill_in = "↑選択 or 記入↓";
-	$s_assign_to = "担当者";
-	$s_additional_information = "追加情報";
-	$s_submit_report_button = "登録";
-	$s_check_report_more_bugs = "続けて登録する場合にはチェックして下さい。";
+	$s_simple_report_link = '簡単なレポート';
+	$s_enter_report_details_title = 'バグレポートの記入';
+	$s_required = '必須';
+	$s_select_category = '＊カテゴリを選択＊';
+	$s_select_reproducibility = '＊再現性を選択＊';
+	$s_select_severity = '＊重要度を選択＊';
+	$s_or_fill_in = '↑選択 or 記入↓';
+	$s_assign_to = '担当者';
+	$s_additional_information = '追加情報';
+	$s_submit_report_button = '登録';
+	$s_check_report_more_bugs = '続けて登録する場合にはチェックして下さい。';
 
 	# report_bug_page.php3
-	$s_advanced_report_link = "高度なレポート";
-	$s_report_stay = "次のレポート";
+	$s_advanced_report_link = '高度なレポート';
+	$s_report_stay = '次のレポート';
 
 	# set_project.php3
-	$s_selected_project = "Selected project";
-	$s_valid_project_msg = "You must choose a valid project";
+	$s_selected_project = 'Selected project';
+	$s_valid_project_msg = 'You must choose a valid project';
 
 	# show_source_page.php3
-	$s_show_source_for_msg = "Showing source for";
-	$s_not_supported_part1 = "This version";
-	$s_not_supported_part2 = "of php does not support";
+	$s_show_source_for_msg = 'Showing source for';
+	$s_not_supported_part1 = 'This version';
+	$s_not_supported_part2 = 'of php does not support';
 
 	# signup.php3
-	$s_invalid_email = "メールアドレスが正しく入力されていません。";
-	$s_duplicate_username = "ユーザ名が重複しています。他のユーザ名を入力して下さい。";
-	$s_account_create_fail = "アカウントの作成に失敗しました。";
-	$s_account_added = "アカウントの作成に成功しました。";
-	$s_password_emailed_msg = "パスワードを、メールで送信しました。";
-	$s_no_reponse_msg = "1週間以内にログオンしなければ、アカウントが削除されます。";
+	$s_invalid_email = 'メールアドレスが正しく入力されていません。';
+	$s_duplicate_username = 'ユーザ名が重複しています。他のユーザ名を入力して下さい。';
+	$s_account_create_fail = 'アカウントの作成に失敗しました。';
+	$s_account_added = 'アカウントの作成に成功しました。';
+	$s_password_emailed_msg = 'パスワードを、メールで送信しました。';
+	$s_no_reponse_msg = '1週間以内にログオンしなければ、アカウントが削除されます。';
 
 	# signup_page.php3
-	$s_signup_info = "希望するユーザ名と正しいメールアドレスを入力して下さい。パスワードは、入力されたメールアドレスに送信されます。";
-	$s_signup_title = "ユーザ登録";
-	$s_signup_button = "登録";
+	$s_signup_info = '希望するユーザ名と正しいメールアドレスを入力して下さい。パスワードは、入力されたメールアドレスに送信されます。';
+	$s_signup_title = 'ユーザ登録';
+	$s_signup_button = '登録';
 
 	# site_settings_edit_page.php3
-	$s_edit_site_settings_title = "サイト設定の編集";
-	$s_save_settings_button = "保存";
+	$s_edit_site_settings_title = 'サイト設定の編集';
+	$s_save_settings_button = '保存';
 
 	# site_settings_page.php3
-	$s_site_settings_title = "サイト設定";
-	$s_system_info_link = "システム情報";
-	$s_site_settings_link = "サイト設定";
+	$s_site_settings_title = 'サイト設定';
+	$s_system_info_link = 'システム情報';
+	$s_site_settings_link = 'サイト設定';
 
 	# site_settings_update.php3
-	$s_site_settings_updated_msg = "サイト設定が更新されました。";
+	$s_site_settings_updated_msg = 'サイト設定が更新されました。';
 
 	# summary_page.php3
-	$s_summary_title = "バグ要約";
-	$s_summary_jpgraph_link = "高度なバグ要約";
-	$s_by_status = "状態による";
-	$s_by_date = "日数による";
-	$s_by_severity = "重要度による";
-	$s_by_resolution = "分析結果による";
-	$s_by_category = "カテゴリによる";
-	$s_by_priority = "優先度による";
-	$s_by_developer = "開発者による";
-	$s_by_reporter ="登録者による";
-	$s_time_stats = "バグ解決にかかる時間";
-	$s_longest_open_bug = "最大放置日数";
-	$s_longest_open = "最大解決日数";
-	$s_average_time = "平均解決日数";
-	$s_total_time = "合計解決日数";
-	$s_developer_stats = "開発者による";
-	$s_reporter_stats = "登録者による";
-	$s_orct = "(新規/解決済/完了/合計)";
+	$s_summary_title = 'バグ要約';
+	$s_summary_jpgraph_link = '高度なバグ要約';
+	$s_by_status = '状態による';
+	$s_by_date = '日数による';
+	$s_by_severity = '重要度による';
+	$s_by_resolution = '分析結果による';
+	$s_by_category = 'カテゴリによる';
+	$s_by_priority = '優先度による';
+	$s_by_developer = '開発者による';
+	$s_by_reporter ='登録者による';
+	$s_time_stats = 'バグ解決にかかる時間';
+	$s_longest_open_bug = '最大放置日数';
+	$s_longest_open = '最大解決日数';
+	$s_average_time = '平均解決日数';
+	$s_total_time = '合計解決日数';
+	$s_developer_stats = '開発者による';
+	$s_reporter_stats = '登録者による';
+	$s_orct = '(新規/解決済/完了/合計)';
 
 	# view_all_bug_page.php3
-	$s_any = "全て";
-	$s_show = "表示数";
-	$s_changed = "変更(時間)";
-	$s_hide_closed = "終了は表示しない";
-	$s_viewing_bugs_title = "バグの表示";
-	$s_updated = "最終更新日時";
+	$s_any = '全て';
+	$s_show = '表示数';
+	$s_changed = '変更(時間)';
+	$s_hide_closed = '終了は表示しない';
+	$s_viewing_bugs_title = 'バグの表示';
+	$s_updated = '最終更新日時';
 
 	# view_all_inc.php
-	$s_none = "無し";
-	$s_search ="検索";
-	$s_view_prev_link = "↑";
-	$s_view_next_link = "↓";
+	$s_none = '無し';
+	$s_search ='検索';
+	$s_view_prev_link = '↑';
+	$s_view_next_link = '↓';
 
 	# view_bug_advanced_page.php3
-	$s_view_simple_link = "簡単な表示";
-	$s_viewing_bug_advanced_details_title = "バグの内容（高度な表示）";
-	$s_product_build = "製品ビルド";
-	$s_system_profile = "システムの詳細説明";
-	$s_update_bug_button = "更新";
-	$s_bug_assign_button    = "私が担当します";
-	$s_reopen_bug_button = "バグの再登録";
-	$s_attached_files = "添付ファイル";
+	$s_view_simple_link = '簡単な表示';
+	$s_viewing_bug_advanced_details_title = 'バグの内容（高度な表示）';
+	$s_product_build = '製品ビルド';
+	$s_system_profile = 'システムの詳細説明';
+	$s_update_bug_button = '更新';
+	$s_bug_assign_button    = '私が担当します';
+	$s_reopen_bug_button = 'バグの再登録';
+	$s_attached_files = '添付ファイル';
 
 	# view_bug_inc.php
 
 	# view_bug_page.php3
-	$s_view_advanced_link = "高度な表示";
-	$s_viewing_bug_simple_details_title = "バグの内容（簡単な表示）";
+	$s_view_advanced_link = '高度な表示';
+	$s_viewing_bug_simple_details_title = 'バグの内容（簡単な表示）';
 ?>

@@ -15,10 +15,11 @@ Mantis
  * Updated Russian localization.
  * Updated Romanian localization.
  * Updated German localization.
- * Modified input checked varaibles to be prefixed by $c_.
+ * Modified input checked variables to be prefixed by $c_.
  * Reworked code formatting for $c_ variables.
  * Modified form elements to be standards compliant.
  * Modified core_print_API.php to escape double quotes in text fields, instead of replacing them by single quotes.
+ * Modified all string files to use single quotes instead of double quotes.
 
 2002.05.19  -  0.17.3
 
