@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.141 2004-12-12 21:49:57 bpfennigschmidt Exp $
+	# $Id: html_api.php,v 1.142 2004-12-17 15:21:23 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -54,6 +54,8 @@
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'project_api.php' );
 	require_once( $t_core_dir . 'helper_api.php' );
+	require_once( $t_core_dir . 'authentication_api.php' );
+	require_once( $t_core_dir . 'user_api.php' );
 
 	$g_rss_feed_url = null;
 
@@ -683,6 +685,62 @@
 			$t_color = get_status_color( $t_s[0] );
 
 			PRINT "<td class=\"small-caption\" width=\"$width%\" bgcolor=\"$t_color\">$t_val</td>";
+		}
+
+		PRINT '</tr>';
+		PRINT '</table>';
+	}
+
+ 	# --------------------
+	# Print the legend for the status percentage
+	function html_status_percentage_legend() {
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
+		$t_project_id = helper_get_current_project();
+		$t_user_id = auth_get_current_user_id();
+		
+		#checking if it's a per project statistic or all projects
+		if ( ALL_PROJECTS == $t_project_id ) {
+			# Only projects to which the user have access
+			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$specific_where = '1=1';
+			}
+		} else {
+			$specific_where = " project_id='$t_project_id'";
+		}
+		
+		$query = "SELECT status
+				FROM $t_mantis_bug_table
+				WHERE $specific_where
+				ORDER BY status";
+		$result = db_query( $query );
+		
+		$bug_count = db_num_rows( $result );
+		$t_status_array = array();
+
+		while ( $row = db_fetch_array( $result ) ) {
+			$t_status_array[] = $row[status];
+		}
+
+		$t_status_count_array = array_count_values( $t_status_array );
+
+		PRINT '<br />';
+		PRINT '<table class="width100" cellspacing="0">';
+		PRINT '<tr>';
+
+
+		$t_arr		= explode_enum_string( config_get( 'status_enum_string' ) );
+		$enum_count	= count( $t_arr );
+		for ( $i=0; $i < $enum_count; $i++) {
+			$t_s = explode_enum_arr( $t_arr[$i] );
+			$t_color = get_status_color( $t_s[0] );
+			$width = round( ( $t_status_count_array[ $t_s[0] ] / $bug_count ) * 100 );
+			
+			if ($width > 0) {
+				PRINT "<td class=\"small-caption-center\" width=\"$width%\" bgcolor=\"$t_color\">$width%</td>";
+			}
 		}
 
 		PRINT '</tr>';

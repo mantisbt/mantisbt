@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.230 2004-12-16 22:41:26 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.231 2004-12-17 15:20:59 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 
@@ -573,6 +573,8 @@
 	$g_default_email_on_priority_minimum_severity	= OFF; # @@@ Unused
 	$g_default_email_bugnote_limit					= 0;
 	# default_language - is set to site language
+
+	$g_status_percentage_legend = ON;
 
 	###############################
 	# Mantis Summary Settings
