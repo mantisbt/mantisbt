@@ -17,14 +17,19 @@
 	check_bug_exists( $f_id );
 	$c_id = (integer)$f_id;
 
-	$t_handler_id = get_current_user_field( 'id' );
+	$t_handler_id	= get_current_user_field( 'id' );
+
+	$h_status		= get_bug_field( $c_id, 'status' );
 
 	# Update fields
 	$t_clo_val = CLOSED;
 	$query = "UPDATE $g_mantis_bug_table
 			SET status='$t_clo_val'
-			WHERE id='$f_id'";
+			WHERE id='$c_id'";
 	$result = db_query($query);
+
+	# log changes
+	history_log_event( $c_id, 'status', $h_status );
 
 	# get user information
 	$u_id = get_current_user_field( 'id' );
@@ -51,12 +56,15 @@
 				VALUES
 				( null, '$c_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
 		$result = db_query( $query );
+
+		# updated the last_updated date
+		$result = bug_date_update( $c_id );
+
+		# log new bugnote
+		history_log_event_special( $c_id, BUGNOTE_ADDED );
+
+		email_close( $c_id );
 	}
-
-	# updated the last_updated date
-	$result = bug_date_update( $f_id );
-
-	email_close( $f_id );
 
 	$t_redirect_url = $g_view_all_bug_page;
 	if ( $result ) {

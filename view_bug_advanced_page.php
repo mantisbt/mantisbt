@@ -54,6 +54,7 @@
 <?php if ( BOTH == $g_show_view ) { ?>
 		<span class="small"><?php print_bracket_link( $g_view_bug_page.'?f_id='.$f_id, $s_view_simple_link )?></span>
 <?php }?>
+	<span class="small"><?php print_bracket_link( $g_view_bug_advanced_page.'?f_id='.$f_id.'&amp;f_history=1#history', $s_bug_history ) ?></span>
 	<span class="small"><?php print_bracket_link( $g_print_bug_page.'?f_id='.$f_id, $s_print ) ?></span>
 	</td>
 </tr>
@@ -378,8 +379,8 @@
 ?>
 <?php # CLOSE form BEGIN ?>
 <?php if ( ( access_level_check_greater_or_equal( $g_close_bug_threshold ) ||
-		( ON == $g_allow_reporter_close && 
-		  $v_reporter_id == $t_user_id ) ) && 
+		( ON == $g_allow_reporter_close &&
+		  $v_reporter_id == $t_user_id ) ) &&
 		( RESOLVED == $v_status ) ) { ?>
 	<td class="center">
 		<form method="post" action="<?php echo $g_bug_close_page ?>">
@@ -436,7 +437,12 @@
 </tr>
 </table>
 
-<?php include( $g_bug_file_upload_inc ) ?>
-<?php include( $g_bugnote_include_file ) ?>
+<?php
+	include( $g_bug_file_upload_inc );
+	include( $g_bugnote_include_file );
 
+	if ( isset( $f_history ) ) {
+		include( $g_history_include_file );
+	}
+?>
 <?php print_page_bot1( __FILE__ ) ?>

@@ -41,20 +41,24 @@
 				VALUES
 				( null, '$c_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
 		$result = db_query( $query );
-	}
-	# update bug last updated
-   	$result = bug_date_update( $f_id );
 
-   	# notify reporter and handler
-   	if ( get_bug_field( $f_id, 'status' ) == FEEDBACK ) {
-   		if ( get_bug_field( $f_id, 'resolution' ) == REOPENED ) {
-   			email_reopen( $f_id );
-   		} else {
-   			email_feedback( $f_id );
-   		}
-   	} else {
-   		email_bugnote_add( $f_id );
-   	}
+		# update bug last updated
+	   	$result = bug_date_update( $f_id );
+
+		# log new bug
+		history_log_event_special( $f_id, BUGNOTE_ADDED );
+
+	   	# notify reporter and handler
+	   	if ( get_bug_field( $f_id, 'status' ) == FEEDBACK ) {
+	   		if ( get_bug_field( $f_id, 'resolution' ) == REOPENED ) {
+	   			email_reopen( $f_id );
+	   		} else {
+	   			email_feedback( $f_id );
+	   		}
+	   	} else {
+	   		email_bugnote_add( $f_id );
+	   	}
+	}
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id, 1 );

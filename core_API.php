@@ -81,7 +81,7 @@
 	require( 'core_news_API.php' );
 	require( 'core_icon_API.php' );
 	require( 'core_ldap_API.php' );
-	#require( 'core_history_API.php' );
+	require( 'core_history_API.php' );
 	require( 'core_proj_user_API.php' );
 	require( 'core_category_API.php' );
 	require( 'core_version_API.php' );

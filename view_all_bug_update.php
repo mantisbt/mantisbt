@@ -28,6 +28,9 @@
 			if ( !$result ) {
 				break;
 			}
+
+			# log new project_id
+			history_log_event( $t_new_id, 'project_id', $g_project_cookie_val );
 		}
 	}
 

@@ -64,6 +64,19 @@
 		return db_result( $result, 0 );
 	}
 	# --------------------
+	# Returns the specified field value of the specified bug text
+	function get_file_field( $p_file_id, $p_field_name ) {
+		global 	$g_string_cookie_val,
+				$g_mantis_bug_file_table;
+
+		# get info
+		$query = "SELECT $p_field_name
+				FROM $g_mantis_bug_file_table
+				WHERE id='$p_file_id'";
+		$result = db_query( $query );
+		return db_result( $result, 0 );
+	}
+	# --------------------
 	# converts a 1 value to X
 	# converts a 0 value to a space
 	function trans_bool( $p_num ) {

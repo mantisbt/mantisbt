@@ -17,7 +17,10 @@
 	check_bug_exists( $f_id );
 	$c_id = (integer)$f_id;
 
-	$t_handler_id = get_current_user_field( 'id' );
+	$t_handler_id	= get_current_user_field( 'id' );
+
+	$h_status		= get_bug_field( $c_id, 'status' );
+	$h_resolution	= get_bug_field( $c_id, 'resolution' );
 
 	# Update fields
 	$t_fee_val = FEEDBACK;
@@ -27,6 +30,10 @@
 				resolution='$t_reop'
     		WHERE id='$c_id'";
    	$result = db_query($query);
+
+	# log changes
+	history_log_event( $c_id, 'status',     $h_status );
+	history_log_event( $c_id, 'resolution', $h_resolution );
 
 	# get user information
 	$u_id = get_current_user_field( 'id' );
@@ -53,12 +60,16 @@
 				VALUES
 				( null, '$c_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
 		$result = db_query( $query );
-	}
-	# update bug last updated
-	$result = bug_date_update( $f_id );
 
-   	# notify reporter and handler
-   	email_reopen( $f_id );
+		# update bug last updated
+		$result = bug_date_update( $f_id );
+
+		# log new bugnote
+		history_log_event_special( $f_id, BUGNOTE_ADDED );
+
+	   	# notify reporter and handler
+	   	email_reopen( $f_id );
+	}
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id, 1 );

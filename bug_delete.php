@@ -80,6 +80,12 @@
 		WHERE bug_id='$c_id'";
 	$result = db_query($query);
 
+	# Delete the bug history
+	$query = "DELETE
+		FROM $g_mantis_bug_history_table
+		WHERE bug_id='$c_id'";
+	$result = db_query($query);
+
 	$t_redirect_url = $g_view_all_bug_page;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );

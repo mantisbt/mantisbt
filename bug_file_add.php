@@ -58,6 +58,9 @@
 
 		# updated the last_updated date
 		$result = bug_date_update( $f_id );
+
+		# log new file
+		history_log_event_special( $f_id, FILE_ADDED, $f_file_name );
 	}
 
 	# Determine which view page to redirect back to.

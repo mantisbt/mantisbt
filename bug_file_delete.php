@@ -13,8 +13,10 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
-  
+
 	$c_file_id = (integer)$f_file_id;
+
+	$t_file_name = get_file_field( $c_file_id, 'filename' );
 
 	if ( DISK == $g_file_upload_method ) {
 		# grab the file name
@@ -32,6 +34,9 @@
 	$query = "DELETE FROM $g_mantis_bug_file_table
 			WHERE id='$c_file_id'";
 	$result = db_query( $query );
+
+	# log file deletion
+	history_log_event_special( $f_id, FILE_DELETED, $t_file_name );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id );

@@ -107,6 +107,18 @@
 	define( 'NO_ANONYMOUS', 2 );
 	define( 'ADMIN_ONLY',   3 );
 
+	define( 'NORMAL_TYPE',               0 );
+	define( 'NEW_BUG',                   1 );
+	define( 'BUGNOTE_ADDED',             2 );
+	define( 'BUGNOTE_UPDATED',           3 );
+	define( 'BUGNOTE_DELETED',           4 );
+	define( 'SUMMARY_UPDATED',           5 );
+	define( 'DESCRIPTION_UPDATED',       6 );
+	define( 'ADDITIONAL_INFO_UPDATED',   7 );
+	define( 'STEP_TO_REPRODUCE_UPDATED', 8 );
+	define( 'FILE_ADDED',                9 );
+	define( 'FILE_DELETED',             10 );
+
 	# error messages
 	define( 'ERROR_GENERIC',              0 );
 	define( 'ERROR_SQL',                  1 );

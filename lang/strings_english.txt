@@ -30,6 +30,22 @@
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -60,6 +76,7 @@
 	$s_access_levels_enum_string      = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
 	$s_project_status_enum_string     = '10:development,30:release,50:stable,70:obsolete';
 	$s_project_view_state_enum_string = '10:public,50:private';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:none,20:low,30:normal,40:high,50:urgent,60:immediate';
 	$s_severity_enum_string           = '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block';

@@ -190,6 +190,9 @@
 			$result = db_query( $query );
 		}
 
+		# log new bug
+		history_log_event_special( $t_bug_id, NEW_BUG );
+
 		# Notify users of new bug report
 		if ( ON == $g_notify_developers_on_new ) {
 			email_new_bug( $t_bug_id );

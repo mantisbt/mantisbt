@@ -27,6 +27,9 @@
 	# updated the last_updated date
 	bugnote_date_update( $f_bugnote_id );
 
+	# log new bug
+	history_log_event_special( $f_id, BUGNOTE_UPDATED );
+
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_bug_link_plain( $f_id );
 	if ( $result ) {
