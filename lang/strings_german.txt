@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.70 $
+	# $Revision: 1.71 $
 	# $Author: jlatour $
-	# $Date: 2003-05-07 15:48:27 $
+	# $Date: 2003-05-16 10:43:17 $
 	#
-	# $Id: strings_german.txt,v 1.70 2003-05-07 15:48:27 jlatour Exp $
+	# $Id: strings_german.txt,v 1.71 2003-05-16 10:43:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -51,13 +51,13 @@
 	$s_copy_users = 'Benutzer kopieren';
 	$s_copy_categories_from = 'Kategorien kopieren von';
 	$s_copy_categories_to = 'Kategorien kopieren nach';
-	$s_bug_history = 'Fehler Historie';
+	$s_bug_history = 'Fehlerhistorie';
 	$s_field = 'Feld';
 	$s_old_value = 'Alter Wert';
 	$s_new_value = 'Neuer Wert';
-	$s_date_modified = 'Äderungsdatum';
+	$s_date_modified = 'Änderungsdatum';
 	$s_bugnote = 'Fehlernotiz';
-	$s_change = 'Äderung';
+	$s_change = 'Änderung';
 	$s_bugnote_view_state = 'Fehlernotiz Anzeigestatus';
 	$s_bug_monitor = 'Fehler beobachten';
 	$s_bug_end_monitor = 'Fehler Beobachtung beendet';
