@@ -48,7 +48,7 @@
 						}
 						break;
 			case DATABASE:
-						$t_content = addslashes( fread ( fopen( $f_file, "r" ), $t_file_size ) );
+						$t_content = addslashes( fread ( fopen( $f_file, "rb" ), $t_file_size ) );
 						$query = "INSERT INTO $g_mantis_bug_file_table
 								(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 								VALUES
