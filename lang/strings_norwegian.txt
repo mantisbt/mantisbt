@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.88 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:21:03 $
+	# $Revision: 1.89 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-21 04:47:59 $
 	#
-	# $Id: strings_norwegian.txt,v 1.88 2005-02-28 07:21:03 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.89 2005-03-21 04:47:59 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -625,6 +625,7 @@ $s_manage_custom_field_link = 'Administrer brukerdefinerte felter';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Tilgangsrapport';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Opprett konto';
@@ -642,6 +643,8 @@ $s_last_visit = 'Siste pålogging';
 $s_edit_user_link = 'Rediger bruker';
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -669,6 +672,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Prosjektet har blitt lagt til ...';
@@ -1070,7 +1087,7 @@ $s_custom_field_require_resolved = 'Påkreves ved løsning';
 $s_custom_field_require_closed = 'Påkreves ved lukking';
 
 $s_custom_field_sequence = 'Sekvens';
-$s_custom_field_type_enum_string = '0:Streng,1:Numerisk,2:Flyttall,3:Oppramsing,4:Epost,5:Sjekkboks,6:Liste,7:Flervalgsliste';
+$s_custom_field_type_enum_string = '0:Streng,1:Numerisk,2:Flyttall,3:Oppramsing,4:Epost,5:Sjekkboks,6:Liste,7:Flervalgsliste,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'Dette feltet brukes nå av minst ett annet prosjekt.  Hvis du fortsetter vil alle verdier for dette feltet bli sletta.  Det er ikke mulig å gå tilbake på dette valget.  Hvis du ikke vil slette dette feltet, trykk Tilbake-knappen i vevleseren din.  For å fortsette, trykk knappen under.';
 $s_confirm_custom_field_deletion = 'Er du sikker på at du vil slette dette feltet og alle dets tilkoblede verdier?';

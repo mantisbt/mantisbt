@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.84 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:20:57 $
+	# $Revision: 1.85 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-21 04:47:58 $
 	#
-	# $Id: strings_dutch.txt,v 1.84 2005-02-28 07:20:57 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.85 2005-03-21 04:47:58 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -627,6 +627,7 @@ $s_manage_custom_field_link = 'Beheer gebruikersvelden';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Aanmaken account';
@@ -644,6 +645,8 @@ $s_last_visit = 'Laatste bezoek';
 $s_edit_user_link = 'Aanpassen gebruiker';
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -671,6 +674,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project is succesvol toegevoegd.';
@@ -1072,7 +1089,7 @@ $s_custom_field_require_resolved = 'Verplicht bij oplossen';
 $s_custom_field_require_closed = 'Verplicht bij sluiten';
 
 $s_custom_field_sequence = 'Rij';
-$s_custom_field_type_enum_string = '0:String,1:Numeriek,2:Drijvende komma,3:Enumeratie,4:E-mail,5:Checkbox,6:List,7:Multiselectie lijst';
+$s_custom_field_type_enum_string = '0:String,1:Numeriek,2:Drijvende komma,3:Enumeratie,4:E-mail,5:Checkbox,6:List,7:Multiselectie lijst,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste &eacute;&eacute;n project.  Als u doorgaat, zullen alle waarden voor dit veld permanent verwijderd worden.  Deze actie kan niet ongedaan gemaakt worden.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk op onderstaande knop om door te gaan.';
 $s_confirm_custom_field_deletion = 'Weet u zeker dat u dit gebruikersveld en alle bijbehorende waarden wilt verwijderen?';

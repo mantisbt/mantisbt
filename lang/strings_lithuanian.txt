@@ -9,11 +9,11 @@
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# Lithuanian: Vilius Ðumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
 	# -------------------------------------------------
-	# $Revision: 1.25 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:21:03 $
+	# $Revision: 1.26 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-21 04:47:59 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.25 2005-02-28 07:21:03 jlatour Exp $
+	# $Id: strings_lithuanian.txt,v 1.26 2005-03-21 04:47:59 bigbadger Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -636,6 +636,7 @@ $s_manage_custom_field_link = 'Tvarkyti papildomus laukus';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Sukurti naujà vartotojà';
@@ -653,6 +654,8 @@ $s_last_visit = 'Paskutinis apsilankymas';
 $s_edit_user_link = 'Redaguoti vartotojà';
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -680,6 +683,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projektas sëkmingai sukurtas...';
@@ -1081,7 +1098,7 @@ $s_custom_field_require_resolved = 'Reikia uþpildyti sprendþiant';
 $s_custom_field_require_closed = 'Reikia uþpildyti uþdarant';
 
 $s_custom_field_sequence = 'Eilës tvarka';
-$s_custom_field_type_enum_string = '0:Eilutë,1:Sveikasis skaièius,2:Realusis skaièius,3:Sugrupuotas sàraðas,4:El.paðto adresas,5:Paþymëjimo laukas,6:Sàraðas,7:Daugialypis sàraðas';
+$s_custom_field_type_enum_string = '0:Eilutë,1:Sveikasis skaièius,2:Realusis skaièius,3:Sugrupuotas sàraðas,4:El.paðto adresas,5:Paþymëjimo laukas,6:Sàraðas,7:Daugialypis sàraðas,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'Ðis laukas susietas bent su vienu projektu.  Jei pratæsite, visos ðio lauko reikðmës bus iðtrintos.  Veiksmo nebus galima atðaukti.  Jeigu nenorite iðtrinti ðio lauko, paspauskite mygtukà "Atgal" savo narðyklëje.  Jei norite tæsti, spauskite mygtukà apaèioje';
 $s_confirm_custom_field_deletion = 'Ar tikrai norite iðtrinti ðá papildomà laukà ir visas susijusias reikðmes?';

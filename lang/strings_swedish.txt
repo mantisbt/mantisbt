@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.85 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:21:04 $
+	# $Revision: 1.86 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-21 04:48:01 $
 	#
-	# $Id: strings_swedish.txt,v 1.85 2005-02-28 07:21:04 jlatour Exp $
+	# $Id: strings_swedish.txt,v 1.86 2005-03-21 04:48:01 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -623,6 +623,7 @@ $s_manage_custom_field_link = 'Hantera skräddarsydda fält';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Skapa nytt konto';
@@ -640,6 +641,8 @@ $s_last_visit = 'Senast inloggad';
 $s_edit_user_link = 'Redigera';
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -667,6 +670,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Projektet har lagts till...';
@@ -1068,7 +1085,7 @@ $s_custom_field_require_resolved = 'Krävs vid lösning';
 $s_custom_field_require_closed = 'Krävs vid stängning';
 
 $s_custom_field_sequence = 'Serie';
-$s_custom_field_type_enum_string = '0:Sträng,1:Numerisk,2:Flyttal,3:Uppräkning,4:E-post,5:Checkbox,6:List,7:Flervalslista';
+$s_custom_field_type_enum_string = '0:Sträng,1:Numerisk,2:Flyttal,3:Uppräkning,4:E-post,5:Checkbox,6:List,7:Flervalslista,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'Detta fält är för närvarande länkat till åtminstone ett projekt.  Om du fortsätter kommer alla värden för dett fält att tas bort permanent.  Denna åtgärd kan inte ångras.  Om du inte vill ta bort detta fält, tryck \'Bakåt\' i din webbläsare.  För att fortsätta, tryck på knappen nedan';
 $s_confirm_custom_field_deletion = 'Är du säker på att du vill ta bort detta skräddarsydda fält och alla associerade värden?';

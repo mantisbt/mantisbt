@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.84 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:21:04 $
+	# $Revision: 1.85 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-21 04:48:00 $
 	#
-	# $Id: strings_spanish.txt,v 1.84 2005-02-28 07:21:04 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.85 2005-03-21 04:48:00 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -628,6 +628,7 @@ $s_manage_custom_field_link = 'Administrar Campos Personalizados';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Crear cuenta';
@@ -645,6 +646,8 @@ $s_last_visit = 'Última Visita';
 $s_edit_user_link = 'Editar Usuario';
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -672,6 +675,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = 'El proyecto ha sido agregado...';
@@ -1073,7 +1090,7 @@ $s_custom_field_require_resolved = 'Requerido al resolver';
 $s_custom_field_require_closed = 'Requerido al cerrar';
 
 $s_custom_field_sequence = 'Secuencia';
-$s_custom_field_type_enum_string = '0:Cadena,1:Numérico,2:Flotante,3:Enumeración,4:Email,5:Casilla de verificación,6:Lista,7:Selección múltiple';
+$s_custom_field_type_enum_string = '0:Cadena,1:Numérico,2:Flotante,3:Enumeración,4:Email,5:Casilla de verificación,6:Lista,7:Selección múltiple,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'Este campo está vinculado al menos a un proyecto.  Si continúa todos los valores para este campo serán borrados permanentemente.  Esta acción no puede volverse atrás.  Si no desea eliminar el campo, haga click sobre el botón Atrás de su navegador.  Para proceder, haga click sobre el botón que aparece abajo';
 $s_confirm_custom_field_deletion = '¿Seguro que desea eliminar este campo y todos los valores asociados?';

@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.85 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:21:04 $
+	# $Revision: 1.86 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-21 04:47:59 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.85 2005-02-28 07:21:04 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.86 2005-03-21 04:47:59 bigbadger Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.217 -- jferraz 2004/08/23
 	###########################################################################
@@ -627,6 +627,7 @@ $s_manage_custom_field_link = 'Gerenciar Campos Personalizados';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Criar Nova Conta';
@@ -644,6 +645,8 @@ $s_last_visit = 'Última Visita';
 $s_edit_user_link = 'Alterar Usuário';
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -671,6 +674,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = 'O projeto foi adicionado com sucesso...';
@@ -1072,7 +1089,7 @@ $s_custom_field_require_resolved = 'Requerido na resolução';
 $s_custom_field_require_closed = 'Requerido no fechamento';
 
 $s_custom_field_sequence = 'Seqüência';
-$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Caixa de Marcação (V/F),6:Lista,7:Lista de seleção múltipla';
+$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Caixa de Marcação (V/F),6:Lista,7:Lista de seleção múltipla,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'Este campo atualmente está ligado a pelo menos um projeto.  Se você continuar, todos os valores para este campo serão apagados permanentemente.  Esta ação não pode ser desfeita.  Se você não deseja apagar este campo, clique no botão Voltar de seu navegador.  Para continuar, clique no botão abaixo.';
 $s_confirm_custom_field_deletion = 'Você tem certeza que deseja apagar este campo personalizado e todos os seus valores associados?';

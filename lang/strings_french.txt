@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.96 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:20:57 $
+	# $Revision: 1.97 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-21 04:47:58 $
 	#
-	# $Id: strings_french.txt,v 1.96 2005-02-28 07:20:57 jlatour Exp $
+	# $Id: strings_french.txt,v 1.97 2005-03-21 04:47:58 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -630,6 +630,7 @@ $s_manage_custom_field_link = 'Gérer les champs personnalisés';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Créer un compte';
@@ -647,6 +648,8 @@ $s_last_visit = 'Dernière visite';
 $s_edit_user_link = 'Modifier l\'utilisateur';
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -674,6 +677,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Nouveau projet installé avec succès...';
@@ -1075,7 +1092,7 @@ $s_custom_field_require_resolved = 'Nécessaire à la résolution';
 $s_custom_field_require_closed = 'Nécessaire à la fermeture';
 
 $s_custom_field_sequence = 'Suite';
-$s_custom_field_type_enum_string = '0:Chaîne,1:Entier,2:Décimal,3:Enumération,4:Email,5:Checkbox,6:List,7:Multiselection list';
+$s_custom_field_type_enum_string = '0:Chaîne,1:Entier,2:Décimal,3:Enumération,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'Ce champ est actuellement lié à au moins un projet.  Si vous continuez, toutes les valeurs de ce champ seront supprimées.  Cette action ne peut être annulée.  Si vous ne voulez pas supprimer ce champ, cliquer sur le bouton Retour de votre navigateur.  Sinon pour supprimer ce champ, cliquer sur le bouton ci dessous';
 $s_confirm_custom_field_deletion = 'Etes vous sûr de vouloir supprimer ce champ personnalisé et toutes les valeurs associées ?';

@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.63 $
-	# $Author: jlatour $
-	# $Date: 2005-02-28 07:20:56 $
+	# $Revision: 1.64 $
+	# $Author: bigbadger $
+	# $Date: 2005-03-21 04:47:57 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.63 2005-02-28 07:20:56 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.64 2005-03-21 04:47:57 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
@@ -641,6 +641,7 @@ $s_manage_custom_field_link = '自定义字段管理';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Create New Account';
@@ -658,6 +659,8 @@ $s_last_visit = "最后一次登录";
 $s_edit_user_link = "编辑用户";
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -685,6 +688,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = "已添加项目...";
@@ -1086,7 +1103,7 @@ $s_custom_field_require_resolved = '解决 Issue 时必需';
 $s_custom_field_require_closed = '关闭 Issue 时必需';
 
 $s_custom_field_sequence = '顺序';
-$s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:电子邮件,5:Checkbox,6:列表,7:多选列表';
+$s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:电子邮件,5:Checkbox,6:列表,7:多选列表,8:Date';
 
 $s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“后退”按钮；点击下面的按钮继续删除。';
 $s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
