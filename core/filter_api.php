@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.88 2005-02-26 01:00:39 vboctor Exp $
+	# $Id: filter_api.php,v 1.89 2005-03-14 11:41:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -139,7 +139,7 @@
 			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR $t_bug_table.reporter_id='$t_user_id')" );
 		} else {
 			$t_view_state = db_prepare_int( $t_filter['view_state'] );
-			if ( ( $t_view_state != '[any]' ) && ( !is_blank( $t_view_state ) ) ) {
+			if ( ( $t_view_state != META_FILTER_ANY ) && ( !is_blank( $t_view_state ) ) ) {
 				array_push( $t_where_clauses, "($t_bug_table.view_state='$t_view_state')" );
 			}
 		}
@@ -148,7 +148,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['reporter_id'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -159,7 +159,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['reporter_id'] as $t_filter_member ) {
-				if ( '[none]' == $t_filter_member ) {
+				if ( META_FILTER_NONE == $t_filter_member ) {
 					array_push( $t_clauses, "0" );
 				} else {
 					$c_reporter_id = db_prepare_int( $t_filter_member );
@@ -187,7 +187,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['handler_id'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -198,7 +198,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['handler_id'] as $t_filter_member ) {
-				if ( '[none]' == $t_filter_member ) {
+				if ( META_FILTER_NONE == $t_filter_member ) {
 					array_push( $t_clauses, 0 );
 				} else {
 					$c_handler_id = db_prepare_int( $t_filter_member );
@@ -220,7 +220,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['show_category'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+			if ( META_FILTER_ANY == $t_filter_member ) {
 				$t_any_found = true;
 			}
 		}
@@ -232,7 +232,7 @@
 
 			foreach( $t_filter['show_category'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( '[none]' == $t_filter_member ) {
+				if ( META_FILTER_NONE == $t_filter_member ) {
 					array_push( $t_clauses, "''" );
 				} else {
 					$c_show_category = db_prepare_string( $t_filter_member );
@@ -249,7 +249,7 @@
 		# severity
 		$t_any_found = false;
 		foreach( $t_filter['show_severity'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -287,7 +287,7 @@
 			$t_this_status = $t_filter['show_status'][0];
 			$t_this_hide_status = $t_filter['hide_status'][0];
 
-			if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 === $t_this_status ) ) {
+			if ( ( META_FILTER_ANY == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 === $t_this_status ) ) {
 				$t_any_found = true;
 			}
 			if ( $t_any_found ) {
@@ -304,7 +304,7 @@
 			$t_any_found = false;
 			foreach( $t_filter['show_status'] as $t_this_status ) {
 				$t_desired_statuses[] = $t_this_status;
-				if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 === $t_this_status ) ) {
+				if ( ( META_FILTER_ANY == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 === $t_this_status ) ) {
 					$t_any_found = true;
 				}
 			}
@@ -330,7 +330,7 @@
 		# resolution
 		$t_any_found = false;
 		foreach( $t_filter['show_resolution'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+			if ( META_FILTER_ANY == $t_filter_member ) {
 				$t_any_found = true;
 			}
 		}
@@ -354,7 +354,7 @@
 		# priority
 		$t_any_found = false;
 		foreach( $t_filter['show_priority'] as $t_filter_member ) {
-				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 					$t_any_found = true;
 				}
 		}
@@ -379,7 +379,7 @@
 		# product build
 		$t_any_found = false;
 		foreach( $t_filter['show_build'] as $t_filter_member ) {
-				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -391,7 +391,7 @@
 
 			foreach( $t_filter['show_build'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( '[none]' == $t_filter_member ) {
+				if ( META_FILTER_NONE == $t_filter_member ) {
 					array_push( $t_clauses, "''" );
 				} else {
 					$c_show_build = db_prepare_string( $t_filter_member );
@@ -408,7 +408,7 @@
 		# product version
 		$t_any_found = false;
 		foreach( $t_filter['show_version'] as $t_filter_member ) {
-				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -420,7 +420,7 @@
 
 			foreach( $t_filter['show_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( '[none]' == $t_filter_member ) {
+				if ( META_FILTER_NONE == $t_filter_member ) {
 					array_push( $t_clauses, "''" );
 				} else {
 					$c_show_version = db_prepare_string( $t_filter_member );
@@ -453,7 +453,7 @@
 		# fixed in version
 		$t_any_found = false;
 		foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -465,7 +465,7 @@
 
 			foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
 				$t_filter_member = stripslashes( $t_filter_member );
-				if ( '[none]' == $t_filter_member ) {
+				if ( META_FILTER_NONE == $t_filter_member ) {
 					array_push( $t_clauses, "''" );
 				} else {
 					$c_fixed_in_version = db_prepare_string( $t_filter_member );
@@ -482,7 +482,7 @@
 		# users monitoring a bug
 		$t_any_found = false;
 		foreach( $t_filter['user_monitor'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+			if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -542,7 +542,7 @@
 				# Ignore all custom filters that are not set, or that are set to '' or "any"
 				$t_any_found = false;
 				foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
-				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
+				if ( ( META_FILTER_ANY == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 						$t_any_found = true;
 					}
 				}
@@ -579,10 +579,10 @@
 
 						foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
 							if ( isset( $t_filter_member ) &&
-								( '[any]' != strtolower( $t_filter_member ) ) ) {
+								( META_FILTER_ANY != strtolower( $t_filter_member ) ) ) {
 
 								$t_filter_member = stripslashes( $t_filter_member );
-								if ( '[none]' == $t_filter_member ) { # coerce filter value if selecting 'none'
+								if ( META_FILTER_NONE == $t_filter_member ) { # coerce filter value if selecting META_FILTER_NONE
 									$t_filter_member = '';
 								}
 
@@ -983,7 +983,7 @@
 										?>
 										<input type="hidden" name="reporter_id[]" value="<?php echo $t_current;?>" />
 										<?php
-										if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
+										if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( META_FILTER_ANY == $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
@@ -991,7 +991,7 @@
 											} else {
 												$t_any_found = true;
 											}
-										} else if ( '[none]' == $t_current ) {
+										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_name = lang_get( 'none' );
 										} else {
 											$t_this_name = user_get_name( $t_current );
@@ -1024,7 +1024,7 @@
 										<input type="hidden" name="user_monitor[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_name = '';
-										if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
+										if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( META_FILTER_ANY == $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
@@ -1063,9 +1063,9 @@
 										<input type="hidden" name="handler_id[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_name = '';
-										if ( '[none]' == $t_current ) {
+										if ( META_FILTER_NONE == $t_current ) {
 											$t_this_name = lang_get( 'none' );
-										} else if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
+										} else if ( ( $t_current === 0 ) || ( is_blank( $t_current ) ) || ( META_FILTER_ANY == $t_current ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
@@ -1105,9 +1105,9 @@
 										<input type="hidden" name="show_category[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
-										} else if ( '[none]' == $t_current ) {
+										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = $t_current;
@@ -1140,7 +1140,7 @@
 										<input type="hidden" name="show_severity[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'severity', $t_current );
@@ -1173,7 +1173,7 @@
 										<input type="hidden" name="show_resolution[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'resolution', $t_current );
@@ -1239,7 +1239,7 @@
 										<input type="hidden" name="show_status[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'status', $t_current );
@@ -1272,7 +1272,7 @@
 										<input type="hidden" name="hide_status[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == 'none' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( ( $t_current == META_FILTER_NONE ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
 											$t_none_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'status', $t_current );
@@ -1310,9 +1310,9 @@
 										<input type="hidden" name="show_build[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
-										} else if ( '[none]' == $t_current ) {
+										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = $t_current;
@@ -1347,9 +1347,9 @@
 										<input type="hidden" name="show_version[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
-										} else if ( '[none]' == $t_current ) {
+										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = $t_current;
@@ -1383,9 +1383,9 @@
 										<input type="hidden" name="fixed_in_version[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
-										} else if ( '[none]' == $t_current ) {
+										} else if ( META_FILTER_NONE == $t_current ) {
 											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = $t_current;
@@ -1426,7 +1426,7 @@
 										<input type="hidden" name="show_priority[]" value="<?php echo $t_current;?>" />
 										<?php
                   	$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
                   		$t_any_found = true;
 	                  } else {
 	                  	$t_this_string = get_enum_element( 'priority', $t_current );
@@ -1649,9 +1649,9 @@
 							foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
 								$t_current = stripslashes( $t_current );
 								$t_this_string = '';
-								if ( ( $t_current == '[any]' ) || ( $t_current === 0 ) ) {
+								if ( ( $t_current == META_FILTER_ANY ) || ( $t_current === 0 ) ) {
 									$t_any_found = true;
-								} else if ( '[none]' == $t_current ) {
+								} else if ( META_FILTER_NONE == $t_current ) {
 									$t_this_string = lang_get( 'none' );
 								} else {
 									$t_this_string = $t_current;
@@ -2156,9 +2156,9 @@
 		if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 			foreach( $t_custom_fields as $t_cfid ) {
 				if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, '[any]' );
+					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, META_FILTER_ANY );
 				} else {
-					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, '[any]' );
+					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
 					$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
 				}
 			}
@@ -2194,7 +2194,7 @@
 				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
 					$t_filter_value = stripslashes( $t_filter_value );
 					if ( ( 5 == $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
-						$t_filter_value = '[any]';
+						$t_filter_value = META_FILTER_ANY;
 					}
 					if ( 'string' == $t_multi_field_type ) {
 						$t_checked_array[] = db_prepare_string( $t_filter_value );
@@ -2220,7 +2220,7 @@
 					foreach ( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
 						$t_filter_value = stripslashes( $t_filter_value );
 						if ( ( 5 == $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
-							$t_filter_value = '[any]';
+							$t_filter_value = META_FILTER_ANY;
 						}
 						$t_checked_array[] = db_prepare_string( $t_filter_value );
 					}
@@ -2270,7 +2270,7 @@
 				PRINT '<option value="' . $t_id . '" SELECTED >' . $t_display_name . '</option>';
 			} else {
 		?>
-			<option value="[any]" <?php check_selected( $t_filter['reporter_id'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="[any]" <?php check_selected( $t_filter['reporter_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php
 				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
@@ -2290,7 +2290,7 @@
 		?>
 	<!-- Monitored by -->
 		<select <?php PRINT $t_select_modifier;?> name="user_monitor[]">
-			<option value="[any]" <?php check_selected( $t_filter['user_monitor'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="[any]" <?php check_selected( $t_filter['user_monitor'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php
 				if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
@@ -2308,8 +2308,8 @@
 		?>
 		<!-- Handler -->
 		<select <?php PRINT $t_select_modifier;?> name="handler_id[]">
-			<option value="[any]" <?php check_selected( $t_filter['handler_id'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['handler_id'], '[none]' ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="[any]" <?php check_selected( $t_filter['handler_id'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="[none]" <?php check_selected( $t_filter['handler_id'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php
 				if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
@@ -2327,8 +2327,8 @@
 		?>
 		<!-- Category -->
 		<select <?php PRINT $t_select_modifier;?> name="show_category[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_category'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['show_category'], '[none]' ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="[any]" <?php check_selected( $t_filter['show_category'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="[none]" <?php check_selected( $t_filter['show_category'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php # This shows orphaned categories as well as selectable categories ?>
 			<?php print_category_complete_option_list( $t_filter['show_category'] ) ?>
 		</select>
@@ -2339,7 +2339,7 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Severity -->
 			<select <?php PRINT $t_select_modifier;?> name="show_severity[]">
-				<option value="[any]" <?php check_selected( $t_filter['show_severity'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+				<option value="[any]" <?php check_selected( $t_filter['show_severity'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 				<?php print_enum_string_option_list( 'severity', $t_filter['show_severity'] ) ?>
 			</select>
 		<?php
@@ -2349,7 +2349,7 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Resolution -->
 			<select <?php PRINT $t_select_modifier;?> name="show_resolution[]">
-				<option value="[any]" <?php check_selected( $t_filter['show_resolution'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+				<option value="[any]" <?php check_selected( $t_filter['show_resolution'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 				<?php print_enum_string_option_list( 'resolution', $t_filter['show_resolution'] ) ?>
 			</select>
 		<?php
@@ -2359,7 +2359,7 @@
 		global $t_select_modifier, $t_filter;
 		?>	<!-- Status -->
 			<select <?php PRINT $t_select_modifier;?> name="show_status[]">
-				<option value="[any]" <?php check_selected( $t_filter['show_status'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+				<option value="[any]" <?php check_selected( $t_filter['show_status'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 				<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
 			</select>
 		<?php
@@ -2379,8 +2379,8 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Build -->
 		<select <?php PRINT $t_select_modifier;?> name="show_build[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_build'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['show_build'], '[none]' ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="[any]" <?php check_selected( $t_filter['show_build'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="[none]" <?php check_selected( $t_filter['show_build'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php print_build_option_list( $t_filter['show_build'] ) ?>
 		</select>
 		<?php
@@ -2390,8 +2390,8 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Version -->
 		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_version'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['show_version'], '[none]' ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="[any]" <?php check_selected( $t_filter['show_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="[none]" <?php check_selected( $t_filter['show_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED ) ?>
 		</select>
 		<?php
@@ -2401,8 +2401,8 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Fixed in Version -->
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
-			<option value="[any]" <?php check_selected( $t_filter['fixed_in_version'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['fixed_in_version'], '[none]' ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
+			<option value="[any]" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="[none]" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL ) ?>
 		</select>
 		<?php
@@ -2412,7 +2412,7 @@
 		global $t_select_modifier, $t_filter;
 		?><!-- Priority -->
     <select <?php PRINT $t_select_modifier;?> name="show_priority[]">
-			<option value="[any]" <?php check_selected( $t_filter['show_priority'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+			<option value="[any]" <?php check_selected( $t_filter['show_priority'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php print_enum_string_option_list( 'priority', $t_filter['show_priority'] ) ?>
     </select>
 		<?php
@@ -2565,7 +2565,7 @@
 				echo '<option value="[any]" ';
 				check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );
 				echo '>[' . lang_get( 'any' ) .']</option>';
-				# don't show '[none]' for enumerated types as it's not possible for them to be blank
+				# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
 				if ( ! in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
 					echo '<option value="[none]" ';
 					check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.43 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: constant_inc.php,v 1.44 2005-03-14 11:41:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -294,6 +294,8 @@
 
 	# Meta filter values
 	define( 'META_FILTER_MYSELF',	-1 );
+	define( 'META_FILTER_NONE',     '[none]'  );
+	define( 'META_FILTER_ANY',      '[any]'   );
 
 	# Versions
 	define( 'VERSION_ALL',		null );
@@ -328,5 +330,6 @@
 	define( 'CUSTOM_FIELD_DATE_ON',			5 ) ;
 	define( 'CUSTOM_FIELD_DATE_AFTER',		6 ) ;
 	define( 'CUSTOM_FIELD_DATE_ONORAFTER',	7 ) ;
+
 
 ?>

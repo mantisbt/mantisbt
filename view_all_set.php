@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.49 2005-02-26 01:09:28 vboctor Exp $
+	# $Id: view_all_set.php,v 1.50 2005-03-14 11:41:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -21,97 +21,97 @@
 	# these are all possibly multiple selections for advanced filtering
 	$f_show_category = array();
 	if ( is_array( gpc_get( 'show_category', null ) ) ) {
-		$f_show_category = gpc_get_string_array( 'show_category', '[any]' );
+		$f_show_category = gpc_get_string_array( 'show_category', META_FILTER_ANY );
 	} else {
-		$f_show_category = gpc_get_string( 'show_category', '[any]' );
+		$f_show_category = gpc_get_string( 'show_category', META_FILTER_ANY );
 		$f_show_category = array( $f_show_category );
 	}
 
 	$f_show_severity = array();
 	if ( is_array( gpc_get( 'show_severity', null ) ) ) {
-		$f_show_severity = gpc_get_string_array( 'show_severity', '[any]' );
+		$f_show_severity = gpc_get_string_array( 'show_severity', META_FILTER_ANY );
 	} else {
-		$f_show_severity = gpc_get_string( 'show_severity', '[any]' );
+		$f_show_severity = gpc_get_string( 'show_severity', META_FILTER_ANY );
 		$f_show_severity = array( $f_show_severity );
 	}
 
 	$f_show_status = array();
 	if ( is_array( gpc_get( 'show_status', null ) ) ) {
-		$f_show_status = gpc_get_string_array( 'show_status', '[any]' );
+		$f_show_status = gpc_get_string_array( 'show_status', META_FILTER_ANY );
 	} else {
-		$f_show_status = gpc_get_string( 'show_status', '[any]' );
+		$f_show_status = gpc_get_string( 'show_status', META_FILTER_ANY );
 		$f_show_status = array( $f_show_status );
 	}
 
 	$f_hide_status = array();
 	if ( is_array( gpc_get( 'hide_status', null ) ) ) {
-		$f_hide_status = gpc_get_string_array( 'hide_status', 'none' );
+		$f_hide_status = gpc_get_string_array( 'hide_status', META_FILTER_NONE );
 	} else {
-		$f_hide_status = gpc_get_string( 'hide_status', 'none' );
+		$f_hide_status = gpc_get_string( 'hide_status', META_FILTER_NONE );
 		$f_hide_status = array( $f_hide_status );
 	}
 
 	$f_reporter_id = array();
 	if ( is_array( gpc_get( 'reporter_id', null ) ) ) {
-		$f_reporter_id = gpc_get_string_array( 'reporter_id', '[any]' );
+		$f_reporter_id = gpc_get_string_array( 'reporter_id', META_FILTER_ANY );
 	} else {
-		$f_reporter_id = gpc_get_string( 'reporter_id', '[any]' );
+		$f_reporter_id = gpc_get_string( 'reporter_id', META_FILTER_ANY );
 		$f_reporter_id = array( $f_reporter_id );
 	}
 
 	$f_handler_id = array();
 	if ( is_array( gpc_get( 'handler_id', null ) ) ) {
-		$f_handler_id = gpc_get_string_array( 'handler_id', '[any]' );
+		$f_handler_id = gpc_get_string_array( 'handler_id', META_FILTER_ANY );
 	} else {
-		$f_handler_id = gpc_get_string( 'handler_id', '[any]' );
+		$f_handler_id = gpc_get_string( 'handler_id', META_FILTER_ANY );
 		$f_handler_id = array( $f_handler_id );
 	}
 
 	$f_show_resolution = array();
 	if ( is_array( gpc_get( 'show_resolution', null ) ) ) {
-		$f_show_resolution = gpc_get_string_array( 'show_resolution', '[any]' );
+		$f_show_resolution = gpc_get_string_array( 'show_resolution', META_FILTER_ANY );
 	} else {
-		$f_show_resolution = gpc_get_string( 'show_resolution', '[any]' );
+		$f_show_resolution = gpc_get_string( 'show_resolution', META_FILTER_ANY );
 		$f_show_resolution = array( $f_show_resolution );
 	}
 
 	$f_show_build = array();
 	if ( is_array( gpc_get( 'show_build', null ) ) ) {
-		$f_show_build = gpc_get_string_array( 'show_build', '[any]' );
+		$f_show_build = gpc_get_string_array( 'show_build', META_FILTER_ANY );
 	} else {
-		$f_show_build = gpc_get_string( 'show_build', '[any]' );
+		$f_show_build = gpc_get_string( 'show_build', META_FILTER_ANY );
 		$f_show_build = array( $f_show_build );
 	}
 
 	$f_show_version = array();
 	if ( is_array( gpc_get( 'show_version', null ) ) ) {
-		$f_show_version = gpc_get_string_array( 'show_version', '[any]' );
+		$f_show_version = gpc_get_string_array( 'show_version', META_FILTER_ANY );
 	} else {
-		$f_show_version = gpc_get_string( 'show_version', '[any]' );
+		$f_show_version = gpc_get_string( 'show_version', META_FILTER_ANY );
 		$f_show_version = array( $f_show_version );
 	}
 
 	$f_fixed_in_version = array();
 	if ( is_array( gpc_get( 'fixed_in_version', null ) ) ) {
-		$f_fixed_in_version = gpc_get_string_array( 'fixed_in_version', '[any]' );
+		$f_fixed_in_version = gpc_get_string_array( 'fixed_in_version', META_FILTER_ANY );
 	} else {
-		$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '[any]' );
+		$f_fixed_in_version = gpc_get_string( 'fixed_in_version', META_FILTER_ANY );
 		$f_fixed_in_version = array( $f_fixed_in_version );
 	}
 
 	$f_show_priority = array();
 	if ( is_array( gpc_get( 'show_priority', null ) ) ) {
-		$f_show_priority = gpc_get_string_array( 'show_priority', '[any]' );
+		$f_show_priority = gpc_get_string_array( 'show_priority', META_FILTER_ANY );
 	} else {
-		$f_show_priority = gpc_get_string( 'show_priority', '[any]' );
+		$f_show_priority = gpc_get_string( 'show_priority', META_FILTER_ANY );
 		$f_show_priority = array( $f_show_priority );
 	}
 
 	$f_user_monitor = array();
 	if ( is_array( gpc_get( 'user_monitor', null ) ) ) {
-		$f_user_monitor = gpc_get_string_array( 'user_monitor', '[any]' );
+		$f_user_monitor = gpc_get_string_array( 'user_monitor', META_FILTER_ANY );
 	} else {
-		$f_user_monitor = gpc_get_string( 'user_monitor', '[any]' );
+		$f_user_monitor = gpc_get_string( 'user_monitor', META_FILTER_ANY );
 		$f_user_monitor = array( $f_user_monitor );
 	}
 
@@ -137,7 +137,7 @@
 	$f_search				= gpc_get_string( 'search', '' );
 	$f_and_not_assigned		= gpc_get_bool( 'and_not_assigned' );
 	$f_do_filter_by_date	= gpc_get_bool( 'do_filter_by_date' );
-	$f_view_state			= gpc_get_string( 'view_state', '[any]' );
+	$f_view_state			= gpc_get_string( 'view_state', META_FILTER_ANY );
 
 	$t_custom_fields 		= custom_field_get_ids();
 	$f_custom_fields_data 	= array();
@@ -194,9 +194,9 @@
 				$f_custom_fields_data[$t_cfid][2] = $t_end;
 			} else {
 				if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, '[any]' );
+					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, META_FILTER_ANY );
 				} else {
-					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, '[any]' );
+					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
 					$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
 				}
 			}
@@ -368,14 +368,14 @@
 			}
 		# Generalise the filter
 		case '4':
-				$t_setting_arr['show_category']	= array( '[any]' );
-				$t_setting_arr['reporter_id'] 	= array( '[any]' );
-				$t_setting_arr['handler_id'] 	= array( '[any]' );
-				$t_setting_arr['show_build'] 	= array( '[any]' );
-				$t_setting_arr['show_version'] 	= array( '[any]' );
-				$t_setting_arr['show_priority']	= array( '[any]' );
-				$t_setting_arr['fixed_in_version']	= array( '[any]' );
-				$t_setting_arr['user_monitor'] 		= array( '[any]' );
+				$t_setting_arr['show_category']	= array( META_FILTER_ANY );
+				$t_setting_arr['reporter_id'] 	= array( META_FILTER_ANY );
+				$t_setting_arr['handler_id'] 	= array( META_FILTER_ANY );
+				$t_setting_arr['show_build'] 	= array( META_FILTER_ANY );
+				$t_setting_arr['show_version'] 	= array( META_FILTER_ANY );
+				$t_setting_arr['show_priority']	= array( META_FILTER_ANY );
+				$t_setting_arr['fixed_in_version']	= array( META_FILTER_ANY );
+				$t_setting_arr['user_monitor'] 		= array( META_FILTER_ANY );
 				$t_setting_arr['relationship_type'] = -1;
 				$t_setting_arr['relationship_bug'] = 0;
 
@@ -383,7 +383,7 @@
 				$t_custom_fields_data 	= array();
 				if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 					foreach( $t_custom_fields as $t_cfid ) {
-						$t_custom_fields_data[$t_cfid] =  array( '[any]' );
+						$t_custom_fields_data[$t_cfid] =  array( META_FILTER_ANY );
 					}
 				}
 				$t_setting_arr['custom_fields'] = $t_custom_fields_data;
