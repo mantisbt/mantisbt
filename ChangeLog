@@ -12,12 +12,17 @@ Mantis
  * Added Polish localization
  * Added Russian localization
  * Added umask call to prevent uploaded files from being executed remotely.
+ * Added Plain Text authentication
+ * Added MD5 authentication
+ * Added option to view priority as text
  * Updated Italian localization
  * Updated Korean localization
  * Updated Spanish localization
  * Modified User section so users with automatic access are listed
- * Modifed view all filters to consolidate functionality
- * Modifed view all filters to remember sort field and order
+ * Modified view all filters to consolidate functionality
+ * Modified view all filters to remember sort field and order
+ * Modified authentication system to no longer require crypt()
+ * Modified email formatting to work better with other languages
  * Removed email_bug_info_to_address()
 
 08.28.2001  -   0.15.7
