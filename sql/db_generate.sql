@@ -1,11 +1,11 @@
 #
 # Table structure for table `mantis_bug_file_table`
 # --------------------------------------------------------
-# $Revision: 1.5 $
+# $Revision: 1.6 $
 # $Author: jhuggins $
-# $Date: 2002-06-07 14:17:26 $
+# $Date: 2002-06-10 17:16:26 $
 #
-# $Id: db_generate.sql,v 1.5 2002-06-07 14:17:26 jhuggins Exp $
+# $Id: db_generate.sql,v 1.6 2002-06-10 17:16:26 jhuggins Exp $
 # --------------------------------------------------------
 #
 
@@ -38,7 +38,8 @@ CREATE TABLE mantis_bug_history_table (
   new_value varchar(128) NOT NULL default '',
   type int(2) NOT NULL default '0',
   KEY bug_id (bug_id),
-  KEY user_id (user_id)
+  KEY user_id (user_id),
+  KEY date_modified (date_modified)
 );
 # --------------------------------------------------------
 
@@ -93,7 +94,10 @@ CREATE TABLE mantis_bug_table (
   profile_id int(7) unsigned zerofill NOT NULL default '0000000',
   view_state int(2) NOT NULL default '10',
   summary varchar(128) NOT NULL default '',
-  PRIMARY KEY  (id)
+  PRIMARY KEY  (id),
+  KEY category (category),
+  KEY date_submitted (date_submitted),
+  KEY reporter_id (reporter_id)
 );
 # --------------------------------------------------------
 
@@ -123,7 +127,8 @@ CREATE TABLE mantis_bugnote_table (
   date_submitted datetime NOT NULL default '1970-01-01 00:00:01',
   last_modified datetime NOT NULL default '1970-01-01 00:00:01',
   PRIMARY KEY  (id),
-  KEY last_modified (last_modified)
+  KEY last_modified (last_modified),
+  KEY date_submitted (date_submitted)
 );
 # --------------------------------------------------------
 
@@ -151,7 +156,8 @@ CREATE TABLE mantis_news_table (
   headline varchar(64) NOT NULL default '',
   body text NOT NULL,
   PRIMARY KEY  (id),
-  KEY id (id)
+  KEY id (id),
+  KEY date_posted (date_posted)
 );
 # --------------------------------------------------------
 
@@ -162,7 +168,9 @@ CREATE TABLE mantis_news_table (
 CREATE TABLE mantis_project_category_table (
   project_id int(7) unsigned zerofill NOT NULL default '0000000',
   user_id int(7) unsigned zerofill NOT NULL default '0000000',
-  category varchar(64) NOT NULL default ''
+  category varchar(64) NOT NULL default '',
+  KEY category (category),
+  KEY project_id (project_id)
 );
 
 INSERT INTO mantis_project_category_table (project_id, category) VALUES ( '0000001', 'bugtracker');
@@ -220,7 +228,8 @@ INSERT INTO mantis_project_table (id, name, status, enabled, view_state, descrip
 CREATE TABLE mantis_project_user_list_table (
   project_id int(7) unsigned zerofill NOT NULL default '0000000',
   user_id int(7) unsigned zerofill NOT NULL default '0000000',
-  access_level int(2) NOT NULL default '10'
+  access_level int(2) NOT NULL default '10',
+  KEY user_id (user_id)
 );
 # --------------------------------------------------------
 
@@ -231,7 +240,9 @@ CREATE TABLE mantis_project_user_list_table (
 CREATE TABLE mantis_project_version_table (
   project_id int(7) unsigned zerofill NOT NULL default '0000000',
   version varchar(64) NOT NULL default '',
-  date_order datetime NOT NULL default '1970-01-01 00:00:01'
+  date_order datetime NOT NULL default '1970-01-01 00:00:01',
+  KEY date_order (date_order),
+  KEY project_id (project_id)
 );
 
 INSERT INTO mantis_project_version_table (project_id, version, date_order) VALUES ( '0000001', '0.14.0', NOW());
@@ -302,7 +313,8 @@ CREATE TABLE mantis_user_table (
   login_count int(11) NOT NULL default '0',
   cookie_string varchar(64) NOT NULL default '',
   PRIMARY KEY  (id),
-  UNIQUE KEY username (username)
+  UNIQUE KEY username (username),
+  KEY access_level (access_level)
 );
 
 # replace the 4th argument after VALUES with your chosen method of encryption
