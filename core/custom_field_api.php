@@ -6,12 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.44 2004-12-15 11:08:32 prichards Exp $
+	# $Id: custom_field_api.php,v 1.45 2005-01-22 02:20:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'bug_api.php' );
+	require_once( $t_core_dir . 'helper_api.php' );
 
 	### Custom Fields API ###
 
@@ -852,6 +853,20 @@
 	}
 
 	# --------------------
+	# $p_possible_values: possible values to be pre-processed.  If it has enum values,
+	#                     it will be left as is.  If it has a method, it will be replaced
+	#                     by the list.
+	function custom_field_prepare_possible_values( $p_possible_values ) {
+		$t_possible_values = $p_possible_values;
+
+		if ( !is_blank( $t_possible_values ) && ( $t_possible_values[0] == '=' ) ) {
+			$t_possible_values = helper_call_custom_function( substr( $t_possible_values, 1 ), array() );
+		}
+
+		return $t_possible_values;
+	}
+
+	# --------------------
 	# Get All Possible Values for a Field.
 	function custom_field_distinct_values( $p_field_id, $p_project_id = ALL_PROJECTS ) {
 		$c_field_id						= db_prepare_int( $p_field_id );
@@ -878,7 +893,9 @@
 			 CUSTOM_FIELD_TYPE_LIST == $row['type'] ||
 			 CUSTOM_FIELD_TYPE_MULTILIST == $row['type'] 
 			) {
-			$t_values_arr = explode( '|', $row['possible_values'] );
+			$t_possible_values = custom_field_prepare_possible_values( $row['possible_values'] );
+
+			$t_values_arr = explode( '|', $t_possible_values );
 
 			foreach( $t_values_arr as $t_option ) {
 				array_push( $t_return_arr, $t_option );
@@ -1079,7 +1096,7 @@
 		case CUSTOM_FIELD_TYPE_ENUM:
 		case CUSTOM_FIELD_TYPE_LIST:
 		case CUSTOM_FIELD_TYPE_MULTILIST:
- 			$t_values = explode( '|', $p_field_def['possible_values'] );
+ 			$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 			$t_list_size = $t_possible_values_count = count( $t_values );
 				
 			if ( $t_possible_values_count > 5 ) {
@@ -1107,7 +1124,7 @@
  			echo '</select>';
 			break;
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
-			$t_values = explode( '|', $p_field_def['possible_values'] );
+			$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 			$t_checked_values = explode( '|', $t_custom_field_value );
 			foreach( $t_values as $t_option ) {
 				echo '<input type="checkbox" name="custom_field_' . $t_id . '[]"';
