@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.30 2003-02-25 14:42:50 vboctor Exp $
+	# $Id: file_api.php,v 1.31 2003-02-26 11:12:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -311,15 +311,15 @@
 			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 			$t_bug_id = bug_format_id( $p_bug_id );
 
-			# grab the file path
-			$t_file_path = project_get_field( $t_project_id, 'file_path' );
-			$t_new_file_name = $t_bug_id . '-' . $p_file_name;
-
 			# prepare variables for insertion
+			$t_file_path = project_get_field( $t_project_id, 'file_path' );
 			$c_file_path = db_prepare_string( $t_file_path );
+
+			$t_new_file_name = $t_bug_id . '-' . $p_file_name;
 			$c_new_file_name = db_prepare_string( $t_new_file_name );
-			$c_file_size = db_prepare_int( filesize( $p_tmp_file ) );
-			$c_file_type = db_prepare_string( $p_file_type );
+
+			$t_file_size = filesize( $p_tmp_file );
+			$c_file_size = db_prepare_int( $t_file_size );
 
 			$t_method = config_get( 'file_upload_method' );
 			$t_bug_file_table = config_get( 'mantis_bug_file_table' );
@@ -327,6 +327,8 @@
 			switch ( $t_method ) {
 				case FTP:
 				case DISK:
+					file_ensure_valid_upload_path( $t_file_path );
+
 					if ( !file_exists( $t_file_path . $t_new_file_name ) ) {
 						if ( FTP == $t_method ) {
 							$conn_id = file_ftp_connect();
@@ -448,11 +450,8 @@
 	# --------------------
 	# checks whether the specified upload path exists and is writable
 	function file_ensure_valid_upload_path( $p_upload_path ) {
-		$c_upload_path	= db_prepare_string( $p_upload_path );
-		if ( !is_blank( $c_upload_path ) ) {
-			if ( !file_exists( $c_upload_path ) || !is_dir( $c_upload_path ) || !is_writable( $c_upload_path ) ) {
-				trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
-			}
+		if ( is_blank( $p_upload_path ) || !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) ) {
+			trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
 		}
 	}
 

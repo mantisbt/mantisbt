@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.41 2003-02-23 04:45:03 vboctor Exp $
+	# $Id: project_api.php,v 1.42 2003-02-26 11:12:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -219,7 +219,9 @@
 
 		project_ensure_name_unique( $p_name );
 
-		file_ensure_valid_upload_path( $p_file_path );
+		if ( !is_blank( $p_file_path ) ) {
+			file_ensure_valid_upload_path( $p_file_path );
+		}
 
 		$t_project_table = config_get( 'mantis_project_table' );
 
@@ -297,7 +299,9 @@
 			project_ensure_name_unique( $p_name );
 		}
 
-		file_ensure_valid_upload_path( $p_file_path );
+		if ( !is_blank( $p_file_path ) ) {
+			file_ensure_valid_upload_path( $p_file_path );
+		}
 
 		$t_project_table = config_get( 'mantis_project_table' );
 

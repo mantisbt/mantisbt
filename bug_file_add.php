@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.42 2003-02-25 14:02:24 vboctor Exp $
+	# $Id: bug_file_add.php,v 1.43 2003-02-26 11:12:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,15 +34,6 @@
 	}
 
 	$t_upload_method	= config_get( 'file_upload_method' );
-
-	if ( DISK == $t_upload_method || FTP == $t_upload_method )  {
-		$t_project_id	= bug_get_field( $f_bug_id, 'project_id' );
-		$t_file_path	= project_get_field( $t_project_id, 'file_path' );
-
-		if ( !file_exists( $t_file_path ) ) {
-			trigger_error( ERROR_NO_DIRECTORY, ERROR );
-		}
-	}
 
 	file_add( $f_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'] );
 
