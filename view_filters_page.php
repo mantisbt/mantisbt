@@ -307,7 +307,7 @@
 		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_version_option_list( $t_filter['show_version'] ) ?>
+			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED ) ?>
 		</select>
 	</td>
 	<!-- Fixed in Version -->
@@ -315,7 +315,7 @@
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_version_option_list( $t_filter['fixed_in_version'] ) ?>
+			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL ) ?>
 		</select>
 	</td>
 	<!-- Number of bugs per page -->

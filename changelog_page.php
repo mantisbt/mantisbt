@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.5 2004-07-10 12:09:46 vboctor Exp $
+	# $Id: changelog_page.php,v 1.6 2004-07-11 07:09:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,6 +44,8 @@
 		$t_version = $t_version_row['version'];
 		$c_version = db_prepare_string( $t_version );
 
+		$t_version_id = version_get_id( $c_version );
+
 		$query = "SELECT id, view_state FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
 
 		$t_first_entry = true;
@@ -60,6 +62,7 @@
 				continue;
 			}
 
+			# Print the header for the version with the first changelog entry to be added.
 			if ( $t_first_entry ) {
 				if ( $i > 0 ) {
 					echo '<br />';
@@ -69,9 +72,13 @@
 				echo $t_release_title, '<br />';
 				echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
 
+				$t_description = version_get_field( $t_version_id, 'description' );
+				if ( ( $t_description !== false ) && !is_blank( $t_description ) ) {
+					echo string_display( "<br />$t_description<br /><br />" );
+				}
+
 				$t_first_entry = false;
 			}
-
 
 			helper_call_custom_function( 'changelog_print_issue', array( $t_issue_id ) );
 		}

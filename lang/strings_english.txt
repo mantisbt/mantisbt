@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.181 $
-	# $Author: narcissus $
-	# $Date: 2004-07-09 00:02:01 $
+	# $Revision: 1.182 $
+	# $Author: vboctor $
+	# $Date: 2004-07-11 07:09:53 $
 	#
-	# $Id: strings_english.txt,v 1.181 2004-07-09 00:02:01 narcissus Exp $
+	# $Id: strings_english.txt,v 1.182 2004-07-11 07:09:53 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -622,6 +622,7 @@ $s_delete_version_button = 'Delete Version';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Edit Project Version';
 $s_update_version_button = 'Update Version';
+$s_released = 'Released';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Version has been successfully updated...';

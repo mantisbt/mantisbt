@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.36 2004-06-26 14:05:42 prichards Exp $
+	# $Id: bug_report_advanced_page.php,v 1.37 2004-07-11 07:09:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -205,7 +205,7 @@
 	</td>
 	<td>
 		<select tabindex="9" name="product_version">
-			<?php print_version_option_list( $f_product_version ) ?>
+			<?php print_version_option_list( $f_product_version, $t_project_id, VERSION_RELEASED ) ?>
 		</select>
 	</td>
 </tr>

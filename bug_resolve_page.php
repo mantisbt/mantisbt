@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve_page.php,v 1.39 2004-06-26 14:05:42 prichards Exp $
+	# $Id: bug_resolve_page.php,v 1.40 2004-07-11 07:09:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -117,7 +117,7 @@
 	<td>
 		<select name="fixed_in_version">
 			<?php print_version_option_list( bug_get_field( $f_bug_id, 'fixed_in_version' ),
-							bug_get_field( $f_bug_id, 'project_id' ) ) ?>
+							bug_get_field( $f_bug_id, 'project_id' ), VERSION_ALL ) ?>
 		</select>
 	</td>
 </tr>

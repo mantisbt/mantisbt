@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_delete.php,v 1.20 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_ver_delete.php,v 1.21 2004-07-11 07:09:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,15 +17,16 @@
 	require_once( $t_core_path.'version_api.php' );
 ?>
 <?php
-	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_version		= gpc_get_string( 'version' );
+	$f_version_id	= gpc_get_int( 'version_id' );
 
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+	$t_version_info = version_get( $f_version_id );
+
+	access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version_info->project_id );
 
 	helper_ensure_confirmed( lang_get( 'version_delete_sure' ),
 							 lang_get( 'delete_version_button' ) );
 
-	version_remove( $f_project_id, $f_version );
+	version_remove( $f_version_id );
 
-	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id );
+	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $t_version_info->project_id );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.70 2004-06-26 14:05:42 prichards Exp $
+	# $Id: bug_update_page.php,v 1.71 2004-07-11 07:09:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -244,7 +244,7 @@
 	</td>
 	<td colspan="5">
 		<select name="version">
-			<?php print_version_option_list( $t_bug->version, $t_bug->project_id ) ?>
+			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
 		</select>
 	</td>
 </tr>

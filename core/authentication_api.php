@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.40 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: authentication_api.php,v 1.41 2004-07-11 07:09:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -34,7 +34,7 @@
 				print_header_redirect( 'logout_page.php' );
 			}
 		} else { # not logged in
-			if ( is_blank( $p_return_page ) ) {
+			if ( is_blank( $p_return_page ) && isset( $_SERVER['REQUEST_URI'] ) ) {
 				$p_return_page = $_SERVER['REQUEST_URI'];
 			}
 			$p_return_page = string_url( $p_return_page );

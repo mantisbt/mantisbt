@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.19 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: constant_inc.php,v 1.20 2004-07-11 07:09:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -254,4 +254,9 @@
 
 	# Meta filter values
 	define( 'META_FILTER_MYSELF',	-1 );
+
+	# Versions
+	define( 'VERSION_ALL',		null );
+	define( 'VERSION_FUTURE',	0 );
+	define( 'VERSION_RELEASED',	1 );
 ?>

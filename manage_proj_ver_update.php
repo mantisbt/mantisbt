@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_update.php,v 1.28 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_ver_update.php,v 1.29 2004-07-11 07:09:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,23 +17,31 @@
 	require_once( $t_core_path.'version_api.php' );
 ?>
 <?php
-	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_version		= gpc_get_string( 'version' );
+	$f_version_id = gpc_get_int( 'version_id' );
+
+	$t_version = version_get( $f_version_id );
+
 	$f_date_order	= gpc_get_string( 'date_order' );
 	$f_new_version	= gpc_get_string( 'new_version' );
+	$f_description  = gpc_get_string( 'description' );
+	$f_released     = gpc_get_bool( 'released' );
 
-	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+	access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
 
 	if ( is_blank( $f_new_version ) ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$f_version		= trim( $f_version );
 	$f_new_version	= trim( $f_new_version );
 
-	version_update( $f_project_id, $f_version, $f_new_version, $f_date_order );
+	$t_version->version = $f_new_version;
+	$t_version->description = $f_description;
+	$t_version->released = $f_released ? VERSION_RELEASED : VERSION_FUTURE;
+	$t_version->date_order = $f_date_order;
 
-	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
+	version_update( $t_version );
+
+	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $t_version->project_id;
 ?>
 <?php
 	html_page_top1();

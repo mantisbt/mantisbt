@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.69 2004-06-26 14:05:42 prichards Exp $
+	# $Id: bug_update_advanced_page.php,v 1.70 2004-07-11 07:09:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -287,7 +287,7 @@
 	</td>
 	<td>
 		<select name="fixed_in_version">
-			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id ) ?>
+			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 		</select>
 	</td>
 
@@ -297,7 +297,7 @@
 	</td>
 	<td>
 		<select name="version">
-			<?php print_version_option_list( $t_bug->version, $t_bug->project_id ) ?>
+			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
 		</select>
 	</td>
 

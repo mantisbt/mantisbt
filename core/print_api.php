@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.89 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: print_api.php,v 1.90 2004-07-11 07:09:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -516,29 +516,24 @@
 		}
 	}
 	# --------------------
-	function print_version_option_list( $p_version='', $p_project_id = null ) {
-		global $g_mantis_project_version_table;
-
+	# Print the option list for versions
+	# $p_version = currently selected version.
+	# $p_project_id = project id, otherwise current project will be used.
+	# $p_released = null to get all, 1: only released, 0: only future versions
+	function print_version_option_list( $p_version='', $p_project_id = null, $p_released = null ) {
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
 		} else {
 			$c_project_id = db_prepare_int( $p_project_id );
 		}
 
-		$query = "SELECT *
-				FROM $g_mantis_project_version_table
-				WHERE project_id='$c_project_id'
-				ORDER BY date_order DESC";
-		$result = db_query( $query );
-		$version_count = db_num_rows( $result );
+		$versions = version_get_all_rows( $c_project_id, $p_released );
 
-		PRINT "<option value=\"\"></option>\n";
-		for ($i=0;$i<$version_count;$i++) {
-			$row = db_fetch_array( $result );
-			$t_version = string_attribute( $row['version'] );
-			PRINT "<option value=\"$t_version\"";
+		foreach( $versions as $version ) {
+			$t_version = string_attribute( $version['version'] );
+			echo "<option value=\"$t_version\"";
 			check_selected( $p_version, $t_version );
-			PRINT ">$t_version</option>";
+			echo ">$t_version</option>";
 		}
 	}
 	# --------------------

@@ -3,7 +3,7 @@
 # http://www.phpmyadmin.net
 #
 # Host: localhost
-# Generation Time: Jul 09, 2004 at 12:02 AM
+# Generation Time: Jul 11, 2004 at 04:45 PM
 # Server version: 4.0.20
 # PHP Version: 4.3.7
 # 
@@ -408,10 +408,14 @@ CREATE TABLE mantis_project_user_list_table (
 #
 
 CREATE TABLE mantis_project_version_table (
+  id int(7) NOT NULL auto_increment,
   project_id int(7) unsigned NOT NULL default '0',
   version varchar(64) NOT NULL default '',
   date_order datetime NOT NULL default '1970-01-01 00:00:01',
-  PRIMARY KEY  (project_id,version)
+  description text NOT NULL,
+  released tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (id),
+  UNIQUE KEY project_version (project_id,version)
 ) TYPE=MyISAM;
 
 #
@@ -724,6 +728,11 @@ INSERT INTO mantis_upgrade_table VALUES ('custom_fields-3', 'Allow custom fields
 INSERT INTO mantis_upgrade_table VALUES ('custom_fields-4', 'Allow custom fields to be set/required for resolve/close/report/update');
 INSERT INTO mantis_upgrade_table VALUES ('custom_fields-5', 'Allow custom fields to be set/required for resolve/close/report/update');
 INSERT INTO mantis_upgrade_table VALUES ('custom_fields-6', 'Allow custom fields to be set/required for resolve/close/report/update');
+INSERT INTO mantis_upgrade_table VALUES ('version_remove_pk', 'Remove project_id+version primary key');
+INSERT INTO mantis_upgrade_table VALUES ('version_add_version_', 'Add id to version table and use it as primary key');
+INSERT INTO mantis_upgrade_table VALUES ('version_add_project_', 'Add a unique index for project_id + version combination.');
+INSERT INTO mantis_upgrade_table VALUES ('version_add_descript', 'Add description field to versions.');
+INSERT INTO mantis_upgrade_table VALUES ('version_add_released', 'Add released flag to determine whether the version was released or still a future release.');
 
 # --------------------------------------------------------
 

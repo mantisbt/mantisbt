@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.9 2004-06-30 17:54:52 prichards Exp $
+	# $Id: 0_18_inc.php,v 1.10 2004-07-11 07:09:51 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -232,6 +232,31 @@
 			'custom_fields-6',
 			'Allow custom fields to be set/required for resolve/close/report/update',
 			"ALTER TABLE mantis_custom_field_table ADD require_close BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'version_remove_pk',
+			'Remove project_id+version primary key',
+			"ALTER TABLE mantis_project_version_table DROP PRIMARY KEY" );
+
+	$upgrades[] = new SQLUpgrade(
+			'version_add_version_id_pk',
+			'Add id to version table and use it as primary key',
+			"ALTER TABLE mantis_project_version_table ADD id INT( 7 ) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST" );
+
+	$upgrades[] = new SQLUpgrade(
+			'version_add_project_version_index',
+			'Add a unique index for project_id + version combination.',
+			"ALTER TABLE mantis_project_version_table ADD UNIQUE project_version ( project_id , version )" );
+
+	$upgrades[] = new SQLUpgrade(
+			'version_add_description',
+			'Add description field to versions.',
+			"ALTER TABLE mantis_project_version_table ADD description TEXT NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+			'version_add_released_flag',
+			'Add released flag to determine whether the version was released or still a future release.',
+			"ALTER TABLE mantis_project_version_table ADD released TINYINT( 1 ) DEFAULT '1' NOT NULL" );
 
 	return $upgrades;
 ?>
