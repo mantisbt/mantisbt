@@ -379,6 +379,35 @@ ALTER TABLE mantis_project_version_table ADD date_order DATETIME DEFAULT '1970-0
 # 0.16.x to 0.17.0
 # =================
 
-# Allow for files greater than 64KB
+# Allow for file uploads greater than 64KB
 ALTER TABLE mantis_bug_file_table CHANGE content content LONGBLOB NOT NULL;
 ALTER TABLE mantis_project_file_table CHANGE content content LONGBLOB NOT NULL;
+
+# Remove TIMESTAMP field
+ALTER TABLE mantis_bug_table CHANGE last_updated last_updated DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL;
+ALTER TABLE mantis_bugnote_table CHANGE last_modified last_modified DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL;
+ALTER TABLE mantis_news_table CHANGE last_modified last_modified DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL;
+ALTER TABLE mantis_user_table CHANGE last_visit last_visit DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL;
+
+# Add public/private switch to bug and bugnote
+ALTER TABLE mantis_bug_table ADD view_state INT(2) DEFAULT '10'  NOT NULL AFTER profile_id;
+ALTER TABLE mantis_bugnote_table ADD view_state INT(2) DEFAULT '10' NOT NULL AFTER bugnote_text_id;
+
+# Relationship table
+CREATE TABLE mantis_bug_relationship_table (
+  source_bug_id int(7) unsigned zerofill NOT NULL default '0000000',
+  destination_bug_id int(7) unsigned zerofill NOT NULL default '0000000',
+  relationship_type int(2) NOT NULL default '0'
+);
+
+# Bug monitor table
+CREATE TABLE mantis_bug_monitor_table (
+  user_id int(7) unsigned zerofill NOT NULL default '0000000',
+  bug_id int(7) unsigned NOT NULL default '0'
+);
+
+# extend version and category strings
+ALTER TABLE mantis_project_version_table CHANGE version version VARCHAR(64) NOT NULL;
+ALTER TABLE mantis_project_category_table CHANGE category category VARCHAR(64) NOT NULL;
+ALTER TABLE mantis_bug_table CHANGE category category VARCHAR(64) NOT NULL;
+ALTER TABLE mantis_bug_table CHANGE version version VARCHAR(64) NOT NULL;
