@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.66 2003-01-30 09:41:11 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.67 2003-02-08 10:29:40 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -645,13 +645,13 @@
 
 	# --- status color codes ----------
 	#
-	$g_status_colors		= array('new'			=> '#ffffff', # white
-									'feedback'		=> '#ffc0cc', # purple
-									'acknowledged'	=> '#ff6600', # orange
-									'confirmed'		=> '#ffd850', # yellow
-									'assigned'		=> '#c8c8ff', # blue
-									'resolved'		=> '#cceedd', # blueish-green
-									'closed'		=> '#e8e8e8'); # light gray
+	$g_status_colors		= array( 'new'			=> '#ffa0a0', # red,
+									 'feedback'		=> '#ff50a8', # purple
+									 'acknowledged'	=> '#ffd850', # orange
+									 'confirmed'	=> '#ffffb0', # yellow
+									 'assigned'		=> '#c8c8ff', # blue
+									 'resolved'		=> '#cceedd', # buish-green
+									 'closed'		=> '#e8e8e8'); # light gray
 
 	###############################
 	# Mantis Cookie Variables
