@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.55 2003-02-18 02:28:09 jfitzell Exp $
+	# $Id: html_api.php,v 1.56 2003-02-18 02:37:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -31,17 +31,19 @@
 		html_head_begin();
 		html_content_type();
 		html_title();
-		html_css( config_get( 'css_include_file' ) );
+		html_css();
 		include( config_get( 'meta_include_file' ) );
 	}
+
 	# --------------------
 	# core part of page top but without login info and menu - used in login pages
 	function html_page_top2a() {
 		html_head_end();
 		html_body_begin();
 		html_header();
-		html_top_banner( config_get( 'top_include_page' ) );
+		html_top_banner();
 	}
+
 	# --------------------
 	# second part of the html, comes after the meta tags
 	#  includes the complete page top, including html_page_top2a()
@@ -54,6 +56,7 @@
 		}
 		print_menu();
 	}
+
 	# --------------------
 	# comes at the bottom of the html
 	# $p_file should always be the __FILE__ variable. This is passed to show source
@@ -65,6 +68,7 @@
 
 		html_page_bottom1a( $p_file );
 	}
+
 	# --------------------
 	# core page bottom - used in login pages
 	function html_page_bottom1a( $p_file = null ) {
@@ -72,11 +76,12 @@
 			$p_file = basename( $GLOBALS['PHP_SELF'] );
 		}
 
-		html_bottom_banner( config_get( 'bottom_include_page' ) );
+		html_bottom_banner();
 		html_footer( $p_file );
 		html_body_end();
 		html_end();
 	}
+
 	# --------------------
 	# (1) this is the first text sent by the page
 	function html_begin() {
@@ -87,11 +92,13 @@
 
 		echo '<html>';
 	}
+
 	# --------------------
 	# (2) Opens the <HEAD> section
 	function html_head_begin() {
 	   echo '<head>';
 	}
+
 	# --------------------
 	# (3) Prints the content-type
 	function html_content_type() {
@@ -114,16 +121,19 @@
 		
 		echo '<title>' . string_display( $t_title ) . "</title>\n";
 	}
+
 	# --------------------
 	# (5) includes the css include file to use, is likely to be either empty or css_inc.php
-	function html_css( $p_css ) {
-		echo '<link rel="stylesheet" type="text/css" href="'.$p_css.'" />';
+	function html_css() {
+		$t_css_url = config_get( 'css_include_file' );
+		echo '<link rel="stylesheet" type="text/css" href="' . $t_css_url . '" />';
 		echo '<script language="JavaScript" type="text/javascript">';
 		echo '<!--';
 		echo 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}';
 		echo '//-->';
 		echo '</script>';
 	}
+
 	# --------------------
 	# (6) OPTIONAL: for pages that require a redirect
 	# The time field is the number of seconds to wait before redirecting
@@ -142,16 +152,19 @@
 
 		return true;
 	}
+
 	# --------------------
 	# (7) Ends the <HEAD> section
 	function html_head_end() {
 		echo '</head>';
 	}
+
 	# --------------------
 	# (8) Starts the <BODY> of the page
 	function html_body_begin() {
 		echo '<body>';
 	}
+
 	# --------------------
 	# (9) Prints the title that is visible in the main panel of the browser
 	function html_header() {
@@ -168,22 +181,33 @@
 
 		echo '<div class="center"><span class="pagetitle">' . string_display( $t_title ) . '</span></div>';
 	}
+
 	# --------------------
 	# (10) $p_page is included.  This allows for the admin to have a nice banner or
 	# graphic at the top of every page
-	function html_top_banner( $p_page ) {
-		if (( !is_blank( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
-			include( $p_page );
+	function html_top_banner() {
+		$t_page = config_get( 'top_include_page' );
+
+		if ( !is_blank( $t_page ) &&
+			 file_exists( $t_page ) &&
+			 !is_dir( $t_page ) ) {
+			include( $t_page );
 		}
 	}
+
 	# --------------------
 	# (11) $p_page is included.  This allows for the admin to have a nice baner or
 	# graphic at the bottom of every page
-	function html_bottom_banner( $p_page ) {
-		if (( !is_blank( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
-			include( $p_page );
+	function html_bottom_banner() {
+		$t_page = config_get( 'bottom_include_page' );
+
+		if ( !is_blank( $t_page ) &&
+			 file_exists( $t_page ) &&
+			 !is_dir( $t_page ) ) {
+			include( $t_page );
 		}
 	}
+
 	# --------------------
 	# (12) Prints the bottom of page information
 	function html_footer( $p_file ) {
@@ -229,20 +253,24 @@
 			}
 		}
 	}
+
 	# --------------------
 	# (13) Ends the <BODY> section.
 	function html_body_end() {
 		echo '</body>';
 	}
+
 	# --------------------
 	# (14) The very last text that is sent in a html page.
 	function html_end() {
 		echo '</html>';
 	}
-	# --------------------
+
+
 	###########################################################################
 	# HTML Appearance Helper API
 	###########################################################################
+
 	# --------------------
 	# prints the user that is logged in and the date/time
 	# it also creates the form where users can switch projects
@@ -280,6 +308,7 @@
 	###########################################################################
 	# HTML Menu API
 	###########################################################################
+
 	# --------------------
 	# print the standard command menu at the top of the pages
 	# also prints the login info, time, and project select form
@@ -380,7 +409,7 @@
 		echo '</table>';
 	}
 
-	### --------------------
+	# --------------------
 	# prints the links to the graphic pages, in summary_page.php
 	function print_menu_graph() {
 		if ( config_get( 'use_jpgraph' ) ) {
@@ -440,6 +469,7 @@
 		print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) );
 		print_bracket_link( $t_account_profile_menu_page, lang_get( 'manage_profiles_link' ) );
 	}
+
 	# --------------------
 	# prints the doc menu
 	# if the $p_page matches a url then don't make that a link
@@ -460,6 +490,7 @@
 			print_bracket_link( $t_proj_doc_add_page, lang_get( 'add_file' ) );
 		}
 	}
+
 	# --------------------
 	# prints the manage doc menu
 	# if the $p_page matches a url then don't make that a link
@@ -480,6 +511,7 @@
 			print_bracket_link( $t_path.'CUSTOMIZATION', 'CUSTOMIZATION' );
 		echo '</div>';
 	}
+
 	# --------------------
 	# prints the summary menu
 	function print_summary_menu( $p_page='' ) {
@@ -500,6 +532,7 @@
 		}
 		echo '</div>';
 	}
+
 	# --------------------
 	# Print the color legend for the colors
 	function html_status_legend() {
@@ -553,6 +586,7 @@
 			echo '</td>';
 		}
 	}
+
 	# --------------------
 	# Print a button to assign the given bug
 	function html_button_bug_assign( $p_bug_id ) {
@@ -568,6 +602,7 @@
 			}
 		}
 	}
+
 	# --------------------
 	# Print a button to resolve the given bug
 	function html_button_bug_resolve( $p_bug_id ) {
@@ -579,6 +614,7 @@
 			echo '</td>';
 		}
 	}
+
 	# --------------------
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
@@ -592,6 +628,7 @@
 			echo '</td>';
 		}
 	}
+
 	# --------------------
 	# Print a button to close the given bug
 	function html_button_bug_close( $p_bug_id ) {
@@ -605,6 +642,7 @@
 			echo '</td>';
 		}
 	}
+
 	# --------------------
 	# Print a button to monitor the given bug
 	function html_button_bug_monitor( $p_bug_id ) {
@@ -616,6 +654,7 @@
 			echo '</td>';
 		}
 	}
+
 	# --------------------
 	# Print a button to unmonitor the given bug
 	#  no reason to ever disallow someone from unmonitoring a bug
@@ -626,6 +665,7 @@
 					 array( 'bug_id' => $p_bug_id, 'action' => 'delete' ) );
 		echo '</td>';
 	}
+
 	# --------------------
 	# Print a button to delete the given bug
 	function html_button_bug_delete( $p_bug_id ) {
@@ -637,6 +677,7 @@
 			echo '</td>';
 		}
 	}
+
 	# --------------------
 	# Print all buttons for view bug pages
 	function html_buttons_view_bug_page( $p_bug_id ) {
