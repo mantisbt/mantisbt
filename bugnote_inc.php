@@ -46,6 +46,12 @@
 		extract( $row, EXTR_PREFIX_ALL, 'v3' );
 		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
 
+		# do not print private bugnotes for non-developers
+		if (( PRIVATE == $v3_view_state ) &&
+			( !access_level_check_greater_or_equal( DEVELOPER ) )) {
+			continue;
+		}
+
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT id, note
 				FROM $g_mantis_bugnote_text_table
@@ -53,7 +59,7 @@
 		$result2 = db_query( $query );
 		$row = db_fetch_array( $result2 );
 
-		$v3_view_state = $row['id'];
+		$v3_bugnote_text_id = $row['id'];
 		$v3_note = $row['note'];
 
 		$v3_note = string_display( $v3_note );
@@ -65,11 +71,14 @@
 			<td class="category" colspan="2" width="25%">
 				<?php print_user( $v3_reporter_id ) ?><br />
 				<hr color="#eeeeee" size="1">
+				<?php if ( PRIVATE == $v3_view_state ) { ?>
+				<span class="small"><?php echo $s_private ?></span><br />
+				<hr color="#eeeeee" size="1">
+				<?php } ?>
 				<span class="small"><?php echo $v3_date_submitted ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php
-					# check access level
-					# only admins and the bugnote creator can delete this bugnote
+					# only admins and the bugnote creator can edit/delete this bugnote
 					# bug must be open to be editable
 					if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
 						if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
