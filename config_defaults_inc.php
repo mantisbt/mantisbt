@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.91 2003-02-22 18:49:42 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.92 2003-02-22 23:01:39 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -125,24 +125,56 @@
 	# allow email notification
 	$g_enable_email_notification	= ON;
 
-	# Associated with each action a list of flags to control who should be notified.
-	# The default will be used if the action is not included in $g_notify_flags or
-	# if the flag is not included in the specific action definition.
-	# The list of actions include: new, assigned, resolved, bugnote, reopened, closed, deleted, feedback
-	# In case you need to override the threshold for the 'admin' group in the custom_config_inc.php, use:
-	# $g_default_notify_flags['admin']	= OFF;
+	# The following two config options allow you to control who should get email
+	# notifications on different actions.  The first option (default_notify_flags)
+	# sets the default values for different user categories.  The user categories
+	# are:
+	# 
+	# 	   'reporter': the reporter of the bug
+	# 	    'handler': the handler of the bug
+	# 	    'monitor': users who are monitoring a bug
+	# 	   'bugnotes': users who have added a bugnote to the bug
+	# 'threshold_max': all users below this access level...
+	# 'threshold_min': ..and above this access level
+	# 
+	# The second config option (notify_flags) sets overrides for specific actions.
+	# If a user category is not listed for an action, the default from the config
+	# option above is used.  The possible actions are:
+	# 
+	# 	   'new': a new bug has been added
+	# 'assigned': a bug has been assigned
+	# 'resolved': a bug has been resolved
+	#  'bugnote': a bugnote has been added to a bug
+	# 'reopened': a bugnote has been reopened
+	#   'closed': a bug has been closed
+	#  'deleted': a bug has been deleted
+	# 'feedback': a bug has been put into the FEEDBACK state
+	# 
+	# If you wanted to have all developers get notified of new bugs you might add
+	# the following lines to your config file:
+	# 
+	# $g_notify_flags['new']['threshold_min'] = DEVELOPER;
+	# $g_notify_flags['new']['threshold_max'] = DEVELOPER;
+	# 
+	# You might want to do something similar so all managers are notified when a
+	# bug is closed.  If you didn't want reporters to be notified when a bug is
+	# closed (only when it is resolved) you would use:
+	# 
+	# $g_notify_flags['closed']['reporter'] = OFF;
+
 	$g_default_notify_flags	= array('reporter'	=> ON,
 									'handler'	=> ON,
-									'manager'	=> ON,
 									'monitor'	=> ON,
-									'admin'		=> ON,
 									'bugnotes'	=> ON,
 									'threshold_min'	=> NOBODY,
 									'threshold_max' => NOBODY);
 
-	# Following is the definition of the differences between the "new" action and the default.
-	# In case you need to override the threshold for the new action in custom_config_inc.php, use:
-	# $g_notify_flags['new']['threshold'] = MANAGER;
+	# We don't need to send these notifications on new bugs
+	# (see above for info on this config option)
+	#@@@ (though I'm not sure they need to be turned off anymore
+	#      - there just won't be anyone in those categories)
+	#      I guess it serves as an example and a placeholder for this
+	#      config option
 	$g_notify_flags['new']	= array('bugnotes'	=> OFF,
 									'monitor'	=> OFF);
 

@@ -27,6 +27,7 @@ Mantis ChangeLog
  * Fix #2982: Having email_set_category set to EMAIL_CATEGORY_PROJECT_CATEGORY erased various mail headers.
  * DB Upgrade: Added "id" primary key to bug history table.
  * Languages: Updated German localisation.
+ * Changed confit option (default_notify_flags): remove 'admin', 'manager', and 'threshold' categories and add 'threshold_min' and 'threshold_max'
  * New config option (email_receive_own): controls whether users receive emails for changes they make
  * New config option (display_bug_padding): controls the level of padding on bug ids
  * New config option (display_bugnote_padding): controls the level of padding on bugnote ids
