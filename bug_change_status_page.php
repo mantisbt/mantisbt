@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.6 2004-08-27 00:29:54 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.7 2004-09-03 04:19:01 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -187,7 +187,7 @@ if ( $f_new_status >= $t_resolved ) { ?>
 
 <?php
 	if ( ( bug_get_field( $f_bug_id, 'status' ) == $t_resolved ) 
-			&& ( $f_new_status = config_get( 'bug_reopen_status' ) ) ) {
+			&& ( $f_new_status == config_get( 'bug_reopen_status' ) ) ) {
 		# bug was re-opened
 		printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
 	}
