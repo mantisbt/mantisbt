@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.11 2002-12-30 05:38:39 jfitzell Exp $
+	# $Id: bug_report_advanced_page.php,v 1.12 2002-12-30 05:47:05 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,7 @@
 	$f_description			= gpc_get_string( 'description', '' );
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
 	$f_additional_info		= gpc_get_string( 'additional_info', '' );
-	$f_view_state			= gpc_get_int( 'view_state', 0 );
+	$f_view_state			= gpc_get_int( 'view_state', PUBLIC );
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
 ?>
