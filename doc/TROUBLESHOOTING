@@ -4,11 +4,11 @@
 
 Make sure you ran the upgrade steps in the UPGRADE file.
 
-For additional help please visit the website: http://mantisbt.sourceforge.net/
+For additional help please visit the website: http://www.mantisbt.org/
 
-FAQ:             http://mantisbt.sourceforge.net/faq.php3
+FAQ:             http://www.mantisbt.org/faq.php
 		 or doc/faq.html.
-Mailing Lists:   http://mantisbt.sourceforge.net/mailinglists.php3
+Mailing Lists:   http://www.mantisbt.org/mailinglists.php
 
 * PROBLEM: Cannot login.  It just redirects me to the login page with no errors
 or messages.

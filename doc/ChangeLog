@@ -7,6 +7,8 @@ Mantis ChangeLog
  * Fix #3522: /news_update.php looks different from /main_page.php.
  * Fix #3537: Rewriting custom values with 0 when updating a bug.
  * Fix #3539: Simple view page shows advanced custom fields.
+ * Fix #3541: link to documentation wrong.
+ * Mantis website moved to http://www.mantisbt.org
 
 2004.02.06  -  0.18.1
 

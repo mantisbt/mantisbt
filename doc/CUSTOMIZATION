@@ -4,23 +4,13 @@ Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
 Copyright (C) 2002-2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
-Visit the following links for Customization details:
-http://mantisbt.sourceforge.net/manual/manual.customizing.mantis.php
-
-
 CONFIGURATION
 
 * Also see configuration.html
 
-NOTE: Currently Mantis is still in heavy development.  Drastic changes may
-occur negating large amounts of customization that you may implement.
-When the package is functionally more mature we will concentrate on
-making the interface more customizable.  Keep this in mind before you
-put in a lot of effort into customizing the look/feel of the product.
-
-
 This file contains information to help you customize Mantis.  A more
-detailed doc is in the works.
+detailed doc can be found at:
+http://www.mantisbt.org/manual/manual.customizing.mantis.php
 
 * config_defaults_inc.php
   - this file contains the default values for all the site-wide variables.
@@ -41,7 +31,7 @@ detailed doc is in the works.
 * count variables have the word count in the variable name
 
 More detail can be seen in the coding guidelines at:
-http://mantisbt.sourceforge.net/guidelines.php3
+http://www.mantisbt.org/guidelines.php
 
 Also at:
 http://utvikler.start.no/code/php_coding_standard.html

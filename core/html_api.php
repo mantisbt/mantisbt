@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.81 2004-02-05 12:45:21 vboctor Exp $
+	# $Id: html_api.php,v 1.82 2004-02-08 13:16:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -293,7 +293,7 @@
 		echo '<br />';
 		echo '<hr size="1" />';
 		if ( ON == config_get( 'show_version' ) ) {
-			echo '<span class="timer"><a href="http://mantisbt.sourceforge.net/">Mantis ' . config_get( 'mantis_version' ) . '</a></span>';
+			echo '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ' . config_get( 'mantis_version' ) . '</a></span>';
 		}
 		echo '<address>Copyright &copy; 2000 - 2004</address>';
 		echo '<address><a href="mailto:' . config_get( 'webmaster_email' ) . '">' . config_get( 'webmaster_email' ) . '</a></address>';
