@@ -10,11 +10,11 @@
 	# Italian: Stefano Mazzocchi, stefano@apache.org
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.56 $
+	# $Revision: 1.57 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:19 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_italian.txt,v 1.56 2003-08-22 06:00:19 beerfrick Exp $
+	# $Id: strings_italian.txt,v 1.57 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -796,8 +796,6 @@ $s_show = "Quanti bug";
 $s_changed = "Modificato (ore)";
 $s_viewing_bugs_title = "Elenco dei Bug";
 $s_updated = "Aggiornato";
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = "nessuno";

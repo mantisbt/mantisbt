@@ -9,11 +9,11 @@
 	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.12 $
+	# $Revision: 1.13 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:32 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_slovak.txt,v 1.12 2003-08-22 06:00:32 beerfrick Exp $
+	# $Id: strings_slovak.txt,v 1.13 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -795,8 +795,6 @@ $s_show = 'Ukáza»';
 $s_changed = 'Zmenené(h)';
 $s_viewing_bugs_title = 'Prehladanie bugov';
 $s_updated = 'Aktualizácia';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = '¾iadny';

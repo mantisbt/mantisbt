@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.55 $
+	# $Revision: 1.56 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:12 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_dutch.txt,v 1.55 2003-08-22 06:00:12 beerfrick Exp $
+	# $Id: strings_dutch.txt,v 1.56 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 
 ?>
@@ -796,8 +796,6 @@ $s_show = 'Laat zien';
 $s_changed = 'Aangepast (uren)';
 $s_viewing_bugs_title = 'Bekijken bugs';
 $s_updated = 'Aangepast';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'geen';

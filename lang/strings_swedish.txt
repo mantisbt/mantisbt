@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.54 $
+	# $Revision: 1.55 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:34 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_swedish.txt,v 1.54 2003-08-22 06:00:34 beerfrick Exp $
+	# $Id: strings_swedish.txt,v 1.55 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -793,8 +793,6 @@ $s_show = 'Visa';
 $s_changed = 'Ändrad(timmar)';
 $s_viewing_bugs_title = 'Visa buggar';
 $s_updated = 'Uppdaterad';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'ingen';

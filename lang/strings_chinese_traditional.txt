@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:11 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.50 2003-08-22 06:00:11 beerfrick Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.51 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -793,8 +793,6 @@ $s_show = '顯示';
 $s_changed = '已變更(小時)';
 $s_viewing_bugs_title = '檢視臭蟲';
 $s_updated = '已更新';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'none';

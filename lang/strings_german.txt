@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.78 $
+	# $Revision: 1.79 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:17 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_german.txt,v 1.78 2003-08-22 06:00:17 beerfrick Exp $
+	# $Id: strings_german.txt,v 1.79 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -797,8 +797,6 @@ $s_show = 'Zeige';
 $s_changed = 'geändert (Std.)';
 $s_viewing_bugs_title = 'Fehler anzeigen';
 $s_updated = 'Aktualisiert';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'keine';

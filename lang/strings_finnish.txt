@@ -10,11 +10,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.3 $
+	# $Revision: 1.4 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:14 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_finnish.txt,v 1.3 2003-08-22 06:00:14 beerfrick Exp $
+	# $Id: strings_finnish.txt,v 1.4 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -796,8 +796,6 @@ $s_show = 'Näytä';
 $s_changed = 'Muutettu(tuntia)';
 $s_viewing_bugs_title = 'Näytetään Bugit';
 $s_updated = 'Päivitetty';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'none';

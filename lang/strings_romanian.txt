@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:30 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_romanian.txt,v 1.49 2003-08-22 06:00:30 beerfrick Exp $
+	# $Id: strings_romanian.txt,v 1.50 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -793,8 +793,6 @@ $s_show = 'Arata';
 $s_changed = 'Modificate(ore)';
 $s_viewing_bugs_title = 'Lista de bug-uri';
 $s_updated = 'Modificat';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'nimic';

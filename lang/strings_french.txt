@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.62 $
+	# $Revision: 1.63 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:15 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_french.txt,v 1.62 2003-08-22 06:00:15 beerfrick Exp $
+	# $Id: strings_french.txt,v 1.63 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -800,8 +800,6 @@ $s_show = 'Afficher';
 $s_changed = 'Modifiés (heures)';
 $s_viewing_bugs_title = 'Liste des bugs';
 $s_updated = 'Mis à jour';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'aucun';

@@ -10,11 +10,11 @@
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
 	# -------------------------------------------------
-	# $Revision: 1.31 $
+	# $Revision: 1.32 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:10 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.31 2003-08-22 06:00:10 beerfrick Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.32 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -796,8 +796,6 @@ $s_show = "显示";
 $s_changed = "已变更(小时)";
 $s_viewing_bugs_title = "检查Bug";
 $s_updated = "已更新";
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = "none";

@@ -8,11 +8,11 @@
 	# Portuguese Brazil: Felipe Tonioli, tonioli@easyline.com.br
 	# Portuguese Brazil: Fernando Machado, fm-nospam@fmachado.com
 	# -------------------------------------------------
-	# $Revision: 1.52 $
+	# $Revision: 1.53 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:29 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.52 2003-08-22 06:00:29 beerfrick Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.53 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -794,8 +794,6 @@ $s_show               = "Exibir";
 $s_changed            = "Modificado (hora)";
 $s_viewing_bugs_title = "Visualizar Bugs";
 $s_updated            = "Atualizado";
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none           = "Nenhum";

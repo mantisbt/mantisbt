@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.52 $
+	# $Revision: 1.53 $
 	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:12 $
+	# $Date: 2003-08-24 10:02:33 $
 	#
-	# $Id: strings_danish.txt,v 1.52 2003-08-22 06:00:12 beerfrick Exp $
+	# $Id: strings_danish.txt,v 1.53 2003-08-24 10:02:33 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -793,8 +793,6 @@ $s_show = 'Vis';
 $s_changed = 'Ændret (time)';
 $s_viewing_bugs_title = 'Vis Fejl';
 $s_updated = 'Opdateret';
-$s_last_bugnote = 'Last';
-$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'ingen';
