@@ -11,7 +11,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_user_check_only() ?>
 <?php
-	check_varset( $f_ref, '' );
+	$f_ref	= gpc_get_string( 'f_ref', '' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2a() ?>
@@ -24,7 +24,7 @@
 	<td class="form-title" colspan="2">
 		<form method="post" action="set_project.php">
 		<input type="hidden" name="f_ref" value="<?php echo $f_ref ?>" />
-		<?php echo $s_login_title ?>
+		<?php echo lang_get( 'login_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -33,14 +33,14 @@
 	</td>
 	<td width="60%">
 		<select name="f_project_id">
-		<option value="00000000"><?php echo $s_all_projects ?></option>
+		<option value="00000000"><?php echo lang_get( 'all_projects' ) ?></option>
 		<?php print_project_option_list() ?>
 		</select>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_make_default ?>:
+		<?php echo lang_get( 'make_default' ) ?>:
 	</td>
 	<td>
 		<input type="checkbox" name="f_make_default" />
@@ -48,7 +48,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_select_project_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'select_project_button') ?>" />
 		</form>
 	</td>
 </tr>
