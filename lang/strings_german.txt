@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.127 $
+	# $Revision: 1.128 $
 	# $Author: bigbadger $
-	# $Date: 2005-03-21 04:47:58 $
+	# $Date: 2005-03-22 04:30:25 $
 	#
-	# $Id: strings_german.txt,v 1.127 2005-03-21 04:47:58 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.128 2005-03-22 04:30:25 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,10 +29,10 @@ $s_actiongroup_menu_copy = 'Kopieren';
 $s_actiongroup_menu_assign = 'Zuordnen';
 $s_actiongroup_menu_close = 'Schließen';
 $s_actiongroup_menu_delete = 'Löschen';
-$s_actiongroup_menu_resolve = 'Beheben';
+$s_actiongroup_menu_resolve = 'Erledigen';
 $s_actiongroup_menu_update_priority = 'Priorität ändern';
 $s_actiongroup_menu_update_status = 'Status ändern';
-$s_actiongroup_menu_update_view_status = 'Aktualisiere Anzeigestatus';
+$s_actiongroup_menu_update_view_status = 'Anzeigestatus ändern';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Ausgewählte Probleme';
@@ -112,7 +112,7 @@ $s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich lösch
 $s_move_bugs_conf_msg = 'Probleme verschieben zu Projekt:';
 $s_copy_bugs_conf_msg = 'Probleme kopieren nach';
 $s_assign_bugs_conf_msg = 'Probleme zuordnen zu:';
-$s_resolve_bugs_conf_msg = 'Grund für Behebung auswählen:';
+$s_resolve_bugs_conf_msg = 'Grund für Erledigung auswählen:';
 $s_priority_bugs_conf_msg = 'Neue Problempriorität:';
 $s_status_bugs_conf_msg = 'Neuer Problemstatus:';
 $s_view_status_bugs_conf_msg = 'Anzeigestatus des Problems auswählen';
@@ -122,10 +122,10 @@ $s_delete_group_bugs_button = 'Probleme löschen' ;
 $s_move_group_bugs_button = 'Probleme verschieben' ;
 $s_copy_group_bugs_button = 'Probleme kopieren' ;
 $s_assign_group_bugs_button = 'Probleme zuordnen' ;
-$s_resolve_group_bugs_button = 'Probleme beheben' ;
+$s_resolve_group_bugs_button = 'Probleme erledigen' ;
 $s_priority_group_bugs_button = 'Priorität ändern' ;
 $s_status_group_bugs_button = 'Status ändern' ;
-$s_view_status_group_bugs_button = 'Anzeigestatus aktualisieren';
+$s_view_status_group_bugs_button = 'Anzeigestatus ändern';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
@@ -149,7 +149,7 @@ $s_severity_link = 'nach Schwere';
 $s_category_link = 'nach Kategorie';
 $s_resolution_link = 'nach Lösung';
 $s_legend_still_open = 'Noch offen';
-$s_legend_resolved = 'Behoben';
+$s_legend_resolved = 'Erledigt';
 $s_legend_assigned = 'Zugewiesen';
 $s_legend_total = 'Gesamt';
 $s_legend_opened = 'Geöffnet';
@@ -252,7 +252,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Die Bestätigungs-URL 
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. Anzahl der in Bearbeitung befindlichen Anfragen erreicht. Bitte setzen Sie sich mit Ihrem Systemadministrator in Verbindung.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'Ihr Konto ist vielleich deaktiviert oder gesperrt (wegen zu vieler fehlgeschlagener Loginversuche) oder der eingebene Benutzername oder das Passwort sind falsch.';
 $s_login_error = 'Benutzername oder Passwort falsch.';
 $s_login_cookies_disabled = 'Ihr Web-Browser akzeptiert keine Cookies.';
 
@@ -280,8 +280,8 @@ $s_view_state_enum_string = '10:öffentlich,50:privat';
 $s_priority_enum_string = '10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:sofort';
 $s_severity_enum_string = '10:Feature-Wunsch,20:Trivial,30:Fehler im Text,40:Unschönheit,50:kleinerer Fehler,60:schwerer Fehler,70:Absturz,80:Blocker';
 $s_reproducibility_enum_string = '10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar,100:N/A';
-$s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zugewiesen,80:behoben,90:geschlossen';
-$s_resolution_enum_string = '10:offen,20:behoben,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:keine Bearbeitung,80:aufgeschoben,90:wird nicht behoben';
+$s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zugewiesen,80:erledigt,90:geschlossen';
+$s_resolution_enum_string = '10:offen,20:behoben,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:wird nicht behoben';
 $s_projection_enum_string = '10:keine,30:Kleinigkeit,50:kleinere Änderung,70:größere Änderung,90:Neuentwicklung';
 $s_eta_enum_string = '10:keine,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,60:> 1 Monat';
 
@@ -304,7 +304,7 @@ $s_email_notification_title_for_status_bug_feedback = 'Das folgende Problem benö
 $s_email_notification_title_for_status_bug_acknowledged = 'Das folgende Problem wurde anerkannt.';
 $s_email_notification_title_for_status_bug_confirmed = 'Das folgende Problem wurde bestätigt.';
 $s_email_notification_title_for_status_bug_assigned = 'Das folgende Problem wurde zugewiesen.';
-$s_email_notification_title_for_status_bug_resolved = 'Das folgende Problem wurde behoben.';
+$s_email_notification_title_for_status_bug_resolved = 'Das folgende Problem wurde erledigt.';
 $s_email_notification_title_for_status_bug_closed = 'Das folgende Problem wurde geschlossen.';
 
 $s_email_notification_title_for_action_bug_submitted = 'Das folgende Problem wurde mitgeteilt.';
@@ -327,7 +327,7 @@ $s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Die
 $s_email_notification_title_for_action_related_to_relationship_deleted = "Die Beziehung des folgenden Problems als VERWANDT MIT Problem %s wurde aufgehoben.";
 $s_email_notification_title_for_action_dependant_on_relationship_deleted = "Das folgende Problem ist nicht mehr VORFAHRE VON Problem %s.";
 $s_email_notification_title_for_action_blocks_relationship_deleted = "Das folgende Problem ist nicht mehr NACHKOMME VON Problem %s..";
-$s_email_notification_title_for_action_relationship_child_resolved = "Das VERWANDTE Problem %s wurde BEHOBEN.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Das VERWANDTE Problem %s wurde ERLEDIGT.";
 $s_email_notification_title_for_action_relationship_child_closed = "Das VERWANDTE Problem %s wurde GESCHLOSSEN.";
 
 $s_email_reporter = 'Berichtet von';
@@ -383,7 +383,7 @@ $s_bugnote_order_desc = 'Absteigend';
 $s_email_on_new = 'E-Mail bei Neueintrag';
 $s_email_on_assigned = 'E-Mail bei Zuweisung';
 $s_email_on_feedback = 'E-Mail bei Rückmeldung';
-$s_email_on_resolved = 'E-Mail bei Behoben';
+$s_email_on_resolved = 'E-Mail bei Erledigung';
 $s_email_on_closed = 'E-Mail bei Schließen';
 $s_email_on_reopened = 'E-Mail bei Wiedereröffnung';
 $s_email_on_bugnote_added = 'E-Mail bei Problemergänzung';
@@ -488,12 +488,12 @@ $s_reopen_add_bugnote_title = 'Notiz für Problemreaktivierung hinzufügen';
 $s_bugnote_add_reopen_button = 'Notiz hinzufügen und Problem reaktivieren';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Problem behoben';
-$s_resolved_bug_button = 'Problem beheben';
+$s_resolved_bug_title = 'Problem erledigt';
+$s_resolved_bug_button = 'Problem erledigen';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Problem behoben. Bitte Notiz eingeben...';
-$s_resolve_add_bugnote_title = 'Notiz zur Problembehebung eingeben';
+$s_bug_resolved_msg = 'Problem erledigt. Bitte Notiz eingeben...';
+$s_resolve_add_bugnote_title = 'Notiz zur Problemerledigung eingeben';
 $s_bugnote_add_resolve_button = 'Notiz hinzufügen';
 
 # bug_reminder_page.php
@@ -821,8 +821,8 @@ $s_my_view_link = 'Übersicht';
 $s_my_view_title_unassigned = 'Nicht zugewiesen';
 $s_my_view_title_recent_mod = 'Vor kurzem bearbeitet';
 $s_my_view_title_reported = 'Von mir berichtet';
-$s_my_view_title_assigned = 'Mir zugewiesen (noch nicht behoben)';
-$s_my_view_title_resolved = 'Behoben';
+$s_my_view_title_assigned = 'Mir zugewiesen (noch nicht erledigt)';
+$s_my_view_title_resolved = 'Erledigt';
 $s_my_view_title_monitored = 'Von mir beobachtet';
 
 # news_add.php
@@ -942,7 +942,7 @@ $s_no_reponse_msg = 'Sie haben sieben Tage um die Kontobestätigung auszuführen. 
 
 # signup_page.php
 $s_signup_captcha_request = 'Geben Sie den Code ein, den Sie im Rahmen auf der rechten Seite sehen.';
-$s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten, wird Ihnen einen Bestätigungsmail an die angegebene Adresse geschickt.<br/>Benutzen Sie diese E-Mail um Ihr Konto zu aktivieren. Wenn Sie Ihr Konto nicht innerhalb von sieben Tagen freischalten wird das Konto entfernt.<br/>Sie müssen eine gültige E-Mail Adresse angeben um die Bestätigungsmail zu erhalten.';
+$s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten, wird Ihnen eine Bestätigungsmail an die angegebene Adresse geschickt.<br/>Benutzen Sie diese E-Mail, um Ihr Konto zu aktivieren. Wenn Sie Ihr Konto nicht innerhalb von sieben Tagen freischalten, wird das Konto entfernt.<br/>Sie müssen eine gültige E-Mail Adresse angeben um die Bestätigungsmail zu erhalten.';
 $s_signup_title = 'Anmeldung';
 $s_signup_button = 'Anmelden';
 $s_no_password_request = 'Ihr Passwort wird von einem anderen System verwaltet. Nehmen Sie Kontakt mit Ihrem Administrator auf.';
@@ -966,7 +966,7 @@ $s_by_project = 'Nach Projekt';
 $s_by_status = 'Nach Status';
 $s_by_date = 'Nach Datum';
 $s_by_severity = 'Nach Schweregrad';
-$s_by_resolution = 'Nach Behebung';
+$s_by_resolution = 'Nach Lösung';
 $s_by_category = 'Nach Kategorie';
 $s_by_priority = 'Nach Priorität';
 $s_by_developer = 'Nach Entwickler';
@@ -985,7 +985,7 @@ $s_average_time = 'durchschnittlich';
 $s_total_time = 'insgesamt';
 $s_developer_stats = 'Entwicklerstatistik';
 $s_reporter_stats = 'Reporter Statistiken';
-$s_orct = '(offen/behoben/geschlossen/gesamt)';
+$s_orct = '(offen/erledigt/geschlossen/gesamt)';
 
 # view_all_bug_page.php
 $s_any = 'alle';
@@ -1032,7 +1032,7 @@ $s_query_delete_msg = 'Möchten Sie diesen Filter wirklich löschen?';
 # view_bug_advanced_page.php
 $s_view_simple_link = 'einfache Anzeige';
 $s_viewing_bug_advanced_details_title = 'Erweiterte Problemanzeige';
-$s_product_build = 'Produktbuilt';
+$s_product_build = 'Produktbuild';
 $s_system_profile = 'Systembeschreibung';
 $s_update_bug_button = 'Aktualisieren';
 $s_bug_assign_to_button = 'Zuordnen zu';
@@ -1082,11 +1082,11 @@ $s_custom_field_length_max = 'Maximallänge';
 $s_custom_field_advanced = 'Erweitert';
 $s_custom_field_display_report = 'Bei Problemeingabe anzeigen';
 $s_custom_field_display_update = 'Bei Problemaktualisierung anzeigen';
-$s_custom_field_display_resolved = 'Beim Beheben anzeigen';
+$s_custom_field_display_resolved = 'Beim Erledigen anzeigen';
 $s_custom_field_display_closed = 'Beim Schließen anzeigen';
 $s_custom_field_require_report = 'Erforderlich für neue Reports';
 $s_custom_field_require_update = 'Erforderlich beim Aktualisieren';
-$s_custom_field_require_resolved = 'Erforderlich beim Beheben';
+$s_custom_field_require_resolved = 'Erforderlich beim Erledigen';
 $s_custom_field_require_closed = 'Erforderlich beim Schließen';
 
 $s_custom_field_sequence = 'Reihenfolge';
@@ -1101,7 +1101,7 @@ $s_field_remove_button = 'Remove Field';
 
 $s_hide_status = 'Status ausblenden';
 $s_filter_closed = 'Geschlossen';
-$s_filter_resolved = 'Behoben';
+$s_filter_resolved = 'Erledigt';
 $s_hide_closed = "Geschlossene Probleme ausblenden";
 $s_hide_resolved = "Gelöste Probleme ausblenden";
 $s_and_above = 'und darüber';
@@ -1146,8 +1146,9 @@ $s_replace_relationship_sure_msg = "Es besteht bereits eine Beziehung zwischen d
 $s_relationship_with_parent = "Beziehung mit dem Vorfahren-Problem";
 $s_delete_relationship_button = "Löschen";
 $s_delete_relationship_sure_msg = "Sind Sie sicher, dass Sie diese Beziehung löschen wollen?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ACHTUNG</b>. Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Grundproblem <b>beheben/schließen</b>, sollten alle seine Folgeprobleme behoben oder geschlossen werden.";
+$s_relationship_warning_blocking_bugs_not_resolved = "Nicht alle Folgeprobleme sind bereits erledigt oder geschlossen.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ACHTUNG</b>. Nicht alle Folgeprobleme sind bereits erledigt oder geschlossen.<br>Bevor Sie ein Grundproblem <b>erledigen/schließen</b>, sollten alle seine Folgeprobleme erledigt oder geschlossen werden.";
+
 $s_create_child_bug_button = "Klon erzeugen";
 $s_bug_cloned_to = "Problem dupliziert";
 $s_bug_created_from = "Problem angelegt von";
@@ -1190,7 +1191,7 @@ $s_view_private_news = 'Private Nachrichten ansehen';
 $s_manage_news = 'Nachrichten verwalten';
 $s_view_list_of_attachments = 'Liste der Anhänge ansehen';
 $s_download_attachments = 'Anhänge downloaden';
-$s_delete_attachments = 'Anhängelöschen';
+$s_delete_attachments = 'Anhänge löschen';
 $s_delete_attachment_button = "Delete";
 $s_delete_attachment_sure_msg = "Are you sure you wish to delete this attachment?";
 $s_upload_issue_attachments = 'Anhänge für Problem uploaden ';
