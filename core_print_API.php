@@ -97,35 +97,6 @@
 	# Option List Printing API
 	###########################################################################
 	### --------------------
-	function print_handler_option_list( $p_handler_id ) {
-		global $g_mantis_user_table;
-
-		$t_dev = DEVELOPER;
-		$t_man = MANAGER;
-		$t_adm = ADMINISTRATOR;
-
-	    $query = "SELECT id, username
-	    		FROM $g_mantis_user_table
-				WHERE 	access_level=$t_dev OR
-						access_level=$t_man OR
-						access_level=$t_adm
-	    		ORDER BY username";
-	    $result = db_query( $query );
-	    $user_count = db_num_rows( $result );
-	    for ($i=0;$i<$user_count;$i++) {
-	    	$row = db_fetch_array( $result );
-	    	$t_handler_id	= $row["id"];
-	    	$t_handler_name	= $row["username"];
-
-	    	if ( $t_handler_id==$p_handler_id ) {
-				PRINT "<option value=\"$t_handler_id\" SELECTED>".$t_handler_name."</option>";
-			}
-			else {
-				PRINT "<option value=\"$t_handler_id\">".$t_handler_name."</option>";
-			}
-		}
-	}
-	### --------------------
 	function print_user_option_list( $p_user_id ) {
 		global $g_mantis_user_table;
 

@@ -26,6 +26,7 @@ Mantis
  * Modified set project to clear view filters when changing projects
  * Modified the report_bug pages to properly honor $g_show_report
  * Removed email_bug_info_to_address()
+ * Removed print_handler_option_list()
 
 08.28.2001  -   0.15.7
 
