@@ -198,8 +198,8 @@
 	$s_bug_deleted_msg = 'Баг удален...';
 
 	# bug_monitor.php3
-	$s_monitor_bug_button = 'Monitor Bug';
-	$s_unmonitor_bug_button = 'End Monitoring';
+	$s_monitor_bug_button = "Следить";
+	$s_unmonitor_bug_button = "Не следить"; 
 
 	# bug_delete_page.php3
 	$s_delete_bug_sure_msg = 'Вы уверены, что желаете обновить баг?';
