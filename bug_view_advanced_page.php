@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.27 2003-01-25 20:50:22 jlatour Exp $
+	# $Id: bug_view_advanced_page.php,v 1.28 2003-01-25 21:13:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,12 +14,12 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'bug_api.php' );
-	require_once( $t_core_path . 'custom_field_api.php' );
-	require_once( $t_core_path . 'file_api.php' );
-	require_once( $t_core_path . 'compress_api.php' );
-	require_once( $t_core_path . 'date_api.php' );
-	require_once( $t_core_path . 'relationship_api.php' );
+	require_once( $t_core_path.'bug_api.php' );
+	require_once( $t_core_path.'custom_field_api.php' );
+	require_once( $t_core_path.'file_api.php' );
+	require_once( $t_core_path.'compress_api.php' );
+	require_once( $t_core_path.'date_api.php' );
+	require_once( $t_core_path.'relationship_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: jump_to_bug.php,v 1.15 2003-01-25 19:10:42 jlatour Exp $
+	# $Id: jump_to_bug.php,v 1.16 2003-01-25 21:13:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,7 +17,7 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'bug_api.php' );
+	require_once( $t_core_path.'bug_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

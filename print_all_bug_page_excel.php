@@ -15,9 +15,9 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'current_user_api.php' );
-	require_once( $t_core_path . 'bug_api.php' );
-	require_once( $t_core_path . 'string_api.php' );
+	require_once( $t_core_path.'current_user_api.php' );
+	require_once( $t_core_path.'bug_api.php' );
+	require_once( $t_core_path.'string_api.php' );
 ?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
 <?php login_cookie_check() ?>

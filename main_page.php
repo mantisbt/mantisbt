@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.33 2003-01-25 19:10:42 jlatour Exp $
+	# $Id: main_page.php,v 1.34 2003-01-25 21:13:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,8 +18,8 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'current_user_api.php' );
-	require_once( $t_core_path . 'news_api.php' );
+	require_once( $t_core_path.'current_user_api.php' );
+	require_once( $t_core_path.'news_api.php' );
 ?>
 <?php login_cookie_check();
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.9 2003-01-25 19:10:42 jlatour Exp $
+	# $Id: csv_export.php,v 1.10 2003-01-25 21:13:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,7 +14,7 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'filter_api.php' );
+	require_once( $t_core_path.'filter_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.20 2003-01-25 19:10:42 jlatour Exp $
+	# $Id: file_download.php,v 1.21 2003-01-25 21:13:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,7 +17,7 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'file_api.php' );
+	require_once( $t_core_path.'file_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

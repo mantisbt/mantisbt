@@ -12,7 +12,7 @@
 <?php
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'string_api.php' );
+	require_once( $t_core_path.'string_api.php' );
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );

@@ -8,11 +8,11 @@
 <?php
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'current_user_api.php' );
-	require_once( $t_core_path . 'bug_api.php' );
-	require_once( $t_core_path . 'string_api.php' );
-	require_once( $t_core_path . 'date_api.php' );
-	require_once( $t_core_path . 'icon_api.php' );
+	require_once( $t_core_path.'current_user_api.php' );
+	require_once( $t_core_path.'bug_api.php' );
+	require_once( $t_core_path.'string_api.php' );
+	require_once( $t_core_path.'date_api.php' );
+	require_once( $t_core_path.'icon_api.php' );
 ?>
 <?php
 	$t_filter = current_user_get_bug_filter();

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_update.php,v 1.30 2003-01-25 19:10:41 jlatour Exp $
+	# $Id: bugnote_update.php,v 1.31 2003-01-25 21:13:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,8 +17,8 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'bug_api.php' );
-	require_once( $t_core_path . 'bugnote_api.php' );
+	require_once( $t_core_path.'bug_api.php' );
+	require_once( $t_core_path.'bugnote_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.44 $
+	# $Revision: 1.45 $
 	# $Author: jlatour $
-	# $Date: 2003-01-25 19:10:44 $
+	# $Date: 2003-01-25 21:13:20 $
 	#
-	# $Id: view_all_bug_page.php,v 1.44 2003-01-25 19:10:44 jlatour Exp $
+	# $Id: view_all_bug_page.php,v 1.45 2003-01-25 21:13:20 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,8 +18,8 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'compress_api.php' );
-	require_once( $t_core_path . 'filter_api.php' );
+	require_once( $t_core_path.'compress_api.php' );
+	require_once( $t_core_path.'filter_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

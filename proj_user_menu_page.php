@@ -10,7 +10,7 @@
 
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'icon_api.php' );
+	require_once( $t_core_path.'icon_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

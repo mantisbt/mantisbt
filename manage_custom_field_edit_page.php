@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.8 2003-01-25 19:10:42 jlatour Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.9 2003-01-25 21:13:18 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,7 +14,7 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'custom_field_api.php' );
+	require_once( $t_core_path.'custom_field_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php

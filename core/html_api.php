@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.36 2003-01-25 18:21:08 jlatour Exp $
+	# $Id: html_api.php,v 1.37 2003-01-25 21:13:20 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -448,12 +448,12 @@
 		if ( config_get( 'use_jpgraph' ) ) {
 			$t_icon_path = config_get( 'icon_path' );
 
-			echo '<a href="summary_page.php"><img src="' . $t_icon_path . 'synthese.gif" border="0" align="center" />' . lang_get( 'synthesis_link' ) . '</a> | ';
-			echo '<a href="summary_graph_imp_status.php"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'status_link' ) . '</a> | ';
-			echo '<a href="summary_graph_imp_priority.php"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'priority_link' ) . '</a> | ';
-			echo '<a href="summary_graph_imp_severity.php"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'severity_link' ) . '</a> | ';
-			echo '<a href="summary_graph_imp_category.php"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'category_link' ) . '</a> | ';
-			echo '<a href="summary_graph_imp_resolution.php"><img src="' . $t_icon_path . 'synthgraph.gif" border="0" align="center" />' . lang_get( 'resolution_link' ) . '</a>';
+			echo '<a href="summary_page.php"><img src="' . $t_icon_path.'synthese.gif" border="0" align="center" />' . lang_get( 'synthesis_link' ) . '</a> | ';
+			echo '<a href="summary_graph_imp_status.php"><img src="' . $t_icon_path.'synthgraph.gif" border="0" align="center" />' . lang_get( 'status_link' ) . '</a> | ';
+			echo '<a href="summary_graph_imp_priority.php"><img src="' . $t_icon_path.'synthgraph.gif" border="0" align="center" />' . lang_get( 'priority_link' ) . '</a> | ';
+			echo '<a href="summary_graph_imp_severity.php"><img src="' . $t_icon_path.'synthgraph.gif" border="0" align="center" />' . lang_get( 'severity_link' ) . '</a> | ';
+			echo '<a href="summary_graph_imp_category.php"><img src="' . $t_icon_path.'synthgraph.gif" border="0" align="center" />' . lang_get( 'category_link' ) . '</a> | ';
+			echo '<a href="summary_graph_imp_resolution.php"><img src="' . $t_icon_path.'synthgraph.gif" border="0" align="center" />' . lang_get( 'resolution_link' ) . '</a>';
 		}
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.25 2003-01-25 19:10:39 jlatour Exp $
+	# $Id: account_prof_menu_page.php,v 1.26 2003-01-25 21:13:14 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path . 'current_user_api.php' );
+	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php
