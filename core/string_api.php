@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.43 2004-02-22 04:41:46 vboctor Exp $
+	# $Id: string_api.php,v 1.44 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'user_pref_api.php' );
 
@@ -49,7 +49,7 @@
 
 		return $p_string;
 	}
-	
+
 	# --------------------
 	# Prepare a string for display to HTML and add href anchors for URLs, emails,
 	#  bug references, and cvs references
@@ -59,7 +59,7 @@
 		$p_string = string_insert_hrefs( $p_string );
 		$p_string = string_process_bug_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
-		
+
 		return $p_string;
 	}
 
@@ -70,16 +70,16 @@
 
 		return $p_string;
 	}
-	
+
 	# --------------------
 	# Prepare a string for plain text display in email and add URLs for bug
 	#  links and cvs links
 	function string_email_links( $p_string ) {
 		$p_string = string_email( $p_string );
-		
+
 		$p_string = string_process_bug_link( $p_string, false );
 		$p_string = string_process_cvs_link( $p_string, false );
-		
+
 		return $p_string;
 	}
 
@@ -104,7 +104,7 @@
 		return $p_string;
 	}
 
-	# --------------------	
+	# --------------------
 	# process the $p_string and convert filenames in the format
 	#  cvs:filename.ext or cvs:filename.ext:n.nn to a html link
 	# if $p_include_anchor is true, include an <a href="..."> tag,
@@ -140,7 +140,7 @@
 
 		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
 								$p_string, $t_matches, PREG_SET_ORDER );
-		
+
 		$t_result = '';
 
 		if ( $p_include_anchor ) {
@@ -159,7 +159,7 @@
 		} else {
 			foreach ( $t_matches as $t_match ) {
 				$t_result .= $t_match[1];
-				
+
 				if ( isset( $t_match[2] ) ) {
 					$t_bug_id = $t_match[2];
 					# We might as well create the link here even if the bug
@@ -284,19 +284,16 @@
 
 		switch ( config_get( 'show_' . $p_action ) ) {
 			case BOTH:
-				if ( null !== $p_user_id &&
-					 ON == user_pref_get_pref( $p_user_id, 'advanced_' . $p_action ) ) {
-					return 'bug_' . $p_action . '_advanced_page.php';
-				} else {
-					return 'bug_' . $p_action . '_page.php';
-				}
-				break;
+					if ( ( null !== $p_user_id ) &&
+						 ( ON == user_pref_get_pref( $p_user_id, 'advanced_' . $p_action ) ) ) {
+						return 'bug_' . $p_action . '_advanced_page.php';
+					} else {
+						return 'bug_' . $p_action . '_page.php';
+					}
 			case SIMPLE_ONLY:
 					return 'bug_' . $p_action . '_page.php';
-				break;
 			case ADVANCED_ONLY:
 					return 'bug_' . $p_action . '_advanced_page.php';
-				break;
 		}
 	}
 

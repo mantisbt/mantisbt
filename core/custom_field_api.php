@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.28 2004-03-16 11:29:55 yarick123 Exp $
+	# $Id: custom_field_api.php,v 1.29 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'bug_api.php' );
 
 	###########################################################################
@@ -34,7 +34,7 @@
 	#   being spoofed if register_globals is turned on
 	#
 	$g_cache_custom_field = array();
-	
+
 	# Cache a custom field row if necessary and return the cached copy
 	#  If the second parameter is true (default), trigger an error
 	#  if the field can't be found.  If the second parameter is
@@ -272,7 +272,7 @@
 		$c_length_max		= db_prepare_int(    $p_def_array['length_max']      );
 		$c_advanced			= db_prepare_bool(   $p_def_array['advanced']        );
 
-		if (	( is_blank( $c_name ) ) ||
+		if (( is_blank( $c_name ) ) ||
 			( $c_access_level_rw < $c_access_level_r ) ||
 			( $c_length_min < 0 ) ||
 			( ( $c_length_max != 0 ) && ( $c_length_min > $c_length_max ) ) ) {
@@ -519,7 +519,7 @@
 							$t_custom_field_table.id = $t_custom_field_project_table.field_id
 						ORDER BY name ASC";
 		}
-		
+
 		$result = db_query( $query );
 
 		$t_row_count = db_num_rows( $result );
@@ -797,20 +797,20 @@
 		$t_custom_field_string_table = config_get( 'mantis_custom_field_string_table' );
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$t_return_arr = array();
-		
+
 		$query = "SELECT type, possible_values FROM $t_custom_field_table WHERE id='$c_field_id'";
 		$result = db_query( $query );
-		
+
 		$t_row_count = db_num_rows( $result );
 		if ( 0 == $t_row_count ) {
 			return false;
 		}
 		$row = db_fetch_array( $result );
-		
+
 		# If an enumeration type, we get all possible values, not just used values
 		if ( CUSTOM_FIELD_TYPE_ENUM == $row['type'] ) {
 			$t_values_arr = explode( '|', $row['possible_values'] );
-			
+
 			foreach( $t_values_arr as $t_option ) {
 				array_push( $t_return_arr, $t_option );
 			}
@@ -818,15 +818,15 @@
 			$query2 = "SELECT value FROM $t_custom_field_string_table
 						WHERE field_id = '$c_field_id'
 						GROUP BY value";
-			
+
 			$result2 = db_query( $query2 );
-			
+
 			$t_row_count = db_num_rows( $result2 );
-			
+
 			if ( 0 == $t_row_count ) {
 				return false;
 			}
-			
+
 			for ( $i = 0; $i < $t_row_count; $i++ ) {
 				$row = db_fetch_array( $result2 );
 				if( trim( $row['value'] ) != "" ) {

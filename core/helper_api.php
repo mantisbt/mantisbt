@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.42 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: helper_api.php,v 1.43 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -36,7 +36,7 @@
 	#  If no index is given, continue alternating based on the last index given
 	function helper_alternate_class( $p_index=null, $p_odd_class="row-1", $p_even_class="row-2" ) {
 		static $t_index = 1;
-		
+
 		if ( null !== $p_index ) {
 			$t_index = $p_index;
 		}
@@ -124,7 +124,7 @@
 
 	# --------------------
 	# Set up PHP for a long process execution
-	# The script timeout is set based on the value of the 
+	# The script timeout is set based on the value of the
 	#  long_process_timeout config option.
 	# $p_ignore_abort specified whether to ignore user aborts by hitting
 	#  the Stop button (the default is not to ignore user aborts)
@@ -150,12 +150,12 @@
 			$t_project_id = current_user_get_pref( 'default_project' );
 		}
 
-		if ( ! project_exists( $t_project_id ) ||
-			 0 == project_get_field( $t_project_id, 'enabled' ) ||
-			 ! access_has_project_level( VIEWER, $t_project_id ) ) {
+		if ( !project_exists( $t_project_id ) ||
+			 ( 0 == project_get_field( $t_project_id, 'enabled' ) ) ||
+			 !access_has_project_level( VIEWER, $t_project_id ) ) {
 			$t_project_id = ALL_PROJECTS;
 		}
-		
+
 		return (int)$t_project_id;
 	}
 	# --------------------

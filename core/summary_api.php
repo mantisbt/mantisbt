@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.24 2004-03-27 20:22:56 narcissus Exp $
+	# $Id: summary_api.php,v 1.25 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -24,7 +24,7 @@
 	}
 	# --------------------
 	# Used in summary reports
-	# Given the enum string this function prints out the summary 
+	# Given the enum string this function prints out the summary
 	# for each enum setting
 	# The enum field name is passed in through $p_enum
 	function summary_print_by_enum( $p_enum_string, $p_enum ) {
@@ -36,14 +36,15 @@
 		$t_project_id = helper_get_current_project();
 
 		#checking if it's a per project statistic or all projects
-		if ( ALL_PROJECTS == $t_project_id ) 
+		if ( ALL_PROJECTS == $t_project_id ) {
 			$t_project_filter = ' 1=1';
-		else 
+		} else {
 			$t_project_filter = " project_id='$t_project_id'";
+		}
 
-		$query = "SELECT status, $p_enum FROM $t_mantis_bug_table
+		$query = "SELECT status, $p_enum
+				FROM $t_mantis_bug_table
 				WHERE $t_project_filter ORDER BY $p_enum";
-
 		$result = db_query( $query );
 
 		$t_last_value = -1;
@@ -56,37 +57,42 @@
 		$t_closed_val = CLOSED;
 
 		while ( $row = db_fetch_array( $result ) ) {
-			if ( $row[$p_enum] != $t_last_value 
-			  && $t_last_value != -1 ) {
+			if ( ( $row[$p_enum] != $t_last_value ) &&
+				( -1 != $t_last_value ) ) {
 				# Build up the hyperlinks to bug views
 				$t_bug_link = '';
 				switch ( $p_enum ) {
 					case 'status':
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_status=' . $t_last_value;
-					break;
+						break;
 					case 'severity':
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_severity=' . $t_last_value;
-					break;
+						break;
 					case 'resolution':
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_resolution=' . $t_last_value;
-					break;
+						break;
 					case 'priority':
 						# Currently no filtering by priority :(
 						$t_bug_link = '';
-					break;
+						break;
 				}
-				
+
 				if ( $t_bug_link != '' ) {
-					if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
-					if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
-					if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
-					if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+					if ( 0 < $t_bugs_open ) {
+						$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+					}
+					if ( 0 < $t_bugs_resolved ) {
+						$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+					}
+					if ( 0 < $t_bugs_closed ) {
+						$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+					}
+					if ( 0 < $t_bugs_total ) {
+						$t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+					}
 				}
-			  	
-				summary_helper_print_row( 
-				  get_enum_element( $p_enum, $t_last_value)
-			  	  , $t_bugs_open, $t_bugs_resolved
-				  , $t_bugs_closed, $t_bugs_total );
+
+				summary_helper_print_row( get_enum_element( $p_enum, $t_last_value), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
 				$t_bugs_open = 0;
 				$t_bugs_resolved = 0;
@@ -95,7 +101,6 @@
 			}
 
 			$t_bugs_total++;
-
 			switch( $row['status'] ) {
 				case $t_resolved_val:
 					$t_bugs_resolved++;
@@ -117,30 +122,35 @@
 			switch ( $p_enum ) {
 				case 'status':
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_status=' . $t_last_value;
-				break;
+					break;
 				case 'severity':
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_severity=' . $t_last_value;
-				break;
+					break;
 				case 'resolution':
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_resolution=' . $t_last_value;
-				break;
+					break;
 				case 'priority':
 					# Currently no filtering by priority :(
 					$t_bug_link = '';
-				break;
-			}
-			
-			if ( $t_bug_link != '' ) {
-				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
-				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
-				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
-				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+					break;
 			}
 
-			summary_helper_print_row( 
-			  get_enum_element( $p_enum, $t_last_value)
-			  , $t_bugs_open, $t_bugs_resolved
-			  , $t_bugs_closed, $t_bugs_total );
+			if ( $t_bug_link != '' ) {
+				if ( 0 < $t_bugs_open ) {
+					$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				}
+				if ( 0 < $t_bugs_resolved ) {
+					$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				}
+				if ( 0 < $t_bugs_closed ) {
+					$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				}
+				if ( 0 < $t_bugs_total ) {
+					$t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				}
+			}
+
+			summary_helper_print_row( get_enum_element( $p_enum, $t_last_value), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		}
 	}
 	# --------------------
@@ -154,8 +164,11 @@
 		$t_project_id = helper_get_current_project();
 
 		#checking if it's a per project statistic or all projects
-		if ( ALL_PROJECTS == $t_project_id ) $specific_where = ' 1=1';
-		else $specific_where = " project_id='$t_project_id'";
+		if ( ALL_PROJECTS == $t_project_id ) {
+			$specific_where = ' 1=1';
+		} else {
+			$specific_where = " project_id='$t_project_id'";
+		}
 
 		$query = "SELECT COUNT(*)
 				FROM $t_mantis_bug_table
@@ -189,18 +202,18 @@
 	function summary_print_by_developer() {
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
-		
 		$t_project_id = helper_get_current_project();
 
-		if ( ALL_PROJECTS == $t_project_id ) 
+		if ( ALL_PROJECTS == $t_project_id ) {
 			$specific_where = ' 1=1';
-		else 
+		} else {
 			$specific_where = " project_id='$t_project_id'";
+		}
 
-		$query = "SELECT handler_id, status FROM $t_mantis_bug_table
+		$query = "SELECT handler_id, status
+				FROM $t_mantis_bug_table
 				WHERE handler_id>0 AND $specific_where
 				ORDER BY handler_id";
-
 		$result = db_query( $query );
 
 		$t_last_handler = -1;
@@ -215,8 +228,7 @@
 		while ( $row = db_fetch_array( $result ) ) {
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ( $v_handler_id != $t_last_handler 
-			  && $t_last_handler != -1 ) {
+			if ( ($v_handler_id != $t_last_handler) && (-1 != $t_last_handler) ) {
 				$query = "SELECT username
 						FROM $t_mantis_user_table
 						WHERE id=$t_last_handler";
@@ -224,15 +236,20 @@
 				$row2 = db_fetch_array( $result2 );
 
 				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;handler_id=' . $t_last_handler;
-				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
-				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
-				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
-				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				if ( 0 < $t_bugs_open ) {
+					$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				}
+				if ( 0 < $t_bugs_resolved ) {
+					$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				}
+				if ( 0 < $t_bugs_closed ) {
+					$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				}
+				if ( 0 < $t_bugs_total ) {
+					$t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				}
 
-				summary_helper_print_row( 
-				  $row2['username']
-			  	  , $t_bugs_open, $t_bugs_resolved
-				  , $t_bugs_closed, $t_bugs_total );
+				summary_helper_print_row( $row2['username'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
 				$t_bugs_open = 0;
 				$t_bugs_resolved = 0;
@@ -243,15 +260,12 @@
 			$t_bugs_total++;
 
 			switch( $v_status ) {
-				case $t_resolved_val:
-					$t_bugs_resolved++;
-					break;
-				case $t_closed_val:
-					$t_bugs_closed++;
-					break;
-				default:
-					$t_bugs_open++;
-					break;
+				case $t_resolved_val:	$t_bugs_resolved++;
+										break;
+				case $t_closed_val:		$t_bugs_closed++;
+										break;
+				default:				$t_bugs_open++;
+										break;
 			}
 
 			$t_last_handler = $v_handler_id;
@@ -265,15 +279,20 @@
 			$row2 = db_fetch_array( $result2 );
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;handler_id=' . $t_last_handler;
-			if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
-			if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
-			if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
-			if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+			if ( 0 < $t_bugs_open ) {
+				$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+			}
+			if ( 0 < $t_bugs_resolved ) {
+				$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+			}
+			if ( 0 < $t_bugs_closed ) {
+				$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+			}
+			if ( 0 < $t_bugs_total ) {
+				$t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+			}
 
-			summary_helper_print_row(
-			  $row2['username']
-			  , $t_bugs_open, $t_bugs_resolved
-			  , $t_bugs_closed, $t_bugs_total );
+			summary_helper_print_row( $row2['username'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		}
 	}
 	# --------------------
@@ -282,13 +301,14 @@
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
 		$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
-		
+
 		$t_project_id = helper_get_current_project();
 
-		if ( ALL_PROJECTS == $t_project_id ) 
+		if ( ALL_PROJECTS == $t_project_id ) {
 			$specific_where = ' 1=1';
-		else 
+		} else {
 			$specific_where = " project_id='$t_project_id'";
+		}
 
 		$query = "SELECT reporter_id, COUNT(*) as num
 				FROM $t_mantis_bug_table
@@ -296,6 +316,7 @@
 				GROUP BY reporter_id
 				ORDER BY num DESC";
 		$result = db_query( $query, $t_reporter_summary_limit );
+
 		while ( $row = db_fetch_array( $result ) ) {
 			$v_reporter_id = $row['reporter_id'];
 			$query = "SELECT status FROM $t_mantis_bug_table
@@ -316,15 +337,12 @@
 				$t_bugs_total++;
 
 				switch( $row2['status'] ) {
-					case $t_resolved_val:
-						$t_bugs_resolved++;
-						break;
-					case $t_closed_val:
-						$t_bugs_closed++;
-						break;
-					default:
-						$t_bugs_open++;
-						break;
+					case $t_resolved_val:	$t_bugs_resolved++;
+											break;
+					case $t_closed_val:		$t_bugs_closed++;
+											break;
+					default:				$t_bugs_open++;
+											break;
 				}
 			}
 
@@ -336,15 +354,20 @@
 				$row3 = db_fetch_array( $result3 );
 
 				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;reporter_id=' . $v_reporter_id;
-				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
-				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
-				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
-				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				if ( 0 < $t_bugs_open ) {
+					$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				}
+				if ( 0 < $t_bugs_resolved ) {
+					$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				}
+				if ( 0 < $t_bugs_closed ) {
+					$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				}
+				if ( 0 < $t_bugs_total ) {
+					$t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				}
 
-				summary_helper_print_row(
-				$row3['username']
-				, $t_bugs_open, $t_bugs_resolved
-				, $t_bugs_closed, $t_bugs_total );
+				summary_helper_print_row( $row3['username'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 			}
 		}
 	}
@@ -353,17 +376,18 @@
 	function summary_print_by_category() {
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_mantis_project_table = config_get( 'mantis_project_table' );
-		$t_summary_category_include_project = 
-			config_get( 'summary_category_include_project' );
-		
+		$t_summary_category_include_project = config_get( 'summary_category_include_project' );
+
 		$t_project_id = helper_get_current_project();
 
-		if ( ALL_PROJECTS == $t_project_id ) 
+		if ( ALL_PROJECTS == $t_project_id ) {
 			$specific_where = ' 1=1';
-		else 
+		} else {
 			$specific_where = " project_id='$t_project_id'";
+		}
 
-		$query = "SELECT project_id, category, status FROM $t_mantis_bug_table
+		$query = "SELECT project_id, category, status
+				FROM $t_mantis_bug_table
 				WHERE category>'' AND $specific_where
 				ORDER BY project_id, category, status";
 
@@ -382,11 +406,9 @@
 		while ( $row = db_fetch_array( $result ) ) {
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ( $v_category != $last_category 
-			  && $last_category != -1 ) {
-			$label = $last_category;
-				if ( ( ON == $t_summary_category_include_project ) 
-				  && ( ALL_PROJECTS == $t_project_id ) ) {
+			if ( ( $v_category != $last_category ) && ( $last_category != -1 ) ) {
+				$label = $last_category;
+				if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 					$query = "SELECT name
 							FROM $t_mantis_project_table
 							WHERE id=$last_project";
@@ -397,15 +419,20 @@
 				}
 
 				$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . $last_category;
-				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
-				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
-				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
-				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
-				
-				summary_helper_print_row(
-				string_attribute($label)
-				, $t_bugs_open, $t_bugs_resolved
-				, $t_bugs_closed, $t_bugs_total );
+				if ( 0 < $t_bugs_open ) {
+					$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				}
+				if ( 0 < $t_bugs_resolved ) {
+					$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				}
+				if ( 0 < $t_bugs_closed ) {
+					$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				}
+				if ( 0 < $t_bugs_total ) {
+					$t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				}
+
+				summary_helper_print_row( string_attribute($label), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
 				$t_bugs_open = 0;
 				$t_bugs_resolved = 0;
@@ -417,14 +444,14 @@
 
 			switch( $v_status ) {
 				case $t_resolved_val:
-					$t_bugs_resolved++;
-					break;
+										$t_bugs_resolved++;
+										break;
 				case $t_closed_val:
-					$t_bugs_closed++;
-					break;
+										$t_bugs_closed++;
+										break;
 				default:
-					$t_bugs_open++;
-					break;
+										$t_bugs_open++;
+										break;
 			}
 
 			$last_category = $v_category;
@@ -433,29 +460,33 @@
 
 		if ( 0 < $t_bugs_total ) {
 			$label = $last_category;
-			if ( ( ON == $t_summary_category_include_project ) 
-			  && ( ALL_PROJECTS == $t_project_id ) ) {
+			if ( ( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 				$query = "SELECT name
 						FROM $t_mantis_project_table
 						WHERE id=$last_project";
 				$result2 = db_query( $query );
 				$row2 = db_fetch_array( $result2 );
-				
+
 				$label = sprintf( '[%s] %s', $row2['name'], $label );
 			}
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_category=' . $last_category;
 			if ( $t_bug_link != '' ) {
-				if ( 0 < $t_bugs_open ) $t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
-				if ( 0 < $t_bugs_resolved ) $t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
-				if ( 0 < $t_bugs_closed ) $t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
-				if ( 0 < $t_bugs_total ) $t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				if ( 0 < $t_bugs_open ) {
+					$t_bugs_open = $t_bug_link . '&amp;hide_resolved=on&amp;hide_closed=on">' . $t_bugs_open . '</a>';
+				}
+				if ( 0 < $t_bugs_resolved ) {
+					$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_closed=on">' . $t_bugs_resolved . '</a>';
+				}
+				if ( 0 < $t_bugs_closed ) {
+					$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_closed=">' . $t_bugs_closed . '</a>';
+				}
+				if ( 0 < $t_bugs_total ) {
+					$t_bugs_total = $t_bug_link . '&amp;hide_closed=">' . $t_bugs_total . '</a>';
+				}
 			}
 
-			summary_helper_print_row( 
-			  string_attribute($label)
-			  , $t_bugs_open, $t_bugs_resolved
-			  , $t_bugs_closed, $t_bugs_total );
+			summary_helper_print_row( string_attribute($label), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		}
 	}
 	# --------------------
@@ -463,16 +494,17 @@
 	function summary_print_by_project() {
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_mantis_project_table = config_get( 'mantis_project_table' );
-		
+
 		$t_project_id = helper_get_current_project();
 
 		# This function only works when "all projects" is selected
-		if ( ALL_PROJECTS != $t_project_id ) 
+		if ( ALL_PROJECTS != $t_project_id ) {
 			return;
+		}
 
-		$query = "SELECT project_id, status FROM $t_mantis_bug_table
-			ORDER BY project_id";
-
+		$query = "SELECT project_id, status
+				FROM $t_mantis_bug_table
+				ORDER BY project_id";
 		$result = db_query( $query );
 
 		$t_last_project = -1;
@@ -487,17 +519,13 @@
 		while ( $row = db_fetch_array( $result ) ) {
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ( $v_project_id != $t_last_project 
-			  && $t_last_project != -1 ) {
+			if ( ( $v_project_id != $t_last_project ) && ( -1 != $t_last_project ) ) {
 				$query = "SELECT name
 						FROM $t_mantis_project_table
 						WHERE id=$t_last_project";
 				$result2 = db_query( $query );
 				$row2 = db_fetch_array( $result2 );
-				summary_helper_print_row( 
-				  $row2['name']
-			  	  , $t_bugs_open, $t_bugs_resolved
-				  , $t_bugs_closed, $t_bugs_total );
+				summary_helper_print_row( $row2['name'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
 				$t_bugs_open = 0;
 				$t_bugs_resolved = 0;
@@ -509,14 +537,14 @@
 
 			switch( $v_status ) {
 				case $t_resolved_val:
-					$t_bugs_resolved++;
-					break;
+										$t_bugs_resolved++;
+										break;
 				case $t_closed_val:
-					$t_bugs_closed++;
-					break;
+										$t_bugs_closed++;
+										break;
 				default:
-					$t_bugs_open++;
-					break;
+										$t_bugs_open++;
+										break;
 			}
 
 			$t_last_project = $v_project_id;
@@ -528,10 +556,7 @@
 					WHERE id=$t_last_project";
 			$result2 = db_query( $query );
 			$row2 = db_fetch_array( $result2 );
-			summary_helper_print_row(
-			  $row2['name']
-			  , $t_bugs_open, $t_bugs_resolved
-			  , $t_bugs_closed, $t_bugs_total );
+			summary_helper_print_row( $row2['name'], $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 		}
 	}
 	# --------------------
@@ -539,7 +564,7 @@
 	function summary_print_developer_resolution( $p_resolution_enum_string ) {
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
-		
+
 		$t_project_id = helper_get_current_project();
 
 		# Organise an array of resolution values to be used later
@@ -585,7 +610,7 @@
 		# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
 		foreach( $t_handler_res_arr as $t_handler_id => $t_arr2 ) {
 			# Only print developers who have had at least one bug assigned to them. This helps
-			# prevent divide by zeroes, showing developers not on this project, and showing 
+			# prevent divide by zeroes, showing developers not on this project, and showing
 			# users that aren't actually developers...
 
 			if ( $t_arr2[ 'total' ] > 0 ) {
@@ -594,18 +619,18 @@
 				print '<td>';
 				print user_get_name( $t_handler_id );
 				print '</td>';
-				
+
 				# We need to track the percentage of bugs that are considered fix, as well as
 				# those that aren't considered bugs to begin with (when looking at %age)
 				$t_bugs_fixed = 0;
 				$t_bugs_notbugs = 0;
 				for ( $j = 0; $j < $enum_res_count; $j++ ) {
 					$res_bug_count = 0;
-					
-					if ( isset( $t_arr2[ $c_res_s[ $j ] ] ) ) {
-						$res_bug_count = $t_arr2[ $c_res_s[ $j ] ];
+
+					if ( isset( $t_arr2[$c_res_s[$j]] ) ) {
+						$res_bug_count = $t_arr2[$c_res_s[$j]];
 					}
-					
+
 					print '<td>';
 					if ( 0 < $res_bug_count ) {
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;handler_id=' . $t_handler_id;
@@ -630,14 +655,14 @@
 				}
 
 				$t_percent_fixed = 0;
-				if ( ( $t_arr2[ 'total' ] - $t_bugs_notbugs ) > 0 ) {
-					$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2[ 'total' ] - $t_bugs_notbugs ) );
+				if ( ( $t_arr2['total'] - $t_bugs_notbugs ) > 0 ) {
+					$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2['total'] - $t_bugs_notbugs ) );
 				}
 				print '<td>';
 				printf( '% 1.0f%%', ( $t_percent_fixed * 100 ) );
 				print '</td>';
 			}
-		}		
+		}
 	}
 	# --------------------
 	# Print reporter / resolution report
@@ -645,7 +670,7 @@
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
 		$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
-		
+
 		$t_project_id = helper_get_current_project();
 
 		# Organise an array of resolution values to be used later
@@ -689,7 +714,7 @@
 
 		# Sort our total bug count array so that the reporters with the highest number of bugs are listed first,
 		arsort( $t_reporter_bugcount_arr );
-		
+
 		$t_row_count = 0;
 		# We now have a multi dimensional array of users and resolutions, with the value of each resolution for each user
 		foreach( $t_reporter_bugcount_arr as $t_reporter_id => $t_total_user_bugs ) {
@@ -697,9 +722,9 @@
 			if ( $t_row_count > $t_reporter_summary_limit ) {
 				break;
 			}
-			
+
 			# Only print reporters who have reported at least one bug. This helps
-			# prevent divide by zeroes, showing reporters not on this project, and showing 
+			# prevent divide by zeroes, showing reporters not on this project, and showing
 			# users that aren't actually reporters...
 			if ( $t_total_user_bugs > 0 ) {
 				$t_arr2 = $t_reporter_res_arr[ $t_reporter_id ];
@@ -709,18 +734,18 @@
 				print '<td>';
 				print user_get_name( $t_reporter_id );
 				print '</td>';
-				
+
 				# We need to track the percentage of bugs that are considered fix, as well as
 				# those that aren't considered bugs to begin with (when looking at %age)
 				$t_bugs_fixed = 0;
 				$t_bugs_notbugs = 0;
 				for ( $j = 0; $j < $enum_res_count; $j++ ) {
 					$res_bug_count = 0;
-					
+
 					if ( isset( $t_arr2[ $c_res_s[ $j ] ] ) ) {
 						$res_bug_count = $t_arr2[ $c_res_s[ $j ] ];
 					}
-					
+
 					print '<td>';
 					if ( 0 < $res_bug_count ) {
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;reporter_id=' . $t_reporter_id;
@@ -751,14 +776,14 @@
 				printf( '% 1.0f%%', ( $t_percent_errors * 100 ) );
 				print '</td>';
 			}
-		}		
+		}
 	}	# --------------------
 	# Print reporter effectiveness report
 	function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resolution_enum_string ) {
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 		$t_mantis_user_table = config_get( 'mantis_user_table' );
 		$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
-		
+
 		$t_project_id = helper_get_current_project();
 
 		# These are our overall "values" for severities and non-bug results
@@ -831,16 +856,16 @@
 		arsort( $t_reporter_bugcount_arr );
 
 		$t_row_count = 0;
-		# We now have a multi dimensional array of users, resolutions and severities, with the 
+		# We now have a multi dimensional array of users, resolutions and severities, with the
 		# value of each resolution and severity for each user
 		foreach( $t_reporter_bugcount_arr as $t_reporter_id => $t_total_user_bugs ) {
 			# Limit the number of reporters listed
 			if ( $t_row_count > $t_reporter_summary_limit ) {
 				break;
 			}
-			
+
 			# Only print reporters who have reported at least one bug. This helps
-			# prevent divide by zeroes, showing reporters not on this project, and showing 
+			# prevent divide by zeroes, showing reporters not on this project, and showing
 			# users that aren't actually reporters...
 			if ( $t_total_user_bugs > 0 ) {
 				$t_arr2 = $t_reporter_ressev_arr[ $t_reporter_id ];
@@ -857,7 +882,7 @@
 					if ( ! isset( $t_arr2[ $c_sev_s[$j] ] ) ) {
 						continue;
 					}
-				
+
 					$sev_bug_count = $t_arr2[ $c_sev_s[$j] ][ 'total' ];
 					$t_sev_mult = $t_severity_multiplier['average'];
 					if ( $t_severity_multiplier[ $c_sev_s[$j] ] ) {

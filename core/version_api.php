@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.9 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: version_api.php,v 1.10 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -27,7 +27,7 @@
 		$t_project_version_table = config_get( 'mantis_project_version_table' );
 
 		$query = "SELECT COUNT(*)
-					FROM $t_project_version_table 
+					FROM $t_project_version_table
 					WHERE project_id='$c_project_id' AND
 					version='$c_version'";
 
@@ -76,12 +76,12 @@
 	function version_add( $p_project_id, $p_version ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_version		= db_prepare_string( $p_version );
-		
+
 		version_ensure_unique( $p_project_id, $p_version );
 
 		$t_project_version_table = config_get( 'mantis_project_version_table' );
 
-		$query = "INSERT INTO $t_project_version_table 
+		$query = "INSERT INTO $t_project_version_table
 					( project_id, version, date_order )
 				  VALUES
 					( '$c_project_id', '$c_version', " . db_now() . ")";
@@ -98,23 +98,23 @@
 		$c_version		= db_prepare_string( $p_version );
 		$c_new_version	= db_prepare_string( $p_new_version );
 		$c_date_order	= db_prepare_string( $p_date_order );
-		
+
 		version_ensure_exists( $p_project_id, $p_version );
 
 		# check for duplicates
-		if ( strtolower( $p_version ) != strtolower( $p_new_version ) &&
-			 ! version_is_unique( $p_project_id, $p_new_version ) ) {
+		if ( ( strtolower( $p_version ) != strtolower( $p_new_version ) ) &&
+			 !version_is_unique( $p_project_id, $p_new_version ) ) {
 			trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
 		}
 
 		$t_project_version_table	= config_get( 'mantis_project_version_table' );
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
-		$query = "UPDATE $t_project_version_table 
+		$query = "UPDATE $t_project_version_table
 				  SET version='$c_new_version',
-					date_order='$c_date_order'
-				  WHERE version='$c_version'
-					AND project_id='$c_project_id'";
+					  date_order='$c_date_order'
+				  WHERE version='$c_version' AND
+				  		project_id='$c_project_id'";
 		db_query( $query );
 
 		if ( $p_version != $p_new_version ) {
@@ -142,7 +142,7 @@
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "DELETE
-				  FROM $t_project_version_table 
+				  FROM $t_project_version_table
 				  WHERE project_id='$c_project_id'
 				    AND version='$c_version'";
 		db_query( $query );
@@ -193,7 +193,7 @@
 		$t_project_version_table = config_get( 'mantis_project_version_table' );
 
 		$query = "SELECT version, date_order
-				  FROM $t_project_version_table 
+				  FROM $t_project_version_table
 				  WHERE project_id='$c_project_id'
 				  ORDER BY date_order DESC";
 		$result = db_query( $query );

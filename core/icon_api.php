@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: icon_api.php,v 1.9 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: icon_api.php,v 1.10 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -26,7 +26,7 @@
 		IMMEDIATE => 'priority_3.gif'
 	);
 	# --------------------
-	# Sort direction to icon mapping 
+	# Sort direction to icon mapping
 	$g_sort_icon_arr = array (
 		ASC        => 'up.gif',
 		DESC       => 'down.gif'
@@ -68,9 +68,11 @@
 	function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 		global $g_icon_path, $g_sort_icon_arr;
 
-		if ( $p_sort_by != $p_field ) return;
+		if ( $p_sort_by != $p_field ) {
+			return;
+		}
 
-		if ( 'DESC' == $p_dir || DESC == $p_dir) {
+		if ( ( 'DESC' == $p_dir ) || ( DESC == $p_dir ) ) {
 			$t_dir = DESC;
 		} else {
 			$t_dir = ASC;

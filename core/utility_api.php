@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.9 2004-03-16 11:29:55 yarick123 Exp $
+	# $Id: utility_api.php,v 1.10 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -140,8 +140,7 @@
 
 	# --------------------
 	# Sort a multi-dimensional array by one of its keys
-	function multi_sort( $p_array, $p_key, $p_direction=ASC )
-	{
+	function multi_sort( $p_array, $p_key, $p_direction=ASC ) {
 		if ( DESC == $p_direction ) {
 			$t_factor = -1;
 		} else {
@@ -149,12 +148,10 @@
 			$t_factor = 1;
 		}
 
-		$t_function = create_function( '$a, $b',
-						"return $t_factor * strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
+		$t_function = create_function( '$a, $b', "return $t_factor * strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
 		uasort( $p_array, $t_function );
 		return $p_array;
 	}
-
 
 	# --------------------
 	# Copies item with given key from source array to the destination,

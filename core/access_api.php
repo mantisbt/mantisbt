@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.25 2004-02-11 22:16:28 vboctor Exp $
+	# $Id: access_api.php,v 1.26 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
-	
+
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
-	require_once( $t_core_dir . 'constant_inc.php' );	
+	require_once( $t_core_dir . 'constant_inc.php' );
 	require_once( $t_core_dir . 'helper_api.php' );
 	require_once( $t_core_dir . 'authentication_api.php' );
 	require_once( $t_core_dir . 'user_api.php' );
@@ -22,6 +22,7 @@
 	# Access Control API
 	###########################################################################
 
+	# --------------------
 	# Function to be called when a user is attempting to access a page that
 	# he/she is not authorised to.  This outputs an access denied message then
 	# re-directs to the mainpage.
@@ -32,7 +33,7 @@
 
 		if ( ! auth_is_user_authenticated() ) {
 			$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
-			print_header_redirect( 'login_page.php?return=' . $p_return_page );
+			print_header_redirect( 'login_page.php?return='.$p_return_page );
 		} else {
 			print '<center>';
 			print '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
@@ -47,7 +48,6 @@
 	# Caching
 	#===================================
 
-	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
 	#
@@ -55,6 +55,7 @@
 	$g_cache_access_matrix_project_ids = array();
 	$g_cache_access_matrix_user_ids = array();
 
+	# --------------------
 	function access_cache_matrix_project( $p_project_id ) {
 		global $g_cache_access_matrix, $g_cache_access_matrix_project_ids;
 
@@ -64,7 +65,7 @@
 			return array();
 		}
 
-		if ( ! in_array( (int)$p_project_id, $g_cache_access_matrix_project_ids ) ) {
+		if ( !in_array( (int)$p_project_id, $g_cache_access_matrix_project_ids ) ) {
 			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 
 			$query = "SELECT user_id, access_level
@@ -76,7 +77,7 @@
 
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$row = db_fetch_array( $result );
-				
+
 				$g_cache_access_matrix[(int)$row['user_id']][(int)$p_project_id] = (int)$row['access_level'];
 			}
 
@@ -94,6 +95,7 @@
 		return $t_results;
 	}
 
+	# --------------------
 	function access_cache_matrix_user( $p_user_id ) {
 		global $g_cache_access_matrix, $g_cache_access_matrix_user_ids;
 
@@ -157,7 +159,7 @@
 
 	# --------------------
 	# Check if the user has the specified global access level
-	#  and deny access to the page if not	
+	#  and deny access to the page if not
 	function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
 		if ( ! access_has_global_level( $p_access_level, $p_user_id ) ) {
 			access_denied();
@@ -183,7 +185,7 @@
 		if ( ! auth_is_user_authenticated() ) {
 			return false;
 		}
-		
+
 		if ( null === $p_user_id ) {
 		    $p_user_id = auth_get_current_user_id();
 		}
@@ -215,7 +217,7 @@
 
 		return ( $t_access_level >= $p_access_level );
 	}
- 	
+
 	# --------------------
 	# Check if the user has the specified access level for the given project
 	#  and deny access to the page if not
@@ -235,10 +237,10 @@
 		# Deal with not logged in silently in this case
 		# @@@ we may be able to remove this and just error
 		#     and once we default to anon login, we can remove it for sure
-		if ( ! auth_is_user_authenticated() ) {
+		if ( !auth_is_user_authenticated() ) {
 			return false;
 		}
-		
+
 		if ( $p_user_id === null ) {
 		    $p_user_id = auth_get_current_user_id();
 		}
@@ -246,10 +248,10 @@
 		# If the bug is private and the user is not the reporter, then the
 		#  the user must also have higher access than private_bug_threshold
 		if ( VS_PRIVATE == bug_get_field( $p_bug_id, 'view_state' ) &&
-			 ! bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
+			 !bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
 			$p_access_level = max( $p_access_level, config_get( 'private_bug_threshold' ) );
 		}
-	
+
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 		return access_has_project_level( $p_access_level, $t_project_id, $p_user_id );
@@ -258,8 +260,8 @@
 	# --------------------
 	# Check if the user has the specified access level for the given bug
 	#  and deny access to the page if not
-	function access_ensure_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
-		if ( ! access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id ) ) {
+	function access_ensure_bug_level( $p_access_level, $p_bug_id, $p_user_id=null ) {
+		if ( !access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id ) ) {
 			access_denied();
 		}
  	}
@@ -270,18 +272,18 @@
 	#
 	# This function looks up the bugnote's bug and performs an access check
 	#  against that bug
-	function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
-		if ( $p_user_id === null ) {
+	function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id=null ) {
+		if ( null===$p_user_id ) {
 		    $p_user_id = auth_get_current_user_id();
 		}
 
 		# If the bug is private and the user is not the reporter, then the
 		#  the user must also have higher access than private_bug_threshold
 		if ( VS_PRIVATE == bugnote_get_field( $p_bugnote_id, 'view_state' ) &&
-			 ! bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) ) {
+			 !bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) ) {
 			$p_access_level = max( $p_access_level, config_get( 'private_bugnote_threshold' ) );
 		}
-	
+
 		$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 
 		return access_has_bug_level( $p_access_level, $t_bug_id, $p_user_id );
@@ -290,16 +292,16 @@
 	# --------------------
 	# Check if the user has the specified access level for the given bugnote
 	#  and deny access to the page if not
-	function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
-		if ( ! access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id ) ) {
+	function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id=null ) {
+		if ( !access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id ) ) {
 			access_denied();
 		}
  	}
 
 	# --------------------
 	# Check if the current user can close the specified bug
-	function access_can_close_bug ( $p_bug_id, $p_user_id = null ) {
-		if ( $p_user_id === null ) {
+	function access_can_close_bug ( $p_bug_id, $p_user_id=null ) {
+		if ( null===$p_user_id ) {
 		    $p_user_id = auth_get_current_user_id();
 		}
 
@@ -312,11 +314,11 @@
 
 		return access_has_bug_level( config_get( 'close_bug_threshold' ), $p_bug_id, $p_user_id );
 	}
-	
+
 	# --------------------
 	# Make sure that the current user can close the specified bug
 	# See access_can_close_bug() for details.
-	function access_ensure_can_close_bug( $p_bug_id, $p_user_id = null ) {
+	function access_ensure_can_close_bug( $p_bug_id, $p_user_id=null ) {
 		if ( !access_can_close_bug( $p_bug_id, $p_user_id ) ) {
 			access_denied();
 		}
@@ -324,7 +326,7 @@
 
 	# --------------------
 	# Check if the current user can reopen the specified bug
-	function access_can_reopen_bug ( $p_bug_id, $p_user_id = null ) {
+	function access_can_reopen_bug ( $p_bug_id, $p_user_id=null ) {
 		if ( $p_user_id === null ) {
 		    $p_user_id = auth_get_current_user_id();
 		}
@@ -338,23 +340,22 @@
 
 		return access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id, $p_user_id );
 	}
-	
+
 	# --------------------
 	# Make sure that the current user can reopen the specified bug
 	# See access_can_reopen_bug() for details.
-	function access_ensure_can_reopen_bug( $p_bug_id, $p_user_id = null ) {
+	function access_ensure_can_reopen_bug( $p_bug_id, $p_user_id=null ) {
 		if ( !access_can_reopen_bug( $p_bug_id, $p_user_id ) ) {
 			access_denied();
 		}
 	}
-
 
 	#===================================
 	# Data Access
 	#===================================
 
 	function access_get_local_level( $p_user_id, $p_project_id ) {
-		$p_project_id = (int)$p_project_id; // 000001 is different from 1.
+		$p_project_id = (int)$p_project_id; # 000001 is different from 1.
 
 		$t_project_level = access_cache_matrix_user( $p_user_id );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.21 2004-03-05 02:27:52 jlatour Exp $
+	# $Id: gpc_api.php,v 1.22 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -15,7 +15,7 @@
 
 	# ---------------
 	# Retrieve a GPC variable.
-	# If the variable is not set, the default is returned. 
+	# If the variable is not set, the default is returned.
 	# If magic_quotes_gpc is on, slashes will be stripped from the value before being returned.
 	#
 	#  You may pass in any variable as a default (including null) but if
@@ -37,7 +37,7 @@
 			trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 			$t_result = null;
 		}
-		
+
 		return $t_result;
 	}
 	# -----------------
@@ -102,13 +102,13 @@
 		#  otherwise we prevent an error being triggered
 		$args = func_get_args();
 		$t_result = call_user_func_array( 'gpc_get', $args );
-		
+
 		# If we the result isn't the default we were given or an array, error
-		if ( ! ( ( 1 < func_num_args() && $t_result === $p_default ) ||
-			     is_array( $t_result ) ) ) {
+		if ( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) ||
+			is_array( $t_result ) ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
 		}
-		
+
 		return $t_result;
 	}
 	# ------------------
@@ -120,12 +120,12 @@
 		#  otherwise we prevent an error being triggered
 		$args = func_get_args();
 		$t_result = call_user_func_array( 'gpc_get', $args );
-		
+
 		# If we the result isn't the default we were given or an array, error
-		if ( ! ( ( 1 < func_num_args() && $t_result === $p_default ) ||
+		if ( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) ||
 			     is_array( $t_result ) ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
-		} 
+		}
 
 		for ( $i=0 ; $i < sizeof( $t_result ) ; $i++ ) {
 			$t_result[$i] = (integer)$t_result[$i];
@@ -142,9 +142,9 @@
 		#  otherwise we prevent an error being triggered
 		$args = func_get_args();
 		$t_result = call_user_func_array( 'gpc_get', $args );
-		
+
 		# If we the result isn't the default we were given or an array, error
-		if ( ! ( ( 1 < func_num_args() && $t_result === $p_default ) ||
+		if ( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) ||
 			     is_array( $t_result ) ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
 		}
@@ -178,7 +178,7 @@
 		} else {
 			trigger_error(ERROR_GPC_VAR_NOT_FOUND, ERROR);
 		}
-		
+
 		return $t_result;
 	}
 
@@ -234,7 +234,7 @@
 		if ( ! php_version_at_least( '4.1.0' ) ) {
 			global $_FILES;
 		}
-		
+
 		if ( isset ( $_FILES[$p_var_name] ) ) {
 			# FILES are not escaped even if magic_quotes is ON, this applies to Windows paths.
 			$t_result = $_FILES[$p_var_name];

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.24 2004-04-03 20:18:42 narcissus Exp $
+	# $Id: filter_api.php,v 1.25 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'current_user_api.php' );
 
 	###########################################################################
@@ -162,39 +162,39 @@
 
 		# date filter
 		if ( ( 'on' == $t_filter['do_filter_by_date'] ) &&
-				is_numeric( $t_filter['start_month'] ) && 
-				is_numeric( $t_filter['start_day'] ) && 
-				is_numeric( $t_filter['start_year'] ) && 
-				is_numeric( $t_filter['end_month'] ) && 
-				is_numeric( $t_filter['end_day'] ) && 
-				is_numeric( $t_filter['end_year'] ) 
+				is_numeric( $t_filter['start_month'] ) &&
+				is_numeric( $t_filter['start_day'] ) &&
+				is_numeric( $t_filter['start_year'] ) &&
+				is_numeric( $t_filter['end_month'] ) &&
+				is_numeric( $t_filter['end_day'] ) &&
+				is_numeric( $t_filter['end_year'] )
 			) {
-			
+
 			$t_start_string = db_prepare_string( $t_filter['start_year']  . "-". $t_filter['start_month']  . "-" . $t_filter['start_day'] ." 00:00:00" );
 			$t_end_string   = db_prepare_string( $t_filter['end_year']  . "-". $t_filter['end_month']  . "-" . $t_filter['end_day'] ." 23:59:59" );
-			
+
 			array_push( $t_where_clauses, "($t_bug_table.date_submitted BETWEEN '$t_start_string' AND '$t_end_string' )" );
 		}
 
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
 			# custom field filtering
 			$t_custom_fields = custom_field_get_ids();
-			$t_first_time = true;		
+			$t_first_time = true;
 			$t_custom_where_clause = "";
 
 			foreach( $t_custom_fields as $t_cfid ) {
 				# Ignore all custom filters that are not set, or that are set to "" or "any"
-				if ( isset( $t_filter['custom_fields'][$t_cfid] ) && 
-					( 'any' != strtolower( $t_filter['custom_fields'][$t_cfid] ) ) && 
+				if ( isset( $t_filter['custom_fields'][$t_cfid] ) &&
+					( 'any' != strtolower( $t_filter['custom_fields'][$t_cfid] ) ) &&
 					( "" != trim( $t_filter['custom_fields'][$t_cfid] ) ) ) {
-					
+
 					if( $t_first_time ) {
 						$t_first_time = false;
 						$t_custom_where_clause = '(';
 					} else {
 						$t_custom_where_clause .= ' AND ';
 					}
-					
+
 					$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
 					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 					$t_custom_where_clause .= "(  $t_table_name.field_id = $t_cfid AND $t_table_name.value = '";
@@ -205,7 +205,7 @@
 				array_push( $t_where_clauses, $t_custom_where_clause . ')' );
 			}
 		}
-		
+
 		# Simple Text Search - Thnaks to Alan Knowles
 		if ( !is_blank( $t_filter['search'] ) ) {
 			$c_search = db_prepare_string( $t_filter['search'] );
@@ -287,7 +287,7 @@
 
 		# Now add the rest of the criteria i.e. sorting, limit.
 		$c_sort = db_prepare_string( $t_filter['sort'] );
-		
+
 		if ( 'DESC' == $t_filter['dir'] ) {
 			$c_dir = 'DESC';
 		} else {
@@ -338,8 +338,8 @@
 		# check to see if new cookie is needed
 		$t_setting_arr = explode( '#', $t_view_all_cookie, 2 );
 		if ( ( $t_setting_arr[0] == 'v1' ) ||
-			 ( $t_setting_arr[0] == 'v2' ) || 
-			 ( $t_setting_arr[0] == 'v3' ) || 
+			 ( $t_setting_arr[0] == 'v2' ) ||
+			 ( $t_setting_arr[0] == 'v3' ) ||
 			 ( $t_setting_arr[0] == 'v4' ) ) {
 			return false;
 		}
@@ -375,8 +375,7 @@
 		$t_trclass = "row-category2";
 		$t_action  = "view_all_set.php?f=3";
 
-		if ( $p_for_screen == false ) 
-		{
+		if ( $p_for_screen == false ) {
 			$t_tdclass = "print";
 			$t_trclass = "";
 			$t_action  = "view_all_set.php";
@@ -385,51 +384,50 @@
 		<br />
 		<form method="post" name="filters" action="<?php echo $t_action; ?>">
 		<input type="hidden" name="type" value="1" />
-		<?php 
-			if ( $p_for_screen == false ) 
-			{
-				print "<input type=\"hidden\" name=\"print\" value=\"1\" />";
-				print "<input type=\"hidden\" name=\"offset\" value=\"0\" />";
-			}	
+		<?php
+			if ( $p_for_screen == false ) {
+				print '<input type="hidden" name="print" value="1" />';
+				print '<input type="hidden" name="offset" value="0" />';
+			}
 		?>
 		<input type="hidden" name="sort" value="<?php echo $t_sort ?>" />
 		<input type="hidden" name="dir" value="<?php echo $t_dir ?>" />
 		<input type="hidden" name="page_number" value="<?php echo $p_page_number ?>" />
 		<table class="width100" cellspacing="0">
 
-		<?php 
-		$t_filter_cols = 8;
-		$t_custom_cols = 1;
-		if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-			$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
-		}
+		<?php
+			$t_filter_cols = 8;
+			$t_custom_cols = 1;
+			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
+				$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
+			}
 
-		$t_current_user_access_level = current_user_get_access_level();
-		$t_accessible_custom_fields_ids = array();
-		$t_accessible_custom_fields_names = array();
-		$t_accessible_custom_fields_values = array();
-		$t_num_custom_rows = 0;
-		$t_per_row = 0;
-		
-		if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-			$t_custom_fields = custom_field_get_ids( $t_project_id );
-	
-			foreach ( $t_custom_fields as $t_cfid ) {
-				$t_field_info = custom_field_cache_row( $t_cfid, true );
-				if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
-					$t_accessible_custom_fields_ids[] = $t_cfid;
-					$t_accessible_custom_fields_names[] = $t_field_info['name'];
-					$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_cfid );
+			$t_current_user_access_level = current_user_get_access_level();
+			$t_accessible_custom_fields_ids = array();
+			$t_accessible_custom_fields_names = array();
+			$t_accessible_custom_fields_values = array();
+			$t_num_custom_rows = 0;
+			$t_per_row = 0;
+
+			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
+				$t_custom_fields = custom_field_get_ids( $t_project_id );
+
+				foreach ( $t_custom_fields as $t_cfid ) {
+					$t_field_info = custom_field_cache_row( $t_cfid, true );
+					if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
+						$t_accessible_custom_fields_ids[] = $t_cfid;
+						$t_accessible_custom_fields_names[] = $t_field_info['name'];
+						$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_cfid );
+					}
+				}
+
+				if ( sizeof( $t_accessible_custom_fields_ids ) > 0 ) {
+					$t_per_row = config_get( 'filter_custom_fields_per_row' );
+					$t_num_custom_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
 				}
 			}
-	
-			if ( sizeof( $t_accessible_custom_fields_ids ) > 0 ) {
-				$t_per_row = config_get( 'filter_custom_fields_per_row' );
-				$t_num_custom_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
-			}
-		}		
-		
-		$t_filters_url = config_get( 'path' ) . 'view_filters_page.php?for_screen=' . $p_for_screen . '&amp;target_field=';
+
+			$t_filters_url = config_get( 'path' ) . 'view_filters_page.php?for_screen=' . $p_for_screen . '&amp;target_field=';
 		?>
 
 		<input type="hidden" name="reporter_id" value="<?php echo $t_filter['reporter_id'] ?>">
@@ -453,35 +451,35 @@
 		<input type="hidden" name="end_year" value="<?php echo $t_filter['end_year'] ?>">
 		<input type="hidden" name="do_filter_by_date" value="<?php echo $t_filter['do_filter_by_date'] ?>">
 		<?php
-		for ( $i = 0; $i < sizeof( $t_accessible_custom_fields_ids ); $i++ ) {
-			print '<input type="hidden" name="custom_field_';
-			print $t_accessible_custom_fields_ids[ $i ];
-			print '" value="';
-			if ( ! isset( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ] ) ) {
-				$t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ] = 'any';
+			for ( $i = 0; $i < sizeof( $t_accessible_custom_fields_ids ); $i++ ) {
+				print '<input type="hidden" name="custom_field_';
+				print $t_accessible_custom_fields_ids[ $i ];
+				print '" value="';
+				if ( ! isset( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ] ) ) {
+					$t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ] = 'any';
+				}
+				print $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ];
+				print "\">\n";
 			}
-			print $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ];
-			print "\">\n";
-		}
-		?>			
+		?>
 		<tr <?php echo "class=\"" . $t_trclass . "\""; ?>>
 			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 				<a href="<?php print $t_filters_url . 'reporter_id'; ?>"><?php echo lang_get( 'reporter' ) ?>:</a>
-				<?php 
+				<?php
 					if ( $t_filter['reporter_id'] == 0 ) {
 						echo lang_get( 'any' );
 					} else {
-						echo user_get_field( $t_filter['reporter_id'], 'username' ); 
+						echo user_get_field( $t_filter['reporter_id'], 'username' );
 					}
 				?>
 			</td>
 			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 				<a href="<?php print $t_filters_url . 'handler_id'; ?>"><?php echo lang_get( 'assigned_to' ) ?>:</a>
-				<?php 
+				<?php
 					if ( $t_filter['handler_id'] == 0 ) {
 						echo lang_get( 'any' );
 					} else {
-						echo user_get_field( $t_filter['handler_id'], 'username' ); 
+						echo user_get_field( $t_filter['handler_id'], 'username' );
 					}
 					if ( 'on' == $t_filter['and_not_assigned'] ) {
 						echo ' (' . lang_get( 'or_unassigned' ) . ')';
@@ -490,11 +488,11 @@
 			</td>
 			<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 				<a href="<?php print $t_filters_url . 'show_category'; ?>"><?php echo lang_get( 'category' ) ?>:</a>
-				<?php 
+				<?php
 					if ( $t_filter['show_category'] == '' ) {
 						echo lang_get( 'any' );
 					} else {
-						echo $t_filter['show_category']; 
+						echo $t_filter['show_category'];
 					}
 				?>
 			</td>
@@ -543,7 +541,7 @@
 		<tr <?php echo "class=\"" . $t_trclass . "\""; ?>>
 			<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 				<a href="<?php print $t_filters_url . 'do_filter_by_date'; ?>"><?php echo lang_get( 'use_date_filters' ) ?>:</a>
-				<?php 
+				<?php
 				if ( 'on' == $t_filter['do_filter_by_date'] ) {
 					$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 					$t_time = mktime( 0, 0, 0, $t_filter['start_month'], $t_filter['start_day'], $t_filter['start_year'] );
@@ -561,7 +559,7 @@
 							print date( 'Y', $t_time );
 						}
 					}
-					
+
 					echo ' - ';
 
 					$t_time = mktime( 0, 0, 0, $t_filter['end_month'], $t_filter['end_day'], $t_filter['end_year'] );
@@ -586,7 +584,7 @@
 			</td>
 			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 				<a href="<?php print $t_filters_url . 'show_build'; ?>"><?php echo lang_get( 'product_build' ) ?>:</a>
-				<?php			
+				<?php
 				if ( 'any' == $t_filter['show_build'] ) {
 					echo lang_get( 'any' );
 				} else {
@@ -596,7 +594,7 @@
 			</td>
 			<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 				<a href="<?php print $t_filters_url . 'show_version'; ?>"><?php echo lang_get( 'product_version' ) ?>:</a>
-				<?php 
+				<?php
 				if ( 'any' == $t_filter['show_version'] ) {
 					echo lang_get( 'any' );
 				} else {
@@ -628,12 +626,12 @@
 		if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		?>
 			<?php # -- Custom Field Searching -- ?>
-			<?php 
+			<?php
 			if ( sizeof( $t_accessible_custom_fields_ids ) > 0 ) {
 				$t_per_row = config_get( 'filter_custom_fields_per_row' );
 				$t_num_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
 				$t_base = 0;
-				
+
 				for ( $i = 0; $i < $t_num_rows; $i++ ) {
 					?>
 					<tr <?php echo "class=\"" . $t_trclass . "\""; ?>>
@@ -683,7 +681,7 @@
 					foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
 						print '<option value="' . $t_query_id . '">' . $t_query_name . '</option>';
 					}
-					?>	
+					?>
 					</select>
 					<input type="submit" name="switch_to_query_button" value="<?php echo lang_get( 'use_query' ) ?>" />
 					</form>
@@ -703,7 +701,7 @@
 				</td>
 				<?php
 			}
-			
+
 			if ( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
 			?>
 				<td class="left" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
@@ -718,14 +716,14 @@
 			<?php
 			}
 			?>
-			
+
 		</tr>
 		</table>
 <?php
 	}
 
 	# Add a filter to the database for the current user
-	function filter_db_set_for_current_user( $p_project_id, $p_is_public, 
+	function filter_db_set_for_current_user( $p_project_id, $p_is_public,
 										$p_name, $p_filter_string ) {
 		$t_user_id = auth_get_current_user_id();
 		$c_project_id = db_prepare_int( $p_project_id );
@@ -739,7 +737,7 @@
 		if ( ( -1 != $c_project_id ) && ( ! access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
 			return -1;
 		}
-		
+
 		# ensure that we're not making this filter public if we're not allowed
 		if ( ! access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
 			$c_is_public = db_prepare_bool( false );
@@ -760,7 +758,7 @@
 					  	filter_string='$c_filter_string'
 					  WHERE id='" . $row['id'] . "'";
 			db_query( $query );
-			
+
 			return $row['id'];
 		} else {
 			$query = "INSERT INTO $t_filters_table
@@ -768,7 +766,7 @@
 					  VALUES
 						( '$t_user_id', '$c_project_id', '$c_is_public', '$c_name', '$c_filter_string' )";
 			db_query( $query );
-			
+
 			# Recall the query, we want the filter ID
 			$query = "SELECT id
 						FROM $t_filters_table
@@ -781,18 +779,18 @@
 				$row = db_fetch_array( $result );
 				return $row['id'];
 			}
-			
+
 			return -1;
 		}
 	}
 
 	# We cache filter requests to reduce the number of SQL queries
 	$g_cache_filter_db_filters = array();
-	
+
 	# This function will return the filter string that is
 	# tied to the unique id parameter. If the user doesn't
 	# have permission to see this filter, the function will
-	# return null 
+	# return null
 	function filter_db_get_filter( $p_filter_id ) {
 		global $g_cache_filter_db_filters;
 		$t_filters_table = config_get( 'mantis_filters_table' );
@@ -801,30 +799,30 @@
 		if ( isset( $g_cache_filter_db_filters[ $p_filter_id ] ) ) {
 			return $g_cache_filter_db_filters[ $p_filter_id ];
 		}
-		
+
 		$query = "SELECT *
 				  FROM $t_filters_table
 				  WHERE id='$c_filter_id'";
 		$result = db_query( $query );
-		
+
 		if ( db_num_rows( $result ) > 0 ) {
 			$row = db_fetch_array( $result );
-			
+
 			if ( $row['user_id'] != auth_get_current_user_id() ) {
 				if ( $row['is_public'] != true ) {
 					return null;
 				}
 			}
-			
+
 			# check that the user has access to non current filters
 			if ( ( -1 != $row['project_id'] ) && ( ! access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) ) {
 				return null;
 			}
-		
+
 			$g_cache_filter_db_filters[ $p_filter_id ] = $row['filter_string'];
 			return $row['filter_string'];
 		}
-		
+
 		return null;
 	}
 
@@ -836,19 +834,19 @@
 				  FROM $t_filters_table
 				  WHERE id='$c_filter_id'";
 		$result = db_query( $query );
-		
+
 		if ( db_num_rows( $result ) > 0 ) {
 			$row = db_fetch_array( $result );
-			
+
 			if ( $row['user_id'] != auth_get_current_user_id() ) {
 				if ( $row['is_public'] != true ) {
 					return null;
 				}
 			}
-			
+
 			return $row['name'];
 		}
-		
+
 		return null;
 	}
 
@@ -862,7 +860,7 @@
 		if ( access_has_global_level( ADMINISTRATOR ) ) {
 			return true;
 		}
-		
+
 		$query = "SELECT id
 				  FROM $t_filters_table
 				  WHERE id='$c_filter_id'
@@ -870,11 +868,11 @@
 				  AND project_id!='-1'";
 
 		$result = db_query( $query );
-		
+
 		if ( db_num_rows( $result ) > 0 ) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -886,7 +884,7 @@
 		if ( ! filter_db_can_delete_filter( $c_filter_id ) ) {
 			return false;
 		}
-		
+
 		$query = "DELETE FROM $t_filters_table
 				  WHERE id='$c_filter_id'";
 		$result = db_query( $query );
@@ -894,7 +892,7 @@
 		if ( db_affected_rows( $result ) > 0 ) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -905,10 +903,10 @@
 		$t_user_id = auth_get_current_user_id();
 
 		# If the user doesn't have access rights to stored queries, just return
-		if ( ! access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) { 
+		if ( ! access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
 			return $t_overall_query_arr;
 		}
-		
+
 		# Get the list of available queries. By sorting such that public queries are
 		# first, we can override any query that has the same name as a private query
 		# with that private one
@@ -920,14 +918,14 @@
 					ORDER BY is_public DESC, name ASC";
 		$result = db_query( $query );
 		$query_count = db_num_rows( $result );
-		
+
 		for ( $i = 0; $i < $query_count; $i++ ) {
 			$row = db_fetch_array( $result );
 			if ( ( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
 				$t_overall_query_arr[ $row['id'] ] = $row['name'];
 			}
 		}
-		
+
 		$t_overall_query_arr = array_unique( $t_overall_query_arr );
 		asort( $t_overall_query_arr );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.15 2004-04-02 11:22:05 yarick123 Exp $
+	# $Id: user_pref_api.php,v 1.16 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -215,7 +215,7 @@
 		$t_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 
 		$t_vars = get_object_vars( $p_prefs );
-		
+
 		$t_pairs = array();
 
 		foreach ( $t_vars as $var => $val ) {
@@ -318,7 +318,7 @@
 		$t_row_keys = array_keys( $row );
 
 		$t_vars = get_object_vars( $t_prefs );
-	
+
 		# Check each variable in the class
 		foreach ( $t_vars as $var => $val ) {
 			# If we got a field from the DB with the same name
@@ -339,7 +339,7 @@
 		$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
 		$t_vars = get_object_vars( $t_prefs );
-		
+
 		if ( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
 			return $t_prefs->$p_pref_name;
 		} else {
@@ -402,5 +402,4 @@
 
 		return user_pref_set( $p_user_id, $t_prefs, $p_project_id );
 	}
-
 ?>

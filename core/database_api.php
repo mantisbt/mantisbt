@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.22 2004-03-20 02:30:22 vboctor Exp $
+	# $Id: database_api.php,v 1.23 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -22,7 +22,7 @@
 
 	# An array in which all executed queries are stored.  This is used for profiling
 	$g_queries_array = array();
-	
+
 	# Stores whether a database connection was succesfully opened.
 	$g_db_connected = false;
 
@@ -30,7 +30,7 @@
 	# Make a connection to the database
 	function db_connect( $p_hostname, $p_username, $p_password, $p_port, $g_database_name ) {
 		global $g_db_connected, $g_db;
-		
+
 		$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $g_database_name);
 
 		if ( !$t_result ) {
@@ -38,7 +38,7 @@
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 			return false;
 		}
-		
+
 		$g_db_connected = true;
 
 		return true;
@@ -48,7 +48,7 @@
 	# Make a persistent connection to the database
 	function db_pconnect( $p_hostname, $p_username, $p_password, $p_port ) {
 		global $g_db_connected, $g_db;
-		
+
 		$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password);
 
 		if ( !$t_result ) {
@@ -56,17 +56,17 @@
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 			return false;
 		}
-		
+
 		$g_db_connected = true;
 
 		return true;
 	}
-	
+
 	# --------------------
 	# Returns whether a connection to the database exists
 	function db_is_connected() {
 		global $g_db_connected;
-		
+
 		return $g_db_connected;
 	}
 
@@ -130,29 +130,30 @@
 	# --------------------
 	# return the last inserted id
 	function db_insert_id($p_table = null) {
-			global $g_db_type, $g_db;
-			if (isset($p_table) && $g_db_type == "pgsql")
-			{
-				$result = db_query("SELECT currval('".$p_table."_id_seq')");
-				return db_result($result);
+		global $g_db_type, $g_db;
+
+		if ( isset($p_table) && ( 'pgsql' == $g_db_type ) ) {
+			$query = "SELECT currval('".$p_table."_id_seq')";
+			$result = db_query( $query );
+			return db_result($result);
 		}
-			return $g_db->Insert_ID( );
+		return $g_db->Insert_ID( );
 	}
 
 	# --------------------
 	function db_field_exists( $p_field_name, $p_table_name, $p_db_name = '') {
 		global $g_database_name;
 
-		if ($p_db_name == '') {
+		if ( '' == $p_db_name ) {
 			$p_db_name = $g_database_name;
 		}
 
 		$fields = mysql_list_fields($p_db_name, $p_table_name);
 		$columns = mysql_num_fields($fields);
 		for ($i = 0; $i < $columns; $i++) {
-		  if ( mysql_field_name( $fields, $i ) == $p_field_name ) {
-		  	return true;
-		  }
+			if ( mysql_field_name( $fields, $i ) == $p_field_name ) {
+				return true;
+			}
 		}
 
 		return false;

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.43 2004-03-18 14:02:29 vboctor Exp $
+	# $Id: file_api.php,v 1.44 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 
@@ -127,19 +127,20 @@
 
 			echo $t_href_start;
 			print_file_icon ( file_get_display_name( $v_filename ) );
-			echo $t_href_end . '</a>&nbsp;' . $t_href_start . file_get_display_name( $v_filename ) . 
+			echo $t_href_end . '</a>&nbsp;' . $t_href_start . file_get_display_name( $v_filename ) .
 				$t_href_end . " ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
 			if ( $t_can_delete ) {
 				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
 			}
-			
+
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
 				echo ' (' . lang_get( 'cached' ) . ')';
 			}
 
-			if ( $t_can_download && ( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
-				( $v_filesize != 0 ) && 
+			if ( $t_can_download &&
+				( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
+				( $v_filesize != 0 ) &&
 				( in_array( strtolower( file_get_extension( $v_diskfile ) ), array( 'png', 'jpg', 'gif', 'bmp' ), true ) ) ) {
 				echo "<br /><img src=\"file_download.php?file_id=$v_id&amp;type=bug\" />";
 				$image_previewed = true;
@@ -242,12 +243,12 @@
 	# --------------------
 	# Delete all cached files that are older than configured number of days.
 	function file_ftp_cache_cleanup() {
-		
+
 	}
 	# --------------------
 	# Connect to ftp server using configured server address, user name, and password.
 	function file_ftp_connect() {
-		$conn_id = ftp_connect( config_get( 'file_upload_ftp_server' ) ); 
+		$conn_id = ftp_connect( config_get( 'file_upload_ftp_server' ) );
 		$login_result = ftp_login( $conn_id, config_get( 'file_upload_ftp_user' ), config_get( 'file_upload_ftp_pass' ) );
 
 		if ( ( !$conn_id ) || ( !$login_result ) ) {
@@ -276,7 +277,7 @@
 	# --------------------
 	# Disconnect from the ftp server
 	function file_ftp_disconnect( $p_conn_id ) {
-		ftp_quit( $p_conn_id ); 
+		ftp_quit( $p_conn_id );
 	}
 	# --------------------
 	# Delete a local file even if it is read-only.
@@ -306,7 +307,7 @@
 	# --------------------
 	function file_delete( $p_file_id ) {
 		$c_file_id = db_prepare_int( $p_file_id );
-		
+
 		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
 
 		$t_upload_method = config_get( 'file_upload_method' );
@@ -436,13 +437,13 @@
 		}
 
 	}
-	
+
 	# --------------------
 	# Return true if file uploading is enabled (in our config and PHP's),
 	#  false otherwise
 	function file_is_uploading_enabled() {
-		if ( ini_get_bool( 'file_uploads' ) && 
-			 ON == config_get( 'allow_file_upload' ) ) {
+		if ( ini_get_bool( 'file_uploads' ) &&
+			 ( ON == config_get( 'allow_file_upload' ) ) ) {
 			return true;
 		} else {
 			return false;
@@ -463,8 +464,8 @@
 
 		$t_access = user_get_access_level( $p_user_id, $p_project_id );
 
-		if ( ! file_is_uploading_enabled() ||
-			 $t_access < config_get( 'upload_project_file_threshold' ) ) { 
+		if ( !file_is_uploading_enabled() ||
+			 ( $t_access < config_get( 'upload_project_file_threshold' ) ) ) {
 			return false;
 		}
 
@@ -487,7 +488,7 @@
 		if ( ! file_is_uploading_enabled() ) {
 			return false;
 		}
-		
+
 		if ( null === $p_bug_id ) {		# new bug
 			$t_project_id = helper_get_current_project();
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.89 2004-04-06 19:38:33 prescience Exp $
+	# $Id: html_api.php,v 1.90 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -215,9 +215,7 @@
 	function html_top_banner() {
 		$t_page = config_get( 'top_include_page' );
 
-		if ( !is_blank( $t_page ) &&
-			 file_exists( $t_page ) &&
-			 !is_dir( $t_page ) ) {
+		if ( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 			include( $t_page );
 		}
 	}
@@ -277,9 +275,7 @@
 	function html_bottom_banner() {
 		$t_page = config_get( 'bottom_include_page' );
 
-		if ( !is_blank( $t_page ) &&
-			 file_exists( $t_page ) &&
-			 !is_dir( $t_page ) ) {
+		if ( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 			include( $t_page );
 		}
 	}
@@ -710,9 +706,9 @@
 	# --------------------
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
-		if ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id )
-			 || ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id()
-				  && ON == config_get( 'allow_reporter_reopen' ) ) ) {
+		if ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id ) ||
+			 ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() &&
+			 ( ON == config_get( 'allow_reporter_reopen' ) ) ) ) {
 			html_button( 'bug_reopen_page.php',
 						 lang_get( 'reopen_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );

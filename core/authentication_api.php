@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.32 2004-02-05 12:15:17 vboctor Exp $
+	# $Id: authentication_api.php,v 1.33 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -43,7 +43,7 @@
 			print_header_redirect( 'login_page.php?return=' . $p_return_page );
 		}
 	}
-	
+
 	# --------------------
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
@@ -63,7 +63,7 @@
 	# --------------------
 	# Attempt to login the user with the given password
 	#  If the user fails validation, false is returned
-	#  If the user passes validation, the cookies are set and 
+	#  If the user passes validation, the cookies are set and
 	#   true is returned.  If $p_perm_login is true, the long-term
 	#   cookie is created.
 	function auth_attempt_login( $p_username, $p_password, $p_perm_login=false ) {
@@ -148,26 +148,26 @@
 		if ( LDAP == $t_configured_login_method ) {
 			return ldap_authenticate( $p_user_id, $p_test_password );
 		}
-		
+
 		$t_password = user_get_field( $p_user_id, 'password' );
-		
+
 		$t_login_methods = Array(MD5, CRYPT, PLAIN);
-		
+
 		foreach ( $t_login_methods as $t_login_method ) {
-			
+
 			# pass the stored password in as the salt
 			if ( auth_process_plain_password( $p_test_password, $t_password, $t_login_method ) == $t_password ) {
 				# Check for migration to another login method and test whether the password was encrypted
 				# with our previously insecure implemention of the CRYPT method
-				if ( $t_login_method != $t_configured_login_method 
-					|| ( CRYPT == $t_configured_login_method && substr( $t_password, 0, 2 ) == substr( $p_test_password, 0, 2 ) ) ) {
+				if ( ( $t_login_method != $t_configured_login_method ) ||
+					( ( CRYPT == $t_configured_login_method ) && substr( $t_password, 0, 2 ) == substr( $p_test_password, 0, 2 ) ) ) {
 					user_set_password( $p_user_id, $p_test_password, true );
 				}
-				
+
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -286,7 +286,7 @@
 		} else {
 			return true;
 		}
-	}	
+	}
 
 	# --------------------
 	# Return the current user login cookie string,
@@ -335,7 +335,7 @@
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$t_cookie_string = auth_get_current_user_cookie();
-		
+
 		# @@@ error with an error saying they aren't logged in?
 		#     Or redirect to the login page maybe?
 

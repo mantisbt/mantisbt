@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.12 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: graph_api.php,v 1.13 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
 		$t_jpgraph_path = config_get( 'jpgraph_path' );
-		
+
 		require_once( $t_jpgraph_path.'jpgraph.php' );
 		require_once( $t_jpgraph_path.'jpgraph_line.php' );
 		require_once( $t_jpgraph_path.'jpgraph_bar.php' );
@@ -40,8 +40,11 @@
 			$t_s = explode( ':', $t_arr[$i] );
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
-			if ($t_project_id==ALL_PROJECTS) $specific_where = '';
-			else $specific_where = " AND project_id='$t_project_id'";
+			if ( ALL_PROJECTS == $t_project_id ) {
+				$specific_where = '';
+			} else {
+				$specific_where = " AND project_id='$t_project_id'";
+			}
 
 			# Calculates the number of bugs with $p_enum and puts the results in a table
 			$query = "SELECT COUNT(*)
@@ -148,8 +151,11 @@
 		 $t_res_val = RESOLVED;
 		 $t_clo_val = CLOSED;
 
-		if ($t_project_id==ALL_PROJECTS) $specific_where = '';
-		else $specific_where = " AND project_id='$t_project_id'";
+		if ( ALL_PROJECTS == $t_project_id ) {
+			$specific_where = '';
+		} else {
+			$specific_where = " AND project_id='$t_project_id'";
+		}
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
@@ -258,8 +264,11 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ($t_project_id==ALL_PROJECTS) $specific_where = '1=1';
-		else $specific_where = " project_id='$t_project_id'";
+		if ( ALL_PROJECTS == $t_project_id ) {
+			$specific_where = '1=1';
+		} else {
+			$specific_where = " project_id='$t_project_id'";
+		}
 
 		$query = "SELECT COUNT(*)
 	                      FROM $g_mantis_bug_table
@@ -322,12 +331,15 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ( ALL_PROJECTS == $t_project_id ) $specific_where = '1=1';
-		else $specific_where = " project_id='$t_project_id'";
+		if ( ALL_PROJECTS == $t_project_id ) {
+			$specific_where = '1=1';
+		} else {
+			$specific_where = " project_id='$t_project_id'";
+		}
 
 		$query = "SELECT COUNT(*)
-	                      FROM $g_mantis_bug_table
-	                      WHERE $specific_where";
+				FROM $g_mantis_bug_table
+				WHERE $specific_where";
 		$result = db_query( $query );
 		$total = db_result( $result, 0 );
 
@@ -397,8 +409,11 @@
 			$c_s[0] = addslashes($t_s[0]);
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
-			if ($t_project_id==ALL_PROJECTS) $specific_where = '';
-			else $specific_where = " AND project_id='$t_project_id'";
+			if ( ALL_PROJECTS == $t_project_id ) {
+				$specific_where = '';
+			} else {
+				$specific_where = " AND project_id='$t_project_id'";
+			}
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -452,8 +467,12 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ($t_project_id==ALL_PROJECTS) $specific_where = '';
-			else $specific_where = " AND project_id='$t_project_id'";
+			if ( ALL_PROJECTS == $t_project_id ) {
+				$specific_where = '';
+			} else {
+				$specific_where = " AND project_id='$t_project_id'";
+			}
+
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE handler_id='$v_id' $specific_where";
@@ -541,8 +560,12 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ($t_project_id==ALL_PROJECTS) $specific_where = '';
-			else $specific_where = " AND project_id='$t_project_id'";
+			if ( ALL_PROJECTS == $t_project_id ) {
+				$specific_where = '';
+			} else {
+				$specific_where = " AND project_id='$t_project_id'";
+			}
+
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE reporter_id ='$v_id' $specific_where";
@@ -586,8 +609,12 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ($t_project_id==ALL_PROJECTS) $specific_where = ' 1=1 ';
-		else $specific_where = " project_id='$t_project_id'";
+		if ( ALL_PROJECTS == $t_project_id ) {
+			$specific_where = ' 1=1';
+		} else {
+			$specific_where = " AND project_id='$t_project_id'";
+		}
+
 		$query = "SELECT DISTINCT category
 				FROM $g_mantis_project_category_table
 				WHERE $specific_where
@@ -633,8 +660,10 @@
 	}
 
 	function cmp_dates($a, $b){
-		if ($a[0]==$b[0]) return 0;
-		return ($a[0]<$b[0]) ? -1 : 1;
+		if ($a[0] == $b[0]) {
+			return 0;
+		}
+		return ( $a[0] < $b[0] ) ? -1 : 1;
 	}
 
 	function find_date_in_metrics($aDate){
@@ -657,13 +686,17 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ($t_project_id==ALL_PROJECTS) $specific_where = ' 1=1 ';
-			else $specific_where = " project_id='$t_project_id' ";
+		if ( ALL_PROJECTS == $t_project_id ) {
+			$specific_where = ' 1=1';
+		} else {
+			$specific_where = " AND project_id='$t_project_id'";
+		}
 
-		### Get all the submitted dates
+		# Get all the submitted dates
 		$query = "SELECT date_submitted
-			FROM $g_mantis_bug_table WHERE $specific_where
-			ORDER BY date_submitted";
+				FROM $g_mantis_bug_table
+				WHERE $specific_where
+				ORDER BY date_submitted";
 		$result = db_query( $query );
 		$bug_count = db_num_rows( $result );
 

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.53 2004-03-18 14:02:29 vboctor Exp $
+	# $Id: bug_api.php,v 1.54 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'email_api.php' );
 	require_once( $t_core_dir . 'bugnote_api.php' );
@@ -67,7 +67,7 @@
 	#
 	$g_cache_bug = array();
 	$g_cache_bug_text = array();
-	
+
 	# Cache a bug row if necessary and return the cached copy
 	#  If the second parameter is true (default), trigger an error
 	#  if the bug can't be found.  If the second parameter is
@@ -215,7 +215,7 @@
 			return false;
 		}
 	}
-	
+
 	# --------------------
 	# check if the given user is the handler of the bug
 	# return true if the user is the handler, false otherwise
@@ -234,7 +234,7 @@
 	function bug_is_readonly( $p_bug_id ) {
 		return ( bug_get_field( $p_bug_id, 'status' ) < config_get( 'bug_resolved_status_threshold' ) );
 	}
-	
+
 	#===================================
 	# Creation / Deletion / Updating
 	#===================================
@@ -425,7 +425,7 @@
 
 		$bug_count = db_num_rows( $result );
 
-		for ( $i=0 ; $i < $bug_count ; $i++ ) {	
+		for ( $i=0 ; $i < $bug_count ; $i++ ) {
 			$row = db_fetch_array( $result );
 
 			bug_delete( $row['id'] );
@@ -450,8 +450,7 @@
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
-		if ( $p_update_extended )
-		{
+		if ( $p_update_extended ) {
 			# Description field cannot be empty
 			if ( is_blank( $c_bug_data->description ) ) {
 				trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -754,7 +753,7 @@
 	function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text='' ) {
 		$c_bug_id	= db_prepare_int( $p_bug_id );
 		$c_user_id	= db_prepare_int( $p_user_id );
-		
+
 		if ( ( $c_user_id != NO_USER ) && !access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $p_user_id ) ) {
 		    trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
 		}
@@ -763,13 +762,13 @@
 		$h_status		= bug_get_field( $p_bug_id, 'status' );
 		$h_handler_id	= bug_get_field( $p_bug_id, 'handler_id' );
 
-		if ( ON == config_get( 'auto_set_status_to_assigned' ) &&
-			 NO_USER != $p_user_id ) {
+		if ( ( ON == config_get( 'auto_set_status_to_assigned' ) ) &&
+			 ( NO_USER != $p_user_id ) ) {
 			$t_ass_val = config_get( 'bug_assigned_status' );
 		} else {
 			$t_ass_val = $h_status;
 		}
-	
+
 		$t_bug_table = config_get( 'mantis_bug_table' );
 
 		if ( ( $t_ass_val != $h_status ) || ( $p_user_id != $h_handler_id ) ) {
@@ -902,8 +901,8 @@
 		db_query( $query );
 
 		# log new monitoring action
-		history_log_event_special( $p_bug_id, BUG_MONITOR, $c_user_id );	
-		
+		history_log_event_special( $p_bug_id, BUG_MONITOR, $c_user_id );
+
 		return true;
 	}
 

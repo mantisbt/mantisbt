@@ -6,16 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: timer_api.php,v 1.5 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: timer_api.php,v 1.6 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Timer API
 	###########################################################################
 
-	# --------------------
 	# --- BC Timer -------
-	# --------------------
 	# Charles Killian, modified by Kenzaburo Ito
 
 	# USAGE: set $g_debug_timer to ON and just call mark_time( 'token name' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.75 2004-04-02 14:19:37 yarick123 Exp $
+	# $Id: email_api.php,v 1.76 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -127,8 +127,9 @@
 					$host = $t_domain . '.';
 
 					# for no mx record... try dns check
-					if (checkdnsrr ( $host, 'ANY' ))
+					if ( checkdnsrr( $host, 'ANY' ) ) {
 						return true;
+					}
 				}
 			} else {
 				# Email format was valid but did't check for valid mx records
@@ -209,7 +210,7 @@
 					  FROM $t_bugnote_table
 					  WHERE bug_id = $c_bug_id";
 			$result = db_query( $query );
-			
+
 			$count = db_num_rows( $result );
 			for( $i=0 ; $i < $count ; $i++ ) {
 				$t_user_id = db_result( $result, $i );
@@ -240,15 +241,15 @@
 		# and put email address to $t_recipients[user_id]
 		foreach ( $t_recipients as $t_id => $t_ignore ) {
 			# Possibly eliminate the current user
-			if ( auth_get_current_user_id() == $t_id &&
-				 OFF == config_get( 'email_receive_own' ) ) {
+			if ( ( auth_get_current_user_id() == $t_id ) &&
+				 ( OFF == config_get( 'email_receive_own' ) ) ) {
 				unset( $t_recipients[$t_id] );
 				continue;
 			}
 
 			# Eliminate users who don't exist anymore or who are disabled
-			if ( ! user_exists( $t_id ) ||
-				 ! user_is_enabled( $t_id ) ) {
+			if ( !user_exists( $t_id ) ||
+				 !user_is_enabled( $t_id ) ) {
 				unset( $t_recipients[$t_id] );
 				continue;
 			}
@@ -511,8 +512,7 @@
 			}
 		}
 
-		if ( OFF !== $t_debug_email )
-		{
+		if ( OFF !== $t_debug_email ) {
 			$t_message = "\n" . $t_message;
 
 			if ( !is_blank( $t_debug_bcc ) ) {
@@ -528,7 +528,7 @@
 
 		$mail->Subject = $t_subject;
 		$mail->Body    = make_lf_crlf( "\n".$t_message );
-		
+
 		if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) )  {
 			$mail->AddCustomHeader( "Keywords: $p_category" );
 		}
@@ -627,7 +627,7 @@
 				$t_contents = $t_header .
 								string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) .
 								"\n\n$p_message";
-								
+
 				if( ON == config_get( 'enable_email_notification' ) ) {
 					email_send( $t_email, $t_subject, $t_contents );
 				}
@@ -656,16 +656,16 @@
 			$t_subject = '['.$p_visible_bug_data['email_project'].' '
 							.bug_format_id( $p_visible_bug_data['email_bug'] )
 						.']: '.$p_visible_bug_data['email_summary'];
-	
+
 			# build message
-	
+
 			$t_message = lang_get_defaulted( $p_message_id );
 			if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
 				$t_message .= "\n";
 			}
 
 			$t_message .= email_format_bug_message(  $p_visible_bug_data );
-	
+
 			# send mail
 			# echo '<br />email_bug_info::Sending email to :'.$t_user_email;
 			$t_ok = email_send( $t_user_email, $t_subject, $t_message, '', $p_visible_bug_data['set_category'], false );
@@ -713,7 +713,7 @@
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
-		
+
 
 		# custom fields formatting
 		foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {

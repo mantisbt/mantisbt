@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.73 2004-03-05 02:27:52 jlatour Exp $
+	# $Id: print_api.php,v 1.74 2004-04-08 02:42:27 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 
@@ -122,7 +122,7 @@
 		if ( NO_USER == $p_user_id ) {
 			return;
 		}
-		
+
 		$t_username = user_get_name( $p_user_id );
 		if ( user_exists( $p_user_id ) ) {
 			$t_email = user_get_field( $p_user_id, 'email' );
@@ -548,7 +548,7 @@
 				ORDER BY build DESC";
 		$result = db_query( $query );
 		$option_count = db_num_rows( $result );
-		
+
 		for ( $i = 0; $i < $option_count; $i++ ) {
 			$row = db_fetch_array( $result );
 			$t_overall_build_arr[] = $row['build'];
@@ -930,7 +930,7 @@
 			return;
 		}
 
-		# Get localized strings 
+		# Get localized strings
 		$t_first = lang_get( 'first' );
 		$t_last  = lang_get( 'last' );
 		$t_prev  = lang_get( 'prev' );
@@ -938,20 +938,21 @@
 
 		$t_page_links = 10;
 
-    print( "[ " );
+		print( "[ " );
 
 		# First and previous links
 		print_page_link( $p_page, $t_first, 1, $p_current );
 		print_page_link( $p_page, $t_prev, $p_current - 1, $p_current );
-		
+
 		# Page numbers ...
 
 		$t_first_page = max( $p_start, $p_current - $t_page_links/2 );
 		$t_first_page = min( $t_first_page, $p_end - $t_page_links );
 		$t_first_page = max( $t_first_page, $p_start );
 
-		if ( $t_first_page > 1 )
+		if ( $t_first_page > 1 ) {
 			print( " ... " );
+		}
 
 		$t_last_page = $t_first_page + $t_page_links;
 		$t_last_page = min( $t_last_page, $p_end );
@@ -965,14 +966,16 @@
 		}
 		echo implode( '&nbsp;', $t_items );
 
-		if ( $t_last_page < $p_end )
+		if ( $t_last_page < $p_end ) {
 			print( " ... " );
+		}
 
 		# Next and Last links
-		if ( $p_current < $p_end )
+		if ( $p_current < $p_end ) {
 			print_page_link( $p_page, $t_next, $p_current + 1, $p_current );
-		else
+		} else {
 			print_page_link( $p_page, $t_next );
+		}
 		print_page_link( $p_page, $t_last, $p_end, $p_current );
 
     print( " ]" );
@@ -988,7 +991,7 @@
 		if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 			return $p_text;
 		}
-		
+
 		# If we apply string_url() to the whole mailto: link then the @
 		#  gets turned into a %40 and you can't right click in browsers to
 		#  do Copy Email Address.
@@ -1010,7 +1013,7 @@
 		if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 			return $p_text;
 		}
-		
+
 		# If we apply string_url() to the whole mailto: link then the @
 		#  gets turned into a %40 and you can't right click in browsers to
 		#  do Copy Email Address.  If we don't apply string_url() to the
@@ -1023,7 +1026,7 @@
 	}
 	# --------------------
 	# Print a hidden input for each name=>value pair in the array
-	#  
+	#
 	# If a value is an array an input will be created for each item with a name
 	#  that ends with []
 	# The names and values are passed through htmlspecialchars() before being displayed
