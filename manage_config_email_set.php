@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_set.php,v 1.2 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: manage_config_email_set.php,v 1.3 2005-03-19 23:00:22 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -122,14 +122,6 @@
 	}
 	if ( isset( $t_notify_flags ) ) {
 		config_set( 'notify_flags', $t_notify_flags, NO_USER, $t_project, $f_actions_access );
-	}
-
-	# capture minimum severity settings
-	foreach ( $t_valid_actions as $t_action ) {
-		$f_severity = gpc_get( $t_action . '_minimum_severity' );
-		$f_access = gpc_get( $t_action . '_change_severity' );
-
-		config_set( 'default_email_on_' . $t_action . '_minimum_severity', $f_severity, NO_USER, $t_project, $f_access );
 	}
 
 
