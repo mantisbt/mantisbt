@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.12 2004-04-08 18:04:53 prescience Exp $
+	# $Id: version_api.php,v 1.13 2004-05-24 12:35:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -121,6 +121,12 @@
 					  WHERE version='$c_version' AND
 					  		project_id='$c_project_id'";
 			db_query( $query );
+
+			$query = "UPDATE $t_bug_table
+					  SET fixed_in_version='$c_new_version'
+					  WHERE fixed_in_version='$c_version' AND
+					  		project_id='$c_project_id'";
+			db_query( $query );
 		}
 
 		# db_query() errors on failure so:
@@ -150,6 +156,12 @@
 				  		project_id='$c_project_id'";
 		db_query( $query );
 
+		$query = "UPDATE $t_bug_table
+				  SET fixed_in_version='$c_new_version'
+				  WHERE fixed_in_version='$c_version' AND
+				  		project_id='$c_project_id'";
+		db_query( $query );
+
 		# db_query() errors on failure so:
 		return true;
 	}
@@ -169,6 +181,11 @@
 
 		$query = "UPDATE $t_bug_table
 				  SET version=''
+				  WHERE project_id='$c_project_id'";
+		db_query( $query );
+
+		$query = "UPDATE $t_bug_table
+				  SET fixed_in_version=''
 				  WHERE project_id='$c_project_id'";
 		db_query( $query );
 
