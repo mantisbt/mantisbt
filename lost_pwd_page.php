@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd_page.php,v 1.1 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: lost_pwd_page.php,v 1.2 2004-09-28 13:57:37 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# --------------------------------------------------------
@@ -35,6 +35,10 @@
 		<?php echo lang_get( 'lost_password_title' ) ?>
 	</td>
 </tr>
+<?php
+		$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
+  if ( $t_allow_passwd ) {
+?>
 <tr class="row-1">
 	<td class="category" width="25%">
 		<?php echo lang_get( 'username' ) ?>
@@ -63,6 +67,20 @@
 		<input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" />
 	</td>
 </tr>
+<?php
+  }else{
+?>
+<tr>
+	<td colspan="2">
+		<br/>
+		<?php echo lang_get( 'no_password_request' ) ?>
+		<br/><br/>
+	</td>
+</tr>
+<?php
+  }
+?>
+
 </table>
 </form>
 </div>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.7 2004-08-27 00:29:55 thraxisp Exp $
+	# $Id: custom_function_api.php,v 1.8 2004-09-28 13:57:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Custom Function API ###
@@ -113,4 +113,17 @@
 	# issue before it was deleted.
 	function custom_function_default_issue_delete_notify( $p_issue_data ) {
 	}
+
+	# --------------------
+	# Hook for authentication
+	# can Mantis update the password
+	function custom_function_default_auth_can_change_password( ) {
+		$t_can_change = array( PLAIN, CRYPT, CRYPT_FULL_SALT, MD5 );
+		if ( in_array( config_get( 'login_method' ), $t_can_change ) ) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 ?>

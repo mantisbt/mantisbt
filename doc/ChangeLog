@@ -19,6 +19,7 @@ Mantis ChangeLog
 - 0004383: [localization] Editing a note has language specific note at end of note (bpfennig)
 - 0004526: [other] Spaces needed after colons on main page (vboctor)
 - 0004558: [custom fields] Custom Fields doesn't display links (bpfennig)
+- New Custom Function: auth_can_change_password - returns true if Mantis can change the password
 - New Config: $g_display_errors - controlls error handler display
 - New Config: $g_reopen_bug_threshold - access level needed to re-open bugs
 - Removed config option ($g_show_notices, $g_show_warnings): subsumed into $g_display_errors

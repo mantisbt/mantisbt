@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup_page.php,v 1.29 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: signup_page.php,v 1.30 2004-09-28 13:57:37 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -48,7 +48,8 @@
 	</td>
 </tr>
 <?php
-	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 ) {
+	$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
+	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
 		# captcha image requires GD library and related option to ON
 ?>
 <tr class="row-1">
@@ -61,6 +62,17 @@
 	<td>
 		<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>">
 		<input type="hidden" name="public_key" value="<?php echo $t_key ?>">
+	</td>
+</tr>
+<?php
+	}
+	if( false == $t_allow_passwd ) {
+?>
+<tr class="row-1">
+	<td class="category">
+	</td>
+	<td colspan="2">
+		<?php echo lang_get( 'no_password_request' ) ?>
 	</td>
 </tr>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.47 2004-08-14 15:26:19 thraxisp Exp $
+	# $Id: account_page.php,v 1.48 2004-09-28 13:57:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -77,7 +77,7 @@
 		</td>
 	</tr>
 
-<?php if ( $t_ldap ) { ?> <!-- With LDAP -->
+<?php if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) { ?> <!-- With LDAP -->
 
 	<!-- Username -->
 	<tr class="row-1">
@@ -91,9 +91,11 @@
 
 	<!-- Password -->
 	<tr class="row-2">
-		<td colspan="2">
-			The password settings are controlled by your LDAP entry,<br />
-			hence cannot be edited here.
+		<td class="category">
+			<?php echo lang_get( 'password' ) ?>
+		</td>
+		<td>
+			<?php echo lang_get( 'no_password_change' ) ?>
 		</td>
 	</tr>
 

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.213 $
+	# $Revision: 1.214 $
 	# $Author: thraxisp $
-	# $Date: 2004-09-26 02:31:28 $
+	# $Date: 2004-09-28 13:57:38 $
 	#
-	# $Id: strings_english.txt,v 1.213 2004-09-26 02:31:28 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.214 2004-09-28 13:57:38 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -341,6 +341,7 @@ $s_username = 'Username';
 $s_realname = 'Real Name';
 $s_email = 'Email';
 $s_password = 'Password';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Confirm Password';
 $s_access_level = 'Access Level';
 $s_update_user_button = 'Update User';
@@ -854,6 +855,7 @@ $s_signup_captcha_request = 'Enter the code as it is shown in the box on the rig
 $s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Signup';
 $s_signup_button = 'Signup';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Edit Site Settings';
