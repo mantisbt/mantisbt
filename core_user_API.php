@@ -511,6 +511,9 @@
 
 		$t_user_id = get_current_user_field( 'id' );
 		if ( 0 == $p_project_id ) {
+			if ( (integer)$g_project_cookie_val == 0 ) {
+				return -1;
+			}
 			$query = "SELECT access_level
 					FROM $g_mantis_project_user_list_table
 					WHERE user_id='$t_user_id' AND project_id='$g_project_cookie_val'";
