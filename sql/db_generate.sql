@@ -3,7 +3,7 @@
 # http://www.phpmyadmin.net
 #
 # Host: localhost
-# Generation Time: Aug 28, 2004 at 11:18 PM
+# Generation Time: Nov 06, 2004 at 09:52 PM
 # Server version: 4.0.20
 # PHP Version: 4.3.8
 # 
@@ -176,6 +176,8 @@ CREATE TABLE mantis_bugnote_table (
   view_state int(2) NOT NULL default '10',
   date_submitted datetime NOT NULL default '1970-01-01 00:00:01',
   last_modified datetime NOT NULL default '1970-01-01 00:00:01',
+  note_type int(7) default '0',
+  note_attr varchar(250) default '',
   PRIMARY KEY  (id)
 ) TYPE=MyISAM;
 
@@ -761,6 +763,8 @@ INSERT INTO mantis_upgrade_table VALUES ('delete-admin-over', 'Delete any projec
 INSERT INTO mantis_upgrade_table VALUES ('0.18-bugnote-limit', 'Add email_bugnote_limit to user preference table');
 INSERT INTO mantis_upgrade_table VALUES ('0.18-bugnote-order', 'Add bugnote_order to user preference table');
 INSERT INTO mantis_upgrade_table VALUES ('cb_ml_upgrade', 'Upgrade custom field types (checkbox, list, multilist) to support advanced filtering');
+INSERT INTO mantis_upgrade_table VALUES ('bugnote-type', 'Add note type column to bugnote');
+INSERT INTO mantis_upgrade_table VALUES ('bugnote-attr', 'Add note_attr column to bugnote');
 
 # --------------------------------------------------------
 
