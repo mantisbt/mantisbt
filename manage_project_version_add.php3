@@ -16,7 +16,7 @@
 	}
 
 	### check for empty case or duplicate
-	if ( !empty( $f_version )&&( is_not_duplicate_version( $f_version ) ) ) {
+	if ( !empty( $f_version )&&( !is_duplicate_version( $f_version ) ) ) {
 		### insert version
 		$query = "INSERT
 				INTO $g_mantis_project_version_table

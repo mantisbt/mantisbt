@@ -16,12 +16,32 @@
 	}
 
 	### check for duplicate
-	if ( is_not_duplicate_version( $f_version ) ) {
+	if ( !is_duplicate_version( $f_version ) ) {
 		### update version
 		$query = "UPDATE $g_mantis_project_version_table
 				SET version='$f_version'
 				WHERE version='$f_orig_version' AND project_id='$f_project_id'";
 		$result = db_query( $query );
+
+		$query = "SELECT id, date_submitted, last_updated
+				FROM $g_mantis_bug_table
+	    		WHERE version='$f_version'";
+	   	$result = db_query( $query );
+	   	$bug_count = db_num_rows( $result );
+
+		### update version
+		for ($i=0;$i<$bug_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_bug_id = $row["id"];
+			$t_date_submitted = $row["date_submitted"];
+			$t_last_updated = $row["last_updated"];
+
+			$query2 = "UPDATE $g_mantis_bug_table
+					SET version='$f_version', date_submitted='$t_date_submitted',
+						last_updated='$t_last_updated'
+					WHERE id='$t_bug_id'";
+			$result2 = db_query( $query2 );
+		}
 	}
 ?>
 <? print_html_top() ?>
