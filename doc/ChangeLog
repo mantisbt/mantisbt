@@ -29,7 +29,7 @@ Mantis ChangeLog
  * Fix #3598: Bug history: consuming custom fields or not?
  * Fix #3602: Problems with Mantis 0.18.1 localization (partial fix).
  * Languages: Added Lithuanian and Serbian localisations.
- * Languages: Updated Chinese (simplified), Danish, German, Korean, Norwegian, Portuguese and Spanish localisations.
+ * Languages: Updated Chinese (simplified), Danish, German, Korean, Norwegian, Portuguese, Spanish and Swedish localisations.
  * Mantis website moved to http://www.mantisbt.org
 
 2004.02.06  -  0.18.1

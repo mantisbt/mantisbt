@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.58 $
+	# $Revision: 1.59 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 13:24:12 $
+	# $Date: 2004-02-26 23:49:55 $
 	#
-	# $Id: strings_swedish.txt,v 1.58 2004-02-26 13:24:12 jlatour Exp $
+	# $Id: strings_swedish.txt,v 1.59 2004-02-26 23:49:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -35,7 +35,7 @@ $s_date_order = 'Datumordning';
 $s_print_all_bug_page_link = 'Skriv ut rapporter';
 $s_csv_export = 'CSV export';
 $s_login_anonymously = 'Logga in anonymt';
-$s_anonymous = 'Anonymous';
+$s_anonymous = 'Anonym';
 $s_jump_to_bugnotes = 'Hoppa till buggmeddelanden';
 $s_public_project_msg = 'Det här projektet är PUBLIKT.  Alla användare har tillgång till det här projektet.';
 $s_private_project_msg = 'Det här projektet är PRIVAT.  Endast administratörer och manuellt tillagda användare har tillgång.';
@@ -200,7 +200,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FEL: Kategorin finns inte.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEL: Versionen finns redan.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FEL: Versionen finns inte.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FEL: Användarnamnet är ogiltigt.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Användaren har inte tillräcklig behörighet.';
 
 $s_login_error = 'FEL: ditt användarkonto kan vara avstängt eller så har du angivit ett felaktigt användarnamn eller lösenord.';
 $s_login_cookies_disabled = 'FEL: Din bläddrare kan inte hantera cookies eller vägrar använda dem.';
@@ -244,19 +244,19 @@ $s_reset_request_msg = 'Det har kommet en begäran om att nollställa ditt lösenor
 $s_account_name_msg = 'Ditt användarnamn är';
 $s_news_password_msg = 'Här är ditt nya lösenord';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'Följande bugg kräver din ÅTERKOPPLING.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Följande bugg har blivit GODKÄND.';
+$s_email_notification_title_for_status_bug_confirmed = 'Följande bugg har blivit BEKRÄFTAD.';
+$s_email_notification_title_for_status_bug_assigned = 'Följande bugg har blivit TILLDELAD.';
+$s_email_notification_title_for_status_bug_resolved = 'Följande bugg har blivit LÖST.';
+$s_email_notification_title_for_status_bug_closed = 'Följande bugg har blivit STÄNGD.';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'Följande bug har blivit RAPPORTERAD.';
+$s_email_notification_title_for_action_bug_assigned = 'Följande bug har blivit TILLDELAD.';
+$s_email_notification_title_for_action_bug_reopened = 'Följande bug har blivit ÅTERÖPPNAD.';
+$s_email_notification_title_for_action_bug_deleted = 'Följande bug har blivit RADERAD.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'Ett BUGGMEDDELANDE har lagts till denna bugg.';
 
 $s_email_reporter = 'Rapporterare';
 $s_email_handler = 'Ansvarig';
@@ -789,12 +789,12 @@ $s_by_category = 'kategori';
 $s_by_priority = 'prioritet';
 $s_by_developer = 'utvecklare';
 $s_by_reporter ='rapporterare';
-$s_reporter_by_resolution = 'Reporter By Resolution';
-$s_reporter_effectiveness = 'Reporter Effectiveness';
-$s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
+$s_reporter_by_resolution = 'Rapporterare per löst';
+$s_reporter_effectiveness = 'Rapporterareffektivitet';
+$s_developer_by_resolution = 'Utvecklare per löst';
+$s_percentage_fixed = '% Fixade';
+$s_percentage_errors = '% Falska';
+$s_errors = 'Falska';
 $s_total = 'Total';
 $s_time_stats = 'tidsstatistik för lösta buggar(dagar)';
 $s_longest_open_bug = 'längsta öppna bugg';
@@ -828,7 +828,7 @@ $s_viewing_bug_advanced_details_title = 'Visar bugg, avancerad';
 $s_product_build = 'Produktbygge';
 $s_system_profile = 'Systembeskrivning';
 $s_update_bug_button = 'Uppdatera bugg';
-$s_bug_assign_to_button = 'Assign To:';
+$s_bug_assign_to_button = 'Tilldela till:';
 $s_reopen_bug_button = 'Återöppna bugg';
 $s_attached_files = 'Associerade filer';
 $s_publish = 'Publicera';
@@ -837,7 +837,7 @@ $s_cached = 'Cachad';
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = 'Visa advancerad';
+$s_view_advanced_link = 'Visa avancerad';
 $s_viewing_bug_simple_details_title = 'Visar bugg, enkel';
 
 # bug_monitor_list_view_inc.php
