@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.60 2004-11-06 18:40:15 prichards Exp $
+	# $Id: string_api.php,v 1.61 2004-11-06 18:56:35 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -178,7 +178,7 @@
 		$t_tag = config_get( 'bug_link_tag' );
 		$t_path = config_get( 'path' );
 
-		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
+		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag, '/') . '(\d+)|$)/s',
 								$p_string, $t_matches, PREG_SET_ORDER );
 		$t_result = '';
 
@@ -282,7 +282,7 @@
 			return $p_string;
 		}
 		# Find any URL in a string and replace it by a clickable link		
-		$p_string = preg_replace( '/([a-z]{2,}:\/\/([a-z0-9_-]|\/|\@|:{0,1}\.{0,1}){1,})/',
+		$p_string = preg_replace( '/([http|irc|ftp|https]{2,}:\/\/([a-z0-9_-]|\/|\@|:{0,1}\.{0,1}){1,})/',
 									'<a href="\1">\1</a> [<a href="\1" target="blank">^</a>]',   
 									$p_string);
 
