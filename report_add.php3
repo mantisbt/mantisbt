@@ -126,6 +126,9 @@
 		$t_bug_id = db_insert_id();
 
 		### File Uploaded
+		if ( !isset( $f_file ) ) {
+			$f_file = "none";
+		}
 		if ( $f_file != "none" ) {
 			$t_bug_id = str_pd( $t_bug_id, "0", 7 );
 
@@ -147,7 +150,7 @@
 		}
 
 		### Notify users of new bug report
-		if ( $g_notify_developers_on_new==1 ) {
+		if ( $g_notify_developers_on_new == 1 ) {
 			email_new_bug( $t_bug_id );
 		}
 	}

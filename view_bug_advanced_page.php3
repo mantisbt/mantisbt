@@ -241,7 +241,7 @@
 	</tr>
 	<tr>
 		<td align=center bgcolor=<? echo $g_category_title_color ?>>
-			<b><? echo $s_steps_to ?><br><? echo $s_reproduce ?></b>
+			<b><? echo $s_steps_to_reproduce ?></b>
 		</td>
 		<td colspan=5 bgcolor=<? echo $g_primary_color_dark ?>>
 			<? echo $v2_steps_to_reproduce ?>

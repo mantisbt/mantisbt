@@ -707,6 +707,7 @@
 	function string_edit_textarea( $p_string ) {
 		$p_string = stripslashes( $p_string );
 		#@@@$p_string = str_replace( "<br>", "",  $p_string );
+		$p_string = str_replace( "<br />", "\n",  $p_string );
 		$p_string = str_replace( "&lt;", "<",  $p_string );
 		$p_string = str_replace( "&gt;", ">",  $p_string );
 		$p_string = str_replace( "&quot;", "\"",  $p_string );

@@ -34,10 +34,10 @@
 	$v_os_build 				= string_display( $v_os_build );
 	$v_platform					= string_display( $v_platform );
 	$v_version 					= string_display( $v_version );
-	$v_summary					= string_display( $v_summary );
-	$v2_description 			= string_display( $v2_description );
-	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
-	$v2_additional_information 	= string_display( $v2_additional_information );
+	$v_summary					= string_edit_text( $v_summary );
+	$v2_description 			= string_edit_textarea( $v2_description );
+	$v2_steps_to_reproduce 		= string_edit_textarea( $v2_steps_to_reproduce );
+	$v2_additional_information 	= string_edit_textarea( $v2_additional_information );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

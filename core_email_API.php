@@ -10,7 +10,7 @@
 	### --------------------
 	# check to see that the format is valid and that the mx record exists
 	function is_valid_email( $p_email ) {
-		global $g_validate_email;
+		global $g_validate_email, $g_check_mx_record;
 
 		### if we don't validate then just accept
 		if ( $g_validate_email==0 ) {
@@ -18,13 +18,18 @@
 		}
 
 		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+).([a-z]{2,3}$)", $p_email, $check)) {
-			if (getmxrr($check[1].".".$check[2], $temp)) {
-				return true;
-			} else {
-				$host = substr(strstr($check[0], '@'), 1).".";
-				#### for no mx record... try dns
-				if (checkdnsrr ( $host, "ANY" ))
+			if ( $g_check_mx_record == 1 ) {	# Check for valid mx records
+				if (getmxrr($check[1].".".$check[2], $temp)) {
 					return true;
+				} else {
+					$host = substr( strstr( $check[0], '@' ), 1 ).".";
+
+					# for no mx record... try dns
+					if (checkdnsrr ( $host, "ANY" ))
+						return true;
+				}
+			} else {	# Email format was valid but don't check for valid mx records
+				return true;
 			}
 		}
 		### Everything failed.  Bad email.
@@ -38,7 +43,7 @@
 		$p_project_id = get_bug_project_id( $p_bug_id );
 
 		$t_dev = DEVELOPER;
-		$query = "SELECT id
+		$query = "SELECT id, email
 				FROM $g_mantis_user_table
 				WHERE access_level>=$t_dev";
 		$result = db_query( $query );
@@ -49,13 +54,12 @@
 			$row = db_fetch_array( $result );
 
 			$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
-
 			if ( $t_notify==1 ) {
 				$t_bcc .= $row["email"].", ";
 			}
 		}
 
-		$query = "SELECT user_id
+		$query = "SELECT DISTINCT user_id
 				FROM $g_mantis_project_user_list_table
 				WHERE project_id=$p_project_id AND access_level>=$t_dev";
 		$result = db_query( $query );
@@ -66,13 +70,15 @@
 			$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
 
 			if ( $t_notify==1 ) {
-				$t_bcc .= $row["email"].", ";
+				$t_bcc .= get_user_info( $row["user_id"], "email" ).", ";
 			}
 		}
 
-		### chop off the last comma and add a \n
+
+		# chop off the last comma and add a \n
 		if ( strlen( $t_bcc )>4 ) {
-			return substr( $t_bcc, 0, strlen( $t_bcc )-1 )."\n";
+			#echo $t_bcc."$$$<p>";
+			return substr( $t_bcc, 0, strlen( $t_bcc )-2 )."\n";
 		} else {
 			return "";
 		}
@@ -80,7 +86,7 @@
 	### --------------------
 	### Send password to user
 	function email_signup( $p_user_id, $p_password ) {
-		global $g_mantis_user_table, $g_mantis_url,
+		global $g_mantis_user_table, $g_path,
 			$s_new_account_subject,
 			$s_new_account_greeting, $s_new_account_url,
 			$s_new_account_username, $s_new_account_password,
@@ -95,7 +101,7 @@
 
 		### Build Welcome Message
 		$t_message = $s_new_account_greeting.
-						$s_new_account_url.$g_mantis_url."\n".
+						$s_new_account_url.$g_path."\n".
 						$s_new_account_username.$v_username."\n".
 						$s_new_account_password.$p_password."\n\n".
 						$s_new_account_message.
@@ -107,7 +113,7 @@
 	### --------------------
 	### Send new password when user forgets
 	function email_reset( $p_user_id, $p_password ) {
-		global 	$g_mantis_user_table, $g_mantis_url,
+		global 	$g_mantis_user_table, $g_path,
 				$s_reset_request_msg, $s_account_name_msg,
 				$s_news_password_msg;
 
@@ -122,7 +128,7 @@
 		$t_message = $s_reset_request_msg."\n\n".
 					$s_account_name_msg.": ".$v_username."\n".
 					$s_news_password_msg.": ".$p_password."\n\n";
-					$g_mantis_url."\n\n";
+					$g_path."\n\n";
 
 		email_send( $v_email, "New Password", $t_message );
 	}
@@ -211,7 +217,7 @@
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_user_table, $g_mantis_project_table,
 				$g_complete_date_format,
-				$g_bugnote_order, $g_mantis_url, $g_view_bug_page,
+				$g_bugnote_order, $g_view_bug_page,
 				$s_email_reporter, $s_email_handler,
 				$s_email_project, $s_email_bug, $s_email_category,
 				$s_email_reproducibility, $s_email_severity,
@@ -259,7 +265,7 @@
 		$t_sta_str = get_enum_element( $g_status_enum_string, $v_status );
 		$t_rep_str = get_enum_element( $g_reproducibility_enum_string, $v_reproducibility );
 		$t_message = "=======================================================================\n";
-		$t_message .= $g_mantis_url.$g_view_bug_page."?f_id=".$p_bug_id."\n";
+		$t_message .= $g_view_bug_page."?f_id=".$p_bug_id."\n";
 		$t_message .= "=======================================================================\n";
 		$t_message .= "$s_email_reporter:        $t_reporter_name\n";
 		$t_message .= "$s_email_handler:         $t_handler_name\n";
@@ -283,7 +289,7 @@
 		$t_message .= "$s_email_last_modified:    $v_last_updated\n";
 		$t_message .= "=======================================================================\n";
 		$t_message .= "$s_email_summary:  $v_summary\n\n";
-		$t_message .= "$s_email_description: $v2_description\n";
+		$t_message .= "$s_email_description: \n$v2_description\n";
 		$t_message .= "=======================================================================\n\n";
 
 		return $t_message;
@@ -367,14 +373,14 @@
 
 		### Send to reporter if valid
 		if ((!empty($t_reporter_email))&&(is_valid_email($t_reporter_email))) {
-			$res1 = email_send( $t_reporter_email, $p_subject, $t_message );
+			$res1 = email_send( $t_reporter_email, $p_subject, $t_message, $p_headers );
 		}
 
 		### Send to handler if valid
 		if ((!empty($t_handler_email))&&
 			($t_handler_email!=$t_reporter_email)&&
 			(is_valid_email($t_handler_email))) {
-			$res2 = email_send( $t_handler_email, $p_subject, $t_message );
+			$res2 = email_send( $t_handler_email, $p_subject, $t_message, $p_headers );
 		}
 	}
 	### --------------------
@@ -411,7 +417,7 @@
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
 		global $g_from_email, $g_enable_email_notification;
 
-		if ( $g_enable_email_notification==1 ) {
+		if ( $g_enable_email_notification == 1 ) {
 
 			### NEED TO STRIP ALL FIELDS OF INVALID CHARACTERS
 
@@ -442,6 +448,12 @@
 
 			#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
 			#exit;
+
+			echo $t_recipient."<br>";
+			echo nl2br($t_headers)."<br>";
+			echo $t_subject."<br>";
+			echo nl2br($t_message)."<br>";
+			exit;
 
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( !$result ) {

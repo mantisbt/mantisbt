@@ -15,7 +15,7 @@
 	$t_user_id = get_current_user_field( "id " );
 
 	### get the bugnote data
-	$query = "SELECT *
+	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$f_id'
 			ORDER BY date_submitted $g_bugnote_order";
@@ -47,7 +47,7 @@
 		### prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v3" );
-		$v3_date_submitted = date( $g_normal_date_format, sql_to_unix_time( $v3_date_submitted ) );
+		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
 
 		### grab the bugnote text and prefix with v3_
 		$query = "SELECT note

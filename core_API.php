@@ -8,7 +8,8 @@
 	### INCLUDES                                                            ###
 	###########################################################################
 
-	require( "constant_inc.php" );
+	# prevent caching
+  	require( "constant_inc.php" );
 	require( "config_inc.php" );
 
 	require( "core_database_API.php" );

@@ -55,7 +55,7 @@ Now We are selecting the administrator account and pulling out the crypted passw
 <p>
 The crypted administrator account password is: <b><? echo $v_password ?></b><br>
 The hash string is: <b><? echo $v_cookie_string ?></b><br>
-The hash string should be 101 characters in length.  It is <b><? echo strlen( $v_cookie_string ) ?></b> characters long.
+The hash string should be 99 characters in length.  It is <b><? echo strlen( $v_cookie_string ) ?></b> characters long.
 <p>
 <hr>
 Now we will run the proper check on the password to see if it properly re-creates the administrator password.

@@ -348,7 +348,11 @@
 	    		FROM $g_mantis_user_pref_table
 	    		WHERE user_id='$p_user_id'";
 	    $result =  db_query( $query );
-	    return db_result( $result, 0, 0 );
+	    if ( $result ) {
+	    	return db_result( $result, 0, 0 );
+	    } else {
+	    	return 0;
+	    }
 	}
 	### --------------------
 	# return the specified user field for the user id

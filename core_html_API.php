@@ -274,14 +274,14 @@
 
 		switch ( $p_page ) {
 		case $g_account_page: $g_account_page="";break;
-		case $g_account_profile_menu_page: $g_account_profile_menu_page="";break;
 		case $g_account_prefs_page: $g_account_prefs_page="";break;
+		case $g_account_profile_menu_page: $g_account_profile_menu_page="";break;
 		}
 
 		PRINT "<p><div align=\"center\">";
 			print_bracket_link( $g_account_page, $s_account_link );
-			print_bracket_link( $g_account_profile_menu_page, $s_manage_profiles_link );
 			print_bracket_link( $g_account_prefs_page, $s_change_preferences_link );
+			print_bracket_link( $g_account_profile_menu_page, $s_manage_profiles_link );
 		PRINT "</div>";
 	}
 	### --------------------

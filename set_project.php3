@@ -15,6 +15,15 @@
 		$valid_project = 0;
 	}
 
+	### Set default project
+	if ( isset( $f_make_default ) ) {
+		$t_user_id = get_current_user_field( "id" );
+		$query = "UPDATE $g_mantis_user_pref_table
+				SET default_project='$f_project_id'
+				WHERE user_id='$t_user_id'";
+		$result = db_query( $query );
+	}
+
 	### Add item
 	setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length );
 ?>

@@ -35,7 +35,7 @@
 
 	# path to your installation as seen from the web browser
 	# requires trailing /
-	$g_path          = "/mantis/";
+	$g_path          = "http://192.168.1.1/mantis/";
 
 	# path to your images directory (for icons)
 	# requires trailing /
@@ -45,16 +45,12 @@
 	# requires trailing /
 	$g_absolute_path = "/usr/local/share/apache/htdocs/mantis/";
 
-	# enter the exact url where the bugtracker is located
-	# used in the emailing system
-	$g_mantis_url    = "http://www.mydomain.com/mantis/";
-
 	#############################
 	### Mantis Version String ###
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version = "0.14.8";
+	$g_mantis_version = "0.15.0";
 	$g_show_version   = 1;
 
 	#############################
@@ -89,6 +85,7 @@
 
 	# set to 0 to disable email check
 	$g_validate_email            = 1;
+	$g_check_mx_record           = 0;
 
 	################################
 	### Mantis Language Settings ###
@@ -99,11 +96,7 @@
 	$g_default_language     = "english";
 
 	# list the choices that the users are allowed to choose
-	$g_language_choices_arr = array( "english" );
-
-	# @@@ Currently in 0.15.0 only english is supported.
-	# others will follow quickly
-	# "dutch", "french", "german", "italian", "korean", "norwegian", "portuguese", "spanish", "turkish"
+	$g_language_choices_arr = array( "english", "dutch", "french", "german", "italian", "korean", "norwegian", "portuguese", "spanish", "turkish" );
 
 	############################
 	### Mantis Show Settings ###
@@ -151,7 +144,7 @@
 	$g_wait_time          = 2;
 
 	# minutes to wait before document is stale (in minutes)
-	$g_content_expire     = 5;
+	$g_content_expire     = 0;
 
 	############################
 	### Mantis News Settings ###

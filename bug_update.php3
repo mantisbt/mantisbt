@@ -41,14 +41,14 @@
 	}
 
 	### prepare strings
-	$f_os 						= string_prepare_text( $f_os );
-	$f_os_build 				= string_prepare_text( $f_os_build );
-	$f_platform					= string_prepare_text( $f_platform );
-	$f_version 					= string_prepare_text( $f_version );
-	$f_summary					= string_prepare_text( $f_summary );
-	$f_description 				= string_prepare_textarea( $f_description );
-	$f_steps_to_reproduce 		= string_prepare_textarea( $f_steps_to_reproduce );
-	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
+	$f_os 						= string_display( $f_os );
+	$f_os_build 				= string_display( $f_os_build );
+	$f_platform					= string_display( $f_platform );
+	$f_version 					= string_display( $f_version );
+	$f_summary					= string_edit_text( $f_summary );
+	$f_description 				= string_edit_textarea( $f_description );
+	$f_steps_to_reproduce 		= string_edit_textarea( $f_steps_to_reproduce );
+	$f_additional_information 	= string_edit_textarea( $f_additional_information );
 
 	### Update all fields
     $query = "UPDATE $g_mantis_bug_table

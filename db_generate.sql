@@ -171,7 +171,7 @@ CREATE TABLE mantis_project_table (
    UNIQUE name (name)
 );
 
-INSERT INTO mantis_project_table (id, name, status, enabled, view_state, description) VALUES ( '0000001', 'mantis', 'development', 'on', 'public', 'Mantis.  Report problems with the actual bug tracker here. (Do not remove this account.  You can set it to be disabled if you do not wish to see it)');
+INSERT INTO mantis_project_table (id, name, status, enabled, view_state, description) VALUES ( '0000001', 'mantis', 'development', '1', '10', 'Mantis.  Report problems with the actual bug tracker here. (Do not remove this account.  You can set it to be disabled if you do not wish to see it)');
 
 # --------------------------------------------------------
 #
@@ -265,4 +265,4 @@ CREATE TABLE mantis_user_table (
    UNIQUE username (username)
 );
 
-INSERT INTO mantis_user_table (id, username, email, password, date_created, last_visit, enabled, protected, access_level, login_count, cookie_string) VALUES( '0000001', 'administrator', 'admin', 'MNYm8SfoJlvIY', NOW(), NOW(), 'on', 'on', 'administrator', '0', 'MN91uSF/JIhos8bcda8acc2ead8d60749ad019e56b54fadkPGTyoBgNBQf91563adc2f7337f566cc3d2c792bc3c-10728595');
+INSERT INTO mantis_user_table (id, username, email, password, date_created, last_visit, enabled, protected, access_level, login_count, cookie_string) VALUES( '0000001', 'administrator', 'admin', 'MNYm8SfoJlvIY', NOW(), NOW(), '1', '1', '90', '0', 'MN91uSF/JIhos8bcda8acc2ead8d60749ad019e56b54fadkPGTyoBgNBQf91563adc2f7337f566cc3d2c792bc3c-10728595');

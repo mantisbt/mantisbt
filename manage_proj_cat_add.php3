@@ -11,7 +11,7 @@
 	check_access( MANAGER );
 
 	$result = 0;
-	$duplicate = is_duplicate_category( $f_category, $f_project_id )
+	$duplicate = is_duplicate_category( $f_category, $f_project_id );
 	### check for empty case or duplicate
 	if ( !empty( $f_category )&& !$duplicate ) {
 		### insert category

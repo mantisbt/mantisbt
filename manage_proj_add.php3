@@ -17,7 +17,6 @@
 	$duplicate = is_duplicate_project( $f_name );
 	if ( !empty( $f_name ) && !$duplicate ) {
 		### Add item
-		echo "zzz"; exit;
 		$query = "INSERT
 				INTO $g_mantis_project_table
 				( id, name, status, enabled, view_state, file_path, access_min, description )
