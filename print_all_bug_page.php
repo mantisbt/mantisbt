@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.78 2004-07-08 03:50:15 int2str Exp $
+	# $Id: print_all_bug_page.php,v 1.79 2004-07-18 11:56:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,8 +80,6 @@
 </td></tr></table>
 
 <br />
-
-<?php filter_draw_selection_area( $f_page_number, false ); ?>
 
 <form method="post" action="view_all_set.php">
 <input type="hidden" name="type" value="1" />

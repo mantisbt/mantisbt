@@ -21,6 +21,7 @@ Mantis ChangeLog
  * Fix #4017: Random translations popping up
  * Fix #4018: Real name field allows potentially dangerous HTML
  * Fix #4020: Database field 'realname' not found after plain installation (vboctor)
+ * Fix #4021: The filter section is duplicated on the print page (tazza70)
  * Fix #4027: Database query error on text search
  * Fix #4040: Sponsorship timestamp is not displayed correctly in sponsorship list (vboctor)
  * Fix #4041: Empty "Users sponsoring this issue" (vboctor)
