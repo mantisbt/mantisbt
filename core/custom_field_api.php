@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.46 2005-01-25 12:44:12 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.47 2005-01-29 13:56:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -235,7 +235,7 @@
 	function custom_field_create( $p_name ) {
 		$c_name = db_prepare_string( trim( $p_name ) );
 
-		if ( is_blank( $p_name ) ) {			
+		if ( is_blank( $p_name ) ) {
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
@@ -286,7 +286,7 @@
 		if ( $c_advanced == true && ( $c_require_report == true || $c_require_update ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 		}
-		
+
 
 		if ( !custom_field_is_name_unique( $c_name, $c_field_id ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
@@ -778,7 +778,7 @@
 						ON  p.field_id=s.field_id AND s.bug_id='$c_bug_id'
 					WHERE   p.project_id = '$c_project_id'
 					ORDER BY p.sequence ASC, f.name ASC";
-					
+
 			$result = db_query( $query );
 
 			$t_row_count = db_num_rows( $result );
@@ -880,7 +880,7 @@
 		$t_possible_values = $p_possible_values;
 
 		if ( !is_blank( $t_possible_values ) && ( $t_possible_values[0] == '=' ) ) {
-			$t_possible_values = helper_call_custom_function( substr( $t_possible_values, 1 ), array() );
+			$t_possible_values = helper_call_custom_function( 'enum_' . substr( $t_possible_values, 1 ), array() );
 		}
 
 		return $t_possible_values;
@@ -911,7 +911,7 @@
 		if ( CUSTOM_FIELD_TYPE_ENUM == $row['type'] ||
 			 CUSTOM_FIELD_TYPE_CHECKBOX == $row['type'] ||
 			 CUSTOM_FIELD_TYPE_LIST == $row['type'] ||
-			 CUSTOM_FIELD_TYPE_MULTILIST == $row['type'] 
+			 CUSTOM_FIELD_TYPE_MULTILIST == $row['type']
 			) {
 			$t_possible_values = custom_field_prepare_possible_values( $row['possible_values'] );
 
@@ -924,7 +924,7 @@
 			$t_where = '';
 			$t_from = $t_custom_field_string_table;
 			if ( ALL_PROJECTS != $p_project_id ) {
-				$t_where = " AND $t_mantis_bug_table.id = $t_custom_field_string_table.bug_id AND 
+				$t_where = " AND $t_mantis_bug_table.id = $t_custom_field_string_table.bug_id AND
 							$t_mantis_bug_table.project_id = '$p_project_id'";
 				$t_from = $t_from . ", $t_mantis_bug_table";
 			}
@@ -1118,21 +1118,21 @@
 		case CUSTOM_FIELD_TYPE_MULTILIST:
  			$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 			$t_list_size = $t_possible_values_count = count( $t_values );
-				
+
 			if ( $t_possible_values_count > 5 ) {
 				$t_list_size = 5;
 			}
-			
+
 			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ) {
 				$t_list_size = 0;	# for enums the size is 0
 			}
-			
-			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {	 
+
+			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
 				echo '<select name="custom_field_' . $t_id . '[]" size="' . $t_list_size . '" multiple>';
 			} else {
 				echo '<select name="custom_field_' . $t_id . '" size="' . $t_list_size . '">';
 			}
-			
+
 			$t_selected_values = explode( '|', $t_custom_field_value );
  			foreach( $t_values as $t_option ) {
 				if( in_array( $t_option, $t_selected_values ) ) {
@@ -1171,7 +1171,7 @@
 
 	# --------------------
 	# Prepare a string containing a custom field value for display
-	# $p_def 		contains the definition of the custom field 
+	# $p_def 		contains the definition of the custom field
 	# $p_field_id 	contains the id of the field
 	# $p_bug_id		contains the bug id to display the custom field value for
 	# NOTE: This probably belongs in the string_api.php
@@ -1189,12 +1189,12 @@
 				break;
 			default:
 				return string_display_links( $t_custom_field_value );
-		}	
+		}
 	}
 
 	# --------------------
 	# Print a custom field value for display
-	# $p_def 		contains the definition of the custom field 
+	# $p_def 		contains the definition of the custom field
 	# $p_field_id 	contains the id of the field
 	# $p_bug_id		contains the bug id to display the custom field value for
 	# NOTE: This probably belongs in the print_api.php
@@ -1220,8 +1220,8 @@
 				break;
 			default:
 				return $p_value;
-		}	
+		}
 		return $p_value;
 	}
-	
+
 ?>

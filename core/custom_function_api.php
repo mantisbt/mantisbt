@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.15 2005-01-28 21:58:16 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.16 2005-01-29 13:56:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -243,8 +243,8 @@
 	# Construct an enumeration for all versions for the current project.
 	# The enumeration will be empty if current project is ALL PROJECTS.
 	# Enumerations format is: "abc|lmn|xyz"
-	# To use this in a custom field type "=versions_enum" in the possible values field.
-	function custom_function_default_versions_enum() {
+	# To use this in a custom field type "=versions" in the possible values field.
+	function custom_function_default_enum_versions() {
 		$t_versions = version_get_all_rows( helper_get_current_project() );
 
 		$t_enum = array();
@@ -258,11 +258,51 @@
 	}
 
 	# --------------------
+	# Construct an enumeration for released versions for the current project.
+	# The enumeration will be empty if current project is ALL PROJECTS.
+	# Enumerations format is: "abc|lmn|xyz"
+	# To use this in a custom field type "=released_versions" in the possible values field.
+	function custom_function_default_enum_released_versions() {
+		$t_versions = version_get_all_rows( helper_get_current_project() );
+
+		$t_enum = array();
+		foreach( $t_versions as $t_version ) {
+			if ( $t_version['released'] == 1 ) {
+				$t_enum[] = $t_version['version'];
+			}
+		}
+
+		$t_possible_values = implode( '|', $t_enum );
+
+		return $t_possible_values;
+	}
+
+	# --------------------
+	# Construct an enumeration for released versions for the current project.
+	# The enumeration will be empty if current project is ALL PROJECTS.
+	# Enumerations format is: "abc|lmn|xyz"
+	# To use this in a custom field type "=future_versions" in the possible values field.
+	function custom_function_default_enum_future_versions() {
+		$t_versions = version_get_all_rows( helper_get_current_project() );
+
+		$t_enum = array();
+		foreach( $t_versions as $t_version ) {
+			if ( $t_version['released'] == 0 ) {
+				$t_enum[] = $t_version['version'];
+			}
+		}
+
+		$t_possible_values = implode( '|', $t_enum );
+
+		return $t_possible_values;
+	}
+
+	# --------------------
 	# Construct an enumeration for all categories for the current project.
 	# The enumeration will be empty if current project is ALL PROJECTS.
 	# Enumerations format is: "abc|lmn|xyz"
-	# To use this in a custom field type "=categories_enum" in the possible values field.
-	function custom_function_default_categories_enum() {
+	# To use this in a custom field type "=categories" in the possible values field.
+	function custom_function_default_enum_categories() {
 		$t_categories = category_get_all_rows( helper_get_current_project() );
 
 		$t_enum = array();
