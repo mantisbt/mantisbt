@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.46 $
-	# $Author: vboctor $
-	# $Date: 2003-02-19 01:37:24 $
+	# $Revision: 1.47 $
+	# $Author: jlatour $
+	# $Date: 2003-02-19 16:52:04 $
 	#
-	# $Id: strings_korean.txt,v 1.46 2003-02-19 01:37:24 vboctor Exp $
+	# $Id: strings_korean.txt,v 1.47 2003-02-19 16:52:04 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -87,6 +87,8 @@
 	$s_make_public = '공개하기';
 
 	$s_create_new_project_link = 'Create New Project';
+
+	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';

@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.43 $
-	# $Author: vboctor $
-	# $Date: 2003-02-19 01:37:24 $
+	# $Revision: 1.44 $
+	# $Author: jlatour $
+	# $Date: 2003-02-19 16:52:09 $
 	#
-	# $Id: strings_russian.txt,v 1.43 2003-02-19 01:37:24 vboctor Exp $
+	# $Id: strings_russian.txt,v 1.44 2003-02-19 16:52:09 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -87,6 +87,8 @@
 	$s_make_public = 'Сделать общедоступным';
 
 	$s_create_new_project_link = 'Create New Project';
+
+	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';

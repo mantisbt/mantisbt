@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.31 $
-	# $Author: vboctor $
-	# $Date: 2003-02-19 01:37:24 $
+	# $Revision: 1.32 $
+	# $Author: jlatour $
+	# $Date: 2003-02-19 16:52:09 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.31 2003-02-19 01:37:24 vboctor Exp $
+	# $Id: strings_russian_koi8.txt,v 1.32 2003-02-19 16:52:09 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -86,6 +86,8 @@
 	$s_make_public = 'Сделать общедоступным';
 
 	$s_create_new_project_link = 'Create New Project';
+
+	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';

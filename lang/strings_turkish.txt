@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.41 $
-	# $Author: vboctor $
-	# $Date: 2003-02-19 01:37:24 $
+	# $Revision: 1.42 $
+	# $Author: jlatour $
+	# $Date: 2003-02-19 16:52:10 $
 	#
-	# $Id: strings_turkish.txt,v 1.41 2003-02-19 01:37:24 vboctor Exp $
+	# $Id: strings_turkish.txt,v 1.42 2003-02-19 16:52:10 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -87,6 +87,8 @@
 	$s_make_public = 'Make Public';
 
 	$s_create_new_project_link = 'Create New Project';
+
+	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';

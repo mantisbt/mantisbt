@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.46 $
-	# $Author: vboctor $
-	# $Date: 2003-02-19 01:37:23 $
+	# $Revision: 1.47 $
+	# $Author: jlatour $
+	# $Date: 2003-02-19 16:52:01 $
 	#
-	# $Id: strings_dutch.txt,v 1.46 2003-02-19 01:37:23 vboctor Exp $
+	# $Id: strings_dutch.txt,v 1.47 2003-02-19 16:52:01 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -89,6 +89,8 @@
 	$s_make_public = 'Maak Publiekelijk';
 
 	$s_create_new_project_link = 'Maak nieuw project';
+
+	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'Bij de volgende bugs had u niet genoeg permissies om die actie uit te voeren: ';

@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.52 $
-	# $Author: vboctor $
-	# $Date: 2003-02-19 01:37:23 $
+	# $Revision: 1.53 $
+	# $Author: jlatour $
+	# $Date: 2003-02-19 16:52:01 $
 	#
-	# $Id: strings_french.txt,v 1.52 2003-02-19 01:37:23 vboctor Exp $
+	# $Id: strings_french.txt,v 1.53 2003-02-19 16:52:01 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -91,6 +91,7 @@
 	$s_make_public = 'Rendre public';
 
 	$s_create_new_project_link = 'Créer un nouveau projet';
+
 	$s_login_link = 'Connexion';
 
 	# bug_actiongroup_page.php : mass treatment

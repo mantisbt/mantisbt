@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.57 $
-	# $Author: int2str $
-	# $Date: 2003-02-19 12:17:07 $
+	# $Revision: 1.58 $
+	# $Author: jlatour $
+	# $Date: 2003-02-19 16:52:01 $
 	#
-	# $Id: strings_german.txt,v 1.57 2003-02-19 12:17:07 int2str Exp $
+	# $Id: strings_german.txt,v 1.58 2003-02-19 16:52:01 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -90,6 +90,8 @@
 	$s_make_public = '&Ouml;ffentlich machen';
 
 	$s_create_new_project_link = 'Neues Projekt erstellen';
+
+	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen um die gew&auml;hlte Aktion mit den folgenden Fehlern auszuf&uuml;hren: ';

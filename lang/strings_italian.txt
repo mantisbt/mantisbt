@@ -10,11 +10,11 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 	#          Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.45 $
-	# $Author: vboctor $
-	# $Date: 2003-02-19 01:37:24 $
+	# $Revision: 1.46 $
+	# $Author: jlatour $
+	# $Date: 2003-02-19 16:52:02 $
 	#
-	# $Id: strings_italian.txt,v 1.45 2003-02-19 01:37:24 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.46 2003-02-19 16:52:02 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -89,6 +89,8 @@
 	$s_make_public = "Rendi Pubblico";
 
 	$s_create_new_project_link = 'Create New Project';
+
+	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
