@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.15 2003-07-26 13:50:20 vboctor Exp $
+	# $Id: history_api.php,v 1.16 2003-09-11 14:14:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -228,6 +228,9 @@
 				case BUG_UNMONITOR:
 					$v_old_value = user_get_field( $v_old_value, 'username' );
 					$t_note = lang_get( 'bug_end_monitor' ) . ": " . $v_old_value;
+					break;
+				case BUG_DELETED:
+					$t_note = lang_get( 'bug_deleted' ) . ": " . $v_old_value;
 					break;
 				}
 			}

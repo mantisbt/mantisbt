@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.43 2003-04-23 23:00:24 jfitzell Exp $
+	# $Id: bug_api.php,v 1.44 2003-09-11 14:14:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -361,6 +361,9 @@
 
 		$t_bug_table = config_get( 'mantis_bug_table' );
 		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+
+		# log deletion of bug
+		history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
 
 		email_bug_deleted( $p_bug_id );
 

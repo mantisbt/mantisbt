@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.6 2003-03-12 07:56:12 jfitzell Exp $
+	# $Id: constant_inc.php,v 1.7 2003-09-11 14:14:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -132,6 +132,7 @@
 	define( 'BUGNOTE_STATE_CHANGED',		11 );
 	define( 'BUG_MONITOR',					12 );
 	define( 'BUG_UNMONITOR',				13 );
+	define( 'BUG_DELETED',					14 );
 
 	# bug relationship constants
 	define( 'BUG_DUPLICATE',	0 );

@@ -7,6 +7,7 @@ Mantis ChangeLog
  * Fix #3330: "Required" fields on Account Profile page.
  * Fix #3333: Support PHPMailer v1.7x.
  * Fix #3334: Invalid links in bug reminder emails.
+ * Fix #3353: History not updated in bug deletion email.
 
 2003.08.24  -  0.18.0rc1
 
