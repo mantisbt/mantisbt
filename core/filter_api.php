@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.63 2004-11-19 12:29:00 vboctor Exp $
+	# $Id: filter_api.php,v 1.64 2004-11-19 13:06:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -321,24 +321,24 @@
 		}
 
 		# priority 
-                $t_any_found = false;
-                foreach( $t_filter['show_priority'] as $t_filter_member ) {
-                        if ( 'any' == $t_filter_member ) {
-                                $t_any_found = true;
-                        }
-                }
-                if ( count( $t_filter['show_priority'] ) == 0 ) {
-                        $t_any_found = true;
-                }
-                if ( !$t_any_found ) {
-                        $t_clauses = array();
+		$t_any_found = false;
+		foreach( $t_filter['show_priority'] as $t_filter_member ) {
+				if ( 'any' == $t_filter_member ) {
+						$t_any_found = true;
+				}
+		}
+		if ( count( $t_filter['show_priority'] ) == 0 ) {
+				$t_any_found = true;
+		}
+		if ( !$t_any_found ) {
+				$t_clauses = array();
 
-                        foreach( $t_filter['show_priority'] as $t_filter_member ) {
-                                $c_show_priority = db_prepare_int( $t_filter_member );
-                                array_push( $t_clauses, "($t_bug_table.priority='$c_show_priority')" );
-                        }
-                        array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
-                }
+				foreach( $t_filter['show_priority'] as $t_filter_member ) {
+						$c_show_priority = db_prepare_int( $t_filter_member );
+						array_push( $t_clauses, "($t_bug_table.priority='$c_show_priority')" );
+				}
+				array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+		}
 
 
 		# product build
@@ -453,8 +453,8 @@
 			$t_custom_fields = custom_field_get_ids();	# @@@@ Shouldn't the filter be on project specific custom fields?
 
 			foreach( $t_custom_fields as $t_cfid ) {
-			$t_first_time = true;
-			$t_custom_where_clause = '';
+				$t_first_time = true;
+				$t_custom_where_clause = '';
 				# Ignore all custom filters that are not set, or that are set to '' or "any"
 				$t_any_found = false;
 				foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
@@ -472,7 +472,7 @@
 					foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
 						if ( isset( $t_filter_member ) &&
 							( 'any' != strtolower( $t_filter_member ) ) &&
-							( !is_blank( trim( $t_filter_member ) ) ) ) {
+							( !is_blank( trim( $t_filter_member ) ) ) ) {	# @@@ What if the user wants to filter on issues with an empty custom field??.. tricky!!!
 
 							if( $t_first_time ) {
 								$t_first_time = false;
