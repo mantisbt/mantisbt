@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graphviz_api.php,v 1.3 2004-11-02 19:53:24 marcelloscata Exp $
+	# $Id: graphviz_api.php,v 1.4 2004-11-07 16:47:34 prichards Exp $
 	# --------------------------------------------------------
 
 	### GraphViz API ###
@@ -217,6 +217,8 @@
 					'dst' => $p_dst,
 					'attributes' => $p_attributes
 				);
+		}
+		
 		# --------------------
 		# Check if an edge is already present.
 		function is_edge_present( $p_src, $p_dst ) {
