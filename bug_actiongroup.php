@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.36 2004-08-24 13:30:19 thraxisp Exp $
+	# $Id: bug_actiongroup.php,v 1.37 2004-08-29 08:06:07 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,6 +21,8 @@
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
+	helper_begin_long_process();
+
 	$f_action	= gpc_get_string( 'action' );
 	$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
 
