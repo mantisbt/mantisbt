@@ -9,13 +9,13 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.70 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:58 $
+	# $Revision: 1.71 $
+	# $Author: vboctor $
+	# $Date: 2004-08-28 14:08:19 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.70 2004-08-26 17:40:58 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.71 2004-08-28 14:08:19 vboctor Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.187 -- jferraz 2004/07/11
+	# Up-to-date with strings_english.txt revision 1.204 -- jferraz 2004/08/23
 	###########################################################################
 ?>
 <?php
@@ -73,11 +73,11 @@ $s_bug_relationships = 'Relações';
 $s_empty_password_sure_msg = 'Este usuário possui uma senha em branco.  Você tem certeza que é isso que você deseja?';
 $s_empty_password_button = 'Usar Senha em Branco';
 
-$s_duplicate_of = 'duplicado de';
+$s_duplicate_of = 'é duplicado de';
 $s_has_duplicate = 'possui duplicado';
-$s_related_to = 'relacionado a';
-$s_dependant_on = 'pai de';
-$s_blocks = 'filho de';
+$s_related_to = 'está relacionado a';
+$s_dependant_on = 'é pai de';
+$s_blocks = 'é filho de';
 
 $s_new_bug = 'Novo Caso';
 $s_bugnote_added = 'Anotação Adicionada';
@@ -100,8 +100,8 @@ $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Você não possui as permissões apropriadas para realizar esta ação nos seguintes casos: ';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_access = 'Você não possui as permissões apropriadas para realizar esta ação.';
+$s_bug_actiongroup_status = 'Este caso não pode ser alterado para o status solicitado';
 $s_close_bugs_conf_msg = 'Você tem certeza que deseja fechar estes casos ?';
 $s_delete_bugs_conf_msg = 'Você tem certeza que deseja apagar estes casos ?';
 $s_move_bugs_conf_msg = 'Mover casos para';
@@ -213,28 +213,28 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Uma versão com este nome já existe.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão não encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de usuário não é válido. Nomes de usuário podem conter apenas letras, números, espaços, hífens e sublinhados.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'O usuário não possui o nível de acesso necessário';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'O "Nome Verdadeiro" escolhido é igual ao nome de login de outro usuário. Por favor escolha outro.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'O suporte a patrocínio não está habilitado.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Patrocínio %d não encontrado.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'O patrocínio (%s) está abaixo da quantia mínima (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Esta pessoa não possui o nível de acesso necessário para tratar casos patrocinados.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acesso Negado: Atribuir casos patrocinados requer um nível de acesso maior.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Patrocinador não forneceu um endereço de e-mail. Por favor, atualize seu perfil.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A opção de configuração \'%s\' tem um valor inválido \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A ação não pode ser realizada porque o caso \'%d\' é somente-leitura';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERRO: Já existe uma relação entre estes dois casos.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERRO: Relação não encontrada.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Já existe uma relação entre estes dois casos.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relação não encontrada.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Acesso negado: O caso %d requer um nível de acesso maior.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERRO: um caso não pode se relacionar com si próprio.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Um caso não pode se relacionar com si próprio.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'O código de confirmação não combina. Por favor, tente novamente.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'O recurso de recuperação de senha não está disponível.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Você deve fornecer um endereço de e-mail para poder reajustar a senha.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'A informação fornecida não combina com nenhuma conta registrada!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'O endereço de confirmação é inválido ou já foi usado. Por favor, registre-se novamente.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'O número máximo de solicitações em progresso foi atingido. Por favor, contate o administrador do sistema.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = 'ERRO: Sua conta pode estar desativada ou o nome de usuário e a senha que você entrou não estão corretos.';
+#$s_login_error = 'Sua conta pode estar desativada ou bloqueada (devido a um número excessivo de tentativas falhas de login) ou o nome de usuário e a senha que você entrou não estão corretos.';
+$s_login_error = 'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você entrou não estão corretos.';
 $s_login_cookies_disabled = 'ERRO: Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
 
 # General Strings
@@ -244,7 +244,7 @@ $s_proceed = 'Clique aqui para prosseguir';
 $s_switch = 'Mudar';
 $s_logged_in_as = 'Acessando como';
 
-$s_prefix_for_deleted_users = 'user';
+$s_prefix_for_deleted_users = 'usuário';
 
 $s_administrator = 'administrador';
 $s_myself = "Eu mesmo";
@@ -264,18 +264,18 @@ $s_projection_enum_string = '10:nenhuma,30:mínimo,50:correção pequena,70:grande 
 $s_eta_enum_string = '10:nenhum,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mês,60:> 1 mês';
 
 # Email Strings
-$s_new_account_subject = 'Account registration';
-$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
-$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_subject = 'Registro de conta';
+$s_new_account_greeting = 'Obrigado por se registrar. Você possui uma conta com o nome de usuário \'';
+$s_new_account_greeting2 = '\'. Para completar seu registro, visite o endereço a seguir (certifique-se que ele seja digitado como uma única linha) e ajuste a sua própria senha de acesso:';
 $s_new_account_username = 'Nome de usuário: ';
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
-$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_message = 'Se você não solicitou nenhum registro, ignore esta mensagem e nada irá acontecer.' . "\n\n";
+$s_new_account_do_not_reply = 'NÃO RESPONDA A ESTA MENSAGEM';
 $s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
-$s_new_account_signup_msg = 'The following account has been created:';
+$s_new_account_IP = 'Endereço IP remoto: ';
+$s_new_account_signup_msg = 'A seguinte conta foi criada:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
-$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
+$s_reset_request_msg = 'Alguém (presumidamente você) solicitou uma troca de senha através da verificação de e-mail. Se este não foi você, ignore esta mensagem e nada irá acontecer.' . "\n\n" . 'Se você solicitou esta verificação, visite o seguinte endereço para alterar a sua senha:';
+$s_reset_request_in_progress_msg = 'Se você forneceu o nome de usuário e endereço de e-mail corretos para a sua conta, nós teremos enviado agora uma mensagem de confirmação para este endereço de e-mail. Assim que a mensagem for recebida, siga as instruções fornecidas para mudar a senha da sua conta.';
 
 $s_email_notification_title_for_status_bug_feedback = 'O seguinte caso requer o seu RETORNO.';
 $s_email_notification_title_for_status_bug_acknowledged = 'O seguinte caso foi ADMITIDO.';
@@ -345,9 +345,9 @@ $s_advanced_update = 'Atualização Avançada';
 $s_refresh_delay = 'Tempo de Renovação';
 $s_redirect_delay = 'Tempo de Redirecionamento';
 $s_with_minimum_severity = 'Com a gravidade mínima';
-$s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
+$s_bugnote_order = 'Ordem de Classificação de Anotações';
+$s_bugnote_order_asc = 'Ascendente';
+$s_bugnote_order_desc = 'Descendente';
 $s_email_on_new = 'Enviar e-mail para Novos Casos';
 $s_email_on_assigned = 'Enviar e-mail para Casos Atribuídos';
 $s_email_on_feedback = 'Enviar e-mail para Retornos';
@@ -357,7 +357,7 @@ $s_email_on_reopened = 'Enviar e-mail para Casos Reabertos';
 $s_email_on_bugnote_added = 'Enviar e-mail para Anotações Adicionadas';
 $s_email_on_status_change = 'Enviar e-mail para Mudança de Status';
 $s_email_on_priority_change = 'Enviar e-mail para Mudança de Prioridade';
-$s_email_bugnote_limit = 'Email Bugnotes Limit';
+$s_email_bugnote_limit = 'Limite de Anotações por e-mail';
 $s_language = 'Idioma';
 $s_update_prefs_button = 'Atualizar Preferências';
 $s_reset_prefs_button = 'Zerar Preferências';
@@ -400,7 +400,7 @@ $s_profile_updated_msg = 'Perfil atualizado...';
 # account_update.php
 $s_account_updated_msg = 'Sua conta foi atualizada com sucesso...';
 $s_email_updated = 'Endereço de email atualizado com sucesso';
-$s_realname_duplicated = 'Real name is used by another user';
+$s_realname_duplicated = 'O nome verdadeiro é usado por outro usuário';
 $s_realname_updated = 'Nome verdadeiro atualizado com sucesso';
 $s_password_updated = 'Senha atualizada com sucesso';
 
@@ -408,16 +408,16 @@ $s_password_updated = 'Senha atualizada com sucesso';
 $s_bug_assign_msg = 'O caso foi atribuído com sucesso...';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
-$s_acknowledged_bug_title = 'Acknowledge Issue';
-$s_confirmed_bug_title = 'Confirm Issue';
-$s_assigned_bug_title = 'Assign Issue';
-$s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
-$s_acknowledged_bug_button = 'Acknowledge Issue';
-$s_confirmed_bug_button = 'Confirm Issue';
-$s_assigned_bug_button = 'Assign Issue';
+$s_new_bug_title = 'Novo Caso';
+$s_feedback_bug_title = 'Fornecer Retorno para o Caso';
+$s_acknowledged_bug_title = 'Admitir Caso';
+$s_confirmed_bug_title = 'Confirmar Caso';
+$s_assigned_bug_title = 'Atribuir Caso';
+$s_new_bug_button = 'Novo Caso';
+$s_feedback_bug_button = 'Fornecer Retorno';
+$s_acknowledged_bug_button = 'Admitir Caso';
+$s_confirmed_bug_button = 'Confirmar Caso';
+$s_assigned_bug_button = 'Atribuir Caso';
 
 # bug_close.php
 $s_bug_close_msg = 'O caso foi fechado...';
@@ -431,10 +431,10 @@ $s_bug_deleted_msg = 'O caso foi apagado...';
 
 # bug_delete_page.php
 $s_delete_bug_sure_msg = 'Você tem certeza que deseja apagar este caso?';
-$s_delete_bug_button = 'Apagar Caso';
+$s_delete_bug_button = 'Apagar';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Monitorar Caso';
+$s_monitor_bug_button = 'Monitorar';
 $s_unmonitor_bug_button = 'Parar de Monitorar';
 
 # bug_file_add.php
@@ -544,7 +544,7 @@ $s_save_login = 'Salvar Login';
 $s_choose_project = 'Escolher Projeto';
 $s_login_button = 'Entrar';
 $s_signup_link = 'criar uma nova conta';
-$s_lost_password_link = 'Lost your password?';
+$s_lost_password_link = 'Perdeu a sua senha?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Selecionar Projeto';
@@ -553,12 +553,13 @@ $s_select_project_button = 'Selecionar Projeto';
 $s_logged_out_title = 'Saindo...';
 $s_redirecting = '...Redirecionando';
 $s_here = 'Aqui';
+
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = "Reajuste de Senha";
+$s_lost_password_done_title = "Mensagem de Senha Enviada";
+$s_lost_password_subject = "Reajuste de Senha";
+$s_lost_password_info = "Para reestabelecer sua senha perdida, por favor forneça o nome e endereço de e-mail da sua conta.<br/><br/>Se os dados corresponderem a uma conta válida, lhe será enviado um endereço especial via e-mail que contém um código de validação para a sua conta. Por favor, siga este link para mudar a sua senha.";
+$s_lost_password_confirm_hash_OK = "Sua confirmação foi aceita. Por favor, atualize sua senha.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Abertos e atribuídos a mim';
@@ -583,7 +584,7 @@ $s_create_user_button = 'Criar Usuário';
 $s_hide_disabled = 'Ocultar Desabilitados';
 $s_filter_button = 'Aplicar Filtro';
 $s_manage_users_link = 'Gerenciar Usuários';
-$s_manage_projects_link = 'Gerenciar Progetos';
+$s_manage_projects_link = 'Gerenciar Projetos';
 $s_manage_custom_field_link = 'Gerenciar Campos Personalizados';
 $s_create_new_account_link = 'Criar Nova Conta';
 $s_projects_link = 'Projetos';
@@ -689,13 +690,13 @@ $s_confirm_account_pruning = 'Você tem certeza que deseja apagar as contas velha
 $s_edit_user_title = 'Alterar Usuário';
 $s_reset_password_button = 'Zerar Senha';
 $s_delete_user_button = 'Apagar Usuário';
-$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
+$s_reset_password_msg = 'Zerar Senha enviará o endereço de confirmação via e-mail.';
 $s_reset_password_msg2 = 'Zerar Senha deixará a senha em branco.';
 $s_show_all_users = 'TODOS';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Conta protegida. Não se pode limpar a senha.';
-$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
+$s_account_reset_msg = 'Uma mensagem de confirmação foi enviada ao seu endereço de e-mail...';
 $s_account_reset_msg2 = 'A senha da conta foi deixada em branco...';
 
 # manage_user_update.php
@@ -714,17 +715,17 @@ $s_manage_link = 'Gerenciar';
 $s_edit_news_link = 'Alterar Notícias';
 $s_docs_link = 'Docs';
 $s_logout_link = 'Sair';
-$s_my_view_link = 'Minha visão';
+$s_my_view_link = 'Minha Visão';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Não atribuídos';
+$s_my_view_title_unassigned = 'Não Atribuídos';
 $s_my_view_title_recent_mod = 'Modificados Recentemente';
 $s_my_view_title_reported = 'Relatados por Mim';
 $s_my_view_title_assigned = 'Atribuídos a Mim (não resolvidos)';
 $s_my_view_title_resolved = 'Resolvidos';
-$s_my_view_title_monitored = 'Monitorado por Mim';
+$s_my_view_title_monitored = 'Monitorados por Mim';
 
 # news_add.php
 $s_news_added_msg = 'Notícia adicionada...';
@@ -833,13 +834,13 @@ $s_selected_project = 'Projeto selecionado';
 $s_valid_project_msg = 'Você deve escolher um projeto válido';
 
 # signup.php
-$s_signup_done_title = 'Account registration processed';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
-$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
+$s_signup_done_title = 'Registro de conta processado';
+$s_password_emailed_msg = 'Parabéns. Você registrou com sucesso. Um e-mail de confirmação lhe está sendo enviado agora para verificar seu endereço de e-mail. Ao visitar o link enviado a você neste e-mail irá ativar sua conta.';
+$s_no_reponse_msg = 'Você terá sete dias para completar o processo de confirmação de conta; se você falhar em completar a confirmação de conta dentro de sete dias, esta conta recém-registrada poderá ser apagada.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
+$s_signup_captcha_request = 'Digite o código que é mostrado no quadro à direita.';
+$s_signup_info = 'Ao completar este formulário e verificar suas respostas, um e-mail de confirmação lhe será enviado para o endereço de e-mail que você especificou.<br/>Usando o e-mail de confirmação, você será capaz de ativar sua conta. Se você falhar em ativar sua conta dentro de sete dias, ela será apagada.<br/>Você deve especificar um endereço de e-mail válido para poder receber o e-mail de confirmação de conta.';
 $s_signup_title = 'Criar Conta';
 $s_signup_button = 'Criar Conta';
 
@@ -853,7 +854,7 @@ $s_system_info_link = 'Informações do Sistema';
 $s_site_settings_link = 'Configurações do Sítio';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = 'As configurações do sítio foram atualizadas';
+$s_site_settings_updated_msg = 'As configurações do site foram atualizadas';
 
 # summary_page.php
 $s_summary_title = 'Resumo';
@@ -876,7 +877,7 @@ $s_errors = 'Falso';
 $s_total = 'Total';
 $s_time_stats = 'Estatísticas de Tempo para Casos Resolvidos (dias)';
 $s_longest_open_bug = 'Caso aberto há mais tempo';
-$s_longest_open = 'Aberto há mais tempo';
+$s_longest_open = 'Aberto há quanto tempo';
 $s_average_time = 'Tempo médio';
 $s_total_time = 'Tempo total';
 $s_developer_stats = 'Estatísticas de Desenvolvedores';
@@ -907,7 +908,7 @@ $s_no = 'Não';
 $s_open_filters = 'Alterar Filtro';
 $s_or_unassigned = 'ou não atribuído';
 $s_ok = 'OK';
-$s_select_all = 'Select All';
+$s_select_all = 'Selecionar Tudo';
 
 # stored query strings
 $s_use_query = 'Usar Filtro';
@@ -928,11 +929,11 @@ $s_view_simple_link = 'Visualização Simples';
 $s_viewing_bug_advanced_details_title = 'Visualização Avançada do Caso';
 $s_product_build = 'Build do Produto';
 $s_system_profile = 'Descrição do Sistema';
-$s_update_bug_button = 'Atualizar Caso';
+$s_update_bug_button = 'Atualizar';
 $s_bug_assign_to_button = 'Atribuir a:';
-$s_bug_status_to_button = 'Change Status To:';
-$s_reopen_bug_button = 'Reabrir Caso';
-$s_move_bug_button = 'Mover Caso';
+$s_bug_status_to_button = 'Alterar Status:';
+$s_reopen_bug_button = 'Reabrir';
+$s_move_bug_button = 'Mover';
 $s_attached_files = 'Arquivos Anexados';
 $s_publish = 'Publicar';
 $s_cached = 'Em cache';
@@ -960,23 +961,23 @@ $s_add_custom_field_button = 'Novo Campo Personalizado';
 $s_delete_custom_field_button = 'Apagar Campo Personalizado';
 $s_delete_custom_field_everywhere = 'Apagar Campo Personalizado Totalmente';
 $s_update_custom_field_button = 'Atualizar Campo Personalizado';
-$s_add_existing_custom_field = 'Adicionar Este Campo Personalizado Existente';
+$s_add_existing_custom_field = 'Adicionar Este Campo Personalizado';
 $s_edit_custom_field_title = 'Alterar campo personalizado';
 $s_custom_field = 'Campo';
 $s_custom_fields_setup = 'Campos Personalizados';
 $s_custom_field_name = 'Nome';
-$s_custom_field_project_count = 'Contagem de Projetos';
+$s_custom_field_project_count = 'Projetos que Usam';
 $s_custom_field_type = 'Tipo';
 $s_custom_field_possible_values = 'Valores Possíveis';
 $s_custom_field_default_value = 'Valor Padrão';
 $s_custom_field_valid_regexp = 'Expressão Regular';
 $s_custom_field_access_level_r = 'Acesso de Leitura';
 $s_custom_field_access_level_rw = 'Acesso de Escrita';
-$s_custom_field_length_min = 'Tamanho Mínimo';
-$s_custom_field_length_max = 'Tamanho Máximo';
+$s_custom_field_length_min = 'Cumprimento Mínimo';
+$s_custom_field_length_max = 'Cumprimento Máximo';
 $s_custom_field_advanced = 'Mostrar somente na página avançada';
-$s_custom_field_display_report = 'Display When Reporting Issues';
-$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_report = 'Mostrar ao reportar casos';
+$s_custom_field_display_update = 'Mostrar ao atualizar casos';
 $s_custom_field_display_resolved = 'Mostrar ao resolver casos';
 $s_custom_field_display_closed = 'Mostrar ao fechar casos';
 $s_custom_field_require_report = 'Requerido no relato';
@@ -985,7 +986,7 @@ $s_custom_field_require_resolved = 'Requerido na resolução';
 $s_custom_field_require_closed = 'Requerido no fechamento';
 
 $s_custom_field_sequence = 'Seqüência';
-$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Checkbox,6:List,7:Multiselection list';
+$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail,5:Caixa de Marcação (V/F),6:Lista,7:Lista de seleção múltipla';
 
 $s_confirm_used_custom_field_deletion = 'Este campo atualmente está ligado a pelo menos um projeto.  Se você continuar, todos os valores para este campo serão apagados permanentemente.  Esta ação não pode ser desfeita.  Se você não deseja apagar este campo, clique no botão Voltar de seu navegador.  Para continuar, clique no botão abaixo.';
 $s_confirm_custom_field_deletion = 'Você tem certeza que deseja apagar este campo personalizado e todos os seus valores associados?';
@@ -1028,14 +1029,14 @@ $s_http_auth_realm = "Login do Mantis";
 $s_bug = "caso";
 $s_add_new_relationship = "Nova relação";
 $s_add_new_relationship_button = "Adicionar";
-$s_this_bug = "Caso atual";
+$s_this_bug = "Este caso";
 $s_relationship_added = "Relação adicionada";
 $s_relationship_deleted = "Relação apagada";
 $s_delete_relationship_button = "Apagar";
 $s_delete_relationship_sure_msg = "Você tem certeza que deseja apagar esta relação?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Nem todos os casos filhos já foram resolvidos ou fechados.";
+$s_relationship_warning_blocking_bugs_not_resolved = "Nem todos os casos filhos foram resolvidos ou fechados.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENÇÃO</b>. Nem todos os casos filhos já foram resolvidos ou fechados.<br>Antes de <b>resolver/fechar</b> um caso pai, todos os casos relacionados como filhos deste devem ser resolvidos ou fechados.";
-$s_create_child_bug_button = "Criar filho";
+$s_create_child_bug_button = "Criar Filho";
 $s_bug_cloned_to = "Caso clonado";
 $s_bug_created_from = "Caso gerado à partir de";
 
