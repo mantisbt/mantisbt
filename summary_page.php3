@@ -137,6 +137,7 @@
 			<b><? echo $s_time_stats ?>:</b>
 		</td>
 		<td>
+			<b><? echo $s_developer_stats ?>:</b>
 		</td>
 	</tr>
 	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
@@ -184,6 +185,9 @@
 			</table>
 		</td>
 		<td>
+			<table width=97%>
+				<? print_developer_summary() ?>
+			</table>
 		</td>
 	</tr>
 	</table>
