@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.38 2004-05-25 23:43:48 int2str Exp $
+	# $Id: authentication_api.php,v 1.39 2004-05-26 00:59:27 int2str Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -372,10 +372,21 @@
 		exit;
 	}
 
-	function auth_http_logout() {
-		$_SERVER['PHP_AUTH_USER'] = "";
-		$_SERVER['PHP_AUTH_PW'] = "";
+	function auth_http_set_logout_pending( $p_pending ) {
+		$t_cookie_name = config_get( 'logout_cookie' );
 
-		auth_http_prompt();
+		if ( $p_pending ) {
+			gpc_set_cookie( $t_cookie_name, "1", false );
+		} else {
+			$t_cookie_path = config_get( 'cookie_path' );
+			gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
+		}
+	}
+
+	function auth_http_is_logout_pending() {
+		$t_cookie_name = config_get( 'logout_cookie' );
+		$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
+
+		return( $t_cookie > '' );
 	}
 ?>

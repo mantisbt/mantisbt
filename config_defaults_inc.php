@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.166 2004-05-24 13:50:47 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.167 2004-05-26 00:59:27 int2str Exp $
 	# --------------------------------------------------------
 
 
@@ -904,6 +904,7 @@
 	$g_project_cookie		= $g_cookie_prefix.'_PROJECT_COOKIE';
 	$g_view_all_cookie		= $g_cookie_prefix.'_VIEW_ALL_COOKIE';
 	$g_manage_cookie		= $g_cookie_prefix.'_MANAGE_COOKIE';
+	$g_logout_cookie		= $g_cookie_prefix.'_LOGOUT_COOKIE';
 
 	#######################################
 	# Mantis Filter Variables

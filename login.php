@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.30 2004-05-25 23:43:48 int2str Exp $
+	# $Id: login.php,v 1.31 2004-05-26 00:59:27 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,6 +19,7 @@
 	$f_password		= gpc_get_string( 'password', '' );
 	$f_perm_login	= gpc_get_bool( 'perm_login' );
 	$f_return		= gpc_get_string( 'return', 'main_page.php' );
+	$f_from			= gpc_get_string( 'from', '' );
 
 	if ( BASIC_AUTH == config_get( 'login_method' ) ) {
 		$f_username = $_SERVER['REMOTE_USER'];
@@ -26,10 +27,15 @@
  	}
 
     if ( HTTP_AUTH == config_get( 'login_method' ) ) {
-		if ( isset( $_SERVER['PHP_AUTH_USER'] ) )
-			$f_username = $_SERVER['PHP_AUTH_USER'];
-		if ( isset( $_SERVER['PHP_AUTH_PW'] ) )
-			$f_password = $_SERVER['PHP_AUTH_PW'];
+		if ( !auth_http_is_logout_pending() )
+		{
+			if ( isset( $_SERVER['PHP_AUTH_USER'] ) )
+				$f_username = $_SERVER['PHP_AUTH_USER'];
+			if ( isset( $_SERVER['PHP_AUTH_PW'] ) )
+				$f_password = $_SERVER['PHP_AUTH_PW'];
+		} else {
+			auth_http_set_logout_pending( false );
+		}
 	}
 
 	if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
