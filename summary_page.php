@@ -86,7 +86,7 @@
 				<?php echo lang_get( 'by_status' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( config_get( 'status_enum_string' ), 'status' ) ?>
+		<?php summary_print_by_enum( config_get( 'status_enum_string' ), 'status' ) ?>
 		</table>
 
 		<br />
@@ -98,7 +98,7 @@
 				<?php echo lang_get( 'by_severity' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( config_get( 'severity_enum_string' ), 'severity' ) ?>
+		<?php summary_print_by_enum( config_get( 'severity_enum_string' ), 'severity' ) ?>
 		</table>
 
 		<br />
@@ -110,7 +110,7 @@
 				<?php echo lang_get( 'by_category' ) ?>:
 			</td>
 		</tr>
-		<?php print_category_summary() ?>
+		<?php summary_print_by_category() ?>
 		</table>
 
 		<br />
@@ -169,7 +169,7 @@
 				<?php echo lang_get( 'developer_stats' ) ?>:
 			</td>
 		</tr>
-		<?php print_developer_summary() ?>
+		<?php summary_print_by_developer() ?>
 		</table>
 	</td>
 
@@ -183,7 +183,7 @@
 				<?php echo lang_get( 'by_date' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_date_summary( config_get( 'date_partitions' ) ) ?>
+		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
 		</table>
 
 		<br />
@@ -195,7 +195,7 @@
 				<?php echo lang_get( 'by_resolution' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( config_get( 'resolution_enum_string' ), 'resolution' ) ?>
+		<?php summary_print_by_enum( config_get( 'resolution_enum_string' ), 'resolution' ) ?>
 		</table>
 
 		<br />
@@ -207,7 +207,7 @@
 				<?php echo lang_get( 'by_priority' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( config_get( 'priority_enum_string' ), 'priority' ) ?>
+		<?php summary_print_by_enum( config_get( 'priority_enum_string' ), 'priority' ) ?>
 		</table>
 
 		<br />
@@ -219,7 +219,7 @@
 				<?php echo lang_get( 'reporter_stats' ) ?>:
 			</td>
 		</tr>
-		<?php print_reporter_summary() ?>
+		<?php summary_print_by_reporter() ?>
 		</table>
 	</td>
 </tr>
