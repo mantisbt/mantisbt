@@ -24,6 +24,9 @@
 
     $t_ass_val = ASSIGNED;
 
+	$h_status		= get_bug_field( $c_id, 'status' );
+	$h_handler_id	= get_bug_field( $c_id, 'handler_id' );
+
     # get user id
     $t_handler_id = get_current_user_field( 'id' );
     $query = "UPDATE $g_mantis_bug_table
@@ -33,6 +36,10 @@
 
 	# updated the last_updated date
 	$result = bug_date_update( $f_id );
+
+	# log changes
+	history_log_event( $c_id, 'status', $h_status );
+	history_log_event( $c_id, 'handler_id', $h_handler_id );
 
 	# send assigned to email
 	email_assign( $f_id );
