@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.22 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: 0_18_inc.php,v 1.23 2004-08-20 23:02:40 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -606,15 +606,45 @@
 		return true;
 	}
 
-        $upgrades[] = new SQLUpgrade(
-                        '0.18-bugnote-limit',
-                        "Add email_bugnote_limit to user preference table",
-                        "ALTER TABLE $t_user_pref_table ADD email_bugnote_limit INT( 2 ) NOT NULL AFTER email_on_new_minimum_severity" );
+    $upgrades[] = new SQLUpgrade(
+			'0.18-bugnote-limit',
+			'Add email_bugnote_limit to user preference table',
+			"ALTER TABLE $t_user_pref_table ADD email_bugnote_limit INT( 2 ) NOT NULL AFTER email_on_new_minimum_severity" );
 
-        $upgrades[] = new SQLUpgrade(
-                        '0.18-bugnote-order',
-                        "Add bugnote_order to user preference table",
-                        "ALTER TABLE $t_user_pref_table ADD bugnote_order VARCHAR( 4 ) NOT NULL DEFAULT '" . config_get( 'default_bugnote_order' ) . "' AFTER redirect_delay" );
+	$upgrades[] = new SQLUpgrade(
+			'0.18-bugnote-order',
+			'Add bugnote_order to user preference table',
+			"ALTER TABLE $t_user_pref_table ADD bugnote_order VARCHAR( 4 ) NOT NULL DEFAULT '" . config_get( 'default_bugnote_order' ) . "' AFTER redirect_delay" );
+
+	$upgrades[] = new FunctionUpgrade(
+			'cb_ml_upgrade',
+			'Upgrade custom field types (checkbox, list, multilist) to support advanced filtering',
+			'upgrade_0_19_checkbox_list_multilist_upgrade' );
+
+	function upgrade_0_19_checkbox_list_multilist_upgrade() {
+		global $t_custom_field_string_table, $t_custom_field_table;
+		$t_checkbox = CUSTOM_FIELD_TYPE_CHECKBOX;
+		$t_multilist = CUSTOM_FIELD_TYPE_MULTILIST;
+		$query = "SELECT f.field_id, f.bug_id, f.value FROM $t_custom_field_string_table AS f
+			  LEFT JOIN $t_custom_field_table as s ON f.field_id = s.id 
+			  WHERE (s.type = $t_checkbox) OR (s.type = $t_multilist)";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+		for ( $i = 0; $i < $t_count; $i++ ) {
+			$t_row = db_fetch_array( $result );
+			$t_value = $t_row['value'];
+			if ( '' != $t_value ) {
+			    $t_field_id = $t_row['field_id'];
+			    $t_bug_id = $t_row['bug_id'];
+			    $query = "UPDATE $t_custom_field_string_table
+				      SET value = '|$t_value|'
+				      WHERE (field_id = $t_field_id) AND (bug_id = $t_bug_id)";
+			    db_query( $query );
+			}
+		}
+		
+		return true;
+	}
 
 	return $upgrades;
 ?>

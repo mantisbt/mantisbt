@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.38 2004-08-03 23:45:57 prichards Exp $
+	# $Id: custom_field_api.php,v 1.39 2004-08-20 23:00:39 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -686,7 +686,7 @@
 		custom_field_ensure_exists( $p_field_id );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT access_level_r, default_value
+		$query = "SELECT access_level_r, default_value, type
 				  FROM $t_custom_field_table
 				  WHERE id='$c_field_id'";
 		$result = db_query( $query );
@@ -707,7 +707,7 @@
 		$result = db_query( $query );
 
 		if( db_num_rows( $result ) > 0 ) {
-			return db_result( $result );
+			return custom_field_database_to_value( db_result( $result ) , $row['type'] );
 		} else {
 			return $t_default_value;
 		}
@@ -750,7 +750,7 @@
 			$t_custom_field_table         = config_get( 'mantis_custom_field_table' );
 			$t_custom_field_string_table  = config_get( 'mantis_custom_field_string_table' );
 
-			$query = "SELECT f.name, f.type, f.access_level_r, f.default_value, s.value
+			$query = "SELECT f.name, f.type, f.access_level_r, f.default_value, f.type, s.value
 					FROM $t_custom_field_project_table AS p, $t_custom_field_table AS f
 					LEFT JOIN $t_custom_field_string_table AS s
 						ON  p.field_id=s.field_id AND s.bug_id='$c_bug_id'
@@ -769,7 +769,7 @@
 				if( is_null( $row['value'] ) ) {
 					$t_value = $row['default_value'];
 				} else {
-					$t_value = $row['value'];
+					$t_value = custom_field_database_to_value( $row['value'], $row['type'] );
 				}
 
 				$t_custom_fields[$row['name']] = array( 'type'  => $row['type'],
@@ -913,13 +913,46 @@
 	# Data Modification
 	#===================================
 
+ 	# --------------------
+	# Convert the value to save it into the database, depending of the type
+	# return value for database
+	function custom_field_value_to_database( $p_value, $p_type ) {
+		switch ($p_type) {
+		case CUSTOM_FIELD_TYPE_MULTILIST:
+		case CUSTOM_FIELD_TYPE_CHECKBOX:
+			if ( '' == $p_value ) {
+				$result = '';
+			} else {
+				$result = '|' . $p_value . '|';
+			}
+			break;
+		default:
+			$result = $p_value;
+		}
+		return $result;
+	}
+
+	# --------------------
+	# Convert the database-value to value, depending of the type
+	# return value for further operation
+	function custom_field_database_to_value( $p_value, $p_type ) {
+		switch ($p_type) {
+		case CUSTOM_FIELD_TYPE_MULTILIST:
+		case CUSTOM_FIELD_TYPE_CHECKBOX:
+			$result = str_replace( '||', '', '|' . $p_value . '|' );
+			break;
+		default:
+			$result = $p_value;
+		}
+		return $result;
+	}
+
 	# --------------------
 	# Set the value of a custom field for a given bug
 	#  return true on success, false on failure
 	function custom_field_set_value( $p_field_id, $p_bug_id, $p_value ) {
 		$c_field_id	= db_prepare_int( $p_field_id );
 		$c_bug_id	= db_prepare_int( $p_bug_id );
-		$c_value	= db_prepare_string( $p_value );
 
 		custom_field_ensure_exists( $p_field_id );
 
@@ -939,6 +972,8 @@
 		$t_length_min		= $row['length_min'];
 		$t_length_max		= $row['length_max'];
 		$t_default_value	= $row['default_value'];
+
+		$c_value	= db_prepare_string( custom_field_value_to_database( $p_value, $t_type ) );
 
 		# check for valid value
 		if ( !is_blank( $t_valid_regexp ) ) {

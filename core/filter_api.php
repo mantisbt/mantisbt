@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.54 2004-08-08 15:19:37 prichards Exp $
+	# $Id: filter_api.php,v 1.55 2004-08-20 23:00:39 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -418,6 +418,7 @@
 					$t_any_found = true;
 				}
 				if ( !$t_any_found ) {
+					$t_def = custom_field_get_definition( $t_cfid );				
 					$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
 					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 					foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
@@ -432,8 +433,19 @@
 								$t_custom_where_clause .= ' OR ';
 							}
 
-							$t_custom_where_clause .= "(  $t_table_name.field_id = $t_cfid AND $t_table_name.value = '";
-							$t_custom_where_clause .= db_prepare_string( trim( $t_filter_member ) )  . "' )";
+							$t_custom_where_clause .= "(  $t_table_name.field_id = $t_cfid AND $t_table_name.value ";
+							switch( $t_def['type'] ) {
+							case CUSTOM_FIELD_TYPE_MULTILIST:
+							case CUSTOM_FIELD_TYPE_CHECKBOX:
+								$t_custom_where_clause .= "LIKE '%";
+								$t_custom_where_clause_closing = "%' )";
+								break;
+							default:
+								$t_custom_where_clause .= "= '";
+								$t_custom_where_clause_closing = "' )";
+							}
+							$t_custom_where_clause .= db_prepare_string( trim( $t_filter_member ) );
+							$t_custom_where_clause .= $t_custom_where_clause_closing;
 						}
 					}
 					if ( !is_blank( $t_custom_where_clause ) ) {
