@@ -131,7 +131,7 @@
 		}
 		$f_file = trim( $f_file );
 		if ( is_uploaded_file( $f_file ) ) {
-			$t_bug_id = str_pd( $t_bug_id, "0", 7 );
+			$t_bug_id = str_pd( $t_bug_id, "0", 7, STR_PAD_LEFT );
 
 			$query = "SELECT file_path
 					FROM $g_mantis_project_table
