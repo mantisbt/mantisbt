@@ -2,7 +2,14 @@
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
+	# See the README and LICENSE files for details	
+?>
+<?php
+	# Bugs to display / print / export can be selected with the checkboxes
+	# A printing Options link allows to choose the fields to export
+	# Export : 
+	#	- the bugs displayed in print_all_bug_page.php are saved in a .doc or .xls file
+	#   - the IE icons allows to see or directly print the same result
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
@@ -120,7 +127,7 @@
 	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status )) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
-
+	
 	if ( $f_show_category != 'any' ) {
 		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
 	}
@@ -168,6 +175,9 @@
 	# perform query
     $result = db_query( $query );
 	$row_count = db_num_rows( $result );
+
+	# for export
+	check_varset( $t_show_flag, 0 );
 ?>
 <?php print_page_top1() ?>
 <?php print_head_bottom() ?>
@@ -266,7 +276,35 @@
 		</form>
 	</td>
 </tr>
+
+<?php 
+	#<SQLI> Excel & Print export 
+	#$f_bug_array stores the number of the selected rows
+	#$t_bug_arr_sort is used for displaying
+	#$f_export is a string for the word and excel pages
+	
+	$f_bug_arr[$row_count]=-1;
+
+	for($i=0; $i < $row_count; $i++) {
+		if ( isset($f_bug_arr[$i]) ) {
+			$index = $f_bug_arr[$i];
+			$t_bug_arr_sort[$index]=1;
+		}
+	}
+	$f_export = implode(',',$f_bug_arr);
+?>
+
+<tr>
+	<td>
+	<a href="<? echo "print_all_bug_page_excel.php"; ?>?f_search=<? echo urlencode($f_search) ?>&amp;f_sort=<? echo $f_sort ?>&amp;f_dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;f_type_page=excel&amp;f_export=<? echo $f_export ?>&amp;f_show_flag=<? echo $t_show_flag ?>"><img src="images/excelicon.gif" border="0" align="absmiddle" alt="Excel 2000"></a> <a href="<? echo "print_all_bug_page_excel.php" ?>?f_search=<? echo urlencode($f_search) ?>&amp;f_sort=<? echo $f_sort ?>&amp;f_dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;f_type_page=html&amp;f_export=<? echo $f_export ?>&amp;f_show_flag=<? echo $t_show_flag ?>" target="_blank"><img src="images/ieicon.gif" border="0" align="absmiddle" alt="Excel View"></a>
+	- <a href="<? echo "print_all_bug_page_word.php" ?>?f_search=<? echo urlencode($f_search) ?>&amp;f_sort=<? echo $f_sort ?>&amp;f_dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;f_type_page=word&amp;f_export=<? echo $f_export ?>&amp;f_show_flag=<? echo $t_show_flag ?>"><img src="images/wordicon.gif" border="0" align="absmiddle" alt="Word 2000"></a>
+	<a href="<? echo "print_all_bug_page_word.php" ?>?f_search=<? echo urlencode($f_search) ?>&amp;f_sort=<? echo $f_sort ?>&amp;f_dir=<? if ( $f_dir == "DESC" ) { echo "ASC"; } else { echo "DESC"; } ?>&amp;f_type_page=html&amp;f_export=<? echo $f_export ?>&amp;f_show_flag=<? echo $t_show_flag ?>" target="_blank"><img src="images/ieicon.gif" border="0" align="absmiddle" alt="Word View">
+	</td>
+</tr>
+<?php #<SQLI> ?>
 </table>
+
+<form method="post" action="print_all_bug_page.php">
 
 <table class="width100" cellspacing="1">
 <tr>
@@ -283,13 +321,19 @@
 			PRINT "($v_start - $v_end)";
 		?>
 	</td>
+	<td>
+	</td>
 	<td class="right">
+		<?php print_bracket_link( 'print_all_bug_options_page.php', $s_printing_options_link ) ?>
 		<?php print_bracket_link( 'view_all_bug_page.php', $s_view_bugs_link ) ?>
 		<?php print_bracket_link( 'summary_page.php', $s_summary ) ?>
 	</td>
 <p>
 </tr>
 <tr class="row-category">
+	<td class="center" width="2%">
+		&nbsp;
+	</td>
 	<td class="center" width="8%">
 		<?php print_view_bug_sort_link2( 'P', 'priority', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'priority' ) ?>
@@ -350,8 +394,14 @@
 				WHERE bug_id='$v_id'";
 		$res2 = db_query( $query );
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
-?>
+
+		if (isset($t_bug_arr_sort[$i])||($t_show_flag==0)) {
+?>	 
+
 <tr>
+	<td class="print" bgcolor="<?php echo $status_color ?>">
+		<input type="checkbox" name="f_bug_arr[]" value="<?php echo $i ?>">
+	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo get_enum_element( 'priority', $v_priority ) ?>
 	</td>
@@ -408,6 +458,9 @@
 	</td>
 </tr>
 <?php
-	}
+	} # isset_loop	
+} # for_loop
 ?>
+<input type="hidden" name="t_show_flag" value="1">
 </table>
+<input type="submit" value="<?php echo $s_hide_button ?>">
