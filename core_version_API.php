@@ -15,13 +15,15 @@
 
 		$c_project_id	= (integer)$p_project_id;
 		$c_version		= addslashes($p_version);
-		$c_date_order	= addslashes($p_date_order);
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_version_table
 				WHERE project_id='$c_project_id' AND
-					version='$c_version' AND
-					date_order='$c_date_order'";
+				version='$c_version'";
+		if ( strcmp($p_date_order, '0') != 0) {
+			$c_date_order	= addslashes($p_date_order);
+			$query = $query . " AND	date_order='$c_date_order'";
+		}
 		$result = db_query( $query );
 		$version_count =  db_result( $result, 0, 0 );
 		if ( $version_count > 0 ) {
