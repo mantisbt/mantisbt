@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.92 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: email_api.php,v 1.93 2004-08-15 22:21:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -21,9 +21,6 @@
 
 	# reusable object of class SMTP
 	$g_phpMailer_smtp = null;
-
-	# email language
-	$g_email_lang = NULL; # NULL = default
 
 	###########################################################################
 	# Email API
@@ -297,26 +294,25 @@
 	# --------------------
 	# Send password to user
 	function email_signup( $p_user_id, $p_password, $p_confirm_hash ) {
-		global $g_email_lang;
 
 		if ( OFF == config_get( 'send_reset_password' ) ) {
 			return;
 		}
 
-		$g_email_lang = user_pref_get_language( $p_user_id );
+		lang_push( user_pref_get_language( $p_user_id ) );
 
 		# retrieve the username and email
 		$t_username = user_get_field( $p_user_id, 'username' );
 		$t_email = user_get_email( $p_user_id );
 
 		# Build Welcome Message
-		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject', $g_email_lang );
+		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
-		$t_message = lang_get( 'new_account_greeting', $g_email_lang ) . $t_username .
-						lang_get( 'new_account_greeting2', $g_email_lang ) . "\n\n" .
+		$t_message = lang_get( 'new_account_greeting' ) . $t_username .
+						lang_get( 'new_account_greeting2' ) . "\n\n" .
 						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" .
-						lang_get( 'new_account_message', $g_email_lang ) .
-						lang_get( 'new_account_do_not_reply', $g_email_lang );
+						lang_get( 'new_account_message' ) .
+						lang_get( 'new_account_do_not_reply' );
 
 		# Send signup email regardless of mail notification pref
 		# or else users won't be able to sign up
@@ -324,31 +320,30 @@
 			email_send( $t_email, $t_subject, $t_message );
 		}
 
-		$g_email_lang = NULL;
+		lang_pop();
 	}
 
 	# --------------------
 	# Send confirm_hash url to user forgets the password
 	function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-		global $g_email_lang;
 
 		if ( OFF == config_get( 'send_reset_password' ) ) {
 			return;
 		}
 
-		$g_email_lang = user_pref_get_language( $p_user_id );
+		lang_push( user_pref_get_language( $p_user_id ) );
 
 		# retrieve the username and email
 		$t_username = user_get_field( $p_user_id, 'username' );
 		$t_email = user_get_email( $p_user_id );
 
-		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject', $g_email_lang );
+		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
 
-		$t_message = lang_get( 'reset_request_msg', $g_email_lang ) . "\n\n" .
+		$t_message = lang_get( 'reset_request_msg' ) . "\n\n" .
 						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" .
-						lang_get( 'new_account_username', $g_email_lang ) . $t_username . "\n" .
-						lang_get( 'new_account_IP', $g_email_lang ) . $_SERVER["REMOTE_ADDR"] . "\n\n" .
-						lang_get( 'new_account_do_not_reply', $g_email_lang );
+						lang_get( 'new_account_username' ) . $t_username . "\n" .
+						lang_get( 'new_account_IP' ) . $_SERVER["REMOTE_ADDR"] . "\n\n" .
+						lang_get( 'new_account_do_not_reply' );
 
 		# Send password reset regardless of mail notification prefs
 		# or else users won't be able to receive their reset pws
@@ -356,35 +351,34 @@
 			email_send( $t_email, $t_subject, $t_message );
 		}
 
-		$g_email_lang = NULL;
+		lang_pop();
 	}
 
 	# --------------------
 	# notify the selected group a new user has signup
 	function email_notify_new_account( $p_username, $p_email ) {
-		global $g_email_lang, $g_path;
 
 		$t_threshold_min = config_get( 'notify_new_user_created_threshold_min' );
 		$t_threshold_users = project_get_all_user_rows( ALL_PROJECTS, $t_threshold_min );
 
 		foreach( $t_threshold_users as $t_user ) {
-			$g_email_lang = user_pref_get_language( $t_user['id'] );
+			lang_push( user_pref_get_language( $t_user['id'] ) );
 
 			$t_recipient_email = user_get_email( $t_user['id'] );
-			$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject', $g_email_lang );
+			$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
-			$t_message = lang_get( 'new_account_signup_msg', $g_email_lang ) . "\n\n" .
-						lang_get( 'new_account_username', $g_email_lang ) . $p_username . "\n" .
-						lang_get( 'new_account_email', $g_email_lang ) . $p_email . "\n" .
-						lang_get( 'new_account_IP', $g_email_lang ) . $_SERVER["REMOTE_ADDR"] . "\n" .
+			$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" .
+						lang_get( 'new_account_username' ) . $p_username . "\n" .
+						lang_get( 'new_account_email' ) . $p_email . "\n" .
+						lang_get( 'new_account_IP' ) . $_SERVER["REMOTE_ADDR"] . "\n" .
 						$g_path . "\n\n" .
-						lang_get( 'new_account_do_not_reply', $g_email_lang );
+						lang_get( 'new_account_do_not_reply' );
 
 			if( !is_blank( $t_recipient_email ) ) {
 				email_send( $t_recipient_email, $t_subject, $t_message );
 			}
 
-			$g_email_lang = NULL;
+			lang_pop();
 		}
 	}
 
@@ -527,7 +521,7 @@
 	# this function sends the actual email
 	# if $p_exit_on_error == true (default) - calls exit() on errors, else - returns true on success and false on errors
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='', $p_exit_on_error=true ) {
-		global $g_phpMailer_smtp, $g_email_lang;
+		global $g_phpMailer_smtp;
 
 		$t_recipient = trim( $p_recipient );
 		$t_subject   = string_email( trim( $p_subject ) );
@@ -555,7 +549,8 @@
 		$mail = new PHPMailer;
 
 		$mail->PluginDir = PHPMAILER_PATH;
-		$mail->SetLanguage( lang_get( 'phpmailer_language', $g_email_lang ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
+		# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp) 
+		$mail->SetLanguage( lang_get( 'phpmailer_language', lang_get_current() ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
 
 		# Select the method to send mail
 		switch ( config_get( 'phpMailer_method' ) ) {
@@ -586,7 +581,7 @@
 		$mail->IsHTML(false);              # set email format to plain text
 		$mail->WordWrap = 80;              # set word wrap to 50 characters
 		$mail->Priority = config_get( 'mail_priority' );               # Urgent = 1, Not Urgent = 5, Disable = 0
-		$mail->CharSet = lang_get( 'charset', $g_email_lang );
+		$mail->CharSet = lang_get( 'charset', lang_get_current() );
 		$mail->Host     = config_get( 'smtp_host' );
 		$mail->From     = config_get( 'from_email' );
 		$mail->Sender   = config_get( 'return_path_email' );
@@ -719,7 +714,6 @@
 	# @@@ I'm not sure this shouldn't return an array of user ids... more work for
 	#  the caller but cleaner from an API point of view.
 	function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
-		global $g_email_lang;
 
 		if ( !is_array( $p_recipients ) ) {
 			$p_recipients = array( $p_recipients );
@@ -728,14 +722,14 @@
 		$result = array();
 		foreach ( $p_recipients as $t_recipient ) {
 
-			$g_email_lang = user_pref_get_language( $t_recipient, bug_get_field( $p_bug_id, 'project_id' ) );
+			lang_push( user_pref_get_language( $t_recipient, bug_get_field( $p_bug_id, 'project_id' ) ) );
 
 			$t_subject = email_build_subject( $p_bug_id );
 			$t_sender = current_user_get_field( 'username' ) . ' <' .
 						current_user_get_field( 'email' ) . '>' ;
 			$t_date = date( config_get( 'normal_date_format' ) );
-			$t_header = "\n" . lang_get( 'on', $g_email_lang ) . " $t_date, $t_sender " .
-						lang_get( 'sent_you_this_reminder_about', $g_email_lang ) . ":\n\n";
+			$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender " .
+						lang_get( 'sent_you_this_reminder_about' ) . ":\n\n";
 
 			$t_email = user_get_email( $t_recipient );
 			$result[] = user_get_name( $t_recipient );
@@ -747,7 +741,7 @@
 				email_send( $t_email, $t_subject, $t_contents );
 			}
 
-			$g_email_lang = NULL;
+			lang_pop();
 		}
 		return $result;
 	}
@@ -756,18 +750,17 @@
 	# Send bug info to given user
 	# return true on success
 	function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id ) {
-		global $g_email_lang;
 
 		$t_user_email = user_get_email( $p_user_id );
 
-		# check wether email should be sent
+		# check whether email should be sent
 		# @@@ can be email field empty? if yes - then it should be handled here
 		if ( ON !== config_get( 'enable_email_notification' ) || is_blank( $t_user_email ) ) {
 			return true;
 		}
 
 		# load (push) user language
-		$g_email_lang = user_pref_get_language( $p_user_id, $p_project_id );
+		lang_push( user_pref_get_language( $p_user_id, $p_project_id ) );
 
 		# build subject
 		$t_subject = '['.$p_visible_bug_data['email_project'].' '
@@ -776,7 +769,7 @@
 
 		# build message
 
-		$t_message = lang_get_defaulted( $p_message_id, null, $g_email_lang );
+		$t_message = lang_get_defaulted( $p_message_id, null );
 		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
 			$t_message .= "\n";
 		}
@@ -787,7 +780,7 @@
 		# PRINT '<br />email_bug_info::Sending email to :'.$t_user_email;
 		$t_ok = email_send( $t_user_email, $t_subject, $t_message, '', $p_visible_bug_data['set_category'], false );
 
-		$g_email_lang = NULL;
+		lang_pop();
 
 		return $t_ok;
 	}
@@ -795,7 +788,6 @@
 	# --------------------
 	# Build the bug info part of the message
 	function email_format_bug_message( $p_visible_bug_data ) {
-		global $g_email_lang;
 
 		$t_normal_date_format = config_get( 'normal_date_format' );
 		$t_complete_date_format = config_get( 'complete_date_format' );
@@ -836,7 +828,7 @@
 		# custom fields formatting
 		foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
 
-			$t_message .= str_pad( lang_get_defaulted( $t_custom_field_name, null, $g_email_lang ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
+			$t_message .= str_pad( lang_get_defaulted( $t_custom_field_name, null ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
 
 			if ( CUSTOM_FIELD_TYPE_EMAIL === $t_custom_field_data['type'] ) {
 				$t_message .= 'mailto:'.$t_custom_field_data['value'];
@@ -861,7 +853,7 @@
 
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
 
-		$t_message .= lang_get( 'email_description', $g_email_lang ) . ": \n".wordwrap( $p_visible_bug_data['email_description'] )."\n";
+		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $p_visible_bug_data['email_description'] )."\n";
 
 		# MASC RELATIONSHIP
 		if ( ON == config_get( 'enable_relationship' ) ) {
@@ -874,7 +866,7 @@
 		# Sponsorship
 		if ( isset( $p_visible_bug_data['sponsorship_total'] ) && ( $p_visible_bug_data['sponsorship_total'] > 0 ) ) {
 			$t_message .= $t_email_separator1."\n";
-			$t_message .= sprintf( lang_get( 'total_sponsorship_amount', $g_email_lang ), sponsorship_format_amount( $p_visible_bug_data['sponsorship_total'] ) ) . "\n" . "\n";
+			$t_message .= sprintf( lang_get( 'total_sponsorship_amount' ), sponsorship_format_amount( $p_visible_bug_data['sponsorship_total'] ) ) . "\n" . "\n";
 
 			if ( isset( $p_visible_bug_data['sponsorships'] ) ) {
 				foreach ( $p_visible_bug_data['sponsorships'] as $t_sponsorship ) {
@@ -902,11 +894,11 @@
 
 		# format history
 		if ( array_key_exists( 'history', $p_visible_bug_data ) ) {
-			$t_message .=	lang_get( 'bug_history', $g_email_lang ) . "\n";
-			$t_message .=	str_pad( lang_get( 'date_modified', $g_email_lang ), 15 ) .
-							str_pad( lang_get( 'username', $g_email_lang ), 15 ) .
-							str_pad( lang_get( 'field', $g_email_lang ), 25 ) .
-							str_pad( lang_get( 'change', $g_email_lang ), 20 ). "\n";
+			$t_message .=	lang_get( 'bug_history' ) . "\n";
+			$t_message .=	str_pad( lang_get( 'date_modified' ), 15 ) .
+							str_pad( lang_get( 'username' ), 15 ) .
+							str_pad( lang_get( 'field' ), 25 ) .
+							str_pad( lang_get( 'change' ), 20 ). "\n";
 
 			$t_message .= $t_email_separator1."\n";
 
@@ -932,10 +924,9 @@
 	# returns concatenated translated attribute name and original
 	# attribute value. Else return empty string.
 	function email_format_attribute( $p_visible_bug_data, $attribute_id ) {
-		global $g_email_lang;
 
 		if ( array_key_exists( $attribute_id, $p_visible_bug_data ) ) {
-			return str_pad( lang_get( $attribute_id, $g_email_lang ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ).$p_visible_bug_data[$attribute_id]."\n";
+			return str_pad( lang_get( $attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ).$p_visible_bug_data[$attribute_id]."\n";
 		}
 		return '';
 	}

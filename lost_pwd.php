@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd.php,v 1.1 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: lost_pwd.php,v 1.2 2004-08-15 22:21:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# --------------------------------------------------------
@@ -67,7 +67,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">
-		<b><?php echo lang_get( 'lost_password_done_title', $g_email_lang ) ?></b>
+		<b><?php echo lang_get( 'lost_password_done_title' ) ?></b>
 	</td>
 </tr>
 <tr>

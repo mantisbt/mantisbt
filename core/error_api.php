@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.32 2004-08-03 13:47:48 vboctor Exp $
+	# $Id: error_api.php,v 1.33 2004-08-15 22:21:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -33,12 +33,16 @@
 	#
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
+		global $g_lang_overrides;
 
 		# check if errors were disabled with @ somewhere in this call chain
 		if ( 0 == error_reporting() ) {
 			return;
 		}
 
+		# flush any language overrides to return to user's natural default
+		lang_push( config_get ( 'default_language' ) );
+		
 		$t_short_file	= basename( $p_file );
 		$t_method		= 'none';
 
@@ -139,6 +143,7 @@
 			# do nothing
 		}
 
+		lang_pop();
 		$g_error_parameters = array();
 		$g_error_handled = true;
 		$g_error_proceed_url = null;

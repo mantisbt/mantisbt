@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.29 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: lang_api.php,v 1.30 2004-08-15 22:21:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -14,6 +14,9 @@
 	# Cache of localization strings in the language specified by the last
 	# lang_load call
 	$g_lang_strings = array();
+
+	# stack for language overrides
+	$g_lang_overrides = array();
 
 	# To be used in custom_strings_inc.php :
 	$g_active_language  = '';
@@ -55,11 +58,6 @@
 		global $g_active_language;
 
 		$t_lang = false;
-
-		# Have we determined the default language already?
-		if ( $g_active_language != '' ) {
-			return $g_active_language;
-		}
 
 		# Confirm that the user's language can be determined
 		if ( auth_is_user_authenticated() ) {
@@ -128,6 +126,58 @@
 		}
 	}
 
+
+
+	# ------------------
+	# language stack implementation
+	#
+  # push a language onto the stack
+  function lang_push( $p_lang=null ) {
+		global $g_lang_overrides;
+
+  	# If no specific language is requested, we'll
+		#  try to determine the language from the users
+		#  preferences
+
+		$t_lang = $p_lang;
+
+		if ( null === $t_lang ) {
+			$t_lang = lang_get_default();
+		}
+
+		$g_lang_overrides[] = $t_lang;
+		
+		# Remember the language
+		$g_active_language = $t_lang;
+
+		# make sure it's loaded
+		lang_ensure_loaded( $t_lang );
+  }
+
+  # pop a language onto the stack and return it
+  function lang_pop( ) {
+		global $g_lang_overrides;
+
+		return array_pop( $g_lang_overrides );
+  }
+
+  # return value on top of the language stack
+  #  return default if stack is empty
+  function lang_get_current( ) {
+		global $g_lang_overrides;
+
+		if (count($g_lang_overrides) > 0 ) {
+			$t_lang = $g_lang_overrides[ count( $g_lang_overrides ) - 1];
+		}else{
+			$t_lang = lang_get_default();
+		}
+		
+		return $t_lang;
+  }
+
+  
+
+
 	# ------------------
 	# Retrieves an internationalized string
 	#  This function will return one of (in order of preference):
@@ -143,11 +193,7 @@
 		$t_lang = $p_lang;
 
 		if ( null === $t_lang ) {
-			$t_lang = lang_get_default();
-		}
-
-		if ( 'auto' == $t_lang ) {
-			$t_lang = lang_map_auto();
+			$t_lang = lang_get_current();
 		}
 
 		# Now we'll make sure that the requested language is loaded
@@ -186,11 +232,7 @@
 		$t_lang = $p_lang;
 
 		if ( null === $t_lang ) {
-			$t_lang = lang_get_default();
-		}
-
-		if ( 'auto' == $t_lang ) {
-			$t_lang = lang_map_auto();
+			$t_lang = lang_get_current();
 		}
 
 		# Now we'll make sure that the requested language is loaded
