@@ -78,7 +78,6 @@ class  ADODB_odbc_oracle extends ADODB_odbc {
 	{
 	global $php_errormsg;
 	
-		$php_errormsg = '';
 		$this->_connectionID = odbc_connect($argDSN,$argUsername,$argPassword,SQL_CUR_USE_ODBC );
 		$this->_errorMsg = $php_errormsg;
 		
@@ -90,7 +89,6 @@ class  ADODB_odbc_oracle extends ADODB_odbc {
 	function _pconnect($argDSN, $argUsername, $argPassword, $argDatabasename)
 	{
 	global $php_errormsg;
-		$php_errormsg = '';
 		$this->_connectionID = odbc_pconnect($argDSN,$argUsername,$argPassword,SQL_CUR_USE_ODBC );
 		$this->_errorMsg = $php_errormsg;
 		

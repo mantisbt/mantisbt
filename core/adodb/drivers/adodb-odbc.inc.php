@@ -146,7 +146,6 @@ class ADODB_odbc extends ADOConnection {
 		if ($this->debug && $argDatabasename) {
 			ADOConnection::outp("For odbc Connect(), $argDatabasename is not used. Place dsn in 1st parameter.");
 		}
-		$php_errormsg = '';
 		if ($this->curmode === false) $this->_connectionID = odbc_connect($argDSN,$argUsername,$argPassword);
 		else $this->_connectionID = odbc_connect($argDSN,$argUsername,$argPassword,$this->curmode);
 		$this->_errorMsg = $php_errormsg;
@@ -159,7 +158,6 @@ class ADODB_odbc extends ADOConnection {
 	function _pconnect($argDSN, $argUsername, $argPassword, $argDatabasename)
 	{
 	global $php_errormsg;
-		$php_errormsg = '';
 		if ($this->debug && $argDatabasename) {
 			ADOConnection::outp("For odbc PConnect(), $argDatabasename is not used. Place dsn in 1st parameter.");
 		}
@@ -422,7 +420,6 @@ class ADODB_odbc extends ADOConnection {
 	function _query($sql,$inputarr=false) 
 	{
 	GLOBAL $php_errormsg;
-		$php_errormsg = '';
 		$this->_error = '';
 		
 		if ($inputarr) {
