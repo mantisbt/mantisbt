@@ -478,7 +478,7 @@
 	# this function sends the actual email
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
 		global $g_from_email, $g_enable_email_notification,
-				$g_return_path_email,
+				$g_return_path_email, $g_use_x_priority,
 				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host;
 
 		# short-circuit if no emails should be sent
@@ -547,7 +547,9 @@
 
 			$t_headers .= "X-Sender: <$g_from_email>\n";
 			$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
-			$t_headers .= "X-Priority: 0\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
+			if ( $g_use_x_priority == 1 ) {
+				$t_headers .= "X-Priority: 0\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
+			}
 			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
 			# If you want to send foreign charsets
 			# $t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";

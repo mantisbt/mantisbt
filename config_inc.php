@@ -99,6 +99,9 @@
 	# This disables the automatic generation of mailto: links
 	$g_hide_user_email           = 0;
 
+	# Set to 0 to remove X-Priority header
+	$g_use_x_priority            = 1;
+
 	# Set to 0 as on Windows systems, as long as php-mail-function has its
 	# bcc-bug (~PHP 4.0.6)
 	$g_use_bcc                   = 1;
