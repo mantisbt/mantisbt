@@ -231,10 +231,15 @@
 		?>
 	</td>
 	<td class="center">
-		<?php print_bug_link( $v_id )?>
-		<?php # type project name if viewing 'all projects'?>
-		<?php if ( "0000000" == $g_project_cookie_val ) {?>
-		<BR>[<?php print_view_bug_sort_link( $link_page, "$project_name", "project_id", $f_sort, $f_dir ) ?>]<?php print_sort_icon( $f_dir, $f_sort, "project_id" ); }?>
+		<?php
+			print_bug_link( $v_id );
+			# type project name if viewing 'all projects'
+			if ( "0000000" == $g_project_cookie_val ) {
+				echo "<br />[";
+				print_view_bug_sort_link( $link_page, "$project_name", "project_id", $f_sort, $f_dir );
+				echo "]";
+			}
+		?>
 	</td>
 	<td class="center">
 		<?php
