@@ -12,7 +12,7 @@
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
 		$t_settings_string = "any#any#any#".$g_default_limit_view."#".
-							$g_default_show_changed."#0#any#any#last_updated#ASC";
+							$g_default_show_changed."#0#any#any#last_updated#DESC";
 		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
 		print_header_redirect( $g_view_all_bug_page );
 	}
