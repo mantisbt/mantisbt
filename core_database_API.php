@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.12 $
+	# $Revision: 1.13 $
 	# $Author: vboctor $
-	# $Date: 2002-06-20 14:48:18 $
+	# $Date: 2002-06-25 10:19:58 $
 	#
-	# $Id: core_database_API.php,v 1.12 2002-06-20 14:48:18 vboctor Exp $
+	# $Id: core_database_API.php,v 1.13 2002-06-25 10:19:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -19,6 +19,9 @@
 	# This in the general interface for all database calls.
 	# The actual SQL queries are found in the pages.
 	# Use this as a starting point to port to other databases
+	
+	# An array in which all executed queries are stored.  This is used for profiling
+	$g_queries_array = array();
 
 	# --------------------
 	# connect to database and select database
@@ -63,6 +66,9 @@
 	# --------------------
 	# execute query, requires connection to be opened,
 	function db_query( $p_query ) {
+		global $g_queries_array;
+
+		array_push ( $g_queries_array, $p_query );
 
 		$t_result = mysql_query( $p_query );
 

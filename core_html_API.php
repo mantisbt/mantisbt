@@ -172,7 +172,8 @@
 		global 	$g_string_cookie_val, $g_webmaster_email,
 				$g_menu_include_file, $g_show_footer_menu,
 				$g_mantis_version, $g_show_version,
-				$g_timer, $g_show_timer;
+				$g_timer, $g_show_timer, 
+				$g_show_queries_count, $g_show_queries_list, $g_queries_array;
 
 		# @@@
 		if (isset($g_string_cookie_val)&&!empty($g_string_cookie_val)) {
@@ -193,6 +194,18 @@
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 		if ( ON == $g_show_timer ) {
 			$g_timer->print_times();
+		}
+		if ( ON == $g_show_queries_count ) {
+			$t_count = count( $g_queries_array );
+			PRINT "$t_count total queries executed.<br />";
+			PRINT count( array_unique ( $g_queries_array ) ) . " unique queries executed.<br />";
+			if ( ON == $g_show_queries_list ) {
+				PRINT '<table>';
+				for ( $i = 0; $i < $t_count; $i++ ) {
+					PRINT "<tr><td>". ($i+1) ."</td><td>$g_queries_array[$i]</td></tr>";
+				}
+				PRINT '</table>';
+			}
 		}
 	}
 	# --------------------
