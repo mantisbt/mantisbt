@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.32 2004-08-27 13:24:10 thraxisp Exp $
+	# $Id: database_api.php,v 1.33 2004-09-09 17:56:37 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -89,7 +89,8 @@
 		list( $usec, $sec ) = explode( " ", microtime() );
 		return ( (float)$usec + (float)$sec );
 	}
-		# --------------------
+	
+	# --------------------
 	# execute query, requires connection to be opened
 	# If $p_error_on_failure is true (default) an error will be triggered
 	#  if there is a problem executing the query.
@@ -102,7 +103,8 @@
 		} else {
 			$t_result = $g_db->Execute( $p_query );
 		}
-		$t_elapsed = number_format( microtime_float() - $t_start, 4);		array_push ( $g_queries_array, array( $p_query, $t_elapsed ) );
+		$t_elapsed = number_format( microtime_float() - $t_start, 4);
+		array_push ( $g_queries_array, array( $p_query, $t_elapsed ) );
 
 		if ( !$t_result ) {
 			db_error($p_query);
@@ -332,6 +334,30 @@
 		}
 	}
 
+	# --------------------
+	# count queries
+	function db_count_queries () {
+		global $g_queries_array;
+
+		return count( $g_queries_array );
+		}
+
+	# --------------------
+	# count unique queries
+	function db_count_unique_queries () {
+		global $g_queries_array;
+
+		$t_unique_queries = 0;
+		$t_shown_queries = array();
+		foreach ($g_queries_array as $t_val_array) {
+			if ( ! in_array( $t_val_array[0], $t_shown_queries ) ) {
+				$t_unique_queries++;
+				array_push( $t_shown_queries, $t_val_array[0] );
+			}
+		}
+		return $t_unique_queries;
+		}
+		
 	# --------------------
 	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
