@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.65 2005-03-21 02:03:12 thraxisp Exp $
+	# $Id: file_api.php,v 1.66 2005-04-05 16:26:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -495,9 +495,23 @@
 	}
 
 	# --------------------
-	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='', $p_table = 'bug', $p_title = '', $p_desc = '' ) {
+	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='', $p_table = 'bug', $p_error = 0, $p_title = '', $p_desc = '' ) {
 
-		if ( !is_readable( $p_tmp_file ) && DISK != config_get( 'file_upload_method' ) ) {
+		if ( php_version_at_least( '4.2.0' ) ) {
+		    switch ( $p_error ) {
+		        case UPLOAD_ERR_INI_SIZE:
+		        case UPLOAD_ERR_FORM_SIZE:
+                    trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+		        case UPLOAD_ERR_PARTIAL:
+		        case UPLOAD_ERR_NO_FILE:
+                    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+            }
+        }
+        
+	    if ( ( '' == $p_tmp_file ) || ( '' == $p_file_name ) ) {
+		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+        }
+		if ( !is_readable( $p_tmp_file ) ) {
 			trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
 		}
 
@@ -528,8 +542,10 @@
 			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 		}
 		else {
-		$t_file_path = project_get_field( $t_project_id, 'file_path' );
-			if( $t_file_path == '' ) $t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		    $t_file_path = project_get_field( $t_project_id, 'file_path' );
+			if( $t_file_path == '' ) {
+			    $t_file_path = config_get( 'absolute_path_default_upload_folder' );
+			}
 		}
 		$c_file_path = db_prepare_string( $t_file_path );
 		$c_new_file_name = db_prepare_string( $p_file_name );
@@ -538,14 +554,14 @@
 		$t_disk_file_name = $t_file_path . file_generate_unique_name( $t_file_hash . '-' . $p_file_name, $t_file_path );
 		$c_disk_file_name = db_prepare_string( $t_disk_file_name );
 
-		if ( is_readable ( $p_tmp_file ) ) {
-			$t_file_size = filesize( $p_tmp_file );
-		} else {
-			//try to get filesize from 'post' data
-			//@@@ fixme - this should support >1 file ?
-			global $HTTP_POST_FILES;
-			$t_file_size = $HTTP_POST_FILES['file']['size'];
-		}
+		$t_file_size = filesize( $p_tmp_file );
+	    if ( 0 == $t_file_size ) {
+		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+        }
+		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+        if ( $t_file_size > $t_max_file_size ) {
+            trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+        }
 		$c_file_size = db_prepare_int( $t_file_size );
 
 		$t_method			= config_get( 'file_upload_method' );
@@ -562,7 +578,9 @@
 						file_ftp_disconnect ( $conn_id );
 					}
 
-					move_uploaded_file( $p_tmp_file, $t_disk_file_name );
+					if ( !move_uploaded_file( $p_tmp_file, $t_disk_file_name ) ) {
+					    trigger_error( FILE_MOVE_FAILED, ERROR );
+					}
 					chmod( $t_disk_file_name, 0400 );
 
 					$c_content = '';
@@ -617,15 +635,8 @@
 		if ( null === $p_user_id ) {
 			$p_user_id = auth_get_current_user_id();
 		}
-
-		$t_access = user_get_access_level( $p_user_id, $p_project_id );
-
-		if ( !file_is_uploading_enabled() ||
-			 ( $t_access < config_get( 'upload_project_file_threshold' ) ) ) {
-			return false;
-		}
-
-		return true;
+		return ( file_is_uploading_enabled() &&
+			 ( access_has_project_level( config_get( 'upload_project_file_threshold' ), $p_project_id, $p_user_id ) ) );
 	}
 
 	# --------------------

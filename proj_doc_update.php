@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_update.php,v 1.26 2005-02-12 20:01:07 jlatour Exp $
+	# $Id: proj_doc_update.php,v 1.27 2005-04-05 16:26:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -47,11 +47,25 @@
 	extract( $f_file, EXTR_PREFIX_ALL, 'v' );
 
 	if ( is_uploaded_file( $v_tmp_name ) ) {
+		if ( php_version_at_least( '4.2.0' ) ) {
+		    switch ( $v_error ) {
+		        case UPLOAD_ERR_INI_SIZE:
+		        case UPLOAD_ERR_FORM_SIZE:
+                    trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+		        case UPLOAD_ERR_PARTIAL:
+		        case UPLOAD_ERR_NO_FILE:
+                    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+            }
+        }
+        
+	    if ( ( '' == $v_tmp_name ) || ( '' == $v_name ) ) {
+		    trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+        }
 		if ( !file_type_check( $v_name ) ) {
 			trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
 		}
 
-		if ( !is_readable( $v_tmp_name ) && DISK != config_get( 'file_upload_method' ) ) {
+		if ( !is_readable( $v_tmp_name ) ) {
 			trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
 		}
 
@@ -64,14 +78,11 @@
 		# prepare variables for insertion
 		$c_file_name = db_prepare_string( $v_name );
 		$c_file_type = db_prepare_string( $v_type );
-		if ( is_readable ( $v_tmp_name ) ) {
-			$t_file_size = filesize( $v_tmp_name );
-		} else {
-				//try to get filesize from 'post' data
-				//@@@ fixme - this should support >1 file ?
-			global $HTTP_POST_FILES;
-			$t_file_size = $HTTP_POST_FILES['file']['size'];
-		}
+		$t_file_size = filesize( $v_tmp_name );
+		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+        if ( $t_file_size > $t_max_file_size ) {
+            trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+        }
 		$c_file_size = db_prepare_int( $t_file_size );
 
 		$t_method = config_get( 'file_upload_method' );
@@ -89,8 +100,10 @@
 				if ( file_exists( $t_disk_file_name ) ) {
 					file_delete_local( $t_disk_file_name );
 				}
-				umask( 0333 );  # make read only
-				move_uploaded_file( $v_tmp_name, $t_disk_file_name );
+				if ( !move_uploaded_file( $v_tmp_name, $t_disk_file_name ) ) {
+					trigger_error( FILE_MOVE_FAILED, ERROR );
+				}
+				chmod( $t_disk_file_name, 0400 );
 
 				$c_content = '';
 				break;

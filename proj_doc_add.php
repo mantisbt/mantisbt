@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add.php,v 1.48 2004-12-18 13:53:35 marcelloscata Exp $
+	# $Id: proj_doc_add.php,v 1.49 2005-04-05 16:26:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -30,11 +30,8 @@
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if ( !is_uploaded_file( $f_file['tmp_name'] ) || 0 == $f_file['size'] ) {
-		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
-	}
-
-	file_add( 0, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'project', $f_title, $f_description );
+    $f_file_error =  ( isset( $f_file['error'] ) ) ? $f_file['error'] : 0;
+	file_add( 0, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'project', $f_file_error, $f_title, $f_description );
 
 	$t_redirect_url = 'proj_doc_page.php';
 

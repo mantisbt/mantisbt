@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.44 2005-03-14 11:41:22 vboctor Exp $
+	# $Id: constant_inc.php,v 1.45 2005-04-05 16:26:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -193,6 +193,8 @@
 	define( 'ERROR_FILE_NOT_ALLOWED',				501 );
 	define( 'ERROR_FILE_DUPLICATE',					502 );
 	define( 'ERROR_FILE_INVALID_UPLOAD_PATH',		503 );
+	define( 'ERROR_FILE_NO_UPLOAD_FAILURE',		    504 );
+	define( 'ERROR_FILE_MOVE_FAILED',		    505 );
 
 	# ERROR_BUGNOTE_*
 	define( 'ERROR_BUGNOTE_NOT_FOUND',				600 );
