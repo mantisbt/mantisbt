@@ -245,7 +245,7 @@
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_menu( $p_page="" ) {
 		global 	$g_manage_page,
-				$s_manage_users_link, $s_manage_projects_link
+				$s_manage_users_link, $s_manage_projects_link,
 				$g_manage_create_user_page, $s_create_new_account_link,
 				$g_manage_project_menu_page, $s_projects,
 				$g_documentation_page, $s_documentation_link;
