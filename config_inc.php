@@ -89,6 +89,7 @@
 	# set to 0 to disable email check
 	$g_validate_email            = 1;
 	$g_check_mx_record           = 1;
+       $g_hide_user_email              =0;
 
 	################################
 	### Mantis Language Settings ###

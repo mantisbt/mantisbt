@@ -25,7 +25,7 @@
 			$t_username	= db_result( $result, 0, 0 );
 			$t_email	= db_result( $result, 0, 1 );
 
-			PRINT "<a href=\"mailto:$t_email\">".$t_username."</a>";
+                      print_email_link($t_email,$t_username);
 		}
 		else {
 			PRINT $s_user_no_longer_exists;
@@ -587,12 +587,17 @@
 	### --------------------
 	# print a mailto: href link
 	function print_email_link( $p_email, $p_text ) {
-		PRINT "<a href=\"mailto:$p_email\">$p_text</a>";
+		PRINT get_email_link($p_email,$p_text);
 	}
 	### --------------------
 	# return the mailto: href string link instead of printing it
 	function get_email_link( $p_email, $p_text ) {
-		return "<a href=\"mailto:$p_email\">$p_text</a>";
+		global $g_hide_user_email;
+              if($g_hide_user_email){
+                return "$p_text";
+              }else{
+                return "<a href=\"mailto:$p_email\">$p_text</a>";
+              }
 	}
 	### --------------------
 	# print our standard mysql query error
