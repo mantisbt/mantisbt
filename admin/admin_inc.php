@@ -15,5 +15,9 @@
 		$t_custom_config = $t_mantis_path . 'config_inc.php';
 	}
 	
+	if ( file_exists( $t_custom_config ) ) {
+		include ( $t_custom_config );
+	}
+
 	require $t_mantis_path . 'core_database_API.php';
 ?>
