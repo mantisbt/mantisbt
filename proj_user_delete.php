@@ -12,7 +12,7 @@
 
 	$result = proj_user_delete( $g_project_cookie_val, $f_user_id );
 
-    $t_redirect_url = $g_proj_user_menu_page;
+    $t_redirect_url = 'proj_user_menu_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

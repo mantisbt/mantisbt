@@ -10,7 +10,7 @@
 
 	# Check for invalid access to signup page
 	if ( OFF == $g_allow_signup ) {
-		print_header_redirect( $g_login_page );
+		print_header_redirect( 'login_page.php' );
 		exit;
 	}
 ?>
@@ -33,11 +33,11 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_signup ?>">
+		<form method="post" action="signup.php">
 		<?php echo $s_signup_title ?>
 	</td>
 	<td class="right">
-		<?php print_bracket_link( $g_login_page, $s_go_back ) ?>
+		<?php print_bracket_link( 'login_page.php', $s_go_back ) ?>
 	</td>
 </tr>
 <tr class="row-1">

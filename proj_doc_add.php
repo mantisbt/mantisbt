@@ -53,7 +53,7 @@
 		$result = db_query( $query );
 	}
 
-	$t_redirect_url = $g_proj_doc_page;
+	$t_redirect_url = 'proj_doc_page.php';
 ?>
 <?php print_page_top1() ?>
 <?php

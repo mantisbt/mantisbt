@@ -21,7 +21,7 @@
 		$result = proj_user_add( $g_project_cookie_val, $t_user_id, $f_access_level );
 	}
 
-	$t_redirect_url = $g_proj_user_menu_page;
+	$t_redirect_url = 'proj_user_menu_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

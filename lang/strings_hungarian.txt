@@ -59,6 +59,7 @@
   $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'HIBA: Ez a kategória már létezik.';
   $MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'HIBA: Ez a verzió már létezik.';
   $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'HIBA: Ez a file már létezik, elõször törölni kell.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
   $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HIBA: Egy szükséges mezõ üresen maradt, ellenõrizze a bevitt adatokat.';
   $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'HIBA: Ez fiók védett.  A fiók csak a védelem eltávolítása után érhetô el.';
 

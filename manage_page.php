@@ -59,7 +59,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( $g_manage_page ) ?>
+<?php print_manage_menu( 'manage_page.php' ) ?>
 
 <?php # New Accounts Form BEGIN ?>
 <?php
@@ -108,7 +108,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo $s_never_logged_in_title ?> [<?php echo $user_count ?>] <?php print_bracket_link( $g_manage_prune, $s_prune_accounts ) ?>
+		<?php echo $s_never_logged_in_title ?> [<?php echo $user_count ?>] <?php print_bracket_link( 'manage_prune.php', $s_prune_accounts ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -154,7 +154,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		<?php echo $s_manage_accounts_title ?> [<?php echo $user_count ?>]
 	</td>
 	<td class="center" colspan="2">
-		<form method="post" action="<?php echo $g_manage_page ?>">
+		<form method="post" action="manage_page.php">
 		<input type="hidden" name="f_save" value="1">
 		<input type="checkbox" name="f_hide" <?php if ( 1 == $f_hide ) echo 'CHECKED' ?>> <?php echo $s_hide_inactive ?>
 		<input type="submit" value="<?php echo $s_filter_button ?>">
@@ -163,31 +163,31 @@ for ($i=0;$i<$new_user_count;$i++) {
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_username, 'username', $f_dir, $f_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_username, 'username', $f_dir, $f_hide ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'username' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_email, 'email', $f_dir, $f_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_email, 'email', $f_dir, $f_hide ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'email' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_access_level, 'access_level', $f_dir, $f_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_access_level, 'access_level', $f_dir, $f_hide ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'access_level' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_enabled, 'enabled', $f_dir, $f_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_enabled, 'enabled', $f_dir, $f_hide ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'enabled' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_p, 'protected', $f_dir, $f_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_p, 'protected', $f_dir, $f_hide ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'protected' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_date_created, 'date_created', $f_dir, $f_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_date_created, 'date_created', $f_dir, $f_hide ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'date_created' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_last_visit, 'last_visit', $f_dir, $f_hide ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_last_visit, 'last_visit', $f_dir, $f_hide ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'last_visit' ) ?>
 	</td>
 </tr>
@@ -205,7 +205,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 ?>
 <tr>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<a href="<?php echo $g_manage_user_page.'?f_id='.$u_id ?>"><?php echo $u_username ?></a>
+		<a href="manage_user_page.php?f_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php print_email_link( $u_email, $u_email ) ?>

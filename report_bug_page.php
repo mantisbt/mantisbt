@@ -12,11 +12,11 @@
 <?php
 	# these pages are invalid for the 'All Project' selection
 	if ( '0000000' == $g_project_cookie_val ) {
-		print_header_redirect( $g_login_select_proj_page );
+		print_header_redirect( 'login_select_proj_page.php' );
 	}
 
 	if ( ADVANCED_ONLY == $g_show_report ) {
-		print_header_redirect ( $g_report_bug_advanced_page );
+		print_header_redirect ( 'report_bug_advanced_page.php' );
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -40,14 +40,14 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="<?php echo $g_report_add ?>">
+		<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="report_add.php">
 		<input type="hidden" name="f_assign_id" value="0000000">
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">
 		<?php
 			if ( BOTH == $g_show_report ) {
-				print_bracket_link( $g_report_bug_advanced_page, $s_advanced_report_link );
+				print_bracket_link( 'report_bug_advanced_page.php', $s_advanced_report_link );
 			}
 		?>
 	</td>

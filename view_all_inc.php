@@ -2,7 +2,7 @@
 <table class="width100" cellspacing="0">
 <tr class="row-category2">
     <td class="small-caption">
-		<form method="post" action="<?php echo $g_view_all_set ?>?f=3">
+		<form method="post" action="view_all_set.php?f=3">
 		<input type="hidden" name="f_type" value="1">
 		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
 		<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
@@ -139,7 +139,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="<?php echo $col_count ?>">
-		<form method="post" action="<?php echo $g_view_all_bug_update ?>">
+		<form method="post" action="view_all_bug_update.php">
 		<?php echo $s_viewing_bugs_title ?>
 		<?php
 			if ( $row_count > 0 ) {
@@ -151,7 +151,7 @@
 			}
 			PRINT "($v_start - $v_end / $t_query_count)";
 		?>
-		<span class="small"><?php print_bracket_link( $g_print_all_bug_page, $s_print_all_bug_page_link ) ?></span>
+		<span class="small"><?php print_bracket_link( 'print_all_bug_page.php', $s_print_all_bug_page_link ) ?></span>
 	</td>
 	<td class="right">
 		[
@@ -162,7 +162,7 @@
 					PRINT "$i&nbsp;";
 				} else {
 					$f_search = urlencode( $f_search );
-					PRINT "<a href=\"$g_view_all_bug_page?f_page_number=$i&amp;f_search=$f_search\">$i</a>&nbsp;";
+					PRINT "<a href=\"view_all_bug_page.php?f_page_number=$i&amp;f_search=$f_search\">$i</a>&nbsp;";
 				}
 			}
 		?>
@@ -340,7 +340,7 @@
 	# print the [ prev ] link
 	if ($f_page_number > 1) {
 		$t_prev_page_number = $f_page_number - 1;
-		print_bracket_link( $g_view_all_bug_page.'?f_page_number='.$t_prev_page_number, $s_view_prev_link.' '.$f_per_page );
+		print_bracket_link( 'view_all_bug_page.php?f_page_number='.$t_prev_page_number, $s_view_prev_link.' '.$f_per_page );
 	} else {
 		print_bracket_link( '', $s_view_prev_link.' '.$f_per_page );
 	}
@@ -348,7 +348,7 @@
 	# print the [ next ] link
 	if ($f_page_number < $t_page_count) {
 		$t_next_page_number = $f_page_number + 1;
-		print_bracket_link( $g_view_all_bug_page.'?f_page_number='.$t_next_page_number, $s_view_next_link.' '.$f_per_page );
+		print_bracket_link( 'view_all_bug_page.php?f_page_number='.$t_next_page_number, $s_view_next_link.' '.$f_per_page );
 	} else {
 		print_bracket_link( '', $s_view_next_link.' '.$f_per_page );
 	}

@@ -17,7 +17,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" enctype="multipart/form-data" action="<?php echo $g_bug_file_add ?>">
+		<form method="post" enctype="multipart/form-data" action="bug_file_add.php">
 		<?php echo $s_upload_file ?>
 	</td>
 </tr>

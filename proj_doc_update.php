@@ -19,7 +19,7 @@
 			WHERE id='$c_id'";
 	$result = db_query( $query );
 
-	$t_redirect_url = $g_proj_doc_page;
+	$t_redirect_url = 'proj_doc_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

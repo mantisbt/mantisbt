@@ -42,7 +42,7 @@
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $g_news_menu_page, $s_proceed );
+	print_bracket_link( 'news_menu_page.php', $s_proceed );
 ?>
 </div>
 

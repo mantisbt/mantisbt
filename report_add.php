@@ -12,7 +12,7 @@
 <?php
 	# these pages are invalid for the 'All Project' selection
 	if ( '0000000' == $g_project_cookie_val ) {
-		print_header_redirect( $g_login_select_proj_page );
+		print_header_redirect( 'login_select_proj_page.php' );
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -104,11 +104,11 @@
 		$c_assign_id 		= (integer)$f_assign_id;
 		$c_severity 		= (integer)$f_severity;
 		$c_reproducibility 	= (integer)$f_reproducibility;
-		$c_category 		= addslashes($f_category);
 		$c_view_state 		= (integer)$f_view_state;
-		$c_product_version 	= addslashes($f_product_version);
 		$c_profile_id		= (integer)$f_profile_id;
 		$c_priority 		= (integer)$f_priority;
+		$c_category 		= addslashes($f_category);
+		$c_product_version 	= addslashes($f_product_version);
 
 		# check to see if we want to assign this right off
 		$t_status = NEW_;
@@ -208,7 +208,7 @@
 <?php print_page_top1() ?>
 <?php
 	if ( ( !$check_failed )&&( $result )&&( !isset( $f_report_stay ) ) ) {
-		print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
+		print_meta_redirect( 'view_all_bug_page.php', $g_wait_time );
 	}
 ?>
 <?php print_page_top2() ?>
@@ -221,19 +221,19 @@
 	if ( $check_failed ) {
 		PRINT '<span class="bold">'.$MANTIS_ERROR[ERROR_REPORT].'</span><p>';
 		if ( empty( $f_category ) ) {
-			PRINT "$s_must_enter_category<br />";
+			PRINT $s_must_enter_category.'<br />';
 		}
 		if ( empty( $f_severity ) ) {
-			PRINT "$s_must_enter_severity<br />";
+			PRINT $s_must_enter_severity.'<br />';
 		}
 		if ( empty( $f_reproducibility ) ) {
-			PRINT "$s_must_enter_reproducibility<br />";
+			PRINT $s_must_enter_reproducibility.'<br />';
 		}
 		if ( empty( $f_summary ) ) {
-			PRINT "$s_must_enter_summary<br />";
+			PRINT $s_must_enter_summary.'<br />';
 		}
 		if ( empty( $f_description ) ) {
-			PRINT "$s_must_enter_description<br />";
+			PRINT $s_must_enter_description.'<br />';
 		}
 ?>
 		<p>
@@ -279,7 +279,7 @@
 		} else {
 			$t_view_bug_url = get_view_redirect_url( $t_bug_id, 1 );
 			print_bracket_link( $t_view_bug_url, $s_view_submitted_bug_link.' '.$t_bug_id );
-			print_bracket_link( $g_view_all_bug_page, $s_view_bugs_link );
+			print_bracket_link( 'view_all_bug_page.php', $s_view_bugs_link );
 		}
 	}
 ?>

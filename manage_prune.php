@@ -18,7 +18,7 @@
 			WHERE login_count=0 AND TO_DAYS(NOW()) - '$days_old' > TO_DAYS(date_created)";
 	$result = db_query($query);
 
-	$t_redirect_url = $g_manage_page;
+	$t_redirect_url = 'manage_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

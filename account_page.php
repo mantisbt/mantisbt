@@ -39,11 +39,11 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_account_update ?>">
+		<form method="post" action="account_update.php">
 		<?php echo $s_edit_account_title ?>
 	</td>
 	<td class="right">
-		<?php print_account_menu( $g_account_page ) ?>
+		<?php print_account_menu( 'account_page.php' ) ?>
 	</td>
 </tr>
 <?php # using LDAP accounts
@@ -115,7 +115,7 @@
 		</form>
 	</td>
 	<td class="center">
-		<form method="post" action="<?php echo $g_account_delete_page ?>">
+		<form method="post" action="account_delete_page.php">
 		<input type="submit" value="<?php echo $s_delete_account_button ?>">
 		</form>
 	</td>
@@ -189,7 +189,7 @@
 		if ( ON == $g_allow_account_delete ) {
 ?>
 	<td class="right">
-		<form method="post" action="<?php echo $g_account_delete_page ?>">
+		<form method="post" action="account_delete_page.php">
 		<input type="submit" value="<?php echo $s_delete_account_button ?>">
 		</form>
 	</td>

@@ -12,7 +12,7 @@
 
 	# these pages are invalid for the 'All Project' selection
 	if ( '0000000' == $g_project_cookie_val ) {
-		print_header_redirect( $g_login_select_proj_page );
+		print_header_redirect( 'login_select_proj_page.php' );
 	}
 
 	check_varset( $f_sort, 'username' );
@@ -56,7 +56,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">
-		<form method="post" action="<?php echo $g_proj_user_add ?>">
+		<form method="post" action="proj_user_add.php">
 		<?php echo $s_add_user_title ?>
 	</td>
 </tr>
@@ -96,15 +96,15 @@
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_username, 'username', $f_dir ) ?>
+		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_username, 'username', $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'username' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_email, 'email', $f_dir ) ?>
+		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_email, 'email', $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'email' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_access_level, 'access_level', $f_dir ) ?>
+		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_access_level, 'access_level', $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'access_level' ) ?>
 	</td>
 	<td>
@@ -153,7 +153,7 @@
 	<td class="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php
 			if ( is_removable_proj_user( $u_id ) ) {
-				print_bracket_link( $g_proj_user_delete.'?f_user_id='.$u_id, $s_remove_link );
+				print_bracket_link( 'proj_user_delete.php?f_user_id='.$u_id, $s_remove_link );
 			}
 		?>
 	</td>

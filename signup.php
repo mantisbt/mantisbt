@@ -10,7 +10,7 @@
 
 	# Check to see if signup is allowed
 	if ( OFF == $g_allow_signup ) {
-		print_header_redirect( $g_login_page );
+		print_header_redirect( 'login_page.php' );
 		exit;
 	}
 
@@ -24,8 +24,8 @@
 	# Check for a properly formatted email with valid MX record
 	$result = 0;
 	if ( !is_valid_email( $f_email ) ) {
-		PRINT "$f_email $s_invalid_email<p>";
-		PRINT "<a href=\"$g_signup_page\">$s_proceed</a>";
+		PRINT $f_email.' '.$s_invalid_email.'<p>';
+		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
 		exit;
 	}
 
@@ -35,15 +35,15 @@
 		WHERE username='$c_username'";
     $result = db_query( $query );
     if ( db_num_rows( $result ) > 0 ) {
-    	PRINT "$f_username $s_duplicate_username<p>";
-		PRINT "<a href=\"$g_signup_page\">$s_proceed</a>";
+    	PRINT $f_username $s_duplicate_username.'<p>';
+		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
     	exit;
     }
 
 	# Passed our checks.  Insert into DB then send email.
 	if ( !signup_user( $f_username, $f_email ) ) {
-		PRINT "$s_account_create_fail<p>";
-		PRINT "<a href=\"$g_signup_page\">$s_proceed</a>";
+		PRINT $s_account_create_fail.'<p>';
+		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
 		exit;
 	}
 ?>
@@ -64,7 +64,7 @@
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $g_login_page, $s_proceed );
+	print_bracket_link( 'login_page.php', $s_proceed );
 ?>
 </div>
 

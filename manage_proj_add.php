@@ -28,7 +28,7 @@
 	    $result = db_query( $query );
 	}
 
-	$t_redirect_url = $g_manage_project_menu_page;
+	$t_redirect_url = 'manage_proj_menu_page.php';
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -42,9 +42,9 @@
 <div align="center">
 <?php
 	if ( $result ) {					# SUCCESS
-		PRINT "$s_operation_successful<p>";
+		PRINT $s_operation_successful.'<p>';
 	} else if ( $duplicate ) {			# DUPLICATE
-		PRINT "There was a duplicate project.<p>";
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT].'<p>';
 	} else {							# FAILURE
 		print_sql_error( $query );
 	}

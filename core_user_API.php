@@ -14,7 +14,6 @@
 	# if $p_redirect_url is specifed then redirect them to that page
 	function login_cookie_check( $p_redirect_url='', $p_return_page='' ) {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$g_login_page, $g_logout_page, $g_login_select_proj_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table, $REQUEST_URI;
 
@@ -26,7 +25,7 @@
 			$t_enabled = get_current_user_field( 'enabled' );
 			# check for access enabled
 			if ( OFF == $t_enabled ) {
-				print_header_redirect( $g_logout_page );
+				print_header_redirect( 'logout_page.php' );
 			}
 
 			# update last_visit date
@@ -35,14 +34,12 @@
 
 			# if no project is selected then go to the project selection page
 			if ( empty( $g_project_cookie_val ) ) {
-				print_header_redirect( $g_login_select_proj_page );
-				exit;
+				print_header_redirect( 'login_select_proj_page.php' );
 			}
 
 			# go to redirect if set
 			if ( !empty( $p_redirect_url ) ) {
 				print_header_redirect( $p_redirect_url );
-				exit;
 			} else {			# continue with current page
 				return;
 			}
@@ -51,8 +48,7 @@
 				$p_return_page = $REQUEST_URI;
 			}
 			$p_return_page = htmlentities(urlencode($p_return_page));
-			print_header_redirect( $g_login_page . '?f_return=' . $p_return_page );
-			exit;
+			print_header_redirect( 'login_page.php?f_return='.$p_return_page );
 		}
 	}
 	# --------------------
@@ -61,15 +57,13 @@
 	# otherwise redirects to the login page
 	function index_login_cookie_check( $p_redirect_url='' ) {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$g_login_page, $g_logout_page, $g_login_select_proj_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
 			if ( empty( $g_project_cookie_val ) ) {
-				print_header_redirect( $g_login_select_proj_page );
-				exit;
+				print_header_redirect( 'login_select_proj_page.php' );
 			}
 
 			# set last visit cookie
@@ -81,7 +75,7 @@
 
 			# check for acess enabled
 			if ( OFF == $t_enabled ) {
-				print_header_redirect( $g_login_page );
+				print_header_redirect( 'login_page.php' );
 			}
 
 			# update last_visit date
@@ -91,13 +85,11 @@
 			# go to redirect
 			if ( !empty( $p_redirect_url ) ) {
 				print_header_redirect( $p_redirect_url );
-				exit;
 			} else {			# continue with current page
 				return;
 			}
 		} else {				# not logged in
-			print_header_redirect( $g_login_page );
-			exit;
+			print_header_redirect( 'login_page.php' );
 		}
 	}
 	# --------------------
@@ -105,7 +97,6 @@
 	# redirect to logout_page if fail
 	function login_user_check_only() {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$g_login_page, $g_logout_page, $g_login_select_proj_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
@@ -117,12 +108,11 @@
 			$t_enabled = get_current_user_field( 'enabled' );
 			# check for acess enabled
 			if ( OFF == $t_enabled ) {
-				print_header_redirect( $g_logout_page );
+				print_header_redirect( 'logout_page.php' );
 			}
 			db_close();
 		} else {				# not logged in
-			print_header_redirect( $g_login_page );
-			exit;
+			print_header_redirect( 'login_page.php' );
 		}
 	}
 	# --------------------
@@ -397,7 +387,7 @@
 		}
 	}
     # Checks if the access level is greater than or equal the specified access level
-	# The return will be true for administrators, will be the project-specific access 
+	# The return will be true for administrators, will be the project-specific access
 	# right if found, or the default if project is PUBLIC and no specific access right
 	# found, otherwise, (private/not found) will return false
 	function access_level_ge_no_default_for_private ( $p_access_level, $p_project_id ) {
@@ -463,16 +453,13 @@
 	# --------------------
 	# Checks to see if the user should be here.  If not then log the user out.
 	function check_access( $p_access_level ) {
-		global $g_logout_page;
-
 		# Administrators ALWAYS pass.
 		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return;
 		}
 		if ( !access_level_check_greater_or_equal( $p_access_level ) ) {
 			# need to replace with access error page
-			print_header_redirect( $g_logout_page );
-			exit;
+			print_header_redirect( 'logout_page.php' );
 		}
 	}
 	# --------------------
@@ -480,9 +467,8 @@
 	# If not then log the user out
 	# If not logged into the project it attempts to log you into that project
 	function project_access_check( $p_bug_id, $p_project_id='0' ) {
-		global	$g_logout_page, $g_mantis_project_user_list_table,
+		global	$g_mantis_project_user_list_table,
 				$g_mantis_project_table, $g_mantis_bug_table,
-				$g_login_select_proj_page,
 				$g_project_cookie_val;
 
 		project_check( $p_bug_id );
@@ -503,7 +489,7 @@
 			# private projects require users to be assigned
 			$t_project_access_level = get_project_access_level( $t_project_id );
 			if ( -1 == $t_project_access_level ) {
-				print_header_redirect( $g_login_select_proj_page );
+				print_header_redirect( 'login_select_proj_page.php' );
 			} else {
 				return;
 			}

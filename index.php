@@ -7,11 +7,11 @@
 <?php include( 'core_API.php' ) ?>
 <?php
 	if ( BASIC_AUTH == $g_login_method ) {
-		print_header_redirect( $g_login );
+		print_header_redirect( 'login.php' );
 	} else {
 		# Only place this function is called
 		# Other pages use login_cookie_check()
-		index_login_cookie_check( $g_main_page );
+		index_login_cookie_check( 'main_page.php' );
 	}
 ?>
 <?php print_page_top1() ?>
@@ -20,7 +20,7 @@
 
 <p>
 <div align="center">
-	<a href="<?php echo $g_login_page ?>"><?php echo $s_click_to_login ?></a>
+	<a href="login_page.php"><?php echo $s_click_to_login ?></a>
 </div>
 
 <?php print_bottom_page( $g_bottom_include_page ) ?>

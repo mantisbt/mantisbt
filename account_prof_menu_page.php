@@ -33,12 +33,12 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_account_profile_add ?>">
+		<form method="post" action="account_prof_add.php">
 		<input type="hidden" name="f_user_id" value="<?php echo get_current_user_field( 'id' ) ?>">
 		<?php echo $s_add_profile_title ?>
 	</td>
 	<td class="right">
-		<?php print_account_menu( $g_account_profile_menu_page ) ?>
+		<?php print_account_menu( 'account_prof_menu_page.php' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -90,7 +90,7 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_account_profile_edit_page ?>">
+<form method="post" action="account_prof_edit_page.php">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo $s_edit_or_delete_profiles_title ?>

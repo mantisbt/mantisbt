@@ -14,8 +14,7 @@
 
 	# If Deleteing item redirect to delete script
 	if ( 'delete' == $f_action ) {
-		print_header_redirect( "$g_project_delete_page?f_project_id=$f_project_id" );
-		exit;
+		print_header_redirect( 'manage_proj_delete.php?f_project_id='.$f_project_id );
 	}
 
 	$c_project_id = (integer)$f_project_id;
@@ -33,14 +32,14 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( $g_manage_project_edit_page ) ?>
+<?php print_manage_menu( 'manage_proj_edit_page.php' ) ?>
 
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="<?php echo $g_manage_project_update ?>">
+		<form method="post" action="manage_proj_update.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<?php echo $s_edit_project_title ?>
 	</td>
@@ -103,7 +102,7 @@
 	</td>
 	<td class="right">
        <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { ?>
-		<form method="post" action="<?php echo $g_manage_project_delete_page?>">
+		<form method="post" action="manage_proj_delete_page.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="submit" value="<?php echo $s_delete_project_button ?>">
 		</form>
@@ -146,9 +145,9 @@
 			</td>
 			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
 				<?php
-					print_bracket_link( $g_manage_project_category_edit_page.'?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_edit_link );
+					print_bracket_link( 'manage_proj_cat_edit_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_edit_link );
 					PRINT '&nbsp;';
-					print_bracket_link( $g_manage_project_category_delete_page.'?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_remove_link );
+					print_bracket_link( 'manage_proj_cat_del_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_remove_link );
 				?>
 			</td>
 		</tr>
@@ -158,7 +157,7 @@
 </tr>
 <tr>
 	<td class="left">
-		<form method="post" action="<?php echo $g_manage_project_category_add ?>">
+		<form method="post" action="manage_proj_cat_add.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="text" name="f_category" size="32" maxlength="64">
 		<input type="submit" value="<?php echo $s_add_category_button ?>">
@@ -167,7 +166,7 @@
 </tr>
 <tr>
 	<td class="left">
-		<form method="post" action="<?php echo $g_manage_project_category_copy ?>">
+		<form method="post" action="manage_proj_cat_copy.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<select name="f_other_project_id">
 			<?php print_project_option_list() ?>
@@ -211,10 +210,10 @@
 				<?php echo $t_date_order ?>
 			</td>
 			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
-				<?php 
-					print_bracket_link( $g_manage_project_version_edit_page.'?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_edit_link );
+				<?php
+					print_bracket_link( 'manage_proj_ver_edit_page.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_edit_link );
 					PRINT '&nbsp;';
-					print_bracket_link( $g_manage_project_version_delete_page.'?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_remove_link );
+					print_bracket_link( 'manage_proj_ver_del_page.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_remove_link );
 				?>
 			</td>
 		</tr>
@@ -224,7 +223,7 @@
 </tr>
 <tr>
 	<td class="left">
-		<form method="post" action="<?php echo $g_manage_project_version_add ?>">
+		<form method="post" action="manage_proj_ver_add.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="text" name="f_version" size="32" maxlength="64">
 		<input type="submit" value="<?php echo $s_add_version_button ?>">

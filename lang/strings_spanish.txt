@@ -59,6 +59,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'ERROR: Esta es una categoria duplicada.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ERROR: Esta es una version duplicada.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: Este es un archivo duplicado. Por favor borre el archivo primero.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: Un campo necesario estaba vacio. Por favor compruebe los datos.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: Esta cuenta esta protegida. Ud. no tiene permitido accesar esto hasta que la proteccion de la cuenta haya sido retirada.';
 

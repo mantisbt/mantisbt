@@ -99,15 +99,15 @@
 <p>
 <div align="center">
 <?php
-	print_bracket_link( $g_news_list_page, $s_archives );
+	print_bracket_link( 'news_list_page.php', $s_archives );
 	$f_offset_next = $f_offset + $g_news_view_limit;
 	$f_offset_prev = $f_offset - $g_news_view_limit;
 
 	if ( $f_offset_prev >= 0) {
-		print_bracket_link( $g_main_page.'?f_offset='.$f_offset_prev, $s_newer_news_link );
+		print_bracket_link( 'main_page.php?f_offset='.$f_offset_prev, $s_newer_news_link );
 	}
 	if ( $news_count == $g_news_view_limit ) {
-		print_bracket_link( $g_main_page.'?f_offset='.$f_offset_next, $s_older_news_link );
+		print_bracket_link( 'main_page.php?f_offset='.$f_offset_next, $s_older_news_link );
 	}
 ?>
 </div>

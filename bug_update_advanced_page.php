@@ -11,7 +11,7 @@
 <?php login_cookie_check() ?>
 <?php
 	if ( SIMPLE_ONLY == $g_show_update ) {
-		print_header_redirect ( $g_bug_update_page.'?f_id='.$f_id );
+		print_header_redirect ( 'bug_update_page.php?f_id='.$f_id );
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -51,7 +51,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<form method="post" action="<?php echo $g_bug_update ?>">
+		<form method="post" action="bug_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
 		<input type="hidden" name="f_old_status" value="<?php echo $v_status ?>">
 		<input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>">
@@ -60,16 +60,16 @@
 	<td class="right" colspan="3">
 <?php
 	switch ( $g_show_view ) {
-		case 0: print_bracket_link( $g_view_bug_advanced_page.'?f_id='.$f_id, $s_back_to_bug_link );
+		case 0: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_back_to_bug_link );
 				break;
-		case 1: print_bracket_link( $g_view_bug_page.'?f_id='.$f_id, $s_back_to_bug_link );
+		case 1: print_bracket_link( 'view_bug_page.php?f_id='.$f_id, $s_back_to_bug_link );
 				break;
-		case 2: print_bracket_link( $g_view_bug_advanced_page.'?f_id='.$f_id, $s_back_to_bug_link );
+		case 2: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_back_to_bug_link );
 				break;
 	}
 
 	if ( BOTH == $g_show_update ) {
-		print_bracket_link( $g_bug_update_page.'?f_id='.$f_id, $s_update_simple_link );
+		print_bracket_link( 'bug_update_page.php?f_id='.$f_id, $s_update_simple_link );
 	}
 ?>
 	</td>

@@ -29,7 +29,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_proj_doc_update ?>">
+		<form method="post" action="proj_doc_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<?php echo $s_upload_file_title ?>
 	</td>
@@ -67,7 +67,7 @@
 		</form>
 	</td>
 	<td class="right">
-		<form method="post" action="<?php echo $g_proj_doc_delete_page ?>">
+		<form method="post" action="proj_doc_delete_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<input type="submit" value="<?php echo $s_file_delete_button ?>">
 		</form>

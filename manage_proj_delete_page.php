@@ -18,7 +18,7 @@
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $s_project_delete_msg ?>
 
-	<form method="post" action="<?php echo $g_manage_project_delete ?>">
+	<form method="post" action="manage_proj_delete.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="submit" value="<?php echo $s_project_delete_button ?>">
 	</form>

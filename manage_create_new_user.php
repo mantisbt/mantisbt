@@ -24,7 +24,7 @@
     $result = db_query( $query );
     if ( db_num_rows( $result ) > 0 ) {
     	PRINT "$f_username $s_duplicate_username<p>";
-		PRINT "<a href=\"$g_manage_create_user_page\">$s_proceed</a>";
+		PRINT "<a href=\"manage_create_user_page.php\">$s_proceed</a>";
     	exit;
     }
 
@@ -86,7 +86,7 @@
     		'$g_default_email_on_priority', '$g_default_language')";
     $result = db_query($query);
 
-    $t_redirect_url = $g_manage_page;
+    $t_redirect_url = 'manage_page.php';
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

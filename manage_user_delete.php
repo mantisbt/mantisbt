@@ -37,7 +37,7 @@
 	    $result = db_query( $query );
     }
 
-    $t_redirect_url = $g_manage_page;
+    $t_redirect_url = 'manage_page.php';
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -51,9 +51,9 @@
 <div align="center">
 <?php
 	if ( "on" == $f_protected ) {				# PROTECTED
-		PRINT "$s_account_delete_protected_msg<p>";
+		PRINT $s_account_delete_protected_msg.'<p>';
 	} else if ( $result ) {						# SUCCESS
-		PRINT "$s_operation_successful<p>";
+		PRINT $s_operation_successful.'<p>';
 	} else {									# FAILURE
 		print_sql_error( $query );
 	}

@@ -18,7 +18,7 @@
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $s_version_delete_sure ?>
 
-	<form method="post" action="<?php echo $g_manage_project_version_delete ?>">
+	<form method="post" action="manage_proj_ver_delete.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="hidden" name="f_version" value="<?php echo $f_version ?>">
 		<input type="submit" value="<?php echo $s_delete_version_button ?>">

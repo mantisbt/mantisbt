@@ -54,7 +54,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_summary_menu( $g_summary_jpgraph_page ) ?>
+<?php print_summary_menu( 'summary_jpgraph_page.php' ) ?>
 
 <p>
 <table class="width100" cellspacing="1">
@@ -65,34 +65,34 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="<?php echo $g_summary_jpgraph_cumulative_bydate ?>" border="0">
+		<img src="summary_graph_cumulative_bydate.php" border="0">
 	</td>
 	<td width="50%">
-		<img src="<?php echo $g_summary_jpgraph_bydeveloper ?>" border="0">
-	</td>
-</tr>
-<tr valign="top">
-	<td width="50%">
-		<img src="<?php echo $g_summary_jpgraph_byreporter ?>" border="0">
-	</td>
-	<td width="50%">
-		<img src="<?php echo $g_summary_jpgraph_byseverity ?>" border="0">
+		<img src="summary_graph_bydeveloper.php" border="0">
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="<?php echo $g_summary_jpgraph_bystatus ?>" border="0">
+		<img src="summary_jpgraph_byreporter.php" border="0">
 	</td>
 	<td width="50%">
-		<img src="<?php echo $g_summary_jpgraph_byresolution ?>" border="0">
+		<img src="summary_jpgraph_byseverity.php" border="0">
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="<?php echo $g_summary_jpgraph_bycategory ?>" border="0">
+		<img src="summary_jpgraph_bystatus.php" border="0">
 	</td>
 	<td width="50%">
-		<img src="<?php echo $g_summary_jpgraph_bypriority ?>" border="0">
+		<img src="summary_jpgraph_byresolution.php" border="0">
+	</td>
+</tr>
+<tr valign="top">
+	<td width="50%">
+		<img src="summary_jpgraph_bycategory.php" border="0">
+	</td>
+	<td width="50%">
+		<img src="summary_jpgraph_bypriority.php" border="0">
 	</td>
 </tr>
 </table>

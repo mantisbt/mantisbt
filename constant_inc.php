@@ -130,6 +130,7 @@
 	define( 'ERROR_DUPLICATE_CATEGORY',   7 );
 	define( 'ERROR_DUPLICATE_VERSION',    8 );
 	define( 'ERROR_DUPLICATE_FILE',       9 );
-	define( 'ERROR_EMPTY_FIELD',         10 );
-	define( 'ERROR_PROTECTED_ACCOUNT',   11 );
+	define( 'ERROR_DUPLICATE_PROJECT',   10 );
+	define( 'ERROR_EMPTY_FIELD',         11 );
+	define( 'ERROR_PROTECTED_ACCOUNT',   12 );
 ?>

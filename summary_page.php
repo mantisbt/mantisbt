@@ -55,7 +55,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_summary_menu( $g_summary_page ) ?>
+<?php print_summary_menu( 'summary_page.php' ) ?>
 
 <p>
 <table class="width100" cellspacing="1">

@@ -58,6 +58,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'EROARE: Aceasta categorie exista deja.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'EROARE: Aceasta versiune exista deja.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'EROARE: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'EROARE: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'EROARE: Acest cont este protejat si nu poate fi accesat pana in momentul in care protectia este ridicata.';
 

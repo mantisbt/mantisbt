@@ -60,6 +60,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'FOUT: Deze categorie bestaat al.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'FOUT: Deze versie bestaat al.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FOUT: Dit bestand bestaat al. Verwijder het bestand eerst.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FOUT: Een benodigd veld is niet ingevuld. Controleer a.u.b. uw invoer.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 

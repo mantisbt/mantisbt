@@ -49,6 +49,7 @@ Mantis
  * Made 'light grey' the default color for 'closed'.
  * Added bug history functionality.
  * Fixed defects with updating project categories and versions.
+ * Removed most file variables from default/config_inc2.php.
 
 2002.05.19  -  0.17.3
 

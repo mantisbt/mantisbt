@@ -46,7 +46,7 @@
 		}
 	} # end if protected
 
-	$t_redirect_url = $g_account_page;
+	$t_redirect_url = 'account_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

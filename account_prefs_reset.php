@@ -44,7 +44,7 @@
 			WHERE user_id='$t_user_id'";
 	$result = db_query( $query );
 
-	$t_redirect_url = $g_account_prefs_page;
+	$t_redirect_url = 'account_prefs_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

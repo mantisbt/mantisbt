@@ -66,7 +66,7 @@
 		email_close( $c_id );
 	}
 
-	$t_redirect_url = $g_view_all_bug_page;
+	$t_redirect_url = 'view_all_bug_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

@@ -80,7 +80,7 @@
     		WHERE project_id='$c_project_id'";
     $result = db_query( $query );
 
-    $t_redirect_url = $g_manage_project_menu_page;
+    $t_redirect_url = 'manage_proj_menu_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

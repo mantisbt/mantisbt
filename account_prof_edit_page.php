@@ -26,13 +26,11 @@
 
 	# If deleteing profile redirect to delete script
 	if ( 'delete' == $f_action) {
-		print_header_redirect( "$g_account_profile_delete?f_id=$f_id" );
-		exit;
+		print_header_redirect( 'account_prof_delete.php?f_id='.$f_id );
 	}
 	# If Defaulting profile redirect to make default script
 	else if ( 'make default' == $f_action ) {
-		print_header_redirect( $g_account_profile_make_default.'?f_id='.$f_id.'&amp;f_user_id='.$f_user_id );
-		exit;
+		print_header_redirect( 'account_prof_make_default.php?f_id='.$f_id.'&amp;f_user_id='.$f_user_id );
 	}
 
 	# Retrieve new item data and prefix with v_
@@ -60,7 +58,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_account_profile_update ?>">
+		<form method="post" action="account_prof_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
 		<?php echo $s_edit_profile_title ?>
 	</td>

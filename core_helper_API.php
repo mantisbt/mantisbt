@@ -91,7 +91,7 @@
 	# if it doesn't exist then redirect to the main page
 	# otherwise let execution continue undisturbed
 	function check_bug_exists( $p_bug_id ) {
-		global $g_mantis_bug_table, $g_main_page;
+		global $g_mantis_bug_table;
 
 		$c_bug_id = (integer)$p_bug_id;
 
@@ -100,7 +100,7 @@
 				WHERE id='$c_bug_id'";
 		$result = db_query( $query );
 		if ( 0 == db_num_rows( $result ) ) {
-			print_header_redirect( $g_main_page );
+			print_header_redirect( 'main_page.php' );
 		}
 	}
 	# --------------------
@@ -108,7 +108,7 @@
 	# if it doesn't exist then redirect to the main page
 	# otherwise let execution continue undisturbed
 	function check_bugnote_exists( $p_bugnote_id ) {
-		global $g_mantis_bugnote_table, $g_main_page;
+		global $g_mantis_bugnote_table;
 
 		$c_bugnote_id = (integer)$p_bugnote_id;
 
@@ -117,7 +117,7 @@
 				WHERE id='$c_bugnote_id'";
 		$result = db_query( $query );
 		if ( 0 == db_num_rows( $result ) ) {
-			print_header_redirect( $g_main_page );
+			print_header_redirect( 'main_page.php' );
 		}
 	}
 	# --------------------
@@ -125,7 +125,7 @@
 	# if it doesn't exist then redirect to the main page
 	# otherwise let execution continue undisturbed
 	function check_user_exists( $p_user_id ) {
-		global $g_mantis_user_table, $g_main_page;
+		global $g_mantis_user_table;
 
 		$c_user_id = (integer)$p_user_id;
 
@@ -134,7 +134,7 @@
 				WHERE id='$c_user_id'";
 		$result = db_query( $query );
 		if ( 0 == db_num_rows( $result ) ) {
-			print_header_redirect( $g_main_page );
+			print_header_redirect( 'main_page.php' );
 		}
 	}
 	# --------------------
@@ -142,7 +142,7 @@
 	# if it doesn't exist then redirect to the main page
 	# otherwise let execution continue undisturbed
 	function check_project_exists( $p_project_id ) {
-		global $g_mantis_project_table, $g_main_page;
+		global $g_mantis_project_table;
 
 		$c_project_id = (integer)$p_project_id;
 
@@ -151,7 +151,7 @@
 				WHERE id='$c_project_id'";
 		$result = db_query( $query );
 		if ( 0 == db_result( $result, 0, 0 ) ) {
-			print_header_redirect( $g_main_page );
+			print_header_redirect( 'main_page.php' );
 		}
 	}
 	# --------------------
@@ -249,31 +249,30 @@
 	# eg. #45  or  bug:76
 	# default is the # symbol.  You may substitue any pattern you want.
 	function process_bug_link( $p_string ) {
-		global $g_bug_link_tag, $g_view_bug_page, $g_view_bug_advanced_page;
+		global $g_bug_link_tag;
 
 		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
 			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"<a href=\"$g_view_bug_advanced_page?f_id=\\1\">#\\1</a>",
+								"<a href=\"view_bug_advanced_page.php?f_id=\\1\">#\\1</a>",
 								$p_string);
 		} else {
 			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"<a href=\"$g_view_bug_page?f_id=\\1\">#\\1</a>",
+								"<a href=\"view_bug_page.php?f_id=\\1\">#\\1</a>",
 								$p_string);
 		}
 	}
 	# --------------------
 	# process the $p_string and convert bugs in this format #123 to a plain text link
 	function process_bug_link_email( $p_string ) {
-		global	$g_view_bug_page, $g_view_bug_advanced_page,
-				$g_bug_link_tag;
+		global	$g_bug_link_tag;
 
 		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
 			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"$g_view_bug_advanced_page?f_id=\\1",
+								"view_bug_advanced_page.php?f_id=\\1",
 								$p_string);
 		} else {
 			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"$g_view_bug_page?f_id=\\1",
+								"view_bug_page.php?f_id=\\1",
 								$p_string);
 		}
 	}
@@ -431,7 +430,7 @@
 	# This function helps determine which pages to redirect to
 	# based on site and user preference.
 	function get_view_redirect_url( $p_bug_id, $p_no_referer=0 ) {
-		global $HTTP_REFERER, $g_show_view, $g_view_bug_page, $g_view_bug_advanced_page;
+		global $HTTP_REFERER, $g_show_view;
 
 		if ( ( !isset( $HTTP_REFERER ) ) ||
 			 ( empty( $HTTP_REFERER ) ) ||
@@ -439,15 +438,15 @@
 			switch ( $g_show_view ) {
 				case BOTH:
 						if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-							return $g_view_bug_advanced_page.'?f_id='.$p_bug_id;
+							return 'view_bug_advanced_page.php?f_id='.$p_bug_id;
 						} else {
-							return $g_view_bug_page.'?f_id='.$p_bug_id;
+							return 'view_bug_page.php?f_id='.$p_bug_id;
 						}
 				case SIMPLE_ONLY:
-						return $g_view_bug_page.'?f_id='.$p_bug_id;
+						return 'view_bug_page.php?f_id='.$p_bug_id;
 				case ADVANCED_ONLY:
-						return $g_view_bug_advanced_page.'?f_id='.$p_bug_id;
-				default:return $g_view_bug_page.'?f_id='.$p_bug_id;
+						return 'view_bug_advanced_page.php?f_id='.$p_bug_id;
+				default:return 'view_bug_page.php?f_id='.$p_bug_id;
 			}
 		} else {
 			return $HTTP_REFERER;
@@ -458,7 +457,7 @@
 	# This function helps determine which pages to redirect to
 	# based on site and user preference.
 	function get_report_redirect_url( $p_no_referer=0 ) {
-		global $HTTP_REFERER, $g_show_report, $g_report_bug_page, $g_report_bug_advanced_page;
+		global $HTTP_REFERER, $g_show_report;
 
 		if ( ( !isset( $HTTP_REFERER ) ) ||
 			 ( empty( $HTTP_REFERER ) ) ||
@@ -466,15 +465,15 @@
 			switch( $g_show_report ) {
 				case BOTH:
 						if ( ON == get_current_user_pref_field( 'advanced_report' ) ) {
-							return $g_report_bug_advanced_page;
+							return 'report_bug_advanced_page.php';
 		 				} else {
-							return $g_report_bug_page;
+							return 'report_bug_page.php';
 						}
 				case SIMPLE_ONLY:
-						return $g_report_bug_page;
+						return 'report_bug_page.php';
 				case ADVANCED_ONLY:
-						return $g_report_bug_advanced_page;
-				default:return $g_report_bug_page;
+						return 'report_bug_advanced_page.php';
+				default:return 'report_bug_page.php';
 			}
 		} else {
 			return $HTTP_REFERER;

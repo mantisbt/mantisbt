@@ -18,11 +18,11 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" enctype="multipart/form-data" action="<?php echo $g_proj_doc_add ?>">
+		<form method="post" enctype="multipart/form-data" action="proj_doc_add.php">
 		<?php echo $s_upload_file_title ?>
 	</td>
 	<td class="right">
-		<?php print_doc_menu( $g_proj_doc_add_page ) ?>
+		<?php print_doc_menu( 'proj_doc_add_page.php' ) ?>
 	</td>
 </tr>
 <tr class="row-1">

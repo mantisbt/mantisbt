@@ -15,7 +15,7 @@
 
 	# check if users can't delete their own accounts
 	if ( OFF == $g_allow_account_delete ) {
-		print_header_redirect( $g_account_page );
+		print_header_redirect( 'account_page.php' );
 	}
 
 	# get protected state
@@ -27,7 +27,7 @@
 	}
 
 	if ( OFF == $g_allow_account_delete ) {
-		print_header_redirect( $g_account_page );
+		print_header_redirect( 'account_page.php' );
 	}
 ?>
 <?php print_page_top1() ?>
@@ -38,7 +38,7 @@
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $s_confirm_delete_msg ?>
 
-	<form method="post" action="<?php echo $g_account_delete ?>">
+	<form method="post" action="account_delete.php">
 		<input type="submit" value="<?php echo $s_delete_account_button ?>">
 	</form>
 

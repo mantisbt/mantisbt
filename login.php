@@ -34,7 +34,6 @@
 				extract( $row, EXTR_PREFIX_ALL, 'u' );
 			}
 		}
-
 	}
 
 	if (( $g_anonymous_account == $f_username ) && ( ON == $g_allow_anonymous_login )) {
@@ -77,16 +76,16 @@
 		if ( !empty($f_return) ) {
 			$t_redirect_url = $f_return;
 		} else {
-			$t_redirect_url = $g_main_page;
+			$t_redirect_url = 'main_page.php';
 		}
 	} else if ( $login_result ) {
 		if ( isset($f_project_id) ) {
-			$t_redirect_url = $g_set_project.'?f_project_id='.$f_project_id;
+			$t_redirect_url = 'set_project.php?f_project_id='.$f_project_id;
 		} else {
-			$t_redirect_url = $g_login_select_proj_page;
+			$t_redirect_url = 'login_select_proj_page.php';
 		}
 	} else {
-		$t_redirect_url = $g_login_page.'?f_error=1';
+		$t_redirect_url = 'login_page.php?f_error=1';
 	}
 
 	if ( $login_result ) {
@@ -100,17 +99,17 @@
 		if ( !empty($f_return) ) {
 			$t_redirect_url = $f_return;
 		} else {
-			$t_redirect_url = $g_main_page;
+			$t_redirect_url = 'main_page.php';
 		}
 		print_meta_redirect( $t_redirect_url, 0 );
 	} else if ( $login_result ) {
 		if ( isset($f_project_id) ) {
-			print_meta_redirect( $g_set_project.'?f_project_id='.$f_project_id, 0 );
+			print_meta_redirect( 'set_project.php?f_project_id='.$f_project_id, 0 );
 		} else {
-			print_meta_redirect( $g_login_select_proj_page, 0 );
+			print_meta_redirect( 'login_select_proj_page.php', 0 );
 		}
 	} else {
-		print_meta_redirect( $g_login_page.'?f_error=1', 0 );
+		print_meta_redirect( 'login_page.php?f_error=1', 0 );
 	}
 ?>
 <?php print_page_top2a() ?>
@@ -119,13 +118,13 @@
 <div align="center">
 <?php
 	if ( $t_project_id > 0 ) {							# SUCCESS
-		print_bracket_link( $g_main_page, $s_proceed );
+		print_bracket_link( 'main_page.php', $s_proceed );
 	} else if ( $login_result ) {						# SUCCESS
-		print_bracket_link( $g_login_select_proj_page, $s_proceed );
+		print_bracket_link( 'login_select_proj_page.php', $s_proceed );
 	} else {											# FAILURE
 		print $MANTIS_ERROR[ERROR_LOGIN].'<p>';
 
-		print_bracket_link( $g_login_page.'?f_error=1', $s_proceed );
+		print_bracket_link( 'login_page.php?f_error=1', $s_proceed );
 	}
 ?>
 </div>

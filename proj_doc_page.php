@@ -28,7 +28,7 @@
 		<?php echo $s_project_documentation_title ?>
 	</td>
 	<td class="right">
-		<?php print_doc_menu( $g_proj_doc_page ) ?>
+		<?php print_doc_menu( 'proj_doc_page.php' ) ?>
 	</td>
 </tr>
 <?php
@@ -47,10 +47,10 @@
 <tr valign="top">
 	<td bgcolor="<?php echo $status_color ?>">
 <?php
-		PRINT '<a href="'.$g_file_download.'?f_id='.$v_id.'&amp;f_type=doc">'.$v_title.'</a> ('.$v_filesize.' bytes)';
+		PRINT '<a href="file_download.php?f_id='.$v_id.'&amp;f_type=doc">'.$v_title.'</a> ('.$v_filesize.' bytes)';
 
 		if ( access_level_check_greater_or_equal( MANAGER ) ) {
-			print_bracket_link( $g_proj_doc_edit_page.'?f_id='.$v_id, 'edit' );
+			print_bracket_link( 'proj_doc_edit_page.php?f_id='.$v_id, 'edit' );
 		}
 ?>
 		<br />

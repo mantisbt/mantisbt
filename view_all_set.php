@@ -10,12 +10,12 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	if ( isset( $f_csv ) ) {
-		print_header_redirect( $g_view_all_bug_page.'?f_csv=1' );
+		print_header_redirect( 'view_all_bug_page.php?f_csv=1' );
 		die;
 	}
 
 	if ( !isset( $f_type ) ) {
-		print_header_redirect( $g_view_all_bug_page );
+		print_header_redirect( 'view_all_bug_page.php' );
 	}
 
 	if ( ON == $g_hide_closed_default ) {
@@ -122,9 +122,9 @@
 
 	# redirect to print_all or view_all page
 	if ( isset( $f_print ) ) {
-		$t_redirect_url = $g_print_all_bug_page;
+		$t_redirect_url = 'print_all_bug_page.php';
 	} else {
-		$t_redirect_url = $g_view_all_bug_page;
+		$t_redirect_url = 'view_all_bug_page.php';
 	}
 
 	# pass on search term(s)

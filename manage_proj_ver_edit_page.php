@@ -13,7 +13,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( $g_manage_project_version_edit_page ) ?>
+<?php print_manage_menu( 'manage_proj_ver_edit_page.php' ) ?>
 
 <p>
 <div align="center">
@@ -25,7 +25,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<form method="post" action="<?php echo $g_manage_project_version_update ?>">
+		<form method="post" action="manage_proj_ver_update.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="hidden" name="f_orig_version" value="<?php echo $f_version ?>">
 		<?php echo $s_version ?>
@@ -48,7 +48,7 @@
 		</form>
 	</td>
 	<td class="right" width="50%">
-		<form method="post" action="<?php echo $g_manage_project_version_delete_page ?>">
+		<form method="post" action="manage_proj_ver_del_page.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="hidden" name="f_version" value="<?php echo $f_version ?>">
 		<input type="submit" value="<?php echo $s_delete_version_button ?>">

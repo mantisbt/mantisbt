@@ -13,7 +13,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( $g_manage_project_category_edit_page ) ?>
+<?php print_manage_menu( 'manage_proj_cat_edit_page.php' ) ?>
 
 <p>
 <div align="center">
@@ -25,7 +25,7 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<form method="post" action="<?php echo $g_manage_project_category_update ?>">
+		<form method="post" action="manage_proj_cat_update.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>">
 		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>">
@@ -37,7 +37,7 @@
 		</form>
 	</td>
 	<td class="right" width="50%">
-		<form method="post" action="<?php echo $g_manage_project_category_delete_page ?>">
+		<form method="post" action="manage_proj_cat_del_page.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="hidden" name="f_category" value="<?php echo $f_category ?>">
 		<input type="submit" value="<?php echo $s_delete_category_button ?>">

@@ -21,7 +21,7 @@
 		$result = category_add( $f_project_id, $f_category );
 	}
 
-	$t_redirect_url = $g_manage_project_edit_page.'?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -35,7 +35,7 @@
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		PRINT "$s_operation_successful<p>";
+		PRINT $s_operation_successful.'<p>';
 	} else if ( $duplicate ) {		# DUPLICATE
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p>';
 	} else {						# FAILURE

@@ -18,7 +18,7 @@
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $s_delete_news_sure_msg ?>
 
-	<form method="post" action="<?php echo $g_news_delete ?>">
+	<form method="post" action="news_delete.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<input type="submit" value="<?php echo $s_delete_news_item_button ?>">
 	</form>

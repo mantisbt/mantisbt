@@ -35,15 +35,15 @@
 	# for proxies that clear out HTTP_REFERER
 	if ( 1 == $valid_project ) {
 		if ( !isset( $HTTP_REFERER ) || empty( $HTTP_REFERER ) ) {
-			$t_redirect_url = $g_main_page;
-		} else if ( eregi( $g_view_all_bug_page, $HTTP_REFERER ) ){
-			$t_redirect_url = $g_view_all_set.'?f_type=0';
-		} else if ( eregi( $g_summary_page, $HTTP_REFERER ) ){
-			$t_redirect_url = $g_summary_page;
-		} else if ( eregi( $g_proj_user_menu_page, $HTTP_REFERER ) ){
-			$t_redirect_url = $g_proj_user_menu_page;
+			$t_redirect_url = 'main_page.php';
+		} else if ( eregi( 'view_all_bug_page.php', $HTTP_REFERER ) ){
+			$t_redirect_url = 'view_all_set.php?f_type=0';
+		} else if ( eregi( 'summary_page.php', $HTTP_REFERER ) ){
+			$t_redirect_url =  'summary_page.php';
+		} else if ( eregi( 'proj_user_menu_page.php', $HTTP_REFERER ) ){
+			$t_redirect_url = 'proj_user_menu_page.php';
 		} else {
-			$t_redirect_url = $g_main_page;
+			$t_redirect_url = 'main_page.php';
 		}
 	}
 
@@ -67,9 +67,9 @@
 <div align="center">
 <?php
 	if ( 1 == $valid_project ) {	# SUCCESS
-		PRINT "$s_operation_successful<p>";
+		PRINT $s_operation_successful.'<p>';
 	} else {						# FAILURE
-		PRINT "$s_valid_project_msg";
+		echo $s_valid_project_msg;
 	}
 
 	print_bracket_link( $t_redirect_url, $s_proceed );

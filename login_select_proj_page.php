@@ -23,7 +23,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="<?php echo $g_set_project ?>">
+		<form method="post" action="set_project.php">
 		<input type="hidden" name="f_ref" value="<?php echo $f_ref ?>">
 		<?php echo $s_login_title ?>
 	</td>

@@ -84,7 +84,7 @@
 		if ( ON == $t_notify_reporter ) {
 			$send_arr[] = get_user_info( $v_reporter_id, 'email' );
 		}
-		
+
 		# Get Handler Email
 		$v_handler_id = get_bug_field( $p_bug_id, 'handler_id' );
 		if ( $v_handler_id > 0 ) {
@@ -318,7 +318,7 @@
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_user_table, $g_mantis_project_table,
 				$g_complete_date_format, $g_show_view,
-				$g_bugnote_order, $g_view_bug_page, $g_view_bug_advanced_page,
+				$g_bugnote_order,
 				$s_email_reporter, $s_email_handler,
 				$s_email_project, $s_email_bug, $s_email_category,
 				$s_email_reproducibility, $s_email_severity,
@@ -367,9 +367,9 @@
 		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
 		if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == get_current_user_pref_field( 'advanced_view' ) ) ) {
-			$t_message .= $g_view_bug_advanced_page;
+			$t_message .= 'view_bug_advanced_page.php';
 		} else {
-			$t_message .= $g_view_bug_page;
+			$t_message .= 'view_bug_page.php';
 		}
 		$t_message .= '?f_id='.$p_bug_id."\n";
 		$t_message .= $g_email_separator1."\n";

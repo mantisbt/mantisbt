@@ -13,7 +13,7 @@
 	# Delete the news entry
     $result = news_delete_query( $f_id );
 
-    $t_redirect_url = $g_news_menu_page;
+    $t_redirect_url = 'news_menu_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

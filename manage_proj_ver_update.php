@@ -38,7 +38,7 @@
 		$result = db_query( $query );
 	}
 
-	$t_redirect_url = $g_manage_project_edit_page.'?f_project_id='.$f_project_id;
+	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -52,7 +52,7 @@
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		PRINT "$s_operation_successful<p>";
+		PRINT $s_operation_successful.'<p>';
 	} else if ( is_duplicate_version( $f_project_id, $f_version, '0', $f_orig_version )) {
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION].'<p>';
 	} else {						# FAILURE

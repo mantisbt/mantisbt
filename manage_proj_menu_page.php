@@ -29,7 +29,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( $g_manage_project_menu_page ) ?>
+<?php print_manage_menu( 'manage_proj_menu_page.php' ) ?>
 
 <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { # Add Project Form BEGIN ?>
 <p>
@@ -37,7 +37,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="<?php echo $g_manage_project_add ?>">
+		<form method="post" action="manage_proj_add.php">
 		<?php echo $s_add_project_title ?>
 	</td>
 </tr>
@@ -104,23 +104,23 @@
 </tr>
 <tr class="row-category">
 	<td width="20%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_name, 'name', $f_dir ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_name, 'name', $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'name' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_status, 'status', $f_dir ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_status, 'status', $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'status' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_enabled, 'enabled', $f_dir ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_enabled, 'enabled', $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'enabled' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_view_status, 'view_state', $f_dir ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_view_status, 'view_state', $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'view_state' ) ?>
 	</td>
 	<td width="40%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_description, 'description', $f_dir ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_description, 'description', $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'description' ) ?>
 	</td>
 </tr>
@@ -147,7 +147,7 @@
 ?>
 <tr>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<a href="<?php echo $g_manage_project_edit_page.'?f_project_id='.$v_id ?>"><?php echo $v_name ?></a>
+		<a href="manage_proj_edit_page.php?f_project_id=<?php echo $v_id ?>"><?php echo $v_name ?></a>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo get_enum_element( 'project_status', $v_status ) ?>

@@ -58,6 +58,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'エラー：カテゴリが重複しています。';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'エラー：バージョンが重複しています。';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'エラー：ファイルが重複しています。先にファイルを削除して下さい。';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'エラー：必須フィールドが入力されていません。入力を確認して下さい。';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 

@@ -3,9 +3,9 @@
 function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '')
 {
 	global	$g_mantis_user_pref_table, $g_default_advanced_report,
-			$g_default_advanced_view, $g_account_prefs_update,
-			$g_account_prefs_page, $g_enable_email_notification,
-			$g_account_prefs_reset, $s_default_account_preferences_title,
+			$g_default_advanced_view,
+			$g_enable_email_notification,
+			$s_default_account_preferences_title,
 			$s_default_project, $s_all_projects, $s_advanced_report,
 			$s_advanced_view, $s_advanced_update, $s_refresh_delay,
 			$s_reset_prefs_button, $s_redirect_delay, $s_email_on_new,
@@ -19,10 +19,10 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 	if ($c_user_id == 0) {
 		$c_user_id = get_current_user_field( 'id' );
 	}
-	
+
 	$t_redirect_url = $p_redirect_url;
 	if ( strlen ($t_redirect_url)== 0 ) {
-		$t_redirect_url = $g_account_prefs_page;
+		$t_redirect_url = 'account_prefs_page.php';
 	}
 
 	# get protected state
@@ -73,7 +73,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_account_prefs_update ?>">
+		<form method="post" action="account_prefs_update.php">
 		<input type="hidden" name="f_user_id" value="<?php echo $c_user_id ?>">
 		<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>">
 		<?php echo $s_default_account_preferences_title ?>
@@ -81,7 +81,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 	<td class="right">
 		<?php
 			if ( $p_accounts_menu ) {
-				print_account_menu( $g_account_prefs_page );
+				print_account_menu( 'account_prefs_page.php' );
 			}
 		?>
 	</td>
@@ -240,7 +240,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		</form>
 	</td>
 	<td class="center">
-		<form method="post" action="<?php echo $g_account_prefs_reset ?>">
+		<form method="post" action="account_prefs_reset.php">
 		<input type="hidden" name="f_id" value="<?php echo $c_user_id ?>">
 		<input type="submit" value="<?php echo $s_reset_prefs_button ?>">
 		</form>

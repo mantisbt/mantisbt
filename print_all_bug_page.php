@@ -11,13 +11,13 @@
 
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
-		print_header_redirect( $g_view_all_set.'?f_type=0&amp;f_print=1' );
+		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
 	}
 
 	# check to see if new cookie is needed
 	$t_setting_arr 			= explode( '#', $g_view_all_cookie_val );
 	if ( $t_setting_arr[0] != $g_cookie_version ) {
-		print_header_redirect( $g_view_all_set.'?f_type=0&amp;f_print=1' );
+		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
 	}
 
 	check_varset( $f_search, false );
@@ -46,12 +46,12 @@
 	$c_offset 				= (integer)$f_offset;
 	$c_user_id				= (integer)$f_user_id;
 	$c_assign_id			= (integer)$f_assign_id;
+	$c_limit_view			= (integer)$f_limit_view;
 	$c_show_category		= addslashes($f_show_category);
 	$c_show_severity		= addslashes($f_show_severity);
 	$c_show_status			= addslashes($f_show_status);
 	$c_search				= addslashes($f_search);
 	$c_sort					= addslashes($f_sort);
-	$c_limit_view			= (integer)$f_limit_view;
 
 	if ('DESC' == $f_dir) {
 		$c_dir = 'DESC';
@@ -181,7 +181,7 @@
 <table class="width100">
 <tr>
     <td class="print">
-		<form method="post" action="<?php echo $g_view_all_set ?>">
+		<form method="post" action="view_all_set.php">
 		<input type="hidden" name="f_type" value="1">
 		<input type="hidden" name="f_print" value="1">
 		<input type="hidden" name="f_offset" value="0">
@@ -289,8 +289,8 @@
 		?>
 	</td>
 	<td class="right">
-		<?php print_bracket_link( $g_view_all_bug_page, $s_view_bugs_link ) ?>
-		<?php print_bracket_link( $g_summary_page, $s_summary ) ?>
+		<?php print_bracket_link( 'view_all_bug_page.php', $s_view_bugs_link ) ?>
+		<?php print_bracket_link( 'summary_page.php', $s_summary ) ?>
 	</td>
 <p>
 </tr>
@@ -404,7 +404,7 @@
 
 				PRINT "<span class=\"bold\">$t_last_updated</span>";
 			} else {
-				ehco "$t_last_updated;
+				echo $t_last_updated;
 			}
 		?>
 	</td>

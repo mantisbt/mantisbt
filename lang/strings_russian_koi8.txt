@@ -58,6 +58,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'ОШИБКА: Дубликат категории.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ОШИБКА: Дубликат версии.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ОШИБКА: Дубликат файла. Сначала удалите старый файл.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены.  Проверьте правильность ввода.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
 

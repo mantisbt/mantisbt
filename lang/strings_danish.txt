@@ -58,6 +58,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'FEJL: Denne kategori findes allerede.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION]  = 'FEJL: Denne version findes allerede.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'FEJL: Denne fil findes allerede. Slet den gamle fil først.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'FEJL: Et påkrævert felt er ikke udfyldt.  Ret venligst dette.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEJL: Denne konto er beskyttet.  Du har ikke adgang før kontoens beskyttelse er ophævet.';
 

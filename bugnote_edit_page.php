@@ -23,10 +23,10 @@
 			( $t_bugnote_user_id == $t_user_id )) {
 			# do nothing
 		} else {
-			print_header_redirect( $g_logout_page );
+			print_header_redirect( 'logout_page.php' );
 		}
 	} else {
-		print_header_redirect( $g_logout_page );
+		print_header_redirect( 'logout_page.php' );
 	}
 	$c_bugnote_text_id = (integer)$f_bugnote_text_id;
 
@@ -49,7 +49,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_bugnote_update ?>">
+		<form method="post" action="bugnote_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<input type="hidden" name="f_bugnote_text_id" value="<?php echo $f_bugnote_text_id ?>">
 		<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>">

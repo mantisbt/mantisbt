@@ -12,7 +12,7 @@
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
-		print_header_redirect( "$g_news_delete_page?f_id=$f_id" );
+		print_header_redirect( '$news_delete_page.php?f_id='.$f_id );
 		exit;
 	}
 
@@ -34,12 +34,12 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_news_update ?>">
+		<form method="post" action="news_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
 		<?php echo $s_edit_news_title ?>
 	</td>
 	<td class="right">
-		<?php print_bracket_link( $g_news_menu_page, $s_go_back ) ?>
+		<?php print_bracket_link( 'news_menu_page.php', $s_go_back ) ?>
 	</td>
 </tr>
 <tr class="row-1">

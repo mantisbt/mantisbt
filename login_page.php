@@ -14,7 +14,7 @@
 
 	# Check to see if the user is logged in and then validate the cookie value
 	if ( !empty( $g_string_cookie_val ) ) {
-		login_cookie_check( $g_main_page );
+		login_cookie_check( 'main_page.php' );
 	}
 ?>
 <?php print_page_top1() ?>
@@ -39,7 +39,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_login ?>">
+		<form method="post" action="login.php">
 		<?php	if (isset($f_return)) { ?>
 		<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>">
 		<?php	} ?>
@@ -51,7 +51,7 @@
 	<td class="right">
 	<?php
 		if ( ON == $g_allow_anonymous_login ) {
-			print_bracket_link( $g_login_anon, $s_login_anonymously );
+			print_bracket_link( 'login_anon.php', $s_login_anonymously );
 		}
 	?>
 	</td>

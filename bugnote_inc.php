@@ -76,8 +76,8 @@
 				if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
 					if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 						( $v3_reporter_id == $t_user_id )) {
-						print_bracket_link( $g_bugnote_edit_page.'?f_bugnote_text_id='.$v3_bugnote_text_id.'&amp;f_id='.$f_id.'&amp;f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
-						print_bracket_link( $g_bugnote_delete.'?f_bugnote_id='.$v3_id.'&amp;f_id='.$f_id, $s_delete_link );
+						print_bracket_link( 'bugnote_edit_page.php?f_bugnote_text_id='.$v3_bugnote_text_id.'&amp;f_id='.$f_id.'&amp;f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
+						print_bracket_link( 'bugnote_delete.php?f_bugnote_id='.$v3_id.'&amp;f_id='.$f_id, $s_delete_link );
 					}
 				}
 			?>
@@ -115,7 +115,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="<?php echo $g_bugnote_add ?>">
+		<form method="post" action="bugnote_add.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<?php echo $s_add_bugnote_title ?>
 	</td>

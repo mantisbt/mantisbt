@@ -19,7 +19,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="<?php echo $g_news_add ?>">
+		<form method="post" action="news_add.php">
 		<input type="hidden" name="f_poster_id" value="<?php echo get_current_user_field( 'id' ) ?>">
 		<?php echo $s_add_news_title ?>
 	</td>
@@ -72,7 +72,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="<?php echo $g_news_edit_page ?>">
+		<form method="post" action="news_edit_page.php">
 		<?php echo $s_edit_or_delete_news_title ?>
 	</td>
 </tr>

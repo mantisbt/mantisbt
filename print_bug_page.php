@@ -8,7 +8,7 @@
 <?php login_cookie_check() ?>
 <?php
 	if ( SIMPLE_ONLY == $g_show_view ) {
-		print_header_redirect ( $g_view_bug_page.'?f_id='.$f_id );
+		print_header_redirect ( 'view_bug_page.php?f_id='.$f_id );
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -53,7 +53,7 @@
 		<?php echo $s_viewing_bug_advanced_details_title ?>
 	</td>
 	<td class="right" colspan="3">
-		<span class="small"><?php print_bracket_link( $g_view_bug_page.'?f_id='.$f_id, $s_go_back ) ?></span>
+		<span class="small"><?php print_bracket_link( 'view_bug_page.php?f_id='.$f_id, $s_go_back ) ?></span>
 	</td>
 </tr>
 <tr>

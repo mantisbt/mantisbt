@@ -97,13 +97,11 @@
 	}
 	# --------------------
 	function print_duplicate_id( $p_duplicate_id ) {
-		global 	$g_view_bug_page, $g_view_bug_advanced_page;
-
 		if ( $p_duplicate_id != '0000000' ) {
 			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-				PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
+				PRINT "<a href=\"view_bug_advanced_page.php?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
 			} else {
-				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
+				PRINT "<a href=\"view_bug_page.php?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
 			}
 		}
 	}
@@ -754,7 +752,7 @@
 	# list of projects that a user is NOT in
 	function print_project_user_list( $p_user_id ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_project_table,
-				$s_remove_link, $g_manage_user_proj_delete;
+				$s_remove_link;
 
 		$c_user_id = (integer)$p_user_id;
 
@@ -775,7 +773,7 @@
 			$t_access_level	= $row['access_level'];
 			$t_access_level	= get_enum_element( 'access_levels', $t_access_level );
 			$t_view_state	= get_enum_element( 'project_view_state', $t_view_state );
-			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="'.$g_manage_user_proj_delete.'?f_project_id='.$t_project_id.'&amp;f_user_id='.$p_user_id.'">'.$s_remove_link.'</a>]<br />';
+			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="manage_user_proj_delete.php?f_project_id='.$t_project_id.'&amp;f_user_id='.$p_user_id.'">'.$s_remove_link.'</a>]<br />';
 		}
 	}
 	# --------------------
@@ -786,21 +784,21 @@
 	# prints a link to a bug given an ID
 	# it accounts for the user preference and site override
 	function print_bug_link( $p_id ) {
-		global 	$g_view_bug_page, $g_view_bug_advanced_page, $g_show_view;
+		global 	$g_show_view;
 
 		switch ( $g_show_view ) {
 		case BOTH:
 			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-				PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
+				PRINT "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
 			} else {
-				PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
+				PRINT "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
 			}
 			break;
 		case SIMPLE_ONLY:
-			PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
+			PRINT "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
 			break;
 		case ADVANCED_ONLY:
-			PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
+			PRINT "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
 			break;
 		}
 	}
@@ -808,21 +806,21 @@
 	# prints a link to the update page given an ID
 	# it accounts for the user preference and site override
 	function get_bug_update_page() {
-		global 	$g_bug_update_page, $g_bug_update_advanced_page, $g_show_update;
+		global 	$g_show_update;
 
 		switch ( $g_show_update ) {
 		case BOTH:
 			if ( ON == get_current_user_pref_field( 'advanced_update' ) ) {
-				return $g_bug_update_advanced_page;
+				return 'bug_update_advanced_page.php';
 			} else {
-				return $g_bug_update_page;
+				return 'bug_update_page.php';
 			}
 			break;
 		case SIMPLE_ONLY:
-				return $g_bug_update_page;
+				return 'bug_update_page.php';
 			break;
 		case ADVANCED_ONLY:
-				return $g_bug_update_advanced_page;
+				return 'bug_update_advanced_page.php';
 			break;
 		}
 	}
@@ -830,21 +828,21 @@
 	# returns a href link to a bug given an ID
 	# it accounts for the user preference and site override
 	function get_bug_link( $p_id ) {
-		global 	$g_view_bug_page, $g_view_bug_advanced_page, $g_show_view;
+		global 	$g_show_view;
 
 		switch ( $g_show_view ) {
 		case BOTH:
 			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-				return "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
+				return "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
 			} else {
-				return "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
+				return "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
 			}
 			break;
 		case SIMPLE_ONLY:
-			return "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
+			return "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
 			break;
 		case ADVANCED_ONLY:
-			return "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
+			return "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
 			break;
 		}
 	}
@@ -852,21 +850,21 @@
 	# returns a href link to a bug given an ID
 	# it accounts for the user preference and site override
 	function get_bug_link_plain( $p_id ) {
-		global 	$g_view_bug_page, $g_view_bug_advanced_page, $g_show_view;
+		global 	$g_show_view;
 
 		switch ( $g_show_view ) {
 		case BOTH:
 			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-				return "$g_view_bug_advanced_page?f_id=$p_id";
+				return 'view_bug_advanced_page.php?f_id='.$p_id;
 			} else {
-				return "$g_view_bug_page?f_id=$p_id";
+				return 'view_bug_page.php?f_id='.$p_id;
 			}
 			break;
 		case SIMPLE_ONLY:
-			return "$g_view_bug_page?f_id=$p_id";
+			return 'view_bug_page.php?f_id='.$p_id;
 			break;
 		case ADVANCED_ONLY:
-			return "$g_view_bug_advanced_page?f_id=$p_id";
+			return 'view_bug_advanced_page.php?f_id='.$p_id;
 			break;
 		}
 	}
@@ -943,8 +941,6 @@
 	###########################################################################
 	# --------------------
 	function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir ) {
-		global $g_view_all_set;
-
 		if ( $p_sort_field == $p_sort ) {
 			# we toggle between ASC and DESC if the user clicks the same sort order
 			if ( 'ASC' == $p_dir ) {
@@ -953,12 +949,10 @@
 				$p_dir = 'ASC';
 			}
 		}
-		PRINT '<a href="'.$g_view_all_set.'?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2">'.$p_string.'</a>';
+		PRINT '<a href="view_all_set.php?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_view_bug_sort_link2( $p_string, $p_sort_field, $p_sort, $p_dir ) {
-		global $g_view_all_set;
-
 		if ( $p_sort_field == $p_sort ) {
 			# we toggle between ASC and DESC if the user clicks the same sort order
 			if ( 'ASC' == $p_dir ) {
@@ -967,7 +961,7 @@
 				$p_dir = 'ASC';
 			}
 		}
-		PRINT '<a href="'.$g_view_all_set.'?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2&amp;f_print=1">'.$p_string.'</a>';
+		PRINT '<a href="view_all_set.php?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2&amp;f_print=1">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_manage_user_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir, $p_hide=0 ) {
@@ -1212,59 +1206,6 @@
 			}
 		}
 		return $p_string;
-	}
-	# --------------------
-	/* wordwrap($string, $cols, $prefix)
-	 *
-	 * Takes $string, and wraps it on a per-word boundary (does not clip
-	 * words UNLESS the word is more than $cols long), no more than $cols per
-	 * line. Allows for optional prefix string for each line. (Was written to
-	 * easily format replies to e-mails, prefixing each line with "> ".
-	 *
-	 * Copyright 1999 Dominic J. Eidson, use as you wish, but give credit
-	 * where credit due.
-	 */
-	if ( !function_exists( "wordwrap" ) ) {
-		function wordwrap ($string, $cols = 72, $prefix = "") {
-
-			$t_lines = split( "\n", $string);
-			$outlines = "";
-
-			while(list(, $thisline) = each($t_lines)) {
-				if(strlen($thisline) > $cols) {
-
-					$newline = "";
-					$t_l_lines = split(" ", $thisline);
-
-					while(list(, $thisword) = each($t_l_lines)) {
-						while((strlen($thisword) + strlen($prefix)) > $cols) {
-							$cur_pos = 0;
-							$outlines .= $prefix;
-
-							for($num=0; $num < $cols-1; $num++) {
-							    $outlines .= $thisword[$num];
-							    $cur_pos++;
-							} # end for
-
-							$outlines .= "\n";
-							$thisword = substr($thisword, $cur_pos, (strlen($thisword)-$cur_pos));
-						} # end innermost while
-
-						if((strlen($newline) + strlen($thisword)) > $cols) {
-							$outlines .= $prefix.$newline."\n";
-							$newline = $thisword." ";
-						} else {
-							$newline .= $thisword." ";
-						}
-					}  # end while
-
-					$outlines .= $prefix.$newline."\n";
-			    } else {
-					$outlines .= $prefix.$thisline."\n";
-				}
-			} # end outermost while
-			return $outlines;
-		}
 	}
 	# --------------------
 ?>

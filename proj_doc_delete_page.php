@@ -18,7 +18,7 @@
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $s_confirm_file_delete_msg ?>
 
-	<form method="post" action="<?php echo $g_proj_doc_delete ?>">
+	<form method="post" action="proj_doc_delete.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<input type="hidden" name="f_protected" value="<?php echo $f_protected ?>">
 		<input type="submit" value="<?php echo $s_file_delete_button ?>">

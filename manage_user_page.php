@@ -29,7 +29,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<form method="post" action="<?php echo $g_manage_user_update ?>">
+		<form method="post" action="manage_user_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 		<?php echo $s_edit_user_title ?>
 	</td>
@@ -82,7 +82,7 @@
 		</form>
 	</td>
 	<td class="center">
-		<form method="post" action="<?php echo $g_manage_user_reset ?>">
+		<form method="post" action="manage_user_reset.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 		<input type="hidden" name="f_email" value="<?php echo $u_email ?>">
 		<input type="hidden" name="f_protected" value="<?php echo $u_protected ?>">
@@ -90,7 +90,7 @@
 		</form>
 	</td>
 	<td class="center">
-		<form method="post" action="<?php echo $g_manage_user_delete_page ?>">
+		<form method="post" action="manage_user_delete_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 		<input type="hidden" name="f_protected" value="<?php echo $u_protected ?>">
 		<input type="submit" value="<?php echo $s_delete_user_button ?>">
@@ -117,7 +117,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="<?php echo $g_manage_user_proj_add ?>">
+		<form method="post" action="manage_user_proj_add.php">
 		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>">
 		<?php echo $s_add_user_title ?>
 	</td>
@@ -164,7 +164,7 @@
 <?php
 	if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) {
 		include ( 'account_prefs_inc.php' );
-		edit_account_prefs( $u_id, false, false, $g_manage_page );
+		edit_account_prefs( $u_id, false, false, 'manage_page.php' );
 	}
 ?>
 

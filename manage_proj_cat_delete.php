@@ -13,7 +13,7 @@
 
 	$result = category_delete( $f_project_id, $f_category );
 
-    $t_redirect_url = $g_manage_project_edit_page.'?f_project_id='.$f_project_id;
+    $t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

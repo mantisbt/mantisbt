@@ -59,6 +59,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'B£¡D: Podana kategoria ju¿ istnieje.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'B£¡D: Podana wersja ju¿ istnieje.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'B£¡D: Plik o podanej nazwie ju¿ istnieje. Usuñ najpierw istniej±cy plik.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'B£¡D: Wymagane pole nie jest wype³nione. Sprawd¼ wprowadzone dane.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'B£¡D: To konto jest zabezpieczone. Nie masz praw dostêpu do tego konta póki zabezpieczenie jest aktywne.';
 

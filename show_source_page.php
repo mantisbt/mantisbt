@@ -16,7 +16,7 @@
 		check_access( ADMINISTRATOR );
 	} else {
 		# need to replace with access error page
-		print_header_redirect( $g_logout_page );
+		print_header_redirect( 'logout_page.php' );
 		exit;
 	}
 ?>

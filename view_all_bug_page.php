@@ -11,18 +11,18 @@
 
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
-		print_header_redirect( $g_view_all_set.'?f_type=0' );
+		print_header_redirect( 'view_all_set.php?f_type=0' );
 	}
 
 	# check to see if new cookie is needed
 	$t_setting_arr 			= explode( '#', $g_view_all_cookie_val );
 	if ( $t_setting_arr[0] != $g_cookie_version ) {
-		print_header_redirect( $g_view_all_set.'?f_type=0' );
+		print_header_redirect( 'view_all_set.php?f_type=0' );
 	}
 
 	# go to the print page instead.
 	if ( isset( $f_print ) ) {
-		print_header_redirect( $g_print_all_bug_page );
+		print_header_redirect( 'print_all_bug_page.php' );
 	}
 
 	check_varset( $f_search, false );
@@ -55,7 +55,12 @@
 	$c_search				= addslashes($f_search);
 	$c_sort					= addslashes($f_sort);
 	$c_per_page				= (integer)$f_per_page;
-	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
+
+	if ( 'DESC' == $f_dir ) {
+		$c_dir = 'DESC';
+	} else {
+		$c_dir = 'ASC';
+	}
 
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
@@ -251,7 +256,7 @@
 <?php print_page_top1() ?>
 <?php
 	if ( get_current_user_pref_field( 'refresh_delay' ) > 0 ) {
-		print_meta_redirect( $g_view_all_bug_page.'?f_page_number='.$f_page_number, get_current_user_pref_field( 'refresh_delay' )*60 );
+		print_meta_redirect( 'view_all_bug_page.php?f_page_number='.$f_page_number, get_current_user_pref_field( 'refresh_delay' )*60 );
 	}
 ?>
 <?php print_page_top2() ?>

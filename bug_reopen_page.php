@@ -21,7 +21,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="<?php echo $g_bug_reopen ?>">
+		<form method="post" action="bug_reopen.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<?php echo $s_reopen_add_bugnote_title ?>
 	</td>

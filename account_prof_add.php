@@ -53,7 +53,7 @@
 	    $result = db_query( $query );
 	}
 
-    $t_redirect_url = $g_account_profile_menu_page;
+    $t_redirect_url = 'account_prof_menu_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

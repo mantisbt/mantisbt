@@ -15,7 +15,7 @@
 
 	# check if users can't delete their own accounts
 	if ( OFF == $g_allow_account_delete ) {
-		print_header_redirect( $g_account_page );
+		print_header_redirect( 'account_page.php' );
 	}
 
 	# get protected state
@@ -66,7 +66,7 @@
 <?php print_page_top1() ?>
 <?php
 	if ( $result ) {
-		print_meta_redirect( $g_logout_redirect_page );
+		print_meta_redirect( 'login_page.php' );
 	}
 ?>
 <?php print_page_top2() ?>
@@ -75,11 +75,11 @@
 <div align="center">
 <?php
 	if ( ON == $t_protected ) {				# PROTECTED
-		PRINT "$s_account_protected_msg<p>";
-		print_bracket_link( $g_account_page, $s_go_back );
+		PRINT $s_account_protected_msg.'<p>';
+		print_bracket_link( 'account_page.php', $s_go_back );
 	} else if ( $result ) {					# SUCCESS
-		PRINT "$s_operation_successful<p>";
-		print_bracket_link( $g_logout_redirect_page, $s_proceed );
+		PRINT $s_operation_successful.'<p>';
+		print_bracket_link( 'login_page.php', $s_proceed );
 	} else {								# FAILURE
 		print_sql_error( $query );
 	}
