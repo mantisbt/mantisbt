@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.37 2004-11-30 13:02:57 vboctor Exp $
+	# $Id: error_api.php,v 1.38 2005-01-11 00:47:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -41,7 +41,7 @@
 		}
 
 		# flush any language overrides to return to user's natural default
-		lang_push( config_get ( 'default_language' ) );
+		lang_push( lang_get_default() );
 
 		$t_short_file	= basename( $p_file );
 		$t_method_array = config_get( 'display_errors' );
