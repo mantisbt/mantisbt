@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.82 $
-	# $Author: bigbadger $
-	# $Date: 2004-09-11 02:55:16 $
+	# $Revision: 1.83 $
+	# $Author: vboctor $
+	# $Date: 2004-09-12 11:37:07 $
 	#
-	# $Id: strings_french.txt,v 1.82 2004-09-11 02:55:16 bigbadger Exp $
+	# $Id: strings_french.txt,v 1.83 2004-09-12 11:37:07 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -233,7 +233,7 @@ $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Les éléments de confirmation
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'la fonctionnalité \'perdu votre mot de passe\' n\'est pas disponible.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Vous devez fournir une adresse email pour réinitialiser le mot de passe';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Les informations fournies ne correspondent à aucun compte enregistré !';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'L'URL de confirmation n\'est pas valide ou a déjà été utilisée. Merci de s\'inscrire à nouveau.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'L\'URL de confirmation n\'est pas valide ou a déjà été utilisée. Merci de s\'inscrire à nouveau.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Nombre Max. de demandes en-cours atteint. Veuillez contacter l\'administrateur du système';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
