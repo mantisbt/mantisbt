@@ -12,11 +12,14 @@ Mantis ChangeLog
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
+ * Enh #3688: Add threshold for changing the bug/bugnote view status.
  * Fix #3259: Saving CSV file of bugs containning double quotes causes invalid csv.
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
  * Fix #3635: status_resolved in email_api should be resolved.
  * Fix #3646: Error in core/obsolete.php.
+ * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
+ * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).
  * New Config: view_history_threshold (default VIEWER) - threshold needed to view the bug history (now works for emails only).
  * New Config: view_attachments_threshold (default VIEWER).  Access level needed to view bugs attachments.  View means to see the file names sizes, and timestamps of the attachments.

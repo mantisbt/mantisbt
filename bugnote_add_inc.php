@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.17 2004-03-17 12:42:28 vboctor Exp $
+	# $Id: bugnote_add_inc.php,v 1.18 2004-03-26 09:29:07 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
@@ -33,10 +33,20 @@
 <?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'private' ) ?>
+		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="private" <?php check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ); ?> />
+<?php
+		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+?>
+			<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+<?php
+			echo lang_get( 'private' );
+		} else {
+			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+		}
+?>
 	</td>
 </tr>
 <?php } ?>

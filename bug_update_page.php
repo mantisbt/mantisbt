@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.64 2004-03-17 12:42:27 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.65 2004-03-26 09:29:07 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -145,9 +145,16 @@
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
-		<select name="view_state">
-			<?php print_enum_string_option_list( 'view_state', $t_bug->view_state) ?>
-		</select>
+<?php
+		if ( access_has_project_level( config_get( 'change_view_status_threshold' ) ) ) { ?>
+			<select name="view_state">
+				<?php print_enum_string_option_list( 'view_state', $t_bug->view_state) ?>
+			</select>
+<?php
+		} else {
+			echo get_enum_element( 'project_view_state', $t_bug->view_state );
+		}
+?>
 	</td>
 
 	<!-- spacer -->
@@ -316,10 +323,20 @@
 <?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'private' ) ?>
+		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td colspan="5">
-		<input type="checkbox" name="private" <?php check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ); ?> />
+<?php
+		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+?>
+			<input type="checkbox" name="private" <?php check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ); ?> />
+<?php
+			echo lang_get( 'private' );
+		} else {
+			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+		}
+?>
 	</td>
 </tr>
 <?php } ?>

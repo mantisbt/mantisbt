@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.13 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: bugnote_view_inc.php,v 1.14 2004-03-26 09:29:07 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -96,12 +96,13 @@
 		<?php
 			# only admins and the bugnote creator can edit/delete this bugnote
 			# bug must be open to be editable
-			if ( bug_get_field( $f_bug_id, 'status' ) < config_get( 'bug_resolved_status_threshold' ) ) {
+			if ( bug_is_readonly( $f_bug_id ) ) {
 				if ( ( access_has_bug_level( config_get( 'manage_project_threshold' ), $f_bug_id ) ) ||
 					( ( $v3_reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
 					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
 					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
-					if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
+					if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) && 
+						access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id ) ) {
 						if ( VS_PRIVATE == $v3_view_state ) {
 							print_bracket_link('bugnote_set_view_state.php?private=0&amp;bugnote_id='.$v3_id, lang_get( 'make_public' ));
 						} else {

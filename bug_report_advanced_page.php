@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.33 2004-03-17 13:58:59 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.34 2004-03-26 09:28:54 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -351,11 +351,18 @@
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
-		<input tabindex="17" type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?>
-		<input tabindex="18" type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?>
+<?php 
+	if ( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) {
+?>
+		<input tabindex="9" type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?>
+		<input tabindex="10" type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?>
+<?php
+	} else {
+		echo get_enum_element( 'project_view_state', $f_view_state );
+	}
+?>
 	</td>
 </tr>
-
 
 <!-- Report Stay (report more bugs) -->
 <tr <?php echo helper_alternate_class() ?>>
