@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.17 2004-05-17 11:39:06 vboctor Exp $
+	# $Id: bug_reminder_page.php,v 1.18 2004-08-23 14:29:04 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,7 +51,7 @@
 <tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<select name="to[]" multiple="multiple" size="10">
-			<?php echo print_project_user_option_list() ?>
+			<?php echo print_project_user_option_list( bug_get_field( $f_bug_id, 'project_id' ) ) ?>
 		</select>
 	</td>
 	<td class="center">

@@ -21,6 +21,7 @@ Mantis ChangeLog
 - 0004185: [customization] Support custom menu options (vboctor)
 - 0003975: [email] Realname vs username in email history (thraxisp)
 - 0004147: [email] Receiving emails in foreign languages (thraxisp)
+- 0004372: [email] Wrong Reciepients-List in "send a reminder" (thraxisp)
 - 0003880: [filters] Ordering doesnt take last_updated into account (narcissus)
 - 0003928: [filters] 'Copy Issue' was not copying attachments (narcissus)
 - 0003945: [filters] Give the ability to "Update Fixed in Version" in view_all_bug_page.php (narcissus)
