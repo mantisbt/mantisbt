@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.234 2004-12-18 13:53:35 marcelloscata Exp $
+	# $Id: config_defaults_inc.php,v 1.235 2004-12-18 17:03:59 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 
@@ -425,6 +425,11 @@
 	# --- see constant_inc.php. (*: BOTTOM or TOP)
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
 
+	# --- Show a legend with percentage of bug status
+	# --- x% of all bugs are new, y% of all bugs are assigned and so on.
+	# --- If set to ON it will printed below the status colour legend.
+	$g_status_percentage_legend = OFF;
+
 	# --- show product versions in create, view and update screens
 	#  ON forces display even if none are defined
 	#  OFF suppresses display
@@ -573,8 +578,6 @@
 	$g_default_email_on_priority_minimum_severity	= OFF; # @@@ Unused
 	$g_default_email_bugnote_limit					= 0;
 	# default_language - is set to site language
-
-	$g_status_percentage_legend = ON;
 
 	###############################
 	# Mantis Summary Settings
@@ -1439,7 +1442,7 @@
 
 	# Enable support for bug relationships where a bug can be a related, dependent on, or duplicate of another.
 	# See relationship_api.php for more details.
-	$g_enable_relationship = ON;
+	$g_enable_relationship = OFF;
 
 	# --- Relationship Graphs -----------
 	# Show issue relationships using graphs.
