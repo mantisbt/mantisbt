@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add.php,v 1.38 2003-02-20 03:32:25 vboctor Exp $
+	# $Id: bugnote_add.php,v 1.39 2003-02-20 07:30:04 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,5 +35,5 @@
 		email_bugnote_add( $f_bug_id );
 	}
 
-	print_success_and_redirect( $f_bug_id );
+	print_successful_redirect_to_bug( $f_bug_id );
 ?>

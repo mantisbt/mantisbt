@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen.php,v 1.31 2003-02-20 02:35:27 vboctor Exp $
+	# $Id: bug_reopen.php,v 1.32 2003-02-20 07:30:04 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,5 +27,5 @@
 
 	bug_reopen( $f_bug_id, $f_bugnote_text );
 
-	print_success_and_redirect( $f_bug_id );
+	print_successful_redirect_to_bug( $f_bug_id );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close.php,v 1.35 2003-02-20 02:35:27 vboctor Exp $
+	# $Id: bug_close.php,v 1.36 2003-02-20 07:30:03 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,5 +28,5 @@
 
 	bug_close( $f_bug_id, $f_bugnote_text );
 
-	print_success_and_redirect( 'view_all_bug_page.php' );
+	print_successful_redirect( 'view_all_bug_page.php' );
 ?>

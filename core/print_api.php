@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.46 2003-02-20 02:35:28 vboctor Exp $
+	# $Id: print_api.php,v 1.47 2003-02-20 07:30:05 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -57,31 +57,35 @@
 	function print_header_redirect_view( $p_bug_id ) {
 		print_header_redirect( string_get_bug_view_url( $p_bug_id ) );
 	}
-	# --------------------
-	# If the show query count is ON, prints success and redirects in one second.
-	# If the show query count is OFF, redirects right away.
-	# $p_redirect_to can be a string, which means the url to redirect to
-	# $p_redirect_to can be a number, which means the bug id to redirect to. 
-	function print_success_and_redirect( $p_redirect_to ) {
-		if ( is_integer( $p_redirect_to ) ) {
-			$t_url = string_get_bug_view_url( $p_redirect_to, auth_get_current_user_id() );
-		} else {
-			$t_url = $p_redirect_to;
-		}
 
+	# --------------------
+	# Get a view URL for the bug id based on the user's preference and
+	#  call print_successful_redirect() with that URL
+	function print_successful_redirect_to_bug( $p_bug_id ) {
+		$t_url = string_get_bug_view_url( $p_bug_id, auth_get_current_user_id() );
+
+		print_successful_redirect( $t_url );
+	}
+
+	# --------------------
+	# If the show query count is ON, print success and redirect after the
+	#  configured system wait time.
+	# If the show query count is OFF, redirect right away.
+	function print_successful_redirect( $p_redirect_to ) {
 		if ( ON == config_get( 'show_queries_count' ) ) {
-			html_meta_redirect( $t_url );
+			html_meta_redirect( $p_redirect_to );
 			html_page_top1();
 			html_page_top2();
 			echo '<br /><div class="center">';
 			echo lang_get( 'operation_successful' ) . '<br />';
-			print_bracket_link( $t_url, lang_get( 'proceed' ) );
+			print_bracket_link( $p_redirect_to, lang_get( 'proceed' ) );
 			echo '</div>';
 			html_page_bottom1();
 		} else {
 			print_header_redirect( $t_url );
 		}
 	}
+
 	# --------------------
 	# Print a redirect header to update a bug
 	function print_header_redirect_update( $p_bug_id ) {

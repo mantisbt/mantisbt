@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_delete.php,v 1.32 2003-02-20 02:49:32 vboctor Exp $
+	# $Id: bugnote_delete.php,v 1.33 2003-02-20 07:30:04 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,5 +33,5 @@
 
 	bugnote_delete( $f_bugnote_id );
 
-	print_success_and_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
+	print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
 ?>
