@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.8 2004-09-04 05:06:03 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.9 2004-09-21 18:24:25 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,7 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 ?>
 
 <?php
-if ( $t_resolved == $f_new_status ) { ?>
+if ( ( $t_resolved <= $f_new_status ) && ( CLOSED > $f_new_status ) ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -80,7 +80,7 @@ if ( $t_resolved == $f_new_status ) { ?>
 <?php } ?>
 
 <?php
-if ( $t_resolved == $f_new_status ) { ?>
+if ( ( $t_resolved <= $f_new_status ) && ( CLOSED > $f_new_status ) ) { ?>
 <!-- Duplicate ID -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -93,7 +93,7 @@ if ( $t_resolved == $f_new_status ) { ?>
 <?php } ?>
 
 <?php
-if ( ASSIGNED == $f_new_status ) { ?>
+if ( $t_resolved > $f_new_status ) { ?>
 <!-- Assigned To -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -112,10 +112,11 @@ if ( ASSIGNED == $f_new_status ) { ?>
 <!-- Custom Fields -->
 <?php
 $t_custom_status_label = "update"; # default info to check
-if ( $f_new_status == config_get( 'bug_resolved_status_threshold' ) ) {
+if ( ( $f_new_status == config_get( 'bug_resolved_status_threshold' ) ) &&
+			( CLOSED > $f_new_status ) ) {
 	$t_custom_status_label = "resolved";
 }
-if ( $f_new_status == CLOSED ) {
+if ( CLOSED == $f_new_status ) {
 	$t_custom_status_label = "closed";
 }
 

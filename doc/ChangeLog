@@ -2,6 +2,8 @@ Mantis ChangeLog
 
 2004.10.xx  -  0.19.1
 
+- 0004538: [bugtracker] $g_bug_resolved_status_threshold doesn't work correctly with additional status (thraxisp)
+- 0004440: [bugtracker] It should be possible to define an assigned to at "Change Status To" (thraxisp)
 - 0004437: [bugtracker] Filenames of uploaded attached files are damaged (thraxisp)
 - 0004576: [administration] Simplify display options for error handler (thraxisp)
 - 0004394: [feature] Add link to remove all users from project (bpfennig)
