@@ -31,7 +31,7 @@
 		print_body_top();
 		print_header( $g_page_title );
 		print_top_page( $g_top_include_page );
-		print_menu();
+		print_top_menu();
 	}
 	# --------------------
 	# second part of the html, comes after the meta tags
@@ -265,75 +265,84 @@
 	# --------------------
 	# print the standard command menu at the top of the pages
 	# also prints the login info, time, and project select form
-	function print_menu() {
-		global	$g_string_cookie_val, $g_project_cookie_val,
-
-				$g_show_report,
-
-				$g_main_page, $g_view_all_bug_page,
-				$g_report_bug_page, $g_report_bug_advanced_page,
-				$g_summary_page, $g_account_page, $g_proj_doc_page, $g_manage_page,
-				$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
-				$g_proj_user_menu_page, $g_login_select_proj_page,
-
-				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
-				$s_summary_link, $s_account_link, $g_manage_project_menu_page,
-				$s_manage_link, $s_users_link, $s_edit_news_link, $s_docs_link,
-				$s_logout_link;
+	function print_top_menu() {
+	
+		global	$g_string_cookie_val; 
 
 		if ( isset( $g_string_cookie_val ) ) {
 			print_login_info();
-
-		    $t_protected = get_current_user_field( "protected" );
+			print_menu();
+		}
+	}
+	
+	# --------------------
+	# print the standard command menu
+	# called from the top_menu and also from the bottom_menu functions
+	function print_menu() {
+		
+		global	$g_string_cookie_val, $g_project_cookie_val,
+			$g_show_report,$g_main_page, $g_view_all_bug_page,
+			$g_report_bug_page, $g_report_bug_advanced_page,
+			$g_summary_page, $g_account_page, $g_proj_doc_page, $g_manage_page,
+			$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
+			$g_proj_user_menu_page, $g_login_select_proj_page,
+					
+			$s_main_link, $s_view_bugs_link, $s_report_bug_link,
+			$s_summary_link, $s_account_link, $g_manage_project_menu_page,
+			$s_manage_link, $s_users_link, $s_edit_news_link, $s_docs_link,
+			$s_logout_link;
+					
+		if ( isset( $g_string_cookie_val ) ) {	
+			$t_protected = get_current_user_field( "protected" );
 			PRINT "<table class=\"width100\" cellspacing=\"0\">";
 			PRINT "<tr>";
-				PRINT "<td class=\"menu\">";
-				PRINT "<a href=\"$g_main_page\">$s_main_link</a> | ";
-				PRINT "<a href=\"$g_view_all_bug_page\">$s_view_bugs_link</a> | ";
-				if ( access_level_check_greater_or_equal( REPORTER ) ) {
-					if ( "0000000" != $g_project_cookie_val ) {
-						$t_report_url = get_report_redirect_url( 1 );
-						PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
-					} else {
-						PRINT "<a href=\"$g_login_select_proj_page\">$s_report_bug_link</a> | ";
-					}
+			PRINT "<td class=\"menu\">";
+			PRINT "<a href=\"$g_main_page\">$s_main_link</a> | ";
+			PRINT "<a href=\"$g_view_all_bug_page\">$s_view_bugs_link</a> | ";
+			if ( access_level_check_greater_or_equal( REPORTER ) ) {
+				if ( "0000000" != $g_project_cookie_val ) {
+					$t_report_url = get_report_redirect_url( 1 );
+					PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
+				} else {
+					PRINT "<a href=\"$g_login_select_proj_page\">$s_report_bug_link</a> | ";
 				}
-
-				PRINT "<a href=\"$g_summary_page\">$s_summary_link</a> | ";
-				PRINT "<a href=\"$g_account_page\">$s_account_link</a> | ";
-				if ( access_level_check_greater_or_equal( MANAGER ) ) {
-					if ( "0000000" != $g_project_cookie_val ) {
-						PRINT "<a href=\"$g_proj_user_menu_page\">$s_users_link</a> | ";
-					} else {
-						PRINT "<a href=\"$g_login_select_proj_page\">$s_users_link</a> | ";
-					}
+			}#end if reporter
+	
+			PRINT "<a href=\"$g_summary_page\">$s_summary_link</a> | ";
+			PRINT "<a href=\"$g_account_page\">$s_account_link</a> | ";
+			if ( access_level_check_greater_or_equal( MANAGER ) ) {
+				if ( "0000000" != $g_project_cookie_val ) {
+					PRINT "<a href=\"$g_proj_user_menu_page\">$s_users_link</a> | ";
+				} else {
+					PRINT "<a href=\"$g_login_select_proj_page\">$s_users_link</a> | ";
 				}
+			}#end if manager
+			
 			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
 				PRINT "<a href=\"$g_manage_page\">$s_manage_link</a> | ";
 			}
 			if ( access_level_check_greater_or_equal( MANAGER ) ) {
 				PRINT "<a href=\"$g_news_menu_page\">$s_edit_news_link</a> | ";
 			}
-
-				PRINT "<a href=\"$g_proj_doc_page\">$s_docs_link</a> | ";
-				PRINT "<a href=\"$g_logout_page\">$s_logout_link</a>";
+	
+			PRINT "<a href=\"$g_proj_doc_page\">$s_docs_link</a> | ";
+			PRINT "<a href=\"$g_logout_page\">$s_logout_link</a>";
 			PRINT "</td>";
 			PRINT "</tr>";
 			PRINT "</table>";
-		}
+		}#if isset($g_string_cookie_val)
 	}
+	
 	# --------------------
-	# this is the same as print_menu except without the login info
+	# bottom menu is printed by this function
+	# basically the same as print_menu except without the login info
 	# this is set by setting $g_show_footer_menu to 1
 	function print_bottom_menu( $p_menu_file="" ) {
-		PRINT "<p>";
-		PRINT "<table class=\"menu\" cellspacing=\"0\">";
-		PRINT "<tr>";
-			PRINT "<td class=\"menu\">";
-				include( $p_menu_file );
-			PRINT "</td>";
-		PRINT "</tr>";
-		PRINT "</table>";
+		global	$g_string_cookie_val;
+		if ( isset( $g_string_cookie_val ) ) {
+			print_menu();
+		}
+		
 	}
 	# --------------------
 	# prints the manage menu
