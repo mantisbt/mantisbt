@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.250 2005-03-04 13:28:10 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.251 2005-03-18 03:48:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -123,10 +123,9 @@
 	# These patterns will be concatenated and used as a regular expression
 	# to bypass the database lookup and look here for appropriate global settings.
 	$g_global_settings = array(
-		'_table$', 'cookie', 'custom_headers', '^db_', 'hostname', 'database_name',
+		'_table$', 'cookie', '^db_', 'hostname', 'database_name',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'stop_on_errors', 'login_method', '_file$',
-		'_title$', 'anonymous', 'content_expire', 'html_valid_tags', 'default_home_page',
-		'use_phpMailer'
+		'anonymous', 'content_expire', 'html_valid_tags', 'custom_headers'
 	);
 
 	#############################
@@ -945,7 +944,7 @@
 	$g_delete_bug_threshold = DEVELOPER;
 
 	# Delete bugnote threshold
-	$g_delete_bugnote_threshold = $g_delete_bug_threshold;
+	$g_delete_bugnote_threshold = '%delete_bug_threshold%';
 
 	# Are users allowed to change and delete their own bugnotes?
 	$g_bugnote_allow_user_edit_delete = ON;
@@ -1140,12 +1139,12 @@
 	$g_cookie_prefix		= 'MANTIS';
 
 	# --- cookie names ----------------
-	$g_string_cookie		= $g_cookie_prefix.'_STRING_COOKIE';
-	$g_project_cookie		= $g_cookie_prefix.'_PROJECT_COOKIE';
-	$g_view_all_cookie		= $g_cookie_prefix.'_VIEW_ALL_COOKIE';
-	$g_manage_cookie		= $g_cookie_prefix.'_MANAGE_COOKIE';
-	$g_logout_cookie		= $g_cookie_prefix.'_LOGOUT_COOKIE';
-	$g_bug_list_cookie		= $g_cookie_prefix.'_BUG_LIST_COOKIE';
+	$g_string_cookie		= '%cookie_prefix%_STRING_COOKIE';
+	$g_project_cookie		= '%cookie_prefix%_PROJECT_COOKIE';
+	$g_view_all_cookie		= '%cookie_prefix%_VIEW_ALL_COOKIE';
+	$g_manage_cookie		= '%cookie_prefix%_MANAGE_COOKIE';
+	$g_logout_cookie		= '%cookie_prefix%_LOGOUT_COOKIE';
+	$g_bug_list_cookie		= '%cookie_prefix%_BUG_LIST_COOKIE';
 
 	#######################################
 	# Mantis Filter Variables
@@ -1162,35 +1161,36 @@
 
 	# --- table prefix ----------------
 	$g_db_table_prefix		= 'mantis';
+	$g_db_table_suffix		= '_table';
 
 	# --- table names -----------------
-	$g_mantis_bug_file_table				= '%db_table_prefix%_bug_file_table';
-	$g_mantis_bug_history_table				= '%db_table_prefix%_bug_history_table';
-	$g_mantis_bug_monitor_table				= '%db_table_prefix%_bug_monitor_table';
-	$g_mantis_bug_relationship_table		= '%db_table_prefix%_bug_relationship_table';
-	$g_mantis_bug_table						= '%db_table_prefix%_bug_table';
-	$g_mantis_bug_text_table				= '%db_table_prefix%_bug_text_table';
-	$g_mantis_bugnote_table					= '%db_table_prefix%_bugnote_table';
-	$g_mantis_bugnote_text_table			= '%db_table_prefix%_bugnote_text_table';
-	$g_mantis_news_table					= '%db_table_prefix%_news_table';
-	$g_mantis_project_category_table		= '%db_table_prefix%_project_category_table';
-	$g_mantis_project_file_table			= '%db_table_prefix%_project_file_table';
-	$g_mantis_project_table					= '%db_table_prefix%_project_table';
-	$g_mantis_project_user_list_table		= '%db_table_prefix%_project_user_list_table';
-	$g_mantis_project_version_table			= '%db_table_prefix%_project_version_table';
-	$g_mantis_user_table					= '%db_table_prefix%_user_table';
-	$g_mantis_user_profile_table			= '%db_table_prefix%_user_profile_table';
-	$g_mantis_user_pref_table				= '%db_table_prefix%_user_pref_table';
-	$g_mantis_user_print_pref_table			= '%db_table_prefix%_user_print_pref_table';
-	$g_mantis_custom_field_project_table	= '%db_table_prefix%_custom_field_project_table';
-	$g_mantis_custom_field_table      	    = '%db_table_prefix%_custom_field_table';
-	$g_mantis_custom_field_string_table     = '%db_table_prefix%_custom_field_string_table';
-	$g_mantis_upgrade_table					= '%db_table_prefix%_upgrade_table';
-	$g_mantis_filters_table					= '%db_table_prefix%_filters_table';
-	$g_mantis_sponsorship_table				= '%db_table_prefix%_sponsorship_table';
-	$g_mantis_tokens_table					= '%db_table_prefix%_tokens_table';
-	$g_mantis_project_hierarchy_table		= '%db_table_prefix%_project_hierarchy_table';
-	$g_mantis_config_table					= '%db_table_prefix%_config_table';
+	$g_mantis_bug_file_table				= '%db_table_prefix%_bug_file%db_table_suffix%';
+	$g_mantis_bug_history_table				= '%db_table_prefix%_bug_history%db_table_suffix%';
+	$g_mantis_bug_monitor_table				= '%db_table_prefix%_bug_monitor%db_table_suffix%';
+	$g_mantis_bug_relationship_table		= '%db_table_prefix%_bug_relationship%db_table_suffix%';
+	$g_mantis_bug_table						= '%db_table_prefix%_bug%db_table_suffix%';
+	$g_mantis_bug_text_table				= '%db_table_prefix%_bug_text%db_table_suffix%';
+	$g_mantis_bugnote_table					= '%db_table_prefix%_bugnote%db_table_suffix%';
+	$g_mantis_bugnote_text_table			= '%db_table_prefix%_bugnote_text%db_table_suffix%';
+	$g_mantis_news_table					= '%db_table_prefix%_news%db_table_suffix%';
+	$g_mantis_project_category_table		= '%db_table_prefix%_project_category%db_table_suffix%';
+	$g_mantis_project_file_table			= '%db_table_prefix%_project_file%db_table_suffix%';
+	$g_mantis_project_table					= '%db_table_prefix%_project%db_table_suffix%';
+	$g_mantis_project_user_list_table		= '%db_table_prefix%_project_user_list%db_table_suffix%';
+	$g_mantis_project_version_table			= '%db_table_prefix%_project_version%db_table_suffix%';
+	$g_mantis_user_table					= '%db_table_prefix%_user%db_table_suffix%';
+	$g_mantis_user_profile_table			= '%db_table_prefix%_user_profile%db_table_suffix%';
+	$g_mantis_user_pref_table				= '%db_table_prefix%_user_pref%db_table_suffix%';
+	$g_mantis_user_print_pref_table			= '%db_table_prefix%_user_print_pref%db_table_suffix%';
+	$g_mantis_custom_field_project_table	= '%db_table_prefix%_custom_field_project%db_table_suffix%';
+	$g_mantis_custom_field_table      	    = '%db_table_prefix%_custom_field%db_table_suffix%';
+	$g_mantis_custom_field_string_table     = '%db_table_prefix%_custom_field_string%db_table_suffix%';
+	$g_mantis_upgrade_table					= '%db_table_prefix%_upgrade%db_table_suffix%';
+	$g_mantis_filters_table					= '%db_table_prefix%_filters%db_table_suffix%';
+	$g_mantis_sponsorship_table				= '%db_table_prefix%_sponsorship%db_table_suffix%';
+	$g_mantis_tokens_table					= '%db_table_prefix%_tokens%db_table_suffix%';
+	$g_mantis_project_hierarchy_table		= '%db_table_prefix%_project_hierarchy%db_table_suffix%';
+	$g_mantis_config_table					= '%db_table_prefix%_config%db_table_suffix%';
 
 	###########################
 	# Mantis Enum Strings
