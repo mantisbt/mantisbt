@@ -8,7 +8,7 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### shows all variables and values
+	### shows all variables and values; for debug
     #while (list($var, $value) = each($HTTP_POST_VARS)) {
         #echo "$var = $value<br>\n";
     #}

@@ -18,9 +18,9 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### check whether the user wanted to hide the results
-	if ( !isset( $f_show_status ) ) {
-		$f_hide_resolved = $g_default_hide_resolved;
-	}
+#	if ( !isset( $f_show_status ) ) {
+#		$f_hide_resolved = $g_default_hide_resolved;
+#	}
 
 	if ( !isset( $f_limit_view ) ) {
 		$f_limit_view = $g_default_limit_view;
@@ -46,6 +46,10 @@
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
 	}
+
+#	if ( $f_show_status!="any" ) {
+#		$f_hide_resolved = "";
+#	}
 
 	### basically we toggle between ASC and DESC if the user clicks the
 	### same sort order
@@ -91,6 +95,7 @@
 		</select>
 		Show: <input type=text name=f_limit_view size=3 maxlength=7 value="<? echo $f_limit_view ?>">
 		Changed(hrs): <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
+		Hide Fixed: <input type=checkbox name=f_hide_resolved <? if ($f_hide_resolved=="on") echo "CHECKED"?>>
 		<input type=submit value=" Filter ">
 		</td>
 		</form>
@@ -312,10 +317,10 @@
 
 <div align=center>
 <? if ( $f_offset_prev >= 0 ) { ?>
- [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">View Prev <? echo $f_limit_view ?></a> ]
+ [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>&f_hide_resolved=<? echo $f_hide_resolved ?>">View Prev <? echo $f_limit_view ?></a> ]
 <? } ?>
 <? if ( $row_count == $f_limit_view ) { ?>
- [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">View Next <? echo $f_limit_view ?></a> ]
+ [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>&f_hide_resolved=<? echo $f_hide_resolved ?>">View Next <? echo $f_limit_view ?></a> ]
 <? } ?>
 </div>
 
