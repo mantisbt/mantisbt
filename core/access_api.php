@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.28 2004-04-08 20:52:49 prescience Exp $
+	# $Id: access_api.php,v 1.29 2004-07-24 13:26:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -30,8 +30,12 @@
 		}
 
 		if ( !auth_is_user_authenticated() ) {
-			$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
-			print_header_redirect( 'login_page.php?return=' . $p_return_page );
+			if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+				$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
+				print_header_redirect( 'login_page.php?return=' . $p_return_page );
+			} else {
+				print_header_redirect( 'login_page.php' );
+			}
 		} else {
 			PRINT '<center>';
 			PRINT '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
