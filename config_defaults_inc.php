@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.157 2004-03-27 20:22:55 narcissus Exp $
+	# $Id: config_defaults_inc.php,v 1.158 2004-03-29 12:58:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -493,6 +493,9 @@
 	# the handler or the reporter (since they automatically get notified, if required)
 	# If recipients of the reminders are below the monitor threshold, they will not be added.
 	$g_reminder_recipents_monitor_bug = ON;
+
+        # Default Reminder View Status (VS_PUBLIC or VS_PRIVATE)
+        $g_default_reminder_view_status = VS_PUBLIC;
 
 	###################################
 	# Mantis File Upload Settings

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.13 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_reminder.php,v 1.14 2004-03-29 12:58:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,7 +50,7 @@
 			$t_body .= "\n\n" . $f_body;
 		}
 
-		bugnote_add( $f_bug_id, $t_body );
+		bugnote_add( $f_bug_id, $t_body, config_get( 'default_reminder_view_status' ) == VS_PRIVATE );
 	}
 
 	html_page_top1();
