@@ -2,18 +2,19 @@ Mantis ChangeLog
 
 2003.??.??  -  0.18.0a3
 
- * Fix: META redirects were not XHTML-compliant
- * Fix: db_insert_id() did not use mysql_insert_id(), but executed another query (which is probably slower)
- * Fix: $g_lang_current was not available to custom_strings_inc.php
  * Enhancement: When an enumeration is not found, display @<enumid>@ instead of @null@.
+ * Fix: META redirects were not XHTML-compliant
+ * Fix: $g_lang_current was not available to custom_strings_inc.php
  * Fix #2939: Confusing file names for uploaded project documents.
  * Fix #2954: Bgcolor attribute on TD in view_all_bug_page (moved to TR) [optimisation]
+ * Fix #2956: db_insert_id() did not use mysql_insert_id(), but executed another query (which is probably slower)
  * Fix #2964: proj_doc_add.php is empty if document file already exists
  * Fix #2967: Make bugnotes visible while updating bugs (updating, resolving, and closing)
  * Fix #2968: Add query counts to action pages.
  * Fix #2969: Bug not found error when deleting a bugnote.
  * Fix #2970: Sending a reminder sends two notifications.
  * Fix #2974: Message "APPLICATION WARNING #300" on main page.
+ * Fix #2982: Having email_set_category set to EMAIL_CATEGORY_PROJECT_CATEGORY erased various mail headers.
  * Languages: Updated German localisation.
 
 2003.02.19  -  0.18.0a2

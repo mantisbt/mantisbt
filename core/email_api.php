@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.50 2003-02-19 12:18:09 puklos Exp $
+	# $Id: email_api.php,v 1.51 2003-02-20 15:38:53 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -758,7 +758,7 @@
 			$t_headers .= 'Content-Type: text/plain; charset=' . lang_get( 'charset' ) . "\n";
 
 			if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) ) {
-				$t_headers = "Keywords: $p_category\n";
+				$t_headers .= "Keywords: $p_category\n";
 			}
 
 			if ( OFF === $t_debug_email ) {
