@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.57 2005-02-27 21:20:35 prichards Exp $
+	# $Id: helper_api.php,v 1.58 2005-03-23 18:41:23 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -57,6 +57,7 @@
 		# statements
 
 		$t_color_str	= 'closed';
+		$t_color = '#ffffff';
 		$t_arr			= explode_enum_string( $t_status_enum_string );
 		$t_arr_count	= count( $t_arr );
 		for ( $i=0; $i < $t_arr_count ;$i++ ) {
@@ -68,14 +69,11 @@
 			}
 		}
 
-		$t_color_variable_name = $t_color_str.'_color';
-		if ( config_is_set( $t_color_variable_name ) ) {
-			return config_get( $t_color_variable_name );
-		} elseif ( isset ( $t_status_colors[$t_color_str] ) ) {
-			return $t_status_colors[$t_color_str];
+        if ( isset ( $t_status_colors[$t_color_str] ) ) {
+			$t_color = $t_status_colors[$t_color_str];
 		}
 
-		return '#ffffff';
+		return $t_color;
 	}
 	# --------------------
 	# Given a enum string and num, return the appropriate string
