@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.38 2004-05-25 23:43:48 int2str Exp $
+	# $Id: login_page.php,v 1.39 2004-07-10 00:29:14 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,7 +17,7 @@
 
 	$f_error		= gpc_get_bool( 'error' );
 	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
-	$f_return		= gpc_get_string( 'return', '' );
+	$f_return		= strip_tags( gpc_get_string( 'return', '' ) );
 
 	# Check for HTTP_AUTH. HTTP_AUTH is handled in login.php
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.18 2004-06-26 14:05:42 prichards Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.19 2004-07-10 00:29:14 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
 	$f_field_id	= gpc_get_int( 'field_id' );
-	$f_return	= gpc_get_string( 'return', 'manage_custom_field_page.php' );
+	$f_return	= strip_tags( gpc_get_string( 'return', 'manage_custom_field_page.php' ) );
 
 	custom_field_ensure_exists( $f_field_id );
 

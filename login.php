@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.33 2004-06-28 10:13:22 vboctor Exp $
+	# $Id: login.php,v 1.34 2004-07-10 00:29:14 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,8 +18,8 @@
 	$f_username		= gpc_get_string( 'username', '' );
 	$f_password		= gpc_get_string( 'password', '' );
 	$f_perm_login	= gpc_get_bool( 'perm_login' );
-	$f_return		= gpc_get_string( 'return', config_get( 'default_home_page' ) );
-	$f_from			= gpc_get_string( 'from', '' );
+	$f_return		= strip_tags( gpc_get_string( 'return', config_get( 'default_home_page' ) ) );
+	$f_from			= strip_tags( gpc_get_string( 'from', '' ) );
 
 	if ( BASIC_AUTH == config_get( 'login_method' ) ) {
 		$f_username = $_SERVER['REMOTE_USER'];

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_delete.php,v 1.14 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_custom_field_delete.php,v 1.15 2004-07-10 00:29:14 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
 	$f_field_id	= gpc_get_int( 'field_id' );
-	$f_return	= gpc_get_string( 'return', 'manage_custom_field_page.php' );
+	$f_return	= strip_tags( gpc_get_string( 'return', 'manage_custom_field_page.php' ) );
 
 	if( 0 < count( custom_field_get_project_ids( $f_field_id ) ) ) {
 		helper_ensure_confirmed( lang_get( 'confirm_used_custom_field_deletion' ),

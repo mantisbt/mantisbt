@@ -14,6 +14,7 @@ Mantis ChangeLog
  * Fix #4020: Database field 'realname' not found after plain installation (vboctor)
  * Fix #4027: Database query error on text search
  * Fix #4040: Sponsorship timestamp is not displayed correctly in sponsorship list (vboctor)
+ * Fix #4044: Cross Site Scripting Vulnerability
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection..
  * Updated German, Italian, and Brazilian Portuguese languages.
 
