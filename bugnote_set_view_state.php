@@ -1,9 +1,13 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: bugnote_set_view_state.php,v 1.14 2002-12-30 10:46:25 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# Set an existing bugnote private or public.
@@ -14,35 +18,25 @@
 	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );
 	$f_private		= gpc_get_bool( 'private' );
 
-	# make sure the user accessing the note is valid and has proper access
 	bugnote_ensure_exists( $f_bugnote_id );
-	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );
-	$t_bug_id				= bugnote_get_field( $f_bugnote_id, 'bug_id' );
-	$t_user_id			= current_user_get_field( 'id' );
-	$c_bugnote_id 		= (integer)$f_bugnote_id;
-
+	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );
+	bug_ensure_exists( $t_bug_id );
 
-	if ( bug_get_field( $t_bug_id, 'status' ) < RESOLVED ) {
-		if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
-			( $t_bugnote_user_id == $t_user_id )) {
-			# do nothing
-		} elseif ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
-			# do nothing
-		} else {
-			print_header_redirect( 'logout_page.php' );
-		}
-	} else {
-		print_header_redirect( 'logout_page.php' );
+	# Check if the bug has been resolved
+	if ( bug_get_field( $t_bug_id, 'status' ) >= RESOLVED ) {
+		trigger_error( ERROR_BUG_RESOLVED_ACTION_DENIED, ERROR );
 	}
 
-	$result = bugnote_update_view_state( $f_bugnote_id, $f_private );
+	# make sure the user accessing the note is valid and has proper access
+	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 
-	# Determine which view page to redirect back to.
-	$t_redirect_url = string_get_bug_view_url( $t_bug_id ) . '#bugnotes';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
+	if ( ( ! access_level_check_greater_or_equal( config_get( 'update_bugnote_threshold' ) ) ) &&
+		 ( $t_bugnote_user_id != auth_get_current_user_id() ) ) {
+		access_denied();
 	}
+
+	bugnote_set_view_state( $f_bugnote_id, $f_private );
+
+	print_header_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
 ?>

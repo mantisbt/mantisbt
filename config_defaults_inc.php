@@ -539,8 +539,9 @@
 	# Add bugnote threshold
 	$g_add_bugnote_threshold = REPORTER;
 
-	# Update bugnote threshold (assuming that
-	$g_update_bugnote_threshold = REPORTER;
+	# Update bugnote threshold (if the bugnote is not your own - users can
+	#  always update their own bugnotes)
+	$g_update_bugnote_threshold = DEVELOPER;
 
 	# Add profile threshold
 	$g_add_profile_threshold = REPORTER;

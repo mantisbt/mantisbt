@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.99 $
+	# $Revision: 1.100 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-30 05:38:40 $
+	# $Date: 2002-12-30 10:46:25 $
 	#
-	# $Id: strings_english.txt,v 1.99 2002-12-30 05:38:40 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.100 2002-12-30 10:46:25 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -174,6 +174,7 @@
 	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
 	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
+	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
 
 	# General Strings
 	$s_go_back = 'Go Back';
