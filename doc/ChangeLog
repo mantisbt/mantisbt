@@ -54,6 +54,7 @@ Mantis ChangeLog
  * Fixed defects with updating project categories and versions.
  * Fixed problem deleting bugnotes.
  * Fixed problem in core_API.php where constants were used before declaration
+ * Fixed problem in core_email_API.php where an email could be send to noone at all, in rare cases.
  * Fixed problem in core_user_API.php which caused an infinite redirect in some browsers (such as Mozilla).
  * Fixed problem in manage_proj_update.php which gave a warning when editing projects with empty upload file paths.
  * Fixed problem with ambiguous column names in queries when using the text search or applying filters

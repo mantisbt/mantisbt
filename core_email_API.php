@@ -8,11 +8,11 @@
 	###########################################################################
 	# Email API
 	# -------------------------------------------------
-	# $Revision: 1.69 $
-	# $Author: vboctor $
-	# $Date: 2002-08-16 08:25:22 $
+	# $Revision: 1.70 $
+	# $Author: jlatour $
+	# $Date: 2002-08-17 14:44:14 $
 	#
-	# $Id: core_email_API.php,v 1.69 2002-08-16 08:25:22 vboctor Exp $
+	# $Id: core_email_API.php,v 1.70 2002-08-17 14:44:14 jlatour Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -529,6 +529,11 @@
 		$t_recipient = trim( $p_recipient );
 		$t_subject   = trim( $p_subject );
 		$t_message   = trim( $p_message );
+		
+		# short-circuit if no recipient is defined
+		if (!$p_recipient) {
+			return;
+		}
 
 		# for debugging only
 		#echo $t_recipient.'<br />'.$t_subject.'<br />'.$t_message.'<br />'.$t_headers;
