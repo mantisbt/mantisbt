@@ -6,6 +6,7 @@ Mantis
  * Fixed account profiles to check for blank inputs.
  * Fixed some problems with BASIC_AUTH.
  * Fixed problems with documentation links.
+ * Fixed a few documentation errors in configuration.html.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.
@@ -18,6 +19,7 @@ Mantis
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
  * Added a global option to control what access levels can delete bugs.
  * Removed access_min and access threshold concepts from the user and project management.
+ * Removed extra "echo" in news archive page.
 
 03.15.2002  -   0.17.1
 
