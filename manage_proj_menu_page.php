@@ -12,16 +12,11 @@
 	check_varset( $f_sort, 'name' );
 	$c_sort = addslashes($f_sort);
 
-	# basically we toggle between ASC and DESC if the user clicks the
-	# same sort order
-	if ( isset( $f_dir ) ) {
-		if ( 'ASC' == $f_dir ) {
-			$f_dir = 'DESC';
-		} else {
-			$f_dir = 'ASC';
-		}
+	check_varset( $f_dir, 'ASC' );
+	if ( 'ASC' == $f_dir ) {
+		$c_dir = 'ASC';
 	} else {
-		$f_dir = 'ASC';
+		$c_dir = 'DESC';
 	}
 
 ?>
@@ -104,28 +99,27 @@
 </tr>
 <tr class="row-category">
 	<td width="20%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_name, 'name', $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'name' ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_name, 'name', $c_dir, $c_sort ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'name' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_status, 'status', $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'status' ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_status, 'status', $c_dir, $c_sort ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'status' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_enabled, 'enabled', $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'enabled' ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_enabled, 'enabled', $c_dir, $c_sort ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_view_status, 'view_state', $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'view_state' ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_view_status, 'view_state', $c_dir, $c_sort ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'view_state' ) ?>
 	</td>
 	<td width="40%">
-		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_description, 'description', $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'description' ) ?>
+		<?php print_manage_project_sort_link(  'manage_proj_menu_page.php', $s_description, 'description', $c_dir, $c_sort ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'description' ) ?>
 	</td>
 </tr>
 <?php
-	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
 	$query = "SELECT *
 			FROM $g_mantis_project_table
 			ORDER BY '$c_sort' $c_dir";

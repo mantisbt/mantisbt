@@ -9,23 +9,21 @@
 <?php
 	check_access( MANAGER );
 
-	# these pages are invalid for the 'All Project' selection
+	# These pages are invalid for the 'All Project' selection
 	if ( '0000000' == $g_project_cookie_val ) {
 		print_header_redirect( 'login_select_proj_page.php' );
 	}
 
 	check_varset( $f_sort, 'username' );
+	check_varset( $f_dir, 'DESC' );
 
-	# basically we toggle between ASC and DESC if the user clicks the
-	# same sort order
-	if ( isset( $f_dir ) ) {
-		if ( 'ASC' == $f_dir ) {
-			$f_dir = 'DESC';
-		} else {
-			$f_dir = 'ASC';
-		}
+	# Clean up the form variables
+	$c_sort = addslashes($f_sort);
+
+	if ($f_dir == 'ASC') {
+		$c_dir = 'ASC';
 	} else {
-		$f_dir = 'ASC';
+		$c_dir = 'DESC';
 	}
 ?>
 <?php print_page_top1() ?>
@@ -95,19 +93,19 @@
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_username, 'username', $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'username' ) ?>
+		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_username, 'username', $c_dir, $c_sort ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'username' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_email, 'email', $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'email' ) ?>
+		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_email, 'email', $c_dir, $c_sort ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'email' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_access_level, 'access_level', $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'access_level' ) ?>
+		<?php print_manage_user_sort_link( 'proj_user_menu_page.php', $s_access_level, 'access_level', $c_dir, $c_sort ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'access_level' ) ?>
 	</td>
-	<td>
-		&nbsp;
+	<td>&nbsp;
+		
 	</td>
 </tr>
 <?php

@@ -9,22 +9,12 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	check_varset( $f_sort, '' );
-	check_varset( $f_dir, '' );
+	check_varset( $f_sort, 'username' );
+	check_varset( $f_dir, 'DESC' );
+	check_varset( $f_hide, 0 );
 
 	# set cookie values for hide, sort by, and dir
 	if ( isset( $f_save ) ) {
-		#echo $f_hide.$f_sort;
-		if ( isset( $f_hide ) ) {
-			if ( ( 'on' == $f_hide ) || ( 1 == $f_hide ) ) {
-				$f_hide = 1;
-			} else {
-				$f_hide = 0;
-			}
-		} else {
-			$f_hide = 0;
-		}
-
 		$t_manage_string = $f_hide.':'.$f_sort.':'.$f_dir;
 		setcookie( $g_manage_cookie, $t_manage_string, time()+$g_cookie_time_length, $g_cookie_path );
 	} else if ( !empty( $g_manage_cookie_val ) ) {
@@ -42,17 +32,21 @@
 		} else {
 			$f_dir = 'DESC';
 		}
-	} else {
-		$f_hide = 0;
-		$f_sort = 'username';
-		$f_dir  = 'DESC';
 	}
 
-	# we toggle between ASC and DESC if the user clicks the same sort order
-	if ( 'ASC' == $f_dir ) {
-		$f_dir = 'DESC';
+	# Clean up the form variables
+	$c_sort = addslashes($f_sort);
+
+	if ($f_dir == 'ASC') {
+		$c_dir = 'ASC';
 	} else {
-		$f_dir = 'ASC';
+		$c_dir = 'DESC';
+	}
+	
+	if ($f_hide == 0) { # a 0 will turn it off
+		$c_hide = 0;
+	} else {            # anything else (including 'on') will turn it on
+		$c_hide = 1;
 	}
 ?>
 <?php print_page_top1() ?>
@@ -62,7 +56,6 @@
 
 <?php # New Accounts Form BEGIN ?>
 <?php
-	# Get the user data in $f_sort order
 	$days_old = 7;
 	$query = "SELECT *
 		FROM $g_mantis_user_table
@@ -95,7 +88,6 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 <?php # Never Logged In Form BEGIN ?>
 <?php
-	# Get the user data in $f_sort order
 	$query = "SELECT *
 		FROM $g_mantis_user_table
 		WHERE login_count=0
@@ -127,10 +119,8 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 <?php # Manage Form BEGIN ?>
 <?php
-	# Get the user data in $f_sort order
-	$c_sort = addslashes($f_sort);
-	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
-	if ( 0 == $f_hide ) {
+	# Get the user data in $c_sort order
+	if ( 0 == $c_hide ) {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
 				UNIX_TIMESTAMP(last_visit) as last_visit
 				FROM $g_mantis_user_table
@@ -154,40 +144,42 @@ for ($i=0;$i<$new_user_count;$i++) {
 	</td>
 	<td class="center" colspan="2">
 		<form method="post" action="manage_page.php">
+		<input type="hidden" name="f_sort" value="<?php echo $c_sort ?>">
+		<input type="hidden" name="f_dir" value="<?php echo $c_dir ?>">
 		<input type="hidden" name="f_save" value="1">
-		<input type="checkbox" name="f_hide" <?php if ( 1 == $f_hide ) echo 'CHECKED' ?>> <?php echo $s_hide_inactive ?>
+		<input type="checkbox" name="f_hide" value="1" <?php if ( 1 == $c_hide ) echo 'CHECKED' ?>> <?php echo $s_hide_inactive ?>
 		<input type="submit" value="<?php echo $s_filter_button ?>">
 		</form>
 	</td>
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_username, 'username', $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'username' ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_username, 'username', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'username' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_email, 'email', $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'email' ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_email, 'email', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'email' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_access_level, 'access_level', $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'access_level' ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_access_level, 'access_level', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'access_level' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_enabled, 'enabled', $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'enabled' ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_enabled, 'enabled', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_p, 'protected', $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'protected' ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_p, 'protected', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'protected' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_date_created, 'date_created', $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'date_created' ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_date_created, 'date_created', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'date_created' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  'manage_page.php', $s_last_visit, 'last_visit', $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, 'last_visit' ) ?>
+		<?php print_manage_user_sort_link(  'manage_page.php', $s_last_visit, 'last_visit', $c_dir, $c_sort, $c_hide ) ?>
+		<?php print_sort_icon( $c_dir, $c_sort, 'last_visit' ) ?>
 	</td>
 </tr>
 <?php

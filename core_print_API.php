@@ -985,7 +985,7 @@
 	# --------------------
 	function print_view_bug_sort_link2( $p_string, $p_sort_field, $p_sort, $p_dir ) {
 		if ( $p_sort_field == $p_sort ) {
-			# we toggle between ASC and DESC if the user clicks the same sort order
+			# We toggle between ASC and DESC if the user clicks the same sort order
 			if ( 'ASC' == $p_dir ) {
 				$p_dir = 'DESC';
 			} else {
@@ -995,12 +995,32 @@
 		PRINT '<a href="view_all_set.php?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_type=2&amp;f_print=1">'.$p_string.'</a>';
 	}
 	# --------------------
-	function print_manage_user_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir, $p_hide=0 ) {
-		PRINT '<a href="'.$p_page.'?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'&amp;f_save=1&amp;f_hide='.$p_hide.'">'.$p_string.'</a>';
+	function print_manage_user_sort_link(  $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {
+		if ($p_sort_by == $p_field) {   # If this is the selected field flip the order
+			if ($p_dir == 'ASC') {
+				$t_dir = 'DESC';
+			} else {
+				$t_dir = 'ASC';
+			}       
+		} else {                        # Otherwise always start with ASCending
+				$t_dir = 'ASC';
+		}
+		
+		PRINT '<a href="'.$p_page.'?f_sort='.$p_field.'&amp;f_dir='.$t_dir.'&amp;f_save=1&amp;f_hide='.$p_hide.'">'.$p_string.'</a>';
 	}
 	# --------------------
-	function print_manage_project_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir ) {
-		PRINT '<a href="'.$p_page.'?f_sort='.$p_sort_field.'&amp;f_dir='.$p_dir.'">'.$p_string.'</a>';
+	function print_manage_project_sort_link(  $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
+		if ($p_sort_by == $p_field) {   # If this is the selected field flip the order
+			if ($p_dir == 'ASC') {
+				$t_dir = 'DESC';
+			} else {
+				$t_dir = 'ASC';
+			}       
+		} else {                        # Otherwise always start with ASCending
+			$t_dir = 'ASC';
+		}
+		
+		PRINT '<a href="'.$p_page.'?f_sort='.$p_field.'&amp;f_dir='.$t_dir.'">'.$p_string.'</a>';
 	}
 	# --------------------
 	# print the bracketed links used near the top

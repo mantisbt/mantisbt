@@ -77,6 +77,7 @@ Mantis ChangeLog
  * Added word2k and excel export in print_all_bug_page.php. Users can choose the bugs to display/print, and the fields to export with the 'Printing Options' link.
  * Added custom attributes for the 7 ones in config_inc.php : priority, severity, status (with colors), etc... Define it in manage_proj_menu_page.php ; implementation has been thought in a 'per project Settings' conception, but only available for all projects right now.
  * Fixed security hole in summary_graph_functions.php (Joao Gouveia: tharbad@kaotik.org)
+ * Improved the behaviour of sorting the tables of users and projects in 'Manage'.
 
 2002.05.19  -  0.17.3
 
