@@ -10,7 +10,8 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
 
-	# Either generate a random password and email it or make a blank one.
+	# Either generate a random password and email it if emailing is enabled.
+	# Otherwise make a blank one.
 
 	### Go with random password and email it to the user
     if ( $f_protected==0 ) {
@@ -59,7 +60,11 @@
 	if ( $f_protected==1 ) {				### PROTECTED
 		PRINT "$s_account_reset_protected_msg<p>";
 	} else if ( $result ) {					### SUCCESS
-		PRINT "$s_account_reset_msg<p>";
+		if ( $g_allow_signup==1 ) {
+			PRINT "$s_account_reset_msg<p>";
+		} else {
+			PRINT "$s_account_reset_msg2<p>";
+		}
 	} else {								### FAILURE
 		print_sql_error( $query );
 	}

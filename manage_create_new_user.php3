@@ -63,14 +63,6 @@
     		'$g_default_email_on_bugnote', '$g_default_email_on_status',
     		'$g_default_email_on_priority', '$g_default_language')";
     $result = db_query($query);
-
-	### Add profile
-	/*$query = "INSERT
-			INTO $g_mantis_user_profile_table
-    		( id, user_id, platform, os, os_build, description, default_profile )
-			VALUES
-			( null, '$f_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description', '' )";
-    $result = db_query( $query );*/
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
