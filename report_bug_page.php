@@ -70,8 +70,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<?php echo $s_category ?> <?php print_documentaion_link( "category" ) ?>:<br>
-		<span class="required">*<?php echo $s_required ?>*</span>
+		<span class="required">*</span><?php echo $s_category ?> <?php print_documentaion_link( "category" ) ?>:<br />
 	</td>
 	<td width="70%">
 		<select name="f_category">
@@ -82,8 +81,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_reproducibility ?> <?php print_documentaion_link( "reproducibility" ) ?>:<br>
-		<span class="required">*<?php echo $s_required ?>*</span>
+		<span class="required">*</span><?php echo $s_reproducibility ?> <?php print_documentaion_link( "reproducibility" ) ?>:<br />
 	</td>
 	<td>
 		<select name="f_reproducibility">
@@ -94,8 +92,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_severity ?> <?php print_documentaion_link( "severity" ) ?>:<br>
-		<span class="required">*<?php echo $s_required ?>*</span>
+		<span class="required">*</span><?php echo $s_severity ?> <?php print_documentaion_link( "severity" ) ?>:<br />
 	</td>
 	<td>
 		<select name="f_severity">
@@ -106,8 +103,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_summary ?> <?php print_documentaion_link( "summary" ) ?>:<br>
-		<span class="required">*<?php echo $s_required ?>*</span>
+		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentaion_link( "summary" ) ?>:<br />
 	</td>
 	<td>
 		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>">
@@ -115,8 +111,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_description ?> <?php print_documentaion_link( "description" ) ?>:<br>
-		<span class="required">*<?php echo $s_required ?>*</span>
+		<span class="required">*</span><?php echo $s_description ?> <?php print_documentaion_link( "description" ) ?>:<br />
 	</td>
 	<td>
 		<textarea name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
@@ -150,7 +145,10 @@
 	</td>
 </tr>
 <tr>
-	<td class="center" colspan="2">
+	<td class="left">
+		<span class="required"> * <?php echo $s_required ?></span>
+	</td>
+	<td class="center">
 		<input type="submit" value="<?php echo $s_submit_report_button ?>">
 	</td>
 </tr>
