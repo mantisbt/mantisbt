@@ -144,8 +144,9 @@
 				$v_start = 0;
 				$v_end   = 0;
 			}
+			PRINT "($v_start - $v_end / $t_query_count)";
 		?>
-		(<?php echo $v_start ?> - <?php echo $v_end ?> / <?php echo $t_query_count ?>)
+		<span class="small"><?php print_bracket_link( $g_print_all_bug_page, $s_print_all_bug_page_link ) ?></span>
 	</td>
 	<td class="right">
 		[

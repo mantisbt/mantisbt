@@ -41,6 +41,7 @@ Mantis
  * Added g_bug_move_access_level to control what access level can move bugs to other projects.
  * Added extra link after a bug report to go directly to the new bug.
  * Added g_close_bug_threshold for closing a bug.
+ * Added print report link to view all bug page.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
 
