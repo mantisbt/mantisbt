@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.192 $
+	# $Revision: 1.193 $
 	# $Author: prichards $
-	# $Date: 2004-08-01 22:24:59 $
+	# $Date: 2004-08-02 18:17:59 $
 	#
-	# $Id: strings_english.txt,v 1.192 2004-08-01 22:24:59 prichards Exp $
+	# $Id: strings_english.txt,v 1.193 2004-08-02 18:17:59 prichards Exp $
 	###########################################################################
 ?>
 <?php
@@ -941,6 +941,8 @@ $s_custom_field_access_level_rw = 'Write Access';
 $s_custom_field_length_min = 'Min. Length';
 $s_custom_field_length_max = 'Max. Length';
 $s_custom_field_advanced = 'Display Only On Advanced Page';
+$s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_update = 'Display When Updating Issues';
 $s_custom_field_display_resolve = 'Display When Resolving Issues';
 $s_custom_field_display_close = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';

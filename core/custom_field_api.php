@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.36 2004-08-01 22:24:59 prichards Exp $
+	# $Id: custom_field_api.php,v 1.37 2004-08-02 18:17:11 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -266,6 +266,8 @@
 		$c_length_min		= db_prepare_int(    $p_def_array['length_min']      );
 		$c_length_max		= db_prepare_int(    $p_def_array['length_max']      );
 		$c_advanced			= db_prepare_bool(   $p_def_array['advanced']        );
+		$c_display_report	= db_prepare_bool( 	 $p_def_array['display_report'] );
+		$c_display_update	= db_prepare_bool( 	 $p_def_array['display_update'] );
 		$c_display_resolve	= db_prepare_bool( 	 $p_def_array['display_resolve'] );
 		$c_display_close	= db_prepare_bool( 	 $p_def_array['display_close']   );
 		$c_require_report	= db_prepare_bool( 	 $p_def_array['require_report']  );
@@ -372,6 +374,22 @@
 				$query .= ', ';
 			}
 			$query .= "advanced='$c_advanced'";
+		}
+		if( array_key_exists( 'display_report', $p_def_array ) ) {
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "display_report='$c_display_report'";
+		}
+		if( array_key_exists( 'display_update', $p_def_array ) ) {
+			if ( !$t_update_something ) {
+				$t_update_something = true;
+			} else {
+				$query .= ', ';
+			}
+			$query .= "display_update='$c_display_update'";
 		}
 		if( array_key_exists( 'display_resolve', $p_def_array ) ) {
 			if ( !$t_update_something ) {

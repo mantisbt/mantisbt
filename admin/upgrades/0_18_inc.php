@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.16 2004-08-01 14:42:53 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.17 2004-08-02 18:16:47 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -477,6 +477,16 @@
 			'cat_user_id_unsigned',
 			'Change the user_id in mantis_project_category_table to unsigned int.',
 			"ALTER TABLE mantis_project_category_table CHANGE user_id user_id INT( 7 ) UNSIGNED DEFAULT '0' NOT NULL" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-7',
+			'Allow custom fields to be hidden/displayed for report/update',
+			"ALTER TABLE mantis_custom_field_table ADD display_report BOOL NOT NULL default '1'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-8',
+			'Allow custom fields to be hidden/displayed for report/update',
+			"ALTER TABLE mantis_custom_field_table ADD display_update BOOL NOT NULL default '1'" );
 
 	return $upgrades;
 ?>

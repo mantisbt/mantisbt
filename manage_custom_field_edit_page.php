@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.19 2004-07-10 00:29:14 int2str Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.20 2004-08-02 18:16:20 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -127,6 +127,22 @@
 			</td>
 			<td>
 				<input type="checkbox" name="advanced" value="1" <?php check_checked( $t_definition['advanced'] ) ?>>
+			</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">
+				<?php echo lang_get( 'custom_field_display_report' ) ?>
+			</td>
+			<td>
+				<input type="checkbox" name="display_report" value="1" <?php check_checked( $t_definition['display_report'] ) ?>>
+			</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">
+				<?php echo lang_get( 'custom_field_display_update' ) ?>
+			</td>
+			<td>
+				<input type="checkbox" name="display_update" value="1" <?php check_checked( $t_definition['display_update'] ) ?>>
 			</td>
 		</tr>
 		<tr <?php echo helper_alternate_class() ?>>

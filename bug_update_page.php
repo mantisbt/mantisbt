@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.77 2004-07-26 13:24:38 prichards Exp $
+	# $Id: bug_update_page.php,v 1.78 2004-08-02 18:16:20 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -322,12 +322,12 @@
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if( ( !$t_def['advanced'] || $t_def['require_report']) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
+		if( ( ( $t_def['display_update'] && !$t_def['advanced'] ) || $t_def['require_update']) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 			$t_custom_fields_found = true;
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if($t_def['require_update']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td colspan="5">
 		<?php
