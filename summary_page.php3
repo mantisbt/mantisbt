@@ -16,6 +16,33 @@
 <? print_header( $g_page_title ) ?>
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	$query = "SELECT id, date_submitted, last_updated
+			FROM $g_mantis_bug_table
+			WHERE status='resolved'";
+	$result = mysql_query( $query );
+	$bug_count = mysql_num_rows( $result );
+
+	$t_bug_id = 0;
+	$t_largest_diff = 0;
+	$t_total_time = 0;
+	for ($i=0;$i<$bug_count;$i++) {
+		$row = mysql_fetch_array( $result );
+		$t_date_submitted = sql_to_unix_time($row["date_submitted"]);
+		$t_last_updated = sql_to_unix_time($row["last_updated"]);
+
+		$t_diff = $t_last_updated - $t_date_submitted;
+		$t_total_time = $t_total_time + $t_diff;
+		if ( $t_diff > $t_largest_diff ) {
+			$t_largest_diff = $t_diff;
+			$t_bug_id = $row["id"];
+		}
+	}
+	$t_average_time = $t_total_time / $bug_count;
+
+	$t_largest_diff = number_format( $t_largest_diff / 86400, 2 );
+	$t_total_time = number_format( $t_total_time / 86400, 2 );
+	$t_average_time = number_format( $t_average_time / 86400, 2 );
 ?>
 
 <p>
@@ -76,7 +103,7 @@
 				<? print_bug_enum_summary( "resolution" ) ?>
 			</table>
 		</td>
-		</tr>
+	</tr>
 	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
 		<td>
 			<b>by category:</b>
@@ -99,10 +126,63 @@
 			</table>
 		</td>
 	</tr>
+	<tr valign=bottom height=28 bgcolor=<? echo $g_white_color ?>>
+		<td>
+			<b>time stats(days):</b>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
+		<td>
+			<? ### CATEGORY ### ?>
+			<table width=97%>
+			<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
+				<td width=50%>
+					longest open bug
+				</td>
+				<td width=50%>
+					<? if ( get_current_user_profile_field( "advanced_view" )==on ) { ?>
+						<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
+					<? } else {?>
+						<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
+					<? } ?>
+				</td>
+			</tr>
+			<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
+				<td>
+					longest open
+				</td>
+				<td>
+					<? echo $t_largest_diff ?>
+				</td>
+			</tr>
+			<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
+				<td>
+					average time
+				</td>
+				<td>
+					<? echo $t_average_time ?>
+				</td>
+			</tr>
+			<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
+				<td>
+					total time
+				</td>
+				<td>
+					<? echo $t_total_time ?>
+				</td>
+			</tr>
+			</table>
+		</td>
+		<td>
+		</td>
+	</tr>
 	</table>
 	</td>
 </tr>
 </table>
+
 
 <? print_footer() ?>
 <? print_body_bottom() ?>

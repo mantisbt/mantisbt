@@ -505,6 +505,53 @@
 		}
 	}
 	#--------------------
+	### Returns the specified field of the currently logged in user, otherwise 0
+	function get_current_user_field( $p_field_name ) {
+		global 	$g_string_cookie_val,
+				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
+				$g_mantis_user_table;
+
+		### if logged in
+		if ( isset( $g_string_cookie_val ) ) {
+
+			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+			### get user info
+			$query = "SELECT $p_field_name
+					FROM $g_mantis_user_table
+					WHERE cookie_string='$g_string_cookie_val'";
+			$result = db_mysql_query( $query );
+			return mysql_result( $result, 0 );
+		}
+		else {
+			return 0;
+		}
+	}
+	#--------------------
+	### Returns the specified field of the currently logged in user, otherwise 0
+	function get_current_user_profile_field( $p_field_name ) {
+		global 	$g_string_cookie_val,
+				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
+				$g_mantis_user_table, $g_mantis_user_pref_table;
+
+		### if logged in
+		if ( isset( $g_string_cookie_val ) ) {
+
+			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+			$t_id = get_current_user_field( "id" );
+			### get user info
+			$query = "SELECT $p_field_name
+					FROM $g_mantis_user_pref_table
+					WHERE user_id='$t_id'";
+			$result = db_mysql_query( $query );
+			return mysql_result( $result, 0 );
+		}
+		else {
+			return 0;
+		}
+	}
+	#--------------------
 	####################
 	# Authentication API
 	####################
