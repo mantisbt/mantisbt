@@ -6,3 +6,5 @@ tr.top-bar { background-color: #98b8e8; padding: 3px; padding: 3px; color: #2048
 tr.top-bar td { border-top: 1px solid #222222; border-bottom: 1px solid #222222 }
 tr.top-bar td.title { text-align: right; font-size: 10pt; font-weight: bold; letter-spacing: 1.0em; }
 tr.top-bar td.links { text-align: left; font-size: 8pt }
+tr.row-1 { background-color: #d8d8d8; color: #000000; }
+tr.row-2 { background-color: #e8e8e8; color: #000000; }

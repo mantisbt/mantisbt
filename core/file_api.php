@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.50 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: file_api.php,v 1.51 2004-07-23 23:20:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -415,6 +415,13 @@
 
 		return false;
 	}
+
+	# --------------------
+	# clean file name by removing sensitive characters and replacing them with underscores
+	function file_clean_name( $p_filename ) {
+		return preg_replace( "/[\/\\ :&]/", "_", $p_filename); 
+	}
+
 	# --------------------
 	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='' ) {
 		$c_bug_id		= db_prepare_int( $p_bug_id );

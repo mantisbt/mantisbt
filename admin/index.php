@@ -22,6 +22,7 @@
 	<p>[ <a href="check.php">Check your installation</a> ]</p>
 	<p>[ <a href="upgrade_warning.php">Upgrade your installation</a> ]</p>
 	<p>[ <a href="css/index.php">Modify stylesheets</a> ]</p>
+	<p>[ <a href="system_utils.php">System Utilities</a> ]</p>
 	</td></tr></table>
 </div>
 </body>

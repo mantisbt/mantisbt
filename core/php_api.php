@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.12 2004-04-08 18:04:53 prescience Exp $
+	# $Id: php_api.php,v 1.13 2004-07-23 23:20:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	### PHP Compatibility API ###
@@ -77,4 +77,20 @@
 			return key_exists( $key, $search );
 		}
 	}
+
+	# --------------------
+	# file_put_contents is normally in PEAR
+		if (!function_exists('file_put_contents')) {
+		function file_put_contents($filename, $data) {
+			if (($h = fopen($filename, 'w')) === false) {
+				return false;
+			}
+			if (($bytes = @fwrite($h, $data)) === false) {
+				return false;
+			}
+			fclose($h);
+			return $bytes;
+		}
+	}
+
 ?>
