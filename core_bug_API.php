@@ -23,7 +23,7 @@
 			   $g_mantis_bugnote_table, $g_mantis_bugnote_text_table, $g_mantis_bug_history_table,
 			   $g_file_upload_method ;
 
-		email_bug_deleted($p_id);
+		email_bug_deleted( $p_id );
 
 		$c_id			= (integer)$p_id;
 		$c_bug_text_id	= (integer)$p_bug_text_id;
@@ -32,13 +32,13 @@
 		$query = "DELETE
 				FROM $g_mantis_bug_table
 				WHERE id='$c_id'";
-		$result = db_query($query);
+		$result = db_query( $query );
 
 		# Delete the corresponding bug text
 		$query = "DELETE
 				FROM $g_mantis_bug_text_table
 				WHERE id='$c_bug_text_id'";
-		$result = db_query($query);
+		$result = db_query( $query );
 
 		# Delete the bugnote text items
 		$query = "SELECT bugnote_text_id
@@ -68,7 +68,7 @@
 			$query = "SELECT diskfile, filename
 				FROM $g_mantis_bug_file_table
 				WHERE bug_id='$c_id'";
-			$result = db_query($query);
+			$result = db_query( $query );
 			$file_count = db_num_rows( $result );
 
 			# there may be more than one file
@@ -96,6 +96,50 @@
 			FROM $g_mantis_bug_history_table
 			WHERE bug_id='$c_id'";
 		$result = db_query($query);
+	}
+	# --------------------
+	# This function assigns the bug to the current user
+	function bug_assign( $p_bug_id ) {
+		global $g_mantis_bug_table, $g_auto_set_status_to_assigned;
+
+		# extract current information into history variables
+		$result = get_bug_row ( $p_bug_id );
+		if ( 0 == db_num_rows( $result ) ) {
+			# speed is not an issue in this case, so re-use code
+			check_bug_exists( $p_bug_id );
+		}
+
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, 'h' );
+
+		if ( ON == $g_auto_set_status_to_assigned ) {
+			$t_ass_val = ASSIGNED;
+		} else {
+			$t_ass_val = $h_status;
+		}
+
+		$t_handler_id = get_current_user_field( 'id' );
+
+		if ( ( $t_ass_val != $h_status ) || ( $t_handler_id != $h_handler_id ) ) {
+			$c_id = (integer)$p_bug_id;
+
+			# get user id
+			$query ="UPDATE $g_mantis_bug_table ".
+					"SET handler_id='$t_handler_id', status='$t_ass_val' ".
+					"WHERE id='$c_id'";
+			$result = db_query( $query );
+
+			# updated the last_updated date
+			$result = bug_date_update( $p_bug_id );
+
+			# log changes
+			history_log_event_direct( $c_id, 'status', $h_status, $t_ass_val, $t_handler_id );
+			history_log_event_direct( $c_id, 'handler_id', $h_handler_id, $t_handler_id, $t_handler_id );
+
+			# send assigned to email
+			email_assign( $p_bug_id );
+		}
+		return true;
 	}
 	# --------------------
 	function bug_get_field() {
