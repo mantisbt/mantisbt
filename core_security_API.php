@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: jlatour $
-	# $Date: 2002-08-22 18:05:08 $
+	# $Date: 2002-08-22 18:15:10 $
 	#
-	# $Id: core_security_API.php,v 1.1 2002-08-22 18:05:08 jlatour Exp $
+	# $Id: core_security_API.php,v 1.2 2002-08-22 18:15:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -32,8 +32,7 @@
 		} else if ( 'nil' != $p_default) {
 			$t_result = $p_default;
 		} else {
-			# To be implemented later.
-			# trigger_error("Variable '$p_var_name' with no default is missing", E_USER_ERROR);
+			trigger_error("Variable '$p_var_name' with no default is missing", E_USER_ERROR);
 		}
 		
 		return $t_result;
