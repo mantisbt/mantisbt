@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.6 2002-12-05 09:07:43 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.7 2002-12-06 18:01:56 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -21,7 +21,7 @@
 #	- add an object to store field data like BugData and UserPrefs ?
 #	- add caching functions like user, bug, etc
 #	- make existing api functions use caching functions
-#	- add functions to return individual db fields of a field definition
+#	- add functions to return individual db columns for a field definition
 #
 #	DB SCHEMA
 #	The following is the current proposed DB schema to go with this API
@@ -38,7 +38,6 @@ CREATE TABLE mantis_custom_field_table (
   length_min int(3) NOT NULL default '0',
   length_max int(3) NOT NULL default '0',
   advanced int(1) NOT NULL default '0',
-  sequence int(2) NOT NULL default '0',
   PRIMARY KEY (id),
   KEY name (name)
 ) TYPE=MyISAM COMMENT='Field definitions';
@@ -53,6 +52,7 @@ CREATE TABLE mantis_custom_field_string_table (
 CREATE TABLE mantis_custom_field_project_table (
   field_id int(3) NOT NULL,
   project_id int(7) unsigned NOT NULL,
+  sequence int(2) NOT NULL default '0',
   PRIMARY KEY (field_id,project_id)
 ) TYPE=MyISAM COMMENT='Definitions of which fields are available in each project';
 */
@@ -253,7 +253,6 @@ CREATE TABLE mantis_custom_field_project_table (
 		$c_length_min		= db_prepare_int(    $p_def_array['length_min']      );
 		$c_length_max		= db_prepare_int(    $p_def_array['length_max']      );
 		$c_advanced			= db_prepare_bool(   $p_def_array['advanced']        );
-		$c_sequence			= db_prepare_int(    $p_def_array['sequence']        );
 
 		$query = "UPDATE " .
 				 config_get( 'mantis_custom_field_table' ).
@@ -339,14 +338,6 @@ CREATE TABLE mantis_custom_field_project_table (
 				$query .= ', ';
 			}
 			$query .= "advanced='$c_advanced'";
-		}
-		if( array_key_exists( 'sequence', $p_def_array ) ) {
-			if ( !$t_update_something ) {
-				$t_update_something = true;
-			} else {
-				$query .= ', ';
-			}
-			$query .= "sequence='$c_sequence'";
 		}
 
 		$query .= " WHERE id='$c_field_id'";
@@ -489,7 +480,7 @@ CREATE TABLE mantis_custom_field_project_table (
 					  $t_custom_field_project_table p, $t_custom_field_table f
 					  WHERE p.project_id='$c_project_id'
 						AND p.field_id = f.id
-					  ORDER BY f.sequence ASC";
+					  ORDER BY p.sequence ASC";
 		}
 		$result = db_query( $query );
 

@@ -22,7 +22,6 @@
 	$t_values['length_min']      = gpc_get_int(    'f_length_min' );
 	$t_values['length_max']      = gpc_get_int(    'f_length_max' );
 	$t_values['advanced']        = gpc_get_bool(   'f_advanced' );
-	$t_values['sequence']        = gpc_get_int(    'f_sequence' );
 
 	custom_field_update( $f_field_id, $t_values );
 

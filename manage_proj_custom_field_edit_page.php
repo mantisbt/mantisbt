@@ -121,14 +121,6 @@
 		<input type="checkbox" name="f_advanced" value="1" <?php if($t_definition['advanced']) echo 'checked'; ?>>
 	</td>
 </tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'custom_field_sequence' ) ?>
-	</td>
-	<td>
-		<input type="text" name="f_sequence" size="32" maxlength="64" value="<?php echo $t_definition['sequence'] ?>" />
-	</td>
-</tr>
 <tr>
 	<td>
 		&nbsp;
