@@ -32,7 +32,7 @@
 	    		WHERE id='$f_id'";
 	}
 
-    $result = mysql_query( $query );
+    $result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

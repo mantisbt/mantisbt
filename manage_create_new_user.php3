@@ -25,7 +25,7 @@
 			VALUES
 			( null, '$f_username', '$f_email', '$t_password', NOW(), NOW(),
 			'$f_access_level', '$f_enabled', '$f_protected', '$t_cookie_string')";
-    $result = mysql_query( $query );
+    $result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

@@ -21,12 +21,12 @@
 				last_updated=NOW(), eta='$f_eta',
 				handler_id='$f_handler_id'
     		WHERE id='$f_id'";
-   	$result = mysql_query($query);
+   	$result = db_query($query);
 
     $query = "UPDATE $g_mantis_bug_table
     		SET last_updated=NOW()
     		WHERE id='$f_id'";
-   	$result = mysql_query($query);
+   	$result = db_query($query);
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

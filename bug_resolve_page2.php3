@@ -13,8 +13,8 @@
 	$query = "SELECT date_submitted
 			FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
-   	$result = mysql_query( $query );
-   	$t_date_submitted = mysql_result( $result, 0 );
+   	$result = db_query( $query );
+   	$t_date_submitted = db_result( $result, 0 );
 
 	$t_handler_id = get_current_user_field( "id " );
 
@@ -27,7 +27,7 @@
     			date_submitted='$t_date_submitted',
 				last_updated=NOW()
     		WHERE id='$f_id'";
-   	$result = mysql_query($query);
+   	$result = db_query($query);
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

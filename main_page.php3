@@ -16,15 +16,15 @@
 	### get news count
 	$query = "SELECT COUNT(id)
 			FROM $g_mantis_news_table";
-	$result = mysql_query( $query );
-    $total_news_count = mysql_result( $result, 0 );
+	$result = db_query( $query );
+    $total_news_count = db_result( $result, 0 );
 
 	$query = "SELECT *
 			FROM $g_mantis_news_table
 			ORDER BY id DESC
 			LIMIT $f_offset, $g_news_view_limit";
 	$result = db_query( $query );
-    $news_count = mysql_num_rows( $result );
+    $news_count = db_num_rows( $result );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -40,7 +40,7 @@
 
 <?
 	for ($i=0;$i<$news_count;$i++) {
-		$row = mysql_fetch_array($result);
+		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 		$v_headline = string_display( $v_headline );
 		$v_body = string_display_with_br( $v_body );
@@ -50,9 +50,9 @@
 	    $query = "SELECT username, email
 	    		FROM $g_mantis_user_table
 	    		WHERE id='$v_poster_id'";
-	    $result2 = mysql_query( $query );
+	    $result2 = db_query( $query );
 	    if ( $result2 ) {
-	    	$row = mysql_fetch_array( $result2 );
+	    	$row = db_fetch_array( $result2 );
 			$t_poster_name	= $row["username"];
 			$t_poster_email	= $row["email"];
 		}

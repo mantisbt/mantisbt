@@ -13,14 +13,14 @@
     		FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
     $result = db_query( $query );
-	$row = mysql_fetch_array( $result );
+	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
     		WHERE id='$v_bug_text_id'";
-    $result = mysql_query( $query );
-	$row = mysql_fetch_array( $result );
+    $result = db_query( $query );
+	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
 	$v_summary = string_display( $v_summary );
@@ -255,8 +255,8 @@
 		$query = "SELECT description
 				FROM $g_mantis_user_profile_table
 				WHERE id='$v_profile_id'";
-		$result = mysql_query( $query );
-		$t_profile_description = mysql_result( $result, 0 );
+		$result = db_query( $query );
+		$t_profile_description = db_result( $result, 0 );
 		$t_profile_description = string_display_with_br( $t_profile_description );
 
 ?>

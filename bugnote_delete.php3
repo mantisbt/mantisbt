@@ -13,20 +13,20 @@
 	$query = "DELETE
 			FROM $g_mantis_bugnote_table
 			WHERE id='$f_bug_id'";
-	$result = mysql_query($query);
+	$result = db_query($query);
 
 	### get date submitted (weird bug in mysql)
 	$query = "SELECT date_submitted
 			FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
-   	$result = mysql_query( $query );
-   	$t_date_submitted = mysql_result( $result, 0 );
+   	$result = db_query( $query );
+   	$t_date_submitted = db_result( $result, 0 );
 
 	### update bug last updated
 	$query = "UPDATE $g_mantis_bug_table
     		SET date_submitted='$t_date_submitted', last_updated=NOW()
     		WHERE id='$f_id'";
-   	$result = mysql_query($query);
+   	$result = db_query($query);
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

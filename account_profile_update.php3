@@ -26,7 +26,7 @@
     		SET platform='$f_platform', os='$f_os',
     			os_build='$f_os_build', description='$f_description'
     		WHERE id='$f_id'";
-    $result = mysql_query( $query );
+    $result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

@@ -13,7 +13,7 @@
 			FROM $g_mantis_user_table
 			WHERE username='$f_username'";
 	$result = db_query( $query );
-	$row = mysql_fetch_array( $result );
+	$row = db_fetch_array( $result );
 
 	if ( $row ) {
 		extract( $row, EXTR_PREFIX_ALL, "u" );

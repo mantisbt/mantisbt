@@ -19,7 +19,7 @@
     $result = db_query($query);
 
     ## OOPS, No entry in the database yet.  Lets make one
-    if ( mysql_num_rows( $result )==0 ) {
+    if ( db_num_rows( $result )==0 ) {
 
 		### Create row
 	    $query = "INSERT
@@ -38,7 +38,7 @@
     }
 
     ### prefix data with u_
-	$row = mysql_fetch_array($result);
+	$row = db_fetch_array($result);
 	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
 <? print_html_top() ?>

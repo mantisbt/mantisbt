@@ -27,9 +27,9 @@
     $query = "SELECT access_level, protected
     		FROM $g_mantis_user_table
 			WHERE cookie_string='$g_string_cookie_val'";
-    $result = mysql_query($query);
-    $t_access_level = mysql_result( $result, 0, 0 );
-    $t_protected = mysql_result( $result, 0, 1 );
+    $result = db_query($query);
+    $t_access_level = db_result( $result, 0, 0 );
+    $t_protected = db_result( $result, 0, 1 );
 ?>
 <div align=center>
 <font face=Verdana size=-1>

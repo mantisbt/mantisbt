@@ -21,7 +21,7 @@
 			CHANGE category
 			category ENUM ($f_category)
 			not null";
-	$result = mysql_query( $query );
+	$result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

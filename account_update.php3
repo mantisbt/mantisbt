@@ -16,7 +16,7 @@
 	    $query = "UPDATE $g_mantis_user_table
 	    		SET username='$f_username', email='$f_email'
 	    		WHERE id='$f_id'";
-		$result = mysql_query( $query );
+		$result = db_query( $query );
 
 		### Update password if changed and the two match and not empty
 		if ( !empty( $f_password ) ) {
@@ -25,7 +25,7 @@
 				$query = "UPDATE $g_mantis_user_table
 						SET password='$t_password'
 						WHERE id='$f_id'";
-				$result = mysql_query( $query );
+				$result = db_query( $query );
 	    	}
 		}
 	} ### end if protected

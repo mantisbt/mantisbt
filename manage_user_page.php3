@@ -20,7 +20,7 @@
     		FROM $g_mantis_user_table
 			WHERE id='$f_id'";
     $result = db_query($query);
-	$row = mysql_fetch_array($result);
+	$row = db_fetch_array($result);
 	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
 <? print_html_top() ?>

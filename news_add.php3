@@ -24,7 +24,7 @@
     		( id, poster_id, date_posted, last_modified, headline, body )
 			VALUES
 			( null, '$f_poster_id', NOW(), NOW(), '$f_headline', '$f_body' )";
-    $result = mysql_query( $query );
+    $result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

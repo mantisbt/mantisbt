@@ -39,7 +39,7 @@
 			ORDER BY '$f_sort' $f_dir";
 
     $result = db_query($query);
-	$user_count = mysql_num_rows($result);
+	$user_count = db_num_rows( $result );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -114,7 +114,7 @@
 <?
 	for ($i=0;$i<$user_count;$i++) {
 		### prefix user data with u_
-		$row = mysql_fetch_array($result);
+		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, "u" );
 
 		$u_date_created  = date( "m-d H:i", sql_to_unix_time( $u_date_created ) );

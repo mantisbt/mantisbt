@@ -19,13 +19,13 @@
 	$query = "UPDATE $g_mantis_user_profile_table
     		SET default_profile=''
     		WHERE user_id='$f_user_id'";
-    $result = mysql_query( $query );
+    $result = db_query( $query );
 
     ### Set Default
 	$query = "UPDATE $g_mantis_user_profile_table
     		SET default_profile='on'
     		WHERE id='$f_id'";
-    $result = mysql_query( $query );
+    $result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

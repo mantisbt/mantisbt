@@ -14,7 +14,7 @@
 			FROM $g_mantis_user_table
 			WHERE cookie_string='$g_string_cookie_val'";
 	$result = db_query( $query );
-	$t_user_id = mysql_result( $result, 0);
+	$t_user_id = db_result( $result, 0);
 
 	if ( !isset( $f_limit_view ) ) {
 		$f_limit_view = $g_default_limit_view;
@@ -201,11 +201,11 @@
 	<?
 		### perform query
 	    $result = db_query( $query );
-		$row_count = mysql_num_rows( $result );
+		$row_count = db_num_rows( $result );
 
 		for($i=0; $i < $row_count; $i++) {
 			### prefix bug data with v_
-			$row = mysql_fetch_array($result);
+			$row = db_fetch_array($result);
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			$v_summary = string_display( $v_summary );

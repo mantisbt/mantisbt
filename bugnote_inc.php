@@ -16,7 +16,7 @@
 			WHERE bug_id='$f_id'
 			ORDER BY date_submitted $g_bugnote_order";
 	$result = db_query($query);
-	$num_notes = mysql_num_rows($result);
+	$num_notes = db_num_rows($result);
 ?>
 
 <table width=100% cols=2 bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
@@ -42,7 +42,7 @@
 <?
 	for($i=0; $i < $num_notes; $i++) {
 		### prefix all bugnote data with v3_
-		$row = mysql_fetch_array( $result );
+		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v3" );
 		$v3_date_submitted = date( "m-d H:i", sql_to_unix_time( $v3_date_submitted ) );
 
@@ -51,7 +51,7 @@
 				FROM $g_mantis_bugnote_text_table
 				WHERE id='$v3_bugnote_text_id'";
 		$result2 = db_query($query);
-		$v3_note = mysql_result( $result2, 0);
+		$v3_note = db_result( $result2, 0);
 ?>
 <tr height=5 bgcolor=<? echo $g_white_color ?>>
 	<td colspan=2 bgcolor=<? echo $g_white_color ?>>

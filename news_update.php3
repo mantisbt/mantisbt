@@ -24,7 +24,7 @@
 			SET headline='$f_headline', body='$f_body',
 				date_posted='$f_date_posted', last_modified=NOW()
     		WHERE id='$f_id'";
-    $result = mysql_query( $query );
+    $result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

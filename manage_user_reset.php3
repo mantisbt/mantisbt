@@ -20,7 +20,7 @@
 	    $query = "UPDATE $g_mantis_user_table
 	    		SET password='4nPtPLdAFdoxA'
 	    		WHERE id='$f_id'";
-	    $result = mysql_query( $query );
+	    $result = db_query( $query );
 	}
 ?>
 <? print_html_top() ?>

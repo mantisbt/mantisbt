@@ -56,7 +56,7 @@
 	}
 	### --------------------
 	function db_select_db( $p_db_name ) {
-		mysql_select_db( $p_db_name );
+		return mysql_select_db( $p_db_name );
 	}
 	### --------------------
 	function db_num_rows( $p_result ) {
@@ -144,7 +144,7 @@
 				FROM $g_mantis_user_table
 				WHERE cookie_string='$g_string_cookie_val'";
 		$result = db_query( $query );
-		$t_username = mysql_result( $result, 0 );
+		$t_username = db_result( $result, 0 );
 
 		$t_now = date("d-m-y h:m T");
 		PRINT "<table width=100%><tr>";
@@ -213,10 +213,10 @@
 	    $query = "SELECT id, username
 	    		FROM $g_mantis_user_table
 	    		WHERE access_level='administrator' OR access_level='developer'";
-	    $result = mysql_query( $query );
-	    $user_count = mysql_num_rows( $result );
+	    $result = db_query( $query );
+	    $user_count = db_num_rows( $result );
 	    for ($i=0;$i<$user_count;$i++) {
-	    	$row = mysql_fetch_array( $result );
+	    	$row = db_fetch_array( $result );
 	    	$t_handler_id	= $row["id"];
 	    	$t_handler_name	= $row["username"];
 
@@ -235,12 +235,12 @@
 	    $query = "SELECT id
 	    		FROM $g_mantis_bug_table
 	    		ORDER BY id ASC";
-	    $result = mysql_query( $query );
-	    $duplicate_id_count = mysql_num_rows( $result );
+	    $result = db_query( $query );
+	    $duplicate_id_count = db_num_rows( $result );
 	    PRINT "<option value=\"0000000\">";
 
 	    for ($i=0;$i<$duplicate_id_count;$i++) {
-	    	$row = mysql_fetch_array( $result );
+	    	$row = db_fetch_array( $result );
 	    	$t_duplicate_id	= $row["id"];
 
 	    	if ( $t_duplicate_id==$p_duplicate_id ) {
@@ -260,10 +260,10 @@
 			FROM $g_mantis_news_table
 			ORDER BY id DESC";
 	    $result = db_query( $query );
-	    $news_count = mysql_num_rows( $result );
+	    $news_count = db_num_rows( $result );
 
 		for ($i=0;$i<$news_count;$i++) {
-			$row = mysql_fetch_array( $result );
+			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			$v_headline = string_unsafe( $v_headline );
 			$v_headline = htmlspecialchars( $v_headline );
@@ -305,9 +305,9 @@
 	    		FROM $g_mantis_user_table
 	    		WHERE id='$p_user_id'";
 	    $result = db_query( $query );
-	    if ( mysql_num_rows( $result )>0 ) {
-			$t_handler_username	= mysql_result( $result, 0, 0 );
-			$t_handler_email	= mysql_result( $result, 0, 1 );
+	    if ( db_num_rows( $result )>0 ) {
+			$t_handler_username	= db_result( $result, 0, 0 );
+			$t_handler_email	= db_result( $result, 0, 1 );
 
 			PRINT "<a href=\"mailto:$t_handler_email\">".$t_handler_username."</a>";
 		}
@@ -340,12 +340,12 @@
 			WHERE user_id='$p_id'
 			ORDER BY id DESC";
 	    $result = db_query( $query );
-	    $profile_count = mysql_num_rows( $result );
+	    $profile_count = db_num_rows( $result );
 
 		PRINT "<option value=\"\">";
 		for ($i=0;$i<$profile_count;$i++) {
 			### prefix data with v_
-			$row = mysql_fetch_array( $result );
+			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			$v_platform	= string_unsafe( $v_platform );
 			$v_os		= string_unsafe( $v_os );
@@ -370,9 +370,9 @@
 		$query = "SHOW FIELDS
 				FROM $g_mantis_bug_table";
 		$result = db_query( $query );
-		$entry_count = mysql_num_rows( $result );
+		$entry_count = db_num_rows( $result );
 		for ($i=0;$i<$entry_count;$i++) {
-			$row = mysql_fetch_array( $result );
+			$row = db_fetch_array( $result );
 	    	$t_type = stripslashes($row["Type"]);
 	    	$t_field = $row["Field"];
 	    	if ( $t_field==$p_field_name ) {
@@ -412,8 +412,8 @@
 					$query = $query." AND status='$p_status'";
 				}
 			}
-			$result = mysql_query( $query );
-			$t_enum_count = mysql_result( $result, 0 );
+			$result = db_query( $query );
+			$t_enum_count = db_result( $result, 0 );
 
 			### alternate row colors
 			if ( $i % 2 == 1) {
@@ -509,7 +509,7 @@
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
 			$result = db_query( $query );
-			$row = mysql_fetch_array( $result );
+			$row = db_fetch_array( $result );
 			if ( $row ) {
 				$t_enabled = $row["enabled"];
 			}
@@ -524,14 +524,14 @@
 			$query = "SELECT date_created
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
-			$result = mysql_query( $query );
-			$t_date_created = mysql_result( $result, 0 );
+			$result = db_query( $query );
+			$t_date_created = db_result( $result, 0 );
 
 			### update last_visit date
 			$query = "UPDATE $g_mantis_user_table
 					SET last_visit=NOW(), date_created='$t_date_created'
 					WHERE cookie_string='$g_string_cookie_val'";
-			$result = mysql_query( $query );
+			$result = db_query( $query );
 			db_close();
 
 			### go to redirect
@@ -570,7 +570,7 @@
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
 			$result = db_query( $query );
-			$row = mysql_fetch_array( $result );
+			$row = db_fetch_array( $result );
 			if ( $row ) {
 				$t_enabled = $row["enabled"];
 			}
@@ -583,8 +583,8 @@
 			$query = "SELECT last_visit
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
-			$result = mysql_query( $query );
-			$t_last_access = mysql_result( $result, "last_visit" );
+			$result = db_query( $query );
+			$t_last_access = db_result( $result, "last_visit" );
 			db_close();
 
 			### go to redirect
@@ -620,7 +620,7 @@
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
 			$result = db_query( $query );
-			return mysql_result( $result, 0 );
+			return db_result( $result, 0 );
 		}
 		else {
 			return 0;
@@ -644,7 +644,7 @@
 					FROM $g_mantis_user_pref_table
 					WHERE user_id='$t_id'";
 			$result = db_query( $query );
-			return mysql_result( $result, 0 );
+			return db_result( $result, 0 );
 		}
 		else {
 			return 0;
@@ -659,7 +659,7 @@
 					FROM $g_mantis_bugnote_table
 					WHERE bug_id ='$p_id'";
 		$result = db_query( $query );
-		return mysql_result( $result, 0 );
+		return db_result( $result, 0 );
 	}
 	### --------------------
 	###########################################################################
@@ -711,8 +711,8 @@
 					WHERE user_id='$u_id'";
 			$result = db_query( $query );
 
-			if ( mysql_num_rows( $result ) > 0 ) {
-				return mysql_result( $result, 0 );
+			if ( db_num_rows( $result ) > 0 ) {
+				return db_result( $result, 0 );
 			}
 			else {
 				return "";
@@ -750,8 +750,8 @@
 		$query = "SELECT COUNT(id)
 				FROM $g_mantis_bug_table
 				WHERE UNIX_TIMESTAMP(last_updated)>$day";
-		$result = mysql_query( $query );
-		return mysql_result( $result, 0 );
+		$result = db_query( $query );
+		return db_result( $result, 0 );
 	}
 	### --------------------
 	###########################################################################
@@ -815,8 +815,8 @@
 		$query = "SELECT access_level
 				FROM $g_mantis_user_table
 				WHERE cookie_string='$g_string_cookie_val'";
-		$result = mysql_query( $query );
-		$t_access_level = mysql_result( $result, "access_level" );
+		$result = db_query( $query );
+		$t_access_level = db_result( $result, "access_level" );
 
 		if ( access_level_value( $t_access_level ) == access_level_value( $p_access_level ) ) {
 			return true;
@@ -837,8 +837,8 @@
 		$query = "SELECT access_level
 				FROM $g_mantis_user_table
 				WHERE cookie_string='$g_string_cookie_val'";
-		$result = mysql_query( $query );
-		$t_access_level = mysql_result( $result, "access_level" );
+		$result = db_query( $query );
+		$t_access_level = db_result( $result, "access_level" );
 
 		if ( access_level_value( $t_access_level ) >= access_level_value( $p_access_level ) ) {
 			return true;

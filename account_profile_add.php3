@@ -27,7 +27,7 @@
     		( id, user_id, platform, os, os_build, description, default_profile )
 			VALUES
 			( null, '$f_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description', '' )";
-    $result = mysql_query( $query );
+    $result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

@@ -16,19 +16,19 @@
     	$query = "DELETE
     			FROM $g_mantis_user_table
     			WHERE id='$f_id'";
-	    $result = mysql_query( $query );
+	    $result = db_query( $query );
 
 	    ### Remove associated profiles
 	    $query = "DELETE
 	    		FROM $g_mantis_user_profile_table
 	    		WHERE user_id='$f_id'";
-	    $result = mysql_query( $query );
+	    $result = db_query( $query );
 
 		### Remove associated preferences
     	$query = "DELETE
     			FROM $g_mantis_user_pref_table
     			WHERE user_id='$f_id'";
-    	$result = mysql_query( $query );
+    	$result = db_query( $query );
 	} ### end if protected
 ?>
 <? print_html_top() ?>

@@ -12,14 +12,14 @@
 	$query = "SELECT id, date_submitted, last_updated
 			FROM $g_mantis_bug_table
 			WHERE status='resolved'";
-	$result = mysql_query( $query );
-	$bug_count = mysql_num_rows( $result );
+	$result = db_query( $query );
+	$bug_count = db_num_rows( $result );
 
 	$t_bug_id = 0;
 	$t_largest_diff = 0;
 	$t_total_time = 0;
 	for ($i=0;$i<$bug_count;$i++) {
-		$row = mysql_fetch_array( $result );
+		$row = db_fetch_array( $result );
 		$t_date_submitted = sql_to_unix_time($row["date_submitted"]);
 		$t_last_updated = sql_to_unix_time($row["last_updated"]);
 

@@ -33,7 +33,7 @@
 				FROM $g_mantis_user_table
 				WHERE cookie_string='$g_string_cookie_val'";
 		$result = db_query( $query );
-		$u_id = mysql_result( $result, 0 );
+		$u_id = db_result( $result, 0 );
 
 		### Make strings safe for database
 		$f_summary = string_safe( $f_summary );
@@ -54,9 +54,9 @@
 				FROM $g_mantis_user_profile_table
 				WHERE id='$f_id'";
 		    $result = db_query( $query );
-		    $profile_count = mysql_num_rows( $result );
+		    $profile_count = db_num_rows( $result );
 
-			$row = mysql_fetch_array( $result );
+			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			$f_platform	= string_unsafe( $v_platform );
 			$f_os		= string_unsafe( $v_os );
@@ -70,16 +70,16 @@
 				VALUES
 				( null, '$f_description', '$f_steps_to_reproduce',
 				'$f_additional_info' )";
-		$result = mysql_query( $query );
+		$result = db_query( $query );
 
 		### Get the id of the text information we just inserted
 		### NOTE: this is guarranteed to be the correct one.
 		### The value LAST_INSERT_ID is stored on a per connection basis.
 
 		$query = "select LAST_INSERT_ID()";
-		$result = mysql_query( $query );
+		$result = db_query( $query );
 		if ( $result ) {
-			$t_id = mysql_result( $result, 0 );
+			$t_id = db_result( $result, 0 );
 		}
 
 		### Insert the rest of the data
@@ -95,7 +95,7 @@
 				NOW(), NOW(), NOW(), '$t_id', '$f_os', '$f_osbuild',
 				'$f_platform', '$f_version', '$f_build',
 				1, '$f_profile_id', '$f_summary' )";
-		$result = mysql_query( $query );
+		$result = db_query( $query );
 	}
 ?>
 <? print_html_top() ?>

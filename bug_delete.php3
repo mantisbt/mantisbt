@@ -13,36 +13,36 @@
 	$query = "DELETE
 			FROM $g_mantis_bug_table
 			WHERE id='$f_id'";
-	$result = mysql_query($query);
+	$result = db_query($query);
 
 	### Delete the corresponding bug text
 	$query = "DELETE
 			FROM $g_mantis_bug_text_table
 			WHERE id='$f_bug_text_id'";
-	$result = mysql_query($query);
+	$result = db_query($query);
 
 	### Delete the bugnote text items
 	$query = "SELECT bugnote_text_id
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$f_id'";
-	$result = mysql_query($query);
-	$bugnote_count = mysql_num_rows( $result );
+	$result = db_query($query);
+	$bugnote_count = db_num_rows( $result );
 	for ($i=0;$i<$bugnote_count;$i++){
-		$row = mysql_fetch_array( $result );
+		$row = db_fetch_array( $result );
 		$t_bugnote_text_id = $row["bugnote_text_id"];
 
 		### Delete the corresponding bugnote texts
 		$query = "DELETE
 				FROM $g_mantis_bugnote_text_table
 				WHERE id='$t_bugnote_text_id'";
-		$result2 = mysql_query( $query );
+		$result2 = db_query( $query );
 	}
 
 	### Delete the corresponding bugnotes
 	$query = "DELETE
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$f_id'";
-	$result = mysql_query($query);
+	$result = db_query($query);
 
 	header( "Location: $g_view_bug_all_page" );
 ?>

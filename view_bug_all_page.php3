@@ -191,11 +191,11 @@
 	<?
 		### perform query
 	    $result = db_query( $query );
-		$row_count = mysql_num_rows( $result );
+		$row_count = db_num_rows( $result );
 
 		for($i=0; $i < $row_count; $i++) {
 			### prefix bug data with v_
-			$row = mysql_fetch_array($result);
+			$row = db_fetch_array($result);
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			$v_summary = string_display( $v_summary );
