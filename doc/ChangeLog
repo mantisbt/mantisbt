@@ -16,6 +16,7 @@ Mantis ChangeLog
 - 0004122: [relationships] Upgrade script seems to swap the duplicate relationship (masc)
 - 0004083: [sponsorships] Users without email address must not be able to sponsor issues (thraxisp)
 - 0002861: [bugtracker] misleading 'copyright' at the pages' bottom (vboctor)
+- 0003710: [bugtracker] time stats in summary to use resolved (thraxisp)
 - 0004031: [bugtracker] Hiding/removing fixed_in_versions (thraxisp)
 - 0004154: [bugtracker] "Product version" and "Fixed in Version" do not get updated on rename (vboctor)
 - 0004160: [bugtracker] Javascript error in the issue view pages (vboctor)

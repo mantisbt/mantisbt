@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.39 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: summary_page.php,v 1.40 2004-07-27 00:22:13 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,11 +29,12 @@
 	}
 
 	$t_bug_table = config_get( 'mantis_bug_table' );
+	$t_history_table = config_get( 'mantis_bug_history_table' );
 
-	$t_clo_val = CLOSED;
-	$query = "SELECT id, date_submitted, last_updated
+	$t_clo_val = config_get( 'bug_resolved_status_threshold' );
+	$query = "SELECT id, date_submitted, last_updated, status
 			FROM $t_bug_table
-			WHERE $specific_where AND status='$t_clo_val'";
+			WHERE $specific_where AND status>='$t_clo_val'";
 	$result = db_query( $query );
 	$bug_count = db_num_rows( $result );
 
@@ -44,6 +45,25 @@
 		$row = db_fetch_array( $result );
 		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );
 		$t_last_updated   = db_unixtimestamp( $row['last_updated'] );
+		$t_id = $row['id'];
+		$t_status = $row['status'];
+
+		# if the status is not the closed value, it may have passed through the
+		#  status we consider closed (e.g., bug is CLOSED, not RESOLVED)
+		#  we should look for the last time it was RESOLVED in the history
+		if ( $t_status <> $t_clo_val ) {
+			$query2 = "SELECT date_modified
+				FROM " . $t_history_table . "
+				WHERE bug_id=$t_id AND type=" . NORMAL_TYPE . 
+							" AND field_name='status' AND new_value=$t_clo_val
+				ORDER BY date_modified DESC";
+			$result2 = db_query( $query2 );
+			if ( db_num_rows( $result2 ) >= 1 ) {
+				# if any were found, read the first (oldest) one and update the timestamp
+				$row2 = db_fetch_array( $result2 );
+				$t_last_updated   = db_unixtimestamp( $row2['date_modified'] );
+			}
+		}		
 
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated   = 0;
