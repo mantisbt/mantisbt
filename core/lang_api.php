@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.31 2004-08-31 03:54:47 thraxisp Exp $
+	# $Id: lang_api.php,v 1.32 2004-08-31 15:22:30 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -27,6 +27,7 @@
 	function lang_load( $p_lang ) {
 		global $g_lang_strings, $g_active_language;
 
+		$g_active_language  = $p_lang;
 		if ( isset( $g_lang_strings[ $p_lang ] ) ) {
 			return;
 		}
@@ -39,7 +40,7 @@
 		# custom_strings_inc.php can use $g_active_language
 		$t_custom_strings = dirname ( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'custom_strings_inc.php';
 		if ( file_exists( $t_custom_strings ) ) {
-			require_once( $t_custom_strings );
+			require( $t_custom_strings ); # this may be loaded multiple times, once per language
 		}
 
 		$t_vars = get_defined_vars();
