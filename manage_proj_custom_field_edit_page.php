@@ -34,10 +34,10 @@
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get( 'custom_field_caption' ) ?>
+		<?php echo lang_get( 'custom_field_name' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_caption" size="32" maxlength="64" value="<?php echo $t_definition['caption'] ?>" />
+		<input type="text" name="f_name" size="32" maxlength="64" value="<?php echo $t_definition['name'] ?>" />
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -45,7 +45,9 @@
 		<?php echo lang_get( 'custom_field_type' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_type" size="32" maxlength="64" value="<?php echo $t_definition['type'] ?>" />
+		<select name="f_type">
+			<?php print_enum_string_option_list( 'custom_field_type', $t_definition['type'] ) ?>
+		</select>
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>

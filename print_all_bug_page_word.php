@@ -181,7 +181,7 @@
 	$query = $query." LIMIT $c_offset, $c_per_page";
 
 	# perform query
-    $result = db_query( $query );
+	$result = db_query( $query );
 	$row_count = db_num_rows( $result );
 
 ?>
@@ -412,6 +412,26 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 	</td>
 </tr>
+<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
+<?php
+$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+foreach( $t_related_custom_field_ids as $t_id ) {
+	$t_def = custom_field_get_definition($t_id);
+?>
+<tr class="print">
+	<td class="print-category">
+		<?php echo $t_def['name'] ?>:
+	</td>
+	<td class="print" colspan="5">
+		<?php
+			echo custom_field_get_value( $t_id, $v_id );
+		?>
+	</td>
+</tr>
+<?php
+}       // foreach
+?>
+<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
 <tr>
 	<td class="print-spacer" colspan="6">
 		<hr size="1" />

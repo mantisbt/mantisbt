@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.35 2002-10-29 08:30:21 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.36 2002-12-04 08:05:45 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -73,7 +73,7 @@
 		<?php echo lang_get( 'last_update' ) ?>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<?php echo bug_format_id( $f_bug_id ) ?>
 	</td>
@@ -104,7 +104,7 @@
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'reporter' ) ?>
 	</td>
@@ -125,7 +125,7 @@
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
@@ -136,7 +136,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'priority' ) ?>
 	</td>
@@ -158,7 +158,7 @@
 		<input type="text" name="f_platform" size="16" maxlength="32" value="<?php echo $t_bug->platform ?>" />
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'status' ) ?>
 	</td>
@@ -180,7 +180,7 @@
 		<input type="text" name="f_os" size="16" maxlength="32" value="<?php echo $t_bug->os ?>" />
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'projection' ) ?>
 	</td>
@@ -199,7 +199,7 @@
 		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $t_bug->os_build ?>" />
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'eta' ) ?>
 	</td>
@@ -220,7 +220,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td colspan="4">
 		&nbsp;
 	</td>
@@ -231,7 +231,7 @@
 		<input type="text" name="f_build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td colspan="4">
 		&nbsp;
 	</td>
@@ -242,12 +242,39 @@
 		<?php echo $t_bug->votes ?>
 	</td>
 </tr>
+
+<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <tr>
 	<td class="spacer" colspan="6">
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-1">
+<?php
+$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+foreach( $t_related_custom_field_ids as $id ) {
+	$t_def = custom_field_get_definition($id);
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo $t_def['name'] ?>:
+	</td>
+	<td colspan="5">
+		<?php
+			print_custom_field_input( $t_def, $f_bug_id );
+		?>
+	</td>
+</tr>
+<?php
+}   // foreach
+?>
+<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
+
+<tr>
+	<td class="spacer" colspan="6">
+		&nbsp;
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
@@ -255,7 +282,7 @@
 		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $t_bug->summary ?>" />
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'description' ) ?>
 	</td>
@@ -263,7 +290,7 @@
 		<textarea cols="60" rows="5" name="f_description" wrap="virtual"><?php echo $t_bug->description ?></textarea>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'steps_to_reproduce' ) ?>
 	</td>
@@ -271,7 +298,7 @@
 		<textarea cols="60" rows="5" name="f_steps_to_reproduce" wrap="virtual"><?php echo $t_bug->steps_to_reproduce ?></textarea>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
@@ -284,7 +311,7 @@
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
@@ -294,7 +321,7 @@
 </tr>
 
 <?php if ( access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ) ) ) { ?>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'private' ) ?>
 	</td>
@@ -305,7 +332,7 @@
 <?php } ?>
 
 <tr>
-	<td class="center" colspan="6"">
+	<td class="center" colspan="6">
 		<input type="submit" value="<?php echo lang_get( 'update_information_button' ) ?>" />
 	</td>
 </tr>

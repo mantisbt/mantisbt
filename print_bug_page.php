@@ -16,18 +16,18 @@
 	bug_ensure_exists( $f_bug_id );
 	$c_bug_id = (integer)$f_bug_id;
 
-    $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-    		UNIX_TIMESTAMP(last_updated) as last_updated
-    		FROM $g_mantis_bug_table
-    		WHERE id='$c_bug_id'";
-    $result = db_query( $query );
+	$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
+			UNIX_TIMESTAMP(last_updated) as last_updated
+			FROM $g_mantis_bug_table
+			WHERE id='$c_bug_id'";
+	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-    $query = "SELECT *
-    		FROM $g_mantis_bug_text_table
-    		WHERE id='$v_bug_text_id'";
-    $result = db_query( $query );
+	$query = "SELECT *
+			FROM $g_mantis_bug_text_table
+			WHERE id='$v_bug_text_id'";
+	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v2' );
 
@@ -219,6 +219,28 @@
 
 	</td>
 </tr>
+
+<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
+<?php
+$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+foreach( $t_related_custom_field_ids as $t_id ) {
+	$t_def = custom_field_get_definition($t_id);
+?>
+<tr class="print">
+	<td class="print-category">
+		<?php echo $t_def['name'] ?>:
+	</td>
+	<td class="print" colspan="4">
+		<?php
+			echo custom_field_get_value( $t_id, $f_bug_id );
+		?>
+	</td>
+</tr>
+<?php
+}       // foreach
+?>
+<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
+
 <tr>
 	<td class="print-spacer" colspan="6">
 		<hr size="1" />

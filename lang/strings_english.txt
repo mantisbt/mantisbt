@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.91 $
+	# $Revision: 1.92 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-04 03:16:33 $
+	# $Date: 2002-12-04 08:05:48 $
 	#
-	# $Id: strings_english.txt,v 1.91 2002-12-04 03:16:33 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.92 2002-12-04 08:05:48 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -185,8 +185,9 @@
 	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
 	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_CAPTION_NOT_UNIQUE]= 'ERROR: This is a duplicate caption.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field!';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_WRONG_VALUE] = 'ERROR: Field entry does not match definition!';
 	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
@@ -807,7 +808,7 @@
 	$s_edit_custom_field_title = 'Edit custom field';
 	$s_custom_fields = 'Fields:';
 	$s_custom_fields_setup = 'Custom Fields:';
-	$s_custom_field_caption = 'caption';
+	$s_custom_field_name = 'name';
 	$s_custom_field_type = 'type';
 	$s_custom_field_possible_values = 'possible values';
 	$s_custom_field_default_value = 'default value';
@@ -818,4 +819,5 @@
 	$s_custom_field_length_max = 'max. length';
 	$s_custom_field_advanced = 'advanced';
 	$s_custom_field_seqence = 'seqence';
+	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enummeration,4:Email';
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.10 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: bug_view_page.php,v 1.11 2002-12-04 08:05:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -66,7 +66,7 @@
 		<?php echo lang_get( 'last_update' ) ?>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<?php echo bug_format_id( $f_bug_id ) ?>
 	</td>
@@ -91,7 +91,7 @@
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'reporter' ) ?>
 	</td>
@@ -108,7 +108,7 @@
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
@@ -116,7 +116,7 @@
 		<?php print_user_with_subject( $t_bug->handler_id, $f_bug_id ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'priority' ) ?>
 	</td>
@@ -133,7 +133,7 @@
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'status' ) ?>
 	</td>
@@ -150,12 +150,41 @@
 		&nbsp;
 	</td>
 </tr>
+
+<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
+<?php
+$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+foreach( $t_related_custom_field_ids as $t_id ) {
+	$t_def = custom_field_get_definition($t_id);
+	if( !$t_def['advanced'] ) {
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo $t_def['name'] ?>:
+	</td>
+	<td colspan="5">
+		<?php
+			$t_custom_field_value = custom_field_get_value( $t_id, $f_bug_id );
+			if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {
+				echo "<a href=\"mailto:$t_custom_field_value\">$t_custom_field_value</a>";
+			} else {
+				echo $t_custom_field_value;
+			}
+		?>
+	</td>
+</tr>
+<?php
+	}   // !$t_def['advanced']
+}       // foreach
+?>
+<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
+
 <tr>
 	<td class="spacer" colspan="6">
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
@@ -163,7 +192,7 @@
 		<?php echo $t_bug->summary ?>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'description' ) ?>
 	</td>
@@ -171,7 +200,7 @@
 		<?php echo $t_bug->description ?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
@@ -184,7 +213,7 @@
 
 	if ( $t_show_attachments ) {
 ?>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'attached_files' ) ?>
 	</td>
@@ -193,7 +222,7 @@
 	</td>
 </tr>
 <?php } ?>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'bug_relationships' ) ?>
 	</td>
@@ -291,7 +320,7 @@
 		echo '<td class="center">';
 		html_button_bug_monitor( $f_bug_id );
 		echo '</td>';
-	}	
+	}
 
 	# DELETE button
 	echo '<td class="center">';

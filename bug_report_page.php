@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.3 2002-10-27 22:53:40 jfitzell Exp $
+	# $Id: bug_report_page.php,v 1.4 2002-12-04 08:05:45 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -56,7 +56,7 @@
 		?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category" width="30%">
 		<?php echo lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>:
 	</td>
@@ -66,7 +66,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'reproducibility' ) ?> <?php print_documentation_link( 'reproducibility' ) ?>:
 	</td>
@@ -76,7 +76,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'severity' ) ?> <?php print_documentation_link( 'severity' ) ?>:
 	</td>
@@ -88,7 +88,7 @@
 </tr>
 
 <?php if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) { ?>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'priority' ) ?> <?php print_documentation_link( 'priority' ) ?>:
 	</td>
@@ -100,12 +100,40 @@
 </tr>
 <?php } ?>
 
+<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <tr>
 	<td class="spacer" colspan="2">
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-2">
+<?php
+$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+foreach( $t_related_custom_field_ids as $id ) {
+	$t_def = custom_field_get_definition($id);
+	if( !$t_def['advanced'] ) {
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo $t_def['name'] ?>:
+	</td>
+	<td>
+		<?php
+			print_custom_field_input( $t_def );
+		?>
+	</td>
+</tr>
+<?php
+	}   // !$t_def['advanced']
+}
+?>
+<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
+
+<tr>
+	<td class="spacer" colspan="2">
+		&nbsp;
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>:
 	</td>
@@ -113,7 +141,7 @@
 		<input tabindex="5" type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>" />
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<span class="required">*</span><?php echo lang_get( 'description' ) ?> <?php print_documentation_link( 'description' ) ?>:
 	</td>
@@ -121,7 +149,7 @@
 		<textarea tabindex="6" name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'additional_information' ) ?> <?php print_documentation_link( 'additional_information' ) ?>:
 	</td>
@@ -131,7 +159,7 @@
 </tr>
 
 <?php if ( ON == config_get( 'allow_file_upload' ) ) { ?>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'upload_file' ) ?>
 	</td>
@@ -142,7 +170,7 @@
 </tr>
 <?php } ?>
 
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
@@ -151,7 +179,7 @@
 		<input tabindex="9" type="radio" name="f_view_state" value="50" /> <?php echo lang_get( 'private' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'report_stay' ) ?> <?php print_documentation_link( 'report_stay' ) ?>:
 	</td>

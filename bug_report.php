@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.4 2002-11-16 16:06:04 jfitzell Exp $
+	# $Id: bug_report.php,v 1.5 2002-12-04 08:05:45 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,7 +80,7 @@
 					$f_category,
 					$f_os, $f_os_build,
 					$f_platform, $f_product_version,
-					$f_build, 
+					$f_build,
 					$f_profile_id, $f_summary, $f_view_state,
 					$f_description, $f_steps_to_reproduce, $f_additional_info );
 
@@ -88,6 +88,16 @@
 	if ( is_uploaded_file( $f_file['tmp_name'] ) && 0 != $f_file['size'] ) {
 		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'] );
 	}
+
+if( ON == config_get( 'use_experimental_custom_fields' ) ) {
+	$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+	foreach( $t_related_custom_field_ids as $id ) {
+		$t_def = custom_field_get_definition($id);
+		if( !custom_field_set_value( $id, $t_bug_id, gpc_get_string( "f_custom_field_$id", $t_def['default_value'] ) ) ) {
+			trigger_error( ERROR_CUSTOM_FIELD_WRONG_VALUE, ERROR );
+		}
+	}
+} // ON = config_get( 'use_experimental_custom_fields' )
 
 	print_page_top1();
 

@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.3 2002-11-25 08:06:00 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.4 2002-12-04 08:05:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -28,7 +28,7 @@
 /*
 CREATE TABLE mantis_custom_field_table (
   id int(3) NOT NULL auto_increment,
-  caption varchar(64) NOT NULL default '',
+  name varchar(64) NOT NULL default '',
   type int(2) NOT NULL default '0',
   possible_values varchar(255) NOT NULL default '',
   default_value varchar(255) NOT NULL default '',
@@ -74,7 +74,7 @@ CREATE TABLE mantis_custom_field_project_table (
 		$query = "SELECT COUNT(*) FROM
 				  $t_custom_field_project_table
 				  WHERE field_id='$c_field_id'
-				    AND project_id='$c_project_id'";
+					AND project_id='$c_project_id'";
 		$result = db_query( $query );
 
 		$count = db_result( $result );
@@ -120,15 +120,15 @@ CREATE TABLE mantis_custom_field_project_table (
 	}
 
 	# --------------------
-	# Check to see whether the caption is unique
-	#  return false if a field with the caption already exists, true otherwise
-	function custom_field_is_caption_unique( $p_caption ) {
-		$c_caption		= db_prepare_string( $p_caption );
+	# Check to see whether the name is unique
+	#  return false if a field with the name already exists, true otherwise
+	function custom_field_is_name_unique( $p_name ) {
+		$c_name		= db_prepare_string( $p_name );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$query = "SELECT COUNT(*) FROM
 				  $t_custom_field_table
-				  WHERE caption='$c_caption'";
+				  WHERE name='$c_name'";
 		$result = db_query( $query );
 
 		$count = db_result( $result );
@@ -179,18 +179,18 @@ CREATE TABLE mantis_custom_field_project_table (
 	#===================================
 
 	# --------------------
-	# create a new custom field with the caption $p_caption
+	# create a new custom field with the name $p_name
 	# the definition are the default values and can be changes later
 	# return the ID of the new definition
-	function custom_field_create( $p_caption ) {
-		$c_caption = db_prepare_string( $p_caption );
+	function custom_field_create( $p_name ) {
+		$c_name = db_prepare_string( $p_name );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$query = "INSERT INTO
 				  $t_custom_field_table
-					( caption )
+					( name )
 				  VALUES
-					( '$c_caption' )";
+					( '$c_name' )";
 
 		db_query( $query );
 
@@ -230,7 +230,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	#  return true on success, false on failure
 	function custom_field_update( $p_field_id, $p_def_array ) {
 		$c_field_id			= db_prepare_int( $p_field_id );
-		$c_caption			= db_prepare_string( $p_def_array['caption']         );
+		$c_name			= db_prepare_string( $p_def_array['name']         );
 		$c_type				= db_prepare_int(    $p_def_array['type']            );
 		$c_possible_values	= db_prepare_string( $p_def_array['possible_values'] );
 		$c_default_value	= db_prepare_string( $p_def_array['default_value']   );
@@ -247,13 +247,13 @@ CREATE TABLE mantis_custom_field_project_table (
 				 " SET ";
 		$t_update_something = false;
 
-		if( array_key_exists( 'caption', $p_def_array ) ) {
+		if( array_key_exists( 'name', $p_def_array ) ) {
 			if ( !$t_update_something ) {
 				$t_update_something = true;
 			} else {
 				$query .= ', ';
 			}
-			$query .= "caption='$c_caption'";
+			$query .= "name='$c_name'";
 		}
 		if( array_key_exists( 'type', $p_def_array ) ) {
 			if ( !$t_update_something ) {
@@ -544,12 +544,12 @@ CREATE TABLE mantis_custom_field_project_table (
 		$c_field_id = db_prepare_int( $p_field_id );
 		$c_bug_id   = db_prepare_int( $p_bug_id );
 
-		ensure_field_exists( $p_field_id );
+		custom_field_ensure_exists( $p_field_id );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
 		$query = "SELECT access_level_r, default_value FROM
 				  $t_custom_field_table
-				  WHERE field_id='$c_field_id'";
+				  WHERE id='$c_field_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
 
@@ -586,16 +586,17 @@ CREATE TABLE mantis_custom_field_project_table (
 		$c_bug_id	= db_prepare_int( $p_bug_id );
 		$c_value	= db_prepare_string( $p_value );
 
-		ensure_field_exists( $p_field_id );
+		custom_field_ensure_exists( $p_field_id );
 
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT type, possible_values, valid_regexp, access_level_rw,
-				  length_min, length_max, default_value
+		$query = "SELECT name, type, possible_values, valid_regexp,
+				  access_level_rw, length_min, length_max, default_value
 				  FROM $t_custom_field_table
-				  WHERE field_id='$c_field_id'";
+				  WHERE id='$c_field_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
 
+		$t_name				= $row['name'];
 		$t_type				= $row['type'];
 		$t_possible_values	= $row['possible_values'];
 		$t_valid_regexp		= $row['valid_regexp'];
@@ -605,8 +606,10 @@ CREATE TABLE mantis_custom_field_project_table (
 		$t_default_value	= $row['default_value'];
 
 		# check for valid value
-		if ( !ereg( $t_valid_regexp, $p_value ) ) {
-			return false;
+		if ( !is_blank( $t_valid_regexp ) ) {
+			if ( !ereg( $t_valid_regexp, $p_value ) ) {
+				return false;
+			}
 		}
 
 		if ( strlen( $p_value ) < $t_length_min ) {
@@ -624,33 +627,82 @@ CREATE TABLE mantis_custom_field_project_table (
 		$t_custom_field_string_table = config_get( 'mantis_custom_field_string_table' );
 
 		# do I need to update or insert this value?
-		$query = "SELECT COUNT(*)
+		$query = "SELECT value
 				  FROM $t_custom_field_string_table
 				  WHERE field_id='$c_field_id'
 					AND bug_id='$c_bug_id'";
 		$result = db_query( $query );
 
-		if ( db_result( $result ) > 0 ) {
+		if ( db_num_rows( $result ) > 0 ) {
 			$query = "UPDATE $t_custom_field_string_table
 					  SET value='$c_value'
 					  WHERE field_id='$c_field_id'
 						AND bug_id='$c_bug_id'";
 			db_query( $query );
+
+			$row = db_fetch_array( $result );
+			history_log_event_direct( $c_bug_id, $t_name, $row['value'], $c_value);
 		} else {
-			# If the bug doesn't have a value yet and we're setting it to
-			#  the default, don't set it.  This prevents looping forms
-			#  from hardcoding all the defaults into the bug whenever it gets
-			#  updated
-			if ( $t_default_value != $p_value ) {
-				$query = "INSERT INTO $t_custom_field_string_table
-							( field_id, bug_id, value )
-						  VALUES
-							( '$c_field_id', '$c_bug_id', '$c_value' )";
-				db_query( $query );
-			}
+			# Always store the value, even if it's the dafault value
+			# This is important, as the definitions might change but the
+			#  values stored with a bug must not change
+			$query = "INSERT INTO $t_custom_field_string_table
+						( field_id, bug_id, value )
+					  VALUES
+						( '$c_field_id', '$c_bug_id', '$c_value' )";
+			db_query( $query );
 		}
 
 		#db_query() errors on failure so:
 		return true;
 	}
+
+	#===================================
+	# Output
+	#===================================
+
+	# --------------------
+	# Print an input field
+	# $p_field_def contains the definition of the custom field (including it's
+	#              field id
+	# $p_bug_id    contains the bug where this field belongs to. If it's left
+	#              away, it'll default to 0 and thus belongs to a new (i.e.
+	#              non-existant) bug
+	# NOTE: This probably belongs in the print_api.php
+	function print_custom_field_input( $p_field_def, $p_bug_id = 0) {
+		$t_id = $p_field_def['id'];
+
+		if( 0 == $p_bug_id ) {
+			$t_custom_field_value = $p_field_def['default_value'];
+		} else {
+			$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );
+		}
+		switch ($p_field_def['type']) {
+		case CUSTOM_FIELD_TYPE_ENUM:
+			echo "<select name=\"f_custom_field_$t_id\">";
+			$t_values = explode('|', $p_field_def['possible_values']);
+			foreach( $t_values as $t_option ) {
+				if( $t_custom_field_value == $t_option ) {
+					echo "<option value=\"$t_option\" selected>$t_option</option>";
+				} else {
+					echo "<option value=\"$t_option\">$t_option</option>";
+				}
+			}
+			echo '</select>';
+			break;
+		case CUSTOM_FIELD_TYPE_NUMERIC:
+		case CUSTOM_FIELD_TYPE_FLOAT:
+		case CUSTOM_FIELD_TYPE_EMAIL:
+		default:
+		case CUSTOM_FIELD_TYPE_STRING:
+			echo "<input type=\"text\" name=\"f_custom_field_$t_id\" size=\"80\"";
+			if( 0 < $p_field_def['length_max'] ) {
+				echo ' maxlength="' . $p_field_def['length_max'] . '"';
+			} else {
+				echo ' maxlength="255"';
+			}
+			echo " value=\"$t_custom_field_value\"></input>";
+		}
+	}
+
 ?>

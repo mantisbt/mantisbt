@@ -696,6 +696,8 @@
 	$g_projection_enum_string			= '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
 	$g_eta_enum_string					= '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
 
+	$g_custom_field_type_enum_string    = '0:string,1:numeric,2:float,3:enum,4:email';
+
 	#############################
 	# Mantis Page Variables
 	#############################

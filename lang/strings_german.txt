@@ -10,11 +10,11 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.44 $
+	# $Revision: 1.45 $
 	# $Author: jfitzell $
-	# $Date: 2002-11-25 08:06:01 $
+	# $Date: 2002-12-04 08:05:48 $
 	#
-	# $Id: strings_german.txt,v 1.44 2002-11-25 08:06:01 jfitzell Exp $
+	# $Id: strings_german.txt,v 1.45 2002-12-04 08:05:48 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -144,8 +144,9 @@
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_CAPTION_NOT_UNIQUE] = 'ERROR: Das ist ein doppelter Name.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'ERROR: Das ist ein doppelter Name.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'ERROR: Mindestens ein Projekt benutzt noch dieses Feld!';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_WRONG_VALUE] = 'ERROR: Feld-Eintrag entspricht nicht der Definition!';
 
 	# General Strings
 	$s_go_back = 'Zurück';
@@ -767,4 +768,5 @@
 	$s_custom_field_length_max = 'Maximale L&auml;nge';
 	$s_custom_field_advanced = 'Erweitert';
 	$s_custom_field_seqence = 'Reihenfolge';
+	$s_custom_field_type_enum_string = '0:Text,1:Zahlen,2:Gleitkomma Zahlen,3:Aufz&auml;hlung,4:EMail';
 ?>

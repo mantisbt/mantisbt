@@ -202,8 +202,9 @@
 
 	# ERROR_CUSTOM_FIELD_*
 	define( 'ERROR_CUSTOM_FIELD_NOT_FOUND',			1300 );
-	define( 'ERROR_CUSTOM_FIELD_CAPTION_NOT_UNIQUE',1301 );
+	define( 'ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE',   1301 );
 	define( 'ERROR_CUSTOM_FIELD_IN_USE',			1302 );
+	define( 'ERROR_CUSTOM_FIELD_WRONG_VALUE',		1303 );
 
 	# ERROR_LDAP_*
 	define( 'ERROR_LDAP_AUTH_FAILED',				1400 );
@@ -217,4 +218,11 @@
 
 	# Flags for settings E-mail categories
 	define( 'EMAIL_CATEGORY_PROJECT_CATEGORY',	1);
+
+	# Custom Field types
+	define( 'CUSTOM_FIELD_TYPE_STRING',   0 );
+	define( 'CUSTOM_FIELD_TYPE_NUMERIC',  1 );
+	define( 'CUSTOM_FIELD_TYPE_FLOAT',    2 );
+	define( 'CUSTOM_FIELD_TYPE_ENUM',     3 );
+	define( 'CUSTOM_FIELD_TYPE_EMAIL',    4 );
 ?>

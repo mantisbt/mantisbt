@@ -32,7 +32,7 @@
 	if ( $result ) {				# SUCCESS
 		echo lang_get( 'operation_successful' ).'<br />';
 	} else if ( $duplicate ) {		# DUPLICATE
-		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_CAPTION_NOT_UNIQUE].'<br />';
+		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE].'<br />';
 	} else {						# FAILURE
 		print_sql_error( $query );
 	}

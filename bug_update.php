@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.39 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: bug_update.php,v 1.40 2002-12-04 08:05:45 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -55,13 +55,23 @@
 	$f_bugnote_text					= gpc_get_string( 'f_bugnote_text', '' );
 
 	# Handle auto-assigning
-    if ( ( NEW_ == $t_bug_data->status ) 
+	if ( ( NEW_ == $t_bug_data->status )
 	  && ( 0 != $t_bug_data->handler_id )
 	  && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
-        $t_bug_data->status = ASSIGNED;
-    }
+		$t_bug_data->status = ASSIGNED;
+	}
 
 	bug_update( $f_bug_id, $t_bug_data, true );
+
+if( ON == config_get( 'use_experimental_custom_fields' ) ) {
+	$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+	foreach( $t_related_custom_field_ids as $t_id ) {
+		$t_def = custom_field_get_definition($t_id);
+		if (!custom_field_set_value( $t_id, $f_bug_id, gpc_get_string( "f_custom_field_$t_id", $t_def['default_value'] ) )) {
+			trigger_error( ERROR_CUSTOM_FIELD_WRONG_VALUE, ERROR );
+		}
+	}
+} // ON = config_get( 'use_experimental_custom_fields' )
 
 	$f_bugnote_text = trim( $f_bugnote_text );
 	if ( !is_blank( $f_bugnote_text ) ) {

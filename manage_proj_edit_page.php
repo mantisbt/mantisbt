@@ -159,7 +159,7 @@
 				}
 
 		?>
-		<tr <?php echo helper_alternate_class( $i ) ?>>
+		<tr <?php echo helper_alternate_class() ?>>
 			<td width="50%">
 				<?php echo $t_category ?>
 			</td>
@@ -223,7 +223,7 @@
 				$t2_date_order = urlencode( $t_date_order );
 
 		?>
-		<tr <?php echo helper_alternate_class( $i ) ?>>
+		<tr <?php echo helper_alternate_class() ?>>
 			<td width="50%">
 				<?php echo $t_version ?>
 			</td>
@@ -277,9 +277,9 @@
 			foreach( $t_custom_fields as $t_this_field_id ) {
 				$t_desc = custom_field_get_definition( $t_this_field_id );
 		?>
-		<tr <?php echo helper_alternate_class( $i ) ?>>
+		<tr <?php echo helper_alternate_class() ?>>
 			<td width="50%">
-				<?php echo $t_desc['caption'] ?>
+				<?php echo $t_desc['name'] ?>
 			</td>
 			<td width="25%">
 				<?php echo $t_this_field_id ?>
@@ -300,7 +300,7 @@
 	<td class="left">
 		<form method="post" action="manage_proj_custom_field_add_new.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-		<input type="text" name="f_caption" size="32" maxlength="64" />
+		<input type="text" name="f_name" size="32" maxlength="64" />
 		<input type="submit" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
 		</form>
 	</td>
@@ -317,7 +317,7 @@
 				{
 					if( !custom_field_in_project( $t_this_field_id, $f_project_id ) ) {
 						$t_desc = custom_field_get_definition( $t_this_field_id );
-						echo "<option value=\"$t_this_field_id\">" . $t_desc['caption'] . '</option>' ;
+						echo "<option value=\"$t_this_field_id\">" . $t_desc['name'] . '</option>' ;
 					}
 				}
 			?>
@@ -337,7 +337,7 @@
 				foreach( $t_custom_fields as $t_this_field_id )
 				{
 					$t_desc = custom_field_get_definition( $t_this_field_id );
-					echo "<option value=\"$t_this_field_id\">" . $t_desc['caption'] . '</option>' ;
+					echo "<option value=\"$t_this_field_id\">" . $t_desc['name'] . '</option>' ;
 				}
 			?>
 		</select>

@@ -34,10 +34,10 @@ not reflect the db tables):
   - Regular Expression (to be used for validation)
   - Type (0-string, 1-numeric, 2-float, 3-enum, 4-email?) (eg: 3)
   - Value (possible values (if type = 3) / default (otherwise) (eg: RED|_YELLOW_|BLUE)
-    In this example, yellow is the default option.
+	In this example, yellow is the default option.
 - All custom fields of type VARCHAR(255).
 - If the value of a custom field for a certain defect is empty, then it
-shouldn't be stored in the db (consider saving anyway for speed!). 
+shouldn't be stored in the db (consider saving anyway for speed!).
 - If the value of a custom field for a certain defect is not found, then it
 should be assumed to be empty ('').
 - If the value of a custom field is equal to the default, then it should still
@@ -91,38 +91,38 @@ CREATE TABLE mantis_custom_fields_strings (
 - mantis_custom_fields_strings.bug_id: foreign key to mantis_bug_table
 - mantis_custom_fields_strings.field_id: foreign key to mantis_custom_fields
 - mantis_custom_fields.project_id: foreign key to mantis_project_table
-- var_name is the portion after the. For example, $s_custom_field_caption, would be
-  "custom_field_caption".
+- var_name is the portion after the. For example, $s_custom_field_name, would be
+  "custom_field_name".
 
 core_custom_fields_API.php
 --------------------------
 
 - function custom_field_val_get( $p_bug_id, $p_field_id )
-    returns false - bug doesn't exist, field doesn't exist, ...etc
-    return  value - otherwise
+	returns false - bug doesn't exist, field doesn't exist, ...etc
+	return  value - otherwise
 
 - function custom_field_val_set( $p_bug_id, $p_field_id, $p_value )
-    returns false - bug doesn't exist, field doesn't exist, invalid value,
-    ...etc
-    return  true - otherwise
+	returns false - bug doesn't exist, field doesn't exist, invalid value,
+	...etc
+	return  true - otherwise
 
 - function custom_field_def_add ( $p_project_id, $p_variable_name, $p_type,
 $p_value, $p_regexp, $p_read_access, $p_write_access )
 
 - function custom_field_def_update ( $p_project_id, $p_old_variable_name,
   $p_new_variable_name, $p_type, $p_value, $p_regexp, $p_read_access,
-  $p_write_access ) 
+  $p_write_access )
 
 - function custom_field_def_delete ( $p_project_id, $p_variable_name )
-    deletes the field definition and all values for it (for all bugs).
+	deletes the field definition and all values for it (for all bugs).
 
 - function custom_field_val_delete_all ( $p_bug_id )
-    deletes all custom values associated with the specified bug.  To be called
-    from bug_delete().
+	deletes all custom values associated with the specified bug.  To be called
+	from bug_delete().
 
 - function custom_field_def_delete_all ( $p_project_id )
-    deletes all custom fields defined for the specified project.  To be called
-    from within project_delete().
+	deletes all custom fields defined for the specified project.  To be called
+	from within project_delete().
 
 - function custom_field_def_get_ids ( $p_project_id )
 
