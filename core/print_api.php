@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.19 2002-09-21 23:00:44 jfitzell Exp $
+	# $Id: print_api.php,v 1.20 2002-10-15 20:32:54 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -812,16 +812,29 @@
 		echo string_get_bug_update_link( $p_bug_id );
 	}
 
+ 	# --------------------
+	# formats the priority given the status
+	# shows the priority in BOLD if the bug is NOT closed and is of significant priority
+	function print_formatted_priority_string( $p_status, $p_priority ) {
+		$t_pri_str = get_enum_element( 'priority', $p_priority );
+
+		if ( ( HIGH <= $p_priority ) &&
+			 ( CLOSED != $p_status ) ) {
+			echo "<span class=\"bold\">$t_pri_str</span>";
+		} else {
+			echo $t_pri_str;
+		}
+	}
+
 	# --------------------
 	# formats the severity given the status
 	# shows the severity in BOLD if the bug is NOT closed and is of significant severity
 	function print_formatted_severity_string( $p_status, $p_severity ) {
 		$t_sev_str = get_enum_element( 'severity', $p_severity );
-		if ( ( ( MAJOR == $p_severity ) ||
-			   ( CRASH == $p_severity ) ||
-			   ( BLOCK == $p_severity ) ) &&
+
+		if ( ( MAJOR <= $p_severity ) &&
 			 ( CLOSED != $p_status ) ) {
-			PRINT "<span class=\"bold\">$t_sev_str</span>";
+			echo "<span class=\"bold\">$t_sev_str</span>";
 		} else {
 			echo $t_sev_str;
 		}

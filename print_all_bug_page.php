@@ -403,7 +403,7 @@
 		<input type="checkbox" name="f_bug_arr[]" value="<?php echo $i ?>" />
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
-		<?php echo get_enum_element( 'priority', $v_priority ) ?>
+		<?php print_formatted_priority_string( $v_status, $v_priority ) ?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_id ?>

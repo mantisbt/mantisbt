@@ -306,7 +306,7 @@
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ( ON == config_get( 'show_priority_text' ) ) {
-				echo get_enum_element( 'priority', $v_priority );
+				print_formatted_priority_string( $v_status, $v_priority );
 			} else {
 				print_status_icon( $v_priority );
 			}
