@@ -14,6 +14,7 @@ Mantis ChangeLog
  * Fix: lang_api did not load the user's preferred language
  * Fix: obscure error when database connect failed
  * Fix: error when deleting news items
+ * Fix: we no longer execute thousands of queries in view_all_bug_page when there are a lot of users in the database
  * New config option (mail_priority): if use_x_priority is set to ON, what should the value of X-Priority be? The default is 3 (instead of 0 in previous version, which was misinterpreted by some MTAs)
  * New config option (long_process_timeout): the number of seconds to give long executing pages (like database upgrades) to complete before aborting them (defaults to 0 which is unlimited)
  * New config option (private_project_threshold): threshold needed to get into private project automatically
