@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.92 2003-02-22 23:01:39 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.93 2003-02-23 04:26:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -951,4 +951,41 @@
 
 	# Whether to start editng a custom field immediately after creating it
 	$g_custom_field_edit_after_create = ON;
+
+	##########
+	# Icons
+	##########
+
+	# Maps a file extension to a file type icon.  These icons are printed 
+	# next to project documents and bug attachments.
+	# Note:
+	# - Extensions must be in lower case
+	# - All icons will be displayed as 16x16 pixels.
+	$g_file_type_icons = array(	'pdf' => 'pdficon.gif',
+					'doc' => 'wordicon.gif',
+					'dot' => 'wordicon.gif',
+					'rtf' => 'wordicon.gif',
+					'xls' => 'excelicon.gif',
+					'xlk' => 'excelicon.gif',
+					'csv' => 'excelicon.gif',
+					'ppt' => 'ppticon.gif',
+					'htm' => 'htmlicon.gif',
+					'html' => 'htmlicon.gif',
+					'css' => 'htmlicon.gif',
+					'gif' => 'gificon.gif',
+					'jpg' => 'jpgicon.gif',
+					'png' => 'pngicon.gif',
+					'zip' => 'zipicon.gif',
+					'tar' => 'zipicon.gif',
+					'gz' => 'zipicon.gif',
+					'tgz' => 'zipicon.gif',
+					'rar' => 'zipicon.gif',
+					'arj' => 'zipicon.gif',
+					'lzh' => 'zipicon.gif',
+					'uc2' => 'zipicon.gif',
+					'ace' => 'zipicon.gif',
+					'txt' => 'texticon.gif',
+					'log' => 'texticon.gif',
+					'eml' => 'mailicon.gif',
+					'?' => 'fileicon.gif' );
 ?>

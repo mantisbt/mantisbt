@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.48 2003-02-22 19:20:59 jfitzell Exp $
+	# $Id: print_api.php,v 1.49 2003-02-23 04:26:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1050,4 +1050,17 @@
 		exit;
 	}
 
+	# --------------------
+	# Get icon corresponding to the specified filename
+	function print_file_icon( $p_filename ) {
+		global $g_file_type_icons;
+
+		$ext = strtolower( file_get_extension( $p_filename ) );
+		if ( is_blank( $ext ) || !isset( $g_file_type_icons[$ext] ) ) {
+			$ext = '?';
+		}
+
+		$t_name = $g_file_type_icons[$ext];
+		echo '<img src="' . config_get( 'path' ) . 'images/'. $t_name . '" width="16" height="16" border="0" />';
+	}
 ?>

@@ -50,8 +50,11 @@
 <tr valign="top" <?php echo helper_alternate_class( $i ) ?>>
 	<td>
 <?php
-		PRINT '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">'.$v_title.'</a> ('.$v_filesize.' bytes)';
-
+		$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
+		echo $t_href;
+		print_file_icon( $v_filename );
+		echo '</a>&nbsp;';
+		echo $t_href . $v_title . '</a> ('.$v_filesize.' bytes)';
 		if ( access_has_project_level( MANAGER ) ) {
 			print_bracket_link( 'proj_doc_edit_page.php?file_id='.$v_id, 'edit' );
 		}

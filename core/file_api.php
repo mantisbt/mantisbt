@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.26 2003-02-20 19:44:36 int2str Exp $
+	# $Id: file_api.php,v 1.27 2003-02-23 04:26:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -49,7 +49,12 @@
 			$v_filesize = number_format( $v_filesize );
 			$v_date_added = date( config_get( 'normal_date_format' ), ( $v_date_added ) );
 
-			echo "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\">".file_get_display_name($v_filename)."</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
+			$t_href = "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\">";
+
+			echo $t_href;
+			print_file_icon ( file_get_display_name( $v_filename ) );
+			echo '</a>&nbsp;' . $t_href . file_get_display_name( $v_filename ) . 
+				"</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
 
 			if ( $t_can_delete ) {
 				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
@@ -435,6 +440,34 @@
 			if ( !file_exists( $c_upload_path ) || !is_dir( $c_upload_path ) || !is_writable( $c_upload_path ) ) {
 				trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
 			}
+		}
+	}
+
+	# --------------------
+	# Get extension given the filename or its full path.
+	function file_get_extension( $p_filename ) {
+		$ext = '';
+		$dot_found = false;
+		$i = strlen( $p_filename ) - 1;
+		while ( $i >= 0 ) {
+			if ( $p_filename[$i] == '.' ) {
+				$dot_found = true;
+				break;
+			}
+
+			if ( ( $p_filename[$i] == "/" ) || ( $p_filename[$i] == "\\" ) ) {
+				return '';
+			}
+
+			$ext = $p_filename[$i] . $ext;
+
+			$i--;
+		}
+
+		if ( $dot_found ) {
+			return $ext;
+		} else {
+			return '';
 		}
 	}
 ?>
