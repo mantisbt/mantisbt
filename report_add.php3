@@ -73,16 +73,14 @@
 		$result = mysql_query( $query );
 
 		### Get the id of the text information we just inserted
-		### NOTE: this is not 100% gurrantted to be the correct one.
-		### It will be 99.9% of them time but it is not guarrnteed.
-		### Looking for an elegant workaround w/o having to edit tables
-		$query = "SELECT id
-				FROM $g_mantis_bug_text_table
-				WHERE description='$f_description'
-				ORDER BY id DESC
-				LIMIT 1";
+		### NOTE: this is not guarranteed to be the correct one.
+		### The value LAST_INSERT_ID is stored on a per connection basis.
+
+		$query = "select LAST_INSERT_ID()";
 		$result = mysql_query( $query );
-		$t_id = mysql_result( $result, 0 );
+		if ( $result ) {
+			$t_id = mysql_result( $result, 0 );
+		}
 
 		### Insert the rest of the data
 		$query = "INSERT

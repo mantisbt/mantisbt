@@ -28,17 +28,13 @@
 	$result = mysql_query( $query );
 
 	### retrieve bugnote text id number
-	### NOTE: this is not 100% gurrantted to be the correct one.
-	### It will be 99.9% of them time but it is not guarrnteed.
-	### Looking for an elegant workaround w/o having to edit tables
-	$query = "SELECT id
-			FROM $g_mantis_bugnote_text_table
-			WHERE note='$f_bugnote_text'
-			ORDER BY id DESC
-			LIMIT 1";
+	### NOTE: this is not guarranteed to be the correct one.
+	### The value LAST_INSERT_ID is stored on a per connection basis.
+
+	$query = "select LAST_INSERT_ID()";
 	$result = mysql_query( $query );
 	if ( $result ) {
-		$t_bugnote_text_id = mysql_result( $result, "id" );
+		$t_bugnote_text_id = mysql_result( $result, 0 );
 	}
 
 	### insert bugnote info
