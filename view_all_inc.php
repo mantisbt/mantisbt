@@ -19,6 +19,8 @@
 
 	$t_sort = $t_filter['sort'];
 	$t_dir = $t_filter['dir'];
+
+	$t_checkboxes_exist = false;
 ?>
 <?php # -- ====================== FILTER FORM ========================= -- ?>
 <br />
@@ -315,6 +317,7 @@
 	<?php # -- Checkbox -- ?>
 <?php
 	if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $v_id ) ) {
+		$t_checkboxes_exist = true;
 ?>
 	<td>
 		<input type="checkbox" name="bug_arr[]" value="<?php echo "$v_id" ?>" />
@@ -446,10 +449,18 @@
 <?php # -- ====================== MASS BUG MANIPULATION ========================= -- ?>
 	<tr>
 		<td colspan="<?php echo $col_count-2 ?>">
+<?php
+		if ( $t_checkboxes_exist ) {
+?>
 			<select name="action">
 				<?php print_all_bug_action_option_list() ?>
 			</select>
 			<input type="submit" value="<?php echo 'OK';  ?>" />
+<?php
+		} else {
+			echo '&nbsp;';
+		}
+?>
 		</td>
 		<?php # -- Page number links -- ?>
 		<td class="right" colspan="2">

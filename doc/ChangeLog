@@ -14,6 +14,7 @@ Mantis ChangeLog
  * Fix #3108: No custom fields are shown in the details, if you are in "All Projects"
  * Fix #3109: Error when adding protected users.
  * Fix #3115: manage_proj_cat_edit_page.php uses the wrong project id.
+ * Fix #3124: view_bugs: a reporter has the drop-down box of actions, but doesn't have the checkboxes.
  * Languages: Updated Italian and Dutch localisations.
  * Languages: Synchronised localisation files with English localisation.
 
