@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.24 2004-07-25 21:09:41 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.25 2004-07-30 12:46:09 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -133,21 +133,18 @@
 	define( 'BUG_ADD_SPONSORSHIP',				15 );
 	define( 'BUG_UPDATE_SPONSORSHIP',			16 );
 	define( 'BUG_DELETE_SPONSORSHIP',			17 );
-	# MASC RELATIONSHIP
 	define( 'BUG_ADD_RELATIONSHIP', 		18 );
 	define( 'BUG_DEL_RELATIONSHIP', 		19 );
 	define( 'BUG_CLONED_TO', 				20 );
 	define( 'BUG_CREATED_FROM', 			21 );
-	# MASC RELATIONSHIP
+	define( 'CHECKIN',				22 );
 
 	# bug relationship constants
 	define( 'BUG_DUPLICATE',	0 );
 	define( 'BUG_RELATED',		1 );
 	define( 'BUG_DEPENDANT',	2 );
-	# MASC RELATIONSHIP
 	define( 'BUG_BLOCKS', 3 );
 	define( 'BUG_HAS_DUPLICATE', 4 );
-	# MASC RELATIONSHIP
 
 	# error messages
 	define( 'ERROR_GENERIC',						0 );

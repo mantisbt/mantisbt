@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_delete.php,v 1.27 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_user_delete.php,v 1.28 2004-07-30 12:46:09 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -20,7 +20,7 @@
 
 	user_delete( $f_user_id );
 
-    $t_redirect_url = 'manage_user_page.php';
+	$t_redirect_url = 'manage_user_page.php';
 
 	html_page_top1();
 

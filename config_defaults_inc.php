@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.183 2004-07-25 21:09:39 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.184 2004-07-30 12:46:09 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -53,9 +53,14 @@
 			$t_protocol = 'https';
 		}
 
-		$t_port = ':' . $_SERVER['SERVER_PORT'];
-		if ( ( ':80' == $t_port && 'http' == $t_protocol )
-		  || ( ':443' == $t_port && 'https' == $t_protocol )) {
+		# $_SERVER['SERVER_PORT'] is not defined in case of php-cgi.exe
+		if ( isset( $_SERVER['SERVER_PORT'] ) ) {
+			$t_port = ':' . $_SERVER['SERVER_PORT'];
+			if ( ( ':80' == $t_port && 'http' == $t_protocol )
+			  || ( ':443' == $t_port && 'https' == $t_protocol )) {
+				$t_port = '';
+			}
+		} else {
 			$t_port = '';
 		}
 
@@ -99,7 +104,11 @@
 	#############################
 
 	# Using Microsoft Internet Information Server (IIS)
-	$g_use_iis = ( strstr( $_SERVER['SERVER_SOFTWARE'], 'IIS' ) !== false ) ? ON : OFF;
+	if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) { # SERVER_SOFTWARE not defined in case of php-cgi.exe
+		$g_use_iis = ( strstr( $_SERVER['SERVER_SOFTWARE'], 'IIS' ) !== false ) ? ON : OFF;
+	} else {
+		$g_use_iis = OFF;
+	}
 
 	#############################
 	# Mantis Email Settings
@@ -883,6 +892,26 @@
 	# insert the URL to your CVSweb or ViewCVS
 	# eg: http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/mantisbt/mantisbt/
 	$g_cvs_web				= '';
+	
+	# --- Source Control Integration ------
+	
+	# For open source projects it is expected that the notes be public, however,
+	# for non-open source it will probably be VS_PRIVATE.
+	$g_source_control_notes_view_status = VS_PRIVATE;
+
+	# Account to be used by the source control script.  The account must be enabled
+	# and must have the appropriate access level to add notes to all issues even
+	# private ones (DEVELOPER access recommended).
+	$g_source_control_account           = '';
+
+	# If set to a status, then after a checkin, the issue status is set to the 
+	# specified status, otherwise if set to OFF, the issue status is not affected.
+	$g_source_control_set_status_to     = OFF;
+
+	# Regular expression used to detect issue ids within checkin comments.
+	# see preg_match_all() documentation at
+	# http://www.php.net/manual/en/function.preg-match-all.php
+	$g_source_control_regexp = "/\bissue [#]{0,1}(\d+)\b/i";
 
 	# --- Bug Linking ---------------
 	# if a number follows this tag it will create a link to a bug.

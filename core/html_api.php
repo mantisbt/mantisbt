@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.113 2004-07-24 15:20:45 vboctor Exp $
+	# $Id: html_api.php,v 1.114 2004-07-30 12:46:09 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -375,7 +375,7 @@
 
 		foreach( $t_custom_menu_options as $t_custom_option ) {
 			$t_access_level = $t_custom_option[1];
-			if ( access_has_project_level( $t_access_level ) ) {
+			if ( access_has_global_level( $t_access_level ) ) {
 				$t_caption = lang_get_defaulted( $t_custom_option[0] );
 				$t_link = $t_custom_option[2];
 				$t_options[] = "<a href=\"$t_link\">$t_caption</a>";

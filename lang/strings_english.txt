@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.189 $
+	# $Revision: 1.190 $
 	# $Author: vboctor $
-	# $Date: 2004-07-22 15:05:13 $
+	# $Date: 2004-07-30 12:46:10 $
 	#
-	# $Id: strings_english.txt,v 1.189 2004-07-22 15:05:13 vboctor Exp $
+	# $Id: strings_english.txt,v 1.190 2004-07-30 12:46:10 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -1000,4 +1000,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>

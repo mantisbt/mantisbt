@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.25 2004-07-18 09:58:29 vboctor Exp $
+	# $Id: history_api.php,v 1.26 2004-07-30 12:46:09 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -302,7 +302,6 @@
 					$t_note = lang_get( 'sponsorship_deleted' );
 					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
 					break;
-				# MASC RELATIONSHIP
 				case BUG_ADD_RELATIONSHIP:
 					$t_note = lang_get( 'relationship_added' ) . ': ' . lang_get( 'bug' ) . ' ' . bug_format_id( $p_new_value );
 					break;
@@ -315,8 +314,9 @@
 				case BUG_CREATED_FROM:
 					$t_note = lang_get( 'bug_created_from' ) . ': ' . bug_format_id( $p_new_value );
 					break;
-				# MASC RELATIONSHIP
-
+				case CHECKIN:
+					$t_note = lang_get( 'checkin' );
+					break;
 			}
 		}
 

@@ -6,10 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.42 2004-07-27 14:24:57 prichards Exp $
+	# $Id: authentication_api.php,v 1.43 2004-07-30 12:46:09 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
+
+	$g_script_login_cookie = null;
 
 	#===================================
 	# Boolean queries and ensures
@@ -49,11 +51,7 @@
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
 	function auth_is_user_authenticated() {
-		if ( is_blank( auth_get_current_user_cookie() ) ) {
-			return false;
-		} else {
-			return true;
-		}
+		return ( !is_blank( auth_get_current_user_cookie() ) );
 	}
 
 
@@ -126,12 +124,45 @@
 	}
 
 	# --------------------
+	# Allows scripts to login using a login name or ( login name + password )
+	function auth_attempt_script_login( $p_username, $p_password = null ) {
+		global $g_script_login_cookie;
+
+		$t_user_id = user_get_id_by_name( $p_username );
+
+		$t_user = user_get_row( $t_user_id );
+
+		# check for disabled account
+		if ( OFF == $t_user['enabled'] ) {
+			return false;
+		}
+
+		# validate password if supplied	
+		if ( null !== $p_password ) {
+			if ( !auth_does_password_match( $t_user_id, $p_password ) ) {
+				return false;
+			}
+		}
+
+		# ok, we're good to login now
+
+		# increment login count
+		user_increment_login_count( $t_user_id );
+
+		# set the cookies
+		$g_script_login_cookie = $t_user['cookie_string'];
+
+		return true;
+	}
+
+	# --------------------
 	# Logout the current user and remove any remaining cookies from their browser
 	# Returns true on success, false otherwise
 	function auth_logout() {
 		auth_clear_cookies();
 		helper_clear_pref_cookies();
 		filter_db_delete_current_filters();
+
 		return true;
 	}
 
@@ -238,6 +269,10 @@
 	# --------------------
 	# Clear login cookies
 	function auth_clear_cookies() {
+		global $g_script_login_cookie;
+
+		$g_script_login_cookie = null;
+
 		$t_cookie_name =  config_get( 'string_cookie' );
 		$t_cookie_path = config_get( 'cookie_path' );
 
@@ -291,19 +326,25 @@
 	# if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
 	# otherwise returns '' (an empty string)
 	function auth_get_current_user_cookie() {
+		global $g_script_login_cookie;
+
 		$t_cookie_name = config_get( 'string_cookie' );
 		$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 		# if cookie not found, and anonymous login enabled, use cookie of anonymous account.
 		if ( is_blank( $t_cookie ) ) {
-			if ( ON == config_get( 'allow_anonymous_login' ) ) {
-				$query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
-						config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
-				$result = db_query( $query );
+			if ( $g_script_login_cookie !== null ) {
+				return $g_script_login_cookie;
+			} else {
+				if ( ON == config_get( 'allow_anonymous_login' ) ) {
+					$query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
+							config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
+					$result = db_query( $query );
 
-				if ( 1 == db_num_rows( $result ) ) {
-					$row		= db_fetch_array( $result );
-					$t_cookie	= $row['cookie_string'];
+					if ( 1 == db_num_rows( $result ) ) {
+						$row		= db_fetch_array( $result );
+						$t_cookie	= $row['cookie_string'];
+					}
 				}
 			}
 		}
