@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.3 2002-08-27 19:59:18 jfitzell Exp $
+	# $Id: news_api.php,v 1.4 2002-08-28 09:58:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -101,18 +101,41 @@
 	}
 	# --------------------
 	# get news count (selected project plus sitewide posts)
-	function news_get_count( $p_project_id ) {
+	function news_get_count( $p_project_id, $p_sitewide=true ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_news_table = config_get( 'mantis_news_table' );
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_news_table
-				  WHERE project_id='$c_project_id' OR project_id='0000000'";
+				  WHERE project_id='$c_project_id'";
+				  
+		if ( $p_sitewide ) {
+			$query .= " OR project_id='0000000'";
+		}
 
 		$result = db_query( $query );
 
 	    return db_result( $result, 0, 0 );
 	}
 	# --------------------
+	# get news items (selected project plus sitewide posts)
+	function news_get_rows( $p_project_id, $p_sitewide=true ) {
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_news_table = config_get( 'mantis_news_table' );
+
+		$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+				  FROM $t_news_table
+				  WHERE project_id='$c_project_id'";
+		
+		if ( $p_sitewide ) {
+			$query .= " OR project_id='0000000'";
+		}
+
+		# @@@ shouldn't we order by date_posted ?
+		$query .= "ORDER BY id DESC";
+
+		return db_query( $query );
+	}
 ?>

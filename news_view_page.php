@@ -10,30 +10,19 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 <?php
-	# Select the news posts
-	$c_id = (integer)$f_id;
-	$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
-			FROM $g_mantis_news_table
-			WHERE (project_id='$g_project_cookie_val' OR project_id='0000000') AND
-					id='$c_id'";
-	$result = db_query( $query );
-    $news_count = db_num_rows( $result );
+	$f_id = gpc_get_int( 'f_id' );
 
-    # Loop through results
-	for ($i=0;$i<$news_count;$i++) {
-		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+	$row = news_get_row( $f_id );
 
-		$v_headline 	= string_display( $v_headline );
-		$v_body 		= string_display( $v_body );
-		$v_date_posted 	= date( $g_normal_date_format, $v_date_posted );
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		## grab the username and email of the poster
-    	$row2 = user_cache_row( $v_poster_id );
-		if ( $row2 ) {
-			$t_poster_name	= $row2['username'];
-			$t_poster_email	= $row2['email'];
-		}
+	$v_headline 	= string_display( $v_headline );
+	$v_body 		= string_display( $v_body );
+	$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
+
+	## grab the username and email of the poster
+	$t_poster_name	= user_get_name( $v_poster_id );
+	$t_poster_email	= user_get_email( $v_poster_id );
 ?>
 <p>
 <div align="center">
@@ -52,9 +41,6 @@
 </tr>
 </table>
 </div>
-<?php
-	}  # end for loop
-?>
 
 <p>
 <div align="center">

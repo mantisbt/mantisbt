@@ -73,13 +73,8 @@
 		}
 
 		## grab the username and email of the poster
-    	$row2 = user_cache_row( $v_poster_id );
-		$t_poster_name	= '';
-		$t_poster_email	= '';
-		if ( $row2 ) {
-			$t_poster_name	= $row2['username'];
-			$t_poster_email	= $row2['email'];
-		}
+		$t_poster_name	= user_get_name( $v_poster_id );
+		$t_poster_email	= user_get_email( $v_poster_id );
 
 		if ( PRIVATE == $v_view_state ) {
 			$t_news_css = 'news-heading-private';

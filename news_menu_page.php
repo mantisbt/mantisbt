@@ -20,7 +20,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="news_add.php">
-		<input type="hidden" name="f_poster_id" value="<?php echo get_current_user_field( 'id' ) ?>">
+		<input type="hidden" name="f_poster_id" value="<?php echo auth_get_current_user_id() ?>">
 		<?php echo $s_add_news_title ?>
 	</td>
 </tr>

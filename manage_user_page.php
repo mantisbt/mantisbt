@@ -10,8 +10,10 @@
 <?php
 	check_access( ADMINISTRATOR );
 
+	$f_id = gpc_get_int( 'f_id' );
+
 	# grab user data and prefix with u_
-	$row = user_cache_row( $f_id );
+	$row = user_get_row( $f_id );
 	extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
 <?php print_page_top1() ?>

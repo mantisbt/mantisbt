@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.13 2002-08-28 09:30:41 jfitzell Exp $
+	# $Id: user_api.php,v 1.14 2002-08-28 09:58:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -360,6 +360,11 @@
 		$row = user_cache_row( $t_user_id );
 
 		return $row;
+	}
+	# --------------------
+	# return a user row
+	function user_get_row( $p_user_id ) {
+		return user_cache_row( $p_user_id );
 	}
 	# --------------------
 	# return the specified preference field for the user id

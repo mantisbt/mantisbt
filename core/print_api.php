@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.4 2002-08-26 00:40:23 jfitzell Exp $
+	# $Id: print_api.php,v 1.5 2002-08-28 09:58:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -254,17 +254,18 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 			$v_headline = string_display( $v_headline );
 
-			$t_note = '';
+			$t_notes = array();
+			$t_note_string = '';
 			if ( 1 == $v_announcement ) {
-				$t_note = $s_announcement;
+				array_push( $t_notes, $s_announcement );
 			}
 			if ( PRIVATE == $v_view_state ) {
-				$t_note .= ' '.$s_private;
+				array_push( $t_notes, $s_private );
 			}
-			if ( !empty( $t_note ) ) {
-				$t_note = '['.$t_note.']';
+			if ( sizeof( $t_notes ) > 0 ) {
+				$t_note_string = ' ['.implode( ' ', $t_notes ).']';
 			}
-			PRINT "<option value=\"$v_id\">$v_headline $t_note</option>";
+			PRINT "<option value=\"$v_id\">$v_headline$t_note_string</option>";
 		}
 	}
 	# --------------------
