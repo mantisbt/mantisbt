@@ -28,6 +28,7 @@
 
 	$v_name 		= string_edit_text( $v_name );
 	$v_description 	= string_edit_textarea( $v_description );
+	$v_file_path    = string_edit_text( $v_file_path );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

@@ -51,9 +51,9 @@
 	# requires trailing /
 	$g_icon_path     = $g_path.'images/';
 
-	# absolute path to your installation.  Requires trailing /
+	# absolute path to your installation.  Requires trailing / or \
 	# Symbolic links are allowed since release 0.17.3
-	$g_absolute_path = dirname( __FILE__ ) . '/';
+	$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 	#############################
 	# Web Server
@@ -240,7 +240,7 @@
 	# (DEFINE('DIR_BASE','/www/mantisbt/jpgraph/');)
 
 	$g_use_jpgraph = OFF;
-	$g_jpgraph_path = './jpgraph/';   # dont forget the ending slash!
+	$g_jpgraph_path = '.' . DIRETORY_SEPARATOR . 'jpgraph' . DIRECTORY_SEPARATOR;   # dont forget the ending slash!
 
 	############################
 	# Mantis Time Settings
