@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.41 $
+	# $Revision: 1.42 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:51 $
 	#
-	# $Id: strings_polish.txt,v 1.41 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_polish.txt,v 1.42 2003-01-08 02:35:51 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -127,7 +127,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC] = 'B£¡D: Wyst±pi³ b³±d podczas wykonywanej operacji.  Mo¿esz zg³osciæ ten b³±d Twojemu administratorowi.';
 	$MANTIS_ERROR[ERROR_SQL] = 'B£¡D: Wykryto b³±d SQL. Proszê o zg³oszenie b³êdu do ';
-	$MANTIS_ERROR[ERROR_LOGIN] = 'B£¡D: Twoje konto mo¿e byæ wy³±czone lub nazwa u¿ytkownika/has³o nie s± poprawne.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'B£¡D: Wyst±pi³ b³±d w twoim zg³oszeniu.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'B£¡D: Nie zosta³ podany ¿aden plik.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'B£¡D: Typ przesy³anego pliku nie jest dozwolony.';
@@ -138,8 +137,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'B£¡D: Wymagane pole nie jest wype³nione. Sprawd¼ wprowadzone dane.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'B£¡D: To konto jest zabezpieczone. Nie masz praw dostêpu do tego konta póki zabezpieczenie jest aktywne.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = 'B£¡D: Twoje konto mo¿e byæ wy³±czone lub nazwa u¿ytkownika/has³o nie s± poprawne.';
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Powrót';

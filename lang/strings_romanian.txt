@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.34 $
+	# $Revision: 1.35 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:51 $
 	#
-	# $Id: strings_romanian.txt,v 1.34 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_romanian.txt,v 1.35 2003-01-08 02:35:51 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -126,7 +126,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'EROARE: O eroare a aparut in timpul acestei operatiuni. Probabil ca este important sa raportati eroarea administratorului aplicatiei.';
 	$MANTIS_ERROR[ERROR_SQL] = 'EROARE: Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ';
-	$MANTIS_ERROR[ERROR_LOGIN] = 'EROARE: acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'EROARE: Ati omis un detaliu obligatoriu din raport.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'EROARE: Nu ati specificat un fisier.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'EROARE: Acest tip de fisier nu este permis';
@@ -137,8 +136,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'EROARE: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'EROARE: Acest cont este protejat si nu poate fi accesat pana in momentul in care protectia este ridicata.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = 'EROARE: acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.';
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Intoarcere';

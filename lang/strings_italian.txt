@@ -9,11 +9,11 @@
 	#          Marco Vassura,  m.vassura@itools.it
 	#          Stefano Mazzocchi, stefano@apache.org
 	# -------------------------------------------------
-	# $Revision: 1.38 $
+	# $Revision: 1.39 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:50 $
 	#
-	# $Id: strings_italian.txt,v 1.38 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_italian.txt,v 1.39 2003-01-08 02:35:50 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -128,7 +128,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
 	$MANTIS_ERROR[ERROR_SQL] = 'ERROR: SQL error detected.  Please report this to ';
-	$MANTIS_ERROR[ERROR_LOGIN] = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'ERROR: There was an error in your report.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERROR: No file specified';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
@@ -139,8 +138,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Indietro';

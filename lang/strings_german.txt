@@ -10,11 +10,11 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:50 $
 	#
-	# $Id: strings_german.txt,v 1.49 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_german.txt,v 1.50 2003-01-08 02:35:50 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -129,7 +129,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
 	$MANTIS_ERROR[ERROR_SQL] = 'FEHLER: SQL-Fehler gefunden. Bitte melden Sie diesen Fehler an ';
-	$MANTIS_ERROR[ERROR_LOGIN] = 'FEHLER: Benutzername oder Passwort falsch.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'FEHLER: Ihr Fehlerbericht enthielt ungültige Daten.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEHLER: Keine Datei angegeben.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
@@ -141,12 +140,14 @@
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEHLER: Ein benötigtes Feld wurde nicht ausgefüllt. Bitte übrprüfen Sie Ihre Eingaben.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'ERROR: Das ist ein doppelter Name.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'ERROR: Mindestens ein Projekt benutzt noch dieses Feld!';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Feld-Eintrag entspricht nicht der Definition!';
+
+	$s_login_error = 'FEHLER: Benutzername oder Passwort falsch.';
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Zurück';

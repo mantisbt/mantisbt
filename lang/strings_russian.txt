@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.37 $
+	# $Revision: 1.38 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:51 $
 	#
-	# $Id: strings_russian.txt,v 1.37 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_russian.txt,v 1.38 2003-01-08 02:35:51 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -106,7 +106,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ОШИБКА: в процессе выполнения операции произошла ошибка. Вы может быть захотите сообщить об этом вашему локальному администратору.';
 	$MANTIS_ERROR[ERROR_SQL] = 'ОШИБКА: Обнаружена ошибка SQL . Пожалуйста, сообщите об этом ';
-	$MANTIS_ERROR[ERROR_LOGIN] = 'ОШИБКА: Ваш бюджет может быть заблокирован или имя пользователя/пароль неправилен.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'ОШИБКА: В вашем рапорте обнаружены ошибки.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ОШИБКА: Нет описанного файла';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ОШИБКА: Этот тип файлов запрещен';
@@ -117,8 +116,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ОШИБКА: Это имя проекта.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = 'ОШИБКА: Ваш бюджет может быть заблокирован или имя пользователя/пароль неправилен.';
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Назад';

@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.37 $
+	# $Revision: 1.38 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:25 $
+	# $Date: 2003-01-08 02:35:50 $
 	#
-	# $Id: strings_danish.txt,v 1.37 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: strings_danish.txt,v 1.38 2003-01-08 02:35:50 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -126,7 +126,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEJL: Der opstod en uventet fejl.  Du bedes kontakte din lokale administrator.';
 	$MANTIS_ERROR[ERROR_SQL]                = 'FEJL: SQL fejl opstået.  Giv venligst besked om dette til ';
-	$MANTIS_ERROR[ERROR_LOGIN]              = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/password.';
 	$MANTIS_ERROR[ERROR_REPORT]             = 'FEJL: DIn rapportering indeholder fejl.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'FEJL: Der er ikke valgt en fil';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FEJL: Denne fil-type er ikke tilladt';
@@ -137,8 +136,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'FEJL: Et påkrævert felt er ikke udfyldt.  Ret venligst dette.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEJL: Denne konto er beskyttet.  Du har ikke adgang før kontoens beskyttelse er ophævet.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/password.';
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Tilbage';

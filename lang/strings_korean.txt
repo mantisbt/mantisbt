@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.40 $
+	# $Revision: 1.41 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:51 $
 	#
-	# $Id: strings_korean.txt,v 1.40 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_korean.txt,v 1.41 2003-01-08 02:35:51 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -127,7 +127,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = '오류: An error occurred during this action.  You may wish to report this error to your local administrator.';
 	$MANTIS_ERROR[ERROR_SQL] = '오류: SQL 오류 발생. 벌레 리포트해주시기 바랍니다.';
-	$MANTIS_ERROR[ERROR_LOGIN] = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
 	$MANTIS_ERROR[ERROR_REPORT] = '오류: 입력내용에 오류가 발생했습니다.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '오류: 허용되지 않는 파일 종류입니다.';
@@ -138,8 +137,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '오류: 같은 이름의 프로젝트가 이미 존재합니다.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '오류: 필수 입력 필드 누락, 입력사항을 확인하세요.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = '오류: 보호중인 계정입니다. 보호를 해제하기전에는 이 계정에 접근할 수 없습니다.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = '오류: 파일 올리기 실패. 관리자가 admin_check 프로그램을 통해 해결할 수 있습니다.';
+
+	$s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
+	$s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
 
 	# General Strings
 	$s_go_back = '뒤로';

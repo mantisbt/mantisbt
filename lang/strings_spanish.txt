@@ -8,11 +8,11 @@
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
 	# -------------------------------------------------
-	# $Revision: 1.40 $
+	# $Revision: 1.41 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:51 $
 	#
-	# $Id: strings_spanish.txt,v 1.40 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_spanish.txt,v 1.41 2003-01-08 02:35:51 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -127,7 +127,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: Un error ocurrio durante esta accion. Reporte este error a su administrador local.';
 	$MANTIS_ERROR[ERROR_SQL] = 'ERROR: Error de SQL detectado.  Por favor reporte esto a ';
-	$MANTIS_ERROR[ERROR_LOGIN] = 'ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña que ingreso son incorrectos.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'ERROR: Se encontro un error en su reporte.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERROR: Archivo no especificado';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: Este tipo de archivo no esta permitido';
@@ -138,8 +137,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: Un campo necesario estaba vacio. Por favor compruebe los datos.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: Esta cuenta esta protegida. Ud. no tiene permitido accesar esto hasta que la proteccion de la cuenta haya sido retirada.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = 'ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña que ingreso son incorrectos.';
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Volver';

@@ -7,11 +7,11 @@
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # -------------------------------------------------
-  # $Revision: 1.29 $
+  # $Revision: 1.30 $
   # $Author: jfitzell $
-  # $Date: 2002-08-21 22:46:29 $
+  # $Date: 2003-01-08 02:35:50 $
   #
-  # $Id: strings_hungarian.txt,v 1.29 2002-08-21 22:46:29 jfitzell Exp $
+  # $Id: strings_hungarian.txt,v 1.30 2003-01-08 02:35:50 jfitzell Exp $
   ###########################################################################
 ?>
 <?php
@@ -126,7 +126,6 @@
 	# ERROR strings
   $MANTIS_ERROR[ERROR_GENERIC] = 'HIBA: Hiba történt a végrehajtás során.  Kérjük jelentse a hibát a helyi adminisztrátornak.';
   $MANTIS_ERROR[ERROR_SQL] = 'HIBA: SQL hibát találtam.  Kérem jelentse a hibát itt: ';
-  $MANTIS_ERROR[ERROR_LOGIN] = 'HIBA: elképzelhetõ, hogy fiókja nincs engedélyezve, vagy a megadott felhasználónév/jelszó helytelen.';
   $MANTIS_ERROR[ERROR_REPORT] = 'HIBA: A bejelentés feldolgozásakor hiba történt.';
   $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'HIBA: Nincs megadva file';
   $MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'HIBA: A érvénytelen file típus.';
@@ -137,9 +136,11 @@
   $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
   $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'HIBA: Egy szükséges mezõ üresen maradt, ellenõrizze a bevitt adatokat.';
   $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'HIBA: Ez fiók védett.  A fiók csak a védelem eltávolítása után érhetô el.';
-  $MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
   $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
+
+  $s_login_error = 'HIBA: elképzelhetõ, hogy fiókja nincs engedélyezve, vagy a megadott felhasználónév/jelszó helytelen.';
+  $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
   $s_go_back = 'Visszatérés';

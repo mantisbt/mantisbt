@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.38 $
+	# $Revision: 1.39 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:25 $
+	# $Date: 2003-01-08 02:35:50 $
 	#
-	# $Id: strings_dutch.txt,v 1.38 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: strings_dutch.txt,v 1.39 2003-01-08 02:35:50 jfitzell Exp $
 	###########################################################################
 
 ?>
@@ -129,7 +129,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'FOUT: Deze actie had een fout tot gevolg. Zou u dit willen melden aan uw systeembeheerder?';
 	$MANTIS_ERROR[ERROR_SQL] = 'FOUT: SQL fout gevonden.  Zou u dit willen melden aan ';
-	$MANTIS_ERROR[ERROR_LOGIN] = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'FOUT: Er is een fout in uw rapport.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FOUT: Geen bestand opgegeven.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FOUT: Het bestandstype is niet toegestaan';
@@ -140,8 +139,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FOUT: Dit project bestaat al.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FOUT: Een benodigd veld is niet ingevuld. Controleer a.u.b. uw invoer.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FOUT: This account wordt beschermd. U heeft geen toegang hiertoe totdat de bescherming is opgeheven.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'FOUT: Ofwel uw browser ondersteund geen cookies, of deze zijn uitgeschakeld.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
+	$s_login_cookies_disabled = 'FOUT: Ofwel uw browser ondersteund geen cookies, of deze zijn uitgeschakeld.';
 
 	# General Strings
 	$s_go_back = 'Ga terug';

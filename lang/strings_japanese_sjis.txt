@@ -7,11 +7,11 @@
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# -------------------------------------------------
-	# $Revision: 1.29 $
+	# $Revision: 1.30 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:51 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.29 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.30 2003-01-08 02:35:51 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -126,7 +126,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = "エラー：エラーが発生しました。システム管理者までお知らせ下さい。";
 	$MANTIS_ERROR[ERROR_SQL] = "エラー：SQLでエラーが発生しました。システム管理者までお知らせ下さい→";
-	$MANTIS_ERROR[ERROR_LOGIN] = "エラー：ユーザ名／パスワードが間違えています。";
 	$MANTIS_ERROR[ERROR_REPORT] = "エラー：改修要望に間違いがあります。";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "エラー：ファイルが選択されていません。";
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "エラー：ファイル種別が間違えています。";
@@ -137,8 +136,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "エラー：必須フィールドが入力されていません。入力を確認して下さい。";
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "エラー：権限がありません。アクセスする為には、権限を上げて下さい。";
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = "エラー：ユーザ名／パスワードが間違えています。";
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = "戻る";

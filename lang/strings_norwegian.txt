@@ -7,11 +7,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.39 $
+	# $Revision: 1.40 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:26 $
+	# $Date: 2003-01-08 02:35:51 $
 	#
-	# $Id: strings_norwegian.txt,v 1.39 2003-01-03 03:24:26 jfitzell Exp $
+	# $Id: strings_norwegian.txt,v 1.40 2003-01-08 02:35:51 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -126,7 +126,6 @@
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEIL: Det oppstod en en feil. Du kan rapportere feilen til din administrator.';
 	$MANTIS_ERROR[ERROR_SQL] = 'FEIL: SQL feil.  Vennligst rapporter dette til ';
-	$MANTIS_ERROR[ERROR_LOGIN] = 'FEIL: kontoen kan ha blitt stengt eller ditt brukernavn/passordet du oppga var ikke riktig.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'FEIL: Det var en feil i rapporten din.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEIL: Ingen fil spesifisert';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FEIL: Ulovlig filtype';
@@ -137,8 +136,10 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEIL: En påkrevd felt er ikke fylt ut. Vennligst sjekk feltene for manglende input.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEIL: Denne kontoen er beskyttet.  Du kan ikke bruke kontoen inntil beskyttelsen er fjernet.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+
+	$s_login_error = 'FEIL: kontoen kan ha blitt stengt eller ditt brukernavn/passordet du oppga var ikke riktig.';
+	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 
 	# General Strings
 	$s_go_back = 'Tilbake';
