@@ -6,11 +6,11 @@
 
 	# Russian (WindowsKOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.16 $
+	# $Revision: 1.17 $
 	# $Author: prescience $
-	# $Date: 2002-06-11 01:14:52 $
+	# $Date: 2002-06-12 01:03:18 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.16 2002-06-11 01:14:52 prescience Exp $
+	# $Id: strings_russian_koi8.txt,v 1.17 2002-06-12 01:03:18 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -51,6 +51,13 @@
 	$s_stays_on_top = 'Stays on Top';
 	$s_delete_bugnote_button = 'Bugnote Delete';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bug?';
+	$s_bug_relationships = 'Relationships';
+
+	$s_duplicate_of = 'duplicate of %id';
+	$s_has_duplicate = 'has duplicate %id';
+	$s_related_to = 'related to %id';
+	$s_dependant_on = 'dependant on %id';
+	$s_blocks = 'blocks %id';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';
@@ -65,6 +72,7 @@
 
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
+
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ОШИБКА: в процессе выполнения операции произошла ошибка.  Вы может быть захотите сообщить об этом вашему локальному администратору.';

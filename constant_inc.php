@@ -107,6 +107,7 @@
 	define( 'NO_ANONYMOUS', 2 );
 	define( 'ADMIN_ONLY',   3 );
 
+	# history constants
 	define( 'NORMAL_TYPE',               0 );
 	define( 'NEW_BUG',                   1 );
 	define( 'BUGNOTE_ADDED',             2 );
@@ -121,6 +122,11 @@
 	define( 'BUGNOTE_STATE_CHANGED',    11 );
 	define( 'BUG_MONITOR',              12 );
 	define( 'BUG_UNMONITOR',            13 );
+
+	# bug relationship constants
+	define( 'BUG_DUPLICATE', 0 );
+	define( 'BUG_RELATED',   1 );
+	define( 'BUG_DEPENDANT', 2 );
 
 	# error messages
 	define( 'ERROR_GENERIC',              0 );

@@ -26,7 +26,7 @@
 	if ( 0 == db_num_rows( $result ) ) {
 		print_header_redirect( 'main_page.php' );
 	}
-	
+
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
@@ -45,7 +45,7 @@
 	$v2_description 			= string_display( $v2_description );
 	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display( $v2_additional_information );
-	
+
 	start_compression();
 ?>
 <?php print_page_top1() ?>
@@ -227,6 +227,55 @@
 			}
 		}
 ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<?php echo $s_bug_relationships ?>
+	</td>
+	<td colspan="5">
+		<?php
+			$result = relationship_fetch_all_src( $v_id );
+			$relationship_count = db_num_rows( $result );
+			for ($i=0;$i<$relationship_count;$i++) {
+				$row = db_fetch_array( $result );
+				extract( $row, EXTR_PREFIX_ALL, 'v2' );
+
+				$t_bug_link = get_bug_link( $v2_destination_bug_id );
+				switch ( $v2_relationship_type ) {
+				case BUG_DUPLICATE:	$t_description = str_replace( '%id', $t_bug_link, $s_duplicate_of );
+									break;
+				case BUG_RELATED:	$t_description = str_replace( '%id', $t_bug_link, $s_related_to );
+									break;
+				case BUG_DEPENDANT:	$t_description = str_replace( '%id', $t_bug_link, $s_dependant_on );
+									break;
+				default:			$t_description = str_replace( '%id', $t_bug_link, $s_duplicate_of );
+				}
+
+				PRINT "$t_description<br />";
+			}
+		?>
+		<?php
+			$result = relationship_fetch_all_dest( $v_id );
+			$relationship_count = db_num_rows( $result );
+			for ($i=0;$i<$relationship_count;$i++) {
+				$row = db_fetch_array( $result );
+				extract( $row, EXTR_PREFIX_ALL, 'v2' );
+
+				$t_bug_link = get_bug_link( $v2_source_bug_id );
+				switch ( $v2_relationship_type ) {
+				case BUG_DUPLICATE:	$t_description = str_replace( '%id', $t_bug_link, $s_has_duplicate );
+									break;
+				case BUG_RELATED:	$t_description = str_replace( '%id', $t_bug_link, $s_related_to );
+									break;
+				case BUG_DEPENDANT:	$t_description = str_replace( '%id', $t_bug_link, $s_blocks );
+									break;
+				default:			$t_description = str_replace( '%id', $t_bug_link, $s_has_duplicate );
+				}
+
+				PRINT "$t_description<br />";
+			}
+		?>
 	</td>
 </tr>
 <tr align="center">
