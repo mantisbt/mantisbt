@@ -57,6 +57,7 @@ Mantis ChangeLog
  * Enh #3276: Add bugnote numbering and the ability to link to bugnotes directly using configured tags like with buglinks
  * Fix #3292: Exporting csv results in "cannot modify header" error.
  * Fix #3295: $g_limit_reporters doesn't work.
+ * Fix #3306: PHP error if unable to connect to database.
  * Languages: Updated Italian, German, Spanish, Slovak, Swedish, French and Dutch localisations.
  * Languages: Synchronised localisation files with English localisation.
  * Added Mantis FAQ to documentation folder.

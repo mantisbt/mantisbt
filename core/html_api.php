@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.76 2003-08-21 23:00:58 vboctor Exp $
+	# $Id: html_api.php,v 1.77 2003-08-22 11:48:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -71,6 +71,11 @@
 	#  actual page content
 	function html_page_top2() {
 		html_page_top2a();
+
+		if ( !db_is_connected() ) {
+			return;
+		}
+
 		html_login_info();
 		if( ON == config_get( 'show_project_menu_bar' ) ) {
 			print_project_menu_bar();
@@ -95,6 +100,10 @@
 	# Print the part of the page that comes below the page content
 	# $p_file should always be the __FILE__ variable. This is passed to show source
 	function html_page_bottom1( $p_file = null ) {
+		if ( !db_is_connected() ) {
+			return;
+		}
+
 		if ( config_get( 'show_footer_menu' ) ) {
 			echo '<br />';
 			print_menu();
