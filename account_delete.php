@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.14 $
+	# $Revision: 1.15 $
 	# $Author: prescience $
-	# $Date: 2002-09-01 22:00:35 $
+	# $Date: 2002-09-03 02:41:50 $
 	#
-	# $Id: account_delete.php,v 1.14 2002-09-01 22:00:35 prescience Exp $
+	# $Id: account_delete.php,v 1.15 2002-09-03 02:41:50 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,14 +52,14 @@
 ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <div align="center">
 <?php
 	if ( ON == $t_protected ) {				# PROTECTED
-		PRINT $s_account_protected_msg.'<p />';
+		PRINT $s_account_protected_msg.'<br />';
 		print_bracket_link( 'account_page.php', $s_go_back );
 	} else if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<p />';
+		PRINT $s_operation_successful.'<br />';
 		print_bracket_link( 'login_page.php', $s_proceed );
 	} else {								# FAILURE
 		print_sql_error( $query );

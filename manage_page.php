@@ -66,7 +66,7 @@
 	$result = db_query( $query );
 	$new_user_count = db_num_rows( $result );
 ?>
-<p />
+<br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
@@ -97,7 +97,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	$result = db_query( $query );
 	$user_count = db_num_rows( $result );
 ?>
-<p />
+<br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
@@ -138,7 +138,7 @@ for ($i=0;$i<$new_user_count;$i++) {
     $result = db_query($query);
 	$user_count = db_num_rows( $result );
 ?>
-<p />
+<br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">

@@ -22,7 +22,7 @@
 ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <div align="center">
 <?php
 	if ( $result ) {

@@ -123,7 +123,7 @@ function edit_printing_prefs($p_user_id = 0, $p_error_if_protected = true, $p_re
 
 <?php # Account Preferences Form BEGIN ?>
 <?php $t_index_count=0; ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>

@@ -46,13 +46,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <div align="center">
 <?php
 	if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<p />';
+		PRINT $s_operation_successful.'<br />';
 	} else if ( is_duplicate_category( $f_project_id, $f_category, $f_orig_category )) {
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p />';
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<br />';
 	} else {							# FAILURE
 		print_sql_error( $query );
 	}

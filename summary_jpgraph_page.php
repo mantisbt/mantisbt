@@ -60,7 +60,7 @@
 
 <?php print_summary_menu( 'summary_jpgraph_page.php' ) ?>
 
-<p />
+<br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">

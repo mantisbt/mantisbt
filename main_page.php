@@ -82,7 +82,7 @@
 			$t_news_css = 'news-heading-public';
 		}
 ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="0">
 <tr>
@@ -116,7 +116,7 @@
 ?>
 
 <?php # Print NEXT and PREV links if necessary ?>
-<p />
+<br />
 <div align="center">
 <?php
 	print_bracket_link( 'news_list_page.php', $s_archives );

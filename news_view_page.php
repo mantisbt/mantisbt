@@ -24,7 +24,7 @@
 	$t_poster_name	= user_get_name( $v_poster_id );
 	$t_poster_email	= user_get_email( $v_poster_id );
 ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="0">
 <tr>
@@ -42,7 +42,7 @@
 </table>
 </div>
 
-<p />
+<br />
 <div align="center">
 	<?php print_bracket_link( 'news_list_page.php', $s_back_link ) ?>
 </div>

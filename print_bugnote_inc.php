@@ -24,7 +24,7 @@
 ?>
 
 <?php # Bugnotes BEGIN ?>
-<p />
+<br />
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes

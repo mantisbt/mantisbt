@@ -28,7 +28,7 @@
 <?php print_manage_menu( 'manage_proj_menu_page.php' ) ?>
 
 <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { # Add Project Form BEGIN ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
@@ -98,7 +98,7 @@
 <?php } # Add Project Form END ?>
 
 <?php # Project Menu Form BEGIN ?>
-<p />
+<br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">
@@ -175,7 +175,7 @@
 <?php # Attributes customization BEGIN
 if (($g_customize_attributes)&&(access_level_check_greater_or_equal( ADMINISTRATOR ) ) ) {
 	?>
-	<p />
+	<br />
 	<div align="center">
 	<table class="width75" cellspacing="1">
 	<tr>

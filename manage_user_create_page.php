@@ -15,7 +15,7 @@
 
 <?php print_manage_menu( 'manage_user_create_page.php' ) ?>
 
-<p />
+<br />
 <div align="center">
 <table class="width50" cellspacing="1">
 <tr>

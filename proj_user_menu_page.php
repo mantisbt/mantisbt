@@ -38,7 +38,7 @@
 		$t_msg = $s_private_project_msg;
 	}
 ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
@@ -49,7 +49,7 @@
 </table>
 </div>
 
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
@@ -84,7 +84,7 @@
 </table>
 </div>
 
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>

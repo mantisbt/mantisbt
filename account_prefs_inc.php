@@ -68,7 +68,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 ?>
 
 <?php # Account Preferences Form BEGIN ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>

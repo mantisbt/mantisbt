@@ -59,11 +59,11 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
+<br />
 <?php print_summary_menu( 'summary_page.php' ) ?>
-<p />
-<? print_menu_graph() ?>
 
-<p />
+<? print_menu_graph() ?>
+<br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">

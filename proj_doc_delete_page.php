@@ -13,7 +13,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <div align="center">
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $s_confirm_file_delete_msg ?>

@@ -31,7 +31,7 @@
 <?php print_page_top2() ?>
 
 <?php # Edit News Form BEGIN ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.28 $
+	# $Revision: 1.29 $
 	# $Author: prescience $
-	# $Date: 2002-09-01 22:00:37 $
+	# $Date: 2002-09-03 02:41:50 $
 	#
-	# $Id: bug_update_page.php,v 1.28 2002-09-01 22:00:37 prescience Exp $
+	# $Id: bug_update_page.php,v 1.29 2002-09-03 02:41:50 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -56,7 +56,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">

@@ -48,7 +48,7 @@
 	} // end switch
 ?>
 
-<p />
+<br />
 <div align="center">
 <table class="width50" cellspacing="1">
 <tr>

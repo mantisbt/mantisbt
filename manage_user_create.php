@@ -34,11 +34,11 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <div align="center">
 <?php
 	$f_access_level = get_enum_element( 'access_levels', $f_access_level );
-	echo "$s_created_user_part1 <span class=\"bold\">$f_username</span> $s_created_user_part2 <span class=\"bold\">$f_access_level</span><p />";
+	echo "$s_created_user_part1 <span class=\"bold\">$f_username</span> $s_created_user_part2 <span class=\"bold\">$f_access_level</span><br />";
 
 	print_bracket_link('manage_page.php', $s_proceed );
 ?>

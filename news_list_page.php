@@ -10,7 +10,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <ul>
 <?php
 	# Select the news posts

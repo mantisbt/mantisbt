@@ -19,7 +19,7 @@
 	check_varset( $f_assigned_to, '0' );
 ?>
 
-<p />
+<br />
 <div align="center">
 <table class="width50" cellspacing="1">
 <tr>

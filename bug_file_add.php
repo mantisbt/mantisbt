@@ -93,15 +93,15 @@
 ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <div align="center">
 <?php
 	if ( 1 == $upload_error ) {
-		PRINT $MANTIS_ERROR[ERROR_FILE_TOO_BIG].'<p />';
+		PRINT $MANTIS_ERROR[ERROR_FILE_TOO_BIG].'<br />';
 	} else if ( 1 == $disallowed ) {
-		PRINT $MANTIS_ERROR[ERROR_FILE_DISALLOWED].'<p />';
+		PRINT $MANTIS_ERROR[ERROR_FILE_DISALLOWED].'<br />';
 	} else if ( 0 == $good_upload ) {
-		PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED].'<p />';
+		PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED].'<br />';
 	} else if ( !$result ) {
 		print_sql_error( $query );
 	}

@@ -127,7 +127,7 @@
 ?>
 <?php print_page_top2a() ?>
 
-<p />
+<br />
 <div align="center">
 <?php
 	if ( $t_project_id > 0 ) {							# SUCCESS
@@ -135,7 +135,7 @@
 	} else if ( $login_result ) {						# SUCCESS
 		print_bracket_link( 'login_select_proj_page.php', $s_proceed );
 	} else {											# FAILURE
-		print $MANTIS_ERROR[ERROR_LOGIN].'<p />';
+		print $MANTIS_ERROR[ERROR_LOGIN].'<br />';
 
 		print_bracket_link( 'login_page.php?f_error=1', $s_proceed );
 	}

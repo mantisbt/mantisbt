@@ -21,7 +21,7 @@
 
 <?php print_manage_menu() ?>
 
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
@@ -95,7 +95,7 @@
 </table>
 </div>
 
-<p />
+<br />
 <div align="center">
 <?php
 	if ( ON == $g_send_reset_password ) {
@@ -107,7 +107,7 @@
 </div>
 
 <?php ### BEGIN User to Project Add Form ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>

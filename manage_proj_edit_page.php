@@ -36,7 +36,7 @@
 
 <?php print_manage_menu( 'manage_proj_edit_page.php' ) ?>
 
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
@@ -121,7 +121,7 @@
 </table>
 </div>
 
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>

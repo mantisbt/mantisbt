@@ -28,7 +28,7 @@
 <?php print_page_top2() ?>
 
 <?php # Add Profile Form BEGIN ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
@@ -87,7 +87,7 @@
 <?php # Add Profile Form END ?>
 
 <?php # Edit or Delete Profile Form BEGIN ?>
-<p />
+<br />
 <div align="center">
 <table class="width75" cellspacing="1">
 <form method="post" action="account_prof_edit_page.php">

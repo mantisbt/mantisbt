@@ -99,13 +99,13 @@
 ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		PRINT $s_operation_successful.'<p />';
+		PRINT $s_operation_successful.'<br />';
 	} else if ( $duplicate ) {		# DUPLICATE
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p />';
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<br />';
 	} else {						# FAILURE
 		print_sql_error( $query );
 	}

@@ -329,7 +329,7 @@
 		<?php print_bracket_link( 'view_all_bug_page.php', $s_view_bugs_link ) ?>
 		<?php print_bracket_link( 'summary_page.php', $s_summary ) ?>
 	</td>
-<p />
+<br />
 </tr>
 <tr class="row-category">
 	<td class="center" width="2%">

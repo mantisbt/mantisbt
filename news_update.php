@@ -24,9 +24,9 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<p />
+<br />
 <div align="center">
-	<?php echo $s_operation_successful ?><p />
+	<?php echo $s_operation_successful ?><br />
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="news-heading">
@@ -39,7 +39,7 @@
 	</td>
 </tr>
 </table>
-<p />
+<br />
 <?php
 	print_bracket_link( 'news_edit_page.php?f_id='.$f_id.'&amp;f_action=edit', $s_edit_link );
 	print_bracket_link( 'news_menu_page.php', $s_proceed );
