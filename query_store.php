@@ -27,7 +27,8 @@
 	
 	# We can't have a blank name
 	if ( is_blank( $f_query_name ) ) {	
-		$t_query_redirect_url = $t_query_redirect_url . '?error_msg=' . lang_get( 'query_blank_name' );
+		$t_query_redirect_url = $t_query_redirect_url . '?error_msg=' 
+			. urlencode( lang_get( 'query_blank_name' ) );
 		print_header_redirect( $t_query_redirect_url );
 	}
 
@@ -36,7 +37,8 @@
 	$t_query_arr = filter_db_get_available_queries();
 	foreach( $t_query_arr as $t_id => $t_name )	{
 		if ( $f_query_name == $t_name ) {
-			$t_query_redirect_url = $t_query_redirect_url . '?error_msg=' . lang_get( 'query_dupe_name' );
+			$t_query_redirect_url = $t_query_redirect_url . '?error_msg=' 
+				. urlencode( lang_get( 'query_dupe_name' ) );
 			print_header_redirect( $t_query_redirect_url );
 			exit;
 		}
@@ -53,7 +55,8 @@
 													$f_query_name, $t_filter_string);
 		
 	if ( $t_new_row_id == -1 ) {	
-		$t_query_redirect_url = $t_query_redirect_url . '?error_msg=' . lang_get( 'query_store_error' );
+		$t_query_redirect_url = $t_query_redirect_url . '?error_msg=' 
+			. urlencode( lang_get( 'query_store_error' ) );
 		print_header_redirect( $t_query_redirect_url );
 	} else {	
 		print_header_redirect( 'view_all_bug_page.php' );
