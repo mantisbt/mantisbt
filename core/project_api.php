@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.31 2003-02-11 08:59:33 jfitzell Exp $
+	# $Id: project_api.php,v 1.32 2003-02-15 07:49:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -51,6 +51,8 @@
 		$result = db_query( $query );
 
 		if ( 0 == db_num_rows( $result ) ) {
+			$g_cache_project[(int)$p_project_id] = false;
+
 			if ( $p_trigger_errors ) {
 				trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
 			} else {
