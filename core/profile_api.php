@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.3 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: profile_api.php,v 1.4 2003-09-01 22:52:31 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -25,13 +25,18 @@
 	# --------------------
 	# Create a new profile for the user, return the ID of the new profile
 	function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
-		$c_user_id		= db_prepare_string( $p_user_id );
+		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_platform		= db_prepare_string( $p_platform );
 		$c_os			= db_prepare_string( $p_os );
 		$c_os_build		= db_prepare_string( $p_os_build );
 		$c_description	= db_prepare_string( $p_description );
 
 		user_ensure_unprotected( $p_user_id );
+
+		# platform, os, os_build cannot be blank
+		if ( is_blank( $c_platform ) || is_blank( $c_os ) || is_blank( $c_os_build ) ) {
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
 
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
@@ -81,6 +86,11 @@
 		$c_description	= db_prepare_string( $p_description );
 
 		user_ensure_unprotected( $p_user_id );
+
+		# platform, os, os_build cannot be blank
+		if ( is_blank( $c_platform ) || is_blank( $c_os ) || is_blank( $c_os_build ) ) {
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
 
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 

@@ -4,6 +4,7 @@ Mantis ChangeLog
 
  * Enh #3335: Added Estonian Language (thanks to Villem Vannas)
  * Fix #3310: Sorting of projects in menu bar.
+ * Fix #3330: "Required" fields on Account Profile page.
  * Fix #3333: Support PHPMailer v1.7x.
  * Fix #3334: Invalid links in bug reminder emails.
 

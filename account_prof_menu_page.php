@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.29 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: account_prof_menu_page.php,v 1.30 2003-09-01 22:52:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -76,7 +76,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'additional_description' ) ?>
+		<?php echo lang_get( 'additional_description' ) ?>
 	</td>
 	<td>
 		<textarea name="description" cols="60" rows="8" wrap="virtual"></textarea>

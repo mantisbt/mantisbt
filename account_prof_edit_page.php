@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.31 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: account_prof_edit_page.php,v 1.32 2003-09-01 22:52:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,7 +66,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo lang_get( 'platform' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="platform" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" />
@@ -74,7 +74,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'operating_system' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'operating_system' ) ?>
 	</td>
 	<td>
 		<input type="text" name="os" size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" />
@@ -82,7 +82,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'version' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'version' ) ?>
 	</td>
 	<td>
 		<input type="text" name="os_build" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" />
