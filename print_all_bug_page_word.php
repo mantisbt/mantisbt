@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.42 2004-02-05 00:34:38 jlatour Exp $
+	# $Id: print_all_bug_page_word.php,v 1.43 2004-03-03 18:12:12 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -362,7 +362,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 	<td class="print" colspan="5">
 		<?php
-			$query5 = "SELECT *
+			$query5 = "SELECT filename, filesize, date_added
 					FROM $g_mantis_bug_file_table
 					WHERE bug_id='$v_id'";
 			$result5 = db_query( $query5 );

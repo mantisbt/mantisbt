@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.43 2004-02-05 12:15:18 vboctor Exp $
+	# $Id: print_bug_page.php,v 1.44 2004-03-03 18:12:12 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -309,7 +309,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 	<td class="print" colspan="5">
 		<?php
-			$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
+			$query = "SELECT filename, filesize, UNIX_TIMESTAMP(date_added) as date_added
 					FROM $g_mantis_bug_file_table
 					WHERE bug_id='$c_bug_id'";
 			$result = db_query( $query );

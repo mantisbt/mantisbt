@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.19.0
 
+ * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
  * Updated Estonian and Czech languages for 0.18.2 strings.
 
