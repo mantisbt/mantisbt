@@ -18,6 +18,7 @@ Mantis
  * Modified disk uploads to use the file_download.php script.
  * Added HTTP_POST_FILES to core_API.php.
  * Bumped version number.
+ * Modified bugnote last_modified query slightly.
 
 05.12.2002  -   0.17.2
 

@@ -232,9 +232,11 @@
 		# grab the project name
 		$project_name = get_project_field($v_project_id,"NAME");
 
-		$query = "SELECT UNIX_TIMESTAMP(MAX(last_modified)) as last_modified
+		$query = "SELECT UNIX_TIMESTAMP(last_modified) as last_modified
 				FROM $g_mantis_bugnote_table
-				WHERE bug_id='$v_id'";
+				WHERE bug_id='$v_id'
+				ORDER BY last_modified DESC
+				LIMIT 1";
 		$res2 = db_query( $query );
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 
