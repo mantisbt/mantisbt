@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.37 2004-07-11 07:09:51 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.38 2004-07-11 08:22:59 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -381,7 +381,7 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input tabindex="20" type="submit" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
+		<input tabindex="20" type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
 	</td>
 </tr>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.26 2004-04-01 18:42:10 narcissus Exp $
+	# $Id: account_prefs_inc.php,v 1.27 2004-07-11 08:22:59 vboctor Exp $
 	# --------------------------------------------------------
 	
 	$t_core_path = config_get( 'core_path' );
@@ -270,7 +270,7 @@
 </tr>
 <tr>
 	<td colspan="2" class="center">
-		<input type="submit" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -283,7 +283,7 @@
 	<form method="post" action="account_prefs_reset.php">
 	<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 	<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
-	<input type="submit" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
+	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</form>
 </div>
 
