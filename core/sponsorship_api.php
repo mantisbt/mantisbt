@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: sponsorship_api.php,v 1.3 2004-07-10 23:38:02 vboctor Exp $
+	# $Id: sponsorship_api.php,v 1.4 2004-07-18 10:27:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -190,7 +190,7 @@
 	function sponsorship_format_amount( $amount ) {
 		# @@@ add some currency formating in the future
 		$t_currency = sponsorship_get_currency();
-		return "$t_currency&nbsp;$amount";
+		return "$t_currency $amount";
 	}
 
 	# --------------------
@@ -249,7 +249,7 @@
 
 			if ( $t_old_amount == $c_amount ) {
 				return $t_sponsorship_id;
-			}				
+			}
 
 			# Update
 			$query = "UPDATE $t_sponsorship_table
