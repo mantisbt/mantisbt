@@ -14,15 +14,9 @@
     $result = news_delete_query( $f_id );
 
     $t_redirect_url = $g_news_menu_page;
-?>
-<?php print_page_top1() ?>
-<?php
 	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
+		print_header_redirect( $t_redirect_url );
+	} else {
+		print_mantis_error( ERROR_GENERIC );
 	}
 ?>
-<?php print_page_top2() ?>
-
-<?php print_proceed( $result, $query, $t_redirect_url ) ?>
-
-<?php print_page_bot1( __FILE__ ) ?>

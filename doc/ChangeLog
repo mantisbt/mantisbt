@@ -63,6 +63,8 @@ Mantis
  * Removed action confirmations in Bug/Bugnote pages.
  * Removed action confirmations in Login/Logout pages.
  * Removed some action confirmations in Manage pages.
+ * Removed some action confirmations in News pages.
+ * Removed some action confirmations in Project Doc pages.
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.
  * Modified edit project links to use the project name instead of the [edit] link.
