@@ -77,7 +77,7 @@
 		</select>
 	</td>
 	<td>
-		<input type="submit" value="<?php echo $s_add_user_button ?>">
+		<input type="submit" value="<?php echo $s_add_user_button ?>" />
 		</form>
 	</td>
 </tr>
@@ -106,7 +106,7 @@
 		<?php print_sort_icon( $c_dir, $c_sort, 'access_level' ) ?>
 	</td>
 	<td>&nbsp;
-		
+
 	</td>
 </tr>
 <?php

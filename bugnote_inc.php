@@ -125,7 +125,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="bugnote_add.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
 		<?php echo $s_add_bugnote_title ?>
 	</td>
 </tr>
@@ -143,13 +143,13 @@
 		<?php echo $s_private ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_private">
+		<input type="checkbox" name="f_private" />
 	</td>
 </tr>
 <?php } ?>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_add_bugnote_button ?>">
+		<input type="submit" value="<?php echo $s_add_bugnote_button ?>" />
 		</form>
 	</td>
 </tr>

@@ -27,7 +27,7 @@
 <tr>
 	<td class="form-title" colspan="3">
 		<form method="post" action="manage_user_update.php">
-		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
+		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
 		<?php echo $s_edit_user_title ?>
 	</td>
 </tr>
@@ -36,7 +36,7 @@
 		<?php echo $s_username ?>:
 	</td>
 	<td colspan="2" width="70%">
-		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>">
+		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -44,7 +44,7 @@
 		<?php echo $s_email ?>:
 	</td>
 	<td colspan="2">
-		<input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>">
+		<input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -62,7 +62,7 @@
 		<?php echo $s_enabled ?>:
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_enabled" <?php check_checked( $u_enabled, ON ); ?>>
+		<input type="checkbox" name="f_enabled" <?php check_checked( $u_enabled, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -70,25 +70,25 @@
 		<?php echo $s_protected ?>:
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_protected" <?php check_checked( $u_protected, ON ); ?>>
+		<input type="checkbox" name="f_protected" <?php check_checked( $u_protected, ON ); ?> />
 	</td>
 </tr>
 <tr>
 	<td class="center">
-		<input type="submit" value="<?php echo $s_update_user_button ?>">
+		<input type="submit" value="<?php echo $s_update_user_button ?>" />
 		</form>
 	</td>
 	<td class="center">
 		<form method="post" action="manage_user_reset.php">
-		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
-		<input type="hidden" name="f_email" value="<?php echo $u_email ?>">
-		<input type="submit" value="<?php echo $s_reset_password_button ?>">
+		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
+		<input type="hidden" name="f_email" value="<?php echo $u_email ?>" />
+		<input type="submit" value="<?php echo $s_reset_password_button ?>" />
 		</form>
 	</td>
 	<td class="center">
 		<form method="post" action="manage_user_delete_page.php">
-		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
-		<input type="submit" value="<?php echo $s_delete_user_button ?>">
+		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
+		<input type="submit" value="<?php echo $s_delete_user_button ?>" />
 		</form>
 	</td>
 </tr>
@@ -113,7 +113,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="manage_user_proj_add.php">
-		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>">
+		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
 		<?php echo $s_add_user_title ?>
 	</td>
 </tr>
@@ -148,7 +148,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_add_user_button ?>">
+		<input type="submit" value="<?php echo $s_add_user_button ?>" />
 		</form>
 	</td>
 </tr>

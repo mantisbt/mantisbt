@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.26 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-30 08:36:50 $
+	# $Revision: 1.27 $
+	# $Author: prescience $
+	# $Date: 2002-08-31 23:31:21 $
 	#
-	# $Id: bug_update_advanced_page.php,v 1.26 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.27 2002-08-31 23:31:21 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -64,9 +64,9 @@
 <tr>
 	<td class="form-title" colspan="3">
 		<form method="post" action="bug_update.php">
-		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
-		<input type="hidden" name="f_old_status" value="<?php echo $v_status ?>">
-		<input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>">
+		<input type="hidden" name="f_id" value="<?php echo $v_id ?>" />
+		<input type="hidden" name="f_old_status" value="<?php echo $v_status ?>" />
+		<input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>" />
 		<?php echo $s_updating_bug_advanced_title ?>
 	</td>
 	<td class="right" colspan="3">
@@ -188,7 +188,7 @@
 		<?php echo $s_platform ?>
 	</td>
 	<td>
-		<input type="text" name="f_platform" size="16" maxlength="32" value="<?php echo $v_platform ?>">
+		<input type="text" name="f_platform" size="16" maxlength="32" value="<?php echo $v_platform ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -210,7 +210,7 @@
 		<?php echo $s_os ?>
 	</td>
 	<td>
-		<input type="text" name="f_os" size="16" maxlength="32" value="<?php echo $v_os ?>">
+		<input type="text" name="f_os" size="16" maxlength="32" value="<?php echo $v_os ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -229,7 +229,7 @@
 		<?php echo $s_os_version ?>
 	</td>
 	<td>
-		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $v_os_build ?>">
+		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $v_os_build ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -261,7 +261,7 @@
 		<?php echo $s_build ?>
 	</td>
 	<td>
-		<input type="text" name="f_build" size="16" maxlength="32" value="<?php echo $v_build ?>">
+		<input type="text" name="f_build" size="16" maxlength="32" value="<?php echo $v_build ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -285,7 +285,7 @@
 		<?php echo $s_summary ?>
 	</td>
 	<td colspan="5">
-		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $v_summary ?>">
+		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $v_summary ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -331,13 +331,13 @@
 		<?php echo $s_private ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_private">
+		<input type="checkbox" name="f_private" />
 	</td>
 </tr>
 <?php } ?>
 <tr>
 	<td class="center" colspan="6"">
-		<input type="submit" value="<?php echo $s_update_information_button ?>">
+		<input type="submit" value="<?php echo $s_update_information_button ?>" />
 		</form>
 	</td>
 </tr>

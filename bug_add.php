@@ -262,21 +262,21 @@
 ?>
 		<p>
 		<form method="post" action="<?php echo $t_redirect_url ?>">
-			<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>">
-			<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>">
-			<input type="hidden" name="f_reproducibility" 	value="<?php echo $f_reproducibility ?>">
-			<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>">
-			<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>">
-			<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>">
-			<input type="hidden" name="f_os_build" 			value="<?php echo $f_os_build ?>">
-			<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>">
-			<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>">
-			<input type="hidden" name="f_assign_id" 		value="<?php echo $f_assign_id ?>">
-			<input type="hidden" name="f_summary" 			value="<?php echo $f_summary ?>">
-			<input type="hidden" name="f_description" 		value="<?php echo $f_description ?>">
-			<input type="hidden" name="f_steps_to_reproduce" value="<?php echo $f_steps_to_reproduce ?>">
-			<input type="hidden" name="f_additional_info" 	value="<?php echo $f_additional_info ?>">
-			<input type="submit" 							value="<?php echo $s_go_back ?>">
+			<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>" />
+			<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>" />
+			<input type="hidden" name="f_reproducibility" 	value="<?php echo $f_reproducibility ?>" />
+			<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>" />
+			<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>" />
+			<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>" />
+			<input type="hidden" name="f_os_build" 			value="<?php echo $f_os_build ?>" />
+			<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>" />
+			<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>" />
+			<input type="hidden" name="f_assign_id" 		value="<?php echo $f_assign_id ?>" />
+			<input type="hidden" name="f_summary" 			value="<?php echo $f_summary ?>" />
+			<input type="hidden" name="f_description" 		value="<?php echo $f_description ?>" />
+			<input type="hidden" name="f_steps_to_reproduce" value="<?php echo $f_steps_to_reproduce ?>" />
+			<input type="hidden" name="f_additional_info" 	value="<?php echo $f_additional_info ?>" />
+			<input type="submit" 							value="<?php echo $s_go_back ?>" />
 		</form>
 <?php
 	} else if ( !$result ) {		# MYSQL ERROR
@@ -287,17 +287,17 @@
 		if ( isset( $f_report_stay )) {
 ?>
 			<form method="post" action="<?php echo $t_redirect_url ?>">
-				<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>">
-				<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>">
-				<input type="hidden" name="f_reproducibility" 	value="<?php echo $f_reproducibility ?>">
-				<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>">
-				<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>">
-				<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>">
-				<input type="hidden" name="f_os_build" 			value="<?php echo $f_os_build ?>">
-				<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>">
-				<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>">
-				<input type="hidden" name="f_report_stay" 		value="<?php echo $f_report_stay ?>">
-				<input type="submit" 							value="<?php echo $s_report_more_bugs ?>">
+				<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>" />
+				<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>" />
+				<input type="hidden" name="f_reproducibility" 	value="<?php echo $f_reproducibility ?>" />
+				<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>" />
+				<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>" />
+				<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>" />
+				<input type="hidden" name="f_os_build" 			value="<?php echo $f_os_build ?>" />
+				<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>" />
+				<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>" />
+				<input type="hidden" name="f_report_stay" 		value="<?php echo $f_report_stay ?>" />
+				<input type="submit" 							value="<?php echo $s_report_more_bugs ?>" />
 			</form>
 <?php
 		} else {

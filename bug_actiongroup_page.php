@@ -87,10 +87,10 @@
 <div align="center">
 <table class="width75" cellspacing="1">
 <form method="POST" action="view_all_bug_update.php">
-<input type="hidden" name="f_actionconfirmed" value="1">
-<input type="hidden" name="f_action" value="<?php echo $f_action ?>">
+<input type="hidden" name="f_actionconfirmed" value="1" />
+<input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
 <?php foreach( $f_bug_arr as $value ) { ?>
-		<input type="hidden" name="f_bug_arr[]" value="<?php echo $value ?>">
+		<input type="hidden" name="f_bug_arr[]" value="<?php echo $value ?>" />
 <?php } ?>
 <tr class="row-1">
 	<td class="category">
@@ -116,7 +116,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $t_button_title ?>">
+		<input type="submit" value="<?php echo $t_button_title ?>" />
 	</td>
 </tr>
 </form>
@@ -133,14 +133,14 @@
 	<?php echo $t_question_title ?>
 
 	<form method="post" action="view_all_bug_update.php">
-		<input type="hidden" name="f_actionconfirmed" value="1">
-		<input type="hidden" name="f_action" value="<?php echo $f_action ?>">
+		<input type="hidden" name="f_actionconfirmed" value="1" />
+		<input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
 
 	<?php foreach( $f_bug_arr as $value ) { ?>
-		<input type="hidden" name="f_bug_arr[]" value="<?php echo $value ?>">
+		<input type="hidden" name="f_bug_arr[]" value="<?php echo $value ?>" />
 	<?php } ?>
 
-		<input type="submit" value="<?php echo $t_button_title ?>">
+		<input type="submit" value="<?php echo $t_button_title ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

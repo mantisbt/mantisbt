@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.7 2002-08-31 02:54:20 vboctor Exp $
+	# $Id: html_api.php,v 1.8 2002-08-31 23:31:22 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -254,7 +254,7 @@
 					PRINT '<option value="0000000">' . lang_get( 'all_projects' ) . '</option>';
 					print_project_option_list( $g_project_cookie_val );
 				PRINT '</select>';
-				PRINT '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small">';
+				PRINT '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small" />';
 				PRINT '</form>';
 			PRINT '</td>';
 		PRINT '</tr>';
@@ -356,8 +356,8 @@
 				PRINT '</td>';
 				PRINT '<td class="right" style="white-space: nowrap;">';
 					PRINT '<form method="post" action="jump_to_bug.php">';
-					PRINT "<input type=\"text\" name=\"f_id\" size=\"10\" class=\"small\">&nbsp;";
-					PRINT '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small">&nbsp;';
+					PRINT "<input type=\"text\" name=\"f_id\" size=\"10\" class=\"small\" />&nbsp;";
+					PRINT '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
 					PRINT '</form>';
 				PRINT '</td>';
 			PRINT '</tr>';

@@ -45,10 +45,10 @@
 	<td class="form-title">
 		<form name="f_login_form" method="post" action="login.php">
 		<?php	if (isset($f_return)) { ?>
-		<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>">
+		<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>" />
 		<?php	} ?>
 		<?php	if (isset($f_project_id)) { ?>
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<?php } ?>
 		<?php echo $s_login_title ?>
 	</td>
@@ -65,7 +65,7 @@
 		<?php echo $s_username ?>:
 	</td>
 	<td width="75%">
-		<input type="text" name="f_username" size="32" maxlength="32">
+		<input type="text" name="f_username" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -73,7 +73,7 @@
 		<?php echo $s_password ?>:
 	</td>
 	<td>
-		<input type="password" name="f_password" size="16" maxlength="32">
+		<input type="password" name="f_password" size="16" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -81,12 +81,12 @@
 		<?php echo $s_save_login ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_perm_login">
+		<input type="checkbox" name="f_perm_login" />
 	</td>
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_login_button ?>">
+		<input type="submit" value="<?php echo $s_login_button ?>" />
 		</form>
 	</td>
 </tr>
@@ -96,10 +96,8 @@
 
 <?php print_signup_link() ?>
 
-<script language="JavaScript">
-<!--
-	window.document.f_login_form.f_username.focus();
-//-->
+<script type="text/javascript" language="JavaScript">
+window.document.f_login_form.f_username.focus();
 </script>
 
 <?php print_page_bot1( __FILE__ ) ?>

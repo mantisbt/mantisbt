@@ -30,7 +30,7 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="proj_doc_update.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
 		<?php echo $s_upload_file_title ?>
 	</td>
 	<td class="right">
@@ -42,7 +42,7 @@
 		<?php echo $s_title ?>
 	</td>
 	<td width="80%">
-		<input type="text" name="f_title" size="70" maxlength="250" value="<?php echo $v_title ?>">
+		<input type="text" name="f_title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -63,13 +63,13 @@
 </tr>
 <tr>
 	<td class="left">
-		<input type="submit" value="<?php echo $s_file_update_button ?>">
+		<input type="submit" value="<?php echo $s_file_update_button ?>" />
 		</form>
 	</td>
 	<td class="right">
 		<form method="post" action="proj_doc_delete_page.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
-		<input type="submit" value="<?php echo $s_file_delete_button ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="submit" value="<?php echo $s_file_delete_button ?>" />
 		</form>
 	</td>
 </tr>

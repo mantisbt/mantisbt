@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.31 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-30 08:36:50 $
+	# $Revision: 1.32 $
+	# $Author: prescience $
+	# $Date: 2002-08-31 23:31:21 $
 	#
-	# $Id: bug_update.php,v 1.31 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bug_update.php,v 1.32 2002-08-31 23:31:21 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php

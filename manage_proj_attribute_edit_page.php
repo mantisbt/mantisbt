@@ -13,7 +13,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php 
+<?php
 	print_manage_menu( 'manage_proj_attribute_edit_page.php' );
 
 	check_varset( $f_assigned_to, '0' );
@@ -22,7 +22,7 @@
 <?php # attribute definition
 	  # complete this switch to add new attributes
 	$t_title = '';
-	
+
 	switch ($f_parameter) {
 		case 'priorities' :
 			$t_title = $s_priority ;
@@ -59,13 +59,13 @@
 <tr class="row-1">
 	<td class="category">
 		<form method="post" action="manage_proj_attribute_update.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<input type="hidden" name="f_orig_attribute" value="<?php echo $f_attribute ?>"> 
-		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="hidden" name="f_orig_attribute" value="<?php echo $f_attribute ?>" />
+		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
 		<?php echo $t_title ?>
 	</td>
 	<td>
-		<input type="text" name="f_attribute" size="32" value="<?php echo urldecode( stripslashes( $f_attribute ) ) ?>">
+		<input type="text" name="f_attribute" size="32" value="<?php echo urldecode( stripslashes( $f_attribute ) ) ?>" />
 	</td>
 </tr>
 <?php if ($f_parameter == $s_states) { ?>
@@ -79,19 +79,19 @@
 		</select>
 	</td>
 </tr>
-	<?php } #if color ?>	
+	<?php } #if color ?>
 
 <tr>
 	<td class="left" width="50%">
-		<input type="submit" value="<?php echo $s_update_button.' '.$t_title ?>">
+		<input type="submit" value="<?php echo $s_update_button.' '.$t_title ?>" />
 		</form>
 	</td>
 	<td class="right" width="50%">
 		<form method="post" action="manage_proj_attribute_del_page.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<input type="hidden" name="f_attribute" value="<?php echo $f_attribute ?>">
-		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>">
-		<input type="submit" value="<?php echo $s_delete_button.' '.$t_title ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="hidden" name="f_attribute" value="<?php echo $f_attribute ?>" />
+		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
+		<input type="submit" value="<?php echo $s_delete_button.' '.$t_title ?>" />
 		</form>
 	</td>
 </tr>

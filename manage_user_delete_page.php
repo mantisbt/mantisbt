@@ -19,8 +19,8 @@
 	<?php echo $s_delete_account_sure_msg ?>
 
 	<form method="post" action="manage_user_delete.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
-		<input type="submit" value="<?php echo $s_delete_account_button ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="submit" value="<?php echo $s_delete_account_button ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

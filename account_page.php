@@ -80,7 +80,7 @@
 	    <?php echo $s_email ?>:
 	</td>
 	<td>
-	    <input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>">
+	    <input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>" />
 	</td>
 </tr>
 <?php } ?>
@@ -110,12 +110,12 @@
 </tr>
 <tr>
 	<td class="center">
-		<input type="submit" value="<?php echo $s_update_user_button ?>">
+		<input type="submit" value="<?php echo $s_update_user_button ?>" />
 		</form>
 	</td>
 	<td class="center">
 		<form method="post" action="account_delete_page.php">
-		<input type="submit" value="<?php echo $s_delete_account_button ?>">
+		<input type="submit" value="<?php echo $s_delete_account_button ?>" />
 		</form>
 	</td>
 </tr>
@@ -127,7 +127,7 @@
 		<?php echo $s_username ?>:
 	</td>
 	<td width="75%">
-		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>">
+		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -135,7 +135,7 @@
 		<?php echo $s_password ?>:
 	</td>
 	<td>
-		<input type="password" size="32" maxlength="32" name="f_password">
+		<input type="password" size="32" maxlength="32" name="f_password" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -143,7 +143,7 @@
 		<?php echo $s_confirm_password ?>:
 	</td>
 	<td>
-		<input type="password" size="32" maxlength="32" name="f_password_confirm">
+		<input type="password" size="32" maxlength="32" name="f_password_confirm" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -151,7 +151,7 @@
 	    <?php echo $s_email ?>:
 	</td>
 	<td>
-	    <input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>">
+	    <input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -180,7 +180,7 @@
 </tr>
 <tr>
 	<td class="left">
-		<input type="submit" value="<?php echo $s_update_user_button ?>">
+		<input type="submit" value="<?php echo $s_update_user_button ?>" />
 		</form>
 	</td>
 <?php
@@ -189,7 +189,7 @@
 ?>
 	<td class="right">
 		<form method="post" action="account_delete_page.php">
-		<input type="submit" value="<?php echo $s_delete_account_button ?>">
+		<input type="submit" value="<?php echo $s_delete_account_button ?>" />
 		</form>
 	</td>
 <?php 	} else { ?>

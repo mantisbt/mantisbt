@@ -44,7 +44,7 @@
 		<?php echo $s_username ?>:
 	</td>
 	<td width="70%">
-		<input type="text" name="f_username" size="32" maxlength="32">
+		<input type="text" name="f_username" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -52,12 +52,12 @@
 		<?php echo $s_email ?>:
 	</td>
 	<td>
-		<input type="text" name="f_email" size="32" maxlength="64">
+		<input type="text" name="f_email" size="32" maxlength="64" />
 	</td>
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_signup_button ?>">
+		<input type="submit" value="<?php echo $s_signup_button ?>" />
 		</form>
 	</td>
 </tr>

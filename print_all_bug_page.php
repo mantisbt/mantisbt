@@ -188,11 +188,11 @@
 <tr>
     <td class="print">
 		<form method="post" action="view_all_set.php">
-		<input type="hidden" name="f_type" value="1">
-		<input type="hidden" name="f_print" value="1">
-		<input type="hidden" name="f_offset" value="0">
-		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
-		<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
+		<input type="hidden" name="f_type" value="1" />
+		<input type="hidden" name="f_print" value="1" />
+		<input type="hidden" name="f_offset" value="0" />
+		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>" />
+		<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>" />
         <?php echo $s_search ?>
     </td>
     <td class="print">
@@ -225,7 +225,7 @@
 </tr>
 <tr>
 	<td>
-	    <input type="text" name="f_search" value="<?php echo $f_search; ?>">
+	    <input type="text" name="f_search" value="<?php echo $f_search; ?>" />
 	</td>
 	<td>
 		<select name="f_user_id">
@@ -264,16 +264,16 @@
 		</select>
 	</td>
 	<td>
-		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>">
+		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>" />
 	</td>
 	<td>
-		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
+		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>" />
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?>>
+		<input type="checkbox" name="f_hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?> />
 	</td>
 	<td>
-		<input type="submit" value="<?php echo $s_filter_button ?>">
+		<input type="submit" value="<?php echo $s_filter_button ?>" />
 		</form>
 	</td>
 </tr>
@@ -401,7 +401,7 @@
 
 <tr>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
-		<input type="checkbox" name="f_bug_arr[]" value="<?php echo $i ?>">
+		<input type="checkbox" name="f_bug_arr[]" value="<?php echo $i ?>" />
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo get_enum_element( 'priority', $v_priority ) ?>
@@ -462,6 +462,7 @@
 	} # isset_loop
 } # for_loop
 ?>
-<input type="hidden" name="t_show_flag" value="1">
+<input type="hidden" name="t_show_flag" value="1" />
 </table>
-<input type="submit" value="<?php echo $s_hide_button ?>">
+<input type="submit" value="<?php echo $s_hide_button ?>" />
+<?php # @@@ BUG ?  Where is the closing FORM tag??? ?>

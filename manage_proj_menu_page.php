@@ -42,7 +42,7 @@
 		<?php echo $s_project_name?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_name" size="64" maxlength="128">
+		<input type="text" name="f_name" size="64" maxlength="128" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -73,7 +73,7 @@
 				<?php echo $s_upload_file_path ?>
 			</td>
 			<td>
-				<input type="text" name="f_file_path" size="70" maxlength="250">
+				<input type="text" name="f_file_path" size="70" maxlength="250" />
 			</td>
 		</tr>
 		<?php
@@ -89,7 +89,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_add_project_button ?>">
+		<input type="submit" value="<?php echo $s_add_project_button ?>" />
 		</form>
 	</td>
 </tr>
@@ -172,7 +172,7 @@
 
 <?php # Attribute customization is for all projects at the moment
 	  # Place the following code in manage_proj_edit_page.php when Per Project Settings are ok ?>
-<?php # Attributes customization BEGIN 
+<?php # Attributes customization BEGIN
 if (($g_customize_attributes)&&(access_level_check_greater_or_equal( ADMINISTRATOR ) ) ) {
 	?>
 	<p>
@@ -183,8 +183,8 @@ if (($g_customize_attributes)&&(access_level_check_greater_or_equal( ADMINISTRAT
 			<?php echo $s_attribute_customization_title ?>
 		</td>
 	</tr>
-<?php 
-	# to be deleted when moving to manage_project_page.php	
+<?php
+	# to be deleted when moving to manage_project_page.php
 	$t_project_id = '0000000';
 
 	#priorities

@@ -34,7 +34,7 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="account_prof_add.php">
-		<input type="hidden" name="f_user_id" value="<?php echo current_user_get_field( 'id' ) ?>">
+		<input type="hidden" name="f_user_id" value="<?php echo current_user_get_field( 'id' ) ?>" />
 		<?php echo $s_add_profile_title ?>
 	</td>
 	<td class="right">
@@ -46,7 +46,7 @@
 		<span class="required">*</span><?php echo $s_platform ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_platform" size="32" maxlength="32">
+		<input type="text" name="f_platform" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -54,7 +54,7 @@
 		<span class="required">*</span><?php echo $s_operating_system ?>
 	</td>
 	<td>
-		<input type="text" name="f_os" size="32" maxlength="32">
+		<input type="text" name="f_os" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -62,7 +62,7 @@
 		<span class="required">*</span><?php echo $s_version ?>
 	</td>
 	<td>
-		<input type="text" name="f_os_build" size="16" maxlength="16">
+		<input type="text" name="f_os_build" size="16" maxlength="16" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -78,7 +78,7 @@
 		<span class="required"> * <?php echo $s_required ?></span>
 	</td>
 	<td class="center">
-		<input type="submit" value="<?php echo $s_add_profile_button ?>">
+		<input type="submit" value="<?php echo $s_add_profile_button ?>" />
 		</form>
 	</td>
 </tr>
@@ -98,9 +98,9 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<input type="radio" name="f_action" value="edit" checked="checked"> <?php echo $s_edit_profile ?>
-		<input type="radio" name="f_action" value="make default"> <?php echo $s_make_default ?>
-		<input type="radio" name="f_action" value="delete"> <?php echo $s_delete_profile ?>
+		<input type="radio" name="f_action" value="edit" checked="checked" /> <?php echo $s_edit_profile ?>
+		<input type="radio" name="f_action" value="make default" /> <?php echo $s_make_default ?>
+		<input type="radio" name="f_action" value="delete" /> <?php echo $s_delete_profile ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -115,7 +115,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_submit_button ?>">
+		<input type="submit" value="<?php echo $s_submit_button ?>" />
 		</form>
 	</td>
 </tr>

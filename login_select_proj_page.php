@@ -23,7 +23,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="set_project.php">
-		<input type="hidden" name="f_ref" value="<?php echo $f_ref ?>">
+		<input type="hidden" name="f_ref" value="<?php echo $f_ref ?>" />
 		<?php echo $s_login_title ?>
 	</td>
 </tr>
@@ -43,12 +43,12 @@
 		<?php echo $s_make_default ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_make_default">
+		<input type="checkbox" name="f_make_default" />
 	</td>
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_select_project_button ?>">
+		<input type="submit" value="<?php echo $s_select_project_button ?>" />
 		</form>
 	</td>
 </tr>

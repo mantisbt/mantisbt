@@ -29,7 +29,7 @@
 		<?php echo $s_username ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_username" size="32" maxlength="32">
+		<input type="text" name="f_username" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -37,7 +37,7 @@
 		<?php echo $s_email ?>
 	</td>
 	<td>
-		<input type="text" name="f_email" size="32" maxlength="64">
+		<input type="text" name="f_email" size="32" maxlength="64" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -45,7 +45,7 @@
 		<?php echo $s_password ?>
 	</td>
 	<td>
-		<input type="password" name="f_password" size="32" maxlength="32">
+		<input type="password" name="f_password" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -53,7 +53,7 @@
 		<?php echo $s_verify_password ?>
 	</td>
 	<td>
-		<input type="password" name="f_password_verify" size="32" maxlength="32">
+		<input type="password" name="f_password_verify" size="32" maxlength="32" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -71,7 +71,7 @@
 		<?php echo $s_enabled ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_enabled" checked="checked">
+		<input type="checkbox" name="f_enabled" checked="checked" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -79,12 +79,12 @@
 		<?php echo $s_protected ?>
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_protected">
+		<input type="checkbox" name="f_protected" />
 	</td>
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_create_user_button ?>">
+		<input type="submit" value="<?php echo $s_create_user_button ?>" />
 		</form>
 	</td>
 </tr>

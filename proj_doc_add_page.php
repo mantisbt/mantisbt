@@ -30,7 +30,7 @@
 		<?php echo $s_title ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_title" size="70" maxlength="250">
+		<input type="text" name="f_title" size="70" maxlength="250" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -46,13 +46,13 @@
 		<?php echo $s_select_file ?>
 	</td>
 	<td>
-		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>">
-		<input name="f_file" type="file" size="70">
+		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>" />
+		<input name="f_file" type="file" size="70" />
 	</td>
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_upload_file_button ?>">
+		<input type="submit" value="<?php echo $s_upload_file_button ?>" />
 		</form>
 	</td>
 </tr>

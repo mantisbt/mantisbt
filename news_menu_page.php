@@ -20,7 +20,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="news_add.php">
-		<input type="hidden" name="f_poster_id" value="<?php echo auth_get_current_user_id() ?>">
+		<input type="hidden" name="f_poster_id" value="<?php echo auth_get_current_user_id() ?>" />
 		<?php echo $s_add_news_title ?>
 	</td>
 </tr>
@@ -30,7 +30,7 @@
 		<span class="small"><?php echo $s_do_not_use ?> "</span>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_headline" size="64" maxlength="64">
+		<input type="text" name="f_headline" size="64" maxlength="64" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -62,7 +62,7 @@
 		<span class="small"><?php echo $s_stays_on_top ?></span>
 	</td>
 	<td>
-		<input type="checkbox" name="f_announcement">
+		<input type="checkbox" name="f_announcement" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -77,7 +77,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_post_news_button ?>">
+		<input type="submit" value="<?php echo $s_post_news_button ?>" />
 		</form>
 	</td>
 </tr>
@@ -97,8 +97,8 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<input type="radio" name="f_action" value="edit" checked="checked"> <?php echo $s_edit_post ?>
-		<input type="radio" name="f_action" value="delete"> <?php echo $s_delete_post ?>
+		<input type="radio" name="f_action" value="edit" checked="checked" /> <?php echo $s_edit_post ?>
+		<input type="radio" name="f_action" value="delete" /> <?php echo $s_delete_post ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -113,7 +113,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_submit_button ?>">
+		<input type="submit" value="<?php echo $s_submit_button ?>" />
 		</form>
 	</td>
 </tr>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.23 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bugnote_edit_page.php,v 1.24 2002-08-31 23:31:21 prescience Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -57,7 +57,7 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="bugnote_update.php">
-		<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>">
+		<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>" />
 		<?php echo $s_edit_bugnote_title ?>
 	</td>
 	<td class="right">
@@ -71,7 +71,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_update_information_button ?>">
+		<input type="submit" value="<?php echo $s_update_information_button ?>" />
 		</form>
 	</td>
 </tr>

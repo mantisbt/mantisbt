@@ -74,8 +74,8 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 <tr>
 	<td class="form-title">
 		<form method="post" action="account_prefs_update.php">
-		<input type="hidden" name="f_user_id" value="<?php echo $c_user_id ?>">
-		<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>">
+		<input type="hidden" name="f_user_id" value="<?php echo $c_user_id ?>" />
+		<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
 		<?php echo $s_default_account_preferences_title ?>
 	</td>
 	<td class="right">
@@ -103,7 +103,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_advanced_report ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_report" <?php check_checked( $u_advanced_report, ON ); ?>>
+		<input type="checkbox" name="f_advanced_report" <?php check_checked( $u_advanced_report, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -111,7 +111,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_advanced_view ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_view" <?php check_checked( $u_advanced_view, ON ); ?>>
+		<input type="checkbox" name="f_advanced_view" <?php check_checked( $u_advanced_view, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-2">
@@ -119,7 +119,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_advanced_update ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_update" <?php check_checked( $u_advanced_update, ON ); ?>>
+		<input type="checkbox" name="f_advanced_update" <?php check_checked( $u_advanced_update, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -127,7 +127,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_refresh_delay ?>
 	</td>
 	<td>
-		<input type="text" name="f_refresh_delay" size="4" maxlength="4" value="<?php echo $u_refresh_delay ?>">
+		<input type="text" name="f_refresh_delay" size="4" maxlength="4" value="<?php echo $u_refresh_delay ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -135,7 +135,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_redirect_delay ?>
 	</td>
 	<td>
-		<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<?php echo $u_redirect_delay ?>">
+		<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<?php echo $u_redirect_delay ?>" />
 	</td>
 </tr>
 <?php
@@ -146,7 +146,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_new ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_new" <?php check_checked( $u_email_on_new, ON ); ?>>
+		<input type="checkbox" name="f_email_on_new" <?php check_checked( $u_email_on_new, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-2">
@@ -154,7 +154,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_assigned ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_assigned" <?php check_checked( $u_email_on_assigned, ON ); ?>>
+		<input type="checkbox" name="f_email_on_assigned" <?php check_checked( $u_email_on_assigned, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -162,7 +162,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_feedback ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_feedback" <?php check_checked( $u_email_on_feedback, ON ); ?>>
+		<input type="checkbox" name="f_email_on_feedback" <?php check_checked( $u_email_on_feedback, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-2">
@@ -170,7 +170,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_resolved ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_resolved" <?php check_checked( $u_email_on_resolved, ON ); ?>>
+		<input type="checkbox" name="f_email_on_resolved" <?php check_checked( $u_email_on_resolved, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -178,7 +178,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_closed ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_closed" <?php check_checked( $u_email_on_closed, ON ); ?>>
+		<input type="checkbox" name="f_email_on_closed" <?php check_checked( $u_email_on_closed, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-2">
@@ -186,7 +186,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_reopened ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_reopened" <?php check_checked( $u_email_on_reopened, ON ); ?>>
+		<input type="checkbox" name="f_email_on_reopened" <?php check_checked( $u_email_on_reopened, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -194,7 +194,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_bugnote_added ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_bugnote" <?php check_checked( $u_email_on_bugnote, ON ); ?>>
+		<input type="checkbox" name="f_email_on_bugnote" <?php check_checked( $u_email_on_bugnote, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-2">
@@ -202,7 +202,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_status_change ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_status" <?php check_checked( $u_email_on_status, ON ); ?>>
+		<input type="checkbox" name="f_email_on_status" <?php check_checked( $u_email_on_status, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -210,19 +210,19 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_priority_change ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_priority" <?php check_checked( $u_email_on_priority , ON); ?>>
+		<input type="checkbox" name="f_email_on_priority" <?php check_checked( $u_email_on_priority , ON); ?> />
 	</td>
 </tr>
 <?php } else { ?>
-		<input type="hidden" name="f_email_on_new"      value="<?php echo $u_email_on_new ?>">
-		<input type="hidden" name="f_email_on_assigned" value="<?php echo $u_email_on_assigned ?>">
-		<input type="hidden" name="f_email_on_feedback" value="<?php echo $u_email_on_feedback ?>">
-		<input type="hidden" name="f_email_on_resolved" value="<?php echo $u_email_on_resolved ?>">
-		<input type="hidden" name="f_email_on_closed"   value="<?php echo $u_email_on_closed ?>">
-		<input type="hidden" name="f_email_on_reopened" value="<?php echo $u_email_on_reopened ?>">
-		<input type="hidden" name="f_email_on_bugnote"  value="<?php echo $u_email_on_bugnote ?>">
-		<input type="hidden" name="f_email_on_status"   value="<?php echo $u_email_on_status ?>">
-		<input type="hidden" name="f_email_on_priority" value="<?php echo $u_email_on_priority ?>">
+		<input type="hidden" name="f_email_on_new"      value="<?php echo $u_email_on_new ?>" />
+		<input type="hidden" name="f_email_on_assigned" value="<?php echo $u_email_on_assigned ?>" />
+		<input type="hidden" name="f_email_on_feedback" value="<?php echo $u_email_on_feedback ?>" />
+		<input type="hidden" name="f_email_on_resolved" value="<?php echo $u_email_on_resolved ?>" />
+		<input type="hidden" name="f_email_on_closed"   value="<?php echo $u_email_on_closed ?>" />
+		<input type="hidden" name="f_email_on_reopened" value="<?php echo $u_email_on_reopened ?>" />
+		<input type="hidden" name="f_email_on_bugnote"  value="<?php echo $u_email_on_bugnote ?>" />
+		<input type="hidden" name="f_email_on_status"   value="<?php echo $u_email_on_status ?>" />
+		<input type="hidden" name="f_email_on_priority" value="<?php echo $u_email_on_priority ?>" />
 <?php } ?>
 <tr class="row-2">
 	<td class="category">
@@ -236,13 +236,13 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 </tr>
 <tr>
 	<td class="center">
-		<input type="submit" value="<?php echo $s_update_prefs_button ?>">
+		<input type="submit" value="<?php echo $s_update_prefs_button ?>" />
 		</form>
 	</td>
 	<td class="center">
 		<form method="post" action="account_prefs_reset.php">
-		<input type="hidden" name="f_id" value="<?php echo $c_user_id ?>">
-		<input type="submit" value="<?php echo $s_reset_prefs_button ?>">
+		<input type="hidden" name="f_id" value="<?php echo $c_user_id ?>" />
+		<input type="submit" value="<?php echo $s_reset_prefs_button ?>" />
 		</form>
 	</td>
 </tr>

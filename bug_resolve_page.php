@@ -22,7 +22,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="bug_resolve.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
 		<?php echo $s_resolve_bug_title ?>
 	</td>
 </tr>
@@ -41,7 +41,7 @@
 		<?php echo $s_duplicate_id ?>
 	</td>
 	<td>
-		<input type="text" name="f_duplicate_id" maxlength="7">
+		<input type="text" name="f_duplicate_id" maxlength="7" />
 	</td>
 </tr>
 <?php if ( ON == $g_allow_close_immediately ) { ?>
@@ -50,7 +50,7 @@
 		<?php echo $s_close_immediately ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_close_now">
+		<input type="checkbox" name="f_close_now" />
 	</td>
 </tr>
 <?php } ?>
@@ -66,7 +66,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_resolve_bug_button ?>">
+		<input type="submit" value="<?php echo $s_resolve_bug_button ?>" />
 		</form>
 	</td>
 </tr>

@@ -47,10 +47,10 @@
 	<?php echo $s_attribute_delete_sure_msg ?>
 
 	<form method="get" action="manage_proj_attribute_delete.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<input type="hidden" name="f_attribute" value="<?php echo $f_attribute ?>">
-		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>">
-		<input type="submit" value="<?php echo $s_delete_button.' '.$t_title ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="hidden" name="f_attribute" value="<?php echo $f_attribute ?>" />
+		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
+		<input type="submit" value="<?php echo $s_delete_button.' '.$t_title ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

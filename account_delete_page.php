@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.11 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-29 02:56:22 $
+	# $Revision: 1.12 $
+	# $Author: prescience $
+	# $Date: 2002-08-31 23:31:20 $
 	#
-	# $Id: account_delete_page.php,v 1.11 2002-08-29 02:56:22 jfitzell Exp $
+	# $Id: account_delete_page.php,v 1.12 2002-08-31 23:31:20 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,7 @@
 	<?php echo $s_confirm_delete_msg ?>
 
 	<form method="post" action="account_delete.php">
-		<input type="submit" value="<?php echo $s_delete_account_button ?>">
+		<input type="submit" value="<?php echo $s_delete_account_button ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

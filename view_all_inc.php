@@ -3,11 +3,11 @@
 <tr class="row-category2">
 	<td class="small-caption">
 		<form method="post" action="view_all_set.php?f=3">
-		<input type="hidden" name="f_type" value="1">
-		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
-		<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
-		<input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>">
-		<input type="hidden" name="f_per_page" value="<?php echo $f_per_page ?>">
+		<input type="hidden" name="f_type" value="1" />
+		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>" />
+		<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>" />
+		<input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>" />
+		<input type="hidden" name="f_per_page" value="<?php echo $f_per_page ?>" />
 		<?php echo $s_reporter ?>
 	</td>
 	<td class="small-caption">
@@ -71,13 +71,13 @@
 		</select>
 	</td>
 	<td>
-		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>">
+		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>" />
 	</td>
 	<td>
-		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
+		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>" />
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?>>
+		<input type="checkbox" name="f_hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?> />
 	</td>
 </tr>
 <tr class="row-category2">
@@ -92,7 +92,7 @@
 </tr>
 <tr>
 	<td>
-	    <input type="text" size="16" name="f_search" value="<?php echo $f_search; ?>">
+	    <input type="text" size="16" name="f_search" value="<?php echo $f_search; ?>" />
 	</td>
 	<td class="left" colspan="2">
 	<!--
@@ -121,8 +121,8 @@
 	-->
 	</td>
 	<td class="right" colspan="7">
-		<input type="submit" name="f_filter" value="<?php echo $s_filter_button ?>">
-		<input type="submit" name="f_csv" value="<?php echo $s_csv_export ?>">
+		<input type="submit" name="f_filter" value="<?php echo $s_filter_button ?>" />
+		<input type="submit" name="f_csv" value="<?php echo $s_csv_export ?>" />
 		</form>
 	</td>
 </tr>
@@ -263,7 +263,7 @@
 	<?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
 	<td bgcolor="<?php echo $status_color ?>">
 			<?php $t_transf="$v_id".','."$v_bug_text_id"; ?>
-			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $t_transf ?>">
+			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $t_transf ?>" />
 	</td>
 	<?php	} ?>
 
@@ -272,7 +272,7 @@
 			if ($g_project_cookie_val!='0000000') {
 				if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 	<td bgcolor="<?php echo $status_color ?>">
-			<?php print " <input type=\"image\" name=\"update_$v_id\" src=\"images/update.png\" width=\"11\" height=\"11\">"; ?>
+			<?php print " <input type=\"image\" name=\"update_$v_id\" src=\"images/update.png\" width=\"11\" height=\"11\" />"; ?>
 	</td>
 	<?php		}
 			}?>
@@ -367,7 +367,7 @@
 		<select name="f_action">
 		<?php print_all_bug_action_option_list() ?>
 		</select>
-		<input type="submit" value="<?php echo 'OK';  ?>" >
+		<input type="submit" value="<?php echo 'OK';  ?>" />
 	</td>
 </tr>
 <?php } ?>

@@ -25,9 +25,9 @@
 	<?php echo $s_delete_bug_sure_msg ?>
 
 	<form method="post" action="bug_delete.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
-		<input type="hidden" name="f_bug_text_id" value="<?php echo $f_bug_text_id ?>">
-		<input type="submit" value="<?php echo $s_delete_bug_button ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_text_id" value="<?php echo $f_bug_text_id ?>" />
+		<input type="submit" value="<?php echo $s_delete_bug_button ?>" />
 	</form>
 
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>

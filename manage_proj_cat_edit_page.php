@@ -13,7 +13,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php 
+<?php
 	print_manage_menu( 'manage_proj_cat_edit_page.php' );
 
 	check_varset( $f_assigned_to, '0' );
@@ -30,12 +30,12 @@
 <tr class="row-1">
 	<td class="category">
 		<form method="post" action="manage_proj_cat_update.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>" />
 		<?php echo $s_category ?>
 	</td>
 	<td>
-		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>">
+		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -51,14 +51,14 @@
 </tr>
 <tr>
 	<td class="left" width="50%">
-		<input type="submit" value="<?php echo $s_update_category_button ?>">
+		<input type="submit" value="<?php echo $s_update_category_button ?>" />
 		</form>
 	</td>
 	<td class="right" width="50%">
 		<form method="post" action="manage_proj_cat_del_page.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<input type="hidden" name="f_category" value="<?php echo $f_category ?>">
-		<input type="submit" value="<?php echo $s_delete_category_button ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="hidden" name="f_category" value="<?php echo $f_category ?>" />
+		<input type="submit" value="<?php echo $s_delete_category_button ?>" />
 		</form>
 	</td>
 </tr>

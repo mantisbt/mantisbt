@@ -22,7 +22,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="bug_close.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
 		<?php echo $s_close_bug_title ?>
 	</td>
 </tr>
@@ -33,7 +33,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_close_bug_button ?>">
+		<input type="submit" value="<?php echo $s_close_bug_button ?>" />
 		</form>
 	</td>
 </tr>

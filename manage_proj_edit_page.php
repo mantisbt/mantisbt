@@ -42,7 +42,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="manage_proj_update.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<?php echo $s_edit_project_title ?>
 	</td>
 </tr>
@@ -51,7 +51,7 @@
 		<?php echo $s_project_name ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_name" size="64" maxlength="128" value="<?php echo $v_name ?>">
+		<input type="text" name="f_name" size="64" maxlength="128" value="<?php echo $v_name ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -69,7 +69,7 @@
 		<?php echo $s_enabled ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_enabled" <?php check_checked( $v_enabled, ON ); ?>>
+		<input type="checkbox" name="f_enabled" <?php check_checked( $v_enabled, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-2">
@@ -90,7 +90,7 @@
 				<?php echo $s_upload_file_path ?>
 			</td>
 			<td>
-				<input type="text" name="f_file_path" size="70" maxlength="250" value="<?php echo $v_file_path ?>">
+				<input type="text" name="f_file_path" size="70" maxlength="250" value="<?php echo $v_file_path ?>" />
 			</td>
 		</tr>
 		<?php
@@ -106,14 +106,14 @@
 </tr>
 <tr>
 	<td class="left">
-		<input type="submit" value="<?php echo $s_update_project_button ?>">
+		<input type="submit" value="<?php echo $s_update_project_button ?>" />
 		</form>
 	</td>
 	<td class="right">
        <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { ?>
 		<form method="post" action="manage_proj_delete_page.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<input type="submit" value="<?php echo $s_delete_project_button ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="submit" value="<?php echo $s_delete_project_button ?>" />
 		</form>
 	   <?php } ?>
 	</td>
@@ -177,21 +177,21 @@
 <tr>
 	<td class="left">
 		<form method="post" action="manage_proj_cat_add.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<input type="text" name="f_category" size="32" maxlength="64">
-		<input type="submit" value="<?php echo $s_add_category_button ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="text" name="f_category" size="32" maxlength="64" />
+		<input type="submit" value="<?php echo $s_add_category_button ?>" />
 		</form>
 	</td>
 </tr>
 <tr>
 	<td class="left">
 		<form method="post" action="manage_proj_cat_copy.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<select name="f_other_project_id">
 			<?php print_project_option_list() ?>
 		</select>
-		<input type="submit" name="f_copy_from" value="<?php echo $s_copy_categories_from ?>">
-		<input type="submit" name="f_copy_to" value="<?php echo $s_copy_categories_to ?>">
+		<input type="submit" name="f_copy_from" value="<?php echo $s_copy_categories_from ?>" />
+		<input type="submit" name="f_copy_to" value="<?php echo $s_copy_categories_to ?>" />
 		</form>
 	</td>
 </tr>
@@ -243,9 +243,9 @@
 <tr>
 	<td class="left">
 		<form method="post" action="manage_proj_ver_add.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<input type="text" name="f_version" size="32" maxlength="64">
-		<input type="submit" value="<?php echo $s_add_version_button ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+		<input type="text" name="f_version" size="32" maxlength="64" />
+		<input type="submit" value="<?php echo $s_add_version_button ?>" />
 		</form>
 	</td>
 </tr>

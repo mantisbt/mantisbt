@@ -37,7 +37,7 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="news_update.php">
-		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
+		<input type="hidden" name="f_id" value="<?php echo $v_id ?>" />
 		<?php echo $s_headline ?>
 	</td>
 	<td class="right">
@@ -50,7 +50,7 @@
 		<span class="small"><?php echo $s_do_not_use ?> "</span>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_headline" size="64" maxlength="64" value="<?php echo $v_headline ?>">
+		<input type="text" name="f_headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -82,7 +82,7 @@
 		<span class="small"><?php echo $s_stays_on_top ?></span>
 	</td>
 	<td>
-		<input type="checkbox" name="f_announcement" <?php check_checked( $v_announcement, 1 ); ?>>
+		<input type="checkbox" name="f_announcement" <?php check_checked( $v_announcement, 1 ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -97,7 +97,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_update_news_button ?>">
+		<input type="submit" value="<?php echo $s_update_news_button ?>" />
 		</form>
 	</td>
 </tr>

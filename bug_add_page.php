@@ -41,7 +41,7 @@
 <tr>
 	<td class="form-title">
 		<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_add.php">
-		<input type="hidden" name="f_assign_id" value="0000000">
+		<input type="hidden" name="f_assign_id" value="0000000" />
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">
@@ -104,7 +104,7 @@
 		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentation_link( 'summary' ) ?>:
 	</td>
 	<td>
-		<input tabindex="5" type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>">
+		<input tabindex="5" type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -130,8 +130,8 @@
 		<?php echo $s_upload_file ?>
 	</td>
 	<td>
-		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>">
-		<input tabindex="7" name="f_file" type="file" size="60">
+		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>" />
+		<input tabindex="7" name="f_file" type="file" size="60" />
 	</td>
 </tr>
 <?php } ?>
@@ -140,8 +140,8 @@
 		<?php echo $s_view_status ?>
 	</td>
 	<td>
-		<input tabindex="8" type="radio" name="f_view_state" value="10" checked="checked"> <?php echo $s_public ?>
-		<input tabindex="9" type="radio" name="f_view_state" value="50"> <?php echo $s_private ?>
+		<input tabindex="8" type="radio" name="f_view_state" value="10" checked="checked" /> <?php echo $s_public ?>
+		<input tabindex="9" type="radio" name="f_view_state" value="50" /> <?php echo $s_private ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -149,7 +149,7 @@
 		<?php echo $s_report_stay ?> <?php print_documentation_link( 'report_stay' ) ?>:
 	</td>
 	<td>
-		<input tabindex="10" type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'checked="checked"' ?>> (<?php echo $s_check_report_more_bugs ?>)
+		<input tabindex="10" type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'checked="checked"' ?> /> (<?php echo $s_check_report_more_bugs ?>)
 	</td>
 </tr>
 <tr>
@@ -157,7 +157,7 @@
 		<span class="required"> * <?php echo $s_required ?></span>
 	</td>
 	<td class="center">
-		<input tabindex="11" type="submit" value="<?php echo $s_submit_report_button ?>">
+		<input tabindex="11" type="submit" value="<?php echo $s_submit_report_button ?>" />
 		</form>
 	</td>
 </tr>

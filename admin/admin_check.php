@@ -232,7 +232,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		?>
 		<form method="post" action="<?php echo $PHP_SELF ?>#email">
 		Email Address: <?php echo $g_administrator_email; ?><br />
-		<input type="submit" value="Send Mail" name="f_mail_test">
+		<input type="submit" value="Send Mail" name="f_mail_test" />
 		</form>
 	</td>
 </tr>
@@ -247,8 +247,8 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		<span class="title">Password Check:</span>
 		<p>
 		<form method="post" action="<?php echo $PHP_SELF ?>#password">
-		Password: <input type="text" size="32" name="f_password" value="<?php if ( isset( $f_password ) ) echo $f_password ?>"><br />
-		<input type="submit" name="f_password_test">
+		Password: <input type="text" size="32" name="f_password" value="<?php if ( isset( $f_password ) ) echo $f_password ?>" /><br />
+		<input type="submit" name="f_password_test" />
 		</form>
 		<?php
 				if ( isset( $f_password_test ) ) {

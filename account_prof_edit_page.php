@@ -58,7 +58,7 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="account_prof_update.php">
-		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
+		<input type="hidden" name="f_id" value="<?php echo $v_id ?>" />
 		<?php echo $s_edit_profile_title ?>
 	</td>
 	<td class="right">
@@ -70,7 +70,7 @@
 		<?php echo $s_platform ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_platform" size="32" maxlength="32" value="<?php echo $v_platform ?>">
+		<input type="text" name="f_platform" size="32" maxlength="32" value="<?php echo $v_platform ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -78,7 +78,7 @@
 		<?php echo $s_operating_system ?>
 	</td>
 	<td>
-		<input type="text" name="f_os" size="32" maxlength="32" value="<?php echo $v_os ?>">
+		<input type="text" name="f_os" size="32" maxlength="32" value="<?php echo $v_os ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -86,7 +86,7 @@
 		<?php echo $s_version ?>
 	</td>
 	<td>
-		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $v_os_build ?>">
+		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $v_os_build ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -99,7 +99,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_update_profile_button ?>">
+		<input type="submit" value="<?php echo $s_update_profile_button ?>" />
 		</form>
 	</td>
 </tr>

@@ -126,7 +126,7 @@
 		<?php echo $s_platform ?>:
 	</td>
 	<td>
-		<input tabindex="6" type="text" name="f_platform" size="32" maxlength="32" value="<?php echo $f_platform ?>">
+		<input tabindex="6" type="text" name="f_platform" size="32" maxlength="32" value="<?php echo $f_platform ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -134,7 +134,7 @@
 		<?php echo $s_os ?>:
 	</td>
 	<td>
-		<input tabindex="7" type="text" name="f_os" size="32" maxlength="32" value="<?php echo $f_os ?>">
+		<input tabindex="7" type="text" name="f_os" size="32" maxlength="32" value="<?php echo $f_os ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -165,7 +165,7 @@
 		<?php echo $s_product_build ?>
 	</td>
 	<td>
-		<input tabindex="10" type="text" name="f_build" size="32" maxlength="32" value="<?php echo $f_build ?>">
+		<input tabindex="10" type="text" name="f_build" size="32" maxlength="32" value="<?php echo $f_build ?>" />
 	</td>
 </tr>
 <tr>
@@ -187,7 +187,7 @@
 	</td>
 </tr>
 <?php } else { ?>
-<input type="hidden" name="f_assign_id" value="0000000">
+<input type="hidden" name="f_assign_id" value="0000000" />
 <?php } ?>
 <tr>
 	<td class="spacer" colspan="2">
@@ -199,7 +199,7 @@
 		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentation_link( 'summary' ) ?>:
 	</td>
 	<td>
-		<input tabindex="12" type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>">
+		<input tabindex="12" type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -233,8 +233,8 @@
 		<?php echo $s_upload_file ?>
 	</td>
 	<td>
-		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>">
-		<input tabindex="16" name="f_file" type="file" size="60">
+		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>" />
+		<input tabindex="16" name="f_file" type="file" size="60" />
 	</td>
 </tr>
 <?php } ?>
@@ -243,8 +243,8 @@
 		<?php echo $s_view_status ?>
 	</td>
 	<td>
-		<input tabindex="17" type="radio" name="f_view_state" value="10" checked="checked"> <?php echo $s_public ?>
-		<input tabindex="18" type="radio" name="f_view_state" value="50"> <?php echo $s_private ?>
+		<input tabindex="17" type="radio" name="f_view_state" value="10" checked="checked" /> <?php echo $s_public ?>
+		<input tabindex="18" type="radio" name="f_view_state" value="50" /> <?php echo $s_private ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -252,7 +252,7 @@
 		<?php echo $s_report_stay ?> <?php print_documentation_link( 'report_stay' ) ?>:
 	</td>
 	<td>
-		<input tabindex="19" type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'checked="checked"' ?>> (<?php echo $s_check_report_more_bugs ?>)
+		<input tabindex="19" type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'checked="checked"' ?> /> (<?php echo $s_check_report_more_bugs ?>)
 	</td>
 </tr>
 <tr>
@@ -260,7 +260,7 @@
 		<span class="required"> * <?php echo $s_required ?></span>
 	</td>
 	<td class="center">
-		<input tabindex="20" type="submit" value="<?php echo $s_submit_report_button ?>">
+		<input tabindex="20" type="submit" value="<?php echo $s_submit_report_button ?>" />
 		</form>
 	</td>
 </tr>
