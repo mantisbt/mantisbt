@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.28 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: bug_actiongroup.php,v 1.29 2004-05-18 12:28:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -93,6 +93,18 @@
 				$t_failed_ids[] = $t_bug_id;
 			}
 			break;
+
+		case 'VIEW_STATUS':
+			if ( access_has_bug_level( config_get( 'change_view_status_threshold' ), $t_bug_id ) ) {
+				$f_view_status = gpc_get_int( 'view_status' );
+				bug_set_field( $t_bug_id, 'view_state', $f_view_status );
+			} else {
+				$t_failed_ids[] = $t_bug_id;
+			}
+			break;
+
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
 		}
 	}
 

@@ -22,6 +22,7 @@ Mantis ChangeLog
  * Enh #3808: Ability to sponsor (fund) a bug or feature request.
  * Enh #3811: Allow private flag to be unset on resolved bugs.
  * Fix #3094: Switching projects clears filter values.
+ * Fix #3159: Allow case of user name to be changed. Also fixed bug where database error was displayed when trying to create user "TeSt" when user "Test" already exists.
  * Fix #3397: Delete notification should be off when deleting a project.
  * Fix #3473: g_bug_resolved_status_threshold variable ignored.
  * Fix #3504: project cookie not cleared at logout
@@ -30,10 +31,11 @@ Mantis ChangeLog
  * Fix #3629: Duplicate Error ID.
  * Fix #3641: 'Date submited' in reports is always '12-31-69'.
  * Fix #3723: No ability to edit or even delete news is associated project was deleted.
+ * Fix #3826: Allow case of project name to be changed.
  * Fix #3837: Bugs can be edited after being closed.
  * Fix #3840: Why strip the leading spaces from Description? (applied to all multi-line fields in issue + issue notes).
- * Fix #3826: Allow case of project name to be changed.
- * Fix #3159: Allow case of user name to be changed. Also fixed bug where database error was displayed when trying to create user "TeSt" when user "Test" already exists.
+ * Fix #3851: Ability to change the view status for a group of bugs
+ * Fix #3852: OK button in View Issues page is not localised
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).

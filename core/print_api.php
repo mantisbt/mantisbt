@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.78 2004-05-18 05:04:47 int2str Exp $
+	# $Id: print_api.php,v 1.79 2004-05-18 12:28:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -634,7 +634,8 @@
 							'DELETE' => lang_get('actiongroup_menu_delete'),
 							'RESOLVE' => lang_get('actiongroup_menu_resolve'),
 							'UP_PRIOR' => lang_get('actiongroup_menu_update_priority'),
-							'UP_STATUS' => lang_get('actiongroup_menu_update_status') );
+							'UP_STATUS' => lang_get('actiongroup_menu_update_status'),
+							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ) );
 
 		while (list ($key,$val) = each ($commands)) {
 			PRINT "<option value=\"".$key."\">".$val."</option>";

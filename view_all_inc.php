@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.136 2004-05-17 14:39:34 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.137 2004-05-18 12:28:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -350,7 +350,7 @@
 			<select name="action">
 				<?php print_all_bug_action_option_list() ?>
 			</select>
-			<input type="submit" class="button" value="<?php echo 'OK';  ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'ok' );  ?>" />
 <?php
 		} else {
 			echo '&nbsp;';

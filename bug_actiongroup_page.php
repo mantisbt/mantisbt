@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.34 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: bug_actiongroup_page.php,v 1.35 2004-05-18 12:28:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -71,6 +71,16 @@
 			$t_form 				= 'status';
 			$t_request 				= 'status';
 			break;
+
+		case 'VIEW_STATUS':
+			$t_question_title		= lang_get( 'view_status_bugs_conf_msg' );
+			$t_button_title			= lang_get( 'view_status_group_bugs_button' );
+			$t_form				= 'view_status';
+			$t_request			= 'view_status';
+			break;
+
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
 	}
 ?>
 <?php html_page_top1() ?>
@@ -99,6 +109,9 @@
 						break;
 					case 'ASSIGN':
 						print_assign_to_option_list();
+						break;
+					case 'VIEW_STATUS':
+						print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
 						break;
 				}
 
