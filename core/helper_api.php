@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.7 2002-08-28 09:58:32 jfitzell Exp $
+	# $Id: helper_api.php,v 1.8 2002-08-28 22:16:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -259,15 +259,15 @@
 			switch( $g_show_report ) {
 				case BOTH:
 						if ( ON == get_current_user_pref_field( 'advanced_report' ) ) {
-							return 'report_bug_advanced_page.php';
+							return 'bug_add_advanced_page.php';
 		 				} else {
-							return 'report_bug_page.php';
+							return 'bug_add_page.php';
 						}
 				case SIMPLE_ONLY:
-						return 'report_bug_page.php';
+						return 'bug_add_page.php';
 				case ADVANCED_ONLY:
-						return 'report_bug_advanced_page.php';
-				default:return 'report_bug_page.php';
+						return 'bug_add_advanced_page.php';
+				default:return 'bug_add_page.php';
 			}
 		} else {
 			return $HTTP_REFERER;

@@ -17,7 +17,7 @@
 	}
 
 	if ( SIMPLE_ONLY == $g_show_report ) {
-		print_header_redirect ( 'report_bug_page.php' );
+		print_header_redirect ( 'bug_add_page.php' );
 	}
 
 	check_access( REPORTER );
@@ -48,13 +48,13 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="report_add.php">
+		<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_add.php">
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">
 		<?php
 			if ( BOTH == $g_show_report ) {
-				print_bracket_link( 'report_bug_page.php', $s_simple_report_link );
+				print_bracket_link( 'bug_add_page.php', $s_simple_report_link );
 			}
 		?>
 	</td>
