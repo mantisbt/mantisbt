@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.9 2004-09-21 18:24:25 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.10 2004-10-08 18:57:51 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_new_status = gpc_get_int( 'new_status' );
 
-	if ( ! ( ( access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id ) ) ||
+	if ( ! ( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
 				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) && 
 						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
 								( ON == config_get( 'allow_reporter_close' ) ) ) ) ) ) {
