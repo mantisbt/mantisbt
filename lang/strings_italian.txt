@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.97 $
+	# $Revision: 1.98 $
 	# $Author: jlatour $
-	# $Date: 2005-02-28 07:18:25 $
+	# $Date: 2005-02-28 07:20:57 $
 	#
-	# $Id: strings_italian.txt,v 1.97 2005-02-28 07:18:25 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.98 2005-02-28 07:20:57 jlatour Exp $
 	###########################################################################
 ?>
 <?php

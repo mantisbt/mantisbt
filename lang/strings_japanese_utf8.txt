@@ -10,11 +10,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.19 $
+	# $Revision: 1.20 $
 	# $Author: jlatour $
-	# $Date: 2005-02-28 07:18:26 $
+	# $Date: 2005-02-28 07:20:57 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.19 2005-02-28 07:18:26 jlatour Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.20 2005-02-28 07:20:57 jlatour Exp $
 	###########################################################################
 ?>
 <?php

@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.68 $
+  # $Revision: 1.69 $
   # $Author: jlatour $
-  # $Date: 2005-02-28 07:18:24 $
+  # $Date: 2005-02-28 07:20:57 $
   #
-  # $Id: strings_hungarian.txt,v 1.68 2005-02-28 07:18:24 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.69 2005-02-28 07:20:57 jlatour Exp $
   ###########################################################################
 ?>
 <?php

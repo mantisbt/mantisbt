@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.84 $
+	# $Revision: 1.85 $
 	# $Author: jlatour $
-	# $Date: 2005-02-28 07:18:29 $
+	# $Date: 2005-02-28 07:21:04 $
 	#
-	# $Id: strings_swedish.txt,v 1.84 2005-02-28 07:18:29 jlatour Exp $
+	# $Id: strings_swedish.txt,v 1.85 2005-02-28 07:21:04 jlatour Exp $
 	###########################################################################
 ?>
 <?php

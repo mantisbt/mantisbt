@@ -9,11 +9,11 @@
 	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
 	# Translations: Bug, Isssue - Fejl
 	# -------------------------------------------------
-	# $Revision: 1.81 $
+	# $Revision: 1.82 $
 	# $Author: jlatour $
-	# $Date: 2005-02-28 07:18:22 $
+	# $Date: 2005-02-28 07:20:57 $
 	#
-	# $Id: strings_danish.txt,v 1.81 2005-02-28 07:18:22 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.82 2005-02-28 07:20:57 jlatour Exp $
 	###########################################################################
 ?>
 <?php
