@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: system_utils.php,v 1.1 2004-07-23 23:20:16 vboctor Exp $
+	# $Id: system_utils.php,v 1.2 2004-07-25 00:13:08 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -40,14 +40,39 @@
 
 	<!-- each row links to an upgrade
 		move database bug attachments to disk -->
-	<tr bgcolor="#ffffff"><td>Move attachments stored in database schema to disk files.</td><td>
+	<tr bgcolor="#ffffff"><td>Move attachments stored in database schema to disk files.</td><td><center>
 	<?php html_button( 'move_db2disk.php', 'Move Attachments to Disk', array( 'doc' => 'attachment') ); ?>
-	</td></tr>
+	</center></td></tr>
 
 	<!-- move database project files to disk -->
-	<tr bgcolor="#ffffff"><td>Move project files stored in database schema to disk.</td><td>
+	<tr bgcolor="#ffffff"><td>Move project files stored in database schema to disk.</td><td><center>
 	<?php html_button( 'move_db2disk.php', 'Move Project Files to Disk', array( 'doc' => 'project') ); ?>
-	</td></tr>
+	</center></td></tr>
+
+	<!-- move custom field content to standard field -->
+	<tr bgcolor="#ffffff"><td>Copy Custom Field to Standard Field.</td><td><center>
+	<form method="post" action="copy_field.php">
+	   From
+		<SELECT name="source_id">
+			<?php 
+				$t_custom_ids = custom_field_get_ids();
+				foreach ( $t_custom_ids as $t_id ) {
+					printf("<OPTION VALUE=\"%d\">%s", $t_id, custom_field_get_field($t_id, 'name' ) );
+				}
+			?>
+		</SELECT> to
+		<SELECT name="dest_id">
+			<?php
+				$t_dest_ids = array('fixed in');  # @@@ should be expanded and configurable
+				foreach ( $t_dest_ids as $t_id ) {
+					printf("<OPTION VALUE=\"%s\">%s", $t_id, $t_id );
+				}
+			?>
+		</SELECT>
+	<input type="submit" class="button" value="Copy" >
+	</form>
+	</center></td></tr>
+
 
 </table>
 </body>
