@@ -173,7 +173,7 @@
 		global 	$g_string_cookie_val, $g_webmaster_email,
 				$g_menu_include_file, $g_show_footer_menu,
 				$g_mantis_version, $g_show_version,
-				$g_timer, $g_show_timer, 
+				$g_timer, $g_show_timer,
 				$g_show_queries_count, $g_show_queries_list, $g_queries_array;
 
 		# @@@
@@ -361,7 +361,7 @@
 				PRINT "<a href=\"proj_doc_page.php\">$s_docs_link</a> | ";
 				PRINT "<a href=\"logout_page.php\">$s_logout_link</a>";
 				PRINT '</td>';
-				PRINT '<td nowrap class="right">';
+				PRINT '<td class="right" style="white-space: nowrap;">';
 					PRINT '<form method="post" action="jump_to_bug.php">';
 					PRINT "<input type=\"text\" name=\"f_id\" size=\"10\" class=\"small\">&nbsp;";
 					PRINT "<input type=\"submit\" value=\"$s_jump\" class=\"small\">&nbsp;";
