@@ -76,7 +76,7 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100% cols=7>
 	<tr>
-		<form method=post action="<? echo $g_view_bug_add_page ?>">
+		<form method=post action="<? echo $g_view_bug_all_page ?>">
 		<input type=hidden name=f_offset value="0">
 		<td align=center>
 		<select name=f_show_category>

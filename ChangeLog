@@ -18,6 +18,7 @@ To Do:
 
 12.XX.2000	-	0.12.0
 
+ * Fixed problem with viewing filters not working with Netscape
  * Tweaked the string_edit() function
  * Added $g_show_login_date_info adn the ability to show who is logged in and
    the current time
