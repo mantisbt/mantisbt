@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.16 2004-10-05 17:20:25 thraxisp Exp $
+	# $Id: bug_reminder.php,v 1.17 2004-10-17 00:28:13 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,6 +49,13 @@
 
 	# Add reminder as bugnote if store reminders option is ON.
 	if ( ON == config_get( 'store_reminders' ) ) {
+		if ( count( $f_to ) > 50 ) {		# too many recipients to log, truncate the list
+			$t_to = array();
+			for ( $i=0; $i<$t_count_to; $i++ ) {
+				$t_to[] = $f_to[$i];
+			}
+			$f_to = $t_to;
+		}
 		$t_attr = '|' . implode( '|', $f_to ) . '|';
 		bugnote_add( $f_bug_id, $f_body, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr );
 	}
