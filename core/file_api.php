@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.25 2003-02-20 18:42:27 int2str Exp $
+	# $Id: file_api.php,v 1.26 2003-02-20 19:44:36 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -83,16 +83,23 @@
 			$file_count = db_num_rows( $result );
 
 			# there may be more than one file
+			$ftp = 0;
+			if ( FTP == $t_method ) {
+				$ftp = file_ftp_connect();
+			}
+
 			for ( $i = 0 ; $i < $file_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 
 				file_delete_local ( $row['diskfile'] );
 
 				if ( FTP == $t_method ) {
-					$ftp = file_ftp_connect();
 					file_ftp_delete ( $ftp, $row['filename'] );
-					file_ftp_disconnect( $ftp );
 				}
+			}
+
+			if ( FTP == $t_method ) {
+				file_ftp_disconnect( $ftp );
 			}
 		}
 
@@ -119,16 +126,23 @@
 
 			$file_count = db_num_rows( $result );
 
+			$ftp = 0;
+			if ( FTP == $t_method ) {
+				$ftp = file_ftp_connect();
+			}
+
 			for ( $i = 0 ; $i < $file_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 
 				file_delete_local ( $row['diskfile'] );
 
 				if ( FTP == $t_method ) {
-					$ftp = file_ftp_connect();
 					file_ftp_delete ( $ftp, $row['filename'] );
-					file_ftp_disconnect( $ftp );
 				}
+			}
+
+			if ( FTP == $t_method ) {
+				file_ftp_disconnect( $ftp );
 			}
 		}
 
