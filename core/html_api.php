@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.128 2004-08-28 12:35:58 vboctor Exp $
+	# $Id: html_api.php,v 1.129 2004-08-28 12:51:54 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -531,20 +531,20 @@
 		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
-		$t_documentation_page 		= 'documentation_page.php';
+		# $t_documentation_page 		= 'documentation_page.php';
 
 		switch ( $p_page ) {
 			case $t_manage_user_page				: $t_manage_user_page 				= ''; break;
 			case $t_manage_project_menu_page: $t_manage_project_menu_page 	= ''; break;
 			case $t_manage_custom_field_page: $t_manage_custom_field_page 	= ''; break;
-			case $t_documentation_page		: $t_documentation_page 		= ''; break;
+			# case $t_documentation_page		: $t_documentation_page 		= ''; break;
 		}
 
 		PRINT '<br /><div align="center">';
 			print_bracket_link( $t_manage_user_page, lang_get( 'manage_users_link' ) );
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
 			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
-			print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
+			# print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
 		PRINT '</div>';
 	}
 
@@ -588,27 +588,6 @@
 		if ( file_allow_project_upload() ) {
 			print_bracket_link( $t_proj_doc_add_page, lang_get( 'add_file' ) );
 		}
-	}
-
-	# --------------------
-	# Print the menu for the management docs section
-	# $p_page specifies the current page name so it's link can be disabled
-	function print_manage_doc_menu( $p_page='' ) {
-		$t_path = config_get( 'path' ).'doc/';
-		$t_documentation_page = 'documentation_page.php';
-
-		switch ( $p_page ) {
-			case $t_documentation_page: $t_documentation_page = ''; break;
-		}
-
-		PRINT '<br /><div align="center">';
-			print_bracket_link( $t_documentation_page, lang_get( 'system_info_link' ) );
-			print_bracket_link( $t_path.'ChangeLog', 'ChangeLog' );
-			print_bracket_link( $t_path.'README', 'README' );
-			print_bracket_link( $t_path.'INSTALL', 'INSTALL' );
-			print_bracket_link( $t_path.'UPGRADING', 'UPGRADING' );
-			print_bracket_link( $t_path.'CUSTOMIZATION', 'CUSTOMIZATION' );
-		PRINT '</div>';
 	}
 
 	# --------------------
