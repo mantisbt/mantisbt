@@ -25,7 +25,7 @@
 	if ( $result ) {				# SUCCESS
 		PRINT "$s_operation_successful<p>";
 ?>
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="news-heading">
 		<span class="news-headline"><?php echo $f_headline ?></span>

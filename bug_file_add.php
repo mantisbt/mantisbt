@@ -64,7 +64,7 @@
 		PRINT "$s_operation_successful<p>";
 	} else {							# FAILURE
 		if ( 0 == $good_upload ) {
-			PRINT "$s_no_file_specified<p>";
+			PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]."<p>";
 		} else {
 			print_sql_error( $query );
 		}

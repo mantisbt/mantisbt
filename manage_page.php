@@ -77,7 +77,7 @@
 	$new_user_count = db_num_rows( $result );
 ?>
 <p>
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
 		<?php echo $s_new_accounts_title ?> (<?php echo $s_1_week_title ?>) [<?php echo $new_user_count ?>]
@@ -109,7 +109,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	$user_count = db_num_rows( $result );
 ?>
 <p>
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
 		<?php echo $s_never_logged_in_title ?> [<?php echo $user_count ?>] <?php print_bracket_link( $g_manage_prune, $s_prune_accounts ) ?>

@@ -187,7 +187,7 @@
 	# FORM ERROR
 	# required fields not entered
 	if ( $check_failed ) {
-		PRINT "<span class=\"bold\">$s_report_add_error_msg</span><p>";
+		PRINT "<span class=\"bold\">".$MANTIS_ERROR[ERROR_REPORT]."</span><p>";
 		if ( empty( $f_category ) ) {
 			PRINT "$s_must_enter_category<br>";
 		}

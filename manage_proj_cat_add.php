@@ -39,7 +39,7 @@
 	if ( $result ) {				# SUCCESS
 		PRINT "$s_operation_successful<p>";
 	} else if ( $duplicate ) {		# DUPLICATE
-		PRINT "$s_duplicate_category<p>";
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY]."<p>";
 	} else {						# FAILURE
 		print_sql_error( $query );
 	}

@@ -26,7 +26,7 @@
 
 <?php # Bugnotes BEGIN ?>
 <p>
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
 	if ( 0 == $num_notes ) {
@@ -61,7 +61,7 @@
 ?>
 <tr>
 	<td class="nopad" valign="top" width="25%">
-		<table class="hide" cellspacing="0">
+		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="category" colspan="2">
 				<?php print_user( $v3_reporter_id ) ?>
@@ -89,7 +89,7 @@
 		</table>
 	</td>
 	<td class="nopad" valign="top" width="75%">
-		<table class="hide" cellspacing="0">
+		<table class="hide" cellspacing="1">
 		<tr class="row-2">
 			<td>
 				<?php echo $v3_note ?>
@@ -115,7 +115,7 @@
 		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
 <p>
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <form method="post" action="<?php echo $g_bugnote_add ?>">
 <input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <tr>

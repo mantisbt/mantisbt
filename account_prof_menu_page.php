@@ -78,7 +78,7 @@
 <?php # Edit or Delete Profile Form BEGIN ?>
 <p>
 <div align="center">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <form method="post" action="<?php echo $g_account_profile_edit_page ?>">
 <tr>
 	<td class="form-title" colspan="2">

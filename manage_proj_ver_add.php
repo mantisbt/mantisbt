@@ -38,7 +38,7 @@
 	if ( $result ) {					# SUCCESS
 		PRINT "$s_operation_successful<p>";
 	} else if ( is_duplicate_version( $f_version, $f_project_id )) {
-		PRINT "$s_duplicate_version";
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION];
 	} else {							# FAILURE
 		print_sql_error( $query );
 	}

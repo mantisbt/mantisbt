@@ -1,5 +1,5 @@
 <p>
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <form method="post" action="<?php echo $link_page ?>?f=3">
 <input type="hidden" name="f_offset" value="0">
 <input type="hidden" name="f_save" value="1">
@@ -307,7 +307,7 @@
 
 <?php # print a legend for the status color coding ?>
 <p>
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <tr>
 	<td class="small-caption" width="10%" bgcolor="<?php echo $g_new_color?>"><?php echo get_enum_element( $s_status_enum_string, NEW_ ) ?></td>
 	<td class="small-caption" width="10%" bgcolor="<?php echo $g_feedback_color?>"><?php echo get_enum_element( $s_status_enum_string, FEEDBACK ) ?></td>

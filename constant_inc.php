@@ -101,4 +101,12 @@
 	# show variable values
 	define( "BY_LIMIT",     0 );
 	define( "BY_DATE",      1 );
+
+	# error messages
+	define( "ERROR_SQL",                  0 );
+	define( "ERROR_LOGIN",                1 );
+	define( "ERROR_REPORT",               2 );
+	define( "ERROR_NO_FILE_SPECIFIED",    3 );
+	define( "ERROR_DUPLICATE_CATEGORY",   4 );
+	define( "ERROR_DUPLICATE_VERSION",    5 );
 ?>

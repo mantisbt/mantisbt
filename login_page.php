@@ -25,7 +25,7 @@
 <?php
 	# Only echo error message if error variable is set
 	if ( isset( $f_error ) ) {
-		PRINT "$s_login_error_msg<p>";
+		PRINT $MANTIS_ERROR[ERROR_LOGIN]."<p>";
 	}
 
 	# Display short greeting message
@@ -40,7 +40,7 @@
 <?php	if (isset($f_project_id)) { ?>
 <input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 <?php } ?>
-<table class="width50" cellspacing="0">
+<table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo $s_login_title ?>

@@ -23,7 +23,7 @@
 
 <p>
 <div align="center">
-<table class="width50" cellspacing="0">
+<table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title">
 		<?php echo $s_logged_out_title ?>

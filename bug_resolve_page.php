@@ -18,7 +18,7 @@
 <?php # Resolve Form BEGIN ?>
 <p>
 <div align="center">
-<table class="width50" cellspacing="0">
+<table class="width50" cellspacing="1">
 <form method="post" action="<?php echo $g_bug_resolve_page2 ?>">
 <input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <tr>

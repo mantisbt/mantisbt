@@ -18,6 +18,7 @@ Mantis
  * Modified comments to use one # instead of ### (save space)
  * Modified alternate_colors() to have default parameters.
  * Modified all files to use <?php instead of <?
+ * Modified error messages to use $MANTIS_ERROR array
  * Added view by page feature.
  * Added edit new link in news update page.
  * Added file upload into database.

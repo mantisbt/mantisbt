@@ -9,7 +9,10 @@
 	###########################################################################
 
   	require( "constant_inc.php" );
-	require( "config_inc.php" );
+	require( "./default/config_inc.php" );
+	if ( file_exists( "config_inc.php" ) ) {
+		include( "config_inc.php" );
+	}
 
 	require( "core_database_API.php" );
 

@@ -17,7 +17,7 @@
 
 <p>
 <div align="center">
-<table class="width50" cellspacing="0">
+<table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo $s_edit_project_category_title ?>

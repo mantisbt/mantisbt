@@ -95,7 +95,7 @@
 	} else if ( $login_result ) {						# SUCCESS
 		print_bracket_link( $g_login_select_proj_page, $s_proceed );
 	} else {											# FAILURE
-		echo $s_login_error_msg;
+		echo $MANTIS_ERROR[ERROR_LOGIN]."<p>";
 
 		print_bracket_link( $g_login_page."?f_error=1", $s_proceed );
 	}

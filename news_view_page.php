@@ -37,7 +37,7 @@
 ?>
 <p>
 <div align="center">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="news-heading">
 		<span class="news-headline"><?php echo $v_headline ?></span> -

@@ -26,7 +26,7 @@
 <?php # Signup form BEGIN ?>
 <p>
 <div align="center">
-<table class="width50" cellspacing="0">
+<table class="width50" cellspacing="1">
 <form method="post" action="<?php echo $g_signup ?>">
 <tr>
 	<td class="form-title">

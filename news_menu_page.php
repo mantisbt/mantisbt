@@ -18,7 +18,7 @@
 <div align="center">
 <form method="post" action="<?php echo $g_news_add ?>">
 <input type="hidden" name="f_poster_id" value="<?php echo get_current_user_field( "id " ) ?>">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo $s_add_news_title ?>
@@ -70,7 +70,7 @@
 <p>
 <div align="center">
 <form method="post" action="<?php echo $g_news_edit_page ?>">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo $s_edit_or_delete_news_title ?>

@@ -31,7 +31,7 @@
 
 <p>
 <div align="center">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <form method="post" action="<?php echo $g_bugnote_update ?>">
 <input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <input type="hidden" name="f_bugnote_text_id" value="<?php echo $f_bugnote_text_id ?>">

@@ -53,7 +53,7 @@
 
 <p>
 <div align="center">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <form method="post" action="<?php echo $g_proj_user_add ?>">
 <tr>
 	<td class="form-title" colspan="5">
@@ -86,7 +86,7 @@
 
 <p>
 <div align="center">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="4">
 		<?php echo $s_manage_accounts_title ?>
@@ -155,7 +155,7 @@
 
 <p>
 <div align="center">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="4">
 		<?php echo $s_automatic_access ?>: (<?php echo $t_access_min ?>)

@@ -634,9 +634,9 @@
 	# this function should rarely (if ever) be reached.  instead the db_()
 	# functions should trap (altough inelegantly).
 	function print_sql_error( $p_query ) {
-		global $s_sql_error_detected, $g_administrator_email, $s_administrator;
+		global $MANTIS_ERROR, $g_administrator_email, $s_administrator;
 
-		PRINT "$s_sql_error_detected";
+		PRINT $MANTIS_ERROR[ERROR_SQL];
 		print_email_link( $g_administrator_email, $s_administrator );
 		PRINT "<p>$p_query;<p>";
 	}

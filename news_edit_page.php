@@ -33,7 +33,7 @@
 <div align="center">
 <form method="post" action="<?php echo $g_news_update ?>">
 <input type="hidden" name="f_id" value="<?php echo $v_id ?>">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
 		<?php echo $s_edit_news_title ?>
