@@ -340,9 +340,9 @@
 	function print_bottom_menu( $p_menu_file="" ) {
 		global	$g_string_cookie_val;
 		if ( isset( $g_string_cookie_val ) ) {
+			PRINT "<BR>"; #small cosmetic change
 			print_menu();
 		}
-
 	}
 	# --------------------
 	# prints the manage menu
