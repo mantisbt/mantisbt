@@ -153,7 +153,7 @@
 				$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
 				$found = 0;
 				if ( $t_notify==1 ) {
-					for ($k=0;$k<$proj_user_count;$k++) {
+					for ($k=0;$k<count( $user_id_arr );$k++) {
 						if ( $user_id_arr[$k] == $row["id"] ) {
 							$found = 1;
 							break;
