@@ -8,33 +8,42 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( MANAGER );
+
+	### Remove user from project
+    $query = "DELETE FROM $g_mantis_project_user_list_table
+    		WHERE user_id='$f_user_id' AND
+    			project_id='$g_project_cookie_val'";
+    $result = db_query($query);
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
+<?
+	if ( $result ) {
+		print_meta_redirect( $g_proj_user_menu_page, $g_wait_time );
+	}
+?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
-<hr size=1 width=50%>
+<div align="center">
+<?
+	if ( $result ) {				### SUCCESS
+		PRINT "$s_project_removed_user_msg<p>";
+	} else {						### FAILURE
+		print_sql_error( $query );
+	}
 
-<? echo $s_delete_account_sure_msg ?>
-
-<form method=post action="<? echo $g_manage_user_delete ?>">
-	<input type=hidden name=f_id value="<? echo $f_id ?>">
-	<input type=hidden name=f_protected value="<? echo $f_protected ?>">
-	<input type=submit value="<? echo $s_delete_account_button ?>">
-</form>
-
-<hr size=1 width=50%>
+	print_bracket_link( $g_proj_user_menu_page, $s_proceed );
+?>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

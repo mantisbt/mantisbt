@@ -4,16 +4,16 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Bug delete confirmation page
+	### Page contiues to bug_delete.php3
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "developer" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( DEVELOPER );
+	check_bug_exists( $f_id );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -25,21 +25,21 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
-<hr size=1 width=50%>
 <p>
-<div align=center>
-<? echo $s_delete_bug_sure_msg ?>
-<p>
-<form method=post action="<? echo $g_bug_delete ?>">
-	<input type=hidden name=f_id value="<? echo $f_id ?>">
-	<input type=hidden name=f_bug_text_id value="<? echo $f_bug_text_id ?>">
-	<input type=submit value="<? echo $s_delete_bug_button ?>">
-</form>
+<div align="center">
+	<? print_hr( $g_hr_size, $g_hr_width ) ?>
+	<? echo $s_delete_bug_sure_msg ?>
+
+	<form method="post" action="<? echo $g_bug_delete ?>">
+		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+		<input type="hidden" name="f_bug_text_id" value="<? echo $f_bug_text_id ?>">
+		<input type="submit" value="<? echo $s_delete_bug_button ?>">
+	</form>
+
+	<? print_hr( $g_hr_size, $g_hr_width ) ?>
 </div>
-<hr size=1 width=50%>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_footer(__FILE__) ?>

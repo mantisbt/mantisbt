@@ -4,6 +4,10 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### This is the delete confirmation page
+	### The result is POSTed to account_delete.php3
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
@@ -19,22 +23,18 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
-<hr size=1 width=50%>
+<div align="center">
+	<? print_hr( $g_hr_size, $g_hr_width ) ?>
+	<? echo $s_confirm_delete_msg ?>
 
-<? echo $s_confirm_delete_msg ?>
+	<form method="post" action="<? echo $g_account_delete ?>">
+		<input type="submit" value="<? echo $s_delete_account_button ?>">
+	</form>
 
-<form method=post action="<? echo $g_account_delete ?>">
-	<input type=hidden name=f_id value="<? echo $f_id ?>">
-	<input type=hidden name=f_protected value="<? echo $f_protected ?>">
-	<input type=submit value="<? echo $s_delete_account_button ?>">
-</form>
-
-<hr size=1 width=50%>
+	<? print_hr( $g_hr_size, $g_hr_width ) ?>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

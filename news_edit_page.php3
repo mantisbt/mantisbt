@@ -8,31 +8,22 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( MANAGER );
 
-	if ( !access_level_check_greater_or_equal( "manager" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
-
-	### If Deleteing item redirect to delete script
+	### If deleting item redirect to delete script
 	if ( $f_action=="delete" ) {
 		header( "Location: $g_news_delete_page?f_id=$f_id" );
 		exit;
 	}
 
-	### Retrieve new item data and prefix with v_
-	$query = "SELECT *
-		FROM $g_mantis_news_table
-		WHERE id='$f_id'";
-    $result = db_query( $query );
-	$row = db_fetch_array( $result );
+	### Retrieve news item data and prefix with v_
+	$row = news_select_query( $f_id );
 	if ( $row ) {
     	extract( $row, EXTR_PREFIX_ALL, "v" );
     }
 
-   	$v_headline = string_edit( $v_headline );
-   	$v_body = string_edit( $v_body );
+   	$v_headline = string_edit_text( $v_headline );
+   	$v_body 	= string_edit_textarea( $v_body );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -44,14 +35,17 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
+
+<p>
+<div align="center">
+	<? print_bracket_link( $g_news_menu_page, "Back" ) ?>
+</div>
 
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_news_update ?>">
 <input type="hidden" name="f_id" value="<? echo $v_id ?>">
-<input type="hidden" name="f_date_posted" value="<? echo $v_date_posted ?>">
 <table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">

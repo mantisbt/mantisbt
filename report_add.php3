@@ -4,18 +4,16 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### This page stores the reported bug and then redirects to view_all_bug_page.php3
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-?>
-<?
-	if ( !access_level_check_greater_or_equal( "viewer" ) ) {
-		# should be an access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
-	# need access level check
+	check_access( REPORTER );
+
+	### We check to see if the variable exists to avoid warnings
 
 	if ( !isset( $f_steps_to_reproduce ) ) {
 		$f_steps_to_reproduce = "";
@@ -61,15 +59,15 @@
 		$u_id = get_current_user_field( "id" );
 
 		### Make strings safe for database
-		$f_summary = string_safe( $f_summary );
-		$f_description = string_safe( $f_description );
-		$f_additional_info = string_safe( $f_additional_info );
-		$f_steps_to_reproduce = string_safe( $f_steps_to_reproduce );
-		$f_build = string_safe( $f_build );
+		$f_summary 				= string_prepare_text( $f_summary );
+		$f_description 			= string_prepare_textarea( $f_description );
+		$f_additional_info 		= string_prepare_textarea( $f_additional_info );
+		$f_steps_to_reproduce 	= string_prepare_textarea( $f_steps_to_reproduce );
 
-		$f_platform = string_safe( $f_platform );
-		$f_os = string_safe( $f_os );
-		$f_osbuild = string_safe( $f_osbuild );
+		$f_build 				= string_prepare_text( $f_build );
+		$f_platform 			= string_prepare_text( $f_platform );
+		$f_os 					= string_prepare_text( $f_os );
+		$f_osbuild 				= string_prepare_text( $f_osbuild );
 
 		### if a profile was selected then let's use that information
 		if ( !empty( $f_id ) ) {
@@ -79,12 +77,12 @@
 				WHERE id='$f_id'";
 		    $result = db_query( $query );
 		    $profile_count = db_num_rows( $result );
-
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			$f_platform	= string_unsafe( $v_platform );
-			$f_os		= string_unsafe( $v_os );
-			$f_osbuild	= string_unsafe( $v_os_build );
+
+			$f_platform	= string_prepare_text( $v_platform );
+			$f_os		= string_prepare_text( $v_os );
+			$f_osbuild	= string_prepare_text( $v_os_build );
 		}
 
 		### Insert text information
@@ -100,20 +98,17 @@
 		### NOTE: this is guarranteed to be the correct one.
 		### The value LAST_INSERT_ID is stored on a per connection basis.
 
-		### Use this for MS SQL: SELECT @@IDENTITY AS 'id'
-		$query = "select LAST_INSERT_ID()";
-		$result = db_query( $query );
-		if ( $result ) {
-			$t_id = db_result( $result, 0 );
-		}
+		$t_id = db_insert_id();
 
-		### check to see if we want to assign this right ff
-		$t_status = "new";
+		### check to see if we want to assign this right off
+		$t_status = NEW_;
 		if ( $f_assign_id != "0000000" ) {
-			$t_status = "assigned";
+			$t_status = ASSIGNED;
 		}
 
 		### Insert the rest of the data
+		$t_open = OPEN;
+		$t_nor = NORMAL;
 		$query = "INSERT
 				INTO $g_mantis_bug_table
 				( id, project_id, reporter_id, handler_id, duplicate_id, priority, severity,
@@ -121,19 +116,37 @@
 				date_submitted, last_updated, eta, bug_text_id, os, os_build,
 				platform, version, build, votes, profile_id, summary )
 				VALUES
-				( null, '$g_project_cookie_val', '$u_id', '$f_assign_id', '0000000', 'normal', '$f_severity',
-				'$f_reproducibility', '$t_status', 'open', 'minor fix', '$f_category',
-				NOW(), NOW(), NOW(), '$t_id', '$f_os', '$f_osbuild',
+				( null, '$g_project_cookie_val', '$u_id', '$f_assign_id', '0000000', '$t_nor', '$f_severity',
+				'$f_reproducibility', '$t_status', '$t_open', 10, '$f_category',
+				NOW(), NOW(), 10, '$t_id', '$f_os', '$f_osbuild',
 				'$f_platform', '$f_product_version', '$f_build',
 				1, '$f_profile_id', '$f_summary' )";
 		$result = db_query( $query );
 
-		$query = "select LAST_INSERT_ID()";
-		$result = db_query( $query );
-		if ( $result ) {
-			$t_bug_id = db_result( $result, 0, 0 );
+		$t_bug_id = db_insert_id();
+
+		### File Uploaded
+		if ( $f_file != "none" ) {
+			$t_bug_id = str_pd( $t_bug_id, "0", 7 );
+
+			$query = "SELECT file_path
+					FROM $g_mantis_project_table
+					WHERE id='$g_project_cookie_val'";
+			$result = db_query( $query );
+			$t_file_path = db_result( $result );
+
+			$f_file_name = $t_bug_id."-".$f_file_name;
+			copy($f_file, $t_file_path.$f_file_name);
+			$t_file_size = filesize( $f_file );
+			$t_content = addslashes(fread(fopen($f_file, "r"), filesize($f_file)));
+			$query = "INSERT INTO mantis_bug_file_table
+					(id, bug_id, title, description, diskfile, filename, folder, filesize, date_added, content)
+					VALUES
+					(null, $t_bug_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, NOW(), '')";
+			$result = db_query( $query );
 		}
 
+		### Notify users of new bug report
 		if ( $g_notify_developers_on_new==1 ) {
 			email_new_bug( $t_bug_id );
 		}
@@ -143,12 +156,12 @@
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
+<? include( $g_meta_include_file ) ?>
 <?
-	if ( $result ) {
+	if (( $result )&&( !isset( $f_report_stay ) )) {
 		print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
 	}
 ?>
-<? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
@@ -179,9 +192,8 @@
 		if ( $f_description=="" ) {
 			PRINT "$s_must_enter_description<br>";
 		}
-		PRINT "<p>";
-
 ?>
+		<p>
 		<form method=post action="<? echo $HTTP_REFERER ?>">
 		<input type=hidden name=f_category value="<? echo $f_category ?>">
 		<input type=hidden name=f_severity value="<? echo $f_severity ?>">
@@ -202,19 +214,30 @@
 		<input type=submit value="<? echo $s_go_back ?>">
 		</form>
 <?
-	}
-	### MYSQL ERROR
-	else if ( !$result ) {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
-	### OK!!!
-	else {
+	} else if ( !$result ) {		### MYSQL ERROR
+		print_sql_error( $query );
+	} else {						### SUCCESS
 		PRINT "$s_submission_thanks_msg<p>";
+
+		if ( isset( $f_report_stay )) {
+			PRINT "<form method=post action=\"$HTTP_REFERER\">";
+			PRINT "<input type=hidden name=f_category value=\"$f_category\">";
+			PRINT "<input type=hidden name=f_severity value=\"$f_severity\">";
+			PRINT "<input type=hidden name=f_reproducibility value=\"$f_reproducibility\">";
+			PRINT "<input type=hidden name=f_profile_id value=\"$f_profile_id\">";
+			PRINT "<input type=hidden name=f_platform value=\"$f_platform\">";
+			PRINT "<input type=hidden name=f_os value=\"$f_os\">";
+			PRINT "<input type=hidden name=f_osbuild value=\"$f_osbuild\">";
+			PRINT "<input type=hidden name=f_product_version value=\"$f_product_version\">";
+			PRINT "<input type=hidden name=f_build value=\"$f_build\">";
+			PRINT "<input type=hidden name=f_report_stay value=\"$f_report_stay\">";
+			PRINT "<input type=submit value=\"$s_report_more_bugs\">";
+			PRINT "</form>";
+		} else {
+			print_bracket_link( $g_view_all_bug_page, $s_view_bugs_link );
+		}
 	}
 ?>
-<p>
-<a href="<? echo $g_view_all_bug_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

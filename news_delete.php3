@@ -8,18 +8,10 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "manager" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( MANAGER );
 
 	### Delete the news entry
-	$query = "DELETE
-			FROM $g_mantis_news_table
-    		WHERE id='$f_id'";
-    $result = db_query( $query );
+    $result = news_delete_query( $f_id );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -36,21 +28,19 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
 <div align="center">
 <?
-	if ( $result ) {
+	if ( $result ) {				### SUCCESS
 		PRINT "$s_news_deleted_msg<p>";
+	} else {						### FAILURE
+		print_sql_error( $query );
 	}
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-	}
+
+	print_bracket_link( $g_news_menu_page, $s_proceed );
 ?>
-<p>
-<a href="<? echo $g_news_menu_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

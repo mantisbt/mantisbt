@@ -7,14 +7,17 @@
 <?
 	if ( !isset( $g_string_cookie_val ) ) {
 		### required for variables to get picked up
-		global 	$g_string_cookie_val, $g_path,
+		global 	$g_string_cookie_val,
 				$g_mantis_user_table, $g_mantis_user_pref_table,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 
+				$g_show_report,
+
 				$g_main_page, $g_view_all_bug_page,
 				$g_report_bug_page, $g_report_bug_advanced_page,
-				$g_summary_page, $g_account_page, $g_manage_page,
+				$g_summary_page, $g_account_page, $g_proj_doc_page, $g_manage_page,
 				$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
+				$g_proj_user_menu_page,
 
 				$s_main_link, $s_view_bugs_link, $s_report_bug_link,
 				$s_summary_link, $s_account_link, $g_manage_project_menu_page,
@@ -26,29 +29,44 @@
 
 	### grab the access level and protected information for the
 	### currently logged in user
-    $t_access_level = get_current_user_field( "access_level" );
+    #@@@ $t_access_level = get_current_user_field( "access_level" );
     $t_protected = get_current_user_field( "protected" );
 ?>
 <div align="center">
-	<a href="<? echo $g_path.$g_main_page ?>"><? echo $s_main_link ?></a> |
-	<a href="<? echo $g_path.$g_view_all_bug_page ?>"><? echo $s_view_bugs_link ?></a> |
+	<a href="<? echo $g_main_page ?>"><? echo $s_main_link ?></a> |
+	<a href="<? echo $g_view_all_bug_page ?>"><? echo $s_view_bugs_link ?></a> |
 <?
-	if ( $t_access_level!="viewer" ) {
-		if ( get_user_value( $g_mantis_user_pref_table, "advanced_report" )=="on" ) {
-?>
-			<a href="<? echo $g_path.$g_report_bug_advanced_page ?>"><? echo $s_report_bug_link ?></a> |
-<? 		} else { ?>
-			<a href="<? echo $g_path.$g_report_bug_page ?>"><? echo $s_report_bug_link ?></a> |
-<?
-		}
+	### REPORT link
+	if ( access_level_check_greater_or_equal( REPORTER ) ) {
+		switch( $g_show_report ) {
+		case 0: if ( get_current_user_pref_field( "advanced_report" )==1 ) {
+					PRINT "<a href=\"$g_report_bug_advanced_page\">$s_report_bug_link</a> | ";
+ 				} else {
+					PRINT "<a href=\"$g_report_bug_page\">$s_report_bug_link</a> | ";
+				}
+				break;
+		case 1: PRINT "<a href=\"$g_report_bug_page\">$s_report_bug_link</a> | ";
+				break;
+		case 2: PRINT "<a href=\"$g_report_bug_advanced_page\">$s_report_bug_link</a> | ";
+				break;
+		}  # end report/viewer switch
 	}  # end report/viewer if
 ?>
-	<a href="<? echo $g_path.$g_summary_page ?>"><? echo $s_summary_link ?></a> |
-	<a href="<? echo $g_path.$g_account_page ?>"><? echo $s_account_link ?></a> |
-<? if ( $t_access_level=="administrator" ) { ?>
-	<a href="<? echo $g_path.$g_manage_page ?>"><? echo $s_manage_link ?></a> |
-	<a href="<? echo $g_path.$g_news_menu_page ?>"><? echo $s_edit_news_link ?></a> |
+	<a href="<? echo $g_summary_page ?>"><? echo $s_summary_link ?></a> |
+	<a href="<? echo $g_account_page ?>"><? echo $s_account_link ?></a> |
+
+<? if ( access_level_check_greater_or_equal( MANAGER ) ) { ?>
+	<a href="<? echo $g_proj_user_menu_page ?>">Users</a> |
+<?	} ?>
+
+<? if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) { ?>
+	<a href="<? echo $g_manage_page ?>"><? echo $s_manage_link ?></a> |
 <? } ?>
-	<a href="<? echo $g_path.$g_usage_doc_page ?>"><? echo $s_docs_link ?></a> |
-	<a href="<? echo $g_path.$g_logout_page ?>"><? echo $s_logout_link ?></a>
+
+<? if ( access_level_check_greater_or_equal( MANAGER ) ) { ?>
+	<a href="<? echo $g_news_menu_page ?>"><? echo $s_edit_news_link ?></a> |
+<?	} ?>
+
+	<a href="<? echo $g_proj_doc_page ?>"><? echo $s_docs_link ?></a> |
+	<a href="<? echo $g_logout_page ?>"><? echo $s_logout_link ?></a>
 </div>

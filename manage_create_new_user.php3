@@ -8,12 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( ADMINISTRATOR );
 
 	if ( $f_password != $f_password_verify ) {
 		echo "ERROR: passwords do not match";
@@ -21,11 +16,11 @@
 	}
 
 	if ( !isset( $f_protected ) ) {
-		$f_protected = "";
+		$f_protected = 0;
 	}
 
 	if ( !isset( $f_enabled ) ) {
-		$f_enabled = "";
+		$f_enabled = 0;
 	}
 
 	### create the almost unique string for each user then insert into the table
@@ -41,11 +36,7 @@
     $result = db_query( $query );
 
    	### Use this for MS SQL: SELECT @@IDENTITY AS 'id'
-	$query = "select LAST_INSERT_ID()";
-	$result = db_query( $query );
-	if ( $result ) {
-		$t_user_id = db_result( $result, 0, 0 );
-	}
+	$t_user_id = db_insert_id();
 
 	### Create preferences
     $query = "INSERT
@@ -79,22 +70,20 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	if ( $result ) {
+	if ( $result ) {				### SUCCESS
+		$f_access_level = get_enum_element( $g_access_levels_enum_string, $f_access_level );
 		PRINT "$s_created_user_part1 <b>$f_username</b> $s_created_user_part2 <b>$f_access_level</b><p>";
+	} else {						### FAILURE
+		print_sql_error( $query );
 	}
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
+
+	print_bracket_link( $g_manage_page, $s_proceed );
 ?>
-<p>
-<a href="<? echo $g_manage_page ?>"><? $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

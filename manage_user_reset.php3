@@ -8,17 +8,12 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( MANAGER );
 
 	# Either generate a random password and email it or make a blank one.
 
 	### Go with random password and email it to the user
-    if ( $f_protected!="on" ) {
+    if ( $f_protected==0 ) {
 		if ( $g_allow_signup==1 ) {
 			### Create random password
 			$t_password = create_random_password( $f_email );
@@ -32,7 +27,7 @@
 
 			### Send notification email
 			email_reset( $f_id, $t_password );
-		} else {  ### use blank password, no emailing
+		} else {  		### use blank password, no emailing
 			### password is blank password
 		    $query = "UPDATE $g_mantis_user_table
 		    		SET password='4nPtPLdAFdoxA'
@@ -56,25 +51,21 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	if ( $f_protected=="on" ) {
+	if ( $f_protected==1 ) {				### PROTECTED
 		PRINT "$s_account_reset_protected_msg<p>";
-	}
-	else if ( $result ) {
+	} else if ( $result ) {					### SUCCESS
 		PRINT "$s_account_reset_msg<p>";
+	} else {								### FAILURE
+		print_sql_error( $query );
 	}
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
+
+	print_bracket_link( $g_manage_page, $s_proceed );
 ?>
-<p>
-<a href="<? echo $g_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

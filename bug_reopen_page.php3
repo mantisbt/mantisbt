@@ -4,25 +4,27 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Reopen the bug, set status to feedback and give the user the opportunity
+	### to input a bugnote
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	$query = "SELECT date_submitted
-			FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
-   	$result = db_query( $query );
-   	$t_date_submitted = db_result( $result, 0 );
+	check_access( $g_reopen_bug_threshold );
+	check_bug_exists( $f_id );
 
 	### Update fields
+	$t_fee_val = FEEDBACK;
+	$t_reop = REOPENED;
     $query = "UPDATE $g_mantis_bug_table
-    		SET status='feedback',
-				resolution='reopened',
-				date_submitted='$t_date_submitted',
-				last_updated=NOW()
+    		SET status='$t_fee_val',
+				resolution='$t_reop'
     		WHERE id='$f_id'";
    	$result = db_query($query);
+
+   	email_reopen( $f_id );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -34,54 +36,21 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	### SUCCESS
-	if ( $result ) {
+	if ( $result ) {					### SUCCESS
 		PRINT "$s_bug_reopened_msg<p>";
-	}
-	### FAILURE
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
+	} else {							### FAILURE
+		print_sql_error( $query );
 	}
 ?>
 
-<p>
-<? include( $g_bugnote_include_file ) ?>
+<? include( $g_view_bug_inc ) ?>
 
-<p>
-<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
-<tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100%>
-	<form method=post action="<? echo $g_bugnote_add ?>">
-	<input type=hidden name=f_id value="<? echo $f_id ?>">
-	<tr>
-		<td bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_reopen_add_bugnote_title ?></b>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor=<? echo $g_primary_color_dark ?> align=center>
-			<textarea name=f_bugnote_text cols=80 rows=10></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor=<? echo $g_primary_color_light ?> align=center>
-			<input type=submit value="<? echo $s_bugnote_add_reopen_button ?>">
-		</td>
-	</tr>
-	</form>
-	</table>
-	</td>
-</tr>
-</table>
-</div>
+<? include( $g_bugnote_include_file ) ?>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_footer(__FILE__) ?>

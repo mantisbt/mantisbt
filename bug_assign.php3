@@ -9,26 +9,26 @@
     # Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
 ?>
+<?
+	### Assign bug to user then redirect to viewing page
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( DEVELOPER );
+	check_bug_exists( $f_id );
 
-	if ( !access_level_check_greater_or_equal( "developer" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+    $t_ass_val = ASSIGNED;
 
     ### get user id
     $t_handler_id = get_current_user_field( "id" );
     $query = "UPDATE $g_mantis_bug_table
-            SET handler_id='$t_handler_id', status='assigned',
-            	date_submitted='$f_date_submitted',
-				last_updated=NOW()
-            WHERE id='$f_id'";
+            SET handler_id='$t_handler_id', status='$t_ass_val'
+			WHERE id='$f_id'";
     $result = db_query($query);
 
+	### send assigned to email
 	email_assign( $f_id );
 ?>
 <? print_html_top() ?>
@@ -37,12 +37,7 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_id", $g_wait_time );
-		}
-		else {
-			print_meta_redirect( "$g_view_bug_page?f_id=$f_id", $g_wait_time );
-		}
+		print_meta_redirect( $HTTP_REFERER, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -51,30 +46,18 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	### SUCCESS
-	if ( $result ) {
+	if ( $result ) {					### SUCCESS
         PRINT "$s_bug_assign_msg<p>";
+	} else {							### FAILURE
+		print_sql_error( $query );
 	}
-	### FAILURE
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
-?>
-<p>
-<?
-	if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-		PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$f_id\">$s_proceed</a>";
-	}
-	else {
-		PRINT "<a href=\"$g_view_bug_page?f_id=$f_id\">$s_proceed</a>";
-	}
+
+	print_bracket_link( $HTTP_REFERER, $s_proceed );
 ?>
 </div>
 

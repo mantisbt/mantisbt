@@ -8,12 +8,16 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( MANAGER );
 
-	if ( !access_level_check_greater_or_equal( "developer" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
+	if ( !isset( $f_enabled ) ) {
+		$f_enabled = 0;
+	} else {
+		$f_enabled = 1;
 	}
+
+	$f_name 		= string_prepare_textarea( $f_name );
+	$f_description 	= string_prepare_textarea( $f_description );
 
 	### Update entry
 	$query = "UPDATE $g_mantis_project_table
@@ -21,6 +25,8 @@
 				status='$f_status',
 				enabled='$f_enabled',
 				view_state='$f_view_state',
+				file_path='$f_file_path',
+				access_min='$f_access_min',
 				description='$f_description'
     		WHERE id='$f_project_id'";
     $result = db_query( $query );
@@ -40,21 +46,19 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	if ( $result ) {
+	if ( $result ) {				### SUCCESS
 		PRINT "$s_project_updated_msg<p>";
+	} else {						### FAILURE
+		print_sql_error( $query );
 	}
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-	}
+
+	print_bracket_link( $g_manage_project_menu_page, $s_proceed );
 ?>
-<p>
-<a href="<? echo $g_manage_project_menu_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

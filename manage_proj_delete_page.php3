@@ -8,12 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( MANAGER );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -25,21 +20,19 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
-<hr size=1 width=50%>
+<div align="center">
+	<? print_hr( $g_hr_size, $g_hr_width ) ?>
+	<? echo $s_project_delete_msg ?>
 
-<? echo $s_project_delete_msg ?>
+	<form method="post" action="<? echo $g_manage_project_delete ?>">
+		<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
+		<input type="submit" value="<? echo $s_project_delete_button ?>">
+	</form>
 
-<form method=post action="<? echo $g_manage_project_delete ?>">
-	<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
-	<input type=submit value="<? echo $s_project_delete_button ?>">
-</form>
-
-<hr size=1 width=50%>
+	<? print_hr( $g_hr_size, $g_hr_width ) ?>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

@@ -8,12 +8,8 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( MANAGER );
+	$f_version = urldecode( $f_version );
 
 	### delete version
 	$query = "DELETE
@@ -84,24 +80,18 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	if ( $result ) {
+	if ( $result ) {				### SUCCESS
 		PRINT "$s_version_deleted_msg<p>";
+	} else {						### FAILURE
+		print_sql_error( $query );
 	}
-	### OK!!!
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
-?>
-<p>
-<?
-	PRINT "<a href=\"$g_manage_project_edit_page?f_project_id=$f_project_id\">$s_proceed</a>";
+
+	print_bracket_link( $g_manage_project_edit_page."?f_project_id=".$f_project_id, $s_proceed );
 ?>
 </div>
 

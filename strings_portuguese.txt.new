@@ -1,0 +1,380 @@
+X-Mailer: Calypso Version 3.20.01.01 (2)
+Date: Wed, 25 Apr 2001 18:40:41 -0300
+Reply-To: tonioli@easyline.com.br
+From: "Felipe Tonioli" <tonioli@easyline.com.br>
+To: "Kenzaburo Ito" <kenito@300baud.org>
+Subject: Re: New strings to Localize
+Mime-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 8bit
+X-MIME-Autoconverted: from quoted-printable to 8bit by sage.propagation.net id QAA32185
+Status:  O
+
+Hey Ken ..
+How long :) well, I did the Better, but I need wait until you release the version to check if everything is ok !
+
+
+Regards;
+Felipe Tonioli
+
+===========================================================
+	### General Strings
+	$s_user_no_longer_exists = "Usu&aacute;rio Inexistente";
+
+	### Email Strings
+
+	### account_delete.php3
+
+	### account_delete_page.php3
+
+	### account_page.php3
+
+	### account_prefs_page.php3
+	$s_redirect_delay = "Tempo de Espera de Redirecionamento";
+	$s_email_on_new = "Email Quando Novo";
+	$s_email_on_assigned = "Email Quando Designado";
+	$s_email_on_feedback = "Email Quando Receber um Feedback ";
+	$s_email_on_resolved = "Email Quando Solucionado";
+	$s_email_on_closed = "Email Quando Fechado";
+	$s_email_on_bugnote_added = "Email Quando uma Nota for Adicionada";
+	$s_email_on_status_change = "Email Quando Houver Troca do Status";
+	$s_email_on_priority_change = "Email Quando Houver Mudança na Prioridade";
+	$s_language = "Idioma";
+
+	### account_prefs_reset.php3
+
+	### account_prefs_update.php3
+
+	### account_profile_add.php3
+
+	### account_profile_delete.php3
+
+	### account_profile_edit_page.php3
+
+	### account_profile_make_default.php3
+
+	### account_profile_manage_page.php3
+	$s_add_profile_title = "Adicionar Perfil";
+	### $s_platform = "# defined above";
+	### $s_operating_system = "# defined above";
+	### $s_version = "# defined above";
+	### $s_additional_description = "# defined above";
+	$s_add_profile_button = "Adicionar Perfil";
+	$s_edit_or_delete_profiles_title = "Editar ou Apagar Perfil";
+	$s_edit_profile = "Editar Perfil";
+	$s_make_default = "Tornar Padr&atilde;";
+	$s_delete_profile = "Apagar Perfil";
+	$s_select_profile = "Selecionar Perfil";
+	$s_submit_button = "Enviar";
+
+	### account_profile_update.php3
+
+	### account_update.php3
+
+	### bug_assign.php3
+
+	### bug_delete.php3
+
+	### bug_delete_page.php3
+
+	### bug_file_add.php3
+	$s_file_upload_msg = "Arquivo Enviado com Sucesso";
+
+	### bug_file_upload_inc.php3
+	$s_upload_file = "Enviar Arquivo";
+	$s_select_file = "Selecionar Arquivo";
+	$s_upload_file_button = "Enviar Arquivo";
+
+	### bug_reopen_page.php3
+
+	### bug_resolve_page.php3
+
+	### bug_resolve_page2.php3
+
+	### bug_update.php3
+
+	### bug_update_advanced_page.php3
+
+	### bug_update_page.php3
+
+	### bug_vote_add.php3
+
+	### bugnote_add.php3
+
+	### bugnote_add_inc.php
+
+	### bugnote_add_page.php3
+
+	### bugnote_delete.php3
+
+	### bugnote_inc.php
+
+	### choose_project_page.php3 @@@ remove
+	$s_choose_project_title = "Selecionar Projeto";
+	$s_projects = "Projetos";
+	$s_select_project_button = "Selecionar Projeto";
+
+	### index.php3
+
+	### login.php3
+
+	### login_error_page.php3 @@@ REMOVE THIS
+            $s_login_error_msg = "Existe um erro: sua conta foi desabilitada ou seu usu&aacute;rio/senha est&atilde;o incorretos.";
+	$s_login_title = "Login";
+	### $s_username = "# defined above";
+	### $s_password = "# defined above";
+	$s_save_login = "Salvar Login";
+	### $s_choose_project = "# defined above";
+	$s_login_button = "Login";
+	$s_select_project_button = "Selecionar Projeto";
+
+	### login_page.php3
+
+	### logout_page.php3
+
+	### main_page.php3
+
+	### manage_create_new_user.php3
+
+	### manage_create_user_page.php3
+
+	### manage_page.php3
+
+	### manage_project_add.php3
+
+	### manage_project_category_add.php3
+
+	### manage_project_category_delete.php3
+
+	### manage_project_category_delete_page.php3
+
+	### manage_project_category_edit_page.php3
+
+	### manage_project_category_update.php3
+
+	### manage_project_delete.php3
+
+	### manage_project_delete_page.php3
+
+	### manage_project_edit_page.php3
+
+	### manage_project_menu_page.php3
+
+	### manage_project_update.php3
+
+	### manage_project_version_add.php3
+
+	### manage_project_version_delete.php3
+
+	### manage_project_version_delete_page.php3
+
+	### manage_project_version_edit_page.php3
+
+	### manage_project_version_update.php3
+
+	### manage_user_delete.php3
+
+	### manage_user_delete_page.php3
+
+	### manager_prune.php3
+	$s_accounts_pruned_msg = "Todas as Contas que nao Entraram num Periodo de 1 Semana Foram Removidas";
+
+	### manage_user_page.php3
+
+	### manage_user_reset.php3
+
+	### manage_user_update.php3
+
+	### menu_inc.php
+
+	### meta_inc.php
+
+	### news_add.php3
+	$s_news_added_msg = "Noticia Adicionada...";
+
+	### news_delete.php3
+
+	### news_delete_page.php3
+
+	### news_edit_page.php3
+
+	### news_menu_page.php3
+
+	### news_update.php3
+
+	### news_view_page.php3
+	$s_back_link = "Voltar";
+
+	### proj_doc_add.php3
+	$s_file_uploaded_msg = "Arquivo Enviado com Sucesso";
+
+	### proj_doc_add_page.php3
+	$s_upload_file_title = "Enviar Arquivo";
+	$s_title = "Titulo";
+	### $s_description = "# defined above";
+	$s_select_file = "Selecionar Arquivo";
+	$s_upload_file_button = "Enviar Arquivo";
+
+	### proj_doc_delete.php3
+	$s_project_file_deleted_msg = "Arquivo do Projeto Deletado";
+
+	### proj_doc_delete_page.php3
+	$s_confirm_file_delete_msg = "Tem Certeza que Deseja Apagar Este Arquivo ?";
+
+	### proj_doc_edit_page.php3
+	$s_upload_file_title = "Enviar Arquivo";
+	### $s_title = "# defined above";
+	### $s_description = "# defined above";
+	$s_filename = "Nome do Arquivo";
+	$s_file_update_button = "Atualizar Arquivo";
+	$s_file_delete_button = "Apagar Arquivo";
+
+	### proj_doc_page.php3
+	$s_project_documentation_title = "Documenta&ccedil;&atilde;o do Projeto";
+	$s_user_documentation = "Documenta&ccedil;&atilde;o do Usu&aacute;rio";
+	$s_project_documentation = "Documenta&ccedil;&atilde;o do Projeto";
+	$s_add_file = "Adicionar Arquivo";
+
+	### proj_doc_update.php3
+	$s_project_document_updated = "Projeto Atualizado com Sucesso";
+
+	### proj_user_add.php3
+	$s_project_user_added_msg = "Usu&aacute;rio Adicionado ao Projeto com Sucesso";
+
+	### proj_user_delete.php3
+	$s_project_removed_user_msg = "Usu&aacute;rio Removido do Projeto com Sucesso";
+
+	### proj_user_delete_page.php3
+	$s_remove_user_sure_msg = "Tem Certeza que Deseja Apagar Esse Usu&aacute;rio ?";
+
+	### proj_user_menu_page.php3
+	$s_add_user_title = "Adicionar Usu&aacute;rio ao Projeto";
+	### $s_username = "# defined above";
+	### $s_access_level = "# defined above";
+	$s_add_user_button = "Adicionar Usu&aacute;rio";
+	$s_project_selection_title = "Selecionar Projeto";
+	### $s_projects = "# defined above";
+	### $s_select_project_button = "# defined above";
+	$s_remove_link = "Remover";
+
+	### proj_user_update.php3
+	$s_updated_user_msg = "Usu&aacute;rio Atualizado com Sucesso";
+
+	### report_add.php3
+	### hit_back_msg = "Por Favor, Volte e Complete Todos os Campos Necessarios."; ###  obsolete;
+	$s_submission_thanks_msg = "Obrigado Pelo Envio do Bug";
+	$s_report_more_bugs = "Envie Mais Bugs";
+
+	### report_bug_advanced_page.php3
+
+	### $s_category
+
+	### $s_reproducibility
+
+	### $s_severity
+	$s_check_report_more_bugs = "Marque para Adicionar Mais Bugs";
+
+	### report_bug_page.php3
+
+	### $s_reproducibility
+
+	### $s_severity
+
+	### set_project.php3
+	$s_selected_project = "Selecionar Projeto";
+	$s_valid_project_msg = "Voce Deve Selecionar um Projeto Valido";
+
+	### show_source_page.php3
+
+	### signup.php3
+	$s_account_added = "Conta Adicionada com Sucesso.";
+	$s_password_emailed_msg = "Sua Senha Sera Enviada Para o Seu E-Mail.";
+	$s_no_reponse_msg = "Caso N&atilde;o Volte em Uma Semana, Seu Acesso pode Ser Cortado";
+
+	### signup_page.php3
+
+	### site_settings_edit_page.php3
+	$s_edit_site_settings_title = "Editar Configura&ccedil;&otilde;es do Site";
+	$s_save_settings_button = "Salvar Configura&ccedil;&otilde;es";
+
+	### site_settings_page.php3
+	$s_site_settings_title = "ConfiguraConfigura&ccedil;&otilde;es do Site";
+	$s_system_info_link = "InformaConfigura&ccedil;&atilde;o do Sistema";
+	$s_site_settings_link = "ConfiguraConfigura&ccedil;&otilde;es do Site";
+
+	### site_settings_update.php3
+	$s_site_settings_updated_msg = "As Configura&ccedil;&otilde;es Foram Atualizadas";
+
+	### summary_page.php3
+
+	### view_all_assign_bug_page.php3
+	### $s_all_bugs_link = "# defined above";
+	### $s_reported_bugs_link = "# defined above";
+	### $s_any = "# defined above";
+	### $s_show = "# defined above";
+	### $s_changed = "# defined above";
+	### $s_hide_resolved = "# defined above";
+	### $s_filter_button = "# defined above";
+	### $s_viewing_bugs_title = "# defined above";
+	### $s_id = "# defined above";
+	### $s_category = "# defined above";
+	### $s_severity = "# defined above";
+	### $s_status = "# defined above";
+	### $s_updated = "# defined above";
+	### $s_summary = "# defined above";
+
+	### view_all_bug_page.php3
+	$s_all_bugs_link = "Todos os Bugs";
+	$s_reported_bugs_link = "Reportar Bugs";
+	$s_assigned_bugs_link = "Designar Bugs";
+	$s_unassigned_bugs_link = "Bugs Sem Designa&ccedil;&atilde;o";
+	$s_any = "qualquer";
+	$s_show = "Mostrar";
+	$s_changed = "Mudados(hrs)";
+	$s_hide_resolved = "Sem Solu&ccedil;&atilde;o";
+	$s_filter_button = "Filtro";
+	$s_viewing_bugs_title = "Visualizando Bugs";
+	### $s_id = "# defined above";
+	### $s_category = "# defined above";
+	### $s_severity = "# defined above";
+	### $s_status = "# defined above";
+	$s_updated = "Atualizado";
+	### $s_summary = "# defined above";
+
+	### view_all_inc.php
+
+	### view_user_reported_bug_page.php3
+	### $s_all_bugs_link = "# defined above";
+	### $s_assigned_bugs_link = "# defined above";
+	### $s_any = "# defined above";
+	### $s_show = "# defined above";
+	### $s_changed = "# defined above";
+	### $s_hide_resolved = "# defined above";
+	### $s_filter_button = "# defined above";
+	### $s_viewing_bugs_title = "# defined above";
+	### $s_id = "# defined above";
+	### $s_category = "# defined above";
+	### $s_severity = "# defined above";
+	### $s_status = "# defined above";
+	### $s_updated = "# defined above";
+	### $s_summary = "# defined above";
+
+	### view_all_unassign_bug_page.php3
+	### $s_all_bugs_link = "# defined above";
+	### $s_reported_bugs_link = "# defined above";
+	### $s_any = "# defined above";
+	### $s_show = "# defined above";
+	### $s_changed = "# defined above";
+	### $s_hide_resolved = "# defined above";
+	### $s_filter_button = "# defined above";
+	### $s_viewing_bugs_title = "# defined above";
+	### $s_id = "# defined above";
+	### $s_category = "# defined above";
+	### $s_severity = "# defined above";
+	### $s_status = "# defined above";
+	### $s_updated = "# defined above";
+	### $s_summary = "# defined above";
+
+	### view_bug_advanced_page.php3
+
+	### view_bug_inc.php

@@ -4,11 +4,16 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Login page POSTs results to login.php
+	### Check to see if the user is already logged in via login_cookie_check()
+?>
 <? include( "core_API.php" ) ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if (( isset( $g_string_cookie_val ))&&( !empty( $g_string_cookie_val ) )) {
+	### Check to see if the user is logged in and then validate the cookie value
+	if ( !empty( $g_string_cookie_val ) ) {
 		login_cookie_check( $g_main_page );
 	}
 ?>
@@ -23,8 +28,20 @@
 
 <p>
 <div align="center">
-<? echo $s_login_page_info ?>
+<?
+	### Only echo error message if error variable is set
+	if ( isset( $f_error ) ) {
+		PRINT "$s_login_error_msg<p>";
+	}
+
+	### Display short greeting message
+	echo $s_login_page_info;
+?>
+</div>
+
+<? ### Login Form BEGIN ?>
 <p>
+<div align="center">
 <form method="post" action="<? echo $g_login ?>">
 <table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
@@ -59,19 +76,9 @@
 			<input type="checkbox" name="f_perm_login">
 		</td>
 	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_choose_project ?>:
-		</td>
-		<td>
-			<select name="f_project_id">
-			<? print_project_option_list() ?>
-			</select>
-		</td>
-	</tr>
 	<tr>
 		<td align="center" colspan="2">
-			<input type=submit value="<? echo $s_login_button ?>">
+			<input type="submit" value="<? echo $s_login_button ?>">
 		</td>
 	</tr>
 	</table>
@@ -79,12 +86,10 @@
 </tr>
 </table>
 </form>
-
-<? if ( $g_allow_signup != "0" ) { ?>
-<p>
-<a href="<? echo $g_signup_page ?>"><? echo $s_signup_link ?></a>
-<? } ?>
 </div>
+<? ### Login Form END ?>
+
+<? print_signup_link() ?>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_footer(__FILE__) ?>

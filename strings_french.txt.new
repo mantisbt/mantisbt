@@ -1,0 +1,407 @@
+Date: Mon, 30 Apr 2001 03:06:13 +0200
+To: Kenzaburo Ito <kenito@300baud.org>
+Subject: Re: New strings to Localize [FR]
+Message-ID: <20010430030613.A22246@noweb.ifria.com>
+References: <5.0.2.1.0.20010427094807.02cfaea8@pop.aspic.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=unknown-8bit
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+User-Agent: Mutt/1.3.17i
+In-Reply-To: <5.0.2.1.0.20010427094807.02cfaea8@pop.aspic.com>; from kenito@300baud.org on Fri, Apr 27, 2001 at 09:48:22AM +0200
+From: hellekin@noweb.ifria.com (Hellekin O. Wolf)
+Status:
+
+On Fri, Apr 27, 2001 at 09:48:22AM +0200, Kenzaburo Ito wrote:
+> Hi all,
+>
+> I've got some strings to localize for the 0.15.0 release.  Please just
+> replace the string items that don't have a ### in front and send it back to
+> me (just like you've been doing before).
+>
+>          $s_user_no_longer_exists = "translated string in your language";
+>
+> Try to leave everything else intact.  If you send it back like that it'll
+> make my job a lot easier.  You'll be able to test out the strings in a
+> little over a week (I hope) prior to public release.
+>
+> Thanks,
+> -Ken
+>
+*** I put in comments the example for using sprintf in $s_account_added.
+
+If we had access to your development version we may be able to correct the translation to fit the context better =8)
+
+ttyl
+
+hellekin
+
+P.S.: you should join jitterbug-list on lists.php.net to participate to the next generation PHP.Net bug tracker.
+
+> ===========================================================
+>
+>          ### General Strings
+        $s_user_no_longer_exists = "Cet utilisateur n'existe plus.";
+>
+>          ### Email Strings
+>
+>          ### account_delete.php3
+>
+>          ### account_delete_page.php3
+>
+>          ### account_page.php3
+>
+>          ### account_prefs_page.php3
+         $s_redirect_delay = "délai de redirection";
+         $s_email_on_new = "Email en cas de nouveau bug";
+         $s_email_on_assigned = "Email en cas de nouvelle assignation";
+         $s_email_on_feedback = "Email en cas de feedback";
+         $s_email_on_resolved = "Email en cas de résolution";
+         $s_email_on_closed = "Email en cas de fermeture";
+         $s_email_on_bugnote_added = "Email en cas de nouvelle note";
+         $s_email_on_status_change = "Email en cas de modification d'état";
+         $s_email_on_priority_change = "Email en cas de modification de
+priorité";
+         $s_language = "Langage";
+>
+>          ### account_prefs_reset.php3
+>
+>          ### account_prefs_update.php3
+>
+>          ### account_profile_add.php3
+>
+>          ### account_profile_delete.php3
+>
+>          ### account_profile_edit_page.php3
+>
+>          ### account_profile_make_default.php3
+>
+>          ### account_profile_manage_page.php3
+	$s_add_profile_title = "Ajouter un profil";
+	### $s_platform # defined above
+	### $s_operating_system # defined above
+	### $s_version # defined above
+	### $s_additional_description # defined above
+	$s_add_profile_button = "Ajouter un profil";
+	$s_edit_or_delete_profiles_title = "Modifier ou supprimer des
+profils";
+	$s_edit_profile = "Modifier un profil";
+	$s_make_default = "En faire le profil par défaut";
+	$s_delete_profile = "Supprimer ce profil";
+	$s_select_profile = "Sélectionner ce profil";
+	$s_submit_button = "Envoi";
+>
+>          ### account_profile_update.php3
+>
+>          ### account_update.php3
+>
+>          ### bug_assign.php3
+>
+>          ### bug_delete.php3
+>
+>          ### bug_delete_page.php3
+>
+>          ### bug_file_add.php3
+	$s_file_upload_msg = "Fichier envoyé avec succès.";
+>
+>          ### bug_file_upload_inc.php3
+	$s_upload_file = "Attacher un fichier";
+	$s_select_file = "Sélectionner un fichier";
+	$s_upload_file_button = "Envoyer le fichier";
+>
+>          ### bug_reopen_page.php3
+>
+>          ### bug_resolve_page.php3
+>
+>          ### bug_resolve_page2.php3
+>
+>          ### bug_update.php3
+>
+>          ### bug_update_advanced_page.php3
+>
+>          ### bug_update_page.php3
+>
+>          ### bug_vote_add.php3
+>
+>          ### bugnote_add.php3
+>
+>          ### bugnote_add_inc.php
+>
+>          ### bugnote_add_page.php3
+>
+>          ### bugnote_delete.php3
+>
+>          ### bugnote_inc.php
+>
+>          ### choose_project_page.php3 @@@ remove
+	$s_choose_project_title = "Choisir un projet";
+	$s_projects = "Projets";
+	$s_select_project_button = "Sélectionner un projet";
+>
+>          ### index.php3
+>
+>          ### login.php3
+>
+>          ### login_error_page.php3 @@@ REMOVE THIS
+	$s_login_error_msg = "Erreur : votre compte est désactivé ou vous avez fait une erreur lors de votre identification";
+	$s_login_title = "Merci de vous identifier";
+	### $s_username # defined above
+	### $s_password # defined above
+	$s_save_login = "Identification automatique";
+	### $s_choose_project # defined above
+	$s_login_button = "Identification";
+        $s_select_project_button = "Select Project";
+
+>
+>          ### login_page.php3
+>
+>          ### logout_page.php3
+>
+>          ### main_page.php3
+>
+>          ### manage_create_new_user.php3
+>
+>          ### manage_create_user_page.php3
+>
+>          ### manage_page.php3
+>
+>          ### manage_project_add.php3
+>
+>          ### manage_project_category_add.php3
+>
+>          ### manage_project_category_delete.php3
+>
+>          ### manage_project_category_delete_page.php3
+>
+>          ### manage_project_category_edit_page.php3
+>
+>          ### manage_project_category_update.php3
+>
+>          ### manage_project_delete.php3
+>
+>          ### manage_project_delete_page.php3
+>
+>          ### manage_project_edit_page.php3
+>
+>          ### manage_project_menu_page.php3
+>
+>          ### manage_project_update.php3
+>
+>          ### manage_project_version_add.php3
+>
+>          ### manage_project_version_delete.php3
+>
+>          ### manage_project_version_delete_page.php3
+>
+>          ### manage_project_version_edit_page.php3
+>
+>          ### manage_project_version_update.php3
+>
+>          ### manage_user_delete.php3
+>
+>          ### manage_user_delete_page.php3
+>
+>          ### manager_prune.php3
+          $s_accounts_pruned_msg = "Tous les comptes plus anciens qu'une semaine n'ayant jamais été activés ont été effacés.";
+>
+>          ### manage_user_page.php3
+>
+>          ### manage_user_reset.php3
+>
+>          ### manage_user_update.php3
+>
+>          ### menu_inc.php
+>
+>          ### meta_inc.php
+>
+>          ### news_add.php3
+	$s_news_added_msg = "Nouvelle ajoutée...";
+>
+>          ### news_delete.php3
+>
+>          ### news_delete_page.php3
+>
+>          ### news_edit_page.php3
+>
+>          ### news_menu_page.php3
+>
+>          ### news_update.php3
+>
+>          ### news_view_page.php3
+	$s_back_link = "Retour";
+>
+>          ### proj_doc_add.php3
+	$s_file_uploaded_msg = "Le fichier a bien été envoyé.";
+
+	### proj_doc_add_page.php3
+	$s_upload_file_title = "Attacher un fichier";
+	$s_title = "Titre";
+	### $s_description = "# defined above";
+	$s_select_file = "Sélectionner le fichier";
+	$s_upload_file_button = "Envoyer le fichier";
+
+	### proj_doc_delete.php3
+	$s_project_file_deleted_msg = "Projet supprimé";
+
+	### proj_doc_delete_page.php3
+	$s_confirm_file_delete_msg = "Voulez-vous vraiment supprimer ce fichier ?";
+
+	### proj_doc_edit_page.php3
+	$s_upload_file_title = "Envoyer un fichier";
+	### $s_title = "# defined above";
+	### $s_description = "# defined above";
+	$s_filename = "Nom du fichier;
+	$s_file_update_button = "Modifier le fichier";
+	$s_file_delete_button = "Supprimer le fichier";
+
+	### proj_doc_page.php3
+	$s_project_documentation_title = "Docummentation du projet";
+	$s_user_documentation = "Information pour l'utilisateur";
+	$s_project_documentation = "Documentation du projet";
+	$s_add_file = "Ajouter un fichier";
+
+	### proj_doc_update.php3
+	$s_project_document_updated = "Le projet a été modifié avec succès";
+>
+>          ### proj_user_add.php3
+	$s_project_user_added_msg = "L'utilisateur a été intégré au projet.";
+
+	### proj_user_delete.php3
+	$s_project_removed_user_msg = "L'utilisateur ne fait plus partie du projet.";
+
+	### proj_user_delete_page.php3
+	$s_remove_user_sure_msg = "Voulez-vous vraiment écarter cet utilisateur du projet ?";
+
+	### proj_user_menu_page.php3
+	$s_add_user_title = "Intégrer un utilisateur au projet";
+	### $s_username = "# defined above";
+	### $s_access_level = "# defined above";
+	$s_add_user_button = "Ajouter l'utilisateur";
+         $s_project_selection_title = "Project Selection";
+         ### $s_projects = "# defined above";
+         ### $s_select_project_button = "# defined above";
+	$s_remove_link = "Supprimer";
+
+	### proj_user_update.php3
+	$s_updated_user_msg = "Utilidateur modifié avec succès";
+>
+>          ### report_add.php3
+	#$s_hit_back_msg = "."; ### obsoleted
+	$s_submission_thanks_msg = "Merci de votre contribution.";
+	$s_report_more_bugs = "Saisir un nouveau bug";
+>
+>          ### report_bug_advanced_page.php3
+>
+>          ### $s_category
+>
+>          ### $s_reproducibility
+>
+>          ### $s_severity
+          $s_check_report_more_bugs = "Cocher pour saisir d'autres bugs";
+>
+>          ### report_bug_page.php3
+>
+>          ### $s_reproducibility
+>
+>          ### $s_severity
+>
+>          ### set_project.php3
+	$s_selected_project = "Projet en cours";
+	$s_valid_project_msg = "Vous devez choisir un projet valide";
+>
+>          ### show_source_page.php3
+>
+>          ### signup.php3
+//      $s_account_added = "%s - %s a bien été créé."; // sprintf($s_account_added,$f_username,$f_email);
+  	$s_account_added = "Le compte a bien été créé.";
+  	$s_password_emailed_msg = "Votre mot de passe vous sera communiqué par email";
+  	$s_no_reponse_msg = "Si vous ne répondez pas sous une semaine, votre compte sera supprimé.";
+>
+>          ### signup_page.php3
+>
+>          ### site_settings_edit_page.php3
+	$s_edit_site_settings_title = "Modifier la configuration du site";
+	$s_save_settings_button = "Sauvegarder les modifications";
+>
+>          ### site_settings_page.php3
+	$s_site_settings_title = "Configuration du site";
+	$s_system_info_link = "Information Système";
+	$s_site_settings_link = "Modifier la configuration du site";
+>
+>          ### site_settings_update.php3
+	$s_site_settings_updated_msg = "Les modifications ont bien été prises en compte.";
+>
+>          ### summary_page.php3
+>
+>          ### view_all_assign_bug_page.php3
+>          ### $s_all_bugs_link = "# defined above";
+>          ### $s_reported_bugs_link = "# defined above";
+>          ### $s_any = "# defined above";
+>          ### $s_show = "# defined above";
+>          ### $s_changed = "# defined above";
+>          ### $s_hide_resolved = "# defined above";
+>          ### $s_filter_button = "# defined above";
+>          ### $s_viewing_bugs_title = "# defined above";
+>          ### $s_id = "# defined above";
+>          ### $s_category = "# defined above";
+>          ### $s_severity = "# defined above";
+>          ### $s_status = "# defined above";
+>          ### $s_updated = "# defined above";
+>          ### $s_summary = "# defined above";
+>
+>          ### view_all_bug_page.php3
+	$s_all_bugs_link = "Tous les bugs";
+	$s_reported_bugs_link = "Bugs ouverts";
+	$s_assigned_bugs_link = "Bugs assignés";
+	$s_unassigned_bugs_link = "Bugs non-assignés";
+	$s_any = "tous";
+	$s_show = "Afficher";
+	$s_changed = "Modifiés (heures)";
+	$s_hide_resolved = "Masquer les bugs résolus";
+	$s_filter_button = "Filtrer";
+	$s_viewing_bugs_title = "Afficher les bugs";
+	### $s_id = "# defined above";
+	### $s_category = "# defined above";
+	### $s_severity = "# defined above";
+	### $s_status = "# defined above";
+	$s_updated = "Modifié";
+	### $s_summary = "# defined above";
+>
+>          ### view_all_inc.php
+>
+>          ### view_user_reported_bug_page.php3
+>          ### $s_all_bugs_link = "# defined above";
+>          ### $s_assigned_bugs_link = "# defined above";
+>          ### $s_any = "# defined above";
+>          ### $s_show = "# defined above";
+>          ### $s_changed = "# defined above";
+>          ### $s_hide_resolved = "# defined above";
+>          ### $s_filter_button = "# defined above";
+>          ### $s_viewing_bugs_title = "# defined above";
+>          ### $s_id = "# defined above";
+>          ### $s_category = "# defined above";
+>          ### $s_severity = "# defined above";
+>          ### $s_status = "# defined above";
+>          ### $s_updated = "# defined above";
+>          ### $s_summary = "# defined above";
+>
+>          ### view_all_unassign_bug_page.php3
+>          ### $s_all_bugs_link = "# defined above";
+>          ### $s_reported_bugs_link = "# defined above";
+>          ### $s_any = "# defined above";
+>          ### $s_show = "# defined above";
+>          ### $s_changed = "# defined above";
+>          ### $s_hide_resolved = "# defined above";
+>          ### $s_filter_button = "# defined above";
+>          ### $s_viewing_bugs_title = "# defined above";
+>          ### $s_id = "# defined above";
+>          ### $s_category = "# defined above";
+>          ### $s_severity = "# defined above";
+>          ### $s_status = "# defined above";
+>          ### $s_updated = "# defined above";
+>          ### $s_summary = "# defined above";
+>
+>          ### view_bug_advanced_page.php3
+>
+>          ### view_bug_inc.php
+> 

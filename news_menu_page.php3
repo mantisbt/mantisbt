@@ -8,12 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "manager" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( MANAGER );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -25,14 +20,13 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_news_add ?>">
 <input type="hidden" name="f_poster_id" value="<? echo get_current_user_field( "id " ) ?>">
-<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
 	<table width="100%">

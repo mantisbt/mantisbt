@@ -4,10 +4,25 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Remove the bugnote and bugnote text and redirect back to
+	### the viewing page
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( REPORTER );
+
+	### $f_bug_id is the bug id
+	check_bugnote_exists( $f_bug_id );
+
+	### grab the bugnote text id
+	$query = "SELECT bugnote_text_id
+			FROM $g_mantis_bugnote_table
+			WHERE id='$f_bug_id'";
+	$result = db_query( $query );
+	$t_bugnote_text_id = db_result( $result, 0, 0 );
 
 	### Remove the bugnote
 	$query = "DELETE
@@ -15,17 +30,11 @@
 			WHERE id='$f_bug_id'";
 	$result = db_query($query);
 
-	$query = "SELECT date_submitted
-			FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
-   	$result = db_query( $query );
-   	$t_date_submitted = db_result( $result, 0 );
-
-	### update bug last updated
-	$query = "UPDATE $g_mantis_bug_table
-    		SET date_submitted='$t_date_submitted', last_updated=NOW()
-    		WHERE id='$f_id'";
-   	$result = db_query($query);
+	### Remove the bugnote text
+	$query = "DELETE
+			FROM $g_mantis_bugnote_text_table
+			WHERE id='$t_bugnote_text_id'";
+	$result = db_query($query);
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -33,12 +42,7 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_id", $g_wait_time );
-		}
-		else {
-			print_meta_redirect( "$g_view_bug_page?f_id=$f_id", $g_wait_time );
-		}
+		print_meta_redirect( $HTTP_REFERER, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -47,31 +51,18 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	### SUCCESS
-	if ( $result ) {
+	if ( $result ) {					### SUCCESS
 		PRINT "$s_bugnote_deleted_msg<p>";
+	} else {							### FAILURE
+		print_sql_error( $query );
 	}
-	### FAILURE
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
-?>
 
-<p>
-<?
-	if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-		PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$f_id\">$s_proceed</a>";
-	}
-	else {
-		PRINT "<a href=\"$g_view_bug_page?f_id=$f_id\">$s_proceed</a>";
-	}
+	print_bracket_link( $HTTP_REFERER, $s_proceed );
 ?>
 </div>
 

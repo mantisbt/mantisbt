@@ -8,13 +8,12 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( MANAGER );
+	$f_version 		= urldecode( $f_version );
+	$f_orig_version = urldecode( $f_orig_version );
 
-	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
-
+	$result = 0;
+	$query = "";
 	### check for duplicate
 	if ( !is_duplicate_version( $f_version, $f_project_id ) ) {
 		### update version
@@ -32,9 +31,10 @@
 		### update version
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_bug_id = $row["id"];
-			$t_date_submitted = $row["date_submitted"];
-			$t_last_updated = $row["last_updated"];
+
+			$t_bug_id 			= $row["id"];
+			$t_date_submitted 	= $row["date_submitted"];
+			$t_last_updated 	= $row["last_updated"];
 
 			$query2 = "UPDATE $g_mantis_bug_table
 					SET version='$f_version', date_submitted='$t_date_submitted',
@@ -59,24 +59,20 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	if ( $result ) {
+	if ( $result ) {				### SUCCESS
 		PRINT "$s_version_updated_msg<p>";
+	} else if ( is_duplicate_version( $f_version, $f_project_id )) {
+		PRINT "$s_duplicate_version<p>";
+	} else {						### FAILURE
+		print_sql_error( $query );
 	}
-	### OK!!!
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
-?>
-<p>
-<?
-	PRINT "<a href=\"$g_manage_project_edit_page?f_project_id=$f_project_id\">$s_proceed</a>";
+
+	print_bracket_link( $g_manage_project_edit_page."?f_project_id=".$f_project_id, $s_proceed );
 ?>
 </div>
 

@@ -4,6 +4,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### This page allows the user to set his/her preferences
+	### Update is POSTed to acount_prefs_update.php3
+	### Reset is POSTed to acount_prefs_reset.php3
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
@@ -21,13 +26,13 @@
     ## OOPS, No entry in the database yet.  Lets make one
     if ( db_num_rows( $result )==0 ) {
 
-		### Create row
+		### Create row # @@@@@ Add the rest of the fields
 	    $query = "INSERT
 	    		INTO $g_mantis_user_pref_table
-	    		(id, user_id, advanced_report, advanced_view)
+	    		(id, user_id, advanced_report, advanced_view, language)
 	    		VALUES
 	    		(null, '$u_id',
-	    		'$g_default_advanced_report', '$g_default_advanced_view')";
+	    		'$g_default_advanced_report', '$g_default_advanced_view', 'english')";
 	    $result = db_query($query);
 
 		### Rerun select query
@@ -51,55 +56,164 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
-<p>
-<div align=center>
-	[ <a href="<? echo $g_account_page ?>"><? echo $s_account_link ?></a> ]
-	[ <a href="<? echo $g_account_profile_manage_page ?>"><? echo $s_manage_profiles_link ?></a> ]
-	[ <? echo $s_change_preferences_link ?> ]
-</div>
+<? print_account_menu( $g_account_prefs_page ) ?>
 
+<? ### Account Preferences Form BEGIN ?>
 <p>
-<div align=center>
-<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<div align="center">
+<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100% cols=2>
-	<form method=post action="<? echo $g_account_prefs_update ?>">
-		<input type=hidden name=f_id value="<? echo $u_id ?>">
-		<input type=hidden name=f_user_id value="<? echo $u_user_id ?>">
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table width="100%" cols="2">
+	<form method="post" action="<? echo $g_account_prefs_update ?>">
 	<tr>
-		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
+		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_default_account_preferences_title ?></b>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_light ?>>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
+		<td>
+			<? echo $s_default_project ?>
+		</td>
+		<td>
+			<select name="f_project_id">
+			<? print_project_option_list( $u_default_project ) ?>
+			</select>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $s_advanced_report ?>
 		</td>
 		<td>
-			<input type=checkbox name=f_advanced_report <? if ( $u_advanced_report=="on" ) echo "CHECKED"?>
+			<input type="checkbox" name="f_advanced_report" <? if ( $u_advanced_report==1 ) echo "CHECKED" ?>>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td>
 			<? echo $s_advanced_view ?>
 		</td>
 		<td>
-			<input type=checkbox name=f_advanced_view <? if ( $u_advanced_view=="on" ) echo "CHECKED"?>
+			<input type="checkbox" name="f_advanced_view" <? if ( $u_advanced_view=="1" ) echo "CHECKED" ?>>
 		</td>
 	</tr>
-	<tr align=center>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
-			<input type=submit value="<? echo $s_update_prefs_button ?>">
+			<? echo $s_advanced_update ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_advanced_update" <? if ( $u_advanced_update=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
+		<td>
+			<? echo $s_refresh_delay ?>
+		</td>
+		<td>
+			<input type="text" name="f_refresh_delay" size="4" maxlength="4" value="<? echo $u_refresh_delay ?>">
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
+		<td>
+			<? echo $s_redirect_delay ?>
+		</td>
+		<td>
+			<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<? echo $u_redirect_delay ?>">
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
+		<td>
+			<? echo $s_email_on_new ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_new" <? if ( $u_email_on_new=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
+		<td>
+			<? echo $s_email_on_assigned ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_assigned" <? if ( $u_email_on_assigned=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
+		<td>
+			<? echo $s_email_on_feedback ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_feedback" <? if ( $u_email_on_feedback=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
+		<td>
+			<? echo $s_email_on_resolved ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_resolved" <? if ( $u_email_on_resolved=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
+		<td>
+			<? echo $s_email_on_closed ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_closed" <? if ( $u_email_on_closed=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
+		<td>
+			<? echo $s_email_on_reopened ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_reopened" <? if ( $u_email_on_reopened=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
+		<td>
+			<? echo $s_email_on_bugnote_added ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_bugnote" <? if ( $u_email_on_bugnote=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
+		<td>
+			<? echo $s_email_on_status_change ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_status" <? if ( $u_email_on_status=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
+		<td>
+			<? echo $s_email_on_priority_change ?>
+		</td>
+		<td>
+			<input type="checkbox" name="f_email_on_priority" <? if ( $u_email_on_priority=="1" ) echo "CHECKED" ?>>
+		</td>
+	</tr>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
+		<td>
+			<? echo $s_language ?>
+		</td>
+		<td>
+			<select name=f_language>
+				<? print_language_option_list( $u_language ) ?>
+			</select>
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+			<input type="submit" value="<? echo $s_update_prefs_button ?>">
 		</td>
 		</form>
-		<form method=post action="<? echo $g_account_prefs_reset ?>">
-			<input type=hidden name=f_id value="<? echo $u_id ?>">
+		<form method="post" action="<? echo $g_account_prefs_reset ?>">
+			<input type="hidden" name="f_id" value="<? echo $u_id ?>">
 		<td>
-			<input type=submit value="<? echo $s_reset_prefs_button ?>">
+			<input type="submit" value="<? echo $s_reset_prefs_button ?>">
 		</td>
 		</form>
 	</tr>
@@ -109,6 +223,7 @@
 </tr>
 </table>
 </div>
+<? ### Account Preferences Form END ?>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_footer(__FILE__) ?>

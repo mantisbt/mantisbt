@@ -4,12 +4,18 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Show the simple update bug options
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( UPDATER );
+	check_bug_exists( $f_id );
 
-    $query = "SELECT *
+	### grab data
+    $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted
     		FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
     $result = db_query( $query );
@@ -23,10 +29,15 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
-	$v_summary = string_display( $v_summary );
-	$v2_description = string_display_with_br( $v2_description );
-	$v2_steps_to_reproduce = string_display_with_br( $v2_steps_to_reproduce );
-	$v2_additional_information = string_display_with_br( $v2_additional_information );
+	### prepare strings for display
+	$v_os 						= string_display( $v_os );
+	$v_os_build 				= string_display( $v_os_build );
+	$v_platform					= string_display( $v_platform );
+	$v_version 					= string_display( $v_version );
+	$v_summary					= string_display( $v_summary );
+	$v2_description 			= string_display( $v2_description );
+	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
+	$v2_additional_information 	= string_display( $v2_additional_information );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -38,175 +49,184 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
-<?
-	if ( $g_show_advanced_update==1 ) {
-?>
+<? if ( $g_show_update==1 ) { ?>
 <p>
-<div align=center>
-[ <a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_back_to_bug_link ?></a> ]
-[ <a href="<? echo $g_bug_update_advanced_page ?>?f_id=<? echo $f_id ?>&f_bug_text_id=<? echo $f_bug_text_id ?>"><? echo $s_update_advanced_link ?></a> ]
-</div>
+<div align="center">
 <?
+	if ( $g_show_view==0 ) {
+		print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_back_to_bug_link );
+	}
+
+	if ( $g_show_update==0 ) {
+		print_bracket_link( $g_bug_update_advanced_page."?f_id=".$f_id, $s_update_advanced_link );
 	}
 ?>
+</div>
+<? } ?>
 
 <p>
-<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
-<form method=post action="<? echo $g_bug_update ?>">
-	<input type=hidden name=f_id value="<? echo $v_id ?>">
-	<input type=hidden name=f_resolution value="<? echo $v_resolution ?>">
-	<input type=hidden name=f_projection value="<? echo $v_projection ?>">
-	<input type=hidden name=f_eta value="<? echo $v_eta ?>">
+<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<form method="post" action="<? echo $g_bug_update ?>">
+	<input type="hidden" name="f_id" value="<? echo $v_id ?>">
+	<input type="hidden" name="f_old_status" value="<? echo $v_status ?>">
+	<input type="hidden" name="f_resolution" value="<? echo $v_resolution ?>">
+	<input type="hidden" name="f_projection" value="<? echo $v_projection ?>">
+	<input type="hidden" name="f_eta" value="<? echo $v_eta ?>">
+
+	<input type="hidden" name="f_os" value="<? echo $v_os ?>">
+	<input type="hidden" name="f_os_build" value="<? echo $v_os_build ?>">
+	<input type="hidden" name="f_platform" value="<? echo $v_platform ?>">
+	<input type="hidden" name="f_version" value="<? echo $v_version ?>">
+
+	<input type="hidden" name="f_steps_to_reproduce" value="<? echo $v2_steps_to_reproduce ?>">
 <tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table cols="6" width="100%" bgcolor="<? echo $g_white_color ?>">
 	<tr>
-		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
+		<td colspan="6" bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_updating_bug_simple_title ?></b>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_category_title_color ?> align=center>
-		<td width=15%>
+	<tr align="center" bgcolor="<? echo $g_category_title_color ?>">
+		<td width="15%">
 			<b><? echo $s_id ?></b>
 		</td>
-		<td width=20%>
+		<td width="20%">
 			<b><? echo $s_category ?></b>
 		</td>
-		<td width=15%>
+		<td width="15%">
 			<b><? echo $s_severity ?></b>
 		</td>
-		<td width=20%>
+		<td width="20%">
 			<b><? echo $s_reproducibility ?></b>
 		</td>
-		<td width=15%>
+		<td width="15%">
 			<b><? echo $s_date_submitted ?></b>
 		</td>
-		<td width=15%>
+		<td width="15%">
 			<b><? echo $s_last_update ?></b>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_light ?> align=center>
+	<tr align="center" bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $v_id ?>
 		</td>
 		<td>
-			<select name=f_category>
+			<select name="f_category">
 				<? print_category_option_list( $v_category ) ?>
 			</select>
 		</td>
 		<td>
-			<select name=f_severity>
-				<? print_field_option_list( "severity", $v_severity ) ?>
+			<select name="f_severity">
+				<? print_enum_string_option_list( $g_severity_enum_string, $v_severity ) ?>
 			</select>
 		</td>
 		<td>
-			<select name=f_reproducibility>
-				<? print_field_option_list( "reproducibility", $v_reproducibility ) ?>
+			<select name="f_reproducibility">
+				<? print_enum_string_option_list( $g_reproducibility_enum_string, $v_reproducibility ) ?>
 			</select>
 		</td>
 		<td>
-			<input type=hidden name=f_date_submitted value="<? echo $v_date_submitted ?>">
-			<? echo date( $g_normal_date_format, sql_to_unix_time( $v_date_submitted ) ) ?>
+			<? print_date( $g_normal_date_format, $v_date_submitted ) ?>
 		</td>
 		<td>
-			<? echo date( $g_normal_date_format, sql_to_unix_time( $v_last_updated ) ) ?>
+			<? print_date( $g_normal_date_format, sql_to_unix_time( $v_last_updated ) ) ?>
 		</td>
 	</tr>
-	<tr height=5 bgcolor=<? echo $g_white_color ?>>
-		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+	<tr height="5" bgcolor="<? echo $g_white_color ?>">
+		<td colspan="6" bgcolor="<? echo $g_white_color ?>">
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_reporter ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_dark ?>">
 			<? print_user( $v_reporter_id ) ?>
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_assigned_to ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
-			<select name=f_handler_id>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_light ?>">
+			<select name="f_handler_id">
 				<option value="">
 				<? print_handler_option_list( $v_handler_id ) ?>
 			</select>
 		</td>
 	</tr>
-	<tr align=center>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+	<tr align="center">
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_priority ?></b>
 		</td>
-		<td align=left bgcolor=<? echo $g_primary_color_dark ?>>
-			<select name=f_priority>
-				<? print_field_option_list( "priority", $v_priority ) ?>
+		<td align="left" bgcolor="<? echo $g_primary_color_dark ?>">
+			<select name="f_priority">
+				<? print_enum_string_option_list( $g_priority_enum_string, $v_priority ) ?>
 			</select>
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_resolution ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
-			<? echo $v_resolution ?>
+		<td bgcolor="<? echo $g_primary_color_dark ?>">
+			<? echo get_enum_element( $g_resolution_enum_string, $v_resolution ) ?>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
-
+		<td colspan="2" bgcolor="<? echo $g_primary_color_dark ?>">
+			&nbsp;
 		</td>
 	</tr>
-	<tr align=center>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+	<tr align="center">
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_status ?></b>
 		</td>
-		<td align=left bgcolor=<? echo $g_primary_color_light ?>>
-			<select name=f_status>
-				<? print_field_option_list( "status", $v_status ) ?>
+		<td align="left" bgcolor="<? echo $g_primary_color_light ?>">
+			<select name="f_status">
+				<? print_enum_string_option_list( $g_status_enum_string, $v_status ) ?>
 			</select>
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_duplicate_id ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?>>
+		<td bgcolor="<? echo $g_primary_color_light ?>">
 			<? echo $v_duplicate_id ?>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?> colspan=2>
-
+		<td colspan="2" bgcolor="<? echo $g_primary_color_light ?>">
+			&nbsp;
 		</td>
 	</tr>
-	<tr height=5 bgcolor=<? echo $g_white_color ?>>
-		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+	<tr height="5" bgcolor="<? echo $g_white_color ?>">
+		<td colspan="6" bgcolor="<? echo $g_white_color ?>">
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_summary ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
-			<? echo $v_summary ?>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_dark ?>">
+			<input type="text" name="f_summary" size="80" maxlength="128" value="<? echo $v_summary ?>">
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_description ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
-			<? echo $v2_description ?>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_light ?>">
+			<textarea cols="60" rows="5" name="f_description"><? echo $v2_description ?></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_additional_information ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
-			<? echo $v2_additional_information ?>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_dark ?>">
+			<textarea cols="60" rows="5" name="f_additional_information"><? echo $v2_additional_information ?></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_white_color ?> colspan=6>
-			<input type=submit value="<? echo $s_update_information_button ?>">
+		<td align="center" colspan="6" bgcolor="<? echo $g_white_color ?>">
+			<input type="submit" value="<? echo $s_update_information_button ?>">
 		</td>
 	</tr>
 	</table>

@@ -9,7 +9,9 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-    $query = "SELECT *
+	check_bug_exists( $f_id );
+
+    $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted
     		FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
     $result = db_query( $query );
@@ -23,10 +25,14 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
-	$v_summary = string_display( $v_summary );
-	$v2_description = string_display_with_br( $v2_description );
-	$v2_steps_to_reproduce = string_display_with_br( $v2_steps_to_reproduce );
-	$v2_additional_information = string_display_with_br( $v2_additional_information );
+	$v_os 						= string_display( $v_os );
+	$v_os_build					= string_display( $v_os_build );
+	$v_platform					= string_display( $v_platform );
+	$v_version 					= string_display( $v_version );
+	$v_summary 					= string_display( $v_summary );
+	$v2_description 			= string_display( $v2_description );
+	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
+	$v2_additional_information 	= string_display( $v2_additional_information );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -38,13 +44,14 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
-<p>
-<div align=center>
-[ <a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id?>"><? echo $s_view_advanced_link ?></a> ]
-</div>
+<? if ( $g_show_view==0) { ?>
+	<p>
+	<div align="center">
+		<? print_bracket_link( $g_view_bug_advanced_page."?f_id=".$f_id, $s_view_advanced_link ) ?>
+	</div>
+<?	} ?>
 
 <p>
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
@@ -84,16 +91,16 @@
 			<? echo $v_category ?>
 		</td>
 		<td>
-			<? echo $v_severity ?>
+			<? echo get_enum_element( $g_severity_enum_string, $v_severity ) ?>
 		</td>
 		<td>
-			<? echo $v_reproducibility ?>
+			<? echo get_enum_element( $g_reproducibility_enum_string, $v_reproducibility ) ?>
 		</td>
 		<td>
-			<? echo date( $g_normal_date_format, sql_to_unix_time( $v_date_submitted ) ) ?>
+			<? print_date( $g_normal_date_format, $v_date_submitted ) ?>
 		</td>
 		<td>
-			<? echo date( $g_normal_date_format, sql_to_unix_time( $v_last_updated ) ) ?>
+			<? print_date( $g_normal_date_format, sql_to_unix_time( $v_last_updated ) ) ?>
 		</td>
 	</tr>
 	<tr height=5 bgcolor=<? echo $g_white_color ?>>
@@ -122,13 +129,13 @@
 			<b><? echo $s_priority ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
-			<? echo $v_priority ?>
+			<? echo get_enum_element( $g_priority_enum_string, $v_priority ) ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_resolution ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
-			<? echo $v_resolution ?>
+			<? echo get_enum_element( $g_resolution_enum_string, $v_resolution ) ?>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
 			&nbsp;
@@ -139,7 +146,7 @@
 			<b><? echo $s_status ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<? echo $v_status ?>
+			<? echo get_enum_element( $g_status_enum_string, $v_status ) ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_duplicate_id ?></b>
@@ -180,13 +187,38 @@
 			<? echo $v2_additional_information ?>
 		</td>
 	</tr>
+	<tr>
+		<td align=center bgcolor=<? echo $g_category_title_color ?>>
+			<b>Attached Files</b>
+		</td>
+		<td colspan=5 bgcolor=<? echo $g_primary_color_light ?>>
+			<?
+				$query = "SELECT *
+						FROM mantis_bug_file_table
+						WHERE bug_id='$f_id'";
+				$result = db_query( $query );
+				$num_files = db_num_rows( $result );
+				for ($i=0;$i<$num_files;$i++) {
+					$row = db_fetch_array( $result );
+					extract( $row, EXTR_PREFIX_ALL, "v2" );
+					$v2_diskfile = str_replace( $DOCUMENT_ROOT, "", $v2_diskfile );
+					$v2_filesize = round( $v2_filesize / 1024 );
+
+					PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize KB)";
+					if ( $i != ($num_files - 1) ) {
+						PRINT "<br>";
+					}
+				}
+			?>
+		</td>
+	</tr>
 	<tr height=5 bgcolor=<? echo $g_white_color ?>>
 		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
 			&nbsp;
 		</td>
 	</tr>
 <?
-	if ( access_level_check_greater_or_equal( "updater" ) ) {
+	if ( access_level_check_greater_or_equal( UPDATER ) ) {
 ?>
 	<tr align=center>
 		<form method=post action="<? echo $g_bug_update_page ?>">
@@ -197,8 +229,8 @@
 		</td>
 		</form>
 
-<?	if ($v_status!='resolved') {
-		if ( access_level_check_greater_or_equal( "updater" ) ) {
+<?	if ($v_status!=RESOLVED) {
+		if ( access_level_check_greater_or_equal( UPDATER ) ) {
 ?>
 		<form method=post action="<? echo $g_bug_assign ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
@@ -224,7 +256,7 @@
 <?	} ?>
 		<form method=post action="<? echo $g_bug_delete_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
-			<input type=hidden name=f_bug_text_id value="<? echo $f_bug_text_id ?>">
+			<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value="<? echo $s_delete_bug_button ?>">
 		</td>
@@ -238,26 +270,10 @@
 </tr>
 </table>
 
-<p>
-<?
-	include( $g_bugnote_include_file );
-	PRINT "<p>";
+<? include( $g_bug_file_upload_inc ) ?>
 
-	if ( $v_status=="resolved" ) {
-		if ( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ) {
-			PRINT "<div align=center>";
-			PRINT "<form method=post action=\"$g_bug_reopen_page\">";
-				PRINT "<input type=hidden name=f_id value=\"$v_id\">";
-				PRINT "<input type=submit value=\"$s_reopen_bug_button\">";
-			PRINT "</form>";
-			PRINT "</div>";
-		}
-	} else {
-		include( $g_bugnote_add_include_file );
-	}
-?>
+<? include( $g_bugnote_include_file ) ?>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>

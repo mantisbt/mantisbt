@@ -65,18 +65,18 @@
 	$s_profile_defaulted_msg = "Standardprofil aktualisiert...";
 
 	### account_profile_manage_page.php3
-	$s_add_profile_msg = "Profil hinzufügen";
-	### $s_platform # defined above
-	### $s_operating_system # defined above
-	### $s_version # defined above
-	### $s_additional_description # defined above
-	$s_add_profile_button = "Profil hinzufügen";
-	$s_edit_or_delete_profiles_title = "Profile editieren/löschen";
-	$s_edit_profile = "Profil ändern";
-	$s_make_default = "Fehlwert anlegen";
-	$s_delete_profile = "Profil löschen";
-	$s_select_profile = "Profile wählen";
-	$s_submit_button = "Absenden";
+	$s_add_profile_title = "Adicionar Perfil";
+	### $s_platform = "# defined above";
+	### $s_operating_system = "# defined above";
+	### $s_version = "# defined above";
+	### $s_additional_description = "# defined above";
+	$s_add_profile_button = "Adicionar Perfil";
+	$s_edit_or_delete_profiles_title = "Editar ou Apagar Perfil";
+	$s_edit_profile = "Editar Perfil";
+	$s_make_default = "Tornar Padr&atilde;";
+	$s_delete_profile = "Apagar Perfil";
+	$s_select_profile = "Selecionar Perfil";
+	$s_submit_button = "Enviar";
 
 	### account_profile_update.php3
 	$s_profile_updated_msg = "Profil aktualisiert...";

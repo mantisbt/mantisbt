@@ -8,12 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_equal( "administrator" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( ADMINISTRATOR );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -24,17 +19,11 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
-<p>
-<div align=center>
-	[ <a href="ChangeLog">ChangeLog</a> ]
-	[ <a href="README">README</a> ]
-	[ <a href="INSTALL">INSTALL</a> ]
-	[ <a href="UPGRADING">UPGRADING</a> ]
-	[ <a href="CONFIGURATION">CONFIGURATION</a> ]
-</div>
+<? print_manage_doc_menu( $g_documentation_page ) ?>
+
+<? phpinfo() ?>
 
 <? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>

@@ -4,6 +4,53 @@ Mantis
 
  * Renamed span.bugnote_delete to span.bugnotedelete for css conformance
  * Added "" around all width and bgcolor tags for standards compliance
+ * Split core_API.php into multiple files
+ * Renamed many files to shorten filename length (for MacOS)
+ * Added new functions for news_API
+ * Switched from TIMESTAMP to DATETIME in the date_created/date_posted fields,
+   made appropriate changes in code
+ * Switched from ENUM to INT(2).  Now use hash to map from id to text
+ * Reworked authentication check at top of pages
+ * Fixed several places where manager was omitted when it should have been
+   selected
+ * Fixed error in documentation.html tags
+ * Changed duplicate bug option list to text
+ * Added SQL queires to make sure date() runtime errors disappear
+ * Added str_pd() function to pad IDs with "0"
+ * Removed show_source capability for anyone but admins
+ * Removed strtotime() from all bug view_all* pages
+ * Added better messages for when adding and updating duplicate categories
+   and versions
+ * Added count details to view_all* pages
+ * Moved bugnote_add page into standard bugnote page
+ * Added icon support
+ * Added core_icon_API.php
+ * Fixed sort errors in manage_project page
+ * Improved sort category links
+ * Added hypertest links for bugs formatted by #IDNUM (eg. #234)
+ * Added new status CLOSED
+ * Added more bug counts in various places
+ * Added phpinfo() page in manage documantation section
+ * Added news list/archive view mode
+ * Added ability to edit text of bug details
+ * Added checks to prevent accessing of non-existant bugs
+ * Fixed error where "does not exist" was incorrectly reported as the handler
+ * Modified repot_bug to allow a user to choose to add more bugs or return
+   to view bug page
+ * Added View Unassigned mode
+ * Added urlencode/decode for project category and versions
+ * Added prune functionality for old accounts that have never been logged into
+ * Added file upload support
+ * Added capability to let users choose site language
+ * Added more information to bug_resolve2 page
+ * Added more user preferences
+ * Added more existance checks for bugs and users
+ * Modified view by reporter to not show viewers
+ * Fixed security problem where anyone could delete/edit any non-protected account
+ * Fixed security problem where anyone could delete/edit any profile
+ * Fixed misspelling in email_reopen
+ * Added view site settings page for admin
+ * Added check for duplicate project error message when adding new projects
 
 03.06.2001  -   0.14.8
 

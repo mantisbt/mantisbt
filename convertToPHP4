@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# If you need to do this in window just open up the command shell
+# (Start | Run | cmd (or command) ENTER) then change to the mantis directory then
+# execute: ren *.php43 *.php
+
 echo "Converting all php3 files to php files"
 for filename in $(ls *.php3); do
 	echo "renaming $filename  -->  $(echo $filename | sed -e "s/.php3/.php/")"

@@ -15,6 +15,24 @@
 	$s_switch = "Switch";
 	$s_logged_in_as = "Logged in as";
 
+	$s_user_no_longer_exists = "user no longer exists";
+
+	$s_administrator = "administrator";
+
+	### Enum String Values
+
+	$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
+	$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
+	$s_project_view_state_enum_string = "10:public,50:private";
+
+	$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
+	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
+	$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate";
+	$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
+	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
+	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
+	$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+
 	### Email Strings
 	$s_new_account_subject = "Your new user account";
 	$s_new_account_greeting = "Greetings and welcome to the bugtracker.  Here is the information you need to login\n\n";
@@ -73,8 +91,22 @@
 
 	### account_prefs_page.php3
 	$s_default_account_preferences_title = "Default Account Preferences";
+	$s_default_project = "Default Project";
 	$s_advanced_report = "Advanced Report";
 	$s_advanced_view = "Advanced View";
+	$s_advanced_update = "Advanced Update";
+	$s_refresh_delay = "Refresh Delay";
+	$s_redirect_delay = "Redirect Delay";
+	$s_email_on_new = "Email on New";
+	$s_email_on_assigned = "Email on Assigned";
+	$s_email_on_feedback = "Email on Feedback";
+	$s_email_on_resolved = "Email on Resolved";
+	$s_email_on_closed = "Email on Closed";
+	$s_email_on_reopened = "Email on Reopened";
+	$s_email_on_bugnote_added = "Email on Bugnote Added";
+	$s_email_on_status_change = "Email on Status Change";
+	$s_email_on_priority_change = "Email on Priority Change";
+	$s_language = "Language";
 	$s_default_project = "Default Project";
 	$s_update_prefs_button = "Update Prefs";
 	$s_reset_prefs_button = "Reset Prefs";
@@ -132,6 +164,14 @@
 	### bug_delete_page.php3
 	$s_delete_bug_sure_msg = "Are you sure you wish to delete this bug?";
 	$s_delete_bug_button = "Delete Bug";
+
+	### bug_file_add.php3
+	$s_file_upload_msg = "File upload successful";
+
+	### bug_file_upload_inc.php3
+	$s_upload_file = "Upload File";
+	$s_select_file = "Select File";
+	$s_upload_file_button = "Upload File";
 
 	### bug_reopen_page.php3
 	$s_bug_reopened_msg = "Bug has been reopened...";
@@ -232,7 +272,7 @@
 	### $s_bug_notes_title # defined above
 	$s_delete_link = "Delete";
 
-	### choose_project_page.php3
+	### choose_project_page.php3 @@@ remove
 	$s_choose_project_title = "Choose Project";
 	$s_projects = "Projects";
 	$s_select_project_button = "Select Project";
@@ -242,7 +282,7 @@
 
 	### login.php3
 
-	### login_error_page.php3
+	### login_error_page.php3 @@@ REMOVE THIS
 	$s_login_error_msg = "There was an error: your account may be disabled or the username/password you entered is incorrect.";
 	$s_login_title = "Login";
 	### $s_username # defined above
@@ -250,6 +290,9 @@
 	$s_save_login = "Save Login";
 	### $s_choose_project # defined above
 	$s_login_button = "Login";
+
+	# login_seelct_proj_page.php3
+	$s_select_project_button = "Select Project";
 
 	### login_page.php3
 	$s_login_page_info = "Welcome to the bugtracker.";
@@ -267,6 +310,8 @@
 	$s_here = "Here";
 
 	### main_page.php3
+	$s_open_and_assigned_to_me = "Open and assigned to me";
+	$s_open_and_reported_to_me = "Open and reported by me";
 	$s_newer_news_link = "Newer News";
 	$s_older_news_link = "Older News";
 
@@ -285,10 +330,30 @@
 	$s_protected = "Protected";
 	$s_create_user_button = "Create User";
 
+	### manage_page.php3
+	$s_hide_disabled = "Hide Disabled";
+	$s_filter_button = "Filter";
+	$s_create_new_account_link = "Create Account";
+	$s_projects_link = "Projects";
+	$s_documentation_link = "Documentation";
+	$s_new_accounts_title = "New Accounts";
+	$s_1_week_title = "1 Week";
+	$s_never_logged_in_title = "Never Logged In";
+	$s_manage_accounts_title = "Manage Accounts";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_access_level # defined above
+	### $s_enabled # defined above
+	$s_p = "p";
+	$s_date_created = "Date Created";
+	$s_last_visit = "Last Visit";
+	$s_edit_user_link = "Edit User";
+
 	### manage_project_add.php3
 	$s_project_added_msg = "Project has been successfully added...";
 
 	### manage_project_category_add.php3
+	$s_duplicate_category = "ERROR: This is a duplicate category.";
 	$s_category_added_msg = "Category has been successfully added...";
 
 	### manage_project_category_delete.php3
@@ -305,23 +370,6 @@
 
 	### manage_project_category_update.php3
 	$s_category_updated_msg = "Category has been successfully updated...";
-
-	### manage_page.php3
-	$s_create_new_account_link = "Create Account";
-	$s_projects_link = "Projects";
-	$s_documentation_link = "Documentation";
-	$s_new_accounts_title = "New Accounts";
-	$s_1_week_title = "1 Week";
-	$s_never_logged_in_title = "Never Logged In";
-	$s_manage_accounts_title = "Manage Accounts";
-	### $s_username # defined above
-	### $s_email # defined above
-	### $s_access_level # defined above
-	### $s_enabled # defined above
-	$s_p = "p";
-	$s_date_created = "Date Created";
-	$s_last_visit = "Last Visit";
-	$s_edit_user_link = "Edit User";
 
 	### manage_project_delete.php3
 	$s_project_deleted_msg = "Project successfully removed...";
@@ -353,6 +401,8 @@
 	### $s_project_name # defined above;
 	### $s_status # defined above;
 	### $s_view_status # defined above;
+	$s_access_threshold = "Access Threshold";
+	$s_upload_file_path = "Upload File Path";
 	### $s_public # defined above;
 	### $s_private # defined above;
 	### $s_description # defined above;
@@ -369,6 +419,7 @@
 	$s_project_updated_msg = "Project has been successfully updated...";
 
 	### manage_project_version_add.php3
+	$s_duplicate_version = "ERROR: This is a duplicate version.";
 	$s_version_added_msg = "Version has been successfully added...";
 
 	### manage_project_version_delete.php3
@@ -393,6 +444,9 @@
 	### manage_user_delete_page.php3
 	$s_delete_account_sure_msg = "Are you sure you wish to delete this account?";
 	### $s_delete_account_button # defined above
+
+	### manager_prune.php3
+	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
 
 	### manage_user_page.php3
 	$s_edit_user_title = "Edit User";
@@ -458,10 +512,63 @@
 	### news_update.php3
 	$s_news_updated_msg = "News item updated...";
 
-	### project_menu_page.php3
+	### news_view_page.php3
+	$s_back_link = "Back";
+
+	### proj_doc_add.php3
+	$s_file_uploaded_msg = "File upload successful";
+
+	### proj_doc_add_page.php3
+	$s_upload_file_title = "Upload File";
+	$s_title = "Title";
+	### $s_description # defined above
+	$s_select_file = "Select File";
+	$s_upload_file_button = "Upload File";
+
+	### proj_doc_delete.php3
+	$s_project_file_deleted_msg = "Project file deleted";
+
+	### proj_doc_delete_page.php3
+	$s_confirm_file_delete_msg = "Are you sure you wish to delete this file?";
+
+	### proj_doc_edit_page.php3
+	$s_upload_file_title = "Upload File";
+	### $s_title # defined above
+	### $s_description # defined above
+	$s_filename = "Filename";
+	$s_file_update_button = "Update File";
+	$s_file_delete_button = "Delete File";
+
+	### proj_doc_page.php3
+	$s_project_documentation_title = "Project Documentation";
+	$s_user_documentation = "User Documentation";
+	$s_project_documentation = "Project Documentation";
+	$s_add_file = "Add File";
+
+	### proj_doc_update.php3
+	$s_project_document_updated = "Project update successful";
+
+	### proj_user_add.php3
+	$s_project_user_added_msg = "Successfully added user to project";
+
+	### proj_user_delete.php3
+	$s_project_removed_user_msg = "Successfully removed user from project";
+
+	### proj_user_delete_page.php3
+	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
+
+	### proj_user_menu_page.php3
+	$s_add_user_title = "Add user to project";
+	### $s_username # defined above
+	### $s_access_level # defined above
+	$s_add_user_button = "Add User";
 	$s_project_selection_title = "Project Selection";
 	### $s_projects # defined above
 	### $s_select_project_button # defined above
+	$s_remove_link = "remove";
+
+	### proj_user_update.php3
+	$s_updated_user_msg = "Successfully updated user";
 
 	### report_add.php3
 	$s_report_add_error_msg = "ERROR: There was an error in your report.";
@@ -472,6 +579,7 @@
 	$s_must_enter_description = "You must enter a description";
 	#$s_hit_back_msg = "Please hit back and renter the required fields."; ### obsoleted
 	$s_submission_thanks_msg = "Thank you for your submission.";
+	$s_report_more_bugs = "Report More Bugs";
 
 	### report_bug_advanced_page.php3
 	$s_simple_report_link = "Simple Report";
@@ -496,6 +604,7 @@
 	$s_steps_to_reproduce = "Steps To Reproduce";
 	$s_additional_information = "Additional Information";
 	$s_submit_report_button = "Submit Report";
+	$s_check_report_more_bugs = "check to report more bugs";
 
 	### report_bug_page.php3
 	$s_advanced_report_link = "Advanced Report";
@@ -510,7 +619,13 @@
 	### $s_summary # defined above
 	### $s_description # defined above
 	### $s_additional_information # defined above
+	$s_upload_file = "Upload File";
+	$s_report_stay = "Report Stay";
 	### $s_submit_report_button # defined above
+
+	### set_project.php3
+	$s_selected_project = "Selected project";
+	$s_valid_project_msg = "You must choose a valid project";
 
 	### show_source_page.php3
 	$s_show_source_for_msg = "Showing source for";
@@ -521,6 +636,9 @@
 	$s_invalid_email = "IS AN INVALID EMAIL ADDRESS";
 	$s_duplicate_username = "IS A DUPLICATE USERNAME.  CHOOSE ANOTHER USERNAME";
 	$s_account_create_fail = "FAILED TO CREATE USER ACCOUNT";
+	$s_account_added = "Account was successfully added.";
+	$s_password_emailed_msg = "Your password will be emailed to you.";
+	$s_no_reponse_msg = "If you do not respond within a week your account may be deleted.";
 
 	### signup_page.php3
 	$s_signup_info = "Choose your login name and enter a valid email address.  A randomnly generated password will be send to your address.";
@@ -529,10 +647,22 @@
 	### $s_email = ""; # defined above
 	$s_signup_button = "Signup";
 
+	### site_settings_edit_page.php3
+	$s_edit_site_settings_title = "Edit Site Settings";
+	$s_save_settings_button = "Save Settings";
+
+	### site_settings_page.php3
+	$s_site_settings_title = "Site Settings";
+	$s_system_info_link = "System Info";
+	$s_site_settings_link = "Site Settings";
+
+	### site_settings_update.php3
+	$s_site_settings_updated_msg = "Site settings have been updated";
+
 	### summary_page.php3
 	$s_summary_title = "Summary";
 	$s_by_status = "by status";
-	$s_by_date = "by date";
+	$s_by_date = "by date (days)";
 	$s_by_severity = "by severity";
 	$s_by_resolution = "by resolution";
 	$s_by_category = "by category";
@@ -543,6 +673,74 @@
 	$s_average_time = "average time";
 	$s_total_time = "total time";
 	$s_developer_stats = "developer stats (open/resolved/total)";
+
+	### view_all_assign_bug_page.php3
+	### $s_all_bugs_link # defined above
+	### $s_reported_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
+
+	### view_all_bug_page.php3
+	$s_all_bugs_link = "All Bugs";
+	$s_reported_bugs_link = "Reported Bugs";
+	$s_assigned_bugs_link = "Assigned Bugs";
+	$s_unassigned_bugs_link = "Unassigned Bugs";
+	$s_any = "any";
+	$s_show = "Show";
+	$s_changed = "Changed(hrs)";
+	$s_hide_resolved = "Hide Resolved";
+	$s_filter_button = "Filter";
+	$s_viewing_bugs_title = "Viewing Bugs";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	$s_updated = "Updated";
+	### $s_summary # defined above
+
+	### view_all_inc.php
+
+	### view_user_reported_bug_page.php3
+	### $s_all_bugs_link # defined above
+	### $s_assigned_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
+
+	### view_all_unassign_bug_page.php3
+	### $s_all_bugs_link # defined above
+	### $s_reported_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
 
 	### view_bug_advanced_page.php3
 	$s_view_simple_link = "View Simple";
@@ -580,22 +778,7 @@
 	### $s_delete_bug_button # defined above
 	$s_reopen_bug_button = "Reopen Bug";
 
-	### view_bug_all_page.php3
-	$s_all_bugs_link = "All Bugs";
-	$s_reported_bugs_link = "Reported Bugs";
-	$s_assigned_bugs_link = "Assigned Bugs";
-	$s_any = "any";
-	$s_show = "Show";
-	$s_changed = "Changed(hrs)";
-	$s_hide_resolved = "Hide Resolved";
-	$s_filter_button = "Filter";
-	$s_viewing_bugs_title = "Viewing Bugs";
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_status # defined above
-	$s_updated = "Updated";
-	### $s_summary # defined above
+	### view_bug_inc.php
 
 	### view_bug_page.php3
 	$s_view_advanced_link = "View Advanced";
@@ -622,36 +805,4 @@
 	### $s_resolve_bug_button # defined above
 	### $s_delete_bug_button # defined above
 	### $s_reopen_bug_button # defined above
-
-	### view_user_assigned_bug_page.php3
-	### $s_all_bugs_link # defined above
-	### $s_reported_bugs_link # defined above
-	### $s_any # defined above
-	### $s_show # defined above
-	### $s_changed # defined above
-	### $s_hide_resolved # defined above
-	### $s_filter_button # defined above
-	### $s_viewing_bugs_title # defined above
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_status # defined above
-	### $s_updated # defined above
-	### $s_summary # defined above
-
-	### view_user_reported_bug_page.php3
-	### $s_all_bugs_link # defined above
-	### $s_assigned_bugs_link # defined above
-	### $s_any # defined above
-	### $s_show # defined above
-	### $s_changed # defined above
-	### $s_hide_resolved # defined above
-	### $s_filter_button # defined above
-	### $s_viewing_bugs_title # defined above
-	### $s_id # defined above
-	### $s_category # defined above
-	### $s_severity # defined above
-	### $s_status # defined above
-	### $s_updated # defined above
-	### $s_summary # defined above
 ?>

@@ -8,12 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( MANAGER );
 
 	### grab user data and prefix with u_
     $query = "SELECT *
@@ -33,84 +28,85 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
+<? print_manage_menu() ?>
+
 <p>
-<div align=center>
-<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<div align="center">
+<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100%>
-	<form method=post action="<? echo $g_manage_user_update ?>">
-	<input type=hidden name=f_id value="<? echo $u_id ?>">
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table width="100%">
+	<form method="post" action="<? echo $g_manage_user_update ?>">
+	<input type="hidden" name="f_id" value="<? echo $u_id ?>">
 	<tr>
-		<td colspan=3 bgcolor=<? echo $g_table_title_color ?>>
+		<td colspan="3" bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_edit_user_title ?></b>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td>
 			<? echo $s_username ?>:
 		</td>
-		<td colspan=2>
-			<input type=text size=16 maxlength=32 name=f_username value="<? echo $u_username ?>">
+		<td colspan="2">
+			<input type="text" size="16" maxlength="32" name="f_username" value="<? echo $u_username ?>">
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_light ?>>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $s_email ?>:
 		</td>
-		<td colspan=2>
-			<input type=text size=32 maxlength=64 name=f_email value="<? echo $u_email ?>">
+		<td colspan="2">
+			<input type="text" size="32" maxlength="64" name="f_email" value="<? echo $u_email ?>">
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td>
 			<? echo $s_access_level ?>:
 		</td>
-		<td colspan=2>
-			<select name=f_access_level>
-				<? print_table_field_option_list( $g_mantis_user_table, "access_level", $u_access_level ) ?>
+		<td colspan="2">
+			<select name="f_access_level">
+				<? print_enum_string_option_list( $g_access_levels_enum_string, $u_access_level ) ?>
 			</select>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_light ?>>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $s_enabled ?>
 		</td>
-		<td colspan=2>
-			<input type=checkbox name=f_enabled <? if ( $u_enabled=="on" ) echo "CHECKED" ?>>
+		<td colspan="2">
+			<input type="checkbox" name="f_enabled" <? if ( $u_enabled==1 ) echo "CHECKED" ?>>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td>
 			<? echo $s_protected ?>
 		</td>
-		<td colspan=2>
-			<input type=checkbox name=f_protected <? if ( $u_protected=="on" ) echo "CHECKED" ?>>
+		<td colspan="2">
+			<input type="checkbox" name="f_protected" <? if ( $u_protected==1 ) echo "CHECKED" ?>>
 		</td>
 	</tr>
-	<tr align=center>
+	<tr align="center">
 		<td>
-			<input type=submit value="<? echo $s_update_user_button ?>">
+			<input type="submit" value="<? echo $s_update_user_button ?>">
 		</td>
-			</form>
-			<form method=post action="<? echo $g_manage_user_reset ?>">
+		</form>
+		<form method="post" action="<? echo $g_manage_user_reset ?>">
 		<td>
-			<input type=hidden name=f_id value="<? echo $u_id ?>">
-			<input type=hidden name=f_email value="<? echo $u_email ?>">
-			<input type=hidden name=f_protected value="<? echo $u_protected ?>">
-			<input type=submit value="<? echo $s_reset_password_button ?>">
+			<input type="hidden" name="f_id" value="<? echo $u_id ?>">
+			<input type="hidden" name="f_email" value="<? echo $u_email ?>">
+			<input type="hidden" name="f_protected" value="<? echo $u_protected ?>">
+			<input type="submit" value="<? echo $s_reset_password_button ?>">
 		</td>
-			</form>
-			<form method=post action="<? echo $g_manage_user_delete_page ?>">
+		</form>
+		<form method="post" action="<? echo $g_manage_user_delete_page ?>">
 		<td>
-			<input type=hidden name=f_id value="<? echo $u_id ?>">
-			<input type=hidden name=f_protected value="<? echo $u_protected ?>">
-			<input type=submit value="<? echo $s_delete_user_button ?>">
+			<input type="hidden" name="f_id" value="<? echo $u_id ?>">
+			<input type="hidden" name="f_protected" value="<? echo $u_protected ?>">
+			<input type="submit" value="<? echo $s_delete_user_button ?>">
 		</td>
-			</form>
+		</form>
 	</tr>
 	</table>
 	</td>
@@ -119,46 +115,9 @@
 </div>
 
 <p>
-<div align=center>
-<? echo $s_reset_password_msg ?>
+<div align="center">
+	<? echo $s_reset_password_msg ?>
 </div>
-
-<!--
-<p>
-<div align=center>
-<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
-<tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100%>
-	<tr>
-		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Projects</b>
-		</td>
-	</tr>
-		<?
-		$query = "SELECT p.name, u.name
-				FROM
-				WHERE u.id=";
-		$result = db_result( $query );
-		$user_project_count = db_num_rows( $result );
-		for ($i=0;$i<$user_project_count;$i++) {
-			$row = db_fetch_aray( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
-	?>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
-		<td>
-			<? echo $v_name ?>
-		</td>
-		<td>
-			<? echo $v_access_level ?>
-		</td>
-	</tr>
-	<? } ?>
-	</table>
-	</td>
-</tr>
-</table>
-</div>-->
 
 <? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_footer(__FILE__) ?>

@@ -8,6 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( REPORTER );
 
 	### increase vote count and update in table
 	$f_vote++;
@@ -31,24 +32,19 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	### SUCCESS
-	if ( $result ) {
+	if ( $result ) {				### SUCCESS
 		PRINT "$s_vote_added_msg<p>";
+	} else {						### FAILURE
+		print_sql_error( $query );
 	}
-	### FAILURE
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
+
+	print_bracket_link( $g_view_bug_advanced_page."?f_id=".$f_id, $s_proceed );
 ?>
-<p>
-<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

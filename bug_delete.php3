@@ -4,16 +4,16 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Delete the bug, bugtext, bugnote, and bugtexts selected
+	### Redirects to view_all_bug_page.php3
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "developer" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	check_access( DEVELOPER );
+	check_bug_exists( $f_id );
 
 	### Delete the bug entry
 	$query = "DELETE
@@ -65,24 +65,19 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	### SUCCESS
-	if ( $result ) {
+	if ( $result ) {					### SUCCESS
 		PRINT "$s_bug_deleted_msg<p>";
+	} else {							### FAILURE
+		print_sql_error( $query );
 	}
-	### FAILURE
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
+
+	print_bracket_link( $g_view_all_bug_page, $s_proceed );
 ?>
-<p>
-<a href="<? echo $g_view_all_bug_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

@@ -8,12 +8,14 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( $g_allow_signup == "0" ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
+	### Check to see if signup is allowed
+	if ( $g_allow_signup == 0 ) {
+		header( "Status: 302 moved" );
+		header( "Location: $g_login_page" );
 		exit;
 	}
 
+	### Check for a properly formatted email with valid MX record
 	$result = 0;
 	if ( !is_valid_email( $f_email ) ) {
 		PRINT "$f_email $s_invalid_email<p>";
@@ -37,16 +39,18 @@
 	### Create random password
 	$t_password = create_random_password( $f_email );
 
+	### Use a default access level of REPORTER
+	$t_acc = REPORTER;
 	### create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
 	$t_password2 = crypt( $t_password );
     $query = "INSERT
     		INTO $g_mantis_user_table
     		( id, username, email, password, date_created, last_visit,
-    		access_level, enabled, protected, cookie_string )
+    		enabled, protected, access_level, login_count, cookie_string )
 			VALUES
 			( null, '$f_username', '$f_email', '$t_password2', NOW(), NOW(),
-			'reporter', 'on', '', '$t_cookie_string')";
+			1, 0, $t_acc, 0, '$t_cookie_string')";
     $result = db_query( $query );
     if ( !$result ) {
     	PRINT "$s_account_create_fail<p>";
@@ -54,28 +58,15 @@
     	exit;
     }
 
-   	### Use this for MS SQL: SELECT @@IDENTITY AS 'id'
-	$query = "select LAST_INSERT_ID()";
-	$result = db_query( $query );
-	if ( $result ) {
-		$t_user_id = db_result( $result, 0, 0 );
-	}
-
-	### Create preferences
+	### Create preferences for the user
+	$t_user_id = db_insert_id();
     $query = "INSERT
     		INTO $g_mantis_user_pref_table
     		(id, user_id, advanced_report, advanced_view)
     		VALUES
     		(null, '$t_user_id',
-    		'$g_default_advanced_report', '$g_default_advanced_view')";
+    		$g_default_advanced_report, $g_default_advanced_view)";
     $result = db_query($query);
-
-	### Create user profile
-	/*$query = "INSERT INTO $g_mantis_user_profile_table
-    		( id, user_id, platform, os, os_build, description, default_profile )
-    		VALUES
-			( null, '$t_user_id', '', '', '', '', '' )";
-    $result = db_query( $query );*/
 
 	### Send notification email
 	email_signup( $t_user_id, $t_password );
@@ -91,19 +82,16 @@
 <? print_top_page( $g_top_include_page ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	### SUCCESS
-	if ( $result ) {
-		PRINT "$f_username - $f_email was successfully added.<p>Wait a few minutes and check your email for your password.  If you do not respond within a week your account may be deleted.";
+	if ( $result ) {						### SUCCESS
+		PRINT "[$f_username - $f_email] $$s_password_emailed_msg<p>$s_no_reponse_msg<p>";
+	} else {								### FAILURE
+		print_sql_error( $query );
 	}
-	### FAILURE
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-	}
+
+	print_bracket_link( $g_login_page, $s_proceed );
 ?>
-<p>
-<a href="<? echo $g_login_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

@@ -4,14 +4,51 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Update bug data then redirect to the appropriate viewing page
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( UPDATER );
+	check_bug_exists( $f_id );
 
+	### set variable to be valid if necessary
 	if ( !isset( $f_duplicate_id ) ) {
 		$f_duplicate_id = "";
 	}
+
+	### grab the bug_text_id
+    $query = "SELECT bug_text_id
+    		FROM $g_mantis_bug_table
+    		WHERE id='$f_id'";
+    $result = db_query( $query );
+    $t_bug_text_id = db_result( $result, 0, 0 );
+
+	### prevent warnings
+	if (!isset( $f_os )) {
+		$f_os = "";
+	}
+	if (!isset( $f_os_build )) {
+		$f_os_build = "";
+	}
+	if (!isset( $f_platform )) {
+		$f_platform = "";
+	}
+	if (!isset( $f_version )) {
+		$f_version = "";
+	}
+
+	### prepare strings
+	$f_os 						= string_prepare_text( $f_os );
+	$f_os_build 				= string_prepare_text( $f_os_build );
+	$f_platform					= string_prepare_text( $f_platform );
+	$f_version 					= string_prepare_text( $f_version );
+	$f_summary					= string_prepare_text( $f_summary );
+	$f_description 				= string_prepare_textarea( $f_description );
+	$f_steps_to_reproduce 		= string_prepare_textarea( $f_steps_to_reproduce );
+	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
 
 	### Update all fields
     $query = "UPDATE $g_mantis_bug_table
@@ -20,18 +57,23 @@
 				priority='$f_priority', status='$f_status',
 				projection='$f_projection', duplicate_id='$f_duplicate_id',
 				resolution='$f_resolution', handler_id='$f_handler_id',
-				date_submitted='$f_date_submitted',
-				last_updated=NOW(), eta='$f_eta',
-				handler_id='$f_handler_id'
+				eta='$f_eta', summary='$f_summary'
     		WHERE id='$f_id'";
    	$result = db_query($query);
 
+    $query = "UPDATE $g_mantis_bug_text_table
+    		SET description='$f_description',
+				steps_to_reproduce='$f_steps_to_reproduce',
+				additional_information='$f_additional_information'
+    		WHERE id='$t_bug_text_id'";
+   	$result = db_query($query);
+
 	### If we should notify and it's in feedback state then send an email
-   	if ( $f_status=="feedback" ) {
+   	if (( $f_status==FEEDBACK )&&( $f_status!= $f_old_status )) {
    		email_feedback( $f_id );
    	}
 
-   	if ( $f_status=="assigned" ) {
+   	if (( $f_status==ASSIGNED )&&( $f_status!= $f_old_status )) {
    		email_assign( $f_id );
    	}
 ?>
@@ -41,12 +83,20 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_id", $g_wait_time );
+		switch ( $g_show_view ) {
+		case 0:	if ( get_current_user_pref_field( "advanced_view" )==1 ) {
+					$t_redirect_url = $g_view_bug_page;
+				} else {
+					$t_redirect_url = $g_view_bug_advanced_page;
+				}
+				break;
+		case 1:	$t_redirect_url = $g_view_bug_page;
+				break;
+		case 2:	$t_redirect_url = $g_view_bug_advanced_page;
+				break;
 		}
-		else {
-			print_meta_redirect( "$g_view_bug_page?f_id=$f_id", $g_wait_time );
-		}
+		$t_redirect_url = $t_redirect_url."?f_id=".$f_id;
+		print_meta_redirect( $t_redirect_url, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -55,30 +105,18 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	### SUCCESS
-	if ( $result ) {
+	if ( $result ) {					### SUCCESS
 		PRINT "$s_bug_updated_msg<p>";
+	} else {							### FAILURE
+		print_sql_error( $query );
 	}
-	### FAILURE
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
-?>
-<p>
-<?
-	if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-		PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$f_id\">$s_proceed</a>";
-	}
-	else {
-		PRINT "<a href=\"$g_view_bug_page?f_id=$f_id\">$s_proceed</a>";
-	}
+
+	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>
 </div>
 

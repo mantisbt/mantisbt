@@ -8,6 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( MANAGER );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -19,22 +20,20 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
-<hr size=1 width=50%>
+<div align="center">
+	<? print_hr( $g_hr_size, $g_hr_width ) ?>
+	<? echo $s_category_delete_sure_msg ?>
 
-<? echo $s_version_delete_sure ?>
+	<form method="post" action="<? echo $g_manage_project_category_delete ?>">
+		<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
+		<input type="hidden" name="f_category" value="<? echo $f_category ?>">
+		<input type="submit" value="<? echo $s_delete_category_button ?>">
+	</form>
 
-<form method=post action="<? echo $g_manage_project_version_delete ?>">
-	<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
-	<input type=hidden name=f_version value="<? echo $f_version ?>">
-	<input type=submit value="<? echo $s_delete_version_button ?>">
-</form>
-
-<hr size=1 width=50%>
+	<? print_hr( $g_hr_size, $g_hr_width ) ?>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

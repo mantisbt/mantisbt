@@ -4,17 +4,20 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Removes all the cookies and then redirect to $g_logout_redirect_page
+?>
 <? include( "core_API.php" ); ?>
 <?
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-?>
-<?
-	### delete cookies
+	### delete cookies then redirect to $g_logout_redirect_page
 	setcookie( $g_string_cookie );
 	setcookie( $g_project_cookie );
 	setcookie( $g_view_all_cookie );
 	setcookie( $g_view_reported_cookie );
 	setcookie( $g_view_assigned_cookie );
+	setcookie( $g_view_unassigned_cookie );
+
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

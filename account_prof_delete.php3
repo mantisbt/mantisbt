@@ -4,21 +4,20 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### The specified profile is deleted and the user is redirected to
+	### account_prof_menu_page.php3
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	if ( !access_level_check_greater_or_equal( "reporter" ) ) {
-		### need to replace with access error page
-		header( "Location: $g_logout_page" );
-		exit;
-	}
+	$f_user_id = get_current_user_field( "id" );
 
 	### Delete the profile
 	$query = "DELETE
 			FROM $g_mantis_user_profile_table
-    		WHERE id='$f_id'";
+    		WHERE id='$f_id' AND user_id='$f_user_id'";
     $result = db_query( $query );
 ?>
 <? print_html_top() ?>
@@ -27,7 +26,7 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $g_account_profile_manage_page, $g_wait_time );
+		print_meta_redirect( $g_account_profile_menu_page, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -36,21 +35,19 @@
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
 
-<p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	if ( $result ) {
+	if ( $result ) {					### SUCCESS
 		PRINT "$s_profile_deleted_msg<p>";
+	} else {							### FAILURE
+		print_sql_error( $query );
 	}
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-	}
+
+	print_bracket_link( $g_account_profile_menu_page, $s_proceed );
 ?>
-<p>
-<a href="<? echo $g_account_profile_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

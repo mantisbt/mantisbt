@@ -4,15 +4,20 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
+<?
+	### Insert the bugnote into the database then redirect to the bug page
+?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	check_access( REPORTER );
+	check_bug_exists( $f_id );
 
 	### get user information
 	$u_id = get_current_user_field( "id " );
 
-	$f_bugnote_text = string_safe( $f_bugnote_text );
+	$f_bugnote_text = string_prepare_textarea( $f_bugnote_text );
 	### insert bugnote text
 	$query = "INSERT
 			INTO $g_mantis_bugnote_text_table
@@ -22,15 +27,7 @@
 	$result = db_query( $query );
 
 	### retrieve bugnote text id number
-	### NOTE: this is guarranteed to be the correct one.
-	### The value LAST_INSERT_ID is stored on a per connection basis.
-
-	### Use this for MS SQL: SELECT @@IDENTITY AS 'id'
-	$query = "select LAST_INSERT_ID()";
-	$result = db_query( $query );
-	if ( $result ) {
-		$t_bugnote_text_id = db_result( $result, 0, 0 );
-	}
+	$t_bugnote_text_id = db_insert_id();
 
 	### insert bugnote info
 	$query = "INSERT
@@ -53,13 +50,13 @@
    	$result = db_query($query);
 
    	### notify reporter and handler
-   	if ( get_bug_field( "status", $f_id )=="feedback" ) {
-   		if ( get_bug_field( "resolution", $f_id )=="reopened" ) {
+   	if ( get_bug_field( "status", $f_id )==FEEDBACK ) {
+   		if ( get_bug_field( "resolution", $f_id )==REOPENED ) {
    			email_reopen( $f_id );
    		} else {
    			email_feedback( $f_id );
    		}
-   	} else if ( get_bug_field( "status", $f_id )=="resolved" ) {
+   	} else if ( get_bug_field( "status", $f_id )==RESOLVED ) {
    		email_resolved( $f_id );
    	} else {
    		email_bugnote_add( $f_id );
@@ -71,12 +68,20 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_id", $g_wait_time );
+		switch ( $g_show_view ) {
+		case 0:	if ( get_current_user_pref_field( "advanced_view" )==1 ) {
+					$t_redirect_url = $g_view_bug_page;
+				} else {
+					$t_redirect_url = $g_view_bug_advanced_page;
+				}
+				break;
+		case 1:	$t_redirect_url = $g_view_bug_page;
+				break;
+		case 2:	$t_redirect_url = $g_view_bug_advanced_page;
+				break;
 		}
-		else {
-			print_meta_redirect( "$g_view_bug_page?f_id=$f_id", $g_wait_time );
-		}
+		$t_redirect_url = $t_redirect_url."?f_id=".$f_id;
+		print_meta_redirect( $t_redirect_url, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -89,25 +94,15 @@
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
-	if ( $result ) {
+	if ( $result ) {				### SUCCESS
 		PRINT "$s_bugnote_added_msg<p>";
+	} else {						### FAILURE
+		print_sql_error( $query );
 	}
-	### OK!!!
-	else {
-		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
-	}
-?>
-<p>
-<?
-	if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-		PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$f_id\">$s_proceed</a>";
-	}
-	else {
-		PRINT "<a href=\"$g_view_bug_page?f_id=$f_id\">$s_proceed</a>";
-	}
+
+	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>
 </div>
 
