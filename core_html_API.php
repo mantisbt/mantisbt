@@ -236,9 +236,9 @@
 				PRINT '<form method="post" name="form_set_project" action="set_project.php">';
 
 				if ( ON == $g_use_javascript) { // use javascript auto-submit -SC 2002.Jun.21
-                    PRINT '<select name="f_project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+					PRINT '<select name="f_project_id" class="small" onchange="document.forms.form_set_project.submit();">';
 				} else {
-                    PRINT '<select name="f_project_id" class="small">';
+					PRINT '<select name="f_project_id" class="small">';
 				}
 					PRINT "<option value=\"0000000\">$s_all_projects</option>";
 					print_project_option_list( $g_project_cookie_val );
