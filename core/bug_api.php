@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.20 2002-11-19 05:31:08 vboctor Exp $
+	# $Id: bug_api.php,v 1.21 2002-11-24 20:25:11 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -451,6 +451,8 @@
 				WHERE id='$c_bug_id'";
 		db_query($query);
 
+		bug_clear_cache( $p_bug_id );
+
 		# log changes
 		history_log_event_direct( $p_bug_id, 'project_id',
 									$t_old_data->project_id, $p_bug_data->project_id );
@@ -506,6 +508,8 @@
 						"additional_information='$c_bug_data->additional_information' ".
 						"WHERE id='$t_bug_text_id'";
 			db_query($query);
+
+			bug_text_clear_cache( $p_bug_id );
 
 			if ( $t_old_data->description != $p_bug_data->description ) {
 				history_log_event_special( $p_bug_id, DESCRIPTION_UPDATED );
