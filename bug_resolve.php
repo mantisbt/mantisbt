@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.16 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-16 10:16:25 $
+	# $Revision: 1.17 $
+	# $Author: vboctor $
+	# $Date: 2002-08-18 13:56:07 $
 	#
-	# $Id: bug_resolve.php,v 1.16 2002-08-16 10:16:25 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.17 2002-08-18 13:56:07 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,6 +28,11 @@
 	check_varset( $f_bugnote_text, '' );
 	check_varset( $f_resolution, FIXED );
 	check_varset( $f_duplicate_id, '' );
+	
+	# make sure it is not market as duplicate to itself
+	if ( $f_duplicate_id == $f_id ) {
+		print_mantis_error( ERROR_GENERIC );
+	}
 
 	#clean variables
 	$c_resolution	= (integer)$f_resolution;
