@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.24 2003-02-19 01:37:21 vboctor Exp $
+	# $Id: file_api.php,v 1.25 2003-02-20 18:42:27 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -104,6 +104,37 @@
 
 		# db_query() errors on failure so:
 		return true;
+	}
+	# --------------------
+	function file_delete_project_files( $p_project_id ) {
+		$t_project_file_table = config_get( 'mantis_project_file_table' );
+		$t_method = config_get( 'file_upload_method' );
+
+		# Delete the file physically (if stored via DISK or FTP)
+		if ( ( DISK == $t_method ) || ( FTP == $t_method ) ) {
+			# Delete files from disk
+			$query = "SELECT diskfile, filename FROM $t_project_file_table"
+				. " WHERE project_id=$p_project_id";
+			$result = db_query( $query );
+
+			$file_count = db_num_rows( $result );
+
+			for ( $i = 0 ; $i < $file_count ; $i++ ) {
+				$row = db_fetch_array( $result );
+
+				file_delete_local ( $row['diskfile'] );
+
+				if ( FTP == $t_method ) {
+					$ftp = file_ftp_connect();
+					file_ftp_delete ( $ftp, $row['filename'] );
+					file_ftp_disconnect( $ftp );
+				}
+			}
+		}
+
+		# Delete the corresponding db records
+		$query = "DELETE FROM $t_project_file_table WHERE project_id=$p_project_id";
+		$result = db_query($query);
 	}
 	# --------------------
 	# Delete all cached files that are older than configured number of days.

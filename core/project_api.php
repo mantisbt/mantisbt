@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.38 2003-02-19 10:20:06 jfitzell Exp $
+	# $Id: project_api.php,v 1.39 2003-02-20 18:42:27 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,6 +14,7 @@
 	require_once( $t_core_dir . 'category_api.php' );
 	require_once( $t_core_dir . 'version_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
+	require_once( $t_core_dir . 'file_api.php' );
 
 	###########################################################################
 	# Project API
@@ -593,6 +594,6 @@
 	# --------------------
 	# Delete all files associated with a project
 	function project_delete_all_files( $p_project_id ) {
-		# @@@ to be written
+		file_delete_project_files( $p_project_id );
 	}
 ?>
