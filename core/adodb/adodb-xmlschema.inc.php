@@ -10,9 +10,9 @@
  * build a database on any ADOdb-supported platform using a simple
  * XML schema.
  *
- * Last Editor: $Author: jlatour $
+ * Last Editor: $Author: thraxisp $
  * @author Richard Tango-Lowy & Dan Cech
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *
  * @package axmls
  * @tutorial getting_started.pkg
@@ -1194,7 +1194,7 @@ class dbQuerySet extends dbObject {
 * @tutorial getting_started.pkg
 *
 * @author Richard Tango-Lowy & Dan Cech
-* @version $Revision: 1.4 $
+* @version $Revision: 1.5 $
 *
 * @package axmls
 */
@@ -1917,7 +1917,7 @@ class adoSchema {
 				$schema .= '	<table name="' . $table . '">' . "\n";
 				
 				// grab details from database
-				$rs = $this->db->Execute( 'SELECT * FROM ' . $table . ' WHERE -1' );
+				$rs = $this->db->Execute( 'SELECT * FROM ' . $table . ' WHERE 1=1' );
 				$fields = $this->db->MetaColumns( $table );
 				$indexes = $this->db->MetaIndexes( $table );
 				
@@ -1983,7 +1983,7 @@ class adoSchema {
 						
 						while( $row = $rs->FetchRow() ) {
 							foreach( $row as $key => $val ) {
-								$row[$key] = htmlentities($row);
+								$row[$key] = htmlentities($val);
 							}
 							
 							$schema .= '			<row><f>' . implode( '</f><f>', $row ) . '</f></row>' . "\n";

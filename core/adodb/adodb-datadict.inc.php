@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+  V4.60 24 Jan 2005  (c) 2000-2005 John Lim (jlim@natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -706,15 +706,51 @@ class ADODB_DataDict {
 	*/
 	function ChangeTableSQL($tablename, $flds, $tableoptions = false)
 	{
+	global $ADODB_FETCH_MODE;
+	
+		$save = $ADODB_FETCH_MODE;
+		$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
+		if ($this->connection->fetchMode !== false) $savem = $this->connection->SetFetchMode(false);
+		
 		// check table exists
 		$cols = &$this->MetaColumns($tablename);
+		
+		if (isset($savem)) $this->connection->SetFetchMode($savem);
+		$ADODB_FETCH_MODE = $save;
+		
 		if ( empty($cols)) { 
 			return $this->CreateTableSQL($tablename, $flds, $tableoptions);
 		}
 		
+		if (is_array($flds)) {
+		// Cycle through the update fields, comparing
+		// existing fields to fields to update.
+		// if the Metatype and size is exactly the
+		// same, ignore - by Mark Newham
+			$holdflds = array();
+			foreach($flds as $k=>$v) {
+				if ( isset($cols[$k]) && is_object($cols[$k]) ) {
+					$c = $cols[$k];
+					$ml = $c->max_length;
+					$mt = &$this->MetaType($c->type,$ml);
+					if ($ml == -1) $ml = '';
+					if ($mt == 'X') $ml = $v['SIZE'];
+					if (($mt != $v['TYPE']) ||  $ml != $v['SIZE']) {
+						$holdflds[$k] = $v;
+					}
+				} else {
+					$holdflds[$k] = $v;
+				}		
+			}
+			$flds = $holdflds;
+		}
+	
+
 		// already exists, alter table instead
 		list($lines,$pkey) = $this->_GenFields($flds);
 		$alter = 'ALTER TABLE ' . $this->TableName($tablename);
+		$sql = array();
+
 		foreach ( $lines as $id => $v ) {
 			if ( isset($cols[$id]) && is_object($cols[$id]) ) {
 			

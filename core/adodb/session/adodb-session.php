@@ -2,7 +2,7 @@
 
 
 /*
-V4.01 23 Oct 2003  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+V4.01 23 Oct 2003  (c) 2000-2005 John Lim (jlim@natsoft.com.my). All rights reserved.
          Contributed by Ross Smith (adodb@netebb.com). 
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
@@ -32,6 +32,26 @@ if (!defined('_ADODB_LAYER')) {
 if (defined('ADODB_SESSION')) return 1;
 
 define('ADODB_SESSION', dirname(__FILE__));
+
+
+/* 
+	Unserialize session data manually. See http://phplens.com/lens/lensforum/msgs.php?id=9821 
+	
+	From Kerr Schere, to unserialize session data stored via ADOdb. 
+	1. Pull the session data from the db and loop through it. 
+	2. Inside the loop, you will need to urldecode the data column. 
+	3. After urldecode, run the serialized string through this function:
+
+*/
+function adodb_unserialize( $serialized_string ) 
+{
+	$variables = array( );
+	$a = preg_split( "/(\w+)\|/", $serialized_string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
+	for( $i = 0; $i < count( $a ); $i = $i+2 ) {
+		$variables[$a[$i]] = unserialize( $a[$i+1] );
+	}
+	return( $variables );
+}
 
 /*!
 	\static
@@ -551,7 +571,6 @@ class ADODB_Session {
 
 		$expiry = time() + $lifetime;
 
-		$qkey = $conn->quote($key);
 		$binary = $conn->dataProvider === 'mysql' ? '/*! BINARY */' : '';
 
 		// crc32 optimization since adodb 2.1
@@ -560,8 +579,8 @@ class ADODB_Session {
 			if ($debug) {
 				echo '<p>Session: Only updating date - crc32 not changed</p>';
 			}
-			$sql = "UPDATE $table SET expiry = $expiry WHERE $binary sesskey = $qkey AND expiry >= " . time();
-			$rs =& $conn->Execute($sql);
+			$sql = "UPDATE $table SET expiry = ".$conn->Param('0')." WHERE $binary sesskey = ".$conn->Param('1')." AND expiry >= ".$conn->Param('2');
+			$rs =& $conn->Execute($sql,array($expiry,$key,time()));
 			ADODB_Session::_dumprs($rs);
 			if ($rs) {
 				$rs->Close();

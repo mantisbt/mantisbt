@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+  V4.60 24 Jan 2005  (c) 2000-2005 John Lim (jlim@natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -30,7 +30,7 @@ class ADODB2_mssql extends ADODB_DataDict {
 		
 		$len = -1; // mysql max_length is not accurate
 		switch (strtoupper($t)) {
-
+		case 'R':
 		case 'INT': 
 		case 'INTEGER': return  'I';
 		case 'BIT':
@@ -47,6 +47,7 @@ class ADODB2_mssql extends ADODB_DataDict {
 	function ActualType($meta)
 	{
 		switch(strtoupper($meta)) {
+
 		case 'C': return 'VARCHAR';
 		case 'XL':
 		case 'X': return 'TEXT';
@@ -60,6 +61,7 @@ class ADODB2_mssql extends ADODB_DataDict {
 		case 'T': return 'DATETIME';
 		case 'L': return 'BIT';
 		
+		case 'R':		
 		case 'I': return 'INT'; 
 		case 'I1': return 'TINYINT';
 		case 'I2': return 'SMALLINT';
@@ -241,12 +243,9 @@ CREATE TABLE
 		case 'BIGINT':
 			return $ftype;
 		}
-		if (strlen($fsize) && $ty != 'X' && $ty != 'B' && strpos($ftype,'(') === false) {
-			$ftype .= "(".$fsize;
-			if (strlen($fprec)) $ftype .= ",".$fprec;
-			$ftype .= ')';
-		}
-		return $ftype;
+    	if ($ty == 'T') return $ftype;
+    	return parent::_GetSize($ftype, $ty, $fsize, $fprec);    
+
 	}
 }
 ?>

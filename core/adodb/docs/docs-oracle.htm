@@ -14,6 +14,7 @@ pre {
   font-size: 12px;
   border: 1px solid #ddd;
 }
+.style1 {color: #660000}
 </style>
 <title>ADOdb with PHP and Oracle</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -264,7 +265,22 @@ if (!$ok) return LogError($db-&gt;ErrorMsg());
 $db->UpdateClob('aTable', 'aclob', $clobValue, 'id=aSequence.currVal');
 </pre>
 <p>Note that LogError( ) is a user-defined function, and not part of ADOdb.
-<p>&nbsp;
+<p>Inserting LOBs is more complicated. Since ADOdb 4.55, we allow you to do this
+  (assuming that the <em>photo</em> field is a BLOB, and we want to store $blob_data into
+  this field, and the primary key is the <em>id</em> field):
+<pre>
+	$sql = <span class="style1">"INSERT INTO photos ( ID, photo) ".
+			"VALUES ( :id, empty_blob() )".
+			" RETURNING photo INTO :xx"</span>;
+
+ 		$stmt = $db->PrepareSP($sql);
+		$db->InParameter($stmt, $<strong>id</strong>, <span class="style1">'id'</span>);
+		$blob = $db->InParameter($stmt, $<strong>blob_data</strong>, <span class="style1">'xx'</span>,-1, OCI_B_BLOB);
+		$db->StartTrans();
+		$ok = $db->Execute($stmt);
+		$db->CompleteTrans();
+</pre> 
+<p>
 <h3>5. REF CURSORs</h3>
 <p>Oracle recordsets can be passed around as variables called REF Cursors. For example, in PL/SQL, we could define a function <i>open_tab</i> that returns a REF CURSOR in the first parameter:</p>
 <pre>
@@ -357,7 +373,7 @@ $db->Connect($tns, $user, $pwd);
 $db-&gt;Execute($sql);
 </pre>
 <p>If you are not concerned about date portability and do not use ADOdb's portability layer, you can use your preferred date format instead.
-<p>&nbsp;
+<p>
 <h3>8. Database Portability Layer</h3>
 <p>ADOdb provides the following functions for portably generating SQL functions 
   as strings to be merged into your SQL statements:</p>

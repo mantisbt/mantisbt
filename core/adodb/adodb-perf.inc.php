@@ -1,6 +1,6 @@
 <?php
 /* 
-V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+V4.60 24 Jan 2005  (c) 2000-2005 John Lim (jlim@natsoft.com.my). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. See License.txt. 
@@ -382,6 +382,7 @@ Committed_AS:   348732 kB
 			
 			$save = $ADODB_FETCH_MODE;
 			$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
+			if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
 			//$this->conn->debug=1;
 			$rs =& $this->conn->SelectLimit(
 			"select avg(timer) as avg_timer,$sql1,count(*),max(timer) as max_timer,min(timer) as min_timer
@@ -390,6 +391,7 @@ Committed_AS:   348732 kB
 				and (tracer is null or tracer not like 'ERROR:%')
 				group by sql1
 				order by 1 desc",$numsql);
+			if (isset($savem)) $this->conn->SetFetchMode($savem);
 			$ADODB_FETCH_MODE = $save;
 			$this->conn->fnExecute = $saveE;
 			
@@ -459,6 +461,8 @@ Committed_AS:   348732 kB
 			$sql1 = $this->sql1;
 			$save = $ADODB_FETCH_MODE;
 			$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
+			if ($this->conn->fetchMode !== false) $savem = $this->conn->SetFetchMode(false);
+			
 			$rs =& $this->conn->SelectLimit(
 			"select sum(timer) as total,$sql1,count(*),max(timer) as max_timer,min(timer) as min_timer
 				from $perf_table
@@ -466,7 +470,7 @@ Committed_AS:   348732 kB
 				and (tracer is null or tracer not like 'ERROR:%')
 				group by sql1
 				order by 1 desc",$numsql);
-			
+			if (isset($savem)) $this->conn->SetFetchMode($savem);
 			$this->conn->fnExecute = $saveE;
 			$ADODB_FETCH_MODE = $save;
 			if (!$rs) return "<p>$this->helpurl. ".$this->conn->ErrorMsg()."</p>";
@@ -703,7 +707,7 @@ Committed_AS:   348732 kB
 			echo date('H:i:s').'  '.$osval."$hits  $sess $reads $writes\n";
 			flush();
 			
-			if (connection_aborted()|| connection_timeout()) return;
+			if (connection_aborted()) return;
 			
 			sleep($secs);
 			$arro = $arr;
