@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.104 2004-06-28 10:13:23 vboctor Exp $
+	# $Id: html_api.php,v 1.105 2004-06-29 08:23:05 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -64,6 +64,7 @@
 		html_content_type();
 		include( config_get( 'meta_include_file' ) );
 		html_title( $p_page_title );
+		html_head_javascript();
 	}
 
 	# --------------------
@@ -197,6 +198,15 @@
 		echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\" />\n";
 
 		return true;
+	}
+
+	# ---------------------
+	# (6a) Javascript...
+	function html_head_javascript() {
+		if ( ON == config_get( 'use_javascript' ) ) {
+			echo "\t" . '<script type="text/JavaScript" src="javascript/common.js">';
+			echo '</script>' . "\n";
+		}
 	}
 
 	# --------------------

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.15 2004-05-09 02:24:18 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.16 2004-06-29 08:23:05 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -43,6 +43,20 @@
 
 <?php # Bugnotes BEGIN ?>
 <a name="bugnotes" id="bugnotes" /><br />
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<div id="bugnotes_closed" style="display: none;">
+<table class="width100" cellspacing="1">
+	<td class="form-title" colspan="2">
+		<a href="" onClick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
+		><img src="images/plus.png" alt="+" /></a>
+		<?php echo lang_get( 'bug_notes_title' ) ?>
+	</td>
+</table>
+</div>
+<?php } ?>
+
+<div id="bugnotes_open">
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
@@ -56,6 +70,10 @@
 <?php } else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+		<a href="" onClick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
+		><img src="images/minus.png" alt="-" /></a>
+<?php } ?>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
 	</td>
 </tr>
@@ -126,4 +144,12 @@
 	} # end else
 ?>
 </table>
+</div>
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<script type="text/JavaScript">
+	SetDiv( "bugnotes", g_div_bugnotes );
+</script>
+<?php } ?>
+
 <?php # Bugnotes END ?>

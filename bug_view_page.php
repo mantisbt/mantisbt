@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.57 2004-06-20 22:05:03 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.58 2004-06-29 08:23:05 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -426,7 +426,6 @@
 	include( $t_mantis_dir . 'bugnote_view_inc.php' );
 ?>
 	<!-- Jump to Bugnote add form -->
-	<br />
 <?php
 	if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
 		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) )

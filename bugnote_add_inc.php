@@ -6,20 +6,39 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.20 2004-05-17 11:39:06 vboctor Exp $
+	# $Id: bugnote_add_inc.php,v 1.21 2004-06-29 08:23:05 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
 		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
-<br />
-<a name="addbugnote">
-<form method="post" action="bugnote_add.php">
+<a name="addbugnote"></a> <br />
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<div id="bugnote_add_closed" style="display: none;">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+		<a href="" onClick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
+		><img src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
+	</td>
+</tr>
+</table>
+</div>
+<?php } ?>
+
+<div id="bugnote_add_open">
+<form method="post" action="bugnote_add.php">
+<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2">
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+		<a href="" onClick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
+		><img src="images/minus.png" alt="-" /></a>
+		<?php echo lang_get( 'add_bugnote_title' ) ?>
+<?php } ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -57,5 +76,13 @@
 </tr>
 </table>
 </form>
+</div>
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<script type="text/JavaScript">
+	SetDiv( "bugnote_add", g_div_bugnote_add );
+</script>
+<?php } ?>
+
 <?php # Bugnote Add Form END ?>
 <?php } ?>

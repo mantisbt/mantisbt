@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.21 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: history_inc.php,v 1.22 2004-06-29 08:23:05 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,12 +21,32 @@
 ?>
 
 <a name="history" id="history" /><br />
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<div id="history_closed" style="display: none;">
+<table class="width100" cellspacing="0">
+<tr>
+	<td class="form-title" colspan="4">
+		<a href="" onClick="ToggleDiv( 'history', g_div_history ); return false;"
+		><img src="images/plus.png" alt="+" /></a>
+		<?php echo lang_get( 'bug_history' ) ?>
+	</td>
+</tr>
+</table>
+</div>
+<?php } ?>
+
+<div id="history_open">
 <?php
 	$t_history = history_get_events_array( $f_bug_id );
 ?>
 <table class="width100" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="4">
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+		<a href="" onClick="ToggleDiv( 'history', g_div_history ); return false;"
+		><img src="images/minus.png" alt="-" /></a>
+<?php } ?>
 		<?php echo lang_get( 'bug_history' ) ?>
 	</td>
 </tr>
@@ -65,3 +85,10 @@
 	} # end for loop
 ?>
 </table>
+</div>
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<script type="text/JavaScript">
+	SetDiv( "history", g_div_history );
+</script>
+<?php } ?>

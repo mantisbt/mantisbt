@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.9 2004-05-28 00:21:01 int2str Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.10 2004-06-29 08:23:05 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,25 +28,62 @@
 	$num_users = db_num_rows($result);
 
 	echo '<a name="monitors" id="monitors" /><br />';
- 	echo '<table class="width100" cellspacing="1">';
- 	if ( 0 == $num_users ) {
-		echo '<tr><td class="center">';
- 	 	echo lang_get( 'no_users_monitoring_bug' );
-		echo '</td></tr>';
-	} else {
-		echo '<tr><td class="form-title" colspan="2">' . lang_get( 'users_monitoring_bug' ) . '</td></tr>';
-		echo '<tr class="row-1">';
-		echo '<td class="category" width="15%">' . lang_get( 'monitoring_user_list' ) . '</td>';
-		echo '<td>';
+?>
 
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<div id="monitoring_closed" style="display: none;">
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2">
+		<a href="" onClick="ToggleDiv( 'monitoring', g_div_monitoring ); return false;"
+		><img src="images/plus.png" alt="+" /></a>
+		<?php echo lang_get( 'users_monitoring_bug' ); ?>
+	</td>
+</tr>
+</table>
+</div>
+<?php } ?>
+
+<div id="monitoring_open">
+<table class="width100" cellspacing="1">
+<?php 	if ( 0 == $num_users ) { ?>
+<tr>
+	<td class="center">
+		<?php echo lang_get( 'no_users_monitoring_bug' ); ?>
+	</td>
+</tr>
+<?php	} else { ?>
+<tr>
+	<td class="form-title" colspan="2">
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+		<a href="" onClick="ToggleDiv( 'monitoring', g_div_monitoring ); return false;"
+		><img src="images/minus.png" alt="-" /></a>
+<?php } ?>
+		<?php echo lang_get( 'users_monitoring_bug' ); ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category" width="15%">
+		<?php echo lang_get( 'monitoring_user_list' ); ?>
+	</td>
+	<td>
+<?php
  		for ( $i = 0; $i < $num_users; $i++ ) {
  			$row = db_fetch_array( $result );
 			echo ($i > 0) ? ', ' : '';
 			echo print_user( $row['user_id'] );
  		}
-
-		echo '</td></tr>';
- 	}
- 	echo '</table>';
 ?>
+	</td>
+</tr>
+<?php 	} ?>
+</table>
+</div>
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<script type="text/javascript">
+	SetDiv( "monitoring", g_div_monitoring );
+</script>
+<?php } ?>
+
 <?php } # show monitor list ?>
