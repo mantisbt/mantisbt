@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.47 2004-03-15 21:47:43 vboctor Exp $
+	# $Id: project_api.php,v 1.48 2004-04-08 03:31:37 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'category_api.php' );
 	require_once( $t_core_dir . 'version_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
@@ -50,8 +50,8 @@
 
 		$t_project_table = config_get( 'mantis_project_table' );
 
-		$query = "SELECT * 
-				  FROM $t_project_table 
+		$query = "SELECT *
+				  FROM $t_project_table
 				  WHERE id='$c_project_id'";
 		$result = db_query( $query );
 
@@ -76,11 +76,11 @@
 	# Cache all project rows and return an array of them
 	function project_cache_all() {
 		global $g_cache_project, $g_cache_project_all;
-		
+
 		if ( ! $g_cache_project_all ) {
 			$t_project_table = config_get( 'mantis_project_table' );
 
-			$query = "SELECT * 
+			$query = "SELECT *
 					  FROM $t_project_table";
 			$result = db_query( $query );
 
@@ -102,7 +102,7 @@
 	# Clear the project cache (or just the given id if specified)
 	function project_clear_cache( $p_project_id = null ) {
 		global $g_cache_project, $g_cache_project_missing, $g_cache_project_all;
-		
+
 		if ( null === $p_project_id ) {
 			$g_cache_project = array();
 			$g_cache_project_missing = array();
@@ -152,8 +152,8 @@
 
 		$t_project_table = config_get( 'mantis_project_table' );
 
-		$query ="SELECT COUNT(*) 
-				 FROM $t_project_table 
+		$query ="SELECT COUNT(*)
+				 FROM $t_project_table
 				 WHERE name='$c_name'";
 		$result = db_query( $query );
 
@@ -266,7 +266,7 @@
 		$query = "DELETE
 				FROM $t_project_table
 				WHERE id='$c_project_id'";
-		
+
 		db_query( $query );
 
 		project_clear_cache( $p_project_id );
@@ -462,7 +462,7 @@
 			$t_users[$row['id']] = $row;
 		}
 
-		// Get the project overrides
+		# Get the project overrides
 		$query = "SELECT u.id, u.username, l.access_level
 					FROM $t_project_user_list_table l, $t_user_table u
 					WHERE l.user_id = u.id
@@ -506,7 +506,7 @@
 				    ( project_id, user_id, access_level )
 				  VALUES
 				    ( '$c_project_id', '$c_user_id', '$c_access_level')";
-		
+
 		db_query( $query );
 
 		# db_query errors on failure so:
@@ -536,7 +536,7 @@
 
 	# --------------------
 	# update or add the entry as appropriate
-	#  This function involves one more db query than project_update_user_acces() 
+	#  This function involves one more db query than project_update_user_acces()
 	#  or project_add_user()
 	function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
 		if ( project_includes_user( $p_project_id, $p_user_id ) ) {

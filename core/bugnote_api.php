@@ -6,16 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.22 2004-03-16 11:29:55 yarick123 Exp $
+	# $Id: bugnote_api.php,v 1.23 2004-04-08 03:31:36 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'email_api.php' );
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
-	
+
 	###########################################################################
 	# Bugnote API
 	###########################################################################
@@ -64,7 +64,7 @@
 			trigger_error( ERROR_BUGNOTE_NOT_FOUND, ERROR );
 		}
 	}
-	
+
 	# --------------------
 	# Check if the given user is the reporter of the bugnote
 	# return true if the user is the reporter, false otherwise
@@ -74,7 +74,7 @@
 		} else {
 			return false;
 		}
-	}	
+	}
 
 	#===================================
 	# Creation / Deletion / Updating
@@ -150,7 +150,7 @@
 				FROM $t_bugnote_table
 				WHERE id='$c_bugnote_id'";
 		db_query( $query );
-		
+
 		# Remove the bugnote text
 		$query = "DELETE
 				FROM $t_bugnote_text_table
@@ -252,7 +252,7 @@
 
 		foreach ( $t_all_bugnotes as $t_note_index => $t_bugnote ) {
 			if ( $t_private_bugnote_visible || VS_PUBLIC == $t_bugnote->view_state ) {
-				$t_bugnotes[ $t_note_index ] = $t_bugnote;
+				$t_bugnotes[$t_note_index] = $t_bugnote;
 			}
 		}
 		return $t_bugnotes;
@@ -271,7 +271,7 @@
 			$g_cache_bugnotes = array();
 		}
 
-		if ( ! isset( $g_cache_bugnotes[ $p_bug_id ] ) )  {
+		if ( ! isset( $g_cache_bugnotes[$p_bug_id] ) )  {
 			$c_bug_id = db_prepare_int( $p_bug_id );
 
 			$t_bugnote_table = config_get( 'mantis_bugnote_table' );
@@ -298,16 +298,16 @@
 
 				$t_bugnotes[] = $t_bugnote;
 			}
-			$g_cache_bugnotes[ $p_bug_id ] = $t_bugnotes;
+			$g_cache_bugnotes[$p_bug_id] = $t_bugnotes;
 		}
 
-		return $g_cache_bugnotes[ $p_bug_id ];
+		return $g_cache_bugnotes[$p_bug_id];
 	}
 
 	#===================================
 	# Data Modification
 	#===================================
-	
+
 	# --------------------
 	# Update the last_modified field of the bugnote
 	function bugnote_date_update( $p_bugnote_id ) {

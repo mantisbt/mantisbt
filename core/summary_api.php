@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.25 2004-04-08 02:42:27 prescience Exp $
+	# $Id: summary_api.php,v 1.26 2004-04-08 03:31:37 prescience Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -593,15 +593,15 @@
 		$t_handler_res_arr = array();
 		$t_arr = db_fetch_array( $result );
 		while ( $t_arr ) {
-			if ( ! isset( $t_handler_res_arr[ $t_arr[ 'handler_id' ] ] ) ) {
-				$t_handler_res_arr[ $t_arr[ 'handler_id' ] ] = array();
-				$t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ 'total' ] = 0;
+			if ( ! isset( $t_handler_res_arr[$t_arr['handler_id']] ) ) {
+				$t_handler_res_arr[$t_arr['handler_id']] = array();
+				$t_handler_res_arr[$t_arr['handler_id']]['total'] = 0;
 			}
-			if ( ! isset( $t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ $t_arr[ 'resolution' ] ] ) ) {
-				$t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ $t_arr[ 'resolution' ] ] = 0;
+			if ( ! isset( $t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] ) ) {
+				$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] = 0;
 			}
-			$t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ $t_arr[ 'resolution' ] ]++;
-			$t_handler_res_arr[ $t_arr[ 'handler_id' ] ][ 'total' ]++;
+			$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']]++;
+			$t_handler_res_arr[$t_arr['handler_id']]['total']++;
 
 			$t_arr = db_fetch_array( $result );
 		}
@@ -613,7 +613,7 @@
 			# prevent divide by zeroes, showing developers not on this project, and showing
 			# users that aren't actually developers...
 
-			if ( $t_arr2[ 'total' ] > 0 ) {
+			if ( $t_arr2['total'] > 0 ) {
 				print '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
 				$t_row_count++;
 				print '<td>';
@@ -634,7 +634,7 @@
 					print '<td>';
 					if ( 0 < $res_bug_count ) {
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;handler_id=' . $t_handler_id;
-						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[ $j ] . '">';
+						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[$j] . '">';
 						print $t_bug_link . $res_bug_count . '</a>';
 					} else {
 						print $res_bug_count;
@@ -699,15 +699,15 @@
 		$t_reporter_bugcount_arr = array();
 		$t_arr = db_fetch_array( $result );
 		while ( $t_arr ) {
-			if ( ! isset( $t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ] ) ) {
-				$t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ] = array();
-				$t_reporter_bugcount_arr[ $t_arr[ 'reporter_id' ] ] = 0;
+			if ( ! isset( $t_reporter_res_arr[$t_arr['reporter_id']] ) ) {
+				$t_reporter_res_arr[$t_arr['reporter_id']] = array();
+				$t_reporter_bugcount_arr[$t_arr['reporter_id']] = 0;
 			}
-			if ( ! isset( $t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'resolution' ] ] ) ) {
-				$t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'resolution' ] ] = 0;
+			if ( ! isset( $t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] ) ) {
+				$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] = 0;
 			}
-			$t_reporter_res_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'resolution' ] ]++;
-			$t_reporter_bugcount_arr[ $t_arr[ 'reporter_id' ] ]++;
+			$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']]++;
+			$t_reporter_bugcount_arr[$t_arr['reporter_id']]++;
 
 			$t_arr = db_fetch_array( $result );
 		}
@@ -727,7 +727,7 @@
 			# prevent divide by zeroes, showing reporters not on this project, and showing
 			# users that aren't actually reporters...
 			if ( $t_total_user_bugs > 0 ) {
-				$t_arr2 = $t_reporter_res_arr[ $t_reporter_id ];
+				$t_arr2 = $t_reporter_res_arr[$t_reporter_id];
 
 				print '<tr align="center" ' . helper_alternate_class( $t_row_count ) . '>';
 				$t_row_count++;
@@ -742,14 +742,14 @@
 				for ( $j = 0; $j < $enum_res_count; $j++ ) {
 					$res_bug_count = 0;
 
-					if ( isset( $t_arr2[ $c_res_s[ $j ] ] ) ) {
-						$res_bug_count = $t_arr2[ $c_res_s[ $j ] ];
+					if ( isset( $t_arr2[$c_res_s[$j]] ) ) {
+						$res_bug_count = $t_arr2[$c_res_s[$j]];
 					}
 
 					print '<td>';
 					if ( 0 < $res_bug_count ) {
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;reporter_id=' . $t_reporter_id;
-						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[ $j ] . '">';
+						$t_bug_link = $t_bug_link . '&amp;show_resolution=' .  $c_res_s[$j] . '">';
 						print $t_bug_link . $res_bug_count . '</a>';
 					} else {
 						print $res_bug_count;
@@ -834,20 +834,20 @@
 		$t_reporter_bugcount_arr = array();
 		$t_arr = db_fetch_array( $result );
 		while ( $t_arr ) {
-			if ( ! isset( $t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ] ) ) {
-				$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ] = array();
-				$t_reporter_bugcount_arr[ $t_arr[ 'reporter_id' ] ] = 0;
+			if ( ! isset( $t_reporter_ressev_arr[$t_arr['reporter_id']] ) ) {
+				$t_reporter_ressev_arr[$t_arr['reporter_id']] = array();
+				$t_reporter_bugcount_arr[$t_arr['reporter_id']] = 0;
 			}
-			if ( ! isset( $t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ] ) ) {
-				$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ] = array();
-				$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ 'total' ] = 0;
+			if ( ! isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']] ) ) {
+				$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']] = array();
+				$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']]['total'] = 0;
 			}
-			if ( ! isset( $t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ $t_arr[ 'resolution' ] ] ) ) {
-				$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ $t_arr[ 'resolution' ] ] = 0;
+			if ( ! isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] ) ) {
+				$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] = 0;
 			}
-			$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ $t_arr[ 'resolution' ] ]++;
-			$t_reporter_ressev_arr[ $t_arr[ 'reporter_id' ] ][ $t_arr[ 'severity' ] ][ 'total' ]++;
-			$t_reporter_bugcount_arr[ $t_arr[ 'reporter_id' ] ]++;
+			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']]++;
+			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']]['total']++;
+			$t_reporter_bugcount_arr[$t_arr['reporter_id']]++;
 
 			$t_arr = db_fetch_array( $result );
 		}
@@ -868,7 +868,7 @@
 			# prevent divide by zeroes, showing reporters not on this project, and showing
 			# users that aren't actually reporters...
 			if ( $t_total_user_bugs > 0 ) {
-				$t_arr2 = $t_reporter_ressev_arr[ $t_reporter_id ];
+				$t_arr2 = $t_reporter_ressev_arr[$t_reporter_id];
 
 				print '<tr ' . helper_alternate_class( $t_row_count ) . '>';
 				$t_row_count++;
@@ -879,14 +879,14 @@
 				$t_total_severity = 0;
 				$t_total_errors = 0;
 				for ( $j = 0; $j < $enum_sev_count; $j++ ) {
-					if ( ! isset( $t_arr2[ $c_sev_s[$j] ] ) ) {
+					if ( ! isset( $t_arr2[$c_sev_s[$j]] ) ) {
 						continue;
 					}
 
-					$sev_bug_count = $t_arr2[ $c_sev_s[$j] ][ 'total' ];
+					$sev_bug_count = $t_arr2[$c_sev_s[$j]]['total'];
 					$t_sev_mult = $t_severity_multiplier['average'];
-					if ( $t_severity_multiplier[ $c_sev_s[$j] ] ) {
-						$t_sev_mult = $t_severity_multiplier[ $c_sev_s[$j] ];
+					if ( $t_severity_multiplier[$c_sev_s[$j]] ) {
+						$t_sev_mult = $t_severity_multiplier[$c_sev_s[$j]];
 					}
 
 					if ( $sev_bug_count > 0 ) {
@@ -897,10 +897,10 @@
 					$t_notbug_res_arr = array( UNABLE_TO_DUPLICATE, DUPLICATE, NOT_A_BUG );
 
 					foreach ( $t_notbug_res_arr as $t_notbug_res ) {
-						if ( isset( $t_arr2[ $c_sev_s[$j] ][ $t_notbug_res ] ) ) {
+						if ( isset( $t_arr2[$c_sev_s[$j]][$t_notbug_res] ) ) {
 							$t_notbug_mult = 1;
-							if ( $t_notbug_multiplier[ $t_notbug_res ] ) {
-								$t_notbug_mult = $t_notbug_multiplier[ $t_notbug_res ];
+							if ( $t_notbug_multiplier[$t_notbug_res] ) {
+								$t_notbug_mult = $t_notbug_multiplier[$t_notbug_res];
 							}
 
 							$t_total_errors += ( $t_sev_mult * $t_notbug_mult );

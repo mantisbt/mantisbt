@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.10 2004-04-08 02:42:27 prescience Exp $
+	# $Id: utility_api.php,v 1.11 2004-04-08 03:31:38 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -158,7 +158,7 @@
 	# if the key exists in the source. If not - does nothing.
 	function copy_array_item_if_exist( &$p_arr_src, &$p_arr_dst, $key ) {
 		if( array_key_exists( $key, $p_arr_src ) ) {
-			$p_arr_dst[ $key ] = $p_arr_src[ $key ];
+			$p_arr_dst[$key] = $p_arr_src[$key];
 		}
 	}
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.29 2004-04-08 02:42:27 prescience Exp $
+	# $Id: custom_field_api.php,v 1.30 2004-04-08 03:31:37 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -659,7 +659,7 @@
 		# removing restricted fields
 		foreach ( $t_custom_fields as $t_custom_field_name => $t_custom_field_data ) {
 			if ( $p_user_access_level < $t_custom_field_data['access_level_r'] ) {
-				unset( $t_custom_fields[ $t_custom_field_name ] );
+				unset( $t_custom_fields[$t_custom_field_name] );
 			}
 		}
 		return $t_custom_fields;
@@ -712,15 +712,15 @@
 					$t_value = $row['value'];
 				}
 
-				$t_custom_fields[ $row['name'] ] = array( 'type'  => $row['type'],
+				$t_custom_fields[$row['name']] = array( 'type'  => $row['type'],
 														  'value' => $t_value,
 														  'access_level_r' => $row['access_level_r'] );
 			}
 
-			$g_cached_custom_field_lists[ $p_bug_id ] = $t_custom_fields;
+			$g_cached_custom_field_lists[$p_bug_id] = $t_custom_fields;
 		}
 
-		return $g_cached_custom_field_lists[ $p_bug_id ];
+		return $g_cached_custom_field_lists[$p_bug_id];
 	}
 
 

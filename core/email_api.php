@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.76 2004-04-08 02:42:27 prescience Exp $
+	# $Id: email_api.php,v 1.77 2004-04-08 03:31:37 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -726,7 +726,7 @@
 				$t_message .= $t_custom_field_data['value'];
 			}
 			$t_message .= "\n";
-		}       // foreach custom field
+		} # end foreach custom field
 
 
 		if ( RESOLVED == $t_status ) {
@@ -767,7 +767,7 @@
 
 			$t_message .= $t_email_separator1."\n";
 
-			foreach ( $p_visible_bug_data[ 'history' ] as $t_raw_history_item ) {
+			foreach ( $p_visible_bug_data['history'] as $t_raw_history_item ) {
 				$t_localized_item = history_localize_item(	$t_raw_history_item['field'],
 															$t_raw_history_item['type'],
 															$t_raw_history_item['old_value'],
@@ -789,7 +789,7 @@
 	# attribute value. Else return empty string.
 	function email_format_attribute( $p_visible_bug_data, $attribute_id ) {
 		if ( array_key_exists( $attribute_id, $p_visible_bug_data ) ) {
-			return str_pad( lang_get( $attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ).$p_visible_bug_data [ $attribute_id ]."\n";
+			return str_pad( lang_get( $attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ).$p_visible_bug_data[$attribute_id]."\n";
 		}
 		return '';
 	}

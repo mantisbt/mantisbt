@@ -6,17 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.18 2004-04-02 11:22:05 yarick123 Exp $
+	# $Id: lang_api.php,v 1.19 2004-04-08 03:31:37 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Language (Internationalization) API
 	###########################################################################
-	
+
 	# Cache of localization strings in the language specified by the last
 	# lang_load call
 	$g_lang_strings = array();
-	
+
 	# Currently loaded language
 	$g_loaded_language = '';
 
@@ -40,8 +40,8 @@
 			return;
 		}
 
-		// define current language here so that when custom_strings_inc is
-		// included it knows the current language
+		# define current language here so that when custom_strings_inc is
+		# included it knows the current language
 		$g_loaded_language = $p_lang;
 
 		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
@@ -58,9 +58,9 @@
 		if ( file_exists( $t_custom_strings ) ) {
 			require_once( $t_custom_strings );
 		}
-		
+
 		$t_vars = get_defined_vars();
-		
+
 		foreach ( array_keys( $t_vars ) as $t_var ) {
 			$t_lang_var = ereg_replace( '^s_', '', $t_var );
 			if ( $t_lang_var != $t_var || 'MANTIS_ERROR' == $t_var ) {
@@ -68,7 +68,7 @@
 			}
 		}
 	}
-	
+
 	# ------------------
 	# Loads the user's language or, if the database is unavailable, the default language
 	function lang_load_default() {
@@ -76,10 +76,10 @@
 
 		# Confirm that the user's language can be determined
 		if ( db_is_connected() && !is_blank( $t_cookie_string ) ) {
-			
+
 			$t_mantis_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 			$t_mantis_user_table		= config_get( 'mantis_user_table' );
-			
+
 			$query = "SELECT DISTINCT language
 					FROM $t_mantis_user_pref_table p, $t_mantis_user_table u
 					WHERE u.cookie_string='$t_cookie_string' AND
@@ -91,19 +91,19 @@
 			if ( false == $t_active_language ) {
 				$t_active_language = config_get( 'default_language' );
 			}
-			
+
 		} else {
 			$t_active_language = config_get( 'default_language' );
 		}
-		
+
 		lang_load( $t_active_language );
 	}
-	
+
 	# ------------------
 	# Ensures that a language file has been loaded
 	function lang_ensure_loaded() {
 		global $g_loaded_language, $g_current_language;
-		
+
 		# Load the language, if necessary
 		if ( '' == $g_current_language ) {
 			lang_load_default();
@@ -140,8 +140,8 @@
 
 		$t_last_index = count( $g_language_stack ) - 1;
 		if ( $t_last_index >= 0 ) {
-			lang_set( $g_language_stack[ $t_last_index ] );
-			unset( $g_language_stack[ $t_last_index ] );
+			lang_set( $g_language_stack[$t_last_index] );
+			unset( $g_language_stack[$t_last_index] );
 		}
 	}
 
@@ -152,9 +152,9 @@
 	#    2. The string in English
 	function lang_get( $p_string ) {
 		global $g_lang_strings;
-		
+
 		lang_ensure_loaded();
-		
+
 		# note in the current implementation we always return the same value
 		#  because we don't have a concept of falling back on a language.  The
 		#  language files actually *contain* English strings if none has been
@@ -172,9 +172,9 @@
 	# Check the language entry, if found return true, otherwise return false.
 	function lang_exists( $p_string ) {
 		global $g_lang_strings;
-		
+
 		lang_ensure_loaded();
-		
+
 		return ( isset( $g_lang_strings[$p_string] ) );
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.25 2004-04-08 02:42:27 prescience Exp $
+	# $Id: filter_api.php,v 1.26 2004-04-08 03:31:37 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -453,12 +453,12 @@
 		<?php
 			for ( $i = 0; $i < sizeof( $t_accessible_custom_fields_ids ); $i++ ) {
 				print '<input type="hidden" name="custom_field_';
-				print $t_accessible_custom_fields_ids[ $i ];
+				print $t_accessible_custom_fields_ids[$i];
 				print '" value="';
-				if ( ! isset( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ] ) ) {
-					$t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ] = 'any';
+				if ( ! isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
+					$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] = 'any';
 				}
-				print $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[ $i ] ];
+				print $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]];
 				print "\">\n";
 			}
 		?>
@@ -641,7 +641,7 @@
 						if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
 							echo "<a href=\"" . $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$t_base + $j] . "\">";
 							echo $t_accessible_custom_fields_names[$t_base + $j] . ":</a> ";
-							echo $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[$t_base + $j] ];
+							echo $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$t_base + $j]];
 						} else {
 							echo '&nbsp;';
 						}
@@ -796,8 +796,8 @@
 		$t_filters_table = config_get( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
 
-		if ( isset( $g_cache_filter_db_filters[ $p_filter_id ] ) ) {
-			return $g_cache_filter_db_filters[ $p_filter_id ];
+		if ( isset( $g_cache_filter_db_filters[$p_filter_id] ) ) {
+			return $g_cache_filter_db_filters[$p_filter_id];
 		}
 
 		$query = "SELECT *
@@ -819,7 +819,7 @@
 				return null;
 			}
 
-			$g_cache_filter_db_filters[ $p_filter_id ] = $row['filter_string'];
+			$g_cache_filter_db_filters[$p_filter_id] = $row['filter_string'];
 			return $row['filter_string'];
 		}
 
@@ -922,7 +922,7 @@
 		for ( $i = 0; $i < $query_count; $i++ ) {
 			$row = db_fetch_array( $result );
 			if ( ( $row['user_id'] == $t_user_id ) || db_prepare_bool( $row['is_public'] ) ) {
-				$t_overall_query_arr[ $row['id'] ] = $row['name'];
+				$t_overall_query_arr[$row['id']] = $row['name'];
 			}
 		}
 

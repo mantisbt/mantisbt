@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.19 2004-03-16 11:29:55 yarick123 Exp $
+	# $Id: history_api.php,v 1.20 2004-04-08 03:31:37 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -28,7 +28,7 @@
 			$c_new_value	= db_prepare_string( $p_new_value );
 			$c_bug_id		= db_prepare_int( $p_bug_id );
 			$c_user_id		= db_prepare_int( $p_user_id );
-			
+
 			$query = "INSERT INTO " . config_get( 'mantis_bug_history_table' ) . "
 					( user_id, bug_id, date_modified, field_name, old_value, new_value )
 					VALUES
@@ -201,8 +201,8 @@
 				$p_old_value = '@'.$p_old_value.'@';
 			}
 
-			// Note that the new value maybe an intermediately project and not the
-			// current one.
+			# Note that the new value maybe an intermediately project and not the
+			# current one.
 			if ( project_exists( $p_new_value ) ) {
 				$p_new_value = project_get_field( $p_new_value, 'name' );
 			} else {
@@ -250,10 +250,10 @@
 			case DESCRIPTION_UPDATED:
 				$t_note = lang_get( 'description_updated' );
 				break;
-			case ADDITIONAL_INFO_UPDATED:	
+			case ADDITIONAL_INFO_UPDATED:
 				$t_note = lang_get( 'additional_information_updated' );
 				break;
-			case STEP_TO_REPRODUCE_UPDATED:	
+			case STEP_TO_REPRODUCE_UPDATED:
 				$t_note = lang_get( 'steps_to_reproduce_updated' );
 				break;
 			case FILE_ADDED:

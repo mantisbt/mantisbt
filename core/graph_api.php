@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.13 2004-04-08 02:42:27 prescience Exp $
+	# $Id: graph_api.php,v 1.14 2004-04-08 03:31:37 prescience Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -311,7 +311,7 @@
 
 		$p1 = new PiePlot3d($enum_name_count);
 		$p1->SetTheme('earth');
-		//$p1->SetTheme("sand");
+		#$p1->SetTheme("sand");
 		$p1->SetCenter($center);
 		$p1->SetAngle(60);
 		$p1->SetLegends($enum_name);

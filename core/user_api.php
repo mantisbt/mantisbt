@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.66 2004-03-15 21:47:43 vboctor Exp $
+	# $Id: user_api.php,v 1.67 2004-04-08 03:31:38 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'email_api.php' );
 	require_once( $t_core_dir . 'ldap_api.php' );
 
@@ -125,7 +125,7 @@
 
 		if ( db_num_rows( $result ) > 0 ) {
 			$row = db_fetch_array( $result );
-			return (strcmp($row['username'], $p_username) != 0);  // Xyz & xyz shouldn't match
+			return (strcmp($row['username'], $p_username) != 0);  # Xyz & xyz shouldn't match
 		} else {
 			return true;
 		}
@@ -145,7 +145,7 @@
 	function user_is_name_valid( $p_username ) {
 		# The DB field is only 32 characters
 		if ( strlen( $p_username ) > 32 ) {
-			return false;	
+			return false;
 		}
 
 		# Only allow a basic set of characters
@@ -291,15 +291,15 @@
 			#  If so, there password won't get set anywhere...  (etc)
 			#  RJF: I was going to check for the existence of an LDAP email.
 			#  however, since we can't create an LDAP account at the moment,
-			#  and we don't know the user password in advance, we may not be able 
-			#  to retrieve it anyway.  
+			#  and we don't know the user password in advance, we may not be able
+			#  to retrieve it anyway.
 			#  I'll re-enable this once a plan has been properly formulated for LDAP
 			#  account management and creation.
 
 /*			$t_email = '';
 			if ( ON == config_get( 'use_ldap_email' ) ) {
 				$t_email = ldap_email_from_username( $p_username );
-			} 
+			}
 
 			if ( ! is_blank( $t_email ) ) {
 				$p_email = $t_email;
@@ -517,7 +517,7 @@
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id=u.project_id
-					  WHERE ( p.enabled = 1 ) AND 
+					  WHERE ( p.enabled = 1 ) AND
 						( p.view_state='$t_public'
 						    OR (p.view_state='$t_private'
 							    AND
@@ -690,12 +690,12 @@
 	function user_set_default_project( $p_user_id, $p_project_id ) {
 		return user_pref_set_pref( $p_user_id, 'default_project', (int)$p_project_id );
 	}
-	
+
 	# --------------------
 	# Set the user's password to the given string, encoded as appropriate
 	function user_set_password( $p_user_id, $p_password, $p_allow_protected=false ) {
 		$c_user_id = db_prepare_int( $p_user_id );
-		
+
 		if ( !$p_allow_protected ) {
 			user_ensure_unprotected( $p_user_id );
 		}
@@ -736,7 +736,7 @@
 	#   - if it is ON, generate a random password and send an email
 	#      (unless the second parameter is false)
 	#   - if it is OFF, set the password to blank
-	#  Return false if the user is protected, true if the password was 
+	#  Return false if the user is protected, true if the password was
 	#   successfully reset
 	function user_reset_password( $p_user_id, $p_send_email=true ) {
 		$t_protected = user_get_field( $p_user_id, 'protected' );
