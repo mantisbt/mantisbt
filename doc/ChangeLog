@@ -9,6 +9,7 @@ Mantis ChangeLog
  * Fix #3080: project menu bar shows extra links
  * Fix #3089: Hide link to Profiles management on account page based on access level.
  * Fix #3092: Problem changing printing prefs.
+ * Languages: Updated Italian localisation.
 
 2003.03.22  -  0.18.0a4
 

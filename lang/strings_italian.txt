@@ -10,11 +10,11 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 	#          Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: jlatour $
-	# $Date: 2003-03-12 18:58:21 $
+	# $Date: 2003-04-01 15:48:00 $
 	#
-	# $Id: strings_italian.txt,v 1.50 2003-03-12 18:58:21 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.51 2003-04-01 15:48:00 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -54,7 +54,7 @@
 	$s_field = "Campo";
 	$s_old_value = "Valore precedente";
 	$s_new_value = "Nuovo valore";
-	$s_date_modified = "Data di Modifica";
+	$s_date_modified = "Data e ora";
 	$s_bugnote = "Nota al Bug";
 	$s_change = "Modifica";
 	$s_bugnote_view_state = "Bugnote View State";
@@ -82,8 +82,8 @@
 	$s_description_updated = "Modificata la Descrizione";
 	$s_additional_information_updated = "Modificate le Informazioni Addizionali";
 	$s_steps_to_reproduce_updated = "Modificati i Passi per Riprodurlo";
-	$s_file_added = "File Aggiunto: ";
-	$s_file_deleted = "File Eliminato: ";
+	$s_file_added = "Allegato il File";
+	$s_file_deleted = "Eliminato l'Allegato";
 
 	$s_make_private = "Rendi Privato";
 	$s_make_public = "Rendi Pubblico";
@@ -225,7 +225,7 @@
 	$s_status_enum_string             = "10:nuovo,20:da discutere,30:riconosciuto,40:confermato,50:assegnato,80:risolto,90:chiuso";
 	$s_resolution_enum_string         = "10:aperto,20:risolto,30:riaperto,40:incapace di riprodurlo,50:non correggibile,60:duplicato,70:non è un bug,80:sospeso,90:non verrà corretto";
 	$s_projection_enum_string         = "10:nessuno,30:ritocco,50:fix minore,70:considerevole,90:riscrittura";
-	$s_eta_enum_string                = "10:nessuno,20:meno di un giorno,30:2-3 giorni,40:meno di una settimana,50:meno di un 1 mese,60:più di un mese";
+	$s_eta_enum_string                = "10:nessuno,20:meno di un giorno,30:2-3 giorni,40:meno di una settimana,50:meno di un mese,60:più di un mese";
 
 	# Email Strings
 	$s_new_account_subject = "Il tuo nuovo account utente";
@@ -240,7 +240,7 @@
 	$s_account_name_msg = "Il Nome del tuo Account è";
 	$s_news_password_msg = "La tua nuova Password";
 
-	$s_new_bug_msg = "Questo nuovo bug è stato INSERITO.";
+	$s_new_bug_msg = "È stato INSERITO questo nuovo bug.";
 	$s_email_bugnote_msg = "Una NOTA è stata inserita a questo bug.";
 	$s_email_resolved_msg = "Il seguente bug è stato RISOLTO.";
 	$s_email_close_msg = "Il seguente bug è stato CHIUSO";
@@ -255,7 +255,7 @@
 	$s_email_bug = "ID Bug";
 	$s_email_category = "Categoria";
 	$s_email_reproducibility = "Riproducibilità";
-	$s_email_severity = "Livello di Severità";
+	$s_email_severity = "Severità";
 	$s_email_priority = "Priorità";
 	$s_email_status = "Stato";
 	$s_email_resolution = "Risoluzione";
@@ -287,9 +287,9 @@
 	# account_prefs_page.php
 	$s_default_account_preferences_title = "Preferenze Utente di Default";
 	$s_default_project = "Progetto di Default";
-	$s_advanced_report = "Rapporto Avanzato";
-	$s_advanced_view = "Visualizzazione Avanzata";
-	$s_advanced_update = "Aggiornamento Avanzato";
+	$s_advanced_report = "Modulo dettagliato";
+	$s_advanced_view = "Scheda dettagliata";
+	$s_advanced_update = "Aggiornamento dettagliato";
 	$s_refresh_delay = "Ritardo di Refresh";
 	$s_redirect_delay = "Ritardo di Reindirizzamento";
 	$s_email_on_new = "Email su 'Novità'";
@@ -364,8 +364,8 @@
 	$s_delete_bug_button = "Elimina Bug";
 
 	# bug_monitor.php
-	$s_monitor_bug_button = "Monitor Bug";
-	$s_unmonitor_bug_button = "End Monitoring";
+	$s_monitor_bug_button = "Tienimi informato sul Bug";
+	$s_unmonitor_bug_button = "Smetti di tenermi informato";
 
 	# bug_file_add.php
 	$s_file_upload_msg = "File caricato con successo";
@@ -394,9 +394,9 @@
 	$s_from = "Da";
 	$s_to = "A";
 	$s_on = "Il";
-	$s_sent_you_this_reminder_about = "ti ho spedito questa nota relativa a";
-	$s_bug_reminder = "Spedisci una nota";
-	$s_reminder_sent_to = "Spedita nota a";
+	$s_sent_you_this_reminder_about = "ti invia questo memorandum a proposito del bug";
+	$s_bug_reminder = "Invia un memorandum";
+	$s_reminder_sent_to = "Inviato memorandum a";
 	$s_bug_send_button = "Invia";
 	$s_reminder = "Nota";
 
@@ -409,10 +409,10 @@
 	$s_updating_bug_advanced_title = "Aggiorna l'informazione sul Bug";
 	$s_id = "ID";
 	$s_category = "Categoria";
-	$s_severity = "Livello di Severità";
+	$s_severity = "Severità";
 	$s_reproducibility = "Riproducibilità";
-	$s_date_submitted = "Data Inserimento";
-	$s_last_update = "Ultimo Aggiornamento";
+	$s_date_submitted = "Inserito il";
+	$s_last_update = "Ultimo aggiornamento";
 	$s_reporter = "Segnalato da";
 	$s_assigned_to = "Assegnato a";
 	$s_priority = "Priorità";
@@ -423,19 +423,19 @@
 	$s_projection = "Stima difficoltà";
 	$s_os_version = "Versione";
 	$s_eta = "Stima tempo necessario";
-	$s_product_version = "Versione Prodotto";
+	$s_product_version = "Versione del Prodotto";
 	$s_build = "Release";
 	$s_votes = "Voti";
 	$s_summary = "Riassunto";
 	$s_description = "Descrizione";
-	$s_steps_to_reproduce = "Passaggi per Riprodurre il Bug";
+	$s_steps_to_reproduce = "Passaggi per riprodurre il Bug";
 	$s_additional = "Aggiuntiva";
 	$s_information = "Informazione";
 	$s_update_information_button = "Aggiorna Informazione";
 
 	# bug_update_page.php
-	$s_update_advanced_link = "Aggiornamento Avanzato";
-	$s_updating_bug_simple_title = "Aggiorna le Informazioni sul Bug";
+	$s_update_advanced_link = "Aggiornamento dettagliato";
+	$s_updating_bug_simple_title = "Aggiorna le informazioni sul Bug";
 
 	# bug_vote_add.php
 	$s_vote_added_msg = "Il Voto è stato Aggiunto...";
@@ -484,11 +484,11 @@
 	$s_here = "Qui";
 
 	# main_page.php
-	$s_open_and_assigned_to_me = "Aperti e Assegnati a me";
-	$s_open_and_reported_to_me = "Aperti e Segnalati da me";
+	$s_open_and_assigned_to_me = "Assegnati a me ancora aperti";
+	$s_open_and_reported_to_me = "Segnalati da me ancora aperti";
 	$s_newer_news_link = "Notizie Recenti";
 	$s_older_news_link = "Notizie Precedenti";
-	$s_archives = "Archivi";
+	$s_archives = "Archivio";
 
 	# manage_create_new_user.php
 	$s_created_user_part1 = "Creato Utente";
@@ -625,7 +625,7 @@
 	# menu_inc.php
 	$s_main_link = "Principale";
 	$s_view_bugs_link = "Visualizza i Bug";
-	$s_report_bug_link = "Inserisci Bug";
+	$s_report_bug_link = "Inserisci nuovo Bug";
 	$s_summary_link = "Statistiche";
 	$s_account_link = "Account";
 	$s_users_link = "Utenti";
@@ -714,16 +714,16 @@
 
 	# report_add.php
 	$s_must_enter_category = "Devi selezionare una categoria";
-	$s_must_enter_severity = "Devi selezionare un livello di problematica";
+	$s_must_enter_severity = "Devi selezionare una certa severità";
 	$s_must_enter_reproducibility = "Devi selezionare la riproducibilità";
 	$s_must_enter_summary = "Devi inserire un testo riassuntivo del problema";
 	$s_must_enter_description = "Devi inserire una descrizione";
 	$s_report_more_bugs = "Notifica più Bug";
-	$s_submission_thanks_msg = "Grazie per il tuo interesse!.";
+	$s_submission_thanks_msg = "Grazie per il tuo interesse!";
 
 	# report_bug_advanced_page.php
-	$s_simple_report_link = "Report Semplice";
-	$s_enter_report_details_title = "Dettaglio Report";
+	$s_simple_report_link = "Modulo semplificato";
+	$s_enter_report_details_title = "Modulo dettagliato";
 	$s_required = "obbligatorio";
 	$s_select_category = "Seleziona Categoria";
 	$s_select_reproducibility = "Seleziona la Riproducibilità";
@@ -731,12 +731,12 @@
 	$s_or_fill_in = "oppure completa";
 	$s_assign_to = "Assegna a";
 	$s_additional_information = "Informazioni addizionali";
-	$s_submit_report_button = "Invia Report";
+	$s_submit_report_button = "Invia la segnalazione";
 	$s_check_report_more_bugs = "Notifica più bug";
 
 	# report_bug_page.php
-	$s_advanced_report_link = "Report Avanzato";
-	$s_report_stay = "Rimani nel report";
+	$s_advanced_report_link = "Modulo dettagliato";
+	$s_report_stay = "Rimani sul modulo di inserimento";
 
 	# set_project.php
 	$s_selected_project = "Progetto Selezionato";
@@ -770,7 +770,7 @@
 	# summary_page.php
 	$s_summary_title = "Statistiche";
 	$s_summary_jpgraph_link = "Grafici";
-	$s_by_project = 'by project';
+	$s_by_project = "per progetto";
 	$s_by_status = "per status";
 	$s_by_date = "per data";
 	$s_by_severity = "per gravità";
@@ -790,7 +790,7 @@
 
 	# view_all_bug_page.php
 	$s_any = "Qualsiasi";
-	$s_show = "Visualizza";
+	$s_show = "Quanti bug";
 	$s_changed = "Modificato (ore)";
 	$s_viewing_bugs_title = "Elenco dei Bug";
 	$s_updated = "Aggiornato";
@@ -798,16 +798,16 @@
 	# view_all_inc.php
 	$s_none = "nessuno";
 	$s_search = "Ricerca";
-	$s_view_prev_link = "Successivo";
-	$s_view_next_link = "Precedente";
-	$s_prev = 'Prev';
-	$s_next = 'Next';
-	$s_first = 'First';
-	$s_last = 'Last';
+	$s_view_prev_link = "Precedenti";
+	$s_view_next_link = "Successivi";
+	$s_prev = 'Precedente';
+	$s_next = 'Successiva';
+	$s_first = 'Prima pagina';
+	$s_last = 'Ultima';
 
 	# view_bug_advanced_page.php
-	$s_view_simple_link = "Visualizzazione Semplice";
-	$s_viewing_bug_advanced_details_title = "Dettaglio Visualizzazione Avanzata del Bug";
+	$s_view_simple_link = "Scheda normale";
+	$s_viewing_bug_advanced_details_title = "Scheda dettagliata del Bug";
 	$s_product_build = "Versione del Prodotto";
 	$s_system_profile = "Descrizione del Sistema";
 	$s_update_bug_button = "Aggiorna il Bug";
@@ -820,12 +820,12 @@
 	# view_bug_inc.php
 
 	# view_bug_page.php
-	$s_view_advanced_link = "Visualizzazione Avanzata";
-	$s_viewing_bug_simple_details_title = "Dettaglio Visualizzazione Semplice del Bug";
+	$s_view_advanced_link = "Scheda dettagliata";
+	$s_viewing_bug_simple_details_title = "Scheda del Bug";
 
 	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = "Nessun utente sta monitorando questo bug.";
-	$s_users_monitoring_bug = "Questo bug è monitorato da";
+	$s_no_users_monitoring_bug = "Nessuno ha chiesto di essere notificato su questo bug.";
+	$s_users_monitoring_bug = "Questo bug è tenuto sotto controllo da";
 	$s_monitoring_user_list = "Elenco Utenti";
 
 	# custom field strings
