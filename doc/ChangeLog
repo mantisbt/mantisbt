@@ -36,6 +36,7 @@ Mantis ChangeLog
 - 0004175: [bugtracker] Links are not hyperlinked properly if containing '[' or ']' (vboctor)
 - 0004182: [bugtracker] print_all_bug_page should show all issues matching current filter (vboctor)
 - 0003970: [bugtracker] Reopen issue logic was broken for custom reopen statuses (thraxisp)
+- 0004275: [bugtracker] Relationship warning is now missing when a bus is resolved/closed (thraxisp)
 - 0004255: [localization] Wrong value of $g_language_auto_map (vboctor)
 - 0003714: [upgrade] Please add in a way to transfer attachments from the database to disk (thraxisp)
 - 0004078: [upgrade] Script to import the value of a custom field to a native field (thraxisp) 

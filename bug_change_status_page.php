@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.2 2004-08-04 01:38:06 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.3 2004-08-05 23:37:43 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,8 +49,9 @@
 </tr>
 
 <?php
-if ( $t_resolved == $f_new_status ) {
-	if ( ON == config_get( 'enable_relationship' ) ) {
+# relationship warnings
+if ( ON == config_get( 'enable_relationship' ) ) {
+	if ( $t_resolved <= $f_new_status ) {
 		if ( relationship_can_resolve_bug( $f_bug_id ) == false ) {
 			echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
 		}
