@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.33 2003-02-15 22:20:32 vboctor Exp $
+	# $Id: project_api.php,v 1.34 2003-02-16 10:55:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -28,6 +28,8 @@
 	#   being spoofed if register_globals is turned on
 	#
 	$g_cache_project = array();
+	$g_cache_project_missing = array();
+	$g_cache_project_all = false;
 
 	# --------------------
 	# Cache a project row if necessary and return the cached copy
@@ -35,12 +37,14 @@
 	#  if the project can't be found.  If the second parameter is
 	#  false, return false if the project can't be found.
 	function project_cache_row( $p_project_id, $p_trigger_errors=true ) {
-		global $g_cache_project;
+		global $g_cache_project, $g_cache_project_missing;
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		if ( isset ( $g_cache_project[$c_project_id] ) ) {
-			return $g_cache_project[$c_project_id];
+		if ( isset ( $g_cache_project[(int)$p_project_id] ) ) {
+			return $g_cache_project[(int)$p_project_id];
+		} else if ( isset( $g_cache_project_missing[(int)$p_project_id] ) ) {
+			return false;
 		}
 
 		$t_project_table = config_get( 'mantis_project_table' );
@@ -51,7 +55,7 @@
 		$result = db_query( $query );
 
 		if ( 0 == db_num_rows( $result ) ) {
-			$g_cache_project[(int)$p_project_id] = false;
+			$g_cache_project_missing[(int)$p_project_id] = true;
 
 			if ( $p_trigger_errors ) {
 				trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
@@ -70,20 +74,24 @@
 	# --------------------
 	# Cache all project rows and return an array of them
 	function project_cache_all() {
-		global $g_cache_project;
+		global $g_cache_project, $g_cache_project_all;
 		
-		$t_project_table = config_get( 'mantis_project_table' );
+		if ( ! $g_cache_project_all ) {
+			$t_project_table = config_get( 'mantis_project_table' );
 
-		$query = "SELECT * 
-				  FROM $t_project_table";
-		$result = db_query( $query );
+			$query = "SELECT * 
+					  FROM $t_project_table";
+			$result = db_query( $query );
 
-		$count = db_num_rows( $result );
+			$count = db_num_rows( $result );
 
-		for ( $i = 0 ; $i < $count ; $i++ ) {
-			$row = db_fetch_array( $result );
+			for ( $i = 0 ; $i < $count ; $i++ ) {
+				$row = db_fetch_array( $result );
 
-			$g_cache_project[(int)$row['id']] = $row;
+				$g_cache_project[(int)$row['id']] = $row;
+			}
+
+			$g_cache_project_all = true;
 		}
 
 		return $g_cache_project;
@@ -92,12 +100,16 @@
 	# --------------------
 	# Clear the project cache (or just the given id if specified)
 	function project_clear_cache( $p_project_id = null ) {
-		global $g_cache_project;
+		global $g_cache_project, $g_cache_project_missing, $g_cache_project_all;
 		
 		if ( null === $p_project_id ) {
 			$g_cache_project = array();
+			$g_cache_project_missing = array();
+			$g_cache_project_all = false;
 		} else {
 			unset( $g_cache_project[(int)$p_project_id] );
+			unset( $g_cache_project_missing[(int)$p_project_id] );
+			$g_cache_project_all = false;
 		}
 
 		return true;
