@@ -9,11 +9,11 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# -------------------------------------------------
-	# $Revision: 1.86 $
+	# $Revision: 1.87 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:55 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_polish.txt,v 1.86 2005-04-03 12:48:55 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.87 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -30,6 +30,7 @@ $s_actiongroup_menu_resolve = 'Rozwi±¿';
 $s_actiongroup_menu_update_priority = 'Aktualizuj priorytet';
 $s_actiongroup_menu_update_status = 'Aktualizuj status';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Selected Issues';
@@ -104,6 +105,7 @@ $s_login_link = 'Zaloguj siê';
 $s_bug_actiongroup_failed = 'Nie masz wystarczaj±cych uprawnieñ by wykonaæ t± akcjê na poni¿szych Zagadnieniach: ';
 $s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
 $s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Czy jeste¶ pewny, ¿e chcesz Zamkn±æ te Zagadnienia?';
 $s_delete_bugs_conf_msg = 'Czy jeste¶ pewny, ¿e chesz Usun±æ te Zagadnienia?';
 $s_move_bugs_conf_msg = 'Przenie¶ Zagadnienia do';
@@ -113,6 +115,7 @@ $s_resolve_bugs_conf_msg = 'Wybierz rozwi±zanie Zagadnieñ';
 $s_priority_bugs_conf_msg = 'Wybierz priorytet Zagadnieñ';
 $s_status_bugs_conf_msg = 'Wybierz status Zagadnieñ';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Zamknij Zagadnienia' ;
 $s_delete_group_bugs_button = 'Usuñ Zagadnienia' ;
@@ -122,6 +125,7 @@ $s_assign_group_bugs_button = 'Przypisz Zagadnienia' ;
 $s_resolve_group_bugs_button = 'Rozwi±¿ Zagadnienia' ;
 $s_priority_group_bugs_button = 'Aktualizuj Priorytet' ;
 $s_status_group_bugs_button = 'Aktualizuj Status' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Update View Status';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.100 $
+	# $Revision: 1.101 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:54 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_italian.txt,v 1.100 2005-04-03 12:48:54 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.101 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -31,6 +31,7 @@ $s_actiongroup_menu_resolve = "Risolvi";
 $s_actiongroup_menu_update_priority = "Cambia priorità";
 $s_actiongroup_menu_update_status = "Cambia stato";
 $s_actiongroup_menu_update_view_status = "Cambia privato/pubblico";
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Imposta/resetta sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = "Anomalie selezionate";
@@ -105,6 +106,7 @@ $s_login_link = "Accedi";
 $s_bug_actiongroup_failed = "Non disponi dell'autorizzazione necessaria per eseguire questa azione sulle seguenti anomalie: ";
 $s_bug_actiongroup_access = "Non disponi dell'autorizzazione necessaria per eseguire questa azione";
 $s_bug_actiongroup_status = "Non é possibile impostare lo stato richiesto per la presente anomalia";
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = "Confermi di voler chiudere queste anomalie?";
 $s_delete_bugs_conf_msg = "Confermi di voler eliminare queste anomalie?";
 $s_move_bugs_conf_msg = "Sposta anomalia su";
@@ -114,6 +116,7 @@ $s_resolve_bugs_conf_msg = "Scegli la risoluzione";
 $s_priority_bugs_conf_msg = "Scegli la priorità";
 $s_status_bugs_conf_msg = "Scegli lo stato";
 $s_view_status_bugs_conf_msg = "Seleziona vista priv/pubbl";
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Imposta/resetta anomalie come in primo piano (sticky)?';
 $s_close_group_bugs_button = "Chiudi anomalia";
 $s_delete_group_bugs_button = "Elimina anomalia";
@@ -123,6 +126,7 @@ $s_assign_group_bugs_button = "Assegna anomalia";
 $s_resolve_group_bugs_button = "Risolvi anomalia";
 $s_priority_group_bugs_button = "Aggiorna priorità";
 $s_status_group_bugs_button = "Aggiorna stato";
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = "Cambia priv/pubbl";
 $s_set_sticky_group_bugs_button = 'Imposta/resetta in primo piano (Sticky)';
 

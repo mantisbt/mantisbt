@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.81 $
+	# $Revision: 1.82 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:55 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.81 2005-04-03 12:48:55 jlatour Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.82 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,6 +29,7 @@ $s_actiongroup_menu_resolve = 'Resolver';
 $s_actiongroup_menu_update_priority = 'Actualizar Prioridade';
 $s_actiongroup_menu_update_status = 'Actualizar Estado';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Selected Issues';
@@ -103,6 +104,7 @@ $s_login_link = 'Login';
 $s_bug_actiongroup_failed = 'Desculpe mas NÃO tem as Permissões Necessárias Para Efectuar a Acção Pretendida nos Seguintes Bugs: ';
 $s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
 $s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Tem a Certeza de querer FECHAR os Bugs Selecionados ?';
 $s_delete_bugs_conf_msg = 'Tem a Certeza de querer APAGAR os Bugs Selecionados ?';
 $s_move_bugs_conf_msg = 'Mover os Bugs Selecionados para o Projecto ...';
@@ -112,6 +114,7 @@ $s_resolve_bugs_conf_msg = 'Como Pretende Resolver os Bugs Selecionados ?';
 $s_priority_bugs_conf_msg = 'Escolha a Nova Prioridade para os Bugs Selecionados';
 $s_status_bugs_conf_msg = 'Escolha o Novo Estado para os Bugs Selecionados';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Fechar os Bugs Selecionados' ;
 $s_delete_group_bugs_button = 'Apagar os Bugs Selecionados' ;
@@ -121,6 +124,7 @@ $s_assign_group_bugs_button = 'Atribuir Bugs Selecionados' ;
 $s_resolve_group_bugs_button = 'Resolver os Bugs Selecionados' ;
 $s_priority_group_bugs_button = 'Actualizar Prioridade' ;
 $s_status_group_bugs_button = 'Actualizar Estado' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Update View Status';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

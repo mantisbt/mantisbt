@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.77 $
+	# $Revision: 1.78 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:54 $
+	# $Date: 2005-04-03 12:51:06 $
 	#
-	# $Id: strings_czech.txt,v 1.77 2005-04-03 12:48:54 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.78 2005-04-03 12:51:06 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -33,6 +33,7 @@ $s_actiongroup_menu_resolve = 'Vyøe¹it';
 $s_actiongroup_menu_update_priority = 'Aktualizovat prioritu';
 $s_actiongroup_menu_update_status = 'Aktualizovat stav';
 $s_actiongroup_menu_update_view_status = 'Aktualizovat stav';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Vybrané problémy';
@@ -107,6 +108,7 @@ $s_login_link = 'Pøihlá¹ení';
 $s_bug_actiongroup_failed = 'Nemáte potøebné oprávnìní k èinnostem s tìmito problémy: ';
 $s_bug_actiongroup_access = 'Nemáte potøebné oprávnìní k této èinnosti.';
 $s_bug_actiongroup_status = 'Tento problém nelze pøevést do po¾adovaného stavu';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Opravdu si pøejete uzavøít tyto problémy ?';
 $s_delete_bugs_conf_msg = 'Opravdu si pøejete zru¹it tyto problémy ?';
 $s_move_bugs_conf_msg = 'Pøesunout problém do';
@@ -116,6 +118,7 @@ $s_resolve_bugs_conf_msg = 'Vybrat resolution problému';
 $s_priority_bugs_conf_msg = 'Vybrat prioritu problému';
 $s_status_bugs_conf_msg = 'Vybrat stav problému';
 $s_view_status_bugs_conf_msg = 'Vybrat stav zobrazení problému';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Uzavøít problém' ;
 $s_delete_group_bugs_button = 'Zru¹it problém' ;
@@ -125,6 +128,7 @@ $s_assign_group_bugs_button = 'Pøiøadit problém' ;
 $s_resolve_group_bugs_button = 'Vyøe¹it problém' ;
 $s_priority_group_bugs_button = 'Zmìnit prioritu' ;
 $s_status_group_bugs_button = 'Zmìnit stav' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Obnovit zobrazení problému';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

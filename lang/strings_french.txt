@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.98 $
+	# $Revision: 1.99 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:54 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_french.txt,v 1.98 2005-04-03 12:48:54 jlatour Exp $
+	# $Id: strings_french.txt,v 1.99 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -35,6 +35,7 @@ $s_actiongroup_menu_resolve = 'Résoudre';
 $s_actiongroup_menu_update_priority = 'Mettre à jour la priorité';
 $s_actiongroup_menu_update_status = 'Mettre à jour l\'état';
 $s_actiongroup_menu_update_view_status = 'Mettre à jour Afficher l\'état';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Bugs sélectionnés';
@@ -109,6 +110,7 @@ $s_login_link = 'Connexion';
 $s_bug_actiongroup_failed = 'Vous n\'aviez pas les permissions appropriées pour agir sur les bugs suivants : ';
 $s_bug_actiongroup_access = 'Vous n\'aviez pas les permissions appropriées pour effectuer cette action.';
 $s_bug_actiongroup_status = 'Ce bug ne peut pas être changé pour l\'état demandé';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bugs ?';
 $s_delete_bugs_conf_msg = 'Voulez-vous vraiment supprimer ces bugs ?';
 $s_move_bugs_conf_msg = 'Déplacer vers';
@@ -118,6 +120,7 @@ $s_resolve_bugs_conf_msg = 'Choisir la résultion des bugs';
 $s_priority_bugs_conf_msg = 'Choisir la priorité des bugs';
 $s_status_bugs_conf_msg = 'Choisir l\'état des bugs';
 $s_view_status_bugs_conf_msg = 'Choisir afficher l\'état des bugs';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Fermer les bugs' ;
 $s_delete_group_bugs_button = 'Supprimer les bugs' ;
@@ -127,6 +130,7 @@ $s_assign_group_bugs_button = 'Assigner les bugs' ;
 $s_resolve_group_bugs_button = 'Résoudre les bugs' ;
 $s_priority_group_bugs_button = 'Mettre à jour la priorité' ;
 $s_status_group_bugs_button = 'Mettre à jour le statut' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Mettre à jour Afficher le statut';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.130 $
+	# $Revision: 1.131 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:54 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_german.txt,v 1.130 2005-04-03 12:48:54 jlatour Exp $
+	# $Id: strings_german.txt,v 1.131 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -33,6 +33,7 @@ $s_actiongroup_menu_resolve = 'Erledigen';
 $s_actiongroup_menu_update_priority = 'Priorität ändern';
 $s_actiongroup_menu_update_status = 'Status ändern';
 $s_actiongroup_menu_update_view_status = 'Anzeigestatus ändern';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Fixierung setzen/lösen';
 $s_actiongroup_menu_update_field = 'Aktualisiere %s';
 $s_actiongroup_bugs = 'Ausgewählte Probleme';
@@ -107,6 +108,7 @@ $s_login_link = 'Anmelden';
 $s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Problemen auszuführen: ';
 $s_bug_actiongroup_access = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion auszuführen.';
 $s_bug_actiongroup_status = 'Der gewünschte Status ist für dieses Problem nicht wählbar.';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich schließen?';
 $s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich löschen?';
 $s_move_bugs_conf_msg = 'Probleme verschieben zu Projekt:';
@@ -116,6 +118,7 @@ $s_resolve_bugs_conf_msg = 'Grund für Erledigung auswählen:';
 $s_priority_bugs_conf_msg = 'Neue Problempriorität:';
 $s_status_bugs_conf_msg = 'Neuer Problemstatus:';
 $s_view_status_bugs_conf_msg = 'Anzeigestatus des Problems auswählen';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Sind Sie sicher, dass Sie die Fixierung dieser Probleme ändern wollen?';
 $s_close_group_bugs_button = 'Probleme schließen' ;
 $s_delete_group_bugs_button = 'Probleme löschen' ;
@@ -125,6 +128,7 @@ $s_assign_group_bugs_button = 'Probleme zuordnen' ;
 $s_resolve_group_bugs_button = 'Probleme erledigen' ;
 $s_priority_group_bugs_button = 'Priorität ändern' ;
 $s_status_group_bugs_button = 'Status ändern' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Anzeigestatus ändern';
 $s_set_sticky_group_bugs_button = 'Fixierung ändern';
 

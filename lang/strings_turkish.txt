@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.80 $
+	# $Revision: 1.81 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:57 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_turkish.txt,v 1.80 2005-04-03 12:48:57 jlatour Exp $
+	# $Id: strings_turkish.txt,v 1.81 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,6 +29,7 @@ $s_actiongroup_menu_resolve = 'Resolve';
 $s_actiongroup_menu_update_priority = 'Update Priority';
 $s_actiongroup_menu_update_status = 'Update Status';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Selected Issues';
@@ -103,6 +104,7 @@ $s_login_link = 'Login';
 $s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
 $s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
 $s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
 $s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
 $s_move_bugs_conf_msg = 'Move bugs to';
@@ -112,6 +114,7 @@ $s_resolve_bugs_conf_msg = 'Choose bugs resolution';
 $s_priority_bugs_conf_msg = 'Choose bugs priority';
 $s_status_bugs_conf_msg = 'Choose bugs status';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Close Bugs' ;
 $s_delete_group_bugs_button = 'Delete Bugs' ;
@@ -121,6 +124,7 @@ $s_assign_group_bugs_button = 'Assign Bugs' ;
 $s_resolve_group_bugs_button = 'Resolve Bugs' ;
 $s_priority_group_bugs_button = 'Update Priority' ;
 $s_status_group_bugs_button = 'Update Status' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Update View Status';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

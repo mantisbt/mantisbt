@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.65 $
+	# $Revision: 1.66 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:40 $
+	# $Date: 2005-04-03 12:51:06 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.65 2005-04-03 12:48:40 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.66 2005-04-03 12:51:06 jlatour Exp $
 	###########################################################################
 
 	###########################################################################
@@ -46,6 +46,7 @@ $s_actiongroup_menu_resolve = '解决';
 $s_actiongroup_menu_update_priority = '更新优先级';
 $s_actiongroup_menu_update_status = '更新状态';
 $s_actiongroup_menu_update_view_status = '更新视图状态';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = '选择 Issue';
@@ -120,6 +121,7 @@ $s_login_link = '登录';
 $s_bug_actiongroup_failed = '对于这个 Issue 您没有适当的权限以进行这个操作：';
 $s_bug_actiongroup_access = '你无权执行该项操作';
 $s_bug_actiongroup_status = '无法将Issue的状态改成指定的状态';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = '确定要关闭这些 Issue 吗？';
 $s_delete_bugs_conf_msg = '你确定要删除这些 Issue 吗？';
 $s_move_bugs_conf_msg = '将 Issue 移动到';
@@ -129,6 +131,7 @@ $s_resolve_bugs_conf_msg = '选择相关 Issue';
 $s_priority_bugs_conf_msg = '选择 Issue 优先级别';
 $s_status_bugs_conf_msg = '选择 Issue 状态';
 $s_view_status_bugs_conf_msg = '选择 Issue 浏览状态';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = '关闭 Issue' ;
 $s_delete_group_bugs_button = '删除 Issue' ;
@@ -138,6 +141,7 @@ $s_assign_group_bugs_button = '分派 Issue' ;
 $s_resolve_group_bugs_button = '解决 Issue' ;
 $s_priority_group_bugs_button = '修改优先级别' ;
 $s_status_group_bugs_button = '修改状态' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = '修改浏览状态';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.121 2005-04-03 12:43:35 jlatour Exp $
+	# $Id: print_api.php,v 1.122 2005-04-03 12:51:06 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -457,11 +457,13 @@
 			$c_project_id = db_prepare_int( $p_project_id );
 		}
 
+		$t_project_where = helper_project_specific_where( $c_project_id );
+
 		# grab all categories in the project category table
 		$cat_arr = array();
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $t_mantis_project_category_table
-				WHERE project_id='$c_project_id'
+				WHERE $t_project_where
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -487,16 +489,18 @@
 		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 
 		if ( null === $p_project_id ) {
-			$c_project_id = helper_get_current_project();
+			$t_project_id = helper_get_current_project();
 		} else {
-			$c_project_id = db_prepare_int( $p_project_id );
+			$t_project_id = $p_project_id;
 		}
+
+		$t_project_where = helper_project_specific_where( $t_project_id );
 
 		# grab all categories in the project category table
 		$cat_arr = array();
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $t_mantis_project_category_table
-				WHERE project_id='$c_project_id'
+				WHERE $t_project_where
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -508,7 +512,7 @@
 		# grab all categories in the bug table
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $t_mantis_bug_table
-				WHERE project_id='$c_project_id'
+				WHERE $t_project_where
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -557,10 +561,12 @@
 
 		$t_project_id = helper_get_current_project();
 
+		$t_project_where = helper_project_specific_where( $t_project_id );
+
 		# Get the "found in" build list
 		$query = "SELECT DISTINCT build
 				FROM $t_bug_table
-				WHERE project_id='$t_project_id'
+				WHERE $t_project_where
 				ORDER BY build DESC";
 		$result = db_query( $query );
 		$option_count = db_num_rows( $result );
@@ -710,6 +716,7 @@
 							'SET_STICKY' => lang_get( 'actiongroup_menu_set_sticky' ),
 							'UP_PRIOR' => lang_get('actiongroup_menu_update_priority'),
 							'UP_STATUS' => lang_get('actiongroup_menu_update_status'),
+							'UP_CATEGORY' => lang_get('actiongroup_menu_update_category'),
 							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ) );
 
 		$t_project_id = helper_get_current_project();

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.41 2005-01-29 12:14:21 vboctor Exp $
+	# $Id: bug_actiongroup.php,v 1.42 2005-04-03 12:51:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -136,6 +136,20 @@
 					bug_set_field( $t_bug_id, 'status', $f_status );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
+				}
+			} else {
+				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
+			}
+			break;
+
+		case 'UP_CATEGORY':
+			$f_category = gpc_get_string( 'category' );
+			$t_project = bug_get_field( $t_bug_id, 'project_id' );
+			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
+				if ( category_exists( $t_project, $f_category ) ) {
+					bug_set_field( $t_bug_id, 'category', $f_category );
+				} else {
+					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_category' );
 				}
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );

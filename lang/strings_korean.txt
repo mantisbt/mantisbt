@@ -10,11 +10,11 @@
 	#             hardkoder@gmail.com - (마지막 수정일:2004/09/22)
 	#             miren.info@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.86 $
+	# $Revision: 1.87 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:55 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_korean.txt,v 1.86 2005-04-03 12:48:55 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.87 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -31,6 +31,7 @@ $s_actiongroup_menu_resolve = '해결';
 $s_actiongroup_menu_update_priority = '우선순위 갱신';
 $s_actiongroup_menu_update_status = '상태 갱신';
 $s_actiongroup_menu_update_view_status = '보기 상태 갱신';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = '선택된 이슈';
@@ -105,6 +106,7 @@ $s_login_link = '로그인';
 $s_bug_actiongroup_failed = '이 동작을 실행할 권한이 없습니다. 오류는 다음과 같습니다: ';
 $s_bug_actiongroup_access = '이 동작을 실행할 권한이 없습니다.';
 $s_bug_actiongroup_status = '이 이슈의 상태를 바꿀 수 없습니다.';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = '이 이슈를 폐쇄하시겠습니까 ?';
 $s_delete_bugs_conf_msg = '이 이슈를 삭제하시겠습니까 ?';
 $s_move_bugs_conf_msg = '이슈 이동: ';
@@ -114,6 +116,7 @@ $s_resolve_bugs_conf_msg = '이슈 해결도 선택';
 $s_priority_bugs_conf_msg = '이슈 우선순위 선택';
 $s_status_bugs_conf_msg = '이슈 상태 선택';
 $s_view_status_bugs_conf_msg = '이슈 보기 상태 선택';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = '이슈 폐쇄' ;
 $s_delete_group_bugs_button = '이슈 삭제' ;
@@ -123,6 +126,7 @@ $s_assign_group_bugs_button = '이슈 할당' ;
 $s_resolve_group_bugs_button = '이슈 해결' ;
 $s_priority_group_bugs_button = '우선 순위 갱신' ;
 $s_status_group_bugs_button = '상태 갱신' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = '보기 상태 갱신';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

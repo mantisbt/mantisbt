@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.71 $
+  # $Revision: 1.72 $
   # $Author: jlatour $
-  # $Date: 2005-04-03 12:48:54 $
+  # $Date: 2005-04-03 12:51:07 $
   #
-  # $Id: strings_hungarian.txt,v 1.71 2005-04-03 12:48:54 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.72 2005-04-03 12:51:07 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -29,6 +29,7 @@ $s_actiongroup_menu_resolve = 'Felold';
 $s_actiongroup_menu_update_priority = 'Súlyosság változás';
 $s_actiongroup_menu_update_status = 'Státusz változás';
 $s_actiongroup_menu_update_view_status = 'Láthatóság módosítása';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Kiválasztott hibák';
@@ -103,6 +104,7 @@ $s_login_link = 'Belépés';
 $s_bug_actiongroup_failed = 'Önnek nincs elegendõ jogosultsága megtenni a kért módosítást a következõ hibán: ';
 $s_bug_actiongroup_access = 'Önnek nincs elegendõ jogosultsága, hogy végrehajtsa az utasítást.';
 $s_bug_actiongroup_status = 'Ez a hiba nem állítható az ön által kért státuszba';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Biztos be akarja zárni ezeket a hibákat ?';
 $s_delete_bugs_conf_msg = 'Biztos törölni akarja ezeket a hibákat ?';
 $s_move_bugs_conf_msg = 'Hibák Mozgatása ide:';
@@ -112,6 +114,7 @@ $s_resolve_bugs_conf_msg = 'Megoldás választása';
 $s_priority_bugs_conf_msg = 'Prioritás választása';
 $s_status_bugs_conf_msg = 'Hibák Státuszának választása';
 $s_view_status_bugs_conf_msg = 'Állítsa be az hibák láthatóságát';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Hibák Bezárása' ;
 $s_delete_group_bugs_button = 'Hibák Törlése' ;
@@ -121,6 +124,7 @@ $s_assign_group_bugs_button = 'Hibákhoz Megbízza:' ;
 $s_resolve_group_bugs_button = 'Hibák Megoldása' ;
 $s_priority_group_bugs_button = 'Prioritás Frissítése' ;
 $s_status_group_bugs_button = 'Státusz Frissítése' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Láthatóság módosítása';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

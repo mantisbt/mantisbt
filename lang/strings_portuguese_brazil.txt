@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.87 $
+	# $Revision: 1.88 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:55 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.87 2005-04-03 12:48:55 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.88 2005-04-03 12:51:07 jlatour Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.217 -- jferraz 2004/08/23
 	###########################################################################
@@ -32,6 +32,7 @@ $s_actiongroup_menu_resolve = 'Resolver';
 $s_actiongroup_menu_update_priority = 'Atualizar Prioridade';
 $s_actiongroup_menu_update_status = 'Atualizar Status';
 $s_actiongroup_menu_update_view_status = 'Atualizar Visibilidade';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Casos Selecionados';
@@ -106,6 +107,7 @@ $s_login_link = 'Login';
 $s_bug_actiongroup_failed = 'Você não possui as permissões apropriadas para realizar esta ação nos seguintes casos: ';
 $s_bug_actiongroup_access = 'Você não possui as permissões apropriadas para realizar esta ação.';
 $s_bug_actiongroup_status = 'Este caso não pode ser alterado para o status solicitado';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Você tem certeza que deseja fechar estes casos ?';
 $s_delete_bugs_conf_msg = 'Você tem certeza que deseja apagar estes casos ?';
 $s_move_bugs_conf_msg = 'Mover casos para';
@@ -115,6 +117,7 @@ $s_resolve_bugs_conf_msg = 'Escolher resolução dos casos';
 $s_priority_bugs_conf_msg = 'Escolher prioridade dos casos';
 $s_status_bugs_conf_msg = 'Escolher status dos casos';
 $s_view_status_bugs_conf_msg = 'Escolher visibilidade dos casos';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Fechar Casos' ;
 $s_delete_group_bugs_button = 'Apagar Casos' ;
@@ -124,6 +127,7 @@ $s_assign_group_bugs_button = 'Atribuir Casos' ;
 $s_resolve_group_bugs_button = 'Resolver Casos' ;
 $s_priority_group_bugs_button = 'Atualizar Prioridade' ;
 $s_status_group_bugs_button = 'Atualizar Status' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Atualizar Visibilidade';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

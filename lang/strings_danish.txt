@@ -9,11 +9,11 @@
 	# Danish Update Gunner Poulsen, gp@lyngbjerggaardskolen.dk
 	# Translations: Bug, Isssue - Fejl
 	# -------------------------------------------------
-	# $Revision: 1.84 $
+	# $Revision: 1.85 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:54 $
+	# $Date: 2005-04-03 12:51:06 $
 	#
-	# $Id: strings_danish.txt,v 1.84 2005-04-03 12:48:54 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.85 2005-04-03 12:51:06 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -30,6 +30,7 @@ $s_actiongroup_menu_resolve = 'Løs';
 $s_actiongroup_menu_update_priority = 'Opdater prioritering';
 $s_actiongroup_menu_update_status = 'Opdater status';
 $s_actiongroup_menu_update_view_status = 'Opdater vis-status';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Markerede fejl';
@@ -104,6 +105,7 @@ $s_login_link = 'Log ind';
 $s_bug_actiongroup_failed = 'Du havde ikke tilstrækkelige rettigheder til at udføre denne handling på følgende fejl: ';
 $s_bug_actiongroup_access = 'Du havde ikke tilstrækkelige rettigheder til at udføre denne handling.';
 $s_bug_actiongroup_status = 'Denne fejl kan ikke ændres til den ønskede tilstand';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Ønsker du at lukke disse fejl ?';
 $s_delete_bugs_conf_msg = 'Ønsker du at slette disse fejl ?';
 $s_move_bugs_conf_msg = 'Flyt fejlene til';
@@ -113,6 +115,7 @@ $s_resolve_bugs_conf_msg = 'Vælg fejlenes løsning';
 $s_priority_bugs_conf_msg = 'Vælg fejlenes prioritering';
 $s_status_bugs_conf_msg = 'Vælg fejlenes status';
 $s_view_status_bugs_conf_msg = 'Vælg fejlenes visningsstatus';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Luk fejlene' ;
 $s_delete_group_bugs_button = 'Slet fejlene' ;
@@ -122,6 +125,7 @@ $s_assign_group_bugs_button = 'Tildel fejlene' ;
 $s_resolve_group_bugs_button = 'Løs fejlene' ;
 $s_priority_group_bugs_button = 'Opdater prioritering' ;
 $s_status_group_bugs_button = 'Opdater status' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Opdater visningsstatus';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

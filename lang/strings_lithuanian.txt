@@ -9,11 +9,11 @@
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# Lithuanian: Vilius Ðumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
 	# -------------------------------------------------
-	# $Revision: 1.27 $
+	# $Revision: 1.28 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:55 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.27 2005-04-03 12:48:55 jlatour Exp $
+	# $Id: strings_lithuanian.txt,v 1.28 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -41,6 +41,7 @@ $s_actiongroup_menu_resolve = 'Iðspræsti';
 $s_actiongroup_menu_update_priority = 'Pakeisti prioritetà';
 $s_actiongroup_menu_update_status = 'Pakeisti bûsenà';
 $s_actiongroup_menu_update_view_status = 'Pakeisti perþiûros bûsena';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Pasirinktos klaidos';
@@ -115,6 +116,7 @@ $s_login_link = 'Prisijungti';
 $s_bug_actiongroup_failed = 'Jûs neturite pakankamai teisiø atlikti ðá veiksmà pasirinktoms klaidoms: ';
 $s_bug_actiongroup_access = 'Jûs neturite pakankamai teisiø atlikti ðá veiksmà.';
 $s_bug_actiongroup_status = 'Negaliu pakeisti ðios klaidos bûsenos';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Ar tikrai norite uþdaryti ðias klaidas?';
 $s_delete_bugs_conf_msg = 'Ar tikrai norite iðtrinti ðias klaidas?';
 $s_move_bugs_conf_msg = 'Perkelti klaidas á';
@@ -124,6 +126,7 @@ $s_resolve_bugs_conf_msg = 'Pasirinkti klaidø sprendimà';
 $s_priority_bugs_conf_msg = 'Pasirinkti klaidø prioritetà';
 $s_status_bugs_conf_msg = 'Pasirinkti klaidø bûsenà';
 $s_view_status_bugs_conf_msg = 'Pasirinkti klaidos perþiûros bûsenà';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Uþdaryti klaidas';
 $s_delete_group_bugs_button = 'Iðtrinti klaidas';
@@ -133,6 +136,7 @@ $s_assign_group_bugs_button = 'Priskirti klaidas';
 $s_resolve_group_bugs_button = 'Iðspræsti klaidas';
 $s_priority_group_bugs_button = 'Keisti prioritetà';
 $s_status_group_bugs_button = 'Keisti bûsenà';
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Keisti perþiûros bûsenà';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

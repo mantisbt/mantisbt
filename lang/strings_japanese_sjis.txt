@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.75 $
+	# $Revision: 1.76 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:55 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.75 2005-04-03 12:48:55 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.76 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -30,6 +30,7 @@ $s_actiongroup_menu_resolve = '実装済';
 $s_actiongroup_menu_update_priority = '重要度更新';
 $s_actiongroup_menu_update_status = 'ステータス更新';
 $s_actiongroup_menu_update_view_status = '閲覧ステータスを更新';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = '選択された改善要求';
@@ -104,6 +105,7 @@ $s_login_link = 'ログイン';
 $s_bug_actiongroup_failed = '改善要求に該当のアクションを行う適切な権限がありません。';
 $s_bug_actiongroup_access = 'そのアクションを行なう適切な許可がありませんでした。';
 $s_bug_actiongroup_status = 'この改善要求は要求されたステータスに変更することができません。';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = '改善要求を完了してよろしいですか。';
 $s_delete_bugs_conf_msg = '改善要求を削除してよろしいですか。';
 $s_move_bugs_conf_msg = '改善要求の移動先を選択して下さい。';
@@ -113,6 +115,7 @@ $s_resolve_bugs_conf_msg = '分析状況を選択して下さい。';
 $s_priority_bugs_conf_msg = '重要度を選択して下さい。';
 $s_status_bugs_conf_msg = 'ステータスを選択して下さい。';
 $s_view_status_bugs_conf_msg = '選択した改善要求の状況を見る';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = '改善要求の完了';
 $s_delete_group_bugs_button = '改善要求の削除' ;
@@ -122,6 +125,7 @@ $s_assign_group_bugs_button = '改善要求の割り当て';
 $s_resolve_group_bugs_button = '改善要求の実装';
 $s_priority_group_bugs_button = '重要度の更新' ;
 $s_status_group_bugs_button = 'ステータスの更新' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = '閲覧ステータス更新';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

@@ -10,11 +10,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.29 $
+	# $Revision: 1.30 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:54 $
+	# $Date: 2005-04-03 12:51:06 $
 	#
-	# $Id: strings_estonian.txt,v 1.29 2005-04-03 12:48:54 jlatour Exp $
+	# $Id: strings_estonian.txt,v 1.30 2005-04-03 12:51:06 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -31,6 +31,7 @@ $s_actiongroup_menu_resolve = 'Lahenda';
 $s_actiongroup_menu_update_priority = 'Uuenda prioriteet';
 $s_actiongroup_menu_update_status = 'Uuenda olek';
 $s_actiongroup_menu_update_view_status = 'Uuenda vaate olek';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Valitud kanded';
@@ -105,6 +106,7 @@ $s_login_link = 'Login';
 $s_bug_actiongroup_failed = 'Sul pole vajalikke uigusi jdrgmise kandega tegelemiseks: ';
 $s_bug_actiongroup_access = 'Sul pole vajalikke uigusi selle tegevuse sooritamiseks.';
 $s_bug_actiongroup_status = 'Seda kannet ei saa muuta soovitud olekusse';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Oled kindel, et soovid sulgeda need kanded ?';
 $s_delete_bugs_conf_msg = 'Oled kindel, et soovid kustutada need kanded ?';
 $s_move_bugs_conf_msg = 'Liiguta kanded sinna';
@@ -114,6 +116,7 @@ $s_resolve_bugs_conf_msg = 'Vali kande lahendus';
 $s_priority_bugs_conf_msg = 'Vali kande prioriteet';
 $s_status_bugs_conf_msg = 'Vali kande olek';
 $s_view_status_bugs_conf_msg = 'Vali kande vaate olek';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Sulge kanded' ;
 $s_delete_group_bugs_button = 'Kustuta kanded' ;
@@ -123,6 +126,7 @@ $s_assign_group_bugs_button = 'Mddra kanded' ;
 $s_resolve_group_bugs_button = 'Lahenda kanded' ;
 $s_priority_group_bugs_button = 'Uuenda prioriteeti' ;
 $s_status_group_bugs_button = 'Uuenda olekut' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Uuenda vaate olekut';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

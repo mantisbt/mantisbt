@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.83 $
+	# $Revision: 1.84 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:56 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_russian.txt,v 1.83 2005-04-03 12:48:56 jlatour Exp $
+	# $Id: strings_russian.txt,v 1.84 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,6 +29,7 @@ $s_actiongroup_menu_resolve = 'Решить';
 $s_actiongroup_menu_update_priority = 'Обн. приоритет';
 $s_actiongroup_menu_update_status = 'Обн. статус';
 $s_actiongroup_menu_update_view_status = 'Обн. режим доступа';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Выбранные обращения';
@@ -103,6 +104,7 @@ $s_login_link = 'Вход';
 $s_bug_actiongroup_failed = 'У Вас недостаточно прав для выполнения этой операции со следующими обращениями: ';
 $s_bug_actiongroup_access = 'У Вас недостаточно прав для выполнения этой операции.';
 $s_bug_actiongroup_status = 'Это обращение не может быты изменено в запрошенный статус';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти обращения?';
 $s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти обращения?';
 $s_move_bugs_conf_msg = 'Перенести обрашения в';
@@ -112,6 +114,7 @@ $s_resolve_bugs_conf_msg = 'Выберите результат для обращений';
 $s_priority_bugs_conf_msg = 'Выберите приоритет обращений';
 $s_status_bugs_conf_msg = 'Выберите статус обращений';
 $s_view_status_bugs_conf_msg = 'Выберите режим доступа к обращениям';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Закрыть обращения' ;
 $s_delete_group_bugs_button = 'Удалить обращения' ;
@@ -121,6 +124,7 @@ $s_assign_group_bugs_button = 'Назначить обращения' ;
 $s_resolve_group_bugs_button = 'Решить обращения' ;
 $s_priority_group_bugs_button = 'Обновить приоритет' ;
 $s_status_group_bugs_button = 'Обновить статус' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Обновить режим доступа';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

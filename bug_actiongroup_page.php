@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.47 2005-02-02 10:38:55 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.48 2005-04-03 12:51:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -100,14 +100,21 @@
 			$t_request 				= 'status';
 			break;
 
-		case 'VIEW_STATUS':
+		case 'UP_CATEGORY' :
+			$t_question_title		= lang_get( 'category_bugs_conf_msg' );
+			$t_button_title			= lang_get( 'category_group_bugs_button' );
+			$t_form					= 'category';
+			$t_request				= 'category';
+			break;
+
+		case 'VIEW_STATUS' :
 			$t_question_title		= lang_get( 'view_status_bugs_conf_msg' );
 			$t_button_title			= lang_get( 'view_status_group_bugs_button' );
 			$t_form				= 'view_status';
 			$t_request			= 'view_status';
 			break;
 
-		case 'CUSTOM':
+		case 'CUSTOM' :
 			$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 			$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
 			$t_button_title = $t_question_title;
@@ -184,6 +191,9 @@ if ( !$t_finished ) {
 					break;
 				case 'VIEW_STATUS':
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
+					break;
+				case 'UP_CATEGORY':
+					print_category_option_list();
 					break;
 			}
 

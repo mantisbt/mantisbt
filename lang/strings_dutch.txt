@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.86 $
+	# $Revision: 1.87 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:54 $
+	# $Date: 2005-04-03 12:51:06 $
 	#
-	# $Id: strings_dutch.txt,v 1.86 2005-04-03 12:48:54 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.87 2005-04-03 12:51:06 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -32,6 +32,7 @@ $s_actiongroup_menu_resolve = 'Afronden';
 $s_actiongroup_menu_update_priority = 'Aanpassen prioriteit';
 $s_actiongroup_menu_update_status = 'Aanpassen status';
 $s_actiongroup_menu_update_view_status = 'Aanpassen bekijk status';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Geselecteerde bugs';
@@ -106,6 +107,7 @@ $s_login_link = 'Inloggen';
 $s_bug_actiongroup_failed = 'Bij de volgende bugs had u niet genoeg permissies om die actie uit te voeren: ';
 $s_bug_actiongroup_access = 'U heeft geen permissies om deze actie uit te voeren.';
 $s_bug_actiongroup_status = 'Deze bug kan niet op de gevraagde status gezet worden';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil sluiten?';
 $s_delete_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil verwijderen?';
 $s_move_bugs_conf_msg = 'Verplaats bugs naar';
@@ -115,6 +117,7 @@ $s_resolve_bugs_conf_msg = 'Kies afhandeling van bugs';
 $s_priority_bugs_conf_msg = 'Kies prioriteit van bugs';
 $s_status_bugs_conf_msg = 'Kies status van bugs';
 $s_view_status_bugs_conf_msg = 'Kies bug bekijk status';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Sluit bugs' ;
 $s_delete_group_bugs_button = 'Verwijder bugs' ;
@@ -124,6 +127,7 @@ $s_assign_group_bugs_button = 'Toewijzen bugs' ;
 $s_resolve_group_bugs_button = 'Afhandelen bugs' ;
 $s_priority_group_bugs_button = 'Aanpassen prioriteit' ;
 $s_status_group_bugs_button = 'Aanpassen status' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Aanpassen bekijk status';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

@@ -8,11 +8,11 @@
 	###########################################################################
 	# Ukrainian (Windows1251): Yuri Kirghisov, yuri@apple.com.ua
 	# -------------------------------------------------
-	# $Revision: 1.11 $
+	# $Revision: 1.12 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:57 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_ukrainian.txt,v 1.11 2005-04-03 12:48:57 jlatour Exp $
+	# $Id: strings_ukrainian.txt,v 1.12 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,6 +29,7 @@ $s_actiongroup_menu_resolve = 'Вирішити';
 $s_actiongroup_menu_update_priority = 'Змінити пріоритет';
 $s_actiongroup_menu_update_status = 'Змінити статус';
 $s_actiongroup_menu_update_view_status = 'Змінити рівень доступу';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Виділені проблеми';
@@ -103,6 +104,7 @@ $s_login_link = 'Увійти';
 $s_bug_actiongroup_failed = 'У вас недостатньо прав на виконання операції над наступними проблемами: ';
 $s_bug_actiongroup_access = 'У вас недостатньо прав на виконання операції.';
 $s_bug_actiongroup_status = 'Неможливо змінити статус проблеми на вказаний';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Ви справді хочете закрити ці проблеми?';
 $s_delete_bugs_conf_msg = 'Ви справді хочете видалити ці проблеми?';
 $s_move_bugs_conf_msg = 'Перенести проблеми в проект';
@@ -112,6 +114,7 @@ $s_resolve_bugs_conf_msg = 'Вкажіть резолюцію для проблем';
 $s_priority_bugs_conf_msg = 'Вкажіть пріоритет проблем';
 $s_status_bugs_conf_msg = 'Вкажіть статус проблем';
 $s_view_status_bugs_conf_msg = 'Вкажіть рівень доступу проблеми';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Закрити проблеми' ;
 $s_delete_group_bugs_button = 'Видалити проблеми' ;
@@ -121,6 +124,7 @@ $s_assign_group_bugs_button = 'Призначити проблеми' ;
 $s_resolve_group_bugs_button = 'Вирішити проблеми' ;
 $s_priority_group_bugs_button = 'Змінити пріоритет' ;
 $s_status_group_bugs_button = 'Змінити статус' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Змінити рівень доступу';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 

@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.28 $
+	# $Revision: 1.29 $
 	# $Author: jlatour $
-	# $Date: 2005-04-03 12:48:57 $
+	# $Date: 2005-04-03 12:51:07 $
 	#
-	# $Id: strings_serbian.txt,v 1.28 2005-04-03 12:48:57 jlatour Exp $
+	# $Id: strings_serbian.txt,v 1.29 2005-04-03 12:51:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -30,6 +30,7 @@ $s_actiongroup_menu_resolve = 'Reši';
 $s_actiongroup_menu_update_priority = 'Izmena prioriteta';
 $s_actiongroup_menu_update_status = 'Izmena statusa';
 $s_actiongroup_menu_update_view_status = 'Izmena statusa pogleda';
+$s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Izabrane greske';
@@ -104,6 +105,7 @@ $s_login_link = 'Prijava';
 $s_bug_actiongroup_failed = 'Niste imali odgovarajuce dozvole za izvršenje akcije nad sledecim greškama: ';
 $s_bug_actiongroup_access = 'Niste imali odgovarajuce dozvole za izvrsenje akcije..';
 $s_bug_actiongroup_status = 'Ova greska ne moze biti izmenjena u traženi status';
+$s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_close_bugs_conf_msg = 'Da li ste sigurni da zelite da zatvorite sledece greske ?';
 $s_delete_bugs_conf_msg = 'Da li ste siturni da zelite da izbrisete sledece greske ?';
 $s_move_bugs_conf_msg = 'Premesti grešku u';
@@ -113,6 +115,7 @@ $s_resolve_bugs_conf_msg = 'Izaberite rešenje greške';
 $s_priority_bugs_conf_msg = 'Izaberite prioritet greske';
 $s_status_bugs_conf_msg = 'Izaberite status greske';
 $s_view_status_bugs_conf_msg = 'Izaberite status pregleda gresaka';
+$s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Zatvaranje grešaka' ;
 $s_delete_group_bugs_button = 'Brisanje grešaka' ;
@@ -122,6 +125,7 @@ $s_assign_group_bugs_button = 'Dodeljivanje grešaka' ;
 $s_resolve_group_bugs_button = 'Razlucivanje grešaka' ;
 $s_priority_group_bugs_button = 'Prioritet ažuriranja' ;
 $s_status_group_bugs_button = 'Status ažuriranja' ;
+$s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Izmena statusa pregleda';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
