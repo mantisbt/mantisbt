@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.3 2002-08-25 15:34:22 vboctor Exp $
+	# $Id: user_api.php,v 1.4 2002-08-25 18:55:53 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -721,7 +721,7 @@
 				}
 				$g_cache_user_pref[$t_id] = $row;
 			}
-			return ( $g_user_pref[$t_id][$p_field_name] );
+			return ( $g_cache_user_pref[$t_id][$p_field_name] );
 		} else {
 			return 0;
 		}
