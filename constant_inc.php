@@ -165,7 +165,10 @@
 	define( 'ERROR_LANG_STRING_NOT_FOUND',			300 );
 
 	# ERROR_DB_*
-	define( 'ERROR_DB_FIELD_NOT_FOUND',				400 );
+	define( 'ERROR_DB_CONNECT_FAILED',				400 );
+	define( 'ERROR_DB_QUERY_FAILED',				401 );
+	define( 'ERROR_DB_SELECT_FAILED',				402 );
+	define( 'ERROR_DB_FIELD_NOT_FOUND',				403 );
 
 	# ERROR_FILE_*
 	define( 'ERROR_FILE_TOO_BIG',					500 );

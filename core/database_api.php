@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.11 2003-01-04 07:32:16 jfitzell Exp $
+	# $Id: database_api.php,v 1.12 2003-01-04 09:27:38 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -22,43 +22,29 @@
 
 	# --------------------
 	# connect to database and select database
-	function db_connect($p_hostname, $p_username, $p_password, $p_database,	$p_port ) {
-
-		$t_result = mysql_connect(  $p_hostname.':'.$p_port, $p_username, $p_password );
-
-		if ( !$t_result ) {
-			echo 'ERROR: FAILED CONNECTION TO DATABASE: ';
-			echo db_error();
-			exit;
-		}
-
-		$t_result = db_select_db( $p_database );
+	function db_connect($p_hostname, $p_username, $p_password, $p_port ) {
+		$t_result = mysql_connect( "$p_hostname:$p_port", $p_username, $p_password );
 
 		if ( !$t_result ) {
-			echo 'ERROR: FAILED DATABASE SELECTION: ';
-			echo db_error();
-			exit;
+			db_error();
+			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+			return false;
 		}
+
+		return true;
 	}
 	# --------------------
 	# persistent connect to database and select database
-	function db_pconnect($p_hostname, $p_username, $p_password, $p_database, $p_port ) {
-
-		$t_result = mysql_pconnect(  $p_hostname.':'.$p_port, $p_username, $p_password );
-
-		if ( !$t_result ) {
-			echo 'ERROR: FAILED CONNECTION TO DATABASE: ';
-			echo db_error();
-			exit;
-		}
-
-		$t_result = db_select_db( $p_database );
+	function db_pconnect($p_hostname, $p_username, $p_password, $p_port ) {
+		$t_result = mysql_pconnect( "$p_hostname:$p_port", $p_username, $p_password );
 
 		if ( !$t_result ) {
-			echo 'ERROR: FAILED DATABASE SELECTION: ';
-			echo db_error();
-			exit;
+			db_error();
+			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
+			return false;
 		}
+
+		return true;
 	}
 	# --------------------
 	# execute query, requires connection to be opened
@@ -74,17 +60,26 @@
 
 		$t_result = mysql_query( $p_query );
 
+		# @@@ remove p_error_on_failure and use @ in every caller that used to use it
 		if ( !$t_result && $p_error_on_failure ) {
-			echo 'ERROR: FAILED QUERY: '.$p_query.' : ';
-			echo db_error();
-			exit;
+			db_error($p_query);
+			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
+			return false;
 		} else {
 			return $t_result;
 		}
 	}
 	# --------------------
 	function db_select_db( $p_db_name ) {
-		return mysql_select_db( $p_db_name );
+		$t_result = mysql_select_db( $p_db_name );
+
+		if ( !$t_result ) {
+			db_error();
+			trigger_error( ERROR_DB_SELECT_FAILED, ERROR );
+			return false;
+		}
+
+		return $t_result;
 	}
 	# --------------------
 	function db_num_rows( $p_result ) {
@@ -142,8 +137,12 @@
 	}
 	# --------------------
 	# display both the error num and error msg
-	function db_error() {
-		return '<br />'.db_error_num().': '.db_error_msg().'<br />';
+	function db_error( $p_query=null ) {
+		if ( null !== $p_query ) {
+			error_parameters( db_error_num(), db_error_msg(), $p_query );
+		} else {
+			error_parameters( db_error_num(), db_error_msg() );
+		}
 	}
 	# --------------------
 	# close the connection.
@@ -207,9 +206,10 @@
 
 	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
-			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port );
+			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_port );
 		} else {
-			db_pconnect( $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port );
+			db_pconnect( $g_hostname, $g_db_username, $g_db_password, $g_port );
 		}
+		db_select_db( $g_database_name );
 	}
 ?>
