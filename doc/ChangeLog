@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+2004.xx.xx  -  0.18.2
+
+ * Fix #3539: Simple view page shows advanced custom fields.
+
 2004.02.06  -  0.18.1
 
  * Fix #2668: Proxy incorrectly presents cached output to other users.
