@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.38 2004-11-30 15:41:35 thraxisp Exp $
+	# $Id: bug_actiongroup.php,v 1.39 2004-12-12 20:27:07 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -144,6 +144,12 @@
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
+			break;
+			
+		case 'SET_STICKY':
+			$f_sticky = bug_get_field( $t_bug_id, 'sticky' );
+			// The new value is the inverted old value
+			bug_set_field( $t_bug_id, 'sticky', !$f_sticky );
 			break;
 
 		default:

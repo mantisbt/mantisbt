@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.44 2004-11-22 13:36:49 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.45 2004-12-12 20:27:07 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,6 +41,12 @@
 			$t_button_title 		= lang_get( 'delete_group_bugs_button' );
 			break;
 
+		case 'SET_STICKY' :
+			$t_finished 			= true;
+			$t_question_title		= lang_get( 'set_sticky_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'set_sticky_group_bugs_button' );
+			break;
+		
 		# ...else we define the variables used in the form
 		case 'MOVE' :
 			$t_question_title 		= lang_get( 'move_bugs_conf_msg' );
