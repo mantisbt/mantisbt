@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.72 $
+	# $Revision: 1.73 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-07 17:56:08 $
+	# $Date: 2004-09-08 10:48:33 $
 	#
-	# $Id: strings_swedish.txt,v 1.72 2004-09-07 17:56:08 bigbadger Exp $
+	# $Id: strings_swedish.txt,v 1.73 2004-09-08 10:48:33 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -254,8 +254,8 @@ $s_view_state_enum_string         = '10:publik,50:privat';
 $s_priority_enum_string           = '10:ingen,20:låg,30:normal,40:hög,50:bråttom,60:omedelbart';
 $s_severity_enum_string           = '10:funktion,20:trivial,30:text,40:tweak,50:mindre,60:allvarlig,70:krash,80:blockerare';
 $s_reproducibility_enum_string    = '10:alltid,30:ibland,50:slumpvis,70:har ej testat,90:kan inte göra om,100:ingen';
-$s_status_enum_string             = '10:ny,20:återkoppling,30:godkänd,40:bekräftad,50:tilldelad,80:löst,90:stängd';
-$s_resolution_enum_string         = '10:öppen,20:fixad,30:återöppnad,40:kan inte göra om,50:kan inte fixa,60:kopia av annan,70:inte en bug,80:bordlagd,90:kommer inte fixa';
+$s_status_enum_string             = '10:ny,20:återkoppling,30:godkänt,40:bekräftat,50:tilldelat,80:löst,90:stängt';
+$s_resolution_enum_string         = '10:öppen,20:fixat,30:återöppnat,40:kan inte göra om,50:kan inte fixa,60:kopia av annan,70:inte en bugg,80:bordlagt,90:kommer inte fixa';
 $s_projection_enum_string         = '10:ingen,30:tweak,50:mindre fix,70:omfattande omkodning,90:omdesign';
 $s_eta_enum_string                = '10:ingen,20:< 1 dag,30:2-3 dagar,40:< 1 vecka,50:< 1 månad,60:> 1 månad';
 
@@ -274,23 +274,23 @@ $s_reset_request_msg = 'Någon (troligtvis du) har begärt en ändring av lösenorde
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'Följande ärende kräver din ÅTERKOPPLING.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Följande ärende har blivit GODKÄND.';
-$s_email_notification_title_for_status_bug_confirmed = 'Följande ärende har blivit BEKRÄFTAD.';
-$s_email_notification_title_for_status_bug_assigned = 'Följande ärende har blivit TILLDELAD.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Följande ärende har blivit GODKÄNT.';
+$s_email_notification_title_for_status_bug_confirmed = 'Följande ärende har blivit BEKRÄFTAT.';
+$s_email_notification_title_for_status_bug_assigned = 'Följande ärende har blivit TILLDELAT.';
 $s_email_notification_title_for_status_bug_resolved = 'Följande ärende har blivit LÖST.';
-$s_email_notification_title_for_status_bug_closed = 'Följande ärende har blivit STÄNGD.';
+$s_email_notification_title_for_status_bug_closed = 'Följande ärende har STÄNGTS.';
 
-$s_email_notification_title_for_action_bug_submitted = 'Följande ärende har blivit RAPPORTERAD.';
-$s_email_notification_title_for_action_bug_assigned = 'Följande ärende har blivit TILLDELAD.';
-$s_email_notification_title_for_action_bug_reopened = 'Följande ärende har blivit ÅTERÖPPNAD.';
-$s_email_notification_title_for_action_bug_deleted = 'Följande ärende har blivit RADERAD.';
-$s_email_notification_title_for_action_bug_updated = 'Följande ärende har blivit UPPDATERAD.';
+$s_email_notification_title_for_action_bug_submitted = 'Följande ärende har blivit RAPPORTERAT.';
+$s_email_notification_title_for_action_bug_assigned = 'Följande ärende har blivit TILLDELAT.';
+$s_email_notification_title_for_action_bug_reopened = 'Följande ärende har blivit ÅTERÖPPNAT.';
+$s_email_notification_title_for_action_bug_deleted = 'Följande ärende har blivit RADERAT.';
+$s_email_notification_title_for_action_bug_updated = 'Följande ärende har blivit UPPDATERAT.';
 $s_email_notification_title_for_action_sponsorship_added = 'Följande ärende har blivit SPONSRAT.';
 $s_email_notification_title_for_action_sponsorship_updated = 'En sponsring av följande ärende har ändrats.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'En sponsring av följande ärende har tagits tillbaka.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Ett MEDDELANDE har lagts till detta ärende.';
-$s_email_notification_title_for_action_relationship_added = "En ny REALTION har lagts till detta ärende.";
+$s_email_notification_title_for_action_relationship_added = "En ny RELATION har lagts till detta ärende.";
 $s_email_notification_title_for_action_relationship_deleted = "En RELATION har tagits bort från detta ärende.";
 $s_email_notification_title_for_action_relationship_child_resolved = "Ett RELATERAT ärende har blivit LÖST.";
 $s_email_notification_title_for_action_relationship_child_closed = "Ett RELATERAT ärende har STÄNGTS.";
@@ -306,7 +306,7 @@ $s_email_priority = 'Prioritet';
 $s_email_status = 'Status';
 $s_email_resolution = 'Lösning';
 $s_email_duplicate = 'Kopia av';
-$s_email_fixed_in_version = 'Fixad i version';
+$s_email_fixed_in_version = 'Fixat i version';
 $s_email_date_submitted = 'Inlagd datum';
 $s_email_last_modified = 'Senast ändrad';
 $s_email_summary =  'Sammanfattning';
@@ -454,7 +454,7 @@ $s_resolved_bug_button = 'Lös ärende';
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Ärendet har lösts. Skriv meddelande nedan...';
 $s_resolve_add_bugnote_title = 'Lägg till meddelande om anledning till lösning';
-$s_bugnote_add_resolve_button = 'Lägg till meddelande och lös ärende';
+$s_bugnote_add_resolve_button = 'Lägg till meddelande och lös ärendet';
 
 # bug_reminder_page.php
 $s_from = 'Från';
@@ -605,7 +605,7 @@ $s_category_added_msg = 'Kategorin har lagts till...';
 $s_category_deleted_msg = 'Kategorin har tagits bort...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin? Alla associerade rapporter kommer att tas bort.';
+$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin? Alla associerade ärenden kommer att tas bort.';
 $s_delete_category_button = 'Ta bort kategori';
 
 # manage_proj_category_edit_page.php
@@ -619,7 +619,7 @@ $s_category_updated_msg = 'Kategorin har uppdaterats...';
 $s_project_deleted_msg = 'Projektet har tagits bort...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Är du säker på att du vill ta bort det här projektet och alla dess rapporter?';
+$s_project_delete_msg = 'Är du säker på att du vill ta bort det här projektet och alla dess ärenden?';
 $s_project_delete_button = 'Ta bort projektet';
 
 # manage_proj_edit_page.php
@@ -658,7 +658,7 @@ $s_version_added_msg = 'La till version...';
 $s_version_deleted_msg = 'Tog bort version...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Är du säker på att du vill ta bort versionen? Alla associerade rapporter kommer att tas bort.';
+$s_version_delete_sure = 'Är du säker på att du vill ta bort versionen? Alla associerade ärenden kommer att tas bort.';
 $s_delete_version_button = 'Ta bort versionen';
 
 # manage_proj_version_edit_page.php
@@ -702,7 +702,7 @@ $s_manage_user_updated_msg = 'Kontot uppdaterat...';
 $s_main_link = 'Huvudsida';
 $s_view_bugs_link = 'Visa ärenden';
 $s_report_bug_link = 'Rapportera ärende';
-$s_changelog_link = 'Versionshistoria';
+$s_changelog_link = 'Versionshistorik';
 $s_summary_link = 'Sammanfattning';
 $s_account_link = 'Användarkonto';
 $s_users_link = 'Användare';
@@ -1016,7 +1016,7 @@ $s_sponsorship_more_info = 'Mer information om sponsring';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Versionshistoria';
+$s_changelog = 'Versionshistorik';
 
 # Http auth
 $s_http_auth_realm = "Mantis inloggning (Login)";
