@@ -334,7 +334,7 @@
 		function output( $p_limit=null ) {
 			# @@@ The generated file is in UNIX format, should it be in Windows format?
 			$t_filename = $this->upgrade_file . '.sql';
-			header( "Content-Type: text/plain; name=$t_filename" );
+			#header( "Content-Type: text/plain; name=$t_filename" );
 			#header( 'Content-Transfer-Encoding: BASE64;' );
 			#header( "Content-Disposition: attachment; filename=$t_filename" );
 
