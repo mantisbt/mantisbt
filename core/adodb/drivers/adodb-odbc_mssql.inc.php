@@ -43,7 +43,7 @@ class  ADODB_odbc_mssql extends ADODB_odbc {
 	function ADODB_odbc_mssql()
 	{
 		$this->ADODB_odbc();
-		$this->curmode = SQL_CUR_USE_ODBC;
+		//$this->curmode = SQL_CUR_USE_ODBC;
 	}
 
 	// crashes php...
