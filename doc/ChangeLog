@@ -85,9 +85,10 @@ Mantis ChangeLog
  * Reworked code formatting for $c_ variables.
  * Updated comments in all localization files to point to correct file names.
  * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
- * Added the ability to enter a bugnote when you update a bug
- * Added core_bugnote_API.php
- * Added core_bug_API.php
+ * Added the ability to enter a bugnote when you update a bug.
+ * Added core_bugnote_API.php.
+ * Added core_bug_API.php.
+ * Modified br, hr, li, img, selected, checked, and other html elements to be XHTML compliant.
 
 2002.08.18  -  0.17.4
  * This is a maintenance release. It patches up several vulnerabilities in 0.17.3. No features have been added.
