@@ -35,9 +35,9 @@
 	                                     # installations on one site.
 
 	#--------------------
-	$g_db_table_prefix   = "mantis";     # set to name of tables
-                                         # this allows you to have multiple
-                                         # installations on one site.
+	# table name prefix
+	# if you change this remember to reflect the changes in the database
+	$g_db_table_prefix   = "mantis";
 	#--------------------
 
 	#--------------------
@@ -49,7 +49,7 @@
 	#--------------------
 	# sitewide titles
 	$g_window_title         = "Mantis";     # browser window title
-	$g_page_title           = "Mantis";     # title in html page
+	$g_page_title           = "Mantis";     # title at top of html page
 	#--------------------
 
 	#--------------------
@@ -59,6 +59,7 @@
 
 	$g_show_version              = 0;
 
+	# display a link at the bottom of the page to show the PHP source
 	# requires PHP4
 	# 0 = disabled; 1 = admin only; 2 = anyone
 	$g_show_source               = 0;
@@ -66,23 +67,72 @@
 	# set to 0 to disable the logged in user and time info
 	$g_show_login_date_info      = 1;
 
+	# change to language you want... choices are:
+	# english
 	$g_language                  = "english";
 	#--------------------
 
-	# core file variables
-	$g_core_API_file             = "core_API.php";
-	$g_meta_include_file         = "meta_inc.php";
-	$g_menu_include_file         = "menu_inc.php";
-
 	#--------------------
-	# bugnote includes
-	$g_bugnote_include_file      = "bugnote_inc.php";
-	$g_bugnote_add_include_file  = "bugnote_add_inc.php";
+	# time for coookie to live in seconds
+	$g_time_length              = 30000000;     # 1 year
+	# time to delay between page redirects
+	$g_wait_time                = 1;            # in seconds
 	#--------------------
 
 	#--------------------
-	# css
-	$g_css_include_file          = "css_inc.php";
+	# news
+	$g_news_view_limit      = 5;
+	#--------------------
+
+	#--------------------
+	# defaults for viewing preferences
+	$g_default_limit_view       = 50;
+	$g_default_show_changed     = 6;
+	$g_default_advanced_report  = "";  # set to on to enable
+	$g_default_advanced_view    = "";  # set to on to enable
+	#--------------------
+
+	#--------------------
+	# date lengths to bount bugs by
+	# folows the english required by strtotime()
+	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
+	#--------------------
+
+	#--------------------
+	# html table appearance variables
+	$g_primary_table_tags        = "";
+	#--------------------
+
+	#--------------------
+	# color values
+	$g_white_color           = "#ffffff";    # white
+
+	$g_primary_color_dark    = "#d8d8d8";    # gray
+	$g_primary_color_light   = "#e8e8e8";    # light gray
+	$g_primary_border_color  = "#aaaaaa";    # dark gray
+	$g_category_title_color	 = "#c8c8e8";    # bluish
+	$g_category_title_color2 = "#c0c0c8";    # gray bluish
+
+	$g_table_title_color     = "#ffffff";    # white
+
+	$g_required_field_color  = "#aa0000";    # redish
+
+	$g_new_color             = "#ffa0a0";    # red
+	$g_feedback_color        = "#ff50a8";    # purple
+	$g_acknowledged_color    = "#ffd850";    # orange
+	$g_confirmed_color       = "#ffffb0";    # yellow
+	$g_assigned_color        = "#c8c8ff";    # blue
+	$g_resolved_color        = "#ffffff";    # not used in default
+	#--------------------
+
+	#--------------------
+	# cookies
+
+	# cookie names
+	$g_string_cookie            = $g_cookie_prefix."_STRING_COOKIE";
+
+	# cookie values
+	$g_string_cookie_val        = $HTTP_COOKIE_VARS[$g_string_cookie];
 	#--------------------
 
 	#--------------------
@@ -95,6 +145,24 @@
 	$g_mantis_user_table           = $g_db_table_prefix."_user_table";
 	$g_mantis_user_profile_table   = $g_db_table_prefix."_user_profile_table";
 	$g_mantis_user_pref_table      = $g_db_table_prefix."_user_pref_table";
+	#--------------------
+
+	#--------------------
+	# core file variables
+	$g_core_API_file             = "core_API.php";
+	$g_meta_include_file         = "meta_inc.php";
+	$g_menu_include_file         = "menu_inc.php";
+	#--------------------
+
+	#--------------------
+	# bugnote includes
+	$g_bugnote_include_file      = "bugnote_inc.php";
+	$g_bugnote_add_include_file  = "bugnote_add_inc.php";
+	#--------------------
+
+	#--------------------
+	# css
+	$g_css_include_file          = "css_inc.php";
 	#--------------------
 
 	#--------------------
@@ -198,70 +266,7 @@
 	#--------------------
 
 	#--------------------
-	# cookies
-
-	# cookie names
-	$g_string_cookie            = $g_cookie_prefix."_STRING_COOKIE";
-
-	# cookie values
-	$g_string_cookie_val        = $HTTP_COOKIE_VARS[$g_string_cookie];
-	#--------------------
-
-	#--------------------
-	# time for coookie to live in seconds
-	$g_time_length              = 30000000;     # 1 year
-	# time to delay between page redirects
-	$g_wait_time                = 1;            # in seconds
-	#--------------------
-
-	#--------------------
-	# defaults for viewing preferences
-	$g_default_limit_view       = 50;
-	$g_default_show_changed     = 6;
-	$g_default_advanced_report  = "";  # set to on to enable
-	$g_default_advanced_view    = "";  # set to on to enable
-	#--------------------
-
-	#--------------------
-	# date lengths to bount bugs by
-	# folows the english required by strtotime()
-	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
-	#--------------------
-
-	#--------------------
-	# html table appearance variables
-	$g_primary_table_tags        = "";
-	#--------------------
-
-	#--------------------
-	# color values
-	$g_white_color           = "#ffffff";    # white
-
-	$g_primary_color_dark    = "#d8d8d8";    # gray
-	$g_primary_color_light   = "#e8e8e8";    # light gray
-	$g_primary_border_color  = "#aaaaaa";    # dark gray
-	$g_category_title_color	 = "#c8c8e8";    # bluish
-	$g_category_title_color2 = "#c0c0c8";    # gray bluish
-
-	$g_table_title_color     = "#ffffff";    # white
-
-	$g_required_field_color  = "#aa0000";    # redish
-
-	$g_new_color             = "#ffa0a0";    # red
-	$g_feedback_color        = "#ff50a8";    # purple
-	$g_acknowledged_color    = "#ffd850";    # orange
-	$g_confirmed_color       = "#ffffb0";    # yellow
-	$g_assigned_color        = "#c8c8ff";    # blue
-	$g_resolved_color        = "#ffffff";    # not used in default
-	#--------------------
-
-	#--------------------
-	# news
-	$g_news_view_limit      = 5;
-	#--------------------
-
-	#--------------------
 	#version
-	$g_mantis_version       = "0.12.0";
+	$g_mantis_version       = "0.13.0";
 	#--------------------
 ?>
