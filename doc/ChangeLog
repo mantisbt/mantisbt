@@ -69,6 +69,8 @@ Mantis ChangeLog
  * Added support for custom_config_inc.php, this is to replace config_inc.php.  Although config_inc.php is still supported, it is recommended to use the new name.
  * Replaced $g_<status>_color variables with $g_status_colors['<status color>'] array in the configuration.  For example, $g_new_color is replaced with $g_status_colors['new']. 
  * Added support for adding multiple categories in one step, this is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
+ * Added multiple bug actions in view_all_bug_page.php. 
+ * Added a direct link, with a small icon, on each bug row, so that users on a selected project can switch directly to the bug_update_advanced_page. 
 
 2002.05.19  -  0.17.3
 
