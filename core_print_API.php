@@ -986,7 +986,7 @@
 		for ($i=0;$i<$t_tag_count;$i++) {
 			$tag = preg_replace( $t_filter_from, $t_filter_to, $g_html_tags[$i] );
 
-			$p_string = preg_replace( "/&lt;($tag)&gt;/", "<\\1>", $p_string );
+			$p_string = preg_replace( "/&lt;($tag)&gt;/i", "<\\1>", $p_string );
 		}
 
 		return $p_string;
