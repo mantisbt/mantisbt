@@ -21,10 +21,12 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 			$t_s = explode( ":", $t_arr[$i] );
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
+			if ($g_project_cookie_val=='0000000') $specific_where = "";
+			else $specific_where = " AND project_id='$g_project_cookie_val'";
+			
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE $p_enum='$t_s[0]' AND
-					project_id='$g_project_cookie_val'";
+					WHERE $p_enum='$t_s[0]' $specific_where";
 			$result = db_query( $query );
 			$enum_name_count[] = db_result( $result, 0 );
 		} # end for
@@ -40,12 +42,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->SetScale("textlin");
 		$graph->SetMarginColor("white");
 		$graph->SetFrame(false);
-		#$graph->title->SetFont(FF_VERDANA, FS_BOLD, 12);
 		$graph->title->Set($p_title);
 		$graph->xaxis->SetTickLabels($enum_name);
-#		$graph->xaxis->SetFont(FF_VERDANA, FS_NORMAL, 10);
-#		$graph->xaxis->SetLabelAngle(-30);
-		#$graph->xaxis->SetFont(FF_FONT1);
 		$graph->xaxis->SetLabelAngle(90);
 
 		$graph->yaxis->scale->ticks->SetDirection(-1);
@@ -77,12 +75,12 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			#$developer_name[] = $v_username;
 
+			if ($g_project_cookie_val=='0000000') $specific_where = "";
+			else $specific_where = " AND project_id='$g_project_cookie_val'";
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND
-						project_id='$g_project_cookie_val'";
+					WHERE handler_id='$v_id' $specific_where";
 			$result2 = db_query( $query );
 			$total_buff = db_result( $result2, 0, 0 );
 
@@ -92,16 +90,14 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 					FROM $g_mantis_bug_table
 					WHERE handler_id='$v_id' AND
 						status<>'$t_res_val' AND
-						status<>'$t_clo_val' AND
-						project_id='$g_project_cookie_val'";
+						status<>'$t_clo_val' $specific_where";
 			$result2 = db_query( $query );
 			$open_buff = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE handler_id='$v_id' AND 
-						(status='$t_res_val' OR status='$t_clo_val' ) AND
-						project_id='$g_project_cookie_val'";
+						(status='$t_res_val' OR status='$t_clo_val' ) $specific_where";
 			$result2 = db_query( $query );
 			$resolved_buff = db_result( $result2, 0, 0 );
 
@@ -125,12 +121,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->SetScale("textlin");
 		$graph->SetMarginColor("white");
 		$graph->SetFrame(false);
-		#$graph->title->SetFont(FF_VERDANA, FS_BOLD, 12);
 		$graph->title->Set($s_by_developer);
 		$graph->xaxis->SetTickLabels($developer_name);
-#		$graph->xaxis->SetFont(FF_VERDANA, FS_NORMAL, 10);
-#		$graph->xaxis->SetLabelAngle(-30);
-		#$graph->xaxis->SetFont(FF_FONT1);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
@@ -177,11 +169,11 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			
-
+			if ($g_project_cookie_val=='0000000') $specific_where = "";
+			else $specific_where = " AND project_id='$g_project_cookie_val'";
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE reporter_id ='$v_id' AND
-						project_id='$g_project_cookie_val'";
+					WHERE reporter_id ='$v_id' $specific_where";
 			$result2 = db_query( $query );
 			$t_count =  db_result( $result2, 0, 0 );
 			if ( $t_count > 0){
@@ -203,12 +195,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->SetScale("textlin");
 		$graph->SetMarginColor("white");
 		$graph->SetFrame(false);
-		#$graph->title->SetFont(FF_VERDANA, FS_BOLD, 12);
 		$graph->title->Set($s_by_reporter);
 		$graph->xaxis->SetTickLabels($reporter_name);
-#		$graph->xaxis->SetFont(FF_VERDANA, FS_NORMAL, 10);
-#		$graph->xaxis->SetLabelAngle(-30);
-		#$graph->xaxis->SetFont(FF_FONT1);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
@@ -230,10 +218,12 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 				$g_mantis_project_category_table, $g_project_cookie_val,
 				$category_name, $category_bug_count;
-
-		$query = "SELECT category
+		
+		if ($g_project_cookie_val=='0000000') $specific_where = "1=1";
+		else $specific_where = " project_id='$g_project_cookie_val'";
+		$query = "SELECT DISTINCT category
 				FROM $g_mantis_project_category_table
-				WHERE project_id='$g_project_cookie_val'
+				WHERE $specific_where
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -244,8 +234,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$category_name[$i]' AND
-						project_id='$g_project_cookie_val'";
+					WHERE category='$category_name[$i]' AND $specific_where";
 			$result2 = db_query( $query );
 			$category_bug_count[] = db_result( $result2, 0, 0 );
 
@@ -262,12 +251,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->SetScale("textlin");
 		$graph->SetMarginColor("white");
 		$graph->SetFrame(false);
-		#$graph->title->SetFont(FF_VERDANA, FS_BOLD, 12);
 		$graph->title->Set($s_by_category);
 		$graph->xaxis->SetTickLabels($category_name);
-#		$graph->xaxis->SetFont(FF_VERDANA, FS_NORMAL, 10);
-#		$graph->xaxis->SetLabelAngle(-30);
-		#$graph->xaxis->SetFont(FF_FONT1);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
@@ -310,10 +295,12 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$t_clo_val = CLOSED; 
 		$t_res_val = RESOLVED;
 		
+		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1 ";
+			else $specific_where = " project_id='$g_project_cookie_val' ";
+		
 		### Get all the submitted dates
 		$query = "SELECT UNIX_TIMESTAMP(date_submitted) as date_submitted
-			FROM $g_mantis_bug_table
-			WHERE project_id='$g_project_cookie_val' 
+			FROM $g_mantis_bug_table WHERE $specific_where 
 			ORDER BY date_submitted";
 		$result = db_query( $query );
 		$bug_count = db_num_rows( $result );
@@ -337,8 +324,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		### Get all the resolved dates
 		$query = "SELECT UNIX_TIMESTAMP(last_updated) as last_updated
 			FROM $g_mantis_bug_table
-			WHERE project_id='$g_project_cookie_val' AND 
-				(status='$t_res_val' OR status='$t_clo_val')
+			WHERE $specific_where AND 
+			(status='$t_res_val' OR status='$t_clo_val')
 			ORDER BY last_updated";
 		$result = db_query( $query );
 		$bug_count = db_num_rows( $result );
@@ -385,16 +372,12 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->SetScale("linlin");
 		$graph->SetMarginColor("white");
 		$graph->SetFrame(false);
-		#$graph->title->SetFont(FF_VERDANA, FS_BOLD, 12);
 		$graph->title->Set("cumulative $s_by_date");
 		$graph->legend->Pos(0.1,0.6,"right","top");
 		$graph->legend->SetShadow(false);
 		$graph->legend->SetFillColor("white");
 		$graph->legend->SetLayout(LEGEND_HOR);
 		$graph->xaxis->Hide();
-#		$graph->xaxis->SetFont(FF_VERDANA, FS_NORMAL, 10);
-#		$graph->xaxis->SetLabelAngle(-30);
-		#$graph->xaxis->SetFont(FF_FONT1);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
