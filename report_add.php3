@@ -162,7 +162,7 @@
 <? print_css( $g_css_include_file ) ?>
 <? include( $g_meta_include_file ) ?>
 <?
-	if (( $result )&&( !isset( $f_report_stay ) )) {
+	if (( !$check_failed )&&( $result )&&( !isset( $f_report_stay ) )) {
 		print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
 	}
 ?>
