@@ -2,6 +2,9 @@ Mantis ChangeLog
 
 2004.10.xx  -  0.19.1
 
+- 0004377: [bugtracker] $g_bug_submit_status should depends on user level (bpfennig)
+- 0004407: [administration] History Column Titles do not match table text formating (bpfennig)
+- 0004171: [bugtracker] Make all text area widths the same as for 'Add Note' (bpfennig)
 - 0004538: [bugtracker] $g_bug_resolved_status_threshold doesn't work correctly with additional status (thraxisp)
 - 0004440: [bugtracker] It should be possible to define an assigned to at "Change Status To" (thraxisp)
 - 0004437: [bugtracker] Filenames of uploaded attached files are damaged (thraxisp)
