@@ -6,24 +6,23 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.13 2003-01-04 09:30:41 jfitzell Exp $
+	# $Id: database_api.php,v 1.14 2003-02-17 03:42:16 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Database
 	###########################################################################
 
-	# This in the general interface for all database calls.
-	# The actual SQL queries are found in the pages.
+	# This is the general interface for all database calls.
 	# Use this as a starting point to port to other databases
 
 	# An array in which all executed queries are stored.  This is used for profiling
 	$g_queries_array = array();
 
 	# --------------------
-	# connect to database and select database
-	function db_connect($p_hostname, $p_username, $p_password, $p_port ) {
-		$t_result = mysql_connect( "$p_hostname:$p_port", $p_username, $p_password );
+	# Make a connection to the database
+	function db_connect( $p_hostname, $p_username, $p_password, $p_port ) {
+		$t_result = @mysql_connect( "$p_hostname:$p_port", $p_username, $p_password );
 
 		if ( !$t_result ) {
 			db_error();
@@ -33,10 +32,11 @@
 
 		return true;
 	}
+
 	# --------------------
-	# persistent connect to database and select database
-	function db_pconnect($p_hostname, $p_username, $p_password, $p_port ) {
-		$t_result = mysql_pconnect( "$p_hostname:$p_port", $p_username, $p_password );
+	# Make a persistent connection to the database
+	function db_pconnect( $p_hostname, $p_username, $p_password, $p_port ) {
+		$t_result = @mysql_pconnect( "$p_hostname:$p_port", $p_username, $p_password );
 
 		if ( !$t_result ) {
 			db_error();
@@ -46,6 +46,7 @@
 
 		return true;
 	}
+
 	# --------------------
 	# execute query, requires connection to be opened
 	# If $p_error_on_failure is true (default) an error will be triggered
@@ -58,7 +59,7 @@
 
 		array_push ( $g_queries_array, $p_query );
 
-		$t_result = mysql_query( $p_query );
+		$t_result = @mysql_query( $p_query );
 
 		# @@@ remove p_error_on_failure and use @ in every caller that used to use it
 		if ( !$t_result && $p_error_on_failure ) {
@@ -69,9 +70,10 @@
 			return $t_result;
 		}
 	}
+
 	# --------------------
 	function db_select_db( $p_db_name ) {
-		$t_result = mysql_select_db( $p_db_name );
+		$t_result = @mysql_select_db( $p_db_name );
 
 		if ( !$t_result ) {
 			db_error();
@@ -81,18 +83,22 @@
 
 		return $t_result;
 	}
+
 	# --------------------
 	function db_num_rows( $p_result ) {
 		return mysql_num_rows( $p_result );
 	}
+
 	# --------------------
 	function db_affected_rows() {
 		return mysql_affected_rows();
 	}
+
 	# --------------------
 	function db_fetch_array( $p_result ) {
 		return mysql_fetch_array( $p_result );
 	}
+
 	# --------------------
 	function db_result( $p_result, $p_index1=0, $p_index2=0 ) {
 		if ( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
@@ -101,6 +107,7 @@
 			return false;
 		}
 	}
+
 	# --------------------
 	# return the last inserted id
 	# For MS SQL use: SELECT @@IDENTITY AS 'id'
@@ -109,6 +116,7 @@
 		$t_result = db_query( $query );
 		return db_result( $t_result, 0, 0 );
 	}
+
 	# --------------------
 	function db_field_exists( $p_field_name, $p_table_name, $p_db_name = '') {
 		global $g_database_name;
@@ -127,14 +135,17 @@
 
 		return false;
 	}
+
 	# --------------------
 	function db_error_num() {
 		return mysql_errno();
 	}
+
 	# --------------------
 	function db_error_msg() {
 		return mysql_error();
 	}
+
 	# --------------------
 	# display both the error num and error msg
 	function db_error( $p_query=null ) {
@@ -144,6 +155,7 @@
 			error_parameters( db_error_num(), db_error_msg() );
 		}
 	}
+
 	# --------------------
 	# close the connection.
 	# Not really necessary most of the time since a connection is
@@ -157,17 +169,18 @@
 	function db_prepare_string( $p_string ) {
 		return mysql_escape_string( $p_string );
 	}
+
 	# --------------------
 	# prepare an integer before DB insertion
 	function db_prepare_int( $p_int ) {
 		return (integer)$p_int;
 	}
+
 	# --------------------
 	# prepare a boolean before DB insertion
 	function db_prepare_bool( $p_bool ) {
 		return (int)(bool)$p_bool;
 	}
-
 
 	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
@@ -177,4 +190,5 @@
 		}
 		db_select_db( $g_database_name );
 	}
+
 ?>
