@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.91 2005-03-23 18:40:14 thraxisp Exp $
+	# $Id: filter_api.php,v 1.92 2005-03-23 20:01:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2596,7 +2596,6 @@
 		# get all of the displayed fields for sort, then drop ones that
 		#  are not appropriate and translate the rest
 		$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
-$t_fields[] = 'custom_How Found';
 		$t_n_fields = count( $t_fields );
 		$t_shown_fields[""] = "";
 		for ( $i=0; $i < $t_n_fields; $i++ ) {
