@@ -6,12 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# 한글 번역   aporie@kornet.net
+	# 추가 번역   torija@digitalwave.co.kr
 	# -------------------------------------------------
-	# $Revision: 1.37 $
+	# $Revision: 1.38 $
 	# $Author: torija $
-	# $Date: 2002-08-23 17:02:18 $
+	# $Date: 2002-08-23 17:18:11 $
 	#
-	# $Id: strings_korean.txt,v 1.37 2002-08-23 17:02:18 torija Exp $
+	# $Id: strings_korean.txt,v 1.38 2002-08-23 17:18:11 torija Exp $
 	###########################################################################
 ?>
 <?php
@@ -26,32 +27,32 @@
 	$s_print_all_bug_page_link = '리포트 출력';
 	$s_csv_export = 'CSV 엑스포트';
 	$s_login_anonymously = '익명 로그인';
-	$s_jump_to_bugnotes = 'Jump to Bugnotes';
-	$s_public_project_msg = 'This project is PUBLIC.  All users have access.';
-	$s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
-	$s_access_level_project = 'Project Access Level';
-	$s_view_submitted_bug_link = 'View Submitted Bug';
-	$s_assigned_projects = 'Assigned Projects';
-	$s_unassigned_projects = 'Unassigned Projects';
-	$s_print = 'Print';
-	$s_jump = 'Jump';
-	$s_copy_users = 'Copy Users';
+	$s_jump_to_bugnotes = '버그노트로 이동';
+	$s_public_project_msg = '이 프로젝트는 모두에게 공개되었습니다.';
+	$s_private_project_msg = '이 프로젝트는 관리자와 허용된 사용자만 접근 가능합니다.';
+	$s_access_level_project = '프로젝트 접근 권한';
+	$s_view_submitted_bug_link = '보고된 버그 보기';
+	$s_assigned_projects = '할당된 프로젝트';
+	$s_unassigned_projects = '할당되지 않은 프로젝트';
+	$s_print = '출력';
+	$s_jump = '이동';
+	$s_copy_users = '사용자 복제';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
-	$s_bug_history = 'Bug History';
-	$s_field = 'Field';
+	$s_bug_history = '벌레 히스토리';
+	$s_field = '필드';
 	$s_old_value = 'Old Value';
 	$s_new_value = 'New Value';
-	$s_date_modified = 'Date Modified';
-	$s_bugnote = 'Bugnote';
-	$s_change = 'Change';
+	$s_date_modified = '수정일';
+	$s_bugnote = '벌레노트';
+	$s_change = '수정';
 	$s_bugnote_view_state = 'Bugnote View State';
-	$s_bug_monitor = 'Bug Monitored';
-	$s_bug_end_monitor = 'Bug End Monitor';
+	$s_bug_monitor = '감시중인 벌레';
+	$s_bug_end_monitor = '벌레 감시 끝';
 	$s_announcement = 'Announcement';
-	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Delete Bugnote';
-	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
+	$s_stays_on_top = '맨 위로';
+	$s_delete_bugnote_button = '벌레노트 삭제';
+	$s_delete_bugnote_sure_msg = '벌레노트를 삭제하겠습니까?';
 	$s_bug_relationships = 'Relationships';
 
 	$s_duplicate_of = 'duplicate of %id';
@@ -60,32 +61,32 @@
 	$s_dependant_on = 'dependant on %id';
 	$s_blocks = 'blocks %id';
 
-	$s_new_bug = 'New Bug';
-	$s_bugnote_added = 'Bugnote Added';
-	$s_bugnote_edited = 'Bugnote Edited';
-	$s_bugnote_deleted = 'Bugnote Deleted';
-	$s_summary_updated = 'Summary Updated';
-	$s_description_updated = 'Description Updated';
-	$s_additional_information_updated = 'Additional Information Updated';
+	$s_new_bug = '새 벌레';
+	$s_bugnote_added = '벌레노트 추가됨';
+	$s_bugnote_edited = '벌레노트 수정됨';
+	$s_bugnote_deleted = '벌레노트 삭제됨';
+	$s_summary_updated = '요약 업데이트됨';
+	$s_description_updated = '설명 업데이트됨';
+	$s_additional_information_updated = '추가 정보 업데이트됨';
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
+	$s_file_added = '파일 추가됨: ';
+	$s_file_deleted = '파일 삭제됨: ';
 
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
+	$s_make_private = '보호하기';
+	$s_make_public = '공개하기';
 
 	# bug_actiongroup_page.php : mass treatment
-	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
+	$s_close_bugs_conf_msg = '이 벌레를 끝내시겠습니까 ?';
+	$s_delete_bugs_conf_msg = '이 벌레를 삭제하시겠습니까 ?';
 	$s_move_bugs_conf_msg = 'Move bugs to';
 	$s_assign_bugs_conf_msg = 'Assign bugs to';
 	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
 	$s_priority_bugs_conf_msg = 'Choose bugs priority';
 	$s_status_bugs_conf_msg = 'Choose bugs status';
-	$s_close_group_bugs_button = 'Close Bugs' ;
-	$s_delete_group_bugs_button = 'Delete Bugs' ;
-	$s_move_group_bugs_button = 'Move Bugs' ;
-	$s_assign_group_bugs_button = 'Assign Bugs' ;
+	$s_close_group_bugs_button = '벌레 해결' ;
+	$s_delete_group_bugs_button = '벌레 삭제' ;
+	$s_move_group_bugs_button = '벌레 이동' ;
+	$s_assign_group_bugs_button = '벌레 할당' ;
 	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
 	$s_priority_group_bugs_button = 'Update Priority' ;
 	$s_status_group_bugs_button = 'Update Status' ;
@@ -124,21 +125,21 @@
 	$s_bugnote_description = 'Bugnote description';
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
+	$MANTIS_ERROR[ERROR_GENERIC]            = '오류: An error occurred during this action.  You may wish to report this error to your local administrator.';
 	$MANTIS_ERROR[ERROR_SQL] = '오류: SQL 오류 발생. 벌레 리포트해주시기 바랍니다.';
 	$MANTIS_ERROR[ERROR_LOGIN] = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
 	$MANTIS_ERROR[ERROR_REPORT] = '오류: 입력내용에 오류가 발생했습니다.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '오류: 허용되지 않는 파일 종류입니다.';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = '오류: 카테고리 중복.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = '오류: 버전 중복.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '오류: 파일 중복. 먼저 파일을 삭제하세요.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '오류: 같은 이름의 프로젝트가 이미 존재합니다.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '오류: 필수 입력 필드 누락, 입력사항을 확인하세요.';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
-	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = '오류: 보호중인 계정입니다. 보호를 해제하기전에는 이 계정에 접근할 수 없습니다.';
+	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = '오류: 파일 올리기 실패. 관리자가 admin_check 프로그램을 통해 해결할 수 있습니다.';
 
 	# General Strings
 	$s_go_back = '뒤로';
@@ -158,7 +159,7 @@
 	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:없음,20:낮음,30:보통,40:높음,50:긴급,60:즉시';
-	$s_severity_enum_string           = '10:눈에 띄는 벌레,20:사소한 벌레,30:문자열 오류,40:트윅,50:중요하지 않은 벌레,60:중요한 벌레,70:프로그램 크래시,80:프로그램에 큰 장애';
+	$s_severity_enum_string           = '10:눈에 띄는 벌레,20:사소한 벌레,30:문자열 오류,40:기능개선,50:중요하지 않은 벌레,60:중요한 벌레,70:프로그램 크래시,80:프로그램에 큰 장애';
 	$s_reproducibility_enum_string    = '10:항상발생,30:가끔발생,50:불규칙적,70:아직 시도되지 않은 기능,90:다시 만들수 없음';
 	$s_status_enum_string             = '10:새로운 벌레,20:피드백,30:벌레 인정,40:벌레 확인,50:할당된 벌레,80:해결된 벌레,90:폐쇄된 벌레';
 	$s_resolution_enum_string         = '10:개설,20:수정됨,30:다시 발생,40:다시 만들 수 없음,50:수정할수 없음,60:중복,70:벌레 아님,80:중지(suspended),90:수정될수 없음';
@@ -182,7 +183,7 @@
 	$s_email_bugnote_msg = '이벌레에 대하여 <b>벌레노트</b>가 추가되었습니다.';
 	$s_email_resolved_msg = '아래의 벌레가 <b>해결</b>되었습니다.';
 	$s_email_close_msg = '아래의 벌레가 <b>폐쇄</b>되었습니다.';
-	$s_email_feedback_msg = '아래의 벌레가 <b>FEEDBACK</b>되었습니다.';
+	$s_email_feedback_msg = '아래의 벌레가 <b>반영</b>되었습니다.';
 	$s_email_reopen_msg = '아래의 벌레가 <b>다시 발생</b>되었습니다.';
 	$s_email_assigned_msg = '아래의 벌레가 개발자에게 <b>할당</b>되었습니다.';
 
@@ -231,7 +232,7 @@
 	$s_redirect_delay = '리다이렉트 하지 않음';
 	$s_email_on_new = '새로운 벌레 이메일';
 	$s_email_on_assigned = '할당(Assign)에 대한 이메일';
-	$s_email_on_feedback = '피드백(Feedback)에 대한 이메일';
+	$s_email_on_feedback = '반영(Feedback)에 대한 이메일';
 	$s_email_on_resolved = '해결된 벌레에 대한 이메일';
 	$s_email_on_closed = '폐쇄시 이메일';
 	$s_email_on_reopened = '재발생시 이메일';
@@ -289,7 +290,7 @@
 	$s_close_immediately   = '지금 폐쇄:';
 
 	# bug_close_page.php
-	$s_close_bug_title = 'Close Bug';
+	$s_close_bug_title = '벌레 해결';
 
 	# bug_delete.php
 	$s_bug_deleted_msg = '벌레정보가 삭제되었습니다...';
@@ -299,8 +300,8 @@
 	$s_delete_bug_button = '벌레 삭제';
 
 	# bug_monitor.php
-	$s_monitor_bug_button = 'Monitor Bug';
-	$s_unmonitor_bug_button = 'End Monitoring';
+	$s_monitor_bug_button = '벌레 감시하기';
+	$s_unmonitor_bug_button = '벌레 감시 끝내기';
 
 	# bug_file_add.php
 	$s_file_upload_msg = '파일이 업로드되었습니다.';
