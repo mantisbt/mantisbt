@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.3 2002-08-27 10:08:08 jfitzell Exp $
+	# $Id: config_api.php,v 1.4 2002-08-27 12:44:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -63,5 +63,18 @@
 		$GLOBALS['g_'.$p_option] = $p_value;
 
 		return true;
+	}
+	# ------------------
+	# Checks if an obsolete configuration variable is still in use.  If so, an error
+	# will be generated and the script will exit.  This is called from login_page.php and
+	# admin_check.php.
+	function config_obsolete($var, $replace) {
+		if ( config_is_set( $var ) ) {
+			PRINT '$' . $var . ' is now obsolete';
+			if ($replace != '') {
+				PRINT ', please use $' . $replace;
+			}
+			exit;
+		}
 	}
 ?>

@@ -9,8 +9,10 @@
 	# Login page POSTs results to login.php
 	# Check to see if the user is already logged in via login_cookie_check()
 ?>
-<?php require_once( 'core.php' ) ?>
 <?php
+	require_once( 'core.php' );
+	require_once( $g_core_path . 'obsolete.php' );
+
 	# Check to see if the user is logged in and then validate the cookie value
 	if ( !empty( $g_string_cookie_val ) ) {
 		login_cookie_check( 'main_page.php' );

@@ -9,29 +9,10 @@
 	# INCLUDES
 	###########################################################################
 
-	$t_core_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+	$t_core_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 	# Include compatibility file before anything else
 	require_once( $t_core_dir . 'php_api.php' );
-
-	# Should be eventually moved to the admin scripts, but keep it here for a while
-	# to make sure people don't miss it.
-	function obsolete_config_variable($var, $replace) {
-		global $$var;
-		if (isset($$var)) {
-			PRINT '$' . $var . ' is now obsolete';
-			if ($replace != '') {
-				PRINT ', please use $' . $replace;
-			}
-			exit;
-		}
-	}
-
-	# Check for obsolete variables
-	obsolete_config_variable('g_notify_developers_on_new', 'g_notify_flags');
-	obsolete_config_variable('g_notify_on_new_threshold', 'g_notify_flags');
-	obsolete_config_variable('g_notify_admin_on_new', 'g_notify_flags');
-	
 	require_once( $t_core_dir . 'timer_api.php' );
 
 	# initialize our timer
@@ -44,7 +25,6 @@
 	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
 	# OPENED ANYWHERE ELSE.
 	require_once( $t_core_dir . 'database_api.php' );
-
 
 	require_once( $t_core_dir . 'config_api.php' );
 	require_once( $t_core_dir . 'gpc_api.php' );

@@ -1,5 +1,9 @@
 <?php
-	$t_mantis_path = '..' . DIRECTORY_SEPARATOR;
+	# Unable to use DIRECTORY_SEPARATOR because it may not be defined at 
+	# this stage.
+	require_once( '../core/php_api.php' );
+
+	$t_mantis_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
 
 	require_once( $t_mantis_path . 'constant_inc.php' );
 
@@ -19,7 +23,9 @@
 		require_once( $t_custom_config );
 	}
 
-	require_once( $t_mantis_path . 'core' . DIRECTORY_SEPARATOR . 'database_api.php' );
+	require_once( $g_core_path . 'database_api.php' );
+	require_once( $g_core_path . 'config_api.php' );
+	require_once( $g_core_path . 'obsolete.php' );
 
 	# Checks whether the specified field in the specified database exists. 
 	# If not, a message is displayed and the script exits.

@@ -1,10 +1,8 @@
 <?php
-    $f_skip_open_db = true;  // don't open the database in database_api.php
-	require( 'admin_inc.php' );
-?>
-<?php
 	error_reporting( E_ALL );
-	require_once( '..' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'php_api.php' );
+
+	$f_skip_open_db = true;  // don't open the database in database_api.php
+	require_once( 'admin_inc.php' );
 
 	# mail test
 	if ( isset( $f_mail_test ) ) {

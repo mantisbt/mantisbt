@@ -49,15 +49,15 @@
 
 	# path to your images directory (for icons)
 	# requires trailing /
-	$g_icon_path     = $g_path.'images/';
+	$g_icon_path = $g_path . 'images' . DIRECTORY_SEPARATOR;
 
 	# absolute path to your installation.  Requires trailing / or \
 	# Symbolic links are allowed since release 0.17.3
 	$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-	
+
 	# absolute patch to your core files. The default is usually OK, 
 	# unless you moved the 'core' directory out of your webroot (recommended).
-	$g_core_path = $g_absolute_path . 'core/';
+	$g_core_path = $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
 
 	#############################
 	# Web Server
@@ -547,7 +547,8 @@
 							'closed' => '#e8e8e8'); # light gray
 	# --- custom status color codes ----------
 	# array for colors assoociated with custom attributes
-	#
+ 	# @@@@ Consider changing the values in this array to point to $s_color_<xxxx>.  For example,
+ 	#      lang_get('color_antique_white') should return 'Antique White' for English language.
 	$g_custom_colors		   = array( '#FAEBD7' => 'ANTIQUEWHITE',
 										'#F5DEB3' =>  'WHEAT',     
 										'#FFD700' => 'GOLD',  

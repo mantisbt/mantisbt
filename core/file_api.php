@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.3 2002-08-26 22:42:26 vboctor Exp $
+	# $Id: file_api.php,v 1.4 2002-08-27 12:44:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -43,7 +43,7 @@
 			}
 			
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
-				PRINT " (cached)";
+				PRINT ' (' . lang_get( 'cached' ) . ')';
 			}
 
 			if ( $i != ($num_files - 1) ) {
