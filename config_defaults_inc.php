@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.90 2003-02-22 12:02:00 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.91 2003-02-22 18:49:42 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -684,6 +684,14 @@
 									 'assigned'		=> '#c8c8ff', # blue
 									 'resolved'		=> '#cceedd', # buish-green
 									 'closed'		=> '#e8e8e8'); # light gray
+
+	# The padding level when displaying bug ids
+	#  The bug id will be padded with 0's up to the size given
+	$g_display_bug_padding		= 7;
+
+	# The padding level when displaying bugnote ids
+	#  The bugnote id will be padded with 0's up to the size given
+	$g_display_bugnote_padding	= 7;
 
 	###############################
 	# Mantis Cookie Variables

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.15 2003-02-20 03:32:26 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.16 2003-02-22 18:49:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -306,7 +306,8 @@
 
 	# --------------------
 	# Pad the bugnote id with the appropriate number of zeros for printing
-	function bugnote_format_id( $p_bug_id ) {
-		return( str_pad( $p_bug_id, 7, '0', STR_PAD_LEFT ) );
+	function bugnote_format_id( $p_bugnote_id ) {
+		$t_padding = config_get( 'display_bugnote_padding' );
+		return( str_pad( $p_bugnote_id, $t_padding, '0', STR_PAD_LEFT ) );
 	}
 ?>

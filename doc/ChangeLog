@@ -28,6 +28,8 @@ Mantis ChangeLog
  * DB Upgrade: Added "id" primary key to bug history table.
  * Languages: Updated German localisation.
  * New config option (email_receive_own): controls whether users receive emails for changes they make
+ * New config option (display_bug_padding): controls the level of padding on bug ids
+ * New config option (display_bugnote_padding): controls the level of padding on bugnote ids
  * Removed config option (bugnote_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_view_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_add_include_file): Used file path directly since there is no reason to make it configurable.

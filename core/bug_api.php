@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.37 2003-02-16 11:03:23 jfitzell Exp $
+	# $Id: bug_api.php,v 1.38 2003-02-22 18:49:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -930,7 +930,8 @@
 	# --------------------
 	# Pads the bug id with the appropriate number of zeros.
 	function bug_format_id( $p_bug_id ) {
-		return( str_pad( $p_bug_id, 7, '0', STR_PAD_LEFT ) );
+		$t_padding = config_get( 'display_bug_padding' );
+		return( str_pad( $p_bug_id, $t_padding, '0', STR_PAD_LEFT ) );
 	}
 
 	# --------------------
