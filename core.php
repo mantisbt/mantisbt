@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.32 2004-02-05 01:17:13 jlatour Exp $
+	# $Id: core.php,v 1.33 2004-05-24 22:23:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -74,6 +74,14 @@
 	require_once( $t_core_path.'html_api.php' );
 	require_once( $t_core_path.'error_api.php' );
 	require_once( $t_core_path.'gpc_api.php' );
+
+	# custom functions (in main directory)
+	# @@@ Move all such files to core/
+	require_once( $t_core_path . 'custom_function_api.php' );
+	$t_overrides = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc.php';
+	if ( file_exists( $t_overrides ) ) {
+		require_once( $t_overrides );
+	}
 
 	# initialize our timer
 	$g_timer = new BC_Timer;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.1 2004-05-24 13:50:53 vboctor Exp $
+	# $Id: changelog_page.php,v 1.2 2004-05-24 22:23:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -40,13 +40,17 @@
 		$t_version = $t_version_row['version'];
 		$c_version = db_prepare_string( $t_version );
 
-		$query = "SELECT id, summary, view_state FROM $t_bug_table WHERE fixed_in_version='$c_version' AND duplicate_id='0' AND status >= $t_resolved ORDER BY last_updated DESC";
+		$query = "SELECT id, summary, view_state FROM $t_bug_table WHERE fixed_in_version='$c_version' ORDER BY last_updated DESC";
 
 		echo '<table class="table.width100" width="100%">';
 		echo '<tr><td class="category" colspan="2">', $t_project_name, ' - ', $t_version, '</td></tr>';
 		for ( $t_result = db_query( $query ); !$t_result->EOF; $t_result->MoveNext() ) {
 			# hide private bugs if user doesn't have access to view them.
 			if ( !$t_can_view_private && ( $t_result->fields['view_state'] == VS_PRIVATE ) ) {
+				continue;
+			}
+
+			if ( !helper_call_custom_function( 'changelog_include_issue', array( $t_result->fields['id'] ) ) ) {
 				continue;
 			}
 

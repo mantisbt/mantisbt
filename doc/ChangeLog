@@ -26,6 +26,7 @@ Mantis ChangeLog
  * Enh #3808: Ability to sponsor (fund) a bug or feature request.
  * Enh #3811: Allow private flag to be unset on resolved bugs.
  * Enh #3867: Give the user control whether to open hyperlink in new or current window.
+ * Enh #3870: Support for custom functions which provides hooks for customizing behaviour.
  * Fix #3094: Switching projects clears filter values.
  * Fix #3159: Allow case of user name to be changed. Also fixed bug where database error was displayed when trying to create user "TeSt" when user "Test" already exists.
  * Fix #3397: Delete notification should be off when deleting a project.

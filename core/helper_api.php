@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.49 2004-05-18 19:32:56 narcissus Exp $
+	# $Id: helper_api.php,v 1.50 2004-05-24 22:23:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -221,5 +221,21 @@
 		PRINT "</div>\n";
 		html_page_bottom1();
 		exit;
+	}
+
+	# --------------------
+	# Call custom function.
+	#
+	# $p_function - Name of function to call (eg: do_stuff).  The function will call custom_function_override_do_stuff()
+	#		if found, otherwise, will call custom_function_default_do_stuff().
+	# $p_args_array - Parameters to function as an array
+	function helper_call_custom_function( $p_function, $p_args_array ) {
+		$t_function = 'custom_function_override_' . $p_function;
+
+		if ( !function_exists( $t_function ) ) {
+			$t_function = 'custom_function_default_' . $p_function;
+		}
+
+		return call_user_func_array( $t_function, $p_args_array );
 	}
 ?>
