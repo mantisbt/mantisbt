@@ -49,7 +49,7 @@
 
 	# path to your images directory (for icons)
 	# requires trailing /
-	$g_icon_path = $g_path . 'images' . DIRECTORY_SEPARATOR;
+	$g_icon_path = $g_path . 'images/';
 
 	# absolute path to your installation.  Requires trailing / or \
 	# Symbolic links are allowed since release 0.17.3
