@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -53,7 +53,7 @@
 			<? echo $s_username ?>:
 		</td>
 		<td colspan=2>
-			<input type=text size=16 name=f_username value="<? echo $u_username ?>">
+			<input type=text size=16 maxlength=32 name=f_username value="<? echo $u_username ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
@@ -61,7 +61,7 @@
 			<? echo $s_email ?>:
 		</td>
 		<td colspan=2>
-			<input type=text size=32 name=f_email value="<? echo $u_email ?>">
+			<input type=text size=32 maxlength=64 name=f_email value="<? echo $u_email ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -123,6 +123,42 @@
 <p>
 <div align=center>
 <? echo $s_reset_password_msg ?>
+</div>
+
+<p>
+<div align=center>
+<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<tr>
+	<td bgcolor=<? echo $g_white_color ?>>
+	<table width=100%>
+	<tr>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
+			<b>Projects</b>
+		</td>
+	</tr>
+	<?
+		$query = "SELECT p.name, u.name
+				FROM
+				WHERE u.id=";
+		$result = db_result( $query );
+		$user_project_count = db_num_rows( $result );
+		for ($i=0;$i<$user_project_count;$i++) {
+			$row = db_fetch_aray( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+	?>
+	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+		<td>
+			<? echo $v_name ?>
+		</td>
+		<td>
+			<? echo $v_access_level ?>
+		</td>
+	</tr>
+	<? } ?>
+	</table>
+	</td>
+</tr>
+</table>
 </div>
 
 <? print_footer(__FILE__) ?>
