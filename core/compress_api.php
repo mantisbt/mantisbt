@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.9 2003-02-22 13:29:47 vboctor Exp $
+	# $Id: compress_api.php,v 1.10 2003-02-22 18:17:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -24,6 +24,8 @@
 	function compress_is_enabled() {
 		global $g_compression_started;
 
+		#@@@ temporarily disable compression when using IIS because of
+		#   issue #2953
 		return ( $g_compression_started &&
 				 ON == config_get( 'compress_html' ) &&
 				OFF == config_get( 'use_iis' ) );
