@@ -18,7 +18,7 @@ CREATE TABLE mantis_bug_table (
    status enum('new','feedback','acknowledged','confirmed','assigned','resolved') DEFAULT 'new' NOT NULL,
    resolution enum('open','fixed','reopened','unable to duplicate','not fixable','duplicate','not a bug','suspended') DEFAULT 'open' NOT NULL,
    projection enum('redesign','major rework','minor fix','tweak') DEFAULT 'minor fix' NOT NULL,
-   category enum('bugtracker','other') DEFAULT 'other' NOT NULL,
+   category enum('bugtracker','security','other') DEFAULT 'other' NOT NULL,
    date_submitted timestamp(14),
    last_updated timestamp(14),
    eta enum('none','< 1 day','2-3 days','< 1 week','< 1 month','> 1 month') DEFAULT 'none' NOT NULL,
