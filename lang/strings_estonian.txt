@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.4 $
-	# $Author: jlatour $
-	# $Date: 2004-02-26 13:23:55 $
+	# $Revision: 1.5 $
+	# $Author: vboctor $
+	# $Date: 2004-03-01 12:39:28 $
 	#
-	# $Id: strings_estonian.txt,v 1.4 2004-02-26 13:23:55 jlatour Exp $
+	# $Id: strings_estonian.txt,v 1.5 2004-03-01 12:39:28 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -37,7 +37,7 @@ $s_date_order = 'Kuupäeva järgi';
 $s_print_all_bug_page_link = 'Trüki teated';
 $s_csv_export = 'CSV Eksport';
 $s_login_anonymously = 'Logi sisse anonüümselt';
-$s_anonymous = 'Anonymous';
+$s_anonymous = 'Anonüümne';
 $s_jump_to_bugnotes = 'Mine bugi märkustesse';
 $s_public_project_msg = 'See projekt on AVALIK.  Kõik kasutajad omavad sellele juurdepääsu.';
 $s_private_project_msg = 'See projekt on PRIVAATNE.  Ainult administraator ja eraldi lisatud kasutajad omavad sellele juurdepääsu.';
@@ -84,7 +84,7 @@ $s_additional_information_updated = 'Lisainformatsioon uuendatud';
 $s_steps_to_reproduce_updated = 'Bugi kordamise sammud uuendatud';
 $s_file_added = 'Fail lisatud';
 $s_file_deleted = 'Fail kustutatud';
-$s_bug_deleted = 'Bug Deleted';
+$s_bug_deleted = 'Bugi kustutatud';
 
 $s_make_private = 'Tee privaateseks';
 $s_make_public = 'Tee avalikuks';
@@ -187,7 +187,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Kasutaja välja ei leitud';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'See on duplikaatne kasutaja väli.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Vähemalt üks projekt kasutab seda välja.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Lubamatu väärtus sellele väljale';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Vigane kasutaja välja definitsioon';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP autentimine ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Serveri ühendus ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Kirje uuendamine ebaõnnestus.';
@@ -202,7 +202,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategooriat ei leitud.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Selle nimega versioon juba eksisteerib.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versiooni ei leitud.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Kasutajanimi on vigane. Kasutajanimi võib sisaldada tähti, numbreid, tühikuid, sidekriipsu ja allkriipsu.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Kasutaja ei oma vajalikku kasutajaõiguste taset';
 
 $s_login_error = 'VIGA: Sinu kasutajakonto võib olla blokeeritud või sisestasid vale kasutajanime/parooli.';
 $s_login_cookies_disabled = 'VIGA: Su veebilehitseja kas ei oska küpsiseid kasutada või on see omadus keelatud.';
@@ -217,7 +217,7 @@ $s_logged_in_as = 'Sisse loginud ';
 $s_prefix_for_deleted_users = 'kasutaja';
 
 $s_administrator = 'administraator';
-$s_myself = "Myself";
+$s_myself = "Minule";
 
 # Enum Strings
 $s_access_levels_enum_string = '10:vaatleja,25:teataja,40:uuendaja,55:arendaja,70:mänedzher,90:administraator';
@@ -246,19 +246,19 @@ $s_reset_request_msg = 'Esitatud soov parool uuesti määrata';
 $s_account_name_msg = 'Su kasutajakonto kasutajanimi on';
 $s_news_password_msg = 'Siin on ka su uus parool';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'Järgmine bugi vajab sinu TAGASISIDET.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Järgnev bugi on TUNNISTATUD.';
+$s_email_notification_title_for_status_bug_confirmed = 'Järgmine bugi on KINNITATUD.';
+$s_email_notification_title_for_status_bug_assigned = 'Järgmine bugi on MÄÄRATUD.';
+$s_email_notification_title_for_status_bug_resolved = 'Järgmine bugi on LAHENDATUD.';
+$s_email_notification_title_for_status_bug_closed = 'Järgmine bugi on SULETUD';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'Järgmine bugi on TEATATUD.';
+$s_email_notification_title_for_action_bug_assigned = 'Järgmine bugi on MÄÄRATUD.';
+$s_email_notification_title_for_action_bug_reopened = 'Järgmine bugi on UUESTIAVATUD.';
+$s_email_notification_title_for_action_bug_deleted = 'Järgmine bugi on KUSTUTATUD.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'MÄRKUS on lisatud sellele bugile.';
 
 $s_email_reporter = 'Teataja';
 $s_email_handler = 'Haldaja';
@@ -738,7 +738,7 @@ $s_simple_report_link = 'Lihtteade';
 $s_enter_report_details_title = 'Teate detailide sisestus';
 $s_required = 'Vajalik';
 $s_select_category = 'Vali kategooria';
-$s_select_reproducibility = 'Select Reproducibility';
+$s_select_reproducibility = 'Vali korratavus';
 $s_select_severity = 'Vali raskusaste';
 $s_or_fill_in = 'või täida väljad';
 $s_assign_to = 'Määra';
@@ -791,13 +791,13 @@ $s_by_category = 'kategooria järgi';
 $s_by_priority = 'prioriteedi järgi';
 $s_by_developer = 'arendaja järgi';
 $s_by_reporter = 'teataja järgi';
-$s_reporter_by_resolution = 'Reporter By Resolution';
-$s_reporter_effectiveness = 'Reporter Effectiveness';
-$s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
-$s_total = 'Total';
+$s_reporter_by_resolution = 'Teataja lahenduse järgi';
+$s_reporter_effectiveness = 'Teataja efektiivsus';
+$s_developer_by_resolution = 'Arendaja lahenduse järgi';
+$s_percentage_fixed = '% lahendatud';
+$s_percentage_errors = '% väär';
+$s_errors = 'Väär';
+$s_total = 'Kokku';
 $s_time_stats = 'lahendatud bugide ajaline statistika (päevades)';
 $s_longest_open_bug = 'kõige pikemalt avatud bugi';
 $s_longest_open = 'kõige pikemalt avatud';
@@ -830,7 +830,7 @@ $s_viewing_bug_advanced_details_title = 'Bugi detailsete andmete vaatamine';
 $s_product_build = 'Toote järk (Build)';
 $s_system_profile = 'Süsteemikirjeldus';
 $s_update_bug_button = 'Uuenda bugi';
-$s_bug_assign_to_button = 'Assign To:';
+$s_bug_assign_to_button = 'Määra:';
 $s_reopen_bug_button = 'Ava bugi uuesti';
 $s_attached_files = 'Lisatud failid';
 $s_publish = 'Avalda';
