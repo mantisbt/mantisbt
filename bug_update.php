@@ -82,7 +82,7 @@
 				eta='$f_eta', summary='$f_summary',
 				os='$f_os', os_build='$f_os_build',
 				platform='$f_platform', build='$f_build',
-				version='$f_version'
+				version='$f_version', view_state='$f_view_state'
     		WHERE id='$f_id'";
    	$result = db_query($query);
 

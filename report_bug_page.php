@@ -156,6 +156,15 @@
 <?php } ?>
 <tr class="row-2">
 	<td class="category">
+		<?php echo $s_view_status ?>
+	</td>
+	<td>
+		<input type="radio" name="f_view_state" value="10" CHECKED> <?php echo $s_public ?>
+		<input type="radio" name="f_view_state" value="50"> <?php echo $s_private ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
 		<?php echo $s_report_stay ?> <?php print_documentaion_link( "report_stay" ) ?>:
 	</td>
 	<td>

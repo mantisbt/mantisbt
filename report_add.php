@@ -143,7 +143,7 @@
 				os, os_build,
 				platform, version,
 				build, votes,
-				profile_id, summary )
+				profile_id, summary, view_state )
 				VALUES
 				( null, '$g_project_cookie_val',
 				'$u_id', '$f_assign_id',
@@ -156,7 +156,7 @@
 				'$f_os', '$f_os_build',
 				'$f_platform', '$f_product_version',
 				'$f_build',	1,
-				'$f_profile_id', '$f_summary' )";
+				'$f_profile_id', '$f_summary', '$f_view_state' )";
 		$result = db_query( $query );
 
 		$t_bug_id = db_insert_id();

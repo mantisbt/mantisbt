@@ -65,13 +65,13 @@
 	# 1) count of all the rows
 	# 2) listing of the current page of rows, ordered appropriately
 
+	$t_user_id = get_current_user_field( "id" );
+
+	$t_pub = PUBLIC;
+	$t_prv = PRIVATE;
 	# project selection
 	if ( "0" == $g_project_cookie_val ) { # ALL projects
 		$t_access_level = get_current_user_field( "access_level" );
-		$t_user_id = get_current_user_field( "id" );
-
-		$t_pub = PUBLIC;
-		$t_prv = PRIVATE;
 		if ( ADMINISTRATOR == $t_access_level ) {
 			$query2 = "SELECT DISTINCT( id )
 					FROM $g_mantis_project_table
@@ -108,6 +108,11 @@
 		$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
 	}
 	# end project selection
+
+	# private bug selection
+	if ( ! access_level_check_greater_or_equal($g_private_bug_threshold) ) {
+		$t_where_clause .= " AND (view_state='$t_pub' OR (view_state='$t_prv' AND reporter_id='$t_user_id'))";
+	}
 
 	if ( $f_user_id != "any" ) {
 		$t_where_clause .= " AND reporter_id='$f_user_id'";

@@ -105,8 +105,17 @@
 	<td class="category">
 		<?php echo $s_reporter ?>
 	</td>
-	<td colspan="5">
+	<td>
 		<?php print_user_with_subject( $v_reporter_id, $f_id ) ?>
+	</td>
+	<td class="category">
+		<?php echo $s_view_status ?>
+	</td>
+	<td>
+		<?php echo get_enum_element( "project_view_state", $v_view_state ) ?>
+	</td>
+	<td colspan="2">
+		&nbsp;
 	</td>
 </tr>
 <tr class="row-2">
@@ -219,6 +228,9 @@
 	</td>
 </tr>
 <tr align="center">
+	<td colspan="6">
+		<table width="100%">
+			<tr align="center">
 <?php # UPDATE form BEGIN ?>
 <?php $t_user_id = get_current_user_field ( "id" ); ?>
 <?php if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
@@ -230,8 +242,6 @@
 	</td>
 	</form>
 <?php
-	} else {
-		PRINT "<td>&nbsp;</td>";
 	}
 	# UPDATE form END
 ?>
@@ -248,8 +258,6 @@
 	</td>
 	</form>
 <?php
-	} else {
-		PRINT "<td>&nbsp;</td>";
 	} # ASSIGN form END
 ?>
 <?php # RESOLVE form BEGIN ?>
@@ -261,8 +269,6 @@
 	</td>
 	</form>
 <?php
-	} else {
-		PRINT "<td>&nbsp;</td>";
 	} # RESOLVE form END
 ?>
 <?php # REOPEN form BEGIN ?>
@@ -275,8 +281,7 @@
 		<input type="submit" value="<?php echo $s_reopen_bug_button ?>">
 	</td>
 	</form>
-<?php } else {
-		PRINT "<td>&nbsp;</td>";
+<?php
 	} # REOPEN form END
 ?>
 <?php # CLOSE form BEGIN ?>
@@ -288,9 +293,35 @@
 	</td>
 	</form>
 <?php
-	} else {
-		PRINT "<td>&nbsp;</td>";
 	} # CLOSE form END
+?>
+<?php # MONITOR form BEGIN ?>
+<?php
+ if ( (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! check_bug_monitoring( $t_user_id, $f_id ) ) {
+?>
+	<form method="post" action="<?php echo $g_bug_monitor ?>">
+	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+	<input type="hidden" name="f_action" value="add">
+	<td class="center">
+		<input type="submit" value="<?php echo $s_monitor_bug_button ?>">
+	</td>
+	</form>
+<?php
+	}
+	# MONITOR form END
+?>
+<?php # UNMONITOR form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && check_bug_monitoring( $t_user_id, $f_id ) ) { ?>
+	<form method="post" action="<?php echo $g_bug_monitor ?>">
+	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+	<input type="hidden" name="f_action" value="delete">
+	<td class="center">
+		<input type="submit" value="<?php echo $s_unmonitor_bug_button ?>">
+	</td>
+	</form>
+<?php
+	}
+	# MONITOR form END
 ?>
 <?php # DELETE form BEGIN ?>
 <?php if ( access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
@@ -301,10 +332,12 @@
 		<input type="submit" value="<?php echo $s_delete_bug_button ?>">
 	</td>
 	</form>
-<?php } else {
-	PRINT "<td>&nbsp;</td>";
+<?php
 	} # DELETE form END
 ?>
+			</tr>
+		</table>
+	</td>
 </tr>
 </table>
 

@@ -68,7 +68,8 @@
 				$g_project_cookie_val,
 				$g_mantis_project_user_list_table,
 				$g_notify_developers_on_new,
-				$g_use_bcc, $g_use_phpMailer;
+				$g_use_bcc, $g_use_phpMailer,
+				$g_mantis_bug_monitor_table;
 
 		# setup the array of email entries
 		$send_arr = array();
@@ -152,6 +153,24 @@
 				}
 			} # end DEVELOPERS
 		} # end NEW bug developer section
+
+		# grab all users MONITORING bug
+		$query = "SELECT DISTINCT m.user_id, u.email
+				FROM $g_mantis_bug_monitor_table m,
+					$g_mantis_user_table u
+				WHERE m.bug_id=$p_bug_id AND
+						m.user_id=u.id";
+		$result = db_query( $query );
+		$monitor_user_count = db_num_rows( $result );
+		for ($i=0;$i<$monitor_user_count;$i++) {
+			$row = db_fetch_array( $result );
+
+			# if the user's notification is on then add to the list
+			$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
+			if ( ON == $t_notify ) {
+				$send_arr[] = $row["email"];
+			}
+		} # end MONITORING
 
 		$t_bcc = ( $g_use_bcc && !$g_use_phpMailer ) ? "Bcc: " : "";
 		## win-bcc-bug

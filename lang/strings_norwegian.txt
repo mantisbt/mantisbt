@@ -198,6 +198,10 @@
 	$s_delete_bug_sure_msg = "Er du sikker på at du ønsker å slette feilen?";
 	$s_delete_bug_button = "Slett feil";
 
+	# bug_monitor.php3
+	$s_monitor_bug_button = "Monitor Bug";
+	$s_unmonitor_bug_button = "End Monitoring";
+
 	# bug_file_add.php3
 	$s_file_upload_msg = "Fil lastet opp OK";
 

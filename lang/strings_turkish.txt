@@ -199,6 +199,10 @@
 	$s_delete_bug_sure_msg = "Bu bug'ý silmek istediðinizden emin misiniz?";
 	$s_delete_bug_button = "Bug Sil";
 
+	# bug_monitor.php3
+	$s_monitor_bug_button = "Monitor Bug";
+	$s_unmonitor_bug_button = "End Monitoring";
+
 	# bug_file_add.php3
 	$s_file_upload_msg = "Dosya baþarýyla gönderildi";
 

@@ -125,8 +125,19 @@
 	<td class="category">
 		<?php echo $s_reporter ?>
 	</td>
-	<td colspan="5">
+	<td>
 		<?php print_user( $v_reporter_id ) ?>
+	</td>
+	<td class="category">
+		<?php echo $s_view_status ?>
+	</td>
+	<td>
+		<select name="f_view_state">
+			<?php print_enum_string_option_list( "project_view_state", $v_view_state) ?>
+		</select>
+	</td>
+	<td colspan="2">
+		&nbsp;
 	</td>
 </tr>
 <tr class="row-2">

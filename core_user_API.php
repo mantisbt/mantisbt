@@ -649,6 +649,20 @@
 
 	}
 	# --------------------
+	# return whether user is monitoring bug for the user id and bug id
+	function check_bug_monitoring( $p_user_id, $p_bug_id ) {
+		global $g_mantis_bug_monitor_table;
+
+		$query = "SELECT user_id
+				FROM $g_mantis_bug_monitor_table
+				WHERE user_id='$p_user_id' AND bug_id='$p_bug_id'";
+
+
+		$result =  db_query( $query );
+		return db_result( $result, 0, 0 );
+
+	}
+	# --------------------
 	# return the specified user field for the user id
 	# exception for LDAP email
 	function get_user_field( $p_user_id, $p_field ) {

@@ -200,6 +200,10 @@
 	$s_delete_bug_sure_msg = "Sei sicuro di voler eliminare questo Bug?";
 	$s_delete_bug_button = "Elimina Bug";
 
+	# bug_monitor.php3
+	$s_monitor_bug_button = "Monitor Bug";
+	$s_unmonitor_bug_button = "End Monitoring";
+
 	# bug_file_add.php3
 	$s_file_upload_msg = "File uploadato con successo";
 
