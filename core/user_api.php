@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.34 2002-09-22 05:56:41 jfitzell Exp $
+	# $Id: user_api.php,v 1.35 2002-09-26 22:05:54 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -483,17 +483,29 @@
 		return user_pref_cache_row( $p_user_id );
 	}
 	# --------------------
-	# return the specified preference field for the user id
+	# Return the specified preference field for the user id
+	# If the preference can't be found try to return a defined default
+	# If that fails, trigger a WARNING and return ''
 	# @@@ needs extension for project-specific preferences
 	function user_get_pref( $p_user_id, $p_field_name ) {
-		$row = user_get_pref_row( $p_user_id );
+		$row = user_pref_cache_row( $p_user_id, false );
 
-		if ( isset( $row[$p_field_name] ) ) {
+		if ( false !== $row && isset( $row[$p_field_name] ) ) {
 			return $row[$p_field_name];
 		} else {
-			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
-			return '';
+			# new accounts should have had prefs created for them but older accoutns
+			#  might not yet
+
+			# try to get a default value
+			$t_default = config_get( 'default_' . $p_field_name, null );
+
+			if ( null !== $t_default ) {
+				return $t_default;
+			}
 		}
+
+		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+		return '';
 	}
 	# --------------------
 	# return the specified user field for the user id
@@ -715,6 +727,12 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_pref_name	= db_prepare_string( $p_pref_name );
 		$c_pref_value	= db_prepare_string( $p_pref_value );
+
+		# in case the user doesn't have a prefs table yet (an old account perhaps?)
+		#  create a default one now
+		if ( ! user_has_prefs( $p_user_id ) ) {
+			user_create_prefs( $p_user_id );
+		}
 
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
