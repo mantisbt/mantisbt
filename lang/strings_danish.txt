@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.65 $
+	# $Revision: 1.66 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:15 $
+	# $Date: 2004-08-10 10:46:13 $
 	#
-	# $Id: strings_danish.txt,v 1.65 2004-08-08 11:39:15 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.66 2004-08-10 10:46:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -486,8 +486,6 @@ $s_votes = 'Stemmer';
 $s_summary = 'Opsummering';
 $s_description = 'Beskrivelse';
 $s_steps_to_reproduce = 'Handlinger for at genfrembringe';
-$s_additional = 'Yderligere';
-$s_information = 'Information';
 $s_update_information_button = 'Opdater Information';
 
 # bug_update_page.php

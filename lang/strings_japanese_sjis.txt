@@ -8,11 +8,11 @@
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# Japenese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.56 $
+	# $Revision: 1.57 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:16 $
+	# $Date: 2004-08-10 10:46:15 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.56 2004-08-08 11:39:16 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.57 2004-08-10 10:46:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -487,8 +487,6 @@ $s_votes = 'ŽÀ‘•Šó–]“¾•[”';
 $s_summary = '—v–ñ';
 $s_description = 'Ú×';
 $s_steps_to_reproduce = 'ÄŒ»•û–@';
-$s_additional = '’Ç‰Á';
-$s_information = 'î•ñ';
 $s_update_information_button = 'XV';
 
 # bug_update_page.php

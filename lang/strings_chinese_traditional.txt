@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:01 $
+	# $Date: 2004-08-10 10:46:13 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.60 2004-08-08 11:39:01 jlatour Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.61 2004-08-10 10:46:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -486,8 +486,6 @@ $s_votes = '投票';
 $s_summary = '摘要';
 $s_description = '說明';
 $s_steps_to_reproduce = '臭蟲發生的 步驟說明';
-$s_additional = '額外';
-$s_information = '資訊';
 $s_update_information_button = '更新資訊';
 
 # bug_update_page.php

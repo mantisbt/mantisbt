@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.104 $
+	# $Revision: 1.105 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:15 $
+	# $Date: 2004-08-10 10:46:14 $
 	#
-	# $Id: strings_german.txt,v 1.104 2004-08-08 11:39:15 jlatour Exp $
+	# $Id: strings_german.txt,v 1.105 2004-08-10 10:46:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -491,8 +491,6 @@ $s_votes = 'Stimmen';
 $s_summary = 'Zusammenfassung';
 $s_description = 'Beschreibung';
 $s_steps_to_reproduce = 'Schritte zur Reproduzierung';
-$s_additional = 'Zusätzliche';
-$s_information = 'Information';
 $s_update_information_button = 'Information aktualisieren';
 
 # bug_update_page.php

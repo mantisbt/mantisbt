@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_inc.php,v 1.23 2004-06-30 13:51:07 prichards Exp $
+	# $Id: print_all_bug_options_inc.php,v 1.24 2004-08-10 10:46:12 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,33 +19,34 @@
 function get_field_names()
 {
 	#currently 27 fields
-	return $t_arr = array (		lang_get( 'id' ),
-							    lang_get( 'category' ),
-							    lang_get( 'severity' ),
-							    lang_get( 'reproducibility' ),
-								lang_get( 'date_submitted' ),
-								lang_get( 'last_update' ),
-								lang_get( 'reporter' ),
-								lang_get( 'assigned_to' ),
-								lang_get( 'priority' ),
-								lang_get( 'status' ),
-								lang_get( 'build' ),
-								lang_get( 'projection' ),
-								lang_get( 'eta' ),
-								lang_get( 'platform' ),
-								lang_get( 'os' ),
-								lang_get( 'os_version' ),
-								lang_get( 'product_version' ),
-								lang_get( 'resolution' ),
-								lang_get( 'duplicate_id' ),
-								lang_get( 'summary' ),
-								lang_get( 'description' ),
-								lang_get( 'steps_to_reproduce' ),
-								lang_get( 'additional' ).'_'.lang_get( 'information' ),
-								lang_get( 'attached_files' ),
-								lang_get( 'bugnote_title' ),
-								lang_get( 'bugnote_date' ),
-								lang_get( 'bugnote_description' )) ;
+	return $t_arr = array (
+	                       	'id',
+	                       	'category',
+	                       	'severity',
+	                       	'reproducibility',
+	                       	'date_submitted',
+	                       	'last_update',
+	                       	'reporter',
+	                       	'assigned_to',
+	                      	'priority',
+	                       	'status',
+	                       	'build',
+	                       	'projection',
+	                       	'eta',
+	                       	'platform',
+	                       	'os',
+	                       	'os_version',
+	                       	'product_version',
+	                       	'resolution',
+	                       	'duplicate_id',
+	                       	'summary',
+	                       	'description',
+	                       	'steps_to_reproduce',
+	                       	'additional_information',
+	                       	'attached_files',
+	                       	'bugnote_title',
+	                       	'bugnote_date',
+	                       	'bugnote_description' );
 }
 
 
@@ -133,12 +134,10 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 ?>
 
 	<td class="category">
-		<?php echo $t_field_name_arr[$i] ?>
+		<?php echo lang_get( $t_field_name_arr[$i] ) ?>
 	</td>
 	<td>
-		<?php # @@@ REWORK Code should not span two lines except in extreme cases.  Build this into a variable then print it out.  ?>
-		<?php //echo 'print_'.strtolower(str_replace(' ','_', $t_field_name_arr[$i])); ?>
-		<input type="checkbox" name="<?php echo 'print_' . strtolower( str_replace( ' ', '_', $t_field_name_arr[$i] ) ); ?>"
+		<input type="checkbox" name="<?php echo 'print_' . $t_field_name_arr[$i]; ?>"
 		<?php if ( isset( $t_prefs[$i] ) && ( $t_prefs[$i]==1 ) ) echo 'checked="checked"' ?> />
 	</td>
 </tr>

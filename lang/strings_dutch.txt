@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:15 $
+	# $Date: 2004-08-10 10:46:13 $
 	#
-	# $Id: strings_dutch.txt,v 1.67 2004-08-08 11:39:15 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.68 2004-08-10 10:46:13 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -489,8 +489,6 @@ $s_votes = 'Stemmen';
 $s_summary = 'Samenvatting';
 $s_description = 'Beschrijving';
 $s_steps_to_reproduce = 'Stappen om te reproduceren';
-$s_additional = 'Additioneel';
-$s_information = 'Informatie';
 $s_update_information_button = 'Aanpassen informatie';
 
 # bug_update_page.php

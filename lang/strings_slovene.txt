@@ -484,8 +484,6 @@ $s_votes = 'Glasovi';
 $s_summary = 'Povzetek';
 $s_description = 'Opis';
 $s_steps_to_reproduce = 'Koraki za ponovitev';
-$s_additional = 'Dodatne';
-$s_information = 'Infomacije';
 $s_update_information_button = 'Posodobi informacije';
 
 # bug_update_page.php

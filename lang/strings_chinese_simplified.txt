@@ -11,11 +11,11 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:01 $
+	# $Date: 2004-08-10 10:46:12 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.47 2004-08-08 11:39:01 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.48 2004-08-10 10:46:12 jlatour Exp $
 	###########################################################################
 
 	###########################################################################
@@ -503,8 +503,6 @@ $s_votes = "投票";
 $s_summary = "摘要";
 $s_description = "说明";
 $s_steps_to_reproduce = "Bug 重现步骤说明";
-$s_additional = "附加";
-$s_information = "信息";
 $s_update_information_button = "更新信息";
 
 # bug_update_page.php

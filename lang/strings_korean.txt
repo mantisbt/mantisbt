@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:16 $
+	# $Date: 2004-08-10 10:46:15 $
 	#
-	# $Id: strings_korean.txt,v 1.67 2004-08-08 11:39:16 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.68 2004-08-10 10:46:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -487,8 +487,6 @@ $s_votes = '투표수';
 $s_summary = '요약';
 $s_description = '설 명';
 $s_steps_to_reproduce = '재발생 단계';
-$s_additional = '부가 ';
-$s_information = '정보';
 $s_update_information_button = '정보사항 변경';
 
 # bug_update_page.php

@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.73 $
+	# $Revision: 1.74 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:16 $
+	# $Date: 2004-08-10 10:46:14 $
 	#
-	# $Id: strings_italian.txt,v 1.73 2004-08-08 11:39:16 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.74 2004-08-10 10:46:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -488,8 +488,6 @@ $s_votes = "Voti";
 $s_summary = "Riassunto";
 $s_description = "Descrizione";
 $s_steps_to_reproduce = "Passaggi per riprodurre l'anomalia";
-$s_additional = "Aggiuntiva";
-$s_information = "Informazione";
 $s_update_information_button = "Aggiorna Informazione";
 
 # bug_update_page.php

@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:17 $
+	# $Date: 2004-08-10 10:46:17 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.50 2004-08-08 11:39:17 jlatour Exp $
+	# $Id: strings_russian_koi8.txt,v 1.51 2004-08-10 10:46:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -486,8 +486,6 @@ $s_votes = 'Голоса';
 $s_summary = 'Сводка';
 $s_description = 'Описание';
 $s_steps_to_reproduce = 'Шаги по воспроизведению';
-$s_additional = 'Дополнительная';
-$s_information = 'информация';
 $s_update_information_button = 'Обновить данные';
 
 # bug_update_page.php

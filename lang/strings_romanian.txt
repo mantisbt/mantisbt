@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:17 $
+	# $Date: 2004-08-10 10:46:16 $
 	#
-	# $Id: strings_romanian.txt,v 1.60 2004-08-08 11:39:17 jlatour Exp $
+	# $Id: strings_romanian.txt,v 1.61 2004-08-10 10:46:16 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -486,8 +486,6 @@ $s_votes = 'Voturi';
 $s_summary = 'Sumar';
 $s_description = 'Descriere';
 $s_steps_to_reproduce = 'Pasi de reprodus';
-$s_additional = 'Aditional';
-$s_information = 'Informatie';
 $s_update_information_button = 'Modifica informatia';
 
 # bug_update_page.php

@@ -9,11 +9,11 @@
 	###########################################################################
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.4 $
+	# $Revision: 1.5 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:16 $
+	# $Date: 2004-08-10 10:46:15 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.4 2004-08-08 11:39:16 jlatour Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.5 2004-08-10 10:46:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -488,8 +488,6 @@ $s_votes = '実装希望得票数';
 $s_summary = '要約';
 $s_description = '詳細';
 $s_steps_to_reproduce = '再現方法';
-$s_additional = '追加';
-$s_information = '情報';
 $s_update_information_button = '更新';
 
 # bug_update_page.php

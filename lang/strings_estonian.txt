@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.11 $
+	# $Revision: 1.12 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:15 $
+	# $Date: 2004-08-10 10:46:14 $
 	#
-	# $Id: strings_estonian.txt,v 1.11 2004-08-08 11:39:15 jlatour Exp $
+	# $Id: strings_estonian.txt,v 1.12 2004-08-10 10:46:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -488,8 +488,6 @@ $s_votes = 'Hääli';
 $s_summary = 'Kokkuvõte';
 $s_description = 'Kirjeldus';
 $s_steps_to_reproduce = 'Kordamise sammud';
-$s_additional = 'Lisainfo';
-$s_information = 'Informatsioon';
 $s_update_information_button = 'Uuenda info';
 
 # bug_update_page.php

@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:15 $
+	# $Date: 2004-08-10 10:46:13 $
 	#
-	# $Id: strings_czech.txt,v 1.59 2004-08-08 11:39:15 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.60 2004-08-10 10:46:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -491,8 +491,6 @@ $s_votes = 'Hlasy';
 $s_summary = 'Shrnutí';
 $s_description = 'Popis';
 $s_steps_to_reproduce = 'Kroky k vyvolání';
-$s_additional = 'Dal¹í informace';
-$s_information = 'Informace';
 $s_update_information_button = 'Ulo¾it';
 
 # bug_update_page.php

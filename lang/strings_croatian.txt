@@ -9,11 +9,11 @@
 	###########################################################################
 	# Croatian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.13 $
+	# $Revision: 1.14 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:15 $
+	# $Date: 2004-08-10 10:46:13 $
 	#
-	# $Id: strings_croatian.txt,v 1.13 2004-08-08 11:39:15 jlatour Exp $
+	# $Id: strings_croatian.txt,v 1.14 2004-08-10 10:46:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -488,8 +488,6 @@ $s_votes = "Glasovi";
 $s_summary = "Sa¾etak";
 $s_description = "Opis";
 $s_steps_to_reproduce = "Koraci za reproduciranje";
-$s_additional = "Dodatni";
-$s_information = "Informacija";
 $s_update_information_button = "A¾uriraj informaciju";
 
 # bug_update_page.php

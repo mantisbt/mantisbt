@@ -9,11 +9,11 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:17 $
+	# $Date: 2004-08-10 10:46:15 $
 	#
-	# $Id: strings_polish.txt,v 1.69 2004-08-08 11:39:17 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.70 2004-08-10 10:46:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -488,8 +488,6 @@ $s_votes = 'G³osy';
 $s_summary = 'Podsumowanie';
 $s_description = 'Opis';
 $s_steps_to_reproduce = 'Kroki, by powtórzyæ';
-$s_additional = 'Dodatkowe';
-$s_information = 'Informacja';
 $s_update_information_button = 'Aktualizuj informacjê';
 
 # bug_update_page.php

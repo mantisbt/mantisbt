@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.53 $
+  # $Revision: 1.54 $
   # $Author: jlatour $
-  # $Date: 2004-08-08 11:39:16 $
+  # $Date: 2004-08-10 10:46:14 $
   #
-  # $Id: strings_hungarian.txt,v 1.53 2004-08-08 11:39:16 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.54 2004-08-10 10:46:14 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -487,8 +487,6 @@ $s_votes = 'Szavazatok';
 $s_summary = 'Összegzés';
 $s_description = 'Leírás';
 $s_steps_to_reproduce = 'Reprodukálás lépései';
-$s_additional = 'Egyéb';
-$s_information = 'Információ';
 $s_update_information_button = 'Információ mentése';
 
 # bug_update_page.php

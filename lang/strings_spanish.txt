@@ -11,11 +11,11 @@
 	# Spanish: Bernardo Hernández - b.magno@terra.es
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# -------------------------------------------------
-	# $Revision: 1.68 $
+	# $Revision: 1.69 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 11:39:17 $
+	# $Date: 2004-08-10 10:46:17 $
 	#
-	# $Id: strings_spanish.txt,v 1.68 2004-08-08 11:39:17 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.69 2004-08-10 10:46:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -490,8 +490,6 @@ $s_votes = 'Votos';
 $s_summary = 'Resumen';
 $s_description = 'Descripción';
 $s_steps_to_reproduce = 'Pasos para reproducirlo';
-$s_additional = 'Información';
-$s_information = 'Adicional';
 $s_update_information_button = 'Actualizar Información';
 
 # bug_update_page.php

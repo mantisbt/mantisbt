@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.08.xx  -  0.19.0xx
 
+- 0003938: [localization] Untranslatable string (jlatour)
 - 0004186: [upgrade] Some upgrade scripts do not read table names from config (jlatour)
 - 0004043: [email] Preference to exclude old bugnotes from notification (Bastian Pfennigschmidt)
 - 0004279: [bugtracker] My View makes bad use of available space (tazza70)
