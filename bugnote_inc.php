@@ -12,10 +12,16 @@
 	# grab the user id currently logged in
 	$t_user_id = get_current_user_field( 'id' );
 
+	if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
+		$s_restriction = 'AND view_state=' . PRIVATE;
+	} else {
+		$s_restriction = '';
+	}
+
 	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$f_id'
+			WHERE bug_id='$f_id' $s_restriction
 			ORDER BY date_submitted $g_bugnote_order";
 	$result = db_query($query);
 	$num_notes = db_num_rows($result);
@@ -45,12 +51,6 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v3' );
 		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
-
-		# do not print private bugnotes for non-developers
-		if (( PRIVATE == $v3_view_state ) &&
-			( !access_level_check_greater_or_equal( DEVELOPER ) )) {
-			continue;
-		}
 
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note
@@ -116,19 +116,26 @@
 <p>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title">
+	<td class="form-title" colspan="2">
 		<form method="post" action="bugnote_add.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<?php echo $s_add_bugnote_title ?>
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="center">
+	<td class="center" colspan="2">
 		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>
+<?php if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
+	<td class="right">
+		<input type="checkbox" name="f_private"> <?php echo $s_private; ?>
+	</td>
 	<td class="center">
+<?php } else { ?>
+	<td class="center" colspan="2">
+<?php } ?>
 		<input type="submit" value="<?php echo $s_add_bugnote_button ?>">
 		</form>
 	</td>

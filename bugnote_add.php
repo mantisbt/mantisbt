@@ -34,12 +34,19 @@
 		# retrieve bugnote text id number
 		$t_bugnote_text_id = db_insert_id();
 
+		# Check for private bugnotes.
+		if ($f_private) {
+			$c_view_state = PRIVATE;
+		} else {
+			$c_view_state = PUBLIC;
+		}
+
 		# insert bugnote info
 		$query = "INSERT
 				INTO $g_mantis_bugnote_table
-				( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
+				( id, bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
 				VALUES
-				( null, '$c_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
+				( null, '$c_id', '$u_id','$t_bugnote_text_id', '$c_view_state', NOW(), NOW() )";
 		$result = db_query( $query );
 
 		# update bug last updated
