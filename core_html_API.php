@@ -319,7 +319,11 @@
 					PRINT "<a href=\"$g_manage_page\">$s_manage_link</a> | ";
 				}
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {
+					if ( "0000000" != $g_project_cookie_val ) {
 					PRINT "<a href=\"$g_news_menu_page\">$s_edit_news_link</a> | ";
+					} else {
+						PRINT "<a href=\"$g_login_select_proj_page\">$s_edit_news_link</a> | ";
+					}
 				}
 
 				PRINT "<a href=\"$g_proj_doc_page\">$s_docs_link</a> | ";
