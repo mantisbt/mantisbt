@@ -9,12 +9,15 @@ Mantis
  * Added commented out examples for alternate links in css_inc.php
  * Added closing option tags.
  * Email prefs do not display when $g_enable_email_notification is 0.
- * Added danish localization.
+ * Added Danish localization.
  * Fixed where updaters could assign to themselves.
  * Fixed where updaters could delete bugs.
  * Fixed where search result numbers correctly displayed.
  * Raised access required to ADMINISTRATOR for many manage_* pages.
  * Fixed error where default_profiles were not being picked up properly.
+ * Fixed email subjects to unfilter url links properly.
+ * Fixed simple search to correctly compare between bug_table and bug_text_table.
+ * Added subject to emails when clicked on in the view_bug page.
 
 08.19.2001  -   0.15.4
 
