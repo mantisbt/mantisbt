@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.72 $
+	# $Revision: 1.73 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-24 21:35:38 $
+	# $Date: 2002-08-25 08:02:14 $
 	#
-	# $Id: strings_english.txt,v 1.72 2002-08-24 21:35:38 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.73 2002-08-25 08:02:14 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -164,7 +164,7 @@
 	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
 	$MANTIS_ERROR[ERROR_USERNAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
 	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-
+	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
 	# General Strings
 	$s_go_back = 'Go Back';
 	$s_proceed = 'Click here to proceed';

@@ -135,26 +135,27 @@
 	define( 'BUG_DEPENDANT', 2 );
 
 	# error messages
-	define( 'ERROR_GENERIC',              0 );
-	define( 'ERROR_SQL',                  1 );
-	define( 'ERROR_LOGIN',                2 );
-	define( 'ERROR_REPORT',               3 );
-	define( 'ERROR_NO_FILE_SPECIFIED',    4 );
-	define( 'ERROR_FILE_DISALLOWED',      5 );
-	define( 'ERROR_NO_DIRECTORY',         6 );
-	define( 'ERROR_DUPLICATE_CATEGORY',   7 );
-	define( 'ERROR_DUPLICATE_VERSION',    8 );
-	define( 'ERROR_DUPLICATE_FILE',       9 );
-	define( 'ERROR_DUPLICATE_PROJECT',   10 );
-	define( 'ERROR_EMPTY_FIELD',         11 );
-	define( 'ERROR_PROTECTED_ACCOUNT',   12 );
-	define( 'ERROR_ACCESS_DENIED',       13 );
-	define( 'ERROR_COOKIES_DISABLED',    14 );
-	define( 'ERROR_UPLOAD_FAILURE',      15 );
-	define( 'ERROR_FILE_TOO_BIG',        16 );
-	define( 'ERROR_GPC_VAR_NOT_FOUND',   17 );
-	define( 'ERROR_USERNAME_NOT_UNIQUE', 18 );
-	define( 'ERROR_CONFIG_OPT_NOT_FOUND',19 );
+	define( 'ERROR_GENERIC',					0 );
+	define( 'ERROR_SQL',						1 );
+	define( 'ERROR_LOGIN',						2 );
+	define( 'ERROR_REPORT',						3 );
+	define( 'ERROR_NO_FILE_SPECIFIED',			4 );
+	define( 'ERROR_FILE_DISALLOWED',			5 );
+	define( 'ERROR_NO_DIRECTORY',				6 );
+	define( 'ERROR_DUPLICATE_CATEGORY',			7 );
+	define( 'ERROR_DUPLICATE_VERSION',			8 );
+	define( 'ERROR_DUPLICATE_FILE',				9 );
+	define( 'ERROR_DUPLICATE_PROJECT',			10 );
+	define( 'ERROR_EMPTY_FIELD',				11 );
+	define( 'ERROR_PROTECTED_ACCOUNT',			12 );
+	define( 'ERROR_ACCESS_DENIED',				13 );
+	define( 'ERROR_COOKIES_DISABLED',			14 );
+	define( 'ERROR_UPLOAD_FAILURE',				15 );
+	define( 'ERROR_FILE_TOO_BIG',				16 );
+	define( 'ERROR_GPC_VAR_NOT_FOUND',			17 );
+	define( 'ERROR_USERNAME_NOT_UNIQUE',		18 );
+	define( 'ERROR_CONFIG_OPT_NOT_FOUND',		19 );
+	define( 'ERROR_LANG_STRING_NOT_FOUND',		20 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

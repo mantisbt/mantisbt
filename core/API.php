@@ -45,33 +45,12 @@
 	# OPENED ANYWHERE ELSE.
 	require( $t_core_dir . 'database_api.php' );
 
-	# Nasty code to select the proper language file
-	if ( !empty( $g_string_cookie_val ) ) {
-		$query = "SELECT DISTINCT language
-				FROM $g_mantis_user_pref_table pref, $g_mantis_user_table user
-				WHERE user.cookie_string='$g_string_cookie_val' AND
-						user.id=pref.user_id";
-		$result = db_query( $query );
-		$g_active_language = db_result( $result, 0 , 0 );
-		if (empty( $g_active_language )) {
-			$g_active_language = $g_default_language;
-		}
-	} else {
-		$g_active_language = $g_default_language;
-	}
-
-	include( 'lang/strings_'.$g_active_language.'.txt' );
-
-	# Allow overriding strings declared in the language file.
-	# custom_strings_inc.php can use $g_active_language
-	if ( file_exists( 'custom_strings_inc.php' ) ) {
-		include ( 'custom_strings_inc.php' );
-	}
 
 	require( $t_core_dir . 'config_api.php' );
 	require( $t_core_dir . 'gpc_api.php' );
 	require( $t_core_dir . 'error_api.php' );
 	require( $t_core_dir . 'security_api.php' );
+	require( $t_core_dir . 'lang_api.php' );
 	require( $t_core_dir . 'html_api.php' );
 	require( $t_core_dir . 'print_api.php' );
 	require( $t_core_dir . 'helper_api.php' );
