@@ -26,6 +26,7 @@
 		} else {
 			header( "Location: $p_url" );
 		}
+		die; # additional output can cause problems so let's just stop output here
 	}
 	# --------------------
 	# prints the name of the user given the id.  also makes it an email link.

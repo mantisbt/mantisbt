@@ -10,6 +10,7 @@ Mantis
  * Fixed problem with CSV not downloading.
  * Removed view_csv_export_inc.php (unused).
  * Modified core_API.php to always turn magic_quotes_runtime OFF.
+ * Added die to print_header_redirect().
 
 05.12.2002  -   0.17.2
 
