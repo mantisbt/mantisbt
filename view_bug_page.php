@@ -229,9 +229,12 @@
 		<input type="submit" value="<?php echo $s_update_bug_button ?>">
 	</td>
 	</form>
-<?php } else { ?>
-	<td>&nbsp;</td>
-<?php } # UPDATE form END ?>
+<?php
+	} else {
+		PRINT "<td>&nbsp;</td>";
+	}
+	# UPDATE form END
+?>
 <?php # ASSIGN form BEGIN ?>
 <?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_assign ?>">
@@ -245,9 +248,11 @@
 		<?php } #end of checking if current user already assigned ?>&nbsp;
 	</td>
 	</form>
-<?php } else { ?>
-	<td>&nbsp;</td>
-<?php } # ASSIGN form END ?>
+<?php
+	} else {
+		PRINT "<td>&nbsp;</td>";
+	} # ASSIGN form END
+?>
 <?php # RESOLVE form BEGIN ?>
 <?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_resolve_page ?>">
@@ -256,12 +261,14 @@
 		<input type="submit" value="<?php echo $s_resolve_bug_button ?>">
 	</td>
 	</form>
-<?php } else { ?>
-	<td>&nbsp;</td>
-<?php } # RESOLVE form END ?>
+<?php
+	} else {
+		PRINT "<td>&nbsp;</td>";
+	} # RESOLVE form END
+?>
 <?php # REOPEN form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status >= RESOLVED ) &&
-		(( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ) ||
+<?php if ( ( $v_status >= RESOLVED ) &&
+		( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ||
 		( $v_reporter_id == $t_user_id )) ) { ?>
 	<form method="post" action="<?php echo $g_bug_reopen_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
@@ -269,20 +276,23 @@
 		<input type="submit" value="<?php echo $s_reopen_bug_button ?>">
 	</td>
 	</form>
-<?php } else { ?>
-	<td>&nbsp;</td>
-<?php } # REOPEN form END ?>
+<?php } else {
+		PRINT "<td>&nbsp;</td>";
+	} # REOPEN form END
+?>
 <?php # CLOSE form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( RESOLVED == $v_status ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_close_bug_threshold ) && ( RESOLVED == $v_status ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_close_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="center">
 		<input type="submit" value="<?php echo $s_close_bug_button ?>">
 	</td>
 	</form>
-<?php } else { ?>
-	<td>&nbsp;</td>
-<?php } # CLOSE form END ?>
+<?php
+	} else {
+		PRINT "<td>&nbsp;</td>";
+	} # CLOSE form END
+?>
 <?php # DELETE form BEGIN ?>
 <?php if ( access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_delete_page ?>">
