@@ -52,8 +52,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_headline ?><br />
-		<span class="small"><?php echo $s_do_not_use ?> "</span>
+		<?php echo $s_headline ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" />
