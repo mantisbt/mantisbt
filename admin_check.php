@@ -279,30 +279,5 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 </tr>
 </table>
 
-<?php
-	$funcs = get_defined_functions();
-	$funcs = $funcs["internal"];
-	foreach( $funcs as $func_name ) {
-		#echo $func_name."<br />";
-	}
-?>
-
-</body>
-</html>                                                                                                       d, PLAIN )."<br />";
-
-			$crypt_pass = get_password( $f_password, CRYPT );
-			echo $crypt_pass."<br />";
-			echo get_password( $crypt_pass, CRYPT )."<br />";
-			echo get_password( $f_password, CRYPT2 )."<br />";
-			echo get_password( $f_password, CRYPT3 )."<br />";
-			echo get_password( $f_password, MD5 )."<br />";
-			echo create_random_password( $f_password )."<br />";
-		}
-		echo CRYPT_STD_DES;
-		echo CRYPT_EXT_DES;
-		echo CRYPT_MD5;
-		echo CRYPT_BLOWFISH;
-?>
-
 </body>
 </html>
