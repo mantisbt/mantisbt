@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.10.xx  -  0.19.1
 
+- 0004555: [administration] Warnings on set_time_limit() in safe mode (vboctor)
 - 0004528: [localization] Error on logout page with language=auto (thraxisp)
 - 0004393: [feature] Version should be add with advanced options (bpfennig)
 - 0004363: [bugtracker] "Add user to project" should have an additional button (bpfennig)

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.51 2004-08-01 03:29:25 narcissus Exp $
+	# $Id: helper_api.php,v 1.52 2004-09-28 23:00:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -139,7 +139,9 @@
 	function helper_begin_long_process( $p_ignore_abort=false ) {
 		$t_timeout = config_get( 'long_process_timeout' );
 
-		set_time_limit( $t_timeout );
+		# silent errors or warnings reported when safe_mode is ON.
+		@set_time_limit( $t_timeout );
+
 		ignore_user_abort( $p_ignore_abort );
 		return $t_timeout;
 	}

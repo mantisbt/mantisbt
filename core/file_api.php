@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.57 2004-09-28 00:56:13 thraxisp Exp $
+	# $Id: file_api.php,v 1.58 2004-09-28 23:00:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -317,13 +317,13 @@
 	# --------------------
 	# Put a file to the ftp server.
 	function file_ftp_put ( $p_conn_id, $p_remote_filename, $p_local_filename ) {
-		set_time_limit( 0 );
+		helper_begin_long_process();
 		$upload = ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename, FTP_BINARY);
 	}
 	# --------------------
 	# Get a file from the ftp server.
 	function file_ftp_get ( $p_conn_id, $p_local_filename, $p_remote_filename ) {
-		set_time_limit( 0 );
+		helper_begin_long_process();
 		$download = ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename, FTP_BINARY);
 	}
 	# --------------------
