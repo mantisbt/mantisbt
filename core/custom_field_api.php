@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.16 2003-02-11 05:41:31 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.17 2003-02-15 14:13:54 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -539,7 +539,7 @@ CREATE TABLE mantis_custom_field_project_table (
 				  $t_custom_field_project_table p, $t_custom_field_table f
 				  WHERE p.project_id='$c_project_id'
 					AND p.field_id = f.id
-				  ORDER BY p.sequence ASC";
+				  ORDER BY p.sequence ASC, f.name ASC";
 		$result = db_query( $query );
 
 		$t_row_count = db_num_rows( $result );
@@ -639,6 +639,30 @@ CREATE TABLE mantis_custom_field_project_table (
 		}
 	}
 
+	# --------------------
+	# Gets the sequence number for the specified custom field for the specified
+	# project.  Returns false in case of error.
+	function custom_field_get_sequence( $p_field_id, $p_project_id ) {
+		$c_field_id = db_prepare_int( $p_field_id );
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
+		$query = "SELECT sequence FROM
+				  $t_custom_field_project_table
+				  WHERE field_id='$c_field_id' AND
+					project_id='$c_project_id'
+					LIMIT 1";
+		$result = db_query( $query );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			return false;
+		}
+
+		$t_row = db_fetch_array( $result );
+
+		return $t_row['sequence'];
+	}
+
 	#===================================
 	# Data Modification
 	#===================================
@@ -721,6 +745,27 @@ CREATE TABLE mantis_custom_field_project_table (
 		custom_field_clear_cache( $p_field_id );
 
 		#db_query() errors on failure so:
+		return true;
+	}
+
+	# --------------------
+	# Sets the sequence number for the specified custom field for the specified
+	# project.
+	function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
+		$c_field_id = db_prepare_int( $p_field_id );
+		$c_project_id = db_prepare_int( $p_project_id );
+		$c_sequence = db_prepare_int( $p_sequence );
+
+		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
+
+		$query = "UPDATE $t_custom_field_project_table
+				  SET sequence='$c_sequence'
+				  WHERE field_id='$c_field_id'
+					AND project_id='$c_project_id'";
+		$result = db_query( $query );
+
+		custom_field_clear_cache( $p_field_id );
+
 		return true;
 	}
 

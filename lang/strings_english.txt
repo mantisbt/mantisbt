@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.116 $
-	# $Author: jfitzell $
-	# $Date: 2003-02-15 10:25:22 $
+	# $Revision: 1.117 $
+	# $Author: vboctor $
+	# $Date: 2003-02-15 14:13:54 $
 	#
-	# $Id: strings_english.txt,v 1.116 2003-02-15 10:25:22 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.117 2003-02-15 14:13:54 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -560,6 +560,7 @@
 	$s_actions = 'Actions';
 	$s_version = 'Version';
 	$s_timestamp = 'Timestamp';
+	$s_update = 'Update';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Add Project';

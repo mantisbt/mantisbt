@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.61 2003-02-15 10:25:17 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.62 2003-02-15 14:13:53 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -354,15 +354,16 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 					<?php echo $t_desc['name'] ?>
 				</td>
 				<td>
-					<?php echo $t_field_id ?>
+<form method="post" action="manage_proj_custom_field_update.php">
+	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+	<input type="hidden" name="field_id" value="<?php echo $t_field_id ?>" />
+	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
+	<input type="submit" value="<?php echo lang_get( 'update' ) ?>" />
+</form>
 				</td>
 				<td class="center">
 				<?php
 					# You need global permissions to edit custom field defs
-					if ( access_has_global_level( config_get( 'manage_custom_fields' ) ) ) {
-						print_bracket_link( "manage_custom_field_edit_page.php?field_id=$t_field_id&amp;return=manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'edit_link' ) );
-						echo '&nbsp;';
-					}
 					print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$t_field_id&amp;project_id=$f_project_id", lang_get( 'remove_link' ) );
 				?>
 				</td>
