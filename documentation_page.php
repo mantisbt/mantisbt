@@ -14,7 +14,7 @@
 <?php print_page_top2() ?>
 
 <?php print_manage_doc_menu( $g_documentation_page ) ?>
-
+<p>
 <?php phpinfo() ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

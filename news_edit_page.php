@@ -43,7 +43,7 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td width="25%">
+	<td class="category" width="25%">
 		<?php echo $s_headline ?>
 	</td>
 	<td width="75%">
@@ -51,7 +51,7 @@
 	</td>
 </tr>
 <tr class="row-2">
-	<td>
+	<td class="category">
 		<?php echo $s_body ?>
 	</td>
 	<td>
@@ -59,7 +59,7 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td>
+	<td class="category">
 		<?php echo $s_post_to ?>
 	</td>
 	<td>

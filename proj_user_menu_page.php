@@ -61,13 +61,13 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td>
+	<td class="category">
 		<?php echo $s_username ?>
 	</td>
 	<td>
 		<input type="text" name="f_username" size="32" maxlength="32">
 	</td>
-	<td>
+	<td class="category">
 		<?php echo $s_access_level ?>
 	</td>
 	<td>
