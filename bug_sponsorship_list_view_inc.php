@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.4 2004-07-08 13:57:31 vboctor Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.5 2004-07-10 15:16:14 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,9 +18,26 @@
 
 <?php  ?>
 <?php
+	#
+	# Determine whether the sponsorship section should be shown.
+	#
+
 	if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id ) ) ) {
 		$t_sponsorship_ids = sponsorship_get_all_ids( $f_bug_id );
 
+		$t_sponsorships_exist = count( $t_sponsorship_ids ) > 0;
+		$t_can_sponsor = !bug_is_readonly( $f_bug_id ) && !current_user_is_anonymous();
+
+		$t_show_sponsorships = $t_sponsorships_exist || $t_can_sponsor;
+	} else {
+		$t_show_sponsorships = false;
+	}
+
+	#
+	# Sponsorship Box
+	#
+
+	if ( $t_show_sponsorships ) {
 		echo '<a name="sponsorships" id="sponsorships" /><br />';
  		echo '<table class="width100" cellspacing="1">';
 		echo '<tr><td width="50"><img src="images/dollars.gif" alt="Sponsor Me" border="0" /></td><td><table border="0" cellpadding="3" width="100%"><tr><td>';
@@ -38,7 +55,7 @@
 		</tr>
 
 	<?php 
-		if ( !bug_is_readonly( $f_bug_id ) && !current_user_is_anonymous() ) {
+		if ( $t_can_sponsor ) {
 	?>
 			<tr class="row-1">
 				<td class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></td>
