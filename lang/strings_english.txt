@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.180 $
-	# $Author: int2str $
-	# $Date: 2004-07-07 20:44:54 $
+	# $Revision: 1.181 $
+	# $Author: narcissus $
+	# $Date: 2004-07-09 00:02:01 $
 	#
-	# $Id: strings_english.txt,v 1.180 2004-07-07 20:44:54 int2str Exp $
+	# $Id: strings_english.txt,v 1.181 2004-07-09 00:02:01 narcissus Exp $
 	###########################################################################
 ?>
 <?php
@@ -950,6 +950,7 @@ $s_hide_resolved = "Hide Resolved";
 $s_and_above = 'And Above';
 $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
+$s_monitored_by = 'Monitored By';
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";

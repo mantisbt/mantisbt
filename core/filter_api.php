@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.43 2004-07-08 23:05:47 narcissus Exp $
+	# $Id: filter_api.php,v 1.44 2004-07-09 00:01:52 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -43,6 +43,7 @@
 		$t_custom_field_string_table	= config_get( 'mantis_custom_field_string_table' );
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 		$t_project_table		= config_get( 'mantis_project_table' );
+		$t_bug_monitor_table	= config_get( 'mantis_bug_monitor_table' );
 		$t_limit_reporters		= config_get( 'limit_reporters' );
 		$t_report_bug_threshold		= config_get( 'report_bug_threshold' );
 
@@ -64,6 +65,7 @@
 		$t_where_clauses = array( "$t_project_table.enabled = 1", "$t_project_table.id = $t_bug_table.project_id" );
 		$t_select_clauses = array( "$t_bug_table.*" );
 		$t_join_clauses = array();
+		$t_from_clauses = array();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
 			if ( !current_user_is_administrator() ) {
@@ -92,6 +94,11 @@
 		if ( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
 			$t_public = VS_PUBLIC;
 			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR $t_bug_table.reporter_id='$t_user_id')" );
+		} else {
+			$t_view_state = db_prepare_int( $t_filter['view_state'] );
+			if ( ( $t_view_state != 'any' ) && ( !is_blank( $t_view_state ) ) ) {
+				array_push( $t_where_clauses, "($t_bug_table.view_state='$t_view_state')" );
+			}
 		}
 
 		# reporter
@@ -243,8 +250,15 @@
 			}
 		} else {
 			# advanced filtering: ignore the hide
+			$t_any_found = false;
 			foreach( $t_filter['show_status'] as $t_this_status ) {
 				$t_desired_statuses[] = $t_this_status;
+				if ( ( 'any' == $t_this_status ) || ( is_blank( $t_this_status ) ) ) {
+					$t_any_found = true;
+				}
+			}
+			if ( $t_any_found ) {
+				$t_desired_statuses = array();
 			}
 		}
 
@@ -332,6 +346,56 @@
 			$t_end_string   = db_prepare_string( $t_filter['end_year']  . "-". $t_filter['end_month']  . "-" . $t_filter['end_day'] ." 23:59:59" );
 
 			array_push( $t_where_clauses, "($t_bug_table.date_submitted BETWEEN '$t_start_string' AND '$t_end_string' )" );
+		}
+
+		# fixed in version
+		$t_any_found = false;
+		foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
+			if ( 'any' == $t_filter_member ) {
+				$t_any_found = true;
+			}
+		}
+		if ( count( $t_filter['fixed_in_version'] ) == 0 ) {
+			$t_any_found = true;
+		}
+		if ( !$t_any_found ) {
+			$t_clauses = array();
+
+			foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
+				$c_fixed_in_version = db_prepare_string( $t_filter_member );
+				array_push( $t_clauses, "($t_bug_table.fixed_in_version='$c_fixed_in_version')" );
+			}
+			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
+		}
+
+		# users monitoring a bug
+		$t_any_found = false;
+		foreach( $t_filter['user_monitor'] as $t_filter_member ) {
+			if ( 'any' == $t_filter_member ) {
+				$t_any_found = true;
+			}
+		}
+		if ( count( $t_filter['user_monitor'] ) == 0 ) {
+			$t_any_found = true;
+		}
+		if ( !$t_any_found ) {
+			$t_clauses = array();
+			$t_table_name = 'user_monitor';
+			array_push( $t_from_clauses, $t_bug_monitor_table );
+			array_push( $t_join_clauses, "LEFT JOIN $t_bug_monitor_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
+
+			foreach( $t_filter['user_monitor'] as $t_filter_member ) {
+				$c_user_monitor = db_prepare_string( $t_filter_member );
+				if ( META_FILTER_MYSELF == $c_user_monitor ) {
+					if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
+						$c_user_monitor = auth_get_current_user_id();
+						array_push( $t_clauses, "($t_table_name.user_id='$c_user_monitor')" );
+					}
+				} else {
+					array_push( $t_clauses, "($t_table_name.user_id='$c_user_monitor')" );
+				}
+			}
+			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
 		}
 
 		# custom field filters
@@ -575,7 +639,7 @@
 		<table class="width100" cellspacing="1">
 
 		<?php
-			$t_filter_cols = 7;
+			$t_filter_cols = 9;
 			$t_custom_cols = $t_filter_cols;
 			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 				$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
@@ -618,9 +682,12 @@
 				<a href="<?php PRINT $t_filters_url . 'reporter_id[]'; ?>"><?php PRINT lang_get( 'reporter' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'handler_id[]'; ?>"><?php PRINT lang_get( 'assigned_to' ) ?>:</a>
+				<a href="<?php PRINT $t_filters_url . 'user_monitor[]'; ?>"><?php PRINT lang_get( 'monitored_by' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'handler_id[]'; ?>"><?php PRINT lang_get( 'assigned_to' ) ?>:</a>
+			</td>
+			<td colspan="2" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_category[]'; ?>"><?php PRINT lang_get( 'category' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
@@ -684,6 +751,42 @@
 							<?php
 								$t_output = '';
 								$t_any_found = false;
+								if ( count( $t_filter['user_monitor'] ) == 0 ) {
+									PRINT lang_get( 'any' );
+								} else {
+									$t_first_flag = true;
+									foreach( $t_filter['user_monitor'] as $t_current ) {
+										$t_this_name = '';
+										if ( ( $t_current == 0 ) || ( is_blank( $t_current ) ) ) {
+											$t_any_found = true;
+										} else if ( META_FILTER_MYSELF == $t_current ) {
+											if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
+												$t_this_name = '[' . lang_get( 'myself' ) . ']';
+											} else {
+												$t_any_found = true;
+											}
+										} else {
+											$t_this_name = user_get_name( $t_current );
+										}
+										if ( $t_first_flag != true ) {
+											$t_output = $t_output . '<br>';
+										} else {
+											$t_first_flag = false;
+										}
+										$t_output = $t_output . $t_this_name;
+									}
+									if ( true == $t_any_found ) {
+										PRINT lang_get( 'any' );
+									} else {
+										PRINT $t_output;
+									}
+								}
+							?>
+			</td>
+			<td class="small-caption" valign="top">
+							<?php
+								$t_output = '';
+								$t_any_found = false;
 								if ( count( $t_filter['handler_id'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
@@ -719,7 +822,7 @@
 								}
 							?>
 			</td>
-			<td class="small-caption" valign="top">
+			<td colspan="2" class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
@@ -888,7 +991,13 @@
 				<a href="<?php PRINT $t_filters_url . 'show_version[]'; ?>"><?php PRINT lang_get( 'product_version' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'fixed_in_version[]'; ?>"><?php PRINT lang_get( 'fixed_in_version' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'per_page'; ?>"><?php PRINT lang_get( 'show' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'view_state'; ?>"><?php PRINT lang_get( 'view_status' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>"><?php PRINT lang_get( 'changed' ) ?>:</a>
@@ -964,7 +1073,48 @@
 							?>
 			</td>
 			<td class="small-caption" valign="top">
+							<?php
+								$t_output = '';
+								$t_any_found = false;
+								if ( count( $t_filter['fixed_in_version'] ) == 0 ) {
+									PRINT lang_get( 'any' );
+								} else {
+									$t_first_flag = true;
+									foreach( $t_filter['fixed_in_version'] as $t_current ) {
+										$t_this_string = '';
+										if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
+											$t_any_found = true;
+										} else {
+											$t_this_string = $t_current;
+										}
+										if ( $t_first_flag != true ) {
+											$t_output = $t_output . '<br>';
+										} else {
+											$t_first_flag = false;
+										}
+										$t_output = $t_output . $t_this_string;
+									}
+									if ( true == $t_any_found ) {
+										PRINT lang_get( 'any' );
+									} else {
+										PRINT $t_output;
+									}
+								}
+							?>
+			</td>
+			<td class="small-caption" valign="top">
 				<?php PRINT $t_filter['per_page']; ?>
+			</td>
+			<td class="small-caption" valign="top">
+				<?php
+				if ( VS_PUBLIC == $t_filter['view_state'] ) {
+					PRINT lang_get( 'public' );
+				} else if ( VS_PRIVATE == $t_filter['view_state'] ) {
+					PRINT lang_get( 'private' );
+				} else {
+					PRINT lang_get( 'any' );
+				}
+				?>
 			</td>
 			<td class="small-caption" valign="top">
 				<?php PRINT $t_filter['highlight_changed']; ?>
@@ -1127,7 +1277,7 @@
 			</td>
 			</form>
 
-			<td class="right" colspan="4">
+			<td class="right" colspan="6">
 			<?php
 			$t_stored_queries_arr = array();
 			$t_stored_queries_arr = filter_db_get_available_queries();
@@ -1475,6 +1625,9 @@
 		if ( !isset( $p_filter_arr['do_filter_by_date'] ) ) {
 			$p_filter_arr['do_filter_by_date'] = gpc_get_bool( 'do_filter_by_date' );
 		}
+		if ( !isset( $p_filter_arr['view_state'] ) ) {
+			$p_filter_arr['view_state'] = gpc_get_string( 'view_state', 'any' );
+		}
 
 		$t_custom_fields 		= custom_field_get_ids();
 		$f_custom_fields_data 	= array();
@@ -1490,7 +1643,8 @@
 		}
 
 		$t_multi_select_list = array( 'show_category', 'show_severity', 'show_status', 'reporter_id',
-										'handler_id', 'show_resolution', 'show_build', 'show_version', 'hide_status', 'custom_fields' );
+										'handler_id', 'show_resolution', 'show_build', 'show_version', 'hide_status', 'custom_fields',
+										'fixed_in_version', 'user_monitor' );
 		foreach( $t_multi_select_list as $t_multi_field_name ) {
 			if ( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
 				if ( 'hide_status' == $t_multi_field_name ) {

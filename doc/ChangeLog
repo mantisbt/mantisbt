@@ -2,6 +2,9 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.19.0xx
 
+ * Enh #3804: Add ability to filter on view state
+ * Enh #3805: Add ability to filter on bugs monitored by a user
+ * Enh #3944: Add ability to filter on 'Fixed in Version'
  * Enh #3974: Make Mantis issues searchable by Search Engine
  * Enh #4016: Automatic language selection based on browser preferences
  * Enh #4038: Add icon to sponsorships to attract attention (vboctor)

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.34 2004-06-29 06:08:29 narcissus Exp $
+	# $Id: view_all_set.php,v 1.35 2004-07-09 00:02:01 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -91,6 +91,22 @@
 		$f_show_version = array( $f_show_version );
 	}
 
+	$f_fixed_in_version = array();
+	if ( is_array( gpc_get( 'fixed_in_version', null ) ) ) {
+		$f_fixed_in_version = gpc_get_string_array( 'fixed_in_version', 'any' );
+	} else {
+		$f_fixed_in_version = gpc_get_string( 'fixed_in_version', 'any' );
+		$f_fixed_in_version = array( $f_fixed_in_version );
+	}
+
+	$f_user_monitor = array();
+	if ( is_array( gpc_get( 'user_monitor', null ) ) ) {
+		$f_user_monitor = gpc_get_string_array( 'user_monitor', 'any' );
+	} else {
+		$f_user_monitor = gpc_get_string( 'user_monitor', 'any' );
+		$f_user_monitor = array( $f_user_monitor );
+	}
+
 	# these are only single values, even when doing advanced filtering
 	$f_per_page				= gpc_get_int( 'per_page', -1 );
 	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
@@ -107,6 +123,7 @@
 	$f_search				= gpc_get_string( 'search', '' );
 	$f_and_not_assigned		= gpc_get_bool( 'and_not_assigned' );
 	$f_do_filter_by_date	= gpc_get_bool( 'do_filter_by_date' );
+	$f_view_state			= gpc_get_string( 'view_state', 'any' );
 
 	$t_custom_fields 		= custom_field_get_ids();
 	$f_custom_fields_data 	= array();
@@ -239,6 +256,9 @@
 				$t_setting_arr['show_build'] = $f_show_build;
 				$t_setting_arr['show_version'] = $f_show_version;
 				$t_setting_arr['do_filter_by_date'] = $f_do_filter_by_date;
+				$t_setting_arr['fixed_in_version'] = $f_fixed_in_version;
+				$t_setting_arr['user_monitor'] = $f_user_monitor;
+				$t_setting_arr['view_state'] = $f_view_state;
 				$t_setting_arr['custom_fields'] = $f_custom_fields_data;
 
 				break;
@@ -269,6 +289,8 @@
 				$t_setting_arr['handler_id'] 	= array( "any" );
 				$t_setting_arr['show_build'] 	= array( "any" );
 				$t_setting_arr['show_version'] 	= array( "any" );
+				$t_setting_arr['fixed_in_version']	= array( "any" );
+				$t_setting_arr['user_monitor'] 		= array( "any" );
 
 				$t_custom_fields 		= custom_field_get_ids();
 				$t_custom_fields_data 	= array();
