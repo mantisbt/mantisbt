@@ -19,6 +19,7 @@ Mantis ChangeLog
  * Fix #4044: Cross Site Scripting Vulnerability
  * Fix #4056: Displaying/Reporting Issue -> Application Warning - lang_exists() missing arg 2 (vboctor)
  * Fix #4064: Links are not hyperlinked property if containing () (vboctor)
+ * Fix #4065: Issues are not hyperlinked in Changelog if $g_bug_link_tag is not # (vboctor).
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection..
  * Updated German, Italian, and Brazilian Portuguese languages.
 
