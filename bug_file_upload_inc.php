@@ -9,13 +9,14 @@
 	### It POSTs to bug_file_add.php3
 ?>
 <? ### Upload File Form BEGIN ?>
-<? if ( $g_allow_file_upload==1 ) { ?>
+<? if ( ( $g_allow_file_upload==1 )&&
+		( $v_status < RESOLVED ) ) { ?>
 <p>
 <div align="center">
 <form method="post" enctype="multipart/form-data" action="<? echo $g_bug_file_add ?>">
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="3">
+	<td class="form-title" colspan="2">
 		<? echo $s_upload_file ?>
 	</td>
 </tr>
@@ -23,12 +24,10 @@
 	<td class="category" width="15%">
 		<? echo $s_select_file ?>
 	</td>
-	<td width="70%">
+	<td width="85%">
 		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
 		<input type="hidden" name="max_file_size" value="5000000">
 		<input name="f_file" type="file" size="60">
-	</td>
-	<td width="15%">
 		<input type="submit" value="<? echo $s_upload_file_button ?>">
 	</td>
 </tr>
