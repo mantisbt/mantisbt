@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.54 2003-02-27 07:04:57 jfitzell Exp $
+	# $Id: print_api.php,v 1.55 2003-02-28 15:19:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -82,7 +82,7 @@
 			echo '</div>';
 			html_page_bottom1();
 		} else {
-			print_header_redirect( $t_url );
+			print_header_redirect( $p_redirect_to );
 		}
 	}
 
