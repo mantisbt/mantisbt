@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.74 2004-10-05 14:59:08 thraxisp Exp $
+	# $Id: bug_update.php,v 1.75 2004-10-08 17:23:34 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -71,7 +71,7 @@
 		$t_bug_data->status = config_get( 'bug_assigned_status' );
 	}
 
-	helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data ) );
+	helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data, $f_bugnote_text ) );
 
 	$t_custom_status_label = "update"; # default info to check
 	if ( $t_bug_data->status == config_get( 'bug_resolved_status_threshold' ) ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.8 2004-09-28 13:57:38 thraxisp Exp $
+	# $Id: custom_function_api.php,v 1.9 2004-10-08 17:23:35 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Custom Function API ###
@@ -73,7 +73,7 @@
 	# In case of invalid data, this function should call trigger_error()
 	# p_issue_id is the issue number that can be used to get the existing state
 	# p_new_issue_data is an object (BugData) with the appropriate fields updated
-	function custom_function_default_issue_update_validate( $p_issue_id, $p_new_issue_data ) {
+	function custom_function_default_issue_update_validate( $p_issue_id, $p_new_issue_data, $p_bugnote_text ) {
 	}
 
 	# --------------------
