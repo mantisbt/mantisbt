@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.7 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: news_api.php,v 1.8 2003-01-08 02:42:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -130,11 +130,10 @@
 				  WHERE project_id='$c_project_id'";
 		
 		if ( $p_sitewide ) {
-			$query .= " OR project_id='0000000'";
+			$query .= " OR project_id=0";
 		}
 
-		# @@@ shouldn't we order by date_posted ?
-		$query .= " ORDER BY id DESC";
+		$query .= " ORDER BY date_posted DESC";
 
 		$result = db_query( $query );
 
