@@ -53,6 +53,7 @@ Mantis ChangeLog
 - New Config: main_menu_custom_options (default empty) - Allow addition of custom menu options to main menu (vboctor)
 - New Config: show_realname (default OFF) - show realname in all places instead of username (thraxisp)
 - Updated German, French, Brazilian Portuguese, japanese_euc, japanese_sjis, Korean, Russian and japanese_utf8 language.
+- Added Slovene language.
 
 2004.07.20  -  0.19.0a2
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.192 2004-08-07 16:47:50 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.193 2004-08-08 09:02:34 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -272,10 +272,10 @@
 	$g_language_choices_arr	= array(
 		'auto', 'english', 'chinese_simplified', 'chinese_traditional', 'czech',
 		'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian',
-		'italian', 'japanese_euc', 'japanese_sjis', 'japanese_utf8', 'korean', 'lithuanian',
-		'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard',
-		'romanian', 'russian', 'russian_koi8', 'serbian', 'slovak', 'spanish',
-		'swedish', 'turkish' );
+		'italian', 'japanese_euc', 'japanese_sjis', 'japanese_utf8', 'korean', 
+		'lithuanian', 'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard',
+		'romanian', 'russian', 'russian_koi8', 'serbian', 'slovak', 'slovene', 
+		'spanish', 'swedish', 'turkish' );
 
 	# Browser language mapping for 'auto' language selection
 	$g_language_auto_map = array(
@@ -301,6 +301,7 @@
 		'ru-mo, ru' => 'russian',
 		'sr' => 'serbian',
 		'sk' => 'slovak',
+		'sl' => 'slovene',
 		'es-mx, es-co, es-ar, es-cl, es-pr, es' => 'spanish',
 		'sv-fi, sv' => 'swedish',
 		'tr' => 'turkish'
