@@ -21,7 +21,7 @@
 	if ( file_exists( 'config_inc.php' ) ) {
 		include( 'config_inc.php' );
 	}
-	
+
 	# Should be eventually moved to the admin scripts, but keep it here for a while
 	# to make sure people don't miss it.
 	function obsolete_config_variable($var, $replace) {
@@ -44,9 +44,9 @@
 
 	# @@@ Experimental
 	# deal with register_globals being Off
-	$t_phpversion = explode('.', phpversion()); 
+	$t_phpversion = explode('.', phpversion());
 	if ( OFF == $g_register_globals ) {
-		if ( $t_phpversion[0] == 4 && $t_phpversion[1] >= 1 ) { 
+		if ( $t_phpversion[0] == 4 && $t_phpversion[1] >= 1 ) {
 			extract( $_REQUEST );
 			extract( $_SERVER );
 		} else {
@@ -85,7 +85,7 @@
 	}
 
 	include( 'lang/strings_'.$g_active_language.'.txt' );
-	
+
 	# Allow overriding strings declared in the language file.
 	# custom_strings_inc.php can use $g_active_language
 	if ( file_exists( 'custom_strings_inc.php' ) ) {
@@ -111,5 +111,6 @@
 	require( 'core_file_API.php' );
 	require( 'core_custom_attribute_API.php' );
 	require( 'core_bugnote_API.php' );
+	require( 'core_bug_API.php' );
 	# --------------------
 ?>
