@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.5 2003-02-10 21:59:36 jfitzell Exp $
+	# $Id: manage_proj_page.php,v 1.6 2003-02-11 07:18:25 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,8 @@
 	<td class="form-title" colspan="5">
 		<?php echo lang_get( 'projects_title' ) ?>
 		<?php
-		if ( access_level_check_greater_or_equal ( config_get( 'create_project_threshold' ) ) ) {
+		# Check the user's global access level before allowing project creation
+		if ( absolute_access_level_check_greater_or_equal ( config_get( 'create_project_threshold' ) ) ) {
 			print_bracket_link( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
 		}
 		?>

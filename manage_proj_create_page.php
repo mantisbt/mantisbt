@@ -6,13 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.1 2003-02-09 10:20:38 jfitzell Exp $
+	# $Id: manage_proj_create_page.php,v 1.2 2003-02-11 07:18:25 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( config_get( 'create_project_threshold' ) );
+	# We can't use check_access() because we need absolute access level, not
+	#  project-based access level
+	# @@@ try to add some new access apis
+	if ( !absolute_access_level_check_greater_or_equal( config_get( 'create_project_threshold' ) ) ) {
+		access_denied();
+	}
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -21,7 +26,7 @@
 
 <br />
 <div align="center">
-<form method="post" action="manage_proj_add.php">
+<form method="post" action="manage_proj_create.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">

@@ -6,13 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_add.php,v 1.25 2003-01-30 09:41:16 jfitzell Exp $
+	# $Id: manage_proj_create.php,v 1.1 2003-02-11 07:18:24 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( config_get( 'create_project_threshold' ) );
+	# We can't use check_access() because we need absolute access level, not
+	#  project-based access level
+	# @@@ try to add some new access apis
+	if ( !absolute_access_level_check_greater_or_equal( config_get( 'create_project_threshold' ) ) ) {
+		access_denied();
+	}
 
 	$f_name 		= gpc_get_string( 'name' );
 	$f_description 	= gpc_get_string( 'description' );

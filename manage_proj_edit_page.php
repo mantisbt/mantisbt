@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.56 2003-02-10 21:59:36 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.57 2003-02-11 07:18:25 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -131,7 +131,9 @@
 
 
 <!-- PROJECT DELETE -->
-<?php if ( access_level_check_greater_or_equal ( config_get( 'delete_project_threshold' ) ) ) { ?>
+<?php
+# You must have global permissions to delete projects
+if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <div class="border-center">
 	<form method="post" action="manage_proj_delete.php">
 		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -285,7 +287,9 @@
 <!-- PROJECT CUSTOM FIELD -->
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <?php
-if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_threshold' ) ) ) {
+# You need either global permissions or project-specific permissions to link
+#  custom fields
+if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_threshold' ), $f_project_id ) ) {
 ?>
 	<br />
 	<div align="center">
@@ -318,7 +322,8 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 				</td>
 				<td class="center" width="25%">
 					<?php
-						if ( access_level_check_greater_or_equal( config_get( 'manage_custom_fields' ) ) ) {
+						# You need global permissions to edit custom field defs
+						if ( absolute_access_level_check_greater_or_equal( config_get( 'manage_custom_fields' ) ) ) {
 							print_bracket_link( "manage_custom_field_edit_page.php?field_id=$t_field_id&amp;return=manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'edit_link' ) );
 							echo '&nbsp;';
 						}
@@ -380,7 +385,9 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 
 <!-- USER MANAGEMENT (ADD) -->
 <?php
-if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' ) ) ) {
+# We want to allow people with global permissions and people with high enough
+#  permissions on the project we are editing
+if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' ), $f_project_id ) ) {
 ?>
 <br />
 <div align="center">
@@ -466,9 +473,11 @@ if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' )
 			</td>
 			<td class="center">
 			<?php
-				if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' ) ) ) {
+				# You need global or project-specific permissions to remove users
+				#  from this project
+				if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' ), $f_project_id ) ) {
 					if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
-						print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
+						print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&amp;user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
 					}
 				}
 			?>
