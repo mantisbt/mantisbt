@@ -705,6 +705,7 @@
 	# Prepare a string for plain text display in email
 	function string_email( $p_string ) {
 		$p_string = stripslashes( $p_string );
+		$p_string = unfilter_href_tags( $p_string );
 		$p_string = process_bug_link_email( $p_string );
 		$p_string = str_replace( "&lt;", "<",  $p_string );
 		$p_string = str_replace( "&gt;", ">",  $p_string );
