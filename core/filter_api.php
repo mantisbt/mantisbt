@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.57 2004-08-21 13:07:14 prichards Exp $
+	# $Id: filter_api.php,v 1.58 2004-09-26 15:34:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1588,11 +1588,21 @@
 		$result = db_query( $query );
 	}
 
-	function filter_db_get_available_queries( ) {
+	function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
 		$t_filters_table = config_get( 'mantis_filters_table' );
 		$t_overall_query_arr = array();
-		$t_project_id = helper_get_current_project();
-		$t_user_id = auth_get_current_user_id();
+		
+		if ( null === $p_project_id ) {
+			$t_project_id = helper_get_current_project();
+		} else {
+			$t_project_id = db_prepare_int( $p_project_id );
+		}
+
+		if ( null === $p_user_id ) {
+			$t_user_id = auth_get_current_user_id();
+		} else {
+			$t_user_id = db_prepare_int( $p_user_id );
+		}
 
 		# If the user doesn't have access rights to stored queries, just return
 		if ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
