@@ -13,7 +13,7 @@ Mantis ChangeLog
 - 0004154: [bugtracker] "Product version" and "Fixed in Version" do not get updated on rename (vboctor)
 - 0004160: [bugtracker] Javascript error in the issue view pages (vboctor)
 - 0004175: [bugtracker] Links are not hyperlinked properly if containing '[' or ']' (vboctor)
-- Updated Brazilian Portuguese language.
+- Updated German and Brazilian Portuguese language.
 
 2004.07.20  -  0.19.0a2
 

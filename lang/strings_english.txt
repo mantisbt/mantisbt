@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.188 $
+	# $Revision: 1.189 $
 	# $Author: vboctor $
-	# $Date: 2004-07-20 11:11:19 $
+	# $Date: 2004-07-22 15:05:13 $
 	#
-	# $Id: strings_english.txt,v 1.188 2004-07-20 11:11:19 vboctor Exp $
+	# $Id: strings_english.txt,v 1.189 2004-07-22 15:05:13 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -217,12 +217,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-# MASC RELATIONSHIP
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "an issue can't be related to it self.";
 
 $s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -283,12 +281,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
@@ -991,7 +987,6 @@ $s_changelog = 'Change Log';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "issue";
 $s_add_new_relationship = "New relationship";
 $s_add_new_relationship_button = "Add";
@@ -1005,5 +1000,4 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
-# MASC RELATIONSHIP
 ?>

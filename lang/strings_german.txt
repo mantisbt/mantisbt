@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.100 $
+	# $Revision: 1.101 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Date: 2004-07-22 15:05:13 $
 	#
-	# $Id: strings_german.txt,v 1.100 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_german.txt,v 1.101 2004-07-22 15:05:13 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -69,16 +69,16 @@ $s_bug_end_monitor = 'Problembeobachtung beendet';
 $s_announcement = 'Ankündigung';
 $s_stays_on_top = 'Im Vordergrund bleiben';
 $s_delete_bugnote_button = 'Problemnotiz löschen';
-$s_delete_bugnote_sure_msg = 'Möchten Sie diese notiz wirklich löschen?';
+$s_delete_bugnote_sure_msg = 'Möchten Sie diese Notiz wirklich löschen?';
 $s_bug_relationships = 'Problem-Beziehungen';
 $s_empty_password_sure_msg = 'Der Benutzer hat ein leeres Passwort. Möchten Sie trotzdem fortfahren?';
-$s_empty_password_button = 'Leeres Kennwort benutzen';
+$s_empty_password_button = 'Leeres Passwort benutzen';
 
-$s_duplicate_of = 'Duplikat von %id';
-$s_has_duplicate = 'hat Duplicat %id';
-$s_related_to = 'verwandt mit %id';
-$s_dependant_on = 'abhängig von %id';
-$s_blocks = 'blockiert %id';
+$s_duplicate_of = 'Duplikat von';
+$s_has_duplicate = 'hat Duplikat';
+$s_related_to = 'verwandt mit';
+$s_dependant_on = 'Vorfahre von';
+$s_blocks = 'Nachkomme von';
 
 $s_new_bug = 'Neues Problem';
 $s_bugnote_added = 'Problemnotiz hinzugefügt';
@@ -101,7 +101,7 @@ $s_login_link = 'Anmelden';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Problemen auszuführen: ';
-$s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich schliessen?';
+$s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich schließen?';
 $s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich löschen?';
 $s_move_bugs_conf_msg = 'Probleme verschieben zu Projekt:';
 $s_copy_bugs_conf_msg = 'Probleme kopieren nach';
@@ -110,7 +110,7 @@ $s_resolve_bugs_conf_msg = 'Grund für Behebung auswählen:';
 $s_priority_bugs_conf_msg = 'Neue Problempriorität:';
 $s_status_bugs_conf_msg = 'Neuer Problemstatus:';
 $s_view_status_bugs_conf_msg = 'Anzeigestatus des Problems auswählen';
-$s_close_group_bugs_button = 'Probleme schliessen' ;
+$s_close_group_bugs_button = 'Probleme schließen' ;
 $s_delete_group_bugs_button = 'Probleme löschen' ;
 $s_move_group_bugs_button = 'Probleme verschieben' ;
 $s_copy_group_bugs_button = 'Probleme kopieren' ;
@@ -219,12 +219,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Verwalter hat n
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zugang verweigert: Zuweisung gesponserter Probleme erfordert höhere Nutzerrechte.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Einstellung \'%s\' enthält ungültigen Wert \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Aktion nicht ausführbar, weil Problem \'%d\' schreibgeschützt ist';
-# MASC RELATIONSHIP
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-# MASC RELATIONSHIP
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Es besteht bereits eine Beziehung zwischen diesen zwei Problemen.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Beziehung nicht gefunden.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Zugang verweigert: Das Problem %d benötigt höhere Zugriffsrechte .";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ein Problem kann nicht mit sich selbst in Beziehung gesetzt werden.";
 
 $s_login_error = 'Benutzername oder Passwort falsch.';
 $s_login_cookies_disabled = 'Ihr Web-Browser akzeptiert keine Cookies.';
@@ -279,17 +277,17 @@ $s_email_notification_title_for_action_bug_submitted = 'Das folgende Problem wur
 $s_email_notification_title_for_action_bug_assigned = 'Das folgende Problem wurde zugewiesen.';
 $s_email_notification_title_for_action_bug_reopened = 'Das folgende Problem wurde wiedereröffnet.';
 $s_email_notification_title_for_action_bug_deleted = 'Das folgende Problem wurde gelöscht.';
-$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
+$s_email_notification_title_for_action_bug_updated = 'Das folgende Problem wurde aktualisiert.';
 $s_email_notification_title_for_action_sponsorship_added = 'Das folgende Problem hat einen Sponsor.';
 $s_email_notification_title_for_action_sponsorship_updated = 'Die Sponsorenschaft des folgenden Problems wurde geändert.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'Die Sponsorenschaft des folgenden Problems wurde zurückgezogen.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Eine Notiz wurde zu diesem Problem hinzugefügt.';
 # MASC RELATIONSHIP
-$s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
-$s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
-$s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
+$s_email_notification_title_for_action_relationship_added = "Eine neue BEZIEHUNG wurde dem folgenden Problem hinzugefügt.";
+$s_email_notification_title_for_action_relationship_deleted = "Eine BEZIEHUNG des folgenden Problems wurde gelöscht.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Ein VERWANDTES Problem wurde behoben.";
+$s_email_notification_title_for_action_relationship_child_closed = "Ein VERWANDTES Problem wurde geschlossen.";
 # MASC RELATIONSHIP
 
 $s_email_reporter = 'Berichtet von';
@@ -420,7 +418,7 @@ $s_file_upload_msg = 'Dateitransfer erfolgreich';
 $s_upload_file = 'Datei übertragen';
 $s_select_file = 'Datei wählen';
 $s_upload_file_button = 'Datei übertragen';
-$s_max_file_size = 'Max. Grösse';
+$s_max_file_size = 'Max. Größe';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Problemmeldung reaktiviert...';
@@ -638,7 +636,7 @@ $s_delete_version_button = 'Version löschen';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Projektversion bearbeiten';
 $s_update_version_button = 'Version aktualisieren';
-$s_released = 'Released';
+$s_released = 'Veröffentlicht';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Produktversionen aktualisiert...';
@@ -908,6 +906,7 @@ $s_publish = 'Veröffentlichen';
 $s_cached = 'Zwischengespeichert';
 
 # view_bug_inc.php
+$s_monitored_by = "Beobachtet von";
 
 # view_bug_page.php
 $s_view_advanced_link = 'erweiterte Anzeige';
@@ -995,17 +994,17 @@ $s_http_auth_realm = "Mantis Login";
 
 # MASC RELATIONSHIP
 $s_bug = "issue";
-$s_add_new_relationship = "New relationship";
-$s_add_new_relationship_button = "Add";
-$s_this_bug = "Current issue";
-$s_relationship_added = "Relationship added";
-$s_relationship_deleted = "Relationship deleted";
-$s_delete_relationship_button = "Delete";
-$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Child";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Issue generated from";
+$s_add_new_relationship = "Neue Beziehung";
+$s_add_new_relationship_button = "Hinzufügen";
+$s_this_bug = "Aktuelles Problem";
+$s_relationship_added = "Beziehung hinzugefügt";
+$s_relationship_deleted = "Beziehung gelöscht";
+$s_delete_relationship_button = "Löschen";
+$s_delete_relationship_sure_msg = "Sind Sie sicher, dass Sie diese Beziehung löschen wollen?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ACHTUNG</b>. Nicht alle Folgeprobleme sind bereits behoben oder geschlossen.<br>Bevor Sie ein Grundproblem <b>beheben/schließen</b>, sollten alle seine Folgeprobleme behoben oder geschlossen werden.";
+$s_create_child_bug_button = "Nachkomme erstellen";
+$s_bug_cloned_to = "Problem dupliziert";
+$s_bug_created_from = "Problem angelegt von";
 # MASC RELATIONSHIP
 ?>
