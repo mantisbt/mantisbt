@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.53 $
-	# $Author: jctrosset $
-	# $Date: 2002-08-02 08:18:58 $
+	# $Revision: 1.54 $
+	# $Author: vboctor $
+	# $Date: 2002-08-10 11:17:30 $
 	#
-	# $Id: core_helper_API.php,v 1.53 2002-08-02 08:18:58 jctrosset Exp $
+	# $Id: core_helper_API.php,v 1.54 2002-08-10 11:17:30 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -458,14 +458,15 @@
 		global $$t_color_variable_name;
 		if ( isset( $$t_color_variable_name ) ) {
 			return $$t_color_variable_name;
-			echo "tiiirii" ;
 		} elseif ( isset ( $g_status_colors[$t_color_str] ) ) {
 			return $g_status_colors[$t_color_str];
-			echo "tato" ;
 		} elseif ($g_customize_attributes) {   // custom attributes
 				# if not found before, look into custom status colors
 				$t_colors_arr = attribute_get_all('colors', $t_project_id);
-				return $t_colors_arr[( $p_status-( $g_custom_status_slot[0]+1 ) )];
+				$t_offset = ( $p_status-( $g_custom_status_slot[0]+1 ) );
+				if ( isset( $t_colors_arr[$t_offset ]) ) {
+					return $t_colors_arr[$t_offset];
+				}
 		}
 		return '#ffffff';
 	}
