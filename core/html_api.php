@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.50 2003-02-17 11:09:26 int2str Exp $
+	# $Id: html_api.php,v 1.51 2003-02-18 00:41:22 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -110,6 +110,7 @@
 		$t_title = config_get( 'window_title' );
 
 		if ( auth_is_user_authenticated() &&
+			 db_is_connected() &&
 			 ON == config_get( 'show_project_in_title' ) ) {
 			if ( ! is_blank( $t_title ) ) {
 				$t_title .= ' - ';
@@ -163,6 +164,7 @@
 		$t_title = config_get( 'page_title' );
 
 		if ( auth_is_user_authenticated() &&
+			 db_is_connected() &&
 			 ON == config_get( 'show_project_in_title' ) ) {
 			if ( ! is_blank( $t_title ) ) {
 				$t_title .= ' - ';
