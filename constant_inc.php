@@ -72,7 +72,11 @@
 	define( "READ",     201 );
 	define( "UNREAD",   202 );
 
-	# unread status
-	define( "CRYPT",     	1 );
-	define( "PLAIN_TEXT",   0 );
+	# login methods
+	define( "PLAIN",	0 );
+	define( "CRYPT",	1 );
+	define( "MD5",		2 );
+
+	# email padding
+	define( "EMAIL_PAD_LENGTH", 28 );
 ?>
