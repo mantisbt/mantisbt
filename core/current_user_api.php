@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.7 2002-10-19 04:26:25 jfitzell Exp $
+	# $Id: current_user_api.php,v 1.8 2002-12-30 09:34:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -72,6 +72,11 @@
 	# Return true if the currently logged in user protected, false otherwise
 	function current_user_is_protected() {
 		return user_is_protected( auth_get_current_user_id() );
+	}
+	# --------------------
+	# Return true if the currently user is the anonymous user
+	function current_user_is_anonymous() {
+		return current_user_get_field( 'username' ) == config_get( 'anonymous_account' );
 	}
 	# --------------------
 	# Trigger an ERROR if the current user account is protected
