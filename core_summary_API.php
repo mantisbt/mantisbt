@@ -17,13 +17,17 @@
 
 		$t_arr = explode( ",", $p_enum_string );
 		$enum_count = count( $t_arr );
+		
+		#checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		else $specific_where = " project_id='$g_project_cookie_val'";
+		
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_s = explode( ":", $t_arr[$i] );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE $p_enum='$t_s[0]' AND
-						project_id='$g_project_cookie_val'";
+					WHERE $p_enum='$t_s[0]' AND $specific_where";
 			$result = db_query( $query );
 			$t_enum_count = db_result( $result, 0 );
 
@@ -33,24 +37,21 @@
 					FROM $g_mantis_bug_table
 					WHERE $p_enum='$t_s[0]' AND
 						status<>'$t_res_val' AND
-						status<>'$t_clo_val' AND
-						project_id='$g_project_cookie_val'";
+						status<>'$t_clo_val' AND $specific_where";
 			$result2 = db_query( $query );
 			$open_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE $p_enum='$t_s[0]' AND
-						status='$t_clo_val' AND
-						project_id='$g_project_cookie_val'";
+						status='$t_clo_val' AND $specific_where";
 			$result2 = db_query( $query );
 			$closed_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE $p_enum='$t_s[0]' AND
-						status='$t_res_val' AND
-						project_id='$g_project_cookie_val'";
+						status='$t_res_val' AND $specific_where";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
@@ -78,16 +79,19 @@
 	# current project
 	function get_bug_count_by_date( $p_time_length=1 ) {
 		global $g_mantis_bug_table, $g_project_cookie_val;
+		
+		#checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		else $specific_where = " project_id='$g_project_cookie_val'";
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
-				WHERE TO_DAYS(NOW()) - TO_DAYS(date_submitted) <= '$p_time_length' AND
-					project_id='$g_project_cookie_val'";
+				WHERE TO_DAYS(NOW()) - TO_DAYS(date_submitted) <= '$p_time_length' AND $specific_where";
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
 	# --------------------
-	# This funciton shows the number of bugs submitted in the last X days
+	# This function shows the number of bugs submitted in the last X days
 	# An array of integers representing days is passed in
 	function print_bug_date_summary( $p_date_array ) {
 		global $g_primary_color1, $g_primary_color2;
@@ -123,46 +127,45 @@
 
 		$query = "SELECT id, username
 				FROM $g_mantis_user_table
-				WHERE 	access_level=$t_dev OR
-						access_level=$t_man OR
-						access_level=$t_adm
 				ORDER BY username";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
 
+		#checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		else $specific_where = " project_id='$g_project_cookie_val'";
+		
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND
-						project_id='$g_project_cookie_val'";
+					WHERE handler_id='$v_id' AND $specific_where";
 			$result2 = db_query( $query );
 			$total_bug_count = db_result( $result2, 0, 0 );
 
+			#only developers with relevant stats are displayed
+			if ($total_bug_count>0) {
 			$t_res_val = RESOLVED;
 			$t_clo_val = CLOSED;
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE handler_id='$v_id' AND
 						status<>'$t_res_val' AND
-						status<>'$t_clo_val' AND
-						project_id='$g_project_cookie_val'";
+						status<>'$t_clo_val' AND $specific_where";
 			$result2 = db_query( $query );
 			$open_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND status='$t_clo_val' AND
-						project_id='$g_project_cookie_val'";
+					WHERE handler_id='$v_id' AND status='$t_clo_val' AND $specific_where";
 			$result2 = db_query( $query );
 			$closed_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND status='$t_res_val' AND
-						project_id='$g_project_cookie_val'";
+					WHERE handler_id='$v_id' AND status='$t_res_val' AND $specific_where";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
@@ -182,6 +185,7 @@
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
+			} #end if
 		} # end for
 	}
 	# --------------------
@@ -193,10 +197,14 @@
 				$g_project_cookie_val,
 				$g_summary_pad;
 
+		#checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		else $specific_where = " project_id='$g_project_cookie_val'";
+		
 		$t_view = VIEWER;
 		$query = "SELECT reporter_id, COUNT(*) as num
 				FROM $g_mantis_bug_table
-				WHERE project_id='$g_project_cookie_val'
+				WHERE $specific_where
 				GROUP BY reporter_id
 				ORDER BY num DESC
 				LIMIT $g_reporter_summary_limit";
@@ -212,8 +220,7 @@
 			$t_clo_val = CLOSED;
 			$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
-				WHERE reporter_id='$v_id' AND
-					project_id='$g_project_cookie_val'";
+				WHERE reporter_id='$v_id' AND $specific_where ";
 			$result2 = db_query( $query );
 			$total_bug_count = db_result( $result2, 0, 0 );
 
@@ -221,22 +228,19 @@
 					FROM $g_mantis_bug_table
 					WHERE reporter_id='$v_id' AND
 						status<>'$t_res_val' AND
-						status<>'$t_clo_val' AND
-						project_id='$g_project_cookie_val'";
+						status<>'$t_clo_val' AND $specific_where ";
 			$result2 = db_query( $query );
 			$open_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE reporter_id='$v_id' AND status='$t_clo_val' AND
-						project_id='$g_project_cookie_val'";
+					WHERE reporter_id='$v_id' AND status='$t_clo_val' AND $specific_where ";
 			$result2 = db_query( $query );
 			$closed_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE reporter_id='$v_id' AND status='$t_res_val' AND
-						project_id='$g_project_cookie_val'";
+					WHERE reporter_id='$v_id' AND status='$t_res_val' AND $specific_where ";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
@@ -265,10 +269,14 @@
 				$g_mantis_project_category_table, $g_project_cookie_val,
 				$g_primary_color1, $g_primary_color1,
 				$g_summary_pad;
-
+		
+		#checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		else $specific_where = " project_id='$g_project_cookie_val'";
+		
 		$query = "SELECT category
 				FROM $g_mantis_project_category_table
-				WHERE project_id='$g_project_cookie_val'
+				WHERE $specific_where 
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -279,8 +287,7 @@
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$t_category' AND
-						project_id='$g_project_cookie_val'";
+					WHERE category='$t_category' AND $specific_where ";
 			$result2 = db_query( $query );
 			$total_bug_count = db_result( $result2, 0, 0 );
 
@@ -291,22 +298,19 @@
 					FROM $g_mantis_bug_table
 					WHERE category='$t_category' AND
 						status<>'$t_clo_val' AND
-						status<>'$t_res_val'AND
-						project_id='$g_project_cookie_val'";
+						status<>'$t_res_val'AND $specific_where ";
 			$result2 = db_query( $query );
 			$open_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$t_category' AND status='$t_clo_val' AND
-						project_id='$g_project_cookie_val'";
+					WHERE category='$t_category' AND status='$t_clo_val' AND $specific_where ";
 			$result2 = db_query( $query );
 			$closed_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$t_category' AND status='$t_res_val' AND
-						project_id='$g_project_cookie_val'";
+					WHERE category='$t_category' AND status='$t_res_val' AND $specific_where ";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
