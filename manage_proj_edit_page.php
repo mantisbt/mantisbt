@@ -135,17 +135,27 @@
 				$row = db_fetch_array( $result );
 				$t_category = $row['category'];
 				$t2_category = urlencode( $t_category );
+				$c_user_id = (integer)$row['user_id'];
+
+				if ( $c_user_id != 0 ) {
+					$c_user_name = get_user_field( $c_user_id, 'username' );
+				} else {
+					$c_user_name = '';
+				}
 
 				# alternate row colors
 				$t_bgcolor = alternate_colors( $i );
 		?>
 		<tr>
-			<td width="75%" bgcolor="<?php echo $t_bgcolor ?>">
+			<td width="50%" bgcolor="<?php echo $t_bgcolor ?>">
 				<?php echo $t_category ?>
+			</td>
+			<td width="25%" bgcolor="<?php echo $t_bgcolor ?>">
+				<?php echo $c_user_name ?>
 			</td>
 			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
 				<?php
-					print_bracket_link( 'manage_proj_cat_edit_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_edit_link );
+					print_bracket_link( 'manage_proj_cat_edit_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category.'&amp;f_assigned_to='.$c_user_id, $s_edit_link );
 					PRINT '&nbsp;';
 					print_bracket_link( 'manage_proj_cat_del_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_remove_link );
 				?>

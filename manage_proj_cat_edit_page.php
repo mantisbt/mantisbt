@@ -13,7 +13,11 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( 'manage_proj_cat_edit_page.php' ) ?>
+<?php 
+	print_manage_menu( 'manage_proj_cat_edit_page.php' );
+
+	check_varset( $f_assigned_to, '0' );
+?>
 
 <p>
 <div align="center">
@@ -24,11 +28,25 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="center" colspan="2">
+	<td class="category">
 		<form method="post" action="manage_proj_cat_update.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>">
+		<?php echo $s_category ?>
+	</td>
+	<td>
 		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>">
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<?php echo $s_assigned_to ?>
+	</td>
+	<td>
+		<select name="f_assigned_to">
+			<option value="0"></option>
+			<?php print_assign_to_option_list($f_assigned_to) ?>
+		</select>
 	</td>
 </tr>
 <tr>

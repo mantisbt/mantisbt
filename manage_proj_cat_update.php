@@ -13,6 +13,8 @@
 	if ( empty( $f_category ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
+	
+	check_varset( $f_assigned_to, '0' );
 
 	$f_category = urldecode( $f_category );
 	$f_orig_category = urldecode( stripslashes( $f_orig_category ) );
@@ -20,25 +22,20 @@
 	$result = 0;
 	$query = '';
 
-	# Optimisation if category name was not changed.
-	if ( strcmp ( $f_category, $f_orig_category ) != 0 ) {
-		# check for duplicate
-		if ( !is_duplicate_category( $f_project_id, $f_category, $f_orig_category ) ) {
-			$result = category_update( $f_project_id, $f_category, $f_orig_category );
-			if ( !$result ) {
-				break;
-			}
-
-			$c_category			= addslashes($f_category);
-			$c_orig_category	= addslashes($f_orig_category);
-
-			$query = "UPDATE $g_mantis_bug_table
-					SET category='$c_category'
-					WHERE category='$c_orig_category'";
-		   	$result = db_query( $query );
+	# check for duplicate
+	if ( !is_duplicate_category( $f_project_id, $f_category, $f_orig_category ) ) {
+		$result = category_update( $f_project_id, $f_category, $f_orig_category, $f_assigned_to );
+		if ( !$result ) {
+			break;
 		}
-	} else {
-	  $result = true;
+
+		$c_category			= addslashes($f_category);
+		$c_orig_category	= addslashes($f_orig_category);
+
+		$query = "UPDATE $g_mantis_bug_table
+				SET category='$c_category'
+				WHERE category='$c_orig_category'";
+	   	$result = db_query( $query );
 	}
 
 	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;

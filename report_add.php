@@ -112,7 +112,25 @@
 
 		# check to see if we want to assign this right off
 		$t_status = NEW_;
-		if ( $f_assign_id != '0000000' ) {
+
+		# if not assigned, check if it should auto-assigned.
+		if ( $c_assign_id == 0 ) {
+			# if a default user is associated with the category and we know at this point
+			# that that the bug was not assigned to somebody, then assign it automatically.
+			$query = "SELECT user_id
+					FROM $g_mantis_project_category_table
+					WHERE project_id='$g_project_cookie_val' AND category='$c_category'";
+
+			$result = db_query( $query );
+
+			if ( db_num_rows( $result ) == 1 ) {
+				$c_assign_id = db_result( $result );
+				$f_assign_id = sprintf( '%07d', $c_assign_id );
+			}
+		}
+
+		# Check if bug was pre-assigned or auto-assigned.
+		if ( $c_assign_id != 0 ) {
 			$t_status = ASSIGNED;
 		}
 

@@ -49,15 +49,16 @@
 		return db_query( $query );
 	}
 	# --------------------
-	function category_update( $p_project_id, $p_category, $p_orig_category ) {
+	function category_update( $p_project_id, $p_category, $p_orig_category, $p_assigned_to ) {
 		global $g_mantis_project_category_table;
 
 		$c_project_id		= (integer)$p_project_id;
 		$c_category			= addslashes($p_category);
 		$c_orig_category	= addslashes($p_orig_category);
+		$c_assigned_to		= (integer)$p_assigned_to;
 
 		$query = "UPDATE $g_mantis_project_category_table
-				SET category='$c_category'
+				SET category='$c_category', user_id=$c_assigned_to
 				WHERE category='$c_orig_category' AND
 					  project_id='$c_project_id'";
 		return db_query( $query );
@@ -82,7 +83,7 @@
 
 		$c_project_id = (integer)$p_project_id;
 
-		$query = "SELECT category
+		$query = "SELECT category, user_id
 				FROM $g_mantis_project_category_table
 				WHERE project_id='$c_project_id'
 				ORDER BY category";
