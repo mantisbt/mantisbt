@@ -37,7 +37,7 @@
 	}
 
 	if ( !isset( $f_priority ) ) {
-		$f_priority = "";
+		$f_priority = NORMAL;
 	}
 
 	if ( !isset( $f_profile_id ) ) {

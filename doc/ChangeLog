@@ -7,6 +7,7 @@ Mantis
  * Fixed problem deleting bugnotes.
  * Fixed problem with print_assign_to_option_list() not selecting the current user.
  * Closed a security problem with print_all_bug_page.php which allowed reporters to see bug summaries of bugs they hadn't reported.
+ * Made 'normal' default priority for new bugs.
  * Added capability to monitor bugs even when not reporter or handler
  * Added basic private bug functionality
  * Added validation checks for all inputs that are passed on to database queries.
