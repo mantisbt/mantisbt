@@ -27,7 +27,8 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="15%">
-		<?php echo $s_select_file ?>
+		<?php echo $s_select_file ?><br />
+		<?php echo "($s_max_file_size: " . number_format( $g_max_file_size/1000 ) . "k)"?>
 	</td>
 	<td width="85%">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-21 22:46:29 $
+	# $Date: 2002-08-21 23:21:29 $
 	#
-	# $Id: strings_english.txt,v 1.67 2002-08-21 22:46:29 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.68 2002-08-21 23:21:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -331,6 +331,7 @@
 	$s_upload_file = 'Upload File';
 	$s_select_file = 'Select File';
 	$s_upload_file_button = 'Upload File';
+	$s_max_file_size = 'Max size';
 
 	# bug_reopen.php
 	$s_bug_reopened_msg = 'Bug has been reopened...';
