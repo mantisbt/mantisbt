@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.154 2005-03-18 03:40:19 thraxisp Exp $
+	# $Id: html_api.php,v 1.155 2005-03-19 15:10:09 vwegert Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -475,14 +475,14 @@
 
 				# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
 				$t_show_access = min( config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ), ADMINISTRATOR );
-				if ( access_has_project_level( $t_show_access ) ) {
+				if ( access_has_any_project( $t_show_access ) ) {
 					if ( access_has_project_level( ADMINISTRATOR ) ) {
 						$t_link = 'manage_user_page.php';
 					} else {
-						if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
-							$t_link = 'manage_proj_page.php';
+						if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) { 
+							$t_link = 'manage_proj_edit_page.php?project_id=' . helper_get_current_project();
 						} else {
-							$t_link = 'manage_custom_field_page.php';
+							$t_link = 'manage_proj_page.php';
 						}
 					}
 					$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
