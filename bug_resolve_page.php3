@@ -55,6 +55,7 @@
 			<input type="text" name="f_duplicate_id" maxlength="7">
 		</td>
 	</tr>
+	<? if ( 1 == $g_allow_close_immediately ) { ?>
 	<tr>
 		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_close_immediately ?></b>
@@ -63,6 +64,7 @@
 			<input type="checkbox" name="f_close_now">
 		</td>
 	</tr>
+	<? } ?>
 	<tr>
 		<td align="center" colspan="2" bgcolor="<? echo $g_primary_color_light ?>">
 			<input type="submit" value="<? echo $s_resolve_bug_button ?>">

@@ -376,6 +376,10 @@
 	# Set to 1 if you wish to limit reporters to only viewing bugs that they report.
 	$g_limit_reporters = 0;
 
+	# --- close immediately -----------
+	# Allow develoeprs and above to close bugs immediately when resolving bugs
+	$g_allow_close_immediately = 0;
+
 	##############################
 	### Mantis Color Variables ###
 	##############################
