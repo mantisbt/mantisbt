@@ -3,7 +3,7 @@ Mantis ChangeLog
 2004.08.xx  -  0.19.0xx
 
 - 0004073: [filters] Edit filter page now too wide. 'Apply filter' button is drawn off screen.
-- 0004122: Upgrade script seems to swap the duplicate relationship (masc)
+- 0004122: [relationships] Upgrade script seems to swap the duplicate relationship (masc)
 - Updated Brazilian Portuguese language.
 
 2004.07.20  -  0.19.0a2

@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.13 2004-07-18 22:20:02 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.14 2004-07-19 12:54:54 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -377,7 +377,7 @@
 
 			$query = "UPDATE $t_bug_history_table
 				SET field_name = '',
-					old_value = '" . BUG_HAS_DUPLICATE . "',
+					old_value = '" . BUG_DUPLICATE . "',
 					type = '" . BUG_ADD_RELATIONSHIP . "'
 				WHERE id='$t_history_id'";
 			db_query( $query );
@@ -386,7 +386,52 @@
 				( user_id, bug_id, date_modified, type, old_value, new_value )
 				VALUES
 				( '$t_history_user_id', '$t_duplicate_bug_id', '" . $t_duplicate_bug_last_update . "', " .
-				BUG_ADD_RELATIONSHIP . ", " . BUG_DUPLICATE . ", '$t_bug_id' )";
+				BUG_ADD_RELATIONSHIP . ", " . BUG_HAS_DUPLICATE . ", '$t_bug_id' )";
+			db_query( $query );
+		}
+
+		return true;
+	}
+
+	$upgrades[] = new FunctionUpgrade(
+		'relationship-4',
+		'Fix swapped value in duplicate relationship',
+		'upgrade_0_18_relationship_4' );
+
+	function upgrade_0_18_relationship_4() {
+		global $t_bug_relationship_table, $t_bug_table;
+
+		$query = "SELECT id, duplicate_id
+				   FROM $t_bug_table
+				   WHERE duplicate_id != '';";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+
+		for ( $i = 0 ; $i < $t_count ; $i++ ) {
+			$t_bug = db_fetch_array( $result );
+			$t_bug_id = $t_bug['id'];
+			$t_duplicate_bug_id = $t_bug['duplicate_id'];
+
+			$query = "SELECT id
+						FROM $t_bug_relationship_table
+						WHERE
+							relationship_type = '" . BUG_DUPLICATE . "' and
+							source_bug_id = '$t_duplicate_bug_id' and
+							destination_bug_id = '$t_bug_id';";
+			$result2 = db_query( $query );
+			$t_count2 = db_num_rows( $result2 );
+
+			if( $t_count2 != 1 ) {
+				continue;
+			}
+
+			$t_relationship = db_fetch_array( $result2 );
+			$t_relationship_id = $t_relationship['id'];
+
+			$query = "UPDATE $t_bug_relationship_table
+				SET source_bug_id = '$t_bug_id',
+				destination_bug_id = '$t_duplicate_bug_id'
+				WHERE id='$t_relationship_id'";
 			db_query( $query );
 		}
 
