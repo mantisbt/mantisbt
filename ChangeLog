@@ -1,5 +1,15 @@
 Mantis
 
+07.13.2001  -   0.15.2
+
+ * Fixed explode() error in view_all_unassign_bug.php3
+ * Fixed variable error in report_bug_page.php3.  Affected report stay checkbox.
+ * Fixed bug_delete.php3 error.  Removes uploaded file entries properly.
+ * Fixed bug where news could not be edited to be Sitewide.
+ * Fixed private projects being viewable by non-privileged users.
+ * Modified set_project.php3 to redirect back to the same page if a view_all* page or the summary page.
+ * Added wrap="virtual" tags to <textarea> for old browser users.
+
 07.05.2001  -   0.15.1
 
  * Added configuration.html
