@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.9 2002-11-12 05:19:04 jfitzell Exp $
+	# $Id: history_api.php,v 1.10 2002-11-28 01:23:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -103,37 +103,56 @@
 			$v_date_modified = date( config_get( 'complete_date_format' ), $v_date_modified );
 
 			switch ( $v_field_name ) {
-			case 'status':			$v_old_value = get_enum_element( 'status', $v_old_value );
-									$v_new_value = get_enum_element( 'status', $v_new_value );
-					break;
-			case 'severity':		$v_old_value = get_enum_element( 'severity', $v_old_value );
-									$v_new_value = get_enum_element( 'severity', $v_new_value );
-					break;
-			case 'reproducibility':	$v_old_value = get_enum_element( 'reproducibility', $v_old_value );
-									$v_new_value = get_enum_element( 'reproducibility', $v_new_value );
-					break;
-			case 'resolution':		$v_old_value = get_enum_element( 'resolution', $v_old_value );
-									$v_new_value = get_enum_element( 'resolution', $v_new_value );
-					break;
-			case 'priority':		$v_old_value = get_enum_element( 'priority', $v_old_value );
-									$v_new_value = get_enum_element( 'priority', $v_new_value );
-					break;
-			case 'eta':				$v_old_value = get_enum_element( 'eta', $v_old_value );
-									$v_new_value = get_enum_element( 'eta', $v_new_value );
-					break;
-			case 'view_state':		$v_old_value = get_enum_element( 'view_state', $v_old_value );
-									$v_new_value = get_enum_element( 'view_state', $v_new_value );
-					break;
-			case 'projection':		$v_old_value = get_enum_element( 'projection', $v_old_value );
-									$v_new_value = get_enum_element( 'projection', $v_new_value );
-					break;
-			case 'project_id':		$v_old_value = project_get_field( $v_old_value, 'name' );
-									$v_new_value = project_get_field( $v_new_value, 'name' );
-					break;
+			case 'status':
+				$v_old_value = get_enum_element( 'status', $v_old_value );
+				$v_new_value = get_enum_element( 'status', $v_new_value );
+				break;
+			case 'severity':
+				$v_old_value = get_enum_element( 'severity', $v_old_value );
+				$v_new_value = get_enum_element( 'severity', $v_new_value );
+				break;
+			case 'reproducibility':
+				$v_old_value = get_enum_element( 'reproducibility', $v_old_value );
+				$v_new_value = get_enum_element( 'reproducibility', $v_new_value );
+				break;
+			case 'resolution':
+				$v_old_value = get_enum_element( 'resolution', $v_old_value );
+				$v_new_value = get_enum_element( 'resolution', $v_new_value );
+				break;
+			case 'priority':
+				$v_old_value = get_enum_element( 'priority', $v_old_value );
+				$v_new_value = get_enum_element( 'priority', $v_new_value );
+				break;
+			case 'eta':
+				$v_old_value = get_enum_element( 'eta', $v_old_value );
+				$v_new_value = get_enum_element( 'eta', $v_new_value );
+				break;
+			case 'view_state':
+				$v_old_value = get_enum_element( 'view_state', $v_old_value );
+				$v_new_value = get_enum_element( 'view_state', $v_new_value );
+				break;
+			case 'projection':
+				$v_old_value = get_enum_element( 'projection', $v_old_value );
+				$v_new_value = get_enum_element( 'projection', $v_new_value );
+				break;
+			case 'project_id':
+				$v_old_value = project_get_field( $v_old_value, 'name' );
+				$v_new_value = project_get_field( $v_new_value, 'name' );
+				break;
 			case 'handler_id':
-			case 'reporter_id':		$v_old_value = user_get_field( $v_old_value, 'username' );
-									$v_new_value = user_get_field( $v_new_value, 'username' );
-					break;
+			case 'reporter_id':
+				if ( 0 == $v_old_value ) {
+					$v_old_value = '';
+				} else {
+					$v_old_value = user_get_name( $v_old_value );
+				}
+
+				if ( 0 == $v_new_value ) {
+					$v_new_value = '';
+				} else {
+					$v_new_value = user_get_name( $v_new_value );
+				}
+				break;
 			}
 
 			if ( NORMAL_TYPE != $v_type ) {
