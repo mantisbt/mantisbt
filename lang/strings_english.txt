@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.207 $
-	# $Author: jlatour $
-	# $Date: 2004-09-21 07:39:40 $
+	# $Revision: 1.208 $
+	# $Author: bpfennigschmidt $
+	# $Date: 2004-09-22 10:10:09 $
 	#
-	# $Id: strings_english.txt,v 1.207 2004-09-21 07:39:40 jlatour Exp $
+	# $Id: strings_english.txt,v 1.208 2004-09-22 10:10:09 bpfennigschmidt Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,6 +246,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrator';
 $s_myself = "Myself";
+$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
