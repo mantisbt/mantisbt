@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: icon_api.php,v 1.5 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: icon_api.php,v 1.6 2003-01-30 15:01:03 beerfrick Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -26,10 +26,10 @@
 		IMMEDIATE => 'priority_3.gif'
 	);
 	# --------------------
-	# Sort direction to icon mapping (actually backwards is more correct)
+	# Sort direction to icon mapping 
 	$g_sort_icon_arr = array (
-		ASC        => 'down.gif',
-		DESC       => 'up.gif'
+		ASC        => 'up.gif',
+		DESC       => 'down.gif'
 	);
 	# --------------------
 	# Read status to icon mapping
