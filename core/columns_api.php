@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.5 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: columns_api.php,v 1.6 2005-02-17 21:33:44 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -218,9 +218,9 @@
 
 		echo '<td class="center">';
 
-		# type project name if viewing 'all projects'
+		# type project name if viewing 'all projects' or if issue is in a subproject
 		if ( ON == config_get( 'show_bug_project_links' )
-		  && helper_get_current_project() == ALL_PROJECTS ) {
+		  && helper_get_current_project() != $p_row['project_id'] ) {
 			echo '<small>[';
 			print_view_bug_sort_link( $t_project_name, 'project_id', $t_sort, $t_dir, $p_print );
 			echo ']</small><br />';

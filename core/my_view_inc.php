@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.8 2005-02-12 20:01:18 jlatour Exp $
+	# $Id: my_view_inc.php,v 1.9 2005-02-17 21:33:44 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -227,9 +227,9 @@
 		?>
 		<br />
 		<?php
-			# type project name if viewing 'all projects'
+			# type project name if viewing 'all projects' or bug is in subproject
 			if ( ON == config_get( 'show_bug_project_links' ) &&
-				helper_get_current_project() == ALL_PROJECTS ) {
+				helper_get_current_project() != $v_project_id ) {
 				echo '[';
 				print( $project_name );
 				echo '] ';
