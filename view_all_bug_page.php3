@@ -116,7 +116,7 @@
 	if ( !isset( $f_sort ) ) {
 			$f_sort="last_updated";
 	}
-	$query = $query." ORDER BY '$f_sort' $f_dir";
+	$query = $query." ORDER BY priority desc, '$f_sort' $f_dir";
 	if ( isset( $f_limit_view ) ) {
 		$query = $query." LIMIT $f_offset, $f_limit_view";
 	}
