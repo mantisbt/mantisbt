@@ -113,7 +113,7 @@
 			<b><? echo $s_reporter ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
-			<? print_user( $v_reporter_id ) ?>
+			<? print_user_with_subject( $v_reporter_id, $f_id ) ?>
 		</td>
 	</tr>
 	<tr>
@@ -121,7 +121,7 @@
 			<b><? echo $s_assigned_to ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
-			<? print_user( $v_handler_id ) ?>
+			<? print_user_with_subject( $v_handler_id, $f_id ) ?>
 		</td>
 	</tr>
 	<tr align=center>

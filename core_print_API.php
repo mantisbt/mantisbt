@@ -20,7 +20,29 @@
 		header( "Location: $p_url" );
 	}
 	### --------------------
+	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
+		global $g_mantis_user_table, $s_user_no_longer_exists;
+
+		# invalid user
+		if ( $p_user_id=="0000000" ) {
+			return;
+		}
+	    $query = "SELECT username, email
+	    		FROM $g_mantis_user_table
+	    		WHERE id='$p_user_id'";
+	    $result = db_query( $query );
+	    if ( db_num_rows( $result ) > 0 ) {
+			$t_username	= db_result( $result, 0, 0 );
+			$t_email	= db_result( $result, 0, 1 );
+
+			print_email_link( $t_email, $t_username );
+		} else {
+			PRINT $s_user_no_longer_exists;
+		}
+	}
+	### --------------------
+	function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
 
 		if ( $p_user_id=="0000000" ) {
@@ -30,13 +52,12 @@
 	    		FROM $g_mantis_user_table
 	    		WHERE id='$p_user_id'";
 	    $result = db_query( $query );
-	    if ( db_num_rows( $result )>0 ) {
+	    if ( db_num_rows( $result ) > 0 ) {
 			$t_username	= db_result( $result, 0, 0 );
 			$t_email	= db_result( $result, 0, 1 );
 
-                      print_email_link($t_email,$t_username);
-		}
-		else {
+			print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
+		} else {
 			PRINT $s_user_no_longer_exists;
 		}
 	}
@@ -580,11 +601,37 @@
 	# return the mailto: href string link instead of printing it
 	function get_email_link( $p_email, $p_text ) {
 		global $g_hide_user_email;
-              if($g_hide_user_email){
-                return "$p_text";
-              }else{
-                return "<a href=\"mailto:$p_email\">$p_text</a>";
-              }
+
+		if( $g_hide_user_email==1 ){
+			return "$p_text";
+		} else {
+			return "<a href=\"mailto:$p_email\">$p_text</a>";
+		}
+	}
+	### --------------------
+	# print a mailto: href link
+	function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
+		global $g_mantis_bug_table;
+
+		$query = "SELECT summary
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		$t_summary = db_result( $result, 0, 0 );
+		$t_summary = string_email( $t_summary );
+
+		PRINT get_email_link_with_subject( $p_email, $p_text, $t_summary );
+	}
+	### --------------------
+	# return the mailto: href string link instead of printing it
+	function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
+		global $g_hide_user_email;
+
+		if( $g_hide_user_email==1 ){
+			return "$p_text";
+		} else {
+			return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
+		}
 	}
 	### --------------------
 	# print our standard mysql query error
