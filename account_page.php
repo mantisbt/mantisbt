@@ -17,16 +17,12 @@
 
 	# protected account check
 	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
 	# extracts the user information for the currently logged in user
 	# and prefixes it with u_
-    $query = "SELECT *
-    		FROM $g_mantis_user_table
-			WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_query( $query );
-	$row = db_fetch_array( $result );
+    $row = user_get_row( auth_get_current_user_id() );
 	extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
 <?php print_page_top1() ?>
@@ -127,7 +123,7 @@
 		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="75%">
-		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>" />
+		<?php echo $u_username ?>
 	</td>
 </tr>
 <tr class="row-2">

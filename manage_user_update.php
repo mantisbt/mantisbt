@@ -10,39 +10,46 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	if ( isset( $f_protected ) ) {
-		$f_protected = 1;
-	} else {
-		$f_protected = 0;
-	}
+	$f_protected	= gpc_get_bool( 'f_protected' );
+	$f_enabled		= gpc_get_bool( 'f_enabled' );
+	$f_email		= gpc_get_string( 'f_email', '' );
+	$f_username		= gpc_get_string( 'f_username', '' );
+	$f_access_level	= gpc_get_int( 'f_access_level' );
+	$f_id			= gpc_get_int( 'f_id' );
 
-	if ( isset( $f_enabled ) ) {
-		$f_enabled = 1;
-	} else {
-		$f_enabled = 0;
+	$t_old_username = user_get_field( $f_id, 'username' );
+
+	# check that the username is unique
+	if ( $t_old_username != $f_username &&
+		 false == user_is_name_unique( $f_username ) ) {
+		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 	}
 
 	$f_email = email_append_domain( $f_email );
-
 	email_ensure_valid( $f_email );
 
-	$c_username 	= addslashes($f_username);
-	$c_email		= addslashes($f_email);
-	$c_protected	= (integer)$f_protected;
-	$c_enabled		= (integer)$f_enabled;
-	$c_id			= (integer)$f_id;
-	$c_access_level	= (integer)$f_access_level;
+	$c_email		= db_prepare_string( $f_email );
+	$c_username		= db_prepare_string( $f_username );
+	$c_protected	= db_prepare_bool( $f_protected );
+	$c_enabled		= db_prepare_bool( $f_enabled );
+	$c_id			= db_prepare_int( $f_id );
+	$c_access_level	= db_prepare_int( $f_access_level );
 
-	# update action
-	# administrator is not allowed to change access level or enabled
-	# this is to prevent screwing your own account
-	if ( ON == $f_protected ) {
-	    $query = "UPDATE $g_mantis_user_table
+	$t_user_table = config_get( 'mantis_user_table' );
+
+	$t_old_protected = user_get_field( $f_id, 'protected' );
+
+	# if the user is already protected and the admin is not removing the
+	#  protected flag then don't update the access level and enabled flag.
+	#  If the user was unprotected or the protected flag is being turned off
+	#  then proceed with a full update.
+	if ( $f_protected && $t_old_protected ) {
+	    $query = "UPDATE $t_user_table
 	    		SET username='$c_username', email='$c_email',
 	    			protected='$c_protected'
 	    		WHERE id='$c_id'";
 	} else {
-	    $query = "UPDATE $g_mantis_user_table
+	    $query = "UPDATE $t_user_table
 	    		SET username='$c_username', email='$c_email',
 	    			access_level='$c_access_level', enabled='$c_enabled',
 	    			protected='$c_protected'
@@ -63,10 +70,10 @@
 <br />
 <div align="center">
 <?php
-	if ( ON == $f_protected ) {				# PROTECTED
-		echo lang_get( 'manage_user_protected_msg' ).'<br />';
+	if ( $f_protected && $t_old_protected ) {				# PROTECTED
+		echo lang_get( 'manage_user_protected_msg' ) . '<br />';
 	} else if ( $result ) {					# SUCCESS
-		echo lang_get( 'operation_successful' ).'<br />';
+		echo lang_get( 'operation_successful' ) . '<br />';
 	} else {								# FAILURE
 		print_sql_error( $query );
 	}
