@@ -12,6 +12,14 @@
 # significant releases (like 0.14.x to 0.15.0).
 
 # =================
+# 0.15.x to 0.16.0
+# =================
+
+Please run the admin_upgrade.php3 script and click on the 0.16.0 upgrade.
+
+Several fields were lengthened and a table to prepare for logging added.
+
+# =================
 # 0.15.x to 0.15.8
 # =================
 
