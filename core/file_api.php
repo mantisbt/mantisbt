@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.32 2003-03-24 03:36:53 vboctor Exp $
+	# $Id: file_api.php,v 1.33 2003-03-27 22:34:05 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -23,6 +23,20 @@
 	function file_get_display_name( $p_filename ) {
 		$t_array = explode ('-', $p_filename, 3);
 		return $t_array[count( $t_array ) - 1];
+	}
+	# --------------------
+	# Check if a specific bug has attachments
+	function file_bug_has_attachments( $p_bug_id ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
+		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+
+		$query = "SELECT bug_id FROM $t_bug_file_table WHERE bug_id='$c_bug_id'";
+		$result = db_query( $query );
+
+		if ( 0 < db_num_rows( $result ) )
+			return TRUE;
+			
+		return FALSE;
 	}
 	# --------------------
 	# List the attachments belonging to the specified bug.  This is used from within

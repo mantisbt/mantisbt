@@ -169,6 +169,12 @@
 	if ( STATUS_LEGEND_POSITION_TOP == config_get( 'status_legend_position' ) ) {
 		html_status_legend();
 	}
+
+	$t_show_attachments = config_get( 'show_attachment_indicator' );
+	if ( ON == $t_show_attachments ) {
+		$col_count++;
+	}
+
 ?>
 
 <br />
@@ -210,53 +216,61 @@
 </tr>
 <?php # -- Bug list column header row -- ?>
 <tr class="row-category">
-	<td class="center" width="2%">&nbsp;</td>
+	<td class="center">&nbsp;</td>
 
-	<td class="center" width="2%">&nbsp;</td>
+	<td class="center">&nbsp;</td>
 
 	<?php # -- Priority column -- ?>
-	<td class="center" width="5%">
+	<td class="center">
 		<?php print_view_bug_sort_link( 'P', 'priority', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'priority' ) ?>
 	</td>
 
 	<?php # -- Bug ID column -- ?>
-	<td class="center" width="8%">
+	<td class="center">
 		<?php print_view_bug_sort_link( lang_get( 'id' ), 'id', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'id' ) ?>
 	</td>
 
 	<?php # -- Bugnote count column -- ?>
-	<td class="center" width="3%">
+	<td class="center">
 		#
 	</td>
 
+	<?php # -- Attachment indicator --
+		if ( ON == $t_show_attachments ) {
+		  echo '<td class="center">';
+			echo '<img src="' . config_get( 'icon_path' ) . 'attachment.png' . '" alt="" />';
+			echo '</td>';
+		}
+	?>
+
 	<?php # -- Category column -- ?>
-	<td class="center" width="12%">
+	<td class="center">
 		<?php print_view_bug_sort_link( lang_get( 'category' ), 'category', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'category' ) ?>
 	</td>
 
 	<?php # -- Severity column -- ?>
-	<td class="center" width="10%">
+	<td class="center">
 		<?php print_view_bug_sort_link( lang_get( 'severity' ), 'severity', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'severity' ) ?>
 	</td>
 
 	<?php # -- Status column -- ?>
-	<td class="center" width="10%">
+	<td class="center">
 		<?php print_view_bug_sort_link( lang_get( 'status' ), 'status', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'status' ) ?>
 	</td>
 
 	<?php # -- Last Updated column -- ?>
-	<td class="center" width="12%">
+	<td class="center">
 		<?php print_view_bug_sort_link( lang_get( 'updated' ), 'last_updated', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'last_updated' ) ?>
 	</td>
 
 	<?php # -- Summary column -- ?>
-	<td class="center" width="38%">
+	<td class="center">
 		<?php print_view_bug_sort_link( lang_get( 'summary' ), 'summary', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'summary' ) ?>
 	</td>
@@ -281,6 +295,14 @@
 
 		# grab the bugnote count
 		$bugnote_count = bug_get_bugnote_count( $v_id );
+
+		# Check for attachments
+		$t_has_attachments = FALSE;
+		if ( ON == $t_show_attachments 
+			&& ( $v_reporter_id == auth_get_current_user_id() 
+				|| access_has_bug_level( config_get( 'view_attachments_threshold' ), $v_id ) ) ) {
+		   $t_has_attachments = file_bug_has_attachments( $v_id );
+		}
 
 		# grab the project name
 		$project_name = project_get_field( $v_project_id, 'name' );
@@ -346,6 +368,21 @@
 			}
 		?>
 	</td>
+
+	<?php # -- Attachment indicator --
+	  
+		if ( ON == $t_show_attachments ) {
+		  echo '<td class="center">';
+			if ( TRUE == $t_has_attachments ) {
+				echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
+				echo '<img border="0" src="' . config_get( 'icon_path' ) . 'attachment.png' . '" alt="" />';
+				echo '</a>';
+			} else {
+			  echo '&nbsp;';
+			}
+			echo '</td>';
+		}
+	?>
 
 	<?php # -- Category -- ?>
 	<td class="center">

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.46 2003-03-24 06:26:42 jfitzell Exp $
+	# $Id: bug_view_page.php,v 1.47 2003-03-27 22:34:04 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -322,6 +322,7 @@
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
+		<a name="attachments" id="attachments" />
 		<?php echo lang_get( 'attached_files' ) ?>
 	</td>
 	<td colspan="5">

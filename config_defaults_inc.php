@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.116 2003-03-22 11:51:53 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.117 2003-03-27 22:34:04 int2str Exp $
 	# --------------------------------------------------------
 
 	
@@ -313,6 +313,14 @@
 	# --- Position of the status colour legend, can be: STATUS_LEGEND_POSITION_*
 	# --- see constant_inc.php. (*: BOTTOM or TOP)
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
+
+	# --- Show an attachment indicator on bug list ---
+	# Show a clickable attachment indicator on the bug 
+	# list page if the bug has one or more files attached.
+	# Note: This option is disabled by default since it adds
+	# 1 database query per bug listed and thus might slow
+	# down the page display.
+	$g_show_attachment_indicator = OFF;
 
 	############################
 	# Mantis JPGRAPH Addon
