@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.22 2002-11-24 20:43:49 jfitzell Exp $
+	# $Id: bug_api.php,v 1.23 2002-11-29 16:46:47 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -750,10 +750,10 @@
 			# updated the last_updated date
 			bug_update_date( $p_bug_id );
 
+			bug_clear_cache( $p_bug_id );
+
 			# send assigned to email
 			email_assign( $p_bug_id );
-
-			bug_clear_cache( $p_bug_id );
 		}
 
 		return true;
@@ -832,6 +832,8 @@
 				  SET last_updated=NOW()
 				  WHERE id='$c_bug_id'";
 		db_query( $query );
+
+		bug_clear_cache( $p_bug_id );
 
 		return true;
 	}
