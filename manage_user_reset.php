@@ -17,7 +17,7 @@
 ?>
 <?php html_page_top1() ?>
 <?php
-	if ( $result ) {
+	if ( $t_result ) {
 		html_meta_redirect( $t_redirect_url );
 	}
 ?>
