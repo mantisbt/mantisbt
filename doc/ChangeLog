@@ -28,7 +28,8 @@ Mantis ChangeLog
  * Fix #3594: Incorrect encoding for Turkish localization.
  * Fix #3597: custom fields names are not translaten in email (thanks to yarik123).
  * Fix #3598: bug history: consuming custom fields or not?
- * Languages: Added Lithuanian - Updated Norwegian localisation.
+ * Fix #3603: Missing german strings in localisation file (thanks to Dr. Jürgen Kehrel).
+ * Languages: Added Lithuanian - Updated Norwegian and German localisations.
  * Mantis website moved to http://www.mantisbt.org
 
 2004.02.06  -  0.18.1
