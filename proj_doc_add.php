@@ -24,49 +24,66 @@
 	}
 
 	$f_description	= gpc_get_string( 'description' );
+	$f_file		= gpc_get_file( 'file' );
 
 	$result = 0;
 	$good_upload = 0;
 	$disallowed = 0;
-	extract( $HTTP_POST_FILES['file'], EXTR_PREFIX_ALL, 'f' );
 
-	if ( !file_type_check( $f_name ) ) {
+	extract( $f_file, EXTR_PREFIX_ALL, 'v' );
+
+	if ( !file_type_check( $v_name ) ) {
 		$disallowed = 1;
-	} else if ( is_uploaded_file( $f_tmp_name ) ) {
+	} else if ( is_uploaded_file( $v_tmp_name ) ) {
 		$good_upload = 1;
 
 		$t_project_id = helper_get_current_project();
 
-		# grab the file path
-		$t_file_path = project_get_field( helper_get_current_project(), 'file_path' );
+		# grab the file path and name
+		$t_file_path = project_get_field( $t_project_id, 'file_path' );
+		$t_prefix = config_get( 'document_files_prefix' );
+		if ( !is_blank( $t_prefix ) ) {
+			$t_prefix .= '-';
+		}
+		$t_file_name = $t_prefix . project_format_id ( $t_project_id ) . '-' . $v_name;
 
 		# prepare variables for insertion
-		$f_title 	= db_prepare_string( $f_title );
-		$f_description 	= db_prepare_string( $f_description );
+		$c_title = db_prepare_string( $f_title );
+		$c_description = db_prepare_string( $f_description );
+		$c_file_path = db_prepare_string( $t_file_path );
+		$c_file_name = db_prepare_string( $t_file_name );
+		$c_file_type = db_prepare_string( $v_type );
+		$c_file_size = db_prepare_int( $v_size );
 
-		$f_file_name = config_get( 'document_files_prefix' ) . '-' . project_format_id ( $t_project_id ) . '-' . $f_name;
-		$t_file_size = $f_size;
-
-		switch ( $g_file_upload_method ) {
-			case DISK:	if ( !file_exists( $t_file_path.$f_file_name ) ) {
+		$t_method = config_get( 'file_upload_method' );		
+		switch ( $t_method ) {
+			case FTP:
+			case DISK:	if ( !file_exists( $t_file_path.$t_file_name ) ) {
+							if ( FTP == $t_method ) {
+								$conn_id = file_ftp_connect();
+								file_ftp_put ( $conn_id, $t_file_name, $v_tmp_name );
+								file_ftp_disconnect ( $conn_id );
+							}
 							umask( 0333 );  # make read only
-							copy($f_tmp_name, $t_file_path.$f_file_name);
-							$query = "INSERT INTO mantis_project_file_table
-									(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
-									VALUES
-									(null, $t_project_id, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '')";
+							copy( $v_tmp_name, $t_file_path . $t_file_name );
+							$c_content = '';
 						} else {
 							trigger_error( ERROR_DUPLICATE_FILE, ERROR );
 						}
 						break;
 			case DATABASE:
-						$t_content = addslashes( fread ( fopen( $f_tmp_name, 'rb' ), $t_file_size ) );
-						$query = "INSERT INTO mantis_project_file_table
-								(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
-								VALUES
-								(null, $t_project_id, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '$t_content')";
+						$c_content = db_prepare_string( fread ( fopen( $v_tmp_name, 'rb' ), $v_size ) );
 						break;
+			default:
+				# @@@ Such errors should be checked in the admin checks
+				trigger_error( ERROR_GENERIC, ERROR );
 		}
+
+		$query = "INSERT INTO mantis_project_file_table
+				(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
+				VALUES
+				(null, $t_project_id, '$c_title', '$c_description', '$c_file_path$c_file_name', '$c_file_name', '$c_file_path', $c_file_size, '$c_file_type', NOW(), '$c_content')";
+
 		$result = db_query( $query );
 	}
 

@@ -46,7 +46,7 @@
 		$v_filesize 	= number_format( $v_filesize );
 		$v_title 		= string_display( $v_title );
 		$v_description 	= string_display_links( $v_description );
-		$v_date_added = date( $g_complete_date_format, $v_date_added );
+		$v_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
 
 ?>
 <tr valign="top" <?php echo helper_alternate_class( $i ) ?>>
@@ -57,12 +57,16 @@
 		print_file_icon( $v_filename );
 		echo '</a>&nbsp;';
 		echo $t_href . $v_title . '</a> ('.$v_filesize.' bytes)';
-		if ( access_has_project_level( MANAGER ) ) {
-			print_bracket_link( 'proj_doc_edit_page.php?file_id='.$v_id, 'edit' );
-		}
 ?>
 		<br />
-		<span class="small">(<?php echo $v_date_added ?>)</span>
+		<span class="small">(<?php echo $v_date_added ?>)
+		<?php
+			if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
+				echo '&nbsp;';
+				print_bracket_link( 'proj_doc_edit_page.php?file_id='.$v_id, 'edit' );
+			}
+		?>
+		</span>
 	</td>
 	<td>
 		<?php echo $v_description ?>

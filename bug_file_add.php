@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.41 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_file_add.php,v 1.42 2003-02-25 14:02:24 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -56,6 +56,7 @@
 <br />
 <div align="center">
 <?php
+	echo lang_get( 'operation_successful' ) . '<br />';
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>

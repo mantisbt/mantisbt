@@ -32,6 +32,7 @@ Mantis ChangeLog
  * Fix #2980: Escaping fixes are not applied to the bug history table.
  * Fix #2982: Having email_set_category set to EMAIL_CATEGORY_PROJECT_CATEGORY erased various mail headers.
  * Fix #2989: Allow managers to manage bugnotes.
+ * Fix #2992: Unable to attach files to bugs (or documents to projects) [applicable to Windows servers]
  * Fix #2993: Read/Write access levels not checked in custom fields.
  * DB Upgrade: Added "id" primary key to bug history table (needed for #2980).
  * Languages: Updated German localisation.

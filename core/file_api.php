@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.28 2003-02-25 10:11:31 vboctor Exp $
+	# $Id: file_api.php,v 1.29 2003-02-25 14:02:26 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -33,8 +33,9 @@
 		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
 
 		$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
-				  FROM $t_bug_file_table
-				  WHERE bug_id='$c_bug_id'";
+				FROM $t_bug_file_table
+				WHERE bug_id='$c_bug_id'
+				ORDER BY date_added";
 		$result = db_query( $query );
 
 		$t_bug = bug_get( $c_bug_id, false );
@@ -289,23 +290,23 @@
 	# --------------------
 	function file_add( $p_bug_id, $p_tmp_file, $p_file_name, $p_file_type='' ) {
 		$c_bug_id		= db_prepare_int( $p_bug_id );
-		$c_tmp_file		= db_prepare_string( $p_tmp_file );
-		$c_file_name	= db_prepare_string( $p_file_name );
 		$c_file_type	= db_prepare_string( $p_file_type );
 
 		if ( !file_type_check( $p_file_name ) ) {
 			trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
 		} else if ( is_uploaded_file( $p_tmp_file ) ) {
 			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+			$t_bug_id = bug_format_id( $p_bug_id );
 
 			# grab the file path
 			$t_file_path = project_get_field( $t_project_id, 'file_path' );
-
-			$t_bug_id = bug_format_id( $p_bug_id );
+			$t_new_file_name = $t_bug_id . '-' . $p_file_name;
 
 			# prepare variables for insertion
-			$t_new_file_name = $t_bug_id.'-'.$c_file_name;
-			$t_file_size = filesize( $p_tmp_file );
+			$c_file_path = db_prepare_string( $t_file_path );
+			$c_new_file_name = db_prepare_string( $t_new_file_name );
+			$c_file_size = db_prepare_int( filesize( $p_tmp_file ) );
+			$c_file_type = db_prepare_string( $p_file_type );
 
 			$t_method = config_get( 'file_upload_method' );
 			$t_bug_file_table = config_get( 'mantis_bug_file_table' );
@@ -323,24 +324,23 @@
 						umask( 0333 );  # make read only
 						copy( $p_tmp_file, $t_file_path . $t_new_file_name );
 
-						$query = "INSERT INTO $t_bug_file_table
-								    (id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
-								  VALUES
-								    (null, $c_bug_id, '', '', '$t_file_path$t_new_file_name', '$t_new_file_name', '$t_file_path', $t_file_size, '$c_file_type', NOW(), '')";
-						db_query( $query );
+						$c_content = '';
 					} else {
 						trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 					}
 					break;
 				case DATABASE:
-					$t_content = db_prepare_string( fread ( fopen( $p_tmp_file, 'rb' ), $t_file_size ) );
-					$query = "INSERT INTO $t_bug_file_table
-							    (id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
-							  VALUES
-							    (null, $c_bug_id, '', '', '$t_file_path$t_new_file_name', '$t_new_file_name', '$t_file_path', $t_file_size, '$c_file_type', NOW(), '$t_content')";
-					db_query( $query );
+					$c_content = db_prepare_string( fread ( fopen( $p_tmp_file, 'rb' ), $t_file_size ) );
 					break;
+				default:
+					trigger_error( ERROR_GENERIC, ERROR );
 			}
+
+			$query = "INSERT INTO $t_bug_file_table
+						(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
+						VALUES
+						(null, $c_bug_id, '', '', '$c_file_path$c_new_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', NOW(), '$c_content')";
+			db_query( $query );
 
 			# updated the last_updated date
 			$result = bug_update_date( $p_bug_id );
