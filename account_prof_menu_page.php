@@ -43,7 +43,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_platform ?>
+		<span class="required">*</span><?php echo $s_platform ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="f_platform" size="32" maxlength="32">
@@ -51,7 +51,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_operating_system ?>
+		<span class="required">*</span><?php echo $s_operating_system ?>
 	</td>
 	<td>
 		<input type="text" name="f_os" size="32" maxlength="32">
@@ -59,7 +59,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_version ?>
+		<span class="required">*</span><?php echo $s_version ?>
 	</td>
 	<td>
 		<input type="text" name="f_os_build" size="16" maxlength="16">
@@ -67,14 +67,17 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_additional_description ?>
+		<span class="required">*</span><?php echo $s_additional_description ?>
 	</td>
 	<td>
 		<textarea name="f_description" cols="60" rows="8" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>
-	<td class="center" colspan="2">
+	<td class="left">
+		<span class="required"> * <?php echo $s_required ?></span>
+	</td>
+	<td class="center">
 		<input type="submit" value="<?php echo $s_add_profile_button ?>">
 	</td>
 </tr>
