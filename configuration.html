@@ -26,6 +26,7 @@ This is the Mantis system configuration documentation.
 <ul>
 <li><a href="#database">Database</a>
 <li><a href="#path">Path</a>
+<li><a href="#web_server">Web Server</a>
 <li><a href="#version">Version</a>
 <li><a href="#email">Email</a>
 <li><a href="#language">Language</a>
@@ -154,6 +155,31 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	<td colspan=2 bgcolor="#eeeeee">
 		These path settings are important for proper linking within your database.<br>
 		The examples are unix style but you can use windows style paths as well (eg. "\\apache\\htdocs\\mantis\\" ).
+	</td>
+</tr>
+</table>
+<!-- --- PATH END -------------------------------------------------------- -->
+
+<!-- --- PATH BEGIN ------------------------------------------------------ -->
+<p>
+<a name="web_server">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>Web Server</b>
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_use_iis
+	</td>
+	<td bgcolor="#ffffff">
+		You need to set this to 1 if you use Miscrosoft's IIS.  This helps correct a bug in IIS.
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		Any web server specific bugs and workarounds can be controled from here.
 	</td>
 </tr>
 </table>
