@@ -226,7 +226,7 @@
 		<table width="100%">
 			<tr align="center">
 <?php # UPDATE form BEGIN ?>
-<?php $t_user_id = get_current_user_field ( "id" ); ?>
+<?php $t_user_id = get_current_user_field ( 'id' ); ?>
 <?php if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="<?php echo get_bug_update_page() ?>">
@@ -249,7 +249,7 @@
 		<input type="hidden" name="f_date_submitted" value="<?php echo $v_date_submitted ?>">
 		<input type="submit" value="<?php echo $s_bug_assign_button ?>">
 		</form>
-		<?php } #end of checking if current user already assigned ?>&nbsp;
+		<?php } #end of checking if current user already assigned ?>
 	</td>
 <?php
 	} # ASSIGN form END
