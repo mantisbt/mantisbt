@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.10 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: database_api.php,v 1.11 2003-01-04 07:32:16 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -205,7 +205,7 @@
 		return $t_new_row;
 	}
 
-	if ( !isset( $f_skip_open_db ) ) {
+	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port );
 		} else {

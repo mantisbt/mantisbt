@@ -8,7 +8,7 @@
 <?php
 	error_reporting( E_ALL );
 
-	$f_skip_open_db = true;  // don't open the database in database_api.php
+	$g_skip_open_db = true;  // don't open the database in database_api.php
 	require_once( 'admin_inc.php' );
 
 	# mail test
