@@ -4,8 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
@@ -15,8 +15,8 @@
     $f_headline = string_display( $f_headline );
     $f_body 	= string_display( $f_body );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
 <p>
 <div align="center">
@@ -27,12 +27,12 @@
 <table class="width75" cellspacing="0">
 <tr>
 	<td class="news-heading">
-		<span class="news-headline"><? echo $f_headline ?></span>
+		<span class="news-headline"><?php echo $f_headline ?></span>
 	</td>
 </tr>
 <tr>
 	<td class="news-body">
-		<? echo $f_body ?>
+		<?php echo $f_body ?>
 	</td>
 </tr>
 </table>
@@ -46,4 +46,4 @@
 ?>
 </div>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

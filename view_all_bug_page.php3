@@ -4,8 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -272,15 +272,15 @@
 		die;
     }*/
 ?>
-<? print_page_top1() ?>
+<?php print_page_top1() ?>
 <?
 	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
 		print_meta_redirect( $PHP_SELF."?f_page_number=".$f_page_number, get_current_user_pref_field( "refresh_delay" )*60 );
 	}
 ?>
-<? print_page_top2() ?>
+<?php print_page_top2() ?>
 
 
-<? include( $g_view_all_include_file ) ?>
+<?php include( $g_view_all_include_file ) ?>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

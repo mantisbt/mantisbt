@@ -8,21 +8,21 @@
 	# This is the first page a user sees when they login to the bugtracker
 	# News is displayed which can notify users of any important changes
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
-<? db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name ) ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
+<?php db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name ) ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
 <table class="hide">
 <tr>
 	<td class="quick-summary-left">
-		<? echo $s_open_and_assigned_to_me ?>:
-		<? echo get_assigned_open_bug_count($g_project_cookie_val,$g_string_cookie_val) ?>
+		<?php echo $s_open_and_assigned_to_me ?>:
+		<?php echo get_assigned_open_bug_count($g_project_cookie_val,$g_string_cookie_val) ?>
 	</td>
 	<td class="quick-summary-right">
-		<? echo $s_open_and_reported_to_me ?>:
-		<? echo get_reported_open_bug_count($g_project_cookie_val,$g_string_cookie_val) ?>
+		<?php echo $s_open_and_reported_to_me ?>:
+		<?php echo get_reported_open_bug_count($g_project_cookie_val,$g_string_cookie_val) ?>
 	</td>
 </tr>
 </table>
@@ -78,14 +78,14 @@
 <table class="width75" cellspacing="0">
 <tr>
 	<td class="news-heading">
-		<span class="news-headline"><? echo $v_headline ?></span> -
-		<span class="news-date"><? echo $v_date_posted ?></span> -
-		<a class="news-email" href="mailto:<? echo $t_poster_email ?>"><? echo $t_poster_name ?></a>
+		<span class="news-headline"><?php echo $v_headline ?></span> -
+		<span class="news-date"><?php echo $v_date_posted ?></span> -
+		<a class="news-email" href="mailto:<?php echo $t_poster_email ?>"><?php echo $t_poster_name ?></a>
 	</td>
 </tr>
 <tr>
 	<td class="news-body">
-		<? echo $v_body ?>
+		<?php echo $v_body ?>
 	</td>
 </tr>
 </table>
@@ -94,7 +94,7 @@
 	}  # end for loop
 ?>
 
-<? # Print NEXT and PREV links if necessary ?>
+<?php # Print NEXT and PREV links if necessary ?>
 <p>
 <div align="center">
 <?
@@ -111,4 +111,4 @@
 ?>
 </div>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

@@ -24,7 +24,7 @@
 	$num_notes = db_num_rows($result);
 ?>
 
-<? # Bugnotes BEGIN ?>
+<?php # Bugnotes BEGIN ?>
 <p>
 <table class="width100" cellspacing="0">
 <?
@@ -33,13 +33,13 @@
 ?>
 <tr>
 	<td class="center" colspan="2">
-		<? echo $s_no_bugnotes_msg ?>
+		<?php echo $s_no_bugnotes_msg ?>
 	</td>
 </tr>
 <?	} else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
-		<? echo $s_bug_notes_title ?>
+		<?php echo $s_bug_notes_title ?>
 	</td>
 </tr>
 <?
@@ -64,12 +64,12 @@
 		<table class="hide" cellspacing="0">
 		<tr>
 			<td class="category" colspan="2">
-				<? print_user( $v3_reporter_id ) ?>
+				<?php print_user( $v3_reporter_id ) ?>
 			</td>
 		</tr>
 		<tr class="row-1">
 			<td class="small-caption">
-				<? echo $v3_date_submitted ?>
+				<?php echo $v3_date_submitted ?>
 			</td>
 			<td class="small-caption">
 			<?
@@ -92,7 +92,7 @@
 		<table class="hide" cellspacing="0">
 		<tr class="row-2">
 			<td>
-				<? echo $v3_note ?>
+				<?php echo $v3_note ?>
 			</td>
 		</tr>
 		</table>
@@ -108,19 +108,19 @@
 	} # end else
 ?>
 </table>
-<? # Bugnotes END ?>
+<?php # Bugnotes END ?>
 
-<? if ( ( ( $v_status < RESOLVED ) ||
+<?php if ( ( ( $v_status < RESOLVED ) ||
 		  ( isset( $f_resolve_note ) ) ) &&
 		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
-<? # Bugnote Add Form BEGIN ?>
+<?php # Bugnote Add Form BEGIN ?>
 <p>
 <table class="width100" cellspacing="0">
-<form method="post" action="<? echo $g_bugnote_add ?>">
-<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+<form method="post" action="<?php echo $g_bugnote_add ?>">
+<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <tr>
 	<td class="form-title">
-		<? echo $s_add_bugnote_title ?>
+		<?php echo $s_add_bugnote_title ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -130,10 +130,10 @@
 </tr>
 <tr>
 	<td class="center">
-		<input type="submit" value="<? echo $s_add_bugnote_button ?>">
+		<input type="submit" value="<?php echo $s_add_bugnote_button ?>">
 	</td>
 </tr>
 </form>
 </table>
-<? # Bugnote Add Form END ?>
+<?php # Bugnote Add Form END ?>
 <?	} ?>

@@ -7,7 +7,7 @@
 <?
 	# Check login then redirect to main_page.php3 or to login_page.php3
 ?>
-<? include( "core_API.php" ) ?>
+<?php include( "core_API.php" ) ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -70,7 +70,7 @@
 		print_header_redirect( $t_redirect_url );
 	}
 ?>
-<? print_page_top1() ?>
+<?php print_page_top1() ?>
 <?
 	# goto main_page or back to login_page
 	if ( $t_project_id > 0 ) {
@@ -85,7 +85,7 @@
 		print_meta_redirect( $g_login_page."?f_error=1", 0 );
 	}
 ?>
-<? print_page_top2a() ?>
+<?php print_page_top2a() ?>
 
 <p>
 <div align="center">
@@ -102,4 +102,4 @@
 ?>
 </div>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

@@ -8,7 +8,7 @@
 	# Login page POSTs results to login.php
 	# Check to see if the user is already logged in via login_cookie_check()
 ?>
-<? include( "core_API.php" ) ?>
+<?php include( "core_API.php" ) ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -17,8 +17,8 @@
 		login_cookie_check( $g_main_page );
 	}
 ?>
-<? print_page_top1() ?>
-<? print_page_top2a() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2a() ?>
 
 <p>
 <div align="center">
@@ -33,22 +33,22 @@
 ?>
 </div>
 
-<? # Login Form BEGIN ?>
+<?php # Login Form BEGIN ?>
 <p>
 <div align="center">
-<form method="post" action="<? echo $g_login ?>">
+<form method="post" action="<?php echo $g_login ?>">
 <?	if (isset($f_project_id)) { ?>
-<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
+<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 <?	} ?>
 <table class="width50" cellspacing="0">
 <tr>
 	<td class="form-title" colspan="2">
-		<? echo $s_login_title ?>
+		<?php echo $s_login_title ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<? echo $s_username ?>:
+		<?php echo $s_username ?>:
 	</td>
 	<td width="75%">
 		<input type="text" name="f_username" size="32" maxlength="32">
@@ -56,7 +56,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_password ?>:
+		<?php echo $s_password ?>:
 	</td>
 	<td>
 		<input type="password" name="f_password" size="16" maxlength="32">
@@ -64,7 +64,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_save_login ?>:
+		<?php echo $s_save_login ?>:
 	</td>
 	<td>
 		<input type="checkbox" name="f_perm_login">
@@ -72,14 +72,14 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<? echo $s_login_button ?>">
+		<input type="submit" value="<?php echo $s_login_button ?>">
 	</td>
 </tr>
 </table>
 </form>
 </div>
-<? # Login Form END ?>
+<?php # Login Form END ?>
 
-<? print_signup_link() ?>
+<?php print_signup_link() ?>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

@@ -4,8 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -46,135 +46,135 @@
 	$t_total_time		= number_format( $t_total_time / 86400, 2 );
 	$t_average_time 	= number_format( $t_average_time / 86400, 2 );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
-<? print_summary_menu( $g_summary_page ) ?>
+<?php print_summary_menu( $g_summary_page ) ?>
 
 <p>
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<? echo $s_summary_title ?> <? echo $s_orct ?>
+		<?php echo $s_summary_title ?> <?php echo $s_orct ?>
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<? # STATUS # ?>
+		<?php # STATUS # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<? echo $s_by_status ?>:
+				<?php echo $s_by_status ?>:
 			</td>
 		</tr>
-		<? print_bug_enum_summary( $s_status_enum_string, "status" ) ?>
+		<?php print_bug_enum_summary( $s_status_enum_string, "status" ) ?>
 		</table>
 	</td>
 	<td width="50%">
-		<? # DATE # ?>
+		<?php # DATE # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<? echo $s_by_date ?>:
+				<?php echo $s_by_date ?>:
 			</td>
 		</tr>
-		<? print_bug_date_summary( $g_date_partitions ) ?>
+		<?php print_bug_date_summary( $g_date_partitions ) ?>
 		</table>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<? # SEVERITY # ?>
+		<?php # SEVERITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<? echo $s_by_severity ?>:
+				<?php echo $s_by_severity ?>:
 			</td>
 		</tr>
-		<? print_bug_enum_summary( $s_severity_enum_string, "severity" ) ?>
+		<?php print_bug_enum_summary( $s_severity_enum_string, "severity" ) ?>
 		</table>
 	</td>
 	<td>
-		<? # RESOLUTION # ?>
+		<?php # RESOLUTION # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<? echo $s_by_resolution ?>:
+				<?php echo $s_by_resolution ?>:
 			</td>
 		</tr>
-		<? print_bug_enum_summary( $s_resolution_enum_string, "resolution" ) ?>
-		</table>
-	</td>
-</tr>
-<tr valign="top">
-	<td>
-		<? # CATEGORY # ?>
-		<table class="width100" cellspacing="1">
-		<tr>
-			<td class="form-title" colspan="2">
-				<? echo $s_by_category ?>:
-			</td>
-		</tr>
-		<? print_category_summary() ?>
-		</table>
-	</td>
-	<td>
-		<? # PRIORITY # ?>
-		<table class="width100" cellspacing="1">
-		<tr>
-			<td class="form-title" colspan="2">
-				<? echo $s_by_priority ?>:
-			</td>
-		</tr>
-		<? print_bug_enum_summary( $s_priority_enum_string, "priority" ) ?>
+		<?php print_bug_enum_summary( $s_resolution_enum_string, "resolution" ) ?>
 		</table>
 	</td>
 </tr>
 <tr valign="top">
 	<td>
-		<? # MISCELLANEOUS # ?>
+		<?php # CATEGORY # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<?php echo $s_by_category ?>:
+			</td>
+		</tr>
+		<?php print_category_summary() ?>
+		</table>
+	</td>
+	<td>
+		<?php # PRIORITY # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<?php echo $s_by_priority ?>:
+			</td>
+		</tr>
+		<?php print_bug_enum_summary( $s_priority_enum_string, "priority" ) ?>
+		</table>
+	</td>
+</tr>
+<tr valign="top">
+	<td>
+		<?php # MISCELLANEOUS # ?>
 		<table class="width100">
 		<tr>
 			<td class="form-title">
-				<? echo $s_time_stats ?>:
+				<?php echo $s_time_stats ?>:
 			</td>
 		</tr>
 		<tr class="row-1">
 			<td width="50%">
-				<? echo $s_longest_open_bug ?>
+				<?php echo $s_longest_open_bug ?>
 			</td>
 			<td width="50%">
-				<? if ($t_bug_id>0) { ?>
-					<? if ( ON == get_current_user_pref_field( "advanced_view" ) ) { ?>
-						<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
-					<? } else {?>
-						<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
-					<? } ?>
-				<? } ?>
+				<?php if ($t_bug_id>0) { ?>
+					<?php if ( ON == get_current_user_pref_field( "advanced_view" ) ) { ?>
+						<a href="<?php echo $g_view_bug_advanced_page ?>?f_id=<?php echo $t_bug_id ?>"><?php echo $t_bug_id ?></a>
+					<?php } else {?>
+						<a href="<?php echo $g_view_bug_page ?>?f_id=<?php echo $t_bug_id ?>"><?php echo $t_bug_id ?></a>
+					<?php } ?>
+				<?php } ?>
 			</td>
 		</tr>
 		<tr class="row-2">
 			<td>
-				<? echo $s_longest_open ?>
+				<?php echo $s_longest_open ?>
 			</td>
 			<td>
-				<? echo $t_largest_diff ?>
+				<?php echo $t_largest_diff ?>
 			</td>
 		</tr>
 		<tr class="row-1">
 			<td>
-				<? echo $s_average_time ?>
+				<?php echo $s_average_time ?>
 			</td>
 			<td>
-				<? echo $t_average_time ?>
+				<?php echo $t_average_time ?>
 			</td>
 		</tr>
 		<tr class="row-2">
 			<td>
-				<? echo $s_total_time ?>
+				<?php echo $s_total_time ?>
 			</td>
 			<td>
-				<? echo $t_total_time ?>
+				<?php echo $t_total_time ?>
 			</td>
 		</tr>
 		</table>
@@ -185,28 +185,28 @@
 </tr>
 <tr valign="top">
 	<td>
-		<? # DEVELOPER # ?>
+		<?php # DEVELOPER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<? echo $s_developer_stats ?>:
+				<?php echo $s_developer_stats ?>:
 			</td>
 		</tr>
-		<? print_developer_summary() ?>
+		<?php print_developer_summary() ?>
 		</table>
 	</td>
 	<td>
-		<? # REPORTER # ?>
+		<?php # REPORTER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="2">
-				<? echo $s_reporter_stats ?>:
+				<?php echo $s_reporter_stats ?>:
 			</td>
 		</tr>
-		<? print_reporter_summary() ?>
+		<?php print_reporter_summary() ?>
 		</table>
 	</td>
 </tr>
 </table>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

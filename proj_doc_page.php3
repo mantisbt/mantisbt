@@ -4,8 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( VIEWER );
@@ -17,18 +17,18 @@
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
 <p>
 <div align="center">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<? echo $s_project_documentation_title ?>
+		<?php echo $s_project_documentation_title ?>
 	</td>
 	<td class="right">
-		<? print_doc_menu( $g_proj_doc_page ) ?>
+		<?php print_doc_menu( $g_proj_doc_page ) ?>
 	</td>
 </tr>
 <?
@@ -43,7 +43,7 @@
 		# alternate row colors
 		$status_color = alternate_colors( $i );
 ?>
-<tr valign="top" bgcolor="<? echo $status_color ?>">
+<tr valign="top" bgcolor="<?php echo $status_color ?>">
 	<td>
 <?
 		switch ( $g_file_upload_method ) {
@@ -58,14 +58,14 @@
 		}
 ?>
 		<br>
-		<span class="small">(<? echo $v_filesize ?> KB)</span>
+		<span class="small">(<?php echo $v_filesize ?> KB)</span>
 	</td>
 	<td>
-		<? echo $v_description ?>
+		<?php echo $v_description ?>
 	</td>
 </tr>
-<? 		} # end for loop ?>
+<?php 		} # end for loop ?>
 </table>
 </div>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

@@ -7,8 +7,8 @@
 <?
 	# This page stores the reported bug and then redirects to view_all_bug_page.php3
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	# these pages are invalid for the "All Project" selection
 	if ( "0000000" == $g_project_cookie_val ) {
@@ -164,13 +164,13 @@
 	# Determine which report page to redirect back to.
 	$t_redirect_url = get_report_redirect_url();
 ?>
-<? print_page_top1() ?>
+<?php print_page_top1() ?>
 <?
 	if ( ( !$check_failed )&&( $result )&&( !isset( $f_report_stay ) ) ) {
 		print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
 	}
 ?>
-<? print_page_top2() ?>
+<?php print_page_top2() ?>
 
 <p>
 <div align="center">
@@ -196,22 +196,22 @@
 		}
 ?>
 		<p>
-		<form method="post" action="<? echo $t_redirect_url ?>">
-			<input type="hidden" name="f_category" 			value="<? echo $f_category ?>">
-			<input type="hidden" name="f_severity" 			value="<? echo $f_severity ?>">
-			<input type="hidden" name="f_reproducibility" 	value="<? echo $f_reproducibility ?>">
-			<input type="hidden" name="f_profile_id" 		value="<? echo $f_profile_id ?>">
-			<input type="hidden" name="f_platform" 			value="<? echo $f_platform ?>">
-			<input type="hidden" name="f_os" 				value="<? echo $f_os ?>">
-			<input type="hidden" name="f_osbuild" 			value="<? echo $f_osbuild ?>">
-			<input type="hidden" name="f_product_version" 	value="<? echo $f_product_version ?>">
-			<input type="hidden" name="f_build" 			value="<? echo $f_build ?>">
-			<input type="hidden" name="f_assign_id" 		value="<? echo $f_assign_id ?>">
-			<input type="hidden" name="f_summary" 			value="<? echo $f_summary ?>">
-			<input type="hidden" name="f_description" 		value="<? echo $f_description ?>">
-			<input type="hidden" name="f_steps_to_reproduce" value="<? echo $f_steps_to_reproduce ?>">
-			<input type="hidden" name="f_additional_info" 	value="<? echo $f_additional_info ?>">
-			<input type="submit" 							value="<? echo $s_go_back ?>">
+		<form method="post" action="<?php echo $t_redirect_url ?>">
+			<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>">
+			<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>">
+			<input type="hidden" name="f_reproducibility" 	value="<?php echo $f_reproducibility ?>">
+			<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>">
+			<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>">
+			<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>">
+			<input type="hidden" name="f_osbuild" 			value="<?php echo $f_osbuild ?>">
+			<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>">
+			<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>">
+			<input type="hidden" name="f_assign_id" 		value="<?php echo $f_assign_id ?>">
+			<input type="hidden" name="f_summary" 			value="<?php echo $f_summary ?>">
+			<input type="hidden" name="f_description" 		value="<?php echo $f_description ?>">
+			<input type="hidden" name="f_steps_to_reproduce" value="<?php echo $f_steps_to_reproduce ?>">
+			<input type="hidden" name="f_additional_info" 	value="<?php echo $f_additional_info ?>">
+			<input type="submit" 							value="<?php echo $s_go_back ?>">
 		</form>
 <?
 	} else if ( !$result ) {		# MYSQL ERROR
@@ -221,18 +221,18 @@
 
 		if ( isset( $f_report_stay )) {
 ?>
-			<form method="post" action="<? echo $t_redirect_url ?>">
-				<input type="hidden" name="f_category" 			value="<? echo $f_category ?>">
-				<input type="hidden" name="f_severity" 			value="<? echo $f_severity ?>">
-				<input type="hidden" name="f_reproducibility" 	value="<? echo $f_reproducibility ?>">
-				<input type="hidden" name="f_profile_id" 		value="<? echo $f_profile_id ?>">
-				<input type="hidden" name="f_platform" 			value="<? echo $f_platform ?>">
-				<input type="hidden" name="f_os" 				value="<? echo $f_os ?>">
-				<input type="hidden" name="f_osbuild" 			value="<? echo $f_osbuild ?>">
-				<input type="hidden" name="f_product_version" 	value="<? echo $f_product_version ?>">
-				<input type="hidden" name="f_build" 			value="<? echo $f_build ?>">
-				<input type="hidden" name="f_report_stay" 		value="<? echo $f_report_stay ?>">
-				<input type="submit" 							value="<? echo $s_report_more_bugs ?>">
+			<form method="post" action="<?php echo $t_redirect_url ?>">
+				<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>">
+				<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>">
+				<input type="hidden" name="f_reproducibility" 	value="<?php echo $f_reproducibility ?>">
+				<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>">
+				<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>">
+				<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>">
+				<input type="hidden" name="f_osbuild" 			value="<?php echo $f_osbuild ?>">
+				<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>">
+				<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>">
+				<input type="hidden" name="f_report_stay" 		value="<?php echo $f_report_stay ?>">
+				<input type="submit" 							value="<?php echo $s_report_more_bugs ?>">
 			</form>
 <?
 		} else {
@@ -242,4 +242,4 @@
 ?>
 </div>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

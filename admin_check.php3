@@ -10,7 +10,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 </style>
 </head>
 <body>
-<? include( "core_API.php" ) ?>
+<?php include( "core_API.php" ) ?>
 <?
 	define( "BAD", 0 );
 	define( "GOOD", 1 );
@@ -30,13 +30,13 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 <!-- PHP version -->
 <tr>
 	<td bgcolor="#ffffff" colspan="2">
-		You are using PHP version <? echo phpversion() ?>
+		You are using PHP version <?php echo phpversion() ?>
 	</td>
 </tr>
 <!-- Test DATABASE part 1 -->
 <tr>
 	<td bgcolor="#ffffff">
-		Opening connection to database on host [<? echo $g_hostname ?>] with username [<? echo $g_db_username ?>]
+		Opening connection to database on host [<?php echo $g_hostname ?>] with username [<?php echo $g_db_username ?>]
 	</td>
 	<?
 		$result = mysql_connect( $g_hostname, $g_db_username, $g_db_password );
@@ -50,7 +50,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 <!-- Test DATABASE part 2 -->
 <tr>
 	<td bgcolor="#ffffff">
-		Selecting database [<? echo $g_database_name ?>]
+		Selecting database [<?php echo $g_database_name ?>]
 	</td>
 	<?
 		$result = mysql_select_db( $g_database_name );
@@ -173,7 +173,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 		magic_quotes_gpc
 	</td>
 	<td bgcolor="#ffffff">
-		<? echo get_cfg_var( "magic_quotes_gpc" ) ?>
+		<?php echo get_cfg_var( "magic_quotes_gpc" ) ?>
 	</td>
 </tr>
 <tr>
@@ -181,7 +181,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 		gpc_order
 	</td>
 	<td bgcolor="#ffffff">
-		<? echo get_cfg_var( "gpc_order" ) ?>
+		<?php echo get_cfg_var( "gpc_order" ) ?>
 	</td>
 </tr>
 <tr>
@@ -189,7 +189,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 		variables_order
 	</td>
 	<td bgcolor="#ffffff">
-		<? echo get_cfg_var( "variables_order" ) ?>
+		<?php echo get_cfg_var( "variables_order" ) ?>
 	</td>
 </tr>
 <tr>
@@ -197,7 +197,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 		include_path
 	</td>
 	<td bgcolor="#ffffff">
-		<? echo get_cfg_var( "include_path" ) ?>
+		<?php echo get_cfg_var( "include_path" ) ?>
 	</td>
 </tr>
 <tr>
@@ -205,7 +205,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 		short_open_tag
 	</td>
 	<td bgcolor="#ffffff">
-		<? echo get_cfg_var( "short_open_tag" ) ?>
+		<?php echo get_cfg_var( "short_open_tag" ) ?>
 	</td>
 </tr>
 </table>

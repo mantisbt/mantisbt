@@ -1,4 +1,4 @@
-<? include( "core_API.php" ) ?>
+<?php include( "core_API.php" ) ?>
 <?
         db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 ?>
@@ -182,11 +182,11 @@ PRINT "UPGRADED USER";
 
 	}
 ?>
-<? if (!isset($f_action) ) { ?>
+<?php if (!isset($f_action) ) { ?>
 <p>
 Upgrading your Mantis version from 0.12.x and 0.13.x to 0.14.0
 <p>
-<a href="<? echo $PHP_SELF ?>?f_action=upgrade">Click here to upgrade</a>
-<? } else { ?>
+<a href="<?php echo $PHP_SELF ?>?f_action=upgrade">Click here to upgrade</a>
+<?php } else { ?>
 <p>**** Upgrade is complete.
-<? } ?>
+<?php } ?>

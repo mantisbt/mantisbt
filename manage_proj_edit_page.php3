@@ -4,8 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
@@ -30,91 +30,91 @@
 	$v_name 		= string_edit_text( $v_name );
 	$v_description 	= string_edit_textarea( $v_description );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
-<? print_manage_menu( $g_manage_project_edit_page ) ?>
+<?php print_manage_menu( $g_manage_project_edit_page ) ?>
 
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<? echo $g_manage_project_update ?>">
-<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
+<form method="post" action="<?php echo $g_manage_project_update ?>">
+<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 <tr>
 	<td class="form-title" colspan="2">
-		<? echo $s_edit_project_title ?>
+		<?php echo $s_edit_project_title ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<? echo $s_project_name ?>
+		<?php echo $s_project_name ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_name" size="64" maxlength="128" value="<? echo $v_name ?>">
+		<input type="text" name="f_name" size="64" maxlength="128" value="<?php echo $v_name ?>">
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_status ?>
+		<?php echo $s_status ?>
 	</td>
 	<td>
 		<select name="f_status">
-		<? print_enum_string_option_list( $s_project_status_enum_string, $v_status ) ?>
+		<?php print_enum_string_option_list( $s_project_status_enum_string, $v_status ) ?>
 		</select>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_enabled ?>
+		<?php echo $s_enabled ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_enabled" <? if ( ON == $v_enabled ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_enabled" <?php if ( ON == $v_enabled ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_view_status ?>
+		<?php echo $s_view_status ?>
 	</td>
 	<td>
-		<input type="radio" name="f_view_state" value="10" <? if ( PUBLIC == $v_view_state ) echo "CHECKED" ?>> <? echo $s_public ?>
-		<input type="radio" name="f_view_state" value="50" <? if ( PRIVATE == $v_view_state ) echo "CHECKED" ?>> <? echo $s_private ?>
+		<input type="radio" name="f_view_state" value="10" <?php if ( PUBLIC == $v_view_state ) echo "CHECKED" ?>> <?php echo $s_public ?>
+		<input type="radio" name="f_view_state" value="50" <?php if ( PRIVATE == $v_view_state ) echo "CHECKED" ?>> <?php echo $s_private ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_access_threshold ?>
+		<?php echo $s_access_threshold ?>
 	</td>
 	<td>
 		<select name="f_access_min">
-		<? print_enum_string_option_list( $s_access_levels_enum_string, $v_access_min ) ?>
+		<?php print_enum_string_option_list( $s_access_levels_enum_string, $v_access_min ) ?>
 		</select>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_upload_file_path ?>
+		<?php echo $s_upload_file_path ?>
 	</td>
 	<td>
-		<input type="text" name="f_file_path" size="70" maxlength="250" value="<? echo $v_file_path ?>">
+		<input type="text" name="f_file_path" size="70" maxlength="250" value="<?php echo $v_file_path ?>">
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_description ?>
+		<?php echo $s_description ?>
 	</td>
 	<td>
-		<textarea name="f_description" cols="60" rows="5" wrap="virtual"><? echo $v_description ?></textarea>
+		<textarea name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $v_description ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="left">
-		<input type="submit" value="<? echo $s_update_project_button ?>">
+		<input type="submit" value="<?php echo $s_update_project_button ?>">
 	</td>
 	</form>
-	<form method="post" action="<? echo $g_manage_project_delete_page?>">
-	<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
+	<form method="post" action="<?php echo $g_manage_project_delete_page?>">
+	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<td class="right">
-		<input type="submit" value="<? echo $s_delete_project_button ?>">
+		<input type="submit" value="<?php echo $s_delete_project_button ?>">
 	</td>
 	</form>
 </tr>
@@ -126,15 +126,15 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<? echo $s_categories_and_version_title ?>
+		<?php echo $s_categories_and_version_title ?>
 	</td>
 </tr>
 <tr class="row-category">
 	<td width="50%">
-		<? echo $s_categories ?>
+		<?php echo $s_categories ?>
 	</td>
 	<td width="50%">
-		<? echo $s_versions ?>
+		<?php echo $s_versions ?>
 	</td>
 </tr>
 <tr>
@@ -155,15 +155,15 @@
 				# alternate row colors
 				$t_bgcolor = alternate_colors( $i );
 		?>
-		<tr bgcolor="<? echo $t_bgcolor ?>">
+		<tr bgcolor="<?php echo $t_bgcolor ?>">
 			<td width="75%">
-				<? echo $t_category ?>
+				<?php echo $t_category ?>
 			</td>
 			<td class="center" width="25%">
-				<? print_bracket_link( $g_manage_project_category_edit_page."?f_project_id=".$f_project_id."&f_category=".$t2_category, $s_edit_link ) ?>
+				<?php print_bracket_link( $g_manage_project_category_edit_page."?f_project_id=".$f_project_id."&f_category=".$t2_category, $s_edit_link ) ?>
 			</td>
 		</tr>
-		<? 	} # end for loop ?>
+		<?php 	} # end for loop ?>
 		</table>
 	</td>
 	<td width="50%">
@@ -185,12 +185,12 @@
 				# alternate row colors
 				$t_bgcolor = alternate_colors( $i );
 		?>
-		<tr bgcolor="<? echo $t_bgcolor ?>">
+		<tr bgcolor="<?php echo $t_bgcolor ?>">
 			<td width="75%">
-				<? echo $t_version ?>
+				<?php echo $t_version ?>
 			</td>
 			<td class="center" width="25%">
-				<? print_bracket_link( $g_manage_project_version_edit_page."?f_project_id=".$f_project_id."&f_version=".$t2_version."&f_date_order=".$t2_date_order, $s_edit_link ) ?>
+				<?php print_bracket_link( $g_manage_project_version_edit_page."?f_project_id=".$f_project_id."&f_version=".$t2_version."&f_date_order=".$t2_date_order, $s_edit_link ) ?>
 			</td>
 		</tr>
 		<?	} # end for loop ?>
@@ -198,22 +198,22 @@
 	</td>
 </tr>
 <tr>
-<form method="post" action="<? echo $g_manage_project_category_add ?>">
-<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
+<form method="post" action="<?php echo $g_manage_project_category_add ?>">
+<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<td class="center">
 		<input type="text" name="f_category" size="32" maxlength="64">
-		<input type="submit" value="<? echo $s_add_category_button ?>">
+		<input type="submit" value="<?php echo $s_add_category_button ?>">
 	</td>
 </form>
-<form method="post" action="<? echo $g_manage_project_version_add ?>">
-<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
+<form method="post" action="<?php echo $g_manage_project_version_add ?>">
+<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<td class="center">
 		<input type="text" name="f_version" size="32" maxlength="64">
-		<input type="submit" value="<? echo $s_add_version_button ?>">
+		<input type="submit" value="<?php echo $s_add_version_button ?>">
 	</td>
 </form>
 </tr>
 </table>
 </div>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

@@ -4,13 +4,13 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 <?
 	# Select the news posts
 	$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
@@ -40,14 +40,14 @@
 <table class="width75" cellspacing="0">
 <tr>
 	<td class="news-heading">
-		<span class="news-headline"><? echo $v_headline ?></span> -
-		<span class="news-date"><? echo $v_date_posted ?></span> -
-		<a class="news-email" href="mailto:<? echo $t_poster_email ?>"><? echo $t_poster_name ?></a>
+		<span class="news-headline"><?php echo $v_headline ?></span> -
+		<span class="news-date"><?php echo $v_date_posted ?></span> -
+		<a class="news-email" href="mailto:<?php echo $t_poster_email ?>"><?php echo $t_poster_name ?></a>
 	</td>
 </tr>
 <tr>
 	<td class="news-body">
-		<? echo $v_body ?>
+		<?php echo $v_body ?>
 	</td>
 </tr>
 </table>
@@ -58,7 +58,7 @@
 
 <p>
 <div align="center">
-	<? print_bracket_link( $g_news_list_page, $s_back_link ) ?>
+	<?php print_bracket_link( $g_news_list_page, $s_back_link ) ?>
 </div>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

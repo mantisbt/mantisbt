@@ -8,8 +8,8 @@
 	# This file sets the bug to the chosen resolved state then gives the
 	# user the opportunity to enter a reason for the closure
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
@@ -31,8 +31,8 @@
     		WHERE id='$f_id'";
    	$result = db_query($query);
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
 <p>
 <div align="center">
@@ -45,9 +45,9 @@
 ?>
 </div>
 
-<? include( $g_view_bug_inc ) ?>
+<?php include( $g_view_bug_inc ) ?>
 
-<? $f_resolve_note = 1; # Must set this ?>
-<? include( $g_bugnote_include_file ) ?>
+<?php $f_resolve_note = 1; # Must set this ?>
+<?php include( $g_bugnote_include_file ) ?>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

@@ -4,8 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -168,48 +168,48 @@
 	$link_page = $g_print_all_bug_page;
 	$page_type = "all";
 ?>
-<? print_page_top1() ?>
+<?php print_page_top1() ?>
 <?
 	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
 		print_meta_redirect( $PHP_SELF."?f_offset=".$f_offset, get_current_user_pref_field( "refresh_delay" )*60 );
 	}
 ?>
-<? print_head_bottom() ?>
-<? print_body_top() ?>
+<?php print_head_bottom() ?>
+<?php print_body_top() ?>
 
-<form method="post" action="<? echo $link_page ?>?f=3">
+<form method="post" action="<?php echo $link_page ?>?f=3">
 <input type="hidden" name="f_offset" value="0">
 <input type="hidden" name="f_save" value="1">
-<input type="hidden" name="f_sort" value="<? echo $f_sort ?>">
-<input type="hidden" name="f_dir" value="<? echo $f_dir ?>">
+<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
+<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
 <table class="width100">
 <tr>
     <td class="print">
-        <? echo $s_search ?>
+        <?php echo $s_search ?>
     </td>
     <td class="print">
-		<? echo $s_reporter ?>
+		<?php echo $s_reporter ?>
 	</td>
     <td class="print">
-		<? echo $s_assigned_to ?>
+		<?php echo $s_assigned_to ?>
 	</td>
     <td class="print">
-		<? echo $s_category ?>
+		<?php echo $s_category ?>
 	</td>
     <td class="print">
-		<? echo $s_severity ?>
+		<?php echo $s_severity ?>
 	</td>
     <td class="print">
-		<? echo $s_status ?>
+		<?php echo $s_status ?>
 	</td>
     <td class="print">
-		<? echo $s_show ?>
+		<?php echo $s_show ?>
 	</td>
     <td class="print">
-		<? echo $s_changed ?>
+		<?php echo $s_changed ?>
 	</td>
     <td class="print">
-		<? echo $s_hide_closed ?>
+		<?php echo $s_hide_closed ?>
 	</td>
     <td class="print">
 		&nbsp;
@@ -217,55 +217,55 @@
 </tr>
 <tr>
 	<td>
-	    <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
+	    <input type="text" name="f_search_text" value="<?php echo $f_search_text; ?>">
 	</td>
 	<td>
 		<select name="f_user_id">
-			<option value="any"><? echo $s_any ?></option>
+			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<? print_reporter_option_list( $f_user_id ) ?>
+			<?php print_reporter_option_list( $f_user_id ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_assign_id">
-			<option value="any"><? echo $s_any ?></option>
-			<option value="none" <? if ( "none" == $f_assign_id ) echo "SELECTED" ?>><? echo $s_none ?></option>
+			<option value="any"><?php echo $s_any ?></option>
+			<option value="none" <?php if ( "none" == $f_assign_id ) echo "SELECTED" ?>><?php echo $s_none ?></option>
 			<option value="any"></option>
-			<? print_assign_to_option_list( $f_assign_id ) ?>
+			<?php print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_category">
-			<option value="any"><? echo $s_any ?></option>
+			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<? print_category_option_list( $f_show_category ) ?>
+			<?php print_category_option_list( $f_show_category ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_severity">
-			<option value="any"><? echo $s_any ?></option>
+			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<? print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
+			<?php print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_status">
-			<option value="any"><? echo $s_any ?></option>
+			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<? print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
+			<?php print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
 		</select>
 	</td>
 	<td>
-		<input type="text" name="f_limit_view" size="3" maxlength="7" value="<? echo $f_limit_view ?>">
+		<input type="text" name="f_limit_view" size="3" maxlength="7" value="<?php echo $f_limit_view ?>">
 	</td>
 	<td>
-		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<? echo $f_highlight_changed ?>">
+		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <? if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
+		<input type="checkbox" name="f_hide_closed" <?php if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
 	</td>
 	<td>
-		<input type="submit" value="<? echo $s_filter_button ?>">
+		<input type="submit" value="<?php echo $s_filter_button ?>">
 	</td>
 </tr>
 </table>
@@ -274,7 +274,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="7">
-		<? echo $s_viewing_bugs_title ?>
+		<?php echo $s_viewing_bugs_title ?>
 		<?
 			if ( $row_count > 0 ) {
 				$v_start = $f_offset+1;
@@ -287,41 +287,41 @@
 		?>
 	</td>
 	<td class="right">
-		<a href="<? echo $g_summary_page ?>">Back to Summary</a>
+		<a href="<?php echo $g_summary_page ?>">Back to Summary</a>
 	</td>
 <p>
 </tr>
 <tr class="row-category">
 	<td class="center" width="8%">
-		<? print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
+		<?php print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
 	</td>
 	<td class="center" width="8%">
-		<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "id" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "id" ) ?>
 	</td>
 	<td class="center" width="3%">
 		#
 	</td>
 	<td class="center" width="12%">
-		<? print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "category" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "category" ) ?>
 	</td>
 	<td class="center" width="10%">
-		<? print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
 	</td>
 	<td class="center" width="10%">
-		<? print_view_bug_sort_link( $link_page, $s_status, "status", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "status" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_status, "status", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "status" ) ?>
 	</td>
 	<td class="center" width="12%">
-		<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 	</td>
 	<td class="center" width="37%">
-		<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 	</td>
 </tr>
 <tr>
@@ -350,12 +350,12 @@
 		$res2 = db_query( $query );
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 ?>
-<tr bgcolor="<? echo $status_color ?>">
+<tr bgcolor="<?php echo $status_color ?>">
 	<td class="print">
-		<? echo get_enum_element($s_priority_enum_string, $v_priority) ?>
+		<?php echo get_enum_element($s_priority_enum_string, $v_priority) ?>
 	</td>
 	<td class="print">
-		<? echo $v_id ?>
+		<?php echo $v_id ?>
 	</td>
 	<td class="print">
 		<?
@@ -372,10 +372,10 @@
 		?>
 	</td>
 	<td class="print">
-		<? echo $v_category ?>
+		<?php echo $v_category ?>
 	</td>
 	<td class="print">
-		<? print_formatted_severity_string( $v_status, $v_severity ) ?>
+		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
 	<td class="print">
 		<?
@@ -400,7 +400,7 @@
 		?>
 	</td>
 	<td class="left">
-		<span class="print"><? echo $v_summary ?></a>
+		<span class="print"><?php echo $v_summary ?></a>
 	</td>
 </tr>
 <?

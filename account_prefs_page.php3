@@ -9,8 +9,8 @@
 	# Update is POSTed to acount_prefs_update.php3
 	# Reset is POSTed to acount_prefs_reset.php3
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -46,72 +46,72 @@
 	$row = db_fetch_array($result);
 	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
-<? # Account Preferences Form BEGIN ?>
+<?php # Account Preferences Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<? echo $g_account_prefs_update ?>">
+<form method="post" action="<?php echo $g_account_prefs_update ?>">
 <tr>
 	<td class="form-title">
-		<? echo $s_default_account_preferences_title ?>
+		<?php echo $s_default_account_preferences_title ?>
 	</td>
 	<td class="right">
-		<? print_account_menu( $g_account_prefs_page ) ?>
+		<?php print_account_menu( $g_account_prefs_page ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="50%">
-		<? echo $s_default_project ?>
+		<?php echo $s_default_project ?>
 	</td>
 	<td width="50%">
 		<select name="f_project_id">
 			<option value="-1"></option>
-			<option value="00000000"><? echo $s_all_projects ?></option>
-			<? print_project_option_list( $u_default_project ) ?></option>
+			<option value="00000000"><?php echo $s_all_projects ?></option>
+			<?php print_project_option_list( $u_default_project ) ?></option>
 		</select>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_advanced_report ?>
+		<?php echo $s_advanced_report ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_report" <? if ( ON == $u_advanced_report ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_advanced_report" <?php if ( ON == $u_advanced_report ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_advanced_view ?>
+		<?php echo $s_advanced_view ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_view" <? if ( ON == $u_advanced_view ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_advanced_view" <?php if ( ON == $u_advanced_view ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_advanced_update ?>
+		<?php echo $s_advanced_update ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_update" <? if ( ON == $u_advanced_update ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_advanced_update" <?php if ( ON == $u_advanced_update ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_refresh_delay ?>
+		<?php echo $s_refresh_delay ?>
 	</td>
 	<td>
-		<input type="text" name="f_refresh_delay" size="4" maxlength="4" value="<? echo $u_refresh_delay ?>">
+		<input type="text" name="f_refresh_delay" size="4" maxlength="4" value="<?php echo $u_refresh_delay ?>">
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_redirect_delay ?>
+		<?php echo $s_redirect_delay ?>
 	</td>
 	<td>
-		<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<? echo $u_redirect_delay ?>">
+		<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<?php echo $u_redirect_delay ?>">
 	</td>
 </tr>
 <?
@@ -119,111 +119,111 @@
 ?>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_email_on_new ?>
+		<?php echo $s_email_on_new ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_new" <? if ( ON == $u_email_on_new ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_new" <?php if ( ON == $u_email_on_new ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_email_on_assigned ?>
+		<?php echo $s_email_on_assigned ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_assigned" <? if ( ON == $u_email_on_assigned ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_assigned" <?php if ( ON == $u_email_on_assigned ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_email_on_feedback ?>
+		<?php echo $s_email_on_feedback ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_feedback" <? if ( ON == $u_email_on_feedback ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_feedback" <?php if ( ON == $u_email_on_feedback ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_email_on_resolved ?>
+		<?php echo $s_email_on_resolved ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_resolved" <? if ( ON == $u_email_on_resolved ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_resolved" <?php if ( ON == $u_email_on_resolved ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_email_on_closed ?>
+		<?php echo $s_email_on_closed ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_closed" <? if ( ON == $u_email_on_closed ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_closed" <?php if ( ON == $u_email_on_closed ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_email_on_reopened ?>
+		<?php echo $s_email_on_reopened ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_reopened" <? if ( ON == $u_email_on_reopened ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_reopened" <?php if ( ON == $u_email_on_reopened ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_email_on_bugnote_added ?>
+		<?php echo $s_email_on_bugnote_added ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_bugnote" <? if ( ON == $u_email_on_bugnote ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_bugnote" <?php if ( ON == $u_email_on_bugnote ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_email_on_status_change ?>
+		<?php echo $s_email_on_status_change ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_status" <? if ( ON == $u_email_on_status ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_status" <?php if ( ON == $u_email_on_status ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_email_on_priority_change ?>
+		<?php echo $s_email_on_priority_change ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_priority" <? if ( ON == $u_email_on_priority ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_email_on_priority" <?php if ( ON == $u_email_on_priority ) echo "CHECKED" ?>>
 	</td>
 </tr>
 <?	} else { ?>
-		<input type="hidden" name="f_email_on_new"      value="<? echo $u_email_on_new ?>">
-		<input type="hidden" name="f_email_on_assigned" value="<? echo $u_email_on_assigned ?>">
-		<input type="hidden" name="f_email_on_feedback" value="<? echo $u_email_on_feedback ?>">
-		<input type="hidden" name="f_email_on_resolved" value="<? echo $u_email_on_resolved ?>">
-		<input type="hidden" name="f_email_on_closed"   value="<? echo $u_email_on_closed ?>">
-		<input type="hidden" name="f_email_on_reopened" value="<? echo $u_email_on_reopened ?>">
-		<input type="hidden" name="f_email_on_bugnote"  value="<? echo $u_email_on_bugnote ?>">
-		<input type="hidden" name="f_email_on_status"   value="<? echo $u_email_on_status ?>">
-		<input type="hidden" name="f_email_on_priority" value="<? echo $u_email_on_priority ?>">
+		<input type="hidden" name="f_email_on_new"      value="<?php echo $u_email_on_new ?>">
+		<input type="hidden" name="f_email_on_assigned" value="<?php echo $u_email_on_assigned ?>">
+		<input type="hidden" name="f_email_on_feedback" value="<?php echo $u_email_on_feedback ?>">
+		<input type="hidden" name="f_email_on_resolved" value="<?php echo $u_email_on_resolved ?>">
+		<input type="hidden" name="f_email_on_closed"   value="<?php echo $u_email_on_closed ?>">
+		<input type="hidden" name="f_email_on_reopened" value="<?php echo $u_email_on_reopened ?>">
+		<input type="hidden" name="f_email_on_bugnote"  value="<?php echo $u_email_on_bugnote ?>">
+		<input type="hidden" name="f_email_on_status"   value="<?php echo $u_email_on_status ?>">
+		<input type="hidden" name="f_email_on_priority" value="<?php echo $u_email_on_priority ?>">
 <?	} ?>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_language ?>
+		<?php echo $s_language ?>
 	</td>
 	<td>
 		<select name=f_language>
-			<? print_language_option_list( $u_language ) ?>
+			<?php print_language_option_list( $u_language ) ?>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td class="center">
-		<input type="submit" value="<? echo $s_update_prefs_button ?>">
+		<input type="submit" value="<?php echo $s_update_prefs_button ?>">
 	</td>
 	</form>
-	<form method="post" action="<? echo $g_account_prefs_reset ?>">
-		<input type="hidden" name="f_id" value="<? echo $u_id ?>">
+	<form method="post" action="<?php echo $g_account_prefs_reset ?>">
+		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 	<td class="center">
-		<input type="submit" value="<? echo $s_reset_prefs_button ?>">
+		<input type="submit" value="<?php echo $s_reset_prefs_button ?>">
 	</td>
 	</form>
 </tr>
 </table>
 </div>
-<? # Account Preferences Form END ?>
+<?php # Account Preferences Form END ?>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

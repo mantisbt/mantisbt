@@ -387,15 +387,15 @@
 	# --- color values ----------------
 	# you can change the look and feel by modifying these values
 
-	$g_background_color        = "#ffffff";
+	$g_background_color        = "#ffffff"; # white
 	$g_required_color          = "#bb0000"; # red
-	$g_table_border_color      = "#000000";
+	$g_table_border_color      = "#000000"; # black
 	$g_category_title_color    = "#c8c8e8"; # blue
 	$g_primary_color1          = "#d8d8d8"; # dark gray
 	$g_primary_color2          = "#e8e8e8"; # light gray
 	$g_form_title_color        = "#ffffff"; # white
 	$g_spacer_color            = "#ffffff"; # white
-	$g_menu_color              = "#e8e8e8";
+	$g_menu_color              = "#e8e8e8"; # light gray
 
 	# --- status color codes ----------
 	#
@@ -405,8 +405,7 @@
 	$g_confirmed_color         = "#ffffb0"; # yellow
 	$g_assigned_color          = "#c8c8ff"; # blue
 	$g_resolved_color          = "#cceedd"; # buish-green
-	$g_closed_color            = "#ffffff"; # not used in default
-
+	$g_closed_color            = "#ffffff"; # white
 
 	###############################
 	# Mantis Cookie Variables

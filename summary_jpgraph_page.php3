@@ -7,8 +7,8 @@
 	# Initial code for this addon cames from Duncan Lisset
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -51,50 +51,50 @@
 
 
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
-<? print_summary_menu( $g_summary_jpgraph_page ) ?>
+<?php print_summary_menu( $g_summary_jpgraph_page ) ?>
 
 <p>
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<? echo $s_summary_title ?>
+		<?php echo $s_summary_title ?>
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="<? echo $g_summary_jpgraph_cumulative_bydate ?>" border="0">
+		<img src="<?php echo $g_summary_jpgraph_cumulative_bydate ?>" border="0">
 	</td>
 	<td width="50%">
-		<img src="<? echo $g_summary_jpgraph_bydeveloper ?>" border="0">
-	</td>
-</tr>
-<tr valign="top">
-	<td width="50%">
-		<img src="<? echo $g_summary_jpgraph_byreporter ?>" border="0">
-	</td>
-	<td width="50%">
-		<img src="<? echo $g_summary_jpgraph_byseverity ?>" border="0">
+		<img src="<?php echo $g_summary_jpgraph_bydeveloper ?>" border="0">
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="<? echo $g_summary_jpgraph_bystatus ?>" border="0">
+		<img src="<?php echo $g_summary_jpgraph_byreporter ?>" border="0">
 	</td>
 	<td width="50%">
-		<img src="<? echo $g_summary_jpgraph_byresolution ?>" border="0">
+		<img src="<?php echo $g_summary_jpgraph_byseverity ?>" border="0">
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="<? echo $g_summary_jpgraph_bycategory ?>" border="0">
+		<img src="<?php echo $g_summary_jpgraph_bystatus ?>" border="0">
 	</td>
 	<td width="50%">
-		<img src="<? echo $g_summary_jpgraph_bypriority ?>" border="0">
+		<img src="<?php echo $g_summary_jpgraph_byresolution ?>" border="0">
+	</td>
+</tr>
+<tr valign="top">
+	<td width="50%">
+		<img src="<?php echo $g_summary_jpgraph_bycategory ?>" border="0">
+	</td>
+	<td width="50%">
+		<img src="<?php echo $g_summary_jpgraph_bypriority ?>" border="0">
 	</td>
 </tr>
 </table>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

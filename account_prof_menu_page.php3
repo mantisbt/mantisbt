@@ -10,32 +10,32 @@
 
 	# Users can also manage their profiles
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
-<? # Add Profile Form BEGIN ?>
+<?php # Add Profile Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<? echo $g_account_profile_add ?>">
-<input type="hidden" name="f_user_id" value="<? echo get_current_user_field( "id " ) ?>">
+<form method="post" action="<?php echo $g_account_profile_add ?>">
+<input type="hidden" name="f_user_id" value="<?php echo get_current_user_field( "id " ) ?>">
 <tr>
 	<td class="form-title">
-		<? echo $s_add_profile_title ?>
+		<?php echo $s_add_profile_title ?>
 	</td>
 	<td class="right">
-		<? print_account_menu( $g_account_profile_menu_page ) ?>
+		<?php print_account_menu( $g_account_profile_menu_page ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<? echo $s_platform ?>
+		<?php echo $s_platform ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="f_platform" size="32" maxlength="32">
@@ -43,7 +43,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_operating_system ?>
+		<?php echo $s_operating_system ?>
 	</td>
 	<td>
 		<input type="text" name="f_os" size="32" maxlength="32">
@@ -51,7 +51,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_version ?>
+		<?php echo $s_version ?>
 	</td>
 	<td>
 		<input type="text" name="f_os_build" size="16" maxlength="16">
@@ -59,7 +59,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_additional_description ?>
+		<?php echo $s_additional_description ?>
 	</td>
 	<td>
 		<textarea name="f_description" cols="60" rows="8" wrap="virtual"></textarea>
@@ -67,49 +67,49 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<? echo $s_add_profile_button ?>">
+		<input type="submit" value="<?php echo $s_add_profile_button ?>">
 	</td>
 </tr>
 </form>
 </table>
 </div>
-<? # Add Profile Form END ?>
+<?php # Add Profile Form END ?>
 
-<? # Edit or Delete Profile Form BEGIN ?>
+<?php # Edit or Delete Profile Form BEGIN ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="0">
-<form method="post" action="<? echo $g_account_profile_edit_page ?>">
+<form method="post" action="<?php echo $g_account_profile_edit_page ?>">
 <tr>
 	<td class="form-title" colspan="2">
-		<? echo $s_edit_or_delete_profiles_title ?>
+		<?php echo $s_edit_or_delete_profiles_title ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<input type="radio" name="f_action" value="edit" CHECKED> <? echo $s_edit_profile ?>
-		<input type="radio" name="f_action" value="make default"> <? echo $s_make_default ?>
-		<input type="radio" name="f_action" value="delete"> <? echo $s_delete_profile ?>
+		<input type="radio" name="f_action" value="edit" CHECKED> <?php echo $s_edit_profile ?>
+		<input type="radio" name="f_action" value="make default"> <?php echo $s_make_default ?>
+		<input type="radio" name="f_action" value="delete"> <?php echo $s_delete_profile ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category" width="25%">
-		<? echo $s_select_profile ?>
+		<?php echo $s_select_profile ?>
 	</td>
 	<td width="75%">
 		<select name="f_id">
-			<? print_profile_option_list( get_current_user_field( "id " ) ) ?>
+			<?php print_profile_option_list( get_current_user_field( "id " ) ) ?>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<? echo $s_submit_button ?>">
+		<input type="submit" value="<?php echo $s_submit_button ?>">
 	</td>
 	</form>
 </tr>
 </table>
 </div>
-<? # Edit or Delete Profile Form END ?>
+<?php # Edit or Delete Profile Form END ?>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

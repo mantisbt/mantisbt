@@ -7,8 +7,8 @@
 <?
 	# Show the simple update bug options
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	if ( ADVANCED_ONLY == $g_show_update ) {
 		print_header_redirect ( $g_bug_update_advanced_page."?f_id=".$f_id );
@@ -45,26 +45,26 @@
 	$v2_steps_to_reproduce 		= string_edit_textarea( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_edit_textarea( $v2_additional_information );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
 <p>
 <table class="width100" cellspacing="1">
-<form method="post" action="<? echo $g_bug_update ?>">
-<input type="hidden" name="f_id"                 value="<? echo $v_id ?>">
-<input type="hidden" name="f_old_status"         value="<? echo $v_status ?>">
-<input type="hidden" name="f_old_handler_id"     value="<? echo $v_handler_id ?>">
-<input type="hidden" name="f_resolution"         value="<? echo $v_resolution ?>">
-<input type="hidden" name="f_projection"         value="<? echo $v_projection ?>">
-<input type="hidden" name="f_eta"                value="<? echo $v_eta ?>">
-<input type="hidden" name="f_os"                 value="<? echo $v_os ?>">
-<input type="hidden" name="f_os_build"           value="<? echo $v_os_build ?>">
-<input type="hidden" name="f_platform"           value="<? echo $v_platform ?>">
-<input type="hidden" name="f_version"            value="<? echo $v_version ?>">
-<input type="hidden" name="f_steps_to_reproduce" value="<? echo $v2_steps_to_reproduce ?>">
+<form method="post" action="<?php echo $g_bug_update ?>">
+<input type="hidden" name="f_id"                 value="<?php echo $v_id ?>">
+<input type="hidden" name="f_old_status"         value="<?php echo $v_status ?>">
+<input type="hidden" name="f_old_handler_id"     value="<?php echo $v_handler_id ?>">
+<input type="hidden" name="f_resolution"         value="<?php echo $v_resolution ?>">
+<input type="hidden" name="f_projection"         value="<?php echo $v_projection ?>">
+<input type="hidden" name="f_eta"                value="<?php echo $v_eta ?>">
+<input type="hidden" name="f_os"                 value="<?php echo $v_os ?>">
+<input type="hidden" name="f_os_build"           value="<?php echo $v_os_build ?>">
+<input type="hidden" name="f_platform"           value="<?php echo $v_platform ?>">
+<input type="hidden" name="f_version"            value="<?php echo $v_version ?>">
+<input type="hidden" name="f_steps_to_reproduce" value="<?php echo $v2_steps_to_reproduce ?>">
 <tr>
 	<td class="form-title" colspan="3">
-		<? echo $s_updating_bug_simple_title ?>
+		<?php echo $s_updating_bug_simple_title ?>
 	</td>
 	<td class="right" colspan="3">
 <?
@@ -85,48 +85,48 @@
 </tr>
 <tr class="row-category">
 	<td width="15%">
-		<? echo $s_id ?>
+		<?php echo $s_id ?>
 	</td>
 	<td width="20%">
-		<? echo $s_category ?>
+		<?php echo $s_category ?>
 	</td>
 	<td width="15%">
-		<? echo $s_severity ?>
+		<?php echo $s_severity ?>
 	</td>
 	<td width="20%">
-		<? echo $s_reproducibility ?>
+		<?php echo $s_reproducibility ?>
 	</td>
 	<td width="15%">
-		<? echo $s_date_submitted ?>
+		<?php echo $s_date_submitted ?>
 	</td>
 	<td width="15%">
-		<? echo $s_last_update ?>
+		<?php echo $s_last_update ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td>
-		<? echo $v_id ?>
+		<?php echo $v_id ?>
 	</td>
 	<td>
 		<select name="f_category">
-			<? print_category_option_list( $v_category ) ?>
+			<?php print_category_option_list( $v_category ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_severity">
-			<? print_enum_string_option_list( $s_severity_enum_string, $v_severity ) ?>
+			<?php print_enum_string_option_list( $s_severity_enum_string, $v_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_reproducibility">
-			<? print_enum_string_option_list( $s_reproducibility_enum_string, $v_reproducibility ) ?>
+			<?php print_enum_string_option_list( $s_reproducibility_enum_string, $v_reproducibility ) ?>
 		</select>
 	</td>
 	<td>
-		<? print_date( $g_normal_date_format, $v_date_submitted ) ?>
+		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
 	</td>
 	<td>
-		<? print_date( $g_normal_date_format, $v_last_updated ) ?>
+		<?php print_date( $g_normal_date_format, $v_last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -136,37 +136,37 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_reporter ?>
+		<?php echo $s_reporter ?>
 	</td>
 	<td colspan="5">
-		<? print_user( $v_reporter_id ) ?>
+		<?php print_user( $v_reporter_id ) ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_assigned_to ?>
+		<?php echo $s_assigned_to ?>
 	</td>
 	<td colspan="5">
 		<select name="f_handler_id">
 			<option value="0"></option>
-			<? print_assign_to_option_list( $v_handler_id ) ?>
+			<?php print_assign_to_option_list( $v_handler_id ) ?>
 		</select>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_priority ?>
+		<?php echo $s_priority ?>
 	</td>
 	<td>
 		<select name="f_priority">
-			<? print_enum_string_option_list( $s_priority_enum_string, $v_priority ) ?>
+			<?php print_enum_string_option_list( $s_priority_enum_string, $v_priority ) ?>
 		</select>
 	</td>
 	<td class="category">
-		<? echo $s_resolution ?>
+		<?php echo $s_resolution ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
+		<?php echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -174,18 +174,18 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_status ?>
+		<?php echo $s_status ?>
 	</td>
 	<td>
 		<select name="f_status">
-			<? print_enum_string_option_list( $s_status_enum_string, $v_status ) ?>
+			<?php print_enum_string_option_list( $s_status_enum_string, $v_status ) ?>
 		</select>
 	</td>
 	<td class="category">
-		<? echo $s_duplicate_id ?>
+		<?php echo $s_duplicate_id ?>
 	</td>
 	<td>
-		<? echo $v_duplicate_id ?>
+		<?php echo $v_duplicate_id ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -198,34 +198,34 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_summary ?>
+		<?php echo $s_summary ?>
 	</td>
 	<td colspan="5">
-		<input type="text" name="f_summary" size="80" maxlength="128" value="<? echo $v_summary ?>">
+		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $v_summary ?>">
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_description ?>
+		<?php echo $s_description ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="60" rows="5" name="f_description" wrap="virtual"><? echo $v2_description ?></textarea>
+		<textarea cols="60" rows="5" name="f_description" wrap="virtual"><?php echo $v2_description ?></textarea>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_additional_information ?>
+		<?php echo $s_additional_information ?>
 	</td>
 	<td colspan="5">
-		<textarea cols="60" rows="5" name="f_additional_information" wrap="virtual"><? echo $v2_additional_information ?></textarea>
+		<textarea cols="60" rows="5" name="f_additional_information" wrap="virtual"><?php echo $v2_additional_information ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="center" colspan="6">
-		<input type="submit" value="<? echo $s_update_information_button ?>">
+		<input type="submit" value="<?php echo $s_update_information_button ?>">
 	</td>
 </tr>
 </form>
 </table>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

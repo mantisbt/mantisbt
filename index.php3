@@ -4,22 +4,22 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
+<?php include( "core_API.php" ) ?>
 <?
 	# Only place this function is called
 	# Other pages use login_cookie_check()
 	index_login_cookie_check( $g_main_page );
 ?>
-<? print_page_top1() ?>
-<? print_meta_redirect( $g_login_page, $g_wait_time ) ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_meta_redirect( $g_login_page, $g_wait_time ) ?>
+<?php print_page_top2() ?>
 
 <p>
 <div align="center">
-	<a href="<? echo $g_login_page ?>"><? echo $s_click_to_login ?></a>
+	<a href="<?php echo $g_login_page ?>"><?php echo $s_click_to_login ?></a>
 </div>
 
-<? print_bottom_page( $g_bottom_include_page ) ?>
-<? print_footer(__FILE__) ?>
-<? print_body_bottom() ?>
-<? print_html_bottom() ?>
+<?php print_bottom_page( $g_bottom_include_page ) ?>
+<?php print_footer(__FILE__) ?>
+<?php print_body_bottom() ?>
+<?php print_html_bottom() ?>

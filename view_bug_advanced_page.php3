@@ -4,8 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	if ( SIMPLE_ONLY == $g_show_view ) {
 		print_header_redirect ( $g_view_bug_page."?f_id=".$f_id );
@@ -39,14 +39,14 @@
 	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display( $v2_additional_information );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
 <p>
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<? echo $s_viewing_bug_advanced_details_title ?>
+		<?php echo $s_viewing_bug_advanced_details_title ?>
 	</td>
 	<td class="right" colspan="3">
 <?
@@ -58,42 +58,42 @@
 </tr>
 <tr class="row-category">
 	<td width="16%">
-		<? echo $s_id ?>
+		<?php echo $s_id ?>
 	</td>
 	<td width="16%">
-		<? echo $s_category ?>
+		<?php echo $s_category ?>
 	</td>
 	<td width="16%">
-		<? echo $s_severity ?>
+		<?php echo $s_severity ?>
 	</td>
 	<td width="16%">
-		<? echo $s_reproducibility ?>
+		<?php echo $s_reproducibility ?>
 	</td>
 	<td width="16%">
-		<? echo $s_date_submitted ?>
+		<?php echo $s_date_submitted ?>
 	</td>
 	<td width="16%">
-		<? echo $s_last_update ?>
+		<?php echo $s_last_update ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td>
-		<? echo $v_id ?>
+		<?php echo $v_id ?>
 	</td>
 	<td>
-		<? echo $v_category ?>
+		<?php echo $v_category ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_severity_enum_string, $v_severity ) ?>
+		<?php echo get_enum_element( $s_severity_enum_string, $v_severity ) ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_reproducibility_enum_string, $v_reproducibility ) ?>
+		<?php echo get_enum_element( $s_reproducibility_enum_string, $v_reproducibility ) ?>
 	</td>
 	<td>
-		<? print_date( $g_normal_date_format, $v_date_submitted ) ?>
+		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
 	</td>
 	<td>
-		<? print_date( $g_normal_date_format, $v_last_updated ) ?>
+		<?php print_date( $g_normal_date_format, $v_last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -103,92 +103,92 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_reporter ?>
+		<?php echo $s_reporter ?>
 	</td>
 	<td colspan="5">
-		<? print_user_with_subject( $v_reporter_id, $f_id ) ?>
+		<?php print_user_with_subject( $v_reporter_id, $f_id ) ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_assigned_to ?>
+		<?php echo $s_assigned_to ?>
 	</td>
 	<td colspan="5">
-		<? print_user_with_subject( $v_handler_id, $f_id ) ?>
+		<?php print_user_with_subject( $v_handler_id, $f_id ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_priority ?>
+		<?php echo $s_priority ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_priority_enum_string, $v_priority ) ?>
+		<?php echo get_enum_element( $s_priority_enum_string, $v_priority ) ?>
 	</td>
 	<td class="category">
-		<? echo $s_resolution ?>
+		<?php echo $s_resolution ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
+		<?php echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
 	</td>
 	<td class="category">
-		<? echo $s_platform ?>
+		<?php echo $s_platform ?>
 	</td>
 	<td>
-		<? echo $v_platform ?>
+		<?php echo $v_platform ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_status ?>
+		<?php echo $s_status ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_status_enum_string, $v_status ) ?>
+		<?php echo get_enum_element( $s_status_enum_string, $v_status ) ?>
 	</td>
 	<td class="category">
-		<? echo $s_duplicate_id ?>
+		<?php echo $s_duplicate_id ?>
 	</td>
 	<td>
-		<? print_duplicate_id( $v_duplicate_id ) ?>
+		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
 	<td class="category">
-		<? echo $s_os ?>
+		<?php echo $s_os ?>
 	</td>
 	<td>
-		<? echo $v_os ?>
+		<?php echo $v_os ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_projection ?>
+		<?php echo $s_projection ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_projection_enum_string, $v_projection ) ?>
+		<?php echo get_enum_element( $s_projection_enum_string, $v_projection ) ?>
 	</td>
 	<td colspan="2">
 
 	</td>
 	<td class="category">
-		<? echo $s_os_version ?>
+		<?php echo $s_os_version ?>
 	</td>
 	<td>
-		<? echo $v_os_build ?>
+		<?php echo $v_os_build ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_eta ?>
+		<?php echo $s_eta ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_eta_enum_string, $v_eta ) ?>
+		<?php echo get_enum_element( $s_eta_enum_string, $v_eta ) ?>
 	</td>
 	<td colspan="2">
 
 	</td>
 	<td class="category">
-		<? echo $s_product_version ?>
+		<?php echo $s_product_version ?>
 	</td>
 	<td>
-		<? echo $v_version ?>
+		<?php echo $v_version ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -196,10 +196,10 @@
 		&nbsp;
 	</td>
 	<td class="category">
-		<? echo $s_product_build ?>
+		<?php echo $s_product_build ?>
 	</td>
 	<td>
-		<? echo $v_build?>
+		<?php echo $v_build?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -207,10 +207,10 @@
 		&nbsp;
 	</td>
 	<td class="category">
-		<? echo $s_votes ?>
+		<?php echo $s_votes ?>
 	</td>
 	<td>
-		<? echo $v_votes ?>
+		<?php echo $v_votes ?>
 	</td>
 </tr>
 <tr>
@@ -220,34 +220,34 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_summary ?>
+		<?php echo $s_summary ?>
 	</td>
 	<td colspan="5">
-		<? echo $v_summary ?>
+		<?php echo $v_summary ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_description ?>
+		<?php echo $s_description ?>
 	</td>
 	<td colspan="5">
-		<? echo $v2_description ?>
+		<?php echo $v2_description ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_steps_to_reproduce ?>
+		<?php echo $s_steps_to_reproduce ?>
 	</td>
 	<td colspan="5">
-		<? echo $v2_steps_to_reproduce ?>
+		<?php echo $v2_steps_to_reproduce ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_additional_information ?>
+		<?php echo $s_additional_information ?>
 	</td>
 	<td colspan="5">
-		<? echo $v2_additional_information ?>
+		<?php echo $v2_additional_information ?>
 	</td>
 </tr>
 <?
@@ -271,10 +271,10 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_system_profile ?>
+		<?php echo $s_system_profile ?>
 	</td>
 	<td colspan="5">
-		<? echo $t_profile_description ?>
+		<?php echo $t_profile_description ?>
 	</td>
 </tr>
 <?
@@ -282,7 +282,7 @@
 ?>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_attached_files ?>
+		<?php echo $s_attached_files ?>
 	</td>
 	<td colspan="5">
 		<?
@@ -319,11 +319,11 @@
 <tr align="center">
 <?	# UPDATE form BEGIN ?>
 <?	if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
-	<form method="post" action="<? echo $g_bug_update_page ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-	<input type="hidden" name="f_bug_text_id" value="<? echo $v_bug_text_id ?>">
+	<form method="post" action="<?php echo $g_bug_update_page ?>">
+	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+	<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>">
 	<td class="center">
-		<input type="submit" value="<? echo $s_update_bug_button ?>">
+		<input type="submit" value="<?php echo $s_update_bug_button ?>">
 	</td>
 	</form>
 <?	} else { ?>
@@ -331,11 +331,11 @@
 <?	} # UPDATE form END ?>
 <?	# ASSIGN form BEGIN ?>
 <?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
-	<form method="post" action="<? echo $g_bug_assign ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-	<input type="hidden" name="f_date_submitted" value="<? echo $v_date_submitted ?>">
+	<form method="post" action="<?php echo $g_bug_assign ?>">
+	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+	<input type="hidden" name="f_date_submitted" value="<?php echo $v_date_submitted ?>">
 	<td class="center">
-		<input type="submit" value="<? echo $s_bug_assign_button ?>">
+		<input type="submit" value="<?php echo $s_bug_assign_button ?>">
 	</td>
 	</form>
 <?	} else { ?>
@@ -343,10 +343,10 @@
 <?	} # ASSIGN form END ?>
 <?	# RESOLVE form BEGIN ?>
 <?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
-	<form method="post" action="<? echo $g_bug_resolve_page ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<form method="post" action="<?php echo $g_bug_resolve_page ?>">
+	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="center">
-		<input type="submit" value="<? echo $s_resolve_bug_button ?>">
+		<input type="submit" value="<?php echo $s_resolve_bug_button ?>">
 	</td>
 	</form>
 <?	} else { ?>
@@ -356,10 +356,10 @@
 <?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status >= RESOLVED ) &&
 		(( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ) ||
 		( $v_reporter_id == $t_user_id )) ) { ?>
-	<form method="post" action="<? echo $g_bug_reopen_page ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<form method="post" action="<?php echo $g_bug_reopen_page ?>">
+	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="center">
-		<input type="submit" value="<? echo $s_reopen_bug_button ?>">
+		<input type="submit" value="<?php echo $s_reopen_bug_button ?>">
 	</td>
 	</form>
 <?	} else { ?>
@@ -367,10 +367,10 @@
 <?	} # REOPEN form END ?>
 <?	# CLOSE form BEGIN ?>
 <?	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( RESOLVED == $v_status ) ) { ?>
-	<form method="post" action="<? echo $g_bug_close ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<form method="post" action="<?php echo $g_bug_close ?>">
+	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="center">
-		<input type="submit" value="<? echo $s_close_bug_button ?>">
+		<input type="submit" value="<?php echo $s_close_bug_button ?>">
 	</td>
 	</form>
 <?	} else { ?>
@@ -378,11 +378,11 @@
 <?	} # CLOSE form END ?>
 <?	# DELETE form BEGIN ?>
 <?	if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
-	<form method="post" action="<? echo $g_bug_delete_page ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-	<input type="hidden" name="f_bug_text_id" value="<? echo $v_bug_text_id ?>">
+	<form method="post" action="<?php echo $g_bug_delete_page ?>">
+	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+	<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>">
 	<td class="center">
-		<input type="submit" value="<? echo $s_delete_bug_button ?>">
+		<input type="submit" value="<?php echo $s_delete_bug_button ?>">
 	</td>
 	</form>
 <?	} else {
@@ -391,7 +391,7 @@
 </tr>
 </table>
 
-<? include( $g_bug_file_upload_inc ) ?>
-<? include( $g_bugnote_include_file ) ?>
+<?php include( $g_bug_file_upload_inc ) ?>
+<?php include( $g_bugnote_include_file ) ?>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

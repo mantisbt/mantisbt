@@ -10,4 +10,4 @@
 <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 <META HTTP-EQUIV="Pragma-directive" CONTENT="no-cache">
 <META HTTP-EQUIV="Cache-Directive" CONTENT="no-cache">
-<META HTTP-EQUIV="Expires" CONTENT="<? echo $g_content_expire ?>">
+<META HTTP-EQUIV="Expires" CONTENT="<?php echo $g_content_expire ?>">

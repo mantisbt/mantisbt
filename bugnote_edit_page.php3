@@ -8,8 +8,8 @@
 	# Remove the bugnote and bugnote text and redirect back to
 	# the viewing page
 ?>
-<? include( "core_API.php" ) ?>
-<? login_cookie_check() ?>
+<?php include( "core_API.php" ) ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
@@ -26,35 +26,35 @@
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id );
 ?>
-<? print_page_top1() ?>
-<? print_page_top2() ?>
+<?php print_page_top1() ?>
+<?php print_page_top2() ?>
 
 <p>
 <div align="center">
 <table class="width75" cellspacing="0">
-<form method="post" action="<? echo $g_bugnote_update ?>">
-<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-<input type="hidden" name="f_bugnote_text_id" value="<? echo $f_bugnote_text_id ?>">
+<form method="post" action="<?php echo $g_bugnote_update ?>">
+<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+<input type="hidden" name="f_bugnote_text_id" value="<?php echo $f_bugnote_text_id ?>">
 <tr>
 	<td class="form-title">
-		<? echo $s_edit_bugnote_title ?>
+		<?php echo $s_edit_bugnote_title ?>
 	</td>
 	<td class="right">
-		<? print_bracket_link( $t_redirect_url, $s_go_back ) ?>
+		<?php print_bracket_link( $t_redirect_url, $s_go_back ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<textarea cols="80" rows="10" name="f_bugnote_text" wrap="virtual"><? echo $f_bugnote_text ?></textarea>
+		<textarea cols="80" rows="10" name="f_bugnote_text" wrap="virtual"><?php echo $f_bugnote_text ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<? echo $s_update_information_button ?>">
+		<input type="submit" value="<?php echo $s_update_information_button ?>">
 	</td>
 </tr>
 </form>
 </table>
 </div>
 
-<? print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1( __FILE__ ) ?>

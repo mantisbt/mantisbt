@@ -1,39 +1,39 @@
 <p>
 <table class="width100" cellspacing="0">
-<form method="post" action="<? echo $link_page ?>?f=3">
+<form method="post" action="<?php echo $link_page ?>?f=3">
 <input type="hidden" name="f_offset" value="0">
 <input type="hidden" name="f_save" value="1">
-<input type="hidden" name="f_sort" value="<? echo $f_sort ?>">
-<input type="hidden" name="f_dir" value="<? echo $f_dir ?>">
-<input type="hidden" name="f_page_number" value="<? echo $f_page_number ?>">
-<input type="hidden" name="f_per_page" value="<? echo $f_per_page ?>">
+<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
+<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
+<input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>">
+<input type="hidden" name="f_per_page" value="<?php echo $f_per_page ?>">
 <tr>
     <td class="small-caption">
-        <? echo $s_search ?>
+        <?php echo $s_search ?>
     </td>
     <td class="small-caption">
-		<? echo $s_reporter ?>
+		<?php echo $s_reporter ?>
 	</td>
     <td class="small-caption">
-		<? echo $s_assigned_to ?>
+		<?php echo $s_assigned_to ?>
 	</td>
     <td class="small-caption">
-		<? echo $s_category ?>
+		<?php echo $s_category ?>
 	</td>
     <td class="small-caption">
-		<? echo $s_severity ?>
+		<?php echo $s_severity ?>
 	</td>
     <td class="small-caption">
-		<? echo $s_status ?>
+		<?php echo $s_status ?>
 	</td>
     <td class="small-caption">
-		<? echo $s_show ?>
+		<?php echo $s_show ?>
 	</td>
     <td class="small-caption">
-		<? echo $s_changed ?>
+		<?php echo $s_changed ?>
 	</td>
     <td class="small-caption">
-		<? echo $s_hide_closed ?>
+		<?php echo $s_hide_closed ?>
 	</td>
     <td class="small-caption">
 		&nbsp;
@@ -41,70 +41,70 @@
 </tr>
 <tr>
 	<td>
-	    <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
+	    <input type="text" name="f_search_text" value="<?php echo $f_search_text; ?>">
 	</td>
 	<td>
 		<select name="f_user_id">
-			<option value="any"><? echo $s_any ?></option>
+			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<? print_reporter_option_list( $f_user_id ) ?>
+			<?php print_reporter_option_list( $f_user_id ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_assign_id">
-			<option value="any"><? echo $s_any ?></option>
-			<option value="none" <? if ( "none" == $f_assign_id ) echo "SELECTED" ?>><? echo $s_none ?></option>
+			<option value="any"><?php echo $s_any ?></option>
+			<option value="none" <?php if ( "none" == $f_assign_id ) echo "SELECTED" ?>><?php echo $s_none ?></option>
 			<option value="any"></option>
-			<? print_assign_to_option_list( $f_assign_id ) ?>
+			<?php print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_category">
-			<option value="any"><? echo $s_any ?></option>
+			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<? print_category_option_list( $f_show_category ) ?>
+			<?php print_category_option_list( $f_show_category ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_severity">
-			<option value="any"><? echo $s_any ?></option>
+			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<? print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
+			<?php print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_status">
-			<option value="any"><? echo $s_any ?></option>
+			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<? print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
+			<?php print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
 		</select>
 	</td>
 	<td>
-		<input type="text" name="f_per_page" size="3" maxlength="7" value="<? echo $f_per_page ?>">
+		<input type="text" name="f_per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>">
 	</td>
 	<td>
-		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<? echo $f_highlight_changed ?>">
+		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <? if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
+		<input type="checkbox" name="f_hide_closed" <?php if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
 	</td>
 <!--
 		<td>
 		<input type="checkbox" name="f_export_csv">
 	</td>-->
 	<td>
-		<input type="submit" value="<? echo $s_filter_button ?>">
+		<input type="submit" value="<?php echo $s_filter_button ?>">
 	</td>
 </tr>
 </form>
 </table>
 
 <p>
-<form method="post" action="<? echo $g_view_all_bug_update ?>">
+<form method="post" action="<?php echo $g_view_all_bug_update ?>">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="8">
-		<? echo $s_viewing_bugs_title ?>
+		<?php echo $s_viewing_bugs_title ?>
 		<?
 			if ( $row_count > 0 ) {
 				$v_start = $t_offset+1;
@@ -114,7 +114,7 @@
 				$v_end   = 0;
 			}
 		?>
-		(<?= $v_start ?> - <?= $v_end ?> / <?= $t_query_count ?>)
+		(<?php echo $v_start ?> - <?php echo $v_end ?> / <?php echo $t_query_count ?>)
 	</td>
 	<td class="right">
 		[
@@ -127,7 +127,7 @@
 					echo $i;
 				} else {
 		?>
-				<a href="<?= $g_view_all_bug_page ?>?f_page_number=<?= $i ?>"><?= $i ?></a>
+				<a href="<?php echo $g_view_all_bug_page ?>?f_page_number=<?php echo $i ?>"><?php echo $i ?></a>
 		<?
 				}
 			}
@@ -140,35 +140,35 @@
 		&nbsp;
 	</td>
 	<td class="center" width="5%">
-		<? print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
+		<?php print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
 	</td>
 	<td class="center" width="8%">
-		<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "id" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "id" ) ?>
 	</td>
 	<td class="center" width="3%">
 		#
 	</td>
 	<td class="center" width="12%">
-		<? print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "category" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "category" ) ?>
 	</td>
 	<td class="center" width="10%">
-		<? print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
 	</td>
 	<td class="center" width="10%">
-		<? print_view_bug_sort_link( $link_page, $s_status, "status", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "status" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_status, "status", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "status" ) ?>
 	</td>
 	<td class="center" width="12%">
-		<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 	</td>
 	<td class="center" width="38%">
-		<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
-		<? print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
+		<?php print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 	</td>
 </tr>
 <tr>
@@ -208,10 +208,10 @@
 		$res2 = db_query( $query );
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 ?>
-<tr bgcolor="<? echo $status_color ?>">
+<tr bgcolor="<?php echo $status_color ?>">
 	<td>
 		<?	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
-			<input type="checkbox" name="f_bug_arr[]" value="<? echo $v_id ?>">
+			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $v_id ?>">
 		<?	} else { ?>
 			&nbsp;
 		<?	} ?>
@@ -226,7 +226,7 @@
 		?>
 	</td>
 	<td class="center">
-		<? print_bug_link( $v_id ) ?>
+		<?php print_bug_link( $v_id ) ?>
 	</td>
 	<td class="center">
 		<?
@@ -243,10 +243,10 @@
 		?>
 	</td>
 	<td class="center">
-		<? echo $v_category ?>
+		<?php echo $v_category ?>
 	</td>
 	<td class="center">
-		<? print_formatted_severity_string( $v_status, $v_severity ) ?>
+		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
 	<td class="center">
 		<?
@@ -270,7 +270,7 @@
 		?>
 	</td>
 	<td class="left">
-		<? echo $v_summary ?>
+		<?php echo $v_summary ?>
 	</td>
 </tr>
 <?
@@ -278,12 +278,12 @@
 ?>
 </table>
 <select name="f_project_id">
-<? print_project_option_list() ?>
+<?php print_project_option_list() ?>
 </select>
-<input type="submit" value="<? echo $s_move_bugs ?>">
+<input type="submit" value="<?php echo $s_move_bugs ?>">
 </form>
 
-<? # Show NEXT and PREV links as needed ?>
+<?php # Show NEXT and PREV links as needed ?>
 <p>
 <div align="center">
 <?
@@ -305,16 +305,16 @@
 ?>
 </div>
 
-<? # print a legend for the status color coding ?>
+<?php # print a legend for the status color coding ?>
 <p>
 <table class="width100" cellspacing="0">
 <tr>
-	<td class="small-caption" width="10%" bgcolor="<? echo $g_new_color?>"><? echo get_enum_element( $s_status_enum_string, NEW_ ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<? echo $g_feedback_color?>"><? echo get_enum_element( $s_status_enum_string, FEEDBACK ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<? echo $g_acknowledged_color?>"><? echo get_enum_element( $s_status_enum_string, ACKNOWLEDGED ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<? echo $g_confirmed_color?>"><? echo get_enum_element( $s_status_enum_string, CONFIRMED ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<? echo $g_assigned_color?>"><? echo get_enum_element( $s_status_enum_string, ASSIGNED ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<? echo $g_resolved_color?>"><? echo get_enum_element( $s_status_enum_string, RESOLVED ) ?></td>
-	<td class="small-caption" width="10%" bgcolor="<? echo $g_closed_color?>"><? echo get_enum_element( $s_status_enum_string, CLOSED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<?php echo $g_new_color?>"><?php echo get_enum_element( $s_status_enum_string, NEW_ ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<?php echo $g_feedback_color?>"><?php echo get_enum_element( $s_status_enum_string, FEEDBACK ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<?php echo $g_acknowledged_color?>"><?php echo get_enum_element( $s_status_enum_string, ACKNOWLEDGED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<?php echo $g_confirmed_color?>"><?php echo get_enum_element( $s_status_enum_string, CONFIRMED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<?php echo $g_assigned_color?>"><?php echo get_enum_element( $s_status_enum_string, ASSIGNED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<?php echo $g_resolved_color?>"><?php echo get_enum_element( $s_status_enum_string, RESOLVED ) ?></td>
+	<td class="small-caption" width="10%" bgcolor="<?php echo $g_closed_color?>"><?php echo get_enum_element( $s_status_enum_string, CLOSED ) ?></td>
 </tr>
 </table>

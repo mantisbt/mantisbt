@@ -3,7 +3,7 @@ include ($g_jpgraph_path."jpgraph.php");
 include ($g_jpgraph_path."jpgraph_line.php");
 include ($g_jpgraph_path."jpgraph_bar.php");
 ?>
-<? login_cookie_check() ?>
+<?php login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 

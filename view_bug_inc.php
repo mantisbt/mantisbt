@@ -37,47 +37,47 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="6">
-		<? echo $s_viewing_bug_simple_details_title ?>
+		<?php echo $s_viewing_bug_simple_details_title ?>
 	</td>
 </tr>
 <tr>
 	<td class="category" width="15%">
-		<? echo $s_id ?>
+		<?php echo $s_id ?>
 	</td>
 	<td class="category" width="20%">
-		<? echo $s_category ?>
+		<?php echo $s_category ?>
 	</td>
 	<td class="category" width="15%">
-		<? echo $s_severity ?>
+		<?php echo $s_severity ?>
 	</td>
 	<td class="category" width="20%">
-		<? echo $s_reproducibility ?>
+		<?php echo $s_reproducibility ?>
 	</td>
 	<td class="category" width="15%">
-		<? echo $s_date_submitted ?>
+		<?php echo $s_date_submitted ?>
 	</td>
 	<td class="category" width="15%">
-		<? echo $s_last_update ?>
+		<?php echo $s_last_update ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td>
-		<? echo $v_id ?>
+		<?php echo $v_id ?>
 	</td>
 	<td>
-		<? echo $v_category ?>
+		<?php echo $v_category ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_severity_enum_string, $v_severity ) ?>
+		<?php echo get_enum_element( $s_severity_enum_string, $v_severity ) ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_reproducibility_enum_string, $v_reproducibility ) ?>
+		<?php echo get_enum_element( $s_reproducibility_enum_string, $v_reproducibility ) ?>
 	</td>
 	<td>
-		<? print_date( $g_normal_date_format, $v_date_submitted ) ?>
+		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
 	</td>
 	<td>
-		<? print_date( $g_normal_date_format, $v_last_updated ) ?>
+		<?php print_date( $g_normal_date_format, $v_last_updated ) ?>
 	</td>
 </tr>
 <tr height="5" class="spacer">
@@ -87,32 +87,32 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_reporter ?>
+		<?php echo $s_reporter ?>
 	</td>
 	<td colspan="5">
-		<? print_user( $v_reporter_id ) ?>
+		<?php print_user( $v_reporter_id ) ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_assigned_to ?>
+		<?php echo $s_assigned_to ?>
 	</td>
 	<td colspan="5">
-		<? print_user( $v_handler_id ) ?>
+		<?php print_user( $v_handler_id ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_priority ?>
+		<?php echo $s_priority ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_priority_enum_string, $v_priority ) ?>
+		<?php echo get_enum_element( $s_priority_enum_string, $v_priority ) ?>
 	</td>
 	<td class="category">
-		<? echo $s_resolution ?>
+		<?php echo $s_resolution ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
+		<?php echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -120,16 +120,16 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_status ?>
+		<?php echo $s_status ?>
 	</td>
 	<td>
-		<? echo get_enum_element( $s_status_enum_string, $v_status ) ?>
+		<?php echo get_enum_element( $s_status_enum_string, $v_status ) ?>
 	</td>
 	<td class="category">
-		<? echo $s_duplicate_id ?>
+		<?php echo $s_duplicate_id ?>
 	</td>
 	<td>
-		<? print_duplicate_id( $v_duplicate_id ) ?>
+		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -142,26 +142,26 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_summary ?>
+		<?php echo $s_summary ?>
 	</td>
 	<td colspan="5">
-		<? echo $v_summary ?>
+		<?php echo $v_summary ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<? echo $s_description ?>
+		<?php echo $s_description ?>
 	</td>
 	<td colspan="5">
-		<? echo $v2_description ?>
+		<?php echo $v2_description ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<? echo $s_additional_information ?>
+		<?php echo $s_additional_information ?>
 	</td>
 	<td colspan="5">
-		<? echo $v2_additional_information ?>
+		<?php echo $v2_additional_information ?>
 	</td>
 </tr>
 </table>

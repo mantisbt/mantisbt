@@ -37,20 +37,20 @@ table.width50		{ width: 50%;  border-color: <?php echo $g_table_border_color ?>;
 td.center			{ text-align: center; }
 td.left				{ text-align: left; }
 td.right			{ text-align: right; }
-td.category			{ background-color: <? echo $g_category_title_color ?>; font-weight: bold; }
-td.col-1			{ background-color: <? echo $g_primary_color1 ?>; }
-td.col-2			{ background-color: <? echo $g_primary_color2 ?>; }
-td.form-title		{ background-color: <? echo $g_form_title_color ?>; font-weight: bold; }
+td.category			{ background-color: <?php echo $g_category_title_color ?>; font-weight: bold; }
+td.col-1			{ background-color: <?php echo $g_primary_color1 ?>; }
+td.col-2			{ background-color: <?php echo $g_primary_color2 ?>; }
+td.form-title		{ background-color: <?php echo $g_form_title_color ?>; font-weight: bold; }
 td.nopad			{ padding: 0px; }
-td.spacer			{ background-color: <? echo $g_spacer_color ?>; font-size: 1pt; line-height: 0.1; }
+td.spacer			{ background-color: <?php echo $g_spacer_color ?>; font-size: 1pt; line-height: 0.1; }
 td.small-caption	{ font-size: 8pt; }
 td.print			{ font-size: 8pt; text-align: center; }
 
 tr.center			{ text-align: center; }
-tr.row-1			{ background-color: <? echo $g_primary_color1 ?>; }
-tr.row-2			{ background-color: <? echo $g_primary_color2 ?>; }
-tr.spacer			{ background-color: <? echo $g_spacer_color ?>; }
-tr.row-category		{ background-color: <? echo $g_category_title_color ?>; font-weight: bold; }
+tr.row-1			{ background-color: <?php echo $g_primary_color1 ?>; }
+tr.row-2			{ background-color: <?php echo $g_primary_color2 ?>; }
+tr.spacer			{ background-color: <?php echo $g_spacer_color ?>; }
+tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; font-weight: bold; }
 
 /* Login Info */
 td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }
@@ -60,15 +60,15 @@ span.login-username	{ font-style: italic; }
 span.login-time		{ font-size: 8pt; font-style: italic; }
 
 /* Menu */
-td.menu				{ background-color: <? echo $g_menu_color ?>; text-align: center; }
+td.menu				{ background-color: <?php echo $g_menu_color ?>; text-align: center; }
 
 /* Quick Summary */
 td.quick-summary-left	{ width: 50%; text-align: left; }
 td.quick-summary-right	{ width: 50%; text-align: right; }
 
 /* News */
-td.news-heading		{ background-color: <? echo $g_primary_color1 ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
-td.news-body		{ background-color: <? echo $g_spacer_color ?>; padding: 16px; }
+td.news-heading		{ background-color: <?php echo $g_primary_color1 ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
+td.news-body		{ background-color: <?php echo $g_spacer_color ?>; padding: 16px; }
 span.news-headline	{ font-weight: bold; }
 span.news-date		{ font-style: italic; font-size: 8pt; }
 a.news-email		{ font-size: 8pt; }
