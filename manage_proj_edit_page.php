@@ -157,7 +157,7 @@
 				<?php
 					print_bracket_link( 'manage_proj_cat_edit_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category.'&amp;f_assigned_to='.$c_user_id, $s_edit_link );
 					PRINT '&nbsp;';
-					print_bracket_link( 'manage_proj_cat_del_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_remove_link );
+					print_bracket_link( 'manage_proj_cat_del_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, $s_delete_link );
 				?>
 			</td>
 		</tr>
@@ -223,7 +223,7 @@
 				<?php
 					print_bracket_link( 'manage_proj_ver_edit_page.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_edit_link );
 					PRINT '&nbsp;';
-					print_bracket_link( 'manage_proj_ver_del_page.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_remove_link );
+					print_bracket_link( 'manage_proj_ver_del_page.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, $s_delete_link );
 				?>
 			</td>
 		</tr>

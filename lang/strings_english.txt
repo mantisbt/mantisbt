@@ -409,7 +409,7 @@
 	$s_add_category_button = 'Add Category';
 	$s_versions = 'Versions';
 	$s_add_version_button = 'Add Version';
-	$s_edit_link = 'edit';
+	$s_edit_link = 'Edit';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Add Project';
@@ -550,7 +550,7 @@
 	$s_add_user_title = 'Add user to project';
 	$s_add_user_button = 'Add User';
 	$s_project_selection_title = 'Project Selection';
-	$s_remove_link = 'remove';
+	$s_remove_link = 'Remove';
 
 	# proj_user_update.php
 	$s_updated_user_msg = 'Successfully updated user';
