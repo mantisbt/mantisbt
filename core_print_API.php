@@ -689,14 +689,8 @@
 	function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
 		global $g_mantis_bug_table;
 
-		$query = "SELECT summary
-				FROM $g_mantis_bug_table
-				WHERE id='$p_bug_id'";
-		$result = db_query( $query );
-		$t_summary = db_result( $result, 0, 0 );
-		$t_summary = string_email( $t_summary );
-
-		PRINT get_email_link_with_subject( $p_email, $p_text, $t_summary );
+		$t_subject = email_build_subject( $p_bug_id );
+		PRINT get_email_link_with_subject( $p_email, $p_text, $t_subject );
 	}
 	# --------------------
 	# return the mailto: href string link instead of printing it
