@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.41 $
+	# $Revision: 1.42 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-29 09:26:46 $
+	# $Date: 2003-01-03 03:24:26 $
 	#
-	# $Id: strings_french.txt,v 1.41 2002-12-29 09:26:46 jfitzell Exp $
+	# $Id: strings_french.txt,v 1.42 2003-01-03 03:24:26 jfitzell Exp $
 	###########################################################################
 ?>
 <?php

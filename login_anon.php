@@ -1,14 +1,12 @@
 <?php
-/**
- * anon_login.php
- *
- # Mantis - a php based bugtracking system
- # Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * This file copyright (C) 2002 August Zajonc - augustz@users.sourceforge.net
- * This program is distributed under the terms and conditions of the GPL
- * See the README and LICENSE files for details
- *
- * login_anon.php logs a user in anonymously without having to enter a username
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+?>
+<?php
+ /* login_anon.php logs a user in anonymously without having to enter a username
  * or password.
  *
  * Depends on two global configuration variables:
@@ -18,8 +16,6 @@
  * TODO:
  * Check how manage account is impacted.
  * Might be extended to allow redirects for bug links etc.
- *
- * @author  August Zajonc - augustz@users.sourceforge.net
  */
 	require_once( 'core.php' );
 

@@ -1,4 +1,11 @@
 <?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+?>
+<?php
 	# Unable to use DIRECTORY_SEPARATOR because it may not be defined at 
 	# this stage.
 	require_once( '../core/php_api.php' );

@@ -3,10 +3,10 @@
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
-	# See the files README and LICENSE for details
+	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.27 2002-12-30 10:46:25 jfitzell Exp $
+	# $Id: bug_api.php,v 1.28 2003-01-03 03:24:24 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################

@@ -1,16 +1,16 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.4 $
+	# $Revision: 1.5 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-29 10:26:08 $
+	# $Date: 2003-01-03 03:24:23 $
 	#
-	# $Id: csv_export.php,v 1.4 2002-12-29 10:26:08 jfitzell Exp $
+	# $Id: csv_export.php,v 1.5 2003-01-03 03:24:23 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
