@@ -172,7 +172,7 @@
 		global $g_login_method;
 
 		switch ( $g_login_method ) {
-			case CRYPT:	$salt = substr( $p_password, 0, 2 ); 
+			case CRYPT:	$salt = substr( $p_password, 0, 2 );
 					return crypt( $p_password, $salt );
 			case PLAIN:	return $p_password;
 			case MD5:	return md5( $p_password );
@@ -225,6 +225,80 @@
 		} else {
 			return false;
 		}
+	}
+	# --------------------
+	# Create a user.
+	# If $g_use_ldap_email then tries to find email using ldap
+	# $p_email may be empty, but the user wont get any emails.
+	# returns false if error, the generated cookie string if ok
+	function signup_user( $p_username, $p_email=false ) {
+		global $g_use_ldap_email,
+		$g_mantis_user_table,
+		$g_default_new_account_access_level,
+		$g_mantis_user_pref_table,
+		$g_default_advanced_report,
+		$g_default_advanced_view, $g_default_advanced_update,
+		$g_default_refresh_delay, $g_default_redirect_delay,
+		$g_default_email_on_new, $g_default_email_on_assigned,
+		$g_default_email_on_feedback, $g_default_email_on_resolved,
+		$g_default_email_on_closed, $g_default_email_on_reopened,
+		$g_default_email_on_bugnote, $g_default_email_on_status,
+		$g_default_email_on_priority, $g_default_language;
+
+		if ( ( false == $p_email ) && ( ON == $g_use_ldap_email ) ) {
+			$p_email = get_user_info( "$p_username","email" );
+		}
+
+		$t_seed = $p_email ? $p_email : $p_username;
+		# Create random password
+		$t_password = create_random_password( $t_seed );
+		# Use a default access level
+		# create the almost unique string for each user then insert into the table
+		$t_cookie_string = create_cookie_string( $t_seed );
+		$t_password2 = process_plain_password( $t_password );
+		$query = "INSERT INTO $g_mantis_user_table
+				( id, username, email, password, date_created, last_visit,
+				enabled, protected, access_level, login_count, cookie_string )
+				VALUES
+				( null, '$p_username', '$p_email', '$t_password2', NOW(), NOW(),
+				1, 0, $g_default_new_account_access_level, 0, '$t_cookie_string')";
+		$result = db_query( $query );
+
+		if ( !$result ) {
+			return false;
+		}
+
+		# Create preferences for the user
+		$t_user_id = db_insert_id();
+		$query = "INSERT INTO $g_mantis_user_pref_table
+				(id, user_id, advanced_report, advanced_view, advanced_update,
+				refresh_delay, redirect_delay,
+				email_on_new, email_on_assigned,
+				email_on_feedback, email_on_resolved,
+				email_on_closed, email_on_reopened,
+				email_on_bugnote, email_on_status,
+				email_on_priority, language)
+				VALUES
+				(null, '$t_user_id', '$g_default_advanced_report',
+				'$g_default_advanced_view', '$g_default_advanced_update',
+				'$g_default_refresh_delay', '$g_default_redirect_delay',
+				'$g_default_email_on_new', '$g_default_email_on_assigned',
+				'$g_default_email_on_feedback', '$g_default_email_on_resolved',
+				'$g_default_email_on_closed', '$g_default_email_on_reopened',
+				'$g_default_email_on_bugnote', '$g_default_email_on_status',
+				'$g_default_email_on_priority', '$g_default_language')";
+		$result = db_query($query);
+
+		if ( !$result ) {
+			return false;
+		}
+
+		# Send notification email
+		if ( $p_email ) {
+			email_signup( $t_user_id, $t_password );
+		}
+
+		return $t_cookie_string;
 	}
 	# --------------------
 	###########################################################################

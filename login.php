@@ -11,6 +11,11 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( BASIC_AUTH == $g_login_method ) {
+		$f_username = isset( $PHP_AUTH_USER ) ? $PHP_AUTH_USER : $REMOTE_USER;
+		$f_password = $PHP_AUTH_PW;
+ 	}
+
    	# get user info
 	$row = get_user_info_by_name_arr( $f_username );
 
@@ -62,6 +67,15 @@
 		} else {
 			$t_redirect_url = $g_login_select_proj_page;
 		}
+	# Login failed, create user if basic authentication
+	} else if ( BASIC_AUTH == $g_login_method ) { # @@@ ADDED  fix the if assignment problem
+		if ( $t_cookie_string = signup_user( $f_username ) ) {
+			$t_redirect_url = $g_login_select_proj_page;
+			$login_result = 1;
+			setcookie( $g_string_cookie, $t_cookie_string );
+ 		} else {
+			$t_redirect_url = $g_login_page."?f_error=1";
+ 		}
 	} else {
 		$t_redirect_url = $g_login_page."?f_error=1";
 	}

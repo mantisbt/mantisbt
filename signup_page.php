@@ -15,8 +15,12 @@
 	}
 ?>
 <?php print_page_top1() ?>
-<?php print_page_top2() ?>
-
+<?php
+	print_head_bottom();
+	print_body_top();
+	print_header( $g_page_title );
+	print_top_page( $g_top_include_page );
+?>
 
 <p>
 <div align="center">

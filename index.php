@@ -6,9 +6,13 @@
 ?>
 <?php include( "core_API.php" ) ?>
 <?php
-	# Only place this function is called
-	# Other pages use login_cookie_check()
-	index_login_cookie_check( $g_main_page );
+	if ( BASIC_AUTH == $g_login_method ) {
+		print_header_redirect( $g_login );
+	} else {
+		# Only place this function is called
+		# Other pages use login_cookie_check()
+		index_login_cookie_check( $g_main_page );
+	}
 ?>
 <?php print_page_top1() ?>
 <?php print_meta_redirect( $g_login_page, $g_wait_time ) ?>
