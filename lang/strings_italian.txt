@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.78 $
+	# $Revision: 1.79 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:57 $
+	# $Date: 2004-09-11 04:05:11 $
 	#
-	# $Id: strings_italian.txt,v 1.78 2004-08-26 17:40:57 bigbadger Exp $
+	# $Id: strings_italian.txt,v 1.79 2004-09-11 04:05:11 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -98,8 +98,8 @@ $s_login_link = "Accedi";
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = "Non disponi dell'autorizzazione necessaria per eseguire questa azione sulle seguenti anomalie: ";
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_access = "Non disponi dell'autorizzazione necessaria per eseguire questa azione";
+$s_bug_actiongroup_status = "Non é possibile impostare lo stato richiesto per la presente anomalia";
 $s_close_bugs_conf_msg = "Confermi di voler chiudere queste anomalie?";
 $s_delete_bugs_conf_msg = "Confermi di voler eliminare queste anomalie?";
 $s_move_bugs_conf_msg = "Sposta anomalia su";
@@ -344,9 +344,9 @@ $s_refresh_delay = "Ritardo di Refresh";
 $s_redirect_delay = "Ritardo di Reindirizzamento";
 $s_with_minimum_severity = "Con severità minima di";
 $s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
-$s_email_on_new = "Email su 'Novità'";
+$s_bugnote_order_asc = 'Cronologico';
+$s_bugnote_order_desc = 'Cronologico inverso';
+$s_email_on_new = "Email su 'Nuovo'";
 $s_email_on_assigned = "Email su 'Assegnato'";
 $s_email_on_feedback = "Email su 'Da Discutere'";
 $s_email_on_resolved = "Email su 'Risolto'";
@@ -406,16 +406,16 @@ $s_password_updated = "La password è stata aggiornata correttamente";
 $s_bug_assign_msg = "L'anomalia è stato assegnato correttamente...";
 
 # bug_change_status_page.php
-$s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
-$s_acknowledged_bug_title = 'Acknowledge Issue';
-$s_confirmed_bug_title = 'Confirm Issue';
-$s_assigned_bug_title = 'Assign Issue';
-$s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
-$s_acknowledged_bug_button = 'Acknowledge Issue';
-$s_confirmed_bug_button = 'Confirm Issue';
-$s_assigned_bug_button = 'Assign Issue';
+$s_new_bug_title = 'Nuova anomalia';
+$s_feedback_bug_title = 'Poni in discussione anomalia';
+$s_acknowledged_bug_title = 'Riconosci anomalia';
+$s_confirmed_bug_title = 'Conferma anomalia';
+$s_assigned_bug_title = 'Assegna anomalia';
+$s_new_bug_button = 'Nuova anomalia';
+$s_feedback_bug_button = 'Poni in discussione anomalia';
+$s_acknowledged_bug_button = 'Riconosci anomalia';
+$s_confirmed_bug_button = 'Conferma anomalia';
+$s_assigned_bug_button = 'Assegna anomalia';
 
 # bug_close.php
 $s_bug_close_msg = "L'anomalia è stata chiusa...";
@@ -553,10 +553,10 @@ $s_redirecting = "... redirezione in corso ...";
 $s_here = "Qui";
 # lost_pwd_page.php
 $s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
+$s_lost_password_done_title = "Password reset operazione processata";
 $s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_info = "Per reimpostare la password di accesso dimenticata, occorre fornire il tuo nome utente e l'indirizzo email associato con quell'account (deve essere quello correntemente in uso).<br/><br/>Se i dati indicati corrisponderanno ad un account valido e registrato, ti verrà inviato un indirizzo URL speciale via email che contiene un codice di convalida per il tuo account. Visitanto questo indirizzo potrai cambiare la tua password di accesso e accedere al sito.";
+$s_lost_password_confirm_hash_OK = "Codice di convalida valido. Ora sarà possibile cambiare la password di accesso.";
 
 # main_page.php
 $s_open_and_assigned_to_me = "Assegnati a me ancora aperti";
@@ -928,7 +928,7 @@ $s_product_build = "Release del Prodotto";
 $s_system_profile = "Descrizione del Sistema";
 $s_update_bug_button = "Aggiorna";
 $s_bug_assign_to_button = "Assegna:";
-$s_bug_status_to_button = 'Change Status To:';
+$s_bug_status_to_button = 'Cambia stato in:';
 $s_reopen_bug_button = "Riapre";
 $s_move_bug_button = "Muove";
 $s_attached_files = "File allegati";
@@ -973,8 +973,8 @@ $s_custom_field_access_level_rw = "Modificabile";
 $s_custom_field_length_min = "Lunghezza min.";
 $s_custom_field_length_max = "Lunghezza max.";
 $s_custom_field_advanced = "Avanzato";
-$s_custom_field_display_report = 'Display When Reporting Issues';
-$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_report = "Visualizza quando 'Riporti anomalia'";
+$s_custom_field_display_update = "Visualizza quando 'Aggiorni anomalia'";
 $s_custom_field_display_resolved = "Visualizza in 'Risolvi anomalia'";
 $s_custom_field_display_closed = "Visualizza in 'Chiudi anomalia'";
 $s_custom_field_require_report = "Obbligatorio nei report";
