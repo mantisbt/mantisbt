@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.4 2002-10-20 22:15:48 jfitzell Exp $
+	# $Id: user_pref_api.php,v 1.5 2002-10-20 22:51:26 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -159,7 +159,7 @@
 
 		$t_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 
-		$t_vars = get_class_vars( 'UserPreferences' );
+		$t_vars = get_object_vars( $p_prefs );
 		$t_values = array();
 
 		foreach ( $t_vars as $var => $val ) {
@@ -192,7 +192,7 @@
 
 		$t_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 
-		$t_vars = get_class_vars( 'UserPreferences' );
+		$t_vars = get_object_vars( $p_prefs );
 		
 		$t_pairs = array();
 
@@ -291,7 +291,7 @@
 
 		$t_row_keys = array_keys( $row );
 
-		$t_vars = get_class_vars( 'UserPreferences' );
+		$t_vars = get_object_vars( $t_prefs );
 	
 		# Check each variable in the class
 		foreach ( $t_vars as $var => $val ) {
@@ -312,10 +312,10 @@
 	function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = 0 ) {
 		$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
-		$t_vars = get_class_vars( 'UserPreferences' );
-
+		$t_vars = get_object_vars( $t_prefs );
+		
 		if ( in_array( $p_pref_name, array_keys( $t_vars ) ) ) {
-			return $t_vars[$p_pref_name];
+			return $t_prefs->$p_pref_name;
 		} else {
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 			return '';
