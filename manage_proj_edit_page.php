@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.69 2003-03-12 07:56:10 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.70 2003-03-19 07:26:42 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -53,7 +53,7 @@
 		<?php echo lang_get( 'project_name' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="name" size="64" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" />
+		<input type="text" name="name" size="50" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" />
 	</td>
 </tr>
 
@@ -98,7 +98,7 @@
 		<?php echo lang_get( 'upload_file_path' ) ?>
 	</td>
 	<td>
-		<input type="text" name="file_path" size="70" maxlength="250" value="<?php echo string_attribute( $row['file_path'] ) ?>" />
+		<input type="text" name="file_path" size="50" maxlength="250" value="<?php echo string_attribute( $row['file_path'] ) ?>" />
 	</td>
 </tr>
 <?php } ?>
@@ -161,13 +161,13 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	if ( count( $t_categories ) > 0 ) {
 ?>
 		<tr class="row-category">
-			<td width="50%">
+			<td>
 				<?php echo lang_get( 'category' ) ?>
 			</td>
-			<td width="25%">
+			<td>
 				<?php echo lang_get( 'assign_to' ) ?>
 			</td>
-			<td class="center" width="25%">
+			<td class="center">
 				<?php echo lang_get( 'actions' ) ?>
 			</td>
 		</tr>
@@ -196,7 +196,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 					$t_name = urlencode( $t_name );
 
 					print_bracket_link( 'manage_proj_cat_edit_page.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'edit_link' ) );
-					echo '&nbsp;';
+					echo ' ';
 					print_bracket_link( 'manage_proj_cat_delete.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'delete_link' ) );
 				?>
 			</td>
