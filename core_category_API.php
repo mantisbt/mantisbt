@@ -10,7 +10,10 @@
 	# --------------------
 	# checks to see if the category is a duplicate
 	# we do it this way because each different project can have the same category names
-	function is_duplicate_category( $p_project_id, $p_category ) {
+	# The old category name is excluded from the search for duplicate since a category
+	# can re-take its name.  It is also useful when changing the case of a category name.
+	# For example, "category" -> "Category".
+	function is_duplicate_category( $p_project_id, $p_category , $p_old_category = '' ) {
 		global $g_mantis_project_category_table;
 
 		$c_project_id	= (integer)$p_project_id;
@@ -19,14 +22,17 @@
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_category_table
 				WHERE project_id='$c_project_id' AND
-					category='$c_category'";
+				category='$c_category'";
+
+		if (strlen($p_old_category) != 0) {
+			$c_old_category = addslashes($p_old_category);
+			$query = $query . " AND category <> '$c_old_category'";
+		}
+
 		$result = db_query( $query );
 		$category_count =  db_result( $result, 0, 0 );
-		if ( $category_count > 0 ) {
-			return true;
-		} else {
-			return false;
-		}
+
+		return ( $category_count > 0 );
 	}
 	# --------------------
 	function category_add( $p_project_id, $p_category ) {

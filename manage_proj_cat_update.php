@@ -19,9 +19,11 @@
 
 	$result = 0;
 	$query = '';
+	
+	# Optimisation if category name was not changed.
 	if ( strcmp ( $f_category, $f_orig_category ) != 0 ) {
 		# check for duplicate
-		if ( !is_duplicate_category( $f_project_id, $f_category ) ) {
+		if ( !is_duplicate_category( $f_project_id, $f_category, $f_orig_category ) ) {
 			$result = category_update( $f_project_id, $f_category, $f_orig_category );
 			if ( !$result ) {
 				break;
@@ -54,7 +56,7 @@
 <?php
 	if ( $result ) {					# SUCCESS
 		PRINT "$s_operation_successful<p>";
-	} else if ( is_duplicate_category( $f_project_id, $f_category )) {
+	} else if ( is_duplicate_category( $f_project_id, $f_category, $f_orig_category )) {
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p>';
 	} else {							# FAILURE
 		print_sql_error( $query );

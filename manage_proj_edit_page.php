@@ -223,7 +223,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="center">
+	<td class="left">
 		<form method="post" action="<?php echo $g_manage_project_version_add ?>">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="text" name="f_version" size="32" maxlength="64">

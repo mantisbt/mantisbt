@@ -18,6 +18,7 @@
 
 	# set variable to be valid if necessary
 	check_varset( $f_duplicate_id, '' );
+	check_varset( $f_category, '' );
 
 	# grab the bug_text_id
 	$query = "SELECT bug_text_id

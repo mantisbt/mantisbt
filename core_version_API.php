@@ -10,7 +10,10 @@
 	# --------------------
 	# checks to see if the version is a duplicate
 	# we do it this way because each different project can have the same category names
-	function is_duplicate_version( $p_project_id, $p_version, $p_date_order='0' ) {
+	# The old version name is excluded from the search for duplicates since a version
+	# can re-take its name.  It is also useful when changing the case of a version name.
+	# For example, "version" -> "Version".
+	function is_duplicate_version( $p_project_id, $p_version, $p_date_order='0', $p_old_version = '' ) {
 		global $g_mantis_project_version_table;
 
 		$c_project_id	= (integer)$p_project_id;
@@ -20,17 +23,21 @@
 				FROM $g_mantis_project_version_table
 				WHERE project_id='$c_project_id' AND
 				version='$c_version'";
+
+		if ( strlen($p_old_version) != 0 ) {
+			$c_old_version = addslashes($p_old_version);
+			$query = $query . " AND version <> '$c_old_version'";
+		}
+
 		if ( strcmp($p_date_order, '0') != 0) {
 			$c_date_order	= addslashes($p_date_order);
 			$query = $query . " AND	date_order='$c_date_order'";
 		}
+
 		$result = db_query( $query );
 		$version_count =  db_result( $result, 0, 0 );
-		if ( $version_count > 0 ) {
-			return true;
-		} else {
-			return false;
-		}
+
+		return ( $version_count > 0 );
 	}
 	# --------------------
 	function version_add( $p_project_id, $p_version ) {
