@@ -59,6 +59,7 @@ Mantis
  * Fixed the access level checks to be more accurate.
  * Fixed summary by category to work when categories have single quotes.
  * Removed site_settings link in print_manage_doc_menu().
+ * Removed action confirmations in Account pages.
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.
  * Modified edit project links to use the project name instead of the [edit] link.

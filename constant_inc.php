@@ -101,14 +101,15 @@
 	define( "BY_DATE",      1 );
 
 	# error messages
-	define( "ERROR_SQL",                  0 );
-	define( "ERROR_LOGIN",                1 );
-	define( "ERROR_REPORT",               2 );
-	define( "ERROR_NO_FILE_SPECIFIED",    3 );
-	define( "ERROR_NO_DIRECTORY",         4 );
-	define( "ERROR_DUPLICATE_CATEGORY",   5 );
-	define( "ERROR_DUPLICATE_VERSION",    6 );
-	define( "ERROR_DUPLICATE_FILE",       7 );
-	define( "ERROR_EMPTY_FIELD",          8 );
-	define( "ERROR_PROTECTED_ACCOUNT",    9 );
+	define( "ERROR_GENERIC",              0 );
+	define( "ERROR_SQL",                  1 );
+	define( "ERROR_LOGIN",                2 );
+	define( "ERROR_REPORT",               3 );
+	define( "ERROR_NO_FILE_SPECIFIED",    4 );
+	define( "ERROR_NO_DIRECTORY",         5 );
+	define( "ERROR_DUPLICATE_CATEGORY",   6 );
+	define( "ERROR_DUPLICATE_VERSION",    7 );
+	define( "ERROR_DUPLICATE_FILE",       8 );
+	define( "ERROR_EMPTY_FIELD",          9 );
+	define( "ERROR_PROTECTED_ACCOUNT",   10 );
 ?>

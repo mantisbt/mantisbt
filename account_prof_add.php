@@ -30,12 +30,11 @@
 		$check_failed = true;
 	}
 
+	$result = 0;
 	if ( $check_failed ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
-	}
-
-	# required fields ok, proceeding
-	if ( !$check_failed ) {
+	} else {
+		# required fields ok, proceeding
 		# " character poses problem when editting so let's just convert them
 		$f_platform		= string_prepare_text( $f_platform );
 		$f_os			= string_prepare_text( $f_os );
@@ -53,16 +52,11 @@
 				( null, '$t_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description' )";
 	    $result = db_query( $query );
 	}
+
     $t_redirect_url = $g_account_profile_menu_page;
-?>
-<?php print_page_top1() ?>
-<?php
 	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
+		print_header_redirect( $t_redirect_url );
+	} else {
+		print_mantis_error( ERROR_GENERIC );
 	}
 ?>
-<?php print_page_top2() ?>
-
-<?php print_proceed( $result, $query, $t_redirect_url ) ?>
-
-<?php print_page_bot1( __FILE__ ) ?>

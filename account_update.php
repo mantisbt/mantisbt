@@ -43,26 +43,9 @@
 	} # end if protected
 
 	$t_redirect_url = $g_account_page;
-?>
-<?php print_page_top1() ?>
-<?php
 	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
+		print_header_redirect( $t_redirect_url );
+	} else {
+		print_mantis_error( ERROR_GENERIC );
 	}
 ?>
-<?php print_page_top2() ?>
-
-<p>
-<div align="center">
-<?php
-	if ( $result ) {						# SUCCESS
-		PRINT "$s_operation_successful<p>";
-	} else {								# FAILURE
-		print_sql_error( $query );
-	}
-
-	print_bracket_link( $g_account_page, $s_proceed );
-?>
-</div>
-
-<?php print_page_bot1( __FILE__ ) ?>
