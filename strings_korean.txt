@@ -587,7 +587,7 @@
 	$s_any = "모두";
 	$s_show = "갯수";
 	$s_changed = "변경된(시간)";
-	$s_hide_closed = "해결된 버그 숨김";
+	$s_hide_closed = "폐쇄된 버그 숨김";
 	$s_filter_button = "필터";
 	$s_viewing_bugs_title = "버그 보기";
 	$s_updated = "최종 갱신";
