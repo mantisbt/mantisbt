@@ -102,8 +102,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	bug_date_update($p_id);
 
    	# notify reporter and handler
-	# currently desactivated
-	/*switch ( $p_status ) {
+	switch ( $p_status ) {
 
 		case ASSIGNED:	email_assign( $p_id );
 			   			break;
@@ -111,7 +110,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 						break;
 		case CLOSED:	email_close( $p_id );
 						break;
-	}*/
+	}
 
 }//updateBug 
 
