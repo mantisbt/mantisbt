@@ -716,12 +716,22 @@
 	# --------------------
 	# return the mailto: href string link instead of printing it
 	function get_email_link( $p_email, $p_text ) {
-		global $g_hide_user_email;
+		global $g_show_user_email, $g_anonymous_account;
 
-		if( ON == $g_hide_user_email ){
-			return "$p_text";
-		} else {
-			return "<a href=\"mailto:$p_email\">$p_text</a>";
+		switch ( $g_show_user_email ) {
+			case NONE:	return "$p_text";
+			case ALL:	return "<a href=\"mailto:$p_email\">$p_text</a>";
+			case NO_ANONYMOUS:	if ( get_current_user_field( "username" ) != $g_anonymous_account ) {
+									return "<a href=\"mailto:$p_email\">$p_text</a>";
+								} else {
+									return "$p_text";
+								}
+			case ADMIN_ONLY:	if ( ADMINISTRATOR == get_current_user_field( "access_level" ) ) {
+									return "<a href=\"mailto:$p_email\">$p_text</a>";
+								} else {
+									return "$p_text";
+								}
+			default:	return "$p_text";
 		}
 	}
 	# --------------------
@@ -736,13 +746,22 @@
 	# return the mailto: href string link instead of printing it
 	# add subject line
 	function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
-		global $g_hide_user_email;
+		global $g_show_user_email, $g_anonymous_account;
 
-		if ( ON == $g_hide_user_email ){
-			return "$p_text";
-		} else {
-			$p_summary = mime_encode( $p_summary );
-			return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
+		switch ( $g_show_user_email ) {
+			case NONE:	return "$p_text";
+			case ALL:	return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
+			case NO_ANONYMOUS:	if ( get_current_user_field( "username" ) != $g_anonymous_account ) {
+									return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
+								} else {
+									return "$p_text";
+								}
+			case ADMIN_ONLY:	if ( ADMINISTRATOR == get_current_user_field( "access_level" ) ) {
+									return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
+								} else {
+									return "$p_text";
+								}
+			default:	return "$p_text";
 		}
 	}
 	# --------------------

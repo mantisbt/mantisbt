@@ -100,6 +100,12 @@
 	define( "BY_LIMIT",     0 );
 	define( "BY_DATE",      1 );
 
+	# show email limits
+	define( "NONE",         0 );
+	define( "ALL",          1 );
+	define( "NO_ANONYMOUS", 2 );
+	define( "ADMIN_ONLY",   3 );
+
 	# error messages
 	define( "ERROR_GENERIC",              0 );
 	define( "ERROR_SQL",                  1 );

@@ -33,6 +33,7 @@ Mantis
  * Modified language files to use long php tags.
  * Modified tr bgcolor elements and moved them into td bgcolor blocks to help MacOS IE color table cells properly.
  * Modified view_all_bug_page to use view_all_set as a pure script to set cookies.
+ * Modified g_hide_user_email to be g_show_user_email and have different usage modes.
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
