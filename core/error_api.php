@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.15 2003-02-08 22:31:29 jfitzell Exp $
+	# $Id: error_api.php,v 1.16 2003-02-09 00:45:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -46,13 +46,13 @@
 		# build an appropriate error string
 		switch ( $p_type ) {
 			case E_WARNING:
-				$t_string = "SYSTEM WARNING: $p_error\n$t_short_file: line $p_line)";
+				$t_string = "SYSTEM WARNING: $p_error\n($t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
 				break;
 			case E_NOTICE:
-				$t_string = "SYSTEM WARNING: $p_error\n$t_short_file: line $p_line)";
+				$t_string = "SYSTEM WARNING: $p_error\n($t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
@@ -84,6 +84,8 @@
 				$t_string = $p_error;
 		}
 
+		$t_string = nl2br( htmlentities( $t_string ) );
+
 		if ( 'halt' == $t_method ) {
 			$t_old_contents = ob_get_contents();
 			ob_end_clean();
@@ -91,7 +93,7 @@
 			print_page_top1();
 			print_page_top2a();
 
-			echo '<p class="center" style="color:red">' . nl2br( htmlentities( $t_string ) ) . '</p>';
+			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
 
 			# @@@ temp until we get parameterized errors
 			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
