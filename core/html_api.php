@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.129 2004-08-28 12:51:54 vboctor Exp $
+	# $Id: html_api.php,v 1.130 2004-09-04 05:06:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -698,9 +698,22 @@
 			$t_status = $t_elem[0];
 			if ( ( $t_status <> $t_bug_current_state ) && ( $t_current_access >= access_get_status_threshold( $t_status ) ) ) {
 				$t_enum_list[$t_status] = $t_elem2;
+			} 
+			# handle reporter can re-open
+			if ( ( config_get( 'bug_reopen_status' ) == $t_status ) && 
+						( config_get( 'bug_resolved_status_threshold' ) <= $t_bug_current_state ) && 
+						( ON == config_get( 'allow_reporter_reopen' ) ) && 
+						( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) ) {
+				$t_enum_list[$t_status] = get_enum_to_string( lang_get( 'resolution_enum_string' ), config_get( 'bug_reopen_resolution' ) );
+			}
+			# handle reporter can close
+			if ( ( CLOSED == $t_status ) && 
+						( ON == config_get( 'allow_reporter_close' ) ) && 
+						( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) ) {
+				$t_enum_list[$t_status] = $t_elem2;
 			}
 		} # end for
-
+		
 		if ( count( $t_enum_list ) > 0 ) {
 			echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
 
@@ -927,12 +940,12 @@
 			echo '<td class="center">';
 			html_button_bug_assign_to( $p_bug_id );
 			echo '</td>';
-
-			# Change State button
-			echo '<td class="center">';
-			html_button_bug_change_status( $p_bug_id );
-			echo '</td>';
 		}
+
+		# Change State button
+		echo '<td class="center">';
+		html_button_bug_change_status( $p_bug_id );
+		echo '</td>';
 		
 		# MONITOR/UNMONITOR button
 		echo '<td class="center">';
@@ -952,12 +965,13 @@
 			echo '</td>';
 		} 
 
-		if ( $t_resolved <= $t_status ) { # resolved is not the same as readonly
-			PRINT '<td class="center">';
-			# REOPEN button
-			html_button_bug_reopen( $p_bug_id );
-			PRINT '</td>';
-		}
+# now handled by button_bug_change_status
+#		if ( $t_resolved <= $t_status ) { # resolved is not the same as readonly
+#			PRINT '<td class="center">';
+#			# REOPEN button
+#			html_button_bug_reopen( $p_bug_id );
+#			PRINT '</td>';
+#		}
 
 		if ( !$t_readonly ) {
 			# MOVE button

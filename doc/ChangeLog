@@ -5,6 +5,7 @@ Mantis ChangeLog
 - 0003896: [security] Change default value of $g_view_summary_threshold to MANAGER (Victor Boctor)
 - 0004425: [bugtracker] Action group page exceeds max execution time (Victor Boctor)
 - 0004437: [bugtracker] Filenames of uploaded attached files are damaged (thraxisp)
+- 0004479: [bugtracker] Reporters can't close or reopen issues they reported
 - 0004426: [email] Email notifications to users with language set to "auto" causes errors (thraxisp)
 - 0004448: [email] Custom severity and status shown in mail as code (thraxisp)
 - 0004429: [localization] Slovene national characters not displayed correctly (Jeroen Latour)

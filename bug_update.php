@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.69 2004-08-24 13:30:20 thraxisp Exp $
+	# $Id: bug_update.php,v 1.70 2004-09-04 05:06:03 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,7 +25,12 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_update_mode = gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
 
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	if ( ! ( ( access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id ) ) ||
+				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) && 
+						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
+								( ON == config_get( 'allow_reporter_close' ) ) ) ) ) ) {
+		access_denied();
+	}
 
 	# extract current extended information
 	$t_bug_data = bug_get( $f_bug_id, true );

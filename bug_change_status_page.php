@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.7 2004-09-03 04:19:01 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.8 2004-09-04 05:06:03 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,12 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_new_status = gpc_get_int( 'new_status' );
 
-	access_ensure_bug_level( access_get_status_threshold( $f_new_status ), $f_bug_id );
+	if ( ! ( ( access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id ) ) ||
+				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) && 
+						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
+								( ON == config_get( 'allow_reporter_close' ) ) ) ) ) ) {
+		access_denied();
+	}
 
 	$t_status_label = str_replace( " ", "_", get_enum_to_string( config_get( 'status_enum_string' ), $f_new_status ) );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
@@ -173,7 +178,8 @@ if (  $f_new_status >= $t_resolved ) {
 <?php
 if ( $f_new_status >= $t_resolved ) { ?>
 <!-- Close Immediately (if enabled) -->
-<?php if ( ON == config_get( 'allow_close_immediately' ) ) { ?>
+<?php if ( ( ON == config_get( 'allow_close_immediately' ) )
+				&& ( access_has_bug_level( access_get_status_threshold( CLOSED ), $f_bug_id ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'close_immediately' ) ?>
