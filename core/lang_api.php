@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.26 2004-07-09 02:46:49 int2str Exp $
+	# $Id: lang_api.php,v 1.27 2004-07-10 15:38:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -150,8 +150,7 @@
 			$t_lang = lang_map_auto();
 		}
 
-		# Now we'll make sure that the requested language
-		#  is loaded
+		# Now we'll make sure that the requested language is loaded
 
 		lang_ensure_loaded( $t_lang );
 
@@ -183,8 +182,21 @@
 	# - If found, return the appropriate string (as lang_get()).
 	# - If not found, no default supplied, return the supplied string as is.
 	# - If not found, default supplied, return default.
-	function lang_get_defaulted( $p_string, $p_default = null ) {
-		if ( lang_exists( $p_string) ) {
+	function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {
+		$t_lang = $p_lang;
+
+		if ( NULL == $t_lang ) {
+			$t_lang = lang_get_default();
+		}
+
+		if ( 'auto' == $t_lang ) {
+			$t_lang = lang_map_auto();
+		}
+
+		# Now we'll make sure that the requested language is loaded
+		lang_ensure_loaded( $t_lang );
+
+		if ( lang_exists( $p_string, $t_lang ) ) {
 			return lang_get( $p_string );
 		} else {
 			if ( null === $p_default ) {

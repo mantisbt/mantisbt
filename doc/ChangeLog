@@ -17,6 +17,7 @@ Mantis ChangeLog
  * Fix #4040: Sponsorship timestamp is not displayed correctly in sponsorship list (vboctor)
  * Fix #4041: Empty "Users sponsoring this issue" (vboctor)
  * Fix #4044: Cross Site Scripting Vulnerability
+ * Fix #4056: Displaying/Reporting Issue -> Application Warning - lang_exists() missing arg 2 (vboctor)
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection..
  * Updated German, Italian, and Brazilian Portuguese languages.
 
