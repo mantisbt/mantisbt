@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.15 $
-	# $Author: prescience $
-	# $Date: 2002-09-03 02:41:50 $
+	# $Revision: 1.16 $
+	# $Author: jfitzell $
+	# $Date: 2002-09-15 21:31:25 $
 	#
-	# $Id: account_delete.php,v 1.15 2002-09-03 02:41:50 prescience Exp $
+	# $Id: account_delete.php,v 1.16 2002-09-15 21:31:25 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 <?php login_cookie_check() ?>
 <?php
 	# check if users can't delete their own accounts
-	if ( OFF == $g_allow_account_delete ) {
+	if ( OFF == config_get( 'allow_account_delete' ) ) {
 		print_header_redirect( 'account_page.php' );
 	}
 
@@ -30,40 +30,31 @@
 
 	# protected account check
 	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
-	$t_user_id = current_user_get_field( 'id' );
+	$t_user_id = auth_get_current_user_id();
 
-	if (user_delete( $t_user_id )) {
+	if ( user_delete( $t_user_id ) ) {
 		# delete cookies
-		setcookie( $g_string_cookie );
-		setcookie( $g_project_cookie );
-		setcookie( $g_view_all_cookie );
-	}
-?>
-<?php print_page_top1() ?>
-<?php
-	if ( $result ) {
+		#@@@ move these to a function... maybe in the gpc_api ??
+		setcookie( config_get( 'string_cookie' ) );
+		setcookie( config_get( 'project_cookie' ) );
+		setcookie( config_get( 'view_all_cookie' ) );
+
 		print_meta_redirect( 'login_page.php' );
 	}
 ?>
+<?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
 <br />
 <div align="center">
 <?php
-	if ( ON == $t_protected ) {				# PROTECTED
-		PRINT $s_account_protected_msg.'<br />';
-		print_bracket_link( 'account_page.php', $s_go_back );
-	} else if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<br />';
-		print_bracket_link( 'login_page.php', $s_proceed );
-	} else {								# FAILURE
-		print_sql_error( $query );
-	}
+	echo lang_get( 'operation_successful' ) . '<br />';
+	print_bracket_link( 'login_page.php', lang_get( 'proceed' ) );
 ?>
 </div>
 
