@@ -13,6 +13,8 @@
 	$result = 0;
 	$good_upload = 0;
 	$disallowed = 0;
+	extract( $HTTP_POST_FILES['f_file'], EXTR_PREFIX_ALL, "f" );
+
 	if ( !file_type_check( $f_file_name ) ) {
 		$disallowed = 1;
 	} else if ( is_uploaded_file( $f_file ) ) {
