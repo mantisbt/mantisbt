@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.11 2003-01-25 20:50:25 jlatour Exp $
+	# $Id: ldap_api.php,v 1.12 2003-10-24 12:44:26 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -58,7 +58,7 @@
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
 	    $t_search_filter	= "(&$t_ldap_organization(uid=$p_username))";
-		$t_search_attrs		= array( 'uid', 'email', 'dn' );
+		$t_search_attrs		= array( 'uid', 'mail', 'dn' );
 	    $t_ds				= ldap_connect_bind();
 
 		$t_sr	= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );

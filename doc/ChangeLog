@@ -1,8 +1,9 @@
 Mantis ChangeLog
 
-2003.10.??  -  0.18.0??
+2003.10.??  -  0.18.0
 
- * Enh #3335: Added Estonian Language (thanks to Villem Vannas)
+ * Fix #3207: LDAP mail lookup was looking for the 'email' attribute instead of the 'mail' attribute.
+ * Enh #3335: Added Estonian Language (thanks to Villem Vannas).
  * Fix #3310: Sorting of projects in menu bar.
  * Fix #3330: "Required" fields on Account Profile page.
  * Fix #3333: Support PHPMailer v1.7x.
