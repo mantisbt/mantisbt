@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.79 2004-07-18 11:56:57 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.80 2004-07-24 14:31:43 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -59,7 +59,7 @@
 
 	# This replaces the actual search that used to be here
 	$f_page_number = gpc_get_int( 'page_number', 1 );
-	$t_per_page = null;
+	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = null;
 	

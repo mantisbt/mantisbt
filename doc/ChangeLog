@@ -16,6 +16,7 @@ Mantis ChangeLog
 - 0004154: [bugtracker] "Product version" and "Fixed in Version" do not get updated on rename (vboctor)
 - 0004160: [bugtracker] Javascript error in the issue view pages (vboctor)
 - 0004175: [bugtracker] Links are not hyperlinked properly if containing '[' or ']' (vboctor)
+- 0004182: [bugtracker] print_all_bug_page should show all issues matching current filter (vboctor)
 - 0003714: [upgrade] Please add in a way to transfer attachments from the database to disk (thraxisp)
 - 0003877: [email] Upgrade to PHPMailer 1.72 (vboctor)
 - 0002220: [installation] usage of consistent naming schema for images (vboctor)
