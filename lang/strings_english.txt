@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.212 $
-	# $Author: prichards $
-	# $Date: 2004-09-25 14:35:26 $
+	# $Revision: 1.213 $
+	# $Author: thraxisp $
+	# $Date: 2004-09-26 02:31:28 $
 	#
-	# $Id: strings_english.txt,v 1.212 2004-09-25 14:35:26 prichards Exp $
+	# $Id: strings_english.txt,v 1.213 2004-09-26 02:31:28 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -285,6 +285,7 @@ $s_new_account_signup_msg = 'The following account has been created:';
 $s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
 $s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
