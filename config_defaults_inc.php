@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.61 2003-01-21 08:39:15 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.62 2003-01-23 00:33:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -163,10 +163,6 @@
 	# This disables the automatic generation of mailto: links
 	# Valid values: NONE, ALL, NO_ANONYMOUS, ADMIN_ONLY
 	$g_show_user_email		= NONE;
-
-	# Auto-generate user names for deleted users.  For example, user123 for user with id = 123.
-	# OFF if a user-no-longer-exists message is to be displayed.
-	$g_prefix_for_deleted_users = 'user';
 
 	# Set to OFF to remove X-Priority header
 	$g_use_x_priority		= ON;

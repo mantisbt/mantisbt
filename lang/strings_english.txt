@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.105 $
-	# $Author: jfitzell $
-	# $Date: 2003-01-16 10:36:20 $
+	# $Revision: 1.106 $
+	# $Author: vboctor $
+	# $Date: 2003-01-23 00:33:15 $
 	#
-	# $Id: strings_english.txt,v 1.105 2003-01-16 10:36:20 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.106 2003-01-23 00:33:15 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -187,7 +187,7 @@
 	$s_switch = 'Switch';
 	$s_logged_in_as = 'Logged in as';
 
-	$s_user_no_longer_exists = 'account no longer exists';
+	$s_prefix_for_deleted_users = 'user';
 
 	$s_administrator = 'administrator';
 

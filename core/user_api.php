@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.45 2003-01-19 23:56:08 vboctor Exp $
+	# $Id: user_api.php,v 1.46 2003-01-23 00:33:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -375,12 +375,7 @@
 		$row = user_cache_row( $p_user_id, false );
 
 		if ( false == $row ) {
-			$t_prefix = config_get( 'prefix_for_deleted_users' );
-			if ( OFF === $t_prefix ) {
-				return lang_get ( 'user_no_longer_exists' );
-			} else {
-				return $t_prefix . (integer)$p_user_id;
-			}
+			return lang_get( 'prefix_for_deleted_users' ) . (integer)$p_user_id;
 		} else {
 			return $row['username'];
 		}

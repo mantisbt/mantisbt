@@ -146,7 +146,7 @@ Mantis ChangeLog
  * New config option (html_valid_tags): Replaces allow_html_tags and html_tags.  Set it to a string containing a comma-separated list of tag names that should be allowed in messages.
  * New config option (custom_field_link_threshold): provide a threshold for users who can link and unlink custom fields but not delte, create, or modify them
  * New config option (custom_field_edit_after_create): new option to control whether a user is directed to edit a custom field after creating it
- * New config option (prefix_for_deleted_users): specifies the prefix to be used for auto-generating user names for accounts that no longer exists.
+ * Enhancement: User names are now auto-generated for accounts that no longer exists.  The user names are prefixed by the string (prefix_for_deleted_users).
  * Fix: when viewing all bugs for all projects you no longer see bugs from disabled projects
 
 2002.08.23  -  0.17.5
