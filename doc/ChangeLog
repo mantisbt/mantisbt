@@ -54,6 +54,7 @@ Mantis
  * Modified get_view_redirect_url() call on bug_assign.php to handle redirects better.
  * Modified search to look in bugnotes.
  * Modified is_duplicate_category().  Reversed the arguments.
+ * Modified to use core_project_API.php.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added Czech translation.

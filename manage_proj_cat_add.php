@@ -19,13 +19,7 @@
 	$duplicate = is_duplicate_category( $f_project_id, $f_category );
 	# check for empty case or duplicate
 	if ( !empty( $f_category )&& !$duplicate ) {
-		# insert category
-		$query = "INSERT
-				INTO $g_mantis_project_category_table
-				( project_id, category )
-				VALUES
-				( '$f_project_id', '$f_category' )";
-		$result = db_query( $query );
+		$result = category_add( $f_project_id, $f_category );
 	}
 
 	$t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;

@@ -349,7 +349,7 @@
 	$s_category_deleted_msg = "Category has been successfully deleted...";
 
 	# manage_project_category_delete_page.php3
-	$s_category_delete_sure_msg = "Are you sure you want to delete this category? All associated bugs will be deleted.";
+	$s_category_delete_sure_msg = "Are you sure you want to delete this category?";
 	$s_delete_category_button = "Delete Category";
 
 	# manage_project_category_edit_page.php3
@@ -398,7 +398,7 @@
 	$s_version_deleted_msg = "Version has been successfully deleted...";
 
 	# manage_project_version_delete_page.php3
-	$s_version_delete_sure = "Are you sure you want to delete this version? All associated bugs will be deleted.";
+	$s_version_delete_sure = "Are you sure you want to delete this version?";
 	$s_delete_version_button = "Delete Version";
 
 	# manage_project_version_edit_page.php3

@@ -28,7 +28,7 @@
 	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>">
 	<td class="center" colspan="2">
-		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( $f_category ) ?>">
+		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>">
 	</td>
 </tr>
 <tr>

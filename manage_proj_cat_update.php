@@ -10,37 +10,21 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 	$f_category = urldecode( $f_category );
-	$f_orig_category = urldecode( $f_orig_category );
+	$f_orig_category = urldecode( stripslashes( $f_orig_category ) );
 
 	$result = 0;
 	$query = "";
 	# check for duplicate
 	if ( !is_duplicate_category( $f_project_id, $f_category ) ) {
-		# update category
-		$query = "UPDATE $g_mantis_project_category_table
-				SET category='$f_category'
-				WHERE category='$f_orig_category' AND project_id='$f_project_id'";
-		$result = db_query( $query );
-
-		$query = "SELECT id, date_submitted, last_updated
-				FROM $g_mantis_bug_table
-	    		WHERE category='$f_orig_category'";
-	   	$result = db_query( $query );
-	   	$bug_count = db_num_rows( $result );
-
-		# update version in each corresponding bug
-		for ($i=0;$i<$bug_count;$i++) {
-			$row = db_fetch_array( $result );
-			$t_bug_id = $row["id"];
-			$t_date_submitted = $row["date_submitted"];
-			$t_last_updated = $row["last_updated"];
-
-			$query2 = "UPDATE $g_mantis_bug_table
-					SET category='$f_category', date_submitted='$t_date_submitted',
-						last_updated='$t_last_updated'
-					WHERE id='$t_bug_id'";
-			$result2 = db_query( $query2 );
+		$result = category_update( $f_project_id, $f_category, $f_orig_category );
+		if ( !$result ) {
+			break;
 		}
+
+		$query = "UPDATE $g_mantis_bug_table
+				SET category='$f_category'
+				WHERE category='$f_orig_category'";
+	   	$result = db_query( $query );
 	}
 
 	$t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;
