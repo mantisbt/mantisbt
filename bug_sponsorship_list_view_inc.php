@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.3 2004-07-08 13:49:12 vboctor Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.4 2004-07-08 13:57:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -68,7 +68,7 @@
 						$i = 0;
 						foreach ( $t_sponsorship_ids as $id ) {
 							$t_sponsorship = sponsorship_get( $id );
-							$t_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $t_sponsorship->date_submitted ) );
+							$t_date_added = date( config_get( 'normal_date_format' ), $t_sponsorship->date_submitted );
 
 							echo ($i > 0) ? '<br />' : '';
 							$i++;
