@@ -19,8 +19,9 @@ To Do:
  * More documentation on installtion, configuration, and customization
  * Add glyphs and icons as optional display feature
  * Further document core_API.php
+ * Add changed in last X minutes/hours/days option
 
-12.07.2000	-	0.10.3
+12.08.2000	-	0.10.3
 
  * Added summary by date
  * Fixed bug with Bugnote Add button showing up i the wrong places
@@ -30,6 +31,7 @@ To Do:
  * Renamed corresponding .php3 files
  * Added profile management
  * Profiles can be used for advanced bug submission
+ * Made enum displays (category, status, etc) easier to maintain via print_lists();
 
 12.06.2000	-	0.10.2
 

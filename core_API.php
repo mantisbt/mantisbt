@@ -156,6 +156,25 @@
 		} ### end for
 	}
 	#--------------------
+	### Used for update pages
+	function print_list( $p_list,  $p_item="" ) {
+		global $g_mantis_bug_table
+
+		$t_category_string = get_enum_string( $p_list );
+	    $t_str = $t_category_string.",";
+		$entry_count = get_enum_count($t_str)-1;
+		for ($i=0;$i<$entry_count;$i++) {
+			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
+			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
+			if ( $p_item==$t_s ) {
+				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
+			}
+			else {
+				PRINT "<option value=\"$t_s\">$t_s";
+			}
+		} ### end for
+	}
+	#--------------------
 	### Used in summary reports
 	function print_bug_enum_summary( $p_enum, $p_status="" ) {
 		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark;
@@ -228,6 +247,36 @@
 				PRINT "</td>";
 			PRINT "</tr>";
 		} ### end for
+	}
+	#--------------------
+	# prints the profiles given the user id
+	function print_profiles( $p_id ) {
+		global $g_mantis_user_profile_table;
+
+		### Get profiles
+		$query = "SELECT id, platform, os, os_build, default_profile
+			FROM $g_mantis_user_profile_table
+			WHERE user_id='$p_id'
+			ORDER BY id DESC";
+	    $result = db_mysql_query( $query );
+	    $profile_count = mysql_num_rows( $result );
+
+		PRINT "<option value=\"\">";
+		for ($i=0;$i<$profile_count;$i++) {
+			### prefix data with v_
+			$row = mysql_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+			$v_platform	= string_unsafe( $v_platform );
+			$v_os		= string_unsafe( $v_os );
+			$v_os_build	= string_unsafe( $v_os_build );
+
+			if ( $v_default_profile=="on" ) {
+				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
+			}
+			else {
+				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
+			}
+		}
 	}
 	#--------------------
 	####################

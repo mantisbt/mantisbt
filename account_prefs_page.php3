@@ -17,97 +17,83 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### extracts the user information for the currently logged in user
-	### and prefixes it with u_
     $query = "SELECT *
     		FROM $g_mantis_user_table
 			WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_mysql_query( $query );
-	$row = mysql_fetch_array( $result );
-	if ( $row ) {
-		extract( $row, EXTR_PREFIX_ALL, "u" );
-	}
+    $result = db_mysql_query($query);
+	$row = mysql_fetch_array($result);
+	extract( $row, EXTR_PREFIX_ALL, "u" );
 ?>
 
 <p>
 <? print_menu( $g_menu_include_file ) ?>
 
-<?
-	if ( access_level_check_greater( "reporter" ) ) {
-?>
-<p>
-<div align=center>
-	[ <a href="<? echo $g_account_profile_manage_page ?>">Manage Profiles</a> ]
-	[ <a href="<? echo $g_account_prefs_page ?>">Change Preferences</a> ]
-</div>
-<?
-	}
-?>
 <p>
 <div align=center>
 <table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table cols=2 width=100%>
-	<form method=post action="<? echo $g_account_update ?>">
-	<input type=hidden name=f_id value="<? echo $u_id ?>">
+	<table width=100% cols=2>
+	<form method=post action="<? echo $g_account_prefs_update ?>">
+	<input type=hidden name=f_action value="update">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Edit Account</b>
+			<b>Default Account Preferences</b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=40%>
-			Username:
+			Hide Resolved
 		</td>
 		<td width=60%>
-			<input type=text size=16 name=f_username value="<? echo $u_username ?>">
+			<input type=checkbox name=f_hide_resolved <? if ( $g_hide_resolved_val=="on" ) echo "CHECKED"?>>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Email:
+			Limit to
 		</td>
 		<td>
-			<input type=text size=32 name=f_email value="<? echo $u_email ?>">
+			<input type=text name=f_view_limit size=7 maxlength=7 value="<? echo $g_view_limit_val ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Password:
+			Show changed since
 		</td>
 		<td>
-			<input type=password size=32 name=f_password>
+			<input type=text name=f_hours size=4 maxlength=4 value="<? echo $v_hour_count ?>"> hours ago
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Confirm Password:
+			Advanced report
 		</td>
 		<td>
-			<input type=password size=32 name=f_password_confirm>
+			<input type=checkbox name=f_advanced_report size=4 maxlength=4 value="<? echo $v_hour_count ?>"> hours ago
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Access Level:
+			Advanced view
 		</td>
 		<td>
-			<? echo $u_access_level ?>
+			<input type=checkbox name=f_advanced_view size=4 maxlength=4 value="<? echo $v_hour_count ?>"> hours ago
 		</td>
 	</tr>
 	<tr align=center>
-		<td align=left>
-			<input type=submit value=" Update User ">
+		<td>
+			<input type=submit value=" Update Prefs ">
 		</td>
-			</form>
-		<td align=right>
-			<form method=post action="<? echo $g_account_delete_page ?>">
-				<input type=hidden name=f_id value="<? echo $u_id ?>">
-				<input type=submit value="Delete Account">
+		</form>
+		<form method=post action="<? echo $g_view_prefs_update ?>">
+		<input type=hidden name=f_action value="reset">
+		<td>
+			<input type=submit value=" Reset Prefs ">
 		</td>
-			</form>
+		</form>
 	</tr>
+	</form>
 	</table>
 	</td>
 </tr>

@@ -16,7 +16,7 @@ CREATE TABLE mantis_bug_table (
    priority enum('immediate','urgent','high','normal','low','none') DEFAULT 'normal' NOT NULL,
    severity enum('block','crash','major','minor','tweak','text','trivial','feature') DEFAULT 'minor' NOT NULL,
    reproducibility enum('always','sometimes','random','have not tried','unable to duplicate') DEFAULT 'always' NOT NULL,
-   status enum('new','acknowledged','confirmed','assigned','resolved') DEFAULT 'new' NOT NULL,
+   status enum('new','feedback','acknowledged','confirmed','assigned','resolved') DEFAULT 'new' NOT NULL,
    resolution enum('open','fixed','reopened','unable to duplicate','not fixable','duplicate','not a bug','suspended') DEFAULT 'open' NOT NULL,
    projection enum('redesign','major rework','minor fix','tweak') DEFAULT 'minor fix' NOT NULL,
    category enum('bugtracker','other') DEFAULT 'other' NOT NULL,
@@ -107,6 +107,7 @@ CREATE TABLE mantis_user_table (
    date_created timestamp(14),
    last_visit timestamp(14),
    enabled char(3) DEFAULT 'on' NOT NULL,
+   protected char(3) DEFAULT '' NOT NULL,
    access_level enum('viewer','reporter','updater','developer','administrator') DEFAULT 'viewer' NOT NULL,
    cookie_string varchar(128) NOT NULL,
    PRIMARY KEY (id)
@@ -116,5 +117,19 @@ CREATE TABLE mantis_user_table (
 # Dumping data for table 'mantis_user_table'
 #
 
-INSERT INTO mantis_user_table VALUES( '0000001', 'administrator', 'admin', 'MNYm8SfoJlvIY', '20001121161430', '20001121161430', 'on', 'administrator', 'MN91uSF/JIhos8bcda8acc2ead8d60749ad019e56b54fadkPGTyoBgNBQf91563adc2f7337f566cc3d2c792bc3c-10728595');
+INSERT INTO mantis_user_table VALUES( '0000001', 'administrator', 'admin', 'MNYm8SfoJlvIY', '20001121161430', '20001121161430', 'on', 'on', 'administrator', 'MN91uSF/JIhos8bcda8acc2ead8d60749ad019e56b54fadkPGTyoBgNBQf91563adc2f7337f566cc3d2c792bc3c-10728595');
 
+#
+# Table structure for table 'mantis_user_profile_table'
+#
+
+CREATE TABLE mantis_user_profile_table (
+   id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL auto_increment,
+   user_id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL,
+   platform varchar(32) NOT NULL,
+   os varchar(32) NOT NULL,
+   os_build varchar(16) NOT NULL,
+   description text NOT NULL,
+   default_profile char(3) NOT NULL,
+   PRIMARY KEY (id)
+);

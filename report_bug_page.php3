@@ -52,7 +52,7 @@
 		<td>
 			<select name=f_category>
 				<option value="" selected>Select Category
-				<? print_categories() ?>
+				<? print_list( "category" ) ?>
 			</select>
 		</td>
 	</tr>
@@ -63,12 +63,8 @@
 		</td>
 		<td>
 			<select name=f_reproducibility>
-				<option value="" selected>Select Reproducebility
-				<option value="always">always
-				<option value="sometimes">sometimes
-				<option value="random">random
-				<option value="have not tried">have not tried
-				<option value="unable to duplicate">unable to duplicate
+				<option value="" SELECTED>Select Reproducebility
+				<? print_list( "reproducibility" ) ?>
 			</select>
 		</td>
 	</tr>
@@ -79,14 +75,7 @@
 		<td>
 			<select name=f_severity>
 				<option value="" selected>Select Severity
-				<option value="block">block
-				<option value="crash">crash
-				<option value="major">major
-				<option value="minor">minor
-				<option value="tweak">tweak
-				<option value="text">text
-				<option value="trivial">trivial
-				<option value="feature">feature
+				<? print_list( "severity" ) ?>
 			</select>
 		</td>
 	</tr>

@@ -8,35 +8,49 @@
 	### CONFIGURATION VARIABLES                                             ###
 	###########################################################################
 
+	#--------------------
 	# database variables
 	$g_hostname        = "localhost";    # set this
 	$g_port            = 3306;           # set this if not default
 	$g_db_username     = "root";         # set this
 	$g_db_password     = "";             # set this
 	$g_database_name   = "bugtracker";   # set this
+	#--------------------
 
+	#--------------------
 	# file path variables
 	$g_path            = "/mantisbt/";   # requires trailing /
+	#--------------------
 
+	#--------------------
 	# extensions for php 3 and php 4
 	$g_php             = ".php3";        # set this to php for php4
+	#--------------------
 	                                     # or whatever your webserver needs
 
+	#--------------------
 	$g_cookie_prefix     = "MANTIS";     # set this to a unique identifier
 	                                     # this allows you to have multiple
+	#--------------------
 	                                     # installations on one site.
 
+	#--------------------
 	$g_db_table_prefix   = "mantis";     # set to name of tables
                                          # this allows you to have multiple
                                          # installations on one site.
+	#--------------------
+
 	#--------------------
 	# email variables
 	$g_administrator_email  = "administrator@mydomain.com";   # set this
 	$g_webmaster_email      = "webmaster@mydomain.com";       # set this
 	#--------------------
 
+	#--------------------
+	# sitewide titles
 	$g_window_title         = "Mantis";     # browser window title
 	$g_page_title           = "Mantis";     # title in html page
+	#--------------------
 
 	#--------------------
 	# toggling advanced interfaces
@@ -49,12 +63,16 @@
 	$g_meta_include_file         = "meta_inc.php";
 	$g_menu_include_file         = "menu_inc.php";
 
+	#--------------------
 	# bugnote includes
 	$g_bugnote_include_file      = "bugnote_inc.php";
 	$g_bugnote_add_include_file  = "bugnote_add_inc.php";
+	#--------------------
 
+	#--------------------
 	# css
 	$g_css_include_file     = "css_inc.php";
+	#--------------------
 
 	#--------------------
 	# database table names
@@ -65,6 +83,7 @@
 	$g_mantis_news_table           = $g_db_table_prefix."_news_table";
 	$g_mantis_user_table           = $g_db_table_prefix."_user_table";
 	$g_mantis_user_profile_table   = $g_db_table_prefix."_user_profile_table";
+	#--------------------
 
 	#--------------------
 	# page names
@@ -111,6 +130,9 @@
 	$g_account_profile_delete         = "account_profile_delete".$g_php;
 	$g_account_profile_make_default   = "account_profile_make_default".$g_php;
 
+	$g_account_prefs_page             = "account_prefs_page".$g_php;
+	$g_account_prefs_update           = "account_prefs_update".$g_php;
+
 	# site management
 	$g_manage_page                 = "manage_page".$g_php;
 	$g_manage_create_new_user      = "manage_create_new_user".$g_php;
@@ -118,7 +140,7 @@
 	$g_manage_user_page            = "manage_user_page".$g_php;
 	$g_manage_user_update          = "manage_user_update".$g_php;
 
-	$g_documentation_page          = "documentation_page.php3";
+	$g_documentation_page          = "documentation_page".$g_php;
 
 	# category management
 	$g_manage_category_page        = "manage_category_page".$g_php;
@@ -162,18 +184,23 @@
 	$g_view_limit_val           = $HTTP_COOKIE_VARS[$g_view_limit_cookie];
 	#--------------------
 
+	#--------------------
 	# time for coookie to live in seconds
 	$g_time_length              = 30000000;     # 1 year
 	# time to delay between page redirects
 	$g_wait_time                = 1;            # in seconds
+	#--------------------
 
+	#--------------------
 	# date lengths to bount bugs by
 	# folows the english required by strtotime()
 	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
+	#--------------------
 
 	#--------------------
 	# html table appearance variables
 	$g_primary_table_tags        = "";
+	#--------------------
 
 
 	#--------------------
@@ -191,15 +218,20 @@
 	$g_required_field_color  = "#aa0000";    # redish
 
 	$g_new_color             = "#ffa0a0";    # red
+	$g_feedback_color        = "#ff50d8";    # purple
 	$g_acknowledged_color    = "#ffd850";    # orange
 	$g_confirmed_color       = "#ffffb0";    # yellow
 	$g_assigned_color        = "#c8c8ff";    # blue
 	$g_resolved_color        = "#ffffff";    # not used in default
 	#--------------------
 
+	#--------------------
 	# news
 	$g_news_view_limit      = 5;
+	#--------------------
 
+	#--------------------
 	#version
-	$g_mantis_version       = "0.10.0";
+	$g_mantis_version       = "0.10.3";
+	#--------------------
 ?>

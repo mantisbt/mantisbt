@@ -31,12 +31,20 @@ you will want to set the database variables.  hostname, username, password, and
 database name must be set to match the configuration of your webserver and
 mysql database.
 
-5. If you require .php extensions (instead of .php3) run the convertToPHP4 script.
-You will probably need to first run "chmod +x convertToPHP4" to make the script
+5. If you require .php extensions (instead of .php3) run the convertToPHP4
+script.  You may need to first run "chmod +x convertToPHP4" to make the script
 executable.
 
-The script will rename all the .php3 files to .php.  Next you need to edit the
+The script will rename all the .php3 files to .php.  You also need to edit the
 config_inc.php file and change $g_php = ".php3" to be ".php"
+
+NOTE: If your server sends .php files in plain text you're going to need to do
+some heavy editing.  Basically you'll need to rename all the .php files to
+.php3 and then do a search and replace in every single file to rename
+core_API.php to core_API.php3, and rename config_inc.php to config_inc.php3 in
+the core_API file... and the same for all the other affected files.  If
+you don't do this then anyone can access your database information (and delete
+it).
 
 That should be it.  You're off and running.  For some help on custom editting
 of the site (including renaming the database tables) please read the
@@ -46,12 +54,35 @@ is covered in CONFIGURATION.
 -------------------------------------------------------------------------------
 ### Upgrading ###
 -------------------------------------------------------------------------------
+=================
 0.9.x to 0.10.x
+=================
 
 You will need to add a 'protected' field in the mantis_user_table.
 This command will do the trick:
 
 ALTER TABLE mantis_user_table ADD protected VARCHAR (3) not null
+
+=================
+0.10.2 to 0.10.3+
+=================
+
+I've added a profile table and inserted feedback into the main bug table
+Run these queries:
+
+ALTER TABLE mantis_bug_table CHANGE status status ENUM ('new','fdeedback',
+	'acknowledged','confirmed','assigned','resolved') DEFAULT 'new' not null;
+
+CREATE TABLE mantis_user_profile_table (
+   id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL auto_increment,
+   user_id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL,
+   platform varchar(32) NOT NULL,
+   os varchar(32) NOT NULL,
+   os_build varchar(16) NOT NULL,
+   description text NOT NULL,
+   default_profile char(3) NOT NULL,
+   PRIMARY KEY (id)
+);
 
 -------------------------------------------------------------------------------
 ### Useful links ###

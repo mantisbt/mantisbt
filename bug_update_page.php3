@@ -126,28 +126,17 @@
 		</td>
 		<td>
 			<select name=f_category>
-				<? print_categories( $v_category ) ?>
+				<? print_list( "category", $v_category ) ?>
 			</select>
 		</td>
 		<td>
 			<select name=f_severity>
-				<option value="block" <? if ( $v_severity=="block" ) echo "SELECTED" ?>>block
-				<option value="crash" <? if ( $v_severity=="crash" ) echo "SELECTED" ?>>crash
-				<option value="major" <? if ( $v_severity=="major" ) echo "SELECTED" ?>>major
-				<option value="minor" <? if ( $v_severity=="minor" ) echo "SELECTED" ?>>minor
-				<option value="tweak" <? if ( $v_severity=="tweak" ) echo "SELECTED" ?>>tweak
-				<option value="text" <? if ( $v_severity=="text" ) echo "SELECTED" ?>>text
-				<option value="trivial" <? if ( $v_severity=="trivial" ) echo "SELECTED" ?>>trivial
-				<option value="feature" <? if ( $v_severity=="feature" ) echo "SELECTED" ?>>feature
+				<? print_list( "severity", $v_severity ) ?>
 			</select>
 		</td>
 		<td>
 			<select name=f_reproducibility>
-				<option value="always" <? if ( $v_reproducibility=="always" ) echo "SELECTED" ?>>always
-				<option value="sometimes" <? if ( $v_reproducibility=="sometimes" ) echo "SELECTED" ?>>sometimes
-				<option value="random" <? if ( $v_reproducibility=="random" ) echo "SELECTED" ?>>random
-				<option value="have not tried" <? if ( $v_reproducibility=="have not tried" ) echo "SELECTED" ?>>have not tried
-				<option value="unable to duplicate" <? if ( $v_reproducibility=="unable to duplicate" ) echo "SELECTED" ?>>unable to duplicate
+				<? print_list( "reproducibility", $v_reproducibility ) ?>
 			</select>
 		</td>
 		<td>
@@ -207,12 +196,7 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<select name=f_priority>
-				<option value="immediate" <? if ( $v_priority=="immediate" ) echo "SELECTED" ?>>immediate
-				<option value="urgent" <? if ( $v_priority=="urgent" ) echo "SELECTED" ?>>urgent
-				<option value="high" <? if ( $v_priority=="high" ) echo "SELECTED" ?>>high
-				<option value="normal" <? if ( $v_priority=="normal" ) echo "SELECTED" ?>>normal
-				<option value="low" <? if ( $v_priority=="low" ) echo "SELECTED" ?>>low
-				<option value="none" <? if ( $v_priority=="none" ) echo "SELECTED" ?>>none
+				<? print_list( "priority", $v_priority ) ?>
 			</select>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
@@ -220,15 +204,7 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<select name=f_resolution>
-				<option value="open" <? if ( $v_resolution=="open" ) echo "SELECTED" ?>>open
-				<option value="fixed" <? if ( $v_resolution=="fixed" ) echo "SELECTED" ?>>fixed
-				<option value="duplicate" <? if ( $v_resolution=="duplicate" ) echo "SELECTED" ?>>duplicate
-				<option value="not a bug" <? if ( $v_resolution=="not a bug" ) echo "SELECTED" ?>>not a bug
-				<option value="suspended" <? if ( $v_resolution=="suspended" ) echo "SELECTED" ?>>suspended
-				<option value="reopened" <? if ( $v_resolution=="reopened" ) echo "SELECTED" ?>>reopened
-				<option value="wont fix" <? if ( $v_resolution=="wont fix" ) echo "SELECTED" ?>>wont fix
-				<option value="not fixable" <? if ( $v_resolution=="not fixable" ) echo "SELECTED" ?>>not fixable
-				<option value="unable to duplicate" <? if ( $v_resolution=="unable to duplicate" ) echo "SELECTED" ?>>unable to duplicate
+				<? print_list( "resolution", $v_resolution ) ?>
 			</select>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
@@ -241,11 +217,7 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<select name=f_status>
-				<option value="new" <? if ( $v_status=="new" ) echo "SELECTED" ?>>new
-				<option value="acknowledged" <? if ( $v_status=="acknowledged" ) echo "SELECTED" ?>>acknowledged
-				<option value="confirmed" <? if ( $v_status=="confirmed" ) echo "SELECTED" ?>>confirmed
-				<option value="assigned" <? if ( $v_status=="assigned" ) echo "SELECTED" ?>>assigned
-				<option value="resolved" <? if ( $v_status=="resolved" ) echo "SELECTED" ?>>resolved
+				<? print_list( "status", $v_status ) ?>
 			</select>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>

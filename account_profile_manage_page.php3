@@ -117,32 +117,7 @@
 		</td>
 		<td width=75%>
 			<select name=f_id>
-			<?
-				### Get profiles
-				$query = "SELECT id, platform, os, os_build, default_profile
-					FROM $g_mantis_user_profile_table
-					WHERE user_id='$u_id'
-					ORDER BY id DESC";
-			    $result = db_mysql_query( $query );
-			    $profile_count = mysql_num_rows( $result );
-
-				for ($i=0;$i<$profile_count;$i++) {
-					### prefix data with v_
-					$row = mysql_fetch_array( $result );
-					extract( $row, EXTR_PREFIX_ALL, "v" );
-					$v_platform	= string_unsafe( $v_platform );
-					$v_os		= string_unsafe( $v_os );
-					$v_os_build	= string_unsafe( $v_os_build );
-
-					if ( $v_default_profile=="on" ) {
-						PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
-					}
-					else {
-						PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
-					}
-				}
-
-			?>
+				<? print_profiles( $u_id ) ?>
 			</select>
 		</td>
 	</tr>

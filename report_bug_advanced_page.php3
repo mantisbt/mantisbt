@@ -53,7 +53,7 @@
 		<td>
 			<select name=f_category>
 				<option value="" selected>Select Category
-				<? print_categories() ?>
+				<? print_list( "category" ) ?>
 			</select>
 		</td>
 	</tr>
@@ -65,11 +65,7 @@
 		<td>
 			<select name=f_reproducibility>
 				<option value="" selected>Select Reproducebility
-				<option value="always">always
-				<option value="sometimes">sometimes
-				<option value="random">random
-				<option value="have not tried">have not tried
-				<option value="unable to duplicate">unable to duplicate
+				<? print_list( "reproducibility" ) ?>
 			</select>
 		</td>
 	</tr>
@@ -80,14 +76,7 @@
 		<td>
 			<select name=f_severity>
 				<option value="" selected>Select Severity
-				<option value="block">block
-				<option value="crash">crash
-				<option value="major">major
-				<option value="minor">minor
-				<option value="tweak">tweak
-				<option value="text">text
-				<option value="trivial">trivial
-				<option value="feature">feature
+				<? print_list( "severity" ) ?>
 			</select>
 		</td>
 	</tr>
@@ -101,33 +90,7 @@
 		</td>
 		<td>
 			<select name=f_id>
-				<option value="">
-			<?
-				### Get profiles
-				$query = "SELECT id, platform, os, os_build, default_profile
-					FROM $g_mantis_user_profile_table
-					WHERE user_id='$u_id'
-					ORDER BY id DESC";
-			    $result = db_mysql_query( $query );
-			    $profile_count = mysql_num_rows( $result );
-
-				for ($i=0;$i<$profile_count;$i++) {
-					### prefix data with v_
-					$row = mysql_fetch_array( $result );
-					extract( $row, EXTR_PREFIX_ALL, "v" );
-					$v_platform	= string_unsafe( $v_platform );
-					$v_os		= string_unsafe( $v_os );
-					$v_os_build	= string_unsafe( $v_os_build );
-
-					if ( $v_default_profile=="on" ) {
-						PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
-					}
-					else {
-						PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
-					}
-				}
-
-			?>
+				<? print_profiles( $u_id ) ?>
 			</select>
 		</td>
 	</tr>
