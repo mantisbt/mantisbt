@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.81 $
+	# $Revision: 1.82 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-25 16:30:26 $
+	# $Date: 2004-12-24 20:18:08 $
 	#
-	# $Id: strings_norwegian.txt,v 1.81 2004-10-25 16:30:26 bigbadger Exp $
+	# $Id: strings_norwegian.txt,v 1.82 2004-12-24 20:18:08 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -27,9 +27,9 @@ $s_actiongroup_menu_assign = 'Deleger til';
 $s_actiongroup_menu_close = 'Sett status til lukket';
 $s_actiongroup_menu_delete = 'Slett';
 $s_actiongroup_menu_resolve = 'Sett status til løst';
-$s_actiongroup_menu_update_priority = 'Endr prioritet';
-$s_actiongroup_menu_update_status = 'Endr status';
-$s_actiongroup_menu_update_view_status = 'Endr visningsstatus';
+$s_actiongroup_menu_update_priority = 'Endre prioritet';
+$s_actiongroup_menu_update_status = 'Endre status';
+$s_actiongroup_menu_update_view_status = 'Endre visningsstatus';
 $s_actiongroup_bugs = 'Valgte saker';
 
 # new strings:
@@ -113,11 +113,11 @@ $s_close_group_bugs_button = 'Lukk saker';
 $s_delete_group_bugs_button = 'Slett saker';
 $s_move_group_bugs_button = 'Flytt saker';
 $s_copy_group_bugs_button = 'Kopier saker';
-$s_assign_group_bugs_button = 'Tilordn saker';
-$s_resolve_group_bugs_button = 'Lagr løsningsstatus';
-$s_priority_group_bugs_button = 'Endr prioritet';
-$s_status_group_bugs_button = 'Endr status';
-$s_view_status_group_bugs_button = 'Endr visningsstatus';
+$s_assign_group_bugs_button = 'Tilordne saker';
+$s_resolve_group_bugs_button = 'Lagre løsningsstatus';
+$s_priority_group_bugs_button = 'Endre prioritet';
+$s_status_group_bugs_button = 'Endre status';
+$s_view_status_group_bugs_button = 'Endre visningsstatus';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'graf eter status' ;
@@ -173,10 +173,10 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Mappen eksisterer ikke. Vennligst sjekk pro
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Filen eksisterer fra før. Vennligst slett filen først.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'Det eksisterer et prosjekt med et likt navn.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'En påkrevd felt er ikke fylt ut. Vennligst sjekk feltene for manglende input.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Denne kontoen er beskyttet.  Du kan ikke bruke kontoen inntil beskyttelsen er fjernet.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'Denne kontoen er beskyttet.  Du kan ikke bruke kontoen før beskyttelsen er fjernet.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'Du har ikke tilgang.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'Mislykket filopplasting.  Be din administrator om å kjøre admin_check scriptet for å feilsøke problemet.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Mislykket filopplasting.  Dette er sannsynlig forårsaket av at filstørrelsen var større enn det din PHP-installasjon tillater.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'Mislykket filopplasting.  Dette er sannsynligvis forårsaket av at filstørrelsen var større enn det din PHP-installasjon tillater.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'En påkrevd parameter til denne siden ble ikke funnet.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Det brukernavnet er allerede i bruk.  Vennligst gå tilbake og velg et annet.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurasjonsopsjon \'%s\' ikke funnet.';
@@ -259,7 +259,7 @@ $s_myself = "Meg selv";
 $s_default_access_level = 'Standard tilgangsnivå';
 
 # Enum Strings
-$s_access_levels_enum_string      = '10:Leser,25:Reporter,40:Superbruker,55:Utvikler,70:Prosjektleder,90:Administrator';
+$s_access_levels_enum_string      = '10:Leser,25:Reporter,40:Oppdaterer,55:Utvikler,70:Prosjektleder,90:Administrator';
 $s_project_status_enum_string     = '10:Utvikling,30:Release,50:Stabil,70:Uvesentlig';
 $s_project_view_state_enum_string = '10:Offentlig,50:Privat';
 $s_view_state_enum_string         = '10:Offentlig,50:Privat';
@@ -345,7 +345,7 @@ $s_delete_account_button = 'Slett konto';
 
 # account_page.php
 $s_manage_profiles_link = 'Administrer profiler';
-$s_change_preferences_link = 'Endr innstillinger';
+$s_change_preferences_link = 'Endre innstillinger';
 $s_edit_account_title = 'Endre konto';
 $s_username = 'Brukernavn';
 $s_realname = 'Fullt navn';
@@ -363,7 +363,7 @@ $s_advanced_report = 'Avansert rapport';
 $s_advanced_view = 'Avansert visning';
 $s_advanced_update = 'Avansert oppdatering';
 $s_refresh_delay = 'Forsinkelse på oppfriskning';
-$s_redirect_delay = 'Forsinkelse på redirrigering';
+$s_redirect_delay = 'Forsinkelse på redirigering';
 $s_with_minimum_severity = 'Med minimum alvorlighetsgrad';
 $s_bugnote_order = 'Sortering av notat';
 $s_bugnote_order_asc = 'Økende';
@@ -437,7 +437,7 @@ $s_new_bug_button = 'Ny sak';
 $s_feedback_bug_button = 'Be om tilbakemelding';
 $s_acknowledged_bug_button = 'Godkjenn sak';
 $s_confirmed_bug_button = 'Bekreft sak';
-$s_assigned_bug_button = 'Tilordn sak';
+$s_assigned_bug_button = 'Tilordne sak';
 
 # bug_close.php
 $s_bug_close_msg       = 'Saken har blitt lukket ...';
@@ -608,6 +608,7 @@ $s_filter_button = 'Filtrer';
 $s_manage_users_link = 'Vedlikehold brukere';
 $s_manage_projects_link = 'Vedlikehold prosjekter';
 $s_manage_custom_field_link = 'Administrer brukerdefinerte felter';
+$s_permissions_summary_report = 'Tilgangsrapport';
 $s_create_new_account_link = 'Opprett konto';
 $s_projects_link = 'Prosjekter';
 $s_documentation_link = 'Dokumentasjon';
@@ -662,7 +663,7 @@ $s_categories = 'Kategorier';
 $s_add_category_button = 'Ny kategori';
 $s_versions = 'Versjoner';
 $s_add_version_button = 'Legg til versjon';
-$s_add_and_edit_version_button = 'Legg til og endr versjon';
+$s_add_and_edit_version_button = 'Legg til og endre versjon';
 $s_edit_link = 'Rediger';
 $s_actions = 'Valg';
 $s_version = 'Versjon';
@@ -713,7 +714,7 @@ $s_confirm_account_pruning = 'Er du sikker på at du vil slette gamle kontoer som
 $s_edit_user_title = 'Redigere bruker';
 $s_reset_password_button = 'Nullstill passord';
 $s_delete_user_button = 'Slett bruker';
-$s_reset_password_msg = '\'Nullstill passord\' sender bekreftelses-URL-en URL via epost.';
+$s_reset_password_msg = '\'Nullstill passord\' sender bekreftelses-URL via epost.';
 $s_reset_password_msg2 = 'Nullstille passord setter passordet til blank.';
 $s_show_all_users = 'ALLE';
 
@@ -829,7 +830,7 @@ $s_updated_user_msg = 'Oppdatert bruker OK';
 
 # report_add.php
 $s_must_enter_category = 'Du må velge en kategori';
-$s_must_enter_severity = 'Du må velge konsekvensegrad';
+$s_must_enter_severity = 'Du må velge konsekvensgrad';
 $s_must_enter_reproducibility = 'Du må velge reproduserbarhet';
 $s_must_enter_summary = 'Du må angi oppsummering';
 $s_must_enter_description = 'Du må angi beskrivelse';
@@ -870,7 +871,7 @@ $s_signup_button = 'Registrer';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Redigere nettstedinnstillinger';
-$s_save_settings_button = 'Lagr innstillinger';
+$s_save_settings_button = 'Lagre innstillinger';
 
 # site_settings_page.php
 $s_site_settings_title = 'Nettstedsinnstillinger';
@@ -929,7 +930,7 @@ $s_end_date = 'Sluttdato';
 $s_use_date_filters = 'Bruk datoavgrensing';
 $s_yes = 'Ja';
 $s_no = 'Nei';
-$s_open_filters = 'Endr filter';
+$s_open_filters = 'Endre filter';
 $s_or_unassigned = 'eller ikke delegert';
 $s_ok = 'OK';
 $s_select_all = 'Velg alle';
@@ -938,7 +939,7 @@ $s_select_all = 'Velg alle';
 $s_use_query = 'Bruk filter';
 $s_delete_query = 'Slett filter';
 $s_query_deleted = 'Filter slettet';
-$s_save_query = 'Lagr dette filteret';
+$s_save_query = 'Lagre dette filteret';
 $s_reset_query = 'Nullstill filter';
 $s_query_name = 'Filternavn';
 $s_query_exists = 'Dette søket ser ut til å eksistere allerede.';
@@ -955,8 +956,8 @@ $s_product_build = 'Underversjon';
 $s_system_profile = 'Systembeskrivelse';
 $s_update_bug_button = 'Oppdater sak';
 $s_bug_assign_to_button = 'Deleger til:';
-$s_bug_status_to_button = 'Endr status til:';
-$s_reopen_bug_button = 'Gjenåpn sak';
+$s_bug_status_to_button = 'Endre status til:';
+$s_reopen_bug_button = 'Gjenåpne sak';
 $s_move_bug_button = 'Flytt sak';
 $s_attached_files = 'Filvedlegg';
 $s_publish = 'Publisere';
