@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.132 2004-01-13 12:23:50 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.133 2004-01-26 03:41:33 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -188,7 +188,7 @@
 	
 	# set to OFF to disable email check
 	$g_validate_email		= ON;
-	$g_check_mx_record		= ON;
+	$g_check_mx_record		= OFF;	# Not supported under Windows.
 
 	# if ON, allow the user to omit an email field
 	# note if you allow users to create their own accounts, they
