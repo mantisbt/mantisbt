@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.28 2004-08-16 21:15:58 prichards Exp $
+	# $Id: gpc_api.php,v 1.29 2004-12-18 02:02:27 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -32,6 +32,7 @@
 		} else if ( func_num_args() > 1 ) { #check for a default passed in (allowing null)
 			$t_result = $p_default;
 		} else {
+			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 			$t_result = null;
 		}
@@ -49,6 +50,7 @@
 		$t_result = call_user_func_array( 'gpc_get', $args );
 
 		if ( is_array( $t_result ) ) {
+			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 		}
 
@@ -65,6 +67,7 @@
 		$t_result = call_user_func_array( 'gpc_get', $args );
 
 		if ( is_array( $t_result ) ) {
+			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 		}
 
@@ -80,6 +83,7 @@
 			return $p_default;
 		} else {
 			if ( is_array( $t_result ) ) {
+				error_parameters( $p_var_name );
 				trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 			}
 
@@ -127,6 +131,7 @@
 		# If we the result isn't the default we were given or an array, error
 		if ( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) ||
 			is_array( $t_result ) ) ) {
+			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
 		}
 
@@ -145,6 +150,7 @@
 		# If we the result isn't the default we were given or an array, error
 		if ( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) ||
 			     is_array( $t_result ) ) ) {
+			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
 		}
 
@@ -167,6 +173,7 @@
 		# If we the result isn't the default we were given or an array, error
 		if ( !( ( ( 1 < func_num_args() ) && ( $t_result === $p_default ) ) ||
 			     is_array( $t_result ) ) ) {
+			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
 		}
 
@@ -197,6 +204,7 @@
 		} else if ( func_num_args() > 1 ) { #check for a default passed in (allowing null)
 			$t_result = $p_default;
 		} else {
+			error_parameters( $p_var_name );
 			trigger_error(ERROR_GPC_VAR_NOT_FOUND, ERROR);
 		}
 
@@ -272,6 +280,7 @@
 		} else if ( func_num_args() > 1 ) { #check for a default passed in (allowing null)
 			$t_result = $p_default;
 		} else {
+			error_parameters( $p_var_name );
 			trigger_error(ERROR_GPC_VAR_NOT_FOUND, ERROR);
 		}
 
