@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.112 2005-04-06 01:24:21 thraxisp Exp $
+	# $Id: email_api.php,v 1.113 2005-04-06 15:21:18 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -426,8 +426,13 @@
 			if ( is_array( $t_recipients ) ) {
 				# send email to every recipient
 				foreach ( $t_recipients as $t_user_id => $t_user_email ) {
+					# load (push) user language here as build_visible_bug_data assumes current language
+					lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
+
 					$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
 					$t_ok = email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params ) && $t_ok;
+					
+					lang_pop();
 				}
 			}
 		}
@@ -838,9 +843,6 @@
 			return true;
 		}
 
-		# load (push) user language
-		lang_push( user_pref_get_language( $p_user_id, $p_project_id ) );
-
 		# build subject
 		$t_subject = '['.$p_visible_bug_data['email_project'].' '
 						.bug_format_id( $p_visible_bug_data['email_bug'] )
@@ -863,8 +865,6 @@
 		# send mail
 		# PRINT '<br />email_bug_info::Sending email to :'.$t_user_email;
 		$t_ok = email_send( $t_user_email, $t_subject, $t_message, '', $p_visible_bug_data['set_category'], false );
-
-		lang_pop();
 
 		return $t_ok;
 	}
@@ -971,7 +971,7 @@
 		# format history
 		if ( array_key_exists( 'history', $p_visible_bug_data ) ) {
 			$t_message .=	lang_get( 'bug_history' ) . " \n";
-			$t_message .=	str_pad( lang_get( 'date_modified' ), 15 ) .
+			$t_message .=	str_pad( lang_get( 'date_modified' ), 16 ) .
 							str_pad( lang_get( 'username' ), 15 ) .
 							str_pad( lang_get( 'field' ), 25 ) .
 							str_pad( lang_get( 'change' ), 20 ). " \n";
@@ -984,7 +984,7 @@
 															$t_raw_history_item['old_value'],
 															$t_raw_history_item['new_value'] );
 
-				$t_message .=	str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 15 ) .
+				$t_message .=	str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 16 ) .
 								str_pad( $t_raw_history_item['username'], 15 ) .
 								str_pad( $t_localized_item['note'], 25 ) .
 								str_pad( $t_localized_item['change'], 20 ) . "\n";
