@@ -144,44 +144,52 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 	?>
 </tr>
 <!-- PHP Setup check -->
+<?php
+	$t_vars = array( 'magic_quotes_gpc',
+					'gpc_order',
+					'variables_order',
+					'include_path',
+					'short_open_tag');
+	
+	while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
+?>
 <tr>
 	<td bgcolor="#ffffff">
-		magic_quotes_gpc
+		<?php echo $t_var ?>
 	</td>
 	<td bgcolor="#ffffff">
-		<?php echo ini_get( "magic_quotes_gpc" ) ?>
+		<?php echo ini_get( $t_var ) ?>
 	</td>
 </tr>
+<?php
+	}
+?>
+</table>
+
+<p>
+<?php # ---- Uploads ? ---- ?>
+<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>
-	<td bgcolor="#ffffff">
-		gpc_order
-	</td>
-	<td bgcolor="#ffffff">
-		<?php echo ini_get( "gpc_order" ) ?>
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ffffff">
-		variables_order
-	</td>
-	<td bgcolor="#ffffff">
-		<?php echo ini_get( "variables_order" ) ?>
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ffffff">
-		include_path
-	</td>
-	<td bgcolor="#ffffff">
-		<?php echo ini_get( "include_path" ) ?>
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ffffff">
-		short_open_tag
-	</td>
-	<td bgcolor="#ffffff">
-		<?php echo ini_get("short_open_tag") ?>
+	<td bgcolor="#f4f4f4">
+		<span class="title">File Uploads</span><br />
+		<?php
+			if( ini_get( 'file_uploads' ) ) {
+		?>
+				<p>File uploads are ENABLED</p>
+
+				<p>The following size settings are in effect.  Maximum upload size will be whichever of these is SMALLEST. </p>
+				<p>PHP variable 'upload_max_filesize': <?php echo ini_get( 'upload_max_filesize' ) ?><br />
+				PHP variable 'post_max_size': <?php echo ini_get( 'post_max_size' ) ?><br />
+				Mantis variable '$g_max_file_sze': <?php echo $g_max_file_size ?> bytes</p>
+				
+				<p>There may also be settings in Apache (or MySQL if using the SQL upload method) that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.</p>
+		<?php
+			} else {
+		?>
+				<p>File uploads are DISABLED.  To enable them, add "file_uploads = TRUE" to your php.ini file</p>
+		<?php
+			}
+		?>
 	</td>
 </tr>
 </table>
