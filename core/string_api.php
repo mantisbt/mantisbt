@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.56 2004-08-01 05:53:00 vboctor Exp $
+	# $Id: string_api.php,v 1.57 2004-08-01 11:04:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -55,6 +55,24 @@
 			return $p_string;
 		}
 	}
+	
+	# --------------------
+	# Similar to nl2br, but fixes up a problem where new lines are doubled between
+	# <pre> tags.
+	function string_nl2br( $p_string, $p_wrap = 100 ) {
+		$p_string = nl2br( $p_string );
+
+		# fix up eols within <pre> tags (#1146)
+		$pre2 = array();
+		preg_match_all("/<pre[^>]*?>(.|\n)*?<\/pre>/", $p_string, $pre1);
+		for ( $x = 0; $x < count($pre1[0]); $x++ ) {
+			$pre2[$x] = preg_replace("/<br[^>]*?>/", "", $pre1[0][$x]);
+			$pre2[$x] = preg_replace("/([^\n]{".$p_wrap."})(?!<\/pre>)/", "$1\n", $pre2[$x]);
+			$pre1[0][$x] = "/" . preg_quote($pre1[0][$x], "/") . "/";
+		}
+
+		return preg_replace( $pre1[0], $pre2, $p_string );
+	}
 
 	# --------------------
 	# Prepare a string for display to HTML
@@ -63,7 +81,7 @@
 		$p_string = htmlspecialchars( $p_string );
 		$p_string = string_restore_valid_html_tags( $p_string );
 		$p_string = string_preserve_spaces_at_bol( $p_string );
-		$p_string = nl2br( $p_string );
+		$p_string = string_nl2br( $p_string );
 
 		return $p_string;
 	}
