@@ -62,6 +62,7 @@ Mantis ChangeLog
  * Enhancement: you can add multiple categories in one step. This is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
  * Enhancement: you can monitor bugs even when not reporter or handler
  * Enhancement: support for custom fields.
+ * Enhancement: you can now change the password encryption method by simply changing the configuration option - Mantis will change your passwords automatically as people login
  * Fix: Account pruning now also removes profiles, preferences and such.
  * Fix: all string files use single quotes instead of double quotes
  * Fix: bug that let you change your username to that of an already existing user

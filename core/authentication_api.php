@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.19 2003-02-11 09:08:57 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.20 2003-02-15 22:45:15 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -143,20 +143,29 @@
 	# Return true if the password for the user id given matches the given
 	#  password (taking into account the global login method)
 	function auth_does_password_match( $p_user_id, $p_test_password ) {
-		$t_login_method = config_get( 'login_method' );
+		$t_configured_login_method = config_get( 'login_method' );
 
 		if ( LDAP == $t_login_method ) {
 			return ldap_authenticate( $p_user_id, $p_test_password );
 		}
 
 		$t_password = user_get_field( $p_user_id, 'password' );
-
-		# pass the stored password in as the salt
-		if ( auth_process_plain_password( $p_test_password, $t_password ) == $t_password ) {
-			return true;
-		} else {
-			return false;
+		
+		$t_login_methods = Array(MD5, CRYPT, PLAIN);
+		
+		foreach ($t_login_methods as $t_login_method) {
+			
+			# pass the stored password in as the salt
+			if ( auth_process_plain_password( $p_test_password, $t_password, $t_login_method ) == $t_password ) {
+				if ( $t_login_method != $t_configured_login_method ) {
+					user_set_password( $p_user_id, $p_test_password, true );
+				}
+				
+				return true;
+			}
 		}
+		
+		return false;
 	}
 
 	# --------------------
@@ -167,8 +176,11 @@
 	# When encrypting a password to compare to a stored password, the stored
 	#  password should be passed in as salt.  If the auth method is CRYPT then
 	#  crypt() will extract the appropriate portion of the stored password as its salt
-	function auth_process_plain_password( $p_password, $p_salt=null ) {
+	function auth_process_plain_password( $p_password, $p_salt=null, $p_method=null ) {
 		$t_login_method = config_get( 'login_method' );
+		if ($p_method != null) {
+			$t_login_method = $p_method;
+		}
 
 		switch ( $t_login_method ) {
 			case CRYPT:

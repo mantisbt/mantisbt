@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.51 2003-02-11 21:36:23 jlatour Exp $
+	# $Id: user_api.php,v 1.52 2003-02-15 22:45:15 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -643,10 +643,12 @@
 	
 	# --------------------
 	# Set the user's password to the given string, encoded as appropriate
-	function user_set_password( $p_user_id, $p_password ) {
+	function user_set_password( $p_user_id, $p_password, $p_allow_protected=false ) {
 		$c_user_id = db_prepare_int( $p_user_id );
 		
-    	user_ensure_unprotected( $p_user_id );
+		if ( !$p_allow_protected ) {
+			user_ensure_unprotected( $p_user_id );
+		}
 
 		$t_password = auth_process_plain_password( $p_password );
 
