@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.79 $
-	# $Author: beerfrick $
-	# $Date: 2003-08-24 10:02:33 $
+	# $Revision: 1.80 $
+	# $Author: vboctor $
+	# $Date: 2003-08-31 11:32:20 $
 	#
-	# $Id: strings_german.txt,v 1.79 2003-08-24 10:02:33 beerfrick Exp $
+	# $Id: strings_german.txt,v 1.80 2003-08-31 11:32:20 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -864,4 +864,7 @@ $s_filter_resolved = "Erledigt";
 
 $s_attachments = "Angehängte Datei(en)";
 $s_attachment_alt = "D";
+
+# PHPMailer
+$s_phpmailer_language = 'de';
 ?>

@@ -8,11 +8,11 @@
 	# Portuguese Brazil: Felipe Tonioli, tonioli@easyline.com.br
 	# Portuguese Brazil: Fernando Machado, fm-nospam@fmachado.com
 	# -------------------------------------------------
-	# $Revision: 1.53 $
-	# $Author: beerfrick $
-	# $Date: 2003-08-24 10:02:33 $
+	# $Revision: 1.54 $
+	# $Author: vboctor $
+	# $Date: 2003-08-31 11:32:20 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.53 2003-08-24 10:02:33 beerfrick Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.54 2003-08-31 11:32:20 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -861,4 +861,7 @@ $s_filter_resolved = "Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'br';
 ?>

@@ -7,11 +7,11 @@
 
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt  V0.1
 	# -------------------------------------------------
-	# $Revision: 1.52 $
-	# $Author: beerfrick $
-	# $Date: 2003-08-24 10:02:33 $
+	# $Revision: 1.53 $
+	# $Author: vboctor $
+	# $Date: 2003-08-31 11:32:21 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.52 2003-08-24 10:02:33 beerfrick Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.53 2003-08-31 11:32:21 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -860,4 +860,7 @@ $s_filter_resolved = "Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
+
+# PHPMailer
+$s_phpmailer_language = 'br';
 ?>

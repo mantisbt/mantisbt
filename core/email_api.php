@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.62 2003-08-31 10:17:08 vboctor Exp $
+	# $Id: email_api.php,v 1.63 2003-08-31 11:32:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -600,6 +600,11 @@
 			include_once( $t_phpMailer_path . 'class.phpmailer.php');
 			$mail = new phpmailer;
 			$mail->PluginDir = $t_phpMailer_path;
+
+			# Support PHPMailer v1.7x
+			if ( method_exists( $mail, 'SetLanguage' ) ) {
+				$mail->SetLanguage( lang_get( 'phpmailer_language' ), $t_phpMailer_path . 'language' . DIRECTORY_SEPARATOR );
+			}
 
 			# Select the method to send mail
 			switch ( $g_phpMailer_method ) {
