@@ -27,7 +27,8 @@ Mantis ChangeLog
  * Fix #3050: Setting Assigned To to null causes Status to change to assigned
  * Fix #3055: (Non-email) URLs containing '@' characters are now linked correctly.
  * Fix #3058: Clicking on view_all_bug_page.php results in 'file download' popup.
-
+ * Fix #2953: 'View all bugs page empty'.  We now disabled compression if zlib isn't available to php.  See notes in the config_defaults_inc.php for information on enabling zlib on Windows.
+	
 2003.02.26  -  0.18.0a3
 
  * Behaviour change: allow bug IDs to get replaced when they are preceeded by any character that is not a letter, a number, or an underscore instead of requiring them to be preceeded by whitespace
