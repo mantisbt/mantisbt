@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.19 2002-10-29 09:27:47 jfitzell Exp $
+	# $Id: bug_api.php,v 1.20 2002-11-19 05:31:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -218,6 +218,16 @@
 				$p_profile_id, $p_summary, $p_view_state,
 				$p_description, $p_steps_to_reproduce, $p_additional_info ) {
 
+		$c_summary				= db_prepare_string( $p_summary );
+		$c_description			= db_prepare_string( $p_description );
+
+		# empty( trim( $c_summary ) ) is not accepted by PHP
+		$t_summary = trim( $c_summary );
+		$t_description = trim( $c_description );
+		if ( empty( $t_summary ) || empty( $t_description ) ) {
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
 		$c_project_id			= db_prepare_int( $p_project_id );
 		$c_reporter_id			= db_prepare_int( $p_reporter_id );
 		$c_handler_id			= db_prepare_int( $p_handler_id );
@@ -231,9 +241,7 @@
 		$c_version				= db_prepare_string( $p_version );
 		$c_build				= db_prepare_string( $p_build );
 		$c_profile_id			= db_prepare_int( $p_profile_id );
-		$c_summary				= db_prepare_string( $p_summary );
 		$c_view_state			= db_prepare_int( $p_view_state );
-		$c_description			= db_prepare_string( $p_description );
 		$c_steps_to_reproduce	= db_prepare_string( $p_steps_to_reproduce );
 		$c_additional_info		= db_prepare_string( $p_additional_info );
 
@@ -396,6 +404,19 @@
 	function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false ) {
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_bug_data		= bug_prepare_db( $p_bug_data );
+
+		$t_summary = trim( $c_bug_data->summary );
+		if ( empty( $t_summary ) ) {
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		if ( $p_update_extended )
+		{
+			$t_description = trim( $c_bug_data->description );
+			if ( empty( $t_description ) ) {
+				trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			}
+		}
 
 		$t_old_data = bug_get( $p_bug_id, true );
 
