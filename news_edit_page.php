@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_edit_page.php,v 1.38 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: news_edit_page.php,v 1.39 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,7 +37,7 @@
    	$v_headline = string_attribute( $v_headline );
    	$v_body 	= string_textarea( $v_body );
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( lang_get( 'edit_news_title' ) ) ?>
 <?php html_page_top2() ?>
 
 <?php # Edit News Form BEGIN ?>

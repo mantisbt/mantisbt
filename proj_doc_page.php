@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.40 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: proj_doc_page.php,v 1.41 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -34,7 +34,7 @@
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( lang_get( 'docs_link' ) ) ?>
 <?php html_page_top2() ?>
 
 <br />

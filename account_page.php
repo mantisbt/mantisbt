@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.45 2004-05-26 02:28:54 int2str Exp $
+	# $Id: account_page.php,v 1.46 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -48,7 +48,7 @@
 
 	# extracts the user information for the currently logged in user
 	# and prefixes it with u_
-    $row = user_get_row( auth_get_current_user_id() );
+	$row = user_get_row( auth_get_current_user_id() );
 	extract( $row, EXTR_PREFIX_ALL, 'u' );
 
 	$t_ldap = ( LDAP == config_get( 'login_method' ) );
@@ -57,7 +57,7 @@
 	#  that version instead of the one in the DB
 	$u_email = user_get_email( $u_id, $u_username );
 
-	html_page_top1();
+	html_page_top1( lang_get( 'account_link' ) );
 	html_page_top2();
 ?>
 

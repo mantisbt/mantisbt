@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_menu_page.php,v 1.32 2004-04-12 21:04:36 jlatour Exp $
+	# $Id: news_menu_page.php,v 1.33 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( lang_get( 'edit_news_link' ) ) ?>
 <?php html_page_top2() ?>
 
 <?php # Add News Form BEGIN ?>

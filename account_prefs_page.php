@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_page.php,v 1.17 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_prefs_page.php,v 1.18 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -45,7 +45,7 @@
 <?php
 	include( 'account_prefs_inc.php' );
 
-	html_page_top1();
+	html_page_top1( lang_get( 'change_preferences_link' ) );
 	html_page_top2();
 
 	edit_account_prefs();

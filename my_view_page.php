@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.6 2004-07-15 13:32:11 vboctor Exp $
+	# $Id: my_view_page.php,v 1.7 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 
 	compress_enable();
 
-	html_page_top1();
+	html_page_top1( lang_get( 'my_view_link' ) );
 
 	if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 		html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.38 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: summary_page.php,v 1.39 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -75,7 +75,7 @@
 		$t_orcttab .= '</td>';
 	}
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( lang_get( 'summary_link' ) ) ?>
 <?php html_page_top2() ?>
 
 <br />

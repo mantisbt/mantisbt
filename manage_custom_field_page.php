@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_page.php,v 1.16 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: manage_custom_field_page.php,v 1.17 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,7 @@
 <?php 
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
-	html_page_top1();
+	html_page_top1( lang_get( 'manage_custom_field_link' ) );
 	html_page_top2();
 
 	print_manage_menu( 'manage_custom_field_page.php' );

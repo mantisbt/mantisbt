@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.32 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: account_prof_menu_page.php,v 1.33 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,7 +33,7 @@
 	# protected account check
 	current_user_ensure_unprotected();
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( lang_get( 'manage_profiles_link' ) ) ?>
 <?php html_page_top2() ?>
 
 <?php # Add Profile Form BEGIN ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.40 2004-07-11 08:22:59 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.41 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,7 +46,7 @@
 
 	$t_project_id			= helper_get_current_project();
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( lang_get( 'report_bug_link' ) ) ?>
 <?php html_page_top2() ?>
 
 <br />

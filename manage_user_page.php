@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.53 2004-05-25 13:38:52 vboctor Exp $
+	# $Id: manage_user_page.php,v 1.54 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -64,7 +64,7 @@
 		$c_hide = 1;
 	}
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( lang_get( 'manage_users_link' ) ) ?>
 <?php html_page_top2() ?>
 
 <?php print_manage_menu( 'manage_user_page.php' ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.10 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_page.php,v 1.11 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,7 +28,7 @@
 	}
 
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( lang_get( 'manage_projects_link' ) ) ?>
 <?php html_page_top2() ?>
 
 <?php print_manage_menu( 'manage_proj_page.php' ) ?>

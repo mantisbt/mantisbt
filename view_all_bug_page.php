@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.53 $
-	# $Author: int2str $
-	# $Date: 2004-07-08 03:50:15 $
+	# $Revision: 1.54 $
+	# $Author: vboctor $
+	# $Date: 2004-07-20 15:51:50 $
 	#
-	# $Id: view_all_bug_page.php,v 1.53 2004-07-08 03:50:15 int2str Exp $
+	# $Id: view_all_bug_page.php,v 1.54 2004-07-20 15:51:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,7 +36,7 @@
 
 	compress_enable();
 
-	html_page_top1();
+	html_page_top1( lang_get( 'view_bugs_link' ) );
 
 	if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 		html_meta_redirect( 'view_all_bug_page.php?page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
