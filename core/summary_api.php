@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.4 2002-08-27 10:08:08 jfitzell Exp $
+	# $Id: summary_api.php,v 1.5 2002-09-26 22:55:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -143,6 +143,8 @@
 		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
 		else $specific_where = " project_id='$g_project_cookie_val'";
 
+		$t_row_count = 0;
+
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
@@ -183,7 +185,7 @@
 			$total_bug_count	= str_pad( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i );
+			$t_bgcolor = alternate_colors( $t_row_count );
 
 			PRINT '<tr align="center">';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
@@ -193,6 +195,8 @@
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT '</td>';
 			PRINT '</tr>';
+
+			$t_row_count++;
 			} #end if
 		} # end for
 	}
