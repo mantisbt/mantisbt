@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.180 2004-07-18 16:05:10 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.181 2004-07-24 14:04:45 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1199,7 +1199,7 @@
 	# --------------------
 	# Read status to icon mapping
 	$g_unread_icon_arr = array (
-		READ         => 'mantis-space.gif',
+		READ         => 'mantis_space.gif',
 		UNREAD       => 'unread.gif'
 	);
 	# --------------------

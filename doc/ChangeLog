@@ -17,6 +17,7 @@ Mantis ChangeLog
 - 0004175: [bugtracker] Links are not hyperlinked properly if containing '[' or ']' (vboctor)
 - 0003714: [upgrade] Please add in a way to transfer attachments from the database to disk (thraxisp)
 - 0003877: [email] Upgrade to PHPMailer 1.72 (vboctor)
+- 0002220: [installation] usage of consistent naming schema for images (vboctor)
 - Updated German and Brazilian Portuguese language.
 
 2004.07.20  -  0.19.0a2
