@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.19 2004-09-09 17:56:37 thraxisp Exp $
+	# $Id: graph_api.php,v 1.20 2004-09-10 00:29:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -360,11 +360,11 @@
 		if ( ALL_PROJECTS == $t_project_id ) {
 			$specific_where = '1=1';
 		} else {
-			$specific_where = " $t_cat_table.project_id='$t_project_id'";
+			$specific_where = " t.project_id='$t_project_id'";
 		}
 
 		$query = "SELECT COUNT(*)
-				FROM $t_bug_table
+				FROM $t_bug_table as t
 				WHERE $specific_where";
 		$result = db_query( $query );
 		$total = db_result( $result, 0 );
@@ -372,9 +372,9 @@
 			return;
 		}
 
-		$query = "SELECT $t_cat_table.category, $t_cat_table.project_id, count($t_bug_table.id) as bugs 
-				FROM $t_cat_table LEFT JOIN $t_bug_table 
-				USING (category, project_id) 
+		$query = "SELECT t.category, t.project_id, count(b.id) as bugs 
+				FROM $t_cat_table as t LEFT JOIN $t_bug_table as b
+				ON t.category = b.category AND t.project_id = b.project_id 
 				WHERE $specific_where
 				GROUP BY project_id, category
 				ORDER BY project_id, category";
