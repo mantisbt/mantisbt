@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.74 2004-04-02 11:22:05 yarick123 Exp $
+	# $Id: email_api.php,v 1.75 2004-04-02 14:19:37 yarick123 Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -564,8 +564,6 @@
 				$g_phpMailer_smtp->Quit();
 				$g_phpMailer_smtp->Close();
 			}
-
-			$g_phpMailer_smtp->SmtpClose();
 			$g_phpMailer_smtp = null;
 		}
 	}
