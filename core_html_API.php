@@ -25,7 +25,24 @@
 	### --------------------
 	# (3)
 	function print_title( $p_title ) {
-	   PRINT "<title>$p_title</title>";
+		global 	$g_show_project_in_title,
+				$g_project_cookie_val;
+
+		if ( $g_show_project_in_title==1 ) {
+			$t_project_name = get_project_name($g_project_cookie_val);
+
+			if ( empty( $t_project_name ) ) {
+				PRINT "<title>$p_title</title>";
+			} else {
+				PRINT "<title>$p_title - $t_project_name</title>";
+			}
+		} else if ( $g_show_project_in_title==2 ) {
+			$t_project_name = get_project_name($g_project_cookie_val);
+
+			PRINT "<title>$t_project_name</title>";
+		} else {
+			PRINT "<title>$p_title</title>";
+		}
 	}
 	### --------------------
 	# (4) the css include file to use, is likely to be either empty or css_inc.php
@@ -54,15 +71,10 @@
 	# (8) This prints the title that is visible in the main panel of the browser
 	function print_header( $p_title="Mantis" ) {
 		global 	$g_show_project_in_title,
-				$g_project_cookie_val,
-				$g_mantis_project_table;
+				$g_project_cookie_val;
 
 		if ( $g_show_project_in_title==1 ) {
-			$query = "SELECT name
-					FROM $g_mantis_project_table
-					WHERE id='$g_project_cookie_val'";
-			$result = db_query( $query );
-			$t_project_name = db_result( $result, 0, 0 );
+			$t_project_name = get_project_name($g_project_cookie_val);
 
 			if ( empty( $t_project_name ) ) {
 				PRINT "<h3>$p_title</h3>";
@@ -70,11 +82,7 @@
 				PRINT "<h3>$p_title - $t_project_name</h3>";
 			}
 		} else if ( $g_show_project_in_title==2 ) {
-			$query = "SELECT name
-					FROM $g_mantis_project_table
-					WHERE id='$g_project_cookie_val'";
-			$result = db_query( $query );
-			$t_project_name = db_result( $result, 0, 0 );
+			$t_project_name = get_project_name($g_project_cookie_val);
 
 			PRINT "<h3>$t_project_name</h3>";
 		} else {
