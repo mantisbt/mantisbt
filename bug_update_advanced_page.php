@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.75 2004-08-03 13:47:47 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.76 2004-08-24 13:30:20 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,6 +46,7 @@
 <tr>
 	<td class="form-title" colspan="3">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+		<input type="hidden" name="update_mode"			value="1" />
 		<?php echo lang_get( 'updating_bug_advanced_title' ) ?>
 	</td>
 	<td class="right" colspan="3">

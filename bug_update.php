@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.68 2004-08-18 17:13:01 thraxisp Exp $
+	# $Id: bug_update.php,v 1.69 2004-08-24 13:30:20 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,6 +23,7 @@
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
+	$f_update_mode = gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 
@@ -101,36 +102,54 @@
 		}
 	}
 
-	switch ( $t_bug_data->status ) {
-		case config_get( 'bug_resolved_status_threshold' ):
-			bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version, 
+	if ( ( $t_old_bug_status != $t_bug_data->status ) && ( FALSE == $f_update_mode ) ) {
+		# handle status transitions that come from pages other than bug_*update_page.php
+		# this does the minimum to act on the bug and sends a specific message
+		switch ( $t_bug_data->status ) {
+			case config_get( 'bug_resolved_status_threshold' ):
+				# bug_resolve updates the status and bugnote and sends message
+				bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version, 
 						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id);
 
-			if ( $f_close_now ) {
-				bug_set_field( $f_bug_id, 'status', CLOSED );
-			}
-			break;
-
-		case CLOSED:
-			bug_close( $f_bug_id, $f_bugnote_text );
-			break;
-
-		case config_get( 'bug_reopen_status' ):
-			if ( $t_old_bug_status >= config_get( 'bug_resolved_status_threshold' ) ) {
-				bug_reopen( $f_bug_id, $f_bugnote_text );
+				if ( $f_close_now ) {
+					bug_set_field( $f_bug_id, 'status', CLOSED );
+				}
 				break;
-			} # else fall through to default
 
-		default:				
-			# Add a bugnote if there is one
-			if ( !is_blank( $f_bugnote_text ) ) {
-				bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
-			}
+			case CLOSED:
+				# bug_close updates the status and bugnote and sends message
+				bug_close( $f_bug_id, $f_bugnote_text );
+				break;
 
-			# Update the bug entry
-			bug_update( $f_bug_id, $t_bug_data, true );
-			break;
-	}
+			case config_get( 'bug_reopen_status' ):
+				if ( $t_old_bug_status >= config_get( 'bug_resolved_status_threshold' ) ) {
+					# bug_reopen updates the status and bugnote and sends message
+					bug_reopen( $f_bug_id, $f_bugnote_text );
+					break;
+				} # else fall through to default
+
+			default:				
+				# Add a bugnote if there is one
+				if ( !is_blank( $f_bugnote_text ) ) {
+					bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
+				}
+
+				# Update the bug entry
+				# bug_update sends a generic message
+				bug_update( $f_bug_id, $t_bug_data, true );
+				break;
+		}
+	}else{
+		# handle other updates that come from bug_*update_page.php or where status has not changed
+		
+		# Add a bugnote if there is one
+		if ( !is_blank( $f_bugnote_text ) ) {
+			bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
+		}
+
+		# Update the bug entry
+		bug_update( $f_bug_id, $t_bug_data, true );
+	}	
 
 	helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
   

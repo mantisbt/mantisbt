@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.35 2004-08-24 01:44:16 thraxisp Exp $
+	# $Id: bug_actiongroup.php,v 1.36 2004-08-24 13:30:19 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -76,17 +76,17 @@
 		case 'ASSIGN':
 			$f_assign = gpc_get_int( 'assign' );
 			if ( ON == config_get( 'auto_set_status_to_assigned' ) ) {
-				$t_ass_val = config_get( 'bug_assigned_status' );
+				$t_assign_status = config_get( 'bug_assigned_status' );
 			} else {
-				$t_ass_val = $t_status;
+				$t_assign_status = $t_status;
 			}
-			$t_threshold = access_get_status_threshold( $t_ass_val, bug_get_field( $t_bug_id, 'project_id' ) );
+			$t_threshold = access_get_status_threshold( $t_assign_status, bug_get_field( $t_bug_id, 'project_id' ) );
 			if ( access_has_bug_level( $t_threshold , $t_bug_id, $f_assign ) &&
 				 access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id ) &&
-					bug_check_workflow($t_status, $t_ass_val )	) {
+					bug_check_workflow($t_status, $t_assign_status )	) {
 				bug_assign( $t_bug_id, $f_assign );
 			} else {
-				if ( bug_check_workflow($t_status, $t_ass_val ) ) {
+				if ( bug_check_workflow($t_status, $t_assign_status ) ) {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
@@ -96,7 +96,7 @@
 
 		case 'RESOLVE':
 			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-			if ( access_has_bug_level( access_get_status_threshold( $t_ass_val, bug_get_field( $t_bug_id, 'project_id' ) ), $t_bug_id ) &&
+			if ( access_has_bug_level( access_get_status_threshold( $t_resolved_status, bug_get_field( $t_bug_id, 'project_id' ) ), $t_bug_id ) &&
 				 		( $t_status < $t_resolved_status ) && 
 						bug_check_workflow($t_status, $t_resolved_status ) ) {
 				$f_resolution = gpc_get_int( 'resolution' );
