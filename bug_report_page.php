@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.4 2002-12-04 08:05:45 jfitzell Exp $
+	# $Id: bug_report_page.php,v 1.5 2002-12-06 18:48:20 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -107,7 +107,7 @@
 	</td>
 </tr>
 <?php
-$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
 foreach( $t_related_custom_field_ids as $id ) {
 	$t_def = custom_field_get_definition($id);
 	if( !$t_def['advanced'] ) {

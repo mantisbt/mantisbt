@@ -10,7 +10,6 @@
 <?php
 	check_access( MANAGER );
 
-	$f_project_id                = gpc_get_int(    'f_project_id' );
 	$f_field_id		             = gpc_get_int(    'f_field_id' );
 	$t_values['name']            = gpc_get_string( 'f_name' );
 	$t_values['type']            = gpc_get_int(    'f_type' );
@@ -25,7 +24,7 @@
 
 	custom_field_update( $f_field_id, $t_values );
 
-	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id=' . $f_project_id;
+	$t_redirect_url = 'manage_custom_field_page.php';
 ?>
 <?php print_page_top1() ?>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.12 2002-12-06 09:12:56 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.13 2002-12-06 18:48:20 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -153,7 +153,7 @@
 
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <?php
-$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition($t_id);
 	if( !$t_def['advanced'] ) {

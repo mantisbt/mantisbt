@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.23 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: html_api.php,v 1.24 2002-12-06 18:48:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -407,12 +407,14 @@
 
 		$t_manage_page 				= 'manage_page.php';
 		$t_manage_project_menu_page = 'manage_proj_menu_page.php';
+		$t_manage_custom_field_page = 'manage_custom_field_page.php';
 		$t_manage_user_create_page 	= 'manage_user_create_page.php';
 		$t_documentation_page 		= 'documentation_page.php';
 
 		switch ( $p_page ) {
 			case $t_manage_page				: $t_manage_page 				= ''; break;
 			case $t_manage_project_menu_page: $t_manage_project_menu_page 	= ''; break;
+			case $t_manage_custom_field_page: $t_manage_custom_field_page 	= ''; break;
 			case $t_manage_user_create_page	: $t_manage_user_create_page 	= ''; break;
 			case $t_documentation_page		: $t_documentation_page 		= ''; break;
 		}
@@ -420,6 +422,7 @@
 		PRINT '<br /><div align="center">';
 			print_bracket_link( $t_manage_page, lang_get( 'manage_users_link' ) );
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
+			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
 			print_bracket_link( $t_manage_user_create_page, lang_get( 'create_new_account_link' ) );
 			print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
 		PRINT '</div>';

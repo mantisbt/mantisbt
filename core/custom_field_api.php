@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.7 2002-12-06 18:01:56 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.8 2002-12-06 18:48:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -464,24 +464,40 @@ CREATE TABLE mantis_custom_field_project_table (
 	#===================================
 
 	# --------------------
-	# Return an array of ids of custom fields related to the specified project
-	# if the project_id parameter is empty (or 0) return all existing custom
-	# field ids  (the array may be empty)
-	function custom_field_get_ids( $p_project_id = 0 ) {
+	# Return an array all custom field ids
+	function custom_field_get_ids() {
+		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
+		$query = "SELECT id FROM
+				  $t_custom_field_table
+				  ORDER BY name ASC";
+		$result = db_query( $query );
+
+		$t_row_count = db_num_rows( $result );
+		$t_ids = array();
+
+		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			array_push( $t_ids, $row['id'] );
+		}
+
+		return $t_ids;
+	}
+
+	# --------------------
+	# Return an array of ids of custom fields bound to the specified project
+	#
+	# The ids will be sorted based on the sequence number associated with the binding
+	function custom_field_get_bound_ids( $p_project_id ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_custom_field_project_table = config_get( 'mantis_custom_field_project_table' );
 		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		if( 0 == $p_project_id ) {
-			$query = "SELECT id as field_id FROM
-					  $t_custom_field_table";
-		} else {
-			$query = "SELECT field_id FROM
-					  $t_custom_field_project_table p, $t_custom_field_table f
-					  WHERE p.project_id='$c_project_id'
-						AND p.field_id = f.id
-					  ORDER BY p.sequence ASC";
-		}
+		$query = "SELECT field_id FROM
+				  $t_custom_field_project_table p, $t_custom_field_table f
+				  WHERE p.project_id='$c_project_id'
+					AND p.field_id = f.id
+				  ORDER BY p.sequence ASC";
 		$result = db_query( $query );
 
 		$t_row_count = db_num_rows( $result );

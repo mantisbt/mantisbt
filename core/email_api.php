@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.27 2002-12-06 15:01:00 vboctor Exp $
+	# $Id: email_api.php,v 1.28 2002-12-06 18:48:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -422,7 +422,7 @@
 
 		# @@@ Add support for access levels, possible only send the ones that are available for access level EVERYBODY
 		if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
-			$t_related_custom_field_ids = custom_field_get_ids( $v_project_id );
+			$t_related_custom_field_ids = custom_field_get_bound_ids( $v_project_id );
 			foreach( $t_related_custom_field_ids as $t_id ) {
 				$t_def = custom_field_get_definition( $t_id );
 

@@ -11,13 +11,12 @@
 	check_access( MANAGER );
 
 	$f_field_id		= gpc_get_int( 'f_field_id' );
-	$f_project_id	= gpc_get_int( 'f_project_id' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
 <?php
-	print_manage_menu( 'manage_proj_custom_field_edit_page.php' );
+	print_manage_menu( 'manage_custom_field_edit_page.php' );
 
 	custom_field_ensure_exists( $f_field_id );
 
@@ -26,8 +25,7 @@
 
 <br />
 <div align="center">
-<form method="post" action="manage_proj_custom_field_update.php">
-<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+<form method="post" action="manage_custom_field_update.php">
 <input type="hidden" name="f_field_id" value="<?php echo $f_field_id ?>" />
 <table class="width50" cellspacing="1">
 <tr>
@@ -136,7 +134,7 @@
 <br />
 
 <div class="border-center">
-	<form method="post" action="manage_proj_custom_field_delete.php">
+	<form method="post" action="manage_custom_field_delete.php">
 	<input type="hidden" name="f_field_id" value="<?php echo $f_field_id ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
 	</form>

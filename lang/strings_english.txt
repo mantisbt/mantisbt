@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.94 $
+	# $Revision: 1.95 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-06 18:23:50 $
+	# $Date: 2002-12-06 18:48:21 $
 	#
-	# $Id: strings_english.txt,v 1.94 2002-12-06 18:23:50 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.95 2002-12-06 18:48:21 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -487,6 +487,7 @@
 	$s_filter_button = 'Apply Filter';
 	$s_manage_users_link = 'Manage Users';
 	$s_manage_projects_link = 'Manage Projects';
+	$s_manage_custom_field_link = 'Manage Custom Fields';
 	$s_create_new_account_link = 'Create Account';
 	$s_projects_link = 'Projects';
 	$s_documentation_link = 'Documentation';

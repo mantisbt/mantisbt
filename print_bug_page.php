@@ -222,7 +222,7 @@
 
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <?php
-$t_related_custom_field_ids = custom_field_get_ids( helper_get_current_project() );
+$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition($t_id);
 ?>
