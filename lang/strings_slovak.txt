@@ -9,11 +9,11 @@
 	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.8 $
+	# $Revision: 1.9 $
 	# $Author: jlatour $
-	# $Date: 2003-05-07 15:48:29 $
+	# $Date: 2003-05-12 23:02:46 $
 	#
-	# $Id: strings_slovak.txt,v 1.8 2003-05-07 15:48:29 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.9 2003-05-12 23:02:46 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -156,7 +156,7 @@
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'CHYBA: Toto konto je chránené. Nemáte povolený vstup dokiaµ nebude ochrana odstránená.';
 	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'CHYBA: Prístup zakázaný.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'CHYBA: Upload súboru sa nepodaril. Popýtajte va¹eho administrátora aby spustil skript admin_check pre vyrie¹enie tohto problému.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'CHYBA: Zlyhalo';
+	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'CHYBA: Zlyhalo uploadovanie súboru.  Toto je pravdepodobne kvoli tomu, ¾e veµkos» súboru bola väè¹ia ako je povolené v PHP kofigurácii.';
 	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'CHYBA: Chýba potrebný parameter pre túto stránku.';
 	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'CHYBA: Vybrané pou¾ívateµské meno sa u¾ pou¾íva.  Prosím choïte naspä» a vyberte si iné.';
 	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='CHYBA: Konfiguraèná voµba nenájdená.';
