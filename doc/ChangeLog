@@ -10,6 +10,7 @@ Mantis ChangeLog
  * Fix #3334: Invalid links in bug reminder emails.
  * Fix #3353: History not updated in bug deletion email.
  * Fix #3389: Problems upgrading existing users to administrator.
+ * Fix #3417: Setting $g_manage_news_threshold to 'DEVELOPER' can't add new news.
  * Sec #0000: Various Cross-Site Scripting vulnerabilities fixed (thanks to Paul Richards).
  * Languages: Updated French localisation.
 

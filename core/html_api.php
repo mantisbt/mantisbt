@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.77 2003-08-22 11:48:34 vboctor Exp $
+	# $Id: html_api.php,v 1.78 2003-11-12 20:40:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -370,7 +370,7 @@
 
 				echo '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a> | ';
 
-				if ( access_has_project_level( MANAGER ) ) {
+				if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
 					if ( access_has_project_level( ADMINISTRATOR ) ) {
 					  $t_link = 'manage_user_page.php';
 					} else {
@@ -378,7 +378,7 @@
 					}
 					echo "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a> | ';
 				}
-				if ( access_has_project_level( MANAGER ) ) {
+				if ( access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
 					# Admin can edit news for All Projects (site-wide)
 					if ( ( ALL_PROJECTS != helper_get_current_project() ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
 						echo '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
