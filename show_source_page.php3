@@ -9,47 +9,47 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !access_level_check_greater_or_equal( "reporter" ) ) {
+	### Check to make sure that the access is legal
+	### NOTE: enabling this can be a rather bad idea except for debugging
+	if ( $g_show_source==1 ) {
+		### not an admin
+		if ( !access_level_check_greater_or_equal( "administrator" ) ) {
+			### need to replace with access error page
+			header( "Location: $g_logout_page" );
+			exit;
+		}
+	}
+	### not supposed to be viewing
+	else if ( $g_show_source==0 ) {
 		### need to replace with access error page
 		header( "Location: $g_logout_page" );
 		exit;
 	}
-
-	### Delete the profile
-	$query = "DELETE
-			FROM $g_mantis_user_profile_table
-    		WHERE id='$f_id'";
-    $result = mysql_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
-<?
-	if ( $result ) {
-		print_meta_redirect( $g_account_profile_manage_page, $g_wait_time );
-	}
-?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
-
 <p>
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
 <div align=center>
 <?
-	if ( $result ) {
-		PRINT "Deleted profile...<p>";
+	PRINT "Showing source for: $f_url<p>";
+	### Print source
+	$t_ver = phpversion();
+	if ( floor( $t_ver )>=4 ) {
+		show_source( $DOCUMENT_ROOT.$f_url );
 	}
 	else {
-		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "This version ($t_ver) of php does not support show_source()";
 	}
 ?>
-<p>
-<a href="<? echo $g_account_profile_manage_page ?>">Click here to proceed</a>
 </div>
 
 <? print_footer() ?>

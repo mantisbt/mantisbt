@@ -28,6 +28,10 @@
 		$f_limit_view = $g_view_limit_val;
 	}
 
+	if ( empty( $f_limit_view )) {
+		$f_limit_view = $g_default_view_limit;
+	}
+
 	### basically we toggle between ASC and DESC if the user clicks the
 	### same sort order
 	if ( isset( $f_dir ) ) {
@@ -47,7 +51,7 @@
 
 <p>
 <div align=center>
-[ <a href="<? echo $g_view_prefs_page ?>">Viewing Preferences</a> ]
+[ <a href="<? echo $g_account_prefs_page ?>">Viewing Preferences</a> ]
 </div>
 
 <p>
@@ -157,7 +161,17 @@
 	?>
 	<tr bgcolor=<? echo $status_color ?> align=center>
 		<td>
+		<?
+			if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" ) ) {
+		?>
+			<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $v_id ?>"><? echo $v_id ?></a>
+		<?
+			} else {
+		?>
 			<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $v_id ?>"><? echo $v_id ?></a>
+		<?
+			}
+		?>
 		</td>
 		<td>
 			<? if ($bugnote_count > 0) echo $bugnote_count ?>

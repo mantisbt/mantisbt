@@ -9,7 +9,7 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !access_level_check_greater( "viewer" ) ) {
+	if ( !access_level_check_greater_or_equal( "viewer" ) ) {
 		# should be an access error page
 		header( "Location: $g_logout_page" );
 		exit;

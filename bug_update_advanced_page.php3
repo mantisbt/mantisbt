@@ -23,7 +23,7 @@
 
 <p>
 <div align=center>
-[ <a href="<? echo $g_view_bug_yadvanced_page ?>?f_id=<? echo $f_id ?>">Back</a> ]
+[ <a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id ?>">Back</a> ]
 </div>
 
 <?
@@ -78,8 +78,8 @@
 	$v2_description = string_display( $v2_description );
 	$v2_steps_to_reproduce = string_display( $v2_steps_to_reproduce );
 	$v2_additional_information = string_display( $v2_additional_information );
-	$v_date_submitted = date( "m-d H:i", sql_to_unix_time( $v_date_submitted ) );
-	$v_last_updated = date( "m-d H:i", sql_to_unix_time( $v_last_updated ) );
+	#$v_date_submitted = date( "m-d H:i", sql_to_unix_time( $v_date_submitted ) );
+	#$v_last_updated = date( "m-d H:i", sql_to_unix_time( $v_last_updated ) );
 ?>
 
 <p>
@@ -134,10 +134,11 @@
 			</select>
 		</td>
 		<td>
-			<? echo $v_date_submitted ?>
+			<input type=hidden name=f_date_submitted value="<? echo $v_date_submitted ?>">
+			<? echo date( "m-d H:i", sql_to_unix_time( $v_date_submitted ) ) ?>
 		</td>
 		<td>
-			<? echo $v_last_updated ?>
+			<? echo date( "m-d H:i", sql_to_unix_time( $v_last_updated ) ) ?>
 		</td>
 	</tr>
 	<tr>

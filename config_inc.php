@@ -53,9 +53,15 @@
 	#--------------------
 
 	#--------------------
-	# toggling advanced interfaces
-	$g_show_advanced_report      = 1;      # 1 to enable - 0 to disable
-	$g_show_advanced_update      = 1;      # 1 to enable - 0 to disable
+	# toggling advanced interfaces      # 1 to enable - 0 to disable
+	$g_show_advanced_report      = 1;
+	$g_show_advanced_update      = 1;
+
+	$g_show_version              = 0;
+
+	# requires PHP4
+	# 0 = disabled; 1 = admin only; 2 = anyone
+	$g_show_source               = 0;
 	#--------------------
 
 	# core file variables
@@ -94,13 +100,15 @@
 	# bug view/update
 	$g_view_bug_all_page           = "view_bug_all_page".$g_php;
 	$g_view_bug_page               = "view_bug_page".$g_php;
-	$g_view_bug_yadvanced_page     = "view_bug_advanced_page".$g_php;
+	$g_view_bug_advanced_page      = "view_bug_advanced_page".$g_php;
 
 	$g_bug_delete_page             = "bug_delete_page".$g_php;
 	$g_bug_delete                  = "bug_delete".$g_php;
 	$g_bug_update_page             = "bug_update_page".$g_php;
 	$g_bug_update_advanced_page    = "bug_update_advanced_page".$g_php;
 	$g_bug_update                  = "bug_update".$g_php;
+
+	$g_bug_reopen                  = "bug_reopen".$g_php;
 
 	# vote
 	$g_bug_vote_add                = "bug_vote_add".$g_php;
@@ -172,6 +180,9 @@
 	# view prefs
 	$g_view_prefs_page             = "view_prefs_page".$g_php;
 	$g_view_prefs_update           = "view_prefs_update".$g_php;
+
+	# debug only
+	$g_show_source_page            = "show_source_page".$g_php;
 
 	# errors
 	$g_mysql_error_page            = "mysql_error_page".$g_php;
@@ -250,6 +261,6 @@
 
 	#--------------------
 	#version
-	$g_mantis_version       = "0.10.3";
+	$g_mantis_version       = "0.11.0";
 	#--------------------
 ?>

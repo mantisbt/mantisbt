@@ -7,7 +7,7 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	### check access level
-	if ( access_level_check_greater( "reporter" ) ) {
+	if ( access_level_check_greater_or_equal( "reporter" ) ) {
 ?>
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>

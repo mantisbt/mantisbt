@@ -19,7 +19,7 @@ To Do:
  * More documentation on installtion, configuration, and customization
  * Further document core_API.php
 
-12.09.2000	-	0.10.3
+12.10.2000	-	0.11.0
 
  * Added summary by date
  * Fixed bug with Bugnote Add button showing up i the wrong places
@@ -40,6 +40,8 @@ To Do:
  * Modified version to be an enum.
  * Added version editing capability
  * Added account preferences
+ * Added show source debug capability - requires PHP4
+ * Renamed access_level_check_greater() to access_level_check_greater_or_equal()
 
 12.06.2000	-	0.10.2
 

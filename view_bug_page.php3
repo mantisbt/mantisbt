@@ -77,7 +77,7 @@
 
 <p>
 <div align=center>
-[ <a href="<? echo $g_view_bug_yadvanced_page ?>?f_id=<? echo $f_id?>">Advanced View</a> ]
+[ <a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id?>">Advanced View</a> ]
 </div>
 
 <p>
@@ -234,13 +234,13 @@
 	<form method=post action="<? echo $g_bug_update_page ?>">
 		<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
-		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=4>
-			<input type=submit value=" Update Bug Information ">
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=3>
+			<input type=submit value=" Update Bug ">
 		</td>
 		</form>
 		<form method=post action="<? echo $g_bug_delete_page ?>">
 		<input type=hidden name=f_id value="<? echo $f_id ?>">
-		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=3>
 			<input type=submit value=" Delete Bug ">
 		</td>
 	</form>
@@ -254,9 +254,21 @@
 </table>
 
 <p>
-<? include( $g_bugnote_include_file ) ?>
-<p>
-<? include( $g_bugnote_add_include_file ) ?>
+<?
+	if ( $v_status=="resolved" ) {
+		PRINT "<div align=center>";
+		PRINT "<form method=post action=\"$g_bug_reopen\">";
+			PRINT "<input type=hidden name=f_id value=\"$v_id\">";
+			PRINT "<input type=submit value=\" Reopen Bug \">";
+		PRINT "</form>";
+		PRINT "</div>";
+	} else {
+		PRINT "<p>";
+		include( $g_bugnote_include_file );
+		PRINT "<p>";
+		include( $g_bugnote_add_include_file );
+	}
+?>
 
 <? print_footer() ?>
 <? print_body_bottom() ?>

@@ -88,8 +88,10 @@
 	}
 	#--------------------
 	function print_footer() {
-		global 	$g_string_cookie_val, $g_webmaster_email,
-				$g_last_access_cookie_val;
+		global 	$g_string_cookie_val, $g_webmaster_email, $g_show_source;
+		global  $DOCUMENT_ROOT, $PHP_SELF;
+
+		print_source_link();
 
 		PRINT "<hr size=1>";
 		PRINT "<address><font size=-1>Copyright (c) 2000</font></address>";
@@ -115,6 +117,30 @@
 		PRINT "</tr>";
 		PRINT "</table>";
 	}
+	#--------------------
+	### checks to see whether we need to be displaying the source link
+	function print_source_link() {
+		global $g_show_source, $g_show_source_page, $PHP_SELF;
+
+		if ( $g_show_source==1 ) {
+			if ( access_level_check_greater_or_equal( "administrator" ) ) {
+				PRINT "<p>";
+				PRINT "<div align=center>";
+				PRINT "<a href=\"$g_show_source_page?f_url=$PHP_SELF\">Show Source</a>";
+				PRINT "</div>";
+			}
+		}
+		else if ( $g_show_source==2 ) {
+			PRINT "<p>";
+			PRINT "<div align=center>";
+			PRINT "<a href=\"$g_show_source_page?f_url=$PHP_SELF\">Show Source</a>";
+			PRINT "</div>";
+		}
+	}
+	#--------------------
+	####################
+	# String printing API
+	####################
 	#--------------------
 	function get_enum_string( $p_field_name ) {
 		global $g_mantis_bug_table;
@@ -475,13 +501,23 @@
 		### get user id
 		$u_id = get_current_user_id();
 
-		db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+		if ( $u_id ) {
+			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			$query = "SELECT $p_table_field
+					FROM $p_table_name
+					WHERE user_id='$u_id'";
+			$result = db_mysql_query( $query );
 
-		$query = "SELECT $p_table_field
-				FROM $p_table_name
-				WHERE user_id='$u_id'";
-		$result = db_mysql_query( $query );
-		return mysql_result( $result, 0 );
+			if ( mysql_num_rows( $result ) > 0 ) {
+				return mysql_result( $result, 0 );
+			}
+			else {
+				return "";
+			}
+		}
+		else {
+			return "";
+		}
 	}
 	#--------------------
 	####################
@@ -568,6 +604,10 @@
 	function access_level_check_equal( $p_access_level ) {
 		global $g_string_cookie_val, $g_mantis_user_table;
 
+		if ( !isset($g_string_cookie_val) ) {
+			return false;
+		}
+
 		$query = "SELECT access_level
 				FROM $g_mantis_user_table
 				WHERE cookie_string='$g_string_cookie_val'";
@@ -582,8 +622,12 @@
 		}
 	}
 	#--------------------
-	function access_level_check_greater( $p_access_level ) {
+	function access_level_check_greater_or_equal( $p_access_level ) {
 		global $g_string_cookie_val, $g_mantis_user_table;
+
+		if ( !isset($g_string_cookie_val) ) {
+			return false;
+		}
 
 		$query = "SELECT access_level
 				FROM $g_mantis_user_table

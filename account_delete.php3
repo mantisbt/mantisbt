@@ -12,10 +12,10 @@
 	### If an account is protected then no one can change the information
 	### This is useful for shared accounts or for demo purposes
 	if ( $f_protected!="on" ) {
-		### Remove account
-	    $query = "DELETE
-	    		FROM $g_mantis_user_table
-	    		WHERE id='$f_id'";
+	    ### Remove aaccount
+    	$query = "DELETE
+    			FROM $g_mantis_user_table
+    			WHERE id='$f_id'";
 	    $result = mysql_query( $query );
 
 	    ### Remove associated profiles
@@ -23,6 +23,12 @@
 	    		FROM $g_mantis_user_profile_table
 	    		WHERE user_id='$f_id'";
 	    $result = mysql_query( $query );
+
+		### Remove associated preferences
+    	$query = "DELETE
+    			FROM $g_mantis_user_pref_table
+    			WHERE user_id='$f_id'";
+    	$result = mysql_query( $query );
 	} ### end if protected
 ?>
 <? print_html_top() ?>

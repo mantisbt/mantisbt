@@ -308,19 +308,19 @@
 ?>
 	<tr align=center>
 
+		<form method=post action="<? echo $g_bug_update_advanced_page ?>">
+		<input type=hidden name=f_id value="<? echo $f_id ?>">
+		<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
+		<td valign="top" bgcolor=<? echo $g_white_color ?> colspan=2>
+			<input type=submit value=" Update Bug ">
+		</td>
+		</form>
+
 		<form method=post action="<? echo $g_bug_vote_add ?>">
 		<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<input type=hidden name=f_vote value="<? echo $v_votes ?>">
 		<td valign="top" bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value=" Add Vote ">
-		</td>
-		</form>
-
-		<form method=post action="<? echo $g_bug_update_advanced_page ?>">
-		<input type=hidden name=f_id value="<? echo $f_id ?>">
-		<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
-		<td valign="top" bgcolor=<? echo $g_white_color ?> colspan=2>
-			<input type=submit value=" Update Bug Information ">
 		</td>
 		</form>
 
@@ -341,9 +341,21 @@
 </table>
 
 <p>
-<? include( $g_bugnote_include_file ) ?>
-<p>
-<? include( $g_bugnote_add_include_file ) ?>
+<?
+	if ( $v_status=="resolved" ) {
+		PRINT "<div align=center>";
+		PRINT "<form method=post action=\"$g_bug_reopen\">";
+			PRINT "<input type=hidden name=f_id value=\"$v_id\">";
+			PRINT "<input type=submit value=\" Reopen Bug \">";
+		PRINT "</form>";
+		PRINT "</div>";
+	} else {
+		PRINT "<p>";
+		include( $g_bugnote_include_file );
+		PRINT "<p>";
+		include( $g_bugnote_add_include_file );
+	}
+?>
 
 <? print_footer() ?>
 <? print_body_bottom() ?>

@@ -9,7 +9,7 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !access_level_check_greater( "administrator" ) ) {
+	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
 		### need to replace with access error page
 		header( "Location: $g_logout_page" );
 		exit;
@@ -17,11 +17,24 @@
 
 	### delete account
     if ( $f_protected!="on" ) {
+	    ### Remove aaccount
     	$query = "DELETE
     			FROM $g_mantis_user_table
     			WHERE id='$f_id'";
+	    $result = mysql_query( $query );
+
+	    ### Remove associated profiles
+	    $query = "DELETE
+	    		FROM $g_mantis_user_profile_table
+	    		WHERE user_id='$f_id'";
+	    $result = mysql_query( $query );
+
+		### Remove associated preferences
+    	$query = "DELETE
+    			FROM $g_mantis_user_pref_table
+    			WHERE user_id='$f_id'";
+    	$result = mysql_query( $query );
     }
-    $result = mysql_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

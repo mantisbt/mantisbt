@@ -22,7 +22,7 @@
 ?>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?> align=center colspan=2>
-		There are no notes attached to this bug yet.<br>
+		There are no notes attached to this bug
 	</td>
 </tr>
 <?
@@ -76,7 +76,7 @@
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 		<?
 			### check access level
-			if ( access_level_check_greater( "reporter" ) ) {
+			if ( access_level_check_greater_or_equal( "reporter" ) ) {
 		?>
 			<font size=1><a href="<? echo $g_bugnote_delete ?>?f_id=<? echo $f_id ?>&f_bug_id=<? echo $v3_id ?>">Delete</a></font>
 		<? } ?>

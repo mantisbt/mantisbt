@@ -33,7 +33,7 @@
 <? print_menu( $g_menu_include_file ) ?>
 
 <?
-	if ( access_level_check_greater( "reporter" ) ) {
+	if ( access_level_check_greater_or_equal( "reporter" ) ) {
 ?>
 <p>
 <div align=center>

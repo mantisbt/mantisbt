@@ -10,21 +10,10 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### Update all fields
-	### BUG IN MYSQL or PHP
     $query = "UPDATE $g_mantis_bug_table
-    		SET category='$f_category', severity='$f_severity',
-    			reproducibility='$f_reproducibility',
-				priority='$f_priority', status='$f_status',
-				projection='$f_projection', duplicate_id='$f_duplicate_id',
-				resolution='$f_resolution', handler_id='$f_handler_id',
-				date_submitted='$f_date_submitted',
-				last_updated=NOW(), eta='$f_eta',
-				handler_id='$f_handler_id'
-    		WHERE id='$f_id'";
-   	$result = mysql_query($query);
-
-    $query = "UPDATE $g_mantis_bug_table
-    		SET last_updated=NOW()
+    		SET status='feedback',
+				resolution='reopened',
+				last_updated=NOW()
     		WHERE id='$f_id'";
    	$result = mysql_query($query);
 ?>
@@ -49,7 +38,7 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		PRINT "Bug has been successfully updated...<p>";
+		PRINT "Bug has been reopened...<p>";
 	}
 	### FAILURE
 	else {
