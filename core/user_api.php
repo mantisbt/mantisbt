@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.50 2003-02-11 13:54:39 vboctor Exp $
+	# $Id: user_api.php,v 1.51 2003-02-11 21:36:23 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -143,7 +143,7 @@
 	# Return true if it is, false otherwise
 	function user_is_name_valid( $p_username ) {
 		# The DB field is only 32 characters
-		if ( 32 > strlen( $p_username ) ) {
+		if ( strlen( $p_username ) > 32 ) {
 			return false;	
 		}
 
