@@ -94,6 +94,9 @@
 		</td>
 	</tr>
 	<?
+		if ( !isset( $f_offset ) ) {
+			$f_offset = 0;
+		}
 		### build our query string based on our viewing criteria
 		$query = "SELECT * FROM $g_mantis_bug_table";
 		if ( $g_hide_resolved_val=="on"  ) {
@@ -104,7 +107,7 @@
 		}
 		$query = $query." ORDER BY '$f_sort' $f_dir";
 		if ( isset( $g_view_limit_val ) ) {
-			$query = $query." LIMIT $g_view_limit_val";
+			$query = $query." LIMIT $f_offset, $g_view_limit_val";
 		}
 
 		### perform query
@@ -205,6 +208,24 @@
 	</td>
 </tr>
 </table>
+
+<?
+	$f_offset_next = $f_offset + $g_view_limit_val;
+	$f_offset_prev = $f_offset - $g_view_limit_val;
+
+	if ( $f_offset_prev < 0 ) {
+		$f_offset_prev = -1;
+	}
+?>
+
+<div align=center>
+<? if ( $f_offset_prev >= 0 ) { ?>
+<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>">View Prev <? echo $g_view_limit_val ?></a>
+<? } ?>
+<? if ( $row_count == $g_view_limit_val ) { ?>
+<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>">View Next <? echo $g_view_limit_val ?></a>
+<? } ?>
+</div>
 
 <? print_footer() ?>
 <? print_body_bottom() ?>
