@@ -26,8 +26,10 @@
 
 	if( password_match( $f_password, $u_password ) && ( $u_enabled=="on" ) ) {
 		### increment login count
+		$t_date_created = get_current_user_field( "date_created" );
 		$query = "UPDATE $g_mantis_user_table
-				SET login_count=login_count+1
+				SET login_count=login_count+1,
+					date_created='$t_date_created'
 				WHERE username='$f_username'";
 		$result = db_query( $query );
 
