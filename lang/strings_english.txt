@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.123 $
+	# $Revision: 1.124 $
 	# $Author: vboctor $
-	# $Date: 2003-02-19 23:19:13 $
+	# $Date: 2003-02-24 03:12:45 $
 	#
-	# $Id: strings_english.txt,v 1.123 2003-02-19 23:19:13 vboctor Exp $
+	# $Id: strings_english.txt,v 1.124 2003-02-24 03:12:45 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -822,6 +822,11 @@
 	# view_bug_page.php
 	$s_view_advanced_link = 'View Advanced';
 	$s_viewing_bug_simple_details_title = 'Viewing Bug Simple Details';
+
+	# bug_monitor_list_view_inc.php
+	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
+	$s_users_monitoring_bug = 'Users monitoring this bug';
+	$s_monitoring_user_list = 'Users List';
 
 	# custom field strings
 	$s_add_custom_field_button = 'New Custom Field';

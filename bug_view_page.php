@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.42 2003-02-23 14:18:00 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.43 2003-02-24 03:12:44 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -414,6 +414,9 @@
 	if ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) {
 		include( $t_mantis_dir . 'bug_file_upload_inc.php' );
 	}
+
+	# User list monitoring the bug
+	include( $t_mantis_dir . 'bug_monitor_list_view_inc.php' );
 
 	# Bugnotes
 	include( $t_mantis_dir . 'bugnote_view_inc.php' );

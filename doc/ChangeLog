@@ -4,6 +4,7 @@ Mantis ChangeLog
 
  * Enhancement: When an enumeration is not found, display @<enumid>@ instead of @null@.
  * Enhancement: Added file type icons next to project documents and bug file attachments.  Also provided a set of standard icons.
+ * Enhancement: Added a section to the bug view pages that lists the users that are monitoring the current bug.
  * Fix: META redirects were not XHTML-compliant
  * Fix: $g_lang_current was not available to custom_strings_inc.php
  * Fix: reduced the executed number of queries throughout the interface
@@ -37,6 +38,7 @@ Mantis ChangeLog
  * New config option (display_bug_padding): controls the level of padding on bug ids
  * New config option (display_bugnote_padding): controls the level of padding on bugnote ids
  * New config option (file_type_icons): provides mapping between file extensions and icons to be used for file types.
+ * New config option (show_monitor_list): provides a section in the bug view pages that lists the users monitoring the current bug.  The default is OFF.
  * Removed config option (bugnote_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_view_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_add_include_file): Used file path directly since there is no reason to make it configurable.

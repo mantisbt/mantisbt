@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.94 2003-02-23 04:45:02 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.95 2003-02-24 03:12:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -313,6 +313,10 @@
 	# --- Position of the status colour legend, can be: STATUS_LEGEND_POSITION_*
 	# --- see constant_inc.php. (*: BOTTOM or TOP)
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
+
+	# --- Show list of users montoring a bug on the bug view pages.
+	# --- this can be set to ON or OFF.
+	$g_show_monitor_list = OFF;
 
 	############################
 	# Mantis JPGRAPH Addon
