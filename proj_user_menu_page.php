@@ -73,7 +73,7 @@
 	<td>
 		<select name="f_access_level">
 			<?php # No administrator choice ?>
-			<?php print_project_user_option_list( REPORTER ) ?>
+			<?php print_project_access_levels_option_list( REPORTER ) ?>
 		</select>
 	</td>
 	<td>

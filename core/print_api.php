@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.29 2002-11-30 21:27:39 jfitzell Exp $
+	# $Id: print_api.php,v 1.30 2002-12-04 10:27:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -659,7 +659,7 @@
 	# --------------------
 	# prints the list of access levels exluding ADMINISTRATOR
 	# this is used when adding users to projects
-	function print_project_user_option_list( $p_val ) {
+	function print_project_access_levels_option_list( $p_val ) {
 		global $g_mantis_project_table, $g_access_levels_enum_string;
 
 		$t_arr = explode_enum_string( $g_access_levels_enum_string );
