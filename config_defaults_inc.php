@@ -451,8 +451,11 @@
 
 	# --- using openldap -------------
 	$g_ldap_server			= '192.168.192.38';
+	$g_ldap_port			= '636';
 	$g_ldap_root_dn			= 'dc=traffic,dc=redflex,dc=com,dc=au';
-	$g_ldap_organisation	= '(organizationname=*Traffic)'; # optional
+	$g_ldap_organization	= '(organizationname=*Traffic)'; # optional
+	$g_ldap_bind_dn			= '';
+	$g_ldap_bind_passwd		= '';
 	$g_use_ldap_email		= OFF; # Should we send to the LDAP email address or what MySql tells us
 	# --- ldapauth type --- CLEAR or CRYPT (as in /etc/passwd /etc/shadow)
 	$g_ldapauth_type		= 'CRYPT';

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.5 2002-12-04 03:18:33 jfitzell Exp $
+	# $Id: ldap_api.php,v 1.6 2002-12-04 10:30:34 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -47,10 +47,10 @@
  	# --------------------
 	# Find an email address from LDAP, given a username
 	function ldap_email( $p_username ) {
-		$t_ldap_organisation	= config_get( 'ldap_organisation' );
+		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
-	    $t_search_filter	= "(&$t_ldap_organisation(uid=$p_username))";
+	    $t_search_filter	= "(&$t_ldap_organization(uid=$p_username))";
 		$t_search_attrs		= array( 'uid', 'email', 'dn' );
 	    $t_ds				= ldap_connect_bind();
 
@@ -65,10 +65,10 @@
 	# --------------------
 	# Return true if the $uid has an assigngroup=$p_group tag, false otherwise
 	function ldap_has_group( $p_username, $p_group ) {
-		$t_ldap_organisation	= config_get( 'ldap_organisation' );
+		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
-		$t_search_filter	= "(&$t_ldap_organisation(uid=$p_username)(assignedgroup=$p_group))";
+		$t_search_filter	= "(&$t_ldap_organization(uid=$p_username)(assignedgroup=$p_group))";
 		$t_search_attrs		= array( 'uid', 'dn', 'assignedgroup' );
 	    $t_ds				= ldap_connect_bind();
 
@@ -88,10 +88,10 @@
 	# Attempt to authenticate the a username against the LDAP directory
 	#  return true on successful authentication, false otherwise
 	function ldap_authenticate( $p_username, $p_password ) {
-		$t_ldap_organisation	= config_get( 'ldap_organisation' );
+		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
-		$t_search_filter	= "(&$t_ldap_organisation(uid=$p_username))";
+		$t_search_filter	= "(&$t_ldap_organization(uid=$p_username))";
 		$t_search_attrs		= array( 'uid', 'dn' );
 	    $t_ds				= ldap_connect_bind();
 		

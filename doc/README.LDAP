@@ -52,11 +52,11 @@ It is also required to set the following configuration items in config_inc.php
 	$g_ldap_server         = "ldaps://ldap.example.com/";
 	$g_ldap_port           = "636";
 	$g_ldap_root_dn        = "dc=example, dc=com";
-	#$g_ldap_organisation  = "(organizationname=*Example)"; # optional
+	#$g_ldap_organization  = "(organizationname=*Example)"; # optional
 	#$g_ldap_auth_type 	   = "CRYPT"; # NO LONGER USED
 	$g_use_ldap_email      = ON; # Should we send to the LDAP email address or what MySql tells us
-	$t_ldap_bind_dn        = "cn=Manager, dc=example, dc=com";
-	$t_ldap_bind_passwd    = "secret";
+	$g_ldap_bind_dn        = "cn=Manager, dc=example, dc=com";
+	$g_ldap_bind_passwd    = "secret";
 
 Dont forget to change your $g_login_method to $g_login_method = LDAP;
 
