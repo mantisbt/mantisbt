@@ -67,6 +67,6 @@ pre						{display: inline;}
 
 div.faq-category		{font-weight: bold; font-size: 13pt; background-color: #98b8e8; padding: 4px; letter-spacing: 0.1em; border-bottom: solid 1px #000088;}
 dt						{font-weight: bold;}
-dd						{}
+dd						{font-weight: normal;}
 li.faq-category			{line-height: 1.4em;}
 li.faq					{list-style: disc; line-height: 1.3em;}
