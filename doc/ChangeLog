@@ -12,6 +12,7 @@ Mantis ChangeLog
  * Fix: improved handling of bad cookies (you now get a chance to log in again)
  * Fix: Added the removal of invalid history entries that were added due to escaping errors to the string escaping fixes.
  * Fix: Improve speed of actions that trigger email sends by reducing the number of queries by 200x (20,000%). Queries when sending emails are now linear to the number of users receiving the email instead of the number of users in the system.
+ * Fix: error deleting bug files fixed
  * Fix #2944: Project files are not deleted when project is deleted.
  * Fix #2939: Confusing file names for uploaded project documents.
  * Fix #2953: View all bugs page empty (temporary fix by disabling compression when running on an IIS server).
