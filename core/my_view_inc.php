@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.3 2004-07-18 10:09:34 vboctor Exp $
+	# $Id: my_view_inc.php,v 1.4 2004-08-11 09:22:23 tazza70 Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,7 +47,8 @@
 		'hide_status'		=> Array ( '0' => $t_bug_resolved_status_threshold ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
-
+	$url_link_parameters['assigned'] = 'handler_id=' . $t_current_user_id . '&hide_status=' . $t_bug_resolved_status_threshold;
+	
 	$c_filter['recent_mod'] = array(
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
@@ -61,7 +62,8 @@
 		'hide_status'		=> Array ( '0' => 'none' ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
-
+	$url_link_parameters['recent_mod'] = 'hide_status=none';
+	
 	$c_filter['reported'] = array(
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
@@ -76,7 +78,8 @@
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
-
+	$url_link_parameters['reported'] = 'reporter_id=' . $t_current_user_id . '&hide_status=' . $t_hide_status_default;
+	
 	$c_filter['resolved'] = array(
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
@@ -90,7 +93,8 @@
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
-
+	$url_link_parameters['resolved'] = 'show_status=' . $t_bug_resolved_status_threshold . '&hide_status=' . $t_bug_resolved_status_threshold;
+	
 	$c_filter['unassigned'] = array(
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
@@ -104,23 +108,25 @@
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => 'any' )
 	);
-
+	$url_link_parameters['unassigned'] = 'handler_id=none' . '&hide_status=' . $t_hide_status_default;
+	
 	$c_filter['monitored'] = array(
 		'show_category'		=> Array ( '0' => 'any' ),
 		'show_severity'		=> Array ( '0' => 'any' ),
 		'show_status'		=> Array ( '0' => 'any' ),
 		'highlight_changed'	=> $t_default_show_changed,
 		'reporter_id'		=> Array ( '0' => 'any' ),
-		'handler_id'		=> Array ( '0' => 'none' ),
+		'handler_id'		=> Array ( '0' => 'any' ),
 		'show_resolution'	=> Array ( '0' => 'any' ),
 		'show_build'		=> Array ( '0' => 'any' ),
 		'show_version'		=> Array ( '0' => 'any' ),
 		'hide_status'		=> Array ( '0' => $t_hide_status_default ),
 		'user_monitor'		=> Array ( '0' => $t_current_user_id )
 	);
-
+	$url_link_parameters['monitored'] = 'user_monitor=' . $t_current_user_id . '&hide_status=' . $t_hide_status_default;
+	
         $rows = filter_get_bug_rows ( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title]  );
-
+	
         $box_title = lang_get( 'my_view_title_' . $t_box_title );
 ?>
 
@@ -132,8 +138,15 @@
 <tr>
 	<?php # -- Viewing range info -- ?>
 	<td class="form-title" colspan="2">
-		<?php #echo lang_get( 'viewing_bugs_title' ) ?>
-		<?php echo $box_title ?>
+		<?php
+			echo '<a class="subtle" href="view_all_set.php?type=1&temporary=y&' . $url_link_parameters[$t_box_title] . '">';
+			echo $box_title;
+			echo '</a>';
+			echo ' [';
+			echo '<a class="subtle" href="view_all_set.php?type=1&temporary=y&' . $url_link_parameters[$t_box_title] . '" target="_blank">';
+			echo '^';
+			echo '</a>]';
+		?>
 		<?php
 			if ( sizeof( $rows ) > 0 ) {
 				$v_start = $t_filter['per_page'] * ($f_page_number-1) +1;
