@@ -237,7 +237,7 @@ CREATE TABLE mantis_custom_field_table (
 CREATE TABLE mantis_news_table (
   id int(7) unsigned NOT NULL auto_increment,
   project_id int(7) unsigned NOT NULL default '0',
-  poster_id int(7) unsigned zerofill NOT NULL default '0000000',
+  poster_id int(7) unsigned NOT NULL default '0000000',
   date_posted datetime NOT NULL default '1970-01-01 00:00:01',
   last_modified datetime NOT NULL default '1970-01-01 00:00:01',
   view_state int(2) NOT NULL default '10',
