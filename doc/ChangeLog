@@ -5,6 +5,7 @@ Mantis ChangeLog
  * Enh #3974: Make Mantis issues searchable by Search Engine
  * Enh #4016: Automatic language selection based on browser preferences
  * Fix #4005: Signup for new account - invalid username generates crash
+ * Fix #4018: Real name field allows potentially dangerous HTML
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection..
 
 2004.07.07  -  0.19.0a1
