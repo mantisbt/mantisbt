@@ -201,7 +201,8 @@
 		global 	$g_mantis_user_table,
 				$g_string_cookie_val, $g_project_cookie_val,
 				$g_complete_date_format, $g_set_project,
-				$s_switch, $s_logged_in_as, $s_all_projects;
+				$s_switch, $s_logged_in_as, $s_all_projects,
+				$s_projects_title;
 
 		$t_username = get_current_user_field( "username" );
 		$t_now = date( $g_complete_date_format );
@@ -216,7 +217,7 @@
 				PRINT "<span class=\"login-time\">$t_now</span>";
 			PRINT "</td>";
 			PRINT "<td class=\"login-info-right\">";
-				PRINT "<select name=f_project_id>";
+				PRINT "$s_projects_title: <select name=f_project_id>";
 					PRINT "<option value=\"0000000\">$s_all_projects</option>";
 					print_project_option_list( $g_project_cookie_val );
 				PRINT "</select>";
