@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.186 $
+	# $Revision: 1.187 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 14:29:42 $
+	# $Date: 2004-07-18 14:47:00 $
 	#
-	# $Id: strings_english.txt,v 1.186 2004-07-18 14:29:42 vboctor Exp $
+	# $Id: strings_english.txt,v 1.187 2004-07-18 14:47:00 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -71,8 +71,8 @@ $s_bug_relationships = 'Relationships';
 $s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
 $s_empty_password_button = 'Use Empty Password';
 
-$s_duplicate_of = "duplicates";
-$s_has_duplicate = "has duplicates";
+$s_duplicate_of = "duplicate of";
+$s_has_duplicate = "has duplicate";
 $s_related_to = "related to";
 $s_dependant_on = "parent of";
 $s_blocks = "child of";
