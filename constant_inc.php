@@ -98,7 +98,7 @@
 	define( "SIMPLE_ONLY",      1 );
 	define( "ADVANCED_ONLY",    2 );
 
-	# show variable values
+	# news values
 	define( "BY_LIMIT",     0 );
 	define( "BY_DATE",      1 );
 
