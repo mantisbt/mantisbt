@@ -16,7 +16,7 @@ To Do:
  * Move as much of the config_inc.php varaibles into a database table.
    Then build a nice interface into it.
 
-12.XX.2000	-	0.11.2
+12.XX.2000	-	0.12.0
 
  * Tweaked the string_edit() function
  * Added $g_show_login_date_info adn the ability to show who is logged in and
@@ -32,6 +32,8 @@ To Do:
  * Added support to show bugs reported by and assigned to the logged in user.
  * Added view_user_assigned_bug_page.php3 and view_user_reported_bug_page.php3
    and the corresponding global variables
+ * Tweaked the bug update and bugnote update and delete functions to redirect
+   to the user chosen default viewing level page
 
 12.15.2000	-	0.11.1
 

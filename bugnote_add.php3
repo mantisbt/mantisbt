@@ -57,7 +57,12 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( "$g_view_bug_page?f_id=$f_bug_id", $g_wait_time );
+		if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
+			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_bug_id", $g_wait_time );
+		}
+		else {
+			print_meta_redirect( "$g_view_bug_page?f_id=$f_bug_id", $g_wait_time );
+		}
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -81,7 +86,11 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_bug_id ?>">Click here to proceed</a>
+<? if ( get_current_user_profile_field( "advanced_view" )=="on" ) { ?>
+<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
+<? } else { ?>
+<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
+<? } ?>
 </div>
 
 <? print_footer() ?>

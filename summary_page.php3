@@ -142,7 +142,7 @@
 					longest open bug
 				</td>
 				<td width=50%>
-					<? if ( get_current_user_profile_field( "advanced_view" )==on ) { ?>
+					<? if ( get_current_user_profile_field( "advanced_view" )=="on" ) { ?>
 						<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
 					<? } else {?>
 						<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
