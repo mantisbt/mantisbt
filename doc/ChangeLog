@@ -22,6 +22,7 @@ Mantis
  * Fixed file uploads to not allow duplicate files when using DISK.
  * Fixed file upload switch with break statements.
  * Fixed print_assign_to_option_list() to accurately reflect settings.
+ * Fixed print_reporter_option_list() to accurately reflect settings.
  * Removed site_settings link in print_manage_doc_menu().
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.
