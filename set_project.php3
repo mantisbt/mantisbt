@@ -35,7 +35,9 @@
 	# redirect to 'same page' when switching projects.
 	# view_all_* pages, and summary
 	if ( $valid_project==1 ) {
-		if (eregi($g_view_all_bug_page,$HTTP_REFERER)){
+		if (!isset($HTTP_REFERER)) {
+			print_meta_redirect( $g_main_page, $g_wait_time );
+		} else if (eregi($g_view_all_bug_page,$HTTP_REFERER)){
 			print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
 		} else if (eregi($g_view_all_assigned_bug_page,$HTTP_REFERER)){
 			print_meta_redirect( $g_view_all_assigned_bug_page, $g_wait_time );

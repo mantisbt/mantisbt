@@ -63,7 +63,11 @@
 	if ( $t_project_id > 0 ) {
 		print_meta_redirect( $g_main_page, 0 );
 	} else if ( $login_result ) {
-		print_meta_redirect( $g_login_select_proj_page, 0 );
+		if ( isset($f_project_id) ) {
+			print_meta_redirect( $g_set_project."?f_project_id=".$f_project_id, 0 );
+		} else {
+			print_meta_redirect( $g_login_select_proj_page, 0 );
+		}
 	} else {
 		print_meta_redirect( $g_login_page."?f_error=1", 0 );
 	}

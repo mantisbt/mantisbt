@@ -43,6 +43,13 @@
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_login ?>">
+<?
+	if (isset($f_project_id)) {
+?>
+<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
+<?
+	}
+?>
 <table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">

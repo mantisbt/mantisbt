@@ -1,5 +1,6 @@
 Mantis
 
+ * Added pre-selecting project. Hint: login_page.php3?f_project_id=0000001
  * Fixed sorting in buglist is now preserved when going to next or prev page.
  * Fixed sorting in buglist. Bugs with high priority is now always first.
 
