@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.137 2004-02-08 13:16:55 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.138 2004-02-12 21:09:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -17,7 +17,7 @@
 	# config_defaults_inc.php
 
 	# This file should not be changed. If you want to override any of the values
-	# defined here, define them in a file called custom_config_inc.php, which will
+	# defined here, define them in a file called config_inc.php, which will
 	# be loaded after this file.
 
 	# In general a value of OFF means the feature is disabled and ON means the
