@@ -509,7 +509,9 @@
 			$mail->From     = $g_from_email;
 			$mail->FromName = "";
 
-			$mail->AddAddress($t_recipient, "");
+			if($t_recipient) {
+				$mail->AddAddress($t_recipient, "");
+			}
 
 			# add to the BCC list
 			$t_bcc_list = split(",", $p_header);
