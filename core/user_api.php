@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.61 2003-10-28 10:37:15 vboctor Exp $
+	# $Id: user_api.php,v 1.62 2003-11-20 10:38:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -516,11 +516,13 @@
 			$query = "SELECT DISTINCT( p.id )
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
-					    ON p.id=u.project_id AND p.enabled=1
-					  WHERE p.view_state='$t_public'
-					    OR (p.view_state='$t_private'
-						    AND
-					        u.user_id='$c_user_id')
+					    ON p.id=u.project_id
+					  WHERE ( p.enabled = 1 ) AND 
+						( p.view_state='$t_public'
+						    OR (p.view_state='$t_private'
+							    AND
+						        u.user_id='$c_user_id' )
+						)
 					  ORDER BY p.name";
 		}
 
