@@ -7,7 +7,7 @@
 ?>
 <?php
 	# This include file prints out the list of bugnotes attached to the bug
-	# $f_id must be set and be set to the bug id
+	# $f_bug_id must be set and be set to the bug id
 ?>
 <?php
 	# grab the user id currently logged in
@@ -22,7 +22,7 @@
 	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$f_id' $t_restriction
+			WHERE bug_id='$f_bug_id' $t_restriction
 			ORDER BY date_submitted $g_bugnote_order";
 	$result = db_query($query);
 	$num_notes = db_num_rows($result);
@@ -83,7 +83,7 @@
 		<?php
 			# only admins and the bugnote creator can edit/delete this bugnote
 			# bug must be open to be editable
-			if ( bug_get_field( $f_id, 'status' ) < RESOLVED ) {
+			if ( bug_get_field( $f_bug_id, 'status' ) < RESOLVED ) {
 				if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 					( $v3_reporter_id == $t_user_id )) {
 					print_bracket_link( 'bugnote_edit_page.php?f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
@@ -125,7 +125,7 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<?php echo $s_add_bugnote_title ?>
 	</td>
 </tr>

@@ -10,7 +10,7 @@
 <?php
 	check_access( MANAGER );
 
-	$f_id = gpc_get_int( 'f_id' );
+	$f_news_id = gpc_get_int( 'f_news_id' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -21,7 +21,7 @@
 	<?php echo $s_delete_news_sure_msg ?>
 
 	<form method="post" action="news_delete.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_news_id" value="<?php echo $f_news_id ?>" />
 		<input type="submit" value="<?php echo $s_delete_news_item_button ?>" />
 	</form>
 

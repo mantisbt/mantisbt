@@ -8,22 +8,22 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_id		= gpc_get_int( 'f_id' );
-	$f_id		= bug_format_id( $f_id );
+	$f_bug_id		= gpc_get_int( 'f_bug_id' );
+	$f_bug_id		= bug_format_id( $f_bug_id );
 
 	if ( ADVANCED_ONLY == $g_show_view ) {
-		print_header_redirect ( 'bug_view_advanced_page.php?f_id='.$f_id );
+		print_header_redirect ( 'bug_view_advanced_page.php?f_bug_id='.$f_bug_id );
 	}
 
 	$f_history	= gpc_get_bool( 'f_history' );
 
-	$c_id = (integer)$f_id;
-	project_access_check( $f_id );
+	$c_bug_id = (integer)$f_bug_id;
+	project_access_check( $f_bug_id );
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
     		FROM $g_mantis_bug_table
-    		WHERE id='$c_id'";
+    		WHERE id='$c_bug_id'";
     $result = db_query( $query );
 
 	# check bug exists here, rather than calling bug_ensure_exists() and executing
@@ -36,7 +36,7 @@
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 	# if bug is private, make sure user can view private bugs
-	access_bug_check( $f_id, $v_view_state );
+	access_bug_check( $f_bug_id, $v_view_state );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
@@ -68,10 +68,10 @@
 	</td>
 	<td class="right" colspan="3">
 <?php if ( BOTH == $g_show_view ) { ?>
-		<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_id='.$f_id, $s_view_advanced_link )?></span>
+		<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id='.$f_bug_id, $s_view_advanced_link )?></span>
 <?php }?>
-	<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_id='.$f_id.'&amp;f_history=1#history', $s_bug_history ) ?></span>
-	<span class="small"><?php print_bracket_link( 'print_bug_page.php?f_id='.$f_id, $s_print ) ?></span>
+	<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_bug_id='.$f_bug_id.'&amp;f_history=1#history', $s_bug_history ) ?></span>
+	<span class="small"><?php print_bracket_link( 'print_bug_page.php?f_bug_id='.$f_bug_id, $s_print ) ?></span>
 	</td>
 </tr>
 <tr class="row-category">
@@ -124,7 +124,7 @@
 		<?php echo $s_reporter ?>
 	</td>
 	<td>
-		<?php print_user_with_subject( $v_reporter_id, $f_id ) ?>
+		<?php print_user_with_subject( $v_reporter_id, $f_bug_id ) ?>
 	</td>
 	<td class="category">
 		<?php echo $s_view_status ?>
@@ -141,7 +141,7 @@
 		<?php echo $s_assigned_to ?>
 	</td>
 	<td colspan="5">
-		<?php print_user_with_subject( $v_handler_id, $f_id ) ?>
+		<?php print_user_with_subject( $v_handler_id, $f_bug_id ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -218,7 +218,7 @@
 		<?php echo $s_attached_files ?>
 	</td>
 	<td colspan="5">
-		<?php file_list_attachments ( $f_id ); ?>
+		<?php file_list_attachments ( $f_bug_id ); ?>
 	</td>
 </tr>
 <?php } ?>
@@ -279,7 +279,7 @@
 <?php if ( access_level_check_greater_or_equal( $g_update_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="<?php echo string_get_bug_update_page() ?>">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>" />
 		<input type="submit" value="<?php echo $s_update_bug_button ?>" />
 		</form>
@@ -294,7 +294,7 @@
 		<?php #check if current user already assigned to the bug ?>
 		<?php if ( $t_user_id != $v_handler_id ) { ?>
 		<form method="post" action="bug_assign.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="f_date_submitted" value="<?php echo $v_date_submitted ?>" />
 		<input type="submit" value="<?php echo $s_bug_assign_button ?>" />
 		</form>
@@ -307,7 +307,7 @@
 <?php if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_resolve_page.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="submit" value="<?php echo $s_resolve_bug_button ?>" />
 		</form>
 	</td>
@@ -320,7 +320,7 @@
 		( $v_reporter_id == $t_user_id )) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_reopen_page.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="submit" value="<?php echo $s_reopen_bug_button ?>" />
 		</form>
 	</td>
@@ -334,7 +334,7 @@
 		( RESOLVED == $v_status ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_close_page.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="submit" value="<?php echo $s_close_bug_button ?>" />
 		</form>
 	</td>
@@ -343,11 +343,11 @@
 ?>
 <?php # MONITOR form BEGIN ?>
 <?php
- if ( (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! user_is_monitoring_bug( $t_user_id, $f_id ) ) {
+ if ( (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! user_is_monitoring_bug( $t_user_id, $f_bug_id ) ) {
 ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="f_action" value="add" />
 		<input type="submit" value="<?php echo $s_monitor_bug_button ?>" />
 		</form>
@@ -357,10 +357,10 @@
 	# MONITOR form END
 ?>
 <?php # UNMONITOR form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && user_is_monitoring_bug( $t_user_id, $f_id ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && user_is_monitoring_bug( $t_user_id, $f_bug_id ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="f_action" value="delete" />
 		<input type="submit" value="<?php echo $s_unmonitor_bug_button ?>" />
 		</form>
@@ -373,7 +373,7 @@
 <?php if ( access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_delete_page.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="submit" value="<?php echo $s_delete_bug_button ?>" />
 		</form>
 	</td>

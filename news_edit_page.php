@@ -10,16 +10,16 @@
 <?php
 	check_access( MANAGER );
 
-	$f_id = gpc_get_int( 'f_id' );
+	$f_news_id = gpc_get_int( 'f_news_id' );
 	$f_action = gpc_get_string( 'f_action', '' );
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
-		print_header_redirect( 'news_delete_page.php?f_id='.$f_id );
+		print_header_redirect( 'news_delete_page.php?f_news_id='.$f_news_id );
 	}
 
 	# Retrieve news item data and prefix with v_
-	$row = news_get_row( $f_id );
+	$row = news_get_row( $f_news_id );
 	if ( $row ) {
     	extract( $row, EXTR_PREFIX_ALL, 'v' );
     }
@@ -37,7 +37,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_id" value="<?php echo $v_id ?>" />
+		<input type="hidden" name="f_news_id" value="<?php echo $v_id ?>" />
 		<?php echo $s_headline ?>
 	</td>
 	<td class="right">

@@ -31,7 +31,7 @@
 		<?php echo "($s_max_file_size: " . number_format( $g_max_file_size/1000 ) . "k)"?>
 	</td>
 	<td width="85%">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>" />
 		<input name="f_file" type="file" size="60" />
 		<input type="submit" value="<?php echo $s_upload_file_button ?>" />

@@ -198,7 +198,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 ?>
 <tr>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<a href="manage_user_page.php?f_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
+		<a href="manage_user_page.php?f_user_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php print_email_link( $u_email, $u_email ) ?>

@@ -46,10 +46,10 @@
 <tr valign="top">
 	<td bgcolor="<?php echo $status_color ?>">
 <?php
-		PRINT '<a href="file_download.php?f_id='.$v_id.'&amp;f_type=doc">'.$v_title.'</a> ('.$v_filesize.' bytes)';
+		PRINT '<a href="file_download.php?f_file_id='.$v_id.'&amp;f_type=doc">'.$v_title.'</a> ('.$v_filesize.' bytes)';
 
 		if ( access_level_check_greater_or_equal( MANAGER ) ) {
-			print_bracket_link( 'proj_doc_edit_page.php?f_id='.$v_id, 'edit' );
+			print_bracket_link( 'proj_doc_edit_page.php?f_file_id='.$v_id, 'edit' );
 		}
 ?>
 		<br />

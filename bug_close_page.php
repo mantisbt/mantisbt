@@ -8,9 +8,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( $g_close_bug_threshold );
-	bug_ensure_exists( $f_id );
+	bug_ensure_exists( $f_bug_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -22,7 +22,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<?php echo $s_close_bug_title ?>
 	</td>
 </tr>

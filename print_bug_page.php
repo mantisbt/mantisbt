@@ -9,17 +9,17 @@
 <?php login_cookie_check() ?>
 <?php
 	if ( SIMPLE_ONLY == $g_show_view ) {
-		print_header_redirect ( 'bug_view_page.php?f_id='.$f_id );
+		print_header_redirect ( 'bug_view_page.php?f_bug_id='.$f_bug_id );
 	}
 
-	project_access_check( $f_id );
-	bug_ensure_exists( $f_id );
-	$c_id = (integer)$f_id;
+	project_access_check( $f_bug_id );
+	bug_ensure_exists( $f_bug_id );
+	$c_bug_id = (integer)$f_bug_id;
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
     		FROM $g_mantis_bug_table
-    		WHERE id='$c_id'";
+    		WHERE id='$c_bug_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
@@ -53,7 +53,7 @@
 		<?php echo $s_viewing_bug_advanced_details_title ?>
 	</td>
 	<td class="right" colspan="3">
-		<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_id='.$f_id, $s_go_back ) ?></span>
+		<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_bug_id='.$f_bug_id, $s_go_back ) ?></span>
 	</td>
 </tr>
 <tr>
@@ -111,7 +111,7 @@
 		<?php echo $s_reporter ?>:
 	</td>
 	<td class="print">
-		<?php print_user_with_subject( $v_reporter_id, $f_id ) ?>
+		<?php print_user_with_subject( $v_reporter_id, $f_bug_id ) ?>
 	</td>
 	<td class="print-category">
 		<?php echo $s_platform ?>:
@@ -128,7 +128,7 @@
 		<?php echo $s_assigned_to ?>:
 	</td>
 	<td class="print">
-		<?php print_user_with_subject( $v_handler_id, $f_id ) ?>
+		<?php print_user_with_subject( $v_handler_id, $f_bug_id ) ?>
 	</td>
 	<td class="print-category">
 		<?php echo $s_os ?>:
@@ -289,7 +289,7 @@
 		<?php
 			$query = "SELECT *
 					FROM $g_mantis_bug_file_table
-					WHERE bug_id='$c_id'";
+					WHERE bug_id='$c_bug_id'";
 			$result = db_query( $query );
 			$num_files = db_num_rows( $result );
 			for ($i=0;$i<$num_files;$i++) {

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.35 $
-	# $Author: vboctor $
-	# $Date: 2002-10-11 10:25:12 $
+	# $Revision: 1.36 $
+	# $Author: jfitzell $
+	# $Date: 2002-10-20 23:59:48 $
 	#
-	# $Id: bug_update.php,v 1.35 2002-10-11 10:25:12 vboctor Exp $
+	# $Id: bug_update.php,v 1.36 2002-10-20 23:59:48 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,20 +19,20 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( $g_update_bug_threshold );
 
-	$c_id = (integer)$f_id;
+	$c_bug_id = (integer)$f_bug_id;
 
-	bug_ensure_exists( $f_id );
+	bug_ensure_exists( $f_bug_id );
 
 	# extract current extended information into history variables
-	$row = bug_get_extended_row( $f_id );
+	$row = bug_get_extended_row( $f_bug_id );
 	extract( $row, EXTR_PREFIX_ALL, 'h' );
 
 	# if bug is private, make sure user can view private bugs
 	# use the db view state rather than the new one to check
-	access_bug_check( $f_id, $h_view_state );
+	access_bug_check( $f_bug_id, $h_view_state );
 
 	# set variable to be valid if necessary
 	check_varset( $f_duplicate_id, '' );
@@ -106,7 +106,7 @@
 				build='$c_build',
 				version='$c_version',
 				view_state='$c_view_state'
-    		WHERE id='$c_id'";
+    		WHERE id='$c_bug_id'";
    	$result = db_query($query);
 
 	# These fields are not changed as often as the assigned person, priority, status, etc.
@@ -121,33 +121,33 @@
 
 	# log changes
 	$t_user_id = current_user_get_field( 'id' );
-	history_log_event_direct( $c_id, 'category',        $h_category, $f_category, $t_user_id );
-	history_log_event_direct( $c_id, 'severity',        $h_severity, $c_severity, $t_user_id );
-	history_log_event_direct( $c_id, 'reproducibility', $h_reproducibility, $c_reproducibility, $t_user_id );
-	history_log_event_direct( $c_id, 'priority',        $h_priority, $c_priority, $t_user_id );
-	history_log_event_direct( $c_id, 'status',          $h_status, $c_status, $t_user_id );
-	history_log_event_direct( $c_id, 'projection',      $h_projection, $f_projection, $t_user_id );
-	history_log_event_direct( $c_id, 'duplicate_id',    $h_duplicate_id, $c_duplicate_id, $t_user_id );
-	history_log_event_direct( $c_id, 'resolution',      $h_resolution, $c_resolution, $t_user_id );
-	history_log_event_direct( $c_id, 'handler_id',      $h_handler_id, $c_handler_id, $t_user_id );
-	history_log_event_direct( $c_id, 'reporter_id',     $h_reporter_id, $c_reporter_id, $t_user_id );
-	history_log_event_direct( $c_id, 'eta',             $h_eta, $c_eta, $t_user_id );
-	history_log_event_direct( $c_id, 'summary',         $h_summary, $f_summary, $t_user_id );
-	history_log_event_direct( $c_id, 'os',              $h_os, $f_os, $t_user_id );
-	history_log_event_direct( $c_id, 'os_build',        $h_os_build, $f_os_build, $t_user_id );
-	history_log_event_direct( $c_id, 'platform',        $h_platform, $f_platform, $t_user_id );
-	history_log_event_direct( $c_id, 'build',           $h_build, $f_build, $t_user_id );
-	history_log_event_direct( $c_id, 'version',         $h_version, $f_version, $t_user_id );
-	history_log_event_direct( $c_id, 'view_state',      $h_view_state, $c_view_state, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'category',        $h_category, $f_category, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'severity',        $h_severity, $c_severity, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'reproducibility', $h_reproducibility, $c_reproducibility, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'priority',        $h_priority, $c_priority, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'status',          $h_status, $c_status, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'projection',      $h_projection, $f_projection, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'duplicate_id',    $h_duplicate_id, $c_duplicate_id, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'resolution',      $h_resolution, $c_resolution, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'handler_id',      $h_handler_id, $c_handler_id, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'reporter_id',     $h_reporter_id, $c_reporter_id, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'eta',             $h_eta, $c_eta, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'summary',         $h_summary, $f_summary, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'os',              $h_os, $f_os, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'os_build',        $h_os_build, $f_os_build, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'platform',        $h_platform, $f_platform, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'build',           $h_build, $f_build, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'version',         $h_version, $f_version, $t_user_id );
+	history_log_event_direct( $c_bug_id, 'view_state',      $h_view_state, $c_view_state, $t_user_id );
 
 	if ( $h_description != $c_description ) {
-		history_log_event_special( $c_id, DESCRIPTION_UPDATED );
+		history_log_event_special( $c_bug_id, DESCRIPTION_UPDATED );
 	}
 	if ( $h_steps_to_reproduce != $c_steps_to_reproduce ) {
-		history_log_event_special( $c_id, STEP_TO_REPRODUCE_UPDATED );
+		history_log_event_special( $c_bug_id, STEP_TO_REPRODUCE_UPDATED );
 	}
 	if ( $h_additional_information != $c_additional_information ) {
-		history_log_event_special( $c_id, ADDITIONAL_INFO_UPDATED );
+		history_log_event_special( $c_bug_id, ADDITIONAL_INFO_UPDATED );
 	}
 
 	# add a bugnote if there was one
@@ -156,11 +156,11 @@
 
 	$f_bugnote_text = trim( $f_bugnote_text );
 	if ( !empty( $f_bugnote_text ) ) {
-		$result = bugnote_add( $f_id, $f_bugnote_text, (bool)$f_private );
+		$result = bugnote_add( $f_bug_id, $f_bugnote_text, (bool)$f_private );
 	}
 
 	# updated the last_updated date
-	$result = bug_update_date( $f_id );
+	$result = bug_update_date( $f_bug_id );
 
 	# If we should notify and it's in feedback state then send an email
 	switch ( $f_status ) {
@@ -169,25 +169,25 @@
 						# @@@ In case of unassigned, the e-mail will still say ASSIGNED, but it will be shown
 						# that the handler is empty + history ( old_handler => @null@ ).
 						if ( $f_handler_id != $f_old_handler_id ) {
-							email_assign( $f_id );
+							email_assign( $f_bug_id );
 						}
 						break;
 		case FEEDBACK:	if ( $f_status!= $f_old_status ) {
-   							email_feedback( $f_id );
+   							email_feedback( $f_bug_id );
    						}
 						break;
 		case ASSIGNED:	if ( ( $f_handler_id != $f_old_handler_id ) OR ( $f_status != $f_old_status ) ) {
-							email_assign( $f_id );
+							email_assign( $f_bug_id );
 			   			}
 						break;
-		case RESOLVED:	email_resolved( $f_id );
+		case RESOLVED:	email_resolved( $f_bug_id );
 						break;
-		case CLOSED:	email_close( $f_id );
+		case CLOSED:	email_close( $f_bug_id );
 						break;
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = string_get_bug_view_url( $f_id );
+	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

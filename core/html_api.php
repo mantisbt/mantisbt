@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.19 2002-10-19 04:43:28 jfitzell Exp $
+	# $Id: html_api.php,v 1.20 2002-10-20 23:59:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -369,7 +369,7 @@
 				PRINT '</td>';
 				PRINT '<td class="right" style="white-space: nowrap;">';
 					PRINT '<form method="post" action="jump_to_bug.php">';
-					PRINT "<input type=\"text\" name=\"f_id\" size=\"10\" class=\"small\" />&nbsp;";
+					PRINT "<input type=\"text\" name=\"f_bug_id\" size=\"10\" class=\"small\" />&nbsp;";
 					PRINT '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
 					PRINT '</form>';
 				PRINT '</td>';

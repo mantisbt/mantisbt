@@ -12,9 +12,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( $g_allow_bug_delete_access_level );
-	bug_ensure_exists( $f_id );
+	bug_ensure_exists( $f_bug_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -25,7 +25,7 @@
 	<?php echo $s_delete_bug_sure_msg ?>
 
 	<form method="post" action="bug_delete.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="submit" value="<?php echo $s_delete_bug_button ?>" />
 	</form>
 

@@ -11,10 +11,10 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_id = gpc_get_int( 'f_id' );
-	project_access_check( $f_id );
-	bug_ensure_exists( $f_id );
+	$f_bug_id = gpc_get_int( 'f_bug_id' );
+	project_access_check( $f_bug_id );
+	bug_ensure_exists( $f_bug_id );
 
 	# Determine which view page to redirect back to.
-	print_header_redirect_view( $f_id );
+	print_header_redirect_view( $f_bug_id );
 ?>

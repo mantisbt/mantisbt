@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.24 $
+	# $Revision: 1.25 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-30 08:36:50 $
+	# $Date: 2002-10-20 23:59:48 $
 	#
-	# $Id: bug_close.php,v 1.24 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bug_close.php,v 1.25 2002-10-20 23:59:48 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,14 +20,14 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( $g_close_bug_threshold );
-	bug_ensure_exists( $f_id );
+	bug_ensure_exists( $f_bug_id );
 
 	# check variables
 	check_varset( $f_bugnote_text, '' );
 
-	$result = bug_close( $f_id, $f_bugnote_text );
+	$result = bug_close( $f_bug_id, $f_bugnote_text );
 	if ( $result ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	} else {

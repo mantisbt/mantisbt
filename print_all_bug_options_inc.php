@@ -168,7 +168,6 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 
 <div class="border-center">
 	<form method="post" action="print_all_bug_options_reset.php">
-	<input type="hidden" name="f_id" value="<?php echo $c_user_id ?>" />
 	<input type="submit" value="<?php echo $s_reset_prefs_button ?>" />
 	</form>
 </div>

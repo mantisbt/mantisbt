@@ -10,7 +10,7 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	$f_id	= gpc_get_int( 'f_id' );
+	$f_user_id	= gpc_get_int( 'f_user_id' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -21,7 +21,7 @@
 	<?php echo lang_get( 'delete_account_sure_msg' ) ?>
 
 	<form method="post" action="manage_user_delete.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_user_id" value="<?php echo $f_user_id ?>" />
 		<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
 

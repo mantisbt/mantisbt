@@ -10,10 +10,10 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	$f_id = gpc_get_int( 'f_id' );
+	$f_user_id = gpc_get_int( 'f_user_id' );
 
 	# grab user data and prefix with u_
-	$row = user_get_row( $f_id );
+	$row = user_get_row( $f_user_id );
 	extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
 <?php print_page_top1() ?>
@@ -27,7 +27,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
+		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
 		<?php echo lang_get( 'edit_user_title' ) ?>
 	</td>
 </tr>
@@ -88,7 +88,7 @@
 
 <!-- Reset Button -->
 	<form method="post" action="manage_user_reset.php">
-	<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
+	<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
 	<input type="hidden" name="f_email" value="<?php echo $u_email ?>" />
 	<input type="submit" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
 	</form>
@@ -96,7 +96,7 @@
 
 <!-- Delete Button -->
 	<form method="post" action="manage_user_delete_page.php">
-	<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
+	<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>
 </div>

@@ -28,7 +28,7 @@
 		$result = db_query( $query );
 	}
 
-	$t_redirect_url = 'manage_user_page.php?f_id='.$f_user_id;
+	$t_redirect_url = 'manage_user_page.php?f_user_id='.$f_user_id;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

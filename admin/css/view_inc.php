@@ -42,7 +42,7 @@
 				<a href="">Logout</a>
 			</td>
 			<td class="right">
-				<input class="small" type="input" name="f_id" size="6"><input class="small" type="submit" value="Jump">
+				<input class="small" type="input" name="f_bug_id" size="6"><input class="small" type="submit" value="Jump">
 			</td>
 		</tr>
 		</table>
@@ -80,7 +80,7 @@
 			<a href="">Logout</a>
 		</div>
 		<div class="menu-right">
-			&nbsp;<input class="small" type="input" name="f_id" size="6"><input class="small" type="submit" value="Jump">
+			&nbsp;<input class="small" type="input" name="f_bug_id" size="6"><input class="small" type="submit" value="Jump">
 		</div>
 
 		<!-- News -->

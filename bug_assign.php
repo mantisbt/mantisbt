@@ -10,11 +10,11 @@
 	# Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
 	# --------------------------------------------------------
-	# $Revision: 1.22 $
+	# $Revision: 1.23 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-21 10:17:13 $
+	# $Date: 2002-10-20 23:59:48 $
 	#
-	# $Id: bug_assign.php,v 1.22 2002-09-21 10:17:13 jfitzell Exp $
+	# $Id: bug_assign.php,v 1.23 2002-10-20 23:59:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# Assign bug to user then redirect to viewing page
@@ -22,14 +22,14 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_id = gpc_get_int( 'f_id' );
+	$f_bug_id = gpc_get_int( 'f_bug_id' );
 
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( config_get( 'handle_bug_threshold' ) );
 
-	bug_ensure_exists( $f_id );
+	bug_ensure_exists( $f_bug_id );
 
-	bug_assign( $f_id, auth_get_current_user_id() );
+	bug_assign( $f_bug_id, auth_get_current_user_id() );
 
-	print_header_redirect_view( $f_id );
+	print_header_redirect_view( $f_bug_id );
 ?>

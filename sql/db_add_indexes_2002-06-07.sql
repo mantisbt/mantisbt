@@ -3,17 +3,17 @@
 # as of June 7, 2002.
 #
 # This may address the slowness described in bug #1975
-# http://mantisbt.sourceforge.net/mantis/view_bug_advanced_page.php?f_id=0001975
+# http://mantisbt.sourceforge.net/mantis/view_bug_advanced_page.php?f_bug_id=0001975
 #
 # This file should only exist long enough for db_upgrade.sql to
 # incorporate these changes in the next published release if
 # they are deemed appropriate by the other developers.
 # -----------------------------------------------------------
-# $Revision: 1.3 $
-# $Author: jctrosset $
-# $Date: 2002-08-02 08:06:34 $
+# $Revision: 1.4 $
+# $Author: jfitzell $
+# $Date: 2002-10-20 23:59:49 $
 #
-# $Id: db_add_indexes_2002-06-07.sql,v 1.3 2002-08-02 08:06:34 jctrosset Exp $
+# $Id: db_add_indexes_2002-06-07.sql,v 1.4 2002-10-20 23:59:49 jfitzell Exp $
 
 # mantis_bug_history_table.date_modified
 ALTER TABLE `mantis_bug_history_table` ADD INDEX(`date_modified`);

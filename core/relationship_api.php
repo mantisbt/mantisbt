@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.3 2002-08-29 09:42:03 jfitzell Exp $
+	# $Id: relationship_api.php,v 1.4 2002-10-20 23:59:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -24,31 +24,31 @@
 		return db_query( $query );
 	}
 	# --------------------
-	function relationship_update( $p_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+	function relationship_update( $p_relation_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
 		global $g_mantis_bug_relationship_table;
 
 		$query = "UPDATE $g_mantis_bug_relationship_table
 				SET source_bug_id='$p_src_bug_id',
 					destination_bug_id='$p_dest_bug_id',
 					relationship_type='$p_relationship_type'
-				WHERE id='$p_id'";
+				WHERE id='$p_relation_id'";
 		return db_query( $query );
 	}
 	# --------------------
-	function relationship_delete( $p_id ) {
+	function relationship_delete( $p_relation_id ) {
 		global $g_mantis_bug_relationship_table;
 
 		$query = "DELETE FROM $g_mantis_bug_relationship_table
-				WHERE id='$p_id'";
+				WHERE id='$p_relation_id'";
 		return db_query( $query );
 	}
 	# --------------------
-	function relationship_fetch( $p_id ) {
+	function relationship_fetch( $p_relation_id ) {
 		global $g_mantis_bug_relationship_table;
 
 		$query = "SELECT *
 				FROM $g_mantis_bug_relationship_table
-				WHERE id='$p_id'";
+				WHERE id='$p_relation_id'";
 		$result = db_query( $query );
 		return db_fetch_array( $result );
 	}

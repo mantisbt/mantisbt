@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.32 $
-	# $Author: prescience $
-	# $Date: 2002-09-30 00:45:54 $
+	# $Revision: 1.33 $
+	# $Author: jfitzell $
+	# $Date: 2002-10-20 23:59:48 $
 	#
-	# $Id: bug_update_advanced_page.php,v 1.32 2002-09-30 00:45:54 prescience Exp $
+	# $Id: bug_update_advanced_page.php,v 1.33 2002-10-20 23:59:48 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,27 +20,27 @@
 <?php login_cookie_check() ?>
 <?php
 	if ( SIMPLE_ONLY == $g_show_update ) {
-		print_header_redirect ( 'bug_update_page.php?f_id='.$f_id );
+		print_header_redirect ( 'bug_update_page.php?f_bug_id='.$f_bug_id );
 	}
 
-	$f_id		= gpc_get_int( 'f_id' );
+	$f_bug_id		= gpc_get_int( 'f_bug_id' );
 
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( $g_update_bug_threshold );
-	bug_ensure_exists( $f_id );
+	bug_ensure_exists( $f_bug_id );
 
-	$c_id = (integer)$f_id;
+	$c_bug_id = (integer)$f_bug_id;
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
     		FROM $g_mantis_bug_table
-    		WHERE id='$c_id'";
+    		WHERE id='$c_bug_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 	# if bug is private, make sure user can view private bugs
-	access_bug_check( $f_id, $v_view_state );
+	access_bug_check( $f_bug_id, $v_view_state );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
@@ -66,17 +66,17 @@
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<input type="hidden" name="f_id" value="<?php echo $v_id ?>" />
+		<input type="hidden" name="f_bug_id" value="<?php echo $v_id ?>" />
 		<input type="hidden" name="f_old_status" value="<?php echo $v_status ?>" />
 		<input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>" />
 		<?php echo $s_updating_bug_advanced_title ?>
 	</td>
 	<td class="right" colspan="3">
 <?php
-	print_bracket_link( string_get_bug_view_url( $f_id ), $s_back_to_bug_link );
+	print_bracket_link( string_get_bug_view_url( $f_bug_id ), $s_back_to_bug_link );
 
 	if ( BOTH == $g_show_update ) {
-		print_bracket_link( 'bug_update_page.php?f_id='.$f_id, $s_update_simple_link );
+		print_bracket_link( 'bug_update_page.php?f_bug_id='.$f_bug_id, $s_update_simple_link );
 	}
 ?>
 	</td>

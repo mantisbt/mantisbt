@@ -19,7 +19,7 @@
 	<?php echo $s_confirm_file_delete_msg ?>
 
 	<form method="post" action="proj_doc_delete.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_file_id" value="<?php echo $f_file_id ?>" />
 		<input type="submit" value="<?php echo $s_file_delete_button ?>" />
 	</form>
 

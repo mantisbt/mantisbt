@@ -10,9 +10,9 @@
 <?php
 	check_access( ADMINISTRATOR );
 	
-	$f_id = gpc_get_int( 'f_id' );
+	$f_user_id = gpc_get_int( 'f_user_id' );
 
-	$t_result = user_reset_password( $f_id );
+	$t_result = user_reset_password( $f_user_id );
 
 	$t_redirect_url = 'manage_page.php';
 ?>

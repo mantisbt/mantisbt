@@ -107,7 +107,7 @@
 		<?php echo $s_select_post ?>
 	</td>
 	<td width="75%">
-		<select name="f_id">
+		<select name="f_news_id">
 			<?php print_news_item_option_list() ?>
 		</select>
 	</td>

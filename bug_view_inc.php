@@ -6,23 +6,23 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-21 10:17:13 $
+	# $Date: 2002-10-20 23:59:48 $
 	#
-	# $Id: bug_view_inc.php,v 1.1 2002-09-21 10:17:13 jfitzell Exp $
+	# $Id: bug_view_inc.php,v 1.2 2002-10-20 23:59:48 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the bug information
-	# $f_id MUST be specified before the file is included
+	# $f_bug_id MUST be specified before the file is included
 ?>
 <?php
-	$c_id = (integer)$f_id;
+	$c_bug_id = (integer)$f_bug_id;
 	$query ="SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted, ".
 			"UNIX_TIMESTAMP(last_updated) as last_updated ".
 			"FROM $g_mantis_bug_table ".
-			"WHERE id='$c_id' ".
+			"WHERE id='$c_bug_id' ".
 			"LIMIT 1";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );

@@ -9,13 +9,13 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );  # @@@ Need to check that the person is assigned to this project
-	$c_id = (integer)$f_id;
+	$c_file_id = (integer)$f_file_id;
 
 	if ( DISK == $g_file_upload_method ) {
 		# grab the file name
 		$query = "SELECT diskfile
 				FROM $g_mantis_project_file_table
-				WHERE id='$c_id'";
+				WHERE id='$c_file_id'";
 		$result = db_query( $query );
 		$t_diskfile = db_result( $result );
 
@@ -25,7 +25,7 @@
 	}
 
 	$query = "DELETE FROM $g_mantis_project_file_table
-			WHERE id='$c_id'";
+			WHERE id='$c_file_id'";
 	$result = db_query( $query );
 
 	$t_redirect_url = 'proj_doc_page.php';

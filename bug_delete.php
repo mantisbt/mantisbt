@@ -11,11 +11,11 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( $g_allow_bug_delete_access_level );
-	bug_ensure_exists( $f_id );
+	bug_ensure_exists( $f_bug_id );
 
-	if ( bug_delete( $f_id ) ) {
+	if ( bug_delete( $f_bug_id ) ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	} else {
 		print_mantis_error( ERROR_GENERIC );

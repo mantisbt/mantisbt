@@ -11,7 +11,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( $g_handle_bug_threshold );
 
 	$c_file_id = (integer)$f_file_id;
@@ -43,10 +43,10 @@
 	$result = db_query( $query );
 
 	# log file deletion
-	history_log_event_special( $f_id, FILE_DELETED, file_get_display_name ( $t_file_name ) );
+	history_log_event_special( $f_bug_id, FILE_DELETED, file_get_display_name ( $t_file_name ) );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = string_get_bug_view_url( $f_id );
+	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

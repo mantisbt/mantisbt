@@ -11,7 +11,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$c_id = (integer)$f_id;
+	$c_file_id = (integer)$f_file_id;
 	#check_access( $g_handle_bug_threshold );
 
 	# we handle the case where the file is attached to a bug
@@ -19,11 +19,11 @@
 	switch ( $f_type ) {
 		case 'bug':	$query = "SELECT *
 							FROM $g_mantis_bug_file_table
-							WHERE id='$c_id'";
+							WHERE id='$c_file_id'";
 					break;
 		case 'doc':	$query = "SELECT *
 							FROM $g_mantis_project_file_table
-							WHERE id='$c_id'";
+							WHERE id='$c_file_id'";
 					break;
 	}
 	$result = db_query( $query );

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.14 $
+	# $Revision: 1.15 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-21 10:17:13 $
+	# $Date: 2002-10-20 23:59:48 $
 	#
-	# $Id: bug_monitor.php,v 1.14 2002-09-21 10:17:13 jfitzell Exp $
+	# $Id: bug_monitor.php,v 1.15 2002-10-20 23:59:48 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,10 +20,10 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
-	bug_ensure_exists( $f_id );
+	project_access_check( $f_bug_id );
+	bug_ensure_exists( $f_bug_id );
 
-	$t_view_state = bug_get_field( $f_id, 'view_state' );
+	$t_view_state = bug_get_field( $f_bug_id, 'view_state' );
 
 	$t_threshold = $g_monitor_bug_threshold;
 	if ( ( PRIVATE == $t_view_state ) && ( $g_private_bug_threshold > $t_threshold ) ) {
@@ -32,7 +32,7 @@
 
 	check_access( $t_threshold );
 
-	$c_id = (integer)$f_id;
+	$c_bug_id = (integer)$f_bug_id;
 
 	# get user information
 	$u_id = current_user_get_field( 'id' );
@@ -41,7 +41,7 @@
 		# Make sure we aren't already monitoring this bug
 		$query ="SELECT bug_id ".
 				"FROM $g_mantis_bug_monitor_table ".
-				"WHERE bug_id='$c_id' AND user_id='$u_id' ".
+				"WHERE bug_id='$c_bug_id' AND user_id='$u_id' ".
 				"LIMIT 1";
  		$result = db_query( $query );
 		$t_num_rows = db_num_rows( $result );
@@ -52,25 +52,25 @@
 					"INTO $g_mantis_bug_monitor_table ".
 					"( user_id, bug_id ) ".
 					"VALUES ".
-					"( '$u_id', '$c_id' )";
+					"( '$u_id', '$c_bug_id' )";
 			$result = db_query($query);
 
 			# log new monitoring action
-			history_log_event_special( $f_id, BUG_MONITOR, $u_id );
+			history_log_event_special( $f_bug_id, BUG_MONITOR, $u_id );
 		}
 	} elseif ( 'delete' == $f_action ) {
 		# Delete monitoring record
 		$query ="DELETE ".
 				"FROM $g_mantis_bug_monitor_table ".
-				"WHERE user_id = '$u_id' AND bug_id = '$c_id'";
+				"WHERE user_id = '$u_id' AND bug_id = '$c_bug_id'";
 		$result = db_query($query);
 
 		# log new un-monitor action
-		history_log_event_special( $f_id, BUG_UNMONITOR, $u_id );
+		history_log_event_special( $f_bug_id, BUG_UNMONITOR, $u_id );
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = string_get_bug_view_url( $f_id );
+	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

@@ -15,9 +15,9 @@
 	$f_email		= gpc_get_string( 'f_email', '' );
 	$f_username		= gpc_get_string( 'f_username', '' );
 	$f_access_level	= gpc_get_int( 'f_access_level' );
-	$f_id			= gpc_get_int( 'f_id' );
+	$f_user_id			= gpc_get_int( 'f_user_id' );
 
-	$t_old_username = user_get_field( $f_id, 'username' );
+	$t_old_username = user_get_field( $f_user_id, 'username' );
 
 	# check that the username is unique
 	if ( $t_old_username != $f_username &&
@@ -32,12 +32,12 @@
 	$c_username		= db_prepare_string( $f_username );
 	$c_protected	= db_prepare_bool( $f_protected );
 	$c_enabled		= db_prepare_bool( $f_enabled );
-	$c_id			= db_prepare_int( $f_id );
+	$c_user_id			= db_prepare_int( $f_user_id );
 	$c_access_level	= db_prepare_int( $f_access_level );
 
 	$t_user_table = config_get( 'mantis_user_table' );
 
-	$t_old_protected = user_get_field( $f_id, 'protected' );
+	$t_old_protected = user_get_field( $f_user_id, 'protected' );
 
 	# if the user is already protected and the admin is not removing the
 	#  protected flag then don't update the access level and enabled flag.
@@ -47,13 +47,13 @@
 	    $query = "UPDATE $t_user_table
 	    		SET username='$c_username', email='$c_email',
 	    			protected='$c_protected'
-	    		WHERE id='$c_id'";
+	    		WHERE id='$c_user_id'";
 	} else {
 	    $query = "UPDATE $t_user_table
 	    		SET username='$c_username', email='$c_email',
 	    			access_level='$c_access_level', enabled='$c_enabled',
 	    			protected='$c_protected'
-	    		WHERE id='$c_id'";
+	    		WHERE id='$c_user_id'";
 	}
 
     $result = db_query( $query );

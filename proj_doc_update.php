@@ -10,13 +10,13 @@
 <?php
 	check_access( MANAGER );
 
-	$c_id			= (integer)$f_id;
+	$c_file_id			= (integer)$f_file_id;
 	$c_title 		= string_prepare_text( $f_title );
 	$c_description 	= string_prepare_textarea( $f_description );
 
 	$query = "UPDATE $g_mantis_project_file_table
 			SET title='$c_title', description='$c_description'
-			WHERE id='$c_id'";
+			WHERE id='$c_file_id'";
 	$result = db_query( $query );
 
 	$t_redirect_url = 'proj_doc_page.php';

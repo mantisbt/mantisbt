@@ -11,7 +11,7 @@
 <?php # Bug History BEGIN ?>
 <a name="history"><br /></a>
 <?php
-	$history = history_get_events_array( $f_id );
+	$history = history_get_events_array( $f_bug_id );
 ?>
 <table class="width100" cellspacing="0">
 <tr>

@@ -10,9 +10,9 @@
 <?php
 	check_access( MANAGER );
 
-	$f_id = gpc_get_int( 'f_id' );
+	$f_news_id = gpc_get_int( 'f_news_id' );
 
-    news_delete( $f_id );
+    news_delete( $f_news_id );
 
     $t_redirect_url = 'news_menu_page.php';
 	print_header_redirect( $t_redirect_url );

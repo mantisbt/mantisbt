@@ -9,11 +9,11 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
-	$c_id = (integer)$f_id;
+	$c_file_id = (integer)$f_file_id;
 
 	$query = "SELECT *
 			FROM $g_mantis_project_file_table
-			WHERE id='$c_id'";
+			WHERE id='$c_file_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
@@ -30,7 +30,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_file_id" value="<?php echo $f_file_id ?>" />
 		<?php echo $s_upload_file_title ?>
 	</td>
 	<td class="right">
@@ -75,7 +75,7 @@
 <br />
 
 		<form method="post" action="proj_doc_delete_page.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
+		<input type="hidden" name="f_file_id" value="<?php echo $f_file_id ?>" />
 		<input type="submit" value="<?php echo $s_file_delete_button ?>" />
 		</form>
 

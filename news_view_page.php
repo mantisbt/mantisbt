@@ -10,9 +10,9 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 <?php
-	$f_id = gpc_get_int( 'f_id' );
+	$f_news_id = gpc_get_int( 'f_news_id' );
 
-	$row = news_get_row( $f_id );
+	$row = news_get_row( $f_news_id );
 
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 

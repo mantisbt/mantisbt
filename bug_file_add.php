@@ -11,10 +11,10 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	project_access_check( $f_bug_id );
 	check_access( REPORTER );
 
-	$c_id			= (integer)$f_id;
+	$c_bug_id			= (integer)$f_bug_id;
 	$c_file_type	= addslashes($f_file_type);
 
 	$result = 0;
@@ -39,7 +39,7 @@
 		$t_file_path = project_get_field( helper_get_current_project(), 'file_path' );
 
 		# prepare variables for insertion
-		$f_file_name = $f_id.'-'.$f_file_name;
+		$f_file_name = $f_bug_id.'-'.$f_file_name;
 		$t_file_size = filesize( $f_file );
 
 		switch ( $g_file_upload_method ) {
@@ -57,7 +57,7 @@
 							$query = "INSERT INTO $g_mantis_bug_file_table
 									(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 									VALUES
-									(null, $c_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$c_file_type', NOW(), '')";
+									(null, $c_bug_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$c_file_type', NOW(), '')";
 						} else {
 							print_mantis_error( ERROR_DUPLICATE_FILE );
 						}
@@ -67,20 +67,20 @@
 						$query = "INSERT INTO $g_mantis_bug_file_table
 								(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 								VALUES
-								(null, $c_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$c_file_type', NOW(), '$t_content')";
+								(null, $c_bug_id, '', '', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$c_file_type', NOW(), '$t_content')";
 						break;
 		}
 		$result = db_query( $query );
 
 		# updated the last_updated date
-		$result = bug_update_date( $f_id );
+		$result = bug_update_date( $f_bug_id );
 
 		# log new file
-		history_log_event_special( $f_id, FILE_ADDED, file_get_display_name( $f_file_name ) );
+		history_log_event_special( $f_bug_id, FILE_ADDED, file_get_display_name( $f_file_name ) );
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = string_get_bug_view_url( $f_id );
+	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	}

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.23 2002-10-20 22:13:10 jfitzell Exp $
+	# $Id: print_api.php,v 1.24 2002-10-20 23:59:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -459,21 +459,21 @@
 	}
 	# --------------------
 	# prints the profiles given the user id
-	function print_profile_option_list( $p_id, $p_select_id='' ) {
+	function print_profile_option_list( $p_user_id, $p_select_id='' ) {
 		global $g_mantis_user_profile_table, $g_mantis_user_pref_table;
 
-		$c_id = db_prepare_int( $p_id );
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		$query = "SELECT default_profile
 			FROM $g_mantis_user_pref_table
-			WHERE user_id='$c_id'";
+			WHERE user_id='$c_user_id'";
 	    $result = db_query( $query );
 	    $v_default_profile = db_result( $result, 0, 0 );
 
 		# Get profiles
 		$query = "SELECT id, platform, os, os_build
 			FROM $g_mantis_user_profile_table
-			WHERE user_id='$c_id'
+			WHERE user_id='$c_user_id'
 			ORDER BY id";
 	    $result = db_query( $query );
 	    $profile_count = db_num_rows( $result );
@@ -493,7 +493,7 @@
 		}
 	}
 	# --------------------
-	function print_news_project_option_list( $p_id ) {
+	function print_news_project_option_list( $p_project_id ) {
 		global 	$g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie;
 
@@ -516,7 +516,7 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			echo "<option value=\"$v_id\"";
-			check_selected( $v_id, $p_id );
+			check_selected( $v_id, $p_project_id );
 			echo ">$v_name</option>";
 		} # end for
 	}
@@ -734,8 +734,8 @@
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_username = $row['username'];
-			$t_id = $row['id'];
-			PRINT "<option value=\"$t_id\">$t_username</option>";
+			$t_user_id = $row['id'];
+			PRINT "<option value=\"$t_user_id\">$t_username</option>";
 		}
 	}
 	# --------------------
@@ -759,8 +759,8 @@
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_project_name	= $row['name'];
-			$t_id			= $row['id'];
-			PRINT "<option value=\"$t_id\">$t_project_name</option>";
+			$t_user_id			= $row['id'];
+			PRINT "<option value=\"$t_user_id\">$t_project_name</option>";
 		}
 	}
 	# --------------------
