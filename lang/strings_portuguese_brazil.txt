@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:45 $
+	# $Date: 2004-08-26 17:40:58 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.69 2004-08-16 13:28:45 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.70 2004-08-26 17:40:58 bigbadger Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.187 -- jferraz 2004/07/11
 	###########################################################################
@@ -907,6 +907,7 @@ $s_no = 'Não';
 $s_open_filters = 'Alterar Filtro';
 $s_or_unassigned = 'ou não atribuído';
 $s_ok = 'OK';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = 'Usar Filtro';

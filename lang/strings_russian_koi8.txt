@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.54 $
+	# $Revision: 1.55 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-18 09:32:32 $
+	# $Date: 2004-08-26 17:40:58 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.54 2004-08-18 09:32:32 bigbadger Exp $
+	# $Id: strings_russian_koi8.txt,v 1.55 2004-08-26 17:40:58 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -903,6 +903,7 @@ $s_no = 'Нет';
 $s_open_filters = 'Изменить фильтр';
 $s_or_unassigned = 'Или неназначенные';
 $s_ok = 'OK';
+$s_select_all = 'Выбрать все';
 
 # stored query strings
 $s_use_query = 'Использовать фильтр';

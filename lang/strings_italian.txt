@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.77 $
+	# $Revision: 1.78 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:43 $
+	# $Date: 2004-08-26 17:40:57 $
 	#
-	# $Id: strings_italian.txt,v 1.77 2004-08-16 13:28:43 bigbadger Exp $
+	# $Id: strings_italian.txt,v 1.78 2004-08-26 17:40:57 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -905,6 +905,7 @@ $s_no = "No";
 $s_open_filters = "Cambia filtro";
 $s_or_unassigned = "oppure non assegnato";
 $s_ok = "OK";
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = "Usa filtro";

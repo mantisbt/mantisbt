@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.62 $
+	# $Revision: 1.63 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:40 $
+	# $Date: 2004-08-26 17:40:56 $
 	#
-	# $Id: strings_czech.txt,v 1.62 2004-08-16 13:28:40 bigbadger Exp $
+	# $Id: strings_czech.txt,v 1.63 2004-08-26 17:40:56 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -908,6 +908,7 @@ $s_no = 'Ne';
 $s_open_filters = 'Zmìna filtru';
 $s_or_unassigned = 'nebo nepøiøazeno';
 $s_ok = 'OK';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = 'Pou¾ít filtr';

@@ -11,11 +11,11 @@
 	# Spanish: Bernardo Hernández - b.magno@terra.es
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# -------------------------------------------------
-	# $Revision: 1.71 $
+	# $Revision: 1.72 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:46 $
+	# $Date: 2004-08-26 17:40:59 $
 	#
-	# $Id: strings_spanish.txt,v 1.71 2004-08-16 13:28:46 bigbadger Exp $
+	# $Id: strings_spanish.txt,v 1.72 2004-08-26 17:40:59 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -907,6 +907,7 @@ $s_no = 'No';
 $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
 $s_ok = 'OK';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = 'Use Filter';

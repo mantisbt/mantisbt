@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.63 $
+	# $Revision: 1.64 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:45 $
+	# $Date: 2004-08-26 17:40:58 $
 	#
-	# $Id: strings_romanian.txt,v 1.63 2004-08-16 13:28:45 bigbadger Exp $
+	# $Id: strings_romanian.txt,v 1.64 2004-08-26 17:40:58 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -903,6 +903,7 @@ $s_no = 'No';
 $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
 $s_ok = 'OK';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = 'Use Filter';

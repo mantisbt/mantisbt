@@ -6,13 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
-	# Japenese: Seiji Sogabe, sogabe@alles.or.jp
+	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
+	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:44 $
+	# $Date: 2004-08-26 17:40:58 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.59 2004-08-16 13:28:44 bigbadger Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.60 2004-08-26 17:40:58 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -83,7 +84,7 @@ $s_bugnote_deleted = 'コメント削除';
 $s_summary_updated = '一覧更新';
 $s_description_updated = '詳細更新';
 $s_additional_information_updated = '追加情報更新';
-$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+$s_steps_to_reproduce_updated = '複製の手段を更新しました。';
 $s_file_added = 'ファイル追加: ';
 $s_file_deleted = 'ファイル削除: ';
 $s_bug_deleted = '改善要求削除';
@@ -97,8 +98,8 @@ $s_login_link = 'ログイン';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = '改善要求に該当のアクションを行う適切な権限がありません。';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_access = 'そのアクションを行なう適切な許可がありませんでした。';
+$s_bug_actiongroup_status = 'この改善要求は要求されたステータスに変更することができません。';
 $s_close_bugs_conf_msg = '改善要求を完了してよろしいですか。';
 $s_delete_bugs_conf_msg = '改善要求を削除してよろしいですか。';
 $s_move_bugs_conf_msg = '改善要求の移動先を選択して下さい。';
@@ -111,7 +112,7 @@ $s_view_status_bugs_conf_msg = '選択した改善要求の状況を見る';
 $s_close_group_bugs_button = '改善要求の完了';
 $s_delete_group_bugs_button = '改善要求の削除' ;
 $s_move_group_bugs_button = '改善要求の移動';
-$s_copy_group_bugs_button = 'Copy Issues' ;
+$s_copy_group_bugs_button = '改善要求コピー' ;
 $s_assign_group_bugs_button = '改善要求の割り当て';
 $s_resolve_group_bugs_button = '改善要求の実装';
 $s_priority_group_bugs_button = '重要度の更新' ;
@@ -133,11 +134,11 @@ $s_by_severity_mix = '重要度とステータス';
 $s_by_priority_mix = '優先度とステータス';
 $s_by_resolution_mix = '解決とステータス';
 $s_synthesis_link = '総合';
-$s_status_link = 'ステータスによる';
-$s_priority_link = '優先度による';
-$s_severity_link = '重要度による';
-$s_category_link = 'カテゴリによる';
-$s_resolution_link = '分析状況による';
+$s_status_link = 'ステータス別';
+$s_priority_link = '優先度別';
+$s_severity_link = '重要度別';
+$s_category_link = 'カテゴリ別';
+$s_resolution_link = '分析状況別';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = '選択項目のみ表示する';
@@ -210,27 +211,27 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'バージョンが重複しています。';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'バージョンがありません。';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'ユーザー名が無効です。';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'ユーザーが必要なアクセス権限を持っていません。';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '選ばれた「本名」はもう一人のユーザのログイン名と一致します。別のものを選んでください。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = '後援機能が有効ではありません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '後援 %d が見つかりません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = '後援(%s)は 最低額(%s)以下です。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ハンドラーは、後援済みの改善要求を扱うために必要なアクセスレベルを持っていません。';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'アクセス拒否: 改善要求への後援の割り当てにはより高いアクセスレベルを要求します。';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'スポンサーは電子メールアドレスを提供していません。プロフィールを更新してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = '構成オプション \'%s\' は不正な値 \'%s\' です。';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = '改善要求 \'%s\' が読取専用であるので、その操作は行なうことができません。';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "これらの2つの改善要求間に関連が既にあります。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "後援が見つかりません。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "アクセス拒否: 改善要求 %d はより高いアクセスレベルを要求します。";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "改善要求は自分自身に関連付け出来ません。";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'ハッシュ確認が一致しません。再度お願いします。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '\'パスワード紛失\' 機能は有効ではありません。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'パスワードをリセットするために，電子メールアドレスを入力しなければなりません。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '入力された情報は登録済みアカウントと一致しません!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '確認 URL は無効か既に使用されました。もう一度サインアップしてください。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '最大回数のリクエストを実行しました。システム管理者に連絡してください。';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'あなたのアカウントは無効かブロックされている(多数のログインの試みに失敗があった)かもしれませんまたは、入力したユーザー名とパスワードが正しくありません。';
 $s_login_error = 'エラー:ユーザー名/パスワードが間違えています。';
 $s_login_cookies_disabled = 'エラー: 使用しているブラウザがクッキーに対応していないか、クッキーを無効にしています。';
 
@@ -261,18 +262,18 @@ $s_projection_enum_string = '10:未定,30:些細な修正,50:小さな修正,70:大きな修正,9
 $s_eta_enum_string = '10:即時,20:1日以内,30:2～3日,40:1週間以内,50:1ヶ月以内,60:1ヶ月以上';
 
 # Email Strings
-$s_new_account_subject = 'Account registration';
-$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
-$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_subject = 'アカウント登録';
+$s_new_account_greeting = '登録ありがとう。あなたのアカウントはユーザー名「';
+$s_new_account_greeting2 = "」です。\nあなたは登録を終えて、次のURL(1行になっているか確認してください)に訪れ、\n自分のアクセスパスワードを設定してください:";
 $s_new_account_username = 'ユーザー名:';
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
-$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
-$s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
-$s_new_account_signup_msg = 'The following account has been created:';
+$s_new_account_message = 'いかなる登録要請も、このメッセージを無視することで、何も発生しません。' . "\n\n";
+$s_new_account_do_not_reply = 'このメッセージに返信しないでください。';
+$s_new_account_email = '電子メール: ';
+$s_new_account_IP = 'リモート IP アドレス: ';
+$s_new_account_signup_msg = '次のアカウントが作成されました:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
-$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
+$s_reset_request_msg = '誰か(推測上あなた)が電子メール立証を通じてパスワード変更を要求しました。これがあなたでなかった場合は、このメッセージを無視してください。そうすれば、何も起こりません。' . "\n\n" . 'この要求を確認し、あなたのパスワードを変更するために次のURLを訪てください:';
+$s_reset_request_in_progress_msg = 'もしあなたが正確なユーザー名と電子メールアドレスを入力した場合、私たちは今すぐ、その電子メールアドレスへ確認メッセージを送るでしょう。一通のメッセージが受け取られたならば、あなたのアカウント上のパスワードを変更するための提供されたリンクに従ってください。';
 
 $s_email_notification_title_for_status_bug_feedback = '次の改善要求について、もっと情報が必要です。';
 $s_email_notification_title_for_status_bug_acknowledged = '次の改善要求の内容が確認されました。';
@@ -342,9 +343,9 @@ $s_advanced_update = '高度な更新';
 $s_refresh_delay = '再表示時間';
 $s_redirect_delay = 'リダイレクト時間';
 $s_with_minimum_severity = '対象の最小重要度';
-$s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
+$s_bugnote_order = 'コメントソート順序';
+$s_bugnote_order_asc = '昇順';
+$s_bugnote_order_desc = '降順';
 $s_email_on_new = '新規要望通知メール';
 $s_email_on_assigned = '担当者決定通知メール';
 $s_email_on_feedback = 'フィードバック通知メール';
@@ -354,7 +355,7 @@ $s_email_on_reopened = '差戻し通知メール';
 $s_email_on_bugnote_added = 'コメント追加通知メール';
 $s_email_on_status_change = 'ステータス変更通知メール';
 $s_email_on_priority_change = '優先度変更通知メール';
-$s_email_bugnote_limit = 'Email Bugnotes Limit';
+$s_email_bugnote_limit = 'コメントの電子メール制限';
 $s_language = '言語';
 $s_update_prefs_button = '更新';
 $s_reset_prefs_button = 'リセット';
@@ -397,7 +398,7 @@ $s_profile_updated_msg = 'プロフィールが更新されました。';
 # account_update.php
 $s_account_updated_msg = 'アカウントが正常に更新されました。';
 $s_email_updated = 'Emailアドレスが正常に更新されました。';
-$s_realname_duplicated = 'Real name is used by another user';
+$s_realname_duplicated = 'その本名は他のユーザーが使用しています。';
 $s_realname_updated = '本名の更新に成功しました。';
 $s_password_updated = 'パスワードが正常に更新されました。';
 
@@ -405,16 +406,16 @@ $s_password_updated = 'パスワードが正常に更新されました。';
 $s_bug_assign_msg       = '改善要求が担当者に割り当てられました。';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
-$s_acknowledged_bug_title = 'Acknowledge Issue';
-$s_confirmed_bug_title = 'Confirm Issue';
-$s_assigned_bug_title = 'Assign Issue';
-$s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
-$s_acknowledged_bug_button = 'Acknowledge Issue';
-$s_confirmed_bug_button = 'Confirm Issue';
-$s_assigned_bug_button = 'Assign Issue';
+$s_new_bug_title = '新規改善要求';
+$s_feedback_bug_title = '改善要求へフィードバックを提供';
+$s_acknowledged_bug_title = '改善要求承認';
+$s_confirmed_bug_title = '改善要求確認';
+$s_assigned_bug_title = '改善要求割り当て';
+$s_new_bug_button = '新規改善要求';
+$s_feedback_bug_button = 'フィードバック提供';
+$s_acknowledged_bug_button = '改善要求承認';
+$s_confirmed_bug_button = '改善要求確認';
+$s_assigned_bug_button = '改善要求割り当て';
 
 # bug_close.php
 $s_bug_close_msg       = '改善要求が完了しました。';
@@ -453,9 +454,9 @@ $s_resolved_bug_title = '解決状況の入力';
 $s_resolved_bug_button = '解決状況の更新';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = '改善要求が実装されました。↓コメントを記述して下さい。';
-$s_resolve_add_bugnote_title = '実装のコメント';
-$s_bugnote_add_resolve_button = 'コメントの追加';
+$s_bug_resolved_msg = '改善要求が実装されました。下記にコメントを記述して下さい。';
+$s_resolve_add_bugnote_title = '問題解決の理由をコメント追加';
+$s_bugnote_add_resolve_button = 'コメント追加';
 
 # bug_reminder_page.php
 $s_from = '差出人';
@@ -541,7 +542,7 @@ $s_save_login = 'パスワードの保存';
 $s_choose_project = 'プロジェクト選択';
 $s_login_button = 'ログイン';
 $s_signup_link = '新しいユーザーの作成';
-$s_lost_password_link = 'Lost your password?';
+$s_lost_password_link = 'パスワードを紛失しましたか?';
 
 # login_select_proj_page.php
 $s_select_project_button = '選択';
@@ -552,11 +553,11 @@ $s_redirecting = '...次のページ→';
 $s_here = 'Here';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = "パスワードリセット";
+$s_lost_password_done_title = "パスワードのメッセージを送信しました。";
+$s_lost_password_subject = "パスワードリセット";
+$s_lost_password_info = "あなたの失われたパスワードを回復させるために、アカウントの名前および電子メールアドレスを供給してください。<br /><br />データが有効なアカウントに相当すれば、アカウントのための確認コードを含む電子メールによって特別の URL を送られるでしょう。あなたのパスワードを変更するためにこのリンクに従ってください。";
+$s_lost_password_confirm_hash_OK = "あなたの確認は受理されました。パスワードを更新してください。";
 
 # main_page.php
 $s_open_and_assigned_to_me = '私が担当する改善要求';
@@ -687,13 +688,13 @@ $s_confirm_account_pruning = 'ログインされたことのない古いアカウントを削除しても
 $s_edit_user_title = 'ユーザー情報の編集';
 $s_reset_password_button = 'パスワードのリセット';
 $s_delete_user_button = 'アカウント削除';
-$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
+$s_reset_password_msg = 'リセットされたパスワードは、電子メールで確認URLを送ります。';
 $s_reset_password_msg2 = 'パスワードのリセットを行うと、パスワードが無しに設定されます。';
 $s_show_all_users = '全て';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'アカウントが保護されています。パスワードをリセットできません。';
-$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
+$s_account_reset_msg = '確認メッセージはあなたの電子メールアドレスへ送られました...';
 $s_account_reset_msg2 = 'パスワードが無しに設定されました。';
 
 # manage_user_update.php
@@ -712,7 +713,7 @@ $s_manage_link = 'システム管理';
 $s_edit_news_link = 'ニュース編集';
 $s_docs_link = 'ドキュメント';
 $s_logout_link = 'ログアウト';
-$s_my_view_link = '自分のを見る';
+$s_my_view_link = '自己状況閲覧';
 
 # meta_inc.php
 
@@ -831,13 +832,13 @@ $s_selected_project = '選択したプロジェクト';
 $s_valid_project_msg = 'プロジェクトを正しく選択して下さい。';
 
 # signup.php
-$s_signup_done_title = 'Account registration processed';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
-$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
+$s_signup_done_title = 'アカウント登録を処理しました。';
+$s_password_emailed_msg = 'おめでとうございます。登録に成功しました。電子メールアドレスを確認するために、ただいま電子メールを送信しています。このメールに含まれるリンクにアクセスすることで、あなたのアカウントは有効化されるでしょう。';
+$s_no_reponse_msg = 'アカウント確認処理の終了まで 7 日間待ちます。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去されるかもしれません。';
 
 # signup_page.php
-$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
+$s_signup_captcha_request = '右側上の箱の中で表示されたコードを入力します。';
+$s_signup_info = 'このフォームの完成および回答の確認は、指定した電子メールアドレスへ確認電子メールが送られるでしょう。<br />確認メールを用いることであなたのアカウントは有効になります。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去されるかもしれません。<br />アカウント確認電子メールを受け取るために有効な電子メールアドレスを指定しなければなりません。';
 $s_signup_title = 'ユーザー登録';
 $s_signup_button = '登録';
 
@@ -856,15 +857,15 @@ $s_site_settings_updated_msg = 'サイト設定が更新されました。';
 # summary_page.php
 $s_summary_title = '改善要求の要約';
 $s_summary_jpgraph_link = '高度な要約';
-$s_by_project = 'プロジェクトによる';
-$s_by_status = 'ステータスによる';
-$s_by_date = '日数による';
-$s_by_severity = '重要度による';
-$s_by_resolution = '解決状況による';
-$s_by_category = 'カテゴリによる';
-$s_by_priority = '優先度による';
-$s_by_developer = '開発者による';
-$s_by_reporter ='登録者による';
+$s_by_project = 'プロジェクト別';
+$s_by_status = 'ステータス別';
+$s_by_date = '日数別';
+$s_by_severity = '重要度別';
+$s_by_resolution = '解決状況別';
+$s_by_category = 'カテゴリ別';
+$s_by_priority = '優先度別';
+$s_by_developer = '開発者別';
+$s_by_reporter ='登録者別';
 $s_reporter_by_resolution = '登録者毎の解決状況';
 $s_reporter_effectiveness = '登録者毎の有効度';
 $s_developer_by_resolution = '開発者毎の解決状況';
@@ -905,6 +906,7 @@ $s_no = 'いいえ';
 $s_open_filters = 'フィルター変更';
 $s_or_unassigned = 'もしくは未アサイン';
 $s_ok = 'OK';
+$s_select_all = '全選択';
 
 # stored query strings
 $s_use_query = 'フィルター使用';
@@ -927,7 +929,7 @@ $s_product_build = '製品ビルド';
 $s_system_profile = 'システムの詳細説明';
 $s_update_bug_button = '更新';
 $s_bug_assign_to_button = '担当者の割り当て';
-$s_bug_status_to_button = 'Change Status To:';
+$s_bug_status_to_button = 'ステータス変更:';
 $s_reopen_bug_button = '差戻し';
 $s_move_bug_button = '改善要求の移動';
 $s_attached_files = '添付ファイル';
@@ -972,8 +974,8 @@ $s_custom_field_access_level_rw = '読み書き権限';
 $s_custom_field_length_min = '項目長(最小値)';
 $s_custom_field_length_max = '項目長(最大値)';
 $s_custom_field_advanced = '高度な画面で表示';
-$s_custom_field_display_report = 'Display When Reporting Issues';
-$s_custom_field_display_update = 'Display When Updating Issues';
+$s_custom_field_display_report = 'いつ問題改善を報告したか表示';
+$s_custom_field_display_update = 'いつ問題改善を更新したか表示';
 $s_custom_field_display_resolved = '改善要求を解決する場合表示';
 $s_custom_field_display_closed = '改善要求を閉じる場合表示';
 $s_custom_field_require_report = 'レポートで要求';
@@ -982,7 +984,7 @@ $s_custom_field_require_resolved = '解決で要求';
 $s_custom_field_require_closed = 'クローズで要求';
 
 $s_custom_field_sequence = '表示順';
-$s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール,5:Checkbox,6:List,7:Multiselection list';
+$s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列挙,4:メール,5:チェックボックス,6:リスト,7:複数選択リスト';
 
 $s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。もし続行するならば、この項目のすべての値は削除されます。削除したら戻すことはできません。削除したくないなら、ブラウザの戻るボタンを選択して下さい。続行するなら、下のボタンをクリックして下さい。';
 $s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を削除してよろしいですか。';
@@ -1037,5 +1039,5 @@ $s_bug_cloned_to = "改善要求を複製しました";
 $s_bug_created_from = "改善要求を生成しました。 対象";
 
 # Source Control Integration
-$s_checkin = 'Checkin';
+$s_checkin = 'チェックイン';
 ?>

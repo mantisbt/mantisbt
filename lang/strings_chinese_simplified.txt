@@ -11,11 +11,11 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:30 $
+	# $Date: 2004-08-26 17:40:56 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.50 2004-08-16 13:28:30 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.51 2004-08-26 17:40:56 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
@@ -920,6 +920,7 @@ $s_no = '否';
 $s_open_filters = '修改过滤器';
 $s_or_unassigned = '或未指派的';
 $s_ok = '确定';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = '使用过滤器';

@@ -9,11 +9,11 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# -------------------------------------------------
-	# $Revision: 1.72 $
+	# $Revision: 1.73 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:44 $
+	# $Date: 2004-08-26 17:40:58 $
 	#
-	# $Id: strings_polish.txt,v 1.72 2004-08-16 13:28:44 bigbadger Exp $
+	# $Id: strings_polish.txt,v 1.73 2004-08-26 17:40:58 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -905,6 +905,7 @@ $s_no = 'Nie';
 $s_open_filters = 'Zmieñ filtr';
 $s_or_unassigned = 'lub nieprzypisane';
 $s_ok = 'OK';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = 'U¿yj filtru';

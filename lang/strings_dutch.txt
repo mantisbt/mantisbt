@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.71 $
+	# $Revision: 1.72 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-19 10:08:19 $
+	# $Date: 2004-08-26 17:40:57 $
 	#
-	# $Id: strings_dutch.txt,v 1.71 2004-08-19 10:08:19 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.72 2004-08-26 17:40:57 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -906,6 +906,7 @@ $s_no = 'No';
 $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
 $s_ok = 'OK';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = 'Use Filter';

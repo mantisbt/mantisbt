@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.79 $
+	# $Revision: 1.80 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:41 $
+	# $Date: 2004-08-26 17:40:57 $
 	#
-	# $Id: strings_french.txt,v 1.79 2004-08-16 13:28:41 bigbadger Exp $
+	# $Id: strings_french.txt,v 1.80 2004-08-26 17:40:57 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -910,6 +910,7 @@ $s_no = 'Non';
 $s_open_filters = 'Changer de filtre';
 $s_or_unassigned = 'Ou non assigné';
 $s_ok = 'OK';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = 'Utiliser le filtre';

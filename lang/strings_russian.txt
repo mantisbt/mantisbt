@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.68 $
+	# $Revision: 1.69 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-18 09:32:31 $
+	# $Date: 2004-08-26 17:40:58 $
 	#
-	# $Id: strings_russian.txt,v 1.68 2004-08-18 09:32:31 bigbadger Exp $
+	# $Id: strings_russian.txt,v 1.69 2004-08-26 17:40:58 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -904,6 +904,7 @@ $s_no = 'Нет';
 $s_open_filters = 'Изменить фильтр';
 $s_or_unassigned = 'Или неназначенные';
 $s_ok = 'OK';
+$s_select_all = 'Выбрать все';
 
 # stored query strings
 $s_use_query = 'Использовать фильтр';
