@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: system_utils.php,v 1.2 2004-07-25 00:13:08 thraxisp Exp $
+	# $Id: system_utils.php,v 1.3 2004-07-25 20:56:34 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -63,7 +63,9 @@
 		</SELECT> to
 		<SELECT name="dest_id">
 			<?php
-				$t_dest_ids = array('fixed in');  # @@@ should be expanded and configurable
+				# @@@ should be expanded and configurable
+				# list matches exact field name from database
+				$t_dest_ids = array('fixed_in_version');
 				foreach ( $t_dest_ids as $t_id ) {
 					printf("<OPTION VALUE=\"%s\">%s", $t_id, $t_id );
 				}

@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.1 2004-07-23 23:20:16 vboctor Exp $
+	# $Id: move_db2disk.php,v 1.2 2004-07-25 20:56:34 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,7 +29,7 @@
 			# Windows absolute
 			return '';
 		}
-		return '..' . ( strstr( PHP_OS, "WIN") ? "\\" :  "/" );
+		return dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR;
 	}
 
 	#------ move file attachments to issues from database to disk

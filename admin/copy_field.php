@@ -8,14 +8,14 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: copy_field.php,v 1.1 2004-07-25 00:13:08 thraxisp Exp $
+	# $Id: copy_field.php,v 1.2 2004-07-25 20:56:34 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	require_once( '../core.php' );
+	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 	
-	$f_source = gpc_get_int( 'source_id' );
-	$f_dest = gpc_get( 'dest_id' );
+	$f_source_field_id = gpc_get_int( 'source_id' );
+	$f_dest_field = gpc_get( 'dest_id' );
 ?>
 <html>
 <head>
@@ -28,7 +28,7 @@
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="system_utils.php">Back to System Utilities</a> ]
-			[ <a href="copy_field.php">Refresh view</a> ]
+			[ <a href="copy_field.php?source_id=<?php echo $f_source_field_id ?>&amp;dest_id=<?php echo $f_dest_field ?>">Refresh view</a> ]
 		</td>
 		<td class="title">
 			Mantis Administration - Copy Custom Fields to Built-in
@@ -39,19 +39,25 @@
 
 <?php
 	#checks on validity
+	$t_valid_fields = array( 'fixed_in_version' );
+	if ( ! in_array( $f_dest_field, $t_valid_fields ) ) {
+		echo '<p>Invalid destination field (' . $f_dest_field . ') specified.</p>';
+		echo '</body></html>';
+		exit;
+	}
 	#@@@ check that source and destination are compatible
 
 	$t_string_table = config_get( 'mantis_custom_field_string_table' );
 	$t_bug_table = config_get( 'mantis_bug_table' );
-	$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . $f_source . ' and value <> \'\'';
+	$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . $f_source_field_id . ' and value <> \'\'';
 
 	$result = @db_query( $query );
-	if ( false == $result ) {
-		echo '<p>No fields need to be updated.';
+	if ( FALSE == $result ) {
+		echo '<p>No fields need to be updated.</p>';
 	}else{
 
 		$count = db_num_rows( $result );
-		echo '<p>Found ' . $count . ' fields to be updated.';
+		echo '<p>Found ' . $count . ' fields to be updated.</p>';
 		$t_failures = 0;
 
 		if ( $count > 0 ) {
@@ -66,37 +72,36 @@
 
 			# trace bug id back to project
 			$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
-			$t_bug_id = $v_bug_id;
 			$t_cust_value = $v_value;
-			printf("\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class(), $t_bug_id, $v_value);
+			printf("\n<tr %s><td><a href=\"../view.php?id=%d\">%07d</a></td><td>%s</td><td>", 
+					helper_alternate_class(), $v_bug_id, $v_bug_id, $v_value);
 
-			switch ( $f_dest ) {
-				case 'fixed in':
-					$t_version_id = version_get_id( $t_cust_value, $t_project_id );
-					if ( $t_version_id <> FALSE ) {
-						# it matched, update value
-						$query2 = "UPDATE $t_bug_table SET fixed_in_version = '$t_cust_value' WHERE id = $t_bug_id";
-						$update = @db_query( $query2 );
-						if ( ! $update ) {
-							echo 'database update failed';
-							$t_failures++;
-						}else{
-							echo 'applied';
-						}
-					}else{
-						echo 'no matching version found';
-						$t_failures++;
-					}
+			# validate field contents
+			switch ( $f_dest_field ) {
+				case 'fixed_in_version':
+					$t_valid = ( version_get_id( $t_cust_value, $t_project_id ) == FALSE ) ? FALSE : TRUE;
 					break;
-				# other conversions go here
 				default:
+					$t_valid = FALSE;
+			}
+			if ( $t_valid ) {
+				# value was valid, update value
+				if ( ! bug_set_field( $v_bug_id, $f_dest_field, $t_cust_value ) ) {
+					echo 'database update failed';
+					$t_failures++;
+				}else{
+					echo 'applied';
+				}
+			}else{
+				echo 'field value was not valid or previously defined';
+				$t_failures++;
 			}
 			echo '</td></tr>';
 		}
 
 		echo '</table><br />' . $count . ' fields processed, ' . $t_failures . ' failures';
 	}
-	echo '<p> Completed...';
+	echo '<p> Completed...<p>';
 ?>
 </body>
 </html>
