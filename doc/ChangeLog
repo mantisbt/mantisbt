@@ -25,6 +25,8 @@ Mantis ChangeLog
 - New Custom Function: auth_can_change_password - returns true if Mantis can change the password
 - New Config: $g_display_errors - controlls error handler display
 - New Config: $g_reopen_bug_threshold - access level needed to re-open bugs
+- New Config: $g_update_bug_assign_threshold - access level needed to show the Assign To: button bug_view*_page or 
+       the Assigned list in bug_update*_page.
 - Removed config option ($g_show_notices, $g_show_warnings): subsumed into $g_display_errors
 - Removed config option ($g_port): $if requried, g_hostname should supply the port e.g. localhost:3306
 

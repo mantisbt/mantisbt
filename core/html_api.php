@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.135 2004-10-01 16:57:49 thraxisp Exp $
+	# $Id: html_api.php,v 1.136 2004-10-02 14:53:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -721,7 +721,7 @@
 		}
 
 		# make sure current user has access to modify bugs.
-		if ( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+		if ( !access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $p_bug_id ) ) {
 			return;
 		}
 

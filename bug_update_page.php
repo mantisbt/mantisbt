@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.85 2004-09-28 15:03:30 thraxisp Exp $
+	# $Id: bug_update_page.php,v 1.86 2004-10-02 14:53:02 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -175,10 +175,17 @@
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td colspan="5">
+	<?php if ( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
+	?>
 		<select name="handler_id">
 			<option value="0"></option>
 			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
 		</select>
+	<?php
+		} else {
+			echo user_get_name( $t_bug->handler_id );
+		}
+	?>
 	</td>
 
 </tr>

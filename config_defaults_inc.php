@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.215 2004-10-01 18:08:23 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.216 2004-10-02 14:53:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -798,6 +798,11 @@
 
 	# access level needed to be able to be listed in the assign to field.
 	$g_handle_bug_threshold			= DEVELOPER;
+	# access level needed to show the Assign To: button bug_view*_page or 
+	#  the Assigned list in bug_update*_page.
+	#  This allows control over who can route bugs
+	# This defaults to $g_handle_bug_threshold
+	# $g_update_bug_assign_threshold			= DEVELOPER;
 
 	# access level needed to view private bugnotes
 	# Look in the constant_inc.php file if you want to set a different value
