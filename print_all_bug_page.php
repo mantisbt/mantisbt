@@ -151,11 +151,6 @@
 	$row_count = db_num_rows( $result );
 ?>
 <?php print_page_top1() ?>
-<?php
-	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
-		print_meta_redirect( $PHP_SELF."?f_offset=".$f_offset, get_current_user_pref_field( "refresh_delay" )*60 );
-	}
-?>
 <?php print_head_bottom() ?>
 <?php print_body_top() ?>
 
