@@ -27,7 +27,7 @@ Mantis
  * Modified the report_bug pages to properly honor $g_show_report
  * Removed email_bug_info_to_address()
  * Removed print_handler_option_list()
-
+ * Removed view_all_assigned/unassigned/report_bug_page and associated variables.
 08.28.2001  -   0.15.7
 
  * Fixed problem with account prefs not being updated.

@@ -321,34 +321,6 @@
 		PRINT "</div>";
 	}
 	### --------------------
-	# prints the view all bugs
-	# if the $p_page matches a url then don't make that a link
-	function print_view_all_bugs_menu( $p_page="" ) {
-		global 	$g_view_all_bug_page, $s_all_bugs_link,
-				$g_view_all_reported_bug_page, $s_reported_bugs_link,
-				$g_view_all_assigned_bug_page, $s_assigned_bugs_link,
-				$g_view_all_unassign_bug_page, $s_unassigned_bugs_link;
-
-		$t_view_all_bug_page 			= $g_view_all_bug_page;
-		$t_view_all_reported_bug_page 	= $g_view_all_reported_bug_page;
-		$t_view_all_assigned_bug_page 	= $g_view_all_assigned_bug_page;
-		$t_view_all_unassign_bug_page 	= $g_view_all_unassign_bug_page;
-
-		switch ( $p_page ) {
-			case $t_view_all_bug_page			: $t_view_all_bug_page			= ""; break;
-			case $t_view_all_reported_bug_page	: $t_view_all_reported_bug_page	= ""; break;
-			case $t_view_all_assigned_bug_page	: $t_view_all_assigned_bug_page	= ""; break;
-			case $t_view_all_unassign_bug_page	: $t_view_all_unassign_bug_page	= ""; break;
-		}
-
-		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $t_view_all_bug_page, $s_all_bugs_link );
-			print_bracket_link( $t_view_all_reported_bug_page, $s_reported_bugs_link );
-			print_bracket_link( $t_view_all_assigned_bug_page, $s_assigned_bugs_link );
-			print_bracket_link( $t_view_all_unassign_bug_page, $s_unassigned_bugs_link );
-		PRINT "</div>";
-	}
-	### --------------------
 	# prints the manage doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_doc_menu( $p_page="" ) {

@@ -714,11 +714,8 @@
 
 	#----------------------------------
 	# bug view/update
-	$g_view_all_assigned_bug_page     = $g_path."view_all_assign_bug_page".$g_php;
 	$g_view_all_bug_page              = $g_path."view_all_bug_page".$g_php;
 	$g_view_all_include_file          = $g_absolute_path."view_all_inc.php";
-	$g_view_all_reported_bug_page     = $g_path."view_all_report_bug_page".$g_php;
-	$g_view_all_unassign_bug_page     = $g_path."view_all_unassign_bug_pg".$g_php;
 
 	$g_view_bug_advanced_page         = $g_path."view_bug_advanced_page".$g_php;
 	$g_view_bug_page                  = $g_path."view_bug_page".$g_php;

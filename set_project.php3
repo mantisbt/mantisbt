@@ -30,20 +30,14 @@
 	# redirect to 'same page' when switching projects.
 	# view_all_* pages, and summary
 	if ( $valid_project==1 ) {
-		if (!isset($HTTP_REFERER)) {
+		if ( !isset( $HTTP_REFERER ) ) {
 			$t_redirect_url = $g_main_page;
-		} else if (eregi($g_view_all_bug_page,$HTTP_REFERER)){
+		} else if ( eregi( $g_view_all_bug_page,$HTTP_REFERER ) ){
 			$t_redirect_url = $g_view_all_bug_page;
-		} else if (eregi($g_view_all_assigned_bug_page,$HTTP_REFERER)){
-			$t_redirect_url = $g_view_all_assigned_bug_page;
-		} else if (eregi($g_view_all_reported_bug_page,$HTTP_REFERER)){
-			$t_redirect_url = $g_view_all_reported_bug_page;
-		} else if (eregi($g_view_all_unassign_bug_page,$HTTP_REFERER)){
-			$t_redirect_url = $g_view_all_unassign_bug_page;
-		} else if (eregi($g_summary_page,$HTTP_REFERER)){
+		} else if ( eregi( $g_summary_page,$HTTP_REFERER ) ){
 			$t_redirect_url = $g_summary_page;
-		} else if (eregi($g_summary_page,$HTTP_REFERER)){
-			$t_redirect_url = $g_summary_page;
+		} else if ( eregi( $g_manage_project_user_menu_page,$HTTP_REFERER ) ){
+			$t_redirect_url = $g_manage_project_user_menu_page;
 		} else {
 			$t_redirect_url = $g_main_page;
 		}

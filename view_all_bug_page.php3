@@ -30,15 +30,6 @@
 		$f_search_text = false;
 	}
 
-/*	$f_hide_closed = "";
-	$f_limit_view = $g_default_limit_view;
-	$f_highlight_changed = $g_default_show_changed;
-	$f_show_category = "any";
-	$f_show_severity = "any";
-	$f_show_status = "any";
-	$f_user_id = "any";
-	$f_assign_id = "any";*/
-
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
 	}
@@ -189,8 +180,6 @@
 <? print_top_page( $g_top_include_page ) ?>
 
 <? print_menu( $g_menu_include_file ) ?>
-
-<? #print_view_all_bugs_menu( $g_view_all_bug_page ) ?>
 
 <? include( $g_view_all_include_file ) ?>
 
