@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.48 2004-02-19 13:54:22 vboctor Exp $
+	# $Id: bug_api.php,v 1.49 2004-02-22 04:26:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -554,49 +554,32 @@
 		# Update the last update date
 		bug_update_date( $p_bug_id );
 
-		# @@@ VBOCTOR: I don't like the following code since it hard-codes some assumptions
-		#              about the bug states and when an email should be sent.  There should
-		#              be configuration options that achieves the same in a generic way.
-		# Suggestion:
-		#		- An email should always be sent if the handler is changed, independent
-		#		of whether the status is changed or not.  The configs should specify
-		#		who is to be notified in this case.
-		#		- The first index of $g_notify_flags should be the status id rather
-		#		a string that corresponds to it.  For example, _NEW rather than
-		#		'new'.
-		#               - $s_bug_update_notification[<status>] that is to be used to
-		#		determine the message to be displayed at the top of the email.
-		#
-		# If we should notify and it's in feedback state then send an email
-		switch ( $p_bug_data->status ) {
-			case NEW_:
-				# This will be used in the case where auto-assign = OFF, in this case the bug can be 
-				# assigned/unassigned while the status is NEW.
-				# @@@ In case of unassigned, the e-mail will still say ASSIGNED, but it will be shown
-				# that the handler is empty + history ( old_handler => @null@ ).
-				if ( $p_bug_data->handler_id != $t_old_data->handler_id ) {
-					email_assign( $p_bug_id );
-				}
-				break;
-			case FEEDBACK:
-				if ( $p_bug_data->status!= $t_old_data->status ) {
-					email_feedback( $p_bug_id );
-				}
-				break;
-			case ASSIGNED:
-				if ( ( $p_bug_data->handler_id != $t_old_data->handler_id )
-				  || ( $p_bug_data->status != $t_old_data->status ) ) {
-					email_assign( $p_bug_id );
-				}
-				break;
-			case RESOLVED:
-				email_resolved( $p_bug_id );
-				break;
-			case CLOSED:
-				email_close( $p_bug_id );
-				break;
+		$t_action_prefix = 'email_notification_title_for_action_bug_';
+		$t_status_prefix = 'email_notification_title_for_status_bug_';
+
+		# bug assigned
+		if ( $t_old_data->handler_id != $p_bug_data->handler_id )
+		{
+			$t_message = lang_get_defaulted( $t_action_prefix . 'assigned', '' );
+			email_generic( $p_bug_id, 'assigned', $t_message );
+			return true;
 		}
-	
+
+		# status changed
+		if ( $t_old_data->status != $p_bug_data->status ) {
+			$t_status = get_enum_to_string( config_get( 'status_enum_string' ), $p_bug_data->status );
+			$t_status = str_replace( ' ', '', $t_status );
+			$t_message = lang_get_defaulted( $t_status_prefix . $t_status, '' );
+			email_generic( $p_bug_id, 'status_' . $t_status, $t_message );
+			return true;
+		}
+
+		# @@@ handle priority change if it requires special handling
+
+		# generic update notification
+		$t_message = lang_get_defaulted( $t_action_prefix . 'updated' , '' );
+		email_generic( $p_bug_id, 'updated', $t_message );
+
 		return true;
 	}
 

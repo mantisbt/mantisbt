@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.65 2004-02-05 21:10:46 jlatour Exp $
+	# $Id: email_api.php,v 1.66 2004-02-22 04:26:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -345,52 +345,47 @@
 		email_send( $v_email, lang_get( 'news_password_msg' ), $t_message );
 	}
 	# --------------------
+	# send a generic email
+	# $p_notify_type: use check who she get notified of such event.
+	# $p_message: message to be included at the top of the email message.
+	function email_generic( $p_bug_id, $p_notify_type, $p_message = null ) {
+		$t_bcc = email_build_bcc_list( $p_bug_id, $p_notify_type );
+		email_bug_info( $p_bug_id, $p_message, $t_bcc );
+	}
+	# --------------------
 	# send notices when a new bug is added
 	function email_new_bug( $p_bug_id ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, 'new' );
-		email_bug_info( $p_bug_id, lang_get( 'new_bug_msg' ), $t_bcc );
+		email_generic( $p_bug_id, 'new', lang_get( 'email_notification_title_for_action_bug_submitted' ) );
 	}
 	# --------------------
 	# send notices when a new bugnote
 	function email_bugnote_add( $p_bug_id ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, 'bugnote' );
-		email_bug_info( $p_bug_id, lang_get( 'email_bugnote_msg' ), $t_bcc );
+		email_generic( $p_bug_id, 'bugnote', lang_get( 'email_notification_title_for_action_bugnote_submitted' ) );
 	}
 	# --------------------
 	# send notices when a bug is RESOLVED
 	function email_resolved( $p_bug_id ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, 'resolved' );
-		email_bug_info( $p_bug_id, lang_get( 'email_resolved_msg' ), $t_bcc );
+		email_generic( $p_bug_id, 'status_resolved', lang_get( 'email_notification_title_for_status_bug_resolved' ) );
 	}
 	# --------------------
 	# send notices when a bug is CLOSED
 	function email_close( $p_bug_id ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, 'closed' );
-		email_bug_info( $p_bug_id, lang_get( 'email_close_msg' ), $t_bcc );
-	}
-	# --------------------
-	# send notices when a bug is set to FEEDBACK
-	function email_feedback( $p_bug_id ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, 'feedback' );
-		email_bug_info( $p_bug_id, lang_get( 'email_feedback_msg' ), $t_bcc );
+		email_generic( $p_bug_id, 'status_closed', lang_get( 'email_notification_title_for_status_bug_closed' ) );
 	}
 	# --------------------
 	# send notices when a bug is REOPENED
 	function email_reopen( $p_bug_id ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, 'reopened' );
-		email_bug_info( $p_bug_id, lang_get( 'email_reopen_msg' ), $t_bcc );
+		email_generic( $p_bug_id, 'reopened', lang_get( 'email_notification_title_for_action_bug_reopened' ) );
 	}
 	# --------------------
 	# send notices when a bug is ASSIGNED
 	function email_assign( $p_bug_id ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, 'assigned' );
-		email_bug_info( $p_bug_id, lang_get( 'email_assigned_msg' ), $t_bcc );
+		email_generic( $p_bug_id, 'assigned', lang_get( 'email_notification_title_for_action_bug_assigned' ) );
 	}
 	# --------------------
 	# send notices when a bug is DELETED
 	function email_bug_deleted( $p_bug_id ) {
-		$t_bcc = email_build_bcc_list( $p_bug_id, 'deleted' );
-		email_bug_info( $p_bug_id, lang_get( 'email_bug_deleted_msg' ), $t_bcc );
+		email_generic( $p_bug_id, 'deleted', lang_get( 'email_notification_title_for_action_bug_deleted' ) );
 	}
 	# --------------------
 	# Build the bug info part of the message
@@ -419,7 +414,7 @@
 		$t_sta_str = get_enum_element( 'status', $v_status );
 		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
-		if ( $p_message != lang_get( 'email_bug_deleted_msg' ) ) {
+		if ( $p_message != lang_get( 'email_notification_title_for_action_bug_deleted' ) ) {
 			$t_message .= string_get_bug_view_url_with_fqdn( $p_bug_id ) . "\n";
 			$t_message .= $g_email_separator1."\n";
 		}
@@ -544,7 +539,10 @@
 
 		# build message
 		$t_category = '';
-		$t_message = $p_message."\n";
+		$t_message = '';
+		if ( ( $p_message !== null ) && ( !is_blank( $p_message ) ) ) {
+			$t_message .= $p_message."\n";
+		}
 		$t_message .= email_build_bug_message( $p_bug_id, $p_message, $t_category );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 		$t_message .= email_build_history_message( $p_bug_id );

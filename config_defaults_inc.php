@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.138 2004-02-12 21:09:03 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.139 2004-02-22 04:26:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -131,29 +131,29 @@
 	$g_enable_email_notification	= ON;
 
 	# The following two config options allow you to control who should get email
-	# notifications on different actions.  The first option (default_notify_flags)
+	# notifications on different actions/statuses.  The first option (default_notify_flags)
 	# sets the default values for different user categories.  The user categories
 	# are:
 	# 
-	# 	   'reporter': the reporter of the bug
-	# 	    'handler': the handler of the bug
-	# 	    'monitor': users who are monitoring a bug
-	# 	   'bugnotes': users who have added a bugnote to the bug
-	# 'threshold_max': all users below this access level...
-	# 'threshold_min': ..and above this access level
+	#      'reporter': the reporter of the bug
+	#       'handler': the handler of the bug
+	#       'monitor': users who are monitoring a bug
+	#      'bugnotes': users who have added a bugnote to the bug
+	# 'threshold_max': all users with access <= max
+	# 'threshold_min': ..and with access >= min
 	# 
-	# The second config option (notify_flags) sets overrides for specific actions.
+	# The second config option (notify_flags) sets overrides for specific actions/statuses.
 	# If a user category is not listed for an action, the default from the config
 	# option above is used.  The possible actions are:
 	# 
-	# 	   'new': a new bug has been added
-	# 'assigned': a bug has been assigned
-	# 'resolved': a bug has been resolved
-	#  'bugnote': a bugnote has been added to a bug
-	# 'reopened': a bugnote has been reopened
-	#   'closed': a bug has been closed
-	#  'deleted': a bug has been deleted
-	# 'feedback': a bug has been put into the FEEDBACK state
+	#             'new': a new bug has been added
+ 	#        'assigned': a bug has been assigned
+	#        'reopened': a bug has been reopened
+ 	#         'deleted': a bug has been deleted
+	#         'updated': a bug has been updated
+	#         'bugnote': a bugnote has been added to a bug
+	# 'status_<status>': eg: 'status_resolved', 'status_closed', 'status_feedback', 'status_acknowledged', ...etc.
+
 	# 
 	# If you wanted to have all developers get notified of new bugs you might add
 	# the following lines to your config file:

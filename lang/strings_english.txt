@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.153 $
+	# $Revision: 1.154 $
 	# $Author: vboctor $
-	# $Date: 2004-02-11 22:16:30 $
+	# $Date: 2004-02-22 04:26:48 $
 	#
-	# $Id: strings_english.txt,v 1.153 2004-02-11 22:16:30 vboctor Exp $
+	# $Id: strings_english.txt,v 1.154 2004-02-22 04:26:48 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -246,14 +246,19 @@ $s_reset_request_msg = 'There was a request to have your password reset';
 $s_account_name_msg = 'Your account name is';
 $s_news_password_msg = 'Here is your new password';
 
-$s_new_bug_msg = 'The following NEW bug has been ADDED.';
-$s_email_bugnote_msg = 'A BUGNOTE has been added to this bug.';
-$s_email_resolved_msg = 'The following bug has been RESOLVED.';
-$s_email_close_msg = 'The following bug has been CLOSED';
-$s_email_feedback_msg = 'The following bug requires your FEEDBACK.';
-$s_email_reopen_msg = 'The following bug has been REOPENED.';
-$s_email_assigned_msg = 'The following bug has been ASSIGNED.';
-$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
