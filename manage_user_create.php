@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.19 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: manage_user_create.php,v 1.20 2004-08-20 13:18:09 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -19,9 +19,8 @@
 
 	$f_username			= gpc_get_string( 'username' );
 	$f_realname			= gpc_get_string( 'realname' );
-	$f_password			= gpc_get_string( 'password' );
-	$f_password_verify	= gpc_get_string( 'password_verify' );
-	$f_random_password	= gpc_get_bool( 'random_password' );
+	$f_password			= gpc_get_string( 'password', '' );
+	$f_password_verify	= gpc_get_string( 'password_verify', '' );
 	$f_email			= gpc_get_string( 'email' );
 	$f_access_level		= gpc_get_string( 'access_level' );
 	$f_protected		= gpc_get_bool( 'protected' );
