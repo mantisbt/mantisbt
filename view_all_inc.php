@@ -121,7 +121,8 @@
 	</tr>
 	<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
 		<td width="2%">
-			&nbsp;
+			<? print_view_bug_sort_link( $link_page, "p", "priority", $f_sort, $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
 		</td>
 		<td width="8%">
 			<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
