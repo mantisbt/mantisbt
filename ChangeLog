@@ -3,6 +3,7 @@ Mantis
 12.01.2001  -   0.16.1
 
  * Fixed SQL error when reporting bug in a private project.
+ * Fixed problem where upgrade scripts were not executed for 0.16.0 upgrade.
 
 11.27.2001  -   0.16.0
 

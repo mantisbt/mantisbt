@@ -26,15 +26,10 @@
 			}
 		}
 
-		function PerformItem( $p_index ) {
-			PRINT "Executing upgrade #".$p_index."<br>";
-			#$result = db_query( $this->query_arr[$p_index] );
-		}
-
 		function PerformAll() {
 			for ( $i=0; $i<$this->item_count; $i++ ) {
 				PRINT "Executing upgrade #".$i.": ".$this->query_arr[$i]."<br>";
-				#$result = db_query( $this->query_arr[$i] );
+				$result = db_query( $this->query_arr[$i] );
 			}
 		}
 	}
