@@ -46,6 +46,7 @@
 <p>
 <div align=center>
 <?
+	### SUCCESS
 	if ( $result ) {
 		$t_headline  = string_unsafe( $f_headline );
 		$t_body      = string_unsafe( $f_body );
@@ -70,6 +71,7 @@
 </div>
 <?
 	}
+	### FAILURE
 	else {
 		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 	}

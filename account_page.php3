@@ -24,7 +24,9 @@
 			WHERE cookie_string='$g_string_cookie_val'";
     $result = db_mysql_query( $query );
 	$row = mysql_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "u" );
+	if ( $row ) {
+		extract( $row, EXTR_PREFIX_ALL, "u" );
+	}
 ?>
 
 <p>

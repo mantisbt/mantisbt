@@ -27,9 +27,11 @@
 		WHERE id='$f_id'";
     $result = db_mysql_query( $query );
 	$row = mysql_fetch_array( $result );
-    extract( $row, EXTR_PREFIX_ALL, "v" );
-    $v_headline = string_edit( $v_headline );
-    $v_body = string_edit( $v_body );
+	if ( $row ) {
+    	extract( $row, EXTR_PREFIX_ALL, "v" );
+    }
+   	$v_headline = string_edit( $v_headline );
+   	$v_body = string_edit( $v_body );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
