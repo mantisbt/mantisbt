@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.28 2003-03-19 11:18:36 int2str Exp $
+	# $Id: bug_report_page.php,v 1.29 2003-04-09 11:07:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,6 +42,8 @@
 	$f_view_state			= gpc_get_int( 'view_state', VS_PUBLIC );
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
+
+	$t_project_id			= helper_get_current_project();
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
@@ -55,6 +57,7 @@
 <!-- Title -->
 <tr>
 	<td class="form-title">
+		<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 		<input type="hidden" name="handler_id" value="0" />
 		<?php echo lang_get( 'enter_report_details_title' ) ?>
 	</td>
@@ -170,11 +173,11 @@
 <!-- Custom Fields -->
 <?php
 	$t_custom_fields_found = false;
-	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if( !$t_def['advanced'] && custom_field_has_write_access_to_project( $t_id, helper_get_current_project() ) ) {
+		if( !$t_def['advanced'] && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
 			$t_custom_fields_found = true;
 ?>
 <tr <?php echo helper_alternate_class() ?>>

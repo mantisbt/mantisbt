@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.24 2003-03-20 07:09:36 jfitzell Exp $
+	# $Id: bug_report.php,v 1.25 2003-04-09 11:07:46 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,11 +23,6 @@
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
 <?php
-	# this page is invalid for the 'All Project' selection
-	if ( ALL_PROJECTS == helper_get_current_project() ) {
-		print_header_redirect( 'login_select_proj_page.php?ref=' . string_get_bug_report_url() );
-	}
-
 	access_ensure_project_level( config_get('report_bug_threshold' ) );
 
 	$f_build				= gpc_get_string( 'build', '' );
@@ -50,18 +45,17 @@
 
 	$f_file					= gpc_get_file( 'file', null );
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
+	$f_project_id			= gpc_get_int( 'project_id' );
 
 	$t_reporter_id		= auth_get_current_user_id();
-	$t_project_id		= helper_get_current_project();
 	$t_upload_method	= config_get( 'file_upload_method' );
-
 
 	# If a file was uploaded, and we need to store it on disk, let's make
 	#  sure that the file path for this project exists
 	if ( is_uploaded_file( $f_file['tmp_name'] ) &&
 		  file_allow_bug_upload() &&
 		  ( DISK == $t_upload_method || FTP == $t_upload_method ) ) {
-		$t_file_path = project_get_field( $t_project_id, 'file_path' );
+		$t_file_path = project_get_field( $f_project_id, 'file_path' );
 
 		if ( !file_exists( $t_file_path ) ) {
 			trigger_error( ERROR_NO_DIRECTORY, ERROR );
@@ -84,7 +78,7 @@
 		}
 	}
 
-	$t_bug_id = bug_create( $t_project_id,
+	$t_bug_id = bug_create( $f_project_id,
 					$t_reporter_id, $f_handler_id,
 					$f_priority,
 					$f_severity, $f_reproducibility,
@@ -105,7 +99,7 @@
 
 
 	# Handle custom field submission
-	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $f_project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		# Do not set custom field value if user has no write access.
 		if( !custom_field_has_write_access( $t_id, $t_bug_id ) ) {
