@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.29 2004-12-18 09:35:21 marcelloscata Exp $
+	# $Id: relationship_api.php,v 1.30 2005-02-18 17:58:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -682,7 +682,13 @@
 
  	# --------------------
  	# print HTML relationship listbox
-	function relationship_list_box( $p_default_rel_type = -1 ) {
+	function relationship_list_box( $p_default_rel_type = -1, $p_select_name = "rel_type", $p_include_any = false) {
+?>
+<select name="<?php echo $p_select_name?>">
+<?php if ($p_include_any) { ?>
+<option value="any" <?php echo ( $p_default_rel_type == -1 ? ' selected' : '' ) ?>>[<?php echo lang_get( 'any' ) ?>]</option>
+<?php 
+    } 
 ?>
 <select name="rel_type">
 <option value="<?php echo BUG_RELATED ?>"<?php echo ( $p_default_rel_type == BUG_RELATED ? ' selected' : '' ) ?>><?php echo lang_get( 'related_to' ) ?></option>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.84 2005-02-13 21:36:37 jlatour Exp $
+	# $Id: filter_api.php,v 1.85 2005-02-18 17:58:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -15,6 +15,7 @@
 	require_once( $t_core_dir . 'user_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'collapse_api.php' );
+	require_once( $t_core_dir . 'relationship_api.php' );
 
 	###########################################################################
 	# Filter API
@@ -55,6 +56,7 @@
 		$t_project_table		= config_get( 'mantis_project_table' );
 		$t_bug_monitor_table	= config_get( 'mantis_bug_monitor_table' );
 		$t_limit_reporters		= config_get( 'limit_reporters' );
+		$t_bug_relationship_table	= config_get( 'mantis_bug_relationship_table' );
 		$t_report_bug_threshold		= config_get( 'report_bug_threshold' );
 
 		$t_current_user_id = auth_get_current_user_id();
@@ -506,6 +508,27 @@
 			} else {
 				array_push( $t_where_clauses, "( $t_table_name.user_id=$t_clauses[0] )" );
 			}
+		}
+		# bug relationship
+		$t_any_found = false;
+		$c_rel_type = $t_filter['relationship_type'];
+		$c_rel_bug = $t_filter['relationship_bug'];
+		if ( -1 == $c_rel_type || 0 == $c_rel_bug) {
+			$t_any_found = true;
+		}
+		if ( !$t_any_found ) {
+		    # use the complementary type
+		    $c_rel_type = relationship_get_complementary_type($c_rel_type);
+			$t_clauses = array();
+			$t_table_name = 'relationship';
+			array_push( $t_from_clauses, $t_bug_relationship_table );
+			array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table as $t_table_name ON $t_table_name.destination_bug_id = $t_bug_table.id" );
+			// get reverse relationships
+			if ( $c_rel_type == 1 ) array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table as $t_table_name"."2 ON $t_table_name"."2.source_bug_id = $t_bug_table.id" );
+ 			array_push( $t_clauses, "($t_table_name.relationship_type='$c_rel_type' AND $t_table_name.source_bug_id='$c_rel_bug')" );
+ 			// get reverse relationships
+			if ( $c_rel_type == 1 ) array_push( $t_clauses, "($t_table_name"."2.relationship_type='$c_rel_type' AND $t_table_name"."2.destination_bug_id='$c_rel_bug')" );
+			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
 		}
 
 		# custom field filters
@@ -1389,8 +1412,11 @@
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>" id="highlight_changed_filter"><?php PRINT lang_get( 'changed' ) ?>:</a>
 			</td>
-			<td class="small-caption" valign="top" colspan="4">
+			<td class="small-caption" valign="top" colspan="2">
 				<a href="<?php PRINT $t_filters_url . 'do_filter_by_date'; ?>" id="do_filter_by_date_filter"><?php PRINT lang_get( 'use_date_filters' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top" colspan="2">
+				<a href="<?php PRINT $t_filters_url . 'relationship_type'; ?>" id="relationship_type_filter"><?php PRINT lang_get( 'bug_relationships' ) ?>:</a>
 			</td>
 		</tr>
 		<tr class="row-1">
@@ -1418,7 +1444,7 @@
 				<?php PRINT $t_filter['highlight_changed']; ?>
 				<input type="hidden" name="highlight_changed" value="<?php echo $t_filter['highlight_changed'];?>" />
 			</td>
-			<td class="small-caption" valign="top" colspan="4" id="do_filter_by_date_filter_target">
+			<td class="small-caption" valign="top" colspan="2" id="do_filter_by_date_filter_target">
 							<?php
 							if ( 'on' == $t_filter['do_filter_by_date'] ) {
 								?>
@@ -1469,6 +1495,28 @@
 							}
 							?>
 			</td>
+
+			<td class="small-caption" valign="top" colspan="2" id="relationship_type_filter_target">
+							<?php
+								$c_rel_type = $t_filter['relationship_type'];
+								$c_rel_bug = $t_filter['relationship_bug'];
+								if ( -1 == $c_rel_type || 0 == $c_rel_bug ) {
+									PRINT lang_get( 'any' );
+								} else {
+								    PRINT relationship_get_description_for_history ($c_rel_type) . ' ' . $c_rel_bug;
+								}
+
+							?>
+			</td>
+
+
+
+
+			<?php 
+				if ( $t_custom_cols > $t_filter_cols ) {
+					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
+				}
+			?>
 		</tr>
 		<?php
 
@@ -2002,6 +2050,12 @@
 		if ( !isset( $p_filter_arr['view_state'] ) ) {
 			$p_filter_arr['view_state'] = gpc_get_int( 'view_state', '' );
 		}
+		if ( !isset( $p_filter_arr['relationship_type'] ) ) {
+			$p_filter_arr['relationship_type'] = gpc_get_int( 'relationship_type', -1 );
+		}
+		if ( !isset( $p_filter_arr['relationship_bug'] ) ) {
+			$p_filter_arr['relationship_bug'] = gpc_get_int( 'relationship_bug', 0 );
+		}
 
 		$t_custom_fields 		= custom_field_get_ids();
 		$f_custom_fields_data 	= array();
@@ -2027,7 +2081,8 @@
 									  'show_version' => 'string',
 									  'hide_status' => 'int',
 									  'fixed_in_version' => 'string',
-									  'user_monitor' => 'int' );
+									  'user_monitor' => 'int',
+									 );
 		foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
 			if ( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
 				if ( 'hide_status' == $t_multi_field_name ) {
@@ -2383,6 +2438,18 @@
 		</tr>
 		</table>
 		<?php
+	}
+
+	function print_filter_relationship_type(){
+		global $t_filter;
+		$c_reltype_value = $t_filter['relationship_type'];
+		if (!$c_reltype_value) {
+			$c_reltype_value = -1;
+		}
+		relationship_list_box ($c_reltype_value, "relationship_type", true); ?>
+		<input type="text" name="relationship_bug" size="5" maxlength="10" value="<?php echo $t_filter['relationship_bug']?>" />
+		<?php
+
 	}
 
 	function print_filter_custom_field($p_field_id){

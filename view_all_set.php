@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.45 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: view_all_set.php,v 1.46 2005-02-18 17:58:15 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -151,6 +151,9 @@
 			}
 		}
 	}
+	
+	$f_relationship_type = gpc_get_string( 'relationship_type', -1 );
+	$f_relationship_bug = gpc_get_string( 'relationship_bug', 0 );
 
 	if ( $f_temp_filter ) {
 		$f_type = 1;
@@ -218,6 +221,9 @@
 	22: $f_show_version
 	23: $f_do_filter_by_date
 	24: $f_custom_field
+	25: $f_relationship_type
+	26: $f_relationship_bug
+	
 */
 	# Set new filter values.  These are stored in a cookie
 	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
@@ -285,6 +291,8 @@
 				$t_setting_arr['view_state'] = $f_view_state;
 				$t_setting_arr['custom_fields'] = $f_custom_fields_data;
 				$t_setting_arr['sticky_issues'] = $f_sticky_issues;
+				$t_setting_arr['relationship_type'] = $f_relationship_type;
+				$t_setting_arr['relationship_bug'] = $f_relationship_bug;
 
 				break;
 		# Set the sort order and direction
@@ -317,6 +325,8 @@
 				$t_setting_arr['show_priority']	= array( '[any]' );
 				$t_setting_arr['fixed_in_version']	= array( '[any]' );
 				$t_setting_arr['user_monitor'] 		= array( '[any]' );
+				$t_setting_arr['relationship_type'] = -1;
+				$t_setting_arr['relationship_bug'] = 0;
 
 				$t_custom_fields 		= custom_field_get_ids();
 				$t_custom_fields_data 	= array();
