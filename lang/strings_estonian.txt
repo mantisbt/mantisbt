@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.3 $
+	# $Revision: 1.4 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:44 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_estonian.txt,v 1.3 2004-02-05 15:10:44 jlatour Exp $
+	# $Id: strings_estonian.txt,v 1.4 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -202,6 +202,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategooriat ei leitud.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Selle nimega versioon juba eksisteerib.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versiooni ei leitud.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Kasutajanimi on vigane. Kasutajanimi võib sisaldada tähti, numbreid, tühikuid, sidekriipsu ja allkriipsu.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'VIGA: Sinu kasutajakonto võib olla blokeeritud või sisestasid vale kasutajanime/parooli.';
 $s_login_cookies_disabled = 'VIGA: Su veebilehitseja kas ei oska küpsiseid kasutada või on see omadus keelatud.';
@@ -216,6 +217,7 @@ $s_logged_in_as = 'Sisse loginud ';
 $s_prefix_for_deleted_users = 'kasutaja';
 
 $s_administrator = 'administraator';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string = '10:vaatleja,25:teataja,40:uuendaja,55:arendaja,70:mänedzher,90:administraator';
@@ -244,14 +246,19 @@ $s_reset_request_msg = 'Esitatud soov parool uuesti määrata';
 $s_account_name_msg = 'Su kasutajakonto kasutajanimi on';
 $s_news_password_msg = 'Siin on ka su uus parool';
 
-$s_new_bug_msg = 'Järgmine UUS bugi on LISATUD.';
-$s_email_bugnote_msg = 'MÄRKUS lisati sellele bugile.';
-$s_email_resolved_msg = 'Järgmine bugi on LAHENDATUD.';
-$s_email_close_msg = 'Järgmine bugi on SULETUD';
-$s_email_feedback_msg = 'Järgmine bugi vajab Sinu TAGASISIDET.';
-$s_email_reopen_msg = 'Järgmine bugi on UUESTI AVATUD.';
-$s_email_assigned_msg = 'Järgmine bugi on MÄÄRATUD.';
-$s_email_bug_deleted_msg = 'Järgmine bugi on KUSTUTATUD.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Teataja';
 $s_email_handler = 'Haldaja';
@@ -492,6 +499,7 @@ $s_open_and_reported_to_me = 'avatud ja mulle raporteeritud';
 $s_newer_news_link = 'Uuemad uudised';
 $s_older_news_link = 'Vanemad uudised';
 $s_archives = 'Arhiivid';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Loodud kasutaja';
@@ -783,6 +791,13 @@ $s_by_category = 'kategooria järgi';
 $s_by_priority = 'prioriteedi järgi';
 $s_by_developer = 'arendaja järgi';
 $s_by_reporter = 'teataja järgi';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'lahendatud bugide ajaline statistika (päevades)';
 $s_longest_open_bug = 'kõige pikemalt avatud bugi';
 $s_longest_open = 'kõige pikemalt avatud';
@@ -815,7 +830,7 @@ $s_viewing_bug_advanced_details_title = 'Bugi detailsete andmete vaatamine';
 $s_product_build = 'Toote järk (Build)';
 $s_system_profile = 'Süsteemikirjeldus';
 $s_update_bug_button = 'Uuenda bugi';
-$s_bug_assign_button = 'Määra mulle';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Ava bugi uuesti';
 $s_attached_files = 'Lisatud failid';
 $s_publish = 'Avalda';

@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.58 $
+	# $Revision: 1.59 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:44 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_dutch.txt,v 1.58 2004-02-05 15:10:44 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.59 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -203,6 +203,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FOUT: Categorie niet gevonden.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'Een versie met die naam bestaat al.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FOUT: Versie niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FOUT: De gebruikersnaam is ongeldig.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 $s_login_cookies_disabled = 'FOUT: Ofwel uw browser ondersteund geen cookies, of deze zijn uitgeschakeld.';
@@ -217,6 +218,7 @@ $s_logged_in_as = 'Ingelogd als';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'beheerder';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:kijker,25:rapporteur,40:bewerker,55:ontwikkelaar,70:manager,90:beheerder';
@@ -245,14 +247,19 @@ $s_reset_request_msg = 'Er was een verzoek tot resetten van uw wachtwoord';
 $s_account_name_msg = 'Uw account naam is';
 $s_news_password_msg = 'Hier is uw nieuwe wachtwoord';
 
-$s_new_bug_msg = 'De onderstaande NIEUWE bug is TOEGEVOEGD';
-$s_email_bugnote_msg = 'Aan deze bug is een aantekening toegevoegd.';
-$s_email_resolved_msg = 'De volgende bug is afgerond.';
-$s_email_close_msg = 'De volgende bug is AFGESLOTEN';
-$s_email_feedback_msg = 'Voor de volgende bug wordt uw feedback verzocht.';
-$s_email_reopen_msg = 'De volgende bug is heropend.';
-$s_email_assigned_msg = 'De volgende bug is aan iemand toegekend.';
-$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Rapporteur';
 $s_email_handler = 'Afgehandeld door:';
@@ -493,6 +500,7 @@ $s_open_and_reported_to_me = 'Open en door mij gemeld';
 $s_newer_news_link = 'Nieuwer nieuws';
 $s_older_news_link = 'Ouder nieuws';
 $s_archives = 'Archieven';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Aangemaakte gebruiker';
@@ -784,6 +792,13 @@ $s_by_category = 'naar categorie';
 $s_by_priority = 'naar prioriteit';
 $s_by_developer = 'naar ontwikkelaar';
 $s_by_reporter ='naar rapporteur';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'looptijd voor afgeronde bugs (dagen)';
 $s_longest_open_bug = 'langst openstaande bug';
 $s_longest_open = 'langst openstaand';
@@ -816,7 +831,7 @@ $s_viewing_bug_advanced_details_title = 'Bekijk uitgebreide bug details';
 $s_product_build = 'Product gemaakt';
 $s_system_profile = 'Systeem beschrijving';
 $s_update_bug_button = 'Update bug';
-$s_bug_assign_button    = 'Wijs toe aan mij';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Heropen bug';
 $s_attached_files = 'Bijgevoegde bestanden';
 $s_publish = 'Publiceer';

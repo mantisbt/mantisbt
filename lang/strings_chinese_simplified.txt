@@ -10,11 +10,11 @@
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
 	# -------------------------------------------------
-	# $Revision: 1.34 $
+	# $Revision: 1.35 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:43 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.34 2004-02-05 15:10:43 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.35 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -203,6 +203,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "ERROR: This is a duplicate version.";
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -217,6 +218,7 @@ $s_logged_in_as = "登录为";
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = "administrator";
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
@@ -245,14 +247,19 @@ $s_reset_request_msg = "密码重设：";
 $s_account_name_msg = "你的帐户姓名是";
 $s_news_password_msg = "你的新密码";
 
-$s_new_bug_msg = "添加以下Bug：";
-$s_email_bugnote_msg = "这个Bug已经添加到Bug跟踪记录";
-$s_email_resolved_msg = "已经解决的Bug";
-$s_email_close_msg = "下列Bug已经被关闭";
-$s_email_feedback_msg = "以下Bug需要你的反馈";
-$s_email_reopen_msg = "以下Bug被重新打开";
-$s_email_assigned_msg = "以下Bug已经被指派";
-$s_email_bug_deleted_msg = "以下Bug已经被删除";
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = "报告人";
 $s_email_handler = "主持人(Handler)";
@@ -493,6 +500,7 @@ $s_open_and_reported_to_me = "由我报告并开放的Bug";
 $s_newer_news_link = "更新的新闻";
 $s_older_news_link = "稍早的新闻";
 $s_archives = "归档信息";
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = "建立用户";
@@ -784,6 +792,13 @@ $s_by_category = "根据类别";
 $s_by_priority = "根据优先权";
 $s_by_developer = "根据开发者";
 $s_by_reporter ="根据报告者";
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = "已解决Bug(天数)的时间状态";
 $s_longest_open_bug = "时间最长的Bug";
 $s_longest_open = "最长的打开时间";
@@ -816,7 +831,7 @@ $s_viewing_bug_advanced_details_title = "检查Bug进度详细资料";
 $s_product_build = "产品Build";
 $s_system_profile = "系统说明";
 $s_update_bug_button = "更新Bug";
-$s_bug_assign_button = "指定给我";
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = "重开Bug";
 $s_attached_files = "附属文件";
 $s_publish = '发布';

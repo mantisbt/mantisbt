@@ -9,11 +9,11 @@
 	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.15 $
+	# $Revision: 1.16 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:46 $
+	# $Date: 2004-02-26 13:24:12 $
 	#
-	# $Id: strings_slovak.txt,v 1.15 2004-02-05 15:10:46 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.16 2004-02-26 13:24:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -202,6 +202,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'CHYBA: Kategória nenájdená.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'CHYBA: Verzia s týmyo menom u¾ existuje.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'CHYBA: Verzia nenájdená.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'CHYBA: Pou¾ívateµské meno je neplatné.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'CHYBA: va¹e konto mô¾e by» vypnuté, alebo pou¾ívatµské meno/heslo ktoré ste zadali nie je správne.';
 $s_login_cookies_disabled = 'CHYBA: Vá¹ browser nepodporuje cookies, alebo ich zamietol.';
@@ -216,6 +217,7 @@ $s_logged_in_as = 'Prihlásený';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrátor';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:recenzent,25:reportér,40:aktualizátor,55:vývojár,70:vedúci,90:administrátor';
@@ -244,14 +246,19 @@ $s_reset_request_msg = '®iados» o vynlovanie Va¹eho hesla bola vyrie¹ená.';
 $s_account_name_msg = 'Va¹e pou¾ívateµské meno je';
 $s_news_password_msg = 'Tu je Va¹e nové heslo';
 
-$s_new_bug_msg = 'Nasledujúci NOVÝ bug bol pridaný.';
-$s_email_bugnote_msg = 'K bugu bola pridaná poznámka.';
-$s_email_resolved_msg = 'Nasledujúci bug bol VYRIE©ENÝ.';
-$s_email_close_msg = 'Nasledujúci bug bol UZAVRETÝ.';
-$s_email_feedback_msg = 'Nasledujúci bug vy¾aduje va¹u reakciu.';
-$s_email_reopen_msg = 'Nasledujúci bug bol ZNOVU OTVORENÝ.';
-$s_email_assigned_msg = 'Nasledujúci bug bol PRIRADENÝ.';
-$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Autor';
 $s_email_handler = 'Handler';
@@ -492,6 +499,7 @@ $s_open_and_reported_to_me = 'Moje otvorené a vytvorené';
 $s_newer_news_link = 'Nov¹ie novinky';
 $s_older_news_link = 'Star¹ie novinky';
 $s_archives = 'Archív';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Vytvorený pou¾ívateµ';
@@ -783,6 +791,13 @@ $s_by_category = 'podµa kategórie';
 $s_by_priority = 'podµa priority';
 $s_by_developer = 'podµa vývojára';
 $s_by_reporter ='podµa autora';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'èasové ¹tatistiky pre vyrie¹ené bugy(dni)';
 $s_longest_open_bug = 'najdlh¹ie otvorený bug';
 $s_longest_open = 'najdlh¹ie otvorený';
@@ -815,7 +830,7 @@ $s_viewing_bug_advanced_details_title = 'Roz¹írené detaily bugu';
 $s_product_build = 'Build produktu';
 $s_system_profile = 'Popis systému';
 $s_update_bug_button = 'Aktualizova»';
-$s_bug_assign_button    = 'Priradené mne';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Znovuotvorí»';
 $s_attached_files = 'Pripojené súbory';
 $s_publish = 'Poblikova»';

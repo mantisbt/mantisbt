@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.55 $
-	# $Author: vboctor $
-	# $Date: 2004-02-24 12:55:40 $
+	# $Revision: 1.56 $
+	# $Author: jlatour $
+	# $Date: 2004-02-26 13:24:12 $
 	#
-	# $Id: strings_turkish.txt,v 1.55 2004-02-24 12:55:40 vboctor Exp $
+	# $Id: strings_turkish.txt,v 1.56 2004-02-26 13:24:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -201,6 +201,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -215,6 +216,7 @@ $s_logged_in_as = 'Þu anki kullanýcý';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'yönetici';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:izleyici,25:bildirici,40:güncelleyici,55:programcý,70:menejer,90:yönetici';
@@ -243,14 +245,19 @@ $s_reset_request_msg = 'Þifrenizim yenilenmesi için bir istekte bulunuldu';
 $s_account_name_msg = 'Kullanýcý adýnýz';
 $s_news_password_msg = 'Yeni Þifreniz';
 
-$s_new_bug_msg = 'Aþaðýdaki YENÝ bug EKLENDÝ.';
-$s_email_bugnote_msg = 'Bu bug\'a bir bug notu eklendi.';
-$s_email_resolved_msg = 'Aþaðýdaki bug ÇÖZÜMLENDÝ';
-$s_email_close_msg = 'Aþaðýdaki bug KAPATILDI';
-$s_email_feedback_msg = 'Aþaðýdaki bug ÝLAVE BÝLGÝ gerektiriyor.';
-$s_email_reopen_msg = 'Aþaðýdaki bug YENÝDEN AÇILDI.';
-$s_email_assigned_msg = 'Aþaðýdaki bug TAHSÝS EDÝLDÝ.';
-$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Bildirici';
 $s_email_handler = 'Ýlgili';
@@ -491,6 +498,7 @@ $s_open_and_reported_to_me = 'Açýk ve benim tarafýmdan bildirilenler';
 $s_newer_news_link = 'Yeni Haberler';
 $s_older_news_link = 'Eski Haberler';
 $s_archives = 'Archives';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Kullanýcý ';
@@ -782,6 +790,13 @@ $s_by_category = 'kategoriye göre';
 $s_by_priority = 'önceliðe göre';
 $s_by_developer = 'geliþtiriciye göre';
 $s_by_reporter = 'bildirene göre';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'çözümlenmiþ buglar için süre istatistikleri (gün) ';
 $s_longest_open_bug = 'en uzun süredir açýk olan bug';
 $s_longest_open = 'en uzun süredir açýk olan';
@@ -814,7 +829,7 @@ $s_viewing_bug_advanced_details_title = 'Detaylý Bug Bilgileri Ýzleme';
 $s_product_build = 'Ürün Alt Versiyonu';
 $s_system_profile = 'Sistem Özellikleri';
 $s_update_bug_button = 'Bug Güncelle';
-$s_bug_assign_button = 'Kendine Ata';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Bug Yeniden Aç';
 $s_attached_files = 'Eklenen Dosyalar';
 $s_publish = 'Publish';

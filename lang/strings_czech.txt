@@ -11,11 +11,11 @@
   	# Czech: Milan Cizek, cizek.milan@seznam.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:43 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_czech.txt,v 1.47 2004-02-05 15:10:43 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.48 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -204,6 +204,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'CHYBA: Kategorie nenalezena.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'CHYBA: Verze tohoto jména ji¾ existuje.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'CHYBA: Verze nenalezena.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'CHYBA: Neplatné u¾ivatelské jméno.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'CHYBA: vá¹ úèet je zablokován nebo jste zadali chybnou kombinaci login/heslo.';
 $s_login_cookies_disabled = 'CHYBA: Vá¹ prohlí¾eè buï neumí nebo odmítá pracovat s cookies.';
@@ -218,6 +219,7 @@ $s_logged_in_as = 'Pøihlá¹en';
 $s_prefix_for_deleted_users = 'u¾ivatel';
 
 $s_administrator = 'správce';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:recenzent,25:reportér,40:aktualizátor,55:vývojáø,70:vedoucí,90:správce';
@@ -246,14 +248,19 @@ $s_reset_request_msg = '®ádost o vynulování Va¹eho hesla byla vyøe¹ena';
 $s_account_name_msg = 'Va¹e u¾ivatelské jméno je';
 $s_news_password_msg = 'Zde je Va¹e nové heslo';
 
-$s_new_bug_msg = 'Byl pøidán následující NOVÝ bug.';
-$s_email_bugnote_msg = 'K bugu byla pøidána poznámka.';
-$s_email_resolved_msg = 'Následující bug byl VYØE©EN.';
-$s_email_close_msg = 'Následující bug byl UZAVØEN';
-$s_email_feedback_msg = 'Následující bug vy¾aduje Va¹i reakci.';
-$s_email_reopen_msg = 'Následující bug byl ZNOVUOTEVØEN.';
-$s_email_assigned_msg = 'Následující bug byl PØIØAZEN.';
-$s_email_bug_deleted_msg = 'Následující bug byl ZRU©EN.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Autor';
 $s_email_handler = 'Operátor';
@@ -494,6 +501,7 @@ $s_open_and_reported_to_me = 'Moje otevøené a vytvoøené';
 $s_newer_news_link = 'Novìj¹í novinky';
 $s_older_news_link = 'Star¹í novinky';
 $s_archives = 'Archív';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Vytvoøen u¾ivatel';
@@ -785,6 +793,13 @@ $s_by_category = 'podle kategorie';
 $s_by_priority = 'podle priority';
 $s_by_developer = 'podle vývojáøe';
 $s_by_reporter ='podle autora';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'èasové statistiky pro vyøe¹ené bugy(dny)';
 $s_longest_open_bug = 'nejdéle otevøený bug';
 $s_longest_open = 'nejdéle otevøený';
@@ -817,7 +832,7 @@ $s_viewing_bug_advanced_details_title = 'Roz¹íøené detaily bugu';
 $s_product_build = 'Build produktu';
 $s_system_profile = 'Popis systému';
 $s_update_bug_button = 'Aktualizovat';
-$s_bug_assign_button    = 'Pøiøazené mnì';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Znovuotevøít';
 $s_attached_files = 'Pøipojené soubory';
 $s_publish = 'Publikovat';

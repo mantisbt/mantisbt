@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.53 $
+	# $Revision: 1.54 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:43 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.53 2004-02-05 15:10:43 jlatour Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.54 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -200,6 +200,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -214,6 +215,7 @@ $s_logged_in_as = '登入為';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrator';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
@@ -242,14 +244,19 @@ $s_reset_request_msg = '這有一個密碼重設的要求';
 $s_account_name_msg = '你的帳戶姓名是';
 $s_news_password_msg = '這裡是你的新密碼';
 
-$s_new_bug_msg = '以下的 \'新\' 臭蟲已經被新增';
-$s_email_bugnote_msg = '\'臭蟲筆記\' 已經被新增到這個臭蟲';
-$s_email_resolved_msg = '以下的臭蟲已經被解決';
-$s_email_close_msg = 'The following bug has beeen CLOSED';
-$s_email_feedback_msg = '以下的臭蟲需要你的 \'回饋\'';
-$s_email_reopen_msg = '以下的臭蟲已經被 \'重開\'';
-$s_email_assigned_msg = '以下的臭蟲已經被 \'指定\'';
-$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = '回報人';
 $s_email_handler = '主持人(Handler)';
@@ -490,6 +497,7 @@ $s_open_and_reported_to_me = 'Open and reported by me';
 $s_newer_news_link = '更新的新聞';
 $s_older_news_link = '稍早的新聞';
 $s_archives = 'Archives';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = '建立使用者';
@@ -781,6 +789,13 @@ $s_by_category = '依類別';
 $s_by_priority = '依優先權';
 $s_by_developer = 'by developer';
 $s_by_reporter ='by reporter';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = '已解決臭蟲(天數)的時間狀態';
 $s_longest_open_bug = '最長的開啟臭蟲';
 $s_longest_open = '最長的開啟時間';
@@ -813,7 +828,7 @@ $s_viewing_bug_advanced_details_title = '檢視臭蟲進階詳細資料';
 $s_product_build = '產品Build';
 $s_system_profile = '系統說明';
 $s_update_bug_button = '更新臭蟲';
-$s_bug_assign_button    = '指定給我';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = '重開臭蟲';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';

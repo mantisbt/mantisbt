@@ -10,11 +10,11 @@
 	# Italian: Stefano Mazzocchi, stefano@apache.org
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:45 $
+	# $Date: 2004-02-26 13:24:11 $
 	#
-	# $Id: strings_italian.txt,v 1.60 2004-02-05 15:10:45 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.61 2004-02-26 13:24:11 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -203,6 +203,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = "ERRORE: Il tuo account potrebbe essere stato disabilitato oppure puoi aver immesso un nome e/o una password errata.";
 $s_login_cookies_disabled = "ERRORE: Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
@@ -217,6 +218,7 @@ $s_logged_in_as = "Autenticato come ";
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = "amministratore";
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:osservatore,25:segnalatore,40:aggiornatore,55:sviluppatore,70:manager,90:amministratore";
@@ -245,14 +247,19 @@ $s_reset_request_msg = "È stato richiesto un reset della tua password".
 $s_account_name_msg = "Il Nome del tuo Account è";
 $s_news_password_msg = "La tua nuova Password";
 
-$s_new_bug_msg = "È stato INSERITO questo nuovo bug.";
-$s_email_bugnote_msg = "Una NOTA è stata inserita a questo bug.";
-$s_email_resolved_msg = "Il seguente bug è stato RISOLTO.";
-$s_email_close_msg = "Il seguente bug è stato CHIUSO";
-$s_email_feedback_msg = "Il seguente bug necessita un tuo commento.";
-$s_email_reopen_msg = "Il seguente bug è stato RIAPERTO.";
-$s_email_assigned_msg = "Il seguente bug è stato ASSEGNATO.";
-$s_email_bug_deleted_msg = "Il seguente bug è stato ELIMINATO.";
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = "Segnalato da";
 $s_email_handler = "In carico a";
@@ -493,6 +500,7 @@ $s_open_and_reported_to_me = "Segnalati da me ancora aperti";
 $s_newer_news_link = "Notizie Recenti";
 $s_older_news_link = "Notizie Precedenti";
 $s_archives = "Archivio";
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = "Creato Utente";
@@ -784,6 +792,13 @@ $s_by_category = "per categoria";
 $s_by_priority = "per priorità";
 $s_by_developer = "per sviluppatore";
 $s_by_reporter = "per segnalatore";
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = "Statistiche in giorni per la risoluzione dei bug";
 $s_longest_open_bug = "bug più lungo nella risoluzione";
 $s_longest_open = "durata massima in stato Aperto";
@@ -816,7 +831,7 @@ $s_viewing_bug_advanced_details_title = "Scheda dettagliata del Bug";
 $s_product_build = "Versione del Prodotto";
 $s_system_profile = "Descrizione del Sistema";
 $s_update_bug_button = "Aggiorna il Bug";
-$s_bug_assign_button = "Assegnami il lavoro";
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = "Riapri il Bug";
 $s_attached_files = "File allegati";
 $s_publish = 'Rendi Pubblico';

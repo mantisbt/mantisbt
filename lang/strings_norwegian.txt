@@ -10,11 +10,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: jlatour $
-	# $Date: 2004-02-12 13:23:54 $
+	# $Date: 2004-02-26 13:24:12 $
 	#
-	# $Id: strings_norwegian.txt,v 1.59 2004-02-12 13:23:54 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.60 2004-02-26 13:24:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -84,6 +84,7 @@ $s_description_updated = 'Beskrivelse oppdatert';
 $s_additional_information_updated = 'Tillegsinformasjon oppdatert';
 $s_steps_to_reproduce_updated = 'Reprodukjsonsbeskrivelse oppdatert';
 $s_file_added = 'Fil lagt til: ';
+$s_file_deleted = 'File Deleted';
 $s_bug_deleted = 'Sak slettet';
 
 $s_make_private = 'Make Private';
@@ -202,6 +203,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEIL: Versjonen eksisterer fra før.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'FEIL: Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -216,6 +218,7 @@ $s_logged_in_as = 'Logget inn som';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrator';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:Leser,25:Raportør,40:Superbruker,55:Utvikler,70:Prosjektleder,90:Administrator';
@@ -244,14 +247,19 @@ $s_reset_request_msg = 'Det har kommet en forespørsel om å nullstille passordet 
 $s_account_name_msg = 'Kontonavnet ditt er';
 $s_news_password_msg = 'Her er ditt nye passord';
 
-$s_new_bug_msg = 'Følgende NYE saker har blitt LAGT til.';
-$s_email_bugnote_msg = 'En MELDING har blitt lagt til denne saken.';
-$s_email_resolved_msg = 'Følgende sak har blitt LØST.';
-$s_email_close_msg = 'Følgende sak har blitt LUKKET';
-$s_email_feedback_msg = 'Følgende sak krever din TILBAKEMELDING.';
-$s_email_reopen_msg = 'Følgende sak har blitt ÅPNET PÅ NYTT.';
-$s_email_assigned_msg = 'Følgende sak har blitt DELEGERT.';
-$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Rapportert av';
 $s_email_handler = 'Ansvarlig';
@@ -492,6 +500,7 @@ $s_open_and_reported_to_me = 'Åpne og rapportert av meg';
 $s_newer_news_link = 'Nyere nyheter';
 $s_older_news_link = 'Eldre nyheter';
 $s_archives = 'Arkiv';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Bruker opprettet';
@@ -783,6 +792,13 @@ $s_by_category = 'Per kategori';
 $s_by_priority = 'Per prioritet';
 $s_by_developer = 'Per utvikler';
 $s_by_reporter ='Per reporter';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'Tidsstatistikk for løste saker (dager)';
 $s_longest_open_bug = 'Lengste åpne sak';
 $s_longest_open = 'Lengste åpne';
@@ -815,7 +831,7 @@ $s_viewing_bug_advanced_details_title = 'Vis avanserte detaljer for sak';
 $s_product_build = 'Underversjon';
 $s_system_profile = 'Systembeskrivelse';
 $s_update_bug_button = 'Oppdater sak';
-$s_bug_assign_button    = 'Delegere til meg';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Gjenåpne sak';
 $s_attached_files = 'Filvedlegg';
 $s_publish = 'Publiser';

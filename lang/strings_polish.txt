@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:45 $
+	# $Date: 2004-02-26 13:24:12 $
 	#
-	# $Id: strings_polish.txt,v 1.60 2004-02-05 15:10:45 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.61 2004-02-26 13:24:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -201,6 +201,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'B£¡D: Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'B£¡D: Podana wersja ju¿ istnieje.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'B£¡D: Nie znaleziono wersji.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'B£¡D: Nieprawid³owa nazwa u¿ytkownika.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'B£¡D: Twoje konto mo¿e byæ wy³±czone lub nazwa u¿ytkownika/has³o nie s± poprawne.';
 $s_login_cookies_disabled = 'B£¡D: Twoja przegl±darka nie obs³uguje cookies lub ich obs³uga zosat³a wy³±czona.';
@@ -215,6 +216,7 @@ $s_logged_in_as = 'Zalogowano jako';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrator';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:obserwator,25:zg³aszaj±cy,40:aktualizuj±cy,55:wykonawca,70:zarz±dca,90:administrator';
@@ -243,14 +245,19 @@ $s_reset_request_msg = 'To jest odpowied¼ na Twoj± pro¶bê o nowe has³o.';
 $s_account_name_msg = 'Twoje konto to:';
 $s_news_password_msg = 'To jest twoje nowe has³o';
 
-$s_new_bug_msg = 'Zosta³ DODANY NOWY b³±d.';
-$s_email_bugnote_msg = ' Do poni¿szego b³êdu zosta³ dodany KOMENTARZ.';
-$s_email_resolved_msg = 'Poni¿szy b³±d zosta³ ROZWI¡ZANY.';
-$s_email_close_msg = ' Poni¿szy b³±d zosta³ ZAMKNIÊTY';
-$s_email_feedback_msg = 'Poni¿szy b³±d oczekuje Twojej INFORMACJI ZWROTNEJ.';
-$s_email_reopen_msg = ' Poni¿szy b³±d zosta³ PONOWNIE OTWARTY.';
-$s_email_assigned_msg = 'Poni¿szy b³±d zosta³ PRZYPISANY.';
-$s_email_bug_deleted_msg = 'Poni¿szy b³±d zosta³ USUNIÊTY.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Zg³aszaj±cy';
 $s_email_handler = 'Operator';
@@ -491,6 +498,7 @@ $s_open_and_reported_to_me = 'Otwarte i zg³oszone przeze mnie';
 $s_newer_news_link = 'Nowsze wiadomo¶ci';
 $s_older_news_link = 'Starsze wiadomo¶ci';
 $s_archives = 'Archiwum';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Zosta³ stworzony u¿ytkownik';
@@ -782,6 +790,13 @@ $s_by_category = 'wg kategorii';
 $s_by_priority = 'wg priorytetu';
 $s_by_developer = 'wg wykonawcy';
 $s_by_reporter ='wg zg³aszaj±cego';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'statystyki rozwi±zanych b³êdów (w dniach)';
 $s_longest_open_bug = 'najd³u¿ej otwarty b³±d';
 $s_longest_open = 'czas najd³u¿szego otwarcia';
@@ -814,7 +829,7 @@ $s_viewing_bug_advanced_details_title = 'Widok zaawansowany';
 $s_product_build = 'Kompilacja produktu';
 $s_system_profile = 'Opis systemu';
 $s_update_bug_button = 'Aktualizuj B³±d';
-$s_bug_assign_button = 'Przypisz do mnie';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Otwórz Ponownie B³±d';
 $s_attached_files = 'Do³±czone Pliki';
 $s_publish = 'Publish';

@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.55 $
+	# $Revision: 1.56 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:43 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_danish.txt,v 1.55 2004-02-05 15:10:43 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.56 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -200,6 +200,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FEJL: Kategori ikke fundet.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEJL: Denne version findes allerede.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'FEJL: Version ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'FEJL: Brugernavnet er ugyldigt.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
 $s_login_cookies_disabled = 'FEJL: Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
@@ -214,6 +215,7 @@ $s_logged_in_as = 'Logget ind som';
 $s_prefix_for_deleted_users = 'bruger';
 
 $s_administrator = 'administrator';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string = '10:observatør,25:rapportør,40:opdatering,55:udvikler,70:leder,90:administrator';
@@ -242,14 +244,19 @@ $s_reset_request_msg = 'Der har været en forespørgsel på at nulstille din adgang
 $s_account_name_msg = 'Dit brugernavn er';
 $s_news_password_msg = 'Her er din nye adgangskode';
 
-$s_new_bug_msg = 'Følgende NYE fejl er blevet TILFØJET.';
-$s_email_bugnote_msg = 'Der er tilknyttet en FEJLNOTE til denne fejl.';
-$s_email_resolved_msg = 'Følgende fejl er BESTEMT.';
-$s_email_close_msg = 'Følgende fejl er LUKKET';
-$s_email_feedback_msg = 'Følgende fejl kræver din TILBAGEMELDING.';
-$s_email_reopen_msg = 'Følgende fejl er GENÅBNET.';
-$s_email_assigned_msg = 'Følgende fejl er TILDELT.';
-$s_email_bug_deleted_msg = 'Følgende fejl er blevet SLETTET';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Rapportør';
 $s_email_handler = 'Tilsyn';
@@ -490,6 +497,7 @@ $s_open_and_reported_to_me = 'Åbnet og rapporteret af mig';
 $s_newer_news_link = 'Nyere Nyheder';
 $s_older_news_link = 'Ældre Nyheder';
 $s_archives = 'Arkiv';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Oprettet bruger';
@@ -781,6 +789,13 @@ $s_by_category = 'efter kategori';
 $s_by_priority = 'efter prioritet';
 $s_by_developer = 'efter udvikler';
 $s_by_reporter = 'efter rapportør';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'tids statistik for bestemte fejl (dage)';
 $s_longest_open_bug = 'længst åbne fejl';
 $s_longest_open = 'længst åbne';
@@ -813,7 +828,7 @@ $s_viewing_bug_advanced_details_title = 'Avanceret oversigt over fejl i dette pr
 $s_product_build = 'Produkt Udgave';
 $s_system_profile = 'System Beskrivelse';
 $s_update_bug_button = 'Opdater Fejl';
-$s_bug_assign_button = 'Tildeles mig';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Genåben Fejl';
 $s_attached_files = 'Vedhæftede Filer';
 $s_publish = 'Udgivet';

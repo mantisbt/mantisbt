@@ -9,11 +9,11 @@
 	###########################################################################
 	# Croatian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.6 $
+	# $Revision: 1.7 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:43 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_croatian.txt,v 1.6 2004-02-05 15:10:43 jlatour Exp $
+	# $Id: strings_croatian.txt,v 1.7 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -202,6 +202,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'A version with that name already exists.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -216,6 +217,7 @@ $s_logged_in_as = "Prijavljen kao";
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = "administrator";
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:pregled,25:prijava,40:a¾uriranje,55:razvoj,70:upravljanje,90:administracija";
@@ -244,14 +246,19 @@ $s_reset_request_msg = "Pojavio se zahtjev za resetiranjem zaporke";
 $s_account_name_msg = "Va¹e korisnièko ime je";
 $s_news_password_msg = "Ovdje je Va¹a nova zaporka";
 
-$s_new_bug_msg = "Slijedeæi NOVI bug je DODAN.";
-$s_email_bugnote_msg = "Bugu je dodana BILJE©KA.";
-$s_email_resolved_msg = "Slijedeæi bug je RIJE©EN.";
-$s_email_close_msg = "Slijedeæi bug je ZATVOREN";
-$s_email_feedback_msg = "Slijedeæi bug zahtjeva Va¹u POVRATNU INFORMACIJU.";
-$s_email_reopen_msg = "Slijedeæi bug je PONOVNO OTVOREN.";
-$s_email_assigned_msg = "Slijedeæi bug je DODIJELJEN.";
-$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = "Izvjestitelj";
 $s_email_handler = "Rukovatelj";
@@ -492,6 +499,7 @@ $s_open_and_reported_to_me = "Otvoreni i prijavljeni od mene";
 $s_newer_news_link = "Novije vijesti";
 $s_older_news_link = "Starije vijesti";
 $s_archives = "Arhive";
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = "Kreirani korisnik";
@@ -783,6 +791,13 @@ $s_by_category = "prema kategoriji";
 $s_by_priority = "prema prioritetu";
 $s_by_developer = "prema razvoju";
 $s_by_reporter ="prema izvjestitelju";
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = "vremenski status rije¹enih bugova(dani)";
 $s_longest_open_bug = "najdu¾e otvoren bug";
 $s_longest_open = "najdu¾e otvoren";
@@ -815,7 +830,7 @@ $s_viewing_bug_advanced_details_title = "Pregled naprednih detalja buga";
 $s_product_build = "Produkt Build";
 $s_system_profile = "Opis sustava";
 $s_update_bug_button = "A¾uriraj bug";
-$s_bug_assign_button    = "Dodijeli meni";
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = "Ponovno otvori bug";
 $s_attached_files = "Pridru¾ene datoteke";
 $s_publish = 'Publish';

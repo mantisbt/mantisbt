@@ -9,11 +9,11 @@
 	#          Ariel Arjona - beerfrick@users.sf.net
 	#          Luis Miguel Cruz Miranda - luismi@b2bi.es
 	# -------------------------------------------------
-	# $Revision: 1.58 $
+	# $Revision: 1.59 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:46 $
+	# $Date: 2004-02-26 13:24:12 $
 	#
-	# $Id: strings_spanish.txt,v 1.58 2004-02-05 15:10:46 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.59 2004-02-26 13:24:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -202,6 +202,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Categoria no encontrada.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: Esta es una version duplicada.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version no encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: El usuario es incorrecto.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña que ingreso son incorrectos.';
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -216,6 +217,7 @@ $s_logged_in_as = 'Conectado como';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrador';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:espectador,25:reportero,40:actualizador,55:desarrollador,70:administrador,90:administrador del sistema';
@@ -244,14 +246,19 @@ $s_reset_request_msg = 'Se solicito para resetear su clave.';
 $s_account_name_msg = 'Su nombre de cuenta es';
 $s_news_password_msg = 'Aqui esta su nueva clave';
 
-$s_new_bug_msg = 'El siguiente NUEVO bug ha sido AGREGADO.';
-$s_email_bugnote_msg = 'Una NOTA ha sido agregada a este bug.';
-$s_email_resolved_msg = 'El siguiente bug ha sido RESUELTO.';
-$s_email_close_msg = 'El siguiente bug ha sido CERRADO';
-$s_email_feedback_msg = 'El siguiente bug requiere su OPINION.';
-$s_email_reopen_msg = 'El siguiente bug ha sido RE-ABIERTO.';
-$s_email_assigned_msg = 'El siguiente bug ha sido ASIGNADO.';
-$s_email_bug_deleted_msg = 'El siguiente bug ha sido BORRADO.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Reportero';
 $s_email_handler = 'Encargado';
@@ -492,6 +499,7 @@ $s_open_and_reported_to_me = 'Bugs Abiertos y Reportados por mi';
 $s_newer_news_link = 'Nuevas Noticias';
 $s_older_news_link = 'Noticias Anteriores';
 $s_archives = 'Noticias Archivadas';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Usuario Creado';
@@ -783,6 +791,13 @@ $s_by_category = 'por categoria';
 $s_by_priority = 'por prioridad';
 $s_by_developer = 'por desarrollador';
 $s_by_reporter ='por reportero';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'estadisticas de bugs resueltos (dias)';
 $s_longest_open_bug = 'bug abierto por mayor tiempo';
 $s_longest_open = 'mayor tiempo abierto';
@@ -815,7 +830,7 @@ $s_viewing_bug_advanced_details_title = 'Vista Avanzada';
 $s_product_build = 'Build de Producto';
 $s_system_profile = 'Descripcion del Sistema';
 $s_update_bug_button = 'Actualizar Bug';
-$s_bug_assign_button    = 'Asignar a Mi';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Reabrir Bug';
 $s_attached_files = 'Archivos Adjuntos';
 $s_publish = 'Publish';

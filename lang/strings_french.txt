@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.66 $
+	# $Revision: 1.67 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:44 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_french.txt,v 1.66 2004-02-05 15:10:44 jlatour Exp $
+	# $Id: strings_french.txt,v 1.67 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -207,6 +207,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERREUR: Catégorie non trouvée.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERREUR: Version dupliquée.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERREUR: Version non trouvée.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERREUR: Nom d\'utilisateur invalide.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'ERREUR: Votre compte est peut être désactivé ou alors l\'utilisateur/le mot de passe que vous avez saisi est incorrect.';
 $s_login_cookies_disabled = 'ERREUR: Votre navigateur ne sait pas gérer les cookies ou refuse de les gérer.';
@@ -221,6 +222,7 @@ $s_logged_in_as = 'Connecté en tant que';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrateur';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:développeur,70:chef de projet,90:administrateur';
@@ -249,14 +251,19 @@ $s_reset_request_msg = 'Une requête a été enregistrée pour réinitialiser votre m
 $s_account_name_msg = 'Votre identifiant est ';
 $s_news_password_msg = 'Voici votre nouveau mot de passe ';
 
-$s_new_bug_msg = 'Le bug suivant a été ajouté.';
-$s_email_bugnote_msg = 'Une note a été ajoutée pour ce bug.';
-$s_email_resolved_msg = 'Le bug suivant a été résolu.';
-$s_email_close_msg = 'Le bug suivant a été fermé.';
-$s_email_feedback_msg = 'Le bug suivant nécessite votre commentaire.';
-$s_email_reopen_msg = 'Le bug suivant a été réouvert.';
-$s_email_assigned_msg = 'Le bug suivant a été assigné.';
-$s_email_bug_deleted_msg = 'Le bug suivant a été supprimé.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Rapporteur';
 $s_email_handler = 'Responsable';
@@ -497,6 +504,7 @@ $s_open_and_reported_to_me = 'Bug ouverts dont je suis le rapporteur';
 $s_newer_news_link = 'Nouvelles récentes';
 $s_older_news_link = 'Anciennes nouvelles';
 $s_archives = 'Archives';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Utilisateur créé';
@@ -788,6 +796,13 @@ $s_by_category = 'par catégorie';
 $s_by_priority = 'par priorité';
 $s_by_developer = 'par développeur';
 $s_by_reporter ='par rapporteur';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'statistiques (en jours) pour les résolutions';
 $s_longest_open_bug = 'bug ouvert depuis le plus longtemps';
 $s_longest_open = 'temps maximal';
@@ -820,7 +835,7 @@ $s_viewing_bug_advanced_details_title = 'Afficher le rapport détaillé';
 $s_product_build = 'Build';
 $s_system_profile = 'Description du système';
 $s_update_bug_button = 'Mettre à jour le bug';
-$s_bug_assign_button    = 'Prendre l\'assignation';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Réouvrir un bug';
 $s_attached_files = 'Fichiers attachés';
 $s_publish = 'Publié';

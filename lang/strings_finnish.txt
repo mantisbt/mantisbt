@@ -10,11 +10,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.6 $
+	# $Revision: 1.7 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:44 $
+	# $Date: 2004-02-26 13:23:55 $
 	#
-	# $Id: strings_finnish.txt,v 1.6 2004-02-05 15:10:44 jlatour Exp $
+	# $Id: strings_finnish.txt,v 1.7 2004-02-26 13:23:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -203,6 +203,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'VIRHE: Kategoriaa ei löydy.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'VIRHE: Samanniminen versio on jo olemassa.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'VIRHE: Versiota ei löydy.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'VIRHE: Virheellinen käyttäjätunnus.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = 'VIRHE: Käyttäjätunnuksesi saattaa olla pois käytöstä tai antamasi käyttäjätunnus/salasana-yhdistelmä on väärä.';
 $s_login_cookies_disabled = 'VIRHE: Selaimesi ei tunnu ymmärtävän tai hyväksyvän evästeitä.';
@@ -217,6 +218,7 @@ $s_logged_in_as = 'Olet sisäänkirjautuneena käyttäjätunnuksella';
 $s_prefix_for_deleted_users = 'käyttäjä';
 
 $s_administrator = 'pääkäyttäjä';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
@@ -245,14 +247,19 @@ $s_reset_request_msg = 'Salasanan resetointipyyntö';
 $s_account_name_msg = 'Käyttäjätunnuksesi on';
 $s_news_password_msg = 'Tässä on uusi salasanasi';
 
-$s_new_bug_msg = 'Seuraava UUSI bugi on LISÄTTY.';
-$s_email_bugnote_msg = 'A BUGNOTE has been added to this bug.';
-$s_email_resolved_msg = 'Seuraava bugi on RATKAISTU.';
-$s_email_close_msg = 'Seuraava bugi on SULJETTU';
-$s_email_feedback_msg = 'Seuraava bugi kaipaa sinun PALAUTETTA.';
-$s_email_reopen_msg = 'Seuraava bugi on UUDELLEENAVATTU.';
-$s_email_assigned_msg = 'Seuraava bugi on OSOITETTU.';
-$s_email_bug_deleted_msg = 'Seuraava bugi on POISTETTU.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = 'Raportoija';
 $s_email_handler = 'Käsittelijä';
@@ -493,6 +500,7 @@ $s_open_and_reported_to_me = 'Avoimia ja minun raportoimia';
 $s_newer_news_link = 'Uudempia Uutisia';
 $s_older_news_link = 'Vanhempia Uutisia';
 $s_archives = 'Arkistot';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Luotu käyttäjätunnus';
@@ -784,6 +792,13 @@ $s_by_category = 'katogorian mukaan';
 $s_by_priority = 'prioriteetin mukaan';
 $s_by_developer = 'kehittäjän mukaan';
 $s_by_reporter ='raportoijan mukaan';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = 'ratkaistujen bugien aikatilastot (päiviä)';
 $s_longest_open_bug = 'kauin avoin bugi';
 $s_longest_open = 'kauin avoin';
@@ -816,7 +831,7 @@ $s_viewing_bug_advanced_details_title = 'Näytetään bugin yksityiskohtaiset tiedo
 $s_product_build = 'Tuotteen Build';
 $s_system_profile = 'Järjestelmäkuvaus';
 $s_update_bug_button = 'Päivitä Bugi';
-$s_bug_assign_button    = 'Osoita minulle';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Uudelleenavaa Bugi';
 $s_attached_files = 'Liitetiedostot';
 $s_publish = 'Julkaise';

@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.87 $
-	# $Author: vboctor $
-	# $Date: 2004-02-26 13:07:15 $
+	# $Revision: 1.88 $
+	# $Author: jlatour $
+	# $Date: 2004-02-26 13:24:11 $
 	#
-	# $Id: strings_german.txt,v 1.87 2004-02-26 13:07:15 vboctor Exp $
+	# $Id: strings_german.txt,v 1.88 2004-02-26 13:24:11 jlatour Exp $
 	###########################################################################
 ?>
 <?php

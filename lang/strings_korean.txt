@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 13:07:04 $
+	# $Date: 2004-02-26 13:24:12 $
 	#
-	# $Id: strings_korean.txt,v 1.59 2004-02-26 13:07:04 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.60 2004-02-26 13:24:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -201,6 +201,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '오류: 카테고리를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = '오류: 버전정보를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = '오류: 사용자 이름 오류.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
 
 $s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
 $s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
@@ -215,6 +216,7 @@ $s_logged_in_as = '로그인한 ID :';
 $s_prefix_for_deleted_users = '사용자';
 
 $s_administrator = '관리자';
+$s_myself = "Myself";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
@@ -243,14 +245,19 @@ $s_reset_request_msg = '암호 초기화에 대한 요청이 있습니다.';
 $s_account_name_msg = '당신의 계정은 ';
 $s_news_password_msg = '당신의 새로운 암호입니다. ';
 
-$s_new_bug_msg = '다음의 새로운 벌레가 추가되었습니다.';
-$s_email_bugnote_msg = '이벌레에 대하여 <b>벌레노트</b>가 추가되었습니다.';
-$s_email_resolved_msg = '아래의 벌레가 <b>해결</b>되었습니다.';
-$s_email_close_msg = '아래의 벌레가 <b>폐쇄</b>되었습니다.';
-$s_email_feedback_msg = '아래의 벌레가 <b>반영</b>되었습니다.';
-$s_email_reopen_msg = '아래의 벌레가 <b>다시 발생</b>되었습니다.';
-$s_email_assigned_msg = '아래의 벌레가 개발자에게 <b>할당</b>되었습니다.';
-$s_email_bug_deleted_msg = '아래의 벌레가 <b>삭제</b>되었습니다.';
+$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+
+$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+
+$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
 $s_email_reporter = '보고자';
 $s_email_handler = '조작자';
@@ -491,6 +498,7 @@ $s_open_and_reported_to_me = '내가 보고한 벌레';
 $s_newer_news_link = '새로운 뉴스';
 $s_older_news_link = '이전 뉴스';
 $s_archives = '아카이브';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = '사용자가 ';
@@ -782,6 +790,13 @@ $s_by_category = '카테고리별';
 $s_by_priority = '우선순위';
 $s_by_developer = '개발자별';
 $s_by_reporter ='보고자별';
+$s_reporter_by_resolution = 'Reporter By Resolution';
+$s_reporter_effectiveness = 'Reporter Effectiveness';
+$s_developer_by_resolution = 'Developer By Resolution';
+$s_percentage_fixed = '% Fixed';
+$s_percentage_errors = '% False';
+$s_errors = 'False';
+$s_total = 'Total';
 $s_time_stats = '시간 통계';
 $s_longest_open_bug = '가장 오래 해결되지 않은 벌레';
 $s_longest_open = '가장 오래된 시간';
@@ -814,7 +829,7 @@ $s_viewing_bug_advanced_details_title = '벌레 자세히 보기';
 $s_product_build = '제품 빌드번호';
 $s_system_profile = '시스템 설명';
 $s_update_bug_button = '벌레 갱신';
-$s_bug_assign_button    = '내게 할당된 벌레';
+$s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = '재발생 벌레';
 $s_attached_files = '첨부 파일';
 $s_publish = 'Publish';
