@@ -1,12 +1,12 @@
 Mantis
 
-10.xx.2001  -   0.15.8
+10.24.2001  -   0.15.8
 
  * Fixed problem with $g_manage_cookie not being unset on logout
  * Fixed error in db_upgrade.sql ( nul; should be null; )
  * Fixed serveral localization errors
  * Fixed email to only send to devlopers and higher for a given project
- * Fixed potential security hole with executable uploaded files
+ * Fixed potential security hole with uploaded file permissions
  * Added ALT fields to IMG tags
  * Added edit bugnote capability
  * Added Polish localization

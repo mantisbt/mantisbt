@@ -9,7 +9,7 @@
 # Generally, you can just copy over the current installation.  You may want to
 # backup up your current config_inc.php and any customizations that you may
 # have made.  Usually database modifications will occur only between
-# significant releases (like 0.14.x to 0.15.x).
+# significant releases (like 0.14.x to 0.15.0).
 
 # =================
 # 0.14.x to 0.15.0
