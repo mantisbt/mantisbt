@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.75 2004-05-26 03:22:16 int2str Exp $
+	# $Id: manage_proj_edit_page.php,v 1.76 2004-05-27 02:00:58 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -269,6 +269,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	foreach ( $t_versions as $t_version ) {
 		$t_name = $t_version['version'];
 		$t_date_order = $t_version['date_order'];
+		$t_date_formatted = version_format_date( $t_version['date_order'] );
 ?>
 <!-- Repeated Info Rows -->
 		<tr <?php echo helper_alternate_class() ?>>
@@ -276,7 +277,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				<?php echo string_display( $t_name ) ?>
 			</td>
 			<td class="center">
-				<?php echo $t_date_order ?>
+				<?php echo $t_date_formatted ?>
 			</td>
 			<td class="center">
 				<?php
