@@ -29,6 +29,7 @@
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
+<? print_top_page( $g_top_include_page ) ?>
 
 <? print_menu( $g_menu_include_file ) ?>
 

@@ -10,6 +10,7 @@ Mantis
  * Fixed a problem with bug updates making the status hard to deal with.
  * Fixed the emailing method to honor the private access threshold.
  * Fixed problem where reporters could assign bugs in advanced report page.
+ * Fixed problem where not all proj_doc* pages had the top of page include.
  * Modified the mantis_bug_table.build field to be a VARCHAR(32).
  * Modified the mantis_bug_table.votes field to be an INT(4).
  * Modified the mantis_bug_table.os_build field to a VARCHAR(32).
