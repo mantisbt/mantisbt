@@ -35,6 +35,11 @@
 	}
 ?>
 <?
+	# save timestamps
+	$query = "SELECT id, last_updated
+			FROM mantis_bug_table";
+	$result = db_query( $query );
+
 	$upgrade_obj = new UpgradeItem();
 	$upgrade_obj->AddItem( "ALTER TABLE mantis_bug_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize" );
 	$upgrade_obj->AddItem( "ALTER TABLE mantis_project_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize" );
@@ -55,7 +60,18 @@
 
 	$upgrade_obj->AddItem( "ALTER TABLE mantis_project_version_table ADD date_order DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL" );
 
-	#$upgrade_obj->PrintAll();
 	$upgrade_obj->PerformAll();
+
+
+	# restore timestamps
+	$bug_count = db_num_rows( $result );
+	for ( $i=0; $i < $bug_count; $i++ ) {
+		$row = db_fetch_array( $result );
+		extract( $row );
+		$query2 = "UPDATE mantis_bug_table
+				SET last_updated='$last_updated'
+				WHERE id='$id'";
+		$result2 = db_query( $query2 );
+	}
 ?>
 <p>Finished
