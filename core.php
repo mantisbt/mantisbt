@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.10 2003-01-25 20:50:23 jlatour Exp $
+	# $Id: core.php,v 1.11 2003-01-25 21:29:20 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -38,8 +38,17 @@
 		require_once( $t_local_config );
 	}
 
-	# Attempt to find the location of the core files.
-	$t_core_path = dirname(__FILE__).DIRECTORY_SEPERATOR.'core';
+	# Directory separator was introduced in PHP 4.0.6
+	if ( !defined( 'DIRECTORY_SEPARATOR' ) ) {
+		if (substr(php_uname(), 0, 7) == 'Windows') {
+			define('DIRECTORY_SEPARATOR', '\\');
+		} else {
+			define('DIRECTORY_SEPARATOR', '/');
+		}
+	}
+
+	# Attempt to find the location of the core files.	
+	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core';
 	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
 		$t_core_path = $g_core_path;
 	}

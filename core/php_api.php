@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.6 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: php_api.php,v 1.7 2003-01-25 21:29:20 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -64,19 +64,6 @@
 		}
 		foreach ($HTTP_GET_VARS as $key => $value) {
 			$_REQUEST[$key] = $value;
-		}
-	}
-
-	########################
-	# PHP Constants
-	########################
-
-	# Directory separator was introduced in PHP 4.0.6
-	if ( !defined( 'DIRECTORY_SEPARATOR' ) ) {
-		if (substr(php_uname(), 0, 7) == 'Windows') {
-			define('DIRECTORY_SEPARATOR', '\\');
-		} else {
-			define('DIRECTORY_SEPARATOR', '/');
 		}
 	}
 ?>
