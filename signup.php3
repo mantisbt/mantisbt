@@ -16,7 +16,7 @@
 
 	$result = 0;
 	if ( !is_valid_email( $f_email ) ) {
-		echo $f_email." INVALID";
+		echo $f_email." IS INVALID";
 		exit;
 	}
 
@@ -31,26 +31,23 @@
     }
 
 	### Passed our checks.  Insert into DB then send email.
+
+	### Create random password
 	$t_password = create_random_password( $p_email );
-	$result = send_new_user_password( $f_username, $f_email, $t_password );
-	if ( !$result ) {
-		echo "PROBLEMS SENDING EMAIL";
-		exit;
-	}
 
 	### create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
-	$t_password = crypt( $t_password );
+	$t_password2 = crypt( $t_password );
     $query = "INSERT
     		INTO $g_mantis_user_table
     		( id, username, email, password, date_created, last_visit,
     		access_level, enabled, protected, cookie_string )
 			VALUES
-			( null, '$f_username', '$f_email', '$t_password', NOW(), NOW(),
+			( null, '$f_username', '$f_email', '$t_password2', NOW(), NOW(),
 			'reporter', 'on', '', '$t_cookie_string')";
     $result = db_query( $query );
     if ( !$result ) {
-    	echo "Failed to create user account";
+    	echo "FAILED TO CREATE USER ACCOUNT";
     	exit;
     }
 
@@ -61,13 +58,15 @@
 		$t_user_id = db_result( $result, 0, 0 );
 	}
 
-	### Add profile
-	$query = "INSERT
-			INTO $g_mantis_user_profile_table
+	### Create user profile
+	$query = "INSERT INTO $g_mantis_user_profile_table
     		( id, user_id, platform, os, os_build, description, default_profile )
-			VALUES
-			( null, '$f_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description', '' )";
+    		VALUES
+			( null, '$t_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description', '' )";
     $result = db_query( $query );
+
+	### Send notification email
+	email_signup( $t_user_id, $t_password );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
