@@ -49,6 +49,13 @@
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$f_id'";
 	$result = db_query($query);
+
+        ### Delete the corresponding files
+       $query = "DELETE
+                        FROM $g_mantis_bug_file_table
+                        WHERE bug_id='$f_id'";
+       $result = db_query($query);
+
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
