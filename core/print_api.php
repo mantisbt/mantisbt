@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.9 2002-09-01 01:23:24 vboctor Exp $
+	# $Id: print_api.php,v 1.10 2002-09-01 21:45:59 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -701,7 +701,7 @@
 	function print_project_user_list_option_list2( $p_user_id ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
 
-		$c_user_id = db_prepare_int( $p_user_id ); 
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		$t_prv = PRIVATE;
 		$query = "SELECT DISTINCT p.id, p.name
@@ -1048,7 +1048,7 @@
 
 		PRINT $MANTIS_ERROR[ERROR_SQL];
 		print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
-		PRINT "<p>$p_query;<p>";
+		PRINT "<p />$p_query;<p />";
 	}
 	# --------------------
 	###########################################################################

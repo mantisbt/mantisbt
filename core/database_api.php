@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.6 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: database_api.php,v 1.7 2002-09-01 21:45:59 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,7 +16,7 @@
 	# This in the general interface for all database calls.
 	# The actual SQL queries are found in the pages.
 	# Use this as a starting point to port to other databases
-	
+
 	# An array in which all executed queries are stored.  This is used for profiling
 	$g_queries_array = array();
 
@@ -138,7 +138,7 @@
 	# --------------------
 	# display both the error num and error msg
 	function db_error() {
-		return '<p>'.db_error_num().': '.db_error_msg().'<p>';
+		return '<p />'.db_error_num().': '.db_error_msg().'<p />';
 	}
 	# --------------------
 	# close the connection.

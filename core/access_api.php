@@ -6,19 +6,19 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.3 2002-08-31 01:59:34 vboctor Exp $
+	# $Id: access_api.php,v 1.4 2002-09-01 21:45:59 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Access Control API
 	###########################################################################
-	# function to be called when a user is attempting to access a page that 
+	# function to be called when a user is attempting to access a page that
 	# he/she is not authorised to.  This outputs an access denied message then
 	# re-directs to the mainpage.
 	function access_denied() {
 		global $MANTIS_ERROR;
 		print '<center>';
-		print '<p>' . $MANTIS_ERROR[ERROR_ACCESS_DENIED] . '<p>';
+		print '<p />' . $MANTIS_ERROR[ERROR_ACCESS_DENIED] . '<p />';
 		print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
 		print '</center>';
 		exit;
@@ -45,7 +45,7 @@
 		}
 	}
 	# --------------------
-	# check to see if the current user has access to the specified bug.  This assume that the bug exists and 
+	# check to see if the current user has access to the specified bug.  This assume that the bug exists and
 	# that the user has access to the project (check_bug_exists() and project_access_check()).
 	function access_bug_check( $p_bug_id, $p_view_state='' ) {
 		global $g_private_bug_threshold;
@@ -310,6 +310,6 @@
 			return user_get_field( $t_user_id, 'access_level' );
 		}
 	}
-	
+
 
 ?>
