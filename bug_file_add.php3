@@ -42,6 +42,9 @@
 		}
 		$result = db_query( $query );
 	}
+
+	# Determine which view page to redirect back to.
+	$t_redirect_url = get_view_redirect_url( $f_id );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -50,7 +53,7 @@
 <? include( $g_meta_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $HTTP_REFERER, $g_wait_time );
+		print_meta_redirect( $t_redirect_url, $g_wait_time );
 	}
 ?>
 <? print_head_bottom() ?>
@@ -68,7 +71,7 @@
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $HTTP_REFERER, $s_proceed );
+	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>
 </div>
 

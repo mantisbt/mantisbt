@@ -156,23 +156,8 @@
 		}
 	}
 
-	# for proxies that clear out HTTP_REFERER
-	if ( ( !isset( $HTTP_REFERER ) ) OR ( empty( $HTTP_REFERER )) ) {
-		switch( $g_show_report ) {
-		case 0: if ( get_current_user_pref_field( "advanced_report" )==1 ) {
-					$t_redirect_url = $g_report_bug_advanced_page;
- 				} else {
-					$t_redirect_url = $g_report_bug_page;
-				}
-				break;
-		case 1: $t_redirect_url = $g_report_bug_page;
-				break;
-		case 2: $t_redirect_url = $g_report_bug_advanced_page;
-				break;
-		}
-	} else {
-		$t_redirect_url = $HTTP_REFERER;
-	}
+	# Determine which report page to redirect back to.
+	$t_redirect_url = get_report_redirect_url();
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

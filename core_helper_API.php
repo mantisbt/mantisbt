@@ -286,6 +286,7 @@
 		return db_result( $result, 0 );
 	}
 	### --------------------
+	# Returns the name of the project
 	function get_project_name( $p_project_id ) {
 		global $g_mantis_project_table;
 
@@ -295,8 +296,68 @@
 		$result = db_query( $query );
 		return db_result( $result, 0, 0 );
 	}
-	### --------------------
-	###########################################################################
-	### END                                                                 ###
-	###########################################################################
+	# --------------------
+	# Some proxies strip out HTTP_REFERER.
+	# This function helps determine which pages to redirect to
+	# based on site and user preference.
+	function get_view_redirect_url( $p_bug_id ) {
+		global $HTTP_REFERER, $g_show_view, $g_view_bug_page, $g_view_bug_advanced_page;
+
+		if ( ( !isset( $HTTP_REFERER ) ) || ( empty( $HTTP_REFERER )) ) {
+			switch ( $g_show_view ) {
+				case 0:	if ( 1 == get_current_user_pref_field( "advanced_view" ) ) {
+							return $g_view_bug_page."?f_id=".$p_bug_id;
+						} else {
+							return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
+						}
+				case 1:	return $g_view_bug_page."?f_id=".$p_bug_id;
+				case 2:	return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
+				default:return $g_view_bug_page."?f_id=".$p_bug_id;
+			}
+		} else {
+			return $HTTP_REFERER;
+		}
+	}
+	# --------------------
+	# Some proxies strip out HTTP_REFERER.
+	# This function helps determine which pages to redirect to
+	# based on site and user preference.
+	function get_update_redirect_url( $p_bug_id ) {
+		global $g_show_view, $g_view_bug_page, $g_view_bug_advanced_page;
+
+		switch ( $g_show_view ) {
+			case 0:	if ( 1 == get_current_user_pref_field( "advanced_view" ) ) {
+						return $g_view_bug_page."?f_id=".$p_bug_id;
+					} else {
+						return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
+					}
+			case 1:	return $g_view_bug_page."?f_id=".$p_bug_id;
+			case 2:	return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
+			default:return $g_view_bug_page."?f_id=".$p_bug_id;
+		}
+	}
+	# --------------------
+	# Some proxies strip out HTTP_REFERER.
+	# This function helps determine which pages to redirect to
+	# based on site and user preference.
+	function get_report_redirect_url() {
+		global $HTTP_REFERER, $g_show_report, $g_report_bug_page, $g_report_bug_advanced_page;
+
+		if ( ( !isset( $HTTP_REFERER ) ) || ( empty( $HTTP_REFERER )) ) {
+			switch( $g_show_report ) {
+				case 0: if ( 1 == get_current_user_pref_field( "advanced_report" ) ) {
+							return $g_report_bug_advanced_page;
+		 				} else {
+							return $g_report_bug_page;
+						}
+				case 1: return $g_report_bug_page;
+				case 2: return $g_report_bug_advanced_page;
+				default:return $g_report_bug_page;
+			}
+		} else {
+			return $HTTP_REFERER;
+		}
+	}
+	# --------------------
+	# END
 ?>

@@ -88,19 +88,8 @@
 						break;
 	}
 
-	switch ( $g_show_view ) {
-		case 0:	if ( get_current_user_pref_field( "advanced_view" )==1 ) {
-					$t_redirect_url = $g_view_bug_page;
-				} else {
-					$t_redirect_url = $g_view_bug_advanced_page;
-				}
-				break;
-		case 1:	$t_redirect_url = $g_view_bug_page;
-				break;
-		case 2:	$t_redirect_url = $g_view_bug_advanced_page;
-				break;
-	}
-	$t_redirect_url = $t_redirect_url."?f_id=".$f_id;
+	# Determine which view page to redirect back to.
+	$t_redirect_url = get_update_redirect_url( $f_id );
 
 	if (( $g_quick_proceed == 1 )&&( $result )) {
 		print_header_redirect( $t_redirect_url );

@@ -29,8 +29,9 @@
 
 	# redirect to 'same page' when switching projects.
 	# view_all_* pages, and summary
+	# for proxies that clear out HTTP_REFERER
 	if ( $valid_project==1 ) {
-		if ( !isset( $HTTP_REFERER ) ) {
+		if ( !isset( $HTTP_REFERER ) || empty( $HTTP_REFERER ) ) {
 			$t_redirect_url = $g_main_page;
 		} else if ( eregi( $g_view_all_bug_page,$HTTP_REFERER ) ){
 			$t_redirect_url = $g_view_all_bug_page;
