@@ -7,6 +7,8 @@ Mantis
  * Fixed sorting in buglist is now preserved when going to next or prev page.
  * Fixed sorting in buglist. Bugs with high priority is now always first.
  * Replaced header( "Location: " ) calls with print_header_redirect().
+ * Fixed error in simple bug search
+ * Added phpMailer support
 
 07.29.2001  -   0.15.3
 
