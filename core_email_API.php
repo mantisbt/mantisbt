@@ -7,35 +7,39 @@
 	###########################################################################
 	# Email API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# check to see that the format is valid and that the mx record exists
 	function is_valid_email( $p_email ) {
 		global $g_validate_email, $g_check_mx_record;
 
-		### if we don't validate then just accept
+		# if we don't validate then just accept
 		if ( $g_validate_email==0 ) {
 			return true;
 		}
 
+		# Use a regular expression to check to see if the email is in valid format
+		#  x-xx.xxx@yyy.zzz.abc etc.
 		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+).([a-z]{2,3}$)", $p_email, $check)) {
+			# passed format check. see if we should check the mx records
 			if ( $g_check_mx_record == 1 ) {	# Check for valid mx records
 				if (getmxrr($check[1].".".$check[2], $temp)) {
 					return true;
 				} else {
 					$host = substr( strstr( $check[0], '@' ), 1 ).".";
 
-					# for no mx record... try dns
+					# for no mx record... try dns check
 					if (checkdnsrr ( $host, "ANY" ))
 						return true;
 				}
-			} else {	# Email format was valid but don't check for valid mx records
+			} else {
+				# Email format was valid but did't check for valid mx records
 				return true;
 			}
 		}
-		### Everything failed.  Bad email.
+		# Everything failed.  Bad email.
 		return false;
 	}
-	### --------------------
+	# --------------------
 	# return true if a duplicate entry exists
 	# return false if entry does not already exist
 	function check_duplicate( $p_arr, $p_str ) {
@@ -47,7 +51,7 @@
 		}
 		return false;
 	}
-	### --------------------
+	# --------------------
 	# build the bcc list
 	function build_bcc_list( $p_bug_id, $p_notify_type ) {
 		global $g_mantis_bug_table, $g_mantis_user_table,
@@ -137,8 +141,8 @@
 			return "";
 		}
 	}
-	### --------------------
-	### Send password to user
+	# --------------------
+	# Send password to user
 	function email_signup( $p_user_id, $p_password ) {
 		global $g_mantis_user_table, $g_path,
 			$s_new_account_subject,
@@ -164,8 +168,8 @@
 		$t_headers = "";
 		email_send( $v_email, $s_new_account_subject, $t_message, $t_headers );
 	}
-	### --------------------
-	### Send new password when user forgets
+	# --------------------
+	# Send new password when user forgets
 	function email_reset( $p_user_id, $p_password ) {
 		global 	$g_mantis_user_table, $g_path,
 				$s_reset_request_msg, $s_account_name_msg,
@@ -186,7 +190,8 @@
 
 		email_send( $v_email, "New Password", $t_message );
 	}
-	### --------------------
+	# --------------------
+	# send notices when a new bug is added
 	function email_new_bug( $p_bug_id ) {
 		global 	$g_mantis_user_table, $s_new_bug_msg, $g_email_new_address,
 				$g_project_cookie_val;
@@ -198,8 +203,8 @@
 			email_bug_info_to_address( $p_bug_id, $s_new_bug_msg, $g_email_new_address );
 		}
 	}
-	### --------------------
-	### Notify reporter and handler when new bugnote is added
+	# --------------------
+	# send notices when a new bugnote
 	function email_bugnote_add( $p_bug_id ) {
 		global $s_email_bugnote_msg, $g_email_update_address;
 
@@ -210,7 +215,8 @@
 			email_bug_info_to_address( $p_bug_id, $s_email_bugnote_msg, $g_email_update_address );
 		}
 	}
-	### --------------------
+	# --------------------
+	# send notices when a bug is RESOLVED
 	function email_resolved( $p_bug_id ) {
 		global $s_email_resolved_msg, $g_email_update_address;
 
@@ -221,7 +227,8 @@
 			email_bug_info_to_address( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
 		}
 	}
-	### --------------------
+	# --------------------
+	# send notices when a bug is CLOSED
 	function email_close( $p_bug_id ) {
 		global $s_email_close_msg, $g_email_update_address;
 
@@ -232,7 +239,8 @@
 			email_bug_info_to_address( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
 		}
 	}
-	### --------------------
+	# --------------------
+	# send notices when a bug is set to FEEDBACK
 	function email_feedback( $p_bug_id ) {
 		global $s_email_feedback_msg, $g_email_update_address;
 
@@ -243,7 +251,8 @@
 			email_bug_info_to_address( $p_bug_id, $s_email_feedback_msg, $g_email_update_address );
 		}
 	}
-	### --------------------
+	# --------------------
+	# send notices when a bug is REOPENED
 	function email_reopen( $p_bug_id ) {
 		global $s_email_reopen_msg, $g_email_update_address;
 
@@ -254,7 +263,8 @@
 			email_bug_info_to_address( $p_bug_id, $s_email_reopen_msg, $g_email_update_address );
 		}
 	}
-	### --------------------
+	# --------------------
+	# send notices when a bug is ASSIGNED
 	function email_assign( $p_bug_id ) {
 		global $s_email_assigned_msg, $g_email_update_address;
 
@@ -265,8 +275,9 @@
 			email_bug_info_to_address( $p_bug_id, $s_email_assigned_msg, $g_email_update_address );
 		}
 	}
-	### --------------------
-	# Build the top part of the message
+	# --------------------
+	# messages are in two parts, the bug info and the bugnotes
+	# Build the bug info part of the message
 	function email_build_bug_message( $p_bug_id ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_user_table, $g_mantis_project_table,
@@ -348,8 +359,9 @@
 
 		return $t_message;
 	}
-	### --------------------
-	# Build the bottom part of the message
+	# --------------------
+	# messages are in two parts, the bug info and the bugnotes
+	# Build the bugnotes part of the message
 	function email_build_bugnote_message( $p_bug_id ) {
 		global 	$g_mantis_bugnote_table, $g_mantis_bugnote_text_table,
 				$g_mantis_user_table, $g_complete_date_format,
@@ -388,7 +400,7 @@
 
 		return $t_message;
 	}
-	### --------------------
+	# --------------------
 	### Send bug info to reporter and handler
 	function email_bug_info( $p_bug_id, $p_message, $p_headers="" ) {
 		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table, $g_to_email;
@@ -408,8 +420,9 @@
 		### Send Email
 		$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers );
 	}
-	### --------------------
-	### Send to only the id
+	# --------------------
+	# Send to only the id
+	# @@@ UNUSED
 	function email_bug_info_to_id( $p_bug_id, $p_message, $p_user_id ) {
 		# build subject
 		$p_subject = email_build_subject( $p_bug_id );
@@ -424,8 +437,8 @@
 		### send mail
 		$res = email_send( $p_user_email, $p_subject, $t_message, $p_bcc_header );
 	}
-	### --------------------
-	### Send to only the address
+	# --------------------
+	# Send to only the address
 	function email_bug_info_to_address( $p_bug_id, $p_message, $p_email_address ) {
 		# build subject
 		$p_subject = email_build_subject( $p_bug_id );
@@ -438,7 +451,8 @@
 		### send mail
 		$res = email_send( $p_email_address, $p_subject, $t_message );
 	}
-	### --------------------
+	# --------------------
+	# this function sends the actual email
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
 		global $g_from_email, $g_enable_email_notification, $g_return_path_email;
 
@@ -451,18 +465,11 @@
 			$t_subject = trim( $p_subject );
 			$t_message = trim( $p_message );
 
-			# @@@ Is it important to wordwrap???
-			/*if ( floor( phpversion() )>=4 ) {
-				$t_message = trim( wordwrap( $t_message, 72 ) );
-			} else {
-				$t_message = trim( word_wrap( $t_message, 72 ) );
-			}*/
-
 			$t_headers = "From: $g_from_email\n";
 			#$t_headers .= "Reply-To: $p_reply_to_email\n";
 			$t_headers .= "X-Sender: <$g_from_email>\n";
 			$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
-			$t_headers .= "X-Priority: 0\n"; # Urgent = 1, No Urgent = 5, Disable = 0
+			$t_headers .= "X-Priority: 0\n"; # Urgent = 1, Not Urgent = 5, Disable = 0
 			$t_headers .= "Return-Path: <$g_return_path_email>\n"; # return email if error
 			# If you want to send foreign charsets
 			#$t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
@@ -485,7 +492,8 @@
 			}
 		}
 	}
-	### --------------------
+	# --------------------
+	# helper function
 	function get_bug_project_id( $p_bug_id ) {
 		global $g_mantis_bug_table;
 
@@ -495,7 +503,8 @@
 		$result = db_query( $query );
 		return db_result( $result, 0, 0 );
 	}
-	### --------------------
+	# --------------------
+	# helper function
 	function get_bug_summary( $p_bug_id ) {
 		global $g_mantis_bug_table;
 
@@ -505,7 +514,10 @@
 		$result = db_query( $query );
 		return db_result( $result, 0, 0 );
 	}
-	### --------------------
+	# --------------------
+	# formats the subject correctly
+	# we include the project name, bug id, and summary.
+	# @@@ NOTE: Is there a limit to the length of the subject field?
 	function email_build_subject( $p_bug_id ) {
 		# grab the project name
 		$p_project_name = get_project_name( get_bug_project_id( $p_bug_id ) );
