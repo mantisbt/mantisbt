@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.72 2004-07-18 13:59:15 vboctor Exp $
+	# $Id: bug_api.php,v 1.73 2004-07-18 14:29:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -441,7 +441,7 @@
 		$t_bug_data = bug_get( $t_bug_id, true );
 
 		# retrieve the project id associated with the bug
-		if ( $t_target_project_id == "" ) {
+		if ( ( $p_target_project_id == null ) || is_blank( $p_target_project_id ) ) {
 			$t_target_project_id = $t_bug_data->project_id;
 		}
 
@@ -482,7 +482,7 @@
 		bug_set_field( $t_new_bug_id, 'sponsorship_total', $t_bug_data->sponsorship_total );
 
 		# COPY CUSTOM FIELDS
-		if ( $p_copy_custom_fields = true ) {
+		if ( $p_copy_custom_fields ) {
 			$query = "SELECT field_id, bug_id, value
 					   FROM $t_mantis_custom_field_string_table
 					   WHERE bug_id = '$t_bug_id';";
@@ -491,9 +491,14 @@
 
 			for ( $i = 0 ; $i < $t_count ; $i++ ) {
 				$t_bug_custom = db_fetch_array( $result );
+
+				$c_field_id = db_prepare_int( $t_bug_custom['field_id'] );
+				$c_new_bug_id = db_prepare_int( $t_new_bug_id );
+				$c_value = db_prepare_string( $t_bug_custom['value'] );
+
 				$query = "INSERT INTO $t_mantis_custom_field_string_table
-						   ('field_id', 'bug_id', 'value')
-						   VALUES ('" . $t_bug_custom['field_id'] . "', '$t_new_bug_id', '" . $t_bug_custom['value'] . "');";
+						   ( field_id, bug_id, value )
+						   VALUES ('$c_field_id', '$c_new_bug_id', '$c_value')";
 				db_query( $query );
 			}
 		}
@@ -536,7 +541,7 @@
 				}
 
 				$query2 = "INSERT INTO $t_mantis_bugnote_table
-						   ( `bug_id`, `reporter_id`, `bugnote_text_id`, `view_state`, `date_submitted`, `last_modified` )
+						   ( bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
 						   VALUES ( '$t_new_bug_id',
 						   			'" . $t_bug_note['reporter_id'] . "',
 						   			'$t_bugnote_text_insert_id',
@@ -569,7 +574,7 @@
 				}
 
 				$query = "INSERT INTO $t_mantis_bug_file_table
-						( `bug_id`, `title`, `description`, `diskfile`, `filename`, `folder`, `filesize`, `file_type`, `date_added`, `content` )
+						( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
 						VALUES ( '$t_new_bug_id',
 								 '" . db_prepare_string( $t_bug_file['title'] ) . "',
 								 '" . db_prepare_string( $t_bug_file['description'] ) . "',
@@ -585,7 +590,7 @@
 		}
 
 		# Copy users monitoring bug
-		if ( $p_copy_monitoring_users == true ) {
+		if ( $p_copy_monitoring_users ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_monitor_table
 					  WHERE bug_id = '$t_bug_id';";
@@ -602,7 +607,7 @@
 		}
 
 		# COPY HISTORY
-		history_delete( $t_new_bug_id );
+		history_delete( $t_new_bug_id );	# should history only be deleted inside the if statement below?
 		if ( $p_copy_history ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_history_table
@@ -613,7 +618,7 @@
 			for ( $i = 0; $i < $t_count; $i++ ) {
 				$t_bug_history = db_fetch_array( $result );
 				$query = "INSERT INTO $t_mantis_bug_history_table
-						  ( `user_id`, `bug_id`, `date_modified`, `field_name`, `old_value`, `new_value`, `type` )
+						  ( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 						  VALUES ( '" . db_prepare_int( $t_bug_history['user_id'] ) . "',
 						  		   '$t_new_bug_id',
 						  		   '" . db_prepare_string( $t_bug_history['date_modified'] ) . "',

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.185 $
+	# $Revision: 1.186 $
 	# $Author: vboctor $
-	# $Date: 2004-07-16 23:03:09 $
+	# $Date: 2004-07-18 14:29:42 $
 	#
-	# $Id: strings_english.txt,v 1.185 2004-07-16 23:03:09 vboctor Exp $
+	# $Id: strings_english.txt,v 1.186 2004-07-18 14:29:42 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -1001,7 +1001,7 @@ $s_delete_relationship_button = "Delete";
 $s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Add Child";
+$s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
 # MASC RELATIONSHIP
