@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.26 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: bug_actiongroup_page.php,v 1.27 2003-01-18 02:09:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,8 +20,7 @@
 
 	# redirects to all_bug_page if nothing is selected
 	if ( ( $f_action=='' ) || 0 == sizeof( $f_bug_arr ) ) {
-		print_meta_redirect( 'view_all_bug_page.php', 0 );
-		exit;
+		print_header_redirect( 'view_all_bug_page.php' );
 	}
 
 	$t_finished = false;
