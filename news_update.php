@@ -11,8 +11,8 @@
 	check_access( MANAGER );
 
 	# Update news
-    $result = news_update_query( $f_id, $f_headline, $f_body, $f_project_id );
-
+	check_varset( $f_accouncement, '' );
+    $result = news_update_query( $f_id, $f_view_state, $f_announcement, $f_headline, $f_body, $f_project_id );
     $f_headline 	= string_display( $f_headline );
     $f_body 		= string_display( $f_body );
 ?>

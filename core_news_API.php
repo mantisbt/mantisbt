@@ -14,21 +14,30 @@
 	# function news_select( $p_id );
 
 	# --------------------
-	function news_add_query( $p_project_id, $p_poster_id, $p_headline, $p_body ) {
+	function news_add_query( $p_project_id, $p_poster_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
 		global $g_mantis_news_table;
 
 		$c_project_id	= (integer)$p_project_id;
 		$c_poster_id	= (integer)$p_poster_id;
+		$c_view_state	= (integer)$p_view_state;
 
 		$c_headline		= string_prepare_text( $p_headline );
 		$c_body			= string_prepare_textarea( $p_body );
 
+		if ( 'on' == $p_announcement ) {
+			$c_announcement = 1;
+		} else {
+			$c_announcement = 0;
+		}
+
 		# Add item
 		$query = "INSERT
 				INTO $g_mantis_news_table
-	    		( id, project_id, poster_id, date_posted, last_modified, headline, body )
+	    		( id, project_id, poster_id, date_posted, last_modified,
+	    		  view_state, announcement, headline, body )
 				VALUES
-				( null, '$c_project_id', '$c_poster_id', NOW(), NOW(), '$c_headline', '$c_body' )";
+				( null, '$c_project_id', '$c_poster_id', NOW(), NOW(),
+				  '$c_view_state', '$c_announcement', '$c_headline', '$c_body' )";
 	    return db_query( $query );
 	}
 	# --------------------
@@ -45,19 +54,30 @@
 	}
 	# --------------------
 	# Update news item
-	function news_update_query( $p_id, $p_headline, $p_body, $p_project_id ) {
+	function news_update_query( $p_id, $p_view_state, $p_announcement, $p_headline, $p_body, $p_project_id ) {
 		global $g_mantis_news_table;
 
 		$c_id			= (integer)$p_id;
 		$c_project_id	= (integer)$p_project_id;
+		$c_view_state	= (integer)$p_view_state;
 
 		$c_headline		= string_prepare_text( $p_headline );
 		$c_body			= string_prepare_textarea( $p_body );
 
+		if ( 'on' == $p_announcement ) {
+			$c_announcement = 1;
+		} else {
+			$c_announcement = 0;
+		}
+
 		# Update entry
 		$query = "UPDATE $g_mantis_news_table
-				SET headline='$c_headline', body='$c_body',
-					project_id='$c_project_id', last_modified=NOW()
+				SET view_state='$c_view_state',
+					announcement='$c_announcement',
+					headline='$c_headline',
+					body='$c_body',
+					project_id='$c_project_id',
+					last_modified=NOW()
 	    		WHERE id='$c_id'";
 	    return db_query( $query );
 	}
@@ -68,7 +88,7 @@
 
 		$c_id = (integer)$p_id;
 
-		$query = "SELECT *
+		$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
 			FROM $g_mantis_news_table
 			WHERE id='$c_id'";
 	    $result = db_query( $query );

@@ -42,7 +42,7 @@
 			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
 					FROM $g_mantis_news_table
 					WHERE project_id='$g_project_cookie_val' OR project_id='0000000'
-					ORDER BY id DESC
+					ORDER BY announcement DESC, id DESC
 					LIMIT $c_offset, $g_news_view_limit";
 			break;
 		case 1 :
@@ -51,7 +51,7 @@
 					FROM $g_mantis_news_table
 					WHERE ( project_id='$g_project_cookie_val' OR project_id='0000000' ) AND
 						(TO_DAYS(NOW()) - TO_DAYS(date_posted) < '$g_news_view_limit_days')
-					ORDER BY id DESC";
+					ORDER BY announcement DESC, id DESC";
 			break;
 	} # end switch
 	$result = db_query( $query );
@@ -66,6 +66,12 @@
 		$v_body 		= string_display( $v_body );
 		$v_date_posted 	= date( $g_normal_date_format, $v_date_posted );
 
+		# only show PIRVATE posts to DEVELOPERS and above
+		if (( PRIVATE == $v_view_state ) &&
+			!access_level_check_greater_or_equal( DEVELOPER )) {
+			continue;
+		}
+
 		## grab the username and email of the poster
     	$row2 = get_user_info_by_id_arr( $v_poster_id );
 		$t_poster_name	= '';
@@ -74,15 +80,33 @@
 			$t_poster_name	= $row2['username'];
 			$t_poster_email	= $row2['email'];
 		}
+
+		if ( PRIVATE == $v_view_state ) {
+			$t_news_css = 'news-heading-private';
+		} else {
+			$t_news_css = 'news-heading-public';
+		}
 ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="0">
 <tr>
-	<td class="news-heading">
+	<td class="<?php echo $t_news_css ?>">
 		<span class="news-headline"><?php echo $v_headline ?></span> -
 		<span class="news-date"><?php echo $v_date_posted ?></span> -
 		<a class="news-email" href="mailto:<?php echo $t_poster_email ?>"><?php echo $t_poster_name ?></a>
+		<span class='small'>
+		<?php
+			if ( 1 == $v_announcement ) {
+				PRINT '['.$s_announcement.']';
+			}
+		?>
+		<?php
+			if ( PRIVATE == $v_view_state ) {
+				PRINT '['.$s_private.']';
+			}
+		?>
+		</span>
 	</td>
 </tr>
 <tr>

@@ -27,7 +27,7 @@
 <tr class="row-1">
 	<td class="category" width="25%">
 		<?php echo $s_headline ?><br />
-		<?php echo $s_do_not_use ?> "
+		<span class="small"><?php echo $s_do_not_use ?> "</span>
 	</td>
 	<td width="75%">
 		<input type="text" name="f_headline" size="64" maxlength="64">
@@ -53,6 +53,25 @@
 			}
 			print_project_option_list( $g_project_cookie_val );
 		?>
+		</select>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<?php echo $s_announcement ?><br />
+		<span class="small"><?php echo $s_stays_on_top ?></span>
+	</td>
+	<td>
+		<input type="checkbox" name="f_announcement">
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category" width="25%">
+		<?php echo $s_view_status ?>
+	</td>
+	<td width="75%">
+		<select name="f_view_state">
+			<?php print_enum_string_option_list( 'view_state' ) ?>
 		</select>
 	</td>
 </tr>

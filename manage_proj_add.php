@@ -13,8 +13,8 @@
 	$c_name 		= string_prepare_textarea( $f_name );
 	$c_description 	= string_prepare_textarea( $f_description );
 	$c_view_state	= (integer)$f_view_state;
-	$c_file_path	= addslashes($f_file_path);
 	$c_status		= (integer)$f_status;
+	$c_file_path	= addslashes($f_file_path);
 
 	$result = 0;
 	$duplicate = is_duplicate_project( $f_name );

@@ -248,14 +248,15 @@
 	# --------------------
 	# Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
-		global $g_mantis_news_table, $g_project_cookie_val;
+		global	$g_mantis_news_table, $g_project_cookie_val,
+				$s_announcement, $s_private;
 
 		if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-			$query = "SELECT id, headline
+			$query = "SELECT id, headline, announcement, view_state
 				FROM $g_mantis_news_table
 				ORDER BY date_posted DESC";
 		} else {
-			$query = "SELECT id, headline
+			$query = "SELECT id, headline, announcement, view_state
 				FROM $g_mantis_news_table
 				WHERE project_id='$g_project_cookie_val'
 				ORDER BY date_posted DESC";
@@ -268,7 +269,17 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 			$v_headline = string_display( $v_headline );
 
-			PRINT "<option value=\"$v_id\">$v_headline</option>";
+			$t_note = '';
+			if ( 1 == $v_announcement ) {
+				$t_note = $s_announcement;
+			}
+			if ( PRIVATE == $v_view_state ) {
+				$t_note .= ' '.$s_private;
+			}
+			if ( !empty( $t_note ) ) {
+				$t_note = '['.$t_note.']';
+			}
+			PRINT "<option value=\"$v_id\">$v_headline $t_note</option>";
 		}
 	}
 	# --------------------

@@ -36,7 +36,7 @@
 	<td class="form-title">
 		<form method="post" action="news_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
-		<?php echo $s_edit_news_title ?>
+		<?php echo $s_headline ?>
 	</td>
 	<td class="right">
 		<?php print_bracket_link( 'news_menu_page.php', $s_go_back ) ?>
@@ -44,7 +44,8 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_headline ?>
+		<?php echo $s_headline ?><br />
+		<span class="small"><?php echo $s_do_not_use ?> "</span>
 	</td>
 	<td width="75%">
 		<input type="text" name="f_headline" size="64" maxlength="64" value="<?php echo $v_headline ?>">
@@ -70,6 +71,25 @@
 			}
 			print_project_option_list( $v_project_id );
 		?>
+		</select>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<?php echo $s_announcement ?><br />
+		<span class="small"><?php echo $s_stays_on_top ?></span>
+	</td>
+	<td>
+		<input type="checkbox" name="f_announcement" <?php if ( 1 == $v_announcement ) { echo 'CHECKED'; } ?>>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category" width="25%">
+		<?php echo $s_view_status ?>
+	</td>
+	<td width="75%">
+		<select name="f_view_state">
+			<?php print_enum_string_option_list( 'view_state', $v_view_state ) ?>
 		</select>
 	</td>
 </tr>

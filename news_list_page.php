@@ -16,7 +16,7 @@
 <ul>
 <?php
 	# Select the news posts
-	$query = "SELECT id, poster_id, UNIX_TIMESTAMP(date_posted) as date_posted, headline
+	$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
 			FROM $g_mantis_news_table
 			WHERE project_id='$g_project_cookie_val' OR project_id='0000000'
 			ORDER BY id DESC";
@@ -38,7 +38,17 @@
 			$t_poster_email	= $row2['email'];
 		}
 
-		PRINT "<li><span class=\"news-date\">$v_date_posted</span> - <span class=\"news-headline\"><a href=\"news_view_page.php?f_id=$v_id\">$v_headline</a></span> - <a class=\"news-email\" href=\"mailto:$t_poster_email\">$t_poster_name</a>";
+		$t_note = '';
+		if ( 1 == $v_announcement ) {
+			$t_note = $s_announcement;
+		}
+		if ( PRIVATE == $v_view_state ) {
+			$t_note .= ' '.$s_private;
+		}
+		if ( !empty( $t_note ) ) {
+			$t_note = '['.$t_note.']';
+		}
+		PRINT "<li><span class=\"news-date\">$v_date_posted</span> - <span class=\"news-headline\"><a href=\"news_view_page.php?f_id=$v_id\">$v_headline</a></span> <span class=\"small\">$t_note</span> <a class=\"news-email\" href=\"mailto:$t_poster_email\">$t_poster_name</a>";
 	}  # end for loop
 ?>
 </ul>

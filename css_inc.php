@@ -83,11 +83,12 @@ td.menu				{ background-color: <?php echo $g_menu_color ?>; color: <?php echo $g
 td.quick-summary-left	{ width: 50%; text-align: left; }
 td.quick-summary-right	{ width: 50%; text-align: right; }
 
-td.news-heading		{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
-td.news-body		{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; padding: 16px; }
-span.news-headline	{ font-weight: bold; }
-span.news-date		{ font-style: italic; font-size: <?php echo $g_font_small ?>; }
-a.news-email		{ font-size: <?php echo $g_font_small ?>; }
+td.news-heading-public	{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
+td.news-heading-private	{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
+td.news-body			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; padding: 16px; }
+span.news-headline		{ font-weight: bold; }
+span.news-date			{ font-style: italic; font-size: <?php echo $g_font_small ?>; }
+a.news-email			{ font-size: <?php echo $g_font_small ?>; }
 </style>
 <script language="JavaScript" type="text/javascript">
 <!--

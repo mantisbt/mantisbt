@@ -58,6 +58,8 @@ Mantis
  * In the view bugs, when all projects is selected the project name is now displayed in smaller font over the category.
  * Added support for optional compression of html output ($g_compress_html).  This option is OFF by default since it requires PHP 4.04.
  * Moved admin_* scripts into admin/ folder.
+ * Added view_state to news.  News can now be made private.
+ * Added announcement flag to news.  Announcements are always kept at the top of the news page.
 
 2002.05.19  -  0.17.3
 
