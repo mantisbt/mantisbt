@@ -50,7 +50,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version = "0.15.1";
+	$g_mantis_version = "0.15.3";
 	$g_show_version   = 1;
 
 	#############################
@@ -135,7 +135,8 @@
 	$g_show_project_in_title = 1;
 
 	# --- show assigned to names ------
-	$g_show_assigned_names = 1;
+	# This is in the view all pages
+	$g_show_assigned_names = 0;
 
 	############################
 	### Mantis Time Settings ###
@@ -234,7 +235,7 @@
 
 	# --- file upload settings --------
 	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
-	$g_allow_file_upload    = 0;
+	$g_allow_file_upload    = 1;
 
 	# Upload destination: specify actual location in project settings
 	# 1 = "disk"

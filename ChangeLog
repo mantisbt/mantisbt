@@ -1,5 +1,13 @@
 Mantis
 
+07.XX.2001  -   0.15.3
+
+ * Added wordwrap() to text formatting in email messages.  Affects description and bugnotes.
+ * Added new function process_plain_password().  This, in conjunction with $g_@@@@@@@@@@@@@, allows you to bypass crypt().
+ * Added N/A to reproducibility
+ * Added PHP version check to admin_check.php3
+ * Added simple text search field to all view_all* pages
+
 07.13.2001  -   0.15.2
 
  * Fixed explode() error in view_all_unassign_bug.php3
