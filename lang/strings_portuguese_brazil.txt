@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.64 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.65 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.64 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.65 2004-08-08 08:45:14 jlatour Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.187 -- jferraz 2004/07/11
 	###########################################################################
@@ -392,6 +392,7 @@ $s_password_updated = 'Senha atualizada com sucesso';
 
 # bug_assign.php
 $s_bug_assign_msg = 'O caso foi atribuído com sucesso...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';
@@ -1018,6 +1019,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENÇÃO</b>. Nem todo
 $s_create_child_bug_button = "Criar filho";
 $s_bug_cloned_to = "Caso clonado";
 $s_bug_created_from = "Caso gerado à partir de";
+
 # Source Control Integration
 $s_checkin = 'Checkin';
 ?>

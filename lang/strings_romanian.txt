@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.58 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.59 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_romanian.txt,v 1.58 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_romanian.txt,v 1.59 2004-08-08 08:45:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -388,6 +388,7 @@ $s_password_updated = 'Password successfully updated';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Bug-ul a fost asignat cu succes...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';

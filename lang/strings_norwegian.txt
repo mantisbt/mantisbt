@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.67 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.68 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_norwegian.txt,v 1.67 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_norwegian.txt,v 1.68 2004-08-08 08:45:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -390,6 +390,7 @@ $s_password_updated = 'Passordet er oppdatert';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Saken har blitt delegert ...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';

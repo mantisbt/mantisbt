@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.65 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:12 $
+	# $Revision: 1.66 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:13 $
 	#
-	# $Id: strings_dutch.txt,v 1.65 2004-08-05 04:42:12 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.66 2004-08-08 08:45:13 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -391,6 +391,7 @@ $s_password_updated = 'Wachtwoord is aangepast.';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Bug is toegewezen.';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';
@@ -954,14 +955,14 @@ $s_custom_field_access_level_rw = 'Schrijftoegang';
 $s_custom_field_length_min = 'Min. lengte';
 $s_custom_field_length_max = 'Max. lengte';
 $s_custom_field_advanced = 'Uitgebreid';
-s_custom_field_display_report = 'Display When Reporting Issues';
+$s_custom_field_display_report = 'Display When Reporting Issues';
 $s_custom_field_display_update = 'Display When Updating Issues';
 $s_custom_field_display_resolved = 'Display When Resolving Issues';
 $s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_require_resolved = 'Required On Resolve';
+$s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = 'Rij';
 $s_custom_field_type_enum_string = '0:String,1:Numeriek,2:Drijvende komma,3:Enumeratie,4:E-mail,5:Checkbox,6:List,7:Multiselection list';
@@ -1004,7 +1005,6 @@ $s_changelog = 'Change Log';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "issue";
 $s_add_new_relationship = "New relationship";
 $s_add_new_relationship_button = "Add";

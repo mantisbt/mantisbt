@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.62 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.63 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.62 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.63 2004-08-08 08:45:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -389,6 +389,7 @@ $s_password_updated = 'Password Alterada com Sucesso';
 
 # bug_assign.php
 $s_bug_assign_msg = 'O Bug Foi Atribuido Com Sucesso...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';

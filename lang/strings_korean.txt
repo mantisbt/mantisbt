@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.65 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.66 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_korean.txt,v 1.65 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_korean.txt,v 1.66 2004-08-08 08:45:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -200,6 +200,7 @@ $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= '오류: LDAP 사용자 갱신 오류.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= '오류: 데이타베이스 연결 오류.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= '오류: 데이타베이스 질의 오류.';$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= '오류: 데이타베이스 선택 오류.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '오류: 복사 실행이 명시되지 않음.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '오류: 카테고리를 찾을 수 없습니다.';
@@ -388,6 +389,7 @@ $s_password_updated = '암호가 변경되었습니다...';
 
 # bug_assign.php
 $s_bug_assign_msg       = '이슈가 할당되었습니다...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';

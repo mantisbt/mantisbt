@@ -6,19 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# Czech: Pavel Loupal, Pavel.Loupal@seznam.cz
-  	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
-  	# Czech: Vít Jurásek, vit.jurasek@vegateam.cz
-  	# Czech: Milan Cizek, cizek.milan@seznam.cz
-  	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
-        # Czech: Pøemek Brada, brada@kiv.zcu.cz       
-  	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
+	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
+	# Czech: Vít Jurásek, vit.jurasek@vegateam.cz
+	# Czech: Milan Cizek, cizek.milan@seznam.cz
+	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.57 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:12 $
+	# $Revision: 1.58 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:13 $
 	#
-	# $Id: strings_czech.txt,v 1.57 2004-08-05 04:42:12 bigbadger Exp $
+	# $Id: strings_czech.txt,v 1.58 2004-08-08 08:45:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -395,6 +393,7 @@ $s_password_updated = 'Heslo bylo úspì¹nì aktualizováno';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Problém byl úspì¹nì pøiøazen...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';

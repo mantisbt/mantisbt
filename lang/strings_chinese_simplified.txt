@@ -11,11 +11,11 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.45 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:12 $
+	# $Revision: 1.46 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:13 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.45 2004-08-05 04:42:12 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.46 2004-08-08 08:45:13 jlatour Exp $
 	###########################################################################
 
 	###########################################################################
@@ -73,7 +73,7 @@ $s_field = '字段';
 $s_old_value = '旧的值';
 $s_new_value = '新的值';
 $s_date_modified = '日期修正';
-$s_Bugnote = 'Bug 注解';
+$s_bugnote = 'Bug 注解';
 $s_change = '改变';
 $s_bugnote_view_state = '查看 Bug 注解状态';
 $s_bug_monitor = 'Bug 监视人';
@@ -233,12 +233,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
-
 
 $s_login_error = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -290,10 +288,10 @@ $s_email_notification_title_for_status_bug_resolved = '下列 Bug 已经被解决';
 $s_email_notification_title_for_status_bug_closed = '下列 Bug 已经关闭';
 
 $s_email_notification_title_for_action_bug_submitted = '下列 Bug 已经提交。';
-$s_email_notification_title_for_action_bug_reopened = '下列 Bug 重新打开。';
-$s_email_notification_title_for_action_bug_deleted = '下列 Bug 已经被删除';
-$s_email_notification_title_for_action_bug_deleted = '下列 Issue 已经被删除';
 $s_email_notification_title_for_action_bug_assigned = '下列 Bug 已经被指派';
+$s_email_notification_title_for_action_bug_reopened = '下列 Bug 重新打开。';
+$s_email_notification_title_for_action_bug_deleted = '下列 Issue 已经被删除';
+$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = '下列 Bug 已经被 SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
@@ -407,6 +405,7 @@ $s_password_updated = '密码更新成功';
 
 # bug_assign.php
 $s_bug_assign_msg       = "已成功指派 Bug...";
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';
@@ -511,17 +510,17 @@ $s_updating_bug_simple_title = "正在更新 Bug 信息";
 # bug_vote_add.php
 $s_vote_added_msg = "投票已添加...";
 
-# Bugnote_add.php
+# bugnote_add.php
 $s_bugnote_added_msg = "已添加 Bug 注解...";
 
-# Bugnote_delete.php
+# bugnote_delete.php
 $s_bugnote_deleted_msg = "已删除 Bug 注解...";
 $s_bug_notes_title = "Bug 注解";
 
-# Bugnote_edit_page.php
+# bugnote_edit_page.php
 $s_edit_bugnote_title = "编辑 Bug 注解";
 
-# Bugnote_inc.php
+# bugnote_inc.php
 $s_no_bugnotes_msg = "这个 Bug 没有注解信息";
 $s_delete_link = "删除";
 $s_add_bugnote_title = "添加 Bug 注解";
@@ -529,7 +528,7 @@ $s_add_bugnote_button = "添加 Bug 注解";
 $s_bugnote_edit_link = "编辑";
 $s_closed_bug_button = "关闭 Bug";
 
-# Bugnote_update.php
+# bugnote_update.php
 $s_bugnote_updated_msg = "已经被成功更新 Bug 注解...";
 $s_edited_on = "编辑于：";
 

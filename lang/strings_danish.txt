@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.63 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:12 $
+	# $Revision: 1.64 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:13 $
 	#
-	# $Id: strings_danish.txt,v 1.63 2004-08-05 04:42:12 bigbadger Exp $
+	# $Id: strings_danish.txt,v 1.64 2004-08-08 08:45:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -280,12 +280,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = 'Rapportør';
 $s_email_handler = 'Tilsyn';
@@ -384,11 +382,13 @@ $s_profile_updated_msg = 'Profil opdateret...';
 # account_update.php
 $s_account_updated_msg = 'Din konto er blevet opdateret...';
 $s_email_updated = 'Vellykket opdatering af E-mail adresse';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Vellykket opdatering af Adgangskode';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Fejlen er blevet tildelt...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';
@@ -954,12 +954,12 @@ $s_custom_field_length_max = 'Max. Længde';
 $s_custom_field_advanced = 'Avanceret';
 $s_custom_field_display_report = 'Display When Reporting Issues';
 $s_custom_field_display_update = 'Display When Updating Issues';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_display_resolved = 'Display When Resolving Issues';
+$s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_require_resolved = 'Required On Resolve';
+$s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = 'Sekvens';
 $s_custom_field_type_enum_string = '0:Streng,1:Nummerisk,2:Kommatal,3:Optælling,4:E-mail,5:Checkbox,6:List,7:Multiselection list';

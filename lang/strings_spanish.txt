@@ -11,11 +11,11 @@
 	# Spanish: Bernardo Hernández - b.magno@terra.es
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# -------------------------------------------------
-	# $Revision: 1.66 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:14 $
+	# $Revision: 1.67 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_spanish.txt,v 1.66 2004-08-05 04:42:14 bigbadger Exp $
+	# $Id: strings_spanish.txt,v 1.67 2004-08-08 08:45:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -392,6 +392,7 @@ $s_password_updated = 'Contraseña actualizada';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'El Bug ha sido exitosamente asignado...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';

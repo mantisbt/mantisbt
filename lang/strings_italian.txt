@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.71 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.72 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_italian.txt,v 1.71 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_italian.txt,v 1.72 2004-08-08 08:45:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -390,6 +390,7 @@ $s_password_updated = "La password è stata aggiornata correttamente";
 
 # bug_assign.php
 $s_bug_assign_msg = "L'anomalia è stato assegnato correttamente...";
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';
@@ -1016,6 +1017,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. NON a
 $s_create_child_bug_button = "Genera figlio";
 $s_bug_cloned_to = "Anomalia clonata";
 $s_bug_created_from = "Anomalia generata da";
+
 # Source Control Integration
 $s_checkin = 'Checkin';
 ?>

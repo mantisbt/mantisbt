@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.12 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.13 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_latvian.txt,v 1.12 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_latvian.txt,v 1.13 2004-08-08 08:45:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -390,6 +390,7 @@ $s_password_updated = 'Password successfully updated';
 
 # bug_assign.php
 $s_bug_assign_msg       = "Kïûdas atbildîgais tika noteikts...";
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';

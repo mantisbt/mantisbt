@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.9 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:12 $
+	# $Revision: 1.10 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:13 $
 	#
-	# $Id: strings_estonian.txt,v 1.9 2004-08-05 04:42:12 bigbadger Exp $
+	# $Id: strings_estonian.txt,v 1.10 2004-08-08 08:45:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -282,12 +282,10 @@ $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of t
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'MÄRKUS on lisatud sellele bugile.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
 $s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
 $s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
-# MASC RELATIONSHIP
 
 $s_email_reporter = 'Teataja';
 $s_email_handler = 'Haldaja';

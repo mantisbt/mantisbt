@@ -8,11 +8,11 @@
 	##########################################################################
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# -------------------------------------------------
-	# $Revision: 1.7 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.8 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:14 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.7 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_lithuanian.txt,v 1.8 2004-08-08 08:45:14 jlatour Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -400,6 +400,7 @@ $s_password_updated = 'Slaptaþodis sëkmingai atnaujintas';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Problema sëkmingai paskirta...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';

@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.58 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:12 $
+	# $Revision: 1.59 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 08:45:13 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.58 2004-08-05 04:42:12 bigbadger Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.59 2004-08-08 08:45:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -388,6 +388,7 @@ $s_password_updated = 'Password successfully updated';
 
 # bug_assign.php
 $s_bug_assign_msg       = '臭蟲已經成功被指定...';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';
