@@ -128,10 +128,18 @@
 	# --------------------
 	# Checks for password match using the globally specified login method
 	function is_password_match( $f_username, $p_test_password, $p_password ) {
-		global $g_login_method;
+		global $g_login_method, $g_allow_anonymous_login, $g_anonymous_account;
+
+		# allow anonymous logins
+		if ( ON == $g_allow_anonymous_login ) {
+			if ( $g_anonymous_account == $f_username ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 
 		switch ( $g_login_method ) {
-
 			case CRYPT:	$salt = substr( $p_password, 0, 2 );
 						if ( crypt( $p_test_password, $salt ) == $p_password ) {
 							return true;

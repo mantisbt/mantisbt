@@ -42,8 +42,15 @@
 <?php } ?>
 <table class="width50" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
+	<td class="form-title">
 		<?php echo $s_login_title ?>
+	</td>
+	<td class="right">
+	<?php
+		if ( ON == $g_allow_anonymous_login ) {
+			print_bracket_link( $g_login_anon, $s_login_anonymously );
+		}
+	?>
 	</td>
 </tr>
 <tr class="row-1">

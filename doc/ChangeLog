@@ -22,6 +22,7 @@ Mantis
  * Added project name as supplementary info next to bug id in buglist for "All projects" option
  * Added Basic Authentication patch.
  * Added CSV Export patch.
+ * Added Anonymous Login patch.
 
 01.23.2002  -   0.17.0
 

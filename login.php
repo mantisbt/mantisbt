@@ -27,6 +27,10 @@
 		$login_result = 0;
 	}
 
+	if ( ON == $g_allow_anonymous_login ) {
+		$f_password = "";
+	}
+
 	$t_project_id = 0;
 	if (( 1 == $login_result )&&
 		( ON == $u_enabled )&&
