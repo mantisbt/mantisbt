@@ -8,8 +8,8 @@
 	# prevent caching
 	global $g_content_expire;
 ?>
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-<META HTTP-EQUIV="Pragma-directive" CONTENT="no-cache">
-<META HTTP-EQUIV="Cache-Directive" CONTENT="no-cache">
-<META HTTP-EQUIV="Expires" CONTENT="<?php echo $g_content_expire ?>">
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma-directive" content="no-cache" />
+<meta http-equiv="Cache-Directive" content="no-cache" />
+<meta http-equiv="Expires" content="<?php echo $g_content_expire ?>" />

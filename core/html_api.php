@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.12 2002-09-06 06:06:28 jfitzell Exp $
+	# $Id: html_api.php,v 1.13 2002-09-09 04:31:45 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -61,7 +61,8 @@
 	function print_html_top() {
 		# @@@ NOTE make this a configurable global.
 		#PRINT '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-		PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">';
+		PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+		#PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">';
 
 		PRINT '<html>';
 	}
@@ -73,7 +74,7 @@
 	# --------------------
 	# (3) Prints the content-type
 	function print_content_type() {
-		PRINT '<meta http-equiv="Content-type" content="text/html;charset=' . lang_get( 'charset' ) . '">';
+		PRINT '<meta http-equiv="Content-type" content="text/html;charset=' . lang_get( 'charset' ) . '" />';
 	}
 
 	# --------------------
@@ -267,7 +268,7 @@
 	# This prints the little [?] link for user help
 	# The $p_a_name is a link into the documentation.html file
 	function print_documentation_link( $p_a_name='' ) {
-		PRINT "<a href=\"doc/documentation.html#$p_a_name\" target=_info>[?]</a>";
+		PRINT "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 	}
 	# --------------------
 	# checks to see whether we need to be displaying the source link

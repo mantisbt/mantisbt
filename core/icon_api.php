@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: icon_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: icon_api.php,v 1.3 2002-09-09 04:31:45 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -48,9 +48,9 @@
 
 		$t_none = NONE;
 		if ( !empty( $g_status_icon_arr[$p_icon] ) ) {
-			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$p_icon]\" ALT=\"\" />";
+			PRINT "<img src=\"$g_icon_path$g_status_icon_arr[$p_icon]\" alt=\"\" />";
 		} else {
-			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\" />";
+			PRINT "<img src=\"$g_icon_path$g_status_icon_arr[$t_none]\" alt=\"\" />";
 		}
 	}
 	# --------------------
@@ -75,9 +75,9 @@
 
 		$t_none = NONE;
 		if ( !empty( $g_sort_icon_arr[$t_dir] ) ) {
-			PRINT "<IMG SRC=\"$g_icon_path$g_sort_icon_arr[$t_dir]\" ALT=\"\" />";
+			PRINT "<img src=\"$g_icon_path$g_sort_icon_arr[$t_dir]\" alt=\"\" />";
 		} else {
-			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\" />";
+			PRINT "<img src=\"$g_icon_path$g_status_icon_arr[$t_none]\" alt=\"\" />";
 		}
 	}
 	# --------------------
@@ -88,9 +88,9 @@
 
 		$t_none = NONE;
 		if ( !empty( $g_unread_icon_arr[$p_unread] ) ) {
-			PRINT "<IMG SRC=\"$g_icon_path$g_unread_icon_arr[$p_unread]\" ALT=\"\" />";
+			PRINT "<img src=\"$g_icon_path$g_unread_icon_arr[$p_unread]\" alt=\"\" />";
 		} else {
-			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\" />";
+			PRINT "<img src=\"$g_icon_path$g_status_icon_arr[$t_none]\" alt=\"\" />";
 		}
 	}
 	# --------------------

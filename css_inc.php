@@ -90,6 +90,9 @@ td.news-body			{ background-color: <?php echo $g_spacer_color ?>; color: <?php e
 span.news-headline		{ font-weight: bold; }
 span.news-date			{ font-style: italic; font-size: <?php echo $g_font_small ?>; }
 a.news-email			{ font-size: <?php echo $g_font_small ?>; }
+
+img						{}
+img.icon				{ width: 11px; height: 11px; }
 </style>
 <script language="JavaScript" type="text/javascript">
 <!--
