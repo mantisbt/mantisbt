@@ -103,6 +103,9 @@ Mantis ChangeLog
  * Removed $g_register_globals variable and just check the actual value of the PHP config variable
  * Added core_error_API.php with a new pretty error handler and error_string() to obtain internationalized error strings
 
+2002.08.23  -  0.17.5
+ * Fixed problem where you could see public bugs if all projects were marked private (#2341)
+
 2002.08.19  -  0.17.4a
  * Fixed the fix of the ambigious column problem
  * Fixed the 'second line of defense' against the arbitrary-code-execution vulnerability

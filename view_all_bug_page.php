@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.34 $
-	# $Author: jlatour $
-	# $Date: 2002-08-18 08:27:23 $
+	# $Revision: 1.35 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-23 09:54:17 $
 	#
-	# $Id: view_all_bug_page.php,v 1.34 2002-08-18 08:27:23 jlatour Exp $
+	# $Id: view_all_bug_page.php,v 1.35 2002-08-23 09:54:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php include( 'core_API.php' ) ?>
@@ -101,7 +101,10 @@
 		$result2 = db_query( $query2 );
 		$project_count = db_num_rows( $result2 );
 		if ( 0 == $project_count ) {
-			$t_where_clause = ' WHERE 1=1';
+			# we don't want to select anything if no projects exist
+			# @@@ once this is in an API function we can just return an empty
+			#     array here and avoid all the wasted db queries
+			$t_where_clause = ' WHERE 1=0';
 		} else {
 			$t_where_clause = ' WHERE (';
 			for ($i=0;$i<$project_count;$i++) {
