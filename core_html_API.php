@@ -249,18 +249,23 @@
 				$g_manage_project_menu_page, $s_projects,
 				$g_documentation_page, $s_documentation_link;
 
+		$t_manage_page = $g_manage_page;
+		$t_manage_project_menu_page = $g_manage_project_menu_page;
+		$t_manage_create_user_page = $g_manage_create_user_page;
+		$t_documentation_page = $g_documentation_page;
+
 		switch ( $p_page ) {
-		case $g_manage_page: $g_manage_page="";break;
-		case $g_manage_project_menu_page: $g_manage_project_menu_page="";break;
-		case $g_manage_create_user_page: $g_manage_create_user_page="";break;
-		case $g_documentation_page: $g_documentation_page="";break;
+			case $t_manage_page: $t_manage_page="";break;
+			case $t_manage_project_menu_page: $t_manage_project_menu_page="";break;
+			case $t_manage_create_user_page: $t_manage_create_user_page="";break;
+			case $t_documentation_page: $t_documentation_page="";break;
 		}
 
 		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $g_manage_page, "Manage Users" );
-			print_bracket_link( $g_manage_project_menu_page, "Manage Projects");
-			print_bracket_link( $g_manage_create_user_page, $s_create_new_account_link );
-			print_bracket_link( $g_documentation_page, $s_documentation_link );
+			print_bracket_link( $t_manage_page, "Manage Users" );
+			print_bracket_link( $t_manage_project_menu_page, "Manage Projects");
+			print_bracket_link( $t_manage_create_user_page, $s_create_new_account_link );
+			print_bracket_link( $t_documentation_page, $s_documentation_link );
 		PRINT "</div>";
 	}
 	### --------------------
@@ -271,16 +276,20 @@
 				$g_account_profile_menu_page, $s_manage_profiles_link,
 				$g_account_prefs_page, $s_change_preferences_link;
 
+		$t_account_page = $g_account_page;
+		$t_account_prefs_page = $g_account_prefs_page;
+		$t_account_profile_menu_page = $g_account_profile_menu_page;
+
 		switch ( $p_page ) {
-		case $g_account_page: $g_account_page="";break;
-		case $g_account_prefs_page: $g_account_prefs_page="";break;
-		case $g_account_profile_menu_page: $g_account_profile_menu_page="";break;
+			case $t_account_page: $t_account_page="";break;
+			case $t_account_prefs_page: $t_account_prefs_page="";break;
+			case $t_account_profile_menu_page: $t_account_profile_menu_page="";break;
 		}
 
 		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $g_account_page, $s_account_link );
-			print_bracket_link( $g_account_prefs_page, $s_change_preferences_link );
-			print_bracket_link( $g_account_profile_menu_page, $s_manage_profiles_link );
+			print_bracket_link( $t_account_page, $s_account_link );
+			print_bracket_link( $t_account_prefs_page, $s_change_preferences_link );
+			print_bracket_link( $t_account_profile_menu_page, $s_manage_profiles_link );
 		PRINT "</div>";
 	}
 	### --------------------
@@ -292,17 +301,21 @@
 				$g_proj_doc_add_page, $s_add_file,
 				$g_allow_file_upload;
 
+		$t_documentation_html = $g_documentation_html;
+		$t_proj_doc_page = $g_proj_doc_page;
+		$t_proj_doc_add_page = $g_proj_doc_add_page;
+
 		switch ( $p_page ) {
-		case $g_documentation_html: $g_documentation_html="";break;
-		case $g_proj_doc_page: $g_proj_doc_page="";break;
-		case $g_proj_doc_add_page: $g_proj_doc_add_page="";break;
+			case $t_documentation_html: $t_documentation_html="";break;
+			case $t_proj_doc_page: $t_proj_doc_page="";break;
+			case $t_proj_doc_add_page: $t_proj_doc_add_page="";break;
 		}
 
 		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $g_documentation_html, $s_user_documentation );
-			print_bracket_link( $g_proj_doc_page, $s_project_documentation );
+			print_bracket_link( $t_documentation_html, $s_user_documentation );
+			print_bracket_link( $t_proj_doc_page, $s_project_documentation );
 			if (( $g_allow_file_upload==1 )&&( access_level_check_greater_or_equal( MANAGER ) )) {
-				print_bracket_link( $g_proj_doc_add_page, $s_add_file );
+				print_bracket_link( $t_proj_doc_add_page, $s_add_file );
 			}
 		PRINT "</div>";
 	}
@@ -315,18 +328,23 @@
 				$g_view_all_assigned_bug_page, $s_assigned_bugs_link,
 				$g_view_all_unassign_bug_page, $s_unassigned_bugs_link;
 
+		$t_view_all_bug_page = $g_view_all_bug_page;
+		$t_view_all_reported_bug_page = $g_view_all_reported_bug_page;
+		$t_view_all_assigned_bug_page = $g_view_all_assigned_bug_page;
+		$t_view_all_unassign_bug_page = $g_view_all_unassign_bug_page;
+
 		switch ( $p_page ) {
-		case $g_view_all_bug_page: $g_view_all_bug_page="";break;
-		case $g_view_all_reported_bug_page: $g_view_all_reported_bug_page="";break;
-		case $g_view_all_assigned_bug_page: $g_view_all_assigned_bug_page="";break;
-		case $g_view_all_unassign_bug_page: $g_view_all_unassign_bug_page="";break;
+			case $t_view_all_bug_page: $t_view_all_bug_page="";break;
+			case $t_view_all_reported_bug_page: $t_view_all_reported_bug_page="";break;
+			case $t_view_all_assigned_bug_page: $t_view_all_assigned_bug_page="";break;
+			case $t_view_all_unassign_bug_page: $t_view_all_unassign_bug_page="";break;
 		}
 
 		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $g_view_all_bug_page, $s_all_bugs_link );
-			print_bracket_link( $g_view_all_reported_bug_page, $s_reported_bugs_link );
-			print_bracket_link( $g_view_all_assigned_bug_page, $s_assigned_bugs_link );
-			print_bracket_link( $g_view_all_unassign_bug_page, $s_unassigned_bugs_link );
+			print_bracket_link( $t_view_all_bug_page, $s_all_bugs_link );
+			print_bracket_link( $t_view_all_reported_bug_page, $s_reported_bugs_link );
+			print_bracket_link( $t_view_all_assigned_bug_page, $s_assigned_bugs_link );
+			print_bracket_link( $t_view_all_unassign_bug_page, $s_unassigned_bugs_link );
 		PRINT "</div>";
 	}
 	### --------------------
@@ -336,14 +354,17 @@
 		global	$g_site_settings_page, $s_site_settings_link,
 				$g_documentation_page, $s_system_info_link;
 
+		$t_documentation_page = $g_documentation_page;
+		$t_site_settings_page = $g_site_settings_page;
+
 		switch ( $p_page ) {
-		case $g_documentation_page: $g_documentation_page="";break;
-		case $g_site_settings_page: $g_site_settings_page="";break;
+			case $t_documentation_page: $t_documentation_page="";break;
+			case $t_site_settings_page: $t_site_settings_page="";break;
 		}
 
 		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $g_documentation_page, $s_system_info_link );
-			print_bracket_link( $g_site_settings_page, $s_site_settings_link );
+			print_bracket_link( $t_documentation_page, $s_system_info_link );
+			print_bracket_link( $t_site_settings_page, $s_site_settings_link );
 			print_bracket_link( "ChangeLog", "ChangeLog" );
 			print_bracket_link( "README", "README" );
 			print_bracket_link( "INSTALL", "INSTALL" );
@@ -355,22 +376,24 @@
 	# prints the summary menu
 	function print_summary_menu( $p_page="" ) {
 		global	$g_summary_page, $s_summary_link,
-                                          $g_use_jpgraph, $s_summary_jpgraph_link,
-                                          $g_summary_jpgraph_page;
+				$g_use_jpgraph, $s_summary_jpgraph_link,
+				$g_summary_jpgraph_page;
 
-                            if(!$g_use_jpgraph){
-                                return false;
-                            }
+        if ( $g_use_jpgraph==0 ) {
+            return;
+        }
+
+		$t_summary_page = $g_summary_page;
+		$t_summary_jpgraph_page = $g_summary_jpgraph_page;
 
 		switch ( $p_page ) {
-		case $g_summary_page: $g_summary_page="";break;
-                            case $g_summary_jpgraph_page: $g_summary_jpgraph_page="";break;
+			case $t_summary_page: $t_summary_page="";break;
+			case $t_summary_jpgraph_page: $t_summary_jpgraph_page="";break;
 		}
 
 		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $g_summary_page, $s_summary_link );
-                                          print_bracket_link( $g_summary_jpgraph_page, $s_summary_jpgraph_link );
-                                          #print_bracket_link( "CONFIGURATION", "CONFIGURATION" );
+			print_bracket_link( $t_summary_page, $s_summary_link );
+			print_bracket_link( $t_summary_jpgraph_page, $s_summary_jpgraph_link );
 		PRINT "</div>";
 	}
 	### --------------------
