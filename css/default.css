@@ -33,8 +33,6 @@ table.width60		{ width: 60%;  border: solid 1px #000000; }
 table.width50		{ width: 50%;  border: solid 1px #000000; }
 
 td 					{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; padding: 4px; text-align: left; }
-td.category			{ background-color: #c8c8e8; color: #000000; font-weight: bold; }
-
 td.center			{ text-align: center; }
 td.left				{ text-align: left; }
 td.right			{ text-align: right; }
