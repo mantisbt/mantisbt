@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.30 2003-02-25 17:46:09 jfitzell Exp $
+	# $Id: account_prefs_update.php,v 1.31 2003-02-26 06:44:41 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -31,7 +31,7 @@
 	# @@@ should we really be sharing this file between the manage section
 	#  and the account section.  The account section should always be operating
 	#  on the current user, so passing in a user ID here is a little odd.
-	if ( auth_get_current_user_id() !== $f_user_id ) {
+	if ( auth_get_current_user_id() != $f_user_id ) {
 		access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 	}
 
