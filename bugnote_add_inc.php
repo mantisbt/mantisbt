@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.21 2004-06-29 08:23:05 int2str Exp $
+	# $Id: bugnote_add_inc.php,v 1.22 2004-06-29 08:38:43 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
@@ -20,7 +20,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<a href="" onClick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
-		><img src="images/plus.png" alt="+" /></a>
+		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
 </tr>
@@ -36,7 +36,7 @@
 	<td class="form-title" colspan="2">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 		<a href="" onClick="ToggleDiv( 'bugnote_add', g_div_bugnote_add ); return false;"
-		><img src="images/minus.png" alt="-" /></a>
+		><img border="0" src="images/minus.png" alt="-" /></a>
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 <?php } ?>
 	</td>

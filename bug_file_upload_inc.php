@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_upload_inc.php,v 1.34 2004-06-29 08:23:05 int2str Exp $
+	# $Id: bug_file_upload_inc.php,v 1.35 2004-06-29 08:38:42 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -31,7 +31,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<a href="" onClick="ToggleDiv( 'upload_form', g_div_upload_form ); return false;"
-		><img src="images/plus.png" alt="+" /></a>
+		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'upload_file' ) ?>
 	</td>
 </tr>
@@ -46,7 +46,7 @@
 	<td class="form-title" colspan="2">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 		<a href="" onClick="ToggleDiv( 'upload_form', g_div_upload_form ); return false;"
-		><img src="images/minus.png" alt="-" /></a>
+		><img border="0" src="images/minus.png" alt="-" /></a>
 <?php } ?>
 		<?php echo lang_get( 'upload_file' ) ?>
 	</td>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.22 2004-06-29 08:23:05 int2str Exp $
+	# $Id: history_inc.php,v 1.23 2004-06-29 08:38:43 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,7 +28,7 @@
 <tr>
 	<td class="form-title" colspan="4">
 		<a href="" onClick="ToggleDiv( 'history', g_div_history ); return false;"
-		><img src="images/plus.png" alt="+" /></a>
+		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'bug_history' ) ?>
 	</td>
 </tr>
@@ -45,7 +45,7 @@
 	<td class="form-title" colspan="4">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 		<a href="" onClick="ToggleDiv( 'history', g_div_history ); return false;"
-		><img src="images/minus.png" alt="-" /></a>
+		><img border="0" src="images/minus.png" alt="-" /></a>
 <?php } ?>
 		<?php echo lang_get( 'bug_history' ) ?>
 	</td>

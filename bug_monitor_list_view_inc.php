@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.10 2004-06-29 08:23:05 int2str Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.11 2004-06-29 08:38:43 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,7 +36,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<a href="" onClick="ToggleDiv( 'monitoring', g_div_monitoring ); return false;"
-		><img src="images/plus.png" alt="+" /></a>
+		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'users_monitoring_bug' ); ?>
 	</td>
 </tr>
@@ -57,7 +57,7 @@
 	<td class="form-title" colspan="2">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 		<a href="" onClick="ToggleDiv( 'monitoring', g_div_monitoring ); return false;"
-		><img src="images/minus.png" alt="-" /></a>
+		><img border="0" src="images/minus.png" alt="-" /></a>
 <?php } ?>
 		<?php echo lang_get( 'users_monitoring_bug' ); ?>
 	</td>

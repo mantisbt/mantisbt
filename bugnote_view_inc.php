@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.16 2004-06-29 08:23:05 int2str Exp $
+	# $Id: bugnote_view_inc.php,v 1.17 2004-06-29 08:38:43 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,7 +49,7 @@
 <table class="width100" cellspacing="1">
 	<td class="form-title" colspan="2">
 		<a href="" onClick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
-		><img src="images/plus.png" alt="+" /></a>
+		><img border="0" src="images/plus.png" alt="+" /></a>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
 	</td>
 </table>
@@ -72,7 +72,7 @@
 	<td class="form-title" colspan="2">
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 		<a href="" onClick="ToggleDiv( 'bugnotes', g_div_bugnotes ); return false;"
-		><img src="images/minus.png" alt="-" /></a>
+		><img border="0" src="images/minus.png" alt="-" /></a>
 <?php } ?>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
 	</td>
