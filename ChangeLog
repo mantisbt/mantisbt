@@ -10,11 +10,13 @@ To Do:
  * Force resolution to go through a dialog
  * Add postgreSQL support and a Database abstraction layer
  * Refine viewing preferences
+ * Add profiles for each user
 
 XX.XX.2000	-	0.10.2
 
  * Fixed Reporter Field on update page
  * Fixed variable error preventing Bugnote addition
+ * Fixed minor viewing bugs related to \ characters
 
 12.03.2000	-	0.10.1
 
