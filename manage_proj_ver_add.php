@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_add.php,v 1.28 2004-09-22 10:15:33 bpfennigschmidt Exp $
+	# $Id: manage_proj_ver_add.php,v 1.29 2004-10-24 14:09:39 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,7 +41,7 @@
 		}
 
 		$t_version = trim( $t_version );
-		if ( version_is_unique( $f_project_id, $t_version ) ) {
+		if ( version_is_unique( $t_version, $f_project_id ) ) {
 			version_add( $f_project_id, $t_version );
 		} else if ( 1 == $t_version_count ) {
 			# We only error out on duplicates when a single value was
