@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.117 $
+	# $Revision: 1.118 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-15 11:50:12 $
+	# $Date: 2004-10-20 11:25:33 $
 	#
-	# $Id: strings_german.txt,v 1.117 2004-10-15 11:50:12 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.118 2004-10-20 11:25:33 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -492,7 +492,7 @@ $s_reminder_sent_to = 'Erinnerung gesendet an';
 $s_bug_send_button = 'Absenden';
 $s_reminder = 'Erinnerung';
 $s_reminder_explain = 'Diese Notiz wird an die aufgeführten Empfänger gesandt, die eine Benachrichtigung zu diesem Problem wünschten.';
-$s_reminder_monitor = 'Diese Empfänger beginnen auch, das Problem zu beobachten. Sie können sich abmelden mit Klick auf den 'Beobachtung beenden' Knopf.';
+$s_reminder_monitor = 'Diese Empfänger beginnen auch, das Problem zu beobachten. Sie können sich abmelden mit Klick auf den \'Beobachtung beenden\' Knopf.';
 $s_reminder_store = 'Diese Notiz wird mit dem Problem abgespeichert.';
 
 # bug_update.php

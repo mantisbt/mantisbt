@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.10.xx  -  0.19.1
 
+- 0004743: [localization] parse error in $s_reminder_monitor (strings_german.txt)
 - 0004555: [administration] Warnings on set_time_limit() in safe mode (vboctor)
 - 0004528: [localization] Error on logout page with language=auto (thraxisp)
 - 0004667: [localization] croatian and latvian languages missing from config_defaults_inc.php (vboctor)
