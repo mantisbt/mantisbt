@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.21 2004-09-23 18:19:36 bpfennigschmidt Exp $
+	# $Id: graph_api.php,v 1.22 2004-12-08 16:14:35 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -874,7 +874,7 @@
 	}
 
 	function graph_date_format ($p_date) {
-		return strftime( "%D", $p_date );
+		return date( config_get( 'short_date_format' ), $p_date );
 	}
 	
 	# --------------------
