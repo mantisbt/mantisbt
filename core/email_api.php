@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.28 2002-12-06 18:48:21 jfitzell Exp $
+	# $Id: email_api.php,v 1.29 2002-12-10 12:27:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -605,19 +605,46 @@
 			$mail->From     = $g_from_email;
 			$mail->FromName = '';
 
+			$t_debug_email = config_get('debug_email');
+			$t_debug_to = '';
 			# add to the Recipient list
 			$t_recipient_list = split(',', $t_recipient);
 			while ( list( , $t_recipient ) = each( $t_recipient_list ) ) {
 				if ( !is_blank( $t_recipient ) ) {
-					$mail->AddAddress( $t_recipient, '' );
+					if ( OFF === $t_debug_email ) {
+						$mail->AddAddress( $t_recipient, '' );
+					} else {
+						$t_debug_to .= $t_recipient . ', ';
+					}
 				}
 			}
+
 			# add to the BCC list
+			$t_debug_bcc = '';
 			$t_bcc_list = split(',', $p_header);
 			while(list(, $t_bcc) = each($t_bcc_list)) {
 				if ( !is_blank( $t_bcc ) ) {
-					$mail->AddBCC($t_bcc, '');
+					if ( OFF === $t_debug_email ) {
+						$mail->AddBCC( $t_bcc, '' );
+					} else {
+						$t_debug_bcc .= $t_bcc . ', ';
+					}
 				}
+			}
+
+			if ( OFF !== $t_debug_email )
+			{
+				$t_message = "\n" . $t_message;
+
+				if ( !is_blank( $t_debug_bcc ) ) {
+					$t_message = 'Bcc: ' . $t_debug_bcc . "\n" . $t_message;
+				}
+
+				if ( !is_blank( $t_debug_to ) ) {
+					$t_message = 'To: '. $t_debug_to . "\n" . $t_message;
+				}
+
+				$mail->AddAddress( $t_debug_email, '' );
 			}
 
 			$mail->Subject = $t_subject;

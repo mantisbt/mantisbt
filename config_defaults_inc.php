@@ -792,6 +792,11 @@
 	# used for development only.  Leave OFF
 	$g_debug_timer			= OFF;
 
+	# Used for debugging e-mail feature, when set to OFF the emails work as normal.
+	# when set to e-mail address, all e-mails are sent to this address with the
+	# original To, Cc, Bcc included in the message body.
+	$g_debug_email			= OFF;
+
 	# Shows the list of all queries that are executed in chronological order from top
 	# to bottom.  This option is only effective when $g_show_queries_count is ON.
 	# WARNING: Potential security hazard.  Only turn this on when you really
