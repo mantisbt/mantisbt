@@ -27,6 +27,7 @@ Mantis ChangeLog
  * Fix #2978: URLs not hyperlinked in news_add page.
  * Fix #2980: Escaping fixes are not applied to the bug history table.
  * Fix #2982: Having email_set_category set to EMAIL_CATEGORY_PROJECT_CATEGORY erased various mail headers.
+ * Fix #2989: Allow managers to manage bugnotes.
  * DB Upgrade: Added "id" primary key to bug history table.
  * Languages: Updated German localisation.
  * Changed confit option (default_notify_flags): remove 'admin', 'manager', and 'threshold' categories and add 'threshold_min' and 'threshold_max'
