@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.106 2004-07-05 13:52:50 vboctor Exp $
+	# $Id: html_api.php,v 1.107 2004-07-08 04:37:06 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -77,7 +77,10 @@
 			return;
 		}
 
-		html_login_info();
+		if ( auth_is_user_authenticated() ) {
+			html_login_info();
+		}
+
 		if( ON == config_get( 'show_project_menu_bar' ) ) {
 			print_project_menu_bar();
 			PRINT '<br />';
