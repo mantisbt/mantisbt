@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.2 $
+	# $Revision: 1.3 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-20 19:42:52 $
+	# $Date: 2002-09-20 20:22:06 $
 	#
-	# $Id: csv_export.php,v 1.2 2002-09-20 19:42:52 jfitzell Exp $
+	# $Id: csv_export.php,v 1.3 2002-09-20 20:22:06 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -25,13 +25,6 @@
 	$t_page_count = null;
 
 	$rows = filter_get_bug_rows( 1, -1, &$t_page_count, &$t_bug_count );
-	# Do we want this parsed to the browser as a csv attachment (also changes the viewing parameters below)
-	# Send headers to browser to active mime loading
-	# Leigh Morresi <leighm@linuxbandwagon.com>
-
-	header( 'Content-Type: text/plain; name='.config_get('page_title').'.csv' );
-	header( 'Content-Transfer-Encoding: BASE64;' );
-	header( 'Content-Disposition: attachment; filename='.config_get('page_title').'.csv' );
 
 	echo lang_get('email_project').','.config_get('page_title')."\n\n";
 	echo lang_get( 'priority' ).','.lang_get( 'id' ).','.lang_get( 'severity' ).','.lang_get( 'status' ).','.lang_get( 'version' ).','.lang_get( 'assigned_to' ).','.lang_get( 'reporter' ).','.lang_get( 'updated' ).','.lang_get( 'summary' )."\n";
@@ -49,6 +42,12 @@
 
 		echo "$t_priority,$v_id,$t_severity,$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
 	}
+
+	# Send headers to browser to active mime loading
+	header( 'Content-Type: text/plain; name='.config_get('page_title').'.csv' );
+	header( 'Content-Transfer-Encoding: BASE64;' );
+	header( 'Content-Disposition: attachment; filename='.config_get('page_title').'.csv' );
+	
 	die; 
 
 ?>
