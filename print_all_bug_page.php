@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.70 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.71 2004-01-11 09:09:38 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,9 +18,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'date_api.php' );
@@ -62,7 +62,7 @@
 	$f_end_month 			= $t_setting_arr[14];
 	$f_end_day				= $t_setting_arr[15];
 	$f_end_year				= $t_setting_arr[16];
-	$f_hide_resolved 			= $t_setting_arr[18];
+	$f_hide_resolved 		= $t_setting_arr[18];
 
 	# Clean input
 	$c_offset 				= (integer)$f_offset;
@@ -143,13 +143,13 @@
 		$t_where_clause .= " AND handler_id='$c_assign_id'";
 	}
 
-	$t_clo_val = CLOSED;
-	if ( ( 'on' == $f_hide_closed ) && ( 'closed' != $f_show_status ) ) {
-		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
+	$t_closed_val = CLOSED;
+	if ( ( 'on' == $f_hide_closed ) && ( $t_closed_val != $f_show_status ) ) {
+		$t_where_clause = $t_where_clause." AND status<>'$t_closed_val'";
 	}
 
 	$t_resolved_val = RESOLVED;
-	if ( ( 'on' == $f_hide_resolved ) && ( 'resolved' != $f_show_status ) ) {
+	if ( ( 'on' == $f_hide_resolved ) && ( $t_resolved_val != $f_show_status ) ) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_resolved_val'";
 	}
 
@@ -335,7 +335,7 @@
 		}
 
 		$t_search = urlencode( $f_search );
-		
+
 		$t_icons = array(
 			array( 'print_all_bug_page_excel', 'excel', '', 'excelicon.gif', 'Excel 2000' ),
 			array( 'print_all_bug_page_excel', 'html', 'target="_blank"', 'ieicon.gif', 'Excel View' ),
@@ -344,7 +344,7 @@
 
 		foreach ( $t_icons as $t_icon ) {
 			echo '<a href="' . $t_icon[0] . '.php' .
-				"?search=$t_search" . 
+				"?search=$t_search" .
 				"&amp;sort=$f_sort" .
 				"&amp;dir=$t_new_dir" .
 				'&amp;type_page=' . $t_icon[1] .
@@ -460,7 +460,7 @@
 		<?php print_formatted_priority_string( $v_status, $v_priority ) ?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
-		<?php echo $v_id ?>
+		<?php echo bug_format_id( $v_id ) ?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php
@@ -477,11 +477,11 @@
 		?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
-		<?php 
+		<?php
 			# Print project name if viewing 'all projects'
 			if ( ALL_PROJECTS == $t_project_id ) {
-				print "[$project_name] <br />"; 
-			} 
+				print "[$project_name] <br />";
+			}
 		?>
 		<?php echo $v_category ?>
 	</td>

@@ -6,6 +6,7 @@ Mantis ChangeLog
  * Fix #3479: Reset account preferences of a user results in reset administrators (current) account.
  * Fix #3493: Missing string $s_bug_deleted in German (and some other) translation
  * Fix #3495: Warning even if administrator account is disabled.
+ * Fix #3501: No output for print_all_bug_page.php when status=closed, and Hide Status Closed is selected.
  * Updated copyright to include 2004
 
 2003.12.08  -  0.18.0
