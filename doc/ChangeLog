@@ -50,6 +50,7 @@ Mantis ChangeLog
 - 0004275: [bugtracker] Relationship warning is now missing when a bus is resolved/closed (thraxisp)
 - 0004255: [localization] Wrong value of $g_language_auto_map (vboctor)
 - 0004293: [localization] Lang variable names broken (thraxisp)
+- 0004164: [news] Announcement news don't remain on top (masc)
 - 0003714: [upgrade] Please add in a way to transfer attachments from the database to disk (thraxisp)
 - 0004078: [upgrade] Script to import the value of a custom field to a native field (thraxisp) 
 - 0003483: [upgrade] some admin users permissions not completly upgraded from 0.17.5 to 0.18.0 (thraxisp)

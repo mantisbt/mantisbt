@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.16 2004-04-21 14:15:32 vboctor Exp $
+	# $Id: news_api.php,v 1.17 2004-08-14 18:25:56 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### News API ###
@@ -198,7 +198,7 @@
 
 		switch ( config_get( 'news_limit_method' ) ) {
 			case 0 :
-				# Select the news posts
+				# BY_LIMIT - Select the news posts
 				$query = "SELECT *, date_posted
 						FROM $t_news_table
 						WHERE project_id='$c_project_id' OR project_id=" . ALL_PROJECTS . "
@@ -206,13 +206,14 @@
 				$result = db_query( $query , $t_news_view_limit , $c_offset);
 				break;
 			case 1 :
-				# Select the news posts @@BUGBUG-query
+				# BY_DATE - Select the news posts
 				$query = "SELECT *, date_posted
 						FROM $t_news_table
 						WHERE ( project_id='$c_project_id' OR project_id=" . ALL_PROJECTS . " ) AND
-							" . db_helper_compare_days( db_now(), 'date_posted', "< $t_news_view_limit_days") . "
+							" . db_helper_compare_days( db_now(), 'date_posted', "< $t_news_view_limit_days") . " OR
+							announcement = 1
 						ORDER BY announcement DESC, id DESC";
-				$result = db_query( $query );
+				$result = db_query( $query, $t_news_view_limit, $c_offset );
 				break;
 		} # end switch
 

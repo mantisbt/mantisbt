@@ -6,33 +6,28 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.52 2004-05-10 13:46:18 vboctor Exp $
+	# $Id: main_page.php,v 1.53 2004-08-14 18:25:56 thraxisp Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	# This is the first page a user sees when they login to the bugtracker
 	# News is displayed which can notify users of any important changes
-?>
-<?php
+
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'news_inc.php' );
-?>
-<?php
+
 	access_ensure_project_level( VIEWER );
 
 	$f_offset = gpc_get_int( 'offset', 0 );
 
-?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
+	html_page_top1();
+	html_page_top2();
 
-<?php
 	if ( !current_user_is_anonymous() ) {
 		echo '<div class="quick-summary-left">';
 		echo lang_get( 'open_and_assigned_to_me' ) . ':';
@@ -49,40 +44,32 @@
 		echo print_date( config_get( 'normal_date_format' ), db_unixtimestamp( current_user_get_field( 'last_visit' ) ) );
 		echo '</div>';
 	}
-?>
 
-<br />
-<br />
-<br />
+	echo '<br />';
+	echo '<br />';
+	echo '<br />';
 
-<?php
 	$t_project_id = helper_get_current_project();
 
-	# get news count (project plus sitewide posts)
-	$total_news_count = news_get_count( $t_project_id );
-
-	$news_rows = news_get_limited_rows( $f_offset, $t_project_id );
-	$news_count = count( $news_rows );
+	$t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
+	$t_news_count = count( $t_news_rows );
 
 	# Loop through results
-	for ( $i = 0; $i < $news_count; $i++ ) {
-		$row = $news_rows[$i];
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+	for ( $i = 0; $i < $t_news_count; $i++ ) {
+		$t_row = $t_news_rows[$i];
 
 		# only show VS_PRIVATE posts to configured threshold and above
-		if ( ( VS_PRIVATE == $v_view_state ) &&
+		if ( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
 			 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
 			continue;
 		}
 
-		print_news_entry_from_row( $row );
+		print_news_entry_from_row( $t_row );
 		echo '<br />';
 	}  # end for loop
-?>
 
-<?php # Print NEXT and PREV links if necessary ?>
-<div align="center">
-<?php
+	echo '<div align="center">';
+
 	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
 	$t_news_view_limit = config_get( 'news_view_limit' );
 	$f_offset_next = $f_offset + $t_news_view_limit;
@@ -92,12 +79,13 @@
 		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
 	}
 
-	if ( $news_count == $t_news_view_limit ) {
+	if ( $t_news_count == $t_news_view_limit ) {
 		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
 	}
 
 	print_bracket_link( "news_rss.php?project_id=$t_project_id", lang_get( 'rss' ) );
-?>
-</div>
 
-<?php html_page_bottom1( __FILE__ ) ?>
+	echo '</div>';
+
+	html_page_bottom1( __FILE__ );
+?>
