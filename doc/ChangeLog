@@ -18,6 +18,7 @@ Mantis ChangeLog
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
  * Fix #3635: status_resolved in email_api should be resolved.
+ * Fix #3641: 'Date submited' in reports is always '12-31-69'.
  * Fix #3646: Error in core/obsolete.php.
  * Fix #3691: Parse error in Romanian localisation.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
