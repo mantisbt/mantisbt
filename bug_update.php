@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.60 2004-01-13 12:23:50 vboctor Exp $
+	# $Id: bug_update.php,v 1.61 2004-02-07 12:00:14 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -64,13 +64,20 @@
 
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
+		$t_custom_field_value = gpc_get_string( "custom_field_$t_id", null );
+
+		# Only update the field if it is posted
+		if ( $t_custom_field_value === null ) {
+			continue;
+		}
+		
 		# Do not set custom field value if user has no write access.
 		if( !custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 			continue;
 		}
 
 		$t_def = custom_field_get_definition( $t_id );
-		if ( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_string( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
+		if ( !custom_field_set_value( $t_id, $f_bug_id, $t_custom_field_value ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
 	}

@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.2
 
+ * Fix #3537: Rewriting custom values with 0 when updating a bug.
  * Fix #3539: Simple view page shows advanced custom fields.
 
 2004.02.06  -  0.18.1
