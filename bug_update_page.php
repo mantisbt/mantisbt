@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.59 2003-03-21 05:33:52 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.60 2003-03-21 05:55:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -136,7 +136,7 @@
 	</td>
 	<td>
 		<select name="reporter_id">
-			<?php print_reporter_option_list( $t_bug->reporter_id ) ?>
+			<?php print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id ) ?>
 		</select>
 	</td>
 
@@ -164,7 +164,7 @@
 	<td colspan="5">
 		<select name="handler_id">
 			<option value="0"></option>
-			<?php print_assign_to_option_list( $t_bug->handler_id ) ?>
+			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
 		</select>
 	</td>
 

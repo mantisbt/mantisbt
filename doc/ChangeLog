@@ -28,7 +28,7 @@ Mantis ChangeLog
  * Fix #3050: Setting Assigned To to null causes Status to change to assigned
  * Fix #3055: (Non-email) URLs containing '@' characters are now linked correctly.
  * Fix #3058: Clicking on view_all_bug_page.php results in 'file download' popup.
- * Fix #3062: category, version option lists (and custom fields) populated from current project rather than bug category.
+ * Fix #3062: category, version option lists (and custom fields/reporter/assign to) populated from current project rather than bug category.
 
 2003.02.26  -  0.18.0a3
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.64 2003-03-21 05:33:53 vboctor Exp $
+	# $Id: print_api.php,v 1.65 2003-03-21 05:55:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -177,11 +177,15 @@
 	#  actually reported the bugs at the time. Maybe we could get all user
 	#  who are listed as the reporter in any bug?  It would probably be a
 	#  faster query actually.
-	function print_reporter_option_list( $p_user_id ) {
+	function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
 		$t_users = array();
 
+		if ( null === $p_project_id ) {
+			$p_project_id = helper_get_current_project();
+		}
+
 		# checking if it's per project or all projects
-		if ( ALL_PROJECTS == helper_get_current_project() ) {
+		if ( ALL_PROJECTS == $p_project_id ) {
 			$t_adm = ADMINISTRATOR;
 			$t_rep = config_get( 'report_bug_threshold' );
 			$t_pub = VS_PUBLIC;
@@ -209,7 +213,7 @@
 				$t_users[] = $row;
 			}
 		} else {
-			$t_users = project_get_all_user_rows( helper_get_current_project() );
+			$t_users = project_get_all_user_rows( $p_project_id );
 		}
 
 		foreach ( $t_users as $t_user ) {
@@ -290,11 +294,15 @@
 		} # end for
 	}
 	# --------------------
-	function print_assign_to_option_list( $p_user_id='' ) {
+	function print_assign_to_option_list( $p_user_id='', $p_project_id = null ) {
 		$t_users = array();
 
+		if ( null === $p_project_id ) {
+			$p_project_id = helper_get_current_project();
+		}
+
 		# checking if it's per project or all projects
-		if ( ALL_PROJECTS == helper_get_current_project() ) {
+		if ( ALL_PROJECTS == $p_project_id ) {
 			$t_adm = ADMINISTRATOR;
 			$t_dev = config_get( 'handle_bug_threshold' );
 			$t_pub = VS_PUBLIC;
@@ -322,7 +330,7 @@
 				$t_users[$row['username']] = $row;
 			}
 		} else {
-			$t_users = project_get_all_user_rows( helper_get_current_project(),
+			$t_users = project_get_all_user_rows( $p_project_id,
 												config_get( 'handle_bug_threshold' ) );
 		}
 
