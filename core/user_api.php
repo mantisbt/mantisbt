@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.87 2005-02-20 14:12:22 vboctor Exp $
+	# $Id: user_api.php,v 1.88 2005-02-27 21:02:01 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -637,7 +637,7 @@
 		$t_private	= VS_PRIVATE;
 
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-			$query = "SELECT DISTINCT( p.id )
+			$query = "SELECT DISTINCT( p.id ), p.name
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
@@ -645,7 +645,7 @@
 					    AND ph.child_id IS NULL
 					  ORDER BY p.name";
 		} else {
-			$query = "SELECT DISTINCT( p.id )
+			$query = "SELECT DISTINCT( p.id ), p.name
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id=u.project_id
@@ -706,7 +706,7 @@
 		$t_private	= VS_PRIVATE;
 
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-			$query = "SELECT DISTINCT( p.id ), ph.parent_id
+			$query = "SELECT DISTINCT( p.id ), p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
@@ -714,7 +714,7 @@
 					  	AND ph.parent_id IS NOT NULL
 					  ORDER BY p.name";
 		} else {
-			$query = "SELECT DISTINCT( p.id ), ph.parent_id
+			$query = "SELECT DISTINCT( p.id ), p.name, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id = u.project_id
