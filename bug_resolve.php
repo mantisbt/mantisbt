@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.19 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-29 02:56:23 $
+	# $Revision: 1.20 $
+	# $Author: vboctor $
+	# $Date: 2002-08-29 14:41:31 $
 	#
-	# $Id: bug_resolve.php,v 1.19 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.20 2002-08-29 14:41:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,6 @@
 	history_log_event( $f_id, 'resolution',   $h_resolution );
 	history_log_event( $f_id, 'duplicate_id', $h_duplicate_id );
 
-
 	$f_bugnote_text = trim( $f_bugnote_text );
 
 	# check for blank bugnote
@@ -76,12 +75,14 @@
 
 	   	# notify reporter and handler
 		email_resolved( $f_id );
+	} else {
+		# updated the last_updated date
+		$result = bug_date_update( $f_id );
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
 	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
+		print_header_redirect( get_view_redirect_url( $f_id, 1 ) );
 	} else {
 		print_mantis_error( ERROR_GENERIC );
 	}
