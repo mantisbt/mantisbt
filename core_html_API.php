@@ -238,7 +238,7 @@
 	# --------------------
 	# This prints the little [?] link for user help
 	# The $p_a_name is a link into the documentation.html file
-	function print_documentaion_link( $p_a_name="" ) {
+	function print_documentation_link( $p_a_name="" ) {
 		global $g_documentation_html;
 
 		PRINT "<a href=\"$g_documentation_html#$p_a_name\" target=_info>[?]</a>";

@@ -106,7 +106,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<?php echo $s_category ?> <?php print_documentaion_link( "category" ) ?>:
+		<?php echo $s_category ?> <?php print_documentation_link( "category" ) ?>:
 	</td>
 	<td width="70%">
 		<select name="f_category">
@@ -116,7 +116,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_reproducibility ?> <?php print_documentaion_link( "reproducibility" ) ?>:
+		<?php echo $s_reproducibility ?> <?php print_documentation_link( "reproducibility" ) ?>:
 	</td>
 	<td>
 		<select name="f_reproducibility">
@@ -126,7 +126,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_severity ?> <?php print_documentaion_link( "severity" ) ?>:
+		<?php echo $s_severity ?> <?php print_documentation_link( "severity" ) ?>:
 	</td>
 	<td>
 		<select name="f_severity">
@@ -137,7 +137,7 @@
 <? if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_priority ?> <?php print_documentaion_link( "priority" ) ?>:
+		<?php echo $s_priority ?> <?php print_documentation_link( "priority" ) ?>:
 	</td>
 	<td>
 		<select name="f_priority">
@@ -241,7 +241,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentaion_link( "summary" ) ?>:
+		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentation_link( "summary" ) ?>:
 	</td>
 	<td>
 		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>">
@@ -249,7 +249,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<span class="required">*</span><?php echo $s_description ?> <?php print_documentaion_link( "description" ) ?>:
+		<span class="required">*</span><?php echo $s_description ?> <?php print_documentation_link( "description" ) ?>:
 	</td>
 	<td>
 		<textarea name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
@@ -257,7 +257,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_steps_to_reproduce ?> <?php print_documentaion_link( "steps_to_reproduce" ) ?>:
+		<?php echo $s_steps_to_reproduce ?> <?php print_documentation_link( "steps_to_reproduce" ) ?>:
 	</td>
 	<td>
 		<textarea name="f_steps_to_reproduce" cols="60" rows="5" wrap="virtual"><?php echo $f_steps_to_reproduce ?></textarea>
@@ -265,7 +265,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_additional_information ?> <?php print_documentaion_link( "additional_information" ) ?>:
+		<?php echo $s_additional_information ?> <?php print_documentation_link( "additional_information" ) ?>:
 	</td>
 	<td>
 		<textarea name="f_additional_info" cols="60" rows="5" wrap="virtual"><?php echo $f_additional_info ?></textarea>
@@ -293,7 +293,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_report_stay ?> <?php print_documentaion_link( "report_stay" ) ?>:
+		<?php echo $s_report_stay ?> <?php print_documentation_link( "report_stay" ) ?>:
 	</td>
 	<td>
 		<input type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo "CHECKED"?>> (<?php echo $s_check_report_more_bugs ?>)
