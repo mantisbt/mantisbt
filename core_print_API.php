@@ -291,7 +291,7 @@
 		} # end for
 	}
 	# --------------------
-	function print_assign_to_option_list( $p_id="" ) {
+	function print_assign_to_option_list( $p_user_id="" ) {
 		global $g_mantis_user_table, $g_mantis_project_table,
 				$g_mantis_project_user_list_table, $g_project_cookie_val;
 
