@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.83 2004-02-08 15:56:35 jlatour Exp $
+	# $Id: html_api.php,v 1.84 2004-02-11 22:16:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -614,32 +614,77 @@
 	}
 
 	# --------------------
-	# Print a button to assign the given bug
-	function html_button_bug_assign( $p_bug_id ) {
-		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
-			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+	# Print Assign To: combo box of possible handlers
+	function html_button_bug_assign_to( $p_bug_id ) {
+		# make sure current user has access to modify bugs.
+		if ( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+			return;
+		}
 
-			if ( $t_handler_id != auth_get_current_user_id() ) {
-				html_button( 'bug_assign.php',
-							 lang_get( 'bug_assign_button' ), 
-							 array( 'bug_id' => $p_bug_id ) );
+		$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
+	    $t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+		$t_current_user_id = auth_get_current_user_id();
+
+		$t_options = array();
+		$t_default_assign_to = null;
+
+		if ( ( $t_handler_id != $t_current_user_id ) &&
+			( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $t_current_user_id ) ) ) {
+		    $t_options[] = array( $t_current_user_id, '[' . lang_get( 'myself' ) . ']' );
+			$t_default_assign_to = $t_current_user_id;
+		}
+
+		if ( ( $t_handler_id != $t_reporter_id ) &&
+			( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $t_reporter_id ) ) ) {
+		    $t_options[] = array( $t_reporter_id, '[' . lang_get( 'reporter' ) . ']' );
+			
+			if ( $t_default_assign_to === null ) {
+				$t_default_assign_to = $t_reporter_id;
 			}
 		}
-	}
 
-	# --------------------
-	# Print a button to assign the given bug back to the reporter
-	function html_button_bug_assign_reporter( $p_bug_id ) {
-		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
-			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-			$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
+		echo "<form method=\"post\" action=\"bug_assign.php\">\n";
 
-			if ( $t_reporter_id != $t_handler_id ) {
-				html_button( 'bug_assign_reporter.php',
-							 lang_get( 'bug_assign_reporter_button' ), 
-							 array( 'bug_id' => $p_bug_id ) );
+		$t_button_text = lang_get( 'bug_assign_to_button' );
+		echo "	<input type=\"submit\" value=\"$t_button_text\" />\n";
+
+		echo "<select name=\"handler_id\">";
+		
+		$t_already_selected = false;
+
+		foreach ( $t_options as $t_entry ) {
+			$t_id = string_attribute( $t_entry[0] );
+			$t_caption = string_attribute( $t_entry[1] );
+
+			# if current user and reporter can't be selected, then select the first
+			# user in the list.
+			if ( $t_default_assign_to === null ) {
+			    $t_default_assign_to = $t_id;
 			}
+
+		    echo "<option value=\"$t_id\" ";
+				
+			if ( ( $t_id == $t_default_assign_to ) && !$t_already_selected ) {
+				check_selected( $t_id, $t_default_assign_to );
+			    $t_already_selected = true;
+			}
+
+			echo ">$t_caption</option>";
 		}
+
+		# allow un-assigning if already assigned.
+		if ( $t_handler_id != 0 ) {
+			echo "<option value=\"0\"></option>";
+		}
+		
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		print_assign_to_option_list( 0 /* currently selected */, $t_project_id );
+		echo "</select>";
+
+		$t_bug_id = string_attribute( $p_bug_id );
+		echo "	<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
+
+		echo "</form>\n";
 	}
 
 	# --------------------
@@ -719,12 +764,7 @@
 			echo '</td><td>';
 
 			# ASSIGN button
-			html_button_bug_assign( $p_bug_id );
-
-			echo '</td><td>';
-
-			# ASSIGN TO REPORTER button
-			html_button_bug_assign_reporter( $p_bug_id );
+			html_button_bug_assign_to( $p_bug_id );
 
 			echo '</td><td>';
 

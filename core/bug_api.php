@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.46 2004-01-13 12:23:50 vboctor Exp $
+	# $Id: bug_api.php,v 1.47 2004-02-11 22:16:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -759,6 +759,10 @@
 	function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text='' ) {
 		$c_bug_id	= db_prepare_int( $p_bug_id );
 		$c_user_id	= db_prepare_int( $p_user_id );
+		
+		if ( ( $c_user_id != NO_USER ) && !access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $p_user_id ) ) {
+		    trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
+		}
 
 		# extract current information into history variables
 		$h_status		= bug_get_field( $p_bug_id, 'status' );

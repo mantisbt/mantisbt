@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.9 2004-02-03 13:06:14 vboctor Exp $
+	# $Id: constant_inc.php,v 1.10 2004-02-11 22:16:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -192,6 +192,7 @@
 	define( 'ERROR_USER_CREATE_PASSWORD_MISMATCH',	803 );
 	define( 'ERROR_USER_PROFILE_NOT_FOUND',			804 );
 	define( 'ERROR_USER_NAME_INVALID',				805 );
+	define( 'ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS',		806 );
 
 	# ERROR_AUTH_*
 	define( 'ERROR_AUTH_INVALID_COOKIE',			900 );

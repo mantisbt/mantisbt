@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.24 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: access_api.php,v 1.25 2004-02-11 22:16:28 vboctor Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,7 +14,7 @@
 	require_once( $t_core_dir . 'constant_inc.php' );	
 	require_once( $t_core_dir . 'helper_api.php' );
 	require_once( $t_core_dir . 'authentication_api.php' );
-	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'user_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'project_api.php' );
 
@@ -133,10 +133,14 @@
 	#
 	# This function only checks the user's global access level, ignoring any
 	#  overrides they might have at a project level
-	function access_has_global_level( $p_access_level ) {
+	function access_has_global_level( $p_access_level, $p_user_id = null ) {
 		# Short circuit the check in this case
 		if ( NOBODY == $p_access_level ) {
 			return false;
+		}
+
+		if ( $p_user_id === null ) {
+		    $p_user_id = auth_get_current_user_id();
 		}
 
 		# Deal with not logged in silently in this case
@@ -146,22 +150,18 @@
 			return false;
 		}
 
-		$t_access_level = current_user_get_field( 'access_level' );
+		$t_access_level = user_get_field( $p_user_id, 'access_level' );
 
-		if ( $t_access_level >= $p_access_level ) {
-			return true;
-		} else {
-			return false;
-		}
+		return ( $t_access_level >= $p_access_level );
 	}
 
 	# --------------------
 	# Check if the user has the specified global access level
 	#  and deny access to the page if not	
-	function access_ensure_global_level( $p_access_level ) {
-		if ( ! access_has_global_level( $p_access_level ) ) {
+	function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
+		if ( ! access_has_global_level( $p_access_level, $p_user_id ) ) {
 			access_denied();
-		}		
+		}
 	}
 
 	# --------------------
@@ -171,7 +171,7 @@
 	# This function checks the project access level first (for the current project
 	#  if none is specified) and if the user is not listed, it falls back on the
 	#  user's global access level.
-	function access_has_project_level( $p_access_level, $p_project_id=null ) {
+	function access_has_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
 		# Short circuit the check in this case
 		if ( NOBODY == $p_access_level ) {
 			return false;
@@ -183,17 +183,20 @@
 		if ( ! auth_is_user_authenticated() ) {
 			return false;
 		}
+		
+		if ( null === $p_user_id ) {
+		    $p_user_id = auth_get_current_user_id();
+		}
 
 		if ( null === $p_project_id ) {
 			$p_project_id = helper_get_current_project();
 		}
 
 		if ( ALL_PROJECTS == $p_project_id ) {
-			return access_has_global_level( $p_access_level );
+			return access_has_global_level( $p_access_level, $p_user_id );
 		}
 
-		$t_access_level = access_get_local_level( auth_get_current_user_id(),
-													$p_project_id );
+		$t_access_level = access_get_local_level( $p_user_id, $p_project_id );
 
 		# Try to use the project access level.
 		# If the user is not listed in the project, then try to fall back
@@ -204,9 +207,9 @@
 			# If the project is private and the user isn't listed, then they
 			# must have the private_project_threshold access level to get in.
 			if ( VS_PRIVATE == $t_project_view_state ) {
-				return ( access_has_global_level( config_get( 'private_project_threshold' ) ) );
+				return ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) );
 			} else {
-				$t_access_level = current_user_get_field( 'access_level' );
+				$t_access_level = user_get_field( $p_user_id, 'access_level' );
 			}
 		}
 
@@ -216,8 +219,8 @@
 	# --------------------
 	# Check if the user has the specified access level for the given project
 	#  and deny access to the page if not
-	function access_ensure_project_level( $p_access_level, $p_project_id=null ) {
-		if ( ! access_has_project_level(  $p_access_level, $p_project_id ) ) {
+	function access_ensure_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
+		if ( ! access_has_project_level(  $p_access_level, $p_project_id, $p_user_id ) ) {
 			access_denied();
 		}
 	}
@@ -228,31 +231,35 @@
 	#
 	# This function looks up the bug's project and performs an access check
 	#  against that project
-	function access_has_bug_level( $p_access_level, $p_bug_id ) {
+	function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 		# Deal with not logged in silently in this case
 		# @@@ we may be able to remove this and just error
 		#     and once we default to anon login, we can remove it for sure
 		if ( ! auth_is_user_authenticated() ) {
 			return false;
 		}
+		
+		if ( $p_user_id === null ) {
+		    $p_user_id = auth_get_current_user_id();
+		}
 
 		# If the bug is private and the user is not the reporter, then the
 		#  the user must also have higher access than private_bug_threshold
 		if ( VS_PRIVATE == bug_get_field( $p_bug_id, 'view_state' ) &&
-			 ! bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() ) ) {
+			 ! bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
 			$p_access_level = max( $p_access_level, config_get( 'private_bug_threshold' ) );
 		}
 	
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
-		return access_has_project_level( $p_access_level, $t_project_id );
+		return access_has_project_level( $p_access_level, $t_project_id, $p_user_id );
 	}
 
 	# --------------------
 	# Check if the user has the specified access level for the given bug
 	#  and deny access to the page if not
-	function access_ensure_bug_level( $p_access_level, $p_bug_id ) {
-		if ( ! access_has_bug_level( $p_access_level, $p_bug_id ) ) {
+	function access_ensure_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
+		if ( ! access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id ) ) {
 			access_denied();
 		}
  	}
@@ -263,68 +270,80 @@
 	#
 	# This function looks up the bugnote's bug and performs an access check
 	#  against that bug
-	function access_has_bugnote_level( $p_access_level, $p_bugnote_id ) {
+	function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
+		if ( $p_user_id === null ) {
+		    $p_user_id = auth_get_current_user_id();
+		}
+
 		# If the bug is private and the user is not the reporter, then the
 		#  the user must also have higher access than private_bug_threshold
 		if ( VS_PRIVATE == bugnote_get_field( $p_bugnote_id, 'view_state' ) &&
-			 ! bugnote_is_user_reporter( $p_bugnote_id, auth_get_current_user_id() ) ) {
+			 ! bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) ) {
 			$p_access_level = max( $p_access_level, config_get( 'private_bugnote_threshold' ) );
 		}
 	
 		$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 
-		return access_has_bug_level( $p_access_level, $t_bug_id );
+		return access_has_bug_level( $p_access_level, $t_bug_id, $p_user_id );
 	}
 
 	# --------------------
 	# Check if the user has the specified access level for the given bugnote
 	#  and deny access to the page if not
-	function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id ) {
-		if ( ! access_has_bugnote_level( $p_access_level, $p_bugnote_id ) ) {
+	function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
+		if ( ! access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id ) ) {
 			access_denied();
 		}
  	}
 
 	# --------------------
 	# Check if the current user can close the specified bug
-	function access_can_close_bug ( $p_bug_id ) {
+	function access_can_close_bug ( $p_bug_id, $p_user_id = null ) {
+		if ( $p_user_id === null ) {
+		    $p_user_id = auth_get_current_user_id();
+		}
+
 		# If allow_reporter_close is enabled, then reporters can always close
 		#  their own bugs
 		if ( ON == config_get( 'allow_reporter_close' ) &&
-			bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() ) ) {
+			bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
 			return true;
 		}
 
-		return access_has_bug_level( config_get( 'close_bug_threshold' ), $p_bug_id );
+		return access_has_bug_level( config_get( 'close_bug_threshold' ), $p_bug_id, $p_user_id );
 	}
 	
 	# --------------------
 	# Make sure that the current user can close the specified bug
 	# See access_can_close_bug() for details.
-	function access_ensure_can_close_bug( $p_bug_id ) {
-		if ( !access_can_close_bug( $p_bug_id ) ) {
+	function access_ensure_can_close_bug( $p_bug_id, $p_user_id = null ) {
+		if ( !access_can_close_bug( $p_bug_id, $p_user_id ) ) {
 			access_denied();
 		}
 	}
 
 	# --------------------
 	# Check if the current user can reopen the specified bug
-	function access_can_reopen_bug ( $p_bug_id ) {
+	function access_can_reopen_bug ( $p_bug_id, $p_user_id = null ) {
+		if ( $p_user_id === null ) {
+		    $p_user_id = auth_get_current_user_id();
+		}
+
 		# If allow_reporter_reopen is enabled, then reporters can always reopen
 		#  their own bugs
 		if ( ON == config_get( 'allow_reporter_reopen' ) &&
-			bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() ) ) {
+			bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
 			return true;
 		}
 
-		return access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id );
+		return access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id, $p_user_id );
 	}
 	
 	# --------------------
 	# Make sure that the current user can reopen the specified bug
 	# See access_can_reopen_bug() for details.
-	function access_ensure_can_reopen_bug( $p_bug_id ) {
-		if ( !access_can_reopen_bug( $p_bug_id ) ) {
+	function access_ensure_can_reopen_bug( $p_bug_id, $p_user_id = null ) {
+		if ( !access_can_reopen_bug( $p_bug_id, $p_user_id ) ) {
 			access_denied();
 		}
 	}

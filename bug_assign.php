@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_assign.php,v 1.36 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: bug_assign.php,v 1.37 2004-02-11 22:16:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,11 +21,15 @@
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
+	$f_handler_id = gpc_get_int( 'handler_id', auth_get_current_user_id() );
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
-	access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id );
+	
+	if ( $f_handler_id != NO_USER ) {
+		access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id );
+	}
 
-	bug_assign( $f_bug_id, auth_get_current_user_id() );
+	bug_assign( $f_bug_id, $f_handler_id );
 
 	print_successful_redirect_to_bug( $f_bug_id );
 ?>
