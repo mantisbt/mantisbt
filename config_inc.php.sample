@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_inc.php.sample,v 1.13 2004-08-15 23:13:02 thraxisp Exp $
+	# $Id: config_inc.php.sample,v 1.14 2004-09-12 12:23:35 vboctor Exp $
 	# --------------------------------------------------------
 	
 	# This sample file contains the essential files that you MUST
@@ -29,7 +29,6 @@
 
 	# set these values to match your setup
 	$g_hostname      = "localhost";
-	$g_port          = 3306;         # 3306 is default
 	$g_db_username   = "root";
 	$g_db_password   = "";
 	$g_database_name = "bugtracker";
@@ -43,16 +42,6 @@
 
 	# the return address for bounced mail
 	$g_return_path_email    = 'admin@example.com';
-
-	# --- login method ----------------
-	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
-	$g_login_method = MD5;
-
-	# --- email vars ------------------
-	# set to OFF to disable email check
-	# These should be OFF for Windows installations
-	$g_validate_email            = OFF;
-	$g_check_mx_record           = OFF;
 
 	# --- file upload settings --------
 	# This is the master setting to disable *all* file uploading functionality
