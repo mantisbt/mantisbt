@@ -179,7 +179,7 @@
 			case CRYPT:	return crypt( $p_password );
 			case PLAIN:	return $p_password;
 			case MD5:	return md5( $p_password );
-			defaut:		return $p_password;
+			default:	return $p_password;
 		}
 	}
 	### --------------------
