@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.6 2002-10-20 22:52:52 jfitzell Exp $
+	# $Id: user_pref_api.php,v 1.7 2002-11-10 22:32:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -168,7 +168,7 @@
 			array_push( $t_values, '\'' . db_prepare_string( $p_prefs->$var ) . '\'' );
 		}
 
-		$t_vars_string = implode( ', ', $t_vars );
+		$t_vars_string = implode( ', ', array_keys( $t_vars ) );
 		$t_values_string = implode( ', ', $t_values );
 
 	    $query = "INSERT
