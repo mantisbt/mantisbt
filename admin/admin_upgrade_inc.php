@@ -1,8 +1,5 @@
 <?php
-	require_once( '../constant_inc.php' );
-	require_once( '../default/config_inc1.php' );
-	require_once( '../config_inc.php' );
-	require_once( '../core_database_API.php' );
+	require( 'admin_inc.php' );
 ?>
 <?php
 	class UpgradeItem {

@@ -1,7 +1,5 @@
 <?php
-	require( "../constant_inc.php" );
-	require( "../config_inc.php" );
-	require( "../core_database_API.php" );
+	require( "admin_inc.php" );
 ?>
 <?php
 	if ( $f_action=="upgrade" ) {

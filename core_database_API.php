@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.11 $
+	# $Revision: 1.12 $
 	# $Author: vboctor $
-	# $Date: 2002-06-14 07:50:50 $
+	# $Date: 2002-06-20 14:48:18 $
 	#
-	# $Id: core_database_API.php,v 1.11 2002-06-14 07:50:50 vboctor Exp $
+	# $Id: core_database_API.php,v 1.12 2002-06-20 14:48:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -124,9 +124,11 @@
 	}
 	# --------------------
 
-	if ( OFF == $g_use_persistent_connections ) {
-		db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port );
-	} else {
-		db_pconnect( $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port );
+	if ( !isset( $f_skip_open_db ) ) {
+		if ( OFF == $g_use_persistent_connections ) {
+			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port );
+		} else {
+			db_pconnect( $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port );
+		}
 	}
 ?>

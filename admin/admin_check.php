@@ -1,7 +1,6 @@
 <?php
-	require( "../constant_inc.php" );
-	require( "../config_inc.php" );
-	require( "../core_database_API.php" );
+    $f_skip_open_db = true;  // don't open the database in core_database_API.php
+	require( "admin_inc.php" );
 ?>
 <?php
 	error_reporting( E_ALL );
@@ -73,7 +72,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 	<td bgcolor="#f0f0ff">
 		<span class="title">Version</span>
 		<p>
-		Mantis requires at least <b>PHP 4.0.3</b>.  If you are not running this version you or you radministrator will need to upgrade your build of PHP.  I recommend 4.0.6 or 4.1.2 at the moment.
+		Mantis requires at least <b>PHP 4.0.3</b>.  If you are not running this version you or your administrator will need to upgrade your build of PHP.  I recommend 4.0.6 or 4.1.2 at the moment.
 		<p />
 		You are running <b>PHP <?php echo $version ?></b>
 	</td>
@@ -119,7 +118,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 <!-- Absolute path check -->
 <tr>
 	<td bgcolor="#ffffff">
-		Checking to see if your $g_absolute_path variable has a trailing /
+		Checking to see if your $g_absolute_path variable has a trailing / "<?php echo $g_absolute_path ?>"
 	</td>
 	<?php
 		if (( "\\" == $g_absolute_path[strlen($g_absolute_path)-1] ) ||
