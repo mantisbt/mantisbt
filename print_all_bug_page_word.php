@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.54 2004-12-09 20:38:51 thraxisp Exp $
+	# $Id: print_all_bug_page_word.php,v 1.55 2005-01-13 20:51:20 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -430,6 +430,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 			$row = db_fetch_array( $result6 );
 			extract( $row, EXTR_PREFIX_ALL, 'v3' );
 			$v3_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_submitted ) ) );
+			$v3_date_modified = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_modified ) ) );
 
 			# grab the bugnote text and id and prefix with v3_
 			$query6 = "SELECT note, id
@@ -447,8 +448,13 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 </tr>
 <tr>
-	<td class="nopad" valign="top" width="15%">
+	<td class="nopad" valign="top" width="20%">
 		<table class="hide" cellspacing="1">
+		<tr>
+			<td class="print">
+				(<?php echo bugnote_format_id( $v3_id ) ?>)
+			</td>
+		</tr>
 		<tr>
 			<td class="print">
 				<?php print_user( $v3_reporter_id ) ?>&nbsp;&nbsp;&nbsp;
@@ -457,6 +463,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		<tr>
 			<td class="print">
 				<?php echo $v3_date_submitted ?>&nbsp;&nbsp;&nbsp;
+				<?php if ( db_unixtimestamp( $v3_date_submitted ) != db_unixtimestamp( $v3_last_modified ) ) {
+					echo '<br />(' . lang_get( 'edited_on').' '. $v3_last_modified . ')';
+				} ?>
 			</td>
 		</tr>
 		</table>
