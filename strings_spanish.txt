@@ -5,6 +5,7 @@
 	# See the README and LICENSE files for details
 
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
+			 Ariel Arjona - beerfrick@users.sf.net
 ?>
 <?
 	# General Strings
@@ -533,9 +534,9 @@
 	$s_valid_project_msg = "Debe seleccionar un proyecto valido";
 
 	# show_source_page.php3
-	$s_show_source_for_msg = "Showing source for";
-	$s_not_supported_part1 = "This version";
-	$s_not_supported_part2 = "of php does not support";
+	$s_show_source_for_msg = "Mostrando codigo fuente para";
+	$s_not_supported_part1 = "Esta version";
+	$s_not_supported_part2 = "de PHP no soporta";
 
 	# signup.php3
 	$s_invalid_email = "ES UNA DIRECCION DE CORREO INVALIDA";
