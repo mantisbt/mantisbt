@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.77 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:10 $
+	# $Revision: 1.78 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:04:14 $
 	#
-	# $Id: strings_spanish.txt,v 1.77 2004-10-15 07:07:10 bigbadger Exp $
+	# $Id: strings_spanish.txt,v 1.78 2005-02-12 20:04:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php

@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_by_severity.php,v 1.7 2004-01-11 07:16:11 vboctor Exp $
+	# $Id: graph_by_severity.php,v 1.8 2005-02-12 20:03:49 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( '../core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'graph_api.php' );
 ?>
 <?php

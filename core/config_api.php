@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.14 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: config_api.php,v 1.15 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Configuration API ###

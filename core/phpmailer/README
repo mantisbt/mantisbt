@@ -39,14 +39,14 @@ Installation:
 
 Copy class.phpmailer.php into your php.ini include_path. If you are
 using the SMTP mailer then place class.smtp.php in your path as well.
-In the language directory you will find several files like 
-phpmailer.lang-en.php.  If you look right before the .php extension 
-that there are two letters.  These represent the language type of the 
-translation file.  For instance "en" is the English file and "br" is 
-the Portuguese file.  Chose the file that best fits with your language 
-and place it in the PHP include path.  If your language is English 
-then you have nothing more to do.  If it is a different language then 
-you must point PHPMailer to the correct translation.  To do this, call 
+In the language directory you will find several files like
+phpmailer.lang-en.php.  If you look right before the .php extension
+that there are two letters.  These represent the language type of the
+translation file.  For instance "en" is the English file and "br" is
+the Portuguese file.  Chose the file that best fits with your language
+and place it in the PHP include path.  If your language is English
+then you have nothing more to do.  If it is a different language then
+you must point PHPMailer to the correct translation.  To do this, call
 the PHPMailer SetLanguage method like so:
 
 // To load the Portuguese version

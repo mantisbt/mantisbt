@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.36 2005-01-12 01:49:47 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.37 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -35,8 +35,8 @@
 	define( 'NOBODY',			100 );
 
 	define( 'DEFAULT_ACCESS_LEVEL', -1); # This is used in add user to project
-	
-	
+
+
 	# status
 	define( 'NEW_',				10 );   # NEW seems to be a reserved keyword
 	define( 'FEEDBACK',			20 );

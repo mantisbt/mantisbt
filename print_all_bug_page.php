@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.81 2005-01-25 13:57:29 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.82 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -54,7 +54,7 @@
 
 		$t_setting_arr = explode( '#', $t_cookie_value, 2 );
 		$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
-	
+
 		$f_highlight_changed 	= $t_filter_cookie_arr['highlight_changed'];
 		$f_sort 				= $t_filter_cookie_arr['sort'];
 		$f_dir		 			= $t_filter_cookie_arr['dir'];
@@ -66,7 +66,7 @@
 	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = null;
-	
+
 	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	$row_count = sizeof( $result );
 

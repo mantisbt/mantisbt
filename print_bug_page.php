@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.52 2004-12-16 16:41:39 bpfennigschmidt Exp $
+	# $Id: print_bug_page.php,v 1.53 2005-02-12 20:01:07 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'date_api.php' );

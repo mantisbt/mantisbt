@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.47 2004-08-27 00:29:54 thraxisp Exp $
+	# $Id: bugnote_edit_page.php,v 1.48 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -22,9 +22,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'string_api.php' );
@@ -37,7 +37,7 @@
 	$t_user_id = auth_get_current_user_id();
 	$t_reporter_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 
-	if ( ( $t_user_id != $t_reporter_id ) || 
+	if ( ( $t_user_id != $t_reporter_id ) ||
 	 	( OFF == config_get( 'bugnote_allow_user_edit_delete' ) ) ) {
 		access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
 	}

@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.81 2004-09-22 10:15:33 bpfennigschmidt Exp $
+	# $Id: manage_proj_edit_page.php,v 1.82 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path . 'category_api.php' );
 	require_once( $t_core_path . 'version_api.php' );
 	require_once( $t_core_path . 'custom_field_api.php' );
@@ -173,7 +173,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		</tr>
 <?php
 	}
-	
+
 	foreach ( $t_categories as $t_category ) {
 		$t_name = $t_category['category'];
 
@@ -509,7 +509,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 				?>
 			</td>
 			<td>
-			<?php 
+			<?php
 				$t_email = user_get_email( $t_user['id'] );
 				print_email_link( $t_email, $t_email );
 			?>

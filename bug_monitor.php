@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor.php,v 1.26 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_monitor.php,v 1.27 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 ?>
 <?php

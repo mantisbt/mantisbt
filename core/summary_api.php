@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.34 2004-12-17 01:31:44 thraxisp Exp $
+	# $Id: summary_api.php,v 1.35 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -545,7 +545,7 @@
 		if ( ALL_PROJECTS != $t_project_id ) {
 			return;
 		}
-		
+
 		# Only projects to which the user have access
 		$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
 		if ( count( $t_accessible_projects_array ) > 0 ) {

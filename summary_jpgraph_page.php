@@ -9,7 +9,7 @@
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 
 	# --------------------------------------------------------
-	# $Id: summary_jpgraph_page.php,v 1.23 2004-12-16 22:41:26 thraxisp Exp $
+	# $Id: summary_jpgraph_page.php,v 1.24 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -21,9 +21,9 @@
 	print_summary_menu( 'summary_jpgraph_page.php' );
 
 	$t_graphs = array( 'summary_graph_cumulative_bydate', 'summary_graph_bydeveloper', 'summary_graph_byreporter',
-			'summary_graph_byseverity', 'summary_graph_bystatus', 'summary_graph_byresolution', 
+			'summary_graph_byseverity', 'summary_graph_bystatus', 'summary_graph_byresolution',
 			'summary_graph_bycategory', 'summary_graph_bypriority' );
-	$t_wide = config_get( 'graph_summary_graphs_per_row' );		
+	$t_wide = config_get( 'graph_summary_graphs_per_row' );
 	$t_width = config_get( 'graph_window_width' );
 	$t_graph_width = (int) ( ( $t_width - 50 ) / $t_wide );
 
@@ -48,7 +48,7 @@
 			print( "</tr>\n" );
 		}
 	}
-?>		
+?>
 </table>
 
 <?php html_page_bottom1( __FILE__ ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_delete.php,v 1.29 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_delete.php,v 1.30 2005-02-12 20:01:02 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -50,7 +50,7 @@
 	$t_redirect = config_get( 'logout_redirect_page' );
 
 	html_meta_redirect( $t_redirect );
-	
+
 	html_page_top1();
 
 ?>

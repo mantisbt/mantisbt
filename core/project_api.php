@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.63 2005-02-11 15:38:16 thraxisp Exp $
+	# $Id: project_api.php,v 1.64 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -333,7 +333,7 @@
 	# Get the id of the project with the specified name
 	function project_get_id_by_name( $p_project_name ) {
 		$c_project_name = db_prepare_string( $p_project_name );
-	
+
 		$t_project_table = config_get( 'mantis_project_table' );
 
 		$query = "SELECT id FROM $t_project_table WHERE name = '$c_project_name'";
@@ -471,11 +471,11 @@
 
 		$t_users = array();
 		$query = "SELECT DISTINCT u.id, u.username, u.realname
-					FROM 	$t_user_table u, 
+					FROM 	$t_user_table u,
 							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id
-					WHERE	( ( p.view_state='$t_pub' AND u.access_level >= $t_access_level ) 
-							OR ( l.access_level >= $t_access_level AND l.user_id=u.id ) 
-							OR u.access_level>='$t_adm' ) 
+					WHERE	( ( p.view_state='$t_pub' AND u.access_level >= $t_access_level )
+							OR ( l.access_level >= $t_access_level AND l.user_id=u.id )
+							OR u.access_level>='$t_adm' )
 							AND u.enabled = $t_on
 							$t_project_clause
 					ORDER BY u.realname, u.username";
@@ -507,7 +507,7 @@
 			# Default access level for this user
 			$c_access_level = db_prepare_int( user_get_access_level ( $p_user_id ) );
 		}
-		
+
 		$query = "INSERT
 				  INTO $t_project_user_list_table
 				    ( project_id, user_id, access_level )

@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_rss.php,v 1.2 2004-02-10 13:41:03 vboctor Exp $
+	# $Id: news_rss.php,v 1.3 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path . 'class.RSSBuilder.inc.php' );
 	require_once( $t_core_path . 'news_api.php' );
 	require_once( $t_core_path . 'project_api.php' );
@@ -64,7 +64,7 @@
 	# person, an organization, or a service
 	$contributor = (string) '';
 
-	$rssfile->addDCdata(	$publisher, $creator, $date, $language, $rights, $coverage, 
+	$rssfile->addDCdata(	$publisher, $creator, $date, $language, $rights, $coverage,
 				$contributor);
 
 	# hourly / daily / weekly / ...
@@ -84,7 +84,7 @@
 		$row = $news_rows[$i];
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		# skip news item if private, or 
+		# skip news item if private, or
 		# belongs to a private project (will only happen
 		if ( VS_PRIVATE == $v_view_state ) {
 			continue;
@@ -113,7 +113,7 @@
 		# optional mod_im value for dispaying a different pic for every item
 		$image = '';
 
-		$rssfile->addItem(	$about, $title, $link, $description, $subject, $date,	
+		$rssfile->addItem(	$about, $title, $link, $description, $subject, $date,
 					$author, $comments, $image);
 	}
 

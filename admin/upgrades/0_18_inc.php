@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.25 2004-10-25 19:45:04 marcelloscata Exp $
+	# $Id: 0_18_inc.php,v 1.26 2005-02-12 20:01:09 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,12 +16,12 @@
 
 	$upgrades = array();
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'0.18-vb-1',
 		'Add index on bug_id field in mantis_bug_file_table.',
 		'upgrade_0_18_vb_1' );
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'filtersdb-1',
 			'Add mantis_filters_table',
 			"CREATE TABLE $t_filters_table (
@@ -49,31 +49,31 @@
 		return true;
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'emailsevs-1',
 		'Add the necessary columns for email severity filtering',
 		'emailseverities_fix_1' );
-	
+
 	function emailseverities_fix_1() {
 		global $t_user_pref_table;
-		
+
 		if ( !db_field_exists( 'email_on_priority_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_priority_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_priority";
-	
+
 			$result = @db_query( $query );
-	
+
 			if ( false == $result ) {
 				return false;
 			}
 		}
-	
+
 		if ( !db_field_exists( 'email_on_status_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_status_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_priority_minimum_severity";
-	
+
 			$result = @db_query( $query );
-			
+
 			if ( false == $result ) {
 				return false;
 			}
@@ -82,9 +82,9 @@
 		if ( !db_field_exists( 'email_on_bugnote_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_bugnote_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_status_minimum_severity";
-	
+
 			$result = @db_query( $query );
-			
+
 			if ( false == $result ) {
 				return false;
 			}
@@ -93,9 +93,9 @@
 		if ( !db_field_exists( 'email_on_reopened_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_reopened_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_bugnote_minimum_severity";
-	
+
 			$result = @db_query( $query );
-			
+
 			if ( false == $result ) {
 				return false;
 			}
@@ -104,9 +104,9 @@
 		if ( !db_field_exists( 'email_on_closed_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_closed_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_reopened_minimum_severity";
-	
+
 			$result = @db_query( $query );
-			
+
 			if ( false == $result ) {
 				return false;
 			}
@@ -115,9 +115,9 @@
 		if ( !db_field_exists( 'email_on_resolved_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_resolved_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_closed_minimum_severity";
-	
+
 			$result = @db_query( $query );
-			
+
 			if ( false == $result ) {
 				return false;
 			}
@@ -126,9 +126,9 @@
 		if ( !db_field_exists( 'email_on_feedback_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_feedback_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_resolved_minimum_severity";
-	
+
 			$result = @db_query( $query );
-			
+
 			if ( false == $result ) {
 				return false;
 			}
@@ -137,9 +137,9 @@
 		if ( !db_field_exists( 'email_on_assigned_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_assigned_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_feedback_minimum_severity";
-	
+
 			$result = @db_query( $query );
-			
+
 			if ( false == $result ) {
 				return false;
 			}
@@ -148,9 +148,9 @@
 		if ( !db_field_exists( 'email_on_new_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_new_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_assigned_minimum_severity";
-	
+
 			$result = @db_query( $query );
-			
+
 			if ( false == $result ) {
 				return false;
 			}
@@ -160,7 +160,7 @@
 	}
 
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'sponsorship-1',
 			'Add sponsorships table',
 			"CREATE TABLE IF NOT EXISTS mantis_sponsorship_table (
@@ -178,27 +178,27 @@
 				KEY user_id (user_id)
 				) TYPE=MyISAM COMMENT='A table for sponsorships' AUTO_INCREMENT=1" );
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'sponsorship-2',
 			'Add sponsorship_total to bug table',
 			"ALTER TABLE $t_bug_table ADD sponsorship_total INT( 7 ) DEFAULT '0' NOT NULL" );
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'sponsorship-3',
 			'Add an index on sponsorship_total in bug table',
 			"ALTER TABLE $t_bug_table ADD INDEX sponsorship_total ( sponsorship_total )" );
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'fixed_in_version-1',
 			'Add fixed_in_version field to bug table.',
 			"ALTER TABLE $t_bug_table ADD fixed_in_version VARCHAR( 64 ) NOT NULL AFTER version" );
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'fixed_in_version-2',
 			'Add index on fixed_in_version field in bug table.',
 			"ALTER TABLE $t_bug_table ADD INDEX ( fixed_in_version )" );
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'user_realname',
 			'Add real name to user information.',
 			"ALTER TABLE $t_user_table ADD realname VARCHAR( 64 ) NOT NULL AFTER username" );
@@ -438,7 +438,7 @@
 	}
 
 		if ( config_get( 'differentiate_duplicates' ) ) {
-			$upgrades[] = new SQLUpgrade( 
+			$upgrades[] = new SQLUpgrade(
 				'user-duplicate',
 				'Add realname duplicate field to user table',
 				"ALTER TABLE $t_user_table ADD duplicate_realname INT( 1 ) DEFAULT '0'" );
@@ -452,9 +452,9 @@
 	function upgrade_0_18_user_duplicate() {
 		global $t_user_table;
 
-		$query = "SELECT realname FROM $t_user_table 
-								WHERE realname != '' 
-								GROUP BY realname 
+		$query = "SELECT realname FROM $t_user_table
+								WHERE realname != ''
+								GROUP BY realname
 								HAVING count(realname) > 1";
 		$result = db_query( $query );
 		$t_count = db_num_rows( $result );
@@ -624,7 +624,7 @@
 		$t_checkbox = CUSTOM_FIELD_TYPE_CHECKBOX;
 		$t_multilist = CUSTOM_FIELD_TYPE_MULTILIST;
 		$query = "SELECT f.field_id, f.bug_id, f.value FROM $t_custom_field_string_table AS f
-			  LEFT JOIN $t_custom_field_table as s ON f.field_id = s.id 
+			  LEFT JOIN $t_custom_field_table as s ON f.field_id = s.id
 			  WHERE (s.type = $t_checkbox) OR (s.type = $t_multilist)";
 		$result = db_query( $query );
 		$t_count = db_num_rows( $result );
@@ -640,7 +640,7 @@
 			    db_query( $query );
 			}
 		}
-		
+
 		return true;
 	}
 

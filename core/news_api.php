@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.17 2004-08-14 18:25:56 thraxisp Exp $
+	# $Id: news_api.php,v 1.18 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	### News API ###

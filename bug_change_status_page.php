@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.17 2005-02-07 22:26:09 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.18 2005-02-12 20:01:03 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -40,10 +40,10 @@
 				trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
 			}
 		}
-	
+
 		if ( $f_handler_id != NO_USER ) {
 			access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id );
-	
+
 			if ( $t_bug_sponsored ) {
 				if ( !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
 					trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
@@ -51,7 +51,7 @@
 			}
 		}
 	}
-	
+
 	$t_status_label = str_replace( " ", "_", get_enum_to_string( config_get( 'status_enum_string' ), $f_new_status ) );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -116,7 +116,7 @@ if ( ( $t_resolved <= $f_new_status ) && ( CLOSED > $f_new_status ) ) { ?>
 <?php } ?>
 
 <?php
-if ( ( $t_resolved > $f_new_status ) && 
+if ( ( $t_resolved > $f_new_status ) &&
 		access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold')), $f_bug_id) ) { ?>
 <!-- Assigned To -->
 <tr <?php echo helper_alternate_class() ?>>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.81 2004-12-21 02:16:48 thraxisp Exp $
+	# $Id: user_api.php,v 1.82 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -137,12 +137,12 @@
 
 	# --------------------
 	# Check if the realname is a valid username (does not account for uniqueness)
-	# Return 0 if it is invalid, The number of matches + 1 
+	# Return 0 if it is invalid, The number of matches + 1
 	function user_is_realname_unique( $p_username, $p_realname ) {
 		if ( is_blank( $p_realname ) ) { # don't bother checking if realname is blank
 			return 1;
 		}
-		
+
 		$c_realname = db_prepare_string( $p_realname );
 		# allow realname to match username
 		if ( $p_realname <> $p_username ) {
@@ -182,7 +182,7 @@
 	}
 
 	# --------------------
-	# Check if the username is a valid username (does not account for uniqueness) 
+	# Check if the username is a valid username (does not account for uniqueness)
 	#  realname can match
 	# Return true if it is, false otherwise
 	function user_is_name_valid( $p_username ) {
@@ -207,7 +207,7 @@
 		if ( !user_is_name_valid( $p_username ) ) {
 			trigger_error( ERROR_USER_NAME_INVALID, ERROR );
 		}
-	}	
+	}
 
 	# --------------------
 	# return whether user is monitoring bug for the user id and bug id
@@ -706,7 +706,7 @@
 	function user_is_login_request_allowed( $p_user_id ) {
 		$t_max_failed_login_count = config_get( 'max_failed_login_count' );
 		$t_failed_login_count = user_get_field( $p_user_id, 'failed_login_count' );
-		return ( $t_failed_login_count < $t_max_failed_login_count 
+		return ( $t_failed_login_count < $t_max_failed_login_count
 							|| OFF == $t_max_failed_login_count);
 	}
 
@@ -718,7 +718,7 @@
 		}
 		$t_max_lost_password_in_progress_count = config_get( 'max_lost_password_in_progress_count' );
 		$t_lost_password_in_progress_count = user_get_field( $p_user_id, 'lost_password_in_progress_count' );
-		return ( $t_lost_password_in_progress_count < $t_max_lost_password_in_progress_count 
+		return ( $t_lost_password_in_progress_count < $t_max_lost_password_in_progress_count
 							|| OFF == $t_max_lost_password_in_progress_count );
 	}
 

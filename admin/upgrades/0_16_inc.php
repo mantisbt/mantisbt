@@ -8,7 +8,7 @@
 	# Changes applied to 0.16 database to give us 0.17
 
 	# --------------------------------------------------------
-	# $Id: 0_16_inc.php,v 1.6 2004-02-06 14:51:14 jlatour Exp $
+	# $Id: 0_16_inc.php,v 1.7 2005-02-12 20:01:09 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -54,45 +54,45 @@
 		);
 
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 			'0.16-7',
 			'Add view_state to bug table',
 			'upgrade_0_16_7' );
-	
+
 	function upgrade_0_16_7() {
 		global $t_bug_table;
-		
+
 		if ( !db_field_exists( 'view_state', $t_bug_table ) ) {
 			$query = "ALTER TABLE $t_bug_table ADD view_state INT(2) DEFAULT '10'  NOT NULL AFTER profile_id";
-	
+
 			$result = @db_query( $query );
-	
+
 			if ( false == $result ) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 			'0.16-8',
 			'Add view_state to bugnote table',
 			'upgrade_0_16_8' );
-	
+
 	function upgrade_0_16_8() {
 		global $t_bugnote_table;
-		
+
 		if ( !db_field_exists( 'view_state', $t_bugnote_table ) ) {
 			$query = "ALTER TABLE $t_bugnote_table ADD view_state INT(2) DEFAULT '10' NOT NULL AFTER bugnote_text_id";
-	
+
 			$result = @db_query( $query );
-	
+
 			if ( false == $result ) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -120,24 +120,24 @@
 			"ALTER TABLE $t_bug_table CHANGE version version VARCHAR(64) NOT NULL"
 		);
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 			'0.16-13',
 			'Add project_id to user pref table',
 			'upgrade_0_16_13' );
-	
+
 	function upgrade_0_16_13() {
 		global $t_user_pref_table;
-		
+
 		if ( !db_field_exists( 'project_id', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD project_id INT(7) UNSIGNED ZEROFILL NOT NULL AFTER user_id";
-	
+
 			$result = @db_query( $query );
-	
+
 			if ( false == $result ) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -157,6 +157,6 @@
 			  user_id int(7) unsigned zerofill NOT NULL default '0000000',
 			  bug_id int(7) unsigned NOT NULL default '0')"
 		);
-	
+
 	return $upgrades;
 ?>

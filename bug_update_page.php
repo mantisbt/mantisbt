@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.87 2004-10-13 23:35:07 thraxisp Exp $
+	# $Id: bug_update_page.php,v 1.88 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -226,8 +226,8 @@
 		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
-		<?php print_status_option_list( 'status', $t_bug->status, 
-						( $t_bug->reporter_id == auth_get_current_user_id() && 
+		<?php print_status_option_list( 'status', $t_bug->status,
+						( $t_bug->reporter_id == auth_get_current_user_id() &&
 								( ON == config_get( 'allow_reporter_close' ) ) ), $t_bug->project_id ) ?>
 	</td>
 
@@ -247,10 +247,10 @@
 		}
 	?>
 <?php
-	$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
-			|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+			|| ( ( AUTO == config_get( 'show_product_version' ) )
 						&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-	if ( $t_show_version ) { 
+	if ( $t_show_version ) {
 ?>
 	<!-- Product Version -->
 	<td class="category">

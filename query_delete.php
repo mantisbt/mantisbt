@@ -8,7 +8,7 @@
 <?php
 	require_once( 'core.php' );
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'filter_api.php' );
 	require_once( $t_core_path.'current_user_api.php' );
@@ -22,11 +22,11 @@
 	$f_query_id = gpc_get_int( 'source_query_id' );
 	$t_redirect_url = 'query_view_page.php';
 
-	if ( ! filter_db_can_delete_filter( $f_query_id ) ) {	
+	if ( ! filter_db_can_delete_filter( $f_query_id ) ) {
 		print_header_redirect( $t_redirect_url );
 	}
 	else
-	{	
+	{
 		html_page_top1();
 		html_page_top2();
 		filter_db_delete_filter( $f_query_id );
@@ -37,7 +37,7 @@
 		<form method="post" action="<?php print $t_redirect_url; ?>">
 		<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
 		</form>
-	
+
 		<?php
 		echo '</div>';
 		html_page_bottom1( __FILE__ );

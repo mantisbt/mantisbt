@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_view_page.php,v 1.32 2004-02-10 13:41:03 vboctor Exp $
+	# $Id: news_view_page.php,v 1.33 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path . 'news_api.php' );
 	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'news_inc.php' );
 ?>
@@ -29,7 +29,7 @@
 	if ( $f_news_id !== null ) {
 		$t_project_id = news_get_field( $f_news_id, 'project_id' );
 		if ( news_is_private( $f_news_id ) ) {
-			access_ensure_project_level(	config_get( 'private_news_threshold' ), 
+			access_ensure_project_level(	config_get( 'private_news_threshold' ),
 							$t_project_id );
 		} else {
 			access_ensure_project_level( VIEWER, $t_project_id );

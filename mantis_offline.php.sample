@@ -8,8 +8,8 @@
     <meta http-equiv="Refresh" content="600" />
 
     <style type="text/css"> <!--
-      body { 
-        background-color: white; 
+      body {
+        background-color: white;
       }
 
       h1 {
@@ -58,7 +58,7 @@
         Use your browser's refresh or reload function to try again
         in a few minutes.
       </p>
-          
+
     </div>
 
   </body>

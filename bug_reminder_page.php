@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.20 2004-10-05 17:20:26 thraxisp Exp $
+	# $Id: bug_reminder_page.php,v 1.21 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 ?>
 <?php

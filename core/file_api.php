@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.63 2004-12-18 13:53:35 marcelloscata Exp $
+	# $Id: file_api.php,v 1.64 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -41,7 +41,7 @@
 			}
 		}
 	}
-	
+
 	# --------------------
 	# Check the number of attachments a bug has (if any)
 	function file_bug_attachment_count( $p_bug_id ) {
@@ -373,7 +373,7 @@
 				file_ftp_delete( $ftp, $t_diskfile );
 				file_ftp_disconnect( $ftp );
 			}
-		
+
 			if ( file_exists( $t_diskfile ) ) {
 				file_delete_local( $t_diskfile );
 			}
@@ -429,7 +429,7 @@
 	# --------------------
 	# clean file name by removing sensitive characters and replacing them with underscores
 	function file_clean_name( $p_filename ) {
-		return preg_replace( "/[\/\\ :&]/", "_", $p_filename); 
+		return preg_replace( "/[\/\\ :&]/", "_", $p_filename);
 	}
 
 	# --------------------
@@ -503,11 +503,11 @@
 
 		if ( !file_type_check( $p_file_name ) ) {
 			trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
-		}  
+		}
 
 		if ( !file_is_name_unique( $p_file_name, $p_bug_id ) ) {
 			trigger_error( ERROR_DUPLICATE_FILE, ERROR );
-		}  
+		}
 
 		if ( 'bug' == $p_table ) {
 			$t_project_id	= bug_get_field( $p_bug_id, 'project_id' );
@@ -538,11 +538,11 @@
 		$t_disk_file_name = $t_file_path . file_generate_unique_name( $t_file_hash . '-' . $p_file_name, $t_file_path );
 		$c_disk_file_name = db_prepare_string( $t_disk_file_name );
 
-		if ( is_readable ( $p_tmp_file ) ) { 
+		if ( is_readable ( $p_tmp_file ) ) {
 			$t_file_size = filesize( $p_tmp_file );
 		} else {
 			//try to get filesize from 'post' data
-			//@@@ fixme - this should support >1 file ? 
+			//@@@ fixme - this should support >1 file ?
 			global $HTTP_POST_FILES;
 			$t_file_size = $HTTP_POST_FILES['file']['size'];
 		}

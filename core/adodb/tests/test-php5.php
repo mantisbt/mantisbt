@@ -1,8 +1,8 @@
 <?php
 /*
   V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
-  Released under both BSD license and Lesser GPL library license. 
-  Whenever there is any discrepancy between the two licenses, 
+  Released under both BSD license and Lesser GPL library license.
+  Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
   Set tabs to 8.
  */
@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 $path = dirname(__FILE__);
 
 include("$path/../adodb-exceptions.inc.php");
-include("$path/../adodb.inc.php");	
+include("$path/../adodb.inc.php");
 
 echo "<h3>PHP ".PHP_VERSION."</h3>\n";
 try {
@@ -30,7 +30,7 @@ case 'mysql':
 	$db = NewADOConnection("mysql");
 	$db->Connect('localhost','root','','test');
 	break;
-	
+
 case 'mysqli':
 	$db = NewADOConnection("mysqli://root:@localhost/test");
 	//$db->Connect('localhost','root','','test');

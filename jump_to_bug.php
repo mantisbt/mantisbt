@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: jump_to_bug.php,v 1.20 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: jump_to_bug.php,v 1.21 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,6 +19,6 @@
 <?php
 	# Determine which view page to redirect back to.
 	$f_bug_id		= gpc_get_int( 'bug_id' );
-	
+
 	print_header_redirect_view( $f_bug_id );
 ?>

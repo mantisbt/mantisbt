@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.17 2005-01-05 20:57:04 thraxisp Exp $
+	# $Id: utility_api.php,v 1.18 2005-02-12 20:01:19 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Utility API ###
@@ -166,7 +166,7 @@
 		}
 		return $t_result;
 	}
-	
+
 
 
 	# --------------------

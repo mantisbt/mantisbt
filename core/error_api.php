@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.39 2005-01-27 11:55:11 vboctor Exp $
+	# $Id: error_api.php,v 1.40 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Error API ###

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: tokens_api.php,v 1.3 2004-12-16 22:41:27 thraxisp Exp $
+	# $Id: tokens_api.php,v 1.4 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	### TOKENS API ###

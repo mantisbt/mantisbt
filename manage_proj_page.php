@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.11 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: manage_proj_page.php,v 1.12 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'icon_api.php' );

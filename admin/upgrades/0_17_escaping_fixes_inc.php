@@ -10,12 +10,12 @@
 	#  entities and then insert the data back in.
 
 	# --------------------------------------------------------
-	# $Id: 0_17_escaping_fixes_inc.php,v 1.3 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: 0_17_escaping_fixes_inc.php,v 1.4 2005-02-12 20:01:09 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'db_table_names_inc.php' );
-	
+
 	$upgrades = array();
 
 	function upgrade_decode_entities( $p_string ) {
@@ -70,99 +70,99 @@
 		}
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-1',
 		'Fix double escaped data in mantis_bug_file_table',
 		'upgrade_escaping_fix_1' );
-	
+
 	function upgrade_escaping_fix_1() {
 		global $t_bug_file_table;
 		return upgrade_fix_strings( $t_bug_file_table, 'id',
 			array( 'title', 'description', 'filename' ) );
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-2',
 		'Fix double escaped data in mantis_bug_table',
 		'upgrade_escaping_fix_2' );
-	
+
 	function upgrade_escaping_fix_2() {
 		global $t_bug_table;
 		return upgrade_fix_strings( $t_bug_table, 'id',
 			array( 'os', 'os_build', 'platform', 'version', 'build', 'summary' ) );
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-3',
 		'Fix double escaped data in mantis_bug_text_table',
 		'upgrade_escaping_fix_3' );
-	
+
 	function upgrade_escaping_fix_3() {
 		global $t_bug_text_table;
 		return upgrade_fix_strings( $t_bug_text_table, 'id',
 			array( 'description', 'steps_to_reproduce', 'additional_information' ) );
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-4',
 		'Fix double escaped data in mantis_bugnote_text_table',
 		'upgrade_escaping_fix_4' );
-	
+
 	function upgrade_escaping_fix_4() {
 		global $t_bugnote_text_table;
 		return upgrade_fix_strings( $t_bugnote_text_table, 'id',
 			array( 'note' ) );
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-5',
 		'Fix double escaped data in mantis_news_table',
 		'upgrade_escaping_fix_5' );
-	
+
 	function upgrade_escaping_fix_5() {
 		global $t_news_table;
 		return upgrade_fix_strings( $t_news_table, 'id',
 			array( 'headline', 'body' ) );
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-6',
 		'Fix double escaped data in mantis_project_file_table',
 		'upgrade_escaping_fix_6' );
-	
+
 	function upgrade_escaping_fix_6() {
 		global $t_project_file_table;
 		return upgrade_fix_strings( $t_project_file_table, 'id',
 			array( 'title', 'description', 'filename' ) );
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-7',
 		'Fix double escaped data in mantis_project_table',
 		'upgrade_escaping_fix_7' );
-	
+
 	function upgrade_escaping_fix_7() {
 		global $t_project_table;
 		return upgrade_fix_strings( $t_project_table, 'id',
 			array( 'name', 'file_path', 'description' ) );
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-8',
 		'Fix double escaped data in mantis_user_profile_table',
 		'upgrade_escaping_fix_8' );
-	
+
 	function upgrade_escaping_fix_8() {
 		global $t_user_profile_table;
 		return upgrade_fix_strings( $t_user_profile_table, 'id',
 			array( 'platform', 'os', 'os_build', 'description' ) );
 	}
 
-	$upgrades[] = new FunctionUpgrade( 
+	$upgrades[] = new FunctionUpgrade(
 		'escaping-fix-9',
 		'Fix double escaped data in mantis_bug_history_table',
 		'upgrade_escaping_fix_9' );
-	
+
 	function upgrade_escaping_fix_9() {
 		global $t_bug_history_table;
 
@@ -174,7 +174,7 @@
 		return false;
 	}
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 		'escaping-fix-10',
 		'Remove history entries where type=0 and the old value = new value.  These existed because of escaping errors',
 		"DELETE FROM $t_bug_history_table

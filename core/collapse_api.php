@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: collapse_api.php,v 1.2 2004-07-18 13:22:28 vboctor Exp $
+	# $Id: collapse_api.php,v 1.3 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;

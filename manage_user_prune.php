@@ -6,13 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_prune.php,v 1.6 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: manage_user_prune.php,v 1.7 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
-	
+
 	$t_user_table = config_get( 'mantis_user_table' );
 
 	# Delete the users who have never logged in and are older than 1 week

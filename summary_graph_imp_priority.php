@@ -8,13 +8,13 @@
 	# This page displays "improved" charts on priorities : bars, 3Dpie and a mix priorities per status
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_priority.php,v 1.21 2004-12-16 22:41:26 thraxisp Exp $
+	# $Id: summary_graph_imp_priority.php,v 1.22 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
 	$t_core_path = config_get( 'core_path' );
 	require_once( $t_core_path.'graph_api.php' );
-	
+
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	html_page_top1();
@@ -22,8 +22,8 @@
 
 	print_summary_menu( 'summary_page.php' );
 	echo '<br />';
-	
-	print_menu_graph();	
+
+	print_menu_graph();
 	$t_width = config_get( 'graph_window_width' );
 	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
@@ -31,7 +31,7 @@
 	$t_user_id = auth_get_current_user_id();
 	token_delete_by_type_owner( TOKEN_GRAPH, $t_user_id );
 	$t_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority');
-	$t_token = token_add( serialize( $t_metrics ), TOKEN_GRAPH, $t_user_id );		
+	$t_token = token_add( serialize( $t_metrics ), TOKEN_GRAPH, $t_user_id );
 
  ?>
 

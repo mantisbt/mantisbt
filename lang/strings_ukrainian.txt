@@ -8,11 +8,11 @@
 	###########################################################################
 	# Ukrainian (Windows1251): Yuri Kirghisov, yuri@apple.com.ua
 	# -------------------------------------------------
-	# $Revision: 1.2 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:11 $
+	# $Revision: 1.3 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:04:15 $
 	#
-	# $Id: strings_ukrainian.txt,v 1.2 2004-10-15 07:07:11 bigbadger Exp $
+	# $Id: strings_ukrainian.txt,v 1.3 2005-02-12 20:04:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php

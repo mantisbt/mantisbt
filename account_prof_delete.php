@@ -6,23 +6,23 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_delete.php,v 1.25 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_prof_delete.php,v 1.26 2005-02-12 20:01:03 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# The specified profile is deleted and the user is redirected to
 	# account_prof_menu_page.php3
 ?>
-<?php 
+<?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'profile_api.php' );
 ?>
 <?php
 	auth_ensure_user_authenticated();
-	
+
 	current_user_ensure_unprotected();
 ?>
 <?php

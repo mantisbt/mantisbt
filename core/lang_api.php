@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.34 2004-09-26 02:05:14 thraxisp Exp $
+	# $Id: lang_api.php,v 1.35 2005-02-12 20:01:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -154,7 +154,7 @@
 		}
 
 		$g_lang_overrides[] = $t_lang;
-		
+
 		# Remember the language
 		$g_active_language = $t_lang;
 
@@ -179,11 +179,11 @@
 		}else{
 			$t_lang = lang_get_default();
 		}
-		
+
 		return $t_lang;
   }
 
-  
+
 
 
 	# ------------------
@@ -212,7 +212,7 @@
 		#  because we don't have a concept of falling back on a language.  The
 		#  language files actually *contain* English strings if none has been
 		#  defined in the correct language
-		# @@@ thraxisp - not sure if this is still true. Strings from last language loaded 
+		# @@@ thraxisp - not sure if this is still true. Strings from last language loaded
 		#      may still be in memeory if a new language is loaded.
 
 		if ( lang_exists( $p_string, $t_lang ) ) {

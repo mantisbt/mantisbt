@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_create.php,v 1.14 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_custom_field_create.php,v 1.15 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
 <?php

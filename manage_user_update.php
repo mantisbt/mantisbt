@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_update.php,v 1.34 2004-05-25 13:38:52 vboctor Exp $
+	# $Id: manage_user_update.php,v 1.35 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'email_api.php' );
 ?>
 <?php
@@ -33,7 +33,7 @@
 	$t_old_username = user_get_field( $f_user_id, 'username' );
 
 	# check that the username is unique
-	if ( 0 != strcasecmp( $t_old_username, $f_username ) 
+	if ( 0 != strcasecmp( $t_old_username, $f_username )
         && false == user_is_name_unique( $f_username ) ) {
 		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 	}

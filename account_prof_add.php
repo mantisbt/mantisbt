@@ -6,22 +6,22 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_add.php,v 1.24 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_prof_add.php,v 1.25 2005-02-12 20:01:03 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This file adds a new profile and redirects to account_proj_menu_page.php
 ?>
-<?php 
+<?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'profile_api.php' );
 ?>
 <?php
 	auth_ensure_user_authenticated();
-	
+
 	current_user_ensure_unprotected();
 ?>
 <?php

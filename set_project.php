@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.49 2004-10-24 02:40:01 vboctor Exp $
+	# $Id: set_project.php,v 1.50 2005-02-12 20:01:07 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php
@@ -50,7 +50,7 @@
 
 		if ( $t_source_filter_id != null ) {
 			$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
-		} 
+		}
 	} else if ( eregi( 'changelog_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url =  'changelog_page.php';
 	} else if ( eregi( 'summary_page.php', $_SERVER['HTTP_REFERER'] ) ){

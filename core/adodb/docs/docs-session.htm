@@ -92,7 +92,7 @@ including adodb-cryptsession.inc.php instead of adodb-session.inc.php. </li>
 <p><pre>
  <font
  color="#004040">    include('adodb/adodb.inc.php');<br>    <br><b>    $ADODB_SESSION_DRIVER='mysql';<br>    $ADODB_SESSION_CONNECT='localhost';<br>    $ADODB_SESSION_USER ='scott';<br>    $ADODB_SESSION_PWD ='tiger';<br>    $ADODB_SESSION_DB ='sessiondb';</b><br>    <br>    <b>include('adodb/session/adodb-session.php');</b><br>    session_start();<br>    <br>    #<br>    # Test session vars, the following should increment on refresh<br>    #<br>    $_SESSION['AVAR'] += 1;<br>    print "&lt;p&gt;\$_SESSION['AVAR']={$_SESSION['AVAR']}&lt;/p&gt;";<br></font></pre>
- 
+
 <p>To force non-persistent connections, call adodb_session_open() first before session_start():
 <p>
  <pre>
@@ -136,7 +136,7 @@ including adodb-cryptsession.inc.php instead of adodb-session.inc.php. </li>
  <h4>Installation</h4>
 <p>1. Create this table in your database (syntax might vary depending on your db):
 <p><pre> <a
- name="sessiontab"></a> <font color="#004040"><br>  create table sessions (<br>       SESSKEY char(32) not null,<br>       EXPIRY int(11) unsigned not null,<br>       EXPIREREF varchar(64),<br>       DATA text not null,<br>      primary key (sesskey)<br>  );</font><br> 
+ name="sessiontab"></a> <font color="#004040"><br>  create table sessions (<br>       SESSKEY char(32) not null,<br>       EXPIRY int(11) unsigned not null,<br>       EXPIREREF varchar(64),<br>       DATA text not null,<br>      primary key (sesskey)<br>  );</font><br>
  </pre>
  <p> For the adodb-session-clob.php version, create this:
 <p>  <pre>

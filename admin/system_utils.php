@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: system_utils.php,v 1.4 2004-09-23 21:22:12 thraxisp Exp $
+	# $Id: system_utils.php,v 1.5 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -54,7 +54,7 @@
 	<form method="post" action="copy_field.php">
 	   From
 		<SELECT name="source_id">
-			<?php 
+			<?php
 				$t_custom_ids = custom_field_get_ids();
 				foreach ( $t_custom_ids as $t_id ) {
 					printf("<OPTION VALUE=\"%d\">%s", $t_id, custom_field_get_field($t_id, 'name' ) );

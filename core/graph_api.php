@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.29 2005-01-05 17:04:15 thraxisp Exp $
+	# $Id: graph_api.php,v 1.30 2005-02-12 20:01:11 jlatour Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -52,7 +52,7 @@
 		$t_graph_font = graph_get_font();
 
 		error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
-		
+
 		$graph = new Graph( $p_graph_width, $p_graph_height );
 		$graph->img->SetMargin(40,40,40,170);
 		$graph->img->SetAntiAliasing();
@@ -89,11 +89,11 @@
 
 	# Function which displays the charts using the absolute values according to the status (opened/closed/resolved)
 	function graph_group( $p_metrics, $p_title='', $p_graph_width = 350, $p_graph_height = 400, $p_baseline = 100 ){
-		# $p_metrics is an array of three arrays 
+		# $p_metrics is an array of three arrays
 		#   $p_metrics['open'] = array( 'enum' => value, ...)
 		#   $p_metrics['resolved']
 		#   $p_metrics['closed']
-		
+
 		$t_graph_font = graph_get_font();
 
 		# count up array portions that are set
@@ -156,12 +156,12 @@
 
 		$gbplot = new GroupBarPlot(array($p1,$p3,$p2));
 		$graph->Add($gbplot);
-		
+
 		if ( ON == config_get( 'show_queries_count' ) ) {
 			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 			$graph->subtitle->SetFont( $t_graph_font, FS_NORMAL, 8 );
 		}
-		
+
 		$graph->Stroke();
 
 	}
@@ -213,13 +213,13 @@
 
 	# --------------------
 	# Function that displays pie charts
-	function graph_pie( $p_metrics, $p_title='', 
+	function graph_pie( $p_metrics, $p_title='',
 			$p_graph_width = 500, $p_graph_height = 350, $p_center = 0.4, $p_poshorizontal = 0.10, $p_posvertical = 0.09 ){
 
 		$t_graph_font = graph_get_font();
 
 		error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
-		
+
 		$graph = new PieGraph( $p_graph_width, $p_graph_height);
 		$graph->img->SetMargin(40,40,40,100);
 		$graph->title->Set($p_title);
@@ -256,7 +256,7 @@
 
 		$t_graph_font = graph_get_font();
 		error_check( is_array( $p_metrics ) ? count($p_metrics) : 0, lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
-		
+
 		foreach ($p_metrics as $i=>$vals) {
 			if ( $i > 0 ) {
 				$plot_date[] = $i;
@@ -434,8 +434,8 @@
 		$t_res_val = config_get( 'bug_resolved_status_threshold' );
 		$t_clo_val = CLOSED;
 
-		$query = "SELECT handler_id, status 
-				 FROM $t_bug_table 
+		$query = "SELECT handler_id, status
+				 FROM $t_bug_table
 				 WHERE handler_id != '' $specific_where";
 		$result = db_query( $query );
 		$t_total_handled = db_num_rows( $result );
@@ -500,8 +500,8 @@
 			$specific_where = " AND project_id='$t_project_id'";
 		}
 
-		$query = "SELECT reporter_id 
-				 FROM $t_bug_table 
+		$query = "SELECT reporter_id
+				 FROM $t_bug_table
 				 WHERE id != '' $specific_where";
 		$result = db_query( $query );
 		$t_total_reported = db_num_rows( $result );
@@ -641,15 +641,15 @@
 
 		### Get all the dates where a transition from not resolved to resolved may have happened
 		#    also, get the last updated date for the bug as this may be all the information we have
-		$query = "SELECT $t_bug_table.id, last_updated, date_modified, new_value, old_value 
-			FROM $t_bug_table LEFT JOIN $t_history_table 
-			ON mantis_bug_table.id = mantis_bug_history_table.bug_id 
+		$query = "SELECT $t_bug_table.id, last_updated, date_modified, new_value, old_value
+			FROM $t_bug_table LEFT JOIN $t_history_table
+			ON mantis_bug_table.id = mantis_bug_history_table.bug_id
 			WHERE $specific_where
 						AND $t_bug_table.status >= '$t_res_val'
-						AND ( ( $t_history_table.new_value >= '$t_res_val' 
+						AND ( ( $t_history_table.new_value >= '$t_res_val'
 								AND $t_history_table.field_name = 'status' )
 						OR $t_history_table.id is NULL )
-			ORDER BY $t_bug_table.id, date_modified ASC"; 
+			ORDER BY $t_bug_table.id, date_modified ASC";
 		$result = db_query( $query );
 		$bug_count = db_num_rows( $result );
 
@@ -665,12 +665,12 @@
 				if ( $t_res_val > $row['old_value'] ) {
 					$t_date = db_unixtimestamp( $row['date_modified'] );
 				}
-			} 
+			}
 			if ( $t_id <> $t_last_id ) {
 				if ( 0 <> $t_last_id ) {
 					# rationalise the timestamp to a day to reduce the amount of data
 					$t_date_index = (int) ( $t_last_date / 86400 );
-			
+
 					if ( isset( $metrics[$t_date_index] ) ){
 						$metrics[$t_date_index][1]++;
 					} else {
@@ -699,22 +699,22 @@
 	function graph_date_format ($p_date) {
 		return date( config_get( 'short_date_format' ), $p_date );
 	}
-	
-	
+
+
 	# ----------------------------------------------------
-	# 
+	#
 	# Check that there is enough data to create graph
 	#
 	# ----------------------------------------------------
 	function error_check( $bug_count, $title ) {
-		
+
 		if ( 0 == $bug_count ) {
 			$t_graph_font = graph_get_font();
 
 			$graph = new CanvasGraph(300,380);
-				
+
 			$txt = new Text( lang_get( 'not_enough_data' ), 150, 100);
-			$txt->Align("center","center","center"); 
+			$txt->Align("center","center","center");
 			$txt->SetFont( $t_graph_font, FS_BOLD );
 			$graph->title->Set( $title );
 			$graph->title->SetFont( $t_graph_font, FS_BOLD );

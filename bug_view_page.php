@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.71 2005-01-15 02:40:51 thraxisp Exp $
+	# $Id: bug_view_page.php,v 1.72 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'compress_api.php' );
@@ -72,13 +72,13 @@
 
 	<!-- prev/next links -->
 	<?php if( $t_bugslist ) { ?>
-	<td class="center"><span class="small"> 			
-		<?php 
+	<td class="center"><span class="small">
+		<?php
 			$t_bugslist = explode( ',', $t_bugslist );
 			$t_index = array_search( $f_bug_id, $t_bugslist );
 			if( false !== $t_index ) {
-				if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;' ); 
-				if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' ); 
+				if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+				if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
 			}
 		?>
 	</span></td>
@@ -255,10 +255,10 @@
 
 	<!-- Product Version -->
 	<?php
-		$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
-			|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+		$t_show_version = ( ON == config_get( 'show_product_version' ) )
+			|| ( ( AUTO == config_get( 'show_product_version' ) )
 					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-		if ( $t_show_version ) { 
+		if ( $t_show_version ) {
 	?>
 	<td class="category">
 		<?php echo lang_get( 'product_version' ) ?>
@@ -273,7 +273,7 @@
 	</td>
 	<td>
 	</td>
-	<?php 
+	<?php
 		}
 	?>
 </tr>
@@ -425,6 +425,6 @@
 	if ( $f_history ) {
 		include( $t_mantis_dir . 'history_inc.php' );
 	}
-	
+
 	html_page_bottom1( __FILE__ );
 ?>

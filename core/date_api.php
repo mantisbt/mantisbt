@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: date_api.php,v 1.5 2004-04-08 18:04:53 prescience Exp $
+	# $Id: date_api.php,v 1.6 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Date API ###

@@ -1,4 +1,4 @@
-/* 
+/*
  * Mantis - a php based bugtracking system
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.5 2005-01-31 21:34:14 prichards Exp $
+ * $Id: common.js,v 1.6 2005-02-12 20:03:50 jlatour Exp $
  * --------------------------------------------------------
  */
 
@@ -16,8 +16,8 @@
  */
 
 function Trim( p_string ) {
-	if (typeof p_string != "string") { 
-		return p_string; 
+	if (typeof p_string != "string") {
+		return p_string;
 	}
 
 	var t_string = p_string;
@@ -127,10 +127,10 @@ function ToggleDiv( p_div, p_cookie_bit ) {
 /* Check checkboxes */
 function checkall( p_formname, p_state) {
 	var t_elements = (eval("document." + p_formname + ".elements"));
-	
-	for (var i = 0; i < t_elements.length; i++) { 
-    	if(t_elements[i].type == 'checkbox') { 
+
+	for (var i = 0; i < t_elements.length; i++) {
+    	if(t_elements[i].type == 'checkbox') {
       		t_elements[i].checked = p_state;
-   		} 
+   		}
   	}
 }

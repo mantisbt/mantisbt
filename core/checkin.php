@@ -7,7 +7,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: checkin.php,v 1.2 2004-09-30 18:26:38 thraxisp Exp $
+	# $Id: checkin.php,v 1.3 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	global $g_bypass_headers;
@@ -62,7 +62,7 @@
 	$t_history_new_value = '';
 
 	# Call the custom function to register the checkin on each issue.
-	foreach ( $t_issues as $t_issue_id ) { 
+	foreach ( $t_issues as $t_issue_id ) {
 		helper_call_custom_function( 'checkin', array( $t_issue_id, $t_comment, $t_history_old_value, $t_history_new_value ) );
 	}
 

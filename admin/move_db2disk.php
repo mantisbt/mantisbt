@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.4 2005-01-06 23:16:16 thraxisp Exp $
+	# $Id: move_db2disk.php,v 1.5 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,7 @@
 	#
 	# Re-running this is safe because the data
 	# is not removed from the database until it is successfully copied.
-	#	
+	#
 	function upgrade_move_att2disk($p_source) {
 		# $p_source is the string "attachment" or "project"
 		if ( $p_source == 'attachment' ) {
@@ -58,14 +58,14 @@
 			echo 'Failure: Internal Error: File source not set';
 			return;
 		}
-		
+
 		# check that the destination is set up properly
 		$t_upload_method = config_get( 'file_upload_method' );
 		if ( $t_upload_method <> DISK ) {
 			echo 'Failure: Upload Method is not DISK';
 			return;
 		}
-		
+
 		$query = 'SELECT * FROM ' . $t_file_table . ' WHERE content <> \'\'';
 
 		$result = @db_query( $query );
@@ -100,8 +100,8 @@
 			$t_file_path = project_get_field( $t_project_id, 'file_path' );
 			$prefix = get_prefix( $t_file_path );
 			$t_real_file_path = $prefix . $t_file_path;
-			$c_filename = file_clean_name($v_filename); 
-			
+			$c_filename = file_clean_name($v_filename);
+
 			printf("\n<tr %s><td>%8d</td><td>%s</td><td>", helper_alternate_class(), $t_bug_id, $v_filename);
 
 			if ( is_blank( $t_real_file_path ) || !file_exists( $t_real_file_path ) || !is_dir( $t_real_file_path ) || !is_writable( $t_real_file_path ) ) {
@@ -109,7 +109,7 @@
 				$t_failures++;
 			}else{
 				$t_file_name = $t_real_file_path . $c_filename;
-			
+
 				// write file to disk store after adjusting the path
 				if ( file_put_contents( $t_file_name, $v_content ) ){
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.33 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: account_prof_menu_page.php,v 1.34 2005-02-12 20:01:03 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,14 +17,14 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php
 	auth_ensure_user_authenticated();
-	
+
 	current_user_ensure_unprotected();
 ?>
 <?php

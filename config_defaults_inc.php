@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.240 2005-02-11 15:38:13 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.241 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -439,7 +439,7 @@
 	# -- show users with their real name or not
 	$g_show_realname = OFF;
 	$g_differentiate_duplicates = OFF;  # leave off for now
-	
+
 	# -- sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted with the "D"s
 	$g_sort_by_last_name = OFF;
 
@@ -464,7 +464,7 @@
 	# NOTE: these fonts need to be installed in the TTF_DIR as specified to jpgraph
 	$g_graph_font = '';
 
-	# what width is used to scale the graphs. 
+	# what width is used to scale the graphs.
 	$g_graph_window_width = 800;
 	# bar graph aspect ration (height / width)
 	$g_graph_bar_aspect = 0.9;
@@ -720,7 +720,7 @@
 	# do NOT include href or img tags here
 	# do NOT include tags that have parameters (eg. <font face="arial">)
 	$g_html_valid_tags		= 'p, li, ul, ol, br, pre, i, b, u';
-	
+
 	# maximum length of the description in a dropdown menu (for search)
 	# set to 0 to disable truncations
 	$g_max_dropdown_length = 40;
@@ -969,7 +969,7 @@
 
 	# access level needed to re-open bugs
 	$g_reopen_bug_threshold			= DEVELOPER;
-	
+
 	# access level needed to set a bug sticky
 	$g_set_bug_sticky_threshold			= MANAGER;
 
@@ -1485,7 +1485,7 @@
 	# the DOTFONTPATH environment variable in your webserver startup script
 	# or (2) use this config option conveniently available here. If you need
 	# to list more than one directory, use colons to separate them.
-	
+
 	# Since 0.19.3 we use the $g_system_font_folder variable to define the font folder
 
 	# Default dependency orientation. If you have issues with lots of childs

@@ -6,13 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.68 2005-01-15 02:40:50 thraxisp Exp $
+	# $Id: bug_view_advanced_page.php,v 1.69 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'file_api.php' );
@@ -71,12 +71,12 @@
 	<!-- prev/next links -->
 	<?php if( $t_bugslist ) { ?>
 	<td class="center"><span class="small">
-		<?php 
+		<?php
 			$t_bugslist = explode( ',', $t_bugslist );
 			$t_index = array_search( $f_bug_id, $t_bugslist );
 			if( false !== $t_index ) {
-				if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_advanced_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;' ); 
-				if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_advanced_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' ); 
+				if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_advanced_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
+				if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_advanced_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
 			}
 		?>
 	</span></td>
@@ -305,11 +305,11 @@
 	</td>
 
 	<!-- fixed in version -->
-		<?php 
-			$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
-					|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+		<?php
+			$t_show_version = ( ON == config_get( 'show_product_version' ) )
+					|| ( ( AUTO == config_get( 'show_product_version' ) )
 								&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-			if ( $t_show_version ) { 
+			if ( $t_show_version ) {
 		?>
 	<td class="category">
 		<?php echo lang_get( 'fixed_in_version' ) ?>
@@ -328,8 +328,8 @@
 			}
 		?>
 	<!-- Product Version or Product Build, if version is suppressed -->
-		<?php 
-			if ( $t_show_version ) { 
+		<?php
+			if ( $t_show_version ) {
 		?>
 	<td class="category">
 		<?php echo lang_get( 'product_version' ) ?>
@@ -435,7 +435,7 @@
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		if ( !custom_field_has_read_access( $t_id, $f_bug_id ) ) {
-			continue;			
+			continue;
 		} # has read access
 
 		$t_custom_fields_found = true;

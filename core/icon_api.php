@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: icon_api.php,v 1.11 2004-04-08 17:40:45 prescience Exp $
+	# $Id: icon_api.php,v 1.12 2005-02-12 20:01:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Icon API ###

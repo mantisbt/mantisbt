@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.89 $
-	# $Author: bigbadger $
-	# $Date: 2005-01-12 00:33:13 $
+	# $Revision: 1.90 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:04:10 $
 	#
-	# $Id: strings_french.txt,v 1.89 2005-01-12 00:33:13 bigbadger Exp $
+	# $Id: strings_french.txt,v 1.90 2005-02-12 20:04:10 jlatour Exp $
 	###########################################################################
 ?>
 <?php

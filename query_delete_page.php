@@ -8,7 +8,7 @@
 <?php
 	require_once( 'core.php' );
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'filter_api.php' );
 	require_once( $t_core_path.'current_user_api.php' );
@@ -22,11 +22,11 @@
 	$f_query_id = gpc_get_int( 'source_query_id' );
 	$t_redirect_url = 'query_view_page.php';
 	$t_delete_url = 'query_delete.php';
-	
+
 	if ( ! filter_db_can_delete_filter( $f_query_id ) ) {
 		print_header_redirect( $t_redirect_url );
 	}
-	
+
 	html_page_top1();
 	html_page_top2();
 ?>

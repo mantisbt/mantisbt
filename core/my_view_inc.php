@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.7 2005-01-14 00:36:57 thraxisp Exp $
+	# $Id: my_view_inc.php,v 1.8 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path . 'current_user_api.php' );
 	require_once( $t_core_path . 'bug_api.php' );
 	require_once( $t_core_path . 'string_api.php' );
@@ -48,7 +48,7 @@
 		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['assigned'] = 'handler_id=' . $t_current_user_id . '&hide_status=' . $t_bug_resolved_status_threshold;
-	
+
 	$c_filter['recent_mod'] = array(
 		'show_category'		=> Array ( '0' => '[any]' ),
 		'show_severity'		=> Array ( '0' => '[any]' ),
@@ -63,7 +63,7 @@
 		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['recent_mod'] = 'hide_status=none';
-	
+
 	$c_filter['reported'] = array(
 		'show_category'		=> Array ( '0' => '[any]' ),
 		'show_severity'		=> Array ( '0' => '[any]' ),
@@ -79,7 +79,7 @@
 		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['reported'] = 'reporter_id=' . $t_current_user_id . '&hide_status=' . $t_hide_status_default;
-	
+
 	$c_filter['resolved'] = array(
 		'show_category'		=> Array ( '0' => '[any]' ),
 		'show_severity'		=> Array ( '0' => '[any]' ),
@@ -94,7 +94,7 @@
 		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['resolved'] = 'show_status=' . $t_bug_resolved_status_threshold . '&hide_status=' . $t_bug_resolved_status_threshold;
-	
+
 	$c_filter['unassigned'] = array(
 		'show_category'		=> Array ( '0' => '[any]' ),
 		'show_severity'		=> Array ( '0' => '[any]' ),
@@ -109,7 +109,7 @@
 		'user_monitor'		=> Array ( '0' => '[any]' )
 	);
 	$url_link_parameters['unassigned'] = 'handler_id=[none]' . '&hide_status=' . $t_hide_status_default;
-	
+
 	$c_filter['monitored'] = array(
 		'show_category'		=> Array ( '0' => '[any]' ),
 		'show_severity'		=> Array ( '0' => '[any]' ),
@@ -124,9 +124,9 @@
 		'user_monitor'		=> Array ( '0' => $t_current_user_id )
 	);
 	$url_link_parameters['monitored'] = 'user_monitor=' . $t_current_user_id . '&hide_status=' . $t_hide_status_default;
-	
+
         $rows = filter_get_bug_rows ( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title]  );
-	
+
         $box_title = lang_get( 'my_view_title_' . $t_box_title );
 ?>
 

@@ -8,7 +8,7 @@
 <?php
 	require_once( 'core.php' );
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'filter_api.php' );
 	require_once( $t_core_path.'current_user_api.php' );
@@ -28,7 +28,7 @@
 
 	$t_sort = $t_filter['sort'];
 	$t_dir = $t_filter['dir'];
-	
+
 	$t_current_user_access_level = current_user_get_access_level();
 	$t_accessible_custom_fields_ids = array();
 	$t_accessible_custom_fields_names = array();
@@ -56,7 +56,7 @@
 			$t_per_row = config_get( 'filter_custom_fields_per_row' );
 			$t_custom_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
 		}
-	}		
+	}
 
 	$f_for_screen = gpc_get_bool( 'for_screen', true );
 
@@ -64,7 +64,7 @@
 	$t_dir = $t_filter['dir'];
 	$t_action  = "view_all_set.php?f=3";
 
-	if ( $f_for_screen == false ) 
+	if ( $f_for_screen == false )
 	{
 		$t_action  = "view_all_set.php";
 	}
@@ -85,7 +85,7 @@
 	$t_select_modifier = '';
 	if ( 'advanced' == $f_view_type ) {
 		$t_select_modifier = 'multiple="multiple" size="10" ';
-	}	
+	}
 
 	#
 	# Controller
@@ -94,7 +94,7 @@
 		if(isset($_GET['filter_target'])){
 			$filter = $_GET['filter_target'];
 			$t_functionName = 'print_filter_'. substr($filter,0,-7);
-			echo "<!-- $filter -->";			
+			echo "<!-- $filter -->";
 			if(function_exists($t_functionName)){
 				call_user_func($t_functionName);
 			}elseif('custom_field' == substr($filter, 0, 12)){

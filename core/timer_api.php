@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: timer_api.php,v 1.7 2004-04-08 18:04:53 prescience Exp $
+	# $Id: timer_api.php,v 1.8 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Timer API ###

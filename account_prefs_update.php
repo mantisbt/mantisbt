@@ -6,20 +6,20 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.34 2004-08-08 11:39:00 jlatour Exp $
+	# $Id: account_prefs_update.php,v 1.35 2005-02-12 20:01:03 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Updates prefs then redirect to account_prefs_page.php3
 ?>
-<?php 
+<?php
 	require_once( 'core.php' );
-		
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'user_pref_api.php' );
 ?>
-<?php 
+<?php
 	auth_ensure_user_authenticated();
 ?>
 <?php
@@ -66,7 +66,7 @@
 	$t_prefs->email_on_bugnote_minimum_severity		= gpc_get_int( 'email_on_bugnote_minimum_severity' );
 	$t_prefs->email_on_status_minimum_severity		= gpc_get_int( 'email_on_status_minimum_severity' );
 	$t_prefs->email_on_priority_minimum_severity	= gpc_get_int( 'email_on_priority_minimum_severity' );
-	
+
 	$t_prefs->bugnote_order = gpc_get_string( 'bugnote_order' );
 	$t_prefs->email_bugnote_limit = gpc_get_int( 'email_bugnote_limit' );
 

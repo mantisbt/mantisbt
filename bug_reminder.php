@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.17 2004-10-17 00:28:13 thraxisp Exp $
+	# $Id: bug_reminder.php,v 1.18 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'email_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
@@ -39,7 +39,7 @@
 	{
 		if ( ON == config_get( 'reminder_recipents_monitor_bug' ) &&
 			access_has_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id ) &&
-			!bug_is_user_handler( $f_bug_id, $t_recipient ) && 
+			!bug_is_user_handler( $f_bug_id, $t_recipient ) &&
 			!bug_is_user_reporter( $f_bug_id, $t_recipient ) ) {
 			bug_monitor( $f_bug_id, $t_recipient );
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.35 2004-12-11 20:22:24 prichards Exp $
+	# $Id: core.php,v 1.36 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -51,7 +51,7 @@
 	}
 
 
-	# Attempt to find the location of the core files.	
+	# Attempt to find the location of the core files.
 	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
 	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
 		$t_core_path = $g_core_path;
@@ -66,7 +66,7 @@
 	require_once( $t_core_path.'utility_api.php' );
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'tokens_api.php' );
-	
+
 	# Load internationalization functions (needed before database_api, in case database connection fails)
 	require_once( $t_core_path.'lang_api.php' );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.44 2005-02-08 16:11:19 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.45 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -126,7 +126,7 @@
 	$f_dir_1				= gpc_get_string( 'dir_1', 'DESC' );
 	$f_sort_2				= gpc_get_string( 'sort_2', '' );
 	$f_dir_2				= gpc_get_string( 'dir_2', '' );
-	
+
 	# date values
 	$f_start_month			= gpc_get_string( 'start_month', date( 'm' ) );
 	$f_end_month			= gpc_get_string( 'end_month', date( 'm' ) );
@@ -155,7 +155,7 @@
 	if ( $f_temp_filter ) {
 		$f_type = 1;
 	}
-	
+
 	if ( $f_and_not_assigned ) {
 		$f_and_not_assigned = 'on';
 	}
@@ -163,7 +163,7 @@
 	if ( $f_do_filter_by_date ) {
 		$f_do_filter_by_date = 'on';
 	}
-	
+
 	if ( $f_sticky_issues ) {
 		$f_sticky_issues = 'on';
 	} else {
@@ -175,13 +175,13 @@
 	}
 
 	$t_hide_status_default = config_get( 'hide_status_default' );
-	
+
 	# show bugs per page
 	if ( $f_per_page < 1 ) {
 		$f_per_page = config_get( 'default_limit_view' );
 	}
-	
-	# combine sort settings 
+
+	# combine sort settings
 	#  (f_sort overrides f_sort_1 if set to keep old sorting code working in view_all_bug_inc)
 	$f_sort = ( ( $f_sort_d != "" ) ? $f_sort_d : $f_sort_1 ) . ( ( $f_sort_2 != "" ) ? "," . $f_sort_2 : "" );
 	$f_dir = ( ( $f_dir_d != "" ) ? $f_dir_d : $f_dir_1 ) . ( ( $f_dir_2 != "" ) ? "," . $f_dir_2 : "" );
@@ -189,8 +189,8 @@
 	# -1 is a special case stored query: it means we want to reset our filter
 	if ( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 		$f_type = 0;
-	} 
-	
+	}
+
 /*   array contents
      --------------
 	 0: version
@@ -225,7 +225,7 @@
 	$t_old_setting_arr	= explode( '#', $t_view_all_cookie, 2 );
 
 	$t_setting_arr = array();
-	
+
 	# If we're not going to reset the cookie, make sure it's valid
 	if ( $f_type != 0 ) {
 		$t_cookie_vers = (int) substr( $t_old_setting_arr[0], 1 );
@@ -236,7 +236,7 @@
 		if ( isset( $t_old_setting_arr[1] ) ) {
 			$t_setting_arr = unserialize( $t_old_setting_arr[1] );
 		}
-	
+
 		if ( isset($t_setting_arr['highlight_changed']) ) {
 			check_varset( $f_highlight_changed, $t_setting_arr['highlight_changed'] );
 		} else {
@@ -349,11 +349,11 @@
 		$t_project_id = helper_get_current_project();
 		$t_project_id = ( $t_project_id * -1 );
 		$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
-	
+
 		# set cookie values
 		gpc_set_cookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
 	}
-	
+
 	# redirect to print_all or view_all page
 	if ( $f_print ) {
 		$t_redirect_url = 'print_all_bug_page.php';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_anon.php,v 1.14 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: login_anon.php,v 1.15 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php

@@ -8,12 +8,12 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: copy_field.php,v 1.2 2004-07-25 20:56:34 thraxisp Exp $
+	# $Id: copy_field.php,v 1.3 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-	
+
 	$f_source_field_id = gpc_get_int( 'source_id' );
 	$f_dest_field = gpc_get( 'dest_id' );
 ?>
@@ -73,7 +73,7 @@
 			# trace bug id back to project
 			$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
 			$t_cust_value = $v_value;
-			printf("\n<tr %s><td><a href=\"../view.php?id=%d\">%07d</a></td><td>%s</td><td>", 
+			printf("\n<tr %s><td><a href=\"../view.php?id=%d\">%07d</a></td><td>%s</td><td>",
 					helper_alternate_class(), $v_bug_id, $v_bug_id, $v_value);
 
 			# validate field contents

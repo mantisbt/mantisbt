@@ -13,7 +13,7 @@
 //| Authors: Michael Wimmer <flaimo@gmx.net>                             |
 //+----------------------------------------------------------------------+
 //
-// $Id: class.RSSBuilder.inc.php,v 1.2 2004-06-16 04:29:09 robertjf Exp $
+// $Id: class.RSSBuilder.inc.php,v 1.3 2005-02-12 20:01:10 jlatour Exp $
 
 /**
 * @package RSSBuilder

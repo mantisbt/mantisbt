@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.106 2005-01-17 01:40:38 thraxisp Exp $
+	# $Id: email_api.php,v 1.107 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -244,7 +244,7 @@
 		unset( $t_status_change[FEEDBACK] );
 		unset( $t_status_change[RESOLVED] );
 		unset( $t_status_change[CLOSED] );
-		
+
 		if ( $p_notify_type = 'owner' ) {
 			$t_pref_field = 'email_on_assigned';
 		} else if ( in_array( $p_notify_type, $t_status_change ) ) {
@@ -293,7 +293,7 @@
 					}
 				}
 			}
-			
+
 			# check that user can see bugnotes if the last update included a bugnote
 			if ( $t_bug_date == $t_bugnote_date ) {
 				if ( !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id ) ) {
@@ -598,7 +598,7 @@
 
 		# short-circuit if no recipient is defined, or email disabled
 		# note that this may cause signup messages not to be sent
-		
+
 		if ( is_blank( $p_recipient ) || ( OFF == config_get( 'enable_email_notification' ) ) ) {
 			return;
 		}
@@ -620,7 +620,7 @@
 		$mail = new PHPMailer;
 
 		$mail->PluginDir = PHPMAILER_PATH;
-		# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp) 
+		# @@@ should this be the current language (for the recipient) or the default one (for the user running the command) (thraxisp)
 		$mail->SetLanguage( lang_get( 'phpmailer_language', lang_get_current() ), PHPMAILER_PATH . 'language' . DIRECTORY_SEPARATOR );
 
 		# Select the method to send mail

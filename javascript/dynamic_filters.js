@@ -1,4 +1,4 @@
-/* 
+/*
  * Mantis - a php based bugtracking system
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: dynamic_filters.js,v 1.2 2004-12-13 23:13:39 thraxisp Exp $
+ * $Id: dynamic_filters.js,v 1.3 2005-02-12 20:03:50 jlatour Exp $
  * --------------------------------------------------------
  */
 /*
@@ -55,7 +55,7 @@
 // | In another instance, I use this to product live comments by passing  |
 // | the text to a Textile class that parses it to valid HTML. After      |
 // | parsing, the html is returned and displayed on the page as the       |
-// | user types.                                                          | 
+// | user types.                                                          |
 // +----------------------------------------------------------------------+
 //
 //
@@ -75,7 +75,7 @@
 //
 */
 
-	
+
 var processURI    = './return_dynamic_filters.php';
 var liveReq = false;
 
@@ -98,7 +98,7 @@ function liveReqDoReq() {
 	} else if (window.ActiveXObject) {
 		liveReq = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	
+
 	name = this.id;
 	liveReq.onreadystatechange = function(){liveReqProcessReqChange(name);};
 	t_view = document.getElementById('filters_form').elements['view_type'].value;
@@ -126,7 +126,7 @@ function liveReqProcessReqChange(name) {
  * Strip the tag, leave the content.
  */
 function replaceWithContent(id){
-	tag = document.getElementById(id);	
+	tag = document.getElementById(id);
 	if (!tag) return false;
 	t_parent = tag.parentNode;
 	if (!t_parent) return false;
@@ -141,15 +141,15 @@ function replaceWithContent(id){
  * Initialise the filter links
  */
 function labelInit(){
-	// keep browsers that don't support DOM or 
+	// keep browsers that don't support DOM or
 	// XMLHttpRequest from getting in trouble
 	if (document.getElementById && 	(window.XMLHttpRequest || window.ActiveXObject)) {
-		
+
 		t_form = document.getElementById("filters_form");
 		if (!t_form) return false;
 		t_links = t_form.getElementsByTagName("a");
 		if (!t_links) return false;
-		
+
 		for(var i=0; i < t_links.length; i++){
 			var t_link = t_links[i];
 			if (t_link.id.substring((t_link.id.length - 7), t_link.id.length) == "_filter"){

@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_edit_page.php,v 1.39 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: news_edit_page.php,v 1.40 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>

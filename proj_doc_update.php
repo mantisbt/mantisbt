@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_update.php,v 1.25 2004-12-18 13:53:35 marcelloscata Exp $
+	# $Id: proj_doc_update.php,v 1.26 2005-02-12 20:01:07 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_reset.php,v 1.25 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_prefs_reset.php,v 1.26 2005-02-12 20:01:03 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -25,9 +25,9 @@
 	#	- User must not be protected
 
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'user_pref_api.php' );
 
 	#============ Parameters ============

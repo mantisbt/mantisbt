@@ -89,8 +89,8 @@ REMOVE the default administrator account.
 4. The next part involves configuring the installation to work with your
 specific setup.
 
-In the installation directory, locate config_inc.php.sample and copy it to 
-config_inc.php. 
+In the installation directory, locate config_inc.php.sample and copy it to
+config_inc.php.
 Open the file in an editor and edit the values to match your settings.  The
 sample file contains only essential settings.  There are many more that
 you can use to customize your Mantis installation.  See the customization.html

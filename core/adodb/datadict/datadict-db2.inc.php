@@ -2,28 +2,28 @@
 
 /**
   V4.60 24 Jan 2005  (c) 2000-2005 John Lim (jlim@natsoft.com.my). All rights reserved.
-  Released under both BSD license and Lesser GPL library license. 
-  Whenever there is any discrepancy between the two licenses, 
+  Released under both BSD license and Lesser GPL library license.
+  Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-	
+
   Set tabs to 4 for best viewing.
- 
+
 */
 // security - hide paths
 if (!defined('ADODB_DIR')) die();
 
 class ADODB2_db2 extends ADODB_DataDict {
-	
+
 	var $databaseType = 'db2';
 	var $seqField = false;
-	
+
  	function ActualType($meta)
 	{
 		switch($meta) {
 		case 'C': return 'VARCHAR';
 		case 'XS':
 		case 'XL': return 'CLOB';
-		case 'X': return 'VARCHAR(3600)'; 
+		case 'X': return 'VARCHAR(3600)';
 
 		case 'C2': return 'VARCHAR'; // up to 32K
 		case 'X2': return 'VARCHAR(3600)'; // up to 32000, but default page size too small
@@ -46,12 +46,12 @@ class ADODB2_db2 extends ADODB_DataDict {
 			return $meta;
 		}
 	}
-	
+
 	// return string must begin with space
 	function _CreateSuffix($fname,$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint)
-	{	
+	{
 		$suffix = '';
-		if ($fautoinc) return ' GENERATED ALWAYS AS IDENTITY'; # as identity start with 
+		if ($fautoinc) return ' GENERATED ALWAYS AS IDENTITY'; # as identity start with
 		if (strlen($fdefault)) $suffix .= " DEFAULT $fdefault";
 		if ($fnotnull) $suffix .= ' NOT NULL';
 		if ($fconstraint) $suffix .= ' '.$fconstraint;
@@ -63,37 +63,37 @@ class ADODB2_db2 extends ADODB_DataDict {
 		if ($this->debug) ADOConnection::outp("AlterColumnSQL not supported");
 		return array();
 	}
-	
-	
+
+
 	function DropColumnSQL($tabname, $flds)
 	{
 		if ($this->debug) ADOConnection::outp("DropColumnSQL not supported");
 		return array();
 	}
-	
-	
+
+
 	function xChangeTableSQL($tablename, $flds, $tableoptions = false)
 	{
-		
+
 		/**
 		  Allow basic table changes to DB2 databases
-		  DB2 will fatally reject changes to non character columns 
+		  DB2 will fatally reject changes to non character columns
 
 		*/
-		
+
 		$validTypes = array("CHAR","VARC");
 		$invalidTypes = array("BIGI","BLOB","CLOB","DATE", "DECI","DOUB", "INTE", "REAL","SMAL", "TIME");
 		// check table exists
 		$cols = &$this->MetaColumns($tablename);
-		if ( empty($cols)) { 
+		if ( empty($cols)) {
 			return $this->CreateTableSQL($tablename, $flds, $tableoptions);
 		}
-		
+
 		// already exists, alter table instead
 		list($lines,$pkey) = $this->_GenFields($flds);
 		$alter = 'ALTER TABLE ' . $this->TableName($tablename);
 		$sql = array();
-		
+
 		foreach ( $lines as $id => $v ) {
 			if ( isset($cols[$id]) && is_object($cols[$id]) ) {
 				/**
@@ -110,10 +110,10 @@ class ADODB2_db2 extends ADODB_DataDict {
 				for ($i=1;$i<sizeof($vargs);$i++)
 					if ($vargs[$i] != '')
 						break;
-				
+
 				// if $vargs[$i] is one of the following, we are trying to change the
 				// size of the field, if not allowed, simply ignore the request.
-				if (in_array(substr($vargs[$i],0,4),$invalidTypes)) 
+				if (in_array(substr($vargs[$i],0,4),$invalidTypes))
 					continue;
 				// insert the appropriate DB2 syntax
 				if (in_array(substr($vargs[$i],0,4),$validTypes)) {
@@ -128,16 +128,16 @@ class ADODB2_db2 extends ADODB_DataDict {
 						break;
 					array_splice($vargs,$i,2,'');
 				}
-				$v = implode(' ',$vargs);	
+				$v = implode(' ',$vargs);
 				$sql[] = $alter . $this->alterCol . ' ' . $v;
 			} else {
 				$sql[] = $alter . $this->addCol . ' ' . $v;
 			}
 		}
-		
+
 		return $sql;
 	}
-	
+
 }
 
 

@@ -13,7 +13,7 @@
 
 
 // added Claudio Bustos  clbustos#entelchile.net
-if (!defined('ADODB_ERROR_HANDLER_TYPE')) define('ADODB_ERROR_HANDLER_TYPE',E_USER_ERROR); 
+if (!defined('ADODB_ERROR_HANDLER_TYPE')) define('ADODB_ERROR_HANDLER_TYPE',E_USER_ERROR);
 
 if (!defined('ADODB_ERROR_HANDLER')) define('ADODB_ERROR_HANDLER','ADODB_Error_Handler');
 
@@ -74,6 +74,6 @@ function ADODB_Error_Handler($dbms, $fn, $errno, $errmsg, $p1, $p2, &$thisConnec
 
 
 	//print "<p>$s</p>";
-	trigger_error($s,ADODB_ERROR_HANDLER_TYPE); 
+	trigger_error($s,ADODB_ERROR_HANDLER_TYPE);
 }
 ?>

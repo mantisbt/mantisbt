@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_by_daily_delta.php,v 1.8 2004-03-05 01:26:19 jlatour Exp $
+	# $Id: graph_by_daily_delta.php,v 1.9 2005-02-12 20:03:48 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( '../core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'graph_api.php' );
 ?>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.83 2004-10-13 23:35:07 thraxisp Exp $
+	# $Id: bug_update_advanced_page.php,v 1.84 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -228,8 +228,8 @@
 		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
-		<?php print_status_option_list( 'status', $t_bug->status, 
-						( $t_bug->reporter_id == auth_get_current_user_id() && 
+		<?php print_status_option_list( 'status', $t_bug->status,
+						( $t_bug->reporter_id == auth_get_current_user_id() &&
 								( ON == config_get( 'allow_reporter_close' ) ) ), $t_bug->project_id ) ?>
 	</td>
 
@@ -301,17 +301,17 @@
 
 	<td class="category">
 		<?php
-			$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
-					|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+			$t_show_version = ( ON == config_get( 'show_product_version' ) )
+					|| ( ( AUTO == config_get( 'show_product_version' ) )
 								&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-			if ( $t_show_version ) { 
-				echo lang_get( 'fixed_in_version' ); 
+			if ( $t_show_version ) {
+				echo lang_get( 'fixed_in_version' );
 			}
 		?>
 	</td>
 	<td>
 		<?php
-			if ( $t_show_version ) { 
+			if ( $t_show_version ) {
 		?>
 		<select name="fixed_in_version">
 			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
@@ -323,8 +323,8 @@
 
 	<!-- Product Version  or Product Build, if version is suppressed -->
 	<td class="category">
-		<?php 
-			if ( $t_show_version ) { 
+		<?php
+			if ( $t_show_version ) {
 				echo lang_get( 'product_version' );
 			}else{
 				echo lang_get( 'build' );
@@ -332,8 +332,8 @@
 		?>
 	</td>
 	<td>
-		<?php 
-			if ( $t_show_version ) { 
+		<?php
+			if ( $t_show_version ) {
 		?>
 		<select name="version">
 			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
@@ -345,13 +345,13 @@
 		<?php
 			}
 		?>
-		
+
 	</td>
 
 </tr>
 
-<?php 
-	if ( $t_show_version ) { 
+<?php
+	if ( $t_show_version ) {
 ?>
 
 <tr <?php echo helper_alternate_class() ?>>
@@ -435,7 +435,7 @@
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 		if( ( $t_def['display_update'] || $t_def['require_update']) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
-			$t_custom_fields_found = true;			
+			$t_custom_fields_found = true;
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">

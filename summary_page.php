@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.42 2004-10-20 01:11:02 narcissus Exp $
+	# $Id: summary_page.php,v 1.43 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'summary_api.php' );
 ?>
 <?php
@@ -61,7 +61,7 @@
 		if ( $t_status <> $t_clo_val ) {
 			$query2 = "SELECT date_modified
 				FROM " . $t_history_table . "
-				WHERE bug_id=$t_id AND type=" . NORMAL_TYPE . 
+				WHERE bug_id=$t_id AND type=" . NORMAL_TYPE .
 							" AND field_name='status' AND new_value='$t_clo_val'
 				ORDER BY date_modified DESC";
 			$result2 = db_query( $query2 );
@@ -70,7 +70,7 @@
 				$row2 = db_fetch_array( $result2 );
 				$t_last_updated   = db_unixtimestamp( $row2['date_modified'] );
 			}
-		}		
+		}
 
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated   = 0;
@@ -92,7 +92,7 @@
 	$t_largest_diff 	= number_format( $t_largest_diff / 86400, 2 );
 	$t_total_time		= number_format( $t_total_time / 86400, 2 );
 	$t_average_time 	= number_format( $t_average_time / 86400, 2 );
-	
+
 	$t_orct_arr = preg_split( '/[\)\/\(]/', lang_get( 'orct' ), -1, PREG_SPLIT_NO_EMPTY );
 
 	$t_orcttab = "";
@@ -325,7 +325,7 @@
 				echo ucwords( get_enum_element( 'resolution', $c_s[0] ) );
 				print '</td>';
 			}
-			
+
 			print '<td>';
 			print lang_get( 'percentage_errors' );
 			print '</td>';
@@ -355,7 +355,7 @@
 				echo ucwords( get_enum_element( 'resolution', $c_s[0] ) );
 				print '</td>';
 			}
-			
+
 			print '<td>';
 			print lang_get( 'percentage_fixed' );
 			print '</td>';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_escaping.php,v 1.2 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: upgrade_escaping.php,v 1.3 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php

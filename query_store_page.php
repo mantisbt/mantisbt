@@ -8,7 +8,7 @@
 <?php
 	require_once( 'core.php' );
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'filter_api.php' );
 	require_once( $t_core_path.'current_user_api.php' );
@@ -28,21 +28,21 @@
 <?php
 	$t_query_to_store = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
 	$t_query_arr = filter_db_get_available_queries();
-	
+
 	# Let's just see if any of the current filters are the
 	# same as the one we're about the try and save
 	foreach( $t_query_arr as $t_id => $t_name ) {
 		if ( filter_db_get_filter( $t_id ) == $t_query_to_store ) {
 			print lang_get( 'query_exists' ) . ' (' . $t_name . ')<br />';
 		}
-	} 
-	
+	}
+
 	# Check for an error
 	$t_error_msg = gpc_get_string( 'error_msg', null );
 	if ( $t_error_msg != null ) {
 		print "<br />$t_error_msg<br /><br />";
 	}
-	
+
 	print lang_get( 'query_name' ) . ': ';
 ?>
 	<form method="POST" action="query_store.php">

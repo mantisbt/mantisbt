@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_page.php,v 1.18 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: account_prefs_page.php,v 1.19 2005-02-12 20:01:03 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -29,9 +29,9 @@
 	#	- The user's account must not be protected
 
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 
 	#============ Parameters ============

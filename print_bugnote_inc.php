@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.31 2005-01-13 20:51:21 thraxisp Exp $
+	# $Id: print_bugnote_inc.php,v 1.32 2005-02-12 20:01:07 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php

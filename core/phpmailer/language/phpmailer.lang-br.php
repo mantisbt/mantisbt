@@ -1,6 +1,6 @@
 <?php
 /**
- * PHPMailer language file.  
+ * PHPMailer language file.
  * Portuguese Version
  * By Paulo Henrique Garcia - paulo@controllerweb.com.br
  */

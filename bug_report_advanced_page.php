@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.45 2004-10-24 19:04:36 thraxisp Exp $
+	# $Id: bug_report_advanced_page.php,v 1.46 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -386,7 +386,7 @@
 
 
 <!-- File Upload (if enabled) -->
-<?php if ( file_allow_bug_upload() ) { 
+<?php if ( file_allow_bug_upload() ) {
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
 <tr <?php echo helper_alternate_class() ?>>

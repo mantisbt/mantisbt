@@ -1,10 +1,10 @@
 <?php
-/* 
+/*
 version V4.54 5 Nov 2004 (c) 2000-2004  John Lim (jlim@natsoft.com.my).  All rights
 reserved.
-  Released under both BSD license and Lesser GPL library license. 
-  Whenever there is any discrepancy between the two licenses, 
-  the BSD license will take precedence. 
+  Released under both BSD license and Lesser GPL library license.
+  Whenever there is any discrepancy between the two licenses,
+  the BSD license will take precedence.
 Set tabs to 4 for best viewing.
 
   Latest version is available at http://adodb.sourceforge.net
@@ -30,7 +30,7 @@ Set tabs to 4 for best viewing.
 		.
 	   'VALUES (\'test\', ' . $blobVarName . ')');
 
-	 instead of loading blob from a file, you can also load from 
+	 instead of loading blob from a file, you can also load from
 	  an unformatted (raw) blob variable:
 	  $dbcon->load_blobvar_from_var($blobVarName, $varName);
 
@@ -53,9 +53,9 @@ if (!defined('ADODB_SYBASE_SQLANYWHERE')){
  define('ADODB_SYBASE_SQLANYWHERE',1);
 
  class ADODB_sqlanywhere extends ADODB_odbc {
-  	var $databaseType = "sqlanywhere";	
+  	var $databaseType = "sqlanywhere";
 	var $hasInsertID = true;
-	
+
 	function ADODB_sqlanywhere()
 	{
 		$this->ADODB_odbc();
@@ -152,9 +152,9 @@ if (!defined('ADODB_SYBASE_SQLANYWHERE')){
   }
  }; //class
 
- class  ADORecordSet_sqlanywhere extends ADORecordSet_odbc {	
+ class  ADORecordSet_sqlanywhere extends ADORecordSet_odbc {
 
-  var $databaseType = "sqlanywhere";		
+  var $databaseType = "sqlanywhere";
 
  function ADORecordSet_sqlanywhere($id,$mode=false)
  {

@@ -10,11 +10,11 @@ V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reser
 
    1. When selecting (joining) multiple tables, in assoc mode the table
    	  names are included in the assoc keys in the "sqlite" driver.
-	  
-	  In "sqlitepo" driver, the table names are stripped from the returned column names. 
+
+	  In "sqlitepo" driver, the table names are stripped from the returned column names.
 	  When this results in a conflict,  the first field get preference.
 
-	Contributed by Herman Kuiper  herman#ozuzo.net  
+	Contributed by Herman Kuiper  herman#ozuzo.net
 */
 
 if (!defined('ADODB_DIR')) die();
@@ -42,7 +42,7 @@ class ADORecordset_sqlitepo extends ADORecordset_sqlite {
    {
       $this->ADORecordset_sqlite($queryID,$mode);
    }
-   
+
    // Modified to strip table names from returned fields
    function _fetch($ignore_fields=false)
    {

@@ -6,17 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_page.php,v 1.17 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: manage_custom_field_page.php,v 1.18 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
-<?php 
+<?php
 	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
 	html_page_top1( lang_get( 'manage_custom_field_link' ) );
@@ -53,7 +53,7 @@
 			<?php echo lang_get( 'custom_field_advanced' ) ?>
 		</td>
 	</tr>
-	<?php 
+	<?php
 		$t_custom_fields = custom_field_get_ids();
 		foreach( $t_custom_fields as $t_field_id )
 		{
@@ -80,7 +80,7 @@
 			</td>
 		</tr>
 	<?php
-		} # Create Form END 
+		} # Create Form END
 	?>
 </table>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.11 2005-01-27 13:45:31 vboctor Exp $
+	# $Id: changelog_page.php,v 1.12 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

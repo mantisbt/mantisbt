@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_reset.php,v 1.12 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: print_all_bug_options_reset.php,v 1.13 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
@@ -31,9 +31,9 @@
 	# get the fields list
 	$t_field_name_arr = get_field_names();
 	$field_name_count = count($t_field_name_arr);
-	
+
 	# create a default array, same size than $t_field_name
-	for ($i=0 ; $i<$field_name_count ; $i++) { 
+	for ($i=0 ; $i<$field_name_count ; $i++) {
 		$t_default_arr[$i] = 0 ;
 	}
 	$t_default = implode('',$t_default_arr) ;

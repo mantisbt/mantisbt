@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lost_pwd_page.php,v 1.3 2004-10-25 19:45:04 marcelloscata Exp $
+	# $Id: lost_pwd_page.php,v 1.4 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 	# ======================================================================
 	# Author: Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY

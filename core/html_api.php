@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.146 2005-01-24 14:18:42 thraxisp Exp $
+	# $Id: html_api.php,v 1.147 2005-02-12 20:01:11 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -717,19 +717,19 @@
 				$t_specific_where
 				GROUP BY status";
 		$result = db_query( $query );
-		
+
 		$t_bug_count = 0;
 		$t_status_count_array = array();
 
 		while ( $row = db_fetch_array( $result ) ) {
-			
-			$t_status_count_array[ $row['status'] ] = $row['number']; 
+
+			$t_status_count_array[ $row['status'] ] = $row['number'];
 			$t_bug_count += $row['number'];
 		}
-		
+
 		$t_arr		= explode_enum_string( config_get( 'status_enum_string' ) );
 		$enum_count	= count( $t_arr );
-		
+
 		if ( $t_bug_count > 0 ) {
 			echo '<br />';
 			echo '<table class="width100" cellspacing="1">';
@@ -742,7 +742,7 @@
 				$t_s = explode_enum_arr( $t_arr[$i] );
 				$t_color = get_status_color( $t_s[0] );
 				$t_status = $t_s[0];
-		
+
 				if ( !isset( $t_status_count_array[ $t_status ] ) ) {
 					$t_status_count_array[ $t_status ] = 0;
 				}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.30 2004-12-18 01:19:02 thraxisp Exp $
+	# $Id: obsolete.php,v 1.31 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Obsolete API ###
@@ -86,12 +86,12 @@
 	config_obsolete( 'summary_pad', '' );
 
 	config_obsolete( 'show_project_in_title', '' );
-	
+
 # removed in 0.19
 	config_obsolete( 'hide_closed_default', 'hide_status_default' );
 
 	config_obsolete( 'close_bug_threshold', 'set_status_threshold' );
-	
+
 	config_obsolete( 'status_pulldown_enum_mask_string', '' );
 	config_obsolete( 'to_email', '' );
 	config_obsolete( 'use_bcc', '' );
@@ -101,5 +101,5 @@
 
 # changes in 0.19.3
 	config_obsolete( 'relationship_graph_fontpath', 'system_font_folder' );
-	
+
 ?>

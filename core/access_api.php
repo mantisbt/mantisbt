@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.33 2004-12-08 13:43:59 marcelloscata Exp $
+	# $Id: access_api.php,v 1.34 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -392,7 +392,7 @@
 	# Data Access
 	#===================================
 
-	# get the user's access level specific to this project. 
+	# get the user's access level specific to this project.
 	# return false (0) if the user has no access override here
 	function access_get_local_level( $p_user_id, $p_project_id ) {
 		$p_project_id = (int)$p_project_id; # 000001 is different from 1.
@@ -408,7 +408,7 @@
 
 	# --------------------
 	# get the access level required to change the issue to the new status
-	#  If there is no specific differentiated access level, use the 
+	#  If there is no specific differentiated access level, use the
 	#  generic update_bug_status_threshold
 	function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) {
 		$t_thresh_array = config_get( 'set_status_threshold' );

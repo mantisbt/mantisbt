@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.3 2004-12-12 20:35:00 bpfennigschmidt Exp $
+	# $Id: 0_19_inc.php,v 1.4 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,7 +26,7 @@
 			'Add note_attr column to bugnote',
 			"ALTER TABLE $t_bugnote_table ADD note_attr VARCHAR(250) default ''" );
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'tokensdb-1',
 			'Add mantis_tokens_table',
 			"CREATE TABLE $t_tokens_table (

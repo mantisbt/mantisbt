@@ -1,5 +1,5 @@
 <?php
-// Italian language file contributed by Tiraboschi Massimiliano aka TiMax  
+// Italian language file contributed by Tiraboschi Massimiliano aka TiMax
 // www.maxdev.com  timax@maxdev.com
 $ADODB_LANG_ARRAY = array (
             'LANG'                      => 'it',

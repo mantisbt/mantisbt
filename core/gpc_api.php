@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.31 2005-01-12 19:23:38 thraxisp Exp $
+	# $Id: gpc_api.php,v 1.32 2005-02-12 20:01:11 jlatour Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -69,7 +69,7 @@
 		if ( is_array( $t_result ) ) {
 			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
-		} 
+		}
 		$t_val = str_replace( " ", "", trim( $t_result ) );
 		if ( ! preg_match( "/^-?([0-9])*$/", $t_val ) ) {
 			error_parameters( $p_var_name );
@@ -99,13 +99,13 @@
 	#===================================
 	# Custom Field Functions
 	#===================================
-	
+
 	# ------------------
 	# Retrieve a custom field variable.  Uses gpc_get().
 	#  If you pass in *no* default, an error will be triggered if
 	#  the variable does not exist
 	function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = null ) {
-		switch ($p_custom_field_type ) { 
+		switch ($p_custom_field_type ) {
 			case CUSTOM_FIELD_TYPE_MULTILIST:
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
 				$t_values = gpc_get_string_array( $p_var_name, $p_default );
@@ -249,18 +249,18 @@
 		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_COOKIE;
 		}
-		
+
 		if ( null === $p_path ) {
 			$p_path = config_get( 'cookie_path' );
 		}
 		if ( null === $p_domain ) {
 			$p_domain = config_get( 'cookie_domain' );
 		}
-	
+
 		if ( isset( $_COOKIE[$p_name] ) ) {
 			unset( $_COOKIE[$p_name] ) ;
 		}
-		
+
 		return setcookie( $p_name, '', -1, $p_path, $p_domain );
 	}
 

@@ -8,12 +8,12 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: workflow.php,v 1.2 2004-09-30 18:31:24 thraxisp Exp $
+	# $Id: workflow.php,v 1.3 2005-02-12 20:01:09 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
-	
+
 ?>
 <html>
 <head>
@@ -47,18 +47,18 @@
 
 	echo '<center><table class="width50" cellspacing="1">';
 	echo '<tr><th>Validation</th><th>Status</th><th></th></tr>';
-	
+
 	# prepopulate new bug state (bugs go from nothing to here)
 	$t_submit_status_array = config_get( 'bug_submit_status' );
 	if ( true == is_array( $t_submit_status_array ) ) {
 		foreach ($t_submit_status_array as $t_access => $t_status ) {
-			$t_entry[$t_status][0] = 'new'; 
-			$t_exit[0][$t_status] = 'new'; 
+			$t_entry[$t_status][0] = 'new';
+			$t_exit[0][$t_status] = 'new';
 		}
 	}else{
 			$t_status = $t_submit_status_array;
-			$t_entry[$t_status][0] = 'new'; 
-			$t_exit[0][$t_status] = 'new'; 
+			$t_entry[$t_status][0] = 'new';
+			$t_exit[0][$t_status] = 'new';
 	}
 
   # add user defined arcs and implicit reopen arcs
@@ -134,11 +134,11 @@
 	echo '</table></center>';
 	echo '<br />';
 	echo '<br />';
-	
+
 	# display the graph as a matrix
 	$t_all_status = explode( ',', $t_extra_enum_status);
 	$t_status_count = count( $t_all_status);
-	
+
 	echo '<center><table class="width100" cellspacing="1">';
 	echo '<tr><th width="25%">Current Status</th><th colspan="' . $t_status_count . '" class="center">Next Status</th></tr>';
 	echo '<tr><th></th>';
@@ -160,7 +160,7 @@
 		echo '<td class="center">' . get_enum_to_string( config_get( 'access_levels_enum_string' ), $t_access ) . '</td>';
 	}
 	echo '</tr>';
-		
+
 	foreach ( $t_all_status as $t_from_status ) {
 		list( $t_from_status_id, $t_from_status_label ) = explode_enum_arr( $t_from_status );
 		echo '<tr ' . helper_alternate_class() . '><td>' . $t_from_status_label . '</td>';

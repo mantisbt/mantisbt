@@ -8,11 +8,11 @@
 	# Slovak: Lubos Magat <lubos@magat.sk>
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.31 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:10 $
+	# $Revision: 1.32 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:04:14 $
 	#
-	# $Id: strings_slovak.txt,v 1.31 2004-10-15 07:07:10 bigbadger Exp $
+	# $Id: strings_slovak.txt,v 1.32 2005-02-12 20:04:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php

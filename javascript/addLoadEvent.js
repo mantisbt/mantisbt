@@ -1,4 +1,4 @@
-/* 
+/*
  * Mantis - a php based bugtracking system
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -6,11 +6,11 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: addLoadEvent.js,v 1.1 2004-12-12 14:10:38 thraxisp Exp $
+ * $Id: addLoadEvent.js,v 1.2 2005-02-12 20:03:50 jlatour Exp $
  * --------------------------------------------------------
  */
 /*
-Care Of: 
+Care Of:
 		Simon Willison
 		http://simon.incutio.com/archive/2004/05/26/addLoadEvent
 		Thnx Dude!
@@ -18,7 +18,7 @@ Care Of:
 ******** USEAGE ********************************
 addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
 addLoadEvent(function() {
-  // more code to run on page load 
+  // more code to run on page load
 });
 */
 function addLoadEvent(func) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.52 2004-09-28 23:00:48 vboctor Exp $
+	# $Id: helper_api.php,v 1.53 2005-02-12 20:01:11 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###

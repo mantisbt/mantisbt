@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.42 2004-11-30 13:48:28 thraxisp Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.43 2005-02-12 20:01:07 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -368,7 +368,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 		$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
-		
+
 		$query6 = "SELECT *,date_submitted
 				FROM $t_bugnote_table
 				WHERE bug_id='$v_id' $t_restriction

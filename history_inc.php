@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.25 2004-10-16 00:22:39 vboctor Exp $
+	# $Id: history_inc.php,v 1.26 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 ?>
 <?php
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'history_api.php' );
 ?>
 

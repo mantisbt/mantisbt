@@ -9,11 +9,11 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# -------------------------------------------------
-	# $Revision: 1.77 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:09 $
+	# $Revision: 1.78 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:04:12 $
 	#
-	# $Id: strings_polish.txt,v 1.77 2004-10-15 07:07:09 bigbadger Exp $
+	# $Id: strings_polish.txt,v 1.78 2005-02-12 20:04:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php

@@ -1,6 +1,6 @@
 <?php
 /**
- * PHPMailer language file.  
+ * PHPMailer language file.
  * French Version
  * bruno@ioda-net.ch 09.08.2003
  */

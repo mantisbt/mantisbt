@@ -8,7 +8,7 @@
 	# This page displays "improved" charts on status : the old one and a 3D Pie
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_status.php,v 1.22 2004-12-16 22:41:26 thraxisp Exp $
+	# $Id: summary_graph_imp_status.php,v 1.23 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -30,7 +30,7 @@
 	$t_user_id = auth_get_current_user_id();
 	token_delete_by_type_owner( TOKEN_GRAPH, $t_user_id );
 	$t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
-	$t_token = token_add( serialize( $t_metrics ), TOKEN_GRAPH, $t_user_id );		
+	$t_token = token_add( serialize( $t_metrics ), TOKEN_GRAPH, $t_user_id );
 
 ?>
 

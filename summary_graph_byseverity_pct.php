@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_byseverity_pct.php,v 1.14 2004-12-16 22:41:26 thraxisp Exp $
+	# $Id: summary_graph_byseverity_pct.php,v 1.15 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'graph_api.php' );
 
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );

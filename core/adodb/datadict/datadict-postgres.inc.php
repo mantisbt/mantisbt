@@ -2,26 +2,26 @@
 
 /**
   V4.60 24 Jan 2005  (c) 2000-2005 John Lim (jlim@natsoft.com.my). All rights reserved.
-  Released under both BSD license and Lesser GPL library license. 
-  Whenever there is any discrepancy between the two licenses, 
+  Released under both BSD license and Lesser GPL library license.
+  Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-	
+
   Set tabs to 4 for best viewing.
- 
+
 */
 
 // security - hide paths
 if (!defined('ADODB_DIR')) die();
 
 class ADODB2_postgres extends ADODB_DataDict {
-	
+
 	var $databaseType = 'postgres';
 	var $seqField = false;
 	var $seqPrefix = 'SEQ_';
 	var $addCol = ' ADD COLUMN';
 	var $quote = '"';
 	var $renameTable = 'ALTER TABLE %s RENAME TO %s'; // at least since 7.1
-	
+
 	function MetaType($t,$len=-1,$fieldobj=false)
 	{
 		if (is_object($t)) {
@@ -29,9 +29,9 @@ class ADODB2_postgres extends ADODB_DataDict {
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
-		$is_serial = is_object($fieldobj) && $fieldobj->primary_key && $fieldobj->unique && 
+		$is_serial = is_object($fieldobj) && $fieldobj->primary_key && $fieldobj->unique &&
 			$fieldobj->has_default && substr($fieldobj->default_value,0,8) == 'nextval(';
-		
+
 		switch (strtoupper($t)) {
 			case 'INTERVAL':
 			case 'CHAR':
@@ -40,52 +40,52 @@ class ADODB2_postgres extends ADODB_DataDict {
 			case 'NAME':
 	   		case 'BPCHAR':
 				if ($len <= $this->blobSize) return 'C';
-			
+
 			case 'TEXT':
 				return 'X';
-	
+
 			case 'IMAGE': // user defined type
 			case 'BLOB': // user defined type
 			case 'BIT':	// This is a bit string, not a single bit, so don't return 'L'
 			case 'VARBIT':
 			case 'BYTEA':
 				return 'B';
-			
+
 			case 'BOOL':
 			case 'BOOLEAN':
 				return 'L';
-			
+
 			case 'DATE':
 				return 'D';
-			
+
 			case 'TIME':
 			case 'DATETIME':
 			case 'TIMESTAMP':
 			case 'TIMESTAMPTZ':
 				return 'T';
-			
+
 			case 'INTEGER': return !$is_serial ? 'I' : 'R';
-			case 'SMALLINT': 
+			case 'SMALLINT':
 			case 'INT2': return !$is_serial ? 'I2' : 'R';
 			case 'INT4': return !$is_serial ? 'I4' : 'R';
-			case 'BIGINT': 
+			case 'BIGINT':
 			case 'INT8': return !$is_serial ? 'I8' : 'R';
-				
+
 			case 'OID':
 			case 'SERIAL':
 				return 'R';
-			
+
 			case 'FLOAT4':
 			case 'FLOAT8':
 			case 'DOUBLE PRECISION':
 			case 'REAL':
 				return 'F';
-				
+
 			 default:
 			 	return 'N';
 		}
 	}
- 	
+
  	function ActualType($meta)
 	{
 		switch($meta) {
@@ -93,31 +93,31 @@ class ADODB2_postgres extends ADODB_DataDict {
 		case 'XS':
 		case 'XL':
 		case 'X': return 'TEXT';
-		
+
 		case 'C2': return 'VARCHAR';
 		case 'X2': return 'TEXT';
-		
+
 		case 'B': return 'BYTEA';
-			
+
 		case 'D': return 'DATE';
 		case 'T': return 'TIMESTAMP';
-		
+
 		case 'L': return 'SMALLINT';
 		case 'I': return 'INTEGER';
 		case 'I1': return 'SMALLINT';
 		case 'I2': return 'INT2';
 		case 'I4': return 'INT4';
 		case 'I8': return 'INT8';
-		
+
 		case 'F': return 'FLOAT8';
 		case 'N': return 'NUMERIC';
 		default:
 			return $meta;
 		}
 	}
-	
+
 	/**
-	 * Adding a new Column 
+	 * Adding a new Column
 	 *
 	 * reimplementation of the default function as postgres does NOT allow to set the default in the same statement
 	 *
@@ -139,7 +139,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 				list(,$colname,$default) = $matches;
 				$sql[] = $alter . str_replace($default,'',$v);
 				$sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET ' . $default;
-			} else {				
+			} else {
 				$sql[] = $alter . $v;
 			}
 			if ($not_null) {
@@ -149,7 +149,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 		}
 		return $sql;
 	}
-	
+
 	/**
 	 * Change the definition of one column
 	 *
@@ -169,7 +169,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 		}
 		return $this->_recreate_copy_table($tabname,False,$tableflds,$tableoptions);
 	}
-	
+
 	/**
 	 * Drop one column
 	 *
@@ -193,7 +193,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 		}
 		return $this->_recreate_copy_table($tabname,$flds,$tableflds,$tableoptions);
 	}
-	
+
 	/**
 	 * Save the content into a temp. table, drop and recreate the original table and copy the content back in
 	 *
@@ -213,14 +213,14 @@ class ADODB2_postgres extends ADODB_DataDict {
 		foreach($this->MetaColumns($tabname) as $fld) {
 			if (!$dropflds || !in_array($fld->name,$dropflds)) {
 				// we need to explicit convert varchar to a number to be able to do an AlterColumn of a char column to a nummeric one
-				if (preg_match('/'.$fld->name.' (I|I2|I4|I8|N|F)/i',$tableflds,$matches) && 
+				if (preg_match('/'.$fld->name.' (I|I2|I4|I8|N|F)/i',$tableflds,$matches) &&
 					in_array($fld->type,array('varchar','char','text','bytea'))) {
 					$copyflds[] = "to_number($fld->name,'S99D99')";
 				} else {
 					$copyflds[] = $fld->name;
 				}
 				// identify the sequence name and the fld its on
-				if ($fld->primary_key && $fld->has_default && 
+				if ($fld->primary_key && $fld->has_default &&
 					preg_match("/nextval\('([^']+)'::text\)/",$fld->default_value,$matches)) {
 					$seq_name = $matches[1];
 					$seq_fld = $fld->name;
@@ -228,7 +228,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 			}
 		}
 		$copyflds = implode(', ',$copyflds);
-		
+
 		$tempname = $tabname.'_tmp';
 		$aSql[] = 'BEGIN';		// we use a transaction, to make sure not to loose the content of the table
 		$aSql[] = "SELECT * INTO TEMPORARY TABLE $tempname FROM $tabname";
@@ -251,14 +251,14 @@ class ADODB2_postgres extends ADODB_DataDict {
 		$aSql[] = 'COMMIT';
 		return $aSql;
 	}
-	
+
 	function DropTableSQL($tabname)
 	{
 		$sql = ADODB_DataDict::DropTableSQL($tabname);
-		
+
 		$drop_seq = $this->_DropAutoIncrement($tabname);
 		if ($drop_seq) $sql[] = $drop_seq;
-		
+
 		return $sql;
 	}
 
@@ -275,7 +275,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 		if ($fconstraint) $suffix .= ' '.$fconstraint;
 		return $suffix;
 	}
-	
+
 	// search for a sequece for the given table (asumes the seqence-name contains the table-name!)
 	// if yes return sql to drop it
 	// this is still necessary if postgres < 7.3 or the SERIAL was created on an earlier version!!!
@@ -291,7 +291,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 		}
 		return "DROP SEQUENCE ".$seq;
 	}
-	
+
 	/*
 	CREATE [ [ LOCAL ] { TEMPORARY | TEMP } ] TABLE table_name (
 	{ column_name data_type [ DEFAULT default_expr ] [ column_constraint [, ... ] ]
@@ -315,8 +315,8 @@ class ADODB2_postgres extends ADODB_DataDict {
 	[ MATCH FULL | MATCH PARTIAL ] [ ON DELETE action ] [ ON UPDATE action ] }
 	[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
 	*/
-	
-	
+
+
 	/*
 	CREATE [ UNIQUE ] INDEX index_name ON table
 [ USING acc_method ] ( column [ ops_name ] [, ...] )
@@ -328,32 +328,32 @@ CREATE [ UNIQUE ] INDEX index_name ON table
 	function _IndexSQL($idxname, $tabname, $flds, $idxoptions)
 	{
 		$sql = array();
-		
+
 		if ( isset($idxoptions['REPLACE']) || isset($idxoptions['DROP']) ) {
 			$sql[] = sprintf ($this->dropIndex, $idxname, $tabname);
 			if ( isset($idxoptions['DROP']) )
 				return $sql;
 		}
-		
+
 		if ( empty ($flds) ) {
 			return $sql;
 		}
-		
+
 		$unique = isset($idxoptions['UNIQUE']) ? ' UNIQUE' : '';
-		
+
 		$s = 'CREATE' . $unique . ' INDEX ' . $idxname . ' ON ' . $tabname . ' ';
-		
+
 		if (isset($idxoptions['HASH']))
 			$s .= 'USING HASH ';
-		
+
 		if ( isset($idxoptions[$this->upperName]) )
 			$s .= $idxoptions[$this->upperName];
-		
+
 		if ( is_array($flds) )
 			$flds = implode(', ',$flds);
 		$s .= '(' . $flds . ')';
 		$sql[] = $s;
-		
+
 		return $sql;
 	}
 }

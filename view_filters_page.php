@@ -8,7 +8,7 @@
 <?php
 	require_once( 'core.php' );
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'filter_api.php' );
 	require_once( $t_core_path.'current_user_api.php' );
@@ -28,7 +28,7 @@
 	if ( ON == config_get( 'use_javascript' ) ) {
 		?>
 		<body onload="SetInitialFocus();">
-		
+
 		<script language="Javascript">
 		function SetInitialFocus() {
 			<?php
@@ -47,10 +47,10 @@
 			if ( field_to_focus ) {
 				eval( "document.filters['" + field_to_focus + "'].focus()" );
 			}
-			
+
 			SwitchDateFields();
 		}
-		
+
 		function SwitchDateFields() {
 		    // All fields need to be enabled to go back to the script
 			document.filters.start_month.disabled = ! document.filters.do_filter_by_date.checked;
@@ -59,21 +59,21 @@
 			document.filters.end_month.disabled = ! document.filters.do_filter_by_date.checked;
 			document.filters.end_day.disabled = ! document.filters.do_filter_by_date.checked;
 			document.filters.end_year.disabled = ! document.filters.do_filter_by_date.checked;
-		
+
 		    return true;
 		}
 		</script>
 
 		<?php
 	}
-	
+
 	$t_filter = current_user_get_bug_filter();
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 	$t_project_id = helper_get_current_project();
 
 	$t_sort = $t_filter['sort'];
 	$t_dir = $t_filter['dir'];
-	
+
 	$t_current_user_access_level = current_user_get_access_level();
 	$t_accessible_custom_fields_ids = array();
 	$t_accessible_custom_fields_names = array();
@@ -99,13 +99,13 @@
 			$t_per_row = config_get( 'filter_custom_fields_per_row' );
 			$t_custom_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
 		}
-	}		
+	}
 
 	$f_for_screen = gpc_get_bool( 'for_screen', true );
 
 	$t_action  = "view_all_set.php?f=3";
 
-	if ( $f_for_screen == false ) 
+	if ( $f_for_screen == false )
 	{
 		$t_action  = "view_all_set.php";
 	}
@@ -127,18 +127,18 @@
 	if ( 'advanced' == $f_view_type ) {
 		$t_select_modifier = 'multiple="multiple" size="10" ';
 	}
-	
+
 ?>
 <br />
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
 <input type="hidden" name="type" value="1" />
 <input type="hidden" name="view_type" value="<?php PRINT $f_view_type; ?>" />
-<?php 
-	if ( $f_for_screen == false ) 
+<?php
+	if ( $f_for_screen == false )
 	{
 		print "<input type=\"hidden\" name=\"print\" value=\"1\" />";
 		print "<input type=\"hidden\" name=\"offset\" value=\"0\" />";
-	}	
+	}
 ?>
 <input type="hidden" name="sort" value="<?php echo $t_sort ?>" />
 <input type="hidden" name="dir" value="<?php echo $t_dir ?>" />
@@ -249,9 +249,9 @@
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
-		<input type="checkbox" name="do_filter_by_date" <?php 
-			check_checked( $t_filter['do_filter_by_date'], 'on' ); 
-			if ( ON == config_get( 'use_javascript' ) ) { 
+		<input type="checkbox" name="do_filter_by_date" <?php
+			check_checked( $t_filter['do_filter_by_date'], 'on' );
+			if ( ON == config_get( 'use_javascript' ) ) {
 				print "onclick=\"SwitchDateFields();\""; } ?> />
 		<?php echo lang_get( 'use_date_filters' ) ?>
 	</td>
@@ -282,12 +282,12 @@
 if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 ?>
 	<?php # -- Custom Field Searching -- ?>
-	<?php 
+	<?php
 	if ( sizeof( $t_accessible_custom_fields_ids ) > 0 ) {
 		$t_per_row = config_get( 'filter_custom_fields_per_row' );
 		$t_num_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
 		$t_base = 0;
-		
+
 		for ( $i = 0; $i < $t_num_rows; $i++ ) {
 			?>
 			<tr class="row-category2">
@@ -314,7 +314,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 				}
 				echo '</td>';
 			}
-			
+
 			?>
 			</tr>
 			<?php
@@ -329,13 +329,13 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		<?php PRINT lang_get( 'sort' ) ?>:
 	</td>
 	<td valign="top" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
-		<?php 
+		<?php
 			print_filter_show_sort();
 		?>
 	</td>
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 	</td>
-</tr>		
+</tr>
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
 <td class="small-caption" colspan="<?php echo ( 6 * $t_custom_cols ); ?>"></td>
@@ -347,7 +347,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 	</td>
 
 	<td class="small-caption" colspan="<?php echo ( 5 * $t_custom_cols ); ?>"></td>
-			
+
 	<!-- Submit button -->
 	<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="submit" name="filter" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />

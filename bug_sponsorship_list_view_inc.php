@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.10 2004-07-21 12:38:36 vboctor Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.11 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -40,7 +40,7 @@
 
 <a name="sponsorships" id="sponsorships"></a> <br />
 
-<?php 
+<?php
 	collapse_open( 'sponsorship' );
 ?>
 
@@ -56,14 +56,14 @@
 
 			$t_details_url = lang_get( 'sponsorship_process_url' );
 			if ( !is_blank( $t_details_url ) ) {
-				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">' 
+				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">'
 					. lang_get( 'sponsorship_more_info' ) . '</a>]';
 			}
 		?>
 		</td>
 	</tr>
 
-<?php 
+<?php
 	if ( $t_can_sponsor ) {
 ?>
 	<tr class="row-1">
@@ -87,7 +87,7 @@
 		<td class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></td>
 		<td>
 		<?php
-			echo sprintf( lang_get( 'total_sponsorship_amount' ), 
+			echo sprintf( lang_get( 'total_sponsorship_amount' ),
 				sponsorship_format_amount( $t_total_sponsorship ) );
 
 			if ( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' )
@@ -128,7 +128,7 @@
 
 			$t_details_url = lang_get( 'sponsorship_process_url' );
 			if ( !is_blank( $t_details_url ) ) {
-				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">' 
+				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">'
 					. lang_get( 'sponsorship_more_info' ) . '</a>]';
 			}
 ?>
@@ -137,7 +137,7 @@
 	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
 	if ( $t_total_sponsorship > 0 ) {
 		echo ' <span style="font-weight: normal;">(';
-		echo sprintf( lang_get( 'total_sponsorship_amount' ), 
+		echo sprintf( lang_get( 'total_sponsorship_amount' ),
 			sponsorship_format_amount( $t_total_sponsorship ) );
 		echo ')</span>';
 	}

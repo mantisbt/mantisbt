@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_edit_page.php,v 1.28 2004-07-27 14:38:34 vboctor Exp $
+	# $Id: manage_proj_ver_edit_page.php,v 1.29 2005-02-12 20:01:06 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>

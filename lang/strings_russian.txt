@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.74 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:09 $
+	# $Revision: 1.75 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:04:13 $
 	#
-	# $Id: strings_russian.txt,v 1.74 2004-10-15 07:07:09 bigbadger Exp $
+	# $Id: strings_russian.txt,v 1.75 2005-02-12 20:04:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php

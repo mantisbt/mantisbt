@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.4 2005-02-08 16:11:21 thraxisp Exp $
+	# $Id: columns_api.php,v 1.5 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,7 +35,7 @@
 
 	function print_column_title_attachment( $p_sort, $p_dir, $p_print = false  ) {
 		global $t_icon_path;
-		
+
 		$t_show_attachments = config_get( 'show_attachment_indicator' );
 
 		if ( ON == $t_show_attachments ) {

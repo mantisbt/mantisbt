@@ -1,6 +1,6 @@
 <?php
 /**
- * PHPMailer language file.  
+ * PHPMailer language file.
  * Swedish Version
  * Author: Johan Linnér <johan@linner.biz>
  */

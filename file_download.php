@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.31 2004-12-08 16:52:42 thraxisp Exp $
+	# $Id: file_download.php,v 1.32 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'file_api.php' );
 ?>
 <?php auth_ensure_user_authenticated() ?>
@@ -70,10 +70,10 @@
 	@ob_end_clean();
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
-	
+
 	header( 'Content-type: ' . $v_file_type );
 	header( 'Content-Length: ' . $v_filesize );
-	
+
 	# Added Quotes (") around file name.
 	header( 'Content-Disposition: filename="' . file_get_display_name( $v_filename ) . '"' );
 	header( 'Content-Description: Download Data' );

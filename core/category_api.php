@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.13 2004-04-08 18:04:53 prescience Exp $
+	# $Id: category_api.php,v 1.14 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Category API ###

@@ -13,7 +13,7 @@ $db->Connect( 'localhost', 'root', '', 'schematest' );
 // To create a schema object and build the query array.
 $schema = new adoSchema( $db );
 
-// To upgrade an existing schema object, use the following 
+// To upgrade an existing schema object, use the following
 // To upgrade an existing database to the provided schema,
 // uncomment the following line:
 #$schema->upgradeSchema();

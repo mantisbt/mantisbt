@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.21 2005-01-30 22:13:09 prichards Exp $
+	# $Id: user_pref_api.php,v 1.22 2005-02-12 20:01:19 jlatour Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -214,7 +214,7 @@
 
 		$t_user_pref_table	= config_get( 'mantis_user_pref_table' );
 		$t_vars				= get_object_vars( $p_prefs );
-		
+
 		$t_pairs = array();
 
 		foreach ( $t_vars as $var => $val ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.45 2004-10-05 14:59:08 thraxisp Exp $
+	# $Id: bug_file_add.php,v 1.46 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,15 +14,15 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'file_api.php' );
 ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$f_file		= gpc_get_file( 'file' );
-	
+
 	if ( ! file_allow_bug_upload( $f_bug_id ) ) {
 		access_denied();
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.18 2004-12-12 14:10:37 thraxisp Exp $
+	# $Id: check.php,v 1.19 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -240,23 +240,23 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	test_bug_download_threshold();
 	test_bug_attachments_allow_flags();
 
-		print_test_row( 'check mail configuration: send_reset_password = ON requires allow_blank_email = OFF', 
+		print_test_row( 'check mail configuration: send_reset_password = ON requires allow_blank_email = OFF',
 				( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'allow_blank_email' ) ) ) );
-		print_test_row( 'check mail configuration: send_reset_password = ON requires enable_email_notification = ON', 
+		print_test_row( 'check mail configuration: send_reset_password = ON requires enable_email_notification = ON',
 				( OFF == config_get( 'send_reset_password' ) ) || ( ON == config_get( 'enable_email_notification' ) ) );
-		print_test_row( 'check mail configuration: allow_signup = ON requires enable_email_notification = ON', 
+		print_test_row( 'check mail configuration: allow_signup = ON requires enable_email_notification = ON',
 				( OFF == config_get( 'allow_signup' ) ) || ( ON == config_get( 'enable_email_notification' ) ) );
-		print_test_row( 'check mail configuration: allow_signup = ON requires send_reset_password = ON', 
+		print_test_row( 'check mail configuration: allow_signup = ON requires send_reset_password = ON',
 				( OFF == config_get( 'allow_signup' ) ) || ( ON == config_get( 'send_reset_password' ) ) );
-		print_test_row( 'check language configuration: fallback_language is not \'auto\'', 
+		print_test_row( 'check language configuration: fallback_language is not \'auto\'',
 				'auto' <> config_get( 'fallback_language' ) );
-				
-		print_test_row( '$g_bug_link_tag is not empty ("' . config_get( 'bug_link_tag' ) . '")', 
+
+		print_test_row( '$g_bug_link_tag is not empty ("' . config_get( 'bug_link_tag' ) . '")',
 				'' <> config_get( 'bug_link_tag' ) );
-		print_test_row( '$g_bugnote_link_tag is not empty ("' . config_get( 'bugnote_link_tag' ) . '")', 
+		print_test_row( '$g_bugnote_link_tag is not empty ("' . config_get( 'bugnote_link_tag' ) . '")',
 				'' <> config_get( 'bugnote_link_tag' ) );
 
-		print_test_row( 'filters: dhtml_filters = ON requires use_javascript = ON', 
+		print_test_row( 'filters: dhtml_filters = ON requires use_javascript = ON',
 				( OFF == config_get( 'dhtml_filters' ) ) || ( ON == config_get( 'use_javascript' ) ) );
 ?>
 </table>
@@ -384,7 +384,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 		<?php
 		if ( $f_mail_test ) {
 			echo '<b><font color="#ff0000">Testing Mail</font></b> - ';
- # @@@ thraxisp - workaround to ensure a language is set without authenticating			
+ # @@@ thraxisp - workaround to ensure a language is set without authenticating
  #  will disappear when this is properly localized
 			lang_push( 'english' );
 			$result = email_send( config_get( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');

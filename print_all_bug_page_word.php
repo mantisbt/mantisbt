@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.55 2005-01-13 20:51:20 thraxisp Exp $
+	# $Id: print_all_bug_page_word.php,v 1.56 2005-02-12 20:01:07 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,9 +16,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
@@ -40,7 +40,7 @@
 
 		# Make sure that IE can download the attachments under https.
 		header( 'Pragma: public' );
-		
+
 		header( 'Content-Type: application/msword' );
 		header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.doc"' );
 	}
@@ -50,7 +50,7 @@
 	$t_per_page = null;
 	$t_bug_count = null;
 	$t_page_count = null;
-	
+
 	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	$row_count = sizeof( $result );
 
@@ -396,7 +396,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
 	$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
-	
+
 	$query6 = "SELECT *, date_submitted
 			FROM $t_bugnote_table
 			WHERE bug_id='$v_id' $t_restriction

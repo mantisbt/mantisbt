@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup.php,v 1.38 2004-09-28 13:57:37 thraxisp Exp $
+	# $Id: signup.php,v 1.39 2005-02-12 20:01:07 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -30,7 +30,7 @@
 		exit;
 	}
 
-	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&& 
+	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
 				helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 		# captcha image requires GD library and related option to ON
 		$t_key = strtolower( substr( md5( config_get( 'password_confirm_hash_magic_string' ) . $f_public_key ), 1, 5) );

@@ -6,9 +6,9 @@
 # Generation Time: Nov 06, 2004 at 09:52 PM
 # Server version: 4.0.20
 # PHP Version: 4.3.8
-# 
+#
 # Database : `mantis`
-# 
+#
 
 # --------------------------------------------------------
 

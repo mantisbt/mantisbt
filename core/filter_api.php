@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.82 2005-02-11 15:38:15 thraxisp Exp $
+	# $Id: filter_api.php,v 1.83 2005-02-12 20:01:11 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -706,7 +706,7 @@
 			} else {
 				$c_dir = 'ASC';
 			}
-			
+
 			$t_order .= "$c_sort $c_dir, ";
 		}
 
@@ -1564,10 +1564,10 @@
 				<a href="<?php PRINT $t_filters_url . 'show_sort'; ?>" id="show_sort_filter"><?php PRINT lang_get( 'sort' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top" colspan="4" id="show_sort_filter_target">
-				<?php 
+				<?php
 					$t_sort_fields = split( ',', $t_filter['sort'] );
 					$t_dir_fields = split( ',', $t_filter['dir'] );
-					
+
 					echo string_get_field_name( $t_sort_fields[0] ) . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[0] ) );
 					echo "<input type=\"hidden\" name=\"sort_1\" value=\"$t_sort_fields[0]\" />";
 					echo "<input type=\"hidden\" name=\"dir_1\" value=\"$t_dir_fields[0]\" />";
@@ -1581,7 +1581,7 @@
 			</td>
 			<td class="small-caption" valign="top" colspan="2">
 			</td>
-		</tr>		
+		</tr>
 		<?php
 		} // expanded
 		?>
@@ -2405,10 +2405,10 @@
 		}
 
 	}
-	
+
 	function print_filter_show_sort() {
 		global $t_filter;
-		
+
 		# get all of the displayed fields for sort, then drop ones that
 		#  are not appropriate and translate the rest
 		$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
@@ -2420,9 +2420,9 @@
 			}
 		}
 		$t_shown_dirs[""] = "";
-		$t_shown_dirs["ASC"] = lang_get( 'bugnote_order_asc' ); 
-		$t_shown_dirs["DESC"] = lang_get( 'bugnote_order_desc' ); 
-		
+		$t_shown_dirs["ASC"] = lang_get( 'bugnote_order_asc' );
+		$t_shown_dirs["DESC"] = lang_get( 'bugnote_order_desc' );
+
 		# get default values from filter structure
 		$t_sort_fields = split( ',', $t_filter['sort'] );
 		$t_dir_fields = split( ',', $t_filter['dir'] );
@@ -2441,7 +2441,7 @@
 				echo ">$val</option>";
 			}
 			echo '</select>';
-			
+
 			echo '<select name="dir_1">';
 			foreach ( $t_shown_dirs as $key => $val ) {
 				echo "<option value=\"$key\"";
@@ -2449,9 +2449,9 @@
 				echo ">$val</option>";
 			}
 			echo '</select>';
-			
+
 			echo ', ';
-			
+
 			# for secondary sort
 			echo '<select name="sort_2">';
 			foreach ( $t_shown_fields as $key => $val ) {

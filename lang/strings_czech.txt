@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.68 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:06 $
+	# $Revision: 1.69 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:03:51 $
 	#
-	# $Id: strings_czech.txt,v 1.68 2004-10-15 07:07:06 bigbadger Exp $
+	# $Id: strings_czech.txt,v 1.69 2005-02-12 20:03:51 jlatour Exp $
 	###########################################################################
 ?>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_inc.php,v 1.14 2004-08-27 00:29:54 thraxisp Exp $
+	# $Id: bug_view_inc.php,v 1.15 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,7 @@
 ?>
 <?php
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 ?>

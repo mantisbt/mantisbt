@@ -8,7 +8,7 @@
 	# This page displays "improved" charts on categories : categories on bars and 3Dpie
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_category.php,v 1.21 2004-12-16 22:41:26 thraxisp Exp $
+	# $Id: summary_graph_imp_category.php,v 1.22 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -20,10 +20,10 @@
 	html_page_top1();
 	html_page_top2();
 	print_summary_menu( 'summary_page.php' );
-	
+
 	echo '<br />';
 	print_menu_graph();
-	
+
 	$t_width = config_get( 'graph_window_width' );
 	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
@@ -31,7 +31,7 @@
 	$t_user_id = auth_get_current_user_id();
 	token_delete_by_type_owner( TOKEN_GRAPH, $t_user_id );
 	$t_metrics = create_category_summary();
-	$t_token = token_add( serialize( $t_metrics ), TOKEN_GRAPH, $t_user_id );		
+	$t_token = token_add( serialize( $t_metrics ), TOKEN_GRAPH, $t_user_id );
 
  ?>
 

@@ -404,7 +404,7 @@ Users installing Mantis for the first time should sql/db_generate.sql to create 
  * Fix #3473: g_bug_resolved_status_threshold variable ignored.
  * Fix #3504: project cookie not cleared at logout
  * Fix #3567: Reminders can be added for a readonly bug.
- * Fix #3578: Word 2000 reports "The dimensions after resizing are too small or too large." trying to open word document from Mantis 
+ * Fix #3578: Word 2000 reports "The dimensions after resizing are too small or too large." trying to open word document from Mantis
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
  * Fix #3641: 'Date submited' in reports is always '12-31-69'.

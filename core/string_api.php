@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.67 2005-02-08 16:11:24 thraxisp Exp $
+	# $Id: string_api.php,v 1.68 2005-02-12 20:01:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -55,7 +55,7 @@
 			return $p_string;
 		}
 	}
-	
+
 	# --------------------
 	# Similar to nl2br, but fixes up a problem where new lines are doubled between
 	# <pre> tags.
@@ -90,12 +90,12 @@
 	# Prepare a string for display to HTML and add href anchors for URLs, emails,
 	#  bug references, and cvs references
 	function string_display_links( $p_string ) {
-		$p_string = string_display( $p_string );		
+		$p_string = string_display( $p_string );
 		$p_string = string_insert_hrefs( $p_string );
 		$p_string = string_process_bug_link( $p_string );
 		$p_string = string_process_bugnote_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
-	
+
 		return $p_string;
 	}
 
@@ -179,7 +179,7 @@
 		if ( '' == $t_tag ) {
 			return $p_string;
 		}
-		
+
 		$t_path = config_get( 'path' );
 
 		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag, '/') . '(\d+)|$)/s',
@@ -218,7 +218,7 @@
 
 		return $t_result;
 	}
-	
+
 	# --------------------
 	# Process $p_string, looking for bugnote ID references and creating bug view
 	#  links for them.
@@ -296,11 +296,11 @@
 			$t_change_quotes = true;
 			ini_set( 'magic_quotes_sybase', false );
 		}
-		
+
 		# Find any URL in a string and replace it by a clickable link
-		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),\[\][:alnum:]])+)/se',   
-                                                                 "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"blank\">^</a>]'",   
-                                                                 $p_string); 
+		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?%^\\\\:@&={\|}+$#\(\),\[\][:alnum:]])+)/se',
+                                                                 "'<a href=\"'.rtrim('\\1','.').'\">\\1</a> [<a href=\"'.rtrim('\\1','.').'\" target=\"blank\">^</a>]'",
+                                                                 $p_string);
 		if( $t_change_quotes ) {
 			ini_set( 'magic_quotes_sybase', true );
 		}
@@ -330,11 +330,11 @@
 		#  * whitespace
 		#  * a , character (allowing 'email foo@bar.baz, or ...')
 		#  * a \n, \r, or <
-		
+
 		$p_string = preg_replace( '/(?<=^|&quot;|&lt;|[\s\:\>\n\r])('.$t_atom.'(?:\.'.$t_atom.')*\@'.$t_atom.'(?:\.'.$t_atom.')*)(?=$|&quot;|&gt;|[\s\,\<\n\r])/s',
 								'<a href="mailto:\1" target="_new">\1</a>',
 								$p_string);
-		
+
 		return $p_string;
 	}
 
@@ -433,7 +433,7 @@
 
 		return $t_link;
 	}
-	
+
 	# --------------------
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
@@ -454,14 +454,14 @@
 
 		return $t_link;
 	}
-	
+
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_view_url( $p_bug_id, $p_user_id = null ) {
 		return 'view.php?id=' . $p_bug_id;
 	}
-	
+
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
@@ -477,7 +477,7 @@
 	function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
 		return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id ).'#'.$p_bugnote_id;
 	}
-	
+
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
@@ -558,21 +558,21 @@
 		$t_timestamp = db_unixtimestamp( $p_date );
 		return date( config_get( 'complete_date_format' ), $t_timestamp );
 	}
-	
+
 	# --------------------
 	# Shorten a string for display on a dropdown to prevent the page rendering too wide
 	#  ref issues #4630, #5072, #5131
-	
+
 	function string_shorten( $p_string ) {
 		$t_max = config_get( 'max_dropdown_length' );
 		if ( ( strlen( $p_string ) > $t_max ) && ( $t_max > 0 ) ){
 			$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
 			$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
-		
+
 			$t_string = '';
 			$t_last = $t_bits[ count( $t_bits ) - 1 ];
 			$t_last_len = strlen( $t_last );
-		
+
 			foreach ( $t_bits as $t_bit ) {
 				if ( ( strlen( $t_string ) + strlen( $t_bit ) + $t_last_len + 3 <= $t_max )
 					|| ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
@@ -590,14 +590,14 @@
 
 	# --------------------
 	# remap a field name to a string name (for sort filter)
-	
+
 	function string_get_field_name( $p_string ) {
-	
+
 		$t_map = array(
 				'last_updated' => 'last_update',
 				'id' => 'email_bug'
 				);
-				
+
 		$t_string = $p_string;
 		if ( isset( $t_map[ $p_string ] ) ) {
 			$t_string = $t_map[ $p_string ];

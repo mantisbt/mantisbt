@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.30 2005-01-05 20:57:03 thraxisp Exp $
+	# $Id: bugnote_api.php,v 1.31 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -232,7 +232,7 @@
 
 		$query = "SELECT id
 		          	FROM $t_bugnote_table
-		          	WHERE bug_id='$c_bug_id' 
+		          	WHERE bug_id='$c_bug_id'
 		          	ORDER by last_modified DESC";
 		$result = db_query( $query, 1 );
 
@@ -282,7 +282,7 @@
 			$c_bug_id            	= db_prepare_int( $p_bug_id );
 			$t_bugnote_table     	= config_get( 'mantis_bugnote_table' );
 			$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
-			
+
 			if ( 0 == $p_user_bugnote_limit ) {
 				## Show all bugnotes
 				$t_bugnote_limit = -1;
@@ -292,12 +292,12 @@
 				if ( 'ASC' == $p_user_bugnote_order ) {
 					$result = db_query( "SELECT COUNT(*) AS row_count FROM $t_bugnote_table WHERE bug_id = '$c_bug_id'" );
 					$row    = db_fetch_array( $result );
-					
-					$t_bugnote_offset = $row['row_count'] - $p_user_bugnote_limit;				
+
+					$t_bugnote_offset = $row['row_count'] - $p_user_bugnote_limit;
 				} else {
 					$t_bugnote_offset = -1;
 				}
-					
+
 				$t_bugnote_limit = $p_user_bugnote_limit;
 			}
 

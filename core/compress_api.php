@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.15 2004-04-08 18:04:53 prescience Exp $
+	# $Id: compress_api.php,v 1.16 2005-02-12 20:01:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Compression API ###

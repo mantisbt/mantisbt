@@ -3,7 +3,7 @@
 
 /*
 V4.01 23 Oct 2003  (c) 2000-2005 John Lim (jlim@natsoft.com.my). All rights reserved.
-         Contributed by Ross Smith (adodb@netebb.com). 
+         Contributed by Ross Smith (adodb@netebb.com).
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
@@ -34,16 +34,16 @@ if (defined('ADODB_SESSION')) return 1;
 define('ADODB_SESSION', dirname(__FILE__));
 
 
-/* 
-	Unserialize session data manually. See http://phplens.com/lens/lensforum/msgs.php?id=9821 
-	
-	From Kerr Schere, to unserialize session data stored via ADOdb. 
-	1. Pull the session data from the db and loop through it. 
-	2. Inside the loop, you will need to urldecode the data column. 
+/*
+	Unserialize session data manually. See http://phplens.com/lens/lensforum/msgs.php?id=9821
+
+	From Kerr Schere, to unserialize session data stored via ADOdb.
+	1. Pull the session data from the db and loop through it.
+	2. Inside the loop, you will need to urldecode the data column.
 	3. After urldecode, run the serialized string through this function:
 
 */
-function adodb_unserialize( $serialized_string ) 
+function adodb_unserialize( $serialized_string )
 {
 	$variables = array( );
 	$a = preg_split( "/(\w+)\|/", $serialized_string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE );
@@ -158,7 +158,7 @@ class ADODB_Session {
 
 	/*!
 	*/
-	function persist($persist = null) 
+	function persist($persist = null)
 	{
 		static $_persist = true;
 
@@ -484,7 +484,7 @@ class ADODB_Session {
 		if ($ok) $GLOBALS['ADODB_SESS_CONN'] =& $conn;
 		else
 			ADOConnection::outp('<p>Session: connection failed</p>', false);
-		
+
 
 		return $ok;
 	}
@@ -760,7 +760,7 @@ class ADODB_Session {
 					$rs->MoveNext();
 				}
 				$rs->Close();
-				
+
 				$conn->CommitTrans();
 			}
 		} else {
@@ -834,7 +834,7 @@ function adodb_sess_open($save_path, $session_name, $persist = true) {
 
 // for backwards compatability only
 function adodb_sess_gc($t)
-{	
+{
 	return ADODB_Session::gc($t);
 }
 

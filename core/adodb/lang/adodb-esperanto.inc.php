@@ -1,5 +1,5 @@
 <?php
-// Vivu Esperanto cxiam! 
+// Vivu Esperanto cxiam!
 // Traduko fare de Antono Vasiljev (anders[#]brainactive.org)
 
 $ADODB_LANG_ARRAY = array (

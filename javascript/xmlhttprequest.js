@@ -1,4 +1,4 @@
-/* 
+/*
  * Mantis - a php based bugtracking system
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: xmlhttprequest.js,v 1.1 2004-12-12 14:10:38 thraxisp Exp $
+ * $Id: xmlhttprequest.js,v 1.2 2005-02-12 20:03:50 jlatour Exp $
  * --------------------------------------------------------
  */
 /*
@@ -37,7 +37,7 @@ Not Fully Supported in Opera
 * getAllResponseHeaders(), getAllResponseHeader(header)
 */
 
-/* 
+/*
  * commented out (30/07/2004) because it was causing subsequent request to freeze
 // IE support
 if (window.ActiveXObject && !window.XMLHttpRequest) {

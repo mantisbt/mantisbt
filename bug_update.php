@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.81 2005-01-13 17:37:34 thraxisp Exp $
+	# $Id: bug_update.php,v 1.82 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,12 +26,12 @@
 	$f_update_mode = gpc_get_bool( 'update_mode', FALSE ); # set if called from generic update page
 	$f_new_status	= gpc_get_int( 'status', bug_get_field( $f_bug_id, 'status' ) );
 
-	if ( ! ( 
+	if ( ! (
 				( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
 				( access_has_bug_level( config_get( 'update_bug_threshold' ) , $f_bug_id ) ) ||
-				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) && 
+				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
 						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
-								( ON == config_get( 'allow_reporter_close' ) ) ) ) 
+								( ON == config_get( 'allow_reporter_close' ) ) ) )
 			) ) {
 		access_denied();
 	}
@@ -86,20 +86,20 @@
 	if ( $t_bug_data->status == CLOSED ) {
 		$t_custom_status_label = "closed";
 	}
-	
+
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 		$t_custom_field_value = gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], null );
 
 		# Only update the field if it would have been display for editing
-		if( !( $t_def['display_' . $t_custom_status_label] || 
+		if( !( $t_def['display_' . $t_custom_status_label] ||
 						$t_def['require_' . $t_custom_status_label] ||
 						( $f_update_mode && $t_def['display_update'] ) ||
 						( $f_update_mode && $t_def['require_update'] ) ) ) {
 			continue;
 		}
-		
+
 		# Only update the field if it is posted
 		if ( $t_custom_field_value === null ) {
 			continue;
@@ -128,7 +128,7 @@
 		switch ( $t_bug_data->status ) {
 			case $t_resolved:
 				# bug_resolve updates the status and bugnote and sends message
-				bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version, 
+				bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version,
 						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id);
 				$t_notify = false;
 				$t_bug_note_set = true;
@@ -171,7 +171,7 @@
 				} # else fall through to default
 		}
 	}
-		
+
 	# Add a bugnote if there is one
 	if ( ( !is_blank( $f_bugnote_text ) ) && ( false == $t_bug_note_set ) ) {
 		bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
@@ -181,6 +181,6 @@
 	bug_update( $f_bug_id, $t_bug_data, true, ( false == $t_notify ) );
 
 	helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
-  
+
 	print_successful_redirect_to_bug( $f_bug_id );
 ?>

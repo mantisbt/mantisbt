@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.12 2004-07-13 12:53:06 vboctor Exp $
+	# $Id: upgrade_inc.php,v 1.13 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,7 +26,7 @@
 		# 0.14.0 upgrades (applied to 0.13 db)
 		if ( admin_check_applied( $t_project_table ) ) {
 			$t_upgrades = include( 'upgrades/0_13_inc.php' );
-			
+
 			foreach ( $t_upgrades as $t_item ) {
 				$t_item->set_applied();
 			}
@@ -35,7 +35,7 @@
 		# 0.15.0 upgrades (applied to 0.14 db)
 		if ( admin_check_applied( $t_bug_file_table ) ) {
 			$t_upgrades = include( 'upgrades/0_14_inc.php' );
-			
+
 			foreach ( $t_upgrades as $t_item ) {
 				$t_item->set_applied();
 			}
@@ -44,7 +44,7 @@
 		# 0.16.0 upgrades (applied to 0.15 db)
 		if ( admin_check_applied( $t_bug_history_table ) ) {
 			$t_upgrades = include( 'upgrades/0_15_inc.php' );
-			
+
 			foreach ( $t_upgrades as $t_item ) {
 				$t_item->set_applied();
 			}
@@ -53,7 +53,7 @@
 		# 0.17.0 upgrades (applied to 0.16 db)
 		if ( admin_check_applied( $t_bug_monitor_table ) ) {
 			$t_upgrades = include( 'upgrades/0_16_inc.php' );
-			
+
 			foreach ( $t_upgrades as $t_item ) {
 				$t_item->set_applied();
 			}
@@ -70,7 +70,7 @@
 		$c_field_name = db_prepare_string( $p_field_name );
 
 		$result = db_query( "DESCRIBE $c_table_name $c_field_name" );
-		
+
 		if ( $result && db_num_rows($result) ) {
 			return true;
 		} else {
@@ -291,7 +291,7 @@
 						$t_message	= 'Skipped due to previous error';
 						continue;  # next one
 					}
-					
+
 					if ( $item->execute() ) {
 						$t_state	= 'disabled="disabled"';
 						$t_color	= '#00ff88';
@@ -335,7 +335,7 @@
 				echo "<input type=\"submit\" name=\"{$this->upgrade_file}_print_selected\" value=\"Print Selected\" />";
 			}
 		}
-		
+
 		function output( $p_limit=null ) {
 			# @@@ The generated file is in UNIX format, should it be in Windows format?
 			$t_filename = $this->upgrade_file . '.sql';

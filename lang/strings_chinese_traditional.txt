@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.68 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:06 $
+	# $Revision: 1.69 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:03:51 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.68 2004-10-15 07:07:06 bigbadger Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.69 2005-02-12 20:03:51 jlatour Exp $
 	###########################################################################
 ?>
 <?php

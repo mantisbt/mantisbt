@@ -21,13 +21,13 @@ if (!defined('ADODB_DIR')) die();
 	The big difference between mssqlpo and it's parent mssql is that mssqlpo supports
 	the more standard || string concatenation operator.
 */
-	
+
 include_once(ADODB_DIR.'/drivers/adodb-mssql.inc.php');
 
 class ADODB_mssqlpo extends ADODB_mssql {
 	var $databaseType = "mssqlpo";
-	var $concat_operator = '||'; 
-	
+	var $concat_operator = '||';
+
 	function ADODB_mssqlpo()
 	{
 		ADODB_mssql::ADODB_mssql();
@@ -44,7 +44,7 @@ class ADODB_mssqlpo extends ADODB_mssql {
 		if (!$stmt)  return $sql;
 		return array($sql,$stmt);
 	}
-	
+
 	function _query($sql,$inputarr)
 	{
 		if (is_string($sql)) $sql = str_replace('||','+',$sql);

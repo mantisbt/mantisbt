@@ -2,14 +2,14 @@
 
 /*
 V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
-  Released under both BSD license and Lesser GPL library license. 
-  Whenever there is any discrepancy between the two licenses, 
+  Released under both BSD license and Lesser GPL library license.
+  Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
   Set tabs to 8.
-  
+
   MySQL code that supports transactions. For MySQL 3.23 or later.
   Code from James Poon <jpoon88@yahoo.com>
-  
+
   Requires mysql client. Works on Windows and Unix.
 */
 
@@ -23,33 +23,33 @@ class ADODB_mysqlt extends ADODB_mysql {
 	var $databaseType = 'mysqlt';
 	var $ansiOuter = true; // for Version 3.23.17 or later
 	var $hasTransactions = true;
-	var $autoRollback = true; // apparently mysql does not autorollback properly 
-	
-	function ADODB_mysqlt() 
-	{			
+	var $autoRollback = true; // apparently mysql does not autorollback properly
+
+	function ADODB_mysqlt()
+	{
 	global $ADODB_EXTENSION; if ($ADODB_EXTENSION) $this->rsPrefix .= 'ext_';
 	}
-	
+
 	function BeginTrans()
-	{	  
+	{
 		if ($this->transOff) return true;
 		$this->transCnt += 1;
 		$this->Execute('SET AUTOCOMMIT=0');
 		$this->Execute('BEGIN');
 		return true;
 	}
-	
-	function CommitTrans($ok=true) 
+
+	function CommitTrans($ok=true)
 	{
-		if ($this->transOff) return true; 
+		if ($this->transOff) return true;
 		if (!$ok) return $this->RollbackTrans();
-		
+
 		if ($this->transCnt) $this->transCnt -= 1;
 		$this->Execute('COMMIT');
 		$this->Execute('SET AUTOCOMMIT=1');
 		return true;
 	}
-	
+
 	function RollbackTrans()
 	{
 		if ($this->transOff) return true;
@@ -58,15 +58,15 @@ class ADODB_mysqlt extends ADODB_mysql {
 		$this->Execute('SET AUTOCOMMIT=1');
 		return true;
 	}
-	
+
 }
 
-class ADORecordSet_mysqlt extends ADORecordSet_mysql{	
+class ADORecordSet_mysqlt extends ADORecordSet_mysql{
 	var $databaseType = "mysqlt";
-	
-	function ADORecordSet_mysqlt($queryID,$mode=false) 
+
+	function ADORecordSet_mysqlt($queryID,$mode=false)
 	{
-		if ($mode === false) { 
+		if ($mode === false) {
 			global $ADODB_FETCH_MODE;
 			$mode = $ADODB_FETCH_MODE;
 		}
@@ -78,10 +78,10 @@ class ADORecordSet_mysqlt extends ADORecordSet_mysql{
 		case ADODB_FETCH_DEFAULT:
 		case ADODB_FETCH_BOTH:$this->fetchMode = MYSQL_BOTH; break;
 		}
-	
-		$this->ADORecordSet($queryID);	
+
+		$this->ADORecordSet($queryID);
 	}
-	
+
 	function MoveNext()
 	{
 		if (@$this->fields =& mysql_fetch_array($this->_queryID,$this->fetchMode)) {
@@ -96,11 +96,11 @@ class ADORecordSet_mysqlt extends ADORecordSet_mysql{
 	}
 }
 
-class ADORecordSet_ext_mysqlt extends ADORecordSet_mysqlt {	
+class ADORecordSet_ext_mysqlt extends ADORecordSet_mysqlt {
 
-	function ADORecordSet_ext_mysqli($queryID,$mode=false) 
+	function ADORecordSet_ext_mysqli($queryID,$mode=false)
 	{
-		if ($mode === false) { 
+		if ($mode === false) {
 			global $ADODB_FETCH_MODE;
 			$mode = $ADODB_FETCH_MODE;
 		}
@@ -112,10 +112,10 @@ class ADORecordSet_ext_mysqlt extends ADORecordSet_mysqlt {
 		case ADODB_FETCH_DEFAULT:
 		case ADODB_FETCH_BOTH:$this->fetchMode = MYSQL_BOTH; break;
 		}
-	
-		$this->ADORecordSet($queryID);	
+
+		$this->ADORecordSet($queryID);
 	}
-	
+
 	function MoveNext()
 	{
 		return adodb_movenext($this);

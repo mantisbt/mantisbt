@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_delete.php,v 1.7 2004-11-02 19:51:54 marcelloscata Exp $
+	# $Id: bug_relationship_delete.php,v 1.8 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade.php,v 1.5 2004-10-05 17:20:26 thraxisp Exp $
+	# $Id: upgrade.php,v 1.6 2005-02-12 20:01:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php

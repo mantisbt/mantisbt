@@ -3,25 +3,25 @@
 <html>
 <head>
 	<title>ADODB Benchmarks</title>
-</head> 
+</head>
 
 <body>
-<?php 
+<?php
 /*
 V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
-  Released under both BSD license and Lesser GPL library license. 
-  Whenever there is any discrepancy between the two licenses, 
+  Released under both BSD license and Lesser GPL library license.
+  Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-  
+
   Benchmark code to test the speed to the ADODB library with different databases.
   This is a simplistic benchmark to be used as the basis for further testing.
   It should not be used as proof of the superiority of one database over the other.
-*/ 
- 
+*/
+
 $testmssql = true;
 //$testvfp = true;
 $testoracle = true;
-$testado = true; 
+$testado = true;
 $testibase = true;
 $testaccess = true;
 $testmysql = true;
@@ -37,36 +37,36 @@ function testdb(&$db,$createtab="create table ADOXYZ (id int, firstname char(24)
 GLOBAL $ADODB_version,$ADODB_FETCH_MODE;
 
 	adodb_backtrace();
-	
+
 	$max = 100;
 	$sql = 'select * from ADOXYZ';
 	$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-	
+
 	//print "<h3>ADODB Version: $ADODB_version Host: <i>$db->host</i> &nbsp; Database: <i>$db->database</i></h3>";
-	
-	// perform query once to cache results so we are only testing throughput 
+
+	// perform query once to cache results so we are only testing throughput
 	$rs = $db->Execute($sql);
 	if (!$rs){
 		print "Error in recordset<p>";
 		return;
-	}	
+	}
 	$arr = $rs->GetArray();
 	//$db->debug = true;
 	global $ADODB_COUNTRECS;
 	$ADODB_COUNTRECS = false;
 	$start = microtime();
 	for ($i=0; $i < $max; $i++) {
-		$rs =& $db->Execute($sql);	
+		$rs =& $db->Execute($sql);
 		$arr =& $rs->GetArray();
 	   //		 print $arr[0][1];
 	}
 	$end =  microtime();
 	$start = explode(' ',$start);
 	$end = explode(' ',$end);
-	
+
 	//print_r($start);
 	//print_r($end);
-	
+
 	  //  print_r($arr);
 	$total = $end[0]+trim($end[1]) - $start[0]-trim($start[1]);
 	printf ("<p>seconds = %8.2f for %d iterations each with %d records</p>",$total,$max, sizeof($arr));

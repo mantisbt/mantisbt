@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_add.php,v 1.30 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_cat_add.php,v 1.31 2005-02-12 20:01:05 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'category_api.php' );
 ?>
 <?php

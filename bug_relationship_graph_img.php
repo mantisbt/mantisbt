@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_graph_img.php,v 1.1 2004-09-25 14:21:34 prichards Exp $
+	# $Id: bug_relationship_graph_img.php,v 1.2 2005-02-12 20:01:04 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );

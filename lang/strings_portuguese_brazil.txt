@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.78 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:09 $
+	# $Revision: 1.79 $
+	# $Author: jlatour $
+	# $Date: 2005-02-12 20:04:12 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.78 2004-10-15 07:07:09 bigbadger Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.79 2005-02-12 20:04:12 jlatour Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.217 -- jferraz 2004/08/23
 	###########################################################################
