@@ -19,7 +19,7 @@
 		$query = "CREATE TABLE $t_upgrade_table
 				  (upgrade_id char(20) NOT NULL,
 				  description char(255) NOT NULL,
-				  KEY upgrade_id (upgrade_id))";
+				  PRIMARY KEY (upgrade_id))";
 
 		db_query( $query );
 
