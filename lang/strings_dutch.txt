@@ -9,17 +9,17 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.35 $
+	# $Revision: 1.36 $
 	# $Author: jlatour $
-	# $Date: 2002-08-17 15:22:36 $
+	# $Date: 2002-08-21 14:11:38 $
 	#
-	# $Id: strings_dutch.txt,v 1.35 2002-08-17 15:22:36 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.36 2002-08-21 14:11:38 jlatour Exp $
 	###########################################################################
 
 ?>
 <?php
     # Charset
-	$s_charset = 'iso-8859-1';
+	$s_charset = 'iso-8859-15';
 
 	# new strings:
 	$s_all_projects = 'Alle projecten';

@@ -12,16 +12,16 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.38 $
+	# $Revision: 1.39 $
 	# $Author: jlatour $
-	# $Date: 2002-08-17 15:22:37 $
+	# $Date: 2002-08-21 14:11:38 $
 	#
-	# $Id: strings_french.txt,v 1.38 2002-08-17 15:22:37 jlatour Exp $
+	# $Id: strings_french.txt,v 1.39 2002-08-21 14:11:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
     # Charset
-	$s_charset = 'iso-8859-1';
+	$s_charset = 'iso-8859-15';
 
 	# new strings:
 	$s_all_projects = 'Tous les projets';
