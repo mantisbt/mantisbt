@@ -3,6 +3,9 @@
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+	
+	# Initial code for this addon cames from Duncan Lisset
+	# Modified and "make mantis codeguidlines compatible" by Rufinus
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>

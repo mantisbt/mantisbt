@@ -151,6 +151,8 @@
              ############################
 
 	# --- jpgraph settings --- #
+	# Initial Version from Duncan Lisset
+	# 
 	# To use the Jpgraph addon you need the JPGRAPH package from
 	# http://www.aditus.nu/jpgraph/index.php
 	# You can place the package whereever you want, but you have
