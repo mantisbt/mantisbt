@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.42 2003-02-24 03:12:43 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.43 2003-02-25 15:50:05 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -481,13 +481,9 @@
 <!-- Buttons -->
 <tr align="center">
 	<td class="center" colspan="6">
-		<table>
-			<tr align="center">
 <?php
 	html_buttons_view_bug_page( $f_bug_id );
 ?>
-			</tr>
-		</table>
 	</td>
 </tr>
 </table>

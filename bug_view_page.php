@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.43 2003-02-24 03:12:44 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.44 2003-02-25 15:50:08 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -87,22 +87,22 @@
 
 <!-- Labels -->
 <tr class="row-category">
-	<td width="15%">
+	<td>
 		<?php echo lang_get( 'id' ) ?>
 	</td>
-	<td width="20%">
+	<td>
 		<?php echo lang_get( 'category' ) ?>
 	</td>
-	<td width="15%">
+	<td>
 		<?php echo lang_get( 'severity' ) ?>
 	</td>
-	<td width="20%">
+	<td>
 		<?php echo lang_get( 'reproducibility' ) ?>
 	</td>
-	<td width="15%">
+	<td>
 		<?php echo lang_get( 'date_submitted' ) ?>
 	</td>
-	<td width="15%">
+	<td>
 		<?php echo lang_get( 'last_update' ) ?>
 	</td>
 </tr>
@@ -394,13 +394,9 @@
 <!-- Buttons -->
 <tr align="center">
 	<td class="center" colspan="6">
-		<table>
-			<tr align="center">
 <?php
 	html_buttons_view_bug_page( $f_bug_id );
 ?>
-			</tr>
-		</table>
 	</td>
 </tr>
 
