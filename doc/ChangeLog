@@ -1,26 +1,36 @@
 Mantis ChangeLog
 
-2004.09.xx  -  0.19.0
+2004.09.12  -  0.19.0
 
-- 0003896: [security] Change default value of $g_view_summary_threshold to MANAGER (Victor Boctor)
-- 0004425: [bugtracker] Action group page exceeds max execution time (Victor Boctor)
-- 0004437: [bugtracker] Filenames of uploaded attached files are damaged (thraxisp)
-- 0004479: [bugtracker] Reporters can't close or reopen issues they reported
-- 0004495: [bugtracker] Warning in bug_actiongroup_page.php when risolving (thraxisp)
+This is a stable release that followed a couple of alpha releases + a release candidate.  Compared to 0.18.3 this release has over 250 enhancements and fixes.  These include some major additions to Mantis including issue relationships, sponsorships, advanced filters, changelog, workflow control, my-view, using ADODB as a database abstraction layer, "forgot password" support, more secure signup with captcha image, security fixes, and various other fixes and enhancements.  All users of previous releases are encouraged to upgrade to this release.
+
+- 0003896: [security] Change default value of $g_view_summary_threshold to MANAGER (vboctor)
+- 0004478: [upgrade] database upgrade from 0.18.3 problem: upgrade-ID "filters-db1" does not work on mySQL4.1.3b-beta (jlatour)
+- 0004435: [other] Auto-preview of attached images is broken (vboctor)
+- 0004470: [other] Strange changes of "Resolution" value (thraxisp)
+- 0004523: [filters] SYSTEM NOTICE: Undefined variable: t_target_field in view_filters_page.php (vboctor)
+- 0004431: [relationships] Relationship removal is always "duplicate of" in history (masc)
 - 0004426: [email] Email notifications to users with language set to "auto" causes errors (thraxisp)
 - 0004448: [email] Custom severity and status shown in mail as code (thraxisp)
-- 0004480: [email] admin/check.php - Check email failing. (thraxisp)
-- 0004523: [filters] SYSTEM NOTICE: Undefined variable: t_target_field in view_filters_page.php (Victor Boctor)
-- 0004463: [graph] pie chart of summary graph per category wrong when viewing allprojects (thraxisp)
-- 0004464: [graph] Pie graphs display as error if no issue exist for a specific project (thraxisp)
-- 0004511: [graph] Summary Graph "Cumulative by Date" is blank (process expires) (thraxisp)
-- 0004507: [graph] No time-line in the summary for cumulative by days (thraxisp)
-- 0004429: [localization] Slovene national characters not displayed correctly (Jeroen Latour)
-- 0004423: [localization] Parse error in strings_hungarian.txt line 974 (Victor Boctor)
+- 0004321: [localization] New german lang strings (bpfennig)
+- 0004423: [localization] Parse error in strings_hungarian.txt line 974 (vboctor)
+- 0004429: [localization] Slovene national characters not displayed correctly (jlatour)
+- 0004445: [localization] New Spanish strings file (Wanderer)
+- 0004458: [localization] Small fixes to the French file (Wanderer)
+- 0004459: [localization] Typos in German and English strings (Wanderer)
+- 0004498: [localization] Swedish translation updated for 0.19.0rc1 (Wanderer)
 - 0004509: [localization] Request rather than "Provide Feedback to Issue" (thraxisp)
-- 0004431: [relationships] Relationship removal is always "duplicate of" in history (masc)
-- 0004435: [other] Auto-preview of attached images is broken (Victor Boctor)
-- 0004478: [upgrade] database upgrade from 0.18.3 problem: upgrade-ID "filters-db1" does not work on mySQL4.1.3b-beta (Jeroen Latour)
+- 0004519: [localization] Updated the Italian language strings file to 0.19.0rc1 (Wanderer)
+- 0004463: [graphs] pie chart of summary graph per category wrong when viewing allprojects) (thraxisp)
+- 0004464: [graphs] Pie graphs display as error if no issue exist for a specific project (thraxisp)
+- 0004481: [graphs] Query counts are incorrect in graphs (thraxisp)
+- 0004507: [graphs] No time-line in the summary for cumulative by days (thraxisp)
+- 0004511: [graphs] Summary Graph "Cumulative by Date" is blank (process expires) (thraxisp)
+- 0004425: [bugtracker] Action group page exceeds max execution time (vboctor)
+- 0004437: [bugtracker] Filenames of uploaded attached files are damaged (thraxisp)
+- 0004479: [bugtracker] Reporters can't close or reopen issues they reported (thraxisp)
+- 0004495: [bugtracker] Warning in bug_actiongroup_page.php when risolving (thraxisp)
+- 0004480: [administration] admin/check.php - Check email failing. (thraxisp)
 - Updated Italian, French, Portuguese Brazil, Lithuanian, Korean, Czech, Swedish, Spanish, German and Dutch translations
 
 2004.08.28  -  0.19.0rc1
@@ -137,13 +147,13 @@ This is the first release candidate for 0.19.0, it requires database upgrade.  W
 - New Config: main_menu_custom_options (default empty) - Allow addition of custom menu options to main menu (vboctor)
 - New Config: show_realname (default OFF) - show realname in all places instead of username (thraxisp)
 - New Config: max_failed_login_count -	Max. attempts to login using a wrong password before lock the account.
-- New Config:	notify_new_user_created_threshold_min - access level required to be notified when a new user has been created
-- New Config:	password_confirm_hash_magic_string - String used to generate the confirm_hash for the 'lost password' feature
-- New Config:	signup_use_captcha	- use image to validate subscription
-- New Config:	system_font_folder	- absolute path  to folder which contains your TrueType-Font files
-- New Config:	font_per_captcha	- font name used to create the captcha image
-- New Config:	lost_password_feature - enable lost password feature
-- New Config:	max_lost_password_in_progress_count - Max. simultaneous requests of 'lost password'
+- New Config: notify_new_user_created_threshold_min - access level required to be notified when a new user has been created
+- New Config: password_confirm_hash_magic_string - String used to generate the confirm_hash for the 'lost password' feature
+- New Config: signup_use_captcha	- use image to validate subscription
+- New Config: system_font_folder	- absolute path  to folder which contains your TrueType-Font files
+- New Config: font_per_captcha	- font name used to create the captcha image
+- New Config: lost_password_feature - enable lost password feature
+- New Config: max_lost_password_in_progress_count - Max. simultaneous requests of 'lost password'
 - Removed config option (to_mail): no longer required
 - Removed config option (use_bcc): no longer required
 - Updated German, French, Brazilian Portuguese, japanese_euc, japanese_sjis, Korean, Russian and japanese_utf8 language.
