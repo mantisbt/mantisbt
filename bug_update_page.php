@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.73 2004-07-16 23:03:08 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.74 2004-07-16 23:30:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -233,14 +233,21 @@
 			echo '<td>';
 			echo '<input type="text" name="duplicate_id" value="', $t_bug->duplicate_id, '" maxlength="7" />&nbsp;';
 			echo '</td>';
-
-			# spacer
-			echo '<td colspan="2">&nbsp;</td>';
 		} else {
 			# spacer
-			echo '<td colspan="4">&nbsp;</td>';
+			echo '<td colspan="2">&nbsp;</td>';
 		}
 	?>
+
+	<!-- Product Version -->
+	<td class="category">
+		<?php echo lang_get( 'product_version' ) ?>
+	</td>
+	<td>
+		<select name="version">
+			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
+		</select>
+	</td>
 </tr>
 
 

@@ -28,6 +28,7 @@ Mantis ChangeLog
  * Fix #4064: Links are not hyperlinked property if containing () (vboctor)
  * Fix #4065: Issues are not hyperlinked in Changelog if $g_bug_link_tag is not # (vboctor).
  * Fix #4081: mantis_upgrade_table.upgrade_id too small (vboctor).
+ * Fix #4104: Product Version Field in simple View (vboctor).
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection.
  * New Config: status_enum_workflow (default disabled) - Defines the workflow to indicate what are the possible statuses based on the current one.
  * Updated German, Italian, Russian, Czech and Brazilian Portuguese languages.

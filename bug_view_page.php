@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.60 2004-07-16 23:03:08 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.61 2004-07-16 23:30:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -172,7 +172,6 @@
 
 	<!-- spacer -->
 	<td colspan="2">&nbsp;</td>
-
 </tr>
 
 
@@ -228,14 +227,19 @@
 			echo '<td>';
 			print_duplicate_id( $t_bug->duplicate_id );
 			echo '</td>';
-
-			# spacer
-			echo '<td colspan="2">&nbsp;</td>';
 		} else {
 			# spacer
-			echo '<td colspan="4">&nbsp;</td>';
+			echo '<td colspan="2">&nbsp;</td>';
 		}
 	?>
+
+	<!-- Product Version -->
+	<td class="category">
+		<?php echo lang_get( 'product_version' ) ?>
+	</td>
+	<td>
+		<?php echo $t_bug->version ?>
+	</td>
 </tr>
 
 
