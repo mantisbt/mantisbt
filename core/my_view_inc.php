@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.10 2005-03-14 11:41:22 vboctor Exp $
+	# $Id: my_view_inc.php,v 1.11 2005-03-23 18:42:22 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -175,7 +175,8 @@
 		$status_color = get_status_color( $v_status );
 
 		# grab the bugnote count
-		$bugnote_count = bug_get_bugnote_count( $v_id );
+		# @@@ thraxisp - not used???
+#		$bugnote_info = bug_get_bugnote_stats( $v_id );
 
 		# Check for attachments
 		$t_attachment_count = 0;
@@ -185,10 +186,6 @@
 
 		# grab the project name
 		$project_name = project_get_field( $v_project_id, 'name' );
-
-		if ( $bugnote_count > 0 ) {
-			$v_bugnote_updated = bug_get_newest_bugnote_timestamp( $v_id );
-		}
 ?>
 
 <tr bgcolor="<?php echo $status_color ?>">
