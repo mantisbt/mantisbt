@@ -19,6 +19,7 @@ include ($g_jpgraph_path.'jpgraph_bar.php');
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_s = explode_enum_arr( $t_arr[$i] );
+			$c_s[0] = addslashes($t_s[0]);
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
 			if ($g_project_cookie_val=='0000000') $specific_where = '';
@@ -26,7 +27,7 @@ include ($g_jpgraph_path.'jpgraph_bar.php');
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE $p_enum='$t_s[0]' $specific_where";
+					WHERE $p_enum='$c_s[0]' $specific_where";
 			$result = db_query( $query );
 			$enum_name_count[] = db_result( $result, 0 );
 		} # end for

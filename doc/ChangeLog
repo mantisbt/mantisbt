@@ -13,6 +13,7 @@ Mantis
  * Added validation checks for all inputs that are passed on to database queries.
  * Added check_varset() function to replace if isset() else checks.
  * Added $s_charset to all localization files.
+ * Quoted various text values retrieved from a database and used in a database query.
  * Updated Hungarian localization.
  * Updated Russian localization.
  * Updated Romanian localization.

@@ -24,10 +24,11 @@
 
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_s = explode_enum_arr( $t_arr[$i] );
+			$c_s[0] = addslashes($t_s[0]);
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE $p_enum='$t_s[0]' AND $specific_where";
+					WHERE $p_enum='$c_s[0]' AND $specific_where";
 			$result = db_query( $query );
 			$t_enum_count = db_result( $result, 0 );
 
@@ -35,7 +36,7 @@
 			$t_clo_val = CLOSED;
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE $p_enum='$t_s[0]' AND
+					WHERE $p_enum='$c_s[0]' AND
 						status<>'$t_res_val' AND
 						status<>'$t_clo_val' AND $specific_where";
 			$result2 = db_query( $query );
@@ -43,14 +44,14 @@
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE $p_enum='$t_s[0]' AND
+					WHERE $p_enum='$c_s[0]' AND
 						status='$t_clo_val' AND $specific_where";
 			$result2 = db_query( $query );
 			$closed_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE $p_enum='$t_s[0]' AND
+					WHERE $p_enum='$c_s[0]' AND
 						status='$t_res_val' AND $specific_where";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
@@ -286,10 +287,10 @@
 			$row = db_fetch_array( $result );
 			$t_category = $row['category'];
 
-			$t_category2 = addslashes( $t_category );
+			$c_category = addslashes( $t_category );
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$t_category2' AND $specific_where ";
+					WHERE category='$c_category' AND $specific_where ";
 			$result2 = db_query( $query );
 			$total_bug_count = db_result( $result2, 0, 0 );
 
@@ -298,7 +299,7 @@
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$t_category2' AND
+					WHERE category='$c_category' AND
 						status<>'$t_clo_val' AND
 						status<>'$t_res_val'AND $specific_where ";
 			$result2 = db_query( $query );
@@ -306,13 +307,13 @@
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$t_category2' AND status='$t_clo_val' AND $specific_where ";
+					WHERE category='$c_category' AND status='$t_clo_val' AND $specific_where ";
 			$result2 = db_query( $query );
 			$closed_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE category='$t_category2' AND status='$t_res_val' AND $specific_where ";
+					WHERE category='$c_category' AND status='$t_res_val' AND $specific_where ";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
