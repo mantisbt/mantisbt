@@ -222,13 +222,8 @@
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 
-		# choose color based on status only if not resolved
-		if ( !( CLOSED == $v_status ) ) {
-			$status_color = get_status_color( $v_status );
-		} else {
-			# alternate row colors
-			$status_color = alternate_colors( $i );
-		}
+		# choose color based on status
+		$status_color = get_status_color( $v_status );
 
 		# grab the bugnote count
 		$bugnote_count = get_bugnote_count( $v_id );

@@ -175,7 +175,7 @@
 	<td class="category">
 		<?php echo $s_status ?>
 	</td>
-	<td <?php echo get_status_bgcolor( $v_status ) ?>>
+	<td bgcolor="<?php echo get_status_color( $v_status ) ?>">
 		<select name="f_status">
 			<?php print_enum_string_option_list( 'status', $v_status ) ?>
 		</select>

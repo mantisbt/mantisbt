@@ -148,7 +148,7 @@
 	<td class="category">
 		<?php echo $s_status ?>
 	</td>
-	<td <?php echo get_status_bgcolor( $v_status ) ?>>
+	<td bgcolor="<?php echo get_status_color( $v_status ) ?>">
 		<?php echo get_enum_element( 'status', $v_status ) ?>
 	</td>
 	<td class="category">

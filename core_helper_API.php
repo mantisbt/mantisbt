@@ -308,15 +308,6 @@
 		return $$t_color_variable_name;
 	}
 	# --------------------
-	# get a bgcolor='' string for the given status or '' if the status is CLOSED
-	function get_status_bgcolor( $p_status ){
-		if ( !( CLOSED == $p_status ) ) {
-			return 'bgcolor="'.get_status_color( $p_status ).'"';
-		} else {
-			return '';
-		}
-	}
-	# --------------------
 	# Get the default project of a user
 	function get_default_project( $p_user_id ) {
 		global $g_mantis_user_pref_table;

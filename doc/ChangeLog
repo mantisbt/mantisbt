@@ -24,6 +24,8 @@ Mantis
  * Updated comments in all localization files to list correct file names with the .php suffix.
  * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
  * Removed HTML entities from all localization files.
+ * Removed get_status_bgcolor from core_helper_API.php and all files using it, in favor of get_status_color.
+ * Removed special status of 'closed' concerning colors. 'View all bugs' will use the configured background color.
  * Reworked code formatting for $c_ variables.
  * Reworked !isset() checks to use check_varset().
  * Modified input checked variables to be prefixed by $c_.
@@ -34,6 +36,7 @@ Mantis
  * Modified core_html_API.php to print a META-tag defining the charset.
  * Modified core_email_API.php to send a content-type header in emails.
  * Modified core_user_API.php, login.php and login_page.php to send the user back to the referring page after login.
+ * Made 'light grey' the default color for 'closed'.
 
 2002.05.19  -  0.17.3
 
