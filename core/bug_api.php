@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.91 2004-12-23 01:34:02 thraxisp Exp $
+	# $Id: bug_api.php,v 1.92 2005-01-09 18:56:56 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -269,6 +269,9 @@
 
 		if ( count( $t_status_enum_workflow ) < 1) {
 			# workflow not defined, use default enum
+			return true;
+		} else if ( $p_bug_status == $p_wanted_status ) {
+			# no change in state, allow the transition
 			return true;
 		} else {
 			# workflow defined - find allowed states
