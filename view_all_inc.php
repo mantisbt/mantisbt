@@ -7,6 +7,8 @@
 	<input type="hidden" name="f_save" value="1">
 	<input type="hidden" name="f_sort" value="<? echo $f_sort ?>">
 	<input type="hidden" name="f_dir" value="<? echo $f_dir ?>">
+	<input type="hidden" name="f_page_number" value="<? echo $f_page_number ?>">
+	<input type="hidden" name="f_per_page" value="<? echo $f_per_page ?>">
 	<table width="100%">
 	<tr align="center">
         <td>
@@ -81,7 +83,7 @@
 			</select>
 		</td>
 		<td>
-			<input type="text" name="f_limit_view" size="3" maxlength="7" value="<? echo $f_limit_view ?>">
+			<input type="text" name="f_per_page" size="3" maxlength="7" value="<? echo $f_per_page ?>">
 		</td>
 		<td>
 			<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<? echo $f_highlight_changed ?>">
@@ -112,14 +114,34 @@
 			<b><? echo $s_viewing_bugs_title ?></b>
 			<?
 				if ( $row_count > 0 ) {
-					$v_start = $f_offset+1;
-					$v_end   = $f_offset+$row_count;
+					$v_start = $t_offset+1;
+					$v_end   = $t_offset+$row_count;
 				} else {
 					$v_start = 0;
 					$v_end   = 0;
 				}
-				PRINT "($v_start - $v_end)";
 			?>
+			(<?= $v_start ?> - <?= $v_end ?> of <?= $t_query_count ?>)
+		</td>
+		<td align="right">
+			<b>[
+			<?
+				# print out a link for each page i.e.
+				#     [ 1 2 3 ]
+				#
+				for ($i = 1; $i <= $t_page_count; $i ++) {
+					if ($i == $f_page_number) {
+			?>
+			<?= $i ?>
+			<?
+					} else {
+			?>
+			<a href="<?= $PHP_SELF ?>?f_page_number=<?= $i ?>"><?= $i ?></a>
+			<?
+					}
+				}
+			?>
+			]&nbsp;&nbsp;</b>
 		</td>
 	</tr>
 	<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
@@ -263,25 +285,25 @@
 <p>
 <div align="center">
 <?
-	$f_offset_next = $f_offset + $f_limit_view;
-	$f_offset_prev = $f_offset - $f_limit_view;
-
-	if ( $f_offset_prev < 0 ) {
-		$f_offset_prev = -1;
-	}
-
-	if ( $f_dir=="DESC" ) {
-		$f_dir = "ASC";
+	# print the [ prev ] link
+	#
+	if ($f_page_number > 1) {
+		$t_prev_page_number = $f_page_number - 1;
+		print_bracket_link($link_page . "?f_page_number=" . $t_prev_page_number, $s_view_prev_link." ".$f_per_page);
 	} else {
-		$f_dir = "DESC";
+		print_bracket_link('', $s_view_prev_link." ".$f_per_page);
 	}
+?>
+	&nbsp;
+<?
 
-
-	if ( $f_offset_prev >= 0 ) {
-		print_bracket_link( $link_page."?&f_offset=".$f_offset_prev, $s_view_prev_link." ".$f_limit_view );
-	}
-	if ( $row_count == $f_limit_view ) {
-		print_bracket_link( $link_page."?f_offset=".$f_offset_next, $s_view_next_link." ".$f_limit_view );
+	# print the [ next ] link
+	#
+	if ($f_page_number < $t_page_count) {
+		$t_next_page_number = $f_page_number + 1;
+		print_bracket_link($link_page . "?f_page_number=" . $t_next_page_number, $s_view_next_link." ".$f_per_page);
+	} else {
+		print_bracket_link('', $s_view_next_link." ".$f_per_page);
 	}
 ?>
 </div>

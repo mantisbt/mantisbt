@@ -30,8 +30,12 @@
 		$f_search_text = false;
 	}
 
-	if ( !isset( $f_offset ) ) {
-		$f_offset = 0;
+	if ( !isset( $f_page_number ) ) {
+		$f_page_number = 1;
+	}
+
+	if ( !isset( $f_per_page ) ) {
+		$f_per_page = 4;
 	}
 
 	if ( !isset( $f_hide_closed ) ) {
@@ -46,7 +50,7 @@
 								$f_show_category."#".
 								$f_show_severity."#".
 								$f_show_status."#".
-								$f_limit_view."#".
+								$f_per_page."#".
 								$f_highlight_changed."#".
 								$f_hide_closed."#".
 								$f_user_id."#".
@@ -61,7 +65,7 @@
 			$f_show_category 		= $t_setting_arr[1];
 			$f_show_severity	 	= $t_setting_arr[2];
 			$f_show_status 			= $t_setting_arr[3];
-			$f_limit_view 			= $t_setting_arr[4];
+			$f_per_page 			= $t_setting_arr[4];
 			$f_highlight_changed 	= $t_setting_arr[5];
 			$f_hide_closed 			= $t_setting_arr[6];
 			$f_user_id 				= $t_setting_arr[7];
@@ -78,7 +82,7 @@
 								$f_show_category."#".
 								$f_show_severity."#".
 								$f_show_status."#".
-								$f_limit_view."#".
+								$f_per_page."#".
 								$f_highlight_changed."#".
 								$f_hide_closed."#".
 								$f_user_id."#".
@@ -94,7 +98,7 @@
 		$f_show_category 		= $t_setting_arr[1];
 		$f_show_severity	 	= $t_setting_arr[2];
 		$f_show_status 			= $t_setting_arr[3];
-		$f_limit_view 			= $t_setting_arr[4];
+		$f_per_page 			= $t_setting_arr[4];
 		$f_highlight_changed 	= $t_setting_arr[5];
 		$f_hide_closed 			= $t_setting_arr[6];
 		$f_user_id 				= $t_setting_arr[7];
@@ -111,9 +115,13 @@
 		}
 	}
 
-	# Build our query string based on our viewing criteria
-
-	$query = "SELECT * FROM $g_mantis_bug_table";
+	# Build the query string based on the user's viewing criteria.
+	# Build the query up in sections, because two queries need to 
+	# be performed.
+	#
+	# 1) count of all the rows
+	# 2) listing of the current page of rows, ordered appropriately
+	#
 
 	$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
 
@@ -150,12 +158,49 @@
 							OR (additional_information LIKE '%".addslashes($f_search_text)."%')
 							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search_text)."%'))
 							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
-		$query = "SELECT $g_mantis_bug_table.*, $g_mantis_bug_text_table.description
-				FROM $g_mantis_bug_table, $g_mantis_bug_text_table ".$t_where_clause;
+
+		$t_columns_clause = " $g_mantis_bug_table.*";
+		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table";
 	} else {
-		$query = $query.$t_where_clause;
+		$t_columns_clause = " *";
+		$t_from_clause = " FROM $g_mantis_bug_table";
 	}
 
+	# Get the total number of bugs that meet the criteria.
+	#
+	$query = "SELECT count(*) " . $t_from_clause . $t_where_clause;
+	$result = db_query( $query );
+	$row = db_fetch_array($result);
+	$t_query_count = $row['count(*)'];
+
+
+	# Guard against silly values of $f_per_page.
+	#
+	if ($f_per_page == 0) {
+		$f_per_page = 1;
+	}
+	$f_per_page = (int) abs($f_per_page);
+
+
+	# Use $t_query_count and $f_per_page to determine how many pages
+	# to split this list up into.
+	# For the sake of consistency have at least one page, even if it
+	# is empty.
+	#
+	$t_page_count = ceil($t_query_count / $f_per_page);
+	if ($t_page_count < 1) {
+		$t_page_count = 1;
+	}
+
+	# Make sure f_page_number isn't past the last page.
+	#
+	if ($f_page_number > $t_page_count) {
+		$f_page_number = $t_page_count;
+	}
+
+	# Now add the rest of the criteria i.e. sorting, limit.
+	#
+	$query = "SELECT " . $t_columns_clause . $t_from_clause . $t_where_clause;
 	if ( !isset( $f_sort ) ) {
 		$f_sort="last_updated";
 	}
@@ -164,12 +209,21 @@
 		$query = $query.", priority DESC";
 	}
 
-	if ( isset( $f_limit_view ) ) {
-		$query = $query." LIMIT $f_offset, $f_limit_view";
+	# t_offset = ((f_page_number - 1) * f_per_page)
+	# f_per_page = f_per_page
+	#
+	# for example page number 1, per page 5:
+	#     t_offset = 0
+	# for example page number 2, per page 5:
+	#     t_offset = 5
+	#
+	$t_offset = (($f_page_number - 1) * $f_per_page);
+	if ( isset( $f_per_page ) ) {
+		$query = $query." LIMIT $t_offset, $f_per_page";
 	}
 
 	# perform query
-    $result = db_query( $query );
+	$result = db_query( $query );
 	$row_count = db_num_rows( $result );
 
 	$link_page = $g_view_all_bug_page;
@@ -187,7 +241,7 @@
 <? include( $g_meta_include_file ) ?>
 <?
 	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
-		print_meta_redirect( $PHP_SELF."?f_offset=".$f_offset, get_current_user_pref_field( "refresh_delay" )*60 );
+		print_meta_redirect( $PHP_SELF."?f_page_number=".$f_page_number, get_current_user_pref_field( "refresh_delay" )*60 );
 	}
 ?>
 <? print_head_bottom() ?>
