@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.33 2004-05-24 22:23:06 vboctor Exp $
+	# $Id: core.php,v 1.34 2004-09-30 18:26:37 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -95,10 +95,14 @@
 	require_once( $t_core_path.'database_api.php' );
 
 	# Headers to prevent caching
-	header( 'Pragma: no-cache' );
-	header( 'Expires: Fri, 01 Jan 1999 00:00:00 GMT' );
-	header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-	header( 'Cache-Control: post-check=0, pre-check=0', false );
+	#  with option to bypass if running from script
+	global $g_bypass_headers;
+	if ( !isset( $g_bypass_headers ) ) {
+		header( 'Pragma: no-cache' );
+		header( 'Expires: Fri, 01 Jan 1999 00:00:00 GMT' );
+		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+		header( 'Cache-Control: post-check=0, pre-check=0', false );
+	}
 
 	# SEND USER-DEFINED HEADERS
 	foreach( config_get( 'custom_headers' ) as $t_header ) {

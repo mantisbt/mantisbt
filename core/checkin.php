@@ -7,9 +7,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: checkin.php,v 1.1 2004-07-30 12:46:10 vboctor Exp $
+	# $Id: checkin.php,v 1.2 2004-09-30 18:26:38 thraxisp Exp $
 	# --------------------------------------------------------
 
+	global $g_bypass_headers;
+	$g_bypass_headers = 1;
 	require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 	# Make sure this script doesn't run via the webserver
