@@ -50,12 +50,9 @@
 	$f_steps_to_reproduce 		= string_prepare_textarea( $f_steps_to_reproduce );
 	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
 
-    if( ( $f_handler_id != 0 ) AND ( $f_status < ASSIGNED ) ){
-        $f_status=ASSIGNED;
+    if ( ( $f_handler_id != 0 ) AND ( $f_status == NEW_ ) ) {
+        $f_status = ASSIGNED;
     }
-	if (( $f_handler_id == 0 ) AND ( $f_status >= ASSIGNED ) ) {
-        $f_status = ACKNOWLEDGED;
-	}
 
 	### Update all fields
     $query = "UPDATE $g_mantis_bug_table
