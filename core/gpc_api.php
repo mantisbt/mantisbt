@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.30 2005-01-12 01:49:53 thraxisp Exp $
+	# $Id: gpc_api.php,v 1.31 2005-01-12 19:23:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -71,7 +71,7 @@
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 		} 
 		$t_val = str_replace( " ", "", trim( $t_result ) );
-		if ( ! preg_match( "/^([0-9])*$/", $t_val ) ) {
+		if ( ! preg_match( "/^-?([0-9])*$/", $t_val ) ) {
 			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
 		}
