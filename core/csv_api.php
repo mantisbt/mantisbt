@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.3 2004-05-24 12:23:18 vboctor Exp $
+	# $Id: csv_api.php,v 1.4 2004-07-16 23:03:09 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CSV API ###
@@ -74,8 +74,12 @@
 								'summary' => 'summary',
 								'status' => 'status',
 								'resolution' => 'resolution',
-								'duplicate_id' => 'duplicate_id',
 								'fixed_in_version' => 'fixed_in_version' );
+
+		if ( OFF == config_get( 'enable_relationship' ) ) {
+			$t_columns['duplicate_id'] = 'duplicate_id';
+		} # MASC RELATIONSHIP
+
 		return $t_columns;
 	}
 

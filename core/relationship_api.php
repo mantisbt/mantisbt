@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.10 2004-07-12 04:37:43 int2str Exp $
+	# $Id: relationship_api.php,v 1.11 2004-07-16 23:03:09 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -346,6 +346,13 @@
 			$p_user_id = auth_get_current_user_id();
 		}
 
+		if ( $p_html_preview == false ) {
+			$t_td = '<td>';
+		}
+		else {
+			$t_td = '<td class="print">';
+		}
+
 		if ( $p_bug_id == $p_relationship->src_bug_id ) {
 			# root bug is in the src side, related bug in the dest side
 			$t_related_bug_id = $p_relationship->dest_bug_id;
@@ -368,12 +375,12 @@
 
 				$t_relationship_info_html = $t_relationship_descr . '</td>';
 				if ( $p_html_preview == false ) {
-					$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
-					$t_relationship_info_html .= '<td bgcolor="' . get_status_color( $t_bug->status ) . '">' . $t_status . '&nbsp;</td><td>';
+					$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a>' . $t_td;
+					$t_relationship_info_html .= '<td bgcolor="' . get_status_color( $t_bug->status ) . '">' . $t_status . '&nbsp;</td>' . $t_td;
 				}
 				else {
-					$t_relationship_info_html .= '<td>' . bug_format_id( $t_related_bug_id ) . '</td>';
-					$t_relationship_info_html .= '<td>' . $t_status . '&nbsp;</td><td>';
+					$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';
+					$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>' . $t_td;
 				}
 
 				$t_relationship_info_text = str_pad( $t_relationship_descr,25);
@@ -382,21 +389,21 @@
 
 				# get the handler name of the related bug
 				if ( $t_bug->handler_id > 0 )  {
-					$t_relationship_info_html .= string_attribute( user_get_name(  $t_bug->handler_id ) );
+					$t_relationship_info_html .= '<nobr>' . string_attribute( user_get_name(  $t_bug->handler_id ) ) . '<nobr>';
 				}
 
 				# add summary
-				$t_relationship_info_html .= '&nbsp;</td><td><i>' . string_attribute( $t_bug->summary ) . '</i>';
+				$t_relationship_info_html .= '&nbsp;</td>' . $t_td . string_attribute( $t_bug->summary );
 			}
 			else {
 				# no viewer access to the related bug
-				$t_relationship_info_html = bug_format_id( $t_related_bug_id ) . '</td><td>&nbsp;</td><td>&nbsp;</td><td>';
+				$t_relationship_info_html = bug_format_id( $t_related_bug_id ) . '</td>' . $t_td . '&nbsp;</td>' . $t_td . '&nbsp;</td>' . $t_td;
 				$t_relationship_info_text = str_pad( bug_format_id( $t_related_bug_id ),8 );
 			}
 		}
 		else {
 			# related bug not found...
-			$t_relationship_info_html = bug_format_id( $t_related_bug_id ) . '</td><td>&nbsp;</td><td>&nbsp;</td><td>';
+			$t_relationship_info_html = bug_format_id( $t_related_bug_id ) . '</td>' . $t_td . '&nbsp;</td>' . $t_td . '&nbsp;</td>' . $t_td;
 			$t_relationship_info_text = str_pad( bug_format_id( $t_related_bug_id ),8 );
 		}
 
@@ -410,10 +417,10 @@
 		$t_relationship_info_text .= "\n";
 
 		if ( $p_html_preview == false ) {
-			$t_relationship_info_html = '<tr class="row-2"><td>' . $t_relationship_info_html . '&nbsp;</td></tr>';
+			$t_relationship_info_html = '<tr class="row-2">' . $t_td . $t_relationship_info_html . '&nbsp;</td></tr>';
 		}
 		else {
-			$t_relationship_info_html = '<tr class="print"><td>' . $t_relationship_info_html . '&nbsp;</td></tr>';
+			$t_relationship_info_html = '<tr>' . $t_td . $t_relationship_info_html . '&nbsp;</td></tr>';
 		}
 
 		if ( $p_html == true ) {
@@ -446,7 +453,9 @@
 			$t_summary .= '<tr class="row-2"><td colspan=5><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
 		}
 
-		$t_summary = '<table class="width100">' . $t_summary . '</table>';
+		if ( $t_summary != '' ) {
+			$t_summary = '<table class="width100">' . $t_summary . '</table>';
+		}
 
 		return $t_summary;
 	}
@@ -469,10 +478,12 @@
 		}
 
 		if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="print"><td colspan=5><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+			$t_summary .= '<tr class="print"><td class="print" colspan=5><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
 		}
 
-		$t_summary = '<table cellspacing=0 cellpadding=1 border=0>' . $t_summary . '</table>';
+		if ( !is_blank( $t_summary ) ) {
+			$t_summary = '<table class="width100">' . $t_summary . '</table>';
+		}
 
 		return $t_summary;
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.69 2004-07-13 12:16:10 vboctor Exp $
+	# $Id: bug_api.php,v 1.70 2004-07-16 23:03:09 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -286,7 +286,7 @@
 
 		return false;
 	}
-	
+
 	#===================================
 	# Creation / Deletion / Updating
 	#===================================
@@ -655,11 +655,8 @@
 		sponsorship_delete( sponsorship_get_all_ids( $p_bug_id ) );
 
 		# MASC RELATIONSHIP
-		# @@@ VB: Once the database is upgraded and the feature is tested,
-		# 	we should probably delete relationships even if the feature is currently off.
-		if ( ON == config_get( 'enable_relationship' ) ) {
-			relationship_delete_all( $p_bug_id );
-		}
+		# we delete relationships even if the feature is currently off.
+		relationship_delete_all( $p_bug_id );
 		# MASC RELATIONSHIP
 
 		# Delete files
@@ -972,7 +969,7 @@
 
 	# --------------------
 	# return the timestamp for the most recent time at which a bugnote
-	#  associated wiht the bug was modified and the total bugnote 
+	#  associated with the bug was modified and the total bugnote
 	#  count in one db query
 	function bug_get_bugnote_stats( $p_bug_id ) {
 		$c_bug_id			= db_prepare_int( $p_bug_id );
@@ -1111,13 +1108,38 @@
 	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
+		if ( null !== $p_duplicate_id ) {
+			# MASC RELATIONSHIP
+
+			# the related bug exists...
+			bug_ensure_exists( $p_duplicate_id );
+
+			# @@@ Would be nice if we don't generate an error if the relationship
+			# @@@ is the same as the one we are trying to add.
+			# there is no other relationship between the same bugs...
+			if ( relationship_exists( $p_bug_id, $p_duplicate_id ) ) {
+				trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
+			}
+
+			# user can access to the related bug at least as viewer...
+			if ( !access_has_bug_level( VIEWER, $p_duplicate_id ) ) {
+				error_parameters( $p_duplicate_id );
+				trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
+			}
+
+			bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
+			if ( ON == config_get( 'enable_relationship' ) ) {
+				# Relationship feature active
+				relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
+				history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
+				history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
+			}
+			# MASC RELATIONSHIP
+		}
+
 		bug_set_field( $p_bug_id, 'status', config_get( 'bug_resolved_status_threshold' ) );
 		bug_set_field( $p_bug_id, 'fixed_in_version', $p_fixed_in_version );
 		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
-
-		if ( null !== $p_duplicate_id ) {
-			bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
-		}
 
 		# only set handler if specified explicitly or if bug was not assigned to a handler
 		if ( null == $p_handler_id ) {

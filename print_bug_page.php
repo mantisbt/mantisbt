@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.48 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: print_bug_page.php,v 1.49 2004-07-16 23:03:09 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -204,10 +204,18 @@
 		<?php echo get_enum_element( 'projection', $v_projection ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo lang_get( 'duplicate_id' ) ?>:
+		<?php
+			if ( !config_get( 'enable_relationship' ) ) {
+				echo lang_get( 'duplicate_id' );
+			} # MASC RELATIONSHIP
+		?>&nbsp;
 	</td>
 	<td class="print">
-		<?php print_duplicate_id( $v_duplicate_id ) ?>
+		<?php
+			if ( !config_get( 'enable_relationship' ) ) {
+				print_duplicate_id( $v_duplicate_id );
+			} # MASC RELATIONSHIP
+		?>&nbsp;
 	</td>
 	<td class="print" colspan="2">&nbsp;</td>
 </tr>

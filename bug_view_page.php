@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.59 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.60 2004-07-16 23:03:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -220,17 +220,22 @@
 		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 
-	<!-- Duplicate ID -->
-	<td class="category">
-		<?php echo lang_get( 'duplicate_id' ) ?>
-	</td>
-	<td>
-		<?php print_duplicate_id( $t_bug->duplicate_id ) ?>
-	</td>
+	<?php
+		# MASC RELATIONSHIP
+		if ( OFF == config_get( 'enable_relationship' ) ) {
+			# Duplicate ID
+			echo '<td class="category">', lang_get( 'duplicate_id' ), '&nbsp;</td>';
+			echo '<td>';
+			print_duplicate_id( $t_bug->duplicate_id );
+			echo '</td>';
 
-	<!-- spacer -->
-	<td colspan="2">&nbsp;</td>
-
+			# spacer
+			echo '<td colspan="2">&nbsp;</td>';
+		} else {
+			# spacer
+			echo '<td colspan="4">&nbsp;</td>';
+		}
+	?>
 </tr>
 
 

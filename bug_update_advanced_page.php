@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.71 2004-07-13 12:16:10 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.72 2004-07-16 23:03:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -225,13 +225,21 @@
 		</select>
 	</td>
 
-	<!-- Duplicate ID -->
-	<td class="category">
-		<?php echo lang_get( 'duplicate_id' ) ?>
-	</td>
-	<td>
-		<input type="text" name="duplicate_id" value="<?php echo $t_bug->duplicate_id ?>" maxlength="7" />
-	</td>
+	<?php
+		# Duplicate Id
+
+		# MASC RELATIONSHIP
+		if ( OFF == config_get( 'enable_relationship' ) ) {
+			# Duplicate ID
+			echo '<td class="category">', lang_get( 'duplicate_id' ), '&nbsp;</td>';
+			echo '<td>';
+			echo '<input type="text" name="duplicate_id" value="', $t_bug->duplicate_id, '" maxlength="7" />&nbsp;';
+			echo '</td>';
+		} else {
+			# spacer
+			echo '<td colspan="2">&nbsp;</td>';
+		}
+	?>
 
 	<!-- Operating System -->
 	<td class="category">

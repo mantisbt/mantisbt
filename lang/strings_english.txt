@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.184 $
+	# $Revision: 1.185 $
 	# $Author: vboctor $
-	# $Date: 2004-07-15 21:51:17 $
+	# $Date: 2004-07-16 23:03:09 $
 	#
-	# $Id: strings_english.txt,v 1.184 2004-07-15 21:51:17 vboctor Exp $
+	# $Id: strings_english.txt,v 1.185 2004-07-16 23:03:09 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -276,6 +276,7 @@ $s_email_notification_title_for_action_bug_submitted = 'The following issue has 
 $s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
 $s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
 $s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
+$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';

@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.68 $
+	# $Revision: 1.69 $
 	# $Author: vboctor $
-	# $Date: 2004-07-12 22:11:21 $
+	# $Date: 2004-07-16 23:03:10 $
 	#
-	# $Id: strings_italian.txt,v 1.68 2004-07-12 22:11:21 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.69 2004-07-16 23:03:10 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -71,11 +71,11 @@ $s_bug_relationships = "Relazioni";
 $s_empty_password_sure_msg = "L'utente ha una password vuota.  Sei sicuro sia quello che vuoi?";
 $s_empty_password_button = "Usa una Password Vuota";
 
-$s_duplicate_of = "duplicato del %id";
-$s_has_duplicate = "duplica il %id";
-$s_related_to = "relativo al %id";
-$s_dependant_on = "depende dal %id";
-$s_blocks = "blocca il %id";
+$s_duplicate_of = "duplicato del";
+$s_has_duplicate = "duplica il";
+$s_related_to = "relativo al";
+$s_dependant_on = "depende dal";
+$s_blocks = "blocca il";
 
 $s_new_bug = "Nuova anomalia";
 $s_bugnote_added = "Nota aggiunta";
@@ -635,6 +635,7 @@ $s_delete_version_button = "Elimina Versione";
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = "Modifica la Versione del Progetto";
 $s_update_version_button = "Aggiorna la Versione";
+$s_released = 'Rilasciata';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = "La Versione è stata aggiornata...";
@@ -1003,5 +1004,4 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. NON a
 $s_create_child_bug_button = "Genera figlio";
 $s_bug_cloned_to = "Anomalia clonata";
 $s_bug_created_from = "Anomalia generata da";
-
 ?>
