@@ -181,11 +181,13 @@
 		&nbsp;
 	</td>
 <?php	} ?>
-<?php	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
+<?php	if ($g_project_cookie_val!='0000000') {
+			if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 	<td class="center" width="2%">
 		&nbsp;
 	</td>
-<?php	} ?>
+<?php		}
+		}?>
 	<td class="center" width="5%">
 		<?php print_view_bug_sort_link( 'P', 'priority', $f_sort, $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, 'priority' ) ?>
@@ -261,11 +263,14 @@
 	<?php	} ?>
 
 	<?php # the pencil shortcut 
-			if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
+			#only for a per project basis
+			if ($g_project_cookie_val!='0000000') {
+				if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 	<td bgcolor="<?php echo $status_color ?>">
 			<?php print " <input type=\"image\" name=\"update_$v_id\" src=\"images/update.png\" width=\"11\" height=\"11\">"; ?>
 	</td>
-	<?php	} ?>
+	<?php		} 
+			}?>
 	
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php

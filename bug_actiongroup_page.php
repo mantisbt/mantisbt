@@ -15,15 +15,16 @@
 <?php
 	# the pencil shortcut, to directly edit bugs
 	if ( $QUERY_STRING!='' ) {
-		$f_qsValues=split('&', $QUERY_STRING);
-		foreach($f_qsValues as $value) {
-			$val=split('=', $value);	
-			if ( substr($val[0], 0, 6)=='update' ) {
-				print_meta_redirect( 'bug_update_advanced_page.php?f_id='.substr($val[0], 7, strlen($val[0])-9), 0 );
+	$f_qsValues=split('&', $QUERY_STRING);
+	foreach($f_qsValues as $value) {
+		$val=split('=', $value);	
+		if ( substr($val[0], 0, 6)=='update' ) {
+			print_meta_redirect( 'bug_update_advanced_page.php?f_id='.substr($val[0], 7, strlen($val[0])-9), 0 );
+			exit;
 			}
 		}
 	}
-	
+
 	# redirects to all_bug_page if nothing is selected
 	if (( $f_action=='') or count($f_bug_arr)==0 ) {
 		print_meta_redirect( 'view_all_bug_page.php',0);

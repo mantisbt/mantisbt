@@ -7,11 +7,11 @@
 	###########################################################################
 	# Email API
 	# -------------------------------------------------
-	# $Revision: 1.61 $
-	# $Author: jhuggins $
-	# $Date: 2002-06-05 17:29:20 $
+	# $Revision: 1.62 $
+	# $Author: jctrosset $
+	# $Date: 2002-06-24 10:06:18 $
 	#
-	# $Id: core_email_API.php,v 1.61 2002-06-05 17:29:20 jhuggins Exp $
+	# $Id: core_email_API.php,v 1.62 2002-06-24 10:06:18 jctrosset Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -507,9 +507,9 @@
 		if ( ON == $g_use_phpMailer )  {
 			# Visit http://phpmailer.sourceforge.net
 			# if you have problems with phpMailer
-
+			
 			include('class.phpmailer.php');
-			$mail = new phpmailer;
+			$mail = new phpmailer; 
 
 			# Select the method to send mail
 			switch ( $g_phpMailer_method ) {

@@ -59,7 +59,8 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	bug_date_update($p_id);
 
    	# notify reporter and handler
-	switch ( $p_status ) {
+	# currently desactivated
+	/*switch ( $p_status ) {
 
 		case ASSIGNED:	email_assign( $p_id );
 			   			break;
@@ -67,7 +68,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 						break;
 		case CLOSED:	email_close( $p_id );
 						break;
-	}
+	}*/
 
 }//updateBug 
 
@@ -83,7 +84,7 @@ if ( $f_actionconfirmed=='1' ) {
 		switch ( $f_action ) {
 		
 		case 'CLOSE':
-			updateBugLite($t_id_arr[0],CLOSED,$f_resolution);
+			updateBugLite($t_id_arr[0],CLOSED,'');
 			break;
 
 		case 'DELETE':
