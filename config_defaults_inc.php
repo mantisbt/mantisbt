@@ -788,6 +788,13 @@
 	#  hide useful information from the user.
 	$g_show_warnings		= ON;
 
+	# --- debug messages ---
+	# If this option is turned OFF (default) page redirects will continue to
+	#  function even if a non-fatal error occurs.  For debugging purposes, you
+	#  can set this to ON so that any non-fatal error will prevent page redirection,
+	#  allowing you to see the errors.
+	# Only turn this option on for debugging
+	$g_stop_on_errors		= OFF;
 
 	# seed to be used to generate CRC checksums for view-only-defects
 	# Assign to this variable a keyword that won't change.  If this value changes

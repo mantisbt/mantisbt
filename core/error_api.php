@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.8 2002-09-16 00:57:48 jfitzell Exp $
+	# $Id: error_api.php,v 1.9 2002-09-21 23:00:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -17,10 +17,11 @@
 	set_error_handler( 'error_handler' );
 
 	#########################################
-	# SECURITY NOTE: this global is initialized here to prevent it
+	# SECURITY NOTE: these globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
 	#
 	$g_error_parameters = array();
+	$g_error_handled = false;
 
 	# ---------------
 	# Default error handler
@@ -32,7 +33,7 @@
 	# The others, being system errors, will come with a string in $p_error
 	#
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-		global $g_error_parameters;
+		global $g_error_parameters, $g_error_handled;
 
 		$t_short_file = basename( $p_file );
 		$t_method = 'none';
@@ -66,9 +67,9 @@
 				}
 				break;
 			case E_USER_NOTICE:
-				$t_string = "MANTIS NOTICE #$p_error: " .
-							error_string( $p_error ) .
-							"<br />($t_short_file: line $p_line)";
+				# used for debugging
+				$t_string = $p_error;
+
 				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
@@ -79,6 +80,9 @@
 		}
 
 		if ( 'halt' == $t_method ) {
+			$t_old_contents = ob_get_contents();
+			ob_end_clean();
+
 			print_page_top1();
 			print_page_top2a();
 
@@ -90,12 +94,17 @@
 			}
 
 			if ( ON == config_get( 'show_detailed_errors' ) ) {
-				if (isset($php_errormsg))
-					echo "okie dokie";
-
 				error_print_details( $p_file, $p_line, $p_context );
 				echo '<br />';
 				error_print_stack_trace();
+			}
+
+			if ( $g_error_handled ) {
+				echo '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
+
+				echo '<div style="border: solid 1px black;padding: 4px">';
+				echo $t_old_contents;
+				echo '</div>';
 			}
 
 			die();
@@ -110,6 +119,7 @@
 		}
 
 		$g_error_parameters = array();
+		$g_error_handled = true;
 	}
 
 	# ---------------
@@ -166,11 +176,19 @@
 	}
 
 	# ---------------
-	# returns an error string (in the current language) for the given error
+	# return an error string (in the current language) for the given error
 	function error_string( $p_error ) {
 		global $MANTIS_ERROR;
 
 		return $MANTIS_ERROR[$p_error];
+	}
+
+	# ---------------
+	# return true if we have handled an error on this page
+	function error_handled() {
+		global $g_error_handled;
+
+		return ( true == $g_error_handled );
 	}
 
 	function error_parameters() {

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.18 2002-09-21 22:09:28 jfitzell Exp $
+	# $Id: print_api.php,v 1.19 2002-09-21 23:00:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -19,8 +19,14 @@
 	# Print the headers to cause the page to redirect to $p_url
 	# If $p_die is true (default), terminate the execution of the script
 	#  immediately
+	# If we have handled any errors on this page and the 'stop_on_errors' config
+	#  option is turned on, return false and don't redirect.
 	function print_header_redirect( $p_url, $p_die=true ) {
 		$t_use_iis = config_get( 'use_iis');
+
+		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
+			return false;
+		}
 
 		if ( OFF == $t_use_iis ) {
 			header( 'Status: 302' );
@@ -38,6 +44,8 @@
 		if ( $p_die ) {
 			die; # additional output can cause problems so let's just stop output here
 		}
+
+		return true;
 	}
 	# --------------------
 	# Print a redirect header to view a bug

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.19 2002-09-21 21:02:51 jfitzell Exp $
+	# $Id: helper_api.php,v 1.20 2002-09-21 23:00:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -221,5 +221,10 @@
 		gpc_clear_cookie( 'project_cookie' );
 		gpc_clear_cookie( 'view_all_cookie' );
 		gpc_clear_cookie( 'manage_cookie' );
+	}
+	# --------------------
+	# Print a debug string by generating a notice
+	function debug( $p_string ) {
+		trigger_error( $p_string, NOTICE );
 	}
 ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.15 2002-09-21 10:17:14 jfitzell Exp $
+	# $Id: html_api.php,v 1.16 2002-09-21 23:00:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -107,14 +107,20 @@
 	# --------------------
 	# (6) OPTIONAL: for pages that require a redirect
 	# The time field is the number of seconds to wait before redirecting
-	function print_meta_redirect( $p_url, $p_time='' ) {
-		global $g_wait_time;
-
-		if ( empty( $p_time ) ) {
-			$p_time = $g_wait_time;
+	# If we have handled any errors on this page and the 'stop_on_errors' config
+	#  option is turned on, return false and don't redirect.
+	function print_meta_redirect( $p_url, $p_time=null ) {
+		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
+			return false;
 		}
 
-		PRINT "<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\">";
+		if ( null === $p_time ) {
+			$p_time = config_get( 'wait_time' );
+		}
+
+		echo "<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\">";
+
+		return true;
 	}
 	# --------------------
 	# (7) Ends the <HEAD> section
