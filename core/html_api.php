@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.11 2002-09-03 02:21:01 prescience Exp $
+	# $Id: html_api.php,v 1.12 2002-09-06 06:06:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -290,8 +290,14 @@
 	}
  	# --------------------
 	# print the hr
-	function print_hr( $p_hr_size, $p_hr_width ) {
-		PRINT "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
+	function print_hr( $p_hr_size=null, $p_hr_width=null ) {
+		if ( $p_hr_size === null ) {
+			$p_hr_size = config_get( 'hr_size' );
+		}
+		if ( $p_hr_width === null ) {
+			$p_hr_width = config_get( 'hr_width' );
+		}
+		echo "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
 	}
 	# --------------------
 	###########################################################################

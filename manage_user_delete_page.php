@@ -9,21 +9,23 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( ADMINISTRATOR );
+
+	$f_id	= gpc_get_int( 'f_id' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
 <br />
 <div align="center">
-	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
-	<?php echo $s_delete_account_sure_msg ?>
+	<?php print_hr() ?>
+	<?php echo lang_get( 'delete_account_sure_msg' ) ?>
 
 	<form method="post" action="manage_user_delete.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
-		<input type="submit" value="<?php echo $s_delete_account_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
 
-	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
+	<?php print_hr() ?>
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

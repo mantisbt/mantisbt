@@ -9,28 +9,26 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( ADMINISTRATOR );
+	
+	$f_id	= gpc_get_int( 'f_id' );
+
     $t_redirect_url = 'manage_page.php';
 
-	$t_protected = !user_delete($f_id);
+	user_delete( $f_id );
+
+	print_page_top1();
+
+	print_meta_redirect( $t_redirect_url, $g_wait_time );
+
+	print_page_top2();
 ?>
-<?php print_page_top1() ?>
-<?php
-	if ( $result ) {
-		print_meta_redirect( $t_redirect_url, $g_wait_time );
-	}
-?>
-<?php print_page_top2() ?>
 
 <br />
 <div align="center">
 <?php
-	if ( $t_protected ) {				# PROTECTED
-		PRINT $s_account_delete_protected_msg.'<br />';
-	} else {						# SUCCESS
-		PRINT $s_operation_successful.'<br />';
-	}
+	echo lang_get( 'operation_successful' ).'<br />';
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 
