@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.11 2003-02-20 03:32:25 vboctor Exp $
+	# $Id: bug_reminder_page.php,v 1.12 2003-02-21 00:32:37 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -63,7 +63,7 @@
 </table>
 
 <br />
-<?php include( config_get( 'bug_view_inc' ) ) ?>
-<?php include( config_get( 'bugnote_view_include_file' ) ) ?>
+<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' ) ?>
+<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' ) ?>
 
 <?php html_page_bottom1( __FILE__ ) ?>

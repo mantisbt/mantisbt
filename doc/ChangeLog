@@ -20,6 +20,14 @@ Mantis ChangeLog
  * Fix #2974: Message "APPLICATION WARNING #300" on main page.
  * Fix #2982: Having email_set_category set to EMAIL_CATEGORY_PROJECT_CATEGORY erased various mail headers.
  * Languages: Updated German localisation.
+ * Removed config option (bugnote_include_file): Used file path directly since there is no reason to make it configurable.
+ * Removed config option (bugnote_view_include_file): Used file path directly since there is no reason to make it configurable.
+ * Removed config option (bugnote_add_include_file): Used file path directly since there is no reason to make it configurable.
+ * Removed config option (history_include_file): Used file path directly since there is no reason to make it configurable.
+ * Removed config option (print_bugnote_include_file): Used file path directly since there is no reason to make it configurable.
+ * Removed config option (view_all_include_file): Used file path directly since there is no reason to make it configurable.
+ * Removed config option (bug_view_inc): Used file path directly since there is no reason to make it configurable.
+ * Removed config option (bug_file_upload_inc): Used file path directly since there is no reason to make it configurable.
 
 2003.02.19  -  0.18.0a2
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close_page.php,v 1.28 2003-02-20 00:15:46 vboctor Exp $
+	# $Id: bug_close_page.php,v 1.29 2003-02-21 00:32:37 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,7 +52,7 @@
 <?php # Close Form END ?>
 
 <br />
-<?php include( config_get( 'bug_view_inc' ) ) ?>
-<?php include( config_get( 'bugnote_view_include_file' ) ) ?>
+<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' ) ?>
+<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' ) ?>
 
 <?php html_page_bottom1( __FILE__ ) ?>

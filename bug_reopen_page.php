@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen_page.php,v 1.28 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_reopen_page.php,v 1.29 2003-02-21 00:32:37 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,6 +49,7 @@
 </div>
 
 <br />
-<?php include( config_get( 'bug_view_inc' ) ) ?>
+<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' ) ?>
+<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' ); ?>
 
 <?php html_page_bottom1( __FILE__ ) ?>

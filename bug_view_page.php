@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.40 2003-02-20 00:15:47 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.41 2003-02-21 00:32:38 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -402,18 +402,20 @@
 </table>
 
 <?php
+	$t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+
 	# File upload box
 	if ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) {
-		include( config_get( 'bug_file_upload_inc' ) );
+		include( $t_mantis_dir . 'bug_file_upload_inc.php' );
 	}
 
 	# Bugnotes
-	include( config_get( 'bugnote_view_include_file' ) );
-	include( config_get( 'bugnote_add_include_file' ) );
+	include( $t_mantis_dir . 'bugnote_view_inc.php' );
+	include( $t_mantis_dir . 'bugnote_add_inc.php' );
 
 	# History
 	if ( $f_history ) {
-		include( config_get( 'history_include_file' ) );
+		include( $t_mantis_dir . 'history_inc.php' );
 	}
 	
 	html_page_bottom1( __FILE__ );

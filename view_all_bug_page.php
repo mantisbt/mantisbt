@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.49 $
-	# $Author: jfitzell $
-	# $Date: 2003-02-20 08:11:26 $
+	# $Revision: 1.50 $
+	# $Author: vboctor $
+	# $Date: 2003-02-21 00:32:38 $
 	#
-	# $Id: view_all_bug_page.php,v 1.49 2003-02-20 08:11:26 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.50 2003-02-21 00:32:38 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,7 +46,7 @@
 
 	html_page_top2();
 
-	include( $g_view_all_include_file );
+	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view_all_inc.php' );
 
 	html_page_bottom1( __FILE__ );
 ?>

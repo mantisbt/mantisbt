@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.15 2003-02-17 08:30:31 jlatour Exp $
+	# $Id: obsolete.php,v 1.16 2003-02-21 00:32:38 vboctor Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -30,7 +30,7 @@
 	config_obsolete( 'notify_developers_on_new', 'notify_flags' );
 	config_obsolete( 'notify_on_new_threshold', 'notify_flags' );
 	config_obsolete( 'notify_admin_on_new', 'notify_flags' );
-	config_obsolete( 'view_bug_inc', 'bug_view_inc' );
+	config_obsolete( 'view_bug_inc', '' );
 	config_obsolete( 'ldap_organisation', 'ldap_organization' );
 	config_obsolete( 'ldapauth_type', '' );
 	config_obsolete( 'summary_product_colon_category', 'summary_category_include_project' );
@@ -47,4 +47,13 @@
 	config_obsolete( 'php', '' );
 	config_obsolete( 'use_experimental_custom_fields', '' );
 	config_obsolete( 'mail_send_crlf', '' );
+
+	config_obsolete( 'bugnote_include_file', '' );
+	config_obsolete( 'bugnote_view_include_file', '' );
+	config_obsolete( 'bugnote_add_include_file', '' );
+	config_obsolete( 'history_include_file', '' );
+	config_obsolete( 'print_bugnote_include_file', '' );
+	config_obsolete( 'view_all_include_file', '' );
+	config_obsolete( 'bug_view_inc', '' );
+	config_obsolete( 'bug_file_upload_inc', '' );
 ?>

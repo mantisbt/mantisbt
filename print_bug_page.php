@@ -335,4 +335,4 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 </table>
 
-<?php include( $g_print_bugnote_include_file ) ?>
+<?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_bugnote_inc.php' ) ?>
