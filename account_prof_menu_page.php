@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.27 2003-02-11 09:08:30 jfitzell Exp $
+	# $Id: account_prof_menu_page.php,v 1.28 2003-02-15 10:25:15 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,9 +22,13 @@
 	
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'add_profile_threshold' ) );
+	auth_ensure_user_authenticated();
+	
+	current_user_ensure_unprotected();
+?>
+<?php
+	access_ensure_project_level( config_get( 'add_profile_threshold' ) );
 
 	# protected account check
 	current_user_ensure_unprotected();

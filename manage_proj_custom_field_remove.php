@@ -12,16 +12,15 @@
 	
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
+	$f_field_id		= gpc_get_int( 'field_id' );
+	$f_project_id	= gpc_get_int( 'project_id' );
+
 	# We should check both since we are in the project section and an
 	#  admin might raise the first threshold and not realize they need
 	#  to raise the second
-	check_access( config_get( 'manage_project_threshold' ) );
-	check_access( config_get( 'custom_field_link_threshold' ) );
-
-	$f_field_id		= gpc_get_int( 'field_id' );
-	$f_project_id	= gpc_get_int( 'project_id' );
+	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+	access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id );
 
 	custom_field_unlink( $f_field_id, $f_project_id );
 

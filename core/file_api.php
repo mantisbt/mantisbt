@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.22 2003-01-30 09:41:32 jfitzell Exp $
+	# $Id: file_api.php,v 1.23 2003-02-15 10:25:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -39,7 +39,7 @@
 
 		$t_bug = bug_get( $c_bug_id, false );
 		$t_can_delete = ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
-				access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) );
+				access_has_project_level( config_get( 'handle_bug_threshold' ) );
 
 		$num_files = db_num_rows( $result );
 		for ( $i = 0 ; $i < $num_files ; $i++ ) {

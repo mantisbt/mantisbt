@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.29 2003-02-11 09:08:30 jfitzell Exp $
+	# $Id: account_prof_edit_page.php,v 1.30 2003-02-15 10:25:15 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,11 @@
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'profile_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
+<?php
+	auth_ensure_user_authenticated();
+	
+	current_user_ensure_unprotected();
+?>
 <?php
 	# protected account check
 	current_user_ensure_unprotected();

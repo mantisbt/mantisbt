@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_inc.php,v 1.80 2003-02-10 21:59:34 jfitzell Exp $
+	# $Id: bugnote_inc.php,v 1.81 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,7 @@
 	# grab the user id currently logged in
 	$t_user_id = current_user_get_field( 'id' );
 
-	if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
+	if ( !access_has_project_level( $g_private_bugnote_threshold ) ) {
 		$t_restriction = 'AND view_state=' . PUBLIC;
 	} else {
 		$t_restriction = '';
@@ -93,11 +93,11 @@
 			# only admins and the bugnote creator can edit/delete this bugnote
 			# bug must be open to be editable
 			if ( bug_get_field( $f_bug_id, 'status' ) < config_get( 'bug_resolved_status_threshold' ) ) {
-				if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
+				if (( access_has_project_level( ADMINISTRATOR ) ) ||
 					( $v3_reporter_id == $t_user_id )) {
 					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, $s_bugnote_edit_link );
 					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, $s_delete_link );
-					if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
+					if ( access_has_project_level( $g_private_bugnote_threshold ) ) {
 						if ( PRIVATE == $v3_view_state ) {
 							print_bracket_link('bugnote_set_view_state.php?private=0&bugnote_id='.$v3_id, $s_make_public);
 						} else {
@@ -125,7 +125,7 @@
 
 <?php if ( ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) ||
 		  ( isset( $f_resolve_note ) ) ) &&
-		( access_level_check_greater_or_equal( config_get( 'add_bugnote_threshold' ) ) ) ) { ?>
+		( access_has_project_level( config_get( 'add_bugnote_threshold' ) ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
 <br />
 <form method="post" action="bugnote_add.php">
@@ -144,7 +144,7 @@
 		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
-<?php if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) { ?>
+<?php if ( access_has_project_level( $g_private_bugnote_threshold ) ) { ?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo $s_private ?>

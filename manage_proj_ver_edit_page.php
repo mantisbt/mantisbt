@@ -6,17 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_edit_page.php,v 1.22 2003-02-11 09:08:46 jfitzell Exp $
+	# $Id: manage_proj_ver_edit_page.php,v 1.23 2003-02-15 10:25:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
-
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_version		= gpc_get_string( 'version' );
 	$f_date_order	= gpc_get_string( 'date_order' );
+
+	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

@@ -13,10 +13,7 @@
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
-
 	$f_news_id = gpc_get_int( 'news_id' );
 	$f_action = gpc_get_string( 'action', '' );
 
@@ -30,6 +27,8 @@
 	if ( $row ) {
     	extract( $row, EXTR_PREFIX_ALL, 'v' );
     }
+
+	access_ensure_project_level( config_get( 'manage_news_threshold' ), $v_project_id );
 
    	$v_headline = string_attribute( $v_headline );
    	$v_body 	= string_textarea( $v_body );
@@ -76,7 +75,7 @@
 		<select name="project_id">
 		<?php
 			$t_sitewide = false;
-			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
+			if ( access_has_project_level( ADMINISTRATOR ) ) {
 				$t_sitewide = true;
 			}
 			print_project_option_list( $v_project_id, $t_sitewide );

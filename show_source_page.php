@@ -6,17 +6,14 @@
 	# See the README and LICENSE files for details
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( ADMINISTRATOR );
+	access_ensure_global_level( ADMINISTRATOR );
 
 	$f_url = gpc_get_string( 'url' );
 
 	# Check to make sure that the access is legal
 	# NOTE: enabling this could be a bad idea
-	if ( ON == $g_show_source ) {
-		check_access( ADMINISTRATOR );
-	} else {
+	if ( ON != config_get( 'show_source' ) ) {
 		access_denied();
 	}
 ?>

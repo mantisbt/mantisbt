@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve.php,v 1.33 2003-02-11 09:08:36 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.34 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,6 @@
 	
 	require_once( $t_core_path.'bug_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
@@ -28,9 +27,8 @@
 	$f_duplicate_id	= gpc_get_int( 'duplicate_id', null );
 	$f_close_now	= gpc_get_bool( 'close_now' );
 
-	project_access_check( $f_bug_id );
-	check_access( config_get( 'handle_bug_threshold' ) );
-	bug_ensure_exists( $f_bug_id );
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id );
 
 	# make sure the bug is not being marked as a duplicate of itself
 	if ( $f_duplicate_id === $f_bug_id ) {

@@ -13,7 +13,9 @@
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
+<?php
+	access_ensure_project_level( VIEWER );
+?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
@@ -25,13 +27,13 @@
     # Loop through results
 	for ( $i=0 ; $i < sizeof( $rows ) ; $i++ ) {
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
+		if ( PRIVATE == $v_view_state &&
+			 ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
+			continue;
+		}
 
 		$v_headline 	= string_display( $v_headline );
 		$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted );
-
-		# grab the username and email of the poster
-		$t_poster_name	= user_get_name( $v_poster_id );
-		$t_poster_email	= user_get_email( $v_poster_id );
 
 		$t_notes = array();
 		$t_note_string = '';
@@ -45,7 +47,11 @@
 			$t_note_string = '['.implode( ' ', $t_notes ).']';
 		}
 
-		PRINT "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?news_id=$v_id\">$v_headline</a></span> <span class=\"small\">$t_note_string</span> <a class=\"small\" href=\"mailto:$t_poster_email\">$t_poster_name</a></li>";
+		echo "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?news_id=$v_id\">$v_headline</a></span> <span class=\"small\">$t_note_string ";
+		
+		print_user( $v_poster_id );
+		
+		echo "</span></li>";
 	}  # end for loop
 ?>
 </ul>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_delete.php,v 1.26 2003-02-11 09:08:24 jfitzell Exp $
+	# $Id: account_delete.php,v 1.27 2003-02-15 10:25:15 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -32,6 +32,8 @@
 
 	#============ Permissions ============
 	auth_ensure_user_authenticated();
+
+	current_user_ensure_unprotected();
 
 	if ( OFF == config_get( 'allow_account_delete' ) ) {
 		print_header_redirect( 'account_page.php' );

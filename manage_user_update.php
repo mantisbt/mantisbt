@@ -12,9 +12,8 @@
 	
 	require_once( $t_core_path.'email_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( ADMINISTRATOR );
+	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_protected	= gpc_get_bool( 'protected' );
 	$f_enabled		= gpc_get_bool( 'enabled' );

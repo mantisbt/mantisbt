@@ -165,12 +165,9 @@
 
 <!-- ====================== BUG LIST ========================= -->
 <?php
-	$col_count = 7;
-	if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) ) ) {
-		$col_count++;
-	}
-	if ( helper_get_current_project() != 0 &&
-		 access_level_check_greater_or_equal( UPDATER ) ) {
+	$col_count = 8;
+
+	if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
 		$col_count++;
 	}
 
@@ -216,14 +213,14 @@
 	</td>
 </tr>
 <!-- Bug list column header row -->
-<tr class="row-category"> <?php
-	if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) ) ) { ?>
-		<td class="center" width="2%">&nbsp;</td> <?php
+<tr class="row-category">
+<?php
+	if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
+		echo '<td class="center" width="2%">&nbsp;</td>';
 	}
-	if ( helper_get_current_project() != 0 &&
-		 access_level_check_greater_or_equal( UPDATER ) ) {	?>
-		<td class="center" width="2%">&nbsp;</td> <?php
-	} ?>
+?>
+
+	<td class="center" width="2%">&nbsp;</td>
 
 	<!-- Priority column -->
 	<td class="center" width="5%">
@@ -301,20 +298,28 @@
 		}
 ?>
 <!-- Repeating bug row -->
-<tr> <?php
-	if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) ) ) { ?>
-		<td bgcolor="<?php echo $status_color ?>">
-			<input type="checkbox" name="bug_arr[]" value="<?php echo "$v_id" ?>" />
-		</td> <?php
+<tr>
+	<!-- Checkbox -->
+<?php
+	if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
+?>
+	<td bgcolor="<?php echo $status_color ?>">
+		<input type="checkbox" name="bug_arr[]" value="<?php echo "$v_id" ?>" />
+	</td>
+<?php
 	}
+?>
 
-	# Pencil shortcut
-	if ( helper_get_current_project() != 0 &&
-		 access_level_check_greater_or_equal( UPDATER ) ) {	?>
-		<td bgcolor="<?php echo $status_color ?>">
-			<a href="<?php echo string_get_bug_update_url( $v_id ) ?>"><img border="0" src="<?php echo config_get( 'icon_path' ).'update.png' ?>" /></a>
-		</td> <?php
-	} ?>
+	<!-- Pencil shortcut -->
+	<td bgcolor="<?php echo $status_color ?>" class="center">
+	<?php
+		if ( access_has_bug_level( UPDATER, $v_id ) ) {
+			echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . config_get( 'icon_path' ) . 'update.png' . '" /></a>';
+		} else {
+			echo '&nbsp;';
+		}
+	?>
+	</td>
 
 	<!-- Priority -->
 	<td class="center" bgcolor="<?php echo $status_color ?>">
@@ -407,7 +412,7 @@
 
 <!-- ====================== MASS BUG MANIPULATION ========================= -->
 <?php
-if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) ) ) {
+if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
 ?>
 	<tr>
 		<td colspan="<?php echo $col_count ?>">

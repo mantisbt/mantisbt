@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.115 $
+	# $Revision: 1.116 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-13 07:11:17 $
+	# $Date: 2003-02-15 10:25:22 $
 	#
-	# $Id: strings_english.txt,v 1.115 2003-02-13 07:11:17 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.116 2003-02-15 10:25:22 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -90,6 +90,7 @@
 	$s_create_new_project_link = 'Create New Project';
 
 	# bug_actiongroup_page.php : mass treatment
+	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
 	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
 	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
 	$s_move_bugs_conf_msg = 'Move bugs to';

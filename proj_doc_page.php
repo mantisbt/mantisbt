@@ -12,9 +12,8 @@
 	
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'view_proj_doc_threshold' ) );
+	access_ensure_project_level( config_get( 'view_proj_doc_threshold' ) );
 
 	# Select project files
 	$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
@@ -52,7 +51,7 @@
 <?php
 		PRINT '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">'.$v_title.'</a> ('.$v_filesize.' bytes)';
 
-		if ( access_level_check_greater_or_equal( MANAGER ) ) {
+		if ( access_has_project_level( MANAGER ) ) {
 			print_bracket_link( 'proj_doc_edit_page.php?file_id='.$v_id, 'edit' );
 		}
 ?>

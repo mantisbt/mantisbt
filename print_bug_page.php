@@ -15,7 +15,6 @@
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
@@ -23,8 +22,8 @@
 		print_header_redirect ( 'bug_view_page.php?bug_id='.$f_bug_id );
 	}
 
-	project_access_check( $f_bug_id );
-	bug_ensure_exists( $f_bug_id );
+	access_ensure_bug_level( VIEWER, $f_bug_id );
+
 	$c_bug_id = (integer)$f_bug_id;
 
 	$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,

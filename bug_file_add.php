@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.39 2003-02-11 09:08:32 jfitzell Exp $
+	# $Id: bug_file_add.php,v 1.40 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,6 @@
 	
 	require_once( $t_core_path.'file_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$f_file		= gpc_get_file( 'file' );
@@ -28,8 +27,7 @@
 		access_denied();
 	}
 
-	project_access_check( $f_bug_id );
-	check_access( config_get( 'upload_bug_file_threshold' ) );
+	access_ensure_bug_level( config_get( 'upload_bug_file_threshold' ), $f_bug_id );
 
 	if ( !is_uploaded_file( $f_file['tmp_name'] ) || 0 == $f_file['size'] ) {
 		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );

@@ -12,11 +12,10 @@
 	
 	require_once( $t_core_path.'news_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
-
 	$f_news_id = gpc_get_int( 'news_id' );
+
+	access_ensure_project_level( config_get( 'manage_news_threshold' ), $f_news_id );
 
 	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ),
 							 lang_get( 'delete_news_item_button' ) );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen_page.php,v 1.26 2003-02-11 09:08:34 jfitzell Exp $
+	# $Id: bug_reopen_page.php,v 1.27 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,15 +16,10 @@
 	
 	require_once( $t_core_path.'bug_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	$f_bug_id		= gpc_get_int( 'bug_id' );
+	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	project_access_check( $f_bug_id );
-	if ( OFF == config_get( 'allow_reporter_reopen' )
-		 || auth_get_current_user_id() != bug_get_field( $f_bug_id, 'reporter_id' ) ) {
-		check_access( config_get( 'reopen_bug_threshold' ) );
-	}
+	access_ensure_can_reopen_bug( $f_bug_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

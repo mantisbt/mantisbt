@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.35 2003-02-14 02:58:17 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.36 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,6 @@
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'relationship_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$f_history	= gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
@@ -31,10 +30,7 @@
 		print_header_redirect ( 'bug_view_advanced_page.php?bug_id=' . $f_bug_id );
 	}
 
-	project_access_check( $f_bug_id );
-
-	# if bug is private, make sure user can view private bugs
-	access_bug_check( $f_bug_id );
+	access_ensure_bug_level( VIEWER, $f_bug_id );
 
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
 
@@ -59,7 +55,7 @@
 		<!-- Send Bug Reminder -->
 	<?php
 		if ( !current_user_is_anonymous() &&
-			  access_level_check_greater_or_equal( config_get( 'bug_reminder_threshold' ) ) ) {
+			  access_has_project_level( config_get( 'bug_reminder_threshold' ) ) ) {
 	?>
 		<span class="small">
 			<?php print_bracket_link( 'bug_reminder_page.php?bug_id='.$f_bug_id, lang_get( 'bug_reminder' ) ) ?>
@@ -316,7 +312,7 @@
 
 <!-- Attachments -->
 <?php
-	$t_show_attachments = ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_level_check_greater_or_equal( config_get( 'view_attachments_threshold' ) );
+	$t_show_attachments = ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_has_project_level( config_get( 'view_attachments_threshold' ) );
 
 	if ( $t_show_attachments ) {
 ?>

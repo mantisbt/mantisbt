@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.51 2003-02-11 09:08:37 jfitzell Exp $
+	# $Id: bug_update.php,v 1.52 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,17 +21,10 @@
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	project_access_check( $f_bug_id );
-	check_access( config_get( 'update_bug_threshold' ) );
-	bug_ensure_exists( $f_bug_id );
-
-	# if bug is private, make sure user can view private bugs
-	# use the db view state rather than the new one to check
-	access_bug_check( $f_bug_id );
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 
 	# extract current extended information
 	$t_bug_data = bug_get( $f_bug_id, true );

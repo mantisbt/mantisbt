@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor.php,v 1.22 2003-02-11 09:08:33 jfitzell Exp $
+	# $Id: bug_monitor.php,v 1.23 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,22 +19,11 @@
 	
 	require_once( $t_core_path.'bug_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$f_action	= gpc_get_string( 'action' );
 
-	project_access_check( $f_bug_id );
-	bug_ensure_exists( $f_bug_id );
-
-	$t_view_state = bug_get_field( $f_bug_id, 'view_state' );
-
-	$t_threshold = config_get( 'monitor_bug_threshold' );
-	if ( PRIVATE == $t_view_state ) {
-		$t_threshold = max( config_get( 'private_bug_threshold' ) , $t_threshold );
-	}
-
-	check_access( $t_threshold );
+	access_ensure_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id );
 
 	if ( 'delete' == $f_action ) {
 		bug_unmonitor( $f_bug_id, auth_get_current_user_id() );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.50 2003-02-11 09:08:38 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.51 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,6 @@
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
@@ -29,12 +28,7 @@
 		print_header_redirect ( 'bug_update_page.php?bug_id=' . $f_bug_id );
 	}
 
-	project_access_check( $f_bug_id );
-	check_access( config_get( 'update_bug_threshold' ) );
-	bug_ensure_exists( $f_bug_id );
-
-	# if bug is private, make sure user can view private bugs
-	access_bug_check( $f_bug_id );
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
 
 	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
 ?>
@@ -402,7 +396,7 @@
 
 
 <!-- Bugnote Private Checkbox (if permitted) -->
-<?php if ( access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ) ) ) { ?>
+<?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'private' ) ?>

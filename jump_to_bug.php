@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: jump_to_bug.php,v 1.17 2003-02-11 09:08:42 jfitzell Exp $
+	# $Id: jump_to_bug.php,v 1.18 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,16 +14,10 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
-	$t_core_path = config_get( 'core_path' );
-	
-	require_once( $t_core_path.'bug_api.php' );
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
-	$f_bug_id = gpc_get_int( 'bug_id' );
-	project_access_check( $f_bug_id );
-	bug_ensure_exists( $f_bug_id );
+	# No need for access checking.  We're just redirecting to another page.
 
 	# Determine which view page to redirect back to.
 	print_header_redirect_view( $f_bug_id );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_assign.php,v 1.30 2003-02-11 09:08:32 jfitzell Exp $
+	# $Id: bug_assign.php,v 1.31 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,14 +19,11 @@
 	
 	require_once( $t_core_path.'bug_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	project_access_check( $f_bug_id );
-	check_access( config_get( 'handle_bug_threshold' ) );
-
-	bug_ensure_exists( $f_bug_id );
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+	access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id );
 
 	bug_assign( $f_bug_id, auth_get_current_user_id() );
 

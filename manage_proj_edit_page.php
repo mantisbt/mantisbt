@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.60 2003-02-13 07:11:17 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.61 2003-02-15 10:25:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,11 +19,10 @@
 	require_once( $t_core_path . 'custom_field_api.php' );
 	require_once( $t_core_path . 'icon_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
+	$f_project_id = gpc_get_int( 'project_id' );
 
-	$f_project_id	= gpc_get_int( 'project_id' );
+	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	$row = project_get_row( $f_project_id );
 ?>
@@ -130,7 +129,7 @@
 <!-- PROJECT DELETE -->
 <?php
 # You must have global permissions to delete projects
-if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_threshold' ) ) ) { ?>
+if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <div class="border-center">
 	<form method="post" action="manage_proj_delete.php">
 		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -318,7 +317,7 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 <?php
 # You need either global permissions or project-specific permissions to link
 #  custom fields
-if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_threshold' ), $f_project_id ) ) {
+if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id ) ) {
 ?>
 	<br />
 	<div align="center">
@@ -360,7 +359,7 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 				<td class="center">
 				<?php
 					# You need global permissions to edit custom field defs
-					if ( absolute_access_level_check_greater_or_equal( config_get( 'manage_custom_fields' ) ) ) {
+					if ( access_has_global_level( config_get( 'manage_custom_fields' ) ) ) {
 						print_bracket_link( "manage_custom_field_edit_page.php?field_id=$t_field_id&amp;return=manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'edit_link' ) );
 						echo '&nbsp;';
 					}
@@ -423,7 +422,7 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 <?php
 # We want to allow people with global permissions and people with high enough
 #  permissions on the project we are editing
-if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' ), $f_project_id ) ) {
+if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
 ?>
 <br />
 <div align="center">
@@ -513,7 +512,7 @@ if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' )
 			<?php
 				# You need global or project-specific permissions to remove users
 				#  from this project
-				if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' ), $f_project_id ) ) {
+				if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id ) ) {
 					if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
 						print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&amp;user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
 					}

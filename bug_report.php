@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.18 2003-02-11 09:08:34 jfitzell Exp $
+	# $Id: bug_report.php,v 1.19 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,14 +22,13 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	# this page is invalid for the 'All Project' selection
 	if ( 0 == helper_get_current_project() ) {
 		print_header_redirect( 'login_select_proj_page.php?ref=' . string_get_bug_report_url() );
 	}
 
-	check_access( config_get('report_bug_threshold' ) );
+	access_ensure_project_level( config_get('report_bug_threshold' ) );
 
 	$f_build				= gpc_get_string( 'build', '' );
 	$f_platform				= gpc_get_string( 'platform', '' );

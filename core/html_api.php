@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.46 2003-02-15 08:12:38 jfitzell Exp $
+	# $Id: html_api.php,v 1.47 2003-02-15 10:25:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -304,7 +304,7 @@
 		}
 
 		if (( ON == $g_show_source )&&
-			( access_level_check_greater_or_equal( ADMINISTRATOR ) )) {
+			( access_has_project_level( ADMINISTRATOR ) )) {
 				PRINT '<br />';
 				PRINT '<div align="center">';
 				PRINT "<a href=\"show_source_page.php?url=$p_file\">Show Source</a>";
@@ -340,27 +340,27 @@
 				PRINT '<td class="menu">';
 				PRINT '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a> | ';
 				PRINT '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a> | ';
-				if ( access_level_check_greater_or_equal( REPORTER ) ) {
+				if ( access_has_project_level( REPORTER ) ) {
 					PRINT string_get_bug_report_link() . ' | ';
 				}
 
-				if ( access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
+				if ( access_has_project_level( $g_view_summary_threshold ) ) {
 					PRINT '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a> | ';
 				}
 
 				PRINT '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a> | ';
 
-				if ( access_level_check_greater_or_equal( MANAGER ) ) {
-					if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
+				if ( access_has_project_level( MANAGER ) ) {
+					if ( access_has_project_level( ADMINISTRATOR ) ) {
 					  $t_link = 'manage_user_page.php';
 					} else {
 					  $t_link = 'manage_proj_page.php';
 					}
 					PRINT "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a> | ';
 				}
-				if ( access_level_check_greater_or_equal( MANAGER ) ) {
+				if ( access_has_project_level( MANAGER ) ) {
 					# Admin can edit news for All Projects (site-wide)
-					if ( ( "0000000" != $g_project_cookie_val ) || ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ) {
+					if ( ( "0000000" != $g_project_cookie_val ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
 						PRINT '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
 					} else {
 						PRINT '<a href="login_select_proj_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
@@ -448,11 +448,11 @@
 	# prints the manage menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_menu( $p_page='' ) {
-		if ( !access_level_check_greater_or_equal ( ADMINISTRATOR ) ) {
+		if ( !access_has_project_level( ADMINISTRATOR ) ) {
 			return;
 		}
 
-		$t_manage_user_page 				= 'manage_user_page.php';
+		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
 		$t_documentation_page 		= 'documentation_page.php';
@@ -636,7 +636,7 @@
 	# --------------------
 	# Print a button to update the given bug
 	function html_button_bug_update( $p_bug_id ) {
-		if ( access_level_check_greater_or_equal( config_get( 'update_bug_threshold' ) ) ) {
+		if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
 			echo '<td class="center">';
 			html_button( string_get_bug_update_page(),
 						 lang_get( 'update_bug_button' ), 
@@ -647,7 +647,7 @@
 	# --------------------
 	# Print a button to assign the given bug
 	function html_button_bug_assign( $p_bug_id ) {
-		if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
+		if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 
 			if ( $t_handler_id != auth_get_current_user_id() ) {
@@ -662,7 +662,7 @@
 	# --------------------
 	# Print a button to resolve the given bug
 	function html_button_bug_resolve( $p_bug_id ) {
-		if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
+		if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 			echo '<td class="center">';
 			html_button( 'bug_resolve_page.php',
 						 lang_get( 'resolve_bug_button' ), 
@@ -673,7 +673,7 @@
 	# --------------------
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
-		if ( access_level_check_greater_or_equal( config_get( 'reopen_bug_threshold' ) )
+		if ( access_has_project_level( config_get( 'reopen_bug_threshold' ) )
 			 || ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() 
 				  && ON == config_get( 'allow_reporter_reopen' ) ) ) {
 			echo '<td class="center">';
@@ -699,7 +699,7 @@
 	# --------------------
 	# Print a button to monitor the given bug
 	function html_button_bug_monitor( $p_bug_id ) {
-		if ( access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) ) {
+		if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 			echo '<td class="center">';
 			html_button( 'bug_monitor.php',
 						 lang_get( 'monitor_bug_button' ), 
@@ -720,7 +720,7 @@
 	# --------------------
 	# Print a button to delete the given bug
 	function html_button_bug_delete( $p_bug_id ) {
-		if ( access_level_check_greater_or_equal( config_get( 'allow_bug_delete_access_level' ) ) ) {
+		if ( access_has_project_level( config_get( 'allow_bug_delete_access_level' ) ) ) {
 			echo '<td class="center">';
 			html_button( 'bug_delete.php',
 						 lang_get( 'delete_bug_button' ), 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.14 2003-02-13 13:24:18 vboctor Exp $
+	# $Id: manage_user_create.php,v 1.15 2003-02-15 10:25:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,9 +16,8 @@
 	
 	require_once( $t_core_path.'email_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_user_threshold' ) );
+	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_username			= gpc_get_string( 'username' );
 	$f_password			= gpc_get_string( 'password' );

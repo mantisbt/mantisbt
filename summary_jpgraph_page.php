@@ -9,12 +9,8 @@
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	# if user below view summary threshold, then re-direct to mainpage.
-	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
-		access_denied();
-	}
+	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	$t_res_val = RESOLVED;
 	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.22 2003-02-11 09:08:41 jfitzell Exp $
+	# $Id: file_download.php,v 1.23 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,8 +25,9 @@
 	$f_type		= gpc_get_string( 'type' );
 
 	$c_file_id = (integer)$f_file_id;
-	#check_access( $g_handle_bug_threshold );
-	# @@@ - hmm... that's commented out but we need *some* security check
+	#access_ensure_project_level( $g_handle_bug_threshold );
+	# @@@ We need a security check here but we need the API to
+	#   get the project_id or bug_id from the file first.
 
 	# we handle the case where the file is attached to a bug
 	# or attached to a project as a project doc.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.72 2003-02-14 02:58:17 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.73 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -578,9 +578,12 @@
 	# Threshold needed to view project documentation
 	$g_view_proj_doc_threshold = ANYBODY;
 
-	# Threshold needed to manage a project: add users to the project, edit project
-	# details (not to add/delete projects), upload documentation, news, ...etc.
+	# Threshold needed to manage a project: edit project
+	# details (not to add/delete projects), upload documentation, ...etc.
 	$g_manage_project_threshold = MANAGER;
+
+	# Threshold needed to add/delete/modify news
+	$g_manage_news_threshold = MANAGER;
 
 	# Threshold required to delete a project
 	$g_delete_project_threshold = ADMINISTRATOR;

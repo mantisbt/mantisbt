@@ -6,16 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_delete.php,v 1.24 2003-02-11 09:08:45 jfitzell Exp $
+	# $Id: manage_proj_delete.php,v 1.25 2003-02-15 10:25:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'delete_project_threshold' ) );
-	
 	$f_project_id = gpc_get_int( 'project_id' );
 	
+	access_ensure_project_level( config_get( 'delete_project_threshold' ), $f_project_id );
+
 	helper_ensure_confirmed( lang_get( 'project_delete_msg' ),
 							 lang_get( 'project_delete_button' ) );
 

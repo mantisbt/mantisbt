@@ -6,13 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: documentation_page.php,v 1.16 2003-02-11 09:08:41 jfitzell Exp $
+	# $Id: documentation_page.php,v 1.17 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( ADMINISTRATOR );
+	access_ensure_global_level( ADMINISTRATOR );
 ?>
 <?php 
 	print_page_top1();

@@ -12,9 +12,8 @@
 
 	require_once( $t_core_path . 'icon_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_user_threshold' ) );
+	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_sort	= gpc_get_string( 'sort', 'username' );
 	$f_dir	= gpc_get_string( 'dir', 'ASC' );

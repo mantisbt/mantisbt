@@ -23,13 +23,14 @@
 
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
+	access_ensure_project_level( VIEWER, $v_project_id );
+	if ( PRIVATE == $v_view_state ) {
+		access_ensure_project_level( config_get( 'private_news_threshold' ), $v_project_id );
+	}
+
 	$v_headline 	= string_display( $v_headline );
 	$v_body 		= string_display_links( $v_body );
 	$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
-
-	## grab the username and email of the poster
-	$t_poster_name	= user_get_name( $v_poster_id );
-	$t_poster_email	= user_get_email( $v_poster_id );
 ?>
 <br />
 <div align="center">
@@ -38,7 +39,11 @@
 	<td class="news-heading">
 		<span class="bold"><?php echo $v_headline ?></span> -
 		<span class="italic-small"><?php echo $v_date_posted ?></span> -
-		<a class="news-email" href="mailto:<?php echo $t_poster_email ?>"><?php echo $t_poster_name ?></a>
+		<span class="news-email">
+		<?php
+			print_user( $v_poster_id );
+		?>
+		</span>
 	</td>
 </tr>
 <tr>

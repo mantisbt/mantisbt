@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_copy.php,v 1.17 2003-02-11 09:08:43 jfitzell Exp $
+	# $Id: manage_proj_cat_copy.php,v 1.18 2003-02-15 10:25:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,14 +16,13 @@
 	
 	require_once( $t_core_path.'category_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
-
 	$f_project_id		= gpc_get_int( 'project_id' );
 	$f_other_project_id	= gpc_get_int( 'other_project_id' );
 	$f_copy_from		= gpc_get_bool( 'copy_from' );
 	$f_copy_to			= gpc_get_bool( 'copy_to' );
+
+	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	if ( $f_copy_from ) {
 	  $t_src_project_id = $f_other_project_id;

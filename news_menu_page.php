@@ -6,9 +6,8 @@
 	# See the README and LICENSE files for details
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
+	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -39,22 +38,6 @@
 	</td>
 	<td>
 		<textarea name="body" cols="60" rows="8" wrap="virtual"></textarea>
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="category">
-		<?php echo $s_post_to ?>
-	</td>
-	<td>
-		<select name="project_id">
-		<?php
-			$t_sitewide = false;
-			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-				$t_sitewide = true;
-			}
-			print_project_option_list( helper_get_current_project(), $t_sitewide );
-		?>
-		</select>
 	</td>
 </tr>
 <tr class="row-2">

@@ -6,9 +6,8 @@
 	# See the README and LICENSE files for details
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( ADMINISTRATOR );
+	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 	
 	$f_user_id = gpc_get_int( 'user_id' );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_create.php,v 1.10 2003-02-11 09:08:43 jfitzell Exp $
+	# $Id: manage_custom_field_create.php,v 1.11 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,9 +16,8 @@
 	
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_custom_fields' ) );
+	access_ensure_global_level( config_get( 'manage_custom_fields' ) );
 
 	$f_name	= gpc_get_string( 'name' );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.8 2003-02-11 09:08:33 jfitzell Exp $
+	# $Id: bug_reminder.php,v 1.9 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,22 +21,19 @@
 	require_once( $t_core_path.'email_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_to			= gpc_get_int_array( 'to' );
 	$f_body			= gpc_get_string( 'body' );
 
-	project_access_check( $f_bug_id );
-	check_access( config_get( 'bug_reminder_threshold' ) );
-	bug_ensure_exists( $f_bug_id );
+	access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 
 	# Automically add recipients to monitor list if they are above the monitor
 	# threshold, option is enabled, and not reporter or handler.
 	foreach ( $f_to as $t_recipient )
 	{
 		if ( ON == config_get( 'reminder_recipents_monitor_bug' ) &&
-			access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) &&
+			access_has_project_level( config_get( 'monitor_bug_threshold' ) ) &&
 			!bug_is_user_handler( $f_bug_id, $t_recipient ) && 
 			!bug_is_user_reporter( $f_bug_id, $t_recipient ) ) {
 			bug_monitor( $f_bug_id, $t_recipient );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_delete.php,v 1.32 2003-02-11 09:08:32 jfitzell Exp $
+	# $Id: bug_delete.php,v 1.33 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,13 +19,10 @@
 	
 	require_once( $t_core_path.'bug_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	project_access_check( $f_bug_id );
-	check_access( config_get( 'allow_bug_delete_access_level' ) );
-	bug_ensure_exists( $f_bug_id );
+	access_ensure_bug_level( config_get( 'allow_bug_delete_access_level' ), $f_bug_id );
 
 	helper_ensure_confirmed( lang_get( 'delete_bug_sure_msg' ), lang_get( 'delete_bug_button' ) );
 

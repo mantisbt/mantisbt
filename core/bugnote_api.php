@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.13 2003-01-25 18:21:08 jlatour Exp $
+	# $Id: bugnote_api.php,v 1.14 2003-02-15 10:25:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -54,6 +54,17 @@
 			trigger_error( ERROR_BUGNOTE_NOT_FOUND, ERROR );
 		}
 	}
+	
+	# --------------------
+	# Check if the given user is the reporter of the bugnote
+	# return true if the user is the reporter, false otherwise
+	function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
+		if ( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) == $p_user_id ) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
 
 	#===================================
 	# Creation / Deletion / Updating
@@ -84,7 +95,7 @@
 		$t_bugnote_text_id = db_insert_id();
 
 		# Check for private bugnotes.
-		if ( $p_private && access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ) ) ) {
+		if ( $p_private && access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) {
 			$t_view_state = PRIVATE;
 		} else {
 			$t_view_state = PUBLIC;

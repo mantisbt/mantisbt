@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.7 2003-02-11 09:08:46 jfitzell Exp $
+	# $Id: manage_proj_page.php,v 1.8 2003-02-15 10:25:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,8 +18,6 @@
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
-
 	$f_sort	= gpc_get_string( 'sort', 'name' );
 	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 
@@ -43,7 +41,7 @@
 		<?php echo lang_get( 'projects_title' ) ?>
 		<?php
 		# Check the user's global access level before allowing project creation
-		if ( absolute_access_level_check_greater_or_equal ( config_get( 'create_project_threshold' ) ) ) {
+		if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
 			print_bracket_link( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
 		}
 		?>
@@ -79,7 +77,7 @@
 	foreach ( $t_projects as $t_project ) {
 		extract( $t_project, EXTR_PREFIX_ALL, 'v' );
 
-        if ( !access_level_ge_no_default_for_private ( config_get( 'manage_project_threshold' ), $v_id ) ) {
+        if ( !access_has_project_level ( config_get( 'manage_project_threshold' ), $v_id ) ) {
 		  continue;
 		}
 

@@ -12,12 +12,7 @@
 	
 	require_once( $t_core_path.'graph_api.php' );
 
-	auth_ensure_user_authenticated();
-
-	# if user is below view summary threshold, then re-direct to mainpage.
-	if ( !access_level_check_greater_or_equal( config_get( 'view_summary_threshold' ) ) ) {
-		access_denied();
-	}
+	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	create_bug_enum_summary( lang_get( 'resolution_enum_string' ), 'resolution' );
 	graph_bug_enum_summary( lang_get( 'by_resolution' ) );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.40 2003-02-09 22:30:10 jfitzell Exp $
+	# $Id: print_api.php,v 1.41 2003-02-15 10:25:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -260,7 +260,7 @@
 	function print_news_item_option_list() {
 		global	$g_mantis_news_table, $g_project_cookie_val;
 
-		if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
+		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			$query = "SELECT id, headline, announcement, view_state
 				FROM $g_mantis_news_table
 				ORDER BY date_posted DESC";
@@ -494,7 +494,7 @@
 		global 	$g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie;
 
-		if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
+		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			$query = "SELECT *
 					FROM $g_mantis_project_table
 					ORDER BY name";
@@ -984,7 +984,7 @@
 	# --------------------
 	# return the mailto: href string link instead of printing it
 	function get_email_link( $p_email, $p_text ) {
-		if ( !access_level_check_greater_or_equal( config_get( 'show_user_email_threshold' ) ) ) {
+		if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 			return $p_text;
 		}
 
@@ -1000,7 +1000,7 @@
 	# return the mailto: href string link instead of printing it
 	# add subject line
 	function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
-		if ( !access_level_check_greater_or_equal( config_get( 'show_user_email_threshold' ) ) ) {
+		if ( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 			return $p_text;
 		}
 

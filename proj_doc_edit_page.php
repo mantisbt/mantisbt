@@ -12,9 +12,9 @@
 	
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( MANAGER );
+	# @@@ Need to obtain the project_id from the file once we have an API for that	
+	access_ensure_project_level( MANAGER );
 
 	$f_file_id = gpc_get_int( 'file_id' );
 

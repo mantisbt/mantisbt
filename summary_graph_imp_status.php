@@ -8,12 +8,8 @@
 	# This page displays "improved" charts on status : the old one and a 3D Pie
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	# if user below view summary threshold, then re-direct to mainpage.
-	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
-		access_denied();
-	}
+	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 	#checking if it's a per project statistic or all projects
 	if ($g_project_cookie_val=='0000000') {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.34 2003-02-15 07:49:00 jfitzell Exp $
+	# $Id: bug_api.php,v 1.35 2003-02-15 10:25:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -685,7 +685,7 @@
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
-		if ( !access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
+		if ( !access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
 			$t_restriction = 'AND view_state=' . PUBLIC;
 		} else {
 			$t_restriction = '';

@@ -142,6 +142,7 @@ Mantis ChangeLog
  * New config option (view_attachments_threshold): the access level required to view attachments.  This is useful when there is a need to share the knowledge about the defects, but to secure customer data.
  * New config option (view_summary_threshold): the access level required for viewing the summary page
  * New config option (history_default_visible): whether bug history should be visible by default or only when requested.
+ * New config option (manage_news_threshold): threshold needed to manage news postings
  * New file (obsolete.php): checks for obsolete variables and tells the operator
  * Removed config option (allow_href_tags): see new option html_make_links
  * Removed config option (allow_html_tags): see new option html_valid_tags

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.5 2003-01-25 18:21:08 jlatour Exp $
+	# $Id: filter_api.php,v 1.6 2003-02-15 10:25:21 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -48,6 +48,7 @@
 				} else {
 					$t_clauses = array();
 
+					#@@@ use project_id IN (1,2,3,4) syntax if we can
 					for ( $i=0 ; $i < sizeof( $t_projects ) ; $i++) {
 						array_push( $t_clauses, "($t_bug_table.project_id='$t_projects[$i]')" );
 					}
@@ -56,13 +57,13 @@
 				}
 			}
 		} else {
-			check_access_to_project($t_project_id);
+			access_ensure_project_level( VIEWER, $t_project_id );
 
 			array_push( $t_where_clauses, "($t_bug_table.project_id='$t_project_id')" );
 		}
 
 		# private bug selection
-		if ( ! access_level_check_greater_or_equal( config_get( 'private_bug_threshold' ) ) ) {
+		if ( ! access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
 			$t_public = PUBLIC;
 			$t_private = PRIVATE;
 			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR ($t_bug_table.view_state='$t_private' AND $t_bug_table.reporter_id='$t_user_id'))" );

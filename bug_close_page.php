@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close_page.php,v 1.25 2003-02-13 13:24:18 vboctor Exp $
+	# $Id: bug_close_page.php,v 1.26 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,13 +16,10 @@
 	
 	require_once( $t_core_path.'bug_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
 
-	project_access_check( $f_bug_id );
-	bug_ensure_exists( $f_bug_id );
 	access_ensure_can_close_bug( $f_bug_id );
 ?>
 <?php print_page_top1() ?>

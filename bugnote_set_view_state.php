@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_set_view_state.php,v 1.19 2003-02-11 09:08:41 jfitzell Exp $
+	# $Id: bugnote_set_view_state.php,v 1.20 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,27 +20,16 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );
 	$f_private		= gpc_get_bool( 'private' );
 
-	bugnote_ensure_exists( $f_bugnote_id );
-	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
-	project_access_check( $t_bug_id );
-	bug_ensure_exists( $t_bug_id );
+	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
 
 	# Check if the bug has been resolved
+	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	if ( bug_get_field( $t_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold' ) ) {
 		trigger_error( ERROR_BUG_RESOLVED_ACTION_DENIED, ERROR );
-	}
-
-	# make sure the user accessing the note is valid and has proper access
-	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );
-
-	if ( ( ! access_level_check_greater_or_equal( config_get( 'update_bugnote_threshold' ) ) ) &&
-		 ( $t_bugnote_user_id != auth_get_current_user_id() ) ) {
-		access_denied();
 	}
 
 	bugnote_set_view_state( $f_bugnote_id, $f_private );

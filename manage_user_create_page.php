@@ -6,13 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create_page.php,v 1.12 2003-02-11 09:08:47 jfitzell Exp $
+	# $Id: manage_user_create_page.php,v 1.13 2003-02-15 10:25:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_user_threshold' ) );
+	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	print_page_top1();
 	print_page_top2();

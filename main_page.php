@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.36 2003-02-11 09:08:43 jfitzell Exp $
+	# $Id: main_page.php,v 1.37 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,8 @@
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'news_api.php' );
 ?>
-<?php auth_ensure_user_authenticated();
+<?php
+	access_ensure_project_level( VIEWER );
 
 	$f_offset = gpc_get_int( 'offset', 0 );
 
@@ -89,7 +90,7 @@
 
 		# only show PRIVATE posts to configured threshold and above
 		if ( ( PRIVATE == $v_view_state ) &&
-			 !access_level_check_greater_or_equal( config_get( 'private_news_threshold' ) ) ) {
+			 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
 			continue;
 		}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.21 2003-02-11 09:08:35 jfitzell Exp $
+	# $Id: bug_report_advanced_page.php,v 1.22 2003-02-15 10:25:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,6 @@
 	require_once( $t_core_path.'file_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
 	# this page is invalid for the 'All Project' selection
 	if ( 0 == helper_get_current_project() ) {
@@ -31,7 +30,7 @@
 		print_header_redirect ( 'bug_report_page.php' );
 	}
 
-	check_access( config_get( 'report_bug_threshold' ) );
+	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 	$f_build				= gpc_get_string( 'build', '' );
 	$f_platform				= gpc_get_string( 'platform', '' );
@@ -116,7 +115,7 @@
 
 
 <!-- Priority (if permissions allow) -->
-<?php if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) { ?>
+<?php if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'priority' ) ?> <?php print_documentation_link( 'priority' ) ?>
@@ -227,7 +226,7 @@
 
 
 <!-- Handler (if permissions allow) -->
-<?php if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) { ?>
+<?php if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'assign_to' ) ?>

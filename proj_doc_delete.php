@@ -6,9 +6,9 @@
 	# See the README and LICENSE files for details
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( MANAGER );  # @@@ Need to check that the person is assigned to this project
+	# @@@ Need to obtain the project_id from the file once we have an API for that	
+	access_ensure_project_level( MANAGER );
 
 	$f_file_id = gpc_get_int( 'file_id' );
 

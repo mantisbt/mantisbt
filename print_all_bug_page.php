@@ -76,7 +76,7 @@
 
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
-		( !access_level_check_greater_or_equal( UPDATER  ) )) {
+		( !access_has_project_level( UPDATER ) )) {
 		$c_user_id = current_user_get_field( 'id' );
 	}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.30 2003-02-11 09:08:31 jfitzell Exp $
+	# $Id: account_update.php,v 1.31 2003-02-15 10:25:15 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,11 @@
 	
 	require_once( $t_core_path.'email_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
+<?php
+	auth_ensure_user_authenticated();
+	
+	current_user_ensure_unprotected();
+?>
 <?php
 	$f_email			= gpc_get_string( 'email', '' );
 	$f_password			= gpc_get_string( 'password', '' );

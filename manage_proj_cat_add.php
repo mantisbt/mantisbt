@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_add.php,v 1.27 2003-02-11 09:08:43 jfitzell Exp $
+	# $Id: manage_proj_cat_add.php,v 1.28 2003-02-15 10:25:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,12 +16,11 @@
 	
 	require_once( $t_core_path.'category_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
-
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_category		= gpc_get_string( 'category' );
+
+	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	if ( is_blank( $f_category ) ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );

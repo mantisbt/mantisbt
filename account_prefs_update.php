@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.27 2003-02-11 09:08:27 jfitzell Exp $
+	# $Id: account_prefs_update.php,v 1.28 2003-02-15 10:25:15 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,11 @@
 	
 	require_once( $t_core_path.'user_pref_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
+<?php 
+	auth_ensure_user_authenticated();
+	
+	current_user_ensure_unprotected();
+?>
 <?php
 	$f_user_id					= gpc_get_int( 'user_id' );
 	$f_redirect_url				= gpc_get_string( 'redirect_url' );
@@ -47,7 +51,7 @@
 
 	# prevent users from changing other user's accounts
 	if ( $f_user_id != auth_get_current_user_id() ) {
-		check_access( ADMINISTRATOR );
+		access_ensure_project_level( ADMINISTRATOR );
 	}
 
 	# make sure the delay isn't too low
