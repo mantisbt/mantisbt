@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.48 2003-01-25 18:21:11 jlatour Exp $
+	# $Id: user_api.php,v 1.49 2003-02-11 07:36:01 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -139,6 +139,33 @@
 	}
 
 	# --------------------
+	# Check if the username is a valid username (does not account for uniqueness)
+	# Return true if it is, false otherwise
+	function user_is_name_valid( $p_username ) {
+		# The DB field is only 32 characters
+		if ( 32 > strlen( $p_username ) ) {
+			return false;	
+		}
+
+		# Only allow a basic set of characters
+		if ( 0 == preg_match( '/^\w+$/', $p_username ) ) {
+			return false;
+		}
+
+		# We have a valid username
+		return true;
+	}
+
+	# --------------------
+	# Check if the username is a valid username (does not account for uniqueness)
+	# Trigger an error if the username is not valid
+	function user_ensure_name_valid( $p_username ) {
+		if ( ! user_is_name_valid( $p_username ) ) {
+			trigger_error( ERROR_USER_NAME_INVALID, ERROR );
+		}
+	}
+
+	# --------------------
 	# return whether user is monitoring bug for the user id and bug id
 	function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 		$c_user_id	= db_prepare_int( $p_user_id );
@@ -207,6 +234,7 @@
 		$c_protected	= db_prepare_bool( $p_protected );
 		$c_enabled		= db_prepare_bool( $p_enabled );
 
+		user_ensure_name_valid( $p_username );
 		user_ensure_name_unique( $p_username );
 		email_ensure_valid( $p_email );
 
@@ -634,6 +662,15 @@
 		email_ensure_valid( $p_email );
 
 		return user_set_field( $p_user_id, 'email', $p_email );
+	}
+
+	# --------------------
+	# Set the user's username to the given string after checking that it is valid
+	function user_set_name( $p_user_id, $p_username ) {
+		user_ensure_name_valid( $p_username );
+		user_ensure_name_unique( $p_username );
+
+		return user_set_field( $p_user_id, 'username', $p_username );
 	}
 
 	# --------------------

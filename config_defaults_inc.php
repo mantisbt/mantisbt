@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.69 2003-02-09 10:30:06 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.70 2003-02-11 07:36:01 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -582,6 +582,9 @@
 
 	# Threshold needed to manage user access to a project
 	$g_project_user_threshold = MANAGER;
+
+	# Threshold needed to manage user accounts
+	$g_manage_user_threshold = ADMINISTRATOR;
 
 	# --- login method ----------------
 	# CRYPT or CRYPT_FULL_SALT or PLAIN or MD5 or LDAP or BASIC_AUTH

@@ -4,11 +4,15 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_user_delete.php,v 1.22 2003-02-11 07:36:01 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( ADMINISTRATOR );
+	check_access( config_get( 'manage_user_threshold' ) );
 	
 	$f_user_id	= gpc_get_int( 'user_id' );
 
@@ -29,7 +33,7 @@
 <br />
 <div align="center">
 <?php
-	echo lang_get( 'operation_successful' ).'<br />';
+	echo lang_get( 'operation_successful' ) . '<br />';
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>

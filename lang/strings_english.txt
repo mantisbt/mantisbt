@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.112 $
+	# $Revision: 1.113 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-09 22:30:11 $
+	# $Date: 2003-02-11 07:36:02 $
 	#
-	# $Id: strings_english.txt,v 1.112 2003-02-09 22:30:11 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.113 2003-02-11 07:36:02 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -64,6 +64,8 @@
 	$s_delete_bugnote_button = 'Delete Bugnote';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
 	$s_bug_relationships = 'Relationships';
+	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+	$s_empty_password_button = 'Use Empty Password';
 
 	$s_duplicate_of = 'duplicate of %id';
 	$s_has_duplicate = 'has duplicate %id';
@@ -190,6 +192,7 @@
 	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
 	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'ERROR: A version with that name already exists.';
 	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 
 	$s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';

@@ -4,29 +4,24 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_user_proj_add.php,v 1.16 2003-02-11 07:36:01 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( config_get( 'manage_project_threshold' ) );
+	check_access( config_get( 'manage_user_threshold' ) );
+	check_access( config_get( 'project_user_threshold' ) );
 
 	$f_user_id		= gpc_get_int( 'user_id' );
 	$f_access_level	= gpc_get_int( 'access_level' );
-	# check for no projects
-	check_varset( $f_project_id, array() );
+	$f_project_id	= gpc_get_int_array( 'project_id', array() );
 
-	# Add a user to project(s)
-	$count = count( $f_project_id );
-	$result = ( $count == 0 );
-	for ($i=0;$i<$count;$i++) {
-		$t_project_id = $f_project_id[$i];
-		$result = project_add_user( $t_project_id, $f_user_id, $f_access_level );
+	foreach ( $f_project_id as $t_proj_id ) {
+		project_add_user( $t_proj_id, $f_user_id, $f_access_level );
 	}
 
-	$t_redirect_url = 'manage_user_edit_page.php?user_id='.$f_user_id;
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( 'manage_user_edit_page.php?user_id=' . $f_user_id );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.72 2003-02-09 00:50:58 jfitzell Exp $
+	# $Id: constant_inc.php,v 1.73 2003-02-11 07:36:01 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -183,6 +183,7 @@
 	define( 'ERROR_USER_PREFS_NOT_FOUND',			802 );
 	define( 'ERROR_USER_CREATE_PASSWORD_MISMATCH',	803 );
 	define( 'ERROR_USER_PROFILE_NOT_FOUND',			804 );
+	define( 'ERROR_USER_NAME_INVALID',				805 );
 
 	# ERROR_AUTH_*
 	define( 'ERROR_AUTH_INVALID_COOKIE',			900 );

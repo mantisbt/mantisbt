@@ -10,14 +10,14 @@
 	
 	$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path.'icon_api.php' );
+	require_once( $t_core_path . 'icon_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( ADMINISTRATOR );
+	check_access( config_get( 'manage_user_threshold' ) );
 
 	$f_sort	= gpc_get_string( 'sort', 'username' );
-	$f_dir	= gpc_get_string( 'dir', 'DESC' );
+	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 	$f_hide = gpc_get_bool( 'hide' );
 	$f_save = gpc_get_bool( 'save' );
 
@@ -79,7 +79,7 @@
 		<?php echo lang_get( 'new_accounts_title' ) ?> (<?php echo lang_get( '1_week_title' ) ?>) [<?php echo $new_user_count ?>]
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 <?php
 for ($i=0;$i<$new_user_count;$i++) {
@@ -110,7 +110,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		<?php echo lang_get( 'never_logged_in_title' ) ?> [<?php echo $user_count ?>] <?php print_bracket_link( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ) ?>
 	</td>
 </tr>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 <?php
 	for ($i=0;$i<$user_count;$i++) {
