@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.6 2002-08-30 07:20:15 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.7 2002-09-16 10:03:22 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -186,9 +186,31 @@
 			$t_result = $p_default;
 		} else {
 			trigger_error(ERROR_GPC_VAR_NOT_FOUND, ERROR);
-			$t_result = null;
 		}
 		
+		return $t_result;
+	}
+
+	#===================================
+	# File Functions
+	#===================================
+
+	# ------------------
+	# Retrieve a file variable
+	function gpc_get_file( $p_var_name, $p_default = null ) {
+		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_FILES;
+		}
+		
+		if ( isset ( $_FILES[$p_var_name] ) ) {
+			$t_result = gpc_strip_slashes( $_FILES[$p_var_name] );
+		} else if ( func_num_args() > 1 ) { #check for a default passed in (allowing null)
+			$t_result = $p_default;
+		} else {
+			trigger_error(ERROR_GPC_VAR_NOT_FOUND, ERROR);
+		}
+
 		return $t_result;
 	}
 
@@ -217,8 +239,8 @@
 		} else if ( ! is_array( $p_var ) ){
 			return stripslashes( $p_var );
 		} else {
-			for ( $i=0 ; $i < sizeof( $p_var ) ; $i++ ) {
-				$p_var[$i] = stripslashes( $p_var[$i] );
+			foreach ( $p_var as $key => $value ) {
+				$p_var[$key] = stripslashes( $value );
 
 				return $p_var;
 			}
