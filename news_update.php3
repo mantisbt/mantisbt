@@ -15,8 +15,10 @@
 		exit;
 	}
 
-	$f_headline	= string_safe( $f_headline );
+	### " character poses problem when editting so let's just convert them
+	$f_headline	= string_safe( str_replace( "\"", "'", $f_headline ) );
 	$f_body		= string_safe( $f_body );
+	### Update entry
 	$query = "UPDATE $g_mantis_news_table
 			SET headline='$f_headline', body='$f_body', last_modified=NOW()
     		WHERE id='$f_id'";

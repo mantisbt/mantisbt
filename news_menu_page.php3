@@ -15,6 +15,7 @@
 		exit;
 	}
 
+	### Get user information and prefix with u_
 	$query = "SELECT *
 		FROM $g_mantis_user_table
 		WHERE cookie_string='$g_string_cookie_val'";
@@ -103,14 +104,15 @@
 		<td width=75%>
 			<select name=f_id>
 			<?
+				### Get current headlines and id  prefix with v_
 				$query = "SELECT id, headline
 					FROM $g_mantis_news_table
 					ORDER BY id DESC";
-			    $result = db_mysql_query($query);
+			    $result = db_mysql_query( $query );
 			    $news_count = mysql_num_rows( $ result );
 
 				for ($i=0;$i<$news_count;$i++) {
-					$row = mysql_fetch_array($result);
+					$row = mysql_fetch_array( $result );
 					extract( $row, EXTR_PREFIX_ALL, "v" );
 					$v_headline = string_unsafe( $v_headline );
 
@@ -122,7 +124,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value="  Edit Post ">
+			<input type=submit value=" Edit Post ">
 		</td>
 		</form>
 	</tr>

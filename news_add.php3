@@ -15,8 +15,10 @@
 		exit;
 	}
 
+	### " character poses problem when editting so let's just convert them
 	$f_headline	= string_safe( str_replace( "\"", "'", $f_headline ) );
 	$f_body		= string_safe( $f_body );
+	### Add item
 	$query = "INSERT
 			INTO $g_mantis_news_table
     		( id, poster_id, date_posted, last_modified, headline, body )

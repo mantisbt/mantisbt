@@ -15,13 +15,13 @@
 		exit;
 	}
 
-	### deleting news items
+	### If Deleteing item redirect to delete script
 	if ( $f_action=="delete") {
 		header( "Location: $g_news_delete?f_id=$f_id" );
 		exit;
 	}
 
-	### editing news item
+	### Retrieve new item data and prefix with v_
 	$query = "SELECT *
 		FROM $g_mantis_news_table
 		WHERE id='$f_id'";

@@ -15,6 +15,7 @@
 		exit;
 	}
 
+	### Delete the news entry
 	$query = "DELETE
 			FROM $g_mantis_news_table
     		WHERE id='$f_id'";
