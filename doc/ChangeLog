@@ -5,6 +5,7 @@ Mantis ChangeLog
  * Languages: Updated Italian localisation.
  * Languages: Added Slovak localisation.
  * Enhancement: Field names in bug history are now localized.
+ * Enhancement: g_use_iis default value is now based on auto-detection of IIS servers.  Before it was defaulted to OFF.
  * Fix: 'Display selected only' on print bugs page fixed.
  * Fix: 'Hide resolved' now also works for report printing and export.
  * Fix: Do not call custom_field_set_value() in bug report and bug update if user has no write access.

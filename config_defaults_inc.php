@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.110 2003-03-08 11:24:26 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.111 2003-03-10 04:03:58 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -696,7 +696,8 @@
 
 	# --- CVS linking ---------------
 	# insert the URL to your CVSweb or ViewCVS
-	$g_cvs_web				= 'http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/mantisbt/mantisbt/';
+	# eg: http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/mantisbt/mantisbt/
+	$g_cvs_web				= '';
 
 	# --- Bug Linking ---------------
 	# if a number follows this tag it will create a link to a bug.
