@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.56 $
-	# $Author: thraxisp $
-	# $Date: 2004-10-17 00:14:27 $
+	# $Revision: 1.57 $
+	# $Author: bpfennigschmidt $
+	# $Date: 2004-12-12 20:39:44 $
 	#
-	# $Id: view_all_bug_page.php,v 1.56 2004-10-17 00:14:27 thraxisp Exp $
+	# $Id: view_all_bug_page.php,v 1.57 2004-12-12 20:39:44 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -31,6 +31,11 @@
 
 	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	if ( $rows === false ) {
+		print_header_redirect( 'view_all_set.php?type=0' );
+	}
+	
+	$sticky_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
+	if ( $sticky_rows === false ) {
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 

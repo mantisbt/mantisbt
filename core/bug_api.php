@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.88 2004-11-30 11:11:05 vboctor Exp $
+	# $Id: bug_api.php,v 1.89 2004-12-12 20:33:25 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -51,6 +51,7 @@
 		var $view_state = VS_PUBLIC;
 		var $summary = '';
 		var $sponsorship_total = 0;
+		var $sticky = 0;
 
 		# omitted:
 		# var $bug_text_id
@@ -111,7 +112,7 @@
 
 		return $row;
 	}
-
+	
 	# --------------------
 	# Inject a bug into the bug cache
 	function bug_add_to_cache( $p_bug_row ) {
@@ -260,6 +261,7 @@
 
 		return true;
 	}
+	
 	# --------------------
 	# Validate workflow state to see if bug can be moved to requested state
 	function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
@@ -314,7 +316,8 @@
 		$c_view_state			= db_prepare_int( $p_bug_data->view_state );
 		$c_steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
 		$c_additional_info		= db_prepare_string( $p_bug_data->additional_information );
-		$c_sponsorship_total = 0;
+		$c_sponsorship_total 	= 0;
+		$c_sticky 				= 0; 
 
 		# Summary cannot be blank
 		if ( is_blank( $c_summary ) ) {
@@ -383,7 +386,7 @@
 				      os, os_build,
 				      platform, version,
 				      build,
-				      profile_id, summary, view_state, sponsorship_total )
+				      profile_id, summary, view_state, sponsorship_total, sticky )
 				  VALUES
 				    ( '$c_project_id',
 				      '$c_reporter_id', '$c_handler_id',
@@ -396,7 +399,7 @@
 				      '$c_os', '$c_os_build',
 				      '$c_platform', '$c_version',
 				      '$c_build',
-				      '$c_profile_id', '$c_summary', '$c_view_state', '$c_sponsorship_total' )";
+				      '$c_profile_id', '$c_summary', '$c_view_state', '$c_sponsorship_total', '$c_sticky' )";
 		db_query( $query );
 
 		$t_bug_id = db_insert_id($t_bug_table);
@@ -454,6 +457,7 @@
 		bug_set_field( $t_new_bug_id, 'eta', $t_bug_data->eta );
 		bug_set_field( $t_new_bug_id, 'fixed_in_version', $t_bug_data->fixed_in_version );
 		bug_set_field( $t_new_bug_id, 'sponsorship_total', 0 );
+		bug_set_field( $t_new_bug_id, 'sticky', 0 );
 
 		# COPY CUSTOM FIELDS
 		if ( $p_copy_custom_fields ) {
@@ -742,6 +746,7 @@
 					view_state='$c_bug_data->view_state',
 					summary='$c_bug_data->summary',
 					sponsorship_total='$c_bug_data->sponsorship_total'
+					sticky='$c_bug_data->sticky'
 				WHERE id='$c_bug_id'";
 		db_query( $query );
 
@@ -769,6 +774,7 @@
 		history_log_event_direct( $p_bug_id, 'view_state', $t_old_data->view_state, $p_bug_data->view_state );
 		history_log_event_direct( $p_bug_id, 'summary', $t_old_data->summary, $p_bug_data->summary );
 		history_log_event_direct( $p_bug_id, 'sponsorship_total', $t_old_data->sponsorship_total, $p_bug_data->sponsorship_total );
+		history_log_event_direct( $p_bug_id, 'sticky', $t_old_data->sticky, $p_bug_data->sticky );
 
 		# Update extended info if requested
 		if ( $p_update_extended ) {
@@ -1290,10 +1296,11 @@
 		$p_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
 		$p_bug_data->version			= db_prepare_string( $p_bug_data->version );
 		$p_bug_data->build				= db_prepare_string( $p_bug_data->build );
-		$p_bug_data->fixed_in_version		= db_prepare_string( $p_bug_data->fixed_in_version );
+		$p_bug_data->fixed_in_version	= db_prepare_string( $p_bug_data->fixed_in_version );
 		$p_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
 		$p_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
-		$p_bug_data->sponsorship_total		= db_prepare_int( $p_bug_data->sponsorship_total );
+		$p_bug_data->sponsorship_total	= db_prepare_int( $p_bug_data->sponsorship_total );
+		$p_bug_data->sticky				= db_prepare_int( $p_bug_data->sticky );
 
 		$p_bug_data->description		= db_prepare_string( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
@@ -1314,9 +1321,10 @@
 		$p_bug_data->platform			= string_attribute( $p_bug_data->platform );
 		$p_bug_data->version			= string_attribute( $p_bug_data->version );
 		$p_bug_data->build				= string_attribute( $p_bug_data->build );
-		$p_bug_data->fixed_in_version		= string_attribute( $p_bug_data->fixed_in_version );
+		$p_bug_data->fixed_in_version	= string_attribute( $p_bug_data->fixed_in_version );
 		$p_bug_data->summary			= string_attribute( $p_bug_data->summary );
-		$p_bug_data->sponsorship_total		= string_attribute( $p_bug_data->sponsorship_total );
+		$p_bug_data->sponsorship_total	= string_attribute( $p_bug_data->sponsorship_total );
+		$p_bug_data->sticky				= string_attribute( $p_bug_data->sticky );
 
 		$p_bug_data->description		= string_textarea( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= string_textarea( $p_bug_data->steps_to_reproduce );
@@ -1337,9 +1345,10 @@
 		$p_bug_data->platform			= string_display( $p_bug_data->platform );
 		$p_bug_data->version			= string_display( $p_bug_data->version );
 		$p_bug_data->build				= string_display( $p_bug_data->build );
-		$p_bug_data->fixed_in_version		= string_display( $p_bug_data->fixed_in_version );
+		$p_bug_data->fixed_in_version	= string_display( $p_bug_data->fixed_in_version );
 		$p_bug_data->summary			= string_display_links( $p_bug_data->summary );
-		$p_bug_data->sponsorship_total		= string_display( $p_bug_data->sponsorship_total );
+		$p_bug_data->sponsorship_total	= string_display( $p_bug_data->sponsorship_total );
+		$p_bug_data->sticky				= string_display( $p_bug_data->sticky );
 
 		$p_bug_data->description		= string_display_links( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= string_display_links( $p_bug_data->steps_to_reproduce );

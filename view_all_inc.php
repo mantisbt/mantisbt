@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.147 2004-12-12 14:10:37 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.148 2004-12-12 20:39:44 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -173,187 +173,211 @@
 <tr>
 	<td class="spacer" colspan="<?php echo $col_count; ?>"> &nbsp; </td>
 </tr>
-
 <?php 
-	mark_time( 'begin loop' );
-
-	# -- Loop over bug rows and create $v_* variables -- 
-
-	for($i=0; $i < sizeof( $rows ); $i++) {
-		# prefix bug data with v_
-
-		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
-
-		$v_summary = string_display_links( $v_summary );
-		$t_last_updated = date( config_get( 'short_date_format' ), $v_last_updated );
-
-		# choose color based on status
-		$status_color = get_status_color( $v_status );
-
-		# grab the bugnote count
-		$t_bugnote_stats = bug_get_bugnote_stats( $v_id );
-		if ( NULL != $t_bugnote_stats ) {
-			$bugnote_count = $t_bugnote_stats['count'];
-			$v_bugnote_updated = $t_bugnote_stats['last_modified'];
-		} else {
-			$bugnote_count = 0;
-		}
-
-		# Check for attachments
-		$t_attachment_count = 0;
-		if ( ( ON == $t_show_attachments ) 
-		  && ( file_can_view_bug_attachments( $v_id ) ) ) {
-			$t_attachment_count = file_bug_attachment_count( $v_id );
-		}
-
-		# grab the project name
-		$project_name = project_get_field( $v_project_id, 'name' );
-?>
-<tr bgcolor="<?php echo $status_color; ?>">
-	<td> <?php
-		# -- Checkbox -- 
-
-		if ( access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
-			$t_checkboxes_exist = true;
-			printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" />" , $v_id );
-		} else {
-			echo "&nbsp;";
-		}
-	?> </td>
-	<td> <?php 
-		# -- Pencil shortcut --
-
-		if ( !bug_is_readonly( $v_id ) 
-		  && access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
-			echo '<a href="' . string_get_bug_update_url( $v_id ) . '">';
-			echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'update.png';
-			echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
-			echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
-		} else {
-			echo '&nbsp;';
-		}
-	?> </td>
-	<td> <?php
-		# -- Priority --
-
-		if ( ON == config_get( 'show_priority_text' ) ) {
-			print_formatted_priority_string( $v_status, $v_priority );
-		} else {
-			print_status_icon( $v_priority );
-		}
-	?> </td>
-	<td class="center"> <?php 
-		# -- Bug ID and details link -- 
-
-		print_bug_link( $v_id, false );
-	?> </td>
-<?php
-		# -- Sponsorship Amount -- 
-
-		if ( $t_enable_sponsorship == ON ) {
-			echo "\t<td class=\"right\">";
-			if ( $v_sponsorship_total > 0 ) {
-				$t_sponsorship_amount = sponsorship_format_amount( $v_sponsorship_total );
-				echo string_no_break( $t_sponsorship_amount );
-			}
-			echo "</td>\n";
-		}
-?>
-	<td class="center"> <?php
-		# -- Bugnote count --
-
-		if ( $bugnote_count > 0 ) {
-			$t_bugnote_link = '<a href="' . string_get_bug_view_url( $v_id ) 
-				. '&amp;nbn=' . $bugnote_count . '#bugnotes">' 
-				. $bugnote_count . '</a>'; 
-
-			if ( $v_bugnote_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
-				printf( '<span class="bold">%s</span>', $t_bugnote_link );
-			} else {
-				echo $t_bugnote_link;
-				}
-		} else {
-			echo '&nbsp;';
-		}
-	?> </td>
-<?php 
-		# -- Attachment indicator --
-	  
-		if ( ON == $t_show_attachments ) {
-			echo "\t<td>";
-			if ( 0 < $t_attachment_count ) {
-				echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
-				echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
-				echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
-				echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
-				echo ' />';
-				echo '</a>';
-			} else {
-				echo ' &nbsp; ';
-			}
-			echo "</td>\n";
-		}
-?>
-	<td class="center"> <?php 
-		# -- Category -- 
-
-		# type project name if viewing 'all projects'
-		if ( ON == config_get( 'show_bug_project_links' ) 
-		  && helper_get_current_project() == ALL_PROJECTS ) {
-			echo '<small>[';
-			print_view_bug_sort_link( $project_name, 'project_id', $t_sort, $t_dir );
-			echo ']</small><br />';
-		}
-
-		echo string_display( $v_category );
-	?> </td>
-	<td class="center"> <?php 
-		# -- Severity --
-
-		print_formatted_severity_string( $v_status, $v_severity );
-	?> </td>
-	<td class="center"> <?php 
-		# -- Status / Handler --
-
-		printf( '<u><a title="%s">%s</a></u>'
-			, get_enum_element( 'resolution', $v_resolution ) 
-			, get_enum_element( 'status', $v_status )
-		);
-
-		# print username instead of status
-		if ( ON == config_get( 'show_assigned_names' ) 
-		  && $v_handler_id > 0 ) {
-			echo ' (';
-			print_user( $v_handler_id );
-			echo ')';
-		}
-	?> </td>
-	<td class="center"> <?php 
-		# -- Last Updated -- 
+	function write_bug_rows ( $p_rows )
+	{
+		global $t_icon_path;
+		global $t_update_bug_threshold;
+		global $t_enable_sponsorship;
+		global $t_filter;
+		global $t_show_attachments;
+		global $t_sort;
+		global $t_dir;
+		global $t_checkboxes_exist;
+		
+		
+		mark_time( 'begin loop' );
 	
-		if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
-			printf( '<span class="bold">%s</span>', $t_last_updated );
-		} else {
-			echo $t_last_updated;
-		}
-	?> </td>
-	<td class="left"> <?php 
-		# -- Summary --
-
-		echo $v_summary;
-		if ( VS_PRIVATE == $v_view_state ) {
-			printf( ' <img src="%s" alt="(%s)" title="%s" />'
-				, $t_icon_path . 'protected.gif'
-				, lang_get( 'private' )
-				, lang_get( 'private' )
+		# -- Loop over bug rows and create $v_* variables -- 
+	
+		for($i=0; $i < sizeof( $p_rows ); $i++) {
+			# prefix bug data with v_
+	
+			extract( $p_rows[$i], EXTR_PREFIX_ALL, 'v' );
+	
+			$v_summary = string_display_links( $v_summary );
+			$t_last_updated = date( config_get( 'short_date_format' ), $v_last_updated );
+	
+			# choose color based on status
+			$status_color = get_status_color( $v_status );
+	
+			# grab the bugnote count
+			$t_bugnote_stats = bug_get_bugnote_stats( $v_id );
+			if ( NULL != $t_bugnote_stats ) {
+				$bugnote_count = $t_bugnote_stats['count'];
+				$v_bugnote_updated = $t_bugnote_stats['last_modified'];
+			} else {
+				$bugnote_count = 0;
+			}
+	
+			# Check for attachments
+			$t_attachment_count = 0;
+			if ( ( ON == $t_show_attachments ) 
+			  && ( file_can_view_bug_attachments( $v_id ) ) ) {
+				$t_attachment_count = file_bug_attachment_count( $v_id );
+			}
+	
+			# grab the project name
+			$project_name = project_get_field( $v_project_id, 'name' );
+?>
+	<tr bgcolor="<?php echo $status_color; ?>" border="1">
+		<td> <?php
+			# -- Checkbox -- 
+	
+			if ( access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
+				$t_checkboxes_exist = true;
+				printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" />" , $v_id );
+			} else {
+				echo "&nbsp;";
+			}
+		?> </td>
+		<td> <?php 
+			# -- Pencil shortcut --
+	
+			if ( !bug_is_readonly( $v_id ) 
+			  && access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
+				echo '<a href="' . string_get_bug_update_url( $v_id ) . '">';
+				echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'update.png';
+				echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
+				echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
+			} else {
+				echo '&nbsp;';
+			}
+		?> </td>
+		<td> <?php
+			# -- Priority --
+	
+			if ( ON == config_get( 'show_priority_text' ) ) {
+				print_formatted_priority_string( $v_status, $v_priority );
+			} else {
+				print_status_icon( $v_priority );
+			}
+		?> </td>
+		<td class="center"> <?php 
+			# -- Bug ID and details link -- 
+	
+			print_bug_link( $v_id, false );
+		?> </td>
+<?php
+			# -- Sponsorship Amount -- 
+	
+			if ( $t_enable_sponsorship == ON ) {
+				echo "\t<td class=\"right\">";
+				if ( $v_sponsorship_total > 0 ) {
+					$t_sponsorship_amount = sponsorship_format_amount( $v_sponsorship_total );
+					echo string_no_break( $t_sponsorship_amount );
+				}
+				echo "</td>\n";
+			}
+?>
+		<td class="center"> <?php
+			# -- Bugnote count --
+	
+			if ( $bugnote_count > 0 ) {
+				$t_bugnote_link = '<a href="' . string_get_bug_view_url( $v_id ) 
+					. '&amp;nbn=' . $bugnote_count . '#bugnotes">' 
+					. $bugnote_count . '</a>'; 
+	
+				if ( $v_bugnote_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
+					printf( '<span class="bold">%s</span>', $t_bugnote_link );
+				} else {
+					echo $t_bugnote_link;
+					}
+			} else {
+				echo '&nbsp;';
+			}
+		?> </td>
+<?php 
+			# -- Attachment indicator --
+		  
+			if ( ON == $t_show_attachments ) {
+				echo "\t<td>";
+				if ( 0 < $t_attachment_count ) {
+					echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
+					echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
+					echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
+					echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
+					echo ' />';
+					echo '</a>';
+				} else {
+					echo ' &nbsp; ';
+				}
+				echo "</td>\n";
+			}
+?>
+		<td class="center"> <?php 
+			# -- Category -- 
+	
+			# type project name if viewing 'all projects'
+			if ( ON == config_get( 'show_bug_project_links' ) 
+			  && helper_get_current_project() == ALL_PROJECTS ) {
+				echo '<small>[';
+				print_view_bug_sort_link( $project_name, 'project_id', $t_sort, $t_dir );
+				echo ']</small><br />';
+			}
+	
+			echo string_display( $v_category );
+		?> </td>
+		<td class="center"> <?php 
+			# -- Severity --
+	
+			print_formatted_severity_string( $v_status, $v_severity );
+		?> </td>
+		<td class="center"> <?php 
+			# -- Status / Handler --
+	
+			printf( '<u><a title="%s">%s</a></u>'
+				, get_enum_element( 'resolution', $v_resolution ) 
+				, get_enum_element( 'status', $v_status )
 			);
-		}
-	 ?> </td>
-</tr>
+	
+			# print username instead of status
+			if ( ON == config_get( 'show_assigned_names' ) 
+			  && $v_handler_id > 0 ) {
+				echo ' (';
+				print_user( $v_handler_id );
+				echo ')';
+			}
+		?> </td>
+		<td class="center"> <?php 
+			# -- Last Updated -- 
+		
+			if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
+				printf( '<span class="bold">%s</span>', $t_last_updated );
+			} else {
+				echo $t_last_updated;
+			}
+		?> </td>
+		<td class="left"> <?php 
+			# -- Summary --
+	
+			echo $v_summary;
+			if ( VS_PRIVATE == $v_view_state ) {
+				printf( ' <img src="%s" alt="(%s)" title="%s" />'
+					, $t_icon_path . 'protected.gif'
+					, lang_get( 'private' )
+					, lang_get( 'private' )
+				);
+			}
+		 ?> </td>
+	</tr>
 <?php 
 	# -- end of Repeating bug row --
+		}
 	}
+?>
 
+<?php
+	write_bug_rows($sticky_rows);
+	# -- ====================== end of STICKY BUG LIST ========================= --
+	if ( 0 < sizeof($sticky_rows) ) {
+?>
+		<tr>
+			<td class="left" colspan="<?php echo $col_count; ?>" bgcolor="#999999">&nbsp;</td>
+		</tr>
+<?php
+	}
+	write_bug_rows($rows);
 	# -- ====================== end of BUG LIST ========================= --
 
 	# -- ====================== MASS BUG MANIPULATION =================== -- 

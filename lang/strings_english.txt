@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.222 $
-	# $Author: thraxisp $
-	# $Date: 2004-12-12 14:10:39 $
+	# $Revision: 1.223 $
+	# $Author: bpfennigschmidt $
+	# $Date: 2004-12-12 20:34:29 $
 	#
-	# $Id: strings_english.txt,v 1.222 2004-12-12 14:10:39 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.223 2004-12-12 20:34:29 bpfennigschmidt Exp $
 	###########################################################################
 
 # Charset
@@ -29,6 +29,7 @@ $s_actiongroup_menu_resolve = 'Resolve';
 $s_actiongroup_menu_update_priority = 'Update Priority';
 $s_actiongroup_menu_update_status = 'Update Status';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
@@ -108,6 +109,7 @@ $s_resolve_bugs_conf_msg = 'Choose issues resolution';
 $s_priority_bugs_conf_msg = 'Choose issues priority';
 $s_status_bugs_conf_msg = 'Choose issues status';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Close Issues' ;
 $s_delete_group_bugs_button = 'Delete Issues' ;
 $s_move_group_bugs_button = 'Move Issues' ;
@@ -117,6 +119,7 @@ $s_resolve_group_bugs_button = 'Resolve Issues' ;
 $s_priority_group_bugs_button = 'Update Priority' ;
 $s_status_group_bugs_button = 'Update Status' ;
 $s_view_status_group_bugs_button = 'Update View Status';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Synthesis graphs by status' ;

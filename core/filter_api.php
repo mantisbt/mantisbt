@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.65 2004-12-12 14:10:37 thraxisp Exp $
+	# $Id: filter_api.php,v 1.66 2004-12-12 20:33:25 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -44,7 +44,9 @@
 	#   - project id to use in filtering.
 	# $p_user_id
 	#   - user id to use as current user when filtering.
-	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $custom_filter = null, $p_project_id = null, $p_user_id = null ) {
+	# $p_show_sticky
+	#	- get sticky issues only.
+	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 		$t_bug_table			= config_get( 'mantis_bug_table' );
 		$t_bug_text_table		= config_get( 'mantis_bug_text_table' );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
@@ -538,6 +540,12 @@
 		} else {
 			$t_where	= '';
 		}
+		if ( null === $p_show_sticky ) {
+			$t_where .= " AND $t_bug_table.sticky = 0";
+		}
+		else {
+			$t_where .= " AND $t_bug_table.sticky = 1";
+		}
 
 		# Possibly do two passes. First time, grab the IDs of issues that match the filters. Second time, grab the IDs of issues that
 		# have bugnotes that match the text search if necessary.
@@ -575,6 +583,7 @@
 		} else {
 			$t_where = "WHERE 1 != 1";
 		}
+		
 		$t_from = 'FROM ' . $t_bug_table;
 
 		# Get the total number of bugs that meet the criteria.
@@ -622,7 +631,7 @@
 					$t_from
 					$t_join
 					$t_where";
-
+					
 		# Now add the rest of the criteria i.e. sorting, limit.
 		$c_sort = db_prepare_string( $t_filter['sort'] );
 

@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.2 2004-12-11 20:24:02 prichards Exp $
+	# $Id: 0_19_inc.php,v 1.3 2004-12-12 20:35:00 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,6 +38,11 @@
 			  value text NOT NULL,
 			  PRIMARY KEY (id))"
 		);
+
+	$upgrades[] = new SQLUpgrade(
+			'sticky-issues',
+			'Add sticky column to bug table',
+			"ALTER TABLE $t_bug_table ADD sticky TINYINT(1) default '0' NOT NULL" );
 
 	return $upgrades;
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.107 2004-11-30 12:17:03 vboctor Exp $
+	# $Id: print_api.php,v 1.108 2004-12-12 20:33:26 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -708,6 +708,7 @@
 							'CLOSE' => lang_get('actiongroup_menu_close'),
 							'DELETE' => lang_get('actiongroup_menu_delete'),
 							'RESOLVE' => lang_get('actiongroup_menu_resolve'),
+							'SET_STICKY' => lang_get( 'actiongroup_menu_set_sticky' ),
 							'UP_PRIOR' => lang_get('actiongroup_menu_update_priority'),
 							'UP_STATUS' => lang_get('actiongroup_menu_update_status'),
 							'VIEW_STATUS' => lang_get( 'actiongroup_menu_update_view_status' ) );
