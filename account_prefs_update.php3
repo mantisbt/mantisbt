@@ -87,7 +87,8 @@
 	}
 
 	### make sure the delay isn't too low
-	if ( $g_min_refresh_delay > $f_refresh_delay ) {
+	if (( $g_min_refresh_delay > $f_refresh_delay )&&
+		( $f_refresh_delay != 0 )) {
 		$f_refresh_delay = $g_min_refresh_delay;
 	}
 
