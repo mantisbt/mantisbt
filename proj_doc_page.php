@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.37 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: proj_doc_page.php,v 1.38 2004-02-25 14:30:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -67,7 +67,7 @@
 		<?php
 			if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
 				echo '&nbsp;';
-				print_bracket_link( 'proj_doc_edit_page.php?file_id='.$v_id, 'edit' );
+				print_bracket_link( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
 			}
 		?>
 		</span>
