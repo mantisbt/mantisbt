@@ -32,7 +32,7 @@
 ?>
 	<br />
 	<div align="center">
-	<center><b><?php print filter_db_get_name( $f_query_id ); ?></b></center>
+	<center><b><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></b></center>
 	<?php echo lang_get( 'query_delete_msg' ); ?>
 
 	<form method="post" action="<?php print $t_delete_url; ?>">

@@ -47,7 +47,7 @@
 
 		print '<td>';
 		
-		print "<a href=" . $t_use_query_url . db_prepare_int( $t_id ) . ">$t_name</a>";
+		print '<a href=' . $t_use_query_url . db_prepare_int( $t_id ) . '>' . string_display( $t_name ) . '</a>';
 
 		if ( filter_db_can_delete_filter( $t_id ) ) {
 			print " [<a href=" . $t_delete_query_url . db_prepare_int( $t_id ) . ">" . lang_get( 'delete_query' ) . "</a>]";
