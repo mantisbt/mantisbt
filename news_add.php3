@@ -31,11 +31,6 @@
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
-<?
-	if ( $result ) {
-		print_meta_redirect( $g_news_menu_page, $g_wait_time );
-	}
-?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
@@ -50,6 +45,8 @@
 <?
 	### SUCCESS
 	if ( $result ) {
+		PRINT "$s_news_added_msg<p>";
+
 		$t_headline  = string_display( $f_headline );
 		$t_body      = stripslashes( string_display_with_br( $f_body ) );
 ?>

@@ -38,12 +38,14 @@
 ?>
 <p>
 <div align=center>
+	[ <? echo $s_account_link ?> ]
 	[ <a href="<? echo $g_account_profile_manage_page ?>"><? echo $s_manage_profiles_link ?></a> ]
 	[ <a href="<? echo $g_account_prefs_page ?>"><? echo $s_change_preferences_link ?></a> ]
 </div>
 <?
 	}
 ?>
+
 <p>
 <div align=center>
 <table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>

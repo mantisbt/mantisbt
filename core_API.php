@@ -445,7 +445,7 @@
 		} ### end for
 	}
 	### --------------------
-	function print_assign_to_option_list( $p_id ) {
+	function print_assign_to_option_list( $p_id="" ) {
 		global $g_mantis_user_table;
 
 		$query = "SELECT id, username
@@ -1374,6 +1374,8 @@
 	### --------------------
 	### Send new password when user forgets
 	function email_reset( $p_user_id, $p_password ) {
+		global $g_mantis_user_table;
+
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
 				WHERE id='$p_user_id'";
@@ -1387,6 +1389,25 @@
 					"Here is your new password: ".$p_password."\n\n";
 
 		email_send( $v_email, "New Password", $t_message );
+	}
+	### --------------------
+	function email_new_bug( $p_bug_id ) {
+
+		### @@@ not yet implemented
+		return;
+
+		global $g_mantis_user_table;
+
+		$query = "SELECT id
+				FROM $g_mantis_user_table
+				WHERE access_level='developer' OR access_level='administrator'";
+		$result = db_query( $query );
+		$user_count = db_num_rows( $result );
+		for ($i=0;$i<$user_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_id = $row["id"];
+			#email_bug_info( $t_id, "The following bug has been ADDED." );
+		}
 	}
 	### --------------------
 	### Notify reporter and handler when new bugnote is added
@@ -1412,7 +1433,8 @@
 	### --------------------
 	function email_build_bug_message( $p_bug_id ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
-				$g_mantis_user_table, $g_complete_date_format,
+				$g_mantis_user_table, $g_mantis_project_table,
+				$g_complete_date_format,
 				$g_bugnote_order, $g_mantis_url, $g_view_bug_page;
 
 		$query = "SELECT *
@@ -1430,6 +1452,12 @@
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v2" );
 
+		$query = "SELECT name
+				FROM $g_mantis_project_table
+				WHERE id='$v_project_id'";
+		$result = db_query( $query );
+		$t_project_name = db_result( $result, 0, 0 );
+
 		$v2_description = stripslashes( str_replace( "<br>", "", $v2_description ) );
 		$v_summary = stripslashes( $v_summary );
 		$v_date_submitted = date( $g_complete_date_format, sql_to_unix_time( $v_date_submitted ) );
@@ -1438,6 +1466,7 @@
 		$t_message = "=======================================================================\n";
 		$t_message .= $g_mantis_url.$g_view_bug_page."?f_id=".$p_bug_id."\n";
 		$t_message .= "=======================================================================\n";
+		$t_message .= "Project:         $t_project_name\n";
 		$t_message .= "Bug:             $v_id\n";
 		$t_message .= "Category:        $v_category\n";
 		$t_message .= "Reproducibility: $v_reproducibility\n";

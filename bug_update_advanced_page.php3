@@ -260,7 +260,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
-			<b><? echo $s_additional ?><br><? echo $s_information ?></b>
+			<b><? echo $s_additional_information ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
 			<? echo $v2_additional_information ?>

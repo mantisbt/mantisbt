@@ -1,5 +1,30 @@
 Mantis
 
+02.23.2001  -   0.14.6
+
+ * Added Italian translation
+ * Added French translation
+ * Added project name in email
+ * Added g_reopen_bug_threshold to prevent unprivileged users from reopening
+   bugs
+ * Fixed error with version editing
+ * Fixed error with direct assign to user not working on report
+ * Fixed error with string $s_add_project_button in Portuguese
+ * Modified Portuguese s_view_status
+ * Changed = in css_inc.php to : (specifically for font sizes)
+
+02.19.2001  -   0.14.5
+
+ * Added updated German translation
+ * Modified news add and news update to behave better
+ * Fixed string s_add_profile_title
+ * Fixed error on category update
+ * Fixed error in password reset
+ * Renamed g_view_bug_all_page, g_view_user_reported_bug_page,
+   g_view_user_assigned_bug_page
+ * Removed duplicate global page references
+ * Updated all translations with some missing localization strings
+
 02.17.2001  -   0.14.4
 
  * Fixed erroneous error message when signing up for new account

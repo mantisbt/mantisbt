@@ -93,12 +93,22 @@
 				date_submitted, last_updated, eta, bug_text_id, os, os_build,
 				platform, version, build, votes, profile_id, summary )
 				VALUES
-				( null, '$g_project_cookie_val', '$u_id', '0000000', '0000000', 'normal', '$f_severity',
+				( null, '$g_project_cookie_val', '$u_id', '$f_assign_id', '0000000', 'normal', '$f_severity',
 				'$f_reproducibility', '$t_status', 'open', 'minor fix', '$f_category',
 				NOW(), NOW(), NOW(), '$t_id', '$f_os', '$f_osbuild',
 				'$f_platform', '$f_version', '$f_build',
 				1, '$f_profile_id', '$f_summary' )";
 		$result = db_query( $query );
+
+		$query = "select LAST_INSERT_ID()";
+		$result = db_query( $query );
+		if ( $result ) {
+			$t_bug_id = db_result( $result, 0, 0 );
+		}
+
+		if ( $g_notify_developers_on_new==1 ) {
+			email_new_bug( $t_bug_id );
+		}
 	}
 ?>
 <? print_html_top() ?>
@@ -107,7 +117,7 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $g_view_bug_all_page, $g_wait_time );
+		print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -176,7 +186,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_view_bug_all_page ?>"><? echo $s_proceed ?></a>
+<a href="<? echo $g_view_all_bug_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

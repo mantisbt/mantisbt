@@ -30,11 +30,6 @@
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
-<?
-	if ( $result ) {
-		print_meta_redirect( $g_news_menu_page, $g_wait_time );
-	}
-?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
@@ -47,9 +42,34 @@
 <p>
 <div align=center>
 <?
+	### SUCCESS
 	if ( $result ) {
 		PRINT "$s_news_updated_msg<p>";
+
+		$t_headline  = string_display( $f_headline );
+		$t_body      = stripslashes( string_display_with_br( $f_body ) );
+?>
+<p>
+<div align=center>
+<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<tr>
+	<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<b><? echo string_unsafe( $t_headline ) ?></b>
+	</td>
+</tr>
+<tr>
+	<td bgcolor=<? echo $g_primary_color_light ?>>
+		<br>
+		<blockquote>
+			<? echo $t_body ?>
+		</blockquote>
+	</td>
+</tr>
+</table>
+</div>
+<?
 	}
+	### FAILURE
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 	}

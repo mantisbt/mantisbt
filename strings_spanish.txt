@@ -331,6 +331,8 @@
 	### $s_public # defined above;
 	### $s_private # defined above;
 	### $s_description # defined above;
+	$s_add_project_button = "Adicionar Projeto";
+	$s_projects_title = "Proyectos";
 	$s_name = "Nombre";
 	### $s_status # defined above;
 	### $s_enabed # defined above;

@@ -16,7 +16,7 @@
 	}
 
 	### check for duplicate
-	if ( !is_duplicate_version( $f_version ) ) {
+	if ( !is_duplicate_version( $f_version, $f_project_id ) ) {
 		### update version
 		$query = "UPDATE $g_mantis_project_version_table
 				SET version='$f_version'

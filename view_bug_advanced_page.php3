@@ -242,7 +242,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
-			<b><? echo $s_additional ?><br><? echo $s_information ?></b>
+			<b><? echo $s_additional_information ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
 			<? echo $v2_additional_information ?>
@@ -349,12 +349,14 @@
 	PRINT "<p>";
 
 	if ( $v_status=="resolved" ) {
-		PRINT "<div align=center>";
-		PRINT "<form method=post action=\"$g_bug_reopen_page\">";
-			PRINT "<input type=hidden name=f_id value=\"$v_id\">";
-			PRINT "<input type=submit value=\"$s_reopen_bug_button\">";
-		PRINT "</form>";
-		PRINT "</div>";
+		if ( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ) {
+			PRINT "<div align=center>";
+			PRINT "<form method=post action=\"$g_bug_reopen_page\">";
+				PRINT "<input type=hidden name=f_id value=\"$v_id\">";
+				PRINT "<input type=submit value=\"$s_reopen_bug_button\">";
+			PRINT "</form>";
+			PRINT "</div>";
+		}
 	} else {
 		include( $g_bugnote_add_include_file );
 	}

@@ -44,7 +44,7 @@
 			WHERE bug_id='$f_id'";
 	$result = db_query($query);
 
-	header( "Location: $g_view_bug_all_page" );
+	header( "Location: $g_view_all_bug_page" );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -52,7 +52,7 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $g_view_bug_all_page, $g_wait_time );
+		print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -78,7 +78,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_view_bug_all_page ?>"><? echo $s_proceed ?></a>
+<a href="<? echo $g_view_all_bug_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

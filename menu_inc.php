@@ -11,7 +11,7 @@
 				$g_mantis_user_table, $g_mantis_user_pref_table,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 
-				$g_main_page, $g_view_bug_all_page,
+				$g_main_page, $g_view_all_bug_page,
 				$g_report_bug_page, $g_report_bug_advanced_page,
 				$g_summary_page, $g_account_page, $g_manage_page,
 				$g_news_menu_page, $g_usage_doc_page, $g_logout_page,
@@ -31,7 +31,7 @@
 ?>
 <div align=center>
 	<a href="<? echo $g_path.$g_main_page ?>"><? echo $s_main_link ?></a> |
-	<a href="<? echo $g_path.$g_view_bug_all_page ?>"><? echo $s_view_bugs_link ?></a> |
+	<a href="<? echo $g_path.$g_view_all_bug_page ?>"><? echo $s_view_bugs_link ?></a> |
 <?
 	if ( $t_access_level!="viewer" ) {
 		if ( get_user_value( $g_mantis_user_pref_table, "advanced_report" )=="on" ) {

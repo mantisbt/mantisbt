@@ -16,7 +16,7 @@
 	}
 
 	### check for duplicate
-	if ( !is_duplicate_category( $f_category ) ) {
+	if ( !is_duplicate_category( $f_category, $f_project_id ) ) {
 		### update category
 		$query = "UPDATE $g_mantis_project_category_table
 				SET category='$f_category'

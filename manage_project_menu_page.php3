@@ -96,7 +96,7 @@
 	</tr>
 	<tr>
 		<td align=center bgcolor=<? echo $g_white_color ?> colspan=6>
-			<input type=submit value="Add Project">
+			<input type=submit value="<? echo $s_add_project_button ?>">
 		</td>
 	</tr>
 	</table>

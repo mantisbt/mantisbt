@@ -23,18 +23,6 @@
 	#--------------------
 
 	#--------------------
-	# extensions for php 3 and php 4
-	# set this to php for php4 or whatever your webserver needs
-	$g_php             = ".php3";
-	#--------------------
-
-	#--------------------
-	# table name prefix
-	# if you change this remember to reflect the changes in the database
-	$g_db_table_prefix = "mantis";
-	#--------------------
-
-	#--------------------
 	# email variables
 	$g_administrator_email  = "administrator@mydomain.com";   # set this
 	$g_webmaster_email      = "webmaster@mydomain.com";       # set this
@@ -48,6 +36,18 @@
 	#--------------------
 
 	#--------------------
+	# extensions for php 3 and php 4
+	# set this to php for php4 or whatever your webserver needs
+	$g_php             = ".php3";
+	#--------------------
+
+	#--------------------
+	# table name prefix
+	# if you change this remember to reflect the changes in the database
+	$g_db_table_prefix = "mantis";
+	#--------------------
+
+	#--------------------
 	# sitewide titles
 	$g_window_title         = "Mantis";     # browser window title
 	$g_page_title           = "Mantis";     # title at top of html page
@@ -58,10 +58,7 @@
 	$g_show_advanced_report      = 1;
 	$g_show_advanced_update      = 1;
 
-	### allow users to signup for their own accounts
-	$g_allow_signup              = 1;
-
-	$g_show_version              = 0;
+	$g_show_version              = 1;
 
 	# display a link at the bottom of the page to show the PHP source
 	# requires PHP4
@@ -73,15 +70,21 @@
 	# 1 = show menu at bottom
 	$g_show_footer_menu          = 0;
 
-	# change to language you want... choices are:
-	# english, spanish, portuguese
-	$g_language                  = "english";
+	### allow users to signup for their own accounts
+	$g_allow_signup              = 1;
 
-	# Allow email
+	# Allow email notification
 	$g_enable_email_notification = 1;
+
+	$g_notify_developers_on_new  = 1;
 
 	# set to 0 to disable email check
 	$g_validate_email            = 1;
+
+	# change to language you want... choices are:
+	# english, spanish, portuguese, german, french, italian
+	$g_language                  = "english";
+
 	#--------------------
 
 	#--------------------
@@ -99,9 +102,11 @@
 	#--------------------
 
 	#--------------------
-	# defaults for viewing preferences
+	# site defaults for viewing preferences
 	$g_default_limit_view       = 50;
 	$g_default_show_changed     = 6;
+
+	# defaults for new account viewing preferences
 	$g_default_advanced_report  = "";  # set to on to enable
 	$g_default_advanced_view    = "";  # set to on to enable
 	#--------------------
@@ -125,6 +130,11 @@
 	$g_short_date_format    = "m-d";
 	$g_normal_date_format   = "m-d H:i";
 	$g_complete_date_format = "m-d-y H:i T";
+	#--------------------
+
+	#--------------------
+	# access level needed to re-open bugs
+	$g_reopen_bug_threshold = "developer";
 	#--------------------
 
 	#--------------------
@@ -233,9 +243,9 @@
 	$g_main_page                      = "main_page".$g_php;
 
 	# bug view/update
-	$g_view_bug_all_page              = "view_bug_all_page".$g_php;
-	$g_view_user_assigned_bug_page    = "view_user_assigned_bug_page".$g_php;
-	$g_view_user_reported_bug_page    = "view_user_reported_bug_page".$g_php;
+	$g_view_all_bug_page              = "view_all_bug_page".$g_php;
+	$g_view_all_assigned_bug_page     = "view_all_assigned_bug_page".$g_php;
+	$g_view_all_reported_bug_page     = "view_all_reported_bug_page".$g_php;
 
 	$g_view_bug_page                  = "view_bug_page".$g_php;
 	$g_view_bug_advanced_page         = "view_bug_advanced_page".$g_php;
@@ -271,10 +281,6 @@
 
 	# summary
 	$g_summary_page                   = "summary_page".$g_php;
-
-	# user feedback
-	$g_view_user_reported_bug_page    = "view_user_reported_bug_page".$g_php;
-	$g_view_user_assigned_bug_page    = "view_user_assigned_bug_page".$g_php;
 
 	#signup
 	$g_signup_page                    = "signup_page".$g_php;
@@ -372,6 +378,6 @@
 
 	#--------------------
 	#version
-	$g_mantis_version = "0.14.4";
+	$g_mantis_version = "0.14.7";
 	#--------------------
 ?>

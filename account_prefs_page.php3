@@ -56,6 +56,13 @@
 
 <p>
 <div align=center>
+	[ <a href="<? echo $g_account_page ?>"><? echo $s_account_link ?></a> ]
+	[ <a href="<? echo $g_account_profile_manage_page ?>"><? echo $s_manage_profiles_link ?></a> ]
+	[ <? echo $s_change_preferences_link ?> ]
+</div>
+
+<p>
+<div align=center>
 <table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>

@@ -18,21 +18,21 @@
 	# Either generate a random password and email it or make a blank one.
 
 	### Go with random password and email it to the user
-	if ( $g_allow_signup==1 ) {
-		### Create random password
-		$t_password = create_random_password( $p_email );
+    if ( $f_protected!="on" ) {
+		if ( $g_allow_signup==1 ) {
+			### Create random password
+			$t_password = create_random_password( $p_email );
 
-		### create the almost unique string for each user then insert into the table
-		$t_password2 = crypt( $t_password );
-	    $query = "UPDATE $g_mantis_user_table
-	    		SET password='$t_password2'
-	    		WHERE id='$f_id'";
-	    $result = db_query( $query );
+			### create the almost unique string for each user then insert into the table
+			$t_password2 = crypt( $t_password );
+		    $query = "UPDATE $g_mantis_user_table
+		    		SET password='$t_password2'
+		    		WHERE id='$f_id'";
+		    $result = db_query( $query );
 
-		### Send notification email
-		email_reset( $f_id, $t_password );
-	} else {  ### use blank password, no emailing
-	    if ( $f_protected!="on" ) {
+			### Send notification email
+			email_reset( $f_id, $t_password );
+		} else {  ### use blank password, no emailing
 			### password is blank password
 		    $query = "UPDATE $g_mantis_user_table
 		    		SET password='4nPtPLdAFdoxA'

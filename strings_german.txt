@@ -1,10 +1,10 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# Hermann-Josef Beckers
+	# Hermann-Josef Beckers, Heiko Gierer
 ?>
 <?
 	# This file is to aid in localization
@@ -247,6 +247,7 @@
 	$s_create_new_account_link = "Neues Konto erstellen";
 	$s_manage_categories_link = "Kategorien";
 	$s_manage_product_versions_link = "Produkt-Versionen";
+	$s_projects_link = "Projekte";
 	$s_documentation_link = "Dokumentation";
 	$s_manage_accounts_title = "Konten verwalten";
 	### $s_username # defined above
@@ -504,4 +505,98 @@
 	### $s_status # defined above
 	### $s_updated # defined above
 	### $s_summary # defined above
+
+### german additions for mantis 0.14.1                hjb-2001-02-15
+	$s_switch = "Wechsel";
+	$s_logged_in_as = "angemeldet als";
+
+	### Email Strings
+	$s_new_account_subject = "Ihr neues Benutzerkonto";
+	$s_new_account_greeting = "Willkommen zum Bugtracker.  Hier sind die zur Anmeldung erforderlichen Informationen.\n\n";
+	$s_new_account_url = "Sie können sich hier anmelden: ";
+	$s_new_account_username = "Benutzername: ";
+	$s_new_account_password = "Passwort: ";
+	$s_new_account_message = "Ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. tion. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.\n\n";
+	$s_new_account_do_not_reply = "Bitte beantworten Sie diese Nachricht nicht.\n";
+
+	$s_default_project = "Standard-Projekt";
+
+    $s_bug_assign_msg       = "Fehler wurde zugeordnet...";
+
+	### choose_project_page.php3
+	$s_choose_project_title = "Projekt wählen";
+	$s_projects = "Projekte";
+	$s_select_project_button = "Projekt wählen";
+
+
+	### login_page.php3
+	$s_login_page_info = "Willkommen zum Bugtracker.";
+	$s_choose_project = "Projekt wählen";
+	$s_signup_link = "Neues Konto anmelden";
+
+	### manage_project_category_delete_page.php3
+	$s_delete_category_button = "Kategorie löschen";
+
+	### manage_project_category_edit_page.php3
+	$s_edit_project_category_title = "Projekt-Kategorie editieren";
+	$s_update_category_button = "Kategorie aktualisieren";
+	### $s_delete_category_button # defined above
+
+	### manage_page.php3
+	$s_new_accounts_title = "Neue Konten";
+	$s_1_week_title = "1 Woche";
+	$s_never_logged_in_title = "Noch nie angemeldet";
+
+	### manage_project_edit_page.php3
+	$s_edit_project_title = "Projekt editieren";
+	### $s_enbaled # defined above
+	$s_view_status = "Status-Anzeige";
+	$s_update_project_button = "Projekt aktualisieren";
+	$s_delete_project_button = "Projekt löschen";
+	$s_categories_and_version_title = "Kategorien und Versionen";
+	$s_categories = "Kategorien";
+	$s_add_category_button = "Kategorie hinzufügen";
+	$s_add_version_button = "Version hinzufügen";
+	$s_edit_link = "editieren";
+
+	### manage_project_menu_page.php3
+	$s_add_project_title = "Projekt hinzufügen";
+	### $s_view_status # defined above;
+	$s_add_project_button = "Projekt hinzufügen";
+	$s_projects_title = "Projekte";
+	$s_name = "Name";
+	### $s_enabed # defined above;
+	### $s_view_status # defined above;
+	### $s_edit_link # defined above;
+
+	### manage_project_version_delete_page.php3
+	$s_delete_version_button = "Version löschen";
+
+	### manage_project_version_edit_page.php3
+	$s_edit_project_version_title = "Projekt-Version editieren";
+	$s_update_version_button = "Version aktualisieren";
+	### $s_delete_version_button # defined above;
+
+
+	### report_bug_advanced_page.php3
+	$s_select_category = "Kategorie wählen";
+	$s_select_reproducibility = "Reproduzierbarkeit wählen";
+	$s_select_severity = "Schwere wählen";
+	$s_assign_to = "Zuordnung an ";
+
+	### signup.php3
+	$s_invalid_email = "IST EINE UNGÜLTIGE EMAIL-ADRESSE";
+	$s_duplicate_username = "IST EIN DOPPELTER BENUTZERNAME. BITTE ANDEREN WÄHLEN";
+	$s_account_create_fail = "KONNTE KONTO NICHT ANLEGEN";
+
+	### signup_page.php3
+	$s_signup_info = "Wählen Sie einen Anmeldenamen und eine gültige E-Mail-Adresse. Ein zufallserzeugtes Passwort wird an diese Adresse gesendet.";
+	$s_signup_title = "Anmeldung";
+	$s_signup_button = "Anmeldung";
+
+	### summary_page.php3
+	$s_developer_stats = "Entwicklerstatistik (offen/gelöst/total)";
+
+	### view_bug_advanced_page.php3
+    $s_bug_assign_button    = "mir zuordnen";
 ?>
