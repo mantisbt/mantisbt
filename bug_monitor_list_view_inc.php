@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.11 2004-06-29 08:38:43 int2str Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.12 2004-10-04 15:12:11 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 	$t_user_table = config_get( 'mantis_user_table' );
 
 	# get the bugnote data
-	$query = "SELECT user_id
+	$query = "SELECT user_id, enabled
 			FROM $t_bug_monitor_table m, $t_user_table u
 			WHERE m.bug_id=$c_bug_id AND m.user_id = u.id
 			ORDER BY u.realname, u.username";
@@ -71,7 +71,13 @@
  		for ( $i = 0; $i < $num_users; $i++ ) {
  			$row = db_fetch_array( $result );
 			echo ($i > 0) ? ', ' : '';
+			if ( FALSE == $row['enabled'] ) {
+				echo '<font STYLE="text-decoration: line-through">';
+			} else {
+				echo '<font STYLE="text-decoration: none">';
+			}
 			echo print_user( $row['user_id'] );
+			echo '</font>';
  		}
 ?>
 	</td>
