@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.55 2004-08-31 13:11:51 thraxisp Exp $
+	# $Id: file_api.php,v 1.56 2004-09-21 18:02:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -23,15 +23,25 @@
 	function file_get_display_name( $p_filename ) {
 		$t_array = explode( '-', $p_filename, 2 );
 
-		# Check if it's a project document filename (doc-000-filename)
-		# or a bug attachment filename (000-filename)
+		# Check if it's a project document filename (doc-0000000-filename)
+		# or a bug attachment filename (0000000-filename)
+		# for newer filenames, the filename in schema is correct.
 		# This is important to handle filenames with '-'s properly
-		if ( $t_array[0] == config_get( 'document_files_prefix' ) ) {
-			$t_array = explode( '-', $p_filename, 3 );
+		$t_doc_match = '/^' . config_get( 'document_files_prefix' ) . '-\d{7}-/';
+		$t_name = preg_split($t_doc_match, $p_filename);
+		if ( isset( $t_name[1] ) ) {
+			return $t_name[1];
+		}else{
+			$t_bug_match = '/^\d{7}-/';
+			$t_name = preg_split($t_bug_match, $p_filename);
+			if ( isset( $t_name[1] ) ) {
+				return $t_name[1];
+			}else{
+				return $p_filename;
+			}
 		}
-		$count = count( $t_array );
-		return $t_array[$count-1];
 	}
+	
 	# --------------------
 	# Check the number of attachments a bug has (if any)
 	function file_bug_attachment_count( $p_bug_id ) {
@@ -149,7 +159,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$t_file_display_name = $v_filename;
+			$t_file_display_name = file_get_display_name( $v_filename );
 			$t_filesize		= number_format( $v_filesize );
 			$t_date_added	= date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
 

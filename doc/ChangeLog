@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.10.xx  -  0.19.1
 
+- 0004437: [bugtracker] Filenames of uploaded attached files are damaged (thraxisp)
 - 0004576: [administration] Simplify display options for error handler (thraxisp)
 - 0004394: [feature] Add link to remove all users from project (bpfennig)
 - 0002091: [bugtracker] Bugnotes containing urls with the '@' sign in them get mangled (bpfennig)
