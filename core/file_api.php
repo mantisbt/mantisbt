@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.35 2003-03-31 23:17:08 int2str Exp $
+	# $Id: file_api.php,v 1.36 2003-04-18 04:02:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -108,15 +108,18 @@
 
 		$t_method = config_get( 'file_upload_method' );
 
+		# Delete files from disk
+		$query = "SELECT diskfile, filename
+			FROM $t_bug_file_table
+			WHERE bug_id='$c_bug_id'";
+		$result = db_query( $query );
+
+		$file_count = db_num_rows( $result );
+		if ( 0 == $file_count ) {
+			return true;
+		}
+
 		if ( ( DISK == $t_method ) || ( FTP == $t_method ) ) {
-			# Delete files from disk
-			$query = "SELECT diskfile, filename
-				FROM $t_bug_file_table
-				WHERE bug_id='$c_bug_id'";
-			$result = db_query( $query );
-
-			$file_count = db_num_rows( $result );
-
 			# there may be more than one file
 			$ftp = 0;
 			if ( FTP == $t_method ) {
