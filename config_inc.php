@@ -64,14 +64,14 @@
 	$g_webmaster_email      = "webmaster@nowhere";
 
 	# the "From: " field in emails
-	$g_from_email           = "nobody@nowhere";
+	$g_from_email           = "noreply@300baud.org";
 
 	# the "To: " address all emails are sent.  This can be a mailing list or archive address.
 	# Actual users are emailed via the bcc: fields
-	$g_to_email             = "nobody@nowhere";
+	$g_to_email             = "nobody@300baud.org";
 
 	# the return address for bounced mail
-	$g_return_path_email    = "admin@nowhere";
+	$g_return_path_email    = "admin@300baud.org";
 
 	# allow users to signup for their own accounts
 	$g_allow_signup              = 1;
@@ -79,18 +79,9 @@
 	# allow email notification
 	$g_enable_email_notification = 1;
 
-	# notify developers and higher when a new bug comes in (they need to turn on their preferences as well)
+	# notify developers and higher when a new bug comes in
+	# only if their preference is also set
 	$g_notify_developers_on_new  = 1;
-
-	# @@@ BROKEN
-	# Send an email to the following address when a new bug is added
-	# Useful for sending to a mailing list
-	$g_email_new_address         = "";
-
-	# @@@ BROKEN
-	# Send an email to the following address when a bug/bugnote is updated
-	# Useful for sending to a mailing list
-	$g_email_update_address      = "";
 
 	# set to 0 to disable email check
 	$g_validate_email            = 1;
@@ -347,6 +338,15 @@
 	# access level needed to re-open bugs
 	# Look in the constant_inc.php file if you want to set a different value
 	$g_reopen_bug_threshold = DEVELOPER;
+
+	# --- threshold -------------------
+	# see fewer confirmation screens between actions
+	$g_quick_proceed = 1;
+
+	# --- threshold -------------------
+	# see fewer confirmation screens between actions
+	# PLAIN_TEXT or CRYPT
+	$g_login_method = CRYPT;
 
 	##############################
 	### Mantis Color Variables ###
