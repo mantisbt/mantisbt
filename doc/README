@@ -25,7 +25,7 @@ Important Files:
 doc/INSTALL             - Installation instructions
 doc/UPGRADING           - Upgrade instructions
 doc/TROUBLESHOOTING     - How to get help
-doc/CONFIGURATION       - Help on custom configuration
+doc/CUSTOMIZATION       - Help on custom configuration
 doc/LICENSE             - GNU General Public License
 doc/CREDITS             - List of contributors
 doc/Changelog           - List of fixes, additions, and todo items
