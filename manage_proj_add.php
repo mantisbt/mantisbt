@@ -14,7 +14,7 @@
 	$f_description 	= gpc_get_string( 'f_description' );
 	$f_view_state	= gpc_get_int( 'f_view_state' );
 	$f_status		= gpc_get_int( 'f_status' );
-	$f_file_path	= gpc_get_string( 'f_file_path' );
+	$f_file_path	= gpc_get_string( 'f_file_path', '' );
 
 	project_create( $f_name, $f_description, $f_status, $f_view_state, $f_file_path );
 

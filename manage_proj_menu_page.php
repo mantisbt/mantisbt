@@ -65,14 +65,20 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
-	<td class="category">
-		<?php echo $s_upload_file_path ?>
-	</td>
-	<td>
-		<input type="text" name="f_file_path" size="70" maxlength="250">
-	</td>
-</tr>
+<?php
+	if ( config_get( 'allow_file_upload' ) ) {
+	?>
+		<tr class="row-2">
+			<td class="category">
+				<?php echo $s_upload_file_path ?>
+			</td>
+			<td>
+				<input type="text" name="f_file_path" size="70" maxlength="250">
+			</td>
+		</tr>
+		<?php
+	}
+?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo $s_description ?>
