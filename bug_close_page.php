@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close_page.php,v 1.18 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: bug_close_page.php,v 1.19 2002-12-30 09:39:45 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -48,6 +48,7 @@
 </div>
 <?php # Close Form END ?>
 
+<br />
 <?php include( config_get( 'bug_view_inc' ) ) ?>
 
 <?php print_page_bot1( __FILE__ ) ?>
