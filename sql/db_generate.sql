@@ -1,11 +1,11 @@
 #
 # Table structure for table `mantis_bug_file_table`
 # --------------------------------------------------------
-# $Revision: 1.9 $
+# $Revision: 1.10 $
 # $Author: jfitzell $
-# $Date: 2002-09-05 22:16:09 $
+# $Date: 2002-12-29 09:26:46 $
 #
-# $Id: db_generate.sql,v 1.9 2002-09-05 22:16:09 jfitzell Exp $
+# $Id: db_generate.sql,v 1.10 2002-12-29 09:26:46 jfitzell Exp $
 # --------------------------------------------------------
 #
 
@@ -181,24 +181,6 @@ CREATE TABLE mantis_project_category_table (
 INSERT INTO mantis_project_category_table (project_id, category) VALUES ( '0000001', 'bugtracker');
 INSERT INTO mantis_project_category_table (project_id, category) VALUES ( '0000001', 'other');
 INSERT INTO mantis_project_category_table (project_id, category) VALUES ( '0000001', 'security');
-
-#
-# Table structure for table `mantis_project_customization_table`
-#
-
-CREATE TABLE mantis_project_customization_table (
-  project_id int(7) unsigned zerofill NOT NULL default '0000000',
-  priorities varchar(200) NOT NULL default '',
-  severities varchar(200) NOT NULL default '',
-  reproducibilities varchar(200) NOT NULL default '',
-  states varchar(200) NOT NULL default '',
-  resolutions varchar(200) NOT NULL default '',
-  projections varchar(200) NOT NULL default '',
-  etas varchar(200) NOT NULL default '',
-  colors varchar(160) NOT NULL default '',
-  KEY project_id (project_id)
-) TYPE=MyISAM;
-# --------------------------------------------------------
 
 #
 # Table structure for table `mantis_project_file_table`

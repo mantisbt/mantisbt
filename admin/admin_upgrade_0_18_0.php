@@ -9,20 +9,6 @@
 	# START OF UPGRADE SQL STATEMENTS
 	# --- LATEST CHANGES SHOULD GO AT THE BOTTOM ---
 
-	$upgrade_obj->AddItem( "# Mantis Project Customization" );
-	$upgrade_obj->AddItem( "CREATE TABLE mantis_project_customization_table ".
-	                       "(project_id int(7) unsigned zerofill NOT NULL default '0000000', ".
-						   "priorities varchar(200) NOT NULL default '', ".
-						   "severities varchar(200) NOT NULL default '', ".
-						   "reproducibilities varchar(200) NOT NULL default '', ".
-						   "states varchar(200) NOT NULL default '', ".
-						   "resolutions varchar(200) NOT NULL default '', ".
-						   "projections varchar(200) NOT NULL default '', ".
-						   "etas varchar(200) NOT NULL default '', ".
-						   "colors varchar(160) NOT NULL default '', ".
-						   "KEY project_id (project_id))" );
-	$upgrade_obj->AddItem();
-
 	$upgrade_obj->AddItem( "# Printing Preference Table" );
 	$upgrade_obj->AddItem( "CREATE TABLE mantis_user_print_pref_table (user_id int(7) unsigned zerofill NOT ".
 	                       "NULL default '0000000', print_pref varchar(27) NOT NULL default '', PRIMARY KEY ".

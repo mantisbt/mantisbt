@@ -10,15 +10,6 @@
 
 	$height = 100;
 
-	if ( ON == config_get( 'customize_attributes' ) ) {
-		# to be deleted when moving to manage_project_page.php	
-		$t_project_id = '0000000';
-
-		# custom attributes insertion
-		attribute_insert( 'severity', $t_project_id, 'global' );
-		attribute_insert( 'severity', $t_project_id, 'str' ) ;
-	}
-
 	enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );
 	graph_group( lang_get( 'by_severity_mix' ) );
 ?>

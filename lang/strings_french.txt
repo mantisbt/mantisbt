@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.40 $
+	# $Revision: 1.41 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-21 22:46:29 $
+	# $Date: 2002-12-29 09:26:46 $
 	#
-	# $Id: strings_french.txt,v 1.40 2002-08-21 22:46:29 jfitzell Exp $
+	# $Id: strings_french.txt,v 1.41 2002-12-29 09:26:46 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -115,21 +115,6 @@
 	$s_severity_link = 'Par sévérité';
 	$s_category_link = 'Par catégorie';
 	$s_resolution_link = 'Par résolution';
-
-	# manage_proj_edit_page.php - attribute customization
-	$s_attribute_customization_title = 'Attributs personnalisés';
-	$s_severities = 'sévérités';
-	$s_states = 'états';
-	$s_add_button = 'Ajouter';
-	$s_del_button = 'Supprimer';
-	$s_copy_from = 'Copier de';
-	$s_copy_to = 'Copier vers';
-	$s_asso_color = 'Couleur associée : ';
-
-	# manage_proj_attribute_edit_page.php
-	$s_edit_project_title = 'Editer projet';
-	$s_update_button = 'Mettre à jour';
-	$s_delete_button = 'Supprimer';
 
 	#print_all_bug_page.php : display selected bugs
 	$s_hide_button = 'Afficher bugs sélectionnés';

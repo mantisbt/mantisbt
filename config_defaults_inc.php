@@ -617,10 +617,6 @@
 	# the defect is in progress, rather than just put in a person's queue.
 	$g_auto_set_status_to_assigned	= ON;
 
-	# --- Custom attributes --------
-	# Enables custom attributes
-	$g_customize_attributes	= OFF;
-
 	################################
 	# Mantis Look and Feel Variables
 	################################
@@ -634,33 +630,6 @@
 									'assigned'		=> '#c8c8ff', # blue
 									'resolved'		=> '#cceedd', # buish-green
 									'closed'		=> '#e8e8e8'); # light gray
-	# --- custom status color codes ----------
-	# array for colors assoociated with custom attributes
-	# @@@@ Consider changing the values in this array to point to $s_color_<xxxx>.  For example,
-	#	  lang_get('color_antique_white') should return 'Antique White' for English language.
-	$g_custom_colors		= array('#FAEBD7' => 'ANTIQUEWHITE',
-									'#F5DEB3' => 'WHEAT',
-									'#FFD700' => 'GOLD',
-									'#FFFFF0' => 'IVORY',
-									'#F0E68C' => 'KHAKI',
-									'#E6E6FA' => 'LAVENDER',
-									'#FFF0F5' => 'LAVENDERBLUSH',
-									'#FFFACD' => 'LEMONCHIFFON',
-									'#ADD8E6' => 'LIGHTBLUE',
-									'#90EE90' => 'LIGHTGREEN',
-									'#D3D3D3' => 'LIGHTGREY',
-									'#FFB6C1' => 'LIGHTPINK',
-									'#FFA07A' => 'LIGHTSALMON',
-									'#20B2AA' => 'LIGHTSEAGREEN',
-									'#87CEFA' => 'LIGHTSKYBLUE',
-									'#778899' => 'LIGHTSLATEGRAY',
-									'#B0C4DE' => 'LIGHTSTEELBLUE',
-									'#BA55D3' => 'MEDIUMORCHID',
-									'#D8BFD8' => 'THISTLE',
-									'#48D1CC' => 'MEDIUMTURQUOISE',
-									'#C71585' => 'MEDIUMVIOLETRED');
-	# the 'slots', umber between whic you can insert status. Between 51 and 79 (included)
-	$g_custom_status_slot	= array('59','79');
 
 	###############################
 	# Mantis Cookie Variables
@@ -735,7 +704,6 @@
 	$g_mantis_user_profile_table			= $g_db_table_prefix.'_user_profile_table';
 	$g_mantis_user_pref_table				= $g_db_table_prefix.'_user_pref_table';
 	$g_mantis_user_print_pref_table			= $g_db_table_prefix.'_user_print_pref_table';
-	$g_mantis_project_customization_table	= $g_db_table_prefix.'_project_customization_table';
 	$g_mantis_custom_field_project_table	= $g_db_table_prefix.'_custom_field_project_table';
 	$g_mantis_custom_field_table      	    = $g_db_table_prefix.'_custom_field_table';
 	$g_mantis_custom_field_string_table     = $g_db_table_prefix.'_custom_field_string_table';

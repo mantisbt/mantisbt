@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.29 2002-12-17 22:30:42 jfitzell Exp $
+	# $Id: helper_api.php,v 1.30 2002-12-29 09:26:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -52,23 +52,11 @@
 	function get_status_color( $p_status ) {
 		$t_status_enum_string = config_get( 'status_enum_string' );
 		$t_status_colors = config_get( 'status_colors' );
-		$t_custom_status_slot = config_get( 'custom_status_slot' );
-		$t_customize_attributes = config_get( 'customize_attributes' );
-		
 
 		# This code creates the appropriate variable name
 		# then references that color variable
 		# You could replace this with a bunch of if... then... else
 		# statements
-
-		if ($t_customize_attributes) {
-			# custom colors : to be deleted when moving to manage_project_page.php
-			$t_project_id = '0000000';
-
-			# insert attriutes for color displaying in viex_bug_page.php
-			attribute_insert( 'status', $t_project_id, 'global' );
-			attribute_insert( 'status', $t_project_id, 'str' ) ;
-		}
 
 		$t_color_str = 'closed';
 		$t_arr = explode_enum_string( $t_status_enum_string );
@@ -87,14 +75,8 @@
 			return config_get( $t_color_variable_name );
 		} elseif ( isset ( $t_status_colors[$t_color_str] ) ) {
 			return $t_status_colors[$t_color_str];
-		} elseif ($t_customize_attributes) {   // custom attributes
-				# if not found before, look into custom status colors
-				$t_colors_arr = attribute_get_all('colors', $t_project_id);
-				$t_offset = ( $p_status-( $t_custom_status_slot[0]+1 ) );
-				if ( isset( $t_colors_arr[$t_offset ]) ) {
-					return $t_colors_arr[$t_offset];
-				}
 		}
+
 		return '#ffffff';
 	}
 	# --------------------
@@ -102,17 +84,7 @@
 	function get_enum_element( $p_enum_name, $p_val ) {
 		$config_var = config_get( $p_enum_name.'_enum_string' );
 		$string_var = lang_get(  $p_enum_name.'_enum_string' );
-		$t_customize_attributes = config_get( 'customize_attributes' );
 
-		# custom attributes
-		if ($t_customize_attributes) {
-			# to be deleted when moving to manage_project_page.php
-			$t_project_id = '0000000';
-
-			# custom attributes insertion
-			attribute_insert( $p_enum_name, $t_project_id, 'global' );
-			attribute_insert( $p_enum_name, $t_project_id, 'str' ) ;
-		}
 		# use the global enum string to search
 		$t_arr = explode_enum_string( $config_var );
 		$t_arr_count = count( $t_arr );

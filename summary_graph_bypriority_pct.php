@@ -15,15 +15,6 @@
 	$poshorizontal = 0.03;
 	$posvertical = 0.09;
 
-	if ( ON == config_get( 'customize_attributes' ) ) {
-		# to be deleted when moving to manage_project_page.php	
-		$t_project_id = '0000000';
-
-		# custom attributes insertion
-		attribute_insert( 'priority', $t_project_id, 'global' );
-		attribute_insert( 'priority', $t_project_id, 'str' ) ;
-	}
-
 	create_bug_enum_summary_pct( lang_get( 'priority_enum_string' ), 'priority' );
 	graph_bug_enum_summary_pct( lang_get( 'by_priority_pct' ) );
 ?>

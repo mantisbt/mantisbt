@@ -61,7 +61,6 @@
 	require_once( $t_core_dir.'compress_api.php' );
 	require_once( $t_core_dir.'relationship_api.php' );
 	require_once( $t_core_dir.'file_api.php' );
-	require_once( $t_core_dir.'custom_attribute_api.php' );
 	require_once( $t_core_dir.'bugnote_api.php' );
 	require_once( $t_core_dir.'bug_api.php' );
 	require_once( $t_core_dir.'project_api.php' );

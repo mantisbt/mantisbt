@@ -2,9 +2,6 @@ Mantis ChangeLog
 
 2002.12.??  -  0.18.0
 
-These two will probably be removed before release:
- * Added custom attributes for the 7 ones in config_inc.php : priority, severity, status (with colors), etc... Define it in manage_proj_menu_page.php ; implementation has been thought in a 'per project Settings' conception, but only available for all projects right now.
-
  * Behaviour change: made 'normal' the default priority for new bugs
  * Behaviour change: Merged default/config_inc1.php and default/config_inc2.php in config_defaults_inc.php
  * Changed config options (default_advanced_report, default_advanced_view, default_advanced_update): now ON/OFF instead of BOTH/SIMPLE/ADVANCED (they never worked the other way anyway)

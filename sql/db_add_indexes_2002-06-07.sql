@@ -9,11 +9,11 @@
 # incorporate these changes in the next published release if
 # they are deemed appropriate by the other developers.
 # -----------------------------------------------------------
-# $Revision: 1.4 $
+# $Revision: 1.5 $
 # $Author: jfitzell $
-# $Date: 2002-10-20 23:59:49 $
+# $Date: 2002-12-29 09:26:46 $
 #
-# $Id: db_add_indexes_2002-06-07.sql,v 1.4 2002-10-20 23:59:49 jfitzell Exp $
+# $Id: db_add_indexes_2002-06-07.sql,v 1.5 2002-12-29 09:26:46 jfitzell Exp $
 
 # mantis_bug_history_table.date_modified
 ALTER TABLE `mantis_bug_history_table` ADD INDEX(`date_modified`);
@@ -57,20 +57,5 @@ CREATE TABLE mantis_user_print_pref_table (
 user_id int(7) unsigned zerofill NOT NULL default '0000000',
 print_pref varchar(27) NOT NULL default '',
 PRIMARY KEY  (user_id)
-);
-
-# mantis_projet_customization_table (for custom status, severities...)
-#DROP TABLE IF EXISTS mantis_project_customization_table ;
-CREATE TABLE mantis_project_customization_table (
-project_id int(7) unsigned zerofill NOT NULL default '0000000',
-priorities varchar(200) NOT NULL default '',
-severities varchar(200) NOT NULL default '',
-reproducibilities varchar(200) NOT NULL default '',
-states varchar(200) NOT NULL default '',
-resolutions varchar(200) NOT NULL default '',
-projections varchar(200) NOT NULL default '',
-etas varchar(200) NOT NULL default '',
-colors varchar(160) NOT NULL default '',
-KEY project_id (project_id)
 );
 

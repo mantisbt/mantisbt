@@ -10,15 +10,6 @@
 
 	$height = 150;
 
-	if ( ON == config_get( 'customize_attributes' ) ) {
-		# to be deleted when moving to manage_project_page.php	
-		$t_project_id = '0000000';
-
-		# custom attributes insertion
-		attribute_insert( 'resolution', $t_project_id, 'global' );
-		attribute_insert( 'resolution', $t_project_id, 'str' ) ;
-	}
-
 	enum_bug_group( lang_get( 'resolution_enum_string' ), 'resolution');
 	graph_group( lang_get( 'by_resolution_mix' ) );
 ?>

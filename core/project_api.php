@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.21 2002-12-21 10:07:18 jfitzell Exp $
+	# $Id: project_api.php,v 1.22 2002-12-29 09:26:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -205,9 +205,6 @@
 
 		# Delete the project versions
 		version_delete_all( $p_project_id );
-
-		# Delete the project custom attributes
-		attribute_delete_all( $p_project_id );
 
 		# Delete the project files
 		project_delete_all_files( $p_project_id );
