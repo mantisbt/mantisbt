@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.13 2002-10-23 01:17:04 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.14 2002-12-28 20:30:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -34,7 +34,7 @@
 		} else if ( func_num_args() > 1 ) { #check for a default passed in (allowing null)
 			$t_result = $p_default;
 		} else {
-			trigger_error(ERROR_GPC_VAR_NOT_FOUND, ERROR);
+			trigger_error( ERROR_GPC_VAR_NOT_FOUND, ERROR );
 			$t_result = null;
 		}
 		
