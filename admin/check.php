@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.21 2005-02-26 15:16:45 thraxisp Exp $
+	# $Id: check.php,v 1.22 2005-02-28 14:42:52 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core/email_api.php' );
 
-	$t_core_path = config_get( 'core_path' );
+	$t_core_path = config_get_global( 'core_path' );
 
 	$f_mail_test	= gpc_get_bool( 'mail_test' );
 	$f_password		= gpc_get_string( 'password', null );
@@ -64,9 +64,9 @@
 	{
 		$t_pass = true;
 
-		$t_view_threshold = config_get( 'view_attachments_threshold' );
-		$t_download_threshold = config_get( 'download_attachments_threshold' );
-		$t_delete_threshold = config_get( 'delete_attachments_threshold' );
+		$t_view_threshold = config_get_global( 'view_attachments_threshold' );
+		$t_download_threshold = config_get_global( 'download_attachments_threshold' );
+		$t_delete_threshold = config_get_global( 'delete_attachments_threshold' );
 
 		if ( $t_view_threshold > $t_download_threshold ) {
 			$t_pass = false;
@@ -86,9 +86,9 @@
 	{
 		$t_pass = true;
 
-		$t_own_view = config_get( 'allow_view_own_attachments' );
-		$t_own_download = config_get( 'allow_download_own_attachments' );
-		$t_own_delete = config_get( 'allow_delete_own_attachments' );
+		$t_own_view = config_get_global( 'allow_view_own_attachments' );
+		$t_own_download = config_get_global( 'allow_download_own_attachments' );
+		$t_own_delete = config_get_global( 'allow_delete_own_attachments' );
 
 		if ( ( $t_own_delete == ON ) && ( $t_own_download == FALSE ) ) {
 			$t_pass = false;
@@ -151,10 +151,10 @@
 <!-- Test DATABASE part 1 -->
 <tr>
 	<td bgcolor="#ffffff">
-		Opening connection to database [<?php echo config_get( 'database_name' ) ?>] on host [<?php echo config_get( 'hostname' ) ?>] with username [<?php echo config_get( 'db_username' ) ?>]
+		Opening connection to database [<?php echo config_get_global( 'database_name' ) ?>] on host [<?php echo config_get_global( 'hostname' ) ?>] with username [<?php echo config_get_global( 'db_username' ) ?>]
 	</td>
 	<?php
-		$result = @db_connect( config_get( 'hostname' ), config_get( 'db_username' ), config_get( 'db_password' ), config_get( 'database_name' ) );
+		$result = @db_connect( config_get_global( 'hostname' ), config_get_global( 'db_username' ), config_get_global( 'db_password' ), config_get_global( 'database_name' ) );
 		if ( false == $result ) {
 			print_test_result( BAD );
 		} else {
@@ -166,10 +166,10 @@
 <!-- Absolute path check -->
 <tr>
 	<td bgcolor="#ffffff">
-		Checking to see if your absolute_path config option has a trailing slash: "<?php echo config_get( 'absolute_path' ) ?>"
+		Checking to see if your absolute_path config option has a trailing slash: "<?php echo config_get_global( 'absolute_path' ) ?>"
 	</td>
 	<?php
-		$t_absolute_path = config_get( 'absolute_path' );
+		$t_absolute_path = config_get_global( 'absolute_path' );
 
 		if ( ( "\\" == substr( $t_absolute_path, -1, 1 ) ) ||
 			 ( "/"  == substr( $t_absolute_path, -1, 1 ) ) ) {
@@ -191,7 +191,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 		validate_email = OFF?
 	</td>
 	<?php
-		if ( ON != config_get( 'validate_email' ) ) {
+		if ( ON != config_get_global( 'validate_email' ) ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD );
@@ -205,7 +205,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 		check_mx_record = OFF?
 	</td>
 	<?php
-		if ( ON != config_get( 'check_mx_record' ) ) {
+		if ( ON != config_get_global( 'check_mx_record' ) ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD );
@@ -241,23 +241,23 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	test_bug_attachments_allow_flags();
 
 		print_test_row( 'check mail configuration: send_reset_password = ON requires allow_blank_email = OFF',
-				( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'allow_blank_email' ) ) ) );
+				( ( OFF == config_get_global( 'send_reset_password' ) ) || ( OFF == config_get_global( 'allow_blank_email' ) ) ) );
 		print_test_row( 'check mail configuration: send_reset_password = ON requires enable_email_notification = ON',
-				( OFF == config_get( 'send_reset_password' ) ) || ( ON == config_get( 'enable_email_notification' ) ) );
+				( OFF == config_get_global( 'send_reset_password' ) ) || ( ON == config_get_global( 'enable_email_notification' ) ) );
 		print_test_row( 'check mail configuration: allow_signup = ON requires enable_email_notification = ON',
-				( OFF == config_get( 'allow_signup' ) ) || ( ON == config_get( 'enable_email_notification' ) ) );
+				( OFF == config_get_global( 'allow_signup' ) ) || ( ON == config_get_global( 'enable_email_notification' ) ) );
 		print_test_row( 'check mail configuration: allow_signup = ON requires send_reset_password = ON',
-				( OFF == config_get( 'allow_signup' ) ) || ( ON == config_get( 'send_reset_password' ) ) );
+				( OFF == config_get_global( 'allow_signup' ) ) || ( ON == config_get_global( 'send_reset_password' ) ) );
 		print_test_row( 'check language configuration: fallback_language is not \'auto\'',
-				'auto' <> config_get( 'fallback_language' ) );
+				'auto' <> config_get_global( 'fallback_language' ) );
 
-		print_test_row( '$g_bug_link_tag is not empty ("' . config_get( 'bug_link_tag' ) . '")',
-				'' <> config_get( 'bug_link_tag' ) );
-		print_test_row( '$g_bugnote_link_tag is not empty ("' . config_get( 'bugnote_link_tag' ) . '")',
-				'' <> config_get( 'bugnote_link_tag' ) );
+		print_test_row( '$g_bug_link_tag is not empty ("' . config_get_global( 'bug_link_tag' ) . '")',
+				'' <> config_get_global( 'bug_link_tag' ) );
+		print_test_row( '$g_bugnote_link_tag is not empty ("' . config_get_global( 'bugnote_link_tag' ) . '")',
+				'' <> config_get_global( 'bugnote_link_tag' ) );
 
 		print_test_row( 'filters: dhtml_filters = ON requires use_javascript = ON',
-				( OFF == config_get( 'dhtml_filters' ) ) || ( ON == config_get( 'use_javascript' ) ) );
+				( OFF == config_get_global( 'dhtml_filters' ) ) || ( ON == config_get_global( 'use_javascript' ) ) );
 ?>
 </table>
 
@@ -284,7 +284,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 
 <!-- login_method check -->
 <?php
-	if ( CRYPT_FULL_SALT == config_get( 'login_method' ) ) { ?>
+	if ( CRYPT_FULL_SALT == config_get_global( 'login_method' ) ) { ?>
 		<br />
 
 		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
@@ -300,7 +300,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 		</table>
 
 		<br /><?php
-	} else if ( MD5 != config_get( 'login_method' ) ) { ?>
+	} else if ( MD5 != config_get_global( 'login_method' ) ) { ?>
 		<br />
 
 		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
@@ -328,11 +328,11 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	<td bgcolor="#f4f4f4">
 		<span class="title">File Uploads</span><br />
 		<?php
-			if ( ini_get_bool( 'file_uploads' ) && config_get( 'allow_file_upload' ) ) {
+			if ( ini_get_bool( 'file_uploads' ) && config_get_global( 'allow_file_upload' ) ) {
 		?>
 				<p>File uploads are ENABLED.</p>
 				<p>File uploads will be stored <?php
-								switch ( config_get( 'file_upload_method' ) ) {
+								switch ( config_get_global( 'file_upload_method' ) ) {
 									case DATABASE:
 										echo 'in the DATABASE.';
 										break;
@@ -340,7 +340,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 										echo 'on DISK in the directory specified by the project.';
 										break;
 									case FTP:
-										echo 'on an FTP server (' . config_get( 'file_upload_ftp_server' ) . '), and cached locally.';
+										echo 'on an FTP server (' . config_get_global( 'file_upload_ftp_server' ) . '), and cached locally.';
 										break;
 									default:
 										echo 'in an illegal place.';
@@ -349,12 +349,12 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 				<p>The following size settings are in effect.  Maximum upload size will be whichever of these is SMALLEST. </p>
 				<p>PHP variable 'upload_max_filesize': <?php echo ini_get_number( 'upload_max_filesize' ) ?> bytes<br />
 				PHP variable 'post_max_size': <?php echo ini_get_number( 'post_max_size' ) ?> bytes<br />
-				Mantis variable 'max_file_size': <?php echo config_get( 'max_file_size' ) ?> bytes</p>
+				Mantis variable 'max_file_size': <?php echo config_get_global( 'max_file_size' ) ?> bytes</p>
 
 		<?php
-				if ( DATABASE == config_get( 'file_upload_method' ) ) {
+				if ( DATABASE == config_get_global( 'file_upload_method' ) ) {
 					echo '<p>There may also be settings in your web server and database that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information. ';
-					if ( 500 < min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) ) ) {
+					if ( 500 < min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get_global( 'max_file_size' ) ) ) {
 						echo '<span class="error">Your current settings will most likely need adjustments to the PHP max_execution_time or memory_limit settings, the MySQL max_allowed_packet setting, or equivalent.</span>';
 					}
 				} else {
@@ -387,17 +387,17 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
  # @@@ thraxisp - workaround to ensure a language is set without authenticating
  #  will disappear when this is properly localized
 			lang_push( 'english' );
-			$result = email_send( config_get( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
+			$result = email_send( config_get_global( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
 
 			if ( !$result ) {
-				echo ' PROBLEMS SENDING MAIL TO: ' . config_get( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
+				echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
 			} else {
 				echo ' mail() send successful.<br />';
 			}
 		}
 		?>
 		<form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>#email">
-		Email Address: <?php echo config_get( 'administrator_email' ); ?><br />
+		Email Address: <?php echo config_get_global( 'administrator_email' ); ?><br />
 		<input type="submit" value="Send Mail" name="mail_test" />
 		</form>
 	</td>

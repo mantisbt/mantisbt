@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: workflow.php,v 1.3 2005-02-12 20:01:09 jlatour Exp $
+	# $Id: workflow.php,v 1.4 2005-02-28 14:42:53 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,9 +37,9 @@
 
 <?php
 	# count arcs in and out of each status
-	$t_enum_status = config_get( 'status_enum_string' );
-	$t_enum_workflow = config_get( 'status_enum_workflow' );
-	$t_reopen = config_get( 'bug_reopen_status' );
+	$t_enum_status = config_get_global( 'status_enum_string' );
+	$t_enum_workflow = config_get_global( 'status_enum_workflow' );
+	$t_reopen = config_get_global( 'bug_reopen_status' );
 
 	$t_status_arr  = explode_enum_string( $t_enum_status );
 	$t_entry = array();
@@ -49,7 +49,7 @@
 	echo '<tr><th>Validation</th><th>Status</th><th></th></tr>';
 
 	# prepopulate new bug state (bugs go from nothing to here)
-	$t_submit_status_array = config_get( 'bug_submit_status' );
+	$t_submit_status_array = config_get_global( 'bug_submit_status' );
 	if ( true == is_array( $t_submit_status_array ) ) {
 		foreach ($t_submit_status_array as $t_access => $t_status ) {
 			$t_entry[$t_status][0] = 'new';
@@ -62,8 +62,8 @@
 	}
 
   # add user defined arcs and implicit reopen arcs
-	$t_reopen = config_get( 'bug_reopen_status' );
-	$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
+	$t_reopen = config_get_global( 'bug_reopen_status' );
+	$t_resolved_status = config_get_global( 'bug_resolved_status_threshold' );
 	foreach ( $t_status_arr as $t_status ) {
 		list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
 		if ( isset( $t_enum_workflow[$t_status_id] ) ) {
@@ -153,11 +153,11 @@
 	foreach ( $t_status_arr as $t_status ) {
 		list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
 		if ( NEW_ == $t_status_id ) {
-			$t_access = config_get( 'report_bug_threshold' );
+			$t_access = config_get_global( 'report_bug_threshold' );
 		}else{
 			$t_access = access_get_status_threshold( $t_status_id );
 		}
-		echo '<td class="center">' . get_enum_to_string( config_get( 'access_levels_enum_string' ), $t_access ) . '</td>';
+		echo '<td class="center">' . get_enum_to_string( config_get_global( 'access_levels_enum_string' ), $t_access ) . '</td>';
 	}
 	echo '</tr>';
 

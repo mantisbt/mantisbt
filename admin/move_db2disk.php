@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: move_db2disk.php,v 1.5 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: move_db2disk.php,v 1.6 2005-02-28 14:42:53 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,11 +46,11 @@
 	function upgrade_move_att2disk($p_source) {
 		# $p_source is the string "attachment" or "project"
 		if ( $p_source == 'attachment' ) {
-				$t_file_table = config_get( 'mantis_bug_file_table' );
+				$t_file_table = config_get_global( 'mantis_bug_file_table' );
 				$t_bug_label = "Bug";
 		}
 		if ( $p_source == 'project' ) {
-				$t_file_table = config_get( 'mantis_project_file_table' );
+				$t_file_table = config_get_global( 'mantis_project_file_table' );
 				$t_bug_label = "Project";
 		}
 		# check that the source was valid
@@ -60,7 +60,7 @@
 		}
 
 		# check that the destination is set up properly
-		$t_upload_method = config_get( 'file_upload_method' );
+		$t_upload_method = config_get_global( 'file_upload_method' );
 		if ( $t_upload_method <> DISK ) {
 			echo 'Failure: Upload Method is not DISK';
 			return;

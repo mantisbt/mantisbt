@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.26 2005-02-12 20:01:09 jlatour Exp $
+	# $Id: 0_18_inc.php,v 1.27 2005-02-28 14:42:53 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -437,7 +437,7 @@
 		return true;
 	}
 
-		if ( config_get( 'differentiate_duplicates' ) ) {
+		if ( config_get_global( 'differentiate_duplicates' ) ) {
 			$upgrades[] = new SQLUpgrade(
 				'user-duplicate',
 				'Add realname duplicate field to user table',
@@ -612,7 +612,7 @@
 	$upgrades[] = new SQLUpgrade(
 			'0.18-bugnote-order',
 			'Add bugnote_order to user preference table',
-			"ALTER TABLE $t_user_pref_table ADD bugnote_order VARCHAR( 4 ) NOT NULL DEFAULT '" . config_get( 'default_bugnote_order' ) . "' AFTER redirect_delay" );
+			"ALTER TABLE $t_user_pref_table ADD bugnote_order VARCHAR( 4 ) NOT NULL DEFAULT '" . config_get_global( 'default_bugnote_order' ) . "' AFTER redirect_delay" );
 
 	$upgrades[] = new FunctionUpgrade(
 			'cb_ml_upgrade',

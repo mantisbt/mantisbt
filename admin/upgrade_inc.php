@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.13 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: upgrade_inc.php,v 1.14 2005-02-28 14:42:53 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -95,7 +95,7 @@
 		}
 
 		function is_applied() {
-			$t_upgrade_table = config_get( 'mantis_upgrade_table' );
+			$t_upgrade_table = config_get_global( 'mantis_upgrade_table' );
 
 			$query = "SELECT COUNT(*)
 					  FROM $t_upgrade_table
@@ -111,7 +111,7 @@
 		}
 
 		function set_applied() {
-			$t_upgrade_table = config_get( 'mantis_upgrade_table' );
+			$t_upgrade_table = config_get_global( 'mantis_upgrade_table' );
 
 			$query = "INSERT INTO $t_upgrade_table
 						(upgrade_id, description)
@@ -343,7 +343,7 @@
 			#header( 'Content-Transfer-Encoding: BASE64;' );
 			#header( "Content-Disposition: attachment; filename=$t_filename" );
 
-			$t_upgrade_table = config_get( 'mantis_upgrade_table' );
+			$t_upgrade_table = config_get_global( 'mantis_upgrade_table' );
 
 			foreach ( $this->item_array as $item ) {
 				if ( $item->is_applied()  #already applied or...

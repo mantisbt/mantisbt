@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.18 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: config_api.php,v 1.19 2005-02-28 14:42:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -150,50 +150,58 @@
 		if ( isset( $GLOBALS['g_' . $p_option] ) || isset( $g_cache_config[$p_option] ) ) {
 			return true;
 		} else {
-			$t_config_table = config_get_global( 'mantis_config_table' );
+			# bypass table lookup for certain options
+			$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
+			$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
+			
+			if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() )
+				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
 
-			# prepare the user's list
-			$t_users = array( ALL_USERS );
-			if ( ( null == $p_user ) && ( auth_is_user_authenticated() ) ) {
-				$t_users[] = auth_get_current_user_id();
-			} else if ( ! in_array( $p_user, $t_users ) ) {
-				$t_users[] = $p_user;
-			}
-			if ( 1 < count( $t_users ) ) {
-				$t_user_clause = "user_id in (". implode( ', ', $t_users ) .")";
-			} else {
-				$t_user_clause = "user_id=$t_users[0]";
-			}
+				$t_config_table = config_get_global( 'mantis_config_table' );
 
-			# prepare the projects list
-			$t_projects = array( ALL_PROJECTS );
-			if ( ( null == $p_project ) && ( auth_is_user_authenticated() ) ) {
-				$t_selected_project = helper_get_current_project( false );
-				if ( ALL_PROJECTS <> $t_selected_project ) {
-					$t_projects[] = $t_selected_project;
+				# prepare the user's list
+				$t_users = array( ALL_USERS );
+				if ( ( null == $p_user ) && ( auth_is_user_authenticated() ) ) {
+					$t_users[] = auth_get_current_user_id();
+				} else if ( ! in_array( $p_user, $t_users ) ) {
+					$t_users[] = $p_user;
 				}
-			} else if ( ! in_array( $p_project, $t_projects ) ) {
-				$t_projects[] = $p_project;
-			}
-			if ( 1 < count( $t_projects ) ) {
-				$t_project_clause = "project_id in (". implode( ', ', $t_projects ) .")";
-			} else {
-				$t_project_clause = "project_id=$t_projects[0]";
-			}
+				if ( 1 < count( $t_users ) ) {
+					$t_user_clause = "user_id in (". implode( ', ', $t_users ) .")";
+				} else {
+					$t_user_clause = "user_id=$t_users[0]";
+				}
 
-			$c_option = db_prepare_string( $p_option );
-			# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
-			#  once here. we need to reverse the sort, so that the last value overwrites the
-			#  config table
-			$query = "SELECT COUNT(*) FROM $t_config_table
-				WHERE config_id = '$p_option' AND
-					$t_project_clause AND
-					$t_user_clause";
+				# prepare the projects list
+				$t_projects = array( ALL_PROJECTS );
+				if ( ( null == $p_project ) && ( auth_is_user_authenticated() ) ) {
+					$t_selected_project = helper_get_current_project( false );
+					if ( ALL_PROJECTS <> $t_selected_project ) {
+						$t_projects[] = $t_selected_project;
+					}
+				} else if ( ! in_array( $p_project, $t_projects ) ) {
+					$t_projects[] = $p_project;
+				}
+				if ( 1 < count( $t_projects ) ) {
+					$t_project_clause = "project_id in (". implode( ', ', $t_projects ) .")";
+				} else {
+					$t_project_clause = "project_id=$t_projects[0]";
+				}
 
-			$result = db_query( $query );
+				$c_option = db_prepare_string( $p_option );
+				# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
+				#  once here. we need to reverse the sort, so that the last value overwrites the
+				#  config table
+				$query = "SELECT COUNT(*) FROM $t_config_table
+					WHERE config_id = '$p_option' AND
+						$t_project_clause AND
+						$t_user_clause";
 
-			if ( 0 < db_result( $result ) ) {
-				return true;
+				$result = db_query( $query );
+	
+				if ( 0 < db_result( $result ) ) {
+					return true;
+				}
 			}
 
 			return false;

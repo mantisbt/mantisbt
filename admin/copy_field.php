@@ -8,7 +8,7 @@
 	# This upgrade moves attachments from the database to the disk
 
 	# --------------------------------------------------------
-	# $Id: copy_field.php,v 1.3 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: copy_field.php,v 1.4 2005-02-28 14:42:52 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,8 +47,8 @@
 	}
 	#@@@ check that source and destination are compatible
 
-	$t_string_table = config_get( 'mantis_custom_field_string_table' );
-	$t_bug_table = config_get( 'mantis_bug_table' );
+	$t_string_table = config_get_global( 'mantis_custom_field_string_table' );
+	$t_bug_table = config_get_global( 'mantis_bug_table' );
 	$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . $f_source_field_id . ' and value <> \'\'';
 
 	$result = @db_query( $query );
