@@ -8,6 +8,14 @@
 	# INCLUDES
 	###########################################################################
 
+
+	foreach ( $HTTP_POST_VARS as $key => $value) {
+		$$key = $value;
+	}
+	foreach ( $HTTP_GET_VARS as $key => $value) {
+		$$key = $value;
+	}
+
 	include( "core_timer_API.php" );
 	$g_timer = new BC_Timer;
 	$g_timer->start_time();
@@ -23,6 +31,17 @@
 	}
 	# Load file globals # @@@ ugly hack for ugly problem.  Find better solution soon
 	require( "./default/config_inc2.php" );
+
+	# @@@ Experimental
+	# deal with register_globals being Off
+	if ( OFF = $g_register_globals ) {
+		foreach ( $HTTP_POST_VARS as $key => $value) {
+			$$key = $value;
+		}
+		foreach ( $HTTP_GET_VARS as $key => $value) {
+			$$key = $value;
+		}
+	}
 
 	require( "core_database_API.php" );
 
