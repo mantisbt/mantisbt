@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.95 2004-05-17 11:39:07 vboctor Exp $
+	# $Id: html_api.php,v 1.96 2004-05-18 04:29:21 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -265,7 +265,7 @@
 				}
 				print_project_option_list( helper_get_current_project() );
 				PRINT '</select>';
-				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" class="small" />';
+				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
 				PRINT '</form>';
 			PRINT '</td>';
 		PRINT '</tr>';
@@ -412,7 +412,7 @@
 			PRINT '<td class="right" style="white-space: nowrap;">';
 				PRINT '<form method="post" action="jump_to_bug.php">';
 				PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
-				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
+				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&nbsp;';
 				PRINT '</form>';
 			PRINT '</td>';
 			PRINT '</tr>';

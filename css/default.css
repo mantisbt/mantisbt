@@ -14,7 +14,7 @@ form				{ display: inline; }
 
 input				{}
 input.button			{}
-input.button-small		{}
+input.button-small		{ font-size: 8pt; }
 
 textarea			{}
 select				{}
