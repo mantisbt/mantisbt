@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.28 2003-02-09 00:51:00 jfitzell Exp $
+	# $Id: project_api.php,v 1.29 2003-02-09 10:30:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -345,11 +345,9 @@
 	}
 	# --------------------
 	# Return an array of info about users who have access to the the given project
-	# For each user we have 'id', 'name', and 'access_level' (overall access level)
+	# For each user we have 'id', 'username', and 'access_level' (overall access level)
 	function project_get_all_user_rows( $p_project_id ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
-		$c_higher_than	= db_prepare_int( $p_higher_than );
-		$c_lower_than	= db_prepare_int( $p_lower_than );
 
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
@@ -396,7 +394,7 @@
 			$t_users[$row['id']] = $row;
 		}
 
-		return array_values($t_users);
+		return multi_sort( array_values($t_users), 'username' );
 	}
 	#===================================
 	# Data Modification

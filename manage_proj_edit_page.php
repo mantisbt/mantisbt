@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.54 2003-02-09 00:50:59 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.55 2003-02-09 10:30:06 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,6 +17,7 @@
 	require_once( $t_core_path . 'category_api.php' );
 	require_once( $t_core_path . 'version_api.php' );
 	require_once( $t_core_path . 'custom_field_api.php' );
+	require_once( $t_core_path . 'icon_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php
@@ -356,5 +357,127 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 }
 ?>
 <?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
+
+
+<!-- PROJECT VIEW STATUS -->
+<br />
+<div align="center">
+	<table class="width75" cellspacing="1">
+		<tr>
+			<td class="center">
+			<?php
+				if ( PUBLIC == project_get_field( $f_project_id, 'view_state' ) ) {
+					echo lang_get( 'public_project_msg' );
+				} else {
+					echo lang_get( 'private_project_msg' );
+				}
+			?>
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+<!-- USER MANAGEMENT (ADD) -->
+<?php
+if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' ) ) ) {
+?>
+<br />
+<div align="center">
+	<form method="post" action="manage_proj_user_add.php">
+		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+		<table class="width75" cellspacing="1">
+			<tr>
+				<td class="form-title" colspan="5">
+					<?php echo lang_get( 'add_user_title' ) ?>
+				</td>
+			</tr>
+			<tr class="row-1" valign="top">
+				<td class="category">
+					<?php echo lang_get( 'username' ) ?>
+				</td>
+				<td>
+					<select name="user_id[]" multiple size="10">
+						<?php print_project_user_list_option_list() ?>
+					</select>
+				</td>
+				<td class="category">
+					<?php echo lang_get( 'access_level' ) ?>
+				</td>
+				<td>
+					<select name="access_level">
+						<?php # No administrator choice ?>
+						<?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
+					</select>
+				</td>
+				<td>
+					<input type="submit" value="<?php echo lang_get( 'add_user_button' ) ?>" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<?php
+}
+?>
+
+
+<!-- LIST OF USERS -->
+<br />
+<div align="center">
+	<table class="width75" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="4">
+				<?php echo lang_get( 'manage_accounts_title' ) ?>
+			</td>
+		</tr>
+		<tr class="row-category">
+			<td>
+				<?php echo lang_get( 'username' ) ?>
+			</td>
+			<td>
+				<?php echo lang_get( 'email' ) ?>
+			</td>
+			<td>
+				<?php echo lang_get( 'access_level' ) ?>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+<?php
+	$t_users = project_get_all_user_rows( $f_project_id );
+
+	# reset the class counter
+	helper_alternate_class( 0 );
+
+	foreach ( $t_users as $t_user ) {
+?>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td>
+				<?php echo $t_user['username'] ?>
+			</td>
+			<td>
+			<?php 
+				$t_email = user_get_email( $t_user['id'] );
+				print_email_link( $t_email, $t_email );
+			?>
+			</td>
+			<td>
+				<?php echo get_enum_element( 'access_levels', $t_user['access_level'] ) ?>
+			</td>
+			<td class="center">
+			<?php
+				if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' ) ) ) {
+					if ( project_includes_user( $f_project_id, $t_user['id'] )  ) {
+						print_bracket_link( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
+					}
+				}
+			?>
+			</td>
+		</tr>
+<?php
+	}  # end for
+?>
+	</table>
+</div>
 
 <?php print_page_bot1( __FILE__ ) ?>

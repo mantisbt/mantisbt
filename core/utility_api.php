@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.4 2003-01-04 09:10:51 jfitzell Exp $
+	# $Id: utility_api.php,v 1.5 2003-02-09 10:30:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -138,4 +138,13 @@
 		}
 	}
 
+	# --------------------
+	# Sort a multi-dimensional array by one of its keys
+	function multi_sort( $p_array, $p_key )
+	{
+		$t_function = create_function( '$a, $b',
+						"return strnatcasecmp( \$a['$p_key'], \$b['$p_key'] );" );
+		uasort( $p_array, $t_function );
+		return $p_array;
+	}
 ?>

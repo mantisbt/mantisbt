@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.39 2003-01-30 07:51:47 jfitzell Exp $
+	# $Id: html_api.php,v 1.40 2003-02-09 10:30:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -357,14 +357,6 @@
 				# only show accounts that are NOT protected
 				if ( OFF == $t_protected ) {
 					PRINT '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a> | ';
-				}
-
-				if ( access_level_check_greater_or_equal( MANAGER ) ) {
-					if ( "0000000" != $g_project_cookie_val ) {
-						PRINT '<a href="proj_user_menu_page.php">' . lang_get( 'users_link' ) . '</a> | ';
-					} else {
-						PRINT '<a href="login_select_proj_page.php?ref=proj_user_menu_page.php">' . lang_get( 'users_link' ) . '</a> | ';
-					}
 				}
 
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {

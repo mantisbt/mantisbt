@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.110 $
+	# $Revision: 1.111 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-09 00:51:02 $
+	# $Date: 2003-02-09 10:30:07 $
 	#
-	# $Id: strings_english.txt,v 1.110 2003-02-09 00:51:02 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.111 2003-02-09 10:30:07 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -84,6 +84,8 @@
 
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
+
+	$s_create_new_project_link = 'Create New Project';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
