@@ -13,19 +13,19 @@
 	$s_operation_successful = "Operatiune reusita.";
 	$s_date_order = "Ordonare dupa data";
 	$s_print_all_bug_page_link = "Tipareste rapoarte";
-	$s_csv_export = "CSV Export";
-	$s_login_anonymously = "Login Anonymously";
+	$s_csv_export = "Export CSV";
+	$s_login_anonymously = "Conectare anonima";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
+	$MANTIS_ERROR[ERROR_SQL] = "EROARE: Eroare SQL detectata. Sunteti rugat sa semnalati acest lucru la ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "EROARE: acontul a fost dezactivat sau utilizatorul/parola sunt incorecte.";
+	$MANTIS_ERROR[ERROR_REPORT] = "EROARE: Ati omis un detaliu obligatoriu din raport.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "EROARE: Nu ati specificat un fisier.";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "EROARE: Calea specificata nu exista. Sunteti rugat sa verificati preferintele proiectului.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "EROARE: Aceasta categorie exista deja.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "EROARE: Aceasta versiune exista deja.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: Acest fisier exista deja. Sunteti rugat sa stergeti vechiul fisier.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: Un camp obligatoriu nu a fost introdus. Sunteti rugat sa reverificati datele.";
 
 	# General Strings
 	$s_go_back = "Intoarcere";
