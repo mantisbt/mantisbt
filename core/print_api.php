@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.12 2002-09-06 08:15:06 jfitzell Exp $
+	# $Id: print_api.php,v 1.13 2002-09-07 07:53:42 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -775,29 +775,25 @@
 	###########################################################################
 	# --------------------
 	# prints a link to a bug given an ID
-	# it accounts for the user preference and site override
+	#  account for the user preference and site override
 	function print_bug_link( $p_id ) {
-		global 	$g_show_view;
-
-		switch ( $g_show_view ) {
-		case BOTH:
-			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-				PRINT "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
-			} else {
-				PRINT "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
-			}
-			break;
-		case SIMPLE_ONLY:
-			PRINT "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
-			break;
-		case ADVANCED_ONLY:
-			PRINT "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
-			break;
-		}
+		echo get_bug_link( $p_id );
 	}
 	# --------------------
-	# prints a link to the update page given an ID
-	# it accounts for the user preference and site override
+	# return an href anchor that links to a bug update page for the given bug
+	#  account for the user preference and site override
+	function get_bug_link( $p_id ) {
+		return '<a href="'.get_bug_link_plain( $p_id ).'">'.$p_id.'</a>';
+	}
+	# --------------------
+	# return the name and GET parameters of a bug update page for the given bug
+	#  account for the user preference and site override
+	function get_bug_link_plain( $p_id ) {
+		return get_bug_update_page().'?f_id='.$p_id;
+	}
+	# --------------------
+	# return the name of a bug update page for the user
+	#  account for the user preference and site override
 	function get_bug_update_page() {
 		global 	$g_show_update;
 
@@ -814,50 +810,6 @@
 			break;
 		case ADVANCED_ONLY:
 				return 'bug_update_advanced_page.php';
-			break;
-		}
-	}
-	# --------------------
-	# returns a href link to a bug given an ID
-	# it accounts for the user preference and site override
-	function get_bug_link( $p_id ) {
-		global 	$g_show_view;
-
-		switch ( $g_show_view ) {
-		case BOTH:
-			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-				return "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
-			} else {
-				return "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
-			}
-			break;
-		case SIMPLE_ONLY:
-			return "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
-			break;
-		case ADVANCED_ONLY:
-			return "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
-			break;
-		}
-	}
-	# --------------------
-	# returns a href link to a bug given an ID
-	# it accounts for the user preference and site override
-	function get_bug_link_plain( $p_id ) {
-		global 	$g_show_view;
-
-		switch ( $g_show_view ) {
-		case BOTH:
-			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-				return 'view_bug_advanced_page.php?f_id='.$p_id;
-			} else {
-				return 'view_bug_page.php?f_id='.$p_id;
-			}
-			break;
-		case SIMPLE_ONLY:
-			return 'view_bug_page.php?f_id='.$p_id;
-			break;
-		case ADVANCED_ONLY:
-			return 'view_bug_advanced_page.php?f_id='.$p_id;
 			break;
 		}
 	}
@@ -993,6 +945,21 @@
 		} else {
 			PRINT "[ <a href=\"$p_link\">$p_url_text</a> ]";
 		}
+	}
+	# --------------------
+	# print a list of page number links (eg [1 2 3])
+	function print_page_links( $p_page, $p_start, $p_end, $p_current ) {
+		$t_items = array();
+
+		for ( $i = $p_start ; $i <= $p_end ; $i++ ) {
+			if ( $i == $p_current ) {
+				array_push( $t_items, $i );
+			} else {
+				array_push( $t_items, "<a href=\"$p_page?f_page_number=$i\">$i</a>" );
+			}
+		}
+
+		echo '[ '.implode( '&nbsp;', $t_items ).' ]';
 	}
 	# --------------------
 	# print a mailto: href link
