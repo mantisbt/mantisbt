@@ -8,7 +8,7 @@
 	# Changes applied to 0.16 database to give us 0.17
 
 	# --------------------------------------------------------
-	# $Id: 0_16_inc.php,v 1.5 2004-02-06 14:33:25 jlatour Exp $
+	# $Id: 0_16_inc.php,v 1.6 2004-02-06 14:51:14 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -144,7 +144,7 @@
 	$upgrades[] = new SQLUpgrade(
 			'0.16-14',
 			'Create bug relationship table',
-			"CREATE TABLE $t_bug_relationship_table (
+			"CREATE TABLE IF NOT EXISTS $t_bug_relationship_table (
 			  source_bug_id int(7) unsigned zerofill NOT NULL default '0000000',
 			  destination_bug_id int(7) unsigned zerofill NOT NULL default '0000000',
 			  relationship_type int(2) NOT NULL default '0')"
@@ -153,7 +153,7 @@
 	$upgrades[] = new SQLUpgrade(
 			'0.16-15',
 			'Create bug monitor table',
-			"CREATE TABLE $t_bug_monitor_table (
+			"CREATE TABLE IF NOT EXISTS $t_bug_monitor_table (
 			  user_id int(7) unsigned zerofill NOT NULL default '0000000',
 			  bug_id int(7) unsigned NOT NULL default '0')"
 		);

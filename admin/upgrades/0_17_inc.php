@@ -8,7 +8,7 @@
 	# Changes applied to 0.17 database to give us ____
 
 	# --------------------------------------------------------
-	# $Id: 0_17_inc.php,v 1.9 2004-02-06 14:07:35 jlatour Exp $
+	# $Id: 0_17_inc.php,v 1.10 2004-02-06 14:51:14 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -133,7 +133,7 @@
 	$upgrades[] = new SQLUpgrade(
 		'0.17-custom-field-1',
 		'Add mantis_custom_field_table',
-		"CREATE TABLE $t_custom_field_table (
+		"CREATE TABLE IF NOT EXISTS $t_custom_field_table (
 		  id int(3) NOT NULL auto_increment,
 		  name varchar(64) NOT NULL default '',
 		  type int(2) NOT NULL default '0',
@@ -151,7 +151,7 @@
 	$upgrades[] = new SQLUpgrade(
 		'0.17-custom-field-2',
 		'Add mantis_custom_field_string_table',
-		"CREATE TABLE $t_custom_field_string_table (
+		"CREATE TABLE IF NOT EXISTS $t_custom_field_string_table (
 		  field_id int(3) NOT NULL,
 		  bug_id int(7) NOT NULL,
 		  value varchar(255) NOT NULL default '',
@@ -160,7 +160,7 @@
 	$upgrades[] = new SQLUpgrade(
 		'0.17-custom-field-3',
 		'Add mantis_custom_field_project_table',
-		"CREATE TABLE $t_custom_field_project_table (
+		"CREATE TABLE IF NOT EXISTS $t_custom_field_project_table (
 		  field_id int(3) NOT NULL,
 		  project_id int(7) unsigned NOT NULL,
 		  sequence int(2) NOT NULL default '0',

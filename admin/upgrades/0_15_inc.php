@@ -8,7 +8,7 @@
 	# Changes applied to 0.15 database to give us 0.16
 
 	# --------------------------------------------------------
-	# $Id: 0_15_inc.php,v 1.5 2004-02-06 14:33:25 jlatour Exp $
+	# $Id: 0_15_inc.php,v 1.6 2004-02-06 14:51:14 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -91,7 +91,7 @@
 	$upgrades[] = new SQLUpgrade(
 			'0.15-8',
 			'Create bug history table',
-			"CREATE TABLE $t_bug_history_table (
+			"CREATE TABLE IF NOT EXISTS $t_bug_history_table (
 			  user_id int(7) unsigned zerofill NOT NULL default '0000000',
 			  bug_id int(7) unsigned zerofill NOT NULL default '0000000',
 			  date_modified datetime NOT NULL default '1970-01-01 00:00:01',
