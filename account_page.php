@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.26 2002-09-22 09:35:06 jfitzell Exp $
+	# $Id: account_page.php,v 1.27 2002-10-01 20:28:19 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -17,7 +17,14 @@
 
 	# EXPECTED BEHAVIOUR
 	#	- Display the user's current settings
-	#	- Submit changes in these settings to account_update.php
+	#	- Allow the user to edit their settings
+	#	- Allow the user to save their changes
+	#	- Allow the user to delete their account if account deletion is enabled
+
+	# CALLS
+	#	This page calls the following pages:
+	#	- account_update.php  (to save changes)
+	#	- account_delete_page.php  (to delete the user's account)
 
 	# RESTRICTIONS & PERMISSIONS
 	#	- User must be authenticated
@@ -25,7 +32,7 @@
 
 	require_once( 'core.php' );
 
-	#============ Variables ============
+	#============ Parameters ============
 	# (none)
 
 	#============ Permissions ============

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_delete_page.php,v 1.18 2002-09-22 09:35:06 jfitzell Exp $
+	# $Id: account_delete_page.php,v 1.19 2002-10-01 20:28:19 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -15,7 +15,10 @@
 
 	# EXPECTED BEHAVIOUR
 	#	- Prompt the user, asking whether they wish to delete their account
-	#	- Upon confirmation, submit to account_delete.php
+
+	# CALLS
+	#	This page calls the following pages:
+	#	- account_delete.php  (to perform the deletion)
 
 	# RESTRICTIONS & PERMISSIONS
 	#	- User must be authenticated
@@ -24,7 +27,7 @@
 
 	require_once( 'core.php' );
 
-	#============ Variables ============
+	#============ Parameters ============
 	# (none)
 
 	#============ Permissions ============

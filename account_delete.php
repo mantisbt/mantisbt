@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_delete.php,v 1.21 2002-09-22 09:35:06 jfitzell Exp $
+	# $Id: account_delete.php,v 1.22 2002-10-01 20:28:19 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -18,13 +18,16 @@
 	#	- Logout the current user
 	#	- Redirect to the page specified in the logout_redirect_page config option
 
+	# CALLS
+	#	This page conditionally redirects upon completion
+
 	# RESTRICTIONS & PERMISSIONS
 	#	- User must be authenticated
 	#	- allow_account_delete config option must be enabled
 
 	require_once( 'core.php' );
 
-	#============ Variables ============
+	#============ Parameters ============
 	# (none)
 
 	#============ Permissions ============

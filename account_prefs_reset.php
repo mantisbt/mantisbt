@@ -4,29 +4,40 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: account_prefs_reset.php,v 1.13 2002-10-01 20:28:19 jfitzell Exp $
+	# --------------------------------------------------------
+
+	# CALLERS
+	#	This page is called from:
+	#	- account_prefs_inc.php
+
+	# EXPECTED BEHAVIOUR
+	#	- Reset the user's preferences to default values
+	#	- Redirect to account_prefs_page.php or another page, if given
+
+	# CALLS
+	#	This page conditionally redirects upon completion
+
+	# RESTRICTIONS & PERMISSIONS
+	#	- User must be authenticated
+	#	- The user's account must not be protected
+
+	require_once( 'core.php' );
+
+	#============ Parameters ============
+	$f_redirect_url	= gpc_get_string( 'f_redirect_url', 'account_prefs_page.php' );
+
+	#============ Permissions ============
+	login_cookie_check();
+
+	current_user_ensure_unprotected();
 ?>
 <?php
-	# Reset prefs to defaults then redirect to account_prefs_page.php3
-?>
-<?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
-<?php
-	$f_user_id				= gpc_get_int( 'f_user_id' );
-	$f_redirect_url			= gpc_get_string( 'f_redirect_url', 'account_prefs_page.php' );
-
-	# protected account check
-	if ( user_is_protected( $f_user_id ) ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	}
-
-	# prevent users from changing other user's accounts
-	if ( $f_user_id != auth_get_current_user_id() ) {
-		check_access( ADMINISTRATOR );
-	}
-
 	# delete and then recreate user prefs
-	user_delete_prefs( $f_user_id );
-	user_create_prefs( $f_user_id );
+	user_delete_prefs( auth_get_current_user_id() );
+	user_create_prefs( auth_get_current_user_id() );
 
 	print_header_redirect( $f_redirect_url );
 ?>
