@@ -431,7 +431,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 			for( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<td class="small-caption" colspan="' . ( 1 * $t_filter_cols ) . '">';
 				if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
-					echo lang_get_defaulted( $t_accessible_custom_fields_names[$t_base + $j] );
+					echo string_display( lang_get_defaulted( $t_accessible_custom_fields_names[$t_base + $j] ) );
 				} else {
 					echo '&nbsp;';
 				}
