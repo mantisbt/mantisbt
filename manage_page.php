@@ -192,30 +192,27 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 		$u_date_created  = date( config_get( 'normal_date_format' ), $u_date_created );
 		$u_last_visit    = date( config_get( 'normal_date_format' ), $u_last_visit );
-
-		# alternate row colors
-		$t_bgcolor = alternate_colors( $i );
 ?>
-<tr>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+<tr <?php echo helper_alternate_class( $i ) ?>>
+	<td>
 		<a href="manage_user_page.php?f_user_id=<?php echo $u_id ?>"><?php echo $u_username ?></a>
 	</td>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+	<td>
 		<?php print_email_link( $u_email, $u_email ) ?>
 	</td>
-	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
+	<td align="center">
 		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
 	</td>
-	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
+	<td align="center">
 		<?php echo trans_bool( $u_enabled ) ?>
 	</td>
-	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
+	<td align="center">
 		<?php echo trans_bool( $u_protected ) ?>
 	</td>
-	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
+	<td align="center">
 		<?php echo $u_date_created ?>
 	</td>
-	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
+	<td align="center">
 		<?php echo $u_last_visit ?>
 	</td>
 </tr>

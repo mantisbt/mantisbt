@@ -40,11 +40,9 @@
 		$v_description 	= string_display( $v_description );
 		$v_date_added = date( $g_complete_date_format, $v_date_added );
 
-		# alternate row colors
-		$status_color = alternate_colors( $i );
 ?>
-<tr valign="top">
-	<td bgcolor="<?php echo $status_color ?>">
+<tr valign="top" <?php echo helper_alternate_class( $i ) ?>>
+	<td>
 <?php
 		PRINT '<a href="file_download.php?f_file_id='.$v_id.'&amp;f_type=doc">'.$v_title.'</a> ('.$v_filesize.' bytes)';
 
@@ -55,7 +53,7 @@
 		<br />
 		<span class="small">(<?php echo $v_date_added ?>)</span>
 	</td>
-	<td bgcolor="<?php echo $status_color ?>">
+	<td>
 		<?php echo $v_description ?>
 	</td>
 </tr>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.8 2002-09-16 06:05:39 jfitzell Exp $
+	# $Id: history_api.php,v 1.9 2002-11-12 05:19:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -99,8 +99,6 @@
 		for ( $i=0; $i < $history_count; $i++ ) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-			$status_color = alternate_colors( $i+1, config_get( 'background_color' ) );
 
 			$v_date_modified = date( config_get( 'complete_date_format' ), $v_date_modified );
 

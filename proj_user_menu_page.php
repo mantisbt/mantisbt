@@ -133,20 +133,18 @@
 
 		$u_access_level = user_get_access_level( $u_id, helper_get_current_project() );
 
-		# alternate row colors
-		$t_bgcolor = alternate_colors( $i );
 ?>
-<tr>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+<tr <?php echo helper_alternate_class( $i ) ?>>
+	<td>
 		<?php echo $u_username ?>
 	</td>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+	<td>
 		<?php print_email_link( $u_email, $u_email ) ?>
 	</td>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+	<td>
 		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
 	</td>
-	<td class="center" bgcolor="<?php echo $t_bgcolor ?>">
+	<td class="center">
 		<?php
 			if ( project_includes_user( helper_get_current_project(), $u_id )  ) {
 				print_bracket_link( 'proj_user_delete.php?f_user_id='.$u_id, $s_remove_link );

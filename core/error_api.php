@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.9 2002-09-21 23:00:43 jfitzell Exp $
+	# $Id: error_api.php,v 1.10 2002-11-12 05:19:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -168,7 +168,7 @@
 			echo '<center><table class="width75">';
 
 			for ( $i = 0 ; $i < sizeof( $t_stack ) ; $i = $i + 1 ) {
-				echo '<tr bgcolor="'.alternate_colors( $i).'"><td>'.$t_stack[$i].'</td></tr>';
+				echo '<tr ' . helper_alternate_class( $i ) . '"><td>'.$t_stack[$i].'</td></tr>';
 			}
 
 			echo '</table></center>';

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.24 2002-11-11 10:36:54 jfitzell Exp $
+	# $Id: helper_api.php,v 1.25 2002-11-12 05:19:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -34,18 +34,34 @@
 	}
 	# --------------------
 	# alternate color function
-	function alternate_colors( $p_num, $p_color1='', $p_color2='' ) {
-		if ( empty( $p_color1 ) ) {
-			$p_color1 = config_get( 'primary_color1' );
-		}
-		if ( empty( $p_color2 ) ) {
-			$p_color2 = config_get( 'primary_color2' );
+	#  If no index is given, continue alternating based on the last index given
+	function helper_alternate_colors( $p_index=null, $p_odd_color, $p_even_color ) {
+		static $t_index = 1;
+
+		if ( null !== $p_index ) {
+			$t_index = $p_index;
 		}
 
-		if ( 1 == $p_num % 2 ) {
-			return $p_color1;
+		if ( 1 == $t_index++ % 2 ) {
+			return $p_odd_color;
 		} else {
-			return $p_color2;
+			return $p_even_color;
+		}
+	}
+	# --------------------
+	# alternate classes for table rows
+	#  If no index is given, continue alternating based on the last index given
+	function helper_alternate_class( $p_index=null, $p_odd_class="row-1", $p_even_class="row-2" ) {
+		static $t_index = 1;
+		
+		if ( null !== $p_index ) {
+			$t_index = $p_index;
+		}
+
+		if ( 1 == $t_index++ % 2 ) {
+			return "class=\"$p_odd_class\"";
+		} else {
+			return "class=\"$p_even_class\"";
 		}
 	}
 	# --------------------

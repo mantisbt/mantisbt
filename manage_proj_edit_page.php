@@ -158,17 +158,15 @@
 					$c_user_name = '';
 				}
 
-				# alternate row colors
-				$t_bgcolor = alternate_colors( $i );
 		?>
-		<tr>
-			<td width="50%" bgcolor="<?php echo $t_bgcolor ?>">
+		<tr <?php echo helper_alternate_class( $i ) ?>>
+			<td width="50%">
 				<?php echo $t_category ?>
 			</td>
-			<td width="25%" bgcolor="<?php echo $t_bgcolor ?>">
+			<td width="25%">
 				<?php echo $c_user_name ?>
 			</td>
-			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
+			<td class="center" width="25%">
 				<?php
 					print_bracket_link( 'manage_proj_cat_edit_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category.'&amp;f_assigned_to='.$c_user_id, lang_get( 'edit_link' ) );
 					PRINT '&nbsp;';
@@ -224,17 +222,15 @@
 				$t_date_order = $row['date_order'];
 				$t2_date_order = urlencode( $t_date_order );
 
-				# alternate row colors
-				$t_bgcolor = alternate_colors( $i );
 		?>
-		<tr>
-			<td width="50%" bgcolor="<?php echo $t_bgcolor ?>">
+		<tr <?php echo helper_alternate_class( $i ) ?>>
+			<td width="50%">
 				<?php echo $t_version ?>
 			</td>
-			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
+			<td class="center" width="25%">
 				<?php echo $t_date_order ?>
 			</td>
-			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
+			<td class="center" width="25%">
 				<?php
 					print_bracket_link( 'manage_proj_ver_edit_page.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, lang_get( 'edit_link' ) );
 					PRINT '&nbsp;';

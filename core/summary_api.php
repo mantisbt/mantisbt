@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.5 2002-09-26 22:55:17 jfitzell Exp $
+	# $Id: summary_api.php,v 1.6 2002-11-12 05:19:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,8 +18,7 @@
 	# Given the enum string this function prints out the summary for each enum setting
 	# The enum field name is passed in through $p_enum
 	function print_bug_enum_summary( $p_enum_string, $p_enum ) {
-		global 	$g_mantis_bug_table, $g_primary_color1, $g_primary_color2,
-				$g_project_cookie_val, $g_summary_pad;
+		global 	$g_mantis_bug_table, $g_project_cookie_val, $g_summary_pad;
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -67,14 +66,11 @@
 			$closed_bug_count	= str_pad( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 			$t_enum_count		= str_pad( $t_enum_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
-			# alternate row colors
-			$t_bgcolor = alternate_colors( $i );
-
-			PRINT '<tr align="center">';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+			print '<tr align="center" ' . helper_alternate_class( $i ) . '>';
+				PRINT "<td width=\"50%\">";
 					echo get_enum_element( $p_enum, $t_s[0] );
 				PRINT '</td>';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+				PRINT "<td width=\"50%\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $t_enum_count";
 				PRINT '</td>';
 			PRINT '</tr>';
@@ -102,20 +98,15 @@
 	# This function shows the number of bugs submitted in the last X days
 	# An array of integers representing days is passed in
 	function print_bug_date_summary( $p_date_array ) {
-		global $g_primary_color1, $g_primary_color2;
-
 		$arr_count = count( $p_date_array );
 		for ($i=0;$i<$arr_count;$i++) {
 			$t_enum_count = get_bug_count_by_date( $p_date_array[$i] );
 
-			# alternate row colors
-			$t_bgcolor = alternate_colors( $i );
-
-			PRINT '<tr align="center">';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+			print '<tr align="center" ' . helper_alternate_class( $i ) . '>';
+				PRINT "<td width=\"50%\">";
 					echo $p_date_array[$i];
 				PRINT '</td>';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+				PRINT "<td width=\"50%\">";
 					echo $t_enum_count;
 				PRINT '</td>';
 			PRINT '</tr>';
@@ -125,7 +116,6 @@
 	# print bug counts by assigned to each developer
 	function print_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
-				$g_primary_color1, $g_primary_color2,
 				$g_project_cookie_val,
 				$g_summary_pad, $g_handle_bug_threshold;
 
@@ -184,14 +174,11 @@
 			$closed_bug_count	= str_pad( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 			$total_bug_count	= str_pad( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
-			# alternate row colors
-			$t_bgcolor = alternate_colors( $t_row_count );
-
-			PRINT '<tr align="center">';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+			print '<tr align="center" ' . helper_alternate_class( $i ) . '>';
+				PRINT "<td width=\"50%\">";
 					echo $v_username;
 				PRINT '</td>';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+				PRINT "<td width=\"50%\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT '</td>';
 			PRINT '</tr>';
@@ -204,7 +191,6 @@
 	# print bug counts by reporter id
 	function print_reporter_summary() {
 		global 	$g_mantis_bug_table, 
-				$g_primary_color1, $g_primary_color2,
 				$g_reporter_summary_limit,
 				$g_project_cookie_val,
 				$g_summary_pad;
@@ -261,14 +247,11 @@
 			$closed_bug_count	= str_pad( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 			$total_bug_count	= str_pad( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
-			# alternate row colors
-			$t_bgcolor = alternate_colors( $i );
-
-			PRINT '<tr align="center">';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+			print '<tr align="center" ' . helper_alternate_class( $i ) . '>';
+				PRINT "<td width=\"50%\">";
 					echo $v_username;
 				PRINT '</td>';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+				PRINT "<td width=\"50%\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 				PRINT '</td>';
 			PRINT '</tr>';
@@ -279,7 +262,6 @@
 	function print_category_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_project_table,
 				$g_mantis_project_category_table, $g_project_cookie_val,
-				$g_primary_color1, $g_primary_color1,
 				$g_summary_pad, $g_summary_product_colon_category;
 
 		#checking if it's a per project statistic or all projects
@@ -336,15 +318,12 @@
 			$closed_bug_count	= str_pad( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 			$total_bug_count	= str_pad( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
-			# alternate row colors
-			$t_bgcolor = alternate_colors( $i );
-
-			PRINT '<tr align="center">';
-			PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+			print '<tr align="center" ' . helper_alternate_class( $i ) . '>';
+			PRINT "<td width=\"50%\">";
 			if ( ( ON == $g_summary_product_colon_category ) && ( $g_project_cookie_val=='0000000' ) ) {
 				PRINT "[$t_project] ";
 			}
-			PRINT "$t_category</td><td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+			PRINT "$t_category</td><td width=\"50%\">";
 			PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
 			PRINT '</td>';
 			PRINT '</tr>';

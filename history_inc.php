@@ -35,9 +35,8 @@
 </tr>
 <?php
 	for ( $i=0; $i < count( $history ); $i++ ) {
-		$status_color = alternate_colors( $i+1, config_get( 'background_color' ) );
 ?>
-<tr bgcolor="<?php echo $status_color ?>">
+<tr <?php echo helper_alternate_class( $i ) ?>>
 	<td class="small-caption">
 		<?php echo $history[$i]['date'] ?>
 	</td>

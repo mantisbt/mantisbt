@@ -144,23 +144,21 @@
 		$v_name 		= string_display( $v_name );
 		$v_description 	= string_display( $v_description );
 
-		# alternate row colors
-		$t_bgcolor = alternate_colors( $i );
 ?>
-<tr>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+<tr <?php echo helper_alternate_class( $i ) ?>>
+	<td>
 		<a href="manage_proj_edit_page.php?f_project_id=<?php echo $v_id ?>"><?php echo $v_name ?></a>
 	</td>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+	<td>
 		<?php echo get_enum_element( 'project_status', $v_status ) ?>
 	</td>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+	<td>
 		<?php echo trans_bool( $v_enabled ) ?>
 	</td>
-	<td bgcolor="<?php echo $t_bgcolor ?>">
+	<td>
 		<?php echo get_enum_element( 'project_view_state', $v_view_state ) ?>
 	</td>
-	<td align="left" bgcolor="<?php echo $t_bgcolor ?>">
+	<td>
 		<?php echo $v_description ?>
 	</td>
 </tr>
