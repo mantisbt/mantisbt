@@ -51,7 +51,7 @@
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
+	<table width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_viewing_bug_details_title ?></b>
@@ -99,6 +99,7 @@
 	</tr>
 	<tr height=5 bgcolor=<? echo $g_white_color ?>>
 		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+			&nbsp;
 		</td>
 	</tr>
 	<tr>
@@ -131,7 +132,7 @@
 			<? echo $v_resolution ?>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
-
+			&nbsp;
 		</td>
 	</tr>
 	<tr align=center>
@@ -148,11 +149,12 @@
 			<? print_duplicate_id( $v_duplicate_id ) ?>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=2>
-
+			&nbsp;
 		</td>
 	</tr>
 	<tr height=5 bgcolor=<? echo $g_white_color ?>>
 		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+			&nbsp;
 		</td>
 	</tr>
 	<tr>
@@ -181,6 +183,7 @@
 	</tr>
 	<tr height=5 bgcolor=<? echo $g_white_color ?>>
 		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+			&nbsp;
 		</td>
 	</tr>
 <?
@@ -217,6 +220,7 @@
 		</form>
 <?	} else { ?>
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+			&nbsp;
 		</td>
 <?	} ?>
 		<form method=post action="<? echo $g_bug_delete_page ?>">
