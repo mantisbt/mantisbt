@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.73 $
+	# $Revision: 1.74 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-08 10:48:33 $
+	# $Date: 2004-09-11 03:10:39 $
 	#
-	# $Id: strings_swedish.txt,v 1.73 2004-09-08 10:48:33 bigbadger Exp $
+	# $Id: strings_swedish.txt,v 1.74 2004-09-11 03:10:39 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -254,7 +254,7 @@ $s_view_state_enum_string         = '10:publik,50:privat';
 $s_priority_enum_string           = '10:ingen,20:låg,30:normal,40:hög,50:bråttom,60:omedelbart';
 $s_severity_enum_string           = '10:funktion,20:trivial,30:text,40:tweak,50:mindre,60:allvarlig,70:krash,80:blockerare';
 $s_reproducibility_enum_string    = '10:alltid,30:ibland,50:slumpvis,70:har ej testat,90:kan inte göra om,100:ingen';
-$s_status_enum_string             = '10:ny,20:återkoppling,30:godkänt,40:bekräftat,50:tilldelat,80:löst,90:stängt';
+$s_status_enum_string             = '10:nytt,20:återkoppling,30:godkänt,40:bekräftat,50:tilldelat,80:löst,90:stängt';
 $s_resolution_enum_string         = '10:öppen,20:fixat,30:återöppnat,40:kan inte göra om,50:kan inte fixa,60:kopia av annan,70:inte en bugg,80:bordlagt,90:kommer inte fixa';
 $s_projection_enum_string         = '10:ingen,30:tweak,50:mindre fix,70:omfattande omkodning,90:omdesign';
 $s_eta_enum_string                = '10:ingen,20:< 1 dag,30:2-3 dagar,40:< 1 vecka,50:< 1 månad,60:> 1 månad';
@@ -405,12 +405,12 @@ $s_bug_assign_msg       = 'Ärendet har tilldelats...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Nytt ärende';
-$s_feedback_bug_title = 'Skriv återkoppling till ärende';
+$s_feedback_bug_title = 'Begär återkoppling till ärende';
 $s_acknowledged_bug_title = 'Acceptera ärende';
 $s_confirmed_bug_title = 'Bekräfta ärende';
 $s_assigned_bug_title = 'Tilldela ärende';
 $s_new_bug_button = 'Nytt ärende';
-$s_feedback_bug_button = 'Tillför återkoppling';
+$s_feedback_bug_button = 'Begär återkoppling';
 $s_acknowledged_bug_button = 'Acceptera ärende';
 $s_confirmed_bug_button = 'Bekräfta ärende';
 $s_assigned_bug_button = 'Tilldela ärende';
