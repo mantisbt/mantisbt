@@ -302,6 +302,27 @@
 		</td>
 	</tr>
 <?
+	### account profile description
+	if ($v_profile_id>0) {
+		$query = "SELECT description
+				FROM $g_mantis_user_profile_table
+				WHERE id='$v_profile_id'";
+		$result = mysql_query( $query );
+		$t_profile_description = mysql_result( $result, 0 );
+		$t_profile_description = string_display_with_br( $t_profile_description );
+
+?>
+	<tr>
+		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+			<b>System Profile</b>
+		</td>
+		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
+			<? echo $t_profile_description ?>
+		</td>
+	</tr>
+<?
+	}
+
 	if ( ( $u_access_level=="administrator" ) ||
 		 ( $u_access_level=="developer" ) ||
 		 ( $u_access_level=="updater" ) ) {

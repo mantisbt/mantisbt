@@ -88,13 +88,13 @@
 				( id, reporter_id, handler_id, duplicate_id, priority, severity,
 				reproducibility, status, resolution, projection, category,
 				date_submitted, last_updated, eta, bug_text_id, os, os_build,
-				platform, version, build, votes, summary )
+				platform, version, build, votes, profile_id, summary )
 				VALUES
 				( null, '$u_id', '0000000', '0000000', 'normal', '$f_severity',
 				'$f_reproducibility', 'new', 'open', 'minor fix', '$f_category',
 				NOW(), NOW(), NOW(), '$t_id', '$f_os', '$f_osbuild',
 				'$f_platform', '$f_version', '$f_build',
-				1, '$f_summary' )";
+				1, '$f_profile_id', '$f_summary' )";
 		$result = mysql_query( $query );
 	}
 ?>

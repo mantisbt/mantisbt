@@ -17,7 +17,7 @@
 ALTER TABLE mantis_user_table ADD protected VARCHAR (3) not null;
 
 # =================
-# 0.10.2 to 0.10.3+
+# 0.10.2 to 0.11.0
 # =================
 
 # inserted feedback as a status
@@ -52,3 +52,10 @@ CREATE TABLE mantis_user_pref_table (
    PRIMARY KEY (id)
 );
 
+# =================
+# 0.11.x to 0.12.0
+# =================
+
+# Add a new field to store profile descriptions
+
+ALTER TABLE mantis_bug_table ADD profile_id INT UNSIGNED ZEROFILL not null AFTER votes

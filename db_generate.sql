@@ -29,6 +29,7 @@ CREATE TABLE mantis_bug_table (
    version enum ('none') NOT NULL,
    build tinyint(4) DEFAULT '0' NOT NULL,
    votes tinyint(4) DEFAULT '0' NOT NULL,
+   profile_id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL,
    summary varchar(128) NOT NULL,
    PRIMARY KEY (id)
 );

@@ -18,22 +18,26 @@ To Do:
 
 12.XX.2000	-	0.11.2
 
- * Tweaked the string_edit() function.
- * Added $g_show_login_date_info adn the ability to show who is logged in and the current time
+ * Tweaked the string_edit() function
+ * Added $g_show_login_date_info adn the ability to show who is logged in and
+   the current time
  * Modified bugnotes to be ordered by date_submitted
  * Added protection to prevent anyone from deleting bugnotes
  * Used LAST_INSERT_ID() to ensure that bug and bugnote insertion is correct
- *
- *
+ * Reporting a bug now stores a link to the account profile (if chosen)
+ * The information from the profile is displayed (if chosen at report time) in
+   the advanced bug view
  *
 
 12.15.2000	-	0.11.1
 
- * Added projection and eta to be passed as hidden info by the simple update page.
+ * Added projection and eta to be passed as hidden info by the simple update
+   page.
  * Fixed a missing </TD> tag on the report bug pages.  Messed up old 4.x unix
    Netscape.
  * Modified the priority to print counts of all bugs.
- * Wrapped the global cookie _val variables in if (isset()) blocks.  Seemed to cause some troubles on some setups.
+ * Wrapped the global cookie _val variables in if (isset()) blocks.  Seemed to
+   cause some troubles on some setups.
 
 12.12.2000	-	0.11.0
 
@@ -44,7 +48,8 @@ To Do:
  * Added a confirmation before an admin can delete an account
  * Added several ; in core_API.php that caused errors on some servers
  * Added view next/prev XYZ bugs on bug viewing page
- * Added a string_display() function to prevent HTML tags from screwing up display
+ * Added a string_display() function to prevent HTML tags from screwing up
+   display
  * Added version editing capability
  * Added account preferences
  * Added changed in last X hours option
@@ -56,13 +61,17 @@ To Do:
  * Added $g_usage_doc_page for userland documentation
  * Added Docs to the menu
  * Fixed bug with Bugnote Add button showing up in the wrong places
- * Fixed bug with SQL queries updating both submitted and last updated dates on bugs
- * Fixed bug with SQL queries updating both submitted and last access dates on users
+ * Fixed bug with SQL queries updating both submitted and last updated dates on
+   bugs
+ * Fixed bug with SQL queries updating both submitted and last access dates on
+   users
  * Modified version to be an enum.
  * Modified ordering methods in manage account
  * Modified viewing preferences
- * Made enum displays (category, status, etc) easier to maintain via print_lists()
- * Renamed access_level_check_greater() to access_level_check_greater_or_equal()
+ * Made enum displays (category, status, etc) easier to maintain via
+   print_lists()
+ * Renamed access_level_check_greater() to
+   access_level_check_greater_or_equal()
  * Renamed $g_bug_view_all_page $g_bug_view_all_page $g_bug_view_all_page
    to      $g_view_bug_all_page $g_view_bug_page $g_view_bug_advanced_page
  * Renamed corresponding .php3 files

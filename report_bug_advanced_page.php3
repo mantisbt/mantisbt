@@ -90,7 +90,7 @@
 			Select Profile:
 		</td>
 		<td>
-			<select name=f_id>
+			<select name=f_profile_id>
 				<? print_profiles( $u_id ) ?>
 			</select>
 		</td>

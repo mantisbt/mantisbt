@@ -6,6 +6,14 @@
 # Take a look in db_upgrade.sql as well.
 
 # =================
+# 0.11.x to 0.12.0
+# =================
+
+# Add a new field to store profile descriptions
+
+ALTER TABLE mantis_bug_table ADD profile_id INT UNSIGNED ZEROFILL not null AFTER votes
+
+# =================
 # 0.10.2 to 0.11.0
 # =================
 
