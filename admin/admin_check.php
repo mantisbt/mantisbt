@@ -4,7 +4,7 @@
 ?>
 <?php
 	error_reporting( E_ALL );
-	include '../core/php_API.PHP';
+	include '..' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'php_API.php';
 
 	# mail test
 	if ( isset( $f_mail_test ) ) {

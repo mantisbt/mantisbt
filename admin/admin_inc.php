@@ -1,5 +1,5 @@
 <?php
-	$t_mantis_path = '../';
+	$t_mantis_path = '..' . DIRECTORY_SEPARATOR;
 
 	require ( $t_mantis_path . 'constant_inc.php' );
 
@@ -19,8 +19,8 @@
 		include ( $t_custom_config );
 	}
 
-	require $t_mantis_path . 'core/database_API.php';
-	
+	require $t_mantis_path . 'core' . DIRECTORY_SEPARATOR . 'database_API.php';
+
 	# Checks whether the specified field in the specified database exists. 
 	# If not, a message is displayed and the script exits.
 	#

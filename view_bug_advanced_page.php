@@ -23,7 +23,7 @@
 	}
 
 	if ( isset( $f_check ) ) {
-		if ( $f_check != calcCRC( $f_id, __FILE__ ) ) {
+		if ( $f_check != calc_crc( $f_id, __FILE__ ) ) {
 		  access_denied();
 		}
 	}
@@ -92,7 +92,7 @@
 	<td class="right" colspan="2">
 
 <?php if ( !isset( $f_check ) ) { ?>
-	<span class="small"><?php print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id.'&amp;f_check=' . calcCRC( $f_id, __FILE__ ), 'Publish' )?></span>
+	<span class="small"><?php print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id.'&amp;f_check=' . calc_crc( $f_id, __FILE__ ), 'Publish' )?></span>
 <?php }?>
 
 <?php if ( !isset( $f_check ) && ( BOTH == $g_show_view ) ) { ?>
