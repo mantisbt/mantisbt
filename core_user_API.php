@@ -189,16 +189,24 @@
 	function process_plain_password( $p_password ) {
 		global $g_login_method;
 
+		$t_processed_password = $p_password;
 		switch ( $g_login_method ) {
 			case CRYPT:	$salt = substr( $p_password, 0, 2 );
-						return crypt( $p_password, $salt );
+						$t_processed_password= crypt( $p_password, $salt );
+						break;
 			case CRYPT_FULL_SALT:
 						$salt = $p_password;
-						return crypt( $p_password, $salt );
-			case PLAIN:	return $p_password;
-			case MD5:	return md5( $p_password );
-			default:	return $p_password;
+						$t_processed_password = crypt( $p_password, $salt );
+						break;
+			case PLAIN:	$t_processed_password = $p_password;
+						break;
+			case MD5:	$t_processed_password = md5( $p_password );
+						break;
+			default:	$t_processed_password = $p_password;
+						break;
 		}
+		# cut this off to 32 cahracters which the largest possible string in the database
+		return substr( $t_processed_password, 0, 32 );
 	}
 	# --------------------
 	###########################################################################

@@ -80,6 +80,7 @@ Mantis
  * Added project category copy.
  * Added CRYPT_FULL_SALT authentication.
  * Added page timer.
+ * Added mt_srand() call in core_API.php.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
  * Removed proj_user_delete_page.php.
