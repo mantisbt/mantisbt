@@ -6,6 +6,7 @@
 
 	# French: Hellekin O. Wolf, hellekin@mmania.com
 	# French: Eric Hartmann, eric@rhinfo.com
+	# French: Samuel Tardieu, sam@rfc1149.net
 ?>
 <?
 	# General Strings
@@ -278,16 +279,16 @@
 	$s_create_user_button = "Créer l'utilisateur";
 
 	# manage_page.php3
-	$s_hide_disabled = "Hide Disabled";
-	$s_filter_button = "Filter";
+	$s_hide_disabled = "Cacher Désactivés";
+	$s_filter_button = "Filtrer";
 	$s_create_new_account_link = "Créer un compte utilisateur";
 	$s_projects_link = "Projets";
 	$s_documentation_link = "Documentation";
 	$s_new_accounts_title = "Nouveaux utilisateurs";
 	$s_1_week_title = "1 semaine";
 	$s_never_logged_in_title = "N'a jamais utilisé le système";
-	$s_prune_accounts = "Prune Accounts";
-	$s_hide_inactive = "Hide Inactive";
+	$s_prune_accounts = "Effacer Comptes";
+	$s_hide_inactive = "Cacher Inactifs";
 	$s_manage_accounts_title = "Administrer les comptes utilisateurs";
 	$s_p = "p";
 	$s_date_created = "Date de création";
@@ -339,7 +340,7 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Ajouter un projet";
-	$s_access_threshold = "Access Threshold";
+	$s_access_threshold = "Niveau d'Accès";
 	$s_upload_file_path = "Chemin pout l'upload de fichier";
 	$s_add_project_button = "Ajouter ce projet";
 	$s_projects_title = "Projets";
@@ -396,11 +397,11 @@
 	$s_report_bug_link = "Nouveau bug";
 	$s_summary_link = "Synthèse";
 	$s_account_link = "Options";
-	$s_users_link = "Users";
+	$s_users_link = "Utilisateurs";
 	$s_manage_link = "Administration";
 	$s_edit_news_link = "Editer les nouvelles";
 	$s_docs_link = "Documentation";
-	$s_logout_link = "Logout";
+	$s_logout_link = "Déconnexion";
 
 	# meta_inc.php
 
@@ -478,7 +479,7 @@
 	# proj_user_menu_page.php3
 	$s_add_user_title = "Intégrer un utilisateur au projet";
 	$s_add_user_button = "Ajouter l'utilisateur";
-	$s_project_selection_title = "Project Selection";
+	$s_project_selection_title = "Choix du projet";
 	$s_remove_link = "Supprimer";
 
 	# proj_user_update.php3
@@ -501,7 +502,7 @@
 	$s_select_category = "Choisir une catégorie";
 	$s_select_reproducibility = "Choisir la reproductibilité";
 	$s_select_severity = "Choisir une sévérité";
-	$s_or_fill_in = "OR Fill In";
+	$s_or_fill_in = "OU Remplir";
 	$s_assign_to = "Assigné à";
 	$s_steps_to_reproduce = "Etapes à suivre pour reproduire le bug";
 	$s_additional_information = "Information complémentaire";
@@ -561,7 +562,7 @@
 	$s_average_time = "temps moyen";
 	$s_total_time = "temps total";
 	$s_developer_stats = "statistiques par développeur";
-	$s_orct = "(open/resolved/closed/total)";
+	$s_orct = "(ouvert/résolu/fermé/total)";
 
 	# view_all_assign_bug_page.php3
 
@@ -579,7 +580,7 @@
 	$s_updated = "Mis à jour";
 
 	# view_all_inc.php
-        $s_search ="Search";
+	$s_search ="Chercher";
 
 	# view_user_reported_bug_page.php3
 
