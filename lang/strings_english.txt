@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.74 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-25 09:32:44 $
+	# $Revision: 1.75 $
+	# $Author: vboctor $
+	# $Date: 2002-08-25 14:26:03 $
 	#
-	# $Id: strings_english.txt,v 1.74 2002-08-25 09:32:44 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.75 2002-08-25 14:26:03 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -763,6 +763,7 @@
 	$s_bug_assign_button    = 'Assign to Me';
 	$s_reopen_bug_button = 'Reopen Bug';
 	$s_attached_files = 'Attached Files';
+	$s_publish = 'Publish';
 
 	# view_bug_inc.php
 

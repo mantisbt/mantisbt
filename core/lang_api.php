@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.1 2002-08-25 08:02:14 jfitzell Exp $
+	# $Id: lang_api.php,v 1.2 2002-08-25 14:26:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -49,6 +49,13 @@
 		$g_active_language = $g_default_language;
 	}
 
+	# in most scenarios English is done first, then translated,
+	# hence including the English first would show non-translated
+	# strings in English rather than giving errors (if the copying 
+	# script is not used)
+	if ( $g_active_language != 'english' ) {
+		include( 'lang/strings_english.txt' );
+	}
 	include( 'lang/strings_'.$g_active_language.'.txt' );
 
 	# Allow overriding strings declared in the language file.

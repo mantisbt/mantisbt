@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.3 2002-08-25 14:26:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,7 +18,7 @@
 	# If the variable is not set, the default is returned. 
 	# If magic_quotes_gpc is on, slashes will be stripped from the value before being returned.
 	function gpc_get( $p_var_name, $p_default = null ) {
-		# simulate auto-globals from PHP v4.1.0 (see also code in core_php_API.php)
+		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
 		if ( ! php_version_at_least( '4.1.0' ) ) {
 			global $_REQUEST;
 		}

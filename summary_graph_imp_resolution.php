@@ -7,7 +7,7 @@
 	# <SQLI>
 	# This page displays "improved" charts on resolutions : bars, 3Dpie and a mix resolutions per status
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php include( 'core_api.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.
