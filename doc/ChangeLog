@@ -2,6 +2,8 @@ Mantis ChangeLog
 
 2003.??.??  -  0.18.0a4
  * Languages: Updated Italian localisation.
+ * Fix: 'Hide resolved' now also works for report printing and export.
+ * Fix #3903: Project name is not printed on bug list report.
 
 2003.02.26  -  0.18.0a3
 
