@@ -18,7 +18,7 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### grab the user id
-    $u_id = get_current_user_id();
+	$u_id = get_current_user_field( "id " );
 
 	### Grab the data
     $query = "SELECT *

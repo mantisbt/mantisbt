@@ -26,6 +26,10 @@ To Do:
    dealing with bugnotes.
  * Reordered the config_inc.php file items
  * Added a logout redirect page variable for the logout page
+ * Fixed show source problem
+ * Removed get_current_user_id() and replaced with calls to get_current_user_field( "id" )
+ * Added reopen bug dialog
+ * Added $g_bug_reopen_page and removed $g_bug_reopen
 
 12.20.2000	-	0.12.0
 

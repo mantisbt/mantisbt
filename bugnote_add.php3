@@ -10,7 +10,7 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### get user information
-	$u_id = get_current_user_id();
+	$u_id = get_current_user_field( "id " );
 
 	$f_bugnote_text = string_safe( $f_bugnote_text );
 	### insert bugnote text
@@ -42,14 +42,14 @@
 	### get date submitted (weird bug in mysql)
 	$query = "SELECT date_submitted
 			FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
+    		WHERE id='$f_bug_id'";
    	$result = mysql_query( $query );
    	$t_date_submitted = mysql_result( $result, 0 );
 
 	### update bug last updated
 	$query = "UPDATE $g_mantis_bug_table
     		SET date_submitted='$t_date_submitted', last_updated=NOW()
-    		WHERE id='$f_id'";
+    		WHERE id='$f_bug_id'";
    	$result = mysql_query($query);
 ?>
 <? print_html_top() ?>

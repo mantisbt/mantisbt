@@ -204,7 +204,7 @@
 
 	if ( $v_status=="resolved" ) {
 		PRINT "<div align=center>";
-		PRINT "<form method=post action=\"$g_bug_reopen\">";
+		PRINT "<form method=post action=\"$g_bug_reopen_page\">";
 			PRINT "<input type=hidden name=f_id value=\"$v_id\">";
 			PRINT "<input type=submit value=\" Reopen Bug \">";
 		PRINT "</form>";

@@ -34,7 +34,7 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table cols=2 width=100%>
 	<form method=post action="<? echo $g_account_profile_add ?>">
-	<input type=hidden name=f_user_id value="<? echo get_current_user_id() ?>">
+	<input type=hidden name=f_user_id value="<? echo get_current_user_field( "id " ) ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_add_profile ?></b>
@@ -91,7 +91,7 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_account_profile_edit_page ?>">
-	<input type=hidden name=f_user_id value="<? echo get_current_user_id() ?>">
+	<input type=hidden name=f_user_id value="<? echo get_current_user_field( "id " ) ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_edit_or_delete_profiles ?></b>

@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	###########################################################################
-	### CONFIGURATION VARIABLES                                             ###
+	### INCLUDES                                                            ###
 	###########################################################################
 
 	require( "config_inc.php" );
@@ -15,10 +15,10 @@
 	### FUNCTIONS                                                           ###
 	###########################################################################
 
-	####################
+	###########################################################################
 	# MySQL
-	####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	# connect to database
 	function db_mysql_connect( 	$p_hostname="localhost", $p_username="root", $p_password="",
 								$p_database="mantis", $p_port=3306 ) {
@@ -27,7 +27,7 @@
 									$p_username, $p_password );
 		$t_result = mysql_select_db( $p_database );
 	}
-	#--------------------
+	### --------------------
 	# execute query, requires connection to be opened,
 	# goes to error page if error occurs
 	# Use this when you don't want to handler an error yourself
@@ -43,53 +43,53 @@
 			return $t_result;
 		}
 	}
-	#--------------------
+	### --------------------
 	function db_mysql_close() {
 		$t_result = mysql_close();
 	}
-	#--------------------
+	### --------------------
 	function db_mysql_error() {
 		$t_error = mysql_errno().":".mysql_error();
 	}
-	#--------------------
-	####################
+	### --------------------
+	###########################################################################
 	# Core HTML API
-	####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	function print_html_top() {
 		PRINT "<html>";
 	}
-	#--------------------
+	### --------------------
 	function print_head_top() {
 	   PRINT "<head>";
 	}
-	#--------------------
+	### --------------------
 	function print_title( $p_title ) {
 	   PRINT "<title>$p_title</title>";
 	}
-	#--------------------
+	### --------------------
 	function print_css( $p_css="" ) {
 		if ( !empty($p_css )) {
 			include( "$p_css" );
 		}
 	}
-	#--------------------
+	### --------------------
 	function print_meta_redirect( $p_url, $p_time ) {
 	   PRINT "<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\">";
 	}
-	#--------------------
+	### --------------------
 	function print_head_bottom() {
 	   PRINT "</head>";
 	}
-	#--------------------
+	### --------------------
 	function print_body_top() {
 		PRINT "<body>";
 	}
-	#--------------------
+	### --------------------
 	function print_header( $p_title="Mantis" ) {
 		PRINT "<div align=center><h3>$p_title</h3></div>";
 	}
-	#--------------------
+	### --------------------
 	function print_footer( $p_file ) {
 		global 	$g_string_cookie_val, $g_webmaster_email, $g_show_source;
 
@@ -100,19 +100,19 @@
 		PRINT "<address><font size=-1>Copyright (c) 2000</font></address>";
 		PRINT "<address><font size=-1><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></font></address>";
 	}
-	#--------------------
+	### --------------------
 	function print_body_bottom() {
 		PRINT "</body>";
 	}
-	#--------------------
+	### --------------------
 	function print_html_bottom() {
 		PRINT "<html>";
 	}
-	#--------------------
-	############################
+	### --------------------
+	###########################################################################
 	# HTML Appearance Helper API
-	############################
-	#--------------------
+	###########################################################################
+	### --------------------
 	# prints the user that is logged in and the date/time
 	function print_login_info() {
 		global 	$g_mantis_user_table, $g_string_cookie_val;
@@ -133,7 +133,7 @@
 		PRINT "</td>";
 		PRINT "</tr></table>";
 	}
-	#--------------------
+	### --------------------
 	function print_menu( $p_menu_file="" ) {
 		global 	$g_primary_border_color, $g_primary_color_light,
 				$g_show_login_date_info;
@@ -150,7 +150,7 @@
 		PRINT "</tr>";
 		PRINT "</table>";
 	}
-	#--------------------
+	### --------------------
 	### checks to see whether we need to be displaying the source link
 	function print_source_link( $p_file ) {
 		global $g_show_source, $g_show_source_page;
@@ -170,7 +170,7 @@
 			PRINT "</div>";
 		}
 	}
-	#--------------------
+	### --------------------
 	### checks to see whether we need to be displaying the source link
 	function print_mantis_version() {
 		global $g_mantis_version, $g_show_version;
@@ -179,11 +179,11 @@
 			PRINT "<i>Mantis version $g_mantis_version</i>";
 		}
 	}
-	#--------------------
-	##########################
+	### --------------------
+	###########################################################################
 	# Option List Printing API
-	##########################
-	#--------------------
+	###########################################################################
+	### --------------------
 	function print_handler_option_list( $p_handler_id ) {
 		global $g_mantis_user_table;
 
@@ -205,7 +205,7 @@
 			}
 		}
 	}
-	#--------------------
+	### --------------------
 	function print_duplicate_id_option_list( $p_duplicate_id ) {
 		global $g_mantis_bug_table;
 
@@ -228,7 +228,7 @@
 			}
 		}
 	}
-	#--------------------
+	### --------------------
 	### Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
 		global $g_mantis_news_table;
@@ -248,7 +248,7 @@
 			PRINT "<option value=\"$v_id\">$v_headline";
 		}
 	}
-	#--------------------
+	### --------------------
 	### Used for update pages
 	function print_field_option_list( $p_list, $p_item="" ) {
 		global $g_mantis_bug_table;
@@ -267,11 +267,11 @@
 			}
 		} ### end for
 	}
-	#--------------------
-	######################
+	### --------------------
+	###########################################################################
 	# Print API
-	######################
-	#--------------------
+	###########################################################################
+	### --------------------
 	function print_user( $p_user_id ) {
 		global $g_mantis_user_table;
 
@@ -292,7 +292,7 @@
 			PRINT "user no longer exists";
 		}
 	}
-	#--------------------
+	### --------------------
 	function print_duplicate_id( $p_duplicate_id ) {
 		global 	$g_view_bug_page, $g_view_bug_advanced_page,
 				$g_mantis_user_pref_table;
@@ -306,7 +306,7 @@
 			}
 		}
 	}
-	#--------------------
+	### --------------------
 	# prints the profiles given the user id
 	function print_profile_option_list( $p_id ) {
 		global $g_mantis_user_profile_table;
@@ -336,11 +336,11 @@
 			}
 		}
 	}
-	#--------------------
-	#####################
+	### --------------------
+	###########################################################################
 	# String printing API
-	#####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	function get_enum_string( $p_field_name ) {
 		global $g_mantis_bug_table;
 
@@ -357,13 +357,13 @@
 		    }
 	    } ### end for
 	}
-	#--------------------
+	### --------------------
 	# returns the number of items in a list
 	# default delimiter is a ,
 	function get_list_item_count( $t_enum_string, $p_delim_char="," ) {
 		return count(explode($p_delim_char,$t_enum_string));
 	}
-	#--------------------
+	### --------------------
 	### Used in summary reports
 	function print_bug_enum_summary( $p_enum, $p_status="" ) {
 		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark;
@@ -410,7 +410,7 @@
 			PRINT "</tr>";
 		} ### end for
 	}
-	#--------------------
+	### --------------------
 	### Used in summary reports
 	function print_bug_date_summary( $p_date_array ) {
 		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark;
@@ -437,7 +437,7 @@
 			PRINT "</tr>";
 		} ### end for
 	}
-	#--------------------
+	### --------------------
 	### prints a link to a bug given an ID
 	### it accounts for the user preference
 	function print_bug_link( $p_id ) {
@@ -450,7 +450,7 @@
 			PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
 		}
 	}
-	#--------------------
+	### --------------------
 	### formats the severity given the status
 	function print_formatted_severity( $p_status, $p_severity ) {
 		if ( ( ( $p_severity=="major" ) ||
@@ -463,11 +463,11 @@
 			PRINT "$p_severity";
 		}
 	}
-	#--------------------
-	####################
+	### --------------------
+	###########################################################################
 	# Cookie API
-	####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	### checks to see that a user is logged in
 	### if the user is and the account is enabled then let them pass
 	### otherwise redirect them to the login page
@@ -527,7 +527,7 @@
 			exit;
 		}
 	}
-	#--------------------
+	### --------------------
 	### checks to see if a returning user is valid
 	### also sets the last time they visited
 	### otherwise redirects to the login page
@@ -580,30 +580,7 @@
 			exit;
 		}
 	}
-	#--------------------
-	### Returns the id of the currently logged in user, otherwise 0
-	function get_current_user_id() {
-		global 	$g_string_cookie_val,
-				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
-				$g_mantis_user_table;
-
-		### if logged in
-		if ( isset( $g_string_cookie_val ) ) {
-
-			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-			### get user info
-			$query = "SELECT id
-					FROM $g_mantis_user_table
-					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_mysql_query( $query );
-			return mysql_result( $result, 0 );
-		}
-		else {
-			return 0;
-		}
-	}
-	#--------------------
+	### --------------------
 	### Returns the specified field of the currently logged in user, otherwise 0
 	function get_current_user_field( $p_field_name ) {
 		global 	$g_string_cookie_val,
@@ -626,7 +603,7 @@
 			return 0;
 		}
 	}
-	#--------------------
+	### --------------------
 	### Returns the specified field of the currently logged in user, otherwise 0
 	function get_current_user_profile_field( $p_field_name ) {
 		global 	$g_string_cookie_val,
@@ -650,7 +627,8 @@
 			return 0;
 		}
 	}
-	#--------------------
+	### --------------------
+	### Returns the number of bugntoes for the given bug_id
 	function get_bugnote_count( $p_id ) {
 		global $g_mantis_bugnote_table;
 
@@ -660,11 +638,11 @@
 		$result = db_mysql_query( $query );
 		return mysql_result( $result, 0 );
 	}
-	#--------------------
-	####################
+	### --------------------
+	###########################################################################
 	# Authentication API
-	####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	function password_match( $p_test_password, $p_password ) {
 		$salt = substr( $p_password, 0, 2 );
 		if ( crypt( $p_test_password, $salt ) == $p_password ) {
@@ -674,11 +652,11 @@
 			return false;
 		}
 	}
-	#--------------------
-	#####################
+	### --------------------
+	###########################################################################
 	# User Management API
-	#####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	# This string is used to use as the login identified for the web cookie
 	# It is not guarranteed to be unique but should be good enough
 	# It is chopped to be 128 characters in length to fit into the database
@@ -691,17 +669,17 @@
 
 		return substr( $t_cookie_string, 0, 128 );
 	}
-	#--------------------
-	####################
+	### --------------------
+	###########################################################################
 	# Preferences API
-	####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	### return a vlue of a table of the currently logged in user
 	function get_user_value( $p_table_name, $p_table_field ) {
 		global 	$g_hostname, $g_db_username, $g_db_password, $g_database_name;
 
 		### get user id
-		$u_id = get_current_user_id();
+		$u_id = get_current_user_field( "id " );
 
 		if ( $u_id ) {
 			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -721,15 +699,16 @@
 			return "";
 		}
 	}
-	#--------------------
-	####################
+	### --------------------
+	###########################################################################
 	# Date API
-	####################
-	#--------------------
+	###########################################################################
+	### --------------------
+	###
 	function days_old( $month, $day, $year ) {
 
 	}
-	#--------------------
+	### --------------------
 	function sql_to_unix_time( $p_timeString ) {
 		return mktime( substr( $p_timeString, 8, 2 ),
 					   substr( $p_timeString, 10, 2 ),
@@ -738,7 +717,7 @@
 					   substr( $p_timeString, 6, 2 ),
 					   substr( $p_timeString, 0, 4 ) );
 	}
-	#--------------------
+	### --------------------
 	# expects the paramter to be neutral in time length
 	# automatically adds the -
 	function get_bug_count_by_date( $p_time_length="day" ) {
@@ -751,43 +730,38 @@
 		$result = mysql_query( $query );
 		return mysql_result( $result, 0 );
 	}
-	#--------------------
-	####################
+	### --------------------
+	###########################################################################
 	# String API
-	####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	function string_safe( $p_string ) {
 		return addslashes( nl2br( $p_string ) );
 	}
-	#--------------------
+	### --------------------
 	function string_unsafe( $p_string ) {
 		return stripslashes( $p_string );
 	}
-	#--------------------
+	### --------------------
 	function string_display( $p_string ) {
 		return htmlspecialchars(stripslashes( $p_string ));
 	}
-	#--------------------
+	### --------------------
 	function string_display_with_br( $p_string ) {
 		return str_replace( "&lt;br&gt;", "<br>", htmlspecialchars(stripslashes( $p_string )));
 	}
-	#--------------------
+	### --------------------
 	function string_edit( $p_string ) {
 		return str_replace( "<br>", "",  stripslashes( $p_string ) );
 	}
-	#--------------------
-	#####################
+	### --------------------
+	###########################################################################
 	# Access Control API
-	#####################
-	#--------------------
+	###########################################################################
+	### --------------------
 	# "administrator", "developer", "updater", "reporter", "viewer"
-	#--------------------
-	function access_level() {
-		global $g_access_cookie;
-		return $HTTP_COOKIE_VARS[$g_access_cookie];
-	}
-	#--------------------
-	### This is used to order the access levels
+	### --------------------
+	### This is a helper function used to order the access levels
 	function access_level_value( $p_access_level ) {
 		if ( $p_access_level == "administrator" ) {
 			return 10;
@@ -806,7 +780,8 @@
 		}
 
 	}
-	#--------------------
+	### --------------------
+	### check to see if the access level is strictly equal
 	function access_level_check_equal( $p_access_level ) {
 		global $g_string_cookie_val, $g_mantis_user_table;
 
@@ -827,7 +802,8 @@
 			return false;
 		}
 	}
-	#--------------------
+	### --------------------
+	### check to see if the access level is equal or greater
 	function access_level_check_greater_or_equal( $p_access_level ) {
 		global $g_string_cookie_val, $g_mantis_user_table;
 
@@ -848,8 +824,7 @@
 			return false;
 		}
 	}
-	#--------------------
-
+	### --------------------
 	###########################################################################
 	### END                                                                 ###
 	###########################################################################

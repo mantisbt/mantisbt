@@ -78,8 +78,10 @@
 	$s_delete_bug_sure = "Are you sure you wish to delete this bug?";
 	$s_delete_bug_button = "Delete Bug";
 
-	### bug_reopen.php3
+	### bug_reopen_page.php3
 	$s_bug_reopened = "Bug has been reopened...";
+	$s_bugnote_add_reopen_button = "Add Bugnote and Reopen Bug";
+	$s_reopen_add_bugnote_title = "Add Bugnote Reason For Reopening Bug";
 
 	### bug_update.php3
 	$s_bug_updated = "Bug has been successfully updated...";

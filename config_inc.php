@@ -176,7 +176,7 @@
 	$g_bug_update_advanced_page    = "bug_update_advanced_page".$g_php;
 	$g_bug_update                  = "bug_update".$g_php;
 
-	$g_bug_reopen                  = "bug_reopen".$g_php;
+	$g_bug_reopen_page             = "bug_reopen_page".$g_php;
 
 	# vote
 	$g_bug_vote_add                = "bug_vote_add".$g_php;
