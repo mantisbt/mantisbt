@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.37 2003-01-25 18:21:08 jlatour Exp $
+	# $Id: print_api.php,v 1.38 2003-01-29 22:19:06 beerfrick Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -702,13 +702,13 @@
 	# --------------------
 	# @@@ preliminary support for multiple bug actions.
 	function print_all_bug_action_option_list() {
-		$commands = array(  'MOVE' => 'Move Bugs',
-							'ASSIGN' => 'Assign',
-							'CLOSE' => 'Close',
-							'DELETE' => 'Delete',
-							'RESOLVE' => 'Resolve',
-							'UP_PRIOR' => 'Update Priority',
-							'UP_STATUS' => 'Update Status' );
+		$commands = array(  'MOVE' => lang_get('actiongroup_menu_move'),
+							'ASSIGN' => lang_get('actiongroup_menu_assign'),
+							'CLOSE' => lang_get('actiongroup_menu_close'),
+							'DELETE' => lang_get('actiongroup_menu_delete'),
+							'RESOLVE' => lang_get('actiongroup_menu_resolve'),
+							'UP_PRIOR' => lang_get('actiongroup_menu_update_priority'),
+							'UP_STATUS' => lang_get('actiongroup_menu_update_status') );
 
 		while (list ($key,$val) = each ($commands)) {
 			PRINT "<option value=\"".$key."\">".$val."</option>";

@@ -8,16 +8,25 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.38 $
-	# $Author: jfitzell $
-	# $Date: 2003-01-08 02:35:51 $
+	# $Revision: 1.39 $
+	# $Author: beerfrick $
+	# $Date: 2003-01-29 22:19:14 $
 	#
-	# $Id: strings_russian.txt,v 1.38 2003-01-08 02:35:51 jfitzell Exp $
+	# $Id: strings_russian.txt,v 1.39 2003-01-29 22:19:14 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
-    # Charset
+	# Charset
 	$s_charset = 'Windows-1251';
+
+	# Group commands menuitems
+	$s_actiongroup_menu_move = 'Move';
+	$s_actiongroup_menu_assign = 'Assign';
+	$s_actiongroup_menu_close = 'Close';
+	$s_actiongroup_menu_delete = 'Delete';
+	$s_actiongroup_menu_resolve = 'Resolve';
+	$s_actiongroup_menu_update_priority = 'Update Priority';
+	$s_actiongroup_menu_update_status = 'Update Status';
 
 	# new strings:
 	$s_all_projects = 'Все проекты';
@@ -91,7 +100,28 @@
 	$s_priority_group_bugs_button = 'Обновить приоритет' ;
 	$s_status_group_bugs_button = 'Обновить статус' ;
 
-	#print_all_bug_page.php : display selected bugs
+	# improved JPgraphs strings
+	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
+	$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
+	$s_graph_imp_severity_title = 'Synthesis graphs by severity';
+	$s_graph_imp_category_title = 'Synthesis graphs by category';
+	$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
+	$s_by_status_pct = 'by status percentage';
+	$s_by_priority_pct = 'by priority percentage';
+	$s_by_severity_pct = 'by severity percentage';
+	$s_by_category_pct = 'by category percentage';
+	$s_by_resolution_pct = 'by resolution percentage';
+	$s_by_severity_mix = 'by severity and status';
+	$s_by_priority_mix = 'by priority and status';
+	$s_by_resolution_mix = 'by resolution and status';
+	$s_synthesis_link = 'Synthesis';
+	$s_status_link = 'Per state';
+	$s_priority_link = 'Per priority';
+	$s_severity_link = 'Per severity';
+	$s_category_link = 'Per category';
+	$s_resolution_link = 'Per resolution';
+
+	# print_all_bug_page.php : display selected bugs
 	$s_hide_button = 'Display selected only';
 
 	# print_all_bug_options.php : printing preferences
@@ -116,7 +146,44 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ОШИБКА: Это имя проекта.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
+	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
+	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
+	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
+	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
+	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
+	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
+	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
+	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
+	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
+	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
+	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
+	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
+	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
+	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
+	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
+	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
+	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
+	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
+	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
+	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
+	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
+	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
+	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
+	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
 
 	$s_login_error = 'ОШИБКА: Ваш бюджет может быть заблокирован или имя пользователя/пароль неправилен.';
 	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -128,7 +195,7 @@
 	$s_switch = 'Переключиться';
 	$s_logged_in_as = 'Зарегистрирован как';
 
-	$s_user_no_longer_exists = 'пользователь не существует';
+	$s_prefix_for_deleted_users = 'user';
 
 	$s_administrator = 'Администратор';
 
@@ -166,6 +233,7 @@
 	$s_email_feedback_msg = 'Следующий баг требует Вашей ДОПОЛНИТЕЛЬНОЙ ИНФОРМАЦИИ.';
 	$s_email_reopen_msg = 'Следующий баг был ОТКРЫТ ПОВТОРНО.';
 	$s_email_assigned_msg = 'Следующий баг НАЗНАЧЕН.';
+	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
 
 	$s_email_reporter = 'Пользователь';
 	$s_email_handler = 'Ответственный';
@@ -261,6 +329,8 @@
 
 	# account_update.php
 	$s_account_updated_msg = 'Ваш бюджет обновлен...';
+	$s_email_updated = 'Email address successfully updated';
+	$s_password_updated = 'Password successfully updated';
 
 	# bug_assign.php
 	$s_bug_assign_msg       = 'Баг был  назначен...';
@@ -290,6 +360,7 @@
 	$s_upload_file = 'Загрузка файла';
 	$s_select_file = 'Выбрать файл';
 	$s_upload_file_button = 'Загрузить файл';
+	$s_max_file_size = 'Max size';
 
 	# bug_reopen.php
 	$s_bug_reopened_msg = 'Баг открыт повторно...';
@@ -304,6 +375,15 @@
 	$s_bug_resolved_msg = 'Баг разрешен. Добавьте комментарий...';
 	$s_resolve_add_bugnote_title = 'Добавьте комментарий к решению';
 	$s_bugnote_add_resolve_button = 'Добавить комментарий';
+
+	# bug_reminder_page.php
+	$s_from = 'From';
+	$s_to = 'To';
+	$s_on = 'On';
+	$s_sent_you_this_reminder_about = 'sent you this reminder about';
+	$s_bug_reminder = 'Send a reminder';
+	$s_reminder_sent_to = 'Reminder sent to';
+	$s_bug_send_button = 'Send';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Информация о баге обновлена...';
@@ -411,6 +491,7 @@
 	$s_filter_button = 'Фильтровать';
 	$s_manage_users_link = 'Управление пользователями';
 	$s_manage_projects_link = 'Управление проектами';
+	$s_manage_custom_field_link = 'Manage Custom Fields';
 	$s_create_new_account_link = 'Cоздать бюджет';
 	$s_projects_link = 'Проекты';
 	$s_documentation_link = 'Документация';
@@ -714,10 +795,39 @@
 	$s_bug_assign_button    = 'Назначить себе';
 	$s_reopen_bug_button = 'Открыть повторно';
 	$s_attached_files = 'Присоединенные файлы';
+	$s_publish = 'Publish';
+	$s_cached = 'Cached';
 
 	# view_bug_inc.php
 
 	# view_bug_page.php
 	$s_view_advanced_link = 'Расширенный просмотр';
 	$s_viewing_bug_simple_details_title = 'Простой просмотр';
+
+	# custom field strings
+	$s_add_custom_field_button = 'New Custom Field';
+	$s_delete_custom_field_button = 'Delete Custom Field';
+	$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
+	$s_update_custom_field_button = 'Update Custom Field';
+	$s_add_existing_custom_field = 'Add This Existing Custom Field';
+	$s_edit_custom_field_title = 'Edit custom field';
+	$s_custom_fields = 'Fields';
+	$s_custom_fields_setup = 'Custom Fields';
+	$s_custom_field_name = 'Name';
+	$s_custom_field_project_count = 'Project Count';
+	$s_custom_field_type = 'Type';
+	$s_custom_field_possible_values = 'Possible Values';
+	$s_custom_field_default_value = 'Default Value';
+	$s_custom_field_valid_regexp = 'Regular Expression';
+	$s_custom_field_access_level_r = 'Read Access';
+	$s_custom_field_access_level_rw = 'Write Access';
+	$s_custom_field_length_min = 'Min. Length';
+	$s_custom_field_length_max = 'Max. Length';
+	$s_custom_field_advanced = 'Advanced';
+	$s_custom_field_sequence = 'Sequence';
+	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+
+	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
+	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
+	$s_field_delete_button = 'Delete Field';
 ?>
