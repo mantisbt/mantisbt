@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.6 2003-02-15 10:25:21 jfitzell Exp $
+	# $Id: filter_api.php,v 1.7 2003-02-19 16:19:18 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -185,7 +185,13 @@
 
 		# Now add the rest of the criteria i.e. sorting, limit.
 		$c_sort = db_prepare_string( $t_filter['sort'] );
-		$c_dir	= db_prepare_string( $t_filter['dir'] );
+		
+		if ( 'DESC' == $t_filter['dir'] ) {
+			$c_dir = 'DESC';
+		} else {
+			$c_dir = 'ASC';
+		}
+
 		$query2 .= " ORDER BY '$c_sort' $c_dir";
 
 		# Figure out the offset into the db query
