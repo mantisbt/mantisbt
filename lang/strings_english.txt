@@ -15,6 +15,7 @@
 	$s_print_all_bug_page_link = "Print Reports";
 	$s_csv_export = "CSV Export";
 	$s_login_anonymously = "Login Anonymously";
+	$s_jump_to_bugnotes = "Jump to Bugnotes";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";

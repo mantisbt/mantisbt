@@ -22,7 +22,7 @@
 ?>
 
 <?php # Bugnotes BEGIN ?>
-<p>
+<a name="bugnotes"><p>
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes

@@ -25,7 +25,7 @@ a.small-link		{ font-size: <?php echo $g_font_small ?>; }
 span.print			{ font-size: <?php echo $g_font_small ?>; }
 
 span.required 		{ font-size: <?php echo $g_font_small ?>; color: <?php echo $g_required_color ?>; }
-span.small 			{ font-size: <?php echo $g_font_small ?> }
+span.small 			{ font-size: <?php echo $g_font_small ?>; font-weight: normal; }
 span.pagetitle		{ font-size: <?php echo $g_font_large ?>; font-weight: bold; text-align: center }
 span.bold			{ font-weight: bold; }
 span.italic			{ font-style: italic; }

@@ -11,6 +11,7 @@ Mantis
  * Modified file size reports to show up as bytes.
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
+ * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
 
 03.15.2002  -   0.17.1
 

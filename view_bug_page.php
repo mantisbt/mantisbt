@@ -47,6 +47,7 @@
 <tr>
 	<td class="form-title" colspan="3">
 		<?php echo $s_viewing_bug_simple_details_title ?>
+		<span class="small"><?php print_bracket_link( "#bugnotes", $s_jump_to_bugnotes ) ?></span>
 	</td>
 	<td class="right" colspan="3">
 <?php
