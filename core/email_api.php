@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.14 2002-09-06 06:11:52 jfitzell Exp $
+	# $Id: email_api.php,v 1.15 2002-09-06 07:13:18 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -19,7 +19,11 @@
 		global $g_validate_email, $g_check_mx_record;
 
 		# if we don't validate then just accept
-		if ( OFF == $g_validate_email ) {
+		if ( OFF == config_get( 'validate_email' ) ) {
+			return true;
+		}
+
+		if ( empty( $p_email ) && ON == config_get( 'allow_blank_email' ) ) {
 			return true;
 		}
 
