@@ -721,6 +721,7 @@
 	$g_mantis_custom_field_project_table	= $g_db_table_prefix.'_custom_field_project_table';
 	$g_mantis_custom_field_table      	    = $g_db_table_prefix.'_custom_field_table';
 	$g_mantis_custom_field_string_table     = $g_db_table_prefix.'_custom_field_string_table';
+	$g_mantis_upgrade_table					= $g_db_table_prefix.'_upgrade_table';
 
 	###########################
 	# Mantis Enum Strings
