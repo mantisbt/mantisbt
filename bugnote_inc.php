@@ -74,14 +74,14 @@
 	<td class="bugnote" valign="top" width="100%">
 		<table class="hide" cellspacing="0">
 		<tr valign="top">
-			<td class="<?php echo $t_bugnote_css ?>" colspan="2">
-				<?php print_user( $v3_reporter_id ) ?><br />
-				<hr size="1" />
+			<td class="<?php echo $t_bugnote_css ?>">
+				<?php print_user( $v3_reporter_id ) ?>
 				<?php if ( PRIVATE == $v3_view_state ) { ?>
-				<span class="small"><?php echo $s_private ?></span><br />
-				<hr size="1" />
+				<span class="small">[ <?php echo $s_private ?> ]</span>
 				<?php } ?>
-				<span class="small"><?php echo $v3_date_submitted ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<br />
+				<span class="small"><?php echo $v3_date_submitted ?></span><br /><br />
+				<span class="small">
 				<?php
 					# only admins and the bugnote creator can edit/delete this bugnote
 					# bug must be open to be editable
