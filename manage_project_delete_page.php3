@@ -1,11 +1,14 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
+<?
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
@@ -20,13 +23,16 @@
 
 <p>
 <div align=center>
-There was a sql error.  Please report this to your administrator or the author of this software.
-<p>
-<?
-	$t_error = mysql_errno().":".mysql_error();
-	echo $t_error."<p>";
-	echo $f_message;
-?>
+<hr size=1 width=50%>
+
+Are you sure you want to delete this project and all attached bug reports?
+
+<form method=post action="<? echo $g_project_delete ?>">
+	<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
+	<input type=submit value="Delete Project">
+</form>
+
+<hr size=1 width=50%>
 </div>
 
 <? print_footer(__FILE__) ?>

@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -9,19 +9,21 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !access_level_check_greater_or_equal( "administrator" ) ) {
+	if ( !access_level_check_greater_or_equal( "developer" ) ) {
 		### need to replace with access error page
 		header( "Location: $g_logout_page" );
 		exit;
 	}
 
-	### remove \ from string
-	$f_category = string_unsafe( $f_category );
-	$query = "ALTER TABLE $g_mantis_bug_table
-			CHANGE category
-			category ENUM ($f_category)
-			not null";
-	$result = db_query( $query );
+	### Update entry
+	$query = "UPDATE $g_mantis_project_table
+			SET name='$f_name',
+				status='$f_status',
+				enabled='$f_enabled',
+				view_state='$f_view_state',
+				description='$f_description'
+    		WHERE id='$f_project_id'";
+    $result = db_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -29,7 +31,7 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $g_manage_category_page, $g_wait_time );
+		print_meta_redirect( $g_manage_project_menu_page, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -44,15 +46,14 @@
 <div align=center>
 <?
 	if ( $result ) {
-		PRINT "$s_categories_updated_msg<p>";
+		PRINT "$s_project_updated_msg<p>";
 	}
 	else {
 		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
-		echo $query;
 	}
 ?>
 <p>
-<a href="<? echo $g_manage_category_page ?>"><? echo $s_proceed ?></a>
+<a href="<? echo $g_manage_project_menu_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer(__FILE__) ?>

@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -14,6 +14,7 @@
 		header( "Location: $g_logout_page" );
 		exit;
 	}
+
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -32,30 +33,37 @@
 <table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100%>
-	<form method=post action="<? echo $g_manage_category_update ?>">
+	<table width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
-		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_edit_categories_title ?></b>
+		<td bgcolor=<? echo $g_table_title_color ?>>
+			<b>Edit Project Category</b>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
-		<td width=25%>
-			<? echo $s_category_names ?>
-		</td>
-		<td width=75%>
-			<input type=text name=f_category size=48 maxlength=255 value="<? echo get_enum_string( "category" ) ?>">
-		</td>
-	</tr>
-	<tr>
-		<td colspan=2 align=center>
-			<input type=submit value="<? echo $s_update_categories_button ?>">
+	<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
+		<form method=post action="<? echo $g_manage_project_category_update ?>">
+		<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
+		<input type=hidden name=f_orig_category value="<? echo $f_category ?>">
+		<td colspan=2>
+			<input type=text name=f_category size=32 maxlength=32 value="<? echo $f_category ?>">
 		</td>
 	</tr>
-	</form>
+	<tr align=center bgcolor=<? echo $g_white_color ?>>
+		<td width=50%>
+			<input type=submit value="Update Category">
+		</td>
+		</form>
+		<form method=post action="<? echo $g_manage_project_category_delete_page ?>">
+		<input type=hidden name=f_project_id value="<? echo $f_project_id ?>">
+		<input type=hidden name=f_category value="<? echo $f_category ?>">
+		<td width=50%>
+			<input type=submit value="Delete Category">
+		</td>
+		</form>
+	</tr>
 	</table>
 	</td>
 </tr>
+</form>
 </table>
 </div>
 
