@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.112 $
-	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:19 $
+	# $Revision: 1.113 $
+	# $Author: bpfennigschmidt $
+	# $Date: 2004-09-23 18:24:03 $
 	#
-	# $Id: strings_german.txt,v 1.112 2004-09-22 16:08:19 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.113 2004-09-23 18:24:03 bpfennigschmidt Exp $
 	###########################################################################
 ?>
 <?php
@@ -142,6 +142,15 @@ $s_priority_link = 'nach Priorität';
 $s_severity_link = 'nach Schwere';
 $s_category_link = 'nach Kategorie';
 $s_resolution_link = 'nach Lösung';
+$s_legend_still_open = 'Noch offen';
+$s_legend_resolved = 'Behoben';
+$s_legend_assigned = 'Zugewiesen';
+$s_legend_total = 'Gesamt';
+$s_legend_opened = 'Geöffnet';
+$s_legend_closed = 'Geschlossen';
+$s_legend_reported = 'Gemeldet';
+$s_cumulative = 'Ansteigend';
+$s_not_enough_data = 'Nicht genug Daten für den Graphen';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Nur ausgewählte anzeigen';
