@@ -15,37 +15,116 @@
 	$upgrades[] = new SQLUpgrade( 
 		'0.17-jf-1',
 		'Printing Preference Table',
-		"CREATE TABLE $t_user_print_pref_table (user_id int(7) unsigned zerofill NOT ".
+		"CREATE TABLE IF NOT EXISTS $t_user_print_pref_table (user_id int(7) unsigned zerofill NOT ".
 		  "NULL default '0000000', print_pref varchar(27) NOT NULL default '', PRIMARY KEY ".
 		  "(user_id))" );
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new FunctionUpgrade( 
 		'0.17-jf-2',
 		'Bug history',
-		"ALTER TABLE $t_bug_history_table ADD type INT(2) NOT NULL" );
+		'upgrade_0_17_jf_2' );
+	
+	function upgrade_0_17_jf_2() {
+		global $t_bug_history_table;
+		
+		if ( !db_field_exists( 'type', $t_bug_history_table ) ) {
+			$query = "ALTER TABLE $t_bug_history_table ADD type INT(2) NOT NULL";
+	
+			$result = @db_query( $query );
+	
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
-	$upgrades[] = new SQLUpgrade(
+	$upgrades[] = new FunctionUpgrade(
 		'0.17-jf-3',
 		'Auto-assigning of bugs for a default user per category',
-		"ALTER TABLE $t_project_category_table ADD user_id INT(7) NOT NULL" );
+		'upgrade_0_17_jf_3' );
+	
+	function upgrade_0_17_jf_3() {
+		global $t_project_category_table;
+		
+		if ( !db_field_exists( 'user_id', $t_project_category_table ) ) {
+			$query = "ALTER TABLE $t_project_category_table ADD user_id INT(7) NOT NULL";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new FunctionUpgrade( 
 		'0.17-jf-4',
 		'Private news support',
-		"ALTER TABLE $t_news_table ADD view_state INT(2) DEFAULT '10' NOT NULL ".
-		  "AFTER last_modified" );
+		'upgrade_0_17_jf_4' );
+	
+	function upgrade_0_17_jf_4() {
+		global $t_news_table;
+		
+		if ( !db_field_exists( 'view_state', $t_news_table ) ) {
+			$query = "ALTER TABLE $t_news_table ADD view_state INT(2) DEFAULT '10' NOT NULL
+						AFTER last_modified";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
-	$upgrades[] = new SQLUpgrade(
+	$upgrades[] = new FunctionUpgrade(
 		'0.17-jf-5',
 		'Allow news items to stay at the top',
-		"ALTER TABLE $t_news_table ADD announcement INT(1) NOT NULL AFTER view_state" );
+		'upgrade_0_17_jf_5' );
+	
+	function upgrade_0_17_jf_5() {
+		global $t_news_table;
+		
+		if ( !db_field_exists( 'announcement', $t_news_table ) ) {
+			$query = "ALTER TABLE $t_news_table ADD announcement INT(1) NOT NULL AFTER view_state";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
-
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new FunctionUpgrade( 
 		'0.17-jf-6',
 		'relationship support',
-		"ALTER TABLE $t_bug_relationship_table ADD id INT(7) UNSIGNED ZEROFILL NOT ".
-		  "NULL AUTO_INCREMENT PRIMARY KEY FIRST" );
+		'upgrade_0_17_jf_6' );
+	
+	function upgrade_0_17_jf_6() {
+		global $t_bug_relationship_table;
+		
+		if ( !db_field_exists( 'id', $t_bug_relationship_table ) ) {
+			$query = "ALTER TABLE $t_bug_relationship_table ADD id INT(7) UNSIGNED ZEROFILL NOT
+						NULL AUTO_INCREMENT PRIMARY KEY FIRST";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
 	$upgrades[] = new SQLUpgrade(
 		'0.17-custom-field-1',
