@@ -6,14 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.8 2004-05-22 11:51:43 int2str Exp $
+	# $Id: check.php,v 1.9 2004-08-06 17:19:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	error_reporting( E_ALL );
 
 	$g_skip_open_db = true;  # don't open the database in database_api.php
-	@require_once( '../core.php' );
+	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+	require_once ( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core/email_api.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
@@ -344,7 +345,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 		if ( $f_mail_test ) {
 			echo '<b><font color="#ff0000">Mail sent</font></b> - ';
 			
-			$result = mail( config_get( 'administrator_email' ), 'Testing PHP mail() function', 'Your PHP mail settings appear to be correctly set.', 'From: ' . config_get( 'administrator_email' ) . "\n" );
+			$result = email_send( config_get( 'administrator_email' ), 'Testing PHP mail() function', 'Your PHP mail settings appear to be correctly set.', 'From: ' . config_get( 'administrator_email' ) . "\n" );
 
 			if ( !$result ) {
 				echo ' PROBLEMS SENDING MAIL TO: ' . config_get( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';
