@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.90 $
+	# $Revision: 1.91 $
 	# $Author: marcelloscata $
-	# $Date: 2004-12-15 22:11:26 $
+	# $Date: 2004-12-22 20:26:42 $
 	#
-	# $Id: strings_italian.txt,v 1.90 2004-12-15 22:11:26 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.91 2004-12-22 20:26:42 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -180,7 +180,7 @@ $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected.  You are no
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page was not found.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%s) was not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
@@ -196,8 +196,8 @@ $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
@@ -236,7 +236,7 @@ $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be perform
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = "Il codice di convalida inserito non é corretto. Si prega di riprovare.";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = "Funzione non disponibile.";
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = "E' possibile eseguire la procedura di recupero password solo per gli account che hanno indicato un indirizzo e-mail";
@@ -260,6 +260,8 @@ $s_prefix_for_deleted_users = "utente";
 $s_administrator = "Amministratore";
 $s_myself = "Me stesso";
 $s_default_access_level = 'Livello di accesso di default';
+
+$s_issue_status_percentage = 'Stato anomalie (%)';
 
 # Enum Strings
 $s_access_levels_enum_string      = "10:osservatore,25:segnalatore,40:aggiornatore,55:sviluppatore,70:manager,90:amministratore";
@@ -1028,7 +1030,7 @@ $s_field_delete_button = "Elimina campo personalizzato";
 $s_confirm_custom_field_unlinking = 'Rimuovere questo campo personalizzato dal presente progetto?';
 $s_field_remove_button = 'Rimuove campo personalizzato';
 
-$s_hide_status = "Non mostrare quelli";
+$s_hide_status = "Non mostrare";
 $s_filter_closed = "Chiusi";
 $s_filter_resolved = "Risolti";
 $s_hide_closed = "Nascondi chiuse";
