@@ -93,6 +93,11 @@ Mantis ChangeLog
  * Added javascript autofocus to the login page.
  * Added javascript autofocus to the report bug pages.
  * Added tabindexes to the report bug pages.
+ * Added file upload setting information to admin_check.php
+ * Cleaned up file uploading with better error messages and hiding file upload when it's disabled in PHP
+ * Replaced '/' with DIRECTORY_SEPARATOR throughout to make things cross-platform
+ * Prevent an unauthorized user from deleting a bug by modifying the URL
+ * Fixed bug where upload paths with \'s in them kept getting escaped over and over
 
 2002.08.19  -  0.17.4a
  * Fixed the fix of the ambigious column problem
