@@ -88,6 +88,12 @@
 		'Drop mantis_project_customization_table',
 		"DROP TABLE IF EXISTS mantis_project_customization_table" );
 
+	$upgrades[] = new SQLUpgrade(
+		'0.17-jf-8',
+		'Drop votes column of mantis_bug_table',
+		"ALTER TABLE $t_bug_table DROP COLUMN votes" );
+
+
 	# The following are all changes that were goofed somewhere between 0.13 and here
 	# In some cases, changes were made in db_upgrade scripts but not applied to the
 	#  database that was used to generate db_generate.  These upgrades all attempt to
