@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.27 2005-02-28 14:42:53 thraxisp Exp $
+	# $Id: 0_18_inc.php,v 1.28 2005-03-24 02:55:17 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -589,7 +589,7 @@
 
 		$t_admin = ADMINISTRATOR;
 		$query = "select p.user_id
-				FROM $t_project_user_list_table as p, $t_user_table as u
+				FROM $t_project_user_list_table p, $t_user_table u
 				WHERE ( ( p.user_id = u.id ) AND ( u.access_level >= $t_admin ) )";
 		$result = db_query( $query );
 		$t_count = db_num_rows( $result );
@@ -623,8 +623,8 @@
 		global $t_custom_field_string_table, $t_custom_field_table;
 		$t_checkbox = CUSTOM_FIELD_TYPE_CHECKBOX;
 		$t_multilist = CUSTOM_FIELD_TYPE_MULTILIST;
-		$query = "SELECT f.field_id, f.bug_id, f.value FROM $t_custom_field_string_table AS f
-			  LEFT JOIN $t_custom_field_table as s ON f.field_id = s.id
+		$query = "SELECT f.field_id, f.bug_id, f.value FROM $t_custom_field_string_table f
+			  LEFT JOIN $t_custom_field_table s ON f.field_id = s.id
 			  WHERE (s.type = $t_checkbox) OR (s.type = $t_multilist)";
 		$result = db_query( $query );
 		$t_count = db_num_rows( $result );

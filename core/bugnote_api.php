@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.34 2005-03-21 02:03:12 thraxisp Exp $
+	# $Id: bugnote_api.php,v 1.35 2005-03-24 02:55:22 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -301,8 +301,8 @@
 			}
 
 			$query = "SELECT b.*, t.note
-			          	FROM      $t_bugnote_table AS b
-			          	LEFT JOIN $t_bugnote_text_table AS t ON b.bugnote_text_id = t.id
+			          	FROM      $t_bugnote_table b
+			          	LEFT JOIN $t_bugnote_text_table t ON b.bugnote_text_id = t.id
 			          	WHERE b.bug_id = '$c_bug_id'
 			          	ORDER BY b.date_submitted $p_user_bugnote_order";
 			$t_bugnotes = array();

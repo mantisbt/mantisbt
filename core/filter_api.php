@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.92 2005-03-23 20:01:39 thraxisp Exp $
+	# $Id: filter_api.php,v 1.93 2005-03-24 02:55:23 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -493,7 +493,7 @@
 			$t_clauses = array();
 			$t_table_name = 'user_monitor';
 			array_push( $t_from_clauses, $t_bug_monitor_table );
-			array_push( $t_join_clauses, "LEFT JOIN $t_bug_monitor_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
+			array_push( $t_join_clauses, "LEFT JOIN $t_bug_monitor_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 
 			foreach( $t_filter['user_monitor'] as $t_filter_member ) {
 				$c_user_monitor = db_prepare_int( $t_filter_member );
@@ -522,9 +522,9 @@
 			$t_clauses = array();
 			$t_table_name = 'relationship';
 			array_push( $t_from_clauses, $t_bug_relationship_table );
-			array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table as $t_table_name ON $t_table_name.destination_bug_id = $t_bug_table.id" );
+			array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_name ON $t_table_name.destination_bug_id = $t_bug_table.id" );
 			// get reverse relationships
-			if ( $c_rel_type == 1 ) array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table as $t_table_name"."2 ON $t_table_name"."2.source_bug_id = $t_bug_table.id" );
+			if ( $c_rel_type == 1 ) array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_name"."2 ON $t_table_name"."2.source_bug_id = $t_bug_table.id" );
  			array_push( $t_clauses, "($t_table_name.relationship_type='$c_rel_type' AND $t_table_name.source_bug_id='$c_rel_bug')" );
  			// get reverse relationships
 			if ( $c_rel_type == 1 ) array_push( $t_clauses, "($t_table_name"."2.relationship_type='$c_rel_type' AND $t_table_name"."2.destination_bug_id='$c_rel_bug')" );
@@ -552,7 +552,7 @@
 				if ( !$t_any_found ) {
 					$t_def = custom_field_get_definition( $t_cfid );
 					$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
-					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
+					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 
 					if ($t_def['type'] == CUSTOM_FIELD_TYPE_DATE) {
 						switch ($t_filter['custom_fields'][$t_cfid][0]) {
