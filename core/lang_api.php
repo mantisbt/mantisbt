@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.24 2004-05-30 01:26:21 vboctor Exp $
+	# $Id: lang_api.php,v 1.25 2004-07-07 22:08:41 int2str Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -32,22 +32,58 @@
 	function lang_load( $p_lang ) {
 		global $g_lang_strings, $g_loaded_language, $g_current_language;
 
-		$g_current_language = $p_lang;
+		$t_lang = $p_lang;
 
-		if ( $g_loaded_language == $p_lang ) {
+		if ( 'auto' == $t_lang ) {
+			$t_lang = config_get( 'fallback_language' );
+
+			if ( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
+				$t_accept_langs = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
+				$t_auto_map = config_get( 'language_auto_map' );
+
+				# Expand language map
+				$t_auto_map_exp = array();
+				foreach( $t_auto_map as $t_encs => $t_enc_lang ) {
+					$t_encs_arr = explode( ',', $t_encs );
+
+					foreach ( $t_encs_arr as $t_enc ) {
+						$t_auto_map_exp[ trim( $t_enc ) ] = $t_enc_lang;
+					}
+				}
+
+				# Find encoding
+				foreach ( $t_accept_langs as $t_accept_lang ) {
+					$t_tmp = explode( ';', strtolower( $t_accept_lang ) );
+
+					if ( isset( $t_auto_map_exp[ trim( $t_tmp[0] ) ] ) ) {
+						$t_valid_langs = config_get( 'language_choices_arr' );
+						$t_found_lang = $t_auto_map_exp[ trim( $t_tmp[0] ) ];
+
+						if ( in_array( $t_found_lang, $t_valid_langs, true ) ) {
+							$t_lang = $t_found_lang;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		$g_current_language = $t_lang;
+
+		if ( $g_loaded_language == $t_lang ) {
 			return;
 		}
 
 		# define current language here so that when custom_strings_inc is
 		# included it knows the current language
-		$g_loaded_language = $p_lang;
+		$g_loaded_language = $t_lang;
 
 		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 
-		if ( strcasecmp( $p_lang, "english" ) !== 0 ) {
+		if ( strcasecmp( $t_lang, "english" ) !== 0 ) {
 			require_once( $t_lang_dir . 'strings_english.txt' );
 		}
-		require_once( $t_lang_dir . 'strings_'.$p_lang.'.txt' );
+		require_once( $t_lang_dir . 'strings_'.$t_lang.'.txt' );
 
 		# Allow overriding strings declared in the language file.
 		# custom_strings_inc.php can use $g_active_language

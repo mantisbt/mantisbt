@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.172 2004-07-07 14:39:40 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.173 2004-07-07 22:08:40 int2str Exp $
 	# --------------------------------------------------------
 
 
@@ -253,16 +253,52 @@
 	################################
 
 	# --- language settings -----------
-	$g_default_language		= 'english';
+
+	# If the language is set to 'auto', the actual
+	# language is determined by the user agent (web browser)
+	# language preference.
+	$g_default_language		= 'auto';
 
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr	= array(
-		'english', 'chinese_simplified', 'chinese_traditional', 'czech',
+		'auto', 'english', 'chinese_simplified', 'chinese_traditional', 'czech',
 		'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian',
 		'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'lithuanian',
 		'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard',
 		'romanian', 'russian', 'russian_koi8', 'serbian', 'slovak', 'spanish',
 		'swedish', 'turkish' );
+
+	# Browser language mapping for 'auto' language selection
+	$g_language_auto_map = array(
+		'en-us, en-gb, en-au, en' => 'english',
+		'zh-cn, zh-sg, zh' => 'chinese_simplified',
+		'zh-hk, zh-tw' => 'chinese_traditional',
+		'cs' => 'czech',
+		'da' => 'danish',
+		'nl-be, nl' => 'dutch',
+		'et' => 'estonian',
+		'fr-be, fr-ca, fr-ch, fr' => 'french',
+		'de-de, de-at, de-ch, de' => 'german',
+		'hu' => 'hungarian',
+		'it-ch, it' => 'italian',
+		'ja' => 'japanese_sjis',
+		'ko' => 'korean',
+		'lt' => 'lithuanian',
+		'no' => 'norwegian',
+		'pl' => 'polish',
+		'pt-br' => 'portugese_brazil',
+		'pt' => 'portugese_standard',
+		'ro-mo, ro' => 'romanian',
+		'ru-mo, ru' => 'russian',
+		'sr' => 'serbian',
+		'sl' => 'slovak',
+		'es-mx, es-co, es-ar, es-cl, es-pr, es' => 'spanish',
+		'sv-fi, sv' => 'swedish',
+		'tr' => 'turkish'
+	);
+
+	# Fallback for automatic language selection 
+	$g_fallback_language	= 'english';
 
 	###############################
 	# Mantis Display Settings
@@ -479,8 +515,8 @@
 	# If recipients of the reminders are below the monitor threshold, they will not be added.
 	$g_reminder_recipents_monitor_bug = ON;
 
-        # Default Reminder View Status (VS_PUBLIC or VS_PRIVATE)
-        $g_default_reminder_view_status = VS_PUBLIC;
+	# Default Reminder View Status (VS_PUBLIC or VS_PRIVATE)
+	$g_default_reminder_view_status = VS_PUBLIC;
 
 	###################################
 	# Mantis Sponsorship Settings
