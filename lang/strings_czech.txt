@@ -11,16 +11,16 @@
   	# Czech: Milan Cizek, cizek.milan@seznam.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.43 $
-	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:12 $
+	# $Revision: 1.44 $
+	# $Author: prescience $
+	# $Date: 2003-08-22 19:08:35 $
 	#
-	# $Id: strings_czech.txt,v 1.43 2003-08-22 06:00:12 beerfrick Exp $
+	# $Id: strings_czech.txt,v 1.44 2003-08-22 19:08:35 prescience Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8259-2';
+$s_charset = 'iso-8859-2';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Pøesunout';

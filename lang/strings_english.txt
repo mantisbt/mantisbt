@@ -9,16 +9,16 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.140 $
-	# $Author: beerfrick $
-	# $Date: 2003-08-22 06:00:13 $
+	# $Revision: 1.141 $
+	# $Author: prescience $
+	# $Date: 2003-08-22 19:08:35 $
 	#
-	# $Id: strings_english.txt,v 1.140 2003-08-22 06:00:13 beerfrick Exp $
+	# $Id: strings_english.txt,v 1.141 2003-08-22 19:08:35 prescience Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = 'iso-8859-1';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Move';
