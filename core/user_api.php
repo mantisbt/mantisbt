@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.56 2003-03-12 07:56:12 jfitzell Exp $
+	# $Id: user_api.php,v 1.57 2003-04-06 23:43:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -250,18 +250,24 @@
 
 		$query = "INSERT INTO $t_user_table
 				    ( id, username, email, password, date_created, last_visit,
-				     enabled, protected, access_level, login_count, cookie_string )
+				     enabled, access_level, login_count, cookie_string )
 				  VALUES
 				    ( null, '$c_username', '$c_email', '$c_password', NOW(), NOW(),
-				     $c_enabled, $c_protected, $c_access_level, 0, '$t_cookie_string')";
+				     $c_enabled, $c_access_level, 0, '$t_cookie_string')";
 		db_query( $query );
 
 		# Create preferences for the user
 		$t_user_id = db_insert_id();
 		user_pref_set_default( $t_user_id );
 
+		# Users are added with protected set to FALSE in order to be able to update
+		# preferences.  Now set the real value of protected.
+		if ( $c_protected ) {
+			user_set_field( $t_user_id, 'protected', 1);
+		}
+
 		# Send notification email
-		if ( $p_email ) {
+		if ( !is_blank( $p_email ) ) {
 			email_signup( $t_user_id, $p_password );
 		}
 
@@ -624,7 +630,9 @@
 		$c_field_name	= db_prepare_string( $p_field_name );
 		$c_field_value	= db_prepare_string( $p_field_value );
 
-    	user_ensure_unprotected( $p_user_id );
+		if ( $p_field_name != "protected" ) {
+			user_ensure_unprotected( $p_user_id );
+		}
 
 		$t_user_table = config_get( 'mantis_user_table' );
 
