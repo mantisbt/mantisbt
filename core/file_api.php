@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.40 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: file_api.php,v 1.41 2004-02-08 08:34:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -308,22 +308,24 @@
 		# check against disallowed files
 		$t_disallowed_arr =  explode_enum_string( $t_disallowed_files );
 		foreach ( $t_disallowed_arr as $t_val ) {
-		    if ( $t_val == $t_extension ) {
-		    	return false;
-		    }
+			if ( strcasecmp( $t_val, $t_extension ) == 0 ) {
+				return false;
+			}
 		}
 
 		# if the allowed list is note populated then the file must be allowed
 		if ( is_blank( $t_allowed_files ) ) {
 			return true;
 		}
+
 		# check against allowed files
 		$t_allowed_arr = explode_enum_string( $t_allowed_files );
 		foreach ( $t_allowed_arr as $t_val ) {
-		    if ( $t_val == $t_extension ) {
+			if ( strcasecmp( $t_val, $t_extension ) == 0 ) {
 				return true;
-		    }
+			}
 		}
+
 		return false;
 	}
 	# --------------------
