@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.59 2003-02-19 17:52:43 jlatour Exp $
+	# $Id: html_api.php,v 1.60 2003-02-22 11:53:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -108,8 +108,12 @@
 	#  the menu.  This is used during the login process and other times when the
 	#  user may not be authenticated.
 	function html_page_bottom1a( $p_file = null ) {
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_SERVER;
+		}
+
 		if ( null === $p_file ) {
-			$p_file = basename( $GLOBALS['PHP_SELF'] );
+			$p_file = basename( $_SERVER['PHP_SELF'] );
 		}
 
 		html_bottom_banner();
