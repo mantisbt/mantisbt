@@ -15,7 +15,7 @@
 
 <p>
 <div align="center">
-	<?php print_bracket_link( $proj_user_menu_page, "Back" ) ?>
+	<?php print_bracket_link( $g_proj_user_menu_page, "Back" ) ?>
 </div>
 
 <p>
