@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.8 2002-10-29 09:27:47 jfitzell Exp $
+	# $Id: bug_view_advanced_page.php,v 1.9 2002-10-30 10:42:07 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -342,108 +342,57 @@
 		<table width="100%">
 			<tr align="center">
 <?php # UPDATE form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( config_get( 'update_bug_threshold' ) ) && ( $t_bug->status < RESOLVED ) ) { ?>
-	<td class="center">
-		<form method="post" action="<?php echo string_get_bug_update_page() ?>">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'update_bug_button' ) ?>" />
-		</form>
-	</td>
 <?php
+	# UPDATE button
+	if ( $t_bug->status < RESOLVED ) {
+		echo '<td class="center">';
+		html_button_bug_update( $f_bug_id );
+		echo '</td>';
 	}
-	# UPDATE form END
-?>
-<?php # ASSIGN form BEGIN ?>
-<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) && ( $t_bug->status < RESOLVED ) ) { ?>
-	<td class="center">
-		<?php #check if current user already assigned to the bug ?>
-		<?php if ( auth_get_current_user_id() != $t_bug->handler_id ) { ?>
-		<form method="post" action="bug_assign.php">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="hidden" name="f_date_submitted" value="<?php echo $t_bug->date_submitted ?>" />
-		<input type="submit" value="<?php echo lang_get( 'bug_assign_button' ) ?>" />
-		</form>
-		<?php } #end of checking if current user already assigned ?>
-	</td>
-<?php
-	} # ASSIGN form END
-?>
-<?php # RESOLVE form BEGIN ?>
-<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) && ( $t_bug->status < RESOLVED ) ) { ?>
-	<td class="center">
-		<form method="post" action="bug_resolve_page.php">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'resolve_bug_button' ) ?>" />
-		</form>
-	</td>
-<?php
-	} # RESOLVE form END
-?>
-<?php # REOPEN form BEGIN ?>
-<?php if ( empty( $f_check ) && ( $t_bug->status >= RESOLVED ) &&
-		( access_level_check_greater_or_equal( config_get( 'reopen_bug_threshold' ) ) ||
-		( $t_bug->reporter_id == $t_user_id  && ON == config_get( 'allow_reporter_reopen' ) ) ) ) { ?>
-	<td class="center">
-		<form method="post" action="bug_reopen_page.php">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'reopen_bug_button' ) ?>" />
-		</form>
-	</td>
-<?php
-	} # REOPEN form END
-?>
-<?php # CLOSE form BEGIN ?>
-<?php if ( empty( $f_check ) && ( access_level_check_greater_or_equal( config_get( 'close_bug_threshold' ) ) ||
-		( ON == config_get( 'allow_reporter_close' ) &&
-		  $t_bug->reporter_id == $t_user_id ) ) &&
-		( RESOLVED == $t_bug->status ) ) { ?>
-	<td class="center">
-		<form method="post" action="bug_close_page.php">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'close_bug_button' ) ?>" />
-		</form>
-	</td>
-<?php
-	} # CLOSE form END
-?>
-<?php # MONITOR form BEGIN ?>
-<?php
- if ( empty( $f_check ) && (( PUBLIC == $t_bug->view_state && access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) ) || ( PRIVATE == $t_bug->view_state && access_level_check_greater_or_equal( config_get( 'private_bug_threshold' ) ) )) && ! user_is_monitoring_bug( auth_get_current_user_id(), $f_bug_id ) ) {
-?>
-	<td class="center">
-		<form method="post" action="bug_monitor.php">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="hidden" name="f_action" value="add" />
-		<input type="submit" value="<?php echo lang_get( 'monitor_bug_button' ) ?>" />
-		</form>
-	</td>
-<?php
+
+	# ASSIGN button
+	if ( $t_bug->status < RESOLVED ) {
+		echo '<td class="center">';
+		html_button_bug_assign( $f_bug_id );
+		echo '</td>';
 	}
-	# MONITOR form END
-?>
-<?php # UNMONITOR form BEGIN ?>
-<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) && user_is_monitoring_bug( auth_get_current_user_id(), $f_bug_id ) ) { ?>
-	<td class="center">
-		<form method="post" action="bug_monitor.php">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="hidden" name="f_action" value="delete" />
-		<input type="submit" value="<?php echo lang_get( 'unmonitor_bug_button' ) ?>" />
-		</form>
-	</td>
-<?php
+
+	# RESOLVE button
+	if ( $t_bug->status < RESOLVED ) {
+		echo '<td class="center">';
+		html_button_bug_resolve( $f_bug_id );
+		echo '</td>';
 	}
-	# MONITOR form END
-?>
-<?php # DELETE form BEGIN ?>
-<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'allow_bug_delete_access_level' ) ) ) { ?>
-	<td class="center">
-		<form method="post" action="bug_delete.php">
-		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'delete_bug_button' ) ?>" />
-		</form>
-	</td>
-<?php
-	} # DELETE form END
+
+	# REOPEN button
+	if ( $t_bug->status >= RESOLVED ) {
+		echo '<td class="center">';
+		html_button_bug_reopen( $f_bug_id );
+		echo '</td>';
+	}
+
+	# REOPEN button
+	if ( $t_bug->status == RESOLVED ) {
+		echo '<td class="center">';
+		html_button_bug_close( $f_bug_id );
+		echo '</td>';
+	}
+
+	# MONITOR/UNMONITOR button
+	if ( user_is_monitoring_bug( auth_get_current_user_id(), $f_bug_id ) ) {
+		echo '<td class="center">';
+		html_button_bug_unmonitor( $f_bug_id );
+		echo '</td>';
+	} else {
+		echo '<td class="center">';
+		html_button_bug_monitor( $f_bug_id );
+		echo '</td>';
+	}	
+
+	# DELETE button
+	echo '<td class="center">';
+	html_button_bug_delete( $f_bug_id );
+	echo '</td>';
 ?>
 			</tr>
 		</table>

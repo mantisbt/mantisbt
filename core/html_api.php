@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.21 2002-10-23 02:18:11 jfitzell Exp $
+	# $Id: html_api.php,v 1.22 2002-10-30 10:42:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -563,5 +563,112 @@
 		PRINT '</tr>';
 		PRINT '</table>';
 	}
+
 	# --------------------
+	# Print an html button inside a form
+	function html_button ( $p_action, $p_button_text, $p_fields = null ) {
+		$p_action = urlencode( $p_action );
+		$p_button_text = string_edit_text( $p_button_text );
+		if ( null === $p_fields ) {
+			$p_fields = array();
+		}
+
+		echo "<form method=\"post\" action=\"$p_action\">\n";
+
+		foreach ( $p_fields as $key => $val ) {
+			$key = string_edit_text( $key );
+			$val = string_edit_text( $val );
+
+			echo "	<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
+		}
+
+		echo "	<input type=\"submit\" value=\"$p_button_text\" />\n";
+		echo "</form>\n";
+	}
+
+	# --------------------
+	# Print a button to update the given bug
+	function html_button_bug_update( $p_bug_id ) {
+		if ( access_level_check_greater_or_equal( config_get( 'update_bug_threshold' ) ) ) {
+			html_button( string_get_bug_update_page(),
+						 lang_get( 'update_bug_button' ), 
+						 array( 'f_bug_id' => $p_bug_id ) );
+		}
+	}
+	# --------------------
+	# Print a button to assign the given bug
+	function html_button_bug_assign( $p_bug_id ) {
+		if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
+			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+
+			if ( $t_handler_id != auth_get_current_user_id() ) {
+				html_button( 'bug_assign.php',
+							 lang_get( 'bug_assign_button' ), 
+							 array( 'f_bug_id' => $p_bug_id ) );
+			}
+		}
+	}
+	# --------------------
+	# Print a button to resolve the given bug
+	function html_button_bug_resolve( $p_bug_id ) {
+		if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
+			html_button( 'bug_resolve_page.php',
+						 lang_get( 'resolve_bug_button' ), 
+						 array( 'f_bug_id' => $p_bug_id ) );
+		}
+	}
+	# --------------------
+	# Print a button to reopen the given bug
+	function html_button_bug_reopen( $p_bug_id ) {
+		if ( access_level_check_greater_or_equal( config_get( 'reopen_bug_threshold' ) )
+			 || ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() 
+				  && ON == config_get( 'allow_reporter_reopen' ) ) ) {
+			html_button( 'bug_reopen_page.php',
+						 lang_get( 'reopen_bug_button' ), 
+						 array( 'f_bug_id' => $p_bug_id ) );
+		}
+	}
+	# --------------------
+	# Print a button to close the given bug
+	function html_button_bug_close( $p_bug_id ) {
+		if ( access_level_check_greater_or_equal( config_get( 'close_bug_threshold' ) )
+			 || ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() 
+				  && ON == config_get( 'allow_reporter_close' ) ) ) {
+			html_button( 'bug_close_page.php',
+						 lang_get( 'close_bug_button' ), 
+						 array( 'f_bug_id' => $p_bug_id ) );
+		}
+	}
+	# --------------------
+	# Print a button to monitor the given bug
+	function html_button_bug_monitor( $p_bug_id ) {
+		if ( PUBLIC == bug_get_field( $p_bug_id, 'view_state' ) ) {
+			$t_threshold = config_get( 'monitor_bug_threshold' );
+		} else {
+			$t_threshold = config_get( 'private_bug_threshold' );
+		}
+
+		if ( access_level_check_greater_or_equal( $t_threshold ) ) {
+			html_button( 'bug_monitor.php',
+						 lang_get( 'monitor_bug_button' ), 
+						 array( 'f_bug_id' => $p_bug_id, 'f_action' => 'add' ) );
+		}
+	}
+	# --------------------
+	# Print a button to unmonitor the given bug
+	#  no reason to ever disallow someone from unmonitoring a bug
+	function html_button_bug_unmonitor( $p_bug_id ) {
+		html_button( 'bug_monitor.php',
+					 lang_get( 'unmonitor_bug_button' ), 
+					 array( 'f_bug_id' => $p_bug_id, 'f_action' => 'delete' ) );
+	}
+	# --------------------
+	# Print a button to delete the given bug
+	function html_button_bug_delete( $p_bug_id ) {
+		if ( access_level_check_greater_or_equal( config_get( 'allow_bug_delete_access_level' ) ) ) {
+			html_button( 'bug_delete.php',
+						 lang_get( 'delete_bug_button' ), 
+						 array( 'f_bug_id' => $p_bug_id ) );
+		}
+	}
 ?>
