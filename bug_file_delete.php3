@@ -53,7 +53,7 @@
 <div align="center">
 <?
 	if ( $result ) {					# SUCCESS
-		PRINT "$s_file_delete_msg<p>";
+		PRINT "$s_file_deleted_msg<p>";
 	} else {							# FAILURE
 		print_sql_error( $query );
 	}

@@ -10,9 +10,22 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );  ### @@@ Need to check that the person is assigned to this project
 
+	if ( DISK == $g_file_upload_method ) {
+		# grab the file name
+		$query = "SELECT diskfile
+				FROM $g_mantis_project_file_table
+				WHERE id='$f_id'";
+		$result = db_query( $query );
+		$t_diskfile = db_result( $result );
+
+		# in windows replace with system("del $t_diskfile");
+		unlink( $t_diskfile );
+	}
+
 	$query = "DELETE FROM $g_mantis_project_file_table
 			WHERE id='$f_id'";
 	$result = db_query( $query );
+
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -34,7 +47,7 @@
 <div align="center">
 <?
 	if ( $result ) {					### SUCCESS
-		PRINT "$s_project_file_deleted_msg<p>";
+		PRINT "$s_file_deleted_msg<p>";
 	} else {							### FAILURE
 		print_sql_error( $query );
 	}
