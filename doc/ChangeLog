@@ -39,6 +39,7 @@ Mantis
  * Modified get_enum_string to use the g_ enum string value instead of the s_ enum string value.
  * Added Hungarian translation.
  * Added Japanese translation.
+ * Added Czech translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
  * Added a global option to control what access levels can delete bugs.
