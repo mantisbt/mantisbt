@@ -102,7 +102,7 @@
 		 ( $u_access_level=="reporter" ) ) {
 ?>
 <tr>
-<form method=post action="<? echo bugnote_add_page ?>">
+<form method=post action="<? echo $g_bugnote_add_page ?>">
 	<td align=center bgcolor=<? echo $g_white_color ?> colspan=2>
 	<input type=hidden name=f_id value="<? echo $v_id ?>">
 	<input type=submit value="Add Bugnote">

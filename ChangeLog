@@ -11,6 +11,10 @@ To Do:
  * Add postgreSQL support and a Database abstraction layer
  * Refine viewing preferences
 
+XX.XX.2000	-	0.10.2
+
+ * Fixed Reporter Field on update page
+
 12.03.2000	-	0.10.1
 
  * Fixed some category bugs
