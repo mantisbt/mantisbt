@@ -54,7 +54,6 @@
 ?>
 	<a href="<? echo $g_summary_page ?>"><? echo $s_summary_link ?></a> |
 	<a href="<? echo $g_account_page ?>"><? echo $s_account_link ?></a> |
-
 <? if ( access_level_check_greater_or_equal( MANAGER ) ) { ?>
 	<a href="<? echo $g_proj_user_menu_page ?>"><? echo $s_users_link ?></a> |
 <?	} ?>

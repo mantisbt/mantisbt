@@ -52,7 +52,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version = "0.15.3";
+	$g_mantis_version = "0.15.5";
 	$g_show_version   = 1;
 
 	#############################
