@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.179 $
-	# $Author: vboctor $
-	# $Date: 2004-06-28 10:13:24 $
+	# $Revision: 1.180 $
+	# $Author: int2str $
+	# $Date: 2004-07-07 20:44:54 $
 	#
-	# $Id: strings_english.txt,v 1.179 2004-06-28 10:13:24 vboctor Exp $
+	# $Id: strings_english.txt,v 1.180 2004-07-07 20:44:54 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -321,7 +321,7 @@ $s_advanced_view = 'Advanced View';
 $s_advanced_update = 'Advanced Update';
 $s_refresh_delay = 'Refresh Delay';
 $s_redirect_delay = 'Redirect Delay';
-$s_with_minimum_severity = 'With Mimimum Severity of';
+$s_with_minimum_severity = 'With Minimum Severity of';
 $s_email_on_new = 'Email on New';
 $s_email_on_assigned = 'Email on Assigned';
 $s_email_on_feedback = 'Email on Feedback';
