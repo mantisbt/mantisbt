@@ -30,7 +30,7 @@
 	check_varset( $f_duplicate_id, '' );
 	check_varset( $f_category, '' );
 
-    if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) ) {
+    if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) AND ( ON == $g_auto_set_status_to_assigned ) ) {
         $f_status = ASSIGNED;
     }
 

@@ -130,7 +130,7 @@
 		}
 
 		# Check if bug was pre-assigned or auto-assigned.
-		if ( $c_assign_id != 0 ) {
+		if ( ( $c_assign_id != 0 ) && ( ON == $g_auto_set_status_to_assigned ) ) {
 			$t_status = ASSIGNED;
 		}
 

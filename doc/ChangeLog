@@ -62,6 +62,8 @@ Mantis ChangeLog
  * Added announcement flag to news.  Announcements are always kept at the top of the news page.
  * Added $g_view_summary_threshold to configure the access level required for viewing summary page.
  * Added bugnote_dlete_page.php for bugnote delete confirmation.
+ * Added $g_auto_set_status_to_assigned to allow enabling/disabling of automatically setting the status to ASSIGNED when the defect is assigned.  Default is ON.
+
 
 2002.05.19  -  0.17.3
 
