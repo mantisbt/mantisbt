@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.81 2004-08-23 14:48:08 thraxisp Exp $
+	# $Id: bug_api.php,v 1.82 2004-08-27 00:29:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -902,6 +902,14 @@
 			return '';
 		}
 	}
+
+	# --------------------
+	# return the bug summary
+	#  this is a wrapper for the custom function
+	function bug_format_summary( $p_bug_id, $p_context ) {
+		return 	helper_call_custom_function( 'format_issue_summary', array( $p_bug_id , $p_context ) );
+	}
+		
 
 	# --------------------
 	# Returns the number of bugnotes for the given bug_id

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_inc.php,v 1.13 2004-07-16 23:03:08 vboctor Exp $
+	# $Id: bug_view_inc.php,v 1.14 2004-08-27 00:29:54 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -198,7 +198,7 @@
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->summary ?>
+		<?php echo bug_format_summary( $f_bug_id, SUMMARY_FIELD ) ?>
 	</td>
 </tr>
 

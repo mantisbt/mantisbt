@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.60 2004-08-01 22:24:58 prichards Exp $
+	# $Id: bug_view_advanced_page.php,v 1.61 2004-08-27 00:29:54 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,7 +35,7 @@
 
 	compress_enable();
 
-	html_page_top1( bug_format_id( $f_bug_id ) . ': ' . $t_bug->summary );
+	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	html_page_top2();
 ?>
 
@@ -360,7 +360,7 @@
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo bug_format_id( $f_bug_id ), ': ', $t_bug->summary ?>
+		<?php echo bug_format_summary( $f_bug_id, SUMMARY_FIELD ) ?>
 	</td>
 </tr>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.6 2004-08-04 15:02:35 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.7 2004-08-27 00:29:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Custom Function API ###
@@ -28,6 +28,26 @@
 	function custom_function_default_changelog_print_issue( $p_issue_id ) {
 		$t_bug = bug_get( $p_issue_id );
 		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_display( $t_bug->summary ), ' (', user_get_name( $t_bug->handler_id ), ')<br />';
+	}
+	
+	# --------------------
+	# format the bug summary.
+	function custom_function_default_format_issue_summary( $p_issue_id, $p_context=0 ) {
+		switch ( $p_context ) {
+			case SUMMARY_CAPTION:
+				$t_string = bug_format_id( $p_issue_id ) . ': ' . string_attribute( bug_get_field( $p_issue_id, 'summary' ) );
+				break;
+			case SUMMARY_FIELD:
+				$t_string = bug_format_id( $p_issue_id ) . ': ' . string_attribute( bug_get_field( $p_issue_id, 'summary' ) );
+				break;
+			case SUMMARY_EMAIL:
+				$t_string = bug_format_id( $p_issue_id ) . ': ' . string_attribute( bug_get_field( $p_issue_id, 'summary' ) );
+				break;
+			default:
+				$t_string = string_attribute( bug_get_field( $p_issue_id, 'summary' ) );
+				break;
+		}
+		return $t_string;
 	}
 	
 	# --------------------

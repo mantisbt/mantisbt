@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.46 2004-05-17 11:47:34 vboctor Exp $
+	# $Id: bugnote_edit_page.php,v 1.47 2004-08-27 00:29:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -54,7 +54,7 @@
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $t_bug_id );
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) ) ?>
 <?php html_page_top2() ?>
 
 <br />

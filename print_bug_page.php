@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.50 2004-08-01 22:24:59 prichards Exp $
+	# $Id: print_bug_page.php,v 1.51 2004-08-27 00:29:54 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -53,7 +53,7 @@
 	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display_links( $v2_additional_information );
 ?>
-<?php html_page_top1( $v_summary ) ?>
+<?php html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) ) ?>
 <?php
 	html_head_end();
 	html_body_begin();
@@ -262,7 +262,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		<?php echo lang_get( 'summary' ) ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php echo $v_summary ?>
+		<?php echo bug_format_summary( $f_bug_id, SUMMARY_FIELD ) ?>
 	</td>
 </tr>
 <tr class="print">

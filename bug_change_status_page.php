@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.5 2004-08-10 23:56:51 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.6 2004-08-27 00:29:54 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,7 +30,7 @@
 	
 	$t_bug = bug_get( $f_bug_id );
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1(bug_format_summary( $f_bug_id, SUMMARY_CAPTION )) ?>
 <?php html_page_top2() ?>
 
 <br />

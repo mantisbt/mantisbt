@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.08.xx  -  0.19.0a3
 
+- 0004357: [webpage] added issue ID to summary is a bit confusing (thraxisp)
 - 0003995: [bugtracker] My View: Clickable links for sections (tazza70)
 - 0003938: [localization] Untranslatable string (jlatour)
 - 0004186: [upgrade] Some upgrade scripts do not read table names from config (jlatour)
@@ -52,7 +53,7 @@ Mantis ChangeLog
 - 0003970: [bugtracker] Reopen issue logic was broken for custom reopen statuses (thraxisp)
 - 0004270: [bugtracker] Change status in mass treatment ignore defined workflow rules (thraxisp)
 - 0004275: [bugtracker] Relationship warning is now missing when a bus is resolved/closed (thraxisp)
-- 0004386: Changelog doesn´t respect user rights (vboctor).
+- 0004386: Changelog doesnÂ¥t respect user rights (vboctor).
 - 0004255: [localization] Wrong value of $g_language_auto_map (vboctor)
 - 0004293: [localization] Lang variable names broken (thraxisp)
 - 0004164: [news] Announcement news don't remain on top (masc)

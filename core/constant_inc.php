@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.28 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.29 2004-08-27 00:29:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -288,4 +288,10 @@
 	define( 'VERSION_ALL',		null );
 	define( 'VERSION_FUTURE',	0 );
 	define( 'VERSION_RELEASED',	1 );
+
+	# Contexts for bug summary
+	define( 'SUMMARY_CAPTION', 1 );
+	define( 'SUMMARY_FIELD', 2 );
+	define( 'SUMMARY_EMAIL', 3 );
+	
 ?>
