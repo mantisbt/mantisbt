@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.16 2003-02-09 00:45:17 jfitzell Exp $
+	# $Id: error_api.php,v 1.17 2003-02-17 01:50:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -88,6 +88,11 @@
 
 		if ( 'halt' == $t_method ) {
 			$t_old_contents = ob_get_contents();
+			# ob_end_clean() still sems to call the output handler which
+			#  outputs the headers indicating compression. If we had
+			#  PHP > 4.2.0 we could use ob_clean() instead but as it is
+			#  we need to disable compression.
+			compress_disable();
 			ob_end_clean();
 
 			print_page_top1();

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.36 2003-02-15 22:20:31 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.37 2003-02-17 01:50:08 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,7 +33,7 @@
 
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
 
-	compress_start();
+	compress_enable();
 
 	print_page_top1();
 	print_page_top2();
@@ -498,5 +498,4 @@
 	}
 
 	print_page_bot1( __FILE__ );
-	compress_stop();
 ?>

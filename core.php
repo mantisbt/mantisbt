@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.21 2003-02-16 22:20:33 vboctor Exp $
+	# $Id: core.php,v 1.22 2003-02-17 01:50:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -15,7 +15,7 @@
 
 	# Before doing anything else, start output buffering so we don't prevent
 	#  headers from being sent if there's a blank line in an included file
-	ob_start();
+	ob_start( 'compress_handler' );
 
 	# Include compatibility file before anything else
 	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.46 $
+	# $Revision: 1.47 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-11 09:08:56 $
+	# $Date: 2003-02-17 01:50:09 $
 	#
-	# $Id: view_all_bug_page.php,v 1.46 2003-02-11 09:08:56 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.47 2003-02-17 01:50:09 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,7 +35,7 @@
 
 	$rows = filter_get_bug_rows( &$f_page_number, null, &$t_page_count, &$t_bug_count );
 
-	compress_start();
+	compress_enable();
 
 	print_page_top1();
 
@@ -48,6 +48,4 @@
 	include( $g_view_all_include_file );
 
 	print_page_bot1( __FILE__ );
-
-	compress_stop();
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.7 2003-02-16 23:16:34 vboctor Exp $
+	# $Id: compress_api.php,v 1.8 2003-02-17 01:50:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -22,38 +22,36 @@
 	# ----------------
 	# Check if compression should be enabled.
 	function compress_is_enabled() {
-		return ( ON == config_get( 'compress_html' ) );
-	}
-	# ----------------
-	# Start output buffering with compression.
-	function compress_start() {
 		global $g_compression_started;
 
-		if ($g_compression_started) {
-			# @@@ consider triggering an error
-			return;
-		}
+		return ( $g_compression_started &&
+				 ON == config_get( 'compress_html' ) );
+	}
 
-		if  ( compress_is_enabled() ) {
-			ob_implicit_flush( 0 );
-			ob_start( 'ob_gzhandler' );
-			$g_compression_started = true;
+	# ----------------
+	# Output Buffering handler that either compresses the buffer or just
+	#  returns it, depending on the return value of compress_is_enabled()
+	function compress_handler( $p_buffer, $p_mode ) {
+		if ( compress_is_enabled() ) {
+			return ob_gzhandler( $p_buffer, $p_mode );
+		} else {
+			return $p_buffer;
 		}
 	}
+
 	# ----------------
-	# Stop buffering and flush buffer contents.
-	function compress_stop() {
+	# Enable output buffering with compression.
+	function compress_enable() {
 		global $g_compression_started;
 
-		if (!$g_compression_started) {
-			# @@@ consider triggering an error
-			return;
-		}
-
-		if  ( compress_is_enabled() ) {
-			ob_end_flush();
-			ob_implicit_flush();
-		}
+		$g_compression_started = true;
 	}
+
 	# ----------------
+	# Disable output buffering with compression.
+	function compress_disable() {
+		global $g_compression_started;
+
+		$g_compression_started = false;
+	}
 ?>
