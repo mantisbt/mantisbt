@@ -57,26 +57,15 @@
    		} else {
    			email_feedback( $f_id );
    		}
-   	} else if ( get_bug_field( $f_id, "status" ) == RESOLVED ) {
-   		email_resolved( $f_id );
    	} else {
    		email_bugnote_add( $f_id );
    	}
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
-	if ( ( ON == $g_quick_proceed )&&( $result ) ) {
-		print_header_redirect( $t_redirect_url );
-	}
-?>
-<?php print_page_top1() ?>
-<?php
 	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
+		print_header_redirect( $t_redirect_url );
+	} else {
+		print_mantis_error( ERROR_GENERIC );
 	}
 ?>
-<?php print_page_top2() ?>
-
-<?php print_proceed( $result, $query, $t_redirect_url ) ?>
-
-<?php print_page_bot1( __FILE__ ) ?>

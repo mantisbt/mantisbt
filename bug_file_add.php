@@ -63,6 +63,9 @@
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id );
+	if ( $result ) {
+		print_header_redirect( $t_redirect_url );
+	}
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -75,14 +78,10 @@
 <p>
 <div align="center">
 <?php
-	if ( $result ) {					# SUCCESS
-		PRINT "$s_operation_successful<p>";
-	} else {							# FAILURE
-		if ( 0 == $good_upload ) {
-			PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]."<p>";
-		} else {
-			print_sql_error( $query );
-		}
+	if ( 0 == $good_upload ) {
+		PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]."<p>";
+	} else {
+		print_sql_error( $query );
 	}
 
 	print_bracket_link( $t_redirect_url, $s_proceed );
