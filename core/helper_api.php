@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.34 2003-01-16 10:36:20 jfitzell Exp $
+	# $Id: helper_api.php,v 1.35 2003-02-15 07:43:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -130,10 +130,15 @@
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
 		if ( null === $t_project_id ) {
-			return (int)current_user_get_pref( 'default_project' );
-		} else {
-			return (int)$t_project_id;
+			$t_project_id = current_user_get_pref( 'default_project' );
+			
+			if ( ! project_exists( $t_project_id ) ||
+				 ! access_has_project_level( VIEWER, $t_project_id ) ) {
+				$t_project_id = 0;
+			}
 		}
+		
+		return (int)$t_project_id;
 	}
 	# --------------------
 	# Set the current project id (stored in a cookie)
