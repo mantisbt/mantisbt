@@ -39,7 +39,7 @@
 	</td>
 </tr>
 <?php # using LDAP accounts
-	if ( LDAP == $g_login_method ) {
+	if ( LDAP == config_get( 'login_method' ) ) {
 ?>
 <tr class="row-2">
 	<td colspan="2">
@@ -56,7 +56,7 @@
 	</td>
 </tr>
 <?php
-	if ( ON == $g_use_ldap_email ) {
+	if ( ON == config_get( 'use_ldap_email' ) ) {
     	$u_email = user_get_email( $u_username );
 ?>
 <tr class="row-2">
@@ -178,7 +178,7 @@
 	</td>
 <?php
 		# check if users can't delete their own accounts
-		if ( ON == $g_allow_account_delete ) {
+		if ( ON == config_get( 'allow_account_delete' ) ) {
 ?>
 	<td class="right">
 		<form method="post" action="account_delete_page.php">
