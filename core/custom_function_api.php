@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.5 2004-07-30 12:46:09 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.6 2004-08-04 15:02:35 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Custom Function API ###
@@ -44,5 +44,53 @@
 				bug_set_field( $p_issue_id, 'status', $t_status );
 			}
 		}
+	}
+
+	# --------------------
+	# Hook to validate field issue data before updating
+	# Verify that the proper fields are set with the appropriate values before proceeding 
+	# to change the status.
+	# In case of invalid data, this function should call trigger_error()
+	# p_issue_id is the issue number that can be used to get the existing state
+	# p_new_issue_data is an object (BugData) with the appropriate fields updated
+	function custom_function_default_issue_update_validate( $p_issue_id, $p_new_issue_data ) {
+	}
+
+	# --------------------
+	# Hook to notify after an issue has been updated. 
+	# In case of errors, this function should call trigger_error()
+	# p_issue_id is the issue number that can be used to get the existing state
+	function custom_function_default_issue_update_notify( $p_issue_id ) {
+	}
+
+	# --------------------
+	# Hook to validate field settings before creating an issue
+	# Verify that the proper fields are set before proceeding to create an issue
+	# In case of errors, this function should call trigger_error()
+	# p_new_issue_data is an object (BugData) with the appropriate fields updated
+	function custom_function_default_issue_create_validate( $p_new_issue_data ) {
+	}
+
+	# --------------------
+	# Hook to notify after aa issue has been created.
+	# In case of errors, this function should call trigger_error()
+	# p_issue_id is the issue number that can be used to get the existing state
+	function custom_function_default_issue_create_notify( $p_issue_id ) {
+	}
+
+	# --------------------
+	# Hook to validate field settings before deleting an issue.
+	# Verify that the issue can be deleted before the actual deletion.
+	# In the case that the issue should not be deleted, this function should
+	# call trigger_error().
+	# p_issue_id is the issue number that can be used to get the existing state
+	function custom_function_default_issue_delete_validate( $p_issue_id ) {
+	}
+
+	# --------------------
+	# Hook to notify after an issue has been deleted.
+	# p_issue_data is the issue data (BugData) that reflects the last status of the
+	# issue before it was deleted.
+	function custom_function_default_issue_delete_notify( $p_issue_data ) {
 	}
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.66 2004-08-04 01:38:06 thraxisp Exp $
+	# $Id: bug_update.php,v 1.67 2004-08-04 15:02:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -63,6 +63,9 @@
 		$t_bug_data->status = config_get( 'bug_assigned_status' );
 	}
 
+	helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data ) );
+
+
 	$t_custom_status_label = "update"; # default info to check
 	if ( $t_bug_data->status == config_get( 'bug_resolved_status_threshold' ) ) {
 		$t_custom_status_label = "resolved";
@@ -105,5 +108,7 @@
 	# Update the bug entry
 	bug_update( $f_bug_id, $t_bug_data, true );
 
+	helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
+  
 	print_successful_redirect_to_bug( $f_bug_id );
 ?>

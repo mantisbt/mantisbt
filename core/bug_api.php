@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.76 2004-08-01 17:28:58 prichards Exp $
+	# $Id: bug_api.php,v 1.77 2004-08-04 15:02:25 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -294,36 +294,26 @@
 	# --------------------
 	# Create a new bug and return the bug id
 	#
-	# @@@ pass in a bug object instead of all these params
-	function bug_create( $p_project_id,
-				$p_reporter_id, $p_handler_id,
-				$p_priority,
-				$p_severity, $p_reproducibility,
-				$p_category,
-				$p_os, $p_os_build,
-				$p_platform, $p_version,
-				$p_build,
-				$p_profile_id, $p_summary, $p_view_state,
-				$p_description, $p_steps_to_reproduce, $p_additional_info ) {
+	function bug_create( $p_bug_data ) {
 
-		$c_summary				= db_prepare_string( $p_summary );
-		$c_description			= db_prepare_string( $p_description );
-		$c_project_id			= db_prepare_int( $p_project_id );
-		$c_reporter_id			= db_prepare_int( $p_reporter_id );
-		$c_handler_id			= db_prepare_int( $p_handler_id );
-		$c_priority				= db_prepare_int( $p_priority );
-		$c_severity				= db_prepare_int( $p_severity );
-		$c_reproducibility		= db_prepare_int( $p_reproducibility );
-		$c_category				= db_prepare_string( $p_category );
-		$c_os					= db_prepare_string( $p_os );
-		$c_os_build				= db_prepare_string( $p_os_build );
-		$c_platform				= db_prepare_string( $p_platform );
-		$c_version				= db_prepare_string( $p_version );
-		$c_build				= db_prepare_string( $p_build );
-		$c_profile_id			= db_prepare_int( $p_profile_id );
-		$c_view_state			= db_prepare_int( $p_view_state );
-		$c_steps_to_reproduce	= db_prepare_string( $p_steps_to_reproduce );
-		$c_additional_info		= db_prepare_string( $p_additional_info );
+		$c_summary				= db_prepare_string( $p_bug_data->summary );
+		$c_description			= db_prepare_string( $p_bug_data->description );
+		$c_project_id			= db_prepare_int( $p_bug_data->project_id );
+		$c_reporter_id			= db_prepare_int( $p_bug_data->reporter_id );
+		$c_handler_id			= db_prepare_int( $p_bug_data->handler_id );
+		$c_priority				= db_prepare_int( $p_bug_data->priority );
+		$c_severity				= db_prepare_int( $p_bug_data->severity );
+		$c_reproducibility		= db_prepare_int( $p_bug_data->reproducibility );
+		$c_category				= db_prepare_string( $p_bug_data->category );
+		$c_os					= db_prepare_string( $p_bug_data->os );
+		$c_os_build				= db_prepare_string( $p_bug_data->os_build );
+		$c_platform				= db_prepare_string( $p_bug_data->platform );
+		$c_version				= db_prepare_string( $p_bug_data->version );
+		$c_build				= db_prepare_string( $p_bug_data->build );
+		$c_profile_id			= db_prepare_int( $p_bug_data->profile_id );
+		$c_view_state			= db_prepare_int( $p_bug_data->view_state );
+		$c_steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
+		$c_additional_info		= db_prepare_string( $p_bug_data->additional_info );
 		$c_sponsorship_total = 0;
 
 		# Summary cannot be blank

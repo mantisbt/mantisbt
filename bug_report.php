@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.33 2004-08-01 22:24:58 prichards Exp $
+	# $Id: bug_report.php,v 1.34 2004-08-04 15:02:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,32 +25,33 @@
 <?php
 	access_ensure_project_level( config_get('report_bug_threshold' ) );
 
-	$f_build				= gpc_get_string( 'build', '' );
-	$f_platform				= gpc_get_string( 'platform', '' );
-	$f_os					= gpc_get_string( 'os', '' );
-	$f_os_build				= gpc_get_string( 'os_build', '' );
-	$f_product_version		= gpc_get_string( 'product_version', '' );
-	$f_profile_id			= gpc_get_int( 'profile_id', 0 );
-	$f_handler_id			= gpc_get_int( 'handler_id', 0 );
-	$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
+	$t_bug_data = new BugData;
+	$t_bug_data->build				= gpc_get_string( 'build', '' );
+	$t_bug_data->platform				= gpc_get_string( 'platform', '' );
+	$t_bug_data->os					= gpc_get_string( 'os', '' );
+	$t_bug_data->os_build				= gpc_get_string( 'os_build', '' );
+	$t_bug_data->product_version		= gpc_get_string( 'product_version', '' );
+	$t_bug_data->profile_id			= gpc_get_int( 'profile_id', 0 );
+	$t_bug_data->handler_id			= gpc_get_int( 'handler_id', 0 );
+	$t_bug_data->view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
 
-	$f_category				= gpc_get_string( 'category', '' );
-	$f_reproducibility		= gpc_get_int( 'reproducibility' );
-	$f_severity				= gpc_get_int( 'severity' );
-	$f_priority				= gpc_get_int( 'priority', NORMAL );
-	$f_summary				= gpc_get_string( 'summary' );
-	$f_description			= gpc_get_string( 'description' );
-	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
-	$f_additional_info		= gpc_get_string( 'additional_info', '' );
+	$t_bug_data->category				= gpc_get_string( 'category', '' );
+	$t_bug_data->reproducibility		= gpc_get_int( 'reproducibility' );
+	$t_bug_data->severity				= gpc_get_int( 'severity' );
+	$t_bug_data->priority				= gpc_get_int( 'priority', NORMAL );
+	$t_bug_data->summary				= gpc_get_string( 'summary' );
+	$t_bug_data->description			= gpc_get_string( 'description' );
+	$t_bug_data->steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
+	$t_bug_data->additional_info		= gpc_get_string( 'additional_info', '' );
 
 	$f_file					= gpc_get_file( 'file', null );
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
-	$f_project_id			= gpc_get_int( 'project_id' );
+	$t_bug_data->project_id			= gpc_get_int( 'project_id' );
 
-	$t_reporter_id		= auth_get_current_user_id();
+	$t_bug_data->reporter_id		= auth_get_current_user_id();
 	$t_upload_method	= config_get( 'file_upload_method' );
 
-	$f_summary			= trim( $f_summary );
+	$t_bug_data->summary			= trim( $t_bug_data->summary );
 
 	# If a file was uploaded, and we need to store it on disk, let's make
 	#  sure that the file path for this project exists
@@ -66,22 +67,24 @@
 
 
 	# if a profile was selected then let's use that information
-	if ( 0 != $f_profile_id ) {
+	if ( 0 != $t_bug_data->profile_id ) {
 		$row = user_get_profile_row( $t_reporter_id, $f_profile_id );
 
-		if ( is_blank( $f_platform ) ) {
-			$f_platform = $row['platform'];
+		if ( is_blank( $t_bug_data->platform ) ) {
+			$t_bug_data->platform = $row['platform'];
 		}
-		if ( is_blank( $f_os ) ) {
-			$f_os = $row['os'];
+		if ( is_blank( $t_bug_data->os ) ) {
+			$t_bug_data->os = $row['os'];
 		}
-		if ( is_blank( $f_os_build ) ) {
-			$f_os_build = $row['os_build'];
+		if ( is_blank( $t_bug_data->os_build ) ) {
+			$t_bug_data->os_build = $row['os_build'];
 		}
 	}
 
+	helper_call_custom_function( 'issue_create_validate', array( $t_bug_data ) );
+
 	# Validate the custom fields before adding the bug.
-	$t_related_custom_field_ids = custom_field_get_linked_ids( $f_project_id );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 		if ( $t_def['require_report'] && ( gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], '' ) == '' ) ) {
@@ -95,17 +98,7 @@
 	}
 
 	# Create the bug
-	$t_bug_id = bug_create( $f_project_id,
-					$t_reporter_id, $f_handler_id,
-					$f_priority,
-					$f_severity, $f_reproducibility,
-					$f_category,
-					$f_os, $f_os_build,
-					$f_platform, $f_product_version,
-					$f_build,
-					$f_profile_id, $f_summary, $f_view_state,
-					$f_description, $f_steps_to_reproduce, $f_additional_info );
-
+	$t_bug_id = bug_create( $t_bug_data );
 
 	# Handle the file upload
 	if ( is_uploaded_file( $f_file['tmp_name'] ) &&
@@ -130,6 +123,8 @@
 	}
 
 	email_new_bug( $t_bug_id );
+
+	helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
 
 	html_page_top1();
 

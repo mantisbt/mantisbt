@@ -26,6 +26,7 @@ Mantis ChangeLog
 - 0003710: [bugtracker] time stats in summary to use resolved (thraxisp)
 - 0003772: [bugtracker] Status updating should be different from bug updating (thraxisp)
 - 0004031: [bugtracker] Hiding/removing fixed_in_versions (thraxisp)
+- 0004138: [bugtracker] Add validation / notifications hooks for issue create/update/delete (thraxisp)
 - 0004154: [bugtracker] "Product version" and "Fixed in Version" do not get updated on rename (vboctor)
 - 0004160: [bugtracker] Javascript error in the issue view pages (vboctor)
 - 0004175: [bugtracker] Links are not hyperlinked properly if containing '[' or ']' (vboctor)
