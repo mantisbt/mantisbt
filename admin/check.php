@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.7 2004-03-18 14:02:28 vboctor Exp $
+	# $Id: check.php,v 1.8 2004-05-22 11:51:43 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -252,7 +252,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 			<td bgcolor="#ffcc22">
 				<span class="title">WARNING - register_globals - WARNING</span><br /><br />
 
-				You have register_globals enabled in PHP, which is considered a security risk.  Since version 0.18, Mantis has no longer relied on register_globals being enabled.  PHP versions later that 4.2.0 have this option disabled by default.  For more information on the security issues associated with enabling register_globals, see <a href="http://www.php.net/manual/en/security.registerglobals.php">this page</a>.
+				You have register_globals enabled in PHP, which is considered a security risk.  Since version 0.18, Mantis has no longer relied on register_globals being enabled.  PHP versions later that 4.2.0 have this option disabled by default.  For more information on the security issues associated with enabling register_globals, see <a href="http://www.php.net/manual/en/security.globals.php">this page</a>.
 
 				If you have no other PHP applications that rely on register_globals, you should add the line <pre>register_globals = Off</pre> to your php.ini file;  if you do have other applications that require register_globals, you could consider disabling it for your Mantis installation by adding the line <pre>php_value register_globals off</pre> to a <tt>.htaccess</tt> file or a <tt>&lt;Directory&gt;</tt> or <tt>&lt;Location&gt;</tt> block in your apache configuration file.  See the apache documentation if you require more information.
 			</td>
