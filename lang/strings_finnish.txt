@@ -11,11 +11,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.22 $
+	# $Revision: 1.23 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:07 $
+	# $Date: 2004-12-29 05:39:24 $
 	#
-	# $Id: strings_finnish.txt,v 1.22 2004-10-15 07:07:07 bigbadger Exp $
+	# $Id: strings_finnish.txt,v 1.23 2004-12-29 05:39:24 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -55,7 +55,7 @@ $s_jump = 'Siirry';
 $s_copy_users = 'Kopioi käyttäjät';
 $s_copy_categories_from = 'Kopioi kategoriat täältä';
 $s_copy_categories_to = 'Kopioi kategoriat tänne';
-$s_bug_history = 'Tapahtuman&nbsp;historia';
+$s_bug_history = 'Tapahtuman historia';
 $s_field = 'Kenttä';
 $s_old_value = 'Vanha arvo';
 $s_new_value = 'Uusi arvo';
@@ -281,8 +281,8 @@ $s_new_account_greeting2 = '\'. Viimeistele rekisteröinti käymällä ao. osoittees
 $s_new_account_username = 'Käyttäjätunnus: ';
 $s_new_account_message = 'Jos et ole yrittänyt rekisteröityä tällä sähköpostiosoitteella, sinun ei tarvitse tehdä mitään.' . "\n\n";
 $s_new_account_do_not_reply = 'ÄLÄ VASTAA TÄHÄN SÄHKÖPOSTIVIESTIIN';
-$s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
+$s_new_account_email = 'Sähköpostiosoite: ';
+$s_new_account_IP = 'IP-osoite: ';
 $s_new_account_signup_msg = 'Käyttäjätili on luotu:';
 
 $s_reset_request_msg = 'Osoitteellasi on pyydetty salasanan vaihtoa. Jos et ole tätä tehnyt, voit jättää tämän viestin huomioimatta.' . "\n\n" . 'Vaihtaaksesi salasanansi, ole hyvä ja vieraile ao. osoitteessa:';
@@ -306,18 +306,18 @@ $s_email_notification_title_for_action_sponsorship_updated = 'Seuraavan tapahtum
 $s_email_notification_title_for_action_sponsorship_deleted = 'Seuraavan tapahtuman sponsorointi on peruttu.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Tähän tapahtumaan on lisätty muistiinpano.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "Seuraava tapahtuma on duplikaatti tapahtumasta %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "Tapahtuma %s on määritelty duplikaatiksi seuraavalle tapahtumalle.";
+$s_email_notification_title_for_action_related_to_relationship_added = "Seuraava tapahtuma on määritelty relaatioksi tapahtumalle %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "Seuraava tapahtuma on määritelty isätapahtumaksi tapahtumalle %s.";
+$s_email_notification_title_for_action_blocks_relationship_added = "Seuraava tapahtuma on määritelty lapsitapahtumaksi tapahtumalle %s.";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "Seuraavalta tapahtumalta on poistettu tapahtuman %s duplikaattisuus.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "Tapahtumalta %s on poistettu seuraavan tapahtuman duplikaattitila.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "Seuraavalta tapahtumalta on poistettu relaatio tapahtumaan %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "Seuraava tapahtuma ei ole enää tapahtuman %s isätapahtuma.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "Seuraava tapahtuma ei enää ole tapahtuman %s lapsitapahtuma.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Relaatiotapahtuma %s on ratkaistu.";
+$s_email_notification_title_for_action_relationship_child_closed = "Relaatiotapahtuma %s on suljettu.";
 
 $s_email_reporter = 'Raportoija';
 $s_email_handler = 'Käsittelijä';
@@ -490,9 +490,9 @@ $s_bug_reminder = 'Lähetä muistutus';
 $s_reminder_sent_to = 'Muistutus lähetetty';
 $s_bug_send_button = 'Lähetä';
 $s_reminder = 'Muistutus';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = 'Tämä muistutus lähetetään niille vastaanottajille, jotka seuraavat tätä tapahtumaa.';
+$s_reminder_monitor = 'Nämä vastaanottajat lisätään tapahtuman seuraajien listalle. Tapahtumaseurannan voi peruuttaa painamalla painiketta Lopeta tapahtuman seuranta.';
+$s_reminder_store = 'Tämä muistutus talletetaan tapahtuman tietoihin.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Tapahtuma on onnistuneesti päivitetty...';
@@ -609,8 +609,8 @@ $s_hide_disabled = 'Piilota pois käytöstä olevat';
 $s_filter_button = 'Sovella suodinta';
 $s_manage_users_link = 'Käyttäjähallinta';
 $s_manage_projects_link = 'Projektinhallinta';
-$s_manage_custom_field_link = 'Mukautetut kentät';
-$s_permissions_summary_report = 'Permissions Report';
+$s_manage_custom_field_link = 'Muokkaa mukautettuja kenttiä';
+$s_permissions_summary_report = 'Käyttöoikeusraportti';
 $s_create_new_account_link = 'Luo uusi käyttäjätunnus';
 $s_projects_link = 'Projektit';
 $s_documentation_link = 'Dokumentaatio';
@@ -726,22 +726,22 @@ $s_account_reset_msg = 'Vahvistusviesti on lähetetty sähköpostiosoitteeseesi...'
 $s_account_reset_msg2 = 'Käyttäjätunnukselle on asetettu tyhjä salasana...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = 'Käyttäjätunnus on suojattu. Käyttöoikeustaso ja Käytössä-valinnat suojattu. Kaikki muu käyttäjätunnuksessa päivitetty...';
+$s_manage_user_protected_msg = 'Käyttäjätunnus on suojattu. Käyttöoikeustaso ja Käytössä -valinnat suojattu. Kaikki muu käyttäjätunnuksessa päivitetty...';
 $s_manage_user_updated_msg = 'Käyttäjätunnus päivitetty...';
 
 # menu_inc.php
 $s_main_link = 'Pääsivu';
-$s_view_bugs_link = 'Näytä&nbsp;tapahtumat';
-$s_report_bug_link = 'Lisää&nbsp;tapahtuma';
+$s_view_bugs_link = 'Näytä tapahtumat';
+$s_report_bug_link = 'Lisää tapahtuma';
 $s_changelog_link = 'Muutosloki';
 $s_summary_link = 'Yhteenveto';
 $s_account_link = 'Käyttäjätilini';
 $s_users_link = 'Käyttäjät';
 $s_manage_link = 'Hallinta';
-$s_edit_news_link = 'Muokkaa&nbsp;uutisia';
+$s_edit_news_link = 'Muokkaa uutisia';
 $s_docs_link = 'Dokumentaatio';
-$s_logout_link = 'Kirjaudu&nbsp;ulos';
-$s_my_view_link = 'Oma&nbsp;näkymä';
+$s_logout_link = 'Kirjaudu ulos';
+$s_my_view_link = 'Oma näkymä';
 
 # meta_inc.php
 
@@ -771,7 +771,7 @@ $s_update_news_button = 'Päivitä uutiset';
 
 # news_menu_page.php
 $s_add_news_title = 'Lisää uutisia';
-$s_post_to = 'Post to';
+$s_post_to = 'Lähetä osoitteeseen:';
 $s_post_news_button = 'Lisää uutinen';
 $s_edit_or_delete_news_title = 'Muokkaa tai poista uutisia';
 $s_edit_post = 'Muokkaa artikkelia';
@@ -998,7 +998,7 @@ $s_custom_field_project_count = 'Projektien lukumäärä';
 $s_custom_field_type = 'Tyyppi';
 $s_custom_field_possible_values = 'Mahdolliset arvot';
 $s_custom_field_default_value = 'Oletusarvo';
-$s_custom_field_valid_regexp = 'Regular Expression';
+$s_custom_field_valid_regexp = 'Säännöllinen lauseke (regexp)';
 $s_custom_field_access_level_r = 'Lukuoikeus';
 $s_custom_field_access_level_rw = 'Kirjoitusoikeus';
 $s_custom_field_length_min = 'Vähimmäispituus';
@@ -1026,7 +1026,7 @@ $s_filter_resolved = "Ratkaistu";
 $s_hide_closed = "Piilota suljetut";
 $s_hide_resolved = "Piilota ratkaistut";
 $s_and_above = 'ja korkeammat';
-$s_advanced_filters = 'Edistyneet suotimet';
+$s_advanced_filters = 'Lisäsuotimet';
 $s_simple_filters = 'Yksinkertaiset suotimet';
 $s_monitored_by = 'Seuraaja';
 
@@ -1054,22 +1054,22 @@ $s_changelog = 'Muutosloki';
 # Http auth
 $s_http_auth_realm = "Mantis kirjautuminen";
 
-$s_bug = "issue";
+$s_bug = "tapahtuma";
 $s_add_new_relationship = "Uusi relaatio";
 $s_add_new_relationship_button = "Lisää";
 $s_this_bug = "Nykyinen tapahtuma";
 $s_relationship_added = "Relaatio lisätty";
 $s_relationship_deleted = "Relaatio poistettu";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
+$s_no_relationship = "ei relaatiota";
+$s_relationship_replaced = "Relaatio korvattu";
+$s_replace_relationship_button = "Korvaa";
+$s_replace_relationship_sure_msg = "Näiden kahden tapahtuman välillä on jo relaatio. Oletko varma, että haluat korvata sen?";
+$s_relationship_with_parent = "Relaatio isätapahtuman kanssa";
 $s_delete_relationship_button = "Poista";
 $s_delete_relationship_sure_msg = "Oletko varma, että haluat poistaa tämän relaation?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>HUOM!</b>. Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br>Ennen isätapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkitä ratkaistuiksi tai suljetuiksi.";
-$s_create_child_bug_button = "Create Clone";
+$s_create_child_bug_button = "Luo klooni";
 $s_bug_cloned_to = "Tapahtuma kloonattu";
 $s_bug_created_from = "Tapahtuma luotu tapahtumasta";
 # Relationship Graphs
@@ -1082,62 +1082,65 @@ $s_view_issue = "Näytä tapahtuma";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
-$s_view = 'View';
-$s_issues = 'ISSUES';
-$s_report_issue = 'Report an issue';
-$s_update_issue = 'Update an issue';
-$s_monitor_issue = 'Monitor an issue';
-$s_handle_issue = 'Handle an issue';
-$s_move_issue = 'Move an issue';
-$s_delete_issue = 'Delete an issue';
-$s_reopen_issue = 'Reopen an issue';
-$s_view_private_issues = 'View private issues';
-$s_update_readonly_issues = 'Update readonly issues';
-$s_update_issue_status = 'Update issue status';
-$s_set_view_status = 'Set view status (public vs private)';
-$s_update_view_status = 'Update view status (public vs private)';
-$s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
-$s_notes = 'NOTES';
-$s_add_notes = 'Add notes';
-$s_update_notes = 'Update notes';
-$s_delete_note = 'Delete note';
-$s_view_private_notes = 'View private notes';
-$s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
-$s_download_attachments = 'Download attachments';
-$s_delete_attachments = 'Delete attachments';
-$s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
-$s_save_filters = 'Save filters';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
-$s_create_project = 'Create project';
-$s_delete_project = 'Delete project';
-$s_manage_project = 'Manage project';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
-$s_sponsorships = 'SPONSORSHIPS';
-$s_view_sponsorship_details = 'View sponsorship details';
-$s_view_sponsorship_total = 'View sponsorship total';
-$s_sponsor_issue = 'Sponsor issue';
-$s_assign_sponsored_issue = 'Assign sponsored issue';
-$s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_send_reminders = 'Send reminders';
-$s_add_profiles = 'Add profiles';
-$s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
-$s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_perm_rpt_capability = 'Oikeus';
+$s_view = 'Näytä';
+$s_issues = 'TAPAHTUMAT';
+$s_report_issue = 'Lisää tapahtumia';
+$s_update_issue = 'Päivitä tapahtumia';
+$s_monitor_issue = 'Seuraa tapahtumia';
+$s_handle_issue = 'Muokkaa tapahtumia';
+$s_move_issue = 'Tapahtuman siirto';
+$s_delete_issue = 'Tapahtuman poisto';
+$s_reopen_issue = 'Tapahtuman uudelleenavaus';
+$s_view_private_issues = 'Näytä ykstyiset tapahtumat';
+$s_update_readonly_issues = 'Vain lukuoikeuksilla varustettujen tapahtumien päivitysoikeus';
+$s_update_issue_status = 'Tapahtuman tilan päivitys';
+$s_set_view_status = 'Näyttötilan määritys (julkinen/yksityinen)';
+$s_update_view_status = 'Näyttötilan päivitys (julkinen/yksityinen)';
+$s_show_list_of_users_monitoring_issue = 'Näytä lista tapahtumaa seuraavista käyttäjistä';
+$s_notes = 'MUISTIINPANOT';
+$s_add_notes = 'Lisää muistiinpanoja';
+$s_update_notes = 'Päivitä muistiinpanoja';
+$s_delete_note = 'Poista muistiinpano';
+$s_view_private_notes = 'Näytä yksityiset muistiinpanot';
+$s_news = 'UUTISET';
+$s_view_private_news = 'Näytä yksityiset uutiset';
+$s_manage_news = 'Hallinnoi uutisia';
+$s_view_list_of_attachments = 'Näytä liitetiedostolistaukset';
+$s_download_attachments = 'Imuroi liitetiedostoja';
+$s_delete_attachments = 'Poista liitetiedostoja';
+$s_delete_attachment_button = "Poista";
+$s_delete_attachment_sure_msg = "Oletko varma, että haluat poistaa tämän liitetiedoston?";
+$s_upload_issue_attachments = 'Päivitä tapahtuman liitetiedostoja';
+$s_filters = 'suotimet';
+$s_save_filters = 'Tallenna suotimet';
+$s_save_filters_as_shared = 'Tallenna suotimet jaettuina';
+$s_use_saved_filters = 'Käytä talletettuja suotimia';
+$s_create_project = 'Luo projekti';
+$s_delete_project = 'Poista projekti';
+$s_manage_project = 'Hallinnoi projektia';
+$s_manage_user_access_to_project = 'Hallinnoi projektin käyttäjäoikeuksia';
+$s_automatically_included_in_private_projects = 'Lisää automaattisesti yksityisiin projekteihin';
+$s_project_documents = 'PROJEKTIDOKUMENTIT';
+$s_view_project_documents = 'Näytä projektin dokumentit';
+$s_upload_project_documents = 'Lähetä projektidokumentteja';
+$s_link_custom_fields_to_projects = 'Liitä kustomoituja kenttiä projekteihin';
+$s_sponsorships = 'SPONSOROINNIT';
+$s_view_sponsorship_details = 'Näytä sponsoroinnin yksityiskohdat';
+$s_view_sponsorship_total = 'Näytä sponssit yhteensä';
+$s_sponsor_issue = 'Sponsoroi tapahtumaa';
+$s_assign_sponsored_issue = 'Osoita sponsoroitu tapahtuma';
+$s_handle_sponsored_issue = 'Käsittele sponsoroitua tapahtumaa';
+$s_others = 'MUUT';
+$s_see_email_addresses_of_other_users = 'Näytä muiden käyttäjien sähköpostiosoitteet';
+$s_send_reminders = 'Lähetä muistutuksia';
+$s_add_profiles = 'Lisää profiileja';
+$s_notify_of_new_user_created = 'Uuden käyttäjän luonnin jälkeen ilmoitus';
+$s_email_notification = 'SÄHKÖPOSTI-ILMOITUKSET';
+$s_status_changed_to = 'Tila muutettu';
+$s_email_on_deleted = 'Sähköpostia, kun tapahtuma poistetaan';
+$s_email_on_sponsorship_changed = 'Sähköpostia, kun tapahtuman sponssi muuttuu';
+$s_email_on_relationship_changed = 'Sähköpostia, kun tapahtuman relaatioita muokataan';
 ?>

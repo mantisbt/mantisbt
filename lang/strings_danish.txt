@@ -6,12 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# Danish: Søren Mortensen, sm@artmus.dk
+	# Danish Update: Gunner Poulsen, gunner@gnuskole.dk
 	# -------------------------------------------------
-	# $Revision: 1.73 $
+	# $Revision: 1.74 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:06 $
+	# $Date: 2004-12-29 05:39:24 $
 	#
-	# $Id: strings_danish.txt,v 1.73 2004-10-15 07:07:06 bigbadger Exp $
+	# $Id: strings_danish.txt,v 1.74 2004-12-29 05:39:24 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -20,54 +21,54 @@ $s_charset = 'iso-8859-15';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Flyt';
-$s_actiongroup_menu_copy = 'Copy';
+$s_actiongroup_menu_copy = 'Kopier';
 $s_actiongroup_menu_assign = 'Tildel';
 $s_actiongroup_menu_close = 'Luk';
 $s_actiongroup_menu_delete = 'Slet';
 $s_actiongroup_menu_resolve = 'Løs';
-$s_actiongroup_menu_update_priority = 'Opdater Prioritering';
-$s_actiongroup_menu_update_status = 'Opdater Status';
-$s_actiongroup_menu_update_view_status = 'Update View Status';
-$s_actiongroup_bugs = 'Selected Issues';
+$s_actiongroup_menu_update_priority = 'Opdater prioritering';
+$s_actiongroup_menu_update_status = 'Opdater status';
+$s_actiongroup_menu_update_view_status = 'Opdater vis-status';
+$s_actiongroup_bugs = 'Markerede fejl';
 
 # new strings:
-$s_all_projects = 'Alle Projekter';
+$s_all_projects = 'Alle projekter';
 $s_move_bugs = 'Flyt fejl';
 $s_operation_successful = 'Handling vellykket.';
-$s_date_order = 'Dato Orden';
-$s_print_all_bug_page_link = 'Udskriv Rapport';
+$s_date_order = 'Dato-orden';
+$s_print_all_bug_page_link = 'Udskriv rapport';
 $s_csv_export = 'CSV Eksport';
 $s_login_anonymously = 'Log ind som anonym';
 $s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes = 'Gå til Fejlnoter';
+$s_jump_to_bugnotes = 'Gå til fejlnoter';
 $s_public_project_msg = 'Dette projekt er OFFENTLIGT.  Alle brugere har adgang til dette projekt.';
 $s_private_project_msg = 'Dette projekt er PRIVAT.  Kun administratorer og udvalgte brugere har adgang.';
-$s_access_level_project = 'Projekt Adgangs Niveau';
+$s_access_level_project = 'Projekt-adgangsniveau';
 $s_view_submitted_bug_link = 'Vis anmeldte fejl';
-$s_assigned_projects = 'Tildelte Projekter';
-$s_unassigned_projects = 'Ikke tildelte Projekter';
+$s_assigned_projects = 'Tildelte projekter';
+$s_unassigned_projects = 'Ikke tildelte projekter';
 $s_print = 'Udskriv';
 $s_jump = 'Gå til';
-$s_copy_users = 'Kopier Brugere';
-$s_copy_categories_from = 'Kopier Kategorier fra';
-$s_copy_categories_to = 'Kopier Kategorier til';
-$s_bug_history = 'Fejl Historik';
+$s_copy_users = 'Kopier brugere';
+$s_copy_categories_from = 'Kopier kategorier fra';
+$s_copy_categories_to = 'Kopier kategorier til';
+$s_bug_history = 'Fejl-historik';
 $s_field = 'Felt';
-$s_old_value = 'Gammel Værdi';
-$s_new_value = 'Ny Værdi';
-$s_date_modified = 'Dato Ændret';
+$s_old_value = 'Gammel værdi';
+$s_new_value = 'Ny værdi';
+$s_date_modified = 'Dato ændret';
 $s_bugnote = 'Fejlnote';
 $s_change = 'Ændre';
-$s_bugnote_view_state = 'Fejlnote Overblik Tilstand';
-$s_bug_monitor = 'Fejl Overvåges';
-$s_bug_end_monitor = 'Fejl Afslut Overvågning';
+$s_bugnote_view_state = 'Fejlnote-overblikstilstand';
+$s_bug_monitor = 'Fejl overvåges';
+$s_bug_end_monitor = 'Afslut overvågning af fejl';
 $s_announcement = 'Bekendtgørelse';
-$s_stays_on_top = 'Forbliver Øverst';
-$s_delete_bugnote_button = 'Slet Fejlnote';
-$s_delete_bugnote_sure_msg = 'Ønsker du at slette denne Fejlnote?';
+$s_stays_on_top = 'Forbliver øverst';
+$s_delete_bugnote_button = 'Slet fejlnote';
+$s_delete_bugnote_sure_msg = 'Ønsker du at slette denne fejlnote?';
 $s_bug_relationships = 'Forbindelse med';
 $s_empty_password_sure_msg = 'Brugeren har en tom adgangskode. Er det virkelig det, du ønsker?';
-$s_empty_password_button = 'Brug Tom Adgangskode';
+$s_empty_password_button = 'Brug tom adgangskode';
 
 $s_duplicate_of = 'duplikering af %id';
 $s_has_duplicate = 'har duplikeret %id';
@@ -75,47 +76,47 @@ $s_related_to = 'forbindelse til %id';
 $s_dependant_on = 'afhængig af %id';
 $s_blocks = 'blokerer %id';
 
-$s_new_bug = 'Ny Fejl';
-$s_bugnote_added = 'Fejlnote Tilføjet';
-$s_bugnote_edited = 'Fejlnote Redigeret';
-$s_bugnote_deleted = 'Fejlnote Slettet';
-$s_summary_updated = 'Opsummering Opdateret';
-$s_description_updated = 'Beskrivelse Opdateret';
-$s_additional_information_updated = 'Yderligere Information Opdateret';
-$s_steps_to_reproduce_updated = 'Handlinger for at Genfrembringe Opdateret';
-$s_file_added = 'Fil Tilføjet: ';
-$s_file_deleted = 'Fil Slettet: ';
-$s_bug_deleted = 'Bug Deleted';
+$s_new_bug = 'Ny fejl';
+$s_bugnote_added = 'Fejlnote tilføjet';
+$s_bugnote_edited = 'Fejlnote redigeret';
+$s_bugnote_deleted = 'Fejlnote slettet';
+$s_summary_updated = 'Opsummering opdateret';
+$s_description_updated = 'Beskrivelse opdateret';
+$s_additional_information_updated = 'Yderligere information opdateret';
+$s_steps_to_reproduce_updated = 'Handlinger for at genfrembringe opdateret';
+$s_file_added = 'Fil tilføjet: ';
+$s_file_deleted = 'Fil slettet: ';
+$s_bug_deleted = 'Fejl slettet';
 
-$s_make_private = 'Lav Privat';
-$s_make_public = 'Lav Offentlig';
+$s_make_private = 'Gør privat';
+$s_make_public = 'Gør offentlig';
 
-$s_create_new_project_link = 'Opret Nyt Projekt';
+$s_create_new_project_link = 'Opret nyt projekt';
 
 $s_login_link = 'Log ind';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Du havde ikke tilstrækkelige rettigheder til at udføre denne handling på følgende fejl: ';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_access = 'Du havde ikke tilstrækkelige rettigheder til at udføre denne handling.';
+$s_bug_actiongroup_status = 'Denne fejl kan ikke ændres til den ønskede tilstand';
 $s_close_bugs_conf_msg = 'Ønsker du at lukke disse fejl ?';
 $s_delete_bugs_conf_msg = 'Ønsker du at slette disse fejl ?';
 $s_move_bugs_conf_msg = 'Flyt fejlene til';
-$s_copy_bugs_conf_msg = 'Copy issues to';
+$s_copy_bugs_conf_msg = 'Kopier fejlene til';
 $s_assign_bugs_conf_msg = 'Tildel fejlene til';
 $s_resolve_bugs_conf_msg = 'Vælg fejlenes løsning';
 $s_priority_bugs_conf_msg = 'Vælg fejlenes prioritering';
 $s_status_bugs_conf_msg = 'Vælg fejlenes status';
-$s_view_status_bugs_conf_msg = 'Choose issues view status';
-$s_close_group_bugs_button = 'Luk Fejlene' ;
-$s_delete_group_bugs_button = 'Slet Fejlene' ;
-$s_move_group_bugs_button = 'Flyt Fejlene' ;
-$s_copy_group_bugs_button = 'Copy Issues' ;
-$s_assign_group_bugs_button = 'Tildel Fejlene' ;
-$s_resolve_group_bugs_button = 'Løs Fejlene' ;
-$s_priority_group_bugs_button = 'Opdater Prioritering' ;
-$s_status_group_bugs_button = 'Opdater Status' ;
-$s_view_status_group_bugs_button = 'Update View Status';
+$s_view_status_bugs_conf_msg = 'Vælg fejlenes visningsstatus';
+$s_close_group_bugs_button = 'Luk fejlene' ;
+$s_delete_group_bugs_button = 'Slet fejlene' ;
+$s_move_group_bugs_button = 'Flyt fejlene' ;
+$s_copy_group_bugs_button = 'Kopier fejlene' ;
+$s_assign_group_bugs_button = 'Tildel fejlene' ;
+$s_resolve_group_bugs_button = 'Løs fejlene' ;
+$s_priority_group_bugs_button = 'Opdater prioritering' ;
+$s_status_group_bugs_button = 'Opdater status' ;
+$s_view_status_group_bugs_button = 'Opdater visningsstatus';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Sammenfattende grafik efter status' ;
@@ -137,15 +138,15 @@ $s_priority_link = 'efter prioritering';
 $s_severity_link = 'efter alvorlighed';
 $s_category_link = 'efter kategori';
 $s_resolution_link = 'efter løsning';
-$s_legend_still_open = 'Still Open';
-$s_legend_resolved = 'Resolved';
-$s_legend_assigned = 'Assigned';
+$s_legend_still_open = 'Stadig åben';
+$s_legend_resolved = 'Løst';
+$s_legend_assigned = 'Tildelt';
 $s_legend_total = 'Total';
-$s_legend_opened = 'Opened';
-$s_legend_closed = 'Closed';
-$s_legend_reported = 'Reported';
-$s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
+$s_legend_opened = 'Åben';
+$s_legend_closed = 'Lukket';
+$s_legend_reported = 'Raporteret';
+$s_cumulative = 'Kumulativ';
+$s_not_enough_data = 'Ikke data nok til at lave graf';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Vis kun valgte';
@@ -155,7 +156,7 @@ $s_printing_preferences_title = 'Vælg felter der skal udskrives';
 $s_printing_options_link = 'Udskriftmuligheder';
 
 # word and excel export
-$s_bugnote_title = 'Tilsyn af Fejlnote' ;
+$s_bugnote_title = 'Tilsyn af fejlnote' ;
 $s_bugnote_date = 'Dato for fejlnote';
 $s_bugnote_description = 'Fejlnote beskrivelse';
 
@@ -167,25 +168,25 @@ $MANTIS_ERROR[ERROR_SQL] = 'FEJL: SQL fejl opstået.  Giv venligst besked om dett
 $MANTIS_ERROR[ERROR_REPORT] = 'FEJL: Din rapportering indeholder fejl.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEJL: Der er ikke valgt en fil';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'FEJL: Denne filtype er ikke tilladt';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEJL: Denne mappe findes ikke. Undersøg venligst projekts indstillinger.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEJL: Denne mappe findes ikke. Undersøg venligst projektets indstillinger.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEJL: Denne fil findes allerede. Slet den gamle fil først.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'FEJL: Der findes allerede et projekt med dette navn.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEJL: Et påkrævet felt er ikke udfyldt.  Ret venligst dette.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'FEJL: Denne konto er beskyttet.  Du har ikke adgang før kontoens beskyttelse er ophævet.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'FEJL: Adgang Nægtet.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'FEJL: Upload af Fil mislykkedes. Bed din administrator om at afvikle scriptet admin_check for at løse dette problem.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'FEJL: Upload af Fil mislykkedes. Dette skyldes sandsynligvis at filstørrelsen oversteg, hvad der i øjeblikket er tillad i denne PHP installation.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'FEJL: Adgang nægtet.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'FEJL: Overførslen af filen mislykkedes. Bed din administrator om at afvikle scriptet admin_check for at løse dette problem.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'FEJL: Overførslen af filen mislykkedes. Dette skyldes sandsynligvis at filstørrelsen oversteg, hvad der i øjeblikket er tillad i denne PHP installation.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'FEJL: Et krævet paramter til denne side blev ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'FEJL: Dette brugernavn er allerede i brug. Gå venligst tilbage og vælg et andet brugernavn.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Fejl: Konfigurationsmulighed ikke fundet.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'FEJL: Streng ikke fundet.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'FEJL: Fejlnote ikke fundet.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'FEJL: Projekt ikke fundet.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEJL: Database felt ikke fundet.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEJL: Database-felt ikke fundet.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'FEJL: Kunne ikke opnå forbindelse til FTP server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Fejlbehandleren havde ikke tilstrækkelige adgangsrettigheder til at behandle en fejl med denne status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEJL: Der findes allerede et projekt med dette navn. Gå venligst tilbage og vælg et andet navn.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'FEJL: Ugyldigt projektnavn. Navn på et projekt må ikke være tomt.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'FEJL: Ugyldigt projektnavn. Navnet på et projekt må ikke være tomt.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'FEJL: Bruger ikke fundet.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'FEJL: Log ind informationer gemt i din browser er ugyldige. Måske er din konto blevet slettet?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = ' FEJL: Præferencer for denne bruger kunne ikke findes.';
@@ -196,50 +197,50 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'FEJL: En streng var forventet, men 
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'FEJL: Fejl ikke fundet.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'FEJL: Ugyldig e-mail.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'FEJL: Profil ikke fundet.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'FEJL: Upload af denne filtype er ikke tilladt.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'FEJL: Overførsel af denne filtype er ikke tilladt.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'FEJL: Dette er en duplikeret fil. Slet filen først.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEJL: Ugyldig upload sti. Enten findes mappen ikke eller tillader ikke tilføjelser til webserveren';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'FEJL: DU kan ikke stille en fejl som et duplikat af sig selv.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEJL: Ugyldig overførselssti. Enten findes mappen ikke eller tillader ikke tilføjelser til webserveren';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'FEJL: Du kan ikke stille en fejl som et duplikat af sig selv.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'FEJL: Brugerdefineret felt ikke fundet';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'FEJL: Dette er et duplikat navn.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'FEJL: Dette er et duplikat-navn.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'FEJL: Mindst et projekt anvender dette felt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FEJL: Ugyldig værdi for dette felt';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'FEJL: LDAP Godkendelse mislykkedes';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'FEJL: LDAP Server forbindelse mislykkedes';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ugyldig feltbeskrivelse';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'FEJL: LDAP-godkendelse mislykkedes';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'FEJL: Forbindelse til LDAP-server mislykkedes';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'FEJL: LDAP Record Update mislykkedes.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'FEJL: LDAP User Record ikke fundet.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'FEJL: Database forbindelse mislykkedes.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'FEJL: Database forespørgsel mislykkedes.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'FEJL: Database valg mislykkedes.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'FEJL: Database-forbindelse mislykkedes.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'FEJL: Database-forespørgsel mislykkedes.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'FEJL: Database-valg mislykkedes.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEJL: Denne kategori findes allerede.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'FEJL: Ingen kopi handling specificeret.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'FEJL: Ingen kopi-handling specificeret.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FEJL: Kategori ikke fundet.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEJL: Denne version findes allerede.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'FEJL: Version ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'FEJL: Brugernavnet er ugyldigt.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Brugeren har ikke det krævede adgangsniveau';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Det "Rigtige navn" du valgte findes allerede som log ind-navn. Vælg et andet.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorunderstøttelse ikke slået til.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorskabet %d ikke fundet.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorskabet (%s) er under mindste beløb (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurationsmuligheden \'%s\' har en ugyldig værdi \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Handlingen kan ikke udføres fordi fejlen \'%d\' er skrivebeskyttet';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "FEJL: Der er allerede en afhængighed mellem disse to fejl.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "FEJL: Afhængighed ikke fundet.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Adgang nægtet: Fejlen %d kræver et højere adgangsniveau.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "En fejl kan ikke gøres afhængig af sig selv.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Muligheden \'glemt din adgangskode\' er ikke tilgængelig.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du skal angive en e-mail-adresse for at kunne nulstille adgangskoden';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'De angivne oplysninger svarer ikke til nogen eksisterende konto!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Bekræftigelses-URLen er ugyldig eller har allerede været brugt. Registrer dig igen.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. antal samtidige handlinger nået. Kontakt systemadministratoren';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'Din konto er enten deaktiveret eller blokkeret (pga for mange forkerte forsøg på log ind) eller det brugernavn/adgangskode du skrev er forkert.';
 $s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
 $s_login_cookies_disabled = 'FEJL: Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
 
@@ -253,8 +254,8 @@ $s_logged_in_as = 'Logget ind som';
 $s_prefix_for_deleted_users = 'bruger';
 
 $s_administrator = 'administrator';
-$s_myself = "Myself";
-$s_default_access_level = 'Default access level';
+$s_myself = "Mig selv";
+$s_default_access_level = 'Standardadgangsniveau';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:observatør,25:rapportør,40:opdatering,55:udvikler,70:leder,90:administrator';
@@ -263,25 +264,25 @@ $s_project_view_state_enum_string = '10:offentlig,50:privat';
 $s_view_state_enum_string = '10:offentlig,50:privat';
 
 $s_priority_enum_string = '10:ingen,20:lav,30:normal,40:høj,50:haster,60:straks!';
-$s_severity_enum_string = '10:indslag,20:triviel,30:tekst,40:tilpasses,50:mindre,60:større,70:crash,80:block';
+$s_severity_enum_string = '10:indslag,20:triviel,30:tekst,40:tilpasses,50:mindre,60:større,70:crash,80:blokker';
 $s_reproducibility_enum_string = '10:altid,30:af og til,50:sjældent,70:har ikke prøvet,90:kan ikke genskabe,100:ikke tilgængelig';
 $s_status_enum_string = '10:ny,20:tilbagemelding,30:modtaget,40:bekræftet,50:tildelt,80:løst,90:lukket';
-$s_resolution_enum_string = '10:åben,20:rettet,30:genåbnet,40:kan ikke genskabe,50:kun ikke rettes,60:findes i forvejen,70:ikke en fejl,80:stillet i bero,90:vil ikke rette';
+$s_resolution_enum_string = '10:åben,20:rettet,30:genåbnet,40:kan ikke genskabe,50:kan ikke rettes,60:findes i forvejen,70:ikke en fejl,80:stillet i bero,90:vil ikke rette';
 $s_projection_enum_string = '10:ingen,30:tilpasses,50:mindre rettelse,70:større omskrivning,90:omstrukturering';
 $s_eta_enum_string = '10:ingen,20:< 1 dag,30:2-3 dage,40:< 1 uge,50:< 1 måned,60:> 1 måned';
 
 # Email Strings
-$s_new_account_subject = 'Account registration';
-$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
-$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_subject = 'Kontoregistrering';
+$s_new_account_greeting = 'Tak for din registrering. Din konto har brugernavnet \'';
+$s_new_account_greeting2 = '\'. For at færdiggøre din registrering, skal du besøge følgende URL (sørg for den er skrevet i en enkelt linje) og angiv den adgangskode du vil have:';
 $s_new_account_username = 'Brugernavn: ';
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
-$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_message = 'Hvis du ikke har prøvet at registrere dig skal du bare se bort fra denne meddelelse og ingenting vil ske.' . "\n\n";
+$s_new_account_do_not_reply = 'SVAR IKKE PÅ DENNE MEDDELELSE';
 $s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
-$s_new_account_signup_msg = 'The following account has been created:';
+$s_new_account_IP = 'Fjern-IP-adresse: ';
+$s_new_account_signup_msg = 'Følgende konto er blevet oprettet:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_msg = 'En eller anden (formodentligt dig selv) bad om at få ændret adgangskoden genneme-mail-verifikation. Hvis det ikke var dig skal du bare se bort fra denne meddelelse, og ingenting vil ske.' . "\n\n" . 'Hvis du bad om denne verifikation, så besøg denne URL for at ændre din adgangskode:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
@@ -326,89 +327,89 @@ $s_email_priority = 'Prioritet';
 $s_email_status = 'Status';
 $s_email_resolution = 'Løsning';
 $s_email_duplicate = 'Dobbelt';
-$s_email_fixed_in_version = 'Fixed in Version';
-$s_email_date_submitted = 'Afsendt Dato';
-$s_email_last_modified = 'Sidst Ændret';
+$s_email_fixed_in_version = 'Løst i version';
+$s_email_date_submitted = 'Afsendt dato';
+$s_email_last_modified = 'Sidst ændret';
 $s_email_summary = 'Opsummering';
 $s_email_description = 'Beskrivelse';
 
 # account_delete.php
-$s_account_protected_msg = 'Konto beskyttet. Kan ikke ændre indstillingerne...';
+$s_account_protected_msg = 'Beskyttet konto. Kan ikke ændre indstillingerne...';
 $s_account_removed_msg = 'Din konto er blevet fjernet...';
 
 # account_delete_page.php
 $s_confirm_delete_msg = 'Er du sikker på at du vil slette din konto?';
-$s_delete_account_button = 'Slet Konto';
+$s_delete_account_button = 'Slet konto';
 
 # account_page.php
-$s_manage_profiles_link = 'Administrer Profiler';
-$s_change_preferences_link = 'Rediger Præferencer';
+$s_manage_profiles_link = 'Administrer profiler';
+$s_change_preferences_link = 'Rediger præferencer';
 $s_edit_account_title = 'Rediger konto';
 $s_username = 'Brugernavn';
-$s_realname = 'Real Name';
+$s_realname = 'Rigtigt navn';
 $s_email = 'E-mail';
 $s_password = 'Adgangskode';
-$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
-$s_confirm_password = 'Bekræft Adgangskode';
+$s_no_password_change = 'Adgangskoden er kontrolleret af et andet system, så den kan ikke ændres her.';
+$s_confirm_password = 'Bekræft adgangskode';
 $s_access_level = 'Rettigheder';
-$s_update_user_button = 'Opdater Bruger';
+$s_update_user_button = 'Opdater bruger';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Forvalg af Konto Præferencer';
-$s_default_project = 'Forvalg af Projekt';
-$s_advanced_report = 'Avanceret Rapport';
-$s_advanced_view = 'Avanceret Oversigt';
-$s_advanced_update = 'Avanceret Opdatering';
-$s_refresh_delay = 'Forsinkelse ved Opdatering';
-$s_redirect_delay = 'Forsinkelse ved Omadressering';
+$s_default_account_preferences_title = 'Forvalg af konto-præferencer';
+$s_default_project = 'Forvalg af projekt';
+$s_advanced_report = 'Avanceret rapport';
+$s_advanced_view = 'Avanceret oversigt';
+$s_advanced_update = 'Avanceret opdatering';
+$s_refresh_delay = 'Forsinkelse ved opdatering';
+$s_redirect_delay = 'Forsinkelse ved omadressering';
 $s_with_minimum_severity = 'With Mimimum Severity of';
-$s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
-$s_email_on_new = 'E-mail ved Ny';
-$s_email_on_assigned = 'E-mail ved Tildeling';
-$s_email_on_feedback = 'E-mail ved Tilbagemelding';
-$s_email_on_resolved = 'E-mail ved Løsning';
-$s_email_on_closed = 'E-mail ved Lukket';
-$s_email_on_reopened = 'E-mail ved Genåbnet';
-$s_email_on_bugnote_added = 'E-mail ved Tilføjelse af Fejlnote';
-$s_email_on_status_change = 'E-mail ved Ændring af Status';
-$s_email_on_priority_change = 'E-mail ved Ændring af Prioritet';
+$s_bugnote_order = 'Sorteringsoeden for fejlnoter';
+$s_bugnote_order_asc = 'Stigende';
+$s_bugnote_order_desc = 'Faldende';
+$s_email_on_new = 'E-mail ved ny';
+$s_email_on_assigned = 'E-mail ved tildeling';
+$s_email_on_feedback = 'E-mail ved tilbagemelding';
+$s_email_on_resolved = 'E-mail ved løsning';
+$s_email_on_closed = 'E-mail ved lukkning';
+$s_email_on_reopened = 'E-mail ved genåbning';
+$s_email_on_bugnote_added = 'E-mail ved tilføjelse af fejlnote';
+$s_email_on_status_change = 'E-mail ved ændring af status';
+$s_email_on_priority_change = 'E-mail ved ændring af prioritet';
 $s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Sprog';
-$s_update_prefs_button = 'Opdater Præferencer.';
-$s_reset_prefs_button = 'Nulstil Præferencer.';
+$s_update_prefs_button = 'Opdater præferencer.';
+$s_reset_prefs_button = 'Nulstil præferencer.';
 
 # account_prefs_reset.php
 $s_prefs_reset_msg = 'Præferencer er nulstillet...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = 'Præferencer er blevet Opdateret...';
+$s_prefs_updated_msg = 'Præferencer er blevet opdateret...';
 
 # account_profile_add.php
 $s_profile_added_msg = 'Profil tilføjet...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = 'Slettet Profil...';
+$s_profile_deleted_msg = 'Slettet profil...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = 'Rediger Profil';
+$s_edit_profile_title = 'Rediger profil';
 $s_platform = 'Platform';
-$s_operating_system = 'Operativ System';
-$s_additional_description = 'Yderligere Beskrivelse';
-$s_update_profile_button = 'Opdater Profil';
+$s_operating_system = 'Operativsystem';
+$s_additional_description = 'Yderligere beskrivelse';
+$s_update_profile_button = 'Opdater profil';
 
 # account_profile_make_default.php
 $s_profile_defaulted_msg = 'Forvalgt profil opdateret...';
 
 # account_profile_manage_page.php
-$s_add_profile_title = 'Tilføj Profil';
-$s_add_profile_button = 'Tilføj Profil';
-$s_edit_or_delete_profiles_title = 'Rediger eller Slet Profiler';
-$s_edit_profile = 'Rediger Profil';
+$s_add_profile_title = 'Tilføj profil';
+$s_add_profile_button = 'Tilføj profil';
+$s_edit_or_delete_profiles_title = 'Rediger eller slet profiler';
+$s_edit_profile = 'Rediger profil';
 $s_make_default = 'Lav som forvalgte værdier';
-$s_delete_profile = 'Slet Profil';
-$s_select_profile = 'Vælg Profil';
+$s_delete_profile = 'Slet profil';
+$s_select_profile = 'Vælg profil';
 $s_submit_button = 'Send';
 
 # account_profile_update.php
@@ -419,7 +420,7 @@ $s_account_updated_msg = 'Din konto er blevet opdateret...';
 $s_email_updated = 'Vellykket opdatering af E-mail adresse';
 $s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
-$s_password_updated = 'Vellykket opdatering af Adgangskode';
+$s_password_updated = 'Vellykket opdatering af adgangskode';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Fejlen er blevet tildelt...';
@@ -448,34 +449,34 @@ $s_bug_deleted_msg = 'Fejlen er blevet slettet...';
 
 # bug_delete_page.php
 $s_delete_bug_sure_msg = 'Er du sikker på du vil slette denne fejl?';
-$s_delete_bug_button = 'Slet Fejl';
+$s_delete_bug_button = 'Slet fejl';
 
 # bug_monitor.php
 $s_monitor_bug_button = 'Overvåg Fejl';
-$s_unmonitor_bug_button = 'Afslut Overvågning';
+$s_unmonitor_bug_button = 'Afslut overvågning';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Filen er blevet uploadet';
+$s_file_upload_msg = 'Filen er blevet overført';
 
 # bug_file_upload_inc.php
-$s_upload_file = 'Upload Fil';
-$s_select_file = 'Vælg Fil';
-$s_upload_file_button = 'Upload Fil';
-$s_max_file_size = 'Max. Størrelse';
+$s_upload_file = 'Overfør fil';
+$s_select_file = 'Vælg fil';
+$s_upload_file_button = 'Overfør fil';
+$s_max_file_size = 'Max. størrelse';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Fejlen er blevet genåbnet...';
-$s_reopen_add_bugnote_title = 'Tilføj Fejlnote begrundelse for at Genåbne fejlen';
-$s_bugnote_add_reopen_button = 'Tilføj Fejlnote og Genåbn fejlen';
+$s_reopen_add_bugnote_title = 'Tilføj fejlnote begrundelse for at genåbne fejlen';
+$s_bugnote_add_reopen_button = 'Tilføj fejlnote og genåbn fejlen';
 
 # bug_resolve_page.php
-$s_resolved_bug_title = 'Løs Fejl';
-$s_resolved_bug_button = 'Løs Fejl';
+$s_resolved_bug_title = 'Løs fejl';
+$s_resolved_bug_button = 'Løs fejl';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Fejlen er blevet løst. Skriv Fejlnote herunder...';
-$s_resolve_add_bugnote_title = 'Tilføj Fejlnote begrundelse for at Løse fejlen';
-$s_bugnote_add_resolve_button = 'Tilføj Fejlnote';
+$s_bug_resolved_msg = 'Fejlen er blevet løst. Skriv fejlnote herunder...';
+$s_resolve_add_bugnote_title = 'Tilføj fejlnote begrundelse for at løse fejlen';
+$s_bugnote_add_resolve_button = 'Tilføj fejlnote';
 
 # bug_reminder_page.php
 $s_from = 'Fra';
@@ -494,15 +495,15 @@ $s_reminder_store = 'This note will be stored with the issue.';
 $s_bug_updated_msg = 'Fejlen er blevet opdateret...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Tilbage til Fejl';
-$s_update_simple_link = 'Opdater Enkel';
-$s_updating_bug_advanced_title = 'Opdater Fejl Information';
+$s_back_to_bug_link = 'Tilbage til fejl';
+$s_update_simple_link = 'Opdater enkel';
+$s_updating_bug_advanced_title = 'Opdater fejlinformation';
 $s_id = 'ID';
 $s_category = 'Kategori';
 $s_severity = 'Alvorlighed';
 $s_reproducibility = 'Genfrembringelse';
-$s_date_submitted = 'Oprettet Dato';
-$s_last_update = 'Sidst Opdateret';
+$s_date_submitted = 'Oprettet dato';
+$s_last_update = 'Sidst opdateret';
 $s_reporter = 'Rapporter';
 $s_assigned_to = 'Tildelt';
 $s_priority = 'Prioritet';
@@ -513,18 +514,18 @@ $s_os = 'OS';
 $s_projection = 'Planlægning';
 $s_os_version = 'Version';
 $s_eta = 'Anslået';
-$s_product_version = 'Produkt Version';
+$s_product_version = 'Produkt-version';
 $s_build = 'Udgave';
-$s_fixed_in_version = 'Fixed in Version';
+$s_fixed_in_version = 'Løst i version';
 $s_votes = 'Stemmer';
 $s_summary = 'Opsummering';
 $s_description = 'Beskrivelse';
 $s_steps_to_reproduce = 'Handlinger for at genfrembringe';
-$s_update_information_button = 'Opdater Information';
+$s_update_information_button = 'Opdater information';
 
 # bug_update_page.php
-$s_update_advanced_link = 'Opdater Avanceret';
-$s_updating_bug_simple_title = 'Opdater Fejl Information';
+$s_update_advanced_link = 'Opdater avanceret';
+$s_updating_bug_simple_title = 'Opdater fejl-information';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Stemme er blevet tilføjet...';
@@ -537,15 +538,15 @@ $s_bugnote_deleted_msg = 'Fejlnote er blevet slettet..';
 $s_bug_notes_title = 'Fejlnoter';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = 'Rediger Fejlnote';
+$s_edit_bugnote_title = 'Rediger fejlnote';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Der er ikke tilknyttet Fejlnoter til denne fejl.';
+$s_no_bugnotes_msg = 'Der er ikke tilknyttet fejlnoter til denne fejl.';
 $s_delete_link = 'Slet';
-$s_add_bugnote_title = 'Tilføj Fejlnote';
-$s_add_bugnote_button = 'Tilføj Fejlnote';
+$s_add_bugnote_title = 'Tilføj fejlnote';
+$s_add_bugnote_button = 'Tilføj fejlnote';
 $s_bugnote_edit_link = 'Rediger';
-$s_closed_bug_button = 'Luk Fejl';
+$s_closed_bug_button = 'Luk fejl';
 
 # bugnote_update.php
 $s_bugnote_updated_msg = 'Fejlnoten er blevet opdateret ...';
@@ -564,14 +565,14 @@ $s_save_login = 'Gem Log ind';
 $s_choose_project = 'Vælg Projekt';
 $s_login_button = 'Log ind';
 $s_signup_link = 'opret en ny konto';
-$s_lost_password_link = 'Lost your password?';
+$s_lost_password_link = 'Glemt din adgangskode?';
 
 # login_select_proj_page.php
-$s_select_project_button = 'Vælg Projekt';
+$s_select_project_button = 'Vælg projekt';
 
 # logout_page.php
-$s_logged_out_title = 'Logget Af...';
-$s_redirecting = '...Omadressering';
+$s_logged_out_title = 'Logget af...';
+$s_redirecting = '...omadressering';
 $s_here = 'Her';
 # lost_pwd_page.php
 $s_lost_password_title = "Password Reset";
@@ -583,8 +584,8 @@ $s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please 
 # main_page.php
 $s_open_and_assigned_to_me = 'Åbnet og tildelt mig';
 $s_open_and_reported_to_me = 'Åbnet og rapporteret af mig';
-$s_newer_news_link = 'Nyere Nyheder';
-$s_older_news_link = 'Ældre Nyheder';
+$s_newer_news_link = 'Nyere nyheder';
+$s_older_news_link = 'Ældre nyheder';
 $s_archives = 'Arkiv';
 $s_rss = 'RSS';
 
