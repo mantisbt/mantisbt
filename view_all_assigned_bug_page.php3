@@ -11,25 +11,30 @@
 
 	if ( isset( $f_save )) {
 		### Save preferences
-		$t_settings_string = $f_show_category."#".
+		$t_settings_string = $f_assign_id."#".
+							$f_show_category."#".
 							$f_show_severity."#".
 							$f_show_status."#".
 							$f_limit_view."#".
 							$f_show_changed."#".
 							$f_hide_resolved;
-		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+		setcookie( $g_view_assigned_cookie, $t_settings_string, time()+$g_cookie_time_length );
 	}
-	else if ( strlen($g_view_all_cookie_val)>6 ) {
+	else if ( strlen($g_view_assigned_cookie_val)>6 ) {
 		### Load preferences
-		$t_setting_arr = explode( "#", $g_view_all_cookie_val );
-		$f_show_category = $t_setting_arr[0];
-		$f_show_severity = $t_setting_arr[1];
-		$f_show_status = $t_setting_arr[2];
-		$f_limit_view = $t_setting_arr[3];
-		$f_show_changed = $t_setting_arr[4];
-		$f_hide_resolved = $t_setting_arr[5];
+		$t_setting_arr = explode( "#", $g_view_assigned_cookie_val );
+		$f_assign_id = $t_setting_arr[0];
+		$f_show_category = $t_setting_arr[1];
+		$f_show_severity = $t_setting_arr[2];
+		$f_show_status = $t_setting_arr[3];
+		$f_limit_view = $t_setting_arr[4];
+		$f_show_changed = $t_setting_arr[5];
+		$f_hide_resolved = $t_setting_arr[6];
 	}
 
+	if ( !isset( $f_assign_id ) ) {
+		$f_assign_id = get_current_user_field( "id" );
+	}
 
 	if ( !isset( $f_limit_view ) ) {
 		$f_limit_view = $g_default_limit_view;
@@ -72,7 +77,8 @@
 	### build our query string based on our viewing criteria
 	$query = "SELECT * FROM $g_mantis_bug_table";
 
-	$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
+	$t_where_clause = " WHERE project_id='$g_project_cookie_val' AND
+							handler_id='$f_assign_id'";
 
 	if (( $f_hide_resolved=="on"  )&&( $f_show_status!="resolved" )) {
 		$t_where_clause = $t_where_clause." AND status<>'resolved'";
@@ -113,9 +119,9 @@
 
 <p>
 <div align=center>
-	[ <? echo $s_all_bugs_link ?> ]
-	[ <a href="<? echo $g_view_user_reported_bug_page ?>"><? echo $s_reported_bugs_link ?></a> ]
-	[ <a href="<? echo $g_view_user_assigned_bug_page ?>"><? echo $s_assigned_bugs_link ?></a> ]
+	[ <a href="<? echo $g_view_all_bug_page ?>"><? echo $s_all_bugs_link ?></a> ]
+	[ <a href="<? echo $g_view_all_reported_bug_page ?>"><? echo $s_reported_bugs_link ?></a> ]
+	[ <? echo $s_assigned_bugs_link ?> ]
 </div>
 
 <p>
@@ -124,10 +130,13 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<tr>
-		<form method=post action="<? echo $g_view_bug_all_page ?>">
+		<form method=post action="<? echo $g_view_all_assigned_bug_page ?>">
 		<input type=hidden name=f_offset value="0">
 		<input type=hidden name=f_save value="1">
 		<td align=center>
+		<select name=f_assign_id>
+			<? print_handler_option_list( $f_assign_id ) ?>
+		</select>
 		<select name=f_show_category>
 			<option value="any"><? echo $s_any ?>
 			<option value="any">
@@ -143,8 +152,8 @@
 			<option value="any">
 			<? print_field_option_list( "status", $f_show_status ) ?>
 		</select>
-		<? echo $s_show ?>: <input type=text name=f_limit_view size=3 maxlength=9 value="<? echo $f_limit_view ?>">
-		<? echo $s_changed ?>: <input type=text name=f_show_changed size=3 maxlength=9 value="<? echo $f_show_changed ?>">
+		<? echo $s_show ?>: <input type=text name=f_limit_view size=3 maxlength=7 value="<? echo $f_limit_view ?>">
+		<? echo $s_changed ?>: <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
 		<? echo $s_hide_resolved ?>: <input type=checkbox name=f_hide_resolved <? if ($f_hide_resolved=="on") echo "CHECKED"?>>
 		<input type=submit value="<? echo $s_filter_button ?>">
 		</td>
@@ -167,7 +176,7 @@
 	<tr bgcolor=<? echo $g_category_title_color2 ?> align=center>
 		<td width=8%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=id&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_id ?></a>
+				<a href="<? echo $g_view_all_bug_page ?>?f_sort=id&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_id ?></a>
 			</b>
 		</td>
 		<td width=3%>
@@ -177,27 +186,27 @@
 		</td>
 		<td width=12%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=category&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_category ?></a>
+				<a href="<? echo $g_view_all_bug_page ?>?f_sort=category&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_category ?></a>
 			</b>
 		</td>
 		<td width=10%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=severity&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_severity ?></a>
+				<a href="<? echo $g_view_all_bug_page ?>?f_sort=severity&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_severity ?></a>
 			</b>
 		</td>
 		<td width=10%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=status&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_status ?></a>
+				<a href="<? echo $g_view_all_bug_page ?>?f_sort=status&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_status ?></a>
 			</b>
 		</td>
 		<td width=12%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=last_updated&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_updated ?></a>
+				<a href="<? echo $g_view_all_bug_page ?>?f_sort=last_updated&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_updated ?></a>
 			</b>
 		</td>
 		<td width=45%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=summary&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_summary ?></a>
+				<a href="<? echo $g_view_all_bug_page ?>?f_sort=summary&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_summary ?></a>
 			</b>
 		</td>
 	</tr>
@@ -308,10 +317,10 @@
 	}
 
 	if ( $f_offset_prev >= 0 ) {
- 		PRINT "[ <a href=\"$g_view_bug_all_page?f_offset=$f_offset_prev&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved\">View Prev $f_limit_view</a> ] ";
+ 		PRINT "[ <a href=\"$g_view_all_assigned_bug_page?f_offset=$f_offset_prev&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved&f_assign_id=$f_assign_id\">View Prev $f_limit_view</a> ] ";
 	}
 	if ( $row_count == $f_limit_view ) {
- 		PRINT "[ <a href=\"$g_view_bug_all_page?f_offset=$f_offset_next&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved\">View Next $f_limit_view</a> ]";
+ 		PRINT "[ <a href=\"$g_view_all_assigned_bug_page?f_offset=$f_offset_next&f_show_category=$f_show_category&f_show_severity=$f_show_severity&f_show_status=$f_show_status&f_limit_view=$f_limit_view&f_show_changed=$f_show_changed&f_hide_resolved=$f_hide_resolved&f_assign_id=$f_assign_id\">View Next $f_limit_view</a> ]";
 	}
 ?>
 </div>

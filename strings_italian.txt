@@ -1,0 +1,637 @@
+<?
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+?>
+<?
+	# This file is to aid in localization
+
+	### General Strings
+	$s_go_back = "Indietro";
+	$s_proceed = "Clicca qui per continuare";
+	$s_sql_error_detected = "ERRORE: Errore SQL.  Riporta questo errore a : ";
+
+	$s_switch = "Cambia";
+	$s_logged_in_as = "Autenticato come ";
+
+	### Email Strings
+	$s_new_account_subject = "Il tuo nuovo account utente";
+	$s_new_account_greeting = "
+	Benvenuto nel software di gestione problematiche e progetti di N&S. Queste sono le informazioni necessarie per utilizzare il servizio\n\n";
+	$s_new_account_url = "Puoi entrare nel sito da: ";
+	$s_new_account_username = "Nome Utente: ";
+	$s_new_account_password = "Password: ";
+	$s_new_account_message = "After logging into the site please change your password.  Also note that your password is stored via one way encryption.  The staff cannot retrieve your password.  If you forget your password it will have to be reset.\n\n";
+	$s_new_account_do_not_reply = "Non rispondere a questo messaggio.\n";
+
+	### account_delete.php3
+	$s_account_protected_msg = "Il tuo Utente e' protetto, Non puoi modificare i settaggi...";
+	$s_account_removed_msg = "Il tuo Utente e' stato rimosso...";
+
+	### account_delete_page.php3
+	$s_confirm_delete_msg = "Sei sicuro di voler eliminare il tuo utente?";
+	$s_delete_account_button = "Elimina Utente";
+
+	### account_page.php3
+	$s_manage_profiles_link = "Modifica Profili";
+	$s_change_preferences_link = "Modifica Preferenze";
+	$s_edit_account_title = "Modifica Account";
+	$s_username = "Nome Utente";
+	$s_email = "Email";
+	$s_password = "Password";
+	$s_confirm_password  = "Conferma Password";
+	$s_access_level = "Livello di Accesso";
+	$s_update_user_button = "Aggiorna Utente";
+	### $s_delete_account_button # defined above
+
+	### account_prefs_page.php3
+	$s_default_account_preferences_title = "Preferenze Utente di Default";
+	$s_advanced_report = "Report Avanzato";
+	$s_advanced_view = "Visualizzazione Avanzata";
+	$s_default_project = "Progetto di Default";
+	$s_update_prefs_button = "Preferenze di Aggiornamento";
+	$s_reset_prefs_button = "Resetta le Preferenze";
+
+	### account_prefs_reset.php3
+	$s_prefs_reset_msg = "Le Preferenze sono state Azzerate...";
+
+	### account_prefs_update.php3
+	$s_prefs_updated_msg = "Le tue Preferenze sono state modificate...";
+
+	### account_profile_add.php3
+	$s_profile_added_msg = "Profilo inserito...";
+
+	### account_profile_delete.php3
+	$s_profile_deleted_msg = "Profilo Eliminato...";
+
+	### account_profile_edit_page.php3
+	$s_edit_profile_title = "Modifica Profilo";
+	$s_platform = "Piattaforma";
+	$s_operating_system = "Sistema Operativo";
+	$s_version = "Versione/Release";
+	$s_additional_description = "Descrizione Aggiuntiva";
+	$s_update_profile_button = "Aggiorna il Profilo";
+
+	### account_profile_make_default.php3
+	$s_profile_defaulted_msg = "Profilo di Default Aggiornato...";
+
+	### account_profile_manage_page.php3
+	$s_add_profile_title = "Profilo Inserito";
+	### $s_platform # defined above
+	### $s_operating_system # defined above
+	### $s_version # defined above
+	### $s_additional_description # defined above
+	$s_add_profile_button = "Inserisci Profilo";
+	$s_edit_or_delete_profiles_title = "Modifica o Elimina i Profili";
+	$s_edit_profile = "Modifica i Profili";
+	$s_make_default = "Imposta come Default";
+	$s_delete_profile = "Elimina il Profilo";
+	$s_select_profile = "Seleziona il Profilo";
+	$s_submit_button = "Invia";
+
+	### account_profile_update.php3
+	$s_profile_updated_msg = "Profilo Aggiornato...";
+
+	### account_update.php3
+	### $s_account_protected_msg # defined above
+	$s_account_updated_msg = "Il tuo account e' stato aggiornato con successo...";
+
+	### bug_assign.php3
+	$s_bug_assign_msg       = "Il Bug e' stato correttamente assegnato...";
+
+	### bug_delete.php3
+	$s_bug_deleted_msg = "Il Bug e' stato inserito...";
+
+	### bug_delete_page.php3
+	$s_delete_bug_sure_msg = "Sei sicuro di voler eliminare questo Bug?";
+	$s_delete_bug_button = "Elimina Bug";
+
+	### bug_reopen_page.php3
+	$s_bug_reopened_msg = "Il Bug e' stato aperto nuovamente...";
+	$s_reopen_add_bugnote_title = "Inserita una nota per la riapertura del Bug";
+	$s_bugnote_add_reopen_button = "Inserita un nota nel Bug appena riaperto";
+
+	### bug_resolve_page.php3
+	$s_resolve_bug_title = "Risolvi il Bug";
+	### $s_resolution # defined above
+	### $s_duplicate_id # defined above
+	$s_resolve_bug_button = "Risolvi Bug";
+
+	### bug_resolve_page2.php3
+	$s_bug_resolved_msg = "Il Bug e' stato risolto. Inserisci una nota..";
+	$s_resolve_add_bugnote_title = "Inserici una nota per la risoluzione del Bug";
+	$s_bugnote_add_resolve_button = "Inserisci Nota";
+
+	### bug_update.php3
+	$s_bug_updated_msg = "Il Bug e' stato aggiornato correttamente...";
+
+	### bug_update_advanced_page.php3
+	$s_back_to_bug_link = "Ritorna nei Bug";
+	$s_update_simple_link = "Aggiornamento Semplice";
+	$s_updating_bug_advanced_title = "Aggiorna l'informazione sul Bug";
+	$s_id = "ID";
+	$s_category = "Categoria";
+	$s_severity = "Livello Problematica";
+	$s_reproducibility = "Riproducibilita'";
+	$s_date_submitted = "Data Inserimento";
+	$s_last_update = "Ultimo Aggiornamento";
+	$s_reporter = "Chi Riporta i Dati";
+	$s_assigned_to = "Assegnato a ";
+	$s_priority = "Priorita'";
+	$s_resolution = "Risoluzione";
+	### $s_platform # defined above
+	$s_status = "Status";
+	$s_duplicate_id = "ID Duplicato";
+	$s_os = "OS";
+	$s_projection = "Proiezione";
+	$s_os_version = "Versione";
+	$s_eta = "ETA";
+	$s_product_version = "Versione Prodotto";
+	$s_build = "Release";
+	$s_votes = "Vote";
+	$s_summary = "Sommario";
+	$s_description = "Descrizione";
+	$s_steps_to = "Passaggio a";
+	$s_reproduce = "Riproduttibilita'";
+	$s_additional = "Aggiunta";
+	$s_information = "Informazione";
+	$s_update_information_button = "Aggiorna Informazione";
+
+	### bug_update_page.php3
+	### $s_back_to_bug_link # defined above
+	$s_update_advanced_link = "Aggiornamento Avanzato";
+	$s_updating_bug_simple_title = "Aggiorna le Informazioni sul Bug";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	### $s_update_bug_button # defined above
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
+	### $s_reopen_bug_button # defined above
+	### $s_update_information_button # defined above
+
+	### bug_vote_add.php3
+	$s_vote_added_msg = "Una votazione e' stata aggiunta...";
+
+	### bugnote_add.php3
+	$s_bugnote_added_msg = "Nota Aggiunta...";
+
+	### bugnote_add_inc.php
+	$s_add_bugnote_button = "Inserisci Nota";
+
+	### bugnote_add_page.php3
+	$s_add_bugnote_title = "Inserisci una Nota";
+	### $s_add_bugnote_button # defined above
+
+	### bugnote_delete.php3
+	$s_bugnote_deleted_msg = "La Nota e' stata eliminata correttamente...";
+	$s_bug_notes_title = "Note per i Bug";
+
+	### bugnote_inc.php
+	$s_no_bugnotes_msg = "Non sono collegate note a questo Bug.";
+	### $s_bug_notes_title # defined above
+	$s_delete_link = "Elimina";
+
+	### choose_project_page.php3
+	$s_choose_project_title = "Seleziona Progetto";
+	$s_projects = "Projects";
+	$s_select_project_button = "Seleziona Progetto";
+
+	### index.php3
+	$s_click_to_login = "Login";
+
+	### login.php3
+
+	### login_error_page.php3
+	$s_login_error_msg = "E' stato trovato un errore: il tuo account e' stato disabilitato oppure la login/password inserite sono errate.";
+	$s_login_title = "Login";
+	### $s_username # defined above
+	### $s_password # defined above
+	$s_save_login = "Salva Login";
+	### $s_choose_project # defined above
+	$s_login_button = "Login";
+
+	### login_page.php3
+	$s_login_page_info = "Benvenuto nella gestione Progetti/Errori by N&S.";
+	### $s_login_title # defined above
+	### $s_username # defined above
+	### $s_password # defined above
+	### $s_save_login # defined above
+	$s_choose_project = "Seleziona Progetto";
+	### $s_login_button # defined above
+	$s_signup_link = "Registrati come Nuovo Utente";
+
+	### logout_page.php3
+	$s_logged_out_title = "Esci...";
+	$s_redirecting = "...Redirezionamento";
+	$s_here = "Qui";
+
+	### main_page.php3
+	$s_newer_news_link = "Nuove News";
+	$s_older_news_link = "Vecchie News";
+
+	### manage_create_new_user.php3
+	$s_created_user_part1 = "Utente Creato";
+	$s_created_user_part2 = "con un accesso di";
+
+	### manage_create_user_page.php3
+	$s_create_new_account_title = "Crea Nuovo Utente";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_password # defined above
+	$s_verify_password = "Verifica Password";
+	### $s_access_level # defined above
+	$s_enabled = "Abilitato";
+	$s_protected = "Protetto";
+	$s_create_user_button = "Crea Utente";
+
+	### manage_project_add.php3
+	$s_project_added_msg = "Il Progetto e' stato inserito...";
+
+	### manage_project_category_add.php3
+	$s_category_added_msg = "La Categoria e' stata inserita...";
+
+	### manage_project_category_delete.php3
+	$s_category_deleted_msg = "La Categoria e' stata eliminata...";
+
+	### manage_project_category_delete_page.php3
+	$s_category_delete_sure_msg = "
+	Sei sicuro di eliminare questa categoria? Tutti i Bug associati verranno eliminati.";
+	$s_delete_category_button = "Elimina Categoria";
+
+	### manage_project_category_edit_page.php3
+	$s_edit_project_category_title = "Edita le proprieta' di questa categoria del Progetto";
+	$s_update_category_button = "Aggiorna Categoria";
+	### $s_delete_category_button # defined above
+
+	### manage_project_category_update.php3
+	$s_category_updated_msg = "La Categoria e' stata aggiornata correttamente...";
+
+	### manage_page.php3
+	$s_create_new_account_link = "Crea Utente";
+	$s_projects_link = "Progetti";
+	$s_documentation_link = "Documentazione";
+	$s_new_accounts_title = "Nuovi Utenti";
+	$s_1_week_title = "1 Settimana";
+	$s_never_logged_in_title = "Mai Entrato nel sistema";
+	$s_manage_accounts_title = "Gestione Utenti";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_access_level # defined above
+	### $s_enabled # defined above
+	$s_p = "p";
+	$s_date_created = "Data Inserimento";
+	$s_last_visit = "Ultima Visita";
+	$s_edit_user_link = "Modifica Utente";
+
+	### manage_project_delete.php3
+	$s_project_deleted_msg = "Il progetto e' stato correttamente rimosso...";
+
+	### manage_project_delete_page.php3
+	$s_project_delete_msg = "Sei sicuro di voler eliminare questo progetto e tutti i bug associati?";
+	$s_project_delete_button = "Elimina Progetto";
+
+	### manage_project_edit_page.php3
+	$s_edit_project_title = "Modifica Progetto";
+	$s_project_name = "Nome Progetto";
+	### $s_status # defined above
+	### $s_enbaled # defined above
+	$s_view_status = "Visualizza lo Status";
+	$s_public = "pubblico";
+	$s_private = "provato";
+	### $s_description # defined above;
+	$s_update_project_button = "Aggiorna Progetto";
+	$s_delete_project_button = "Elimina Progetto";
+	$s_categories_and_version_title = "Categorie e Versioni";
+	$s_categories = "Categorie";
+	$s_add_category_button = "Nuova Categoria";
+	$s_versions = "Versioni";
+	$s_add_version_button = "Nuova Versione";
+	$s_edit_link = "modifica";
+
+	### manage_project_menu_page.php3
+	$s_add_project_title = "Inserisci Progetto";
+	### $s_project_name # defined above;
+	### $s_status # defined above;
+	### $s_view_status # defined above;
+	### $s_public # defined above;
+	### $s_private # defined above;
+	### $s_description # defined above;
+	$s_add_project_button = "Inserisci Progetto";
+	$s_projects_title = "Progetti";
+	$s_name = "Nome";
+	### $s_status # defined above;
+	### $s_enabed # defined above;
+	### $s_view_status # defined above;
+	### $s_description # defined above;
+	### $s_edit_link # defined above;
+
+	### manage_project_update.php3
+	$s_project_updated_msg = "Il Progetto e' stato correttamente aggiornato...";
+
+	### manage_project_version_add.php3
+	$s_version_added_msg = "La Versione e' stata inserita...";
+
+	### manage_project_version_delete.php3
+	$s_version_deleted_msg = "La Versione e' stata correttamente eliminata...";
+
+	### manage_project_version_delete_page.php3
+	$s_version_delete_sure = "Sei sicuro di voler eliminare questa versione? Tutti i Bug associati verranno eliminati.";
+	$s_delete_version_button = "Elimina Versione";
+
+
+
+
+# ------------------------------------------------------------------
+
+
+	### manage_project_version_edit_page.php3
+	$s_edit_project_version_title = "Modifica la Versione del Progetto";
+	$s_update_version_button = "Aggiorna la Versione";
+	### $s_delete_version_button # defined above;
+
+	### manage_project_version_update.php3
+	$s_version_updated_msg = "La Versione e' stata aggiornata...";
+
+	### manage_user_delete.php3
+	$s_account_delete_protected_msg = "Account Protetto. Non e' possibile eliminare questo utente.";
+	$s_account_deleted_msg = "Utente Eliminato...";
+
+	### manage_user_delete_page.php3
+	$s_delete_account_sure_msg = "Sei sicuro di voler eliminare questo account?";
+	### $s_delete_account_button # defined above
+
+	### manage_user_page.php3
+	$s_edit_user_title = "Elimina Utente";
+	### $s_username # defined above
+	### $s_email # defined above
+	### $s_access_level # defined above
+	### $s_enabled # defined above
+	### $s_protected # defined above
+	### $s_update_user_button # defined above
+	$s_reset_password_button = "Resetta Password";
+	$s_delete_user_button = "Elimina Utente";
+	$s_reset_password_msg = "Resetta le Password e imposta il valore a 'nullo'.";
+
+	### manage_user_reset.php3
+	$s_account_reset_protected_msg = "Account Protetto. Non e' possibile resettare la password.";
+	$s_account_reset_msg = "Password resettata...";
+
+	### manage_user_update.php3
+	$s_manage_user_protected_msg = "Account Protetto per il livello di accesso....";
+	$s_manage_user_updated_msg = "Account aggiornato...";
+
+	### menu_inc.php
+	$s_main_link = "Principale";
+	$s_view_bugs_link = "Visualizza i Bug";
+	$s_report_bug_link = "Inserisci Bug";
+	$s_summary_link = "Sommario";
+	$s_account_link = "Account";
+	$s_manage_link = "Gestisci";
+	$s_edit_news_link = "Modifica News";
+	$s_docs_link = "Documentazione";
+	$s_logout_link = "Esci";
+
+	### meta_inc.php
+	### news_add.php3
+	$s_news_added_msg = "News Inserita...";
+
+	### news_delete.php3
+	$s_news_deleted_msg = "News Eliminata...";
+
+	### news_delete_page.php3
+	$s_delete_news_sure_msg = "Sei sucuro di voler eliminare questa news?";
+	$s_delete_news_item_button = "Elimina News";
+
+	### news_edit_page.php3
+	$s_edit_news_title = "Modifica News";
+	$s_headline = "Titolo";
+	$s_body = "Testo";
+	$s_update_news_button = "Aggiorna News";
+
+	### news_menu_page.php3
+	$s_add_news_title = "Nuova News";
+	### $s_headline # defined above
+	$s_do_not_use = "Non usare";
+	### $s_body # defined above
+	$s_post_to = "Invia in ";
+	$s_post_news_button = "Inserisci News";
+	$s_edit_or_delete_news_title = "Elimina o modifica le News";
+	$s_edit_post = "Modifica il Post";
+	$s_delete_post = "Elimina il Post";
+	$s_select_post = "Seleziona il Post";
+	### $s_submit_button # defined above
+
+	### news_update.php3
+	$s_news_updated_msg = "News Aggiornata...";
+
+	### project_menu_page.php3
+	$s_project_selection_title = "Selezione Progetto";
+	### $s_projects # defined above
+	### $s_select_project_button # defined above
+
+	### report_add.php3
+	$s_report_add_error_msg = "ERRORE: Nel tuo Report e' presente un errore.";
+	$s_must_enter_category = "Devi selezionare una categoria";
+	$s_must_enter_severity = "Devi selezionare un livello di problematica";
+	$s_must_enter_reproducibility = "Devi selezionare la riproducibilita'";
+	$s_must_enter_summary = "Devi inserire un testo descrittivo in modo sommario";
+	$s_must_enter_description = "Devi inserire una descrizione";
+	#$s_hit_back_msg = "Please hit back and renter the required fields."; ### obsoleted
+	$s_submission_thanks_msg = "Grazie per il tuo inserimento.";
+
+	### report_bug_advanced_page.php3
+	$s_simple_report_link = "Report Semplice";
+	$s_enter_report_details_title = "Dettaglio Report";
+	### $s_category
+	$s_required = "obbligatorio";
+	$s_select_category = "Seleziona Categoria";
+	$s_select_reproducibility = "Seleziona la Riproducibilita'";
+	$s_select_severity = "Livello di Problematica";
+	### $s_reproducibility
+	### $s_severity
+	### $s_select_profile # defined above
+	$s_or_fill_in = "O Riempi in ";
+	### $s_platform # defined above
+	### $s_os # defined above
+	### $s_os_version # defined above
+	### $s_product_version # defined above
+	### $s_product_build # defined above
+	$s_assign_to = "Assegnato a ";
+	### $s_summary # defined above
+	### $s_description # defined above
+	$s_steps_to_reproduce = "Passi per la riproduzione dell'errore";
+	$s_additional_information = "Informazioni addizionali";
+	$s_submit_report_button = "Invia Report";
+
+	### report_bug_page.php3
+	$s_advanced_report_link = "Report Avanzato";
+	### $s_enter_report_details_title # defined above
+	### $s_category # defined above
+	### $s_required # defined above
+	### $s_select_category # defined above
+	### $s_select_reproducibility # defined above
+	### $s_select_severity # defined above
+	### $s_reproducibility
+	### $s_severity
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional_information # defined above
+	### $s_submit_report_button # defined above
+
+	### show_source_page.php3
+	$s_show_source_for_msg = "Visualizza la sorgente";
+	$s_not_supported_part1 = "Questa verisone";
+	$s_not_supported_part2 = "di php non lo supporta";
+
+	### signup.php3
+	$s_invalid_email = "EMAIL ERRATO";
+	$s_duplicate_username = "USERNAME DUPLICATO. SELEZIONARE UN UTENTE DIFFERENTE.";
+	$s_account_create_fail = "ERRORE NELLA CREAZIONE DELL'ACCOUNT";
+
+	### signup_page.php3
+	$s_signup_info = "Seleziona la tua login e inserisci una password. La password ti verra' inviata via mail.";
+	$s_signup_title = "Registrazione";
+	### $s_username = ""; # defined above
+	### $s_email = ""; # defined above
+	$s_signup_button = "Registrati";
+
+	### summary_page.php3
+	$s_summary_title = "Sommario";
+	$s_by_status = "per status";
+	$s_by_date = "per data";
+	$s_by_severity = "per gravita'";
+	$s_by_resolution = "per risoluzione";
+	$s_by_category = "per categoria";
+	$s_by_priority = "per priorita'";
+	$s_time_stats = "statistiche in giorni per la risoluzione dei bug";
+	$s_longest_open_bug = "bug piu' lungo nella risoluzione";
+	$s_longest_open = "la piu' lunga apertura";
+	$s_average_time = "tempo medio";
+	$s_total_time = "orario locale";
+	$s_developer_stats = "statistiche di sviluppo (aperti/risolit/totale)";
+
+	### view_bug_advanced_page.php3
+	$s_view_simple_link = "Visualizzazione Semplice";
+	$s_viewing_bug_advanced_details_title = "Visualizzazione avanzata del bug";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_platform # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_os # defined above
+	### $s_projection # defined above
+	### $s_os_version # defined above
+	### $s_eta # defined above
+	### $s_product_version # defined above
+	$s_product_build = "Versione del Progetto";
+	### $s_votes # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_steps_to # defined above
+	### $s_reproduce # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	$s_system_profile = "Descrizione del Sistema";
+	$s_update_bug_button = "Aggiorna il Bug";
+	$s_bug_assign_button    = "Assegnami il lavoro";
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
+	$s_reopen_bug_button = "Riapri il Bug";
+
+	### view_bug_all_page.php3
+	$s_all_bugs_link = "Tutti i Bug";
+	$s_reported_bugs_link = "Bug Evidenziati";
+	$s_assigned_bugs_link = "Bug Assegnati";
+	$s_any = "qualsiasi";
+	$s_show = "Visualizza";
+	$s_changed = "Modificato(ore)";
+	$s_hide_resolved = "Nascondi la Risoluzione";
+	$s_filter_button = "Filtra";
+	$s_viewing_bugs_title = "Visualizza i Bug";
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	$s_updated = "Aggiornato";
+	### $s_summary # defined above
+
+	### view_bug_page.php3
+	$s_view_advanced_link = "Visualizzazione Avanzata";
+	### $s_viewing_bug_details_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_reproducibility # defined above
+	### $s_date_submitted # defined above
+	### $s_last_update # defined above
+	### $s_reporter # defined above
+	### $s_assigned_to # defined above
+	### $s_priority # defined above
+	### $s_resolution # defined above
+	### $s_status # defined above
+	### $s_duplicate_id # defined above
+	### $s_summary # defined above
+	### $s_description # defined above
+	### $s_additional # defined above
+	### $s_information # defined above
+	### $s_update_bug_button # defined above
+	### $s_bug_assign_button # defined above
+	### $s_resolve_bug_button # defined above
+	### $s_delete_bug_button # defined above
+	### $s_reopen_bug_button # defined above
+
+	### view_user_assigned_bug_page.php3
+	### $s_all_bugs_link # defined above
+	### $s_reported_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
+
+	### view_user_reported_bug_page.php3
+	### $s_all_bugs_link # defined above
+	### $s_assigned_bugs_link # defined above
+	### $s_any # defined above
+	### $s_show # defined above
+	### $s_changed # defined above
+	### $s_hide_resolved # defined above
+	### $s_filter_button # defined above
+	### $s_viewing_bugs_title # defined above
+	### $s_id # defined above
+	### $s_category # defined above
+	### $s_severity # defined above
+	### $s_status # defined above
+	### $s_updated # defined above
+	### $s_summary # defined above
+?>
