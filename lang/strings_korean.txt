@@ -9,11 +9,11 @@
 	# 추가 번역   torija@users.sourceforge.net
 	#             hardkoder@gmail.com - 2004/09 현재 수정중 입니다. 중복 수정을 피하기 위해서 수정시 연락 바랍니다.
 	# -------------------------------------------------
-	# $Revision: 1.72 $
+	# $Revision: 1.73 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-06 12:24:59 $
+	# $Date: 2004-09-06 12:29:30 $
 	#
-	# $Id: strings_korean.txt,v 1.72 2004-09-06 12:24:59 bigbadger Exp $
+	# $Id: strings_korean.txt,v 1.73 2004-09-06 12:29:30 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -37,8 +37,8 @@ $s_all_projects = '모든 프로젝트';
 $s_move_bugs = '이슈 이동';
 $s_operation_successful = '실행 완료.';
 $s_date_order = '날짜순 정렬';
-$s_print_all_bug_page_link = '리포트 출력';
-$s_csv_export = 'CSV 엑스포트';
+$s_print_all_bug_page_link = '보고서 출력';
+$s_csv_export = 'CSV 내보내기';
 $s_login_anonymously = '익명 로그인';
 $s_anonymous = '익명';
 $s_jump_to_bugnotes = '이슈노트로 이동';
@@ -71,11 +71,11 @@ $s_bug_relationships = '관계';
 $s_empty_password_sure_msg = '암호가 설정되지 않았습니다. 이대로 사용하시겠습니까?';
 $s_empty_password_button = '암호없이 사용';
 
-$s_duplicate_of = '%id의 중복';
-$s_has_duplicate = "has duplicate";
-$s_related_to = '%id 와 관련';
-$s_dependant_on = '%id 에 종속';
-$s_blocks = '%id 차단';
+$s_duplicate_of = "다음과 중복됨";
+$s_has_duplicate = "다음에 중복됨";
+$s_related_to = "다음과 관련됨";
+$s_dependant_on = "다음에 종속됨";
+$s_blocks = "다음에서 파생됨";
 
 $s_new_bug = '새 이슈';
 $s_bugnote_added = '이슈노트 추가됨';
@@ -97,8 +97,8 @@ $s_create_new_project_link = '새로운 프로젝트 생성';
 $s_login_link = '로그인';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = '이 동작을 실행할 적당한 권한이 없습니다. 오류는 다음과 같습니다: ';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_failed = '이 동작을 실행할 권한이 없습니다. 오류는 다음과 같습니다: ';
+$s_bug_actiongroup_access = '이 동작을 실행할 권한이 없습니다.';
 $s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = '이 이슈를 폐쇄하시겠습니까 ?';
 $s_delete_bugs_conf_msg = '이 이슈를 삭제하시겠습니까 ?';
@@ -155,7 +155,7 @@ $s_bugnote_description = '이슈노트 설명';
 $s_error_no_proceed = '이전 페이지로 돌아가려면 웹 브라우저에서 "뒤로" 버튼을 사용하세요. 이 오류에 대한 문제를 수정하거나 다른 동작을 선택하세요. 새로운 영역으로 이동하기 위해서는 메뉴의 옵션을 클릭하시면 됩니다.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = '오류: 이 동작을 수행하는 도중 오류가 발생했습니다.  시스템 관리자에게 이 오류를 보고하세요.';
+$MANTIS_ERROR[ERROR_GENERIC] = '오류: 이 동작을 수행하는 도중 오류가 발생했습니다.  시스템 관리자에게 이 오류를 보고하세요.';
 $MANTIS_ERROR[ERROR_SQL] = '오류: SQL 오류 발생. 문제를 보고해 주시기 바랍니다.';
 $MANTIS_ERROR[ERROR_REPORT] = '오류: 입력내용에 오류가 발생했습니다.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
@@ -211,7 +211,7 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = '오류: 버전정보를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = '오류: 사용자 이름 오류.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = '접근 권한이 없는 사용자입니다.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '이 별명은 다른 사용자의 아이디로 사용되고 있습니다. 다른걸로 바꿔주세요.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
@@ -245,7 +245,7 @@ $s_logged_in_as = '로그인한 ID :';
 $s_prefix_for_deleted_users = '사용자';
 
 $s_administrator = '관리자';
-$s_myself = "Myself";
+$s_myself = "나";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
@@ -254,7 +254,7 @@ $s_project_view_state_enum_string = '10:공개,50:비공개';
 $s_view_state_enum_string         = '10:공개,50:비공개';
 
 $s_priority_enum_string           = '10:없음,20:낮음,30:보통,40:높음,50:긴급,60:즉시';
-$s_severity_enum_string           = '10:새 기능 요구,20:사소함,30:오타,40:기능 개선,50:덜 중요함,60:중요함,70:충돌,80:장애';
+$s_severity_enum_string           = '10:새 기능 요구,20:사소함,30:오타,40:기능 개선,50:보통,60:중요함,70:충돌,80:장애';
 $s_reproducibility_enum_string    = '10:항상발생,30:가끔발생,50:불규칙적,70:아직 시도되지 않음,90:다시 만들수 없음,100:N/A';
 $s_status_enum_string             = '10:새로운 이슈,20:추가정보(필요),30:이슈 인정,40:이슈 확인,50:할당된 이슈,80:해결된 이슈,90:폐쇄된 이슈';
 $s_resolution_enum_string         = '10:개설,20:수정됨,30:다시 발생,40:재현할 수 없음,50:수정할 수 없음,60:중복,70:이슈 아님,80:보류(suspended),90:해결할 수 없음';
@@ -282,10 +282,10 @@ $s_email_notification_title_for_status_bug_assigned = 'The following issue has b
 $s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
 $s_email_notification_title_for_status_bug_closed = 'The following isse has been CLOSED';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
@@ -315,7 +315,7 @@ $s_email_summary =  '요약';
 $s_email_description = '설명';
 
 # account_delete.php
-$s_account_protected_msg = '계정이 보호되었습니다. 정보를 변경할수 없습니다....';
+$s_account_protected_msg = '계정이 보호되었습니다. 정보를 변경할수 없습니다...';
 $s_account_removed_msg = '당신의 계정이 삭제되었습니다...';
 
 # account_delete_page.php
@@ -327,12 +327,12 @@ $s_manage_profiles_link = '프로파일 관리';
 $s_change_preferences_link = '설정상태 변경';
 $s_edit_account_title = '계정 편집';
 $s_username = '사용자 ID';
-$s_realname = 'Real Name';
+$s_realname = '별명';
 $s_email = '이메일';
 $s_password = '암호';
 $s_confirm_password  = '암호 확인';
 $s_access_level = '접근 레벨';
-$s_update_user_button = '사용자 갱신';
+$s_update_user_button = '정보 갱신';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = '기본 계정 설정상태';
@@ -355,7 +355,7 @@ $s_email_on_reopened = '재발생시 이메일';
 $s_email_on_bugnote_added = '벌레노트 추가시 이메일';
 $s_email_on_status_change = '상태 변경시 이메일';
 $s_email_on_priority_change = '우선순위 변경시 이메일';
-$s_email_bugnote_limit = 'Email Bugnotes Limit';
+$s_email_bugnote_limit = 'Email Notes Limit';
 $s_language = '언어';
 $s_update_prefs_button = '설정상태 갱신';
 $s_reset_prefs_button = '설정상태 초기화';
@@ -398,12 +398,12 @@ $s_profile_updated_msg = '프로파일 갱신....';
 # account_update.php
 $s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
 $s_email_updated = '이메일 주소가 변경되었습니다...';
-$s_realname_duplicated = 'Real name is used by another user';
-$s_realname_updated = 'Real name successfully updated';
+$s_realname_duplicated = '이 별명은 다른 사용자가 쓰고 있습니다.';
+$s_realname_updated = '별명이 수정 되었습니다.';
 $s_password_updated = '암호가 변경되었습니다...';
 
 # bug_assign.php
-$s_bug_assign_msg       = '이슈가 할당되었습니다...';
+$s_bug_assign_msg = '이슈가 할당되었습니다...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
@@ -418,8 +418,8 @@ $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
 
 # bug_close.php
-$s_bug_close_msg       = '이슈가 폐쇄(close)되었습니다...';
-$s_close_immediately   = '지금 폐쇄:';
+$s_bug_close_msg = '이슈가 폐쇄(close)되었습니다...';
+$s_close_immediately = '지금 폐쇄:';
 
 # bug_close_page.php
 $s_closed_bug_title = '이슈 폐쇄';
@@ -461,10 +461,10 @@ $s_bugnote_add_resolve_button = '이슈노트 추가';
 # bug_reminder_page.php
 $s_from = '보낸 사람';
 $s_to = '받는 사람';
-$s_on = 'On';
-$s_sent_you_this_reminder_about = 'sent you this reminder about';
-$s_bug_reminder = 'Send a reminder';
-$s_reminder_sent_to = 'Reminder sent to';
+$s_on = '발송일 : ';
+$s_sent_you_this_reminder_about = ' 당신에게 아래와 같은 알림 메일이 발송 되었습니다.';
+$s_bug_reminder = '알림 메일 보내기';
+$s_reminder_sent_to = '알림 메일이 다음 사람에게 발송 되었습니다 : ';
 $s_bug_send_button = '전송';
 $s_reminder = '요청자';
 
@@ -929,7 +929,7 @@ $s_product_build = '제품 빌드번호';
 $s_system_profile = '시스템 설명';
 $s_update_bug_button = '이슈 갱신';
 $s_bug_assign_to_button = '할당:';
-$s_bug_status_to_button = 'Change Status To:';
+$s_bug_status_to_button = '상태 변경:';
 $s_reopen_bug_button = '재발생 이슈';
 $s_move_bug_button = '이슈 이동';
 $s_attached_files = '첨부 파일';
