@@ -55,7 +55,7 @@
 	# clear view filter between projects
 	setcookie( $g_view_all_cookie );
 
-	if ( ( ON == $g_quick_proceed )&&( $result ) ) {
+	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	}
 ?>
