@@ -11,7 +11,7 @@
 	# --------------------
 	# return the custom list for the specified project id and the specified attribute
 	function attribute_get_all( $p_parameter, $p_project_id ) {
-		global $g_mantis_project_customization_table; 
+		global $g_mantis_project_customization_table;
 
 		$c_project_id = (integer)$p_project_id;
 		$c_parameter	= addslashes($p_parameter);
@@ -36,12 +36,12 @@
 		$c_project_id	= (integer)$p_project_id;
 		$c_attribute	= addslashes($p_attribute);
 		$c_parameter	= addslashes($p_parameter);
-		
+
 		$t_old_flag = 0 ;
 		if (strlen($p_old_attribute) != 0) {
 			$c_old_attribute = addslashes($p_old_attribute);
 			$t_old_flag = 1;
-		}		
+		}
 		# get all the attributes
 		$attribute_count = 0 ;
 		$t_attribute_arr = attribute_get_all($c_parameter, $p_project_id );
@@ -68,7 +68,7 @@
 
 		$t_attribute_arr = attribute_get_all($c_parameter, $c_project_id );
 		$att_arr_count = count($t_attribute_arr);
-		
+
 		# Grab the data to test if the table is empty
 		$query = "SELECT $c_parameter
 				FROM $g_mantis_project_customization_table
@@ -77,13 +77,13 @@
 
 		## OOPS, No entry in the database yet.  Lets make one, used for copy attribute too
 		if ( 0 == db_num_rows( $result ) ) {
-			
+
 			# add attribute field and project id
-			$query = "INSERT 
+			$query = "INSERT
 					INTO $g_mantis_project_customization_table
-					(project_id) 
-					VALUES 
-					('$c_project_id')"; 
+					(project_id)
+					VALUES
+					('$c_project_id')";
 
 			$result = db_query($query);
 		}
@@ -115,8 +115,8 @@
 		$t_index = 0 ;
 
 		$t_attribute_arr = attribute_get_all($c_parameter, $c_project_id );
-		foreach($t_attribute_arr as $key=>$val) 
-		{ 
+		foreach($t_attribute_arr as $key=>$val)
+		{
 			if ($val == $p_orig_attribute) {
 				$t_attribute_arr[$key] = $p_attribute ;
 				$t_index = $key;
@@ -160,7 +160,7 @@
 			}
 		}
 		array_splice( $t_attribute_arr, $t_offset, 1);
-		
+
 		# color treatment for custom states
 		if ($p_parameter == $s_states)  {
 			$t_color_arr = attribute_get_all('colors', $c_project_id) ;
@@ -175,16 +175,16 @@
 		$query = "UPDATE $g_mantis_project_customization_table".
 				" SET $c_parameter='$t_attribute_str'".$t_color_req.
 				" WHERE project_id='$c_project_id'";
-		
+
 		# update mantis_bug table
 		# the bug with the deleted status is now set as @null@
 		# the status above are decreased by 1
 		if ($p_parameter == $s_states)  {
 
-			#slot[0] : the unused one ; index : the deleted bug ; index_up : the end of slot 
+			#slot[0] : the unused one ; index : the deleted bug ; index_up : the end of slot
 			$t_status_index = $g_custom_status_slot[0] + 1 + $t_offset ;
 			$t_status_index_up = $g_custom_status_slot[1] ;
-		
+
 			$query2 = "UPDATE $g_mantis_bug_table
 				SET status=$g_custom_status_slot[0]
 				WHERE status=$t_status_index";
@@ -217,13 +217,13 @@
 				$t_attribute_arr = attribute_get_all($p_parameter, $p_project_id );
 				$att_arr_count = count( $t_attribute_arr );
 				for ($i=0;$i<$att_arr_count;$i++) {
-					
+
 					$t_attribute = $t_attribute_arr[$i];
 					$t2_attribute = urlencode( $t_attribute );
 
 					# alternate row colors
 					$t_bgcolor = alternate_colors( $i );
-					
+
 					# attribute are not initialized the 1st time
 					# so the blank line isn't displayed
 					if ($t_attribute != '') {
@@ -235,7 +235,7 @@
 				<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
 					<?php
 				print_bracket_link('manage_proj_attribute_edit_page.php?f_project_id='.$p_project_id."&amp;f_parameter=$p_parameter&amp;f_attribute=".$t2_attribute, $s_edit_link );
-				PRINT '&nbsp;';	
+				PRINT '&nbsp;';
 				print_bracket_link('manage_proj_attribute_del_page.php?f_project_id='.$p_project_id."&amp;f_parameter=$p_parameter&amp;f_attribute=".$t2_attribute, $s_delete_link );
 					?>
 				</td>
@@ -281,72 +281,72 @@
 	-->
 	<tr>
 		<td>
-			<hr>
+			<hr />
 		</td>
 	</tr>
-	<?php 
+	<?php
 	} # end of attribute_display
 
 	# --------------------
 	# function used in core_helper.api and core_print_api to display the custom attributes
 	# $p_selector is either 'global' for global varis treatment, or 'str' for string treatments
 	function insert_attributes( $p_enum_name, $p_project_id, $p_selector ) {
-		
+
 		$t_prefix = '';
 		# if the function is called for anything that printing attributes, do nothing
-		$t_continue = 0; 
+		$t_continue = 0;
 		switch ($p_selector) {
 			case 'global' :
 				$t_prefix = 'g_';
 				break ;
-			case 'str' : 
+			case 'str' :
 				$t_prefix = 's_';
-				
+
 				break ;
 		}
 		$t_var = $t_prefix.$p_enum_name.'_enum_string';
 		global $$t_var, $g_custom_status_slot;
-		
+
 		$p_parameter = '';
 		switch ($p_enum_name) {
 			case 'priority' :
 				$p_parameter = 'priorities' ;
-				$t_continue = 1; 
+				$t_continue = 1;
 				break;
 			case 'severity' :
 				$p_parameter = 'severities' ;
-				$t_continue = 1; 
+				$t_continue = 1;
 				break;
 			case 'reproducibility' :
 				$p_parameter = 'reproducibilities' ;
-				$t_continue = 1; 
+				$t_continue = 1;
 				break;
 			case 'status' :
 				$p_parameter = 'states' ;
-				$t_continue = 1; 
+				$t_continue = 1;
 				break;
 			case 'resolution' :
 				$p_parameter = 'resolutions' ;
-				$t_continue = 1; 
+				$t_continue = 1;
 				break;
 			case 'projection' :
 				$p_parameter = 'projections' ;
-				$t_continue = 1; 
+				$t_continue = 1;
 				break;
 			case 'eta' :
 				$p_parameter = 'etas' ;
-				$t_continue = 1; 
+				$t_continue = 1;
 				break;
-		} 
+		}
 		if ($t_continue) {
 			$c_project_id = (integer)$p_project_id;
 			$c_parameter  = addslashes($p_parameter);
-			
+
 			# get the selected attribute array
 			$t_attribute_arr = attribute_get_all($c_parameter, $p_project_id );
 			$att_arr_count = count($t_attribute_arr);
-			
-			# status attribute has a particular status, custom fields are inserted between 60 and the resolved status (80) 
+
+			# status attribute has a particular status, custom fields are inserted between 60 and the resolved status (80)
 			if ( ( $t_var == ($t_prefix.'status_enum_string') ) ) {
 
 				# checks if the strings are already included
@@ -358,7 +358,7 @@
 							$$t_var = substr($$t_var,0,$pos).','.($g_custom_status_slot[0]+1+$i).':'.$t_attribute_arr[$i].substr($$t_var,$pos);
 						}
 					} # for loop
-				} # if ereg 
+				} # if ereg
 			} else {   // for other attributes, custom ones are appended after the others, starting with number 110
 				$attribute_index = '110' ;
 				# checks if the strings are already included
@@ -366,7 +366,7 @@
 					for ($i = 0 ; $i < $att_arr_count ; $i++) {
 						$$t_var = $$t_var.','.($attribute_index+$i).':'.$t_attribute_arr[$i];
 					} # for loop
-				} # if ereg 
+				} # if ereg
 			} # if status
 		}# if continue
 	} # end of insert_attributes

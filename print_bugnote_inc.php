@@ -60,7 +60,7 @@
 ?>
 <tr>
 	<td class="print-spacer" colspan="2">
-		<hr size="1">
+		<hr size="1" />
 	</td>
 </tr>
 <tr>

@@ -189,7 +189,7 @@
 </tr>
 <tr>
 	<td>
-		<hr>
+		<hr />
 	</td>
 </tr>
 <tr class="row-category">

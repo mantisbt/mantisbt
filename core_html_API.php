@@ -187,7 +187,7 @@
 		print_source_link( $p_file );
 
 		PRINT '<p>';
-		PRINT '<hr size="1">';
+		PRINT '<hr size="1" />';
 		if ( ON == $g_show_version ) {
 			PRINT "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
 		}
@@ -290,7 +290,7 @@
  	# --------------------
 	# print the hr
 	function print_hr( $p_hr_size, $p_hr_width ) {
-		PRINT "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\">";
+		PRINT "<hr size=\"$p_hr_size\" width=\"$p_hr_width%\" />";
 	}
 	# --------------------
 	###########################################################################

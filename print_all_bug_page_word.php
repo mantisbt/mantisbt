@@ -251,7 +251,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1">
+		<hr size="1" />
 	</td>
 </tr>
 <tr class="print-category">
@@ -296,7 +296,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1">
+		<hr size="1" />
 	</td>
 </tr>
 <tr class="print">
@@ -414,7 +414,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1">
+		<hr size="1" />
 	</td>
 </tr>
 <tr class="print">
@@ -553,7 +553,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	?>
 <tr>
 	<td class="print-spacer" colspan="2">
-		<hr size="1">
+		<hr size="1" />
 	</td>
 </tr>
 <tr>

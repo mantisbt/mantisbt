@@ -58,7 +58,7 @@
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1">
+		<hr size="1" />
 	</td>
 </tr>
 <tr class="print-category">
@@ -103,7 +103,7 @@
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1">
+		<hr size="1" />
 	</td>
 </tr>
 <tr class="print">
@@ -221,7 +221,7 @@
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1">
+		<hr size="1" />
 	</td>
 </tr>
 <tr class="print">
