@@ -373,9 +373,12 @@
 	  
 		if ( ON == $t_show_attachments ) {
 		  echo '<td class="center">';
-			if ( TRUE == $t_has_attachments ) {
+			if ( FALSE != $t_has_attachments ) {
 				echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
-				echo '<img border="0" src="' . config_get( 'icon_path' ) . 'attachment.png' . '" alt="" />';
+				echo '<img border="0" src="' . config_get( 'icon_path' ) . 'attachment.png' . '"';
+				echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
+				echo ' title="' . $t_has_attachments . ' ' . lang_get( 'attachments' ) . '"';
+				echo ' />';
 				echo '</a>';
 			} else {
 			  echo '&nbsp;';

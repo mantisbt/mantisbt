@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.33 2003-03-27 22:34:05 int2str Exp $
+	# $Id: file_api.php,v 1.34 2003-03-31 22:21:06 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -34,7 +34,7 @@
 		$result = db_query( $query );
 
 		if ( 0 < db_num_rows( $result ) )
-			return TRUE;
+			return db_num_rows( $result );
 			
 		return FALSE;
 	}
