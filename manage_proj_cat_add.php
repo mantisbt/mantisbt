@@ -13,11 +13,25 @@
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
 
-	$result = 0;
-	$duplicate = is_duplicate_category( $f_project_id, $f_category );
-	# check for empty case or duplicate
-	if ( !$duplicate ) {
-		$result = category_add( $f_project_id, $f_category );
+	$t_categories_array = explode( '|', $f_category );
+	$t_count = count( $t_categories_array );
+	$result = true;
+	$duplicate = false;
+
+	foreach ( $t_categories_array as $t_category ) {
+		$t_category = trim( $t_category );
+		if ( $t_category == '') {
+			continue;
+		}
+
+		$t_duplicate = is_duplicate_category( $f_project_id, $t_category );
+		if ( !$t_duplicate ) {
+			$t_result = category_add( $f_project_id, $t_category );
+			$result = $result && $t_result;
+		} else {
+			$duplicate = true;
+			$result = false;
+		}
 	}
 
 	$t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;
