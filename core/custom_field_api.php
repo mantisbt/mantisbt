@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.23 2004-02-06 10:05:38 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.24 2004-02-24 23:51:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -776,6 +776,7 @@
 					  VALUES
 						( '$c_field_id', '$c_bug_id', '$c_value' )";
 			db_query( $query );
+			history_log_event_direct( $c_bug_id, $t_name, '', $p_value);
 		}
 
 		custom_field_clear_cache( $p_field_id );
