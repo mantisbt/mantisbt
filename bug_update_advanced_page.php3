@@ -99,10 +99,10 @@
 		</td>
 		<td>
 			<input type=hidden name=f_date_submitted value="<? echo $v_date_submitted ?>">
-			<? echo date( "m-d H:i", sql_to_unix_time( $v_date_submitted ) ) ?>
+			<? echo date( $g_normal_date_format, sql_to_unix_time( $v_date_submitted ) ) ?>
 		</td>
 		<td>
-			<? echo date( "m-d H:i", sql_to_unix_time( $v_last_updated ) ) ?>
+			<? echo date( $g_normal_date_format, sql_to_unix_time( $v_last_updated ) ) ?>
 		</td>
 	</tr>
 	<tr height=5 bgcolor=<? echo $g_white_color ?>>
