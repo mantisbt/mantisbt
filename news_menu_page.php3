@@ -34,7 +34,7 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td width="25%">
+	<td class="category" width="25%">
 		<? echo $s_headline ?><br>
 		<? echo $s_do_not_use ?> "
 	</td>
@@ -43,7 +43,7 @@
 	</td>
 </tr>
 <tr class="row-2">
-	<td>
+	<td class="category">
 		<? echo $s_body ?>
 	</td>
 	<td>
@@ -51,7 +51,7 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td>
+	<td class="category">
 		<? echo $s_post_to ?>
 	</td>
 	<td>
@@ -92,7 +92,7 @@
 	</td>
 </tr>
 <tr class="row-2">
-	<td width="25%">
+	<td class="category" width="25%">
 		<? echo $s_select_post ?>
 	</td>
 	<td width="75%">

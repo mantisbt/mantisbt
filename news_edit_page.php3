@@ -34,13 +34,7 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
-
-<p>
-<div align="center">
-	<? print_bracket_link( $g_news_menu_page, "Back" ) ?>
-</div>
 
 <? ### Edit News Form BEGIN ?>
 <p>
@@ -49,8 +43,11 @@
 <input type="hidden" name="f_id" value="<? echo $v_id ?>">
 <table class="width75" cellspacing="0">
 <tr>
-	<td class="form-title" colspan="2">
+	<td class="form-title">
 		<? echo $s_edit_news_title ?>
+	</td>
+	<td class="right">
+		<? print_bracket_link( $g_news_menu_page, "Back" ) ?>
 	</td>
 </tr>
 <tr class="row-1">

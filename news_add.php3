@@ -24,7 +24,6 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
@@ -33,18 +32,15 @@
 	if ( $result ) {			### SUCCESS
 		PRINT "$s_news_added_msg<p>";
 ?>
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="0">
 <tr>
-	<td bgcolor="<? echo $g_primary_color_dark ?>">
-		<b><? echo $f_headline ?></b>
+	<td class="news-heading">
+		<span class="news-headline"><? echo $f_headline ?></span>
 	</td>
 </tr>
 <tr>
-	<td bgcolor="<? echo $g_primary_color_light ?>">
-		<br>
-		<blockquote>
-			<? echo $f_body ?>
-		</blockquote>
+	<td class="news-body">
+		<? echo $f_body ?>
 	</td>
 </tr>
 </table>
