@@ -68,7 +68,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 <?php  # displays the choices popup menus
-	if ( $t_finished ) {
+	if ( ! $t_finished ) {
 ?>
 <br />
 <div align="center">
