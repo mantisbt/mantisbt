@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.36 2003-02-15 22:20:32 vboctor Exp $
+	# $Id: bug_api.php,v 1.37 2003-02-16 11:03:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -44,7 +44,6 @@
 		var $platform = '';
 		var $version = '';
 		var $build = '';
-		var $votes = 0;
 		var $view_state = PUBLIC;
 		var $summary = '';
 
@@ -325,7 +324,7 @@
 				      eta, bug_text_id,
 				      os, os_build,
 				      platform, version,
-				      build, votes,
+				      build,
 				      profile_id, summary, view_state )
 				  VALUES
 				    ( null, '$c_project_id',
@@ -338,7 +337,7 @@
 				      10, '$t_text_id',
 				      '$c_os', '$c_os_build',
 				      '$c_platform', '$c_version',
-				      '$c_build', 1,
+				      '$c_build',
 				      '$c_profile_id', '$c_summary', '$c_view_state' )";
 		db_query( $query );
 
@@ -471,7 +470,6 @@
 					platform='$c_bug_data->platform',
 					version='$c_bug_data->version',
 					build='$c_bug_data->build',
-					votes='$c_bug_data->votes',
 					view_state='$c_bug_data->view_state',
 					summary='$c_bug_data->summary'
 				WHERE id='$c_bug_id'";
@@ -514,8 +512,6 @@
 									$t_old_data->version, $p_bug_data->version );
 		history_log_event_direct( $p_bug_id, 'build', 
 									$t_old_data->build, $p_bug_data->build );
-		history_log_event_direct( $p_bug_id, 'votes', 
-									$t_old_data->votes, $p_bug_data->votes );
 		history_log_event_direct( $p_bug_id, 'view_state', 
 									$t_old_data->view_state, $p_bug_data->view_state );
 		history_log_event_direct( $p_bug_id, 'summary', 
@@ -959,7 +955,6 @@
 		$p_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
 		$p_bug_data->version			= db_prepare_string( $p_bug_data->version );
 		$p_bug_data->build				= db_prepare_string( $p_bug_data->build );
-		$p_bug_data->votes				= db_prepare_int( $p_bug_data->votes );
 		$p_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
 		$p_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
 
