@@ -11,6 +11,7 @@ To Do:
  * Add postgreSQL support and a Database abstraction layer
  * Refine viewing preferences
  * Add profiles for each user
+ * Refine viewing news archives
 
 XX.XX.2000	-	0.10.2
 

@@ -21,10 +21,16 @@
 <p>
 <? print_menu( $g_menu_include_file ) ?>
 
+<?
+	if ( $g_show_advanced_update==1 ) {
+?>
 <p>
 <div align=center>
 [ <a href="<? echo $g_bug_view_page ?>?f_id=<? echo $f_id ?>">Back</a> ]
 </div>
+<?
+	}
+?>
 
 <?
     $query = "SELECT *

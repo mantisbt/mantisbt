@@ -38,6 +38,12 @@
 	$g_window_title         = "Mantis";     # browser window title
 	$g_page_title           = "Mantis";     # title in html page
 
+	#--------------------
+	# toggling advanced interfaces
+	$g_show_advanced_report      = 1;      # 1 to enable - 0 to disable
+	$g_show_advanced_update      = 1;      # 1 to enable - 0 to disable
+	#--------------------
+
 	# core file variables
 	$g_core_API_file        = "core_API.php";
 	$g_meta_include_file    = "meta_inc.php";

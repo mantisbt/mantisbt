@@ -21,10 +21,16 @@
 <p>
 <? print_menu( $g_menu_include_file ) ?>
 
+<?
+	if ( $g_show_advanced_report==1 ) {
+?>
 <p>
 <div align=center>
 [ <a href="<? echo $g_report_bug_advanced_page ?>">Advanced Report</a> ]
 </div>
+<?
+	}
+?>
 
 <p>
 <div align=center>
