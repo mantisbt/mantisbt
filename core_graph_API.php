@@ -1,25 +1,14 @@
 <?php
-if ( isset($HTTP_GET_VARS['g_jpgraph_path']) ||
-	isset($HTTP_POST_VARS['g_jpgraph_path']) ||
-	isset($HTTP_COOKIE_VARS['g_jpgraph_path']) ) {
-		exit;
-}
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the files README and LICENSE for details
 
-include ($g_jpgraph_path.'jpgraph.php');
-include ($g_jpgraph_path.'jpgraph_line.php');
-include ($g_jpgraph_path.'jpgraph_bar.php');
-include( $g_jpgraph_path.'jpgraph_pie.php');
-include( $g_jpgraph_path.'jpgraph_pie3d.php');
-?>
-<?php login_cookie_check() ?>
-<?php
-	# if user below view summary threshold, then re-direct to mainpage.
-	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
-		print_header_redirect( 'main_page.php' );
-	}
-##########################################################################
-
-	#functions which gives the absolute values according to the status (opened/closed/resolved)
+	###########################################################################
+	# Graph API
+	###########################################################################
+	# Function which gives the absolute values according to the status (opened/closed/resolved)
 	function enum_bug_group( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
 		#these vars are set global so that the other functions can use them
@@ -79,8 +68,7 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		} ### end for
 	}
 
-
-	#functions which displays the charts using the absolute values according to the status (opened/closed/resolved)
+	# Function which displays the charts using the absolute values according to the status (opened/closed/resolved)
 	function graph_group( $p_title='' ){
 		global $enum_name, $enum_name_count;
 		global $open_bug_count, $closed_bug_count, $resolved_bug_count,$height;
@@ -130,8 +118,7 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 
 	}
 
-
-	#function which finds the % according to the status
+	# Function which finds the % according to the status
 	function enum_bug_group_pct( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
 		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
@@ -206,8 +193,7 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		} ### end for
 	}
 
-
-	#function that displays charts in %	according to the status
+	# Function that displays charts in % according to the status
 	function graph_group_pct( $p_title='' ){
 		global $enum_name, $enum_name_count;
 		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
@@ -243,12 +229,9 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 
         $graph->Add($gbplot);
 		$graph->Stroke();
-}
+	}
 
-
-	###########################################################################
-
-	#function which gets the values in %
+	# Function which gets the values in %
 	function create_bug_enum_summary_pct( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count, $total;
 		$enum_name = Null;
@@ -283,8 +266,7 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		} ### end for
 	}
 
-
-	#function that displays pie charts
+	# Function that displays pie charts
 	function graph_bug_enum_summary_pct( $p_title=''){
 		global $enum_name, $enum_name_count, $center, $poshorizontal, $posvertical;
 
@@ -310,10 +292,7 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 
 		$graph->Add($p1);
 		$graph->Stroke();
-
-}
-
-################################################################
+	}
 
 	function create_category_summary_pct() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
@@ -353,7 +332,7 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		} ### end for
 	}
 
-	# pie chart which dispays by categories
+	# Pie chart which dispays by categories
 	function graph_category_summary_pct( $p_title=''){
 		global $category_name, $category_bug_count, $s_by_category;
 
@@ -380,9 +359,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		$graph->Stroke();
 
 	}
-# End of improved charts functions
-
-#############################################################
 
 	function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
@@ -431,8 +407,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		$graph->Stroke();
 
 	}
-
-#############################################################
 
 	function create_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table, $g_mantis_project_user_list_table,
@@ -485,8 +459,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		} # end for
 	}
 
-
-
 	function graph_developer_summary( ){
 		global $developer_name, $total_bug_count, $open_bug_count, $resolved_bug_count, $s_by_developer;
 
@@ -525,9 +497,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 
 	}
 
-
-#############################################################
-
 	function create_reporter_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 			$g_project_cookie_val,
@@ -559,8 +528,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		} # end for
 	}
 
-
-
 	function graph_reporter_summary( ){
 		global $reporter_name, $reporter_count, $s_email_reporter, $s_by_reporter;
 
@@ -583,11 +550,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		$graph->Stroke();
 
 	}
-
-
-#############################################################
-
-
 
 	function create_category_summary() {
 		global 	$g_mantis_bug_table,
@@ -617,7 +579,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		} # end for
 	}
 
-
 	function graph_category_summary(){
 		global $category_name, $category_bug_count, $s_by_category;
 
@@ -641,16 +602,10 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 
 	}
 
-
-
-#############################################################
-
-
 	function cmp_dates($a, $b){
 		if ($a[0]==$b[0]) return 0;
 		return ($a[0]<$b[0]) ? -1 : 1;
 	}
-
 
 	function find_date_in_metrics($aDate){
 		global $metrics;
@@ -663,7 +618,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 		}
 		return $index;
 	}
-
 
 	function create_cumulative_bydate(){
 		global $metrics, $g_mantis_bug_table, $g_project_cookie_val;
@@ -731,7 +685,6 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 
 	}
 
-
 	function graph_cumulative_bydate(){
 		global $metrics, $s_by_date;
 
@@ -778,6 +731,5 @@ include( $g_jpgraph_path.'jpgraph_pie3d.php');
 
 		$graph->Stroke();
 	}
-
-#############################################################
+	# ----------
 ?>

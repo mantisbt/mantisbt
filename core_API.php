@@ -107,5 +107,14 @@
 	require( 'core_custom_attribute_API.php' );
 	require( 'core_bugnote_API.php' );
 	require( 'core_bug_API.php' );
+
+	if (ON == $g_use_jpgraph) {
+		require( 'core_graph_API.php' );
+		require( $g_jpgraph_path . 'jpgraph.php' );
+		require( $g_jpgraph_path . 'jpgraph_line.php' );
+		require( $g_jpgraph_path . 'jpgraph_bar.php' );
+		require( $g_jpgraph_path . 'jpgraph_pie.php' );
+		require( $g_jpgraph_path . 'jpgraph_pie3d.php' );	
+	}
 	# --------------------
 ?>
