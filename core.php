@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.19 2003-02-15 01:25:48 jfitzell Exp $
+	# $Id: core.php,v 1.20 2003-02-16 14:12:46 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -26,10 +26,6 @@
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
 	}
 	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_defaults_inc.php' );
-	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_config_inc.php' ) ) {
-		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_config_inc.php' );
-	}
-	# for backward compatability
 	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
 	}
