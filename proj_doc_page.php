@@ -18,7 +18,8 @@
 	# Select project files
 	$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
 			FROM $g_mantis_project_file_table
-			WHERE project_id='$g_project_cookie_val'";
+			WHERE project_id='$g_project_cookie_val'
+			ORDER BY title ASC";
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );
 ?>
