@@ -11,6 +11,8 @@
 	$g_skip_open_db = true;  # don't open the database in database_api.php
 	@require_once( '../core.php' );
 
+	$t_core_path = config_get( 'core_path' );
+
 	$f_mail_test	= gpc_get_bool( 'mail_test' );
 	$f_password		= gpc_get_string( 'password', null );
 
@@ -56,6 +58,10 @@
 	</tr>
 </table>
 <br /><br />
+
+<?php
+	require_once( $g_core_path . 'obsolete.php' );
+?>
 
 <!-- Version Check -->
 <table width="100%" bgcolor="#0000aa" border="0" cellpadding="20" cellspacing="1">
