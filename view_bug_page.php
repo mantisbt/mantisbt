@@ -195,6 +195,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v2" );
 			$v2_diskfile = str_replace( $DOCUMENT_ROOT, "", $v2_diskfile );
+			$v2_diskfile = dirname( $v2_diskfile )."/".rawurlencode( $v2_filename );
 			$v2_filesize = round( $v2_filesize / 1024 );
 			$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
 
@@ -239,7 +240,7 @@
 		<?php #check if current user already assigned to the bug ?>
 		<?php $t_user_id = get_current_user_field ( "id" ); ?>
 		<?php if ($t_user_id != $v_handler_id) { ?>
-		<input type="submit" value="<?php echo $s_bug_assign_button ?>"> 
+		<input type="submit" value="<?php echo $s_bug_assign_button ?>">
 		<?php } #end of checking if current user already assigned ?>&nbsp;
 	</td>
 	</form>
