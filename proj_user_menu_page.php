@@ -110,25 +110,38 @@
 	</td>
 </tr>
 <?php
+	$t_dev = DEVELOPER;
+	$t_man = MANAGER;
+	$t_adm = ADMINISTRATOR;
+
 	# Get the user data in $f_sort order
     $query = "SELECT *
     		FROM $g_mantis_project_user_list_table
     		WHERE project_id='$g_project_cookie_val'
 			ORDER BY '$f_sort' $f_dir";
 
+	$query = "SELECT DISTINCT t1.id, t1.username, t1.email, t1.access_level, t2.user_id, t2.access_level
+			FROM $g_mantis_user_table as t1
+			LEFT JOIN $g_mantis_project_user_list_table as t2
+			ON t1.id=t2.user_id
+			WHERE (t2.access_level>=$t_dev AND t2.project_id=$g_project_cookie_val) OR
+				  (t1.access_level>=$t_dev AND t2.access_level IS NULL)
+			ORDER BY '$f_sort' $f_dir";
     $result = db_query($query);
 	$user_count = db_num_rows( $result );
 	for ($i=0;$i<$user_count;$i++) {
+		if ( isset( $u_user_id ) ) {
+			unset( $u_user_id );
+		}
 		# prefix user data with u_
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, "u" );
 
-		$query2 = "SELECT username, email
-				FROM $g_mantis_user_table
-				WHERE id='$u_user_id'";
-		$result2 = db_query( $query2 );
-		$row2 = db_fetch_array( $result2 );
-		extract( $row2, EXTR_PREFIX_ALL, "u" );
+		if ( !isset( $u_user_id ) ) {
+			$t_user_id = $u_id;
+		} else {
+			$t_user_id = $u_user_id;
+		}
 
 		# alternate row colors
 		$t_bgcolor = alternate_colors( $i );
@@ -144,7 +157,7 @@
 		<?php echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
 	</td>
 	<td>
-		<?php print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_user_id, $s_remove_link ) ?>
+		<?php print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$t_user_id, $s_remove_link ) ?>
 	</td>
 </tr>
 <?php
@@ -153,6 +166,7 @@
 </table>
 </div>
 
+<!--
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
@@ -179,11 +193,23 @@
 	</td>
 </tr>
 <?php
+	$t_dev = DEVELOPER;
+	$t_man = MANAGER;
+	$t_adm = ADMINISTRATOR;
+
+	$query = "SELECT DISTINCT t1.id, t1.username
+			FROM $g_mantis_user_table as t1
+			LEFT JOIN $g_mantis_project_user_list_table as t2
+			ON t1.id=t2.user_id
+			WHERE (t2.access_level>=$t_dev AND t2.project_id=$g_project_cookie_val) OR
+				  (t1.access_level>=$t_dev AND t2.access_level IS NULL)
+			ORDER BY t1.username";
 	# Get the user data in $f_sort order
     $query = "SELECT DISTINCT u.id
 				FROM $g_mantis_user_table u, $g_mantis_project_user_list_table ul
 				WHERE u.access_level>='$t_access_min_val' AND
-					u.id<>ul.user_id";
+					u.id<>ul.user_id
+				ORDER BY u.username";
     $result = db_query( $query );
 	$user_count = db_num_rows( $result );
 	for ($i=0;$i<$user_count;$i++) {
@@ -220,5 +246,5 @@
 ?>
 </table>
 </div>
-
+-->
 <?php print_page_bot1( __FILE__ ) ?>

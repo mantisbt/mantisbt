@@ -117,6 +117,14 @@
 
 			# Project specific developers
 			# All assigned users that are develoeprs and higher whose accounts are enabled
+/*			$query = "SELECT DISTINCT t1.id, t1.username
+					FROM $g_mantis_user_table as t1
+					LEFT JOIN $g_mantis_project_user_list_table as t2
+					ON t1.id=t2.user_id
+					WHERE (t2.access_level>=55 AND t2.project_id=2) OR
+						  (t1.access_level>=55 AND t2.access_level IS NULL)
+					ORDER BY t1.username";
+*/
 			$query = "SELECT DISTINCT p.user_id
 					FROM $g_mantis_project_user_list_table p,
 						$g_mantis_user_table u

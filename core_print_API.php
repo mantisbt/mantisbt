@@ -132,20 +132,20 @@
 
 		$t_rep = REPORTER;
 	    # checking if it's a per project statistic or all projects
-		if ( '0000000' == $g_project_cookie_val ) {
-			$specific_where = " 1=1";
+		# checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') {
+			$specific_where = " ";
 		} else {
-			$specific_where = " t2.project_id='$g_project_cookie_val'";
+			$specific_where = " (t2.access_level>=$t_rep AND t2.project_id=$g_project_cookie_val) OR ";
 		}
+
 		$query = "SELECT DISTINCT t1.id, t1.username
-				FROM $g_mantis_user_table as t1,
-				$g_mantis_project_user_list_table as t2
-				WHERE ((t1.access_level>=$t_rep) OR
-						(t2.user_id=t1.id AND $specific_where AND
-						t2.access_level>=$t_rep))
+				FROM $g_mantis_user_table as t1
+				LEFT JOIN $g_mantis_project_user_list_table as t2
+				ON t1.id=t2.user_id
+				WHERE $specific_where
+					  (t1.access_level>=$t_rep AND t2.access_level IS NULL)
 				ORDER BY t1.username";
-		$result = db_query( $query );
-		$user_count = db_num_rows( $result );
 
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
@@ -232,15 +232,15 @@
 		if ($g_project_cookie_val=='0000000') {
 			$specific_where = " ";
 		} else {
-			$specific_where = " t2.project_id='$g_project_cookie_val' AND ";
+			$specific_where = " (t2.access_level>=$t_dev AND t2.project_id=$g_project_cookie_val) OR ";
 		}
 
 		$query = "SELECT DISTINCT t1.id, t1.username
 				FROM $g_mantis_user_table as t1
 				LEFT JOIN $g_mantis_project_user_list_table as t2
 				ON t1.id=t2.user_id
-				WHERE (t2.access_level>=55 AND t2.project_id=2) OR
-					  (t1.access_level>=55 AND t2.access_level IS NULL)
+				WHERE $specific_where
+					  (t1.access_level>=$t_dev AND t2.access_level IS NULL)
 				ORDER BY t1.username";
 
 		$result = db_query( $query );
