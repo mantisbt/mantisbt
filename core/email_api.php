@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.44 2003-02-15 22:20:32 vboctor Exp $
+	# $Id: email_api.php,v 1.45 2003-02-16 14:47:04 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -804,10 +804,8 @@
 	# formats the subject correctly
 	# we include the project name, bug id, and summary.
 	function email_build_subject( $p_bug_id ) {
-		global $g_project_cookie_val;
-
 		# grab the project name
-		$p_project_name = project_get_field( $g_project_cookie_val, 'name' );
+		$p_project_name = project_get_field( bug_get_field( $p_bug_id, 'project_id' ), 'name' );
 
 		# grab the subject (summary)
 		$p_subject = get_bug_summary( $p_bug_id );
