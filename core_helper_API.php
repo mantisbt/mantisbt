@@ -461,4 +461,35 @@
 		return( $output );
 	}
 	# --------------------
+	# File type check
+	function file_type_check( $p_file_name ) {
+		global $g_allowed_files, $g_disallowed_files;
+
+		# grab extension
+		$t_ext_array = explode( ".", $p_file_name );
+		$last_position = count( $t_ext_array )-1;
+		$t_extension = $t_ext_array[$last_position];
+
+		# check against disallowed files
+		$t_disallowed_arr =  explode( ",", $g_disallowed_files );
+		foreach ( $t_disallowed_arr as $t_val ) {
+		    if ( $t_val == $t_extension ) {
+		    	return false;
+		    }
+		}
+
+		# check against allowed files
+		$t_allowed_arr = explode( ",", $g_allowed_files );
+		# if the allowed list is populated then the file must be in the list.
+		if ( empty( $g_allowed_files ) ) {
+			return true;
+		}
+		foreach ( $t_allowed_arr as $t_val ) {
+		    if ( $t_val == $t_extension ) {
+				return true;
+		    }
+		}
+		return false;
+	}
+	# --------------------
 ?>

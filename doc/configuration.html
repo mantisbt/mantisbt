@@ -977,6 +977,22 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
+	<td bgcolor="#ddddff">
+		$g_allowed_files
+	</td>
+	<td bgcolor="#ffffff">
+		Files that are allowed. Separate items by commas.  eg. "php,html,java,exe,pl"  If $g_allowed_files is filled in NO other file types will be allowed.  If empty it will assume any files are accepted that pass the $g_disallowed_files list.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_disallowed_files
+	</td>
+	<td bgcolor="#ffffff">
+		Files that not allowed.  Separate items by commas.  eg. "php,html,java,exe,pl"  $g_disallowed_files takes precedence over $g_allowed_files
+	</td>
+</tr>
+<tr>
 	<td colspan="2" bgcolor="#eeeeee">
 		This link may provide more information: <a href="http://www.php.net/manual/en/features.file-upload.php">http://www.php.net/manual/en/features.file-upload.php</a> if you run into problems.
 	</td>

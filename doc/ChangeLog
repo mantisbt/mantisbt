@@ -43,6 +43,7 @@ Mantis
  * Added extra link after a bug report to go directly to the new bug.
  * Added g_close_bug_threshold for closing a bug.
  * Added print report link to view all bug page.
+ * Added g_allowed_files and g_disallowed_files to control what files types may be uploaded.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
 
