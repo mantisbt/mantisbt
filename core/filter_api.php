@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.85 2005-02-18 17:58:16 thraxisp Exp $
+	# $Id: filter_api.php,v 1.86 2005-02-19 18:23:20 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -915,6 +915,11 @@
 				$t_filters_url = $t_filters_url . '&amp;view_type=advanced';
 			}
 			$t_filters_url = $t_filters_url . '&amp;target_field=';
+			
+			$t_show_version = ( ON == config_get( 'show_product_version' ) )
+					|| ( ( AUTO == config_get( 'show_product_version' ) )
+								&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+
 		?>
 
 		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
@@ -1174,12 +1179,21 @@
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_build[]'; ?>" id="show_build_filter"><?php PRINT lang_get( 'product_build' ) ?>:</a>
 			</td>
+			<?php if ( $t_show_version ) { ?>
 			<td colspan="2" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_version[]'; ?>" id="show_version_filter"><?php PRINT lang_get( 'product_version' ) ?>:</a>
 			</td>
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'fixed_in_version[]'; ?>" id="show_fixed_in_version_filter"><?php PRINT lang_get( 'fixed_in_version' ) ?>:</a>
 			</td>
+			<?php } else { ?>
+			<td colspan="2" class="small-caption" valign="top">
+				&nbsp;
+			</td>
+			<td colspan="1" class="small-caption" valign="top">
+				&nbsp;
+			</td>
+			<?php } ?>
 			<td colspan="1" class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_priority[]'; ?>" id="show_priority_filter"><?php PRINT lang_get( 'priority' ) ?>:</a>
 			</td>
@@ -1292,6 +1306,7 @@
 								}
 							?>
 			</td>
+			<?php if ( $t_show_version ) { ?>
 			<td colspan="2" class="small-caption" valign="top" id="show_version_filter_target">
 							<?php
 								$t_output = '';
@@ -1364,6 +1379,14 @@
 								}
 							?>
 			</td>
+			<?php } else { ?>
+			<td colspan="2" class="small-caption" valign="top">
+				&nbsp;
+			</td>
+			<td colspan="1" class="small-caption" valign="top">
+				&nbsp;
+			</td>
+			<?php } ?>
 			<td colspan="1" class="small-caption" valign="top" id="show_priority_filter_target">
               <?php
 							  $t_output = '';

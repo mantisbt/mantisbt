@@ -68,6 +68,8 @@
 		<?php
 	}
 
+	# @@@ thraxisp - could this be replaced by a call to filter_draw_selection_area2
+	
 	$t_filter = current_user_get_bug_filter();
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 	$t_project_id = helper_get_current_project();
@@ -129,6 +131,9 @@
 		$t_select_modifier = 'multiple="multiple" size="10" ';
 	}
 
+	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+			|| ( ( AUTO == config_get( 'show_product_version' ) )
+						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
 ?>
 <br />
 <form method="post" name="filters" action="<?php echo $t_action; ?>">
@@ -207,8 +212,13 @@
 	?>
 	</td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+	<?php if ( $t_show_version ) { ?>
+		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
+		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+	<?php } else { ?>
+		<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">&nbsp;</td>
+		<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
+	<?php } ?>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></td>
 </tr>
 <tr class="row-1">
@@ -232,11 +242,19 @@
 	</td>
 	<!-- Version -->
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
- 		<?php print_filter_show_version(); ?>
+ 		<?php if ( $t_show_version ) {
+ 			print_filter_show_version();
+ 		} else { 
+ 			echo "&nbsp;";
+ 		} ?>
 	</td>
 	<!-- Fixed in Version -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
- 		<?php print_filter_show_fixed_in_version(); ?>
+ 		<?php if ( $t_show_version ) {
+ 			print_filter_show_fixed_in_version();
+ 		} else { 
+ 			echo "&nbsp;";
+ 		} ?>
  	</td>
 	<!-- Priority -->
   <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
