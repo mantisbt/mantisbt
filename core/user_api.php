@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.38 2002-10-19 04:26:25 jfitzell Exp $
+	# $Id: user_api.php,v 1.39 2002-10-20 20:37:11 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -58,6 +58,7 @@
 
 		return $row;
 	}
+
 	# --------------------
 	# Clear the user cache (or just the given id if specified)
 	function user_clear_cache( $p_user_id = null ) {
@@ -96,6 +97,7 @@
 			return false;
 		}
 	}
+
 	# --------------------
 	# check to see if project exists by id
 	# if it doesn't exist then error
@@ -105,6 +107,7 @@
 			trigger_error( ERROR_USER_NOT_FOUND, ERROR );
 		}
 	}
+
 	# --------------------
 	# return true if the username is unique, false if there is already a user
 	#  with that username
@@ -125,6 +128,7 @@
 			return true;
 		}
 	}
+
 	# --------------------
 	# Check if the username is unique and trigger an ERROR if it isn't
 	function user_ensure_name_unique( $p_username ) {
@@ -132,6 +136,7 @@
 			trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 		}
 	}
+
 	# --------------------
 	# return whether user is monitoring bug for the user id and bug id
 	function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
@@ -152,6 +157,7 @@
 			return true;
 		}
 	}
+
 	# --------------------
 	# return true if the user has access of ADMINISTRATOR or higher, false otherwise
 	function user_is_administrator( $p_user_id ) {
@@ -163,11 +169,13 @@
 			return false;
 		}
 	}
+
 	# --------------------
 	# return true is the user account is protected, false otherwise
 	function user_is_protected( $p_user_id ) {
 		return ( ON == user_get_field( $p_user_id, 'protected' ) );
 	}
+
 	# --------------------
 	# Trigger an ERROR if the user account is protected
 	function user_ensure_unprotected( $p_user_id ) {
@@ -225,6 +233,7 @@
 
 		return $t_cookie_string;
 	}
+
 	# --------------------
 	# Signup a user.
 	# If the use_ldap_email config option is on then tries to find email using
@@ -251,20 +260,19 @@
 
 		return user_create( $p_username, $t_password, $p_email );
 	}
+
 	# --------------------
 	# delete an account
 	# returns true when the account was successfully deleted
 	function user_delete( $p_user_id ) {
 		$c_user_id 					= db_prepare_int($p_user_id);
 
+    	user_ensure_unprotected( $p_user_id );
+
 		$t_user_table 				= config_get('mantis_user_table');
 		$t_user_profile_table 		= config_get('mantis_user_profile_table');
 		$t_user_pref_table 			= config_get('mantis_user_pref_table');
 		$t_project_user_list_table 	= config_get('mantis_project_user_list_table');
-
-	    if ( ON == user_get_field( $p_user_id, 'protected' ) ) {
-			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-		}
 
 		# Remove account
 		$query = "DELETE
@@ -294,6 +302,7 @@
 	#===================================
 	# Data Access
 	#===================================
+
 	# --------------------
 	# get a user id from a username
 	#  return false if the username does not exist
@@ -313,6 +322,7 @@
 			return db_result( $result );
 		}
 	}
+
 	# --------------------
 	# return all data associated with a particular user name
 	#  return false if the username does not exist
@@ -327,11 +337,13 @@
 
 		return $row;
 	}
+
 	# --------------------
 	# return a user row
 	function user_get_row( $p_user_id ) {
 		return user_cache_row( $p_user_id );
 	}
+
 	# --------------------
 	# return the specified user field for the user id
 	function user_get_field( $p_user_id, $p_field_name ) {
@@ -348,6 +360,7 @@
 			return '';
 		}
 	}
+
 	# --------------------
 	# lookup the user's email in LDAP or the db as appropriate
 	function user_get_email( $p_user_id ) {
@@ -357,6 +370,7 @@
 			return user_get_field( $p_user_id, 'email' );
 		}
 	}
+
 	# --------------------
 	# return the username or a string saying "user no longer exists"
 	#  if the user does not exist
@@ -371,6 +385,7 @@
 			return $row['username'];
 		}
 	}
+
 	# --------------------
 	# return the user's access level
 	#  account for private project and the project user lists
@@ -389,6 +404,7 @@
 			return $t_project_access_level;
 		}
 	}
+
 	# --------------------
 	# retun an array of project IDs to which the user has access
 	function user_get_accessible_projects( $p_user_id ) {
@@ -430,6 +446,7 @@
 
 		return $t_projects;
 	}
+
 	# --------------------
 	# return the number of open assigned bugs to a user in a project
 	function user_get_assigned_open_bug_count( $p_user_id, $p_project_id=0 ) {
@@ -456,6 +473,7 @@
 
 		return db_result( $result );
 	}
+
 	# --------------------
 	# return the number of open reported bugs by a user in a project
 	function user_get_reported_open_bug_count( $p_user_id, $p_project_id=0 ) {
@@ -482,6 +500,7 @@
 
 		return db_result( $result );
 	}
+
 	# --------------------
 	# return a profile row
 	function user_get_profile_row( $p_user_id, $p_profile_id ) {
@@ -527,6 +546,7 @@
 		# db_query() errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# Increment the number of times the user has logegd in
 	# This function is only called from the login.php script
@@ -546,12 +566,15 @@
 		#db_query() errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# Set a user field
 	function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_field_name	= db_prepare_string( $p_field_name );
 		$c_field_value	= db_prepare_string( $p_field_value );
+
+    	user_ensure_unprotected( $p_user_id );
 
 		$t_user_table = config_get( 'mantis_user_table' );
 
@@ -566,11 +589,41 @@
 		#db_query() errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# Set the user's default project
 	function user_set_default_project( $p_user_id, $p_project_id ) {
 		return user_pref_set_pref( $p_user_id, 'default_project', (int)$p_project_id );
 	}
+	
+	# --------------------
+	# Set the user's password to the given string, encoded as appropriate
+	function user_set_password( $p_user_id, $p_password ) {
+		$c_user_id = db_prepare_int( $p_user_id );
+		
+    	user_ensure_unprotected( $p_user_id );
+
+		$t_password = auth_process_plain_password( $p_password );
+
+		$t_user_table	= config_get( 'mantis_user_table' );
+
+		$query = "UPDATE $t_user_table
+				  SET password='$t_password'
+				  WHERE id='$c_user_id'";
+		db_query( $query );
+
+		#db_query() errors on failure so:
+		return true;
+	}
+
+	# --------------------
+	# Set the user's email to the given string after checking that it is a valid email
+	function user_set_email( $p_user_id, $p_email ) {
+		email_ensure_valid( $p_email );
+
+		return user_set_field( $p_user_id, 'email', $p_email );
+	}
+
 	# --------------------
 	# Reset the user's password
 	#  Take into account the 'send_reset_password' setting
