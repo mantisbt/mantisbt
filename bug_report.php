@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.34 2004-08-04 15:02:22 vboctor Exp $
+	# $Id: bug_report.php,v 1.35 2004-08-17 12:05:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -58,7 +58,7 @@
 	if ( is_uploaded_file( $f_file['tmp_name'] ) &&
 		  file_allow_bug_upload() &&
 		  ( DISK == $t_upload_method || FTP == $t_upload_method ) ) {
-		$t_file_path = project_get_field( $f_project_id, 'file_path' );
+		$t_file_path = project_get_field( $t_bug_data->project_id, 'file_path' );
 
 		if ( !file_exists( $t_file_path ) ) {
 			trigger_error( ERROR_NO_DIRECTORY, ERROR );
@@ -68,7 +68,7 @@
 
 	# if a profile was selected then let's use that information
 	if ( 0 != $t_bug_data->profile_id ) {
-		$row = user_get_profile_row( $t_reporter_id, $f_profile_id );
+		$row = user_get_profile_row( $t_bug_data->reporter_id, $t_bug_data->profile_id );
 
 		if ( is_blank( $t_bug_data->platform ) ) {
 			$t_bug_data->platform = $row['platform'];
@@ -142,17 +142,17 @@
 	if ( $f_report_stay ) {
 ?>
 	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
-		<input type="hidden" name="category" 		value="<?php echo $f_category ?>" />
-		<input type="hidden" name="severity" 		value="<?php echo $f_severity ?>" />
-		<input type="hidden" name="reproducibility" 	value="<?php echo $f_reproducibility ?>" />
-		<input type="hidden" name="profile_id" 		value="<?php echo $f_profile_id ?>" />
-		<input type="hidden" name="platform" 		value="<?php echo $f_platform ?>" />
-		<input type="hidden" name="os" 			value="<?php echo $f_os ?>" />
-		<input type="hidden" name="os_build" 		value="<?php echo $f_os_build ?>" />
-		<input type="hidden" name="product_version" 	value="<?php echo $f_product_version ?>" />
-		<input type="hidden" name="build" 		value="<?php echo $f_build ?>" />
+		<input type="hidden" name="category" 		value="<?php echo $t_bug_data->category ?>" />
+		<input type="hidden" name="severity" 		value="<?php echo $t_bug_data->severity ?>" />
+		<input type="hidden" name="reproducibility" 	value="<?php echo $t_bug_data->reproducibility ?>" />
+		<input type="hidden" name="profile_id" 		value="<?php echo $t_bug_data->profile_id ?>" />
+		<input type="hidden" name="platform" 		value="<?php echo $t_bug_data->platform ?>" />
+		<input type="hidden" name="os" 			value="<?php echo $t_bug_data->os ?>" />
+		<input type="hidden" name="os_build" 		value="<?php echo $t_bug_data->os_build ?>" />
+		<input type="hidden" name="product_version" 	value="<?php echo $t_bug_data->product_version ?>" />
+		<input type="hidden" name="build" 		value="<?php echo $t_bug_data->build ?>" />
 		<input type="hidden" name="report_stay" 	value="1" />
-		<input type="hidden" name="view_state"		value="<?php echo $f_view_state ?>" />
+		<input type="hidden" name="view_state"		value="<?php echo $t_bug_data->view_state ?>" />
 		<input type="submit" class="button" 		value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
 	</form>
 <?php

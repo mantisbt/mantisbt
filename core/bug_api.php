@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.77 2004-08-04 15:02:25 vboctor Exp $
+	# $Id: bug_api.php,v 1.78 2004-08-17 12:05:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -54,7 +54,7 @@
 
 		# omitted:
 		# var $bug_text_id
-		# var $profile_id
+		var $profile_id
 
 		# extended info
 		var $description = '';
