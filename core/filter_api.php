@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.55 2004-08-20 23:00:39 prichards Exp $
+	# $Id: filter_api.php,v 1.56 2004-08-20 23:10:21 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -466,9 +466,9 @@
 							 OR ($t_bug_table.id LIKE '%$c_search%'))" );
 			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
 
-			$t_from_clauses = array( $t_bug_table, $t_bug_text_table, $t_project_table );
+			$t_from_clauses = array( $t_bug_text_table, $t_project_table, $t_bug_table );
 		} else {
-			$t_from_clauses = array( $t_bug_table, $t_project_table );
+			$t_from_clauses = array( $t_project_table, $t_bug_table );
 		}
 
 
