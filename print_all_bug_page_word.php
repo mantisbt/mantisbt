@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.52 2004-08-08 11:39:00 jlatour Exp $
+	# $Id: print_all_bug_page_word.php,v 1.53 2004-11-30 13:48:28 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -385,11 +385,19 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 <?php
 	# get the bugnote data
+ 	if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_id ) ) {
+ 		$t_restriction = 'AND view_state=' . VS_PUBLIC;
+ 	} else {
+ 		$t_restriction = '';
+ 	}
+
+	$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
+	$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 	
 	$query6 = "SELECT *, date_submitted
-			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$v_id'
+			FROM $t_bugnote_table
+			WHERE bug_id='$v_id' $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
 	$result6 = db_query( $query6 );
 	$num_notes = db_num_rows( $result6 );
@@ -423,7 +431,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 
 			# grab the bugnote text and id and prefix with v3_
 			$query6 = "SELECT note, id
-					FROM $g_mantis_bugnote_text_table
+					FROM $t_bugnote_text_table
 					WHERE id='$v3_bugnote_text_id'";
 			$result7 = db_query( $query6 );
 			$v3_note = db_result( $result7, 0, 0 );
@@ -455,7 +463,20 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">
-				<?php echo $v3_note ?>
+				<?php
+					switch ( $v3_note_type ) {
+						case REMINDER:
+							echo lang_get( 'reminder_sent_to' ) . ': ';
+							$v3_note_attr = substr( $v3_note_attr, 1, strlen( $v3_note_attr ) - 2 );
+							$t_to = array();
+							foreach ( explode( '|', $v3_note_attr ) as $t_recipient ) {
+								$t_to[] = prepare_user_name( $t_recipient );
+							}
+							echo implode( ', ', $t_to ) . '<br />';
+						default:
+							echo $v3_note;
+					}
+				?>
 			</td>
 		</tr>
 		</table>
