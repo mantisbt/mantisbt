@@ -10,23 +10,30 @@
 <?php
 	check_access( MANAGER );
 
-	if (isset($copy_from)) {
-	  $f_src_project_id = $f_other_project_id;
-	  $f_dst_project_id = $f_project_id;
+	$f_project_id		= gpc_get_int( 'f_project_id' );
+	$f_other_project_id	= gpc_get_int( 'f_other_project_id' );
+	$f_copy_from		= gpc_get_bool( 'f_copy_from' );
+	$f_copy_to			= gpc_get_bool( 'f_copy_to' );
+
+	if ( $f_copy_from ) {
+	  $t_src_project_id = $f_other_project_id;
+	  $t_dst_project_id = $f_project_id;
+	} else if ( $f_copy_to ) {
+	  $t_src_project_id = $f_project_id;
+	  $t_dst_project_id = $f_other_project_id;
 	} else {
-	  $f_src_project_id = $f_project_id;
-	  $f_dst_project_id = $f_other_project_id;
+		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$result = category_get_all( $f_src_project_id );
+	$result = category_get_all( $t_src_project_id );
 	$category_count = db_num_rows( $result );
 	for ($i=0;$i<$category_count;$i++) {
 		$row = db_fetch_array( $result );
 		$t_category = $row['category'];
 		$t_category = addslashes( $t_category );
 
-		if ( !is_duplicate_category( $f_dst_project_id, $t_category ) ) {
-			category_add( $f_dst_project_id, $t_category );
+		if ( !is_duplicate_category( $t_dst_project_id, $t_category ) ) {
+			category_add( $t_dst_project_id, $t_category );
 		}
 	}
 
