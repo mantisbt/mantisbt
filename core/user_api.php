@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.30 2002-09-18 05:32:50 jfitzell Exp $
+	# $Id: user_api.php,v 1.31 2002-09-18 20:13:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -711,8 +711,8 @@
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
 		$query = "UPDATE $t_user_pref_table
-				SET $c_pref_name='$c_pref_value'
-				WHERE user_id='$c_user_id'";
+				  SET $c_pref_name='$c_pref_value'
+				  WHERE user_id='$c_user_id'";
 
 		db_query( $query );
 
@@ -722,9 +722,70 @@
 		return true;
 	}
 	# --------------------
+	# Set a user field
+	function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
+		$c_user_id		= db_prepare_int( $p_user_id );
+		$c_field_name	= db_prepare_string( $p_field_name );
+		$c_field_value	= db_prepare_string( $p_field_value );
+
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$query = "UPDATE $t_user_table
+				  SET $c_field_name='$c_field_value'
+				  WHERE id='$c_user_id'";
+
+		db_query( $query );
+
+		user_clear_cache( $p_user_id );
+
+		#db_query() errors on failure so:
+		return true;
+	}
+	# --------------------
 	# Set the user's default project
 	function user_set_default_project( $p_user_id, $p_project_id ) {
 		return user_set_pref( $p_user_id, 'default_project', (int)$p_project_id );
 	}
-	
+	# --------------------
+	# Reset the user's password
+	#  Take into account the 'send_reset_password' setting
+	#   - if it is ON, generate a random password and send an email
+	#      (unless the second parameter is false)
+	#   - if it is OFF, set the password to blank
+	#  Return false if the user is protected, true if the password was 
+	#   successfully reset
+	function user_reset_password( $p_user_id, $p_send_email=true ) {
+		$t_protected = user_get_field( $p_user_id, 'protected' );
+
+		# Go with random password and email it to the user
+		if ( ON == $t_protected ) {
+			return false;
+		}
+
+		# @@@ do we want to force blank password instead of random if
+		#      email notifications are turned off?
+		#     How would we indicate that we had done this with a return value?
+		#     Should we just have two functions? (user_reset_password_random()
+		#     and user_reset_password() )?
+
+		if ( ON == config_get( 'send_reset_password' ) ) {
+			# Create random password
+			$t_email = user_get_field( $p_user_id, 'email' );
+			$t_password = auth_generate_random_password( $t_email );
+			$t_password2 = auth_process_plain_password( $t_password );
+
+			user_set_field( $p_user_id, 'password', $t_password2 );
+
+			# Send notification email
+			if ( $p_send_email ) {
+				email_reset( $p_user_id, $t_password );
+			}
+		} else { # use blank password, no emailing
+			$t_password = auth_process_plain_password( '' );
+
+			user_set_field( $p_user_id, 'password', $t_password );
+		}
+
+		return true;
+	}
 ?>
