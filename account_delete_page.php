@@ -12,6 +12,10 @@
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	if ( OFF == $g_allow_account_delete ) {
+		print_header_redirect( $g_account_page );
+	}
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

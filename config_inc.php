@@ -377,6 +377,10 @@
 	# Allow developers and above to close bugs immediately when resolving bugs
 	$g_allow_close_immediately = OFF;
 
+	# --- account delete -----------
+	# Allow users to delete their own accounts
+	$g_allow_account_delete = OFF;
+
 	##############################
 	# Mantis Color Variables
 	##############################

@@ -144,11 +144,17 @@
 		<input type="submit" value="<?php echo $s_update_user_button ?>">
 	</td>
 </form>
+<? 	if ( ON == $g_allow_account_delete ) { ?>
 <form method="post" action="<?php echo $g_account_delete_page ?>">
 	<td class="right">
 		<input type="submit" value="<?php echo $s_delete_account_button ?>">
 	</td>
 </form>
+<? } else { ?>
+	<td>
+		&nbsp;
+	</td>
+<? } ?>
 </tr>
 <?php } ?>
 </table>
