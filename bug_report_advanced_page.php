@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.8 2002-12-23 01:51:55 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.9 2002-12-28 21:43:06 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,7 +50,7 @@
 
 <br />
 <div align="center">
-<form name="report_bug_form" method="post" <?php if ( ON == config_get( 'allow_file_upload' ) ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
+<form name="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
