@@ -1,3 +1,11 @@
+NOTE: Currently Mantis is still in heavy development.  Drastic changes may
+occur negating large amounts of customization that you may implement.
+When the package is functionally more mature we will concentrate on
+making the interface more customizable.  Keep this in mind before you
+put in a lot of effort into custmizing the look/feel of the product.
+
+
+
 This file contains information to help you customize Mantis.  A more
 detailed doc is in the works.
 
@@ -33,6 +41,12 @@ detailed doc is in the works.
 * other variables are usually either prefixed with v_ or t_
 * count variables have the word count in the variable name
 
+More detail can be seen in the coding guidelines at:
+http://mantisbt.sourceforge.net/guidelines.php3
+
+Also at:
+http://utvikler.start.no/code/php_coding_standard.html (excellent)
+
 * The files are split into three basic catgories, viewable pages,
 include files and pure scripts. Examining the viewable pages (suffix _page)
 should make the basic file format fairly easy to see.  The file names
@@ -56,4 +70,8 @@ tried to alleviate this in the config file by using spaces for the most part.
 
 *** A note on globals: globals are a rather quirky item in php.  Basically
 all variables are always local in scope unless declared global.  This is why
-some of the include() files have global deslarations in them.
+some of the include() files have global declarations in them.
+
+As a general debugging tip you should be extremely generous in using echo,
+print and exit functions.  This is the quickest way to see if a database
+query actually contains what you want, etc.

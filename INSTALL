@@ -2,22 +2,37 @@
 ### Installation steps ###
 -------------------------------------------------------------------------------
 
-*** REQUIREMENTS: mysql database, php 3.0.7+, a webserver (tested on Apache,
+*** REQUIREMENTS: mysql database, php 3.0.13+, a webserver (tested on Apache,
 should work with IIS or anything else php will run with).
 
 1. First, transfer the file to your webserver.  You will need to telnet/ssh into
-the server for the next stpes.
+the server machine for the next steps.
 
-2. Next, untar/gzip it to the directory that you want.
+2. Next, untar/gunzip it to the directory that you want.
+The usual command is (1 step):
 
-3. After that you will need to cd into the directory and locate the
+	tar zxvf <filename.tar.gz>
+
+OR  (2 steps):
+
+	gunzip <filename.tar.gz>
+	tar xvf <filename.tar>
+
+At this point you may want to rename the directory to something simpler like
+'mantis'.  You will use the mv command to rename a directory.
+
+mv <directoryname> mantis
+
+If you are upgrading see the UPGRADING document.
+
+3. After that you will need to change into the directory and locate the
 db_generate.sql file.  Run the following command:
 
 mysql -u<username> -p<password> <databasename> < db_generate.sql
 
 You could also cut and paste the sql statements from db_generate.sql into a
-package like phpMyAdmin.  You will need to have created the database ahead of
-time.
+package like phpMyAdmin or into your terminal window.  You will need to have
+created the database ahead of time.
 
 * WARNING: A DEFAULT ADMINISTRATOR level account is created.  The account name
 and password are administrator / root.  Use this when you first login to Mantis.
@@ -30,7 +45,7 @@ it permanently.  REMEMBER: REMOVE the default administrator account.
 4. Now edit config_inc.php and set the appropriate variables.  In particular you
 will want to set the database variables.  hostname, username, password, and
 database name must be set to match the configuration of your webserver and mysql
-database.
+database.  Also set your email values and date formats.
 
 5. If you require .php extensions (instead of .php3) run the convertToPHP4
 script.  You may need to first run "chmod +x convertToPHP4" to make the script
@@ -44,12 +59,21 @@ some heavy editing.  Basically you'll need to rename all the .php files to .php3
 and then do a search and replace in every single file to rename core_API.php to
 core_API.php3, and rename config_inc.php to config_inc.php3 in the core_API
 file... and the same for all the other affected files.  If you don't do this
-then anyone can access your database information (and delete it).
+then anyone can access your database information (and delete it, etc).
+
+The easiest solution is to make your webserver properly support .php and/or
+.php3 files.  For apache it is a one line addition in the server configuration
+file.  Let your administrator know that you would like support.  More detailed
+instructions are at http://www.php.net/manual/en/installation.php
+
+6.  Login to the bugtracker and go to the manage section.  Click on the projects
+link.  You will need to ADD a new project.  Then EDIT the new project and
+remember to ADD at least one category.  Otherwise you won't be able to add any
+bug reports.
 
 That should be it.  You're off and running.  For some help on custom editting of
 the site (including renaming the database tables) please read the CONFIGURATION
-file.  You'll probably want to add more bug catgories which is covered in
-CONFIGURATION.
+file.
 
 -------------------------------------------------------------------------------
 ### Upgrading ###
@@ -61,24 +85,7 @@ See the files: UPGRADING and db_upgrade.sql
 ### Troubleshooting ###
 -------------------------------------------------------------------------------
 
-Make sure you ran the upgrade steps (UPGRADING) if you run into new problems
-after installing a new version.
-
-* PROBLEM:  Warning: Undefined index: MANTIS_STRING_COOKIE in config_inc.php
-on line 197 (and similar warnings)
-
-SOLUTION: Your error_level is too high.  Open up your php3.ini (or php.ini)
-and lower it.  There should be enough comments around the variable to help you
-out.
-
-* PROBLEM: Cannot login.  It just redirects me to the login page with no errors
-or messages.
-
-SOLUTION 1: You may have track_vars set to Off (or 0).  Set this to On in your
-php3.ini or (php.ini) file.  As of version 4.0.3 it is permanently set to On.
-
-SOLUTION 2: You may not have DES installed on your system.  As a direct
-result the crypt() funtion may not work properly.
+See TROUBLESHOOTING
 
 -------------------------------------------------------------------------------
 ### Useful links ###
@@ -87,4 +94,5 @@ result the crypt() funtion may not work properly.
 http://www.mysql.com/      -  good documentation.
 http://www.phpwizard.net/  -  an excellent web front end to mysql.
 http://www.php.net/        -  excellent documentation.
+http://www.phpbuilder.net/ -  good help forums.
 http://www.apache.org/     -  you should be able to find what you need, I hope.

@@ -11,11 +11,13 @@ To Do:
  * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
  * More documentation on installation, configuration, and customization
 
-02.05.2001	-	0.14.0
+02.10.2001	-	0.14.0
 
  * Fixed error in print_html_bottom
  * Fixed error in db_upgrade.sql, changed "need info" to "feedback"
  * Fixed bug_update where resolution was being set to blank
+ * Added TROUBLESHOOTING file
+ * Added multiple project support
  * Added summary by assignee
  * Added one click "Assign to Me"
  * Added corresponding bug_assign.php3 file, global, and string variables
@@ -30,10 +32,15 @@ To Do:
  * Added maxlength= to all input types
  * Added some bug info at the top of the bugnote add page
  * Added login_count field to user_table
- * Left aligned Summary
+ * Added project_category manage area
+ * Added project_version manage area
+ * Added manager access_level
+ * Left aligned Summary field
  * Reset password now emails a randomly generated password to user
  * Created date format global variables
  * &nbsp; is echoed when the bugnote count is 0 (Netscape problem)
+ * Reworked project category and version management
+ * Tweaked manage menu
  * Tweaked css_inc.php
  * Tweaked the bug list view for better indication of which view the user
    is viewing
