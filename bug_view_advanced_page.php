@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.52 2004-05-17 11:39:06 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.53 2004-05-23 14:13:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,7 +35,7 @@
 
 	compress_enable();
 
-	html_page_top1();
+	html_page_top1( $t_bug->summary );
 	html_page_top2();
 ?>
 

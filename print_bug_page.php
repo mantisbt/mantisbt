@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.45 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: print_bug_page.php,v 1.46 2004-05-23 14:13:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -53,7 +53,7 @@
 	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display_links( $v2_additional_information );
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( $v_summary ) ?>
 <?php
 	html_head_end();
 	html_body_begin();

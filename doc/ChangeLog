@@ -19,6 +19,7 @@ Mantis ChangeLog
  * Enh #3690: Request for directly setting reminders private.
  * Enh #3713: Allow users to set severity levels along with email preferences.
  * Enh #3735: New CSS class for HTML Form Buttons
+ * Enh #3765: Change title on bug details page to bug summary line.
  * Enh #3801: Add "myself" meta filter options.
  * Enh #3808: Ability to sponsor (fund) a bug or feature request.
  * Enh #3811: Allow private flag to be unset on resolved bugs.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.96 2004-05-18 04:29:21 int2str Exp $
+	# $Id: html_api.php,v 1.97 2004-05-23 14:13:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -57,13 +57,13 @@
 	# --------------------
 	# Print the part of the page that comes before meta redirect tags should
 	#  be inserted
-	function html_page_top1() {
+	function html_page_top1( $p_page_title = null ) {
 		html_begin();
 		html_head_begin();
 		html_css();
 		html_content_type();
 		include( config_get( 'meta_include_file' ) );
-		html_title();
+		html_title( $p_page_title );
 	}
 
 	# --------------------
@@ -156,9 +156,15 @@
 
 	# --------------------
 	# (4) Print the window title
-	function html_title() {
+	function html_title( $p_page_title = null ) {
 		$t_title = config_get( 'window_title' );
-		echo "\t", '<title>', string_display( $t_title ), '</title>', "\n";
+		echo "\t", '<title>';
+		if ( $p_page_title === null ) {
+			string_display( $t_title );
+		} else {
+			echo $p_page_title . ' - ' . string_display( $t_title );
+		}
+		echo '</title>', "\n";
 	}
 
 	# --------------------

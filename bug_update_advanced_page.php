@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.66 2004-05-17 11:39:06 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.67 2004-05-23 14:13:41 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,7 +37,7 @@
 
 	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
 ?>
-<?php html_page_top1() ?>
+<?php html_page_top1( $t_bug->summary ) ?>
 <?php html_page_top2() ?>
 
 <br />
