@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.19 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: database_api.php,v 1.20 2004-01-31 15:10:33 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -163,6 +163,35 @@
 	}
 
 	# --------------------
+	# Check if there is an index defined on the specified table/field and with
+	# the specified type.
+	#
+	# $p_table: Name of table to check
+	# $p_field: Name of field to check
+	# $p_key: key type to check for (eg: PRI, MUL, ...etc)
+	function db_key_exists_on_field( $p_table, $p_field, $p_key ) {
+		$c_table = db_prepare_string( $p_table );
+		$c_field = db_prepare_string( $p_field );
+		$c_key   = db_prepare_string( $p_key );
+
+		$query = "DESCRIBE $c_table";
+
+		$result = db_query( $query );
+
+		$count = db_num_rows( $result );
+
+		for ( $i=0 ; $i < $count ; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			if ( $row['Field'] == $c_field ) {
+				return ( $row['Key'] == $c_key );
+			}
+		}
+
+		return false;
+	}
+
+	# --------------------
 	function db_error_num() {
 		return mysql_errno();
 	}
@@ -216,5 +245,4 @@
 		}
 		db_select_db( $g_database_name );
 	}
-
 ?>

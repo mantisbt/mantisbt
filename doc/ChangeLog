@@ -14,6 +14,7 @@ Mantis ChangeLog
  * Fix #3495: Warning even if administrator account is disabled.
  * Fix #3501: No output for print_all_bug_page.php when status=closed, and Hide Status Closed is selected.
  * Fix #3506: PHP error if "duplicate id" refers to a bug that does not exist.
+ * Opt #0000: Added an index on bug_id field in the mantis_bug_file_table.
  * Updated copyright to include 2004
 
 2003.12.08  -  0.18.0
