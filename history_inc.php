@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.18 2003-01-25 21:13:17 jlatour Exp $
+	# $Id: history_inc.php,v 1.19 2003-03-22 21:42:22 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 	require_once( $t_core_path.'history_api.php' );
 ?>
 
-<a name="history"><br /></a>
+<a name="history" id="history" /><br />
 <?php
 	$t_history = history_get_events_array( $f_bug_id );
 ?>

@@ -282,7 +282,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 
 
 <!-- Email testing -->
-<a name="email"></a>
+<a name="email" id="email" />
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#f4f4f4">
@@ -313,7 +313,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 
 
 <!-- CRYPT CHECKS -->
-<a name="crypt"></a>
+<a name="crypt" id="crypt" />
 <table width="100%" bgcolor="#aa0000" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#fff0f0">

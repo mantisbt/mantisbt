@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.8 2003-03-22 16:30:35 jlatour Exp $
+	# $Id: bugnote_view_inc.php,v 1.9 2003-03-22 21:42:22 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,7 @@
 ?>
 
 <?php # Bugnotes BEGIN ?>
-<a name="bugnotes"></a><br />
+<a name="bugnotes" id="bugnotes" /><br />
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes

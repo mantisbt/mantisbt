@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.5 2003-03-22 16:30:35 jlatour Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.6 2003-03-22 21:42:22 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,7 +27,7 @@
 	$result = db_query($query);
 	$num_users = db_num_rows($result);
 
-	echo '<a name="monitors"></a><br />';
+	echo '<a name="monitors" id="monitors" /><br />';
  	echo '<table class="width100" cellspacing="1">';
  	if ( 0 == $num_users ) {
 		echo '<tr><td class="center">';
