@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.95 $
-	# $Author: jfitzell $
-	# $Date: 2002-12-06 18:48:21 $
+	# $Revision: 1.96 $
+	# $Author: vboctor $
+	# $Date: 2002-12-08 08:33:26 $
 	#
-	# $Id: strings_english.txt,v 1.95 2002-12-06 18:48:21 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.96 2002-12-08 08:33:26 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -809,16 +809,16 @@
 	$s_edit_custom_field_title = 'Edit custom field';
 	$s_custom_fields = 'Fields';
 	$s_custom_fields_setup = 'Custom Fields';
-	$s_custom_field_name = 'name';
-	$s_custom_field_type = 'type';
-	$s_custom_field_possible_values = 'possible values';
-	$s_custom_field_default_value = 'default value';
-	$s_custom_field_valid_regexp = 'regular expression';
-	$s_custom_field_access_level_r = 'read access';
-	$s_custom_field_access_level_rw = 'write access';
-	$s_custom_field_length_min = 'min. length';
-	$s_custom_field_length_max = 'max. length';
-	$s_custom_field_advanced = 'advanced';
-	$s_custom_field_sequence = 'sequence';
+	$s_custom_field_name = 'Name';
+	$s_custom_field_type = 'Type';
+	$s_custom_field_possible_values = 'Possible Values';
+	$s_custom_field_default_value = 'Default Value';
+	$s_custom_field_valid_regexp = 'Regular Expression';
+	$s_custom_field_access_level_r = 'Read Access';
+	$s_custom_field_access_level_rw = 'Write Access';
+	$s_custom_field_length_min = 'Min. Length';
+	$s_custom_field_length_max = 'Max. Length';
+	$s_custom_field_advanced = 'Advanced';
+	$s_custom_field_sequence = 'Sequence';
 	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
 ?>

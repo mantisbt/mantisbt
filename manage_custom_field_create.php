@@ -8,13 +8,14 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( MANAGER );
+	check_access( ADMINISTRATOR );
 
 	$f_name			= gpc_get_string( 'f_name' );
 
 	$t_names_array = explode( '|', $f_name );
 	$t_duplicate = false;
 
+	$t_count_added = 0;
 	foreach ( $t_names_array as $t_name ) {
 		$t_name = trim( $t_name );
 		if ( is_blank( $t_name ) ) {
@@ -22,6 +23,7 @@
 		}
 
 		if ( custom_field_is_name_unique( $t_name ) ) {
+			$t_count_added++;
 			custom_field_create( $t_name );
 		} else {
 			$t_duplicate = true;
@@ -41,6 +43,8 @@
 <?php
 	if ( $t_duplicate ) {		# DUPLICATE
 		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] . '<br />';
+	} else if ( 0 == $t_count_added ) {
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
