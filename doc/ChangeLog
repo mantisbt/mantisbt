@@ -66,6 +66,8 @@ Mantis
  * Added print bug view.
  * Added jump to bug form.
  * Added core_proj_user_API.php.
+ * Added make_lf_crlf() to remove bare line feeds.
+ * Added priority reporting on the report form for developers.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
  * Removed proj_user_delete_page.php.

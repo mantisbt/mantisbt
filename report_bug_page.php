@@ -36,6 +36,10 @@
 		$f_severity = "";
 	}
 
+	if ( !isset( $f_priority ) ) {
+		$f_priority = "";
+	}
+
 	if ( !isset( $f_summary ) ) {
 		$f_summary = "";
 	}
@@ -70,40 +74,54 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<span class="required">*</span><?php echo $s_category ?> <?php print_documentaion_link( "category" ) ?>:<br />
+		<?php echo $s_category ?> <?php print_documentaion_link( "category" ) ?>:
 	</td>
 	<td width="70%">
 		<select name="f_category">
-			<option value="" SELECTED><?php echo $s_select_category ?></option>
 			<?php print_category_option_list( $f_category ) ?>
 		</select>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<span class="required">*</span><?php echo $s_reproducibility ?> <?php print_documentaion_link( "reproducibility" ) ?>:<br />
+		<?php echo $s_reproducibility ?> <?php print_documentaion_link( "reproducibility" ) ?>:
 	</td>
 	<td>
 		<select name="f_reproducibility">
-			<option value="" SELECTED><?php echo $s_select_reproducibility ?></option>
 			<?php print_enum_string_option_list( "reproducibility", $f_reproducibility ) ?>
 		</select>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo $s_severity ?> <?php print_documentaion_link( "severity" ) ?>:<br />
+		<?php echo $s_severity ?> <?php print_documentaion_link( "severity" ) ?>:
 	</td>
 	<td>
 		<select name="f_severity">
-			<option value="" selected><?php echo $s_select_severity ?></option>
 			<?php print_enum_string_option_list( "severity", $f_severity ) ?>
 		</select>
 	</td>
 </tr>
+<? if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
 <tr class="row-2">
 	<td class="category">
-		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentaion_link( "summary" ) ?>:<br />
+		<?php echo $s_priority ?> <?php print_documentaion_link( "priority" ) ?>:
+	</td>
+	<td>
+		<select name="f_priority">
+			<?php print_enum_string_option_list( "priority", $f_priority ) ?>
+		</select>
+	</td>
+</tr>
+<? } ?>
+<tr>
+	<td class="spacer" colspan="2">
+		&nbsp;
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentaion_link( "summary" ) ?>:
 	</td>
 	<td>
 		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>">
@@ -111,7 +129,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo $s_description ?> <?php print_documentaion_link( "description" ) ?>:<br />
+		<span class="required">*</span><?php echo $s_description ?> <?php print_documentaion_link( "description" ) ?>:
 	</td>
 	<td>
 		<textarea name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>

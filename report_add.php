@@ -127,19 +127,37 @@
 
 		# Insert the rest of the data
 		$t_open = OPEN;
-		$t_nor = NORMAL;
+
+		if ( !isset( $f_priority ) ) {
+			$f_priority = NORMAL;
+		}
 		$query = "INSERT
 				INTO $g_mantis_bug_table
-				( id, project_id, reporter_id, handler_id, duplicate_id, priority, severity,
-				reproducibility, status, resolution, projection, category,
-				date_submitted, last_updated, eta, bug_text_id, os, os_build,
-				platform, version, build, votes, profile_id, summary )
+				( id, project_id,
+				reporter_id, handler_id,
+				duplicate_id, priority,
+				severity, reproducibility,
+				status, resolution,
+				projection, category,
+				date_submitted, last_updated,
+				eta, bug_text_id,
+				os, os_build,
+				platform, version,
+				build, votes,
+				profile_id, summary )
 				VALUES
-				( null, '$g_project_cookie_val', '$u_id', '$f_assign_id', '0000000', '$t_nor', '$f_severity',
-				'$f_reproducibility', '$t_status', '$t_open', 10, '$f_category',
-				NOW(), NOW(), 10, '$t_id', '$f_os', '$f_os_build',
-				'$f_platform', '$f_product_version', '$f_build',
-				1, '$f_profile_id', '$f_summary' )";
+				( null, '$g_project_cookie_val',
+				'$u_id', '$f_assign_id',
+				'0000000', '$f_priority',
+				'$f_severity', '$f_reproducibility',
+				'$t_status', '$t_open',
+				10, '$f_category',
+				NOW(), NOW(),
+				10, '$t_id',
+				'$f_os', '$f_os_build',
+				'$f_platform', '$f_product_version',
+				'$f_build',	1,
+				'$f_profile_id', '$f_summary' )";
 		$result = db_query( $query );
 
 		$t_bug_id = db_insert_id();
