@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.53 2004-11-30 13:48:28 thraxisp Exp $
+	# $Id: print_all_bug_page_word.php,v 1.54 2004-12-09 20:38:51 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -106,6 +106,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$v2_description 			= string_display_links( $v2_description );
 		$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
 		$v2_additional_information 	= string_display_links( $v2_additional_information );
+		### note that dates are converted to unix format in filter_get_bug_rows
 
 		# display the available and selected bugs
 		if ( isset( $t_bug_arr_sort[$j] ) || ( $f_show_flag==0 )) {
@@ -366,8 +367,9 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 			for ( $i=0;$i<$num_files;$i++ ) {
 				$row = db_fetch_array( $result5 );
 				extract( $row, EXTR_PREFIX_ALL, 'v2' );
+				$v2_filename = file_get_display_name( $v2_filename );
 				$v2_filesize = round( $v2_filesize / 1024 );
-				$v2_date_added = date( config_get( 'normal_date_format' ), ( $v2_date_added ) );
+				$v2_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $v2_date_added ) );
 
 				switch ( $g_file_upload_method ) {
 					case DISK:	PRINT "$v2_filename ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";
