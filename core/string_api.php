@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.28 2003-02-18 01:41:50 jfitzell Exp $
+	# $Id: string_api.php,v 1.29 2003-02-21 01:40:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -34,7 +34,7 @@
 	#  bug references, and cvs references
 	function string_display_links( $p_string ) {
 		$p_string = string_display( $p_string );
-		
+
 		$p_string = string_insert_hrefs( $p_string );
 		$p_string = string_process_bug_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
@@ -162,10 +162,10 @@
 			return $p_string;
 		}
 
-    	$p_string = eregi_replace( "([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])",
+    	$p_string = eregi_replace( "([[:alnum:]]+)://([^[:space:]<]*)([[:alnum:]#?/&=])",
     							"<a href=\"\\1://\\2\\3\">\\1://\\2\\3</a>",
     							$p_string);
-        $p_string = eregi_replace( "(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))",
+        $p_string = eregi_replace( "(([a-z0-9_]|\\-|\\.)+@([^[:space:]<]*)([[:alnum:]-]))",
         						"<a href=\"mailto:\\1\" target=\"_new\">\\1</a>",
         						$p_string);
 		return $p_string;
