@@ -10,7 +10,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### Add item
-	setcookie( $g_project_cookie, $f_project_id, $g_cookie_time_length );
+	setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length );
 
 	header( "Location: $g_main_page" );
 ?>
