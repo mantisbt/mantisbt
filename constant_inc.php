@@ -193,6 +193,7 @@
 
 	# ERROR_BUG_*
 	define( 'ERROR_BUG_NOT_FOUND',					1100 );
+	define( 'ERROR_BUG_DUPLICATE_SELF',				1101 );
 
 	# ERROR_EMAIL_*
 	define( 'ERROR_EMAIL_INVALID',					1200 );

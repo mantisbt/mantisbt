@@ -4,9 +4,13 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: bug_report.php,v 1.3 2002-10-27 22:53:40 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
-	# This page stores the reported bug and then redirects to view_all_bug_page.php3
+	# This page stores the reported bug
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
@@ -27,7 +31,7 @@
 	$f_handler_id			= gpc_get_int( 'f_handler_id', 0 );
 	$f_view_state			= gpc_get_int( 'f_view_state', 0 );
 
-	$f_category				= gpc_get_string( 'f_category' );
+	$f_category				= gpc_get_string( 'f_category', '' );
 	$f_reproducibility		= gpc_get_int( 'f_reproducibility' );
 	$f_severity				= gpc_get_int( 'f_severity' );
 	$f_priority				= gpc_get_int( 'f_priority', NORMAL );
@@ -85,17 +89,14 @@
 		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'] );
 	}
 
-	# Determine which report page to redirect back to.
-	$t_redirect_url = string_get_bug_report_url();
-?>
-<?php print_page_top1() ?>
-<?php
+	print_page_top1();
+
 	if ( ! $f_report_stay ) {
 		print_meta_redirect( 'view_all_bug_page.php' );
 	}
-?>
-<?php print_page_top2() ?>
 
+	print_page_top2();
+?>
 <br />
 <div align="center">
 <?php
@@ -103,7 +104,7 @@
 
 	if ( $f_report_stay ) {
 ?>
-			<form method="post" action="<?php echo $t_redirect_url ?>">
+			<form method="post" action="<?php echo string_get_bug_report_url() ?>">
 				<input type="hidden" name="f_category" 			value="<?php echo $f_category ?>" />
 				<input type="hidden" name="f_severity" 			value="<?php echo $f_severity ?>" />
 				<input type="hidden" name="f_reproducibility" 	value="<?php echo $f_reproducibility ?>" />
@@ -118,8 +119,7 @@
 			</form>
 <?php
 	} else {
-		$t_view_bug_url = string_get_bug_view_url( $t_bug_id, 1 );
-		print_bracket_link( $t_view_bug_url, lang_get( 'view_submitted_bug_link' ).' '.$t_bug_id );
+		print_bracket_link( string_get_bug_view_url( $t_bug_id, 1 ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id" );
 		print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 	}
 ?>

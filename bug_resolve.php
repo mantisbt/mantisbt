@@ -6,16 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.25 $
-	# $Author: jfitzell $
-	# $Date: 2002-10-27 00:02:03 $
-	#
-	# $Id: bug_resolve.php,v 1.25 2002-10-27 00:02:03 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.26 2002-10-27 22:53:40 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	# This file sets the bug to the chosen resolved state then gives the
-	# user the opportunity to enter a reason for the closure
+	# This file sets the bug to the chosen resolved state and adds a
+	#  bugnote giving a reason for the resolution
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
@@ -23,66 +19,23 @@
 	$f_bug_id		= gpc_get_int( 'f_bug_id' );
 	$f_bugnote_text	= gpc_get_string( 'f_bugnote_text', '' );
 	$f_resolution	= gpc_get_int( 'f_resolution', FIXED );
-	$f_duplicate_id	= gpc_get_string( 'f_duplicate_id', '' );
+	$f_duplicate_id	= gpc_get_int( 'f_duplicate_id', null );
+	$f_close_now	= gpc_get_bool( 'f_close_now' );
 
 	project_access_check( $f_bug_id );
-	check_access( $g_handle_bug_threshold );
+	check_access( config_get( 'handle_bug_threshold' ) );
 	bug_ensure_exists( $f_bug_id );
 
 	# make sure it is not market as duplicate to itself
 	if ( $f_duplicate_id == $f_bug_id ) {
-		print_mantis_error( ERROR_GENERIC );
+		print_mantis_error( ERROR_BUG_DUPLICATE_SELF );
 	}
 
-	#clean variables
-	$c_resolution	= (integer)$f_resolution;
-	$c_duplicate_id	= (integer)$f_duplicate_id;
-	$c_bug_id			= (integer)$f_bug_id;
+	bug_resolve( $f_bug_id, $f_resolution, $f_bugnote_text, $f_duplicate_id );
 
-	$h_handler_id	= bug_get_field( $f_bug_id, 'handler_id' );
-	$h_status		= bug_get_field( $f_bug_id, 'status' );
-	$h_resolution	= bug_get_field( $f_bug_id, 'resolution' );
-	$h_duplicate_id	= bug_get_field( $f_bug_id, 'duplicate_id' );
-
-	$t_handler_id   = current_user_get_field( 'id' );
-
-	# Update fields
-	$t_status_val = RESOLVED;
-	if ( isset( $f_close_now ) ) {
-		$t_status_val = CLOSED;
-	}
-    $query = "UPDATE $g_mantis_bug_table
-    		SET handler_id='$t_handler_id',
-    			status='$t_status_val',
-    			resolution='$c_resolution',
-    			duplicate_id='$c_duplicate_id'
-    		WHERE id='$c_bug_id'";
-   	$result = db_query($query);
-
-	# log changes
-	history_log_event( $f_bug_id, 'handler_id',   $h_handler_id );
-	history_log_event( $f_bug_id, 'status',       $h_status );
-	history_log_event( $f_bug_id, 'resolution',   $h_resolution );
-	history_log_event( $f_bug_id, 'duplicate_id', $h_duplicate_id );
-
-	$f_bugnote_text = trim( $f_bugnote_text );
-
-	# check for blank bugnote
-	if ( !empty( $f_bugnote_text ) ) {
-		# insert bugnote text
-		$result = bugnote_add( $f_bug_id, $f_bugnote_text );
-
-	   	# notify reporter and handler
-		email_resolved( $f_bug_id );
-	} else {
-		# updated the last_updated date
-		$result = bug_update_date( $f_bug_id );
+	if ( $f_close_now ) {
+		bug_set_field( $f_bug_id, 'status', CLOSED );
 	}
 
-	# Determine which view page to redirect back to.
-	if ( $result ) {
-		print_header_redirect( string_get_bug_view_url( $f_bug_id ) );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect_view( $f_bug_id );
 ?>
