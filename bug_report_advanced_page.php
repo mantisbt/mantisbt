@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.10 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: bug_report_advanced_page.php,v 1.11 2002-12-30 05:38:39 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,7 +17,7 @@
 <?php
 	# this page is invalid for the 'All Project' selection
 	if ( 0 == helper_get_current_project() ) {
-		print_header_redirect( 'login_select_proj_page.php?ref=' . string_get_bug_report_url() );
+		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_advanced_page.php' );
 	}
 
 	if ( SIMPLE_ONLY == config_get( 'show_report' ) ) {
@@ -34,7 +34,7 @@
 	$f_profile_id			= gpc_get_int( 'profile_id', 0 );
 	$f_handler_id			= gpc_get_int( 'handler_id', 0 );
 
-	$f_category				= gpc_get_string( 'category', 0 );
+	$f_category				= gpc_get_string( 'category', '' );
 	$f_reproducibility		= gpc_get_int( 'reproducibility', 0 );
 	$f_severity				= gpc_get_int( 'severity', 0 );
 	$f_priority				= gpc_get_int( 'priority', NORMAL );
@@ -42,6 +42,7 @@
 	$f_description			= gpc_get_string( 'description', '' );
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
 	$f_additional_info		= gpc_get_string( 'additional_info', '' );
+	$f_view_state			= gpc_get_int( 'view_state', 0 );
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
 ?>
@@ -52,6 +53,9 @@
 <div align="center">
 <form name="report_bug_form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <table class="width75" cellspacing="1">
+
+
+<!-- Title -->
 <tr>
 	<td class="form-title">
 		<?php echo lang_get( 'enter_report_details_title' ) ?>
@@ -64,7 +68,10 @@
 		?>
 	</td>
 </tr>
-<tr class="row-1">
+
+
+<!-- Category -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category" width="30%">
 		<?php echo lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>
 	</td>
@@ -74,7 +81,10 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+
+
+<!-- Reproducibility -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'reproducibility' ) ?> <?php print_documentation_link( 'reproducibility' ) ?>
 	</td>
@@ -84,7 +94,9 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+
+<!-- Severity -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'severity' ) ?> <?php print_documentation_link( 'severity' ) ?>
 	</td>
@@ -95,8 +107,10 @@
 	</td>
 </tr>
 
+
+<!-- Priority (if permissions allow) -->
 <?php if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) { ?>
-<tr class="row-2">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'priority' ) ?> <?php print_documentation_link( 'priority' ) ?>
 	</td>
@@ -108,38 +122,17 @@
 </tr>
 <?php } ?>
 
-<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
-<tr>
-	<td class="spacer" colspan="2">
-		&nbsp;
-	</td>
-</tr>
-<?php
-$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
-foreach( $t_related_custom_field_ids as $id ) {
-	$t_def = custom_field_get_definition($id);
-?>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get_defaulted( $t_def['name'] ) ?>
-	</td>
-	<td>
-		<?php
-			print_custom_field_input( $t_def );
-		?>
-	</td>
-</tr>
-<?php
-}   // foreach
-?>
-<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
 
+<!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-2">
+
+
+<!-- Profile -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'select_profile' ) ?>
 	</td>
@@ -149,12 +142,18 @@ foreach( $t_related_custom_field_ids as $id ) {
 		</select>
 	</td>
 </tr>
+
+
+<!-- instructions -->
 <tr>
 	<td colspan="2">
 		<?php echo lang_get( 'or_fill_in' ) ?>
 	</td>
 </tr>
-<tr class="row-2">
+
+
+<!-- Platform -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
@@ -162,7 +161,10 @@ foreach( $t_related_custom_field_ids as $id ) {
 		<input tabindex="6" type="text" name="platform" size="32" maxlength="32" value="<?php echo $f_platform ?>" />
 	</td>
 </tr>
-<tr class="row-1">
+
+
+<!-- Operating System -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'os' ) ?>
 	</td>
@@ -170,7 +172,10 @@ foreach( $t_related_custom_field_ids as $id ) {
 		<input tabindex="7" type="text" name="os" size="32" maxlength="32" value="<?php echo $f_os ?>" />
 	</td>
 </tr>
-<tr class="row-2">
+
+
+<!-- OS Version -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'os_version' ) ?>
 	</td>
@@ -178,12 +183,18 @@ foreach( $t_related_custom_field_ids as $id ) {
 		<input tabindex="8" type="text" name="os_build" size="16" maxlength="16" value="<?php echo $f_os_build ?>">
 	</td>
 </tr>
+
+
+<!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-1">
+
+
+<!-- Product Version -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
@@ -193,7 +204,10 @@ foreach( $t_related_custom_field_ids as $id ) {
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+
+
+<!-- Product Build -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'product_build' ) ?>
 	</td>
@@ -201,14 +215,19 @@ foreach( $t_related_custom_field_ids as $id ) {
 		<input tabindex="10" type="text" name="build" size="32" maxlength="32" value="<?php echo $f_build ?>" />
 	</td>
 </tr>
+
+
+<!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">
 		&nbsp;
 	</td>
 </tr>
 
-<?php if ( current_user_get_field( 'access_level' ) > REPORTER ) { ?>
-<tr class="row-2">
+
+<!-- Handler (if permissions allow) -->
+<?php if ( access_level_check_greater_or_equal( config_get( 'update_bug_threshold' ) ) ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'assign_to' ) ?>
 	</td>
@@ -219,18 +238,19 @@ foreach( $t_related_custom_field_ids as $id ) {
 		</select>
 	</td>
 </tr>
-<?php
-	} else {
-?>
-<input type="hidden" name="handler_id" value="0" />
 <?php } ?>
 
+
+<!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">
 		&nbsp;
 	</td>
 </tr>
-<tr class="row-1">
+
+
+<!-- Summary -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>
 	</td>
@@ -238,7 +258,10 @@ foreach( $t_related_custom_field_ids as $id ) {
 		<input tabindex="12" type="text" name="summary" size="80" maxlength="128" value="<?php echo $f_summary ?>" />
 	</td>
 </tr>
-<tr class="row-2">
+
+
+<!-- Description -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<span class="required">*</span><?php echo lang_get( 'description' ) ?> <?php print_documentation_link( 'description' ) ?>
 	</td>
@@ -246,7 +269,10 @@ foreach( $t_related_custom_field_ids as $id ) {
 		<textarea tabindex="13" name="description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
 	</td>
 </tr>
-<tr class="row-1">
+
+
+<!-- Steps to Reproduce -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'steps_to_reproduce' ) ?> <?php print_documentation_link( 'steps_to_reproduce' ) ?>
 	</td>
@@ -254,7 +280,10 @@ foreach( $t_related_custom_field_ids as $id ) {
 		<textarea tabindex="14" name="steps_to_reproduce" cols="60" rows="5" wrap="virtual"><?php echo $f_steps_to_reproduce ?></textarea>
 	</td>
 </tr>
-<tr class="row-2">
+
+
+<!-- Additional Information -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'additional_information' ) ?> <?php print_documentation_link( 'additional_information' ) ?>
 	</td>
@@ -263,8 +292,50 @@ foreach( $t_related_custom_field_ids as $id ) {
 	</td>
 </tr>
 
+
+<!-- Custom Fields -->
+<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) {
+	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
+
+	# insert a spacer as long as we actually have some custom fields
+	if ( count( $t_related_custom_field_ids ) > 0 ) {
+?>
+<tr>
+	<td class="spacer" colspan="2">
+		&nbsp;
+	</td>
+</tr>
+<?php
+	} # if ( size( $t_related_custom_field_ids ) > 0 )
+
+	foreach( $t_related_custom_field_ids as $id ) {
+		$t_def = custom_field_get_definition($id);
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+	</td>
+	<td>
+		<?php print_custom_field_input( $t_def ) ?>
+	</td>
+</tr>
+<?php
+	} # foreach( $t_related_custom_field_ids as $id )
+} # if( ON == config_get( 'use_experimental_custom_fields' ) )
+?>
+
+
+<!-- spacer -->
+<tr>
+	<td class="spacer" colspan="2">
+		&nbsp;
+	</td>
+</tr>
+
+
+<!-- File Upload (if enabled) -->
 <?php if ( file_allow_bug_upload() ) { ?>
-<tr class="row-1">
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'upload_file' ) ?>
 	</td>
@@ -275,23 +346,31 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <?php } ?>
 
-<tr class="row-2">
+
+<!-- View Status -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
-		<input tabindex="17" type="radio" name="view_state" value="10" checked="checked" /> <?php echo lang_get( 'public' ) ?>
-		<input tabindex="18" type="radio" name="view_state" value="50" /> <?php echo lang_get( 'private' ) ?>
+		<input tabindex="17" type="radio" name="view_state" value="<?php echo PUBLIC ?>" <?php check_checked( $f_view_state, PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?>
+		<input tabindex="18" type="radio" name="view_state" value="<?php echo PRIVATE ?>" <?php check_checked( $f_view_state, PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+
+
+<!-- Report Stay (report more bugs) -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'report_stay' ) ?> <?php print_documentation_link( 'report_stay' ) ?>
 	</td>
 	<td>
-		<input tabindex="19" type="checkbox" name="report_stay" <?php if ( $f_report_stay ) echo 'checked="checked"' ?> /> (<?php echo lang_get( 'check_report_more_bugs' ) ?>)
+		<input tabindex="19" type="checkbox" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> (<?php echo lang_get( 'check_report_more_bugs' ) ?>)
 	</td>
 </tr>
+
+
+<!-- Submit Button -->
 <tr>
 	<td class="left">
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
@@ -300,6 +379,8 @@ foreach( $t_related_custom_field_ids as $id ) {
 		<input tabindex="20" type="submit" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
 	</td>
 </tr>
+
+
 </table>
 </form>
 </div>

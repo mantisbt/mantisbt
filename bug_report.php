@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.10 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: bug_report.php,v 1.11 2002-12-30 05:38:39 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,9 +47,12 @@
 	$t_project_id		= helper_get_current_project();
 	$t_upload_method	= config_get( 'file_upload_method' );
 
-	if ( 0 != $f_file['size'] &&
-		 ( DISK == $t_upload_method || FTP == $t_upload_method ) &&
-		 is_uploaded_file( $f_file ) ) {
+
+	# If a file was uploaded, and we need to store it on disk, let's make
+	#  sure that the file path for this project exists
+	if ( is_uploaded_file( $f_file['tmp_name'] ) &&
+		  file_allow_bug_upload() &&
+		  ( DISK == $t_upload_method || FTP == $t_upload_method ) ) {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 
 		if ( !file_exists( $t_file_path ) ) {
@@ -57,19 +60,19 @@
 		}
 	}
 
+
 	# if a profile was selected then let's use that information
 	if ( 0 != $f_profile_id ) {
 		$row = user_get_profile_row( $t_reporter_id, $f_profile_id );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		if ( '' == $f_platform ) {
-			$f_platform = $v_platform;
+		if ( is_blank( $f_platform ) ) {
+			$f_platform = $row['platform'];
 		}
-		if ( '' == $f_os ) {
-			$f_os = $v_os;
+		if ( is_blank( $f_os ) ) {
+			$f_os = $row['os'];
 		}
-		if ( '' == $f_os_build ) {
-			$f_os_build = $v_os_build;
+		if ( is_blank( $f_os_build ) ) {
+			$f_os_build = $row['os_build'];
 		}
 	}
 
@@ -84,22 +87,25 @@
 					$f_profile_id, $f_summary, $f_view_state,
 					$f_description, $f_steps_to_reproduce, $f_additional_info );
 
-	# File Uploaded
+
+	# Handle the file upload
 	if ( is_uploaded_file( $f_file['tmp_name'] ) &&
 		  0 != $f_file['size'] &&
 		  file_allow_bug_upload() ) {
 		file_add( $t_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'] );
 	}
 
-if( ON == config_get( 'use_experimental_custom_fields' ) ) {
-	$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
-	foreach( $t_related_custom_field_ids as $id ) {
-		$t_def = custom_field_get_definition($id);
-		if( !custom_field_set_value( $id, $t_bug_id, gpc_get_string( "custom_field_$id", $t_def['default_value'] ) ) ) {
-			trigger_error( ERROR_CUSTOM_FIELD_WRONG_VALUE, ERROR );
+
+	# Handle custom field submission
+	if( ON == config_get( 'use_experimental_custom_fields' ) ) {
+		$t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
+		foreach( $t_related_custom_field_ids as $id ) {
+			$t_def = custom_field_get_definition($id);
+			if( !custom_field_set_value( $id, $t_bug_id, gpc_get_string( "custom_field_$id", $t_def['default_value'] ) ) ) {
+				trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
+			}
 		}
 	}
-} // ON = config_get( 'use_experimental_custom_fields' )
 
 	print_page_top1();
 
@@ -116,19 +122,20 @@ if( ON == config_get( 'use_experimental_custom_fields' ) ) {
 
 	if ( $f_report_stay ) {
 ?>
-			<form method="post" action="<?php echo string_get_bug_report_url() ?>">
-				<input type="hidden" name="category" 			value="<?php echo $f_category ?>" />
-				<input type="hidden" name="severity" 			value="<?php echo $f_severity ?>" />
-				<input type="hidden" name="reproducibility" 	value="<?php echo $f_reproducibility ?>" />
-				<input type="hidden" name="profile_id" 		value="<?php echo $f_profile_id ?>" />
-				<input type="hidden" name="platform" 			value="<?php echo $f_platform ?>" />
-				<input type="hidden" name="os" 				value="<?php echo $f_os ?>" />
-				<input type="hidden" name="os_build" 			value="<?php echo $f_os_build ?>" />
-				<input type="hidden" name="product_version" 	value="<?php echo $f_product_version ?>" />
-				<input type="hidden" name="build" 			value="<?php echo $f_build ?>" />
-				<input type="hidden" name="report_stay" 		value="<?php echo $f_report_stay ?>" />
-				<input type="submit" 							value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
-			</form>
+	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
+		<input type="hidden" name="category" 		value="<?php echo $f_category ?>" />
+		<input type="hidden" name="severity" 		value="<?php echo $f_severity ?>" />
+		<input type="hidden" name="reproducibility" value="<?php echo $f_reproducibility ?>" />
+		<input type="hidden" name="profile_id" 		value="<?php echo $f_profile_id ?>" />
+		<input type="hidden" name="platform" 		value="<?php echo $f_platform ?>" />
+		<input type="hidden" name="os" 				value="<?php echo $f_os ?>" />
+		<input type="hidden" name="os_build" 		value="<?php echo $f_os_build ?>" />
+		<input type="hidden" name="product_version" value="<?php echo $f_product_version ?>" />
+		<input type="hidden" name="build" 			value="<?php echo $f_build ?>" />
+		<input type="hidden" name="report_stay" 	value="1" />
+		<input type="hidden" name="view_state"		value="<?php echo $f_view_state ?>" />
+		<input type="submit" 						value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
+	</form>
 <?php
 	} else {
 		print_bracket_link( string_get_bug_view_url( $t_bug_id, 1 ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id" );

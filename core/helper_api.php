@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.30 2002-12-29 09:26:46 jfitzell Exp $
+	# $Id: helper_api.php,v 1.31 2002-12-30 05:38:40 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -101,16 +101,22 @@
 	# If $p_var and $p_val are euqal to each other then we echo SELECTED
 	# This is used when we want to know if a variable indicated a certain
 	# option element is selected
-	function check_selected( $p_var, $p_val ) {
+	#
+	# If the second parameter is not given, the first parameter is compared
+	#  to the boolean value true
+	function check_selected( $p_var, $p_val=true ) {
 		if ( $p_var == $p_val ) {
 			echo ' selected="selected" ';
 		}
 	}
 	# --------------------
-	# If $p_var and $p_val are euqal to each other then we echo CHECKED
+	# If $p_var and $p_val are equal to each other then we echo CHECKED
 	# This is used when we want to know if a variable indicated a certain
 	# element is checked
-	function check_checked( $p_var, $p_val ) {
+	#
+	# If the second parameter is not given, the first parameter is compared
+	#  to the boolean value true
+	function check_checked( $p_var, $p_val=true ) {
 		if ( $p_var == $p_val ) {
 			echo ' checked="checked" ';
 		}

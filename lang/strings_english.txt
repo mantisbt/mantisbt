@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.98 $
+	# $Revision: 1.99 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-29 09:26:46 $
+	# $Date: 2002-12-30 05:38:40 $
 	#
-	# $Id: strings_english.txt,v 1.98 2002-12-29 09:26:46 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.99 2002-12-30 05:38:40 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -169,7 +169,7 @@
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field!';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_WRONG_VALUE] = 'ERROR: Field entry does not match definition!';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
 	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
 	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
 	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
