@@ -1,5 +1,22 @@
 Mantis
 
+02.29.2001  -   0.14.7
+
+ * Added Dutch translation
+ * Added g_show_project_in_title to allow project name title display
+ * Added login check on login_page.php3
+ * Added better email localization
+ * Added email to developers and up when new bug reported
+ * Added access_level check for bug delete
+ * Added simple check for non-matching password in manage ccount create
+ * Improved email message
+ * Modified view bug listings to sort by last_updated by default
+ * Numerous small fixes to remove warnings
+ * Fixed bug where bug text were not being deleted
+ * Fixed bug where new account prefs were not being created
+ * Fixed css : font bug (Netscape)
+ * Fixed product version not being logged in bug report
+
 02.23.2001  -   0.14.6
 
  * Added Italian translation
