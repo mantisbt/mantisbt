@@ -316,11 +316,11 @@
 		return db_result( $result, 0 );
 	}
 	# --------------------
-	# Returns the name of the project
-	function get_project_name( $p_project_id ) {
+	# Returns the specified field of the project
+	function get_project_field( $p_project_id, $p_field_name ) {
 		global $g_mantis_project_table;
 
-		$query = "SELECT name
+		$query = "SELECT $p_field_name
 				FROM $g_mantis_project_table
 				WHERE id='$p_project_id'";
 		$result = db_query( $query );

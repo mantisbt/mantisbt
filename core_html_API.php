@@ -72,7 +72,7 @@
 				$g_project_cookie_val;
 
 		if ( 1 == $g_show_project_in_title ) {
-			$t_project_name = get_project_name($g_project_cookie_val);
+			$t_project_name = get_project_field( $g_project_cookie_val, "name" );
 
 			if ( empty( $t_project_name ) ) {
 				PRINT "<title>$p_title</title>";
@@ -80,7 +80,7 @@
 				PRINT "<title>$p_title - $t_project_name</title>";
 			}
 		} else if ( 2 == $g_show_project_in_title ) {
-			$t_project_name = get_project_name($g_project_cookie_val);
+			$t_project_name = get_project_field( $g_project_cookie_val, "name" );
 
 			PRINT "<title>$t_project_name</title>";
 		} else {
@@ -125,14 +125,14 @@
 
 		$t_title = "";
 		switch ( $g_show_project_in_title ) {
-			case 1:	$t_project_name = get_project_name( $g_project_cookie_val );
+			case 1:	$t_project_name = get_project_field( $g_project_cookie_val, "name" );
 					if ( empty( $t_project_name ) ) {
 						$t_title = $p_title;
 					} else {
 						$t_title = $p_title." - ".$t_project_name;
 					}
 					break;
-			case 2:	$t_title = get_project_name( $g_project_cookie_val );
+			case 2:	$t_title = get_project_field( $g_project_cookie_val, "name" );
 					break;
 			default:$t_title = $p_title;
 					break;

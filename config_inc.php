@@ -371,7 +371,7 @@
 
 	# --- limit reporters -------------
 	# Set to 1 if you wish to limit reporters to only viewing bugs that they report.
-	$g_limit_reporters = ON;
+	$g_limit_reporters = OFF;
 
 	# --- close immediately -----------
 	# Allow developers and above to close bugs immediately when resolving bugs

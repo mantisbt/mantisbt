@@ -582,7 +582,7 @@
 	# we include the project name, bug id, and summary.
 	function email_build_subject( $p_bug_id ) {
 		# grab the project name
-		$p_project_name = get_project_name( get_bug_project_id( $p_bug_id ) );
+		$p_project_name = get_project_field( ( get_bug_project_id( $p_bug_id ) ), "name" );
 
 		# grab the subject (summary)
 		$p_subject = string_email( get_bug_summary( $p_bug_id ) );

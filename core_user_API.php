@@ -290,14 +290,22 @@
 	function project_access_check( $p_bug_id, $p_project_id="0" ) {
 		global	$g_logout_page, $g_mantis_project_user_list_table,
 				$g_mantis_project_table, $g_mantis_bug_table,
+				$g_login_select_proj_page,
 				$g_project_cookie_val;
 
 		project_check( $p_bug_id );
+
+		# access_level check
 		$t_project_id = get_bug_field( "project_id", $p_bug_id );
 		$t_user_id = get_current_user_field( "id" );
-		$t_project_user_access_level = get_project_access_level( $t_project_id );
-		if ( -1 != $t_project_user_access_level ) {
-			return;
+		$t_project_access_level = get_project_access_level( $t_project_id );
+		$t_access_level = get_current_user_field( "access_level" );
+		if ( -1 != $t_project_access_level ) {
+			if ( 0 ) {
+				print_header_redirect( $g_login_select_proj_page );
+			} else {
+				return;
+			}
 		} else {
 			return;
 			#print_header_redirect( $g_logout_page );
@@ -336,7 +344,7 @@
 					WHERE user_id='$t_user_id' AND project_id='$p_project_id'";
 		}
 		$result = db_query( $query );
-		if ( db_num_rows( $result )>0 ) {
+		if ( db_num_rows( $result ) > 0 ) {
 			return db_result( $result, 0, 0 );
 		} else {
 			return -1;
