@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.29 2003-02-21 01:40:08 vboctor Exp $
+	# $Id: string_api.php,v 1.30 2003-02-22 08:26:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -177,8 +177,8 @@
 		$p_string = eregi_replace( "<a href=\"mailto:(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))\" target=\"_new\">(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))</a>",
 								"\\1",
 								$p_string);
-		$p_string = eregi_replace( "<a href=\"([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])\">([[:alnum:][:space:]]*)([[:alnum:]#?/&=])</a>",
-								"\\1://\\2\\3",
+		$p_string = eregi_replace( "<a href=\"([[:alnum:]]+://[^[:space:]]*)([[:alnum:]#?/&=])\">([^<]*)</a>",
+								"\\1",
 								$p_string);
 		return $p_string;
 	}
