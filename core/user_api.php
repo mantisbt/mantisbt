@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.84 2005-02-13 21:36:38 jlatour Exp $
+	# $Id: user_api.php,v 1.85 2005-02-14 10:21:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -672,7 +672,7 @@
 		$t_public	= VS_PUBLIC;
 		$t_private	= VS_PRIVATE;
 
-		if ( user_is_administrator( $p_user_id ) ) {
+		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 			$query = "SELECT p.id, ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_hierarchy_table ph
@@ -700,13 +700,13 @@
 		$result = db_query( $query );
 		$row_count = db_num_rows( $result );
 
-		$t_projects = Array();
+		$t_projects = array();
 
 		for ( $i=0 ; $i < $row_count ; $i++ ) {
 			$row = db_fetch_array( $result );
 
 			if ( !isset( $t_projects[ $row['parent_id'] ] ) ) {
-				$t_projects[ $row['parent_id'] ] = Array();
+				$t_projects[ $row['parent_id'] ] = array();
 			}
 
 			array_push( $t_projects[ $row['parent_id'] ], $row['id'] );
@@ -714,6 +714,10 @@
 
 		if ( auth_get_current_user_id() == $p_user_id ) {
 			$g_user_accessible_subprojects_cache = $t_projects;
+		}
+
+		if ( !isset( $t_projects[ $p_project_id ] ) ) {
+			$t_projects[ $p_project_id ] = array();
 		}
 
 		return $t_projects[ $p_project_id ];

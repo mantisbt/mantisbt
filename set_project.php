@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.51 2005-02-13 21:36:17 jlatour Exp $
+	# $Id: set_project.php,v 1.52 2005-02-14 10:21:44 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 
 	$t_project = split( ';', $f_project_id );
 	$t_top     = $t_project[0];
-	$t_bottom  = $t_project[ count( $t_project ) ];
+	$t_bottom  = $t_project[ count( $t_project ) - 1 ];
 
 	if ( ALL_PROJECTS != $t_bottom ) {
 		project_ensure_exists( $t_bottom );

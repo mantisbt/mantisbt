@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.65 2005-02-13 21:36:38 jlatour Exp $
+	# $Id: project_api.php,v 1.66 2005-02-14 10:21:36 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -473,7 +473,7 @@
 		$t_project_clause = ( $c_project_id != ALL_PROJECTS ) ? ' AND p.id = ' . $c_project_id : '';
 
 		$t_users = array();
-		$query = "SELECT DISTINCT u.id, u.username, u.realname
+		$query = "SELECT DISTINCT u.id, u.username, u.realname, u.access_level
 					FROM 	$t_user_table u,
 							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id
 					WHERE	( ( p.view_state='$t_pub' AND u.access_level >= $t_access_level )
