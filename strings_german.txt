@@ -28,7 +28,7 @@
 	$s_priority_enum_string = "10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:sofort";
 	$s_severity_enum_string = "10:feature,20:trivial,30:textual,40:minimal,50:klein,60:groß,70:crash,80:block";
 	$s_reproducibility_enum_string = "10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar,100:N/A";
-	$s_status_enum_string = "10:neu,20:feedback,30:bekannt,40:bestätigt,50:zugewiesen,80:erledigt,90:geschlossen";
+	$s_status_enum_string = "10:neu,20:feedback,30:anerkannt,40:bestätigt,50:zugewiesen,80:erledigt,90:geschlossen";
 	$s_resolution_enum_string = "10:offen,20:erledigt,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:won't fix";
 	$s_projection_enum_string = "10:keine,30:Kleinigkeit,50:kleinere Änderung,70:größere Änderung,90:Redesign";
 	$s_eta_enum_string = "10:none,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,60:> 1 Monat";
@@ -87,7 +87,7 @@
 	$s_password = "Passwort";
 	$s_confirm_password  = "Passwort bestätigen";
 	$s_access_level = "Zugangsberechtigung";
-	$s_update_user_button = "Benuzterzin aktualisieren";
+	$s_update_user_button = "Benutzer aktualisieren";
 
 	# account_prefs_page.php3
 	$s_default_account_preferences_title = "Fehlwert-Konto-Einstellungen";
@@ -181,7 +181,7 @@
 	$s_resolve_bug_button = "Fehler bereinigen";
 
 	# bug_resolve_page2.php3
-	$s_bug_resolved_msg = "Fehler bereinigt. Bitte Notiz eingebenw...";
+	$s_bug_resolved_msg = "Fehler bereinigt. Bitte Notiz eingeben...";
 	$s_resolve_add_bugnote_title = "Notiz zur Fehlerbereinigung eingeben";
 	$s_bugnote_add_resolve_button = "Notiz hinzufügen";
 
@@ -253,7 +253,7 @@
 	$s_signup_link = "Neues Konto anmelden";
 
 	# login_select_proj_page.php3
-	$s_select_project_button = "Project selektieren";
+	$s_select_project_button = "Projekt wählen";
 
 	# logout_page.php3
 	$s_logged_out_title = "Abgemeldet...";
@@ -261,7 +261,7 @@
 	$s_here = "hier klicken";
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "Öffnen und mir zuweisen";
+	$s_open_and_assigned_to_me = "Offen und mir zugeweisen";
 	$s_open_and_reported_to_me = "Offen und von mir berichtet";
 	$s_newer_news_link = "Neuere Nachrichten";
 	$s_older_news_link = "Ältere Nachrichten";
@@ -278,7 +278,7 @@
 	$s_create_user_button = "Benutzer anlegen";
 
 	# manage_page.php3
-	$s_hide_disabled = "versteckte Ausgeschaltete";
+	$s_hide_disabled = "verstecke Ausgeschaltete";
 	$s_filter_button = "Filter";
 	$s_create_new_account_link = "Neues Konto erstellen";
 	$s_projects_link = "Projekte";
@@ -579,7 +579,7 @@
 	$s_updated = "aktualisiert";
 
 	# view_all_inc.php
-        $s_search ="Suche";
+	$s_search ="Suche";
 
 	# view_user_reported_bug_page.php3
 
