@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.32 2004-09-23 18:19:37 bpfennigschmidt Exp $
+	# $Id: summary_api.php,v 1.33 2004-10-20 01:11:01 narcissus Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -39,7 +39,11 @@
 		if ( ALL_PROJECTS == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$t_project_filter = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$t_project_filter = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$t_project_filter = '1=1';
+			}
 		} else {
 			$t_project_filter = " project_id='$t_project_id'";
 		}
@@ -170,7 +174,11 @@
 		if ( ALL_PROJECTS == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$specific_where = '1=1';
+			}
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -213,7 +221,11 @@
 		if ( ALL_PROJECTS == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$specific_where = '1=1';
+			}
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -308,7 +320,11 @@
 		if ( ALL_PROJECTS == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$specific_where = '1=1';
+			}
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -386,7 +402,11 @@
 		if ( ALL_PROJECTS == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$specific_where = '1=1';
+			}
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -510,7 +530,11 @@
 		
 		# Only projects to which the user have access
 		$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-		$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+		if ( count( $t_accessible_projects_array ) > 0 ) {
+			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+		} else {
+			$specific_where = '1=1';
+		}
 
 		$query = "SELECT project_id, status
 				FROM $t_mantis_bug_table
@@ -592,7 +616,11 @@
 		if ( 0 == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$specific_where = '1=1';
+			}
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -701,7 +729,11 @@
 		if ( 0 == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$specific_where = '1=1';
+			}
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}
@@ -839,7 +871,11 @@
 		if ( 0 == $t_project_id ) {
 			# Only projects to which the user have access
 			$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			if ( count( $t_accessible_projects_array ) > 0 ) {
+				$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+			} else {
+				$specific_where = '1=1';
+			}
 		} else {
 			$specific_where = " project_id='$t_project_id'";
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.41 2004-09-23 18:19:11 bpfennigschmidt Exp $
+	# $Id: summary_page.php,v 1.42 2004-10-20 01:11:02 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,7 +26,11 @@
 	if ( ALL_PROJECTS == $t_project_id ) {
 		# Only projects to which the user have access
 		$t_accessible_projects_array = user_get_accessible_projects( $t_user_id );
-		$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+		if ( count( $t_accessible_projects_array ) > 0 ) {
+			$specific_where = ' (project_id='. implode( ' OR project_id=', $t_accessible_projects_array ).')';
+		} else {
+			$specific_where = '1=1';
+		}
 	} else {
 		$specific_where = " project_id='$t_project_id'";
 	}
