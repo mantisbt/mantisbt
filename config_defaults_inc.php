@@ -747,7 +747,7 @@
 	# Only applies to error types configured to 'halt' in $g_display_errors, below
 	# WARNING: Potential security hazard.  Only turn this on when you really
 	# need it for debugging
-	$g_show_detailed_errors = ON;
+	$g_show_detailed_errors = OFF;
 
 	# --- error dsiplay configuration ---
 	# Control which errors are ignored ('none'), which are displayed
