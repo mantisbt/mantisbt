@@ -1,11 +1,11 @@
 #
 # Database Upgrade SQL
 # -----------------------------------------------------------------
-# $Revision: 1.3 $
-# $Author: jhuggins $
-# $Date: 2002-06-07 14:21:27 $
+# $Revision: 1.4 $
+# $Author: vboctor $
+# $Date: 2002-08-24 02:42:12 $
 #
-# $Id: db_upgrade.sql,v 1.3 2002-06-07 14:21:27 jhuggins Exp $
+# $Id: db_upgrade.sql,v 1.4 2002-08-24 02:42:12 vboctor Exp $
 # -----------------------------------------------------------------
 #	Run these queries to upgrade your bugtracker
 #
@@ -24,6 +24,7 @@
 #   0.14.x to 0.15.0
 #   0.15.x to 0.16.0
 #   0.16.x to 0.17.0
+#   Further Upgrades
 #----------------------
 
 
@@ -423,3 +424,12 @@ ALTER TABLE mantis_bug_table CHANGE version version VARCHAR(64) NOT NULL;
 
 # this is for per project user prefs
 ALTER TABLE mantis_user_pref_table ADD project_id INT(7) UNSIGNED ZEROFILL NOT NULL AFTER user_id;
+
+# =================
+# Further Upgrades
+# =================
+
+# For further upgrades visit admin/admin_upgrade.php.  This script will allow you to:
+# 1. Generate an SQL file like this one.
+# 2. Upgrade the database by executing the SQL directly.
+# 3. View the changes with associated comments.

@@ -1,11 +1,11 @@
 #
 # Table structure for table `mantis_bug_file_table`
 # --------------------------------------------------------
-# $Revision: 1.6 $
-# $Author: jhuggins $
-# $Date: 2002-06-10 17:16:26 $
+# $Revision: 1.7 $
+# $Author: vboctor $
+# $Date: 2002-08-24 02:42:12 $
 #
-# $Id: db_generate.sql,v 1.6 2002-06-10 17:16:26 jhuggins Exp $
+# $Id: db_generate.sql,v 1.7 2002-08-24 02:42:12 vboctor Exp $
 # --------------------------------------------------------
 #
 
@@ -22,7 +22,7 @@ CREATE TABLE mantis_bug_file_table (
   date_added datetime NOT NULL default '1970-01-01 00:00:01',
   content longblob NOT NULL,
   PRIMARY KEY  (id)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -40,7 +40,7 @@ CREATE TABLE mantis_bug_history_table (
   KEY bug_id (bug_id),
   KEY user_id (user_id),
   KEY date_modified (date_modified)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -50,7 +50,7 @@ CREATE TABLE mantis_bug_history_table (
 CREATE TABLE mantis_bug_monitor_table (
   user_id int(7) unsigned zerofill NOT NULL default '0000000',
   bug_id int(7) unsigned NOT NULL default '0'
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -58,10 +58,12 @@ CREATE TABLE mantis_bug_monitor_table (
 #
 
 CREATE TABLE mantis_bug_relationship_table (
+  id int(7) unsigned zerofill NOT NULL auto_increment,
   source_bug_id int(7) unsigned zerofill NOT NULL default '0000000',
   destination_bug_id int(7) unsigned zerofill NOT NULL default '0000000',
-  relationship_type int(2) NOT NULL default '0'
-);
+  relationship_type int(2) NOT NULL default '0',
+  PRIMARY KEY  (id)
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -98,7 +100,7 @@ CREATE TABLE mantis_bug_table (
   KEY category (category),
   KEY date_submitted (date_submitted),
   KEY reporter_id (reporter_id)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -111,7 +113,7 @@ CREATE TABLE mantis_bug_text_table (
   steps_to_reproduce text NOT NULL,
   additional_information text NOT NULL,
   PRIMARY KEY  (id)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -129,7 +131,7 @@ CREATE TABLE mantis_bugnote_table (
   PRIMARY KEY  (id),
   KEY last_modified (last_modified),
   KEY date_submitted (date_submitted)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -140,7 +142,7 @@ CREATE TABLE mantis_bugnote_text_table (
   id int(7) unsigned zerofill NOT NULL auto_increment,
   note text NOT NULL,
   PRIMARY KEY  (id)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -153,12 +155,14 @@ CREATE TABLE mantis_news_table (
   poster_id int(7) unsigned zerofill NOT NULL default '0000000',
   date_posted datetime NOT NULL default '1970-01-01 00:00:01',
   last_modified datetime NOT NULL default '1970-01-01 00:00:01',
+  view_state int(2) NOT NULL default '10',
+  announcement int(1) NOT NULL default '0',
   headline varchar(64) NOT NULL default '',
   body text NOT NULL,
   PRIMARY KEY  (id),
   KEY id (id),
   KEY date_posted (date_posted)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -171,12 +175,29 @@ CREATE TABLE mantis_project_category_table (
   category varchar(64) NOT NULL default '',
   KEY category (category),
   KEY project_id (project_id)
-);
+) TYPE=MyISAM;
+# --------------------------------------------------------
 
 INSERT INTO mantis_project_category_table (project_id, category) VALUES ( '0000001', 'bugtracker');
 INSERT INTO mantis_project_category_table (project_id, category) VALUES ( '0000001', 'other');
 INSERT INTO mantis_project_category_table (project_id, category) VALUES ( '0000001', 'security');
 
+#
+# Table structure for table `mantis_project_customization_table`
+#
+
+CREATE TABLE mantis_project_customization_table (
+  project_id int(7) unsigned zerofill NOT NULL default '0000000',
+  priorities varchar(200) NOT NULL default '',
+  severities varchar(200) NOT NULL default '',
+  reproducibilities varchar(200) NOT NULL default '',
+  states varchar(200) NOT NULL default '',
+  resolutions varchar(200) NOT NULL default '',
+  projections varchar(200) NOT NULL default '',
+  etas varchar(200) NOT NULL default '',
+  colors varchar(160) NOT NULL default '',
+  KEY project_id (project_id)
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -196,7 +217,7 @@ CREATE TABLE mantis_project_file_table (
   date_added datetime NOT NULL default '1970-01-01 00:00:01',
   content longblob NOT NULL,
   PRIMARY KEY  (id)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -215,7 +236,7 @@ CREATE TABLE mantis_project_table (
   PRIMARY KEY  (id),
   UNIQUE KEY name (name),
   KEY id (id)
-);
+) TYPE=MyISAM;
 
 INSERT INTO mantis_project_table (id, name, status, enabled, view_state, description) VALUES ( '0000001', 'mantis', '10', '1', '10', 'Mantis.  Report problems with the actual bug tracker here. (Do not remove this account.  You can set it to be disabled if you do not wish to see it)');
 
@@ -230,7 +251,7 @@ CREATE TABLE mantis_project_user_list_table (
   user_id int(7) unsigned zerofill NOT NULL default '0000000',
   access_level int(2) NOT NULL default '10',
   KEY user_id (user_id)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -241,9 +262,8 @@ CREATE TABLE mantis_project_version_table (
   project_id int(7) unsigned zerofill NOT NULL default '0000000',
   version varchar(64) NOT NULL default '',
   date_order datetime NOT NULL default '1970-01-01 00:00:01',
-  KEY date_order (date_order),
-  KEY project_id (project_id)
-);
+  PRIMARY KEY  (project_id,version)
+) TYPE=MyISAM;
 
 INSERT INTO mantis_project_version_table (project_id, version, date_order) VALUES ( '0000001', '0.14.0', NOW());
 
@@ -274,11 +294,22 @@ CREATE TABLE mantis_user_pref_table (
   email_on_status int(1) NOT NULL default '0',
   email_on_priority int(1) NOT NULL default '0',
   language varchar(32) NOT NULL default 'english',
-  PRIMARY KEY  (id)
-);
+  PRIMARY KEY  (id),
+) TYPE=MyISAM;
 
 INSERT INTO mantis_user_pref_table (id, user_id, advanced_report, advanced_view) VALUES ( '0000001', '0000001', '', '');
 
+# --------------------------------------------------------
+
+#
+# Table structure for table `mantis_user_print_pref_table`
+#
+
+CREATE TABLE mantis_user_print_pref_table (
+  user_id int(7) unsigned zerofill NOT NULL default '0000000',
+  print_pref varchar(27) NOT NULL default '',
+  PRIMARY KEY  (user_id)
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -293,7 +324,7 @@ CREATE TABLE mantis_user_profile_table (
   os_build varchar(32) NOT NULL default '',
   description text NOT NULL,
   PRIMARY KEY  (id)
-);
+) TYPE=MyISAM;
 # --------------------------------------------------------
 
 #
@@ -315,7 +346,7 @@ CREATE TABLE mantis_user_table (
   PRIMARY KEY  (id),
   UNIQUE KEY username (username),
   KEY access_level (access_level)
-);
+) TYPE=MyISAM;
 
 # replace the 4th argument after VALUES with your chosen method of encryption
 # default is MD5
