@@ -372,9 +372,9 @@
 	# date lengths to count bugs by (in days)
 	$g_date_partitions			= array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
 
-	# shows project '[project] category' when 'All Products' is selected
+	# shows project '[project] category' when 'All Projects' is selected
 	# otherwise only 'category name'
-	$g_summary_product_colon_category	= OFF;
+	$g_summary_category_include_project	= OFF;
 
 	# threshold for viewing summary
 	$g_view_summary_threshold	= VIEWER;

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.6 2002-11-12 05:19:04 jfitzell Exp $
+	# $Id: summary_api.php,v 1.7 2002-12-17 08:08:24 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -262,7 +262,7 @@
 	function print_category_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_project_table,
 				$g_mantis_project_category_table, $g_project_cookie_val,
-				$g_summary_pad, $g_summary_product_colon_category;
+				$g_summary_pad, $g_summary_category_include_project;
 
 		#checking if it's a per project statistic or all projects
 		if ($g_project_cookie_val=='0000000') {
@@ -320,7 +320,7 @@
 
 			print '<tr align="center" ' . helper_alternate_class( $i ) . '>';
 			PRINT "<td width=\"50%\">";
-			if ( ( ON == $g_summary_product_colon_category ) && ( $g_project_cookie_val=='0000000' ) ) {
+			if ( ( ON == $g_summary_category_include_project ) && ( $g_project_cookie_val=='0000000' ) ) {
 				PRINT "[$t_project] ";
 			}
 			PRINT "$t_category</td><td width=\"50%\">";
