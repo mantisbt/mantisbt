@@ -180,7 +180,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 				<p>The following size settings are in effect.  Maximum upload size will be whichever of these is SMALLEST. </p>
 				<p>PHP variable 'upload_max_filesize': <?php echo ini_get( 'upload_max_filesize' ) ?><br />
 				PHP variable 'post_max_size': <?php echo ini_get( 'post_max_size' ) ?><br />
-				Mantis variable '$g_max_file_sze': <?php echo $g_max_file_size ?> bytes</p>
+				Mantis variable '$g_max_file_size': <?php echo $g_max_file_size ?> bytes</p>
 				
 				<p>There may also be settings in Apache (or MySQL if using the SQL upload method) that prevent you from  uploading files or limit the maximum file size.  See the documentation for those packages if you need more information.</p>
 		<?php
