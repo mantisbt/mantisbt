@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.21 2005-03-18 03:43:35 thraxisp Exp $
+	# $Id: config_api.php,v 1.22 2005-03-19 16:26:00 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -215,7 +215,7 @@
 		if ( is_array( $p_value ) || is_object( $p_value ) ) {
 			$t_type = CONFIG_TYPE_COMPLEX;
 			$c_value = db_prepare_string( serialize( $p_value ) );
-		} else if ( is_int( $p_value ) ) {
+		} else if ( is_int( $p_value ) || is_numeric( $p_value ) ) {
 			$t_type = CONFIG_TYPE_INT;
 			$c_value = db_prepare_int( $p_value );
 		} else {

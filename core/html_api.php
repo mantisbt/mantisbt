@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.155 2005-03-19 15:10:09 vwegert Exp $
+	# $Id: html_api.php,v 1.156 2005-03-19 16:26:00 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -622,12 +622,16 @@
 	# $p_page specifies the current page name so it's link can be disabled
 	function print_manage_config_menu( $p_page = '' ) {
 		$t_permissions_summary_report = 'adm_permissions_report.php';
+		$t_manage_work_threshold     = 'manage_config_work_threshold_page.php';
 		$t_manage_email 		= 'manage_config_email_page.php';
 		$t_manage_workflow 		= 'manage_config_workflow_page.php';
 
 		switch ( $p_page ) {
 			case $t_permissions_summary_report:
 				$t_permissions_summary_report = '';
+				break;
+			case $t_manage_work_threshold:
+				$t_manage_work_threshold = '';
 				break;
 			case $t_manage_email:
 				$t_manage_email = '';
@@ -640,8 +644,9 @@
 		PRINT '<br /><div align="center">';
 		if ( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
 			print_bracket_link( $t_permissions_summary_report, lang_get( 'permissions_summary_report' ) );
-			print_bracket_link( $t_manage_email, lang_get( 'manage_email_config' ) );
+			print_bracket_link( $t_manage_work_threshold, lang_get( 'manage_threshold_config' ) );
 			print_bracket_link( $t_manage_workflow, lang_get( 'manage_workflow_config' ) );
+			print_bracket_link( $t_manage_email, lang_get( 'manage_email_config' ) );
 		}
 		PRINT '</div>';
 	}

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.244 $
+	# $Revision: 1.245 $
 	# $Author: thraxisp $
-	# $Date: 2005-02-28 02:50:07 $
+	# $Date: 2005-03-19 16:26:01 $
 	#
-	# $Id: strings_english.txt,v 1.244 2005-02-28 02:50:07 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.245 2005-03-19 16:26:01 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -625,8 +625,9 @@ $s_manage_custom_field_link = 'Manage Custom Fields';
 $s_manage_global_profiles_link = 'Manage Global Profiles';
 $s_permissions_summary_report = 'Permissions Report';
 $s_manage_config_link = 'Manage Configuration';
+$s_manage_threshold_config = 'Workflow Thresholds';
 $s_manage_email_config = 'Email Notifications';
-$s_manage_workflow_config = 'Workflow';
+$s_manage_workflow_config = 'Workflow Transitions';
 $s_create_new_account_link = 'Create New Account';
 $s_projects_link = 'Projects';
 $s_documentation_link = 'Documentation';
@@ -669,6 +670,20 @@ $s_desc_bug_reopen_status = 'Status to which reopened issues are set';
 $s_desc_bug_resolved_status_threshold = 'Status where an issue is considered resolved';
 $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
+
+# manage_config_work_threshold_page
+$s_allow_close_immediate = 'Allow issue to be closed on Resolve';
+$s_allow_reporter_close = 'Allow Reporter to close Issue';
+$s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
+$s_set_status_assigned = 'Set status on assignment of Handler';
+$s_allow_user_edit = 'Allow user to edit their own bugnotes';
+$s_limit_access = 'Limit reporter\'s access to their own issues';
+$s_submit_status = 'Status to which a new issue is set';
+$s_assigned_status = 'Status to set auto-assigned issues to';
+$s_resolved_status = 'Status where an issue is considered resolved';
+$s_readonly_status = 'Status where an issue becomes read only';
+$s_reopen_status = 'Status to which a reopened issue is set';
+$s_reopen_resolution = 'Resolution to which a reopened issue is set';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project has been successfully added...';
