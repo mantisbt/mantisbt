@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.40 2004-12-15 17:02:31 bpfennigschmidt Exp $
+	# $Id: bug_actiongroup.php,v 1.41 2005-01-29 12:14:21 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 ?>
 <?php auth_ensure_user_authenticated() ?>
@@ -24,9 +24,14 @@
 	helper_begin_long_process();
 
 	$f_action	= gpc_get_string( 'action' );
+	$f_custom_field_id = gpc_get_int( 'custom_field_id', 0 );
 	$f_bug_arr	= gpc_get_int_array( 'bug_arr', array() );
 
 	$t_failed_ids = array();
+
+	if ( 0 != $f_custom_field_id ) {
+		$t_custom_field_def = custom_field_get_definition( $f_custom_field_id );
+	}
 
 	foreach( $f_bug_arr as $t_bug_id ) {
 		bug_ensure_exists( $t_bug_id );
@@ -36,7 +41,7 @@
 
 		case 'CLOSE':
 			if ( access_can_close_bug( $t_bug_id ) &&
-					( $t_status < CLOSED ) && 
+					( $t_status < CLOSED ) &&
 					bug_check_workflow($t_status, CLOSED) ) {
 				bug_close( $t_bug_id );
 			} else {
@@ -99,13 +104,13 @@
 		case 'RESOLVE':
 			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
 			if ( access_has_bug_level( access_get_status_threshold( $t_resolved_status, bug_get_field( $t_bug_id, 'project_id' ) ), $t_bug_id ) &&
-				 		( $t_status < $t_resolved_status ) && 
+				 		( $t_status < $t_resolved_status ) &&
 						bug_check_workflow($t_status, $t_resolved_status ) ) {
 				$f_resolution = gpc_get_int( 'resolution' );
 				$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
 				bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version );
 			} else {
-				if ( ( $t_status < $t_resolved_status ) && 
+				if ( ( $t_status < $t_resolved_status ) &&
 						bug_check_workflow($t_status, $t_resolved_status ) ) {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 				} else {
@@ -145,7 +150,7 @@
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
-			
+
 		case 'SET_STICKY':
 			if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $t_bug_id ) ) {
 				$f_sticky = bug_get_field( $t_bug_id, 'sticky' );
@@ -154,6 +159,16 @@
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
+			break;
+
+		case 'CUSTOM':
+			if ( 0 === $f_custom_field_id ) {
+				trigger_error( ERROR_GENERIC, ERROR );
+			}
+
+			$t_form_var = "custom_field_$f_custom_field_id";
+			$t_custom_field_value = gpc_get_custom_field( $t_form_var, $t_custom_field_def['type'], null );
+			custom_field_set_value( $f_custom_field_id, $t_bug_id, $t_custom_field_value );
 			break;
 
 		default:
@@ -166,15 +181,15 @@
 	if ( count( $t_failed_ids ) > 0 ) {
 		html_page_top1();
 		html_page_top2();
-		
+
 		echo '<div align="center">';
 		foreach( $t_failed_ids as $t_id => $t_reason ) {
 			printf("<p> %s: %s </p>\n", string_get_bug_view_link( $t_id ), $t_reason);
 		}
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 		echo '</div>';
-		
-		html_page_bottom1( __FILE__ );	
+
+		html_page_bottom1( __FILE__ );
 	} else {
 		print_header_redirect( $t_redirect_url );
 	}

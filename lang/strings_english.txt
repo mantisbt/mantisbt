@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.233 $
-	# $Author: thraxisp $
-	# $Date: 2005-01-24 22:38:22 $
+	# $Revision: 1.234 $
+	# $Author: vboctor $
+	# $Date: 2005-01-29 12:14:23 $
 	#
-	# $Id: strings_english.txt,v 1.233 2005-01-24 22:38:22 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.234 2005-01-29 12:14:23 vboctor Exp $
 	###########################################################################
 
 # Charset
@@ -948,6 +948,7 @@ $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
 $s_ok = 'OK';
 $s_select_all = 'Select All';
+$s_update_field = 'Update %s';
 
 # stored query strings
 $s_use_query = 'Use Filter';
@@ -1159,8 +1160,6 @@ $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
 
-
 # DHTML filters
 $s_loading = 'Loading...';
-
 ?>
