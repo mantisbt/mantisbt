@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.57 $
+	# $Revision: 1.58 $
 	# $Author: bpfennigschmidt $
-	# $Date: 2004-12-12 20:39:44 $
+	# $Date: 2004-12-13 17:03:56 $
 	#
-	# $Id: view_all_bug_page.php,v 1.57 2004-12-12 20:39:44 bpfennigschmidt Exp $
+	# $Id: view_all_bug_page.php,v 1.58 2004-12-13 17:03:56 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,16 +29,18 @@
 	$t_bug_count = null;
 	$t_page_count = null;
 
+	if ( 1 == $f_page_number ) {
+		$sticky_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
+		if ( $sticky_rows === false ) {
+			print_header_redirect( 'view_all_set.php?type=0' );
+		}
+	}
+	
 	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	if ( $rows === false ) {
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 	
-	$sticky_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
-	if ( $sticky_rows === false ) {
-		print_header_redirect( 'view_all_set.php?type=0' );
-	}
-
 	$t_bugslist = Array();
 	for($i=0; $i < sizeof( $rows ); $i++) {
 		array_push($t_bugslist, $rows[$i]["id"] );
