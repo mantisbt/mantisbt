@@ -15,6 +15,7 @@
 <?php
 	$f_id 			= get_current_user_field( 'id' );
 	$f_protected 	= get_current_user_field( 'protected' );
+	$f_old_username = stripslashes( get_current_user_field( 'username' ) );
 
 	# protected account check
 	if ( ON == $f_protected ) {
@@ -29,6 +30,12 @@
 		$c_username	= addslashes($f_username);
 		$c_email	= addslashes($f_email);
 		$c_id		= (integer)$f_id;
+
+		# check that the username is unique
+		if ( $f_old_username != $f_username &&
+			 false == user_name_unique( $f_username ) ) {
+			print_mantis_error( ERROR_USERNAME_NOT_UNIQUE );
+		}
 
 		# Update everything except password
 	    $query = "UPDATE $g_mantis_user_table

@@ -18,14 +18,8 @@
 	$c_username = addslashes($f_username);
 
 	# Check for duplicate username
-	$query = "SELECT username
-		FROM $g_mantis_user_table
-		WHERE username='$c_username'";
-    $result = db_query( $query );
-    if ( db_num_rows( $result ) > 0 ) {
-    	PRINT "$f_username $s_duplicate_username<p>";
-		PRINT "<a href=\"manage_create_user_page.php\">$s_proceed</a>";
-    	exit;
+    if ( ! user_name_unique( $f_username ) ) {
+		print_mantis_error( ERROR_USERNAME_NOT_UNIQUE );
     }
 
 	if ( $f_password != $f_password_verify ) {

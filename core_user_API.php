@@ -894,4 +894,23 @@
 		}
 	}
 	# --------------------
+	# returns true if the username is unique, false if there is already a user
+	#  with that username
+	function user_name_unique( $p_username ) {
+		global $g_mantis_user_table;
+
+		$c_username = addslashes($p_username);
+
+		$query = "SELECT username
+			FROM $g_mantis_user_table
+			WHERE username='$c_username'";
+
+	    $result = db_query( $query );
+
+	    if ( db_num_rows( $result ) > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 ?>

@@ -21,7 +21,6 @@
 	$c_username = addslashes($f_username);
 
 	# Check for a properly formatted email with valid MX record
-	$result = 0;
 	if ( !is_valid_email( $f_email ) ) {
 		PRINT $f_email.' '.$s_invalid_email.'<p>';
 		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
@@ -29,14 +28,8 @@
 	}
 
 	# Check for duplicate username
-	$query = "SELECT username
-		FROM $g_mantis_user_table
-		WHERE username='$c_username'";
-    $result = db_query( $query );
-    if ( db_num_rows( $result ) > 0 ) {
-    	PRINT $f_username . $s_duplicate_username . '<p>';
-	PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
-    	exit;
+    if ( ! user_name_unique( $f_username ) ) {
+		print_mantis_error( ERROR_USERNAME_NOT_UNIQUE );
     }
 
 	# Passed our checks.  Insert into DB then send email.
@@ -57,11 +50,7 @@
 <p>
 <div align="center">
 <?php
-	if ( $result ) {						# SUCCESS
-		PRINT "[$f_username - $f_email] $s_password_emailed_msg<p>$s_no_reponse_msg<p>";
-	} else {								# FAILURE
-		print_sql_error( $query );
-	}
+	PRINT "[$f_username - $f_email] $s_password_emailed_msg<p>$s_no_reponse_msg<p>";
 
 	print_bracket_link( 'login_page.php', $s_proceed );
 ?>
