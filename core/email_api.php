@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.7 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: email_api.php,v 1.8 2002-08-29 14:26:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -351,7 +351,6 @@
 		email_bug_info( $p_bug_id, $s_email_bug_deleted_msg, $t_bcc );
 	}
 	# --------------------
-	# messages are in two parts, the bug info and the bugnotes
 	# Build the bug info part of the message
 	function email_build_bug_message( $p_bug_id, $p_message ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
@@ -444,7 +443,6 @@
 		return $t_message;
 	}
 	# --------------------
-	# messages are in two parts, the bug info and the bugnotes
 	# Build the bugnotes part of the message
 	function email_build_bugnote_message( $p_bug_id ) {
 		global 	$g_mantis_bugnote_table, $g_mantis_bugnote_text_table,
@@ -488,6 +486,26 @@
 		return $t_message;
 	}
 	# --------------------
+	# Builds the bug history portion of the bug e-mail
+	function email_build_history_message( $p_bug_id ) {
+		$history = history_get_events_array( $p_bug_id );
+		$t_message = lang_get( 'bug_history' ) . "\n";
+		$t_message .=	str_pad( lang_get( 'date_modified' ), 20 ) .
+						str_pad( lang_get( 'username' ), 20 ) .
+						str_pad( lang_get( 'field' ), 20 ) .
+						str_pad( lang_get( 'change' ), 20 ). "\n";
+		$t_message .= config_get( 'email_separator1' ) . "\n";
+		for ( $i = 0; $i < count($history); $i++ ) {
+			$t_message .=	str_pad( $history[$i]['date'], 20 ) .
+							str_pad( $history[$i]['username'], 20 ) .
+							str_pad( $history[$i]['note'], 20 ) .
+							str_pad( $history[$i]['change'], 20 ). "\n";
+		}
+
+		$t_message .= config_get( 'email_separator1' ) . "\n\n";
+		return ( $t_message );
+	}
+	# --------------------
 	# Send bug info to reporter and handler
 	function email_bug_info( $p_bug_id, $p_message, $p_headers='' ) {
 		global $g_to_email, $g_use_bcc;
@@ -499,6 +517,7 @@
 		$t_message = $p_message."\n";
 		$t_message .= email_build_bug_message( $p_bug_id, $p_message );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
+		$t_message .= email_build_history_message( $p_bug_id );
 
 		# send mail
 

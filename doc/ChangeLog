@@ -128,6 +128,7 @@ Mantis ChangeLog
  * Added current_user_api.php
  * Renamed manage_create_new_user.php manage_user_create.php
  * Renamed manage_create_new_user_page.php manage_user_create_page.php 
+ * Added support for sending Bug History in e-mails.
 
 2002.08.23  -  0.17.5
  * Corrected bug_delete.php and bug_delete_page.php, which ignored the $g_allow_bug_delete_access_level setting.

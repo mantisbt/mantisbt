@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.4 2002-08-29 13:00:50 vboctor Exp $
+	# $Id: history_api.php,v 1.5 2002-08-29 14:26:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -75,4 +75,116 @@
 		$result = db_query( $query );
 	}
 	# --------------------
+	# Retrieves the history events for the specified bug id and returns it in an array
+	# The array is indexed from 0 to N-1.  The second dimension is: 'date', 'username',
+	# 'note', 'change'.
+	function history_get_events_array( $p_bug_id ) {
+		$t_mantis_bug_history_table = config_get( 'mantis_bug_history_table' );
+		$t_mantis_user_table = config_get( 'mantis_user_table' );
+		$t_history_order = config_get( 'history_order' );
+		$c_bug_id = db_prepare_int( $p_bug_id );
+
+		# grab history and display by date_modified then field_name
+		$query = "SELECT b.*, UNIX_TIMESTAMP(b.date_modified) as date_modified, u.username
+				FROM $t_mantis_bug_history_table b
+				LEFT JOIN $t_mantis_user_table u
+				ON b.user_id=u.id
+				WHERE bug_id='$c_bug_id'
+				ORDER BY date_modified $t_history_order, field_name ASC";
+		$result = db_query( $query );
+		$history_count = db_num_rows( $result );
+		$history = array();
+
+		for ( $i=0; $i < $history_count; $i++ ) {
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
+
+			$status_color = alternate_colors( $i+1, config_get( 'background_color' ) );
+
+			$v_date_modified = date( config_get( 'complete_date_format' ), $v_date_modified );
+
+			switch ( $v_field_name ) {
+			case 'status':			$v_old_value = get_enum_element( 'status', $v_old_value );
+									$v_new_value = get_enum_element( 'status', $v_new_value );
+					break;
+			case 'severity':		$v_old_value = get_enum_element( 'severity', $v_old_value );
+									$v_new_value = get_enum_element( 'severity', $v_new_value );
+					break;
+			case 'reproducibility':	$v_old_value = get_enum_element( 'reproducibility', $v_old_value );
+									$v_new_value = get_enum_element( 'reproducibility', $v_new_value );
+					break;
+			case 'resolution':		$v_old_value = get_enum_element( 'resolution', $v_old_value );
+									$v_new_value = get_enum_element( 'resolution', $v_new_value );
+					break;
+			case 'priority':		$v_old_value = get_enum_element( 'priority', $v_old_value );
+									$v_new_value = get_enum_element( 'priority', $v_new_value );
+					break;
+			case 'eta':				$v_old_value = get_enum_element( 'eta', $v_old_value );
+									$v_new_value = get_enum_element( 'eta', $v_new_value );
+					break;
+			case 'view_state':		$v_old_value = get_enum_element( 'view_state', $v_old_value );
+									$v_new_value = get_enum_element( 'view_state', $v_new_value );
+					break;
+			case 'projection':		$v_old_value = get_enum_element( 'projection', $v_old_value );
+									$v_new_value = get_enum_element( 'projection', $v_new_value );
+					break;
+			case 'project_id':		$v_old_value = project_get_field( $v_old_value, 'name' );
+									$v_new_value = project_get_field( $v_new_value, 'name' );
+					break;
+			case 'handler_id':
+			case 'reporter_id':		$v_old_value = user_get_field( $v_old_value, 'username' );
+									$v_new_value = user_get_field( $v_new_value, 'username' );
+					break;
+			}
+
+			if ( NORMAL_TYPE != $v_type ) {
+				switch ( $v_type ) {
+				case NEW_BUG:					$t_note = lang_get( 'new_bug' );
+												break;
+				case BUGNOTE_ADDED:				$t_note = lang_get( 'bugnote_added' ) . ": " . $v_old_value;
+												break;
+				case BUGNOTE_UPDATED:			$t_note = lang_get( 'bugnote_edited' ) . ": " . $v_old_value;
+												break;
+				case BUGNOTE_DELETED:			$t_note = lang_get( 'bugnote_deleted' ) . ": " . $v_old_value;
+												break;
+				case SUMMARY_UPDATED:			$t_note = lang_get( 'summary_updated' );
+												break;
+				case DESCRIPTION_UPDATED:		$t_note = lang_get( 'description_updated' );
+												break;
+				case ADDITIONAL_INFO_UPDATED:	$t_note = lang_get( 'additional_information_updated' );
+												break;
+				case STEP_TO_REPRODUCE_UPDATED:	$t_note = lang_get( 'steps_to_reproduce_updated' );
+												break;
+				case FILE_ADDED:				$t_note = lang_get( 'file_added' ) . ": " . $v_old_value;
+												break;
+				case FILE_DELETED:				$t_note = lang_get( 'file_deleted' ) . ": " . $v_old_value;
+												break;
+				case BUGNOTE_STATE_CHANGED:		$v_old_value = get_enum_element( 'view_state', $v_old_value );
+												$t_note = lang_get( 'bugnote_view_state' ) . ": " . $v_old_value . ": " . $v_new_value;
+												break;
+				case BUG_MONITOR:				$v_old_value = user_get_field( $v_old_value, 'username' );
+												$t_note = lang_get( 'bug_monitor' ) . ": " . $v_old_value;
+												break;
+				case BUG_UNMONITOR:				$v_old_value = user_get_field( $v_old_value, 'username' );
+												$t_note = lang_get( 'bug_end_monitor' ) . ": " . $v_old_value;
+												break;
+				}
+			}
+
+			# output special cases
+			if ( NORMAL_TYPE != $v_type ) {
+				$history[$i]['date'] = $v_date_modified;
+				$history[$i]['username'] = $v_username;
+				$history[$i]['note'] = $t_note;
+				$history[$i]['change'] = '';
+			} else {   # output normal changes
+				$history[$i]['date'] = $v_date_modified;
+				$history[$i]['username'] = $v_username;
+				$history[$i]['note'] = $v_field_name;
+				$history[$i]['change'] = $v_old_value . ' => ' . $v_new_value;
+			} # end if DEFAULT
+		} # end for loop
+
+		return ( $history );
+	}
 ?>
