@@ -315,6 +315,7 @@
 	$s_private = "private";
 	### $s_description # defined above;
 	$s_update_project_button = "Update Project";
+	$s_delete_project_button = "Delete Project";
 	$s_categories_and_version_title = "Categories and Versions";
 	$s_categories = "Categories";
 	$s_add_category_button = "Add Category";
