@@ -29,6 +29,7 @@
             WHERE id='$f_id'";
     $result = db_query($query);
 
+	email_assign( $f_id );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

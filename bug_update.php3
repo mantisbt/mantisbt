@@ -23,8 +23,12 @@
    	$result = db_query($query);
 
 	### If we should notify and it's in feedback state then send an email
-   	if ( ( $g_enable_email_notification==1 )&&( $f_status=="feedback" ) ) {
+   	if ( $f_status=="feedback" ) {
    		email_feedback( $f_id );
+   	}
+
+   	if ( $f_status=="assigned" ) {
+   		email_assign( $f_id );
    	}
 ?>
 <? print_html_top() ?>
