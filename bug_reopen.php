@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen.php,v 1.22 2002-10-23 04:54:44 jfitzell Exp $
+	# $Id: bug_reopen.php,v 1.23 2002-10-27 00:04:38 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,8 +19,10 @@
 	$f_bugnote_text	= gpc_get_string( 'f_bugnote_text', '' );
 
 	project_access_check( $f_bug_id );
-	check_access( config_get( 'reopen_bug_threshold' ) );
-	bug_ensure_exists( $f_bug_id );
+	if ( OFF == config_get( 'allow_reporter_reopen' )
+		 || auth_get_current_user_id() != bug_get_field( $f_bug_id, 'reporter_id' ) ) {
+		check_access( config_get( 'reopen_bug_threshold' ) );
+	}
 
 	bug_reopen( $f_bug_id, $f_bugnote_text );
 

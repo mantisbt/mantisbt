@@ -317,7 +317,7 @@
 <?php # REOPEN form BEGIN ?>
 <?php if ( ( $v_status >= RESOLVED ) &&
 		( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ||
-		( $v_reporter_id == $t_user_id )) ) { ?>
+		( $v_reporter_id == $t_user_id  && ON == config_get( 'allow_reporter_reopen' ) ) ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_reopen_page.php">
 		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />

@@ -491,6 +491,10 @@
 	# Allow reporters to close the bugs they reported, after they're marked resolved.
 	$g_allow_reporter_close		= OFF;
 
+	# --- reporter can reopen ---------
+	# Allow reporters to reopen the bugs they reported, after they're marked resolved.
+	$g_allow_reporter_reopen	= ON;
+
 	# --- bug delete -----------
 	# Allow the specified access level and higher to delete bugs
 	$g_allow_bug_delete_access_level	= DEVELOPER;
