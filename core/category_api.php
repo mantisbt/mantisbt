@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.9 2003-02-08 23:37:44 jfitzell Exp $
+	# $Id: category_api.php,v 1.10 2003-02-08 23:40:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -61,7 +61,7 @@
 	# Check whether the category is unique within a project
 	# Trigger an error if it is not
 	function category_ensure_unique( $p_project_id, $p_category ) {
-		if ( ! category_exists( $p_project_id, $p_category ) ) {
+		if ( ! category_is_unique( $p_project_id, $p_category ) ) {
 			trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
 		}
 	}
