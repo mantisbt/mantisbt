@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.22 2004-10-05 17:20:26 thraxisp Exp $
+	# $Id: bugnote_view_inc.php,v 1.23 2004-11-22 14:01:01 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -112,7 +112,8 @@
 <tr class="bugnote" name="<?php echo $v3_id ?>" id="<?php echo $v3_id ?>">
         <td class="<?php echo $t_bugnote_css ?>">
 		<span class="small">(<?php echo $t_bugnote_id_formatted ?>)</span><br />
-		<?php if ( FALSE == user_get_field( $v3_reporter_id, 'enabled' ) ) {
+		<?php
+			if ( user_exists( $v3_reporter_id ) && ( FALSE == user_get_field( $v3_reporter_id, 'enabled' ) ) ) {
 				echo '<font STYLE="text-decoration: line-through">';
 			} else {
 				echo '<font STYLE="text-decoration: none">';
