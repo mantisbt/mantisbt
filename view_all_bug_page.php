@@ -112,32 +112,32 @@
 
 	# private bug selection
 	if ( ! access_level_check_greater_or_equal($g_private_bug_threshold) ) {
-		$t_where_clause .= " AND (view_state='$t_pub' OR (view_state='$t_prv' AND reporter_id='$t_user_id'))";
+		$t_where_clause .= " AND ($g_mantis_bug_table.view_state='$t_pub' OR ($g_mantis_bug_table.view_state='$t_prv' AND $g_mantis_bug_table.reporter_id='$t_user_id'))";
 	}
 
 	if ( $f_user_id != "any" ) {
-		$t_where_clause .= " AND reporter_id='$f_user_id'";
+		$t_where_clause .= " AND $g_mantis_bug_table.reporter_id='$f_user_id'";
 	}
 
 	if ( "none" == $f_assign_id ) {
-		$t_where_clause .= " AND handler_id=0";
+		$t_where_clause .= " AND $g_mantis_bug_table.handler_id=0";
 	} else if ( $f_assign_id != "any" ) {
-		$t_where_clause .= " AND handler_id='$f_assign_id'";
+		$t_where_clause .= " AND $g_mantis_bug_table.handler_id='$f_assign_id'";
 	}
 
 	$t_clo_val = CLOSED;
 	if (( "on" == $f_hide_closed  )&&( $f_show_status!="closed" )) {
-		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
+		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.status<>'$t_clo_val'";
 	}
 
 	if ( $f_show_category != "any" ) {
-		$t_where_clause = $t_where_clause." AND category='$f_show_category'";
+		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.category='$f_show_category'";
 	}
 	if ( $f_show_severity != "any" ) {
-		$t_where_clause = $t_where_clause." AND severity='$f_show_severity'";
+		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.severity='$f_show_severity'";
 	}
 	if ( $f_show_status != "any" ) {
-		$t_where_clause = $t_where_clause." AND status='$f_show_status'";
+		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.status='$f_show_status'";
 	}
 
 	# Simple Text Search - Thnaks to Alan Knowles
@@ -145,9 +145,9 @@
 		$t_columns_clause = " $g_mantis_bug_table.*";
 
 		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%')
-							OR (description LIKE '%".addslashes($f_search)."%')
-							OR (steps_to_reproduce LIKE '%".addslashes($f_search)."%')
-							OR (additional_information LIKE '%".addslashes($f_search)."%')
+							OR ($g_mantis_bug_text_table.description LIKE '%".addslashes($f_search)."%')
+							OR ($g_mantis_bug_text_table.steps_to_reproduce LIKE '%".addslashes($f_search)."%')
+							OR ($g_mantis_bug_text_table.additional_information LIKE '%".addslashes($f_search)."%')
 							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search)."%')
 							OR ($g_mantis_bugnote_text_table.note LIKE '%".addslashes($f_search)."%'))
 							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
