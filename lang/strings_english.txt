@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.218 $
-	# $Author: marcelloscata $
-	# $Date: 2004-10-14 17:34:14 $
+	# $Revision: 1.219 $
+	# $Author: thraxisp $
+	# $Date: 2004-11-30 00:08:05 $
 	#
-	# $Id: strings_english.txt,v 1.218 2004-10-14 17:34:14 marcelloscata Exp $
+	# $Id: strings_english.txt,v 1.219 2004-11-30 00:08:05 thraxisp Exp $
 	###########################################################################
 
 # Charset
@@ -309,10 +309,10 @@ $s_email_notification_title_for_action_related_to_relationship_added = "The foll
 $s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
 $s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
 $s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been removed as a DUPLICATE OF the following issue.";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been marked as UNRELATED TO issue %s.";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been removed as the PARENT OF issue %s.";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been removed as the CHILD OF issue %s.";
 $s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
 $s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
 
