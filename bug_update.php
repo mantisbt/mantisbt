@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.71 2004-09-28 14:09:39 thraxisp Exp $
+	# $Id: bug_update.php,v 1.72 2004-09-28 15:11:36 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -72,12 +72,6 @@
 	}
 
 	helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data ) );
-
-	# check that handler has access level to handle the bug
-	if ( ! access_has_project_level( access_get_status_threshold( $t_bug_data->status,
-						 $t_bug_data->project_id ), $t_bug_data->project_id, $t_bug_data->handler_id ) ) {
-		trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
-	}
 
 	$t_custom_status_label = "update"; # default info to check
 	if ( $t_bug_data->status == config_get( 'bug_resolved_status_threshold' ) ) {
