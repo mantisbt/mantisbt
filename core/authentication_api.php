@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.22 2003-02-15 23:37:33 jlatour Exp $
+	# $Id: authentication_api.php,v 1.23 2003-02-16 10:52:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -145,7 +145,7 @@
 	function auth_does_password_match( $p_user_id, $p_test_password ) {
 		$t_configured_login_method = config_get( 'login_method' );
 
-		if ( LDAP == $t_login_method ) {
+		if ( LDAP == $t_configured_login_method ) {
 			return ldap_authenticate( $p_user_id, $p_test_password );
 		}
 		
