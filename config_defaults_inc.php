@@ -170,6 +170,12 @@
 	# Name of smtp host, needed for phpMailer, taken from php.ini
 	$g_smtp_host			= 'localhost';
 
+	# Specify whether e-mails should be sent with the category set or not.  This is tested
+	# with Microsoft Outlook.  More testing for this feature + other formats will be added
+	# in the future.
+	# OFF, EMAIL_CATEGORY_PROJECT_CATEGORY (format: [Project] Category)
+	$g_email_set_category		= OFF;
+
 	# --- email separator and padding ------------
 	$g_email_separator1		= '=======================================================================';
 	$g_email_separator2		= '-----------------------------------------------------------------------';

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.19 2002-09-27 00:01:04 jfitzell Exp $
+	# $Id: email_api.php,v 1.20 2002-10-10 02:02:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -275,8 +275,7 @@
 						lang_get( 'new_account_message' ) .
 						lang_get( 'new_account_do_not_reply' );
 
-		$t_headers = '';
-		email_send( $v_email, lang_get( 'new_account_subject' ), $t_message, $t_headers );
+		email_send( $v_email, lang_get( 'new_account_subject' ), $t_message );
 	}
 	# --------------------
 	# Send new password when user forgets
@@ -298,6 +297,7 @@
 					lang_get( 'news_password_msg' ) . ': '.$p_password."\n\n".
 					$g_path."\n\n";
 
+		# @@@ Localise
 		email_send( $v_email, 'New Password', $t_message );
 	}
 	# --------------------
@@ -350,7 +350,7 @@
 	}
 	# --------------------
 	# Build the bug info part of the message
-	function email_build_bug_message( $p_bug_id, $p_message ) {
+	function email_build_bug_message( $p_bug_id, $p_message, &$p_custom_header ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_project_table,
 				$g_complete_date_format, $g_show_view,
@@ -429,6 +429,11 @@
 		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $v2_description )."\n";
 		$t_message .= $g_email_separator1."\n\n";
 
+		$p_custom_headers = '';
+		if ( OFF != config_get( 'email_set_category' ) ) {
+			$p_custom_header = 'Keywords: [' . $t_project_name . '] ' . $v_category . "\n";
+		}
+
 		return $t_message;
 	}
 	# --------------------
@@ -503,8 +508,9 @@
 		$p_subject = email_build_subject( $p_bug_id );
 
 		# build message
+		$t_custom_headers = '';
 		$t_message = $p_message."\n";
-		$t_message .= email_build_bug_message( $p_bug_id, $p_message );
+		$t_message .= email_build_bug_message( $p_bug_id, $p_message, $t_custom_headers );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 		$t_message .= email_build_history_message( $p_bug_id );
 
@@ -515,11 +521,11 @@
 			## list of receivers
 			$to = $g_to_email.(($p_headers && $g_to_email) ? ', ' : '').$p_headers;
 			# echo '<br />email_bug_info::Sending email to :'.$to;
-			$res1 = email_send( $to, $p_subject, $t_message, '' );
+			$res1 = email_send( $to, $p_subject, $t_message, $t_customer_headers );
 		} else {
 			# Send Email
 			# echo '<br />email_bug_info::Sending email to : '.$g_to_email;
-			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers );
+			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers . $t_custom_headers );
 		}
 	}
 	# --------------------

@@ -200,4 +200,7 @@
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM', 2);
+
+	# Flags for settings E-mail categories
+	define( 'EMAIL_CATEGORY_PROJECT_CATEGORY', 1);
 ?>

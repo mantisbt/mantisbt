@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.10 2002-09-20 18:09:22 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.11 2002-10-10 02:02:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -94,7 +94,7 @@
 	#===================================
 
 	# ------------------
-	# Retrieve a atring array GPC variable.  Uses gpc_get().
+	# Retrieve a string array GPC variable.  Uses gpc_get().
 	#  If you pass in *no* default, an error will be triggered if
 	#  the variable does not exist
 	function gpc_get_string_array( $p_var_name, $p_default = null ) {
