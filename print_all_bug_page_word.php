@@ -417,7 +417,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <?php
 $t_related_custom_field_ids = custom_field_get_bound_ids( helper_get_current_project() );
 foreach( $t_related_custom_field_ids as $t_id ) {
-	$t_def = custom_field_get_definition($t_id);
+	$t_def = custom_field_get_definition( $t_id );
 ?>
 <tr class="print">
 	<td class="print-category">
