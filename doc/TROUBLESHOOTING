@@ -7,7 +7,7 @@ Make sure you ran the upgrade steps in the UPGRADE file.
 For additional help please visit the website: http://mantisbt.sourceforge.net/
 
 FAQ:             http://mantisbt.sourceforge.net/faq.php3
-Forums:          http://mantisbt.sourceforge.net/forums.php3
+		 or doc/faq.html.
 Mailing Lists:   http://mantisbt.sourceforge.net/mailinglists.php3
 
 * PROBLEM: Cannot login.  It just redirects me to the login page with no errors

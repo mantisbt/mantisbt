@@ -1,19 +1,2 @@
------------------------------------------------------------------------------
-   Upgrading
------------------------------------------------------------------------------
-
-*********************************************
-*** ALWAYS MAKE A BACKUP OF YOUR DATABASE ***
-*********************************************
-
-Generally, you can just copy over the current installation.  You may want to
-backup up any customizations that you may have made.  
-Database modifications will occur only between significant releases (like 0.14.x to 0.15.0).
-
-An automated database upgrade script was added in 0.18.0. This script (which can be accessed from
-admin/index.php) will keep track of the current state of your database and allow you to
-convert it to the current version. Make a backup of your database, just in case.
-
-If you are converting from 0.17.x or older, you may have escaped quotes in your databases. If you
-see escaped quotes (e.g. \') anywhere in your Mantis installation (after upgrading), run the
-string escaping fix which can be found through admin/index.php.
+The upgrading process is described in the following link:
+http://mantisbt.sourceforge.net/manual/manual.installation.upgrading.php

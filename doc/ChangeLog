@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2003.??.??  -  0.18.0rc1
+2003.08.24  -  0.18.0rc1
 
  * Enh #0000: New config option(user_login_valid_regex): regular expression used to validate new login names
  * Enh #0000: Added error_proceed_url() to allow pages to give a url to proceed to after displaying the next error
