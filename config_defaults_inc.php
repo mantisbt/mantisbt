@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.139 2004-02-22 04:26:47 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.140 2004-02-24 22:57:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -279,7 +279,13 @@
 	$g_default_language		= 'english';
 
 	# list the choices that the users are allowed to choose
-	$g_language_choices_arr	= array( 'english', 'chinese_simplified', 'chinese_traditional', 'czech', 'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian', 'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard', 'romanian', 'russian', 'russian_koi8', 'slovak', 'spanish', 'swedish', 'turkish' );
+	$g_language_choices_arr	= array(
+		'english', 'chinese_simplified', 'chinese_traditional', 'czech', 
+		'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian', 
+		'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'lithuanian', 
+		'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard', 
+		'romanian', 'russian', 'russian_koi8', 'slovak', 'spanish', 'swedish', 
+		'turkish' );
 
 	###############################
 	# Mantis Display Settings

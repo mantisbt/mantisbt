@@ -10,6 +10,7 @@ Mantis ChangeLog
  * Enh #3548: Support RSS for news syndication.
  * Enh #3552: Improved layout of Summary page and added 'Reporter / Resolution', 'Developer / Resolution' and 'Reporter Effectiveness' reports. (thanks to Lincoln Maskey)
  * Enh #3564: In annonymous mode, login should remember the current page.
+ * Enh #3601: Translation to Lithuanian language for Mantis.
  * Fix #3077: Inconsistency: "Assigned To" versus "Handler".
  * Fix #3118: My Account: after update of password, wrong information is given.
  * Fix #3135: Changing Print-Options does not work.
@@ -25,7 +26,7 @@ Mantis ChangeLog
  * Fix #3579: in the german language file strings_german.txt $s_reset_request_msg has a little problem.
  * Fix #3594: Incorrect encoding for Turkish localization.
  * Fix #3597: custom fields names are not translaten in email (thanks to yarik123).
- * Languages: Updated Norwegian localisation.
+ * Languages: Added Lithuanian - Updated Norwegian localisation.
  * Mantis website moved to http://www.mantisbt.org
 
 2004.02.06  -  0.18.1
