@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.94 $
+	# $Revision: 1.95 $
 	# $Author: int2str $
-	# $Date: 2004-07-07 20:31:58 $
+	# $Date: 2004-07-07 20:38:16 $
 	#
-	# $Id: strings_german.txt,v 1.94 2004-07-07 20:31:58 int2str Exp $
+	# $Id: strings_german.txt,v 1.95 2004-07-07 20:38:16 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -670,17 +670,17 @@ $s_manage_link = 'Verwaltung';
 $s_edit_news_link = 'Nachrichten ändern';
 $s_docs_link = 'Dokumentation';
 $s_logout_link = 'Abmelden';
-$s_my_view_link = 'My View';
+$s_my_view_link = '&Uuml;bersicht';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Unassigned';
-$s_my_view_title_recent_mod = 'Recently Modified';
-$s_my_view_title_reported = 'Reported by Me';
-$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
-$s_my_view_title_resolved = 'Resolved';
-$s_my_view_title_monitored = 'Monitored by Me';
+$s_my_view_title_unassigned = 'Nicht zugewiesen';
+$s_my_view_title_recent_mod = 'Vor kurzem bearbeitet';
+$s_my_view_title_reported = 'Von mir berichtet';
+$s_my_view_title_assigned = 'Mir zugewiesen (noch nicht behoben)';
+$s_my_view_title_resolved = 'Behoben';
+$s_my_view_title_monitored = 'Von mir beobachtet';
 
 # news_add.php
 $s_news_added_msg = 'Nachricht hinzugefügt...';
