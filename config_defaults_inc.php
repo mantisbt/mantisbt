@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.62 2003-01-23 00:33:14 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.63 2003-01-23 06:22:37 robertjf Exp $
 	# --------------------------------------------------------
 
 	
@@ -483,15 +483,13 @@
 	# look in README.LDAP for details
 
 	# --- using openldap -------------
-	$g_ldap_server			= '192.168.192.38';
+	$g_ldap_server			= 'ldaps://ldap.example.com.au/';
 	$g_ldap_port			= '636';
-	$g_ldap_root_dn			= 'dc=traffic,dc=redflex,dc=com,dc=au';
-	$g_ldap_organization	= '(organizationname=*Traffic)'; # optional
+	$g_ldap_root_dn			= 'dc=example,dc=com,dc=au';
+	#$g_ldap_organization	= '(organizationname=*Traffic)'; # optional
 	$g_ldap_bind_dn			= '';
 	$g_ldap_bind_passwd		= '';
 	$g_use_ldap_email		= OFF; # Should we send to the LDAP email address or what MySql tells us
-	# --- ldapauth type --- CLEAR or CRYPT (as in /etc/passwd /etc/shadow)
-	$g_ldapauth_type		= 'CRYPT';
 
 	############################
 	# Mantis Misc Settings
