@@ -350,23 +350,27 @@
 	function print_summary_menu( $p_page="" ) {
 		global	$g_summary_page, $s_summary_link,
 				$g_use_jpgraph, $s_summary_jpgraph_link,
+				$g_print_all_bug_page, $s_print_all_bug_page_link,
 				$g_summary_jpgraph_page;
 
-        if ( $g_use_jpgraph==0 ) {
-            return;
-        }
-
-		$t_summary_page 		= $g_summary_page;
-		$t_summary_jpgraph_page = $g_summary_jpgraph_page;
-
-		switch ( $p_page ) {
-			case $t_summary_page		: $t_summary_page			= ""; break;
-			case $t_summary_jpgraph_page: $t_summary_jpgraph_page	= ""; break;
-		}
+		# @@@ LOCALIZE
+		$s_print_all_bug_page_link = "Print Reports";
 
 		PRINT "<p><div align=\"center\">";
+		print_bracket_link( $g_print_all_bug_page, $s_print_all_bug_page_link );
+
+        if ( $g_use_jpgraph != 0 ) {
+			$t_summary_page 		= $g_summary_page;
+			$t_summary_jpgraph_page = $g_summary_jpgraph_page;
+
+			switch ( $p_page ) {
+				case $t_summary_page		: $t_summary_page			= ""; break;
+				case $t_summary_jpgraph_page: $t_summary_jpgraph_page	= ""; break;
+			}
+
 			print_bracket_link( $t_summary_page, $s_summary_link );
 			print_bracket_link( $t_summary_jpgraph_page, $s_summary_jpgraph_link );
+		}
 		PRINT "</div>";
 	}
 	### --------------------

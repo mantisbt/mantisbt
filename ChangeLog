@@ -1,6 +1,12 @@
 Mantis
 
-10.xx.2001  -   0.15.11
+11.xx.2001  -   0.15.12
+
+ * Added Swedish localization
+ * Added print bugs feature
+ * FIxed error where MD5 wasn't actually being used.
+
+10.28.2001  -   0.15.11
 
  * Modified advanced report's "assign to" drop down to sort alphabetically
  * Modified bug_update script to send emails and behave better

@@ -44,9 +44,6 @@
 	$t_largest_diff 	= number_format( $t_largest_diff / 86400, 2 );
 	$t_total_time		= number_format( $t_total_time / 86400, 2 );
 	$t_average_time 	= number_format( $t_average_time / 86400, 2 );
-
-
-
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
