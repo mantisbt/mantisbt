@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.73 2005-01-14 00:36:57 thraxisp Exp $
+	# $Id: filter_api.php,v 1.74 2005-01-15 21:51:09 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -84,7 +84,7 @@
 		} else {
 			$t_filter = $custom_filter;
 		}
-
+		
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 
 		if ( false === $t_filter ) {
@@ -216,6 +216,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['show_category'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
 				if ( '[none]' == $t_filter_member ) {
 					array_push( $t_clauses, "$t_bug_table.category=''" );
 				} else {
@@ -354,6 +355,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['show_build'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
 				if ( '[none]' == $t_filter_member ) {
 					array_push( $t_clauses, "($t_bug_table.build='')" );
 				} else {
@@ -378,6 +380,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['show_version'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
 				if ( '[none]' == $t_filter_member ) {
 					array_push( $t_clauses, "($t_bug_table.version='')" );
 				} else {
@@ -418,6 +421,7 @@
 			$t_clauses = array();
 
 			foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
+				$t_filter_member = stripslashes( $t_filter_member );
 				if ( '[none]' == $t_filter_member ) {
 					array_push( $t_clauses, "($t_bug_table.fixed_in_version='')" );
 				} else {
@@ -485,6 +489,7 @@
 							( '[any]' != strtolower( $t_filter_member ) ) &&
 							( !is_blank( trim( $t_filter_member ) ) ) ) {	
 							
+							$t_filter_member = stripslashes( $t_filter_member );
 							if ( '[none]' == $t_filter_member ) { # coerce filter value if selecting 'none'
 								$t_filter_member = '';
 							}
@@ -986,6 +991,7 @@
 								} else {
 									$t_first_flag = true;
 									foreach( $t_filter['show_category'] as $t_current ) {
+										$t_current = stripslashes( $t_current );
 										?>
 										<input type="hidden" name="show_category[]" value="<?php echo $t_current;?>" />
 										<?php
@@ -1953,6 +1959,7 @@
 				}
 				$t_checked_array = array();
 				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
+					$t_filter_value = stripslashes( $t_filter_value );
 					if ( ( 5 == $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
 						$t_filter_value = '[any]';
 					}
@@ -1978,6 +1985,7 @@
 					}
 					$t_checked_array = array();
 					foreach ( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
+						$t_filter_value = stripslashes( $t_filter_value );
 						if ( ( 5 == $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
 							$t_filter_value = '[any]';
 						}
