@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.8 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: user_pref_api.php,v 1.9 2003-02-10 23:48:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -304,7 +304,7 @@
 		# Check each variable in the class
 		foreach ( $t_vars as $var => $val ) {
 			# If we got a field from the DB with the same name
-			if ( in_array( $var, $t_row_keys ) ) {
+			if ( in_array( $var, $t_row_keys, true ) ) {
 				# Store that value in the object
 				$t_prefs->$var = $row[$var];
 			}
@@ -322,7 +322,7 @@
 
 		$t_vars = get_object_vars( $t_prefs );
 		
-		if ( in_array( $p_pref_name, array_keys( $t_vars ) ) ) {
+		if ( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
 			return $t_prefs->$p_pref_name;
 		} else {
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );

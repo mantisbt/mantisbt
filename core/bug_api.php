@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.32 2003-02-10 21:59:42 jfitzell Exp $
+	# $Id: bug_api.php,v 1.33 2003-02-10 23:48:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -637,7 +637,7 @@
 		# Check each variable in the class
 		foreach ( $t_vars as $var => $val ) {
 			# If we got a field from the DB with the same name
-			if ( in_array( $var, $t_row_keys ) ) {
+			if ( in_array( $var, $t_row_keys, true ) ) {
 				# Store that value in the object
 				$t_bug_data->$var = $row[$var];
 			}
