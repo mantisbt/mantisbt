@@ -85,7 +85,7 @@
 		$t_redirect_url = $g_login_page."?f_error=1";
 	}
 
-	if ( ( ON == $g_quick_proceed )&&( $login_result ) ) {
+	if ( $login_result ) {
 		print_header_redirect( $t_redirect_url );
 	}
 ?>
