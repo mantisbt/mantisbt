@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.4 2004-07-05 19:53:08 int2str Exp $
+	# $Id: my_view_page.php,v 1.5 2004-07-08 03:26:43 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,7 +18,8 @@
 	auth_ensure_user_authenticated();
 
 	if ( current_user_is_anonymous() ) {
-		access_denied();
+		print_header_redirect( 'main_page.php' );
+		exit;
 	}
 
 	$t_current_user_id = auth_get_current_user_id();
