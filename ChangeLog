@@ -6,15 +6,11 @@ To Do:
  * Add ip tracking/banning capability
  * Add file upload module
  * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
- * Make priority, projectio, eta useful
- * Force some sort of dialog when closing a bug
- * Force some sort of dialog when reopening a bug
+ * Make priority, projection, eta useful
  * Search bugs capability
  * Add glyphs and icons as optional display feature
  * More documentation on installation, configuration, and customization
  * Multiple project support with userland partitioning
- * Move as much of the config_inc.php varaibles into a database table.
-   Then build a nice interface into it.
 
 12.25.2000	-	0.13.0
 
