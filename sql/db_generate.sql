@@ -1,8 +1,8 @@
-# MySQL dump 8.14
+# MySQL dump 8.16
 #
-# Host: localhost    Database: mantis17
+# Host: localhost    Database: test
 #--------------------------------------------------------
-# Server version	3.23.39
+# Server version	3.23.43
 
 #
 # Table structure for table 'mantis_bug_file_table'
@@ -33,6 +33,7 @@ CREATE TABLE mantis_bug_file_table (
 #
 
 CREATE TABLE mantis_bug_history_table (
+  id int(7) unsigned NOT NULL auto_increment,
   user_id int(7) unsigned NOT NULL default '0',
   bug_id int(7) unsigned NOT NULL default '0',
   date_modified datetime NOT NULL default '1970-01-01 00:00:01',
@@ -40,6 +41,7 @@ CREATE TABLE mantis_bug_history_table (
   old_value varchar(128) NOT NULL default '',
   new_value varchar(128) NOT NULL default '',
   type int(2) NOT NULL default '0',
+  PRIMARY KEY  (id),
   KEY bug_id (bug_id),
   KEY user_id (user_id)
 ) TYPE=MyISAM;
@@ -604,6 +606,9 @@ INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-5','Fix double escaped da
 INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-6','Fix double escaped data in mantis_project_file_table');
 INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-7','Fix double escaped data in mantis_project_table');
 INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-8','Fix double escaped data in mantis_user_profile_table');
+INSERT INTO mantis_upgrade_table VALUES ('0.17-vb-19','Add id field to bug history table');
+INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-9','Fix double escaped data in mantis_bug_history_table');
+INSERT INTO mantis_upgrade_table VALUES ('escaping-fix-10','Remove history entries where type=0 and the old value = new value.  These existed because of escaping errors');
 
 #
 # Table structure for table 'mantis_user_pref_table'
@@ -689,8 +694,8 @@ CREATE TABLE mantis_user_table (
   login_count int(11) NOT NULL default '0',
   cookie_string varchar(64) NOT NULL default '',
   PRIMARY KEY  (id),
-  UNIQUE KEY cookie_string (cookie_string),
-  UNIQUE KEY username (username)
+  UNIQUE KEY username (username),
+  UNIQUE KEY cookie_string (cookie_string)
 ) TYPE=MyISAM;
 
 #
