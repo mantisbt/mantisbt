@@ -300,10 +300,10 @@
 				$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
 
 				switch ( $g_file_upload_method ) {
-					case DISK:	PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";
+					case DISK:	PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
 								break;
 					case DATABASE:
-								PRINT "<a href=\"$g_file_download?f_id=$v2_id&f_type=bug\">$v2_filename</a> ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";
+								PRINT "<a href=\"$g_file_download?f_id=$v2_id&f_type=bug\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
 								break;
 				}
 

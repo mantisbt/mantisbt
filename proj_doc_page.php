@@ -48,10 +48,10 @@
 	<td>
 <?php
 		switch ( $g_file_upload_method ) {
-			case DISK:	PRINT "<a href=\"$v_diskfile\">$v_title</a> ($v_filesize KB)";
+			case DISK:	PRINT "<a href=\"$v_diskfile\">$v_title</a> ($v_filesize bytes)";
 						break;
 			case DATABASE:
-						PRINT "<a href=\"$g_file_download?f_id=$v_id&f_type=doc\">$v_title</a> ($v_filesize KB)";
+						PRINT "<a href=\"$g_file_download?f_id=$v_id&f_type=doc\">$v_title</a> ($v_filesize bytes)";
 						break;
 		}
 		if ( access_level_check_greater_or_equal( MANAGER ) ) {
@@ -59,7 +59,7 @@
 		}
 ?>
 		<br>
-		<span class="small">(<?php echo $v_filesize ?> KB)</span>
+		<span class="small">(<?php echo $v_filesize ?> bytes)</span>
 	</td>
 	<td>
 		<?php echo $v_description ?>
