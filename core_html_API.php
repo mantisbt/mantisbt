@@ -415,15 +415,12 @@
 	# prints the manage doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_doc_menu( $p_page="" ) {
-		global	$g_site_settings_page, $s_site_settings_link,
-				$g_documentation_page, $s_system_info_link;
+		global	$g_documentation_page, $s_system_info_link;
 
 		$t_documentation_page = $g_documentation_page;
-		$t_site_settings_page = $g_site_settings_page;
 
 		switch ( $p_page ) {
 			case $t_documentation_page: $t_documentation_page = ""; break;
-			case $t_site_settings_page: $t_site_settings_page = ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";

@@ -2,7 +2,8 @@ Mantis
 
 01.XX.2002  -   0.17.1
 
- * Fixed missing closing span tag in view_bug_*page.php
+ * Fixed missing closing span tag in view_bug_*page.php.
+ * Removed site_settings link in print_manage_doc_menu().
 
 01.23.2002  -   0.17.0
 
