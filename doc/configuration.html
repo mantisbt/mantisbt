@@ -42,7 +42,7 @@ This is the Mantis system configuration documentation.
 <li><a href="#html">HTML</a>
 <li><a href="#hr">HR</a>
 <li><a href="#ldap">LDAP</a>
-<li><a href="#misc">Misc</a>
+<li><a href="#misc">Miscellaneous</a>
 <li><a href="#colors">Colors</a>
 <li><a href="#cookies">Cookies</a>
 <li><a href="#database_tables">Database Tables</a>
@@ -129,9 +129,9 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_path
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		Path to your installation as seen from the web browser; this is what ayou type into the URL field.  Requires trailing / character.
+		Path to your installation as seen from the web browser; this is what you type into the URL field.  Requires trailing / character.
 		<p>
-		eg. http://mantisbt.sourceforge.net/mantis/
+		e.g. http://mantisbt.sourceforge.net/mantis/
 	</td>
 </tr>
 <tr>
@@ -139,7 +139,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_icon_path
 	</td>
 	<td bgcolor="#ffffff">
-		This is the path to the icons directory as seen from the web browser.  This is useed for IMG tag usage.
+		This is the path to the icons directory as seen from the web browser.  This is used for IMG tag usage.
 	</td>
 </tr>
 <tr>
@@ -147,15 +147,15 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_absolute_path
 	</td>
 	<td bgcolor="#ffffff">
-		This is the absolute path to your installation.  THis is the path that you see when you are telneted or sshed into the server.  You can type pwd to find out.  Symlinks are not allowed.  Requires trailing / character.
+		This is the absolute path to your installation.  This is the path that you see when you are telneted or sshed into the server.  You can type pwd to find out.  Symlinks are not allowed.  Requires trailing / character.
 		<p>
-		eg. $g_absolute_path = "/usr/local/share/apache/htdocs/mantis/";
+		e.g. $g_absolute_path = "/usr/local/share/apache/htdocs/mantis/";
 	</td>
 </tr>
 <tr>
 	<td colspan="2" bgcolor="#eeeeee">
 		These path settings are important for proper linking within your database.<br>
-		The examples are unix style but you can use windows style paths as well (eg. "\\apache\\htdocs\\mantis\\" ).
+		The examples are UNIX style but you can use windows style paths as well (e.g. "\\apache\\htdocs\\mantis\\" ).
 	</td>
 </tr>
 </table>
@@ -180,7 +180,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 </tr>
 <tr>
 	<td colspan="2" bgcolor="#eeeeee">
-		Any web server specific bugs and workarounds can be controled from here.
+		Any web server specific bugs and workarounds can be controlled from here.
 	</td>
 </tr>
 </table>
@@ -208,7 +208,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_show_version
 	</td>
 	<td bgcolor="#ffffff">
-		Determines wheter to dsiplay the version of Mantis at the bottom of every page.
+		Determines whether to display the version of Mantis at the bottom of every page.
 	</td>
 </tr>
 </table>
@@ -268,7 +268,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_allow_signup
 	</td>
 	<td bgcolor="#ffffff">
-		This variable toggles whether or not to allow users to signup for their own accounts.  Users must enter a valid email address.  A randomnly generated password is sent to that address.  Users cannot gain access without receiving this email.
+		This variable toggles whether or not to allow users to signup for their own accounts.  Users must enter a valid email address.  A randomly generated password is sent to that address.  Users cannot gain access without receiving this email.
 		<p>
 		If set to off then administrators must create accounts for users.  Furthermore they must notify users manually.
 	</td>
@@ -278,7 +278,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_send_reset_password
 	</td>
 	<td bgcolor="#ffffff">
-		This variable toggles if the user is sent a new randomnly generated password or set to blank.
+		This variable toggles if the user is sent a new randomly generated password or set to blank.
 	</td>
 </tr>
 <tr>
@@ -366,7 +366,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 			<li>class.smtp.php<br>
 			<li>class.phpmailer.php<br>
 		</ul>
-		Copy these files to your php-include-dir (eg: "c:\php\includes" or "/usr/lib/php/includes") and add this path to the "include_path"-entry  in the php.ini file.<br>
+		Copy these files to your php-include-dir (e.g.: "c:\php\includes" or "/usr/lib/php/includes") and add this path to the "include_path"-entry  in the php.ini file.<br>
 		The installation is described in the readme and there is also a simple example included.
 		<p>
 		PhpMailer comes with a detailed documentation in phpdoc format.  It is distributed under the LGPL.
@@ -435,7 +435,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 </tr>
 <tr>
 	<td colspan="2" bgcolor="#eeeeee">
-		The email system allows the package to notify users when significant events occur.  You should have a working Mail Transport Agent (MTA) on your system.  On unix systems this is usually sendmail and usually nothing needs to be done.  For problems regarding mail then visit the support forums or read up on the user notes in the mail() function at: <a href="http://www.php.net/manual/en/function.mail.php">http://www.php.net/manual/en/function.mail.php</a>
+		The email system allows the package to notify users when significant events occur.  You should have a working Mail Transport Agent (MTA) on your system.  On UNIX systems this is usually sendmail and usually nothing needs to be done.  For problems regarding mail then visit the support forums or read up on the user notes in the mail() function at: <a href="http://www.php.net/manual/en/function.mail.php">http://www.php.net/manual/en/function.mail.php</a>
 		<p>
 		Users can also signup for their own accounts.  Emails must be valid!
 		<p>
@@ -558,7 +558,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	<td bgcolor="#ffffff">
 		<li>0 : no project name, display $g_page_title
 		<li>1 : display project name and display $g_page_title
-		<li>2 : display only project nam, no $g_page_title
+		<li>2 : display only project name, no $g_page_title
 	</td>
 </tr>
 <tr>
@@ -608,7 +608,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_cookie_time_length
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		Time for 'permanent' cookie to live in seconds (1 year).  THis is what is used when people select "save login".
+		Time for 'permanent' cookie to live in seconds (1 year).  This is what is used when people select "save login".
 	</td>
 </tr>
 <tr>
@@ -658,9 +658,9 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <tr>
 	<td colspan="2" bgcolor="#eeeeee">
 		To use the Jpgraph addon you need the <a href="http://www.aditus.nu/jpgraph/index.php">JpGraph package</a>.
-		You can place the package whereever you want, but you have to set the var in jpgraph.php
+		You can place the package wherever you want, but you have to set the var in jpgraph.php
 		<p>
-		eg. DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");
+		e.g. DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");
 	</td>
 </tr>
 </table>
@@ -1010,7 +1010,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_allowed_files
 	</td>
 	<td bgcolor="#ffffff">
-		Files that are allowed. Separate items by commas.  eg. "php,html,java,exe,pl"  If $g_allowed_files is filled in NO other file types will be allowed.  If empty it will assume any files are accepted that pass the $g_disallowed_files list.
+		Files that are allowed. Separate items by commas.  e.g. "php,html,java,exe,pl"  If $g_allowed_files is filled in NO other file types will be allowed.  If empty it will assume any files are accepted that pass the $g_disallowed_files list.
 	</td>
 </tr>
 <tr>
@@ -1018,7 +1018,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_disallowed_files
 	</td>
 	<td bgcolor="#ffffff">
-		Files that not allowed.  Separate items by commas.  eg. "php,html,java,exe,pl"  $g_disallowed_files takes precedence over $g_allowed_files
+		Files that not allowed.  Separate items by commas.  e.g. "php,html,java,exe,pl"  $g_disallowed_files takes precedence over $g_allowed_files
 	</td>
 </tr>
 <tr>
@@ -1054,7 +1054,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		This is the list of HTML tags that are allowed.
 		<p>
 		Do NOT include href or img tags here.<br>
-		Do NOT include tags that have parameters (eg. <font face="arial">)
+		Do NOT include tags that have parameters (e.g. <font face="arial">)
 	</td>
 </tr>
 <tr>
@@ -1083,7 +1083,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 </tr>
 <tr>
 	<td colspan="2" bgcolor="#eeeeee">
-		The HTML code is allowed to enter the database as is.  The $g_allow_href_tags does not have to be enabled to make URL links.  The pacakge will automatically hyperlink properly formatted URLs (eg. http://blah.balh/ or mailto://me@more.com/)
+		The HTML code is allowed to enter the database as is.  The $g_allow_href_tags does not have to be enabled to make URL links.  The package will automatically hyperlink properly formatted URLs (e.g. http://blah.balh/ or mailto://me@more.com/)
 	</td>
 </tr>
 </table>
@@ -1222,7 +1222,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
 	<td colspan="2" bgcolor="#ffffff">
-		<b>Misc</b>
+		<b>Miscellaneous</b>
 	</td>
 </tr>
 <tr>
@@ -1254,7 +1254,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 			<li>BASIC_AUTH</li>
 			<li>LDAP</li>
 		</ul>
-		Some systems (mostly non-unix) do not have crypt support in PHP.  MD5 will accomplish almost the same thing.  PLAIN is plain text and there is no attempt to secure the password in the database.  You will not be able to easily convert between encryption methods so this needs to be chosen at install time.  CRYPT was the default until 0.17.0; MD5 is now the default.  Try CRYPT_FULL_SALT if CRYPT is not working.
+		Some systems (mostly non-UNIX) do not have crypt support in PHP.  MD5 will accomplish almost the same thing.  PLAIN is plain text and there is no attempt to secure the password in the database.  You will not be able to easily convert between encryption methods so this needs to be chosen at install time.  CRYPT was the default until 0.17.0; MD5 is now the default.  Try CRYPT_FULL_SALT if CRYPT is not working.
 	</td>
 </tr>
 <tr>
@@ -1328,8 +1328,8 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	<td width="80%" bgcolor="#ffffff">
 		If a number follows this tag it will create a link to a bug.
 		<p>
-		eg. for # a link would be #45<br />
-		eg. for bug: a link would be bug:98
+		e.g. for # a link would be #45<br />
+		e.g. for bug: a link would be bug:98
 	</td>
 </tr>
 <tr>
@@ -1668,7 +1668,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_db_table_prefix
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		Change this is if needed but remember to alter all settings in the db_genrate/upgrade files.
+		Change this is if needed but remember to alter all settings in the db_generate/upgrade files.
 	</td>
 </tr>
 <tr>
@@ -1909,7 +1909,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_bottom_include_page
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		If this page eixsts it will be displayed at the bottom of every page.  It makes a good company branding include page.
+		If this page exists it will be displayed at the bottom of every page.  It makes a good company branding include page.
 	</td>
 </tr>
 <tr>
@@ -1917,7 +1917,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_top_include_page
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		If this page eixsts it will be displayed at the top of every page.  It makes a good company branding include page.
+		If this page exists it will be displayed at the top of every page.  It makes a good company branding include page.
 	</td>
 </tr>
 <tr>
