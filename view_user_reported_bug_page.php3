@@ -15,7 +15,7 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### grab the user id currently logged in
 	$query = "SELECT id

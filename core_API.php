@@ -20,10 +20,21 @@
 	###########################################################################
 	### --------------------
 	# connect to database
-	function db_mysql_connect( 	$p_hostname="localhost", $p_username="root", $p_password="",
-								$p_database="mantis", $p_port=3306 ) {
+	function db_connect($p_hostname="localhost", $p_username="root",
+						$p_password="", $p_database="mantis",
+						$p_port=3306 ) {
 
 		$t_result = mysql_connect(  $p_hostname.":".$p_port,
+									$p_username, $p_password );
+		$t_result = mysql_select_db( $p_database );
+	}
+	### --------------------
+	# connect to database
+	function db_pconnect($p_hostname="localhost", $p_username="root",
+						$p_password="", $p_database="mantis",
+						$p_port=3306 ) {
+
+		$t_result = mysql_pconnect(  $p_hostname.":".$p_port,
 									$p_username, $p_password );
 		$t_result = mysql_select_db( $p_database );
 	}
@@ -44,12 +55,28 @@
 		}
 	}
 	### --------------------
-	function db_mysql_close() {
-		$t_result = mysql_close();
+	function db_select_db( $p_db_name ) {
+		mysql_select_db( $p_db_name );
 	}
 	### --------------------
-	function db_mysql_error() {
-		$t_error = mysql_errno().":".mysql_error();
+	function db_query( $p_query ) {
+		return mysql_query( $p_query );
+	}
+	### --------------------
+	function db_num_rows( $p_result ) {
+		return mysql_num_rows( $p_result );
+	}
+	### --------------------
+	function db_fetch_array( $p_result ) {
+		return mysql_fetch_array( $p_result );
+	}
+	### --------------------
+	function db_result( $p_result, $p_index1=0, $p_index2=0 ) {
+		return mysql_result( $p_result, $p_index1, $p_index2 );
+	}
+	### --------------------
+	function db_close() {
+		$t_result = mysql_close();
 	}
 	### --------------------
 	###########################################################################
@@ -479,7 +506,7 @@
 		### if logged in
 		if ( isset( $g_string_cookie_val ) ) {
 
-			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			### get user info
 			$query = "SELECT enabled
@@ -509,7 +536,7 @@
 					SET last_visit=NOW(), date_created='$t_date_created'
 					WHERE cookie_string='$g_string_cookie_val'";
 			$result = mysql_query( $query );
-			db_mysql_close();
+			db_close();
 
 			### go to redirect
 			if ( !empty( $p_redirect_url ) ) {
@@ -540,7 +567,7 @@
 		if ( isset( $g_string_cookie_val ) ) {
 			### set last visit cookie
 
-			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			### get user info
 			$query = "SELECT enabled
@@ -562,7 +589,7 @@
 					WHERE cookie_string='$g_string_cookie_val'";
 			$result = mysql_query( $query );
 			$t_last_access = mysql_result( $result, "last_visit" );
-			db_mysql_close();
+			db_close();
 
 			### go to redirect
 			if ( !empty( $p_redirect_url ) ) {
@@ -590,7 +617,7 @@
 		### if logged in
 		if ( isset( $g_string_cookie_val ) ) {
 
-			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			### get user info
 			$query = "SELECT $p_field_name
@@ -613,7 +640,7 @@
 		### if logged in
 		if ( isset( $g_string_cookie_val ) ) {
 
-			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			$t_id = get_current_user_field( "id" );
 			### get user info
@@ -682,7 +709,7 @@
 		$u_id = get_current_user_field( "id " );
 
 		if ( $u_id ) {
-			db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 			$query = "SELECT $p_table_field
 					FROM $p_table_name
 					WHERE user_id='$u_id'";

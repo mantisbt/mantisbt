@@ -20,7 +20,7 @@
 				$s_logout_link;
 	}
 
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### grab the access level and protected information for the
 	### currently logged in user

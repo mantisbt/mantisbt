@@ -15,7 +15,7 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_table
@@ -54,7 +54,7 @@
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Viewing Bug Details</b>
+			<b><? echo $s_viewing_bug_details_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color ?> align=center>
@@ -95,6 +95,10 @@
 		</td>
 		<td>
 			<? echo $v_last_updated ?>
+		</td>
+	</tr>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
 		</td>
 	</tr>
 	<tr>
@@ -147,6 +151,10 @@
 
 		</td>
 	</tr>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+		</td>
+	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b>Summary</b>
@@ -171,6 +179,10 @@
 			<? echo $v2_additional_information ?>
 		</td>
 	</tr>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+		</td>
+	</tr>
 <?
 	if ( access_level_check_greater_or_equal( "updater" ) ) {
 ?>
@@ -178,13 +190,24 @@
 		<form method=post action="<? echo $g_bug_update_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 			<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
-		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=3>
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value=" Update Bug ">
 		</td>
 		</form>
+<?	if ($v_status!='resolved') { ?>
+		<form method=post action="<? echo $g_bug_resolve_page ?>">
+			<input type=hidden name=f_id value="<? echo $f_id ?>">
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+			<input type=submit value=" Resolve Bug ">
+		</td>
+		</form>
+<?	} else { ?>
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+		</td>
+<?	} ?>
 		<form method=post action="<? echo $g_bug_delete_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
-		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=3>
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value=" Delete Bug ">
 		</td>
 	</form>

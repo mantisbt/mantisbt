@@ -30,12 +30,15 @@
 	### account_prefs_page.php3
 	$s_default_account_preferences = "Default Account Preferences";
 	$s_advanced_report = "Advanced Report";
-	$s_advanced_report = "Advanced View";
+	$s_advanced_view = "Advanced View";
 	$s_update_prefs = "Update Prefs";
 	$s_reset_prefs = "Reset Prefs";
 
 	### account_prefs_update.php3
-	$s_prefs_updated = "Preferences have been successfully updated...";
+	$s_prefs_updated = "Preferences have been updated...";
+
+	### account_prefs_reset.php3
+	$s_prefs_reset = "Preferences have been reset...";
 
 	### account_profile_add.php3
 	$s_profile_added = "Profile added...";
@@ -83,12 +86,22 @@
 	$s_bugnote_add_reopen_button = "Add Bugnote and Reopen Bug";
 	$s_reopen_add_bugnote_title = "Add Bugnote Reason For Reopening Bug";
 
+	### bug_resolve_page.php3
+	$s_resolve_bug_title = "Resolve Bug";
+	$s_resolve_bug_button = "Resolve Bug";
+
+	### bug_resolve_page2.php3
+	$s_bug_resolved = "Bug has been resolved. Enter bugnote below...";
+	$s_resolve_add_bugnote_title = "Add Bugnote Reason For Resolving Bug";
+
 	### bug_update.php3
 	$s_bug_updated = "Bug has been successfully updated...";
 
 	### bug_update_advanced_page.php3
+	$s_update_simple_link = "Update Simple";
+	$s_updating_bug_advanced_title = "Updating Bug Information";
 	$s_projection = "Projection";
-	$s_eta = "ID";
+	$s_eta = "ETA";
 	$s_os = "OS";
 	$s_os_version = "Version";
 	$s_product_version = "Product Version";
@@ -97,9 +110,11 @@
 	$s_steps_to = "Steps To";
 	$s_reproduce = "Reproduce";
 
+
 	### bug_update_page.php3
 	$s_back_to_bug = "Back To Bug";
-	$s_viewing_bug_details_title = "Viewing Bug Details";
+	$s_update_advanced_link = "Update Advanced";
+	$s_updating_bug_advanced_title = "Updating Bug Information";
 	$s_id = "ID";
 	$s_category = "Category";
 	$s_severity = "Severity";
@@ -304,7 +319,11 @@
 	$s_total_time = "total time";
 
 	### view_bug_advanced_page.php3
+	$s_viewing_bug_advanced_details_title = "Viewing Bug Advanced Details";
+
 	### view_bug_all_page.php3
+	$s_viewing_bug_details_title = "Viewing Bug Details";
+
 	### view_bug_page.php3
 	### view_user_assigned_bug_page.php3
 	### view_user_reported_bug_page.php3
@@ -312,5 +331,5 @@
 	### General Strings
 	$s_go_back = "Go Back";
 	$s_proceed = "Click here to proceed";
-	$s_sql_error_detected = "$s_sql_error_detected";
+	$s_sql_error_detected = "ERROR: SQL error detected.  Please report this to ";
 ?>

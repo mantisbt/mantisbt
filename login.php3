@@ -6,7 +6,7 @@
 ?>
 <? include( "core_API.php" ) ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
    	### get user info
 	$query = "SELECT *

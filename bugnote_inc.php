@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### grab the user id currently logged in
 	$t_user_id = get_current_user_field( "id " );
@@ -14,7 +14,7 @@
 	$query = "SELECT *
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$f_id'
-			ORDER BY date_submitted ASC";
+			ORDER BY date_submitted $g_bugnote_order";
 	$result = db_mysql_query($query);
 	$num_notes = mysql_num_rows($result);
 ?>

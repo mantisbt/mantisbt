@@ -27,9 +27,17 @@ To Do:
  * Reordered the config_inc.php file items
  * Added a logout redirect page variable for the logout page
  * Fixed show source problem
- * Removed get_current_user_id() and replaced with calls to get_current_user_field( "id" )
+ * Removed get_current_user_id() and replaced with calls to
+   get_current_user_field( "id" )
  * Added reopen bug dialog
  * Added $g_bug_reopen_page and removed $g_bug_reopen
+ * Added bug_reopen_page.php3 and removed bug_reopen.php3
+ * Added $g_bug_resolve_page and bug_resolve_page.php3
+ * Modified the appearance of the advanced view and update
+ * Split the account pref modifications into two spearate files:
+   account_prefs_update.php3 and account_prefs_reset.php3
+ * Removed db_mysql_error()
+ *
 
 12.20.2000	-	0.12.0
 

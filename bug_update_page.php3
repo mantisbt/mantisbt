@@ -15,7 +15,7 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_table
@@ -46,6 +46,7 @@
 <p>
 <div align=center>
 [ <a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_back_to_bug ?></a> ]
+[ <a href="<? echo $g_bug_update_advanced_page ?>?f_id=<? echo $f_id ?>&f_bug_text_id=<? echo $f_bug_text_id ?>"><? echo $s_update_advanced_link ?></a> ]
 </div>
 <?
 	}
@@ -112,8 +113,12 @@
 			<? echo date( "m-d H:i", sql_to_unix_time( $v_last_updated ) ) ?>
 		</td>
 	</tr>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+		</td>
+	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b><? echo $s_reporter ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
@@ -121,7 +126,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b><? echo $s_assigned_to ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
@@ -131,7 +136,7 @@
 			</select>
 		</td>
 	</tr>
-	<tr>
+	<tr align=center>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_priority ?></b>
 		</td>
@@ -144,37 +149,35 @@
 			<b><? echo $s_resolution ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
-			<select name=f_resolution>
-				<? print_field_option_list( "resolution", $v_resolution ) ?>
-			</select>
+			<? echo $v_resolution ?>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
 
 		</td>
 	</tr>
-	<tr>
+	<tr align=center>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_status ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<select name=f_status>
-				<? print_field_option_list( "status", $v_status ) ?>
-			</select>
+			<? echo $v_status ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_duplicate_id ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<select name=f_duplicate_id>
-				<? print_duplicate_id_option_list( $v_duplicate_id ) ?>
-			</select>
+			<? echo $v_duplicate_id ?>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=2>
 
 		</td>
 	</tr>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+		</td>
+	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b><? echo $s_summary ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
@@ -182,7 +185,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b><? echo $s_description ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
@@ -190,7 +193,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b><? echo $s_additional ?><br><? echo $s_information ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>

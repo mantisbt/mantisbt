@@ -7,7 +7,7 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	if ( !access_level_check_greater_or_equal( "reporter" ) ) {
 		### need to replace with access error page
@@ -110,7 +110,7 @@
 		</td>
 		<td width=75%>
 			<select name=f_id>
-				<? print_profile_option_list( $u_id ) ?>
+				<? print_profile_option_list( get_current_user_field( "id " ) ) ?>
 			</select>
 		</td>
 	</tr>

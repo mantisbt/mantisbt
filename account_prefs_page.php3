@@ -15,7 +15,7 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### grab the user id
 	$u_id = get_current_user_field( "id " );
@@ -60,7 +60,6 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100% cols=2>
 	<form method=post action="<? echo $g_account_prefs_update ?>">
-		<input type=hidden name=f_action value="update">
 		<input type=hidden name=f_id value="<? echo $u_id ?>">
 		<input type=hidden name=f_user_id value="<? echo $u_user_id ?>">
 	<tr>
@@ -78,7 +77,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			<? echo $s_advanced_report ?>
+			<? echo $s_advanced_view ?>
 		</td>
 		<td>
 			<input type=checkbox name=f_advanced_view size=4 maxlength=4 <? if ( $u_advanced_view=="on" ) echo "CHECKED"?>
@@ -89,8 +88,7 @@
 			<input type=submit value="<? echo $s_update_prefs ?>">
 		</td>
 		</form>
-		<form method=post action="<? echo $g_account_prefs_update ?>">
-			<input type=hidden name=f_action value="reset">
+		<form method=post action="<? echo $g_account_prefs_reset ?>">
 			<input type=hidden name=f_id value="<? echo $u_id ?>">
 		<td>
 			<input type=submit value="<? echo $s_reset_prefs ?>">

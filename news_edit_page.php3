@@ -7,7 +7,7 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	if ( !access_level_check_greater_or_equal( "developer" ) ) {
 		### need to replace with access error page
@@ -16,7 +16,7 @@
 	}
 
 	### If Deleteing item redirect to delete script
-	if ( $f_action=="delete") {
+	if ( $f_action=="delete" ) {
 		header( "Location: $g_news_delete_page?f_id=$f_id" );
 		exit;
 	}

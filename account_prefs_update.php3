@@ -7,24 +7,14 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( $f_action="update" ) {
-		## update preferences
-		$query = "UPDATE $g_mantis_user_pref_table
-				SET advanced_report='$f_advanced_report',
-					advanced_view='$f_advanced_view'
-				WHERE id='$f_id'";
-		$result = mysql_query( $query );
-	}
-	else if ( $f_action="reset" ) {
-		## reset to defaults
-		$query = "UPDATE $g_mantis_user_pref_table
-				SET advanced_report='$g_default_advanced_report',
-					advanced_view='$g_default_advanced_view'
-				WHERE id='$f_id'";
-		$result = mysql_query( $query );
-	}
+	## update preferences
+	$query = "UPDATE $g_mantis_user_pref_table
+			SET advanced_report='$f_advanced_report',
+				advanced_view='$f_advanced_view'
+			WHERE id='$f_id'";
+	$result = mysql_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

@@ -87,6 +87,12 @@
 	#--------------------
 
 	#--------------------
+	# bugnote ordering
+	# change to ASC or DESC
+	$g_bugnote_order = "ASC";
+	#--------------------
+
+	#--------------------
 	# date lengths to count bugs by
 	# folows the english required by strtotime()
 	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
@@ -178,6 +184,9 @@
 
 	$g_bug_reopen_page             = "bug_reopen_page".$g_php;
 
+	$g_bug_resolve_page            = "bug_resolve_page".$g_php;
+	$g_bug_resolve_page2           = "bug_resolve_page2".$g_php;
+
 	# vote
 	$g_bug_vote_add                = "bug_vote_add".$g_php;
 
@@ -213,6 +222,7 @@
 
 	$g_account_prefs_page             = "account_prefs_page".$g_php;
 	$g_account_prefs_update           = "account_prefs_update".$g_php;
+	$g_account_prefs_reset            = "account_prefs_reset".$g_php;
 
 	# site management
 	$g_manage_page                 = "manage_page".$g_php;

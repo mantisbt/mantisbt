@@ -7,7 +7,7 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	if ( !access_level_check_greater_or_equal( "viewer" ) ) {
 		# should be an access error page

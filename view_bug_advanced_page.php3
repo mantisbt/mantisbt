@@ -15,7 +15,7 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <?
-	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_table
@@ -54,7 +54,7 @@
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Viewing Bug Details</b>
+			<b><? echo $s_viewing_bug_advanced_details_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color ?> align=center>
@@ -97,6 +97,10 @@
 			<? echo $v_last_updated ?>
 		</td>
 	</tr>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+		</td>
+	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b>Reporter</b>
@@ -120,8 +124,11 @@
 		<td bgcolor=<? echo $g_primary_color_dark ?> align=center>
 			<? echo $v_priority ?>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
-
+		<td bgcolor=<? echo $g_category_title_color ?>>
+			<b>Resolution</b>
+		</td>
+		<td bgcolor=<? echo $g_primary_color_dark ?>>
+			<? echo $v_resolution ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b>Platform</b>
@@ -137,8 +144,11 @@
 		<td bgcolor=<? echo $g_primary_color_light ?> align=center>
 			<? echo $v_status ?>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?> colspan=2>
-
+		<td bgcolor=<? echo $g_category_title_color ?>>
+			<b>Duplicate ID</b>
+		</td>
+		<td bgcolor=<? echo $g_primary_color_light ?>>
+			<? print_duplicate_id( $v_duplicate_id ) ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b>OS</b>
@@ -182,13 +192,7 @@
 		</td>
 	</tr>
 	<tr align=center>
-		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Resolution</b>
-		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
-			<? echo $v_resolution ?>
-		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
+		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=4>
 
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
@@ -199,13 +203,7 @@
 		</td>
 	</tr>
 	<tr align=center>
-		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Duplicate ID</b>
-		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<? print_duplicate_id( $v_duplicate_id ) ?>
-		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?> colspan=2>
+		<td bgcolor=<? echo $g_primary_color_light ?> colspan=4>
 
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
@@ -213,6 +211,10 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<? echo $v_votes ?>
+		</td>
+	</tr>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
 		</td>
 	</tr>
 	<tr>
@@ -258,6 +260,10 @@
 		$t_profile_description = string_display_with_br( $t_profile_description );
 
 ?>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+		</td>
+	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?> align=center>
 			<b>System Profile</b>
@@ -268,7 +274,12 @@
 	</tr>
 <?
 	}
-
+?>
+	<tr height=5 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+		</td>
+	</tr>
+<?
 	if ( access_level_check_greater_or_equal( "updater" ) ) {
 ?>
 	<tr align=center>
@@ -280,15 +291,27 @@
 			<input type=submit value=" Update Bug ">
 		</td>
 		</form>
-
+<?	if ($v_status!='resolved') { ?>
+		<form method=post action="<? echo $g_bug_resolve_page ?>">
+			<input type=hidden name=f_id value="<? echo $f_id ?>">
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+			<input type=submit value=" Resolve Bug ">
+		</td>
+		</form>
+<?	} else { ?>
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+		</td>
+<?	} ?>
+<!--
+	REMEMBER TO IMPLEMENT VOTE ADDING
 		<form method=post action="<? echo $g_bug_vote_add ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 			<input type=hidden name=f_vote value="<? echo $v_votes ?>">
-		<td valign="top" bgcolor=<? echo $g_white_color ?> colspan=2>
+		<td valign="top" bgcolor=<? echo $g_white_color ?>>
 			<input type=submit value=" Add Vote ">
 		</td>
 		</form>
-
+-->
 		<form method=post action="<? echo $g_bug_delete ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<td valign="top" bgcolor=<? echo $g_white_color ?> colspan=2>
