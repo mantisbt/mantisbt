@@ -2,7 +2,7 @@
 <head>
 <title>Mantis User Documentation</title>
 <style>
-body { background-color:<? echo $g_white_color ?>; font-family:Verdana, Arial; font-size=10pt }
+body { background-color:  #ffffff; font-family:Verdana, Arial; font-size=10pt }
 td {  font-family:Verdana, Arial; font-size=10pt }
 p {  font-family:Verdana, Arial; font-size=10pt }
 </style>
@@ -31,6 +31,7 @@ This is the Mantis system configuration documentation.
 <li><a href="#language">Language</a>
 <li><a href="#display">Display</a>
 <li><a href="#time">Time</a>
+<li><a href="#jpgraph">JpGraph</a>
 <li><a href="#date">Date</a>
 <li><a href="#news">News</a>
 <li><a href="#default">Default Preferences</a>
@@ -294,6 +295,14 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
+	<td bgcolor="#ddddff">
+		$g_hide_user_email
+	</td>
+	<td bgcolor="#ffffff">
+		This disables the automatic generation of mailto: links
+	</td>
+</tr>
+<tr>
 	<td colspan=2 bgcolor="#eeeeee">
 		The email system allows the package to notify users when significant events occur.  You should have a working Mail Transport Agent (MTA) on your system.  On unix systems this is usually sendmail and usually nothing needs to be done.  For problems regarding mail then visit the support forums or read up on the user notes in the mail() function at: <a href="http://www.php.net/manual/en/function.mail.php">http://www.php.net/manual/en/function.mail.php</a>
 		<p>
@@ -470,6 +479,42 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 </tr>
 </table>
 <!-- --- TIME END -------------------------------------------------------- -->
+
+<!-- --- JPGRAPH BEGIN---------------------------------------------------- -->
+<p>
+<a name="jpgraph">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>JpGraph</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_use_jpgraph
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Enabled jpgraph use.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_jpgraph_path
+	</td>
+	<td bgcolor="#ffffff">
+		Don't forget to add the trailing /
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		To use the Jpgraph addon you need the <a href="http://www.aditus.nu/jpgraph/index.php">JpGraph package</a>.
+		You can place the package whereever you want, but you have to set the var in jpgraph.php
+		<p>
+		eg. DEFINE("DIR_BASE","/www/mantisbt/jpgraph/");
+	</td>
+</tr>
+</table>
+<!-- --- JPGRAPH END ----------------------------------------------------- -->
 
 <!-- --- DATE BEGIN ------------------------------------------------------ -->
 <p>
