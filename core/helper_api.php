@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.20 2002-09-21 23:00:43 jfitzell Exp $
+	# $Id: helper_api.php,v 1.21 2002-10-23 02:18:10 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -221,6 +221,44 @@
 		gpc_clear_cookie( 'project_cookie' );
 		gpc_clear_cookie( 'view_all_cookie' );
 		gpc_clear_cookie( 'manage_cookie' );
+	}
+	# --------------------
+	# Check whether the user has confirmed this action.
+	#
+	# If the user has not confirmed the action, generate a page which asks
+	#  the user to confirm and then submits a form back to the current page
+	#  with all the GET and POST data and an additional field called _confirmed
+	#  to indicate that confirmation has been done.
+	function helper_ensure_confirmed( $p_message, $p_button_label ) {
+		if (true == gpc_get_bool( '_confirmed' ) ) {
+			return true;
+		}
+
+		global $PHP_SELF;
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_POST, $_GET;
+		}
+
+		print_page_top1();
+		print_page_top2();
+
+		echo "<br />\n<div align=\"center\">\n";
+		print_hr();
+		echo "\n$p_message\n";
+
+		echo '<form method="post" action="' . $PHP_SELF . "\">\n";
+
+		print_hidden_inputs( gpc_strip_slashes( $_POST ) );
+		print_hidden_inputs( gpc_strip_slashes( $_GET ) );
+
+		echo "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
+		echo '<br /><br /><input type="submit" value="' . $p_button_label . '" />';
+		echo "\n</form>\n";
+
+		print_hr();
+		echo "</div>\n";
+		print_page_bot1();
+		exit;
 	}
 	# --------------------
 	# Print a debug string by generating a notice

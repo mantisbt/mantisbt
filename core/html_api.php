@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.20 2002-10-20 23:59:49 jfitzell Exp $
+	# $Id: html_api.php,v 1.21 2002-10-23 02:18:11 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -48,8 +48,12 @@
 	# --------------------
 	# comes at the bottom of the html
 	# $p_file should always be the __FILE__ variable. This is passed to show source.
-	function print_page_bot1( $p_file ) {
+	function print_page_bot1( $p_file = null ) {
 		global $g_bottom_include_page;
+
+		if ( null === $p_file ) {
+			$p_file = basename( $GLOBALS['PHP_SELF'] );
+		}
 
 		print_bottom_page( $g_bottom_include_page );
 		print_footer( $p_file );

@@ -6,13 +6,13 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.25 2002-10-22 04:28:57 jfitzell Exp $
+	# $Id: print_api.php,v 1.26 2002-10-23 02:18:11 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Basic Print API
 	#
-	# this file handles printing and string manipulation functions
+	# this file handles printing functions
 	###########################################################################
 
 	# --------------------
@@ -1045,6 +1045,26 @@
 		PRINT $MANTIS_ERROR[ERROR_SQL];
 		print_email_link( $g_administrator_email, lang_get( 'administrator' ) );
 		PRINT "<br />$p_query;<br />";
+	}
+	# --------------------
+	# Print a hidden input for each name=>value pair in the array
+	#  
+	# If a value is an array an input will be created for each item with a name
+	#  that ends with []
+	# The names and values are passed through htmlspecialchars() before being displayed
+	function print_hidden_inputs( $p_assoc_array ) {
+		foreach ( $p_assoc_array as $key => $val ) {
+			$key = htmlspecialchars( $key );
+			if ( is_array( $val ) ) {
+				foreach ( $val as $val2 ) {
+					$val2 = htmlspecialchars( $val2 );
+					echo "<input type=\"hidden\" name=\"$val\[\]\" value=\"$val2\" />\n";
+				}
+			} else {
+				$val = htmlspecialchars( $val );
+				echo "<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
+			}
+		}
 	}
 
 ?>
