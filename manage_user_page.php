@@ -19,7 +19,7 @@
 	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 	$f_hide = gpc_get_bool( 'hide' );
 	$f_save = gpc_get_bool( 'save' );
-	$f_prefix = strtoupper( gpc_get_string( 'prefix', 'A' ) );
+	$f_prefix = strtoupper( gpc_get_string( 'prefix', config_get( 'default_manage_user_prefix' ) ) );
 
 	$t_cookie_name = config_get( 'manage_cookie' );
 	$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
@@ -144,10 +144,16 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 	$t_index_links = '<br /><center><table class="width75"><tr>';
 	foreach ( $t_prefix_array as $t_prefix ) {
-		if ( $t_prefix == $f_prefix ) {
-			$t_link = "<strong>$t_prefix</string>";
+		if ( $t_prefix === 'ALL' ) {
+			$t_caption = lang_get( 'show_all_users' );
 		} else {
-			$t_link = '<a href="manage_user_page.php?prefix=' . $t_prefix .'">' . $t_prefix . '</a>';
+			$t_caption = $t_prefix;
+		}
+
+		if ( $t_prefix == $f_prefix ) {
+			$t_link = "<strong>$t_caption</string>";
+		} else {
+			$t_link = '<a href="manage_user_page.php?prefix=' . $t_prefix .'">' . $t_caption . '</a>';
 		}
 		$t_index_links .= '<td>' . $t_link . '</td>';
 	}

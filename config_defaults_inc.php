@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.122 2003-07-30 02:59:59 beerfrick Exp $
+	# $Id: config_defaults_inc.php,v 1.123 2003-08-05 13:12:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -22,8 +22,6 @@
 
 	# In general a value of OFF means the feature is disabled and ON means the
 	# feature is enabled.  Any other cases will have an explanation.
-
-	# Look in configuration.html for more detailed comments.
 
 	################################
 	# Mantis Database Settings
@@ -65,7 +63,7 @@
 		} else if ( isset( $_SERVER['SERVER_ADDR'] ) ) {
 			$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
 		} else {
-			$t_host = 'yourhostnamehere';
+			$t_host = 'www.example.com';
 		}
 
 		$t_path = dirname( $_SERVER['PHP_SELF'] );
@@ -75,7 +73,7 @@
 
 		$g_path	= $t_protocol . '://' . $t_host . $t_path.'/';
 	} else {
-		$g_path	= 'http://yourhostnamehere/mantis/';
+		$g_path	= 'http://www.example.com/mantis/';
 	}
 
 	# path to your images directory (for icons)
@@ -102,18 +100,18 @@
 	#############################
 
 	# --- email variables -------------
-	$g_administrator_email	= 'administrator@nowhere';
-	$g_webmaster_email		= 'webmaster@nowhere';
+	$g_administrator_email	= 'administrator@example.com';
+	$g_webmaster_email		= 'webmaster@example.com';
 
 	# the 'From: ' field in emails
-	$g_from_email			= 'noreply@nowhere';
+	$g_from_email			= 'noreply@example.com';
 
 	# the 'To: ' address all emails are sent.  This can be a mailing list or archive address.
 	# Actual users are emailed via the bcc: fields
-	$g_to_email				= 'nobody@nowhere';
+	$g_to_email				= 'nobody@example.com';
 
 	# the return address for bounced mail
-	$g_return_path_email	= 'admin@nowhere';
+	$g_return_path_email	= 'admin@example.com';
 
 	# allow users to signup for their own accounts.
 	# Mail settings must be correctly configured in order for this to work
@@ -378,7 +376,7 @@
 	$g_short_date_format	= 'm-d-y';
 	$g_normal_date_format	= 'm-d-y H:i';
 	$g_complete_date_format	= 'm-d-Y H:i T';
-#MANUAL---------------------------------------STOPPED HERE-------------------------
+
 	############################
 	# Mantis News Settings
 	############################
@@ -734,6 +732,12 @@
 	#  the rules you are using on your site
 	$g_user_login_valid_regex = '/^[\w \-]+$/';
 
+	# Default user name prefix used to filter the list of users in
+	# manage_user_page.php.  Change this to 'A' (or any other
+	# letter) if you have a lot of users in the system and loading
+	# the manage users page takes a long time.
+	$g_default_manage_user_prefix = 'ALL';
+
 	################################
 	# Mantis Look and Feel Variables
 	################################
@@ -837,21 +841,16 @@
 	$g_custom_field_type_enum_string    = '0:string,1:numeric,2:float,3:enum,4:email';
 
 	#############################
-	# Mantis Page Variables
-	#############################
-
-	#############################
 	# Mantis Javascript Variables
 	#############################
-	#----------------------------------
+
 	# allow the use of Javascript?
 	$g_use_javascript		= ON;
-	#----------------------------------
 
 	###########################
 	# Mantis Speed Optimisation
 	###########################
-	#----------------------------------
+
 	# Use compression of generated html if browser supports it
 	# If you already have compression enabled in your php.ini file
 	#  (either with zlib.output_compression or 
@@ -864,17 +863,14 @@
 	#  the zlib DLL.  You can check what extensions are loaded
 	#  by running "php -m" at the command line (look for 'zlib')
 	$g_compress_html		= ON;
-	#----------------------------------
 
-	#----------------------------------
 	# Use persistent database connections
 	$g_use_persistent_connections	= OFF;
-	#----------------------------------
 
 	###########################
 	# Include files
 	###########################
-	#----------------------------------
+
 	# Specify your top/bottom include file (logos, banners, etc)
 	$g_bottom_include_page			= $g_absolute_path.'';
 	$g_top_include_page				= $g_absolute_path.'';
@@ -882,19 +878,18 @@
 	$g_css_include_file				= $g_path.'css/default.css';
 	# meta tags
 	$g_meta_include_file			= $g_absolute_path.'meta_inc.php';
-	#----------------------------------
 
 	###########################
 	# Redirections
 	###########################
-	# ---------------------------------
+
 	# Specify where the user should be sent after logging out.
 	$g_logout_redirect_page			= $g_path.'login_page.php';
 
 	###########################
 	# Headers
 	###########################
-	# ---------------------------------
+
 	# An array of headers to be sent with each page.
 	# For example, to allow your mantis installation to be viewed in a frame in IE 6
 	#  when the frameset is not at the same hostname as the mantis install, you need
