@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.29 2003-02-18 02:51:21 vboctor Exp $
+	# $Id: login_page.php,v 1.30 2003-03-06 21:13:16 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo lang_get( 'username' ) ?>:
+		<?php echo lang_get( 'username' ) ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="username" size="32" maxlength="32" />
@@ -73,7 +73,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'password' ) ?>:
+		<?php echo lang_get( 'password' ) ?>
 	</td>
 	<td>
 		<input type="password" name="password" size="16" maxlength="32" />
@@ -81,7 +81,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'save_login' ) ?>:
+		<?php echo lang_get( 'save_login' ) ?>
 	</td>
 	<td>
 		<input type="checkbox" name="perm_login" />

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.27 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: login_select_proj_page.php,v 1.28 2003-03-06 21:13:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,7 +33,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="40%">
-		<?php echo lang_get( 'choose_project' ) ?>:
+		<?php echo lang_get( 'choose_project' ) ?>
 	</td>
 	<td width="60%">
 		<select name="project_id">
@@ -43,7 +43,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'make_default' ) ?>:
+		<?php echo lang_get( 'make_default' ) ?>
 	</td>
 	<td>
 		<input type="checkbox" name="make_default" />
