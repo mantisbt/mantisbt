@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.2 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: manage_config_workflow_page.php,v 1.3 2005-03-20 14:34:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -153,13 +153,28 @@
 
 	# count arcs in and out of each status
 	$t_enum_status = config_get( 'status_enum_string' );
+	$t_status_arr  = explode_enum_string( $t_enum_status );
+
 	$t_enum_workflow = config_get( 'status_enum_workflow' );
+	if ( 0 == count( $t_enum_workflow ) ) {
+	    # workflow is not set, default it to all transitions
+	    foreach ( $t_status_arr as $t_status ) {
+		    list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
+		    $t_temp_workflow = array();
+			foreach ( $t_status_arr as $t_next ) {
+				list( $t_next_id, $t_next_label ) = explode_enum_arr( $t_next );
+				if ( $t_status_id <> $t_next_id ) {
+				    $t_temp_workflow[] = $t_next;
+				}
+			}
+		    $t_enum_workflow[$t_status_id] = implode( ',', $t_temp_workflow );
+		}
+	}
 
 	$t_extra_enum_status = '0:non-existent,' . $t_enum_status;
 	$t_lang_enum_status = '0:' . lang_get( 'non_existent' ) . ',' . lang_get( 'status_enum_string' );
 	$t_all_status = explode( ',', $t_extra_enum_status);
 
-	$t_status_arr  = explode_enum_string( $t_enum_status );
 	$t_entry = array();
 	$t_exit = array();
 	$t_validation_result = '';
@@ -234,7 +249,12 @@
 	if ( $t_can_change_flags ) {
 		echo "<form name=\"workflow_config_action\" method=\"post\" action=\"manage_config_workflow_set.php\">\n";
 	}
-	echo '<p class="form-title">' . lang_get( 'project_name' ) . ': ' . project_get_name( $t_project ) . '</p>' . "\n";
+	if ( ALL_PROJECTS == $t_project ) {
+	    $t_project_title = lang_get( 'config_all_projects' );
+	} else {
+	    $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project ) );
+	}
+	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 
 
 	# show the settings used to derive the table

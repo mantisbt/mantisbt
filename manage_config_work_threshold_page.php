@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.1 2005-03-19 16:25:59 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.2 2005-03-20 14:34:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -149,7 +149,14 @@
 	}
 
     echo "<br /><br />\n";
-	echo '<p class="form-title">' . lang_get( 'project_name' ) . ': ' . project_get_name( $t_project ) . '</p>' . "\n";
+    
+	if ( ALL_PROJECTS == $t_project ) {
+	    $t_project_title = lang_get( 'config_all_projects' );
+	} else {
+	    $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project ) );
+	}
+	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
+	
 	echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 
 	# Issues

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_page.php,v 1.2 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: manage_config_email_page.php,v 1.3 2005-03-20 14:34:03 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -98,6 +98,13 @@
 			echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_email_set.php\">\n";
 		}
 
+	    if ( ALL_PROJECTS == $t_project ) {
+	        $t_project_title = lang_get( 'config_all_projects' );
+	    } else {
+	        $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project ) );
+	    }
+	    echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
+	    
 		get_section_begin_for_email( lang_get( 'email_notification' ) );
 		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );
 		get_capability_row_for_email( lang_get( 'email_on_assigned' ), 'owner' );
