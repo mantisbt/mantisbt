@@ -30,6 +30,7 @@ Mantis ChangeLog
  * Languages: Updated German localisation.
  * Changed confit option (default_notify_flags): remove 'admin', 'manager', and 'threshold' categories and add 'threshold_min' and 'threshold_max'
  * New config option (email_receive_own): controls whether users receive emails for changes they make
+ * New config option (display_project_padding): controls the level of padding on project ids
  * New config option (display_bug_padding): controls the level of padding on bug ids
  * New config option (display_bugnote_padding): controls the level of padding on bugnote ids
  * New config option (file_type_icons): provides mapping between file extensions and icons to be used for file types.

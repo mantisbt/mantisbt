@@ -42,7 +42,7 @@
 		$f_title 	= db_prepare_string( $f_title );
 		$f_description 	= db_prepare_string( $f_description );
 
-		$f_file_name = lang_get( 'document_files_prefix' ) . '-' . $g_project_cookie_val . '-' . $f_name;
+		$f_file_name = lang_get( 'document_files_prefix' ) . '-' . project_format_id ( $g_project_cookie_val ) . '-' . $f_name;
 		$t_file_size = $f_size;
 
 		switch ( $g_file_upload_method ) {

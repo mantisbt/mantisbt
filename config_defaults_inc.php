@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.93 2003-02-23 04:26:19 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.94 2003-02-23 04:45:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -716,6 +716,10 @@
 									 'assigned'		=> '#c8c8ff', # blue
 									 'resolved'		=> '#cceedd', # buish-green
 									 'closed'		=> '#e8e8e8'); # light gray
+
+	# The padding level when displaying project ids
+	#  The bug id will be padded with 0's up to the size given
+	$g_display_project_padding	= 3;
 
 	# The padding level when displaying bug ids
 	#  The bug id will be padded with 0's up to the size given

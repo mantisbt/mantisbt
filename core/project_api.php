@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.40 2003-02-22 11:52:39 jfitzell Exp $
+	# $Id: project_api.php,v 1.41 2003-02-23 04:45:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -600,5 +600,16 @@
 	# Delete all files associated with a project
 	function project_delete_all_files( $p_project_id ) {
 		file_delete_project_files( $p_project_id );
+	}
+
+	#===================================
+	# Other
+	#===================================
+
+	# --------------------
+	# Pads the project id with the appropriate number of zeros.
+	function project_format_id( $p_project_id ) {
+		$t_padding = config_get( 'display_project_padding' );
+		return( str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
 	}
 ?>
