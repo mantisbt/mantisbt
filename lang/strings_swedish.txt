@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@restamus.se
 	# -------------------------------------------------
-	# $Revision: 1.41 $
-	# $Author: jfitzell $
-	# $Date: 2003-02-09 00:51:05 $
+	# $Revision: 1.42 $
+	# $Author: jlatour $
+	# $Date: 2003-02-17 17:03:13 $
 	#
-	# $Id: strings_swedish.txt,v 1.41 2003-02-09 00:51:05 jfitzell Exp $
+	# $Id: strings_swedish.txt,v 1.42 2003-02-17 17:03:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -62,6 +62,8 @@
 	$s_delete_bugnote_button = 'Delete Bugnote';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
 	$s_bug_relationships = 'Relationships';
+	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+	$s_empty_password_button = 'Use Empty Password';
 
 	$s_duplicate_of = 'duplicate of %id';
 	$s_has_duplicate = 'has duplicate %id';
@@ -83,7 +85,10 @@
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
+	$s_create_new_project_link = 'Create New Project';
+
 	# bug_actiongroup_page.php : mass treatment
+	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
 	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
 	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
 	$s_move_bugs_conf_msg = 'Move bugs to';
@@ -139,8 +144,6 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERROR: No file specified';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERROR: The directory does not exist. Please check the project settings.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: This is a duplicate file.  Please delete the file first.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
@@ -158,6 +161,7 @@
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+	$MANTIS_ERROR[ERROR_PROJECT_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
 	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
@@ -183,6 +187,12 @@
 	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
 	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
 	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 
 	$s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
 	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -546,6 +556,10 @@
 	$s_versions = 'Versioner';
 	$s_add_version_button = 'Lägg till version';
 	$s_edit_link = 'redigera';
+	$s_actions = 'Actions';
+	$s_version = 'Version/Build';
+	$s_timestamp = 'Timestamp';
+	$s_update = 'Update';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Lägg till projekt';
@@ -581,8 +595,10 @@
 	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = 'Är du säker på att du vill ta bort kontot?';
 
-	# manage_prune.php
+	# manage_user_prune.php
 	$s_accounts_pruned_msg = 'Alla konton som aldrig loggat in och är äldre än en vecka har tagits bort';
+	$s_prune_accounts_button = 'Prune';
+	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 	# manage_user_page.php
 	$s_edit_user_title = 'Redigera användarkonto';
@@ -632,7 +648,6 @@
 
 	# news_menu_page.php
 	$s_add_news_title = 'Lägg till nyhet';
-	$s_do_not_use = 'Använd inte';
 	$s_post_to = 'Koppla till';
 	$s_post_news_button = 'Spara nyhet';
 	$s_edit_or_delete_news_title = 'Redigera eller ta bort nyhet';
@@ -810,7 +825,7 @@
 	$s_update_custom_field_button = 'Update Custom Field';
 	$s_add_existing_custom_field = 'Add This Existing Custom Field';
 	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_fields = 'Fields';
+	$s_custom_field = 'Field';
 	$s_custom_fields_setup = 'Custom Fields';
 	$s_custom_field_name = 'Name';
 	$s_custom_field_project_count = 'Project Count';

@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.54 $
-	# $Author: int2str $
-	# $Date: 2003-02-17 08:59:01 $
+	# $Revision: 1.55 $
+	# $Author: jlatour $
+	# $Date: 2003-02-17 17:03:02 $
 	#
-	# $Id: strings_german.txt,v 1.54 2003-02-17 08:59:01 int2str Exp $
+	# $Id: strings_german.txt,v 1.55 2003-02-17 17:03:02 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -66,6 +66,8 @@
 	$s_delete_bugnote_button = 'Fehlernotiz l&ouml;schen';
 	$s_delete_bugnote_sure_msg = 'M&ouml;chten Sie diese Fehlernotiz wirklich l&ouml;schen?';
 	$s_bug_relationships = 'Fehler-Beziehungen';
+	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+	$s_empty_password_button = 'Use Empty Password';
 
 	$s_duplicate_of = 'Duplikat von %id';
 	$s_has_duplicate = 'Hat Duplicat %id';
@@ -87,7 +89,10 @@
 	$s_make_private = 'Privat machen';
 	$s_make_public = '&Ouml;ffentlich machen';
 
+	$s_create_new_project_link = 'Create New Project';
+
 	# bug_actiongroup_page.php : mass treatment
+	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
 	$s_close_bugs_conf_msg = 'M&ouml;chten Sie alle ausgew&auml;hlten Fehler wirklich schliessen?';
 	$s_delete_bugs_conf_msg = 'M&ouml;chten Sie alle ausgew&auml;hlten Fehler wirklich l&ouml;schen?';
 	$s_move_bugs_conf_msg = 'Fehler verschieben zu Projekt:';
@@ -138,37 +143,19 @@
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 
-          'FEHLER: Ein Fehler ist w&auml;hrend dieses Vorganges aufgetreten. Bitte benachrichtigen Sie den lokalen Administrator von diesem Fehler.';
 	$MANTIS_ERROR[ERROR_SQL] = 
-          'FEHLER: SQL-Fehler gefunden. Bitte melden Sie diesen Fehler an ';
 	$MANTIS_ERROR[ERROR_REPORT] = 
-          'FEHLER: Ihr Fehlerbericht enthielt ungültige Daten.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 
-          'FEHLER: Keine Datei angegeben.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 
-          'FEHLER: Diser Dateityp ist nich erlaubt.';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 
-          'FEHLER: Das Verzeichnis existiert nicht. überprüfen Sie die Einstellungen des Projekts.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 
-          'FEHLER: Kategorie bereits vorhanden.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 
-          'FEHLER: Version bereits vorhanden.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 
-          'FEHLER: Datei bereits vorhanden. Löschen Sie zuerst die alte Datei';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 
-          'FEHLER: Ein Projekt mit diesem Namen existiert bereits.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 
-          'FEHLER: Ein benötigtes Feld wurde nicht ausgefüllt. Bitte übrprüfen Sie Ihre Eingaben.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 
-          'FEHLER: Dieser Benutzername ist gesch&uuml;tzt.  Sie k&ouml;nnen sich nicht mehr anmelden bis der Schutz aufgehoben wurde.';
 	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 
-          'FEHLER: Zugriff verweigert.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 
-          'FEHLER: Datei&uuml;bertragung unerfolgreich. Ihr Administrator sollte das admin_check Programm zum Beheben dieses Problems benutzen.';
 	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 
-          'FEHLER: Datei&uuml;bertragung unerfolgreich.  Die Datei ist gr&ouml;sser als erlaubt.';
 	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 
-          'FEHLER: Ein f&uuml;r diese Seite notwendiger Parameter wurde nicht gefunden.';
 	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
 	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
 	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
@@ -178,6 +165,7 @@
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+	$MANTIS_ERROR[ERROR_PROJECT_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
 	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
@@ -203,6 +191,12 @@
 	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
 	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
 	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 
 	$s_login_error = 'FEHLER: Benutzername oder Passwort falsch.';
 	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -566,6 +560,10 @@
 	$s_versions = 'Versionen';
 	$s_add_version_button = 'Version hinzufügen';
 	$s_edit_link = 'bearbeiten';
+	$s_actions = 'Actions';
+	$s_version = 'Version/Build';
+	$s_timestamp = 'Timestamp';
+	$s_update = 'Update';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Projekt hinzufügen';
@@ -601,8 +599,10 @@
 	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = 'Wollen Sie dieses Konto wirklich löschen?';
 
-	# manage_prune.php
+	# manage_user_prune.php
 	$s_accounts_pruned_msg = 'Alle Benutzer die niemals angemeldet waren und älter als 1 Woche sind wurden entfernt';
+	$s_prune_accounts_button = 'Prune';
+	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 	# manage_user_page.php
 	$s_edit_user_title = 'Benutzer ändern';
@@ -652,7 +652,6 @@
 
 	# news_menu_page.php
 	$s_add_news_title = 'Nachricht hinzufügen';
-	$s_do_not_use = 'Nicht benutzen:';
 	$s_post_to = 'Senden an';
 	$s_post_news_button = 'Nachrichten veröffentlichen';
 	$s_edit_or_delete_news_title = 'Nachricht bearbeiten/löschen';
@@ -830,7 +829,7 @@
 	$s_update_custom_field_button = 'Benutzerdefiniertes Feld aktuallisieren';
 	$s_add_existing_custom_field = 'dieses bestehende benutzerdefinierte Feld hinzuf&uuml;gen';
 	$s_edit_custom_field_title = 'Benutzerdefiniertes Feld editieren';
-	$s_custom_fields = 'Felder';
+	$s_custom_field = 'Field';
 	$s_custom_fields_setup = 'Benutzerdefinierte Felder';
 	$s_custom_field_name = 'Name';
 	$s_custom_field_project_count = 'In Projekten';

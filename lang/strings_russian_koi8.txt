@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.29 $
-	# $Author: jfitzell $
-	# $Date: 2003-02-09 00:51:05 $
+	# $Revision: 1.30 $
+	# $Author: jlatour $
+	# $Date: 2003-02-17 17:03:12 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.29 2003-02-09 00:51:05 jfitzell Exp $
+	# $Id: strings_russian_koi8.txt,v 1.30 2003-02-17 17:03:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -62,6 +62,8 @@
 	$s_delete_bugnote_button = 'Удалить заметку';
 	$s_delete_bugnote_sure_msg = 'Вы уверены, что хотите удалить баг?';
 	$s_bug_relationships = 'Связи';
+	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+	$s_empty_password_button = 'Use Empty Password';
 
 	$s_duplicate_of = 'дубликат %id';
 	$s_has_duplicate = 'имеет дубликат %id';
@@ -83,7 +85,10 @@
 	$s_make_private = 'Сделать частным';
 	$s_make_public = 'Сделать общедоступным';
 
+	$s_create_new_project_link = 'Create New Project';
+
 	# bug_actiongroup_page.php : mass treatment
+	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
 	$s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти баги ?';
 	$s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти баги ?';
 	$s_move_bugs_conf_msg = 'Перенести баги в';
@@ -139,8 +144,6 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ОШИБКА: Нет описанного файла';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ОШИБКА: Этот тип файлов запрещен';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ОШИБКА: Каталога не существует. Проверьте настройки проекта.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ОШИБКА: Дубликат категории.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ОШИБКА: Дубликат версии.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ОШИБКА: Дубликат файла. Сначала удалите старый файл.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ОШИБКА: Это имя проекта.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.';
@@ -158,6 +161,7 @@
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+	$MANTIS_ERROR[ERROR_PROJECT_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
 	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
@@ -183,6 +187,12 @@
 	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
 	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
 	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ОШИБКА: Дубликат категории.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ОШИБКА: Дубликат версии.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 
 	$s_login_error = 'ОШИБКА: Ваш бюджет может быть заблокирован или имя пользователя/пароль неправилен.';
 	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -546,6 +556,10 @@
 	$s_versions = 'Версии';
 	$s_add_version_button = 'Добавить версию';
 	$s_edit_link = 'редакт.';
+	$s_actions = 'Actions';
+	$s_version = 'Версия';
+	$s_timestamp = 'Timestamp';
+	$s_update = 'Update';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Добавить проект';
@@ -581,8 +595,10 @@
 	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = 'Вы уверены, что желаете удалить этот бюджет?';
 
-	# manage_prune.php
+	# manage_user_prune.php
 	$s_accounts_pruned_msg = 'Все пользователи, которые ни разу не входили в систему и бюджеты заведены более недели назад были удалены';
+	$s_prune_accounts_button = 'Prune';
+	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 	# manage_user_page.php
 	$s_edit_user_title = 'Редактирование пользователя';
@@ -632,7 +648,6 @@
 
 	# news_menu_page.php
 	$s_add_news_title = 'Добавить новости';
-	$s_do_not_use = 'Не используйте';
 	$s_post_to = 'Разместить в ';
 	$s_post_news_button = 'Разместить новость';
 	$s_edit_or_delete_news_title = 'Редактирование или удаление новостей';
@@ -810,7 +825,7 @@
 	$s_update_custom_field_button = 'Update Custom Field';
 	$s_add_existing_custom_field = 'Add This Existing Custom Field';
 	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_fields = 'Fields';
+	$s_custom_field = 'Field';
 	$s_custom_fields_setup = 'Custom Fields';
 	$s_custom_field_name = 'Name';
 	$s_custom_field_project_count = 'Project Count';

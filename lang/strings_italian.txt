@@ -10,11 +10,11 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 	#          Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: jlatour $
-	# $Date: 2003-02-17 12:08:34 $
+	# $Date: 2003-02-17 17:03:03 $
 	#
-	# $Id: strings_italian.txt,v 1.43 2003-02-17 12:08:34 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.44 2003-02-17 17:03:03 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -65,6 +65,8 @@
 	$s_delete_bugnote_button = "Elimina la Nota al Bug";
 	$s_delete_bugnote_sure_msg = "Sei sicuro di voler eliminare questa Nota?";
 	$s_bug_relationships = "Relazioni";
+	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+	$s_empty_password_button = 'Use Empty Password';
 
 	$s_duplicate_of = "duplicato del %id";
 	$s_has_duplicate = "duplica il %id";
@@ -86,7 +88,10 @@
 	$s_make_private = "Rendi Privato";
 	$s_make_public = "Rendi Pubblico";
 
+	$s_create_new_project_link = 'Create New Project';
+
 	# bug_actiongroup_page.php : mass treatment
+	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
 	$s_close_bugs_conf_msg = "Confermi di voler chiudere questi Bug ?";
 	$s_delete_bugs_conf_msg = "Confermi di voler eliminare questi Bug ?";
 	$s_move_bugs_conf_msg = "Sposta i Bug su";
@@ -142,8 +147,6 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERROR: No file specified';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERROR: The directory does not exist. Please check the project settings.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: This is a duplicate file.  Please delete the file first.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
@@ -161,6 +164,7 @@
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+	$MANTIS_ERROR[ERROR_PROJECT_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
 	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
@@ -186,6 +190,12 @@
 	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
 	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
 	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 
 	$s_login_error = "ERRORE: Il tuo account potrebbe essere stato disabilitato oppure puoi aver immesso un nome e/o una password errata.";
 	$s_login_cookies_disabled = "ERRORE: Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
@@ -235,6 +245,7 @@
 	$s_email_feedback_msg = "Il seguente bug necessita un tuo commento.";
 	$s_email_reopen_msg = "Il seguente bug è stato RIAPERTO.";
 	$s_email_assigned_msg = "Il seguente bug è stato ASSEGNATO.";
+	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
 
 	$s_email_reporter = "Segnalato da";
 	$s_email_handler = "In carico a";
@@ -327,7 +338,7 @@
 
 	# account_profile_update.php
 	$s_profile_updated_msg = "Profilo Aggiornato...";
- 
+
 	# account_update.php
 	$s_account_updated_msg = "Il tuo Account è stato aggiornato con successo...";
 	$s_email_updated = "L'indirizzo email è stato aggiornato con successo";
@@ -548,6 +559,10 @@
 	$s_versions = "Versioni";
 	$s_add_version_button = "Nuova Versione";
 	$s_edit_link = "modifica";
+	$s_actions = 'Actions';
+	$s_version = "Versione";
+	$s_timestamp = 'Timestamp';
+	$s_update = 'Update';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = "Inserisci Progetto";
@@ -583,8 +598,10 @@
 	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = "Sei sicuro di voler eliminare questo Account?";
 
-	# manage_prune.php
+	# manage_user_prune.php
 	$s_accounts_pruned_msg = "Tutti gli Account che non hanno mai effettuato il login e sono più vecchi di 1 settimana sono stati rimossi";
+	$s_prune_accounts_button = 'Prune';
+	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 	# manage_user_page.php
 	$s_edit_user_title = "Elimina Utente";
@@ -634,7 +651,6 @@
 
 	# news_menu_page.php
 	$s_add_news_title = "Nuova Notizia";
-	$s_do_not_use = "Non usare";
 	$s_post_to = "Invia in";
 	$s_post_news_button = "Inserisci Notizia";
 	$s_edit_or_delete_news_title = "Elimina o modifica la Notizia";
@@ -812,7 +828,7 @@
 	$s_update_custom_field_button = "Aggiorna Campo Personalizzato";
 	$s_add_existing_custom_field = "Aggiungi questo Campo Personalizzato";
 	$s_edit_custom_field_title = "Modifica Campo Personalizzato";
-	$s_custom_fields = "Campi";
+	$s_custom_field = 'Field';
 	$s_custom_fields_setup = "Campi Personalizzati";
 	$s_custom_field_name = "Nome";
 	$s_custom_field_project_count = 'Project Count';

@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: jlatour $
-	# $Date: 2003-02-17 16:58:26 $
+	# $Date: 2003-02-17 17:03:01 $
 	#
-	# $Id: strings_dutch.txt,v 1.43 2003-02-17 16:58:26 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.44 2003-02-17 17:03:01 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -65,6 +65,8 @@
 	$s_delete_bugnote_button = 'Verwijder aantekening';
 	$s_delete_bugnote_sure_msg = 'Weet u zeker dat u deze aantekening wilt verwijderen?';
 	$s_bug_relationships = 'Relaties';
+	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+	$s_empty_password_button = 'Use Empty Password';
 
 	$s_duplicate_of = 'duplicaat van %id';
 	$s_has_duplicate = 'heeft %id als duplicaat';
@@ -86,7 +88,10 @@
 	$s_make_private = 'Maak Privé';
 	$s_make_public = 'Maak Publiekelijk';
 
+	$s_create_new_project_link = 'Create New Project';
+
 	# bug_actiongroup_page.php : mass treatment
+	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
 	$s_close_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil sluiten?';
 	$s_delete_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil verwijderen?';
 	$s_move_bugs_conf_msg = 'Verplaats bugs naar';
@@ -142,8 +147,6 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] 	= 'FOUT: Geen bestand opgegeven.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FOUT: Het bestandstype is niet toegestaan';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] 		= 'FOUT: De folder bestaat niet.  Controleer de project instellingen.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FOUT: Deze categorie bestaat al.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] 	= 'FOUT: Deze versie bestaat al.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] 	= 'FOUT: Dit bestand bestaat al. Verwijder het bestand eerst.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FOUT: Dit project bestaat al.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] 		= 'FOUT: Een benodigd veld is niet ingevuld. Controleer a.u.b. uw invoer.';
@@ -152,22 +155,23 @@
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'FOUT: Uploaden van bestand mislukt.  Vraag uw beheerder het check script in de admin directory te draaien om de oorzaak op te sporen.';
 	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'FOUT: Uploaden van bestand mislukt.  Dit is waarschijnlijk omdat het bestand groter is dan toegestaan door deze PHP installatie.';
 	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'FOUT: Een verplichte parameter van deze pagina kon niet gevonden worden.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]='FOUT: Die gebruikersnaam is al in gebruik. Ga alstublieft terug om een nieuwe naam te kiezen.';
-	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='FOUT: Configuratie-optie niet gevonden.';
-	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='FOUT: Vertaling niet gevonden.';
+	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
+	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
+	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
 	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FOUT: Bugnote niet gevonden.';
 	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'FOUT: Project niet gevonden.';
 	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FOUT: Database veld niet gevonden.';
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FOUT: Kan geen verbinding maken met de FTP server';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FOUT: Er bestaat al een project met die naam.  Ga alstublieft terug om terug om een nieuwe naam te kiezen.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='FOUT: Ongeldige project naam opgegeven. Projectnamen kunnen niet leeg zijn.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+	$MANTIS_ERROR[ERROR_PROJECT_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]		= 'FOUT: Gebruiker niet gevonden.';
 	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'FOUT: De door uw browser opgeslagen login informatie is ongeldig. Misschien is uw account verwijderd?';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='FOUT: De voorkeuren van deze gebruiker konden niet gevonden worden.';
+	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
 	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]		= 'FOUT: Nieuwsitem niet gevonden.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='FOUT: Wachtwoord komt niet overeen met het controle-wachtwoord.';
+	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
 	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FOUT: Een array werd verwacht, maar een string werd ontvangen.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='FOUT: Een string werd verwacht, maar een array werd ontvangen.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
 	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]		= 'FOUT: Bug niet gevonden.';
 	$MANTIS_ERROR[ERROR_EMAIL_INVALID]		= 'FOUT: Ongeldige email.';
 	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'FOUT: Profiel niet gevonden.';
@@ -186,6 +190,12 @@
 	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'FOUT: Database verbinding mislukt.';
 	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'FOUT: Database query mislukt.';
 	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'FOUT: Het selecteren van de database is mislukt.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FOUT: Deze categorie bestaat al.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] 	= 'FOUT: Deze versie bestaat al.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 
 	$s_login_error = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 	$s_login_cookies_disabled = 'FOUT: Ofwel uw browser ondersteund geen cookies, of deze zijn uitgeschakeld.';
@@ -549,6 +559,10 @@
 	$s_versions = 'Versies';
 	$s_add_version_button = 'Voeg versie toe';
 	$s_edit_link = 'Aanpassen';
+	$s_actions = 'Actions';
+	$s_version = 'Versie/Fabrikant';
+	$s_timestamp = 'Timestamp';
+	$s_update = 'Update';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Voeg project toe';
@@ -584,8 +598,10 @@
 	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = 'Weet u zeker dat u dit account wilt verwijderen?';
 
-	# manage_prune.php
+	# manage_user_prune.php
 	$s_accounts_pruned_msg = 'Alle nooit gebruikte accounts ouder dan 1 week zijn verwijderd';
+	$s_prune_accounts_button = 'Prune';
+	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 	# manage_user_page.php
 	$s_edit_user_title = 'Aanpassen gebruiker';
@@ -635,7 +651,6 @@
 
 	# news_menu_page.php
 	$s_add_news_title = 'Toevoegen bericht';
-	$s_do_not_use = 'Geen gebruik maken van';
 	$s_post_to = 'Bij project';
 	$s_post_news_button = 'Post bericht';
 	$s_edit_or_delete_news_title = 'Aanpassen of verwijderen nieuws';
@@ -813,7 +828,7 @@
 	$s_update_custom_field_button = 'Pas veld aan';
 	$s_add_existing_custom_field = 'Voeg dit bestaande veld toe';
 	$s_edit_custom_field_title = 'Pas veld aan';
-	$s_custom_fields = 'Velden';
+	$s_custom_field = 'Field';
 	$s_custom_fields_setup = 'Velden';
 	$s_custom_field_name = 'Veldnaam';
 	$s_custom_field_project_count = 'Aantal projecten';

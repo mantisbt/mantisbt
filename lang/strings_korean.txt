@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.44 $
-	# $Author: jfitzell $
-	# $Date: 2003-02-09 00:51:04 $
+	# $Revision: 1.45 $
+	# $Author: jlatour $
+	# $Date: 2003-02-17 17:03:07 $
 	#
-	# $Id: strings_korean.txt,v 1.44 2003-02-09 00:51:04 jfitzell Exp $
+	# $Id: strings_korean.txt,v 1.45 2003-02-17 17:03:07 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -63,6 +63,8 @@
 	$s_delete_bugnote_button = '벌레노트 삭제';
 	$s_delete_bugnote_sure_msg = '벌레노트를 삭제하겠습니까?';
 	$s_bug_relationships = 'Relationships';
+	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
+	$s_empty_password_button = 'Use Empty Password';
 
 	$s_duplicate_of = 'duplicate of %id';
 	$s_has_duplicate = 'has duplicate %id';
@@ -84,7 +86,10 @@
 	$s_make_private = '보호하기';
 	$s_make_public = '공개하기';
 
+	$s_create_new_project_link = 'Create New Project';
+
 	# bug_actiongroup_page.php : mass treatment
+	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
 	$s_close_bugs_conf_msg = '이 벌레를 끝내시겠습니까 ?';
 	$s_delete_bugs_conf_msg = '이 벌레를 삭제하시겠습니까 ?';
 	$s_move_bugs_conf_msg = 'Move bugs to';
@@ -140,8 +145,6 @@
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = '오류: 파일이 없습니다.';
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = '오류: 허용되지 않는 파일 종류입니다.';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = '오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = '오류: 파일 중복. 먼저 파일을 삭제하세요.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = '오류: 같은 이름의 프로젝트가 이미 존재합니다.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = '오류: 필수 입력 필드 누락, 입력사항을 확인하세요.';
@@ -159,6 +162,7 @@
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
 	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+	$MANTIS_ERROR[ERROR_PROJECT_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
 	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
@@ -184,6 +188,12 @@
 	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
 	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
 	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '오류: 카테고리 중복.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '오류: 버전 중복.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 
 	$s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
 	$s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
@@ -547,6 +557,10 @@
 	$s_versions = '버전';
 	$s_add_version_button = '버전 추가';
 	$s_edit_link = '편집';
+	$s_actions = 'Actions';
+	$s_version = '버전/빌드번호';
+	$s_timestamp = 'Timestamp';
+	$s_update = 'Update';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = '프로젝트 추가';
@@ -582,8 +596,10 @@
 	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = '이 계정을 삭제하시겠습니까?';
 
-	# manage_prune.php
+	# manage_user_prune.php
 	$s_accounts_pruned_msg = '한번도 로그인하지 않은 모든 사용자는 1주일후에 삭제됩니다.';
+	$s_prune_accounts_button = 'Prune';
+	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 	# manage_user_page.php
 	$s_edit_user_title = '사용자 편집';
@@ -633,7 +649,6 @@
 
 	# news_menu_page.php
 	$s_add_news_title = '뉴스 추가';
-	$s_do_not_use = '사용금지 문자: ';
 	$s_post_to = '포스팅 대상';
 	$s_post_news_button = '뉴스 게시';
 	$s_edit_or_delete_news_title = '뉴스 편집 또는 삭제';
@@ -811,7 +826,7 @@
 	$s_update_custom_field_button = 'Update Custom Field';
 	$s_add_existing_custom_field = 'Add This Existing Custom Field';
 	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_fields = 'Fields';
+	$s_custom_field = 'Field';
 	$s_custom_fields_setup = 'Custom Fields';
 	$s_custom_field_name = 'Name';
 	$s_custom_field_project_count = 'Project Count';
