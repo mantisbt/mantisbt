@@ -118,7 +118,7 @@
 		$project_count = db_num_rows( $result2 );
 
 		if ( 0 == $project_count ) {
-			$t_where_clause = ' WHERE 1=1';
+			$t_where_clause = ' WHERE 1=0';
 		} else {
 			$t_where_clause = ' WHERE (';
 			for ( $i=0;$i<$project_count;$i++ ) {
@@ -137,7 +137,7 @@
 	}
 	# end project selection
 
-	if ( $c_user_id != 'any' ) {
+	if ( $f_reporter_id != 'any' ) {
 		$t_where_clause .= " AND reporter_id='$c_user_id'";
 	}
 

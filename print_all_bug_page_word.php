@@ -119,7 +119,7 @@
 		$project_count = db_num_rows( $result2 );
 
 		if ( 0 == $project_count ) {
-			$t_where_clause = ' WHERE 1=1';
+			$t_where_clause = ' WHERE 1=0';
 		} else {
 			$t_where_clause = ' WHERE (';
 			for ( $i=0;$i<$project_count;$i++ ) {
@@ -138,7 +138,7 @@
 	}
 	# end project selection
 
-	if ( $c_user_id != 'any' ) {
+	if ( $f_reporter_id != 'any' ) {
 		$t_where_clause .= " AND reporter_id='$c_user_id'";
 	}
 
@@ -420,7 +420,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<td class="print" colspan="4">&nbsp;</td>
 </tr>
 <?php
-$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
+$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 ?>

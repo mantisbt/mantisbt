@@ -198,7 +198,7 @@
 	$row_count = db_num_rows( $result );
 
 	# for export
-	$t_show_flag = gpc_get_bool( 'show_flag' );
+	$t_show_flag = gpc_get_int( 'show_flag', 0 );
 ?>
 <?php html_page_top1( ) ?>
 <?php html_head_end( ) ?>

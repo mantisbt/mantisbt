@@ -9,6 +9,8 @@ Mantis ChangeLog
  * Fix: Improved adherance to the XHTML standard.
  * Fix: Allow spaces and hyphens in login names.
  * Fix: A bug in the handling of the case where a user who does not have access to a private project, but has access level >= private_project_threshold.
+ * Fix: All bugs were displayed if "All Projects" is selected and user has access to no projects.
+ * Fix: Problem in filtering on reporter = 'any' in the print pages.
  * Fix #2992: Unable to attach files to bugs on Windows servers with magic quotes ON.
  * Fix #2999: Only administrators to can (to private) projects.
  * Fix #3027: History summary a little bit too wide in emails.
@@ -20,6 +22,7 @@ Mantis ChangeLog
  * Fix #3092: Problem changing printing prefs.
  * Fix #3108: No custom fields are shown in the details, if you are in "All Projects"
  * Fix #3109: Error when adding protected users.
+ * Fix #3110: "Print reports" preview in explorer is not possible unless you select "Display selected only" 
  * Fix #3111: Bug links in bugnotes do not contain the FQDN as they do in the full reference.
  * Fix #3115: manage_proj_cat_edit_page.php uses the wrong project id.
  * Fix #3120: Missing "Assign To" field on "Report Bug" screen.
