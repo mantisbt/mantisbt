@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.66 2004-09-25 13:34:25 prichards Exp $
+	# $Id: bug_view_page.php,v 1.67 2004-09-26 01:57:26 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,7 +46,7 @@
 <tr>
 
 	<!-- Title -->
-	<td class="form-title" colspan="4">
+	<td class="form-title" colspan="3">
 		<?php echo lang_get( 'viewing_bug_simple_details_title' ) ?>
 
 		<!-- Jump to Bugnotes -->
@@ -65,14 +65,16 @@
 	?>
 		<!-- prev/next links -->
 		<?php if( $t_bugslist = gpc_get_cookie( 'bugslist', false ) ) { ?>
-		<span class="small"> 			
+		<td class="center"><span class="small"> 			
 			<?php 
 				$t_bugslist = explode( ',', $t_bugslist );
 				$t_index = array_search( $f_bug_id, $t_bugslist );
-				if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '<<' ); 
-				if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '>>' ); 
+				if( false != $t_index ) {
+					if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '<<' ); 
+					if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '>>' ); 
+				}
 			?>
-		</span>
+		</span></td>
 		<?php } ?>
 	</td>
 
