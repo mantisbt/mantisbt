@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.57 $
+	# $Revision: 1.58 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 16:52:12 $
+	# $Date: 2004-02-26 18:12:08 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.57 2004-02-26 16:52:12 jlatour Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.58 2004-02-26 18:12:08 jlatour Exp $
 	###########################################################################
 ?>
 <?php

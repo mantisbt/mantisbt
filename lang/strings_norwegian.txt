@@ -10,11 +10,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 13:24:12 $
+	# $Date: 2004-02-26 18:12:08 $
 	#
-	# $Id: strings_norwegian.txt,v 1.60 2004-02-26 13:24:12 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.61 2004-02-26 18:12:08 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -58,22 +58,22 @@ $s_new_value = 'Ny verdi';
 $s_date_modified = 'Dato endret';
 $s_bugnote = 'Notat';
 $s_change = 'Endring';
-$s_bugnote_view_state = 'Bugnote View State';
-$s_bug_monitor = 'Bug Monitored';
-$s_bug_end_monitor = 'Bug End Monitor';
+$s_bugnote_view_state = 'Meldingstatus';
+$s_bug_monitor = 'Saken overvåkes';
+$s_bug_end_monitor = 'Avslutt overvåkning av saken';
 $s_announcement = 'Annonsering';
-$s_stays_on_top = 'Stays on Top';
+$s_stays_on_top = 'Forblir på toppen';
 $s_delete_bugnote_button = 'Slett notat';
 $s_delete_bugnote_sure_msg = 'Er du sikker på at du vil slette dette notatet?';
-$s_bug_relationships = 'Relationships';
-$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-$s_empty_password_button = 'Use Empty Password';
+$s_bug_relationships = 'Relasjoner';
+$s_empty_password_sure_msg = 'Brukeren har et blankt passord. Er du sikker på at du ønsker dette?';
+$s_empty_password_button = 'Brukt blankt passord';
 
-$s_duplicate_of = 'duplicate of %id';
-$s_has_duplicate = 'has duplicate %id';
-$s_related_to = 'related to %id';
-$s_dependant_on = 'dependant on %id';
-$s_blocks = 'blocks %id';
+$s_duplicate_of = 'duplikat av %id';
+$s_has_duplicate = 'har duplikat %id';
+$s_related_to = 'relatert til %id';
+$s_dependant_on = 'avhengig av %id';
+$s_blocks = 'blokkerer %id';
 
 $s_new_bug = 'Ny sak';
 $s_bugnote_added = 'Notat lagt til';
@@ -84,11 +84,11 @@ $s_description_updated = 'Beskrivelse oppdatert';
 $s_additional_information_updated = 'Tillegsinformasjon oppdatert';
 $s_steps_to_reproduce_updated = 'Reprodukjsonsbeskrivelse oppdatert';
 $s_file_added = 'Fil lagt til: ';
-$s_file_deleted = 'File Deleted';
+$s_file_deleted = 'Fil slettet';
 $s_bug_deleted = 'Sak slettet';
 
-$s_make_private = 'Make Private';
-$s_make_public = 'Make Public';
+$s_make_private = 'Gjør privat';
+$s_make_public = 'Gjør offentlig';
 
 $s_create_new_project_link = 'Lag nytt prosjekt';
 
@@ -112,39 +112,39 @@ $s_priority_group_bugs_button = 'Oppdater prioritet' ;
 $s_status_group_bugs_button = 'Oppdater status' ;
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-$s_graph_imp_category_title = 'Synthesis graphs by category';
-$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-$s_by_status_pct = 'by status percentage';
-$s_by_priority_pct = 'by priority percentage';
-$s_by_severity_pct = 'by severity percentage';
-$s_by_category_pct = 'by category percentage';
-$s_by_resolution_pct = 'by resolution percentage';
-$s_by_severity_mix = 'by severity and status';
-$s_by_priority_mix = 'by priority and status';
-$s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
+$s_graph_imp_status_title = 'graf eter status' ;
+$s_graph_imp_priority_title = 'graf etter prioritet' ;
+$s_graph_imp_severity_title = 'graf etter vanskelighetsgrad';
+$s_graph_imp_category_title = 'grad etter kategori';
+$s_graph_imp_resolution_title = 'graf etter løsning';
+$s_by_status_pct = 'etter status prosentdel';
+$s_by_priority_pct = 'etter prioritet prosentdel';
+$s_by_severity_pct = 'etter vanskelighetsgrad prosentdel';
+$s_by_category_pct = 'etter kategori prosentdel';
+$s_by_resolution_pct = 'etter løsning prosentdel';
+$s_by_severity_mix = 'etter vanskelighetsgrad og status';
+$s_by_priority_mix = 'etter prioritet og status';
+$s_by_resolution_mix = 'etter løsning og status';
+$s_synthesis_link = 'Syntese';
+$s_status_link = 'Per tilstand';
+$s_priority_link = 'Per prioritet';
+$s_severity_link = 'Per vanskelighetsgrad';
+$s_category_link = 'Per kategori';
+$s_resolution_link = 'Per løsning';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Display selected only';
+$s_hide_button = 'Vis kun valgte';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Choose fields to print';
-$s_printing_options_link = 'Printing Options';
+$s_printing_preferences_title = 'Velg felter for utskrift';
+$s_printing_options_link = 'Utskriftsalternativer';
 
 # word and excel export
-$s_bugnote_title = 'Bugnote handler' ;
-$s_bugnote_date = 'Date of bugnote';
-$s_bugnote_description = 'Bugnote description';
+$s_bugnote_title = 'Meldingshåndterer' ;
+$s_bugnote_date = 'Meldingsdato';
+$s_bugnote_description = 'Melding beskrivelse';
 
-$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'Vennligst bruk "TILBAKE" knappen i nettleseren din for å gå tilbake til forrige side. Du kan da korrigere valgene dine som forårsaket denne feilen.  Du kan også velge fra nedtrekksmenyen for å gå direkte til en ny seksjon.';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC]            = 'FEIL: Det oppstod en en feil. Du kan rapportere feilen til din administrator.';
@@ -154,59 +154,59 @@ $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEIL: Ingen fil spesifisert';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FEIL: Ulovlig filtype';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEIL: Mappen eksisterer ikke. Vennligst sjekk prosjektinnstillingene.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEIL: Filen eksisterer fra før. Vennligst slett filen først.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FEIL: Det eksisterer et prosjekt med et likt navn.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEIL: En påkrevd felt er ikke fylt ut. Vennligst sjekk feltene for manglende input.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEIL: Denne kontoen er beskyttet.  Du kan ikke bruke kontoen inntil beskyttelsen er fjernet.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'FEIL: Du har ikke tilgang.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'FEIL: Mislykket filopplasting.  Be din administrator om å kjøre admin_check scriptet for å feilsøke problemet.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'FEIL: Mislykket filopplasting.  Dette er sannsynlig forårsaket av at filstørrelsen var større enn det din PHP-installasjon tillater.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'FEIL: En påkrevd parameter til denne siden ble ikke funnet.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'FEIL: Brukernavnet er i bruk. Vennligst gå tilbake og velg et nytt brukernavn.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='FEIL: Finner ikke konfigurasjonsinnstillingen.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='FEIL: Finner ikke tekststreng.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FEIL: Finner ikke melding.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'FEIL: Finner ikke prosjektet.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEIL: Finner ikke database-feltet.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FEIL: Kan ikke koble til FTP-server.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEIL: Et prosjekt med det samme navnet eksisterer fra før. Vennligst gå tilbake og angi et nytt navn.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='FEIL: Ugyldig prosjektnavn. Prosjektnavn kan ikke være blankt.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'FEIL: Finner ikke bruker.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'FEIL: Innloggingsinformasjonen i nettleseren din er ugyldig. Kanskje kontoen din er slettet?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='FEIL: Finner ikke innstillingene for denne brukeren.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'FEIL: Finner ikke nyhetssak.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='FEIL: Passordet kan ikke verifiseres.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FEIL: Forventet en tabell mot mottok en streng.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='FEIL: Forventet en streng men mottok en tabell.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'FEIL: Finner ikke saken.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'FEIL: Ugyldig epost.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'FEIL: Finner ikke profilen.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FEIL: Ikke tillatt filtype.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'FEIL: Dette er en duplikatfil. Vennligst slett filen først.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEIL: Ugyldig bane til opplastingskatalog. Enten eksisterer ikke katalogen eller så er den ikke overskrivbar for webserveren';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FEIL: En sak kan ikke være et duplikat av seg selv.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'FEIL: Finner ikke skreddersydd felt';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'FEIL: Dette er et duplikat navn.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'FEIL: Minst ett prosjekt bruker fremdeles dette feltet.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FEIL: Ugyldig verdi for feltet';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'FEIL: Ugyldig definisjon på skreddersydd felt';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'FEIL: LDAP autentisering feilet';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'FEIL: Tilkobling til LDAP Server feilet';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'FEIL: Oppdatering av LDAP posten feilet.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'FEIL: LDAP brukerpost finnes ikke.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'FEIL: Denne handlingen kan ikke utføres på grunn av at saken er løst.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'FEIL: Feil ved tilkobling til database.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'FEIL: Database spørring feilet.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'FEIL: Database uttrekk feilet.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEIL: Kategorien eksisterer fra før.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'FEIL: Ingen handling for kopiering er spesifisert.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FEIL: Finner ikke kategorien.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEIL: Versjonen eksisterer fra før.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FEIL: FIner ikke versjonen.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FEIL: Ugyldig brukernavn.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Brukeren har ikke påkrevd tilgangsnivå';
 
 $s_login_error = 'FEIL: Kontoen kan ha blitt stengt eller brukernavnet/passordet du oppga var ikke riktig.';
-$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+$s_login_cookies_disabled = 'FEIL: Nettleseren din er ikke konfigurert til å støtte \'cookies\'.';
 
 # General Strings
 $s_go_back = 'Tilbake';
@@ -218,7 +218,7 @@ $s_logged_in_as = 'Logget inn som';
 $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'administrator';
-$s_myself = "Myself";
+$s_myself = "Meg selv";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:Leser,25:Raportør,40:Superbruker,55:Utvikler,70:Prosjektleder,90:Administrator';
@@ -230,7 +230,7 @@ $s_priority_enum_string           = '10:Ingen,20:Lav,30:Normal,40:Høy,50:Haster,
 $s_severity_enum_string           = '10:Ny funksjonalitet,20:Triviell,30:Tekst,40:Justering,50:Mindre,60:Alvorlig,70:Kræsj,80:Blokkering';
 $s_reproducibility_enum_string    = '10:Alltid,30:Noen ganger,50:Tilfeldig,70:Har ikke forsøkt,90:Kan ikke reprodusere,100:Ingen';
 $s_status_enum_string             = '10:Ny,20:Tilbakemelding,30:Godkjent,40:Bekreftet,50:Delegert,80:Løst,90:Lukket';
-$s_resolution_enum_string         = '10:Åpen,20:Fiksa,30:Åpnet på nytt,40:Kan ikke reprodusere,50:Kan ikke fikses,60:Kopi,70:Ikke feil,80:Utsatt,90:Vil ikke fikse';
+$s_resolution_enum_string         = '10:Åpen,20:Fikset,30:Åpnet på nytt,40:Kan ikke reprodusere,50:Kan ikke fikses,60:Kopi,70:Ikke feil,80:Utsatt,90:Vil ikke fikse';
 $s_projection_enum_string         = '10:Ingen,30:Kan omgås,50:Mindre fiks,70:Omfattende rekoding,90:Redesign';
 $s_eta_enum_string                = '10:Ikke angitt,20:< 1 dag,30:2-3 dager,40:< 1 uke,50:< 1 mnd,60:> 1 mnd';
 
@@ -247,19 +247,19 @@ $s_reset_request_msg = 'Det har kommet en forespørsel om å nullstille passordet 
 $s_account_name_msg = 'Kontonavnet ditt er';
 $s_news_password_msg = 'Her er ditt nye passord';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'Følgende sak krever din TILBAKEMELDING.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Følgende sak har blitt BEKREFTET.';
+$s_email_notification_title_for_status_bug_confirmed = 'Følgende sak har blitt BEKREFTET.';
+$s_email_notification_title_for_status_bug_assigned = 'Følgende sak har blitt DELEGERT.';
+$s_email_notification_title_for_status_bug_resolved = 'Følgende sak har blitt LØST.';
+$s_email_notification_title_for_status_bug_closed = 'Følgende sak har blitt LUKKET';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'Følgende sak har blitt RAPPORTERT.';
+$s_email_notification_title_for_action_bug_assigned = 'Følgende sak har blitt DELEGERT.';
+$s_email_notification_title_for_action_bug_reopened = 'Følgende sak har blitt GJENÅPNET.';
+$s_email_notification_title_for_action_bug_deleted = 'Følgende sak har blitt SLETTET.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'En MELDING har blitt lagt til saken.';
 
 $s_email_reporter = 'Rapportert av';
 $s_email_handler = 'Ansvarlig';
@@ -354,8 +354,8 @@ $s_profile_updated_msg = 'Profilen har blitt oppdatert ...';
 
 # account_update.php
 $s_account_updated_msg = 'Kontoen din har blitt oppdatert ...';
-$s_email_updated = 'Email address successfully updated';
-$s_password_updated = 'Password successfully updated';
+$s_email_updated = 'Epost adressen har blitt oppdatert';
+$s_password_updated = 'Passordet er oppdatert';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Saken har blitt delegert ...';
@@ -385,7 +385,7 @@ $s_file_upload_msg = 'Fil lastet opp OK';
 $s_upload_file = 'Laste opp fil';
 $s_select_file = 'Velg fil';
 $s_upload_file_button = 'Laste opp fil';
-$s_max_file_size = 'Max size';
+$s_max_file_size = 'Maks størrelse';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Saken har blitt gjenåpnet ...';
@@ -402,14 +402,14 @@ $s_resolve_add_bugnote_title = 'Legg til melding om feilårsak';
 $s_bugnote_add_resolve_button = 'Legg til feilmelding';
 
 # bug_reminder_page.php
-$s_from = 'From';
-$s_to = 'To';
-$s_on = 'On';
-$s_sent_you_this_reminder_about = 'sent you this reminder about';
-$s_bug_reminder = 'Send a reminder';
-$s_reminder_sent_to = 'Reminder sent to';
+$s_from = 'Fra';
+$s_to = 'Til';
+$s_on = 'Vedrørende';
+$s_sent_you_this_reminder_about = 'sendte deg denne påminnelsen om';
+$s_bug_reminder = 'Send en påminnelse';
+$s_reminder_sent_to = 'Påminnelse sendt til';
 $s_bug_send_button = 'Send';
-$s_reminder = 'Reminder';
+$s_reminder = 'Påminnelse';
 
 # bug_update.php
 $s_bug_updated_msg = 'Saken har blitt oppdatert ...';
@@ -795,9 +795,9 @@ $s_by_reporter ='Per reporter';
 $s_reporter_by_resolution = 'Reporter By Resolution';
 $s_reporter_effectiveness = 'Reporter Effectiveness';
 $s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
+$s_percentage_fixed = '% løst';
+$s_percentage_errors = '% feil';
+$s_errors = 'Feil';
 $s_total = 'Total';
 $s_time_stats = 'Tidsstatistikk for løste saker (dager)';
 $s_longest_open_bug = 'Lengste åpne sak';
@@ -831,10 +831,10 @@ $s_viewing_bug_advanced_details_title = 'Vis avanserte detaljer for sak';
 $s_product_build = 'Underversjon';
 $s_system_profile = 'Systembeskrivelse';
 $s_update_bug_button = 'Oppdater sak';
-$s_bug_assign_to_button = 'Assign To:';
+$s_bug_assign_to_button = 'Deleger til:';
 $s_reopen_bug_button = 'Gjenåpne sak';
 $s_attached_files = 'Filvedlegg';
-$s_publish = 'Publiser';
+$s_publish = 'Publisere';
 $s_cached = 'Midlertidig lagret';
 
 # view_bug_inc.php
@@ -844,9 +844,9 @@ $s_view_advanced_link = 'Vis Avansert';
 $s_viewing_bug_simple_details_title = 'Oversikt over saker - enkel';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
-$s_monitoring_user_list = 'User List';
+$s_no_users_monitoring_bug = 'Ingen brukere overvåker denne saken.';
+$s_users_monitoring_bug = 'Brukere som overvåker denne saken';
+$s_monitoring_user_list = 'Oversikt over brukere';
 
 # custom field strings
 $s_add_custom_field_button = 'Nytt brukderdefinert felt';
