@@ -47,13 +47,8 @@
 <tr valign="top">
 	<td bgcolor="<?php echo $status_color ?>">
 <?php
-		switch ( $g_file_upload_method ) {
-			case DISK:	PRINT "<a href=\"$v_diskfile\">$v_title</a> ($v_filesize bytes)";
-						break;
-			case DATABASE:
-						PRINT "<a href=\"$g_file_download?f_id=$v_id&f_type=doc\">$v_title</a> ($v_filesize bytes)";
-						break;
-		}
+		PRINT "<a href=\"$g_file_download?f_id=$v_id&f_type=doc\">$v_title</a> ($v_filesize bytes)";
+
 		if ( access_level_check_greater_or_equal( MANAGER ) ) {
 			print_bracket_link( $g_proj_doc_edit_page."?f_id=".$v_id, "edit" );
 		}

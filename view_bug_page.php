@@ -203,18 +203,10 @@
 		for ($i=0;$i<$num_files;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v2" );
-			$v2_diskfile = str_replace( $DOCUMENT_ROOT, "", $v2_diskfile );
-			$v2_diskfile = dirname( $v2_diskfile )."/".rawurlencode( $v2_filename );
 			$v2_filesize = number_format( $v2_filesize );
 			$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
 
-			switch ( $g_file_upload_method ) {
-				case DISK:	PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
-							break;
-				case DATABASE:
-							PRINT "<a href=\"$g_file_download?f_id=$v2_id&f_type=bug\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
-							break;
-			}
+			PRINT "<a href=\"$g_file_download?f_id=$v2_id&f_type=bug\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
 
 			if ( access_level_check_greater_or_equal( DEVELOPER ) ) {
 				PRINT " [<a class=\"small\" href=\"$g_bug_file_delete?f_id=$f_id&f_file_id=$v2_id\">$s_delete_link</a>]";

@@ -13,6 +13,8 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	#check_access( DEVELOPER );
 
+	# we handle the case where the file is attached to a bug
+	# or attached to a project as a project doc.
 	switch ( $f_type ) {
 		case "bug":	$query = "SELECT *
 							FROM $g_mantis_bug_file_table
@@ -23,7 +25,6 @@
 							WHERE id='$f_id'";
 					break;
 	}
-
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );
@@ -34,5 +35,9 @@
 	header( "Content-Description: Download Data" );
 
 	# dump file content to the connection.
-	echo $v_content;
+	if ( DISK == $g_file_upload_method ) {
+		readfile( $v_diskfile );
+	} else {
+		echo $v_content;
+	}
 ?>
