@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.89 2004-07-25 16:39:14 prichards Exp $
+	# $Id: email_api.php,v 1.90 2004-07-29 10:51:30 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -781,7 +781,7 @@
 		$t_message = $t_email_separator1."\n";
 
 		if ( isset( $p_visible_bug_data['email_bug_view_url'] ) ) {
-			$t_message .= $p_visible_bug_data['email_bug_view_url'] . "\n";
+			$t_message .= '<' . $p_visible_bug_data['email_bug_view_url'] . "> \n";
 			$t_message .= $t_email_separator1."\n";
 		}
 
