@@ -7,11 +7,11 @@
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
 	# -------------------------------------------------
-	# $Revision: 1.31 $
-	# $Author: jctrosset $
-	# $Date: 2002-07-17 15:53:51 $
+	# $Revision: 1.32 $
+	# $Author: beerfrick $
+	# $Date: 2002-08-14 19:35:18 $
 	#
-	# $Id: strings_spanish.txt,v 1.31 2002-07-17 15:53:51 jctrosset Exp $
+	# $Id: strings_spanish.txt,v 1.32 2002-08-14 19:35:18 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -36,19 +36,19 @@
 	$s_print = 'Imprimir';
 	$s_jump = 'Saltar a Bug';
 	$s_copy_users = 'Copiar Usuarios';
-	$s_copy_categories_from = 'Copy Categories From';
-	$s_copy_categories_to = 'Copy Categories To';
+	$s_copy_categories_from = 'Copiar Categorias Desde';
+	$s_copy_categories_to = 'Copiar Categorias Hacia';
 	$s_bug_history = 'Bug History';
-	$s_field = 'Field';
-	$s_old_value = 'Old Value';
-	$s_new_value = 'New Value';
+	$s_field = 'Campo';
+	$s_old_value = 'Valor Anterior';
+	$s_new_value = 'Nuevo Valor';
 	$s_date_modified = 'Date Modified';
 	$s_bugnote = 'Bugnote';
 	$s_change = 'Change';
 	$s_bugnote_view_state = 'Bugnote View State';
 	$s_bug_monitor = 'Bug Monitored';
 	$s_bug_end_monitor = 'Bug End Monitor';
-	$s_announcement = 'Announcement';
+	$s_announcement = 'Anuncio';
 	$s_stays_on_top = 'Stays on Top';
 	$s_delete_bugnote_button = 'Bugnote Delete';
 	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bug?';
