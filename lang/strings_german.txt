@@ -10,11 +10,11 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.46 $
+	# $Revision: 1.47 $
 	# $Author: jfitzell $
-	# $Date: 2002-12-05 09:07:44 $
+	# $Date: 2002-12-06 18:24:23 $
 	#
-	# $Id: strings_german.txt,v 1.46 2002-12-05 09:07:44 jfitzell Exp $
+	# $Id: strings_german.txt,v 1.47 2002-12-06 18:24:23 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -755,8 +755,8 @@
 	$s_update_custom_field_button = 'Benutzerdefiniertes Feld aktuallisieren';
 	$s_add_existing_custom_field = 'dieses bestehende benutzerdefinierte Feld hinzuf&uuml;gen';
 	$s_edit_custom_field_title = 'Benutzerdefiniertes Feld editieren';
-	$s_custom_fields = 'Felder:';
-	$s_custom_fields_setup = 'Benutzerdefinierte Felder:';
+	$s_custom_fields = 'Felder';
+	$s_custom_fields_setup = 'Benutzerdefinierte Felder';
 	$s_custom_field_caption = 'Name';
 	$s_custom_field_type = 'Typ';
 	$s_custom_field_possible_values = 'm&ouml;gliche Werte';
