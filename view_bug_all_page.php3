@@ -188,8 +188,6 @@
 			$query = $query." LIMIT $f_offset, $f_limit_view";
 		}
 
-		echo $query;
-
 		### perform query
 	    $result = db_mysql_query( $query );
 		$row_count = mysql_num_rows( $result );
