@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.39 2005-01-29 18:31:45 prichards Exp $
+	# $Id: database_api.php,v 1.40 2005-01-29 18:32:51 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -104,7 +104,7 @@
 		$t_elapsed = number_format( microtime_float() - $t_start, 4);
 		array_push ( $g_queries_array, array( $p_query, $t_elapsed ) );
 
-		if ( FALSE === $t_result ) {
+		if ( !$t_result ) {
 			db_error($p_query);
 			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 			return false;
