@@ -299,7 +299,8 @@
 				PRINT "<td class=\"menu\">";
 				PRINT "<a href=\"$g_main_page\">$s_main_link</a> | ";
 				PRINT "<a href=\"$g_view_all_bug_page\">$s_view_bugs_link</a> | ";
-				if ( access_level_check_greater_or_equal( REPORTER ) ) {
+				$t_project_status = get_project_field( $g_project_cookie_val, "status" );
+				if (( access_level_check_greater_or_equal( REPORTER ) )&&( 70 != $t_project_status )) {
 					if ( "0000000" != $g_project_cookie_val ) {
 						$t_report_url = get_report_redirect_url( 1 );
 						PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";

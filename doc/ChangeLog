@@ -3,6 +3,11 @@ Mantis
  * Added capability to monitor bugs even when not reporter or handler
  * Added basic private bug functionality
 
+05.19.2002  -   0.17.3
+
+ * Fixed problem with CSV not downloading.
+ * Removed view_csv_export_inc.php (unused).
+
 05.12.2002  -   0.17.2
 
  * Fixed error in set_project where setting a project would result in a loop.

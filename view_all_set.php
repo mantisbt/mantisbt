@@ -9,6 +9,11 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( isset( $f_csv ) ) {
+		print_header_redirect( $g_view_all_bug_page."?f_csv=1" );
+		die;
+	}
+
 	if ( !isset( $f_type ) ) {
 		print_header_redirect( $g_view_all_bug_page );
 	}
