@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.39 2004-10-05 21:12:41 prichards Exp $
+	# $Id: bug_report.php,v 1.40 2005-03-01 23:14:16 jlatour Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -65,7 +65,11 @@
 
 	# if a profile was selected then let's use that information
 	if ( 0 != $t_bug_data->profile_id ) {
-		$row = user_get_profile_row( $t_bug_data->reporter_id, $t_bug_data->profile_id );
+		if ( profile_is_global( $t_bug_data->profile_id ) ) {
+			$row = user_get_profile_row( ALL_USERS, $t_bug_data->profile_id );
+		} else {
+			$row = user_get_profile_row( $t_bug_data->reporter_id, $t_bug_data->profile_id );
+		}
 
 		if ( is_blank( $t_bug_data->platform ) ) {
 			$t_bug_data->platform = $row['platform'];
