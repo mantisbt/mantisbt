@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.59 2003-05-23 11:52:27 vboctor Exp $
+	# $Id: user_api.php,v 1.60 2003-08-25 22:24:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -478,7 +478,7 @@
 			$query = "SELECT DISTINCT( id )
 					  FROM $t_project_table
 					  WHERE enabled=1
-					  ORDER BY id";
+					  ORDER BY name";
 		} else {
 			$query = "SELECT DISTINCT( p.id )
 					  FROM $t_project_table p
@@ -488,7 +488,7 @@
 					    OR (p.view_state='$t_private'
 						    AND
 					        u.user_id='$c_user_id')
-					  ORDER BY p.id";
+					  ORDER BY p.name";
 		}
 
 		$result = db_query( $query );
