@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.26 2003-02-18 01:41:50 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.27 2003-02-20 16:48:22 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -329,8 +329,11 @@
 
 		$result = db_query( $query );
 
+		# The cookie was invalid. Clear the cookie (to allow people to log in again)
+		# and give them an Access Denied message.
 		if ( db_num_rows( $result ) < 1 ) {
-			trigger_error( ERROR_AUTH_INVALID_COOKIE, ERROR );
+			auth_clear_cookies();
+			access_denied();
 			return false;
 		}
 
