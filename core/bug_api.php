@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.29 2003-01-12 05:32:20 jfitzell Exp $
+	# $Id: bug_api.php,v 1.30 2003-01-12 05:42:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -173,19 +173,10 @@
 	# check to see if bug exists by id
 	# return true if it does, false otherwise
 	function bug_exists( $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
-		$t_bug_table = config_get( 'mantis_bug_table' );
-
-		$query = "SELECT COUNT(*)
-				  FROM $t_bug_table
-				  WHERE id='$c_bug_id'";
-		$result = db_query( $query );
-
-		if ( db_result( $result ) > 0 ) {
-			return true;
-		} else {
+		if ( false == bug_cache_row( $p_bug_id, false ) ) {
 			return false;
+		} else {
+			return true;
 		}
 	}
 
