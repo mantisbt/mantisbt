@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.27 2004-08-01 22:24:59 prichards Exp $
+	# $Id: constant_inc.php,v 1.28 2004-08-14 15:26:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -255,6 +255,14 @@
 	define( 'ERROR_RELATIONSHIP_NOT_FOUND', 1802 );
 	define( 'ERROR_RELATIONSHIP_SAME_BUG', 1803 );
 	# MASC RELATIONSHIP
+
+	# ERROR_LOST_PASSWORD_*
+	define( 'ERROR_LOST_PASSWORD_NOT_ENABLED', 1900 );
+	define( 'ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID', 1901 );
+	define( 'ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED', 1902 );
+	define( 'ERROR_LOST_PASSWORD_NOT_MATCHING_DATA', 1903 );
+	define( 'ERROR_SIGNUP_NOT_MATCHING_CAPTCHA', 1904 );
+	define( 'ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED', 1905 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);

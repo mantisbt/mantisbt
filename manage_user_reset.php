@@ -6,42 +6,41 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_reset.php,v 1.28 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_user_reset.php,v 1.29 2004-08-14 15:26:20 thraxisp Exp $
 	# --------------------------------------------------------
-?>
-<?php require_once( 'core.php' ) ?>
-<?php
+
+	require_once( 'core.php' );
+
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
-	
+
 	$f_user_id = gpc_get_int( 'user_id' );
-
 	$t_result = user_reset_password( $f_user_id );
-
 	$t_redirect_url = 'manage_user_page.php';
-?>
-<?php html_page_top1() ?>
-<?php
+
+	html_page_top1();
 	if ( $t_result ) {
 		html_meta_redirect( $t_redirect_url );
 	}
-?>
-<?php html_page_top2() ?>
+	html_page_top2();
 
-<br />
-<div align="center">
-<?php
-	if ( false == $t_result ) {				# PROTECTED
-		echo lang_get( 'account_reset_protected_msg' ).'<br />';
-	} else {					# SUCCESS
+	echo "<br />";
+	echo "<div align=\"center\">";
+
+	if ( false == $t_result ) {
+		# PROTECTED
+		echo lang_get( 'account_reset_protected_msg' ) . '<br />';
+	} else {
+		# SUCCESS
 		if ( ON == config_get( 'send_reset_password' ) ) {
-			echo lang_get( 'account_reset_msg' ).'<br />';
+			# send the new random password via email
+			echo lang_get( 'account_reset_msg' ) . '<br />';
 		} else {
-			echo lang_get( 'account_reset_msg2' ).'<br />';
+			# email notification disabled, then set the password to blank
+			echo lang_get( 'account_reset_msg2' ) . '<br />';
 		}
 	}
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	echo "</div>";
+	html_page_bottom1( __FILE__ );
 ?>
-</div>
-
-<?php html_page_bottom1( __FILE__ ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.75 2004-07-30 21:13:31 thraxisp Exp $
+	# $Id: user_api.php,v 1.76 2004-08-14 15:26:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -273,7 +273,8 @@
 
 		# Send notification email
 		if ( !is_blank( $p_email ) ) {
-			email_signup( $t_user_id, $p_password );
+			$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
+			email_signup( $t_user_id, $p_password, $t_confirm_hash );
 		}
 
 		return $t_cookie_string;
@@ -654,6 +655,27 @@
 		return $row;
 	}
 
+	# --------------------
+	# Get failed login attempts
+	function user_is_login_request_allowed( $p_user_id ) {
+		$t_max_failed_login_count = config_get( 'max_failed_login_count' );
+		$t_failed_login_count = user_get_field( $p_user_id, 'failed_login_count' );
+		return ( $t_failed_login_count < $t_max_failed_login_count 
+							|| OFF == $max_failed_login_count);
+	}
+
+	# --------------------
+	# Get 'lost password' in progress attempts
+	function user_is_lost_password_request_allowed( $p_user_id ) {
+		if( OFF == config_get( 'lost_password_feature' ) ) {
+			return false;
+		}
+		$t_max_lost_password_in_progress_count = config_get( 'max_lost_password_in_progress_count' );
+		$t_lost_password_in_progress_count = user_get_field( $p_user_id, 'lost_password_in_progress_count' );
+		return ( $t_lost_password_in_progress_count < $t_max_lost_password_in_progress_count 
+							|| OFF == $t_max_lost_password_in_progress_count );
+	}
+
 	#===================================
 	# Data Modification
 	#===================================
@@ -694,6 +716,70 @@
 		user_clear_cache( $p_user_id );
 
 		#db_query() errors on failure so:
+		return true;
+	}
+
+	# --------------------
+	# Reset to zero the failed login attempts
+	function user_reset_failed_login_count_to_zero( $p_user_id ) {
+		$c_user_id = db_prepare_int( $p_user_id );
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$query = "UPDATE $t_user_table
+				SET failed_login_count=0
+				WHERE id='$c_user_id'";
+		db_query( $query );
+
+		user_clear_cache( $p_user_id );
+
+		return true;
+	}
+
+	# --------------------
+	# Increment the failed login count by 1
+	function user_increment_failed_login_count( $p_user_id ) {
+		$c_user_id = db_prepare_int( $p_user_id );
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$query = "UPDATE $t_user_table
+				SET failed_login_count=failed_login_count+1
+				WHERE id='$c_user_id'";
+		db_query( $query );
+
+		user_clear_cache( $p_user_id );
+
+		return true;
+	}
+
+	# --------------------
+	# Reset to zero the 'lost password' in progress attempts
+	function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
+		$c_user_id = db_prepare_int( $p_user_id );
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$query = "UPDATE $t_user_table
+				SET lost_password_in_progress_count=0
+				WHERE id='$c_user_id'";
+		db_query( $query );
+
+		user_clear_cache( $p_user_id );
+
+		return true;
+	}
+
+	# --------------------
+	# Increment the failed login count by 1
+	function user_increment_lost_password_in_progress_count( $p_user_id ) {
+		$c_user_id = db_prepare_int( $p_user_id );
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$query = "UPDATE $t_user_table
+				SET lost_password_in_progress_count=lost_password_in_progress_count+1
+				WHERE id='$c_user_id'";
+		db_query( $query );
+
+		user_clear_cache( $p_user_id );
+
 		return true;
 	}
 
@@ -805,12 +891,15 @@
 
 			# Send notification email
 			if ( $p_send_email ) {
-				email_reset( $p_user_id, $t_password );
+				$t_confirm_hash = auth_generate_confirm_hash( $p_user_id );
+				email_send_confirm_hash_url( $p_user_id, $t_confirm_hash );
 			}
-		} else { # use blank password, no emailing
+		} else {
+			# use blank password, no emailing
 			$t_password = auth_process_plain_password( '' );
-
 			user_set_field( $p_user_id, 'password', $t_password );
+			# reset the failed login count because in this mode there is no emailing
+			user_reset_failed_login_count_to_zero( $p_user_id );
 		}
 
 		return true;

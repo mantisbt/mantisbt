@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.58 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: project_api.php,v 1.59 2004-08-14 15:26:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -420,7 +420,9 @@
 	# For each user we have 'id', 'username', and 'access_level' (overall access level)
 	# If the second parameter is given, return only users with an access level
 	#  higher than the given value.
-	function project_get_all_user_rows( $p_project_id, $p_access_level=ANYBODY ) {
+	# if the first parameter is given as 'ALL_PROJECTS', return the global access level (without
+	# any reference to the specific project
+	function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 
 		# Optimization when access_level is NOBODY
@@ -435,12 +437,14 @@
 
 		$t_access_level = $p_access_level;
 
-		if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
-			# @@@ we need to get this logic out somewhere else.
-			#   I was getting access_min from the project but apparently we got
-			#   rid of that in 0.17.2.  The user docs claim developers and higher
-			#   get into private projects but the code seems to only allow administrators in
-			$t_access_level = max( $t_access_level, config_get( 'private_project_threshold' ) );
+		if( $c_project_id != ALL_PROJECTS ) {
+			if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
+				# @@@ we need to get this logic out somewhere else.
+				#   I was getting access_min from the project but apparently we got
+				#   rid of that in 0.17.2.  The user docs claim developers and higher
+				#   get into private projects but the code seems to only allow administrators in
+				$t_access_level = max( $t_access_level, config_get( 'private_project_threshold' ) );
+			}
 		}
 
 		$t_access_clause = '';
@@ -454,7 +458,7 @@
 		$query = "SELECT id, username, realname, access_level
 					FROM $t_user_table
 					WHERE enabled = $t_on
-					  $t_access_clause
+					$t_access_clause
 					ORDER BY realname, username";
 
 		$result = db_query( $query );
@@ -464,25 +468,27 @@
 			$t_users[$row['id']] = $row;
 		}
 
-		# Get the project overrides
-		$query = "SELECT u.id, u.username, u.realname, l.access_level
-					FROM $t_project_user_list_table l, $t_user_table u
-					WHERE l.user_id = u.id
-					  AND u.enabled = $t_on
-					  AND l.project_id = $c_project_id
-					ORDER BY u.realname, u.username";
+		if( $c_project_id != ALL_PROJECTS ) {
+			# Get the project overrides
+			$query = "SELECT u.id, u.username, u.realname, l.access_level
+						FROM $t_project_user_list_table l, $t_user_table u
+						WHERE l.user_id = u.id
+						  AND u.enabled = $t_on
+						  AND l.project_id = $c_project_id
+						ORDER BY u.realname, u.username";
 
-		$result = db_query( $query );
-		$t_row_count = db_num_rows( $result );
-		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
-			$row = db_fetch_array( $result );
+			$result = db_query( $query );
+			$t_row_count = db_num_rows( $result );
+			for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+				$row = db_fetch_array( $result );
 
-			if ( $row['access_level'] >= $p_access_level ) {
-				$t_users[$row['id']] = $row;
-			} else {
-				# If user's overridden level is lower than required, so remove
-				#  them from the list if they were previously there
-				unset( $t_users[$row['id']] );
+				if ( $row['access_level'] >= $p_access_level ) {
+					$t_users[$row['id']] = $row;
+				} else {
+					# If user's overridden level is lower than required, so remove
+					#  them from the list if they were previously there
+					unset( $t_users[$row['id']] );
+				}
 			}
 		}
 

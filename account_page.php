@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.46 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: account_page.php,v 1.47 2004-08-14 15:26:19 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -120,7 +120,7 @@
 	</tr>
 
 	<!-- Password confirmation -->
-	<tr class="row-2">
+	<tr class="row-1">
 		<td class="category">
 			<?php echo lang_get( 'confirm_password' ) ?>
 		</td>
@@ -146,7 +146,7 @@
 <?php } else { ?> <!-- Without LDAP Email -->
 
 	<!-- Email -->
-	<tr class="row-1">
+	<tr class="row-2">
 		<td class="category">
 			<?php echo lang_get( 'email' ) ?>
 		</td>

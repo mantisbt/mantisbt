@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.28 2004-07-10 15:40:21 vboctor Exp $
+	# $Id: lang_api.php,v 1.29 2004-08-14 15:26:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -66,7 +66,7 @@
 			$t_lang = user_pref_get_language( auth_get_current_user_id() );
 		}
 
-		# Otherwise fall back to defaule
+		# Otherwise fall back to default
 		if ( false === $t_lang ) {
 			$t_lang = config_get( 'default_language' );
 		}
@@ -173,7 +173,7 @@
 	function lang_exists( $p_string, $p_lang ) {
 		global $g_lang_strings;
 
-		return ( isset( $g_lang_strings[ $p_lang ] ) 
+		return ( isset( $g_lang_strings[ $p_lang ] )
 			&& isset( $g_lang_strings[ $p_lang ][ $p_string ] ) );
 	}
 

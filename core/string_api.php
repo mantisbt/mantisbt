@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.57 2004-08-01 11:04:27 vboctor Exp $
+	# $Id: string_api.php,v 1.58 2004-08-14 15:26:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -419,6 +419,13 @@
 	#  account for the user preference and site override
 	function string_get_bug_report_page( $p_user_id = null ) {
 		return string_get_bug_page( 'report', $p_user_id );
+	}
+
+	# --------------------
+	# return the complete url link to checkin using the confirm_hash
+	function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
+		$t_path = config_get( 'path' );
+		return $t_path . "verify.php?id=" . string_url( $p_user_id ) . "&confirm_hash=" . string_url( $p_confirm_hash );
 	}
 
 	# --------------------

@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.75 $
-	# $Author: jlatour $
-	# $Date: 2004-08-10 15:03:13 $
+	# $Revision: 1.76 $
+	# $Author: thraxisp $
+	# $Date: 2004-08-14 15:26:22 $
 	#
-	# $Id: strings_italian.txt,v 1.75 2004-08-10 15:03:13 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.76 2004-08-14 15:26:22 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -68,14 +68,14 @@ $s_stays_on_top = "Rimani in Primo Piano";
 $s_delete_bugnote_button = "Elimina la Nota alla anomalia";
 $s_delete_bugnote_sure_msg = "Sei sicuro di voler eliminare questa Nota?";
 $s_bug_relationships = "Relazioni";
-$s_empty_password_sure_msg = "L'utente ha una password vuota.  Sei sicuro sia quello che vuoi?";
-$s_empty_password_button = "Usa una Password Vuota";
+$s_empty_password_sure_msg = "L'utente ha una password vuota. Sicuro di procedere?";
+$s_empty_password_button = "Conferma password vuota";
 
-$s_duplicate_of = "duplicato del";
-$s_has_duplicate = "duplica il";
-$s_related_to = "relativo al";
-$s_dependant_on = "depende dal";
-$s_blocks = "blocca il";
+$s_duplicate_of = "duplicato di";
+$s_has_duplicate = "é duplicata da";
+$s_related_to = "relativa a";
+$s_dependant_on = "padre di";
+$s_blocks = "figlia di";
 
 $s_new_bug = "Nuova anomalia";
 $s_bugnote_added = "Nota aggiunta";
@@ -220,13 +220,19 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied:
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Relationship not found.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = "Il codice di convalida inserito non é corretto. Si prega di riprovare.";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = "Funzione non disponibile.";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = "E' possibile eseguire la procedura di recupero password solo per gli account che hanno indicato un indirizzo e-mail";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = "I dati inseriti e/o inviati non corrispondono ad alcun utente registrato.";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = "Codice di convalida (hash code) non valido.";
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = "Raggiunto il numero massimo di richieste di reset pendenti.";
 
-$s_login_error = "ERRORE: Il tuo account potrebbe essere stato disabilitato oppure puoi aver immesso un nome e/o una password errata.";
-$s_login_cookies_disabled = "ERRORE: Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
+$s_login_error = "L'account potrebbe essere stato disabilitato o bloccato (per troppi tentativi falliti di accesso) oppure potreste aver immesso un nome e/o una password errata.";
+$s_login_cookies_disabled = "Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
 
 # General Strings
 $s_go_back = "Indietro";
@@ -255,17 +261,18 @@ $s_projection_enum_string         = "10:nessuno,30:ritocco,50:fix minore,70:cons
 $s_eta_enum_string                = "10:nessuno,20:meno di un giorno,30:2-3 giorni,40:meno di una settimana,50:meno di un mese,60:più di un mese";
 
 # Email Strings
-$s_new_account_subject = "Il tuo nuovo account utente";
-$s_new_account_greeting = "Benvenuto nel software di gestione problematiche e progetti. Queste sono le informazioni che ti servono per utilizzare il servizio\n\n";
-$s_new_account_url = "Puoi entrare nel sito da: ";
-$s_new_account_username = "Nome Utente: ";
-$s_new_account_password = "Password: ";
-$s_new_account_message = "Dopo il login si prega di cambiare la password. Da notare che la password è salvata in maniera cifrata e non può essere recuperata nemmeno dallo staff. Nel caso la si dimentichi, è necessario resettarla.\n\n";
-$s_new_account_do_not_reply = "Non rispondere a questo messaggio.\n";
+$s_new_account_subject = "Nuovo account registrato";
+$s_new_account_greeting = "Benvenuto e grazie per esserti registrato. E' stato creato con successo il tuo account con il nome utente '";
+$s_new_account_greeting2 = "'. Per completare la registrazione, visita il seguente indirizzo e imposta la tua password di accesso:";
+$s_new_account_username = "Nome utente: ";
+$s_new_account_message = "Se la richiesta di iscrizione non é stata fatta da te, ignora semplicemente questo messaggio.\n\n";
+$s_new_account_do_not_reply = "NON RISPONDERE A QUESTO MESSAGGIO\n";
+$s_new_account_email = "E-mail: ";
+$s_new_account_IP = "Indirizzo IP: ";
+$s_new_account_signup_msg = "E' stato creato il seguente account:";
 
-$s_reset_request_msg = "È stato richiesto un reset della tua password".
-$s_account_name_msg = "Il Nome del tuo Account è";
-$s_news_password_msg = "La tua nuova Password";
+$s_reset_request_msg = "Qualcuno (probabilmente te) ha richiesto di cambiare la password di accesso attraverso una procedura di verifica via email. Se questa richiesta non é stata fatta da te, ignora semplicemente questo messaggio.\n\nSe invece hai effettivamente richiesto tu la verifica, visita l'indirizzo di seguito riportato e potrai cambiare la tua password:";
+$s_reset_request_in_progress_msg = "Se hai fornito il corretto nome utente e indirizzo email del tuo account, ti verrà inviata una email all'indirizzo del tuo account con un codice di convalida. Quando riceverai questa email, segui le istruzioni in essa riportate.";
 
 $s_email_notification_title_for_status_bug_feedback = "La seguente anomalia richiede il tuo FEEDBACK.";
 $s_email_notification_title_for_status_bug_acknowledged = "La seguente anomalia é stata RICONOSCIUTA.";
@@ -329,7 +336,7 @@ $s_update_user_button = "Aggiorna Account";
 # account_prefs_page.php
 $s_default_account_preferences_title = "Preferenze Utente di Default";
 $s_default_project = "Progetto di Default";
-$s_advanced_report = "Modulo dettagliato";
+$s_advanced_report = "Report dettagliato";
 $s_advanced_view = "Scheda dettagliata";
 $s_advanced_update = "Aggiornamento dettagliato";
 $s_refresh_delay = "Ritardo di Refresh";
@@ -390,7 +397,7 @@ $s_profile_updated_msg = "Profilo Aggiornato...";
 # account_update.php
 $s_account_updated_msg = "Il tuo Account è stato aggiornato con successo...";
 $s_email_updated = "L'indirizzo email è stato aggiornato con successo";
-$s_realname_duplicated = 'Real name is used by another user';
+$s_realname_duplicated = 'Nominativo già in uso da un altro utente';
 $s_realname_updated = 'Nominativo aggiornato con successo';
 $s_password_updated = "La password è stata aggiornata correttamente";
 
@@ -533,6 +540,7 @@ $s_save_login = "Salva Login";
 $s_choose_project = "Seleziona Progetto";
 $s_login_button = "Login";
 $s_signup_link = "Registrati come Nuovo Utente";
+$s_lost_password_link = 'Password dimenticata?';
 
 # login_select_proj_page.php
 $s_select_project_button = "Seleziona Progetto";
@@ -671,13 +679,13 @@ $s_confirm_account_pruning = "Sei sicuro di voler eliminare i vecchi account che
 $s_edit_user_title = "Elimina Utente";
 $s_reset_password_button = "Resetta Password";
 $s_delete_user_button = "Elimina Utente";
-$s_reset_password_msg = "Resettandola, la Password verrà rigenerata a caso.";
-$s_reset_password_msg2 = "Resettando la Password se ne imposterà il valore a 'nullo'.";
+$s_reset_password_msg = "Resettando la password, verrà inviata all'utente una email di verifica con il codice di convalida.";
+$s_reset_password_msg2 = "Resettando la password, questa verrà impostata come vuota.";
 $s_show_all_users = "TUTTI";
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "Account Protetto. Non è possibile resettare la password.";
-$s_account_reset_msg = "La nuova Password è stata generata e spedita all'utente...";
+$s_account_reset_msg = "Il codice di convalida é stata inviato via email all'utente...";
 $s_account_reset_msg2 = "La Password è stata rimossa...";
 
 # manage_user_update.php
@@ -794,8 +802,8 @@ $s_report_more_bugs = "Notifica più anomalie";
 $s_submission_thanks_msg = "Grazie per il tuo interesse!";
 
 # report_bug_advanced_page.php
-$s_simple_report_link = "Modulo semplificato";
-$s_enter_report_details_title = "Modulo dettagliato";
+$s_simple_report_link = "Report semplificato";
+$s_enter_report_details_title = "Report dettagliato";
 $s_required = "obbligatorio";
 $s_select_category = "Seleziona Categoria";
 $s_select_reproducibility = "Seleziona la Riproducibilità";
@@ -815,15 +823,13 @@ $s_selected_project = "Progetto Selezionato";
 $s_valid_project_msg = "Selezionare un progetto valido";
 
 # signup.php
-$s_invalid_email = "EMAIL ERRATA";
-$s_duplicate_username = "USERNAME DUPLICATO. SELEZIONARE UN UTENTE DIFFERENTE.";
-$s_account_create_fail = "ERRORE NELLA CREAZIONE DELL'ACCOUNT";
-$s_account_added = "L'Account è stato inserito con successo.";
-$s_password_emailed_msg = "La password sarà spedita via email.";
+$s_signup_done_title = "Registrazione eseguita";
+$s_password_emailed_msg = "Registrazione completata con successo. Riceverai una email di conferma per verificare che l'indirizzo email da te indicato sia corretto. Per attivare l'account appena creato ed impostare la password di accesso é necessario visitare l'indirizzo URL indicato all'interno della email.";
 $s_no_reponse_msg = "Non rispondendo a questo messaggio entro una settimana, l'account potrebbe essere eliminato.";
 
 # signup_page.php
-$s_signup_info = "Seleziona la tua login e inserisci una password. La password ti verrà inviata via email.";
+$s_signup_captcha_request = "Inserire il codice alfanumerico come appare nel box a destra";
+$s_signup_info = "Dopo aver completato il form di registrazione, ti verrà inviata una email di conferma per verificare che l'indirizzo email da te indicato sia corretto ed esistente.<br/>L'email conterrà le istruzioni per attivare l'account appena creato. Non rispondendo a questo messaggio entro una settimana, l'account potrebbe essere eliminato.<br/><b>Occorre indicare un indirizzo email valido ed esistente per poter ricevere l'email di conferma.</b>";
 $s_signup_title = "Registrazione";
 $s_signup_button = "Registrati";
 
@@ -982,7 +988,7 @@ $s_hide_resolved = "Nascondi risolte";
 $s_and_above = "e sopra";
 $s_advanced_filters = "Filtro avanzato";
 $s_simple_filters = "Filtro semplice";
-$s_monitored_by = 'Controllato da (Monitored By)';
+$s_monitored_by = 'Monitorato da';
 
 $s_attachments = "Allegati";
 $s_attachment_alt = "A";
@@ -1024,4 +1030,11 @@ $s_bug_created_from = "Anomalia generata da";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
+
+# lost password
+$s_lost_password_title = "Password reset";
+$s_lost_password_done_title = "Password reset operazione processata";
+$s_lost_password_subject = "Password reset";
+$s_lost_password_info = "Per reimpostare la password di accesso dimenticata, occorre fornire il tuo nome utente e l'indirizzo email associato con quell'account (deve essere quello correntemente in uso).<br/><br/>Se i dati indicati corrisponderanno ad un account valido e registrato, ti verrà inviato un indirizzo URL speciale via email che contiene un codice di convalida per il tuo account. Visitanto questo indirizzo potrai cambiare la tua password di accesso e accedere al sito.";
+$s_lost_password_confirm_hash_OK = "Codice di convalida valido. Ora sarà possibile cambiare la password di accesso.";
 ?>

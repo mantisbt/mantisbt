@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.196 2004-08-10 23:56:51 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.197 2004-08-14 15:26:20 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -111,6 +111,57 @@
 	}
 
 	#############################
+	# Signup and Lost Password
+	#############################
+
+	# --- signup ----------------------
+
+	# allow users to signup for their own accounts.
+	# Mail settings must be correctly configured in order for this to work
+	$g_allow_signup			= ON;
+
+	# Max. attempts to login using a wrong password before lock the account.
+	# When locked, it's required to reset the password (lost password)
+	# Value resets to zero at each successfully login
+	# Set to OFF to disable this control
+	$g_max_failed_login_count = OFF;
+
+	# access level required to be notified when a new user has been created using the "signup form"
+	$g_notify_new_user_created_threshold_min = ADMINISTRATOR;
+
+	# if ON users will be sent their password when reset.
+	# if OFF the password will be set to blank. If set to ON, mail settings must be
+	# correctly configured.
+	$g_send_reset_password	= ON;
+
+	# String used to generate the confirm_hash for the 'lost password' feature and captcha code for 'signup'
+	# ATTENTION: CHANGE IT TO WHATEVER VALUE YOU PREFER
+	$g_password_confirm_hash_magic_string = 'blowfish';
+
+	# --- captcha image ---------------
+
+	# use captcha image to validate subscription it requires GD library installed
+	$g_signup_use_captcha	= OFF;
+
+	# absolute path (with trailing slash!) to folder which contains your TrueType-Font files
+	# used to create the captcha image
+	$g_system_font_folder	= 'c:/winnt/fonts/';
+
+	# font name used to create the captcha image. i.e. arial.ttf
+	# (the font file has to exist in the system_font_folder)
+	$g_font_per_captcha	= 'arial.ttf';
+
+	# --- lost password -------------
+
+	#  Setting to disable the 'lost your password' feature.
+	$g_lost_password_feature = ON;
+
+	# Max. simultaneous requests of 'lost password'
+	# When this value is reached, it's no longer possible to request new password reset
+	# Value resets to zero at each successfully login
+	$g_max_lost_password_in_progress_count = 3;
+
+	#############################
 	# Mantis Email Settings
 	#############################
 
@@ -127,15 +178,6 @@
 
 	# the return address for bounced mail
 	$g_return_path_email	= 'admin@example.com';
-
-	# allow users to signup for their own accounts.
-	# Mail settings must be correctly configured in order for this to work
-	$g_allow_signup			= ON;
-
-	# if ON users will be sent their password when reset.
-	# if OFF the password will be set to blank. If set to ON, mail settings must be
-	# correctly configured.
-	$g_send_reset_password	= ON;
 
 	# allow email notification
 	$g_enable_email_notification	= ON;

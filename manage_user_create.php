@@ -6,23 +6,22 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.18 2004-05-25 13:38:51 vboctor Exp $
+	# $Id: manage_user_create.php,v 1.19 2004-08-14 15:26:20 thraxisp Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'email_api.php' );
-?>
-<?php
+
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	$f_username			= gpc_get_string( 'username' );
 	$f_realname			= gpc_get_string( 'realname' );
 	$f_password			= gpc_get_string( 'password' );
 	$f_password_verify	= gpc_get_string( 'password_verify' );
+	$f_random_password	= gpc_get_bool( 'random_password' );
 	$f_email			= gpc_get_string( 'email' );
 	$f_access_level		= gpc_get_string( 'access_level' );
 	$f_protected		= gpc_get_bool( 'protected' );
@@ -45,11 +44,19 @@
 
 	$f_email = email_append_domain( $f_email );
 
-	# We've passed all the validation steps.  Now, if the password is empty,
-	#  confirm that that is what we wanted
-	if ( is_blank( $f_password ) ) {
-		helper_ensure_confirmed( lang_get( 'empty_password_sure_msg' ),
-				 lang_get( 'empty_password_button' ) );
+	if ( ON == config_get( 'send_reset_password' ) ) {
+		# Check code will be sent to the user directly via email. Dummy password set to random
+		# Create random password
+		$t_seed = $f_email . $f_username;
+		$f_password	= auth_generate_random_password( $t_seed );
+	}
+	else {
+		# Password won't to be sent by email. It entered by the admin
+		# Now, if the password is empty, confirm that that is what we wanted
+		if ( is_blank( $f_password ) ) {
+			helper_ensure_confirmed( lang_get( 'empty_password_sure_msg' ),
+					 lang_get( 'empty_password_button' ) );
+		}
 	}
 
 	user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $f_realname );
@@ -57,9 +64,7 @@
 	$t_redirect_url = 'manage_user_page.php';
 
 	html_page_top1();
-
 	html_meta_redirect( $t_redirect_url );
-
 	html_page_top2();
 ?>
 

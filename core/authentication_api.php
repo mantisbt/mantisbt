@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.44 2004-08-01 03:29:25 narcissus Exp $
+	# $Id: authentication_api.php,v 1.45 2004-08-14 15:26:20 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
@@ -95,19 +95,25 @@
 			}
 		}
 
-		$t_user = user_get_row( $t_user_id );
-
 		# check for disabled account
-		if ( OFF == $t_user['enabled'] ) {
+		if ( !user_is_enabled( $t_user_id ) ) {
 			return false;
 		}
+
+		# max. failed login attempts achieved...
+		if( !user_is_login_request_allowed( $t_user_id ) ) {
+			return false;
+		}
+
 		$t_anon_account = config_get( 'anonymous_account' );
 		$t_anon_allowed = config_get( 'allow_anonymous_login' );
+
 		# check for anonymous login
 		if ( !( ( ON == $t_anon_allowed ) && ( $t_anon_account == $p_username)  ) ) {
 			# anonymous login didn't work, so check the password
 
 			if ( !auth_does_password_match( $t_user_id, $p_password ) ) {
+				user_increment_failed_login_count( $t_user_id );
 				return false;
 			}
 		}
@@ -116,6 +122,9 @@
 
 		# increment login count
 		user_increment_login_count( $t_user_id );
+
+		user_reset_failed_login_count_to_zero( $t_user_id );
+		user_reset_lost_password_in_progress_count_to_zero( $t_user_id );
 
 		# set the cookies
 		auth_set_cookies( $t_user_id, $p_perm_login );
@@ -242,6 +251,17 @@
 		return substr( $t_val, 0, 12 );
 	}
 
+	# --------------------
+	# Generate a confirm_hash 12 character to valide the password reset request
+	function auth_generate_confirm_hash( $p_user_id ) {
+		$t_confirm_hash_generator = config_get( 'password_confirm_hash_magic_string' );
+		$t_password = user_get_field( $p_user_id, 'password' );
+		$t_last_visit = user_get_field( $p_user_id, 'last_visit' );
+
+		$t_confirm_hash = md5( $t_confirm_hash_generator . $t_password . $t_last_visit );
+
+		return $t_confirm_hash;
+	}
 
 	#===================================
 	# Cookie functions

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.91 2004-08-08 20:30:19 jlatour Exp $
+	# $Id: email_api.php,v 1.92 2004-08-14 15:26:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -296,62 +296,98 @@
 
 	# --------------------
 	# Send password to user
-	function email_signup( $p_user_id, $p_password ) {
-		global $g_mantis_user_table, $g_path, $g_email_lang;
+	function email_signup( $p_user_id, $p_password, $p_confirm_hash ) {
+		global $g_email_lang;
 
-		$c_user_id = db_prepare_int( $p_user_id );
-
-		$query = "SELECT username, email
-				FROM $g_mantis_user_table
-				WHERE id='$c_user_id'";
-		$result = db_query( $query );
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		if ( OFF == config_get( 'send_reset_password' ) ) {
+			return;
+		}
 
 		$g_email_lang = user_pref_get_language( $p_user_id );
 
+		# retrieve the username and email
+		$t_username = user_get_field( $p_user_id, 'username' );
+		$t_email = user_get_email( $p_user_id );
+
 		# Build Welcome Message
-		$t_message = lang_get( 'new_account_greeting' ).
-						lang_get( 'new_account_url', $g_email_lang ) . $g_path . "\n".
-						lang_get( 'new_account_username', $g_email_lang ) . $v_username . "\n".
-						lang_get( 'new_account_password', $g_email_lang ) . $p_password . "\n\n".
+		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject', $g_email_lang );
+
+		$t_message = lang_get( 'new_account_greeting', $g_email_lang ) . $t_username .
+						lang_get( 'new_account_greeting2', $g_email_lang ) . "\n\n" .
+						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" .
 						lang_get( 'new_account_message', $g_email_lang ) .
 						lang_get( 'new_account_do_not_reply', $g_email_lang );
 
 		# Send signup email regardless of mail notification pref
 		# or else users won't be able to sign up
-		email_send( $v_email, lang_get( 'new_account_subject', $g_email_lang ), $t_message );
+		if( !is_blank( $t_email ) ) {
+			email_send( $t_email, $t_subject, $t_message );
+		}
 
 		$g_email_lang = NULL;
 	}
+
 	# --------------------
-	# Send new password when user forgets
-	function email_reset( $p_user_id, $p_password ) {
-		global 	$g_mantis_user_table, $g_path, $g_email_lang;
+	# Send confirm_hash url to user forgets the password
+	function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
+		global $g_email_lang;
 
-		$c_user_id = db_prepare_int( $p_user_id );
-
-		$query = "SELECT username, email
-				FROM $g_mantis_user_table
-				WHERE id='$c_user_id'";
-		$result = db_query( $query );
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		if ( OFF == config_get( 'send_reset_password' ) ) {
+			return;
+		}
 
 		$g_email_lang = user_pref_get_language( $p_user_id );
 
-		# Build Welcome Message
-		$t_message = lang_get( 'reset_request_msg', $g_email_lang ) . "\n\n".
-					lang_get( 'new_account_username', $g_email_lang ) . $v_username."\n".
-					lang_get( 'new_account_password', $g_email_lang ) . $p_password."\n\n".
-					$g_path."\n\n";
+		# retrieve the username and email
+		$t_username = user_get_field( $p_user_id, 'username' );
+		$t_email = user_get_email( $p_user_id );
+
+		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject', $g_email_lang );
+
+		$t_message = lang_get( 'reset_request_msg', $g_email_lang ) . "\n\n" .
+						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" .
+						lang_get( 'new_account_username', $g_email_lang ) . $t_username . "\n" .
+						lang_get( 'new_account_IP', $g_email_lang ) . $_SERVER["REMOTE_ADDR"] . "\n\n" .
+						lang_get( 'new_account_do_not_reply', $g_email_lang );
 
 		# Send password reset regardless of mail notification prefs
 		# or else users won't be able to receive their reset pws
-		email_send( $v_email, lang_get( 'news_password_msg', $g_email_lang ), $t_message );
+		if( !is_blank( $t_email ) ) {
+			email_send( $t_email, $t_subject, $t_message );
+		}
 
 		$g_email_lang = NULL;
 	}
+
+	# --------------------
+	# notify the selected group a new user has signup
+	function email_notify_new_account( $p_username, $p_email ) {
+		global $g_email_lang, $g_path;
+
+		$t_threshold_min = config_get( 'notify_new_user_created_threshold_min' );
+		$t_threshold_users = project_get_all_user_rows( ALL_PROJECTS, $t_threshold_min );
+
+		foreach( $t_threshold_users as $t_user ) {
+			$g_email_lang = user_pref_get_language( $t_user['id'] );
+
+			$t_recipient_email = user_get_email( $t_user['id'] );
+			$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject', $g_email_lang );
+
+			$t_message = lang_get( 'new_account_signup_msg', $g_email_lang ) . "\n\n" .
+						lang_get( 'new_account_username', $g_email_lang ) . $p_username . "\n" .
+						lang_get( 'new_account_email', $g_email_lang ) . $p_email . "\n" .
+						lang_get( 'new_account_IP', $g_email_lang ) . $_SERVER["REMOTE_ADDR"] . "\n" .
+						$g_path . "\n\n" .
+						lang_get( 'new_account_do_not_reply', $g_email_lang );
+
+			if( !is_blank( $t_recipient_email ) ) {
+				email_send( $t_recipient_email, $t_subject, $t_message );
+			}
+
+			$g_email_lang = NULL;
+		}
+	}
+
 	# --------------------
 	# send a generic email
 	# $p_notify_type: use check who she get notified of such event.

@@ -6,10 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.41 2004-08-05 23:47:46 jlatour Exp $
+	# $Id: login_page.php,v 1.42 2004-08-14 15:26:20 thraxisp Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	# Login page POSTs results to login.php
 	# Check to see if the user is already logged in
 
@@ -38,23 +37,22 @@
 
 	html_page_top1();
 	html_page_top2a();
-?>
 
-<br />
-<div align="center">
-<?php
+	echo '<br /><div align="center">';
+
+	# Display short greeting message
+	echo lang_get( 'login_page_info' ) . '<br />';
+
 	# Only echo error message if error variable is set
 	if ( $f_error ) {
-		echo lang_get( 'login_error' ) . '<br />';
+		echo '<font color="red">' . lang_get( 'login_error' ) . '</font>';
 	}
 	if ( $f_cookie_error ) {
 		echo lang_get( 'login_cookies_disabled' ) . '<br />';
 	}
 
-	# Display short greeting message
-	echo lang_get( 'login_page_info' );
+	echo '</div>';
 ?>
-</div>
 
 <!-- Login Form BEGIN -->
 <br />
@@ -113,7 +111,11 @@
 </div>
 
 <?php
+	PRINT '<br /><div align="center">';
 	print_signup_link();
+	PRINT '&nbsp;';
+	print_lost_password_link();
+	PRINT '</div>';
 
 	#
 	# Do some checks to warn administrators of possible security holes.

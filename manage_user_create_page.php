@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create_page.php,v 1.17 2004-05-25 13:38:52 vboctor Exp $
+	# $Id: manage_user_create_page.php,v 1.18 2004-08-14 15:26:20 thraxisp Exp $
 	# --------------------------------------------------------
-?>
-<?php require_once( 'core.php' ) ?>
-<?php
+
+	require_once( 'core.php' );
+
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 	html_page_top1();
@@ -36,10 +36,10 @@
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category" width="25%">
+	<td class="category">
 		<?php echo lang_get( 'realname' ) ?>
 	</td>
-	<td width="75%">
+	<td>
 		<input type="text" name="realname" size="32" maxlength="32" />
 	</td>
 </tr>
@@ -51,6 +51,9 @@
 		<?php print_email_input( 'email', '' ) ?>
 	</td>
 </tr>
+<?php
+	if ( OFF == config_get( 'send_reset_password' ) ) {
+?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'password' ) ?>
@@ -67,6 +70,9 @@
 		<input type="password" name="password_verify" size="32" maxlength="32" />
 	</td>
 </tr>
+<?php
+	}
+?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'access_level' ) ?>
@@ -89,7 +95,7 @@
 	<td class="category">
 		<?php echo lang_get( 'protected' ) ?>
 	</td>
-	<td colspan="2">
+	<td>
 		<input type="checkbox" name="protected" />
 	</td>
 </tr>

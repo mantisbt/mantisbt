@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.96 2004-08-07 14:15:50 jlatour Exp $
+	# $Id: print_api.php,v 1.97 2004-08-14 15:26:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -143,6 +143,11 @@
 		} else {
 			PRINT '<input type="text" name="'.$p_field_name.'" size="32" maxlength="64" value="'.$p_email.'" />';
 		}
+	}
+	# --------------------
+	# print out an email editing input
+	function print_captcha_input( $p_field_name ) {
+		echo '<input type="text" name="'.$p_field_name.'" size="5" maxlength="5" value="" />';
 	}
 	###########################################################################
 	# Option List Printing API
@@ -1132,12 +1137,22 @@
 	# --------------------
 	# prints the signup link
 	function print_signup_link() {
-		global $g_allow_signup;
-
-		if ( $g_allow_signup != 0 ) {
-			PRINT '<br /><div align="center">';
+		if( ON == config_get( 'allow_signup' ) ) {
 			print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
-			PRINT '</div>';
+		}
+	}
+	# --------------------
+	# prints the login link
+	function print_login_link() {
+		print_bracket_link( 'login_page.php', lang_get( 'login_title' ) );
+	}
+	# --------------------
+	# prints the lost pwd link
+	function print_lost_password_link() {
+		# lost password feature disabled or reset password via email disabled -> stop here!
+		if( ( ON == config_get( 'lost_password_feature' ) ) &&
+			( ON == config_get( 'send_reset_password' ) ) ) {
+			print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
 		}
 	}
 	# --------------------

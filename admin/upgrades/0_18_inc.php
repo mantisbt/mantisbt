@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.21 2004-08-08 15:46:16 jlatour Exp $
+	# $Id: 0_18_inc.php,v 1.22 2004-08-14 15:26:20 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -261,7 +261,7 @@
 	# MASC RELATIONSHIP
 
 	# --------------------------------------------------------
-	# Author: Marcello Scat‡ marcello@marcelloscata.com
+	# Author: Marcello Scata'° marcello@marcelloscata.com
 	# UPGRADE THE DATABASE TO IMPLEMENT THE RELATIONSHIPS
 	# --------------------------------------------------------
 	# The script executes the following steps:
@@ -547,6 +547,39 @@
 			'custom_fields-20',
 			'Rename Column',
 			"ALTER TABLE $t_custom_field_table DROP require_close" );
+
+	$upgrades[] = new FunctionUpgrade(
+		'lost-password',
+		'Add the necessary columns for managing lost passwords',
+		'lostpassword_fix_1' );
+
+	function lostpassword_fix_1() {
+		global $t_user_table;
+
+		if ( !db_field_exists( 'failed_login_count', $t_user_table ) ) {
+			$query = "ALTER TABLE $t_user_table ADD failed_login_count INT(2) DEFAULT '0' NOT NULL
+				AFTER login_count";
+
+			$result = @db_query( $query );
+
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		if ( !db_field_exists( 'lost_password_in_progress_count', $t_user_table ) ) {
+			$query = "ALTER TABLE $t_user_table ADD lost_password_in_progress_count INT(2) DEFAULT '0' NOT NULL
+				AFTER login_count";
+
+			$result = @db_query( $query );
+
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 
 	$upgrades[] = new FunctionUpgrade(
 			'delete-admin-over',
