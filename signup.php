@@ -16,6 +16,9 @@
 	$f_username		= gpc_get_string( 'username' );
 	$f_email		= gpc_get_string( 'email' );
 
+	$f_username = trim( $f_username );
+	$f_email	= trim( $f_email );
+	
 	# Check to see if signup is allowed
 	if ( OFF == config_get( 'allow_signup' ) ) {
 		print_header_redirect( 'login_page.php' );
@@ -23,7 +26,6 @@
 	}
 
 	# check for empty username
-	$f_username = trim( $f_username );
 	if ( is_blank( $f_username ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
@@ -32,7 +34,7 @@
 
 	# Check for a properly formatted email with valid MX record
 	#  Don't allow blank emails when signing up though, no matter what.
-	if ( !email_is_valid( $f_email ) || is_blank( $f_email ) ) {
+	if ( is_blank( $f_email ) || !email_is_valid( $f_email ) ) {
 		echo $f_email.' '.lang_get( 'invalid_email' ).'<br />';
 		echo '<a href="signup_page.php">'.lang_get( 'proceed' ).'</a>';
 		exit;

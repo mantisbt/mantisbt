@@ -23,6 +23,9 @@
 	$f_access_level	= gpc_get_int( 'access_level' );
 	$f_user_id		= gpc_get_int( 'user_id' );
 
+	$f_email	= trim( $f_email );
+	$f_username	= trim( $f_username );
+
 	$t_old_username = user_get_field( $f_user_id, 'username' );
 
 	# check that the username is unique
