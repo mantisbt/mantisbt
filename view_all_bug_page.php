@@ -144,17 +144,21 @@
 		$result2 = db_query( $query2 );
 		$project_count = db_num_rows( $result2 );
 
-		$t_where_clause = " WHERE (";
-		for ($i=0;$i<$project_count;$i++) {
-			$row = db_fetch_array( $result2 );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+		if ( 0 == $project_count ) {
+			$t_where_clause = " WHERE 1=1";
+		} else {
+			$t_where_clause = " WHERE (";
+			for ($i=0;$i<$project_count;$i++) {
+				$row = db_fetch_array( $result2 );
+				extract( $row, EXTR_PREFIX_ALL, "v" );
 
-			$t_where_clause .= "(project_id='$v_id')";
-			if ( $i < $project_count - 1 ) {
-				$t_where_clause .= " OR ";
-			}
-		} # end for
-		$t_where_clause .= ")";
+				$t_where_clause .= "(project_id='$v_id')";
+				if ( $i < $project_count - 1 ) {
+					$t_where_clause .= " OR ";
+				}
+			} # end for
+			$t_where_clause .= ")";
+		}
 	} else {
 		$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
 	}
