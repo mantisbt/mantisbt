@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.15 2004-07-29 10:47:25 thraxisp Exp $
+	# $Id: relationship_api.php,v 1.16 2004-08-01 05:20:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -437,7 +437,7 @@
 		$t_relationship_info_text .= "\n";
 
 		if ( $p_html_preview == false ) {
-			$t_relationship_info_html = '<tr class="row-2">' . $t_td . $t_relationship_info_html . '&nbsp;</td></tr>';
+			$t_relationship_info_html = '<tr bgcolor="' . get_status_color( $t_bug->status ) . '">' . $t_td . $t_relationship_info_html . '&nbsp;</td></tr>';
 		}
 		else {
 			$t_relationship_info_html = '<tr>' . $t_td . $t_relationship_info_html . '&nbsp;</td></tr>';
@@ -470,11 +470,11 @@
 		}
 
 		if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="row-2"><td colspan=5><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+			$t_summary .= '<tr class="row-2"><td colspan="5"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
 		}
 
-		if ( $t_summary != '' ) {
-			$t_summary = '<table class="width100">' . $t_summary . '</table>';
+		if ( !is_blank( $t_summary ) ) {
+			$t_summary = '<table border="0" width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 		}
 
 		return $t_summary;
@@ -549,13 +549,12 @@
 <?php collapse_open( 'relationships' ); ?>
 <table class="width100" cellspacing="1">
 <tr class="row-2" valign="top">
-	<td width="15%" class="form-title">
+	<td width="15%" class="form-title" colspan="2">
 		<?php
 			collapse_icon( 'relationships' );
 			echo lang_get( 'bug_relationships' );
 		?>
 	</td>
-	<td><?php PRINT relationship_get_summary_html( $p_bug_id ) ?></td>
 </tr>
 <?php
 		# bug not read-only and user authenticated
@@ -584,6 +583,9 @@
 			}
 		}
 ?>
+<tr>
+	<td colspan="2"><?php PRINT relationship_get_summary_html( $p_bug_id ) ?></td>
+</tr>
 </table>
 
 <?php collapse_closed( 'relationships' ); ?>
