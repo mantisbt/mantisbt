@@ -285,7 +285,7 @@
 				$s_status_enum_string,
 				$s_reproducibility_enum_string;
 
-		$query = "SELECT *
+		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted
 				FROM $g_mantis_bug_table
 				WHERE id='$p_bug_id'
 				ORDER BY date_submitted $g_bugnote_order";
@@ -311,7 +311,7 @@
 
 		$v2_description   = string_email( $v2_description );
 		$v_summary        = string_email( $v_summary );
-		$v_date_submitted = date( $g_complete_date_format, sql_to_unix_time( $v_date_submitted ) );
+		$v_date_submitted = date( $g_complete_date_format, $v_date_submitted );
 		$v_last_updated   = date( $g_complete_date_format, sql_to_unix_time( $v_last_updated ) );
 
 		$t_sev_str = get_enum_element( $s_severity_enum_string, $v_severity );
