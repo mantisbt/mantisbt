@@ -165,7 +165,7 @@
 	<form method="post" action="<? echo $g_bug_close ?>">
 	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
 		<td align="center" bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="submit" value="Close Bug">
+			<input type="submit" value="<? echo $s_close_bug_button ?>">
 		</td>
 	</tr>
 	</form>

@@ -1,6 +1,6 @@
 Mantis
 
-09.xx.2001  -   0.15.8
+10.xx.2001  -   0.15.8
 
  * Fixed problem with $g_manage_cookie not being unset on logout
  * Fixed error in db_upgrade.sql ( nul; should be null; )

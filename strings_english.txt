@@ -240,6 +240,7 @@
 	$s_delete_link = "Delete";
 	$s_add_bugnote_title = "Add Bugnote";
 	$s_add_bugnote_button = "Add Bugnote";
+	$s_close_bug_button = "Close Bug";
 
 	# bugnote_update.php3
 	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
