@@ -4,9 +4,10 @@ Mantis ChangeLog
 
 - 0004137: [feature] Support a simple "view" URL (vboctor)
 - 0004145: [feature] Mantis pages should have descriptive titles (vboctor)
-- 0003880: [filters] Ordering doesnt take last_updated into account
-- 0004073: [filters] Edit filter page now too wide. 'Apply filter' button is drawn off screen.
-- 0004093: [filters] Custom field values are a larger type size in view_all_bug_page
+- 0003880: [filters] Ordering doesnt take last_updated into account (narcissus)
+- 0004073: [filters] Edit filter page now too wide. 'Apply filter' button is drawn off screen (narcissus)
+- 0004093: [filters] Custom field values are a larger type size in view_all_bug_page (narcissus)
+- 0004108: [filters] "Use Date Filters" in advanced filters (narcissus)
 - 0004150: [filters] Custom field names are not localised in filters (vboctor)
 - 0004122: [relationships] Upgrade script seems to swap the duplicate relationship (masc)
 - 0004083: [sponsorships] Users without email address must not be able to sponsor issues (thraxisp)

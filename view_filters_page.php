@@ -32,7 +32,12 @@
 			<?php
 			$t_target_field = gpc_get_string( 'target_field', '' );
 			if ( $t_target_field ) {
-				print "field_to_focus = \"$t_target_field\";";
+				$f_view_type = gpc_get_string( 'view_type', '' );
+				if ( ( 'hide_status[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
+					print "field_to_focus = \"show_status[]\";";
+				} else {
+					print "field_to_focus = \"$t_target_field\";";
+				}
 			} else {
 				print "field_to_focus = null;";
 			}
