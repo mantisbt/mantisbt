@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.37 2004-08-29 08:06:07 vboctor Exp $
+	# $Id: bug_actiongroup.php,v 1.38 2004-11-30 15:41:35 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -124,9 +124,14 @@
 			break;
 
 		case 'UP_STATUS':
-			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
-				$f_status = gpc_get_int( 'status' );
-				bug_set_field( $t_bug_id, 'status', $f_status );
+			$f_status = gpc_get_int( 'status' );
+			$t_project = bug_get_field( $t_bug_id, 'project_id' );
+			if ( access_has_bug_level( access_get_status_threshold( $f_status, $t_project ), $t_bug_id ) ) {
+				if ( TRUE == bug_check_workflow($t_status, $f_status ) ) {
+					bug_set_field( $t_bug_id, 'status', $f_status );
+				} else {
+					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_status' );
+				}
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
