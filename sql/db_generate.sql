@@ -3,9 +3,9 @@
 # http://www.phpmyadmin.net
 #
 # Host: localhost
-# Generation Time: Jul 19, 2004 at 01:34 AM
+# Generation Time: Aug 28, 2004 at 11:18 PM
 # Server version: 4.0.20
-# PHP Version: 4.3.7
+# PHP Version: 4.3.8
 # 
 # Database : `mantis`
 # 
@@ -255,12 +255,14 @@ CREATE TABLE mantis_custom_field_table (
   length_min int(3) NOT NULL default '0',
   length_max int(3) NOT NULL default '0',
   advanced int(1) NOT NULL default '0',
-  display_resolve tinyint(1) NOT NULL default '0',
-  display_close tinyint(1) NOT NULL default '0',
   require_report tinyint(1) NOT NULL default '0',
   require_update tinyint(1) NOT NULL default '0',
-  require_resolve tinyint(1) NOT NULL default '0',
-  require_close tinyint(1) NOT NULL default '0',
+  display_report tinyint(1) NOT NULL default '1',
+  display_update tinyint(1) NOT NULL default '1',
+  require_resolved tinyint(1) NOT NULL default '0',
+  display_resolved tinyint(1) NOT NULL default '0',
+  display_closed tinyint(1) NOT NULL default '0',
+  require_closed tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (id),
   KEY name (name)
 ) TYPE=MyISAM;
@@ -325,7 +327,7 @@ CREATE TABLE mantis_news_table (
 CREATE TABLE mantis_project_category_table (
   project_id int(7) unsigned NOT NULL default '0',
   category varchar(64) NOT NULL default '',
-  user_id int(7) NOT NULL default '0',
+  user_id int(7) unsigned NOT NULL default '0',
   PRIMARY KEY  (project_id,category)
 ) TYPE=MyISAM;
 
@@ -738,6 +740,27 @@ INSERT INTO mantis_upgrade_table VALUES ('version_add_released', 'Add released f
 INSERT INTO mantis_upgrade_table VALUES ('relationship-1', 'Add index on source_bug_id field in mantis_bug_relationship_table');
 INSERT INTO mantis_upgrade_table VALUES ('relationship-2', 'Add index on destination_bug_id field in mantis_bug_relationship_table');
 INSERT INTO mantis_upgrade_table VALUES ('relationship-3', 'Translate duplicate id information in a new duplicate relationship');
+INSERT INTO mantis_upgrade_table VALUES ('relationship-4', 'Fix swapped value in duplicate relationship');
+INSERT INTO mantis_upgrade_table VALUES ('cat_user_id_unsigned', 'Change the user_id in mantis_project_category_table to unsigned int.');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-7', 'Allow custom fields to be hidden/displayed for report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-8', 'Allow custom fields to be hidden/displayed for report/update');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-9', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-10', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-11', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-12', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-13', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-14', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-15', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-16', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-17', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-18', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-19', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('custom_fields-20', 'Rename Column');
+INSERT INTO mantis_upgrade_table VALUES ('lost-password', 'Add the necessary columns for managing lost passwords');
+INSERT INTO mantis_upgrade_table VALUES ('delete-admin-over', 'Delete any project level access overrides for admin users');
+INSERT INTO mantis_upgrade_table VALUES ('0.18-bugnote-limit', 'Add email_bugnote_limit to user preference table');
+INSERT INTO mantis_upgrade_table VALUES ('0.18-bugnote-order', 'Add bugnote_order to user preference table');
+INSERT INTO mantis_upgrade_table VALUES ('cb_ml_upgrade', 'Upgrade custom field types (checkbox, list, multilist) to support advanced filtering');
 
 # --------------------------------------------------------
 
@@ -756,6 +779,7 @@ CREATE TABLE mantis_user_pref_table (
   advanced_update int(1) NOT NULL default '0',
   refresh_delay int(4) NOT NULL default '0',
   redirect_delay int(1) NOT NULL default '0',
+  bugnote_order varchar(4) NOT NULL default 'ASC',
   email_on_new int(1) NOT NULL default '0',
   email_on_assigned int(1) NOT NULL default '0',
   email_on_feedback int(1) NOT NULL default '0',
@@ -774,6 +798,7 @@ CREATE TABLE mantis_user_pref_table (
   email_on_feedback_minimum_severity int(2) NOT NULL default '10',
   email_on_assigned_minimum_severity int(2) NOT NULL default '10',
   email_on_new_minimum_severity int(2) NOT NULL default '10',
+  email_bugnote_limit int(2) NOT NULL default '0',
   language varchar(32) NOT NULL default 'english',
   PRIMARY KEY  (id)
 ) TYPE=MyISAM;
@@ -839,6 +864,8 @@ CREATE TABLE mantis_user_table (
   protected int(1) NOT NULL default '0',
   access_level int(2) NOT NULL default '10',
   login_count int(11) NOT NULL default '0',
+  lost_password_in_progress_count int(2) NOT NULL default '0',
+  failed_login_count int(2) NOT NULL default '0',
   cookie_string varchar(64) NOT NULL default '',
   PRIMARY KEY  (id),
   UNIQUE KEY cookie_string (cookie_string),
@@ -849,4 +876,4 @@ CREATE TABLE mantis_user_table (
 # Dumping data for table `mantis_user_table`
 #
 
-INSERT INTO mantis_user_table VALUES (1, 'administrator', '', 'admin', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 'f9ff5de2bf76f2e03048c10eba8c7e121c5561c0af7d8b162f9457f17f96d027');
+INSERT INTO mantis_user_table VALUES (1, 'administrator', '', 'admin', '63a9f0ea7bb98050796b649e85481845', '2003-02-16 02:03:48', '2004-07-08 23:59:22', 1, 1, 90, 3, 0, 0, 'f9ff5de2bf76f2e03048c10eba8c7e121c5561c0af7d8b162f9457f17f96d027');
