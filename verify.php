@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: verify.php,v 1.1 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: verify.php,v 1.2 2004-08-14 17:45:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# --------------------------------------------------------
@@ -35,6 +35,9 @@
 
 	user_reset_failed_login_count_to_zero( $f_user_id );
 	user_reset_lost_password_in_progress_count_to_zero( $f_user_id );
+
+	# fake login so the user can set their password
+	auth_attempt_script_login( user_get_field( $f_user_id, 'username' ) );
 
 	include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'account_page.php' );
 /*

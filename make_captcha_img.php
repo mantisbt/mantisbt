@@ -6,16 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: make_captcha_img.php,v 1.1 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: make_captcha_img.php,v 1.2 2004-08-14 17:45:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# --------------------------------------------------------
 	# 2004 by Marcello Scata' (marcello@marcelloscata.com) - ITALY
 	# --------------------------------------------------------
 
-	ob_start();
+#	ob_start();
 	require_once( 'core.php' );
-	ob_flush();
+#	ob_flush();
 
 	$f_public_key = gpc_get_int( 'public_key' );
 

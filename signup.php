@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup.php,v 1.35 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: signup.php,v 1.36 2004-08-14 17:45:29 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -53,7 +53,6 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">
-	# @@@ change for language
 		<b><?php echo lang_get( 'signup_done_title', $g_email_lang ) ?></b><br/>
 		<?php echo "[$f_username - $f_email] " ?>
 	</td>
