@@ -7,7 +7,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-##
+
 #############################################################
 
 	function create_bug_enum_summary( $p_enum_string, $p_enum ) {
@@ -24,10 +24,10 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE $p_enum='$t_s[0]' AND
-						project_id='$g_project_cookie_val'";
+					project_id='$g_project_cookie_val'";
 			$result = db_query( $query );
 			$enum_name_count[] = db_result( $result, 0 );
-		} # end for
+		} // end for
 	}
 
 
@@ -35,7 +35,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		global $enum_name, $enum_name_count;
 
 		$graph = new Graph(300,380);
-		$graph->img->SetMargin(40,40,40,170);
+		$graph->img->SetMargin(40,40,40,170);	
 		$graph->img->SetAntiAliasing();
 		$graph->SetScale("textlin");
 		$graph->SetMarginColor("white");
@@ -62,19 +62,14 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 #############################################################
 
 	function create_developer_summary() {
-		global 	$g_mantis_bug_table, $g_mantis_user_table,
-			$g_project_cookie_val,
-			$developer_name, $open_bug_count, $resolved_bug_count, $total_bug_count;
+		global 	$g_mantis_bug_table, $g_mantis_user_table, $g_mantis_project_user_list_table,
+				$g_project_cookie_val, $developer_name, $open_bug_count,
+				$resolved_bug_count, $total_bug_count;
 
-		$t_dev = DEVELOPER;
-		$t_man = MANAGER;
-		$t_adm = ADMINISTRATOR;
-
+		# selecting all users, some of them might not have a proper default access
+		# but be assigned on some particular projects
 		$query = "SELECT id, username
 				FROM $g_mantis_user_table
-				WHERE 	access_level=$t_dev OR
-						access_level=$t_man OR
-						access_level=$t_adm
 				ORDER BY username";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
@@ -82,14 +77,14 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			$developer_name[] = $v_username;
+			#$developer_name[] = $v_username;
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE handler_id='$v_id' AND
 						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
-			$total_bug_count[] = db_result( $result2, 0, 0 );
+			$total_buff = db_result( $result2, 0, 0 );
 
 			$t_res_val = RESOLVED;
 			$t_clo_val = CLOSED;
@@ -100,17 +95,23 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 						status<>'$t_clo_val' AND
 						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
-			$open_bug_count[] = db_result( $result2, 0, 0 );
+			$open_buff = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND
+					WHERE handler_id='$v_id' AND 
 						(status='$t_res_val' OR status='$t_clo_val' ) AND
 						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
-			$resolved_bug_count[] = db_result( $result2, 0, 0 );
+			$resolved_buff = db_result( $result2, 0, 0 );
 
-		} # end for
+			if (($total_buff+$resolved_buff+$open_buff)>0) {
+				$open_bug_count[]=$open_buff;
+				$resolved_bug_count[]=$resolved_buff;
+				$total_bug_count[]=$total_buff;
+				$developer_name[]=$v_username;
+			}
+		} ### end for
 	}
 
 
@@ -119,7 +120,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		global $developer_name, $total_bug_count, $open_bug_count, $resolved_bug_count, $s_by_developer;
 
 		$graph = new Graph(300,380);
-		$graph->img->SetMargin(40,40,40,170);
+		$graph->img->SetMargin(40,40,40,170);	
 		$graph->img->SetAntiAliasing();
 		$graph->SetScale("textlin");
 		$graph->SetMarginColor("white");
@@ -164,7 +165,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 			$g_project_cookie_val,
 			$reporter_name, $reporter_count;
-
+			
 
 		$query = "SELECT id, username
 				FROM $g_mantis_user_table
@@ -175,7 +176,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-
+			
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -188,7 +189,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 				$reporter_count[] = $t_count;
 			}
 
-		} # end for
+		} ### end for
 	}
 
 
@@ -248,7 +249,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 			$result2 = db_query( $query );
 			$category_bug_count[] = db_result( $result2, 0, 0 );
 
-		} # end for
+		} ### end for
 	}
 
 
@@ -256,7 +257,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		global $category_name, $category_bug_count, $s_by_category;
 
 		$graph = new Graph(300,380);
-		$graph->img->SetMargin(40,40,40,170);
+		$graph->img->SetMargin(40,40,40,170);	
 		$graph->img->SetAntiAliasing();
 		$graph->SetScale("textlin");
 		$graph->SetMarginColor("white");
@@ -307,16 +308,20 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 	function create_cumulative_bydate(){
 		global $metrics, $g_mantis_bug_table, $g_project_cookie_val;
 
-		# Get all the submitted dates
+		$t_clo_val = CLOSED; 
+		$t_res_val = RESOLVED;
+		
+		### Get all the submitted dates
 		$query = "SELECT UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bug_table
-			WHERE project_id='$g_project_cookie_val'
+			WHERE project_id='$g_project_cookie_val' 
 			ORDER BY date_submitted";
 		$result = db_query( $query );
 		$bug_count = db_num_rows( $result );
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
+			### $t_date = sql_to_unix_time($row["date_submitted"]);
  			$t_date = ($row["date_submitted"]);
 			$t_date_string = date("Y-m-d", $t_date);
 
@@ -326,15 +331,15 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 				$metrics[$index][1]++;
 			} else {
 				$metrics[] = array($t_date_string, 1, 0, 0);
-			}
+			} 
 		}
 
 		$t_clo_val = CLOSED;
 		$t_res_val = RESOLVED;
-		# Get all the resolved dates
-		$query = "SELECT UNIX_TIMESTAMP(last_updated) as last_updated
+		### Get all the resolved dates
+		$query = "SELECT last_updated
 			FROM $g_mantis_bug_table
-			WHERE project_id='$g_project_cookie_val' AND
+			WHERE project_id='$g_project_cookie_val' AND 
 				(status='$t_res_val' OR status='$t_clo_val')
 			ORDER BY last_updated";
 		$result = db_query( $query );
@@ -342,7 +347,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_date = $row["last_updated"];
+			$t_date = sql_to_unix_time($row["last_updated"]);
 			$t_date_string = date("Y-m-d", $t_date);
 
 			$index = find_date_in_metrics($t_date_string);
@@ -358,9 +363,9 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		$metrics_count = count($metrics);
 		for ($i=1;$i<$metrics_count;$i++) {
-			$metrics[$i][1] = $metrics[$i][1] + $metrics[$i-1][1];
-			$metrics[$i][2] = $metrics[$i][2] + $metrics[$i-1][2];
-			$metrics[$i][3] = $metrics[$i][1] - $metrics[$i][2];
+			$metrics[$i][1] = $metrics[$i][1] + $metrics[$i-1][1]; 
+			$metrics[$i][2] = $metrics[$i][2] + $metrics[$i-1][2]; 
+			$metrics[$i][3] = $metrics[$i][1] - $metrics[$i][2]; 
 		}
 
 	}
@@ -377,7 +382,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		}
 
 		$graph = new Graph(300,380);
-		$graph->img->SetMargin(40,40,40,170);
+		$graph->img->SetMargin(40,40,40,170);	
 		$graph->img->SetAntiAliasing();
 		$graph->SetScale("linlin");
 		$graph->SetMarginColor("white");
