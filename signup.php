@@ -48,20 +48,15 @@
 	}
 ?>
 <?php print_page_top1() ?>
-<?php
-	print_head_bottom();
-	print_body_top();
-	print_header( $g_page_title );
-	print_top_page( $g_top_include_page );
-?>
+<?php print_page_top2a() ?>
 
 <br />
 <div align="center">
 <?php
-	echo "[$f_username - $f_email] ".lang_get( 'password_emailed_msg' ).'<br />'.lang_get( 'no_reponse_msg').'<br />';
+	echo "[$f_username - $f_email] ".lang_get( 'password_emailed_msg' ).'<br />'.lang_get( 'no_reponse_msg').'<br /><br />';
 
 	print_bracket_link( 'login_page.php', lang_get( 'proceed' ) );
 ?>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1a( __FILE__ ) ?>

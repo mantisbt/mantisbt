@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.26 2003-02-15 01:52:00 jfitzell Exp $
+	# $Id: string_api.php,v 1.27 2003-02-16 19:46:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -107,12 +107,6 @@
 		$t_tag = config_get( 'bug_link_tag' );
 		$t_path = config_get( 'path' );
 
-		if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-			$t_page_name = 'bug_view_advanced_page.php';
-		} else {
-			$t_page_name = 'bug_view_page.php';
-		}
-
 		preg_match_all('/(^|.+?)(?:(?<=^|\s)' . preg_quote($t_tag) . '(\d+)|$)/s',
 								$p_string, $t_matches, PREG_SET_ORDER );
 
@@ -136,12 +130,13 @@
 				$t_result .= $t_match[1];
 				
 				if ( isset( $t_match[2] ) ) {
+					$t_bug_id = $t_match[2];
 					# We might as well create the link here even if the bug
 					#  doesn't exist.  In the case above we don't want to do
 					#  the summary lookup on a non-existant bug.  But here, we
 					#  can create the link and by the time it is clicked on, the
 					#  bug may exist.
-					$t_result .= $t_path . $t_page_name . '?bug_id=' . $t_match[2];
+					$t_result .= string_get_bug_view_url( $t_bug_id );
 				}
 			}
 		}
@@ -220,12 +215,15 @@
 	# If $p_user_id is null or not specified, use the current user
 	function string_get_bug_page( $p_action, $p_user_id=null ) {
 		if ( null === $p_user_id ) {
-			$p_user_id = auth_get_current_user_id();
+			if ( auth_is_user_authenticated() ) {
+				$p_user_id = auth_get_current_user_id();
+			}
 		}
 
 		switch ( config_get( 'show_' . $p_action ) ) {
 			case BOTH:
-				if ( ON == user_pref_get_pref( $p_user_id, 'advanced_' . $p_action ) ) {
+				if ( null !== $p_user_id &&
+					 ON == user_pref_get_pref( $p_user_id, 'advanced_' . $p_action ) ) {
 					return 'bug_' . $p_action . '_advanced_page.php';
 				} else {
 					return 'bug_' . $p_action . '_page.php';
