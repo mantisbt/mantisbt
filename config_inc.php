@@ -8,6 +8,9 @@
 	### CONFIGURATION VARIABLES                                             ###
 	###########################################################################
 
+	#error_reporting(E_ALL ^ E_NOTICE);
+	#error_reporting(E_ALL);
+
 	#--------------------
 	# database variables
 	$g_hostname        = "localhost";    # set this
@@ -70,19 +73,33 @@
 	# 1 = show menu at bottom
 	$g_show_footer_menu          = 0;
 
-	### allow users to signup for their own accounts
+	# show the project name in the page title
+	$g_show_project_in_title     = 1;
+
+	# allow users to signup for their own accounts
 	$g_allow_signup              = 1;
 
 	# Allow email notification
 	$g_enable_email_notification = 1;
 
+	# Notify developers and higher when a new bug comes in
 	$g_notify_developers_on_new  = 1;
+
+	# @@@ BROKEN
+	# Send an email to the following address when a new bug is added
+	# Useful for sending to a mailing list
+	# $g_email_new_address        = "";
+
+	# @@@ BROKEN
+	# Send an email to the following address when a bug/bugnote is updated
+	# Useful for sending to a mailing list
+	# $g_email_update_address     = "";
 
 	# set to 0 to disable email check
 	$g_validate_email            = 1;
 
 	# change to language you want... choices are:
-	# english, spanish, portuguese, german, french, italian
+	# english, spanish, portuguese, german, french, italian, dutch
 	$g_language                  = "english";
 
 	#--------------------
@@ -181,19 +198,19 @@
 	$g_view_reported_cookie_val       = "";
 	$g_view_assigned_cookie_val       = "";
 
-	if ( isset( $g_string_cookie ) ) {
+	if ( isset( $HTTP_COOKIE_VARS[$g_string_cookie] ) ) {
 		$g_string_cookie_val              = $HTTP_COOKIE_VARS[$g_string_cookie];
 	}
-	if ( isset( $g_project_cookie ) ) {
+	if ( isset( $HTTP_COOKIE_VARS[$g_project_cookie] ) ) {
 		$g_project_cookie_val             = $HTTP_COOKIE_VARS[$g_project_cookie];
 	}
-	if ( isset( $g_view_all_cookie ) ) {
+	if ( isset( $HTTP_COOKIE_VARS[$g_view_all_cookie] ) ) {
 		$g_view_all_cookie_val            = $HTTP_COOKIE_VARS[$g_view_all_cookie];
 	}
-	if ( isset( $g_view_reported_cookie ) ) {
+	if ( isset( $HTTP_COOKIE_VARS[$g_view_reported_cookie] ) ) {
 		$g_view_reported_cookie_val       = $HTTP_COOKIE_VARS[$g_view_reported_cookie];
 	}
-	if ( isset( $g_view_assigned_cookie ) ) {
+	if ( isset( $HTTP_COOKIE_VARS[$g_view_assigned_cookie] ) ) {
 		$g_view_assigned_cookie_val       = $HTTP_COOKIE_VARS[$g_view_assigned_cookie];
 	}
 	#--------------------

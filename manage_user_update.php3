@@ -15,6 +15,14 @@
 		exit;
 	}
 
+	if ( !isset( $f_protected ) ) {
+		$f_protected = "";
+	}
+
+	if ( !isset( $f_enabled ) ) {
+		$f_enabled = "";
+	}
+
 	### update action
 	### administrator is not allowed to change access level or enabled
 	### this is to prevent screwing your own account

@@ -55,6 +55,10 @@
 		$f_offset = 0;
 	}
 
+	if ( !isset( $f_hide_resolved ) ) {
+		$f_hide_resolved = "";
+	}
+
 	### basically we toggle between ASC and DESC if the user clicks the
 	### same sort order
 	if ( isset( $f_dir ) ) {
@@ -91,7 +95,7 @@
 	$query = $query.$t_where_clause;
 
 	if ( !isset( $f_sort ) ) {
-			$f_sort="id";
+			$f_sort="last_updated";
 	}
 	$query = $query." ORDER BY '$f_sort' $f_dir";
 	if ( isset( $f_limit_view ) ) {

@@ -330,6 +330,7 @@
 -->
 		<form method=post action="<? echo $g_bug_delete_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
+			<input type=hidden name=f_bug_text_id value="<? echo $f_bug_text_id ?>">
 		<td valign="top" bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value="<? echo $s_delete_bug_button ?>">
 		</td>

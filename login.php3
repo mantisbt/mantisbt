@@ -34,7 +34,7 @@
 		$result = db_query( $query );
 
 		### set permanent cookie (1 year)
-		if ( $f_perm_login=="on") {
+		if (( isset( $f_perm_login ) )&&( $f_perm_login=="on")) {
 			setcookie( $g_string_cookie, $u_cookie_string, time()+$g_cookie_time_length );
 			setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length );
 		}

@@ -41,7 +41,7 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<select name=f_resolution>
-				<? print_field_option_list( "resolution", $v_resolution ) ?>
+				<? print_field_option_list( "resolution", "fixed" ) ?>
 			</select>
 		</td>
 	</tr>
@@ -51,7 +51,7 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<select name=f_duplicate_id>
-				<? print_duplicate_id_option_list( $v_duplicate_id ) ?>
+				<? print_duplicate_id_option_list() ?>
 			</select>
 		</td>
 	</tr>

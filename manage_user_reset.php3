@@ -21,7 +21,7 @@
     if ( $f_protected!="on" ) {
 		if ( $g_allow_signup==1 ) {
 			### Create random password
-			$t_password = create_random_password( $p_email );
+			$t_password = create_random_password( $f_email );
 
 			### create the almost unique string for each user then insert into the table
 			$t_password2 = crypt( $t_password );

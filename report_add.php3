@@ -17,6 +17,34 @@
 	}
 	# need access level check
 
+	if ( !isset( $f_steps_to_reproduce ) ) {
+		$f_steps_to_reproduce = "";
+	}
+
+	if ( !isset( $f_build ) ) {
+		$f_build = "";
+	}
+
+	if ( !isset( $f_platform ) ) {
+		$f_platform = "";
+	}
+
+	if ( !isset( $f_os ) ) {
+		$f_os = "";
+	}
+
+	if ( !isset( $f_osbuild ) ) {
+		$f_osbuild = "";
+	}
+
+	if ( !isset( $f_product_version ) ) {
+		$f_product_version = "";
+	}
+
+	if ( !isset( $f_profile_id ) ) {
+		$f_profile_id = "";
+	}
+
 	### validating input
 	$check_failed = false;
 	if ( ( $f_category=="" ) ||
@@ -96,7 +124,7 @@
 				( null, '$g_project_cookie_val', '$u_id', '$f_assign_id', '0000000', 'normal', '$f_severity',
 				'$f_reproducibility', '$t_status', 'open', 'minor fix', '$f_category',
 				NOW(), NOW(), NOW(), '$t_id', '$f_os', '$f_osbuild',
-				'$f_platform', '$f_version', '$f_build',
+				'$f_platform', '$f_product_version', '$f_build',
 				1, '$f_profile_id', '$f_summary' )";
 		$result = db_query( $query );
 

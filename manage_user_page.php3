@@ -99,6 +99,7 @@
 			<form method=post action="<? echo $g_manage_user_reset ?>">
 		<td>
 			<input type=hidden name=f_id value="<? echo $u_id ?>">
+			<input type=hidden name=f_email value="<? echo $u_email ?>">
 			<input type=hidden name=f_protected value="<? echo $u_protected ?>">
 			<input type=submit value="<? echo $s_reset_password_button ?>">
 		</td>

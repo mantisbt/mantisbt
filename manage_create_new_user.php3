@@ -15,6 +15,19 @@
 		exit;
 	}
 
+	if ( $f_password != $p_password_verify ) {
+		echo "ERROR: passwords do not match";
+		exit;
+	}
+
+	if ( !isset( $f_protected ) ) {
+		$f_protected = "";
+	}
+
+	if ( !isset( $f_enabled ) ) {
+		$f_enabled = "";
+	}
+
 	### create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
 	$t_password = crypt( $f_password );
@@ -34,13 +47,22 @@
 		$t_user_id = db_result( $result, 0, 0 );
 	}
 
+	### Create preferences
+    $query = "INSERT
+    		INTO $g_mantis_user_pref_table
+    		(id, user_id, advanced_report, advanced_view)
+    		VALUES
+    		(null, '$t_user_id',
+    		'$g_default_advanced_report', '$g_default_advanced_view')";
+    $result = db_query($query);
+
 	### Add profile
-	$query = "INSERT
+	/*$query = "INSERT
 			INTO $g_mantis_user_profile_table
     		( id, user_id, platform, os, os_build, description, default_profile )
 			VALUES
 			( null, '$f_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description', '' )";
-    $result = db_query( $query );
+    $result = db_query( $query );*/
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

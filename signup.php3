@@ -35,7 +35,7 @@
 	### Passed our checks.  Insert into DB then send email.
 
 	### Create random password
-	$t_password = create_random_password( $p_email );
+	$t_password = create_random_password( $f_email );
 
 	### create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
@@ -61,12 +61,21 @@
 		$t_user_id = db_result( $result, 0, 0 );
 	}
 
+	### Create preferences
+    $query = "INSERT
+    		INTO $g_mantis_user_pref_table
+    		(id, user_id, advanced_report, advanced_view)
+    		VALUES
+    		(null, '$t_user_id',
+    		'$g_default_advanced_report', '$g_default_advanced_view')";
+    $result = db_query($query);
+
 	### Create user profile
-	$query = "INSERT INTO $g_mantis_user_profile_table
+	/*$query = "INSERT INTO $g_mantis_user_profile_table
     		( id, user_id, platform, os, os_build, description, default_profile )
     		VALUES
-			( null, '$t_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description', '' )";
-    $result = db_query( $query );
+			( null, '$t_user_id', '', '', '', '', '' )";
+    $result = db_query( $query );*/
 
 	### Send notification email
 	email_signup( $t_user_id, $t_password );

@@ -65,7 +65,7 @@
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_viewing_bug_details_title ?></b>
+			<b><? echo $s_updating_bug_simple_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color ?> align=center>

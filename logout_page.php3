@@ -6,6 +6,9 @@
 ?>
 <? include( "core_API.php" ); ?>
 <?
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+?>
+<?
 	### delete cookies
 	setcookie( $g_string_cookie );
 	setcookie( $g_project_cookie );

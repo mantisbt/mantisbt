@@ -9,6 +9,12 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( !access_level_check_greater_or_equal( "developer" ) ) {
+		### need to replace with access error page
+		header( "Location: $g_logout_page" );
+		exit;
+	}
+
 	### Delete the bug entry
 	$query = "DELETE
 			FROM $g_mantis_bug_table
@@ -43,8 +49,6 @@
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$f_id'";
 	$result = db_query($query);
-
-	header( "Location: $g_view_all_bug_page" );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

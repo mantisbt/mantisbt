@@ -8,6 +8,12 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	if ( !access_level_check_greater_or_equal( "developer" ) ) {
+		### need to replace with access error page
+		header( "Location: $g_logout_page" );
+		exit;
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -29,6 +35,7 @@
 <p>
 <form method=post action="<? echo $g_bug_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">
+	<input type=hidden name=f_bug_text_id value="<? echo $f_bug_text_id ?>">
 	<input type=submit value="<? echo $s_delete_bug_button ?>">
 </form>
 </div>

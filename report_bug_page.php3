@@ -8,6 +8,30 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	if ( !isset( $f_category ) ) {
+		$f_category = "";
+	}
+
+	if ( !isset( $f_reproducibility ) ) {
+		$f_reproducibility = "";
+	}
+
+	if ( !isset( $f_severity ) ) {
+		$f_severity = "";
+	}
+
+	if ( !isset( $f_summary ) ) {
+		$f_summary = "";
+	}
+
+	if ( !isset( $f_description ) ) {
+		$f_description = "";
+	}
+
+	if ( !isset( $f_additional_info ) ) {
+		$f_additional_info = "";
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

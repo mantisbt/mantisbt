@@ -9,6 +9,10 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( !isset( $f_duplicate_id ) ) {
+		$f_duplicate_id = "";
+	}
+
 	### Update all fields
     $query = "UPDATE $g_mantis_bug_table
     		SET category='$f_category', severity='$f_severity',

@@ -8,6 +8,63 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	if ( !isset( $f_category ) ) {
+		$f_category = "";
+	}
+
+	if ( !isset( $f_reproducibility ) ) {
+		$f_reproducibility = "";
+	}
+
+	if ( !isset( $f_severity ) ) {
+		$f_severity = "";
+	}
+
+	if ( !isset( $f_profile_id ) ) {
+		$f_profile_id = "";
+	}
+
+	if ( !isset( $f_platform ) ) {
+		$f_platform = "";
+	}
+
+	if ( !isset( $f_os ) ) {
+		$f_os = "";
+	}
+
+	if ( !isset( $f_osbuild ) ) {
+		$f_osbuild = "";
+	}
+
+	if ( !isset( $f_product_version ) ) {
+		$f_product_version = "";
+	}
+
+	if ( !isset( $f_build ) ) {
+		$f_build = "";
+	}
+
+	if ( !isset( $f_assign_id ) ) {
+		$f_assign_id = "";
+	}
+
+	if ( !isset( $f_summary ) ) {
+		$f_summary = "";
+	}
+
+	if ( !isset( $f_description ) ) {
+		$f_description = "";
+	}
+
+
+	if ( !isset( $f_steps_to_reproduce ) ) {
+		$f_steps_to_reproduce = "";
+	}
+
+	if ( !isset( $f_additional_info ) ) {
+		$f_additional_info = "";
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

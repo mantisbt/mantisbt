@@ -15,6 +15,10 @@
 		exit;
 	}
 
+	if ( !isset( $f_action ) ) {
+			$f_action = "";
+	}
+
 	### If Deleteing item redirect to delete script
 	if ( $f_action=="delete" ) {
 		header( "Location: $g_project_delete_page?f_project_id=$f_project_id" );
@@ -128,7 +132,7 @@
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_categories_and_versions ?></b>
+			<b><? echo $s_categories_and_version_title ?></b>
 		</td>
 	</tr>
 	<tr align=center bgcolor=<? echo $g_category_title_color2 ?>>

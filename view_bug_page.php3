@@ -54,7 +54,7 @@
 	<table width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_viewing_bug_details_title ?></b>
+			<b><? echo $s_viewing_bug_simple_details_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color ?> align=center>
@@ -225,6 +225,7 @@
 <?	} ?>
 		<form method=post action="<? echo $g_bug_delete_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
+			<input type=hidden name=f_bug_text_id value="<? echo $f_bug_text_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value="<? echo $s_delete_bug_button ?>">
 		</td>

@@ -7,6 +7,10 @@
 <? include( "core_API.php" ) ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	if (( isset( $g_string_cookie_val ))&&( !empty( $g_string_cookie_val ) )) {
+		login_cookie_check( $g_main_page );
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

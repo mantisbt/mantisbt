@@ -126,7 +126,21 @@
 	}
 	### --------------------
 	function print_header( $p_title="Mantis" ) {
-		PRINT "<h3>$p_title</h3>";
+		global 	$g_show_project_in_title,
+				$g_project_cookie_val,
+				$g_mantis_project_table;
+
+		if ( $g_show_project_in_title==1 ) {
+			$query = "SELECT name
+					FROM $g_mantis_project_table
+					WHERE id='$g_project_cookie_val'";
+			$result = db_query( $query );
+			$t_project_name = db_result( $result, 0, 0 );
+
+			PRINT "<h3>$t_project_name</h3>";
+		} else {
+			PRINT "<h3>$p_title</h3>";
+		}
 	}
 	### --------------------
 	function print_top_page( $p_page ) {
@@ -377,7 +391,7 @@
 		}
 	}
 	### --------------------
-	function print_duplicate_id_option_list( $p_duplicate_id ) {
+	function print_duplicate_id_option_list() {
 		global $g_mantis_bug_table;
 
 	    $query = "SELECT id
@@ -391,12 +405,7 @@
 	    	$row = db_fetch_array( $result );
 	    	$t_duplicate_id	= $row["id"];
 
-	    	if ( $t_duplicate_id==$p_duplicate_id ) {
-				PRINT "<option value=\"$t_duplicate_id\" SELECTED>".$t_duplicate_id;
-			}
-			else {
-				PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id;
-			}
+			PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id;
 		}
 	}
 	### --------------------
@@ -1022,7 +1031,7 @@
 		### if logged in
 		if ( isset( $g_string_cookie_val ) ) {
 			if ( empty( $g_project_cookie_val ) ) {
-				header( "Location: $g_logout_page" );
+				header( "Location: $g_login_page" );
 				exit;
 			}
 
@@ -1035,7 +1044,7 @@
 
 			### check for acess enabled
 			if ( $t_enabled!="on" ) {
-				header( "Location: $g_logout_page" );
+				header( "Location: $g_login_page" );
 			}
 
 			$t_last_access = get_current_user_field( "last_visit" );
@@ -1369,12 +1378,15 @@
 						$s_new_account_message.
 						$s_new_account_do_not_reply;
 
+		$t_headers = "";
 		email_send( $v_email, $s_new_account_subject, $t_message, $t_headers );
 	}
 	### --------------------
 	### Send new password when user forgets
 	function email_reset( $p_user_id, $p_password ) {
-		global $g_mantis_user_table;
+		global 	$g_mantis_user_table, $g_mantis_url,
+				$s_reset_request_msg, $s_account_name_msg,
+				$s_news_password_msg;
 
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
@@ -1384,58 +1396,126 @@
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 
 		### Build Welcome Message
-		$t_message = "There was a request to have your password reset\n\n".
-					"Your account name is: ".$v_username."\n".
-					"Here is your new password: ".$p_password."\n\n";
+		$t_message = $s_reset_request_msg."\n\n".
+					$s_account_name_msg.": ".$v_username."\n".
+					$s_news_password_msg.": ".$p_password."\n\n";
+					$g_mantis_url."\n\n";
 
 		email_send( $v_email, "New Password", $t_message );
 	}
 	### --------------------
 	function email_new_bug( $p_bug_id ) {
-
-		### @@@ not yet implemented
-		return;
-
-		global $g_mantis_user_table;
+		global $g_mantis_user_table, $s_new_bug_msg, $g_email_new_address;
 
 		$query = "SELECT id
 				FROM $g_mantis_user_table
-				WHERE access_level='developer' OR access_level='administrator'";
+				WHERE access_level='developer' OR
+						access_level='manager' OR
+						access_level='administrator'";
 		$result = db_query( $query );
+
 		$user_count = db_num_rows( $result );
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_id = $row["id"];
-			#email_bug_info( $t_id, "The following bug has been ADDED." );
+
+			email_bug_info2( $p_bug_id, $s_new_bug_msg, $t_id );
+		}
+
+		if ( !empty($g_email_new_address) ) {
+			email_bug_info3( $p_bug_id, $s_new_bug_msg, $g_email_new_address );
+		}
+	}
+	### --------------------
+	function email_new_bug2( $p_bug_id ) {
+		global $g_mantis_user_table, $s_new_bug_msg, $g_email_new_address;
+
+		$query = "SELECT email
+				FROM $g_mantis_user_table
+				WHERE access_level='developer' OR
+						access_level='manager' OR
+						access_level='administrator'";
+		$result = db_query( $query );
+
+		$user_count = db_num_rows( $result );
+		$t_bcc_header = "bcc:";
+		for ($i=0;$i<$user_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_email = $row["email"];
+
+			$t_bcc_header .= $t_email.", ";
+		}
+
+		$t_bcc_header = substr( $t_bcc_header, 0, strlen( $t_bcc_header ) - 2 )."\n";
+
+		if ( $user_count > 0 ) {
+			email_bug_info4( $p_bug_id, $s_new_bug_msg, $g_email_new_address, $t_bcc_header );
 		}
 	}
 	### --------------------
 	### Notify reporter and handler when new bugnote is added
 	function email_bugnote_add( $p_bug_id ) {
-		email_bug_info( $p_bug_id, "A BUGNOTE has been added to this bug." );
+		global $s_email_bugnote_msg, $g_email_update_address;
+
+		email_bug_info( $p_bug_id, $s_email_bugnote_msg );
+
+		if ( !empty($g_email_update_address) ) {
+			email_bug_info3( $p_bug_id, $s_email_bugnote_msg, $g_email_update_address );
+		}
 	}
 	### --------------------
 	function email_resolved( $p_bug_id ) {
-		email_bug_info( $p_bug_id, "The following bug has been RESOLVED." );
+		global $s_email_resolved_msg, $g_email_update_address;
+
+		email_bug_info( $p_bug_id, $s_email_resolved_msg );
+
+		if ( !empty($g_email_update_address) ) {
+			email_bug_info3( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
+		}
 	}
 	### --------------------
 	function email_feedback( $p_bug_id ) {
-		email_bug_info( $p_bug_id, "The following bug requires your FEEDBACK." );
+		global $s_email_feedback_msg, $g_email_update_address;
+
+		email_bug_info( $p_bug_id, $s_email_feedback_msg );
+
+		if ( !empty($g_email_update_address) ) {
+			email_bug_info3( $p_bug_id, $s_email_feedback_msg, $g_email_update_address );
+		}
 	}
 	### --------------------
 	function email_reopen( $p_bug_id ) {
-		email_bug_info( $p_bug_id, "The following bug has been REOPENED." );
+		global $s_email_resolved_msg, $g_email_update_address;
+
+		email_bug_info( $p_bug_id, $s_email_resolved_msg );
+
+		if ( !empty($g_email_update_address) ) {
+			email_bug_info3( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
+		}
 	}
 	### --------------------
 	function email_assign( $p_bug_id ) {
-		email_bug_info( $p_bug_id, "The following bug has been ASSIGNED." );
+		global $s_email_resolved_msg, $g_email_update_address;
+
+		email_bug_info( $p_bug_id, $s_email_resolved_msg );
+
+		if ( !empty($g_email_update_address) ) {
+			email_bug_info3( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
+		}
 	}
 	### --------------------
 	function email_build_bug_message( $p_bug_id ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_user_table, $g_mantis_project_table,
 				$g_complete_date_format,
-				$g_bugnote_order, $g_mantis_url, $g_view_bug_page;
+				$g_bugnote_order, $g_mantis_url, $g_view_bug_page,
+				$s_email_reporter, $s_email_handler,
+				$s_email_project, $s_email_bug, $s_email_category,
+				$s_email_reproducibility, $s_email_severity,
+				$s_email_priority, $s_email_status, $s_email_resolution,
+				$s_email_duplicate, $s_email_date_submitted,
+				$s_email_last_modified, $s_email_summary,
+				$s_email_description;
 
 		$query = "SELECT *
 				FROM $g_mantis_bug_table
@@ -1458,6 +1538,27 @@
 		$result = db_query( $query );
 		$t_project_name = db_result( $result, 0, 0 );
 
+		if ( $v_reporter_id > "0000000" ) {
+			$query = "SELECT username
+					FROM $g_mantis_user_table
+					WHERE id='$v_reporter_id'";
+			$result = db_query( $query );
+			$t_reporter_name = db_result( $result, 0, 0 );
+		} else {
+			$t_reporter_name = "Does not exist";
+		}
+
+		$t_handler_name = "";
+		if ( $v_handler_id > "0000000" ) {
+			$query = "SELECT username
+					FROM $g_mantis_user_table
+					WHERE id='$v_handler_id'";
+			$result = db_query( $query );
+			$t_handler_name = db_result( $result, 0, 0 );
+		} else {
+			$t_handler_name = "Does not exist";
+		}
+
 		$v2_description = stripslashes( str_replace( "<br>", "", $v2_description ) );
 		$v_summary = stripslashes( $v_summary );
 		$v_date_submitted = date( $g_complete_date_format, sql_to_unix_time( $v_date_submitted ) );
@@ -1466,25 +1567,28 @@
 		$t_message = "=======================================================================\n";
 		$t_message .= $g_mantis_url.$g_view_bug_page."?f_id=".$p_bug_id."\n";
 		$t_message .= "=======================================================================\n";
-		$t_message .= "Project:         $t_project_name\n";
-		$t_message .= "Bug:             $v_id\n";
-		$t_message .= "Category:        $v_category\n";
-		$t_message .= "Reproducibility: $v_reproducibility\n";
-		$t_message .= "Severity:        $v_severity\n";
-		$t_message .= "Priority:        $v_priority\n";
-		$t_message .= "Status:          $v_status\n";
+		$t_message .= "$s_email_reporter:        $t_reporter_name\n";
+		$t_message .= "$s_email_handler:         $t_handler_name\n";
+		$t_message .= "=======================================================================\n";
+		$t_message .= "$s_email_project:         $t_project_name\n";
+		$t_message .= "$s_email_bug:             $v_id\n";
+		$t_message .= "$s_email_category:        $v_category\n";
+		$t_message .= "$s_email_reproducibility: $v_reproducibility\n";
+		$t_message .= "$s_email_severity:        $v_severity\n";
+		$t_message .= "$s_email_priority:        $v_priority\n";
+		$t_message .= "$s_email_status:          $v_status\n";
 		if ( $v_status=="resolved" ) {
-			$t_message .= "Resolution:      $v_resolution\n";
+			$t_message .= "$s_email_resolution:      $v_resolution\n";
 			if ( $v_resolution=="duplicate" ) {
-				$t_message .= "Duplicate:      $v_duplicate_id\n";
+				$t_message .= "$s_email_duplicate:      $v_duplicate_id\n";
 			}
 		}
 		$t_message .= "=======================================================================\n";
-		$t_message .= "Date Submitted:   $v_date_submitted\n";
-		$t_message .= "Last Modified:    $v_last_updated\n";
+		$t_message .= "$s_email_date_submitted:   $v_date_submitted\n";
+		$t_message .= "$s_email_last_modified:    $v_last_updated\n";
 		$t_message .= "=======================================================================\n";
-		$t_message .= "Summary:  $v_summary\n\n";
-		$t_message .= "Description: $v2_description\n";
+		$t_message .= "$s_email_summary:  $v_summary\n\n";
+		$t_message .= "$s_email_description: $v2_description\n";
 		$t_message .= "=======================================================================\n\n";
 
 		return $t_message;
@@ -1601,7 +1705,110 @@
 		}
 	}
 	### --------------------
-	function email_send( $p_recipient, $p_subject, $p_message ) {
+	### Send only to specified user (by user id)
+	function email_bug_info2( $p_bug_id, $p_message, $p_user_id ) {
+		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table;
+
+		### Get Subject
+		$query = "SELECT project_id, summary
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+		$p_subject = $row["summary"];
+		$t_project_id = $row["project_id"];
+
+		$query = "SELECT name
+				FROM $g_mantis_project_table
+				WHERE id='$t_project_id'";
+		$result = db_query( $query );
+		$t_project_name = db_result( $result, 0, 0 );
+
+		### Get User Email
+		$query = "SELECT email
+				FROM $g_mantis_user_table
+				WHERE id='$p_user_id'";
+		$result = db_query( $query );
+		$t_user_email = db_result( $result, 0, 0 );
+
+		### Build subject
+		$p_subject = "[".$t_project_name." ".$p_bug_id."]: ".stripslashes( $p_subject );
+
+		### build message
+		$t_message = $p_message."\n";
+		$t_message .= email_build_bug_message( $p_bug_id );
+
+		### send mail
+		if (is_valid_email($t_user_email)) {
+			$res = email_send( $t_user_email, $p_subject, $t_message );
+		}
+	}
+	### --------------------
+	### Send only to specified user (by name)
+	function email_bug_info3( $p_bug_id, $p_message, $p_user_email ) {
+		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table;
+
+		### Get Subject
+		$query = "SELECT project_id, summary
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+		$p_subject = $row["summary"];
+		$t_project_id = $row["project_id"];
+
+		$query = "SELECT name
+				FROM $g_mantis_project_table
+				WHERE id='$t_project_id'";
+		$result = db_query( $query );
+		$t_project_name = db_result( $result, 0, 0 );
+
+		### Build subject
+		$p_subject = "[".$t_project_name." ".$p_bug_id."]: ".stripslashes( $p_subject );
+
+		### build message
+		$t_message = $p_message."\n";
+		$t_message .= email_build_bug_message( $p_bug_id );
+
+		### send mail
+		if (is_valid_email($p_user_email)) {
+			$res = email_send( $p_user_email, $p_subject, $t_message );
+		}
+	}
+	### --------------------
+	### Send to reporter and bcc_list
+	function email_bug_info4( $p_bug_id, $p_message, $p_user_email, $p_bcc_header ) {
+		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table;
+
+		### Get Subject
+		$query = "SELECT project_id, summary
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+		$p_subject = $row["summary"];
+		$t_project_id = $row["project_id"];
+
+		$query = "SELECT name
+				FROM $g_mantis_project_table
+				WHERE id='$t_project_id'";
+		$result = db_query( $query );
+		$t_project_name = db_result( $result, 0, 0 );
+
+		### Build subject
+		$p_subject = "[".$t_project_name." ".$p_bug_id."]: ".stripslashes( $p_subject );
+
+		### build message
+		$t_message = $p_message."\n";
+		$t_message .= email_build_bug_message( $p_bug_id );
+
+		### send mail
+		if (is_valid_email($p_user_email)) {
+			$res = email_send( $p_user_email, $p_subject, $t_message, $p_bcc_header );
+		}
+	}
+	### --------------------
+	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
 		global $g_from_email, $g_enable_email_notification;
 
 		if ( $g_enable_email_notification==1 ) {
@@ -1631,6 +1838,8 @@
 			### If you want to send foreign charsets
 			#$t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
 
+			$t_headers .= $p_header;
+
 			#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
 			#exit;
 
@@ -1651,7 +1860,7 @@
 			return true;
 		}
 
-		if (eregi("^[_\.0-9a-z-]+@([0-9a-z][-0-9a-z\.]+)\.([a-z]{2,3}$)", $p_email, $check)) {
+		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+).([a-z]{2,3}$)", $p_email, $check)) {
 			if (getmxrr($check[1].".".$check[2], $temp)) {
 				return true;
 			} else {

@@ -53,7 +53,7 @@
 	<table cols=4 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=4 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_viewing_bug_details_title ?></b>
+			<b><? echo $s_add_bugnote_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color ?> align=center>
