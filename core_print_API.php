@@ -388,7 +388,7 @@
 	### --------------------
 	# @@@ Unused
 	function print_enum_string( $p_value, $p_string ) {
-		global $s_status_enum_string
+		global $s_status_enum_string;
 	}
 	### --------------------
 	function print_project_user_option_list( $p_val=0 ) {
