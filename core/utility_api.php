@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.14 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: utility_api.php,v 1.15 2004-08-16 02:14:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Utility API ###
@@ -169,16 +169,15 @@
 	# It doesn't use gd_info() so it works with PHP < 4.3.0 as well
 	function get_gd_version()
 	{
-		ob_start();
-		phpinfo(8);
-		$module_info = ob_get_contents();
-		ob_end_clean();
-		if( preg_match( "/\bgd\s+version\b[^\d\n\r]+?([\d\.]+)/i", $module_info, $matches ) ) {
-			$gd_version_number = $matches[1];
-		}
-		else {
-			$gd_version_number = 0;
-		}
-		return $gd_version_number;
+    $t_GDfuncList = get_extension_funcs('gd');
+    if( ! is_array( $t_GDfuncList ) ) {
+    	return 0;
+    } else {
+	    if( in_array('imagegd2',$t_GDfuncList) ) {
+	    	return 2;
+	   	} else {
+	   		return 1;
+	   	}
+	  }
 	}
 ?>

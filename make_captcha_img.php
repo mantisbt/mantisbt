@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: make_captcha_img.php,v 1.2 2004-08-14 17:45:29 thraxisp Exp $
+	# $Id: make_captcha_img.php,v 1.3 2004-08-16 02:14:55 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# --------------------------------------------------------
@@ -59,7 +59,7 @@
 			function masc_captcha( $config )
 			{
 				// Test for GD-Library(-Version)
-				$this->gd_version = $this->get_gd_version();
+				$this->gd_version = get_gd_version();
 				if($this->gd_version == 0) die("There is no GD-Library-Support enabled. The Captcha-Class cannot be used!");
 				if($this->debug) echo "\n<br>-Captcha-Debug: The available GD-Library has major version ".$this->gd_version;
 
@@ -250,26 +250,6 @@
 				return $this->TTF_file;
 			}
 
-			function get_gd_version()
-			{
-				static $gd_version_number = null;
-				if($gd_version_number === null)
-				{
-				   ob_start();
-				   phpinfo(8);
-				   $module_info = ob_get_contents();
-				   ob_end_clean();
-				   if(preg_match("/\bgd\s+version\b[^\d\n\r]+?([\d\.]+)/i", $module_info, $matches))
-				   {
-					   $gd_version_number = $matches[1];
-				   }
-				   else
-				   {
-					   $gd_version_number = 0;
-				   }
-				}
-				return $gd_version_number;
-			}
 	} // END CLASS masc_captcha
 
 ?>
