@@ -205,9 +205,19 @@
 	#--------------------
 
 	#--------------------
+	# customizable pages
+
+	# specifiy your top/bottom include file (logos, banners, etc)
+	$g_bottom_include_page            = "";
+	$g_top_include_page               = "";
+	# css
+	$g_css_include_file               = "css_inc.php";
+	# meta tags
+	$g_meta_include_file              = "meta_inc.php";
+
+	#--------------------
 	# core file variables
 	$g_core_API_file                  = "core_API.php";
-	$g_meta_include_file              = "meta_inc.php";
 	$g_menu_include_file              = "menu_inc.php";
 	#--------------------
 
@@ -215,11 +225,6 @@
 	# bugnote includes
 	$g_bugnote_include_file           = "bugnote_inc.php";
 	$g_bugnote_add_include_file       = "bugnote_add_inc.php";
-	#--------------------
-
-	#--------------------
-	# css
-	$g_css_include_file               = "css_inc.php";
 	#--------------------
 
 	#--------------------

@@ -9,9 +9,13 @@ Mantis
  * Added direct link to bug in email
  * Added email to assignee upon assignment
  * Added support for report form to remember input if error occurs
- * Added crude test file to check database connection and config settings (check.php3)
+ * Added crude test file to check database connection and config settings
+   (check.php3)
  * Added some integration with the documentation and the report form
+ * Added include for top and bottom of page.  This lets users add
+   customizations
  * Renamed g_login_url to g_mantis_url
+ * Renamed string files to have .txt extension
  * Obsoleted s_hit_back_msg
 
 02.14.2001  -   0.14.3

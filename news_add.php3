@@ -40,6 +40,7 @@
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
+<? print_top_page( $g_top_include_page ) ?>
 
 <p>
 <? print_menu( $g_menu_include_file ) ?>
@@ -81,6 +82,7 @@
 <a href="<? echo $g_news_menu_page ?>"><? echo $s_proceed ?></a>
 </div>
 
+<? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

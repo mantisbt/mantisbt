@@ -9,7 +9,7 @@
 	###########################################################################
 
 	require( "config_inc.php" );
-	require( "strings_".$g_language.".php" );
+	require( "strings_".$g_language.".txt" );
 
 	###########################################################################
 	### FUNCTIONS                                                           ###
@@ -127,6 +127,18 @@
 	### --------------------
 	function print_header( $p_title="Mantis" ) {
 		PRINT "<h3>$p_title</h3>";
+	}
+	### --------------------
+	function print_top_page( $p_page ) {
+		if ( file_exists( $p_page ) ) {
+			include( $p_page );
+		}
+	}
+	### --------------------
+	function print_bottom_page( $p_page ) {
+		if ( file_exists( $p_page ) ) {
+			include( $p_page );
+		}
 	}
 	### --------------------
 	function print_footer( $p_file ) {
