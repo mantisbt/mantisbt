@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.138 $
+	# $Revision: 1.139 $
 	# $Author: vboctor $
-	# $Date: 2003-07-06 03:09:37 $
+	# $Date: 2003-07-27 14:15:04 $
 	#
-	# $Id: strings_english.txt,v 1.138 2003-07-06 03:09:37 vboctor Exp $
+	# $Id: strings_english.txt,v 1.139 2003-07-27 14:15:04 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -612,6 +612,7 @@ $s_reset_password_button = 'Reset Password';
 $s_delete_user_button = 'Delete User';
 $s_reset_password_msg = 'Reset Password sets the randomly generated password.';
 $s_reset_password_msg2 = 'Reset Password sets the password to be blank.';
+$s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Account protected. Cannot reset the password.';

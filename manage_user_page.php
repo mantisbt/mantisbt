@@ -19,6 +19,7 @@
 	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 	$f_hide = gpc_get_bool( 'hide' );
 	$f_save = gpc_get_bool( 'save' );
+	$f_letter = strtoupper( gpc_get_string( 'letter', 'A' ) );
 
 	$t_cookie_name = config_get( 'manage_cookie' );
 	$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
@@ -131,17 +132,38 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 <?php # Manage Form BEGIN ?>
 <?php
+	$t_index_links = '<br /><center><table class="width75"><tr>';
+	$t_index_links .= '<td><a href="manage_user_page.php?letter=ALL">' . lang_get( 'show_all_users' ) . '</a></td>';
+	for ( $i = 'A'; $i != 'AA'; $i++ ) {
+		if ( $i == $f_letter ) {
+			$t_link = "<strong>$i</string>";
+		} else {
+			$t_link = '<a href="manage_user_page.php?letter=' . $i .'">' . $i . '</a>';
+		}
+		$t_index_links .= '<td>' . $t_link . '</td>';
+	}
+	$t_index_links .= '</tr></table></center>';
+
+	echo $t_index_links;
+
+	if ( $f_letter === 'ALL' ) {
+		$t_where = '(1 = 1)';
+	} else {
+		$t_where = "(username like '$f_letter%')";
+	}
+
 	# Get the user data in $c_sort order
 	if ( 0 == $c_hide ) {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
 				UNIX_TIMESTAMP(last_visit) as last_visit
 				FROM $t_user_table
+				WHERE $t_where
 				ORDER BY '$c_sort' $c_dir";
 	} else {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
 				UNIX_TIMESTAMP(last_visit) as last_visit
 				FROM $t_user_table
-				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old')
+				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old') AND $t_where
 				ORDER BY '$c_sort' $c_dir";
 	}
 
