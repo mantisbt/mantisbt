@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: php_api.php,v 1.3 2002-09-16 10:08:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -50,12 +50,13 @@
 
 	# Experimental support for $_* auto-global variables in PHP < 4.1.0
 	if ( ! php_version_at_least( '4.1.0' ) ) {
-		global $_REQUEST, $_GET, $_POST, $_COOKIE, $_SERVER;
+		global $_REQUEST, $_GET, $_POST, $_COOKIE, $_SERVER, $_FILES;
 		
 		$_GET = $HTTP_GET_VARS;
 		$_POST = $HTTP_POST_VARS;
 		$_COOKIE = $HTTP_COOKIE_VARS;
 		$_SERVER = $HTTP_SERVER_VARS;
+		$_FILES = $HTTP_POST_FILES;
 		
 		$_REQUEST = $HTTP_COOKIE_VARS;
 		foreach ($HTTP_POST_VARS as $key => $value) {
