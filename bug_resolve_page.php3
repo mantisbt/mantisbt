@@ -43,7 +43,7 @@
 		</td>
 		<td bgcolor="<? echo $g_primary_color_dark ?>">
 			<select name="f_resolution">
-				<? print_enum_string_option_list( $g_resolution_enum_string, FIXED ) ?>
+				<? print_enum_string_option_list( $s_resolution_enum_string, FIXED ) ?>
 			</select>
 		</td>
 	</tr>

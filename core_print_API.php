@@ -371,9 +371,10 @@
 	}
 	### --------------------
 	function print_enum_string_option_list( $p_enum_string, $p_val=0 ) {
-		global $g_mantis_project_table;
+		global $s_status_enum_string;
 
-		$t_arr = explode_enum_string( $p_enum_string );
+		$t_arr = explode_enum_string( $p_enum_string);
+		#$t_arr = explode_enum_string( $s_status_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
@@ -383,6 +384,11 @@
 				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]";
 			}
 		} ### end for
+	}
+	### --------------------
+	# @@@ Unused
+	function print_enum_string( $p_value, $p_string ) {
+		global $s_status_enum_string
 	}
 	### --------------------
 	function print_project_user_option_list( $p_val=0 ) {
@@ -490,9 +496,10 @@
 	# formats the severity given the status
 	# shows the severity in BOLD if the bug is NOT closed and is of significant severity
 	function print_formatted_severity_string( $p_status, $p_severity ) {
-		global $g_severity_enum_string;
+		global $g_severity_enum_string, $s_severity_enum_string;
 
-		$t_sev_str = get_enum_element( $g_severity_enum_string, $p_severity );
+		#$t_sev_str = get_enum_element( $g_severity_enum_string, $p_severity );
+		$t_sev_str = get_enum_element( $s_severity_enum_string, $p_severity );
 		if ( ( ( $p_severity==MAJOR ) ||
 			 ( $p_severity==CRASH ) ||
 			 ( $p_severity==BLOCK ) )&&

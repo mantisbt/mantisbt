@@ -4,7 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# German: Hermann-Josef Beckers, Heiko Gierer
+	# German: Hermann-Josef Beckers, hjb-rheine@t-online.de,
+	# German: Heiko Gierer, gierer@rittershaus.de
 ?>
 <?
 	# General Strings

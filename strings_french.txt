@@ -4,7 +4,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# French: Hellekin O. Wolf, Eric Hartmann
+	# French: Hellekin O. Wolf, hellekin@mmania.com
+	# French: Eric Hartmann, eric@rhinfo.com
 ?>
 <?
 	# General Strings

@@ -50,12 +50,42 @@
 	### --------------------
 	# build the bcc list
 	function build_bcc_list( $p_bug_id, $p_notify_type ) {
-		global $g_mantis_user_table, $g_mantis_project_user_list_table;
+		global $g_mantis_bug_table, $g_mantis_user_table,
+				$g_mantis_project_user_list_table;
 
-		$p_project_id = get_bug_project_id( $p_bug_id );
-
+		# setup the array
 		$send_arr = array();
 		$send_counter = 0;
+
+		### Get Reporter and Handler IDs
+		$query = "SELECT reporter_id, handler_id
+				FROM $g_mantis_bug_table
+				WHERE id='$p_bug_id'";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, "v" );
+
+		### Get Reporter Email
+		$t_notify_reporter = get_user_pref_info( $v_reporter_id, $p_notify_type );
+		$t_reporter_email = get_user_info( $v_reporter_id, "email" );
+		if ( $t_notify_reporter==1 ) {
+			$send_arr[$send_counter++] = $t_reporter_email;
+		}
+
+		### Get Handler Email
+		if ( $v_handler_id > 0 ) {
+			$t_handler_email = get_user_info( $v_handler_id, "email" );
+			$t_notify_handler = get_user_pref_info( $v_handler_id, $p_notify_type );
+
+			if ( $t_notify_handler==1 ) {
+				if ( !check_duplicate($send_arr,$t_handler_email) ) {
+					$send_arr[$send_counter++] = $t_handler_email;
+				}
+			}
+		}
+
+		# get the project id
+		$p_project_id = get_bug_project_id( $p_bug_id );
 
 		$t_dev = DEVELOPER;
 		$query = "SELECT id, email
@@ -64,6 +94,7 @@
 					enabled='1'";
 		$result = db_query( $query );
 
+		# if the user's notification is on then add to the list
 		$user_count = db_num_rows( $result );
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
@@ -94,8 +125,7 @@
 			}
 		}
 
-		# Switch to Bcc if on windows  @@@ need elegant solution
-		$t_bcc = "bcc: ";
+		$t_bcc = "Bcc: ";
 		for ($i=0; $i<count($send_arr); $i++) {
 			$t_bcc .= $send_arr[$i].", ";
 		}
@@ -249,11 +279,11 @@
 				$s_email_duplicate, $s_email_date_submitted,
 				$s_email_last_modified, $s_email_summary,
 				$s_email_description,
-				$g_resolution_enum_string,
-				$g_severity_enum_string,
-				$g_priority_enum_string,
-				$g_status_enum_string,
-				$g_reproducibility_enum_string;
+				$s_resolution_enum_string,
+				$s_severity_enum_string,
+				$s_priority_enum_string,
+				$s_status_enum_string,
+				$s_reproducibility_enum_string;
 
 		$query = "SELECT *
 				FROM $g_mantis_bug_table
@@ -284,10 +314,10 @@
 		$v_date_submitted = date( $g_complete_date_format, sql_to_unix_time( $v_date_submitted ) );
 		$v_last_updated   = date( $g_complete_date_format, sql_to_unix_time( $v_last_updated ) );
 
-		$t_sev_str = get_enum_element( $g_severity_enum_string, $v_severity );
-		$t_pri_str = get_enum_element( $g_priority_enum_string, $v_priority );
-		$t_sta_str = get_enum_element( $g_status_enum_string, $v_status );
-		$t_rep_str = get_enum_element( $g_reproducibility_enum_string, $v_reproducibility );
+		$t_sev_str = get_enum_element( $s_severity_enum_string, $v_severity );
+		$t_pri_str = get_enum_element( $s_priority_enum_string, $v_priority );
+		$t_sta_str = get_enum_element( $s_status_enum_string, $v_status );
+		$t_rep_str = get_enum_element( $s_reproducibility_enum_string, $v_reproducibility );
 		$t_message = "=======================================================================\n";
 		$t_message .= $g_view_bug_page."?f_id=".$p_bug_id."\n";
 		$t_message .= "=======================================================================\n";
@@ -302,7 +332,7 @@
 		$t_message .= "$s_email_priority:        $t_pri_str\n";
 		$t_message .= "$s_email_status:          $t_sta_str\n";
 		if ( $v_status==RESOLVED ) {
-			$t_res_str = get_enum_element( $g_resolution_enum_string, $v_resolution );
+			$t_res_str = get_enum_element( $s_resolution_enum_string, $v_resolution );
 			$t_message .= "$s_email_resolution:      $t_res_str\n";
 			if ( $v_resolution==DUPLICATE ) {
 				$t_message .= "$s_email_duplicate:      $v_duplicate_id\n";
@@ -361,23 +391,7 @@
 	### --------------------
 	### Send bug info to reporter and handler
 	function email_bug_info( $p_bug_id, $p_message, $p_headers="" ) {
-		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table;
-
-		### Get Reporter and Handler IDs
-		$query = "SELECT reporter_id, handler_id
-				FROM $g_mantis_bug_table
-				WHERE id='$p_bug_id'";
-		$result = db_query( $query );
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
-
-		### Get Reporter Email
-		$t_reporter_email = get_user_info( $v_reporter_id, "email" );
-
-		### Get Handler Email
-		if ( $v_handler_id > 0 ) {
-			$t_reporter_email = get_user_info( $v_handler_id, "email" );
-		}
+		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table, $g_from_email;
 
 		# build subject
 		$p_subject = email_build_subject( $p_bug_id );
@@ -391,17 +405,8 @@
 		$res1 = 1;
 		$res2 = 1;
 
-		### Send to reporter if valid
-		if ((!empty($t_reporter_email))&&(is_valid_email($t_reporter_email))) {
-			$res1 = email_send( $t_reporter_email, $p_subject, $t_message, $p_headers );
-		}
-
-		### Send to handler if valid
-		if ((!empty($t_handler_email))&&
-			($t_handler_email!=$t_reporter_email)&&
-			(is_valid_email($t_handler_email))) {
-			$res2 = email_send( $t_handler_email, $p_subject, $t_message, $p_headers );
-		}
+		### Send Email
+		$res1 = email_send( $g_from_email, $p_subject, $t_message, $p_headers );
 	}
 	### --------------------
 	### Send to only the id
@@ -435,20 +440,20 @@
 	}
 	### --------------------
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
-		global $g_from_email, $g_enable_email_notification;
+		global $g_from_email, $g_enable_email_notification, $g_return_path_email;
 
 		if ( $g_enable_email_notification == 1 ) {
 
-			### NEED TO STRIP ALL FIELDS OF INVALID CHARACTERS
-
-			### Visit http://www.php.net/manual/function.mail.php
-			### if you have problems with mailing
+			# Visit http://www.php.net/manual/function.mail.php
+			# if you have problems with mailing
 
 			$t_recipient = trim( $p_recipient );
 
 			$t_subject = trim( $p_subject );
 
 			$t_message = trim( $p_message );
+
+			# @@@ Is it important to wordwrap???
 			/*if ( floor( phpversion() )>=4 ) {
 				$t_message = trim( wordwrap( $t_message, 72 ) );
 			} else {
@@ -459,9 +464,9 @@
 			#$t_headers .= "Reply-To: $p_reply_to_email\n";
 			$t_headers .= "X-Sender: <$g_from_email>\n";
 			$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
-			#$t_headers .= "X-Priority: 1\n"; ### Urgent = 1
-			#$t_headers .= "Return-Path: <$g_return_path_email>\n"; ### return if error
-			### If you want to send foreign charsets
+			$t_headers .= "X-Priority: 0\n"; # Urgent = 1, No Urgent = 5, Disable = 0
+			$t_headers .= "Return-Path: <$g_return_path_email>\n"; # return email if error
+			# If you want to send foreign charsets
 			#$t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
 
 			$t_headers .= $p_header;

@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# English: Kenzaburo Ito - kenito@300baud.org
+	# English: Kenzaburo Ito, kenito@300baud.org
 ?>
 <?
 	# General Strings

@@ -74,7 +74,7 @@
 		</td>
 		<td>
 			<select name="f_access_level">
-				<? print_enum_string_option_list( $g_access_levels_enum_string, REPORTER ) ?>
+				<? print_enum_string_option_list( $s_access_levels_enum_string, REPORTER ) ?>
 			</select>
 		</td>
 	</tr>

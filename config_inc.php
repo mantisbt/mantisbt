@@ -41,7 +41,7 @@
 	# requires trailing /
 	$g_icon_path     = $g_path."images/";
 
-	# absolute path to your installation.  NO symlinks allowed
+	# absolute path to your installation.  *NO* symlinks allowed
 	# requires trailing /
 	$g_absolute_path = "/usr/local/share/apache/htdocs/mantis/";
 
@@ -58,11 +58,14 @@
 	#############################
 
 	# --- email variables -------------
-	$g_administrator_email  = "administrator@mydomain.com";
-	$g_webmaster_email      = "webmaster@mydomain.com";
-	$g_from_email           = "nobody@mydomain.com";
+	$g_administrator_email  = "administrator@nowhere";
+	$g_webmaster_email      = "webmaster@nowhere";
 
-	$g_enable_email              = 0;
+	# the address all emails are sent to (which is why it's from_email)
+	$g_from_email           = "nobody@nowhere";
+
+	# the return address for bounced mail
+	$g_return_path_email    = "admin@nowhere";
 
 	# allow users to signup for their own accounts
 	$g_allow_signup              = 1;
@@ -70,7 +73,7 @@
 	# allow email notification
 	$g_enable_email_notification = 1;
 
-	# notify developers and higher when a new bug comes in
+	# notify developers and higher when a new bug comes in (they need to turn on their preferences as well)
 	$g_notify_developers_on_new  = 1;
 
 	# @@@ BROKEN
@@ -96,7 +99,7 @@
 	$g_default_language     = "english";
 
 	# list the choices that the users are allowed to choose
-	$g_language_choices_arr = array( "english", "dutch", "french", "german", "italian", "korean", "norwegian", "portuguese", "spanish", "turkish" );
+	$g_language_choices_arr = array( "english", "dutch", "french", "french2", "german", "italian", "korean", "norwegian", "portuguese", "spanish", "turkish" );
 
 	############################
 	### Mantis Show Settings ###

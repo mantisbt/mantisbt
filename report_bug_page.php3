@@ -91,7 +91,7 @@
 		<td>
 			<select name="f_reproducibility">
 				<option value="" SELECTED><? echo $s_select_reproducibility ?>
-				<? print_enum_string_option_list( $g_reproducibility_enum_string, $f_reproducibility ) ?>
+				<? print_enum_string_option_list( $s_reproducibility_enum_string, $f_reproducibility ) ?>
 			</select>
 		</td>
 	</tr>
@@ -103,7 +103,7 @@
 		<td>
 			<select name="f_severity">
 				<option value="" selected><? echo $s_select_severity ?>
-				<? print_enum_string_option_list( $g_severity_enum_string, $f_severity ) ?>
+				<? print_enum_string_option_list( $s_severity_enum_string, $f_severity ) ?>
 			</select>
 		</td>
 	</tr>

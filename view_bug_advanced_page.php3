@@ -91,10 +91,10 @@
 			<? echo $v_category ?>
 		</td>
 		<td>
-			<? echo get_enum_element( $g_severity_enum_string, $v_severity ) ?>
+			<? echo get_enum_element( $s_severity_enum_string, $v_severity ) ?>
 		</td>
 		<td>
-			<? echo get_enum_element( $g_reproducibility_enum_string, $v_reproducibility ) ?>
+			<? echo get_enum_element( $s_reproducibility_enum_string, $v_reproducibility ) ?>
 		</td>
 		<td>
 			<? print_date( $g_normal_date_format, $v_date_submitted ) ?>
@@ -128,13 +128,13 @@
 			<b><? echo $s_priority ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
-			<? echo get_enum_element( $g_priority_enum_string, $v_priority ) ?>
+			<? echo get_enum_element( $s_priority_enum_string, $v_priority ) ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_resolution ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
-			<? echo get_enum_element( $g_resolution_enum_string, $v_resolution ) ?>
+			<? echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_platform ?></b>
@@ -148,7 +148,7 @@
 			<b><? echo $s_status ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<? echo get_enum_element( $g_status_enum_string, $v_status ) ?>
+			<? echo get_enum_element( $s_status_enum_string, $v_status ) ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_duplicate_id ?></b>
@@ -168,7 +168,7 @@
 			<b><? echo $s_projection ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
-			<? echo get_enum_element( $g_projection_enum_string, $v_projection ) ?>
+			<? echo get_enum_element( $s_projection_enum_string, $v_projection ) ?>
 		</td>
 		<td colspan=2 bgcolor=<? echo $g_primary_color_dark ?>>
 
@@ -185,7 +185,7 @@
 			<b><? echo $s_eta ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<? echo get_enum_element( $g_eta_enum_string, $v_eta ) ?>
+			<? echo get_enum_element( $s_eta_enum_string, $v_eta ) ?>
 		</td>
 		<td colspan=2 bgcolor=<? echo $g_primary_color_light ?>>
 

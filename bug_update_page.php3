@@ -120,12 +120,12 @@
 		</td>
 		<td>
 			<select name="f_severity">
-				<? print_enum_string_option_list( $g_severity_enum_string, $v_severity ) ?>
+				<? print_enum_string_option_list( $s_severity_enum_string, $v_severity ) ?>
 			</select>
 		</td>
 		<td>
 			<select name="f_reproducibility">
-				<? print_enum_string_option_list( $g_reproducibility_enum_string, $v_reproducibility ) ?>
+				<? print_enum_string_option_list( $s_reproducibility_enum_string, $v_reproducibility ) ?>
 			</select>
 		</td>
 		<td>
@@ -164,14 +164,14 @@
 		</td>
 		<td align="left" bgcolor="<? echo $g_primary_color_dark ?>">
 			<select name="f_priority">
-				<? print_enum_string_option_list( $g_priority_enum_string, $v_priority ) ?>
+				<? print_enum_string_option_list( $s_priority_enum_string, $v_priority ) ?>
 			</select>
 		</td>
 		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_resolution ?></b>
 		</td>
 		<td bgcolor="<? echo $g_primary_color_dark ?>">
-			<? echo get_enum_element( $g_resolution_enum_string, $v_resolution ) ?>
+			<? echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
 		</td>
 		<td colspan="2" bgcolor="<? echo $g_primary_color_dark ?>">
 			&nbsp;
@@ -183,7 +183,7 @@
 		</td>
 		<td align="left" bgcolor="<? echo $g_primary_color_light ?>">
 			<select name="f_status">
-				<? print_enum_string_option_list( $g_status_enum_string, $v_status ) ?>
+				<? print_enum_string_option_list( $s_status_enum_string, $v_status ) ?>
 			</select>
 		</td>
 		<td bgcolor="<? echo $g_category_title_color ?>">

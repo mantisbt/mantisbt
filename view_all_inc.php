@@ -66,14 +66,14 @@
 		<select name="f_show_severity">
 			<option value="any"><? echo $s_any ?>
 			<option value="any">
-			<? print_enum_string_option_list( $g_severity_enum_string, $f_show_severity ) ?>
+			<? print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
 		</select>
 		</td>
 		<td>
 		<select name="f_show_status">
 			<option value="any"><? echo $s_any ?>
 			<option value="any">
-			<? print_enum_string_option_list( $g_status_enum_string, $f_show_status ) ?>
+			<? print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
 		</select>
 		</td>
 		<td>
@@ -217,7 +217,8 @@
 					( $v_status!=CLOSED )&&( $v_status!=RESOLVED )) {
 					echo "(".get_user_info( $v_handler_id, "username" ).")";
 				} else {
-					echo get_enum_element( $g_status_enum_string, $v_status );
+					#echo get_enum_element( $g_status_enum_string, $v_status );
+					echo get_enum_element( $s_status_enum_string, $v_status );
 				}
 			?>
 		</td>

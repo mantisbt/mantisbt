@@ -16,22 +16,22 @@
 	$s_switch = "Deðiþtir";
 	$s_logged_in_as = "Þu anki kullanýcý";
 
-	$s_user_no_longer_exists = "user no longer exists";
+	$s_user_no_longer_exists = "kullanýcý artýk sistemde deðil";
 
-	$s_administrator = "administrator";
+	$s_administrator = "yönetici";
 
 	# Enum Strings
-	$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
-	$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
-	$s_project_view_state_enum_string = "10:public,50:private";
+	$s_access_levels_enum_string      = "10:izleyici,25:raporcu,40:güncelleyici,55:programcý,70:menejer,90:yönetici";
+	$s_project_status_enum_string     = "10:geliþtirme,30:sürüm,50:tutarlý,70:eski";
+	$s_project_view_state_enum_string = "10:genel,50:özel";
 
-	$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
-	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
-	$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate";
-	$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
-	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
-	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
-	$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+	$s_priority_enum_string           = "10:yok,20:düþük,30:normal,40:yüksek,50:acil,60:derhal";
+	$s_severity_enum_string           = "10:özellik,20:kolay,30:metin,40:ayar,50:küçük,60:büyük,70:çökme,80:engel";
+	$s_reproducibility_enum_string    = "10:her zaman,30:bazen,50:rastgele,70:denenmedi,90:tekrarlanamadý";
+	$s_status_enum_string             = "10:yeni,20:ek bilgi gerektiren,30:onaylanmýþ,40:doðrulanmýþ,50:tahsis edilmiþ,80:cözümlenmiþ,90:kapalý";
+	$s_resolution_enum_string         = "10:açýk,20:çözümlendi,30:tekrar açýldý,40:tekrarlanamadý,50:çözümlenemedi,60:tekrar,70:bug deðil ,80:ertelendi,90:çözülmeyecek";
+	$s_projection_enum_string         = "10:yok,30:ayar,50:basit çözüm,70:fazla iþ,90:dizayn deðiþikliði";
+	$s_eta_enum_string                = "10:yok,20:< 1 güm,30:2-3 gün,40:< 1 hafta,50:< 1 ay,60:> 1 ay";
 
 	# Email Strings
 	$s_new_account_subject = "Yeni kullanýcý hesabýnýz";
@@ -39,43 +39,43 @@
 	$s_new_account_url = "Sisteme bu adresten ulaþabilirsiniz: ";
 	$s_new_account_username = "Kullanýcý Adý: ";
 	$s_new_account_password = "Þifre: ";
-	$s_new_account_message = "Sisteme girdiktin sonra lütfen þifrenizi deðiþtiriniz.  Sistemdeki þifreler tek yönlü bir algoritma kullanarak muhafaza edildiðinden unutulan þifrelerin kullanýcýya gönderilmesi mümkün deðildir. Þifrenizi unuttuðunuz takdirde yenisiyle deðiþtirilecektir.\n\n";
+	$s_new_account_message = "Sisteme girdikten sonra lütfen þifrenizi deðiþtiriniz.  Sistemdeki þifreler tek yönlü bir algoritma kullanarak muhafaza edildiðinden unutulan þifrelerin kullanýcýya gönderilmesi mümkün deðildir. Þifrenizi unuttuðunuz takdirde yenisiyle deðiþtirilecektir.\n\n";
 	$s_new_account_do_not_reply = "Lütfen bu mesaja cevap göndermeyiniz.\n";
 
-	$s_reset_request_msg = "There was a request to have your password reset".
-	$s_account_name_msg = "Your account name is";
-	$s_news_password_msg = "Here is your new password";
+	$s_reset_request_msg = "Þifrenizim yenilenmesi için bir istekte bulunuldu";
+	$s_account_name_msg = "Kullanýcý adýnýz";
+	$s_news_password_msg = "Yeni Þifreniz";
 
-	$s_new_bug_msg = "The following NEW bug has been ADDED.";
-	$s_email_bugnote_msg = "A BUGNOTE has been added to this bug.";
-	$s_email_resolved_msg = "The following bug has been RESOLVED.";
-	$s_email_close_msg = "The following bug has beeen CLOSED";
-	$s_email_feedback_msg = "The following bug requires your FEEDBACK.";
-	$s_email_reopen_msg = "The following bug has been REOPENED.";
-	$s_email_assigned_msg = "The following bug has been ASSIGNED.";
+	$s_new_bug_msg = "Aþaðýdaki YENÝ bug EKLENDÝ.";
+	$s_email_bugnote_msg = "Bu bug'a bir bug notu eklendi.";
+	$s_email_resolved_msg = "Aþaðýdaki bug ÇÖZÜMLENDÝ";
+	$s_email_close_msg = "Aþaðýdaki bug KAPATILDI";
+	$s_email_feedback_msg = "Aþaðýdaki bug ÝLAVE BÝLGÝ gerektiriyor.";
+	$s_email_reopen_msg = "Aþaðýdaki bug YENÝDEN AÇILDI.";
+	$s_email_assigned_msg = "Aþaðýdaki bug TAHSÝS EDÝLDÝ.";
 
-	$s_email_reporter = "Reporter";
-	$s_email_handler = "Handler";
-	$s_email_project = "Project";
-	$s_email_bug = "Bug ID";
-	$s_email_category = "Category";
-	$s_email_reproducibility = "Reproducibility";
-	$s_email_severity = "Severity";
-	$s_email_priority = "Priority";
-	$s_email_status = "Status";
-	$s_email_resolution = "Resolution";
-	$s_email_duplicate = "Duplicate";
-	$s_email_date_submitted = "Date Submitted";
-	$s_email_last_modified = "Last Modified";
-	$s_email_summary =  "Summary";
-	$s_email_description = "Description";
+	$s_email_reporter = "Raporcu";
+	$s_email_handler = "Ýlgili";
+	$s_email_project = "Proje";
+	$s_email_bug = "Bug No";
+	$s_email_category = "Kategori";
+	$s_email_reproducibility = "Tekrarlanabilirlik";
+	$s_email_severity = "Þiddet";
+	$s_email_priority = "Öncelik";
+	$s_email_status = "Statü";
+	$s_email_resolution = "Çözüm";
+	$s_email_duplicate = "Tekrar";
+	$s_email_date_submitted = "Gönderme Tarihi";
+	$s_email_last_modified = "Son Degiþme Tarihi";
+	$s_email_summary =  "Özet";
+	$s_email_description = "Açýklama";
 
 	# account_delete.php3
 	$s_account_protected_msg = "Hesap korunuyor. Ayarlar deðiþtirilemedi...";
 	$s_account_removed_msg = "Hesabýnýz sistemden silindi...";
 
 	# account_delete_page.php3
-	$s_confirm_delete_msg = "Hesabýnýzý silmek istediþinizden emin misiniz?";
+	$s_confirm_delete_msg = "Hesabýnýzý silmek istediðinizden emin misiniz?";
 	$s_delete_account_button = "Hesap Sil";
 
 	# account_page.php3
@@ -91,22 +91,22 @@
 
 	# account_prefs_page.php3
 	$s_default_account_preferences_title = "Varsayýlan Kullanýcý Hesabý Tercihleri";
-	$s_default_project = "Default Project";
+	$s_default_project = "Varsayýlan Proje";
 	$s_advanced_report = "Detaylý Rapor";
 	$s_advanced_view = "Detaylý Ýzle";
-	$s_advanced_update = "Advanced Update";
-	$s_refresh_delay = "Refresh Delay";
-	$s_redirect_delay = "Redirect Delay";
-	$s_email_on_new = "Email on New";
-	$s_email_on_assigned = "Email on Assigned";
-	$s_email_on_feedback = "Email on Feedback";
-	$s_email_on_resolved = "Email on Resolved";
-	$s_email_on_closed = "Email on Closed";
-	$s_email_on_reopened = "Email on Reopened";
-	$s_email_on_bugnote_added = "Email on Bugnote Added";
-	$s_email_on_status_change = "Email on Status Change";
-	$s_email_on_priority_change = "Email on Priority Change";
-	$s_language = "Language";
+	$s_advanced_update = "Detaylý Güncelleme";
+	$s_refresh_delay = "Yeniden Yükleme Gecikmesi";
+	$s_redirect_delay = "Yönlendirme Gecikmesi";
+	$s_email_on_new = "Yenileri Emaille";
+	$s_email_on_assigned = "Atananlarý Emaille";
+	$s_email_on_feedback = "Bilgi gerektirenleri Emaille";
+	$s_email_on_resolved = "Çözümlenenleri Emaille";
+	$s_email_on_closed = "Kapatýlanlarý Emaille";
+	$s_email_on_reopened = "Yeniden açýlanlarý Emaille";
+	$s_email_on_bugnote_added = "Bug notu eklenenleri Emaille";
+	$s_email_on_status_change = "Statü deðiþikliklerini Emaille";
+	$s_email_on_priority_change = "Öncelik deðiþikliklerini Emaille";
+	$s_language = "Dil";
 	$s_default_project = "Varsayýlan Proje";
 	$s_update_prefs_button = "Tercihleri Güncelle";
 	$s_reset_prefs_button = "Tercihleri Sýfýrla";
@@ -151,10 +151,10 @@
 	$s_account_updated_msg = "Hesabýnýz baþarýyla güncellendi...";
 
 	# bug_assign.php3
-	$s_bug_assign_msg       = "Bug baþarýyla atandý...";
+	$s_bug_assign_msg = "Bug baþarýyla atandý...";
 
 	# bug_close.php3
-	$s_bug_close_msg       = "Bug has been closed...";
+	$s_bug_close_msg = "Bug kapatýldý...";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Bug silindi...";
@@ -164,12 +164,12 @@
 	$s_delete_bug_button = "Bug Sil";
 
 	# bug_file_add.php3
-	$s_file_upload_msg = "File upload successful";
+	$s_file_upload_msg = "Dosya baþarýyla gönderildi";
 
 	# bug_file_upload_inc.php3
-	$s_upload_file = "Upload File";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
+	$s_upload_file = "Dosya Gönder";
+	$s_select_file = "Dosya Seç";
+	$s_upload_file_button = "Dosya Gönder";
 
 	# bug_reopen_page.php3
 	$s_bug_reopened_msg = "Bug yeniden açýldý...";
@@ -213,7 +213,7 @@
 	$s_votes = "Oylar";
 	$s_summary = "Özet";
 	$s_description = "Açýklama";
-	$s_steps_to_reproduce = "Adýmlar Tekrarlamaya Yönelik";
+	$s_steps_to_reproduce = "Tekrarlamaya Yönelik Adýmlar";
 	$s_additional = "Ek";
 	$s_information = "Bilgi";
 	$s_update_information_button = "Bilgi Güncelle";
@@ -253,7 +253,7 @@
 	$s_signup_link = "Yeni bir hesap aç";
 
 	# login_select_proj_page.php3
-	$s_select_project_button = "Select Project";
+	$s_select_project_button = "Proje Seç";
 
 	# logout_page.php3
 	$s_logged_out_title = "Sistemden çýkýldý...";
@@ -261,8 +261,8 @@
 	$s_here = "Yönlendir";
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "Open and assigned to me";
-	$s_open_and_reported_to_me = "Open and reported by me";
+	$s_open_and_assigned_to_me = "Açýk ve bana atanmýþ olanlar";
+	$s_open_and_reported_to_me = "Açýk ve benim tarafýmdan rapor edilmiþ olanlar";
 	$s_newer_news_link = "Yeni Haberler";
 	$s_older_news_link = "Eski Haberler";
 
@@ -278,8 +278,8 @@
 	$s_create_user_button = "Kullanýcý Ekle";
 
 	# manage_page.php3
-	$s_hide_disabled = "Hide Disabled";
-	$s_filter_button = "Filter";
+	$s_hide_disabled = "Etkisizleþtirilenleri Gizle";
+	$s_filter_button = "Filtrele";
 	$s_create_new_account_link = "Hesap Ekle";
 	$s_projects_link = "Projeler";
 	$s_documentation_link = "Dökümantasyon";
@@ -296,7 +296,7 @@
 	$s_project_added_msg = "Proje baþarýyla eklendi...";
 
 	# manage_project_category_add.php3
-	$s_duplicate_category = "ERROR: This is a duplicate category.";
+	$s_duplicate_category = "HATA: Bu kategori adý daha önce kullanýldý.";
 	$s_category_added_msg = "Kategori baþarýyla eklendi...";
 
 	# manage_project_category_delete.php3
@@ -304,7 +304,7 @@
 
 	# manage_project_category_delete_page.php3
 	$s_category_delete_sure_msg = "Bu kategoriyi silmek istediðinizden emin misiniz? Bu kategoriye ait bütün buglar silinecek.";
-	$s_delete_category_button = "Delete Category";
+	$s_delete_category_button = "Kategori Sil";
 
 	# manage_project_category_edit_page.php3
 	$s_edit_project_category_title = "Proje Kategorisi Düzenle";
@@ -337,8 +337,8 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Proje Ekle";
-	$s_access_threshold = "Access Threshold";
-	$s_upload_file_path = "Upload File Path";
+	$s_access_threshold = "Eriþim Sýnýrý";
+	$s_upload_file_path = "Gönderilecek dosyanýn yolu";
 	$s_add_project_button = "Proje Ekle";
 	$s_projects_title = "Projeler";
 	$s_name = "Ýsim";
@@ -347,7 +347,7 @@
 	$s_project_updated_msg = "Proje baþarýyla güncellendi...";
 
 	# manage_project_version_add.php3
-	$s_duplicate_version = "ERROR: This is a duplicate version.";
+	$s_duplicate_version = "HATA: Bu versiyon daha önce kullanýldý.";
 	$s_version_added_msg = "Versiyon baþarýyla eklendi...";
 
 	# manage_project_version_delete.php3
@@ -372,7 +372,7 @@
 	$s_delete_account_sure_msg = "Bu hesabý silmek istediginizden emin misiniz?";
 
 	# manage_prune.php3
-	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
+	$s_accounts_pruned_msg = "Bir haftadan fazla süre önce açýlmýþ olduklarý halde hala hiç kullanýlmayan kullanýcý hesaplarý silindi";
 
 	# manage_user_page.php3
 	$s_edit_user_title = "Kullanýcý Düzenle";
@@ -431,55 +431,55 @@
 	$s_news_updated_msg = "Haber güncellendi...";
 
 	# news_view_page.php3
-	$s_back_link = "Back";
+	$s_back_link = "Geri";
 
 	# proj_doc_add.php3
-	$s_file_uploaded_msg = "File upload successful";
+	$s_file_uploaded_msg = "Dosya baþarýyla gönderildi";
 
 	# proj_doc_add_page.php3
-	$s_upload_file_title = "Upload File";
-	$s_title = "Title";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
+	$s_upload_file_title = "Dosya Gönder";
+	$s_title = "Baþlýk";
+	$s_select_file = "Dosya Seç";
+	$s_upload_file_button = "Dosya Gönder";
 
 	# proj_doc_delete.php3
-	$s_project_file_deleted_msg = "Project file deleted";
+	$s_project_file_deleted_msg = "Proje dosyasý silindi";
 
 	# proj_doc_delete_page.php3
-	$s_confirm_file_delete_msg = "Are you sure you wish to delete this file?";
+	$s_confirm_file_delete_msg = "Bu dosyayý silmek istediðinizden emin misiniz?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Upload File";
-	$s_filename = "Filename";
-	$s_file_update_button = "Update File";
-	$s_file_delete_button = "Delete File";
+	$s_upload_file_title = "Dosya Gönder";
+	$s_filename = "Dosya Adý";
+	$s_file_update_button = "Dosya güncelle";
+	$s_file_delete_button = "Dosya Sil";
 
 	# proj_doc_page.php3
-	$s_project_documentation_title = "Project Documentation";
-	$s_user_documentation = "User Documentation";
-	$s_project_documentation = "Project Documentation";
-	$s_add_file = "Add File";
+	$s_project_documentation_title = "Proje Dökümantasyonu";
+	$s_user_documentation = "Kullanýcý Dökümantasyonu";
+	$s_project_documentation = "Proje Dökümantasyonu";
+	$s_add_file = "Dosya ekle";
 
 	# proj_doc_update.php3
-	$s_project_document_updated = "Project update successful";
+	$s_project_document_updated = "Proje baþarýyla güncellendi";
 
 	# proj_user_add.php3
-	$s_project_user_added_msg = "Successfully added user to project";
+	$s_project_user_added_msg = "Kullanýcý projeye baþarýyla eklendi";
 
 	# proj_user_delete.php3
-	$s_project_removed_user_msg = "Successfully removed user from project";
+	$s_project_removed_user_msg = "Kullanýcý projeden baþarýyla silindi";
 
 	# proj_user_delete_page.php3
-	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
+	$s_remove_user_sure_msg = "Bu kullanýcýyý silmek istediðinizden emin misiniz?";
 
 	# proj_user_menu_page.php3
-	$s_add_user_title = "Add user to project";
-	$s_add_user_button = "Add User";
-	$s_project_selection_title = "Project Selection";
-	$s_remove_link = "remove";
+	$s_add_user_title = "Kullanýcýyý projeye ekle";
+	$s_add_user_button = "Kullanýcý Ekle";
+	$s_project_selection_title = "Proje Seçimi";
+	$s_remove_link = "sil";
 
 	# proj_user_update.php3
-	$s_updated_user_msg = "Successfully updated user";
+	$s_updated_user_msg = "Kullanýcý baþarýyla güncellendi";
 
 	# report_add.php3
 	$s_report_add_error_msg = "HATA: Raporunuzda bir hataya rastlandý.";
@@ -488,7 +488,7 @@
 	$s_must_enter_reproducibility = "Bir 'tekrarlanabilirlik' eklemelisiniz";
 	$s_must_enter_summary = "Bir 'özet' eklemelisiniz";
 	$s_must_enter_description = "Bir 'taným' eklemelisiniz";
-	$s_report_more_bugs = "Report More Bugs";
+	$s_report_more_bugs = "Daha bug rapor et";
 	$s_submission_thanks_msg = "Raporunuz için teþekkürler.";
 
 	# report_bug_advanced_page.php3
@@ -503,16 +503,16 @@
 	$s_steps_to_reproduce = "Tekrarlamaya Yönelik Adýmlar";
 	$s_additional_information = "Ek Bilgi";
 	$s_submit_report_button = "Rapor Et";
-	$s_check_report_more_bugs = "check to report more bugs";
+	$s_check_report_more_bugs = "daha baþka bug rapor etmek için seçiniz";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Detaylý Rapor";
-	$s_upload_file = "Upload File";
-	$s_report_stay = "Report Stay";
+	$s_upload_file = "Dosya Gönder";
+	$s_report_stay = "Rapor Kal";
 
 	# set_project.php3
-	$s_selected_project = "Selected project";
-	$s_valid_project_msg = "You must choose a valid project";
+	$s_selected_project = "Seçilen Proje";
+	$s_valid_project_msg = "Geçerli bir proje seçmelisiniz";
 
 	# show_source_page.php3
 	$s_show_source_for_msg = "Kodu gösterilen sayfa";
@@ -523,9 +523,9 @@
 	$s_invalid_email = "GEÇERSÝZ BÝR EMAÝL ADRESÝDÝR";
 	$s_duplicate_username = "SÝSTEMDE DAHA ÖNCEDEN KULLANILMIÞTIR.  LÜTFEN BAÞKA BÝR KULLANICI ADI SEÇÝNÝZ";
 	$s_account_create_fail = "KULLANICI HESABI AÇILAMADI";
-	$s_account_added = "Account was successfully added.";
-	$s_password_emailed_msg = "Your password will be emailed to you.";
-	$s_no_reponse_msg = "If you do not respond within a week your account may be deleted.";
+	$s_account_added = "Kullanýcý hesabý baþarýyla eklendi.";
+	$s_password_emailed_msg = "Þifreniz size emaille gönderilecektir.";
+	$s_no_reponse_msg = "Eðer bir hafta içinde yanýt vermezseniz kullanýcý hesabýnýz silinebilir.";
 
 	# signup_page.php3
 	$s_signup_info = "Kullanýcý adýnýzý seçip geçerli bir email adresi giriniz. Rastgele oluþturulmuþ bir þifre adresinize gönderilecektir.";
@@ -533,16 +533,16 @@
 	$s_signup_button = "Hesap Aç";
 
 	# site_settings_edit_page.php3
-	$s_edit_site_settings_title = "Edit Site Settings";
-	$s_save_settings_button = "Save Settings";
+	$s_edit_site_settings_title = "Site Ayarlarýný Deðiþtir";
+	$s_save_settings_button = "Ayarlarý Kaydet";
 
 	# site_settings_page.php3
-	$s_site_settings_title = "Site Settings";
-	$s_system_info_link = "System Info";
-	$s_site_settings_link = "Site Settings";
+	$s_site_settings_title = "Site Ayarlarý";
+	$s_system_info_link = "Sistem Bilgileri";
+	$s_site_settings_link = "Site Ayarlarý";
 
 	# site_settings_update.php3
-	$s_site_settings_updated_msg = "Site settings have been updated";
+	$s_site_settings_updated_msg = "Site ayarlarý güncellendi";
 
 	# summary_page.php3
 	$s_summary_title = "Özet";
@@ -565,7 +565,7 @@
 	$s_all_bugs_link = "Bütün Buglar";
 	$s_reported_bugs_link = "Rapor Edilen Buglar";
 	$s_assigned_bugs_link = "Atanmýþ Buglar";
-	$s_unassigned_bugs_link = "Unassigned Bugs";
+	$s_unassigned_bugs_link = "Atanmamýþ Buglar";
 	$s_any = "hepsi";
 	$s_show = "Göster";
 	$s_changed = "Deðiþme(saat)";
@@ -593,5 +593,5 @@
 
 	# view_bug_page.php3
 	$s_view_advanced_link = "Detaylý Link";
-	$s_viewing_bug_simple_details_title = "Viewing Bug Simple Details";
+	$s_viewing_bug_simple_details_title = "Basit Bug Detaylarý Ýzleniyor";
 ?>

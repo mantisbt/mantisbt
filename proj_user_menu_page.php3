@@ -33,7 +33,7 @@
 			WHERE id='$g_project_cookie_val'";
 	$result = db_query( $query );
 	$t_access_min = db_result( $result, 0, 0 );
-	$t_access_min = get_enum_element( $g_access_levels_enum_string, $t_access_min );
+	$t_access_min = get_enum_element( $s_access_levels_enum_string, $t_access_min );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -151,7 +151,7 @@ Automatic access level: <b><? echo $t_access_min ?></b>
 			<? print_email_link( $u_email, $u_email ) ?>
 		</td>
 		<td align="center">
-			<? echo get_enum_element( $g_access_levels_enum_string, $u_access_level ) ?>
+			<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
 		</td>
 		<td align="center">
 			<? print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_user_id, $s_remove_link ) ?>

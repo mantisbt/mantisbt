@@ -71,7 +71,7 @@
 		</td>
 		<td>
 			<select name="f_status">
-			<? print_enum_string_option_list( $g_project_status_enum_string, $v_status ) ?>
+			<? print_enum_string_option_list( $s_project_status_enum_string, $v_status ) ?>
 			</select>
 		</td>
 	</tr>
@@ -98,7 +98,7 @@
 		</td>
 		<td>
 			<select name="f_access_min">
-			<? print_enum_string_option_list( $g_access_levels_enum_string, $v_access_min ) ?>
+			<? print_enum_string_option_list( $s_access_levels_enum_string, $v_access_min ) ?>
 			</select>
 		</td>
 	</tr>

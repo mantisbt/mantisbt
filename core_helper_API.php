@@ -272,7 +272,7 @@
 				return $elem_arr[1];
 			}
 		}
-		return "null";
+		return "@null@";
 	}
 	### --------------------
 	### Returns the number of bugntoes for the given bug_id

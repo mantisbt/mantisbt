@@ -227,7 +227,7 @@
 			<? print_email_link( $u_email, $u_email ) ?>
 		</td>
 		<td align="center">
-			<? echo get_enum_element( $g_access_levels_enum_string, $u_access_level ) ?>
+			<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
 		</td>
 		<td align="center">
 			<? echo trans_bool( $u_enabled ) ?>

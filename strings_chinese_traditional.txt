@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# Chinese_Traditional: Pao-Hsi Huang
+	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 ?>
 <?
 	# General Strings
@@ -87,7 +87,6 @@
 	$s_confirm_password  = "確認密碼";
 	$s_access_level = "存取權限";
 	$s_update_user_button = "更新使用者";
-	# $s_delete_account_button
 
 	# account_prefs_page.php3
 	$s_default_account_preferences_title = "預設帳號喜好設定";
@@ -148,7 +147,6 @@
 	$s_profile_updated_msg = "個人設定更新...";
 
 	# account_update.php3
-	# $s_account_protected_msg
 	$s_account_updated_msg = "你的帳戶已經成功更新...";
 
 	# bug_assign.php3
@@ -179,8 +177,6 @@
 
 	# bug_resolve_page.php3
 	$s_resolve_bug_title = "解決臭蟲";
-	# $s_resolution
-	# $s_duplicate_id
 	$s_resolve_bug_button = "解決臭蟲";
 
 	# bug_resolve_page2.php3
@@ -205,7 +201,6 @@
 	$s_assigned_to = "指定給";
 	$s_priority = "優先權";
 	$s_resolution = "解析度";
-	# $s_platform
 	$s_status = "狀態";
 	$s_duplicate_id = "複製編號";
 	$s_os = "作業系統";
@@ -374,7 +369,6 @@
 
 	# manage_user_delete_page.php3
 	$s_delete_account_sure_msg = "你確定要刪除此一帳號?";
-	# $s_delete_account_button
 
 	# manage_prune.php3
 	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
@@ -575,7 +569,6 @@
 	$s_show = "顯示";
 	$s_changed = "已變更(小時)";
 	$s_hide_closed = "Hide Closed";
-	$s_hide_resolved = "隱藏已解決";
 	$s_filter_button = "過濾條件";
 	$s_viewing_bugs_title = "檢視臭蟲";
 	$s_updated = "已更新";

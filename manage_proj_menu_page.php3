@@ -69,7 +69,7 @@
 		</td>
 		<td>
 			<select name="f_status">
-			<? print_enum_string_option_list( $g_project_status_enum_string ) ?>
+			<? print_enum_string_option_list( $s_project_status_enum_string ) ?>
 			</select>
 		</td>
 	</tr>
@@ -88,7 +88,7 @@
 		</td>
 		<td>
 			<select name="f_access_min">
-			<? print_enum_string_option_list( $g_access_levels_enum_string, VIEWER ) ?>
+			<? print_enum_string_option_list( $s_access_levels_enum_string, VIEWER ) ?>
 			</select>
 		</td>
 	</tr>
@@ -177,13 +177,13 @@
 			<? echo $v_name ?>
 		</td>
 		<td>
-			<? echo get_enum_element( $g_project_status_enum_string, $v_status ) ?>
+			<? echo get_enum_element( $s_project_status_enum_string, $v_status ) ?>
 		</td>
 		<td>
 			<? echo trans_bool( $v_enabled ) ?>
 		</td>
 		<td>
-			<? echo get_enum_element( $g_project_view_state_enum_string, $v_view_state ) ?>
+			<? echo get_enum_element( $s_project_view_state_enum_string, $v_view_state ) ?>
 		</td>
 		<td align="left">
 			<? echo $v_description ?>
