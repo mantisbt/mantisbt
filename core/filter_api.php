@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.70 2005-01-11 20:52:49 thraxisp Exp $
+	# $Id: filter_api.php,v 1.71 2005-01-12 23:23:12 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -135,7 +135,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['reporter_id'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -173,7 +173,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['handler_id'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -182,9 +182,6 @@
 		}
 		if ( !$t_any_found ) {
 			$t_clauses = array();
-			if ( !isset( $t_filter['and_not_assigned'] ) ) {
-				$t_filter['and_not_assigned'] = '';
-			}
 
 			foreach( $t_filter['handler_id'] as $t_filter_member ) {
 				if ( '[none]' == $t_filter_member ) {
@@ -232,7 +229,7 @@
 		# severity
 		$t_any_found = false;
 		foreach( $t_filter['show_severity'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -266,7 +263,7 @@
 			$t_this_status = $t_filter['show_status'][0];
 			$t_this_hide_status = $t_filter['hide_status'][0];
 
-			if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) ) {
+			if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 == $t_this_status ) ) {
 				$t_any_found = true;
 			}
 			if ( $t_any_found ) {
@@ -283,7 +280,7 @@
 			$t_any_found = false;
 			foreach( $t_filter['show_status'] as $t_this_status ) {
 				$t_desired_statuses[] = $t_this_status;
-				if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) ) {
+				if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 == $t_this_status ) ) {
 					$t_any_found = true;
 				}
 			}
@@ -325,7 +322,7 @@
 		# priority 
 		$t_any_found = false;
 		foreach( $t_filter['show_priority'] as $t_filter_member ) {
-				if ( '[any]' == $t_filter_member ) {
+				if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 					$t_any_found = true;
 				}
 		}
@@ -346,7 +343,7 @@
 		# product build
 		$t_any_found = false;
 		foreach( $t_filter['show_build'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+				if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -370,7 +367,7 @@
 		# product version
 		$t_any_found = false;
 		foreach( $t_filter['show_version'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+				if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -410,7 +407,7 @@
 		# fixed in version
 		$t_any_found = false;
 		foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -434,7 +431,7 @@
 		# users monitoring a bug
 		$t_any_found = false;
 		foreach( $t_filter['user_monitor'] as $t_filter_member ) {
-			if ( '[any]' == $t_filter_member ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -472,7 +469,7 @@
 				# Ignore all custom filters that are not set, or that are set to '' or "any"
 				$t_any_found = false;
 				foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
-					if ( '[any]' == $t_filter_member ) {
+				if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
 						$t_any_found = true;
 					}
 				}
@@ -1029,7 +1026,7 @@
 										<input type="hidden" name="show_severity[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'severity', $t_current );
@@ -1062,7 +1059,7 @@
 										<input type="hidden" name="show_resolution[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) || ( '[any]' == $t_current ) ) {
+										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'resolution', $t_current );
@@ -1119,7 +1116,7 @@
 										<input type="hidden" name="show_status[]" value="<?php echo $t_current;?>" />
 										<?php
 										$t_this_string = '';
-										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
 											$t_any_found = true;
 										} else {
 											$t_this_string = get_enum_element( 'status', $t_current );
@@ -1294,7 +1291,7 @@
 										<input type="hidden" name="show_priority[]" value="<?php echo $t_current;?>" />
 										<?php
                   	$t_this_string = '';
-                  	if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
+										if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
                   		$t_any_found = true;
 	                  } else {
 	                  	$t_this_string = get_enum_element( 'priority', $t_current );
@@ -1445,7 +1442,7 @@
 						$t_first_flag = true;
 						foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
 							$t_this_string = '';
-							if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) ) {
+							if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current == 0 ) ) {
 								$t_any_found = true;
 							} else if ( '[none]' == $t_current ) {
 								$t_this_string = lang_get( 'none' );
@@ -1864,6 +1861,10 @@
 		if ( !isset( $p_filter_arr['_version'] ) ) {
 			$p_filter_arr['_version'] = config_get( 'cookie_version' );
 		}
+		$t_cookie_vers = (int) substr( $p_filter_arr['_version'], 1 );
+		if ( substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) { # if the version is old, update it
+			$p_filter_arr['_version'] = config_get( 'cookie_version' );
+		}
 		if ( !isset( $p_filter_arr['_view_type'] ) ) {
 			$p_filter_arr['_view_type'] = gpc_get_string( 'view_type', 'simple' );
 		}
@@ -1953,6 +1954,9 @@
 				}
 				$t_checked_array = array();
 				foreach ( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
+					if ( ( 5 == $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
+						$t_filter_value = '[any]';
+					}
 					if ( 'string' == $t_multi_field_type ) {
 						$t_checked_array[] = db_prepare_string( $t_filter_value );
 					} else if ( 'int' == $t_multi_field_type ) {
@@ -1975,6 +1979,9 @@
 					}
 					$t_checked_array = array();
 					foreach ( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
+						if ( ( 5 == $t_cookie_vers ) && ( $t_filter_value == 'any' ) ) {
+							$t_filter_value = '[any]';
+						}
 						$t_checked_array[] = db_prepare_string( $t_filter_value );
 					}
 					$p_filter_arr['custom_fields'][$t_cfid] = $t_checked_array;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.41 2005-01-11 20:52:48 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.42 2005-01-12 23:23:12 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -100,13 +100,12 @@
 	}
 
 	$f_show_priority = array();
-        if ( is_array( gpc_get( 'show_priority', null ) ) ) {
-                $f_show_priority = gpc_get_string_array( 'show_priority', '[any]' );
-        } else {
-                $f_show_priority = gpc_get_string( 'show_priority', '[any]' );
-                $f_show_priority = array( $f_show_priority );
-        }
-
+	if ( is_array( gpc_get( 'show_priority', null ) ) ) {
+		$f_show_priority = gpc_get_string_array( 'show_priority', '[any]' );
+	} else {
+		$f_show_priority = gpc_get_string( 'show_priority', '[any]' );
+		$f_show_priority = array( $f_show_priority );
+	}
 
 	$f_user_monitor = array();
 	if ( is_array( gpc_get( 'user_monitor', null ) ) ) {
@@ -212,15 +211,13 @@
 	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 	$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
 	$t_old_setting_arr	= explode( '#', $t_view_all_cookie, 2 );
-	
+
 	$t_setting_arr = array();
 	
 	# If we're not going to reset the cookie, make sure it's valid
 	if ( $f_type != 0 ) {
-		if ( ( $t_old_setting_arr[0] == 'v1' ) ||
-			 ( $t_old_setting_arr[0] == 'v2' ) || 
-			 ( $t_old_setting_arr[0] == 'v3' ) || 
-			 ( $t_old_setting_arr[0] == 'v4' ) ) {
+		$t_cookie_vers = (int) substr( $t_old_setting_arr[0], 1 );
+		if ( substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) { # if the version is old, update it
 			gpc_clear_cookie( 'view_all_cookie' );
 			print_header_redirect( 'view_all_set.php?type=0' );
 		}
@@ -329,9 +326,9 @@
 				break;
 	}
 
-	$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
+	$tc_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
-	$t_settings_serialized = serialize( $t_setting_arr );
+	$t_settings_serialized = serialize( $tc_setting_arr );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 
 	# If only using a temporary filter, don't store it in the database
