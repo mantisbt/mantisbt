@@ -4,8 +4,8 @@ Mantis
 
  * Modified advanced report's "assign to" drop down to sort alphabetically
  * Modified bug_update script to send emails and behave better
- * Modified file upload size to 60 to help out Netscape
- * Modified view_all_bug_page refresh to include offset
+ * Modified file upload size down to 60 to help out page layout in Netscape
+ * Modified view_all_bug_page refresh to include f_offset
  * Fixed the post-report forms to redirect properly even if a proxy clears the HTTP_REFERER
  * Added g_use_iis global to workaround an IIS bug with header/Location calls
 
