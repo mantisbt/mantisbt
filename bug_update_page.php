@@ -61,6 +61,7 @@
 <input type="hidden" name="f_os_build"           value="<?php echo $v_os_build ?>">
 <input type="hidden" name="f_platform"           value="<?php echo $v_platform ?>">
 <input type="hidden" name="f_version"            value="<?php echo $v_version ?>">
+<input type="hidden" name="f_build"              value="<?php echo $v_build ?>">
 <input type="hidden" name="f_steps_to_reproduce" value="<?php echo $v2_steps_to_reproduce ?>">
 <tr>
 	<td class="form-title" colspan="3">

@@ -16,6 +16,7 @@ Mantis
  * Modified reset password functionality to use g_send_reset_password to determine whether a password is set to blank or emailed to the user.
  * Modified color legend is now generated form the $g_status_enum_string variable.
  * Modified print_enum_string_option_list() to work better.
+ * Modified bug_update_advanced to allow for more fields to be updated.
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.

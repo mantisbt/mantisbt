@@ -40,12 +40,16 @@
 	if (!isset( $f_version )) {
 		$f_version = "";
 	}
+	if (!isset( $f_build )) {
+		$f_build = "";
+	}
 
 	# prepare strings
 	$f_os 						= string_prepare_text( $f_os );
 	$f_os_build 				= string_prepare_text( $f_os_build );
 	$f_platform					= string_prepare_text( $f_platform );
 	$f_version 					= string_prepare_text( $f_version );
+	$f_build 					= string_prepare_text( $f_build );
 	$f_summary					= string_prepare_text( $f_summary );
 	$f_description 				= string_prepare_textarea( $f_description );
 	$f_steps_to_reproduce 		= string_prepare_textarea( $f_steps_to_reproduce );
@@ -62,7 +66,10 @@
 				priority='$f_priority', status='$f_status',
 				projection='$f_projection', duplicate_id='$f_duplicate_id',
 				resolution='$f_resolution', handler_id='$f_handler_id',
-				eta='$f_eta', summary='$f_summary'
+				eta='$f_eta', summary='$f_summary',
+				os='$f_os', os_build='$f_os_build',
+				platform='$f_platform', build='$f_build',
+				version='$f_version'
     		WHERE id='$f_id'";
    	$result = db_query($query);
 

@@ -48,8 +48,8 @@
 		$f_os = "";
 	}
 
-	if ( !isset( $f_osbuild ) ) {
-		$f_osbuild = "";
+	if ( !isset( $f_os_build ) ) {
+		$f_os_build = "";
 	}
 
 	if ( !isset( $f_product_version ) ) {
@@ -177,7 +177,7 @@
 		<?php echo $s_os_version ?>:
 	</td>
 	<td>
-		<input type="text" name="f_osbuild" size="16" maxlength="16" value="<?php echo $f_osbuild ?>">
+		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $f_os_build ?>">
 	</td>
 </tr>
 <tr>

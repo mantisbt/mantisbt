@@ -163,7 +163,7 @@
 		<?php echo $s_platform ?>
 	</td>
 	<td>
-		<?php echo $v_platform ?>
+		<input type="text" name="f_platform" size="16" maxlength="32" value="<?php echo $v_platform ?>">
 	</td>
 </tr>
 <tr class="row-2">
@@ -185,7 +185,7 @@
 		<?php echo $s_os ?>
 	</td>
 	<td>
-		<?php echo $v_os ?>
+		<input type="text" name="f_os" size="16" maxlength="32" value="<?php echo $v_os ?>">
 	</td>
 </tr>
 <tr class="row-1">
@@ -204,7 +204,7 @@
 		<?php echo $s_os_version ?>
 	</td>
 	<td>
-		<?php echo $v_os_build ?>
+		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $v_os_build ?>">
 	</td>
 </tr>
 <tr class="row-2">
@@ -223,7 +223,9 @@
 		<?php echo $s_product_version ?>
 	</td>
 	<td>
-		<?php echo $v_version ?>
+		<select name="f_version">
+			<?php print_version_option_list( $f_version, $v_version ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-1">
@@ -234,7 +236,7 @@
 		<?php echo $s_build ?>
 	</td>
 	<td>
-		<?php echo $v_build?>
+		<input type="text" name="f_build" size="16" maxlength="32" value="<?php echo $v_build ?>">
 	</td>
 </tr>
 <tr class="row-2">

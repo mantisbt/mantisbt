@@ -49,8 +49,8 @@
 		$f_os = "";
 	}
 
-	if ( !isset( $f_osbuild ) ) {
-		$f_osbuild = "";
+	if ( !isset( $f_os_build ) ) {
+		$f_os_build = "";
 	}
 
 	if ( !isset( $f_product_version ) ) {
@@ -86,7 +86,7 @@
 		$f_build 				= string_prepare_text( $f_build );
 		$f_platform 			= string_prepare_text( $f_platform );
 		$f_os 					= string_prepare_text( $f_os );
-		$f_osbuild 				= string_prepare_text( $f_osbuild );
+		$f_os_build 			= string_prepare_text( $f_os_build );
 
 		# if a profile was selected then let's use that information
 		if ( !empty( $f_profile_id ) ) {
@@ -101,7 +101,7 @@
 
 			$f_platform	= string_prepare_text( $v_platform );
 			$f_os		= string_prepare_text( $v_os );
-			$f_osbuild	= string_prepare_text( $v_os_build );
+			$f_os_build	= string_prepare_text( $v_os_build );
 		}
 
 		# Insert text information
@@ -137,7 +137,7 @@
 				VALUES
 				( null, '$g_project_cookie_val', '$u_id', '$f_assign_id', '0000000', '$t_nor', '$f_severity',
 				'$f_reproducibility', '$t_status', '$t_open', 10, '$f_category',
-				NOW(), NOW(), 10, '$t_id', '$f_os', '$f_osbuild',
+				NOW(), NOW(), 10, '$t_id', '$f_os', '$f_os_build',
 				'$f_platform', '$f_product_version', '$f_build',
 				1, '$f_profile_id', '$f_summary' )";
 		$result = db_query( $query );
@@ -230,7 +230,7 @@
 			<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>">
 			<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>">
 			<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>">
-			<input type="hidden" name="f_osbuild" 			value="<?php echo $f_osbuild ?>">
+			<input type="hidden" name="f_os_build" 			value="<?php echo $f_os_build ?>">
 			<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>">
 			<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>">
 			<input type="hidden" name="f_assign_id" 		value="<?php echo $f_assign_id ?>">
@@ -255,7 +255,7 @@
 				<input type="hidden" name="f_profile_id" 		value="<?php echo $f_profile_id ?>">
 				<input type="hidden" name="f_platform" 			value="<?php echo $f_platform ?>">
 				<input type="hidden" name="f_os" 				value="<?php echo $f_os ?>">
-				<input type="hidden" name="f_osbuild" 			value="<?php echo $f_osbuild ?>">
+				<input type="hidden" name="f_os_build" 			value="<?php echo $f_os_build ?>">
 				<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>">
 				<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>">
 				<input type="hidden" name="f_report_stay" 		value="<?php echo $f_report_stay ?>">
