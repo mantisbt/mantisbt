@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.25 2003-04-09 11:07:46 vboctor Exp $
+	# $Id: bug_report.php,v 1.26 2003-04-17 06:07:12 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -111,6 +111,8 @@
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
 	}
+
+	email_new_bug( $t_bug_id );
 
 	html_page_top1();
 

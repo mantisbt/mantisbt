@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.41 2003-03-12 07:56:12 jfitzell Exp $
+	# $Id: bug_api.php,v 1.42 2003-04-17 06:07:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -345,8 +345,6 @@
 
 		# log new bug
 		history_log_event_special( $t_bug_id, NEW_BUG );
-
-		email_new_bug( $t_bug_id );
 
 		return $t_bug_id;
 	}
