@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.28 2004-12-16 22:41:27 thraxisp Exp $
+	# $Id: graph_api.php,v 1.29 2005-01-05 17:04:15 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -51,7 +51,7 @@
 
 		$t_graph_font = graph_get_font();
 
-		error_check( array_sum( $p_metrics ), $p_title );
+		error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
 		
 		$graph = new Graph( $p_graph_width, $p_graph_height );
 		$graph->img->SetMargin(40,40,40,170);
@@ -96,7 +96,15 @@
 		
 		$t_graph_font = graph_get_font();
 
-		error_check( array_sum( $p_metrics['open'] ) + array_sum( $p_metrics['resolved'] ) + array_sum( $p_metrics['closed'] ), $p_title );
+		# count up array portions that are set
+		$t_count = 0;
+		foreach ( array( 'open', 'resolved', 'closed' ) as $t_label ) {
+			if ( is_array( $p_metrics[$t_label] ) ) {
+				$t_count += array_sum( $p_metrics[$t_label] );
+			}
+		}
+
+		error_check( $t_count, $p_title );
 
 		# calculate totals
 		$total = graph_total_metrics( $p_metrics );
@@ -210,7 +218,7 @@
 
 		$t_graph_font = graph_get_font();
 
-		error_check( array_sum( $p_metrics ), $p_title );
+		error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
 		
 		$graph = new PieGraph( $p_graph_width, $p_graph_height);
 		$graph->img->SetMargin(40,40,40,100);
@@ -247,7 +255,7 @@
 	function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_height = 380 ){
 
 		$t_graph_font = graph_get_font();
-		error_check( count($p_metrics), lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
+		error_check( is_array( $p_metrics ) ? count($p_metrics) : 0, lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
 		
 		foreach ($p_metrics as $i=>$vals) {
 			if ( $i > 0 ) {
@@ -701,11 +709,15 @@
 	function error_check( $bug_count, $title ) {
 		
 		if ( 0 == $bug_count ) {
+			$t_graph_font = graph_get_font();
+
 			$graph = new CanvasGraph(300,380);
 				
 			$txt = new Text( lang_get( 'not_enough_data' ), 150, 100);
 			$txt->Align("center","center","center"); 
+			$txt->SetFont( $t_graph_font, FS_BOLD );
 			$graph->title->Set( $title );
+			$graph->title->SetFont( $t_graph_font, FS_BOLD );
 			$graph->AddText($txt);
 			$graph->Stroke();
 			die();
