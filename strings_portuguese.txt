@@ -231,11 +231,20 @@
 	$s_bugnote_deleted_msg = "Nota foi apagada com sucesso...";
 	$s_bug_notes_title = "Notas do Bug";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Não existe comentários sobre este Bug.";
 	$s_delete_link = "Remover";
 	$s_add_bugnote_title = "Adicionar nota";
 	$s_add_bugnote_button = "Adicionar nota";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "Click aqui para entrar";
@@ -264,6 +273,7 @@
 	$s_open_and_reported_to_me = "Aberto e Informado por Mim";
 	$s_newer_news_link = "Novas Noticias";
 	$s_older_news_link = "Noticias Antigas";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Usuário Criado";
@@ -279,6 +289,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Esconder Desabilitados";
 	$s_filter_button = "Filtro";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Criar Conta";
 	$s_projects_link = "Projetos";
 	$s_documentation_link = "Documentação";
@@ -475,10 +487,13 @@
 	$s_remove_user_sure_msg = "Tem Certeza que Deseja Remover Esse Usuário ?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Adicionar Usuário ao Projeto";
 	$s_add_user_button = "Adicionar Usuário";
 	$s_project_selection_title = "Selecionar Projeto";
 	$s_remove_link = "Remover";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Usuário Atualizado com Sucesso";
@@ -548,21 +563,22 @@
 
 	# summary_page.php3
 	$s_summary_title = "Sumário";
-              $s_summary_jpgraph_link = "Advanced summary";
-              $s_by_status = "por Status";
+	$s_summary_jpgraph_link = "Advanced summary";
+	$s_by_status = "por Status";
 	$s_by_date = "por Data";
 	$s_by_severity = "por Causa";
 	$s_by_resolution = "por Solução";
 	$s_by_category = "por Categoria";
 	$s_by_priority = "por Prioridade";
-              $s_by_developer = "by developer";
-              $s_by_reporter ="by reporter";
-              $s_time_stats = "Status para Bug Resolvido(dias)";
+	$s_by_developer = "by developer";
+	$s_by_reporter ="by reporter";
+	$s_time_stats = "Status para Bug Resolvido(dias)";
 	$s_longest_open_bug = "Bug de Maior tempo sem Solução";
 	$s_longest_open = "Mais tempo Aberto";
 	$s_average_time = "Media de Tempo";
 	$s_total_time = "Tempo Total";
 	$s_developer_stats = "Status dos Desenvolvedores";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(open/resolved/closed/total)";
 
 	# view_all_assign_bug_page.php3
@@ -581,7 +597,10 @@
 	$s_updated = "Atualizado";
 
 	# view_all_inc.php
-        $s_search ="Search";
+	$s_none = "none";
+	$s_search ="Search";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -595,6 +614,7 @@
 	$s_update_bug_button = "Atualizar";
 	$s_bug_assign_button = "Assumir o Bug";
 	$s_reopen_bug_button = "Reabrir Bug";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 

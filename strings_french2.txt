@@ -231,11 +231,20 @@
 	$s_bugnote_deleted_msg = "Note supprim&eacute;e...";
 	$s_bug_notes_title = "Notes sur les bugs";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Ce bug n'est rattach&eacute; &agrave; aucune note.";
 	$s_delete_link = "Supprimer";
 	$s_add_bugnote_title = "Ajouter une note";
 	$s_add_bugnote_button = "Ajouter une note";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "Identification";
@@ -264,6 +273,7 @@
 	$s_open_and_reported_to_me = "Bugs ouverts et rapport&eacute;s ";
 	$s_newer_news_link = "Nouvelles fra&icirc;ches";
 	$s_older_news_link = "Autres nouvelles";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Utilisateur cr&eacute;&eacute;";
@@ -279,6 +289,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Cacher la d&eacute;sactivation";
 	$s_filter_button = "Filtrer";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Cr&eacute;er un compte utilisateur";
 	$s_projects_link = "Projets";
 	$s_documentation_link = "Documentation";
@@ -475,10 +487,13 @@
 	$s_remove_user_sure_msg = "Voulez-vous vraiment enlever cet utilisateur du projet ?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Int&eacute;grer un utilisateur au projet";
 	$s_add_user_button = "Ajouter l'utilisateur";
 	$s_project_selection_title = "Sélection de projet";
 	$s_remove_link = "Supprimer";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Utilisateur modifi&eacute; avec succ&egrave;s";
@@ -563,6 +578,7 @@
 	$s_average_time = "temps moyen";
 	$s_total_time = "temps total";
 	$s_developer_stats = "statistiques par d&eacute;veloppeur";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(ouvert/r&eacute;solu/ferm&eacute;/total)";
 
 	# view_all_assign_bug_page.php3
@@ -581,7 +597,10 @@
 	$s_updated = "Mis &agrave; jour";
 
 	# view_all_inc.php
+	$s_none = "none";
 	$s_search ="Chercher";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -595,6 +614,7 @@
 	$s_update_bug_button = "Mettre &agrave; jour ce bug";
 	$s_bug_assign_button    = "Prendre l'assignation";
 	$s_reopen_bug_button = "Rouvrir un bug";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 

@@ -236,10 +236,10 @@
 
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "There are no notes attached to this bug.";
-	$s_bugnote_edit_link = "Edit";
 	$s_delete_link = "Delete";
 	$s_add_bugnote_title = "Add Bugnote";
 	$s_add_bugnote_button = "Add Bugnote";
+	$s_bugnote_edit_link = "Edit";
 	$s_close_bug_button = "Close Bug";
 
 	# bugnote_update.php3

@@ -232,11 +232,20 @@
 	$s_bugnote_deleted_msg = "Fehlernotiz erfolgreich gelöscht...";
 	$s_bug_notes_title = "Fehlernotiz";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Zu diesem Fehler gibt es keine Notizen.";
 	$s_delete_link = "Löschen";
 	$s_add_bugnote_title = "Fehlernotiz hinzufügen";
 	$s_add_bugnote_button = "Fehlernotiz hinzufügen";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "Anmeldung: bitte hier klicken";
@@ -265,6 +274,7 @@
 	$s_open_and_reported_to_me = "Offen und von mir berichtet";
 	$s_newer_news_link = "Neuere Nachrichten";
 	$s_older_news_link = "Ältere Nachrichten";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Benutzer angelegt";
@@ -280,6 +290,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "verstecke Ausgeschaltete";
 	$s_filter_button = "Filter";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Neues Konto erstellen";
 	$s_projects_link = "Projekte";
 	$s_documentation_link = "Dokumentation";
@@ -476,10 +488,13 @@
 	$s_remove_user_sure_msg = "Soll dieser Benutzer aus dem Projekt wirklich entfernt werden?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Benutzer zum Projekt hinzugefügt";
 	$s_add_user_button = "Benutzer hinzufügen";
 	$s_project_selection_title = "Projektauswahl";
 	$s_remove_link = "löschen";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Benutzer erfolgreich aktualisiert";
@@ -549,23 +564,24 @@
 
 	# summary_page.php3 & summary_page_jpgraph.php3
 	$s_summary_title = "Zusammenfassung";
-              $s_summary_jpgraph_link = "Erweiterte Zusammenfassung";
+	$s_summary_jpgraph_link = "Erweiterte Zusammenfassung";
 	$s_by_status = "nach Status";
 	$s_by_date = "nach Datum";
 	$s_by_severity = "nach Schwere";
 	$s_by_resolution = "nach Bereinigung";
 	$s_by_category = "nach Kategorie";
 	$s_by_priority = "nach Priorität";
-        $s_by_developer = "nach Entwickler";
-        $s_by_reporter ="nach Reporter";
+	$s_by_developer = "nach Entwickler";
+	$s_by_reporter ="nach Reporter";
 	$s_time_stats = "Zeitwerte für Fehlerbereinigung(Tage)";
 	$s_longest_open_bug = "längster geöffneter Fehler";
 	$s_longest_open = "am längsten geöffnet";
 	$s_average_time = "durchschnittlich";
 	$s_total_time = "insgesamt";
 	$s_developer_stats = "Entwicklerstatistik";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(open/resolved/closed/total)";
-              $s_summary_prefix="nach";
+    $s_summary_prefix="nach";
 
 	# view_all_assign_bug_page.php3
 
@@ -583,7 +599,10 @@
 	$s_updated = "aktualisiert";
 
 	# view_all_inc.php
+	$s_none = "none";
 	$s_search ="Suche";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -597,6 +616,7 @@
 	$s_update_bug_button = "Fehlereintrag aktualisieren";
     $s_bug_assign_button    = "mir zuordnen";
 	$s_reopen_bug_button = "Fehler wiederöffnen";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 

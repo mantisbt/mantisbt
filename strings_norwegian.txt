@@ -231,11 +231,20 @@
 	$s_bugnote_deleted_msg = "Meldinger har blitt slettet...";
 	$s_bug_notes_title = "Meldinger";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Det er ingen beskjeder på denne feilen.";
 	$s_delete_link = "Slett";
 	$s_add_bugnote_title = "Ny beskjed";
 	$s_add_bugnote_button = "Legg til beskjed";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "Klikk her for å logge inn";
@@ -264,6 +273,7 @@
 	$s_open_and_reported_to_me = "Åpne og rapportert av meg";
 	$s_newer_news_link = "Nyere nyheter";
 	$s_older_news_link = "Eldre nyheter";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Bruker opprettet";
@@ -279,6 +289,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Skjul deaktiverte";
 	$s_filter_button = "Filtrere";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Opprette konto";
 	$s_projects_link = "Prosjekter";
 	$s_documentation_link = "Dokumentasjon";
@@ -475,10 +487,13 @@
 	$s_remove_user_sure_msg = "Er du sikker på at du ønsker å fjerne brukeren?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Legg bruker til prosjekt";
 	$s_add_user_button = "Legg til bruker";
 	$s_project_selection_title = "Prosjektvalg";
 	$s_remove_link = "fjerne";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Oppdatert bruker OK";
@@ -563,6 +578,7 @@
 	$s_average_time = "gjennomsnittlig tid";
 	$s_total_time = "total tid";
 	$s_developer_stats = "utvikler statistikk";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(åpne/løst/lukket/totalt)";
 
 	# view_all_assign_bug_page.php3
@@ -581,7 +597,10 @@
 	$s_updated = "Oppdatert";
 
 	# view_all_inc.php
+	$s_none = "none";
 	$s_search ="Søk";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -595,6 +614,7 @@
 	$s_update_bug_button = "Oppdatere feil";
 	$s_bug_assign_button    = "Delegere til meg";
 	$s_reopen_bug_button = "Gjenåpne feil";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 

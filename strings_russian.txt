@@ -231,11 +231,20 @@
 	$s_bugnote_deleted_msg = "Сообщение было усмешно удалено...";
 	$s_bug_notes_title = "Заметки об обращении";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Нет дополнительной информации к обращению.";
 	$s_delete_link = "Delete";
 	$s_add_bugnote_title = "Добавление информации";
 	$s_add_bugnote_button = "Добавить";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "Нажмите, чтобы войти в систему";
@@ -264,6 +273,7 @@
 	$s_open_and_reported_to_me = "Еще не решенных моих обращений";
 	$s_newer_news_link = "Свежие новости";
 	$s_older_news_link = "Более старые новости";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Создан пользователь";
@@ -279,6 +289,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Убрать выключенных";
 	$s_filter_button = "Фильтр";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Cоздать аккаунт";
 	$s_projects_link = "Проекты";
 	$s_documentation_link = "Документация";
@@ -475,10 +487,13 @@
 	$s_remove_user_sure_msg = "Вы уверены, что хотите удалить этого пользователя?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Добавление пользователя к проекту";
 	$s_add_user_button = "Добавить";
 	$s_project_selection_title = "Выбор проекта";
 	$s_remove_link = "удалить";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Пользователь успешно обновлен";
@@ -555,14 +570,15 @@
 	$s_by_resolution = "по решению";
 	$s_by_category = "По категориям";
 	$s_by_priority = "По приоритету";
-              $s_by_developer = "по разработчику";
-              $s_by_reporter ="по пользователя";
+	$s_by_developer = "по разработчику";
+	$s_by_reporter ="по пользователя";
 	$s_time_stats = "Статистика продолжительности решения обращений(в днях)";
 	$s_longest_open_bug = "Наиболее продолжительное обращение";
 	$s_longest_open = "Максимальное время";
 	$s_average_time = "Среднее время";
 	$s_total_time = "Сумманое время";
 	$s_developer_stats = "статистика разработчика";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "открытых/решеных/закрытых/всего)";
 
 	# view_all_assign_bug_page.php3
@@ -581,7 +597,10 @@
 	$s_updated = "Обновлен";
 
 	# view_all_inc.php
-        $s_search ="Поиск";
+	$s_none = "none";
+	$s_search ="Поиск";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -595,6 +614,7 @@
 	$s_update_bug_button = "Обновить информацию";
 	$s_bug_assign_button    = "Назначить себя ответственным";
 	$s_reopen_bug_button = "Повторно открыть обращение";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 

@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 
 	# Danish: S&oslash;ren Mortensen, sm@artmus.dk
-  
+
 ?>
 <?
 	# General Strings
@@ -231,11 +231,20 @@
 	$s_bugnote_deleted_msg = "Fejlnote er blevet slettet..";
 	$s_bug_notes_title = "Fejlnoter";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Der er ikke tilknyttet Fejlnoter til denne fejl.";
 	$s_delete_link = "Slet";
 	$s_add_bugnote_title = "Tilf&oslash;j Fejlnote";
 	$s_add_bugnote_button = "Tilf&oslash;j Fejlnote";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "Klik her for at logge ind";
@@ -264,6 +273,7 @@
 	$s_open_and_reported_to_me = "&Aring;bnet og rapporteret af mig";
 	$s_newer_news_link = "Nyere Nyheder";
 	$s_older_news_link = "&AElig;ldre Nyheder";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Oprettet bruger";
@@ -279,6 +289,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Skjul Deaktiveret";
 	$s_filter_button = "Filter";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Opret Konto";
 	$s_projects_link = "Projekter";
 	$s_documentation_link = "Dokumentation";
@@ -420,7 +432,7 @@
 	$s_update_news_button = "Ajourf&oslash;r Nyheder";
 
 	# news_menu_page.php3
-  $g_sitewide = "Alle projekter";
+	$g_sitewide = "Alle projekter";
 	$s_add_news_title = "Tilf&oslash;j Nyheder";
 	$s_do_not_use = "Brug ikke";
 	$s_post_to = "Send til";
@@ -476,10 +488,13 @@
 	$s_remove_user_sure_msg = "Er du sikker p&aring; at du vil fjerne denne bruger?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Tilf&oslash;j bruger til Projekt";
 	$s_add_user_button = "Tilf&oslash;j bruger";
 	$s_project_selection_title = "Projekt Valg";
 	$s_remove_link = "fjern";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Bruger ajourf&oslash;rt";
@@ -549,21 +564,22 @@
 
 	# summary_page.php3
 	$s_summary_title = "Opsummering";
-  $s_summary_jpgraph_link = "Advanceret opsummering";
-  $s_by_status = "efter status";
+	$s_summary_jpgraph_link = "Advanceret opsummering";
+	$s_by_status = "efter status";
 	$s_by_date = "efter dato (dage)";
 	$s_by_severity = "efter alvorlighed";
 	$s_by_resolution = "efter hyppighed";
 	$s_by_category = "efter kategori";
 	$s_by_priority = "efter prioritet";
-  $s_by_developer = "efter udvikler";
-  $s_by_reporter ="efter rapport&oslash;r";
+	$s_by_developer = "efter udvikler";
+	$s_by_reporter ="efter rapport&oslash;r";
 	$s_time_stats = "tids statistik for l&oslash;ste bugs(days)";
 	$s_longest_open_bug = "l&aelig;ngst &aring;bne fejl";
 	$s_longest_open = "l&aelig;ngst &aring;bne";
 	$s_average_time = "gennemsnitlig tid";
 	$s_total_time = "tid i alt";
 	$s_developer_stats = "udvikler stats";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(&aring;ben/l&oslash;st/lukket/total)";
 
 	# view_all_assign_bug_page.php3
@@ -582,7 +598,10 @@
 	$s_updated = "Ajourf&oslash;rt";
 
 	# view_all_inc.php
-        $s_search ="S&oslash;g";
+	$s_none = "none";
+	$s_search ="S&oslash;g";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -596,9 +615,8 @@
 	$s_update_bug_button = "Ajourf&oslash;r Fejl";
 	$s_bug_assign_button    = "Overdrages til mig";
 	$s_reopen_bug_button = "Gen&aring;ben Fejl";
+	$s_attached_files = "Vedh&aelig;ftede Filer";
 
-  $s_attached_files = "Vedh&aelig;ftede Filer";
-  
 	# view_bug_inc.php
 
 	# view_bug_page.php3
@@ -607,23 +625,23 @@
 ?>
 <?
   # MISSING TRANSLATIONS:
-  
+
   #core_email_API.php
   # LINE 537 & LINE 558:
   $s_problems_sending  = "PROBLEMER MED AT SENDE EMAIL TIL";   # "PROBLEMS SENDING MAIL TO";
-  
+
   # LINE 538:
   $s_mailer_error = "Mail Fejl";                               # "Mailer Error";
-   
-  # core_html_API.php 
+
+  # core_html_API.php
   # LINE 260:
   $s_manage_users = "Administrer Brugere";                     # "Manage Users"
   # LINE 261:
   $s_manage_projects = "Administrer Projekter";                # "Manage Projects"
   # And dont forget to add them as globas on LINE 247
-  
+
   # main_page.php
   #LINE 106:
   $s_archives = "Arkiver";                                      # "Archives"
-  
+
 ?>

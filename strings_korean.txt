@@ -232,11 +232,20 @@
 	$s_bugnote_deleted_msg = "버그노트가 삭제되었습니다....";
 	$s_bug_notes_title = "버그 노트";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "이 버그에 첨부된 노트가 없습니다.";
 	$s_delete_link = "삭제";
 	$s_add_bugnote_title = "버그노트 추가";
 	$s_add_bugnote_button = "버그노트 추가";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "로그인";
@@ -265,6 +274,7 @@
 	$s_open_and_reported_to_me = "내가 보고한 버그";
 	$s_newer_news_link = "새로운 뉴스";
 	$s_older_news_link = "이전 뉴스";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "사용자가 ";
@@ -280,6 +290,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Disabled 숨기기";
 	$s_filter_button = "필터";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "계정 생성";
 	$s_projects_link = "프로젝트";
 	$s_documentation_link = "문서";
@@ -476,10 +488,13 @@
 	$s_remove_user_sure_msg = "현재 사용자를 제거하시겠습니까?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "프로젝트에 사용자 추가";
 	$s_add_user_button = "사용자 추가";
 	$s_project_selection_title = "프로젝트 선택";
 	$s_remove_link = "삭제";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "사용자 정보가 갱신되었습니다.";
@@ -550,20 +565,21 @@
 	# summary_page.php3
 	$s_summary_title = "요약";
 	$s_by_status = "상태별";
-              $s_summary_jpgraph_link = "자세한 요약";
-              $s_by_date = "일자별";
+	$s_summary_jpgraph_link = "자세한 요약";
+	$s_by_date = "일자별";
 	$s_by_severity = "중요도별";
 	$s_by_resolution = "해결상태별";
 	$s_by_category = "카테고리별";
 	$s_by_priority = "우선순위";
-              $s_by_developer = "개발자별";
-              $s_by_reporter ="보고자별";
-              $s_time_stats = "시간 통계";
+	$s_by_developer = "개발자별";
+	$s_by_reporter ="보고자별";
+	$s_time_stats = "시간 통계";
 	$s_longest_open_bug = "가장 오래 해결되지 않은 버그";
 	$s_longest_open = "가장 오래된 시간";
 	$s_average_time = "평균 시간";
 	$s_total_time = "전체 시간";
 	$s_developer_stats = "개발자 통계";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(신규/해결/폐쇄/전체)";
 
 	# view_all_assign_bug_page.php3
@@ -582,7 +598,10 @@
 	$s_updated = "최종 갱신";
 
 	# view_all_inc.php
-        $s_search ="검색";
+	$s_none = "none";
+	$s_search ="검색";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -596,6 +615,7 @@
 	$s_update_bug_button = "버그 갱신";
 	$s_bug_assign_button    = "내게 할당된 버그";
 	$s_reopen_bug_button = "재발생 버그";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 

@@ -231,11 +231,20 @@
 	$s_bugnote_deleted_msg = "Notka zosta³a usuniêta...";
 	$s_bug_notes_title = "Notka";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Brak notek w tym b³êdzie.";
 	$s_delete_link = "Skasuj";
 	$s_add_bugnote_title = "Dodaj notkê";
 	$s_add_bugnote_button = "Dodaj notkê";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "WejdŸ tu aby siê zalogowaæ";
@@ -264,6 +273,7 @@
 	$s_open_and_reported_to_me = "Otwarte i zg³oszone przeze mnie";
 	$s_newer_news_link = "Nowe wiadomoœci";
 	$s_older_news_link = "Stare wiadomoœci";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Stworzono u¿ytkownika";
@@ -279,6 +289,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Ukryj wy³¹czone";
 	$s_filter_button = "Filtr";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Stwórz konto";
 	$s_projects_link = "Projekty";
 	$s_documentation_link = "Dokumentacja";
@@ -475,10 +487,13 @@
 	$s_remove_user_sure_msg = "Czy na pewno chcesz usun¹æ konto ?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Dodaj konto do projektu";
 	$s_add_user_button = "Dodaj konto";
 	$s_project_selection_title = "Wybór projektu";
 	$s_remove_link = "usuñ";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Konto zmodyfikowane";
@@ -548,21 +563,22 @@
 
 	# summary_page.php3
 	$s_summary_title = "Statystyki";
-              $s_summary_jpgraph_link = "Zaawansowane statystyki";
-              $s_by_status = "wg statusów";
+	$s_summary_jpgraph_link = "Zaawansowane statystyki";
+	$s_by_status = "wg statusów";
 	$s_by_date = "wg dni";
 	$s_by_severity = "wg wa¿noœci";
 	$s_by_resolution = "wg rozwi¹zañ";
 	$s_by_category = "wg kategorii";
 	$s_by_priority = "wg priorytetów";
-              $s_by_developer = "wg wykonawcy";
-              $s_by_reporter ="wg zg³aszaj¹cego";
+	$s_by_developer = "wg wykonawcy";
+	$s_by_reporter ="wg zg³aszaj¹cego";
 	$s_time_stats = "statystyki rozwi¹zanych b³êdów (w dniach)";
 	$s_longest_open_bug = "najd³u¿ej otwarty b³¹d";
 	$s_longest_open = "czas najd³u¿szego otwarcia";
 	$s_average_time = "przeciêtna d³ugoœæ";
 	$s_total_time = "ogólna d³ugoœæ";
 	$s_developer_stats = "wg wykonawców";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(otwarty/rozwi¹zany/zamkniêty/suma)";
 
 	# view_all_assign_bug_page.php3
@@ -581,7 +597,10 @@
 	$s_updated = "Zmodyfikowany";
 
 	# view_all_inc.php
-        $s_search ="Szukaj";
+	$s_none = "none";
+	$s_search ="Szukaj";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -595,6 +614,7 @@
 	$s_update_bug_button = "Modyfikuj b³¹d";
 	$s_bug_assign_button    = "Przypisz go do mnie";
 	$s_reopen_bug_button = "Otwórz b³¹d ponownie";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 

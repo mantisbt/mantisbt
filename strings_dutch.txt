@@ -151,7 +151,7 @@
 	$s_account_updated_msg = "Uw account is succesvol ge-updated...";
 
 	# bug_assign.php3
-    $s_bug_assign_msg       = "Opdracht is succesvol toegewezen...";
+	$s_bug_assign_msg       = "Opdracht is succesvol toegewezen...";
 
 	# bug_close.php3
 	$s_bug_close_msg       = "Bug has been closed...";
@@ -232,11 +232,20 @@
 	$s_bugnote_deleted_msg = "Opdrachtnotitie suvccesvol verwijderd...";
 	$s_bug_notes_title = "Opdrachtnotities";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "Er zijn geen notities toegevoegd aan deze opdracht.";
 	$s_delete_link = "Verwijder";
 	$s_add_bugnote_title = "Voeg opdrachtnotitie toe";
 	$s_add_bugnote_button = "Voeg opdrachtnotitie toe";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "Klik hier om in te loggen";
@@ -265,6 +274,7 @@
 	$s_open_and_reported_to_me = "Open and reported by me";
 	$s_newer_news_link = "Nieuwer nieuws";
 	$s_older_news_link = "Ouder nieuws";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Aangemaakte gebruiker";
@@ -280,6 +290,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Hide Disabled";
 	$s_filter_button = "Filter";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "Maak account aan";
 	$s_projects_link = "Projecten";
 	$s_documentation_link = "Documentatie";
@@ -476,10 +488,13 @@
 	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Add user to project";
 	$s_add_user_button = "Add User";
 	$s_project_selection_title = "Project Selection";
 	$s_remove_link = "remove";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Successfully updated user";
@@ -549,21 +564,22 @@
 
 	# summary_page.php3
 	$s_summary_title = "Samenvatting";
-              $s_summary_jpgraph_link = "Advanced summary";
-              $s_by_status = "naar status";
+	$s_summary_jpgraph_link = "Advanced summary";
+	$s_by_status = "naar status";
 	$s_by_date = "naar datum";
 	$s_by_severity = "naar serieusheid";
 	$s_by_resolution = "naar resolutie";
 	$s_by_category = "naar categorie";
 	$s_by_priority = "naar prioriteit";
-              $s_by_developer = "by developer";
-              $s_by_reporter ="by reporter";
-              $s_time_stats = "tijd status voor afgeronde opdrachten (dagen)";
+	$s_by_developer = "by developer";
+	$s_by_reporter ="by reporter";
+	$s_time_stats = "tijd status voor afgeronde opdrachten (dagen)";
 	$s_longest_open_bug = "langst openstaande opdracht";
 	$s_longest_open = "langst openstaand";
 	$s_average_time = "gemiddelde tijd";
 	$s_total_time = "totale tijd";
 	$s_developer_stats = "ontwikkel status";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(open/resolved/closed/total)";
 
 	# view_all_assign_bug_page.php3
@@ -582,7 +598,10 @@
 	$s_updated = "Ge-updated";
 
 	# view_all_inc.php
-        $s_search ="Search";
+	$s_none = "none";
+	$s_search ="Search";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -594,8 +613,9 @@
 	$s_product_build = "Product gemaakt";
 	$s_system_profile = "Systeem beschrijving";
 	$s_update_bug_button = "Update opdracht";
-    $s_bug_assign_button    = "Wijs toe aan mij";
+	$s_bug_assign_button    = "Wijs toe aan mij";
 	$s_reopen_bug_button = "Heropen opdracht";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 

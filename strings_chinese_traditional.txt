@@ -231,11 +231,20 @@
 	$s_bugnote_deleted_msg = "臭蟲筆記已刪除...";
 	$s_bug_notes_title = "臭蟲筆記";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "沒有筆記附在次臭蟲身上";
 	$s_delete_link = "刪除";
 	$s_add_bugnote_title = "新增臭蟲筆記";
 	$s_add_bugnote_button = "新增臭蟲筆記";
+	$s_bugnote_edit_link = "Edit";
+	$s_close_bug_button = "Close Bug";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "點選這裡登入";
@@ -264,6 +273,7 @@
 	$s_open_and_reported_to_me = "Open and reported by me";
 	$s_newer_news_link = "更新的新聞";
 	$s_older_news_link = "稍早的新聞";
+	$s_archives = "Archives";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "建立使用者";
@@ -279,6 +289,8 @@
 	# manage_page.php3
 	$s_hide_disabled = "Hide Disabled";
 	$s_filter_button = "Filter";
+	$s_manage_users_link = "Manage Users";
+	$s_manage_projects_link = "Manage Projects";
 	$s_create_new_account_link = "建立帳號";
 	$s_projects_link = "建立專案";
 	$s_documentation_link = "說明";
@@ -475,10 +487,13 @@
 	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Add user to project";
 	$s_add_user_button = "Add User";
 	$s_project_selection_title = "Project Selection";
 	$s_remove_link = "remove";
+	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Successfully updated user";
@@ -555,14 +570,15 @@
 	$s_by_resolution = "依解析度";
 	$s_by_category = "依類別";
 	$s_by_priority = "依優先權";
-              $s_by_developer = "by developer";
-              $s_by_reporter ="by reporter";
-              $s_time_stats = "已解決臭蟲(天數)的時間狀態";
+	$s_by_developer = "by developer";
+	$s_by_reporter ="by reporter";
+	$s_time_stats = "已解決臭蟲(天數)的時間狀態";
 	$s_longest_open_bug = "最長的開啟臭蟲";
 	$s_longest_open = "最長的開啟時間";
 	$s_average_time = "平均時間";
 	$s_total_time = "總共時間";
 	$s_developer_stats = "發展者狀態";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(open/resolved/closed/total)";
 
 	# view_all_assign_bug_page.php3
@@ -581,7 +597,10 @@
 	$s_updated = "已更新";
 
 	# view_all_inc.php
-        $s_search ="Search";
+	$s_none = "none";
+	$s_search ="Search";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 
@@ -595,6 +614,7 @@
 	$s_update_bug_button = "更新臭蟲";
 	$s_bug_assign_button    = "指定給我";
 	$s_reopen_bug_button = "重開臭蟲";
+	$s_attached_files = "Attached Files";
 
 	# view_bug_inc.php
 
