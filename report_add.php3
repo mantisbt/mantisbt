@@ -70,11 +70,11 @@
 		$f_osbuild 				= string_prepare_text( $f_osbuild );
 
 		### if a profile was selected then let's use that information
-		if ( !empty( $f_id ) ) {
+		if ( !empty( $f_profile_id ) ) {
 			### Get profile data and prefix with v_
-			$query = "SELECT id, platform, os, os_build, default_profile
+			$query = "SELECT *
 				FROM $g_mantis_user_profile_table
-				WHERE id='$f_id'";
+				WHERE id='$f_profile_id'";
 		    $result = db_query( $query );
 		    $profile_count = db_num_rows( $result );
 			$row = db_fetch_array( $result );
