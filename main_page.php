@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.46 2004-02-08 08:00:06 vboctor Exp $
+	# $Id: main_page.php,v 1.47 2004-02-10 11:37:42 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -55,41 +55,17 @@
 <br />
 
 <?php
-	$c_offset = db_prepare_int( $f_offset );
-
 	$t_project_id = helper_get_current_project();
 
 	# get news count (project plus sitewide posts)
 	$total_news_count = news_get_count( $t_project_id );
 
-	$t_news_table			= config_get( 'mantis_news_table' );
-	$t_news_view_limit		= config_get( 'news_view_limit' );
-	$t_news_view_limit_days	= config_get( 'news_view_limit_days' );
-
-	switch ( config_get( 'news_limit_method' ) ) {
-		case 0 :
-			# Select the news posts
-			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
-					FROM $t_news_table
-					WHERE project_id='$t_project_id' OR project_id=" . ALL_PROJECTS . "
-					ORDER BY announcement DESC, id DESC
-					LIMIT $c_offset, $t_news_view_limit";
-			break;
-		case 1 :
-			# Select the news posts
-			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
-					FROM $t_news_table
-					WHERE ( project_id='$t_project_id' OR project_id=" . ALL_PROJECTS . " ) AND
-						(TO_DAYS(NOW()) - TO_DAYS(date_posted) < '$t_news_view_limit_days')
-					ORDER BY announcement DESC, id DESC";
-			break;
-	} # end switch
-	$result = db_query( $query );
-	$news_count = db_num_rows( $result );
+	$news_rows = news_get_limited_rows( $p_offset, $t_project_id );
+	$news_count = count( $news_rows );
 
 	# Loop through results
 	for ( $i = 0; $i < $news_count; $i++ ) {
-		$row = db_fetch_array($result);
+		$row = $news_rows[$i];
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		# only show VS_PRIVATE posts to configured threshold and above
@@ -98,7 +74,7 @@
 			continue;
 		}
 
-		print_news_entry( $v_headline, $v_body, $v_poster_id, $v_view_state, $v_announcement, $v_date_posted );
+		print_news_entry_from_row( $row );
 		echo '<br />';
 	}  # end for loop
 ?>
@@ -107,15 +83,19 @@
 <div align="center">
 <?php
 	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
+	$t_news_view_limit = config_get( 'news_view_limit' );
 	$f_offset_next = $f_offset + $t_news_view_limit;
 	$f_offset_prev = $f_offset - $t_news_view_limit;
 
 	if ( $f_offset_prev >= 0) {
 		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
 	}
+
 	if ( $news_count == $t_news_view_limit ) {
 		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
 	}
+
+	print_bracket_link( "news_rss.php?project_id=$t_project_id", lang_get( 'rss' ) );
 ?>
 </div>
 

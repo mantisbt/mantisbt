@@ -4,6 +4,7 @@ Mantis ChangeLog
 
  * Enh #0000: 'Assign to Reporter' button added to 'View Bug' screen. 
  * Enh #0000: Improved the layout of the Summary page.
+ * Enh #3548: Support RSS for news syndication.
  * Fix #3077: Inconsistency: "Assigned To" versus "Handler".
  * Fix #3118: My Account: after update of password, wrong information is given.
  * Fix #3440: "Allowed File Types" is case sensitive (also applies to disallowed file types).

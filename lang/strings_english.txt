@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.150 $
-	# $Author: jlatour $
-	# $Date: 2004-02-10 11:07:48 $
+	# $Revision: 1.151 $
+	# $Author: vboctor $
+	# $Date: 2004-02-10 11:37:42 $
 	#
-	# $Id: strings_english.txt,v 1.150 2004-02-10 11:07:48 jlatour Exp $
+	# $Id: strings_english.txt,v 1.151 2004-02-10 11:37:42 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -492,6 +492,7 @@ $s_open_and_reported_to_me = 'Open and reported by me';
 $s_newer_news_link = 'Newer News';
 $s_older_news_link = 'Older News';
 $s_archives = 'Archives';
+$s_rss = 'RSS';
 
 # manage_create_new_user.php
 $s_created_user_part1 = 'Created user';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.12 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: news_api.php,v 1.13 2004-02-10 11:37:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -37,7 +37,7 @@
 				VALUES
 				  ( null, '$c_project_id', '$c_poster_id', NOW(), NOW(),
 				    '$c_view_state', '$c_announcement', '$c_headline', '$c_body' )";
-	    db_query( $query );
+		db_query( $query );
 
 		# db_query() errors on failure so:
 		return true;
@@ -53,7 +53,7 @@
 				  FROM $t_news_table
 	    		  WHERE id='$c_news_id'";
 
-	   db_query( $query );
+		db_query( $query );
 
 		# db_query() errors on failure so:
 		return true;
@@ -99,7 +99,7 @@
 		$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
 				  FROM $t_news_table
 				  WHERE id='$c_news_id'";
-	    $result = db_query( $query );
+		$result = db_query( $query );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
@@ -149,6 +149,62 @@
 		$t_row_count = db_num_rows( $result );
 
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			array_push( $t_rows, db_fetch_array( $result ) );
+		}
+
+		return $t_rows;
+	}
+	# --------------------
+	# Check if the specified news item is private
+	function news_get_field( $p_news_id, $p_field_name ) {
+		$row = news_get_row( $p_news_id );
+		return ( $row[$p_field_name] );
+	}
+	# --------------------
+	# Check if the specified news item is private
+	function news_is_private( $p_news_id ) {
+		return ( news_get_field( $p_news_id, 'view_state' ) == VS_PRIVATE );
+	}
+	# --------------------
+	# Gets a limited set of news rows to be viewed on one page based on the criteria
+	# defined in the configuration file.
+	function news_get_limited_rows( $p_offset, $p_project_id = null ) {
+		if ( $p_project_id === null ) {
+			$p_project_id = helper_get_current_project();
+		}
+
+		$c_project_id = db_prepare_int( $p_project_id );
+		$c_offset = db_prepare_int( $p_offset );
+
+		$t_news_table = config_get( 'mantis_news_table' );
+		$t_news_view_limit = config_get( 'news_view_limit' );
+		$t_news_view_limit_days = config_get( 'news_view_limit_days' );
+
+		switch ( config_get( 'news_limit_method' ) ) {
+			case 0 :
+				# Select the news posts
+				$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+						FROM $t_news_table
+						WHERE project_id='$c_project_id' OR project_id=" . ALL_PROJECTS . "
+						ORDER BY announcement DESC, id DESC
+						LIMIT $c_offset, $t_news_view_limit";
+			break;
+			case 1 :
+				# Select the news posts
+				$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+						FROM $t_news_table
+						WHERE ( project_id='$c_project_id' OR project_id=" . ALL_PROJECTS . " ) AND
+						(TO_DAYS(NOW()) - TO_DAYS(date_posted) < '$t_news_view_limit_days')
+						ORDER BY announcement DESC, id DESC";
+			break;
+		} # end switch
+
+		$result = db_query( $query );
+
+		$t_row_count = db_num_rows( $result );
+
+		$t_rows = array();
+		for ( $i = 0; $i < $t_row_count; $i++ ) {
 			array_push( $t_rows, db_fetch_array( $result ) );
 		}
 

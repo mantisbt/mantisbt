@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_inc.php,v 1.1 2004-02-08 08:00:06 vboctor Exp $
+	# $Id: news_inc.php,v 1.2 2004-02-10 11:37:43 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	#---------------
-	# Print one news entry given the row retrieved from the news table.
+	# Constructs the string for one news entry given the row retrieved from the news table.
 	function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p_announcement, $p_date_posted ) {
 		$t_headline = string_display_links( $p_headline );
 		$t_body = string_display_links( $p_body );
@@ -23,27 +23,57 @@
 			$t_news_css = 'news-heading-public';
 		}
 
-		echo '<div align="center">';
-		echo '<table class="width75" cellspacing="0">';
-		echo '<tr>';
-		echo "<td class=\"$t_news_css\">";
-		echo "<span class=\"bold\">$t_headline</span> - ";
-		echo "<span class=\"italic-small\">$t_date_posted</span> - ";
+		$output = '<div align="center">';
+		$output .= '<table class="width75" cellspacing="0">';
+		$output .= '<tr>';
+		$output .= "<td class=\"$t_news_css\">";
+		$output .= "<span class=\"bold\">$t_headline</span> - ";
+		$output .= "<span class=\"italic-small\">$t_date_posted</span> - ";
+		echo $output;
+
+		# @@@ eventually we should replace print's with methods to construct the
+		#     strings.
 		print_user( $p_poster_id );
-		echo ' <span class="small">';
+		$output = '';
+
+		$output .= ' <span class="small">';
 		if ( 1 == $p_announcement ) {
-			echo '[' . lang_get( 'announcement' ) . ']';
+			$output .= '[' . lang_get( 'announcement' ) . ']';
 		}
 		if ( VS_PRIVATE == $p_view_state ) {
-			echo '[' . lang_get( 'private' ) . ']';
+			$output .= '[' . lang_get( 'private' ) . ']';
 		}
-		echo '</span>';
-		echo '</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo "<td class=\"news-body\">$t_body</td>";
-		echo '</tr>';
-		echo '</table>';
-		echo '</div>';
+
+		$output .= '</span>';
+		$output .= '</td>';
+		$output .= '</tr>';
+		$output .= '<tr>';
+		$output .= "<td class=\"news-body\">$t_body</td>";
+		$output .= '</tr>';
+		$output .= '</table>';
+		$output .= '</div>';
+
+		echo $output;
+	}
+
+	# --------------------
+	# print a news item given a row in the news table.
+        function print_news_entry_from_row( $p_news_row ) {
+		extract( $p_news_row, EXTR_PREFIX_ALL, 'v' );
+		print_news_entry( $v_headline, $v_body, $v_poster_id, $v_view_state, $v_announcement, $v_date_posted );
+	}
+
+	# --------------------
+	# print a news item
+	function print_news_string_by_news_id( $p_news_id ) {
+		$row = news_get_row( $p_news_id );
+
+		# only show VS_PRIVATE posts to configured threshold and above
+		if ( ( VS_PRIVATE == $row['view_state'] ) &&
+			 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
+			continue;
+		}
+
+		print_news_entry_from_row( $row );
 	}
 ?>
