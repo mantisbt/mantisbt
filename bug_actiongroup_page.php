@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.43 2004-09-08 02:13:58 thraxisp Exp $
+	# $Id: bug_actiongroup_page.php,v 1.44 2004-11-22 13:36:49 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -113,8 +113,8 @@ $t_i = 1;
 
 foreach( $f_bug_arr as $t_bug_id ) { 
 	$t_class = sprintf( "row-%d", ($t_i++ % 2) + 1 );
-	$t_bug_rows .= sprintf( "<tr class=\"%s\"> <td>%s</td> <td>%s</td> </tr>\n"
-		, $t_class, string_get_bug_view_link( $t_bug_id ), bug_get_field( $t_bug_id, 'summary' ) 
+	$t_bug_rows .= sprintf( "<tr bgcolor=\"%s\"> <td>%s</td> <td>%s</td> </tr>\n"
+		, get_status_color( bug_get_field( $t_bug_id, 'status' ) ), string_get_bug_view_link( $t_bug_id ), bug_get_field( $t_bug_id, 'summary' ) 
     );
 	echo '<input type="hidden" name="bug_arr[]" value="' . $t_bug_id . '" />' . "\n";
 }
