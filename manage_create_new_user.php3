@@ -21,10 +21,10 @@
     $query = "INSERT
     		INTO $g_mantis_user_table
     		( id, username, email, password, date_created, last_visit,
-    		access_level, enabled, cookie_string )
+    		access_level, enabled, protected, cookie_string )
 			VALUES
 			( null, '$f_username', '$f_email', '$t_password', NOW(), NOW(),
-			'$f_access_level', '$f_enabled', '$t_cookie_string')";
+			'$f_access_level', '$f_enabled', '$f_protected', '$t_cookie_string')";
     $result = mysql_query( $query );
 ?>
 <? print_html_top() ?>

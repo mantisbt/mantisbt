@@ -32,6 +32,7 @@ To Do:
  * Added profile management
  * Profiles can be used for advanced bug submission
  * Made enum displays (category, status, etc) easier to maintain via print_lists();
+ * Removed the destructive DROP table in db_generate.sql
 
 12.06.2000	-	0.10.2
 

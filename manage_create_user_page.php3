@@ -93,6 +93,14 @@
 			<input type=checkbox name=f_enabled CHECKED>
 		</td>
 	</tr>
+	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+		<td>
+			Protected
+		</td>
+		<td colspan=2>
+			<input type=checkbox name=f_protected>
+		</td>
+	</tr>
 	<tr>
 		<td colspan=2 align=center>
 			<input type=submit value="Create User">

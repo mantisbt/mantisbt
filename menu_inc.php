@@ -33,9 +33,7 @@
 	<a href="<? echo $g_path.$g_report_bug_page ?>">Report Bug</a> |
 <? } ?>
 	<a href="<? echo $g_path.$g_summary_page ?>">Summary</a> |
-<? if ( $t_protected!="on" ) { ?>
 	<a href="<? echo $g_path.$g_account_page ?>">Account</a> |
-<? } ?>
 <? if ( $t_access_level=="administrator" ) { ?>
 	<a href="<? echo $g_path.$g_manage_page ?>">Manage</a> |
 	<a href="<? echo $g_path.$g_news_menu_page ?>">Edit News</a> |
