@@ -579,6 +579,7 @@
 	$s_updated = "aktualisiert";
 
 	# view_all_inc.php
+        $s_search ="Suche";
 
 	# view_user_reported_bug_page.php3
 

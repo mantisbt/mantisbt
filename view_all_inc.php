@@ -4,6 +4,9 @@
 	<td bgcolor="<? echo $g_white_color ?>">
 	<table width="100%">
 	<tr align="center">
+        <td>
+            <span class="smallcaption"><? echo $s_search; ?></span>
+        </td>
 	<? if ( $page_type=="reported" ) { ?>
 	<td>
 		<span class="smallcaption"><? echo $s_reporter ?></span>
@@ -39,6 +42,9 @@
 		<form method="post" action="<? echo $link_page ?>">
 		<input type="hidden" name="f_offset" value="0">
 		<input type="hidden" name="f_save" value="1">
+              <td>
+                    <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
+              </td>
 <? ### view mode specific options ?>
 <? if ( $page_type=="all" ) { ?>
 <? ### do nothing ?>

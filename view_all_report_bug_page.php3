@@ -9,6 +9,10 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+      if(!isset($f_search_text)){
+            $f_search_text=false;
+      }
+
 	if ( !isset( $f_hide_closed ) ) {
 		$f_hide_closed = "";
 	}
@@ -99,7 +103,18 @@
 		$t_where_clause = $t_where_clause." AND status='$f_show_status'";
 	}
 
-	$query = $query.$t_where_clause;
+       ### Simple Text Search - Thx to  Alan Knowles
+       if ($f_search_text) {
+            $t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search_text)."%')
+                                               OR (description LIKE '%".addslashes($f_search_text)."%')
+                                               OR (steps_to_reproduce LIKE '%".addslashes($f_search_text)."%')
+                                               OR (additional_information LIKE '%".addslashes($f_search_text)."%')
+                                               OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search_text)."%'))
+                                               AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.id";
+             $query .= ", $g_mantis_bug_text_table " . $t_where_clause;
+       } else {
+             $query = $query.$t_where_clause;
+       }
 
 	if ( !isset( $f_sort ) ) {
 			$f_sort="last_updated";

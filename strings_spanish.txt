@@ -578,8 +578,9 @@
 	$s_updated = "Actualizado";
 
 	# view_all_inc.php
+        $s_search ="Search";
 
-	# view_user_reported_bug_page.php3
+    # view_user_reported_bug_page.php3
 
 	# view_all_unassign_bug_page.php3
 
