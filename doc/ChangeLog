@@ -24,6 +24,7 @@ Mantis ChangeLog
  * Fix #3094: Switching projects clears filter values.
  * Fix #3397: Delete notification should be off when deleting a project.
  * Fix #3473: g_bug_resolved_status_threshold variable ignored.
+ * Fix #3504: project cookie not cleared at logout
  * Fix #3567: Reminders can be added for a readonly bug.
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
