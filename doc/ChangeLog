@@ -33,6 +33,7 @@ Mantis ChangeLog
  * Fix #3837: Bugs can be edited after being closed.
  * Fix #3840: Why strip the leading spaces from Description? (applied to all multi-line fields in issue + issue notes).
  * Fix #3826: Allow case of project name to be changed.
+ * Fix #3159: Allow case of user name to be changed. Also fixed bug where database error was displayed when trying to create user "TeSt" when user "Test" already exists.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).

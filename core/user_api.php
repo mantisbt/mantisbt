@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.70 2004-05-09 02:24:19 vboctor Exp $
+	# $Id: user_api.php,v 1.71 2004-05-18 03:33:14 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -121,8 +121,7 @@
 		$result = db_query( $query, 1 );
 
 		if ( db_num_rows( $result ) > 0 ) {
-			$row = db_fetch_array( $result );
-			return (strcmp($row['username'], $p_username) != 0);  # Xyz & xyz shouldn't match
+			return false;
 		} else {
 			return true;
 		}
