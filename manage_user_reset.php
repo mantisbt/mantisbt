@@ -15,7 +15,7 @@
 
 	# Go with random password and email it to the user
     if ( OFF == $f_protected ) {
-		if ( ON == $g_allow_signup ) {
+		if ( ON == $g_send_reset_password ) {
 			# Create random password
 			$t_password = create_random_password( $f_email );
 
@@ -62,7 +62,7 @@
 	if ( ON == $f_protected ) {				# PROTECTED
 		PRINT "$s_account_reset_protected_msg<p>";
 	} else if ( $result ) {					# SUCCESS
-		if ( ON == $g_allow_signup ) {
+		if ( ON == $g_send_reset_password ) {
 			PRINT "$s_account_reset_msg<p>";
 		} else {
 			PRINT "$s_account_reset_msg2<p>";

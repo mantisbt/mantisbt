@@ -12,6 +12,7 @@ Mantis
  * Modified email string padding and line separation characters.
  * Modified account page to show default and current project access levels.
  * Modified news posting to properly limit project lists for non Administrators.
+ * Modified reset password functionality to use g_send_reset_password to determine whether a password is set to blank or emailed to the user.
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.
