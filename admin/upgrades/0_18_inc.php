@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.8 2004-05-25 13:38:49 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.9 2004-06-30 17:54:52 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -62,12 +62,12 @@
 						AFTER email_on_priority";
 	
 			$result = @db_query( $query );
-			
+	
 			if ( false == $result ) {
 				return false;
 			}
 		}
-		
+	
 		if ( !db_field_exists( 'email_on_status_minimum_severity', $t_user_pref_table ) ) {
 			$query = "ALTER TABLE $t_user_pref_table ADD email_on_status_minimum_severity INT(2) DEFAULT '10' NOT NULL
 						AFTER email_on_priority_minimum_severity";
@@ -203,6 +203,35 @@
 			'Add real name to user information.',
 			"ALTER TABLE mantis_user_table ADD realname VARCHAR( 64 ) NOT NULL AFTER username" );
 
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-1',
+			'Allow custom fields to be set/required for resolve/close/report/update',
+			"ALTER TABLE mantis_custom_field_table ADD display_resolve BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-2',
+			'Allow custom fields to be set/required for resolve/close/report/update',
+			"ALTER TABLE mantis_custom_field_table ADD display_close BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-3',
+			'Allow custom fields to be set/required for resolve/close/report/update',
+			"ALTER TABLE mantis_custom_field_table ADD require_report BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-4',
+			'Allow custom fields to be set/required for resolve/close/report/update',
+			"ALTER TABLE mantis_custom_field_table ADD require_update BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-5',
+			'Allow custom fields to be set/required for resolve/close/report/update',
+			"ALTER TABLE mantis_custom_field_table ADD require_resolve BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-6',
+			'Allow custom fields to be set/required for resolve/close/report/update',
+			"ALTER TABLE mantis_custom_field_table ADD require_close BOOL NOT NULL default '0'" );
 
 	return $upgrades;
 ?>
