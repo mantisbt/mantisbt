@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_set.php,v 1.2 2005-03-19 16:29:42 thraxisp Exp $
+	# $Id: manage_config_work_threshold_set.php,v 1.3 2005-03-23 23:57:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -59,7 +59,7 @@
 		}
 	}
 
-	function set_capability_boolean( $p_threshold ) {
+	function set_capability_boolean( $p_threshold, $p_all_projects_only=false ) {
 	    global $t_access, $t_project;
 	    
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
@@ -72,7 +72,7 @@
 		}
 	}
 
-	function set_capability_enum( $p_threshold ) {
+	function set_capability_enum( $p_threshold, $p_all_projects_only=false ) {
 	    global $t_access, $t_project;
 	    
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )

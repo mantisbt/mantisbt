@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.2 2005-03-20 14:34:03 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.3 2005-03-23 23:57:50 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -32,12 +32,13 @@
 		
 		echo '<table class="width100">';
 		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 2 ) . '">' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
-		echo '<tr><td class="form-title" width="40%">' . lang_get( 'perm_rpt_capability' ) . '</td>';
+		echo '<tr><td class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</td>';
+		echo '<td class="form-title"style="text-align:center"  width="40%" colspan="' . count( $t_access_levels ) . '">' . lang_get( 'access_levels' ) . '</td>';
+		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'alter_level' ) . '&nbsp;</td></tr><tr>';
 		foreach( $t_access_levels as $t_access_level ) {
 			$t_entry_array = explode_enum_arr( $t_access_level );
 			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), $t_entry_array[0] ) . '&nbsp;</td>';
 		}
-		echo '<td class="form-title" style="text-align:center">&nbsp;' . lang_get( 'alter_level' ) . '&nbsp;</td>';
 		echo '</tr>' . "\n";
 	}
 

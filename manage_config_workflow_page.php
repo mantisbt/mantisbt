@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.3 2005-03-20 14:34:03 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.4 2005-03-23 23:57:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -53,10 +53,10 @@
 		echo '<table class="width100">';
 		echo '<tr><td class="form-title" colspan=' . ( count( $t_enum_status ) + 1 ) . '>'
 			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
-		echo '<tr><td class="form-title" width="30%">' . lang_get( 'current_status' ) . '</td>';
-		echo '<td class="form-title" colspan="' . ( count( $t_enum_status ) ) . '">'
+		echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'current_status' ) . '</td>';
+		echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_status ) ) . '">'
 			. lang_get( 'next_status' ) . '</td></tr>';
-		echo "\n<tr><td>&nbsp;</td>";
+		echo "\n<tr></td>";
 		foreach( $t_enum_status as $t_status ) {
 			$t_entry_array = explode_enum_arr( $t_status );
 			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'status_enum_string' ), $t_entry_array[0] ) . '&nbsp;</td>';

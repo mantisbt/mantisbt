@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.247 $
+	# $Revision: 1.248 $
 	# $Author: thraxisp $
-	# $Date: 2005-03-21 23:19:04 $
+	# $Date: 2005-03-23 23:57:51 $
 	#
-	# $Id: strings_english.txt,v 1.247 2005-03-21 23:19:04 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.248 2005-03-23 23:57:51 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -434,8 +434,6 @@ $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
 # adm_permission_report.php
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Issue has been successfully assigned...';
@@ -645,6 +643,9 @@ $s_edit_user_link = 'Edit User';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_issue_reporter = 'User who reported issue';
+$s_issue_handler = 'User who is handling the issue';
+$s_users_added_bugnote = 'Users who added Bugnotes';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -674,6 +675,7 @@ $s_workflow_change_access = 'Who can change workflow';
 $s_access_change_access = 'Who can change access levels';
 
 # manage_config_work_threshold_page
+$s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';

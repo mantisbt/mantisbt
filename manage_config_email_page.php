@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_page.php,v 1.4 2005-03-21 23:19:04 thraxisp Exp $
+	# $Id: manage_config_email_page.php,v 1.5 2005-03-23 23:57:48 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -55,12 +55,13 @@
 		global $t_project;
 		$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan=' . ( count( $t_access_levels ) + 7 ) . '>' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
-		echo '<tr><td class="form-title" width="30%">Message</td>';
-		echo'<td class="form-title" style="text-align:center">&nbsp;' . lang_get( 'reporter' ) . '&nbsp;</td>';
-		echo '<td class="form-title" style="text-align:center">&nbsp;' . lang_get( 'assigned_to' ) . '&nbsp;</td>';
-		echo '<td class="form-title" style="text-align:center">&nbsp;' . lang_get( 'users_monitoring_bug' ) . '&nbsp;</td>';
-		echo '<td class="form-title" style="text-align:center">&nbsp;' . lang_get( 'users_added_bugnote' ) . '&nbsp;</td>';
+		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
+		echo '<tr><td class="form-title" width="30%" rowspan="2">Message</td>';
+		echo'<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'issue_reporter' ) . '&nbsp;</td>';
+		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'issue_handler' ) . '&nbsp;</td>';
+		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'users_monitoring_bug' ) . '&nbsp;</td>';
+		echo '<td class="form-title" style="text-align:center" rowspan="2">&nbsp;' . lang_get( 'users_added_bugnote' ) . '&nbsp;</td>';
+		echo '<td class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&nbsp;' . lang_get( 'access_levels' ) . '&nbsp;</td></tr><tr>';
 		foreach( $t_access_levels as $t_access_level ) {
 			$t_entry_array = explode_enum_arr( $t_access_level );
 			echo '<td class="form-title" style="text-align:center">&nbsp;' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), $t_entry_array[0] ) . '&nbsp;</td>';
