@@ -29,21 +29,21 @@
 
 	function print_test_result( $p_result ) {
 		if ( BAD == $p_result ) {
-			PRINT "<td bgcolor=#ff0088>BAD</td>";
+			PRINT '<td bgcolor="#ff0088">BAD</td>';
 		}
 
 		if ( GOOD == $p_result ) {
-			PRINT "<td bgcolor=#00ff88>GOOD</td>";
+			PRINT '<td bgcolor="#00ff88">GOOD</td>';
 		}
 	}
 
 	function print_yes_no( $p_result ) {
 		if (( 0 === $p_result ) || ( "no" === strtolower( $p_result ) )) {
-			PRINT "<font bgcolor=#ff0088>No</font>";
+			PRINT '<font bgcolor="#ff0088">No</font>';
 		}
 
 		if (( 1 === $p_result ) || ( "yes" === strtolower( $p_result ) )) {
-			PRINT "<font bgcolor=#00ff88>Yes</font>";
+			PRINT '<font bgcolor="#00ff88">Yes</font>';
 		}
 	}
 
@@ -70,15 +70,13 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 <tr>
 	<td bgcolor="#f0f0ff">
 		<span class="title">Version</span>
-		<p>
-		Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION ?></b>.  If you are not running this version you or your administrator will need to upgrade your build of PHP.  We recommend 4.0.6 or 4.1.2 at the moment.
-		<p />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		You are running <b>PHP <?php echo $version ?></b>
+		<p>Mantis requires at least <b>PHP <?php echo PHP_MIN_VERSION ?></b>.  If you are not running this version you or your administrator will need to upgrade your build of PHP.  We recommend 4.0.6 or 4.1.2 at the moment.</p>
+		<p>You are running <b>PHP <?php echo $version ?></b></p>
 	</td>
 </tr>
 </table>
 
-<p>
+<br />
 
 <table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
 <!-- Test DATABASE part 1 -->
@@ -142,6 +140,35 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		}
 	?>
 </tr>
+<?php # ---- Windows ? ---- 
+if (substr(php_uname(), 0, 7) == 'Windows') {
+?>
+<tr>
+	<td bgcolor="#ffffff">
+		$g_validate_email = OFF?
+	</td>
+	<?php
+		if ( ON != $g_validate_email ) {
+			print_test_result( GOOD );
+		} else {
+			print_test_result( BAD );
+		}
+	?>
+</tr>
+<tr>
+	<td bgcolor="#ffffff">
+		$g_check_mx_record = OFF?
+	</td>
+	<?php
+		if ( ON != $g_check_mx_record ) {
+			print_test_result( GOOD );
+		} else {
+			print_test_result( BAD );
+		}
+	?>
+</tr>
+<?php } ?>
+
 <!-- PHP Setup check -->
 <?php
 	$t_vars = array( 'magic_quotes_gpc',
@@ -165,7 +192,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 ?>
 </table>
 
-<p>
+</p>
 <?php # ---- Uploads ? ---- ?>
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>
@@ -193,25 +220,9 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 </tr>
 </table>
 
-<p>
-<?php # ---- Windows ? ---- ?>
-<table width="100%" bgcolor="#008800" border="0" cellpadding="20" cellspacing="1">
-<tr>
-	<td bgcolor="#f4fff4">
-		<span class="title">Using Windows?</span>
-		In your config_inc.php set the following:<br />
-		<pre>
-		$g_validate_email  = OFF;
-		$g_check_mx_record = OFF;
-		</pre>
-		getmxrr() and checkdnsrr() are not available under Windows.  You need to turn these off the configuration variables above to avoid warnings and errors.
-	</td>
-</tr>
-</table>
+<br />
 
-
-<p>
-<a name="email">
+<a name="email"></a>
 <?php # ---- Email testing ---- ?>
 <table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
 <tr>
@@ -219,7 +230,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		<span class="title">Testing Email</span>
 		<p>
 		You can test the mail() function with this form.  Just check the recipient and click submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.
-		<p>
+		</p>
 		<?php if ( isset( $f_mail_test ) ) { ?>
 		<b><font color="#ff0000">Mail sent</font></b> -
 		<?php
@@ -238,7 +249,8 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 </tr>
 </table>
 
-<a name="password"><p></a>
+<br />
+<a name="password"></a>
 <?php # ---- Password ---- ?>
 <table width="100%" bgcolor="#008800" border="0" cellpadding="20" cellspacing="1">
 <tr>
@@ -264,7 +276,8 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 </tr>
 </table>
 
-<p>
+<br />
+<a name="crypt"></a>
 <?php # ---- CRYPT CHECKS ---- ?>
 <table width="100%" bgcolor="#aa0000" border="0" cellpadding="20" cellspacing="1">
 <tr>
@@ -282,6 +295,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		<br />
 		Blowfish:
 		<?php print_yes_no( CRYPT_BLOWFISH ) ?>
+                </p>
 	</td>
 </tr>
 </table>
