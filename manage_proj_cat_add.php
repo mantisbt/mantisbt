@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -21,7 +21,7 @@
 		$result = category_add( $f_project_id, $f_category );
 	}
 
-	$t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;
+	$t_redirect_url = $g_manage_project_edit_page.'?f_project_id='.$f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -37,7 +37,7 @@
 	if ( $result ) {				# SUCCESS
 		PRINT "$s_operation_successful<p>";
 	} else if ( $duplicate ) {		# DUPLICATE
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY]."<p>";
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p>';
 	} else {						# FAILURE
 		print_sql_error( $query );
 	}

@@ -7,11 +7,11 @@
 <?php
 	# Show the simple update bug options
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	if ( ADVANCED_ONLY == $g_show_update ) {
-		print_header_redirect ( $g_bug_update_advanced_page."?f_id=".$f_id );
+		print_header_redirect ( $g_bug_update_advanced_page.'?f_id='.$f_id );
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -27,14 +27,14 @@
     		WHERE id='$c_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v" );
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
     		WHERE id='$v_bug_text_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v2" );
+	extract( $row, EXTR_PREFIX_ALL, 'v2' );
 
 	# prepare strings for display
 	$v_summary					= string_edit_text( $v_summary );
@@ -57,16 +57,16 @@
 	<td class="right" colspan="3">
 <?php
 	switch ( $g_show_view ) {
-		case 0: print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_back_to_bug_link );
+		case 0: print_bracket_link( $g_view_bug_page.'?f_id='.$f_id, $s_back_to_bug_link );
 				break;
-		case 1: print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_back_to_bug_link );
+		case 1: print_bracket_link( $g_view_bug_page.'?f_id='.$f_id, $s_back_to_bug_link );
 				break;
-		case 2: print_bracket_link( $g_view_bug_advanced_page."?f_id=".$f_id, $s_back_to_bug_link );
+		case 2: print_bracket_link( $g_view_bug_advanced_page.'?f_id='.$f_id, $s_back_to_bug_link );
 				break;
 	}
 
 	if ( BOTH == $g_show_update ) {
-		print_bracket_link( $g_bug_update_advanced_page."?f_id=".$f_id, $s_update_advanced_link );
+		print_bracket_link( $g_bug_update_advanced_page.'?f_id='.$f_id, $s_update_advanced_link );
 	}
 ?>
 	</td>
@@ -102,12 +102,12 @@
 	</td>
 	<td>
 		<select name="f_severity">
-			<?php print_enum_string_option_list( "severity", $v_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $v_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_reproducibility">
-			<?php print_enum_string_option_list( "reproducibility", $v_reproducibility ) ?>
+			<?php print_enum_string_option_list( 'reproducibility', $v_reproducibility ) ?>
 		</select>
 	</td>
 	<td>
@@ -134,7 +134,7 @@
 	</td>
 	<td>
 		<select name="f_view_state">
-			<?php print_enum_string_option_list( "project_view_state", $v_view_state) ?>
+			<?php print_enum_string_option_list( 'project_view_state', $v_view_state) ?>
 		</select>
 	</td>
 	<td colspan="2">
@@ -158,14 +158,14 @@
 	</td>
 	<td>
 		<select name="f_priority">
-			<?php print_enum_string_option_list( "priority", $v_priority ) ?>
+			<?php print_enum_string_option_list( 'priority', $v_priority ) ?>
 		</select>
 	</td>
 	<td class="category">
 		<?php echo $s_resolution ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( "resolution", $v_resolution ) ?>
+		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -177,7 +177,7 @@
 	</td>
 	<td <?php echo get_status_bgcolor( $v_status ) ?>>
 		<select name="f_status">
-			<?php print_enum_string_option_list( "status", $v_status ) ?>
+			<?php print_enum_string_option_list( 'status', $v_status ) ?>
 		</select>
 	</td>
 	<td class="category">

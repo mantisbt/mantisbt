@@ -8,7 +8,7 @@
 	# This is the first page a user sees when they login to the bugtracker
 	# News is displayed which can notify users of any important changes
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name ) ?>
 <?php print_page_top1() ?>
@@ -61,7 +61,7 @@
     # Loop through results
 	for ($i=0;$i<$news_count;$i++) {
 		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$v_headline 	= string_display( $v_headline );
 		$v_body 		= string_display( $v_body );
@@ -69,11 +69,11 @@
 
 		## grab the username and email of the poster
     	$row2 = get_user_info_by_id_arr( $v_poster_id );
-		$t_poster_name	= "";
-		$t_poster_email	= "";
+		$t_poster_name	= '';
+		$t_poster_email	= '';
 		if ( $row2 ) {
-			$t_poster_name	= $row2["username"];
-			$t_poster_email	= $row2["email"];
+			$t_poster_name	= $row2['username'];
+			$t_poster_email	= $row2['email'];
 		}
 ?>
 <p>
@@ -106,10 +106,10 @@
 	$f_offset_prev = $f_offset - $g_news_view_limit;
 
 	if ( $f_offset_prev >= 0) {
-		print_bracket_link( $g_main_page."?f_offset=".$f_offset_prev, $s_newer_news_link );
+		print_bracket_link( $g_main_page.'?f_offset='.$f_offset_prev, $s_newer_news_link );
 	}
 	if ( $news_count == $g_news_view_limit ) {
-		print_bracket_link( $g_main_page."?f_offset=".$f_offset_next, $s_older_news_link );
+		print_bracket_link( $g_main_page.'?f_offset='.$f_offset_next, $s_older_news_link );
 	}
 ?>
 </div>

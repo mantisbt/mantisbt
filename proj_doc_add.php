@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -13,7 +13,7 @@
 	$result = 0;
 	$good_upload = 0;
 	$disallowed = 0;
-	extract( $HTTP_POST_FILES['f_file'], EXTR_PREFIX_ALL, "f" );
+	extract( $HTTP_POST_FILES['f_file'], EXTR_PREFIX_ALL, 'f' );
 
 	if ( !file_type_check( $f_file_name ) ) {
 		$disallowed = 1;
@@ -21,13 +21,13 @@
 		$good_upload = 1;
 
 		# grab the file path
-		$t_file_path = get_current_project_field( "file_path" );
+		$t_file_path = get_current_project_field( 'file_path' );
 
 		# prepare variables for insertion
 		$f_title 		= string_prepare_text( $f_title );
 		$f_description 	= string_prepare_textarea( $f_description );
 
-		$f_file_name = $g_project_cookie_val."-".$f_file_name;
+		$f_file_name = $g_project_cookie_val.'-'.$f_file_name;
 		$t_file_size = filesize( $f_file );
 
 		switch ( $g_file_upload_method ) {
@@ -43,7 +43,7 @@
 						}
 						break;
 			case DATABASE:
-						$t_content = addslashes( fread ( fopen( $f_file, "rb" ), $t_file_size ) );
+						$t_content = addslashes( fread ( fopen( $f_file, 'rb' ), $t_file_size ) );
 						$query = "INSERT INTO mantis_project_file_table
 								(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 								VALUES
@@ -70,9 +70,9 @@
 		PRINT "$s_operation_successful<p>";
 	} else {						# FAILURE
 		if ( 1 == $disallowed ) {
-			PRINT $MANTIS_ERROR[ERROR_FILE_DISALLOWED]."<p>";
+			PRINT $MANTIS_ERROR[ERROR_FILE_DISALLOWED].'<p>';
 		} else if ( 0 == $good_upload ) {
-			PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]."<p>";
+			PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED].'<p>';
 		} else if ( !$result ) {
 			print_sql_error( $query );
 		}

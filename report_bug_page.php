@@ -7,11 +7,11 @@
 <?php
 	# This file POSTs data to report_bug.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	# these pages are invalid for the "All Project" selection
-	if ( "0000000" == $g_project_cookie_val ) {
+	# these pages are invalid for the 'All Project' selection
+	if ( '0000000' == $g_project_cookie_val ) {
 		print_header_redirect( $g_login_select_proj_page );
 	}
 
@@ -25,15 +25,15 @@
 	# We check to see if the variable exists to avoid warnings
 
 	if ( !isset( $f_category ) ) {
-		$f_category = "";
+		$f_category = '';
 	}
 
 	if ( !isset( $f_reproducibility ) ) {
-		$f_reproducibility = "";
+		$f_reproducibility = '';
 	}
 
 	if ( !isset( $f_severity ) ) {
-		$f_severity = "";
+		$f_severity = '';
 	}
 
 	if ( !isset( $f_priority ) ) {
@@ -41,15 +41,15 @@
 	}
 
 	if ( !isset( $f_summary ) ) {
-		$f_summary = "";
+		$f_summary = '';
 	}
 
 	if ( !isset( $f_description ) ) {
-		$f_description = "";
+		$f_description = '';
 	}
 
 	if ( !isset( $f_additional_info ) ) {
-		$f_additional_info = "";
+		$f_additional_info = '';
 	}
 ?>
 <?php print_page_top1() ?>
@@ -60,7 +60,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo "enctype=\"multipart/form-data\""; } ?> action="<?php echo $g_report_add ?>">
+		<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="<?php echo $g_report_add ?>">
 		<input type="hidden" name="f_assign_id" value="0000000">
 		<?php echo $s_enter_report_details_title ?>
 	</td>
@@ -74,7 +74,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<?php echo $s_category ?> <?php print_documentation_link( "category" ) ?>:
+		<?php echo $s_category ?> <?php print_documentation_link( 'category' ) ?>:
 	</td>
 	<td width="70%">
 		<select name="f_category">
@@ -84,32 +84,32 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_reproducibility ?> <?php print_documentation_link( "reproducibility" ) ?>:
+		<?php echo $s_reproducibility ?> <?php print_documentation_link( 'reproducibility' ) ?>:
 	</td>
 	<td>
 		<select name="f_reproducibility">
-			<?php print_enum_string_option_list( "reproducibility", $f_reproducibility ) ?>
+			<?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
 		</select>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_severity ?> <?php print_documentation_link( "severity" ) ?>:
+		<?php echo $s_severity ?> <?php print_documentation_link( 'severity' ) ?>:
 	</td>
 	<td>
 		<select name="f_severity">
-			<?php print_enum_string_option_list( "severity", $f_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $f_severity ) ?>
 		</select>
 	</td>
 </tr>
 <? if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_priority ?> <?php print_documentation_link( "priority" ) ?>:
+		<?php echo $s_priority ?> <?php print_documentation_link( 'priority' ) ?>:
 	</td>
 	<td>
 		<select name="f_priority">
-			<?php print_enum_string_option_list( "priority", $f_priority ) ?>
+			<?php print_enum_string_option_list( 'priority', $f_priority ) ?>
 		</select>
 	</td>
 </tr>
@@ -121,7 +121,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentation_link( "summary" ) ?>:
+		<span class="required">*</span><?php echo $s_summary ?> <?php print_documentation_link( 'summary' ) ?>:
 	</td>
 	<td>
 		<input type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>">
@@ -129,7 +129,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo $s_description ?> <?php print_documentation_link( "description" ) ?>:
+		<span class="required">*</span><?php echo $s_description ?> <?php print_documentation_link( 'description' ) ?>:
 	</td>
 	<td>
 		<textarea name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
@@ -137,7 +137,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_additional_information ?> <?php print_documentation_link( "additional_information" ) ?>:
+		<?php echo $s_additional_information ?> <?php print_documentation_link( 'additional_information' ) ?>:
 	</td>
 	<td>
 		<textarea name="f_additional_info" cols="60" rows="5" wrap="virtual"><?php echo $f_additional_info ?></textarea>
@@ -166,10 +166,10 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_report_stay ?> <?php print_documentation_link( "report_stay" ) ?>:
+		<?php echo $s_report_stay ?> <?php print_documentation_link( 'report_stay' ) ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo "CHECKED"?>> (<?php echo $s_check_report_more_bugs ?>)
+		<input type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'CHECKED' ?>> (<?php echo $s_check_report_more_bugs ?>)
 	</td>
 </tr>
 <tr>

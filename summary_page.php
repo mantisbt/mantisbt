@@ -4,14 +4,14 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	#checking if it's a per project statistic or all projects
 	if ($g_project_cookie_val=='0000000') {
-		$specific_where = " 1=1";
+		$specific_where = ' 1=1';
 	} else {
 		$specific_where = " project_id='$g_project_cookie_val'";
 	}
@@ -28,8 +28,8 @@
 	$t_total_time   = 0;
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_date_submitted = $row["date_submitted"];
-		$t_last_updated   = $row["last_updated"];
+		$t_date_submitted = $row['date_submitted'];
+		$t_last_updated   = $row['last_updated'];
 
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated   = 0;
@@ -40,7 +40,7 @@
 		$t_total_time = $t_total_time + $t_diff;
 		if ( $t_diff > $t_largest_diff ) {
 			$t_largest_diff = $t_diff;
-			$t_bug_id = $row["id"];
+			$t_bug_id = $row['id'];
 		}
 	}
 	if ( $bug_count < 1 ) {
@@ -73,7 +73,7 @@
 				<?php echo $s_by_status ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_status_enum_string, "status" ) ?>
+		<?php print_bug_enum_summary( $g_status_enum_string, 'status' ) ?>
 		</table>
 	</td>
 	<td width="50%">
@@ -97,7 +97,7 @@
 				<?php echo $s_by_severity ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_severity_enum_string, "severity" ) ?>
+		<?php print_bug_enum_summary( $g_severity_enum_string, 'severity' ) ?>
 		</table>
 	</td>
 	<td>
@@ -108,7 +108,7 @@
 				<?php echo $s_by_resolution ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_resolution_enum_string, "resolution" ) ?>
+		<?php print_bug_enum_summary( $g_resolution_enum_string, 'resolution' ) ?>
 		</table>
 	</td>
 </tr>
@@ -132,7 +132,7 @@
 				<?php echo $s_by_priority ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_priority_enum_string, "priority" ) ?>
+		<?php print_bug_enum_summary( $g_priority_enum_string, 'priority' ) ?>
 		</table>
 	</td>
 </tr>

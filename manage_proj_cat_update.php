@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -13,7 +13,7 @@
 	$f_orig_category = urldecode( stripslashes( $f_orig_category ) );
 
 	$result = 0;
-	$query = "";
+	$query = '';
 	# check for duplicate
 	if ( !is_duplicate_category( $f_project_id, $f_category ) ) {
 		$result = category_update( $f_project_id, $f_category, $f_orig_category );
@@ -30,7 +30,7 @@
 	   	$result = db_query( $query );
 	}
 
-	$t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;
+	$t_redirect_url = $g_manage_project_edit_page.'?f_project_id='.$f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -46,7 +46,7 @@
 	if ( $result ) {					# SUCCESS
 		PRINT "$s_operation_successful<p>";
 	} else if ( is_duplicate_category( $f_project_id, $f_category )) {
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY]."<p>";
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY].'<p>';
 	} else {							# FAILURE
 		print_sql_error( $query );
 	}

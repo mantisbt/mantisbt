@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -31,13 +31,13 @@
 			email_reset( $f_id, $t_password );
 		} else { # use blank password, no emailing
 			switch ( $g_login_method ) {
-				case CRYPT: $t_password = "4nPtPLdAFdoxA";
+				case CRYPT: $t_password = '4nPtPLdAFdoxA';
 							break;
-				case PLAIN: $t_password = "";
+				case PLAIN: $t_password = '';
 							break;
-				case MD5:	$t_password = "d41d8cd98f00b204e9800998ecf8427e";
+				case MD5:	$t_password = 'd41d8cd98f00b204e9800998ecf8427e';
 							break;
-				default:	$t_password = "";
+				default:	$t_password = '';
 			}
 			# password is blank password
 		    $query = "UPDATE $g_mantis_user_table

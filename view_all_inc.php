@@ -43,7 +43,7 @@
 	<td>
 		<select name="f_assign_id">
 			<option value="any"><?php echo $s_any ?></option>
-			<option value="none" <?php if ( "none" == $f_assign_id ) echo "SELECTED" ?>><?php echo $s_none ?></option>
+			<option value="none" <?php if ( 'none' == $f_assign_id ) echo "SELECTED" ?>><?php echo $s_none ?></option>
 			<option value="any"></option>
 			<?php print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
@@ -60,14 +60,14 @@
 		<select name="f_show_severity">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( "severity", $f_show_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $f_show_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_status">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( "status", $f_show_status ) ?>
+			<?php print_enum_string_option_list( 'status', $f_show_status ) ?>
 		</select>
 	</td>
 	<td>
@@ -77,7 +77,7 @@
 		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <?php if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
+		<input type="checkbox" name="f_hide_closed" <?php if ( 'on' == $f_hide_closed ) echo 'CHECKED' ?>>
 	</td>
 </tr>
 <tr class="row-category2">
@@ -162,7 +162,7 @@
 					PRINT "$i&nbsp;";
 				} else {
 					$f_search = urlencode( $f_search );
-					PRINT "<a href=\"$g_view_all_bug_page?f_page_number=$i&f_search=$f_search\">$i</a>&nbsp;";
+					PRINT "<a href=\"$g_view_all_bug_page?f_page_number=$i&amp;f_search=$f_search\">$i</a>&nbsp;";
 				}
 			}
 		?>
@@ -176,35 +176,35 @@
 	</td>
 <?php	} ?>
 	<td class="center" width="5%">
-		<?php print_view_bug_sort_link( "P", "priority", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
+		<?php print_view_bug_sort_link( 'P', 'priority', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'priority' ) ?>
 	</td>
 	<td class="center" width="8%">
-		<?php print_view_bug_sort_link( $s_id, "id", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "id" ) ?>
+		<?php print_view_bug_sort_link( $s_id, 'id', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'id' ) ?>
 	</td>
 	<td class="center" width="3%">
 		#
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link( $s_category, "category", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "category" ) ?>
+		<?php print_view_bug_sort_link( $s_category, 'category', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'category' ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link( $s_severity, "severity", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
+		<?php print_view_bug_sort_link( $s_severity, 'severity', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'severity' ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link( $s_status, "status", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "status" ) ?>
+		<?php print_view_bug_sort_link( $s_status, 'status', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'status' ) ?>
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link( $s_updated, "last_updated", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
+		<?php print_view_bug_sort_link( $s_updated, 'last_updated', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'last_updated' ) ?>
 	</td>
 	<td class="center" width="38%">
-		<?php print_view_bug_sort_link( $s_summary, "summary", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
+		<?php print_view_bug_sort_link( $s_summary, 'summary', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'summary' ) ?>
 	</td>
 </tr>
 <tr>
@@ -216,7 +216,7 @@
 	for($i=0; $i < $row_count; $i++) {
 		# prefix bug data with v_
 		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$v_summary = string_display( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
@@ -234,7 +234,7 @@
 		$bugnote_count = get_bugnote_count( $v_id );
 
 		# grab the project name
-		$project_name = get_project_field($v_project_id,"NAME");
+		$project_name = get_project_field( $v_project_id, 'name' );
 
 		$query = "SELECT UNIX_TIMESTAMP(last_modified) as last_modified
 				FROM $g_mantis_bugnote_table
@@ -254,7 +254,7 @@
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ( ON == $g_show_priority_text ) {
-				echo get_enum_element( "priority", $v_priority );
+				echo get_enum_element( 'priority', $v_priority );
 			} else {
 				print_status_icon( $v_priority );
 			}
@@ -264,10 +264,10 @@
 		<?php
 			print_bug_link( $v_id );
 			# type project name if viewing 'all projects'
-			if (( ON == $g_show_bug_project_links )&&( "0000000" == $g_project_cookie_val )) {
-				echo "<br />[";
-				print_view_bug_sort_link( "$project_name", "project_id", $f_sort, $f_dir );
-				echo "]";
+			if (( ON == $g_show_bug_project_links )&&( '0000000' == $g_project_cookie_val )) {
+				echo '<br />[';
+				print_view_bug_sort_link( $project_name, 'project_id', $f_sort, $f_dir );
+				echo ']';
 			}
 		?>
 	</td>
@@ -278,10 +278,10 @@
 					strtotime( "-$f_highlight_changed hours" ) ) {
 					PRINT "<span class=\"bold\">$bugnote_count</span>";
 				} else {
-					PRINT "$bugnote_count";
+					PRINT $bugnote_count;
 				}
 			} else {
-				echo "&nbsp;";
+				echo '&nbsp;';
 			}
 		?>
 	</td>
@@ -295,9 +295,9 @@
 		<?php
 			# print username instead of status
 			if ( ( ON == $g_show_assigned_names )&&( $v_handler_id > 0 ) ) {
-				echo "(".get_user_info( $v_handler_id, "username" ).")";
+				echo '('.get_user_info( $v_handler_id, 'username' ).')';
 			} else {
-				echo get_enum_element( "status", $v_status );
+				echo get_enum_element( 'status', $v_status );
 			}
 		?>
 	</td>
@@ -308,7 +308,7 @@
 
 				PRINT "<span class=\"bold\">$t_last_updated</span>";
 			} else {
-				PRINT "$t_last_updated";
+				PRINT $t_last_updated;
 			}
 		?>
 	</td>
@@ -345,17 +345,17 @@
 	# print the [ prev ] link
 	if ($f_page_number > 1) {
 		$t_prev_page_number = $f_page_number - 1;
-		print_bracket_link( $g_view_all_bug_page."?f_page_number=".$t_prev_page_number, $s_view_prev_link." ".$f_per_page );
+		print_bracket_link( $g_view_all_bug_page.'?f_page_number='.$t_prev_page_number, $s_view_prev_link.' '.$f_per_page );
 	} else {
-		print_bracket_link( "", $s_view_prev_link." ".$f_per_page );
+		print_bracket_link( '', $s_view_prev_link.' '.$f_per_page );
 	}
 
 	# print the [ next ] link
 	if ($f_page_number < $t_page_count) {
 		$t_next_page_number = $f_page_number + 1;
-		print_bracket_link( $g_view_all_bug_page."?f_page_number=".$t_next_page_number, $s_view_next_link." ".$f_per_page );
+		print_bracket_link( $g_view_all_bug_page.'?f_page_number='.$t_next_page_number, $s_view_next_link.' '.$f_per_page );
 	} else {
-		print_bracket_link( "", $s_view_next_link." ".$f_per_page );
+		print_bracket_link( '', $s_view_next_link.' '.$f_per_page );
 	}
 ?>
 </div>

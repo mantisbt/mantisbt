@@ -15,7 +15,7 @@
 	# --------------------
 	function print_month_option_list( $p_month=0 ) {
 		for ($i=1; $i<=12; $i++) {
-			$month_name  = date( "F", mktime(0,0,0,$i,1,2000) );
+			$month_name  = date( 'F', mktime(0,0,0,$i,1,2000) );
 			if ( $i == $p_month ) {
 				PRINT "<option value=\"$i\" SELECTED>$month_name</option>";
 			} else {

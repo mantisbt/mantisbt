@@ -14,9 +14,9 @@
 
 	# --------------------
 	# connect to database and select database
-	function db_connect($p_hostname="", $p_username="",
-						$p_password="", $p_database="",
-						$p_port="" ) {
+	function db_connect($p_hostname='', $p_username='',
+						$p_password='', $p_database='',
+						$p_port='' ) {
 
 		global $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port;
 
@@ -36,11 +36,11 @@
 			$p_port = $g_port;
 		}
 
-		$t_result = mysql_connect(  $p_hostname.":".$p_port,
+		$t_result = mysql_connect(  $p_hostname.':'.$p_port,
 									$p_username, $p_password );
 
 		if ( !$t_result ) {
-			echo "ERROR: FAILED CONNECTION TO DATABASE: ";
+			echo 'ERROR: FAILED CONNECTION TO DATABASE: ';
 			echo db_error();
 			exit;
 		}
@@ -48,22 +48,22 @@
 		$t_result = db_select_db( $p_database );
 
 		if ( !$t_result ) {
-			echo "ERROR: FAILED DATABASE SELECTION: ";
+			echo 'ERROR: FAILED DATABASE SELECTION: ';
 			echo db_error();
 			exit;
 		}
 	}
 	# --------------------
 	# persistent connect to database and select database
-	function db_pconnect($p_hostname="localhost", $p_username="root",
-						$p_password="", $p_database="mantis",
+	function db_pconnect($p_hostname='localhost', $p_username='root',
+						$p_password='', $p_database='mantis',
 						$p_port=3306 ) {
 
-		$t_result = mysql_pconnect(  $p_hostname.":".$p_port,
+		$t_result = mysql_pconnect(  $p_hostname.':'.$p_port,
 									$p_username, $p_password );
 
 		if ( !$t_result ) {
-			echo "ERROR: FAILED CONNECTION TO DATABASE: ";
+			echo 'ERROR: FAILED CONNECTION TO DATABASE: ';
 			echo db_error();
 			exit;
 		}
@@ -71,7 +71,7 @@
 		$t_result = db_select_db( $p_database );
 
 		if ( !$t_result ) {
-			echo "ERROR: FAILED DATABASE SELECTION: ";
+			echo 'ERROR: FAILED DATABASE SELECTION: ';
 			echo db_error();
 			exit;
 		}
@@ -83,7 +83,7 @@
 		$t_result = mysql_query( $p_query );
 
 		if ( !$t_result ) {
-			echo "ERROR: FAILED QUERY: ".$p_query." : ";
+			echo 'ERROR: FAILED QUERY: '.$p_query.' : ';
 			echo db_error();
 			exit;
 		} else {
@@ -114,7 +114,7 @@
 	# return the last inserted id
 	# For MS SQL use: SELECT @@IDENTITY AS 'id'
 	function db_insert_id() {
-		$query = "SELECT LAST_INSERT_ID()";
+		$query = 'SELECT LAST_INSERT_ID()';
 		$t_result = db_query( $query );
 		return db_result( $t_result, 0, 0 );
 	}
@@ -129,7 +129,7 @@
 	# --------------------
 	# display both the error num and error msg
 	function db_error() {
-		return "<p>".db_error_num().": ".db_error_msg()."<p>";
+		return '<p>'.db_error_num().': '.db_error_msg().'<p>';
 	}
 	# --------------------
 	# close the connection.

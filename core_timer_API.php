@@ -17,8 +17,8 @@
 
 		# get_microtime function taken from Everett Michaud on Zend.com
 		function get_microtime(){
-			$tmp=split(" ",microtime());
-			$rt=$tmp[0]+$tmp[1];
+			$tmp = split( ' ', microtime() );
+			$rt = $tmp[0] + $tmp[1];
 			return $rt;
 		}
 

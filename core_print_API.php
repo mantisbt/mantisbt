@@ -15,12 +15,12 @@
 		global $g_use_iis;
 
 		if ( OFF == $g_use_iis ) {
-			header( "Status: 302" );
+			header( 'Status: 302' );
 		}
-		header( "Content-Type: text/html" );
-		header( "Pragma: no-cache" );
-		header( "Expires: Fri, 01 Jan 1999 00:00:00 GMT" );
-		header( "Cache-control: no-cache, no-cache=\"Set-Cookie\", private" );
+		header( 'Content-Type: text/html' );
+		header( 'Pragma: no-cache' );
+		header( 'Expires: Fri, 01 Jan 1999 00:00:00 GMT' );
+		header( 'Cache-control: no-cache, no-cache="Set-Cookie", private' );
 		if ( ON == $g_use_iis ) {
 			header( "Refresh: 0;url=$p_url" );
 		} else {
@@ -36,7 +36,7 @@
 		$c_user_id = (integer)$p_user_id;
 
 		# invalid user
-		if ( "0000000" == $p_user_id ) {
+		if ( '0000000' == $p_user_id ) {
 			return;
 		}
 	    $query = "SELECT username, email
@@ -59,7 +59,7 @@
 
 		$c_user_id = (integer)$p_user_id;
 
-		if ( "0000000" == $p_user_id ) {
+		if ( '0000000' == $p_user_id ) {
 			return;
 		}
 	    $query = "SELECT username, email
@@ -82,8 +82,8 @@
 
 		$c_user_id = (integer)$p_user_id;
 
-		if ( "0000000" == $p_user_id ) {
-			return "";
+		if ( '0000000' == $p_user_id ) {
+			return '';
 		}
 		$query = "SELECT username
 				FROM $g_mantis_user_table
@@ -99,8 +99,8 @@
 	function print_duplicate_id( $p_duplicate_id ) {
 		global 	$g_view_bug_page, $g_view_bug_advanced_page;
 
-		if ( $p_duplicate_id!="0000000" ) {
-			if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
+		if ( $p_duplicate_id != '0000000' ) {
+			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
 				PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
 			} else {
 				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
@@ -154,7 +154,7 @@
 			$user_count = db_num_rows( $result );
 			for ($i=0;$i<$user_count;$i++) {
 				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, "v" );
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
 				$user_arr[$v_username] = array( $v_username, $v_id );
 			}
 		} else {
@@ -167,7 +167,7 @@
 			$user_count = db_num_rows( $result );
 			for ($i=0;$i<$user_count;$i++) {
 				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, "v" );
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
 				$temp_arr[$v_username] = array( $v_username, $v_id );
 			}
 
@@ -176,14 +176,14 @@
 				$v_username = $val[0];
 
 				# always add all administrators
-				$t_access_level = get_user_field( $v_id, "access_level" );
+				$t_access_level = get_user_field( $v_id, 'access_level' );
 				if ( ADMINISTRATOR == $t_access_level ) {
 					$user_arr[$v_username] = array( $v_username, $v_id );
 					continue;
 				}
 
 				# see if users belong
-				$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
+				$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
 				if ( PUBLIC == $t_project_view_state ) {
 					$query = "SELECT l.access_level
 							FROM	$g_mantis_project_user_list_table l,
@@ -238,11 +238,11 @@
 	    		ORDER BY id ASC";
 	    $result = db_query( $query );
 	    $duplicate_id_count = db_num_rows( $result );
-	    PRINT "<option value=\"0000000\"></option>";
+	    PRINT '<option value="0000000"></option>';
 
 	    for ($i=0;$i<$duplicate_id_count;$i++) {
 	    	$row = db_fetch_array( $result );
-	    	$t_duplicate_id	= $row["id"];
+	    	$t_duplicate_id	= $row['id'];
 
 			PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id."</option>";
 		}
@@ -267,7 +267,7 @@
 
 		for ($i=0;$i<$news_count;$i++) {
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 			$v_headline = string_display( $v_headline );
 
 			PRINT "<option value=\"$v_id\">$v_headline</option>";
@@ -275,14 +275,14 @@
 	}
 	# --------------------
 	# Used for update pages
-	function print_field_option_list( $p_list, $p_item="" ) {
+	function print_field_option_list( $p_list, $p_item='' ) {
 		global $g_mantis_bug_table;
 
 		$t_category_string = get_enum_string( $g_mantis_bug_table, $p_list );
 	    $t_arr = explode_enum_string( $t_category_string );
 		$entry_count = count( $t_arr );
 		for ($i=0;$i<$entry_count;$i++) {
-			$t_s = str_replace( "'", "", $t_arr[$i] );
+			$t_s = str_replace( '\'', '', $t_arr[$i] );
 			if ( $p_item == $t_s ) {
 				PRINT "<option value=\"$t_s\" SELECTED>$t_s</option>";
 			}
@@ -292,7 +292,7 @@
 		} # end for
 	}
 	# --------------------
-	function print_assign_to_option_list( $p_user_id="" ) {
+	function print_assign_to_option_list( $p_user_id='' ) {
 		global $g_mantis_user_table, $g_mantis_project_table,
 				$g_mantis_project_user_list_table, $g_project_cookie_val;
 
@@ -319,7 +319,7 @@
 			$user_count = db_num_rows( $result );
 			for ($i=0;$i<$user_count;$i++) {
 				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, "v" );
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
 				$user_arr[$v_username] = array( $v_username, $v_id );
 			}
 		} else {
@@ -332,7 +332,7 @@
 			$user_count = db_num_rows( $result );
 			for ($i=0;$i<$user_count;$i++) {
 				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, "v" );
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
 				$temp_arr[$v_username] = array( $v_username, $v_id );
 			}
 
@@ -341,14 +341,14 @@
 				$v_username = $val[0];
 
 				# always add all administrators
-				$t_access_level = get_user_field( $v_id, "access_level" );
+				$t_access_level = get_user_field( $v_id, 'access_level' );
 				if ( ADMINISTRATOR == $t_access_level ) {
 					$user_arr[$v_username] = array( $v_username, $v_id );
 					continue;
 				}
 
 				# see if users belong
-				$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
+				$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
 				if ( PUBLIC == $t_project_view_state ) {
 					$query = "SELECT l.access_level
 							FROM	$g_mantis_project_user_list_table l,
@@ -396,12 +396,12 @@
 	}
 	# --------------------
 	# List projects that the current user has access to
-	function print_project_option_list( $p_project_id="" ) {
+	function print_project_option_list( $p_project_id='' ) {
 		global $g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie_val;
 
-		$t_user_id = get_current_user_field( "id" );
-		$t_access_level = get_current_user_field( "access_level" );
+		$t_user_id = get_current_user_field( 'id' );
+		$t_access_level = get_current_user_field( 'access_level' );
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;
@@ -427,7 +427,7 @@
 
 		for ($i=0;$i<$project_count;$i++) {
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 			if ( $p_project_id == $v_id ) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
 			} else {
@@ -437,7 +437,7 @@
 	}
 	# --------------------
 	# prints the profiles given the user id
-	function print_profile_option_list( $p_id, $p_select_id="" ) {
+	function print_profile_option_list( $p_id, $p_select_id='' ) {
 		global $g_mantis_user_profile_table, $g_mantis_user_pref_table;
 
 		$c_id = (integer)$p_id;
@@ -456,11 +456,11 @@
 	    $result = db_query( $query );
 	    $profile_count = db_num_rows( $result );
 
-		PRINT "<option value=\"\"></option>";
+		PRINT '<option value=""></option>';
 		for ($i=0;$i<$profile_count;$i++) {
 			# prefix data with v_
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 			$v_platform	= string_display( $v_platform );
 			$v_os		= string_display( $v_os );
 			$v_os_build	= string_display( $v_os_build );
@@ -482,7 +482,7 @@
 					FROM $g_mantis_project_table
 					ORDER BY name";
 		} else {
-			$t_user_id = get_current_user_field( "id" );
+			$t_user_id = get_current_user_field( 'id' );
 			$query = "SELECT p.id, p.name
 					FROM $g_mantis_project_table p, $g_mantis_project_user_list_table m
 					WHERE 	p.id=m.project_id AND
@@ -493,7 +493,7 @@
 		$project_count = db_num_rows( $result );
 		for ($i=0;$i<$project_count;$i++) {
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			if ( $v_id == $p_id ) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
@@ -506,7 +506,7 @@
 	# Since categories can be orphaned we need to grab all unique instances of category
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
-	function print_category_option_list( $p_category="" ) {
+	function print_category_option_list( $p_category='' ) {
 		global $g_mantis_bug_table, $g_mantis_project_category_table, $g_project_cookie_val;
 
 		# grab all categories in the project category table
@@ -519,7 +519,7 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$cat_arr[] = $row["category"];
+			$cat_arr[] = $row['category'];
 		}
 		sort( $cat_arr );
 		$cat_arr = array_unique( $cat_arr );
@@ -536,7 +536,7 @@
 	# Since categories can be orphaned we need to grab all unique instances of category
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
-	function print_category_complete_option_list( $p_category="" ) {
+	function print_category_complete_option_list( $p_category='' ) {
 		global $g_mantis_bug_table, $g_mantis_project_category_table, $g_project_cookie_val;
 
 		# grab all categories in the project category table
@@ -549,7 +549,7 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$cat_arr[] = $row["category"];
+			$cat_arr[] = $row['category'];
 		}
 
 		# grab all categories in the bug table
@@ -562,7 +562,7 @@
 
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$cat_arr[] = $row["category"];
+			$cat_arr[] = $row['category'];
 		}
 		sort( $cat_arr );
 		$cat_arr = array_unique( $cat_arr );
@@ -576,7 +576,7 @@
 		}
 	}
 	# --------------------
-	function print_category_option_listOLD( $p_category="" ) {
+	function print_category_option_listOLD( $p_category='' ) {
 		global $g_mantis_project_category_table, $g_project_cookie_val;
 
 		# @@@ not implemented yet
@@ -597,7 +597,7 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_category = $row["category"];
+			$t_category = $row['category'];
 			if ( $t_category == $p_category ) {
 				PRINT "<option value=\"$t_category\" SELECTED>$t_category</option>";
 			} else {
@@ -606,7 +606,7 @@
 		}
 	}
 	# --------------------
-	function print_version_option_list( $p_version="" ) {
+	function print_version_option_list( $p_version='' ) {
 		global $g_mantis_project_version_table, $g_project_cookie_val;
 
 		$query = "SELECT *
@@ -617,7 +617,7 @@
 		$version_count = db_num_rows( $result );
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_version = $row["version"];
+			$t_version = $row['version'];
 			if ( $t_version == $p_version ) {
 				PRINT "<option value=\"$t_version\" SELECTED>$t_version</option>";
 			} else {
@@ -629,7 +629,7 @@
 	# select the proper enum values based on the input parameter
 	# we use variable variables in order to achieve this
 	function print_enum_string_option_list( $p_enum_name, $p_val=0 ) {
-		$g_var = "g_".$p_enum_name."_enum_string";
+		$g_var = 'g_'.$p_enum_name.'_enum_string';
 		global $$g_var;
 
 		$t_arr  = explode_enum_string( $$g_var );
@@ -659,7 +659,7 @@
 				continue;
 			}
 
-			$t_access_level = get_enum_element( "access_levels", $t_elem[0] );
+			$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
 			if ( $p_val == $t_elem[0] ) {
 				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_access_level</option>";
 			} else {
@@ -684,15 +684,15 @@
 	# --------------------
 	# @@@ preliminary support for multiple bug actions.
 	function print_all_bug_action_option_list() {
-		$zook_arr[0] = "Move Bugs";
-		$zook_arr[1] = "Assign";
-		$zook_arr[3] = "Resolve";
-		$zook_arr[4] = "Update Priority";
-		$zook_arr[4] = "Update Status";
+		$zook_arr[0] = 'Move Bugs';
+		$zook_arr[1] = 'Assign';
+		$zook_arr[3] = 'Resolve';
+		$zook_arr[4] = 'Update Priority';
+		$zook_arr[4] = 'Update Status';
 
 		$t_count = count( $zook_arr );
 		for ($i=0;$i<$t_count;$i++) {
-			PRINT "<option value=\""."\">".$zook_arr[$i]."</option>";
+			PRINT '<option value="">'.$zook_arr[$i].'</option>';
 		}
 	}
 	# --------------------
@@ -720,8 +720,8 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_username = $row["username"];
-			$t_id = $row["id"];
+			$t_username = $row['username'];
+			$t_id = $row['id'];
 			PRINT "<option value=\"$t_id\">$t_username</option>";
 		}
 	}
@@ -745,8 +745,8 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_project_name = $row["name"];
-			$t_id = $row["id"];
+			$t_project_name	= $row['name'];
+			$t_id			= $row['id'];
 			PRINT "<option value=\"$t_id\">$t_project_name</option>";
 		}
 	}
@@ -769,12 +769,12 @@
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_project_id = $row["id"];
-			$t_project_name = $row["name"];
-			$t_view_state = $row["view_state"];
-			$t_access_level = $row["access_level"];
-			$t_access_level = get_enum_element( "access_levels", $t_access_level );
-			$t_view_state = get_enum_element( "project_view_state", $t_view_state );
+			$t_project_id	= $row['id'];
+			$t_project_name	= $row['name'];
+			$t_view_state	= $row['view_state'];
+			$t_access_level	= $row['access_level'];
+			$t_access_level	= get_enum_element( 'access_levels', $t_access_level );
+			$t_view_state	= get_enum_element( 'project_view_state', $t_view_state );
 			PRINT "$t_project_name [$t_access_level] ($t_view_state) [<a class=\"small\" href=\"$g_manage_user_proj_delete?f_project_id=$t_project_id&f_user_id=$p_user_id\">$s_remove_link</a>]<br />";
 		}
 	}
@@ -790,7 +790,7 @@
 
 		switch ( $g_show_view ) {
 		case BOTH:
-			if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
+			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
 				PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
 			} else {
 				PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
@@ -812,7 +812,7 @@
 
 		switch ( $g_show_update ) {
 		case BOTH:
-			if ( ON == get_current_user_pref_field( "advanced_update" ) ) {
+			if ( ON == get_current_user_pref_field( 'advanced_update' ) ) {
 				return $g_bug_update_advanced_page;
 			} else {
 				return $g_bug_update_page;
@@ -834,7 +834,7 @@
 
 		switch ( $g_show_view ) {
 		case BOTH:
-			if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
+			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
 				return "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
 			} else {
 				return "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
@@ -856,7 +856,7 @@
 
 		switch ( $g_show_view ) {
 		case BOTH:
-			if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
+			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
 				return "$g_view_bug_advanced_page?f_id=$p_id";
 			} else {
 				return "$g_view_bug_page?f_id=$p_id";
@@ -874,14 +874,14 @@
 	# formats the severity given the status
 	# shows the severity in BOLD if the bug is NOT closed and is of significant severity
 	function print_formatted_severity_string( $p_status, $p_severity ) {
-		$t_sev_str = get_enum_element( "severity", $p_severity );
+		$t_sev_str = get_enum_element( 'severity', $p_severity );
 		if ( ( ( MAJOR == $p_severity ) ||
 			   ( CRASH == $p_severity ) ||
 			   ( BLOCK == $p_severity ) ) &&
 			 ( CLOSED != $p_status ) ) {
 			PRINT "<span class=\"bold\">$t_sev_str</span>";
 		} else {
-			PRINT "$t_sev_str";
+			echo $t_sev_str;
 		}
 	}
 	# --------------------
@@ -896,14 +896,14 @@
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
-		$t_string = "";
+		$t_string = '';
 
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_category = $row["category"];
+			$t_category = $row['category'];
 
 			if ( $i+1 < $category_count ) {
-				$t_string .= $t_category.", ";
+				$t_string .= $t_category.', ';
 			} else {
 				$t_string .= $t_category;
 			}
@@ -922,14 +922,14 @@
 				WHERE project_id='$c_project_id'";
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
-		$t_string = "";
+		$t_string = '';
 
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_version = $row["version"];
+			$t_version = $row['version'];
 
 			if ( $i+1 < $version_count ) {
-				$t_string .= $t_version.", ";
+				$t_string .= $t_version.', ';
 			} else {
 				$t_string .= $t_version;
 			}
@@ -947,10 +947,10 @@
 
 		if ( $p_sort_field == $p_sort ) {
 			# we toggle between ASC and DESC if the user clicks the same sort order
-			if ( "ASC" == $p_dir ) {
-				$p_dir = "DESC";
+			if ( 'ASC' == $p_dir ) {
+				$p_dir = 'DESC';
 			} else {
-				$p_dir = "ASC";
+				$p_dir = 'ASC';
 			}
 
 			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2\">$p_string</a>";
@@ -964,10 +964,10 @@
 
 		if ( $p_sort_field == $p_sort ) {
 			# we toggle between ASC and DESC if the user clicks the same sort order
-			if ( "ASC" == $p_dir ) {
-				$p_dir = "DESC";
+			if ( 'ASC' == $p_dir ) {
+				$p_dir = 'DESC';
 			} else {
-				$p_dir = "ASC";
+				$p_dir = 'ASC';
 			}
 
 			PRINT "<a href=\"$g_view_all_set?f_sort=$p_sort_field&f_dir=$p_dir&f_type=2&f_print=1\">$p_string</a>";
@@ -1004,19 +1004,19 @@
 		global $g_show_user_email, $g_anonymous_account;
 
 		switch ( $g_show_user_email ) {
-			case NONE:	return "$p_text";
+			case NONE:	return $p_text;
 			case ALL:	return "<a href=\"mailto:$p_email\">$p_text</a>";
-			case NO_ANONYMOUS:	if ( get_current_user_field( "username" ) != $g_anonymous_account ) {
+			case NO_ANONYMOUS:	if ( get_current_user_field( 'username' ) != $g_anonymous_account ) {
 									return "<a href=\"mailto:$p_email\">$p_text</a>";
 								} else {
-									return "$p_text";
+									return $p_text;
 								}
-			case ADMIN_ONLY:	if ( ADMINISTRATOR == get_current_user_field( "access_level" ) ) {
+			case ADMIN_ONLY:	if ( ADMINISTRATOR == get_current_user_field( 'access_level' ) ) {
 									return "<a href=\"mailto:$p_email\">$p_text</a>";
 								} else {
-									return "$p_text";
+									return $p_text;
 								}
-			default:	return "$p_text";
+			default:	return $p_text;
 		}
 	}
 	# --------------------
@@ -1034,19 +1034,19 @@
 		global $g_show_user_email, $g_anonymous_account;
 
 		switch ( $g_show_user_email ) {
-			case NONE:	return "$p_text";
+			case NONE:	return $p_text;
 			case ALL:	return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
-			case NO_ANONYMOUS:	if ( get_current_user_field( "username" ) != $g_anonymous_account ) {
+			case NO_ANONYMOUS:	if ( get_current_user_field( 'username' ) != $g_anonymous_account ) {
 									return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
 								} else {
-									return "$p_text";
+									return $p_text;
 								}
-			case ADMIN_ONLY:	if ( ADMINISTRATOR == get_current_user_field( "access_level" ) ) {
+			case ADMIN_ONLY:	if ( ADMINISTRATOR == get_current_user_field( 'access_level' ) ) {
 									return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
 								} else {
-									return "$p_text";
+									return $p_text;
 								}
-			default:	return "$p_text";
+			default:	return $p_text;
 		}
 	}
 	# --------------------
@@ -1170,10 +1170,10 @@
 		$p_string = unfilter_href_tags( $p_string );
 		$p_string = process_bug_link_email( $p_string );
 		$p_string = process_cvs_link_email( $p_string );
-		$p_string = str_replace( "&lt;", "<",  $p_string );
-		$p_string = str_replace( "&gt;", ">",  $p_string );
-		$p_string = str_replace( "&quot;", "\"",  $p_string );
-		$p_string = str_replace( "&amp;", "&",  $p_string );
+		$p_string = str_replace( '&lt;', '<',  $p_string );
+		$p_string = str_replace( '&gt;', '>',  $p_string );
+		$p_string = str_replace( '&quot;', '"',  $p_string );
+		$p_string = str_replace( '&amp;', '&',  $p_string );
 
 		return $p_string;
 	}
@@ -1181,23 +1181,23 @@
 	# Process a string for display in a textarea box
 	function string_edit_textarea( $p_string ) {
 		$p_string = stripslashes( $p_string );
-		$p_string = str_replace( "<br>", "",  $p_string );
+		$p_string = str_replace( '<br>', '',  $p_string );
 		$p_string = unfilter_href_tags( $p_string );
-		$p_string = str_replace( "<br />", "\n",  $p_string );
-		$p_string = str_replace( "&lt;", "<",  $p_string );
-		$p_string = str_replace( "&gt;", ">",  $p_string );
-		$p_string = str_replace( "&quot;", "\"",  $p_string );
+		$p_string = str_replace( '<br />', '\n',  $p_string );
+		$p_string = str_replace( '&lt;', '<',  $p_string );
+		$p_string = str_replace( '&gt;', '>',  $p_string );
+		$p_string = str_replace( '&quot;', '"',  $p_string );
 		return $p_string;
 	}
 	# --------------------
 	# Process a string for display in a text box
 	function string_edit_text( $p_string ) {
 		$p_string = stripslashes( $p_string );
-		$p_string = str_replace( "<br>", "",  $p_string );
+		$p_string = str_replace( '<br>', '',  $p_string );
 		$p_string = unfilter_href_tags( $p_string );
-		$p_string = str_replace( "&lt;", "<",  $p_string );
-		$p_string = str_replace( "&gt;", ">",  $p_string );
-		$p_string = str_replace( "&quot;", "'",  $p_string );
+		$p_string = str_replace( '&lt;', '<',  $p_string );
+		$p_string = str_replace( '&gt;', '>',  $p_string );
+		$p_string = str_replace( '&quot;', '\'',  $p_string );
 		return $p_string;
 	}
 	# --------------------

@@ -7,13 +7,13 @@
 <?php
 	# Updates prefs then redirect to account_prefs_page.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# get protected state
-	$t_protected = get_current_user_field( "protected" );
+	$t_protected = get_current_user_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -106,7 +106,7 @@
 	$c_refresh_delay = (integer)$f_refresh_delay;
 
 	# get user id
-	$t_user_id = get_current_user_field( "id" );
+	$t_user_id = get_current_user_field( 'id' );
 
 	# update preferences
 	$query = "UPDATE $g_mantis_user_pref_table

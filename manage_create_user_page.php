@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -62,7 +62,7 @@
 	</td>
 	<td>
 		<select name="f_access_level">
-			<?php print_enum_string_option_list( "access_levels", REPORTER ) ?>
+			<?php print_enum_string_option_list( 'access_levels', REPORTER ) ?>
 		</select>
 	</td>
 </tr>

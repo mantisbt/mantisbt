@@ -8,13 +8,13 @@
 	# Users may change their user information from this page.
 	# The data is POSTed to account_update.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# get protected state
-	$t_protected = get_current_user_field( "protected" );
+	$t_protected = get_current_user_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -28,7 +28,7 @@
 			WHERE cookie_string='$g_string_cookie_val'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "u" );
+	extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -65,7 +65,7 @@
 </tr>
 <?php
 	if ( ON == $g_use_ldap_email ) {
-    	$u_email = get_user_info( "$u_username","email" );
+    	$u_email = get_user_info( $u_username, 'email' );
 ?>
 <tr class="row-2">
 	<td class="category">
@@ -90,7 +90,7 @@
 		<?php echo $s_access_level ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( "access_levels", $u_access_level ) ?>
+		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -98,7 +98,7 @@
 		<?php echo $s_access_level_project ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( "access_levels", get_current_user_access_level() ) ?>
+		<?php echo get_enum_element( 'access_levels', get_current_user_access_level() ) ?>
 	</td>
 </tr>
 <tr class="row-1" valign="top">
@@ -106,7 +106,7 @@
 		<?php echo $s_assigned_projects ?>:
 	</td>
 	<td>
-		<?php print_project_user_list( get_current_user_field( "id" ) ) ?>
+		<?php print_project_user_list( get_current_user_field( 'id' ) ) ?>
 	</td>
 </tr>
 <tr>
@@ -160,7 +160,7 @@
 		<?php echo $s_access_level ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( "access_levels", $u_access_level ) ?>
+		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -168,7 +168,7 @@
 		<?php echo $s_access_level_project ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( "access_levels", get_current_user_access_level() ) ?>
+		<?php echo get_enum_element( 'access_levels', get_current_user_access_level() ) ?>
 	</td>
 </tr>
 <tr class="row-1" valign="top">
@@ -176,7 +176,7 @@
 		<?php echo $s_assigned_projects ?>:
 	</td>
 	<td>
-		<?php print_project_user_list( get_current_user_field( "id" ) ) ?>
+		<?php print_project_user_list( get_current_user_field( 'id' ) ) ?>
 	</td>
 </tr>
 <tr>

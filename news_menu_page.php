@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -20,7 +20,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="<?php echo $g_news_add ?>">
-		<input type="hidden" name="f_poster_id" value="<?php echo get_current_user_field( "id " ) ?>">
+		<input type="hidden" name="f_poster_id" value="<?php echo get_current_user_field( 'id' ) ?>">
 		<?php echo $s_add_news_title ?>
 	</td>
 </tr>
@@ -49,7 +49,7 @@
 		<select name="f_project_id">
 		<?php
 			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-				PRINT "<option value=\"0000000\">Sitewide</option>";
+				PRINT '<option value="0000000">Sitewide</option>';
 			}
 			print_project_option_list( $g_project_cookie_val );
 		?>

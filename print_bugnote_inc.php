@@ -10,7 +10,7 @@
 ?>
 <?php
 	# grab the user id currently logged in
-	$t_user_id	= get_current_user_field( "id " );
+	$t_user_id	= get_current_user_field( 'id ' );
 	$c_id		= (integer)$f_id;
 
 	# get the bugnote data
@@ -44,7 +44,7 @@
 	for ( $i=0; $i < $num_notes; $i++ ) {
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v3" );
+		extract( $row, EXTR_PREFIX_ALL, 'v3' );
 		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
 
 		# grab the bugnote text and id and prefix with v3_

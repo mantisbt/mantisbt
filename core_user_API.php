@@ -12,7 +12,7 @@
 	# if the user is and the account is enabled then let them pass
 	# otherwise redirect them to the login page
 	# if $p_redirect_url is specifed then redirect them to that page
-	function login_cookie_check( $p_redirect_url="" ) {
+	function login_cookie_check( $p_redirect_url='' ) {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
 				$g_login_page, $g_logout_page, $g_login_select_proj_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
@@ -23,7 +23,7 @@
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			# get user info
-			$t_enabled = get_current_user_field( "enabled" );
+			$t_enabled = get_current_user_field( 'enabled' );
 			# check for acess enabled
 			if ( OFF == $t_enabled ) {
 				print_header_redirect( $g_logout_page );
@@ -55,7 +55,7 @@
 	# checks to see if a returning user is valid
 	# also sets the last time they visited
 	# otherwise redirects to the login page
-	function index_login_cookie_check( $p_redirect_url="" ) {
+	function index_login_cookie_check( $p_redirect_url='' ) {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
 				$g_login_page, $g_logout_page, $g_login_select_proj_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
@@ -73,7 +73,7 @@
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			# get user info
-			$t_enabled = get_current_user_field( "enabled" );
+			$t_enabled = get_current_user_field( 'enabled' );
 
 			# check for acess enabled
 			if ( OFF == $t_enabled ) {
@@ -110,7 +110,7 @@
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			# get user info
-			$t_enabled = get_current_user_field( "enabled" );
+			$t_enabled = get_current_user_field( 'enabled' );
 			# check for acess enabled
 			if ( OFF == $t_enabled ) {
 				print_header_redirect( $g_logout_page );
@@ -279,7 +279,7 @@
 		$g_default_email_on_priority, $g_default_language;
 
 		if ( ( false == $p_email ) && ( ON == $g_use_ldap_email ) ) {
-			$p_email = get_user_info( "$p_username","email" );
+			$p_email = get_user_info( $p_username,'email' );
 		}
 
 		$t_seed = $p_email ? $p_email : $p_username;
@@ -349,7 +349,7 @@
 			return false;
 		}
 
-		$t_access_level = get_current_user_field( "access_level" );
+		$t_access_level = get_current_user_field( 'access_level' );
 		$t_access_level2 = get_project_access_level( $p_project_id );
 
 		if ( $t_access_level2 == $p_access_level ) {
@@ -373,20 +373,17 @@
 		}
 
 		# Administrators ALWAYS pass.
-		if ( get_current_user_field( "access_level" ) >= ADMINISTRATOR ) {
+		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return true;
 		}
 
-		$t_access_level = get_current_user_field( "access_level" );
+		$t_access_level = get_current_user_field( 'access_level' );
 		$t_access_level2 = get_project_access_level( $p_project_id );
 
 		# use the project level access level instead of the global access level
 		# if the project level is not specified then use the global access level
 		if ( -1 != $t_access_level2 ) {
-			#echo $t_access_level."=".$t_access_level2." ";
-			#echo $t_access_level."=".$t_access_level2." ";
 			$t_access_level = $t_access_level2;
-			#echo $t_access_level."=".$t_access_level2." ";
 		}
 
 		if ( $t_access_level >= $p_access_level ) {
@@ -404,7 +401,7 @@
 			return false;
 		}
 
-		$t_access_level = get_current_user_field( "access_level" );
+		$t_access_level = get_current_user_field( 'access_level' );
 		if ( $t_access_level == $p_access_level ) {
 			return true;
 		} else {
@@ -423,7 +420,7 @@
 			return false;
 		}
 
-		$t_access_level = get_current_user_field( "access_level" );
+		$t_access_level = get_current_user_field( 'access_level' );
 
 		if ( $t_access_level >= $p_access_level ) {
 			return true;
@@ -437,7 +434,7 @@
 		global $g_logout_page;
 
 		# Administrators ALWAYS pass.
-		if ( get_current_user_field( "access_level" ) >= ADMINISTRATOR ) {
+		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return;
 		}
 		if ( !access_level_check_greater_or_equal( $p_access_level ) ) {
@@ -450,7 +447,7 @@
 	# Checks to see if the user has access to this project
 	# If not then log the user out
 	# If not logged into the project it attempts to log you into that project
-	function project_access_check( $p_bug_id, $p_project_id="0" ) {
+	function project_access_check( $p_bug_id, $p_project_id='0' ) {
 		global	$g_logout_page, $g_mantis_project_user_list_table,
 				$g_mantis_project_table, $g_mantis_bug_table,
 				$g_login_select_proj_page,
@@ -459,13 +456,13 @@
 		project_check( $p_bug_id );
 
 		# Administrators ALWAYS pass.
-		if ( get_current_user_field( "access_level" ) >= ADMINISTRATOR ) {
+		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return;
 		}
 
 		# access_level check
-		$t_project_id = get_bug_field( $p_bug_id, "project_id" );
-		$t_project_view_state = get_project_field( $t_project_id, "view_state" );
+		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
+		$t_project_view_state = get_project_field( $t_project_id, 'view_state' );
 
 		# public project accept all users
 		if ( PUBLIC == $t_project_view_state ) {
@@ -488,7 +485,7 @@
 		global	$g_project_cookie, $g_project_cookie_val, $g_view_all_cookie,
 				$g_cookie_time_length, $g_cookie_path;
 
-		$t_project_id = get_bug_field( $p_bug_id, "project_id" );
+		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
 		if ( $t_project_id != $g_project_cookie_val ) {
 			setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length, $g_cookie_path );
 			setcookie( $g_view_all_cookie );
@@ -506,7 +503,7 @@
 
 		$c_project_id = (integer)$p_project_id;
 
-		$t_user_id = get_current_user_field( "id" );
+		$t_user_id = get_current_user_field( 'id' );
 		if ( 0 == $p_project_id ) {
 			$query = "SELECT access_level
 					FROM $g_mantis_project_user_list_table
@@ -534,7 +531,7 @@
 
 		# use the current user unless otherwise specified
 		if ( 0 == $p_user_id ) {
-			$t_user_id = get_current_user_field( "id" );
+			$t_user_id = get_current_user_field( 'id' );
 		} else {
 			$t_user_id = (integer)$p_user_id;
 		}
@@ -560,7 +557,7 @@
 		if ( $count>0 ) {
 			return db_result( $result, 0, 0 );
 		} else {
-			return get_user_field( $t_user_id, "access_level" );
+			return get_user_field( $t_user_id, 'access_level' );
 		}
 	}
 	# --------------------
@@ -592,7 +589,7 @@
 		# if logged in
 		if ( isset( $g_string_cookie_val ) ) {
 
-			$t_id = get_current_user_field( "id" );
+			$t_id = get_current_user_field( 'id' );
 			# get user info
 			$query = "SELECT $p_field_name
 					FROM $g_mantis_user_pref_table
@@ -651,9 +648,9 @@
 	# exception for LDAP email
 	function get_user_info( $p_user_id, $p_field ) {
 		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
-		if ( ( ON == $g_use_ldap_email ) && ( "email" == $p_field  ) ) {
+		if ( ( ON == $g_use_ldap_email ) && ( 'email' == $p_field  ) ) {
 		    # Find out what username belongs to the p_user_id and ask ldap
-		    return ldap_emailaddy("$p_user_id");
+		    return ldap_emailaddy( $p_user_id );
 		}
 		$c_user_id = (integer)$p_user_id;
 
@@ -676,7 +673,6 @@
 				FROM $g_mantis_bug_monitor_table
 				WHERE user_id='$c_user_id' AND bug_id='$c_bug_id'";
 
-
 		$result =  db_query( $query );
 		return db_result( $result, 0, 0 );
 
@@ -686,16 +682,15 @@
 	# exception for LDAP email
 	function get_user_field( $p_user_id, $p_field ) {
 		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
-		if ( ( ON == $g_use_ldap_email ) && ( "email" == $p_field  ) ) {
+		if ( ( ON == $g_use_ldap_email ) && ( 'email' == $p_field  ) ) {
 		    # Find out what username belongs to the p_user_id and ask ldap
-		    return ldap_emailaddy("$p_user_id");
+		    return ldap_emailaddy( $p_user_id );
 		}
 		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT $p_field
 				FROM $g_mantis_user_table
 				WHERE id='$c_user_id'";
-
 
 		$result =  db_query( $query );
 		return db_result( $result, 0, 0 );
@@ -723,7 +718,7 @@
 
 		$c_project_id = (integer)$p_project_id;
 
-		$t_user_id = get_current_user_field( "id" );
+		$t_user_id = get_current_user_field( 'id' );
 	    $query = "SELECT COUNT(*)
 	    		FROM $g_mantis_user_pref_table
 	    		WHERE user_id='$t_user_id' AND project_id='$c_project_id'";
@@ -741,7 +736,7 @@
 
 		$c_project_id = (integer)$p_project_id;
 
-		$t_user_id = get_current_user_field( "id" );
+		$t_user_id = get_current_user_field( 'id' );
 	    $query = "INSERT
 	    		INTO $g_mantis_user_pref_table
 	    		(id, user_id, project_id,
@@ -769,7 +764,7 @@
 	function get_current_user_access_level() {
 		global $g_string_cookie_val;
 
-		$t_access_level = get_current_user_field( "access_level" );
+		$t_access_level = get_current_user_field( 'access_level' );
 		$t_access_level2 = get_project_access_level();
 
 		if ( $t_access_level >= ADMINISTRATOR ) {

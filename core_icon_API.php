@@ -13,24 +13,24 @@
 	# --------------------
 	# Status to icon mapping
 	$g_status_icon_arr = array (
-		NONE      => "mantis-space.gif",
-		LOW       => "mantis-space.gif",
-		NORMAL    => "mantis-space.gif",
-		HIGH      => "priority_1.gif",
-		URGENT    => "priority_2.gif",
-		IMMEDIATE => "priority_3.gif"
+		NONE      => 'mantis-space.gif',
+		LOW       => 'mantis-space.gif',
+		NORMAL    => 'mantis-space.gif',
+		HIGH      => 'priority_1.gif',
+		URGENT    => 'priority_2.gif',
+		IMMEDIATE => 'priority_3.gif'
 	);
 	# --------------------
 	# Sort direction to icon mapping (actually backwards is more correct)
 	$g_sort_icon_arr = array (
-		ASC        => "down.gif",
-		DESC       => "up.gif"
+		ASC        => 'down.gif',
+		DESC       => 'up.gif'
 	);
 	# --------------------
 	# Read status to icon mapping
 	$g_unread_icon_arr = array (
-		READ         => "mantis-space.gif",
-		UNREAD       => "unread.gif"
+		READ         => 'mantis-space.gif',
+		UNREAD       => 'unread.gif'
 	);
 	# --------------------
 	###########################################################################
@@ -62,7 +62,7 @@
 
 		if ( $p_sort_by != $p_field ) return;
 
-		if ( "ASC" == $p_dir ) {
+		if ( 'ASC' == $p_dir ) {
 			$t_dir = ASC;
 		} else {
 			$t_dir = DESC;

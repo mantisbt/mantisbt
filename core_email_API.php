@@ -22,13 +22,13 @@
 		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+).([a-z]{2,6}$)", $p_email, $check)) {
 			# passed format check. see if we should check the mx records
 			if ( ON == $g_check_mx_record ) {	# Check for valid mx records
-				if (getmxrr($check[1].".".$check[2], $temp)) {
+				if (getmxrr($check[1].'.'.$check[2], $temp)) {
 					return true;
 				} else {
-					$host = substr( strstr( $check[0], '@' ), 1 ).".";
+					$host = substr( strstr( $check[0], '@' ), 1 ).'.';
 
 					# for no mx record... try dns check
-					if (checkdnsrr ( $host, "ANY" ))
+					if (checkdnsrr ( $host, 'ANY' ))
 						return true;
 				}
 			} else {
@@ -77,25 +77,25 @@
 		$send_arr = array();
 
 		# Get Reporter Email
-		$v_reporter_id = get_bug_field( $p_bug_id, "reporter_id" );
+		$v_reporter_id = get_bug_field( $p_bug_id, 'reporter_id' );
 		$t_notify_reporter = get_user_pref_info( $v_reporter_id, $p_notify_type );
 		if ( ON == $t_notify_reporter ) {
-			$send_arr[] = get_user_info( $v_reporter_id, "email" );
+			$send_arr[] = get_user_info( $v_reporter_id, 'email' );
 		}
 
 		# Get Handler Email
-		$v_handler_id = get_bug_field( $p_bug_id, "handler_id" );
+		$v_handler_id = get_bug_field( $p_bug_id, 'handler_id' );
 		if ( $v_handler_id > 0 ) {
 			$t_notify_handler = get_user_pref_info( $v_handler_id, $p_notify_type );
 			if ( ON == $t_notify_handler ) {
-				$send_arr[] = get_user_info( $v_handler_id, "email" );
+				$send_arr[] = get_user_info( $v_handler_id, 'email' );
 			}
 		}
 
 		# Check if we want to broadcast to all developers on a NEW bug
-		if ( ( ON == $g_notify_developers_on_new )&&( "email_on_new" == $p_notify_type ) ) {
-			$t_project_id = get_bug_field( $p_bug_id, "project_id" );
-			$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
+		if ( ( ON == $g_notify_developers_on_new )&&( 'email_on_new' == $p_notify_type ) ) {
+			$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
+			$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
 			$t_dev = DEVELOPER;
 			$t_adm = ADMINISTRATOR;
 			$t_public = PUBLIC;
@@ -110,7 +110,7 @@
 			$user_count = db_num_rows( $result );
 			for ($i=0;$i<$user_count;$i++) {
 				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, "v" );
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
 				$temp_arr[$v_email] = array( $v_email, $v_id );
 			}
 
@@ -119,14 +119,14 @@
 				$v_email = $val[0];
 
 				# always add all administrators
-				$t_access_level = get_user_field( $v_id, "access_level" );
+				$t_access_level = get_user_field( $v_id, 'access_level' );
 				if ( ADMINISTRATOR == $t_access_level ) {
 					$send_arr[] = $v_email;
 					continue;
 				}
 
 				# see if users belong
-				$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
+				$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
 				if ( PUBLIC == $t_project_view_state ) {
 					$query = "SELECT l.access_level
 							FROM	$g_mantis_project_user_list_table l,
@@ -159,56 +159,7 @@
 					}
 				}
 			}
-			/*#@@@@@@@@@@@@
-			# grab all the ADMINISTRATORS
-			$query = "SELECT DISTINCT id, email
-					FROM $g_mantis_user_table
-					WHERE access_level>=$t_adm";
-			$result = db_query( $query );
-			$admin_count = db_num_rows( $result );
-			for ($i=0;$i<$admin_count;$i++) {
-				$row = db_fetch_array( $result );
-				$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
-				if ( ON == $t_notify ) {
-					$send_arr[] = $row["email"];
-				}
-			} # end ADMINISTRATORS
-
-			# grab all DEVELOPERs if the project is public
-			# Otherwise check the project user lists
-			if ( PUBLIC == $t_project_view_state ) {
-				$query = "SELECT DISTINCT id as user_id, email
-						FROM $g_mantis_user_table
-						WHERE access_level>=$t_dev";
-			} else {
-				$query = "SELECT DISTINCT p.user_id, u.email
-						FROM $g_mantis_project_user_list_table p,
-							$g_mantis_user_table u
-						WHERE p.project_id=$t_project_id AND
-								p.access_level>=$t_dev AND
-								p.user_id=u.id";
-			}
-
-			# grab all users to mail
-			$query = "SELECT DISTINCT u.id, u.email
-					FROM 	$g_mantis_user_table u,
-							$g_mantis_project_user_list_table l,
-							$g_mantis_project_table p
-					WHERE	u.access_level>=$t_adm OR
-							(p.view_state=$t_public AND
-							p.id=$g_project_cookie_val AND
-							u.access_level>=$t_dev) OR
-							(u.id=l.user_id AND
-							l.project_id=$g_project_cookie_val AND
-							l.access_level>=$t_dev)
-					ORDER BY u.username";
-
-			$result = db_query( $query );
-			$proj_user_count = db_num_rows( $result );
-			for ($i=0;$i<$proj_user_count;$i++) {
-				$row = db_fetch_array( $result );
-
-				# if the user's notification is on then add to the list
+/*				# if the user's notification is on then add to the list
 				$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
 				if ( ON == $t_notify ) {
 					$send_arr[] = $row["email"];
@@ -228,25 +179,25 @@
 			$row = db_fetch_array( $result );
 
 			# if the user's notification is on then add to the list
-			$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
+			$t_notify = get_user_pref_info( $row['user_id'], $p_notify_type );
 			if ( ON == $t_notify ) {
-				$send_arr[] = $row["email"];
+				$send_arr[] = $row['email'];
 			}
 		} # end MONITORING
 
-		$t_bcc = ( $g_use_bcc && !$g_use_phpMailer ) ? "Bcc: " : "";
+		$t_bcc = ( $g_use_bcc && !$g_use_phpMailer ) ? 'Bcc: ' : '';
 		## win-bcc-bug
 
 		$send_arr = array_unique( $send_arr );
 		foreach ( $send_arr as $send_val ) {
-			$t_bcc .= $send_val.", ";
+			$t_bcc .= $send_val.', ';
 		}
 
 		# chop off the last comma and add a \n
 		if ( strlen( $t_bcc ) > 5 ) {
-			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? "\n" : "");  ## win-bcc-bug
+			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? '\n' : '');  ## win-bcc-bug
 		} else {
-			return "";
+			return '';
 		}
 	}
 	# --------------------
@@ -265,17 +216,17 @@
 				WHERE id='$c_user_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		# Build Welcome Message
 		$t_message = $s_new_account_greeting.
-						$s_new_account_url.$g_path."\n".
-						$s_new_account_username.$v_username."\n".
-						$s_new_account_password.$p_password."\n\n".
+						$s_new_account_url.$g_path.'\n'.
+						$s_new_account_username.$v_username.'\n'.
+						$s_new_account_password.$p_password.'\n\n'.
 						$s_new_account_message.
 						$s_new_account_do_not_reply;
 
-		$t_headers = "";
+		$t_headers = '';
 		email_send( $v_email, $s_new_account_subject, $t_message, $t_headers );
 	}
 	# --------------------
@@ -292,15 +243,15 @@
 				WHERE id='$c_user_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		# Build Welcome Message
-		$t_message = $s_reset_request_msg."\n\n".
-					$s_account_name_msg.": ".$v_username."\n".
-					$s_news_password_msg.": ".$p_password."\n\n".
-					$g_path."\n\n";
+		$t_message = $s_reset_request_msg.'\n\n'.
+					$s_account_name_msg.': '.$v_username.'\n'.
+					$s_news_password_msg.': '.$p_password.'\n\n'.
+					$g_path.'\n\n';
 
-		email_send( $v_email, "New Password", $t_message );
+		email_send( $v_email, 'New Password', $t_message );
 	}
 	# --------------------
 	# send notices when a new bug is added
@@ -308,7 +259,7 @@
 		global 	$g_mantis_user_table, $s_new_bug_msg,
 				$g_project_cookie_val;
 
-		$t_bcc = build_bcc_list( $p_bug_id, "email_on_new" );
+		$t_bcc = build_bcc_list( $p_bug_id, 'email_on_new' );
 		email_bug_info( $p_bug_id, $s_new_bug_msg, $t_bcc );
 	}
 	# --------------------
@@ -316,7 +267,7 @@
 	function email_bugnote_add( $p_bug_id ) {
 		global $s_email_bugnote_msg;
 
-		$t_bcc = build_bcc_list( $p_bug_id, "email_on_bugnote" );
+		$t_bcc = build_bcc_list( $p_bug_id, 'email_on_bugnote' );
 		email_bug_info( $p_bug_id, $s_email_bugnote_msg, $t_bcc );
 	}
 	# --------------------
@@ -324,7 +275,7 @@
 	function email_resolved( $p_bug_id ) {
 		global $s_email_resolved_msg;
 
-		$t_bcc = build_bcc_list( $p_bug_id, "email_on_resolved" );
+		$t_bcc = build_bcc_list( $p_bug_id, 'email_on_resolved' );
 		email_bug_info( $p_bug_id, $s_email_resolved_msg, $t_bcc );
 	}
 	# --------------------
@@ -332,7 +283,7 @@
 	function email_close( $p_bug_id ) {
 		global $s_email_close_msg;
 
-		$t_bcc = build_bcc_list( $p_bug_id, "email_on_closed" );
+		$t_bcc = build_bcc_list( $p_bug_id, 'email_on_closed' );
 		email_bug_info( $p_bug_id, $s_email_close_msg, $t_bcc );
 	}
 	# --------------------
@@ -340,7 +291,7 @@
 	function email_feedback( $p_bug_id ) {
 		global $s_email_feedback_msg;
 
-		$t_bcc = build_bcc_list( $p_bug_id, "email_on_feedback" );
+		$t_bcc = build_bcc_list( $p_bug_id, 'email_on_feedback' );
 		email_bug_info( $p_bug_id, $s_email_feedback_msg, $t_bcc );
 	}
 	# --------------------
@@ -348,7 +299,7 @@
 	function email_reopen( $p_bug_id ) {
 		global $s_email_reopen_msg;
 
-		$t_bcc = build_bcc_list( $p_bug_id, "email_on_reopened" );
+		$t_bcc = build_bcc_list( $p_bug_id, 'email_on_reopened' );
 		email_bug_info( $p_bug_id, $s_email_reopen_msg, $t_bcc );
 	}
 	# --------------------
@@ -356,7 +307,7 @@
 	function email_assign( $p_bug_id ) {
 		global $s_email_assigned_msg;
 
-		$t_bcc = build_bcc_list( $p_bug_id, "email_on_assigned" );
+		$t_bcc = build_bcc_list( $p_bug_id, 'email_on_assigned' );
 		email_bug_info( $p_bug_id, $s_email_assigned_msg, $t_bcc );
 	}
 	# --------------------
@@ -386,14 +337,14 @@
 				ORDER BY date_submitted $g_bugnote_order";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$query = "SELECT *
 				FROM $g_mantis_bug_text_table
 				WHERE id='$v_bug_text_id'";
 		$result = db_query( $query );
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v2" );
+		extract( $row, EXTR_PREFIX_ALL, 'v2' );
 
 		$query = "SELECT name
 				FROM $g_mantis_project_table
@@ -409,42 +360,42 @@
 		$v_date_submitted = date( $g_complete_date_format, $v_date_submitted );
 		$v_last_updated   = date( $g_complete_date_format, $v_last_updated );
 
-		$t_sev_str = get_enum_element( "severity", $v_severity );
-		$t_pri_str = get_enum_element( "priority", $v_priority );
-		$t_sta_str = get_enum_element( "status", $v_status );
-		$t_rep_str = get_enum_element( "reproducibility", $v_reproducibility );
-		$t_message = $g_email_separator1."\n";
-		if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == get_current_user_pref_field( "advanced_view" ) ) ) {
+		$t_sev_str = get_enum_element( 'severity', $v_severity );
+		$t_pri_str = get_enum_element( 'priority', $v_priority );
+		$t_sta_str = get_enum_element( 'status', $v_status );
+		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
+		$t_message = $g_email_separator1.'\n';
+		if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == get_current_user_pref_field( 'advanced_view' ) ) ) {
 			$t_message .= $g_view_bug_advanced_page;
 		} else {
 			$t_message .= $g_view_bug_page;
 		}
-		$t_message .= "?f_id=".$p_bug_id."\n";
-		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pd( $s_email_reporter.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
-		$t_message .= str_pd( $s_email_handler.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
-		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pd( $s_email_project.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name."\n";
-		$t_message .= str_pd( $s_email_bug.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_id."\n";
-		$t_message .= str_pd( $s_email_category.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_category."\n";
-		$t_message .= str_pd( $s_email_reproducibility.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str."\n";
-		$t_message .= str_pd( $s_email_severity.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
-		$t_message .= str_pd( $s_email_priority.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
-		$t_message .= str_pd( $s_email_status.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
+		$t_message .= '?f_id='.$p_bug_id.'\n';
+		$t_message .= $g_email_separator1.'\n';
+		$t_message .= str_pd( $s_email_reporter.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name.'\n';
+		$t_message .= str_pd( $s_email_handler.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name.'\n';
+		$t_message .= $g_email_separator1.'\n';
+		$t_message .= str_pd( $s_email_project.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name.'\n';
+		$t_message .= str_pd( $s_email_bug.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_id.'\n';
+		$t_message .= str_pd( $s_email_category.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_category.'\n';
+		$t_message .= str_pd( $s_email_reproducibility.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str.'\n';
+		$t_message .= str_pd( $s_email_severity.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str.'\n';
+		$t_message .= str_pd( $s_email_priority.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str.'\n';
+		$t_message .= str_pd( $s_email_status.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str.'\n';
 		if ( RESOLVED == $v_status ) {
-			$t_res_str = get_enum_element( "resolution", $v_resolution );
-			$t_message .= str_pd( $s_email_resolution.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
+			$t_res_str = get_enum_element( 'resolution', $v_resolution );
+			$t_message .= str_pd( $s_email_resolution.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str.'\n';
 			if ( DUPLICATE == $v_resolution ) {
-				$t_message .= str_pd( $s_email_duplicate.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";
+				$t_message .= str_pd( $s_email_duplicate.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id.'\n';
 			}
 		}
-		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pd( $s_email_date_submitted.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted."\n";
-		$t_message .= str_pd( $s_email_last_modified.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
-		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pd( $s_email_summary.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
-		$t_message .= "$s_email_description: \n".wordwrap( $v2_description )."\n";
-		$t_message .= $g_email_separator1."\n\n";
+		$t_message .= $g_email_separator1.'\n';
+		$t_message .= str_pd( $s_email_date_submitted.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted.'\n';
+		$t_message .= str_pd( $s_email_last_modified.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated.'\n';
+		$t_message .= $g_email_separator1.'\n';
+		$t_message .= str_pd( $s_email_summary.': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary.'\n';
+		$t_message .= '$s_email_description: \n'.wordwrap( $v2_description ).'\n';
+		$t_message .= $g_email_separator1.'\n\n';
 
 		return $t_message;
 	}
@@ -458,7 +409,7 @@
 
 		$c_bug_id = (integer)$p_bug_id;
 
-		$t_message = "";
+		$t_message = '';
 
 		$query = "SELECT *, UNIX_TIMESTAMP(last_modified) as last_modified
 				FROM $g_mantis_bugnote_table
@@ -470,7 +421,7 @@
 		# BUILT MESSAGE
 		for ( $i=0; $i<$bugnote_count; $i++ ) {
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "t" );
+			extract( $row, EXTR_PREFIX_ALL, 't' );
 
 			$query = "SELECT note
 					FROM $g_mantis_bugnote_text_table
@@ -482,17 +433,17 @@
 			$t_note = db_result( $result2, 0, 0 );
 			$t_note = string_email( $t_note );
 			$t_last_modified = date( $g_complete_date_format, $t_last_modified );
-			$t_string = " ".$t_username." - ".$t_last_modified." ";
-			$t_message = $t_message.$g_email_separator2."\n";
-			$t_message = $t_message.$t_string."\n";
-			$t_message = $t_message.$g_email_separator2."\n";
-			$t_message = $t_message.wordwrap( $t_note )."\n\n";
+			$t_string = ' '.$t_username.' - '.$t_last_modified.' ';
+			$t_message = $t_message.$g_email_separator2.'\n';
+			$t_message = $t_message.$t_string.'\n';
+			$t_message = $t_message.$g_email_separator2.'\n';
+			$t_message = $t_message.wordwrap( $t_note ).'\n\n';
 		}
 		return $t_message;
 	}
 	# --------------------
 	# Send bug info to reporter and handler
-	function email_bug_info( $p_bug_id, $p_message, $p_headers="" ) {
+	function email_bug_info( $p_bug_id, $p_message, $p_headers='' ) {
 		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table,
 				$g_to_email, $g_use_bcc;
 
@@ -500,7 +451,7 @@
 		$p_subject = email_build_subject( $p_bug_id );
 
 		# build message
-		$t_message = $p_message."\n";
+		$t_message = $p_message.'\n';
 		$t_message .= email_build_bug_message( $p_bug_id );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 
@@ -511,18 +462,18 @@
 		## win-bcc-bug
 		if ( OFF == $g_use_bcc ) {
 			## list of receivers
-			$to = $g_to_email.(($p_headers && $g_to_email) ? ", " : "").$p_headers;
-			# echo "<br />email_bug_info::Sending email to :" . $to;
-			$res1 = email_send( $to, $p_subject, $t_message, "" );
+			$to = $g_to_email.(($p_headers && $g_to_email) ? ', ' : '').$p_headers;
+			# echo '<br />email_bug_info::Sending email to :'.$to;
+			$res1 = email_send( $to, $p_subject, $t_message, '' );
 		} else {
 			# Send Email
-			# echo "<br />email_bug_info::Sending email to : ".$g_to_email;
+			# echo '<br />email_bug_info::Sending email to : '.$g_to_email;
 			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers );
 		}
 	}
 	# --------------------
 	# this function sends the actual email
-	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
+	function email_send( $p_recipient, $p_subject, $p_message, $p_header='' ) {
 		global $g_from_email, $g_enable_email_notification,
 				$g_return_path_email, $g_use_x_priority,
 				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host;
@@ -537,19 +488,19 @@
 		$t_message   = trim( $p_message );
 
 		# for debugging only
-		#echo $t_recipient."<br />".$t_subject."<br />".$t_message."<br />".$t_headers;
+		#echo $t_recipient.'<br />'.$t_subject.'<br />'.$t_message.'<br />'.$t_headers;
 		#exit;
-		#echo "<br />xxxRecipient =".$t_recipient."<br />";
-		#echo "Headers =".nl2br($t_headers)."<br />";
-		#echo $t_subject."<br />";
-		#echo nl2br($t_message)."<br />";
+		#echo '<br />xxxRecipient ='.$t_recipient.'<br />';
+		#echo 'Headers ='.nl2br($t_headers).'<br />';
+		#echo $t_subject.'<br />';
+		#echo nl2br($t_message).'<br />';
 		#exit;
 
 		if ( ON == $g_use_phpMailer )  {
 			# Visit http://phpmailer.sourceforge.net
 			# if you have problems with phpMailer
 
-			include("class.phpmailer.php");
+			include('class.phpmailer.php');
 			$mail = new phpmailer;
 
 			# Select the method to send mail
@@ -566,29 +517,29 @@
 			$mail->Priority = 0;               # Urgent = 1, Not Urgent = 5, Disable = 0
 			$mail->Host     = $g_smtp_host;
 			$mail->From     = $g_from_email;
-			$mail->FromName = "";
+			$mail->FromName = '';
 
 			# add to the Recipient list
-			$t_recipient_list = split(",", $t_recipient);
+			$t_recipient_list = split(',', $t_recipient);
 			while ( list( , $t_recipient ) = each( $t_recipient_list ) ) {
 				if ( !empty( $t_recipient ) ) {
-					$mail->AddAddress( $t_recipient, "" );
+					$mail->AddAddress( $t_recipient, '' );
 				}
 			}
 			# add to the BCC list
-			$t_bcc_list = split(",", $p_header);
+			$t_bcc_list = split(',', $p_header);
 			while(list(, $t_bcc) = each($t_bcc_list)) {
 				if ( !empty( $t_bcc ) ) {
-					$mail->AddBCC($t_bcc, "");
+					$mail->AddBCC($t_bcc, '');
 				}
 			}
 
 			$mail->Subject = $t_subject;
-			$mail->Body    = make_lf_crlf( "\n".$t_message );
+			$mail->Body    = make_lf_crlf( '\n'.$t_message );
 
 			if( !$mail->Send() ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
-				PRINT "Mailer Error: ".$mail->ErrorInfo."<br />";
+				PRINT 'Mailer Error: '.$mail->ErrorInfo.'<br />';
 				exit;
 			}
 		} else {
@@ -599,13 +550,13 @@
 			#$t_headers .= "Reply-To: $p_reply_to_email\n";
 
 			$t_headers .= "X-Sender: <$g_from_email>\n";
-			$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
+			$t_headers .= 'X-Mailer: PHP/'.phpversion().'\n';
 			if ( ON == $g_use_x_priority ) {
-				$t_headers .= "X-Priority: 0\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
+				$t_headers .= 'X-Priority: 0\n';    # Urgent = 1, Not Urgent = 5, Disable = 0
 			}
 			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
 			# If you want to send foreign charsets
-			# $t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
+			# $t_headers .= 'Content-Type: text/html; charset=iso-8859-1\n';
 
 			$t_headers .= $p_header;
 
@@ -616,10 +567,10 @@
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( TRUE != $result ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<p>";
-				PRINT htmlspecialchars($t_recipient)."<br />";
-				PRINT htmlspecialchars($t_subject)."<p>";
-				PRINT nl2br(htmlspecialchars($t_headers))."<br />";
-				PRINT nl2br(htmlspecialchars($t_message))."<p>";
+				PRINT htmlspecialchars($t_recipient).'<br />';
+				PRINT htmlspecialchars($t_subject).'<p>';
+				PRINT nl2br(htmlspecialchars($t_headers)).'<br />';
+				PRINT nl2br(htmlspecialchars($t_message)).'<p>';
 				exit;
 			}
 		}
@@ -644,15 +595,15 @@
 		global $g_project_cookie_val;
 
 		# grab the project name
-		$p_project_name = get_project_field( $g_project_cookie_val, "name" );
+		$p_project_name = get_project_field( $g_project_cookie_val, 'name' );
 
 		# grab the subject (summary)
 		$p_subject = string_email( get_bug_summary( $p_bug_id ) );
 
 		# padd the bug id with zeros
-		$p_bug_id = str_pd( $p_bug_id, "0", 7, STR_PAD_LEFT );
+		$p_bug_id = str_pd( $p_bug_id, '0', 7, STR_PAD_LEFT );
 
-		return "[".$p_project_name." ".$p_bug_id."]: ".$p_subject;
+		return '['.$p_project_name.' '.$p_bug_id.']: '.$p_subject;
 	}
 	# --------------------
 	# clean up LF to CRLF
@@ -660,8 +611,8 @@
 		global $g_mail_send_crlf;
 
 		if ( ON == $g_mail_send_crlf ) {
-			$p_string = str_replace( "\n", "\r\n", $p_string );
-			return str_replace( "\r\r\n", "\r\n", $p_string );
+			$p_string = str_replace( '\n', '\r\n', $p_string );
+			return str_replace( '\r\r\n', '\r\n', $p_string );
 		} else {
 			return $p_string;
 		}

@@ -8,7 +8,7 @@
 	# Login page POSTs results to login.php
 	# Check to see if the user is already logged in via login_cookie_check()
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -25,7 +25,7 @@
 <?php
 	# Only echo error message if error variable is set
 	if ( isset( $f_error ) ) {
-		PRINT $MANTIS_ERROR[ERROR_LOGIN]."<p>";
+		PRINT $MANTIS_ERROR[ERROR_LOGIN].'<p>';
 	}
 
 	# Display short greeting message

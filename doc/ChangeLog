@@ -20,6 +20,7 @@ Mantis
  * Modified form elements to be standards compliant.
  * Modified core_print_API.php to escape double quotes in text fields, instead of replacing them by single quotes.
  * Modified all string files to use single quotes instead of double quotes.
+ * Modified all php files to use single quotes where double quotes were unnecessary.
 
 2002.05.19  -  0.17.3
 

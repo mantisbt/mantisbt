@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -15,7 +15,7 @@
 	$user_count = count( $result );
 	for ($i=0;$i<$user_count;$i++) {
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		# if there is no duplicate then add a new entry
 		# otherwise just update the access level for the existing entry

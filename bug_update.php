@@ -7,7 +7,7 @@
 <?php
 	# Update bug data then redirect to the appropriate viewing page
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -18,7 +18,7 @@
 
 	# set variable to be valid if necessary
 	if ( !isset( $f_duplicate_id ) ) {
-		$f_duplicate_id = "";
+		$f_duplicate_id = '';
 	}
 
 	# grab the bug_text_id
@@ -34,31 +34,31 @@
 
 	# prevent warnings
 	if ( !isset( $f_os ) ) {
-		$f_os = get_bug_field( $f_id, "os" );
+		$f_os = get_bug_field( $f_id, 'os' );
 	}
 	if ( !isset( $f_os_build ) ) {
-		$f_os_build = get_bug_field( $f_id, "os_build" );
+		$f_os_build = get_bug_field( $f_id, 'os_build' );
 	}
 	if ( !isset( $f_platform ) ) {
-		$f_platform = get_bug_field( $f_id, "platform" );
+		$f_platform = get_bug_field( $f_id, 'platform' );
 	}
 	if ( !isset( $f_version ) ) {
-		$f_version = get_bug_field( $f_id, "version" );
+		$f_version = get_bug_field( $f_id, 'version' );
 	}
 	if ( !isset( $f_build ) ) {
-		$f_build = get_bug_field( $f_id, "build" );
+		$f_build = get_bug_field( $f_id, 'build' );
 	}
 	if ( !isset( $f_eta ) ) {
-		$f_eta = get_bug_field( $f_id, "eta" );
+		$f_eta = get_bug_field( $f_id, 'eta' );
 	}
 	if ( !isset( $f_projection ) ) {
-		$f_projection = get_bug_field( $f_id, "projection" );
+		$f_projection = get_bug_field( $f_id, 'projection' );
 	}
 	if ( !isset( $f_resolution ) ) {
-		$f_resolution = get_bug_field( $f_id, "resolution" );
+		$f_resolution = get_bug_field( $f_id, 'resolution' );
 	}
 	if ( !isset( $f_steps_to_reproduce ) ) {
-		$c_steps_to_reproduce = get_bug_text_field( $f_id, "steps_to_reproduce" );
+		$c_steps_to_reproduce = get_bug_text_field( $f_id, 'steps_to_reproduce' );
 	} else {
 		$c_steps_to_reproduce = string_prepare_textarea( $f_steps_to_reproduce );
 	}

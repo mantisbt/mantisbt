@@ -4,28 +4,28 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
 	if ( !isset( $f_sort ) ) {
-		$f_sort = "name";
+		$f_sort = 'name';
 	}
 	$c_sort = addslashes($f_sort);
 
 	# basically we toggle between ASC and DESC if the user clicks the
 	# same sort order
 	if ( isset( $f_dir ) ) {
-		if ( "ASC" == $f_dir ) {
-			$f_dir = "DESC";
+		if ( 'ASC' == $f_dir ) {
+			$f_dir = 'DESC';
 		} else {
-			$f_dir = "ASC";
+			$f_dir = 'ASC';
 		}
 	}
 	else {
-		$f_dir = "ASC";
+		$f_dir = 'ASC';
 	}
 
 ?>
@@ -58,7 +58,7 @@
 	</td>
 	<td>
 		<select name="f_status">
-		<?php print_enum_string_option_list( "project_status" ) ?>
+		<?php print_enum_string_option_list( 'project_status' ) ?>
 		</select>
 	</td>
 </tr>
@@ -107,24 +107,24 @@
 </tr>
 <tr class="row-category">
 	<td width="20%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_name, "name", $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "name" ) ?>
+		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_name, 'name', $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'name' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_status, "status", $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "status" ) ?>
+		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_status, 'status', $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'status' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_enabled, "enabled", $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "enabled" ) ?>
+		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_enabled, 'enabled', $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'enabled' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_view_status, "view_state", $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "view_state" ) ?>
+		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_view_status, 'view_state', $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'view_state' ) ?>
 	</td>
 	<td width="40%">
-		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_description, "description", $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "description" ) ?>
+		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_description, 'description', $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'description' ) ?>
 	</td>
 </tr>
 <?php
@@ -136,7 +136,7 @@
 	$project_count = db_num_rows( $result );
 	for ($i=0;$i<$project_count;$i++) {
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$v_name 		= string_display( $v_name );
 		$v_description 	= string_display( $v_description );
@@ -146,16 +146,16 @@
 ?>
 <tr>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<a href="<?php echo $g_manage_project_edit_page."?f_project_id=".$v_id ?>"><?php echo $v_name ?></a>
+		<a href="<?php echo $g_manage_project_edit_page.'?f_project_id='.$v_id ?>"><?php echo $v_name ?></a>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<?php echo get_enum_element( "project_status", $v_status ) ?>
+		<?php echo get_enum_element( 'project_status', $v_status ) ?>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo trans_bool( $v_enabled ) ?>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<?php echo get_enum_element( "project_view_state", $v_view_state ) ?>
+		<?php echo get_enum_element( 'project_view_state', $v_view_state ) ?>
 	</td>
 	<td align="left" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo $v_description ?>

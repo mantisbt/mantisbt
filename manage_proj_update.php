@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -17,8 +17,8 @@
 	}
 
 	# Make sure file path has trailing slash
-	if ( $f_file_path[strlen($f_file_path)-1] != "/" ) {
-		$f_file_path = $f_file_path."/";
+	if ( $f_file_path[strlen($f_file_path)-1] != '/' ) {
+		$f_file_path = $f_file_path.'/';
 	}
 
 	$c_name 		= string_prepare_textarea( $f_name );

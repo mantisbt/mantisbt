@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -43,7 +43,7 @@
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $g_news_edit_page."?f_id=".$f_id."&f_action=edit", $s_edit_link );
+	print_bracket_link( $g_news_edit_page.'?f_id='.$f_id.'&f_action=edit', $s_edit_link );
 	print_bracket_link( $g_news_menu_page, $s_proceed );
 ?>
 </div>

@@ -7,7 +7,7 @@
 <?php
 	# Check login then redirect to main_page.php3 or to login_page.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
@@ -21,7 +21,7 @@
 
 	$login_result = 1;
 	if ( $row ) {
-		extract( $row, EXTR_PREFIX_ALL, "u" );
+		extract( $row, EXTR_PREFIX_ALL, 'u' );
 	} else {
 		# invalid login
 		$login_result = 0;
@@ -31,14 +31,14 @@
 			if ( $t_cookie_string = signup_user( $f_username ) ) {
 				$row = get_user_info_by_name_arr( $f_username );
 				$login_result = 1;
-				extract( $row, EXTR_PREFIX_ALL, "u" );
+				extract( $row, EXTR_PREFIX_ALL, 'u' );
 			}
 		}
 
 	}
 
 	if (( $g_anonymous_account == $f_username ) && ( ON == $g_allow_anonymous_login )) {
-		$f_password = "";
+		$f_password = '';
 	}
 
 	$t_project_id = 0;
@@ -52,7 +52,7 @@
 
 		$t_project_id = get_default_project( $u_id );
 
-		if ( ( isset( $f_perm_login ) )&&( "on" == $f_perm_login ) ) {
+		if ( ( isset( $f_perm_login ) )&&( 'on' == $f_perm_login ) ) {
 			# set permanent cookie (1 year)
 			setcookie( $g_string_cookie, $u_cookie_string, time()+$g_cookie_time_length, $g_cookie_path );
 			if ( $t_project_id > -1 ) {
@@ -77,12 +77,12 @@
 		$t_redirect_url = $g_main_page;
 	} else if ( $login_result ) {
 		if ( isset($f_project_id) ) {
-			$t_redirect_url = $g_set_project."?f_project_id=".$f_project_id;
+			$t_redirect_url = $g_set_project.'?f_project_id='.$f_project_id;
 		} else {
 			$t_redirect_url = $g_login_select_proj_page;
 		}
 	} else {
-		$t_redirect_url = $g_login_page."?f_error=1";
+		$t_redirect_url = $g_login_page.'?f_error=1';
 	}
 
 	if ( $login_result ) {
@@ -96,12 +96,12 @@
 		print_meta_redirect( $g_main_page, 0 );
 	} else if ( $login_result ) {
 		if ( isset($f_project_id) ) {
-			print_meta_redirect( $g_set_project."?f_project_id=".$f_project_id, 0 );
+			print_meta_redirect( $g_set_project.'?f_project_id='.$f_project_id, 0 );
 		} else {
 			print_meta_redirect( $g_login_select_proj_page, 0 );
 		}
 	} else {
-		print_meta_redirect( $g_login_page."?f_error=1", 0 );
+		print_meta_redirect( $g_login_page.'?f_error=1', 0 );
 	}
 ?>
 <?php print_page_top2a() ?>
@@ -114,9 +114,9 @@
 	} else if ( $login_result ) {						# SUCCESS
 		print_bracket_link( $g_login_select_proj_page, $s_proceed );
 	} else {											# FAILURE
-		print $MANTIS_ERROR[ERROR_LOGIN]."<p>";
+		print $MANTIS_ERROR[ERROR_LOGIN].'<p>';
 
-		print_bracket_link( $g_login_page."?f_error=1", $s_proceed );
+		print_bracket_link( $g_login_page.'?f_error=1', $s_proceed );
 	}
 ?>
 </div>

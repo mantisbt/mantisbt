@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -21,8 +21,8 @@
 
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_bug_id = $row["id"];
-		$t_bug_text_id = $row["bug_text_id"];
+		$t_bug_id = $row['id'];
+		$t_bug_text_id = $row['bug_text_id'];
 
 		# Delete the bug texts
 		$query2 = "DELETE
@@ -39,8 +39,8 @@
 
 		for ($j=0;$j<$bugnote_count;$j++) {
 			$row2 = db_fetch_array( $result3 );
-			$t_bugnote_id = $row2["id"];
-			$t_bugnote_text_id = $row2["bugnote_text_id"];
+			$t_bugnote_id = $row2['id'];
+			$t_bugnote_text_id = $row2['bugnote_text_id'];
 
 			# Delete the bugnotes
 			$query = "DELETE

@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -14,7 +14,7 @@
 	$f_date_order   = urldecode( $f_date_order );
 
 	$result = 0;
-	$query = "";
+	$query = '';
 	# check for duplicate
 	if ( !is_duplicate_version( $f_project_id, $f_version, $f_date_order ) ) {
 		$result = version_update( $f_project_id, $f_version, $f_date_order, $f_orig_version );
@@ -31,7 +31,7 @@
 		$result2 = db_query( $query2 );
 	}
 
-	$t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;
+	$t_redirect_url = $g_manage_project_edit_page.'?f_project_id='.$f_project_id;
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -47,7 +47,7 @@
 	if ( $result ) {				# SUCCESS
 		PRINT "$s_operation_successful<p>";
 	} else if ( is_duplicate_version( $f_project_id, $f_version, $f_date_order )) {
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION]."<p>";
+		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION].'<p>';
 	} else {						# FAILURE
 		print_sql_error( $query );
 	}

@@ -7,14 +7,14 @@
 <?php
 	# This file adds a new profile and redirects to account_proj_menu_page.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
 	# get protected state
-	$t_protected = get_current_user_field( "protected" );
+	$t_protected = get_current_user_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -42,7 +42,7 @@
 		$c_description	= string_prepare_textarea( $f_description );
 
 		# get user id
-		$c_user_id = (integer)get_current_user_field( "id" );
+		$c_user_id = (integer)get_current_user_field( 'id' );
 
 		# Add profile
 		$query = "INSERT

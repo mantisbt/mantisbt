@@ -4,18 +4,18 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
 	if ( !isset( $f_action ) ) {
-			$f_action = "";
+			$f_action = '';
 	}
 
 	# If Deleteing item redirect to delete script
-	if ( "delete" == $f_action ) {
+	if ( 'delete' == $f_action ) {
 		print_header_redirect( "$g_project_delete_page?f_project_id=$f_project_id" );
 		exit;
 	}
@@ -27,7 +27,7 @@
 			WHERE id='$c_project_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v" );
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 	$v_name 		= string_edit_text( $v_name );
 	$v_description 	= string_edit_textarea( $v_description );
@@ -61,7 +61,7 @@
 	</td>
 	<td>
 		<select name="f_status">
-		<?php print_enum_string_option_list( "project_status", $v_status ) ?>
+		<?php print_enum_string_option_list( 'project_status', $v_status ) ?>
 		</select>
 	</td>
 </tr>
@@ -70,7 +70,7 @@
 		<?php echo $s_enabled ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_enabled" <?php if ( ON == $v_enabled ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_enabled" <?php if ( ON == $v_enabled ) echo 'CHECKED' ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -134,7 +134,7 @@
 			$category_count = db_num_rows( $result );
 			for ($i=0;$i<$category_count;$i++) {
 				$row = db_fetch_array( $result );
-				$t_category = $row["category"];
+				$t_category = $row['category'];
 				$t2_category = urlencode( $t_category );
 
 				# alternate row colors
@@ -145,7 +145,7 @@
 				<?php echo $t_category ?>
 			</td>
 			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
-				<?php print_bracket_link( $g_manage_project_category_edit_page."?f_project_id=".$f_project_id."&f_category=".$t2_category, $s_edit_link ) ?>
+				<?php print_bracket_link( $g_manage_project_category_edit_page.'?f_project_id='.$f_project_id.'&f_category='.$t2_category, $s_edit_link ) ?>
 			</td>
 		</tr>
 		<?php 	} # end for loop ?>
@@ -190,9 +190,9 @@
 			$version_count = db_num_rows( $result );
 			for ($i=0;$i<$version_count;$i++) {
 				$row = db_fetch_array( $result );
-				$t_version = $row["version"];
+				$t_version = $row['version'];
 				$t2_version = urlencode( $t_version );
-				$t_date_order = $row["date_order"];
+				$t_date_order = $row['date_order'];
 				$t2_date_order = urlencode( $t_date_order );
 
 				# alternate row colors
@@ -206,7 +206,7 @@
 				<?php echo $t_date_order ?>
 			</td>
 			<td class="center" width="25%" bgcolor="<?php echo $t_bgcolor ?>">
-				<?php print_bracket_link( $g_manage_project_version_edit_page."?f_project_id=".$f_project_id."&f_version=".$t2_version."&f_date_order=".$t2_date_order, $s_edit_link ) ?>
+				<?php print_bracket_link( $g_manage_project_version_edit_page.'?f_project_id='.$f_project_id.'&f_version='.$t2_version.'&f_date_order='.$t2_date_order, $s_edit_link ) ?>
 			</td>
 		</tr>
 		<?php } # end for loop ?>

@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php #login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -17,12 +17,12 @@
 	}
 
 	if ( !isset( $f_ref ) ) {
-		$f_ref = "";
+		$f_ref = '';
 	}
 
 	# Set default project
 	if ( isset( $f_make_default ) ) {
-		$t_user_id = get_current_user_field( "id" );
+		$t_user_id = get_current_user_field( 'id' );
 		$query = "UPDATE $g_mantis_user_pref_table
 				SET default_project='$c_project_id'
 				WHERE user_id='$t_user_id'";
@@ -39,7 +39,7 @@
 		if ( !isset( $HTTP_REFERER ) || empty( $HTTP_REFERER ) ) {
 			$t_redirect_url = $g_main_page;
 		} else if ( eregi( $g_view_all_bug_page, $HTTP_REFERER ) ){
-			$t_redirect_url = $g_view_all_set."?f_type=0";
+			$t_redirect_url = $g_view_all_set.'?f_type=0';
 		} else if ( eregi( $g_summary_page, $HTTP_REFERER ) ){
 			$t_redirect_url = $g_summary_page;
 		} else if ( eregi( $g_proj_user_menu_page, $HTTP_REFERER ) ){
@@ -54,7 +54,7 @@
 	}
 
 	# clear view filter between projects
-	setcookie( $g_view_all_cookie,	"", -1, $g_cookie_path );
+	setcookie( $g_view_all_cookie,	'', -1, $g_cookie_path );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	}

@@ -7,7 +7,7 @@
 <?php
 	# Insert the bugnote into the database then redirect to the bug page
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -17,7 +17,7 @@
 	$c_id = (integer)$f_id;
 
 	# get user information
-	$u_id = get_current_user_field( "id " );
+	$u_id = get_current_user_field( 'id' );
 
 	$f_bugnote_text = trim( $f_bugnote_text );
 	# check for blank bugnote
@@ -46,8 +46,8 @@
    	$result = bug_date_update( $f_id );
 
    	# notify reporter and handler
-   	if ( get_bug_field( $f_id, "status" ) == FEEDBACK ) {
-   		if ( get_bug_field( $f_id, "resolution" ) == REOPENED ) {
+   	if ( get_bug_field( $f_id, 'status' ) == FEEDBACK ) {
+   		if ( get_bug_field( $f_id, 'resolution' ) == REOPENED ) {
    			email_reopen( $f_id );
    		} else {
    			email_feedback( $f_id );

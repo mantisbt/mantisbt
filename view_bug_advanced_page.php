@@ -4,11 +4,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	if ( SIMPLE_ONLY == $g_show_view ) {
-		print_header_redirect ( $g_view_bug_page."?f_id=".$f_id );
+		print_header_redirect ( $g_view_bug_page.'?f_id='.$f_id );
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -22,14 +22,14 @@
     		WHERE id='$c_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v" );
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
     		WHERE id='$v_bug_text_id'";
     $result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v2" );
+	extract( $row, EXTR_PREFIX_ALL, 'v2' );
 
 	$v_os 						= string_display( $v_os );
 	$v_os_build					= string_display( $v_os_build );
@@ -48,13 +48,13 @@
 <tr>
 	<td class="form-title" colspan="4">
 		<?php echo $s_viewing_bug_advanced_details_title ?>
-		<span class="small"><?php print_bracket_link( "#bugnotes", $s_jump_to_bugnotes ) ?></span>
+		<span class="small"><?php print_bracket_link( '#bugnotes', $s_jump_to_bugnotes ) ?></span>
 	</td>
 	<td class="right" colspan="2">
 <?php if ( BOTH == $g_show_view ) { ?>
-		<span class="small"><?php print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_view_simple_link )?></span>
+		<span class="small"><?php print_bracket_link( $g_view_bug_page.'?f_id='.$f_id, $s_view_simple_link )?></span>
 <?php }?>
-	<span class="small"><?php print_bracket_link( $g_print_bug_page."?f_id=".$f_id, $s_print ) ?></span>
+	<span class="small"><?php print_bracket_link( $g_print_bug_page.'?f_id='.$f_id, $s_print ) ?></span>
 	</td>
 </tr>
 <tr class="row-category">
@@ -85,10 +85,10 @@
 		<?php echo $v_category ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( "severity", $v_severity ) ?>
+		<?php echo get_enum_element( 'severity', $v_severity ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( "reproducibility", $v_reproducibility ) ?>
+		<?php echo get_enum_element( 'reproducibility', $v_reproducibility ) ?>
 	</td>
 	<td>
 		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
@@ -113,7 +113,7 @@
 		<?php echo $s_view_status ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( "project_view_state", $v_view_state ) ?>
+		<?php echo get_enum_element( 'project_view_state', $v_view_state ) ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -132,13 +132,13 @@
 		<?php echo $s_priority ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( "priority", $v_priority ) ?>
+		<?php echo get_enum_element( 'priority', $v_priority ) ?>
 	</td>
 	<td class="category">
 		<?php echo $s_resolution ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( "resolution", $v_resolution ) ?>
+		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
 	<td class="category">
 		<?php echo $s_platform ?>
@@ -152,7 +152,7 @@
 		<?php echo $s_status ?>
 	</td>
 	<td <?php echo get_status_bgcolor( $v_status ) ?>>
-		<?php echo get_enum_element( "status", $v_status ) ?>
+		<?php echo get_enum_element( 'status', $v_status ) ?>
 	</td>
 	<td class="category">
 		<?php echo $s_duplicate_id ?>
@@ -172,7 +172,7 @@
 		<?php echo $s_projection ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( "projection", $v_projection ) ?>
+		<?php echo get_enum_element( 'projection', $v_projection ) ?>
 	</td>
 	<td colspan="2">
 
@@ -189,7 +189,7 @@
 		<?php echo $s_eta ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( "eta", $v_eta ) ?>
+		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
 	<td colspan="2">
 
@@ -267,7 +267,7 @@
 				FROM $g_mantis_user_profile_table
 				WHERE id='$v_profile_id'";
 		$result = db_query( $query );
-		$t_profile_description = "";
+		$t_profile_description = '';
 		if ( db_num_rows( $result ) > 0 ) {
 			$t_profile_description = db_result( $result, 0 );
 		}
@@ -303,17 +303,17 @@
 			$num_files = db_num_rows( $result );
 			for ($i=0;$i<$num_files;$i++) {
 				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, "v2" );
+				extract( $row, EXTR_PREFIX_ALL, 'v2' );
 				$v2_filesize = number_format( $v2_filesize );
 				$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
 
-				PRINT "<a href=\"$g_file_download?f_id=$v2_id&f_type=bug\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
+				PRINT "<a href=\"$g_file_download?f_id=$v2_id&amp;f_type=bug\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
 
 				if ( access_level_check_greater_or_equal( DEVELOPER ) ) {
-					PRINT " [<a class=\"small\" href=\"$g_bug_file_delete?f_id=$f_id&f_file_id=$v2_id\">$s_delete_link</a>]";
+					PRINT " [<a class=\"small\" href=\"$g_bug_file_delete?f_id=$f_id&amp;f_file_id=$v2_id\">$s_delete_link</a>]";
 				}
 				if ( $i != ($num_files - 1) ) {
-					PRINT "<br />";
+					PRINT '<br />';
 				}
 			}
 		?>
@@ -324,7 +324,7 @@
 		<table width="100%">
 			<tr align="center">
 <?php # UPDATE form BEGIN ?>
-<?php $t_user_id = get_current_user_field ( "id" ); ?>
+<?php $t_user_id = get_current_user_field ( 'id' ); ?>
 <?php if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="<?php echo get_bug_update_page() ?>">

@@ -4,20 +4,20 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
-		print_header_redirect( $g_view_all_set."?f_type=0" );
+		print_header_redirect( $g_view_all_set.'?f_type=0' );
 	}
 
 	# check to see if new cookie is needed
-	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
+	$t_setting_arr 			= explode( '#', $g_view_all_cookie_val );
 	if ( $t_setting_arr[0] != $g_cookie_version ) {
-		print_header_redirect( $g_view_all_set."?f_type=0" );
+		print_header_redirect( $g_view_all_set.'?f_type=0' );
 	}
 
 	# go to the print page instead.
@@ -50,7 +50,7 @@
 	$f_end_month 			= $t_setting_arr[14];
 	$f_end_day				= $t_setting_arr[15];
 	$f_end_year				= $t_setting_arr[16];
-	
+
 	# Clean input
 	$c_user_id				= (integer)$f_user_id;
 	$c_assign_id			= (integer)$f_assign_id;
@@ -65,7 +65,7 @@
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
 		( !access_level_check_greater_or_equal( UPDATER  ) )) {
-		$c_user_id = get_current_user_field( "id" );
+		$c_user_id = get_current_user_field( 'id' );
 	}
 
 	# Build the query string based on the user's viewing criteria.
@@ -75,13 +75,13 @@
 	# 1) count of all the rows
 	# 2) listing of the current page of rows, ordered appropriately
 
-	$t_user_id = get_current_user_field( "id" );
+	$t_user_id = get_current_user_field( 'id' );
 
 	$t_pub = PUBLIC;
 	$t_prv = PRIVATE;
 	# project selection
-	if ( "0" == $g_project_cookie_val ) { # ALL projects
-		$t_access_level = get_current_user_field( "access_level" );
+	if ( '0' == $g_project_cookie_val ) { # ALL projects
+		$t_access_level = get_current_user_field( 'access_level' );
 		if ( ADMINISTRATOR == $t_access_level ) {
 			$query2 = "SELECT DISTINCT( id )
 					FROM $g_mantis_project_table
@@ -100,19 +100,19 @@
 		$result2 = db_query( $query2 );
 		$project_count = db_num_rows( $result2 );
 		if ( 0 == $project_count ) {
-			$t_where_clause = " WHERE 1=1";
+			$t_where_clause = ' WHERE 1=1';
 		} else {
-			$t_where_clause = " WHERE (";
+			$t_where_clause = ' WHERE (';
 			for ($i=0;$i<$project_count;$i++) {
 				$row = db_fetch_array( $result2 );
-				extract( $row, EXTR_PREFIX_ALL, "v" );
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 				$t_where_clause .= "(project_id='$v_id')";
 				if ( $i < $project_count - 1 ) {
-					$t_where_clause .= " OR ";
+					$t_where_clause .= ' OR ';
 				}
 			} # end for
-			$t_where_clause .= ")";
+			$t_where_clause .= ')';
 		}
 	} else {
 		$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
@@ -124,28 +124,28 @@
 		$t_where_clause .= " AND ($g_mantis_bug_table.view_state='$t_pub' OR ($g_mantis_bug_table.view_state='$t_prv' AND $g_mantis_bug_table.reporter_id='$t_user_id'))";
 	}
 
-	if ( $c_user_id != "any" ) {
+	if ( $c_user_id != 'any' ) {
 		$t_where_clause .= " AND $g_mantis_bug_table.reporter_id='$c_user_id'";
 	}
 
-	if ( "none" == $f_assign_id ) {
+	if ( 'none' == $f_assign_id ) {
 		$t_where_clause .= " AND $g_mantis_bug_table.handler_id=0";
-	} else if ( $f_assign_id != "any" ) {
+	} else if ( $f_assign_id != 'any' ) {
 		$t_where_clause .= " AND $g_mantis_bug_table.handler_id='$c_assign_id'";
 	}
 
 	$t_clo_val = CLOSED;
-	if (( "on" == $f_hide_closed  )&&( $f_show_status!="closed" )) {
+	if (( 'on' == $f_hide_closed  )&&( $f_show_status!=CLOSED )) {
 		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.status<>'$t_clo_val'";
 	}
 
-	if ( $f_show_category != "any" ) {
+	if ( $f_show_category != 'any' ) {
 		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.category='$c_show_category'";
 	}
-	if ( $f_show_severity != "any" ) {
+	if ( $f_show_severity != 'any' ) {
 		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.severity='$c_show_severity'";
 	}
-	if ( $f_show_status != "any" ) {
+	if ( $f_show_status != 'any' ) {
 		$t_where_clause = $t_where_clause." AND $g_mantis_bug_table.status='$c_show_status'";
 	}
 
@@ -165,7 +165,7 @@
 							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
 							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
 	} else {
-		$t_columns_clause = " *";
+		$t_columns_clause = ' *';
 		$t_from_clause = " FROM $g_mantis_bug_table";
 	}
 
@@ -202,7 +202,7 @@
 
 	# Now add the rest of the criteria i.e. sorting, limit.
 	if ( !isset( $f_sort ) ) {
-		$f_sort="last_updated";
+		$f_sort='last_updated';
 	}
 	$query = $query." ORDER BY '$f_sort' $f_dir";
 
@@ -230,7 +230,7 @@
 		# Leigh Morresi <leighm@linuxbandwagon.com>
 
 		header( "Content-Type: text/plain; name=$g_page_title.csv" );
-		header( "Content-Transfer-Encoding: BASE64;" );
+		header( 'Content-Transfer-Encoding: BASE64;' );
 		header( "Content-Disposition: attachment; filename=$g_page_title.csv" );
 
 		echo "$s_email_project,$g_page_title \n\n";
@@ -238,14 +238,14 @@
 
 		for ( $i=0; $i < $row_count; $i++ ) {
 			$row = db_fetch_array($result);
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			$t_last_updated		= date( $g_short_date_format, $v_last_updated );
-			$t_priority			= get_enum_element( "priority", $v_priority );
-			$t_severity			= get_enum_element( "severity", $v_severity );
-			$t_status			= get_enum_element( "status", $v_status );
-			$t_hander_name		= get_user_info( $v_handler_id, "username" );
-			$t_reporter_name	= get_user_info( $v_reporter_id, "username" );
+			$t_priority			= get_enum_element( 'priority', $v_priority );
+			$t_severity			= get_enum_element( 'severity', $v_severity );
+			$t_status			= get_enum_element( 'status', $v_status );
+			$t_hander_name		= get_user_info( $v_handler_id, 'username' );
+			$t_reporter_name	= get_user_info( $v_reporter_id, 'username' );
 			$v_summary			= string_display( $v_summary );
 
 			echo "$t_priority,$v_id,$t_severity,$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
@@ -257,8 +257,8 @@
 ?>
 <?php print_page_top1() ?>
 <?php
-	if ( get_current_user_pref_field( "refresh_delay" ) > 0 ) {
-		print_meta_redirect( $g_view_all_bug_page."?f_page_number=".$f_page_number, get_current_user_pref_field( "refresh_delay" )*60 );
+	if ( get_current_user_pref_field( 'refresh_delay' ) > 0 ) {
+		print_meta_redirect( $g_view_all_bug_page.'?f_page_number='.$f_page_number, get_current_user_pref_field( 'refresh_delay' )*60 );
 	}
 ?>
 <?php print_page_top2() ?>

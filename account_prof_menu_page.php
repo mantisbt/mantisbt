@@ -10,14 +10,14 @@
 
 	# Users can also manage their profiles
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
 	# get protected state
-	$t_protected = get_current_user_field( "protected" );
+	$t_protected = get_current_user_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -34,7 +34,7 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="<?php echo $g_account_profile_add ?>">
-		<input type="hidden" name="f_user_id" value="<?php echo get_current_user_field( "id " ) ?>">
+		<input type="hidden" name="f_user_id" value="<?php echo get_current_user_field( 'id' ) ?>">
 		<?php echo $s_add_profile_title ?>
 	</td>
 	<td class="right">
@@ -109,7 +109,7 @@
 	</td>
 	<td width="75%">
 		<select name="f_id">
-			<?php print_profile_option_list( get_current_user_field( "id " ) ) ?>
+			<?php print_profile_option_list( get_current_user_field( 'id' ) ) ?>
 		</select>
 	</td>
 </tr>

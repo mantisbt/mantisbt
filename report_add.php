@@ -7,11 +7,11 @@
 <?php
 	# This page stores the reported bug and then redirects to view_all_bug_page.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	# these pages are invalid for the "All Project" selection
-	if ( "0000000" == $g_project_cookie_val ) {
+	# these pages are invalid for the 'All Project' selection
+	if ( '0000000' == $g_project_cookie_val ) {
 		print_header_redirect( $g_login_select_proj_page );
 	}
 
@@ -33,31 +33,31 @@
 	# We check to see if the variable exists to avoid warnings
 
 	if ( !isset( $f_steps_to_reproduce ) ) {
-		$f_steps_to_reproduce = "";
+		$f_steps_to_reproduce = '';
 	}
 
 	if ( !isset( $f_build ) ) {
-		$f_build = "";
+		$f_build = '';
 	}
 
 	if ( !isset( $f_platform ) ) {
-		$f_platform = "";
+		$f_platform = '';
 	}
 
 	if ( !isset( $f_os ) ) {
-		$f_os = "";
+		$f_os = '';
 	}
 
 	if ( !isset( $f_os_build ) ) {
-		$f_os_build = "";
+		$f_os_build = '';
 	}
 
 	if ( !isset( $f_product_version ) ) {
-		$f_product_version = "";
+		$f_product_version = '';
 	}
 
 	if ( !isset( $f_profile_id ) ) {
-		$f_profile_id = "";
+		$f_profile_id = '';
 	}
 
 	# validating input
@@ -74,7 +74,7 @@
 	$result = 0;
 	if ( !$check_failed ) {
 		# Get user id
-		$u_id = get_current_user_field( "id" );
+		$u_id = get_current_user_field( 'id' );
 
 		# Make strings safe for database
 		$c_summary 				= string_prepare_text( $f_summary );
@@ -97,7 +97,7 @@
 		    $result = db_query( $query );
 		    $profile_count = db_num_rows( $result );
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			$c_platform	= string_prepare_text( $v_platform );
 			$c_os		= string_prepare_text( $v_os );
@@ -134,7 +134,7 @@
 
 		# check to see if we want to assign this right off
 		$t_status = NEW_;
-		if ( $f_assign_id != "0000000" ) {
+		if ( $f_assign_id != '0000000' ) {
 			$t_status = ASSIGNED;
 		}
 
@@ -174,23 +174,23 @@
 
 		# File Uploaded
 		if ( !isset( $f_file ) ) {
-			$f_file = "none";
+			$f_file = 'none';
 		}
 		$f_file = trim( $f_file );
 		$disallowed = 0;
 		if ( !isset( $f_file_name ) ) {
-			$f_file_name = "";
+			$f_file_name = '';
 		}
 		if ( !file_type_check( $f_file_name ) ) {
 			$disallowed = 1;
 		} else if ( is_uploaded_file( $f_file ) ) {
-			$t_bug_id = str_pd( $t_bug_id, "0", 7, STR_PAD_LEFT );
+			$t_bug_id = str_pd( $t_bug_id, '0', 7, STR_PAD_LEFT );
 
 			# grab the file path
-			$t_file_path = get_current_project_field( "file_path" );
+			$t_file_path = get_current_project_field( 'file_path' );
 
 			# prepare variables for insertion
-			$f_file_name = $t_bug_id."-".$f_file_name;
+			$f_file_name = $t_bug_id.'-'.$f_file_name;
 			$t_file_size = filesize( $f_file );
 
 			switch ( $g_file_upload_method ) {
@@ -206,7 +206,7 @@
 							}
 							break;
 				case DATABASE:
-							$t_content = addslashes( fread ( fopen( $f_file, "rb" ), $t_file_size ) );
+							$t_content = addslashes( fread ( fopen( $f_file, 'rb' ), $t_file_size ) );
 							$query = "INSERT INTO $g_mantis_bug_file_table
 									(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 									VALUES
@@ -239,7 +239,7 @@
 	# FORM ERROR
 	# required fields not entered
 	if ( $check_failed ) {
-		PRINT "<span class=\"bold\">".$MANTIS_ERROR[ERROR_REPORT]."</span><p>";
+		PRINT '<span class="bold">'.$MANTIS_ERROR[ERROR_REPORT].'</span><p>';
 		if ( empty( $f_category ) ) {
 			PRINT "$s_must_enter_category<br />";
 		}
@@ -298,7 +298,7 @@
 <?php
 		} else {
 			$t_view_bug_url = get_view_redirect_url( $t_bug_id, 1 );
-			print_bracket_link( $t_view_bug_url, $s_view_submitted_bug_link." ".$t_bug_id );
+			print_bracket_link( $t_view_bug_url, $s_view_submitted_bug_link.' '.$t_bug_id );
 			print_bracket_link( $g_view_all_bug_page, $s_view_bugs_link );
 		}
 	}

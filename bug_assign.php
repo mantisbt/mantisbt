@@ -12,7 +12,7 @@
 <?php
 	# Assign bug to user then redirect to viewing page
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -25,7 +25,7 @@
     $t_ass_val = ASSIGNED;
 
     # get user id
-    $t_handler_id = get_current_user_field( "id" );
+    $t_handler_id = get_current_user_field( 'id' );
     $query = "UPDATE $g_mantis_bug_table
             SET handler_id='$t_handler_id', status='$t_ass_val'
 			WHERE id='$c_id'";

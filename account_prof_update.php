@@ -8,20 +8,20 @@
 	# This page updates the users profile information then redirects to
 	# account_prof_menu_page.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# get protected state
-	$t_protected = get_current_user_field( "protected" );
+	$t_protected = get_current_user_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
 		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
 	}
 
-	$c_user_id	= (integer)get_current_user_field( "id" );
+	$c_user_id	= (integer)get_current_user_field( 'id' );
 	$c_id		= (integer)$f_id;
 
 	# " character poses problem when editting so let's just convert them

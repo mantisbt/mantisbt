@@ -1,7 +1,7 @@
 <?php
-include ($g_jpgraph_path."jpgraph.php");
-include ($g_jpgraph_path."jpgraph_line.php");
-include ($g_jpgraph_path."jpgraph_bar.php");
+include ($g_jpgraph_path.'jpgraph.php');
+include ($g_jpgraph_path.'jpgraph_line.php');
+include ($g_jpgraph_path.'jpgraph_bar.php');
 ?>
 <?php login_cookie_check() ?>
 <?php
@@ -21,7 +21,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 			$t_s = explode_enum_arr( $t_arr[$i] );
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
-			if ($g_project_cookie_val=='0000000') $specific_where = "";
+			if ($g_project_cookie_val=='0000000') $specific_where = '';
 			else $specific_where = " AND project_id='$g_project_cookie_val'";
 
 			$query = "SELECT COUNT(*)
@@ -33,14 +33,14 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 	}
 
 
-	function graph_bug_enum_summary( $p_title="" ){
+	function graph_bug_enum_summary( $p_title='' ){
 		global $enum_name, $enum_name_count;
 
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
 		$graph->img->SetAntiAliasing();
-		$graph->SetScale("textlin");
-		$graph->SetMarginColor("white");
+		$graph->SetScale('textlin');
+		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
 		$graph->title->Set($p_title);
 		$graph->xaxis->SetTickLabels($enum_name);
@@ -49,7 +49,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
 		$p1 = new BarPlot($enum_name_count);
-		$p1->SetFillColor("yellow");
+		$p1->SetFillColor('yellow');
 		$p1->SetWidth(0.8);
 		$graph->Add($p1);
 
@@ -74,9 +74,9 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ($g_project_cookie_val=='0000000') $specific_where = "";
+			if ($g_project_cookie_val=='0000000') $specific_where = '';
 			else $specific_where = " AND project_id='$g_project_cookie_val'";
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -118,30 +118,30 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
 		$graph->img->SetAntiAliasing();
-		$graph->SetScale("textlin");
-		$graph->SetMarginColor("white");
+		$graph->SetScale('textlin');
+		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
 		$graph->title->Set($s_by_developer);
 		$graph->xaxis->SetTickLabels($developer_name);
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
-		$graph->legend->Pos(0.1,0.8,"right","top");
+		$graph->legend->Pos(0.1,0.8,'right','top');
 		$graph->legend->SetShadow(false);
-		$graph->legend->SetFillColor("white");
+		$graph->legend->SetFillColor('white');
 		$graph->legend->SetLayout(LEGEND_HOR);
 
 		$p1 = new BarPlot($open_bug_count);
-		$p1->SetFillColor("red");
-		$p1->SetLegend("Still Open");
+		$p1->SetFillColor('red');
+		$p1->SetLegend('Still Open');
 
 		$p2 = new BarPlot($resolved_bug_count);
-		$p2->SetFillColor("yellow");
-		$p2->SetLegend("Resolved");
+		$p2->SetFillColor('yellow');
+		$p2->SetLegend('Resolved');
 
 		$p3 = new BarPlot($total_bug_count);
-		$p3->SetFillColor("blue");
-		$p3->SetLegend("Assigned");
+		$p3->SetFillColor('blue');
+		$p3->SetLegend('Assigned');
 
 		$gbplot =  new GroupBarPlot( array($p1, $p2, $p3));
 		$graph->Add($gbplot);
@@ -167,9 +167,9 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ($g_project_cookie_val=='0000000') $specific_where = "";
+			if ($g_project_cookie_val=='0000000') $specific_where = '';
 			else $specific_where = " AND project_id='$g_project_cookie_val'";
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -192,8 +192,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
 		$graph->img->SetAntiAliasing();
-		$graph->SetScale("textlin");
-		$graph->SetMarginColor("white");
+		$graph->SetScale('textlin');
+		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
 		$graph->title->Set($s_by_reporter);
 		$graph->xaxis->SetTickLabels($reporter_name);
@@ -201,7 +201,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
 		$p1 = new BarPlot($reporter_count);
-		$p1->SetFillColor("yellow");
+		$p1->SetFillColor('yellow');
 		$p1->SetWidth(0.8);
 		$graph->Add($p1);
 
@@ -219,7 +219,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 				$g_mantis_project_category_table, $g_project_cookie_val,
 				$category_name, $category_bug_count;
 
-		if ($g_project_cookie_val=='0000000') $specific_where = "1=1";
+		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1 ';
 		else $specific_where = " project_id='$g_project_cookie_val'";
 		$query = "SELECT DISTINCT category
 				FROM $g_mantis_project_category_table
@@ -230,7 +230,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$category_name[] = $row["category"];
+			$category_name[] = $row['category'];
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -248,8 +248,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
 		$graph->img->SetAntiAliasing();
-		$graph->SetScale("textlin");
-		$graph->SetMarginColor("white");
+		$graph->SetScale('textlin');
+		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
 		$graph->title->Set($s_by_category);
 		$graph->xaxis->SetTickLabels($category_name);
@@ -257,7 +257,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
 		$p1 = new BarPlot($category_bug_count);
-		$p1->SetFillColor("yellow");
+		$p1->SetFillColor('yellow');
 		$p1->SetWidth(0.8);
 		$graph->Add($p1);
 
@@ -295,7 +295,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$t_clo_val = CLOSED;
 		$t_res_val = RESOLVED;
 
-		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1 ";
+		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1 ';
 			else $specific_where = " project_id='$g_project_cookie_val' ";
 
 		### Get all the submitted dates
@@ -307,8 +307,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
- 			$t_date = ($row["date_submitted"]);
-			$t_date_string = date("Y-m-d", $t_date);
+ 			$t_date = ($row['date_submitted']);
+			$t_date_string = date('Y-m-d', $t_date);
 
 			$index = find_date_in_metrics($t_date_string);
 			# Either the date is the same as the last date or it's new
@@ -332,8 +332,8 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_date = $row["last_updated"];
-			$t_date_string = date("Y-m-d", $t_date);
+			$t_date = $row['last_updated'];
+			$t_date_string = date('Y-m-d', $t_date);
 
 			$index = find_date_in_metrics($t_date_string);
 			# Either the date is the same as a submitted date or it's new
@@ -369,34 +369,34 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
 		$graph->img->SetAntiAliasing();
-		$graph->SetScale("linlin");
-		$graph->SetMarginColor("white");
+		$graph->SetScale('linlin');
+		$graph->SetMarginColor('white');
 		$graph->SetFrame(false);
 		$graph->title->Set("cumulative $s_by_date");
-		$graph->legend->Pos(0.1,0.6,"right","top");
+		$graph->legend->Pos(0.1,0.6,'right','top');
 		$graph->legend->SetShadow(false);
-		$graph->legend->SetFillColor("white");
+		$graph->legend->SetFillColor('white');
 		$graph->legend->SetLayout(LEGEND_HOR);
 		$graph->xaxis->Hide();
 		$graph->xaxis->SetLabelAngle(90);
 		$graph->yaxis->scale->ticks->SetDirection(-1);
 
 		$p1 = new LinePlot($reported_plot, $plot_date);
-		$p1->SetColor("blue");
+		$p1->SetColor('blue');
 		$p1->SetCenter();
-		$p1->SetLegend("Reported");
+		$p1->SetLegend('Reported');
 		$graph->Add($p1);
 
 		$p3 = new LinePlot($still_open_plot, $plot_date);
-		$p3->SetColor("red");
+		$p3->SetColor('red');
 		$p3->SetCenter();
-		$p3->SetLegend("Still Open");
+		$p3->SetLegend('Still Open');
 		$graph->Add($p3);
 
 		$p2 = new LinePlot($resolved_plot, $plot_date);
-		$p2->SetColor("black");
+		$p2->SetColor('black');
 		$p2->SetCenter();
-		$p2->SetLegend("Resolved");
+		$p2->SetLegend('Resolved');
 		$graph->Add($p2);
 
 

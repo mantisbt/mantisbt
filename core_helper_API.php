@@ -55,7 +55,7 @@
 		global 	$g_string_cookie_val,
 				$g_mantis_bug_text_table;
 
-		$t_bug_text_id = get_bug_field( $p_bug_id, "bug_text_id" );
+		$t_bug_text_id = get_bug_field( $p_bug_id, 'bug_text_id' );
 		# get info
 		$query = "SELECT $p_field_name
 				FROM $g_mantis_bug_text_table
@@ -68,9 +68,9 @@
 	# converts a 0 value to a space
 	function trans_bool( $p_num ) {
 		if ( 0 == $p_num ) {
-			return "&nbsp;";
+			return '&nbsp;';
 		} else {
-			return "X";
+			return 'X';
 		}
 	}
 	# --------------------
@@ -172,7 +172,7 @@
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
-		if ( "0000000" == $g_project_cookie_val ) $t_where_prj ="1=1";
+		if ( '0000000' == $g_project_cookie_val ) $t_where_prj = ' 1=1 ';
 		else $t_where_prj = "project_id='$c_project_id'";
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
@@ -198,7 +198,7 @@
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
-		if ( "0000000" == $g_project_cookie_val ) $t_where_prj ="1=1";
+		if ( '0000000' == $g_project_cookie_val ) $t_where_prj = ' 1=1 ';
 		else $t_where_prj = "project_id='$c_project_id'";
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
@@ -238,7 +238,7 @@
 	function process_bug_link( $p_string ) {
 		global $g_bug_link_tag, $g_view_bug_page, $g_view_bug_advanced_page;
 
-		if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
+		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
 			return preg_replace("/$g_bug_link_tag([0-9]+)/",
 								"<a href=\"$g_view_bug_advanced_page?f_id=\\1\">#\\1</a>",
 								$p_string);
@@ -254,7 +254,7 @@
 		global	$g_view_bug_page, $g_view_bug_advanced_page,
 				$g_bug_link_tag;
 
-		if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
+		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
 			return preg_replace("/$g_bug_link_tag([0-9]+)/",
 								"$g_view_bug_advanced_page?f_id=\\1",
 								$p_string);
@@ -266,7 +266,7 @@
 	}
 	# --------------------
 	# alternate color function
-	function alternate_colors( $p_num, $p_color1="", $p_color2="" ) {
+	function alternate_colors( $p_num, $p_color1='', $p_color2='' ) {
 		global $g_primary_color1, $g_primary_color2;
 
 		if ( empty( $p_color1 ) ) {
@@ -291,7 +291,7 @@
 		# then references that color variable
 		# You could replace this with a bunch of if... then... else
 		# statements
-		$t_color_str = "closed";
+		$t_color_str = 'closed';
 		$t_arr = explode_enum_string( $g_status_enum_string );
 		$t_arr_count = count( $t_arr );
 		for ( $i=0;$i<$t_arr_count;$i++ ) {
@@ -303,17 +303,17 @@
 			}
 		}
 
-		$t_color_variable_name = "g_".$t_color_str."_color";
+		$t_color_variable_name = 'g_'.$t_color_str.'_color';
 		global $$t_color_variable_name;
 		return $$t_color_variable_name;
 	}
 	# --------------------
-	# get a bgcolor="" string for the given status or "" if the status is CLOSED
+	# get a bgcolor='' string for the given status or '' if the status is CLOSED
 	function get_status_bgcolor( $p_status ){
 		if ( !( CLOSED == $p_status ) ) {
-			return "bgcolor=\"".get_status_color( $p_status )."\"";
+			return 'bgcolor="'.get_status_color( $p_status ).'"';
 		} else {
-			return "";
+			return '';
 		}
 	}
 	# --------------------
@@ -340,24 +340,24 @@
 				return $t_s[1];
 			}
 		}
-		return "@null@";
+		return '@null@';
 	}
 	# --------------------
 	# Breaks up an enum string into num:value elements
 	function explode_enum_string( $p_enum_string ) {
-		return explode( ",", $p_enum_string );
+		return explode( ',', $p_enum_string );
 	}
 	# --------------------
 	# Given one num:value pair it will return both in an array
 	# num will be first (element 0) value second (element 1)
 	function explode_enum_arr( $p_enum_elem ) {
-		return explode( ":", $p_enum_elem );
+		return explode( ':', $p_enum_elem );
 	}
 	# --------------------
 	# Given a enum string and num, return the appropriate string
 	function get_enum_element( $p_enum_name, $p_val ) {
-		$g_var = "g_".$p_enum_name."_enum_string";
-		$s_var = "s_".$p_enum_name."_enum_string";
+		$g_var = 'g_'.$p_enum_name.'_enum_string';
+		$s_var = 's_'.$p_enum_name.'_enum_string';
 		global $$g_var, $$s_var;
 
 		# use the global enum string to search
@@ -370,7 +370,7 @@
 				return get_enum_to_string( $$s_var, $p_val );
 			}
 		}
-		return "@null@";
+		return '@null@';
 	}
 	# --------------------
 	# Returns the number of bugntoes for the given bug_id
@@ -434,16 +434,16 @@
 			 ( 1 == $p_no_referer ) ) {
 			switch ( $g_show_view ) {
 				case BOTH:
-						if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
-							return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
+						if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
+							return $g_view_bug_advanced_page.'?f_id='.$p_bug_id;
 						} else {
-							return $g_view_bug_page."?f_id=".$p_bug_id;
+							return $g_view_bug_page.'?f_id='.$p_bug_id;
 						}
 				case SIMPLE_ONLY:
-						return $g_view_bug_page."?f_id=".$p_bug_id;
+						return $g_view_bug_page.'?f_id='.$p_bug_id;
 				case ADVANCED_ONLY:
-						return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
-				default:return $g_view_bug_page."?f_id=".$p_bug_id;
+						return $g_view_bug_advanced_page.'?f_id='.$p_bug_id;
+				default:return $g_view_bug_page.'?f_id='.$p_bug_id;
 			}
 		} else {
 			return $HTTP_REFERER;
@@ -461,7 +461,7 @@
 			 ( 1 == $p_no_referer ) ) {
 			switch( $g_show_report ) {
 				case BOTH:
-						if ( ON == get_current_user_pref_field( "advanced_report" ) ) {
+						if ( ON == get_current_user_pref_field( 'advanced_report' ) ) {
 							return $g_report_bug_advanced_page;
 		 				} else {
 							return $g_report_bug_page;
@@ -478,13 +478,13 @@
 	}
 	# --------------------
 	# Contributed by Peter Palmreuther
-	function mime_encode( $p_string="" ) {
-		$output = "";
+	function mime_encode( $p_string='' ) {
+		$output = '';
 		for ( $i=0; $i<strlen( $p_string ); $i++ ) {
 			if (( ord( $p_string[$i] ) < 33 ) ||
 				( ord( $p_string[$i] ) > 127 ) ||
 				( eregi( "[\%\[\]\{\}\(\)]", $p_string[$i] ) )) {
-				$output .= sprintf( "%%%02X", ord( $p_string[$i] ) );
+				$output .= sprintf( '%%%02X', ord( $p_string[$i] ) );
 			} else {
 				$output .= $p_string[$i];
 			}
@@ -497,7 +497,7 @@
 		global $g_allowed_files, $g_disallowed_files;
 
 		# grab extension
-		$t_ext_array = explode( ".", $p_file_name );
+		$t_ext_array = explode( '.', $p_file_name );
 		$last_position = count( $t_ext_array )-1;
 		$t_extension = $t_ext_array[$last_position];
 

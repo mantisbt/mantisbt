@@ -4,24 +4,24 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
 
 	if ( !isset( $f_sort ) ) {
-		$f_sort = "";
+		$f_sort = '';
 	}
 	if ( !isset( $f_dir ) ) {
-		$f_dir = "";
+		$f_dir = '';
 	}
 
 	# set cookie values for hide, sort by, and dir
 	if ( isset( $f_save ) ) {
 		#echo $f_hide.$f_sort;
 		if ( isset( $f_hide ) ) {
-			if ( ( "on" == $f_hide ) || ( 1 == $f_hide ) ) {
+			if ( ( 'on' == $f_hide ) || ( 1 == $f_hide ) ) {
 				$f_hide = 1;
 			} else {
 				$f_hide = 0;
@@ -30,34 +30,34 @@
 			$f_hide = 0;
 		}
 
-		$t_manage_string = $f_hide.":".$f_sort.":".$f_dir;
+		$t_manage_string = $f_hide.':'.$f_sort.':'.$f_dir;
 		setcookie( $g_manage_cookie, $t_manage_string, time()+$g_cookie_time_length, $g_cookie_path );
 	} else if ( !empty( $g_manage_cookie_val ) ) {
-		$t_manage_arr = explode( ":", $g_manage_cookie_val );
+		$t_manage_arr = explode( ':', $g_manage_cookie_val );
 		$f_hide = $t_manage_arr[0];
 
 		if ( isset( $t_manage_arr[1] ) ) {
 			$f_sort = $t_manage_arr[1];
 		} else {
-			$f_sort = "username";
+			$f_sort = 'username';
 		}
 
 		if ( isset( $t_manage_arr[2] ) ) {
 			$f_dir  = $t_manage_arr[2];
 		} else {
-			$f_dir = "DESC";
+			$f_dir = 'DESC';
 		}
 	} else {
 		$f_hide = 0;
-		$f_sort = "username";
-		$f_dir  = "DESC";
+		$f_sort = 'username';
+		$f_dir  = 'DESC';
 	}
 
 	# we toggle between ASC and DESC if the user clicks the same sort order
-	if ( "ASC" == $f_dir ) {
-		$f_dir = "DESC";
+	if ( 'ASC' == $f_dir ) {
+		$f_dir = 'DESC';
 	} else {
-		$f_dir = "ASC";
+		$f_dir = 'ASC';
 	}
 ?>
 <?php print_page_top1() ?>
@@ -88,9 +88,9 @@
 <?php
 for ($i=0;$i<$new_user_count;$i++) {
 	$row = db_fetch_array( $result );
-	$t_username = $row["username"];
+	$t_username = $row['username'];
 
-	echo $t_username." : ";
+	echo $t_username.' : ';
 }
 ?>
 	</td>
@@ -120,9 +120,9 @@ for ($i=0;$i<$new_user_count;$i++) {
 <?php
 	for ($i=0;$i<$user_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_username = $row["username"];
+		$t_username = $row['username'];
 
-		echo $t_username." : ";
+		echo $t_username.' : ';
 	}
 ?>
 	</td>
@@ -160,46 +160,46 @@ for ($i=0;$i<$new_user_count;$i++) {
 	<td class="center" colspan="2">
 		<form method="post" action="<?php echo $g_manage_page ?>">
 		<input type="hidden" name="f_save" value="1">
-		<input type="checkbox" name="f_hide" <?php if ( 1 == $f_hide ) echo "CHECKED" ?>> <?php echo $s_hide_inactive ?>
+		<input type="checkbox" name="f_hide" <?php if ( 1 == $f_hide ) echo 'CHECKED' ?>> <?php echo $s_hide_inactive ?>
 		<input type="submit" value="<?php echo $s_filter_button ?>">
 		</form>
 	</td>
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_username, "username", $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "username" ) ?>
+		<?php print_manage_user_sort_link(  $g_manage_page, $s_username, 'username', $f_dir, $f_hide ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'username' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_email, "email", $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "email" ) ?>
+		<?php print_manage_user_sort_link(  $g_manage_page, $s_email, 'email', $f_dir, $f_hide ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'email' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_access_level, "access_level", $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "access_level" ) ?>
+		<?php print_manage_user_sort_link(  $g_manage_page, $s_access_level, 'access_level', $f_dir, $f_hide ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'access_level' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_enabled, "enabled", $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "enabled" ) ?>
+		<?php print_manage_user_sort_link(  $g_manage_page, $s_enabled, 'enabled', $f_dir, $f_hide ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'enabled' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_p, "protected", $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "protected" ) ?>
+		<?php print_manage_user_sort_link(  $g_manage_page, $s_p, 'protected', $f_dir, $f_hide ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'protected' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_date_created, "date_created", $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "date_created" ) ?>
+		<?php print_manage_user_sort_link(  $g_manage_page, $s_date_created, 'date_created', $f_dir, $f_hide ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'date_created' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link(  $g_manage_page, $s_last_visit, "last_visit", $f_dir, $f_hide ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "last_visit" ) ?>
+		<?php print_manage_user_sort_link(  $g_manage_page, $s_last_visit, 'last_visit', $f_dir, $f_hide ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'last_visit' ) ?>
 	</td>
 </tr>
 <?php
 	for ($i=0;$i<$user_count;$i++) {
 		# prefix user data with u_
 		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, "u" );
+		extract( $row, EXTR_PREFIX_ALL, 'u' );
 
 		$u_date_created  = date( $g_normal_date_format, $u_date_created );
 		$u_last_visit    = date( $g_normal_date_format, $u_last_visit );
@@ -209,13 +209,13 @@ for ($i=0;$i<$new_user_count;$i++) {
 ?>
 <tr>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<a href="<?php echo $g_manage_user_page."?f_id=".$u_id ?>"><?php echo $u_username ?></a>
+		<a href="<?php echo $g_manage_user_page.'?f_id='.$u_id ?>"><?php echo $u_username ?></a>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php print_email_link( $u_email, $u_email ) ?>
 	</td>
 	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
-		<?php echo get_enum_element( "access_levels", $u_access_level ) ?>
+		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
 	</td>
 	<td align="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo trans_bool( $u_enabled ) ?>

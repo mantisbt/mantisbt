@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -29,7 +29,7 @@
     }
 
 	if ( $f_password != $f_password_verify ) {
-		echo "ERROR: passwords do not match";
+		echo 'ERROR: passwords do not match';
 		exit;
 	}
 
@@ -95,7 +95,7 @@
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		$f_access_level = get_enum_element( "access_levels", $f_access_level );
+		$f_access_level = get_enum_element( 'access_levels', $f_access_level );
 		PRINT "$s_created_user_part1 <span class=\"bold\">$f_username</span> $s_created_user_part2 <span class=\"bold\">$f_access_level</span><p>";
 	} else {						# FAILURE
 		print_sql_error( $query );

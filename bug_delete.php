@@ -8,7 +8,7 @@
 	# Delete the bug, bugtext, bugnote, and bugtexts selected
 	# Redirects to view_all_bug_page.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -39,7 +39,7 @@
 	$bugnote_count = db_num_rows( $result );
 	for ($i=0;$i<$bugnote_count;$i++){
 		$row = db_fetch_array( $result );
-		$t_bugnote_text_id = $row["bugnote_text_id"];
+		$t_bugnote_text_id = $row['bugnote_text_id'];
 
 		# Delete the corresponding bugnote texts
 		$query = "DELETE
@@ -65,7 +65,7 @@
 		# there may be more than one file
 		for ($i=0;$i<$file_count;$i++){
 			$row = db_fetch_array( $result );
-			$t_diskfile = $row["diskfile"];
+			$t_diskfile = $row['diskfile'];
 
 			# use this instead of delete;
 			# in windows replace with system("del $t_diskfile");

@@ -4,38 +4,38 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	# these pages are invalid for the "All Project" selection
-	if ( "0000000" == $g_project_cookie_val ) {
+	# these pages are invalid for the 'All Project' selection
+	if ( '0000000' == $g_project_cookie_val ) {
 		print_header_redirect( $g_login_select_proj_page );
 	}
 
 	if ( !isset( $f_sort ) ) {
-		$f_sort = "username";
+		$f_sort = 'username';
 	}
 
 	# basically we toggle between ASC and DESC if the user clicks the
 	# same sort order
 	if ( isset( $f_dir ) ) {
-		if ( "ASC" == $f_dir ) {
-			$f_dir = "DESC";
+		if ( 'ASC' == $f_dir ) {
+			$f_dir = 'DESC';
 		} else {
-			$f_dir = "ASC";
+			$f_dir = 'ASC';
 		}
 	} else {
-		$f_dir = "ASC";
+		$f_dir = 'ASC';
 	}
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
 <?php
-	$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
+	$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
 	if ( PUBLIC == $t_project_view_state ) {
 		$t_msg = $s_public_project_msg;
 	} else {
@@ -98,16 +98,16 @@
 </tr>
 <tr class="row-category">
 	<td>
-		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_username, "username", $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "username" ) ?>
+		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_username, 'username', $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'username' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_email, "email", $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "email" ) ?>
+		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_email, 'email', $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'email' ) ?>
 	</td>
 	<td>
-		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_access_level, "access_level", $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "access_level" ) ?>
+		<?php print_manage_user_sort_link( $g_proj_user_menu_page, $s_access_level, 'access_level', $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'access_level' ) ?>
 	</td>
 	<td>
 		&nbsp;
@@ -135,7 +135,7 @@
 	for ($i=0;$i<$user_count;$i++) {
 		# prefix user data with u_
 		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, "u" );
+		extract( $row, EXTR_PREFIX_ALL, 'u' );
 
 		$u_access_level = get_effective_access_level( $u_id );
 
@@ -150,12 +150,12 @@
 		<?php print_email_link( $u_email, $u_email ) ?>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<?php echo get_enum_element( "access_levels", $u_access_level ) ?>
+		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
 	</td>
 	<td class="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php
 			if ( is_removable_proj_user( $u_id ) ) {
-				print_bracket_link( $g_proj_user_delete."?f_user_id=".$u_id, $s_remove_link );
+				print_bracket_link( $g_proj_user_delete.'?f_user_id='.$u_id, $s_remove_link );
 			}
 		?>
 	</td>

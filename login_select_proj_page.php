@@ -7,13 +7,13 @@
 <?php
 	# Allows the user to select a project that is visible to him
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_user_check_only() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	if ( !isset( $f_ref ) ) {
-		$f_ref = "";
+		$f_ref = '';
 	}
 ?>
 <?php print_page_top1() ?>

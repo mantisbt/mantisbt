@@ -7,7 +7,7 @@
 	# Initial code for this addon cames from Duncan Lisset
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -25,8 +25,8 @@
 	$t_total_time = 0;
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_date_submitted = ($row["date_submitted"]);
-		$t_last_updated = $row["last_updated"];
+		$t_date_submitted = ($row['date_submitted']);
+		$t_last_updated = $row['last_updated'];
 
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated = 0;
@@ -37,7 +37,7 @@
 		$t_total_time = $t_total_time + $t_diff;
 		if ( $t_diff > $t_largest_diff ) {
 			$t_largest_diff = $t_diff;
-			$t_bug_id = $row["id"];
+			$t_bug_id = $row['id'];
 		}
 	}
 	if ( $bug_count < 1 ) {

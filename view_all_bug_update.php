@@ -7,7 +7,7 @@
 <?php
 	# This page stores the reported bug and then redirects to view_all_bug_page.php3
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );

@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -17,7 +17,7 @@
 			WHERE id='$c_id'";
     $result = db_query($query);
 	$row = db_fetch_array($result);
-	extract( $row, EXTR_PREFIX_ALL, "u" );
+	extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -56,7 +56,7 @@
 	</td>
 	<td colspan="2">
 		<select name="f_access_level">
-			<?php print_enum_string_option_list( "access_levels", $u_access_level ) ?>
+			<?php print_enum_string_option_list( 'access_levels', $u_access_level ) ?>
 		</select>
 	</td>
 </tr>
@@ -65,7 +65,7 @@
 		<?php echo $s_enabled ?>:
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_enabled" <?php if ( ON == $u_enabled ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_enabled" <?php if ( ON == $u_enabled ) echo 'CHECKED' ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -73,7 +73,7 @@
 		<?php echo $s_protected ?>:
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_protected" <?php if ( ON == $u_protected ) echo "CHECKED" ?>>
+		<input type="checkbox" name="f_protected" <?php if ( ON == $u_protected ) echo 'CHECKED' ?>>
 	</td>
 </tr>
 <tr>

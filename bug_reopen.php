@@ -8,7 +8,7 @@
 	# This file sets the bug to the chosen resolved state then gives the
 	# user the opportunity to enter a reason for the closure
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -17,7 +17,7 @@
 	check_bug_exists( $f_id );
 	$c_id = (integer)$f_id;
 
-	$t_handler_id = get_current_user_field( "id" );
+	$t_handler_id = get_current_user_field( 'id' );
 
 	# Update fields
 	$t_fee_val = FEEDBACK;
@@ -29,7 +29,7 @@
    	$result = db_query($query);
 
 	# get user information
-	$u_id = get_current_user_field( "id " );
+	$u_id = get_current_user_field( 'id' );
 
 	$f_bugnote_text = trim( $f_bugnote_text );
 	# check for blank bugnote

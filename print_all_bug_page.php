@@ -4,20 +4,20 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
-		print_header_redirect( $g_view_all_set."?f_type=0&f_print=1" );
+		print_header_redirect( $g_view_all_set.'?f_type=0&f_print=1' );
 	}
 
 	# check to see if new cookie is needed
-	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
+	$t_setting_arr 			= explode( '#', $g_view_all_cookie_val );
 	if ( $t_setting_arr[0] != $g_cookie_version ) {
-		print_header_redirect( $g_view_all_set."?f_type=0&f_print=1" );
+		print_header_redirect( $g_view_all_set.'?f_type=0&f_print=1' );
 	}
 
 	if( !isset( $f_search ) ) {
@@ -66,18 +66,18 @@
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
 		( !access_level_check_greater_or_equal( UPDATER  ) )) {
-		$c_user_id = get_current_user_field( "id" );
+		$c_user_id = get_current_user_field( 'id' );
 	}
 
 	# Build our query string based on our viewing criteria
 
-	$query = "SELECT DISTINCT *, UNIX_TIMESTAMP(last_updated) as last_updated
-			 FROM $g_mantis_bug_table";
+	$query = 'SELECT DISTINCT *, UNIX_TIMESTAMP(last_updated) as last_updated
+			 FROM $g_mantis_bug_table';
 
 	# project selection
-	if ( "0000000" == $g_project_cookie_val ) { # ALL projects
-		$t_access_level = get_current_user_field( "access_level" );
-		$t_user_id = get_current_user_field( "id" );
+	if ( '0000000' == $g_project_cookie_val ) { # ALL projects
+		$t_access_level = get_current_user_field( 'access_level' );
+		$t_user_id = get_current_user_field( 'id' );
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;
@@ -94,47 +94,47 @@
 		$project_count = db_num_rows( $result2 );
 
 		if ( 0 == $project_count ) {
-			$t_where_clause = " WHERE 1=1";
+			$t_where_clause = ' WHERE 1=1';
 		} else {
-			$t_where_clause = " WHERE (";
+			$t_where_clause = ' WHERE (';
 			for ($i=0;$i<$project_count;$i++) {
 				$row = db_fetch_array( $result2 );
-				extract( $row, EXTR_PREFIX_ALL, "v" );
+				extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 				$t_where_clause .= "(project_id='$v_id')";
 				if ( $i < $project_count - 1 ) {
-					$t_where_clause .= " OR ";
+					$t_where_clause .= ' OR ';
 				}
 			} # end for
-			$t_where_clause .= ")";
+			$t_where_clause .= ')';
 		}
 	} else {
 		$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
 	}
 	# end project selection
 
-	if ( $c_user_id != "any" ) {
+	if ( $c_user_id != 'any' ) {
 		$t_where_clause .= " AND reporter_id='$c_user_id'";
 	}
 
-	if ( "none" == $f_assign_id ) {
-		$t_where_clause .= " AND handler_id=0";
-	} else if ( $f_assign_id != "any" ) {
+	if ( 'none' == $f_assign_id ) {
+		$t_where_clause .= ' AND handler_id=0';
+	} else if ( $f_assign_id != 'any' ) {
 		$t_where_clause .= " AND handler_id='$c_assign_id'";
 	}
 
 	$t_clo_val = CLOSED;
-	if ( ( "on" == $f_hide_closed  )&&( "closed" != $f_show_status )) {
+	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status )) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
 
-	if ( $f_show_category != "any" ) {
+	if ( $f_show_category != 'any' ) {
 		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
 	}
-	if ( $f_show_severity != "any" ) {
+	if ( $f_show_severity != 'any' ) {
 		$t_where_clause = $t_where_clause." AND severity='$c_show_severity'";
 	}
-	if ( $f_show_status != "any" ) {
+	if ( $f_show_status != 'any' ) {
 		$t_where_clause = $t_where_clause." AND status='$c_show_status'";
 	}
 
@@ -154,20 +154,20 @@
 							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
 							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
 	} else {
-		$t_columns_clause = " *";
+		$t_columns_clause = ' *';
 		$t_from_clause = " FROM $g_mantis_bug_table";
 	}
 
 	if ( empty($c_sort) ) {
-		$c_sort="last_updated";
+		$c_sort='last_updated';
 	}
-	$query  = "SELECT DISTINCT ".$t_columns_clause.", UNIX_TIMESTAMP(last_updated) as last_updated";
+	$query  = 'SELECT DISTINCT '.$t_columns_clause.', UNIX_TIMESTAMP(last_updated) as last_updated';
 	$query .= $t_from_clause;
 	$query .= $t_where_clause;
 
 	$query = $query." ORDER BY '$c_sort' $c_dir";
-	if ( $f_sort != "priority" ) {
-		$query = $query.", priority DESC";
+	if ( $f_sort != 'priority' ) {
+		$query = $query.', priority DESC';
 	}
 
 	if ( isset( $f_limit_view ) ) {
@@ -235,7 +235,7 @@
 	<td>
 		<select name="f_assign_id">
 			<option value="any"><?php echo $s_any ?></option>
-			<option value="none" <?php if ( "none" == $f_assign_id ) echo "SELECTED" ?>><?php echo $s_none ?></option>
+			<option value="none" <?php if ( 'none' == $f_assign_id ) echo 'SELECTED' ?>><?php echo $s_none ?></option>
 			<option value="any"></option>
 			<?php print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
@@ -251,14 +251,14 @@
 		<select name="f_show_severity">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( "severity", $f_show_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $f_show_severity ) ?>
 		</select>
 	</td>
 	<td>
 		<select name="f_show_status">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( "status", $f_show_status ) ?>
+			<?php print_enum_string_option_list( 'status', $f_show_status ) ?>
 		</select>
 	</td>
 	<td>
@@ -268,7 +268,7 @@
 		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <?php if ( "on" == $f_hide_closed ) echo "CHECKED"?>>
+		<input type="checkbox" name="f_hide_closed" <?php if ( 'on' == $f_hide_closed ) echo 'CHECKED' ?>>
 	</td>
 	<td>
 		<input type="submit" value="<?php echo $s_filter_button ?>">
@@ -300,35 +300,35 @@
 </tr>
 <tr class="row-category">
 	<td class="center" width="8%">
-		<?php print_view_bug_sort_link2( "P", "priority", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
+		<?php print_view_bug_sort_link2( 'P', 'priority', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'priority' ) ?>
 	</td>
 	<td class="center" width="8%">
-		<?php print_view_bug_sort_link2( $s_id, "id", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "id" ) ?>
+		<?php print_view_bug_sort_link2( $s_id, 'id', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'id' ) ?>
 	</td>
 	<td class="center" width="3%">
 		#
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link2( $s_category, "category", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "category" ) ?>
+		<?php print_view_bug_sort_link2( $s_category, 'category', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'category' ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link2( $s_severity, "severity", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
+		<?php print_view_bug_sort_link2( $s_severity, 'severity', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'severity' ) ?>
 	</td>
 	<td class="center" width="10%">
-		<?php print_view_bug_sort_link2( $s_status, "status", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "status" ) ?>
+		<?php print_view_bug_sort_link2( $s_status, 'status', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'status' ) ?>
 	</td>
 	<td class="center" width="12%">
-		<?php print_view_bug_sort_link2( $s_updated, "last_updated", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
+		<?php print_view_bug_sort_link2( $s_updated, 'last_updated', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'last_updated' ) ?>
 	</td>
 	<td class="center" width="37%">
-		<?php print_view_bug_sort_link2( $s_summary, "summary", $f_sort, $f_dir ) ?>
-		<?php print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
+		<?php print_view_bug_sort_link2( $s_summary, 'summary', $f_sort, $f_dir ) ?>
+		<?php print_sort_icon( $f_dir, $f_sort, 'summary' ) ?>
 	</td>
 </tr>
 <tr>
@@ -340,19 +340,19 @@
 	for($i=0; $i < $row_count; $i++) {
 		# prefix bug data with v_
 		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$v_summary = string_display( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# alternate row colors
-		$status_color = alternate_colors( $i, "#ffffff", $g_primary_color2 );
+		$status_color = alternate_colors( $i, '#ffffff', $g_primary_color2 );
 
 		# grab the bugnote count
 		$bugnote_count = get_bugnote_count( $v_id );
 
 		# grab the project name
-		$project_name = get_project_field($v_project_id,"NAME");
+		$project_name = get_project_field( $v_project_id, 'name' );
 
 		$query = "SELECT MAX(last_modified)
 				FROM $g_mantis_bugnote_table
@@ -362,12 +362,12 @@
 ?>
 <tr>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
-		<?php echo get_enum_element( "priority", $v_priority ) ?>
+		<?php echo get_enum_element( 'priority', $v_priority ) ?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_id ?>
 		<?php # type project name if viewing 'all projects'?>
-		<?php if ( "0000000" == $g_project_cookie_val ) {?>
+		<?php if ( '0000000' == $g_project_cookie_val ) {?>
 		<BR><?php print "[$project_name]"; }?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
@@ -377,10 +377,10 @@
 					strtotime( "-$f_highlight_changed hours" ) ) {
 					PRINT "<span class=\"bold\">$bugnote_count</span>";
 				} else {
-					PRINT "$bugnote_count";
+					echo $bugnote_count;
 				}
 			} else {
-				echo "&nbsp;";
+				PRINT '&nbsp;';
 			}
 		?>
 	</td>
@@ -395,9 +395,9 @@
 			# print username instead of status
 			if (( ON == $g_show_assigned_names )&&( $v_handler_id > 0 )&&
 				( $v_status!=CLOSED )&&( $v_status!=RESOLVED )) {
-				echo "(".get_user_info( $v_handler_id, "username" ).")";
+				echo '('.get_user_info( $v_handler_id, 'username' ).')';
 			} else {
-				echo get_enum_element( "status", $v_status );
+				echo get_enum_element( 'status', $v_status );
 			}
 		?>
 	</td>
@@ -408,7 +408,7 @@
 
 				PRINT "<span class=\"bold\">$t_last_updated</span>";
 			} else {
-				PRINT "$t_last_updated";
+				ehco "$t_last_updated;
 			}
 		?>
 	</td>

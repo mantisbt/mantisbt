@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -34,9 +34,9 @@
 <?php
 	for ($i=0;$i<$num_files;$i++) {
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
-		$v_diskfile 	= str_replace( $DOCUMENT_ROOT, "", $v_diskfile );
-		$v_diskfile		= dirname( $v_diskfile )."/".rawurlencode( $v_filename );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$v_diskfile 	= str_replace( $DOCUMENT_ROOT, '', $v_diskfile );
+		$v_diskfile		= dirname( $v_diskfile ).'/'.rawurlencode( $v_filename );
 		$v_filesize 	= number_format( $v_filesize );
 		$v_title 		= string_display( $v_title );
 		$v_description 	= string_display( $v_description );
@@ -50,7 +50,7 @@
 		PRINT "<a href=\"$g_file_download?f_id=$v_id&f_type=doc\">$v_title</a> ($v_filesize bytes)";
 
 		if ( access_level_check_greater_or_equal( MANAGER ) ) {
-			print_bracket_link( $g_proj_doc_edit_page."?f_id=".$v_id, "edit" );
+			print_bracket_link( $g_proj_doc_edit_page.'?f_id='.$v_id, 'edit' );
 		}
 ?>
 		<br />

@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -16,7 +16,7 @@
 			WHERE id='$c_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v" );
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 	$v_title		= string_edit_text( $v_title );
 	$v_description 	= string_edit_textarea( $v_description );

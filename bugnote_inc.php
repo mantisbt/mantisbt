@@ -10,7 +10,7 @@
 ?>
 <?php
 	# grab the user id currently logged in
-	$t_user_id = get_current_user_field( "id " );
+	$t_user_id = get_current_user_field( 'id' );
 
 	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
@@ -43,7 +43,7 @@
 	for ( $i=0; $i < $num_notes; $i++ ) {
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v3" );
+		extract( $row, EXTR_PREFIX_ALL, 'v3' );
 		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
 
 		# grab the bugnote text and id and prefix with v3_
@@ -73,11 +73,11 @@
 				# check access level
 				# only admins and the bugnote creator can delete this bugnote
 				# bug must be open to be editable
-				if ( get_bug_field( $f_id, "status" ) < RESOLVED ) {
+				if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
 					if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 						( $v3_reporter_id == $t_user_id )) {
-						print_bracket_link( $g_bugnote_edit_page."?f_bugnote_text_id=".$v3_bugnote_text_id."&f_id=".$f_id."&f_bugnote_id=".$v3_id, $s_bugnote_edit_link );
-						print_bracket_link( $g_bugnote_delete."?f_bugnote_id=".$v3_id."&f_id=".$f_id, $s_delete_link );
+						print_bracket_link( $g_bugnote_edit_page.'?f_bugnote_text_id='.$v3_bugnote_text_id.'&f_id='.$f_id.'&f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
+						print_bracket_link( $g_bugnote_delete.'?f_bugnote_id='.$v3_id.'&f_id='.$f_id, $s_delete_link );
 					}
 				}
 			?>

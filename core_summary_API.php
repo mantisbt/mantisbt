@@ -19,7 +19,7 @@
 		$enum_count = count( $t_arr );
 
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
 		else $specific_where = " project_id='$g_project_cookie_val'";
 
 		for ($i=0;$i<$enum_count;$i++) {
@@ -55,23 +55,22 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$t_enum_count = str_pd( $t_enum_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$open_bug_count		= str_pd( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count	= str_pd( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count	= str_pd( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$t_enum_count		= str_pd( $t_enum_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\">";
+			PRINT '<tr align="center">';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo get_enum_element( $p_enum, $t_s[0] );
-				PRINT "</td>";
+				PRINT '</td>';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
-					#PRINT "$open_bug_count $resolved_bug_count $closed_bug_count $t_enum_count";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $t_enum_count";
-				PRINT "</td>";
-			PRINT "</tr>";
+				PRINT '</td>';
+			PRINT '</tr>';
 		} # end for
 	}
 	# --------------------
@@ -83,7 +82,7 @@
 		$c_time_length = (integer)$p_time_length;
 
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
 		else $specific_where = " project_id='$g_project_cookie_val'";
 
 		$query = "SELECT COUNT(*)
@@ -105,14 +104,14 @@
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\">";
+			PRINT '<tr align="center">';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $p_date_array[$i];
-				PRINT "</td>";
+				PRINT '</td>';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $t_enum_count;
-				PRINT "</td>";
-			PRINT "</tr>";
+				PRINT '</td>';
+			PRINT '</tr>';
 		} # end for
 	}
 	# --------------------
@@ -134,12 +133,12 @@
 		$user_count = db_num_rows( $result );
 
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
 		else $specific_where = " project_id='$g_project_cookie_val'";
 
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -171,22 +170,22 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$open_bug_count		= str_pd( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count	= str_pd( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count	= str_pd( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count	= str_pd( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\">";
+			PRINT '<tr align="center">';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $v_username;
-				PRINT "</td>";
+				PRINT '</td>';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
-				PRINT "</td>";
-			PRINT "</tr>";
+				PRINT '</td>';
+			PRINT '</tr>';
 			} #end if
 		} # end for
 	}
@@ -200,7 +199,7 @@
 				$g_summary_pad;
 
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
 		else $specific_where = " project_id='$g_project_cookie_val'";
 
 		$t_view = VIEWER;
@@ -215,8 +214,8 @@
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 
-			$v_id = $row["reporter_id"];
-			$v_username = get_user_info( $v_id, "username" );
+			$v_id = $row['reporter_id'];
+			$v_username = get_user_info( $v_id, 'username' );
 
 			$t_res_val = RESOLVED;
 			$t_clo_val = CLOSED;
@@ -246,22 +245,22 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$open_bug_count		= str_pd( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count	= str_pd( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count	= str_pd( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count	= str_pd( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\">";
+			PRINT '<tr align="center">';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $v_username;
-				PRINT "</td>";
+				PRINT '</td>';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
-				PRINT "</td>";
-			PRINT "</tr>";
+				PRINT '</td>';
+			PRINT '</tr>';
 		} # end for
 	}
 	# --------------------
@@ -273,7 +272,7 @@
 				$g_summary_pad;
 
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
 		else $specific_where = " project_id='$g_project_cookie_val'";
 
 		$query = "SELECT category
@@ -285,7 +284,7 @@
 
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_category = $row["category"];
+			$t_category = $row['category'];
 
 			$t_category2 = addslashes( $t_category );
 			$query = "SELECT COUNT(*)
@@ -317,22 +316,22 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
-			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$open_bug_count		= str_pd( $open_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count	= str_pd( $resolved_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count	= str_pd( $closed_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count	= str_pd( $total_bug_count, '&nbsp;', $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
 			$t_bgcolor = alternate_colors( $i );
 
-			PRINT "<tr align=\"center\">";
+			PRINT '<tr align="center">';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					echo $t_category;
-				PRINT "</td>";
+				PRINT '</td>';
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
-				PRINT "</td>";
-			PRINT "</tr>";
+				PRINT '</td>';
+			PRINT '</tr>';
 		} # end for
 	}
 	# --------------------

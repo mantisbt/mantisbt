@@ -8,7 +8,7 @@
 	# This file sets the bug to the chosen resolved state then gives the
 	# user the opportunity to enter a reason for the closure
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -20,7 +20,7 @@
 				WHERE id='$c_id'";
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v" );
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
 	if ( PRIVATE == $v_view_state ) {
 		check_access( $g_private_bug_threshold );
 	}
@@ -30,9 +30,9 @@
 	check_bug_exists( $f_id );
 
 	# get user information
-	$u_id = get_current_user_field( "id " );
+	$u_id = get_current_user_field( 'id' );
 
-	if ( "add" == $f_action ) {
+	if ( 'add' == $f_action ) {
 	# Make sure we aren't already monitoring this bug
  		$query = "SELECT *
  		   	FROM $g_mantis_bug_monitor_table
@@ -50,7 +50,7 @@
    			$result = db_query($query);
 		}
 
-	} elseif ( "delete" == $f_action ) {
+	} elseif ( 'delete' == $f_action ) {
 
 		# Delete monitoring record
    	 $query = "DELETE

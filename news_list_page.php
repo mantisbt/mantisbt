@@ -4,7 +4,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( "core_API.php" ) ?>
+<?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
@@ -26,7 +26,7 @@
     # Loop through results
 	for ($i=0;$i<$news_count;$i++) {
 		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, "v" );
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$v_headline 	= string_display( $v_headline );
 		$v_date_posted 	= date( $g_complete_date_format, $v_date_posted );
@@ -34,8 +34,8 @@
 		# grab the username and email of the poster
     	$row2 = get_user_info_by_id_arr( $v_poster_id );
 		if ( $row2 ) {
-			$t_poster_name	= $row2["username"];
-			$t_poster_email	= $row2["email"];
+			$t_poster_name	= $row2['username'];
+			$t_poster_email	= $row2['email'];
 		}
 
 		PRINT "<li><span class=\"news-date\">$v_date_posted</span> - <span class=\"news-headline\"><a href=\"$g_news_view_page?f_id=$v_id\">$v_headline</a></span> - <a class=\"news-email\" href=\"mailto:$t_poster_email\">$t_poster_name</a>";
