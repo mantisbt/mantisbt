@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.13 2002-09-05 22:25:49 jfitzell Exp $
+	# $Id: email_api.php,v 1.14 2002-09-06 06:11:52 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -15,7 +15,7 @@
 
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
-	function is_valid_email( $p_email ) {
+	function email_is_valid( $p_email ) {
 		global $g_validate_email, $g_check_mx_record;
 
 		# if we don't validate then just accept
@@ -52,6 +52,14 @@
 		}
 		# Everything failed.  Bad email.
 		return false;
+	}
+	# --------------------
+	# Check if the email address is valid
+	#  return true if it is, trigger an ERROR if it isn't
+	function email_ensure_valid( $p_email ) {
+		if ( ! email_is_valid( $p_email ) ) {
+			trigger_error( ERROR_EMAIL_INVALID, ERROR );
+		}
 	}
 	# --------------------
 	# get_notify_flag

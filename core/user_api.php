@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.22 2002-09-05 23:44:35 jfitzell Exp $
+	# $Id: user_api.php,v 1.23 2002-09-06 06:11:52 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -249,6 +249,7 @@
 		$c_enabled		= db_prepare_bool( $p_enabled );
 
 		user_ensure_name_unique( $p_username );
+		email_ensure_valid( $p_email );
 
 		$t_seed = $p_email.$p_username;
 		$t_cookie_string	= create_cookie_string( $t_seed );

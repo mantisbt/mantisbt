@@ -191,6 +191,9 @@
 	# ERROR_BUG_*
 	define( 'ERROR_BUG_NOT_FOUND',					1100 );
 
+	# ERROR_EMAIL_*
+	define( 'ERROR_EMAIL_INVALID',					1200 );
+
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM', 2);

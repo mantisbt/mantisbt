@@ -28,7 +28,7 @@
 	}
 
 	# Check for a properly formatted email with valid MX record
-	if ( !is_valid_email( $f_email ) ) {
+	if ( !email_is_valid( $f_email ) ) {
 		echo $f_email.' '.lang_get( 'invalid_email' ).'<br />';
 		echo '<a href="signup_page.php">'.lang_get( 'proceed' ).'</a>';
 		exit;
