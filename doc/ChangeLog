@@ -1,6 +1,6 @@
 Mantis
 
-2002.06.??  -   0.18.0
+2002.06.??  -  0.18.0
 
  * Fixed problem in core_API.php where constants were used before declaration
  * Fixed problem with ambiguous column names in queries when using the text search or applying filters
@@ -13,7 +13,7 @@ Mantis
  * Updated Russian localization.
  * Updated Romanian localization.
 
-2002.05.19  -   0.17.3
+2002.05.19  -  0.17.3
 
  * Bumped version number.
  * Fixed problem with CSV not downloading.
@@ -34,7 +34,7 @@ Mantis
  * Removed print_user_option_list() (unused).
  * Closed a security problem in account_update.php.
 
-2002.05.12  -   0.17.2
+2002.05.12  -  0.17.2
 
  * Fixed error in set_project where setting a project would result in a loop.
  * Fixed account profiles to check for blank inputs.
@@ -123,7 +123,7 @@ Mantis
  * Updated Copyright to 2002.
  * Added $g_use_javascript to default/config_inc1.php (SC)
 
-2002.03.15  -   0.17.1
+2002.03.15  -  0.17.1
 
  * Fixed missing closing span tag in view_bug_*page.php.
  * Fixed advanced summaries (jpgraph) for general statistics for all projects.
@@ -177,7 +177,7 @@ Mantis
  * Added blank category check when adding project category.
  * Added blank version check when adding project version.
 
-2002.01.23  -   0.17.0
+2002.01.23  -  0.17.0
 
  * Fixed potential problems with proxies and HTTP_REFERER not being properly sent.
  * Fixed bugnote editing to be unavailable when bug is resolved or closed.
@@ -201,7 +201,7 @@ Mantis
  * Modified error messages to use $MANTIS_ERROR array.
  * Modified code to update last_updated/last_modified fields for bugs, bugnotes, and news.
  * Modified core_API.php and config_inc.php to use a default/ directory in
-   addition to a config_inc.php placed in the root directory.
+  addition to a config_inc.php placed in the root directory.
  * Added view by page feature.
  * Added edit new link in news update page.
  * Added file upload into database.
@@ -229,7 +229,7 @@ Mantis
  * Moved documents into doc/ subdirectory.
  * Moved language files into lang/ subdirectory.
 
-2001.12.01  -   0.16.1
+2001.12.01  -  0.16.1
 
  * Fixed SQL error when reporting bug in a private project.
  * Fixed problem where upgrade scripts were not executed for 0.16.0 upgrade.
@@ -242,7 +242,7 @@ Mantis
  * Updated French localization.
  * Added $g_allow_close_immediately to toggle "close immediately" option when resolving a bug.
 
-2001.11.27  -   0.16.0
+2001.11.27  -  0.16.0
 
  * Fixed minor HTML errors in core_html_API.php.
  * Fixed the view, report, and update pages to honor the forces advanced/simple modes.
@@ -270,7 +270,7 @@ Mantis
  * Added a empty string check before the AddBCC function when buidling the bcc list
  * Added a check to automatically add the trailing slash to the file path.
 
-2001.11.04  -   0.15.12
+2001.11.04  -  0.15.12
 
  * Added Swedish localization
  * Added print bugs feature
@@ -278,7 +278,7 @@ Mantis
  * Fixed problem with the same password being generated over and over.
  * Fixed problem with the same cookie being generated over and over.
 
-2001.10.28  -   0.15.11
+2001.10.28  -  0.15.11
 
  * Modified advanced report's "assign to" drop down to sort alphabetically
  * Modified bug_update script to send emails and behave better
@@ -287,17 +287,17 @@ Mantis
  * Fixed the post-report forms to redirect properly even if a proxy clears the HTTP_REFERER
  * Added g_use_iis global to workaround an IIS bug with header/Location calls
 
-2001.10.28  -   0.15.10
+2001.10.28  -  0.15.10
 
  * Fixed problem with not being able to uncheck "hide closed" bugs filter checkbox
  * Fixed error with warnings on sending email
  * Fixed problem with being kicked out when editing bugnote
 
-2001.10.27  -   0.15.9
+2001.10.27  -  0.15.9
 
  * Fixed problem with warning on view filters.
 
-2001.10.26  -   0.15.8
+2001.10.26  -  0.15.8
 
  * Fixed problem with $g_manage_cookie not being unset on logout
  * Fixed error in db_upgrade.sql ( nul; should be null; )
@@ -326,18 +326,18 @@ Mantis
  * Removed print_handler_option_list()
  * Removed view_all_assigned/unassigned/report_bug_page and associated variables.
 
-2001.08.28  -   0.15.7
+2001.08.28  -  0.15.7
 
  * Fixed problem with account prefs not being updated.
 
-2001.08.27  -   0.15.6
+2001.08.27  -  0.15.6
 
  * Fixed potential security hole with file uploads.  Users can potentially
-   copy files on server to be available via the browser.  This requires
-   PHP 3.0.17 and higher.  Please consider disabling file uploads to disk
-   if you cannot upgrade versions.
+  copy files on server to be available via the browser.  This requires
+  PHP 3.0.17 and higher.  Please consider disabling file uploads to disk
+  if you cannot upgrade versions.
 
-2001.08.26  -   0.15.5
+2001.08.26  -  0.15.5
 
  * Fixed sort problems on view_all_bugs_page.php3
  * Fixed hide inactive problem in manage_page.php3
@@ -357,7 +357,7 @@ Mantis
  * Added subject to emails when clicked on in the view_bug page.
  * Fixed "Assign To" drop down lists to reflect project user mappings.
 
-2001.08.19  -   0.15.4
+2001.08.19  -  0.15.4
 
  * Added pre-selecting project. Hint: login_page.php3?f_project_id=0000001
  * Fixed Warning: Missing argument 5 for print_manage_user_sort_link() in core_print_API.php
@@ -369,7 +369,7 @@ Mantis
  * Fixed email error regarding devleoper notification on bug submissions.
  * Updated configuration document.
 
-2001.07.29  -   0.15.3
+2001.07.29  -  0.15.3
 
  * Added wordwrap() to text formatting in email messages.  Affects description and bugnotes.
  * Added new function process_plain_password().  Not used yet.
@@ -388,7 +388,7 @@ Mantis
  * Removed extra $v_summary = string_display() line in view_all_inc.php
  * Cleaned up email validation code
 
-2001.07.13  -   0.15.2
+2001.07.13  -  0.15.2
 
  * Fixed explode() error in view_all_unassign_bug.php3
  * Fixed variable error in report_bug_page.php3.  Affected report stay checkbox.
@@ -398,7 +398,7 @@ Mantis
  * Modified set_project.php3 to redirect back to the same page if a view_all* page or the summary page.
  * Added wrap="virtual" tags to < textarea> for old browser users.
 
-2001.07.05  -   0.15.1
+2001.07.05  -  0.15.1
 
  * Added configuration.html
  * Fixed error in print_footer()
@@ -409,7 +409,7 @@ Mantis
  * Fixed localization error in summary_page.php3
  * Fixed localization error in menu_inc.php3
 
-2001.07.02  -   0.15.0
+2001.07.02  -  0.15.0
 
  * Renamed span.bugnote_delete to span.bugnotedelete for css conformance
  * Added "" around all width and bgcolor tags for standards compliance
@@ -417,11 +417,11 @@ Mantis
  * Renamed many files to shorten filename length (for MacOS)
  * Added new functions for news_API
  * Switched from TIMESTAMP to DATETIME in the date_created/date_posted fields,
-   made appropriate changes in code
+  made appropriate changes in code
  * Switched from ENUM to INT(2).  Now use hash to map from id to text
  * Reworked authentication check at top of pages
  * Fixed several places where manager was omitted when it should have been
-   selected
+  selected
  * Fixed error in documentation.html tags
  * Changed duplicate bug option list to text
  * Added SQL queires to make sure date() runtime errors disappear
@@ -429,7 +429,7 @@ Mantis
  * Removed show_source capability for anyone but admins
  * Removed strtotime() from all bug view_all* pages
  * Added better messages for when adding and updating duplicate categories
-   and versions
+  and versions
  * Added count details to view_all* pages
  * Moved bugnote_add page into standard bugnote page
  * Added icon support
@@ -445,7 +445,7 @@ Mantis
  * Added checks to prevent accessing of non-existant bugs
  * Fixed error where "does not exist" was incorrectly reported as the handler
  * Modified repot_bug to allow a user to choose to add more bugs or return
-   to view bug page
+  to view bug page
  * Added View Unassigned mode
  * Added urlencode/decode for project category and versions
  * Added prune functionality for old accounts that have never been logged into
@@ -462,7 +462,7 @@ Mantis
  * Added check for duplicate project error message when adding new projects
  * Many Many more... (sorry, I can't remember all of them)
 
-2001.03.06  -   0.14.8
+2001.03.06  -  0.14.8
 
  * Fixed password matching problem with manage create new user
  * Fixed email bug for assigning bug
@@ -471,7 +471,7 @@ Mantis
  * Improved g_show_project_in_title
  * Updated portuguese trnaslation to handle email text better
 
-2001.03.05  -   0.14.7
+2001.03.05  -  0.14.7
 
  * Added Dutch translation
  * Added Norwegian translation
@@ -490,20 +490,20 @@ Mantis
  * Fixed product version not being logged in bug report
  * Fixed SQL error link not having "mailto:"
 
-2001.02.23  -   0.14.6
+2001.02.23  -  0.14.6
 
  * Added Italian translation
  * Added French translation
  * Added project name in email
  * Added g_reopen_bug_threshold to prevent unprivileged users from reopening
-   bugs
+  bugs
  * Fixed error with version editing
  * Fixed error with direct assign to user not working on report
  * Fixed error with string $s_add_project_button in Portuguese
  * Modified Portuguese s_view_status
  * Changed = in css_inc.php to : (specifically for font sizes)
 
-2001.02.19  -   0.14.5
+2001.02.19  -  0.14.5
 
  * Added updated German translation
  * Modified news add and news update to behave better
@@ -511,11 +511,11 @@ Mantis
  * Fixed error on category update
  * Fixed error in password reset
  * Renamed g_view_bug_all_page, g_view_user_reported_bug_page,
-   g_view_user_assigned_bug_page
+  g_view_user_assigned_bug_page
  * Removed duplicate global page references
  * Updated all translations with some missing localization strings
 
-2001.02.17  -   0.14.4
+2001.02.17  -  0.14.4
 
  * Fixed erroneous error message when signing up for new account
  * Fixed error with warning in project_menu_page
@@ -527,21 +527,21 @@ Mantis
  * Added email to assignee upon assignment
  * Added support for report form to remember input if error occurs
  * Added crude test file to check database connection and config settings
-   (check.php3)
+  (check.php3)
  * Added some integration with the documentation and the report form
  * Added include for top and bottom of page.  This lets users add
-   customizations
+  customizations
  * Added Spanish and Portuguese localization
  * Renamed g_login_url to g_mantis_url
  * Renamed string files to have .txt extension
  * Obsoleted s_hit_back_msg
 
-2001.02.14  -   0.14.3
+2001.02.14  -  0.14.3
 
  * Fixed error in upgrade.php3 (date_submitted in mantis_user_table query
-   should be date_created)
+  should be date_created)
 
-2001.02.14  -   0.14.2
+2001.02.14  -  0.14.2
 
  * Fixed default category in update mode to display correctly
  * Fixed parse error in manage_user_reset.php3
@@ -550,13 +550,13 @@ Mantis
  * Added option to disable email validation (g_validate_email)
  * Added project name and bugid in email subject
 
-2001.02.12  -   0.14.1
+2001.02.12  -  0.14.1
 
  * Fixed error where duplicate categories were added
  * Fixed error in advanced_bug_view where bug delete had no confirmation
  * Fixed error in view pages for sort by category
 
-2001.02.10	-	0.14.0
+2001.02.10  -  0.14.0
 
  * Fixed error in print_html_bottom
  * Fixed error in db_upgrade.sql, changed "need info" to "feedback"
@@ -588,23 +588,23 @@ Mantis
  * Tweaked manage menu
  * Tweaked css_inc.php
  * Tweaked the bug list view for better indication of which view the user
-   is viewing
+  is viewing
  * Removed cols=7 in the view bug in list form pages (Netscape problem)
  * Removed mysql_error_page and references
  * Determined that suspected mysql bug about date updating was proper behavior
-   for timestamps
+  for timestamps
 
-2000.12.26	-	0.13.1
+2000.12.26  -  0.13.1
 
  * Fixed bug in bug_delete_page.php3 and manage_user_delete_page.php3
 
-2000.12.25	-	0.13.0
+2000.12.25  -  0.13.0
 
  * Fixed bug in vote adding with incorrect variable name.
  * Fixed bug where bugnote text not properly deleted when bug deleted
  * Fixed manage product versions update redirect
  * Fixed another problem with the date created being updated improperly when
-   dealing with bugnotes.
+  dealing with bugnotes.
  * Fixed show source problem
  * Fixed problem with advanced view showing the wrong dates
  * Uncluttered large portions of code
@@ -621,47 +621,47 @@ Mantis
  * Modified the appearance of the advanced view and update
  * Updated documentation.html
  * Split the account pref modifications into two separate files:
-   account_prefs_update.php3 and account_prefs_reset.php3
+  account_prefs_update.php3 and account_prefs_reset.php3
  * Removed get_current_user_id() and replaced with calls to
-   get_current_user_field( "id" )
+  get_current_user_field( "id" )
  * Removed db_mysql_error()
  * Renamed all mysql_ functions to db_ functions (prepping for db_abstraction)
  * Removed $g_required_field_color and replaced it with a span element in
-   css_inc.php
+  css_inc.php
  * Removed all FONT tags and replaced them with SPAN and CSS formatting
  * Removed print_footer() call on logout_page.php3
 
-2000.12.20	-	0.12.0
+2000.12.20  -  0.12.0
 
  * Fixed problem with viewing filters not working with Netscape
  * Tweaked the string_edit() function
  * Added $g_show_login_date_info and the ability to show who is logged in and
-   the current time
+  the current time
  * Modified bugnotes to be ordered by date_submitted
  * Added protection to prevent anyone from deleting bugnotes
  * Used LAST_INSERT_ID() to ensure that bug and bugnote insertion is correct
  * Reporting a bug now stores a link to the account profile (if chosen)
  * The information from the profile is displayed (if chosen at report time) in
-   the advanced bug view
+  the advanced bug view
  * Added a hide resolved viewing filter option
  * Summary shows time statistics for resolved bugs
  * Added support to show bugs reported by and assigned to the logged in user.
  * Added view_user_assigned_bug_page.php3 and view_user_reported_bug_page.php3
-   and the corresponding global variables
+  and the corresponding global variables
  * Tweaked the bug update and bugnote update and delete functions to redirect
-   to the user chosen default viewing level page
+  to the user chosen default viewing level page
 
-2000.12.15	-	0.11.1
+2000.12.15  -  0.11.1
 
  * Added projection and eta to be passed as hidden info by the simple update
-   page.
+  page.
  * Fixed a missing < /TD> tag on the report bug pages.  Messed up old 4.x unix
-   Netscape.
+  Netscape.
  * Modified the priority to print counts of all bugs.
  * Wrapped the global cookie _val variables in if (isset()) blocks.  Seemed to
-   cause some troubles on some setups.
+  cause some troubles on some setups.
 
-2000.12.12	-	0.11.0
+2000.12.12  -  0.11.0
 
  * Profiles can be used for advanced bug submission
  * Added summary by date
@@ -671,7 +671,7 @@ Mantis
  * Added several ; in core_API.php that caused errors on some servers
  * Added view next/prev XYZ bugs on bug viewing page
  * Added a string_display() function to prevent HTML tags from screwing up
-   display
+  display
  * Added version editing capability
  * Added account preferences
  * Added changed in last X hours option
@@ -684,26 +684,26 @@ Mantis
  * Added Docs to the menu
  * Fixed bug with Bugnote Add button showing up in the wrong places
  * Fixed bug with SQL queries updating both submitted and last updated dates on
-   bugs
+  bugs
  * Fixed bug with SQL queries updating both submitted and last access dates on
-   users
+  users
  * Modified version to be an enum.
  * Modified ordering methods in manage account
  * Modified viewing preferences
  * Made enum displays (category, status, etc) easier to maintain via
-   print_lists()
+  print_lists()
  * Renamed access_level_check_greater() to
-   access_level_check_greater_or_equal()
+  access_level_check_greater_or_equal()
  * Renamed $g_bug_view_all_page $g_bug_view_all_page $g_bug_view_all_page
-   to      $g_view_bug_all_page $g_view_bug_page $g_view_bug_advanced_page
+  to    $g_view_bug_all_page $g_view_bug_page $g_view_bug_advanced_page
  * Renamed corresponding .php3 files
  * Refined view next/prev bugs and news items
  * Split manage user actions into separate files
  * Removed the destructive DROP table in db_generate.sql
  * Removed view_prefs_page.php3 and view_prefs_update.php3 and corresponding
-   cookie variables
+  cookie variables
 
-2000.12.06	-	0.10.2
+2000.12.06  -  0.10.2
 
  * Fixed Reporter Field on update page
  * Fixed variable error preventing Bugnote addition
@@ -713,13 +713,13 @@ Mantis
  * Fixed a few issues with the Advanced bug view
  * Tidied up most of the code
  * Temporarily 'solved' (mostly) a serious issue with consistency on
-   bugnote and bug report additions
+  bugnote and bug report additions
 
-2000.12.03	-	0.10.1
+2000.12.03  -  0.10.1
 
  * Fixed some category bugs
 
-2000.12.03	-	0.10.0
+2000.12.03  -  0.10.0
 
  * Moved constant config settings to config_inc.php3
  * Better news formatting
@@ -731,13 +731,13 @@ Mantis
  * Viewing filters
  * supports php and php3 extensions (php3/php4)
 
-2000.12.01	-	0.9.1
+2000.12.01  -  0.9.1
 
  * Fixed a link
  * Fixed reporter not showing up properly
  * The "enabled" flag on accounts works
 
-2000.12.01	-	0.9.0
+2000.12.01  -  0.9.0
 
  * User management
  * Account maintenance
