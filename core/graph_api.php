@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.23 2004-12-08 18:25:02 thraxisp Exp $
+	# $Id: graph_api.php,v 1.24 2004-12-09 19:08:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -832,7 +832,8 @@
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
- 			$t_date = db_unixtimestamp( $row['date_submitted'] );
+			# rationalise the timestamp to a day to reduce the amount of data
+ 			$t_date = db_unixtimestamp( $row['date_submitted'] ) / 86400;
 
 			if ( isset( $metrics[$t_date] ) ){
 				$metrics[$t_date][0]++;
@@ -841,37 +842,31 @@
 			}
 		}
 
-		### Get all the resolved dates
-		$query = "SELECT last_updated, id, status
-			FROM $t_bug_table
-			WHERE $specific_where AND
-			status >='$t_res_val'
-			ORDER BY last_updated";
+		### Get all the dates where a transition from not resolved to resolved may have happened
+		#    also, get the last updated date for the bug as this may be all the information we have
+		$query = "SELECT MAX(mantis_bug_history_table.date_modified) as h_last_updated, mantis_bug_table.last_updated as last_updated 
+			FROM mantis_bug_table LEFT JOIN mantis_bug_history_table 
+			ON mantis_bug_table.id = mantis_bug_history_table.bug_id 
+			WHERE ( mantis_bug_history_table.new_value >= '$t_res_val'
+					AND mantis_bug_table.status >= '$t_res_val' 
+					AND mantis_bug_history_table.old_value < '$t_res_val' 
+					AND mantis_bug_history_table.field_name = 'status' )
+				OR mantis_bug_table.status >= '$t_res_val'
+			GROUP BY mantis_bug_table.id "; 
 		$result = db_query( $query );
 		$bug_count = db_num_rows( $result );
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_date = db_unixtimestamp( $row['last_updated'] );
-			$t_status = $row['status'];
-			$t_id = $row['id'];
+			# if h_last_updated is NULL, there were no appropriate history records
+			#  (i.e. pre 0.18 data), use last_updated from bug table instead
+			# rationalise the timestamp to a day to reduce the amount of data
+			if (NULL == $row['h_last_updated']) {
+				$t_date = db_unixtimestamp( $row['last_updated'] ) / 86400;
+			} else {
+				$t_date = db_unixtimestamp( $row['h_last_updated'] ) / 86400;
+			}
 
-			# if the status is not the resolved value, it may have passed through the
-			#  status we consider closed (e.g., bug is CLOSED, not RESOLVED)
-			#  we should look for the last time it was RESOLVED in the history
-			if ( $t_status <> $t_res_val ) {
-				$query2 = "SELECT date_modified
-					FROM " . $t_history_table . "
-					WHERE bug_id=$t_id AND type=" . NORMAL_TYPE . 
-							" AND field_name='status' AND new_value='$t_clo_val'
-					ORDER BY date_modified DESC";
-				$result2 = db_query( $query2 );
-				if ( db_num_rows( $result2 ) >= 1 ) {
-					# if any were found, read the first (newest) one and update the timestamp
-					$row2 = db_fetch_array( $result2 );
-					$t_date   = db_unixtimestamp( $row2['date_modified'] );
-				}
-			}		
 			if ( isset( $metrics[$t_date] ) ){
 				$metrics[$t_date][1]++;
 			} else {
@@ -903,12 +898,9 @@
 
 		error_check( count($metrics), lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
 		
-		if ( 0 == count($metrics) ) {
-			return;
-		}
 		foreach ($metrics as $i=>$vals) {
 			if ( $i > 0 ) {
-				$plot_date[] = $i;
+				$plot_date[] = $i * 86400;
 				$reported_plot[] = $metrics[$i][0];
 				$resolved_plot[] = $metrics[$i][1];
 				$still_open_plot[] = $metrics[$i][2];
@@ -950,7 +942,7 @@
 		$graph->Add($p2);
 
 		if ( ON == config_get( 'show_queries_count' ) ) {
-			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique)' );
+			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)');
 		}
 		$graph->Stroke();
 	}
