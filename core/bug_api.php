@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.15 2002-10-23 04:54:01 jfitzell Exp $
+	# $Id: bug_api.php,v 1.16 2002-10-27 22:53:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -540,14 +540,23 @@
 	}
 	# --------------------
 	# resolve the given bug
-	function bug_resolve( $p_bug_id, $p_resolution, $p_bugnote_text='' ) {
+	function bug_resolve( $p_bug_id, $p_resolution, $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
 		bug_set_field( $p_bug_id, 'status', RESOLVED );
 		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
 
+		if ( null !== $p_duplicate_id ) {
+			bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
+		}
+
+		if ( null == $p_handler_id ) {
+			$p_handler_id = auth_get_current_user_id();
+		}
+		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
+
 		# Add bugnote if supplied
-		if ( $p_bugnote_text != '' ) {
+		if ( '' != $p_bugnote_text ) {
 			bugnote_add( $p_bug_id, $p_bugnote_text );
 		}
 
@@ -564,7 +573,7 @@
 		bug_set_field( $p_bug_id, 'resolution', REOPENED );
 
 		# Add bugnote if supplied
-		if ( $p_bugnote_text != '' ) {
+		if ( '' != $p_bugnote_text ) {
 			bugnote_add( $p_bug_id, $p_bugnote_text );
 		}
 
