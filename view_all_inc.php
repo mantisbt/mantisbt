@@ -20,7 +20,7 @@
 	$t_sort = $t_filter['sort'];
 	$t_dir = $t_filter['dir'];
 ?>
-<!-- ====================== FILTER FORM ========================= -->
+<?php # -- ====================== FILTER FORM ========================= -- ?>
 <br />
 <form method="post" action="view_all_set.php?f=3">
 <input type="hidden" name="type" value="1" />
@@ -29,7 +29,7 @@
 <input type="hidden" name="page_number" value="<?php echo $f_page_number ?>" />
 <input type="hidden" name="per_page" value="<?php echo $t_filter['per_page'] ?>" />
 <table class="width100" cellspacing="0">
-<!-- Filter Form Header Row -->
+<?php # -- Filter Form Header Row -- ?>
 <tr class="row-category2">
 	<td class="small-caption"><?php echo lang_get( 'reporter' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'assigned_to' ) ?></td>
@@ -40,9 +40,9 @@
 	<td class="small-caption"><?php echo lang_get( 'changed' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'hide_status' ) ?></td>
 </tr>
-<!-- Filter Form Fields -->
+<?php # -- Filter Form Fields -- ?>
 <tr>
-	<!-- Reporter -->
+	<?php # -- Reporter -- ?>
 	<td>
 		<select name="reporter_id">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
@@ -51,7 +51,7 @@
 		</select>
 	</td>
 
-	<!-- Handler -->
+	<?php # -- Handler -- ?>
 	<td>
 		<select name="handler_id">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
@@ -61,7 +61,7 @@
 		</select>
 	</td>
 
-	<!-- Category -->
+	<?php # -- Category -- ?>
 	<td>
 		<select name="show_category">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
@@ -71,7 +71,7 @@
 		</select>
 	</td>
 
-	<!-- Severity -->
+	<?php # -- Severity -- ?>
 	<td>
 		<select name="show_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
@@ -80,7 +80,7 @@
 		</select>
 	</td>
 
-	<!-- Status -->
+	<?php # -- Status -- ?>
 	<td>
 		<select name="show_status">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
@@ -89,17 +89,17 @@
 		</select>
 	</td>
 
-	<!-- Number of bugs per page -->
+	<?php # -- Number of bugs per page -- ?>
 	<td>
 		<input type="text" name="per_page" size="3" maxlength="7" value="<?php echo $t_filter['per_page'] ?>" />
 	</td>
 
-	<!-- Highlight changed bugs -->
+	<?php # -- Highlight changed bugs -- ?>
 	<td>
 		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $t_filter['highlight_changed'] ?>" />
 	</td>
 
-	<!-- Hide closed bugs -->
+	<?php # -- Hide closed bugs -- ?>
 	<td>
 		<input type="checkbox" name="hide_resolved" <?php check_checked( $t_filter['hide_resolved'], 'on' ); ?> />&nbsp;<?php echo lang_get( 'filter_resolved' ); ?>
 		<input type="checkbox" name="hide_closed" <?php check_checked( $t_filter['hide_closed'], 'on' ); ?> />&nbsp;<?php echo lang_get( 'filter_closed' ); ?>
@@ -107,7 +107,7 @@
 </tr>
 
 
-<!-- Search and Date Header Row -->
+<?php # -- Search and Date Header Row -- ?>
 <tr class="row-category2">
 	<td class="small-caption" colspan="2"><?php echo lang_get( 'search' ) ?></td>
 	<td class="small-caption" colspan="2"><!--Start Date--></td>
@@ -116,14 +116,14 @@
 </tr>
 
 
-<!-- Search and Date fields -->
+<?php # -- Search and Date fields -- ?>
 <tr>
-	<!-- Text search -->
+	<?php # -- Text search -- ?>
 	<td colspan="2">
 	    <input type="text" size="16" name="search" value="<?php echo $t_filter['search']; ?>" />
 	</td>
 
-	<!-- Start date -->
+	<?php # -- Start date -- ?>
 	<td class="left" colspan="2">
 	<!--
 		<select name="start_month">
@@ -138,7 +138,7 @@
 	-->
 	</td>
 
-	<!-- End date -->
+	<?php # -- End date -- ?>
 	<td class="left" colspan="2">
 	<!--
 		<select name="end_month">
@@ -153,16 +153,16 @@
 	-->
 	</td>
 
-	<!-- SUBMIT button -->
+	<?php # -- SUBMIT button -- ?>
 	<td class="right" colspan="2">
 		<input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
 </tr>
 </table>
 </form>
-<!-- ====================== end of FILTER FORM ========================= -->
+<?php # -- ====================== end of FILTER FORM ========================= -- ?>
 
-<!-- ====================== BUG LIST ========================= -->
+<?php # -- ====================== BUG LIST ========================= -- ?>
 <?php
 	$col_count = 10;
 
@@ -174,9 +174,9 @@
 <br />
 <form method="get" action="bug_actiongroup_page.php">
 <table class="width100" cellspacing="1">
-<!-- Navigation header row -->
+<?php # -- Navigation header row -- ?>
 <tr>
-	<!-- Viewing range info -->
+	<?php # -- Viewing range info -- ?>
 	<td class="form-title" colspan="<?php echo $col_count - 2; ?>">
 		<?php echo lang_get( 'viewing_bugs_title' ) ?>
 		<?php
@@ -190,7 +190,7 @@
 			echo "($v_start - $v_end / $t_bug_count)";
 		?>
 
-		<!-- Print and Export links -->
+		<?php # -- Print and Export links -- ?>
 		<span class="small">
 			<?php
 				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
@@ -198,75 +198,75 @@
 				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
 			?>
 		</span>
-		<!-- end Print and Export links -->
+		<?php # -- end Print and Export links -- ?>
 	</td>
 
-	<!-- Page number links -->
+	<?php # -- Page number links -- ?>
 	<td class="right" colspan="2">
 		<span class="small">
 			<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number ) ?>
 		</span>
 	</td>
 </tr>
-<!-- Bug list column header row -->
+<?php # -- Bug list column header row -- ?>
 <tr class="row-category">
 	<td class="center" width="2%">&nbsp;</td>
 
 	<td class="center" width="2%">&nbsp;</td>
 
-	<!-- Priority column -->
+	<?php # -- Priority column -- ?>
 	<td class="center" width="5%">
 		<?php print_view_bug_sort_link( 'P', 'priority', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'priority' ) ?>
 	</td>
 
-	<!-- Bug ID column -->
+	<?php # -- Bug ID column -- ?>
 	<td class="center" width="8%">
 		<?php print_view_bug_sort_link( lang_get( 'id' ), 'id', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'id' ) ?>
 	</td>
 
-	<!-- Bugnote count column -->
+	<?php # -- Bugnote count column -- ?>
 	<td class="center" width="3%">
 		#
 	</td>
 
-	<!-- Category column -->
+	<?php # -- Category column -- ?>
 	<td class="center" width="12%">
 		<?php print_view_bug_sort_link( lang_get( 'category' ), 'category', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'category' ) ?>
 	</td>
 
-	<!-- Severity column -->
+	<?php # -- Severity column -- ?>
 	<td class="center" width="10%">
 		<?php print_view_bug_sort_link( lang_get( 'severity' ), 'severity', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'severity' ) ?>
 	</td>
 
-	<!-- Status column -->
+	<?php # -- Status column -- ?>
 	<td class="center" width="10%">
 		<?php print_view_bug_sort_link( lang_get( 'status' ), 'status', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'status' ) ?>
 	</td>
 
-	<!-- Last Updated column -->
+	<?php # -- Last Updated column -- ?>
 	<td class="center" width="12%">
 		<?php print_view_bug_sort_link( lang_get( 'updated' ), 'last_updated', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'last_updated' ) ?>
 	</td>
 
-	<!-- Summary column -->
+	<?php # -- Summary column -- ?>
 	<td class="center" width="38%">
 		<?php print_view_bug_sort_link( lang_get( 'summary' ), 'summary', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'summary' ) ?>
 	</td>
 </tr>
-<!-- Spacer row -->
+<?php # -- Spacer row -- ?>
 <tr>
 	<td class="spacer" colspan="<?php echo $col_count ?>">&nbsp;</td>
 </tr>
 <?php mark_time( 'begin loop' ); ?>
-<!-- Loop over bug rows and create $v_* variables -->
+<?php # -- Loop over bug rows and create $v_* variables -- ?>
 <?php
 	for($i=0; $i < sizeof( $rows ); $i++) {
 		# prefix bug data with v_
@@ -289,9 +289,8 @@
 			$v_bugnote_updated = bug_get_newest_bugnote_timestamp( $v_id );
 		}
 ?>
-<!-- Repeating bug row -->
 <tr bgcolor="<?php echo $status_color ?>">
-	<!-- Checkbox -->
+	<?php # -- Checkbox -- ?>
 <?php
 	if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $v_id ) ) {
 ?>
@@ -304,7 +303,7 @@
 }
 ?>
 	
-	<!-- Pencil shortcut -->
+	<?php # -- Pencil shortcut -- ?>
 	<td class="center">
 	<?php
 		if ( access_has_bug_level( UPDATER, $v_id ) ) {
@@ -315,7 +314,7 @@
 	?>
 	</td>
 
-	<!-- Priority -->
+	<?php # -- Priority -- ?>
 	<td class="center">
 		<?php
 			if ( ON == config_get( 'show_priority_text' ) ) {
@@ -326,12 +325,12 @@
 		?>
 	</td>
 
-	<!-- Bug ID and details link -->
+	<?php # -- Bug ID and details link -- ?>
 	<td class="center">
 		<?php print_bug_link( $v_id ) ?>
 	</td>
 
-	<!-- Bugnote count -->
+	<?php # -- Bugnote count -- ?>
 	<td class="center">
 		<?php
 			if ( $bugnote_count > 0 ) {
@@ -348,7 +347,7 @@
 		?>
 	</td>
 
-	<!-- Category -->
+	<?php # -- Category -- ?>
 	<td class="center">
 		<?php
 			# type project name if viewing 'all projects'
@@ -362,11 +361,11 @@
 			echo $v_category;
 		?>
 	</td>
-	<!-- Severity -->
+	<?php # -- Severity -- ?>
 	<td class="center">
 		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
-	<!-- Status / Handler -->
+	<?php # -- Status / Handler -- ?>
 	<td class="center">
 		<?php
 			echo get_enum_element( 'status', $v_status );
@@ -378,7 +377,7 @@
 			}
 		?>
 	</td>
-	<!-- Last Updated -->
+	<?php # -- Last Updated -- ?>
 	<td class="center">
 		<?php
 			if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
@@ -388,7 +387,7 @@
 			}
 		?>
 	</td>
-	<!-- Summary -->
+	<?php # -- Summary -- ?>
 	<td class="left">
 		<?php
 			echo $v_summary;
@@ -398,13 +397,13 @@
 		 ?>
 	</td>
 </tr>
-<!-- end of Repeating bug row -->
+<?php # -- end of Repeating bug row -- ?>
 <?php
 	}
 ?>
-<!-- ====================== end of BUG LIST ========================= -->
+<?php # -- ====================== end of BUG LIST ========================= -- ?>
 
-<!-- ====================== MASS BUG MANIPULATION ========================= -->
+<?php # -- ====================== MASS BUG MANIPULATION ========================= -- ?>
 	<tr>
 		<td colspan="<?php echo $col_count-2 ?>">
 			<select name="action">
@@ -412,14 +411,14 @@
 			</select>
 			<input type="submit" value="<?php echo 'OK';  ?>" />
 		</td>
-		<!-- Page number links -->
+		<?php # -- Page number links -- ?>
 		<td class="right" colspan="2">
 			<span class="small">
 				<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number ) ?>
 			</span>
 		</td>
 	</tr>
-<!-- ====================== end of MASS BUG MANIPULATION ========================= -->
+<?php # -- ====================== end of MASS BUG MANIPULATION ========================= -- ?>
 </table>
 </form>
 
