@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.40 2003-01-29 00:12:10 vboctor Exp $
+	# $Id: email_api.php,v 1.41 2003-02-09 01:19:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -633,7 +633,8 @@
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='' ) {
 		global $g_from_email, $g_enable_email_notification,
 				$g_return_path_email, $g_use_x_priority,
-				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host;
+				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host,
+				$g_smtp_username, $g_smtp_password;
 
 		# short-circuit if no emails should be sent
 		if ( OFF ==$g_enable_email_notification ) {
@@ -682,6 +683,11 @@
 			$mail->Host     = $g_smtp_host;
 			$mail->From     = $g_from_email;
 			$mail->FromName = '';
+			if ( ! is_blank( $g_smtp_username ) ) {     # Use SMTP Authentication
+				$mail->SMTPAuth = true;
+				$mail->Username = $g_smtp_username;
+				$mail->Password = $g_smtp_password;
+			}
 
 			$t_debug_to = '';
 			# add to the Recipient list

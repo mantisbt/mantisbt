@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.67 2003-02-08 10:29:40 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.68 2003-02-09 01:19:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -199,6 +199,12 @@
 	# This option allows you to use a remote SMTP host.  Must use the phpMailer script
 	# Name of smtp host, needed for phpMailer, taken from php.ini
 	$g_smtp_host			= 'localhost';
+
+	# These options allow you to use SMTP Authentication when you use a remote
+	# SMTP host with phpMailer.  If smtp_username is not '' then the username
+	# and password will be used when logging in to the SMTP server.
+	$g_smtp_username = '';
+	$g_smtp_password = '';
 
 	# Specify whether e-mails should be sent with the category set or not.  This is tested
 	# with Microsoft Outlook.  More testing for this feature + other formats will be added
