@@ -4,6 +4,14 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Revision: 1.20 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-16 06:38:34 $
+	#
+	# $Id: bug_update_advanced_page.php,v 1.20 2002-08-16 06:38:34 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# Show the advanced update bug options
@@ -11,14 +19,15 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$c_id = (integer)$f_id;
+
 	if ( SIMPLE_ONLY == $g_show_update ) {
-		print_header_redirect ( 'bug_update_page.php?f_id='.$f_id );
+		print_header_redirect ( 'bug_update_page.php?f_id='.$c_id );
 	}
 
-	project_access_check( $f_id );
+	project_access_check( $c_id );
 	check_access( UPDATER );
-	check_bug_exists( $f_id );
-	$c_id = (integer)$f_id;
+	check_bug_exists( $c_id );
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
@@ -60,16 +69,16 @@
 	<td class="right" colspan="3">
 <?php
 	switch ( $g_show_view ) {
-		case 0: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_back_to_bug_link );
+		case 0: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$c_id, $s_back_to_bug_link );
 				break;
-		case 1: print_bracket_link( 'view_bug_page.php?f_id='.$f_id, $s_back_to_bug_link );
+		case 1: print_bracket_link( 'view_bug_page.php?f_id='.$c_id, $s_back_to_bug_link );
 				break;
-		case 2: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_back_to_bug_link );
+		case 2: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$c_id, $s_back_to_bug_link );
 				break;
 	}
 
 	if ( BOTH == $g_show_update ) {
-		print_bracket_link( 'bug_update_page.php?f_id='.$f_id, $s_update_simple_link );
+		print_bracket_link( 'bug_update_page.php?f_id='.$c_id, $s_update_simple_link );
 	}
 ?>
 	</td>
@@ -237,7 +246,7 @@
 	</td>
 	<td>
 		<select name="f_version">
-			<?php print_version_option_list( $f_version, $v_version ) ?>
+			<?php print_version_option_list( $v_version ) ?>
 		</select>
 	</td>
 </tr>
@@ -300,6 +309,29 @@
 		<textarea cols="60" rows="5" name="f_additional_information" wrap="virtual"><?php echo $v2_additional_information ?></textarea>
 	</td>
 </tr>
+<tr>
+	<td class="spacer" colspan="6">
+		&nbsp;
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<?php echo $s_add_bugnote_title ?>
+	</td>
+	<td colspan="5">
+		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+	</td>
+</tr>
+<?php if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) { ?>
+<tr class="row-2">
+	<td class="category">
+		<?php echo $s_private ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_private">
+	</td>
+</tr>
+<?php } ?>
 <tr>
 	<td class="center" colspan="6"">
 		<input type="submit" value="<?php echo $s_update_information_button ?>">

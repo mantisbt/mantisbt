@@ -4,6 +4,14 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Revision: 1.25 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-16 06:38:34 $
+	#
+	# $Id: bug_update.php,v 1.25 2002-08-16 06:38:34 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# Update bug data then redirect to the appropriate viewing page
@@ -11,20 +19,20 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	$c_id = (integer)$f_id;
+	project_access_check( $c_id );
 	check_access( UPDATER );
 
 	# extract current extended information into history variables
-	$result = get_bug_row_ex ( $f_id );
+	$result = get_bug_row_ex ( $c_id );
 	if ( 0 == db_num_rows( $result ) ) {
 		# speed is not an issue in this case, so re-use code
-		check_bug_exists( $f_id );
+		check_bug_exists( $c_id );
 	}
 
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'h' );
 
-	$c_id = (integer)$f_id;
 
 	# set variable to be valid if necessary
 	check_varset( $f_duplicate_id, '' );
@@ -142,27 +150,39 @@
 		history_log_event_special( $c_id, ADDITIONAL_INFO_UPDATED );
 	}
 
+	# add a bugnote if there was one
+	check_varset( $f_private, false );
+	check_varset( $f_bugnote_text, '' );
+	$c_private = (bool)$f_private;
+
+	$f_bugnote_text = trim( $f_bugnote_text );
+	if ( !empty( $f_bugnote_text ) ) {
+		$c_bugnote_text = string_prepare_textarea( $f_bugnote_text );
+		
+		$result = add_bugnote( $c_id, $c_bugnote_text, $c_private );
+	}
+
 	# updated the last_updated date
-	$result = bug_date_update( $f_id );
+	$result = bug_date_update( $c_id );
 
 	# If we should notify and it's in feedback state then send an email
 	switch ( $f_status ) {
 		case FEEDBACK:	if ( $f_status!= $f_old_status ) {
-   							email_feedback( $f_id );
+   							email_feedback( $c_id );
    						}
 						break;
 		case ASSIGNED:	if ( ( $f_handler_id != $f_old_handler_id ) OR ( $f_status!= $f_old_status ) ) {
-			   				email_assign( $f_id );
+			   				email_assign( $c_id );
 			   			}
 						break;
-		case RESOLVED:	email_resolved( $f_id );
+		case RESOLVED:	email_resolved( $c_id );
 						break;
-		case CLOSED:	email_close( $f_id );
+		case CLOSED:	email_close( $c_id );
 						break;
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
+	$t_redirect_url = get_view_redirect_url( $c_id, 1 );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {
