@@ -302,7 +302,7 @@
 	$s_here = "hier klicken";
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "Offen und mir zugeweisen";
+	$s_open_and_assigned_to_me = "Offen und mir zugewiesen";
 	$s_open_and_reported_to_me = "Offen und von mir berichtet";
 	$s_newer_news_link = "Neuere Nachrichten";
 	$s_older_news_link = "&Auml;ltere Nachrichten";
