@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+2004.10.xx  -  0.19.1
+
+
+
 2004.09.12  -  0.19.0
 
 This is a stable release that followed a couple of alpha releases + a release candidate.  Compared to 0.18.3 this release has over 250 enhancements and fixes.  These include some major additions to Mantis including issue relationships, sponsorships, advanced filters, changelog, workflow control, my-view, using ADODB as a database abstraction layer, "forgot password" support, more secure signup with captcha image, security fixes, and various other fixes and enhancements.  All users of previous releases are encouraged to upgrade to this release.

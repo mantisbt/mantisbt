@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.206 2004-09-12 12:12:30 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.207 2004-09-12 13:57:21 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -294,7 +294,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '0.19.0';
+	$g_mantis_version		= '0.19.1-CVS';
 	$g_show_version			= ON;
 
 	################################
