@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001 Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -6,7 +6,7 @@
 
 	# Portuguese Brazil: Felipe Tonioli, tonioli@easyline.com.br  V0.2
 ?>
-<?
+<?php
 	# new strings:
 	$s_all_projects = "Todos os Projetos";
 	$s_move_bugs = "Mover Bugs";

@@ -26,6 +26,7 @@ Mantis
  * Modified view bug pages to show bug status via color.
  * Modified setcookie() to use paths.
  * Modified fopen() to open with rb instead of r.
+ * Modified language files to use long php tags.
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.

@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
@@ -8,7 +8,7 @@
 	#          Marco Vassura,  m.vassura@itools.it
 	#          Stefano Mazzocchi, stefano@apache.org
 ?>
-<?
+<?php
 	# new strings:
 	$s_all_projects = "Progetti";
 	$s_move_bugs = "Sposta Bugs";
