@@ -64,6 +64,7 @@ Mantis ChangeLog
  * Fix #3928: "Copy Issue" did not copy attachments (plus other values).
  * Fix #3937: Custom field filters now only show those values relevant to the selected project.
  * Fix #3951: Add Bugnote - Link.
+ * Fix #3957: IIS had issues with serialised filters in redirects.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).

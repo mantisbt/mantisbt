@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.33 2004-06-15 02:54:39 narcissus Exp $
+	# $Id: view_all_set.php,v 1.34 2004-06-29 06:08:29 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -315,7 +315,10 @@
 
 	if ( $f_temp_filter ) {
 		$t_redirect_url = $t_redirect_url . '?filter=' . $t_settings_serialized;
+		$t_trans = array( '"' => '%22', ';' => '%3B', '%' => '%25', ' ' => '%20' );
+		$t_redirect_url = strtr( $t_redirect_url, $t_trans );
+		html_meta_redirect( $t_redirect_url, 0 );
+	} else {
+		print_header_redirect( $t_redirect_url );
 	}
-	
-	print_header_redirect( $t_redirect_url );
 ?>
