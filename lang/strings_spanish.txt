@@ -18,10 +18,15 @@
 	$s_login_anonymously = "Conectarse Anonimamente";
 	$s_jump_to_bugnotes = "Saltar a Notas";
 	$s_public_project_msg = "Este proyecto es PUBLICO.  Todos los usuarios tienen acceso a este proyecto.";
+	$s_private_project_msg = "This project is PRIVATE.  Only administrators and manually added users have access.";
 	$s_access_level_project = "Nivel de Acceso de Proyecto";
 	$s_view_submitted_bug_link = "Ver Bug Enviado";
 	$s_assigned_projects = "Proyectos Asignados";
 	$s_unassigned_projects = "Proyectos No Asignados";
+	$s_print = "Print";
+	$s_jump = "Jump";
+	$s_copy_users = "Copy Users";
+	$s_copy_categories = "Copy Categories";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";

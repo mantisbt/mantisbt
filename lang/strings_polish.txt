@@ -18,10 +18,15 @@
 	$s_login_anonymously = "Logowanie Anonimowe";
 	$s_jump_to_bugnotes = "Przejd¼ do komentarzy";
 	$s_public_project_msg = "Ten projekt jest PUBLICZNY. Wszyscy u¿ytkownicy posiadaj± dostêp do tego projektu.";
+	$s_private_project_msg = "This project is PRIVATE.  Only administrators and manually added users have access.";
 	$s_access_level_project = "Poziom dostêpu";
 	$s_view_submitted_bug_link = "Zobacz zg³oszony b³±d";
 	$s_assigned_projects = "Projekty przypisane";
 	$s_unassigned_projects = "Projekty nieprzypisane";
+	$s_print = "Print";
+	$s_jump = "Jump";
+	$s_copy_users = "Copy Users";
+	$s_copy_categories = "Copy Categories";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC] = "B£¡D: Wyst±pi³ b³±d podczas wykonywanej operacji.  Mo¿esz zg³osciæ ten b³±d Twojemu administratorowi.";

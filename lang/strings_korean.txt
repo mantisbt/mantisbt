@@ -6,7 +6,7 @@
 
 	# 한글 번역   aporie@kornet.net
 ?>
-<?
+<?php
 	# new strings:
 	$s_all_projects = "모든 프로젝트";
 	$s_move_bugs = "버그 이동";
@@ -15,17 +15,31 @@
 	$s_print_all_bug_page_link = "리포트 출력";
 	$s_csv_export = "CSV 엑스포트";
 	$s_login_anonymously = "익명 로그인";
+	$s_jump_to_bugnotes = "Jump to Bugnotes";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access.";
+	$s_private_project_msg = "This project is PRIVATE.  Only administrators and manually added users have access.";
+	$s_access_level_project = "Project Access Level";
+	$s_view_submitted_bug_link = "View Submitted Bug";
+	$s_assigned_projects = "Assigned Projects";
+	$s_unassigned_projects = "Unassigned Projects";
+	$s_print = "Print";
+	$s_jump = "Jump";
+	$s_copy_users = "Copy Users";
+	$s_copy_categories = "Copy Categories";
 
 	# ERROR strings
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
 	$MANTIS_ERROR[ERROR_SQL] = "오류: SQL 오류 발생. 버그 리포트해주시기 바랍니다.";
 	$MANTIS_ERROR[ERROR_LOGIN] = "오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.";
 	$MANTIS_ERROR[ERROR_REPORT] = "오류: 입력내용에 오류가 발생했습니다.";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "오류: 파일이 없습니다.";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "오류: 디렉토리가 존재하지 않습니다.. 프로젝트 환경을 확인하세요.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "오류: 카테고리 중복.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "오류: 버전 중복.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "오류: 파일 중복. 먼저 파일을 삭제하세요.";
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "오류: 필수 입력 필드 누락, 입력사항을 확인하세요.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
 
 	# General Strings
 	$s_go_back = "뒤로";
@@ -173,6 +187,9 @@
 	# bug_close.php3
 	$s_bug_close_msg       = "버그가 해결(close)되었습니다...";
 	$s_close_immediately   = "지금 폐쇄:";
+
+	# bug_close_page.php3
+	$s_close_bug_title = "Close Bug";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "버그정보가 삭제되었습니다...";
@@ -367,7 +384,6 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "프로젝트 추가";
-	$s_access_threshold = "접근 Threshold";
 	$s_upload_file_path = "업르드 파일 경로";
 	$s_add_project_button = "프로젝트 추가";
 	$s_projects_title = "프로젝트";
@@ -502,13 +518,10 @@
 	$s_remove_user_sure_msg = "현재 사용자를 제거하시겠습니까?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "참조: 프로젝트에 추가하기전에 사용자가 존재해야 합니다.";
-	$s_automatic_access_level = "자동 접근 레벨";
 	$s_add_user_title = "프로젝트에 사용자 추가";
 	$s_add_user_button = "사용자 추가";
 	$s_project_selection_title = "프로젝트 선택";
 	$s_remove_link = "삭제";
-	$s_automatic_access = "자동 접근 설정 사용자";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "사용자 정보가 갱신되었습니다.";
