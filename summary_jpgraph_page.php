@@ -14,10 +14,12 @@
 
 	$t_project_id = helper_get_current_project();
 
+	$t_bug_table = config_get( 'mantis_bug_table' );
+
 	$t_res_val = RESOLVED;
 	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 			UNIX_TIMESTAMP(last_updated) as last_updated
-			FROM $g_mantis_bug_table
+			FROM $t_bug_table
 			WHERE project_id='$t_project_id' AND status='$t_res_val'";
 	$result = db_query( $query );
 	$bug_count = db_num_rows( $result );

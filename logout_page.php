@@ -6,11 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: logout_page.php,v 1.12 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: logout_page.php,v 1.13 2003-02-27 08:14:55 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	# Removes all the cookies and then redirect to $g_logout_redirect_page
+	# Removes all the cookies and then redirect to the page specified in
+	#  the config option logout_redirect_page
 ?>
 <?php require_once( 'core.php' ); ?>
 <?php

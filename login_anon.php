@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_anon.php,v 1.12 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: login_anon.php,v 1.13 2003-02-27 08:14:51 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,8 +14,8 @@
  * or password.
  *
  * Depends on two global configuration variables:
- * $g_allow_anonymous_login - bool which must be true to allow anonymous login.
- * $g_anonymous_account - name of account to login with.
+ * allow_anonymous_login - bool which must be true to allow anonymous login.
+ * anonymous_account - name of account to login with.
  *
  * TODO:
  * Check how manage account is impacted.

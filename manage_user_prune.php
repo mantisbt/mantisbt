@@ -9,11 +9,13 @@
 <?php
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 	
+	$t_user_table = config_get( 'mantis_user_table' );
+
 	# Delete the users who have never logged in and are older than 1 week
 	$days_old = 7;
 	$days_old = (integer)$days_old;
 	$query = "SELECT id
-			FROM $g_mantis_user_table
+			FROM $t_user_table
 			WHERE login_count=0 AND TO_DAYS(NOW()) - '$days_old' > TO_DAYS(date_created)";
 	$result = db_query($query);
 

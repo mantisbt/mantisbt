@@ -65,9 +65,11 @@
 
 <?php # New Accounts Form BEGIN ?>
 <?php
+	$t_user_table = config_get( 'mantis_user_table' );
+
 	$days_old = 7;
 	$query = "SELECT *
-		FROM $g_mantis_user_table
+		FROM $t_user_table
 		WHERE TO_DAYS(NOW()) - TO_DAYS(date_created) <= '$days_old'
 		ORDER BY date_created DESC";
 	$result = db_query( $query );
@@ -98,7 +100,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <?php # Never Logged In Form BEGIN ?>
 <?php
 	$query = "SELECT *
-		FROM $g_mantis_user_table
+		FROM $t_user_table
 		WHERE login_count=0
 		ORDER BY date_created";
 	$result = db_query( $query );
@@ -132,12 +134,12 @@ for ($i=0;$i<$new_user_count;$i++) {
 	if ( 0 == $c_hide ) {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
 				UNIX_TIMESTAMP(last_visit) as last_visit
-				FROM $g_mantis_user_table
+				FROM $t_user_table
 				ORDER BY '$c_sort' $c_dir";
 	} else {
 		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
 				UNIX_TIMESTAMP(last_visit) as last_visit
-				FROM $g_mantis_user_table
+				FROM $t_user_table
 				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old')
 				ORDER BY '$c_sort' $c_dir";
 	}

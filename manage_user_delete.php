@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_delete.php,v 1.25 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: manage_user_delete.php,v 1.26 2003-02-27 08:14:55 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -24,7 +24,7 @@
 
 	html_page_top1();
 
-	html_meta_redirect( $t_redirect_url, $g_wait_time );
+	html_meta_redirect( $t_redirect_url );
 
 	html_page_top2();
 ?>

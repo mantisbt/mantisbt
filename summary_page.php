@@ -23,10 +23,13 @@
 	} else {
 		$specific_where = " project_id='$t_project_id'";
 	}
+
+	$t_bug_table = config_get( 'mantis_bug_table' );
+
 	$t_clo_val = CLOSED;
 	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 			UNIX_TIMESTAMP(last_updated) as last_updated
-			FROM $g_mantis_bug_table
+			FROM $t_bug_table
 			WHERE $specific_where AND status='$t_clo_val'";
 	$result = db_query( $query );
 	$bug_count = db_num_rows( $result );
@@ -83,7 +86,7 @@
 				<?php echo lang_get( 'by_status' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_status_enum_string, 'status' ) ?>
+		<?php print_bug_enum_summary( config_get( 'status_enum_string' ), 'status' ) ?>
 		</table>
 	</td>
 	<td width="50%">
@@ -94,7 +97,7 @@
 				<?php echo lang_get( 'by_date' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_date_summary( $g_date_partitions ) ?>
+		<?php print_bug_date_summary( config_get( 'date_partitions' ) ) ?>
 		</table>
 	</td>
 </tr>
@@ -107,7 +110,7 @@
 				<?php echo lang_get( 'by_severity' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_severity_enum_string, 'severity' ) ?>
+		<?php print_bug_enum_summary( config_get( 'severity_enum_string' ), 'severity' ) ?>
 		</table>
 	</td>
 	<td>
@@ -118,7 +121,7 @@
 				<?php echo lang_get( 'by_resolution' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_resolution_enum_string, 'resolution' ) ?>
+		<?php print_bug_enum_summary( config_get( 'resolution_enum_string' ), 'resolution' ) ?>
 		</table>
 	</td>
 </tr>
@@ -142,7 +145,7 @@
 				<?php echo lang_get( 'by_priority' ) ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_priority_enum_string, 'priority' ) ?>
+		<?php print_bug_enum_summary( config_get( 'priority_enum_string' ), 'priority' ) ?>
 		</table>
 	</td>
 </tr>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.12 2003-02-20 00:15:47 vboctor Exp $
+	# $Id: bugnote_add_inc.php,v 1.13 2003-02-27 08:14:44 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) ||
@@ -30,7 +30,7 @@
 		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
-<?php if ( access_has_project_level( $g_private_bugnote_threshold ) ) { ?>
+<?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) { ?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'private' ) ?>

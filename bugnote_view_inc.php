@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.4 2003-02-27 07:04:57 jfitzell Exp $
+	# $Id: bugnote_view_inc.php,v 1.5 2003-02-27 08:14:48 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,19 +22,23 @@
 	# grab the user id currently logged in
 	$t_user_id = auth_get_current_user_id();
 
-	if ( !access_has_project_level( $g_private_bugnote_threshold ) ) {
+	if ( !access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) {
 		$t_restriction = 'AND view_state=' . PUBLIC;
 	} else {
 		$t_restriction = '';
 	}
 
+	$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
+	$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
+	$t_bugnote_order		= config_get( 'bugnote_order' );
+
 	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
-			FROM $g_mantis_bugnote_table
+			FROM $t_bugnote_table
 			WHERE bug_id='$f_bug_id' $t_restriction
-			ORDER BY date_submitted $g_bugnote_order";
-	$result = db_query($query);
-	$num_notes = db_num_rows($result);
+			ORDER BY date_submitted $t_bugnote_order";
+	$result = db_query( $query );
+	$num_notes = db_num_rows( $result );
 ?>
 
 <?php # Bugnotes BEGIN ?>
@@ -64,7 +68,7 @@
 
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note
-				FROM $g_mantis_bugnote_text_table
+				FROM $t_bugnote_text_table
 				WHERE id='$v3_bugnote_text_id'";
 		$result2 = db_query( $query );
 		$row = db_fetch_array( $result2 );
@@ -97,7 +101,7 @@
 					( ( $v3_reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
 					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
 					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
-					if ( access_has_project_level( $g_private_bugnote_threshold ) ) {
+					if ( access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) {
 						if ( PRIVATE == $v3_view_state ) {
 							print_bracket_link('bugnote_set_view_state.php?private=0&bugnote_id='.$v3_id, lang_get( 'make_public' ));
 						} else {

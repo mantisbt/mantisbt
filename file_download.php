@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.23 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: file_download.php,v 1.24 2003-02-27 08:14:49 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,21 +25,25 @@
 	$f_type		= gpc_get_string( 'type' );
 
 	$c_file_id = (integer)$f_file_id;
-	#access_ensure_project_level( $g_handle_bug_threshold );
+	#access_ensure_project_level( config_get( 'handle_bug_threshold' ) );
 	# @@@ We need a security check here but we need the API to
 	#   get the project_id or bug_id from the file first.
 
 	# we handle the case where the file is attached to a bug
 	# or attached to a project as a project doc.
 	switch ( $f_type ) {
-		case 'bug':	$query = "SELECT *
-							FROM $g_mantis_bug_file_table
-							WHERE id='$c_file_id'";
-					break;
-		case 'doc':	$query = "SELECT *
-							FROM $g_mantis_project_file_table
-							WHERE id='$c_file_id'";
-					break;
+		case 'bug':
+			$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+			$query = "SELECT *
+				FROM $t_bug_file_table
+				WHERE id='$c_file_id'";
+			break;
+		case 'doc':
+			$t_project_file_table = config_get( 'mantis_project_file_table' );
+			$query = "SELECT *
+				FROM $t_project_file_table
+				WHERE id='$c_file_id'";
+			break;
 	}
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
