@@ -10,13 +10,10 @@
 <?php
 	check_access( MANAGER );
 
-	# Delete the news entry
-    $result = news_delete_query( $f_id );
+	$f_id = gpc_get_int( 'f_id' );
+
+    news_delete( $f_id );
 
     $t_redirect_url = 'news_menu_page.php';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( $t_redirect_url );
 ?>

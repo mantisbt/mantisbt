@@ -10,14 +10,16 @@
 <?php
 	check_access( MANAGER );
 
+	$f_id = gpc_get_int( 'f_id' );
+	$f_action = gpc_get_string( 'f_action', '' );
+
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
 		print_header_redirect( 'news_delete_page.php?f_id='.$f_id );
-		exit;
 	}
 
 	# Retrieve news item data and prefix with v_
-	$row = news_select_query( $f_id );
+	$row = news_get_row( $f_id );
 	if ( $row ) {
     	extract( $row, EXTR_PREFIX_ALL, 'v' );
     }

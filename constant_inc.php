@@ -178,8 +178,12 @@
 	define( 'ERROR_USER_NAME_NOT_UNIQUE',		800 );
 	define( 'ERROR_USER_NOT_FOUND',				801 );
 	define( 'ERROR_USER_PREFS_NOT_FOUND',		802 );
+
 	# ERROR_AUTH_*
 	define( 'ERROR_AUTH_INVALID_COOKIE',		800 );
+
+	# ERROR_NEWS_*
+	define( 'ERROR_NEWS_NOT_FOUND',				900 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

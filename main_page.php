@@ -34,7 +34,7 @@
 	$c_offset = (integer)$f_offset;
 
 	# get news count (project plus sitewide posts)
-    $total_news_count = news_count_query( $g_project_cookie_val );
+    $total_news_count = news_get_count( $g_project_cookie_val );
 
 	switch ( $g_news_limit_method ) {
 		case 0 :

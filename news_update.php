@@ -10,9 +10,15 @@
 <?php
 	check_access( MANAGER );
 
-	# Update news
-	check_varset( $f_announcement, '' );
-    $result = news_update_query( $f_id, $f_view_state, $f_announcement, $f_headline, $f_body, $f_project_id );
+	$f_id = gpc_get_int( 'f_id' );
+	$f_project_id = gpc_get_int( 'f_project_id' );
+	$f_view_state = gpc_get_int( 'f_view_state' );
+	$f_announcement = gpc_get_bool( 'f_announcement', false );
+	$f_headline = gpc_get_string( 'f_headline' );
+	$f_announcement = gpc_get_string( 'f_announcement', '' );
+	$f_body = gpc_get_string( 'f_body', '' );
+
+    news_update( $f_id, $f_project_id, $f_view_state, $f_announcement, $f_headline, $f_body );
     $f_headline 	= string_display( $f_headline );
     $f_body 		= string_display( $f_body );
 ?>
@@ -21,10 +27,7 @@
 
 <p>
 <div align="center">
-<?php
-	if ( $result ) {				# SUCCESS
-		PRINT "$s_operation_successful<p>";
-?>
+	<?php echo $s_operation_successful ?><p>
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="news-heading">
@@ -39,10 +42,6 @@
 </table>
 <p>
 <?php
-	} else {						# FAILURE
-		print_sql_error( $query );
-	}
-
 	print_bracket_link( 'news_edit_page.php?f_id='.$f_id.'&amp;f_action=edit', $s_edit_link );
 	print_bracket_link( 'news_menu_page.php', $s_proceed );
 ?>

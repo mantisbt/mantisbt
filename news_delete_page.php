@@ -9,6 +9,8 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
+
+	$f_id = gpc_get_int( 'f_id' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
