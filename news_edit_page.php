@@ -63,15 +63,14 @@
 		<?php echo $s_post_to ?>
 	</td>
 	<td>
-		<?php	if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) { ?>
 		<select name="f_project_id">
-			<option value="0000000" <?php if ( "0000000" == $v_project_id ) echo "SELECTED"?>>Sitewide</option>
-			<?php print_news_project_option_list( $v_project_id ) ?>
+		<?php
+			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
+				PRINT "<option value=\"0000000\">Sitewide</option>";
+			}
+			print_project_option_list( $v_project_id );
+		?>
 		</select>
-		<?php	} else { ?>
-		<input type="hidden" name="f_project_id" value="<?php echo $g_project_cookie_val ?>">
-		<?php echo get_project_field( $v_project_id, "name" ) ?>
-		<?php	} ?>
 	</td>
 </tr>
 <tr>
