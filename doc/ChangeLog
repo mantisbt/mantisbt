@@ -5,6 +5,7 @@ Mantis
  * Added capability to monitor bugs even when not reporter or handler
  * Added basic private bug functionality
  * Added validation checks for all inputs that are passed on to database queries.
+ * Updated Hungarian localization.
 
 05.19.2002  -   0.17.3
 
