@@ -48,7 +48,7 @@
 		}
 	}
 
-	if ( empty( $f_ref ) ) {
+	if ( !empty( $f_ref ) ) {
 		$t_redirect_url = $f_ref;
 	}
 
