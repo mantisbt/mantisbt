@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.9 2002-09-18 04:24:03 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.10 2002-09-20 18:09:22 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -204,7 +204,10 @@
 
 	# ------------------
 	# Clear a cookie variable
-	function gpc_clear_cookie( $p_name, $p_path ) {
+	function gpc_clear_cookie( $p_name, $p_path=null ) {
+		if ( null === $p_path ) {
+			$p_path = config_get( 'cookie_path' );
+		}
 		return setcookie( $p_name, '', -1, $p_path );
 	}
 
