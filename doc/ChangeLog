@@ -3,6 +3,7 @@ Mantis ChangeLog
 2003.??.??  -  0.18.0a5
 
  * Fix: Improved adherance to the XHTML standard.
+ * Fix #3072: Attached file should be opened up in a new browser window.
 
 2003.03.22  -  0.18.0a4
 

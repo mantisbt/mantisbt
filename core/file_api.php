@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.31 2003-02-26 11:12:08 vboctor Exp $
+	# $Id: file_api.php,v 1.32 2003-03-24 03:36:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -56,7 +56,7 @@
 				echo '<br />';
 			}
 
-			$t_href = "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\">";
+			$t_href = "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">";
 
 			echo $t_href;
 			print_file_icon ( file_get_display_name( $v_filename ) );
