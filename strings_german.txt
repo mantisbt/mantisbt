@@ -27,7 +27,7 @@
 
 	$s_priority_enum_string = "10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:sofort";
 	$s_severity_enum_string = "10:feature,20:trivial,30:textual,40:minimal,50:klein,60:groß,70:crash,80:block";
-	$s_reproducibility_enum_string = "10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar";
+	$s_reproducibility_enum_string = "10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar,100:N/A";
 	$s_status_enum_string = "10:neu,20:feedback,30:bekannt,40:bestätigt,50:zugewiesen,80:erledigt,90:geschlossen";
 	$s_resolution_enum_string = "10:offen,20:erledigt,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:won't fix";
 	$s_projection_enum_string = "10:keine,30:Kleinigkeit,50:kleinere Änderung,70:größere Änderung,90:Redesign";

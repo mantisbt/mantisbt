@@ -27,7 +27,7 @@
 
 	$s_priority_enum_string           = "10:yok,20:düþük,30:normal,40:yüksek,50:acil,60:derhal";
 	$s_severity_enum_string           = "10:özellik,20:kolay,30:metin,40:ayar,50:küçük,60:büyük,70:çökme,80:engel";
-	$s_reproducibility_enum_string    = "10:her zaman,30:bazen,50:rastgele,70:denenmedi,90:tekrarlanamadý";
+	$s_reproducibility_enum_string    = "10:her zaman,30:bazen,50:rastgele,70:denenmedi,90:tekrarlanamadý,100:N/A";
 	$s_status_enum_string             = "10:yeni,20:ek bilgi gerektiren,30:onaylanmýþ,40:doðrulanmýþ,50:tahsis edilmiþ,80:cözümlenmiþ,90:kapalý";
 	$s_resolution_enum_string         = "10:açýk,20:çözümlendi,30:tekrar açýldý,40:tekrarlanamadý,50:çözümlenemedi,60:tekrar,70:bug deðil ,80:ertelendi,90:çözülmeyecek";
 	$s_projection_enum_string         = "10:yok,30:ayar,50:basit çözüm,70:fazla iþ,90:dizayn deðiþikliði";
