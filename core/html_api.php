@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.108 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: html_api.php,v 1.109 2004-07-11 13:24:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -761,6 +761,20 @@
 	}
 
 	# --------------------
+	# Print a button to move the given bug to a different project
+	# MASC RELATIONSHIP
+	function html_button_bug_create_child( $p_bug_id ) {
+		if ( ON == config_get( 'enable_relationship' ) ) {
+			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+				html_button( 'bug_create_child.php',
+							 lang_get( 'create_child_bug_button' ),
+							 array( 'bug_id' => $p_bug_id ) );
+			}
+		}
+	}
+	# MASC RELATIONSHIP
+
+	# --------------------
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id ) ||
@@ -838,6 +852,12 @@
 
 			# MOVE button
 			html_button_bug_move( $p_bug_id );
+
+			# MASC RELATIONSHIP
+			# CREATE CHILD button
+			PRINT '</td><td>';
+			html_button_bug_create_child( $p_bug_id );
+			# MASC RELATIONSHIP
 		} else {
 			# REOPEN button
 			html_button_bug_reopen( $p_bug_id );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close_page.php,v 1.32 2004-06-26 14:05:42 prichards Exp $
+	# $Id: bug_close_page.php,v 1.33 2004-07-11 13:24:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,6 +15,10 @@
 	$t_core_path = config_get( 'core_path' );
 	
 	require_once( $t_core_path.'bug_api.php' );
+
+	# MASC RELATIONSHIP
+	require_once( $t_core_path.'relationship_api.php' );
+	# MASC RELATIONSHIP
 ?>
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );
@@ -38,6 +42,14 @@
 </tr>
 <!-- Custom Fields -->
 <?php
+	# MASC RELATIONSHIP
+	if ( ON == config_get( 'enable_relationship' ) ) {
+		if ( relationship_can_resolve_bug( $f_bug_id ) == false ) {
+			echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
+		}
+	}
+	# MASC RELATIONSHIP
+
 	$t_custom_fields_found = false;
 	$t_related_custom_field_ids = custom_field_get_linked_ids( bug_get_field( $f_bug_id, 'project_id' ) );
 	foreach( $t_related_custom_field_ids as $t_id ) {

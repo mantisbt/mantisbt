@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.86 2004-07-10 23:38:01 vboctor Exp $
+	# $Id: email_api.php,v 1.87 2004-07-11 13:24:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -379,6 +379,59 @@
 		}
 
 		return $t_ok;
+	}
+
+	# --------------------
+	# send notices when a relationship is ADDED
+	# MASC RELATIONSHIP
+	function email_relationship_added( $p_bug_id ) {
+		email_generic( $p_bug_id, 'updated', 'email_notification_title_for_action_relationship_added' );
+	}
+
+	# --------------------
+	# send notices when a relationship is DELETED
+	# MASC RELATIONSHIP
+	function email_relationship_deleted( $p_bug_id ) {
+		email_generic( $p_bug_id, 'updated', 'email_notification_title_for_action_relationship_deleted' );
+	}
+
+	# --------------------
+	# send notices to all the handlers of the parent bugs when a child bug is RESOLVED
+	# MASC RELATIONSHIP
+	function email_relationship_child_resolved( $p_bug_id ) {
+		email_relationship_child_resolved_closed( $p_bug_id, 'email_notification_title_for_action_relationship_child_resolved' );
+	}
+
+	# --------------------
+	# send notices to all the handlers of the parent bugs when a child bug is CLOSED
+	# MASC RELATIONSHIP
+	function email_relationship_child_closed( $p_bug_id ) {
+		email_relationship_child_resolved_closed( $p_bug_id, 'email_notification_title_for_action_relationship_child_closed' );
+	}
+
+	# --------------------
+	# send notices to all the handlers of the parent bugs still open when a child bug is resolved/closed
+	# MASC RELATIONSHIP
+	function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
+
+		# retrieve all the relationships in which the bug is the destination bug
+		$t_relationship = relationship_get_all_dest( $p_bug_id );
+		$t_relationship_count = count( $t_relationship );
+		if ( $t_relationship_count == 0 ) {
+			# no parent bug found
+			return;
+		}
+
+		for ( $i = 0 ; $i < $t_relationship_count ; $i++ ) {
+			if ( $t_relationship[$i]->type == BUG_DEPENDANT ) {
+				$t_src_bug_id = $t_relationship[$i]->src_bug_id;
+				$t_status = bug_get_field( $t_src_bug_id, 'status' );
+				if ( $t_status < config_get( 'bug_resolved_status_threshold' ) ) {
+					# sent the notification just for parent bugs not resolved/closed
+					email_generic( $t_src_bug_id, 'handler', $p_message_id );
+				}
+			}
+		}
 	}
 
 	# --------------------
@@ -774,6 +827,14 @@
 
 		$t_message .= lang_get( 'email_description', $g_email_lang ) . ": \n".wordwrap( $p_visible_bug_data['email_description'] )."\n";
 
+		# MASC RELATIONSHIP
+		if ( ON == config_get( 'enable_relationship' ) ) {
+			if (isset( $p_visible_bug_data['relations'] )) {
+				$t_message .= $p_visible_bug_data['relations'];
+			}
+		}
+		# MASC RELATIONSHIP
+
 		# Sponsorship
 		if ( isset( $p_visible_bug_data['sponsorship_total'] ) && ( $p_visible_bug_data['sponsorship_total'] > 0 ) ) {
 			$t_message .= $t_email_separator1."\n";
@@ -912,6 +973,11 @@
 					$t_bug_data['sponsorships'][] = sponsorship_get( $id );
 				}
 			}
+		}
+
+		# MASC RELATIONSHIP
+		if ( ON == config_get( 'enable_relationship' ) ) {
+			$t_bug_data['relations'] = relationship_get_summary_text( $p_bug_id );
 		}
 
 		return $t_bug_data;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.47 2004-05-24 12:23:18 vboctor Exp $
+	# $Id: print_bug_page.php,v 1.48 2004-07-11 13:24:29 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -307,6 +307,14 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 <?php
 	}
+
+	# MASC RELATIONSHIP
+	if ( ON == config_get( 'enable_relationship' ) ) {
+		echo "<tr class=\"print\">";
+		echo "<td class=\"print-category\">" . lang_get( 'bug_relationships' ) . "</td>";
+		echo "<td class=\"print\" colspan=\"5\">" . relationship_get_summary_html_preview( $c_bug_id ) . "</td></tr>";
+	}
+	# MASC RELATIONSHIP
 ?>
 <tr class="print">
 	<td class="print-category">

@@ -5,6 +5,7 @@ Mantis ChangeLog
  * Enh #3804: Add ability to filter on view state
  * Enh #3805: Add ability to filter on bugs monitored by a user
  * Enh #3944: Add ability to filter on 'Fixed in Version'
+ * Enh #3969: Relationship - Patch available (masc) - partial implementation - disabled by default.
  * Enh #3974: Make Mantis issues searchable by Search Engine
  * Enh #4016: Automatic language selection based on browser preferences
  * Enh #4036: Changelog should not display versions with no issues (vboctor)

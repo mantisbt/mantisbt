@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve_page.php,v 1.40 2004-07-11 07:09:51 vboctor Exp $
+	# $Id: bug_resolve_page.php,v 1.41 2004-07-11 13:24:29 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,6 +16,10 @@
 
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
+
+	# MASC RELATIONSHIP
+	require_once( $t_core_path.'relationship_api.php' );
+	# MASC RELATIONSHIP
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
@@ -40,6 +44,15 @@
 	</td>
 </tr>
 
+<?php
+# MASC RELATIONSHIP
+if ( ON == config_get( 'enable_relationship' ) ) {
+	if ( relationship_can_resolve_bug( $f_bug_id ) == false ) {
+		echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
+	}
+}
+# MASC RELATIONSHIP
+?>
 
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.173 2004-07-07 22:08:40 int2str Exp $
+	# $Id: config_defaults_inc.php,v 1.174 2004-07-11 13:24:29 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1209,4 +1209,12 @@
 
 	# Default page after Login or Set Project
 	$g_default_home_page = 'my_view_page.php';
+
+	######################
+	# Bug Relationships
+	######################
+
+	# Enable support for bug relationships where a bug can be a related, dependent on, or duplicate of another.
+	# See relationship_api.php for more details.
+	$g_enable_relationship = OFF;
 ?>

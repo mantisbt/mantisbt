@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.54 2004-05-24 12:23:18 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.55 2004-07-11 13:24:29 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -428,65 +428,6 @@
 	}
 ?>
 
-
-<!-- Bug Relationships -->
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="category">
-		<?php echo lang_get( 'bug_relationships' ) ?>
-	</td>
-	<td colspan="5">
-		<?php
-			$result = relationship_fetch_all_src( $f_bug_id );
-			$relationship_count = db_num_rows( $result );
-			for ( $i = 0 ; $i < $relationship_count ; $i++ ) {
-				$row = db_fetch_array( $result );
-
-				$t_bug_link = string_get_bug_view_link( $row['destination_bug_id'] );
-				switch ( $row['relationship_type'] ) {
-					case BUG_DUPLICATE:
-						$t_description = str_replace( '%id', $t_bug_link, lang_get( 'duplicate_of' ) );
-						break;
-					case BUG_RELATED:
-						$t_description = str_replace( '%id', $t_bug_link, lang_get( 'related_to' ) );
-						break;
-					case BUG_DEPENDANT:
-						$t_description = str_replace( '%id', $t_bug_link, lang_get( 'dependant_on' ) );
-						break;
-					default:
-						$t_description = str_replace( '%id', $t_bug_link, lang_get( 'duplicate_of' ) );
-				}
-
-				echo $t_description . '<br />';
-			}
-		?>
-		<?php
-			$result = relationship_fetch_all_dest( $f_bug_id );
-			$relationship_count = db_num_rows( $result );
-			for ( $i = 0 ; $i < $relationship_count ; $i++ ) {
-				$row = db_fetch_array( $result );
-
-				$t_bug_link = string_get_bug_view_link( $row['source_bug_id'] );
-				switch ( $row['relationship_type'] ) {
-					case BUG_DUPLICATE:
-						$t_description = str_replace( '%id', $t_bug_link, lang_get( 'has_duplicate' ) );
-						break;
-					case BUG_RELATED:
-						$t_description = str_replace( '%id', $t_bug_link, lang_get( 'related_to' ) );
-						break;
-					case BUG_DEPENDANT:
-						$t_description = str_replace( '%id', $t_bug_link, lang_get( 'blocks' ) );
-						break;
-					default:
-						$t_description = str_replace( '%id', $t_bug_link, lang_get( 'has_duplicate' ) );
-				}
-
-				echo $t_description . '<br />';
-			}
-		?>
-	</td>
-</tr>
-
-
 <!-- Buttons -->
 <tr align="center">
 	<td align="center" colspan="6">
@@ -502,6 +443,13 @@
 
 	# User list sponsoring the bug
 	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
+
+	# Bug Relationships
+	# MASC RELATIONSHIP
+	if ( ON == config_get( 'enable_relationship' ) ) {
+		relationship_view_box ( $f_bug_id );
+	}
+	# MASC RELATIONSHIP
 
 	# File upload box
 	if ( !bug_is_readonly( $f_bug_id ) ) {

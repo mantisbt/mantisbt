@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.20 2004-07-11 07:09:52 vboctor Exp $
+	# $Id: constant_inc.php,v 1.21 2004-07-11 13:24:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -132,11 +132,21 @@
 	define( 'BUG_ADD_SPONSORSHIP',				15 );
 	define( 'BUG_UPDATE_SPONSORSHIP',			16 );
 	define( 'BUG_DELETE_SPONSORSHIP',			17 );
+	# MASC RELATIONSHIP
+	define( 'BUG_ADD_RELATIONSHIP', 		18 );
+	define( 'BUG_DEL_RELATIONSHIP', 		19 );
+	define( 'BUG_CLONED_TO', 				20 );
+	define( 'BUG_CREATED_FROM', 			21 );
+	# MASC RELATIONSHIP
 
 	# bug relationship constants
 	define( 'BUG_DUPLICATE',	0 );
 	define( 'BUG_RELATED',		1 );
 	define( 'BUG_DEPENDANT',	2 );
+	# MASC RELATIONSHIP
+	define( 'BUG_BLOCKS', 3 );
+	define( 'BUG_HAS_DUPLICATE', 4 );
+	# MASC RELATIONSHIP
 
 	# error messages
 	define( 'ERROR_GENERIC',						0 );
@@ -237,6 +247,14 @@
 	define( 'ERROR_SPONSORSHIP_AMOUNT_TOO_LOW',			1702 );
 	define( 'ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW',	1703 );
 	define( 'ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW',	1704 );
+
+	# MASC RELATIONSHIP
+	# ERROR RELATIONSHIP
+	define( 'ERROR_RELATIONSHIP_ALREADY_EXISTS', 1800 );
+	define( 'ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW', 1801 );
+	define( 'ERROR_RELATIONSHIP_NOT_FOUND', 1802 );
+	define( 'ERROR_RELATIONSHIP_SAME_BUG', 1803 );
+	# MASC RELATIONSHIP
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);
