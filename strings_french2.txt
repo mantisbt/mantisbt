@@ -106,7 +106,6 @@
 	$s_email_on_status_change = "Email en cas de modification d'&eacute;tat";
 	$s_email_on_priority_change = "Email en cas de modification de priorit&eacute;";
 	$s_language = "Langage";
-	$s_default_project = "Projet par d&eacute;faut";
 	$s_update_prefs_button = "Mettre &agrave; jour les pr&eacute;f&eacute;rences";
 	$s_reset_prefs_button = "R&eacute;initialiser les pr&eacute;f&eacute;rences";
 

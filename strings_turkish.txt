@@ -107,7 +107,6 @@
 	$s_email_on_status_change = "Statü deðiþikliklerini Emaille";
 	$s_email_on_priority_change = "Öncelik deðiþikliklerini Emaille";
 	$s_language = "Dil";
-	$s_default_project = "Varsayýlan Proje";
 	$s_update_prefs_button = "Tercihleri Güncelle";
 	$s_reset_prefs_button = "Tercihleri Sýfýrla";
 
@@ -298,6 +297,8 @@
 	$s_new_accounts_title = "Yeni Hesaplar";
 	$s_1_week_title = "1 Hafta";
 	$s_never_logged_in_title = "Sisteme hiç girmeyen kullanýcýlar";
+	$s_prune_accounts = "Prune Accounts";
+	$s_hide_inactive = "Hide Inactive";
 	$s_manage_accounts_title = "Hesaplarý Düzenle";
 	$s_p = "k";
 	$s_date_created = "Açýlýþ Tarihi";

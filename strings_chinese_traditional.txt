@@ -106,7 +106,6 @@
 	$s_email_on_status_change = "Email on Status Change";
 	$s_email_on_priority_change = "Email on Priority Change";
 	$s_language = "Language";
-	$s_default_project = "預設專案";
 	$s_update_prefs_button = "更新喜好";
 	$s_reset_prefs_button = "重設喜好";
 

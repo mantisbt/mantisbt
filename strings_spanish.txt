@@ -90,7 +90,7 @@
 
 	# account_prefs_page.php3
 	$s_default_account_preferences_title = "Preferencias de cuentas por defecto";
-	$s_default_project = "Default Project";
+	$s_default_project = "Proyecto por defecto";
 	$s_advanced_report = "Reporte Avanzado";
 	$s_advanced_view = "Vista Avanzada";
 	$s_advanced_update = "Advanced Update";
@@ -106,7 +106,6 @@
 	$s_email_on_status_change = "Email on Status Change";
 	$s_email_on_priority_change = "Email on Priority Change";
 	$s_language = "Language";
-	$s_default_project = "Proyecto por defecto";
 	$s_update_prefs_button = "Actualizar Preferencias";
 	$s_reset_prefs_button = "Resetear Preferencias";
 

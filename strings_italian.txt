@@ -564,8 +564,8 @@
 
 	# summary_page.php3
 	$s_summary_title = "Sommario";
-	$s_by_status = "per status";
 	$s_summary_jpgraph_link = "Sommario avanzato";
+	$s_by_status = "per status";
 	$s_by_date = "per data";
 	$s_by_severity = "per gravita'";
 	$s_by_resolution = "per risoluzione";

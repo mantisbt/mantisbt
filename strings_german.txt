@@ -107,7 +107,6 @@
 	$s_email_on_status_change = "Email bei Status-Wechsel";
 	$s_email_on_priority_change = "Email bei Prioritäts-Wechsel";
 	$s_language = "Sprache";
-	$s_default_project = "Standard-Projekt";
 	$s_update_prefs_button = "Einstellungen aktualisieren";
 	$s_reset_prefs_button = "Einstellungen zurücksetzen";
 

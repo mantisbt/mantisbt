@@ -106,7 +106,6 @@
 	$s_email_on_status_change = "Email on Status Change";
 	$s_email_on_priority_change = "Email on Priority Change";
 	$s_language = "Language";
-	$s_default_project = "Default Project";
 	$s_update_prefs_button = "Update Prefs";
 	$s_reset_prefs_button = "Reset Prefs";
 
@@ -261,7 +260,6 @@
 	$s_signup_link = "signup for a new account";
 
 	# login_select_proj_page.php3
-	$s_make_default = "Make Default";
 	$s_select_project_button = "Select Project";
 
 	# logout_page.php3

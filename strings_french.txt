@@ -108,7 +108,6 @@
 	$s_email_on_status_change = "Email en cas de modification d'état";
 	$s_email_on_priority_change = "Email en cas de modification de priorité";
 	$s_language = "Langage";
-	$s_default_project = "Projet par défaut";
 	$s_update_prefs_button = "Mettre à jour les préférences";
 	$s_reset_prefs_button = "Réinitialiser les préférences";
 
@@ -564,8 +563,8 @@
 	$s_site_settings_updated_msg = "Les modifications ont bien été prises en compte.";
 
 	# summary_page.php3
-	$s_summary_jpgraph_link = "Advanced summary";
 	$s_summary_title = "Synthèse";
+	$s_summary_jpgraph_link = "Advanced summary";
 	$s_by_status = "par état";
 	$s_by_date = "par date";
 	$s_by_severity = "par sévérité";

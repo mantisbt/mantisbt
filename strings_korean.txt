@@ -107,7 +107,6 @@
 	$s_email_on_status_change = "상태 변경시 이메일";
 	$s_email_on_priority_change = "우선순위 변경시 이메일";
 	$s_language = "언어";
-	$s_default_project = "기본 프로젝트";
 	$s_update_prefs_button = "설정상태 갱신";
 	$s_reset_prefs_button = "설정상태 초기화";
 
@@ -564,8 +563,8 @@
 
 	# summary_page.php3
 	$s_summary_title = "요약";
-	$s_by_status = "상태별";
 	$s_summary_jpgraph_link = "자세한 요약";
+	$s_by_status = "상태별";
 	$s_by_date = "일자별";
 	$s_by_severity = "중요도별";
 	$s_by_resolution = "해결상태별";

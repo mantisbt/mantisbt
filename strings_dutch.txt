@@ -93,7 +93,6 @@
 	$s_default_project = "Default Project";
 	$s_advanced_report = "Gevorderd rapport";
 	$s_advanced_view = "Gevorderde kijk";
-	$s_default_project = "Default project";
 	$s_advanced_update = "Advanced Update";
 	$s_refresh_delay = "Refresh Delay";
 	$s_redirect_delay = "Redirect Delay";
@@ -107,7 +106,6 @@
 	$s_email_on_status_change = "Email on Status Change";
 	$s_email_on_priority_change = "Email on Priority Change";
 	$s_language = "Language";
-	$s_default_project = "Default Project";
 	$s_update_prefs_button = "Update instellingen";
 	$s_reset_prefs_button = "Begininstellingen";
 

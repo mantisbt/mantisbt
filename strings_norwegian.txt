@@ -106,7 +106,6 @@
 	$s_email_on_status_change = "Epost ved statusendring";
 	$s_email_on_priority_change = "Epost ved endring av pri";
 	$s_language = "Språk";
-	$s_default_project = "Standard prosjekt";
 	$s_update_prefs_button = "Oppdatere preferanser";
 	$s_reset_prefs_button = "Nullstill preferanser";
 
