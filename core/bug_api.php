@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.74 2004-07-18 14:40:46 vboctor Exp $
+	# $Id: bug_api.php,v 1.75 2004-07-25 14:58:34 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -476,8 +476,8 @@
 		bug_set_field( $t_new_bug_id, 'status', $t_bug_data->status );
 		bug_set_field( $t_new_bug_id, 'resolution', $t_bug_data->resolution );
 		bug_set_field( $t_new_bug_id, 'projection', $t_bug_data->projection );
-		bug_set_field( $t_new_bug_id, 'date_submitted', $t_mantis_db->DBTimeStamp( $t_bug_data->date_submitted ) );
-		bug_set_field( $t_new_bug_id, 'last_updated', $t_mantis_db->DBTimeStamp( $t_bug_data->last_updated ) );
+		bug_set_field( $t_new_bug_id, 'date_submitted', $t_mantis_db->DBTimeStamp( $t_bug_data->date_submitted ), false );
+		bug_set_field( $t_new_bug_id, 'last_updated', $t_mantis_db->DBTimeStamp( $t_bug_data->last_updated ), false );
 		bug_set_field( $t_new_bug_id, 'eta', $t_bug_data->eta );
 		bug_set_field( $t_new_bug_id, 'fixed_in_version', $t_bug_data->fixed_in_version );
 		bug_set_field( $t_new_bug_id, 'sponsorship_total', 0 );
@@ -1003,10 +1003,14 @@
 
 	# --------------------
 	# set the value of a bug field
-	function bug_set_field( $p_bug_id, $p_field_name, $p_status ) {
-		$c_bug_id		= db_prepare_int( $p_bug_id );
-		$c_field_name	= db_prepare_string( $p_field_name );
-		$c_status		= db_prepare_string( $p_status ); #generic, unknown type
+	function bug_set_field( $p_bug_id, $p_field_name, $p_status, $p_prepare = true ) {
+		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$c_field_name		= db_prepare_string( $p_field_name );
+		if( $p_prepare ) {
+			$c_status		= '\'' . db_prepare_string( $p_status ) . '\''; #generic, unknown type	
+		} else {
+			$c_status		=  $p_status; #generic, unknown type
+		}			
 
 		$h_status = bug_get_field( $p_bug_id, $p_field_name );
 
@@ -1019,7 +1023,7 @@
 
 		# Update fields
 		$query = "UPDATE $t_bug_table
-				  SET $c_field_name='$c_status'
+				  SET $c_field_name=$c_status
 				  WHERE id='$c_bug_id'";
 		db_query( $query );
 
