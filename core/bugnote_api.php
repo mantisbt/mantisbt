@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.32 2005-03-04 13:34:56 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.33 2005-03-04 13:41:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -320,9 +320,11 @@
 				$t_bugnote = new BugnoteData;
 
 				$t_bugnote->id            = $row['id'];
+				$t_bugnote->bug_id        = $row['bug_id'];
 				$t_bugnote->note          = $row['note'];
 				$t_bugnote->view_state    = $row['view_state'];
 				$t_bugnote->reporter_id   = $row['reporter_id'];
+				$t_bugnote->date_submitted = db_unixtimestamp( $row['date_submitted'] );
 				$t_bugnote->last_modified = db_unixtimestamp( $row['last_modified'] );
 				$t_bugnote->note_type     = $row['note_type'];
 				$t_bugnote->note_attr     = $row['note_attr'];
