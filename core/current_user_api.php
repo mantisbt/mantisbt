@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.20 2004-08-01 03:29:25 narcissus Exp $
+	# $Id: current_user_api.php,v 1.21 2004-08-06 15:38:50 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -90,11 +90,6 @@
 	#  this could be modified to call a user_api function to get the
 	#  filter out of a db or whatever
 	function current_user_get_bug_filter() {
-		# check to see if new cookie is needed
-		if ( !filter_is_cookie_valid() ) {
-			return false;
-		}
-
 		$f_filter_string	= gpc_get_string( 'filter', '' );
 		$t_view_all_cookie	= '';
 		$t_cookie_detail	= '';
@@ -102,6 +97,8 @@
 
 		if ( !is_blank( $f_filter_string ) ) {
 			$t_filter = unserialize( $f_filter_string );
+		} else if ( !filter_is_cookie_valid() ) {
+			return false;
 		} else {
 			$t_view_all_cookie_id	= filter_db_get_project_current( helper_get_current_project() );
 			$t_view_all_cookie		= filter_db_get_filter( $t_view_all_cookie_id );
