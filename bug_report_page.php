@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.23 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_report_page.php,v 1.24 2003-02-23 14:18:00 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -161,22 +161,21 @@
 </tr>
 
 
-<!-- Custom Fields -->
-<?php
-	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
-
-	# insert a spacer as long as we actually have some custom fields
-	if ( count( $t_related_custom_field_ids ) > 0 ) {
-?>
+<!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
+
+
+<!-- Custom Fields -->
 <?php
-	} # if ( size( $t_related_custom_field_ids ) > 0 )
+	$t_custom_fields_found = false;
+	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if( !$t_def['advanced'] ) {
+		if( !$t_def['advanced'] && custom_field_has_write_access_to_project( $t_id, helper_get_current_project() ) ) {
+			$t_custom_fields_found = true;
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -187,15 +186,17 @@
 	</td>
 </tr>
 <?php
-		} # if (!$t_def['advanced'])
+		} # if (!$t_def['advanced']) && has write access
 	} # foreach( $t_related_custom_field_ids as $t_id )
 ?>
 
 
+<?php if ( $t_custom_fields_found ) { ?>
 <!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
+<?php } ?>
 
 
 <!-- File Upload (if enabled) -->

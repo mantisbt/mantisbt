@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.40 2003-02-21 00:32:37 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.41 2003-02-23 14:18:00 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -356,14 +356,22 @@
 </tr>
 
 
-<!-- Custom Fields -->
 <!-- spacer -->
 <tr height="5" class="spacer">
 	<td colspan="6"></td>
 </tr>
+
+
+<!-- Custom Fields -->
 <?php
+	$t_custom_fields_found = false;
 	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 	foreach( $t_related_custom_field_ids as $t_id ) {
+		if ( !custom_field_has_read_access( $t_id, $f_bug_id ) ) {
+			continue;			
+		} # has read access
+
+		$t_custom_fields_found = true;
 		$t_def = custom_field_get_definition( $t_id );
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
@@ -385,11 +393,12 @@
 	} # foreach
 ?>
 
-
+<?php if ( $t_custom_fields_found ) { ?>
 <!-- spacer -->
 <tr height="5" class="spacer">
 	<td colspan="6"></td>
 </tr>
+<?php } # custom fields found ?>
 
 
 <!-- Attachments -->

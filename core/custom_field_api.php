@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.18 2003-02-23 13:16:36 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.19 2003-02-23 14:18:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -172,8 +172,12 @@
 	# --------------------
 	# Return true if the user can read the value of the field for the given bug,
 	#  false otherwise.
-	function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id ) {
+	function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id = null ) {
 		custom_field_ensure_exists( $p_field_id );
+
+		if ( null === $p_user_id ) {
+			$p_user_id = auth_get_current_user_id();
+		}
 
 		$t_access_level_r = custom_field_get_field( $p_field_id, 'access_level_r' );
 
@@ -187,20 +191,30 @@
 	}
 
 	# --------------------
-	# Return true if the user can modify the value of the field for the given bug,
+	# Return true if the user can modify the value of the field for the given project,
 	#  false otherwise.
-	function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id ) {
+	function custom_field_has_write_access_to_project( $p_field_id, $p_project_id, $p_user_id = null ) {
 		custom_field_ensure_exists( $p_field_id );
+
+		if ( null === $p_user_id ) {
+			$p_user_id = auth_get_current_user_id();
+		}
 
 		$t_access_level_rw = custom_field_get_field( $p_field_id, 'access_level_rw' );
 
-		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-
-		if ( user_get_access_level( $p_user_id, $t_project_id ) >= $t_access_level_rw ) {
+		if ( user_get_access_level( $p_user_id, $p_project_id ) >= $t_access_level_rw ) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	# --------------------
+	# Return true if the user can modify the value of the field for the given bug,
+	#  false otherwise.
+	function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id = null ) {
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		return ( custom_field_has_write_access_to_project( $p_field_id, $t_project_id, $p_user_id ) );
 	}
 
 	#===================================
@@ -671,7 +685,7 @@
 			return false;
 		}
 
-		if( !custom_field_has_read_access( $p_field_id, $p_bug_id, auth_get_current_user_id() ) ) {
+		if( !custom_field_has_write_access( $p_field_id, $p_bug_id, auth_get_current_user_id() ) ) {
 			return false;
 		}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.24 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_report_advanced_page.php,v 1.25 2003-02-23 14:18:00 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -291,20 +291,22 @@
 </tr>
 
 
-<!-- Custom Fields -->
-<?php
-	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
-
-	# insert a spacer as long as we actually have some custom fields
-	if ( count( $t_related_custom_field_ids ) > 0 ) {
-?>
 <tr>
 	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
+
+
+<!-- Custom Fields -->
 <?php
-	} # if ( size( $t_related_custom_field_ids ) > 0 )
+	$t_custom_fields_found = false;
+	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
+		if( !custom_field_has_write_access_to_project( $t_id, helper_get_current_project() ) ) {
+			continue;
+		}
+
+		$t_custom_fields_found = true;
 		$t_def = custom_field_get_definition( $t_id );
 ?>
 <tr <?php echo helper_alternate_class() ?>>
@@ -320,10 +322,12 @@
 ?>
 
 
+<?php if ( $t_custom_fields_found ) { ?>
 <!-- spacer -->
 <tr>
 	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
+<?php } # custom fields found ?>
 
 
 <!-- File Upload (if enabled) -->

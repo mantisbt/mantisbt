@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.55 2003-02-21 00:32:37 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.56 2003-02-23 14:18:00 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -350,13 +350,21 @@
 </tr>
 
 
-<!-- Custom Fields -->
 <tr>
 	<td class="spacer" colspan="6">&nbsp;</td>
 </tr>
+
+
+<!-- Custom Fields -->
 <?php
+	$t_custom_fields_found = false;
 	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 	foreach( $t_related_custom_field_ids as $t_id ) {
+		if( !custom_field_has_write_access( $t_id, $f_bug_id ) ) {
+			continue;
+		}
+
+		$t_custom_fields_found = true;
 		$t_def = custom_field_get_definition( $t_id );
 ?>
 <tr <?php echo helper_alternate_class() ?>>
@@ -374,10 +382,12 @@
 ?>
 
 
+<?php if ( $t_custom_fields_found ) { ?>
 <!-- spacer -->
 <tr>
 	<td class="spacer" colspan="6">&nbsp;</td>
 </tr>
+<?php } # custom fields found ?>
 
 
 <!-- Bugnote Text Box -->
