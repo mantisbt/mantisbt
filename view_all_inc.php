@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.135 2004-05-17 11:39:07 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.136 2004-05-17 14:39:34 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,7 +28,6 @@
 
 	$t_icon_path = config_get( 'icon_path' );
 	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
-	$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 ?>
 <?php # -- ====================== FILTER FORM ========================= -- ?>
 <?php filter_draw_selection_area( $f_page_number ); ?>
@@ -47,6 +46,10 @@
 		$col_count++;
 	}
 
+	$t_enable_sponsorship = config_get( 'enable_sponsorship' );
+	if ( ON == $t_enable_sponsorship ) {
+		$col_count++;
+	}
 ?>
 
 <br />
