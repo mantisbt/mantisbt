@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_permissions_report.php,v 1.3 2004-10-25 19:45:04 marcelloscata Exp $
+	# $Id: adm_permissions_report.php,v 1.4 2004-11-02 19:50:45 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -196,7 +196,7 @@
 	}
 
 	# Others
-	echo get_section_begin( 'OTHERS' );
+	echo get_section_begin( lang_get('others') );
 	echo get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'summary_link' ), config_get( 'view_summary_threshold' ) );
 	echo get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'changelog_link' ), config_get( 'view_changelog_threshold' ) );
 	echo get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'assigned_to' ), config_get( 'view_handler_threshold' ) );
