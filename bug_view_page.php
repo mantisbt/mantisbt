@@ -387,7 +387,7 @@
 </table>
 
 <?php
-	if ( $t_show_attachments ) {
+	if ( empty( $f_check ) && $t_show_attachments && $v_status < RESOLVED && access_level_check_greater_or_equal( REPORTER ) ) {
 		include( $g_bug_file_upload_inc );
 	}
 

@@ -43,7 +43,7 @@
 	$t_project_id		= helper_get_current_project();
 	$t_upload_method	= config_get( 'file_upload_method' );
 
-	if ( '' != $f_file &&
+	if ( 0 != $f_file['size'] &&
 		 ( DISK == $t_upload_method || FTP == $t_upload_method ) &&
 		 is_uploaded_file( $f_file ) ) {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );

@@ -6,74 +6,35 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.15 $
-	# $Author: jfitzell $
-	# $Date: 2002-10-20 23:59:48 $
-	#
-	# $Id: bug_monitor.php,v 1.15 2002-10-20 23:59:48 jfitzell Exp $
+	# $Id: bug_monitor.php,v 1.16 2002-10-23 04:54:44 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	# This file sets the bug to the chosen resolved state then gives the
-	# user the opportunity to enter a reason for the closure
+	# This file turns monitoring on or off for a bug for the current user
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bug_id	= gpc_get_int( 'f_bug_id' );
+	$f_action	= gpc_get_string( 'f_action' );
+
 	project_access_check( $f_bug_id );
 	bug_ensure_exists( $f_bug_id );
 
 	$t_view_state = bug_get_field( $f_bug_id, 'view_state' );
 
-	$t_threshold = $g_monitor_bug_threshold;
-	if ( ( PRIVATE == $t_view_state ) && ( $g_private_bug_threshold > $t_threshold ) ) {
-		$t_threshold = $g_private_bug_threshold;
+	$t_threshold = config_get( 'monitor_bug_threshold' );
+	if ( PRIVATE == $t_view_state ) {
+		$t_threshold = max( config_get( 'private_bug_threshold' ) , $t_threshold );
 	}
 
 	check_access( $t_threshold );
 
-	$c_bug_id = (integer)$f_bug_id;
-
-	# get user information
-	$u_id = current_user_get_field( 'id' );
-
-	if ( 'add' == $f_action ) {
-		# Make sure we aren't already monitoring this bug
-		$query ="SELECT bug_id ".
-				"FROM $g_mantis_bug_monitor_table ".
-				"WHERE bug_id='$c_bug_id' AND user_id='$u_id' ".
-				"LIMIT 1";
- 		$result = db_query( $query );
-		$t_num_rows = db_num_rows( $result );
-
-		if ( $t_num_rows == 0 ) {
-			# Insert monitoring record
-			$query ="INSERT ".
-					"INTO $g_mantis_bug_monitor_table ".
-					"( user_id, bug_id ) ".
-					"VALUES ".
-					"( '$u_id', '$c_bug_id' )";
-			$result = db_query($query);
-
-			# log new monitoring action
-			history_log_event_special( $f_bug_id, BUG_MONITOR, $u_id );
-		}
-	} elseif ( 'delete' == $f_action ) {
-		# Delete monitoring record
-		$query ="DELETE ".
-				"FROM $g_mantis_bug_monitor_table ".
-				"WHERE user_id = '$u_id' AND bug_id = '$c_bug_id'";
-		$result = db_query($query);
-
-		# log new un-monitor action
-		history_log_event_special( $f_bug_id, BUG_UNMONITOR, $u_id );
+	if ( 'delete' == $f_action ) {
+		bug_unmonitor( $f_bug_id, auth_get_current_user_id() );
+	} else { # should be 'add' but we have to account for other values
+		bug_monitor( $f_bug_id, auth_get_current_user_id() );
 	}
 
-	# Determine which view page to redirect back to.
-	$t_redirect_url = string_get_bug_view_url( $f_bug_id );
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect_view( $f_bug_id );
 ?>
