@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.13 $
+	# $Revision: 1.14 $
 	# $Author: vboctor $
-	# $Date: 2002-06-25 10:19:58 $
+	# $Date: 2002-07-02 12:48:52 $
 	#
-	# $Id: core_database_API.php,v 1.13 2002-06-25 10:19:58 vboctor Exp $
+	# $Id: core_database_API.php,v 1.14 2002-07-02 12:48:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -107,6 +107,24 @@
 		$query = 'SELECT LAST_INSERT_ID()';
 		$t_result = db_query( $query );
 		return db_result( $t_result, 0, 0 );
+	}
+	# --------------------
+	function db_field_exists( $p_field_name, $p_table_name, $p_db_name = '') {
+		global $g_database_name;
+
+		if ($p_db_name == '') {
+			$p_db_name = $g_database_name;
+		}
+
+		$fields = mysql_list_fields($p_db_name, $p_table_name);
+		$columns = mysql_num_fields($fields);
+		for ($i = 0; $i < $columns; $i++) {
+		  if ( mysql_field_name( $fields, $i ) == $p_field_name ) {
+		  	return true;
+		  }
+		}
+
+		return false;
 	}
 	# --------------------
 	function db_error_num() {

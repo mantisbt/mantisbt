@@ -22,6 +22,24 @@
 	}
 	# Load file globals # @@@ ugly hack for ugly problem.  Find better solution soon
 	require( './default/config_inc2.php' );
+	
+	# Should be eventually moved to the admin scripts, but keep it here for a while
+	# to make sure people don't miss it.
+	function obsolete_config_variable($var, $replace) {
+		global $$var;
+		if (isset($$var)) {
+			PRINT '$' . $var . ' is now obsolete';
+			if ($replace != '') {
+				PRINT ', please use $' . $replace;
+			}
+			exit;
+		}
+	}
+
+	# Check for obsolete variables
+	obsolete_config_variable('g_notify_developers_on_new', 'g_notify_flags');
+	obsolete_config_variable('g_notify_on_new_threshold', 'g_notify_flags');
+	obsolete_config_variable('g_notify_admin_on_new', 'g_notify_flags');
 
 	ini_set('magic_quotes_runtime', 0);
 	if ( OFF == $g_register_globals ) {
