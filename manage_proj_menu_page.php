@@ -72,23 +72,13 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_access_threshold ?>
-	</td>
-	<td>
-		<select name="f_access_min">
-			<?php print_enum_string_option_list( $s_access_levels_enum_string, VIEWER ) ?>
-		</select>
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="category">
 		<?php echo $s_upload_file_path ?>
 	</td>
 	<td>
 		<input type="text" name="f_file_path" size="70" maxlength="250">
 	</td>
 </tr>
-<tr class="row-2">
+<tr class="row-1">
 	<td class="category">
 		<?php echo $s_description ?>
 	</td>

@@ -73,7 +73,7 @@
 				# check access level
 				# only admins and the bugnote creator can delete this bugnote
 				# bug must be open to be editable
-				if ( get_bug_field( "status", $f_id ) < RESOLVED ) {
+				if ( get_bug_field( $f_id, "status" ) < RESOLVED ) {
 					if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 						( $v3_reporter_id == $t_user_id )) {
 						print_bracket_link( $g_bugnote_edit_page."?f_bugnote_text_id=".$v3_bugnote_text_id."&f_id=".$f_id."&f_bugnote_id=".$v3_id, $s_bugnote_edit_link );

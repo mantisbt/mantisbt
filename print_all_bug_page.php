@@ -121,11 +121,8 @@
 				p.view_state='$t_pub') OR
 				(p.enabled=1 AND
 				p.view_state='$t_prv' AND
-				p.access_min<='$t_access_level') OR
-				(p.enabled=1 AND
-				p.view_state='$t_prv' AND
 				u.user_id='$t_user_id'  AND
-                            u.project_id=p.id)
+				u.project_id=p.id)
 			ORDER BY p.name";
 		$result2 = db_query( $query2 );
 		$project_count = db_num_rows( $result2 );
@@ -383,7 +380,7 @@
 
 		# grab the bugnote count
 		$bugnote_count = get_bugnote_count( $v_id );
-		
+
 		# grab the project name
 		$project_name = get_project_field($v_project_id,"NAME");
 

@@ -32,7 +32,7 @@
 	}
 	# --------------------
 	# Returns the specified field value of the specified bug
-	function get_bug_field( $p_field_name, $p_bug_id ) {
+	function get_bug_field( $p_bug_id, $p_field_name ) {
 		global 	$g_string_cookie_val,
 				$g_mantis_bug_table;
 

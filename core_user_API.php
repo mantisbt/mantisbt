@@ -437,23 +437,18 @@
 		}
 
 		# access_level check
-		$t_project_id = get_bug_field( "project_id", $p_bug_id );
-		$t_user_id = get_current_user_field( "id" );
-		$t_project_access_level = get_project_access_level( $t_project_id );
+		$t_project_id = get_bug_field( $p_bug_id, "project_id" );
+		$t_project_view_state = get_project_field( $t_project_id, "view_state" );
 
-		if ( -1 == $t_project_access_level ) {
-			# user is not in the user lists
-			$t_access_level = get_current_user_field( "access_level" );
-			$t_access_threshold = get_project_field( $t_project_id, "access_min" );
-			if ( $t_access_level >= $t_access_threshold ) {
-				return;
-			} else {
-				print_header_redirect( $g_login_select_proj_page );
-			}
-		} else {
-			# user is in the user lists
-			# being in the lists means they have access
+		if ( PUBLIC == $t_project_view_state ) {
 			return;
+		} else {
+			$t_project_access_level = get_project_access_level( $t_project_id );
+			if ( -1 == $t_project_access_level ) {
+				print_header_redirect( $g_login_select_proj_page );
+			} else {
+				return;
+			}
 		}
 	}
 	# --------------------
@@ -463,7 +458,7 @@
 	function project_check( $p_bug_id ) {
 		global	$g_project_cookie, $g_project_cookie_val, $g_cookie_time_length;
 
-		$t_project_id = get_bug_field( "project_id", $p_bug_id );
+		$t_project_id = get_bug_field( $p_bug_id, "project_id" );
 		if ( $t_project_id != $g_project_cookie_val ) {
 			setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length );
 			$t_redirect_url = get_view_redirect_url( $p_bug_id, 1 );

@@ -16,6 +16,7 @@
 	$s_csv_export = "CSV Export";
 	$s_login_anonymously = "Login Anonymously";
 	$s_jump_to_bugnotes = "Jump to Bugnotes";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
@@ -369,7 +370,6 @@
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Add Project";
-	$s_access_threshold = "Access Threshold";
 	$s_upload_file_path = "Upload File Path";
 	$s_add_project_button = "Add Project";
 	$s_projects_title = "Projects";
@@ -504,13 +504,10 @@
 	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
-	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Add user to project";
 	$s_add_user_button = "Add User";
 	$s_project_selection_title = "Project Selection";
 	$s_remove_link = "remove";
-	$s_automatic_access = "Users With Automatic Access";
 
 	# proj_user_update.php3
 	$s_updated_user_msg = "Successfully updated user";

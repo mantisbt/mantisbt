@@ -10,23 +10,13 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	$query = "SELECT id
-			FROM $g_mantis_user_table
-			WHERE username='$f_username'";
-	$result = db_query( $query );
-	if ( db_num_rows( $result ) > 0 ) {
-		$t_user_id = db_result( $result, 0, 0 );
-
-		# Add user to project
-		$query = "INSERT
-				INTO $g_mantis_project_user_list_table
-				(project_id, user_id, access_level)
-				VALUES
-				('$g_project_cookie_val', '$t_user_id', '$f_access_level' )";
-		$result = db_query($query);
-	} else {
-		$result = 0;
-	}
+	# Add user to project
+	$query = "INSERT
+			INTO $g_mantis_project_user_list_table
+			(project_id, user_id, access_level)
+			VALUES
+			('$g_project_cookie_val', '$f_user_id', '$f_access_level' )";
+	$result = db_query($query);
 
 	$t_redirect_url = $g_proj_user_menu_page;
 ?>

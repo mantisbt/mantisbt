@@ -60,14 +60,7 @@
 	# If the handler is assigned then we add that.
 
 	# The next part is only for NEW bugs.
-	# We go through the assigned project users and grab everyone who is a
-	# DEVELOPER or higher and add that to a user_id array.  We also add the
-	# emails to the email address array.  Then we check the mantis_user_table
-	# and grab anyone who should have automatic access.
-	# This way we don't accidentally grab a normal developer who is set to be
-	# lower for a specific project.  The check_duplicates function should prevent
-	# duplicate entries from being entered
-
+	# We add all ADMINISTRATORs then add DEVELOPERs.
 	# Lastly, we do a bit of post processing and return the bcc string.
 	function build_bcc_list( $p_bug_id, $p_notify_type ) {
 		global $g_mantis_bug_table, $g_mantis_user_table,
@@ -79,59 +72,58 @@
 
 		# setup the array of email entries
 		$send_arr = array();
-		$send_counter = 0;
-
-		# Get Reporter and Handler IDs
-		$query = "SELECT reporter_id, handler_id
-		    FROM $g_mantis_bug_table
-		    WHERE id='$p_bug_id'";
-		$result = db_query( $query );
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, "v" );
 
 		# Get Reporter Email
+		$v_reporter_id = get_bug_field( $p_bug_id, "reporter_id" );
 		$t_notify_reporter = get_user_pref_info( $v_reporter_id, $p_notify_type );
-		$t_reporter_email = get_user_info( $v_reporter_id, "email" );
-		if ( 1 == $t_notify_reporter ) {
-			$send_arr[$send_counter++] = $t_reporter_email;
+		if ( ON == $t_notify_reporter ) {
+			$send_arr[] = get_user_info( $v_reporter_id, "email" );
 		}
 
 		# Get Handler Email
+		$v_handler_id = get_bug_field( $p_bug_id, "handler_id" );
 		if ( $v_handler_id > 0 ) {
-			$t_handler_email = get_user_info( $v_handler_id, "email" );
 			$t_notify_handler = get_user_pref_info( $v_handler_id, $p_notify_type );
-
-			if ( 1 == $t_notify_handler ) {
-				if (!check_duplicate($send_arr,$t_handler_email) ) {
-					$send_arr[$send_counter++] = $t_handler_email;
-				}
+			if ( ON == $t_notify_handler ) {
+				$send_arr[] = get_user_info( $v_handler_id, "email" );
 			}
 		}
 
-		# Get Developer Email
+		# Check if we want to broadcast to all developers on a NEW bug
 		if ( ( ON == $g_notify_developers_on_new )&&( "email_on_new" == $p_notify_type ) ) {
-			$user_id_arr = array();
-			$user_id_counter = 0;
-			$p_project_id = get_bug_project_id( $p_bug_id );
+			$t_project_id = get_bug_field( $p_bug_id, "project_id" );
+			$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
 			$t_dev = DEVELOPER;
+			$t_adm = ADMINISTRATOR;
 
-			# Project specific developers
-			# All assigned users that are develoeprs and higher whose accounts are enabled
-/*			$query = "SELECT DISTINCT t1.id, t1.username
-					FROM $g_mantis_user_table as t1
-					LEFT JOIN $g_mantis_project_user_list_table as t2
-					ON t1.id=t2.user_id
-					WHERE (t2.access_level>=55 AND t2.project_id=2) OR
-						  (t1.access_level>=55 AND t2.access_level IS NULL)
-					ORDER BY t1.username";
-*/
-			$query = "SELECT DISTINCT p.user_id
-					FROM $g_mantis_project_user_list_table p,
-						$g_mantis_user_table u
-					WHERE p.project_id=$p_project_id AND
-							p.access_level>=$t_dev AND
-							p.user_id=u.id AND
-							u.enabled=1";
+			# grab all the ADMINISTRATORS
+			$query = "SELECT DISTINCT id, email
+					FROM $g_mantis_user_table
+					WHERE access_level>=$t_adm";
+			$result = db_query( $query );
+			$admin_count = db_num_rows( $result );
+			for ($i=0;$i<$admin_count;$i++) {
+				$row = db_fetch_array( $result );
+				$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
+				if ( ON == $t_notify ) {
+					$send_arr[] = $row["email"];
+				}
+			} # end ADMINISTRATORS
+
+			# grab all DEVELOPERs if the project is public
+			# Otherwise check the project user lists
+			if ( PUBLIC == $t_project_view_state ) {
+				$query = "SELECT DISTINCT id, email
+						FROM $g_mantis_user_table
+						WHERE access_level>=$t_dev";
+			} else {
+				$query = "SELECT DISTINCT p.user_id, u.email
+						FROM $g_mantis_project_user_list_table p,
+							$g_mantis_user_table u
+						WHERE p.project_id=$t_project_id AND
+								p.access_level>=$t_dev AND
+								p.user_id=u.id";
+			}
 			$result = db_query( $query );
 			$proj_user_count = db_num_rows( $result );
 			for ($i=0;$i<$proj_user_count;$i++) {
@@ -139,69 +131,22 @@
 
 				# if the user's notification is on then add to the list
 				$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
-
-				if ( 1 == $t_notify ) {
-					$user_id_arr[$user_id_counter++] = $row["user_id"];
-
-					if ( !check_duplicate( $send_arr,get_user_info( $row["user_id"], "email" ) ) ) {
-						$send_arr[$send_counter++] = get_user_info( $row["user_id"], "email" );
-					}
+				if ( ON == $t_notify ) {
+					$send_arr[] = $row["email"];
 				}
-			}
+			} # end DEVELOPERS
+		} # end NEW bug developer section
 
-			# Grab the minimum access threshold for this project
-			$query = "SELECT access_min, view_state
-					FROM $g_mantis_project_table
-					WHERE id='$g_project_cookie_val'";
-			$result = db_query( $query );
-			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
-
-			# Global developer role
-			if ( PRIVATE == $v_view_state ) {
-				$query = "SELECT id
-							FROM $g_mantis_user_table
-							WHERE access_level>=$v_access_min AND
-									enabled=1";
-			} else {
-				$query = "SELECT id
-							FROM $g_mantis_user_table
-							WHERE access_level>=$t_dev AND
-									enabled=1";
-			}
-			$result = db_query( $query );
-
-			$user_count = db_num_rows( $result );
-			for ($i=0;$i<$user_count;$i++) {
-				$row = db_fetch_array( $result );
-
-				$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
-				$found = 0;
-				if ( 1 == $t_notify ) {
-					for ($k=0;$k<count( $user_id_arr );$k++) {
-						if ( $user_id_arr[$k] == $row["id"] ) {
-							$found = 1;
-							break;
-						}
-					}
-					if ( $found == 0 ) {
-						if ( !check_duplicate( $send_arr, get_user_info( $row["id"], "email" ) ) ) {
-							$send_arr[$send_counter++] = get_user_info( $row["id"], "email" );
-						}
-					}
-				}
-			}
-		}
-
-		$t_bcc = ($g_use_bcc && !$g_use_phpMailer) ? "Bcc: " : "";
+		$t_bcc = ( $g_use_bcc && !$g_use_phpMailer ) ? "Bcc: " : "";
 		## win-bcc-bug
 
-		for ($i=0; $i<count($send_arr); $i++) {
-			$t_bcc .= $send_arr[$i].", ";
+		$send_arr = array_unique( $send_arr );
+		foreach ( $send_arr as $send_val ) {
+			$t_bcc .= $send_val.", ";
 		}
 
 		# chop off the last comma and add a \n
-		if ( strlen( $t_bcc )>5 ) {
+		if ( strlen( $t_bcc ) > 5 ) {
 			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? "\n" : "");  ## win-bcc-bug
 		} else {
 			return "";
@@ -569,17 +514,6 @@
 	}
 	# --------------------
 	# helper function
-	function get_bug_project_id( $p_bug_id ) {
-		global $g_mantis_bug_table;
-
-		$query = "SELECT project_id
-				FROM $g_mantis_bug_table
-				WHERE id='$p_bug_id'";
-		$result = db_query( $query );
-		return db_result( $result, 0, 0 );
-	}
-	# --------------------
-	# helper function
 	function get_bug_summary( $p_bug_id ) {
 		global $g_mantis_bug_table;
 
@@ -593,8 +527,10 @@
 	# formats the subject correctly
 	# we include the project name, bug id, and summary.
 	function email_build_subject( $p_bug_id ) {
+		global $g_project_cookie_val;
+
 		# grab the project name
-		$p_project_name = get_project_field( ( get_bug_project_id( $p_bug_id ) ), "name" );
+		$p_project_name = get_project_field( $g_project_cookie_val, "name" );
 
 		# grab the subject (summary)
 		$p_subject = string_email( get_bug_summary( $p_bug_id ) );

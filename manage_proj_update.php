@@ -31,7 +31,6 @@
 				enabled='$f_enabled',
 				view_state='$f_view_state',
 				file_path='$f_file_path',
-				access_min='$f_access_min',
 				description='$f_description'
     		WHERE id='$f_project_id'";
     $result = db_query( $query );

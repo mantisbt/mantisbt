@@ -19,9 +19,9 @@
 		# Add item
 		$query = "INSERT
 				INTO $g_mantis_project_table
-				( id, name, status, enabled, view_state, file_path, access_min, description )
+				( id, name, status, enabled, view_state, file_path, description )
 				VALUES
-				( null, '$f_name', '$f_status', '1', '$f_view_state', '$f_file_path', '$f_access_min', '$f_description' )";
+				( null, '$f_name', '$f_status', '1', '$f_view_state', '$f_file_path', '$f_description' )";
 	    $result = db_query( $query );
 	}
 

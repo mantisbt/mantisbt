@@ -51,13 +51,13 @@
    	$result = db_query($query);
 
    	# notify reporter and handler
-   	if ( get_bug_field( "status", $f_id ) == FEEDBACK ) {
-   		if ( get_bug_field( "resolution", $f_id ) == REOPENED ) {
+   	if ( get_bug_field( $f_id, "status" ) == FEEDBACK ) {
+   		if ( get_bug_field( $f_id, "resolution" ) == REOPENED ) {
    			email_reopen( $f_id );
    		} else {
    			email_feedback( $f_id );
    		}
-   	} else if ( get_bug_field( "status", $f_id ) == RESOLVED ) {
+   	} else if ( get_bug_field( $f_id, "status" ) == RESOLVED ) {
    		email_resolved( $f_id );
    	} else {
    		email_bugnote_add( $f_id );

@@ -265,26 +265,32 @@
 		global $g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie_val;
 
-		$t_access_level = get_current_user_field( "access_level" );
 		$t_user_id = get_current_user_field( "id" );
+		$t_access_level = get_current_user_field( "access_level" );
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;
 
-		$query = "SELECT DISTINCT( p.id ), p.name
-					FROM $g_mantis_project_table p
-					LEFT JOIN $g_mantis_project_user_list_table u
-					ON p.id=u.project_id
-					WHERE p.enabled=1 AND
-					((p.view_state=$t_pub) OR
-					 (p.view_state=$t_prv AND p.access_min<=$t_access_level) OR
-					 (p.view_state=$t_prv AND u.user_id=$t_user_id))
-					ORDER BY p.name";
+		if ( ADMINISTRATOR == $t_access_level ) {
+			$query = "SELECT DISTINCT( p.id ), p.name
+						FROM $g_mantis_project_table p
+						WHERE p.enabled=1
+						ORDER BY p.name";
+		} else {
+			$query = "SELECT DISTINCT( p.id ), p.name
+						FROM $g_mantis_project_table p
+						LEFT JOIN $g_mantis_project_user_list_table u
+						ON p.id=u.project_id
+						WHERE p.enabled=1 AND
+						((p.view_state=$t_pub) OR
+						 (p.view_state=$t_prv AND u.user_id=$t_user_id))
+						ORDER BY p.name";
+		}
 
 		$result = db_query( $query );
-		$user_count = db_num_rows( $result );
+		$project_count = db_num_rows( $result );
 
-		for ($i=0;$i<$user_count;$i++) {
+		for ($i=0;$i<$project_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			if ( $p_project_id == $v_id ) {
@@ -456,6 +462,28 @@
 		$t_count = count( $zook_arr );
 		for ($i=0;$i<$t_count;$i++) {
 			PRINT "<option value=\"".ACTION."\">".$zook_arr[$i]."</option>";
+		}
+	}
+	# --------------------
+	function print_project_user_list_option_list() {
+		global	$g_mantis_project_user_list_table, $g_mantis_user_table,
+				$g_project_cookie_val;
+		$t_adm = ADMINISTRATOR;
+		$query = "SELECT DISTINCT u.id, u.username
+				FROM $g_mantis_user_table u
+				LEFT JOIN $g_mantis_project_user_list_table p
+				ON p.user_id=u.id AND p.project_id='$g_project_cookie_val'
+				WHERE u.access_level<$t_adm AND
+					p.user_id IS NULL AND
+					u.access_level<'$t_adm'
+				ORDER BY u.username";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_username = $row["username"];
+			$t_id = $row["id"];
+			PRINT "<option value=\"$t_id\">$t_username</option>";
 		}
 	}
 	# --------------------
