@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_update.php,v 1.26 2003-02-08 22:47:00 jfitzell Exp $
+	# $Id: manage_proj_cat_update.php,v 1.27 2003-02-09 00:03:20 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,6 +24,10 @@
 	$f_category			= gpc_get_string( 'category' );
 	$f_new_category		= gpc_get_string( 'new_category' );
 	$f_assigned_to		= gpc_get_int( 'assigned_to', 0 );
+
+	if ( is_blank( $f_new_category ) ) {
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
 
 	$f_category		= trim( $f_category );
 	$f_new_category	= trim( $f_new_category );

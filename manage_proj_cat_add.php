@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_add.php,v 1.25 2003-02-08 22:47:00 jfitzell Exp $
+	# $Id: manage_proj_cat_add.php,v 1.26 2003-02-09 00:02:59 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,6 +22,11 @@
 
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_category		= gpc_get_string( 'category' );
+
+	if ( is_blank( $f_category ) ) {
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+
 	$t_categories = explode( '|', $f_category );
 	$t_category_count = count( $t_categories );
 
