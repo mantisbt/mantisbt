@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.27 2003-02-19 20:09:28 jfitzell Exp $
+	# $Id: core.php,v 1.28 2003-02-19 23:34:41 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -29,9 +29,9 @@
 	#   parameter 'mbadmin=1' to the URL.
 	#
 	$t_mantis_offline = 'mantis_offline.php';
-	if ( file_exists( $t_mantis_offline ) && !isset( $_GET['mbadmin'] ) ) {
-		include( dirname( __FILE__ ).DIRECTORY_SEPARATOR.$t_mantis_offline );
-		exit;
+	if ( file_exists( $t_mantis_offline ) && !isset($_GET['mbadmin'])) {
+		include( $t_mantis_offline);
+		die;
 	}
 
 
