@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.17 2003-02-19 18:06:07 jlatour Exp $
+	# $Id: database_api.php,v 1.18 2003-09-17 01:32:54 beerfrick Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -92,10 +92,16 @@
 
 	# --------------------
 	function db_select_db( $p_db_name ) {
+		global $g_db_connected;
 		$t_result = @mysql_select_db( $p_db_name );
 
 		if ( !$t_result ) {
 			db_error();
+			db_close();
+			# we got the wrong database so we're basically not connected.
+			# this prevents the html functions from trying to display db stuff
+			$g_db_connected = false;
+
 			trigger_error( ERROR_DB_SELECT_FAILED, ERROR );
 			return false;
 		}
