@@ -146,9 +146,9 @@
 	# This is in the view all pages
 	$g_show_assigned_names = 0;
 
-             ############################
-             ### Mantis JPGRAPH Addon ###
-             ############################
+	############################
+	### Mantis JPGRAPH Addon ###
+	############################
 
 	# --- jpgraph settings --- #
 	# Initial Version from Duncan Lisset
@@ -347,6 +347,7 @@
 	$g_view_reported_cookie    = $g_cookie_prefix."_VIEW_REPORTED_COOKIE";
 	$g_view_assigned_cookie    = $g_cookie_prefix."_VIEW_ASSIGNED_COOKIE";
 	$g_view_unassigned_cookie  = $g_cookie_prefix."_VIEW_UNASSIGNED_COOKIE";
+	$g_manage_cookie           = $g_cookie_prefix."_MANAGE_COOKIE";
 
 	# --- cookie values ---------------
 	$g_string_cookie_val        = "";
@@ -355,6 +356,7 @@
 	$g_view_reported_cookie_val = "";
 	$g_view_assigned_cookie_val = "";
 	$g_view_unassigned_cookie_val = "";
+	$g_manage_cookie_val        = "";
 
 	if ( isset( $HTTP_COOKIE_VARS[$g_string_cookie] ) ) {
 		$g_string_cookie_val         = $HTTP_COOKIE_VARS[$g_string_cookie];
@@ -373,6 +375,9 @@
 	}
 	if ( isset( $HTTP_COOKIE_VARS[$g_view_unassigned_cookie] ) ) {
 		$g_view_unassigned_cookie_val  = $HTTP_COOKIE_VARS[$g_view_unassigned_cookie];
+	}
+	if ( isset( $HTTP_COOKIE_VARS[$g_manage_cookie] ) ) {
+		$g_manage_cookie_val  = $HTTP_COOKIE_VARS[$g_manage_cookie];
 	}
 
 	#######################################
