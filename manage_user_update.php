@@ -23,6 +23,10 @@
 		$f_enabled = 0;
 	}
 
+  $f_username = addslashes($f_username);
+  $f_email = addslashes($f_email);
+  $f_protected = (integer)$f_protected;
+
 	# update action
 	# administrator is not allowed to change access level or enabled
 	# this is to prevent screwing your own account

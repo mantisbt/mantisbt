@@ -11,6 +11,7 @@
 <?php login_cookie_check() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+  $f_id = (integer)$f_id;
 	#check_access( DEVELOPER );
 
 	# we handle the case where the file is attached to a bug

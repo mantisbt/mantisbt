@@ -32,6 +32,7 @@
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
 	}
+  $f_offset = (integer)$f_offset;
 
 	# get news count (project plus sitewide posts)
     $total_news_count = news_count_query( $g_project_cookie_val );

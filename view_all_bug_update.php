@@ -12,6 +12,7 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( UPDATER );
+  $f_project_id = (integer)$f_project_id;
 
 	# We check to see if the variable exists to avoid warnings
 	$result = 1;

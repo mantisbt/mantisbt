@@ -9,6 +9,7 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
+  $f_project_id = (integer)$f_project_id;
 
 	# Delete the bugs, bug text, bugnotes, and bugnote text
 	# first select the bug ids

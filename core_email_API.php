@@ -70,6 +70,7 @@
 				$g_notify_developers_on_new,
 				$g_use_bcc, $g_use_phpMailer,
 				$g_mantis_bug_monitor_table;
+    $p_bug_id = (integer)$p_bug_id;
 
 		# setup the array of email entries
 		$send_arr = array();
@@ -255,6 +256,7 @@
 			$s_new_account_greeting, $s_new_account_url,
 			$s_new_account_username, $s_new_account_password,
 			$s_new_account_message, $s_new_account_do_not_reply;
+    $p_user_id = (integer)$p_user_id;
 
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
@@ -280,6 +282,7 @@
 		global 	$g_mantis_user_table, $g_path,
 				$s_reset_request_msg, $s_account_name_msg,
 				$s_news_password_msg;
+    $p_user_id = (integer)$p_user_id;
 
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
@@ -370,6 +373,7 @@
 				$s_email_description,
 				$g_email_separator1,
 				$g_email_padding_length;
+    $p_bug_id = (integer)$p_bug_id;
 
 		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 				UNIX_TIMESTAMP(last_updated) as last_updated
@@ -442,6 +446,7 @@
 		global 	$g_mantis_bugnote_table, $g_mantis_bugnote_text_table,
 				$g_mantis_user_table, $g_complete_date_format,
 				$g_bugnote_order, $g_email_separator2;
+    $p_bug_id = (integer)$p_bug_id;
 
 		$t_message = "";
 

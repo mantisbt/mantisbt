@@ -22,6 +22,7 @@
 	}
 
 	$f_user_id = get_current_user_field( "id" );
+  $f_id = (integer)$f_id;
 
 	# Delete the profile
 	$query = "DELETE

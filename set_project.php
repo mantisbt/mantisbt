@@ -11,6 +11,7 @@
 
 	$valid_project = 1;
 	# Check for invalid project_id selection
+  $f_project_id = (integer)$f_project_id;
 	if ( empty( $f_project_id ) ) {
 		$valid_project = 0;
 	}

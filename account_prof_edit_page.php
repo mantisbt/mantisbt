@@ -22,6 +22,7 @@
 	}
 
 	$f_user_id = get_current_user_field( "id" );
+  $f_id = (integer)$f_id;
 
 	# If deleteing profile redirect to delete script
 	if ( "delete" == $f_action) {

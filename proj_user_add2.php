@@ -9,6 +9,8 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
+  $f_user_id = (integer)$f_user_id;
+  $f_access_level = (integer)$f_access_level;
 
 	# check for no projects
 	if ( !isset( $f_project_id ) ) {
@@ -19,7 +21,7 @@
 	$result = 0;
 	$count = count( $f_project_id );
 	for ($i=0;$i<$count;$i++) {
-		$t_project_id = $f_project_id[$i];
+		$t_project_id = (integer)$f_project_id[$i];
 		$query = "INSERT
 				INTO $g_mantis_project_user_list_table
 				(project_id, user_id, access_level)

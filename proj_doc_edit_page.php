@@ -9,7 +9,7 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
-
+  $f_id = (integer)$f_id;
 
 	$query = "SELECT *
 			FROM $g_mantis_project_file_table

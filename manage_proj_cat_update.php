@@ -9,8 +9,8 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
-	$f_category = urldecode( $f_category );
-	$f_orig_category = urldecode( stripslashes( $f_orig_category ) );
+	$f_category = addslashes( urldecode( $f_category ) );
+	$f_orig_category = addslashes( urldecode( stripslashes( $f_orig_category ) ) );
 
 	$result = 0;
 	$query = "";

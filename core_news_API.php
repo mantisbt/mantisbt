@@ -16,8 +16,9 @@
 	# --------------------
 	function news_add_query( $p_project_id, $p_poster_id, $p_headline, $p_body ) {
 		global $g_mantis_news_table;
+    $p_project_id = (integer)$p_project_id;
+    $p_poster_id = (integer)$p_poster_id;
 
-		# " character poses problem when editting so let's just convert them
 		$p_headline	= string_prepare_text( $p_headline );
 		$p_body		= string_prepare_textarea( $p_body );
 
@@ -33,6 +34,7 @@
 	# Delete the news entry
 	function news_delete_query( $p_id ) {
 		global $g_mantis_news_table;
+    $p_id = (integer)$p_id;
 
 		$query = "DELETE
 				FROM $g_mantis_news_table
@@ -43,8 +45,8 @@
 	# Update news item
 	function news_update_query( $p_id, $p_headline, $p_body, $p_project_id ) {
 		global $g_mantis_news_table;
+    $p_id = (integer)$p_id;
 
-		# " character poses problem when editting so let's just convert them to '
 		$p_headline	= string_prepare_text( $p_headline );
 		$p_body		= string_prepare_textarea( $p_body );
 
@@ -59,6 +61,7 @@
 	# Selects the news item associated with the specified id
 	function news_select_query( $p_id ) {
 		global $g_mantis_news_table;
+    $p_id = (integer)$p_id;
 
 		$query = "SELECT *
 			FROM $g_mantis_news_table
@@ -70,6 +73,7 @@
 	# get news count (selected project plus sitewide posts)
 	function news_count_query( $p_project_id ) {
 		global $g_mantis_news_table;
+    $p_project_id = (integer)$p_project_id;
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_news_table

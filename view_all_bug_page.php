@@ -32,25 +32,26 @@
 	if ( !isset( $f_page_number ) ) {
 		$f_page_number = 1;
 	}
+  $f_page_number = (integer)$f_page_number;
 
 	# Load preferences
-	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
-	$f_show_category 		= $t_setting_arr[1];
-	$f_show_severity	 	= $t_setting_arr[2];
-	$f_show_status 			= $t_setting_arr[3];
-	$f_per_page 			= $t_setting_arr[4];
-	$f_highlight_changed 	= $t_setting_arr[5];
-	$f_hide_closed 			= $t_setting_arr[6];
-	$f_user_id 				= $t_setting_arr[7];
-	$f_assign_id 			= $t_setting_arr[8];
-	$f_sort 				= $t_setting_arr[9];
+	$f_show_category 		= addslashes($t_setting_arr[1]);
+	$f_show_severity	 	= addslashes($t_setting_arr[2]);
+	$f_show_status 			= addslashes($t_setting_arr[3]);
+	$f_per_page 			= (integer)$t_setting_arr[4];
+	$f_highlight_changed 	= (integer)$t_setting_arr[5];
+	$f_hide_closed 			= addslashes($t_setting_arr[6]);
+	$f_user_id 				= addslashes($t_setting_arr[7]);
+	$f_assign_id 			= addslashes($t_setting_arr[8]);
+	$f_sort 				= addslashes($t_setting_arr[9]);
 	$f_dir		 			= $t_setting_arr[10];
-	$f_start_month			= $t_setting_arr[11];
-	$f_start_day 			= $t_setting_arr[12];
-	$f_start_year 			= $t_setting_arr[13];
-	$f_end_month 			= $t_setting_arr[14];
-	$f_end_day				= $t_setting_arr[15];
-	$f_end_year				= $t_setting_arr[16];
+  if ($f_dir != 'ASC' && $f_dir != 'DESC') $f_dir = 'ASC';
+	$f_start_month			= (integer)$t_setting_arr[11];
+	$f_start_day 			= (integer)$t_setting_arr[12];
+	$f_start_year 			= (integer)$t_setting_arr[13];
+	$f_end_month 			= (integer)$t_setting_arr[14];
+	$f_end_day				= (integer)$t_setting_arr[15];
+	$f_end_year				= (integer)$t_setting_arr[16];
 
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&

@@ -13,6 +13,8 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
+  
+  $f_file_id = (integer)$f_file_id;
 
 	if ( DISK == $g_file_upload_method ) {
 		# grab the file name

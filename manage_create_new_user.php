@@ -15,6 +15,7 @@
 	if ( empty( $f_username ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
+  $f_username = addslashes($f_username);
 
 	# Check for duplicate username
 	$query = "SELECT username
@@ -47,6 +48,9 @@
 	# create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string();
 	$t_password = process_plain_password( $f_password );
+  $f_email = addslashes($f_email);
+  $f_access_level = (integer)$f_access_level;
+
     $query = "INSERT
     		INTO $g_mantis_user_table
     		( id, username, email, password, date_created, last_visit,

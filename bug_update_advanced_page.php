@@ -18,6 +18,7 @@
 	project_access_check( $f_id );
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
+  $f_id = (integer)$f_id;
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated

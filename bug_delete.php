@@ -15,6 +15,8 @@
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
 	check_bug_exists( $f_id );
+  $f_id = (integer)$f_id;
+  $f_bug_text_id = (integer)$f_bug_text_id;
 
 	# Delete the bug entry
 	$query = "DELETE

@@ -90,6 +90,7 @@
 		# if a profile was selected then let's use that information
 		if ( !empty( $f_profile_id ) ) {
 			# Get profile data and prefix with v_
+      $f_profile_id = (integer)$f_profile_id;
 			$query = "SELECT *
 				FROM $g_mantis_user_profile_table
 				WHERE id='$f_profile_id'";
@@ -118,6 +119,12 @@
 
 		$t_id = db_insert_id();
 
+    $f_assign_id = (integer)$f_assign_id;
+    $f_severity = (integer)$f_severity;
+    $f_reproducibility = (integer)$f_reproducibility;
+    $f_category = addslashes($f_category);
+    $f_view_state = (integer)$f_view_state;
+
 		# check to see if we want to assign this right off
 		$t_status = NEW_;
 		if ( $f_assign_id != "0000000" ) {
@@ -130,6 +137,7 @@
 		if ( !isset( $f_priority ) ) {
 			$f_priority = NORMAL;
 		}
+    $f_priority = (integer)$f_priority;
 		$query = "INSERT
 				INTO $g_mantis_bug_table
 				( id, project_id,

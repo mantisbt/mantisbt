@@ -13,10 +13,12 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
-    $query = "SELECT view_state
-    		FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
-    $result = db_query( $query );
+  $f_id = (integer)$f_id;
+  
+  $query = "SELECT view_state
+        		FROM $g_mantis_bug_table
+    		    WHERE id='$f_id'";
+  $result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );
 	if ( PRIVATE == $v_view_state ) {

@@ -13,6 +13,7 @@
 	if ( !isset( $f_sort ) ) {
 		$f_sort = "name";
 	}
+  $f_sort = addslashes($f_sort);
 
 	# basically we toggle between ASC and DESC if the user clicks the
 	# same sort order

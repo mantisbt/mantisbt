@@ -15,6 +15,7 @@
 	project_access_check( $f_id );
 	check_access( REPORTER );
 	check_bugnote_exists( $f_id );
+  $f_bugnote_id = (integer)$f_bugnote_id;
 
 	# grab the bugnote text id
 	$query = "SELECT bugnote_text_id

@@ -12,6 +12,7 @@
 	}
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+  $f_id = (integer)$f_id;
 	project_access_check( $f_id );
 	check_bug_exists( $f_id );
 

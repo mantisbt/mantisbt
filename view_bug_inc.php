@@ -9,6 +9,7 @@
 	# $f_id MUST be specified before the file is included
 ?>
 <?php
+  $f_id = (integer)$f_id;
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
     		FROM $g_mantis_bug_table
