@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.30 2002-12-04 10:27:14 jfitzell Exp $
+	# $Id: print_api.php,v 1.31 2002-12-21 10:07:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -655,6 +655,21 @@
 			check_selected( $t_elem[0], $p_val );
 			echo ">$t_elem2</option>";
 		} # end for
+	}
+	# --------------------
+	# prints the list of a project's users
+	# if no project is specified uses the current project
+	function print_project_user_option_list( $p_project_id=null ) {
+ 		if ( null === $p_project_id ) {
+			$p_project_id = helper_get_current_project();
+		}
+
+		$t_rows = project_get_all_user_rows( $p_project_id );
+		foreach ( $t_rows as $t_row ) {
+			$t_user_id = $t_row['id'];
+			$t_username = $t_row['username'];
+			echo "<option value=\"$t_user_id\">$t_username</option>";
+		}
 	}
 	# --------------------
 	# prints the list of access levels exluding ADMINISTRATOR

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.17 2002-12-17 11:35:29 jfitzell Exp $
+	# $Id: bug_view_page.php,v 1.18 2002-12-21 10:07:16 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -37,6 +37,12 @@
 	<td class="form-title" colspan="3">
 		<?php echo lang_get( 'viewing_bug_simple_details_title' ) ?>
 		<span class="small"><?php print_bracket_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ) ) ?></span>
+<?php	if ( ( current_user_get_field( 'username' ) != config_get( 'anonymous_account' ) )
+				&& access_level_check_greater_or_equal( config_get( 'bug_reminder_threshold' ) ) ) { ?>
+			<span class="small">
+				<?php print_bracket_link( 'bug_reminder_page.php?f_bug_id='.$f_bug_id, lang_get( 'bug_reminder' ) ) ?>
+			</span>
+<?php }?>
 	</td>
 	<td class="right" colspan="3">
 <?php if ( BOTH == config_get( 'show_view' ) ) { ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.20 2002-12-06 09:12:56 vboctor Exp $
+	# $Id: project_api.php,v 1.21 2002-12-21 10:07:18 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -288,9 +288,9 @@
 		}
 	}
 	# --------------------
-	# Return the user's access level on the project or false
+	# Return the user's local (overridden) access level on the project or false
 	#  if the user is not listed on the project
-	function project_get_user_access_level( $p_project_id, $p_user_id ) {
+	function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_user_id		= db_prepare_int( $p_user_id );
 
@@ -314,10 +314,10 @@
 	# --------------------
 	# return the descriptor holding all the info from the project user list
 	# for the specified project
-	function project_get_all_user_rows( $p_project_id ) {
-		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
-
+	function project_get_local_user_rows( $p_project_id ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
+
+		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 
 		$query = "SELECT *
 				FROM $t_project_user_list_table
@@ -334,7 +334,61 @@
 
 		return $t_user_rows;
 	}
+	# --------------------
+	# Return an array of info about users who have access to the the given project
+	# For each user we have 'id', 'name', and 'access_level' (overall access level)
+	function project_get_all_user_rows( $p_project_id ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_higher_than	= db_prepare_int( $p_higher_than );
+		$c_lower_than	= db_prepare_int( $p_lower_than );
 
+		$t_user_table = config_get( 'mantis_user_table' );
+		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+
+		$t_on = ON;
+
+		if ( PUBLIC == project_get_field( $p_project_id, 'view_state' ) ) {
+			$t_access_clause = '';
+		} else {
+			# @@@ we need to get this logic out somewhere else.
+			#   I was getting access_min from the project but apparently we got
+			#   rid of that in 0.17.2.  The user docs claim developers and higher
+			#   get into private projects but the code seems to only allow administrators in
+			$t_access_clause = 'AND access_level >= ' . ADMINISTRATOR;
+		}
+
+		$t_users = array();
+
+		$query = "SELECT id, username, access_level
+					FROM $t_user_table
+					WHERE enabled = $t_on
+					  $t_access_clause
+					ORDER BY username";
+
+		$result = db_query( $query );
+		$t_row_count = db_num_rows( $result );
+		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			$row = db_fetch_array( $result );
+			$t_users[$row['id']] = $row;
+		}
+
+		// Get the project overrides
+		$query = "SELECT u.id, u.username, l.access_level
+					FROM $t_project_user_list_table l, $t_user_table u
+					WHERE l.user_id = u.id
+					  AND u.enabled = $t_on
+					  AND l.project_id = $c_project_id
+					ORDER BY u.username";
+
+		$result = db_query( $query );
+		$t_row_count = db_num_rows( $result );
+		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			$row = db_fetch_array( $result );
+			$t_users[$row['id']] = $row;
+		}
+
+		return array_values($t_users);
+	}
 	#===================================
 	# Data Modification
 	#===================================
@@ -428,7 +482,7 @@
 	#  destination project
 	function project_copy_users( $p_destination_id, $p_source_id ) {
 		# Copy all users from current project over to another project
-		$rows = project_get_all_user_rows( $p_source_id );
+		$rows = project_get_local_user_rows( $p_source_id );
 
 		for ( $i = 0 ; $i < sizeof( $rows ) ; $i++ ) {
 			extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );

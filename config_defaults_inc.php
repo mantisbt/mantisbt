@@ -391,6 +391,9 @@
 	# change to ASC or DESC
 	$g_history_order		= 'ASC';
 
+	# are reminders stored as bugnotes
+	$g_store_reminders		= ON;
+
 	###################################
 	# Mantis File Upload Settings
 	###################################
@@ -500,6 +503,10 @@
 
 	# access level needed to view attachments to bugs reported by other users.
 	$g_view_attachments_threshold	= VIEWER;
+
+	# access level needed to send a reminder from the bug view pages
+	# set to NOBODY to disable the feature
+	$g_bug_reminder_threshold		= REPORTER;
 
 	# access level needed to upload files to the project documentation section
 	# You can set this to NOBODY to prevent uploads to projects

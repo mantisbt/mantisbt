@@ -133,6 +133,9 @@ These two will probably be removed before release:
  * Renamed file: report_bug_advanced_page.php to bug_add_advanced_page.php
  * Renamed file: report_bug_page.php to bug_add_page.php
  * New config option (upload_project_file_threshold, upload_bug_file_threshold, allow_reporter_upload): control what users may upload what kinds of files
+ * Enhancement: reminder feature to let you send a message about a bug to a list of users
+ * New config option (store_reminders): controls whether to store sent reminders as a bugnote
+ * New config option (bug_reminder_threshold): the access level required to send reminders
 
 
 2002.08.23  -  0.17.5

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.42 2002-10-20 23:51:21 jfitzell Exp $
+	# $Id: user_api.php,v 1.43 2002-12-21 10:07:18 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -391,7 +391,7 @@
 			return $t_access_level;
 		}
 
-		$t_project_access_level = project_get_user_access_level( $p_project_id, $p_user_id );
+		$t_project_access_level = project_get_local_user_access_level( $p_project_id, $p_user_id );
 
 		if ( false === $t_project_access_level ) {
 			return $t_access_level;

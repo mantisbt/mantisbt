@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.29 2002-12-10 12:27:42 vboctor Exp $
+	# $Id: email_api.php,v 1.30 2002-12-21 10:07:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -582,6 +582,8 @@
 		#echo nl2br($t_message).'<br />';
 		#exit;
 
+		$t_debug_email = config_get('debug_email');
+
 		if ( ON == $g_use_phpMailer )  {
 			# Visit http://phpmailer.sourceforge.net
 			# if you have problems with phpMailer
@@ -605,7 +607,6 @@
 			$mail->From     = $g_from_email;
 			$mail->FromName = '';
 
-			$t_debug_email = config_get('debug_email');
 			$t_debug_to = '';
 			# add to the Recipient list
 			$t_recipient_list = split(',', $t_recipient);
@@ -662,6 +663,11 @@
 		} else {
 			# Visit http://www.php.net/manual/function.mail.php
 			# if you have problems with mailing
+
+			if ( OFF !== $t_debug_email ) {
+				$t_message = 'To: ' . $t_recipient . "\n$t_message";
+				$t_recipient = $t_debug_email;
+			}
 
 			$t_headers = "From: $g_from_email\n";
 			#$t_headers .= "Reply-To: $p_reply_to_email\n";
@@ -750,5 +756,36 @@
 		}
 
 		return $p_email;
+	}
+	# --------------------
+	# Send a bug reminder to each of the given user, or to each user if the first
+	#  parameter is an array
+	# return an array of usernames to which the reminder was successfully sent
+	#
+	# @@@ I'm not sure this shouldn't return an array of user ids... more work for
+	#  the caller but cleaner from an API point of view.
+	function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
+		if ( ! is_array( $p_recipients ) ) {
+			$p_recipients = array( $p_recipients );
+		}
+
+		$t_subject = email_build_subject( $p_bug_id );
+		$t_sender = current_user_get_field( 'username' ) . ' <' .
+					current_user_get_field( 'email' ) . '>' ;
+		$t_date = date( config_get( 'normal_date_format' ) );
+		$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender " .
+					lang_get( 'sent_you_this_reminder_about' ) . ":\n\n" .
+					config_get( 'path' );
+
+		$result = array();
+		foreach ( $p_recipients as $t_recipient ) {
+			$t_email = user_get_email( $t_recipient );
+			$result[] = user_get_name( $t_recipient );
+			$t_contents = $t_header .
+							string_get_bug_view_url( $p_bug_id, $t_recipient ) .
+							"\n\n$p_message";
+			email_send( $t_email, $t_subject, $t_contents );
+		}
+		return $result;
 	}
 ?>

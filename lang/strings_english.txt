@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.96 $
-	# $Author: vboctor $
-	# $Date: 2002-12-08 08:33:26 $
+	# $Revision: 1.97 $
+	# $Author: jfitzell $
+	# $Date: 2002-12-21 10:07:18 $
 	#
-	# $Id: strings_english.txt,v 1.96 2002-12-08 08:33:26 vboctor Exp $
+	# $Id: strings_english.txt,v 1.97 2002-12-21 10:07:18 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -380,6 +380,15 @@
 	$s_bug_resolved_msg = 'Bug has been resolved. Enter bugnote below...';
 	$s_resolve_add_bugnote_title = 'Add Bugnote Reason For Resolving Bug';
 	$s_bugnote_add_resolve_button = 'Add Bugnote';
+
+	# bug_reminder_page.php
+	$s_from = 'From';
+	$s_to = 'To';
+	$s_on = 'On';
+	$s_sent_you_this_reminder_about = 'sent you this reminder about';
+	$s_bug_reminder = 'Send a reminder';
+	$s_reminder_sent_to = 'Reminder sent to';
+	$s_bug_send_button = 'Send';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Bug has been successfully updated...';
