@@ -71,7 +71,7 @@
 		<?php echo $s_enabled ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_enabled" CHECKED>
+		<input type="checkbox" name="f_enabled" checked="checked">
 	</td>
 </tr>
 <tr class="row-1">

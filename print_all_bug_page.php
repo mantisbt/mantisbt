@@ -270,7 +270,7 @@
 		<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>">
 	</td>
 	<td>
-		<input type="checkbox" name="f_hide_closed" <?php if ( 'on' == $f_hide_closed ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_hide_closed" <?php check_checked( f_hide_closed, 'on' ); ?>>
 	</td>
 	<td>
 		<input type="submit" value="<?php echo $s_filter_button ?>">

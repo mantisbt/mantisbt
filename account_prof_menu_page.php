@@ -98,7 +98,7 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<input type="radio" name="f_action" value="edit" CHECKED> <?php echo $s_edit_profile ?>
+		<input type="radio" name="f_action" value="edit" checked="checked"> <?php echo $s_edit_profile ?>
 		<input type="radio" name="f_action" value="make default"> <?php echo $s_make_default ?>
 		<input type="radio" name="f_action" value="delete"> <?php echo $s_delete_profile ?>
 	</td>

@@ -67,7 +67,7 @@
 		<?php echo $s_enabled ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_enabled" <?php if ( ON == $v_enabled ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_enabled" <?php check_checked( $v_enabled, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-2">

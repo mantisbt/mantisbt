@@ -103,7 +103,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_advanced_report ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_report" <?php if ( ON == $u_advanced_report ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_advanced_report" <?php check_checked( $u_advanced_report, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -111,7 +111,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_advanced_view ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_view" <?php if ( ON == $u_advanced_view ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_advanced_view" <?php check_checked( $u_advanced_view, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -119,7 +119,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_advanced_update ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_advanced_update" <?php if ( ON == $u_advanced_update ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_advanced_update" <?php check_checked( $u_advanced_update, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -146,7 +146,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_new ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_new" <?php if ( ON == $u_email_on_new ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_new" <?php check_checked( $u_email_on_new, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -154,7 +154,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_assigned ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_assigned" <?php if ( ON == $u_email_on_assigned ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_assigned" <?php check_checked( $u_email_on_assigned, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -162,7 +162,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_feedback ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_feedback" <?php if ( ON == $u_email_on_feedback ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_feedback" <?php check_checked( $u_email_on_feedback, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -170,7 +170,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_resolved ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_resolved" <?php if ( ON == $u_email_on_resolved ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_resolved" <?php check_checked( $u_email_on_resolved, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -178,7 +178,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_closed ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_closed" <?php if ( ON == $u_email_on_closed ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_closed" <?php check_checked( $u_email_on_closed, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -186,7 +186,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_reopened ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_reopened" <?php if ( ON == $u_email_on_reopened ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_reopened" <?php check_checked( $u_email_on_reopened, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -194,7 +194,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_bugnote_added ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_bugnote" <?php if ( ON == $u_email_on_bugnote ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_bugnote" <?php check_checked( $u_email_on_bugnote, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-2">
@@ -202,7 +202,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_status_change ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_status" <?php if ( ON == $u_email_on_status ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_status" <?php check_checked( $u_email_on_status, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -210,7 +210,7 @@ function edit_account_prefs($p_user_id = 0, $p_error_if_protected = true, $p_acc
 		<?php echo $s_email_on_priority_change ?>
 	</td>
 	<td>
-		<input type="checkbox" name="f_email_on_priority" <?php if ( ON == $u_email_on_priority ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_email_on_priority" <?php check_checked( $u_email_on_priority , ON); ?>>
 	</td>
 </tr>
 <?php } else { ?>

@@ -140,7 +140,7 @@
 		<?php echo $s_view_status ?>
 	</td>
 	<td>
-		<input type="radio" name="f_view_state" value="10" CHECKED> <?php echo $s_public ?>
+		<input type="radio" name="f_view_state" value="10" checked="checked"> <?php echo $s_public ?>
 		<input type="radio" name="f_view_state" value="50"> <?php echo $s_private ?>
 	</td>
 </tr>
@@ -149,7 +149,7 @@
 		<?php echo $s_report_stay ?> <?php print_documentation_link( 'report_stay' ) ?>:
 	</td>
 	<td>
-		<input type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'CHECKED' ?>> (<?php echo $s_check_report_more_bugs ?>)
+		<input type="checkbox" name="f_report_stay" <?php if ( isset($f_report_stay) ) echo 'checked="checked"' ?>> (<?php echo $s_check_report_more_bugs ?>)
 	</td>
 </tr>
 <tr>

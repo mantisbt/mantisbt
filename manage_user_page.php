@@ -60,7 +60,7 @@
 		<?php echo $s_enabled ?>:
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_enabled" <?php if ( ON == $u_enabled ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_enabled" <?php check_checked( $u_enabled, ON ); ?>>
 	</td>
 </tr>
 <tr class="row-1">
@@ -68,7 +68,7 @@
 		<?php echo $s_protected ?>:
 	</td>
 	<td colspan="2">
-		<input type="checkbox" name="f_protected" <?php if ( ON == $u_protected ) echo 'CHECKED' ?>>
+		<input type="checkbox" name="f_protected" <?php check_checked( $u_protected, ON ); ?>>
 	</td>
 </tr>
 <tr>

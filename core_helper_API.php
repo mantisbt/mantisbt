@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.62 $
+	# $Revision: 1.63 $
 	# $Author: prescience $
-	# $Date: 2002-08-19 02:55:55 $
+	# $Date: 2002-08-19 03:11:07 $
 	#
-	# $Id: core_helper_API.php,v 1.62 2002-08-19 02:55:55 prescience Exp $
+	# $Id: core_helper_API.php,v 1.63 2002-08-19 03:11:07 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -480,9 +480,21 @@
 	     }
 	}
 	# --------------------
+	# If $p_var and $p_val are euqal to each other then we echo SELECTED
+	# This is used when we want to know if a variable indicated a certain
+	# option element is selected
 	function check_selected( $p_var, $p_val ) {
 		if ( $p_var == $p_val ) {
 			echo 'selected="selected"';
+		}
+	}
+	# --------------------
+	# If $p_var and $p_val are euqal to each other then we echo CHECKED
+	# This is used when we want to know if a variable indicated a certain
+	# element is checked
+	function check_checked( $p_var, $p_val ) {
+		if ( $p_var == $p_val ) {
+			echo 'checked="checked"';
 		}
 	}
 	# --------------------
