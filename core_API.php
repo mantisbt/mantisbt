@@ -34,7 +34,7 @@
 
 	# @@@ Experimental
 	# deal with register_globals being Off
-	if ( OFF = $g_register_globals ) {
+	if ( OFF == $g_register_globals ) {
 		foreach ( $HTTP_POST_VARS as $key => $value) {
 			$$key = $value;
 		}
