@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.33 2003-03-14 18:54:32 int2str Exp $
+	# $Id: string_api.php,v 1.34 2003-03-17 00:25:47 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -165,14 +165,37 @@
 			return $p_string;
 		}
 
-		$p_string = eregi_replace( "([[:alnum:]]+)://([^[:space:]<]*)([[:alnum:]#?/&=@])",
-								"<a href=\"\\1://\\2\\3\">\\1://\\2\\3</a>",
+		# This is based on the description in RFC 2396 which specifies how
+		#  to match URLs generically without knowing their type
+		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?:@&=+$,[:alnum:]])+)/s',
+								'<a href="\1">\1</a>',
 								$p_string);
-		$p_string = eregi_replace( "^(([a-z0-9_]|\\-|\\.)+@([^[:space:]<]*)([[:alnum:]-]))",
-								"<a href=\"mailto:\\1\" target=\"_new\">\\1</a>",
-								$p_string);
-		$p_string = eregi_replace( "( )(([a-z0-9_]|\\-|\\.)+@([^[:space:]<]*)([[:alnum:]-]))",
-								"\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>",
+
+		# Set up a simple subset of RFC 822 email address parsing
+		#  We don't allow domain literals or quoted strings
+		#  We also don't allow the & character in domains even though the RFC
+		#  appears to do so.  This was to prevent &gt; etc from being included.
+		#  Note: we could use email_get_rfc822_regex() but it doesn't work well
+		#  when applied to data that has already had entities inserted.
+		$t_atom = '(?:[^()<>@,;:\\\".\[\]\000-\037\177 &]+)';
+
+		# In order to avoid selecting URLs containing @ characters as email
+		#  addresses we limit our selection to addresses that are preceded by:
+		#  * the beginning of the string
+		#  * a &lt; entity (allowing '<foo@bar.baz>')
+		#  * whitespace
+		#  * a : (allowing 'send email to:foo@bar.baz')
+		#  * a \n, \r, or > (because newlines have been replaced with <br />
+		#    and > isn't valid in URLs anyway
+		#
+		# At the end of the string we allow the opposite:
+		#  * the end of the string
+		#  * a &gt; entity
+		#  * whitespace
+		#  * a , character (allowing 'email foo@bar.baz, or ...')
+		#  * a \n, \r, or <
+		$p_string = preg_replace( '/(?<=^|&lt;|[\s\:\>\n\r])('.$t_atom.'(?:\.'.$t_atom.')*\@'.$t_atom.'(?:\.'.$t_atom.')*)(?=$|&gt;|[\s\,\<\n\r])/s',
+								'<a href="mailto:\1" target="_new">\1</a>',
 								$p_string);
 		return $p_string;
 	}
@@ -180,11 +203,15 @@
 	# --------------------
 	# Detect href anchors in the string and replace them with URLs and email addresses
 	function string_strip_hrefs( $p_string ) {
-		$p_string = eregi_replace( "<a href=\"mailto:(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))\" target=\"_new\">(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))</a>",
-								"\\1",
+		# First grab mailto: hrefs.  We don't care whether the URL is actually
+		# correct - just that it's inside an href attribute.
+		$p_string = preg_replace( '/<a\s[^\>]*href="mailto:([^\"]+)"[^\"]*>[^\<]*<\/a>/s',
+								'\1',
 								$p_string);
-		$p_string = eregi_replace( "<a href=\"([[:alnum:]]+://[^[:space:]]*)([[:alnum:]#?/&=])\">([^<]*)</a>",
-								"\\1",
+
+		# Then grab any other href
+		$p_string = preg_replace( '/<a\s[^\>]*href="([^\"]+)"[^\"]*>[^\<]*<\/a>/s',
+								'\1',
 								$p_string);
 		return $p_string;
 	}
