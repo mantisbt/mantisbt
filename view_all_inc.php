@@ -1,3 +1,8 @@
+<?php
+	if ( STATUS_LEGEND_POSITION_TOP == $g_status_legend_position ) {
+		print_status_colors();
+	}
+?>
 <p>
 <table class="width100" cellspacing="0">
 <tr class="row-category2">
@@ -363,4 +368,8 @@
 ?>
 </div>
 
-<?php print_status_colors() ?>
+<?php
+	if ( STATUS_LEGEND_POSITION_BOTTOM == $g_status_legend_position ) {
+		print_status_colors();
+	}
+?>

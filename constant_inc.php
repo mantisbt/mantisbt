@@ -142,4 +142,8 @@
 	define( 'ERROR_DUPLICATE_PROJECT',   10 );
 	define( 'ERROR_EMPTY_FIELD',         11 );
 	define( 'ERROR_PROTECTED_ACCOUNT',   12 );
+
+	# Status Legend Position
+	define( 'STATUS_LEGEND_POSITION_TOP',    1);
+	define( 'STATUS_LEGEND_POSITION_BOTTOM', 2);
 ?>
