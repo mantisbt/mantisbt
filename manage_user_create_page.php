@@ -21,12 +21,12 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<form method="post" action="manage_user_create.php">
-		<?php echo $s_create_new_account_title ?>
+		<?php echo lang_get( 'create_new_account_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_username ?>
+		<?php echo lang_get( 'username' ) ?>
 	</td>
 	<td width="75%">
 		<input type="text" name="f_username" size="32" maxlength="32" />
@@ -34,15 +34,15 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_email ?>
+		<?php echo lang_get( 'email' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_email" size="32" maxlength="64" />
+		<?php print_email_input( 'f_email', '' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_password ?>
+		<?php echo lang_get( 'password' ) ?>
 	</td>
 	<td>
 		<input type="password" name="f_password" size="32" maxlength="32" />
@@ -50,7 +50,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_verify_password ?>
+		<?php echo lang_get( 'verify_password' ) ?>
 	</td>
 	<td>
 		<input type="password" name="f_password_verify" size="32" maxlength="32" />
@@ -58,7 +58,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_access_level ?>
+		<?php echo lang_get( 'access_level' ) ?>
 	</td>
 	<td>
 		<select name="f_access_level">
@@ -68,7 +68,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_enabled ?>
+		<?php echo lang_get( 'enabled' ) ?>
 	</td>
 	<td>
 		<input type="checkbox" name="f_enabled" checked="checked" />
@@ -76,7 +76,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_protected ?>
+		<?php echo lang_get( 'protected' ) ?>
 	</td>
 	<td colspan="2">
 		<input type="checkbox" name="f_protected" />
@@ -84,7 +84,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_create_user_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'create_user_button' ) ?>" />
 		</form>
 	</td>
 </tr>

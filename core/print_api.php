@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.11 2002-09-03 02:21:01 prescience Exp $
+	# $Id: print_api.php,v 1.12 2002-09-06 08:15:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -87,6 +87,17 @@
 		}
 	}
 	# --------------------
+	# print out an email editing input
+	function print_email_input( $p_field_name, $p_email ) {
+		$t_limit_email_domain = config_get( 'limit_email_domain' );
+		if ( $t_limit_email_domain ) {
+			# remove the domain part
+			$p_email = eregi_replace( "@$t_limit_email_domain$", '', $p_email );
+			echo '<input type="text" name="'.$p_field_name.'" size="20" maxlength="64" value="'.$p_email.'" />@'.$t_limit_email_domain;
+		} else {
+			echo '<input type="text" name="'.$p_field_name.'" size="32" maxlength="64" value="'.$p_email.'" />';
+		}
+	}
 	###########################################################################
 	# Option List Printing API
 	###########################################################################

@@ -22,10 +22,14 @@
 		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
 	}
 
+	$f_email = email_append_domain( $f_email );
+
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
 	$result = 0;
 	if ( OFF == $f_protected ) {
+
+		email_ensure_valid( $f_email );
 
 		$c_username	= addslashes($f_username);
 		$c_email	= addslashes($f_email);

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.15 2002-09-06 07:13:18 jfitzell Exp $
+	# $Id: email_api.php,v 1.16 2002-09-06 08:15:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -679,4 +679,13 @@
 		}
 	}
 	# --------------------
+	# Check limit_email_domain option and append the domain name if it is set
+	function email_append_domain( $p_email ) {
+		$t_limit_email_domain = config_get( 'limit_email_domain' );
+		if ( $t_limit_email_domain && !empty( $p_email ) ) {
+			$p_email = "$p_email@$t_limit_email_domain";
+		}
+
+		return $p_email;
+	}
 ?>

@@ -80,7 +80,7 @@
 	    <?php echo $s_email ?>:
 	</td>
 	<td>
-	    <input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>" />
+	    <?php print_email_input( 'f_email', $u_email ) ?>
 	</td>
 </tr>
 <?php } ?>
@@ -151,7 +151,7 @@
 	    <?php echo $s_email ?>:
 	</td>
 	<td>
-	    <input type="text" size="32" maxlength="64" name="f_email" value="<?php echo $u_email ?>" />
+		<?php print_email_input( 'f_email', $u_email ) ?>
 	</td>
 </tr>
 <tr class="row-1">

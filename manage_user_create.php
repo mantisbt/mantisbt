@@ -28,19 +28,26 @@
 		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 	}
 
-	user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled )
+	$f_email = email_append_domain( $f_email );
 
+	user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled );
+
+	$t_redirect_url = 'manage_page.php';
+
+	print_page_top1();
+
+	print_meta_redirect( $t_redirect_url );
+
+	print_page_top2();
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
 
 <br />
 <div align="center">
 <?php
 	$f_access_level = get_enum_element( 'access_levels', $f_access_level );
-	echo "$s_created_user_part1 <span class=\"bold\">$f_username</span> $s_created_user_part2 <span class=\"bold\">$f_access_level</span><br />";
+	echo lang_get( 'created_user_part1' ).' <span class="bold">'.$f_username.'</span> '.lang_get( 'created_user_part2' ).' <span class="bold">'.$f_access_level.'</span><br />';
 
-	print_bracket_link('manage_page.php', $s_proceed );
+	print_bracket_link($t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 

@@ -22,6 +22,10 @@
 		$f_enabled = 0;
 	}
 
+	$f_email = email_append_domain( $f_email );
+
+	email_ensure_valid( $f_email );
+
 	$c_username 	= addslashes($f_username);
 	$c_email		= addslashes($f_email);
 	$c_protected	= (integer)$f_protected;

@@ -22,10 +22,7 @@
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
 
-	$t_limit_email_domain = config_get( 'limit_email_domain' );
-	if ( $t_limit_email_domain ) {
-		$f_email = "$f_email@$t_limit_email_domain";
-	}
+	$f_email = email_append_domain( $f_email );
 
 	# Check for a properly formatted email with valid MX record
 	#  Don't allow blank emails when signing up though, no matter what.
