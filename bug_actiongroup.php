@@ -11,152 +11,56 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	
-	$f_action			= gpc_get_string( 'f_action' );
-	$f_bug_arr			= gpc_get_string_array( 'f_bug_arr', array() );
+	$f_action	= gpc_get_string( 'f_action' );
+	$f_bug_arr	= gpc_get_int_array( 'f_bug_arr', array() );
 
-# the queries
-function updateBugLite($p_id, $p_status, $p_request) {
-	$t_handler_id = auth_get_current_user_id();
-	$t_query='';
-	$result = 1;
-
-	bug_ensure_exists( $p_id );
-
-	# history treatment
-	# extract current extended information into history variables
-	$row = bug_get_extended_row( $p_id );
-	extract( $row, EXTR_PREFIX_ALL, 'h' );
-
-	switch ($p_status) {
-
-		case 'MOVED' :
-			check_access( config_get( 'bug_move_access_level' ) );
-			$t_query = "project_id='$p_request'";
-			break;
-
-		case CLOSED :
-			check_access( config_get( 'close_bug_threshold' ) );
-			$t_query="status='$p_status'";
-			break ;
-
-		case ASSIGNED :
-			check_access( config_get( 'update_bug_threshold' ) );
-			// @@@ Check that $p_request has access to handle a bug.
-			$t_handler_id = $p_request ;
-			$t_query="handler_id='$t_handler_id', status='$p_status'";
-			break ;
-
-		case RESOLVED :
-			check_access( config_get( 'handle_bug_threshold' ) );
-			$t_query=" status='$p_status', resolution='$p_request'";
-			break ;
-
-		case 'UP_PRIOR' :
-			check_access( config_get( 'update_bug_threshold' ) );
-			$t_query="priority='$p_request'";
-			break ;
-
-		case 'UP_STATUS' :
-			check_access( config_get( 'update_bug_threshold' ) );
-			$t_query="handler_id='$t_handler_id', status='$p_request'";
-			break ;
-	}
-	# Update fields
-	$query = "UPDATE ".config_get( 'mantis_bug_table' )."
-    		  SET $t_query
-			  WHERE id='$p_id'";
-
-   	$result = db_query($query);
-
-	if ( !$result ) {
-		print_mantis_error( ERROR_GENERIC );
-	}
-
-	# history logging should be done after the field updates
-	switch ($p_status) {
-
-		case 'MOVED' :
-			history_log_event_direct( $p_id, 'project_id', $h_project_id, $p_request, $t_handler_id );
-			break;
-
-		case CLOSED :
-			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
-			break ;
-
-		case ASSIGNED :
-			history_log_event_direct( $p_id, 'handler_id', $h_handler_id, $p_request, $t_handler_id );
-			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
-			break ;
-
-		case RESOLVED :
-			history_log_event_direct( $p_id, 'resolution', $h_resolution, $p_request, $t_handler_id );
-			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
-			break ;
-
-		case 'UP_PRIOR' :
-			history_log_event_direct( $p_id, 'priority', $h_priority, $p_request, $t_handler_id );
-			break ;
-
-		case 'UP_STATUS' :
-			history_log_event_direct( $p_id, 'status', $h_status, $p_request, $t_handler_id );
-			break ;
-	}
-
-	# update bug last updated
-	bug_update_date($p_id);
-
-   	# notify reporter and handler
-	switch ( $p_status ) {
-
-		case ASSIGNED:	email_assign( $p_id );
-			   			break;
-		case RESOLVED:	email_resolved( $p_id );
-						break;
-		case CLOSED:	email_close( $p_id );
-						break;
-	}
-
-}//updateBug
-
-	foreach($f_bug_arr as $value) {
+	foreach( $f_bug_arr as $t_bug_id ) {
+		bug_ensure_exists( $t_bug_id );
 
 		switch ( $f_action ) {
 
 		case 'CLOSE':
-			updateBugLite( $value, CLOSED, '' );
+			check_access( config_get( 'close_bug_threshold' ) );
+			bug_close( $t_bug_id );
 			break;
 
 		case 'DELETE':
-			bug_delete( $value );
+			check_access( config_get( 'allow_bug_delete_access_level' ) );
+			bug_delete( $t_bug_id );
 			break;
 
 		case 'MOVE':
+			check_access( config_get( 'bug_move_access_level' ) );
 			$f_project_id = gpc_get_int( 'f_project_id' );
-			updateBugLite( $value, 'MOVED', $f_project_id );
+			bug_set_field( $t_bug_id, 'project_id', $f_project_id );
 			break;
 
 		case 'ASSIGN':
+			check_access( config_get( 'update_bug_threshold' ) );
+			// @@@ Check that $f_assign has access to handle a bug.
 			$f_assign = gpc_get_int( 'f_assign' );
-			updateBugLite( $value, ASSIGNED, $f_assign );
+			bug_assign( $t_bug_id, $f_assign );
 			break;
 
 		case 'RESOLVE':
+			check_access( config_get( 'handle_bug_threshold' ) );
 			$f_resolution = gpc_get_int( 'f_resolution' );
-			updateBugLite( $value, RESOLVED, $f_resolution );
+			bug_resolve( $t_bug_id, $f_resolution );
 			break;
 
 		case 'UP_PRIOR':
+			check_access( config_get( 'update_bug_threshold' ) );
 			$f_priority = gpc_get_int( 'f_priority' );
-			updateBugLite( $value, 'UP_PRIOR', $f_priority );
+			bug_set_field( $t_bug_id, 'priority', $f_priority );
 			break;
 
 		case 'UP_STATUS':
+			check_access( config_get( 'update_bug_threshold' ) );
 			$f_status = gpc_get_int( 'f_status' );
-			updateBugLite( $value, 'UP_STATUS', $f_status );
+			bug_set_field( $t_bug_id, 'status', $f_status );
 			break;
 		}
 	}
 
-	print_meta_redirect( 'view_all_bug_page.php',0);
+	print_meta_redirect( 'view_all_bug_page.php',0 );
 ?>

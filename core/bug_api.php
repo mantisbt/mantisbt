@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.10 2002-09-16 04:16:59 jfitzell Exp $
+	# $Id: bug_api.php,v 1.11 2002-09-16 06:10:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -326,8 +326,40 @@
 	#===================================
 
 	# --------------------
+	# set the value of a bug field
+	function bug_set_field( $p_bug_id, $p_field_name, $p_status ) {
+		$c_bug_id		= db_prepare_int( $p_bug_id );
+		$c_field_name	= db_prepare_string( $p_field_name );
+		$c_status		= db_prepare_string( $p_status ); #generic, unknown type
+
+		$h_status = bug_get_field( $p_bug_id, $p_field_name );
+
+		# return if status is already set
+		if ( $c_status == $h_status ) {
+			return true;
+		}
+
+		$t_bug_table = config_get ( 'mantis_bug_table' );
+
+		# Update fields
+		$query = "UPDATE $t_bug_table
+				  SET $c_field_name='$c_status'
+				  WHERE id='$c_bug_id'";
+		db_query( $query );
+
+		# updated the last_updated date
+		bug_update_date( $p_bug_id );
+
+		# log changes
+		history_log_event_direct( $p_bug_id, $p_field_name, $h_status, $p_status );
+
+		bug_clear_cache( $p_bug_id );
+
+		return true;
+	}
+	# --------------------
 	# assign the bug to the given user
-	function bug_assign( $p_bug_id, $p_user_id ) {
+	function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text='' ) {
 		$c_bug_id	= db_prepare_int( $p_bug_id );
 		$c_user_id	= db_prepare_int( $p_user_id );
 
@@ -343,7 +375,7 @@
 	
 		$t_bug_table = config_get( 'mantis_bug_table' );
 
-		if ( ( $t_ass_val != $h_status ) || ( $t_handler_id != $h_handler_id ) ) {
+		if ( ( $t_ass_val != $h_status ) || ( $p_user_id != $h_handler_id ) ) {
 
 			# get user id
 			$query = "UPDATE $t_bug_table
@@ -351,60 +383,59 @@
 					  WHERE id='$c_bug_id'";
 			db_query( $query );
 
+			# log changes
+			history_log_event_direct( $c_bug_id, 'status', $h_status, $t_ass_val );
+			history_log_event_direct( $c_bug_id, 'handler_id', $h_handler_id, $p_user_id );
+
+			# Add bugnote if supplied
+			if ( $p_bugnote_text != '' ) {
+				bugnote_add( $p_bug_id, $p_bugnote_text );
+			}
+
 			# updated the last_updated date
 			bug_update_date( $p_bug_id );
 
-			# log changes
-			history_log_event_direct( $c_bug_id, 'status', $h_status, $t_ass_val );
-			history_log_event_direct( $c_bug_id, 'handler_id', $h_handler_id, $t_handler_id );
-
 			# send assigned to email
 			email_assign( $p_bug_id );
+
+			bug_clear_cache( $p_bug_id );
 		}
+
 		return true;
 	}
 	# --------------------
 	# close the given bug
-	function bug_close( $p_bug_id, $p_bugnote_text ) {
+	function bug_close( $p_bug_id, $p_bugnote_text='' ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
-		$c_bug_id			= db_prepare_int( $p_bug_id );
-		$c_bugnote_text		= db_prepare_string( $p_bugnote_text );
-
-		$h_status = bug_get_field( $p_bug_id, 'status' );
-
-		# bug is already closed, return error
-		if ( CLOSED == $h_status ) {
-			return false;
-		}
+		bug_set_field( $p_bug_id, 'status', CLOSED );
 
 		# Add bugnote if supplied
 		if ( $p_bugnote_text != '' ) {
 			bugnote_add( $p_bug_id, $p_bugnote_text );
 		}
 
-		# Clean variables
-		$t_bug_table = config_get ( 'mantis_bug_table' );
-
-		$t_status_val = CLOSED;
-
-		# Update fields
-		$query = "UPDATE $t_bug_table
-				  SET status='$t_status_val'
-				  WHERE id='$c_bug_id'";
-		db_query( $query );
-
-		# updated the last_updated date
-		bug_update_date( $p_bug_id );
-
-		# log changes
-		history_log_event_direct( $p_bug_id, 'status', $h_status, CLOSED );
-
 		email_close( $p_bug_id );
 
 		return true;
 	}
+	# --------------------
+	# resolve the given bug
+	function bug_resolve( $p_bug_id, $p_resolution, $p_bugnote_text='' ) {
+		$p_bugnote_text = trim( $p_bugnote_text );
 
+		bug_set_field( $p_bug_id, 'status', RESOLVED );
+		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
+
+		# Add bugnote if supplied
+		if ( $p_bugnote_text != '' ) {
+			bugnote_add( $p_bug_id, $p_bugnote_text );
+		}
+
+		email_resolved( $p_bug_id );
+
+		return true;
+	}
 	# --------------------
 	# updates the last_updated field
 	function bug_update_date( $p_bug_id ) {
@@ -419,5 +450,4 @@
 
 		return true;
 	}
-
 ?>
