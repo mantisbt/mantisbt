@@ -17,6 +17,13 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### grab the user id currently logged in
+	$query = "SELECT id
+			FROM $g_mantis_user_table
+			WHERE cookie_string='$g_string_cookie_val'";
+	$result = db_mysql_query( $query );
+	$t_user_id = mysql_result( $result, 0);
+
 	if ( !isset( $f_limit_view ) ) {
 		$f_limit_view = $g_default_limit_view;
 	}
@@ -66,7 +73,7 @@
 
 <p>
 <div align=center>
-	[ <a href="<? echo $g_view_user_reported_bug_page ?>">Reported Bugs</a> ]
+	[ <a href="<? echo $g_view_bug_all_page ?>">All Bugs</a> ]
 	[ <a href="<? echo $g_view_user_assigned_bug_page ?>">Assigned Bugs</a> ]
 </div>
 
@@ -112,7 +119,7 @@
 	<table width=100% cols=7>
 	<tr>
 		<td colspan=7 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Viewing Bugs</b>
+			<b>Bugs Reported By User</b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color2 ?> align=center>
@@ -181,7 +188,10 @@
 
 		if ( !empty( $t_where_clause ) ) {
 			$t_where_clause = substr( $t_where_clause, 5, strlen( $t_where_clause ) );
-			$t_where_clause = " WHERE ".$t_where_clause;
+			$t_where_clause = " WHERE  reporter_id='$t_user_id' AND ".$t_where_clause;
+		}
+		else {
+			$t_where_clause = " WHERE reporter_id='$t_user_id'";
 		}
 
 		$query = $query.$t_where_clause;

@@ -50,5 +50,6 @@
 <? } ?>
 	<a href="<? echo $g_path.$g_usage_doc_page ?>">Docs</a> |
 	<a href="<? echo $g_path.$g_logout_page ?>">Logout</a>
+
 </font>
 </div>

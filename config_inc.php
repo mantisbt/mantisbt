@@ -129,6 +129,10 @@
 	# summary
 	$g_summary_page                = "summary_page".$g_php;
 
+	# user feedback
+	$g_view_user_reported_bug_page = "view_user_reported_bug_page".$g_php;
+	$g_view_user_assigned_bug_page = "view_user_assigned_bug_page".$g_php;
+
 	# account
 	$g_account_page                = "account_page".$g_php;
 	$g_account_update              = "account_update".$g_php;

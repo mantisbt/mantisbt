@@ -17,6 +17,13 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### grab the user id currently logged in
+	$query = "SELECT id
+			FROM $g_mantis_user_table
+			WHERE cookie_string='$g_string_cookie_val'";
+	$result = db_mysql_query( $query );
+	$t_user_id = mysql_result( $result, 0);
+
 	if ( !isset( $f_limit_view ) ) {
 		$f_limit_view = $g_default_limit_view;
 	}
@@ -66,8 +73,8 @@
 
 <p>
 <div align=center>
+	[ <a href="<? echo $g_view_bug_all_page ?>">All Bugs</a> ]
 	[ <a href="<? echo $g_view_user_reported_bug_page ?>">Reported Bugs</a> ]
-	[ <a href="<? echo $g_view_user_assigned_bug_page ?>">Assigned Bugs</a> ]
 </div>
 
 <p>
@@ -112,7 +119,7 @@
 	<table width=100% cols=7>
 	<tr>
 		<td colspan=7 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Viewing Bugs</b>
+			<b>Bugs Assigned To User</b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color2 ?> align=center>
@@ -181,7 +188,10 @@
 
 		if ( !empty( $t_where_clause ) ) {
 			$t_where_clause = substr( $t_where_clause, 5, strlen( $t_where_clause ) );
-			$t_where_clause = " WHERE ".$t_where_clause;
+			$t_where_clause = " WHERE handler_id='$t_user_id' AND ".$t_where_clause;
+		}
+		else {
+			$t_where_clause = " WHERE reporter_id='$t_user_id'";
 		}
 
 		$query = $query.$t_where_clause;
@@ -318,10 +328,10 @@
 
 <div align=center>
 <? if ( $f_offset_prev >= 0 ) { ?>
- [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>&f_hide_resolved=<? echo $f_hide_resolved ?>">View Prev <? echo $f_limit_view ?></a> ]
+ [ <a href="view_user_assigned_bug_all_page.php3?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>&f_hide_resolved=<? echo $f_hide_resolved ?>">View Prev <? echo $f_limit_view ?></a> ]
 <? } ?>
 <? if ( $row_count == $f_limit_view ) { ?>
- [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>&f_hide_resolved=<? echo $f_hide_resolved ?>">View Next <? echo $f_limit_view ?></a> ]
+ [ <a href="view_user_assigned_bug_all_page.php3?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>&f_hide_resolved=<? echo $f_hide_resolved ?>">View Next <? echo $f_limit_view ?></a> ]
 <? } ?>
 </div>
 

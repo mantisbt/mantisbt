@@ -29,6 +29,9 @@ To Do:
    the advanced bug view
  * Added a hide fixed viewing filter option
  * Summary shows time statistics
+ * Added support to show bugs reported by and assigned to the logged in user.
+ * Added view_user_assigned_bug_page.php3 and view_user_reported_bug_page.php3
+   and the corresponding global variables
 
 12.15.2000	-	0.11.1
 
