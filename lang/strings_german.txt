@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.76 $
-	# $Author: vboctor $
-	# $Date: 2003-08-02 04:28:37 $
+	# $Revision: 1.77 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-04 18:47:19 $
 	#
-	# $Id: strings_german.txt,v 1.76 2003-08-02 04:28:37 vboctor Exp $
+	# $Id: strings_german.txt,v 1.77 2003-08-04 18:47:19 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -129,7 +129,7 @@ $s_status_link = 'nach Status';
 $s_priority_link = 'nach Priorität';
 $s_severity_link = 'nach Schwere';
 $s_category_link = 'nach Kategorie';
-$s_resolution_link = nach Lösung';
+$s_resolution_link = 'nach Lösung';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Nur ausgewählte anzeigen';
