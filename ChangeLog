@@ -1,5 +1,10 @@
 Mantis
 
+02.14.2001  -   0.14.3
+
+ * Fixed error in upgrade.php3 (date_submitted in mantis_user_table query
+   should be date_created)
+
 02.14.2001  -   0.14.2
 
  * Fixed default category in update mode to display correctly
