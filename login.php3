@@ -25,7 +25,7 @@
 	$t_project_id = 0;
 	if (( $login_result==1 )&&
 		( $u_enabled==1 )&&
-		password_match( $f_password, $u_password )) {
+		is_password_match( $f_password, $u_password )) {
 
 		### increment login count
 		increment_login_count( $u_id );

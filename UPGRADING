@@ -1,9 +1,19 @@
-# -------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 #    Upgrading
-# -------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
 
 # Here are the basic steps to upgrade the database tables
 # Take a look in db_upgrade.sql as well.
+
+# =================
+# 0.14.x to 0.15.0
+# =================
+
+You may upgrade by opening up admin_upgrade.php3 in your web browser and
+clicking on the 0.15.0 upgrade.
+
+The TIMESTAMP issue should be resolved with this upgrade.
 
 # =================
 # 0.12.0 to 0.14.0
@@ -13,17 +23,20 @@ Due to many changes the upgrade procedure is more complicated than before.  I
 will try my best to clearly illustrate the needed steps below.
 
 The primary issue is that you may lose your date stamps for user logins and,
-more importanly, all bug data.  This is due to the time being stored in a 
+more importanly, all bug data.  This is due to the time being stored in a
 TIMESTAMP field (which is a design error on my part). Secondarily, all news
-and bugs are associated with the first project_id (0000001).  The first project 
-defaults  to mantis but feel free to rename it.  DO NOT DELETE IT.  If you have 
+and bugs are associated with the first project_id (0000001).  The first
+project
+defaults  to mantis but feel free to rename it.  DO NOT DELETE IT.  If you
+have
 no projects in your database you will not be able to login.
 
-You will want to run the admin_upgrade.php3 (or admin_upgrade.php file if you ran the php4 
+You will want to run the admin_upgrade.php3 (or admin_upgrade.php file if you
+ran the php4
 filename converter) file. Just type it into the url field.
 
-Hopefully everything goes well with no errors.  If you don't worry about the 
-dates being preserved then you can just run the queries in db_upgrade.sql by 
+Hopefully everything goes well with no errors.  If you don't worry about the
+dates being preserved then you can just run the queries in db_upgrade.sql by
 hand instead.
 
 If you have existing categories they will be converted to varchar(32) in each
@@ -44,7 +57,8 @@ http://www.php.net/manual/en/function.mail.php
 
 # Add a new field to store profile descriptions
 
-ALTER TABLE mantis_bug_table ADD profile_id INT UNSIGNED ZEROFILL not null AFTER votes
+ALTER TABLE mantis_bug_table ADD profile_id INT UNSIGNED ZEROFILL not null
+AFTER votes
 
 # =================
 # 0.10.2 to 0.11.0

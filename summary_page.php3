@@ -113,7 +113,7 @@
 	</tr>
 	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
 		<td>
-			<b><? echo $s_by_category ?>:</b>
+			<b><? echo $s_by_category ?>:</b> (open/resolved/closed/total)
 		</td>
 		<td>
 			<b><? echo $s_by_priority ?>:</b>
@@ -138,7 +138,7 @@
 			<b><? echo $s_time_stats ?>:</b>
 		</td>
 		<td>
-			<b><? echo $s_developer_stats ?>:</b>
+			&nbsp;
 		</td>
 	</tr>
 	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
@@ -186,15 +186,13 @@
 			</table>
 		</td>
 		<td>
-			<table width="97%">
-				<? print_developer_summary() ?>
-			</table>
+			&nbsp;
 		</td>
 	</tr>
-<!--
+
 	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
 		<td>
-			&nbsp;
+			<b><? echo $s_developer_stats ?>:</b>
 		</td>
 		<td>
 			<b>reporter stats (open/resolved/closed/total): </b> <? #@@@ OOPS - localize ?>
@@ -202,15 +200,17 @@
 	</tr>
 	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
 		<td>
-			&nbsp;
+			<table width="97%">
+				<? print_developer_summary() ?>
+			</table>
 		</td>
 		<td>
 			<table width="97%">
-				<? #print_reporter_summary() ?>
+				<? print_reporter_summary() ?>
 			</table>
 		</td>
 	</tr>
--->
+
 	</table>
 	</td>
 </tr>

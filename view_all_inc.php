@@ -83,7 +83,7 @@
 		<? echo $s_changed ?>: <input type="text" name="f_show_changed" size="3" maxlength=7 value="<? echo $f_show_changed ?>">
 		</td>
 		<td>
-		<? echo $s_hide_resolved ?>: <input type=checkbox name=f_hide_resolved <? if ($f_hide_resolved=="on") echo "CHECKED"?>>
+		<? echo $s_hide_closed ?>: <input type=checkbox name=f_hide_closed <? if ($f_hide_closed=="on") echo "CHECKED"?>>
 		</td>
 		<td>
 		<input type="submit" value="<? echo $s_filter_button ?>">
@@ -164,7 +164,7 @@
 			### then references that color variable
 			### You could replace this with a bunch of if... then... else
 			### statements
-			if (!(( $v_status==RESOLVED )||( $v_status==CLOSED ))) {
+			if ( !( $v_status==CLOSED ) ) {
 				$t_color_str = get_enum_element( $g_status_enum_string, $v_status );
 				$t_color_variable_name = "g_".$t_color_str."_color";
 				$status_color = $$t_color_variable_name;

@@ -11,35 +11,26 @@
 
 	check_access( ADMINISTRATOR );
 
-	if ( isset( $f_protected ) ) {
-		$f_protected = 1;
-	} else {
-		$f_protected = 0;
-	}
+	### delete account
+    if ( $f_protected!="on" ) {
+	    ### Remove aaccount
+    	$query = "DELETE
+    			FROM $g_mantis_user_table
+    			WHERE id='$f_id'";
+	    $result = db_query( $query );
 
-	if ( isset( $f_enabled ) ) {
-		$f_enabled = 1;
-	} else {
-		$f_enabled = 0;
-	}
+	    ### Remove associated profiles
+	    $query = "DELETE
+	    		FROM $g_mantis_user_profile_table
+	    		WHERE user_id='$f_id'";
+	    $result = db_query( $query );
 
-	### update action
-	### administrator is not allowed to change access level or enabled
-	### this is to prevent screwing your own account
-	if ( $f_protected==1 ) {
-	    $query = "UPDATE $g_mantis_user_table
-	    		SET username='$f_username', email='$f_email',
-	    			protected='$f_protected'
-	    		WHERE id='$f_id'";
-	} else {
-	    $query = "UPDATE $g_mantis_user_table
-	    		SET username='$f_username', email='$f_email',
-	    			access_level='$f_access_level', enabled='$f_enabled',
-	    			protected='$f_protected'
-	    		WHERE id='$f_id'";
-	}
-
-    $result = db_query( $query );
+		### Remove associated preferences
+    	$query = "DELETE
+    			FROM $g_mantis_user_pref_table
+    			WHERE user_id='$f_id'";
+    	$result = db_query( $query );
+    }
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -61,11 +52,11 @@
 <p>
 <div align="center">
 <?
-	if ( $f_protected==1 ) {				### PROTECTED
-		PRINT "$s_manage_user_protected_msg<p>";
-	} else if ( $result ) {					### SUCCESS
-		PRINT "$s_manage_user_updated_msg<p>";
-	} else {								### FAILURE
+	if ( $f_protected=="on" ) {					### PROTECTED
+		PRINT "$s_account_delete_protected_msg<p>";
+	} else if ( $result ) {						### SUCCESS
+		PRINT "$s_account_deleted_msg<p>";
+	} else {									### FAILURE
 		print_sql_error( $query );
 	}
 

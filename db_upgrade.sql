@@ -215,7 +215,7 @@ UPDATE mantis_bug_table SET status='20' WHERE status='feedback';
 UPDATE mantis_bug_table SET status='30' WHERE status='acknowledged';
 UPDATE mantis_bug_table SET status='40' WHERE status='confirmed';
 UPDATE mantis_bug_table SET status='50' WHERE status='assigned';
-UPDATE mantis_bug_table SET status='80' WHERE status='resolved';
+UPDATE mantis_bug_table SET status='90' WHERE status='resolved';
 UPDATE mantis_bug_table SET status='90' WHERE status='closed';
 
 ALTER TABLE mantis_bug_table CHANGE severity severity VARCHAR (32) DEFAULT 'minor' not null;
@@ -251,9 +251,9 @@ ALTER TABLE mantis_bug_table CHANGE reproducibility reproducibility INT (2) DEFA
 
 # Update dates to be legal
 
-UPDATE mantis_user_table SET date_created=NOW() WHERE date_created='0000-00-00 00:00:00';
-UPDATE mantis_bug_table SET date_submitted=NOW() WHERE date_submitted='0000-00-00 00:00:00';
-UPDATE mantis_news_table SET date_posted=NOW() WHERE date_posted='0000-00-00 00:00:00';
+UPDATE mantis_user_table SET date_created='1970-01-01 00:00:01' WHERE date_created='0000-00-00 00:00:00';
+UPDATE mantis_bug_table SET date_submitted='1970-01-01 00:00:01' WHERE date_submitted='0000-00-00 00:00:00';
+UPDATE mantis_news_table SET date_posted='1970-01-01 00:00:01' WHERE date_posted='0000-00-00 00:00:00';
 
 # Shorten cookie string to 64 characters
 
@@ -305,7 +305,7 @@ CREATE TABLE mantis_project_file_table (
    filename varchar(250) NOT NULL,
    folder varchar(250) NOT NULL,
    filesize int(11) DEFAULT '0' NOT NULL,
-   date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   date_added datetime DEFAULT '1970-01-01 00:00:01' NOT NULL,
    content blob NOT NULL,
    PRIMARY KEY (id)
 );
@@ -321,11 +321,15 @@ CREATE TABLE mantis_bug_file_table (
    filename varchar(250) NOT NULL,
    folder varchar(250) NOT NULL,
    filesize int(11) DEFAULT '0' NOT NULL,
-   date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   date_added datetime DEFAULT '1970-01-01 00:00:01' NOT NULL,
    content blob NOT NULL,
    PRIMARY KEY (id)
 );
 
 # Add a ordering field for versions
 
-ALTER TABLE mantis_project_version_table ADD order INT (7) not null 
+ALTER TABLE mantis_project_version_table ADD ver_order INT (7) not null
+
+# Make the cookie string unique
+
+ALTER TABLE mantis_user_table ADD UNIQUE(cookie_string) 

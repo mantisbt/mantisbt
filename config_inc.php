@@ -100,7 +100,11 @@
 	$g_default_language     = "english";
 
 	# list the choices that the users are allowed to choose
-	$g_language_choices_arr = array( "english", "dutch", "french", "german", "italian", "korean", "norwegian", "portuguese", "spanish", "turkish" );
+	$g_language_choices_arr = array( "english" );
+
+	# @@@ Currently in 0.15.0 only english is supported.
+	# others will follow quickly
+	# "dutch", "french", "german", "italian", "korean", "norwegian", "portuguese", "spanish", "turkish"
 
 	############################
 	### Mantis Show Settings ###
@@ -161,6 +165,10 @@
 	### Mantis Default Preferences ###
 	##################################
 
+	# --- signup default ---------------
+	# look in constant_inc.php for values
+	$g_default_new_account_access_level = REPORTER;
+
 	# --- viewing defaults ------------
 	# site defaults for viewing preferences
 	$g_default_limit_view         = 50;
@@ -185,6 +193,14 @@
 	$g_default_email_on_status    = 0;
 	$g_default_email_on_priority  = 0;
 	$g_default_language           = "english";
+
+	###############################
+	### Mantis Summary Settings ###
+	###############################
+
+	# how many reporters to show
+	# this is useful when there are hundreds of reporters
+	$g_reporter_summary_limit = 25;
 
 	###############################
 	### Mantis Bugnote Settings ###
@@ -283,7 +299,7 @@
 	$g_acknowledged_color      = "#ffd850";    # orange
 	$g_confirmed_color         = "#ffffb0";    # yellow
 	$g_assigned_color          = "#c8c8ff";    # blue
-	$g_resolved_color          = "#ffffff";    # not used in default
+	$g_resolved_color          = "#cceedd";    # not used in default
 	$g_closed_color            = "#ffffff";    # not used in default
 
 	###############################
@@ -439,6 +455,8 @@
 	$g_bug_update                     = $g_path."bug_update".$g_php;
 
 	$g_bug_reopen_page                = $g_path."bug_reopen_page".$g_php;
+
+	$g_bug_close                      = $g_path."bug_close".$g_php;
 
 	$g_bug_resolve_page               = $g_path."bug_resolve_page".$g_php;
 	$g_bug_resolve_page2              = $g_path."bug_resolve_page2".$g_php;

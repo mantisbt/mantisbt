@@ -31,6 +31,7 @@
 		return false;
 	}
 	### --------------------
+	# build the bcc list
 	function build_bcc_list( $p_bug_id, $p_notify_type ) {
 		global $g_mantis_user_table, $g_mantis_project_user_list_table;
 
@@ -155,6 +156,17 @@
 
 		$t_bcc = build_bcc_list( $p_bug_id, "email_on_resolved" );
 		email_bug_info( $p_bug_id, $s_email_resolved_msg, $t_bcc );
+
+		if ( !empty($g_email_update_address) ) {
+			email_bug_info_to_address( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
+		}
+	}
+	### --------------------
+	function email_close( $p_bug_id ) {
+		global $s_email_close_msg, $g_email_update_address;
+
+		$t_bcc = build_bcc_list( $p_bug_id, "email_on_closed" );
+		email_bug_info( $p_bug_id, $s_email_close_msg, $t_bcc );
 
 		if ( !empty($g_email_update_address) ) {
 			email_bug_info_to_address( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );

@@ -107,7 +107,7 @@
 </div>
 <? ### Bugnotes END ?>
 
-<? if ( $v_status < RESOLVED ) { ?>
+<? if (( $v_status < RESOLVED )||( isset( $f_resolve_note ) )) { ?>
 <? ### Bugnote Add Form BEGIN ?>
 <p>
 <div align="center">
@@ -156,8 +156,16 @@
 		<td align="center" bgcolor="<? echo $g_primary_color_light ?>">
 			<input type="submit" value="<? echo $s_reopen_bug_button ?>">
 		</td>
+	</form>
+	<? if ( $v_status != CLOSED ) { ?>
+	<form method="post" action="<? echo $g_bug_close ?>">
+	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+		<td align="center" bgcolor="<? echo $g_primary_color_light ?>">
+			<input type="submit" value="Close Bug">
+		</td>
 	</tr>
 	</form>
+	<? } ?>
 	</table>
 	</td>
 </tr>

@@ -65,7 +65,7 @@
 	if ( !isset( $f_email_on_reopened ) ) {
 		$f_email_on_reopened = 0;
 	} else {
-		f_email_on_reopened = 1;
+		$f_email_on_reopened = 1;
 	}
 
 	if ( !isset( $f_email_on_bugnote ) ) {

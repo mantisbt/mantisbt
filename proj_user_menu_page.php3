@@ -27,6 +27,13 @@
 	else {
 		$f_dir = "ASC";
 	}
+
+	$query = "SELECT access_min
+			FROM $g_mantis_project_table
+			WHERE id='$g_project_cookie_val'";
+	$result = db_query( $query );
+	$t_access_min = db_result( $result, 0, 0 );
+	$t_access_min = get_enum_element( $g_access_levels_enum_string, $t_access_min );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -39,6 +46,11 @@
 <? print_top_page( $g_top_include_page ) ?>
 
 <? print_menu( $g_menu_include_file ) ?>
+
+<p>
+<div align="center">
+Automatic access level: <b><? echo $t_access_min ?></b>
+</div>
 
 <p>
 <div align="center">
@@ -111,6 +123,7 @@
 	### Get the user data in $f_sort order
     $query = "SELECT *
     		FROM $g_mantis_project_user_list_table
+    		WHERE project_id='$g_project_cookie_val'
 			ORDER BY '$f_sort' $f_dir";
 
     $result = db_query($query);

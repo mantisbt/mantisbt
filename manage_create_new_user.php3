@@ -17,10 +17,14 @@
 
 	if ( !isset( $f_protected ) ) {
 		$f_protected = 0;
+	} else {
+		$f_protected = 1;
 	}
 
 	if ( !isset( $f_enabled ) ) {
 		$f_enabled = 0;
+	} else {
+		$f_enabled = 1;
 	}
 
 	### create the almost unique string for each user then insert into the table

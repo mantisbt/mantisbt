@@ -588,7 +588,7 @@
 	$s_any = "cualquiera";
 	$s_show = "ver";
 	$s_changed = "Cambiado(hrs)";
-	$s_hide_resolved = "Ocultar Resueltos";
+	$s_hide_closed = "Ocultar Resueltos";
 	$s_filter_button = "Filtro";
 	$s_viewing_bugs_title = "Bugs";
 	### $s_id # defined above
@@ -629,7 +629,7 @@
 	### $s_any # defined above
 	### $s_show # defined above
 	### $s_changed # defined above
-	### $s_hide_resolved # defined above
+	### $s_hide_closed # defined above
 	### $s_filter_button # defined above
 	### $s_viewing_bugs_title # defined above
 	### $s_id # defined above
@@ -645,7 +645,7 @@
 	### $s_any # defined above
 	### $s_show # defined above
 	### $s_changed # defined above
-	### $s_hide_resolved # defined above
+	### $s_hide_closed # defined above
 	### $s_filter_button # defined above
 	### $s_viewing_bugs_title # defined above
 	### $s_id # defined above

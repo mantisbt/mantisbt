@@ -79,6 +79,7 @@
 		</td>
 		<td>
 			<select name="f_project_id">
+			<option value="0000000">
 			<? print_project_option_list( $u_default_project ) ?>
 			</select>
 		</td>

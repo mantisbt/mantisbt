@@ -60,7 +60,7 @@
 <?	} ?>
 
 <? if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) { ?>
-	<a href="<? echo $g_manage_page ?>"><? echo $s_manage_link ?></a> |
+	<a href="<? echo $g_manage_page ?>?f_hide=1"><? echo $s_manage_link ?></a> |
 <? } ?>
 
 <? if ( access_level_check_greater_or_equal( MANAGER ) ) { ?>

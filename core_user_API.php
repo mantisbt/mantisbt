@@ -129,7 +129,7 @@
 	# Checks for match using crypt()
 	# If this is not available (via DES) then you will need significant modifications
 	# future releases may have alternate encryption methods
-	function password_match( $p_test_password, $p_password ) {
+	function is_password_match( $p_test_password, $p_password ) {
 		$salt = substr( $p_password, 0, 2 );
 		if ( crypt( $p_test_password, $salt ) == $p_password ) {
 			return true;
@@ -223,7 +223,7 @@
 	}
 	### --------------------
 	# @@@ UNUSED
-	function is_manager_for_project( $p_project_id ) {
+	function is_project_manager( $p_project_id ) {
 		global $g_mantis_project_table, $g_mantis_project_user_list_table;
 
 		$t_user_id = get_current_user_field( "id" );

@@ -18,7 +18,7 @@ $save_bug_query = "SELECT id, last_updated FROM mantis_bug_table";
 $save_bug_result = db_query( $save_bug_query );
 
 # preserve user date information
-PRINT "<p>Preserving User Date Information";
+PRINT "<p>Preserving User Date Information<p>";
 $save_user_query = "SELECT id, date_created, last_visit FROM mantis_user_table ORDER BY id";
 $save_user_result = db_query( $save_user_query );
 
@@ -129,7 +129,7 @@ $query[60] = "UPDATE mantis_bug_table SET status='20' WHERE status='feedback'";
 $query[61] = "UPDATE mantis_bug_table SET status='30' WHERE status='acknowledged'";
 $query[62] = "UPDATE mantis_bug_table SET status='40' WHERE status='confirmed'";
 $query[63] = "UPDATE mantis_bug_table SET status='50' WHERE status='assigned'";
-$query[64] = "UPDATE mantis_bug_table SET status='80' WHERE status='resolved'";
+$query[64] = "UPDATE mantis_bug_table SET status='90' WHERE status='resolved'";
 $query[65] = "UPDATE mantis_bug_table SET status='90' WHERE status='closed'";
 
 $query[66] = "UPDATE mantis_bug_table SET severity='10' WHERE severity='feature'";
@@ -161,9 +161,9 @@ $query[86] = "ALTER TABLE mantis_bug_table CHANGE status status INT (2) DEFAULT 
 
 # Update dates to be legal
 
-$query[87] = "UPDATE mantis_user_table SET date_created=NOW() WHERE date_created='0000-00-00 00:00:00'";
-$query[88] = "UPDATE mantis_bug_table SET date_submitted=NOW() WHERE date_submitted='0000-00-00 00:00:00'";
-$query[89] = "UPDATE mantis_news_table SET date_posted=NOW() WHERE date_posted='0000-00-00 00:00:00'";
+$query[87] = "UPDATE mantis_user_table SET date_created='1970-01-01 00:00:01' WHERE date_created='0000-00-00 00:00:00'";
+$query[88] = "UPDATE mantis_bug_table SET date_submitted='1970-01-01 00:00:01' WHERE date_submitted='0000-00-00 00:00:00'";
+$query[89] = "UPDATE mantis_news_table SET date_posted='1970-01-01 00:00:01' WHERE date_posted='0000-00-00 00:00:00'";
 
 # Shorten cookie string to 64 characters
 
@@ -183,26 +183,27 @@ $query[96] = "ALTER TABLE mantis_user_pref_table ADD email_on_assigned INT (1) n
 $query[97] = "ALTER TABLE mantis_user_pref_table ADD email_on_feedback INT (1) not null AFTER email_on_assigned";
 $query[98] = "ALTER TABLE mantis_user_pref_table ADD email_on_resolved INT (1) not null AFTER email_on_feedback";
 $query[99] = "ALTER TABLE mantis_user_pref_table ADD email_on_closed INT (1) not null AFTER email_on_resolved";
-$query[100] = "ALTER TABLE mantis_user_pref_table ADD email_on_bugnote INT (1) not null AFTER email_on_reopened";
-$query[101] = "ALTER TABLE mantis_user_pref_table ADD email_on_status INT (1) not null AFTER email_on_bugnote";
-$query[102] = "ALTER TABLE mantis_user_pref_table ADD redirect_delay INT (1) not null AFTER refresh_delay";
-$query[103] = "ALTER TABLE mantis_user_pref_table ADD email_on_priority INT (1) not null AFTER email_on_status";
-$query[104] = "ALTER TABLE mantis_user_pref_table ADD advanced_update INT (1) not null AFTER advanced_view";
-$query[105] = "ALTER TABLE mantis_user_pref_table ADD default_profile INT (7) UNSIGNED ZEROFILL DEFAULT '0' not null AFTER user_id";
-$query[106] = "ALTER TABLE mantis_user_pref_table ADD default_project INT (7) UNSIGNED ZEROFILL not null AFTER default_profile";
-$query[107] = "ALTER TABLE mantis_user_profile_table DROP default_profile";
+$query[100] = "ALTER TABLE mantis_user_pref_table ADD email_on_reopened INT (1) not null AFTER email_on_closed";
+$query[101] = "ALTER TABLE mantis_user_pref_table ADD email_on_bugnote INT (1) not null AFTER email_on_reopened";
+$query[102] = "ALTER TABLE mantis_user_pref_table ADD email_on_status INT (1) not null AFTER email_on_bugnote";
+$query[103] = "ALTER TABLE mantis_user_pref_table ADD redirect_delay INT (1) not null AFTER refresh_delay";
+$query[104] = "ALTER TABLE mantis_user_pref_table ADD email_on_priority INT (1) not null AFTER email_on_status";
+$query[105] = "ALTER TABLE mantis_user_pref_table ADD advanced_update INT (1) not null AFTER advanced_view";
+$query[106] = "ALTER TABLE mantis_user_pref_table ADD default_profile INT (7) UNSIGNED ZEROFILL DEFAULT '0' not null AFTER user_id";
+$query[107] = "ALTER TABLE mantis_user_pref_table ADD default_project INT (7) UNSIGNED ZEROFILL not null AFTER default_profile";
+$query[108] = "ALTER TABLE mantis_user_profile_table DROP default_profile";
 
 
 # Make new project level user access table
 
-$query[108] = "CREATE TABLE mantis_project_user_list_table (
+$query[109] = "CREATE TABLE mantis_project_user_list_table (
    project_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
    user_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
    access_level int(2) DEFAULT '10' NOT NULL)";
 
 # Make new project file table
 
-$query[109] = "CREATE TABLE mantis_project_file_table (
+$query[110] = "CREATE TABLE mantis_project_file_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    project_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
    title varchar(250) NOT NULL,
@@ -211,13 +212,13 @@ $query[109] = "CREATE TABLE mantis_project_file_table (
    filename varchar(250) NOT NULL,
    folder varchar(250) NOT NULL,
    filesize int(11) DEFAULT '0' NOT NULL,
-   date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   date_added datetime DEFAULT '1970-01-01 00:00:01' NOT NULL,
    content blob NOT NULL,
    PRIMARY KEY (id))";
 
 # Make new bug file table
 
-$query[110] = "CREATE TABLE mantis_bug_file_table (
+$query[111] = "CREATE TABLE mantis_bug_file_table (
    id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL auto_increment,
    bug_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
    title varchar(250) NOT NULL,
@@ -226,25 +227,27 @@ $query[110] = "CREATE TABLE mantis_bug_file_table (
    filename varchar(250) NOT NULL,
    folder varchar(250) NOT NULL,
    filesize int(11) DEFAULT '0' NOT NULL,
-   date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   date_added datetime DEFAULT '1970-01-01 00:00:01' NOT NULL,
    content blob NOT NULL,
    PRIMARY KEY (id))";
 
 # more varchar to enum conversions
 
-$query[111] = "ALTER TABLE mantis_bug_table CHANGE severity severity INT (2) DEFAULT '50' not null";
-$query[112] = "ALTER TABLE mantis_bug_table CHANGE reproducibility reproducibility INT (2) DEFAULT '10' not null";
-$query[113] = "ALTER TABLE mantis_user_pref_table DROP default_project_id";
+$query[112] = "ALTER TABLE mantis_bug_table CHANGE severity severity INT (2) DEFAULT '50' not null";
+$query[113] = "ALTER TABLE mantis_bug_table CHANGE reproducibility reproducibility INT (2) DEFAULT '10' not null";
+$query[114] = "ALTER TABLE mantis_user_pref_table DROP default_project_id";
 
 # Need this entry for the project listing to work
 
-$query[114] = "INSERT INTO mantis_project_user_list_table (project_id, user_id, access_level) VALUES ('0000000','0000000','00')";
+$query[115] = "INSERT INTO mantis_project_user_list_table (project_id, user_id, access_level) VALUES ('0000000','0000000','00')";
 
 # Add ordering field for versions
 
-$query[115] = "ALTER TABLE mantis_project_version_table ADD order INT (7) not null";
-$query[116] = "ALTER TABLE mantis_user_pref_table ADD email_on_bugnote INT (1) not null AFTER email_on_reopened";
+$query[116] = "ALTER TABLE mantis_project_version_table ADD ver_order INT (7) not null";
 
+# Make the cookie string unique
+
+$query[117] = "ALTER TABLE mantis_user_table ADD UNIQUE(cookie_string)";
 
 # ---------------
 # run queries

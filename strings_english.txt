@@ -49,6 +49,7 @@
 	$s_new_bug_msg = "The following NEW bug has been ADDED.";
 	$s_email_bugnote_msg = "A BUGNOTE has been added to this bug.";
 	$s_email_resolved_msg = "The following bug has been RESOLVED.";
+	$s_email_close_msg = "The following bug has beeen CLOSED";
 	$s_email_feedback_msg = "The following bug requires your FEEDBACK.";
 	$s_email_reopen_msg = "The following bug has been REOPENED.";
 	$s_email_assigned_msg = "The following bug has been ASSIGNED.";
@@ -158,6 +159,9 @@
 	### bug_assign.php3
 	$s_bug_assign_msg       = "Bug has been successfully assigned...";
 
+	### bug_close.php3
+	$s_bug_close_msg       = "Bug has been closed...";
+
 	### bug_delete.php3
 	$s_bug_deleted_msg = "Bug has been deleted...";
 
@@ -173,7 +177,7 @@
 	$s_select_file = "Select File";
 	$s_upload_file_button = "Upload File";
 
-	### bug_reopen_page.php3
+	### bug_reopen.php3
 	$s_bug_reopened_msg = "Bug has been reopened...";
 	$s_reopen_add_bugnote_title = "Add Bugnote Reason For Reopening Bug";
 	$s_bugnote_add_reopen_button = "Add Bugnote and Reopen Bug";
@@ -256,13 +260,6 @@
 	### bugnote_add.php3
 	$s_bugnote_added_msg = "Bugnote added...";
 
-	### bugnote_add_inc.php
-	$s_add_bugnote_button = "Add Bugnote";
-
-	### bugnote_add_page.php3
-	$s_add_bugnote_title = "Add Bugnote";
-	### $s_add_bugnote_button # defined above
-
 	### bugnote_delete.php3
 	$s_bugnote_deleted_msg = "Bugnote has been successfully deleted...";
 	$s_bug_notes_title = "Bug Notes";
@@ -271,38 +268,27 @@
 	$s_no_bugnotes_msg = "There are no notes attached to this bug.";
 	### $s_bug_notes_title # defined above
 	$s_delete_link = "Delete";
-
-	### choose_project_page.php3 @@@ remove
-	$s_choose_project_title = "Choose Project";
-	$s_projects = "Projects";
-	$s_select_project_button = "Select Project";
+	$s_add_bugnote_title = "Add Bugnote";
+	$s_add_bugnote_button = "Add Bugnote";
 
 	### index.php3
 	$s_click_to_login = "Click here to login";
 
 	### login.php3
-
-	### login_error_page.php3 @@@ REMOVE THIS
 	$s_login_error_msg = "There was an error: your account may be disabled or the username/password you entered is incorrect.";
+
+	### login_page.php3
+	$s_login_page_info = "Welcome to the bugtracker.";
 	$s_login_title = "Login";
 	### $s_username # defined above
 	### $s_password # defined above
 	$s_save_login = "Save Login";
-	### $s_choose_project # defined above
-	$s_login_button = "Login";
-
-	# login_seelct_proj_page.php3
-	$s_select_project_button = "Select Project";
-
-	### login_page.php3
-	$s_login_page_info = "Welcome to the bugtracker.";
-	### $s_login_title # defined above
-	### $s_username # defined above
-	### $s_password # defined above
-	### $s_save_login # defined above
 	$s_choose_project = "Choose Project";
-	### $s_login_button # defined above
+	$s_login_button = "Login";
 	$s_signup_link = "signup for a new account";
+
+	### login_select_proj_page.php3
+	$s_select_project_button = "Select Project";
 
 	### logout_page.php3
 	$s_logged_out_title = "Logged Out...";
@@ -680,7 +666,7 @@
 	### $s_any # defined above
 	### $s_show # defined above
 	### $s_changed # defined above
-	### $s_hide_resolved # defined above
+	### $s_hide_closed # defined above
 	### $s_filter_button # defined above
 	### $s_viewing_bugs_title # defined above
 	### $s_id # defined above
@@ -698,7 +684,7 @@
 	$s_any = "any";
 	$s_show = "Show";
 	$s_changed = "Changed(hrs)";
-	$s_hide_resolved = "Hide Resolved";
+	$s_hide_closed = "Hide Closed";
 	$s_filter_button = "Filter";
 	$s_viewing_bugs_title = "Viewing Bugs";
 	### $s_id # defined above
@@ -716,7 +702,7 @@
 	### $s_any # defined above
 	### $s_show # defined above
 	### $s_changed # defined above
-	### $s_hide_resolved # defined above
+	### $s_hide_closed # defined above
 	### $s_filter_button # defined above
 	### $s_viewing_bugs_title # defined above
 	### $s_id # defined above
@@ -732,7 +718,7 @@
 	### $s_any # defined above
 	### $s_show # defined above
 	### $s_changed # defined above
-	### $s_hide_resolved # defined above
+	### $s_hide_closed # defined above
 	### $s_filter_button # defined above
 	### $s_viewing_bugs_title # defined above
 	### $s_id # defined above

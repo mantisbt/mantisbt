@@ -27,6 +27,12 @@
 	else {
 		$f_dir = "ASC";
 	}
+
+	if ( !isset( $f_hide ) ) {
+		$f_hide = 0;
+	} else if ( $f_hide=="on" ) {
+		$f_hide = 1;
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -126,13 +132,14 @@
 
 <p>
 <div align="center">
+<form method="post" action="<? echo $g_manage_page ?>?f_hide=<?$f_hide ?>">
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
 	<table width="100%">
 	<tr align="right">
 		<td bgcolor="<? echo $g_table_title_color ?>">
-			<input type=checkbox name=f_hide_disabled> <? echo $s_hide_disabled ?>
+			<input type=checkbox name=f_hide <? if ( $f_hide==1 ) echo "CHECKED" ?>> Hide Inactive
 			<input type=submit value="<? echo $s_filter_button ?>">
 		</td>
 	</tr>
@@ -140,6 +147,7 @@
 	</td>
 </tr>
 </table>
+</form>
 </div>
 
 <p>
@@ -187,9 +195,16 @@
 	</tr>
 <?
 	### Get the user data in $f_sort order
-    $query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
-    		FROM $g_mantis_user_table
-			ORDER BY '$f_sort' $f_dir";
+	if ( $f_hide==0 ) {
+		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
+				FROM $g_mantis_user_table
+				ORDER BY '$f_sort' $f_dir";
+	} else {
+		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
+				FROM $g_mantis_user_table
+				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old')
+				ORDER BY '$f_sort' $f_dir";
+	}
 
     $result = db_query($query);
 	$user_count = db_num_rows( $result );

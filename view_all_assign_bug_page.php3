@@ -9,8 +9,8 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !isset( $f_hide_resolved ) ) {
-		$f_hide_resolved = "";
+	if ( !isset( $f_hide_closed ) ) {
+		$f_hide_closed = "";
 	}
 
 	if ( isset( $f_save )) {
@@ -21,7 +21,7 @@
 							$f_show_status."#".
 							$f_limit_view."#".
 							$f_show_changed."#".
-							$f_hide_resolved;
+							$f_hide_closed;
 		setcookie( $g_view_assigned_cookie, $t_settings_string, time()+$g_cookie_time_length );
 	}
 	else if ( strlen($g_view_assigned_cookie_val)>6 ) {
@@ -33,7 +33,7 @@
 		$f_show_status 		= $t_setting_arr[3];
 		$f_limit_view 		= $t_setting_arr[4];
 		$f_show_changed 	= $t_setting_arr[5];
-		$f_hide_resolved 	= $t_setting_arr[6];
+		$f_hide_closed 	= $t_setting_arr[6];
 	}
 
 	if ( !isset( $f_assign_id ) ) {
@@ -84,8 +84,9 @@
 	$t_where_clause = " WHERE project_id='$g_project_cookie_val' AND
 							handler_id='$f_assign_id'";
 
-	if (( $f_hide_resolved=="on"  )&&( $f_show_status!="resolved" )) {
-		$t_where_clause = $t_where_clause." AND status<>'resolved'";
+	$t_clo_val = CLOSED;
+	if (( $f_hide_closed=="on"  )&&( $f_show_status!="closed" )) {
+		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
 
 	if ( $f_show_category != "any" ) {

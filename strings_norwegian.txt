@@ -588,7 +588,7 @@
 	$s_any = "alle";
 	$s_show = "Vis";
 	$s_changed = "Endret(timer)";
-	$s_hide_resolved = "Skjule løste";
+	$s_hide_closed = "Skjule løste";
 	$s_filter_button = "Filter";
 	$s_viewing_bugs_title = "Feiloversikt";
 	### $s_id # defined above
@@ -629,7 +629,7 @@
 	### $s_any # defined above
 	### $s_show # defined above
 	### $s_changed # defined above
-	### $s_hide_resolved # defined above
+	### $s_hide_closed # defined above
 	### $s_filter_button # defined above
 	### $s_viewing_bugs_title # defined above
 	### $s_id # defined above
@@ -645,7 +645,7 @@
 	### $s_any # defined above
 	### $s_show # defined above
 	### $s_changed # defined above
-	### $s_hide_resolved # defined above
+	### $s_hide_closed # defined above
 	### $s_filter_button # defined above
 	### $s_viewing_bugs_title # defined above
 	### $s_id # defined above

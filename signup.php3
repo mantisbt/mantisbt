@@ -39,8 +39,7 @@
 	### Create random password
 	$t_password = create_random_password( $f_email );
 
-	### Use a default access level of REPORTER
-	$t_acc = REPORTER;
+	### Use a default access level
 	### create the almost unique string for each user then insert into the table
 	$t_cookie_string = create_cookie_string( $f_email );
 	$t_password2 = crypt( $t_password );
@@ -50,7 +49,7 @@
     		enabled, protected, access_level, login_count, cookie_string )
 			VALUES
 			( null, '$f_username', '$f_email', '$t_password2', NOW(), NOW(),
-			1, 0, $t_acc, 0, '$t_cookie_string')";
+			1, 0, $g_default_new_account_access_level, 0, '$t_cookie_string')";
     $result = db_query( $query );
     if ( !$result ) {
     	PRINT "$s_account_create_fail<p>";

@@ -52,6 +52,7 @@
 
 <? include( $g_view_bug_inc ) ?>
 
+<? $f_resolve_note = 1; ### Must set this ?>
 <? include( $g_bugnote_include_file ) ?>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>
