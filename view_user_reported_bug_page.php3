@@ -10,7 +10,7 @@
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
-	<? include( $g_meta_include_file ) ?>
+<? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
@@ -61,6 +61,46 @@
 	else {
 		$f_dir = "DESC";
 	}
+
+	if ( !isset( $f_offset ) ) {
+		$f_offset = 0;
+	}
+	### build our query string based on our viewing criteria
+	$query = "SELECT * FROM $g_mantis_bug_table";
+
+	$t_where_clause = "";
+
+	if (( $f_hide_resolved=="on"  )&&( $f_show_status!="resolved" )) {
+		$t_where_clause = $t_where_clause." AND status<>'resolved'";
+	}
+
+	if ( $f_show_category != "any" ) {
+		$t_where_clause = $t_where_clause." AND category='$f_show_category'";
+	}
+	if ( $f_show_severity != "any" ) {
+		$t_where_clause = $t_where_clause." AND severity='$f_show_severity'";
+	}
+	if ( $f_show_status != "any" ) {
+		$t_where_clause = $t_where_clause." AND status='$f_show_status'";
+	}
+
+	if ( !empty( $t_where_clause ) ) {
+		$t_where_clause = substr( $t_where_clause, 5, strlen( $t_where_clause ) );
+		$t_where_clause = " WHERE reporter_id='$t_user_id' AND ".$t_where_clause;
+	}
+	else {
+		$t_where_clause = " WHERE reporter_id='$t_user_id'";
+	}
+
+	$query = $query.$t_where_clause;
+
+	if ( !isset( $f_sort ) ) {
+			$f_sort="id";
+	}
+	$query = $query." ORDER BY '$f_sort' $f_dir";
+	if ( isset( $f_limit_view ) ) {
+		$query = $query." LIMIT $f_offset, $f_limit_view";
+	}
 ?>
 
 <p>
@@ -84,17 +124,17 @@
 		<select name=f_show_category>
 			<option value="any">any
 			<option value="any">
-			<? print_list( "category", $f_show_category ) ?>
+			<? print_field_option_list( "category", $f_show_category ) ?>
 		</select>
 		<select name=f_show_severity>
 			<option value="any">any
 			<option value="any">
-			<? print_list( "severity", $f_show_severity ) ?>
+			<? print_field_option_list( "severity", $f_show_severity ) ?>
 		</select>
 		<select name=f_show_status>
 			<option value="any">any
 			<option value="any">
-			<? print_list( "status", $f_show_status ) ?>
+			<? print_field_option_list( "status", $f_show_status ) ?>
 		</select>
 		Show: <input type=text name=f_limit_view size=3 maxlength=7 value="<? echo $f_limit_view ?>">
 		Changed(hrs): <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
@@ -159,46 +199,6 @@
 		</td>
 	</tr>
 	<?
-		if ( !isset( $f_offset ) ) {
-			$f_offset = 0;
-		}
-		### build our query string based on our viewing criteria
-		$query = "SELECT * FROM $g_mantis_bug_table";
-
-		$t_where_clause = "";
-
-		if (( $f_hide_resolved=="on"  )&&( $f_show_status!="resolved" )) {
-			$t_where_clause = $t_where_clause." AND status<>'resolved'";
-		}
-
-		if ( $f_show_category != "any" ) {
-			$t_where_clause = $t_where_clause." AND category='$f_show_category'";
-		}
-		if ( $f_show_severity != "any" ) {
-			$t_where_clause = $t_where_clause." AND severity='$f_show_severity'";
-		}
-		if ( $f_show_status != "any" ) {
-			$t_where_clause = $t_where_clause." AND status='$f_show_status'";
-		}
-
-		if ( !empty( $t_where_clause ) ) {
-			$t_where_clause = substr( $t_where_clause, 5, strlen( $t_where_clause ) );
-			$t_where_clause = " WHERE reporter_id='$t_user_id' AND ".$t_where_clause;
-		}
-		else {
-			$t_where_clause = " WHERE reporter_id='$t_user_id'";
-		}
-
-		$query = $query.$t_where_clause;
-
-		if ( !isset( $f_sort ) ) {
-				$f_sort="id";
-		}
-		$query = $query." ORDER BY '$f_sort' $f_dir";
-		if ( isset( $f_limit_view ) ) {
-			$query = $query." LIMIT $f_offset, $f_limit_view";
-		}
-
 		### perform query
 	    $result = db_mysql_query( $query );
 		$row_count = mysql_num_rows( $result );
@@ -209,7 +209,7 @@
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			$v_summary = string_display( $v_summary );
-			$lastupdated = date( "m-d", sql_to_unix_time( $v_last_updated ) );
+			$t_last_updated = date( "m-d", sql_to_unix_time( $v_last_updated ) );
 
 			### alternate row colors
 			if ($i % 2== 0) {
@@ -225,30 +225,16 @@
 			### You could replace this with a bunch of if... then... else
 			### statements
 			if ( $v_status!="resolved" ) {
-				$t = "g_".$v_status."_color";
-				$status_color = $$t;
+				$t_color_variable_name = "g_".$v_status."_color";
+				$status_color = $$t_color_variable_name;
 			}
 
 			### grab the bugnote count
-			$query2 = "SELECT COUNT(id)
-						FROM $g_mantis_bugnote_table
-						WHERE bug_id ='$v_id'";
-			$result2 = db_mysql_query( $query2 );
-			$bugnote_count = mysql_result( $result2, 0 );
+			$bugnote_count = get_bugnote_count( $v_id );
 	?>
 	<tr bgcolor=<? echo $status_color ?> align=center>
 		<td>
-		<?
-			if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" ) ) {
-		?>
-			<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $v_id ?>"><? echo $v_id ?></a>
-		<?
-			} else {
-		?>
-			<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $v_id ?>"><? echo $v_id ?></a>
-		<?
-			}
-		?>
+			<? print_bug_link( $v_id ) ?>
 		</td>
 		<td>
 			<? if ($bugnote_count > 0) echo $bugnote_count ?>
@@ -257,46 +243,20 @@
 			<? echo $v_category ?>
 		</td>
 		<td>
-			<?
-				if ( $v_status=="resolved" ) {
-					echo $v_severity;
-				}
-				else {
-					if ( ( $v_severity=="major" ) ||
-						 ( $v_severity=="crash" ) ||
-						 ( $v_severity=="block" ) ) {
-						PRINT "<b>";
-						echo $v_severity;
-						PRINT "</b>";
-					}
-					else {
-						echo $v_severity;
-					}
-				}
-			?>
+			<? print_formatted_status( $v_status, $v_severity ) ?>
 		</td>
 		<td>
 			<? echo $v_status ?>
 		</td>
 		<td>
 			<?
-				if ( isset( $g_last_access_cookie_val ) ) {
-#					if ( $v_last_updated >
-#						$g_last_access_cookie_val ) {
-					if ( sql_to_unix_time( $v_last_updated ) >
-						strtotime( "-$f_show_changed hours" ) ) {
+				if ( sql_to_unix_time( $v_last_updated ) >
+					strtotime( "-$f_show_changed hours" ) ) {
 
-
-						PRINT "<b>";
-						echo $lastupdated;
-						PRINT "</b>";
-					}
-					else {
-						echo $lastupdated;
-					}
+					PRINT "<b>$t_last_updated</b>";
 				}
 				else {
-					echo $lastupdated;
+					PRINT "$t_last_updated";
 				}
 			?>
 		</td>

@@ -84,8 +84,36 @@
 	$s_bug_updated = "Bug has been successfully updated...";
 
 	### bug_update_advanced_page.php3
+	$s_projection = "Projection";
+	$s_eta = "ID";
+	$s_os = "OS";
+	$s_os_version = "Version";
+	$s_product_version = "Product Version";
+	$s_build = "Build";
+	$s_votes = "Votes";
+	$s_steps_to = "Steps To";
+	$s_reproduce = "Reproduce";
 
 	### bug_update_page.php3
+	$s_back_to_bug = "Back To Bug";
+	$s_viewing_bug_details_title = "Viewing Bug Details";
+	$s_id = "ID";
+	$s_category = "Category";
+	$s_severity = "Severity";
+	$s_reproducibility = "Reproducibility";
+	$s_date_submitted = "Date Submitted";
+	$s_last_update = "Last Update";
+	$s_reporter = "Reporter";
+	$s_assigned_to = "Assigned To";
+	$s_priority = "Priority";
+	$s_resolution = "Resolution";
+	$s_status = "Status";
+	$s_duplicate_id = "Duplicate ID";
+	$s_summary = "Summary";
+	$s_description = "Description";
+	$s_additional = "Additional";
+	$s_information = "Information";
+	$s_update_information_button = "Update Information";
 
 	### bug_vote_add.php3
 	$s_vote_added = "Vote has been added...";

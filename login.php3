@@ -34,8 +34,6 @@
 			setcookie( $g_string_cookie, $u_cookie_string );
 		}
 
-		### set last access cookie
-		setcookie( $g_last_access_cookie, $u_last_visit );
 		header( "Location: $g_main_page" );
 		exit;
 	}

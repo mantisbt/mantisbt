@@ -117,7 +117,7 @@
 		</td>
 		<td width=75%>
 			<select name=f_id>
-				<? print_profiles( $u_id ) ?>
+				<? print_profile_option_list( $u_id ) ?>
 			</select>
 		</td>
 	</tr>

@@ -65,6 +65,8 @@
 
 	# set to 0 to disable the logged in user and time info
 	$g_show_login_date_info      = 1;
+
+	$g_language                  = "english";
 	#--------------------
 
 	# core file variables
@@ -196,17 +198,12 @@
 
 	#--------------------
 	# cookies
+
 	# cookie names
 	$g_string_cookie            = $g_cookie_prefix."_STRING_COOKIE";
-	$g_last_access_cookie       = $g_cookie_prefix."_LAST_ACCESS_COOKIE";
 
 	# cookie values
-	if (isset($HTTP_COOKIE_VARS[$g_string_cookie])) {
-		$g_string_cookie_val        = $HTTP_COOKIE_VARS[$g_string_cookie];
-	}
-	if (isset($HTTP_COOKIE_VARS[$g_last_access_cookie])) {
-		$g_last_access_cookie_val   = $HTTP_COOKIE_VARS[$g_last_access_cookie];
-	}
+	$g_string_cookie_val        = $HTTP_COOKIE_VARS[$g_string_cookie];
 	#--------------------
 
 	#--------------------

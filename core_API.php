@@ -9,7 +9,7 @@
 	###########################################################################
 
 	require( "config_inc.php" );
-	include( "strings_english.php" );
+	require( "strings_".$g_language.".php" );
 
 	###########################################################################
 	### FUNCTIONS                                                           ###
@@ -177,6 +177,87 @@
 		}
 	}
 	#--------------------
+	function print_handler_option_list( $p_handler_id ) {
+		global $g_mantis_user_table;
+
+	    $query = "SELECT id, username
+	    		FROM $g_mantis_user_table
+	    		WHERE access_level='administrator' OR access_level='developer'";
+	    $result = mysql_query( $query );
+	    $user_count = mysql_num_rows( $result );
+	    for ($i=0;$i<$user_count;$i++) {
+	    	$row = mysql_fetch_array( $result );
+	    	$t_handler_id	= $row["id"];
+	    	$t_handler_name	= $row["username"];
+
+	    	if ( $t_handler_id==$p_handler_id ) {
+				PRINT "<option value=\"$t_handler_id\" SELECTED>".$t_handler_name;
+			}
+			else {
+				PRINT "<option value=\"$t_handler_id\">".$t_handler_name;
+			}
+		}
+	}
+	#--------------------
+	function print_duplicate_id_option_list( $p_duplicate_id ) {
+		global $g_mantis_bug_table;
+
+	    $query = "SELECT id
+	    		FROM $g_mantis_bug_table
+	    		ORDER BY id ASC";
+	    $result = mysql_query( $query );
+	    $duplicate_id_count = mysql_num_rows( $result );
+	    PRINT "<option value=\"0000000\">";
+
+	    for ($i=0;$i<$duplicate_id_count;$i++) {
+	    	$row = mysql_fetch_array( $result );
+	    	$t_duplicate_id	= $row["id"];
+
+	    	if ( $t_duplicate_id==$p_duplicate_id ) {
+				PRINT "<option value=\"$t_duplicate_id\" SELECTED>".$t_duplicate_id;
+			}
+			else {
+				PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id;
+			}
+		}
+	}
+	#--------------------
+	function print_user( $p_user_id ) {
+		global $g_mantis_user_table;
+
+		if ( $p_user_id=="0000000" ) {
+			return;
+		}
+	    $query = "SELECT username, email
+	    		FROM $g_mantis_user_table
+	    		WHERE id='$p_user_id'";
+	    $result = db_mysql_query( $query );
+	    if ( mysql_num_rows( $result )>0 ) {
+			$t_handler_username	= mysql_result( $result, 0, 0 );
+			$t_handler_email	= mysql_result( $result, 0, 1 );
+
+			PRINT "<a href=\"mailto:$t_handler_email\">".$t_handler_username."</a>";
+		}
+		else {
+			PRINT "user no longer exists";
+		}
+	}
+	#--------------------
+	function print_duplicate_id( $p_duplicate_id ) {
+		global 	$g_view_bug_page, $g_view_bug_advanced_page,
+				$g_mantis_user_pref_table;
+
+		if ( $p_duplicate_id!='0000000' ) {
+			if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" )=="on" ) {
+				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
+			}
+			else {
+				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
+			}
+		}
+	}
+	#--------------------
+	#--------------------
 	####################
 	# String printing API
 	####################
@@ -205,26 +286,7 @@
 	}
 	#--------------------
 	### Used for update pages
-	function print_categories( $p_category="" ) {
-		global $g_mantis_bug_table;
-
-		$t_category_string = get_enum_string( "category" );
-	    $t_str = $t_category_string.",";
-		$cat_count = get_list_item_count($t_str)-1;
-		for ($i=0;$i<$cat_count;$i++) {
-			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
-			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
-			if ( $p_category==$t_s ) {
-				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
-			}
-			else {
-				PRINT "<option value=\"$t_s\">$t_s";
-			}
-		} ### end for
-	}
-	#--------------------
-	### Used for update pages
-	function print_list( $p_list,  $p_item="" ) {
+	function print_field_option_list( $p_list, $p_item="" ) {
 		global $g_mantis_bug_table;
 
 		$t_category_string = get_enum_string( $p_list );
@@ -232,24 +294,6 @@
 		$entry_count = get_list_item_count($t_str)-1;
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
-			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
-			if ( $p_item==$t_s ) {
-				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
-			}
-			else {
-				PRINT "<option value=\"$t_s\">$t_s";
-			}
-		} ### end for
-	}
-	#--------------------
-	### Used for update pages
-	function print_list2( $p_list,  $p_item="" ) {
-		global $g_mantis_bug_table;
-
-	    $t_str = $p_list.",";
-		$entry_count = get_list_item_count( $t_str )-1;
-		for ($i=0;$i<$entry_count;$i++) {
-			$t_s = substr( $t_str, 0, strpos($t_str, ",") );
 			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
 			if ( $p_item==$t_s ) {
 				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
@@ -335,7 +379,7 @@
 	}
 	#--------------------
 	# prints the profiles given the user id
-	function print_profiles( $p_id ) {
+	function print_profile_option_list( $p_id ) {
 		global $g_mantis_user_profile_table;
 
 		### Get profiles
@@ -361,6 +405,29 @@
 			else {
 				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
 			}
+		}
+	}
+	#--------------------
+	function print_bug_link( $p_id ) {
+		global $g_mantis_user_pref_table, $g_view_bug_page, $g_view_bug_advanced_page;
+
+		if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" )=="on" ) {
+			PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
+		}
+		else {
+			PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
+		}
+	}
+	#--------------------
+	function print_formatted_status( $p_status, $p_severity ) {
+		if ( ( ( $p_severity=="major" ) ||
+			 ( $p_severity=="crash" ) ||
+			 ( $p_severity=="block" ) )&&
+			 ( $p_status!="resolved" ) ) {
+			PRINT "<b>$p_severity</b>";
+		}
+		else {
+			PRINT "$p_severity";
 		}
 	}
 	#--------------------
@@ -432,7 +499,7 @@
 	### also sets the last time they visited
 	### otherwise redirects to the login page
 	function index_login_cookie_check( $p_redirect_url="" ) {
-		global 	$g_string_cookie_val, $g_login_page, $g_last_access_cookie,
+		global 	$g_string_cookie_val, $g_login_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
@@ -463,8 +530,6 @@
 			$result = mysql_query( $query );
 			$t_last_access = mysql_result( $result, "last_visit" );
 			db_mysql_close();
-
-			setcookie( $g_last_access_cookie, $t_last_access );
 
 			### go to redirect
 			if ( !empty( $p_redirect_url ) ) {
@@ -552,6 +617,16 @@
 		else {
 			return 0;
 		}
+	}
+	#--------------------
+	function get_bugnote_count( $p_id ) {
+		global $g_mantis_bugnote_table;
+
+		$query = "SELECT COUNT(id)
+					FROM $g_mantis_bugnote_table
+					WHERE bug_id ='$p_id'";
+		$result = db_mysql_query( $query );
+		return mysql_result( $result, 0 );
 	}
 	#--------------------
 	####################

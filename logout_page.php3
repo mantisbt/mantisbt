@@ -8,7 +8,6 @@
 <?
 	### delete cookies
 	setcookie( $g_string_cookie );
-	setcookie( $g_last_access_cookie );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

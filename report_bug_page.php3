@@ -52,7 +52,7 @@
 		<td>
 			<select name=f_category>
 				<option value="" selected>Select Category
-				<? print_list( "category" ) ?>
+				<? print_field_option_list( "category" ) ?>
 			</select>
 		</td>
 	</tr>
@@ -64,7 +64,7 @@
 		<td>
 			<select name=f_reproducibility>
 				<option value="" SELECTED>Select Reproducibility
-				<? print_list( "reproducibility" ) ?>
+				<? print_field_option_list( "reproducibility" ) ?>
 			</select>
 		</td>
 	</tr>
@@ -76,7 +76,7 @@
 		<td>
 			<select name=f_severity>
 				<option value="" selected>Select Severity
-				<? print_list( "severity" ) ?>
+				<? print_field_option_list( "severity" ) ?>
 			</select>
 		</td>
 	</tr>

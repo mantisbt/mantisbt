@@ -10,7 +10,7 @@
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
-	<? include( $g_meta_include_file ) ?>
+<? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
@@ -18,49 +18,16 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
     $query = "SELECT *
-    		FROM $g_mantis_user_table
-			WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_mysql_query($query);
-	$row = mysql_fetch_array($result);
-	if ( $row ) {
-		extract( $row, EXTR_PREFIX_ALL, "u" );
-	}
-
-    $query = "SELECT *
     		FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
     $result = db_mysql_query( $query );
-	$row_count = mysql_num_rows( $result );
-
 	$row = mysql_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );
-
-    $query = "SELECT username, email
-    		FROM $g_mantis_user_table
-    		WHERE id='$v_handler_id'";
-    $result = db_mysql_query( $query );
-    if ( $result ) {
-   		$row = mysql_fetch_array( $result );
-		$t_handler_name		= $row["username"];
-		$t_handler_email	= $row["email"];
-	}
-
-    $query = "SELECT username, email
-    		FROM $g_mantis_user_table
-    		WHERE id='$v_reporter_id'";
-    $result = db_mysql_query( $query );
-    if ( $result ) {
-   		$row = mysql_fetch_array( $result );
-		$t2_handler_name		= $row["username"];
-		$t2_handler_email		= $row["email"];
-	}
 
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
     		WHERE id='$v_bug_text_id'";
     $result = db_mysql_query( $query );
-	$row_count = mysql_num_rows( $result );
-
 	$row = mysql_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
@@ -135,14 +102,7 @@
 			<b>Reporter</b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
-			<?
-				if ( isset( $t2_handler_name ) ) {
-					echo "<a href=\"mailto:$t2_handler_email\">".$t2_handler_name."</a>";
-				}
-				else {
-					echo "user no longer exists";
-				}
-			?>
+			<? print_user( $v_reporter_id ) ?>
 		</td>
 	</tr>
 	<tr>
@@ -150,17 +110,7 @@
 			<b>Assigned To</b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
-			<?
-				if ( isset( $t_handler_email ) ) {
-					echo "<a href=\"mailto:$t_handler_email\">".$t_handler_name."</a>";
-				}
-				else if ( "0000000"==$v_handler_id ) {
-					echo "";
-				}
-				else {
-					echo "user no longer exists";
-				}
-			?>
+			<? print_user( $v_handler_id ) ?>
 		</td>
 	</tr>
 	<tr align=center>
@@ -191,11 +141,7 @@
 			<b>Duplicate ID</b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<?
-				if ( $v_duplicate_id!='0000000' ) {
-					echo "<a href=\"$g_view_bug_page?f_id=$v_duplicate_id\">".$v_duplicate_id."</a>";
-				}
-			?>
+			<? print_duplicate_id( $v_duplicate_id ) ?>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=2>
 
@@ -226,20 +172,18 @@
 		</td>
 	</tr>
 <?
-	if ( ( $u_access_level=="administrator" ) ||
-		 ( $u_access_level=="developer" ) ||
-		 ( $u_access_level=="updater" ) ) {
+	if ( access_level_check_greater_or_equal( "updater" ) ) {
 ?>
 	<tr align=center>
-	<form method=post action="<? echo $g_bug_update_page ?>">
-		<input type=hidden name=f_id value="<? echo $f_id ?>">
-		<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
+		<form method=post action="<? echo $g_bug_update_page ?>">
+			<input type=hidden name=f_id value="<? echo $f_id ?>">
+			<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=3>
 			<input type=submit value=" Update Bug ">
 		</td>
 		</form>
 		<form method=post action="<? echo $g_bug_delete_page ?>">
-		<input type=hidden name=f_id value="<? echo $f_id ?>">
+			<input type=hidden name=f_id value="<? echo $f_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=3>
 			<input type=submit value=" Delete Bug ">
 		</td>

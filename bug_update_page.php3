@@ -10,12 +10,31 @@
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
-	<? include( $g_meta_include_file ) ?>
+<? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+    $query = "SELECT *
+    		FROM $g_mantis_bug_table
+    		WHERE id='$f_id'";
+    $result = db_mysql_query( $query );
+	$row = mysql_fetch_array( $result );
+	extract( $row, EXTR_PREFIX_ALL, "v" );
+
+    $query = "SELECT *
+    		FROM $g_mantis_bug_text_table
+    		WHERE id='$v_bug_text_id'";
+    $result = db_mysql_query( $query );
+	$row = mysql_fetch_array( $result );
+	extract( $row, EXTR_PREFIX_ALL, "v2" );
+
+	$v_summary = string_display( $v_summary );
+	$v2_description = string_display_with_br( $v2_description );
+	$v2_steps_to_reproduce = string_display_with_br( $v2_steps_to_reproduce );
+	$v2_additional_information = string_display_with_br( $v2_additional_information );
 ?>
 
 <p>
@@ -26,101 +45,44 @@
 ?>
 <p>
 <div align=center>
-[ <a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>">Back</a> ]
+[ <a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_back_to_bug ?></a> ]
 </div>
 <?
 	}
 ?>
 
-<?
-    $query = "SELECT *
-    		FROM $g_mantis_user_table
-			WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_mysql_query($query);
-	$row = mysql_fetch_array($result);
-	if ( $row ) {
-		extract( $row, EXTR_PREFIX_ALL, "u" );
-	}
-
-    $query = "SELECT *
-    		FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
-    $result = db_mysql_query( $query );
-	$row_count = mysql_num_rows( $result );
-
-	$row = mysql_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v" );
-
-    $query = "SELECT username, email
-    		FROM $g_mantis_user_table
-    		WHERE id='$v_handler_id'";
-    $result = db_mysql_query( $query );
-    if ( $result ) {
-   		$row = mysql_fetch_array( $result );
-		$t_handler_name		= $row["username"];
-		$t_handler_email	= $row["email"];
-	}
-
-    $query = "SELECT username, email
-    		FROM $g_mantis_user_table
-    		WHERE id='$v_reporter_id'";
-    $result = db_mysql_query( $query );
-    if ( $result ) {
-   		$row = mysql_fetch_array( $result );
-		$t2_handler_name		= $row["username"];
-		$t2_handler_email	= $row["email"];
-	}
-
-    $query = "SELECT *
-    		FROM $g_mantis_bug_text_table
-    		WHERE id='$v_bug_text_id'";
-    $result = db_mysql_query( $query );
-	$row_count = mysql_num_rows( $result );
-
-	$row = mysql_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, "v2" );
-
-	$v_summary = string_display( $v_summary );
-	$v2_description = string_display_with_br( $v2_description );
-	$v2_steps_to_reproduce = string_display_with_br( $v2_steps_to_reproduce );
-	$v2_additional_information = string_display_with_br( $v2_additional_information );
-	#$v_date_submitted = date( "m-d H:i", sql_to_unix_time( $v_date_submitted ) );
-	#$v_last_updated = date( "m-d H:i", sql_to_unix_time( $v_last_updated ) );
-?>
-
 <p>
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <form method=post action="<? echo $g_bug_update ?>">
-<input type=hidden name=f_id value="<? echo $v_id ?>">
-<input type=hidden name=f_projection value="<? echo $v_projection ?>">
-<input type=hidden name=f_eta value="<? echo $v_eta ?>">
-
+	<input type=hidden name=f_id value="<? echo $v_id ?>">
+	<input type=hidden name=f_projection value="<? echo $v_projection ?>">
+	<input type=hidden name=f_eta value="<? echo $v_eta ?>">
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
 	<tr>
 		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Viewing Bug Details</b>
+			<b><? echo $s_viewing_bug_details_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_category_title_color ?> align=center>
 		<td width=15%>
-			<b>ID</b>
+			<b><? echo $s_id ?></b>
 		</td>
 		<td width=20%>
-			<b>Category</b>
+			<b><? echo $s_category ?></b>
 		</td>
 		<td width=15%>
-			<b>Severity</b>
+			<b><? echo $s_severity ?></b>
 		</td>
 		<td width=20%>
-			<b>Reproducibility</b>
+			<b><? echo $s_reproducibility ?></b>
 		</td>
 		<td width=15%>
-			<b>Date Submitted</b>
+			<b><? echo $s_date_submitted ?></b>
 		</td>
 		<td width=15%>
-			<b>Last Update</b>
+			<b><? echo $s_last_update ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?> align=center>
@@ -129,17 +91,17 @@
 		</td>
 		<td>
 			<select name=f_category>
-				<? print_list( "category", $v_category ) ?>
+				<? print_field_option_list( "category", $v_category ) ?>
 			</select>
 		</td>
 		<td>
 			<select name=f_severity>
-				<? print_list( "severity", $v_severity ) ?>
+				<? print_field_option_list( "severity", $v_severity ) ?>
 			</select>
 		</td>
 		<td>
 			<select name=f_reproducibility>
-				<? print_list( "reproducibility", $v_reproducibility ) ?>
+				<? print_field_option_list( "reproducibility", $v_reproducibility ) ?>
 			</select>
 		</td>
 		<td>
@@ -152,63 +114,38 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Reporter</b>
+			<b><? echo $s_reporter ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
-			<?
-				if ( isset( $t2_handler_name ) ) {
-					echo "<a href=\"mailto:$t2_handler_email\">".$t2_handler_name."</a>";
-				}
-				else {
-					echo "user no longer exists";
-				}
-			?>
+			<? print_user( $v_reporter_id ) ?>
 		</td>
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Assigned To</b>
+			<b><? echo $s_assigned_to ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
 			<select name=f_handler_id>
 				<option value="">
-			<?
-			    $query = "SELECT id, username
-			    		FROM $g_mantis_user_table
-			    		WHERE access_level='administrator' OR access_level='developer'";
-			    $user_result = mysql_query( $query );
-			    $user_count = mysql_num_rows( $user_result );
-			    for ($i=0;$i<$user_count;$i++) {
-			    	$row = mysql_fetch_array( $user_result );
-			    	$t_handler_name	= $row["username"];
-			    	$t_handler_id	= $row["id"];
-
-			    	if ( $t_handler_id==$v_handler_id ) {
-						echo "<option value=\"$t_handler_id\" SELECTED>".$t_handler_name;
-					}
-					else {
-						echo "<option value=\"$t_handler_id\">".$t_handler_name;
-					}
-				}
-			?>
+				<? print_handler_option_list( $v_handler_id ) ?>
 			</select>
 		</td>
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Priority</b>
+			<b><? echo $s_priority ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<select name=f_priority>
-				<? print_list( "priority", $v_priority ) ?>
+				<? print_field_option_list( "priority", $v_priority ) ?>
 			</select>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Resolution</b>
+			<b><? echo $s_resolution ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<select name=f_resolution>
-				<? print_list( "resolution", $v_resolution ) ?>
+				<? print_field_option_list( "resolution", $v_resolution ) ?>
 			</select>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
@@ -217,37 +154,19 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Status</b>
+			<b><? echo $s_status ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<select name=f_status>
-				<? print_list( "status", $v_status ) ?>
+				<? print_field_option_list( "status", $v_status ) ?>
 			</select>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Duplicate ID</b>
+			<b><? echo $s_duplicate_id ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<select name=f_duplicate_id>
-				<option value="0000000">
-			<?
-			    $query = "SELECT id
-			    		FROM $g_mantis_bug_table
-			    		ORDER BY id ASC";
-			    $user_result = mysql_query( $query );
-			    $user_count = mysql_num_rows( $user_result );
-			    for ($i=0;$i<$user_count;$i++) {
-			    	$row = mysql_fetch_array( $user_result );
-			    	$t_duplicate_id	= $row["id"];
-
-			    	if ( $t_duplicate_id==$v_duplicate_id ) {
-						echo "<option value=\"$t_duplicate_id\" SELECTED>".$t_duplicate_id;
-					}
-					else {
-						echo "<option value=\"$t_duplicate_id\">".$t_duplicate_id;
-					}
-				}
-			?>
+				<? print_duplicate_id_option_list( $v_duplicate_id ) ?>
 			</select>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=2>
@@ -256,7 +175,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Summary</b>
+			<b><? echo $s_summary ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
 			<? echo $v_summary ?>
@@ -264,7 +183,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Description</b>
+			<b><? echo $s_description ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
 			<? echo $v2_description ?>
@@ -272,8 +191,7 @@
 	</tr>
 	<tr>
 		<td bgcolor=<? echo $g_category_title_color ?>>
-			<b>Additional<br>
-			Information</b>
+			<b><? echo $s_additional ?><br><? echo $s_information ?></b>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
 			<? echo $v2_additional_information ?>
@@ -281,7 +199,7 @@
 	</tr>
 	<tr>
 		<td align=center bgcolor=<? echo $g_white_color ?> colspan=6>
-			<input type=submit value="Update Information">
+			<input type=submit value="<? echo $s_update_information_button ?>">
 		</td>
 	</tr>
 	</table>
