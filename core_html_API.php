@@ -144,8 +144,8 @@
 		$t_username = get_current_user_field( "username" );
 		$t_now = date($g_complete_date_format);
 
-		PRINT "<table width=\"100%\">";
 		PRINT "<form method=post action=\"$g_set_project\">";
+		PRINT "<table width=\"100%\">";
 		PRINT "<tr>";
 			PRINT "<td align=left width=\"33%\">";
 				PRINT "$s_logged_in_as: <i>$t_username</i>";
@@ -160,9 +160,8 @@
 				PRINT "<input type=\"submit\" value=\"$s_switch\">";
 			PRINT "</td>";
 		PRINT "</tr>";
-		PRINT "</form>";
 		PRINT "</table>";
-
+		PRINT "</form>";
 	}
 	### --------------------
 	# This prints the little [?] link for user help

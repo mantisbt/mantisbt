@@ -66,7 +66,7 @@
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%" cols="2">
+	<table width="100%">
 	<tr>
 		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_summary_title ?></b> <? echo $s_orct ?>

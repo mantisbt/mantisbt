@@ -281,8 +281,8 @@
 			<input type="submit" value="<? echo $s_submit_report_button ?>">
 		</td>
 	</tr>
-	</form>
 	</table>
+	</form>
 	</td>
 </tr>
 </table>

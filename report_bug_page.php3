@@ -63,15 +63,15 @@
 <table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
 	<form method="post" enctype="multipart/form-data" action="<? echo $g_report_add ?>">
 	<input type="hidden" name="f_assign_id" value="0000000">
+	<table width="100%">
 	<tr>
 		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_enter_report_details_title ?></b>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td valign="top" width="25%">
 			<? echo $s_category ?> <? print_documentaion_link( "category" ) ?>:<br>
 			<span class="required">*<? echo $s_required ?>*</span>
@@ -134,7 +134,7 @@
 		</td>
 	</tr>
 <? if ( $g_allow_file_upload==1 ) { ?>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td>
 			<? echo $s_upload_file ?>
 		</td>
@@ -144,7 +144,7 @@
 		</td>
 	</tr>
 <? } ?>
-	<tr bgcolor=<? echo $g_primary_color_light ?>>
+	<tr bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $s_report_stay ?> <? print_documentaion_link( "report_stay" ) ?>:
 		</td>
@@ -157,8 +157,8 @@
 			<input type="submit" value="<? echo $s_submit_report_button ?>">
 		</td>
 	</tr>
-	</form>
 	</table>
+	</form>
 	</td>
 </tr>
 </table>
