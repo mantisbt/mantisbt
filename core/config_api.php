@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.22 2005-03-19 16:26:00 thraxisp Exp $
+	# $Id: config_api.php,v 1.23 2005-03-23 22:32:36 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -72,12 +72,21 @@
 			} else {
 				$t_project_clause = "project_id=$t_projects[0]";
 			}
+			
+			# @@@ thraxisp @@@ this code is required to handle the change in field name in the database. 
+			# @@@ It can probably be removed after the next release , if the upgrade is fixed 
+			# @@@ i.e. the only people that may need this are using CVS now.
+			if ( db_field_exists( 'access_reqd', $t_config_table ) ) {
+				$t_access_field = 'access_reqd';
+			} else {
+				$t_access_field = 'access';
+			}
 
 			$c_option = db_prepare_string( $p_option );
 			# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
 			#  once here. we need to reverse the sort, so that the last value overwrites the
 			#  config table
-			$query = "SELECT type, value, access FROM $t_config_table
+			$query = "SELECT type, value, $t_access_field FROM $t_config_table
 				WHERE config_id = '$p_option' AND
 					$t_project_clause AND
 					$t_user_clause
@@ -102,7 +111,7 @@
 						$t_value = config_eval( $t_raw_value );
 				}
 				$g_cache_config[$p_option] = $t_value;
-				$g_cache_config_access[$p_option] = $row['access'];
+				$g_cache_config_access[$p_option] = $row[$t_access_field];
 				return $t_value;
 			}
 		}
@@ -236,13 +245,13 @@
 
 		if ( 0 < db_num_rows( $result ) ) {
 			$t_set_query = "UPDATE $t_config_table
-				SET value='$c_value', type=$t_type, access=$c_access
+				SET value='$c_value', type=$t_type, access_reqd=$c_access
 				WHERE config_id = '$c_option' AND
 					project_id = $c_project AND
 					user_id = $c_user";
 		} else {
 			$t_set_query = "INSERT INTO $t_config_table
-				SET value='$c_value', type=$t_type, access=$c_access,
+				SET value='$c_value', type=$t_type, access_reqd=$c_access,
 					config_id = '$c_option',
 					project_id = $c_project,
 					user_id = $c_user";
