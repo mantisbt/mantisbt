@@ -137,7 +137,7 @@
 	</td>
 	<td>
 		<select name="f_view_state">
-			<?php print_enum_string_option_list( 'project_view_state', $v_view_state) ?>
+			<?php print_enum_string_option_list( 'view_state', $v_view_state) ?>
 		</select>
 	</td>
 	<td colspan="2">
