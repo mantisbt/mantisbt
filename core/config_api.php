@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.19 2005-02-28 14:42:53 thraxisp Exp $
+	# $Id: config_api.php,v 1.20 2005-03-02 00:14:58 jlatour Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -153,7 +153,7 @@
 			# bypass table lookup for certain options
 			$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
 			$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
-			
+
 			if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() )
 				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
 
@@ -198,7 +198,7 @@
 						$t_user_clause";
 
 				$result = db_query( $query );
-	
+
 				if ( 0 < db_result( $result ) ) {
 					return true;
 				}

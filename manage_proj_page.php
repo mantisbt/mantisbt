@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.13 2005-02-13 21:36:17 jlatour Exp $
+	# $Id: manage_proj_page.php,v 1.14 2005-03-02 00:14:49 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -70,25 +70,26 @@
 	</td>
 </tr>
 <?php
-	$t_projects = project_get_all_rows();
-
+	$t_projects = current_user_get_accessible_projects();
 	$t_projects = multi_sort( $t_projects, $f_sort, $t_direction );
 
-	foreach ( $t_projects as $t_project ) {
-		extract( $t_project, EXTR_PREFIX_ALL, 'v' );
+	$t_stack 	= array( $t_projects );
 
-        if ( !access_has_project_level ( config_get( 'manage_project_threshold' ), $v_id ) ) {
-		  continue;
-		}
+	while ( 0 < count( $t_stack ) ) {
+		$t_projects   = array_shift( $t_stack );
 
-		if ( !project_hierarchy_is_toplevel( $v_id ) ) {
+		if ( 0 == count( $t_projects ) ) {
 			continue;
 		}
 
+		$t_project_id = array_shift( $t_projects );
+		$t_level      = count( $t_stack );
+
+		$t_project = project_get_row( $t_project_id );
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td>
-		<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo string_display( $t_project['name'] ) ?></a>
+		<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo str_repeat( "&raquo; ", $t_level ) . string_display( $t_project['name'] ) ?></a>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'project_status', $t_project['status'] ) ?>
@@ -104,7 +105,17 @@
 	</td>
 </tr>
 <?php
-	} # End of foreach loop over projects
+		$t_subprojects = project_hierarchy_get_subprojects( $t_project_id );
+
+		if ( 0 < count( $t_projects ) || 0 < count( $t_subprojects ) ) {
+			array_unshift( $t_stack, $t_projects );
+		}
+
+		if ( 0 < count( $t_subprojects ) ) {
+			$t_subprojects = multi_sort( $t_subprojects, $f_sort, $t_direction );
+			array_unshift( $t_stack, $t_subprojects );
+		}
+	}
 ?>
 </table>
 

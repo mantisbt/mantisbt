@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.43 2005-02-28 14:40:01 thraxisp Exp $
+	# $Id: error_api.php,v 1.44 2005-03-02 00:14:59 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -35,7 +35,7 @@
 		global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 		global $g_lang_overrides;
 		global $g_error_send_page_header;
-		
+
 		# check if errors were disabled with @ somewhere in this call chain
 		if ( 0 == error_reporting() ) {
 			return;
