@@ -146,6 +146,13 @@
 						} else {
 							return false;
 						}
+			case CRYPT_FULL_SALT:
+						$salt = $p_password;
+						if ( crypt( $p_test_password, $salt ) == $p_password ) {
+							return true;
+						} else {
+							return false;
+						}
 			case PLAIN:	if ( $p_test_password == $p_password ) {
 							return true;
 						} else {
@@ -184,6 +191,9 @@
 
 		switch ( $g_login_method ) {
 			case CRYPT:	$salt = substr( $p_password, 0, 2 );
+						return crypt( $p_password, $salt );
+			case CRYPT_FULL_SALT:
+						$salt = $p_password;
 						return crypt( $p_password, $salt );
 			case PLAIN:	return $p_password;
 			case MD5:	return md5( $p_password );

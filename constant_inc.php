@@ -81,11 +81,12 @@
 	define( "UNREAD",   202 );
 
 	# login methods
-	define( "PLAIN",	  0 );
-	define( "CRYPT",	  1 );
-	define( "MD5",		  2 );
-	define( "LDAP",		  3 );
-	define( "BASIC_AUTH", 4 );
+	define( "PLAIN",	       0 );
+	define( "CRYPT",	       1 );
+	define( "CRYPT_FULL_SALT", 2 );
+	define( "MD5",		       3 );
+	define( "LDAP",		       4 );
+	define( "BASIC_AUTH",      5 );
 
 	# file upload methods
 	define( "DISK",       1 );

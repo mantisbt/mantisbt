@@ -60,6 +60,7 @@ tr.row-2			{ background-color: <?php echo $g_primary_color2 ?>; color: <?php ech
 tr.spacer			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; }
 tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; }
 tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; }
+tr.print			{ vertical-align: top; }
 tr.print-category	{ color: <?php echo $g_font_color ?>; font-weight: bold; }
 
 td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }

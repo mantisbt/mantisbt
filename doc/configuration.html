@@ -1181,10 +1181,11 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		<ul>
 			<li>PLAIN
 			<li>CRYPT
+			<li>CRYPT_FULL_SALT
 			<li>MD5
 			<li>BASIC_AUTH
 		</ul>
-		Some systems (mostly non-unix) do not have crypt support in PHP.  MD5 will accomplish almost the same thing.  PLAIN is plain text and there is no attempt to secure the password in the database.  You will not be able to easily convert between encryption methods so this needs to be chosen at install time.  CRYPT was the default until 0.17.0; MD5 is now the default.
+		Some systems (mostly non-unix) do not have crypt support in PHP.  MD5 will accomplish almost the same thing.  PLAIN is plain text and there is no attempt to secure the password in the database.  You will not be able to easily convert between encryption methods so this needs to be chosen at install time.  CRYPT was the default until 0.17.0; MD5 is now the default.  Try CRYPT_FULL_SALT if CRYPT is not working.
 	</td>
 </tr>
 <tr>
