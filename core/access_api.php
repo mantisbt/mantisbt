@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.30 2004-07-27 14:24:57 prichards Exp $
+	# $Id: access_api.php,v 1.31 2004-08-03 13:47:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -128,17 +128,11 @@
 	#===================================
 
 	# --------------------
-	# Check the current user's access against the given value and return true
-	#  if the user's access is equal to or higher, false otherwise.
+	# Get the current user's access
 	#
 	# This function only checks the user's global access level, ignoring any
 	#  overrides they might have at a project level
-	function access_has_global_level( $p_access_level, $p_user_id = null ) {
-		# Short circuit the check in this case
-		if ( NOBODY == $p_access_level ) {
-			return false;
-		}
-
+	function access_get_global_level( $p_user_id = null ) {
 		if ( $p_user_id === null ) {
 		    $p_user_id = auth_get_current_user_id();
 		}
@@ -150,7 +144,24 @@
 			return false;
 		}
 
-		$t_access_level = user_get_field( $p_user_id, 'access_level' );
+		return user_get_field( $p_user_id, 'access_level' );
+	}
+
+	# --------------------
+	# Check the current user's access against the given value and return true
+	#  if the user's access is equal to or higher, false otherwise.
+	#
+	function access_has_global_level( $p_access_level, $p_user_id = null ) {
+		# Short circuit the check in this case
+		if ( NOBODY == $p_access_level ) {
+			return false;
+		}
+
+		if ( $p_user_id === null ) {
+		    $p_user_id = auth_get_current_user_id();
+		}
+
+		$t_access_level = access_get_global_level( $p_user_id );
 
 		return ( $t_access_level >= $p_access_level );
 	}
@@ -165,23 +176,17 @@
 	}
 
 	# --------------------
-	# Check the current user's access against the given value and return true
-	#  if the user's access is equal to or higher, false otherwise.
+	# Get the current user's access level
 	#
 	# This function checks the project access level first (for the current project
 	#  if none is specified) and if the user is not listed, it falls back on the
 	#  user's global access level.
-	function access_has_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
-		# Short circuit the check in this case
-		if ( NOBODY == $p_access_level ) {
-			return false;
-		}
-
+	function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 		# Deal with not logged in silently in this case
 		# @@@ we may be able to remove this and just error
 		#     and once we default to anon login, we can remove it for sure
 		if ( !auth_is_user_authenticated() ) {
-			return false;
+			return ANYBODY;
 		}
 
 		if ( null === $p_user_id ) {
@@ -193,10 +198,10 @@
 		}
 
 		if ( ALL_PROJECTS == $p_project_id ) {
-			return access_has_global_level( $p_access_level, $p_user_id );
+			$t_access_level = access_get_global_level( $p_user_id );
+		} else {
+			$t_access_level = access_get_local_level( $p_user_id, $p_project_id );
 		}
-
-		$t_access_level = access_get_local_level( $p_user_id, $p_project_id );
 
 		# Try to use the project access level.
 		# If the user is not listed in the project, then try to fall back
@@ -212,6 +217,28 @@
 				$t_access_level = user_get_field( $p_user_id, 'access_level' );
 			}
 		}
+
+		return $t_access_level;
+	}
+
+	# --------------------
+	# Check the current user's access against the given value and return true
+	#  if the user's access is equal to or higher, false otherwise.
+	#
+	function access_has_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
+		# Short circuit the check in this case
+		if ( NOBODY == $p_access_level ) {
+			return false;
+		}
+
+		if ( null === $p_user_id ) {
+		    $p_user_id = auth_get_current_user_id();
+		}
+		if ( null === $p_project_id ) {
+			$p_project_id = helper_get_current_project();
+		}
+
+		$t_access_level = access_get_project_level( $p_project_id, $p_user_id );
 
 		return ( $t_access_level >= $p_access_level );
 	}
@@ -310,7 +337,7 @@
 			return true;
 		}
 
-		return access_has_bug_level( config_get( 'close_bug_threshold' ), $p_bug_id, $p_user_id );
+		return access_has_bug_level( access_get_status_threshold( CLOSED ), $p_bug_id, $p_user_id );
 	}
 
 	# --------------------
@@ -352,6 +379,8 @@
 	# Data Access
 	#===================================
 
+	# get the user's access level specific to this project. 
+	# return false (0) if the user has no access override here
 	function access_get_local_level( $p_user_id, $p_project_id ) {
 		$p_project_id = (int)$p_project_id; # 000001 is different from 1.
 
@@ -361,6 +390,19 @@
 			return $t_project_level[$p_project_id];
 		} else {
 			return false;
+		}
+	}
+
+	# --------------------
+	# get the access level required to change the issue to the new status
+	#  If there is no specific differentiated access level, use the 
+	#  generic update_bug_status_threshold
+	function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) {
+		$t_thresh_array = config_get( 'set_status_threshold' );
+		if ( isset( $t_thresh_array[ $p_status ] ) ) {
+			return $t_thresh_array[$p_status];
+		} else {
+			return config_get( 'update_bug_status_threshold' );
 		}
 	}
 ?>

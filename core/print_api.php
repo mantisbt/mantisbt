@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.93 2004-07-27 00:59:08 thraxisp Exp $
+	# $Id: print_api.php,v 1.94 2004-08-03 13:47:49 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -586,29 +586,48 @@
 	# Select the proper enum values for status based on workflow
 	# or the input parameter if workflows are not used
 	# $p_enum_name : name of enumeration (eg: status)
-	# $p_val : current value
-	function print_enum_string_option_list_workflow( $p_enum_name, $p_val = 0 ) {
-		$t_config_var_name = $p_enum_name . '_enum_string';
-		$t_config_var_value = config_get( $t_config_var_name );
-		$t_enum_workflow = config_get( $p_enum_name . '_enum_workflow' );
+	# $p_current_value : current value
+	function print_status_option_list( $p_select_label, $p_current_value = 0 ) {
+		$t_config_var_value = config_get( 'status_enum_string' );
+		$t_enum_workflow = config_get( 'status_enum_workflow' );
+		$t_current_auth = access_get_project_level();
 
 		if ( count( $t_enum_workflow ) < 1 ) {
 			# workflow not defined, use default enum
 			$t_arr  = explode_enum_string( $t_config_var_value );
 		} else {
 			# workflow defined - find allowed states
-			$t_arr  = explode_enum_string( $t_enum_workflow[$p_val] );
+			$t_arr  = explode_enum_string( $t_enum_workflow[$p_current_value] );
 		}
 
 		$t_enum_count = count( $t_arr );
+		$t_enum_list = array();
+		$t_current_state = '';
 
 		for ( $i = 0; $i < $t_enum_count; $i++ ) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
-			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
-			echo "<option value=\"$t_elem[0]\"";
-			check_selected( $t_elem[0], $p_val );
-			echo ">$t_elem2</option>";
+			$t_elem2 = get_enum_element( 'status', $t_elem[0] );
+			$t_status = $t_elem[0];
+			if ( $t_status == $p_current_value ) {
+				$t_current_state = $t_elem2;
+			}
+			if ( $t_current_auth >= access_get_status_threshold( $t_status ) ) {
+				$t_enum_list[$t_status] = $t_elem2;
+			}
 		} # end for
+
+		if ( count( $t_enum_list ) > 0 ) {
+			echo '<select name="' . $p_select_label . '">';
+			foreach ( $t_enum_list as $key => $val ) {
+				echo "<option value=\"$key\"";
+				check_selected( $val, $p_current_value );
+				echo ">$val</option>";
+			}
+			echo '</select>';
+		} else {
+			echo $t_current_state;
+		}
+
 	}
 	# --------------------
 	# prints the list of a project's users

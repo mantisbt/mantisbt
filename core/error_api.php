@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.31 2004-08-01 12:51:38 vboctor Exp $
+	# $Id: error_api.php,v 1.32 2004-08-03 13:47:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -55,7 +55,7 @@
 				$t_error_type = 'SYSTEM NOTICE';
 				$t_error_description = $p_error;
 				if ( ON == config_get( 'show_notices' ) ) {
-					$t_method = 'inline';
+					$t_method = 'halt'; // 'inline';
 				}
 				break;
 			case E_USER_ERROR:

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.115 2004-08-01 08:56:38 vboctor Exp $
+	# $Id: html_api.php,v 1.116 2004-08-03 13:47:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -405,7 +405,7 @@
 				$t_menu_options[] = '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a>';
 
 				# Report Bugs
-				if ( access_has_project_level( REPORTER ) ) {
+				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 					$t_menu_options[] = string_get_bug_report_link();
 				}
 
@@ -680,6 +680,57 @@
 	}
 
 	# --------------------
+	# Print Change Status to: button
+	#  This code is similar to print_status_option_list except
+	#   there is no masking, except for the current state
+	function html_button_bug_change_status( $p_bug_id ) {
+		$t_bug_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		$t_bug_current_state = bug_get_field( $p_bug_id, 'status' );
+		$t_current_access = access_get_project_level( $t_bug_project_id );
+		
+		$t_enum_status = config_get( 'status_enum_string'); 
+		$t_enum_workflow = config_get( 'status_enum_workflow' );
+		if ( count( $t_enum_workflow ) < 1 ) {
+			# workflow not defined, use default enum
+			$t_arr  = explode_enum_string( $t_enum_status );
+		} else {
+			# workflow defined - find allowed states
+			$t_arr  = explode_enum_string( $t_enum_workflow[$t_bug_current_state] );
+		}
+
+		$t_enum_count = count( $t_arr );
+		$t_enum_list = array();
+		for ( $i = 0; $i < $t_enum_count; $i++ ) {
+			$t_elem  = explode_enum_arr( $t_arr[$i] );
+			$t_elem2 = get_enum_element( 'status', $t_elem[0] );
+			$t_status = $t_elem[0];
+			if ( ( $t_status <> $t_bug_current_state ) && ( $t_current_access >= access_get_status_threshold( $t_status ) ) ) {
+				$t_enum_list[$t_status] = $t_elem2;
+			}
+		} # end for
+
+		if ( count( $t_enum_list ) > 0 ) {
+			echo "&nbsp;<form method=\"post\" action=\"bug_change_status_page.php\">\n";
+
+			$t_button_text = lang_get( 'bug_status_to_button' );
+			echo "	<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />\n";
+
+			echo "<select name=\"new_status\">";
+			foreach ( $t_enum_list as $key => $val ) {
+				echo "<option value=\"$key\"";
+				check_selected( $val, $t_bug_current_state );  # select current status which doesn't exist, hence no selection
+				echo ">$val</option>";
+			}
+			echo '</select>';
+
+			$t_bug_id = string_attribute( $p_bug_id );
+			echo "	<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
+
+			echo "</form>&nbsp;\n";
+		}
+	}
+
+	# --------------------
 	# Print Assign To: combo box of possible handlers
 	function html_button_bug_assign_to( $p_bug_id ) {
 		# make sure status is allowed of assign would cause auto-set-status
@@ -708,7 +759,7 @@
 			$t_default_assign_to = $t_current_user_id;
 		}
 
-		if ( ( $t_handler_id != $t_reporter_id ) &&
+		if ( ( $t_handler_id != $t_reporter_id ) && user_exists( $t_reporter_id ) &&
 			( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $t_reporter_id ) ) ) {
 		    $t_options[] = array( $t_reporter_id, '[' . lang_get( 'reporter' ) . ']' );
 
@@ -717,7 +768,7 @@
 			}
 		}
 
-		PRINT "<form method=\"post\" action=\"bug_assign.php\">\n";
+		PRINT "&nbsp;<form method=\"post\" action=\"bug_assign.php\">\n";
 
 		$t_button_text = lang_get( 'bug_assign_to_button' );
 		PRINT "	<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />\n";
@@ -759,7 +810,7 @@
 		$t_bug_id = string_attribute( $p_bug_id );
 		PRINT "	<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
 
-		PRINT "</form>\n";
+		PRINT "</form>&nbsp;\n";
 	}
 
 	# --------------------
@@ -814,9 +865,10 @@
 	 		  ( ON == config_get( 'allow_reporter_reopen' ) ) 
 			 	) )
 			 ) {
-			html_button( 'bug_reopen_page.php',
+			html_button( 'bug_change_status_page.php',
 						 lang_get( 'reopen_bug_button' ),
-						 array( 'bug_id' => $p_bug_id ) );
+						 array( 'bug_id' => $p_bug_id ,
+						 				'new_status' => config_get( 'bug_reopen_status' ) ) );
 		}
 	}
 
@@ -869,8 +921,9 @@
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 		$t_status = bug_get_field( $p_bug_id, 'status' );
 
-		PRINT '<table><tr><td>';
+		PRINT '<table><tr>';
 		if ( !bug_is_readonly( $p_bug_id ) ) {
+			PRINT '<td>';
 			# UPDATE button
 			html_button_bug_update( $p_bug_id );
 
@@ -881,26 +934,24 @@
 
 			PRINT '</td><td>';
 
-			# RESOLVE button
-			html_button_bug_resolve( $p_bug_id );
-
-			PRINT '</td><td>';
-
 			# MOVE button
 			html_button_bug_move( $p_bug_id );
 
 			# # CREATE CHILD button
 			# PRINT '</td><td>';
 			# html_button_bug_create_child( $p_bug_id );
+		 
+			PRINT '</td>';
 		} else {
+			PRINT '<td>';
 			# REOPEN button
 			html_button_bug_reopen( $p_bug_id );
+			PRINT '</td>';
 		}
-		PRINT '</td>';
-
-		# CLOSE button
+		
 		PRINT '<td>';
-		html_button_bug_close( $p_bug_id );
+		# Change State button
+		html_button_bug_change_status( $p_bug_id );
 		PRINT '</td>';
 
 		# MONITOR/UNMONITOR button

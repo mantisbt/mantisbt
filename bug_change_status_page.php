@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve_page.php,v 1.42 2004-08-01 22:24:58 prichards Exp $
+	# $Id: bug_change_status_page.php,v 1.1 2004-08-03 13:47:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,22 +17,25 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 
-	# MASC RELATIONSHIP
 	require_once( $t_core_path.'relationship_api.php' );
-	# MASC RELATIONSHIP
 ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
+	$f_new_status = gpc_get_int( 'new_status' );
 
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
-	access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id );
+	access_ensure_bug_level( access_get_status_threshold( $f_new_status ), $f_bug_id );
+
+	$t_status_label = get_enum_element( 'status', $f_new_status );
+	$t_resolved = config_get( 'bug_resolved_status_threshold' );
+	
+	$t_bug = bug_get( $f_bug_id );
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
 
 <br />
 <div align="center">
-<form method="post" action="bug_resolve.php">
+<form method="post" action="bug_update.php">
 <table class="width75" cellspacing="1">
 
 
@@ -40,20 +43,23 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-		<?php echo lang_get( 'resolve_bug_title' ) ?>
+		<input type="hidden" name="status" value="<?php echo $f_new_status ?>" />
+		<?php echo lang_get( $t_status_label . '_bug_title' ) ?>
 	</td>
 </tr>
 
 <?php
-# MASC RELATIONSHIP
-if ( ON == config_get( 'enable_relationship' ) ) {
-	if ( relationship_can_resolve_bug( $f_bug_id ) == false ) {
-		echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
+if ( $t_resolved == $f_new_status ) {
+	if ( ON == config_get( 'enable_relationship' ) ) {
+		if ( relationship_can_resolve_bug( $f_bug_id ) == false ) {
+			echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
+		}
 	}
 }
-# MASC RELATIONSHIP
 ?>
 
+<?php
+if ( $t_resolved == $f_new_status ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -65,8 +71,10 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 		</select>
 	</td>
 </tr>
+<?php } ?>
 
-
+<?php
+if ( $t_resolved == $f_new_status ) { ?>
 <!-- Duplicate ID -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -76,20 +84,38 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 		<input type="text" name="duplicate_id" maxlength="7" />
 	</td>
 </tr>
+<?php } ?>
+
+<?php
+if ( ASSIGNED == $f_new_status ) { ?>
+<!-- Assigned To -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'assigned_to' ) ?>
+	</td>
+	<td colspan="5">
+		<select name="handler_id">
+			<option value="0"></option>
+			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
+		</select>
+	</td>
+</tr>
+<?php } ?>
 
 
 <!-- Custom Fields -->
 <?php
+if ( $f_new_status >= $t_resolved ) {
 	$t_custom_fields_found = false;
 	$t_related_custom_field_ids = custom_field_get_linked_ids( bug_get_field( $f_bug_id, 'project_id' ) );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if( ( $t_def['display_resolve'] || $t_def['require_resolve'] ) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
+		if( ( $t_def['display_' . $t_status_label] || $t_def['require_' . $t_status_label] ) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 			$t_custom_fields_found = true;
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php if($t_def['require_resolve']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if($t_def['require_'. $t_status_label]) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
 		<?php
@@ -98,23 +124,37 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 	</td>
 </tr>
 <?php
-		} # $t_def['display_resolve'] || $t_def['require_resolve'] && custom_field_has_write_access( $t_id, $f_bug_id ) )
-		else if( ( $t_def['display_resolve'] || $t_def['require_resolve'] ) && custom_field_has_read_access( $t_id, $f_bug_id ) ) {
+		} # $t_def['display_' . $t_status_label] || $t_def['require_' . $t_status_label] && custom_field_has_write_access( $t_id, $f_bug_id ) )
+		else if( ( $t_def['display_' . $t_status_label] || $t_def['require_' . $t_status_label] ) && custom_field_has_read_access( $t_id, $f_bug_id ) ) {
 ?>
 	<tr <?php echo helper_alternate_class() ?>>
 		<td class="category">
 			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 		</td>
 		<td>
-			<?php print_custom_field_value( $t_def, $t_id, $f_bug_id ); ?>		
+			<?php
+				$t_custom_field_value = custom_field_get_value( $t_id, $f_bug_id );
+				if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {
+					echo "<a href=\"mailto:$t_custom_field_value\">$t_custom_field_value</a>";
+				} else {
+					echo $t_custom_field_value;
+				}
+			?>
 		</td>
 	</tr>
 <?php
-		} # $t_def['display_resolve'] || $t_def['require_resolve'] ) && custom_field_has_read_access( $t_id, $f_bug_id ) )
+		} # $t_def['display_' . $t_status_label] || $t_def['require_' . $t_status_label] ) && custom_field_has_read_access( $t_id, $f_bug_id ) )
 	} # foreach( $t_related_custom_field_ids as $t_id )
+}
 ?>
 
-
+<?php
+if (  $f_new_status >= $t_resolved ) { 
+	$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
+		|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
+	if ( $t_show_version ) { 
+?>
 <!-- Fixed in Version -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -127,8 +167,11 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 		</select>
 	</td>
 </tr>
+<?php } 
+	} ?>
 
-
+<?php
+if ( $f_new_status >= $t_resolved ) { ?>
 <!-- Close Immediately (if enabled) -->
 <?php if ( ON == config_get( 'allow_close_immediately' ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
@@ -140,7 +183,15 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 	</td>
 </tr>
 <?php } ?>
+<?php } ?>
 
+<?php
+	if ( ( bug_get_field( $f_bug_id, 'status' ) == $t_resolved ) 
+			&& ( $f_new_status = config_get( 'bug_reopen_status' ) ) ) {
+		# bug was re-opened
+		printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
+	}
+?>
 
 <!-- Bugnote -->
 <tr <?php echo helper_alternate_class() ?>>
@@ -158,7 +209,7 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 <!-- Submit Button -->
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'resolve_bug_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( $t_status_label . '_bug_button' ) ?>" />
 	</td>
 </tr>
 

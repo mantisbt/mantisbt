@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.74 2004-08-02 18:16:20 prichards Exp $
+	# $Id: bug_update_advanced_page.php,v 1.75 2004-08-03 13:47:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -220,9 +220,7 @@
 		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
-		<select name="status">
-			<?php print_enum_string_option_list_workflow( 'status', $t_bug->status ) ?>
-		</select>
+		<?php print_status_option_list( 'status', $t_bug->status ) ?>
 	</td>
 
 	<?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.188 2004-08-01 22:24:58 prichards Exp $
+	# $Id: config_defaults_inc.php,v 1.189 2004-08-03 13:47:47 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -735,16 +735,8 @@
 	# access level needed to report a bug
 	$g_report_bug_threshold			= REPORTER;
 
-	# access level needed to update bugs
+	# access level needed to update bugs (i.e., the update_bug_page)
 	$g_update_bug_threshold			= UPDATER;
-
-	# access level needed to re-open bugs
-	# Look in the constant_inc.php file if you want to set a different value
-	$g_reopen_bug_threshold			= DEVELOPER;
-
-	# access level needed to close bugs
-	# Look in the constant_inc.php file if you want to set a different value
-	$g_close_bug_threshold			= DEVELOPER;
 
 	# access level needed to monitor bugs
 	# Look in the constant_inc.php file if you want to set a different value
@@ -858,6 +850,14 @@
 	# threshold for viewing changelog
 	$g_view_changelog_threshold = VIEWER;
 
+	# status change thresholds
+	$g_update_bug_status_threshold = DEVELOPER;
+
+	# this array sets the access thresholds needed to enter each status listed.
+	# if a status is not listed, it falls back to $g_update_bug_status_threshold
+	# example: $g_set_status_threshold = array( ACKNOWLEDGED => MANAGER, CONFIRMED => DEVELOPER, CLOSED => MANAGER );
+	$g_set_status_threshold = array();
+	
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
 	# You can simply change this at will. Mantis will try to figure out how the passwords were encrypted.

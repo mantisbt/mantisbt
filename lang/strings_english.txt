@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.193 $
-	# $Author: prichards $
-	# $Date: 2004-08-02 18:17:59 $
+	# $Revision: 1.194 $
+	# $Author: vboctor $
+	# $Date: 2004-08-03 13:47:49 $
 	#
-	# $Id: strings_english.txt,v 1.193 2004-08-02 18:17:59 prichards Exp $
+	# $Id: strings_english.txt,v 1.194 2004-08-03 13:47:49 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -391,12 +391,24 @@ $s_password_updated = 'Password successfully updated';
 # bug_assign.php
 $s_bug_assign_msg = 'Issue has been successfully assigned...';
 
+# bug_change_status_page.php
+$s_new_bug_title = 'New Issue';
+$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_acknowledged_bug_title = 'Acknowledge Issue';
+$s_confirmed_bug_title = 'Confirm Issue';
+$s_assigned_bug_title = 'Assign Issue';
+$s_new_bug_button = 'New Issue';
+$s_feedback_bug_button = 'Provide Feedback';
+$s_acknowledged_bug_button = 'Acknowledge Issue';
+$s_confirmed_bug_button = 'Confirm Issue';
+$s_assigned_bug_button = 'Assign Issue';
+
 # bug_close.php
 $s_bug_close_msg = 'Issue has been closed...';
 $s_close_immediately = 'Close immediately:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Close Issue';
+$s_closed_bug_title = 'Close Issue';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Issue has been deleted...';
@@ -424,8 +436,8 @@ $s_reopen_add_bugnote_title = 'Add Note Reason For Reopening Issue';
 $s_bugnote_add_reopen_button = 'Add Note and Reopen Issue';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Resolve Issue';
-$s_resolve_bug_button = 'Resolve Issue';
+$s_resolved_bug_title = 'Resolve Issue';
+$s_resolved_bug_button = 'Resolve Issue';
 
 # bug_resolve_page2.php
 $s_bug_resolved_msg = 'Issue has been resolved. Enter note below...';
@@ -897,6 +909,7 @@ $s_product_build = 'Product Build';
 $s_system_profile = 'System Description';
 $s_update_bug_button = 'Update Issue';
 $s_bug_assign_to_button = 'Assign To:';
+$s_bug_status_to_button = 'Change Status To:';
 $s_reopen_bug_button = 'Reopen Issue';
 $s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Attached Files';

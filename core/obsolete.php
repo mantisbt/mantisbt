@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.25 2004-05-08 23:57:21 vboctor Exp $
+	# $Id: obsolete.php,v 1.26 2004-08-03 13:47:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Obsolete API ###
@@ -88,4 +88,10 @@
 	config_obsolete( 'show_project_in_title', '' );
 
 	config_obsolete( 'hide_closed_default', 'hide_status_default' );
+
+	config_obsolete( 'close_bug_threshold', 'set_status_threshold' );
+	config_obsolete( 'reopen_bug_threshold', 'set_status_threshold' );
+	
+	config_obsolete( 'status_pulldown_enum_mask_string', '' );
+	
 ?>
