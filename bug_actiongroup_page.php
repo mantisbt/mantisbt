@@ -30,6 +30,7 @@
 		exit;
 	}
 
+	$t_finished = 0;
 
 	switch ($f_action)  {
 
