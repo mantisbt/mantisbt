@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.137 $
-	# $Author: prescience $
-	# $Date: 2003-06-25 21:44:26 $
+	# $Revision: 1.138 $
+	# $Author: vboctor $
+	# $Date: 2003-07-06 03:09:37 $
 	#
-	# $Id: strings_english.txt,v 1.137 2003-06-25 21:44:26 prescience Exp $
+	# $Id: strings_english.txt,v 1.138 2003-07-06 03:09:37 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -421,7 +421,7 @@ $s_status = 'Status';
 $s_duplicate_id = 'Duplicate ID';
 $s_os = 'OS';
 $s_projection = 'Projection';
-$s_os_version = 'Version';
+$s_os_version = 'OS Version';
 $s_eta = 'ETA';
 $s_product_version = 'Product Version';
 $s_build = 'Build';
