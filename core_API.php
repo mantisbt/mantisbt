@@ -105,5 +105,6 @@
 	require( 'core_bugnote_API.php' );
 	require( 'core_bug_API.php' );
 	require( 'core_error_API.php' );
+	require( 'core_config_API.php' );
 	# --------------------
 ?>

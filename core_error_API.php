@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.3 $
+	# $Revision: 1.4 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-24 08:08:03 $
+	# $Date: 2002-08-24 09:16:54 $
 	#
-	# $Id: core_error_API.php,v 1.3 2002-08-24 08:08:03 jfitzell Exp $
+	# $Id: core_error_API.php,v 1.4 2002-08-24 09:16:54 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -30,8 +30,6 @@
 	# The others, being system errors, will come with a string in $p_error
 	# 
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-		global $g_show_warnings, $g_show_notices, $g_show_detailed_errors;
-
 		$t_short_file = basename( $p_file );
 		$t_method = 'none';
 
@@ -39,13 +37,13 @@
 		switch ( $p_type ) {
 			case E_WARNING:
 				$t_string = "SYSTEM WARNING: $p_error <br> ($t_short_file: line $p_line)";
-				if ( $g_show_warnings ) {
+				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
 				break;
 			case E_NOTICE:
 				$t_string = "SYSTEM NOTICE: $p_error <br> ($t_short_file: line $p_line)";
-				if ( $g_show_notices ) {
+				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
 				break;
@@ -59,7 +57,7 @@
 				$t_string = "MANTIS WARNING #$p_error: " .
 							error_string( $p_error ) .
 							"<br>($t_short_file: line $p_line)";
-				if ( $g_show_warnings ) {
+				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
 				break;
@@ -67,7 +65,7 @@
 				$t_string = "MANTIS NOTICE #$p_error: " .
 							error_string( $p_error ) .
 							"<br>($t_short_file: line $p_line)";
-				if ( $g_show_notices ) {
+				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
 				break;
@@ -85,7 +83,9 @@
 
 			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
 
-			if ( $g_show_detailed_errors ) {
+			if ( ON == config_get( 'show_detailed_errors' ) ) {
+				if (isset($php_errormsg))
+					echo "okie dokie";
 			?>
 				<center>
 					<table class="width75">
