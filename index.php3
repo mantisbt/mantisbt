@@ -21,8 +21,8 @@
 <? print_top_page( $g_top_include_page ) ?>
 
 <p>
-<div align=center>
-<a href="<? echo $g_login_page ?>"><? echo $s_click_to_login ?></a>
+<div align="center">
+	<a href="<? echo $g_login_page ?>"><? echo $s_click_to_login ?></a>
 </div>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

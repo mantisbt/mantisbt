@@ -47,14 +47,14 @@
 	</tr>
 	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td width="40%">
-			Make Default:
+			<? echo $s_make_default ?>:
 		</td>
 		<td width="60%">
 			<input type="checkbox" name="f_make_default">
 		</td>
 	</tr>
 	<tr align="center">
-		<td colspan=2>
+		<td colspan="2">
 			<input type="submit" value="<? echo $s_select_project_button ?>">
 		</td>
 	</tr>

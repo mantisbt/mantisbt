@@ -200,7 +200,7 @@
 			<b><? echo $s_developer_stats ?>:</b>
 		</td>
 		<td>
-			<b>reporter stats: </b> <? #@@@ OOPS - localize ?>
+			<b><? echo $s_reporter_stats ?>: </b> <? #@@@ OOPS - localize ?>
 		</td>
 	</tr>
 	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">

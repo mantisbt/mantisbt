@@ -252,6 +252,7 @@
 	$s_signup_link = "signup for a new account";
 
 	# login_select_proj_page.php3
+	$s_make_default = "Make Default";
 	$s_select_project_button = "Select Project";
 
 	# logout_page.php3
@@ -475,6 +476,8 @@
 	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
 
 	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
+	$s_automatic_access_level = "Automatic access level";
 	$s_add_user_title = "Add user to project";
 	$s_add_user_button = "Add User";
 	$s_project_selection_title = "Project Selection";
@@ -548,21 +551,22 @@
 
 	# summary_page.php3
 	$s_summary_title = "Summary";
-              $s_summary_jpgraph_link = "Advanced summary";
-              $s_by_status = "by status";
+	$s_summary_jpgraph_link = "Advanced summary";
+	$s_by_status = "by status";
 	$s_by_date = "by date (days)";
 	$s_by_severity = "by severity";
 	$s_by_resolution = "by resolution";
 	$s_by_category = "by category";
 	$s_by_priority = "by priority";
-              $s_by_developer = "by developer";
-              $s_by_reporter ="by reporter";
+	$s_by_developer = "by developer";
+	$s_by_reporter ="by reporter";
 	$s_time_stats = "time stats for resolved bugs(days)";
 	$s_longest_open_bug = "longest open bug";
 	$s_longest_open = "longest open";
 	$s_average_time = "average time";
 	$s_total_time = "total time";
 	$s_developer_stats = "developer stats";
+	$s_reporter_stats = "reporter stats";
 	$s_orct = "(open/resolved/closed/total)";
 
 	# view_all_assign_bug_page.php3
@@ -595,6 +599,7 @@
 	$s_update_bug_button = "Update Bug";
 	$s_bug_assign_button    = "Assign to Me";
 	$s_reopen_bug_button = "Reopen Bug";
+	$s_attatched_files = "Attached Files";
 
 	# view_bug_inc.php
 

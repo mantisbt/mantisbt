@@ -10,89 +10,89 @@
         <td>
             <span class="smallcaption"><? echo $s_search; ?></span>
         </td>
-	<? if ( $page_type=="reported" ) { ?>
-	<td>
-		<span class="smallcaption"><? echo $s_reporter ?></span>
-	</td>
-	<? } else if ( $page_type=="assigned" ) { ?>
-	<td>
-		<span class="smallcaption"><? echo $s_assigned_to ?></span>
-	</td>
-	<? } ?>
-	<td>
-	<span class="smallcaption"><? echo $s_category ?></span>
-	</td>
-	<td>
-	<span class="smallcaption"><? echo $s_severity ?></span>
-	</td>
-	<td>
-	<span class="smallcaption"><? echo $s_status ?></span>
-	</td>
-	<td>
-		&nbsp;
-	</td>
-	<td>
-		&nbsp;
-	</td>
-	<td>
-		&nbsp;
-	</td>
-	<td>
-		&nbsp;
-	</td>
+		<? if ( $page_type=="reported" ) { ?>
+		<td>
+			<span class="smallcaption"><? echo $s_reporter ?></span>
+		</td>
+		<? } else if ( $page_type=="assigned" ) { ?>
+		<td>
+			<span class="smallcaption"><? echo $s_assigned_to ?></span>
+		</td>
+		<? } ?>
+		<td>
+		<span class="smallcaption"><? echo $s_category ?></span>
+		</td>
+		<td>
+		<span class="smallcaption"><? echo $s_severity ?></span>
+		</td>
+		<td>
+		<span class="smallcaption"><? echo $s_status ?></span>
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td>
+			&nbsp;
+		</td>
 	</tr>
 	<tr align="center">
-              <td>
-                    <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
-              </td>
+      <td>
+            <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
+      </td>
 <? # view mode specific options ?>
 <? if ( $page_type=="all" ) { ?>
 <? # do nothing ?>
 <? } else if ( $page_type=="reported" ) { ?>
 		<td>
-		<select name="f_user_id">
-			<? print_reporter_option_list( $f_user_id ) ?>
-		</select>
+			<select name="f_user_id">
+				<? print_reporter_option_list( $f_user_id ) ?>
+			</select>
 		</td>
 <? } else if ( $page_type=="assigned" ) { ?>
 		<td>
-		<select name="f_assign_id">
-			<? print_assign_to_option_list( $f_assign_id ) ?>
-		</select>
+			<select name="f_assign_id">
+				<? print_assign_to_option_list( $f_assign_id ) ?>
+			</select>
 		</td>
 <? } ?>
 		<td>
-		<select name="f_show_category">
-			<option value="any"><? echo $s_any ?></option>
-			<option value="any"></option>
-			<? print_category_option_list( $f_show_category ) ?>
-		</select>
+			<select name="f_show_category">
+				<option value="any"><? echo $s_any ?></option>
+				<option value="any"></option>
+				<? print_category_option_list( $f_show_category ) ?>
+			</select>
 		</td>
 		<td>
-		<select name="f_show_severity">
-			<option value="any"><? echo $s_any ?></option>
-			<option value="any"></option>
-			<? print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
-		</select>
+			<select name="f_show_severity">
+				<option value="any"><? echo $s_any ?></option>
+				<option value="any"></option>
+				<? print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
+			</select>
 		</td>
 		<td>
-		<select name="f_show_status">
-			<option value="any"><? echo $s_any ?></option>
-			<option value="any"></option>
-			<? print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
-		</select>
+			<select name="f_show_status">
+				<option value="any"><? echo $s_any ?></option>
+				<option value="any"></option>
+				<? print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
+			</select>
 		</td>
 		<td>
-		<? echo $s_show ?>: <input type="text" name="f_limit_view" size="3" maxlength="7" value="<? echo $f_limit_view ?>">
+			<? echo $s_show ?>: <input type="text" name="f_limit_view" size="3" maxlength="7" value="<? echo $f_limit_view ?>">
 		</td>
 		<td>
-		<? echo $s_changed ?>: <input type="text" name="f_highlight_changed" size="3" maxlength=7 value="<? echo $f_highlight_changed ?>">
+			<? echo $s_changed ?>: <input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<? echo $f_highlight_changed ?>">
 		</td>
 		<td>
-		<? echo $s_hide_closed ?>: <input type=checkbox name=f_hide_closed <? if ($f_hide_closed=="on") echo "CHECKED"?>>
+			<? echo $s_hide_closed ?>: <input type="checkbox" name="f_hide_closed" <? if ($f_hide_closed=="on") echo "CHECKED"?>>
 		</td>
 		<td>
-		<input type="submit" value="<? echo $s_filter_button ?>">
+			<input type="submit" value="<? echo $s_filter_button ?>">
 		</td>
 	</tr>
 	</table>

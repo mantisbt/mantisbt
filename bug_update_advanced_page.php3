@@ -64,54 +64,54 @@
 
 <p>
 <table width=100% bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
-<form method=post action="<? echo $g_bug_update ?>">
-	<input type=hidden name=f_id value="<? echo $v_id ?>">
+<form method="post" action="<? echo $g_bug_update ?>">
+	<input type="hidden" name="f_id" value="<? echo $v_id ?>">
 	<input type="hidden" name="f_old_status" value="<? echo $v_status ?>">
-	<input type=hidden name=f_resolution value="<? echo $v_resolution ?>">
+	<input type="hidden" name="f_resolution" value="<? echo $v_resolution ?>">
 <tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table cols="6" width="100%" bgcolor="<? echo $g_white_color ?>">
 	<tr>
-		<td colspan=6 bgcolor=<? echo $g_table_title_color ?>>
+		<td colspan="6" bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_updating_bug_advanced_title ?></b>
 		</td>
 	</tr>
-	<tr align=center bgcolor=<? echo $g_category_title_color ?>>
-		<td width=15%>
+	<tr align="center" bgcolor="<? echo $g_category_title_color ?>">
+		<td width="15%">
 			<b><? echo $s_id ?></b>
 		</td>
-		<td width=20%>
+		<td width="20%">
 			<b><? echo $s_category ?></b>
 		</td>
-		<td width=15%>
+		<td width="15%">
 			<b><? echo $s_severity ?></b>
 		</td>
-		<td width=20%>
+		<td width="20%">
 			<b><? echo $s_reproducibility ?></b>
 		</td>
-		<td width=15%>
+		<td width="15%">
 			<b><? echo $s_date_submitted ?></b>
 		</td>
-		<td width=15%>
+		<td width="15%">
 			<b><? echo $s_last_update ?></b>
 		</td>
 	</tr>
-	<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
+	<tr align="center" bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $v_id ?>
 		</td>
 		<td>
-			<select name=f_category>
+			<select name="f_category">
 				<? print_category_option_list( $v_category ) ?>
 			</select>
 		</td>
 		<td>
-			<select name=f_severity>
+			<select name="f_severity">
 				<? print_enum_string_option_list( $s_severity_enum_string, $v_severity ) ?>
 			</select>
 		</td>
 		<td>
-			<select name=f_reproducibility>
+			<select name="f_reproducibility">
 				<? print_enum_string_option_list( $s_reproducibility_enum_string, $v_reproducibility ) ?>
 			</select>
 		</td>
@@ -122,168 +122,168 @@
 			<? print_date( $g_normal_date_format, sql_to_unix_time( $v_last_updated ) ) ?>
 		</td>
 	</tr>
-	<tr height=5 bgcolor=<? echo $g_white_color ?>>
-		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+	<tr height="5" bgcolor="<? echo $g_white_color ?>">
+		<td colspan="6" bgcolor="<? echo $g_white_color ?>">
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_category_title_color ?>>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_reporter ?></b>
 		</td>
-		<td colspan=5 bgcolor=<? echo $g_primary_color_dark ?>>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_dark ?>">
 			<? print_user( $v_reporter_id ) ?>
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_category_title_color ?>>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_assigned_to ?></b>
 		</td>
-		<td colspan=5 bgcolor=<? echo $g_primary_color_light ?>>
-			<select name=f_handler_id>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_light ?>">
+			<select name="f_handler_id">
 				<option value=""></option>
 				<? print_assign_to_option_list( $v_handler_id ) ?>
 			</select>
 		</td>
 	</tr>
-	<tr align=center>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+	<tr align="center">
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_priority ?></b>
 		</td>
-		<td align=left bgcolor=<? echo $g_primary_color_dark ?>>
-			<select name=f_priority>
+		<td align="left" bgcolor="<? echo $g_primary_color_dark ?>">
+			<select name="f_priority">
 				<? print_enum_string_option_list( $s_priority_enum_string, $v_priority ) ?>
 			</select>
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_resolution ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<td bgcolor="<? echo $g_primary_color_dark ?>">
 			<? echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_platform ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<td bgcolor="<? echo $g_primary_color_dark ?>">
 			<? echo $v_platform ?>
 		</td>
 	</tr>
-	<tr align=center>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+	<tr align="center">
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_status ?></b>
 		</td>
-		<td align=left bgcolor=<? echo $g_primary_color_light ?>>
-			<select name=f_status>
+		<td align="left" bgcolor="<? echo $g_primary_color_light ?>">
+			<select name="f_status">
 				<? print_enum_string_option_list( $s_status_enum_string, $v_status ) ?>
 			</select>
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_duplicate_id ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?>>
+		<td bgcolor="<? echo $g_primary_color_light ?>">
 			<? echo $v_duplicate_id ?>
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_os ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?>>
+		<td bgcolor="<? echo $g_primary_color_light ?>">
 			<? echo $v_os ?>
 		</td>
 	</tr>
 	<tr align="center">
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_projection ?></b>
 		</td>
-		<td align=left bgcolor=<? echo $g_primary_color_dark ?>>
-			<select name=f_projection>
+		<td align="left" bgcolor="<? echo $g_primary_color_dark ?>">
+			<select name="f_projection">
 				<? print_enum_string_option_list( $s_projection_enum_string, $v_projection ) ?>
 			</select>
 		</td>
-		<td colspan=2 bgcolor=<? echo $g_primary_color_dark ?>>
+		<td colspan="2" bgcolor="<? echo $g_primary_color_dark ?>">
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_os_version ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<td bgcolor="<? echo $g_primary_color_dark ?>">
 			<? echo $v_os_build ?>
 		</td>
 	</tr>
-	<tr align=center>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+	<tr align="center">
+		<td bgcolor="<? echo $g_category_title_color ?>>"
 			<b><? echo $s_eta ?></b>
 		</td>
-		<td align=left bgcolor=<? echo $g_primary_color_light ?>>
-			<select name=f_eta>
+		<td align="left" bgcolor="<? echo $g_primary_color_light ?>">
+			<select name="f_eta">
 				<? print_enum_string_option_list( $s_eta_enum_string, $v_eta ) ?>
 			</select>
 		</td>
-		<td colspan=2 bgcolor=<? echo $g_primary_color_light ?>>
+		<td colspan="2" bgcolor="<? echo $g_primary_color_light ?>">
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_product_version ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?>>
+		<td bgcolor="<? echo $g_primary_color_light ?>">
 			<? echo $v_version ?>
 		</td>
 	</tr>
-	<tr align=center>
-		<td colspan=4 bgcolor=<? echo $g_primary_color_dark ?>>
+	<tr align="center">
+		<td colspan="4" bgcolor="<? echo $g_primary_color_dark ?>">
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_build ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<td bgcolor="<? echo $g_primary_color_dark ?>">
 			<? echo $v_build?>
 		</td>
 	</tr>
-	<tr align=center>
-		<td colspan=4 bgcolor=<? echo $g_primary_color_light ?>>
+	<tr align="center">
+		<td colspan="4" bgcolor="<? echo $g_primary_color_light ?>">
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?>>
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_votes ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?>>
+		<td bgcolor="<? echo $g_primary_color_light ?>">
 			<? echo $v_votes ?>
 		</td>
 	</tr>
-	<tr height=5 bgcolor=<? echo $g_white_color ?>>
-		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
+	<tr height="5" bgcolor="<? echo $g_white_color ?>">
+		<td colspan="6" bgcolor="<? echo $g_white_color ?>">
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_category_title_color ?>>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_summary ?></b>
 		</td>
-		<td colspan=5 bgcolor=<? echo $g_primary_color_dark ?>>
-			<input type=text name=f_summary size=80 maxlength=128 value="<? echo $v_summary ?>">
+		<td colspan="5" bgcolor="<? echo $g_primary_color_dark ?>">
+			<input type="text" name="f_summary" size="80" maxlength="128" value="<? echo $v_summary ?>">
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_category_title_color ?>>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_description ?></b>
 		</td>
-		<td colspan=5 bgcolor=<? echo $g_primary_color_light ?>>
-			<textarea cols=60 rows=5 name=f_description wrap="virtual"><? echo $v2_description ?></textarea>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_light ?>">
+			<textarea cols="60" rows="5" name="f_description" wrap="virtual"><? echo $v2_description ?></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_category_title_color ?>>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_steps_to_reproduce ?></b>
 		</td>
-		<td colspan=5 bgcolor=<? echo $g_primary_color_dark ?>>
-			<textarea cols=60 rows=5 name=f_steps_to_reproduce wrap="virtual"><? echo $v2_steps_to_reproduce ?></textarea>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_dark ?>">
+			<textarea cols="60" rows="5" name="f_steps_to_reproduce" wrap="virtual"><? echo $v2_steps_to_reproduce ?></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td align=center bgcolor=<? echo $g_category_title_color ?>>
+		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_additional_information ?></b>
 		</td>
-		<td colspan=5 bgcolor=<? echo $g_primary_color_light ?>>
-			<textarea cols=60 rows=5 name=f_additional_information wrap="virtual"><? echo $v2_additional_information ?></textarea>
+		<td colspan="5" bgcolor="<? echo $g_primary_color_light ?>">
+			<textarea cols="60" rows="5" name="f_additional_information" wrap="virtual"><? echo $v2_additional_information ?></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td align=center colspan=6 bgcolor=<? echo $g_white_color ?>>
-			<input type=submit value="<? echo $s_update_information_button ?>">
+		<td align="center" colspan="6" bgcolor="<? echo $g_white_color ?>">
+			<input type="submit" value="<? echo $s_update_information_button ?>">
 		</td>
 	</tr>
 	</table>

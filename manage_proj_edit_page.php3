@@ -174,7 +174,7 @@
 				$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 		?>
 		<tr bgcolor="<? echo $t_bgcolor ?>">
-			<td width=75%>
+			<td width="75%">
 				<? echo $t_category ?>
 			</td>
 			<td width="25%" align="center">

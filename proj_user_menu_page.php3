@@ -49,7 +49,12 @@
 
 <p>
 <div align="center">
-Automatic access level: <b><? echo $t_access_min ?></b>
+	<? echo $s_automatic_access_level ?>: <b><? echo $t_access_min ?></b>
+</div>
+
+<p>
+<div align="center">
+	<? echo  $s_create_user_message ?>
 </div>
 
 <p>

@@ -34,7 +34,7 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="2">
-			<input type=submit value="<? echo $s_upload_file_button ?>">
+			<input type="submit" value="<? echo $s_upload_file_button ?>">
 		</td>
 	</tr>
 	</table>
