@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.54 2003-03-03 23:29:30 int2str Exp $
+	# $Id: email_api.php,v 1.55 2003-03-12 19:41:59 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -416,23 +416,23 @@
 			$t_message .= string_get_bug_view_url( $p_bug_id ) . "\n";
 			$t_message .= $g_email_separator1."\n";
 		}
-		$t_message .= str_pad( lang_get( 'email_reporter' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
-		$t_message .= str_pad( lang_get( 'email_handler' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
+		$t_message .= str_pad( lang_get( 'email_reporter' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_reporter_name."\n";
+		$t_message .= str_pad( lang_get( 'email_handler' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_handler_name."\n";
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( lang_get( 'email_project' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name."\n";
-		$t_message .= str_pad( lang_get( 'email_bug' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_id."\n";
-		$t_message .= str_pad( lang_get( 'email_category')  . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_category."\n";
-		$t_message .= str_pad( lang_get( 'email_reproducibility' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str."\n";
-		$t_message .= str_pad( lang_get( 'email_severity' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
-		$t_message .= str_pad( lang_get( 'email_priority' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
-		$t_message .= str_pad( lang_get( 'email_status' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
+		$t_message .= str_pad( lang_get( 'email_project' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_project_name."\n";
+		$t_message .= str_pad( lang_get( 'email_bug' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_id."\n";
+		$t_message .= str_pad( lang_get( 'email_category')  . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_category."\n";
+		$t_message .= str_pad( lang_get( 'email_reproducibility' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_rep_str."\n";
+		$t_message .= str_pad( lang_get( 'email_severity' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_sev_str."\n";
+		$t_message .= str_pad( lang_get( 'email_priority' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_pri_str."\n";
+		$t_message .= str_pad( lang_get( 'email_status' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_sta_str."\n";
 
 		# @@@ Add support for access levels, possible only send the ones that are available for access level EVERYBODY
 		$t_related_custom_field_ids = custom_field_get_linked_ids( $v_project_id );
 		foreach( $t_related_custom_field_ids as $t_id ) {
 			$t_def = custom_field_get_definition( $t_id );
 
-			$t_message .= str_pad( $t_def['name'] . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT );
+			$t_message .= str_pad( $t_def['name'] . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT );
 
 			$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );
 			if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {
@@ -445,16 +445,16 @@
 
 		if ( RESOLVED == $v_status ) {
 			$t_res_str = get_enum_element( 'resolution', $v_resolution );
-			$t_message .= str_pad( lang_get( 'email_resolution' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
+			$t_message .= str_pad( lang_get( 'email_resolution' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$t_res_str."\n";
 			if ( DUPLICATE == $v_resolution ) {
-				$t_message .= str_pad( lang_get( 'email_duplicate' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";
+				$t_message .= str_pad( lang_get( 'email_duplicate' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_duplicate_id."\n";
 			}
 		}
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( lang_get( 'email_date_submitted' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted."\n";
-		$t_message .= str_pad( lang_get( 'email_last_modified' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
+		$t_message .= str_pad( lang_get( 'email_date_submitted' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_date_submitted."\n";
+		$t_message .= str_pad( lang_get( 'email_last_modified' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_last_updated."\n";
 		$t_message .= $g_email_separator1."\n";
-		$t_message .= str_pad( lang_get( 'email_summary' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
+		$t_message .= str_pad( lang_get( 'email_summary' ) . ': ', $g_email_padding_length, ' ', STR_PAD_RIGHT ).$v_summary."\n";
 		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $v_description )."\n";
 		$t_message .= $g_email_separator1."\n\n";
 
