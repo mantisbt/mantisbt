@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.183 $
+	# $Revision: 1.184 $
 	# $Author: vboctor $
-	# $Date: 2004-07-11 13:24:30 $
+	# $Date: 2004-07-15 21:51:17 $
 	#
-	# $Id: strings_english.txt,v 1.183 2004-07-11 13:24:30 vboctor Exp $
+	# $Id: strings_english.txt,v 1.184 2004-07-15 21:51:17 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -71,11 +71,11 @@ $s_bug_relationships = 'Relationships';
 $s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
 $s_empty_password_button = 'Use Empty Password';
 
-$s_duplicate_of = 'duplicate of %id';
-$s_has_duplicate = 'has duplicate %id';
-$s_related_to = 'related to %id';
-$s_dependant_on = 'dependant on %id';
-$s_blocks = 'blocks %id';
+$s_duplicate_of = "duplicates";
+$s_has_duplicate = "has duplicates";
+$s_related_to = "related to";
+$s_dependant_on = "parent of";
+$s_blocks = "child of";
 
 $s_new_bug = 'New Issue';
 $s_bugnote_added = 'Note Added';
@@ -1003,11 +1003,5 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Add Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
-
-$s_duplicate_of = "has duplicates";
-$s_has_duplicate = "duplicates";
-$s_related_to = "related to";
-$s_dependant_on = "parent of";
-$s_blocks = "child of";
 # MASC RELATIONSHIP
 ?>

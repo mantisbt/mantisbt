@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.11 2004-07-13 12:53:06 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.12 2004-07-15 21:51:16 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -257,6 +257,142 @@
 			'version_add_released',
 			'Add released flag to determine whether the version was released or still a future release.',
 			"ALTER TABLE mantis_project_version_table ADD released TINYINT( 1 ) DEFAULT '1' NOT NULL" );
+
+	# MASC RELATIONSHIP
+
+	# --------------------------------------------------------
+	# Author: Marcello Scatà marcello@marcelloscata.com
+	# UPGRADE THE DATABASE TO IMPLEMENT THE RELATIONSHIPS
+	# --------------------------------------------------------
+	# The script executes the following steps:
+	# - Add index on source_bug_id field in mantis_bug_relationship_table
+	# - Add index on destination_bug_id field in mantis_bug_relationship_table
+	# - For each bug with the duplicate_id field filled out:
+	#      Check if there is already a relationship set between bug and duplicate bug
+	#      if yes then do nothing and continue with the next bug
+	#      if no then
+	#         add the relationship between bug and duplicate bug
+	#         search in history of bug the line in which is recorded the duplicate id information
+	#         and replace it with the appropriate history record for relationship (same user id, same time-stamp)
+	#         add an history record in the duplicate bug with same user id, same time-stamp with bug
+	# - THE CONTENT OF THE DUPLICATE_ID FIELD IS NOT MODIFIED
+	# --------------------------------------------------------
+
+	$upgrades[] = new FunctionUpgrade(
+		'relationship-1',
+		'Add index on source_bug_id field in mantis_bug_relationship_table',
+		'upgrade_0_18_relationship_1' );
+
+	function upgrade_0_18_relationship_1() {
+		global $t_bug_relationship_table;
+
+		if ( !db_key_exists_on_field( $t_bug_relationship_table, 'source_bug_id', 'MUL' ) ) {
+			$query = "ALTER TABLE $t_bug_relationship_table ADD INDEX ( source_bug_id )";
+			$result = @db_query( $query );
+
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	$upgrades[] = new FunctionUpgrade(
+		'relationship-2',
+		'Add index on destination_bug_id field in mantis_bug_relationship_table',
+		'upgrade_0_18_relationship_2' );
+
+	function upgrade_0_18_relationship_2() {
+		global $t_bug_relationship_table;
+
+		if ( !db_key_exists_on_field( $t_bug_relationship_table, 'destination_bug_id', 'MUL' ) ) {
+			$query = "ALTER TABLE $t_bug_relationship_table ADD INDEX ( destination_bug_id )";
+			$result = @db_query( $query );
+
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	$upgrades[] = new FunctionUpgrade(
+		'relationship-3',
+		'Translate duplicate id information in a new duplicate relationship',
+		'upgrade_0_18_relationship_3' );
+
+	function upgrade_0_18_relationship_3() {
+		global $t_bug_relationship_table, $t_bug_table, $t_bug_history_table;
+
+		$query = "SELECT id, duplicate_id
+				   FROM $t_bug_table
+				   WHERE duplicate_id != '';";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+
+		for ( $i = 0 ; $i < $t_count ; $i++ ) {
+			$t_bug = db_fetch_array( $result );
+			$t_bug_id = $t_bug['id'];
+			$t_duplicate_bug_id = $t_bug['duplicate_id'];
+
+			$query = "SELECT id
+						FROM $t_bug_relationship_table
+						WHERE
+							(source_bug_id = '$t_bug_id' and
+							destination_bug_id = '$t_duplicate_bug_id') or
+							(destination_bug_id = '$t_bug_id' and
+							source_bug_id = '$t_duplicate_bug_id');";
+			$result2 = db_query( $query );
+			$t_count2 = db_num_rows( $result2 );
+
+			if( $t_count2 > 0 ) {
+				continue;
+			}
+
+			$query = "INSERT INTO $t_bug_relationship_table
+					( source_bug_id, destination_bug_id, relationship_type )
+					VALUES
+					( '" . $t_duplicate_bug_id . "', '" . $t_bug_id . "', '" . BUG_DUPLICATE . "')";
+			db_query( $query );
+
+			$query = "SELECT id, user_id, date_modified
+						FROM $t_bug_history_table
+						WHERE
+							bug_id = '$t_bug_id' and
+							field_name = 'duplicate_id' and
+							new_value = '$t_duplicate_bug_id';";
+			$result2 = db_query( $query );
+			$t_count2 = db_num_rows( $result2 );
+
+			if ( $t_count2 < 1) {
+				continue;
+			}
+
+			$t_history_bug = db_fetch_array( $result2 );
+			$t_history_id = $t_history_bug['id'];
+			$t_history_user_id = $t_history_bug['user_id'];
+			$t_duplicate_bug_last_update = $t_history_bug['date_modified'];
+
+			$query = "UPDATE $t_bug_history_table
+				SET field_name = '',
+					old_value = '" . BUG_HAS_DUPLICATE . "',
+					type = '" . BUG_ADD_RELATIONSHIP . "'
+				WHERE id='$t_history_id'";
+			db_query( $query );
+
+			$query = "INSERT INTO $t_bug_history_table
+				( user_id, bug_id, date_modified, type, old_value, new_value )
+				VALUES
+				( '$t_history_user_id', '$t_duplicate_bug_id', '" . $t_duplicate_bug_last_update . "', " .
+				BUG_ADD_RELATIONSHIP . ", " . BUG_DUPLICATE . ", '$t_bug_id' )";
+			db_query( $query );
+		}
+
+		return true;
+	}
+	# MASC RELATIONSHIP
 
 	return $upgrades;
 ?>
