@@ -9,17 +9,18 @@
 	# Chinese_Simplified: Singoo, singoo@163.com
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
+	# Chinese_Simplified: NetCobra,turbonetcobra@hotmai.com
 	# -------------------------------------------------
-	# $Revision: 1.39 $
+	# $Revision: 1.40 $
 	# $Author: vboctor $
-	# $Date: 2004-06-21 21:22:47 $
+	# $Date: 2004-06-22 10:47:00 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.39 2004-06-21 21:22:47 vboctor Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.40 2004-06-22 10:47:00 vboctor Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'gb2312';
+$s_charset = 'GB2312';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = '移动';
@@ -32,14 +33,14 @@ $s_actiongroup_menu_update_status = '更新状态';
 
 # new strings:
 $s_all_projects = "所有的项目";
-$s_move_bugs = "移动Bugs";
+$s_move_bugs = "移动Bug";
 $s_operation_successful = "操作成功。";
 $s_date_order = "日期顺序";
 $s_print_all_bug_page_link = "打印报告";
-$s_csv_export = "CSV导出";
+$s_csv_export = "CSV 导出";
 $s_login_anonymously = "匿名登录";
 $s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes = "跳转至Bug注解";
+$s_jump_to_bugnotes = "跳转至Bug 注解";
 $s_public_project_msg = "这个项目是公共的，所有用户都可以访问该项目。";
 $s_private_project_msg = "这个项目是私有的，只有管理员和授权用户才能访问。";
 $s_access_level_project = "项目访问级别";
@@ -47,45 +48,45 @@ $s_view_submitted_bug_link = "查看提交的Bug";
 $s_assigned_projects = "已分配的项目";
 $s_unassigned_projects = "未分配的项目";
 $s_print = "打印";
-$s_jump = "跳到该bugId";
+$s_jump = "跳转到该 Bug 编号";
 $s_copy_users = "复制用户";
-$s_copy_categories_from = '复制类别从';
-$s_copy_categories_to = '复制类别到';
+$s_copy_categories_from = '复制模块从';
+$s_copy_categories_to = '复制模块到';
 $s_bug_history = 'Bug历史';
-$s_field = '域';
+$s_field = '字段';
 $s_old_value = '旧的值';
 $s_new_value = '新的值';
 $s_date_modified = '日期修正';
-$s_bugnote = 'Bug注解';
+$s_Bugnote = 'Bug 注解';
 $s_change = '改变';
-$s_bugnote_view_state = '查看Bug注解状态';
-$s_bug_monitor = 'Bug monitor';
+$s_bugnote_view_state = '查看 Bug 注解状态';
+$s_bug_monitor = 'Bug 监视人';
 $s_bug_end_monitor = 'Bug End Monitor';
-$s_announcement = 'Announcement';
-$s_stays_on_top = 'Stays on Top';
-$s_delete_bugnote_button = '删除Bug注解';
-$s_delete_bugnote_sure_msg = '你确信要删除这条Bug注解么？';
-$s_bug_relationships = 'Relationships';
-$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-$s_empty_password_button = 'Use Empty Password';
+$s_announcement = '公告';
+$s_stays_on_top = '总在最前面';
+$s_delete_bugnote_button = '删除 Bug 注解';
+$s_delete_bugnote_sure_msg = '确定要删除这条 Bug 注解吗？';
+$s_bug_relationships = '关系';
+$s_empty_password_sure_msg = '确定要设置用户密码为空吗？';
+$s_empty_password_button = '使用空白密码';
 
-$s_duplicate_of = 'duplicate of %id';
-$s_has_duplicate = 'has duplicate %id';
-$s_related_to = 'related to %id';
-$s_dependant_on = 'dependant on %id';
-$s_blocks = 'blocks %id';
+$s_duplicate_of = '%id 重复';
+$s_has_duplicate = '有重复 %id';
+$s_related_to = '与 %id 关联';
+$s_dependant_on = '依赖于 %id';
+$s_blocks = '阻塞 %id';
 
-$s_new_bug = 'New Bug';
-$s_bugnote_added = 'Bugnote Added';
-$s_bugnote_edited = 'Bugnote Edited';
-$s_bugnote_deleted = 'Bugnote Deleted';
-$s_summary_updated = 'Summary Updated';
-$s_description_updated = 'Description Updated';
-$s_additional_information_updated = 'Additional Information Updated';
+$s_new_bug = '新建 Bug';
+$s_bugnote_added = '已添加 Bug 注解';
+$s_bugnote_edited = '已编辑 Bug 注解';
+$s_bugnote_deleted = '已删除 Bug 注解';
+$s_summary_updated = '摘要已修改';
+$s_description_updated = '描述已修改';
+$s_additional_information_updated = '附加信息已修改';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-$s_file_added = 'File Added: ';
-$s_file_deleted = 'File Deleted: ';
-$s_bug_deleted = 'Bug Deleted';
+$s_file_added = '添加了以下文件：';
+$s_file_deleted = '删除了以下文件';
+$s_bug_deleted = '已删除 Bug';
 
 $s_make_private = '标记为私有';
 $s_make_public = '标记为公有';
@@ -95,56 +96,56 @@ $s_create_new_project_link = '创建新项目';
 $s_login_link = '登录';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-$s_move_bugs_conf_msg = 'Move bugs to';
-$s_assign_bugs_conf_msg = 'Assign bugs to';
-$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-$s_priority_bugs_conf_msg = 'Choose bugs priority';
-$s_status_bugs_conf_msg = 'Choose bugs status';
-$s_close_group_bugs_button = 'Close Bugs' ;
-$s_delete_group_bugs_button = 'Delete Bugs' ;
-$s_move_group_bugs_button = 'Move Bugs' ;
-$s_assign_group_bugs_button = 'Assign Bugs' ;
-$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-$s_priority_group_bugs_button = 'Update Priority' ;
-$s_status_group_bugs_button = 'Update Status' ;
+$s_bug_actiongroup_failed = '对于这个 Bug 您没有适当的权限以进行这个操作：';
+$s_close_bugs_conf_msg = '确定要关闭这些 Bug 吗？';
+$s_delete_bugs_conf_msg = '你确定要删除这些 Bug 吗？';
+$s_move_bugs_conf_msg = '将 Bug 移动到';
+$s_assign_bugs_conf_msg = '将 Bug 分派给';
+$s_resolve_bugs_conf_msg = '选择相关 Bug';
+$s_priority_bugs_conf_msg = '选择 Bug 优先级别';
+$s_status_bugs_conf_msg = '选择 Bug 状态';
+$s_close_group_bugs_button = '关闭 Bug' ;
+$s_delete_group_bugs_button = '删除 Bug' ;
+$s_move_group_bugs_button = '移动 Bug' ;
+$s_assign_group_bugs_button = '分派 Bug' ;
+$s_resolve_group_bugs_button = '解决 Bug' ;
+$s_priority_group_bugs_button = '修改优先级别' ;
+$s_status_group_bugs_button = '修改状态' ;
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-$s_graph_imp_category_title = 'Synthesis graphs by category';
-$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-$s_by_status_pct = 'by status percentage';
-$s_by_priority_pct = 'by priority percentage';
-$s_by_severity_pct = 'by severity percentage';
-$s_by_category_pct = 'by category percentage';
-$s_by_resolution_pct = 'by resolution percentage';
-$s_by_severity_mix = 'by severity and status';
-$s_by_priority_mix = 'by priority and status';
-$s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
+$s_graph_imp_status_title = '综合报表（按 Bug 状态）' ;
+$s_graph_imp_priority_title = '综合报表（按 Bug 优先级别）' ;
+$s_graph_imp_severity_title = '综合报表（按 Bug 严重性）';
+$s_graph_imp_category_title = '综合报表（按项目模块）';
+$s_graph_imp_resolution_title = '综合报表（按完成度）';
+$s_by_status_pct = '按 Bug 状态百分比';
+$s_by_priority_pct = '按 Bug 优先级别百分比';
+$s_by_severity_pct = '按 Bug 严重性百分比';
+$s_by_category_pct = '按项目模块百分比';
+$s_by_resolution_pct = '按完成度百分比';
+$s_by_severity_mix = '按 Bug 严重性和状态';
+$s_by_priority_mix = '按 Bug 优先级别和状态';
+$s_by_resolution_mix = '按 Bug 完成度和状态';
+$s_synthesis_link = '综合报表';
+$s_status_link = '按状态统计';
+$s_priority_link = '按优先级别统计';
+$s_severity_link = '按严重性统计';
+$s_category_link = '按模块统计';
+$s_resolution_link = '按完成度统计';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Display selected only';
+$s_hide_button = '只显示选中内容';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Choose fields to print';
-$s_printing_options_link = 'Printing Options';
+$s_printing_preferences_title = '选择要打印的字段';
+$s_printing_options_link = '打印选项';
 
 # word and excel export
-$s_bugnote_title = 'Bugnote handler' ;
-$s_bugnote_date = 'Date of bugnote';
-$s_bugnote_description = 'Bugnote description';
+$s_bugnote_title = 'Bug 注解管理人' ;
+$s_bugnote_date = 'Bug 注解日期';
+$s_bugnote_description = 'Bug 注解内容';
 
-$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = '请在你的浏览器中使用“后退”按钮来返回到上一页面，这样您可以找到发生了什吗问题或者进行别的操作；您还可以点击导航栏中的选项直接跳转到一个新的区段。';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
@@ -221,51 +222,51 @@ $s_administrator = "administrator";
 $s_myself = "Myself";
 
 # Enum Strings
-$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
-$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
-$s_project_view_state_enum_string = "10:public,50:private";
-$s_view_state_enum_string         = '10:public,50:private';
+$s_access_levels_enum_string      = "10:查看人员,25:报告人员,40:修改人员,55:开发人员,70:经理,90:管理员";
+$s_project_status_enum_string     = "10:开发中,30:已发布,50:稳定,70:停止维护";
+$s_project_view_state_enum_string = "10:公共,50:私有";
+$s_view_state_enum_string         = '10:公共,50:私有';
 
-$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
-$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
-$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A";
-$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
-$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
-$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
-$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+$s_priority_enum_string           = "10:无,20:低,30:中,40:高,50:加急,60:特急";
+$s_severity_enum_string           = "10:新特性,20:微不足道,30:文字错误,40:布局不合理,50:次要错误,60:严重错误,70:程序崩溃,80:系统死锁";
+$s_reproducibility_enum_string    = "10:经常,30:有时,50:随机,70:没有试验,90:无法重复,100:N/A";
+$s_status_enum_string             = "10:新建,20:反馈,30:公认,40:已确认,50:已指派,80:已解决,90:已关闭";
+$s_resolution_enum_string         = "10:开放,20:已修正,30:重新打开,40:无法重现,50:无法修复,60:重复 Bug,70:不是 Bug,80:暂停,90:不做修改";
+$s_projection_enum_string         = "10:无,30:很小的改动,50:较小的修正,70:重要修正,90:重新设计";
+$s_eta_enum_string                = "10:无,20:小于 1 天,30:2-3 天,40:小于 1 星期,50:小于 1 个月,60:超过 1 个月";
 
 # Email Strings
 $s_new_account_subject = "你的新用户帐号";
-$s_new_account_greeting = "欢迎来到Bug跟踪系统  这是你需要登录的信息\n\n";
-$s_new_account_url = "你可以在这里登录Bug跟踪系统: ";
+$s_new_account_greeting = "欢迎来到 Mantis Bug 跟踪管理系统，这是你需要登录的信息\n\n";
+$s_new_account_url = "你可以在这里登录 Mantis Bug 跟踪管理系统: ";
 $s_new_account_username = "帐号: ";
 $s_new_account_password = "密码: ";
-$s_new_account_message = "在登录系统后，请记得更改你的密码! 您的密码是以“单项编码”的方式储存，所以管理员无法取得您的密码！\n\n";
-$s_new_account_do_not_reply = "不要回复这封信件.\n";
+$s_new_account_message = "在登录系统后，请记得立即更改你的密码! 您的密码是以 MD5 加密方式储存的，所以管理员无法取得您的密码！\n\n";
+$s_new_account_do_not_reply = "本邮件由系统自动生成，请不要回复。\n";
 
-$s_reset_request_msg = "密码重设：";
+$s_reset_request_msg = "重设密码：";
 $s_account_name_msg = "你的帐户姓名是";
 $s_news_password_msg = "你的新密码";
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = '下列 Bug 需要您的反馈。';
+$s_email_notification_title_for_status_bug_acknowledged = '下列 Bug 已经被公认。';
+$s_email_notification_title_for_status_bug_confirmed = '下列 Bug 已经被确认。';
+$s_email_notification_title_for_status_bug_assigned = '下列 Bug 已经被指派。';
+$s_email_notification_title_for_status_bug_resolved = '下列 Bug 已经被解决';
+$s_email_notification_title_for_status_bug_closed = '下列 Bug 已经关闭';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = '下列 Bug 已经提交。';
+$s_email_notification_title_for_action_bug_assigned = '下列 Bug 已经被指派';
+$s_email_notification_title_for_action_bug_reopened = '下列 Bug 重新打开。';
+$s_email_notification_title_for_action_bug_deleted = '下列 Bug 已经被删除';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = '这个 Bug 中新增加了一个 Bug 注解。';
 
 $s_email_reporter = "报告人";
 $s_email_handler = "主持人(Handler)";
 $s_email_project = "项目";
 $s_email_bug = "Bug 编号";
-$s_email_category = "类别";
+$s_email_category = "模块";
 $s_email_reproducibility = "出现频率";
 $s_email_severity = "严重性";
 $s_email_priority = "优先级";
@@ -282,11 +283,11 @@ $s_account_protected_msg = "帐号被保护，无法更改设置...";
 $s_account_removed_msg = "你的帐号已经被删除...";
 
 # account_delete_page.php
-$s_confirm_delete_msg = "您确定要删除你的帐号？";
+$s_confirm_delete_msg = "确定要删除该帐号？";
 $s_delete_account_button = "删除帐号";
 
 # account_page.php
-$s_manage_profiles_link = "管理个人设置";
+$s_manage_profiles_link = "管理平台配置";
 $s_change_preferences_link = "更改个人设置";
 $s_edit_account_title = "编辑帐号";
 $s_username = "帐号";
@@ -300,20 +301,20 @@ $s_update_user_button = "更新帐号信息";
 $s_default_account_preferences_title = "缺省帐号设置";
 $s_default_project = "缺省项目";
 $s_advanced_report = "高级报告";
-$s_advanced_view = "高级检查";
+$s_advanced_view = "高级查看";
 $s_advanced_update = "高级更新";
 $s_refresh_delay = "刷新延迟";
-$s_redirect_delay = "Redirect Delay";
-$s_email_on_new = "Email on New";
-$s_email_on_assigned = "当指派Bug时发送Email";
-$s_email_on_feedback = "当反馈Bug时发送Email";
-$s_email_on_resolved = "当解决Bug时发送Email";
-$s_email_on_closed = "当关闭Bug时发送Email";
-$s_email_on_reopened = "当重新打开时发送Email";
-$s_email_on_bugnote_added = "当添加Bug注解时发送Email";
-$s_email_on_status_change = "当状态改变时发送Email";
-$s_email_on_priority_change = "当优先级改变时发送Email";
-$s_language = "Language";
+$s_redirect_delay = "重定向延时(秒";
+$s_email_on_new = "当新建Bug时发送Email提醒";
+$s_email_on_assigned = "当指派Bug时发送Email提醒";
+$s_email_on_feedback = "当反馈Bug时发送Email提醒";
+$s_email_on_resolved = "当解决Bug时发送Email提醒";
+$s_email_on_closed = "当关闭Bug时发送Email提醒";
+$s_email_on_reopened = "当重新打开时发送Email提醒";
+$s_email_on_bugnote_added = "当添加Bug 注解时发送Email提醒";
+$s_email_on_status_change = "当状态改变时发送Email提醒";
+$s_email_on_priority_change = "当优先级改变时发送Email提醒";
+$s_language = "界面语言";
 $s_update_prefs_button = "更新设置";
 $s_reset_prefs_button = "重置设置";
 
@@ -324,89 +325,89 @@ $s_prefs_reset_msg = "个人设置已经更改...";
 $s_prefs_updated_msg = "个人设置已经更改...";
 
 # account_profile_add.php
-$s_profile_added_msg = "个人设置已添加...";
+$s_profile_added_msg = "平台配置已添加...";
 
 # account_profile_delete.php
-$s_profile_deleted_msg = "删除个人设置...";
+$s_profile_deleted_msg = "删除平台配置...";
 
 # account_profile_edit_page.php
-$s_edit_profile_title = "编辑个人设置";
+$s_edit_profile_title = "编辑平台设置";
 $s_platform = "硬件平台";
 $s_operating_system = "操作系统";
 $s_additional_description = "简要说明";
-$s_update_profile_button = "更新个人设置";
+$s_update_profile_button = "更新平台设置";
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg = "预设Profile更新...";
+$s_profile_defaulted_msg = "更新默认平台配置...";
 
 # account_profile_manage_page.php
-$s_add_profile_title = "添加个人设置";
-$s_add_profile_button = "添加个人设置";
-$s_edit_or_delete_profiles_title = "编辑或删除个人设置";
-$s_edit_profile = "编辑个人设置";
+$s_add_profile_title = "添加平台配置";
+$s_add_profile_button = "添加平台配置";
+$s_edit_or_delete_profiles_title = "编辑或删除平台配置";
+$s_edit_profile = "编辑平台配置";
 $s_make_default = "指定预设值";
-$s_delete_profile = "删除个人设置";
-$s_select_profile = "选择个人设置";
+$s_delete_profile = "删除平台配置";
+$s_select_profile = "选择平台配置";
 $s_submit_button = "提交";
 
 # account_profile_update.php
-$s_profile_updated_msg = "个人设置更新...";
+$s_profile_updated_msg = "平台配置更新...";
 
 # account_update.php
-$s_account_updated_msg = "你的帐号更新成功...";
+$s_account_updated_msg = "帐号信息更新成功...";
 $s_email_updated = 'Email地址更新成功';
 $s_password_updated = '密码更新成功';
 
 # bug_assign.php
-$s_bug_assign_msg       = "Bug已经被成功指派...";
+$s_bug_assign_msg       = "已成功指派 Bug...";
 
 # bug_close.php
-$s_bug_close_msg       = "Bug已经被关闭...";
+$s_bug_close_msg       = "Bug 已被关闭...";
 $s_close_immediately   = "立即关闭:";
 
 # bug_close_page.php
-$s_close_bug_title = "关闭Bug";
+$s_close_bug_title = "关闭 Bug";
 
 # bug_delete.php
-$s_bug_deleted_msg = "Bug已经被删除...";
+$s_bug_deleted_msg = "Bug 已经被删除...";
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = "你确定要删除此Bug？";
-$s_delete_bug_button = "删除Bug";
+$s_delete_bug_sure_msg = "确定要删除此 Bug 吗？";
+$s_delete_bug_button = "删除 Bug";
 
 # bug_monitor.php
-$s_monitor_bug_button = "跟踪Bug";
-$s_unmonitor_bug_button = "停止跟踪";
+$s_monitor_bug_button = "监视 Bug";
+$s_unmonitor_bug_button = "停止监视";
 
 # bug_file_add.php
-$s_file_upload_msg = "文件上载成功";
+$s_file_upload_msg = "文件上传成功";
 
 # bug_file_upload_inc.php
-$s_upload_file = "上载文件";
+$s_upload_file = "上传文件";
 $s_select_file = "选择文件";
-$s_upload_file_button = "上载文件";
+$s_upload_file_button = "上传文件";
 $s_max_file_size = '最大的大小';
 
 # bug_reopen.php
 $s_bug_reopened_msg = "Bug 已经被重新打开...";
-$s_reopen_add_bugnote_title = "重新打开 Bug 的理由...";
-$s_bugnote_add_reopen_button = "添加Bug注解并重新打开 Bug";
+$s_reopen_add_bugnote_title = "重新打开 Bug 的原因...";
+$s_bugnote_add_reopen_button = "添加 Bug 注解并重新打开 Bug";
 
 # bug_resolve_page.php
 $s_resolve_bug_title = "解决 Bug";
 $s_resolve_bug_button = "解决 Bug";
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = "Bug已经被解决，请在下面填入Bug注解...";
-$s_resolve_add_bugnote_title = "为解决Bug添加Bug注解";
-$s_bugnote_add_resolve_button = "添加Bug注解";
+$s_bug_resolved_msg = "Bug 已经被解决，请在下面填入 Bug 注解...";
+$s_resolve_add_bugnote_title = "为解决 Bug 添加 Bug 注解";
+$s_bugnote_add_resolve_button = "添加 Bug 注解";
 
 # bug_reminder_page.php
-$s_from = 'From';
-$s_to = 'To';
-$s_on = 'On';
-$s_sent_you_this_reminder_about = 'sent you this reminder about';
-$s_bug_reminder = 'Send a reminder';
+$s_from = '从';
+$s_to = '到';
+$s_on = '在';
+$s_sent_you_this_reminder_about = '向您发送这个提醒，关于';
+$s_bug_reminder = 'Bug 提醒';
 $s_reminder_sent_to = '发送提醒';
 $s_bug_send_button = '发送';
 $s_reminder = '提醒';
@@ -417,9 +418,9 @@ $s_bug_updated_msg = "Bug 已经被成功更新...";
 # bug_update_advanced_page.php
 $s_back_to_bug_link = "回到 Bug";
 $s_update_simple_link = "简易更新";
-$s_updating_bug_advanced_title = "正在更新Bug信息";
+$s_updating_bug_advanced_title = "正在更新 Bug 信息";
 $s_id = "编号";
-$s_category = "类别";
+$s_category = "模块";
 $s_severity = "严重性";
 $s_reproducibility = "出现频率";
 $s_date_submitted = "报告日期";
@@ -429,18 +430,18 @@ $s_assigned_to = "指派给";
 $s_priority = "优先权";
 $s_resolution = "完成度";
 $s_status = "状态";
-$s_duplicate_id = "复制编号";
-$s_os = "操作系统系统";
+$s_duplicate_id = "重复编号";
+$s_os = "操作系统";
 $s_projection = "处理方式";
 $s_os_version = "版本";
 $s_eta = "估计完成时间";
 $s_product_version = "产品版本";
-$s_build = "建立";
+$s_build = "创建";
 $s_votes = "投票";
 $s_summary = "摘要";
 $s_description = "说明";
 $s_steps_to_reproduce = "Bug 发生的步骤说明";
-$s_additional = "额外";
+$s_additional = "附加";
 $s_information = "信息";
 $s_update_information_button = "更新信息";
 
@@ -451,27 +452,27 @@ $s_updating_bug_simple_title = "正在更新 Bug 信息";
 # bug_vote_add.php
 $s_vote_added_msg = "投票已添加...";
 
-# bugnote_add.php
-$s_bugnote_added_msg = "Bug注解已添加...";
+# Bugnote_add.php
+$s_bugnote_added_msg = "已添加 Bug 注解...";
 
-# bugnote_delete.php
-$s_bugnote_deleted_msg = "Bug注解已删除...";
-$s_bug_notes_title = "Bug注解";
+# Bugnote_delete.php
+$s_bugnote_deleted_msg = "已删除 Bug 注解...";
+$s_bug_notes_title = "Bug 注解";
 
-# bugnote_edit_page.php
-$s_edit_bugnote_title = "Edit Bugnote";
+# Bugnote_edit_page.php
+$s_edit_bugnote_title = "编辑 Bug 注解";
 
-# bugnote_inc.php
-$s_no_bugnotes_msg = "这个Bug没有注解信息";
+# Bugnote_inc.php
+$s_no_bugnotes_msg = "这个 Bug 没有注解信息";
 $s_delete_link = "删除";
-$s_add_bugnote_title = "添加Bug注解";
-$s_add_bugnote_button = "添加Bug注解";
+$s_add_bugnote_title = "添加 Bug 注解";
+$s_add_bugnote_button = "添加 Bug 注解";
 $s_bugnote_edit_link = "编辑";
-$s_close_bug_button = "关闭Bug";
+$s_close_bug_button = "关闭 Bug";
 
-# bugnote_update.php
-$s_bugnote_updated_msg = "Bug注解已经被成功的更新...";
-$s_edited_on = "edited on: ";
+# Bugnote_update.php
+$s_bugnote_updated_msg = "已经被成功更新 Bug 注解...";
+$s_edited_on = "编辑于：";
 
 # index.php
 $s_click_to_login = "点击这里进入";
@@ -479,7 +480,7 @@ $s_click_to_login = "点击这里进入";
 # login.php
 
 # login_page.php
-$s_login_page_info = "欢迎访问Bug跟踪系统";
+$s_login_page_info = "欢迎访问Mantis Bug 跟踪管理系统";
 $s_login_title = "登录";
 $s_save_login = "记住此次登录";
 $s_choose_project = "选择项目";
@@ -490,37 +491,37 @@ $s_signup_link = "注册一个新帐号";
 $s_select_project_button = "选择项目";
 
 # logout_page.php
-$s_logged_out_title = "注销登录中...";
+$s_logged_out_title = "正在注销登录...";
 $s_redirecting = "...重定向到...";
 $s_here = "到这里";
 
 # main_page.php
 $s_open_and_assigned_to_me = "指派给我并开放的Bug";
 $s_open_and_reported_to_me = "由我报告并开放的Bug";
-$s_newer_news_link = "更新的新闻";
-$s_older_news_link = "稍早的新闻";
-$s_archives = "归档信息";
+$s_newer_news_link = "更新的公告";
+$s_older_news_link = "稍早的公告";
+$s_archives = "归档公告";
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = "建立用户";
+$s_created_user_part1 = "创建用户";
 $s_created_user_part2 = "权限";
 
 # manage_create_user_page.php
-$s_create_new_account_title = "建立用户帐号";
+$s_create_new_account_title = "创建用户帐号";
 $s_verify_password = "确认密码";
 $s_enabled = "启用";
 $s_protected = "保护";
-$s_create_user_button = "建立用户";
+$s_create_user_button = "创建用户";
 
 # manage_page.php
-$s_hide_disabled = "Hide Disabled";
+$s_hide_disabled = "隐藏未启用的账号";
 $s_filter_button = "筛选";
 $s_manage_users_link = "用户管理";
 $s_manage_projects_link = "项目管理";
-$s_manage_custom_field_link = '自定义域管理';
-$s_create_new_account_link = "建立帐号";
-$s_projects_link = "建立项目";
+$s_manage_custom_field_link = '自定义字段管理';
+$s_create_new_account_link = "创建帐号";
+$s_projects_link = "创建项目";
 $s_documentation_link = "说明";
 $s_new_accounts_title = "新帐号";
 $s_1_week_title = "一周内";
@@ -529,78 +530,78 @@ $s_prune_accounts = "清理帐号";
 $s_hide_inactive = "隐藏非活动的";
 $s_manage_accounts_title = "管理帐号";
 $s_p = "p";
-$s_date_created = "建立日期";
+$s_date_created = "创建日期";
 $s_last_visit = "最后一次登录";
 $s_edit_user_link = "编辑用户";
 
 # manage_proj_add.php
-$s_project_added_msg = "项目已添加...";
+$s_project_added_msg = "已添加项目...";
 
 # manage_proj_category_add.php
-$s_category_added_msg = "类别已添加...";
+$s_category_added_msg = "已添加模块...";
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = "类别已删除...";
+$s_category_deleted_msg = "已删除模块...";
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = "你确定要删除此类别? 所有相关联的Bug将会被删除!!";
-$s_delete_category_button = "删除类别";
+$s_category_delete_sure_msg = "确定要删除此模块吗? 所有相关联的Bug将会被删除!!";
+$s_delete_category_button = "删除模块";
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = "编辑项目 类别";
-$s_update_category_button = "更新类别";
+$s_edit_project_category_title = "编辑项目模块";
+$s_update_category_button = "更新模块";
 
 # manage_proj_category_update.php
-$s_category_updated_msg = "类别已经成功更新...";
+$s_category_updated_msg = "模块已经成功更新...";
 
 # manage_proj_delete.php
 $s_project_deleted_msg = "项目已经成功删除...";
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = "你确定要删除此项目和所有附属的Bug?";
+$s_project_delete_msg = "确定要删除此项目和所有附属的 Bug 吗？";
 $s_project_delete_button = "删除项目";
 
 # manage_proj_edit_page.php
 $s_edit_project_title = "编辑项目";
 $s_project_name = "项目名称";
-$s_view_status = "检查状态";
+$s_view_status = "查看状态";
 $s_public = "公共的";
 $s_private = "私有的";
 $s_update_project_button = "更新项目";
 $s_delete_project_button = "删除项目";
-$s_categories_and_version_title = "类别与版本信息";
-$s_categories = "Categories";
-$s_add_category_button = "添加类别";
+$s_categories_and_version_title = "模块与版本信息";
+$s_categories = "模块";
+$s_add_category_button = "添加模块";
 $s_versions = "版本";
 $s_add_version_button = "添加版本";
 $s_edit_link = "编辑";
-$s_actions = 'Actions';
+$s_actions = '操作';
 $s_version = "版本";
 $s_timestamp = '时间戳';
 $s_update = '更新';
 
 # manage_proj_menu_page.php
 $s_add_project_title = "添加项目";
-$s_upload_file_path = "上载文件存放路径";
+$s_upload_file_path = "上传文件存放路径";
 $s_add_project_button = "添加项目";
 $s_projects_title = "所有项目";
 $s_name = "名称";
 
 # manage_proj_update.php
-$s_project_updated_msg = "项目已经成功更新...";
+$s_project_updated_msg = "已经成功更新项目...";
 
 # manage_proj_version_add.php
-$s_version_added_msg = "版本已经成功已添加...";
+$s_version_added_msg = "已经成功添加版本...";
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = "版本已经成功已删除...";
+$s_version_deleted_msg = "已经成功删除版本...";
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = "你确定要删除此版本? 所有相关联的Bug将会被删除!!";
+$s_version_delete_sure = "确定要删除此版本吗? 所有相关联的 Bug 将会被删除!!";
 $s_delete_version_button = "删除版本";
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = "编辑项目 版本";
+$s_edit_project_version_title = "编辑项目版本";
 $s_update_version_button = "更新版本";
 
 # manage_proj_version_update.php
@@ -608,90 +609,90 @@ $s_version_updated_msg = "版本已经成功更新...";
 
 # manage_user_delete.php
 $s_account_delete_protected_msg = "帐号受保护，无法删除此帐号";
-$s_account_deleted_msg = "帐号已删除...";
+$s_account_deleted_msg = "已删除帐号...";
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = "你确定要删除此一帐号?";
+$s_delete_account_sure_msg = "确定要删除此帐号吗？";
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
-$s_prune_accounts_button = 'Prune';
-$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+$s_accounts_pruned_msg = "已删除所有从来没有登录过的账号和晚于一个星期的账号。";
+$s_prune_accounts_button = '删除';
+$s_confirm_account_pruning = '你确定要删除从来没有登录过的旧账号吗？';
 
 # manage_user_page.php
 $s_edit_user_title = "编辑使用者";
 $s_reset_password_button = "重设密码";
 $s_delete_user_button = "删除使用者";
-$s_reset_password_msg = "Reset Password sets the randomly generated password.";
-$s_reset_password_msg2 = "重设密码 sets the password to be blank.";
-$s_show_all_users = 'ALL';
+$s_reset_password_msg = "重置密码并设定一个随机产生的密码。";
+$s_reset_password_msg2 = "重设密码并将密码置为空";
+$s_show_all_users = '全部';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "帐号受保护，不能重置密码。";
 $s_account_reset_msg = "帐号密码重设...";
-$s_account_reset_msg2 = "Account password set to blank...";
+$s_account_reset_msg2 = "账号密码已经置为空...";
 
 # manage_user_update.php
-$s_manage_user_protected_msg = "帐号受保护，存取权限且保护功能已启动。 否则，帐号将会被更新...";
+$s_manage_user_protected_msg = "帐号受保护，“用户级别”和“是否启用”信息不能修改；帐号无法更新...";
 $s_manage_user_updated_msg = "帐号成功更新...";
 
 # menu_inc.php
 $s_main_link = "首页";
-$s_view_bugs_link = "检查Bug";
-$s_report_bug_link = "报告Bug";
-$s_summary_link = "摘要";
+$s_view_bugs_link = "查看 Bug";
+$s_report_bug_link = "报告 Bug";
+$s_summary_link = "统计报表";
 $s_account_link = "个人帐号";
-$s_users_link = "Users";
+$s_users_link = "用户";
 $s_manage_link = "管理";
-$s_edit_news_link = "编辑新闻";
+$s_edit_news_link = "编辑公告";
 $s_docs_link = "使用说明";
 $s_logout_link = "注销";
 
 # meta_inc.php
 
 # news_add.php
-$s_news_added_msg = "新闻项目已添加...";
+$s_news_added_msg = "公告项目已添加...";
 
 # news_delete.php
-$s_news_deleted_msg = "已删除新闻项目...";
+$s_news_deleted_msg = "已删除公告项目...";
 
 # news_delete_page.php
-$s_delete_news_sure_msg = "你确定要删除此新闻项目?";
-$s_delete_news_item_button = "删除新闻项目";
+$s_delete_news_sure_msg = "你确定要删除此公告项目？";
+$s_delete_news_item_button = "删除公告项目";
 
 # news_edit_page.php
-$s_edit_news_title = "编辑新闻";
+$s_edit_news_title = "编辑公告";
 $s_headline = "标题";
 $s_body = "正文";
-$s_update_news_button = "更新新闻";
+$s_update_news_button = "更新公告";
 
 # news_menu_page.php
-$s_add_news_title = "添加新闻";
+$s_add_news_title = "添加公告";
 $s_post_to = "发表到";
-$s_post_news_button = "发表新闻";
-$s_edit_or_delete_news_title = "编辑或删除新闻";
-$s_edit_post = "编辑发表";
-$s_delete_post = "删除发表";
-$s_select_post = "选择发表";
+$s_post_news_button = "发表公告";
+$s_edit_or_delete_news_title = "编辑或删除公告";
+$s_edit_post = "编辑已发表公告";
+$s_delete_post = "删除已发表公告";
+$s_select_post = "选择已发表公告";
 
 # news_update.php
-$s_news_updated_msg = "新闻项目已更新...";
+$s_news_updated_msg = "公告项目已更新...";
 
 # news_view_page.php
-$s_back_link = "Back";
+$s_back_link = "后退";
 
 # proj_doc_add.php
 $s_file_uploaded_msg = "文件上传成功";
 
 # proj_doc_add_page.php
 $s_upload_file_title = "上传文件";
-$s_title = "Title";
+$s_title = "标题";
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = "Project file deleted";
+$s_project_file_deleted_msg = "项目文件已经删除。";
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = "你确信要删除这些文件么?";
+$s_confirm_file_delete_msg = "你确定要删除这些文件吗？";
 
 # proj_doc_edit_page.php
 $s_filename = "文件名";
@@ -711,55 +712,55 @@ $s_project_document_updated = "更新项目成功";
 $s_project_user_added_msg = "添加用户至项目成功";
 
 # proj_user_delete.php
-$s_project_removed_user_msg = "从项目移除用户成功";
+$s_project_removed_user_msg = "从项目删除用户成功";
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = "你确信要删除该用户吗?";
+$s_remove_user_sure_msg = "确定要删除该用户吗？";
 
 # proj_user_menu_page.php
 $s_add_user_title = "添加用户至项目";
 $s_add_user_button = "添加用户";
 $s_project_selection_title = "项目选择";
-$s_remove_link = "移除";
+$s_remove_link = "删除";
 
 # proj_user_update.php
 $s_updated_user_msg = "用户更新成功";
 
 # report_add.php
-$s_must_enter_category = "您必须选择类别";
-$s_must_enter_severity = "您必须选择严重性";
-$s_must_enter_reproducibility = "您必须选择出现频率";
-$s_must_enter_summary = "您必须输入摘要";
-$s_must_enter_description = "您必须输入说明";
-$s_report_more_bugs = "Report More Bugs";
-$s_submission_thanks_msg = "感谢您的已经! ^_^";
+$s_must_enter_category = "必须选择模块";
+$s_must_enter_severity = "必须选择严重性";
+$s_must_enter_reproducibility = "必须选择出现频率";
+$s_must_enter_summary = "必须输入摘要";
+$s_must_enter_description = "必须输入说明";
+$s_report_more_bugs = "报告更多的 Bug";
+$s_submission_thanks_msg = "感谢您提交 Bug！^_^";
 
 # report_bug_advanced_page.php
 $s_simple_report_link = "简易报告";
 $s_enter_report_details_title = "输入报告详细资料";
 $s_required = "必填";
-$s_select_category = "选择类别";
+$s_select_category = "选择模块";
 $s_select_reproducibility = "选择出现频率";
 $s_select_severity = "选择严重性";
-$s_or_fill_in = "或填入";
+$s_or_fill_in = "或填写";
 $s_assign_to = "指派给";
-$s_additional_information = "额外信息";
-$s_submit_report_button = "送出报告";
+$s_additional_information = "附加信息";
+$s_submit_report_button = "提交报告";
 $s_check_report_more_bugs = "报告更多的Bug";
 
 # report_bug_page.php
 $s_advanced_report_link = "高级报告";
-$s_report_stay = "终止报告";
+$s_report_stay = "延后报告";
 
 # set_project.php
-$s_selected_project = "Selected project";
-$s_valid_project_msg = "你必须选择一个有效的项目";
+$s_selected_project = "选择项目";
+$s_valid_project_msg = "必须选择一个有效的项目";
 
 # signup.php
-$s_invalid_email = "是一个无效的 EMIAL 地址!!";
+$s_invalid_email = "是一个无效的 EMAIL 地址!!";
 $s_duplicate_username = "帐号名称已经有人使用了. 请选择其他的使用者名称";
-$s_account_create_fail = "建立使用者帐号失败";
-$s_account_added = "新用户帐号已成功加入.";
+$s_account_create_fail = "创建用户帐号失败";
+$s_account_added = "新用户帐号已成功加入。";
 $s_password_emailed_msg = "密码将通过Email发送给你。";
 $s_no_reponse_msg = "如果你在一周内没有响应，你的帐号将被删除。";
 
@@ -781,116 +782,116 @@ $s_site_settings_link = "站点设置";
 $s_site_settings_updated_msg = "站点设置已经被更新。";
 
 # summary_page.php
-$s_summary_title = "摘要";
-$s_summary_jpgraph_link = "高级摘要";
-$s_by_project = '根据项目';
-$s_by_status = "根据状态";
-$s_by_date = "根据日期";
-$s_by_severity = "根据严重性";
-$s_by_resolution = "根据解析度";
-$s_by_category = "根据类别";
-$s_by_priority = "根据优先权";
-$s_by_developer = "根据开发者";
-$s_by_reporter ="根据报告者";
-$s_reporter_by_resolution = 'Reporter By Resolution';
-$s_reporter_effectiveness = 'Reporter Effectiveness';
-$s_developer_by_resolution = 'Developer By Resolution';
+$s_summary_title = "统计报表";
+$s_summary_jpgraph_link = "图形报表";
+$s_by_project = '按项目';
+$s_by_status = "按 Bug 状态";
+$s_by_date = "按日期";
+$s_by_severity = "按严重性";
+$s_by_resolution = "按完成度";
+$s_by_category = "按项目模块";
+$s_by_priority = "按优先权";
+$s_by_developer = "按开发人员";
+$s_by_reporter ="按报告人";
+$s_reporter_by_resolution = '报告人/完成度';
+$s_reporter_effectiveness = '报告人Effectiveness';
+$s_developer_by_resolution = '开发人员/完成度';
 $s_percentage_fixed = '% Fixed';
 $s_percentage_errors = '% False';
 $s_errors = 'False';
-$s_total = 'Total';
-$s_time_stats = "已解决Bug(天数)的时间状态";
+$s_total = '合计';
+$s_time_stats = "已解决Bug的所用时间(天数)";
 $s_longest_open_bug = "时间最长的Bug";
 $s_longest_open = "最长的打开时间";
 $s_average_time = "平均时间";
-$s_total_time = "总共时间";
-$s_developer_stats = "bug状态与开发者(open/resolved/closed/ total)  ";
-$s_reporter_stats = "bug状态与报告者(open/resolved/closed/ total)  ";
-$s_orct = "(open/resolved/closed/total)";
+$s_total_time = "合计时间";
+$s_developer_stats = "Bug状态与开发人员(开放/已解决/已关闭/合计)";
+$s_reporter_stats = "Bug状态与报告人(开放/已解决/已关闭/合计)";
+$s_orct = "(开放/已解决/已关闭/合计)";
 
 # view_all_bug_page.php
 $s_any = "任意";
 $s_show = "显示";
 $s_changed = "已变更(小时)";
-$s_viewing_bugs_title = "检查Bug";
+$s_viewing_bugs_title = "查看 Bug";
 $s_updated = "最后更新";
 
 # view_all_inc.php
-$s_none = "none";
+$s_none = "无";
 $s_search ="搜索";
-$s_view_prev_link = "View Prev";
-$s_view_next_link = "View Next";
-$s_prev = 'Prev';
-$s_next = 'Next';
-$s_first = 'First';
-$s_last = 'Last';
-$s_start_date = 'Start Date';
-$s_end_date = 'End Date';
-$s_use_date_filters = 'Use Date Filters';
-$s_yes = 'Yes';
-$s_no = 'No';
-$s_open_filters = 'Change Filter';
-$s_or_unassigned = 'Or Unassigned';
+$s_view_prev_link = "浏览上一个";
+$s_view_next_link = "浏览下一个";
+$s_prev = '前一个';
+$s_next = '下一个';
+$s_first = '第一个';
+$s_last = '最后一个';
+$s_start_date = '开始日期';
+$s_end_date = '完成日期';
+$s_use_date_filters = '使用时间过滤';
+$s_yes = '是';
+$s_no = '否';
+$s_open_filters = '修改过滤器';
+$s_or_unassigned = '或未指派的';
 
 # view_bug_advanced_page.php
-$s_view_simple_link = "简易检查";
-$s_viewing_bug_advanced_details_title = "检查Bug进度详细资料";
-$s_product_build = "产品Build";
+$s_view_simple_link = "简易查看";
+$s_viewing_bug_advanced_details_title = "查看Bug进度详细资料";
+$s_product_build = "产品Build号";
 $s_system_profile = "系统说明";
-$s_update_bug_button = "更新Bug";
-$s_bug_assign_to_button = 'Assign To:';
-$s_reopen_bug_button = "重开Bug";
-$s_attached_files = "附属文件";
+$s_update_bug_button = "修改 Bug";
+$s_bug_assign_to_button = '指派给：';
+$s_reopen_bug_button = "重新打开 Bug";
+$s_attached_files = "附件";
 $s_publish = '发布';
-$s_cached = 'Cached';
+$s_cached = '已缓存';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link = "高级检查";
-$s_viewing_bug_simple_details_title = "检查Bug详细资料(简式)";
+$s_view_advanced_link = "高级查看";
+$s_viewing_bug_simple_details_title = "查看Bug详细资料(简易)";
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
+$s_no_users_monitoring_bug = '当前没有用户在监视这个 Bug。';
+$s_users_monitoring_bug = '正在监视这个 Bug 的用户';
 $s_monitoring_user_list = '用户列表';
 
 # custom field strings
-$s_add_custom_field_button = 'New Custom Field';
-$s_delete_custom_field_button = 'Delete Custom Field';
-$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-$s_update_custom_field_button = 'Update Custom Field';
-$s_add_existing_custom_field = 'Add This Existing Custom Field';
-$s_edit_custom_field_title = 'Edit custom field';
-$s_custom_field = 'Field';
-$s_custom_fields_setup = 'Custom Fields';
-$s_custom_field_name = 'Name';
-$s_custom_field_project_count = 'Project Count';
-$s_custom_field_type = 'Type';
-$s_custom_field_possible_values = 'Possible Values';
-$s_custom_field_default_value = 'Default Value';
-$s_custom_field_valid_regexp = 'Regular Expression';
-$s_custom_field_access_level_r = 'Read Access';
-$s_custom_field_access_level_rw = 'Write Access';
-$s_custom_field_length_min = 'Min. Length';
-$s_custom_field_length_max = 'Max. Length';
-$s_custom_field_advanced = 'Advanced';
-$s_custom_field_sequence = 'Sequence';
-$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+$s_add_custom_field_button = '新建自定义字段';
+$s_delete_custom_field_button = '删除自定义字段';
+$s_delete_custom_field_everywhere = '删除所有位置的自定义字段';
+$s_update_custom_field_button = '修改自定义字段';
+$s_add_existing_custom_field = '添加这个已存在的自定义字段';
+$s_edit_custom_field_title = '修改自定义字段';
+$s_custom_field = '字段';
+$s_custom_fields_setup = '自定义字段';
+$s_custom_field_name = '名称';
+$s_custom_field_project_count = '项目名称';
+$s_custom_field_type = '类型';
+$s_custom_field_possible_values = '可能取值';
+$s_custom_field_default_value = '默认值';
+$s_custom_field_valid_regexp = '正则表达式';
+$s_custom_field_access_level_r = '读权限';
+$s_custom_field_access_level_rw = '写权限';
+$s_custom_field_length_min = '最小长度';
+$s_custom_field_length_max = '最大长度';
+$s_custom_field_advanced = '高级';
+$s_custom_field_sequence = '顺序';
+$s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:Email';
 
-$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-$s_field_delete_button = '删除域';
+$s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“后退”按钮；点击下面的按钮继续删除。';
+$s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
+$s_field_delete_button = '删除字段';
 
 $s_hide_status = '隐藏状态';
 $s_filter_closed = "已关闭";
 $s_filter_resolved = "已解决";
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
+$s_hide_closed = "隐藏已关闭的 Bug";
+$s_hide_resolved = "隐藏已解决的 Bug";
 
 $s_attachments = "附件";
 $s_attachment_alt = "A";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'cn';
 ?>
