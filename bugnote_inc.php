@@ -53,30 +53,35 @@
 		}
 
 		# grab the bugnote text and id and prefix with v3_
-		$query = "SELECT id, note
+		$query = "SELECT note
 				FROM $g_mantis_bugnote_text_table
 				WHERE id='$v3_bugnote_text_id'";
 		$result2 = db_query( $query );
 		$row = db_fetch_array( $result2 );
 
-		$v3_bugnote_text_id = $row['id'];
 		$v3_note = $row['note'];
-
 		$v3_note = string_display( $v3_note );
+
+		if ( PRIVATE == $v3_view_state ) {
+			$t_bugnote_css		= 'bugnote-private';
+			$t_bugnote_note_css	= 'bugnote-note-private';
+		} else {
+			$t_bugnote_css		= 'bugnote-public';
+			$t_bugnote_note_css	= 'bugnote-note-public';
+		}
 ?>
 <tr>
-	<td class="nopad" valign="top" width="100%">
-		<table class="hide" cellspacing="1">
+	<td class="bugnote" valign="top" width="100%">
+		<table class="hide" cellspacing="0">
 		<tr valign="top">
-			<td class="category" colspan="2" width="25%">
+			<td class="<?php echo $t_bugnote_css ?>" colspan="2">
 				<?php print_user( $v3_reporter_id ) ?><br />
-				<hr color="#eeeeee" size="1">
+				<hr size="1" />
 				<?php if ( PRIVATE == $v3_view_state ) { ?>
 				<span class="small"><?php echo $s_private ?></span><br />
-				<hr color="#eeeeee" size="1">
+				<hr size="1" />
 				<?php } ?>
-				<span class="small"><?php echo $v3_date_submitted ?>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span class="small"><?php echo $v3_date_submitted ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php
 					# only admins and the bugnote creator can edit/delete this bugnote
 					# bug must be open to be editable
@@ -90,16 +95,11 @@
 				?>
 				</span>
 			</td>
-			<td class="col-2" width="75%">
+			<td class="<?php echo $t_bugnote_note_css ?>">
 				<?php echo $v3_note ?>
 			</td>
 		</tr>
 		</table>
-	</td>
-</tr>
-<tr>
-	<td class="spacer">
-		&nbsp;
 	</td>
 </tr>
 <?php

@@ -21,9 +21,8 @@ form				{ margin: 0px; }
 table				{ }
 td 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; padding: 4px; text-align: left }
 a					{}
+
 a.small				{ font-size: <?php echo $g_font_small ?>; }
-
-
 
 input.small			{ font-size: <?php echo $g_font_small ?>; }
 select.small		{ font-size: <?php echo $g_font_small ?>; }
@@ -66,6 +65,12 @@ tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; colo
 tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; }
 tr.print			{ vertical-align: top; }
 tr.print-category	{ color: <?php echo $g_font_color ?>; font-weight: bold; }
+
+td.bugnote				{ background-color: <?php echo $g_background_color ?>; width: 100%; padding: 0px; padding-bottom: 4px;}
+td.bugnote-public		{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; width: 25%; }
+td.bugnote-private		{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; font-weight: bold; width: 25%; }
+td.bugnote-note-public	{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; width: 75%; }
+td.bugnote-note-private	{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; width: 75%; }
 
 td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle{ width: 33%; padding: 0px; text-align: center; }
