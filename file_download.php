@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.25 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: file_download.php,v 1.26 2004-03-18 11:47:26 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,12 +25,10 @@
 	$f_type		= gpc_get_string( 'type' );
 
 	$c_file_id = (integer)$f_file_id;
-	#access_ensure_project_level( config_get( 'handle_bug_threshold' ) );
-	# @@@ We need a security check here but we need the API to
-	#   get the project_id or bug_id from the file first.
 
 	# we handle the case where the file is attached to a bug
 	# or attached to a project as a project doc.
+	$query = '';
 	switch ( $f_type ) {
 		case 'bug':
 			$t_bug_file_table = config_get( 'mantis_bug_file_table' );
@@ -44,11 +42,29 @@
 				FROM $t_project_file_table
 				WHERE id='$c_file_id'";
 			break;
+		default:
+			access_denied();
 	}
 	$result = db_query( $query );
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
+	# Check access rights
+	switch ( $f_type ) {
+		case 'bug':
+			if ( ! bug_is_user_reporter( $v_bug_id, auth_get_current_user_id() ) ) {
+				access_ensure_bug_level( config_get( 'view_attachments_threshold' ), $v_bug_id );
+			}
+			break;
+		case 'doc':
+			# Check if project documentation feature is enabled.
+			if ( OFF == config_get( 'enable_project_documentation' ) ) {
+				access_denied();
+			}
+
+			access_ensure_project_level( config_get( 'view_proj_doc_threshold' ), $v_project_id );
+			break;
+	}
 	header( 'Content-type: ' . $v_file_type );
 	header( 'Content-Length: ' . $v_filesize );
 	header( 'Content-Disposition: filename=' . file_get_display_name( $v_filename ) );
@@ -60,7 +76,7 @@
 			if ( file_exists( $v_diskfile ) ) {
 				readfile( $v_diskfile );
 			}
-		break;
+			break;
 		case FTP:
 			if ( file_exists( $v_diskfile ) ) {
 				readfile( $v_diskfile );
@@ -70,7 +86,7 @@
 				file_ftp_disconnect( $ftp );
 				readfile( $v_diskfile );
 			}
-		break;
+			break;
 		default:
 			echo $v_content;
 	}

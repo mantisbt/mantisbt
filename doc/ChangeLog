@@ -15,6 +15,11 @@ Mantis ChangeLog
  * Opt #0000: new config option view_history_threshold - threshold needed to view the bug history (now works for emails only).
  * Languages: Updated Czech, Danish, Estonian, Japanese (EUC and SJIS), Serbian and Spanish localisations.
 
+2004.03.??  -  0.18.2a
+
+ * Sec #3660: Ability to execute arbitrary SQL statement if register_globals = ON.
+ * Sec #3661: A logged in user can download any bug attachment or project document.
+
 2004.02.29  -  0.18.2
 
  * Sec #3595: bug_view_page.php: restricted custom fields are shown.
