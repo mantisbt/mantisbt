@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.58 2004-07-25 21:09:39 thraxisp Exp $
+	# $Id: bug_view_advanced_page.php,v 1.59 2004-07-30 22:27:49 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,7 +35,7 @@
 
 	compress_enable();
 
-	html_page_top1( $t_bug->summary );
+	html_page_top1( bug_format_id( $f_bug_id ) . ': ' . $t_bug->summary );
 	html_page_top2();
 ?>
 
