@@ -9,6 +9,7 @@
 	### It POSTs to bug_file_add.php3
 ?>
 <? ### Upload File Form BEGIN ?>
+<? if ( $g_allow_file_upload==1 ) { ?>
 <p>
 <div align="center">
 <form method="post" enctype="multipart/form-data" action="<? echo $g_bug_file_add ?>">
@@ -42,4 +43,5 @@
 </table>
 </form>
 </div>
+<? } ?>
 <? ### Upload File Form END ?>

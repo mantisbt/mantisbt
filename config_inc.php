@@ -42,7 +42,6 @@
 	$g_icon_path     = $g_path."images/";
 
 	# absolute path to your installation.  NO symlinks allowed
-	# This is for file upload support if you choose to store files on the local drive
 	# requires trailing /
 	$g_absolute_path = "/usr/local/share/apache/htdocs/mantis/";
 
@@ -232,6 +231,7 @@
 	###################################
 
 	# --- file upload settings --------
+	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
 	$g_allow_file_upload    = 0;
 	# "disk" or "database" (currently only disk is supported)
 	$g_store_file_to        = "disk";

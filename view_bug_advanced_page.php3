@@ -284,6 +284,31 @@
 <?
 	}
 ?>
+	<tr>
+		<td align=center bgcolor=<? echo $g_category_title_color ?>>
+			<b>Attached Files</b>
+		</td>
+		<td colspan=5 bgcolor=<? echo $g_primary_color_light ?>>
+			<?
+				$query = "SELECT *
+						FROM mantis_bug_file_table
+						WHERE bug_id='$f_id'";
+				$result = db_query( $query );
+				$num_files = db_num_rows( $result );
+				for ($i=0;$i<$num_files;$i++) {
+					$row = db_fetch_array( $result );
+					extract( $row, EXTR_PREFIX_ALL, "v2" );
+					$v2_diskfile = str_replace( $DOCUMENT_ROOT, "", $v2_diskfile );
+					$v2_filesize = round( $v2_filesize / 1024 );
+
+					PRINT "<a href=\"$v2_diskfile\">$v2_filename</a> ($v2_filesize KB)";
+					if ( $i != ($num_files - 1) ) {
+						PRINT "<br>";
+					}
+				}
+			?>
+		</td>
+	</tr>
 	<tr height=5 bgcolor=<? echo $g_white_color ?>>
 		<td colspan=6 bgcolor=<? echo $g_white_color ?>>
 		</td>

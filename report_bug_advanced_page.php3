@@ -257,6 +257,7 @@
 			<textarea name="f_additional_info" cols="60" rows="5"><? echo $f_additional_info ?></textarea>
 		</td>
 	</tr>
+<? if ( $g_allow_file_upload==1 ) { ?>
 	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td>
 			<? echo $s_upload_file ?>
@@ -266,6 +267,7 @@
 			<input name="f_file" type="file" size="60">
 		</td>
 	</tr>
+<? } ?>
 	<tr bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $s_report_stay ?> <? print_documentaion_link( "report_stay" ) ?>:

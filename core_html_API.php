@@ -290,7 +290,8 @@
 	function print_doc_menu( $p_page="" ) {
 		global	$g_documentation_html, $s_user_documentation,
 				$g_proj_doc_page, $s_project_documentation,
-				$g_proj_doc_add_page, $s_add_file;
+				$g_proj_doc_add_page, $s_add_file,
+				$g_allow_file_upload;
 
 		switch ( $p_page ) {
 		case $g_documentation_html: $g_documentation_html="";break;
@@ -301,7 +302,9 @@
 		PRINT "<p><div align=\"center\">";
 			print_bracket_link( $g_documentation_html, $s_user_documentation );
 			print_bracket_link( $g_proj_doc_page, $s_project_documentation );
-			print_bracket_link( $g_proj_doc_add_page, $s_add_file );
+			if ( $g_allow_file_upload==1 ) {
+				print_bracket_link( $g_proj_doc_add_page, $s_add_file );
+			}
 		PRINT "</div>";
 	}
 	### --------------------
