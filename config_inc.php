@@ -37,7 +37,7 @@
 
 	# path to your installation as seen from the web browser
 	# requires trailing /
-	$g_path          = "http://192.168.7.7/mantis/";
+	$g_path          = "http://192.168.7.1/mantis/";
 
 	# path to your images directory (for icons)
 	# requires trailing /
@@ -45,14 +45,14 @@
 
 	# absolute path to your installation.  *NO* symlinks allowed
 	# requires trailing /
-	$g_absolute_path = "/usr/local/share/apache/htdocs/mantis/";
+	$g_absolute_path = "/usr/local/www/data/mantis/";
 
 	#############################
 	### Mantis Version String ###
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version = "0.15.6";
+	$g_mantis_version = "0.15.7";
 	$g_show_version   = 1;
 
 	#############################
