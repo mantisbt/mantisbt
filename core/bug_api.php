@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.11 2002-09-16 06:10:25 jfitzell Exp $
+	# $Id: bug_api.php,v 1.12 2002-09-16 10:05:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -161,7 +161,121 @@
 	#===================================
 
 	# --------------------
-	function bug_create() {
+	# Create a new bug and return the bug id
+	#
+	# @@@ pass in a bug object instead of all these params ??
+	function bug_create( $p_project_id,
+				$p_reporter_id, $p_handler_id,
+				$p_priority,
+				$p_severity, $p_reproducibility,
+				$p_category,
+				$p_os, $p_os_build,
+				$p_platform, $p_version,
+				$p_build, 
+				$p_profile_id, $p_summary, $p_view_state,
+				$p_description, $p_steps_to_reproduce, $p_additional_info ) {
+
+		$c_project_id			= db_prepare_int( $p_project_id );
+		$c_reporter_id			= db_prepare_int( $p_reporter_id );
+		$c_handler_id			= db_prepare_int( $p_handler_id );
+		$c_priority				= db_prepare_int( $p_priority );
+		$c_severity				= db_prepare_int( $p_severity );
+		$c_reproducibility		= db_prepare_int( $p_reproducibility );
+		$c_category				= db_prepare_string( $p_category );
+		$c_os					= db_prepare_string( $p_os );
+		$c_os_build				= db_prepare_string( $p_os_build );
+		$c_platform				= db_prepare_string( $p_platform );
+		$c_version				= db_prepare_string( $p_version );
+		$c_build				= db_prepare_string( $p_build );
+		$c_profile_id			= db_prepare_int( $p_profile_id );
+		$c_summary				= db_prepare_string( $p_summary );
+		$c_view_state			= db_prepare_int( $p_view_state );
+		$c_description			= db_prepare_string( $p_description );
+		$c_steps_to_reproduce	= db_prepare_string( $p_steps_to_reproduce );
+		$c_additional_info		= db_prepare_string( $p_additional_info );
+
+		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
+
+		# Insert text information
+		$query = "INSERT
+				  INTO $t_bug_text_table
+				    ( id, description, steps_to_reproduce, additional_information )
+				  VALUES
+				    ( null, '$c_description', '$c_steps_to_reproduce',
+				      '$c_additional_info' )";
+		db_query( $query );
+
+		# Get the id of the text information we just inserted
+		# NOTE: this is guarranteed to be the correct one.
+		# The value LAST_INSERT_ID is stored on a per connection basis.
+
+		$t_text_id = db_insert_id();
+
+		# check to see if we want to assign this right off
+		$t_status = NEW_;
+
+		# if not assigned, check if it should auto-assigned.
+		if ( 0 == $c_handler_id ) {
+			# if a default user is associated with the category and we know at this point
+			# that that the bug was not assigned to somebody, then assign it automatically.
+			$query = "SELECT user_id
+					  FROM $t_project_category_table
+					  WHERE project_id='$c_project_id' AND category='$c_category'";
+
+			$result = db_query( $query );
+
+			if ( db_num_rows( $result ) > 0 ) {
+				$c_handler_id = $p_handler_id = db_result( $result );
+			}
+		}
+
+		# Check if bug was pre-assigned or auto-assigned.
+		if ( ( $c_handler_id != 0 ) && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
+			$t_status = ASSIGNED;
+		}
+
+		# Insert the rest of the data
+		$t_resolution = OPEN;
+
+		$query = "INSERT
+				  INTO $t_bug_table
+				    ( id, project_id,
+				      reporter_id, handler_id,
+				      duplicate_id, priority,
+				      severity, reproducibility,
+				      status, resolution,
+				      projection, category,
+				      date_submitted, last_updated,
+				      eta, bug_text_id,
+				      os, os_build,
+				      platform, version,
+				      build, votes,
+				      profile_id, summary, view_state )
+				  VALUES
+				    ( null, '$c_project_id',
+				      '$c_reporter_id', '$c_handler_id',
+				      '0', '$c_priority',
+				      '$c_severity', '$c_reproducibility',
+				      '$t_status', '$t_resolution',
+				      10, '$c_category',
+				      NOW(), NOW(),
+				      10, '$t_text_id',
+				      '$c_os', '$c_os_build',
+				      '$c_platform', '$c_version',
+				      '$c_build', 1,
+				      '$c_profile_id', '$c_summary', '$c_view_state' )";
+		db_query( $query );
+
+		$t_bug_id = db_insert_id();
+
+		# log new bug
+		history_log_event_special( $t_bug_id, NEW_BUG );
+
+		email_new_bug( $t_bug_id );
+
+		return $t_bug_id;
 	}
 	# --------------------
 	# allows bug deletion :
