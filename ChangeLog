@@ -2,29 +2,38 @@ Mantis
 
 To Do:
 
- * Inspect security
- * Inspect for unsafe input/output (mostly done)
- * Add mailing module
+ * Add emailing module
  * Add ip tracking/banning capability
  * Add file upload module
  * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
- * Make priority useful
+ * Make priority, projectio, eta useful
  * Force some sort of dialog when closing a bug
  * Force some sort of dialog when reopening a bug
  * Search bugs capability
- * Complex bug criteria searching
  * Add glyphs and icons as optional display feature
  * More documentation on installtion, configuration, and customization
- * Further document core_API.php
  * Multiple project support with userland partitioning
  * Move as much of the config_inc.php varaibles into a database table.
    Then build a nice interface into it.
 
-12.X.2000	-	0.11.1
+12.XX.2000	-	0.11.2
 
- * Wrapped the global cookie _val variables in if (isset)) blocks.
- * Fixed a missing </TD> tag on the report bug pages.
+ * Tweaked the string_edit() function.
+ * Added $g_show_login_date_info adn the ability to show who is logged in and the current time
+ * Modified bugnotes to be ordered by date_submitted
+ * Added protection to prevent anyone from deleting bugnotes
+ * Used LAST_INSERT_ID() to ensure that bug and bugnote insertion is correct
+ *
+ *
+ *
+
+12.15.2000	-	0.11.1
+
  * Added projection and eta to be passed as hidden info by the simple update page.
+ * Fixed a missing </TD> tag on the report bug pages.  Messed up old 4.x unix
+   Netscape.
+ * Modified the priority to print counts of all bugs.
+ * Wrapped the global cookie _val variables in if (isset()) blocks.  Seemed to cause some troubles on some setups.
 
 12.12.2000	-	0.11.0
 

@@ -7,10 +7,18 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### grab the user id currently logged in
+	$query = "SELECT id
+			FROM $g_mantis_user_table
+			WHERE cookie_string='$g_string_cookie_val'";
+	$result = db_mysql_query( $query );
+	$t_user_id = mysql_result( $result, 0);
+
 	### get the bugnote data
 	$query = "SELECT *
 			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$f_id'";
+			WHERE bug_id='$f_id'
+			ORDER BY date_submitted ASC";
 	$result = db_mysql_query($query);
 	$num_notes = mysql_num_rows($result);
 ?>
@@ -76,7 +84,8 @@
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 		<?
 			### check access level
-			if ( access_level_check_greater_or_equal( "reporter" ) ) {
+			if (( access_level_check_greater_or_equal( "administrator" ) )||
+				( $v3_reporter_id==$t_user_id )) {
 		?>
 			<font size=1><a href="<? echo $g_bugnote_delete ?>?f_id=<? echo $f_id ?>&f_bug_id=<? echo $v3_id ?>">Delete</a></font>
 		<? } ?>

@@ -8,7 +8,11 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### get user info
+	### shows all variables and values
+    #while (list($var, $value) = each($HTTP_POST_VARS)) {
+        #echo "$var = $value<br>\n";
+    #}
+    	### get user info
 	$query = "SELECT *
 			FROM $g_mantis_user_table
 			WHERE username='$f_username'";

@@ -19,8 +19,8 @@
 	####################
 	#--------------------
 	# connect to database
-	function db_mysql_connect( 	$p_hostname, $p_username="root", $p_password="",
-								$p_database, $p_port=3306 ) {
+	function db_mysql_connect( 	$p_hostname="localhost", $p_username="root", $p_password="",
+								$p_database="mantis", $p_port=3306 ) {
 
 		$t_result = mysql_connect(  $p_hostname.":".$p_port,
 									$p_username, $p_password );
@@ -109,8 +109,34 @@
 		PRINT "<html>";
 	}
 	#--------------------
+	# prints the user that is logged in and the date/time
+	function print_login_info() {
+		global 	$g_mantis_user_table, $g_string_cookie_val;
+
+		$query = "SELECT username
+				FROM $g_mantis_user_table
+				WHERE cookie_string='$g_string_cookie_val'";
+		$result = db_mysql_query( $query );
+		$t_username = mysql_result( $result, 0 );
+
+		$t_now = date("d-m-y h:m T");
+		PRINT "<table width=100%><tr>";
+		PRINT "<td align=left width=50%>";
+			PRINT "Logged in as: <i>$t_username</i>";
+		PRINT "</td>";
+		PRINT "<td align=right width=50%>";
+			PRINT "<i>$t_now</i>";
+		PRINT "</td>";
+		PRINT "</tr></table>";
+	}
+	#--------------------
 	function print_menu( $p_menu_file="" ) {
-		global $g_primary_border_color, $g_primary_color_light;
+		global 	$g_primary_border_color, $g_primary_color_light,
+				$g_show_login_date_info;
+
+		if ($g_show_login_date_info==1) {
+			print_login_info();
+		}
 
 		PRINT "<table width=100% bgcolor=$g_primary_border_color>";
 		PRINT "<tr align=center height=20>";
@@ -591,7 +617,7 @@
 	}
 	#--------------------
 	function string_edit( $p_string ) {
-		return str_replace( "<br>", " ",  stripslashes( $p_string ) );
+		return str_replace( "<br>", "",  stripslashes( $p_string ) );
 	}
 	#--------------------
 	#####################

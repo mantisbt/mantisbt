@@ -95,7 +95,7 @@
 		<td>
 			<? ### CATEGORY ### ?>
 			<table width=97%>
-				<? print_bug_enum_summary( "priority", "open" ) ?>
+				<? print_bug_enum_summary( "priority" ) ?>
 			</table>
 		</td>
 	</tr>

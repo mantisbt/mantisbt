@@ -62,6 +62,9 @@
 	# requires PHP4
 	# 0 = disabled; 1 = admin only; 2 = anyone
 	$g_show_source               = 0;
+
+	# set to 0 to disable the logged in user and time info
+	$g_show_login_date_info      = 1;
 	#--------------------
 
 	# core file variables
@@ -258,6 +261,6 @@
 
 	#--------------------
 	#version
-	$g_mantis_version       = "0.11.0";
+	$g_mantis_version       = "0.11.2";
 	#--------------------
 ?>
