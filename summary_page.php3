@@ -31,6 +31,10 @@
 		$t_date_submitted = sql_to_unix_time($row["date_submitted"]);
 		$t_last_updated = sql_to_unix_time($row["last_updated"]);
 
+		if ($t_last_updated < $t_date_submitted) {
+			$t_last_updated = 0;
+			$t_date_submitted = 0;
+		}
 		$t_diff = $t_last_updated - $t_date_submitted;
 		$t_total_time = $t_total_time + $t_diff;
 		if ( $t_diff > $t_largest_diff ) {
@@ -142,10 +146,12 @@
 					longest open bug
 				</td>
 				<td width=50%>
-					<? if ( get_current_user_profile_field( "advanced_view" )=="on" ) { ?>
-						<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
-					<? } else {?>
-						<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
+					<? if ($t_bug_id>0) { ?>
+						<? if ( get_current_user_profile_field( "advanced_view" )=="on" ) { ?>
+							<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
+						<? } else {?>
+							<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
+						<? } ?>
 					<? } ?>
 				</td>
 			</tr>

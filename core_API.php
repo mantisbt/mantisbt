@@ -86,7 +86,7 @@
 	}
 	#--------------------
 	function print_header( $p_title="Mantis" ) {
-		PRINT "<div align=center><h3><font face=Verdana>$p_title</font></h3></div>";
+		PRINT "<div align=center><h3>$p_title</h3></div>";
 	}
 	#--------------------
 	function print_footer() {
