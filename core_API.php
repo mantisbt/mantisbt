@@ -116,7 +116,7 @@
 		PRINT "</table>";
 	}
 	#--------------------
-	function print_category_string() {
+	function get_enum_string( $p_field_name ) {
 		global $g_mantis_bug_table
 
 		$query = "SHOW FIELDS
@@ -127,30 +127,23 @@
 			$row = mysql_fetch_array( $result );
 	    	$t_type = stripslashes($row["Type"]);
 	    	$t_field = $row["Field"];
-	    	if ( $t_field=="category" ) {
+	    	if ( $t_field==$p_field_name ) {
 		    	return substr( $t_type, 5, strlen($t_type)-6);
 		    }
-	    }
+	    } ### end for
 	}
 	#--------------------
+	function get_enum_count( $t_enum_string ) {
+		return count(explode(",",$t_enum_string));
+	}
+	#--------------------
+	### Used for update pages
 	function print_categories( $p_category="" ) {
 		global $g_mantis_bug_table
 
-		$query = "SHOW FIELDS
-				FROM $g_mantis_bug_table";
-		$result = db_mysql_query( $query );
-		$entry_count = mysql_num_rows( $result );
-		for ($i=0;$i<$entry_count;$i++) {
-			$row = mysql_fetch_array( $result );
-	    	$t_type = stripslashes($row["Type"]);
-	    	$t_field = $row["Field"];
-	    	if ( $t_field=="category" ) {
-		    	break;
-		    }
-	    }
-
-	    $t_str = substr( $t_type, 5, strlen($t_type)-6).",";
-		$cat_count = count(explode(",",$t_str))-1;
+		$t_category_string = get_enum_string( "category" );
+	    $t_str = $t_category_string.",";
+		$cat_count = get_enum_count($t_str)-1;
 		for ($i=0;$i<$cat_count;$i++) {
 			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
 			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
@@ -160,7 +153,43 @@
 			else {
 				PRINT "<option value=\"$t_s\">$t_s";
 			}
-		}
+		} ### end for
+	}
+	#--------------------
+	### Used in summary reports
+	function print_bug_enum_summary( $p_enum ) {
+		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark;
+
+		$t_enum_string = get_enum_string( "$p_enum" );
+	    $t_str = $t_enum_string.",";
+		$enum_count = get_enum_count($t_str)-1;
+		for ($i=0;$i<$enum_count;$i++) {
+			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
+			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
+
+			$query = "SELECT COUNT(id)
+					FROM $g_mantis_bug_table
+					WHERE $p_enum='$t_s'";
+			$result = mysql_query( $query );
+			$t_enum_count = mysql_result( $result, 0 );
+
+			### alternate row colors
+			if ( $i % 2 == 1) {
+				$bgcolor=$g_primary_color_light;
+			}
+			else {
+				$bgcolor=$g_primary_color_dark;
+			}
+
+			PRINT "<tr align=center bgcolor=$bgcolor>";
+				PRINT "<td width=50%>";
+					echo $t_s;
+				PRINT "</td>";
+				PRINT "<td width=50%>";
+					echo $t_enum_count;
+				PRINT "</td>";
+			PRINT "</tr>";
+		} ### end for
 	}
 	#--------------------
 	####################

@@ -16,48 +16,6 @@
 <? print_header( $g_page_title ) ?>
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
-	### t_active_bug_count
-    $query = "SELECT COUNT(id)
-    		FROM $g_mantis_bug_table
-    		WHERE status<>'resolved'";
-    $result = db_mysql_query( $query );
-	$t_active_bug_count = mysql_result( $result, 0 );
-
-    ### t_fixed_bug_count
-    $query = "SELECT COUNT(id)
-    		FROM $g_mantis_bug_table
-    		WHERE status='resolved'";
-    $result = db_mysql_query( $query );
-	$t_fixed_bug_count = mysql_result( $result, 0 );
-
-	### t_not_fixable_bug_count
-    $query = "SELECT COUNT(id)
-    		FROM $g_mantis_bug_table
-    		WHERE resolution='not fixable'";
-    $result = db_mysql_query( $query );
-	$t_not_fixable_bug_count = mysql_result( $result, 0 );
-
-	### t_crashing_bug_count
-    $query = "SELECT COUNT(id)
-    		FROM $g_mantis_bug_table
-    		WHERE severity='crash'";
-    $result = db_mysql_query( $query );
-	$t_crashing_bug_count = mysql_result( $result, 0 );
-
-	### t_major_bug_count
-    $query = "SELECT COUNT(id)
-    		FROM $g_mantis_bug_table
-    		WHERE severity='major'";
-    $result = db_mysql_query( $query );
-	$t_major_bug_count = mysql_result( $result, 0 );
-
-	### t_minor_bug_count
-    $query = "SELECT COUNT(id)
-    		FROM $g_mantis_bug_table
-    		WHERE severity='minor'";
-    $result = db_mysql_query( $query );
-	$t_minor_bug_count = mysql_result( $result, 0 );
 ?>
 
 <p>
@@ -67,52 +25,98 @@
 <table width=100% bgcolor=<? echo $g_primary_border_color ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100% cols=4>
+	<table width=100% cols=2>
 	<tr>
-		<td bgcolor=<? echo $g_white_color ?> colspan=4>
+		<td bgcolor=<? echo $g_white_color ?> colspan=2>
 			<b>Summary</b>
 		</td>
 	</tr>
-	<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
-		<td width=30%>
-			<b>active bugs</b>
+	<tr valign=bottom height=28 bgcolor=<? echo $g_white ?>>
+		<td width=50%>
+			<b>by status:</b>
 		</td>
-		<td width=20%>
-			<? echo $t_active_bug_count ?>
-		</td>
-		<td width=30%>
-			<b>fixed bugs</b>
-		</td>
-		<td width=20%>
-			<? echo $t_fixed_bug_count ?>
+		<td width=50%>
+			<b>by date:</b>
 		</td>
 	</tr>
-	<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
-		<td>
-			<b>non fixable bugs</b>
+	<tr align=center valign=top height=28 bgcolor=<? echo $g_white ?>>
+		<td width=50%>
+			<? ### STATUS ### ?>
+			<table width=97%>
+				<? print_bug_enum_summary("status") ?>
+			</table>
 		</td>
-		<td>
-			<? echo $t_not_fixable_bug_count ?>
-		</td>
-		<td>
-			<b>crashing bugs</b>
-		</td>
-		<td>
-			<? echo $t_crashing_bug_count ?>
+		<td width=50%>
+			<? ### DATE ### ?>
+			<table width=97%>
+			<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
+				<td width=50%>
+					day
+				</td>
+				<td width=50%>
+					<? echo $t_not_fixable_bug_count ?>
+				</td>
+			</tr>
+			<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
+				<td>
+					week
+				</td>
+				<td>
+					<? echo $t_crashing_bug_count ?>
+				</td>
+			</tr>
+			<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
+				<td>
+					month
+				</td>
+				<td>
+					<? echo $t_not_fixable_bug_count ?>
+				</td>
+			</tr>
+			<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
+				<td>
+					year
+				</td>
+				<td>
+					<? echo $t_crashing_bug_count ?>
+				</td>
+			</tr>
+			</table>
 		</td>
 	</tr>
-	<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
+	<tr valign=bottom height=28 bgcolor=<? echo $g_white ?>>
+		<td width=50%>
+			<b>by severity:</b>
+		</td>
+		<td width=50%>
+			<b>by resolution:</b>
+		</td>
+	</tr>
+	<tr align=center valign=top height=28 bgcolor=<? echo $g_white ?>>
 		<td>
-				<b>major bugs</b>
+			<? ### SEVERITY ### ?>
+			<table width=97%>
+				<? print_bug_enum_summary("severity") ?>
+			</table>
 		</td>
 		<td>
-			<? echo $t_major_bug_count ?>
+			<? ### RESOLUTION ### ?>
+			<table width=97%>
+				<? print_bug_enum_summary("resolution") ?>
+			</table>
 		</td>
-		<td>
-				<b>minor bugs</b>
+		</tr>
+	<tr valign=bottom height=28 bgcolor=<? echo $g_white ?>>
+		<td colspan=2>
+			<b>by category:</b>
 		</td>
+	</tr>
+	<tr align=center valign=top height=28 bgcolor=<? echo $g_white ?>>
 		<td>
-			<? echo $t_minor_bug_count ?>
+			<? ### CATEGORY ### ?>
+			<table width=97%>
+				<? print_bug_enum_summary("category") ?>
+			</table>
 		</td>
 	</tr>
 	</table>

@@ -12,6 +12,7 @@ To Do:
  * Refine viewing preferences
  * Add profiles for each user
  * Refine viewing news archives
+ * Make priority useful
 
 XX.XX.2000	-	0.10.2
 
@@ -19,6 +20,7 @@ XX.XX.2000	-	0.10.2
  * Fixed variable error preventing Bugnote addition
  * Fixed minor viewing bugs related to \ characters
  * Added documentation section
+ * Summary is now useful
 
 12.03.2000	-	0.10.1
 

@@ -44,7 +44,7 @@
 			Category names
 		</td>
 		<td width=75%>
-			<input type=text name=f_category size=48 maxlength=255 value="<? echo print_category_string() ?>">
+			<input type=text name=f_category size=48 maxlength=255 value="<? echo get_enum_string( "category" ) ?>">
 		</td>
 	</tr>
 	<tr>
