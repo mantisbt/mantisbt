@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.74 2004-07-16 23:30:28 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.75 2004-07-18 10:22:21 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -250,18 +250,19 @@
 	</td>
 </tr>
 
-
+<?php /*
 <tr <?php echo helper_alternate_class() ?>>
-	<!-- Product Version -->
+	<!-- Fixed in Version -->
 	<td class="category">
-		<?php echo lang_get( 'product_version' ) ?>
+		<?php echo lang_get( 'fixed_in_version' ) ?>
 	</td>
 	<td colspan="5">
-		<select name="version">
-			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
+		<select name="fixed_in_version">
+			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 		</select>
 	</td>
 </tr>
+*/ ?>
 
 <!-- spacer -->
 <tr>
