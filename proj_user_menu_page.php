@@ -114,18 +114,20 @@
 	$t_man = MANAGER;
 	$t_adm = ADMINISTRATOR;
 
+	$t_access_min = get_project_field( $g_project_cookie_val, "access_min" );
+
 	# Get the user data in $f_sort order
-    $query = "SELECT *
+/*    $query = "SELECT *
     		FROM $g_mantis_project_user_list_table
     		WHERE project_id='$g_project_cookie_val'
-			ORDER BY '$f_sort' $f_dir";
+			ORDER BY '$f_sort' $f_dir";*/
 
 	$query = "SELECT DISTINCT t1.id, t1.username, t1.email, t1.access_level, t2.user_id, t2.access_level
 			FROM $g_mantis_user_table as t1
 			LEFT JOIN $g_mantis_project_user_list_table as t2
 			ON t1.id=t2.user_id
-			WHERE (t2.access_level>=$t_dev AND t2.project_id=$g_project_cookie_val) OR
-				  (t1.access_level>=$t_dev AND t2.access_level IS NULL)
+			WHERE (t2.access_level>=$t_access_min AND t2.project_id=$g_project_cookie_val) OR
+				  (t1.access_level>=$t_access_min AND t2.access_level IS NULL)
 			ORDER BY '$f_sort' $f_dir";
     $result = db_query($query);
 	$user_count = db_num_rows( $result );
