@@ -10,7 +10,7 @@
 	check_access( MANAGER );
 
 	# Update news
-	check_varset( $f_accouncement, '' );
+	check_varset( $f_announcement, '' );
     $result = news_update_query( $f_id, $f_view_state, $f_announcement, $f_headline, $f_body, $f_project_id );
     $f_headline 	= string_display( $f_headline );
     $f_body 		= string_display( $f_body );
