@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: icon_api.php,v 1.6 2003-01-30 15:01:03 beerfrick Exp $
+	# $Id: icon_api.php,v 1.7 2003-02-09 22:15:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -67,10 +67,10 @@
 
 		if ( $p_sort_by != $p_field ) return;
 
-		if ( 'ASC' == $p_dir ) {
-			$t_dir = ASC;
-		} else {
+		if ( 'DESC' == $p_dir || DESC == $p_dir) {
 			$t_dir = DESC;
+		} else {
+			$t_dir = ASC;
 		}
 
 		$t_none = NONE;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.38 2003-01-29 22:19:06 beerfrick Exp $
+	# $Id: print_api.php,v 1.39 2003-02-09 22:15:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -924,23 +924,9 @@
 		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
 	}
 	# --------------------
-	function print_manage_user_sort_link(  $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {
-		if ($p_sort_by == $p_field) {   # If this is the selected field flip the order
-			if ($p_dir == 'ASC') {
-				$t_dir = 'DESC';
-			} else {
-				$t_dir = 'ASC';
-			}
-		} else {                        # Otherwise always start with ASCending
-				$t_dir = 'ASC';
-		}
-
-		PRINT '<a href="'.$p_page.'?sort='.$p_field.'&amp;dir='.$t_dir.'&amp;save=1&amp;hide='.$p_hide.'">'.$p_string.'</a>';
-	}
-	# --------------------
-	function print_manage_project_sort_link(  $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
-		if ($p_sort_by == $p_field) {   # If this is the selected field flip the order
-			if ($p_dir == 'ASC') {
+	function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {
+		if ( $p_sort_by == $p_field ) {   # If this is the selected field flip the order
+			if ( 'ASC' == $p_dir || ASC == $p_dir ) {
 				$t_dir = 'DESC';
 			} else {
 				$t_dir = 'ASC';
@@ -949,7 +935,21 @@
 			$t_dir = 'ASC';
 		}
 
-		PRINT '<a href="'.$p_page.'?sort='.$p_field.'&amp;dir='.$t_dir.'">'.$p_string.'</a>';
+		echo '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '&amp;save=1&amp;hide=' . $p_hide . '">' . $p_string . '</a>';
+	}
+	# --------------------
+	function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
+		if ( $p_sort_by == $p_field ) {   # If this is the selected field flip the order
+			if ( 'ASC' == $p_dir || ASC == $p_dir ) {
+				$t_dir = 'DESC';
+			} else {
+				$t_dir = 'ASC';
+			}
+		} else {                        # Otherwise always start with ASCending
+			$t_dir = 'ASC';
+		}
+
+		echo '<a href="' . $p_page . '?sort=' . $p_field . '&amp;dir=' . $t_dir . '">' . $p_string . '</a>';
 	}
 	# --------------------
 	# print the bracketed links used near the top
