@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -77,7 +77,8 @@
 	### build our query string based on our viewing criteria
 	$query = "SELECT * FROM $g_mantis_bug_table";
 
-	$t_where_clause = "";
+	$t_where_clause = " WHERE project_id='$g_project_cookie_val' AND
+							reporter_id='$f_user_id'";
 
 	if (( $f_hide_resolved=="on"  )&&( $f_show_status!="resolved" )) {
 		$t_where_clause = $t_where_clause." AND status<>'resolved'";
@@ -91,14 +92,6 @@
 	}
 	if ( $f_show_status != "any" ) {
 		$t_where_clause = $t_where_clause." AND status='$f_show_status'";
-	}
-
-	if ( !empty( $t_where_clause ) ) {
-		$t_where_clause = substr( $t_where_clause, 5, strlen( $t_where_clause ) );
-		$t_where_clause = " WHERE reporter_id='$f_user_id' AND ".$t_where_clause;
-	}
-	else {
-		$t_where_clause = " WHERE reporter_id='$f_user_id'";
 	}
 
 	$query = $query.$t_where_clause;
