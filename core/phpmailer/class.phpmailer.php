@@ -125,7 +125,7 @@ class PHPMailer
      *  Holds PHPMailer version.
      *  @var string
      */
-    var $Version           = "1.71";
+    var $Version           = "1.72";
 
     /**
      * Sets the email address that a reading confirmation will be sent.
@@ -140,7 +140,6 @@ class PHPMailer
      *  @var string
      */
     var $Hostname          = "";
-
 
     /////////////////////////////////////////////////
     // SMTP VARIABLES
@@ -344,6 +343,7 @@ class PHPMailer
     function Send() {
         $header = "";
         $body = "";
+        $result = true;
 
         if((count($this->to) + count($this->cc) + count($this->bcc)) < 1)
         {
@@ -355,6 +355,7 @@ class PHPMailer
         if(!empty($this->AltBody))
             $this->ContentType = "multipart/alternative";
 
+        $this->error_count = 0; // reset errors
         $this->SetMessageType();
         $header .= $this->CreateHeader();
         $body = $this->CreateBody();
@@ -362,28 +363,24 @@ class PHPMailer
         if($body == "") { return false; }
 
         // Choose the mailer
-        if($this->Mailer == "sendmail")
+        switch($this->Mailer)
         {
-          if(!$this->SendmailSend($header, $body))
-              return false;
-        }
-        elseif($this->Mailer == "mail")
-        {
-          if(!$this->MailSend($header, $body))
-              return false;
-        }
-        elseif($this->Mailer == "smtp")
-        {
-          if(!$this->SmtpSend($header, $body))
-              return false;
-        }
-        else
-        {
+            case "sendmail":
+                $result = $this->SendmailSend($header, $body);
+                break;
+            case "mail":
+                $result = $this->MailSend($header, $body);
+                break;
+            case "smtp":
+                $result = $this->SmtpSend($header, $body);
+                break;
+            default:
             $this->SetError($this->Mailer . $this->Lang("mailer_not_supported"));
-            return false;
+                $result = false;
+                break;
         }
 
-        return true;
+        return $result;
     }
     
     /**
@@ -596,7 +593,7 @@ class PHPMailer
      * @access public
      * @return bool
      */
-    function SetLanguage($lang_type, $lang_path = "") {
+    function SetLanguage($lang_type, $lang_path = "language/") {
         if(file_exists($lang_path.'phpmailer.lang-'.$lang_type.'.php'))
             include($lang_path.'phpmailer.lang-'.$lang_type.'.php');
         else if(file_exists($lang_path.'phpmailer.lang-en.php'))
@@ -765,7 +762,6 @@ class PHPMailer
         $this->boundary[1] = "b1_" . $uniq_id;
         $this->boundary[2] = "b2_" . $uniq_id;
 
-        $result .= $this->Received();
         $result .= $this->HeaderLine("Date", $this->RFCDate());
         if($this->Sender == "")
             $result .= $this->HeaderLine("Return-Path", trim($this->From));
@@ -1409,36 +1405,6 @@ class PHPMailer
         $tz = abs($tz);
         $tz = ($tz/3600)*100 + ($tz%3600)/60;
         $result = sprintf("%s %s%04d", date("D, j M Y H:i:s"), $tzs, $tz);
-
-        return $result;
-    }
-
-    /**
-     * Returns Received header for message tracing. 
-     * @access private
-     * @return string
-     */
-    function Received() {
-        if ($this->ServerVar('SERVER_NAME') != '')
-        {
-            $protocol = ($this->ServerVar('HTTPS') == 'on') ? 'HTTPS' : 'HTTP';
-            $remote = $this->ServerVar('REMOTE_HOST');
-            if($remote == "")
-                $remote = 'phpmailer';
-            $remote .= ' (['.$this->ServerVar('REMOTE_ADDR').'])';
-        }
-        else
-        {
-            $protocol = 'local';
-            $remote = $this->ServerVar('USER');
-            if($remote == '')
-                $remote = 'phpmailer';
-        }
-
-        $result = sprintf("Received: from %s %s\tby %s " .
-                          "with %s (PHPMailer);%s\t%s%s", $remote, $this->LE,
-                          $this->ServerHostname(), $protocol, $this->LE,
-                          $this->RFCDate(), $this->LE);
 
         return $result;
     }

@@ -14,7 +14,7 @@ $PHPMAILER_LANG["instantiate"] = 'Mail Funktion konnte nicht initialisiert werde
 $PHPMAILER_LANG["authenticate"] = 'SMTP Fehler: Authentifizierung fehlgeschlagen.';
 $PHPMAILER_LANG["from_failed"] = 'Die folgende Absenderadresse ist nicht korrekt: ';
 $PHPMAILER_LANG["recipients_failed"] = 'SMTP Fehler: Die folgenden ' .
-                                       'EMpf&auml;nger sind nicht korrekt: ';
+                                       'Empf&auml;nger sind nicht korrekt: ';
 $PHPMAILER_LANG["data_not_accepted"] = 'SMTP Fehler: Daten werden nicht akzeptiert.';
 $PHPMAILER_LANG["connect_host"] = 'SMTP Fehler: Konnte keine Verbindung zum SMTP-Host herstellen.';
 $PHPMAILER_LANG["file_access"] = 'Zugriff auf folgende Datei fehlgeschlagen: ';

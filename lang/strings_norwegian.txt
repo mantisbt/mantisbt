@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.65 $
+	# $Revision: 1.66 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Date: 2004-07-24 13:36:07 $
 	#
-	# $Id: strings_norwegian.txt,v 1.65 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_norwegian.txt,v 1.66 2004-07-24 13:36:07 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -970,7 +970,7 @@ $s_attachments = "vedlegg";
 $s_attachment_alt = "V";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'no';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';

@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.62 $
+	# $Revision: 1.63 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:05 $
+	# $Date: 2004-07-24 13:36:07 $
 	#
-	# $Id: strings_swedish.txt,v 1.62 2004-07-18 15:22:05 vboctor Exp $
+	# $Id: strings_swedish.txt,v 1.63 2004-07-24 13:36:07 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -968,7 +968,7 @@ $s_attachments = "bilagor";
 $s_attachment_alt = "A";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'se';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';

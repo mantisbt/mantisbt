@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:05 $
+	# $Date: 2004-07-24 13:36:07 $
 	#
-	# $Id: strings_turkish.txt,v 1.59 2004-07-18 15:22:05 vboctor Exp $
+	# $Id: strings_turkish.txt,v 1.60 2004-07-24 13:36:07 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -969,7 +969,7 @@ $s_attachments = 'attachment(s)';
 $s_attachment_alt = 'A';
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'tr';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';

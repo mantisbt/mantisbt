@@ -1,5 +1,13 @@
 ChangeLog
 
+Version 1.72 (Wed, May 25 2004)
+* Added Dutch, Swedish, Czech, Norwegian, and Turkish translations.
+* Received: Removed this method because spam filter programs like 
+SpamAssassin reject this header.
+* Fixed error count bug.
+* SetLanguage default is now "language/".
+* Fixed magic_quotes_runtime bug.
+
 Version 1.71 (Tue, Jul 28 2003)
 * Made several speed enhancements
 * Added German and Italian translation files

@@ -14,11 +14,11 @@
   	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.55 $
+	# $Revision: 1.56 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Date: 2004-07-24 13:36:06 $
 	#
-	# $Id: strings_czech.txt,v 1.55 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_czech.txt,v 1.56 2004-07-24 13:36:06 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -975,7 +975,7 @@ $s_attachments = "dodatky";
 $s_attachment_alt = "D";
 
 # PHPMailer
-$s_phpmailer_language = 'cs';
+$s_phpmailer_language = 'cz';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponzor(-øi)';

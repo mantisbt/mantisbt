@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.63 $
+	# $Revision: 1.64 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Date: 2004-07-24 13:36:07 $
 	#
-	# $Id: strings_dutch.txt,v 1.63 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_dutch.txt,v 1.64 2004-07-24 13:36:07 vboctor Exp $
 	###########################################################################
 
 ?>
@@ -971,7 +971,7 @@ $s_attachments = "bijlage(n)";
 $s_attachment_alt = "B";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'nl';
 
 # Sponsorship Strings
 $s_sponsors = '%d sponsor(s)';
