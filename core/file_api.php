@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.56 2004-09-21 18:02:28 thraxisp Exp $
+	# $Id: file_api.php,v 1.57 2004-09-28 00:56:13 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -449,14 +449,14 @@
 	function file_generate_unique_name( $p_seed , $p_filepath ) {
 		do {
 			$t_string = file_generate_name( $p_seed );
-		} while ( !file_is_name_unique( $t_string , $p_filepath ) );
+		} while ( !diskfile_is_name_unique( $t_string , $p_filepath ) );
 
 		return $t_string;
 	}
 
 	# --------------------
-	# Return true if the file name identifier is unique, false otherwise
-	function file_is_name_unique( $p_name , $p_filepath ) {
+	# Return true if the diskfile name identifier is unique, false otherwise
+	function diskfile_is_name_unique( $p_name , $p_filepath ) {
 		$t_file_table = config_get( 'mantis_bug_file_table' );
 
 		$c_name = db_prepare_string( $p_filepath . $p_name );
@@ -464,6 +464,27 @@
 		$query = "SELECT COUNT(*)
 				  FROM $t_file_table
 				  WHERE diskfile='$c_name'";
+		$result = db_query( $query );
+		$t_count = db_result( $result );
+
+		if ( $t_count > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	# --------------------
+	# Return true if the file name identifier is unique, false otherwise
+	function file_is_name_unique( $p_name, $p_bug_id ) {
+		$t_file_table = config_get( 'mantis_bug_file_table' );
+
+		$c_name = db_prepare_string( $p_name );
+		$c_bug = db_prepare_string( $p_bug_id );
+
+		$query = "SELECT COUNT(*)
+				  FROM $t_file_table
+				  WHERE filename='$c_name' and bug_id=$c_bug";
 		$result = db_query( $query );
 		$t_count = db_result( $result );
 
@@ -485,7 +506,13 @@
 
 		if ( !file_type_check( $p_file_name ) ) {
 			trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
-		} else if ( is_uploaded_file( $p_tmp_file ) ) {
+		}  
+
+		if ( !file_is_name_unique( $p_file_name, $p_bug_id ) ) {
+			trigger_error( ERROR_DUPLICATE_FILE, ERROR );
+		}  
+
+		if ( is_uploaded_file( $p_tmp_file ) ) {
 			$t_project_id	= bug_get_field( $p_bug_id, 'project_id' );
 			$t_bug_id		= bug_format_id( $p_bug_id );
 

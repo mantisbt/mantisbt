@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.61 2004-09-27 12:45:15 vboctor Exp $
+	# $Id: project_api.php,v 1.62 2004-09-28 00:56:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -647,4 +647,26 @@
 		$t_padding = config_get( 'display_project_padding' );
 		return( str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
 	}
+
+		# --------------------
+	# Return true if the file name identifier is unique, false otherwise
+	function project_file_is_name_unique( $p_name ) {
+		$t_file_table = config_get( 'mantis_project_file_table' );
+
+		$c_name = db_prepare_string( $p_name );
+
+		$query = "SELECT COUNT(*)
+				  FROM $t_file_table
+				  WHERE filename='$c_name'";
+		$result = db_query( $query );
+		$t_count = db_result( $result );
+
+		if ( $t_count > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
 ?>

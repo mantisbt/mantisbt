@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add.php,v 1.43 2004-08-31 13:11:50 thraxisp Exp $
+	# $Id: proj_doc_add.php,v 1.44 2004-09-28 00:56:13 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -72,7 +72,7 @@
 			case FTP:
 			case DISK:	file_ensure_valid_upload_path( $t_file_path );
 
-						if ( !file_exists( $t_disk_file_name ) ) {
+						if ( project_file_is_name_unique( $v_name ) ) {
 							if ( FTP == $t_method ) {
 								$conn_id = file_ftp_connect();
 								file_ftp_put ( $conn_id, $t_disk_file_name, $v_tmp_name );
