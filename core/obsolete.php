@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.21 2004-02-05 12:45:22 vboctor Exp $
+	# $Id: obsolete.php,v 1.22 2004-03-09 21:05:30 vboctor Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -77,5 +77,5 @@
 
 	config_obsolete( 'summary_pad', '' );
 
-	config_obsolete( 'show_project_in_title' );
+	config_obsolete( 'show_project_in_title', '' );
 ?>
