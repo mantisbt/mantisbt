@@ -723,20 +723,12 @@
 	###########################
 	#----------------------------------
 	# Specify your top/bottom include file (logos, banners, etc)
-	if ( ! isset( $g_bottom_include_page) ) {
-		$g_bottom_include_page            = $g_absolute_path."";
-	}
-	if ( ! isset( $g_top_include_page) ) {
-		$g_top_include_page               = $g_absolute_path."";
-	}
+	$g_bottom_include_page            = $g_absolute_path."";
+	$g_top_include_page               = $g_absolute_path."";
 	# CSS file
-	if ( ! isset( $g_css_include_file) ) {
-		$g_css_include_file               = $g_absolute_path."css_inc".$g_php;
-	}
+	$g_css_include_file               = $g_absolute_path."css_inc".$g_php;
 	# meta tags
-	if ( ! isset( $g_meta_include_file) ) {
-		$g_meta_include_file              = $g_absolute_path."meta_inc".$g_php;
-	}
+	$g_meta_include_file              = $g_absolute_path."meta_inc".$g_php;
 	#----------------------------------
 	# Internal includes
 	$g_bugnote_include_file           = $g_absolute_path."bugnote_inc.php";

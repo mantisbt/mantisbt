@@ -57,6 +57,7 @@ Mantis ChangeLog
  * Fixed problem in manage_proj_update.php which gave a warning when editing projects with empty upload file paths.
  * Fixed problem with ambiguous column names in queries when using the text search or applying filters
  * Fixed problem with print_assign_to_option_list() not selecting the current user.
+ * Fixed security hole in config_defaults_inc.php (reported by Andrew Johnson)
  * Fixed security hole in summary_graph_functions.php (Joao Gouveia: tharbad@kaotik.org)
  * Improved the behaviour of sorting the tables of users and projects in 'Manage'.
  * In the view bugs, when all projects is selected the project name is now displayed in smaller font over the category.
