@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.117 2004-08-04 02:47:44 thraxisp Exp $
+	# $Id: html_api.php,v 1.118 2004-08-05 01:25:09 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -944,7 +944,8 @@
 			# html_button_bug_create_child( $p_bug_id );
 		 
 			PRINT '</td>';
-		} else {
+		} 
+		if ( $t_resolved <= $t_status ) { # resolved is not the same as readonly
 			PRINT '<td>';
 			# REOPEN button
 			html_button_bug_reopen( $p_bug_id );
