@@ -11,14 +11,15 @@
 	check_access( MANAGER );
 	$f_version 		= urldecode( $f_version );
 	$f_orig_version = urldecode( $f_orig_version );
+	$f_date_order = urldecode( $f_date_order );
 
 	$result = 0;
 	$query = "";
-	### check for duplicate
-	if ( !is_duplicate_version( $f_version, $f_project_id ) ) {
-		### update version
+	# check for duplicate
+	if ( !is_duplicate_version( $f_version, $f_project_id, $f_date_order ) ) {
+		# update version
 		$query = "UPDATE $g_mantis_project_version_table
-				SET version='$f_version'
+				SET version='$f_version', date_order='$f_date_order'
 				WHERE version='$f_orig_version' AND project_id='$f_project_id'";
 		$result = db_query( $query );
 
@@ -28,7 +29,7 @@
 	   	$result = db_query( $query );
 	   	$bug_count = db_num_rows( $result );
 
-		### update version
+		# update version
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
 
@@ -65,7 +66,7 @@
 <?
 	if ( $result ) {				### SUCCESS
 		PRINT "$s_version_updated_msg<p>";
-	} else if ( is_duplicate_version( $f_version, $f_project_id )) {
+	} else if ( is_duplicate_version( $f_version, $f_project_id, $f_date_order )) {
 		PRINT "$s_duplicate_version<p>";
 	} else {						### FAILURE
 		print_sql_error( $query );

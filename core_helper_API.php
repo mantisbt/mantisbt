@@ -44,13 +44,14 @@
 	### --------------------
 	# checks to see if the version is a duplicate
 	# we do it this way because each different project can have the same category names
-	function is_duplicate_version( $p_version, $p_project_id ) {
+	function is_duplicate_version( $p_version, $p_project_id, $p_date_order='0' ) {
 		global $g_mantis_project_version_table;
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_version_table
 				WHERE project_id='$p_project_id' AND
-					version='$p_version'";
+					version='$p_version' AND
+					date_order='$p_date_order'";
 		$result = db_query( $query );
 		$version_count =  db_result( $result, 0, 0 );
 		if ( $version_count > 0 ) {

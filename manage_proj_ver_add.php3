@@ -16,9 +16,9 @@
 		### insert version
 		$query = "INSERT
 				INTO $g_mantis_project_version_table
-				( project_id, version )
+				( project_id, version, date_order )
 				VALUES
-				( '$f_project_id', '$f_version' )";
+				( '$f_project_id', '$f_version', NOW() )";
 		$result = db_query( $query );
 	}
 ?>

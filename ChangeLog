@@ -1,19 +1,22 @@
 Mantis
 
-01.01.2001  -   0.17.0
+01.06.2002  -   0.17.0
 
  * Fixed poential problems with proxies and HTTP_REFERER not being properly sent.
  * Fixed bugnote editing to be unavailable when bug is resolved or closed.
+ * Fixed viewing bugs to automatically switch projects if you view a bug from another project (often done through a link).
  * Modified many files for extensive use of CSS.
  * Modified BLOB field to LONGBLOB.
  * Added view by page feature.
  * Added edit new link in news update page.
  * Added file upload into database.
  * Added a link to Mantis at the bottom of the pages.
+ * Added support for date_order field for version.
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Renamed g_store_file_to to g_file_upload_method.
  * Modified bug action buttons to be more consistent.
+ * Modified version string to be longer.
 
 12.01.2001  -   0.16.1
 

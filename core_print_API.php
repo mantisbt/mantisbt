@@ -372,7 +372,7 @@
 		$query = "SELECT *
 				FROM $g_mantis_project_version_table
 				WHERE project_id='$g_project_cookie_val'
-				ORDER BY version DESC";
+				ORDER BY date_order DESC";
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
 		for ($i=0;$i<$version_count;$i++) {

@@ -25,7 +25,7 @@
 
 <p>
 <div align="center">
-<table class="width50" cellspacing="0">
+<table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<? echo $s_edit_project_version_title ?>
@@ -35,8 +35,21 @@
 	<form method="post" action="<? echo $g_manage_project_version_update ?>">
 	<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
 	<input type="hidden" name="f_orig_version" value="<? echo $f_version ?>">
-	<td class="center" colspan="2">
-		<input type="text" name="f_version" size="32" maxlength="32" value="<? echo urldecode( $f_version ) ?>">
+	<td class="category">
+		<? # @@@ localize ?>
+		Version
+	</td>
+	<td>
+		<input type="text" name="f_version" size="32" maxlength="64" value="<? echo urldecode( $f_version ) ?>">
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? # @@@ localize ?>
+		Date Order
+	</td>
+	<td>
+		<input type="text" name="f_date_order" size="32" value="<? echo urldecode( $f_date_order ) ?>">
 	</td>
 </tr>
 <tr>
