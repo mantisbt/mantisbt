@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.6 2002-08-26 22:38:24 jfitzell Exp $
+	# $Id: error_api.php,v 1.7 2002-09-03 01:01:23 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -73,14 +73,11 @@
 		}
 
 		if ( 'halt' == $t_method ) {
-			# clear the output buffer so we can start from scratch
-			ob_end_clean();
-
 			print_page_top1();
 			print_page_top2a();
 
 			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
-			
+
 			# @@@ temp until we get parameterized errors
 			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
 				echo $g_error_parameters[$i].'<br />';
@@ -146,7 +143,7 @@
 	function error_print_stack_trace() {
 		if ( extension_loaded( 'xdebug' ) ) { #check for xdebug presence
 			$t_stack = xdebug_get_function_stack();
-			
+
 			# reverse the array in a separate line of code so the
 			#  array_reverse() call doesn't appear in the stack
 			$t_stack = array_reverse( $t_stack );
