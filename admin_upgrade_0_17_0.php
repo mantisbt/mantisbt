@@ -52,6 +52,8 @@
 	$upgrade_obj->AddItem( "ALTER TABLE mantis_bug_table CHANGE category category VARCHAR(64) NOT NULL" );
 	$upgrade_obj->AddItem( "ALTER TABLE mantis_bug_table CHANGE version version VARCHAR(64) NOT NULL" );
 
+	$upgrade_obj->AddItem( "ALTER TABLE mantis_user_pref_table ADD project_id INT(7) UNSIGNED ZEROFILL NOT NULL AFTER user_id" );
+
 	$upgrade_obj->AddItem( "CREATE TABLE mantis_bug_relationship_table (
 							source_bug_id int(7) unsigned zerofill NOT NULL default '0000000',
 							destination_bug_id int(7) unsigned zerofill NOT NULL default '0000000',
