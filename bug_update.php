@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.57 2003-04-04 00:02:58 vboctor Exp $
+	# $Id: bug_update.php,v 1.58 2003-04-17 05:48:59 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -62,9 +62,6 @@
 		$t_bug_data->status = ASSIGNED;
 	}
 
-	# Update the bug entry
-	bug_update( $f_bug_id, $t_bug_data, true );
-
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		# Do not set custom field value if user has no write access.
@@ -83,6 +80,9 @@
 	if ( !is_blank( $f_bugnote_text ) ) {
 		bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
 	}
+
+	# Update the bug entry
+	bug_update( $f_bug_id, $t_bug_data, true );
 
 	print_successful_redirect_to_bug( $f_bug_id );
 ?>
