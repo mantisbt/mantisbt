@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: user_api.php,v 1.3 2002-08-25 15:34:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -703,18 +703,25 @@
 	# --------------------
 	# Returns the specified field of the currently logged in user, otherwise 0
 	function get_current_user_pref_field( $p_field_name ) {
-		global 	$g_string_cookie_val, $g_mantis_user_pref_table;
+		global 	$g_string_cookie_val, $g_mantis_user_pref_table, $g_cache_user_pref;
 
 		# if logged in
 		if ( isset( $g_string_cookie_val ) ) {
-
 			$t_id = get_current_user_field( 'id' );
-			# get user info
-			$query = "SELECT $p_field_name
-					FROM $g_mantis_user_pref_table
-					WHERE user_id='$t_id'";
-			$result = db_query( $query );
-			return db_result( $result, 0 );
+
+			if ( !isset( $g_cache_user_pref[$t_id] ) ) {
+				# get user info
+				$query = "SELECT *
+						FROM $g_mantis_user_pref_table
+						WHERE user_id='$t_id'";
+				$result = db_query( $query );
+				$row = db_fetch_array( $result );
+				if ( false === $row ) {
+					return 0;
+				}
+				$g_cache_user_pref[$t_id] = $row;
+			}
+			return ( $g_user_pref[$t_id][$p_field_name] );
 		} else {
 			return 0;
 		}
