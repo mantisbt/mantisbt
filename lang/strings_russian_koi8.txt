@@ -8,7 +8,7 @@
 ?>
 <?php
 	# Charset
-	$s_charset = 'koi8';
+	$s_charset = 'koi8-r';
 
 	# new strings:
 	$s_all_projects = 'Все проекты';

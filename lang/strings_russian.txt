@@ -9,7 +9,7 @@
 ?>
 <?php
 	# Charset
-	$s_charset = 'iso-8859-5';
+	$s_charset = 'Windows-1251';
 
 	# new strings:
 	$s_all_projects = 'Все проекты';
