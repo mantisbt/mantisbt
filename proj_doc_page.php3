@@ -26,17 +26,19 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
 
-<? print_doc_menu( $g_proj_doc_page ) ?>
+
 
 <p>
 <div align="center">
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
+	<td class="form-title">
 		<? echo $s_project_documentation_title ?>
+	</td>
+	<td class="right">
+		<? print_doc_menu( $g_proj_doc_page ) ?>
 	</td>
 </tr>
 <?

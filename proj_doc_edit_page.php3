@@ -30,62 +30,56 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
-
-<? print_doc_menu() ?>
 
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_proj_doc_update ?>">
 <input type="hidden" name="f_id" value="<? echo $f_id ?>">
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="1">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%" bgcolor="<? echo $g_white_color ?>">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? $s_upload_file_title ?></b>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" width="15%" bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_title ?></b>
-		</td>
-		<td width="85%" bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="text" name="f_title" size="70" maxlength="250" value="<? echo $v_title ?>">
-		</td>
-	</tr>
-	<tr>
-		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_description ?></b>
-		</td>
-		<td bgcolor="<? echo $g_primary_color_light ?>">
-			<textarea name="f_description" cols="60" rows="7" wrap="virtual"><? echo $v_description ?></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_filename ?></b>
-		</td>
-		<td bgcolor="<? echo $g_primary_color_light ?>">
-			<? echo $v_filename ?>
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			<input type="submit" value="<? echo $s_file_update_button ?>">
-		</td>
-		</form>
-		<form method="post" action="<? echo $g_proj_doc_delete_page ?>">
-		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-		<td align="right">
-			<input type="submit" value="<? echo $s_file_delete_button ?>">
-		</td>
-		</form>
-	</tr>
-	</table>
+	<td class="form-title">
+		<? echo $s_upload_file_title ?>
 	</td>
+	<td class="right">
+		<? print_doc_menu() ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category" width="20%">
+		<? echo $s_title ?>
+	</td>
+	<td width="80%">
+		<input type="text" name="f_title" size="70" maxlength="250" value="<? echo $v_title ?>">
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_description ?>
+	</td>
+	<td>
+		<textarea name="f_description" cols="60" rows="7" wrap="virtual"><? echo $v_description ?></textarea>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_filename ?>
+	</td>
+	<td>
+		<? echo $v_filename ?>
+	</td>
+</tr>
+<tr>
+	<td class="left">
+		<input type="submit" value="<? echo $s_file_update_button ?>">
+	</td>
+	</form>
+	<form method="post" action="<? echo $g_proj_doc_delete_page ?>">
+	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<td class="right">
+		<input type="submit" value="<? echo $s_file_delete_button ?>">
+	</td>
+	</form>
 </tr>
 </table>
 </form>

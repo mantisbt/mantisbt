@@ -320,13 +320,11 @@
 			case $t_proj_doc_add_page	: $t_proj_doc_add_page	= ""; break;
 		}
 
-		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $t_documentation_html, $s_user_documentation );
-			print_bracket_link( $t_proj_doc_page, $s_project_documentation );
-			if (( $g_allow_file_upload==1 )&&( access_level_check_greater_or_equal( MANAGER ) )) {
-				print_bracket_link( $t_proj_doc_add_page, $s_add_file );
-			}
-		PRINT "</div>";
+		print_bracket_link( $t_documentation_html, $s_user_documentation );
+		print_bracket_link( $t_proj_doc_page, $s_project_documentation );
+		if (( $g_allow_file_upload==1 )&&( access_level_check_greater_or_equal( MANAGER ) )) {
+			print_bracket_link( $t_proj_doc_add_page, $s_add_file );
+		}
 	}
 	### --------------------
 	# prints the manage doc menu

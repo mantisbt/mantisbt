@@ -27,89 +27,82 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
 
 <? print_manage_menu() ?>
 
 <p>
 <div align="center">
-<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width50" cellspacing="1">
+<form method="post" action="<? echo $g_manage_user_update ?>">
+<input type="hidden" name="f_id" value="<? echo $u_id ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<form method="post" action="<? echo $g_manage_user_update ?>">
-	<input type="hidden" name="f_id" value="<? echo $u_id ?>">
-	<tr>
-		<td colspan="3" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_edit_user_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_username ?>:
-		</td>
-		<td colspan="2">
-			<input type="text" size="16" maxlength="32" name="f_username" value="<? echo $u_username ?>">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_email ?>:
-		</td>
-		<td colspan="2">
-			<input type="text" size="32" maxlength="64" name="f_email" value="<? echo $u_email ?>">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_access_level ?>:
-		</td>
-		<td colspan="2">
-			<select name="f_access_level">
-				<? print_enum_string_option_list( $s_access_levels_enum_string, $u_access_level ) ?>
-			</select>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_enabled ?>
-		</td>
-		<td colspan="2">
-			<input type="checkbox" name="f_enabled" <? if ( $u_enabled==1 ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_protected ?>
-		</td>
-		<td colspan="2">
-			<input type="checkbox" name="f_protected" <? if ( $u_protected==1 ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr align="center">
-		<td>
-			<input type="submit" value="<? echo $s_update_user_button ?>">
-		</td>
-		</form>
-		<form method="post" action="<? echo $g_manage_user_reset ?>">
-		<td>
-			<input type="hidden" name="f_id" value="<? echo $u_id ?>">
-			<input type="hidden" name="f_email" value="<? echo $u_email ?>">
-			<input type="hidden" name="f_protected" value="<? echo $u_protected ?>">
-			<input type="submit" value="<? echo $s_reset_password_button ?>">
-		</td>
-		</form>
-		<form method="post" action="<? echo $g_manage_user_delete_page ?>">
-		<td>
-			<input type="hidden" name="f_id" value="<? echo $u_id ?>">
-			<input type="hidden" name="f_protected" value="<? echo $u_protected ?>">
-			<input type="submit" value="<? echo $s_delete_user_button ?>">
-		</td>
-		</form>
-	</tr>
-	</table>
+	<td class="form-title" colspan="3">
+		<? echo $s_edit_user_title ?>
 	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_username ?>:
+	</td>
+	<td colspan="2">
+		<input type="text" size="16" maxlength="32" name="f_username" value="<? echo $u_username ?>">
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_email ?>:
+	</td>
+	<td colspan="2">
+		<input type="text" size="32" maxlength="64" name="f_email" value="<? echo $u_email ?>">
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_access_level ?>:
+	</td>
+	<td colspan="2">
+		<select name="f_access_level">
+			<? print_enum_string_option_list( $s_access_levels_enum_string, $u_access_level ) ?>
+		</select>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_enabled ?>
+	</td>
+	<td colspan="2">
+		<input type="checkbox" name="f_enabled" <? if ( $u_enabled==1 ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_protected ?>
+	</td>
+	<td colspan="2">
+		<input type="checkbox" name="f_protected" <? if ( $u_protected==1 ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr>
+	<td class="center">
+		<input type="submit" value="<? echo $s_update_user_button ?>">
+	</td>
+</form>
+	<form method="post" action="<? echo $g_manage_user_reset ?>">
+	<td class="center">
+		<input type="hidden" name="f_id" value="<? echo $u_id ?>">
+		<input type="hidden" name="f_email" value="<? echo $u_email ?>">
+		<input type="hidden" name="f_protected" value="<? echo $u_protected ?>">
+		<input type="submit" value="<? echo $s_reset_password_button ?>">
+	</td>
+	</form>
+	<form method="post" action="<? echo $g_manage_user_delete_page ?>">
+	<td class="center">
+		<input type="hidden" name="f_id" value="<? echo $u_id ?>">
+		<input type="hidden" name="f_protected" value="<? echo $u_protected ?>">
+		<input type="submit" value="<? echo $s_delete_user_button ?>">
+	</td>
+	</form>
 </tr>
 </table>
 </div>

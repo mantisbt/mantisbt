@@ -19,22 +19,23 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
 
-<? print_doc_menu( $g_proj_doc_add_page ) ?>
 
 <p>
 <div align="center">
-<table class="width75" cellspacing="0">
+<table class="width75" cellspacing="1">
 <form method="post" enctype="multipart/form-data" action="<? echo $g_proj_doc_add ?>">
 <tr>
-	<td class="form-title" colspan="2">
+	<td class="form-title">
 		<? echo $s_upload_file_title ?>
+	</td>
+	<td class="right">
+		<? print_doc_menu( $g_proj_doc_add_page ) ?>
 	</td>
 </tr>
 <tr class="row-1">
-	<td width="25%">
+	<td class="category" width="25%">
 		<? echo $s_title ?>
 	</td>
 	<td width="75%">
@@ -42,7 +43,7 @@
 	</td>
 </tr>
 <tr class="row-2">
-	<td>
+	<td class="category">
 		<? echo $s_description ?>
 	</td>
 	<td>
@@ -50,7 +51,7 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td>
+	<td class="category">
 		<? echo $s_select_file ?>
 	</td>
 	<td>

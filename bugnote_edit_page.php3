@@ -22,6 +22,20 @@
 	$f_bugnote_text = db_result( $result, 0, 0 );
 
 	$f_bugnote_text = string_edit_textarea( $f_bugnote_text );
+
+	switch ( $g_show_view ) {
+		case 0:	if ( get_current_user_pref_field( "advanced_view" )==1 ) {
+					$t_redirect_url = $g_view_bug_page;
+				} else {
+					$t_redirect_url = $g_view_bug_advanced_page;
+				}
+				break;
+		case 1:	$t_redirect_url = $g_view_bug_page;
+				break;
+		case 2:	$t_redirect_url = $g_view_bug_advanced_page;
+				break;
+	}
+	$t_redirect_url = $t_redirect_url."?f_id=".$f_id;
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -32,34 +46,30 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
 <div align="center">
-<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="0">
 <form method="post" action="<? echo $g_bugnote_update ?>">
 <input type="hidden" name="f_id" value="<? echo $f_id ?>">
 <input type="hidden" name="f_bugnote_text_id" value="<? echo $f_bugnote_text_id ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_edit_bugnote_title ?></b>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" bgcolor="<? echo $g_primary_color_dark ?>">
-			<textarea cols="80" rows="10" name="f_bugnote_text" wrap="virtual"><? echo $f_bugnote_text ?></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" colspan="6" bgcolor="<? echo $g_white_color ?>">
-			<input type="submit" value="<? echo $s_update_information_button ?>">
-		</td>
-	</tr>
-	</table>
+	<td class="form-title">
+		<? echo $s_edit_bugnote_title ?>
+	</td>
+	<td class="right">
+		<? print_bracket_link( $t_redirect_url, $s_go_back ) ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="center" colspan="2">
+		<textarea cols="80" rows="10" name="f_bugnote_text" wrap="virtual"><? echo $f_bugnote_text ?></textarea>
+	</td>
+</tr>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<? echo $s_update_information_button ?>">
 	</td>
 </tr>
 </form>
@@ -70,4 +80,3 @@
 <? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>
-
