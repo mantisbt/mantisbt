@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.82 $
+	# $Revision: 1.83 $
 	# $Author: jlatour $
-	# $Date: 2004-02-05 15:10:44 $
+	# $Date: 2004-02-08 15:56:35 $
 	#
-	# $Id: strings_german.txt,v 1.82 2004-02-05 15:10:44 jlatour Exp $
+	# $Id: strings_german.txt,v 1.83 2004-02-08 15:56:35 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -817,7 +817,8 @@ $s_viewing_bug_advanced_details_title = 'Erweiterte Fehler-Anzeige';
 $s_product_build = 'Produkt-Version';
 $s_system_profile = 'System-Beschreibung';
 $s_update_bug_button = 'Fehler aktualisieren';
-$s_bug_assign_button = 'Mir zuordnen';
+$s_bug_assign_button = 'mir zuordnen';
+$s_bug_assign_reporter_button = 'Reporter zuordnen';
 $s_reopen_bug_button = 'Fehler wiedereröffnen';
 $s_attached_files = 'Angehängte Dateien';
 $s_publish = 'Publizieren';

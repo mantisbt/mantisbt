@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.82 2004-02-08 13:16:57 vboctor Exp $
+	# $Id: html_api.php,v 1.83 2004-02-08 15:56:35 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -628,6 +628,21 @@
 	}
 
 	# --------------------
+	# Print a button to assign the given bug back to the reporter
+	function html_button_bug_assign_reporter( $p_bug_id ) {
+		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
+			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+			$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
+
+			if ( $t_reporter_id != $t_handler_id ) {
+				html_button( 'bug_assign_reporter.php',
+							 lang_get( 'bug_assign_reporter_button' ), 
+							 array( 'bug_id' => $p_bug_id ) );
+			}
+		}
+	}
+
+	# --------------------
 	# Print a button to resolve the given bug
 	function html_button_bug_resolve( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
@@ -705,6 +720,11 @@
 
 			# ASSIGN button
 			html_button_bug_assign( $p_bug_id );
+
+			echo '</td><td>';
+
+			# ASSIGN TO REPORTER button
+			html_button_bug_assign_reporter( $p_bug_id );
 
 			echo '</td><td>';
 
