@@ -11,7 +11,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-	check_access( UPDATER );
+	check_access( REPORTER );
 
 	$f_bugnote_text = $f_bugnote_text."\n\n";
 	$f_bugnote_text = $f_bugnote_text.$s_edited_on.date( $g_normal_date_format );
