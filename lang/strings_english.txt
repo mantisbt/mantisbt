@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.149 $
-	# $Author: vboctor $
-	# $Date: 2004-02-08 21:26:45 $
+	# $Revision: 1.150 $
+	# $Author: jlatour $
+	# $Date: 2004-02-10 11:07:48 $
 	#
-	# $Id: strings_english.txt,v 1.149 2004-02-08 21:26:45 vboctor Exp $
+	# $Id: strings_english.txt,v 1.150 2004-02-10 11:07:48 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -774,22 +774,22 @@ $s_site_settings_updated_msg = 'Site settings have been updated';
 # summary_page.php
 $s_summary_title = 'Summary';
 $s_summary_jpgraph_link = 'Advanced summary';
-$s_by_project = 'by project';
-$s_by_status = 'by status';
-$s_by_date = 'by date (days)';
-$s_by_severity = 'by severity';
-$s_by_resolution = 'by resolution';
-$s_by_category = 'by category';
-$s_by_priority = 'by priority';
-$s_by_developer = 'by developer';
-$s_by_reporter = 'by reporter';
-$s_time_stats = 'time stats for resolved bugs(days)';
-$s_longest_open_bug = 'longest open bug';
-$s_longest_open = 'longest open';
-$s_average_time = 'average time';
-$s_total_time = 'total time';
-$s_developer_stats = 'developer stats';
-$s_reporter_stats = 'reporter stats';
+$s_by_project = 'By Project';
+$s_by_status = 'By Status';
+$s_by_date = 'By Date (days)';
+$s_by_severity = 'By Severity';
+$s_by_resolution = 'By Resolution';
+$s_by_category = 'By Category';
+$s_by_priority = 'By Priority';
+$s_by_developer = 'By Developer';
+$s_by_reporter = 'By Reporter';
+$s_time_stats = 'Time Stats For Resolved Bugs (days)';
+$s_longest_open_bug = 'Longest open bug';
+$s_longest_open = 'Longest open';
+$s_average_time = 'Average time';
+$s_total_time = 'Total time';
+$s_developer_stats = 'Developer Stats';
+$s_reporter_stats = 'Reporter Stats';
 $s_orct = '(open/resolved/closed/total)';
 
 # view_all_bug_page.php

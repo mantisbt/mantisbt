@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.35 2004-02-10 10:39:17 jlatour Exp $
+	# $Id: summary_page.php,v 1.36 2004-02-10 11:07:47 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -97,7 +97,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
-				<?php echo ucwords( lang_get( 'by_project' ) ) ?>
+				<?php echo lang_get( 'by_project' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
@@ -111,7 +111,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
-				<?php echo ucwords( lang_get( 'by_status' ) ) ?>
+				<?php echo lang_get( 'by_status' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
@@ -124,7 +124,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
-				<?php echo ucwords( lang_get( 'by_severity' ) ) ?>
+				<?php echo lang_get( 'by_severity' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
@@ -137,7 +137,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
-				<?php echo ucwords( lang_get( 'by_category' ) ) ?>
+				<?php echo lang_get( 'by_category' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
@@ -150,7 +150,7 @@
 		<table class="width100">
 		<tr>
 			<td class="form-title" colspan="5">
-				<?php echo ucwords( lang_get( 'time_stats' ) ) ?>
+				<?php echo lang_get( 'time_stats' ) ?>
 			</td>
 		</tr>
 		<tr class="row-1">
@@ -197,7 +197,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
-				<?php echo ucwords( lang_get( 'developer_stats' ) ) ?>
+				<?php echo lang_get( 'developer_stats' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
@@ -212,7 +212,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="5">
-				<?php echo ucwords( lang_get( 'by_date' ) ) ?>
+				<?php echo lang_get( 'by_date' ) ?>
 			</td>
 		</tr>
 		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
@@ -224,7 +224,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
-				<?php echo ucwords( lang_get( 'by_resolution' ) ) ?>
+				<?php echo lang_get( 'by_resolution' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
@@ -237,7 +237,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
-				<?php echo ucwords( lang_get( 'by_priority' ) ) ?>
+				<?php echo lang_get( 'by_priority' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
@@ -250,7 +250,7 @@
 		<table class="width100" cellspacing="1">
 		<tr>
 			<td class="form-title" colspan="1">
-				<?php echo ucwords( lang_get( 'reporter_stats' ) ) ?>
+				<?php echo lang_get( 'reporter_stats' ) ?>
 			</td>
 			<?php echo $t_orcttab ?>
 		</tr>
