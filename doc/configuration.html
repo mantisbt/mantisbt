@@ -1113,7 +1113,23 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_ldap_server
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		See <a href="README.LDAP">README.LDAP</a>
+		Specify the URL to the LDAP server, including the type (LDAP:// or LDAPS://):
+		<ul>
+			<li>"ldaps://ldap.example.com/" - SSL access</li>
+			<li>"ldap://ldap.example.com/" - Standard access</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_port
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Specify the Port for accessing the LDAP server:
+		<UL>
+			<LI>"636" - SSL LDAP Port</LI>
+			<LI>"389" - Standard LDAP Port</LI>
+		</UL>
 	</td>
 </tr>
 <tr>
@@ -1121,7 +1137,34 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_ldap_root_dn
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		See <a href="README.LDAP">README.LDAP</a>
+		Specify the DN in the LDAP tree to set as the Root to query from:
+		<UL>
+			<LI>"dc=example, dc=com"</LI>
+		</UL>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_bind_dn
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Specify the user to bind to the Directory with if anonymous bind cannot be used.<br \>
+		Used in conjunction with $g_ldap_bind_passwd
+		<ul>
+			<li>"cn=Manager, dc=example, dc=com"</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_bind_passwd
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Specify the password to bind to the Directory with if anonymous bind cannot be used.<br \>
+		Used in conjunction with $g_ldap_bind_dn
+		<ul>
+			<li>"secret"</li>
+		</ul>
 	</td>
 </tr>
 <tr>
@@ -1129,7 +1172,12 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_ldap_organization
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		See <a href="README.LDAP">README.LDAP</a>
+		Optional.  Limit the LDAP search results to a particular organization.  This string
+		should be in the format of the example below.  If this is used, only LDAP entries 
+		that have an organizationname attribute that matches this filter will be able to authenticate.
+		<ul>
+			<li>"(organizationname=*Example)"</li>
+		</ul>
 	</td>
 </tr>
 <tr>
@@ -1137,12 +1185,14 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_use_ldap_email
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		See <a href="README.LDAP">README.LDAP</a>
+		Use the email address in LDAP for sending emails to the authenticated user.
 	</td>
 </tr>
 <tr>
 	<td colspan="2" bgcolor="#eeeeee">
-		LDAP authentication method.
+		LDAP authentication method.  
+		Don't forget to change your $g_login_method to $g_login_method = LDAP;.<br />
+		For more information see <a href="README.LDAP">README.LDAP</a>.
 	</td>
 </tr>
 </table>
@@ -1179,11 +1229,12 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 	<td width="80%" bgcolor="#ffffff">
 		<ul>
-			<li>PLAIN
-			<li>CRYPT
-			<li>CRYPT_FULL_SALT
-			<li>MD5
-			<li>BASIC_AUTH
+			<li>PLAIN</li>
+			<li>CRYPT</li>
+			<li>CRYPT_FULL_SALT</li>
+			<li>MD5</li>
+			<li>BASIC_AUTH</li>
+			<li>LDAP</li>
 		</ul>
 		Some systems (mostly non-unix) do not have crypt support in PHP.  MD5 will accomplish almost the same thing.  PLAIN is plain text and there is no attempt to secure the password in the database.  You will not be able to easily convert between encryption methods so this needs to be chosen at install time.  CRYPT was the default until 0.17.0; MD5 is now the default.  Try CRYPT_FULL_SALT if CRYPT is not working.
 	</td>
