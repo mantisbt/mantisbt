@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.93 2005-03-24 02:55:23 thraxisp Exp $
+	# $Id: filter_api.php,v 1.94 2005-04-01 02:43:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1200,7 +1200,9 @@
 				<a href="<?php PRINT $t_filters_url . 'show_status[]'; ?>" id="show_status_filter"><?php PRINT lang_get( 'status' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'hide_status[]'; ?>" id="hide_status_filter"><?php PRINT lang_get( 'hide_status' ) ?>:</a>
+				<?php if ( 'simple' == $t_view_type ) { ?>
+					<a href="<?php PRINT $t_filters_url . 'hide_status[]'; ?>" id="hide_status_filter"><?php PRINT lang_get( 'hide_status' ) ?>:</a>
+				<?php } ?>
 			</td>
 			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_build[]'; ?>" id="show_build_filter"><?php PRINT lang_get( 'product_build' ) ?>:</a>
@@ -1261,37 +1263,39 @@
 			</td>
 			<td class="small-caption" valign="top" id="hide_status_filter_target">
 							<?php
-								$t_output = '';
-								$t_none_found = false;
-								if ( count( $t_filter['hide_status'] ) == 0 ) {
-									PRINT lang_get( 'none' );
-								} else {
-									$t_first_flag = true;
-									foreach( $t_filter['hide_status'] as $t_current ) {
-										?>
-										<input type="hidden" name="hide_status[]" value="<?php echo $t_current;?>" />
-										<?php
-										$t_this_string = '';
-										if ( ( $t_current == META_FILTER_NONE ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
-											$t_none_found = true;
-										} else {
-											$t_this_string = get_enum_element( 'status', $t_current );
-										}
-										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
-										} else {
-											$t_first_flag = false;
-										}
-										$t_output = $t_output . $t_this_string;
-									}
-									$t_hide_status_post = '';
-									if ( count( $t_filter['hide_status'] ) == 1 ) {
-										$t_hide_status_post = ' (' . lang_get( 'and_above' ) . ')';
-									}
-									if ( true == $t_none_found ) {
+								if ( 'simple' == $t_view_type ) { 
+									$t_output = '';
+									$t_none_found = false;
+									if ( count( $t_filter['hide_status'] ) == 0 ) {
 										PRINT lang_get( 'none' );
 									} else {
-										PRINT $t_output . $t_hide_status_post;
+										$t_first_flag = true;
+										foreach( $t_filter['hide_status'] as $t_current ) {
+											?>
+											<input type="hidden" name="hide_status[]" value="<?php echo $t_current;?>" />
+											<?php
+											$t_this_string = '';
+											if ( ( $t_current == META_FILTER_NONE ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+												$t_none_found = true;
+											} else {
+												$t_this_string = get_enum_element( 'status', $t_current );
+											}
+											if ( $t_first_flag != true ) {
+												$t_output = $t_output . '<br>';
+											} else {
+												$t_first_flag = false;
+											}
+											$t_output = $t_output . $t_this_string;
+										}
+										$t_hide_status_post = '';
+										if ( count( $t_filter['hide_status'] ) == 1 ) {
+											$t_hide_status_post = ' (' . lang_get( 'and_above' ) . ')';
+										}
+										if ( true == $t_none_found ) {
+											PRINT lang_get( 'none' );
+										} else {
+											PRINT $t_output . $t_hide_status_post;
+										}
 									}
 								}
 							?>
@@ -1760,7 +1764,11 @@
 			</form>
 			<td class="center">
 				<?php
-					$f_switch_view_link = 'view_filters_page.php?view_type=';
+					if ( ON == config_get( 'dhtml_filters' ) ) {
+						$f_switch_view_link = 'view_all_set.php?type=6&view_type=';
+					} else {
+						$f_switch_view_link = 'view_filters_page.php?view_type=';
+					}					
 
 					if ( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
 						if ( 'advanced' == $t_view_type ) {

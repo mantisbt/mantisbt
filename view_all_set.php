@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.50 2005-03-14 11:41:22 vboctor Exp $
+	# $Id: view_all_set.php,v 1.51 2005-04-01 02:43:15 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -392,6 +392,11 @@
 		# Just set the search string value
 		case '5':
 				$t_setting_arr['search'] = $f_search;
+
+				break;
+		# Just set the view_state (simple / advanced) value
+		case '6':
+				$t_setting_arr['_view_type'] = $f_view_type;
 
 				break;
 		# does nothing. catch all case
