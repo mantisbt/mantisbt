@@ -15,8 +15,8 @@
 	function bug_date_update( $p_bug_id ) {
 		global $g_mantis_bug_table;
 
-		$query = "UPDATE last_updated
-				FROM $g_mantis_bug_table
+		$query = "UPDATE $g_mantis_bug_table
+				SET last_updated=NOW()
 				WHERE id='$p_bug_id'";
 		$result = db_query( $query );
 	}
@@ -25,8 +25,8 @@
 	function bugnote_date_update( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table;
 
-		$query = "UPDATE last_modified
-				FROM $g_mantis_bugnote_table
+		$query = "UPDATE $g_mantis_bugnote_table
+				SET last_modified=NOW()
 				WHERE id='$p_bugnote_id'";
 		$result = db_query( $query );
 	}
