@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.57 2003-01-18 02:14:11 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.58 2003-01-18 08:43:47 int2str Exp $
 	# --------------------------------------------------------
 
 	
@@ -137,7 +137,7 @@
 									'monitor'	=> ON,
 									'admin'		=> ON,
 									'bugnotes'	=> ON,
-									'threshold'	=> DEVELOPER);
+									'threshold'	=> NOBODY);
 
 	# Following is the definition of the differences between the "new" action and the default.
 	# In case you need to override the threshold for the new action in custom_config_inc.php, use:
