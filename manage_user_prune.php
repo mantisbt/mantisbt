@@ -9,7 +9,7 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( ADMINISTRATOR );
-
+	
 	# Delete the users who have never logged in and are older than 1 week
 	$days_old = 7;
 	$days_old = (integer)$days_old;
@@ -18,7 +18,14 @@
 			WHERE login_count=0 AND TO_DAYS(NOW()) - '$days_old' > TO_DAYS(date_created)";
 	$result = db_query($query);
 
-	for ($i=0; $i < db_num_rows( $result ); $i++) {
+	$count = db_num_rows( $result );
+
+	if ( $count > 0 ) {
+		helper_ensure_confirmed( lang_get( 'confirm_account_pruning' ),
+								 lang_get( 'prune_accounts_button' ) );
+	}
+
+	for ($i=0; $i < $count; $i++) {
 		$row = db_fetch_array( $result );
 		user_delete($row['id']);
 	}

@@ -107,7 +107,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<?php echo lang_get( 'never_logged_in_title' ) ?> [<?php echo $user_count ?>] <?php print_bracket_link( 'manage_prune.php', lang_get( 'prune_accounts' ) ) ?>
+		<?php echo lang_get( 'never_logged_in_title' ) ?> [<?php echo $user_count ?>] <?php print_bracket_link( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ) ?>
 	</td>
 </tr>
 <tr class="row-2">

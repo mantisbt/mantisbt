@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.107 $
-	# $Author: beerfrick $
-	# $Date: 2003-01-29 22:19:08 $
+	# $Revision: 1.108 $
+	# $Author: jfitzell $
+	# $Date: 2003-01-30 07:16:38 $
 	#
-	# $Id: strings_english.txt,v 1.107 2003-01-29 22:19:08 beerfrick Exp $
+	# $Id: strings_english.txt,v 1.108 2003-01-30 07:16:38 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -583,8 +583,10 @@
 	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = 'Are you sure you wish to delete this account?';
 
-	# manage_prune.php
+	# manage_user_prune.php
 	$s_accounts_pruned_msg = 'All accounts that have never logged in and are older than 1 week have been removed';
+	$s_prune_accounts_button = 'Prune';
+	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 	# manage_user_page.php
 	$s_edit_user_title = 'Edit User';
