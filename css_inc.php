@@ -12,7 +12,7 @@
 			$g_font_small, $g_font_normal, $g_font_large;
 ?>
 <style type="text/css">
-body 				{ background-color: <?php echo $g_background_color ?>; font-family:Verdana, Arial; font-size: <?php echo $g_font_normal ?>; margin: 0px; margin-top: 6px; margin-bottom: 6px; }
+body 				{ background-color: <?php echo $g_background_color ?>; font-family:Verdana, Arial; font-size: <?php echo $g_font_normal ?>; margin: 1px; margin-top: 6px; margin-bottom: 6px; }
 p 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?> }
 p.center			{ text-align: center }
 address 			{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_small ?> }
