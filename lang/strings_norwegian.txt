@@ -8,12 +8,13 @@
 	# Norwegian: Espen Holje, eh@escio.no
 	# Norwegian: Morten Lunde, morten.lunde@observer.no
 	# Norwegian: Ingvald Skaug, dev@skaug.no
+	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.58 $
+	# $Revision: 1.59 $
 	# $Author: jlatour $
-	# $Date: 2004-02-12 11:31:20 $
+	# $Date: 2004-02-12 13:23:54 $
 	#
-	# $Id: strings_norwegian.txt,v 1.58 2004-02-12 11:31:20 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.59 2004-02-12 13:23:54 jlatour Exp $
 	###########################################################################
 ?>
 <?php
