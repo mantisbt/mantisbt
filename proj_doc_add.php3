@@ -11,7 +11,7 @@
 	check_access( REPORTER );
 
 	$result = 0;
-	if ( $f_file != "none" ) {
+	if ( is_uploaded_file( $f_file ) ) {
 		$query = "SELECT file_path
 				FROM $g_mantis_project_table
 				WHERE id='$g_project_cookie_val'";

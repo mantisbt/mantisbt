@@ -14,8 +14,7 @@
 	check_access( REPORTER );
 
 	$result = 0;
-	if ( $f_file != "none" ) {
-
+	if ( is_uploaded_file( $f_file ) ) {
 		### grab the file path
 		$query = "SELECT file_path
 				FROM $g_mantis_project_table
