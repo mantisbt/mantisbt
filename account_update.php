@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.38 2004-08-22 01:19:29 thraxisp Exp $
+	# $Id: account_update.php,v 1.39 2004-11-26 00:14:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,9 +27,9 @@
 	current_user_ensure_unprotected();
 ?>
 <?php
-	$f_email			= htmlentities( gpc_get_string( 'email', '' ) );
-	$f_realname			= htmlentities( gpc_get_string( 'realname', '' ) );
-	$f_password			= gpc_get_string( 'password', '' );
+	$f_email           	= gpc_get_string( 'email', '' );
+	$f_realname        	= gpc_get_string( 'realname', '' );
+	$f_password        	= gpc_get_string( 'password', '' );
 	$f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
 	$f_email = email_append_domain( $f_email );

@@ -1,6 +1,8 @@
 Mantis ChangeLog
 
 2005.01.xx  -  0.19.2
+
+- 0004450: [localization] Real name was changed to "π‹¿Ì‘±" (jlatour)
 - New Config: $g_csv_separator - specify separated to be used in exported csv files (vboctor)
 
 
