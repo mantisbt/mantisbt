@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.48 2003-02-17 13:35:50 jlatour Exp $
+	# $Id: email_api.php,v 1.49 2003-02-17 23:37:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -631,7 +631,7 @@
 		global $g_from_email, $g_enable_email_notification,
 				$g_return_path_email, $g_use_x_priority,
 				$g_use_phpMailer, $g_phpMailer_method, $g_smtp_host,
-				$g_smtp_username, $g_smtp_password;
+				$g_smtp_username, $g_smtp_password, $g_mail_priority;
 
 		# short-circuit if no emails should be sent
 		if ( OFF ==$g_enable_email_notification ) {
