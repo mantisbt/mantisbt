@@ -1,0 +1,615 @@
+<?
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
+?>
+<?
+	# General Strings
+	$s_go_back = "Intoarcere";
+	$s_proceed = "Apasa aici pentru a continua";
+	$s_sql_error_detected = "ERROR: eroare SQL detectata. Eroarea poate fi raportata la ";
+
+	$s_switch = "Schimba";
+	$s_logged_in_as = "Logat ca";
+
+	$s_user_no_longer_exists = "utilizatorul nu mai exista";
+
+	$s_administrator = "administrator";
+
+	# Enum Strings
+	$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
+	$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
+	$s_project_view_state_enum_string = "10:public,50:private";
+
+	$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
+	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
+	$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A";
+	$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
+	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
+	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
+	$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+
+	# Email Strings
+	$s_new_account_subject = "Noul dumneavoastra cont";
+	$s_new_account_greeting = "Bine ati venit pe sistemul de urmarire de buguri. Aceasta este informatia de care aveti nevoie pentru a va autentifica\n\n";
+	$s_new_account_url = "Va puteti conecta pe site aici: ";
+	$s_new_account_username = "Utilizator: ";
+	$s_new_account_password = "Parola: ";
+	$s_new_account_message = "Dupa conectarea pe site va rugam sa va schimbati parola. De remarcat ca parola este stocata cu criptare one way, deci nu poate fi extrasa. Daca o pierdeti, ea va trebui anulata.\n\n";
+	$s_new_account_do_not_reply = "Va rugam sa nu raspundeti la acest mesaj.\n";
+
+	$s_reset_request_msg = "Ati cerut ca parola sa fie anulata".
+	$s_account_name_msg = "Numele de cont este";
+	$s_news_password_msg = "Noua parola este";
+
+	$s_new_bug_msg = "Acest bug NOU a fost ADAUGAT.";
+	$s_email_bugnote_msg = "Un COMENTARIU a fost adaugat acestui bug.";
+	$s_email_resolved_msg = "Acest bug a fost REZOLVAT.";
+	$s_email_close_msg = "Acest bug a fost INCHIS.";
+	$s_email_feedback_msg = "Acest bug necesita FEEDBACK.";
+	$s_email_reopen_msg = "Acest bug a fost REDESCHIS.";
+	$s_email_assigned_msg = "Acest bug a fost ASIGNAT.";
+
+	$s_email_reporter = "Reporter";
+	$s_email_handler = "Tratat de";
+	$s_email_project = "Proiect";
+	$s_email_bug = "ID bug";
+	$s_email_category = "Categorie";
+	$s_email_reproducibility = "Reproductibilitate";
+	$s_email_severity = "Severitate";
+	$s_email_priority = "Prioritate";
+	$s_email_status = "Stare";
+	$s_email_resolution = "Rezolvare";
+	$s_email_duplicate = "Duplicat";
+	$s_email_date_submitted = "Data Creatie";
+	$s_email_last_modified = "Modificat";
+	$s_email_summary =  "Sumar";
+	$s_email_description = "Descriere";
+
+	# account_delete.php3
+	$s_account_protected_msg = "Cont protejat. Nu poate fi modificat...";
+	$s_account_removed_msg = "Contul a fost sters...";
+
+	# account_delete_page.php3
+	$s_confirm_delete_msg = "Sunteti sigur ca doriti sa stergeti contul ?";
+	$s_delete_account_button = "Stergere cont";
+
+	# account_page.php3
+	$s_manage_profiles_link = "Modificare profile";
+	$s_change_preferences_link = "Schimbare preferinte";
+	$s_edit_account_title = "Modificare cont";
+	$s_username = "Utilizator";
+	$s_email = "Email";
+	$s_password = "Parola";
+	$s_confirm_password  = "Confirma parola";
+	$s_access_level = "Nivel de acces";
+	$s_update_user_button = "Modifica";
+
+	# account_prefs_page.php3
+	$s_default_account_preferences_title = "Preferinte implicite";
+	$s_default_project = "Proiect implicit";
+	$s_advanced_report = "Raport avansat";
+	$s_advanced_view = "Vizualizare avansata";
+	$s_advanced_update = "Modificare avansata";
+	$s_refresh_delay = "Interval de refresh";
+	$s_redirect_delay = "Interval de redirectionare";
+	$s_email_on_new = "Email la nou";
+	$s_email_on_assigned = "Email la asignat";
+	$s_email_on_feedback = "Email la feedback";
+	$s_email_on_resolved = "Email la rezolvat";
+	$s_email_on_closed = "Email la inchis";
+	$s_email_on_reopened = "Email la redeschis";
+	$s_email_on_bugnote_added = "Email la adaugare comentariu";
+	$s_email_on_status_change = "Email la schimbare de stare";
+	$s_email_on_priority_change = "Email on schimbare de prioritate";
+	$s_language = "Limba";
+	$s_update_prefs_button = "Modificare";
+	$s_reset_prefs_button = "Reset";
+
+	# account_prefs_reset.php3
+	$s_prefs_reset_msg = "Preferintele au fost resetate...";
+
+	# account_prefs_update.php3
+	$s_prefs_updated_msg = "Preferentele au fost modificate...";
+
+	# account_profile_add.php3
+	$s_profile_added_msg = "Profil adaugat...";
+
+	# account_profile_delete.php3
+	$s_profile_deleted_msg = "Profil sters...";
+
+	# account_profile_edit_page.php3
+	$s_edit_profile_title = "Modifica profil";
+	$s_platform = "Platforma";
+	$s_operating_system = "Sistem de operare";
+	$s_version = "Versiune/Build";
+	$s_additional_description = "Descriere aditionala";
+	$s_update_profile_button = "Modifica profilul";
+
+	# account_profile_make_default.php3
+	$s_profile_defaulted_msg = "Profil implicit modificat...";
+
+	# account_profile_manage_page.php3
+	$s_add_profile_title = "Adauga profilul";
+	$s_add_profile_button = "Adauga profilul";
+	$s_edit_or_delete_profiles_title = "Modifica sau sterge profile";
+	$s_edit_profile = "Modifica profilul";
+	$s_make_default = "Implicit";
+	$s_delete_profile = "Sterge profilul";
+	$s_select_profile = "Select profilul";
+	$s_submit_button = "OK";
+
+	# account_profile_update.php3
+	$s_profile_updated_msg = "Profil modificat...";
+
+	# account_update.php3
+	$s_account_updated_msg = "Contul dumneavoastra a fost modificat cu succes...";
+
+	# bug_assign.php3
+	$s_bug_assign_msg       = "Bug-ul a fost asignat cu succes...";
+
+	# bug_close.php3
+	$s_bug_close_msg       = "Bug-ul a fost inchis...";
+	$s_close_immediately   = "Inchide imediat:";
+
+	# bug_delete.php3
+	$s_bug_deleted_msg = "Bug-ul a fost sters...";
+
+	# bug_delete_page.php3
+	$s_delete_bug_sure_msg = "Sunteti sigur ca doriti sa stergeti acest bug?";
+	$s_delete_bug_button = "Sterge bug-ul";
+
+	# bug_file_add.php3
+	$s_file_upload_msg = "Incarcare de fisier terminata cu succes.";
+
+	# bug_file_upload_inc.php3
+	$s_upload_file = "Incarca fisier";
+	$s_select_file = "Selecteaza fisier";
+	$s_upload_file_button = "Incarca";
+
+	# bug_reopen.php3
+	$s_bug_reopened_msg = "Bug-ul a fost redeschis...";
+	$s_reopen_add_bugnote_title = "Adaugati motivul redeschiderii";
+	$s_bugnote_add_reopen_button = "Adauga comentariu si redeschide";
+
+	# bug_resolve_page.php3
+	$s_resolve_bug_title = "Rezolvare bug";
+	$s_resolve_bug_button = "Rezolvat";
+
+	# bug_resolve_page2.php3
+	$s_bug_resolved_msg = "Bug-ul a fost rezolvat. Adaugati un comentariu...";
+	$s_resolve_add_bugnote_title = "Adaugati un comentariu explicativ pentru rezolvarea bug-ului";
+	$s_bugnote_add_resolve_button = "Adauga comentariu";
+
+	# bug_update.php3
+	$s_bug_updated_msg = "Bug-ul a fost modificat cu succes...";
+
+	# bug_update_advanced_page.php3
+	$s_back_to_bug_link = "Inapoi la bug";
+	$s_update_simple_link = "Modificare simpla";
+	$s_updating_bug_advanced_title = "Modificarea informatiei de bug";
+	$s_id = "ID";
+	$s_category = "Categorie";
+	$s_severity = "Severitare";
+	$s_reproducibility = "Reproductibilitate";
+	$s_date_submitted = "Data creare";
+	$s_last_update = "Modificat la";
+	$s_reporter = "Reporter";
+	$s_assigned_to = "Asignat";
+	$s_priority = "Prioritate";
+	$s_resolution = "Rezolvare";
+	$s_status = "Stare";
+	$s_duplicate_id = "ID duplicat";
+	$s_os = "OS";
+	$s_projection = "Estimare";
+	$s_os_version = "Versiune";
+	$s_eta = "ETA";
+	$s_product_version = "Versiune produs";
+	$s_build = "Build";
+	$s_votes = "Voturi";
+	$s_summary = "Sumar";
+	$s_description = "Descriere";
+	$s_steps_to_reproduce = "Pasi de reprodus";
+	$s_additional = "Aditional";
+	$s_information = "Informatie";
+	$s_update_information_button = "Modifica informatia";
+
+	# bug_update_page.php3
+	$s_update_advanced_link = "Modificare avansata";
+	$s_updating_bug_simple_title = "Modificarea informatiei bug-ului";
+
+	# bug_vote_add.php3
+	$s_vote_added_msg = "Votul a fost adaugat...";
+
+	# bugnote_add.php3
+	$s_bugnote_added_msg = "Comentariu adaugat...";
+
+	# bugnote_delete.php3
+	$s_bugnote_deleted_msg = "Comentariul a fost sters cu succes...";
+	$s_bug_notes_title = "Comentarii";
+
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Modifica comentarii";
+
+	# bugnote_inc.php
+	$s_no_bugnotes_msg = "Nu exista comentarii atasate acestui bug.";
+	$s_delete_link = "Sterge";
+	$s_add_bugnote_title = "Adauga comentariu";
+	$s_add_bugnote_button = "Adauga";
+	$s_bugnote_edit_link = "Modifica";
+	$s_close_bug_button = "Inchide bug-ul";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Comentariul a fost modificat cu succes...";
+	$s_edited_on = "modificat la: ";
+
+	# index.php3
+	$s_click_to_login = "Click aici pentru autentificare";
+
+	# login.php3
+	$s_login_error_msg = "A aparut o eroare: contul ar putea fi dezactivat sau numele de utilizator si si/sau parola sunt incorecte.";
+
+	# login_page.php3
+	$s_login_page_info = "Bine ati venit pe sistemul de urmarire de bug-uri.";
+	$s_login_title = "Autentificare";
+	$s_save_login = "Autentificare persistenta";
+	$s_choose_project = "Alegeti proiectul";
+	$s_login_button = "Autentificare";
+	$s_signup_link = "solicitati un cont nou";
+
+	# login_select_proj_page.php3
+	$s_select_project_button = "Alegeti proiectul";
+
+	# logout_page.php3
+	$s_logged_out_title = "Deconectat...";
+	$s_redirecting = "...redirectare";
+	$s_here = "Aici";
+
+	# main_page.php3
+	$s_open_and_assigned_to_me = "Deschise si asignate mie";
+	$s_open_and_reported_to_me = "Deschise si raportate de mine";
+	$s_newer_news_link = "Stirile mai noi";
+	$s_older_news_link = "Stirile mai vechi";
+	$s_archives = "Arhive";
+
+	# manage_create_new_user.php3
+	$s_created_user_part1 = "Utilizator creat";
+	$s_created_user_part2 = "cu un nivel de acces ca si";
+
+	# manage_create_user_page.php3
+	$s_create_new_account_title = "Creeaza un nou cont utilizator";
+	$s_verify_password = "Verifica parola";
+	$s_enabled = "Activat";
+	$s_protected = "Protejat";
+	$s_create_user_button = "Creeaza cont";
+
+	# manage_page.php3
+	$s_hide_disabled = "Ascunde dezactivati";
+	$s_filter_button = "Filtru";
+	$s_manage_users_link = "Gestioneaza conturile";
+	$s_manage_projects_link = "Gestioneaza proiectele";
+	$s_create_new_account_link = "Creeaza cont";
+	$s_projects_link = "Proiecte";
+	$s_documentation_link = "Documentatie";
+	$s_new_accounts_title = "Conturi noi";
+	$s_1_week_title = "1 saptamana";
+	$s_never_logged_in_title = "Nu s-a(u) conectat pana acum";
+	$s_prune_accounts = "Distruge conturile";
+	$s_hide_inactive = "Ascunde inactivi";
+	$s_manage_accounts_title = "Gestionare conturi utilizator";
+	$s_p = "p";
+	$s_date_created = "Data creatiei";
+	$s_last_visit = "Ultima conectare";
+	$s_edit_user_link = "Modifica utilizator";
+
+	# manage_project_add.php3
+	$s_project_added_msg = "Proiectul a fost adaugat cu succes...";
+
+	# manage_project_category_add.php3
+	$s_duplicate_category = "EROARE: Aceasta categorie exista deja.";
+	$s_category_added_msg = "Categorie adaugata cu succes...";
+
+	# manage_project_category_delete.php3
+	$s_category_deleted_msg = "Categorie stearsa cu succes...";
+
+	# manage_project_category_delete_page.php3
+	$s_category_delete_sure_msg = "Sunteti sigur(a) ca doriti sa stergeti categoria ? Toate bug-urile asociate vor fi sterse.";
+	$s_delete_category_button = "Sterge categoria";
+
+	# manage_project_category_edit_page.php3
+	$s_edit_project_category_title = "Modificarea categoriei unui proiect";
+	$s_update_category_button = "Modificare categorie";
+
+	# manage_project_category_update.php3
+	$s_category_updated_msg = "Categoria a fost modificata cu succes...";
+
+	# manage_project_delete.php3
+	$s_project_deleted_msg = "Proiect sters cu succes...";
+
+	# manage_project_delete_page.php3
+	$s_project_delete_msg = "Sunteti sigur(a) ca doriti sa stergeti acest proiect si toate bug-urile asociate ? ";
+	$s_project_delete_button = "Sterge proiectul";
+
+	# manage_project_edit_page.php3
+	$s_edit_project_title = "Modificare proiect";
+	$s_project_name = "Nume proiect";
+	$s_view_status = "Status";
+	$s_public = "public";
+	$s_private = "privat";
+	$s_update_project_button = "Actualizeaza proiectul";
+	$s_delete_project_button = "Sterge proiectul";
+	$s_categories_and_version_title = "Categorii si versiuni";
+	$s_categories = "Categorii";
+	$s_add_category_button = "Adauga o categorie";
+	$s_versions = "Versiuni";
+	$s_add_version_button = "Adauga o versiune";
+	$s_edit_link = "modifica";
+
+	# manage_project_menu_page.php3
+	$s_add_project_title = "Adauga proiect";
+	$s_access_threshold = "Prag de acces";
+	$s_upload_file_path = "Calea spre directorul de incarcare fisiere";
+	$s_add_project_button = "Adauga proiectul";
+	$s_projects_title = "Proiecte";
+	$s_name = "Nume";
+
+	# manage_project_update.php3
+	$s_project_updated_msg = "Proiectul a fost modificat cu succes...";
+
+	# manage_project_version_add.php3
+	$s_duplicate_version = "EROARE: Aceasta este o versiune deja existenta.";
+	$s_version_added_msg = "Versiune adaugata cu succes...";
+
+	# manage_project_version_delete.php3
+	$s_version_deleted_msg = "Versiunea a fost stearsa cu succes...";
+
+	# manage_project_version_delete_page.php3
+	$s_version_delete_sure = "Sunteti sigur(a) ca doriti sa stergeti aceasta versiune ? Toate bug-urile asociate vor fi sterse.";
+	$s_delete_version_button = "Sterge versiunea";
+
+	# manage_project_version_edit_page.php3
+	$s_edit_project_version_title = "Modifica versiunea proiectului";
+	$s_update_version_button = "Modifica versiunea";
+
+	# manage_project_version_update.php3
+	$s_version_updated_msg = "Versiunea a fost modificata cu succes...";
+
+	# manage_user_delete.php3
+	$s_account_delete_protected_msg = "Cont protejat. Nu se poate sterge acest cont.";
+	$s_account_deleted_msg = "Cont sters...";
+
+	# manage_user_delete_page.php3
+	$s_delete_account_sure_msg = "Sunteti sigur(a) ca doriti sa stergeti acest cont?";
+
+	# manage_prune.php3
+	$s_accounts_pruned_msg = "Toate conturile care nu au inregistrat conectari de la creare si care sunt mai vechi de o saptamana au fost sterse.";
+
+	# manage_user_page.php3
+	$s_edit_user_title = "Modificare cont utilizator";
+	$s_reset_password_button = "Reset parola";
+	$s_delete_user_button = "Sterge utilizator";
+	$s_reset_password_msg = "Resetarea parolei face parola vida.";
+
+	# manage_user_reset.php3
+	$s_account_reset_protected_msg = "Cont protejat. Parola nu poate fi resetata.";
+	$s_account_reset_msg = "Parola a fost resetata...";
+	$s_account_reset_msg2 = "Noua parola este vida...";
+
+	# manage_user_update.php3
+	$s_manage_user_protected_msg = "Cont protejat. Nivelul de acces si starea de activare sunt protejate. In afara de acestea, contul a fost modificat...";
+	$s_manage_user_updated_msg = "Cont modificat cu succes...";
+
+	# menu_inc.php
+	$s_main_link = "Tablou de bord";
+	$s_view_bugs_link = "Lista de bug-uri";
+	$s_report_bug_link = "Semnalare bug";
+	$s_summary_link = "Sumar";
+	$s_account_link = "Cont";
+	$s_users_link = "Utilizatori";
+	$s_manage_link = "Gestiune";
+	$s_edit_news_link = "Modifica stirile";
+	$s_docs_link = "Documentatie";
+	$s_logout_link = "Deconectare";
+
+	# meta_inc.php
+
+	# news_add.php3
+	$s_news_added_msg = "Stire noua adaugata...";
+
+	# news_delete.php3
+	$s_news_deleted_msg = "Stire stearsa...";
+
+	# news_delete_page.php3
+	$s_delete_news_sure_msg = "Sunteti sigur(a) ca doriti sa stergeti aceasta stire ?";
+	$s_delete_news_item_button = "Sterge stirea";
+
+	# news_edit_page.php3
+	$s_edit_news_title = "Modificare de stire";
+	$s_headline = "Titlu";
+	$s_body = "Corp";
+	$s_update_news_button = "Modifica stirea";
+
+	# news_menu_page.php3
+	$s_add_news_title = "Adaugare de stire";
+	$s_do_not_use = "Nu folositi";
+	$s_post_to = "Publica la";
+	$s_post_news_button = "Publica stirea";
+	$s_edit_or_delete_news_title = "Modificare sau stergere de stire";
+	$s_edit_post = "Modifica stires";
+	$s_delete_post = "Sterge stirea";
+	$s_select_post = "Selecteaza stirea";
+
+	# news_update.php3
+	$s_news_updated_msg = "Stire modificata...";
+
+	# news_view_page.php3
+	$s_back_link = "Inapoi";
+
+	# proj_doc_add.php3
+	$s_file_uploaded_msg = "Fisier incarcat cu succes";
+
+	# proj_doc_add_page.php3
+	$s_upload_file_title = "Incarca fisier";
+	$s_title = "Titlu";
+	$s_select_file = "Selecteaza fisier";
+	$s_upload_file_button = "Incarca fisier";
+
+	# proj_doc_delete.php3
+	$s_project_file_deleted_msg = "Fisier asociat proiectului sters.";
+
+	# proj_doc_delete_page.php3
+	$s_confirm_file_delete_msg = "Sunteti sigur(a) ca doriti sa stergeti acest fisier ?";
+
+	# proj_doc_edit_page.php3
+	$s_upload_file_title = "Incarca fisier";
+	$s_filename = "Nume fisier";
+	$s_file_update_button = "Modifica fisier";
+	$s_file_delete_button = "Sterge fisier";
+
+	# proj_doc_page.php3
+	$s_project_documentation_title = "Documentatia proiectului";
+	$s_user_documentation = "Documentatie utilizator";
+	$s_project_documentation = "Documentatie de proiect";
+	$s_add_file = "Adauga fisier";
+
+	# proj_doc_update.php3
+	$s_project_document_updated = "Proiect modificat cu succes";
+
+	# proj_user_add.php3
+	$s_project_user_added_msg = "Utilizator adaugat cu succes proiectului";
+
+	# proj_user_delete.php3
+	$s_project_removed_user_msg = "Utilizator sters din proiect";
+
+	# proj_user_delete_page.php3
+	$s_remove_user_sure_msg = "Sunteti sigur(a) ca doriti sa stergeti acest utilizator ?";
+
+	# proj_user_menu_page.php3
+	$s_create_user_message = "NOTA: Trebuie sa adaugati la proiect unul dintre utilizatorii existenti.";
+	$s_automatic_access_level = "Nivel de acces automat";
+	$s_add_user_title = "Adauga utilizator la proiect";
+	$s_add_user_button = "Adauga utilizator";
+	$s_project_selection_title = "Selectare de proiect";
+	$s_remove_link = "sterge";
+	$s_automatic_access = "Utilizatori cu acces automat";
+
+	# proj_user_update.php3
+	$s_updated_user_msg = "Utilizator modificat cu succes";
+
+	# report_add.php3
+	$s_report_add_error_msg = "EROARE: S-a constatat o eroare in semnalarea unui bug.";
+	$s_must_enter_category = "Categoria trebuie selectata";
+	$s_must_enter_severity = "Severitatea trebuie selectata";
+	$s_must_enter_reproducibility = "Reproductibilitatea trebuie selectata";
+	$s_must_enter_summary = "Sumarul este obligatoriu";
+	$s_must_enter_description = "Descrierea este obligatorie";
+	$s_report_more_bugs = "Semnaleaza si alte bug-uri";
+	$s_submission_thanks_msg = "Va multumim";
+
+	# report_bug_advanced_page.php3
+	$s_simple_report_link = "Semnalare simpla";
+	$s_enter_report_details_title = "Introduceti detaliile";
+	$s_required = "obligatoriu";
+	$s_select_category = "Categorie";
+	$s_select_reproducibility = "Reproductibilitate";
+	$s_select_severity = "Severitate";
+	$s_or_fill_in = "SAU precizati";
+	$s_assign_to = "Asigneaza lui";
+	$s_steps_to_reproduce = "Pasi de reprodus";
+	$s_additional_information = "Informatie aditionala";
+	$s_submit_report_button = "Semnaleaza";
+	$s_check_report_more_bugs = "bifati pentru a semnala bug-uri in continuare";
+
+	# report_bug_page.php3
+	$s_advanced_report_link = "Semnalare avansata";
+	$s_upload_file = "Incarca fisier";
+	$s_report_stay = "Stationare";
+
+	# set_project.php3
+	$s_selected_project = "Proiect selectat";
+	$s_valid_project_msg = "Trebuie sa alegeti un proiect valid";
+
+	# show_source_page.php3
+	$s_show_source_for_msg = "Sursa pentru";
+	$s_not_supported_part1 = "Aceasta versiune";
+	$s_not_supported_part2 = "de php nu suporta";
+
+	# signup.php3
+	$s_invalid_email = "este o adresa de e-mail invalida";
+	$s_duplicate_username = "este un nume de utilizator duplicat. Va rugam sa alegeti altul.";
+	$s_account_create_fail = "Esuare la creare unui cont utilizator";
+	$s_account_added = "Contul a fost adaugat cu succes.";
+	$s_password_emailed_msg = "parola va fi trimisa prin e-mail.";
+	$s_no_reponse_msg = "Daca nu raspundeti intr-o saptamana contul ar putea fi sters.";
+
+	# signup_page.php3
+	$s_signup_info = "Alageti-va numele de login si precizati o adresa de e-mail valida. O parola generata aleator va fi trimisa pe adresa dumneavoastra.";
+	$s_signup_title = "Inscriere utilizator";
+	$s_signup_button = "Inscriere";
+
+	# site_settings_edit_page.php3
+	$s_edit_site_settings_title = "Modificare parametri site";
+	$s_save_settings_button = "Salveaza";
+
+	# site_settings_page.php3
+	$s_site_settings_title = "Parametri site";
+	$s_system_info_link = "Informatii de sistem";
+	$s_site_settings_link = "Parametri";
+
+	# site_settings_update.php3
+	$s_site_settings_updated_msg = "Parametrii de site au fost modificati";
+
+	# summary_page.php3
+	$s_summary_title = "Sumar";
+	$s_summary_jpgraph_link = "Sumar avansat";
+	$s_by_status = "dupa stare";
+	$s_dupa_date = "dupa data (zile)";
+	$s_dupa_severity = "dupa severitate";
+	$s_dupa_resolution = "dupa rezolvare";
+	$s_dupa_category = "dupa categorie";
+	$s_dupa_priority = "dupa prioritate";
+	$s_dupa_developer = "dupa dezvoltator";
+	$s_dupa_reporter ="dupa reporter";
+	$s_time_stats = "statistici cronologice pentru bug-uri rezolvate (zile)";
+	$s_longest_open_bug = "bug-ul deschis pentru cel mai mult timp";
+	$s_longest_open = "cel mai mult";
+	$s_average_time = "mediu";
+	$s_total_time = "total";
+	$s_developer_stats = "statistici dezvoltator";
+	$s_reporter_stats = "statistici reporter";
+	$s_orct = "(deschis/rezolvat/inchis/total)";
+
+	# view_all_bug_page.php3
+	$s_any = "orice";
+	$s_show = "Arata";
+	$s_changed = "Modificate(ore)";
+	$s_hide_closed = "Ascunde inchise";
+	$s_filter_button = "Filtrt";
+	$s_viewing_bugs_title = "Lista de bug-uri";
+	$s_updated = "Modificat";
+
+	# view_all_inc.php
+	$s_none = "nimic";
+	$s_search ="Cauta";
+	$s_view_prev_link = "Precedent";
+	$s_view_next_link = "Urmator";
+
+	# view_bug_advanced_page.php3
+	$s_view_simple_link = "Vedere simpla";
+	$s_viewing_bug_advanced_details_title = "Vizualizare de bug cu detalii avansate";
+	$s_product_build = "Versiune produs";
+	$s_system_profile = "Descriere sistem";
+	$s_update_bug_button = "Modifica bug";
+	$s_bug_assign_button    = "Asigneaza-mi mie";
+	$s_reopen_bug_button = "Redeschide bug";
+	$s_attached_files = "Fisiere atasate";
+
+	# view_bug_inc.php
+
+	# view_bug_page.php3
+	$s_view_advanced_link = "Vedere Avansata";
+	$s_viewing_bug_simple_details_title = "Vizualizare de bug cu detalii simple";
+?> 

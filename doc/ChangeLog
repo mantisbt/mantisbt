@@ -33,6 +33,7 @@ Mantis
  * Added email check to admin_check.php3
  * Added a check to make sure the cookie_string really is unique.
  * Added a check for a duplciate user in the manage create user page.
+ * Added Romanian translation.
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Removed sql_to_unix_time() function.  Unecessary with removal of TIMESTAMPS.
