@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.56 2004-07-16 23:03:08 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.57 2004-07-18 10:46:01 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -333,7 +333,7 @@
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $t_bug->summary ?>
+		<?php echo bug_format_id( $f_bug_id ), ': ', $t_bug->summary ?>
 	</td>
 </tr>
 
