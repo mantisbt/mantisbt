@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.5 2002-08-27 04:26:43 jfitzell Exp $
+	# $Id: project_api.php,v 1.6 2002-08-27 06:13:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -19,8 +19,10 @@
 
 	# --------------------
 	# Cache a project row if necessary and return the cached copy
-	#  The cached row should be db_unprepare()'d
-	function project_cache_row( $p_project_id ) {
+	#  If the second parameter is true (default), trigger an error
+	#  if the project can't be found.  If the second parameter is
+	#  false, return false if the project can't be found.
+	function project_cache_row( $p_project_id, $p_trigger_errors=true) {
 		global $g_cache_project;
 
 		$c_project_id = db_prepare_int( $p_project_id );
@@ -41,7 +43,11 @@
 		$result = db_query( $query );
 
 		if ( 0 == db_num_rows( $result ) ) {
-			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+			if ( $p_trigger_errors ) {
+				trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+			} else {
+				return false;
+			}
 		}
 
 		$row = db_fetch_array( $result );
@@ -73,16 +79,11 @@
 	# check to see if project exists by id
 	# return true if it does, false otherwise
 	function project_exists( $p_project_id ) {
-		$c_project_id = db_prepare_int( $p_project_id );
-
-		$t_project_table = config_get( 'mantis_project_table' );
-
-		$query ="SELECT COUNT(*) 
-				 FROM $t_project_table 
-				 WHERE id='$c_project_id'";
-		$result = db_query( $query );
-
-		if ( 0 == db_result( $result ) ) {
+		# we're making use of the caching function here.  If we
+		#  succeed in caching the project then it exists and is
+		#  now cached for use by later function calls.  If we can't
+		#  cache it we return false.
+		if ( false == project_cache_row( $p_project_id, false ) ) {
 			return false;
 		} else {
 			return true;
@@ -211,6 +212,8 @@
 				WHERE id='$c_project_id'";
 		
 		db_query( $query );
+
+		project_clear_cache( $p_project_id );
 
 		# db_query() errors on failure so:
 		return true;
