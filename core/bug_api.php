@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.8 2002-09-07 08:40:30 jfitzell Exp $
+	# $Id: bug_api.php,v 1.9 2002-09-16 02:10:52 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -23,7 +23,7 @@
 	# allows bug deletion :
 	# delete the bug, bugtext, bugnote, and bugtexts selected
 	# used in bug_delete.php & mass treatments
-	function bug_delete( $p_id, $p_bug_text_id ) {
+	function bug_delete( $p_id ) {
 		global $g_mantis_bug_file_table, $g_mantis_bug_table, $g_mantis_bug_text_table,
 			   $g_mantis_bugnote_table, $g_mantis_bugnote_text_table, $g_mantis_bug_history_table,
 			   $g_file_upload_method ;
@@ -31,9 +31,10 @@
 		email_bug_deleted( $p_id );
 
 		$c_id			= (integer)$p_id;
-		$c_bug_text_id	= (integer)$p_bug_text_id;
 		
 		$retval = true;
+
+		$t_bug_text_id = get_bug_field( $p_id, 'bug_text_id' );
 
 		# Delete the bug entry
 		$query = "DELETE
@@ -45,7 +46,7 @@
 		# Delete the corresponding bug text
 		$query = "DELETE
 				FROM $g_mantis_bug_text_table
-				WHERE id='$c_bug_text_id'";
+				WHERE id='$t_bug_text_id'";
 		$result = db_query( $query );
 		$retval = $retval && $result;
 
@@ -121,7 +122,7 @@
 
 		$t_bug_table = config_get( 'mantis_bug_table' );
 
-		$query = "SELECT id, bug_text_id
+		$query = "SELECT id
 				FROM $t_bug_table
 				WHERE project_id='$c_project_id'";
 		$result = db_query( $query );
@@ -131,7 +132,7 @@
 		for ( $i=0 ; $i < $bug_count ; $i++ ) {	
 			$row = db_fetch_array( $result );
 
-			bug_delete( $row['id'], $row['bug_text_id']);
+			bug_delete( $row['id'] );
 		}
 
 		# @@@ should we check the return value of each bug_delete() and 

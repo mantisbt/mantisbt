@@ -15,7 +15,7 @@
 	check_access( $g_allow_bug_delete_access_level );
 	bug_ensure_exists( $f_id );
 
-	if ( bug_delete( $f_id, $f_bug_text_id ) ) {
+	if ( bug_delete( $f_id ) ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	} else {
 		print_mantis_error( ERROR_GENERIC );

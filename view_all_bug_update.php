@@ -139,7 +139,7 @@ if ( $f_actionconfirmed ) {
 			break;
 
 		case 'DELETE':
-			bug_delete($t_id_arr[0],$t_id_arr[1]);
+			bug_delete($t_id_arr[0]);
 			break;
 
 		case 'MOVE':

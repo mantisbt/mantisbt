@@ -82,7 +82,10 @@
 		bug_date_update( $p_id );
 	} # updateBug
 
-	if ( '1' == $f_actionconfirmed ) {
+	$f_action			= gpc_get_string( 'f_action' );
+	$f_actionconfirmed	= gpc_get_bool( 'f_actionconfirmed' );
+
+	if ( $f_actionconfirmed ) {
 		foreach ( $f_bug_arr as $value ) {
 			# get the id and the bug_text_id parameters
 			# the bug_text_id is used only for the delete function
@@ -93,7 +96,7 @@
 					updateBugLite( $t_id_arr[0], CLOSED, '' );
 					break;
 				case 'DELETE':
-					deleteBug( $t_id_arr[0], $t_id_arr[1] );
+					bug_delete( $t_id_arr[0] );
 					break;
 				case 'MOVE':
 					updateBugLite( $t_id_arr[0], 'MOVED', $f_project_id );
