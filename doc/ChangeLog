@@ -93,6 +93,10 @@ Mantis ChangeLog
  * Added javascript autofocus to the report bug pages.
  * Added tabindexes to the report bug pages.
 
+2002.08.19  -  0.17.4a
+ * Fixed the fix of the ambigious column problem
+ * Fixed the 'second line of defense' against the arbitrary-code-execution vulnerability
+
 2002.08.18  -  0.17.4
  * This is a maintenance release. It patches up several vulnerabilities in 0.17.3. No features have been added.
  * Fixed a problem in config_inc2.php, which would allow a malicious user to execute arbitrary code and view any local file available to the webserver-user.
