@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.16 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: user_api.php,v 1.17 2002-08-29 12:59:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -444,6 +444,10 @@
 	# --------------------
 	# return the specified user field for the user id
 	function user_get_field( $p_user_id, $p_field_name ) {
+		if ( 0 == $p_user_id ) {
+		    return "@null@";
+		}
+
 		$row = user_get_row( $p_user_id );
 
 		if ( isset( $row[$p_field_name] ) ) {
