@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.158 2004-03-29 12:58:18 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.159 2004-04-01 18:42:10 narcissus Exp $
 	# --------------------------------------------------------
 
 	
@@ -441,6 +441,15 @@
 	$g_default_email_on_bugnote		= ON;
 	$g_default_email_on_status		= 0; # @@@ Unused
 	$g_default_email_on_priority	= 0; # @@@ Unused
+	$g_default_email_on_new_minimum_severity		= 'any';
+	$g_default_email_on_assigned_minimum_severity	= 'any';
+	$g_default_email_on_feedback_minimum_severity	= 'any';
+	$g_default_email_on_resolved_minimum_severity	= 'any';
+	$g_default_email_on_closed_minimum_severity		= 'any';
+	$g_default_email_on_reopened_minimum_severity	= 'any';
+	$g_default_email_on_bugnote_minimum_severity	= 'any';
+	$g_default_email_on_status_minimum_severity		= 'any'; # @@@ Unused
+	$g_default_email_on_priority_minimum_severity	= 'any'; # @@@ Unused
 	# default_language - is set to site language
 
 	###############################

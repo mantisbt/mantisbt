@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.25 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_prefs_inc.php,v 1.26 2004-04-01 18:42:10 narcissus Exp $
 	# --------------------------------------------------------
 	
 	$t_core_path = config_get( 'core_path' );
@@ -118,6 +118,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_new" <?php check_checked( $u_email_on_new, ON ); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_new_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_new_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-2">
@@ -126,6 +132,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_assigned" <?php check_checked( $u_email_on_assigned, ON ); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_assigned_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_assigned_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-1">
@@ -134,6 +146,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_feedback" <?php check_checked( $u_email_on_feedback, ON ); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_feedback_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_feedback_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-2">
@@ -142,6 +160,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_resolved" <?php check_checked( $u_email_on_resolved, ON ); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_resolved_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_resolved_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-1">
@@ -150,6 +174,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_closed" <?php check_checked( $u_email_on_closed, ON ); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_closed_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_closed_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-2">
@@ -158,6 +188,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_reopened" <?php check_checked( $u_email_on_reopened, ON ); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_reopened_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_reopened_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-1">
@@ -166,6 +202,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_bugnote" <?php check_checked( $u_email_on_bugnote, ON ); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_bugnote_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_bugnote_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-2">
@@ -174,6 +216,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_status" <?php check_checked( $u_email_on_status, ON ); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_status_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_status_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <tr class="row-1">
@@ -182,6 +230,12 @@
 	</td>
 	<td>
 		<input type="checkbox" name="email_on_priority" <?php check_checked( $u_email_on_priority , ON); ?> />
+		<?php echo lang_get( 'with_minimum_severity' ) ?>
+		<select name="email_on_priority_minimum_severity">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'severity', $u_email_on_priority_minimum_severity ) ?>
+		</select>
 	</td>
 </tr>
 <?php } else { ?>
@@ -194,6 +248,15 @@
 		<input type="hidden" name="email_on_bugnote"  value="<?php echo $u_email_on_bugnote ?>" />
 		<input type="hidden" name="email_on_status"   value="<?php echo $u_email_on_status ?>" />
 		<input type="hidden" name="email_on_priority" value="<?php echo $u_email_on_priority ?>" />
+		<input type="hidden" name="email_on_new_minimum_severity"      value="<?php echo $u_email_on_new_minimum_severity ?>" />
+		<input type="hidden" name="email_on_assigned_minimum_severity" value="<?php echo $u_email_on_assigned_minimum_severity ?>" />
+		<input type="hidden" name="email_on_feedback_minimum_severity" value="<?php echo $u_email_on_feedback_minimum_severity ?>" />
+		<input type="hidden" name="email_on_resolved_minimum_severity" value="<?php echo $u_email_on_resolved_minimum_severity ?>" />
+		<input type="hidden" name="email_on_closed_minimum_severity"   value="<?php echo $u_email_on_closed_minimum_severity ?>" />
+		<input type="hidden" name="email_on_reopened_minimum_severity" value="<?php echo $u_email_on_reopened_minimum_severity ?>" />
+		<input type="hidden" name="email_on_bugnote_minimum_severity"  value="<?php echo $u_email_on_bugnote_minimum_severity ?>" />
+		<input type="hidden" name="email_on_status_minimum_severity"   value="<?php echo $u_email_on_status_minimum_severity ?>" />
+		<input type="hidden" name="email_on_priority_minimum_severity" value="<?php echo $u_email_on_priority_minimum_severity ?>" />
 <?php } ?>
 <tr class="row-2">
 	<td class="category">

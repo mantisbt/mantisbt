@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.32 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_prefs_update.php,v 1.33 2004-04-01 18:42:10 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -57,6 +57,15 @@
 	$t_prefs->email_on_bugnote	= gpc_get_bool( 'email_on_bugnote' );
 	$t_prefs->email_on_status	= gpc_get_bool( 'email_on_status' );
 	$t_prefs->email_on_priority	= gpc_get_bool( 'email_on_priority' );
+	$t_prefs->email_on_new_minimum_severity			= gpc_get_int( 'email_on_new_minimum_severity' );
+	$t_prefs->email_on_assigned_minimum_severity	= gpc_get_int( 'email_on_assigned_minimum_severity' );
+	$t_prefs->email_on_feedback_minimum_severity	= gpc_get_int( 'email_on_feedback_minimum_severity' );
+	$t_prefs->email_on_resolved_minimum_severity	= gpc_get_int( 'email_on_resolved_minimum_severity' );
+	$t_prefs->email_on_closed_minimum_severity		= gpc_get_int( 'email_on_closed_minimum_severity' );
+	$t_prefs->email_on_reopened_minimum_severity	= gpc_get_int( 'email_on_reopened_minimum_severity' );
+	$t_prefs->email_on_bugnote_minimum_severity		= gpc_get_int( 'email_on_bugnote_minimum_severity' );
+	$t_prefs->email_on_status_minimum_severity		= gpc_get_int( 'email_on_status_minimum_severity' );
+	$t_prefs->email_on_priority_minimum_severity	= gpc_get_int( 'email_on_priority_minimum_severity' );
 
 	# prevent users from changing other user's accounts
 	if ( $f_user_id != auth_get_current_user_id() ) {

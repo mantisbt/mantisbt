@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.157 $
+	# $Revision: 1.158 $
 	# $Author: narcissus $
-	# $Date: 2004-03-18 23:40:36 $
+	# $Date: 2004-04-01 18:42:11 $
 	#
-	# $Id: strings_english.txt,v 1.157 2004-03-18 23:40:36 narcissus Exp $
+	# $Id: strings_english.txt,v 1.158 2004-04-01 18:42:11 narcissus Exp $
 	###########################################################################
 ?>
 <?php
@@ -303,6 +303,7 @@ $s_advanced_view = 'Advanced View';
 $s_advanced_update = 'Advanced Update';
 $s_refresh_delay = 'Refresh Delay';
 $s_redirect_delay = 'Redirect Delay';
+$s_with_minimum_severity = 'With Mimimum Severity of';
 $s_email_on_new = 'Email on New';
 $s_email_on_assigned = 'Email on Assigned';
 $s_email_on_feedback = 'Email on Feedback';

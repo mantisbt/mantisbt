@@ -14,6 +14,7 @@ Mantis ChangeLog
  * Enh #3662: Provide more config vars to control viewing/downloading/deleting bug attachments.
  * Enh #3688: Add threshold for changing the bug/bugnote view status.
  * Enh #3690: Request for directly setting reminders private.
+ * Enh #3713: Allow users to set severity levels along with email preferences.
  * Fix #3259: Saving CSV file of bugs containning double quotes causes invalid csv.
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.

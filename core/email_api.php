@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.72 2004-03-18 12:16:30 vboctor Exp $
+	# $Id: email_api.php,v 1.73 2004-04-01 18:42:11 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -251,6 +251,17 @@
 				if ( OFF == $t_notify ) {
 					unset( $t_recipients[$t_id] );
 					continue;
+				} else {
+					# Users can define the severity of an issue before they are emailed for
+					# each type of notification
+					$t_min_sev_pref_field = $t_pref_field . '_minimum_severity';
+					$t_min_sev_notify     = user_pref_get_pref( $t_id, $t_min_sev_pref_field );
+					$t_bug_severity       = bug_get_field( $p_bug_id, 'severity' );
+
+					if ( $t_bug_severity < $t_min_sev_notify ) {
+						unset( $t_recipients[$t_id] );
+						continue;
+					}
 				}
 			}
 

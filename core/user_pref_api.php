@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.13 2004-03-15 21:47:43 vboctor Exp $
+	# $Id: user_pref_api.php,v 1.14 2004-04-01 18:42:11 narcissus Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -33,6 +33,15 @@
 		var $email_on_bugnote;
 		var $email_on_status;
 		var $email_on_priority;
+		var $email_on_new_minimum_severity;
+		var $email_on_assigned_minimum_severity;
+		var $email_on_feedback_minimum_severity;
+		var $email_on_resolved_minimum_severity;
+		var $email_on_closed_minimum_severity;
+		var $email_on_reopened_minimum_severity;
+		var $email_on_bugnote_minimum_severity;
+		var $email_on_status_minimum_severity;
+		var $email_on_priority_minimum_severity;
 		var $language;
 
 		function UserPreferences() {
@@ -52,6 +61,15 @@
 			$this->email_on_bugnote			= config_get( 'default_email_on_bugnote');
 			$this->email_on_status			= config_get( 'default_email_on_status');
 			$this->email_on_priority		= config_get( 'default_email_on_priority');
+			$this->email_on_new_minimum_severity		= config_get( 'default_email_on_new_minimum_severity' );
+			$this->email_on_assigned_minimum_severity	= config_get( 'default_email_on_assigned_minimum_severity' );
+			$this->email_on_feedback_minimum_severity	= config_get( 'default_email_on_feedback_minimum_severity' );
+			$this->email_on_resolved_minimum_severity	= config_get( 'default_email_on_resolved_minimum_severity' );
+			$this->email_on_closed_minimum_severity		= config_get( 'default_email_on_closed_minimum_severity' );
+			$this->email_on_reopened_minimum_severity	= config_get( 'default_email_on_reopened_minimum_severity' );
+			$this->email_on_bugnote_minimum_severity	= config_get( 'default_email_on_bugnote_minimum_severity' );
+			$this->email_on_status_minimum_severity		= config_get( 'default_email_on_status_minimum_severity' );
+			$this->email_on_priority_minimum_severity	= config_get( 'default_email_on_priority_minimum_severity' );
 			$this->language					= config_get( 'default_language');
 		}
 	}

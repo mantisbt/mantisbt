@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.2 2004-03-18 23:40:35 narcissus Exp $
+	# $Id: 0_18_inc.php,v 1.3 2004-04-01 18:42:10 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,6 +41,116 @@
 			$query = "ALTER TABLE $t_bug_file_table ADD INDEX bug_id ( bug_id )";
 			$result = @db_query( $query );
 
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	$upgrades[] = new FunctionUpgrade( 
+		'emailsevs-1',
+		'Add the necessary columns for email severity filtering',
+		'emailseverities_fix_1' );
+	
+	function emailseverities_fix_1() {
+		global $t_user_pref_table;
+		
+		if ( !db_field_exists( 'email_on_priority_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_priority_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_priority";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+		
+		if ( !db_field_exists( 'email_on_status_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_status_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_priority_minimum_severity";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		if ( !db_field_exists( 'email_on_bugnote_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_bugnote_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_status_minimum_severity";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		if ( !db_field_exists( 'email_on_reopened_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_reopened_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_bugnote_minimum_severity";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		if ( !db_field_exists( 'email_on_closed_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_closed_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_reopened_minimum_severity";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		if ( !db_field_exists( 'email_on_resolved_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_resolved_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_closed_minimum_severity";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		if ( !db_field_exists( 'email_on_feedback_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_feedback_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_resolved_minimum_severity";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		if ( !db_field_exists( 'email_on_assigned_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_assigned_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_feedback_minimum_severity";
+	
+			$result = @db_query( $query );
+			
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		if ( !db_field_exists( 'email_on_new_minimum_severity', $t_user_pref_table ) ) {
+			$query = "ALTER TABLE $t_user_pref_table ADD email_on_new_minimum_severity INT(2) DEFAULT '10' NOT NULL
+						AFTER email_on_assigned_minimum_severity";
+	
+			$result = @db_query( $query );
+			
 			if ( false == $result ) {
 				return false;
 			}
