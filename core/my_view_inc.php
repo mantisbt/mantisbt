@@ -1,0 +1,148 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: my_view_inc.php,v 1.1 2004-06-28 10:13:23 vboctor Exp $
+	# --------------------------------------------------------
+?>
+<?php
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path . 'current_user_api.php' );
+	require_once( $t_core_path . 'bug_api.php' );
+	require_once( $t_core_path . 'string_api.php' );
+	require_once( $t_core_path . 'date_api.php' );
+	require_once( $t_core_path . 'icon_api.php' );
+?>
+<?php
+	$t_filter = current_user_get_bug_filter();
+
+	$t_sort = $t_filter['sort'];
+	$t_dir = $t_filter['dir'];
+
+	$t_checkboxes_exist = false;
+
+	$t_icon_path = config_get( 'icon_path' );
+	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
+?>
+
+<?php # -- ====================== BUG LIST ========================= -- ?>
+
+<table class="width100" cellspacing="1">
+<?php # -- Navigation header row -- ?>
+<tr>
+	<?php # -- Viewing range info -- ?>
+	<td class="form-title" colspan="2">
+		<?php #echo lang_get( 'viewing_bugs_title' ) ?>
+		<?php echo $box_title ?>
+		<?php
+			if ( sizeof( $rows ) > 0 ) {
+				$v_start = $t_filter['per_page'] * ($f_page_number-1) +1;
+				$v_end   = $v_start + sizeof( $rows ) -1;
+			} else {
+				$v_start = 0;
+				$v_end   = 0;
+			}
+			echo "($v_start - $v_end / $t_bug_count)";
+		?>
+	</td>
+</tr>
+
+<?php mark_time( 'begin loop' ); ?>
+<?php # -- Loop over bug rows and create $v_* variables -- ?>
+<?php
+	for($i=0; $i < sizeof( $rows ); $i++) {
+		# prefix bug data with v_
+
+		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
+
+		$v_summary = string_display_links( $v_summary );
+		$t_last_updated = date( config_get( 'normal_date_format' ), $v_last_updated );
+
+		# choose color based on status
+		$status_color = get_status_color( $v_status );
+
+		# grab the bugnote count
+		$bugnote_count = bug_get_bugnote_count( $v_id );
+
+		# Check for attachments
+		$t_attachment_count = 0;
+		if (  ( file_can_view_bug_attachments( $v_id ) ) ) {
+		   $t_attachment_count = file_bug_attachment_count( $v_id );
+		}
+
+		# grab the project name
+		$project_name = project_get_field( $v_project_id, 'name' );
+
+		if ( $bugnote_count > 0 ) {
+			$v_bugnote_updated = bug_get_newest_bugnote_timestamp( $v_id );
+		}
+?>
+
+<tr bgcolor="<?php echo $status_color ?>">
+	<?php # -- Bug ID and details link + Pencil shortcut -- ?>
+	<td class="center" valign="top" width ="0" nowrap>
+		<span class="small">
+		<?php
+			print_bug_link( $v_id );
+
+			echo '<br />';
+
+			if ( access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
+				echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
+			}
+			print_status_icon( $v_priority );
+			if ( 0 < $t_attachment_count ) {
+				echo '<a href="' . string_get_bug_view_url( $v_id ) . '#attachments">';
+				echo '<img border="0" src="' . $t_icon_path . 'attachment.png' . '"';
+				echo ' alt="' . lang_get( 'attachment_alt' ) . '"';
+				echo ' title="' . $t_attachment_count . ' ' . lang_get( 'attachments' ) . '"';
+				echo ' />';
+				echo '</a>';
+			}
+			if ( VS_PRIVATE == $v_view_state ) {
+				echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
+			}
+		?>
+		</span>
+	</td>
+
+	<?php # -- Summary -- ?>
+	<td class="left" valign="top" width="100%">
+		<span class="small">
+		<?php
+			echo $v_summary;
+		?>
+		<br />
+		<?php
+			# type project name if viewing 'all projects'
+			if ( ON == config_get( 'show_bug_project_links' ) &&
+				helper_get_current_project() == ALL_PROJECTS ) {
+				echo '[';
+				print( $project_name );
+				echo '] ';
+			}
+			echo string_display( $v_category );
+
+			if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
+				echo ' - <b>' . $t_last_updated . '</b>';
+			} else {
+				echo ' - ' . $t_last_updated;
+			}
+		?>
+		</span>
+	</td>
+</tr>
+<?php # -- end of Repeating bug row -- ?>
+<?php
+	}
+?>
+<?php # -- ====================== end of BUG LIST ========================= -- ?>
+
+</table>
+
+<?php mark_time( 'end loop' ); ?>

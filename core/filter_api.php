@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.40 2004-06-24 03:46:45 narcissus Exp $
+	# $Id: filter_api.php,v 1.41 2004-06-28 10:13:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -36,7 +36,7 @@
 	# $p_bug_count
 	#   - you don't need to give a value here, the number of bugs will be
 	#     stored here on return
-	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count ) {
+	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $custom_filter = null ) {
 		$t_bug_table			= config_get( 'mantis_bug_table' );
 		$t_bug_text_table		= config_get( 'mantis_bug_text_table' );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
@@ -46,7 +46,11 @@
 		$t_limit_reporters		= config_get( 'limit_reporters' );
 		$t_report_bug_threshold		= config_get( 'report_bug_threshold' );
 
-		$t_filter = current_user_get_bug_filter();
+		if ( $custom_filter == null ) {
+			$t_filter = current_user_get_bug_filter();
+		} else {
+			$t_filter = $custom_filter;
+		}
 
 		if ( false === $t_filter ) {
 			return false; # signify a need to create a cookie

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.47 2004-05-24 13:50:53 vboctor Exp $
+	# $Id: set_project.php,v 1.48 2004-06-28 10:13:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -43,7 +43,7 @@
 	if ( !is_blank( $f_ref ) ) {
 		$t_redirect_url = $f_ref;
 	} else if ( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
-		$t_redirect_url = 'main_page.php';
+		$t_redirect_url = config_get( 'default_home_page' );
 	} else if ( eregi( 'view_all_bug_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_source_filter_id = filter_db_get_project_current( $f_project_id );
 		$t_redirect_url = 'view_all_set.php?type=4';
@@ -67,8 +67,10 @@
 		$t_redirect_url = 'summary_jpgraph_page.php';
 	} else if ( eregi( 'view_filters_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url = 'view_filters_page.php';
+	} else if ( eregi( 'my_view_page.php', $_SERVER['HTTP_REFERER'] ) ){
+		$t_redirect_url = 'my_view_page.php';
 	} else {
-		$t_redirect_url = 'main_page.php';
+		$t_redirect_url = config_get( 'default_home_page' );
 	}
 
 	print_header_redirect( $t_redirect_url );

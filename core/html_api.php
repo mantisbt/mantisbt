@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.103 2004-05-28 06:24:00 int2str Exp $
+	# $Id: html_api.php,v 1.104 2004-06-28 10:13:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -368,6 +368,9 @@
 
 				# Main Page
 				$t_menu_options[] = '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a>';
+
+				# My View
+				$t_menu_options[] = '<a href="my_view_page.php">' . lang_get( 'my_view_link' ) . '</a>';
 
 				# View Bugs
 				$t_menu_options[] = '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a>';

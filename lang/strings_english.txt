@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.178 $
-	# $Author: prichards $
-	# $Date: 2004-06-26 14:06:43 $
+	# $Revision: 1.179 $
+	# $Author: vboctor $
+	# $Date: 2004-06-28 10:13:24 $
 	#
-	# $Id: strings_english.txt,v 1.178 2004-06-26 14:06:43 prichards Exp $
+	# $Id: strings_english.txt,v 1.179 2004-06-28 10:13:24 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -667,8 +667,17 @@ $s_manage_link = 'Manage';
 $s_edit_news_link = 'Edit News';
 $s_docs_link = 'Docs';
 $s_logout_link = 'Logout';
+$s_my_view_link = 'My View';
 
 # meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Unassigned';
+$s_my_view_title_recent_mod = 'Recently Modified';
+$s_my_view_title_reported = 'Reported by Me';
+$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
+$s_my_view_title_resolved = 'Resolved';
+$s_my_view_title_monitored = 'Monitored by Me';
 
 # news_add.php
 $s_news_added_msg = 'News item added...';

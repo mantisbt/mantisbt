@@ -22,6 +22,7 @@ Mantis ChangeLog
  * Enh #3690: Request for directly setting reminders private.
  * Enh #3713: Allow users to set severity levels along with email preferences.
  * Enh #3735: New CSS class for HTML Form Buttons
+ * Enh #3739: Portal for viewing bug status lists and summaries after login.
  * Enh #3765: Change title on bug details page to bug summary line.
  * Enh #3801: Add "myself" meta filter options.
  * Enh #3802: Auto-use filter selection on change.
@@ -93,6 +94,9 @@ Mantis ChangeLog
  * New Config: update_readonly_bug_threshold (default MANAGER).  Status threshold after which the user is allowed to edit readonly issues.
  * New Config: view_changelog_threshold (default VIEWER).  Status threshold after which the user is allowed to view the changelog.  The changelog will include private issues only if user has the approach access level.
  * New Config: view_filters (default SIMPLE_DEFAULT) - Default filter view.
+ * New Config: default_home_page (default my view page): Default page after Login.
+ * New Config: my_view_bug_count (default 10): Number of bugs shown in each box.
+ * New Config: my_view_boxes: My view boxes to be shown and their order.
  * Removed config option (use_phpMailer): phpMailer has always been used
  * Removed config option (phpMailer_path): phpMailer has been included to Mantis distribution
  * Removed config option (use_x_priority): phpMailer always puts X-Priority header

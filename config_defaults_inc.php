@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.169 2004-06-08 06:47:12 narcissus Exp $
+	# $Id: config_defaults_inc.php,v 1.170 2004-06-28 10:13:22 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1153,4 +1153,24 @@
 		UNREAD       => 'unread.gif'
 	);
 	# --------------------
+
+	##################
+	# My View Settings
+	##################
+
+	# Number of bugs shown in each box
+	$g_my_view_bug_count = 10;
+
+	# Boxes to be shown and their order
+	# A box that is not to be shown can have its value set to 0
+	$g_my_view_boxes = array (
+		'assigned'      => '1',
+		'unassigned'    => '2',
+		'reported'      => '3',
+		'resolved'      => '4',
+		'recent'	=> '5'
+	);
+
+	# Default page after Login or Set Project
+	$g_default_home_page = 'my_view_page.php';
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_cookie_test.php,v 1.5 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: login_cookie_test.php,v 1.6 2004-06-28 10:13:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,7 +14,7 @@
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
-	$f_return = gpc_get_string( 'return', 'main_page.php' );
+	$f_return = gpc_get_string( 'return', config_get( 'default_home_page' ) );
 
 	if ( auth_is_user_authenticated() ) {
 		$t_redirect_url = $f_return;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login.php,v 1.32 2004-05-26 01:06:35 int2str Exp $
+	# $Id: login.php,v 1.33 2004-06-28 10:13:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,7 +18,7 @@
 	$f_username		= gpc_get_string( 'username', '' );
 	$f_password		= gpc_get_string( 'password', '' );
 	$f_perm_login	= gpc_get_bool( 'perm_login' );
-	$f_return		= gpc_get_string( 'return', 'main_page.php' );
+	$f_return		= gpc_get_string( 'return', config_get( 'default_home_page' ) );
 	$f_from			= gpc_get_string( 'from', '' );
 
 	if ( BASIC_AUTH == config_get( 'login_method' ) ) {
@@ -26,7 +26,7 @@
 		$f_password = $_SERVER['PHP_AUTH_PW'];
  	}
 
-    if ( HTTP_AUTH == config_get( 'login_method' ) ) {
+	if ( HTTP_AUTH == config_get( 'login_method' ) ) {
 		if ( !auth_http_is_logout_pending() )
 		{
 			if ( isset( $_SERVER['PHP_AUTH_USER'] ) )
@@ -45,7 +45,7 @@
 	} else {
 		$t_redirect_url = 'login_page.php?error=1';
 
-    	if ( HTTP_AUTH == config_get( 'login_method' ) ) {
+		if ( HTTP_AUTH == config_get( 'login_method' ) ) {
 			auth_http_prompt();
 			exit;
 		}
