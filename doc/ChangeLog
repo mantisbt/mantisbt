@@ -12,7 +12,7 @@ Mantis ChangeLog
 - 0004423: [localization] Parse error in strings_hungarian.txt line 974 (Victor Boctor)
 - 0004435: [other] Auto-preview of attached images is broken (Victor Boctor)
 - 0004478: [upgrade] database upgrade from 0.18.3 problem: upgrade-ID "filters-db1" does not work on mySQL4.1.3b-beta (Jeroen Latour)
-  Updated Spanish, German, Dutch translations
+- Updated Czech, Swedish, Spanish, German, and Dutch translations
 
 2004.08.28  -  0.19.0rc1
 
