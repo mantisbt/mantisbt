@@ -41,6 +41,7 @@ This is the Mantis system configuration documentation.
 <li><a href="#file_upload">File Upload</a>
 <li><a href="#html">HTML</a>
 <li><a href="#hr">HR</a>
+<li><a href="#ldap">LDAP</a>
 <li><a href="#misc">Misc</a>
 <li><a href="#colors">Colors</a>
 <li><a href="#cookies">Cookies</a>
@@ -1031,6 +1032,55 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 </table>
 <!-- --- HR END ---------------------------------------------------------- -->
 
+<!-- --- LDAP BEGIN ------------------------------------------------------ -->
+<p>
+<a name="ldap">&nbsp;</a>
+<table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
+<tr>
+	<td colspan=2 bgcolor="#ffffff">
+		<b>LDAP</b>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_server
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See <a href="README.LDAP">README.LDAP</a>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_root_dn
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See <a href="README.LDAP">README.LDAP</a>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_ldap_organisation
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See <a href="README.LDAP">README.LDAP</a>
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_use_ldap_email
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		See <a href="README.LDAP">README.LDAP</a>
+	</td>
+</tr>
+<tr>
+	<td colspan=2 bgcolor="#eeeeee">
+		LDAP authentication method.
+	</td>
+</tr>
+</table>
+<!-- --- LDAP END -------------------------------------------------------- -->
+
 <!-- --- MISC BEGIN ------------------------------------------------------ -->
 <p>
 <a name="misc">&nbsp;</a>
@@ -1069,6 +1119,15 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		Some systems (mostly non-unix) do not have crypt support in PHP.  MD5 will accomplish almost the same thing.  PLAIN is plain text and there is no attempt to secure the password in the database.  You will not be able to easily convert between encryption methods so this needs to be chosen at install time.  CRYPT is the default.
 	</td>
 </tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_limit_reporters
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Limit reporters to only viewing bugs that they report.
+	</td>
+</tr>
+
 <tr>
 	<td colspan=2 bgcolor="#eeeeee">
 		Access level needed to re-open bugs.  Look in the constant_inc.php file if you want to set a different value.

@@ -64,18 +64,6 @@
 	$g_show_version   = 1;
 
 	#############################
-	### Mantis LDAP Settings  ###
-	#############################
-
-	# look in README.LDAP for details
-
-	# --- using openldap -------------
-	$g_ldap_server       = "192.168.192.38";
-	$g_ldap_root_dn      = "dc=traffic,dc=redflex,dc=com,dc=au";
-	$g_ldap_organisation = "(organizationname=*Traffic)"; # optional
-	$g_use_ldap_email    = 0; # Should we send to the LDAP email address or what MySql tells us
-
-	#############################
 	### Mantis Email Settings ###
 	#############################
 
@@ -354,6 +342,18 @@
 	# --- hr --------------------------
 	$g_hr_size  = 1;
 	$g_hr_width = 50;
+
+	#############################
+	### Mantis LDAP Settings  ###
+	#############################
+
+	# look in README.LDAP for details
+
+	# --- using openldap -------------
+	$g_ldap_server       = "192.168.192.38";
+	$g_ldap_root_dn      = "dc=traffic,dc=redflex,dc=com,dc=au";
+	$g_ldap_organisation = "(organizationname=*Traffic)"; # optional
+	$g_use_ldap_email    = 0; # Should we send to the LDAP email address or what MySql tells us
 
 	############################
 	### Mantis Misc Settings ###

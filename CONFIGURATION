@@ -8,13 +8,11 @@ CONFIGURATION
 * Also see configuration.html
 
 
-
 NOTE: Currently Mantis is still in heavy development.  Drastic changes may
 occur negating large amounts of customization that you may implement.
 When the package is functionally more mature we will concentrate on
 making the interface more customizable.  Keep this in mind before you
 put in a lot of effort into customizing the look/feel of the product.
-
 
 
 This file contains information to help you customize Mantis.  A more
