@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.4 2002-08-27 12:44:10 vboctor Exp $
+	# $Id: file_api.php,v 1.5 2002-08-29 09:40:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -23,31 +23,35 @@
 	# List the attachments belonging to the specified bug.  This is used from within
 	# view_bug_page.php and view_bug_advanced_page.php
 	function file_list_attachments ( $p_bug_id ) {
-		$c_id = (integer) $p_bug_id;
+		$c_bug_id = db_prepate_int( $p_bug_id );
 
-		$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added ".
-				"FROM " . config_get('mantis_bug_file_table') . ' '.
-				"WHERE bug_id='$c_id'";
+		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+
+		$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
+				  FROM $t_bug_file_table
+				  WHERE bug_id='$c_bug_id'";
 		$result = db_query( $query );
+
 		$num_files = db_num_rows( $result );
-		for ($i = 0; $i < $num_files; $i++) {
+		for ( $i = 0 ; $i < $num_files ; $i++ ) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
+
 			$v_filesize = number_format( $v_filesize );
 			$v_date_added = date( config_get( 'normal_date_format' ), ( $v_date_added ) );
 
-			PRINT "<a href=\"file_download.php?f_id=$v_id&amp;f_type=bug\">".file_get_display_name($v_filename)."</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
+			echo "<a href=\"file_download.php?f_id=$v_id&amp;f_type=bug\">".file_get_display_name($v_filename)."</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
 
 			if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
-				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?f_id=$p_bug_id&amp;f_file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
+				echo " [<a class=\"small\" href=\"bug_file_delete.php?f_id=$p_bug_id&amp;f_file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
 			}
 			
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
-				PRINT ' (' . lang_get( 'cached' ) . ')';
+				echo ' (' . lang_get( 'cached' ) . ')';
 			}
 
 			if ( $i != ($num_files - 1) ) {
-				PRINT '<br />';
+				echo '<br />';
 			}
 		}
 	}
