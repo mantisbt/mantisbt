@@ -38,13 +38,13 @@
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align=left>
 <?
 	PRINT "$s_show_source_for: $f_url<p>";
 	### Print source
 	$t_ver = phpversion();
 	if ( floor( $t_ver )>=4 ) {
-		show_source( $DOCUMENT_ROOT.$f_url );
+		show_source( $f_url );
 	}
 	else {
 		PRINT "$s_not_supported_part1 ($t_ver) $s_not_supported_part2 show_source()";

@@ -25,6 +25,7 @@ To Do:
  * Fixed another problem with the date created being updated improperly when
    dealing with bugnotes.
  * Reordered the config_inc.php file items
+ * Added a logout redirect page variable for the logout page
 
 12.20.2000	-	0.12.0
 

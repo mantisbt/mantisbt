@@ -42,7 +42,7 @@
 	<form method=post action="<? echo $g_report_add ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_enter_report_details ?></b>
+			<b><? echo $s_enter_report_details_title ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
