@@ -1,5 +1,7 @@
 Mantis
+
 ??.??.2002  -   0.18.0
+
  * Added capability to monitor bugs even when not reporter or handler
  * Added basic private bug functionality
 
@@ -7,6 +9,7 @@ Mantis
 
  * Fixed problem with CSV not downloading.
  * Removed view_csv_export_inc.php (unused).
+ * Modified core_API.php to always turn magic_quotes_runtime OFF.
 
 05.12.2002  -   0.17.2
 

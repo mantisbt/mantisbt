@@ -8,13 +8,16 @@
 	# INCLUDES
 	###########################################################################
 
-
-	foreach ( $HTTP_POST_VARS as $key => $value) {
+	ini_set("magic_quotes_runtime", 0);
+	extract( $HTTP_POST_VARS );
+	extract( $HTTP_GET_VARS );
+	extract( $HTTP_SERVER_VARS );
+	/*foreach ( $HTTP_POST_VARS as $key => $value) {
 		$$key = $value;
 	}
 	foreach ( $HTTP_GET_VARS as $key => $value) {
 		$$key = $value;
-	}
+	}*/
 
 	include( "core_timer_API.php" );
 	$g_timer = new BC_Timer;
