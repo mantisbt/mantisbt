@@ -139,6 +139,25 @@
 			<input type=text name=f_build size=4 maxlength=4>
 		</td>
 	</tr>
+	<tr height=10 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=2>
+		</td>
+	</tr>
+	<tr bgcolor=<? echo $g_primary_color_light ?>>
+		<td>
+			<? echo $s_assign_to ?>
+		</td>
+		<td>
+			<select name=f_assign_id>
+				<option value="0000000" SELECTED>
+				<? print_assign_to_option_list() ?>
+			</select>
+		</td>
+	</tr>
+	<tr height=10 bgcolor=<? echo $g_white_color ?>>
+		<td colspan=2>
+		</td>
+	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
 			<? echo $s_summary ?>:<br>

@@ -39,6 +39,7 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_report_add ?>">
+	<input type=hidden name=f_assign_id value="0000000">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_enter_report_details_title ?></b>

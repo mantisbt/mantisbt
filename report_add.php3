@@ -29,11 +29,7 @@
 	### required fields ok, proceeding
 	if ( !$check_failed ) {
 		### Get user id
-		$query = "SELECT id
-				FROM $g_mantis_user_table
-				WHERE cookie_string='$g_string_cookie_val'";
-		$result = db_query( $query );
-		$u_id = db_result( $result, 0 );
+		$u_id = get_current_user_field( "id" );
 
 		### Make strings safe for database
 		$f_summary = string_safe( $f_summary );
@@ -83,6 +79,12 @@
 			$t_id = db_result( $result, 0 );
 		}
 
+		### check to see if we want to assign this right ff
+		$t_status = "new";
+		if ( $f_assign_id != "0000000" ) {
+			$t_status = "assigned";
+		}
+
 		### Insert the rest of the data
 		$query = "INSERT
 				INTO $g_mantis_bug_table
@@ -92,7 +94,7 @@
 				platform, version, build, votes, profile_id, summary )
 				VALUES
 				( null, '$u_id', '0000000', '0000000', 'normal', '$f_severity',
-				'$f_reproducibility', 'new', 'open', 'minor fix', '$f_category',
+				'$f_reproducibility', '$t_status', 'open', 'minor fix', '$f_category',
 				NOW(), NOW(), NOW(), '$t_id', '$f_os', '$f_osbuild',
 				'$f_platform', '$f_version', '$f_build',
 				1, '$f_profile_id', '$f_summary' )";
