@@ -16,9 +16,11 @@ Mantis
  * Added option to allow reporters to close the bugs they reported.
  * Quoted various text values retrieved from a database and used in a database query.
  * Updated Hungarian localization.
- * Updated Russian localization.
+ * Updated Russian localizations.
  * Updated Romanian localization.
  * Updated German localization.
+ * Updated Danish lozalization.
+ * Updated Norwegian localization.
  * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
  * Removed HTML entities from all localization files.
  * Reworked code formatting for $c_ variables.
