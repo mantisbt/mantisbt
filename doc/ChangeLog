@@ -2,6 +2,7 @@ Mantis
 
 2002.06.??  -   0.18.0
 
+ * Fixed problem with ambiguous column names in queries when using the text search or applying filters
  * Fixed problem deleting bugnotes.
  * Fixed problem with print_assign_to_option_list() not selecting the current user.
  * Added capability to monitor bugs even when not reporter or handler
