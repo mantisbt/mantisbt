@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.75 2004-07-25 14:58:34 prichards Exp $
+	# $Id: bug_api.php,v 1.76 2004-08-01 17:28:58 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -19,7 +19,7 @@
 	require_once( $t_core_dir . 'sponsorship_api.php' );
 
 	# MASC RELATIONSHIP
-	require_once( $t_core_path.'relationship_api.php' );
+	require_once( $t_core_dir.'relationship_api.php' );
 	# MASC RELATIONSHIP
 
 	### Bug API ###

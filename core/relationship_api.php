@@ -6,10 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.17 2004-08-01 05:53:00 vboctor Exp $
+	# $Id: relationship_api.php,v 1.18 2004-08-01 17:28:58 prichards Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'collapse_api.php' );
 
