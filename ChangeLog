@@ -21,7 +21,7 @@ To Do:
  * Move as much of the config_inc.php varaibles into a database table.
    Then build a nice interface into it.
 
-12.10.2000	-	0.11.0
+12.12.2000	-	0.11.0
 
  * Profiles can be used for advanced bug submission
  * Added summary by date
