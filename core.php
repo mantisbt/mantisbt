@@ -6,12 +6,30 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.24 2003-02-17 13:16:28 jlatour Exp $
+	# $Id: core.php,v 1.25 2003-02-19 12:27:26 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# INCLUDES
 	###########################################################################
+
+	# Check if Mantis is down for maintenance
+	#
+	#   To make Mantis 'offline' simply create a file called
+	#   'mantis_offline.php' in the mantis root directory.
+	#   Users are redirected to that file if it exists.
+	#   If you have to test Mantis while it's offline, add the
+	#   parameter 'mbadmin=1' to the URL.
+	#   @@@ -> The parameter might not work without register_globals...
+	#
+	$t_mantis_offline = 'mantis_offline.php';
+	if (  file_exists( $t_mantis_offline )
+           && !isset( $mbadmin ) ) {
+		header("Location: http://".$_SERVER['HTTP_HOST']
+                      .dirname( $_SERVER['PHP_SELF'])
+                      ."/".$t_mantis_offline );
+	}
+
 
 	# Before doing anything else, start output buffering so we don't prevent
 	#  headers from being sent if there's a blank line in an included file
