@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_inc.php.sample,v 1.9 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: config_inc.php.sample,v 1.10 2003-08-17 22:29:52 vboctor Exp $
 	# --------------------------------------------------------
 	
 	# This sample file contains the essential files that you MUST
@@ -19,10 +19,10 @@
 	# CONFIGURATION VARIABLES
 	###########################################################################
 
-	# In general a value of 0 means the feature is disabled and 1 means the
+	# In general the value OFF means the feature is disabled and ON means the
 	# feature is enabled.  Any other cases will have an explanation.
 
-	# Look in configuration.html or config_defaults_inc.php for more
+	# Look in http://mantisbt.sourceforge.net/manual or config_defaults_inc.php for more
 	# detailed comments.
 
 	# --- database variables ---------
@@ -35,26 +35,22 @@
 	$g_database_name = "bugtracker";
 
 	# --- email variables -------------
-	$g_administrator_email  = "administrator@nowhere";
-	$g_webmaster_email      = "webmaster@nowhere";
+	$g_administrator_email  = 'administrator@example.com';
+	$g_webmaster_email      = 'webmaster@example.com';
 
 	# the "From: " field in emails
-	$g_from_email           = "noreply@nowhere";
+	$g_from_email           = 'noreply@example.com';
 
 	# the "To: " address all emails are sent.  This can be a mailing list or archive address.
 	# Actual users are emailed via the bcc: fields
-	$g_to_email             = "nobody@nowhere";
+	$g_to_email             = 'nobody@example.com';
 
 	# the return address for bounced mail
-	$g_return_path_email    = "admin@nowhere";
+	$g_return_path_email    = 'admin@example.com';
 
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
 	$g_login_method = MD5;
-
-	# --- using MS IIS ----------------
-	# set to ON if you use IIS
-	$g_use_iis = ON;
 
 	# --- email vars ------------------
 	# set to OFF to disable email check

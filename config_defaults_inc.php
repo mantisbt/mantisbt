@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.123 2003-08-05 13:12:07 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.124 2003-08-17 22:29:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -22,6 +22,8 @@
 
 	# In general a value of OFF means the feature is disabled and ON means the
 	# feature is enabled.  Any other cases will have an explanation.
+
+	# For more details see http://mantisbt.sourceforge.net/manual/
 
 	################################
 	# Mantis Database Settings
