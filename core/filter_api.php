@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.71 2005-01-12 23:23:12 thraxisp Exp $
+	# $Id: filter_api.php,v 1.72 2005-01-13 22:16:48 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -135,7 +135,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['reporter_id'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -173,7 +173,7 @@
 		$t_any_found = false;
 
 		foreach( $t_filter['handler_id'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -229,7 +229,7 @@
 		# severity
 		$t_any_found = false;
 		foreach( $t_filter['show_severity'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -263,7 +263,7 @@
 			$t_this_status = $t_filter['show_status'][0];
 			$t_this_hide_status = $t_filter['hide_status'][0];
 
-			if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 == $t_this_status ) ) {
+			if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 === $t_this_status ) ) {
 				$t_any_found = true;
 			}
 			if ( $t_any_found ) {
@@ -280,7 +280,7 @@
 			$t_any_found = false;
 			foreach( $t_filter['show_status'] as $t_this_status ) {
 				$t_desired_statuses[] = $t_this_status;
-				if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 == $t_this_status ) ) {
+				if ( ( '[any]' == $t_this_status ) || ( is_blank( $t_this_status ) ) || ( 0 === $t_this_status ) ) {
 					$t_any_found = true;
 				}
 			}
@@ -322,7 +322,7 @@
 		# priority 
 		$t_any_found = false;
 		foreach( $t_filter['show_priority'] as $t_filter_member ) {
-				if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 					$t_any_found = true;
 				}
 		}
@@ -343,7 +343,7 @@
 		# product build
 		$t_any_found = false;
 		foreach( $t_filter['show_build'] as $t_filter_member ) {
-				if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -367,7 +367,7 @@
 		# product version
 		$t_any_found = false;
 		foreach( $t_filter['show_version'] as $t_filter_member ) {
-				if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -407,7 +407,7 @@
 		# fixed in version
 		$t_any_found = false;
 		foreach( $t_filter['fixed_in_version'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -431,7 +431,7 @@
 		# users monitoring a bug
 		$t_any_found = false;
 		foreach( $t_filter['user_monitor'] as $t_filter_member ) {
-			if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+			if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 				$t_any_found = true;
 			}
 		}
@@ -469,7 +469,7 @@
 				# Ignore all custom filters that are not set, or that are set to '' or "any"
 				$t_any_found = false;
 				foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
-				if ( ( '[any]' == $t_filter_member ) || ( 0 == $t_filter_member ) ) {
+				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
 						$t_any_found = true;
 					}
 				}
@@ -483,9 +483,8 @@
 					foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
 						if ( isset( $t_filter_member ) &&
 							( '[any]' != strtolower( $t_filter_member ) ) &&
-							( !is_blank( trim( $t_filter_member ) ) ) ) {	# @@@ What if the user wants to filter on issues with an empty custom field??.. tricky!!!
-
-
+							( !is_blank( trim( $t_filter_member ) ) ) ) {	
+							
 							if ( '[none]' == $t_filter_member ) { # coerce filter value if selecting 'none'
 								$t_filter_member = '';
 							}
@@ -2297,7 +2296,7 @@
 			check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );
 			echo '>[' . lang_get( 'any' ) .']</option>';
 			# don't show '[none]' for enumerated types as it's not possible for them to be blank
-			if ( ! in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_CHECKBOX, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
+			if ( ! in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
 				echo '<option value="[none]" ';
 				check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );
 				echo '>[' . lang_get( 'none' ) .']</option>';
