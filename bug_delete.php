@@ -16,7 +16,7 @@
 	check_access( $g_handle_bug_threshold );
 	check_bug_exists( $f_id );
 
-	delete_bug($f_id, $f_bug_text_id);
+	bug_delete($f_id, $f_bug_text_id);
 
 	$t_redirect_url = 'view_all_bug_page.php';
 	if ( $result ) {

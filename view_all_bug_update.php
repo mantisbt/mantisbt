@@ -32,11 +32,11 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	extract( $row, EXTR_PREFIX_ALL, 'h' );
 
 	switch ($p_status) {
-		
-		case 'MOVED' : 
+
+		case 'MOVED' :
 			$t_query = "project_id='$p_request'";
 			break;
-				
+
 		case CLOSED :
 			$t_query="status='$p_status'";
 			break ;
@@ -62,7 +62,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	$query = "UPDATE $g_mantis_bug_table ".
     		"SET $t_query ".
 			"WHERE id='$p_id'";
-	
+
    	$result = db_query($query);
 
 	if ( !$result ) {
@@ -71,11 +71,11 @@ function updateBugLite($p_id, $p_status, $p_request) {
 
 	# history logging should be done after the field updates
 	switch ($p_status) {
-		
-		case 'MOVED' : 
-			history_log_event_direct( $p_id, 'project_id', $h_project_id, $p_request, $t_handler_id );	
+
+		case 'MOVED' :
+			history_log_event_direct( $p_id, 'project_id', $h_project_id, $p_request, $t_handler_id );
 			break;
-				
+
 		case CLOSED :
 			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
 			break ;
@@ -95,7 +95,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 			break ;
 
 		case 'UP_STATUS' :
-			history_log_event_direct( $p_id, 'status', $h_status, $p_request, $t_handler_id ); 
+			history_log_event_direct( $p_id, 'status', $h_status, $p_request, $t_handler_id );
 			break ;
 	}
 
@@ -113,7 +113,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 						break;
 	}
 
-}//updateBug 
+}//updateBug
 
 
 
@@ -121,8 +121,8 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	check_access( UPDATER );
 
 	# We check to see if the variable exists to avoid warnings
-	if ( ( $f_actionconfirmed=='1' )&&( isset( $f_bug_arr ) ) )  {	
-	
+	if ( ( $f_actionconfirmed=='1' )&&( isset( $f_bug_arr ) ) )  {
+
 	foreach($f_bug_arr as $value) {
 
 		# get the id and the bug_text_id parameters
@@ -130,19 +130,19 @@ function updateBugLite($p_id, $p_status, $p_request) {
 		$t_id_arr=explode( ',', $value );
 
 		switch ( $f_action ) {
-		
+
 		case 'CLOSE':
 			updateBugLite($t_id_arr[0],CLOSED,'');
 			break;
 
 		case 'DELETE':
-			delete_bug($t_id_arr[0],$t_id_arr[1]);
+			bug_delete($t_id_arr[0],$t_id_arr[1]);
 			break;
-			
+
 		case 'MOVE':
 			updateBugLite($t_id_arr[0],'MOVED',$f_project_id);
 			break;
-	
+
 		case 'ASSIGN':
 			updateBugLite($t_id_arr[0],ASSIGNED,$f_assign);
 			break;
@@ -150,7 +150,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 		case 'RESOLVE':
 			updateBugLite($t_id_arr[0],RESOLVED,$f_resolution);
 			break;
-		
+
 		case 'UP_PRIOR':
 			updateBugLite($t_id_arr[0],'UP_PRIOR',$f_priority);
 			break;
@@ -162,5 +162,5 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	}
 
 	print_meta_redirect( 'view_all_bug_page.php',0);
-} 
+}
 ?>

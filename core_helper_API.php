@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: prescience $
-	# $Date: 2002-08-19 01:13:17 $
+	# $Date: 2002-08-19 01:21:59 $
 	#
-	# $Id: core_helper_API.php,v 1.59 2002-08-19 01:13:17 prescience Exp $
+	# $Id: core_helper_API.php,v 1.60 2002-08-19 01:21:59 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -58,89 +58,6 @@
 		if ( 0 == db_result( $result, 0, 0 ) ) {
 			print_header_redirect( 'main_page.php' );
 		}
-	}
-	# --------------------
-	# allows bug deletion :
-	# delete the bug, bugtext, bugnote, and bugtexts selected
-	# used in bug_delete.php & mass treatments
-	function delete_bug( $p_id, $p_bug_text_id ) {
-		global $g_mantis_bug_file_table, $g_mantis_bug_table, $g_mantis_bug_text_table,
-			   $g_mantis_bugnote_table, $g_mantis_bugnote_text_table, $g_mantis_bug_history_table,
-			   $g_file_upload_method ;
-
-	email_bug_deleted($p_id);
-
-	$c_id			= (integer)$p_id;
-	$c_bug_text_id	= (integer)$p_bug_text_id;
-
-	# Delete the bug entry
-	$query = "DELETE
-			FROM $g_mantis_bug_table
-			WHERE id='$c_id'";
-	$result = db_query($query);
-
-	# Delete the corresponding bug text
-	$query = "DELETE
-			FROM $g_mantis_bug_text_table
-			WHERE id='$c_bug_text_id'";
-	$result = db_query($query);
-
-	# Delete the bugnote text items
-	$query = "SELECT bugnote_text_id
-			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$c_id'";
-	$result = db_query($query);
-	$bugnote_count = db_num_rows( $result );
-	for ($i=0;$i<$bugnote_count;$i++){
-		$row = db_fetch_array( $result );
-		$t_bugnote_text_id = $row['bugnote_text_id'];
-
-		# Delete the corresponding bugnote texts
-		$query = "DELETE
-				FROM $g_mantis_bugnote_text_table
-				WHERE id='$t_bugnote_text_id'";
-		$result2 = db_query( $query );
-	}
-
-	# Delete the corresponding bugnotes
-	$query = "DELETE
-			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$c_id'";
-	$result = db_query($query);
-
-	if ( ( DISK == $g_file_upload_method ) || ( FTP == $g_file_upload_method ) ) {
-		# Delete files from disk
-		$query = "SELECT diskfile, filename
-			FROM $g_mantis_bug_file_table
-			WHERE bug_id='$c_id'";
-		$result = db_query($query);
-		$file_count = db_num_rows( $result );
-
-		# there may be more than one file
-		for ($i=0;$i<$file_count;$i++){
-			$row = db_fetch_array( $result );
-
-			file_delete_local ( $row['diskfile'] );
-
-			if ( FTP == $g_file_upload_method ) {
-				$ftp = file_ftp_connect();
-				file_ftp_delete ( $ftp, $row['filename'] );
-				file_ftp_disconnect( $ftp );
-			}
-		}
-	}
-
-	# Delete the corresponding files
-	$query = "DELETE
-		FROM $g_mantis_bug_file_table
-		WHERE bug_id='$c_id'";
-	$result = db_query($query);
-
-	# Delete the bug history
-	$query = "DELETE
-		FROM $g_mantis_bug_history_table
-		WHERE bug_id='$c_id'";
-	$result = db_query($query);
 	}
 	# --------------------
 	# check to see if user exists

@@ -15,7 +15,87 @@
 	function bug_update() {
 	}
 	# --------------------
-	function bug_delete() {
+	# allows bug deletion :
+	# delete the bug, bugtext, bugnote, and bugtexts selected
+	# used in bug_delete.php & mass treatments
+	function bug_delete( $p_id, $p_bug_text_id ) {
+		global $g_mantis_bug_file_table, $g_mantis_bug_table, $g_mantis_bug_text_table,
+			   $g_mantis_bugnote_table, $g_mantis_bugnote_text_table, $g_mantis_bug_history_table,
+			   $g_file_upload_method ;
+
+		email_bug_deleted($p_id);
+
+		$c_id			= (integer)$p_id;
+		$c_bug_text_id	= (integer)$p_bug_text_id;
+
+		# Delete the bug entry
+		$query = "DELETE
+				FROM $g_mantis_bug_table
+				WHERE id='$c_id'";
+		$result = db_query($query);
+
+		# Delete the corresponding bug text
+		$query = "DELETE
+				FROM $g_mantis_bug_text_table
+				WHERE id='$c_bug_text_id'";
+		$result = db_query($query);
+
+		# Delete the bugnote text items
+		$query = "SELECT bugnote_text_id
+				FROM $g_mantis_bugnote_table
+				WHERE bug_id='$c_id'";
+		$result = db_query($query);
+		$bugnote_count = db_num_rows( $result );
+		for ($i=0;$i<$bugnote_count;$i++){
+			$row = db_fetch_array( $result );
+			$t_bugnote_text_id = $row['bugnote_text_id'];
+
+			# Delete the corresponding bugnote texts
+			$query = "DELETE
+					FROM $g_mantis_bugnote_text_table
+					WHERE id='$t_bugnote_text_id'";
+			$result2 = db_query( $query );
+		}
+
+		# Delete the corresponding bugnotes
+		$query = "DELETE
+				FROM $g_mantis_bugnote_table
+				WHERE bug_id='$c_id'";
+		$result = db_query($query);
+
+		if ( ( DISK == $g_file_upload_method ) || ( FTP == $g_file_upload_method ) ) {
+			# Delete files from disk
+			$query = "SELECT diskfile, filename
+				FROM $g_mantis_bug_file_table
+				WHERE bug_id='$c_id'";
+			$result = db_query($query);
+			$file_count = db_num_rows( $result );
+
+			# there may be more than one file
+			for ($i=0;$i<$file_count;$i++){
+				$row = db_fetch_array( $result );
+
+				file_delete_local ( $row['diskfile'] );
+
+				if ( FTP == $g_file_upload_method ) {
+					$ftp = file_ftp_connect();
+					file_ftp_delete ( $ftp, $row['filename'] );
+					file_ftp_disconnect( $ftp );
+				}
+			}
+		}
+
+		# Delete the corresponding files
+		$query = "DELETE
+			FROM $g_mantis_bug_file_table
+			WHERE bug_id='$c_id'";
+		$result = db_query($query);
+
+		# Delete the bug history
+		$query = "DELETE
+			FROM $g_mantis_bug_history_table
+			WHERE bug_id='$c_id'";
+		$result = db_query($query);
 	}
 	# --------------------
 	function bug_get_field() {
@@ -27,15 +107,12 @@
 
 		$c_bug_id = (integer)$p_bug_id;
 
-		# get info
 		$query ="SELECT * ".
 				"FROM $g_mantis_bug_table ".
 				"WHERE id='$c_bug_id' ".
 				"LIMIT 1";
-
 		return db_query( $query );
 	}
-	# --------------------
 	# --------------------
 	# updates the last_updated field
 	function bug_date_update( $p_bug_id ) {
@@ -59,12 +136,10 @@
 
 		$c_bug_id = (integer)$p_bug_id;
 
-		# get info
 		$query ="SELECT b.*, bt.*, b.id as id ".
 				"FROM $g_mantis_bug_table b, $g_mantis_bug_text_table bt ".
 				"WHERE b.id='$c_bug_id' AND b.bug_text_id = bt.id ".
 				"LIMIT 1";
-
 		return db_query( $query );
 	}
 	# --------------------
@@ -74,7 +149,6 @@
 
 		$c_bug_id = (integer)$p_bug_id;
 
-		# get info
 		$query ="SELECT $p_field_name ".
 				"FROM $g_mantis_bug_table ".
 				"WHERE id='$c_bug_id' ".
@@ -89,7 +163,6 @@
 
 		$t_bug_text_id = get_bug_field( $p_bug_id, 'bug_text_id' );
 
-		# get info
 		$query ="SELECT $p_field_name ".
 				"FROM $g_mantis_bug_text_table ".
 				"WHERE id='$t_bug_text_id' ".
