@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_view_page.php,v 1.31 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: news_view_page.php,v 1.32 2004-02-10 13:41:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,53 +14,34 @@
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path.'news_api.php' );
-	require_once( $t_core_path.'string_api.php' );
+	require_once( $t_core_path . 'news_api.php' );
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'news_inc.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
+<?php
+	$f_news_id = gpc_get_int( 'news_id', null );
+?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
+
+<br />
+
 <?php
-	$f_news_id = gpc_get_int( 'news_id' );
+	if ( $f_news_id !== null ) {
+		$t_project_id = news_get_field( $f_news_id, 'project_id' );
+		if ( news_is_private( $f_news_id ) ) {
+			access_ensure_project_level(	config_get( 'private_news_threshold' ), 
+							$t_project_id );
+		} else {
+			access_ensure_project_level( VIEWER, $t_project_id );
+		}
 
-	$row = news_get_row( $f_news_id );
-
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-	access_ensure_project_level( VIEWER, $v_project_id );
-	if ( VS_PRIVATE == $v_view_state ) {
-		access_ensure_project_level( config_get( 'private_news_threshold' ), $v_project_id );
+		print_news_string_by_news_id( $f_news_id );
 	}
-
-	$v_headline 	= string_display( $v_headline );
-	$v_body 		= string_display_links( $v_body );
-	$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
 ?>
-<br />
-<div align="center">
-<table class="width75" cellspacing="0">
-<tr>
-	<td class="news-heading">
-		<span class="bold"><?php echo $v_headline ?></span> -
-		<span class="italic-small"><?php echo $v_date_posted ?></span> -
-		<span class="news-email">
-		<?php
-			print_user( $v_poster_id );
-		?>
-		</span>
-	</td>
-</tr>
-<tr>
-	<td class="news-body">
-		<?php echo $v_body ?>
-	</td>
-</tr>
-</table>
-</div>
 
 <br />
 <div align="center">
-	<?php print_bracket_link( 'news_list_page.php', lang_get( 'back_link' ) ) ?>
+	<?php print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) ); ?>
 </div>
 
 <?php html_page_bottom1( __FILE__ ) ?>

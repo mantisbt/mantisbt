@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.47 2004-02-10 11:37:42 vboctor Exp $
+	# $Id: main_page.php,v 1.48 2004-02-10 13:41:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -60,7 +60,7 @@
 	# get news count (project plus sitewide posts)
 	$total_news_count = news_get_count( $t_project_id );
 
-	$news_rows = news_get_limited_rows( $p_offset, $t_project_id );
+	$news_rows = news_get_limited_rows( $f_offset, $t_project_id );
 	$news_count = count( $news_rows );
 
 	# Loop through results
