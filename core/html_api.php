@@ -6,16 +6,8 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.57 2003-02-18 03:10:04 jfitzell Exp $
+	# $Id: html_api.php,v 1.58 2003-02-18 03:16:12 jfitzell Exp $
 	# --------------------------------------------------------
-
-	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
-	require_once( $t_core_dir . 'current_user_api.php' );
-	require_once( $t_core_dir . 'string_api.php' );
-	require_once( $t_core_dir . 'bug_api.php' );
-	require_once( $t_core_dir . 'project_api.php' );
-	require_once( $t_core_dir . 'helper_api.php' );
 
 	###########################################################################
 	# HTML API
@@ -53,6 +45,14 @@
 	#  	 html_end
 	#
 	###########################################################################
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+	
+	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'string_api.php' );
+	require_once( $t_core_dir . 'bug_api.php' );
+	require_once( $t_core_dir . 'project_api.php' );
+	require_once( $t_core_dir . 'helper_api.php' );
 
 	# --------------------
 	# Print the part of the page that comes before meta redirect tags should
