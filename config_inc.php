@@ -263,8 +263,8 @@
 
 	# bug view/update
 	$g_view_all_bug_page              = "view_all_bug_page".$g_php;
-	$g_view_all_assigned_bug_page     = "view_all_assigned_bug_page".$g_php;
-	$g_view_all_reported_bug_page     = "view_all_reported_bug_page".$g_php;
+	$g_view_all_assigned_bug_page     = "view_all_assign_bug_page".$g_php;
+	$g_view_all_reported_bug_page     = "view_all_report_bug_page".$g_php;
 
 	$g_view_bug_page                  = "view_bug_page".$g_php;
 	$g_view_bug_advanced_page         = "view_bug_advanced_page".$g_php;
