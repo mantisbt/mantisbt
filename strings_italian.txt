@@ -3,6 +3,8 @@
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# Luca Pescatore
 ?>
 <?
 	# This file is to aid in localization
@@ -24,6 +26,33 @@
 	$s_new_account_password = "Password: ";
 	$s_new_account_message = "After logging into the site please change your password.  Also note that your password is stored via one way encryption.  The staff cannot retrieve your password.  If you forget your password it will have to be reset.\n\n";
 	$s_new_account_do_not_reply = "Non rispondere a questo messaggio.\n";
+
+	$s_reset_request_msg = "E' stata richiesto un reset della tua password".
+	$s_account_name_msg = "Il Nome del tuo Acount e'";
+	$s_news_password_msg = "La tua nuova password";
+
+	$s_new_bug_msg = "Questo nuovo BUG e' stato INSERITO.";
+	$s_email_bugnote_msg = "Una nota e' stata inserita a questo bug.";
+	$s_email_resolved_msg = "Il seguente bug e' stato RISOLTO.";
+	$s_email_feedback_msg = "Il seguente bug ha necessita' di un tuo commento.";
+	$s_email_reopen_msg = "Il seguente bug e' stato RIAPERTO.";
+	$s_email_assigned_msg = "Il seguente bug e' stato ASSEGNATO.";
+
+	$s_email_reporter = "Supervisore";
+	$s_email_handler = "Gestore";
+	$s_email_project = "Progetto";
+	$s_email_bug = "ID Bug";
+	$s_email_category = "Categoria";
+	$s_email_reproducibility = "Riproducibilita'";
+	$s_email_severity = "Livello Problematica";
+	$s_email_priority = "Priorita'";
+	$s_email_status = "Stato";
+	$s_email_resolution = "Risoluzione";
+	$s_email_duplicate = "Duplicato";
+	$s_email_date_submitted = "Data Invio";
+	$s_email_last_modified = "Ultima Modifica";
+	$s_email_summary =  "Sommario";
+	$s_email_description = "Descrizione";
 
 	### account_delete.php3
 	$s_account_protected_msg = "Il tuo Utente e' protetto, Non puoi modificare i settaggi...";
@@ -580,7 +609,7 @@
 
 	### view_bug_page.php3
 	$s_view_advanced_link = "Visualizzazione Avanzata";
-	### $s_viewing_bug_details_title # defined above
+	$s_viewing_bug_simple_details_title = "Visualizzazione dettaglio dell'errore";
 	### $s_id # defined above
 	### $s_category # defined above
 	### $s_severity # defined above

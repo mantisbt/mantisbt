@@ -26,6 +26,33 @@
 	$s_new_account_message = "Luego de conectarse al sitio, por favor cambie su clave.  Su clave sera almacenada en forma encriptada.\n\n";
 	$s_new_account_do_not_reply = "Por favor, no conteste a este mensaje.\n";
 
+    $s_reset_request_msg = "Ocurrio un pedido para resetear su clave.".
+    $s_account_name_msg = "Su nombre de cuenta es";
+    $s_news_password_msg = "Aqui esta su nueva clave";
+
+	$s_new_bug_msg = "El siguiente NUEVO bug ha sido AGREGADO.";
+    $s_email_bugnote_msg = "Una nota ha sido agregada a este bug.";
+    $s_email_resolved_msg = "El siguinte BUG ha sido RESUELTO.";
+    $s_email_feedback_msg = "El siguiente BUG requiere su FEEDBACK.";
+    $s_email_reopen_msg = "El siguiente BUG ha sido RE-ABIERTO.";
+    $s_email_assigned_msg = "El siguiente BUG ha sido ASIGNADO.";
+
+    $s_email_reporter = "Reportero";
+    $s_email_handler = "Manejador";
+    $s_email_project = "Proyecto";
+    $s_email_bug = "Bug ID";
+    $s_email_category = "Categoria";
+    $s_email_reproducibility = "Ocurrencia";
+    $s_email_severity = "Severidad";
+    $s_email_priority = "Prioridad";
+    $s_email_status = "Status";
+    $s_email_resolution = "Resolucion";
+    $s_email_duplicate = "Duplicar";
+    $s_email_date_submitted = "Fecha de Envio";
+    $s_email_last_modified = "Ultima Modificacion";
+    $s_email_summary =  "Sumario";
+    $s_email_description = "Descripcion";
+
 	### account_delete.php3
 	$s_account_protected_msg = "Cuenta Protegida. No es posible cambiar los seteos...";
 	$s_account_removed_msg = "Su cuenta ha sido eliminada...";
@@ -573,7 +600,7 @@
 
 	### view_bug_page.php3
 	$s_view_advanced_link = "Vista Avanzada";
-	### $s_viewing_bug_details_title # defined above
+	$s_viewing_bug_simple_details_title = "Mostrando en modo detallado simple.";
 	### $s_id # defined above
 	### $s_category # defined above
 	### $s_severity # defined above

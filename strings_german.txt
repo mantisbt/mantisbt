@@ -452,7 +452,7 @@
 
 	### view_bug_page.php3
 	$s_view_advanced_link = "erweiterte Anzeige";
-	### $s_viewing_bug_details_title # defined above
+	$s_viewing_bug_simple_details_title = "Einfache Fehleransicht anzeigen";
 	### $s_id # defined above
 	### $s_category # defined above
 	### $s_severity # defined above
@@ -518,6 +518,33 @@
 	$s_new_account_password = "Passwort: ";
 	$s_new_account_message = "Ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. tion. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.\n\n";
 	$s_new_account_do_not_reply = "Bitte beantworten Sie diese Nachricht nicht.\n";
+
+	$s_reset_request_msg = "Es gab eine Anfrage, Ihr Passwort zuruckzusetzen".
+	$s_account_name_msg = "Ihr Bnutzername ist";
+	$s_news_password_msg = "Hier ist Ihr neues Passwort";
+
+	$s_new_bug_msg = "Der folgende neue Fehler wurde hinzugefugt.";
+	$s_email_bugnote_msg = "Eine Fehlernotiz wurde zu diesem Fehler hinzugefugt";
+	$s_email_resolved_msg = "Der folgende Fehler wurde behoben.";
+	$s_email_feedback_msg = "Der folgende Fehler benotigt Ihr Feedback.";
+	$s_email_reopen_msg = "Der folgende Fehler wurde reaktiviert.";
+	$s_email_assigned_msg = "Der folgende Fehler wurde zugewiesen.";
+
+	$s_email_reporter = "Reporter";
+	$s_email_handler = "Bearbeiter";
+	$s_email_project = "Projekt";
+	$s_email_bug = "Fehler ID";
+	$s_email_category = "Kategorie";
+	$s_email_reproducibility = "Reproduzierbarkeit";
+	$s_email_severity = "Schwere";
+	$s_email_priority = "Prioritat";
+	$s_email_status = "Status";
+	$s_email_resolution = "Losung";
+	$s_email_duplicate = "Duplikat";
+	$s_email_date_submitted = "erstellt am";
+	$s_email_last_modified = "letzte Aktualisierung";
+	$s_email_summary =  "Zusammenfassung";
+	$s_email_description = "Beschreibung";
 
 	$s_default_project = "Standard-Projekt";
 

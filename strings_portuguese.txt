@@ -23,8 +23,35 @@
         $s_new_account_url = "Voc&ecirc; pode se Logar neste site aqui: ";
         $s_new_account_username = "Usu&aacute;rio: ";
         $s_new_account_password = "Senha: ";
-        $s_new_account_message = "Depois de entrar no site troque sua senha.  sua senha é armazenada criptografada.  ninguem pode pega-la.  se voc&ecirc; perder sua senha ela ter&aacute; que ser re-iniciada.\n\n";
+        $s_new_account_message = "Depois de entrar no site troque sua senha.  sua senha &eacute; armazenada criptografada.  ninguem pode pega-la.  se voc&ecirc; perder sua senha ela ter&aacute; que ser re-iniciada.\n\n";
         $s_new_account_do_not_reply = "N&atilde;o Responda a Essa Mensagem.\n";
+
+		$s_reset_request_msg = "Existe uma solicita&ccedil;&atilde;o para que sua senha seja Re-Iniciada".
+		$s_account_name_msg = "Sua Conta &eacute;";
+		$s_news_password_msg = "Sua Senha &eacute;";
+
+		$s_new_bug_msg = "O Seguinte novo bug foi ADICIONADO.";
+		$s_email_bugnote_msg = "Uma nota foi adicionada a esse bug.";
+		$s_email_resolved_msg = "O Seguinte bug foi RESOLVIDO";
+		$s_email_feedback_msg = "O Seguinte bug aguarda um FEEDBACK.";
+		$s_email_reopen_msg = "O Seguinte bug foi RE-ABERTO.";
+		$s_email_assigned_msg = "O Seguinte bug foi DESIGNADO.";
+
+		$s_email_reporter = "Relator";
+		$s_email_handler = "Operador";
+		$s_email_project = "Projeto";
+		$s_email_bug = "Bug ID";
+		$s_email_category = "Categoria";
+		$s_email_reproducibility = "freq&uuml;&ecirc;ncia";
+		$s_email_severity = "Conseq&uuml;&ecirc;ncia";
+		$s_email_priority = "Prioridade";
+		$s_email_status = "Status";
+		$s_email_resolution = "Solu&ccedil;&atilde;o";
+		$s_email_duplicate = "Duplica&ccedil;&atilde;o";
+		$s_email_date_submitted = "Data de Envio";
+		$s_email_last_modified = "Ultima Modifica&ccedil;&atilde.";
+		$s_email_summary =  "Sum&aacute;rio";
+		$s_email_description = "Descri&ccedil;&atilde;o";
 
         ### account_delete.php3
         $s_account_protected_msg = "Conta Protegida. Imposs&iacute;vel Alterar as Configura&ccedil;&otilde;es...";
@@ -48,7 +75,7 @@
 
         ### account_prefs_page.php3
         $s_default_account_preferences_title = "Preferencias Padr&atilde;o da Conta ";
-        $s_advanced_report = "Relatório Avan&ccedil;ado";
+        $s_advanced_report = "Relat&oacute;rio Avan&ccedil;ado";
         $s_advanced_view = "Visualiza&ccedil;&atilde;o Avan&ccedil;ada";
         $s_default_project = "Projeto Padr&atilde;o";
         $s_update_prefs_button = "Atualiza Preferencias";
@@ -302,7 +329,7 @@
         $s_project_deleted_msg = "O Projeto foi Removido com Sucesso...";
 
         ### manage_project_delete_page.php3
-        $s_project_delete_msg = "Voc&ecirc; tem certeza que deseja apagar o projeto e todos os relatórios em anexo?";
+        $s_project_delete_msg = "Voc&ecirc; tem certeza que deseja apagar o projeto e todos os relat&oacute;rios em anexo?";
         $s_project_delete_button = "Apagar Projeto";
 
         ### manage_project_edit_page.php3
@@ -362,7 +389,7 @@
         $s_version_updated_msg = "Vers&atilde;o atualizada com sucesso...";
 
         ### manage_user_delete.php3
-        $s_account_delete_protected_msg = "Conta Protegida. N&atilde;o é poss&iacute;vel apaga-la.";
+        $s_account_delete_protected_msg = "Conta Protegida. N&atilde;o &eacute; poss&iacute;vel apaga-la.";
         $s_account_deleted_msg = "Conta Apagada...";
 
         ### manage_user_delete_page.php3
@@ -438,7 +465,7 @@
         ### $s_select_project_button # defined above
 
         ### report_add.php3
-        $s_report_add_error_msg = "ERRO: Existe um erro no seu relatório.";
+        $s_report_add_error_msg = "ERRO: Existe um erro no seu relat&oacute;rio .";
         $s_must_enter_category = "Voc&ecirc; deve selecionar uma categoria";
         $s_must_enter_severity = "Voc&ecirc; deve selecionar uma causa";
         $s_must_enter_reproducibility = "Voc&ecirc; deve selecionar uma freq&uuml;&ecirc;ncia";
@@ -448,10 +475,10 @@
         $s_submission_thanks_msg = "Obrigado pelo envio.";
 
         ### report_bug_advanced_page.php3
-        $s_simple_report_link = "Relatório Simples";
+        $s_simple_report_link = "Relat&oacute;rio Simples";
         $s_enter_report_details_title = "Adicionar Detalhes do Problema";
         ### $s_category
-        $s_required = "Obrigatório";
+        $s_required = "Obrigat&oacute;rio";
         $s_select_category = "Selecione uma Categoria";
         $s_select_reproducibility = "Selecione uma Freq&uuml;&ecirc;ncia";
         $s_select_severity = "Selecione uma Causa";
@@ -469,10 +496,10 @@
         ### $s_description # defined above
         $s_steps_to_reproduce = "Passos para acontecer";
         $s_additional_information = "Informa&ccedil;&otilde;es adicionais";
-        $s_submit_report_button = "Enviar Relatório";
+        $s_submit_report_button = "Enviar Relat&oacute;rio";
 
         ### report_bug_page.php3
-        $s_advanced_report_link = "Relatório Avan&ccedil;ado";
+        $s_advanced_report_link = "Relat&oacute;rio  Avan&ccedil;ado";
         ### $s_enter_report_details_title # defined above
         ### $s_category # defined above
         ### $s_required # defined above
@@ -487,13 +514,13 @@
         ### $s_submit_report_button # defined above
 
         ### show_source_page.php3
-        $s_show_source_for_msg = "Mostrando o código para";
+        $s_show_source_for_msg = "Mostrando o c&oacute;digo para";
         $s_not_supported_part1 = "Essa Vers&atilde;o";
         $s_not_supported_part2 = "de php n&atilde;o suporta";
 
         ### signup.php3
         $s_invalid_email = "ENDEREÇO DE E-MAIL INVALIDO";
-        $s_duplicate_username = "USUÁRIO EXISTENTE. ESCOLHA OUTRO";
+        $s_duplicate_username = "USU&Aacute;RIO EXISTENTE. ESCOLHA OUTRO";
         $s_account_create_fail = "FALHA AO CRIAR A CONTA";
 
         ### signup_page.php3
@@ -573,7 +600,7 @@
 
         ### view_bug_page.php3
         $s_view_advanced_link = "Visualiza&ccedil;&atilde;o Avan&ccedil;ada";
-        ### $s_viewing_bug_details_title # defined above
+        $s_viewing_bug_simple_details_title = "Detalhes Simplificados do Bug";
         ### $s_id # defined above
         ### $s_category # defined above
         ### $s_severity # defined above

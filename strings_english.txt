@@ -24,6 +24,33 @@
 	$s_new_account_message = "After logging into the site please change your password.  Also note that your password is stored via one way encryption.  The staff cannot retrieve your password.  If you forget your password it will have to be reset.\n\n";
 	$s_new_account_do_not_reply = "Do not reply to this message.\n";
 
+	$s_reset_request_msg = "There was a request to have your password reset".
+	$s_account_name_msg = "Your account name is";
+	$s_news_password_msg = "Here is your new password";
+
+	$s_new_bug_msg = "The following NEW bug has been ADDED.";
+	$s_email_bugnote_msg = "A BUGNOTE has been added to this bug.";
+	$s_email_resolved_msg = "The following bug has been RESOLVED.";
+	$s_email_feedback_msg = "The following bug requires your FEEDBACK.";
+	$s_email_reopen_msg = "The following bug has been REOPENED.";
+	$s_email_assigned_msg = "The following bug has been ASSIGNED.";
+
+	$s_email_reporter = "Reporter";
+	$s_email_handler = "Handler";
+	$s_email_project = "Project";
+	$s_email_bug = "Bug ID";
+	$s_email_category = "Category";
+	$s_email_reproducibility = "Reproducibility";
+	$s_email_severity = "Severity";
+	$s_email_priority = "Priority";
+	$s_email_status = "Status";
+	$s_email_resolution = "Resolution";
+	$s_email_duplicate = "Duplicate";
+	$s_email_date_submitted = "Date Submitted";
+	$s_email_last_modified = "Last Modified";
+	$s_email_summary =  "Summary";
+	$s_email_description = "Description";
+
 	### account_delete.php3
 	$s_account_protected_msg = "Account protected. Cannot change settings...";
 	$s_account_removed_msg = "Your account has been removed...";
@@ -572,6 +599,7 @@
 
 	### view_bug_page.php3
 	$s_view_advanced_link = "View Advanced";
+	$s_viewing_bug_simple_details_title = "Viewing Bug Simple Details";
 	### $s_viewing_bug_details_title # defined above
 	### $s_id # defined above
 	### $s_category # defined above

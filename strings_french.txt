@@ -3,6 +3,8 @@
         # Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
         # This program is distributed under the terms and conditions of the GPL
         # See the README and LICENSE files for details
+
+        # Hellekin O. Wolf
 ?>
 <?
         # This file is to aid in localization
@@ -27,6 +29,32 @@
         $s_new_account_message = "Après votre identification, veuillez changer votre mot de passe. Celui-ci est stocké crypté aussi l'équipe d'administration du système ne pourra pas vous le transmettre si vous le perdez : il devra être réinitialisé.\n\n";
         $s_new_account_do_not_reply = "Merci de ne pas répondre à ce message.\n";
 
+		$s_reset_request_msg = "Une requête a été enregistrée pour réinitialiser votre mot de passe".
+		$s_account_name_msg = "Votre identifiant est";
+		$s_news_password_msg = "Voici votre nouveau mot de passe";
+
+		$s_new_bug_msg = "Le nouveau bug suivant a été ajouté.";
+		$s_email_bugnote_msg = "Une note a été ajoutée pour ce bug.";
+		$s_email_resolved_msg = "Le bug suivant a été résolu.";
+		$s_email_feedback_msg = "Le bug suivant réclame votre commentaire.";
+		$s_email_reopen_msg = "Le bug suivant a été ouvert de nouveau.";
+		$s_email_assigned_msg = "Le bug suivant a été assigné.";
+
+		$s_email_reporter = "Rapporteur";
+		$s_email_handler = "Handler"; // Not enough context
+		$s_email_project = "Projet";
+		$s_email_bug = "Bug ID"; // Can be left asis
+		$s_email_category = "Catégorie";
+		$s_email_reproducibility = "Reproductibilité";
+		$s_email_severity = "Sévérité";
+		$s_email_priority = "Priorité";
+		$s_email_status = "Etat";
+		$s_email_resolution = "Résolution";
+		$s_email_duplicate = "Redondance";
+		$s_email_date_submitted = "Date de soumission";
+		$s_email_last_modified = "Dernière modification";
+		$s_email_summary =  "Résumé";
+		$s_email_description = "Description";
 
         ### account_delete.php3
         $s_account_protected_msg = "Ce compte est protégé en écriture. Impossible de modifier sa configuration...";
@@ -652,7 +680,7 @@
 
         ### view_bug_page.php3
         $s_view_advanced_link = "Vue détaillée";
-        ### $s_viewing_bug_details_title # defined above
+        $s_viewing_bug_simple_details_title = "Affichage simplifié des détails du bug";
         ### $s_id # defined above
         ### $s_category # defined above
         ### $s_severity # defined above
