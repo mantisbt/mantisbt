@@ -1,5 +1,6 @@
 <?php
 	require_once( '../constant_inc.php' );
+	require_once( '../default/config_inc1.php' );
 	require_once( '../config_inc.php' );
 	require_once( '../core_database_API.php' );
 ?>
@@ -73,9 +74,9 @@
 
 				for ( $i=0; $i<$this->item_count; $i++ ) {
 					if ( $this->IsValidComment( $this->query_arr[$i] ) ) {
-						PRINT $this->query_arr[$i] . "\n";
+						PRINT $this->query_arr[$i] . "\r\n";
 					} else {
-						PRINT $this->query_arr[$i] . ";\n";
+						PRINT $this->query_arr[$i] . ";\r\n";
 					}
 				}
 

@@ -13,6 +13,21 @@
 
 	$upgrade_obj->AddItem( "# Auto-assigning of bugs for a default user per category" );
 	$upgrade_obj->AddItem( "ALTER TABLE mantis_bug_history_table ADD type INT(2) NOT NULL" );
+	$upgrade_obj->AddItem();
+
+	$upgrade_obj->AddItem( "# Private news support" );
+	$upgrade_obj->AddItem( "ALTER TABLE mantis_news_table ADD view_state INT(2) DEFAULT '10' NOT NULL ".
+							"AFTER last_modified" );
+	$upgrade_obj->AddItem();
+
+	$upgrade_obj->AddItem( "# Allow news items to stay at the top" );
+	$upgrade_obj->AddItem( "ALTER TABLE mantis_news_table ADD announcement INT(1) NOT NULL AFTER view_state" );
+	$upgrade_obj->AddItem();
+
+	$upgrade_obj->AddItem( "# Bug relationship support" );
+	$upgrade_obj->AddItem( "ALTER TABLE mantis_bug_relationship_table ADD id INT(7) UNSIGNED ZEROFILL NOT ".
+							"NULL AUTO_INCREMENT PRIMARY KEY FIRST" );
+	$upgrade_obj->AddItem();
 
 	# END OF UPGRADE SQL STATEMENTS
 
