@@ -10,6 +10,11 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
+	if ( empty( $f_category ) ) {
+		echo $MANTIS_ERROR[ERROR_EMPTY_FIELD];
+		exit;
+	}
+
 	$result = 0;
 	$duplicate = is_duplicate_category( $f_category, $f_project_id );
 	# check for empty case or duplicate
