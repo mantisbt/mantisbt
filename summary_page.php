@@ -10,8 +10,11 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	#checking if it's a per project statistic or all projects
-	if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
-	else $specific_where = " project_id='$g_project_cookie_val'";
+	if ($g_project_cookie_val=='0000000') {
+		$specific_where = " 1=1";
+	} else {
+		$specific_where = " project_id='$g_project_cookie_val'";
+	}
 	$t_res_val = RESOLVED;
 	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 			UNIX_TIMESTAMP(last_updated) as last_updated
