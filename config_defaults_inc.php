@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.199 2004-08-16 00:24:30 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.200 2004-08-20 12:33:11 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -141,7 +141,7 @@
 	# --- captcha image ---------------
 
 	# use captcha image to validate subscription it requires GD library installed
-	$g_signup_use_captcha	= OFF;
+	$g_signup_use_captcha	= ON;
 
 	# absolute path (with trailing slash!) to folder which contains your TrueType-Font files
 	# used to create the captcha image
