@@ -8,11 +8,11 @@
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# Japenese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: jlatour $
-	# $Date: 2004-03-07 18:26:12 $
+	# $Date: 2004-03-14 20:10:48 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.49 2004-03-07 18:26:12 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.50 2004-03-14 20:10:48 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -822,6 +822,13 @@ $s_prev = "前";
 $s_next = "次";
 $s_first = "先頭";
 $s_last = "最終";
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = "簡単な表示";
@@ -876,6 +883,8 @@ $s_field_delete_button = "項目の削除";
 $s_hide_status = "非表示にするステータス";
 $s_filter_closed = "完了";
 $s_filter_resolved = "解決済";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";

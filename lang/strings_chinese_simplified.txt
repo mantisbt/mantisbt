@@ -10,11 +10,11 @@
 	# Chinese_Simplified: zoomq@itcase.com
 	# Chinese_Simplified: liaobin@jite.net
 	# -------------------------------------------------
-	# $Revision: 1.37 $
+	# $Revision: 1.38 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 16:42:45 $
+	# $Date: 2004-03-14 20:10:39 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.37 2004-02-26 16:42:45 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.38 2004-03-14 20:10:39 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -824,6 +824,13 @@ $s_prev = 'Prev';
 $s_next = 'Next';
 $s_first = 'First';
 $s_last = 'Last';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = "简易检查";
@@ -878,6 +885,8 @@ $s_field_delete_button = '删除域';
 $s_hide_status = '隐藏状态';
 $s_filter_closed = "已关闭";
 $s_filter_resolved = "已解决";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "附件";
 $s_attachment_alt = "A";

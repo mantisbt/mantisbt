@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.44 $
+	# $Revision: 1.45 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 13:24:12 $
+	# $Date: 2004-03-14 20:10:49 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.44 2004-02-26 13:24:12 jlatour Exp $
+	# $Id: strings_russian_koi8.txt,v 1.45 2004-03-14 20:10:49 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -821,6 +821,13 @@ $s_prev = 'Prev';
 $s_next = 'Next';
 $s_first = 'First';
 $s_last = 'Last';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Простой просмотр';
@@ -875,6 +882,8 @@ $s_field_delete_button = 'Delete Field';
 $s_hide_status = 'Hide Status';
 $s_filter_closed = "Closed";
 $s_filter_resolved = "Resolved";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";

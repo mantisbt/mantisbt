@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.62 $
-	# $Author: vboctor $
-	# $Date: 2004-02-26 22:25:20 $
+	# $Revision: 1.63 $
+	# $Author: jlatour $
+	# $Date: 2004-03-14 20:10:48 $
 	#
-	# $Id: strings_italian.txt,v 1.62 2004-02-26 22:25:20 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.63 2004-03-14 20:10:48 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -823,6 +823,13 @@ $s_prev = 'Precedente';
 $s_next = 'Successiva';
 $s_first = 'Prima pagina';
 $s_last = 'Ultima';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = "Scheda normale";
@@ -877,6 +884,8 @@ $s_field_delete_button = "Elimina Campo";
 $s_hide_status = "Non mostrare quelli";
 $s_filter_closed = "Chiusi";
 $s_filter_resolved = "Risolti";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";

@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.60 $
+	# $Revision: 1.61 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 13:24:12 $
+	# $Date: 2004-03-14 20:10:48 $
 	#
-	# $Id: strings_korean.txt,v 1.60 2004-02-26 13:24:12 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.61 2004-03-14 20:10:48 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -822,6 +822,13 @@ $s_prev = '이전';
 $s_next = '다음';
 $s_first = '처음';
 $s_last = '마지막';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = '간략히 보기';
@@ -876,6 +883,8 @@ $s_field_delete_button = '필드 삭제';
 $s_hide_status = '상태 숨김';
 $s_filter_closed = "폐쇄됨";
 $s_filter_resolved = "해결됨";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "첨부파일";
 $s_attachment_alt = "A";

@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.58 $
+	# $Revision: 1.59 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 18:12:08 $
+	# $Date: 2004-03-14 20:10:49 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.58 2004-02-26 18:12:08 jlatour Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.59 2004-03-14 20:10:49 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -822,6 +822,13 @@ $s_prev = 'Prev';
 $s_next = 'Next';
 $s_first = 'First';
 $s_last = 'Last';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Visualização Simples';
@@ -876,6 +883,8 @@ $s_field_delete_button = 'Apagar Field';
 $s_hide_status = 'Não Visualizar Bugs...';
 $s_filter_closed = "Encerrado(s)";
 $s_filter_resolved = "Resolvido(s)";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";

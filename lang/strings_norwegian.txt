@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.62 $
-	# $Author: vboctor $
-	# $Date: 2004-02-26 22:25:20 $
+	# $Revision: 1.63 $
+	# $Author: jlatour $
+	# $Date: 2004-03-14 20:10:48 $
 	#
-	# $Id: strings_norwegian.txt,v 1.62 2004-02-26 22:25:20 vboctor Exp $
+	# $Id: strings_norwegian.txt,v 1.63 2004-03-14 20:10:48 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -823,6 +823,13 @@ $s_prev = 'Forrige';
 $s_next = 'Neste';
 $s_first = 'Første';
 $s_last = 'Siste';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Vis enkel';
@@ -877,6 +884,8 @@ $s_field_delete_button = 'Slett felt';
 $s_hide_status = 'Skjul status';
 $s_filter_closed = "Lukket";
 $s_filter_resolved = "Løst";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "vedlegg";
 $s_attachment_alt = "V";

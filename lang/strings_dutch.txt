@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 13:23:55 $
+	# $Date: 2004-03-14 20:10:41 $
 	#
-	# $Id: strings_dutch.txt,v 1.59 2004-02-26 13:23:55 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.60 2004-03-14 20:10:41 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -824,6 +824,13 @@ $s_prev = 'Vorige';
 $s_next = 'Volgende';
 $s_first = 'Eerste';
 $s_last = 'Laatste';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'eenvoudig overzicht';
@@ -878,6 +885,8 @@ $s_field_delete_button = 'Verwijder veld';
 $s_hide_status = 'Verberg Status';
 $s_filter_closed = 'Gesloten';
 $s_filter_resolved = 'Afgerond';
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";

@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.47 $
+  # $Revision: 1.48 $
   # $Author: jlatour $
-  # $Date: 2004-02-26 13:24:11 $
+  # $Date: 2004-03-14 20:10:42 $
   #
-  # $Id: strings_hungarian.txt,v 1.47 2004-02-26 13:24:11 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.48 2004-03-14 20:10:42 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -822,6 +822,13 @@ $s_prev = 'Elõzõ';
 $s_next = 'Következõ';
 $s_first = 'Elsõ';
 $s_last = 'Utolsó';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Egyszerû nézet';
@@ -876,6 +883,8 @@ $s_field_delete_button = 'Mezõ Törlése';
 $s_hide_status = 'Státusz Elrejtés';
 $s_filter_closed = "Zárva";
 $s_filter_resolved = "Megoldva";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";

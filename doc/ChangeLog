@@ -8,7 +8,7 @@ Mantis ChangeLog
  * Fix #3629: Duplicate Error ID.
  * Fix #3635: status_resolved in email_api should be resolved.
  * Fix #3646: Error in core/obsolete.php.
- * Languages: Updated Czech, Estonian and Japanese (EUC and SJIS) localisations.
+ * Languages: Updated Czech, Estonian, Japanese (EUC and SJIS) and Spanish localisations.
 
 2004.02.29  -  0.18.2
 

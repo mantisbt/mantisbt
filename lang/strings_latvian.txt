@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.8 $
-	# $Author: vboctor $
-	# $Date: 2004-02-28 14:16:57 $
+	# $Revision: 1.9 $
+	# $Author: jlatour $
+	# $Date: 2004-03-14 20:10:48 $
 	#
-	# $Id: strings_latvian.txt,v 1.8 2004-02-28 14:16:57 vboctor Exp $
+	# $Id: strings_latvian.txt,v 1.9 2004-03-14 20:10:48 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -823,6 +823,13 @@ $s_prev = 'iepr.';
 $s_next = 'nâkoð.';
 $s_first = 'pirmais';
 $s_last = 'pçdçjais';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = "Apskate";
@@ -877,6 +884,8 @@ $s_field_delete_button = 'Dzçst lauku';
 $s_hide_status = 'Slçpt statusu';
 $s_filter_closed = "Aizvçrtie";
 $s_filter_resolved = "Atrisinâtie";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "pielikums(-i)";
 $s_attachment_alt = "A";

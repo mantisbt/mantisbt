@@ -11,11 +11,11 @@
 	# Spanish: Bernardo Hernández - b.magno@terra.es
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# -------------------------------------------------
-	# $Revision: 1.62 $
-	# $Author: vboctor $
-	# $Date: 2004-02-28 12:54:27 $
+	# $Revision: 1.63 $
+	# $Author: jlatour $
+	# $Date: 2004-03-14 20:10:49 $
 	#
-	# $Id: strings_spanish.txt,v 1.62 2004-02-28 12:54:27 vboctor Exp $
+	# $Id: strings_spanish.txt,v 1.63 2004-03-14 20:10:49 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -825,6 +825,13 @@ $s_prev = 'Ant';
 $s_next = 'Sig';
 $s_first = 'Primero';
 $s_last = 'Último';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Cambiar a Vista Simple';
@@ -854,7 +861,7 @@ $s_add_custom_field_button = 'Nuevo campo personalizado';
 $s_delete_custom_field_button = 'Eliminar campo personalizado';
 $s_delete_custom_field_everywhere = 'Eliminar campo personalizado en todas partes';
 $s_update_custom_field_button = 'Actualizar campo personalizado';
-$s_add_existing_custom_field = 'Aádir este campo personalizado';
+$s_add_existing_custom_field = 'Añadir este campo personalizado';
 $s_edit_custom_field_title = 'Editar campo personalizado';
 $s_custom_field = 'Campo';
 $s_custom_fields_setup = 'Campos Personalizados';
@@ -879,6 +886,8 @@ $s_field_delete_button = 'Eliminar campo';
 $s_hide_status = 'Ocultar con Estado';
 $s_filter_closed = "Cerrado";
 $s_filter_resolved = "Resuelto";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "adjunto(s)";
 $s_attachment_alt = "A";

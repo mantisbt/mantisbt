@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.68 $
-	# $Author: vboctor $
-	# $Date: 2004-02-28 23:34:49 $
+	# $Revision: 1.69 $
+	# $Author: jlatour $
+	# $Date: 2004-03-14 20:10:41 $
 	#
-	# $Id: strings_french.txt,v 1.68 2004-02-28 23:34:49 vboctor Exp $
+	# $Id: strings_french.txt,v 1.69 2004-03-14 20:10:41 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -828,6 +828,13 @@ $s_prev = 'Précédent';
 $s_next = 'Suivant';
 $s_first = 'Premier';
 $s_last = 'Dernier';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Rapport simplifié';
@@ -882,6 +889,8 @@ $s_field_delete_button = 'Supprimer le champ';
 $s_hide_status = 'Cacher le statut';
 $s_filter_closed = 'Fermé';
 $s_filter_resolved = 'Résolu';
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = 'attachement(s)';
 $s_attachment_alt = 'A';

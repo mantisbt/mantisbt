@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.5 $
-	# $Author: vboctor $
-	# $Date: 2004-03-01 12:39:28 $
+	# $Revision: 1.6 $
+	# $Author: jlatour $
+	# $Date: 2004-03-14 20:10:41 $
 	#
-	# $Id: strings_estonian.txt,v 1.5 2004-03-01 12:39:28 vboctor Exp $
+	# $Id: strings_estonian.txt,v 1.6 2004-03-14 20:10:41 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -823,6 +823,13 @@ $s_prev = 'Eelmine';
 $s_next = 'Järgmine';
 $s_first = 'Esimene';
 $s_last = 'Viimane';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Näita tavalist';
@@ -877,6 +884,8 @@ $s_field_delete_button = 'Kustuta väli';
 $s_hide_status = 'Peida staatus';
 $s_filter_closed = "Suletud";
 $s_filter_resolved = "Lahendatud";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "Lisa(d)";
 $s_attachment_alt = "A";
