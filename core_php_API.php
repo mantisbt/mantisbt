@@ -68,6 +68,10 @@
 	#      our GPC variables with functions.  In fact we may want to
 	#      turn off register_global_variables if we can
 	if ( false == ini_get( 'register_globals' ) ) {
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_REQUEST, $_SERVER;
+		}
+
 		extract( $_REQUEST );
 		extract( $_SERVER );
 	}
