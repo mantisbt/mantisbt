@@ -38,6 +38,18 @@
 	$v2_description 			= string_display( $v2_description );
 	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display( $v2_additional_information );
+
+	# choose color based on status only if not resolved
+	# The code creates the appropriate variable name
+	# then references that color variable
+	# You could replace this with a bunch of if... then... else
+	# statements
+	$status_color = $g_primary_color1;
+	if ( CLOSED != $v_status ) {
+		$t_color_str = get_enum_element( $g_status_enum_string, $v_status );
+		$t_color_variable_name = "g_".$t_color_str."_color";
+		$status_color = $$t_color_variable_name;
+	}
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -139,7 +151,7 @@
 	<td class="category">
 		<?php echo $s_status ?>
 	</td>
-	<td>
+	<td bgcolor="<?php echo $status_color ?>">
 		<?php echo get_enum_element( $s_status_enum_string, $v_status ) ?>
 	</td>
 	<td class="category">
