@@ -5,890 +5,957 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# Portuguese Brazil: Felipe Tonioli, tonioli@easyline.com.br
-	# Portuguese Brazil: Fernando Machado, fm-nospam@fmachado.com
+	# Brazilian Portuguese: Felipe Tonioli, tonioli@easyline.com.br
+	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
+	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.58 $
-	# $Author: jlatour $
-	# $Date: 2004-03-14 20:10:49 $
+	# $Revision: 1.59 $
+	# $Author: vboctor $
+	# $Date: 2004-06-21 12:30:34 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.58 2004-03-14 20:10:49 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.59 2004-06-21 12:30:34 vboctor Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = 'iso-8859-1';
 
 # Group commands menuitems
-$s_actiongroup_menu_move = 'Move';
-$s_actiongroup_menu_assign = 'Assign';
-$s_actiongroup_menu_close = 'Close';
-$s_actiongroup_menu_delete = 'Delete';
-$s_actiongroup_menu_resolve = 'Resolve';
-$s_actiongroup_menu_update_priority = 'Update Priority';
-$s_actiongroup_menu_update_status = 'Update Status';
+$s_actiongroup_menu_move = 'Mover';
+$s_actiongroup_menu_copy = 'Copiar';
+$s_actiongroup_menu_assign = 'Atribuir';
+$s_actiongroup_menu_close = 'Fechar';
+$s_actiongroup_menu_delete = 'Apagar';
+$s_actiongroup_menu_resolve = 'Resolver';
+$s_actiongroup_menu_update_priority = 'Atualizar Prioridade';
+$s_actiongroup_menu_update_status = 'Atualizar Status';
+$s_actiongroup_menu_update_view_status = 'Atualizar Visibilidade';
+$s_actiongroup_bugs = 'Casos Selecionados';
 
 # new strings:
-$s_all_projects            = "Todos os projetos";
-$s_move_bugs               = "Mover bugs";
-$s_operation_successful    = "Opera&ccedil;&atilde;o realizada com sucesso.";
-$s_date_order              = "Ordem por data";
-$s_print_all_bug_page_link = "Imprimir lista de bugs";
-$s_csv_export              = "Exportar CSV";
-$s_login_anonymously       = "Login an&ocirc;nimo";
-$s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes        = "Ir para 'Bugnotes'";
-$s_public_project_msg      = "Este &eacute; um projeto p&uacute;blico. ".
-$s_private_project_msg     = "Este &eacute; um projeto reservado. ".
-$s_access_level_project    = "N&iacute;vel de acesso ao projeto";
-$s_view_submitted_bug_link = "Visualizar um bug enviado";
-$s_assigned_projects       = "Projetos atribu&iacute;dos";
-$s_unassigned_projects     = "Projetos n&atilde;o atribu&iacute;dos";
-$s_print                   = "Imprimir";
-$s_jump                    = "Ir para";
-$s_copy_users              = "Copiar usu&aacute;rios";
-$s_copy_categories_from = 'Copy Categories From';
-$s_copy_categories_to = 'Copy Categories To';
-$s_bug_history = 'Bug History';
-$s_field = 'Field';
-$s_old_value = 'Old Value';
-$s_new_value = 'New Value';
-$s_date_modified = 'Date Modified';
-$s_bugnote = 'Bugnote';
-$s_change = 'Change';
-$s_bugnote_view_state = 'Bugnote View State';
-$s_bug_monitor = 'Bug Monitored';
-$s_bug_end_monitor = 'Bug End Monitor';
-$s_announcement = 'Announcement';
-$s_stays_on_top = 'Stays on Top';
-$s_delete_bugnote_button = 'Delete Bugnote';
-$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
-$s_bug_relationships = 'Relationships';
-$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-$s_empty_password_button = 'Use Empty Password';
+$s_all_projects = 'Todos os Projetos';
+$s_move_bugs = 'Mover Casos';
+$s_operation_successful = 'Operação realizada com sucesso.';
+$s_date_order = 'Ordem por Data';
+$s_print_all_bug_page_link = 'Imprimir Relatórios';
+$s_csv_export = 'Exportar CSV';
+$s_login_anonymously = 'Login anônimo';
+$s_anonymous = 'Anônimo';
+$s_jump_to_bugnotes = 'Ir para as Anotações';
+$s_public_project_msg = 'Este projeto é PÚBLICO.  Todos os usuários tem acesso.';
+$s_private_project_msg = 'Este projeto é PRIVADO.  Somente administradores e usuários adicionados manualmente tem acesso.';
+$s_access_level_project = 'Nível de Acesso ao Projeto';
+$s_view_submitted_bug_link = 'Visualizar Caso Enviado';
+$s_assigned_projects = 'Projetos Atribuídos';
+$s_unassigned_projects = 'Projetos Não Atribuídos';
+$s_print = "Imprimir";
+$s_jump = "Ir para";
+$s_copy_users = 'Copiar Usuários';
+$s_copy_categories_from = 'Copiar Categorias De';
+$s_copy_categories_to = 'Copiar Categorias Para';
+$s_bug_history = 'Histórico do Caso';
+$s_field = 'Campo';
+$s_old_value = 'Valor Antigo';
+$s_new_value = 'Novo Valor';
+$s_date_modified = 'Data da Mudança';
+$s_bugnote = 'Anotação';
+$s_change = 'Alterar';
+$s_bugnote_view_state = 'Visibilidade da Anotação';
+$s_bug_monitor = 'Monitorado por';
+$s_bug_end_monitor = 'Parou de monitorar';
+$s_announcement = 'Anúncio';
+$s_stays_on_top = 'Manter no Topo';
+$s_delete_bugnote_button = 'Apagar Anotação';
+$s_delete_bugnote_sure_msg = 'Você tem certeza que você quer apagar essa anotação?';
+$s_bug_relationships = 'Relações';
+$s_empty_password_sure_msg = 'Este usuário possui uma senha em branco.  Você tem certeza que é isso que você deseja?';
+$s_empty_password_button = 'Usar Senha em Branco';
 
-$s_duplicate_of = 'duplicate of %id';
-$s_has_duplicate = 'has duplicate %id';
-$s_related_to = 'related to %id';
-$s_dependant_on = 'dependant on %id';
-$s_blocks = 'blocks %id';
+$s_duplicate_of = 'duplicado de %id';
+$s_has_duplicate = 'possui duplicado %id';
+$s_related_to = 'relacionado a %id';
+$s_dependant_on = 'depende de %id';
+$s_blocks = 'bloqueia %id';
 
-$s_new_bug = 'New Bug';
-$s_bugnote_added = 'Bugnote Added';
-$s_bugnote_edited = 'Bugnote Edited';
-$s_bugnote_deleted = 'Bugnote Deleted';
-$s_summary_updated = 'Summary Updated';
-$s_description_updated = 'Description Updated';
-$s_additional_information_updated = 'Additional Information Updated';
-$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-$s_file_added = 'File Added: ';
-$s_file_deleted = 'File Deleted: ';
-$s_bug_deleted = 'Bug Deleted';
+$s_new_bug = 'Novo Caso';
+$s_bugnote_added = 'Anotação Adicionada';
+$s_bugnote_edited = 'Anotação Alterada';
+$s_bugnote_deleted = 'Anotação Apagada';
+$s_summary_updated = 'Resumo Atualizado';
+$s_description_updated = 'Descrição Atualizada';
+$s_additional_information_updated = 'Informação Adicional Atualizada';
+$s_steps_to_reproduce_updated = 'Passos para Reprodução Atualizados';
+$s_file_added = 'Arquivo Adicionado';
+$s_file_deleted = 'Arquivo Apagado';
+$s_bug_deleted = 'Caso Apagado';
 
-$s_make_private = 'Make Private';
-$s_make_public = 'Make Public';
+$s_make_private = 'Tornar Privado';
+$s_make_public = 'Tornar Público';
 
-$s_create_new_project_link = 'Create New Project';
+$s_create_new_project_link = 'Criar Novo Projeto';
 
 $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-$s_move_bugs_conf_msg = 'Move bugs to';
-$s_assign_bugs_conf_msg = 'Assign bugs to';
-$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-$s_priority_bugs_conf_msg = 'Choose bugs priority';
-$s_status_bugs_conf_msg = 'Choose bugs status';
-$s_close_group_bugs_button = 'Close Bugs' ;
-$s_delete_group_bugs_button = 'Delete Bugs' ;
-$s_move_group_bugs_button = 'Move Bugs' ;
-$s_assign_group_bugs_button = 'Assign Bugs' ;
-$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-$s_priority_group_bugs_button = 'Update Priority' ;
-$s_status_group_bugs_button = 'Update Status' ;
+$s_bug_actiongroup_failed = 'Você não possui as permissões apropriadas para realizar esta ação nos seguintes casos: ';
+$s_close_bugs_conf_msg = 'Você tem certeza que deseja fechar estes casos ?';
+$s_delete_bugs_conf_msg = 'Você tem certeza que deseja apagar estes casos ?';
+$s_move_bugs_conf_msg = 'Mover casos para';
+$s_copy_bugs_conf_msg = 'Copiar casos para';
+$s_assign_bugs_conf_msg = 'Atribuir casos a';
+$s_resolve_bugs_conf_msg = 'Escolher resolução dos casos';
+$s_priority_bugs_conf_msg = 'Escolher prioridade dos casos';
+$s_status_bugs_conf_msg = 'Escolher status dos casos';
+$s_view_status_bugs_conf_msg = 'Escolher visibilidade dos casos';
+$s_close_group_bugs_button = 'Fechar Casos' ;
+$s_delete_group_bugs_button = 'Apagar Casos' ;
+$s_move_group_bugs_button = 'Mover Casos' ;
+$s_copy_group_bugs_button = 'Copiar Casos' ;
+$s_assign_group_bugs_button = 'Atribuir Casos' ;
+$s_resolve_group_bugs_button = 'Resolver Casos' ;
+$s_priority_group_bugs_button = 'Atualizar Prioridade' ;
+$s_status_group_bugs_button = 'Atualizar Status' ;
+$s_view_status_group_bugs_button = 'Atualizar Visibilidade';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-$s_graph_imp_category_title = 'Synthesis graphs by category';
-$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-$s_by_status_pct = 'by status percentage';
-$s_by_priority_pct = 'by priority percentage';
-$s_by_severity_pct = 'by severity percentage';
-$s_by_category_pct = 'by category percentage';
-$s_by_resolution_pct = 'by resolution percentage';
-$s_by_severity_mix = 'by severity and status';
-$s_by_priority_mix = 'by priority and status';
-$s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
+$s_graph_imp_status_title = 'Gráfico de síntese por status' ;
+$s_graph_imp_priority_title = 'Gráfico de síntese por prioridade' ;
+$s_graph_imp_severity_title = 'Gráfico de síntese por gravidade';
+$s_graph_imp_category_title = 'Gráfico de síntese por categoria';
+$s_graph_imp_resolution_title = 'Gráfico de síntese por resolução';
+$s_by_status_pct = 'porcentagem por status';
+$s_by_priority_pct = 'porcentagem por prioridade';
+$s_by_severity_pct = 'porcentagem por gravidade';
+$s_by_category_pct = 'porcentagem por categoria';
+$s_by_resolution_pct = 'porcentagem por resolução';
+$s_by_severity_mix = 'por gravidade e status';
+$s_by_priority_mix = 'por prioridade e status';
+$s_by_resolution_mix = 'por resolução e status';
+$s_synthesis_link = 'Síntese';
+$s_status_link = 'Por status';
+$s_priority_link = 'Por prioridade';
+$s_severity_link = 'Por gravidade';
+$s_category_link = 'Por categoria';
+$s_resolution_link = 'Por resolução';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Display selected only';
+$s_hide_button = 'Mostrar apenas os selecionados';
 
 # print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Choose fields to print';
-$s_printing_options_link = 'Printing Options';
+$s_printing_preferences_title = 'Escolher os campos para impressão';
+$s_printing_options_link = 'Opções de Impressão';
 
 # word and excel export
-$s_bugnote_title = 'Bugnote handler' ;
-$s_bugnote_date = 'Date of bugnote';
-$s_bugnote_description = 'Bugnote description';
+$s_bugnote_title = 'Identificador da anotação' ;
+$s_bugnote_date = 'Data da anotação';
+$s_bugnote_description = 'Descrição da anotação';
 
-$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'Por favor, utilize o botão "Voltar" de seu navegador web para voltar à pagina anterior.  Lá você pode corrigir quaisquer problemas identificados neste erro ou escolher uma outra ação.  Você também pode clicar em uma opção da barra de menus para ir diretamente para outra seção.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = "ERRO: Um erro ocorreu durante esta ".
-$MANTIS_ERROR[ERROR_SQL]                = "ERRO: Cl&aacute;usula SQL incorreta.  ".
-$MANTIS_ERROR[ERROR_REPORT]             = "ERRO: Um erro foi encontrado em seu relat&oacute;rio.";
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = "ERRO: Nenhum arquivo informado!";
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERRO: O tipo de arquivo n&atilde;o &eacute; permitido.";
-$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = "ERRO: O diret&oacute;rio do projeto n&atilde;o ".
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = "ERRO: Existe um arquivo com este nome. Por favor, ".
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = "ERRO: Um campo necess&aacute;rio est&acute; em branco. ".
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERRO: Esta conta est&aacute; protegida. Voc&ecirc; ".
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Um erro ocorreu durante esta ação.  Você pode querer relatar este erro ao seu administrador local.';
+$MANTIS_ERROR[ERROR_SQL] = 'Erro SQL detectado.  Por favor, relate para ';
+$MANTIS_ERROR[ERROR_REPORT] = 'Houve um erro em seu relatório.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Arquivo não especificado';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'O tipo de arquivo não é permitido';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'O diretório não existe. Por favor, verifique as configurações do projeto.';
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Este é um arquivo duplicado.  Por favor, apague o arquivo antes.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessário estava vazio.  Por favor, verifique novamente suas entradas.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida.  Você não tem permissão para acessá-la até que a proteção da conta seja retirada.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou.  Os carregamentos de arquivos do PHP podem estar desabilitados.  Por favor, peça ao seu administrador executar o script admin_check para depurar este problema.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'O carregamento do arquivo falhou.  Provavelmente é devido ao tamanho do arquivo ser maior do que o permitido atualmente por esta instalação PHP.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Um parâmetro necessário para esta página não foi encontrado.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Este nome de usuário já está sendo usado.  Por favor, volte e selecione um outro.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Opção de configuração \'%s\' não encontrada.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Texto \'%s\' não encontrado.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Anotação não encontrada.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projeto não encontrado.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo \'%s\' do banco-de-dados não encontrado.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Incapaz de conectar ao servidor FTP.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Um projeto com este nome já existe.  Por favor, volte e entre um nome diferente.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nome inválido de projeto especificado.  Nomes de projeto não pode ser em branco.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Usuário não encontrado.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A informação de login armazenada pelo seu navegador é inválida.  Talvez sua conta tenha sido apagada?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'As preferências deste usuário não foram encontradas.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Notícia não encontrada.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'A senha não combina com a verificação.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um <q>array</q> era esperado, mas um <q>string</q> foi recebido.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um <q>string</q> era esperado, mas um <q>array</q> foi recebido.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'Tipo de arquivo não permitido para carregamento.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'Este é um arquivo duplicado.  Por favor, apague o arquivo antes.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Caminho para carregamento inválido.  O diretório não existe ou não pode ser escrito pelo servidor web';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'Você não pode ajustar um caso como duplicata de dele mesmo.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Campo personalizado não encontrado';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Este é um nome duplicado.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Pelo menos um projeto ainda usa este campo.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor inválido para o campo';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definição de campo personalizado inválida';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'Autenticação LDAP Authentication Falhou';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Conexão ao Servidor LDAP Falhou';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Atualização de Registro LDAP falhou.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Registro de Usuário LDAP Não Encontrado.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Conexão ao banco-de-dados falhou. Erro recebido do banco-de-dados foi #%d: <q>%s</q>';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Consulta ao banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%d: <q>%s</q> para a consulta: <q>%s</q>';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Seleção de banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%d: <q>%s</q>';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Uma categoria com este nome já existe.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Não foi especificada uma ação de cópia.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Uma versão com este nome já existe.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão não encontrada.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de usuário não é válido. Nomes de usuário podem conter apenas letras, números, espaços, hífens e sublinhados.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'O usuário não possui o nível de acesso necessário';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'O suporte a patrocínio não está habilitado.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Patrocínio %d não encontrado.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'O patrocínio (%s) está abaixo da quantia mínima (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Esta pessoa não possui o nível de acesso necessário para tratar casos patrocinados.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acesso Negado: Atribuir casos patrocinados requer um nível de acesso maior.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A opção de configuração \'%s\' tem um valor inválido \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A ação não pode ser realizada porque o caso \'%d\' é somente-leitura';
 
-$s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
-$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+$s_login_error = 'ERRO: Sua conta pode estar desativada ou o nome de usuário e a senha que você entrou não estão corretos.';
+$s_login_cookies_disabled = 'ERRO: Seu navegador não sabe manusear cookies ou se recusa a manuseá-los.';
 
 # General Strings
-$s_go_back = "Voltar";
-$s_proceed = "Clique para continuar";
+$s_go_back = 'Voltar';
+$s_proceed = 'Clique aqui para prosseguir';
 
-$s_switch       = "Selecionar";
-$s_logged_in_as = "Conectado como";
+$s_switch = 'Switch';
+$s_logged_in_as = 'Acessando como';
 
 $s_prefix_for_deleted_users = 'user';
 
-$s_administrator = "Administrador";
-$s_myself = "Myself";
+$s_administrator = 'administrador';
+$s_myself = "Eu mesmo";
 
 # Enum Strings
-$s_access_levels_enum_string      = "10:Visualizador,25:Notificador,40:Atualizador,".
-$s_project_status_enum_string     = "10:Desenvolvimento,30:Liberado,50:Est&aacute;vel,70:Obsoleto";
-$s_project_view_state_enum_string = "10:Publico,50:Reservado";
-$s_view_state_enum_string         = '10:public,50:private';
+$s_access_levels_enum_string = '10:visualizador,25:relator,40:atualizador,55:desenvolvedor,70:gerente,90:administrador';
+$s_project_status_enum_string = '10:desenvolvimento,30:release,50:estável,70:obsoleto';
+$s_project_view_state_enum_string = '10:público,50:privado';
+$s_view_state_enum_string = '10:público,50:privado';
 
-$s_priority_enum_string = "10:Nenhuma,20:Baixa,30:Normal,40:Alta,50:Urgente,60:Imediato";
-$s_severity_enum_string = "10:Caracteristica,20:Trivial,30:Texto,40:Ajuste,50:Irrelevante,".
-$s_reproducibility_enum_string = "10:Sempre,30:Algumas vezes,50:Esporadicamente,70:Nao ".
-$s_status_enum_string = "10:Novos,20:Respondidos,30:Reconhecidos,40:Confirmados,".
-$s_resolution_enum_string = "10:Abertos,20:Corrigidos,30:Reabertos,40:Impossivel ".
-$s_projection_enum_string = "10:Nada,30:Ajuste,50:Pequenos consertos,70:Refeito,90:Redesenhado";
-$s_eta_enum_string        = "10:Sem previs&atilde;0,20:< 1 dia,30:2-3 dias,40:< 1 semana,".
+$s_priority_enum_string = '10:nenhuma,20:baixa,30:normal,40:alta,50:urgente,60:imediato';
+$s_severity_enum_string = '10:recurso,20:trivial,30:texto,40:mínimo,50:pequeno,60:grande,70:travamento,80:obstáculo';
+$s_reproducibility_enum_string = '10:sempre,30:às vezes,50:aleatório,70:não se tentou,90:incapaz de duplicar,100:N/D';
+$s_status_enum_string = '10:novo,20:retorno,30:admitido,40:confirmado,50:atribuído,80:resolvido,90:fechado';
+$s_resolution_enum_string = '10:aberto,20:corrigido,30:reaberto,40:incapaz de duplicar,50:não corrigível,60:duplicado,70:não é um caso,80:suspenso,90:não será corrigido';
+$s_projection_enum_string = '10:nenhuma,30:mínimo,50:correção pequena,70:grande recriação,90:redesenvolvimento';
+$s_eta_enum_string = '10:nenhum,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mês,60:> 1 mês';
 
 # Email Strings
-$s_new_account_subject  = "Nova conta de usuario";
-$s_new_account_greeting = "Parabens e bem-vindo ao Notificador de Bugs. Aqui estao ".
-$s_new_account_url      = "Para acessar o site, utilize o seguinte endereco:\n";
-$s_new_account_username = "Usuario: ";
-$s_new_account_password = "Senha: ";
-$s_new_account_message  = "Apos entrar no site, troque sua senha. Esta senha e' ".
-$s_new_account_do_not_reply = "Nao responda a esta mensagem.\n";
+$s_new_account_subject = 'Sua nova conta de usuário';
+$s_new_account_greeting = 'Felicitações e bem-vindo ao Gerenciador de Casos.  Aqui está a informação que você precisa para acessar' . "\n\n";
+$s_new_account_url = 'Você pode acessar o sítio aqui: ';
+$s_new_account_username = 'Nome de usuário: ';
+$s_new_account_password = 'Senha: ';
+$s_new_account_message = 'Após acessar o sítio, por favor, altere a sua senha.  Também note que a sua senha é armazenada através de uma criptografia de um único sentido.  Nossa equipe não pode recuperar sua senha.  Se você esquecer sua senha, ela terá que ser zerada.' . "\n\n";
+$s_new_account_do_not_reply = 'Não responda a esta mensagem.' . "\n";
 
-$s_reset_request_msg = "Existe uma solicita&ccedil;&atilde;o para que sua senha seja refeita".
-$s_account_name_msg  = "Seu nome de usu&aacute;rio &eacute;";
-$s_news_password_msg = "Sua senha &eacute;";
+$s_reset_request_msg = 'Houve uma solicitação para que sua senha fosse zerada';
+$s_account_name_msg = 'O nome da sua conta é';
+$s_news_password_msg = 'Aqui está sua nova senha';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'O seguinte caso requer o seu RETORNO.';
+$s_email_notification_title_for_status_bug_acknowledged = 'O seguinte caso foi ADMITIDO.';
+$s_email_notification_title_for_status_bug_confirmed = 'O seguinte caso foi CONFIRMADO.';
+$s_email_notification_title_for_status_bug_assigned = 'O seguinte caso foi ATRIBUÍDO.';
+$s_email_notification_title_for_status_bug_resolved = 'O seguinte caso foi RESOLVIDO.';
+$s_email_notification_title_for_status_bug_closed = 'O seguinte caso foi FECHADO.';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'O seguinte caso foi ENVIADO.';
+$s_email_notification_title_for_action_bug_assigned = 'O seguinte caso foi ATRIBUÍDO.';
+$s_email_notification_title_for_action_bug_reopened = 'O seguinte caso foi REABERTO.';
+$s_email_notification_title_for_action_bug_deleted = 'O seguinte caso foi APAGADO.';
+$s_email_notification_title_for_action_sponsorship_added = 'O seguinte caso foi PATROCINADO.';
+$s_email_notification_title_for_action_sponsorship_updated = 'O patrocínio do seguinte caso foi modificado.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'O patrocínio do seguinte caso foi retirado.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'Uma ANOTAÇÃO foi adicionada a este caso.';
 
-$s_email_reporter        = "Relator";
-$s_email_handler         = "Operador";
-$s_email_project         = "Projeto";
-$s_email_bug             = "Bug ID";
-$s_email_category        = "Categoria";
-$s_email_reproducibility = "Frequencia";
-$s_email_severity        = "Tipo de bug";
-$s_email_priority        = "Prioridade";
-$s_email_status          = "Status";
-$s_email_resolution      = "Solucao";
-$s_email_duplicate       = "Duplicacao";
-$s_email_date_submitted  = "Data de envio";
-$s_email_last_modified   = "Ultima modificacao";
-$s_email_summary         = "Titulo";
-$s_email_description     = "Descricao";
+$s_email_reporter = 'Relatado por';
+$s_email_handler = 'Atribuído a';
+$s_email_project = 'Projeto';
+$s_email_bug = 'Núm do Caso';
+$s_email_category = 'Categoria';
+$s_email_reproducibility = 'Freqüência';
+$s_email_severity = 'Gravidade';
+$s_email_priority = 'Prioridade';
+$s_email_status = 'Status';
+$s_email_resolution = 'Resolução';
+$s_email_duplicate = 'Duplicado';
+$s_email_fixed_in_version = 'Corrigido na Versão';
+$s_email_date_submitted = 'Data de Envio';
+$s_email_last_modified = 'Última Modificação';
+$s_email_summary = 'Resumo';
+$s_email_description = 'Descrição';
 
 # account_delete.php
-$s_account_protected_msg = "Conta protegida. N&atilde;o &eacute; poss&iacute;vel alterar ".
-$s_account_removed_msg   = "Sua conta foi removida...";
+$s_account_protected_msg = 'Conta protegida. Você não pode mudar as configurações...';
+$s_account_removed_msg = 'Sua conta foi removida...';
 
 # account_delete_page.php
-$s_confirm_delete_msg    = "Voc&ecirc; tem certeza que deseja remover sua conta?";
-$s_delete_account_button = "Remover conta";
+$s_confirm_delete_msg = 'Você tem certeza que deseja apagar a sua conta?';
+$s_delete_account_button = 'Apagar Conta';
 
 # account_page.php
-$s_manage_profiles_link    = "Gerenciador de perfil";
-$s_change_preferences_link = "Mudar prefer&ecirc;ncias";
-$s_edit_account_title      = "Editar conta";
-$s_username                = "Usu&aacute;rio";
-$s_email                   = "E-mail";
-$s_password                = "Senha";
-$s_confirm_password        = "Confirme a senha";
-$s_access_level            = "N&iacute;vel de acesso";
-$s_update_user_button      = "Atualizar usu&aacute;rio";
+$s_manage_profiles_link = 'Perfís';
+$s_change_preferences_link = 'Preferências';
+$s_edit_account_title = 'Alterar Conta';
+$s_username = 'Nome do Usuário';
+$s_realname = 'Nome Verdadeiro';
+$s_email = 'E-Mail';
+$s_password = 'Senha';
+$s_confirm_password = 'Confirmar Senha';
+$s_access_level = 'Nível de Acesso';
+$s_update_user_button = 'Atualizar Usuário';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = "Prefer&ecirc;ncias da conta";
-$s_default_project                   = "Projeto padr&atilde;o";
-$s_advanced_report                   = "Relat&oacute;rio avan&ccedil;ado";
-$s_advanced_view                     = "Visualiza&ccedil;&atilde;o avan&ccedil;ada";
-$s_advanced_update                   = "Atualiza&ccedil;&atilde;o avan&ccedil;ada";
-$s_refresh_delay                     = "Tempo de atualiza&ccedil;&atilde;o";
-$s_redirect_delay                    = "Tempo de espera para redirecionamento";
-$s_email_on_new                      = "Enviar e-mail quando novo bug for adicionado";
-$s_email_on_assigned                 = "Enviar e-mail quando encaminhado para SOLU&Ccedil;&Atilde;o";
-$s_email_on_feedback                 = "Enviar e-mail quando receber uma RESPOSTA";
-$s_email_on_resolved                 = "Enviar e-mail quando SOLUCIONADO";
-$s_email_on_closed                   = "Enviar e-mail quando ENCERRADO";
-$s_email_on_reopened                 = "Enviar e-mail quando REABERTO";
-$s_email_on_bugnote_added            = "Enviar e-mail quando uma NOTA for Adicionada";
-$s_email_on_status_change            = "Enviar e-mail quando houver mudan&ccedil;a de STATUS";
-$s_email_on_priority_change          = "Enviar e-mail quando houver mudan&ccedil;a na PRIORIDADE";
-$s_language                          = "Idioma";
-$s_update_prefs_button               = "Atualizar prefer&ecirc;ncias";
-$s_reset_prefs_button                = "Descartar prefer&ecirc;ncias";
+$s_default_account_preferences_title = 'Preferências da Conta';
+$s_default_project = 'Projeto Padrão';
+$s_advanced_report = 'Relatório Avançado';
+$s_advanced_view = 'Visualização Avançada';
+$s_advanced_update = 'Atualização Avançada';
+$s_refresh_delay = 'Tempo de Renovação';
+$s_redirect_delay = 'Tempo de Redirecionamento';
+$s_with_minimum_severity = 'Com a Gravidade Mínima';
+$s_email_on_new = 'Enviar e-mail para Novos Casos';
+$s_email_on_assigned = 'Enviar e-mail para Casos Atribuídos';
+$s_email_on_feedback = 'Enviar e-mail para Retornos';
+$s_email_on_resolved = 'Enviar e-mail para Casos Resolvidos';
+$s_email_on_closed = 'Enviar e-mail para Casos Fechados';
+$s_email_on_reopened = 'Enviar e-mail para Casos Reabertos';
+$s_email_on_bugnote_added = 'Enviar e-mail para Anotações Adicionadas';
+$s_email_on_status_change = 'Enviar e-mail para Mudança de Status';
+$s_email_on_priority_change = 'Enviar e-mail para Mudança de Prioridade';
+$s_language = 'Idioma';
+$s_update_prefs_button = 'Atualizar Preferências';
+$s_reset_prefs_button = 'Zerar Preferências';
 
 # account_prefs_reset.php
-$s_prefs_reset_msg = "As prefer&ecirc;ncias foram descartadas";
+$s_prefs_reset_msg = 'As preferências foram zeradas...';
 
 # account_prefs_update.php
-$s_prefs_updated_msg = "As prefer&ecirc;ncias foram atualizadas";
+$s_prefs_updated_msg = 'As preferências foram atualizadas...';
 
 # account_profile_add.php
-$s_profile_added_msg = "Perfil adicionado";
+$s_profile_added_msg = 'Perfil adicionado...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = "Perfil removido";
+$s_profile_deleted_msg = 'Perfil apagado...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title     = "Editar perfil";
-$s_platform               = "Plataforma";
-$s_operating_system       = "Sistema Operacional";
-$s_additional_description = "Descri&ccedil;&atilde;o adicional";
-$s_update_profile_button  = "Atualizar perfil";
+$s_edit_profile_title = 'Alterar Perfil';
+$s_platform = 'Plataforma';
+$s_operating_system = 'Sistema Operacional';
+$s_additional_description = 'Descrição Adicional';
+$s_update_profile_button = 'Atualizar Perfil';
 
 # account_profile_make_default.php
-$s_profile_defaulted_msg  = "Perfil padr&atilde;o atualizado";
+$s_profile_defaulted_msg = 'Perfil padrão atualizado...';
 
 # account_profile_manage_page.php
-$s_add_profile_title             = "Adicionar perfil";
-$s_add_profile_button            = "Adicionar perfil";
-$s_edit_or_delete_profiles_title = "Editar ou remover perfil";
-$s_edit_profile                  = "Editar perfil";
-$s_make_default                  = "Tornar padr&atilde;o";
-$s_delete_profile                = "Remover perfil";
-$s_select_profile                = "Selecione um perfil";
-$s_submit_button                 = "Enviar";
+$s_add_profile_title = 'Adicionar Perfil';
+$s_add_profile_button = 'Adicionar Perfil';
+$s_edit_or_delete_profiles_title = 'Alterar ou Apagar Perfís';
+$s_edit_profile = 'Alterar Perfil';
+$s_make_default = 'Tornar Padrão';
+$s_delete_profile = 'Apagar Perfil';
+$s_select_profile = 'Selecionar Perfil';
+$s_submit_button = 'Enviar';
 
 # account_profile_update.php
-$s_profile_updated_msg = "Perfil atualizado";
+$s_profile_updated_msg = 'Perfil atualizado...';
 
 # account_update.php
-$s_account_updated_msg = "Sua conta foi atualizada com sucesso";
-$s_email_updated = 'Email address successfully updated';
-$s_password_updated = 'Password successfully updated';
+$s_account_updated_msg = 'Sua conta foi atualizada com sucesso...';
+$s_email_updated = 'Endereço de email atualizado com sucesso';
+$s_realname_updated = 'Nome verdadeiro atualizado com sucesso';
+$s_password_updated = 'Senha atualizada com sucesso';
 
 # bug_assign.php
-$s_bug_assign_msg = "O Bug foi encaminhado para solu&ccedil;&atilde;";
+$s_bug_assign_msg = 'O caso foi atribuído com sucesso...';
 
 # bug_close.php
-$s_bug_close_msg     = "O Bug foi encerrado";
-$s_close_immediately = "Encerrar imediatamente:";
+$s_bug_close_msg = 'O caso foi fechado...';
+$s_close_immediately = 'Fechar imediatamente:';
 
 # bug_close_page.php
-$s_close_bug_title = "Encerrar Bug";
+$s_close_bug_title = 'Fechar Caso';
 
 # bug_delete.php
-$s_bug_deleted_msg = "O Bug foi removido.";
+$s_bug_deleted_msg = 'O caso foi apagado...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = "Voc&ecirc; tem certeza que deseja remover este Bug?";
-$s_delete_bug_button   = "Remover Bug";
+$s_delete_bug_sure_msg = 'Você tem certeza que deseja apagar este caso?';
+$s_delete_bug_button = 'Apagar Caso';
 
 # bug_monitor.php
-$s_monitor_bug_button   = "Monitorar Bug";
-$s_unmonitor_bug_button = "Finalizar monitora&ccedil;&atilde;o";
+$s_monitor_bug_button = 'Monitorar Caso';
+$s_unmonitor_bug_button = 'Parar de Monitorar';
 
 # bug_file_add.php
-$s_file_upload_msg = "Arquivo enviado com sucesso";
+$s_file_upload_msg = 'Arquivo carregado com sucesso';
 
 # bug_file_upload_inc.php
-$s_upload_file        = "Enviar arquivo";
-$s_select_file        = "Selecionar arquivo";
-$s_upload_file_button = "Enviar arquivo";
-$s_max_file_size = 'Max size';
+$s_upload_file = 'Carregar Arquivo';
+$s_select_file = 'Selecionar Arquivo';
+$s_upload_file_button = 'Carregar Arquivo';
+$s_max_file_size = 'Tamanho máximo';
 
 # bug_reopen.php
-$s_bug_reopened_msg          = "O Bug foi reaberto";
-$s_reopen_add_bugnote_title  = "Adicione uma nota com o motivo da reabertura do Bug";
-$s_bugnote_add_reopen_button = "Adicionar nota e reabrir o Bug";
+$s_bug_reopened_msg = 'O caso foi reaberto...';
+$s_reopen_add_bugnote_title = 'Adicionar Anotação do Motivo para a Reabertura do Caso';
+$s_bugnote_add_reopen_button = 'Adicionar Anotação e Reabrir Caso';
 
 # bug_resolve_page.php
-$s_resolve_bug_title  = "Solu&ccedil;&atilde;o do Bug";
-$s_resolve_bug_button = "Solucionar";
+$s_resolve_bug_title = 'Resolver Caso';
+$s_resolve_bug_button = 'Resolver Caso';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg           = "O Bug foi solucionado. Entre com uma nota abaixo:";
-$s_resolve_add_bugnote_title  = "Motivo para solu&ccedil;&atilde;o do Bug";
-$s_bugnote_add_resolve_button = "Adicionar Nota";
+$s_bug_resolved_msg = 'O caso foi resolvido. Digite a anotação abaixo...';
+$s_resolve_add_bugnote_title = 'Adicionar Anotação para a Resolução do Caso';
+$s_bugnote_add_resolve_button = 'Adicionar Anotação';
 
 # bug_reminder_page.php
-$s_from = 'From';
-$s_to = 'To';
-$s_on = 'On';
-$s_sent_you_this_reminder_about = 'sent you this reminder about';
-$s_bug_reminder = 'Send a reminder';
-$s_reminder_sent_to = 'Reminder sent to';
-$s_bug_send_button = 'Send';
-$s_reminder = 'Reminder';
+$s_from = 'De';
+$s_to = 'Para';
+$s_on = 'Em';
+$s_sent_you_this_reminder_about = 'lhe enviou este lembrete sobre';
+$s_bug_reminder = 'Enviar um lembrete';
+$s_reminder_sent_to = 'Lembrete enviado para';
+$s_bug_send_button = 'Enviar';
+$s_reminder = 'Lembrete';
 
 # bug_update.php
-$s_bug_updated_msg = "O Bug foi atualizado com sucesso";
+$s_bug_updated_msg = 'O caso foi atualizado com sucesso...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link            = "Voltar para o Bug";
-$s_update_simple_link          = "Atualizar";
-$s_updating_bug_advanced_title = "Atualizando o Bug";
-$s_id                          = "ID";
-$s_category                    = "Categoria";
-$s_severity                    = "Tipo de Bug";
-$s_reproducibility             = "Freq&uuml;&ecirc;ncia";
-$s_date_submitted              = "Data do envio";
-$s_last_update                 = "Ultima atualiza&ccedil;&atilde;o";
-$s_reporter                    = "Notificador";
-$s_assigned_to                 = "Encaminhado para";
-$s_priority                    = "Prioridade";
-$s_resolution                  = "Solu&ccedil;&atilde;o";
-$s_status                      = "Status";
-$s_duplicate_id                = "Duplicar ID";
-$s_os                          = "Sistema Operacional";
-$s_projection                  = "Proje&ccedil;&atilde;o";
-$s_os_version                  = "Vers&atilde;o";
-$s_eta                         = "Estimado";
-$s_product_version             = "Vers&atilde;o do produto";
-$s_build                       = "Compila&ccedil;&atilde;o";
-$s_votes                       = "Votos";
-$s_summary                     = "Titulo";
-$s_description                 = "Descri&ccedil;&atilde;o";
-$s_steps_to_reproduce          = "Passos para reprodu&ccedil;&atilde;o";
-$s_additional                  = "Adicionais";
-$s_information                 = "Informa&ccedil;&otilde;es";
-$s_update_information_button   = "Atualizar informa&ccedil;&atilde;o";
+$s_back_to_bug_link = 'Voltar ao Caso';
+$s_update_simple_link = 'Atualização Simples';
+$s_updating_bug_advanced_title = 'Atualizar Informações do Caso';
+$s_id = 'Núm';
+$s_category = 'Categoria';
+$s_severity = 'Gravidade';
+$s_reproducibility = 'Freqüência';
+$s_date_submitted = 'Data de Envio';
+$s_last_update = 'Última Atualização';
+$s_reporter = 'Relator';
+$s_assigned_to = 'Atribuído a';
+$s_priority = 'Prioridade';
+$s_resolution = 'Resolução';
+$s_status = 'Status';
+$s_duplicate_id = 'Núm Duplicado';
+$s_os = 'SO';
+$s_projection = 'Projeção';
+$s_os_version = 'Versão SO';
+$s_eta = 'Tempo Estimado';
+$s_product_version = 'Versão do Produto';
+$s_build = 'Build';
+$s_fixed_in_version = 'Corrigido na Versão';
+$s_votes = 'Votos';
+$s_summary = 'Resumo';
+$s_description = 'Descrição';
+$s_steps_to_reproduce = 'Passos para Reproduzir';
+$s_additional = 'Informações';		# sim... tá correto!
+$s_information = 'Adicionais';		# sim... tá correto!
+$s_update_information_button = 'Atualizar Informação';
 
 # bug_update_page.php
-$s_update_advanced_link      = "Atualiza&ccedil;&atilde;o Avan&ccedil;ada";
-$s_updating_bug_simple_title = "Atualizando Informa&ccedil;&otilde;es do Bug";
+$s_update_advanced_link = 'Atualização Avançada';
+$s_updating_bug_simple_title = 'Atualizar Informações do Caso';
 
 # bug_vote_add.php
-$s_vote_added_msg = "Voto foi adicionado";
+$s_vote_added_msg = 'O voto foi adicionado...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = "Nota adicionada";
+$s_bugnote_added_msg = 'Anotação adicionada...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = "Nota apagada com sucesso";
-$s_bug_notes_title     = "Notas do Bug";
+$s_bugnote_deleted_msg = 'A anotação foi apagada com sucesso...';
+$s_bug_notes_title = 'Anotações';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = "Editar notas sobre o Bug";
+$s_edit_bugnote_title = 'Alterar Anotações';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg    = "N&atilde;o existe coment&aacute;rios sobre este Bug";
-$s_delete_link        = "Remover";
-$s_add_bugnote_title  = "Adicionar nota";
-$s_add_bugnote_button = "Adicionar nota";
-$s_bugnote_edit_link  = "Editar";
-$s_close_bug_button   = "Encerrar Bug";
+$s_no_bugnotes_msg = 'Não há anotações anexadas a este caso.';
+$s_delete_link = 'Apagar';
+$s_add_bugnote_title = 'Adicionar Anotação';
+$s_add_bugnote_button = 'Adicionar Anotação';
+$s_bugnote_edit_link = 'Alterar';
+$s_close_bug_button = 'Fechar Caso';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = "Nota do bug atualizada com sucesso";
-$s_edited_on           = "Editado em: ";
+$s_bugnote_updated_msg = 'A anotação foi atualizada com sucesso...';
+$s_edited_on = 'alterado em: ';
 
 # index.php
-$s_click_to_login = "Clique aqui para entrar";
+$s_click_to_login = 'Clique aqui para acessar';
 
 # login.php
 
 # login_page.php
-$s_login_page_info = "Bem-vindo ao Sistema de Informa&ccedil;&atilde;o e Controle de Pestes";
-$s_login_title     = "Entrada do sistema";
-$s_save_login      = "Lembrar usu&aacute;rio na proxima vez";
-$s_choose_project  = "Escolha um Projeto";
-$s_login_button    = "Login";
-$s_signup_link     = "Crie uma nova conta";
+$s_login_page_info = 'Bem-vindo ao Gerenciador de Casos.';
+$s_login_title = 'Login';
+$s_save_login = 'Salvar Login';
+$s_choose_project = 'Escolher Projeto';
+$s_login_button = 'Entrar';
+$s_signup_link = 'criar uma nova conta';
 
 # login_select_proj_page.php
-$s_select_project_button = "Selecionar projeto";
+$s_select_project_button = 'Selecionar Projeto';
 
 # logout_page.php
-$s_logged_out_title = "Saindo...";
-$s_redirecting      = "Redirecionando...";
-$s_here             = "Aqui";
+$s_logged_out_title = 'Saindo...';
+$s_redirecting = '...Redirecionando';
+$s_here = 'Aqui';
 
 # main_page.php
-$s_open_and_assigned_to_me = "Abertos e encaminhados para mim";
-$s_open_and_reported_to_me = "Abertos e informados por mim";
-$s_newer_news_link         = "Novas not&iacute;cias";
-$s_older_news_link         = "Not&iacute;cias antigas";
-$s_archives                = "Arquivos";
+$s_open_and_assigned_to_me = 'Abertos e atribuídos a mim';
+$s_open_and_reported_to_me = 'Abertos e relatados por mim';
+$s_newer_news_link = 'Notícias Recentes';
+$s_older_news_link = 'Notícias Antigas';
+$s_archives = 'Arquivos';
 $s_rss = 'RSS';
 
 # manage_create_new_user.php
-$s_created_user_part1 = "Usu&aacute;rio criado";
-$s_created_user_part2 = "Com um n&iacute;vel de acesso de";
+$s_created_user_part1 = 'Usuário';
+$s_created_user_part2 = 'criado com um nível de acesso de';
 
 # manage_create_user_page.php
-$s_create_new_account_title = "Criar nova conta";
-$s_verify_password          = "Verificar senha";
-$s_enabled                  = "Habilitada";
-$s_protected                = "Protegida";
-$s_create_user_button       = "Criar usu&aacute;rio";
+$s_create_new_account_title = 'Criar Nova Conta';
+$s_verify_password = 'Redigitar Senha';
+$s_enabled = 'Habilitado';
+$s_protected = 'Protegido';
+$s_create_user_button = 'Criar Usuário';
 
 # manage_page.php
-$s_hide_disabled           = "Esconder desabilitados";
-$s_filter_button           = "Filtrar";
-$s_manage_users_link       = "Gerenciar usu&aacute;rios";
-$s_manage_projects_link    = "Gerenciar projetos";
-$s_manage_custom_field_link = 'Manage Custom Fields';
-$s_create_new_account_link = "Criar conta";
-$s_projects_link           = "Projetos";
-$s_documentation_link      = "Documenta&ccedil;&atilde;o";
-$s_new_accounts_title      = "Novas Contas";
-$s_1_week_title            = "1 Semana";
-$s_never_logged_in_title   = "Nunca entrou";
-$s_prune_accounts          = "Apagar inativos";
-$s_hide_inactive           = "N&atilde;o mostrar inativos";
-$s_manage_accounts_title   = "Gerenciador de contas";
-$s_p                       = "P";
-$s_date_created            = "Data de cria&ccedil;&atilde;o";
-$s_last_visit              = "Ultima visita";
-$s_edit_user_link          = "Editar usu&aacute;rio";
+$s_hide_disabled = 'Ocultar Desabilitados';
+$s_filter_button = 'Aplicar Filtro';
+$s_manage_users_link = 'Gerenciar Usuários';
+$s_manage_projects_link = 'Gerenciar Progetos';
+$s_manage_custom_field_link = 'Gerenciar Campos Personalizados';
+$s_create_new_account_link = 'Criar Nova Conta';
+$s_projects_link = 'Projetos';
+$s_documentation_link = 'Documentação';
+$s_new_accounts_title = 'Contas Novas';
+$s_1_week_title = '1 Semana';
+$s_never_logged_in_title = 'Nunca Entraram';
+$s_prune_accounts = 'Apagar Contas';
+$s_hide_inactive = 'Ocultar Inativos';
+$s_manage_accounts_title = 'Gerenciar Contas';
+$s_p = 'p';
+$s_date_created = 'Data de Criação';
+$s_last_visit = 'Última Visita';
+$s_edit_user_link = 'Alterar Usuário';
 
 # manage_proj_add.php
-$s_project_added_msg = "O projeto foi adicionado com sucesso";
+$s_project_added_msg = 'O projeto foi adicionado com sucesso...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = "A categoria foi adicionada com sucesso";
+$s_category_added_msg = 'A categoria foi adicionada com sucesso...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = "A categoria foi exclu&iacute;da com sucesso";
+$s_category_deleted_msg = 'A categoria foi apagada com sucesso...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = "Voc&ecirc; deseja excluir esta categoria? ".
-$s_delete_category_button   = "Excluir categoria";
+$s_category_delete_sure_msg = 'Você tem certeza que deseja apagar esta categoria?';
+$s_delete_category_button = 'Apagar Categoria';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = "Editar categoria do projeto";
-$s_update_category_button      = "Atualizar categoria";
+$s_edit_project_category_title = 'Alterar Categoria do Projeto';
+$s_update_category_button = 'Atualizar Categoria';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = "A categoria foi atualizada com sucesso";
+$s_category_updated_msg = 'A categoria foi atualizada com sucesso...';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = "O projeto foi exclu&iacute;do com sucesso";
+$s_project_deleted_msg = 'O projeto foi removido com sucesso...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg    = "Voc&ecirc; deseja excluir este projeto ".
-$s_project_delete_button = "Excluir projeto";
+$s_project_delete_msg = 'Você tem certeza que deseja apagar este projeto e todos os relatos de casos anexados?';
+$s_project_delete_button = 'Apagar Projeto';
 
 # manage_proj_edit_page.php
-$s_edit_project_title           = "Editar projeto";
-$s_project_name                 = "Nome do projeto";
-$s_view_status                  = "Visualiza&ccedil;&atilde;o";
-$s_public                       = "P&uacute;blico";
-$s_private                      = "Reservado";
-$s_update_project_button        = "Atualizar projeto";
-$s_delete_project_button        = "Excluir projeto";
-$s_categories_and_version_title = "Categorias e vers&otilde;es";
-$s_categories                   = "Categorias";
-$s_add_category_button          = "Adicionar categoria";
-$s_versions                     = "Vers&atilde;o";
-$s_add_version_button           = "Adicionar vers&atilde;o";
-$s_edit_link                    = "editar";
-$s_actions = 'Actions';
-$s_version                = "Vers&atilde;o";
-$s_timestamp = 'Timestamp';
-$s_update = 'Update';
+$s_edit_project_title = 'Alterar Projeto';
+$s_project_name = 'Nome do Projeto';
+$s_view_status = 'Visibilidade';
+$s_public = 'público';
+$s_private = 'privado';
+$s_update_project_button = 'Atualizar Projeto';
+$s_delete_project_button = 'Apagar Projeto';
+$s_categories_and_version_title = 'Categorias e Versões';
+$s_categories = 'Categorias';
+$s_add_category_button = 'Adicionar Categoria';
+$s_versions = 'Versões';
+$s_add_version_button = 'Adicionar Versão';
+$s_edit_link = 'Alterar';
+$s_actions = 'Ações';
+$s_version = 'Versão';
+$s_timestamp = 'Data/hora do Lançamento';
+$s_update = 'Atualizar';
 
 # manage_proj_menu_page.php
-$s_add_project_title  = "Adicionar projeto";
-$s_upload_file_path   = "Caminho do arquivo para upload";
-$s_add_project_button = "Adicionar projeto";
-$s_projects_title     = "Projetos";
-$s_name               = "Nome";
+$s_add_project_title = 'Adicionar Projeto';
+$s_upload_file_path = 'Caminho para Carregamento de Arquivos';
+$s_add_project_button = 'Adicionar Projeto';
+$s_projects_title = 'Projetos';
+$s_name = 'Nome';
 
 # manage_proj_update.php
-$s_project_updated_msg = "Projeto atualizado com sucesso";
+$s_project_updated_msg = 'O projeto foi atualizado com sucesso...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = "Vers&atilde;o atualizada com sucesso";
+$s_version_added_msg = 'A versão foi adicionada com sucesso...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = "Vers&atilde;o exclu&icute;da com sucesso";
+$s_version_deleted_msg = 'A versão foi apagada com sucesso...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure   = "Voc&ecirc; deseja excluir esta vers&atilde;o?";
-$s_delete_version_button = "Excluir vers&atilde;o";
+$s_version_delete_sure = 'Você tem certeza que deseja apagar esta versão?';
+$s_delete_version_button = 'Apagar Versão';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = "Editar vers&atilde;o do projeto";
-$s_update_version_button      = "Atualizar vers&atilde;o";
+$s_edit_project_version_title = 'Alterar Versão do Projeto';
+$s_update_version_button = 'Atualizar Versão';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = "Vers&atilde;o atualizada com sucesso";
+$s_version_updated_msg = 'A versão foi atualizada com sucesso...';
 
 # manage_user_delete.php
-$s_account_delete_protected_msg = "Conta protegida. N&atilde;o &eacute; ".
-$s_account_deleted_msg          = "Conta apagada";
+$s_account_delete_protected_msg = 'Conta protegida. Não se pode apagar esta conta.';
+$s_account_deleted_msg = 'Conta apagada...';
 
 # manage_user_delete_page.php
-$s_delete_account_sure_msg = "Voc&ecirc; deseja excluir esta conta?";
+$s_delete_account_sure_msg = 'Você tem certeza que deseja apagar esta conta?';
 
 # manage_user_prune.php
-$s_accounts_pruned_msg = "Todos os usu&acute;rios inativos na &uacute;ltima ".
-$s_prune_accounts_button = 'Prune';
-$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+$s_accounts_pruned_msg = 'Todas as contas que nunca foram acessadas e foram criadas há mais do que uma semana foram removidas';
+$s_prune_accounts_button = 'Apagar contas velhas';
+$s_confirm_account_pruning = 'Você tem certeza que deseja apagar as contas velhas que nunca foram acessadas?';
 
 # manage_user_page.php
-$s_edit_user_title       = "Editar usu&aacute;rio";
-$s_reset_password_button = "Limpar senha";
-$s_delete_user_button    = "Remover usu&aacute;rio";
-$s_reset_password_msg    = "Reset Password sets the randomly generated password.";
-$s_reset_password_msg2   = "'Limpar senha' ir&aacute; configur&aacute;-la ".
-$s_show_all_users = 'ALL';
+$s_edit_user_title = 'Alterar Usuário';
+$s_reset_password_button = 'Zerar Senha';
+$s_delete_user_button = 'Apagar Usuário';
+$s_reset_password_msg = 'Zerar Senha ajustará uma senha gerada aleatoriamente.';
+$s_reset_password_msg2 = 'Zerar Senha deixará a senha em branco.';
+$s_show_all_users = 'TODOS';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = "Conta Protegida. N&atilde;o &eacute; ".
-$s_account_reset_msg           = "A senha da conta foi alterada para '' (vazio)";
-$s_account_reset_msg2          = "A senha da conta foi alterada para '' (vazio)";
+$s_account_reset_protected_msg = 'Conta protegida. Não se pode limpar a senha.';
+$s_account_reset_msg = 'Uma nova senha foi gerada e enviada ao usuário...';
+$s_account_reset_msg2 = 'A senha da conta foi deixada em branco...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = "Conta protegida. N&iacute;vel de acesso ".
-$s_manage_user_updated_msg   = "Conta atualizada com sucesso";
+$s_manage_user_protected_msg = 'Conta protegida. Nível de acesso e proteção ativada. Caso contrário, a conta foi atualizada...';
+$s_manage_user_updated_msg = 'Conta atualizada com sucesso...';
 
 # menu_inc.php
-$s_main_link       = "Principal";
-$s_view_bugs_link  = "Visualizar Bugs";
-$s_report_bug_link = "Relatar Bugs";
-$s_summary_link    = "Resumo";
-$s_account_link    = "Sua conta";
-$s_users_link      = "Usu&aacute;rios";
-$s_manage_link     = "Gerenciador";
-$s_edit_news_link  = "Editar not&iacute;cias";
-$s_docs_link       = "Docs.";
-$s_logout_link     = "Sair";
+$s_main_link = 'Principal';
+$s_view_bugs_link = 'Ver Casos';
+$s_report_bug_link = 'Relatar Caso';
+$s_changelog_link = 'Registro de Mudanças';
+$s_summary_link = 'Resumo';
+$s_account_link = 'Minha Conta';
+$s_users_link = 'Usuários';
+$s_manage_link = 'Gerenciar';
+$s_edit_news_link = 'Alterar Notícias';
+$s_docs_link = 'Docs';
+$s_logout_link = 'Sair';
 
 # meta_inc.php
 
 # news_add.php
-$s_news_added_msg = "Not&iacute;cia adicionada";
+$s_news_added_msg = 'Notícia adicionada...';
 
 # news_delete.php
-$s_news_deleted_msg = "Not&iacute;cia exclu&icute;da";
+$s_news_deleted_msg = 'Notícia apagada...';
 
 # news_delete_page.php
-$s_delete_news_sure_msg    = "Voc&ecirc; deseja excluir esta not&iacute;cia?";
-$s_delete_news_item_button = "Excluir not&icute;cia";
+$s_delete_news_sure_msg = 'Você tem certeza que deseja apagar esta notícia?';
+$s_delete_news_item_button = 'Apagar Notícia';
 
 # news_edit_page.php
-$s_edit_news_title    = "Editar not&iacute;cias";
-$s_headline           = "Not&iacute;cia";
-$s_body               = "Corpo";
-$s_update_news_button = "Atualizar not&iacute;cias";
+$s_edit_news_title = 'Alterar Notícias';
+$s_headline = 'Título';
+$s_body = 'Corpo';
+$s_update_news_button = 'Atualizar Notícia';
 
 # news_menu_page.php
-$s_add_news_title            = "Adicionar not&iacute;cias";
-$s_post_to                   = "Postar em";
-$s_post_news_button          = "Postar not&iacute;cias";
-$s_edit_or_delete_news_title = "Editar ou remover not&iacute;cias";
-$s_edit_post                 = "Editar postagem";
-$s_delete_post               = "Remover postagem";
-$s_select_post               = "Selecionar postagem";
+$s_add_news_title = 'Adicionar Notícia';
+$s_post_to = 'Anunciar em';
+$s_post_news_button = 'Anunciar Notícia';
+$s_edit_or_delete_news_title = 'Alterar ou Apagar Notícia';
+$s_edit_post = 'Alterar Anúncio';
+$s_delete_post = 'Apagar Anúncio';
+$s_select_post = 'Selecionar Anúncio';
 
 # news_update.php
-$s_news_updated_msg = "Not&iacute;cias atualizadas";
+$s_news_updated_msg = 'Notícia atualizada...';
 
 # news_view_page.php
-$s_back_link = "Voltar";
+$s_back_link = 'Voltar';
 
 # proj_doc_add.php
-$s_file_uploaded_msg = "Arquivo enviado com sucesso";
+$s_file_uploaded_msg = 'Arquivo carregado com sucesso';
 
 # proj_doc_add_page.php
-$s_upload_file_title = "Enviar arquivo";
-$s_title = "T&iacute;tulo";
+$s_upload_file_title = 'Carregar Arquivo';
+$s_title = 'Título';
 
 # proj_doc_delete.php
-$s_project_file_deleted_msg = "Arquivo do projeto exclu&iacute;do";
+$s_project_file_deleted_msg = 'Arquivo do projeto apagado';
 
 # proj_doc_delete_page.php
-$s_confirm_file_delete_msg = "Voc&ecirc; deseja excluir este arquivo?";
+$s_confirm_file_delete_msg = 'Você tem certeza que deseja apagar este arquivo?';
 
 # proj_doc_edit_page.php
-$s_filename           = "Nome do arquivo";
-$s_file_update_button = "Atualizar arquivo";
-$s_file_delete_button = "Remover arquivo";
+$s_filename = 'Nome do Arquivo';
+$s_file_update_button = 'Atualizar Arquivo';
+$s_file_delete_button = 'Apagar Arquivo';
 
 # proj_doc_page.php
-$s_project_documentation_title = "Documenta&ccedil;&atilde;o do projeto";
-$s_user_documentation          = "Documenta&ccedil;&atilde;o do usu&aacute;rio";
-$s_project_documentation       = "Documenta&ccedil;&atilde;o do projeto";
-$s_add_file                    = "Adicionar arquivo";
+$s_project_documentation_title = 'Documentação do Projeto';
+$s_user_documentation = 'Documentação do Usuário';
+$s_project_documentation = 'Documentação do Projeto';
+$s_add_file = 'Adicionar Arquivo';
 
 # proj_doc_update.php
-$s_project_document_updated = "Projeto atualizado com sucesso";
+$s_project_document_updated = 'Projeto atualizado com sucesso';
 
 # proj_user_add.php
-$s_project_user_added_msg = "Usu&aacute;rio adicionado ao projeto";
+$s_project_user_added_msg = 'Usuário adicionado com sucesso ao projeto';
 
 # proj_user_delete.php
-$s_project_removed_user_msg = "Usu&aacute;rio removido do projeto";
+$s_project_removed_user_msg = 'Usuário removido com sucesso do projeto';
 
 # proj_user_delete_page.php
-$s_remove_user_sure_msg = "Voc&ecirc; deseja remover este usu&aacute;rio?";
+$s_remove_user_sure_msg = 'Você tem certeza que deseja remover este usuário?';
 
 # proj_user_menu_page.php
-$s_add_user_title          = "Adicionar usu&aacute;rio ao projeto";
-$s_add_user_button         = "Adicionar usu&aacute;rio";
-$s_project_selection_title = "Selecionar projeto";
-$s_remove_link             = "Remover";
+$s_add_user_title = 'Adicionar usuário ao projeto';
+$s_add_user_button = 'Adicionar Usuário';
+$s_project_selection_title = 'Seleção de Projeto';
+$s_remove_link = 'Remover';
 
 # proj_user_update.php
-$s_updated_user_msg = "Usu&aacute;rio atualizado com sucesso";
+$s_updated_user_msg = 'Usuário atualizado com sucesso';
 
 # report_add.php
-$s_must_enter_category        = "Voc&ecirc; deve selecionar uma categoria";
-$s_must_enter_severity        = "Voc&ecirc; deve selecionar uma causa";
-$s_must_enter_reproducibility = "Voc&ecirc; deve selecionar uma freq&uuml;&ecirc;ncia";
-$s_must_enter_summary         = "Voc&ecirc; deve escrever um titulo";
-$s_must_enter_description     = "Voc&ecirc; deve escrever uma descri&ccedil;&atilde;o";
-$s_report_more_bugs           = "Envie mais Bugs";
-$s_submission_thanks_msg      = "Obrigado pelo envio do Bug";
+$s_must_enter_category = 'Você deve selecionar uma categoria';
+$s_must_enter_severity = 'Você deve selecionar um nível de gravidade';
+$s_must_enter_reproducibility = 'Você deve selecionar um nível de freqüência';
+$s_must_enter_summary = 'Você deve digitar um resumo';
+$s_must_enter_description = 'Você deve digitar uma descrição';
+$s_report_more_bugs = 'Relatar Mais Casos';
+$s_submission_thanks_msg = 'Agradecemos a sua colaboração';
 
 # report_bug_advanced_page.php
-$s_simple_report_link         = "Relat&oacute;rio simples";
-$s_enter_report_details_title = "Detalhes do problema";
-$s_required                   = "Obrigat&oacute;rio";
-$s_select_category            = "Selecione uma categoria";
-$s_select_reproducibility     = "Selecione uma freq&uuml;&ecirc;ncia";
-$s_select_severity            = "Selecione um tipo";
-$s_or_fill_in                 = "Ou preencha";
-$s_assign_to                  = "Encaminhado para";
-$s_additional_information     = "Informa&ccedil;&otilde;es adicionais";
-$s_submit_report_button       = "Enviar notifica&ccedil;&atilde;o";
-$s_check_report_more_bugs     = "Marque para adicionar mais Bugs";
+$s_simple_report_link = 'Relatório Simples';
+$s_enter_report_details_title = 'Digite os Detalhes do Relatório';
+$s_required = 'requerido';
+$s_select_category = 'Selecione a Categoria';
+$s_select_reproducibility = 'Selecione a Freqüência';
+$s_select_severity = 'Selecione a Gravidade';
+$s_or_fill_in = 'OU Preencha';
+$s_assign_to = 'Atribuir a';
+$s_additional_information = 'Informações Adicionais';
+$s_submit_report_button = 'Enviar Relatório';
+$s_check_report_more_bugs = 'selecione para relatar mais casos';
 
 # report_bug_page.php
-$s_advanced_report_link = "Relat&oacute;rio avan&ccedil;ado";
-$s_report_stay          = "Continuar informando bugs?";
+$s_advanced_report_link = 'Relatório Avançado';
+$s_report_stay = 'Continuar Relatando';
 
 # set_project.php
-$s_selected_project  = "Selecionar projeto";
-$s_valid_project_msg = "Voc&ecirc; deve selecionar um projeto v&aacute;lido";
+$s_selected_project = 'Projeto selecionado';
+$s_valid_project_msg = 'Você deve escolher um projeto válido';
 
 # signup.php
-$s_invalid_email        = "ENDERE&Ccedil;O DE E-MAIL INV&Aacute;LIDO";
-$s_duplicate_username   = "NOME DE USU&Aacute; RIO J&Aacute; EXISTE. ESCOLHA OUTRO";
-$s_account_create_fail  = "FALHA AO CRIAR A CONTA";
-$s_account_added        = "Conta adicionada com sucesso";
-$s_password_emailed_msg = "Sua senha ser&aacute; enviada para o seu e-mail";
-$s_no_reponse_msg       = "Caso n&atilde;o retorne em uma semana, seu acesso ".
+$s_invalid_email = 'É UM ENDEREÇO DE E-MAIL INVÁLIDO';
+$s_duplicate_username = 'É UM NOME DE USUÁRIO DUPLICADO.  ESCOLHA OUTRO NOME DE USUÁRIO';
+$s_account_create_fail = 'A CRIAÇÃO DA CONTA DE USUÁRIO FALHOU';
+$s_account_added = 'A conta foi adicionada com sucesso.';
+$s_password_emailed_msg = 'Sua senha será enviada por e-mail para você.';
+$s_no_reponse_msg = 'Se você não responder em uma semana, sua conta poderá ser apagada.';
 
 # signup_page.php
-$s_signup_info   = "Escolha seu nome de usu&aacute;rio (n&atilde;o utilize ".
-$s_signup_title  = "Assinar";
-$s_signup_button = "Assinar";
+$s_signup_info = 'Escolha seu nome de usuário e digite um endereço de e-mail válidalido.  Uma senha gerada aleatoriamente será enviada ao seu endereço.';
+$s_signup_title = 'Criar Conta';
+$s_signup_button = 'Criar Conta';
 
 # site_settings_edit_page.php
-$s_edit_site_settings_title = "Editar configura&ccedil;&otilde;es do site";
-$s_save_settings_button     = "Salvar sonfigura&ccedil;&otilde;es";
+$s_edit_site_settings_title = 'Altera Configurações do Sítio';
+$s_save_settings_button = 'Salvar Configurações';
 
 # site_settings_page.php
-$s_site_settings_title = "Configura&ccedil;&otilde;es do site";
-$s_system_info_link    = "Informar Configura&ccedil;&atilde;o do Sistema";
-$s_site_settings_link  = "Configura&ccedil;&otilde;es do Site";
+$s_site_settings_title = 'Configurações do Sítio';
+$s_system_info_link = 'Informações do Sistema';
+$s_site_settings_link = 'Configurações do Sítio';
 
 # site_settings_update.php
-$s_site_settings_updated_msg = "As Configura&ccedil;&otilde;es foram atualizadas";
+$s_site_settings_updated_msg = 'As configurações do sítio foram atualizadas';
 
 # summary_page.php
-$s_summary_title        = "Resumo";
-$s_summary_jpgraph_link = "Resumo avan&ccedil;ado";
-$s_by_project = 'by project';
-$s_by_status            = "por status";
-$s_by_date              = "por datas";
-$s_by_severity          = "por tipos";
-$s_by_resolution        = "por solu&ccedil;&otilde;es";
-$s_by_category          = "por categorias";
-$s_by_priority          = "por prioridades";
-$s_by_developer         = "por desenvolvedores";
-$s_by_reporter          = "por notificadores";
-$s_reporter_by_resolution = 'Reporter By Resolution';
-$s_reporter_effectiveness = 'Reporter Effectiveness';
-$s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
+$s_summary_title = 'Resumo';
+$s_summary_jpgraph_link = 'Resumo avançado';
+$s_by_project = 'Por Projeto';
+$s_by_status = 'Por Status';
+$s_by_date = 'Por Dia';
+$s_by_severity = 'Por Gravidade';
+$s_by_resolution = 'Por Resolução';
+$s_by_category = 'Por Categoria';
+$s_by_priority = 'Por Prioridade';
+$s_by_developer = 'Por Desenvolvedor';
+$s_by_reporter = 'Por Relator';
+$s_reporter_by_resolution = 'Relator por Resolução';
+$s_reporter_effectiveness = 'Eficiência do Relator';
+$s_developer_by_resolution = 'Desenvolvedor por Resolução';
+$s_percentage_fixed = '% Corrigidos';
+$s_percentage_errors = '% Falsos';
+$s_errors = 'Falso';
 $s_total = 'Total';
-$s_time_stats           = "Status para Bug resolvido(s)";
-$s_longest_open_bug     = "Bug de maior tempo sem solu&ccedil;&atilde;o";
-$s_longest_open         = "Mais tempo aberto";
-$s_average_time         = "Media de tempo";
-$s_total_time           = "Tempo total";
-$s_developer_stats      = "Status dos desenvolvedores";
-$s_reporter_stats       = "Status de notifica&ccedil;&atilde;o";
-$s_orct                 = "(Abertos/Solucionados/Encerrados/total)";
+$s_time_stats = 'Estatísticas de Tempo para Casos Resolvidos (dias)';
+$s_longest_open_bug = 'Caso aberto há mais tempo';
+$s_longest_open = 'Aberto há mais tempo';
+$s_average_time = 'Tempo médio';
+$s_total_time = 'Tempo total';
+$s_developer_stats = 'Estatísticas de Desenvolvedores';
+$s_reporter_stats = 'Estatísticas de Relatores';
+$s_orct = '(aberto/resolvido/fechado/total)';
 
 # view_all_bug_page.php
-$s_any                = "Qualquer";
-$s_show               = "Exibir";
-$s_changed            = "Modificado (hora)";
-$s_viewing_bugs_title = "Visualizar Bugs";
-$s_updated            = "Atualizado";
+$s_any = 'qualquer';
+$s_show = 'Mostrar';
+$s_changed = 'Alterado(hrs)';
+$s_viewing_bugs_title = 'Visualizando Casos';
+$s_updated = 'Atualizado';
 
 # view_all_inc.php
-$s_none           = "Nenhum";
-$s_search         = "Procurar";
-$s_view_prev_link = "Anterior";
-$s_view_next_link = "Pr&oacute;ximo";
-$s_prev = 'Prev';
-$s_next = 'Next';
-$s_first = 'First';
-$s_last = 'Last';
-$s_start_date = 'Start Date';
-$s_end_date = 'End Date';
-$s_use_date_filters = 'Use Date Filters';
-$s_yes = 'Yes';
-$s_no = 'No';
-$s_open_filters = 'Change Filter';
-$s_or_unassigned = 'Or Unassigned';
+$s_none = 'nenhum';
+$s_search = 'Procurar';
+$s_view_prev_link = 'Ver Ant';
+$s_view_next_link = 'Ver Próx';
+$s_prev = 'Anterior';
+$s_next = 'Próximo';
+$s_first = 'Primeiro';
+$s_last = 'Último';
+$s_start_date = 'Data de Início';
+$s_end_date = 'Data de Término';
+$s_use_date_filters = 'Usar Filtros de Data';
+$s_yes = 'Sim';
+$s_no = 'Não';
+$s_open_filters = 'Alterar Filtro';
+$s_or_unassigned = 'Ou Não Atribuído';
+$s_ok = 'OK';
+
+# stored query strings
+$s_use_query = 'Usar Filtro';
+$s_delete_query = 'Apagar Filtro';
+$s_query_deleted = 'Filtro Apagado';
+$s_save_query = 'Salvar Filtro Atual';
+$s_reset_query = 'Zerar Filtro';
+$s_query_name = 'Nome do Filtro';
+$s_query_exists = 'Esta consulta em particular aparenta já existir.';
+$s_query_dupe_name = 'Outra consulta já tem este nome. Por favor, escolha um nome diferente para esta consulta.';
+$s_query_blank_name = 'Você não pode armazenar um filtro sem um nome. Por favor, dê um nome a este filtro antes de salvar.';
+$s_query_store_error = 'Houve um erro ao salvar esta consulta.';
+$s_open_queries = 'Gerenciar Filtros';
+$s_query_delete_msg = 'Você tem certeza que deseja apagar esta consulta?';
 
 # view_bug_advanced_page.php
-$s_view_simple_link  = "Visualiza&ccedil;&atilde;o simples";
-$s_viewing_bug_advanced_details_title = "Visualiza&ccedil;&atilde;o de Bugs avan&ccedil;ada";
-$s_product_build     = "Compila&ccedil;&atilde;o do produto";
-$s_system_profile    = "Descri&ccedil;&atilde;o do sistema";
-$s_update_bug_button = "Atualizar";
-$s_bug_assign_to_button = 'Assign To:';
-$s_reopen_bug_button = "Reabrir Bug";
-$s_attached_files    = "Arquivos anexados";
-$s_publish = 'Publish';
-$s_cached = 'Cached';
+$s_view_simple_link = 'Visualização Simples';
+$s_viewing_bug_advanced_details_title = 'Visualização Avançada do Caso';
+$s_product_build = 'Build do Produto';
+$s_system_profile = 'Descrição do Sistema';
+$s_update_bug_button = 'Atualizar Caso';
+$s_bug_assign_to_button = 'Atribuir a:';
+$s_reopen_bug_button = 'Reabrir Caso';
+$s_move_bug_button = 'Mover Caso';
+$s_attached_files = 'Arquivos Anexados';
+$s_publish = 'Publicar';
+$s_cached = 'Em cache';
 
 # view_bug_inc.php
 
 # view_bug_page.php
-$s_view_advanced_link               = "Visualiza&ccedil;&atilde;o avan&ccedil;ada";
-$s_viewing_bug_simple_details_title = "Detalhes simplificados do bug";
+$s_view_advanced_link = 'Visualização Avançada';
+$s_viewing_bug_simple_details_title = 'Visualização Simples do Caso';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
-$s_monitoring_user_list = 'User List';
+$s_no_users_monitoring_bug = 'Não há usuários monitorando este caso.';
+$s_users_monitoring_bug = 'Usuários monitorando este caso';
+$s_monitoring_user_list = 'Lista de Usuários';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'Não há usuários patrocinando este caso.';
+$s_users_sponsoring_bug = 'Usuários patrocinando este caso';
+$s_sponsors_list = 'Lista de Patrocinadores';
+$s_total_sponsorship_amount = 'Patrocínio Total = %s';
+$s_sponsor_issue = 'Patrocinar Caso';
 
 # custom field strings
-$s_add_custom_field_button = 'New Custom Field';
-$s_delete_custom_field_button = 'Delete Custom Field';
-$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-$s_update_custom_field_button = 'Update Custom Field';
-$s_add_existing_custom_field = 'Add This Existing Custom Field';
-$s_edit_custom_field_title = 'Edit custom field';
-$s_custom_field = 'Field';
-$s_custom_fields_setup = 'Custom Fields';
-$s_custom_field_name = 'Name';
-$s_custom_field_project_count = 'Project Count';
-$s_custom_field_type = 'Type';
-$s_custom_field_possible_values = 'Possible Values';
-$s_custom_field_default_value = 'Default Value';
-$s_custom_field_valid_regexp = 'Regular Expression';
-$s_custom_field_access_level_r = 'Read Access';
-$s_custom_field_access_level_rw = 'Write Access';
-$s_custom_field_length_min = 'Min. Length';
-$s_custom_field_length_max = 'Max. Length';
-$s_custom_field_advanced = 'Advanced';
-$s_custom_field_sequence = 'Sequence';
-$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+$s_add_custom_field_button = 'Novo Campo Personalizado';
+$s_delete_custom_field_button = 'Apagar Campo Personalizado';
+$s_delete_custom_field_everywhere = 'Apagar Campo Personalizado Totalmente';
+$s_update_custom_field_button = 'Atualizar Campo Personalizado';
+$s_add_existing_custom_field = 'Adicionar Este Campo Personalizado Existente';
+$s_edit_custom_field_title = 'Alterar campo personalizado';
+$s_custom_field = 'Campo';
+$s_custom_fields_setup = 'Campos Personalizados';
+$s_custom_field_name = 'Nome';
+$s_custom_field_project_count = 'Contagem de Projetos';
+$s_custom_field_type = 'Tipo';
+$s_custom_field_possible_values = 'Valores Possíveis';
+$s_custom_field_default_value = 'Valor Padrão';
+$s_custom_field_valid_regexp = 'Expressão Regular';
+$s_custom_field_access_level_r = 'Acesso de Leitura';
+$s_custom_field_access_level_rw = 'Acesso de Escrita';
+$s_custom_field_length_min = 'Tamanho Mínimo';
+$s_custom_field_length_max = 'Tamanho Máximo';
+$s_custom_field_advanced = 'Avançado';
+$s_custom_field_sequence = 'Seqüência';
+$s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail';
 
-$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-$s_field_delete_button = 'Delete Field';
+$s_confirm_used_custom_field_deletion = 'Este campo atualmente está ligado a pelo menos um projeto.  Se você continuar, todos os valores para este campo serão apagados permanentemente.  Esta ação não pode ser desfeita.  Se você não deseja apagar este campo, clique no botão Voltar de seu navegador.  Para continuar, clique no botão abaixo.';
+$s_confirm_custom_field_deletion = 'Você tem certeza que deseja apagar este campo personalizado e todos os seus valores associados?';
+$s_field_delete_button = 'Apagar Campo';
 
-$s_hide_status = 'Hide Status';
-$s_filter_closed = "Closed";
-$s_filter_resolved = "Resolved";
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
+$s_hide_status = 'Ocultar Status';
+$s_filter_closed = "Fechado";
+$s_filter_resolved = "Resolvido";
+$s_hide_closed = "Ocultar Fechados";
+$s_hide_resolved = "Ocultar Resolvidos";
+$s_and_above = 'E Acima';
+$s_advanced_filters = 'Filtros Avançados';
+$s_simple_filters = 'Filtros Simples';
 
-$s_attachments = "attachment(s)";
+$s_attachments = "anexo(s)";
 $s_attachment_alt = "A";
 
 # PHPMailer
 $s_phpmailer_language = 'br';
+
+# Sponsorship Strings
+$s_sponsors = '%d patrocinador(es)';
+$s_sponsorship_added = 'Patrocinador Adicionado';
+$s_sponsorship_updated = 'Patrocinador Atualizado';
+$s_sponsorship_deleted = 'Patrocinador Apagado';
+$s_sponsorship_more_info = 'Mais informações sobre patrocínio';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Registro de Mudanças';
+
+# Http auth
+$s_http_auth_realm = "Login do Mantis";
 ?>
