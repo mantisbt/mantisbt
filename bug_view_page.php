@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.14 2002-12-08 10:54:53 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.15 2002-12-10 12:52:09 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -87,8 +87,8 @@
 	</td>
 </tr>
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -104,8 +104,8 @@
 	<td>
 		<?php echo get_enum_element( 'project_view_state', $t_bug->view_state ) ?>
 	</td>
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -129,8 +129,8 @@
 	<td>
 		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
 	</td>
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -146,8 +146,8 @@
 	<td>
 		<?php print_duplicate_id( $t_bug->duplicate_id ) ?>
 	</td>
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 </tr>
 
@@ -180,8 +180,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 <?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
 
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 <tr <?php echo helper_alternate_class() ?>>
@@ -209,7 +209,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 </tr>
 <?php
-	$t_show_attachments = ( ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_level_check_greater_or_equal( config_get( 'view_attachments_threshold' ) ) );
+	$t_show_attachments = ( ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_level_check_greater_or_equal( config_get( 'view_attachments_threshold' ) ) ) && ( ON == config_get( 'allow_file_upload' ) && ini_get( 'file_uploads' ) );
 
 	if ( $t_show_attachments ) {
 ?>
