@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.67 2004-04-08 03:31:38 prescience Exp $
+	# $Id: user_api.php,v 1.68 2004-04-08 16:46:10 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -104,7 +104,7 @@
 	# if it doesn't exist then error
 	#  otherwise let execution continue undisturbed
 	function user_ensure_exists( $p_user_id ) {
-		if ( ! user_exists( $p_user_id ) ) {
+		if ( !user_exists( $p_user_id ) ) {
 			trigger_error( ERROR_USER_NOT_FOUND, ERROR );
 		}
 	}
@@ -134,7 +134,7 @@
 	# --------------------
 	# Check if the username is unique and trigger an ERROR if it isn't
 	function user_ensure_name_unique( $p_username ) {
-		if ( ! user_is_name_unique( $p_username ) ) {
+		if ( !user_is_name_unique( $p_username ) ) {
 			trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 		}
 	}
@@ -161,7 +161,7 @@
 	# Check if the username is a valid username (does not account for uniqueness)
 	# Trigger an error if the username is not valid
 	function user_ensure_name_valid( $p_username ) {
-		if ( ! user_is_name_valid( $p_username ) ) {
+		if ( !user_is_name_valid( $p_username ) ) {
 			trigger_error( ERROR_USER_NAME_INVALID, ERROR );
 		}
 	}
@@ -301,7 +301,7 @@
 				$t_email = ldap_email_from_username( $p_username );
 			}
 
-			if ( ! is_blank( $t_email ) ) {
+			if ( !is_blank( $t_email ) ) {
 				$p_email = $t_email;
 			}
 */

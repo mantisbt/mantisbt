@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.30 2004-04-08 03:31:37 prescience Exp $
+	# $Id: custom_field_api.php,v 1.31 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -672,7 +672,7 @@
 	function custom_field_get_all_linked_fields( $p_bug_id ) {
 		global $g_cached_custom_field_lists;
 
-		if ( ! is_array( $g_cached_custom_field_lists ) ) {
+		if ( !is_array( $g_cached_custom_field_lists ) ) {
 			$g_cached_custom_field_lists = array();
 		}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.44 2004-04-08 02:42:27 prescience Exp $
+	# $Id: string_api.php,v 1.45 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -183,7 +183,7 @@
 	# --------------------
 	# Detect URLs and email addresses in the string and replace them with href anchors
 	function string_insert_hrefs( $p_string ) {
-		if ( ! config_get( 'html_make_links' ) ) {
+		if ( !config_get( 'html_make_links' ) ) {
 			return $p_string;
 		}
 

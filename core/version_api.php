@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.10 2004-04-08 02:42:27 prescience Exp $
+	# $Id: version_api.php,v 1.11 2004-04-08 16:46:25 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -45,14 +45,14 @@
 	# Check whether the version name is unique
 	# Returns true if the name is unique, false otherwise
 	function version_is_unique( $p_project_id, $p_version ) {
-		return ! version_exists( $p_project_id, $p_version );
+		return !version_exists( $p_project_id, $p_version );
 	}
 
 	# --------------------
 	# Check whether the version exists in the project
 	# Trigger an error if it does not
 	function version_ensure_exists( $p_project_id, $p_version ) {
-		if ( ! version_exists( $p_project_id, $p_version ) ) {
+		if ( !version_exists( $p_project_id, $p_version ) ) {
 			trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
 		}
 	}
@@ -61,7 +61,7 @@
 	# Check whether the version is unique within a project
 	# Trigger an error if it is not
 	function version_ensure_unique( $p_project_id, $p_version ) {
-		if ( ! version_is_unique( $p_project_id, $p_version ) ) {
+		if ( !version_is_unique( $p_project_id, $p_version ) ) {
 			trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
 		}
 	}

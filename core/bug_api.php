@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.54 2004-04-08 02:42:27 prescience Exp $
+	# $Id: bug_api.php,v 1.55 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -199,7 +199,7 @@
 	# if it doesn't exist then error
 	#  otherwise let execution continue undisturbed
 	function bug_ensure_exists( $p_bug_id ) {
-		if ( ! bug_exists( $p_bug_id ) ) {
+		if ( !bug_exists( $p_bug_id ) ) {
 			error_parameters( $p_bug_id );
 			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
 		}

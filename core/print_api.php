@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.74 2004-04-08 02:42:27 prescience Exp $
+	# $Id: print_api.php,v 1.75 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -105,7 +105,7 @@
 		$t_username = user_get_name( $p_user_id );
 		if ( user_exists( $p_user_id ) ) {
 			$t_email = user_get_email( $p_user_id );
-			if ( ! is_blank( $t_email ) ) {
+			if ( !is_blank( $t_email ) ) {
 				print_email_link( $t_email, $t_username );
 			} else {
 				echo $t_username;

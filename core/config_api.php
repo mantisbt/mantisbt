@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.11 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: config_api.php,v 1.12 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -33,7 +33,7 @@
 		} else {
 			# unless we were allowing for the option not to exist by passing
 			#  a default, trigger a WARNING
-			if ( null == $p_default ) { 
+			if ( null == $p_default ) {
 				error_parameters( $p_option );
 				trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, WARNING );
 			}
@@ -42,7 +42,7 @@
 	}
 
 	# ------------------
-	# Returns true if the specified config option exists (ie. a 
+	# Returns true if the specified config option exists (ie. a
 	#  value or default can be found), false otherwise
 	function config_is_set( $p_option ) {
 		if ( isset( $GLOBALS['g_'.$p_option] ) ) {
@@ -56,7 +56,7 @@
 	# Sets the value of the given config option to the given value
 	#  If the config option does not exist, an ERROR is triggered
 	function config_set( $p_option, $p_value ) {
-		if ( ! isset( $GLOBALS['g_'.$p_option] ) ) {
+		if ( !isset( $GLOBALS['g_'.$p_option] ) ) {
 			trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
 		}
 
@@ -80,7 +80,7 @@
 					echo '<li>$g_' . $t_option . '</li>';
 				}
 				echo '</ul>';
-			} else if ( ! is_blank( $p_replace ) ) {
+			} else if ( !is_blank( $p_replace ) ) {
 				echo ', please use <tt>$g_' . $p_replace . '</tt> instead.';
 			}
 			echo '</p>';

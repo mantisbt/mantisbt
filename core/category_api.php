@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.11 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: category_api.php,v 1.12 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -23,7 +23,7 @@
 	function category_exists( $p_project_id, $p_category ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_category		= db_prepare_string( $p_category );
-		
+
 		$t_project_category_table = config_get( 'mantis_project_category_table' );
 
 		$query = "SELECT COUNT(*)
@@ -45,7 +45,7 @@
 	# Check whether the category exists in the project
 	# Trigger an error if it does not
 	function category_ensure_exists( $p_project_id, $p_category ) {
-		if ( ! category_exists( $p_project_id, $p_category ) ) {
+		if ( !category_exists( $p_project_id, $p_category ) ) {
 			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
 		}
 	}
@@ -54,14 +54,14 @@
 	# Check whether the category is unique within a project
 	# Returns true if the category is unique, false otherwise
 	function category_is_unique( $p_project_id, $p_category ) {
-		return ! category_exists( $p_project_id, $p_category );
+		return !category_exists( $p_project_id, $p_category );
 	}
 
 	# --------------------
 	# Check whether the category is unique within a project
 	# Trigger an error if it is not
 	function category_ensure_unique( $p_project_id, $p_category ) {
-		if ( ! category_is_unique( $p_project_id, $p_category ) ) {
+		if ( !category_is_unique( $p_project_id, $p_category ) ) {
 			trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
 		}
 	}
@@ -131,7 +131,7 @@
 		$c_new_category	= db_prepare_string( $p_new_category );
 
 		category_ensure_exists( $p_project_id, $p_category );
-		if ( ! is_blank( $p_new_category ) ) {
+		if ( !is_blank( $p_new_category ) ) {
 			category_ensure_exists( $p_project_id, $p_new_category );
 		}
 

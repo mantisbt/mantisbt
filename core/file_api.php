@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.44 2004-04-08 02:42:27 prescience Exp $
+	# $Id: file_api.php,v 1.45 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -485,7 +485,7 @@
 		}
 
 		# If uploads are disbled just return false
-		if ( ! file_is_uploading_enabled() ) {
+		if ( !file_is_uploading_enabled() ) {
 			return false;
 		}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.23 2004-04-08 03:31:36 prescience Exp $
+	# $Id: bugnote_api.php,v 1.24 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -60,7 +60,7 @@
 	#
 	# return true if the bugnote exists, raise an error if not
 	function bugnote_ensure_exists( $p_bugnote_id ) {
-		if ( ! bugnote_exists( $p_bugnote_id ) ) {
+		if ( !bugnote_exists( $p_bugnote_id ) ) {
 			trigger_error( ERROR_BUGNOTE_NOT_FOUND, ERROR );
 		}
 	}
@@ -267,11 +267,11 @@
 	function bugnote_get_all_bugnotes( $p_bug_id ) {
 		global $g_cache_bugnotes;
 
-		if ( ! isset( $g_cache_bugnotes ) )  {
+		if ( !isset( $g_cache_bugnotes ) )  {
 			$g_cache_bugnotes = array();
 		}
 
-		if ( ! isset( $g_cache_bugnotes[$p_bug_id] ) )  {
+		if ( !isset( $g_cache_bugnotes[$p_bug_id] ) )  {
 			$c_bug_id = db_prepare_int( $p_bug_id );
 
 			$t_bugnote_table = config_get( 'mantis_bugnote_table' );
@@ -288,7 +288,7 @@
 			$t_bugnotes = array();
 
 			# BUILD bugnotes array
-			for ( $result = db_query( $query ); ! $result->EOF; $result->MoveNext() )  {
+			for ( $result = db_query( $query ); !$result->EOF; $result->MoveNext() )  {
 				$t_bugnote = new BugnoteData;
 
 				$t_bugnote->note          = $result->fields['note'];

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.10 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: php_api.php,v 1.11 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -39,7 +39,7 @@
 	# --------------------
 
 	# Enforce our minimum requirements
-	if ( ! php_version_at_least( PHP_MIN_VERSION ) ) {
+	if ( !php_version_at_least( PHP_MIN_VERSION ) ) {
 		ob_end_clean();
 		echo '<b>Your version of PHP is too old.  Mantis requires PHP version ' . PHP_MIN_VERSION . ' or newer</b>';
 		phpinfo();
@@ -49,7 +49,7 @@
 	ini_set('magic_quotes_runtime', 0);
 
 	# Experimental support for $_* auto-global variables in PHP < 4.1.0
-	if ( ! php_version_at_least( '4.1.0' ) ) {
+	if ( !php_version_at_least( '4.1.0' ) ) {
 		global $_REQUEST, $_GET, $_POST, $_COOKIE, $_SERVER, $_FILES;
 		
 		$_GET = $HTTP_GET_VARS;
@@ -68,7 +68,7 @@
 	}
 
 	# array_key_exists was not available on PHP 4.0.6
-	if ( ! function_exists( 'array_key_exists' ) ) {
+	if ( !function_exists( 'array_key_exists' ) ) {
 		function array_key_exists( $key, $search ) {
 			return key_exists( $key, $search );
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.77 2004-04-08 03:31:37 prescience Exp $
+	# $Id: email_api.php,v 1.78 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -144,7 +144,7 @@
 	# Check if the email address is valid
 	#  return true if it is, trigger an ERROR if it isn't
 	function email_ensure_valid( $p_email ) {
-		if ( ! email_is_valid( $p_email ) ) {
+		if ( !email_is_valid( $p_email ) ) {
 			trigger_error( ERROR_EMAIL_INVALID, ERROR );
 		}
 	}
@@ -230,7 +230,7 @@
 
 		$t_pref_field = 'email_on_' . $p_notify_type;
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
-		if ( ! db_field_exists( $t_pref_field, $t_user_pref_table ) ) {
+		if ( !db_field_exists( $t_pref_field, $t_user_pref_table ) ) {
 			$t_pref_field = false;
 		}
 
@@ -478,7 +478,7 @@
 		$mail->From     = config_get( 'from_email' );
 		$mail->Sender   = config_get( 'return_path_email' );
 		$mail->FromName = '';
-		if ( ! is_blank( config_get( 'smtp_username' ) ) ) {     # Use SMTP Authentication
+		if ( !is_blank( config_get( 'smtp_username' ) ) ) {     # Use SMTP Authentication
 			$mail->SMTPAuth = true;
 			$mail->Username = config_get( 'smtp_username' );
 			$mail->Password = config_get( 'smtp_password' );
@@ -606,7 +606,7 @@
 	# @@@ I'm not sure this shouldn't return an array of user ids... more work for
 	#  the caller but cleaner from an API point of view.
 	function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
-		if ( ! is_array( $p_recipients ) ) {
+		if ( !is_array( $p_recipients ) ) {
 			$p_recipients = array( $p_recipients );
 		}
 

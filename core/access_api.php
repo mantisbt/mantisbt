@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.26 2004-04-08 02:42:27 prescience Exp $
+	# $Id: access_api.php,v 1.27 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -27,11 +27,11 @@
 	# he/she is not authorised to.  This outputs an access denied message then
 	# re-directs to the mainpage.
 	function access_denied() {
-		if ( ! php_version_at_least( '4.1.0' ) ) {
+		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_SERVER;
 		}
 
-		if ( ! auth_is_user_authenticated() ) {
+		if ( !auth_is_user_authenticated() ) {
 			$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
 			print_header_redirect( 'login_page.php?return='.$p_return_page );
 		} else {
@@ -101,7 +101,7 @@
 
 		$c_user_id = db_prepare_int( $p_user_id );
 
-		if ( ! in_array( (int)$p_user_id, $g_cache_access_matrix_user_ids ) ) {
+		if ( !in_array( (int)$p_user_id, $g_cache_access_matrix_user_ids ) ) {
 			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 
 			$query = "SELECT project_id, access_level
@@ -148,7 +148,7 @@
 		# Deal with not logged in silently in this case
 		# @@@ we may be able to remove this and just error
 		#     and once we default to anon login, we can remove it for sure
-		if ( ! auth_is_user_authenticated() ) {
+		if ( !auth_is_user_authenticated() ) {
 			return false;
 		}
 
@@ -161,7 +161,7 @@
 	# Check if the user has the specified global access level
 	#  and deny access to the page if not
 	function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
-		if ( ! access_has_global_level( $p_access_level, $p_user_id ) ) {
+		if ( !access_has_global_level( $p_access_level, $p_user_id ) ) {
 			access_denied();
 		}
 	}
@@ -182,7 +182,7 @@
 		# Deal with not logged in silently in this case
 		# @@@ we may be able to remove this and just error
 		#     and once we default to anon login, we can remove it for sure
-		if ( ! auth_is_user_authenticated() ) {
+		if ( !auth_is_user_authenticated() ) {
 			return false;
 		}
 
@@ -222,7 +222,7 @@
 	# Check if the user has the specified access level for the given project
 	#  and deny access to the page if not
 	function access_ensure_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
-		if ( ! access_has_project_level(  $p_access_level, $p_project_id, $p_user_id ) ) {
+		if ( !access_has_project_level(  $p_access_level, $p_project_id, $p_user_id ) ) {
 			access_denied();
 		}
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.48 2004-04-08 03:31:37 prescience Exp $
+	# $Id: project_api.php,v 1.49 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -77,7 +77,7 @@
 	function project_cache_all() {
 		global $g_cache_project, $g_cache_project_all;
 
-		if ( ! $g_cache_project_all ) {
+		if ( !$g_cache_project_all ) {
 			$t_project_table = config_get( 'mantis_project_table' );
 
 			$query = "SELECT *
@@ -140,7 +140,7 @@
 	# if it doesn't exist then error
 	#  otherwise let execution continue undisturbed
 	function project_ensure_exists( $p_project_id ) {
-		if ( ! project_exists( $p_project_id ) ) {
+		if ( !project_exists( $p_project_id ) ) {
 			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
 		}
 	}
@@ -169,7 +169,7 @@
 	# if it doesn't exist then error
 	#  otherwise let execution continue undisturbed
 	function project_ensure_name_unique( $p_name ) {
-		if ( ! project_is_name_unique( $p_name ) ) {
+		if ( !project_is_name_unique( $p_name ) ) {
 			trigger_error( ERROR_PROJECT_NAME_NOT_UNIQUE, ERROR );
 		}
 	}

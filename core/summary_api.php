@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.26 2004-04-08 03:31:37 prescience Exp $
+	# $Id: summary_api.php,v 1.27 2004-04-08 16:46:10 prescience Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -593,11 +593,11 @@
 		$t_handler_res_arr = array();
 		$t_arr = db_fetch_array( $result );
 		while ( $t_arr ) {
-			if ( ! isset( $t_handler_res_arr[$t_arr['handler_id']] ) ) {
+			if ( !isset( $t_handler_res_arr[$t_arr['handler_id']] ) ) {
 				$t_handler_res_arr[$t_arr['handler_id']] = array();
 				$t_handler_res_arr[$t_arr['handler_id']]['total'] = 0;
 			}
-			if ( ! isset( $t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] ) ) {
+			if ( !isset( $t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] ) ) {
 				$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']] = 0;
 			}
 			$t_handler_res_arr[$t_arr['handler_id']][$t_arr['resolution']]++;
@@ -699,11 +699,11 @@
 		$t_reporter_bugcount_arr = array();
 		$t_arr = db_fetch_array( $result );
 		while ( $t_arr ) {
-			if ( ! isset( $t_reporter_res_arr[$t_arr['reporter_id']] ) ) {
+			if ( !isset( $t_reporter_res_arr[$t_arr['reporter_id']] ) ) {
 				$t_reporter_res_arr[$t_arr['reporter_id']] = array();
 				$t_reporter_bugcount_arr[$t_arr['reporter_id']] = 0;
 			}
-			if ( ! isset( $t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] ) ) {
+			if ( !isset( $t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] ) ) {
 				$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']] = 0;
 			}
 			$t_reporter_res_arr[$t_arr['reporter_id']][$t_arr['resolution']]++;
@@ -834,15 +834,15 @@
 		$t_reporter_bugcount_arr = array();
 		$t_arr = db_fetch_array( $result );
 		while ( $t_arr ) {
-			if ( ! isset( $t_reporter_ressev_arr[$t_arr['reporter_id']] ) ) {
+			if ( !isset( $t_reporter_ressev_arr[$t_arr['reporter_id']] ) ) {
 				$t_reporter_ressev_arr[$t_arr['reporter_id']] = array();
 				$t_reporter_bugcount_arr[$t_arr['reporter_id']] = 0;
 			}
-			if ( ! isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']] ) ) {
+			if ( !isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']] ) ) {
 				$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']] = array();
 				$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']]['total'] = 0;
 			}
-			if ( ! isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] ) ) {
+			if ( !isset( $t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] ) ) {
 				$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']] = 0;
 			}
 			$t_reporter_ressev_arr[$t_arr['reporter_id']][$t_arr['severity']][$t_arr['resolution']]++;
@@ -879,7 +879,7 @@
 				$t_total_severity = 0;
 				$t_total_errors = 0;
 				for ( $j = 0; $j < $enum_sev_count; $j++ ) {
-					if ( ! isset( $t_arr2[$c_sev_s[$j]] ) ) {
+					if ( !isset( $t_arr2[$c_sev_s[$j]] ) ) {
 						continue;
 					}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.13 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: ldap_api.php,v 1.14 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -28,13 +28,13 @@
 				$p_password	= config_get( 'ldap_bind_passwd', '' );
 			}
 			
-			if ( ! is_blank( $p_binddn ) && ! is_blank( $p_password ) ) {
+			if ( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
 				$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
 			} else {
 				# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
 				$t_br = @ldap_bind( $t_ds );
 			}
-			if ( ! $t_br ) {
+			if ( !$t_br ) {
 				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 			}		
 		} else {

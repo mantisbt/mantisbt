@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.26 2004-04-08 03:31:37 prescience Exp $
+	# $Id: filter_api.php,v 1.27 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -60,7 +60,7 @@
 		$t_join_clauses = array();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			if ( ! current_user_is_administrator() ) {
+			if ( !current_user_is_administrator() ) {
 				$t_projects = current_user_get_accessible_projects();
 
 				if ( 0 == sizeof( $t_projects ) ) {
@@ -83,7 +83,7 @@
 		}
 
 		# private bug selection
-		if ( ! access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
+		if ( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
 			$t_public = VS_PUBLIC;
 			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR $t_bug_table.reporter_id='$t_user_id')" );
 		}
@@ -455,7 +455,7 @@
 				print '<input type="hidden" name="custom_field_';
 				print $t_accessible_custom_fields_ids[$i];
 				print '" value="';
-				if ( ! isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
+				if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
 					$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] = 'any';
 				}
 				print $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]];
@@ -734,12 +734,12 @@
 		$t_filters_table = config_get( 'mantis_filters_table' );
 
 		# check that the user can save non current filters (if required)
-		if ( ( -1 != $c_project_id ) && ( ! access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
+		if ( ( -1 != $c_project_id ) && ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
 			return -1;
 		}
 
 		# ensure that we're not making this filter public if we're not allowed
-		if ( ! access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
+		if ( !access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
 			$c_is_public = db_prepare_bool( false );
 		}
 
@@ -815,7 +815,7 @@
 			}
 
 			# check that the user has access to non current filters
-			if ( ( -1 != $row['project_id'] ) && ( ! access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) ) {
+			if ( ( -1 != $row['project_id'] ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) ) {
 				return null;
 			}
 
@@ -881,7 +881,7 @@
 		$c_filter_id = db_prepare_int( $p_filter_id );
 		$t_user_id = auth_get_current_user_id();
 
-		if ( ! filter_db_can_delete_filter( $c_filter_id ) ) {
+		if ( !filter_db_can_delete_filter( $c_filter_id ) ) {
 			return false;
 		}
 
@@ -903,7 +903,7 @@
 		$t_user_id = auth_get_current_user_id();
 
 		# If the user doesn't have access rights to stored queries, just return
-		if ( ! access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
+		if ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
 			return $t_overall_query_arr;
 		}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.33 2004-04-08 02:42:27 prescience Exp $
+	# $Id: authentication_api.php,v 1.34 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -24,7 +24,7 @@
 	#  If parameter is given it is used as a URL to redirect to following
 	#   successful login.  If none is given, the URL of the current page is used
 	function auth_ensure_user_authenticated( $p_return_page='' ) {
-		if ( ! php_version_at_least( '4.1.0' ) ) {
+		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_SERVER;
 		}
 
@@ -105,10 +105,10 @@
 		$t_anon_account = config_get( 'anonymous_account' );
 		$t_anon_allowed = config_get( 'allow_anonymous_login' );
 		# check for anonymous login
-		if ( ! ( ON == $t_anon_allowed && $t_anon_account == $p_username ) ) {
+		if ( !( ON == $t_anon_allowed && $t_anon_account == $p_username ) ) {
 			# anonymous login didn't work, so check the password
 
-			if ( ! auth_does_password_match( $t_user_id, $p_password ) ) {
+			if ( !auth_does_password_match( $t_user_id, $p_password ) ) {
 				return false;
 			}
 		}
@@ -263,7 +263,7 @@
 	function auth_generate_unique_cookie_string() {
 		do {
 			$t_cookie_string = auth_generate_cookie_string();
-		} while ( ! auth_is_cookie_string_unique( $t_cookie_string ) );
+		} while ( !auth_is_cookie_string_unique( $t_cookie_string ) );
 
 		return $t_cookie_string;
 	}

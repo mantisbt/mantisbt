@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.90 2004-04-08 02:42:27 prescience Exp $
+	# $Id: html_api.php,v 1.91 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -117,7 +117,7 @@
 	#  the menu.  This is used during the login process and other times when the
 	#  user may not be authenticated.
 	function html_page_bottom1a( $p_file = null ) {
-		if ( ! php_version_at_least( '4.1.0' ) ) {
+		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_SERVER;
 		}
 
@@ -232,7 +232,7 @@
 		echo '<tr>';
 			echo '<td class="login-info-left">';
 				if ( current_user_is_anonymous() ) {
-					if ( ! php_version_at_least( '4.1.0' ) ) {
+					if ( !php_version_at_least( '4.1.0' ) ) {
 						global $_SERVER;
 					}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.13 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: compress_api.php,v 1.14 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -31,7 +31,7 @@
 				OFF == config_get( 'use_iis' )  &&
 				'ob_gzhandler' != ini_get('output_handler') &&
 				extension_loaded( 'zlib' ) &&
-				! ini_get('zlib.output_compression') );
+				!ini_get('zlib.output_compression') );
 	}
 
 	# ----------------

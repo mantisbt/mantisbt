@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.22 2004-04-08 02:42:27 prescience Exp $
+	# $Id: gpc_api.php,v 1.23 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -23,7 +23,7 @@
 	#  cannot be found
 	function gpc_get( $p_var_name, $p_default = null ) {
 		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
-		if ( ! php_version_at_least( '4.1.0' ) ) {
+		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_POST, $_GET;
 		}
 
@@ -167,7 +167,7 @@
 	#  cannot be found
 	function gpc_get_cookie( $p_var_name, $p_default = null ) {
 		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
-		if ( ! php_version_at_least( '4.1.0' ) ) {
+		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_COOKIE;
 		}
 
@@ -231,7 +231,7 @@
 	#  cannot be found
 	function gpc_get_file( $p_var_name, $p_default = null ) {
 		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
-		if ( ! php_version_at_least( '4.1.0' ) ) {
+		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_FILES;
 		}
 
@@ -270,7 +270,7 @@
 	function gpc_strip_slashes( $p_var ) {
 		if (get_magic_quotes_gpc() == 0) {
 			return $p_var;
-		} else if ( ! is_array( $p_var ) ){
+		} else if ( !is_array( $p_var ) ){
 			return stripslashes( $p_var );
 		} else {
 			foreach ( $p_var as $key => $value ) {

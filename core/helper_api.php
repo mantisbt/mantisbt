@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.43 2004-04-08 02:42:27 prescience Exp $
+	# $Id: helper_api.php,v 1.44 2004-04-08 16:46:09 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -191,7 +191,7 @@
 		}
 
 		global $PHP_SELF;
-		if ( ! php_version_at_least( '4.1.0' ) ) {
+		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_POST, $_GET;
 		}
 
