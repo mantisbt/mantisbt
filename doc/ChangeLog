@@ -8,6 +8,7 @@ Mantis ChangeLog
  * Fix #4005: Signup for new account - invalid username generates crash
  * Fix #4018: Real name field allows potentially dangerous HTML
  * Fix #4020: Database field 'realname' not found after plain installation (vboctor)
+ * Fix #4027: Database query error on text search
  * Fix #4040: Sponsorship timestamp is not displayed correctly in sponsorship list (vboctor)
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection..
 

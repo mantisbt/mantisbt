@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.42 2004-06-29 06:38:36 narcissus Exp $
+	# $Id: filter_api.php,v 1.43 2004-07-08 23:05:47 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -386,15 +386,10 @@
 							 OR ($t_bug_text_table.description LIKE '%$c_search%')
 							 OR ($t_bug_text_table.steps_to_reproduce LIKE '%$c_search%')
 							 OR ($t_bug_text_table.additional_information LIKE '%$c_search%')
-							 OR ($t_bug_table.id LIKE '%$c_search%')
-							 OR ($t_bugnote_text_table.note LIKE '%$c_search%'))" );
+							 OR ($t_bug_table.id LIKE '%$c_search%'))" );
 			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
 
-			$t_from_clauses = array( $t_bug_text_table, $t_project_table );
-
-			array_push( $t_join_clauses, ",($t_bug_table LEFT JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id)" );
-
-			array_push( $t_join_clauses, "LEFT JOIN $t_bugnote_text_table ON $t_bugnote_text_table.id = $t_bugnote_table.bugnote_text_id" );
+			$t_from_clauses = array( $t_bug_table, $t_bug_text_table, $t_project_table );
 		} else {
 			$t_from_clauses = array( $t_bug_table, $t_project_table );
 		}
