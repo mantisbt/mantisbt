@@ -2,15 +2,43 @@ Mantis
 
 To Do:
 
- * Add emailing module
- * Add ip tracking/banning capability
- * Add file upload module
- * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
- * Make priority, projection, eta useful
  * Search bugs capability
+ * Add file upload module
+ * Make priority, projection, eta useful
  * Add glyphs and icons as optional display feature
+ * Userland partitioning for multiple projects
+ * Add ip tracking/banning capability
+ * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
  * More documentation on installation, configuration, and customization
- * Multiple project support with userland partitioning
+
+02.05.2001	-	0.14.0
+
+ * Fixed error in print_html_bottom
+ * Fixed error in db_upgrade.sql, changed "need info" to "feedback"
+ * Fixed bug_update where resolution was being set to blank
+ * Added summary by assignee
+ * Added one click "Assign to Me"
+ * Added corresponding bug_assign.php3 file, global, and string variables
+ * Added $g_content_expire for META tag
+ * Added direct "assign to" in advanced bug report
+ * Added view by assignee
+ * Added view by reporter
+ * Added method for users to create their own accounts
+ * Added better error handling for db_connect and db_result
+ * Added remember view settings
+ * Added bold indicator when a bugnote has been added
+ * Added maxlength= to all input types
+ * Added some bug info at the top of the bugnote add page
+ * Added login_count field to user_table
+ * Left aligned Summary
+ * Reset password now emails a randomly generated password to user
+ * Created date format global variables
+ * &nbsp; is echoed when the bugnote count is 0 (Netscape problem)
+ * Tweaked css_inc.php
+ * Tweaked the bug list view for better indication of which view the user
+   is viewing
+ * Removed cols=7 in the view bug in list form pages (Netscape problem)
+ * Removed mysql_error_page and references
 
 12.26.2000	-	0.13.1
 

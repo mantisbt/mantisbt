@@ -142,3 +142,16 @@ CREATE TABLE mantis_user_pref_table (
 );
 
 INSERT INTO mantis_user_pref_table VALUES ( '0000000001', '0000000001', '', '');
+
+#
+# Table structure for table 'mantis_projects_table'
+#
+
+CREATE TABLE mantis_projects_table (
+   id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL auto_increment,
+   name varchar(128) NOT NULL,
+   status enum('active','development','closed') DEFAULT 'active' NOT NULL,
+   description text NOT NULL,
+   PRIMARY KEY (id),
+   KEY id (id)
+);
