@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.10 2005-02-25 00:23:49 jlatour Exp $
+	# $Id: profile_api.php,v 1.11 2005-02-26 15:16:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Profile API ###
@@ -170,12 +170,12 @@
 	# --------------------
 	# Returns the default profile
 	function profile_get_default( $p_user_id ) {
-		global $g_mantis_user_pref_table;
 
 		$c_user_id = db_prepare_int( $p_user_id );
+		$t_mantis_user_pref_table = config_get( 'mantis_user_pref_table' );
 
 		$query = "SELECT default_profile
-			FROM $g_mantis_user_pref_table
+			FROM $t_mantis_user_pref_table
 			WHERE user_id='$c_user_id'";
 		$result = db_query( $query );
 

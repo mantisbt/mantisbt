@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.107 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: email_api.php,v 1.108 2005-02-26 15:16:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -155,11 +155,12 @@
 	# on action "new", i.e. notify administrators on new bugs which can be
 	# ON or OFF.
 	function email_notify_flag( $action, $flag ) {
-		global	$g_notify_flags, $g_default_notify_flags;
-		if ( isset ( $g_notify_flags[$action][$flag] ) ) {
-			return $g_notify_flags[$action][$flag];
-		} elseif ( isset ( $g_default_notify_flags[$flag] ) ) {
-			return $g_default_notify_flags[$flag];
+		$t_notify_flags = config_get( 'notify_flags' );
+		$t_default_notify_flags = config_get( 'default_notify_flags' );
+		if ( isset ( $t_notify_flags[$action][$flag] ) ) {
+			return $t_notify_flags[$action][$flag];
+		} elseif ( isset ( $t_default_notify_flags[$flag] ) ) {
+			return $t_default_notify_flags[$flag];
 		}
 
 		return OFF;
@@ -713,7 +714,7 @@
 		}
 
 		if ( !$mail->Send() ) {
-			PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
+			PRINT "PROBLEMS SENDING MAIL TO: $p_recipient<br />";
 			PRINT 'Mailer Error: '.$mail->ErrorInfo.'<br />';
 			if ( $p_exit_on_error )  {
 				exit;

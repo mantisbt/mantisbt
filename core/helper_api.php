@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.54 2005-02-13 21:36:37 jlatour Exp $
+	# $Id: helper_api.php,v 1.55 2005-02-26 15:16:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -155,7 +155,12 @@
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
 		if ( null === $t_project_id ) {
-			$t_project_id = current_user_get_pref( 'default_project' );
+			$t_pref_row = user_pref_cache_row( auth_get_current_user_id(), ALL_PROJECTS, false );
+			if ( false === $t_pref_row ) {
+				$t_project_id = ALL_PROJECTS;
+			} else {
+				$t_project_id = $t_pref_row['default_project'];
+			}
 		} else {
 			$t_project_id = split( ';', $t_project_id );
 			$t_project_id = $t_project_id[ count( $t_project_id ) - 1 ];
@@ -166,7 +171,7 @@
 			 !access_has_project_level( VIEWER, $t_project_id ) ) {
 			$t_project_id = ALL_PROJECTS;
 		}
-
+		
 		return (int)$t_project_id;
 	}
 

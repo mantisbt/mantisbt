@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.245 2005-02-26 01:00:36 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.246 2005-02-26 15:16:45 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -114,6 +114,20 @@
 		$g_use_iis = OFF;
 	}
 
+
+	#############################
+	# Configuration Settings
+	#############################
+
+	# The following list of variables should never be in the database.
+	# These patterns will be concatenated and used as a regular expression 
+	# to bypass the database lookup and look here for appropriate global settings.
+	$g_global_settings = array(
+		'_table$', 'cookie', 'custom_headers', '^db_', 'hostname', 'database_name',
+		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'stop_on_errors', 'login_method', '_file$',
+		'_title$', 'anonymous', 'content_expire', 'html_valid_tags', 'default_home_page'
+	);
+	
 	#############################
 	# Signup and Lost Password
 	#############################
@@ -1078,6 +1092,9 @@
 	# --- CSV Export ---------------
 	# Set the csv separator
 	$g_csv_separator = ',';
+	
+	# threshold for users to view the system configurations
+	$g_view_configuration_threshold = DEVELOPER;
 
 	################################
 	# Mantis Look and Feel Variables
@@ -1143,36 +1160,36 @@
 	#######################################
 
 	# --- table prefix ----------------
-	# if you change this remember to reflect the changes in the database
 	$g_db_table_prefix		= 'mantis';
 
 	# --- table names -----------------
-	$g_mantis_bug_file_table				= $g_db_table_prefix.'_bug_file_table';
-	$g_mantis_bug_history_table				= $g_db_table_prefix.'_bug_history_table';
-	$g_mantis_bug_monitor_table				= $g_db_table_prefix.'_bug_monitor_table';
-	$g_mantis_bug_relationship_table		= $g_db_table_prefix.'_bug_relationship_table';
-	$g_mantis_bug_table						= $g_db_table_prefix.'_bug_table';
-	$g_mantis_bug_text_table				= $g_db_table_prefix.'_bug_text_table';
-	$g_mantis_bugnote_table					= $g_db_table_prefix.'_bugnote_table';
-	$g_mantis_bugnote_text_table			= $g_db_table_prefix.'_bugnote_text_table';
-	$g_mantis_news_table					= $g_db_table_prefix.'_news_table';
-	$g_mantis_project_category_table		= $g_db_table_prefix.'_project_category_table';
-	$g_mantis_project_file_table			= $g_db_table_prefix.'_project_file_table';
-	$g_mantis_project_table					= $g_db_table_prefix.'_project_table';
-	$g_mantis_project_user_list_table		= $g_db_table_prefix.'_project_user_list_table';
-	$g_mantis_project_version_table			= $g_db_table_prefix.'_project_version_table';
-	$g_mantis_user_table					= $g_db_table_prefix.'_user_table';
-	$g_mantis_user_profile_table			= $g_db_table_prefix.'_user_profile_table';
-	$g_mantis_user_pref_table				= $g_db_table_prefix.'_user_pref_table';
-	$g_mantis_user_print_pref_table			= $g_db_table_prefix.'_user_print_pref_table';
-	$g_mantis_custom_field_project_table	= $g_db_table_prefix.'_custom_field_project_table';
-	$g_mantis_custom_field_table      	    = $g_db_table_prefix.'_custom_field_table';
-	$g_mantis_custom_field_string_table     = $g_db_table_prefix.'_custom_field_string_table';
-	$g_mantis_upgrade_table					= $g_db_table_prefix.'_upgrade_table';
-	$g_mantis_filters_table					= $g_db_table_prefix.'_filters_table';
-	$g_mantis_sponsorship_table				= $g_db_table_prefix.'_sponsorship_table';
-	$g_mantis_tokens_table					= $g_db_table_prefix.'_tokens_table';
-	$g_mantis_project_hierarchy_table			= $g_db_table_prefix.'_project_hierachy_table';
+	$g_mantis_bug_file_table				= '%db_table_prefix%_bug_file_table';
+	$g_mantis_bug_history_table				= '%db_table_prefix%_bug_history_table';
+	$g_mantis_bug_monitor_table				= '%db_table_prefix%_bug_monitor_table';
+	$g_mantis_bug_relationship_table		= '%db_table_prefix%_bug_relationship_table';
+	$g_mantis_bug_table						= '%db_table_prefix%_bug_table';
+	$g_mantis_bug_text_table				= '%db_table_prefix%_bug_text_table';
+	$g_mantis_bugnote_table					= '%db_table_prefix%_bugnote_table';
+	$g_mantis_bugnote_text_table			= '%db_table_prefix%_bugnote_text_table';
+	$g_mantis_news_table					= '%db_table_prefix%_news_table';
+	$g_mantis_project_category_table		= '%db_table_prefix%_project_category_table';
+	$g_mantis_project_file_table			= '%db_table_prefix%_project_file_table';
+	$g_mantis_project_table					= '%db_table_prefix%_project_table';
+	$g_mantis_project_user_list_table		= '%db_table_prefix%_project_user_list_table';
+	$g_mantis_project_version_table			= '%db_table_prefix%_project_version_table';
+	$g_mantis_user_table					= '%db_table_prefix%_user_table';
+	$g_mantis_user_profile_table			= '%db_table_prefix%_user_profile_table';
+	$g_mantis_user_pref_table				= '%db_table_prefix%_user_pref_table';
+	$g_mantis_user_print_pref_table			= '%db_table_prefix%_user_print_pref_table';
+	$g_mantis_custom_field_project_table	= '%db_table_prefix%_custom_field_project_table';
+	$g_mantis_custom_field_table      	    = '%db_table_prefix%_custom_field_table';
+	$g_mantis_custom_field_string_table     = '%db_table_prefix%_custom_field_string_table';
+	$g_mantis_upgrade_table					= '%db_table_prefix%_upgrade_table';
+	$g_mantis_filters_table					= '%db_table_prefix%_filters_table';
+	$g_mantis_sponsorship_table				= '%db_table_prefix%_sponsorship_table';
+	$g_mantis_tokens_table					= '%db_table_prefix%_tokens_table';
+	$g_mantis_project_hierarchy_table		= '%db_table_prefix%_project_hierachy_table';
+	$g_mantis_config_table					= '%db_table_prefix%_config_table';
 
 	###########################
 	# Mantis Enum Strings

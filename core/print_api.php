@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.116 2005-02-25 00:18:40 jlatour Exp $
+	# $Id: print_api.php,v 1.117 2005-02-26 15:16:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -231,17 +231,17 @@
 	# --------------------
 	# Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
-		global	$g_mantis_news_table;
+		$t_mantis_news_table = config_get( 'mantis_news_table' );
 
 		$t_project_id = helper_get_current_project();
 
 		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			$query = "SELECT id, headline, announcement, view_state
-				FROM $g_mantis_news_table
+				FROM $t_mantis_news_table
 				ORDER BY date_posted DESC";
 		} else {
 			$query = "SELECT id, headline, announcement, view_state
-				FROM $g_mantis_news_table
+				FROM $t_mantis_news_table
 				WHERE project_id='$t_project_id'
 				ORDER BY date_posted DESC";
 		}
@@ -270,9 +270,9 @@
 	# --------------------
 	# Used for update pages
 	function print_field_option_list( $p_list, $p_item='' ) {
-		global $g_mantis_bug_table;
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 
-		$t_category_string = get_enum_string( $g_mantis_bug_table, $p_list );
+		$t_category_string = get_enum_string( $t_mantis_bug_table, $p_list );
 	    $t_arr = explode_enum_string( $t_category_string );
 		$entry_count = count( $t_arr );
 		for ($i=0;$i<$entry_count;$i++) {
@@ -352,16 +352,17 @@
 	}
 	# --------------------
 	function print_news_project_option_list( $p_project_id ) {
-		global 	$g_mantis_project_table, $g_mantis_project_user_list_table;
+		$t_mantis_project_table = config_get( 'mantis_project_table' );
+		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 
 		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			$query = "SELECT *
-					FROM $g_mantis_project_table
+					FROM $t_mantis_project_table
 					ORDER BY name";
 		} else {
 			$t_user_id = auth_get_current_user_id();
 			$query = "SELECT p.id, p.name
-					FROM $g_mantis_project_table p, $g_mantis_project_user_list_table m
+					FROM $t_mantis_project_table p, $t_mantis_project_user_list_table m
 					WHERE 	p.id=m.project_id AND
 							m.user_id='$t_user_id' AND
 							p.enabled='1'";
@@ -382,7 +383,7 @@
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
 	function print_category_option_list( $p_category='', $p_project_id = null ) {
-		global $g_mantis_bug_table, $g_mantis_project_category_table;
+		$t_mantis_project_category_table = config_get( 'mantis_project_category_table' );
 
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
@@ -393,7 +394,7 @@
 		# grab all categories in the project category table
 		$cat_arr = array();
 		$query = "SELECT DISTINCT( category ) as category
-				FROM $g_mantis_project_category_table
+				FROM $t_mantis_project_category_table
 				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
@@ -416,7 +417,8 @@
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
 	function print_category_complete_option_list( $p_category='', $p_project_id = null ) {
-		global $g_mantis_bug_table, $g_mantis_project_category_table;
+		$t_mantis_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_mantis_bug_table = config_get( 'mantis_bug_table' );
 
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
@@ -427,7 +429,7 @@
 		# grab all categories in the project category table
 		$cat_arr = array();
 		$query = "SELECT DISTINCT( category ) as category
-				FROM $g_mantis_project_category_table
+				FROM $t_mantis_project_category_table
 				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
@@ -439,7 +441,7 @@
 
 		# grab all categories in the bug table
 		$query = "SELECT DISTINCT( category ) as category
-				FROM $g_mantis_bug_table
+				FROM $t_mantis_bug_table
 				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
@@ -595,14 +597,14 @@
 	# prints the list of access levels exluding ADMINISTRATOR
 	# this is used when adding users to projects
 	function print_project_access_levels_option_list( $p_val ) {
-		global $g_mantis_project_table, $g_access_levels_enum_string;
+		$t_access_levels_enum_string = config_get( 'access_levels_enum_string' );
 
 		# Add [default access level] to add the user to a project
 		# with his default access level.
 		PRINT "<option value=\"" . DEFAULT_ACCESS_LEVEL . "\"";
 		PRINT ">[" . lang_get( 'default_access_level' ) . "]</option>";
 
-		$t_arr = explode_enum_string( $g_access_levels_enum_string );
+		$t_arr = explode_enum_string( $t_access_levels_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
@@ -619,9 +621,7 @@
 	}
 	# --------------------
 	function print_language_option_list( $p_language ) {
-		global $g_language_choices_arr;
-
-		$t_arr = $g_language_choices_arr;
+		$t_arr = config_get( 'language_choices_arr' );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_language = string_attribute( $t_arr[$i] );
@@ -672,7 +672,8 @@
 	# list of users that are NOT in the specified project and that are enabled
 	# if no project is specified use the current project
 	function print_project_user_list_option_list( $p_project_id=null ) {
-		global	$g_mantis_project_user_list_table, $g_mantis_user_table;
+		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+		$t_mantis_user_table = config_get( 'mantis_user_table' );
 
 		if ( null == $p_project_id ) {
 			$p_project_id = helper_get_current_project();
@@ -681,8 +682,8 @@
 
 		$t_adm = ADMINISTRATOR;
 		$query = "SELECT DISTINCT u.id, u.username, u.realname
-				FROM $g_mantis_user_table u
-				LEFT JOIN $g_mantis_project_user_list_table p
+				FROM $t_mantis_user_table u
+				LEFT JOIN $t_mantis_project_user_list_table p
 				ON p.user_id=u.id AND p.project_id='$c_project_id'
 				WHERE u.access_level<$t_adm AND
 					u.enabled = 1 AND
@@ -704,14 +705,15 @@
 	# --------------------
 	# list of projects that a user is NOT in
 	function print_project_user_list_option_list2( $p_user_id ) {
-		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
+		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+		$t_mantis_project_table = config_get( 'mantis_project_table' );
 
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		$t_prv = VS_PRIVATE;
 		$query = "SELECT DISTINCT p.id, p.name
-				FROM $g_mantis_project_table p
-				LEFT JOIN $g_mantis_project_user_list_table u
+				FROM $t_mantis_project_table p
+				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id AND u.user_id='$c_user_id'
 				WHERE p.enabled=1 AND
 					p.view_state='$t_prv' AND
@@ -729,13 +731,14 @@
 	# --------------------
 	# list of projects that a user is NOT in
 	function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
-		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
+		$t_mantis_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+		$t_mantis_project_table = config_get( 'mantis_project_table' );
 
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		$query = "SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
-				FROM $g_mantis_project_table p
-				LEFT JOIN $g_mantis_project_user_list_table u
+				FROM $t_mantis_project_table p
+				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id
 				WHERE p.enabled=1 AND
 					u.user_id='$c_user_id'
@@ -806,12 +809,12 @@
 	}
 	# --------------------
 	function print_project_category_string( $p_project_id ) {
-		global $g_mantis_project_category_table, $g_mantis_project_table;
+		$t_mantis_project_category_table = config_get( 'antis_project_category_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$query = "SELECT category
-				FROM $g_mantis_project_category_table
+				FROM $t_mantis_project_category_table
 				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
@@ -833,12 +836,13 @@
 	}
 	# --------------------
 	function print_project_version_string( $p_project_id ) {
-		global $g_mantis_project_version_table, $g_mantis_project_table;
+		$t_mantis_project_version_table = config_get( 'mantis_project_version_table' );
+		$t_mantis_project_table = config_get( 'mantis_project_table' );
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$query = "SELECT version
-				FROM $g_mantis_project_version_table
+				FROM $t_mantis_project_version_table
 				WHERE project_id='$c_project_id'";
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
@@ -1162,14 +1166,14 @@
 	# --------------------
 	# Get icon corresponding to the specified filename
 	function print_file_icon( $p_filename ) {
-		global $g_file_type_icons;
+		$t_file_type_icons = config_get( 'file_type_icons' );
 
 		$ext = strtolower( file_get_extension( $p_filename ) );
-		if ( is_blank( $ext ) || !isset( $g_file_type_icons[$ext] ) ) {
+		if ( is_blank( $ext ) || !isset( $t_file_type_icons[$ext] ) ) {
 			$ext = '?';
 		}
 
-		$t_name = $g_file_type_icons[$ext];
+		$t_name = $t_file_type_icons[$ext];
 		PRINT '<img src="' . config_get( 'path' ) . 'images/'. $t_name . '" width="16" height="16" border="0" />';
 	}
 ?>

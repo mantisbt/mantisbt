@@ -27,4 +27,5 @@
 	$t_filters_table				= config_get( 'mantis_filters_table' );
 	$t_tokens_table					= config_get( 'mantis_tokens_table' );
 	$t_project_hierarchy_table		= config_get( 'mantis_project_hierarchy_table' );
+	$t_config_table					= config_get( 'mantis_config_table' );
 ?>

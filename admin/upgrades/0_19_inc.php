@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.5 2005-02-13 21:36:37 jlatour Exp $
+	# $Id: 0_19_inc.php,v 1.6 2005-02-26 15:16:45 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,7 +44,6 @@
 			'Add sticky column to bug table',
 			"ALTER TABLE $t_bug_table ADD sticky TINYINT(1) default '0' NOT NULL" );
 
-
 	$upgrades[] = new SQLUpgrade(
 			'project-hierarchy',
 			'Add project hierarchy table',
@@ -52,6 +51,20 @@
 			  child_id  INT UNSIGNED NOT NULL,
 			  parent_id INT UNSIGNED NOT NULL)"
 			);
+
+	$upgrades[] = new SQLUpgrade( 
+			'configdb-1',
+			'Add mantis_config_table',
+			"CREATE TABLE $t_config_table (
+			  config_id VARCHAR(64) NOT NULL,
+			  project_id INT DEFAULT 0,
+			  user_id INT DEFAULT 0,
+			  access INT DEFAULT 0, 
+			  type INT DEFAULT 90,
+			  value text NOT NULL,
+			  INDEX (config_id),
+			  UNIQUE config ( config_id, project_id, user_id ) )"
+		);
 
 	return $upgrades;
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.150 2005-02-25 00:18:40 jlatour Exp $
+	# $Id: html_api.php,v 1.151 2005-02-26 15:16:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -566,8 +566,8 @@
 		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
+		$t_manage_config_page = 'adm_permissions_report.php';
 		$t_manage_prof_menu_page    = 'manage_prof_menu_page.php';
-		$t_permissions_summary_report = 'adm_permissions_report.php';
 		# $t_documentation_page 		= 'documentation_page.php';
 
 		switch ( $p_page ) {
@@ -580,8 +580,8 @@
 			case $t_manage_custom_field_page:
 				$t_manage_custom_field_page = '';
 				break;
-			case $t_permissions_summary_report:
-				$t_permissions_summary_report = '';
+			case $t_manage_config_page:
+				$t_manage_config_page = '';
 				break;
 			case $t_manage_prof_menu_page:
 				$t_manage_prof_menu_page = '';
@@ -604,10 +604,39 @@
 		if ( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
 			print_bracket_link( $t_manage_prof_menu_page, lang_get( 'manage_global_profiles_link' ) );
 		}
-		if ( access_has_project_level( ADMINISTRATOR ) ) {
-			print_bracket_link( $t_permissions_summary_report, lang_get( 'permissions_summary_report' ) );
+		if ( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
+			print_bracket_link( $t_manage_config_page, lang_get( 'manage_config_link' ) );
 		}
 			# print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
+		PRINT '</div>';
+	}
+
+	# --------------------
+	# Print the menu for the manage configuration section
+	# $p_page specifies the current page name so it's link can be disabled
+	function print_manage_config_menu( $p_page = '' ) {
+		$t_permissions_summary_report = 'adm_permissions_report.php';
+		$t_manage_email 		= 'manage_config_email_page.php';
+		$t_manage_workflow 		= 'manage_config_workflow_page.php';
+
+		switch ( $p_page ) {
+			case $t_permissions_summary_report:
+				$t_permissions_summary_report = '';
+				break;
+			case $t_manage_email:
+				$t_manage_email = '';
+				break;
+			case $t_manage_workflow:
+				$t_manage_workflow = '';
+				break;
+		}
+
+		PRINT '<br /><div align="center">';
+		if ( access_has_project_level( config_get( 'view_configuration_threshold' ) ) ) {
+			print_bracket_link( $t_permissions_summary_report, lang_get( 'permissions_summary_report' ) );
+			print_bracket_link( $t_manage_email, lang_get( 'manage_email_config' ) );
+			print_bracket_link( $t_manage_workflow, lang_get( 'manage_workflow_config' ) );
+		}
 		PRINT '</div>';
 	}
 

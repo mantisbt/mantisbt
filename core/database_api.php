@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.41 2005-02-13 21:58:08 jlatour Exp $
+	# $Id: database_api.php,v 1.42 2005-02-26 15:16:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -166,10 +166,16 @@
 	}
 
 	# --------------------
-	function db_field_exists( $p_field_name, $p_table_name ) {
+	function db_table_exists( $p_table_name ) {
 		global $g_db;
 
-		return in_array ( $p_field_name , $g_db->MetaColumnNames( $p_table_name) ) ;
+		return in_array ( $p_table_name , $g_db->MetaTables( "TABLE" ) ) ;
+	}
+
+	# --------------------
+	function db_field_exists( $p_field_name, $p_table_name ) {
+		global $g_db;
+		return in_array ( $p_field_name , $g_db->MetaColumnNames( $p_table_name ) ) ;
 	}
 
 	# --------------------
