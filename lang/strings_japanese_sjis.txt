@@ -7,11 +7,11 @@
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# -------------------------------------------------
-	# $Revision: 1.43 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:49 $
+	# $Revision: 1.44 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-22 06:00:24 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.43 2003-07-31 14:41:49 prescience Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.44 2003-08-22 06:00:24 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -793,6 +793,8 @@ $s_show = "表示数";
 $s_changed = "変更(時間)";
 $s_viewing_bugs_title = "改修要望一覧";
 $s_updated = "最終更新日時";
+$s_last_bugnote = 'Last';
+$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = "無し";

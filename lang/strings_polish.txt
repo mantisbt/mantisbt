@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.56 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:49 $
+	# $Revision: 1.57 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-22 06:00:29 $
 	#
-	# $Id: strings_polish.txt,v 1.56 2003-07-31 14:41:49 prescience Exp $
+	# $Id: strings_polish.txt,v 1.57 2003-08-22 06:00:29 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -794,6 +794,8 @@ $s_show = 'Poka¿';
 $s_changed = 'Zmienione (w godzinach)';
 $s_viewing_bugs_title = 'Przegl±danie b³edów';
 $s_updated = 'Aktualizacja';
+$s_last_bugnote = 'Last';
+$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = '¿adne';

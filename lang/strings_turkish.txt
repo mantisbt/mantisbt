@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.50 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 15:53:41 $
+	# $Revision: 1.51 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-22 06:00:36 $
 	#
-	# $Id: strings_turkish.txt,v 1.50 2003-07-31 15:53:41 prescience Exp $
+	# $Id: strings_turkish.txt,v 1.51 2003-08-22 06:00:36 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -163,30 +163,30 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Bugnote not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND] = 'User not found.';
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'News item not found.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'An array was expected but a string was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Bug %d not found.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid email.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bug %d not found.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'This is a duplicate file.  Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set a bug as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Authentication Failed';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'The action cannot be performed because the bug has been resolved';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
@@ -794,6 +794,8 @@ $s_show = 'Göster';
 $s_changed = 'Deðiþme(saat)';
 $s_viewing_bugs_title = 'Buglar Ýzleniyor';
 $s_updated = 'Son Güncelleme';
+$s_last_bugnote = 'Last';
+$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'hiçbiri';

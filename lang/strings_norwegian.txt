@@ -9,11 +9,11 @@
 	# Norwegian: Morten Lunde, morten.lunde@observer.no
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# -------------------------------------------------
-	# $Revision: 1.53 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:49 $
+	# $Revision: 1.54 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-22 06:00:27 $
 	#
-	# $Id: strings_norwegian.txt,v 1.53 2003-07-31 14:41:49 prescience Exp $
+	# $Id: strings_norwegian.txt,v 1.54 2003-08-22 06:00:27 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -795,6 +795,8 @@ $s_show = 'Vis';
 $s_changed = 'Endret(timer)';
 $s_viewing_bugs_title = 'Oversikt over saker';
 $s_updated = 'Oppdatert';
+$s_last_bugnote = 'Last';
+$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'ingen';

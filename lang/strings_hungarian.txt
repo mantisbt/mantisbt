@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.43 $
-  # $Author: prescience $
-  # $Date: 2003-07-31 14:41:49 $
+  # $Revision: 1.44 $
+  # $Author: beerfrick $
+  # $Date: 2003-08-22 06:00:18 $
   #
-  # $Id: strings_hungarian.txt,v 1.43 2003-07-31 14:41:49 prescience Exp $
+  # $Id: strings_hungarian.txt,v 1.44 2003-08-22 06:00:18 beerfrick Exp $
   ###########################################################################
 ?>
 <?php
@@ -794,6 +794,8 @@ $s_show = 'Darab';
 $s_changed = 'Módosítva(óra)';
 $s_viewing_bugs_title = 'Hibák listája';
 $s_updated = 'Módosítva';
+$s_last_bugnote = 'Last';
+$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'nincs';

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.139 $
-	# $Author: vboctor $
-	# $Date: 2003-07-27 14:15:04 $
+	# $Revision: 1.140 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-22 06:00:13 $
 	#
-	# $Id: strings_english.txt,v 1.139 2003-07-27 14:15:04 vboctor Exp $
+	# $Id: strings_english.txt,v 1.140 2003-08-22 06:00:13 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -795,6 +795,8 @@ $s_show = 'Show';
 $s_changed = 'Changed(hrs)';
 $s_viewing_bugs_title = 'Viewing Bugs';
 $s_updated = 'Updated';
+$s_last_bugnote = 'Last';
+$s_bugnotes = 'Bugnotes';
 
 # view_all_inc.php
 $s_none = 'none';

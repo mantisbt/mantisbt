@@ -11,11 +11,11 @@
   	# Czech: Milan Cizek, cizek.milan@seznam.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.42 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:48 $
+	# $Revision: 1.43 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-22 06:00:12 $
 	#
-	# $Id: strings_czech.txt,v 1.42 2003-07-31 14:41:48 prescience Exp $
+	# $Id: strings_czech.txt,v 1.43 2003-08-22 06:00:12 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -797,6 +797,8 @@ $s_show = 'Ukázat';
 $s_changed = 'Zmìnìné(h)';
 $s_viewing_bugs_title = 'Prohlí¾ení bugù';
 $s_updated = 'Aktualizace';
+$s_last_bugnote = 'Last';
+$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = '¾ádný';

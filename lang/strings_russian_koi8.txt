@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.39 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:49 $
+	# $Revision: 1.40 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-22 06:00:31 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.39 2003-07-31 14:41:49 prescience Exp $
+	# $Id: strings_russian_koi8.txt,v 1.40 2003-08-22 06:00:31 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -793,6 +793,8 @@ $s_show = 'Показать';
 $s_changed = 'Изменены за (час)';
 $s_viewing_bugs_title = 'Просмотр багов';
 $s_updated = 'Обновлен';
+$s_last_bugnote = 'Last';
+$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'нет';

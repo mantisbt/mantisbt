@@ -9,11 +9,11 @@
 	#          Ariel Arjona - beerfrick@users.sf.net
 	#          Luis Miguel Cruz Miranda - luismi@b2bi.es
 	# -------------------------------------------------
-	# $Revision: 1.54 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:49 $
+	# $Revision: 1.55 $
+	# $Author: beerfrick $
+	# $Date: 2003-08-22 06:00:32 $
 	#
-	# $Id: strings_spanish.txt,v 1.54 2003-07-31 14:41:49 prescience Exp $
+	# $Id: strings_spanish.txt,v 1.55 2003-08-22 06:00:32 beerfrick Exp $
 	###########################################################################
 ?>
 <?php
@@ -795,6 +795,8 @@ $s_show = 'Ver';
 $s_changed = 'Cambiado(hrs)';
 $s_viewing_bugs_title = 'Bugs';
 $s_updated = 'Actualizado';
+$s_last_bugnote = 'Ultima';
+$s_bugnotes = 'Bugnote';
 
 # view_all_inc.php
 $s_none = 'ninguno';

@@ -54,6 +54,7 @@ Mantis ChangeLog
  * Fix #3232: Signup or password reset emails were not being sent if email notifications were turned off 
  * Fix #3252: Category not selected on update if "&" is used in category name.
  * Fix #3266: Possible patches against CVS (Not all changes were applied, see bug for details)
+ * Enh #3276: Add bugnote numbering and the ability to link to bugnotes directly using configured tags like with buglinks
  * Fix #3292: Exporting csv results in "cannot modify header" error.
  * Fix #3295: $g_limit_reporters doesn't work.
  * Languages: Updated Italian, German, Spanish, Slovak, Swedish, French and Dutch localisations.
