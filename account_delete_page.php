@@ -6,43 +6,59 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.16 $
-	# $Author: jfitzell $
-	# $Date: 2002-09-16 00:39:19 $
-	#
-	# $Id: account_delete_page.php,v 1.16 2002-09-16 00:39:19 jfitzell Exp $
+	# $Id: account_delete_page.php,v 1.17 2002-09-22 05:57:18 jfitzell Exp $
 	# --------------------------------------------------------
-?>
-<?php
-	# This is the delete confirmation page
-	# The result is POSTed to account_delete.php3
-?>
-<?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
-<?php
-	# check if users can't delete their own accounts
+
+	# CALLERS
+	#	This page is submitted to by the following pages:
+	#	- account_page.php
+
+	# EXPECTED BEHAVIOUR
+	#	- Prompt the user, asking whether they wish to delete their account
+	#	- Upon confirmation, submit to account_delete.php
+
+	# RESTRICTIONS & PERMISSIONS
+	#	- User must be authenticated
+	#	- allow_account_delete config option must be enabled
+	#	- The user's account must not be protected
+
+	require_once( 'core.php' );
+
+	#============ Variables ============
+	# (none)
+
+	#============ Permissions ============
+	login_cookie_check();
+
 	if ( OFF == config_get( 'allow_account_delete' ) ) {
 		print_header_redirect( 'account_page.php' );
 	}
 
-	# protected account check
-	if ( current_user_is_protected() ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	}
+	current_user_ensure_unprotected();
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php
 
+	print_page_top1();
+	print_page_top2();
+
+?>
 <br />
 <div align="center">
-	<?php print_hr() ?>
-	<?php echo lang_get( 'confirm_delete_msg' ) ?>
+<?php
 
-	<form method="post" action="account_delete.php">
-		<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
-	</form>
+	print_hr();
+	
+	echo lang_get( 'confirm_delete_msg' );
 
-	<?php print_hr() ?>
+?>
+<form method="post" action="account_delete.php">
+	<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
+</form>
+<?php
+
+	print_hr();
+
+?>
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

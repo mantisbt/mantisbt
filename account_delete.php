@@ -6,50 +6,53 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.19 $
-	# $Author: jfitzell $
-	# $Date: 2002-09-21 20:56:11 $
-	#
-	# $Id: account_delete.php,v 1.19 2002-09-21 20:56:11 jfitzell Exp $
+	# $Id: account_delete.php,v 1.20 2002-09-22 05:57:18 jfitzell Exp $
 	# --------------------------------------------------------
-?>
-<?php
-	# Delete account, remove cookies, and redirect user to logout redirect page
-	# If the account is protected this fails.
-?>
-<?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
-<?php
-	# check if users can't delete their own accounts
+
+	# CALLERS
+	#	This page is submitted to by the following pages:
+	#	- account_delete_page.php
+
+	# EXPECTED BEHAVIOUR
+	#	- Delete the currently logged in user account
+	#	- Logout the current user
+	#	- Redirect to the page specified in the logout_redirect_page config option
+
+	# RESTRICTIONS & PERMISSIONS
+	#	- User must be authenticated
+	#	- allow_account_delete config option must be enabled
+
+	require_once( 'core.php' );
+
+	#============ Variables ============
+	# (none)
+
+	#============ Permissions ============
+	login_cookie_check();
+
 	if ( OFF == config_get( 'allow_account_delete' ) ) {
 		print_header_redirect( 'account_page.php' );
 	}
-
-	# protected account check
-	if ( current_user_is_protected() ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	}
-
-	# If an account is protected then no one can change the information
-	# This is useful for shared accounts or for demo purposes
-	$t_user_id = auth_get_current_user_id();
-	if ( user_delete( $t_user_id ) ) {
-		# delete cookies
-		#@@@ move these to a function... maybe in the gpc_api ??
-		gpc_clear_cookie( config_get( 'string_cookie' ) );
-		gpc_clear_cookie( config_get( 'project_cookie' ) );
-		gpc_clear_cookie( config_get( 'view_all_cookie' ) );
-
-		print_meta_redirect( 'login_page.php' );
-	}
 ?>
-<?php print_page_top1() ?>
+<?php
+
+	user_delete( auth_get_current_user_id() );
+
+	auth_logout();
+
+	$t_redirect = config_get( 'logout_redirect_page' );
+
+	print_meta_redirect( $t_redirect );
+	
+	print_page_top1();
+
+?>
 
 <br />
 <div align="center">
 <?php
 	echo lang_get( 'operation_successful' ) . '<br />';
-	print_bracket_link( 'login_page.php', lang_get( 'proceed' ) );
+	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
 ?>
 </div>
 
