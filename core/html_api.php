@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.100 2004-05-26 04:45:08 int2str Exp $
+	# $Id: html_api.php,v 1.101 2004-05-27 16:28:18 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -160,7 +160,7 @@
 		$t_title = config_get( 'window_title' );
 		echo "\t", '<title>';
 		if ( $p_page_title === null ) {
-			string_display( $t_title );
+			echo string_display( $t_title );
 		} else {
 			echo $p_page_title . ' - ' . string_display( $t_title );
 		}
