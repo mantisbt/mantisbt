@@ -7,18 +7,18 @@ Mantis
 
 05.19.2002  -   0.17.3
 
+ * Bumped version number.
  * Fixed problem with CSV not downloading.
- * Removed view_csv_export_inc.php (unused).
+ * Fixed no colors when using non-English languages (temporary fix).
  * Modified core_API.php to always turn magic_quotes_runtime OFF.
- * Added die to print_header_redirect().
+ * Modified disk uploads to use the file_download.php script.
+ * Modified bugnote last_modified query slightly.
  * Updated PHP and MySQL requirements.
  * Updated Norwegian, Russian, Danish translations.
+ * Added die to print_header_redirect().
  * Added russian_koi8 translation.
- * Fixed no colors when using non-English languages (temporary fix).
- * Modified disk uploads to use the file_download.php script.
  * Added HTTP_POST_FILES to core_API.php.
- * Bumped version number.
- * Modified bugnote last_modified query slightly.
+ * Removed view_csv_export_inc.php (unused).
 
 05.12.2002  -   0.17.2
 
