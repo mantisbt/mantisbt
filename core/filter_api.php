@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.48 2004-07-17 23:52:56 vboctor Exp $
+	# $Id: filter_api.php,v 1.49 2004-07-19 09:46:40 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -655,7 +655,7 @@
 
 		<?php
 		if ( $p_expanded ) {
-			$t_filter_cols = 9;
+			$t_filter_cols = 7;
 			$t_custom_cols = $t_filter_cols;
 			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 				$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
@@ -710,13 +710,7 @@
 				<a href="<?php PRINT $t_filters_url . 'show_severity[]'; ?>"><?php PRINT lang_get( 'severity' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'show_status[]'; ?>"><?php PRINT lang_get( 'status' ) ?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'show_resolution[]'; ?>"><?php PRINT lang_get( 'resolution' ) ?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'hide_status[]'; ?>"><?php PRINT lang_get( 'hide_status' ) ?>:</a>
 			</td>
 
 			<?php 
@@ -904,16 +898,16 @@
 							<?php
 								$t_output = '';
 								$t_any_found = false;
-								if ( count( $t_filter['show_status'] ) == 0 ) {
+								if ( count( $t_filter['show_resolution'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
 									$t_first_flag = true;
-									foreach( $t_filter['show_status'] as $t_current ) {
+									foreach( $t_filter['show_resolution'] as $t_current ) {
 										$t_this_string = '';
 										if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else {
-											$t_this_string = get_enum_element( 'status', $t_current );
+											$t_this_string = get_enum_element( 'resolution', $t_current );
 										}
 										if ( $t_first_flag != true ) {
 											$t_output = $t_output . '<br>';
@@ -930,20 +924,46 @@
 								}
 							?>
 			</td>
+			<?php 
+				if ( $t_custom_cols > $t_filter_cols ) {
+					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
+				}
+			?>
+		</tr>
+
+		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_status[]'; ?>"><?php PRINT lang_get( 'status' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'hide_status[]'; ?>"><?php PRINT lang_get( 'hide_status' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_build[]'; ?>"><?php PRINT lang_get( 'product_build' ) ?>:</a>
+			</td>
+			<td colspan="2" class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_version[]'; ?>"><?php PRINT lang_get( 'product_version' ) ?>:</a>
+			</td>
+			<td colspan="2" class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'fixed_in_version[]'; ?>"><?php PRINT lang_get( 'fixed_in_version' ) ?>:</a>
+			</td>
+		</tr>
+
+		<tr class="row-1">
 			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
-								if ( count( $t_filter['show_resolution'] ) == 0 ) {
+								if ( count( $t_filter['show_status'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
 									$t_first_flag = true;
-									foreach( $t_filter['show_resolution'] as $t_current ) {
+									foreach( $t_filter['show_status'] as $t_current ) {
 										$t_this_string = '';
 										if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else {
-											$t_this_string = get_enum_element( 'resolution', $t_current );
+											$t_this_string = get_enum_element( 'status', $t_current );
 										}
 										if ( $t_first_flag != true ) {
 											$t_output = $t_output . '<br>';
@@ -994,42 +1014,6 @@
 								}
 							?>
 			</td>
-			<?php 
-				if ( $t_custom_cols > $t_filter_cols ) {
-					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
-				}
-			?>
-		</tr>
-
-		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'show_build[]'; ?>"><?php PRINT lang_get( 'product_build' ) ?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'show_version[]'; ?>"><?php PRINT lang_get( 'product_version' ) ?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'fixed_in_version[]'; ?>"><?php PRINT lang_get( 'fixed_in_version' ) ?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'per_page'; ?>"><?php PRINT lang_get( 'show' ) ?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'view_state'; ?>"><?php PRINT lang_get( 'view_status' ) ?>:</a>
-			</td>
-			<td class="small-caption" valign="top">
-				<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>"><?php PRINT lang_get( 'changed' ) ?>:</a>
-			</td>
-			<td class="small-caption" valign="top" colspan="3">
-				<a href="<?php PRINT $t_filters_url . 'do_filter_by_date'; ?>"><?php PRINT lang_get( 'use_date_filters' ) ?>:</a>
-			</td>
-			<?php 
-				if ( $t_custom_cols > $t_filter_cols ) {
-					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
-				}
-			?>
-		</tr>
-		<tr class="row-2">
 			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
@@ -1060,7 +1044,7 @@
 								}
 							?>
 			</td>
-			<td class="small-caption" valign="top">
+			<td colspan="2" class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
@@ -1090,7 +1074,7 @@
 								}
 							?>
 			</td>
-			<td class="small-caption" valign="top">
+			<td colspan="2" class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
@@ -1120,6 +1104,28 @@
 								}
 							?>
 			</td>
+		</tr>
+
+		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'per_page'; ?>"><?php PRINT lang_get( 'show' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'view_state'; ?>"><?php PRINT lang_get( 'view_status' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>"><?php PRINT lang_get( 'changed' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top" colspan="4">
+				<a href="<?php PRINT $t_filters_url . 'do_filter_by_date'; ?>"><?php PRINT lang_get( 'use_date_filters' ) ?>:</a>
+			</td>
+			<?php 
+				if ( $t_custom_cols > $t_filter_cols ) {
+					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
+				}
+			?>
+		</tr>
+		<tr class="row-1">
 			<td class="small-caption" valign="top">
 				<?php PRINT $t_filter['per_page']; ?>
 			</td>
@@ -1137,7 +1143,7 @@
 			<td class="small-caption" valign="top">
 				<?php PRINT $t_filter['highlight_changed']; ?>
 			</td>
-			<td class="small-caption" valign="top" colspan="3">
+			<td class="small-caption" valign="top" colspan="4">
 							<?php
 							if ( 'on' == $t_filter['do_filter_by_date'] ) {
 								$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
@@ -1299,7 +1305,7 @@
 			</td>
 			</form>
 
-			<td class="right" colspan="6">
+			<td class="right" colspan="4">
 			<?php
 			$t_stored_queries_arr = array();
 			$t_stored_queries_arr = filter_db_get_available_queries();

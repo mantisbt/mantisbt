@@ -70,7 +70,7 @@
 	$t_accessible_custom_fields_ids = array();
 	$t_accessible_custom_fields_names = array();
 	$t_accessible_custom_fields_values = array();
-	$t_filter_cols = 9;
+	$t_filter_cols = 7;
 	$t_custom_cols = 1;
 	$t_custom_rows = 0;
 
@@ -161,17 +161,7 @@
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'assigned_to' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'category' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'severity' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'status' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'resolution' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-	<?php
-	if ( 'simple' == $f_view_type ) {
-		echo lang_get( 'hide_status' );
-	} else {
-		echo '&nbsp;';
-	}
-	?>
-	</td>
 </tr>
 <tr class="row-1">
 	<!-- Reporter -->
@@ -244,14 +234,6 @@
             <?php print_enum_string_option_list( 'severity', $t_filter['show_severity'] ) ?>
         </select>
     </td>
-	<!-- Status -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="show_status[]">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
-		</select>
-	</td>
 	<!-- Resolution -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="show_resolution[]">
@@ -260,7 +242,33 @@
 			<?php print_enum_string_option_list( 'resolution', $t_filter['show_resolution'] ) ?>
 		</select>
 	</td>
-	<!-- Hide closed and resolved bugs -->
+</tr>
+
+<tr class="row-category2">
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'status' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<?php
+	if ( 'simple' == $f_view_type ) {
+		echo lang_get( 'hide_status' );
+	} else {
+		echo '&nbsp;';
+	}
+	?>
+	</td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 2 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+</tr>
+<tr class="row-1">
+	<!-- Status -->
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+		<select <?php PRINT $t_select_modifier;?> name="show_status[]">
+			<option value="any"><?php echo lang_get( 'any' ) ?></option>
+			<option value="any"></option>
+			<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
+		</select>
+	</td>
+	<!-- Hide Status -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 	<?php
 	if ( 'simple' == $f_view_type ) {
@@ -276,24 +284,6 @@
 	}
 	?>
 	</td>
-</tr>
-
-<tr class="row-category2">
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'show' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'view_status' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
-		<input type="checkbox" name="do_filter_by_date" <?php 
-			check_checked( $t_filter['do_filter_by_date'], 'on' ); 
-			if ( ON == config_get( 'use_javascript' ) ) { 
-				print "onclick=\"SwitchDateFields();\""; } ?> />
-		<?php echo lang_get( 'use_date_filters' ) ?>
-	</td>
-</tr>
-<tr class="row-2">
 	<!-- Build -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="show_build[]">
@@ -303,7 +293,7 @@
 		</select>
 	</td>
 	<!-- Version -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
@@ -311,13 +301,28 @@
 		</select>
 	</td>
 	<!-- Fixed in Version -->
-	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
 			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL ) ?>
 		</select>
 	</td>
+</tr>
+
+<tr class="row-category2">
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'show' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'view_status' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
+		<input type="checkbox" name="do_filter_by_date" <?php 
+			check_checked( $t_filter['do_filter_by_date'], 'on' ); 
+			if ( ON == config_get( 'use_javascript' ) ) { 
+				print "onclick=\"SwitchDateFields();\""; } ?> />
+		<?php echo lang_get( 'use_date_filters' ) ?>
+	</td>
+</tr>
+<tr class="row-2">
 	<!-- Number of bugs per page -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="text" name="per_page" size="3" maxlength="7" value="<?php echo $t_filter['per_page'] ?>" />
@@ -343,7 +348,7 @@
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $t_filter['highlight_changed'] ?>" />
 	</td>
-	<td valign="top" class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
+	<td valign="top" class="left" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
 	<table cellspacing="0" cellpadding="0">
 	<!-- Start date -->
 	<tr>
@@ -465,7 +470,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
-<td class="small-caption" colspan="<?php echo ( 8 * $t_custom_cols ); ?>"></td>
+<td class="small-caption" colspan="<?php echo ( 6 * $t_custom_cols ); ?>"></td>
 </tr>
 <tr>
 	<!-- Search field -->
@@ -473,7 +478,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		<input type="text" size="16" name="search" value="<?php echo $t_filter['search']; ?>" />
 	</td>
 
-	<td class="small-caption" colspan="<?php echo ( 7 * $t_custom_cols ); ?>"></td>
+	<td class="small-caption" colspan="<?php echo ( 5 * $t_custom_cols ); ?>"></td>
 			
 	<!-- Submit button -->
 	<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
