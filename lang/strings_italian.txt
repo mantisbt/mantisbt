@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.72 $
+	# $Revision: 1.73 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:16 $
 	#
-	# $Id: strings_italian.txt,v 1.72 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.73 2004-08-08 11:39:16 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -333,6 +333,9 @@ $s_advanced_update = "Aggiornamento dettagliato";
 $s_refresh_delay = "Ritardo di Refresh";
 $s_redirect_delay = "Ritardo di Reindirizzamento";
 $s_with_minimum_severity = "Con severità minima di";
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = "Email su 'Novità'";
 $s_email_on_assigned = "Email su 'Assegnato'";
 $s_email_on_feedback = "Email su 'Da Discutere'";
@@ -342,6 +345,7 @@ $s_email_on_reopened = "Email su 'Riaperto'";
 $s_email_on_bugnote_added = "Email su 'Aggiunta Nota ad anomalia'";
 $s_email_on_status_change = "Email su 'Cambio Stato'";
 $s_email_on_priority_change = "Email su 'Cambio Priorità'";
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = "Lingua";
 $s_update_prefs_button = "Aggiorna le Preferenze";
 $s_reset_prefs_button = "Resetta le Preferenze";

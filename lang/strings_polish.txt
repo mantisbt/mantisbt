@@ -9,11 +9,11 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# -------------------------------------------------
-	# $Revision: 1.68 $
+	# $Revision: 1.69 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:17 $
 	#
-	# $Id: strings_polish.txt,v 1.68 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.69 2004-08-08 11:39:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -333,6 +333,9 @@ $s_advanced_update = 'Aktualizacja zaawansowana';
 $s_refresh_delay = 'Opóznienie od¶wie¿ania';
 $s_redirect_delay = 'Opóznienie przekierowania';
 $s_with_minimum_severity = 'Z minimaln± wa¿no¶ci± ';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'List gdy NOWE';
 $s_email_on_assigned = 'List gdy PRZYPISANE';
 $s_email_on_feedback = 'List gdy ZWRÓCONE';
@@ -342,6 +345,7 @@ $s_email_on_reopened = 'List gdy PONOWNIE OTWARTE';
 $s_email_on_bugnote_added = 'List gdy DODANO KOMENTARZ';
 $s_email_on_status_change = 'List gdy ZMIENIONO STATUS';
 $s_email_on_priority_change = 'List gdy ZMIENIONO PRIORYTET';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Jêzyk';
 $s_update_prefs_button = 'Aktualizuj';
 $s_reset_prefs_button = 'Przywróæ ustawienia';

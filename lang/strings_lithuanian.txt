@@ -8,11 +8,11 @@
 	##########################################################################
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# -------------------------------------------------
-	# $Revision: 1.8 $
+	# $Revision: 1.9 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:17 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.8 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_lithuanian.txt,v 1.9 2004-08-08 11:39:17 jlatour Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -343,6 +343,9 @@ $s_advanced_update = 'Detalus atnaujinimas';
 $s_refresh_delay = 'Atnaujinimo daþnumas (minutëmis)';
 $s_redirect_delay = 'Nukreipimo vëlinimas';
 $s_with_minimum_severity = 'With Mimimum Severity of';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Atsiøsti laiðkà pasirodþius naujai problemai';
 $s_email_on_assigned = 'Atsiøsti laiðkà paskyrus problemà man';
 $s_email_on_feedback = 'Atsiøsti laiðkà patikslinus problemà';
@@ -352,6 +355,7 @@ $s_email_on_reopened = 'Atsiøsti laiðkà vël atidarius problemà';
 $s_email_on_bugnote_added = 'Atsiøsti laiðkà pridëjus komentarà';
 $s_email_on_status_change = 'Atsiøsti laiðkà pasikeitus statusui';
 $s_email_on_priority_change = 'Atsiøsti laiðkà pasikeitus prioritetui';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Kalba';
 $s_update_prefs_button = 'Atnaujinti pasirinkimus';
 $s_reset_prefs_button = 'Atstatyti pasirinkimus pagal nutylëjimà';

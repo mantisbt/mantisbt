@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.65 $
+	# $Revision: 1.66 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:17 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.65 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.66 2004-08-08 11:39:17 jlatour Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.187 -- jferraz 2004/07/11
 	###########################################################################
@@ -335,6 +335,9 @@ $s_advanced_update = 'Atualização Avançada';
 $s_refresh_delay = 'Tempo de Renovação';
 $s_redirect_delay = 'Tempo de Redirecionamento';
 $s_with_minimum_severity = 'Com a gravidade mínima';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Enviar e-mail para Novos Casos';
 $s_email_on_assigned = 'Enviar e-mail para Casos Atribuídos';
 $s_email_on_feedback = 'Enviar e-mail para Retornos';
@@ -344,6 +347,7 @@ $s_email_on_reopened = 'Enviar e-mail para Casos Reabertos';
 $s_email_on_bugnote_added = 'Enviar e-mail para Anotações Adicionadas';
 $s_email_on_status_change = 'Enviar e-mail para Mudança de Status';
 $s_email_on_priority_change = 'Enviar e-mail para Mudança de Prioridade';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Idioma';
 $s_update_prefs_button = 'Atualizar Preferências';
 $s_reset_prefs_button = 'Zerar Preferências';

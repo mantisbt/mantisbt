@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.33 2004-04-01 18:42:10 narcissus Exp $
+	# $Id: account_prefs_update.php,v 1.34 2004-08-08 11:39:00 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,6 +66,9 @@
 	$t_prefs->email_on_bugnote_minimum_severity		= gpc_get_int( 'email_on_bugnote_minimum_severity' );
 	$t_prefs->email_on_status_minimum_severity		= gpc_get_int( 'email_on_status_minimum_severity' );
 	$t_prefs->email_on_priority_minimum_severity	= gpc_get_int( 'email_on_priority_minimum_severity' );
+	
+	$t_prefs->bugnote_order = gpc_get_string( 'bugnote_order' );
+	$t_prefs->email_bugnote_limit = gpc_get_int( 'email_bugnote_limit' );
 
 	# prevent users from changing other user's accounts
 	if ( $f_user_id != auth_get_current_user_id() ) {

@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.65 $
+	# $Revision: 1.66 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:17 $
 	#
-	# $Id: strings_swedish.txt,v 1.65 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_swedish.txt,v 1.66 2004-08-08 11:39:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -331,6 +331,9 @@ $s_advanced_update = 'Avancerad uppdatering';
 $s_refresh_delay = 'Uppdateringsfördröjning';
 $s_redirect_delay = 'Omdirigeringsfördröjning';
 $s_with_minimum_severity = 'With Mimimum Severity of';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Epost vid ny';
 $s_email_on_assigned = 'Epost vid tilldelning';
 $s_email_on_feedback = 'Epost vid återkoppling';
@@ -340,6 +343,7 @@ $s_email_on_reopened = 'Epost om återöppnad';
 $s_email_on_bugnote_added = 'Epost vid nytt buggmeddelande';
 $s_email_on_status_change = 'Epost vid statusändring';
 $s_email_on_priority_change = 'Epost vid prioriteringsändring';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Språk';
 $s_update_prefs_button = 'Uppdatera inställningar';
 $s_reset_prefs_button = 'Nollställ inställningar';

@@ -11,11 +11,11 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.46 $
+	# $Revision: 1.47 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:13 $
+	# $Date: 2004-08-08 11:39:01 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.46 2004-08-08 08:45:13 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.47 2004-08-08 11:39:01 jlatour Exp $
 	###########################################################################
 
 	###########################################################################
@@ -348,6 +348,9 @@ $s_advanced_update = "高级更新";
 $s_refresh_delay = "刷新延迟";
 $s_redirect_delay = "重定向延时(秒";
 $s_with_minimum_severity = 'With Mimimum Severity of';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = "当新建Bug时发送Email提醒";
 $s_email_on_assigned = "当指派Bug时发送Email提醒";
 $s_email_on_feedback = "当反馈Bug时发送Email提醒";
@@ -357,6 +360,7 @@ $s_email_on_reopened = "当重新打开时发送Email提醒";
 $s_email_on_bugnote_added = "当添加 Bug 注解时发送Email提醒";
 $s_email_on_status_change = "当状态改变时发送Email提醒";
 $s_email_on_priority_change = "当优先级改变时发送Email提醒";
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = "界面语言";
 $s_update_prefs_button = "更新设置";
 $s_reset_prefs_button = "重置设置";

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.17 2004-06-29 08:38:43 int2str Exp $
+	# $Id: bugnote_view_inc.php,v 1.18 2004-08-08 11:39:00 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,7 +30,7 @@
 
 	$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
 	$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
-	$t_bugnote_order		= config_get( 'bugnote_order' );
+	$t_bugnote_order		= current_user_get_pref( 'bugnote_order' );
 
 	# get the bugnote data
 	$query = "SELECT *,date_submitted

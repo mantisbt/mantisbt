@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.103 $
+	# $Revision: 1.104 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:15 $
 	#
-	# $Id: strings_german.txt,v 1.103 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_german.txt,v 1.104 2004-08-08 11:39:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -336,6 +336,9 @@ $s_advanced_update = 'Erweitertes Update';
 $s_refresh_delay = 'Aktualisierungsverzögerung';
 $s_redirect_delay = 'Verzögerung für Weiterleitung';
 $s_with_minimum_severity = 'mit mindestens Schweregrad';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Email bei Neueintrag';
 $s_email_on_assigned = 'Email bei Zuweisung';
 $s_email_on_feedback = 'Email bei Aktualisierung';
@@ -345,6 +348,7 @@ $s_email_on_reopened = 'Email zur Wiedereröffnung';
 $s_email_on_bugnote_added = 'Email bei Problemergänzung';
 $s_email_on_status_change = 'Email bei Statuswechsel';
 $s_email_on_priority_change = 'Email bei Prioritätswechsel';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Sprache';
 $s_update_prefs_button = 'Einstellungen aktualisieren';
 $s_reset_prefs_button = 'Einstellungen zurücksetzen';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.26 2004-03-05 01:26:16 jlatour Exp $
+	# $Id: print_bugnote_inc.php,v 1.27 2004-08-08 11:39:00 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,6 +16,7 @@
 <?php
 	$t_core_path = config_get( 'core_path' );
 	
+	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
 <?php
@@ -32,6 +33,8 @@
  	}
 
 	# get the bugnote data
+	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
+	
 	$query = "SELECT *,date_submitted
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$c_bug_id' $t_restriction

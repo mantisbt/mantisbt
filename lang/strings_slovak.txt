@@ -9,11 +9,11 @@
 	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.21 $
+	# $Revision: 1.22 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:17 $
 	#
-	# $Id: strings_slovak.txt,v 1.21 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.22 2004-08-08 11:39:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -333,6 +333,9 @@ $s_advanced_update = 'Roz¹írená aktualizácia';
 $s_refresh_delay = 'Interval pre refresh';
 $s_redirect_delay = 'Pauza pre presmerovanie';
 $s_with_minimum_severity = 'With Mimimum Severity of';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Email pri novom';
 $s_email_on_assigned = 'Email pri priradenom';
 $s_email_on_feedback = 'Email pri reakcii';
@@ -342,6 +345,7 @@ $s_email_on_reopened = 'Email pri znovuotvorenom';
 $s_email_on_bugnote_added = 'Email pri novej poznámke k bugu';
 $s_email_on_status_change = 'Email pri zmene stavu';
 $s_email_on_priority_change = 'Email pri zmene priority';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Jazyk';
 $s_update_prefs_button = 'Upravi» nastavenia';
 $s_reset_prefs_button = 'Zmaza» nastavenia';

@@ -8,11 +8,11 @@
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# Japenese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.55 $
+	# $Revision: 1.56 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 09:00:27 $
+	# $Date: 2004-08-08 11:39:16 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.55 2004-08-08 09:00:27 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.56 2004-08-08 11:39:16 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -332,6 +332,9 @@ $s_advanced_update = '高度な更新';
 $s_refresh_delay = '再表示時間';
 $s_redirect_delay = 'リダイレクト時間';
 $s_with_minimum_severity = '対象の最小重要度';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = '新規要望通知メール';
 $s_email_on_assigned = '担当者決定通知メール';
 $s_email_on_feedback = 'フィードバック通知メール';
@@ -341,6 +344,7 @@ $s_email_on_reopened = '差戻し通知メール';
 $s_email_on_bugnote_added = 'コメント追加通知メール';
 $s_email_on_status_change = 'ステータス変更通知メール';
 $s_email_on_priority_change = '優先度変更通知メール';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = '言語';
 $s_update_prefs_button = '更新';
 $s_reset_prefs_button = 'リセット';

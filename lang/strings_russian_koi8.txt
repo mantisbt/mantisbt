@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:17 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.49 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_russian_koi8.txt,v 1.50 2004-08-08 11:39:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -331,6 +331,9 @@ $s_advanced_update = 'Расширенное обновление';
 $s_refresh_delay = 'Задержка обновления';
 $s_redirect_delay = 'Задержка перенаправления';
 $s_with_minimum_severity = 'С минимальной критичностью';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Извещать о новых';
 $s_email_on_assigned = 'Извещать о назначенных';
 $s_email_on_feedback = 'Извещать о дополнительной информации';
@@ -340,6 +343,7 @@ $s_email_on_reopened = 'Извещать о переоткрытых';
 $s_email_on_bugnote_added = 'Извещать о добавлении комментария';
 $s_email_on_status_change = 'Извещать об изменении статуса';
 $s_email_on_priority_change = 'Изменять об изменении приоритета';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Язык';
 $s_update_prefs_button = 'Обновить предпочтения';
 $s_reset_prefs_button = 'Сбросить предпочтения';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.193 2004-08-08 09:02:34 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.194 2004-08-08 11:39:00 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -464,6 +464,7 @@
 	$g_default_advanced_update		= OFF;
 	$g_default_refresh_delay		= 30;    # in minutes
 	$g_default_redirect_delay		= 2;     # in seconds
+	$g_default_bugnote_order		= 'ASC';
 	$g_default_email_on_new			= ON;
 	$g_default_email_on_assigned	= ON;
 	$g_default_email_on_feedback	= ON;
@@ -482,6 +483,7 @@
 	$g_default_email_on_bugnote_minimum_severity	= 'any';
 	$g_default_email_on_status_minimum_severity		= 'any'; # @@@ Unused
 	$g_default_email_on_priority_minimum_severity	= 'any'; # @@@ Unused
+	$g_default_email_bugnote_limit					= 0;
 	# default_language - is set to site language
 
 	###############################
@@ -509,7 +511,7 @@
 
 	# --- bugnote ordering ------------
 	# change to ASC or DESC
-	$g_bugnote_order		= 'ASC';
+	$g_bugnote_order		= 'DESC';
 
 	################################
 	# Mantis Bug History Settings

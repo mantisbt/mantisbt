@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.62 $
+	# $Revision: 1.63 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:14 $
+	# $Date: 2004-08-08 11:39:17 $
 	#
-	# $Id: strings_turkish.txt,v 1.62 2004-08-08 08:45:14 jlatour Exp $
+	# $Id: strings_turkish.txt,v 1.63 2004-08-08 11:39:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -332,6 +332,9 @@ $s_advanced_update = 'Detaylý Güncelleme';
 $s_refresh_delay = 'Yeniden Yükleme Gecikmesi';
 $s_redirect_delay = 'Yönlendirme Gecikmesi';
 $s_with_minimum_severity = 'With Mimimum Severity of';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Yenileri Emaille';
 $s_email_on_assigned = 'Atananlarý Emaille';
 $s_email_on_feedback = 'Bilgi gerektirenleri Emaille';
@@ -341,6 +344,7 @@ $s_email_on_reopened = 'Yeniden açýlanlarý Emaille';
 $s_email_on_bugnote_added = 'Bug notu eklenenleri Emaille';
 $s_email_on_status_change = 'Statü deðiþikliklerini Emaille';
 $s_email_on_priority_change = 'Öncelik deðiþikliklerini Emaille';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Dil';
 $s_update_prefs_button = 'Tercihleri Güncelle';
 $s_reset_prefs_button = 'Tercihleri Sýfýrla';

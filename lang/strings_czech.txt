@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.58 $
+	# $Revision: 1.59 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:13 $
+	# $Date: 2004-08-08 11:39:15 $
 	#
-	# $Id: strings_czech.txt,v 1.58 2004-08-08 08:45:13 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.59 2004-08-08 11:39:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -336,6 +336,9 @@ $s_advanced_update = 'Roz¹íøená aktualizace';
 $s_refresh_delay = 'Interval pro refresh';
 $s_redirect_delay = 'Pauza pro pøesmìrování';
 $s_with_minimum_severity = 's minimální dùle¾itostí';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Email pøi novém';
 $s_email_on_assigned = 'Email pøi pøiøazeném';
 $s_email_on_feedback = 'Email pøi reakci';
@@ -345,6 +348,7 @@ $s_email_on_reopened = 'Email pøi znovuotevøeném';
 $s_email_on_bugnote_added = 'Email pøi nové poznámce k problému';
 $s_email_on_status_change = 'Email pøi zmìnì stavu';
 $s_email_on_priority_change = 'Email pøi zmìnì priority';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Jazyk';
 $s_update_prefs_button = 'Upravit nastavení';
 $s_reset_prefs_button = 'Smazat nastavení';

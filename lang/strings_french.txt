@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.75 $
+	# $Revision: 1.76 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:13 $
+	# $Date: 2004-08-08 11:39:15 $
 	#
-	# $Id: strings_french.txt,v 1.75 2004-08-08 08:45:13 jlatour Exp $
+	# $Id: strings_french.txt,v 1.76 2004-08-08 11:39:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -338,6 +338,9 @@ $s_advanced_update = 'Mise à jour avancée';
 $s_refresh_delay = 'Délai de rafraichissement';
 $s_redirect_delay = 'Délai de redirection';
 $s_with_minimum_severity = 'Avec une sévérité minimum de';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Email en cas de nouveau bug';
 $s_email_on_assigned = 'Email en cas de nouvelle assignation';
 $s_email_on_feedback = 'Email en cas de commentaire';
@@ -347,6 +350,7 @@ $s_email_on_reopened = 'Email en cas de réouverture';
 $s_email_on_bugnote_added = 'Email en cas de nouvelle note';
 $s_email_on_status_change = 'Email en cas de modification d\'état';
 $s_email_on_priority_change = 'Email en cas de modification de priorité';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Langage';
 $s_update_prefs_button = 'Mettre à jour les préférences';
 $s_reset_prefs_button = 'Réinitialiser les préférences';

@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.10 $
+	# $Revision: 1.11 $
 	# $Author: jlatour $
-	# $Date: 2004-08-08 08:45:13 $
+	# $Date: 2004-08-08 11:39:15 $
 	#
-	# $Id: strings_estonian.txt,v 1.10 2004-08-08 08:45:13 jlatour Exp $
+	# $Id: strings_estonian.txt,v 1.11 2004-08-08 11:39:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -333,6 +333,9 @@ $s_advanced_update = 'Näita bugide detailset uuendust';
 $s_refresh_delay = 'uuenduse viivitus';
 $s_redirect_delay = 'Ümbersuunamise viivitus';
 $s_with_minimum_severity = 'With Mimimum Severity of';
+$s_bugnote_order = 'Bugnotes Sort Order';
+$s_bugnote_order_asc = 'Ascending';
+$s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Saada E-mail uue bugi ilmumise kohta';
 $s_email_on_assigned = 'Saada E-mail bugi määramise kohta';
 $s_email_on_feedback = 'Saada E-mail bugile tagasiside andmise kohta';
@@ -342,6 +345,7 @@ $s_email_on_reopened = 'Saada E-mail bugi taasavamise kohta';
 $s_email_on_bugnote_added = 'Saada E-mail bugile märkuse lisamise kohta';
 $s_email_on_status_change = 'Saada E-mail oleku muutuse kohta';
 $s_email_on_priority_change = 'Saada E-mail prioriteedi muutuse kohta';
+$s_email_bugnote_limit = 'Email Bugnotes Limit';
 $s_language = 'Keel';
 $s_update_prefs_button = 'Uuenda seaded';
 $s_reset_prefs_button = 'Taasta seadete vaikimisi olek';

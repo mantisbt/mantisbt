@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.27 2004-07-11 08:22:59 vboctor Exp $
+	# $Id: account_prefs_inc.php,v 1.28 2004-08-08 11:39:00 jlatour Exp $
 	# --------------------------------------------------------
 	
 	$t_core_path = config_get( 'core_path' );
@@ -109,10 +109,19 @@
 		<input type="text" name="redirect_delay" size="1" maxlength="1" value="<?php echo $u_redirect_delay ?>" />
 	</td>
 </tr>
+<tr class="row-1">
+	<td class="category">
+		<?php echo lang_get( 'bugnote_order' ) ?>
+	</td>
+	<td>
+		<input type="radio" name="bugnote_order" value="ASC" <?php check_checked( $u_bugnote_order, 'ASC' ); ?> /><?php echo lang_get( 'bugnote_order_asc' ) ?>
+		<input type="radio" name="bugnote_order" value="DESC" <?php check_checked( $u_bugnote_order, 'DESC' ); ?> /><?php echo lang_get( 'bugnote_order_desc' ) ?>
+	</td>
+</tr>
 <?php
 	if ( ON == config_get( 'enable_email_notification' ) ) {
 ?>
-<tr class="row-1">
+<tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'email_on_new' ) ?>
 	</td>
@@ -126,7 +135,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'email_on_assigned' ) ?>
 	</td>
@@ -140,7 +149,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'email_on_feedback' ) ?>
 	</td>
@@ -154,7 +163,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'email_on_resolved' ) ?>
 	</td>
@@ -168,7 +177,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'email_on_closed' ) ?>
 	</td>
@@ -182,7 +191,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'email_on_reopened' ) ?>
 	</td>
@@ -196,7 +205,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'email_on_bugnote_added' ) ?>
 	</td>
@@ -210,7 +219,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-2">
+<tr class="row-1">
 	<td class="category">
 		<?php echo lang_get( 'email_on_status_change' ) ?>
 	</td>
@@ -224,7 +233,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+<tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'email_on_priority_change' ) ?>
 	</td>
@@ -236,6 +245,14 @@
 			<option value="any"></option>
 			<?php print_enum_string_option_list( 'severity', $u_email_on_priority_minimum_severity ) ?>
 		</select>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<?php echo lang_get( 'email_bugnote_limit' ) ?>
+	</td>
+	<td>
+		<input type="text" name="email_bugnote_limit" maxlength="2" size="2" value="<?php echo $u_email_bugnote_limit ?>">
 	</td>
 </tr>
 <?php } else { ?>

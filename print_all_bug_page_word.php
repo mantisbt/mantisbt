@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.51 2004-08-01 22:24:59 prichards Exp $
+	# $Id: print_all_bug_page_word.php,v 1.52 2004-08-08 11:39:00 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -385,10 +385,12 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </tr>
 <?php
 	# get the bugnote data
+	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
+	
 	$query6 = "SELECT *, date_submitted
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$v_id'
-			ORDER BY date_submitted $g_bugnote_order";
+			ORDER BY date_submitted $t_bugnote_order";
 	$result6 = db_query( $query6 );
 	$num_notes = db_num_rows( $result6 );
 ?>

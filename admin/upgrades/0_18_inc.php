@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.19 2004-08-07 01:37:43 thraxisp Exp $
+	# $Id: 0_18_inc.php,v 1.20 2004-08-08 11:39:00 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -549,9 +549,9 @@
 			"ALTER TABLE mantis_custom_field_table DROP require_close" );
 
 	$upgrades[] = new FunctionUpgrade(
-				'delete-admin-over',
-				'delete any project level access overrides for admin users',
-				'upgrade_0_18_del_admin_override' );
+			'delete-admin-over',
+			'delete any project level access overrides for admin users',
+			'upgrade_0_18_del_admin_override' );
 
 	function upgrade_0_18_del_admin_override() {
 		global $t_user_table, $t_project_user_list_table;
@@ -573,6 +573,15 @@
 		return true;
 	}
 
+        $upgrades[] = new SQLUpgrade(
+                        '0.18-bugnote-limit',
+                        "Add email_bugnote_limit to user preference table",
+                        "ALTER TABLE $t_user_pref_table ADD email_bugnote_limit INT( 2 ) NOT NULL AFTER email_on_new_minimum_severity" );
+
+        $upgrades[] = new SQLUpgrade(
+                        '0.18-bugnote-order',
+                        "Add bugnote_order to user preference table",
+                        "ALTER TABLE $t_user_pref_table ADD bugnote_order VARCHAR( 4 ) NOT NULL DEFAULT '" . config_get( 'default_bugnote_order' ) . "' AFTER redirect_delay" );
 
 	return $upgrades;
 ?>

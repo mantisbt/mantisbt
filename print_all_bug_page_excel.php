@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.40 2004-06-30 13:53:39 prichards Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.41 2004-08-08 11:39:00 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -359,10 +359,12 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <td colspan=3>
 <?php  # print bugnotes
 		# get the bugnote data
+		$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
+		
 		$query6 = "SELECT *,date_submitted
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$v_id'
-				ORDER BY date_submitted $g_bugnote_order";
+				ORDER BY date_submitted $t_bugnote_order";
 		$result6 = db_query( $query6 );
 		$num_notes = db_num_rows( $result6 );
 
