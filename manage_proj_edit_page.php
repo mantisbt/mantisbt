@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.66 2003-02-19 01:04:19 jlatour Exp $
+	# $Id: manage_proj_edit_page.php,v 1.67 2003-02-23 13:17:42 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -316,7 +316,8 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <?php
 # You need either global permissions or project-specific permissions to link
 #  custom fields
-if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id ) ) {
+if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id ) &&
+	( count( custom_field_get_ids() ) > 0 ) ) {
 ?>
 	<br />
 	<div align="center">
