@@ -150,6 +150,9 @@
 
 		$t_bug_id = db_insert_id();
 
+		# log new bug
+		history_log_event_special( $t_bug_id, NEW_BUG );
+
 		# File Uploaded
 		check_varset( $f_file, 'none' );
 		$f_file = trim( $f_file );
@@ -188,10 +191,10 @@
 							break;
 			}
 			$result = db_query( $query );
-		}
 
-		# log new bug
-		history_log_event_special( $t_bug_id, NEW_BUG );
+			# log new bug
+			history_log_event_special( $t_bug_id, FILE_ADDED );
+		}
 
 		# Notify users of new bug report
 		if ( ON == $g_notify_developers_on_new ) {
