@@ -489,7 +489,7 @@
 			}
 
 			$mail->Subject = $t_subject;
-			$mail->Body    = "\n".$t_message;
+			$mail->Body    = make_lf_crlf( "\n".$t_message );
 
 			if( !$mail->Send() ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
@@ -513,6 +513,11 @@
 			# $t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
 
 			$t_headers .= $p_header;
+
+			$t_recipient = make_lf_crlf( $t_recipient );
+			$t_subject = make_lf_crlf( $t_subject );
+			$t_message = make_lf_crlf( $t_message );
+			$t_headers = make_lf_crlf( $t_headers );
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( TRUE != $result ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<p>";
@@ -551,6 +556,18 @@
 		$p_bug_id = str_pd( $p_bug_id, "0", 7, STR_PAD_LEFT );
 
 		return "[".$p_project_name." ".$p_bug_id."]: ".$p_subject;
+	}
+	# --------------------
+	# clean up LF to CRLF
+	function make_lf_crlf( $p_string ) {
+		global $g_strip_bare_lf;
+
+		if ( ON == $g_strip_bare_lf ) {
+			$p_string = str_replace( "\n", "\r\n", $p_string );
+			return str_replace( "\r\r\n", "\r\n", $p_string );
+		} else {
+			return $p_string;
+		}
 	}
 	# --------------------
 ?>
