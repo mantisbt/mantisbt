@@ -6,6 +6,11 @@
 # Here are the basic steps to upgrade the database tables
 # Take a look in db_upgrade.sql as well.
 
+# Generally, you can just copy over the current installation.  You may want to
+# backup up your current config_inc.php and any customizations that you may
+# have made.  Usually database modifications will occur only between
+# significant releases (like 0.14.x to 0.15.x).
+
 # =================
 # 0.14.x to 0.15.0
 # =================
@@ -14,6 +19,13 @@ You may upgrade by opening up admin_upgrade.php3 in your web browser and
 clicking on the 0.15.0 upgrade.
 
 The TIMESTAMP issue should be resolved with this upgrade.
+
+The 0.15.x releases improves localization by removing all ENUM fields from
+the database and replacing them with INT values.  These values can be
+found in constant_inc.php and in *_strings.txt files as "Enum Strings".
+
+Any values that did not get converted over correctly will be displayed as
+@null@.
 
 # =================
 # 0.12.0 to 0.14.0
