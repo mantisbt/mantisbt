@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.131 2004-02-05 00:34:38 jlatour Exp $
+	# $Id: view_all_inc.php,v 1.132 2004-03-18 14:02:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,6 +27,7 @@
 	$t_checkboxes_exist = false;
 
 	$t_icon_path = config_get( 'icon_path' );
+	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
 ?>
 <?php # -- ====================== FILTER FORM ========================= -- ?>
 <?php filter_draw_selection_area( $f_page_number ); ?>
@@ -168,9 +169,7 @@
 
 		# Check for attachments
 		$t_attachment_count = 0;
-		if ( ON == $t_show_attachments 
-			&& ( $v_reporter_id == auth_get_current_user_id() 
-				|| access_has_bug_level( config_get( 'view_attachments_threshold' ), $v_id ) ) ) {
+		if ( ( ON == $t_show_attachments ) && ( file_can_view_bug_attachments( $v_id ) ) ) {
 		   $t_attachment_count = file_bug_attachment_count( $v_id );
 		}
 
@@ -184,7 +183,7 @@
 <tr bgcolor="<?php echo $status_color ?>">
 	<?php # -- Checkbox -- ?>
 <?php
-	if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $v_id ) ) {
+	if ( access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
 		$t_checkboxes_exist = true;
 ?>
 	<td>
@@ -199,7 +198,7 @@
 	<?php # -- Pencil shortcut -- ?>
 	<td class="center">
 	<?php
-		if ( access_has_bug_level( UPDATER, $v_id ) ) {
+		if ( access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
 			echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
 		} else {
 			echo '&nbsp;';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.26 2004-03-18 11:47:26 jlatour Exp $
+	# $Id: file_download.php,v 1.27 2004-03-18 14:02:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,8 +52,8 @@
 	# Check access rights
 	switch ( $f_type ) {
 		case 'bug':
-			if ( ! bug_is_user_reporter( $v_bug_id, auth_get_current_user_id() ) ) {
-				access_ensure_bug_level( config_get( 'view_attachments_threshold' ), $v_bug_id );
+			if ( !file_can_download_bug_attachments( $v_bug_id ) ) {
+				access_denied();
 			}
 			break;
 		case 'doc':

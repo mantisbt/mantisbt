@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.42 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: file_api.php,v 1.43 2004-03-18 14:02:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -42,15 +42,52 @@
 
 		return db_num_rows( $result );
 	}
+
 	# --------------------
 	# Check if a specific bug has attachments
 	function file_bug_has_attachments( $p_bug_id ) {
 		return ( file_bug_attachment_count( $p_bug_id ) > 0 );
 	}
+
+	# --------------------
+	# Check if the current user can view attachments for the specified bug.
+	function file_can_view_bug_attachments( $p_bug_id ) {
+		$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
+		$t_can_view     = access_has_bug_level( config_get( 'view_attachments_threshold' ), $p_bug_id );
+		$t_can_view     = $t_can_view || ( $t_reported_by_me && config_get( 'allow_view_own_attachments' ) );
+		return $t_can_view;
+	}
+
+	# --------------------
+	# Check if the current user can download attachments for the specified bug.
+	function file_can_download_bug_attachments( $p_bug_id ) {
+		$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
+		$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
+		$t_can_download = $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
+		return $t_can_download;
+	}
+
+	# --------------------
+	# Check if the current user can delete attachments from the specified bug.
+	function file_can_delete_bug_attachments( $p_bug_id ) {
+		if ( bug_is_readonly( $p_bug_id ) ) {
+			return false;
+		}
+
+		$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
+		$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
+		$t_can_download = $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
+		return $t_can_download;
+	}
+
 	# --------------------
 	# List the attachments belonging to the specified bug.  This is used from within
 	# bug_view_page.php and bug_view_advanced_page.php
 	function file_list_attachments ( $p_bug_id ) {
+		if ( !file_can_view_bug_attachments( $p_bug_id ) ) {
+			return;
+		}
+
 		$c_bug_id = db_prepare_int( $p_bug_id );
 
 		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
@@ -62,8 +99,9 @@
 		$result = db_query( $query );
 
 		$t_bug = bug_get( $c_bug_id, false );
-		$t_can_delete = ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
-				access_has_project_level( config_get( 'handle_bug_threshold' ) );
+
+		$t_can_download = file_can_download_bug_attachments( $p_bug_id );
+		$t_can_delete   = file_can_delete_bug_attachments( $p_bug_id );
 
 		$num_files = db_num_rows( $result );
 		$image_previewed = false;
@@ -79,12 +117,18 @@
 				echo '<br />';
 			}
 
-			$t_href = "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">";
+			if ( $t_can_download ) {
+				$t_href_start = "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">";
+				$t_href_end   = '</a>';
+			} else {
+				$t_href_start = '';
+				$t_href_end = '';
+			}
 
-			echo $t_href;
+			echo $t_href_start;
 			print_file_icon ( file_get_display_name( $v_filename ) );
-			echo '</a>&nbsp;' . $t_href . file_get_display_name( $v_filename ) . 
-				"</a> ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
+			echo $t_href_end . '</a>&nbsp;' . $t_href_start . file_get_display_name( $v_filename ) . 
+				$t_href_end . " ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
 			if ( $t_can_delete ) {
 				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
@@ -94,7 +138,7 @@
 				echo ' (' . lang_get( 'cached' ) . ')';
 			}
 
-			if ( ( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
+			if ( $t_can_download && ( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
 				( $v_filesize != 0 ) && 
 				( in_array( strtolower( file_get_extension( $v_diskfile ) ), array( 'png', 'jpg', 'gif', 'bmp' ), true ) ) ) {
 				echo "<br /><img src=\"file_download.php?file_id=$v_id&amp;type=bug\" />";

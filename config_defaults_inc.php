@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.151 2004-03-17 13:58:59 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.152 2004-03-18 14:02:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -329,14 +329,6 @@
 	# --- see constant_inc.php. (*: BOTTOM or TOP)
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
 
-	# --- Show an attachment indicator on bug list ---
-	# Show a clickable attachment indicator on the bug
-	# list page if the bug has one or more files attached.
-	# Note: This option is disabled by default since it adds
-	# 1 database query per bug listed and thus might slow
-	# down the page display.
-	$g_show_attachment_indicator = OFF;
-
 	############################
 	# Mantis JPGRAPH Addon
 	############################
@@ -540,11 +532,6 @@
 	# Eg: doc-001-myprojdoc.zip
 	$g_document_files_prefix = 'doc';
 
-	# Specifies the maximum size below which an attachment is previewed in the bug
-	# view pages.  To disable this feature, set max size to 0.
-	# This feature applies to: bmp, png, gif, jpg
-	$g_preview_attachments_inline_max_size = 0;
-
 	############################
 	# Mantis HTML Settings
 	############################
@@ -610,6 +597,45 @@
 	$g_auto_set_status_to_assigned	= ON;
 	
 	############################
+	# Bug Attachments Settings
+	############################
+
+	# Specifies the maximum size below which an attachment is previewed in the bug
+	# view pages.  To disable this feature, set max size to 0.
+	# This feature applies to: bmp, png, gif, jpg
+	$g_preview_attachments_inline_max_size = 0;
+
+	# --- Show an attachment indicator on bug list ---
+	# Show a clickable attachment indicator on the bug
+	# list page if the bug has one or more files attached.
+	# Note: This option is disabled by default since it adds
+	# 1 database query per bug listed and thus might slow
+	# down the page display.
+	$g_show_attachment_indicator = OFF;
+
+	# access level needed to view bugs attachments.  View means to see the file names
+	# sizes, and timestamps of the attachments.
+	$g_view_attachments_threshold	= VIEWER;
+
+	# access level needed to download bug attachments
+	$g_download_attachments_threshold	= VIEWER;
+
+	# access level needed to delete bug attachments
+	$g_delete_attachments_threshold	= VIEWER;
+
+	# allow users to view attachments uploaded by themselves even if their access
+	# level is below view_attachments_threshold.
+	$g_allow_view_own_attachments = ON;
+
+	# allow users to download attachments uploaded by themselves even if their access
+	# level is below download_attachments_threshold.
+	$g_allow_download_own_attachments = ON;
+
+	# allow users to delete attachments uploaded by themselves even if their access
+	# level is below delete_attachments_threshold.
+	$g_allow_delete_own_attachments = OFF;
+
+	############################
 	# Mantis Misc Settings
 	############################
 
@@ -643,9 +669,6 @@
 	# access level needed to view private bugnotes
 	# Look in the constant_inc.php file if you want to set a different value
 	$g_private_bugnote_threshold	= DEVELOPER;
-
-	# access level needed to view attachments to bugs reported by other users.
-	$g_view_attachments_threshold	= VIEWER;
 
 	# access level needed to view handler in bug reports and notification email
 	# @@@ yarick123: now it is implemented for notification email only

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.6 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: check.php,v 1.7 2004-03-18 14:02:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,6 +41,66 @@
 		if ( ( 1 === $p_result ) || ( "yes" === strtolower( $p_result ) ) ) {
 			echo 'Yes';
 		}
+	}
+
+	function print_test_row( $p_description, $p_pass )
+	{
+		echo '<tr>';
+		echo '<td bgcolor="#ffffff">';
+		echo $p_description;
+		echo '</td>';
+
+		if ( $p_pass ) {
+			print_test_result( GOOD );
+		} else {
+			print_test_result( BAD );
+		}
+
+		echo '</tr>';
+	}
+
+	function test_bug_download_threshold()
+	{
+		$t_pass = true;
+
+		$t_view_threshold = config_get( 'view_attachments_threshold' );
+		$t_download_threshold = config_get( 'download_attachments_threshold' );
+		$t_delete_threshold = config_get( 'delete_attachments_threshold' );
+
+		if ( $t_view_threshold > $t_download_threshold ) {
+			$t_pass = false;
+		} else {
+			if ( $t_download_threshold > $t_delete_threshold ) {
+				$t_pass = false;
+			}
+		}
+
+		print_test_row( 'Bug attachments download thresholds (view_attachments_threshold, ' .
+				'download_attachments_threshold, delete_attachments_threshold)', $t_pass );
+
+		return $t_pass;
+	}
+
+	function test_bug_attachments_allow_flags()
+	{
+		$t_pass = true;
+
+		$t_own_view = config_get( 'allow_view_own_attachments' );
+		$t_own_download = config_get( 'allow_download_own_attachments' );
+		$t_own_delete = config_get( 'allow_delete_own_attachments' );
+
+		if ( ( $t_own_delete == ON ) && ( $t_own_download == FALSE ) ) {
+			$t_pass = false;
+		} else {
+			if ( ( $t_own_download == ON ) && ( $t_own_view == OFF ) ) {
+				$t_pass = false;
+			}
+		}
+
+		print_test_row( 'Bug attachments allow own flags (allow_view_own_attachments, ' .
+				'allow_download_own_attachments, allow_delete_own_attachments)', $t_pass );
+
+		return $t_pass;
 	}
 
 	$version = phpversion();
@@ -175,6 +235,9 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 </tr>
 <?php
 	}
+
+	test_bug_download_threshold();
+	test_bug_attachments_allow_flags();
 ?>
 </table>
 

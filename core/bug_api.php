@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.52 2004-03-15 21:47:43 vboctor Exp $
+	# $Id: bug_api.php,v 1.53 2004-03-18 14:02:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -226,8 +226,15 @@
 			return false;
 		}
 	}
-	
 
+	# --------------------
+	# Check if the bug is readonly and shouldn't be modified
+	# by default a bug becomes readonly when it is resolved, but this can be changed
+	# through the configuration file.
+	function bug_is_readonly( $p_bug_id ) {
+		return ( bug_get_field( $p_bug_id, 'status' ) < config_get( 'bug_resolved_status_threshold' ) );
+	}
+	
 	#===================================
 	# Creation / Deletion / Updating
 	#===================================
