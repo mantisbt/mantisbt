@@ -139,11 +139,26 @@
 				}
 			}
 
-			### Global developer role
-			$query = "SELECT id
-						FROM $g_mantis_user_table
-						WHERE access_level>=$t_dev AND
-								enabled=1";
+			# Grab the minimum access threshold for this project
+			$query = "SELECT access_min, view_state
+					FROM $g_mantis_project_table
+					WHERE id='$g_project_cookie_val'";
+			$result = db_query( $query );
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+
+			# Global developer role
+			if ( PRIVATE == $v_view_state ) {
+				$query = "SELECT id
+							FROM $g_mantis_user_table
+							WHERE access_level>=$v_access_min_val AND
+									enabled=1";
+			} else {
+				$query = "SELECT id
+							FROM $g_mantis_user_table
+							WHERE access_level>=$t_dev AND
+									enabled=1";
+			}
 			$result = db_query( $query );
 
 			$user_count = db_num_rows( $result );
@@ -152,7 +167,7 @@
 
 				$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
 				$found = 0;
-				if ( $t_notify==1 ) {
+				if ( 1 == $t_notify ) {
 					for ($k=0;$k<count( $user_id_arr );$k++) {
 						if ( $user_id_arr[$k] == $row["id"] ) {
 							$found = 1;

@@ -8,6 +8,7 @@ Mantis
  * Fixed table names in the proj_doc_* pages to use variables instead of hardcoded names.
  * Fixed table names in bug_file_add.php3, report_add.php3, view_bug_advanced_page.php3, view_bug_page.php3 to use variables instead of hardcoded names.
  * Fixed a problem with bug updates making the status hard to deal with.
+ * Fixed the emailing method to honor the private access threshold.
  * Modified the mantis_bug_table.build field to be a VARCHAR(32).
  * Modified the mantis_bug_table.votes field to be an INT(4).
  * Modified the mantis_bug_table.os_build field to a VARCHAR(32).
