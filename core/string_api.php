@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.21 2003-01-12 07:13:44 jfitzell Exp $
+	# $Id: string_api.php,v 1.22 2003-01-12 08:18:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -175,7 +175,7 @@
 	function filter_html_tags( $p_string ) {
 		$t_html_valid_tags = config_get( 'html_valid_tags' );
 
-		if ( OFF == $t_html_valid_tags ||
+		if ( OFF === $t_html_valid_tags ||
 			 is_blank( $t_html_valid_tags ) ) {
 			return $p_string;
 		}
