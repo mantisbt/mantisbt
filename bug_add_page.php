@@ -41,7 +41,7 @@
 <tr>
 	<td class="form-title">
 		<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_add.php">
-		<input type="hidden" name="f_assign_id" value="0000000" />
+		<input type="hidden" name="f_handler_id" value="0000000" />
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">

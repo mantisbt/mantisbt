@@ -11,13 +11,14 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-
+	
+	$f_action			= gpc_get_string( 'f_action' );
+	$f_actionconfirmed	= gpc_get_bool( 'f_actionconfirmed' );
+	$f_bug_arr			= gpc_get_string_array( 'f_bug_arr', array() );
 
 # the queries
 function updateBugLite($p_id, $p_status, $p_request) {
-	global $g_mantis_bug_table;
-
-	$t_handler_id = current_user_get_field( 'id' );
+	$t_handler_id = auth_get_current_user_id();
 	$t_query='';
 	$result = 1;
 
@@ -34,41 +35,41 @@ function updateBugLite($p_id, $p_status, $p_request) {
 	switch ($p_status) {
 
 		case 'MOVED' :
-			check_access( $g_bug_move_access_level );
+			check_access( config_get( 'bug_move_access_level' ) );
 			$t_query = "project_id='$p_request'";
 			break;
 
 		case CLOSED :
-			check_access( $g_close_bug_threshold );
+			check_access( config_get( 'close_bug_threshold' ) );
 			$t_query="status='$p_status'";
 			break ;
 
 		case ASSIGNED :
-			check_access( $g_update_bug_threshold );
+			check_access( config_get( 'update_bug_threshold' ) );
 			// @@@ Check that $p_request has access to handle a bug.
 			$t_handler_id = $p_request ;
 			$t_query="handler_id='$t_handler_id', status='$p_status'";
 			break ;
 
 		case RESOLVED :
-			check_access( $g_handle_bug_threshold );
+			check_access( config_get( 'handle_bug_threshold' ) );
 			$t_query=" status='$p_status', resolution='$p_request'";
 			break ;
 
 		case 'UP_PRIOR' :
-			check_access( $g_update_bug_threshold );
+			check_access( config_get( 'update_bug_threshold' ) );
 			$t_query="priority='$p_request'";
 			break ;
 
 		case 'UP_STATUS' :
-			check_access( $g_update_bug_threshold );
+			check_access( config_get( 'update_bug_threshold' ) );
 			$t_query="handler_id='$t_handler_id', status='$p_request'";
 			break ;
 	}
 	# Update fields
-	$query = "UPDATE $g_mantis_bug_table ".
-    		"SET $t_query ".
-			"WHERE id='$p_id'";
+	$query = "UPDATE ".config_get( 'mantis_bug_table' )."
+    		  SET $t_query
+			  WHERE id='$p_id'";
 
    	$result = db_query($query);
 
@@ -122,8 +123,8 @@ function updateBugLite($p_id, $p_status, $p_request) {
 
 }//updateBug
 
-	# We check to see if the variable exists to avoid warnings
-	if ( ( $f_actionconfirmed=='1' )&&( isset( $f_bug_arr ) ) )  {
+# We check to see if the variable exists to avoid warnings
+if ( $f_actionconfirmed ) {
 
 	foreach($f_bug_arr as $value) {
 
@@ -142,22 +143,27 @@ function updateBugLite($p_id, $p_status, $p_request) {
 			break;
 
 		case 'MOVE':
+			$f_project_id = gpc_get_int( 'f_project_id' );
 			updateBugLite($t_id_arr[0],'MOVED',$f_project_id);
 			break;
 
 		case 'ASSIGN':
+			$f_assign = gpc_get_int( 'f_assign' );
 			updateBugLite($t_id_arr[0],ASSIGNED,$f_assign);
 			break;
 
 		case 'RESOLVE':
+			$f_resolution = gpc_get_int( 'f_resolution' );
 			updateBugLite($t_id_arr[0],RESOLVED,$f_resolution);
 			break;
 
 		case 'UP_PRIOR':
+			$f_priority = gpc_get_int( 'f_priority' );
 			updateBugLite($t_id_arr[0],'UP_PRIOR',$f_priority);
 			break;
 
 		case 'UP_STATUS':
+			$f_status = gpc_get_int( 'f_status' );
 			updateBugLite($t_id_arr[0],'UP_STATUS',$f_status);
 			break;
 		}

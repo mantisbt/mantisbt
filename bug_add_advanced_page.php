@@ -34,7 +34,7 @@
 	check_varset( $f_os_build, '' );
 	check_varset( $f_product_version, '' );
 	check_varset( $f_build, '' );
-	check_varset( $f_assign_id, '' );
+	check_varset( $f_handler_id, '' );
 	check_varset( $f_summary, '' );
 	check_varset( $f_description, '' );
 	check_varset( $f_steps_to_reproduce, '' );
@@ -180,14 +180,14 @@
 		<?php echo $s_assign_to ?>
 	</td>
 	<td>
-		<select tabindex="11" name="f_assign_id">
+		<select tabindex="11" name="f_handler_id">
 			<option value="0000000" selected="selected"></option>
-			<?php print_assign_to_option_list( $f_assign_id ) ?>
+			<?php print_assign_to_option_list( $f_handler_id ) ?>
 		</select>
 	</td>
 </tr>
 <?php } else { ?>
-<input type="hidden" name="f_assign_id" value="0000000" />
+<input type="hidden" name="f_handler_id" value="0000000" />
 <?php } ?>
 <tr>
 	<td class="spacer" colspan="2">

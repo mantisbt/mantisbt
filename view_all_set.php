@@ -8,39 +8,48 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	if ( isset( $f_csv ) ) {
-		print_header_redirect( 'view_all_bug_page.php?f_csv=1' );
-		die;
+	$f_type					= gpc_get_int( 'f_type', -1 );
+	$f_print				= gpc_get_bool( 'f_print' );
+
+	$f_show_category		= gpc_get_string( 'f_show_category', '' );
+	$f_show_severity		= gpc_get_string( 'f_show_severity', '' );
+	$f_show_status			= gpc_get_string( 'f_show_status', '' );
+	$f_per_page				= gpc_get_int( 'f_per_page', -1 );
+	$f_highlight_changed	= gpc_get_string( 'f_highlight_changed', config_get( 'default_show_changed' ) );
+	$f_hide_closed			= gpc_get_bool( 'f_hide_closed' );
+	$f_reporter_id			= gpc_get_string( 'f_reporter_id', '' );
+	$f_handler_id			= gpc_get_string( 'f_handler_id', '' );
+	# sort direction
+	$f_sort					= gpc_get_string( 'f_sort', 'last_updated' );
+	$f_dir					= gpc_get_string( 'f_dir', 'DESC' );
+	# date values
+	$f_start_month			= gpc_get_string( 'f_start_month', date( 'm' ) );
+	$f_end_month			= gpc_get_string( 'f_end_month', date( 'm' ) );
+	$f_start_day			= gpc_get_string( 'f_start_day', 1 );
+	$f_end_day				= gpc_get_string( 'f_end_day', date( 'd' ) );
+	$f_start_year			= gpc_get_string( 'f_start_year', date( 'Y' ) );
+	$f_end_year				= gpc_get_string( 'f_end_year', date( 'Y' ) );
+	$f_search				= gpc_get_string( 'f_search', '' );
+
+	if ( $f_hide_closed ) {
+		$f_hide_closed = 'on';
 	}
 
-	if ( !isset( $f_type ) ) {
+	if ( $f_type < 0 ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
 
-	if ( ON == $g_hide_closed_default ) {
-		$g_hide_closed_default = 'on';
+	if ( ON == config_get( 'hide_closed_default' ) ) {
+		$t_hide_closed_default = 'on';
 	} else {
-		$g_hide_closed_default = '';
+		$t_hide_closed_default = '';
 	}
-
-	check_varset( $f_hide_closed, '' );
 
 	# show bugs per page
-	if ( !isset( $f_per_page ) || ( $f_per_page < 0 ) ) {
-		$f_per_page = $g_default_limit_view;
+	if ( $f_per_page < 0 ) {
+		$f_per_page = config_get( 'default_limit_view' );
 	}
 
-	# sort direction
-	check_varset( $f_sort, 'last_updated' );
-	check_varset( $f_dir, 'DESC' );
-
-	# date values
-	check_varset( $f_start_month, date( 'm' ) );
-	check_varset( $f_end_month, date( 'm' ) );
-	check_varset( $f_start_day, 1 );
-	check_varset( $f_end_day, date( 'd' ) );
-	check_varset( $f_start_year, date( 'Y' ) );
-	check_varset( $f_end_year, date( 'Y' ) );
 
 /*   array contents
      --------------
@@ -51,8 +60,8 @@
 	 4: $f_per_page
 	 5: $f_highlight_changed
 	 6: $f_hide_closed
-	 7: $f_user_id
-	 8: $f_assign_id
+	 7: $f_reporter_id
+	 8: $f_handler_id
 	 9: $f_sort
 	10: $f_dir
 	11: $f_start_month
@@ -61,44 +70,50 @@
 	14: $f_end_month
 	15: $f_end_day
 	16: $f_end_year
+	17: $f_search
 */
 	# Set new filter values.  These are stored in a cookie
-	$t_setting_arr	= explode( '#', $g_view_all_cookie_val );
+	$t_view_all_cookie = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+	$t_setting_arr	= explode( '#', $t_view_all_cookie );
 
 	if ( isset($t_setting_arr[5]) ) {
 		check_varset( $f_highlight_changed, $t_setting_arr[5] );
 	} else {
-		check_varset( $f_highlight_changed, $g_default_show_changed );
+		check_varset( $f_highlight_changed, config_get( 'default_show_changed' ) );
 	}
+
+	$t_cookie_version = config_get( 'cookie_version' );
+	$t_default_show_changed = config_get( 'default_show_changed' );
 
 	switch ( $f_type ) {
 		# New cookie
 		case '0':
-				$t_settings_string = "$g_cookie_version".
+				$t_settings_string = "$t_cookie_version".
 									"#any#any".
 									"#any#$f_per_page".
-									"#$g_default_show_changed#$g_hide_closed_default".
+									"#$t_default_show_changed#$t_hide_closed_default".
 									"#any#any".
 									"#last_updated#DESC".
 									"#$f_start_month#$f_start_day".
 									"#$f_start_year#$f_end_month".
-									"#$f_end_day#$f_end_year";
+									"#$f_end_day#$f_end_year".
+									"#$f_search";
 				break;
 		# Update filters
 		case '1':
-				$t_settings_string = "$g_cookie_version".
+				$t_settings_string = "$t_cookie_version".
 									"#$f_show_category#$f_show_severity".
 									"#$f_show_status#$f_per_page".
 									"#$f_highlight_changed#$f_hide_closed".
-									"#$f_user_id#$f_assign_id".
+									"#$f_reporter_id#$f_handler_id".
 									"#$f_sort#$f_dir".
 									"#$f_start_month#$f_start_day".
 									"#$f_start_year#$f_end_month".
-									"#$f_end_day#$f_end_year";
+									"#$f_end_day#$f_end_year".
+									"#$f_search";
 				break;
 		# Set the sort order and direction
 		case '2':
-				$t_setting_arr = explode( '#', $g_view_all_cookie_val );
 				$t_settings_string = "$t_setting_arr[0]".
 									"#$t_setting_arr[1]#$t_setting_arr[2]".
 									"#$t_setting_arr[3]#$t_setting_arr[4]".
@@ -107,11 +122,11 @@
 									"#$f_sort#$f_dir".
 									"#$t_setting_arr[11]#$t_setting_arr[12]".
 									"#$t_setting_arr[13]#$t_setting_arr[14]".
-									"#$t_setting_arr[15]#$t_setting_arr[16]";
+									"#$t_setting_arr[15]#$t_setting_arr[16]".
+									"#$t_setting_arr[17]";
 				break;
 		# does nothing. catch all case
 		default:
-				$t_setting_arr = explode( '#', $g_view_all_cookie_val );
 				$t_settings_string = "$t_setting_arr[0]".
 									"#$t_setting_arr[1]#$t_setting_arr[2]".
 									"#$t_setting_arr[3]#$t_setting_arr[4]".
@@ -120,24 +135,19 @@
 									"#$t_setting_arr[9]#$t_setting_arr[10]".
 									"#$t_setting_arr[11]#$t_setting_arr[12]".
 									"#$t_setting_arr[13]#$t_setting_arr[14]".
-									"#$t_setting_arr[15]#$t_setting_arr[16]";
+									"#$t_setting_arr[15]#$t_setting_arr[16]".
+									"#$t_setting_arr[17]";
 	}
 
 	# set cookie values
-	setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length, $g_cookie_path );
+	setcookie( config_get( 'view_all_cookie' ), $t_settings_string, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
 
 	# redirect to print_all or view_all page
-	if ( isset( $f_print ) ) {
+	if ( $f_print ) {
 		$t_redirect_url = 'print_all_bug_page.php';
 	} else {
 		$t_redirect_url = 'view_all_bug_page.php';
 	}
 
-	# pass on search term(s)
-	if ( isset( $f_search ) ) {
-		$f_search = urlencode( $f_search );
-		print_header_redirect( $t_redirect_url.'?f_search='.$f_search );
-	} else {
-		print_header_redirect( $t_redirect_url );
-	}
+	print_header_redirect( $t_redirect_url );
 ?>

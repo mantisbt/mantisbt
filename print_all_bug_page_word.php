@@ -43,8 +43,8 @@
 	$f_per_page 			= $t_setting_arr[4];
 	$f_highlight_changed 	= $t_setting_arr[5];
 	$f_hide_closed 			= $t_setting_arr[6];
-	$f_user_id 				= $t_setting_arr[7];
-	$f_assign_id 			= $t_setting_arr[8];
+	$f_reporter_id 				= $t_setting_arr[7];
+	$f_handler_id 			= $t_setting_arr[8];
 	$f_sort 				= $t_setting_arr[9];
 	$f_dir		 			= $t_setting_arr[10];
 	$f_start_month			= $t_setting_arr[11];
@@ -56,8 +56,8 @@
 
 	# Clean input
 	$c_offset 				= (integer)$f_offset;
-	$c_user_id				= (integer)$f_user_id;
-	$c_assign_id			= (integer)$f_assign_id;
+	$c_user_id				= (integer)$f_reporter_id;
+	$c_assign_id			= (integer)$f_handler_id;
 	$c_per_page				= (integer)$f_per_page;
 	$c_show_category		= addslashes($f_show_category);
 	$c_show_severity		= addslashes($f_show_severity);
@@ -125,9 +125,9 @@
 		$t_where_clause .= " AND reporter_id='$c_user_id'";
 	}
 
-	if ( 'none' == $f_assign_id ) {
+	if ( 'none' == $f_handler_id ) {
 		$t_where_clause .= ' AND handler_id=0';
-	} else if ( $f_assign_id != 'any' ) {
+	} else if ( $f_handler_id != 'any' ) {
 		$t_where_clause .= " AND handler_id='$c_assign_id'";
 	}
 

@@ -11,24 +11,11 @@
 <?php require_once( 'core.php' ) ?>
 <? login_cookie_check() ?>
 <?php
-	# the pencil shortcut, to directly edit bugs
-	if ( '' != $QUERY_STRING ) {
-		$f_qsValues = split( '&', $QUERY_STRING );
-		foreach( $f_qsValues as $value ) {
-			$val = split( '=', $value );
-			if ( 'update' == substr( $val[0], 0, 6 ) ) {
-				if ( ON == current_user_get_pref( 'advanced_update' ) ) {
-					print_meta_redirect( 'bug_update_advanced_page.php?f_id='.substr( $val[0], 7, strlen( $val[0] )-9 ), 0 );
-				} else {
-					print_meta_redirect( 'bug_update_page.php?f_id='.substr( $val[0], 7, strlen( $val[0] )-9 ), 0 );
-				}
-				exit;
-			}
-		}
-	}
+	$f_action = gpc_get_string( 'f_action', '' );
+	$f_bug_arr = gpc_get_string_array( 'f_bug_arr', array() );
 
 	# redirects to all_bug_page if nothing is selected
-	if ( ( $f_action=='' ) || !isset( $f_bug_arr ) || 0 == count( $f_bug_arr ) ) {
+	if ( ( $f_action=='' ) || 0 == sizeof( $f_bug_arr ) ) {
 		print_meta_redirect( 'view_all_bug_page.php', 0 );
 		exit;
 	}
@@ -38,41 +25,41 @@
 		case 'CLOSE' :
 		# Use a simple confirmation page, if close or delete...
 			$t_finished 			= 1;
-			$t_question_title 		= $s_close_bugs_conf_msg;
-			$t_button_title 		= $s_close_group_bugs_button;
+			$t_question_title 		= lang_get( 'close_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'close_group_bugs_button' );
 			break;
 		case 'DELETE' :
 			$t_finished 			= 1;
-			$t_question_title		= $s_delete_bugs_conf_msg;
-			$t_button_title 		= $s_delete_group_bugs_button;
+			$t_question_title		= lang_get( 'delete_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'delete_group_bugs_button' );
 			break;
 		# ...else we define the variables used in the form
 		case 'MOVE' :
-			$t_question_title 		= $s_move_bugs_conf_msg;
-			$t_button_title 		= $s_move_group_bugs_button;
+			$t_question_title 		= lang_get( 'move_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'move_group_bugs_button' );
 			$t_form					= 'f_project_id';
 			break;
 		case 'ASSIGN' :
-			$t_question_title 		= $s_assign_bugs_conf_msg;
-			$t_button_title 		= $s_assign_group_bugs_button;
+			$t_question_title 		= lang_get( 'assign_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'assign_group_bugs_button' );
 			$t_form 				= 'f_assign';
 			break;
 
 		case 'RESOLVE' :
-			$t_question_title 		= $s_resolve_bugs_conf_msg;
-			$t_button_title 		= $s_resolve_group_bugs_button;
+			$t_question_title 		= lang_get( 'resolve_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'resolve_group_bugs_button' );
 			$t_form 				= 'f_resolution';
 			$t_request 				= 'resolution'; # the "request" vars allow to display the adequate list
 			break;
 		case 'UP_PRIOR' :
-			$t_question_title 		= $s_priority_bugs_conf_msg;
-			$t_button_title 		= $s_priority_group_bugs_button;
+			$t_question_title 		= lang_get( 'priority_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'priority_group_bugs_button' );
 			$t_request 				= 'priority';
 			$t_form 				= 'f_priority';
 			break;
 		case 'UP_STATUS' :
-			$t_question_title 		= $s_status_bugs_conf_msg;
-			$t_button_title 		= $s_status_group_bugs_button;
+			$t_question_title 		= lang_get( 'status_bugs_conf_msg' );
+			$t_button_title 		= lang_get( 'status_group_bugs_button' );
 			$t_form 				= 'f_status';
 			$t_request 				= 'status';
 			break;
@@ -129,7 +116,7 @@
 ?>
 <br />
 <div align="center">
-	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
+	<?php print_hr() ?>
 	<?php echo $t_question_title ?>
 
 	<form method="post" action="view_all_bug_update.php">
@@ -143,7 +130,7 @@
 		<input type="submit" value="<?php echo $t_button_title ?>" />
 	</form>
 
-	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
+	<?php print_hr() ?>
 </div>
 <?php
 	}

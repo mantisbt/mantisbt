@@ -101,7 +101,7 @@
 
 		check_varset( $f_priority, NORMAL );
 
-		$c_assign_id 		= (integer)$f_assign_id;
+		$c_assign_id 		= (integer)$f_handler_id;
 		$c_severity 		= (integer)$f_severity;
 		$c_reproducibility 	= (integer)$f_reproducibility;
 		$c_view_state 		= (integer)$f_view_state;
@@ -125,7 +125,7 @@
 
 			if ( db_num_rows( $result ) == 1 ) {
 				$c_assign_id = db_result( $result );
-				$f_assign_id = sprintf( '%07d', $c_assign_id );
+				$f_handler_id = sprintf( '%07d', $c_assign_id );
 			}
 		}
 
@@ -271,7 +271,7 @@
 			<input type="hidden" name="f_os_build" 			value="<?php echo $f_os_build ?>" />
 			<input type="hidden" name="f_product_version" 	value="<?php echo $f_product_version ?>" />
 			<input type="hidden" name="f_build" 			value="<?php echo $f_build ?>" />
-			<input type="hidden" name="f_assign_id" 		value="<?php echo $f_assign_id ?>" />
+			<input type="hidden" name="f_handler_id" 		value="<?php echo $f_handler_id ?>" />
 			<input type="hidden" name="f_summary" 			value="<?php echo $f_summary ?>" />
 			<input type="hidden" name="f_description" 		value="<?php echo $f_description ?>" />
 			<input type="hidden" name="f_steps_to_reproduce" value="<?php echo $f_steps_to_reproduce ?>" />
