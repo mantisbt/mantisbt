@@ -41,7 +41,7 @@
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
-	<form method=post action="<? echo $g_manage_user_update ?>?f_action=update">
+	<form method=post action="<? echo $g_manage_user_update ?>">
 	<input type=hidden name=f_id value="<? echo $u_id ?>">
 	<tr>
 		<td colspan=3 bgcolor=<? echo $g_table_title_color ?>>
@@ -99,13 +99,13 @@
 			<input type=submit value="  Update User  ">
 		</td>
 			</form>
-			<form method=post action="<? echo $g_manage_user_update ?>?f_action=reset">
+			<form method=post action="<? echo $g_manage_user_reset ?>">
 		<td>
 			<input type=hidden name=f_id value="<? echo $u_id ?>">
 			<input type=submit value=" Reset Password ">
 		</td>
 			</form>
-			<form method=post action="<? echo $g_manage_user_update ?>?f_action=delete">
+			<form method=post action="<? echo $g_manage_user_delete_page ?>">
 		<td>
 			<input type=hidden name=f_id value="<? echo $u_id ?>">
 			<input type=submit value="  Delete User  ">

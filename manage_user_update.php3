@@ -16,41 +16,23 @@
 	}
 
 	### update action
-	if ( $f_action=="update" ) {
-		if ( $f_protected=="on" ) {
-		    $query = "UPDATE $g_mantis_user_table
-		    		SET username='$f_username', email='$f_email',
-		    			protected='$f_protected'
-		    		WHERE id='$f_id'";
-		}
-		### administrator is not allowed to change access level or enabled
-		### this is to prevent screwing your own account
-		else {
-		    $query = "UPDATE $g_mantis_user_table
-		    		SET username='$f_username', email='$f_email',
-		    			access_level='$f_access_level', enabled='$f_enabled',
-		    			protected='$f_protected'
-		    		WHERE id='$f_id'";
-		}
-
-	    $result = mysql_query( $query );
-	}
-	### password is blank password
-	else if ( $f_action=="reset" ) {
+	if ( $f_protected=="on" ) {
 	    $query = "UPDATE $g_mantis_user_table
-	    		SET password='4nPtPLdAFdoxA'
+	    		SET username='$f_username', email='$f_email',
+	    			protected='$f_protected'
 	    		WHERE id='$f_id'";
-	    $result = mysql_query( $query );
 	}
-	### delete account
-	else if ( $f_action=="delete" ) {
-	    if ( $f_protected!="on" ) {
-	    	$query = "DELETE
-	    			FROM $g_mantis_user_table
-	    			WHERE id='$f_id'";
-	    }
-	    $result = mysql_query( $query );
+	### administrator is not allowed to change access level or enabled
+	### this is to prevent screwing your own account
+	else {
+	    $query = "UPDATE $g_mantis_user_table
+	    		SET username='$f_username', email='$f_email',
+	    			access_level='$f_access_level', enabled='$f_enabled',
+	    			protected='$f_protected'
+	    		WHERE id='$f_id'";
 	}
+
+    $result = mysql_query( $query );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -72,11 +54,11 @@
 <p>
 <div align=center>
 <?
-	if ( $result ) {
+	if ( $f_protected=="on" ) {
+		PRINT "Account protected. Access level and enabled protected. Otherwise, account has been updated...<p>";
+	}
+	else if ( $result ) {
 		PRINT "Account successfully updated...<p>";
-		if ( $f_protected=="on" ) {
-			PRINT "Account protected. Access level and enabled protected.<p>";
-		}
 	}
 	else {
 		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";

@@ -137,8 +137,12 @@
 	$g_manage_page                 = "manage_page".$g_php;
 	$g_manage_create_new_user      = "manage_create_new_user".$g_php;
 	$g_manage_create_user_page     = "manage_create_user_page".$g_php;
+
 	$g_manage_user_page            = "manage_user_page".$g_php;
 	$g_manage_user_update          = "manage_user_update".$g_php;
+	$g_manage_user_reset           = "manage_user_reset".$g_php;
+	$g_manage_user_delete_page     = "manage_user_delete_page".$g_php;
+	$g_manage_user_delete          = "manage_user_delete".$g_php;
 
 	$g_documentation_page          = "documentation_page".$g_php;
 

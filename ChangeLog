@@ -33,6 +33,8 @@ To Do:
  * Profiles can be used for advanced bug submission
  * Made enum displays (category, status, etc) easier to maintain via print_lists();
  * Removed the destructive DROP table in db_generate.sql
+ * Added 'feedback' status - indicates that it requires more information
+ * Added a confirmation before an admin can delete an account
 
 12.06.2000	-	0.10.2
 

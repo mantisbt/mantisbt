@@ -1,5 +1,4 @@
-This file contains information to help you customize and integrate Mantis with
-whatever you need.
+This file contains information to help you customize Mantis.
 
 * config_inc.php - this file contains all the site-wide variables.
   It is advisable to rename this to something else then change the
