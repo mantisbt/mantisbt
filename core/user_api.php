@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.14 2002-08-28 09:58:32 jfitzell Exp $
+	# $Id: user_api.php,v 1.15 2002-08-28 10:25:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -201,31 +201,34 @@
 	# If $g_use_ldap_email then tries to find email using ldap
 	# $p_email may be empty, but the user wont get any emails.
 	# returns false if error, the generated cookie string if ok
-	function user_signup( $p_username, $p_email=false ) {
-		$t_use_ldap_email 					= config_get('use_ldap_email');
-		$t_default_new_account_access_level = config_get('default_new_account_access_level');
-		$t_default_advanced_report			= config_get('default_advanced_report');
-		$t_default_advanced_view			= config_get('default_advanced_view');
-		$t_default_advanced_update			= config_get('default_advanced_update');
-		$t_default_refresh_delay			= config_get('default_refresh_delay');
-		$t_default_redirect_delay			= config_get('default_redirect_delay');
-		$t_default_email_on_new				= config_get('default_email_on_new');
-		$t_default_email_on_assigned		= config_get('default_email_on_assigned');
-		$t_default_email_on_feedback		= config_get('default_email_on_feedback');
-		$t_default_email_on_resolved		= config_get('default_email_on_resolved');
-		$t_default_email_on_closed			= config_get('default_email_on_closed');
-		$t_default_email_on_reopened		= config_get('default_email_on_reopened');
-		$t_default_email_on_bugnote			= config_get('default_email_on_bugnote');
-		$t_default_email_on_status			= config_get('default_email_on_status');
-		$t_default_email_on_priority		= config_get('default_email_on_priority');
-		$t_default_language					= config_get('default_language');
-
-		$t_user_table 						= config_get('mantis_user_table');
-		$t_user_pref_table 					= config_get('mantis_user_pref_table');
-
-		if ( ( false == $p_email ) && ( ON == $g_use_ldap_email ) ) {
-			$p_email = get_user_info( $p_username,'email' );
+	function user_signup( $p_username, $p_email=null ) {
+		if ( ( null === $p_email ) && ( ON == config_get( 'use_ldap_email' ) ) ) {
+			$p_email = ldap_email( $p_username, 'email' );
 		}
+
+		$c_username	= db_prepare_string( $p_username );
+		$c_email	= db_prepare_string( $p_email );
+
+		$t_use_ldap_email 					= config_get( 'use_ldap_email ');
+		$t_default_new_account_access_level = config_get( 'default_new_account_access_level ');
+		$t_default_advanced_report			= config_get( 'default_advanced_report ');
+		$t_default_advanced_view			= config_get( 'default_advanced_view ');
+		$t_default_advanced_update			= config_get( 'default_advanced_update ');
+		$t_default_refresh_delay			= config_get( 'default_refresh_delay ');
+		$t_default_redirect_delay			= config_get( 'default_redirect_delay ');
+		$t_default_email_on_new				= config_get( 'default_email_on_new ');
+		$t_default_email_on_assigned		= config_get( 'default_email_on_assigned ');
+		$t_default_email_on_feedback		= config_get( 'default_email_on_feedback ');
+		$t_default_email_on_resolved		= config_get( 'default_email_on_resolved ');
+		$t_default_email_on_closed			= config_get( 'default_email_on_closed ');
+		$t_default_email_on_reopened		= config_get( 'default_email_on_reopened ');
+		$t_default_email_on_bugnote			= config_get( 'default_email_on_bugnote ');
+		$t_default_email_on_status			= config_get( 'default_email_on_status ');
+		$t_default_email_on_priority		= config_get( 'default_email_on_priority ');
+		$t_default_language					= config_get( 'default_language ');
+
+		$t_user_table 						= config_get( 'mantis_user_table' );
+		$t_user_pref_table 					= config_get( 'mantis_user_pref_table' );
 
 		$t_seed = $p_email ? $p_email : $p_username;
 		# Create random password
@@ -234,15 +237,13 @@
 		# create the almost unique string for each user then insert into the table
 		$t_cookie_string	= create_cookie_string( $t_seed );
 		$t_password2		= process_plain_password( $t_password );
-		$c_username			= db_prepare_string($p_username);
-		$c_email			= db_prepare_string($p_email);
 
 		$query = "INSERT INTO $t_user_table
 				( id, username, email, password, date_created, last_visit,
 				enabled, protected, access_level, login_count, cookie_string )
 				VALUES
 				( null, '$c_username', '$c_email', '$t_password2', NOW(), NOW(),
-				1, 0, $g_default_new_account_access_level, 0, '$t_cookie_string')";
+				1, 0, $t_default_new_account_access_level, 0, '$t_cookie_string')";
 		$result = db_query( $query );
 
 		if ( !$result ) {
@@ -394,7 +395,7 @@
 	# lookup the user's email in LDAP or the db as appropriate
 	function user_get_email( $p_user_id ) {
 		if ( ON == config_get( 'use_ldap_email' ) ) {
-		    return ldap_email( $p_user_id );
+		    return ldap_email( user_get_name( $p_user_id ) );
 		} else {
 			return user_get_field( $p_user_id, 'email' );
 		}
