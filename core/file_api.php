@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.5 2002-08-29 09:40:09 jfitzell Exp $
+	# $Id: file_api.php,v 1.6 2002-08-29 10:40:05 smhanson Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -23,7 +23,7 @@
 	# List the attachments belonging to the specified bug.  This is used from within
 	# view_bug_page.php and view_bug_advanced_page.php
 	function file_list_attachments ( $p_bug_id ) {
-		$c_bug_id = db_prepate_int( $p_bug_id );
+		$c_bug_id = db_prepare_int( $p_bug_id );
 
 		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
 
