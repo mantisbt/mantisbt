@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: html_api.php,v 1.3 2002-08-25 19:44:46 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -201,8 +201,14 @@
 			PRINT count( array_unique ( $g_queries_array ) ) . " unique queries executed.<br />";
 			if ( ON == $g_show_queries_list ) {
 				PRINT '<table>';
+				$t_shown_queries = array();
 				for ( $i = 0; $i < $t_count; $i++ ) {
-					PRINT "<tr><td>". ($i+1) ."</td><td>$g_queries_array[$i]</td></tr>";
+					if ( in_array( $g_queries_array[$i], $t_shown_queries ) ) {
+						PRINT '<tr><td style="color: red">'. ($i+1) ."</td><td style=\"color: red\">$g_queries_array[$i]</td></tr>";
+					} else {
+						array_push( $t_shown_queries, $g_queries_array[$i] );
+						PRINT '<tr><td>'. ($i+1) ."</td><td>$g_queries_array[$i]</td></tr>";
+					}
 				}
 				PRINT '</table>';
 			}
