@@ -143,6 +143,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 <tr>
 	<td class="form-title" colspan="5">
 		<?php echo lang_get( 'manage_accounts_title' ) ?> [<?php echo $user_count ?>]
+		<?php print_bracket_link( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
 	</td>
 	<td class="center" colspan="2">
 		<form method="post" action="manage_page.php">

@@ -13,7 +13,7 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( 'manage_user_create_page.php' ) ?>
+<?php print_manage_menu() ?>
 
 <br />
 <div align="center">
