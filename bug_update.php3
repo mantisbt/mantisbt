@@ -50,6 +50,12 @@
 	$f_steps_to_reproduce 		= string_prepare_textarea( $f_steps_to_reproduce );
 	$f_additional_information 	= string_prepare_textarea( $f_additional_information );
 
+        # when assigned-to is explicit choosen, then no
+        # manually status change is needed, when the bug has status=NEW_
+        if($f_handler_id AND $f_status==NEW_){
+            $f_status=ASSIGNED;
+        }
+
 	### Update all fields
     $query = "UPDATE $g_mantis_bug_table
     		SET category='$f_category', severity='$f_severity',
