@@ -36,20 +36,20 @@
 			INTO $g_mantis_bugnote_table
 			( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
 			VALUES
-			( null, '$f_bug_id', '$u_id','$t_bugnote_text_id',NOW(), NOW() )";
+			( null, '$f_id', '$u_id','$t_bugnote_text_id',NOW(), NOW() )";
 	$result = db_query( $query );
 
 	### get date submitted (weird bug in mysql)
 	$query = "SELECT date_submitted
 			FROM $g_mantis_bug_table
-    		WHERE id='$f_bug_id'";
+    		WHERE id='$f_id'";
    	$result = db_query( $query );
    	$t_date_submitted = db_result( $result, 0 );
 
 	### update bug last updated
 	$query = "UPDATE $g_mantis_bug_table
     		SET date_submitted='$t_date_submitted', last_updated=NOW()
-    		WHERE id='$f_bug_id'";
+    		WHERE id='$f_id'";
    	$result = db_query($query);
 ?>
 <? print_html_top() ?>
@@ -59,10 +59,10 @@
 <?
 	if ( $result ) {
 		if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
-			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_bug_id", $g_wait_time );
+			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_id", $g_wait_time );
 		}
 		else {
-			print_meta_redirect( "$g_view_bug_page?f_id=$f_bug_id", $g_wait_time );
+			print_meta_redirect( "$g_view_bug_page?f_id=$f_id", $g_wait_time );
 		}
 	}
 ?>

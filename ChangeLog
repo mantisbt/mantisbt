@@ -20,6 +20,7 @@ To Do:
  * Fixed another problem with the date created being updated improperly when
    dealing with bugnotes.
  * Fixed show source problem
+ * Fixed problem with advanced view showing the wrong dates
  * Uncluttered large portions of code
  * Reordered the config_inc.php file items
  * Made view reported by and assigned to pages use variables.

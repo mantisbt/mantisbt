@@ -132,7 +132,7 @@
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_priority ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<td align=left bgcolor=<? echo $g_primary_color_dark ?>>
 			<select name=f_priority>
 				<? print_field_option_list( "priority", $v_priority ) ?>
 			</select>
@@ -154,8 +154,10 @@
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_status ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<? echo $v_status ?>
+		<td align=left bgcolor=<? echo $g_primary_color_light ?>>
+			<select name=f_status>
+				<? print_field_option_list( "status", $v_status ) ?>
+			</select>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_duplicate_id ?></b>
@@ -174,7 +176,7 @@
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_projection ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<td align=left bgcolor=<? echo $g_primary_color_dark ?>>
 			<select name=f_projection>
 				<? print_field_option_list( "projection", $v_projection ) ?>
 			</select>
@@ -192,7 +194,7 @@
 		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_eta ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?>>
+		<td align=left bgcolor=<? echo $g_primary_color_light ?>>
 			<select name=f_eta>
 				<? print_field_option_list( "eta", $v_eta ) ?>
 			</select>

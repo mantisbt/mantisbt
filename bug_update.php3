@@ -10,7 +10,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### Update all fields
-	### BUG IN MYSQL or PHP
+	### BUG IN MYSQL (I think) makes me need to update the date submitted as well
     $query = "UPDATE $g_mantis_bug_table
     		SET category='$f_category', severity='$f_severity',
     			reproducibility='$f_reproducibility',
@@ -20,11 +20,6 @@
 				date_submitted='$f_date_submitted',
 				last_updated=NOW(), eta='$f_eta',
 				handler_id='$f_handler_id'
-    		WHERE id='$f_id'";
-   	$result = db_query($query);
-
-    $query = "UPDATE $g_mantis_bug_table
-    		SET last_updated=NOW()
     		WHERE id='$f_id'";
    	$result = db_query($query);
 ?>
