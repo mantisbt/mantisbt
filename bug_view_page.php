@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.47 2003-03-27 22:34:04 int2str Exp $
+	# $Id: bug_view_page.php,v 1.48 2003-04-04 00:02:59 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -279,7 +279,7 @@
 <!-- Custom Fields -->
 <?php
 	$t_custom_fields_found = false;
-	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		if( !$t_def['advanced'] && custom_field_has_read_access( $t_id, $f_bug_id ) ) {
 			$t_def = custom_field_get_definition( $t_id );

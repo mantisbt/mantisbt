@@ -222,7 +222,7 @@
 </tr>
 
 <?php
-$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
+$t_related_custom_field_ids = custom_field_get_linked_ids( $v_project_id );
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 ?>

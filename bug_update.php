@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.56 2003-03-05 11:51:15 vboctor Exp $
+	# $Id: bug_update.php,v 1.57 2003-04-04 00:02:58 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,7 @@
 	# Update the bug entry
 	bug_update( $f_bug_id, $t_bug_data, true );
 
-	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		# Do not set custom field value if user has no write access.
 		if( !custom_field_has_write_access( $t_id, $f_bug_id ) ) {

@@ -9,6 +9,7 @@ Mantis ChangeLog
  * Fix #3080: project menu bar shows extra links
  * Fix #3089: Hide link to Profiles management on account page based on access level.
  * Fix #3092: Problem changing printing prefs.
+ * Fix #3108: No custom fields are shown in the details, if you are in "All Projects"
  * Languages: Updated Italian and Dutch localisations.
  * Languages: Synchronised localisation files with English localisation.
 
