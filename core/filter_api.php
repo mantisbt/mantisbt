@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.78 2005-01-29 03:10:04 thraxisp Exp $
+	# $Id: filter_api.php,v 1.79 2005-01-29 18:38:13 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1890,7 +1890,6 @@
 					WHERE (project_id='$t_project_id'
 					OR project_id='0')
 					AND name!=''
-					AND filter_string!=''
 					ORDER BY is_public DESC, name ASC";
 		$result = db_query( $query );
 		$query_count = db_num_rows( $result );
