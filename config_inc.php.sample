@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_inc.php.sample,v 1.12 2004-02-08 13:16:57 vboctor Exp $
+	# $Id: config_inc.php.sample,v 1.13 2004-08-15 23:13:02 thraxisp Exp $
 	# --------------------------------------------------------
 	
 	# This sample file contains the essential files that you MUST
@@ -40,10 +40,6 @@
 
 	# the "From: " field in emails
 	$g_from_email           = 'noreply@example.com';
-
-	# the "To: " address all emails are sent.  This can be a mailing list or archive address.
-	# Actual users are emailed via the bcc: fields
-	$g_to_email             = 'nobody@example.com';
 
 	# the return address for bounced mail
 	$g_return_path_email    = 'admin@example.com';

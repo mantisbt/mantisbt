@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.93 2004-08-15 22:21:53 thraxisp Exp $
+	# $Id: email_api.php,v 1.94 2004-08-15 23:13:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -528,7 +528,7 @@
 		$t_message   = string_email_links( trim( $p_message ) );
 
 		# short-circuit if no recipient is defined
-		if ( is_blank( $p_recipient ) && ( OFF == config_get('use_bcc') ) ) {
+		if ( is_blank( $p_recipient ) ) {
 			return;
 		}
 

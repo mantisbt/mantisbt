@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.197 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.198 2004-08-15 23:13:01 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -172,10 +172,6 @@
 	# the 'From: ' field in emails
 	$g_from_email			= 'noreply@example.com';
 
-	# the 'To: ' address all emails are sent.  This can be a mailing list or archive address.
-	# Actual users are emailed via the bcc: fields
-	$g_to_email				= 'nobody@example.com';
-
 	# the return address for bounced mail
 	$g_return_path_email	= 'admin@example.com';
 
@@ -260,9 +256,6 @@
 	# Urgent = 1, Not Urgent = 5, Disable = 0
 	# Note: some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
 	$g_mail_priority		= 3;
-
-	# Set to OFF on Windows systems, as long as php-mail-function has its bcc-bug (~PHP 4.0.6)
-	$g_use_bcc				= ON;
 
 	# select the method to mail by:
 	# 0 - mail()
