@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2003.??.??  -  0.18.0a4
  * Languages: Updated Italian localisation.
+ * Fix: 'Display selected only' on print bugs page fixed.
  * Fix: 'Hide resolved' now also works for report printing and export.
  * Fix #3903: Project name is not printed on bug list report.
  * Fix #3011: 'Hide resolved' flag is now preserved when re-sorting bug list.

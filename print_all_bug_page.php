@@ -194,11 +194,11 @@
 	$query = $query." LIMIT $c_offset, $c_per_page";
 
 	# perform query
-    $result = db_query( $query );
+	$result = db_query( $query );
 	$row_count = db_num_rows( $result );
 
 	# for export
-	check_varset( $t_show_flag, 0 );
+	$t_show_flag = gpc_get( 't_show_flag', 0 );
 ?>
 <?php html_page_top1( ) ?>
 <?php html_head_end( ) ?>
@@ -307,6 +307,7 @@
 	#$t_bug_arr_sort is used for displaying
 	#$f_export is a string for the word and excel pages
 
+	$f_bug_arr = gpc_get( 'bug_arr', NULL );
 	$f_bug_arr[$row_count]=-1;
 
 	for( $i=0; $i < $row_count; $i++ ) {
