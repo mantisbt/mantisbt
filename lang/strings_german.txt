@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.118 $
-	# $Author: bigbadger $
-	# $Date: 2004-10-20 11:25:33 $
+	# $Revision: 1.119 $
+	# $Author: vboctor $
+	# $Date: 2005-02-02 10:38:56 $
 	#
-	# $Id: strings_german.txt,v 1.118 2004-10-20 11:25:33 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.119 2005-02-02 10:38:56 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -33,6 +33,8 @@ $s_actiongroup_menu_resolve = 'Beheben';
 $s_actiongroup_menu_update_priority = 'Priorität ändern';
 $s_actiongroup_menu_update_status = 'Status ändern';
 $s_actiongroup_menu_update_view_status = 'Aktualisiere Anzeigestatus';
+$s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Ausgewählte Probleme';
 
 # new strings:
@@ -112,6 +114,7 @@ $s_resolve_bugs_conf_msg = 'Grund für Behebung auswählen:';
 $s_priority_bugs_conf_msg = 'Neue Problempriorität:';
 $s_status_bugs_conf_msg = 'Neuer Problemstatus:';
 $s_view_status_bugs_conf_msg = 'Anzeigestatus des Problems auswählen';
+$s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
 $s_close_group_bugs_button = 'Probleme schließen' ;
 $s_delete_group_bugs_button = 'Probleme löschen' ;
 $s_move_group_bugs_button = 'Probleme verschieben' ;
@@ -121,6 +124,7 @@ $s_resolve_group_bugs_button = 'Probleme beheben' ;
 $s_priority_group_bugs_button = 'Priorität ändern' ;
 $s_status_group_bugs_button = 'Status ändern' ;
 $s_view_status_group_bugs_button = 'Anzeigestatus aktualisieren';
+$s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Grafikzusammenstellung nach Status' ;
@@ -918,6 +922,7 @@ $s_show = 'Zeige';
 $s_changed = 'geändert (Std.)';
 $s_viewing_bugs_title = 'Probleme anzeigen';
 $s_updated = 'Aktualisiert';
+$s_sticky = 'Show Sticky Issues';
 
 # view_all_inc.php
 $s_none = 'keine';

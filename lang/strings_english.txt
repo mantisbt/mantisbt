@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.234 $
+	# $Revision: 1.235 $
 	# $Author: vboctor $
-	# $Date: 2005-01-29 12:14:23 $
+	# $Date: 2005-02-02 10:38:56 $
 	#
-	# $Id: strings_english.txt,v 1.234 2005-01-29 12:14:23 vboctor Exp $
+	# $Id: strings_english.txt,v 1.235 2005-02-02 10:38:56 vboctor Exp $
 	###########################################################################
 
 # Charset
@@ -30,6 +30,7 @@ $s_actiongroup_menu_update_priority = 'Update Priority';
 $s_actiongroup_menu_update_status = 'Update Status';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
+$s_actiongroup_menu_update_field = 'Update %s';
 $s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
@@ -948,7 +949,6 @@ $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
 $s_ok = 'OK';
 $s_select_all = 'Select All';
-$s_update_field = 'Update %s';
 
 # stored query strings
 $s_use_query = 'Use Filter';

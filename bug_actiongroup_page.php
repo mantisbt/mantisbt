@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.46 2005-01-29 12:14:22 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.47 2005-02-02 10:38:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -109,7 +109,7 @@
 
 		case 'CUSTOM':
 			$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
-			$t_question_title = sprintf( lang_get( 'update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
+			$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
 			$t_button_title = $t_question_title;
 			$t_form = "custom_field_$t_custom_field_id";
 			break;
