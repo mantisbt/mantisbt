@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.5 2002-08-28 14:10:11 vboctor Exp $
+	# $Id: news_api.php,v 1.6 2002-09-06 23:59:30 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -136,6 +136,15 @@
 		# @@@ shouldn't we order by date_posted ?
 		$query .= " ORDER BY id DESC";
 
-		return db_query( $query );
+		$result = db_query( $query );
+
+		$t_rows = array();
+		$t_row_count = db_num_rows( $result );
+
+		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			array_push( $t_rows, db_fetch_array( $result ) );
+		}
+
+		return $t_rows;
 	}
 ?>

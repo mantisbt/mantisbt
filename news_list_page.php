@@ -14,12 +14,10 @@
 <ul>
 <?php
 	# Select the news posts
-	$result = news_get_rows( helper_get_current_project() );
-	$news_count = db_num_rows( $result );
+	$rows = news_get_rows( helper_get_current_project() );
     # Loop through results
-	for ($i=0;$i<$news_count;$i++) {
-		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+	for ( $i=0 ; $i < sizeof( $rows ) ; $i++ ) {
+		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
 
 		$v_headline 	= string_display( $v_headline );
 		$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted );
