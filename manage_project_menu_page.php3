@@ -49,7 +49,7 @@
 <p>
 <div align=center>
 <table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
-<form method=post action="<? echo $g_manage_project_user_add ?>">
+<form method=post action="<? echo $g_manage_project_add ?>">
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table cols=6 width=100% bgcolor=<? echo $g_white_color ?>>
