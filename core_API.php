@@ -96,6 +96,7 @@
 		print_source_link();
 
 		PRINT "<hr size=1>";
+		print_mantis_version();
 		PRINT "<address><font size=-1>Copyright (c) 2000</font></address>";
 		PRINT "<address><font size=-1><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></font></address>";
 	}
@@ -137,6 +138,15 @@
 			PRINT "<div align=center>";
 			PRINT "<a href=\"$g_show_source_page?f_url=$PHP_SELF\">Show Source</a>";
 			PRINT "</div>";
+		}
+	}
+	#--------------------
+	### checks to see whether we need to be displaying the source link
+	function print_mantis_version() {
+		global $g_mantis_version, $g_show_version;
+
+		if ( $g_show_version==1 ) {
+			PRINT "<i>Mantis version $g_mantis_version</i>";
 		}
 	}
 	#--------------------

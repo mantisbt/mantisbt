@@ -57,7 +57,7 @@
 	$g_show_advanced_report      = 1;
 	$g_show_advanced_update      = 1;
 
-	$g_show_version              = 0;
+	$g_show_version              = 1;
 
 	# requires PHP4
 	# 0 = disabled; 1 = admin only; 2 = anyone
