@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.95 2005-04-03 12:43:34 jlatour Exp $
+	# $Id: filter_api.php,v 1.96 2005-04-05 17:10:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1490,8 +1490,11 @@
 				<input type="hidden" name="view_state" value="<?php echo $t_filter['view_state'];?>" />
 			</td>
 			<td class="small-caption" valign="top" id="sticky_issues_filter_target">
-				<?php PRINT ($t_filter['sticky_issues'] ? 'on' : 'off' ) ?>
-				<input type="hidden" name="sticky_issues" value="<?php echo ($t_filter['sticky_issues'] ? 'on' : 'off' );?>" />
+				<?php 
+					$t_sticky_filter_state = gpc_string_to_bool( $t_filter['sticky_issues'] ) ? 'on' : 'off' ;
+					PRINT $t_sticky_filter_state;
+				?>
+				<input type="hidden" name="sticky_issues" value="<?php echo $t_sticky_filter_state;?>" />
 			</td>
 			<td class="small-caption" valign="top" id="highlight_changed_filter_target">
 				<?php PRINT $t_filter['highlight_changed']; ?>
@@ -2459,7 +2462,7 @@
 	function print_filter_sticky_issues(){
 		global $t_filter;
 		?><!-- Show or hide sticky bugs -->
-			<input type="checkbox" name="sticky_issues" <?php check_checked( $t_filter['sticky_issues'], 'on' ); ?> />
+			<input type="checkbox" name="sticky_issues" <?php check_checked( gpc_string_to_bool( $t_filter['sticky_issues'] ), 'on' ); ?> />
 		<?php
 	}
 
