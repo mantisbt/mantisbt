@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.29 2004-12-18 02:02:27 thraxisp Exp $
+	# $Id: gpc_api.php,v 1.30 2005-01-12 01:49:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -69,9 +69,14 @@
 		if ( is_array( $t_result ) ) {
 			error_parameters( $p_var_name );
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
+		} 
+		$t_val = str_replace( " ", "", trim( $t_result ) );
+		if ( ! preg_match( "/^([0-9])*$/", $t_val ) ) {
+			error_parameters( $p_var_name );
+			trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
 		}
 
-		return (int)$t_result;
+		return (int)$t_val;
 	}
 	# ------------------
 	# Retrieve a boolean GPC variable. Uses gpc_get().

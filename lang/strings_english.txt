@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.230 $
+	# $Revision: 1.231 $
 	# $Author: thraxisp $
-	# $Date: 2005-01-05 23:23:20 $
+	# $Date: 2005-01-12 01:49:54 $
 	#
-	# $Id: strings_english.txt,v 1.230 2005-01-05 23:23:20 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.231 2005-01-12 01:49:54 thraxisp Exp $
 	###########################################################################
 
 # Charset
@@ -197,6 +197,7 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received for %s.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';

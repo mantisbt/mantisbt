@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.35 2004-12-16 22:41:27 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.36 2005-01-12 01:49:47 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -174,6 +174,7 @@
 	define( 'ERROR_GPC_VAR_NOT_FOUND',				200 );
 	define( 'ERROR_GPC_ARRAY_EXPECTED',				201 );
 	define( 'ERROR_GPC_ARRAY_UNEXPECTED',			202 );
+	define( 'ERROR_GPC_NOT_NUMBER',			203 );
 
 	# ERROR_LANG_*
 	define( 'ERROR_LANG_STRING_NOT_FOUND',			300 );
