@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.138 2004-10-24 02:39:59 vboctor Exp $
+	# $Id: html_api.php,v 1.139 2004-10-25 01:34:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -572,9 +572,9 @@
 			case $t_permissions_summary_report:
 				$t_permissions_summary_report = '';
 				break;
-			case $t_documentation_page:
-				$t_documentation_page = '';
-				break;
+#			case $t_documentation_page:
+#				$t_documentation_page = '';
+#				break;
 		}
 
 		PRINT '<br /><div align="center">';
