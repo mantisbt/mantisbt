@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.191 2004-08-06 17:17:05 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.192 2004-08-07 16:47:50 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -1274,6 +1274,9 @@
 		'recent_mod'	=> '5',
 		'monitored'	=> '6'
 	);
+	
+	# Toggle whether 'My View' boxes are shown in a fixed position (i.e. adjacent boxes start at the same vertical position)
+	$g_my_view_boxes_fixed_position = ON;
 
 	# Default page after Login or Set Project
 	$g_default_home_page = 'my_view_page.php';
