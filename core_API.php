@@ -932,7 +932,7 @@
 	### if the user is and the account is enabled then let them pass
 	### otherwise redirect them to the login page
 	function login_cookie_check( $p_redirect_url="" ) {
-		global 	$g_string_cookie_val, $g_login_page,
+		global 	$g_string_cookie_val, $g_project_cookie_val, $g_login_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 				$g_mantis_user_table;
 
@@ -943,7 +943,6 @@
 
 			### get user info
 			$t_enabled = get_current_user_field( "enabled" );
-
 			### check for acess enabled
 			if ( $t_enabled!="on" ) {
 				header( "Location: $g_logout_page" );
@@ -951,13 +950,17 @@
 
 			### grab creation date to protect from change
 			$t_date_created = get_current_user_field( "date_created" );
-
 			### update last_visit date
 			$query = "UPDATE $g_mantis_user_table
 					SET last_visit=NOW(), date_created='$t_date_created'
 					WHERE cookie_string='$g_string_cookie_val'";
 			$result = db_query( $query );
 			db_close();
+
+			if ( empty( $g_project_cookie_val ) ) {
+				header( "Location: $p_redirect_url" );
+				exit;
+			}
 
 			### go to redirect
 			if ( !empty( $p_redirect_url ) ) {
