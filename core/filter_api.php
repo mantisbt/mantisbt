@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.46 2004-07-11 05:43:38 narcissus Exp $
+	# $Id: filter_api.php,v 1.47 2004-07-17 12:48:17 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -793,7 +793,9 @@
 									$t_first_flag = true;
 									foreach( $t_filter['handler_id'] as $t_current ) {
 										$t_this_name = '';
-										if ( ( $t_current == 0 ) || ( is_blank( $t_current ) ) ) {
+										if ( 'none' == $t_current ) {
+											$t_this_name = lang_get( 'none' );
+										} else if ( ( $t_current == 0 ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
 										} else if ( META_FILTER_MYSELF == $t_current ) {
 											if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
@@ -1646,7 +1648,7 @@
 									  'show_severity' => 'int',
 									  'show_status' => 'int',
 									  'reporter_id' => 'int',
-									  'handler_id' => 'int',
+									  'handler_id' => 'string',
 									  'show_resolution' => 'int',
 									  'show_build' => 'string',
 									  'show_version' => 'string',
