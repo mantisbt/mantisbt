@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.47 2004-04-14 19:26:45 narcissus Exp $
+	# $Id: helper_api.php,v 1.48 2004-05-17 15:04:25 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -166,9 +166,9 @@
 	# --------------------
 	# Clear all known user preference cookies
 	function helper_clear_pref_cookies() {
-		gpc_clear_cookie( 'project_cookie' );
-		gpc_clear_cookie( 'view_all_cookie' );
-		gpc_clear_cookie( 'manage_cookie' );
+		gpc_clear_cookie( config_get( 'project_cookie' ) );
+		gpc_clear_cookie( config_get( 'view_all_cookie' ) );
+		gpc_clear_cookie( config_get( 'manage_cookie' ) );
 	}
 	# --------------------
 	# Check whether the user has confirmed this action.
