@@ -14,6 +14,8 @@
 	$s_operation_successful = "Operacja zosta³a zakoñczona pomy¶lnie.";
 	$s_date_order = "Sortowanie wg Daty";
 	$s_print_all_bug_page_link = "Drukuj Zg³oszenia";
+	$s_csv_export = "Eksport CSV";
+	$s_login_anonymously = "Logowanie Anonimowe";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_SQL] = "B£¡D: Wykryto b³±d SQL. Proszê o zg³oszenie b³êdu do ";
@@ -23,6 +25,8 @@
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "B£¡D: Podany katalog nie istnieje. Sprawd¼ ustawienia projektu.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "B£¡D: Podana kategoria ju¿ istnieje.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "B£¡D: Podana wersja ju¿ istnieje.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "B£¡D: Plik o podanej nazwie ju¿ istnieje. Usuñ najpierw istniej±cy plik.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "B£¡D: Wymagane pole nie jest wype³nione. Sprawd¼ wprowadzone dane.";
 
 	# General Strings
 	$s_go_back = "Powrót";
