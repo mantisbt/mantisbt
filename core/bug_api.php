@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.45 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: bug_api.php,v 1.46 2004-01-13 12:23:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -290,7 +290,7 @@
 		$t_text_id = db_insert_id();
 
 		# check to see if we want to assign this right off
-		$t_status = NEW_;
+		$t_status = config_get( 'bug_submit_status' );
 
 		# if not assigned, check if it should auto-assigned.
 		if ( 0 == $c_handler_id ) {
@@ -309,7 +309,7 @@
 
 		# Check if bug was pre-assigned or auto-assigned.
 		if ( ( $c_handler_id != 0 ) && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
-			$t_status = ASSIGNED;
+			$t_status = config_get( 'bug_assigned_status' );
 		}
 
 		# Insert the rest of the data
@@ -766,7 +766,7 @@
 
 		if ( ON == config_get( 'auto_set_status_to_assigned' ) &&
 			 NO_USER != $p_user_id ) {
-			$t_ass_val = ASSIGNED;
+			$t_ass_val = config_get( 'bug_assigned_status' );
 		} else {
 			$t_ass_val = $h_status;
 		}
@@ -851,8 +851,8 @@
 	function bug_reopen( $p_bug_id, $p_bugnote_text='' ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
-		bug_set_field( $p_bug_id, 'status', FEEDBACK );
-		bug_set_field( $p_bug_id, 'resolution', REOPENED );
+		bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
+		bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );
 
 		# Add bugnote if supplied
 		if ( '' != $p_bugnote_text ) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.59 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_update.php,v 1.60 2004-01-13 12:23:50 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -59,7 +59,7 @@
 	if ( ( NEW_ == $t_bug_data->status )
 	  && ( 0 != $t_bug_data->handler_id )
 	  && ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
-		$t_bug_data->status = ASSIGNED;
+		$t_bug_data->status = config_get( 'bug_assigned_status' );
 	}
 
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );

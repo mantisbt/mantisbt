@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.131 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.132 2004-01-13 12:23:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -567,14 +567,35 @@
 	$g_use_ldap_email		= OFF; # Should we send to the LDAP email address or what MySql tells us
 
 	############################
-	# Mantis Misc Settings
+	# Status Settings
 	############################
+
+	# Status to assign to the bug when submitted.
+	$g_bug_submit_status = NEW_;
+
+	# Status to assign to the bug when assigned.
+	$g_bug_assigned_status = ASSIGNED;
+
+	# Status to assign to the bug when reopened.
+	$g_bug_reopen_status = FEEDBACK;
+
+	# Resolution to assign to the bug when reopened.
+	$g_bug_reopen_resolution = REOPENED;
 
 	# --- status thresholds (*_status_threshold) ---
 
 	# Bug is resolved, ready to be closed or reopened.  In some custom installations a bug
 	# maybe considered as resolved when it is moved to a custom (FIXED OR TESTED) status.
 	$g_bug_resolved_status_threshold = RESOLVED;
+
+	# Automatically set status to ASSIGNED whenever a bug is assigned to a person.
+	# This is useful for installations where assigned status is to be used when
+	# the bug is in progress, rather than just put in a person's queue.
+	$g_auto_set_status_to_assigned	= ON;
+	
+	############################
+	# Mantis Misc Settings
+	############################
 
 	# --- access level thresholds (*_threshold) ---
 
@@ -725,11 +746,6 @@
 	# Shows the total number/unique number of queries executed to serve the page.
 	$g_show_queries_count	= ON;
 
-	# Automatically set status to ASSIGNED whenever a bug is assigned to a person.
-	# This is useful for installations where assigned status is to be used when
-	# the bug is in progress, rather than just put in a person's queue.
-	$g_auto_set_status_to_assigned	= ON;
-	
 	# The regular expression to use when validating new user login names
 	# The default regular expression allows a-z, A-z, 0-9, as well as space and
 	#  underscore.  If you change this, you may want to update the
