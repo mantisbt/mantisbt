@@ -8,7 +8,7 @@
 	# Changes applied to 0.17 database to give us ____
 
 	# --------------------------------------------------------
-	# $Id: 0_17_inc.php,v 1.8 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: 0_17_inc.php,v 1.9 2004-02-06 14:07:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -179,22 +179,22 @@
 	$upgrades[] = new SQLUpgrade(
 		'0.17-jf-9',
 		'Add primary key on mantis_project_version_table',
-		"ALTER TABLE $t_project_version_table ADD PRIMARY KEY (project_id,version)" );
+		"ALTER IGNORE TABLE $t_project_version_table ADD PRIMARY KEY (project_id,version)" );
 
 	$upgrades[] = new SQLUpgrade(
 		'0.17-jf-10',
 		'Add primary key on mantis_project_user_list_table',
-		"ALTER TABLE $t_project_user_list_table ADD PRIMARY KEY (project_id,user_id)" );
+		"ALTER IGNORE TABLE $t_project_user_list_table ADD PRIMARY KEY (project_id,user_id)" );
 
 	$upgrades[] = new SQLUpgrade(
 		'0.17-jf-11',
 		'Add primary key on mantis_project_category_table',
-		"ALTER TABLE $t_project_category_table ADD PRIMARY KEY (project_id,category)" );
+		"ALTER IGNORE TABLE $t_project_category_table ADD PRIMARY KEY (project_id,category)" );
 
 	$upgrades[] = new SQLUpgrade(
 		'0.17-jf-12',
 		'Add primary key on mantis_bug_monitor_table',
-		"ALTER TABLE $t_bug_monitor_table ADD PRIMARY KEY (user_id,bug_id)" );
+		"ALTER IGNORE TABLE $t_bug_monitor_table ADD PRIMARY KEY (user_id,bug_id)" );
 
 	$upgrades[] = new SQLUpgrade(
 		'0.17-jf-13',
@@ -575,7 +575,7 @@
 		$t_row = db_fetch_array( $result );
 
 		if ( 'UNI' != $t_row['Key'] ) {
-			$query = "ALTER TABLE $t_user_table
+			$query = "ALTER IGNORE TABLE $t_user_table
 						ADD UNIQUE cookie_string (cookie_string)";
 
 			$result = @db_query( $query );
