@@ -9,13 +9,13 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.62 $
+	# $Revision: 1.63 $
 	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:05 $
+	# $Date: 2004-07-19 12:50:14 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.62 2004-07-18 15:22:05 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.63 2004-07-19 12:50:14 vboctor Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.179 -- jferraz 2004/06/29
+	# Up-to-date with strings_english.txt revision 1.187 -- jferraz 2004/07/11
 	###########################################################################
 ?>
 <?php
@@ -61,7 +61,7 @@ $s_old_value = 'Valor Antigo';
 $s_new_value = 'Novo Valor';
 $s_date_modified = 'Data da Mudança';
 $s_bugnote = 'Anotação';
-$s_change = 'AlteraÃ§Ã£o';
+$s_change = 'Alteração';
 $s_bugnote_view_state = 'Visibilidade da Anotação';
 $s_bug_monitor = 'Monitorado por';
 $s_bug_end_monitor = 'Parou de monitorar';
@@ -73,11 +73,11 @@ $s_bug_relationships = 'Relações';
 $s_empty_password_sure_msg = 'Este usuário possui uma senha em branco.  Você tem certeza que é isso que você deseja?';
 $s_empty_password_button = 'Usar Senha em Branco';
 
-$s_duplicate_of = 'duplicado de %id';
-$s_has_duplicate = 'possui duplicado %id';
-$s_related_to = 'relacionado a %id';
-$s_dependant_on = 'depende de %id';
-$s_blocks = 'bloqueia %id';
+$s_duplicate_of = 'duplicado de';
+$s_has_duplicate = 'possui duplicado';
+$s_related_to = 'relacionado a';
+$s_dependant_on = 'pai de';
+$s_blocks = 'filho de';
 
 $s_new_bug = 'Novo Caso';
 $s_bugnote_added = 'Anotação Adicionada';
@@ -163,7 +163,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'O tipo de arquivo não é permitido';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'O diretório não existe. Por favor, verifique as configurações do projeto.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Este é um arquivo duplicado.  Por favor, apague o arquivo antes.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Um projeto com este nome já existe.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessÃ¡rio \'%s\' estava vazio.  Por favor, verifique novamente suas entradas.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Um campo necessário \'%s\' estava vazio.  Por favor, verifique novamente suas entradas.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida.  Você não tem permissão para acessá-la até que a proteção da conta seja retirada.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'O carregamento do arquivo falhou.  Os carregamentos de arquivos do PHP podem estar desabilitados.  Por favor, peça ao seu administrador executar o script admin_check para depurar este problema.';
@@ -183,8 +183,8 @@ $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'A informação de login armazenada pel
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'As preferências deste usuário não foram encontradas.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'Notícia não encontrada.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'A senha não combina com a verificação.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um <q>array</q> era esperado, mas um <q>string</q> foi recebido.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um <q>string</q> era esperado, mas um <q>array</q> foi recebido.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'Um \'array\' era esperado, mas um \'string\' foi recebido.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Um \'string\' era esperado, mas um \'array\' foi recebido.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Caso %d não encontrado.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'E-mail inválido.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil não encontrado.';
@@ -201,9 +201,9 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'Autenticação LDAP Authentication Falho
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Conexão ao Servidor LDAP Falhou';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'Atualização de Registro LDAP falhou.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Registro de Usuário LDAP Não Encontrado.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Conexão ao banco-de-dados falhou. Erro recebido do banco-de-dados foi #%d: <q>%s</q>';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Consulta ao banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%d: <q>%s</q> para a consulta: <q>%s</q>';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Seleção de banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%d: <q>%s</q>';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Conexão ao banco-de-dados falhou. Erro recebido do banco-de-dados foi #%d: "%s"';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Consulta ao banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%d: "%s" para a consulta: "%s"';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Seleção de banco-de-dados falhou.  Erro recebido do banco-de-dados foi #%d: "%s"';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Uma categoria com este nome já existe.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Não foi especificada uma ação de cópia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
@@ -219,10 +219,10 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Acesso Negado:
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'A opção de configuração \'%s\' tem um valor inválido \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'A ação não pode ser realizada porque o caso \'%d\' é somente-leitura';
 # MASC RELATIONSHIP
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERRO: Já existe uma relação entre estes dois casos.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERRO: Relação não encontrada.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Acesso negado: O caso %d requer um nível de acesso maior.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERRO: um caso não pode se relacionar com si próprio.";
 # MASC RELATIONSHIP
 
 $s_login_error = 'ERRO: Sua conta pode estar desativada ou o nome de usuário e a senha que você entrou não estão corretos.';
@@ -278,17 +278,17 @@ $s_email_notification_title_for_action_bug_submitted = 'O seguinte caso foi ENVI
 $s_email_notification_title_for_action_bug_assigned = 'O seguinte caso foi ATRIBUÍDO.';
 $s_email_notification_title_for_action_bug_reopened = 'O seguinte caso foi REABERTO.';
 $s_email_notification_title_for_action_bug_deleted = 'O seguinte caso foi APAGADO.';
-$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
+$s_email_notification_title_for_action_bug_updated = 'O seguinte caso foi ATUALIZADO.';
 $s_email_notification_title_for_action_sponsorship_added = 'O seguinte caso foi PATROCINADO.';
 $s_email_notification_title_for_action_sponsorship_updated = 'O patrocínio do seguinte caso foi modificado.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'O patrocínio do seguinte caso foi retirado.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Uma ANOTAÇÃO foi adicionada a este caso.';
 # MASC RELATIONSHIP
-$s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
-$s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
-$s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
+$s_email_notification_title_for_action_relationship_added = "Uma nova RELAÇÃO foi adicionada ao seguinte caso.";
+$s_email_notification_title_for_action_relationship_deleted = "Uma RELAÇÃO foi apagada do seguinte caso.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Um caso RELACIONADO foi RESOLVIDO.";
+$s_email_notification_title_for_action_relationship_child_closed = "Um caso RELACIONADO foi FECHADO.";
 # MASC RELATIONSHIP
 
 $s_email_reporter = 'Relatado por';
@@ -336,7 +336,7 @@ $s_advanced_view = 'Visualização Avançada';
 $s_advanced_update = 'Atualização Avançada';
 $s_refresh_delay = 'Tempo de Renovação';
 $s_redirect_delay = 'Tempo de Redirecionamento';
-$s_with_minimum_severity = 'Com a gravidade mÃ­nima';
+$s_with_minimum_severity = 'Com a gravidade mínima';
 $s_email_on_new = 'Enviar e-mail para Novos Casos';
 $s_email_on_assigned = 'Enviar e-mail para Casos Atribuídos';
 $s_email_on_feedback = 'Enviar e-mail para Retornos';
@@ -475,7 +475,7 @@ $s_votes = 'Votos';
 $s_summary = 'Resumo';
 $s_description = 'Descrição';
 $s_steps_to_reproduce = 'Passos para Reproduzir';
-$s_additional = 'InformaÃ§Ãµes';		# @@@ check bug 3938 @@@
+$s_additional = 'Informações';		# @@@ check bug 3938 @@@
 $s_information = 'Adicionais';		# @@@ check bug 3938 @@@
 $s_update_information_button = 'Atualizar Informação';
 
@@ -637,7 +637,7 @@ $s_delete_version_button = 'Apagar Versão';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Alterar Versão do Projeto';
 $s_update_version_button = 'Atualizar Versão';
-$s_released = 'Released';
+$s_released = 'Liberada';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'A versão foi atualizada com sucesso...';
@@ -683,15 +683,15 @@ $s_manage_link = 'Gerenciar';
 $s_edit_news_link = 'Alterar Notícias';
 $s_docs_link = 'Docs';
 $s_logout_link = 'Sair';
-$s_my_view_link = 'Minha visÃ£o';
+$s_my_view_link = 'Minha visão';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'NÃ£o atribuÃ­dos';
+$s_my_view_title_unassigned = 'Não atribuídos';
 $s_my_view_title_recent_mod = 'Modificados Recentemente';
 $s_my_view_title_reported = 'Relatados por Mim';
-$s_my_view_title_assigned = 'AtribuÃ­dos a Mim (nÃ£o resolvidos)';
+$s_my_view_title_assigned = 'Atribuídos a Mim (não resolvidos)';
 $s_my_view_title_resolved = 'Resolvidos';
 $s_my_view_title_monitored = 'Monitorado por Mim';
 
@@ -714,11 +714,11 @@ $s_update_news_button = 'Atualizar Notícia';
 # news_menu_page.php
 $s_add_news_title = 'Adicionar Notícia';
 $s_post_to = 'Anunciar em';
-$s_post_news_button = 'Publicar NotÃ­cia';
+$s_post_news_button = 'Publicar Notícia';
 $s_edit_or_delete_news_title = 'Alterar ou Apagar Notícia';
-$s_edit_post = 'Alterar NotÃ­cia';
-$s_delete_post = 'Apagar NotÃ­cia';
-$s_select_post = 'Selecionar NotÃ­cia';
+$s_edit_post = 'Alterar Notícia';
+$s_delete_post = 'Apagar Notícia';
+$s_select_post = 'Selecionar Notícia';
 
 # news_update.php
 $s_news_updated_msg = 'Notícia atualizada...';
@@ -876,7 +876,7 @@ $s_use_date_filters = 'Usar Filtros de Data';
 $s_yes = 'Sim';
 $s_no = 'Não';
 $s_open_filters = 'Alterar Filtro';
-$s_or_unassigned = 'ou nÃ£o atribuÃ­do';
+$s_or_unassigned = 'ou não atribuído';
 $s_ok = 'OK';
 
 # stored query strings
@@ -943,12 +943,12 @@ $s_custom_field_access_level_r = 'Acesso de Leitura';
 $s_custom_field_access_level_rw = 'Acesso de Escrita';
 $s_custom_field_length_min = 'Tamanho Mínimo';
 $s_custom_field_length_max = 'Tamanho Máximo';
-$s_custom_field_advanced = 'Mostrar somente na pÃ¡gina avanÃ§ada';
+$s_custom_field_advanced = 'Mostrar somente na página avançada';
 $s_custom_field_display_resolve = 'Mostrar ao resolver casos';
 $s_custom_field_display_close = 'Mostrar ao fechar casos';
 $s_custom_field_require_report = 'Requerido no relato';
-$s_custom_field_require_update = 'Requerido na atualizaÃ§Ã£o';
-$s_custom_field_require_resolve = 'Requerido na resoluÃ§Ã£o';
+$s_custom_field_require_update = 'Requerido na atualização';
+$s_custom_field_require_resolve = 'Requerido na resolução';
 $s_custom_field_require_close = 'Requerido no fechamento';
 
 $s_custom_field_sequence = 'Seqüência';
@@ -966,7 +966,7 @@ $s_hide_resolved = "Ocultar Resolvidos";
 $s_and_above = 'e acima';
 $s_advanced_filters = 'Filtros Avançados';
 $s_simple_filters = 'Filtros Simples';
-$s_monitored_by = 'Monitored By';
+$s_monitored_by = 'Monitorado Por';
 
 $s_attachments = "anexo(s)";
 $s_attachment_alt = "A";
@@ -993,18 +993,18 @@ $s_changelog = 'Registro de Mudanças';
 $s_http_auth_realm = "Login do Mantis";
 
 # MASC RELATIONSHIP
-$s_bug = "issue";
-$s_add_new_relationship = "New relationship";
-$s_add_new_relationship_button = "Add";
-$s_this_bug = "Current issue";
-$s_relationship_added = "Relationship added";
-$s_relationship_deleted = "Relationship deleted";
-$s_delete_relationship_button = "Delete";
-$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Child";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Issue generated from";
+$s_bug = "caso";
+$s_add_new_relationship = "Nova relação";
+$s_add_new_relationship_button = "Adicionar";
+$s_this_bug = "Caso atual";
+$s_relationship_added = "Relação adicionada";
+$s_relationship_deleted = "Relação apagada";
+$s_delete_relationship_button = "Apagar";
+$s_delete_relationship_sure_msg = "Você tem certeza que deseja apagar esta relação?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Nem todos os casos filhos já foram resolvidos ou fechados.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENÇÃO</b>. Nem todos os casos filhos já foram resolvidos ou fechados.<br>Antes de <b>resolver/fechar</b> um caso pai, todos os casos relacionados como filhos deste devem ser resolvidos ou fechados.";
+$s_create_child_bug_button = "Criar filho";
+$s_bug_cloned_to = "Caso clonado";
+$s_bug_created_from = "Caso gerado à partir de";
 # MASC RELATIONSHIP
 ?>
