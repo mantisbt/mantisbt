@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.6 2002-12-04 10:30:34 jfitzell Exp $
+	# $Id: ldap_api.php,v 1.7 2002-12-04 19:42:24 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -24,10 +24,10 @@
 			# If no Bind DN and Password is set, attempt to login as the configured
 			#  Bind DN.
 			if ( is_blank( $p_binddn ) && is_blank( $p_password ) ) {
-				$p_binddn	= config_get( 'ldap_bind_passwd', '' );
-				$p_password	= config_get( 'ldap_bind_dn', '' );
+				$p_binddn	= config_get( 'ldap_bind_dn', '' );
+				$p_password	= config_get( 'ldap_bind_passwd', '' );
 			}
-
+			
 			if ( ! is_blank( $p_binddn ) && ! is_blank( $p_password ) ) {
 				$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
 			} else {
