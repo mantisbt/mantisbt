@@ -20,6 +20,11 @@
 	# Add item
 	gpc_set_cookie( $g_project_cookie, $f_project_id, true );
 
+	#@@@ we really need to make this more general... it is never intuitive
+	#  to redirect to the main page as far as I can see. Is there a reason
+	#  we can't just redirect back to the referrer in all cases?  See
+	#  issue #2686 about this... -jf
+
 	# redirect to 'same page' when switching projects.
 	# view_all_* pages, and summary
 	# for proxies that clear out HTTP_REFERER
@@ -33,6 +38,8 @@
 		$t_redirect_url =  'summary_page.php';
 	} else if ( eregi( 'proj_user_menu_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url = 'proj_user_menu_page.php';
+	} else if ( eregi( 'manage_page.php', $_SERVER['HTTP_REFERER'] ) ){
+		$t_redirect_url = 'manage_page.php';
 	} else {
 		$t_redirect_url = 'main_page.php';
 	}
