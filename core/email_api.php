@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.33 2002-12-30 07:04:53 jfitzell Exp $
+	# $Id: email_api.php,v 1.34 2002-12-30 08:11:31 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -140,7 +140,7 @@
 
 		# Check if we want to broadcast to all developers on a NEW bug
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-		$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
+		$t_project_view_state = project_get_field( $t_project_id, 'view_state' );
 
 		#@@@@@@@
 		$temp_arr = array();
