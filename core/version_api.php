@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.17 2004-07-11 07:09:52 vboctor Exp $
+	# $Id: version_api.php,v 1.18 2004-07-21 22:05:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -137,7 +137,7 @@
 
 		# check for duplicates
 		if ( ( strtolower( $t_old_version_name ) != strtolower( $p_version_info->version ) ) &&
-			 !version_is_unique( $p_version_info->version, $p_project_id ) ) {
+			 !version_is_unique( $p_version_info->version, $p_version_info->project_id ) ) {
 			trigger_error( ERROR_VERSION_DUPLICATE, ERROR );
 		}
 
@@ -147,6 +147,7 @@
 		$c_description  = db_prepare_string( $p_version_info->description );
 		$c_released     = db_prepare_int( $p_version_info->released );
 		$c_date_order   = db_prepare_string( $p_version_info->date_order );
+		$c_project_id	= db_prepare_int( $p_version_info->project_id );
 
 		$t_project_version_table	= config_get( 'mantis_project_version_table' );
 		$t_bug_table				= config_get( 'mantis_bug_table' );
