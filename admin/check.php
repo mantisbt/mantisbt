@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.19 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: check.php,v 1.20 2005-02-13 21:58:08 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -154,7 +154,7 @@
 		Opening connection to database on host [<?php echo config_get( 'hostname' ) ?>] with username [<?php echo config_get( 'db_username' ) ?>]
 	</td>
 	<?php
-		$result = @db_connect( config_get( 'hostname' ), config_get( 'db_username' ), config_get( 'db_password' ) );
+		$result = @db_connect( config_get( 'hostname' ), config_get( 'db_username' ), config_get( 'db_password' ), config_get( 'database_name' ) );
 		if ( false == $result ) {
 			print_test_result( BAD );
 		} else {

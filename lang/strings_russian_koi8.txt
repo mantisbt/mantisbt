@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.63 $
+	# $Revision: 1.64 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:36:43 $
+	# $Date: 2005-02-13 21:58:09 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.63 2005-02-13 21:36:43 jlatour Exp $
+	# $Id: strings_russian_koi8.txt,v 1.64 2005-02-13 21:58:09 jlatour Exp $
 	###########################################################################
 ?>
 <?php

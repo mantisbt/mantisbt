@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.40 2005-01-29 18:32:51 prichards Exp $
+	# $Id: database_api.php,v 1.41 2005-02-13 21:58:08 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -379,9 +379,9 @@
 
 
 	# --------------------
-	if ( !isset( $g_skip_open_db ) ) {
-		$g_db = $db = ADONewConnection($g_db_type);
+	$g_db = $db = ADONewConnection($g_db_type);
 
+	if ( !isset( $g_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 		} else {

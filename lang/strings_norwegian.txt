@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.84 $
+	# $Revision: 1.85 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:36:42 $
+	# $Date: 2005-02-13 21:58:09 $
 	#
-	# $Id: strings_norwegian.txt,v 1.84 2005-02-13 21:36:42 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.85 2005-02-13 21:58:09 jlatour Exp $
 	###########################################################################
 ?>
 <?php

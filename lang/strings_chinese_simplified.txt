@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:36:39 $
+	# $Date: 2005-02-13 21:58:08 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.59 2005-02-13 21:36:39 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.60 2005-02-13 21:58:08 jlatour Exp $
 	###########################################################################
 
 	###########################################################################

@@ -10,11 +10,11 @@
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.80 $
+	# $Revision: 1.81 $
 	# $Author: jlatour $
-	# $Date: 2005-02-13 21:36:40 $
+	# $Date: 2005-02-13 21:58:09 $
 	#
-	# $Id: strings_dutch.txt,v 1.80 2005-02-13 21:36:40 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.81 2005-02-13 21:58:09 jlatour Exp $
 	###########################################################################
 
 ?>
