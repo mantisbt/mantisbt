@@ -19,6 +19,7 @@ Mantis
  * Fixed user creation to detect empty usernames.
  * Fixed bug file upload error.  Error message was misreported.
  * Fixed project doc upload error.  Error message was misreported.
+ * Fixed problem with bottom page menu not displaying when turned on.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.

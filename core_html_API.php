@@ -31,6 +31,7 @@
 		print_body_top();
 		print_header( $g_page_title );
 		print_top_page( $g_top_include_page );
+		print_login_info();
 		print_menu();
 	}
 	# --------------------
@@ -162,10 +163,11 @@
 		global 	$g_string_cookie_val, $g_webmaster_email,
 				$g_menu_include_file, $g_show_footer_menu,
 				$g_mantis_version, $g_show_version;
-
+		# @@@
 		if (isset($g_string_cookie_val)&&!empty($g_string_cookie_val)) {
 			if ( $g_show_footer_menu ) {
-				print_bottom_menu( $g_menu_include_file );
+				PRINT "<p>";
+				print_menu();
 			}
 		}
 
@@ -285,8 +287,6 @@
 				$s_logout_link;
 
 		if ( isset( $g_string_cookie_val ) ) {
-			print_login_info();
-
 		    $t_protected = get_current_user_field( "protected" );
 			PRINT "<table class=\"width100\" cellspacing=\"0\">";
 			PRINT "<tr>";
@@ -340,19 +340,6 @@
 			PRINT "</tr>";
 			PRINT "</table>";
 		}
-	}
-	# --------------------
-	# this is the same as print_menu except without the login info
-	# this is set by setting $g_show_footer_menu to 1
-	function print_bottom_menu( $p_menu_file="" ) {
-		PRINT "<p>";
-		PRINT "<table class=\"menu\" cellspacing=\"0\">";
-		PRINT "<tr>";
-			PRINT "<td class=\"menu\">";
-				include( $p_menu_file );
-			PRINT "</td>";
-		PRINT "</tr>";
-		PRINT "</table>";
 	}
 	# --------------------
 	# prints the manage menu
