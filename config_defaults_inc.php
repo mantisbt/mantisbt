@@ -53,7 +53,7 @@
 
 	# absolute path to your installation.  *NO* symlinks allowed (causes problems with file downloads)
 	# requires trailing /
-	$g_absolute_path = dirname( dirname( __FILE__ ) ) . '/';
+	$g_absolute_path = dirname( __FILE__ ) . '/';
 
 	#############################
 	# Web Server
