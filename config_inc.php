@@ -646,6 +646,16 @@
 	#----------------------------------
 	# summary
 	$g_summary_page                   = $g_path."summary_page".$g_php;
+        $g_summary_jpgraph_function                    = $g_absolute_path."summary_graph_functions".$g_php;
+        $g_summary_jpgraph_page                        = $g_path."summary_jpgraph_page".$g_php;
+        $g_summary_jpgraph_cumulative_bydate           = "summary_graph_cumulative_bydate".$g_php;
+        $g_summary_jpgraph_bydeveloper            = "summary_graph_bydeveloper".$g_php;
+        $g_summary_jpgraph_byreporter               = "summary_graph_byreporter".$g_php;
+        $g_summary_jpgraph_byseverity                = "summary_graph_byseverity".$g_php;
+        $g_summary_jpgraph_bystatus                   = "summary_graph_bystatus".$g_php;
+        $g_summary_jpgraph_byresolution             = "summary_graph_byresolution".$g_php;
+        $g_summary_jpgraph_bycategory               = "summary_graph_bycategory".$g_php;
+        $g_summary_jpgraph_bypriority                  = "summary_graph_bypriority".$g_php;
 	#----------------------------------
 
 	#----------------------------------
