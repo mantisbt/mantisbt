@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -36,7 +36,6 @@
 		$f_description = string_safe( $f_description );
 		$f_additional_info = string_safe( $f_additional_info );
 		$f_steps_to_reproduce = string_safe( $f_steps_to_reproduce );
-		$f_version = string_safe( $f_version );
 		$f_build = string_safe( $f_build );
 
 		$f_platform = string_safe( $f_platform );
@@ -88,12 +87,12 @@
 		### Insert the rest of the data
 		$query = "INSERT
 				INTO $g_mantis_bug_table
-				( id, reporter_id, handler_id, duplicate_id, priority, severity,
+				( id, project_id, reporter_id, handler_id, duplicate_id, priority, severity,
 				reproducibility, status, resolution, projection, category,
 				date_submitted, last_updated, eta, bug_text_id, os, os_build,
 				platform, version, build, votes, profile_id, summary )
 				VALUES
-				( null, '$u_id', '0000000', '0000000', 'normal', '$f_severity',
+				( null, '$g_project_cookie_val', '$u_id', '0000000', '0000000', 'normal', '$f_severity',
 				'$f_reproducibility', '$t_status', 'open', 'minor fix', '$f_category',
 				NOW(), NOW(), NOW(), '$t_id', '$f_os', '$f_osbuild',
 				'$f_platform', '$f_version', '$f_build',

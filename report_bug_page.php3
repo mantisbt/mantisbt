@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -52,8 +52,8 @@
 		</td>
 		<td>
 			<select name=f_category>
-				<option value="" selected>Select Category
-				<? print_field_option_list( "category" ) ?>
+				<option value="" selected><? echo $s_select_category ?>
+				<? print_category_option_list() ?>
 			</select>
 		</td>
 	</tr>
@@ -64,7 +64,7 @@
 		</td>
 		<td>
 			<select name=f_reproducibility>
-				<option value="" SELECTED>Select Reproducibility
+				<option value="" SELECTED><? echo $s_select_reproducibility ?>
 				<? print_field_option_list( "reproducibility" ) ?>
 			</select>
 		</td>
@@ -76,7 +76,7 @@
 		</td>
 		<td>
 			<select name=f_severity>
-				<option value="" selected>Select Severity
+				<option value="" selected><? echo $s_select_severity ?>
 				<? print_field_option_list( "severity" ) ?>
 			</select>
 		</td>
