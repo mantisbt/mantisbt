@@ -830,7 +830,8 @@
 	function access_level_check_greater_or_equal( $p_access_level ) {
 		global $g_string_cookie_val, $g_mantis_user_table;
 
-		if ( !isset($g_string_cookie_val) ) {
+		if (( !isset( $g_string_cookie_val ) )||
+			( empty( $g_string_cookie_val ) )) {
 			return false;
 		}
 

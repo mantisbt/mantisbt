@@ -25,6 +25,7 @@
 	### NOTE: this is guarranteed to be the correct one.
 	### The value LAST_INSERT_ID is stored on a per connection basis.
 
+	### Use this for MS SQL: SELECT @@IDENTITY AS 'id'
 	$query = "select LAST_INSERT_ID()";
 	$result = db_query( $query );
 	if ( $result ) {

@@ -43,6 +43,7 @@ To Do:
  * Removed $g_required_field_color and replaced it with a span element in
    css_inc.php
  * Removed all FONT tags and replaced them with SPAN and CSS formatting
+ * Removed print_footer() call on logout_page.php3
 
 12.20.2000	-	0.12.0
 

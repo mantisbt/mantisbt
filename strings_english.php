@@ -66,7 +66,7 @@
 	$s_add_profile_msg = "Add Profile";
 	### $s_platform # defined above
 	### $s_operating_system # defined above
-	### $s_verion # defined above
+	### $s_version # defined above
 	### $s_additional_description # defined above
 	$s_add_profile_button = "Add Profile";
 	$s_edit_or_delete_profiles_title = "Edit or Delete Profiles";
@@ -98,7 +98,7 @@
 	### bug_resolve_page.php3
 	$s_resolve_bug_title = "Resolve Bug";
 	### $s_resolution # defined above
-	### $s_deuplicate_id # defined above
+	### $s_duplicate_id # defined above
 	$s_resolve_bug_button = "Resolve Bug";
 
 	### bug_resolve_page2.php3
@@ -195,7 +195,7 @@
 	### login.php3
 
 	### login_error_page.php3
-	$s_login_error_msg = "There was an error: your acount may be disabled or the username/password you entered is incorrect.";
+	$s_login_error_msg = "There was an error: your account may be disabled or the username/password you entered is incorrect.";
 	$s_login_title = "Login";
 	### $s_username # defined above
 	### $s_password # defined above
