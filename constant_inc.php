@@ -94,7 +94,11 @@
 	define( "EMAIL_PAD_LENGTH", 28 );
 
 	# show variable values
-	define( "BOTH",            0 );
+	define( "BOTH",             0 );
 	define( "SIMPLE_ONLY",      1 );
 	define( "ADVANCED_ONLY",    2 );
+
+	# show variable values
+	define( "BY_LIMIT",     0 );
+	define( "BY_DATE",      1 );
 ?>

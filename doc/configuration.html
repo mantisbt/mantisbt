@@ -63,7 +63,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="database">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Database</b>
 	</td>
 </tr>
@@ -108,7 +108,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		The database settings must be set in order for the package to work properly.  Make sure you verify the settings each time to upgrade.
 	</td>
 </tr>
@@ -120,7 +120,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="path">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Path</b>
 	</td>
 </tr>
@@ -153,7 +153,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		These path settings are important for proper linking within your database.<br>
 		The examples are unix style but you can use windows style paths as well (eg. "\\apache\\htdocs\\mantis\\" ).
 	</td>
@@ -166,7 +166,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="web_server">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Web Server</b>
 	</td>
 </tr>
@@ -175,11 +175,11 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_use_iis
 	</td>
 	<td bgcolor="#ffffff">
-		You need to set this to 1 if you use Miscrosoft's IIS.  This helps correct a bug in IIS.
+		You need to set this to 1 if you use Microsoft's IIS.  This helps correct a bug in IIS.
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		Any web server specific bugs and workarounds can be controled from here.
 	</td>
 </tr>
@@ -191,7 +191,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="version">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Version</b>
 	</td>
 </tr>
@@ -219,7 +219,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="email">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Email</b>
 	</td>
 </tr>
@@ -287,22 +287,6 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 	<td bgcolor="#ffffff">
 		Toggle to notify Developers, Managers, and Administrator when a new bug comes in.  Users need to turn on their preference (Email on New) as well.
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ddddff">
-		$g_email_new_address
-	</td>
-	<td bgcolor="#ffffff">
-		NOT ENABLED
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ddddff">
-		$g_email_update_address
-	</td>
-	<td bgcolor="#ffffff">
-		NOT ENABLED
 	</td>
 </tr>
 <tr>
@@ -389,7 +373,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		The email system allows the package to notify users when significant events occur.  You should have a working Mail Transport Agent (MTA) on your system.  On unix systems this is usually sendmail and usually nothing needs to be done.  For problems regarding mail then visit the support forums or read up on the user notes in the mail() function at: <a href="http://www.php.net/manual/en/function.mail.php">http://www.php.net/manual/en/function.mail.php</a>
 		<p>
 		Users can also signup for their own accounts.  Emails must be valid!
@@ -405,7 +389,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="language">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Language</b>
 	</td>
 </tr>
@@ -426,7 +410,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		Each installation has a default language.  This will be used when signing up and is what each new account will be set to.  Users can change their account preferences to use a language that they are more comfortable with.
 		<p>
 		NOTE: There is one current flaw in the system.  If one user is using German and you are using English and that user generates an email event then you will received the email in German.  This should only be a minor inconvenience and may be corrected in the future.
@@ -440,7 +424,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="display">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Display</b>
 	</td>
 </tr>
@@ -525,7 +509,16 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td bgcolor="#ddddff">
+		$g_show_priority_text
+	</td>
+	<td bgcolor="#ffffff">
+		OFF: Shows priority as icon in view all bugs page<br>
+		ON:  Shows priority as text in view all bugs page
+	</td>
+</tr>
+<tr>
+	<td colspan="2" bgcolor="#eeeeee">
 		Users can set their own default preferences for the show report/update/view preferences but these settings should override those preferences.  These settings affect all projects.
 	</td>
 </tr>
@@ -537,7 +530,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="time">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Time</b>
 	</td>
 </tr>
@@ -573,7 +566,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="jpgraph">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>JpGraph</b>
 	</td>
 </tr>
@@ -594,7 +587,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		To use the Jpgraph addon you need the <a href="http://www.aditus.nu/jpgraph/index.php">JpGraph package</a>.
 		You can place the package whereever you want, but you have to set the var in jpgraph.php
 		<p>
@@ -609,7 +602,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="date">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Date</b>
 	</td>
 </tr>
@@ -638,7 +631,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		These variables control how the date is displayed (default is 'US' formatting).  Go to <a href="http://www.php.net/manual/en/function.date.php">http://www.php.net/manual/en/function.date.php</a> for detailed instructions on alternative date formatting.
 	</td>
 </tr>
@@ -650,7 +643,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="news">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>News</b>
 	</td>
 </tr>
@@ -687,7 +680,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="default">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Default Preferences</b>
 	</td>
 </tr>
@@ -836,7 +829,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		These are the settings that each new account is initialized with.
 		<p>
 		Default language is set to default site language ($g_default_language).
@@ -850,7 +843,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="summary">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Summary</b>
 	</td>
 </tr>
@@ -886,7 +879,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="bugnote">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Bugnote</b>
 	</td>
 </tr>
@@ -906,7 +899,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="file_upload">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>File Upload</b>
 	</td>
 </tr>
@@ -920,12 +913,11 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 </tr>
 <tr>
 	<td bgcolor="#ddddff">
-		$g_store_file_to
+		$g_file_upload_method
 	</td>
 	<td bgcolor="#ffffff">
-		<li>0 = no upload
-		<li>1 = "disk"
-		<li>2 = "database" (currently only disk is supported)
+		<li>DISK
+		<li>DATABASE
 	</td>
 </tr>
 <tr>
@@ -937,7 +929,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		This link may provide more information: <a href="http://www.php.net/manual/en/features.file-upload.php">http://www.php.net/manual/en/features.file-upload.php</a> if you run into problems.
 	</td>
 </tr>
@@ -949,7 +941,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="html">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>HTML</b>
 	</td>
 </tr>
@@ -997,7 +989,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		The HTML code is allowed to enter the database as is.  The $g_allow_href_tags does not have to be enabled to make URL links.  The pacakge will automatically hyperlink properly formatted URLs (eg. http://blah.balh/ or mailto://me@more.com/)
 	</td>
 </tr>
@@ -1009,7 +1001,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="hr">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>HR</b>
 	</td>
 </tr>
@@ -1037,7 +1029,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="ldap">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>LDAP</b>
 	</td>
 </tr>
@@ -1074,7 +1066,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		LDAP authentication method.
 	</td>
 </tr>
@@ -1086,7 +1078,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="misc">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Misc</b>
 	</td>
 </tr>
@@ -1127,9 +1119,16 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		Limit reporters to only viewing bugs that they report.
 	</td>
 </tr>
-
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td width="20%" bgcolor="#ddddff">
+		$g_allow_close_immediately
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Allow developers and above to close bugs immediately when resolving bugs.
+	</td>
+</tr>
+<tr>
+	<td colspan="2" bgcolor="#eeeeee">
 		Access level needed to re-open bugs.  Look in the constant_inc.php file if you want to set a different value.
 	</td>
 </tr>
@@ -1141,40 +1140,32 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="colors">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Colors</b>
 	</td>
 </tr>
 <tr>
 	<td width="20%" bgcolor="#ddddff">
-		$g_white_color
+		$g_background_color
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		White.
+		&nbsp;
 	</td>
 </tr>
 <tr>
 	<td bgcolor="#ddddff">
-		$g_primary_color_dark
+		$g_required_color
 	</td>
 	<td bgcolor="#ffffff">
-		Dark Table Color
+		&nbsp;
 	</td>
 </tr>
 <tr>
 	<td bgcolor="#ddddff">
-		$g_primary_color_light
+		$g_table_border_color
 	</td>
 	<td bgcolor="#ffffff">
-		Light Table Color
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ddddff">
-		$g_primary_border_color
-	</td>
-	<td bgcolor="#ffffff">
-		Table Border Color
+		&nbsp;
 	</td>
 </tr>
 <tr>
@@ -1182,23 +1173,55 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_category_title_color
 	</td>
 	<td bgcolor="#ffffff">
-		Category Color
+		&nbsp;
 	</td>
 </tr>
 <tr>
 	<td bgcolor="#ddddff">
-		$g_category_title_color2
+		$g_category_title_color
 	</td>
 	<td bgcolor="#ffffff">
-		Category Color 2
+		&nbsp;
 	</td>
 </tr>
 <tr>
 	<td bgcolor="#ddddff">
-		$g_table_title_color
+		$g_primary_color1
 	</td>
 	<td bgcolor="#ffffff">
-		Table Title Color
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_primary_color2
+	</td>
+	<td bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_form_title_color
+	</td>
+	<td bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_spacer_color
+	</td>
+	<td bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_menu_color
+	</td>
+	<td bgcolor="#ffffff">
+		&nbsp;
 	</td>
 </tr>
 <tr>
@@ -1206,7 +1229,15 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_new_color
 	</td>
 	<td bgcolor="#ffffff">
-		New Bug Color (default red).
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_acknowledged_color
+	</td>
+	<td bgcolor="#ffffff">
+		&nbsp;
 	</td>
 </tr>
 <tr>
@@ -1214,7 +1245,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_feedback_color
 	</td>
 	<td bgcolor="#ffffff">
-		Feedback Bug Color (default purple/magenta).
+		&nbsp;
 	</td>
 </tr>
 <tr>
@@ -1222,7 +1253,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_confirmed_color
 	</td>
 	<td bgcolor="#ffffff">
-		Confirmed Bug Color (default blue).
+		&nbsp;
 	</td>
 </tr>
 <tr>
@@ -1230,7 +1261,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_assigned_color
 	</td>
 	<td bgcolor="#ffffff">
-		Assigned Bug Color (default blue).
+		&nbsp;
 	</td>
 </tr>
 <tr>
@@ -1238,7 +1269,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_resolved_color
 	</td>
 	<td bgcolor="#ffffff">
-		Resolved Bug Color (default bluish-green).
+		&nbsp;
 	</td>
 </tr>
 <tr>
@@ -1246,11 +1277,11 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_closed_color
 	</td>
 	<td bgcolor="#ffffff">
-		Closed Bug Color (default gray).
+		&nbsp;
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		You can change the look and feel by modifying these values.
 	</td>
 </tr>
@@ -1262,7 +1293,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="cookies">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Cookies</b>
 	</td>
 </tr>
@@ -1300,26 +1331,10 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 </tr>
 <tr>
 	<td bgcolor="#ddddff">
-		$g_view_reported_cookie
+		$g_manage_cookie
 	</td>
 	<td bgcolor="#ffffff">
-		The name for the view all reported bugs settings cookie.
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ddddff">
-		$g_view_assigned_cookie
-	</td>
-	<td bgcolor="#ffffff">
-		The name for the view all assigned bugs settings cookie.
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ddddff">
-		$g_view_unassigned_cookie
-	</td>
-	<td bgcolor="#ffffff">
-		The name for the view all unassigned bugs settings cookie.
+		The name for the manage settings cookie.
 	</td>
 </tr>
 <tr>
@@ -1327,7 +1342,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_string_cookie_val
 	</td>
 	<td bgcolor="#ffffff">
-		The users cookie_string value.
+		The user's cookie_string value.  This is a unique identifier for the user.
 	</td>
 </tr>
 <tr>
@@ -1335,7 +1350,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_project_cookie_val
 	</td>
 	<td bgcolor="#ffffff">
-		The users currently active Project ID.
+		The user's currently active Project ID.
 	</td>
 </tr>
 <tr>
@@ -1343,35 +1358,19 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_view_all_cookie_val
 	</td>
 	<td bgcolor="#ffffff">
-		The users view all bugs settings.
+		The user's view all bugs settings.
 	</td>
 </tr>
 <tr>
 	<td bgcolor="#ddddff">
-		$g_view_reported_cookie_val
+		$g_manage_cookie_val
 	</td>
 	<td bgcolor="#ffffff">
-		The users view all reported bugs settings.
+		The users's manage settings cookie.
 	</td>
 </tr>
 <tr>
-	<td bgcolor="#ddddff">
-		$g_view_assigned_cookie_val
-	</td>
-	<td bgcolor="#ffffff">
-		The users view all assigned bugs settings.
-	</td>
-</tr>
-<tr>
-	<td bgcolor="#ddddff">
-		$g_view_unassigned_cookie_val
-	</td>
-	<td bgcolor="#ffffff">
-		The users view all unassigned bugs settings.
-	</td>
-</tr>
-<tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		I believe there is a limit of 18 or 20 cookies per domain/directory.
 	</td>
 </tr>
@@ -1383,7 +1382,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="database_tables">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Database Tables</b>
 	</td>
 </tr>
@@ -1396,7 +1395,127 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_bug_file_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_bug_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_bug_text_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_bugnote_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_bugnote_text_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_bug_file_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_news_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_project_category_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_project_file_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_project_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_project_user_list_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_project_version_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_user_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_user_profile_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_mantis_user_pref_table
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td colspan="2" bgcolor="#eeeeee">
 		The prefix is used to help make sure table names are unique.  This is useful for users who are limited to one database.
 	</td>
 </tr>
@@ -1408,21 +1527,92 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="enum">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Enum</b>
 	</td>
 </tr>
 <tr>
 	<td width="20%" bgcolor="#ddddff">
-		$g_reopen_bug_threshold
+		$g_access_levels_enum_string
 	</td>
 	<td width="80%" bgcolor="#ffffff">
-		hr size
+		&nbsp;
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
-		Access level needed to re-open bugs.  Look in the constant_inc.php file if you want to set a different value.
+	<td width="20%" bgcolor="#ddddff">
+		$g_project_status_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_project_view_state_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_priority_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_severity_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_reproducibility_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_status_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_resolution_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_projection_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_eta_enum_string
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		&nbsp;
+	</td>
+</tr>
+<tr>
+	<td colspan="2" bgcolor="#eeeeee">
 	</td>
 </tr>
 </table>
@@ -1433,7 +1623,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 <a name="page">&nbsp;</a>
 <table width="100%" bgcolor="#aaaaaa" cellspacing=1 border=0 cellpadding=3>
 <tr>
-	<td colspan=2 bgcolor="#ffffff">
+	<td colspan="2" bgcolor="#ffffff">
 		<b>Page</b>
 	</td>
 </tr>
@@ -1480,7 +1670,7 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
-	<td colspan=2 bgcolor="#eeeeee">
+	<td colspan="2" bgcolor="#eeeeee">
 		Remember to run the convertToPHP4 script if you need the .php extensions.
 	</td>
 </tr>

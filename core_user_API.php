@@ -462,4 +462,46 @@
 		$result = db_query( $query );
 	}
 	# --------------------
+	function check_user_pref_exists( $p_project_id ) {
+		global $g_mantis_user_pref_table;
+
+		$t_user_id = get_current_user_field( "id" );
+	    $query = "SELECT COUNT(*)
+	    		FROM $g_mantis_user_pref_table
+	    		WHERE user_id='$t_user_id' AND project_id='$p_project_id'";
+	    $result = db_query($query);
+		$t_count =  db_result( $result, 0, 0 );
+		if ( $t_count > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	# --------------------
+	function create_project_user_prefs( $p_project_id ) {
+		global $g_mantis_user_pref_table;
+
+		$t_user_id = get_current_user_field( "id" );
+	    $query = "INSERT
+	    		INTO $g_mantis_user_pref_table
+	    		(id, user_id, project_id,
+	    		advanced_report, advanced_view, advanced_update,
+	    		refresh_delay, redirect_delay,
+	    		email_on_new, email_on_assigned,
+	    		email_on_feedback, email_on_resolved,
+	    		email_on_closed, email_on_reopened,
+	    		email_on_bugnote, email_on_status,
+	    		email_on_priority, language)
+	    		VALUES
+	    		(null, '$t_user_id', '$p_project_id',
+	    		'$g_default_advanced_report', '$g_default_advanced_view', '$g_default_advanced_update',
+	    		'$g_default_refresh_delay', '$g_default_redirect_delay',
+	    		'$g_default_email_on_new', '$g_default_email_on_assigned',
+	    		'$g_default_email_on_feedback', '$g_default_email_on_resolved',
+	    		'$g_default_email_on_closed', '$g_default_email_on_reopened',
+	    		'$g_default_email_on_bugnote', '$g_default_email_on_status',
+	    		'$g_default_email_on_priority', '$g_default_language')";
+	    $result = db_query($query);
+	}
+	# --------------------
 ?>

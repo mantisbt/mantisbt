@@ -52,15 +52,15 @@
 	#############################
 
 	# --- using MS IIS ----------------
-	# set to 1 if you use IIS
-	$g_use_iis = 0;
+	# set to ON if you use IIS
+	$g_use_iis = OFF;
 
 	#############################
 	# Mantis Version String
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version = "0.16.0";
+	$g_mantis_version = "0.17.0";
 	$g_show_version   = ON;
 
 	#############################
@@ -231,12 +231,12 @@
 
 	# --- Limit News Items ------------
 	# limit by entry count or date
-	# 0 - entry limit
-	# 1 - by date
-	$g_news_limit_method = 0;
+	# BY_LIMIT - entry limit
+	# BY_DATE - by date
+	$g_news_limit_method    = BY_LIMIT;
 
 	# limit by last X entries
-	$g_news_view_limit = 7;
+	$g_news_view_limit      = 7;
 
 	# limit by days
 	$g_news_view_limit_days = 30;
@@ -284,7 +284,7 @@
 	$g_reporter_summary_limit = 10;
 
 	# default space padding (increase when bug count goes over 100,000)
-	$g_summary_pad = 5;
+	$g_summary_pad            = 5;
 
 	# --- summary date displays -------
 	# date lengths to count bugs by (in days)
@@ -311,7 +311,7 @@
 	# DISK or DATABASE
 	$g_file_upload_method   = DISK;
 
-	$g_max_file_size = 5000000; # 5 MB
+	$g_max_file_size        = 5000000; # 5 MB
 
 	############################
 	# Mantis HTML Settings
@@ -327,9 +327,6 @@
 									"<i>","</i>","<b>","</b>","<u>","</u>");
 
 	$g_allow_href_tags        = ON;
-
-	# @@@ Not functional
-	#$g_allow_img_tags         = ON;
 
 	# --- table tags ------------------
 	# this is inserted into the outermost tables ( tags like border, cellspacing, etc)
@@ -353,7 +350,7 @@
 	$g_ldap_server       = "192.168.192.38";
 	$g_ldap_root_dn      = "dc=traffic,dc=redflex,dc=com,dc=au";
 	$g_ldap_organisation = "(organizationname=*Traffic)"; # optional
-	$g_use_ldap_email    = 0; # Should we send to the LDAP email address or what MySql tells us
+	$g_use_ldap_email    = OFF; # Should we send to the LDAP email address or what MySql tells us
 
 	############################
 	# Mantis Misc Settings
@@ -374,10 +371,10 @@
 
 	# --- limit reporters -------------
 	# Set to 1 if you wish to limit reporters to only viewing bugs that they report.
-	$g_limit_reporters = 0;
+	$g_limit_reporters = ON;
 
 	# --- close immediately -----------
-	# Allow develoeprs and above to close bugs immediately when resolving bugs
+	# Allow developers and above to close bugs immediately when resolving bugs
 	$g_allow_close_immediately = OFF;
 
 	##############################
@@ -419,18 +416,12 @@
 	$g_string_cookie           = $g_cookie_prefix."_STRING_COOKIE";
 	$g_project_cookie          = $g_cookie_prefix."_PROJECT_COOKIE";
 	$g_view_all_cookie         = $g_cookie_prefix."_VIEW_ALL_COOKIE";
-	$g_view_reported_cookie    = $g_cookie_prefix."_VIEW_REPORTED_COOKIE";
-	$g_view_assigned_cookie    = $g_cookie_prefix."_VIEW_ASSIGNED_COOKIE";
-	$g_view_unassigned_cookie  = $g_cookie_prefix."_VIEW_UNASSIGNED_COOKIE";
 	$g_manage_cookie           = $g_cookie_prefix."_MANAGE_COOKIE";
 
 	# --- cookie values ---------------
 	$g_string_cookie_val           = "";
 	$g_project_cookie_val          = "";
 	$g_view_all_cookie_val         = "";
-	$g_view_reported_cookie_val    = "";
-	$g_view_assigned_cookie_val    = "";
-	$g_view_unassigned_cookie_val  = "";
 	$g_manage_cookie_val           = "";
 
 	if ( isset( $HTTP_COOKIE_VARS[$g_string_cookie] ) ) {
@@ -441,15 +432,6 @@
 	}
 	if ( isset( $HTTP_COOKIE_VARS[$g_view_all_cookie] ) ) {
 		$g_view_all_cookie_val       = $HTTP_COOKIE_VARS[$g_view_all_cookie];
-	}
-	if ( isset( $HTTP_COOKIE_VARS[$g_view_reported_cookie] ) ) {
-		$g_view_reported_cookie_val  = $HTTP_COOKIE_VARS[$g_view_reported_cookie];
-	}
-	if ( isset( $HTTP_COOKIE_VARS[$g_view_assigned_cookie] ) ) {
-		$g_view_assigned_cookie_val  = $HTTP_COOKIE_VARS[$g_view_assigned_cookie];
-	}
-	if ( isset( $HTTP_COOKIE_VARS[$g_view_unassigned_cookie] ) ) {
-		$g_view_unassigned_cookie_val  = $HTTP_COOKIE_VARS[$g_view_unassigned_cookie];
 	}
 	if ( isset( $HTTP_COOKIE_VARS[$g_manage_cookie] ) ) {
 		$g_manage_cookie_val  = $HTTP_COOKIE_VARS[$g_manage_cookie];
@@ -730,14 +712,14 @@
 	$g_summary_page                       = $g_path."summary_page".$g_php;
 	$g_summary_jpgraph_function           = $g_absolute_path."summary_graph_functions".$g_php;
 	$g_summary_jpgraph_page               = $g_path."summary_jpgraph_page".$g_php;
-	$g_summary_jpgraph_cumulative_bydate  = "summary_graph_cumulative_bydate".$g_php;
-	$g_summary_jpgraph_bydeveloper        = "summary_graph_bydeveloper".$g_php;
-	$g_summary_jpgraph_byreporter         = "summary_graph_byreporter".$g_php;
-	$g_summary_jpgraph_byseverity         = "summary_graph_byseverity".$g_php;
-	$g_summary_jpgraph_bystatus           = "summary_graph_bystatus".$g_php;
-	$g_summary_jpgraph_byresolution       = "summary_graph_byresolution".$g_php;
-	$g_summary_jpgraph_bycategory         = "summary_graph_bycategory".$g_php;
-	$g_summary_jpgraph_bypriority         = "summary_graph_bypriority".$g_php;
+	$g_summary_jpgraph_cumulative_bydate  = $g_path."summary_graph_cumulative_bydate".$g_php;
+	$g_summary_jpgraph_bydeveloper        = $g_path."summary_graph_bydeveloper".$g_php;
+	$g_summary_jpgraph_byreporter         = $g_path."summary_graph_byreporter".$g_php;
+	$g_summary_jpgraph_byseverity         = $g_path."summary_graph_byseverity".$g_php;
+	$g_summary_jpgraph_bystatus           = $g_path."summary_graph_bystatus".$g_php;
+	$g_summary_jpgraph_byresolution       = $g_path."summary_graph_byresolution".$g_php;
+	$g_summary_jpgraph_bycategory         = $g_path."summary_graph_bycategory".$g_php;
+	$g_summary_jpgraph_bypriority         = $g_path."summary_graph_bypriority".$g_php;
 	#----------------------------------
 
 	#----------------------------------

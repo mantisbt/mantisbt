@@ -411,3 +411,6 @@ ALTER TABLE mantis_project_version_table CHANGE version version VARCHAR(64) NOT 
 ALTER TABLE mantis_project_category_table CHANGE category category VARCHAR(64) NOT NULL;
 ALTER TABLE mantis_bug_table CHANGE category category VARCHAR(64) NOT NULL;
 ALTER TABLE mantis_bug_table CHANGE version version VARCHAR(64) NOT NULL;
+
+# this is for per project user prefs
+ALTER TABLE mantis_user_pref_table ADD project_id INT(7) UNSIGNED ZEROFILL NOT NULL AFTER user_id;
