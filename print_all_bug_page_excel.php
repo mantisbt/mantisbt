@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.44 2005-02-28 00:30:39 thraxisp Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.45 2005-03-26 18:27:18 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -118,7 +118,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			$t_bug_arr_sort[$index]=1;
 		}
 	}
-
+var_dump($t_field_name_arr);
 	for( $i=0; $i < $row_count; $i++ ) {
 
 		# prefix bug data with v_
@@ -350,7 +350,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 					PRINT '<br />';
 				}
 				else {
-					PRINT '&nbsp';
+					PRINT ' ';
 				} #if
 			} #for loop
 
@@ -372,7 +372,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 		$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
-		$query6 = "SELECT *,date_submitted
+		$query6 = "SELECT *
 				FROM $t_bugnote_table
 				WHERE bug_id='$v_id' $t_restriction
 				ORDER BY date_submitted $t_bugnote_order";

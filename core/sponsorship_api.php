@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: sponsorship_api.php,v 1.4 2004-07-18 10:27:18 vboctor Exp $
+	# $Id: sponsorship_api.php,v 1.5 2005-03-26 18:27:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -52,7 +52,7 @@
 			return $g_cache_sponsorships[$c_sponsorship_id];
 		}
 
-		$query = "SELECT *, date_submitted, last_updated
+		$query = "SELECT *
 				  FROM $t_sponsorship_table
 				  WHERE id='$c_sponsorship_id'";
 		$result = db_query( $query );

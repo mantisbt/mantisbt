@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.33 2005-02-28 00:30:39 thraxisp Exp $
+	# $Id: print_bugnote_inc.php,v 1.34 2005-03-26 18:27:17 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,7 +37,7 @@
 	# get the bugnote data
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
-	$query = "SELECT *,date_submitted
+	$query = "SELECT *
 			FROM $t_bugnote_table
 			WHERE bug_id='$c_bug_id' $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";

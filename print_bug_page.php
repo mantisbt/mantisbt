@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.54 2005-02-28 00:30:39 thraxisp Exp $
+	# $Id: print_bug_page.php,v 1.55 2005-03-26 18:27:17 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -31,7 +31,7 @@
 	$c_bug_id = (integer)$f_bug_id;
 
 	$t_bug_table = config_get( 'mantis_bug_table' );
-	$query = "SELECT *, date_submitted, last_updated
+	$query = "SELECT *
 			FROM $t_bug_table
 			WHERE id='$c_bug_id'";
 	$result = db_query( $query );

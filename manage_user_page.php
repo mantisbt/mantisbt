@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.56 2004-12-08 12:52:59 vboctor Exp $
+	# $Id: manage_user_page.php,v 1.57 2005-03-26 18:27:18 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -179,12 +179,12 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 	# Get the user data in $c_sort order
 	if ( 0 == $c_hide ) {
-		$query = "SELECT *, date_created, last_visit
+		$query = "SELECT *
 				FROM $t_user_table
 				WHERE $t_where
 				ORDER BY $c_sort $c_dir";
 	} else {
-		$query = "SELECT *, date_created, last_visit
+		$query = "SELECT *
 				FROM $t_user_table
 				WHERE (" . db_helper_compare_days(db_now(),"last_visit","< '$days_old'") . ") AND $t_where
 				ORDER BY $c_sort $c_dir";

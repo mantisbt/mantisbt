@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.21 2005-03-21 12:09:30 vboctor Exp $
+	# $Id: news_api.php,v 1.22 2005-03-26 18:27:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### News API ###
@@ -124,7 +124,7 @@
 
 		$t_news_table = config_get( 'mantis_news_table' );
 
-		$query = "SELECT *, date_posted
+		$query = "SELECT *
 				  FROM $t_news_table
 				  WHERE id='$c_news_id'";
 		$result = db_query( $query );
@@ -170,7 +170,7 @@
 
 		$t_projects = array_map( 'db_prepare_int', $t_projects );
 
-		$query = "SELECT *, date_posted
+		$query = "SELECT *
 				  FROM $t_news_table";
 
 		if ( 1 == count( $t_projects ) ) {
@@ -231,7 +231,7 @@
 		switch ( config_get( 'news_limit_method' ) ) {
 			case 0 :
 				# BY_LIMIT - Select the news posts
-				$query = "SELECT *, date_posted
+				$query = "SELECT *
 						FROM $t_news_table";
 
 				if ( 1 == count( $t_projects ) ) {
@@ -246,7 +246,7 @@
 				break;
 			case 1 :
 				# BY_DATE - Select the news posts
-				$query = "SELECT *, date_posted
+				$query = "SELECT *
 						FROM $t_news_table";
 
 				if ( 1 == count( $t_projects ) ) {
