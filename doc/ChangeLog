@@ -110,6 +110,8 @@ Mantis ChangeLog
  * Added $g_show_warnings
  * Fixed bug that let you change your username to that of an already existing user
  * Added core_config_API.php to handle obtaining config information
+ * Added core_gpc_API.php with functions to safely get POST and GET data and set cookies
+ * Added core_security_API.php
 
 2002.08.23  -  0.17.5
  * Fixed problem where you could see public bugs if all projects were marked private (#2341)

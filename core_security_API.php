@@ -6,63 +6,17 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.4 $
+	# $Revision: 1.5 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-23 03:34:31 $
+	# $Date: 2002-08-24 09:25:59 $
 	#
-	# $Id: core_security_API.php,v 1.4 2002-08-23 03:34:31 jfitzell Exp $
+	# $Id: core_security_API.php,v 1.5 2002-08-24 09:25:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Security API
 	###########################################################################
 
-	# ---------------
-	# Retrieves a GPC variable.
-	# If the variable is not set, the default is returned. 
-	# If magic_quotes_gpc is on, slashes will be stripped from the value before being returned.
-	function get_var( $p_var_name, $p_default = null ) {
-		# simulate auto-globals from PHP v4.1.0 (see also code in core_php_API.php)
-		if ( ! php_version_at_least( '4.1.0' ) ) {
-			global $_REQUEST;
-		}
+	
 
-		if ( isset( $_REQUEST[$p_var_name] ) ) {
-			$t_result = $_REQUEST[$p_var_name];
-			if (get_magic_quotes_gpc() == 1) {
-				$t_result = stripslashes( $t_result );
-			}
-		} else if ( null !== $p_default) {
-			$t_result = $p_default;
-		} else {
-			trigger_error(ERROR_GPC_VAR_NOT_FOUND, E_USER_ERROR);
-			$t_result = null;
-		}
-		
-		return $t_result;
-	}
-	# -----------------
-	# Retrieves a string GPC variable. Uses get_var().
-	function get_var_string( $p_var_name, $p_default = null ) {
-		return get_var( $p_var_name, $p_default );
-	}
-	# ------------------
-	# Retrieves an integer GPC variable. Uses get_var().
-	function get_var_int( $p_var_name, $p_default = null ) {
-		return (integer)(get_var( $p_var_name, $p_default ));
-	}
-	# ------------------
-	# Retrieves a boolean GPC variable. Uses get_var();
-	function get_var_bool( $p_var_name, $p_default = null ) {
-		$t_result = get_var( $p_var_name, $p_default );
-
-		if ( 0 == strcasecmp( 'off', $t_result ) ||
-			 0 == strcasecmp( 'no', $t_result ) ||
-			 0 == strcasecmp( 'false', $t_result ) ||
-			 0 == strcasecmp( '0', $t_result ) ) {
-			return false;
-		} else {
-			return true;
-		}
-	}
 ?>

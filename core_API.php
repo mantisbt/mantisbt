@@ -83,6 +83,9 @@
 		include ( 'custom_strings_inc.php' );
 	}
 
+	require( 'core_config_API.php' );
+	require( 'core_gpc_API.php' );
+	require( 'core_error_API.php' );
 	require( 'core_security_API.php' );
 	require( 'core_html_API.php' );
 	require( 'core_print_API.php' );
@@ -104,7 +107,5 @@
 	require( 'core_custom_attribute_API.php' );
 	require( 'core_bugnote_API.php' );
 	require( 'core_bug_API.php' );
-	require( 'core_error_API.php' );
-	require( 'core_config_API.php' );
 	# --------------------
 ?>
