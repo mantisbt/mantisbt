@@ -43,7 +43,7 @@
 		<td width=50%>
 			<? ### STATUS ### ?>
 			<table width=97%>
-				<? print_bug_enum_summary("status") ?>
+				<? print_bug_enum_summary( "status" ) ?>
 			</table>
 		</td>
 		<td width=50%>
@@ -67,26 +67,35 @@
 		<td>
 			<? ### SEVERITY ### ?>
 			<table width=97%>
-				<? print_bug_enum_summary("severity") ?>
+				<? print_bug_enum_summary( "severity" ) ?>
 			</table>
 		</td>
 		<td>
 			<? ### RESOLUTION ### ?>
 			<table width=97%>
-				<? print_bug_enum_summary("resolution") ?>
+				<? print_bug_enum_summary( "resolution" ) ?>
 			</table>
 		</td>
 		</tr>
 	<tr valign=bottom height=28 bgcolor=<? echo $g_white ?>>
-		<td colspan=2>
+		<td>
 			<b>by category:</b>
+		</td>
+		<td>
+			<b>by priority:</b>
 		</td>
 	</tr>
 	<tr align=center valign=top height=28 bgcolor=<? echo $g_white ?>>
 		<td>
 			<? ### CATEGORY ### ?>
 			<table width=97%>
-				<? print_bug_enum_summary("category") ?>
+				<? print_bug_enum_summary( "category" ) ?>
+			</table>
+		</td>
+		<td>
+			<? ### CATEGORY ### ?>
+			<table width=97%>
+				<? print_bug_enum_summary( "priority", "open" ) ?>
 			</table>
 		</td>
 	</tr>

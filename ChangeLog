@@ -14,6 +14,10 @@ To Do:
  * Refine viewing news archives
  * Make priority useful
  * Force some sort of dialog when closing a bug (resolved)
+ * Search bugs
+ * Complex bug criteria searching
+ * More documentation on installtion, configuration, and customization
+ * Add glyphs and icons as optional display feature
 
 12.XX.2000	-	1.0.0
 

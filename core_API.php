@@ -157,10 +157,10 @@
 	}
 	#--------------------
 	### Used in summary reports
-	function print_bug_enum_summary( $p_enum ) {
+	function print_bug_enum_summary( $p_enum, $p_status="" ) {
 		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark;
 
-		$t_enum_string = get_enum_string( "$p_enum" );
+		$t_enum_string = get_enum_string( $p_enum );
 	    $t_str = $t_enum_string.",";
 		$enum_count = get_enum_count($t_str)-1;
 		for ($i=0;$i<$enum_count;$i++) {
@@ -170,6 +170,17 @@
 			$query = "SELECT COUNT(id)
 					FROM $g_mantis_bug_table
 					WHERE $p_enum='$t_s'";
+			if ( !empty( $p_status ) ) {
+				if ( $p_status=="open" ) {
+					$query = $query." AND status<>'resolved'";
+				}
+				else if ( $p_status=="open" ) {
+					$query = $query." AND status='resolved'";
+				}
+				else {
+					$query = $query." AND status='$p_status'";
+				}
+			}
 			$result = mysql_query( $query );
 			$t_enum_count = mysql_result( $result, 0 );
 
