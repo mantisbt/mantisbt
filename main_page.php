@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.48 2004-02-10 13:41:03 vboctor Exp $
+	# $Id: main_page.php,v 1.49 2004-02-25 00:49:17 beerfrick Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,6 +51,7 @@
 	}
 ?>
 
+<br />
 <br />
 <br />
 
