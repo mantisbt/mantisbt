@@ -333,7 +333,7 @@
 ?>
 <tr>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
-		<?php echo get_enum_element($s_priority_enum_string, $v_priority) ?>
+		<?php echo get_enum_element( "priority", $v_priority ) ?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_id ?>
@@ -368,7 +368,7 @@
 				( $v_status!=CLOSED )&&( $v_status!=RESOLVED )) {
 				echo "(".get_user_info( $v_handler_id, "username" ).")";
 			} else {
-				echo get_enum_element( $s_status_enum_string, $v_status );
+				echo get_enum_element( "status", $v_status );
 			}
 		?>
 	</td>

@@ -411,14 +411,13 @@
 	# we use variable variables in order to achieve this
 	function print_enum_string_option_list( $p_enum_name, $p_val=0 ) {
 		$g_var = "g_".$p_enum_name."_enum_string";
-		$s_var = "s_".$p_enum_name."_enum_string";
-		global $$g_var, $$s_var;
+		global $$g_var;
 
 		$t_arr  = explode_enum_string( $$g_var );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
-			$t_elem2 = get_enum_element( $$s_var, $t_elem[0] );
+			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
 			if ( $t_elem[0] == $p_val ) {
 				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem2</option>";
 			} else {
@@ -473,14 +472,20 @@
 		}
 	}
 	# --------------------
-	function print_project_user_list_option_list() {
+	# list of users that are NOT in the specified project
+	# if no project is specified use the current project
+	function print_project_user_list_option_list( $p_project_id=0 ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_user_table,
 				$g_project_cookie_val;
+
+		if ( 0 == $p_project_id ) {
+			$p_project_id = $g_project_cookie_val;
+		}
 		$t_adm = ADMINISTRATOR;
 		$query = "SELECT DISTINCT u.id, u.username
 				FROM $g_mantis_user_table u
 				LEFT JOIN $g_mantis_project_user_list_table p
-				ON p.user_id=u.id AND p.project_id='$g_project_cookie_val'
+				ON p.user_id=u.id AND p.project_id='$p_project_id'
 				WHERE u.access_level<$t_adm AND
 					p.user_id IS NULL AND
 					u.access_level<'$t_adm'
@@ -492,6 +497,53 @@
 			$t_username = $row["username"];
 			$t_id = $row["id"];
 			PRINT "<option value=\"$t_id\">$t_username</option>";
+		}
+	}
+	# --------------------
+	# list of projects that a user is NOT in
+	function print_project_user_list_option_list2( $p_user_id ) {
+		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
+
+		$t_prv = PRIVATE;
+		$query = "SELECT DISTINCT p.id, p.name
+				FROM $g_mantis_project_table p
+				LEFT JOIN $g_mantis_project_user_list_table u
+				ON p.id=u.project_id AND u.user_id='$p_user_id'
+				WHERE p.enabled=1 AND
+					p.view_state='$t_prv' AND
+					u.user_id IS NULL
+				ORDER BY p.name";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_project_name = $row["name"];
+			$t_id = $row["id"];
+			PRINT "<option value=\"$t_id\">$t_project_name</option>";
+		}
+	}
+	# --------------------
+	# list of projects that a user is NOT in
+	function print_project_user_list( $p_user_id ) {
+		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
+
+		$t_prv = PRIVATE;
+		$query = "SELECT DISTINCT p.name, u.access_level
+				FROM $g_mantis_project_table p
+				LEFT JOIN $g_mantis_project_user_list_table u
+				ON p.id=u.project_id
+				WHERE p.enabled=1 AND
+					p.view_state='$t_prv' AND
+					u.user_id='$p_user_id'
+				ORDER BY p.name";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_project_name = $row["name"];
+			$t_access_level = $row["access_level"];
+			$t_access_level = get_enum_element( "access_levels", $t_access_level );
+			PRINT "$t_project_name [$t_access_level]";
 		}
 	}
 	# --------------------
@@ -590,10 +642,7 @@
 	# formats the severity given the status
 	# shows the severity in BOLD if the bug is NOT closed and is of significant severity
 	function print_formatted_severity_string( $p_status, $p_severity ) {
-		global $g_severity_enum_string, $s_severity_enum_string;
-
-		#$t_sev_str = get_enum_element( $g_severity_enum_string, $p_severity );
-		$t_sev_str = get_enum_element( $s_severity_enum_string, $p_severity );
+		$t_sev_str = get_enum_element( "severity", $p_severity );
 		if ( ( ( MAJOR == $p_severity ) ||
 			   ( CRASH == $p_severity ) ||
 			   ( BLOCK == $p_severity ) ) &&

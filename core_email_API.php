@@ -311,10 +311,10 @@
 		$v_date_submitted = date( $g_complete_date_format, $v_date_submitted );
 		$v_last_updated   = date( $g_complete_date_format, $v_last_updated );
 
-		$t_sev_str = get_enum_element( $s_severity_enum_string, $v_severity );
-		$t_pri_str = get_enum_element( $s_priority_enum_string, $v_priority );
-		$t_sta_str = get_enum_element( $s_status_enum_string, $v_status );
-		$t_rep_str = get_enum_element( $s_reproducibility_enum_string, $v_reproducibility );
+		$t_sev_str = get_enum_element( "severity", $v_severity );
+		$t_pri_str = get_enum_element( "priority", $v_priority );
+		$t_sta_str = get_enum_element( "status", $v_status );
+		$t_rep_str = get_enum_element( "reproducibility", $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
 		$t_message .= $g_view_bug_page."?f_id=".$p_bug_id."\n";
 		$t_message .= $g_email_separator1."\n";
@@ -329,7 +329,7 @@
 		$t_message .= str_pd( $s_email_priority.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
 		$t_message .= str_pd( $s_email_status.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
 		if ( RESOLVED == $v_status ) {
-			$t_res_str = get_enum_element( $s_resolution_enum_string, $v_resolution );
+			$t_res_str = get_enum_element( "resolution", $v_resolution );
 			$t_message .= str_pd( $s_email_resolution.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
 			if ( DUPLICATE == $v_resolution ) {
 				$t_message .= str_pd( $s_email_duplicate.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";

@@ -146,7 +146,7 @@
 		<?php print_email_link( $u_email, $u_email ) ?>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<?php echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
+		<?php echo get_enum_element( "access_levels", $u_access_level ) ?>
 	</td>
 	<td class="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php

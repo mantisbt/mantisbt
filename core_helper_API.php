@@ -307,7 +307,7 @@
 		# then references that color variable
 		# You could replace this with a bunch of if... then... else
 		# statements
-		$t_color_str = get_enum_element( $g_status_enum_string, $p_status );
+		$t_color_str = get_enum_element( "status", $p_status );
 		$t_color_variable_name = "g_".$t_color_str."_color";
 
 		global $$t_color_variable_name;
@@ -344,7 +344,7 @@
 				return $t_s[1];
 			}
 		}
-		return "";
+		return "@null@";
 	}
 	# --------------------
 	# Breaks up an enum string into num:value elements
@@ -358,13 +358,19 @@
 		return explode( ":", $p_enum_elem );
 	}
 	# --------------------
-	# Given a enum string and num, return the appriate string
-	function get_enum_element( $p_enum_string, $p_val ) {
-		$arr = explode_enum_string( $p_enum_string );
-		for ( $i=0;$i<count( $arr );$i++ ) {
-			$elem_arr = explode_enum_arr( $arr[$i] );
+	# Given a enum string and num, return the appropriate string
+	function get_enum_element( $p_enum_name, $p_val ) {
+		$g_var = "g_".$p_enum_name."_enum_string";
+		$s_var = "s_".$p_enum_name."_enum_string";
+		global $$g_var, $$s_var;
+
+		return get_enum_to_string( $$s_var, $p_val );
+		$t_arr = explode_enum_string( $$g_var );
+		$t_arr_count = count( $t_arr );
+		for ( $i=0;$i<$t_arr_count;$i++ ) {
+			$elem_arr = explode_enum_arr( $t_arr[$i] );
 			if ( $elem_arr[0] == $p_val ) {
-				return $elem_arr[1];
+				get_enum_to_string( $$s_var, $elem_arr[0] );
 			}
 		}
 		return "@null@";

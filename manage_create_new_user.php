@@ -85,7 +85,7 @@
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		$f_access_level = get_enum_element( $s_access_levels_enum_string, $f_access_level );
+		$f_access_level = get_enum_element( "access_levels", $f_access_level );
 		PRINT "$s_created_user_part1 <span class=\"bold\">$f_username</span> $s_created_user_part2 <span class=\"bold\">$f_access_level</span><p>";
 	} else {						# FAILURE
 		print_sql_error( $query );

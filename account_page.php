@@ -90,7 +90,7 @@
 		<?php echo $s_access_level ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
+		<?php echo get_enum_element( "access_levels", $u_access_level ) ?>
 	</td>
 </tr>
 <tr>
@@ -144,7 +144,7 @@
 		<?php echo $s_access_level ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
+		<?php echo get_enum_element( "access_levels", $u_access_level ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -152,7 +152,7 @@
 		<?php echo $s_access_level_project ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_access_levels_enum_string, get_current_user_access_level() ) ?>
+		<?php echo get_enum_element( "access_levels", get_current_user_access_level() ) ?>
 	</td>
 </tr>
 <tr>

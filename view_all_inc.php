@@ -246,7 +246,7 @@
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ( ON == $g_show_priority_text ) {
-				echo get_enum_element($s_priority_enum_string, $v_priority);
+				echo get_enum_element( "priority", $v_priority );
 			} else {
 				print_status_icon( $v_priority );
 			}
@@ -289,7 +289,7 @@
 			if ( ( ON == $g_show_assigned_names )&&( $v_handler_id > 0 ) ) {
 				echo "(".get_user_info( $v_handler_id, "username" ).")";
 			} else {
-				echo get_enum_element( $s_status_enum_string, $v_status );
+				echo get_enum_element( "status", $v_status );
 			}
 		?>
 	</td>

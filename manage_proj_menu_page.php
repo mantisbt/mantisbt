@@ -147,13 +147,13 @@
 		<a href="<?php echo $g_manage_project_edit_page."?f_project_id=".$v_id ?>"><?php echo $v_name ?></a>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<?php echo get_enum_element( $s_project_status_enum_string, $v_status ) ?>
+		<?php echo get_enum_element( "project_status", $v_status ) ?>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo trans_bool( $v_enabled ) ?>
 	</td>
 	<td bgcolor="<?php echo $t_bgcolor ?>">
-		<?php echo get_enum_element( $s_project_view_state_enum_string, $v_view_state ) ?>
+		<?php echo get_enum_element( "project_view_state", $v_view_state ) ?>
 	</td>
 	<td align="left" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php echo $v_description ?>

@@ -204,7 +204,7 @@
 				$s_access_levels_enum_string;
 
 		$t_username = get_current_user_field( "username" );
-		$t_access_level = get_enum_element( $s_access_levels_enum_string, get_current_user_access_level() );
+		$t_access_level = get_enum_element( "access_levels", get_current_user_access_level() );
 		$t_now = date( $g_complete_date_format );
 
 		PRINT "<table class=\"hide\">";
@@ -521,7 +521,7 @@
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_s = explode( ":", $t_arr[$i] );
-			$t_val = get_enum_element( $s_status_enum_string, $t_s[0] );
+			$t_val = get_enum_element( "status", $t_s[0] );
 
 			$t_color = "#ffffff";
 			$t_color_variable_name = "g_".$t_s[1]."_color";

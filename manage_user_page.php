@@ -61,7 +61,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_enabled ?>
+		<?php echo $s_enabled ?>:
 	</td>
 	<td colspan="2">
 		<input type="checkbox" name="f_enabled" <?php if ( ON == $u_enabled ) echo "CHECKED" ?>>
@@ -69,7 +69,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_protected ?>
+		<?php echo $s_protected ?>:
 	</td>
 	<td colspan="2">
 		<input type="checkbox" name="f_protected" <?php if ( ON == $u_protected ) echo "CHECKED" ?>>
@@ -109,5 +109,55 @@
 	}
 ?>
 </div>
+
+<?php ### BEGIN User to Project Add Form ?>
+<p>
+<div align="center">
+<table class="width50" cellspacing="1">
+<form method="post" action="<?php echo $g_proj_user_add2 ?>">
+<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>">
+<tr>
+	<td class="form-title" colspan="2">
+		<?php echo $s_add_user_title ?>
+	</td>
+</tr>
+<tr class="row-1" valign="top">
+	<td class="category" width="50%">
+		<?php echo $s_projects_title ?>:
+	</td>
+	<td width="50%">
+		<?php print_project_user_list( $u_id ) ?>
+	</td>
+</tr>
+<tr class="row-2" valign="top">
+	<td class="category" width="50%">
+		<?php echo $s_projects_title ?>:
+	</td>
+	<td width="50%">
+		<select name="f_project_id[]" multiple size="5">
+			<?php print_project_user_list_option_list2( $u_id ) ?>
+		</select>
+	</td>
+</tr>
+<tr class="row-1" valign="top">
+	<td class="category">
+		<?php echo $s_access_level ?>:
+	</td>
+	<td>
+		<select name="f_access_level">
+			<?php # No administrator choice ?>
+			<?php print_project_user_option_list( REPORTER ) ?>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<?php echo $s_add_user_button ?>">
+	</td>
+</tr>
+</form>
+</table>
+</div>
+<?php ### END User to Project Add Form ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

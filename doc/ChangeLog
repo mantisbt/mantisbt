@@ -36,6 +36,7 @@ Mantis
  * Modified g_hide_user_email to be g_show_user_email and have different usage modes.
  * Modified phpmailer AddAddress in email sending to allow for multiple to recipients.
  * Modified project user adding to use a multi-select list box.
+ * Modified get_enum_string to use the g_ enum string value instead of the s_ enum string value.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added g_bug_link_tag to let users customize how to create bug links.

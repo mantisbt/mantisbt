@@ -156,7 +156,7 @@
 		<?php echo $s_resolution ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
+		<?php echo get_enum_element( "resolution", $v_resolution ) ?>
 	</td>
 	<td class="category">
 		<?php echo $s_platform ?>

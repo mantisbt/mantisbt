@@ -85,10 +85,10 @@
 		<?php echo $v_category ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_severity_enum_string, $v_severity ) ?>
+		<?php echo get_enum_element( "severity", $v_severity ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_reproducibility_enum_string, $v_reproducibility ) ?>
+		<?php echo get_enum_element( "reproducibility", $v_reproducibility ) ?>
 	</td>
 	<td>
 		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
@@ -123,13 +123,13 @@
 		<?php echo $s_priority ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_priority_enum_string, $v_priority ) ?>
+		<?php echo get_enum_element( "priority", $v_priority ) ?>
 	</td>
 	<td class="category">
 		<?php echo $s_resolution ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_resolution_enum_string, $v_resolution ) ?>
+		<?php echo get_enum_element( "resolution", $v_resolution ) ?>
 	</td>
 	<td class="category">
 		<?php echo $s_platform ?>
@@ -143,7 +143,7 @@
 		<?php echo $s_status ?>
 	</td>
 	<td <?php echo get_status_bgcolor( $v_status ) ?>>
-		<?php echo get_enum_element( $s_status_enum_string, $v_status ) ?>
+		<?php echo get_enum_element( "status", $v_status ) ?>
 	</td>
 	<td class="category">
 		<?php echo $s_duplicate_id ?>
@@ -163,7 +163,7 @@
 		<?php echo $s_projection ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_projection_enum_string, $v_projection ) ?>
+		<?php echo get_enum_element( "projection", $v_projection ) ?>
 	</td>
 	<td colspan="2">
 
@@ -180,7 +180,7 @@
 		<?php echo $s_eta ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( $s_eta_enum_string, $v_eta ) ?>
+		<?php echo get_enum_element( "eta", $v_eta ) ?>
 	</td>
 	<td colspan="2">
 

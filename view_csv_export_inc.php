@@ -15,9 +15,9 @@
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
-		$t_priority 	= get_enum_element( $s_priority_enum_string, $v_priority );
-		$t_status 		= get_enum_element( $s_status_enum_string, $v_status );
-		$t_severity		= get_enum_element( $s_severity_enum_string, $v_severity );
+		$t_priority 	= get_enum_element( "priority", $v_priority );
+		$t_status 		= get_enum_element( "status", $v_status );
+		$t_severity		= get_enum_element( "severity", $v_severity );
 		echo "$t_priority,$v_id,$t_severity,$t_status,$t_last_updated,\"$v_summary\"\n";
     }
 ?>
