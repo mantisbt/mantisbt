@@ -169,6 +169,11 @@
 	# This is in the view all pages
 	$g_show_assigned_names = 0;
 
+	# --- show priority as icon ---
+	# 0: Shows priority as icon in view all bugs page
+	# 1: Shows priority as text in view all bugs page
+	$g_show_priority_text = 0;
+
 	############################
 	### Mantis JPGRAPH Addon ###
 	############################
@@ -339,13 +344,12 @@
 	# Look in the constant_inc.php file if you want to set a different value
 	$g_reopen_bug_threshold = DEVELOPER;
 
-	# --- threshold -------------------
+	# --- quick proceed----------------
 	# see fewer confirmation screens between actions
 	$g_quick_proceed = 1;
 
-	# --- threshold -------------------
-	# see fewer confirmation screens between actions
-	# PLAIN_TEXT or CRYPT
+	# --- login method ----------------
+	# CRYPT or PLAIN or MD5
 	$g_login_method = CRYPT;
 
 	##############################
