@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.4 2002-09-16 00:50:06 jfitzell Exp $
+	# $Id: current_user_api.php,v 1.5 2002-09-22 05:56:41 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -72,6 +72,11 @@
 	# Return true if the currently logged in user protected, false otherwise
 	function current_user_is_protected() {
 		return user_is_protected( auth_get_current_user_id() );
+	}
+	# --------------------
+	# Trigger an ERROR if the current user account is protected
+	function current_user_ensure_unprotected() {
+		user_ensure_unprotected( auth_get_current_user_id() );
 	}
 	# --------------------
 	# return the bug filter parameters for the current user

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.33 2002-09-22 05:28:48 jfitzell Exp $
+	# $Id: user_api.php,v 1.34 2002-09-22 05:56:41 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -180,8 +180,7 @@
 		}
 	}
 	# --------------------
-	# Check if the username is unique
-	#  return true if it is, trigger an ERROR if it isn't
+	# Check if the username is unique and trigger an ERROR if it isn't
 	function user_ensure_name_unique( $p_username ) {
 		if ( ! user_is_name_unique( $p_username ) ) {
 			trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
@@ -243,6 +242,15 @@
 	function user_is_protected( $p_user_id ) {
 		return ( ON == user_get_field( $p_user_id, 'protected' ) );
 	}
+	# --------------------
+	# Trigger an ERROR if the user account is protected
+	function user_ensure_unprotected( $p_user_id ) {
+		if ( user_is_protected( $p_user_id ) ) {
+			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+		}
+	}
+
+
 	#===================================
 	# Creation / Deletion / Updating
 	#===================================
