@@ -4,10 +4,21 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-?>
-<?php
-	# Remove the bugnote and bugnote text and redirect back to
-	# the viewing page
+
+	# --------------------------------------------------------
+	# $Id: bugnote_edit_page.php,v 1.21 2002-08-26 22:14:49 jfitzell Exp $
+	# --------------------------------------------------------
+
+	# CALLERS
+	#	This page is submitted to by the following pages:
+	#	- bugnote_inc.php
+
+	# EXPECTED BEHAVIOUR
+	#	Allow the user to modify the text of a bugnote, then submit to
+	#	bugnote_update.php with the new text
+
+	# RESTRICTIONS & PERMISSIONS
+	#	- none beyond API restrictions
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
