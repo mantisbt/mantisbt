@@ -18,8 +18,8 @@
 	$t_cwd = getcwd();
 	chdir( dirname( __FILE__ ) );
 
-	$t_core_path = dirname( __FILE__ ).'/core/';
-	require_once( $t_core_path.'php_api.php' );
+	$t_core_path = dirname( __FILE__ ) . '/core/';
+	require_once( $t_core_path . 'php_api.php' );
 
 	# Load constants and configuration files
   	require_once( 'constant_inc.php' );
@@ -44,8 +44,7 @@
 
 
 	# Load rest of core in seperate directory.
-	require_once( $g_core_path.'API.php');
+	require_once( $g_core_path . 'API.php');
 
 	chdir( $t_cwd );
-	# --------------------
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	# Update bug data then redirect to the appropriate viewing page
+	# Redirect to the appropriate viewing page for the bug
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>

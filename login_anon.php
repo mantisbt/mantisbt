@@ -19,5 +19,5 @@
  */
 	require_once( 'core.php' );
 
-	print_header_redirect( 'login.php?username='.config_get( 'anonymous_account' ).'&amp;perm_login=false' );
+	print_header_redirect( 'login.php?username=' . config_get( 'anonymous_account' ) . '&amp;perm_login=false' );
 ?>

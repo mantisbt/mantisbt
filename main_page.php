@@ -19,37 +19,42 @@
 <?php print_page_top2() ?>
 
 <div class="quick-summary-left">
-		<?php echo $s_open_and_assigned_to_me ?>:
-		<?php PRINT '<a href="view_all_set.php?type=1&amp;reporter_id=any&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_closed=on">' . current_user_get_assigned_open_bug_count() . '</a>' ?>
+		<?php echo lang_get( 'open_and_assigned_to_me' ) ?>:
+		<?php echo '<a href="view_all_set.php?type=1&amp;reporter_id=any&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=' .  auth_get_current_user_id() . '&amp;hide_closed=on">' . current_user_get_assigned_open_bug_count() . '</a>' ?>
 </div>
 <div class="quick-summary-right">
-		<?php echo $s_open_and_reported_to_me ?>:
+		<?php echo lang_get( 'open_and_reported_to_me' ) ?>:
 		<?php PRINT '<a href="view_all_set.php?type=1&amp;reporter_id=' . auth_get_current_user_id() . '&amp;show_status=any&amp;show_severity=any&amp;show_category=any&amp;handler_id=any&amp;hide_closed=on">' . current_user_get_reported_open_bug_count() . '</a>' ?>
 </div>
 <br />
 
 <?php
-	# Check to see if variable is set
-	$c_offset = (integer)$f_offset;
+	$c_offset = db_prepare_int( $f_offset );
+
+	$t_project_id = helper_get_current_project();
 
 	# get news count (project plus sitewide posts)
-    $total_news_count = news_get_count( $g_project_cookie_val );
+    $total_news_count = news_get_count( $t_project_id );
 
-	switch ( $g_news_limit_method ) {
+	$t_news_table			= config_get( 'mantis_news_table' );
+	$t_news_view_limit		= config_get( 'news_view_limit' );
+	$t_news_view_limit_days	= config_get( 'news_view_limit_days' );
+
+	switch ( config_get( 'news_limit_method' ) ) {
 		case 0 :
 			# Select the news posts
 			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
-					FROM $g_mantis_news_table
-					WHERE project_id='$g_project_cookie_val' OR project_id='0000000'
+					FROM $t_news_table
+					WHERE project_id='$t_project_id' OR project_id=0
 					ORDER BY announcement DESC, id DESC
-					LIMIT $c_offset, $g_news_view_limit";
+					LIMIT $c_offset, $t_news_view_limit";
 			break;
 		case 1 :
 			# Select the news posts
 			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
-					FROM $g_mantis_news_table
-					WHERE ( project_id='$g_project_cookie_val' OR project_id='0000000' ) AND
-						(TO_DAYS(NOW()) - TO_DAYS(date_posted) < '$g_news_view_limit_days')
+					FROM $t_news_table
+					WHERE ( project_id='$t_project_id' OR project_id=0 ) AND
+						(TO_DAYS(NOW()) - TO_DAYS(date_posted) < '$t_news_view_limit_days')
 					ORDER BY announcement DESC, id DESC";
 			break;
 	} # end switch
@@ -65,9 +70,9 @@
 		$v_body 		= string_display( $v_body );
 		$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
 
-		# only show PIRVATE posts to configured threshold and above
-		if (( PRIVATE == $v_view_state ) &&
-			!access_level_check_greater_or_equal( $g_private_news_threshold )) {
+		# only show PRIVATE posts to configured threshold and above
+		if ( ( PRIVATE == $v_view_state ) &&
+			 !access_level_check_greater_or_equal( config_get( 'private_news_threshold' ) ) ) {
 			continue;
 		}
 
@@ -92,12 +97,12 @@
 		<span class='small'>
 		<?php
 			if ( 1 == $v_announcement ) {
-				PRINT '['.$s_announcement.']';
+				PRINT '[' . lang_get( 'announcement' ) . ']';
 			}
 		?>
 		<?php
 			if ( PRIVATE == $v_view_state ) {
-				PRINT '['.$s_private.']';
+				PRINT '[' . lang_get( 'private' ) . ']';
 			}
 		?>
 		</span>
@@ -118,15 +123,15 @@
 <br />
 <div align="center">
 <?php
-	print_bracket_link( 'news_list_page.php', $s_archives );
-	$f_offset_next = $f_offset + $g_news_view_limit;
-	$f_offset_prev = $f_offset - $g_news_view_limit;
+	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
+	$f_offset_next = $f_offset + $t_news_view_limit;
+	$f_offset_prev = $f_offset - $t_news_view_limit;
 
 	if ( $f_offset_prev >= 0) {
-		print_bracket_link( 'main_page.php?offset='.$f_offset_prev, $s_newer_news_link );
+		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link ' ) );
 	}
-	if ( $news_count == $g_news_view_limit ) {
-		print_bracket_link( 'main_page.php?offset='.$f_offset_next, $s_older_news_link );
+	if ( $news_count == $t_news_view_limit ) {
+		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link ' ) );
 	}
 ?>
 </div>

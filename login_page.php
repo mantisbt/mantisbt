@@ -11,11 +11,10 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	require_once( $g_core_path . 'obsolete.php' );
 
-	# Check to see if the user is logged in and then validate the cookie value
-	if ( !is_blank( $g_string_cookie_val ) ) {
-		login_cookie_check( 'main_page.php' );
+	# Check if the user is already logged in
+	if ( auth_is_user_authenticated() ) {
+		print_header_redirect( 'main_page.php' );
 	}
 ?>
 <?php print_page_top1() ?>
@@ -31,10 +30,10 @@
 
 	# Only echo error message if error variable is set
 	if ( $f_error ) {
-		echo $MANTIS_ERROR[ERROR_LOGIN].'<br />';
+		echo lang_get( 'login_error' ) . '<br />';
 	}
 	if ( $f_cookie_error ) {
-		echo $MANTIS_ERROR[ERROR_COOKIES_DISABLED].'<br />';
+		echo lang_get( 'login_cookies_disabled' ) . '<br />';
 	}
 
 	# Display short greeting message
@@ -42,7 +41,7 @@
 ?>
 </div>
 
-<?php # Login Form BEGIN ?>
+<!-- Login Form BEGIN -->
 <br />
 <div align="center">
 <form name="login_form" method="post" action="login.php">
@@ -50,9 +49,9 @@
 <tr>
 	<td class="form-title">
 		<?php
-			if ( !is_blank($f_return) ) {
+			if ( !is_blank( $f_return ) ) {
 			?>
-				<input type="hidden" name="return" value="<?php echo htmlentities($f_return) ?>" />
+				<input type="hidden" name="return" value="<?php echo $f_return ?>" />
 				<?php
 			}
 
@@ -104,7 +103,6 @@
 </table>
 </form>
 </div>
-<?php # Login Form END ?>
 
 <?php print_signup_link() ?>
 
@@ -114,4 +112,4 @@
 //-->
 </script>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php print_page_bot1a( __FILE__ ) ?>

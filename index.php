@@ -13,16 +13,3 @@
 		print_header_redirect( 'login_page.php' );
 	}
 ?>
-<?php print_page_top1() ?>
-<?php print_meta_redirect( $g_login_page, $g_wait_time ) ?>
-<?php print_page_top2() ?>
-
-<br />
-<div align="center">
-	<a href="login_page.php"><?php echo $s_click_to_login ?></a>
-</div>
-
-<?php print_bottom_page( $g_bottom_include_page ) ?>
-<?php print_footer(__FILE__) ?>
-<?php print_body_bottom() ?>
-<?php print_html_bottom() ?>

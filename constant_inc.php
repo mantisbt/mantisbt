@@ -137,7 +137,6 @@
 	# error messages
 	define( 'ERROR_GENERIC',						0 );
 	define( 'ERROR_SQL',							1 );
-	define( 'ERROR_LOGIN',							2 );
 	define( 'ERROR_REPORT',							3 );
 	define( 'ERROR_NO_FILE_SPECIFIED',				4 );
 	define( 'ERROR_FILE_DISALLOWED',				5 );
@@ -149,7 +148,6 @@
 	define( 'ERROR_EMPTY_FIELD',					11 );
 	define( 'ERROR_PROTECTED_ACCOUNT',				12 );
 	define( 'ERROR_ACCESS_DENIED',					13 );
-	define( 'ERROR_COOKIES_DISABLED',				14 );
 	define( 'ERROR_UPLOAD_FAILURE',					15 );
 	define( 'ERROR_FTP_CONNECT_ERROR',				16 );
 

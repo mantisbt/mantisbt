@@ -16,6 +16,7 @@
 
 	$c_file_id = (integer)$f_file_id;
 	#check_access( $g_handle_bug_threshold );
+	# @@@ - hmm... that's commented out but we need *some* security check
 
 	# we handle the case where the file is attached to a bug
 	# or attached to a project as a project doc.
@@ -33,13 +34,13 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	header( 'Content-type: '.$v_file_type );
-	header( 'Content-Length: '.$v_filesize );
-	header( 'Content-Disposition: filename='.file_get_display_name($v_filename));
+	header( 'Content-type: ' . $v_file_type );
+	header( 'Content-Length: ' . $v_filesize );
+	header( 'Content-Disposition: filename=' . file_get_display_name( $v_filename ) );
 	header( 'Content-Description: Download Data' );
 
 	# dump file content to the connection.
-	switch ( $g_file_upload_method ) {
+	switch ( config_get( 'file_upload_method' ) ) {
 		case DISK:
 			if ( file_exists( $v_diskfile ) ) {
 				readfile( $v_diskfile );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	# Check login then redirect to main_page.php3 or to login_page.php3
+	# Check login then redirect to main_page.php or to login_page.php
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php

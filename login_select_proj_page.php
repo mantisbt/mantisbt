@@ -11,12 +11,12 @@
 <?php require_once( 'core.php' ) ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
-	$f_ref  = gpc_get_string( 'ref', '' );
+	$f_ref = gpc_get_string( 'ref', '' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2a() ?>
 
-<?php # Project Select Form BEGIN ?>
+<!-- Project Select Form BEGIN -->
 <br />
 <div align="center">
 <form method="post" action="set_project.php">
@@ -29,7 +29,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="40%">
-		<?php echo $s_choose_project ?>:
+		<?php echo lang_get( 'choose_project' ) ?>:
 	</td>
 	<td width="60%">
 		<select name="project_id">
@@ -53,6 +53,5 @@
 </table>
 </form>
 </div>
-<?php # Project Select Form END ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

@@ -7,11 +7,13 @@
 ?>
 <?php
 	# This include file prints out the bug history
+
+	# $f_bug_id must already be defined
 ?>
-<?php # Bug History BEGIN ?>
+
 <a name="history"><br /></a>
 <?php
-	$history = history_get_events_array( $f_bug_id );
+	$t_history = history_get_events_array( $f_bug_id );
 ?>
 <table class="width100" cellspacing="0">
 <tr>
@@ -34,24 +36,24 @@
 	</td>
 </tr>
 <?php
-	for ( $i=0; $i < count( $history ); $i++ ) {
+	foreach ( $t_history as $t_item ) {
 ?>
-<tr <?php echo helper_alternate_class( $i ) ?>>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="small-caption">
-		<?php echo $history[$i]['date'] ?>
+		<?php echo $t_item['date'] ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $history[$i]['username'] ?>
+		<?php echo $t_item['username'] ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $history[$i]['note'] ?>
+		<?php echo $t_item['note'] ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $history[$i]['change'] ?>
+		<?php echo $t_item['change'] ?>
 	</td>
 </tr>
 <?php
 	} # end for loop
 ?>
 </table>
-<?php # Bug History END ?>
+

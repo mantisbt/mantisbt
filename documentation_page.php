@@ -10,13 +10,16 @@
 <?php
 	check_access( ADMINISTRATOR );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php 
+	print_page_top1();
+	print_page_top2();
 
-<?php print_manage_menu( 'documentation_page.php' ) ?>
+	print_manage_menu( 'documentation_page.php' );
 
-<?php print_manage_doc_menu( 'documentation_page.php' ) ?>
-<br />
-<?php phpinfo() ?>
+	print_manage_doc_menu( 'documentation_page.php' );
 
+	echo '<br />';
+
+	phpinfo();
+?>
 <?php print_page_bot1( __FILE__ ) ?>

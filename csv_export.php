@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.5 $
+	# $Revision: 1.6 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-03 03:24:23 $
+	# $Date: 2003-01-08 02:44:39 $
 	#
-	# $Id: csv_export.php,v 1.5 2003-01-03 03:24:23 jfitzell Exp $
+	# $Id: csv_export.php,v 1.6 2003-01-08 02:44:39 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -26,10 +26,18 @@
 
 	$rows = filter_get_bug_rows( 1, -1, &$t_page_count, &$t_bug_count );
 
-	echo lang_get('email_project').','.config_get('page_title')."\n\n";
-	echo lang_get( 'priority' ).','.lang_get( 'id' ).','.lang_get( 'severity' ).','.lang_get( 'status' ).','.lang_get( 'version' ).','.lang_get( 'assigned_to' ).','.lang_get( 'reporter' ).','.lang_get( 'updated' ).','.lang_get( 'summary' )."\n";
+	echo lang_get('email_project') . ',' . config_get('page_title') . "\n\n";
+	echo lang_get( 'priority' ) . ',' .
+			lang_get( 'id' ) . ',' .
+			lang_get( 'severity' ) . ',' .
+			lang_get( 'status' ) . ',' .
+			lang_get( 'version' ) . ',' .
+			lang_get( 'assigned_to' ) . ',' .
+			lang_get( 'reporter' ) . ',' .
+			lang_get( 'updated' ) . ',' .
+			lang_get( 'summary' ) . "\n";
 
-	for ( $i=0; $i < sizeof($rows); $i++ ) {
+	for ( $i=0 ; $i < sizeof($rows) ; $i++ ) {
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
 
 		$t_last_updated		= date( config_get( 'short_date_format' ), $v_last_updated );
@@ -44,10 +52,10 @@
 	}
 
 	# Send headers to browser to active mime loading
-	header( 'Content-Type: text/plain; name='.config_get('page_title').'.csv' );
+	header( 'Content-Type: text/plain; name=' . config_get( 'page_title' ) . '.csv' );
 	header( 'Content-Transfer-Encoding: BASE64;' );
-	header( 'Content-Disposition: attachment; filename='.config_get('page_title').'.csv' );
+	header( 'Content-Disposition: attachment; filename=' . config_get( 'page_title' ) . '.csv' );
 	
-	die; 
+	exit; 
 
 ?>
