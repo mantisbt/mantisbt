@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.144 2004-08-28 12:24:20 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.145 2004-10-17 15:38:19 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -68,7 +68,7 @@
 			}
 
 			echo lang_get( 'viewing_bugs_title' );
-			echo "($v_start - $v_end / $t_bug_count)";
+			echo " ($v_start - $v_end / $t_bug_count)";
 		?>
 
 		<span class="small"> <?php
