@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.14 2003-01-28 23:23:13 vboctor Exp $
+	# $Id: core.php,v 1.15 2003-01-29 14:50:51 beerfrick Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -17,21 +17,30 @@
 	#  headers from being sent if there's a blank line in an included file
 	ob_start();
 
-        # Include compatibility file before anything else
-        require_once( dirname( __FILE__ ).'/core/php_api.php' );
+	# Directory separator was introduced in PHP 4.0.6
+	if ( !defined( 'DIRECTORY_SEPARATOR' ) ) {
+		if (substr(php_uname(), 0, 7) == 'Windows') {
+			define('DIRECTORY_SEPARATOR', '\\');
+		} else {
+			define('DIRECTORY_SEPARATOR', '/');
+		}
+	}
+
+     # Include compatibility file before anything else
+        require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
 
 	# Load constants and configuration files
-  	require_once( dirname( __FILE__ ).'/constant_inc.php' );
-	if ( file_exists( dirname( __FILE__ ).'/custom_constant_inc.php' ) ) {
-		require_once( dirname( __FILE__ ).'/custom_constant_inc.php' );
+  	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'constant_inc.php' );
+	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
+		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
 	}
-	require_once( dirname( __FILE__ ).'/config_defaults_inc.php' );
-	if ( file_exists( dirname( __FILE__ ).'/custom_config_inc.php' ) ) {
-		require_once( dirname( __FILE__ ).'/custom_config_inc.php' );
+	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_defaults_inc.php' );
+	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_config_inc.php' ) ) {
+		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_config_inc.php' );
 	}
 	# for backward compatability
-	if ( file_exists( dirname( __FILE__ ).'config_inc.php' ) ) {
-		require_once( dirname( __FILE__ ).'config_inc.php' );
+	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' ) ) {
+		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'config_inc.php' );
 	}
 
 	# Allow an environment variable (defined in an Apache vhost for example)
@@ -41,14 +50,6 @@
 		require_once( $t_local_config );
 	}
 
-	# Directory separator was introduced in PHP 4.0.6
-	if ( !defined( 'DIRECTORY_SEPARATOR' ) ) {
-		if (substr(php_uname(), 0, 7) == 'Windows') {
-			define('DIRECTORY_SEPARATOR', '\\');
-		} else {
-			define('DIRECTORY_SEPARATOR', '/');
-		}
-	}
 
 	# Attempt to find the location of the core files.	
 	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
