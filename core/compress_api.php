@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.10 2003-02-22 18:17:44 jfitzell Exp $
+	# $Id: compress_api.php,v 1.11 2003-03-15 01:42:37 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -28,7 +28,8 @@
 		#   issue #2953
 		return ( $g_compression_started &&
 				 ON == config_get( 'compress_html' ) &&
-				OFF == config_get( 'use_iis' ) );
+				OFF == config_get( 'use_iis' )  &&
+				extension_loaded( 'zlib' ) );
 	}
 
 	# ----------------
