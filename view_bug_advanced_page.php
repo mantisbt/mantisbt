@@ -71,7 +71,7 @@
 	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display( $v2_additional_information );
 	
-	start_compression();
+	compress_start();
 
 	print_page_top1();
 
@@ -488,5 +488,5 @@
 	}
 
 	print_page_bot1( __FILE__ );
-	stop_compression();
+	compress_stop();
 ?>

@@ -6,31 +6,35 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: compress_api.php,v 1.3 2002-08-26 13:28:34 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Compression API
 	#
-	# Starts the buffering/compression (only if the compression option is ON)
-	# This method should be called after all possible re-directs and access
-	# level checks.
+	# Starts the buffering/compression (only if the compression option is ON
+	# and PHP version 4.0.4 or above is used).  This method should be called 
+	# after all possible re-directs and access level checks.
 	###########################################################################
 
-	function start_compression() {
+	# ----------------
+	# Check if compression should be enabled.
+	function compress_is_enabled() {
 		global $g_compress_html;
-
-		if ( ON == $g_compress_html ) {
+		return ( ( ON == $g_compress_html ) && php_version_at_least('4.0.4') );
+	}
+	# ----------------
+	# Start output buffering with compression.
+	function compress_start() {
+		if  ( compress_is_enabled() ) {
 			ob_implicit_flush( 0 );
 			ob_start( 'ob_gzhandler' );
 		}
 	}
 	# ----------------
 	# Stop buffering and flush buffer contents.
-	function stop_compression() {
-		global $g_compress_html;
-
-		if ( ON == $g_compress_html ) {
+	function compress_stop() {
+		if  ( compress_is_enabled() ) {
 			ob_end_flush();
 			ob_implicit_flush();
 		}

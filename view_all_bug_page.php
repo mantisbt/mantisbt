@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.36 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:58 $
+	# $Revision: 1.37 $
+	# $Author: vboctor $
+	# $Date: 2002-08-26 13:28:33 $
 	#
-	# $Id: view_all_bug_page.php,v 1.36 2002-08-25 21:04:58 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.37 2002-08-26 13:28:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -258,7 +258,7 @@
 	# END CSV export feature
 	# ------------------------
 
-	start_compression();
+	compress_start();
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -272,5 +272,5 @@
 
 <?php print_page_bot1( __FILE__ ) ?>
 <?php
-	stop_compression();
+	compress_stop();
 ?>
