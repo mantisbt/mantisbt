@@ -7,11 +7,11 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.46 $
-	# $Author: jfitzell $
-	# $Date: 2003-03-04 20:54:23 $
+	# $Revision: 1.47 $
+	# $Author: jlatour $
+	# $Date: 2003-03-11 08:16:38 $
 	#
-	# $Id: strings_swedish.txt,v 1.46 2003-03-04 20:54:23 jfitzell Exp $
+	# $Id: strings_swedish.txt,v 1.47 2003-03-11 08:16:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = 'Valt projekt';
 	$s_valid_project_msg = 'Du måste välja ett giltigt projekt';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Visar källkod för';
-	$s_not_supported_part1 = 'Denna version';
-	$s_not_supported_part2 = 'av PHP stöder inte';
-
 	# signup.php
 	$s_invalid_email = 'ÄR INTE EN GILTIG EPOSTADRESS';
 	$s_duplicate_username = 'ÄR REDAN UPPTAGET.  VÄLJ ETT ANNAT KONTONAMN';
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = 'Sammanfattning';
 	$s_summary_jpgraph_link = 'Avancerad sammanfattning';
+	$s_by_project = 'by project';
 	$s_by_status = 'status';
 	$s_by_date = 'datum (dagar)';
 	$s_by_severity = 'allvarlighetsgrad';

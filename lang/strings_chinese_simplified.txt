@@ -7,11 +7,11 @@
 
 	# Chinese_Simplified: Kai-Zheng Cheng, neek@sina.com
 	# -------------------------------------------------
-	# $Revision: 1.24 $
+	# $Revision: 1.25 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:31 $
+	# $Date: 2003-03-11 08:16:33 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.24 2003-02-26 14:25:31 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.25 2003-03-11 08:16:33 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = "Selected project";
 	$s_valid_project_msg = "You must choose a valid project";
 
-	# show_source_page.php
-	$s_show_source_for_msg = "显示源码给";
-	$s_not_supported_part1 = "此版本";
-	$s_not_supported_part2 = "的 PHP 並沒有支持!!";
-
 	# signup.php
 	$s_invalid_email = "是一个无效的 EMIAL 地址!!";
 	$s_duplicate_username = "帐号名称已经有人使用了. 请选择其他的使用者名称";
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = "摘要";
               $s_summary_jpgraph_link = "Advanced summary";
+	$s_by_project = 'by project';
               $s_by_status = "根据状态";
 	$s_by_date = "根据日期";
 	$s_by_severity = "根据严重性";

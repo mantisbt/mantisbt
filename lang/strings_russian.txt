@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.45 $
+	# $Revision: 1.46 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:36 $
+	# $Date: 2003-03-11 08:16:37 $
 	#
-	# $Id: strings_russian.txt,v 1.45 2003-02-26 14:25:36 jlatour Exp $
+	# $Id: strings_russian.txt,v 1.46 2003-03-11 08:16:37 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -740,11 +740,6 @@
 	$s_selected_project = 'Âûáðàííûé ïðîåêò';
 	$s_valid_project_msg = 'Âû äîëæíû âûáðàòü ïðàâèëüíûé ïðîåêò';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Ïîêàç êîäà ';
-	$s_not_supported_part1 = 'Ýòà âåðñèÿ';
-	$s_not_supported_part2 = 'PHP íå ïîääåðæèâàåò';
-
 	# signup.php
 	$s_invalid_email = 'ÍÅÏÐÀÂÈËÜÍÛÉ E-MAIL àäðåñ';
 	$s_duplicate_username = 'ÒÀÊÎÅ ÈÌß ÏÎËÜÇÎÂÀÒÅËß ÓÆÅ ÈÑÏÎËÜÇÓÅÒÑß.  ÂÛÁÅÐÈÒÅ ÄÐÓÃÎÅ ÈÌß';
@@ -773,6 +768,7 @@
 	# summary_page.php
 	$s_summary_title = 'Ñòàòèñòèêà';
 	$s_summary_jpgraph_link = 'Ãðàôè÷åñêàÿ ñòàòèñòèêà';
+	$s_by_project = 'by project';
 	$s_by_status = 'Ïî ñòàòóñó';
 	$s_by_date = 'Ïî äàòå (äíÿì)';
 	$s_by_severity = 'Ïî êðèòè÷íîñòè';

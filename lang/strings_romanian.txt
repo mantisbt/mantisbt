@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.42 $
+	# $Revision: 1.43 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:36 $
+	# $Date: 2003-03-11 08:16:37 $
 	#
-	# $Id: strings_romanian.txt,v 1.42 2003-02-26 14:25:36 jlatour Exp $
+	# $Id: strings_romanian.txt,v 1.43 2003-03-11 08:16:37 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = 'Proiect selectat';
 	$s_valid_project_msg = 'Trebuie sa alegeti un proiect valid';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Sursa pentru';
-	$s_not_supported_part1 = 'Aceasta versiune';
-	$s_not_supported_part2 = 'de php nu suporta';
-
 	# signup.php
 	$s_invalid_email = 'este o adresa de e-mail invalida';
 	$s_duplicate_username = 'este un nume de utilizator duplicat. Va rugam sa alegeti altul.';
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = 'Sumar';
 	$s_summary_jpgraph_link = 'Sumar avansat';
+	$s_by_project = 'by project';
 	$s_by_status = 'dupa stare';
 	$s_by_date = 'by date (days)';
 	$s_by_severity = 'by severity';

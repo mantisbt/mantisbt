@@ -10,11 +10,11 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 	#          Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.48 $
+	# $Revision: 1.49 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 16:40:44 $
+	# $Date: 2003-03-11 08:16:35 $
 	#
-	# $Id: strings_italian.txt,v 1.48 2003-02-26 16:40:44 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.49 2003-03-11 08:16:35 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -742,11 +742,6 @@
 	$s_selected_project = "Progetto Selezionato";
 	$s_valid_project_msg = "Selezionare un progetto valido";
 
-	# show_source_page.php
-	$s_show_source_for_msg = "Visualizza il sorgente";
-	$s_not_supported_part1 = "Questa versione";
-	$s_not_supported_part2 = "di php non lo supporta";
-
 	# signup.php
 	$s_invalid_email = "EMAIL ERRATA";
 	$s_duplicate_username = "USERNAME DUPLICATO. SELEZIONARE UN UTENTE DIFFERENTE.";
@@ -775,6 +770,7 @@
 	# summary_page.php
 	$s_summary_title = "Statistiche";
 	$s_summary_jpgraph_link = "Grafici";
+	$s_by_project = 'by project';
 	$s_by_status = "per status";
 	$s_by_date = "per data";
 	$s_by_severity = "per gravità";

@@ -7,11 +7,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:35 $
+	# $Date: 2003-03-11 08:16:36 $
 	#
-	# $Id: strings_norwegian.txt,v 1.47 2003-02-26 14:25:35 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.48 2003-03-11 08:16:36 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = 'Valgt prosjekt';
 	$s_valid_project_msg = 'Du må velge et gyldig prosjekt';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Viser kilden for';
-	$s_not_supported_part1 = 'Denne versjonen';
-	$s_not_supported_part2 = 'av PHP støtter ikke';
-
 	# signup.php
 	$s_invalid_email = 'ER EN UGYLDIG EPOST-ADRESSE';
 	$s_duplicate_username = 'EKSISTERER FRA FØR.  VELG ET ANNET BRUKERNAVN';
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = 'Oppsummering';
 	$s_summary_jpgraph_link = 'Avansert oppsummering';
+	$s_by_project = 'by project';
 	$s_by_status = 'pr status';
 	$s_by_date = 'pr dato';
 	$s_by_severity = 'pr alvorlighetsgrad';

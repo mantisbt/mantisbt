@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.54 $
+	# $Revision: 1.55 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:33 $
+	# $Date: 2003-03-11 08:16:35 $
 	#
-	# $Id: strings_french.txt,v 1.54 2003-02-26 14:25:33 jlatour Exp $
+	# $Id: strings_french.txt,v 1.55 2003-03-11 08:16:35 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -744,11 +744,6 @@
 	$s_selected_project = 'Projet en cours';
 	$s_valid_project_msg = 'Vous devez choisir un projet valide';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Source du fichier';
-	$s_not_supported_part1 = 'La version';
-	$s_not_supported_part2 = 'de PHP ne supporte pas';
-
 	# signup.php
 	$s_invalid_email = 'EST UNE ADRESSE EMAIL INVALIDE';
 	$s_duplicate_username = 'EST DEJA DANS LA BASE. CHOISISSEZ UN AUTRE IDENTIFIANT';
@@ -777,6 +772,7 @@
 	# summary_page.php
 	$s_summary_title = 'Synthèse';
 	$s_summary_jpgraph_link = 'Synthèse avancée';
+	$s_by_project = 'by project';
 	$s_by_status = 'par état';
 	$s_by_date = 'par date';
 	$s_by_severity = 'par sévérité';

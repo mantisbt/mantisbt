@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.48 $
+	# $Revision: 1.49 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:32 $
+	# $Date: 2003-03-11 08:16:34 $
 	#
-	# $Id: strings_dutch.txt,v 1.48 2003-02-26 14:25:32 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.49 2003-03-11 08:16:34 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -742,11 +742,6 @@
 	$s_selected_project = 'Geselecteerd project';
 	$s_valid_project_msg = 'U moet een geldig project kiezen';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Laat bron zien voor';
-	$s_not_supported_part1 = 'Deze versie';
-	$s_not_supported_part2 = 'van php ondersteunt niet';
-
 	# signup.php
 	$s_invalid_email = 'is geen geldig e-mail adres';
 	$s_duplicate_username = 'De door u opgegeven gebruikersnaam is al in gebruik. Kies A.U.B. een andere gebruikersnaam';
@@ -775,6 +770,7 @@
 	# summary_page.php
 	$s_summary_title = 'Samenvatting';
 	$s_summary_jpgraph_link = 'Uitgebreid overzicht';
+	$s_by_project = 'by project';
 	$s_by_status = 'naar status';
 	$s_by_date = 'naar datum';
 	$s_by_severity = 'naar ernstigheid';

@@ -8,11 +8,11 @@
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
 	# -------------------------------------------------
-	# $Revision: 1.48 $
+	# $Revision: 1.49 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:38 $
+	# $Date: 2003-03-11 08:16:38 $
 	#
-	# $Id: strings_spanish.txt,v 1.48 2003-02-26 14:25:38 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.49 2003-03-11 08:16:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -740,11 +740,6 @@
 	$s_selected_project = 'Proyecto Seleccionado';
 	$s_valid_project_msg = 'Debe seleccionar un proyecto valido';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Mostrando codigo fuente para';
-	$s_not_supported_part1 = 'Esta version';
-	$s_not_supported_part2 = 'de PHP no soporta';
-
 	# signup.php
 	$s_invalid_email = 'ES UNA DIRECCION DE CORREO INVALIDA';
 	$s_duplicate_username = 'ES UN USUARIO DUPLICADO.  SELECCIONE OTRO NOMBRE DE USUARIO';
@@ -773,6 +768,7 @@
 	# summary_page.php
 	$s_summary_title = 'Reporte General';
 	$s_summary_jpgraph_link = 'Reporte General Avanzado';
+	$s_by_project = 'by project';
 	$s_by_status = 'por Status';
 	$s_by_date = 'por fecha';
 	$s_by_severity = 'por severidad';

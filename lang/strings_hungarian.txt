@@ -7,11 +7,11 @@
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # -------------------------------------------------
-  # $Revision: 1.37 $
+  # $Revision: 1.38 $
   # $Author: jlatour $
-  # $Date: 2003-02-26 14:25:34 $
+  # $Date: 2003-03-11 08:16:35 $
   #
-  # $Id: strings_hungarian.txt,v 1.37 2003-02-26 14:25:34 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.38 2003-03-11 08:16:35 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
   $s_selected_project = 'Kiválasztott projekt';
   $s_valid_project_msg = 'Ki kell választania egy érvényes projektet';
 
-	# show_source_page.php
-  $s_show_source_for_msg = 'Ennek a forráskódja:';
-  $s_not_supported_part1 = 'A php ezen verziója (';
-  $s_not_supported_part2 = ') nem támogatja';
-
 	# signup.php
   $s_invalid_email = 'ÉRVÉNYTELEN E-MAILCÍM';
   $s_duplicate_username = 'FELHASTNÁLÓNÉV MÁR LÉTEZIK.  VÁLASSZON MÁSIKAT';
@@ -772,6 +767,7 @@
 	# summary_page.php
   $s_summary_title = 'Összegzés';
   $s_summary_jpgraph_link = 'Részletes összegzés';
+	$s_by_project = 'by project';
   $s_by_status = 'állapot szerint';
   $s_by_date = 'dátum (napok) szerint';
   $s_by_severity = 'súlyosság szerint';

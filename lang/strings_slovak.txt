@@ -9,11 +9,11 @@
 	# Code page: ISO-8259-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: jlatour $
-	# $Date: 2003-03-06 12:20:15 $
+	# $Date: 2003-03-11 08:16:38 $
 	#
-	# $Id: strings_slovak.txt,v 1.1 2003-03-06 12:20:15 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.2 2003-03-11 08:16:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -741,11 +741,6 @@
 	$s_selected_project = 'Vyber projekt';
 	$s_valid_project_msg = 'Musíte vybra» platný projekt';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Zdroj pre';
-	$s_not_supported_part1 = 'Táto verzia';
-	$s_not_supported_part2 = 'php nepodporuje';
-
 	# signup.php
 	$s_invalid_email = 'JE NEPLATNÁ EMAILOVÁ ADRESA';
 	$s_duplicate_username = 'JE U® EXISTUJÚCE U®IVATE¥SKÉ MENO. VYBERTE INÉ U®IVATE¥SKÉ MENO.';
@@ -774,6 +769,7 @@
 	# summary_page.php
 	$s_summary_title = 'Zhrnutie';
 	$s_summary_jpgraph_link = 'Roz¹írené zhrnutie';
+	$s_by_project = 'by project';
 	$s_by_status = 'podµa stavu';
 	$s_by_date = 'podµa dátumu(dni)';
 	$s_by_severity = 'podµa dôle¾itosti';

@@ -7,11 +7,11 @@
 
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt  V0.1
 	# -------------------------------------------------
-	# $Revision: 1.44 $
+	# $Revision: 1.45 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:36 $
+	# $Date: 2003-03-11 08:16:37 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.44 2003-02-26 14:25:36 jlatour Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.45 2003-03-11 08:16:37 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = 'Seleccionar Projecto';
 	$s_valid_project_msg = 'Deve Selecionar um Projecto Válido';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Mostrando o código para';
-	$s_not_supported_part1 = 'Essa Versão';
-	$s_not_supported_part2 = 'de php não suporta';
-
 	# signup.php
 	$s_invalid_email = 'ENDEREÇO DE E-MAIL INVÁLIDO';
 	$s_duplicate_username = 'UTILIZADOR EXISTENTE. ESCOLHA OUTRO';
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = 'Sumário';
 	$s_summary_jpgraph_link = 'Sumário Avançado';
+	$s_by_project = 'by project';
 	$s_by_status = 'por Estado';
 	$s_by_date = 'por Data';
 	$s_by_severity = 'por Causa';

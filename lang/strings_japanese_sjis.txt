@@ -7,11 +7,11 @@
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# -------------------------------------------------
-	# $Revision: 1.37 $
+	# $Revision: 1.38 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:35 $
+	# $Date: 2003-03-11 08:16:36 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.37 2003-02-26 14:25:35 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.38 2003-03-11 08:16:36 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = "選択したプロジェクト";
 	$s_valid_project_msg = "プロジェクトを正しく選択して下さい。";
 
-	# show_source_page.php
-	$s_show_source_for_msg = "ソースを表示：";
-	$s_not_supported_part1 = "このバージョン";
-	$s_not_supported_part2 = "のPHPはサポートしていません。";
-
 	# signup.php
 	$s_invalid_email = "メールアドレスが正しく入力されていません。";
 	$s_duplicate_username = "ユーザ名が重複しています。他のユーザ名を入力して下さい。";
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = "改修要望のサマリ";
 	$s_summary_jpgraph_link = "高度なサマリ";
+	$s_by_project = 'by project';
 	$s_by_status = "状態による";
 	$s_by_date = "日数による";
 	$s_by_severity = "重要度による";

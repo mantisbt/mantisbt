@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.45 $
+	# $Revision: 1.46 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:32 $
+	# $Date: 2003-03-11 08:16:34 $
 	#
-	# $Id: strings_danish.txt,v 1.45 2003-02-26 14:25:32 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.46 2003-03-11 08:16:34 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = 'Projekt Valgt';
 	$s_valid_project_msg = 'Du skal vælge et gyldigt Projekt';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Vis kilde til';
-	$s_not_supported_part1 = 'Denne version';
-	$s_not_supported_part2 = 'af php understøtter ikke';
-
 	# signup.php
 	$s_invalid_email = 'ER EN UGYLDIG EMAIL ADRESSE';
 	$s_duplicate_username = 'ER ALLEREDE I ANVENDELSE SOM BRUGERNAVN.  VÆLG ET ANDET BRUGERNAVN';
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = 'Opsummering';
 	$s_summary_jpgraph_link = 'Avanceret opsummering';
+	$s_by_project = 'by project';
 	$s_by_status = 'efter status';
 	$s_by_date = 'efter dato (dage)';
 	$s_by_severity = 'efter alvorlighed';

@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:35 $
+	# $Date: 2003-03-11 08:16:36 $
 	#
-	# $Id: strings_polish.txt,v 1.50 2003-02-26 14:25:35 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.51 2003-03-11 08:16:36 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -740,11 +740,6 @@
 	$s_selected_project = 'Wybrany projekt';
 	$s_valid_project_msg = 'Musisz wybraæ prawid³owy projekt';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Poka¿ ¼ród³a dla';
-	$s_not_supported_part1 = 'Ta wersja';
-	$s_not_supported_part2 = 'php nie wspiera';
-
 	# signup.php
 	$s_invalid_email = 'NIE JEST PRAWID£OWYM ADRESEM EMAIL';
 	$s_duplicate_username = 'JU¯ ISTNIEJE.  WYBIERZ INN¡ NAZWÊ U¯YTKOWNIKA';
@@ -773,6 +768,7 @@
 	# summary_page.php
 	$s_summary_title = 'Statystyki';
 	$s_summary_jpgraph_link = 'Zaawansowane statystyki';
+	$s_by_project = 'by project';
 	$s_by_status = 'wg statusu';
 	$s_by_date = 'wg daty (dni)';
 	$s_by_severity = 'wg wa¿no¶ci';

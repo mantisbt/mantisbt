@@ -8,11 +8,11 @@
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:38 $
+	# $Date: 2003-03-11 08:16:38 $
 	#
-	# $Id: strings_turkish.txt,v 1.43 2003-02-26 14:25:38 jlatour Exp $
+	# $Id: strings_turkish.txt,v 1.44 2003-03-11 08:16:38 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -740,11 +740,6 @@
 	$s_selected_project = 'Seçilen Proje';
 	$s_valid_project_msg = 'Geçerli bir proje seçmelisiniz';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'Kodu gösterilen sayfa';
-	$s_not_supported_part1 = 'PHP\'nin bu versiyonu ';
-	$s_not_supported_part2 = 'desteklemiyor';
-
 	# signup.php
 	$s_invalid_email = 'GEÇERSÝZ BÝR EMAÝL ADRESÝDÝR';
 	$s_duplicate_username = 'SÝSTEMDE DAHA ÖNCEDEN KULLANILMIÞTIR.  LÜTFEN BAÞKA BÝR KULLANICI ADI SEÇÝNÝZ';
@@ -773,6 +768,7 @@
 	# summary_page.php
 	$s_summary_title = 'Özet';
 	$s_summary_jpgraph_link = 'Advanced summary';
+	$s_by_project = 'by project';
 	$s_by_status = 'statüye göre';
 	$s_by_date = 'tarihe göre';
 	$s_by_severity = 'þiddete göre';

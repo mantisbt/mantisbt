@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:31 $
+	# $Date: 2003-03-11 08:16:33 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.43 2003-02-26 14:25:31 jlatour Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.44 2003-03-11 08:16:33 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = 'Selected project';
 	$s_valid_project_msg = 'You must choose a valid project';
 
-	# show_source_page.php
-	$s_show_source_for_msg = '顯示原始碼給';
-	$s_not_supported_part1 = '此版本';
-	$s_not_supported_part2 = '的 PHP 並沒有支援!!';
-
 	# signup.php
 	$s_invalid_email = '是一個無效的 EMIAL 地址!!';
 	$s_duplicate_username = '帳號名稱已經有人使用了. 請選擇其他的使用者名稱';
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = '摘要';
               $s_summary_jpgraph_link = 'Advanced summary';
+	$s_by_project = 'by project';
               $s_by_status = '依狀態';
 	$s_by_date = '依日期';
 	$s_by_severity = '依嚴重性';

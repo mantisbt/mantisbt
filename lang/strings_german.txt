@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.63 $
-	# $Author: int2str $
-	# $Date: 2003-03-10 11:51:30 $
+	# $Revision: 1.64 $
+	# $Author: jlatour $
+	# $Date: 2003-03-11 08:16:35 $
 	#
-	# $Id: strings_german.txt,v 1.63 2003-03-10 11:51:30 int2str Exp $
+	# $Id: strings_german.txt,v 1.64 2003-03-11 08:16:35 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -742,11 +742,6 @@
 	# set_project.php
 	$s_selected_project = 'Gewähltes Projekt';
 	$s_valid_project_msg = 'Es muss ein Projekt ausgewählt werden';
-
-	# show_source_page.php
-	$s_show_source_for_msg = 'Quellcode anzeigen für';
-	$s_not_supported_part1 = 'Diese php-Version';
-	$s_not_supported_part2 = 'hat keine Unterstützung für';
 
 	# signup.php
 	$s_invalid_email = 'IST EINE UNG&Uuml;LTIGE EMAIL-ADRESSE';

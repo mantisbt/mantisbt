@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.33 $
+	# $Revision: 1.34 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:38 $
+	# $Date: 2003-03-11 08:16:37 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.33 2003-02-26 14:25:38 jlatour Exp $
+	# $Id: strings_russian_koi8.txt,v 1.34 2003-03-11 08:16:37 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -739,11 +739,6 @@
 	$s_selected_project = '÷ÙÂÒÁÎÎÙÊ ÐÒÏÅËÔ';
 	$s_valid_project_msg = '÷Ù ÄÏÌÖÎÙ ×ÙÂÒÁÔØ ÐÒÁ×ÉÌØÎÙÊ ÐÒÏÅËÔ';
 
-	# show_source_page.php
-	$s_show_source_for_msg = 'ðÏËÁÚ ËÏÄÁ ';
-	$s_not_supported_part1 = 'üÔÁ ×ÅÒÓÉÑ';
-	$s_not_supported_part2 = 'PHP ÎÅ ÐÏÄÄÅÒÖÉ×ÁÅÔ';
-
 	# signup.php
 	$s_invalid_email = 'îåðòá÷éìøîùê E-MAIL ÁÄÒÅÓ';
 	$s_duplicate_username = 'ôáëïå éíñ ðïìøúï÷áôåìñ õöå éóðïìøúõåôóñ.  ÷ùâåòéôå äòõçïå éíñ';
@@ -772,6 +767,7 @@
 	# summary_page.php
 	$s_summary_title = 'óÔÁÔÉÓÔÉËÁ';
 	$s_summary_jpgraph_link = 'çÒÁÆÉÞÅÓËÁÑ ÓÔÁÔÉÓÔÉËÁ';
+	$s_by_project = 'by project';
 	$s_by_status = 'ðÏ ÓÔÁÔÕÓÕ';
 	$s_by_date = 'ðÏ ÄÁÔÅ (ÄÎÑÍ)';
 	$s_by_severity = 'ðÏ ËÒÉÔÉÞÎÏÓÔÉ';
