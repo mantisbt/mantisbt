@@ -14,6 +14,7 @@ Mantis
  * Fixed where updaters could delete bugs.
  * Fixed where search result numbers correctly displayed.
  * Raised access required to ADMINISTRATOR for many manage_* pages.
+ * Fixed error where default_profiles were not being picked up properly.
 
 08.19.2001  -   0.15.4
 
