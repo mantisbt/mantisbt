@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.8 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: ldap_api.php,v 1.9 2003-01-23 06:05:21 robertjf Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -45,8 +45,14 @@
 	}
 
  	# --------------------
-	# Find an email address from LDAP, given a username
-	function ldap_email( $p_username ) {
+	# Return an email address from LDAP, given a userid
+	function ldap_email( $p_user_id ) {
+		$t_username 	= user_get_field( $p_user_id, 'username' );
+		return ldap_email_from_username($t_username)
+		
+	}
+
+	function ldap_email_from_username( $p_username ) {
 		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
@@ -64,11 +70,12 @@
 
 	# --------------------
 	# Return true if the $uid has an assigngroup=$p_group tag, false otherwise
-	function ldap_has_group( $p_username, $p_group ) {
+	function ldap_has_group( $p_user_id, $p_group ) {
 		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
-		$t_search_filter	= "(&$t_ldap_organization(uid=$p_username)(assignedgroup=$p_group))";
+		$t_username 		= user_get_field( $p_user_id, 'username' );
+		$t_search_filter	= "(&$t_ldap_organization(uid=$t_username)(assignedgroup=$p_group))";
 		$t_search_attrs		= array( 'uid', 'dn', 'assignedgroup' );
 	    $t_ds				= ldap_connect_bind();
 
@@ -85,13 +92,14 @@
 	}
 	
 	# --------------------
-	# Attempt to authenticate the a username against the LDAP directory
+	# Attempt to authenticate the user against the LDAP directory
 	#  return true on successful authentication, false otherwise
-	function ldap_authenticate( $p_username, $p_password ) {
+	function ldap_authenticate( $p_user_id, $p_password ) {
 		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
-		$t_search_filter	= "(&$t_ldap_organization(uid=$p_username))";
+		$t_username 		= user_get_field( $p_user_id, 'username' );
+		$t_search_filter	= "(&$t_ldap_organization(uid=$t_username))";
 		$t_search_attrs		= array( 'uid', 'dn' );
 	    $t_ds				= ldap_connect_bind();
 		
@@ -100,7 +108,7 @@
 		$t_info	= ldap_get_entries( $t_ds, $t_sr );
 
 		$t_authenticated = false;
-
+		
 		if ( $t_info ) {
 			# Try to authenticate to each until we get a match
 			for ( $i = 0 ; $i < $t_info['count'] ; $i++ ) {
