@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.3 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: utility_api.php,v 1.4 2003-01-04 09:10:51 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -109,6 +109,33 @@
 			return true;
 		}
 		return false;
+	}
+
+	# --------------------
+	# Get the named php ini variable but return it as a bool
+	function ini_get_bool( $p_name ) {
+		$result = ini_get( $p_name );
+
+		if ( is_string( $result ) ) {
+			switch ( $result ) {
+				case 'off':
+				case 'false':
+				case 'no':
+				case 'none':
+				case '':
+				case '0':
+					return false;
+					break;
+				case 'on':
+				case 'true':
+				case 'yes':
+				case '1':
+					return true;
+					break;
+			}
+		} else {
+			return (bool)$result;
+		}
 	}
 
 ?>

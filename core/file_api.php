@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.18 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: file_api.php,v 1.19 2003-01-04 09:10:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -305,7 +305,7 @@
 
 		$t_access = user_get_access_level( $p_user_id, $p_project_id );
 
-		if ( false == ini_get( 'file_uploads' ) ||
+		if ( ! ini_get_bool( 'file_uploads' ) ||
 			 OFF == config_get( 'allow_file_upload' ) ||
 			 $t_access < config_get( 'upload_project_file_threshold' ) ) { 
 			return false;
@@ -327,7 +327,7 @@
 		}
 
 		# If uploads are disbled just return false
-		if ( false == ini_get( 'file_uploads' ) || 
+		if ( ! ini_get_bool( 'file_uploads' ) || 
 			 OFF == config_get( 'allow_file_upload' ) ) {
 			return false;
 		}
