@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.74 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: manage_proj_edit_page.php,v 1.75 2004-05-26 03:22:16 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -438,13 +438,16 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 				<td class="category">
 					<?php echo lang_get( 'username' ) ?>
 				</td>
+				<td class="category">
+					<?php echo lang_get( 'access_level' ) ?>
+				</td>
+				<td class="category"> &nbsp; </td>
+			</tr>
+			<tr class="row-1" valign="top">
 				<td>
 					<select name="user_id[]" multiple="multiple" size="10">
 						<?php print_project_user_list_option_list( $f_project_id ) ?>
 					</select>
-				</td>
-				<td class="category">
-					<?php echo lang_get( 'access_level' ) ?>
 				</td>
 				<td>
 					<select name="access_level">
@@ -497,7 +500,12 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 ?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php echo $t_user['username'] ?>
+				<?php
+					echo $t_user['username'];
+					if ( isset( $t_user['realname'] ) && $t_user['realname'] > "" ) {
+						echo " (" . $t_user['realname'] . ")";
+					}
+				?>
 			</td>
 			<td>
 			<?php 

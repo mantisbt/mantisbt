@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.80 2004-05-18 19:32:56 narcissus Exp $
+	# $Id: print_api.php,v 1.81 2004-05-26 03:22:16 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -184,6 +184,7 @@
 		if ( ( ON == config_get( 'limit_reporters' ) ) && ( current_user_get_access_level() <= config_get( 'report_bug_threshold' ) ) ) {
 			$t_user['id'] = auth_get_current_user_id();
 			$t_user['username'] = user_get_field( $t_user['id'], 'username' );
+			$t_user['realname'] = user_get_field( $t_user['id'], 'realname' );
 			$t_users[] = $t_user;
 		}
 		else
@@ -221,6 +222,10 @@
 
 		foreach ( $t_users as $t_user ) {
 			$t_user_name = string_attribute( $t_user['username'] );
+			if ( isset( $t_user['realname'] ) && $t_user['realname'] > "" ) {
+				$t_user_name = string_attribute( $t_user['realname'] );
+			}
+
 			PRINT '<option value="' . $t_user['id'] . '" ';
 			check_selected( $p_user_id, $t_user['id'] );
 			PRINT '>' . $t_user_name . '</option>';
@@ -316,7 +321,7 @@
 			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
 			$t_project_table = config_get( 'mantis_project_table' );
 
-			$query = "SELECT DISTINCT u.id, u.username
+			$query = "SELECT DISTINCT u.id, u.username, u.realname
 					FROM 	$t_user_table u,
 							$t_project_user_list_table l,
 							$t_project_table p
@@ -335,13 +340,18 @@
 			}
 		} else {
 			$t_users = project_get_all_user_rows( $p_project_id,
-												config_get( 'handle_bug_threshold' ) );
+				config_get( 'handle_bug_threshold' ) );
 		}
 
 		foreach ( $t_users as $t_user ) {
+			$t_user_name = string_attribute( $t_user['username'] );
+			if ( isset( $t_user['realname'] ) && $t_user['realname'] > "" ) {
+				$t_user_name = string_attribute( $t_user['realname'] );
+			}
+
 			PRINT '<option value="' . $t_user['id'] . '" ';
 			check_selected( $p_user_id, $t_user['id'] );
-			PRINT '>' . $t_user['username'] . '</option>';
+			PRINT '>' . $t_user_name . '</option>';
 		}
 	}
 	# --------------------
@@ -653,7 +663,7 @@
 		$c_project_id = (int)$p_project_id;
 
 		$t_adm = ADMINISTRATOR;
-		$query = "SELECT DISTINCT u.id, u.username
+		$query = "SELECT DISTINCT u.id, u.username, u.realname
 				FROM $g_mantis_user_table u
 				LEFT JOIN $g_mantis_project_user_list_table p
 				ON p.user_id=u.id AND p.project_id='$c_project_id'
@@ -667,6 +677,9 @@
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_username = string_attribute(	$row['username'] );
+			if ( $row['realname'] > "" ) {
+				$t_username .= " (" . string_attribute( $row['realname'] ) . ")";
+			}
 			$t_user_id = $row['id'];
 			PRINT "<option value=\"$t_user_id\">$t_username</option>";
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.54 2004-05-18 09:19:17 int2str Exp $
+	# $Id: project_api.php,v 1.55 2004-05-26 03:22:17 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -451,7 +451,7 @@
 
 		$t_users = array();
 
-		$query = "SELECT id, username, access_level
+		$query = "SELECT id, username, realname, access_level
 					FROM $t_user_table
 					WHERE enabled = $t_on
 					  $t_access_clause
@@ -465,7 +465,7 @@
 		}
 
 		# Get the project overrides
-		$query = "SELECT u.id, u.username, l.access_level
+		$query = "SELECT u.id, u.username, u.realname, l.access_level
 					FROM $t_project_user_list_table l, $t_user_table u
 					WHERE l.user_id = u.id
 					  AND u.enabled = $t_on
