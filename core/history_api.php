@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.17 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: history_api.php,v 1.18 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -32,7 +32,7 @@
 			$query = "INSERT INTO " . config_get( 'mantis_bug_history_table' ) . "
 					( user_id, bug_id, date_modified, field_name, old_value, new_value )
 					VALUES
-					( '$c_user_id', '$c_bug_id', NOW(), '$c_field_name', '$c_old_value', '$c_new_value' )";
+					( '$c_user_id', '$c_bug_id', " . db_now() . ", '$c_field_name', '$c_old_value', '$c_new_value' )";
 			$result = db_query( $query );
 		}
 	}
@@ -56,7 +56,7 @@
 		$query = "INSERT INTO " . config_get( 'mantis_bug_history_table' ) . "
 				( user_id, bug_id, date_modified, type, old_value, new_value )
 				VALUES
-				( '$t_user_id', '$c_bug_id', NOW(), '$c_type', '$c_optional', '$c_optional2' )";
+				( '$t_user_id', '$c_bug_id', " . db_now() . ", '$c_type', '$c_optional', '$c_optional2' )";
 		$result = db_query( $query );
 	}
 	# --------------------
@@ -86,7 +86,7 @@
 		$c_bug_id = db_prepare_int( $p_bug_id );
 
 		# grab history and display by date_modified then field_name
-		$query = "SELECT b.*, UNIX_TIMESTAMP(b.date_modified) as date_modified, u.username
+		$query = "SELECT b.*, u.username
 				FROM $t_mantis_bug_history_table b
 				LEFT JOIN $t_mantis_user_table u
 				ON b.user_id=u.id
@@ -100,7 +100,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$v_date_modified = date( config_get( 'normal_date_format' ), $v_date_modified );
+			$v_date_modified = date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_modified ) );
 
 			switch ( $v_field_name ) {
 			case 'category':

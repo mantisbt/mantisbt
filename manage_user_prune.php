@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_prune.php,v 1.5 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_user_prune.php,v 1.6 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -20,7 +20,7 @@
 	$days_old = (integer)$days_old;
 	$query = "SELECT id
 			FROM $t_user_table
-			WHERE login_count=0 AND TO_DAYS(NOW()) - '$days_old' > TO_DAYS(date_created)";
+			WHERE login_count=0 AND TO_DAYS(".db_now().") - '$days_old' > TO_DAYS(date_created)";
 	$result = db_query($query);
 
 	$count = db_num_rows( $result );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.45 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: project_api.php,v 1.46 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -227,14 +227,14 @@
 
 		$query = "INSERT
 				  INTO $t_project_table
-					( id, name, status, enabled, view_state, file_path, description )
+					( name, status, enabled, view_state, file_path, description )
 				  VALUES
-					( null, '$c_name', '$c_status', '$c_enabled', '$c_view_state', '$c_file_path', '$c_description' )";
+					( '$c_name', '$c_status', '$c_enabled', '$c_view_state', '$c_file_path', '$c_description' )";
 
 		db_query( $query );
 
 		# return the id of the new project
-		return db_insert_id();
+		return db_insert_id($t_project_table);
 	}
 
 	# --------------------

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.20 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.21 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -86,13 +86,13 @@
 		# insert bugnote text
 		$query = "INSERT
 				INTO $t_bugnote_text_table
-				( id, note )
+				( note )
 				VALUES
-				( null, '$c_bugnote_text' )";
+				( '$c_bugnote_text' )";
 		db_query( $query );
 
 		# retrieve bugnote text id number
-		$t_bugnote_text_id = db_insert_id();
+		$t_bugnote_text_id = db_insert_id($t_bugnote_text_table);
 
 		# Check for private bugnotes.
 		if ( $p_private && access_has_project_level( config_get( 'private_bugnote_threshold' ) ) ) {
@@ -107,13 +107,13 @@
 		# insert bugnote info
 		$query = "INSERT
 				INTO $t_bugnote_table
-				( id, bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
+				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
 				VALUES
-				( null, '$c_bug_id', '$t_user_id','$t_bugnote_text_id', '$t_view_state', NOW(), NOW() )";
+				('$c_bug_id', '$t_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ")";
 		db_query( $query );
 
 		# get bugnote id
-		$t_bugnote_id = db_insert_id();
+		$t_bugnote_id = db_insert_id($t_bugnote_table);
 
 		# update bug last updated
 		bug_update_date( $p_bug_id );
@@ -221,9 +221,8 @@
 
 		$query ="SELECT $c_field_name ".
 				"FROM $t_bugnote_table ".
-				"WHERE id='$c_bugnote_id' ".
-				"LIMIT 1";
-		$result = db_query( $query );
+				"WHERE id='$c_bugnote_id' ";
+		$result = db_query( $query, 1 );
 
 		return db_result( $result );
 	}
@@ -241,7 +240,7 @@
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table
-				  SET last_modified=NOW()
+				  SET last_modified=" . db_now() . "
 				  WHERE id='$c_bugnote_id'";
 		db_query( $query );
 

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.12 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.13 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,7 +33,7 @@
 	$t_bugnote_order		= config_get( 'bugnote_order' );
 
 	# get the bugnote data
-	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
+	$query = "SELECT *,date_submitted
 			FROM $t_bugnote_table
 			WHERE bug_id='$f_bug_id' $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
@@ -64,7 +64,7 @@
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v3' );
-		$v3_date_submitted = date( config_get( 'normal_date_format' ), ( $v3_date_submitted ) );
+		$v3_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_submitted ) ) );
 
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.5 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: check.php,v 1.6 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -94,21 +94,6 @@
 	</td>
 	<?php
 		$result = @db_connect( config_get( 'hostname' ), config_get( 'db_username' ), config_get( 'db_password' ), config_get( 'port' ) );
-		if ( false == $result ) {
-			print_test_result( BAD );
-		} else {
-			print_test_result( GOOD );
-		}
-	?>
-</tr>
-
-<!-- Test DATABASE part 2 -->
-<tr>
-	<td bgcolor="#ffffff">
-		Selecting database [<?php echo config_get( 'database_name' ) ?>]
-	</td>
-	<?php
-		$result = @db_select_db( config_get( 'database_name' ) );
 		if ( false == $result ) {
 			print_test_result( BAD );
 		} else {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.13 2004-02-10 11:37:42 vboctor Exp $
+	# $Id: news_api.php,v 1.14 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -32,10 +32,10 @@
 		# Add item
 		$query = "INSERT
 				INTO $t_news_table
-	    		  ( id, project_id, poster_id, date_posted, last_modified,
+	    		  ( project_id, poster_id, date_posted, last_modified,
 	    		    view_state, announcement, headline, body )
 				VALUES
-				  ( null, '$c_project_id', '$c_poster_id', NOW(), NOW(),
+				  ( '$c_project_id', '$c_poster_id', " . db_now() . "," . db_now() .",
 				    '$c_view_state', '$c_announcement', '$c_headline', '$c_body' )";
 		db_query( $query );
 
@@ -81,7 +81,7 @@
 					headline='$c_headline',
 					body='$c_body',
 					project_id='$c_project_id',
-					last_modified=NOW()
+					last_modified= " . db_now() . "
 				  WHERE id='$c_news_id'";
 		
 		db_query( $query );
@@ -96,7 +96,7 @@
 
 		$t_news_table = config_get( 'mantis_news_table' );
 
-		$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+		$query = "SELECT *, date_posted
 				  FROM $t_news_table
 				  WHERE id='$c_news_id'";
 		$result = db_query( $query );
@@ -104,7 +104,9 @@
 		if ( 0 == db_num_rows( $result ) ) {
 			trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
 		} else {
-			return db_fetch_array( $result );
+			$row = db_fetch_array( $result );
+			$row['date_posted'] = db_unixtimestamp ( $row['date_posted'] );
+			return $row;
 		}
 	}
 	# --------------------
@@ -133,7 +135,7 @@
 
 		$t_news_table = config_get( 'mantis_news_table' );
 
-		$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+		$query = "SELECT *, date_posted
 				  FROM $t_news_table
 				  WHERE project_id='$c_project_id'";
 		
@@ -149,7 +151,9 @@
 		$t_row_count = db_num_rows( $result );
 
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
-			array_push( $t_rows, db_fetch_array( $result ) );
+			$row = db_fetch_array( $result ) ;
+			$row['date_posted'] = db_unixtimestamp( $row['date_posted'] );
+			array_push( $t_rows, $row );
 		}
 
 		return $t_rows;
@@ -183,29 +187,30 @@
 		switch ( config_get( 'news_limit_method' ) ) {
 			case 0 :
 				# Select the news posts
-				$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+				$query = "SELECT *, date_posted
 						FROM $t_news_table
 						WHERE project_id='$c_project_id' OR project_id=" . ALL_PROJECTS . "
-						ORDER BY announcement DESC, id DESC
-						LIMIT $c_offset, $t_news_view_limit";
+						ORDER BY announcement DESC, id DESC";
+				$result = db_query( $query , $t_news_view_limit , $c_offset);
 			break;
 			case 1 :
-				# Select the news posts
-				$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
+				# Select the news posts @@BUGBUG-query
+				$query = "SELECT *, date_posted
 						FROM $t_news_table
 						WHERE ( project_id='$c_project_id' OR project_id=" . ALL_PROJECTS . " ) AND
-						(TO_DAYS(NOW()) - TO_DAYS(date_posted) < '$t_news_view_limit_days')
+						" . db_helper_compare_days( db_now(), 'date_posted', "< $t_news_view_limit_days") . "
 						ORDER BY announcement DESC, id DESC";
+				$result = db_query( $query );
 			break;
 		} # end switch
-
-		$result = db_query( $query );
 
 		$t_row_count = db_num_rows( $result );
 
 		$t_rows = array();
 		for ( $i = 0; $i < $t_row_count; $i++ ) {
-			array_push( $t_rows, db_fetch_array( $result ) );
+			$row = db_fetch_array( $result ) ;
+			$row['date_posted'] = db_unixtimestamp( $row['date_posted'] );
+			array_push( $t_rows, $row );
 		}
 
 		return $t_rows;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.64 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: user_api.php,v 1.65 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -119,10 +119,9 @@
 
 		$query = "SELECT username
 				FROM $t_user_table
-				WHERE username='$c_username'
-				LIMIT 1";
+				WHERE username='$c_username'";
 
-		$result = db_query( $query );
+		$result = db_query( $query, 1 );
 
 		if ( db_num_rows( $result ) > 0 ) {
 			$row = db_fetch_array( $result );
@@ -251,15 +250,15 @@
 		$t_user_table 						= config_get( 'mantis_user_table' );
 
 		$query = "INSERT INTO $t_user_table
-				    ( id, username, email, password, date_created, last_visit,
+				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string )
 				  VALUES
-				    ( null, '$c_username', '$c_email', '$c_password', NOW(), NOW(),
+				    ( '$c_username', '$c_email', '$c_password', " . db_now() . "," . db_now() . ",
 				     $c_enabled, $c_access_level, 0, '$t_cookie_string')";
 		db_query( $query );
 
 		# Create preferences for the user
-		$t_user_id = db_insert_id();
+		$t_user_id = db_insert_id( $t_user_table );
 		user_pref_set_default( $t_user_id );
 
 		# Users are added with protected set to FALSE in order to be able to update
@@ -508,12 +507,12 @@
 		$t_private = VS_PRIVATE;
 
 		if ( user_is_administrator( $p_user_id ) ) {
-			$query = "SELECT DISTINCT( id )
+			$query = "SELECT DISTINCT( id ), name
 					  FROM $t_project_table
 					  WHERE enabled=1
 					  ORDER BY name";
 		} else {
-			$query = "SELECT DISTINCT( p.id )
+			$query = "SELECT DISTINCT( p.id ), p.name
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id=u.project_id
@@ -622,14 +621,14 @@
 	#===================================
 
 	# --------------------
-	# Update the last_visited field to be NOW()
+	# Update the last_visited field to be now
 	function user_update_last_visit( $p_user_id ) {
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$query = "UPDATE $t_user_table
-				  SET last_visit=NOW()
+				  SET last_visit= " . db_now() . "
 				  WHERE id='$c_user_id'";
 
 		db_query( $query );

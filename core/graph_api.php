@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.11 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: graph_api.php,v 1.12 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -661,7 +661,7 @@
 			else $specific_where = " project_id='$t_project_id' ";
 
 		### Get all the submitted dates
-		$query = "SELECT UNIX_TIMESTAMP(date_submitted) as date_submitted
+		$query = "SELECT date_submitted
 			FROM $g_mantis_bug_table WHERE $specific_where
 			ORDER BY date_submitted";
 		$result = db_query( $query );
@@ -669,7 +669,7 @@
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
- 			$t_date = ($row['date_submitted']);
+ 			$t_date = db_unixtimestamp( $row['date_submitted'] );
 			$t_date_string = date('Y-m-d', $t_date);
 
 			$index = find_date_in_metrics($t_date_string);
@@ -684,7 +684,7 @@
 		$t_clo_val = CLOSED;
 		$t_res_val = RESOLVED;
 		### Get all the resolved dates
-		$query = "SELECT UNIX_TIMESTAMP(last_updated) as last_updated
+		$query = "SELECT last_updated
 			FROM $g_mantis_bug_table
 			WHERE $specific_where AND
 			(status='$t_res_val' OR status='$t_clo_val')
@@ -694,7 +694,7 @@
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_date = $row['last_updated'];
+			$t_date = db_unixtimestamp( $row['last_updated'] );
 			$t_date_string = date('Y-m-d', $t_date);
 
 			$index = find_date_in_metrics($t_date_string);

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.44 2004-03-03 18:12:12 narcissus Exp $
+	# $Id: print_bug_page.php,v 1.45 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,8 +30,7 @@
 
 	$c_bug_id = (integer)$f_bug_id;
 
-	$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-			UNIX_TIMESTAMP(last_updated) as last_updated
+	$query = "SELECT *, date_submitted, last_updated
 			FROM $g_mantis_bug_table
 			WHERE id='$c_bug_id'";
 	$result = db_query( $query );
@@ -111,10 +110,10 @@
 		<?php echo get_enum_element( 'reproducibility', $v_reproducibility ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_submitted ) ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_last_updated ) ) ?>
 	</td>
 </tr>
 <tr>
@@ -309,7 +308,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 	<td class="print" colspan="5">
 		<?php
-			$query = "SELECT filename, filesize, UNIX_TIMESTAMP(date_added) as date_added
+			$query = "SELECT filename, filesize, date_added
 					FROM $g_mantis_bug_file_table
 					WHERE bug_id='$c_bug_id'";
 			$result = db_query( $query );
@@ -318,7 +317,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 				$row = db_fetch_array( $result );
 				extract( $row, EXTR_PREFIX_ALL, 'v2' );
 				$v2_filesize = round( $v2_filesize / 1024 );
-				$v2_date_added = date( config_get( 'normal_date_format' ), ( $v2_date_added ) );
+				$v2_date_added = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v2_date_added ) ) );
 
 				switch ( $g_file_upload_method ) {
 					case DISK:	PRINT "$v2_filename ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_list_page.php,v 1.29 2004-02-08 08:00:06 vboctor Exp $
+	# $Id: news_list_page.php,v 1.30 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,10 +52,8 @@
 		}
 
 		echo "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?news_id=$v_id\">$v_headline</a></span> <span class=\"small\"> ";
-		
 		print_user( $v_poster_id );
 		echo ' ' . $t_note_string;
-		
 		echo "</span></li>";
 	}  # end for loop
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.50 2004-02-26 14:36:29 yarick123 Exp $
+	# $Id: bug_api.php,v 1.51 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -83,8 +83,7 @@
 			return $g_cache_bug[$c_bug_id];
 		}
 
-		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-			UNIX_TIMESTAMP(last_updated) as last_updated
+		$query = "SELECT *, date_submitted, last_updated
 				  FROM $t_bug_table
 				  WHERE id='$c_bug_id'";
 		$result = db_query( $query );
@@ -101,6 +100,8 @@
 		}
 
 		$row = db_fetch_array( $result );
+		$row['date_submitted'] = db_unixtimestamp( $row['date_submitted'] );
+		$row['last_updated'] = db_unixtimestamp( $row['last_updated'] );
 
 		$g_cache_bug[$c_bug_id] = $row;
 
@@ -277,9 +278,9 @@
 		# Insert text information
 		$query = "INSERT
 				  INTO $t_bug_text_table
-				    ( id, description, steps_to_reproduce, additional_information )
+				    ( description, steps_to_reproduce, additional_information )
 				  VALUES
-				    ( null, '$c_description', '$c_steps_to_reproduce',
+				    ( '$c_description', '$c_steps_to_reproduce',
 				      '$c_additional_info' )";
 		db_query( $query );
 
@@ -287,7 +288,7 @@
 		# NOTE: this is guarranteed to be the correct one.
 		# The value LAST_INSERT_ID is stored on a per connection basis.
 
-		$t_text_id = db_insert_id();
+		$t_text_id = db_insert_id($t_bug_text_table);
 
 		# check to see if we want to assign this right off
 		$t_status = config_get( 'bug_submit_status' );
@@ -317,7 +318,7 @@
 
 		$query = "INSERT
 				  INTO $t_bug_table
-				    ( id, project_id,
+				    ( project_id,
 				      reporter_id, handler_id,
 				      duplicate_id, priority,
 				      severity, reproducibility,
@@ -330,13 +331,13 @@
 				      build,
 				      profile_id, summary, view_state )
 				  VALUES
-				    ( null, '$c_project_id',
+				    ( '$c_project_id',
 				      '$c_reporter_id', '$c_handler_id',
 				      '0', '$c_priority',
 				      '$c_severity', '$c_reproducibility',
 				      '$t_status', '$t_resolution',
 				      10, '$c_category',
-				      NOW(), NOW(),
+				      " . db_now() . "," . db_now() . ",
 				      10, '$t_text_id',
 				      '$c_os', '$c_os_build',
 				      '$c_platform', '$c_version',
@@ -344,7 +345,7 @@
 				      '$c_profile_id', '$c_summary', '$c_view_state' )";
 		db_query( $query );
 
-		$t_bug_id = db_insert_id();
+		$t_bug_id = db_insert_id($t_bug_table);
 
 		# log new bug
 		history_log_event_special( $t_bug_id, NEW_BUG );
@@ -689,14 +690,17 @@
 
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
 
-		$query = "SELECT UNIX_TIMESTAMP(last_modified) as last_modified
+		$query = "SELECT last_modified
 				  FROM $t_bugnote_table
 				  WHERE bug_id='$c_bug_id'
-				  ORDER BY last_modified DESC
-				  LIMIT 1";
-		$result = db_query( $query );
-		
-		return db_result( $result );
+				  ORDER BY last_modified DESC";
+		$result = db_query( $query, 1 );
+		$row = db_result( $result );
+		if ( $row == false ) {
+			return false;
+		} else {
+			return db_unixtimestamp( $row );
+		}
 	}
 
 	#===================================
@@ -858,7 +862,7 @@
 		$t_bug_table = config_get( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_bug_table
-				  SET last_updated=NOW()
+				  SET last_updated= " . db_now() . "
 				  WHERE id='$c_bug_id'";
 		db_query( $query );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.41 2004-02-08 08:34:27 vboctor Exp $
+	# $Id: file_api.php,v 1.42 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -55,7 +55,7 @@
 
 		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
 
-		$query = "SELECT id, title, diskfile, filename, filesize, UNIX_TIMESTAMP(date_added) as date_added
+		$query = "SELECT id, title, diskfile, filename, filesize, date_added
 				FROM $t_bug_file_table
 				WHERE bug_id='$c_bug_id'
 				ORDER BY date_added";
@@ -72,7 +72,7 @@
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 			$t_filesize = number_format( $v_filesize );
-			$t_date_added = date( config_get( 'normal_date_format' ), ( $v_date_added ) );
+			$t_date_added = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v_date_added ) ) );
 
 			if ( $image_previewed ) {
 				$image_previewed = false;
@@ -254,9 +254,8 @@
 		# get info
 		$query = "SELECT $c_field_name
 				  FROM $t_bug_file_table
-				  WHERE id='$c_file_id'
-				  LIMIT 1";
-		$result = db_query( $query );
+				  WHERE id='$c_file_id'";
+		$result = db_query( $query, 1 );
 
 		return db_result( $result );
 	}
@@ -380,9 +379,9 @@
 			}
 
 			$query = "INSERT INTO $t_bug_file_table
-						(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
+						(bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 						VALUES
-						(null, $c_bug_id, '', '', '$c_file_path$c_new_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', NOW(), '$c_content')";
+						($c_bug_id, '', '', '$c_file_path$c_new_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
 			db_query( $query );
 
 			# updated the last_updated date

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_page.php,v 1.37 2004-02-10 22:33:47 jlatour Exp $
+	# $Id: summary_page.php,v 1.38 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -31,8 +31,7 @@
 	$t_bug_table = config_get( 'mantis_bug_table' );
 
 	$t_clo_val = CLOSED;
-	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-			UNIX_TIMESTAMP(last_updated) as last_updated
+	$query = "SELECT id, date_submitted, last_updated
 			FROM $t_bug_table
 			WHERE $specific_where AND status='$t_clo_val'";
 	$result = db_query( $query );
@@ -43,8 +42,8 @@
 	$t_total_time   = 0;
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_date_submitted = $row['date_submitted'];
-		$t_last_updated   = $row['last_updated'];
+		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );
+		$t_last_updated   = db_unixtimestamp( $row['last_updated'] );
 
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated   = 0;

@@ -9,7 +9,7 @@
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 
 	# --------------------------------------------------------
-	# $Id: summary_jpgraph_page.php,v 1.20 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: summary_jpgraph_page.php,v 1.21 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -21,8 +21,7 @@
 	$t_bug_table = config_get( 'mantis_bug_table' );
 
 	$t_res_val = RESOLVED;
-	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-			UNIX_TIMESTAMP(last_updated) as last_updated
+	$query = "SELECT id, date_submitted, last_updated
 			FROM $t_bug_table
 			WHERE project_id='$t_project_id' AND status='$t_res_val'";
 	$result = db_query( $query );
@@ -33,8 +32,8 @@
 	$t_total_time = 0;
 	for ($i=0;$i<$bug_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_date_submitted = ($row['date_submitted']);
-		$t_last_updated = $row['last_updated'];
+		$t_date_submitted = db_unixtimestamp( $row['date_submitted'] );
+		$t_last_updated = db_unixtimestamp( $row['last_updated'] );
 
 		if ($t_last_updated < $t_date_submitted) {
 			$t_last_updated = 0;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.8 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: upgrade_inc.php,v 1.9 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,13 +14,8 @@
 
 	require_once( 'db_table_names_inc.php' );
 
-	# Check if the upgrade table has been created yet
-	$query = "DESCRIBE $t_upgrade_table";
-	$result = db_query( $query, false );
-
-	# If not, then create it
-	if ( false === $result ) {
-		$query = "CREATE TABLE $t_upgrade_table
+	# Create the upgrade table if it does not exist
+	$query = "CREATE TABLE IF NOT EXISTS $t_upgrade_table
 				  (upgrade_id char(20) NOT NULL,
 				  description char(255) NOT NULL,
 				  PRIMARY KEY (upgrade_id))";
@@ -62,7 +57,6 @@
 				$t_item->set_applied();
 			}
 		}
-	}
 
 	# Compatibility function
 	#

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.39 2004-02-29 09:07:45 vboctor Exp $
+	# $Id: proj_doc_page.php,v 1.40 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,7 +27,7 @@
 	$t_project_id = helper_get_current_project();
 
 	# Select project files
-	$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
+	$query = "SELECT *, date_added
 			FROM $g_mantis_project_file_table
 			WHERE project_id='$t_project_id'
 			ORDER BY title ASC";
@@ -55,7 +55,7 @@
 		$v_filesize 	= number_format( $v_filesize );
 		$v_title 		= string_display( $v_title );
 		$v_description 	= string_display_links( $v_description );
-		$v_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
+		$v_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
 
 ?>
 <tr valign="top" <?php echo helper_alternate_class( $i ) ?>>

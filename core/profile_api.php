@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.5 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: profile_api.php,v 1.6 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -43,12 +43,12 @@
 		# Add profile
 		$query = "INSERT
 				  INTO $t_user_profile_table
-				    ( id, user_id, platform, os, os_build, description )
+				    ( user_id, platform, os, os_build, description )
 				  VALUES
-				    ( null, '$c_user_id', '$c_platform', '$c_os', '$c_os_build', '$c_description' )";
+				    ( '$c_user_id', '$c_platform', '$c_os', '$c_os_build', '$c_description' )";
 		db_query( $query );
 
-		return db_insert_id();
+		return db_insert_id($t_user_profile_table);
 	}
 
 	# --------------------

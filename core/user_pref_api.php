@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.11 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: user_pref_api.php,v 1.12 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -173,10 +173,10 @@
 
 	    $query = "INSERT
 				  INTO $t_user_pref_table
-				    (id, user_id, project_id, 
+				    (user_id, project_id,
 					  $t_vars_string)
 				  VALUES
-				    (null, '$c_user_id', '$c_project_id', 
+				    ('$c_user_id', '$c_project_id',
 					  $t_values_string)";
 		db_query($query);
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.34 2004-03-03 18:12:12 narcissus Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.35 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -365,7 +365,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <td colspan=3>
 <?php  # print bugnotes
 		# get the bugnote data
-		$query6 = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
+		$query6 = "SELECT *,date_submitted
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$v_id'
 				ORDER BY date_submitted $g_bugnote_order";
@@ -379,7 +379,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			# prefix all bugnote data with v3_
 			$row = db_fetch_array( $result6 );
 			extract( $row, EXTR_PREFIX_ALL, 'v3' );
-			$v3_date_submitted = date( config_get( 'normal_date_format' ), ( $v3_date_submitted ) );
+			$v3_date_submitted = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v3_date_submitted ) ) );
 
 			# grab the bugnote text and id and prefix with v3_
 			$query6 = "SELECT note, id

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.68 2004-02-26 14:36:29 yarick123 Exp $
+	# $Id: email_api.php,v 1.69 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -220,10 +220,6 @@
 		}
 
 		$t_pref_field = 'email_on_' . $p_notify_type;
-		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
-		if ( ! db_field_exists( $t_pref_field, $t_user_pref_table ) ) {
-			$t_pref_field = false;
-		}
 
 		# @@@ we could optimize by modifiying user_cache() to take an array
 		#  of user ids so we could pull them all in.  We'll see if it's necessary
@@ -245,13 +241,11 @@
 			}
 
 			# Exclude users who have this notification type turned off
-			if ( $t_pref_field ) {
 				$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
 				if ( OFF == $t_notify ) {
 					unset( $t_recipients[$t_id] );
 					continue;
 				}
-			}
 
 			# Finally, let's get their emails, if they've set one
 			$t_email = user_get_email( $t_id );
@@ -480,7 +474,7 @@
 
 		$t_state = VS_PUBLIC;
 
-		$query = "SELECT *, UNIX_TIMESTAMP(last_modified) as last_modified
+		$query = "SELECT *, last_modified
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$c_bug_id' AND view_state='$t_state'
 				ORDER BY date_submitted $g_bugnote_order";
@@ -500,7 +494,7 @@
 			$t_username = user_get_name( $t_reporter_id );
 
 			$t_note = db_result( $result2, 0, 0 );
-			$t_last_modified = date( $g_complete_date_format, $t_last_modified );
+			$t_last_modified = date( $g_complete_date_format, db_unixtimestamp( $t_last_modified ) );
 			$t_string = ' '.$t_username.' - '.$t_last_modified.' ';
 			$t_message = $t_message.$g_email_separator2."\n";
 			$t_message = $t_message.$t_string."\n";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_by_daily_delta.php,v 1.7 2004-01-11 07:16:11 vboctor Exp $
+	# $Id: graph_by_daily_delta.php,v 1.8 2004-03-05 01:26:19 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,9 +24,7 @@
 
 	$g_start_date = date( 'Y-m-d', strtotime("-1 Month"));
 
-	$query = "SELECT status,
-					UNIX_TIMESTAMP(date_submitted) as date_submitted,
-					UNIX_TIMESTAMP(last_updated) as last_updated
+	$query = "SELECT status, date_submitted, last_updated
 			FROM mantis_bug_table
 			WHERE project_id='$t_project_id' AND
 					date_submitted>='$g_start_date'
@@ -92,9 +90,9 @@
 		extract( $row );
 
 		if ( $status < 80 ) {
-			$date_str = date( 'm/d/Y', $date_submitted );
+			$date_str = date( 'm/d/Y', db_unixtimestamp( $date_submitted ) );
 		} else {
-			$date_str = date( 'm/d/Y', $last_updated );
+			$date_str = date( 'm/d/Y', db_unixtimestamp( $last_updated ) );
 		}
 
 		$data_date_arr[] = $date_str;

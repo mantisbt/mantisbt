@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add.php,v 1.40 2004-02-29 09:07:45 vboctor Exp $
+	# $Id: proj_doc_add.php,v 1.41 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -91,9 +91,9 @@
 		}
 
 		$query = "INSERT INTO mantis_project_file_table
-				(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
+				(project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 				VALUES
-				(null, $t_project_id, '$c_title', '$c_description', '$c_file_path$c_file_name', '$c_file_name', '$c_file_path', $c_file_size, '$c_file_type', NOW(), '$c_content')";
+				($t_project_id, '$c_title', '$c_description', '$c_file_path$c_file_name', '$c_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
 
 		$result = db_query( $query );
 	}

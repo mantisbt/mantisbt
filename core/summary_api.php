@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.20 2004-02-10 22:33:48 jlatour Exp $
+	# $Id: summary_api.php,v 1.21 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -109,7 +109,7 @@
 
 		$query = "SELECT COUNT(*)
 				FROM $t_mantis_bug_table
-				WHERE TO_DAYS(NOW()) - TO_DAYS(date_submitted) <= '$c_time_length' AND $specific_where";
+				WHERE ".db_helper_compare_days("date_submitted",db_now(),"<= '$c_time_length'")." AND $specific_where";
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}
@@ -223,9 +223,8 @@
 				FROM $t_mantis_bug_table
 				WHERE $specific_where
 				GROUP BY reporter_id
-				ORDER BY num DESC
-				LIMIT $t_reporter_summary_limit";
-		$result = db_query( $query );
+				ORDER BY num DESC";
+		$result = db_query( $query, $t_reporter_summary_limit );
 		while ( $row = db_fetch_array( $result ) ) {
 			$v_reporter_id = $row['reporter_id'];
 			$query = "SELECT status FROM $t_mantis_bug_table
@@ -319,7 +318,7 @@
 					$label = sprintf( '[%s] %s', $row2['name'], $label );
 				}
 				summary_helper_print_row(
-				$label
+				string_attribute($label)
 				, $t_bugs_open, $t_bugs_resolved
 				, $t_bugs_closed, $t_bugs_total );
 
@@ -360,7 +359,7 @@
 				$label = sprintf( '[%s] %s', $row2['name'], $label );
 			}
 			summary_helper_print_row( 
-			  $label
+			  string_attribute($label)
 			  , $t_bugs_open, $t_bugs_resolved
 			  , $t_bugs_closed, $t_bugs_total );
 		}

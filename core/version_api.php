@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.8 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: version_api.php,v 1.9 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -84,7 +84,7 @@
 		$query = "INSERT INTO $t_project_version_table 
 					( project_id, version, date_order )
 				  VALUES
-					( '$c_project_id', '$c_version', NOW() )";
+					( '$c_project_id', '$c_version', " . db_now() . ")";
 		db_query( $query );
 
 		# db_query() errors on failure so:

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.49 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_user_page.php,v 1.50 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -76,7 +76,7 @@
 	$days_old = 7;
 	$query = "SELECT *
 		FROM $t_user_table
-		WHERE TO_DAYS(NOW()) - TO_DAYS(date_created) <= '$days_old'
+		WHERE ".db_helper_compare_days(db_now(),"date_created","<= '$days_old'")."
 		ORDER BY date_created DESC";
 	$result = db_query( $query );
 	$new_user_count = db_num_rows( $result );
@@ -173,17 +173,15 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 	# Get the user data in $c_sort order
 	if ( 0 == $c_hide ) {
-		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
-				UNIX_TIMESTAMP(last_visit) as last_visit
+		$query = "SELECT *, date_created, last_visit
 				FROM $t_user_table
 				WHERE $t_where
-				ORDER BY '$c_sort' $c_dir";
+				ORDER BY $c_sort $c_dir";
 	} else {
-		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created,
-				UNIX_TIMESTAMP(last_visit) as last_visit
+		$query = "SELECT *, date_created, last_visit
 				FROM $t_user_table
-				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old') AND $t_where
-				ORDER BY '$c_sort' $c_dir";
+				WHERE " . db_helper_compare_days(db_now(),"last_visit","< '$days_old'") . ") AND $t_where
+				ORDER BY $c_sort $c_dir";
 	}
 
     $result = db_query($query);
@@ -242,8 +240,8 @@ for ($i=0;$i<$new_user_count;$i++) {
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, 'u' );
 
-		$u_date_created  = date( config_get( 'normal_date_format' ), $u_date_created );
-		$u_last_visit    = date( config_get( 'normal_date_format' ), $u_last_visit );
+		$u_date_created  = date( config_get( 'normal_date_format' ), db_unixtimestamp( $u_date_created ) );
+		$u_last_visit    = date( config_get( 'normal_date_format' ), db_unixtimestamp( $u_last_visit ) );
 ?>
 <tr <?php echo helper_alternate_class( $i ) ?>>
 	<td>

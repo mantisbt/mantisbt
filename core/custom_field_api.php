@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.24 2004-02-24 23:51:38 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.25 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -249,7 +249,7 @@
 
 		db_query( $query );
 
-		return db_insert_id();
+		return db_insert_id($t_custom_field_table);
 	}
 
 	# --------------------
@@ -643,9 +643,8 @@
 		$query = "SELECT sequence FROM
 				  $t_custom_field_project_table
 				  WHERE field_id='$c_field_id' AND
-					project_id='$c_project_id'
-					LIMIT 1";
-		$result = db_query( $query );
+					project_id='$c_project_id'";
+		$result = db_query( $query, 1 );
 
 		if ( 0 == db_num_rows( $result ) ) {
 			return false;

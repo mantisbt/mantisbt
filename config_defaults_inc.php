@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.146 2004-02-29 10:10:04 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.147 2004-03-05 01:26:16 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -37,6 +37,7 @@
 	$g_db_username			= 'root';
 	$g_db_password			= '';
 	$g_database_name		= 'bugtracker';
+	$g_db_type			= 'mysql';
 
 	############################
 	# Mantis Path Settings

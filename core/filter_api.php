@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.17 2004-02-27 01:53:37 beerfrick Exp $
+	# $Id: filter_api.php,v 1.18 2004-03-05 01:26:17 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -56,7 +56,6 @@
 
 		$t_where_clauses = array( "$t_project_table.enabled = 1", "$t_project_table.id = $t_bug_table.project_id" );
 		$t_select_clauses = array( "$t_bug_table.*" );
-		$t_from_clauses = array( $t_bug_table, $t_project_table );
 		$t_join_clauses = array();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
@@ -151,12 +150,15 @@
 							 OR ($t_bugnote_text_table.note LIKE '%$c_search%'))" );
 			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
 
-			array_push( $t_from_clauses, $t_bug_text_table );
+			$t_from_clauses = array( $t_bug_text_table, $t_project_table );
 
-			array_push( $t_join_clauses, "LEFT JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id" );
+			array_push( $t_join_clauses, ",($t_bug_table LEFT JOIN $t_bugnote_table ON $t_bugnote_table.bug_id = $t_bug_table.id)" );
 
 			array_push( $t_join_clauses, "LEFT JOIN $t_bugnote_text_table ON $t_bugnote_text_table.id = $t_bugnote_table.bugnote_text_id" );
+		} else {
+			$t_from_clauses = array( $t_bug_table, $t_project_table );
 		}
+
 
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
 		$t_from		= 'FROM ' . implode( ', ', array_unique( $t_from_clauses ) );
@@ -210,7 +212,7 @@
 			$p_page_number = 1;
 		}
 
-		$query2  = "SELECT DISTINCT $t_select, UNIX_TIMESTAMP(last_updated) as last_updated
+		$query2  = "SELECT DISTINCT $t_select
 					$t_from
 					$t_join
 					$t_where";
@@ -224,7 +226,7 @@
 			$c_dir = 'ASC';
 		}
 
-		$query2 .= " ORDER BY '$c_sort' $c_dir";
+		$query2 .= " ORDER BY $c_sort $c_dir";
 
 		# Figure out the offset into the db query
 		#
@@ -236,17 +238,17 @@
 		$c_page_number = db_prepare_int( $p_page_number );
 		$t_offset = ( ( $c_page_number - 1 ) * $c_per_page );
 
-		$query2 .= " LIMIT $t_offset, $c_per_page";
-
 		# perform query
-		$result2 = db_query( $query2 );
+		$result2 = db_query( $query2, $c_per_page, $t_offset );
 
 		$row_count = db_num_rows( $result2 );
 
 		$rows = array();
 
 		for ( $i=0 ; $i < $row_count ; $i++ ) {
-			array_push( $rows, db_fetch_array( $result2 ) );
+			$row = db_fetch_array( $result2 );
+			$row['last_updated'] = db_unixtimestamp ( $row['last_updated'] );
+			array_push( $rows, $row );
 		}
 
 		return $rows;
