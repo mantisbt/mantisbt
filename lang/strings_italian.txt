@@ -10,11 +10,11 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.85 $
+	# $Revision: 1.86 $
 	# $Author: marcelloscata $
-	# $Date: 2004-10-25 19:45:05 $
+	# $Date: 2004-11-02 19:54:01 $
 	#
-	# $Id: strings_italian.txt,v 1.85 2004-10-25 19:45:05 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.86 2004-11-02 19:54:01 marcelloscata Exp $
 	###########################################################################
 
 # Charset
@@ -886,7 +886,7 @@ $s_site_settings_updated_msg = "Impostazioni Sito aggiornate";
 $s_summary_title = "Statistiche";
 $s_summary_jpgraph_link = "Grafici";
 $s_by_project = "Per progetto";
-$s_by_status = "Per status";
+$s_by_status = "Per stato";
 $s_by_date = "Per data";
 $s_by_severity = "Per severita'";
 $s_by_resolution = "Per motivazione";
