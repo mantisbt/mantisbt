@@ -7,7 +7,7 @@
 
 	# mail test
 	if ( isset( $f_mail_test ) ) {
-		$result = mail( $g_administrator_email, "Testing PHP mail() function", $f_message, "From: $g_administrator_email\n" );
+		$result = mail( $g_administrator_email, 'Testing PHP mail() function', 'Your PHP mail settings appear to be correctly set.', "From: $g_administrator_email\n" );
 	}
 
 	define( "CRYPT2", 10 );
@@ -211,7 +211,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 	<td bgcolor="#f4f4f4">
 		<span class="title">Testing Email</span>
 		<p>
-		You can test the mail() function with this form.  Just fill in a message and submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.
+		You can test the mail() function with this form.  Just check the recipient and click submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.
 		<p>
 		<?php if ( isset( $f_mail_test ) ) { ?>
 		<b><font color="#ff0000">Mail sent</font></b> -
@@ -225,7 +225,6 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		?>
 		<form method="post" action="<?php echo $PHP_SELF ?>#email">
 		Email Address: <?php echo $g_administrator_email; ?><br>
-		<textarea name="f_message" cols="60" rows="5">Test message text</textarea><br>
 		<input type="submit" value="Send Mail" name="f_mail_test">
 		</form>
 	</td>
