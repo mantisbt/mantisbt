@@ -12,6 +12,14 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	# get protected state
+	$t_protected = get_current_user_field( "protected" );
+
+	# protected account check
+	if ( ON == $t_protected ) {
+		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	}
+
 	# get user id
 	$t_user_id = get_current_user_field( "id" );
 

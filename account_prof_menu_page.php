@@ -15,6 +15,14 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
+
+	# get protected state
+	$t_protected = get_current_user_field( "protected" );
+
+	# protected account check
+	if ( ON == $t_protected ) {
+		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	}
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

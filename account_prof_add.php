@@ -13,6 +13,14 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
+	# get protected state
+	$t_protected = get_current_user_field( "protected" );
+
+	# protected account check
+	if ( ON == $t_protected ) {
+		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	}
+
 	# " character poses problem when editting so let's just convert them
 	$f_platform		= string_prepare_text( $f_platform );
 	$f_os			= string_prepare_text( $f_os );
