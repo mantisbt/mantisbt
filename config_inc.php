@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
@@ -162,6 +162,10 @@
 	$g_view_reported_cookie_val       = $HTTP_COOKIE_VARS[$g_view_reported_cookie];
 	$g_view_assigned_cookie_val       = $HTTP_COOKIE_VARS[$g_view_assigned_cookie];
 	#--------------------
+	if ( empty( $g_project_cookie_val ) ) {
+		$g_project_cookie_val = "0000000";
+	}
+	#--------------------
 
 	#--------------------
 	# database table names
@@ -170,7 +174,10 @@
 	$g_mantis_bugnote_table           = $g_db_table_prefix."_bugnote_table";
 	$g_mantis_bugnote_text_table      = $g_db_table_prefix."_bugnote_text_table";
 	$g_mantis_news_table              = $g_db_table_prefix."_news_table";
-	$g_mantis_projects_table          = $g_db_table_prefix."_projects_table";
+	$g_mantis_project_category_table  = $g_db_table_prefix."_project_category_table";
+	$g_mantis_project_table           = $g_db_table_prefix."_project_table";
+	$g_mantis_project_user_list_table = $g_db_table_prefix."_project_user_list_table";
+	$g_mantis_project_version_table   = $g_db_table_prefix."_project_version_table";
 	$g_mantis_user_table              = $g_db_table_prefix."_user_table";
 	$g_mantis_user_profile_table      = $g_db_table_prefix."_user_profile_table";
 	$g_mantis_user_pref_table         = $g_db_table_prefix."_user_pref_table";
@@ -275,22 +282,44 @@
 	$g_documentation_page             = "documentation_page".$g_php;
 
 	# category management
-	$g_manage_category_page           = "manage_category_page".$g_php;
-	$g_manage_category_update         = "manage_category_update".$g_php;
+	#$g_manage_category_page           = "manage_category_page".$g_php;
+	#$g_manage_category_update         = "manage_category_update".$g_php;
 
 	# product versions
-	$g_manage_product_versions_page   = "manage_product_versions_page".$g_php;
-	$g_manage_product_versions_update = "manage_product_versions_update".$g_php;
+	#$g_manage_product_versions_page   = "manage_product_versions_page".$g_php;
+	#$g_manage_product_versions_update = "manage_product_versions_update".$g_php;
 
 	# multiple projects
-	$g_project_menu_page              = "project_menu_page".$g_php;
-	$g_project_select                 = "project_select".$g_php;
-	$g_project_reset                  = "project_reset".$g_php;
-	$g_project_add_page               = "project_add_page".$g_php;
-	$g_project_add                    = "project_add".$g_php;
-	$g_project_edit_page              = "project_edit_page".$g_php;
-	$g_project_update                 = "project_update".$g_php;
-	$g_project_delete                 = "project_delete".$g_php;
+	$g_manage_project_menu_page       = "manage_project_menu_page".$g_php;
+	$g_manage_project_add             = "manage_project_add".$g_php;
+	$g_manage_project_edit_page       = "manage_project_edit_page".$g_php;
+	$g_manage_project_update          = "manage_project_update".$g_php;
+	$g_manage_project_delete          = "manage_project_delete".$g_php;
+	$g_manage_project_delete_page     = "manage_project_delete_page".$g_php;
+
+	$g_set_project                    = "set_project".$g_php;
+
+	# manage multiple project users
+	$g_manage_project_user_menu_page    = "manage_project_user_menu_page".$g_php;
+	$g_manage_project_user_add          = "manage_project_user_add".$g_php;
+	$g_manage_project_user_edit_page    = "manage_project_user_edit_page".$g_php;
+	$g_manage_project_user_update       = "manage_project_user_update".$g_php;
+	$g_manage_project_user_delete       = "manage_project_user_delete".$g_php;
+	$g_manage_project_user_delete_page  = "manage_project_user_delete_page".$g_php;
+
+	# project versions
+	$g_manage_project_version_add       = "manage_project_version_add".$g_php;
+	$g_manage_project_version_update    = "manage_project_version_update".$g_php;
+	$g_manage_project_version_delete    = "manage_project_version_delete".$g_php;
+	$g_manage_project_version_delete_page = "manage_project_version_delete_page".$g_php;
+	$g_manage_project_version_edit_page  = "manage_project_version_edit_page".$g_php;
+
+	# project category
+	$g_manage_project_category_add       = "manage_project_category_add".$g_php;
+	$g_manage_project_category_update    = "manage_project_category_update".$g_php;
+	$g_manage_project_category_delete    = "manage_project_category_delete".$g_php;
+	$g_manage_project_category_delete_page = "manage_project_category_delete_page".$g_php;
+	$g_manage_project_category_edit_page  = "manage_project_category_edit_page".$g_php;
 
 	# news
 	$g_news_menu_page                 = "news_menu_page".$g_php;
@@ -315,7 +344,6 @@
 	$g_show_source_page               = "show_source_page".$g_php;
 
 	# errors
-	$g_mysql_error_page               = "mysql_error_page".$g_php;
 	#--------------------
 
 	#--------------------

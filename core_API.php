@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
@@ -58,7 +58,7 @@
 
 		$t_result = mysql_query( $p_query );
 		if ( !$t_result ) {
-			echo "ERROR: FAILED QUERY";
+			echo "ERROR: FAILED QUERY: ".$p_query;
 			exit;
 		}
 		else {
@@ -141,9 +141,10 @@
 
 		print_source_link( $p_file );
 
+		PRINT "<p>";
 		PRINT "<hr size=1>";
 		print_mantis_version();
-		PRINT "<address>Copyright (c) 2000, 2001</address>";
+		PRINT "<address>Copyright (C) 2000, 2001</address>";
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 	}
 	### --------------------
@@ -161,24 +162,26 @@
 	### --------------------
 	# prints the user that is logged in and the date/time
 	function print_login_info() {
-		global 	$g_mantis_user_table, $g_string_cookie_val,
-				$g_complete_date_format;
+		global 	$g_mantis_user_table,
+				$g_string_cookie_val, $g_project_cookie_val,
+				$g_complete_date_format, $g_set_project,
+				$s_switch, $s_logged_in_as;
 
 		$t_username = get_current_user_field( "username" );
 		$t_now = date($g_complete_date_format);
 		PRINT "<table width=100%><tr>";
 		PRINT "<td align=left width=25%>";
-			PRINT "Logged in as: <i>$t_username</i>";
+			PRINT "$s_logged_in_as: <i>$t_username</i>";
 		PRINT "</td>";
 		PRINT "<td align=center width=50%>";
 			PRINT "<i>$t_now</i>";
 		PRINT "</td>";
 		PRINT "<td align=right width=25%>";
-			PRINT "<form method=post action=$g_>";
+			PRINT "<form method=post action=$g_set_project>";
 			PRINT "<select name=f_project_id>";
-			print_projects_option_list();
+				print_projects_option_list( $g_project_cookie_val );
 			PRINT "</select>";
-			PRINT "<input type=submit value=\"go\">";
+			PRINT "<input type=submit value=\"$s_switch\">";
 		PRINT "</td>";
 			PRINT "</form>";
 		PRINT "</tr></table>";
@@ -240,6 +243,21 @@
 		}
 	}
 	### --------------------
+	function print_manage_menu() {
+		global 	$g_path, $g_manage_create_user_page, $g_manage_project_menu_page,
+				$g_manage_category_page, $g_manage_product_versions_page,
+				$g_documentation_page,
+				$s_create_new_account_link, $s_manage_categories_link,
+				$s_manage_product_versions_link, $s_documentation_link;
+
+		PRINT "<div align=center>";
+			PRINT "[ <a href=\"$g_path.$g_manage_create_user_page\">$s_create_new_account_link</a> ] ";
+			PRINT "[ <a href=\"$g_path.$g_manage_project_menu_page\">Projects</a> ] ";
+			PRINT "[ <a href=\"$g_path.$g_manage_category_page\">$s_manage_categories_link</a> ] ";
+			PRINT "[ <a href=\"$g_path.$g_manage_product_versions_page\">$s_manage_product_versions_link</a> ] ";
+			PRINT "[ <a href=\"$g_path.$g_documentation_page\">$s_documentation_link</a> ]";
+		PRINT "</div>";
+	}
 	###########################################################################
 	# Basic Print API
 	###########################################################################
@@ -283,7 +301,7 @@
 	function get_bugnote_count( $p_id ) {
 		global $g_mantis_bugnote_table;
 
-		$query = "SELECT COUNT(id)
+		$query = "SELECT COUNT(*)
 					FROM $g_mantis_bugnote_table
 					WHERE bug_id ='$p_id'";
 		$result = db_query( $query );
@@ -364,11 +382,18 @@
 	### --------------------
 	### Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
-		global $g_mantis_news_table;
+		global $g_mantis_news_table, $g_project_cookie_val;
 
-		$query = "SELECT id, headline
-			FROM $g_mantis_news_table
-			ORDER BY id DESC";
+		if ( get_current_user_field( "access_level" )=="administrator" ) {
+			$query = "SELECT id, headline
+				FROM $g_mantis_news_table
+				ORDER BY date_posted DESC";
+		} else {
+			$query = "SELECT id, headline
+				FROM $g_mantis_news_table
+				WHERE project_id='$g_project_cookie_val'
+				ORDER BY date_posted DESC";
+		}
 	    $result = db_query( $query );
 	    $news_count = db_num_rows( $result );
 
@@ -386,12 +411,11 @@
 	function print_field_option_list( $p_list, $p_item="" ) {
 		global $g_mantis_bug_table;
 
-		$t_category_string = get_enum_string( $p_list );
-	    $t_str = $t_category_string.",";
-		$entry_count = get_list_item_count($t_str)-1;
+		$t_category_string = get_enum_string( $g_mantis_bug_table, $p_list );
+	    $t_arr = explode( ",", $t_category_string );
+		$entry_count = count( $t_arr );
 		for ($i=0;$i<$entry_count;$i++) {
-			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
-			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
+			$t_s = str_replace( "'", "", $t_arr[$i] );
 			if ( $p_item==$t_s ) {
 				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
 			}
@@ -418,11 +442,12 @@
 		} ### end for
 	}
 	### --------------------
-	function print_projects_option_list() {
-		global $g_mantis_projects_table;
+	function print_projects_option_list( $p_project_id="" ) {
+		global $g_mantis_project_table,
+				$g_project_cookie_val;
 
 		$query = "SELECT id, name
-			FROM $g_mantis_projects_table
+			FROM $g_mantis_project_table
 			ORDER BY name";
 		$result = db_query( $query );
 		$project_count = db_num_rows( $result );
@@ -431,7 +456,11 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
-			PRINT "<option value=\"$v_id\">$v_name";
+			if ( $p_project_id==$v_id ) {
+				PRINT "<option value=\"$v_id\" SELECTED>$v_name";
+			} else {
+				PRINT "<option value=\"$v_id\">$v_name";
+			}
 		} ### end for
 	}
 	### --------------------
@@ -458,9 +487,110 @@
 
 			if ( $v_default_profile=="on" ) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
+			} else {
+				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
+			}
+		}
+	}
+	### --------------------
+	function print_project_status_option_list( $p_status ) {
+		global $g_mantis_project_table;
+
+		$t_enum_string = get_enum_string( $g_mantis_project_table, "status" );
+		$t_arr = explode( ",", $t_enum_string );
+		$enum_count = count( $t_arr );
+		for ($i=0;$i<$enum_count;$i++) {
+			$t_s = str_replace( "'", "", $t_arr[$i] );
+			if ( $t_s==$p_status ) {
+				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
+			} else {
+				PRINT "<option value=\"$t_s\">$t_s";
+			}
+		} ### end for
+	}
+	### --------------------
+	function print_news_project_option_list( $p_id ) {
+		global 	$g_mantis_project_table, $g_mantis_project_user_list_table,
+				$g_project_cookie;
+
+		$t_user_id = get_current_user_field( "id" );
+		$t_access_level = get_current_user_field( "access_level" );
+		if ( $t_access_level=="administrator" ) {
+			$query = "SELECT *
+					FROM $g_mantis_project_table
+					ORDER BY name";
+		} else {
+			$query = "SELECT p.id, p.name
+					FROM $g_mantis_project_table p, $g_mantis_project_user_list_table m
+					WHERE 	p.id=m.project_id AND
+							m.user_id='$t_user_id AND m.enabled='on' AND
+							m.access_level='manager'";
+		}
+		$result = db_query( $query );
+		$project_count = db_num_rows( $result );
+		for ($i=0;$i<$project_count;$i++) {
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+
+			if ( $v_id==$p_id ) {
+				PRINT "<option value=\"$v_id\" SELECTED>$v_name";
+			} else {
+				PRINT "<option value=\"$v_id\">$v_name";
+			}
+		} ### end for
+	}
+	### --------------------
+	function print_table_field_option_list( $p_table_name, $p_field_name, $p_item="" ) {
+		$t_field_string = get_enum_string( $p_table_name, $p_field_name );
+	    $t_arr = explode( ",", $t_field_string );
+		$entry_count = count( $t_arr );
+		for ($i=0;$i<$entry_count;$i++) {
+			$t_s = str_replace( "'", "", $t_arr[$i] );
+			if ( $p_item==$t_s ) {
+				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
 			}
 			else {
-				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
+				PRINT "<option value=\"$t_s\">$t_s";
+			}
+		} ### end for
+	}
+	### --------------------
+	function print_category_option_list( $p_category="" ) {
+		global $g_mantis_project_category_table, $g_project_cookie_val;
+
+		$query = "SELECT *
+				FROM $g_mantis_project_category_table
+				WHERE project_id='$g_project_cookie_val'
+				ORDER BY category";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_category = $row["category"];
+			if ( $t_category==$p_category ) {
+				PRINT "<option value=\"$t_category\">$t_category";
+			} else {
+				PRINT "<option value=\"$t_category\">$t_category";
+			}
+		}
+	}
+	### --------------------
+	function print_version_option_list( $p_version="" ) {
+		global $g_mantis_project_version_table, $g_project_cookie_val;
+
+		$query = "SELECT *
+				FROM $g_mantis_project_version_table
+				WHERE project_id='$g_project_cookie_val'
+				ORDER BY version DESC";
+		$result = db_query( $query );
+		$version_count = db_num_rows( $result );
+		for ($i=0;$i<$version_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_version = $row["version"];
+			if ( $t_version==$p_version ) {
+				PRINT "<option value=\"$t_version\">$t_version";
+			} else {
+				PRINT "<option value=\"$t_version\">$t_version";
 			}
 		}
 	}
@@ -469,11 +599,9 @@
 	# String printing API
 	###########################################################################
 	### --------------------
-	function get_enum_string( $p_field_name ) {
-		global $g_mantis_bug_table;
-
+	function get_enum_string( $p_table_name, $p_field_name ) {
 		$query = "SHOW FIELDS
-				FROM $g_mantis_bug_table";
+				FROM $p_table_name";
 		$result = db_query( $query );
 		$entry_count = db_num_rows( $result );
 		for ($i=0;$i<$entry_count;$i++) {
@@ -488,8 +616,8 @@
 	### --------------------
 	# returns the number of items in a list
 	# default delimiter is a ,
-	function get_list_item_count( $t_enum_string, $p_delim_char="," ) {
-		return count(explode($p_delim_char,$t_enum_string));
+	function get_list_item_count( $p_delim_char, $t_enum_string ) {
+		return count( explode( $p_delim_char,$t_enum_string ) );
 	}
 	### --------------------
 	### prints a link to a bug given an ID
@@ -516,6 +644,55 @@
 		else {
 			PRINT "$p_severity";
 		}
+	}
+	### --------------------
+	function print_project_category_string( $p_project_id ) {
+		global $g_mantis_project_category_table, $g_mantis_project_table;
+
+		$query = "SELECT category
+				FROM $g_mantis_project_category_table
+				WHERE project_id='$p_project_id'
+				ORDER BY category";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+		$t_string = "";
+
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_category = $row["category"];
+
+			if ( $i+1 < $category_count ) {
+				$t_string .= $t_category.", ";
+			} else {
+				$t_string .= $t_category;
+			}
+		}
+
+		return $t_string;
+	}
+	### --------------------
+	function print_project_version_string( $p_project_id ) {
+		global $g_mantis_project_version_table, $g_mantis_project_table;
+
+		$query = "SELECT version
+				FROM $g_mantis_project_version_table
+				WHERE project_id='$p_project_id'";
+		$result = db_query( $query );
+		$version_count = db_num_rows( $result );
+		$t_string = "";
+
+		for ($i=0;$i<$version_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_version = $row["version"];
+
+			if ( $i+1 < $version_count ) {
+				$t_string .= $t_version.", ";
+			} else {
+				$t_string .= $t_version;
+			}
+		}
+
+		return $t_string;
 	}
 	### --------------------
 	###########################################################################
@@ -560,18 +737,19 @@
 	### --------------------
 	### Used in summary reports
 	function print_bug_enum_summary( $p_enum, $p_status="" ) {
-		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark;
+		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark,
+			$g_project_cookie_val;
 
-		$t_enum_string = get_enum_string( $p_enum );
-	    $t_str = $t_enum_string.",";
-		$enum_count = get_list_item_count($t_str)-1;
+		$t_enum_string = get_enum_string( $g_mantis_bug_table, $p_enum );
+		$t_arr = explode( ",", $t_enum_string );
+		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
-			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
-			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
+			$t_s = str_replace( "'", "", $t_arr[$i] );
 
-			$query = "SELECT COUNT(id)
+			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE $p_enum='$t_s'";
+					WHERE $p_enum='$t_s' AND
+						project_id='$g_project_cookie_val'";
 			if ( !empty( $p_status ) ) {
 				if ( $p_status=="open" ) {
 					$query = $query." AND status<>'resolved'";
@@ -605,6 +783,20 @@
 		} ### end for
 	}
 	### --------------------
+	# expects the paramter to be neutral in time length
+	# automatically adds the -
+	function get_bug_count_by_date( $p_time_length="day" ) {
+		global $g_mantis_bug_table, $g_project_cookie_val;
+
+		$day = strtotime( "-".$p_time_length );
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_bug_table
+				WHERE UNIX_TIMESTAMP(last_updated)>$day AND
+					project_id='$g_project_cookie_val'";
+		$result = db_query( $query );
+		return db_result( $result, 0 );
+	}
+	### --------------------
 	### Used in summary reports
 	function print_bug_date_summary( $p_date_array ) {
 		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark;
@@ -634,7 +826,8 @@
 	### --------------------
 	function print_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
-				$g_primary_color_light, $g_primary_color_dark;
+				$g_primary_color_light, $g_primary_color_dark,
+				$g_project_cookie_val;
 
 		$query = "SELECT id, username
 				FROM $g_mantis_user_table
@@ -649,19 +842,22 @@
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id'";
+					WHERE handler_id='$v_id' AND
+						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
 			$total_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND status<>'resolved'";
+					WHERE handler_id='$v_id' AND status<>'resolved' AND
+						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
 			$open_bug_count = db_result( $result2, 0, 0 );
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
-					WHERE handler_id='$v_id' AND status='resolved'";
+					WHERE handler_id='$v_id' AND status='resolved' AND
+						project_id='$g_project_cookie_val'";
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
@@ -679,6 +875,49 @@
 				PRINT "</td>";
 				PRINT "<td width=50%>";
 					PRINT "$open_bug_count / $resolved_bug_count / $total_bug_count";
+				PRINT "</td>";
+			PRINT "</tr>";
+		} ### end for
+	}
+	### --------------------
+	function print_category_summary() {
+		global 	$g_mantis_bug_table, $g_mantis_user_table,
+				$g_mantis_project_category_table, $g_project_cookie_val,
+				$g_primary_color_light, $g_primary_color_dark;
+
+		$query = "SELECT category
+				FROM $g_mantis_project_category_table
+				WHERE project_id='$g_project_cookie_val'
+				ORDER BY category";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$t_category = $row["category"];
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE category='$t_category' AND
+						project_id='$g_project_cookie_val'";
+			$result2 = db_query( $query );
+			$catgory_bug_count = db_result( $result2, 0, 0 );
+
+
+			### alternate row colors
+			if ( $i % 2 == 1) {
+				$bgcolor=$g_primary_color_light;
+			}
+			else {
+				$bgcolor=$g_primary_color_dark;
+			}
+
+			PRINT "<tr align=center bgcolor=$bgcolor>";
+				PRINT "<td width=50%>";
+					echo $t_category;
+				PRINT "</td>";
+				PRINT "<td width=50%>";
+					PRINT "$catgory_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
 		} ### end for
@@ -905,19 +1144,6 @@
 					   substr( $p_timeString, 0, 4 ) );
 	}
 	### --------------------
-	# expects the paramter to be neutral in time length
-	# automatically adds the -
-	function get_bug_count_by_date( $p_time_length="day" ) {
-		global $g_mantis_bug_table;
-
-		$day = strtotime( "-".$p_time_length );
-		$query = "SELECT COUNT(id)
-				FROM $g_mantis_bug_table
-				WHERE UNIX_TIMESTAMP(last_updated)>$day";
-		$result = db_query( $query );
-		return db_result( $result, 0 );
-	}
-	### --------------------
 	###########################################################################
 	# String API
 	###########################################################################
@@ -1003,6 +1229,9 @@
 		if ( $p_access_level == "administrator" ) {
 			return 10;
 		}
+		else if ( $p_access_level == "manager" ) {
+			return 8;
+		}
 		else if ( $p_access_level == "developer" ) {
 			return 7;
 		}
@@ -1049,6 +1278,23 @@
 			return true;
 		}
 		else {
+			return false;
+		}
+	}
+	### --------------------
+	function is_manager_for_project( $p_project_id ) {
+		global $g_mantis_project_table, $g_mantis_project_user_list_table;
+
+		$t_user_id = get_current_user_field( "id" );
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_project_user_list_table
+				WHERE project_id='$p_project_id' AND user_id='$t_user_id' AND
+					access_level='manager'";
+		$result = db_query( $query );
+		$t_count = db_result( $result );
+		if ($t_count > 1) {
+			return true;
+		} else {
 			return false;
 		}
 	}
