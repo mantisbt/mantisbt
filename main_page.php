@@ -18,11 +18,12 @@
 <tr>
 	<td class="quick-summary-left">
 		<?php echo $s_open_and_assigned_to_me ?>:
-		<?php echo get_assigned_open_bug_count($g_project_cookie_val,$g_string_cookie_val) ?>
+		<?php PRINT '<a href="view_all_set.php?f_type=1&amp;f_user_id=any&amp;f_show_status=any&amp;f_show_severity=any&amp;f_show_category=any&amp;f_assign_id=' .  get_current_user_field( 'id') . '&amp;f_hide_closed=on">' . get_assigned_open_bug_count($g_project_cookie_val,$g_string_cookie_val) . '</a>' ?>
 	</td>
 	<td class="quick-summary-right">
 		<?php echo $s_open_and_reported_to_me ?>:
-		<?php echo get_reported_open_bug_count($g_project_cookie_val,$g_string_cookie_val) ?>
+		<?php PRINT '<a href="view_all_set.php?f_type=1&amp;f_user_id=' . get_current_user_field( 'id') . '&amp;f_show_status=any&amp;f_show_severity=any&amp;f_show_category=any&amp;f_assign_id=any&amp;f_hide_closed=on">' . get_reported_open_bug_count($g_project_cookie_val,$g_string_cookie_val) . '</a>' ?>
+		<?php echo  ?>
 	</td>
 </tr>
 </table>

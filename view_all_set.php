@@ -65,6 +65,8 @@
 */
 	# Set new filter values.  These are stored in a cookie
 	$t_setting_arr	= explode( '#', $g_view_all_cookie_val );
+	check_varset( $f_highlight_changed, $t_setting_arr[5] );
+
 	switch ( $f_type ) {
 		# New cookie
 		case '0':
