@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.41 2004-08-27 23:05:33 prichards Exp $
+	# $Id: custom_field_api.php,v 1.42 2004-09-16 16:48:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -942,7 +942,7 @@
 			$result = str_replace( '||', '', '|' . $p_value . '|' );
 			break;
 		default:
-			$result = $p_value;
+			$result = string_display_links( $p_value );
 		}
 		return $result;
 	}
