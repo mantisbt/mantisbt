@@ -234,16 +234,19 @@
 							 $p_string );
 	}
 	# --------------------
-	# process the $p_string and convert bugs in this format #123 to a html link
+	# process the $p_string and create links to bugs if warranted
+	# Uses the $g_bug_link_tag variable to determine the bug link tag
+	# eg. #45  or  bug:76
+	# default is the # symbol.  You may substitue any pattern you want.
 	function process_bug_link( $p_string ) {
-		global $g_view_bug_page, $g_view_bug_advanced_page;
+		global $g_bug_link_tag, $g_view_bug_page, $g_view_bug_advanced_page;
 
 		if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
-			return preg_replace("/#([0-9]+)/",
+			return preg_replace("/$g_bug_link_tag([0-9]+)/",
 								"<a href=\"$g_view_bug_advanced_page?f_id=\\1\">#\\1</a>",
 								$p_string);
 		} else {
-			return preg_replace("/#([0-9]+)/",
+			return preg_replace("/$g_bug_link_tag([0-9]+)/",
 								"<a href=\"$g_view_bug_page?f_id=\\1\">#\\1</a>",
 								$p_string);
 		}
