@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.11 2002-08-30 07:43:25 jfitzell Exp $
+	# $Id: project_api.php,v 1.12 2002-09-06 23:50:37 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -316,7 +316,16 @@
 				FROM $t_project_user_list_table
 				WHERE project_id='$c_project_id'";
 
-		return db_query( $query );
+		$result = db_query( $query );
+
+		$t_user_rows = array();
+		$t_row_count = db_num_rows( $result );
+
+		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
+			array_push( $t_user_rows, db_fetch_array( $result ) );
+		}
+
+		return $t_user_rows;
 	}
 
 	#===================================
@@ -412,12 +421,10 @@
 	#  destination project
 	function project_copy_users( $p_destination_id, $p_source_id ) {
 		# Copy all users from current project over to another project
-		$result = project_get_all_user_rows( $p_source_id );
+		$rows = project_get_all_user_rows( $p_source_id );
 
-		$user_count = db_num_rows( $result );
-		for ( $i = 0 ; $i < $user_count ; $i++ ) {
-			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
+		for ( $i = 0 ; $i < sizeof( $rows ) ; $i++ ) {
+			extract( $row[$i], EXTR_PREFIX_ALL, 'v' );
 
 			# if there is no duplicate then add a new entry
 			# otherwise just update the access level for the existing entry
