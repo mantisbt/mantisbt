@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.3 2002-08-25 14:26:03 vboctor Exp $
+	# $Id: gpc_api.php,v 1.4 2002-08-27 08:32:30 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -52,7 +52,9 @@
 	function gpc_get_bool( $p_var_name, $p_default = null ) {
 		$t_result = gpc_get( $p_var_name, $p_default );
 
-		if ( 0 == strcasecmp( 'off', $t_result ) ||
+		if ( $t_result === $p_default ) {
+			return $p_default;
+		} else if ( 0 == strcasecmp( 'off', $t_result ) ||
 			 0 == strcasecmp( 'no', $t_result ) ||
 			 0 == strcasecmp( 'false', $t_result ) ||
 			 0 == strcasecmp( '0', $t_result ) ) {
