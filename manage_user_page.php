@@ -20,12 +20,14 @@
 	$f_hide = gpc_get_bool( 'hide' );
 	$f_save = gpc_get_bool( 'save' );
 
+	$t_cookie_name = config_get( 'manage_cookie' );
+
 	# set cookie values for hide, sort by, and dir
-	if ( isset( $f_save ) ) {
+	if ( $f_save ) {
 		$t_manage_string = $f_hide.':'.$f_sort.':'.$f_dir;
-		setcookie( $g_manage_cookie, $t_manage_string, time()+$g_cookie_time_length, $g_cookie_path );
-	} else if ( !is_blank( $g_manage_cookie_val ) ) {
-		$t_manage_arr = explode( ':', $g_manage_cookie_val );
+		gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
+	} else if ( !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
+		$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
 		$f_hide = $t_manage_arr[0];
 
 		if ( isset( $t_manage_arr[1] ) ) {

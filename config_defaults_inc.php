@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.98 2003-02-24 09:52:01 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.99 2003-02-24 10:15:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -759,13 +759,9 @@
 	#@@@ this code can be removed after full conversion to
 	#@@@ the gpc_api
 	$g_view_all_cookie_val	= '';
-	$g_manage_cookie_val	= '';
 
 	if ( isset( $HTTP_COOKIE_VARS[$g_view_all_cookie] ) ) {
 		$g_view_all_cookie_val	= $HTTP_COOKIE_VARS[$g_view_all_cookie];
-	}
-	if ( isset( $HTTP_COOKIE_VARS[$g_manage_cookie] ) ) {
-		$g_manage_cookie_val	= $HTTP_COOKIE_VARS[$g_manage_cookie];
 	}
 	#@@@ end removable code block
 	#@@@
