@@ -25,13 +25,10 @@ Important Files:
 
 doc/INSTALL             - Installation instructions
 doc/UPGRADING           - Upgrade instructions
-doc/TROUBLESHOOTING     - How to get help
 doc/CUSTOMIZATION       - Help on custom configuration
 doc/LICENSE             - GNU General Public License
 doc/CREDITS             - List of contributors
 doc/Changelog           - List of fixes, additions, and todo items
-doc/documentation.html  - Help on general use
-doc/configuration.html  - Help on configuration options for config_inc.php
 config_inc.php          - Configuration
 config_defaults_inc.php - Configuration defaults - Check to see what else you can configure but do not edit
 core/                   - Core functions
