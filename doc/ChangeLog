@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2003.??.??  -  0.18.0a5
 
+ * Enhancement: Show file attachment indicator on bug list page (#3088).
  * Fix: Improved adherance to the XHTML standard.
  * Fix #3064: view bug buttons in vertical column
  * Fix #3072: Attached file should be opened up in a new browser window.
