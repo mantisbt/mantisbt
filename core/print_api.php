@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.114 2005-02-13 21:36:38 jlatour Exp $
+	# $Id: print_api.php,v 1.115 2005-02-20 21:12:07 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -32,12 +32,17 @@
 			return false;
 		}
 
-		header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
+		# don't send more headers if they have already been sent (guideweb)
+		if ( ! headers_sent() ) {
+			header( 'Content-Type: text/html; charset=' . lang_get( 'charset' ) );
 
-		if ( ON == $t_use_iis ) {
-			header( "Refresh: 0;url=$p_url" );
+			if ( ON == $t_use_iis ) {
+				header( "Refresh: 0;url=$p_url" );
+			} else {
+				header( "Location: $p_url" );
+			}
 		} else {
-			header( "Location: $p_url" );
+			return false;
 		}
 
 		if ( $p_die ) {

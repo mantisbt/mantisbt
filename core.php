@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.37 2005-02-13 21:36:17 jlatour Exp $
+	# $Id: core.php,v 1.38 2005-02-20 21:12:07 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -98,16 +98,16 @@
 	# Headers to prevent caching
 	#  with option to bypass if running from script
 	global $g_bypass_headers;
-	if ( !isset( $g_bypass_headers ) ) {
+	if ( !isset( $g_bypass_headers ) && !headers_sent() ) {
 		header( 'Pragma: no-cache' );
 		header( 'Expires: Fri, 01 Jan 1999 00:00:00 GMT' );
 		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
 		header( 'Cache-Control: post-check=0, pre-check=0', false );
-	}
 
-	# SEND USER-DEFINED HEADERS
-	foreach( config_get( 'custom_headers' ) as $t_header ) {
-		header( $t_header );
+		# SEND USER-DEFINED HEADERS
+		foreach( config_get( 'custom_headers' ) as $t_header ) {
+			header( $t_header );
+		}
 	}
 
 	require_once( $t_core_path.'project_api.php' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.40 2005-02-12 20:01:10 jlatour Exp $
+	# $Id: error_api.php,v 1.41 2005-02-20 21:12:07 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -101,8 +101,11 @@
 				ob_end_clean();
 			}
 
-			html_page_top1();
-			html_page_top2();
+			# don't send the page header information if it has already been sent
+			if ( ! headers_sent() ) { 
+				html_page_top1();
+				html_page_top2();
+			}
 
 			PRINT '<br /><div align="center"><table class="width50" cellspacing="1">';
 			PRINT "<tr><td class=\"form-title\">$t_error_type</td></tr>";
