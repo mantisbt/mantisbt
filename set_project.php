@@ -17,8 +17,7 @@
 		current_user_set_default_project( $f_project_id );
 	}
 
-	# Add item
-	gpc_set_cookie( $g_project_cookie, $f_project_id, true );
+	helper_set_current_project( $f_project_id );
 
 	#@@@ we really need to make this more general... it is never intuitive
 	#  to redirect to the main page as far as I can see. Is there a reason
@@ -43,9 +42,6 @@
 	} else {
 		$t_redirect_url = 'main_page.php';
 	}
-
-	# clear view filter between projects
-	gpc_clear_cookie( $g_view_all_cookie );
 
 	print_header_redirect( $t_redirect_url );
 ?>

@@ -17,6 +17,12 @@
 
 	project_delete( $f_project_id );
 
+	# Don't leave the current project set to a deleted project - 
+	#  set it to All Projects
+	if ( helper_get_current_project() == $f_project_id ) {
+		helper_set_current_project( 0 );
+	}
+
     $t_redirect_url = 'manage_proj_menu_page.php';
 	print_header_redirect( $t_redirect_url );
 ?>

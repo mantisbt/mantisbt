@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.31 2002-12-30 05:38:40 jfitzell Exp $
+	# $Id: helper_api.php,v 1.32 2003-01-02 22:58:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -134,6 +134,19 @@
 		} else {
 			return (int)$t_project_id;
 		}
+	}
+	# --------------------
+	# Set the current project id (stored in a cookie)
+	function helper_set_current_project( $p_project_id ) {
+		$t_project_cookie_name	= config_get( 'project_cookie' );
+		$t_filter_cookie_name	= config_get( 'view_all_cookie' );
+
+		gpc_set_cookie( $t_project_cookie_name, $p_project_id, true );
+
+		# clear view filter when switching projects
+		gpc_clear_cookie( $t_filter_cookie_name );
+
+		return true;
 	}
 	# --------------------
 	# Clear all known user preference cookies
