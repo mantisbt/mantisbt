@@ -265,9 +265,12 @@ CREATE TABLE mantis_user_table (
 );
 
 # replace the 4th argument after VALUES with your chosen method of encryption
-# plain = root
-# crypt = MNYm8SfoJlvIY
-# md5   = 63a9f0ea7bb98050796b649e85481845
+# default is CRYPT
+
+#   PLAIN = root
+#   CRYPT = MNYm8SfoJlvIY
+#   MD5   = 63a9f0ea7bb98050796b649e85481845
+
 INSERT INTO mantis_user_table
 	(id, username, email, password, date_created, last_visit, enabled, protected, access_level, login_count, cookie_string)
 VALUES
