@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.30 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: authentication_api.php,v 1.31 2004-01-25 17:00:13 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -248,7 +248,7 @@
 
 	# --------------------
 	# Generate a string to use as the identifier for the login cookie
-	# It is not guarranteed to be unique and should be checked
+	# It is not guaranteed to be unique and should be checked
 	# The string returned should be 64 characters in length
 	function auth_generate_cookie_string() {
 		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );

@@ -2,9 +2,10 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.1
 
+ * Sec #3137: By default, every installation has an admin account with a known login cookie value. This value is now generated at installation time.
  * Fix #3177: Switching project in advanced summary changes current page.
  * Fix #3400: Reopen a 'closed' bug, the value of 'resolution' is 'reopen' and can't be changed (now resolution / duplicate id can be edited)
- * Security Fix #3445: User see all information from all projects (if user has access to 0 projects)
+ * Sec #3445: User see all information from all projects (if user has access to 0 projects)
  * Fix #3467: Delete user ends up at user not found error.
  * Fix #3475: Reopen bug to custom status possibility.
  * Fix #3479: Reset account preferences of a user results in reset administrators (current) account.

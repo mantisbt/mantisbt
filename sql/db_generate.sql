@@ -702,5 +702,5 @@ CREATE TABLE mantis_user_table (
 # Dumping data for table 'mantis_user_table'
 #
 
-INSERT INTO mantis_user_table VALUES (1,'administrator','admin','63a9f0ea7bb98050796b649e85481845','2003-02-16 02:03:48','2003-02-16 02:36:38',1,1,90,3,'MN91uSF/JIhos8bcda8acc2ead8d60749ad019e56b54fadkPGTyoBgNBQf91563');
+INSERT INTO mantis_user_table VALUES (1,'administrator','admin','63a9f0ea7bb98050796b649e85481845','2003-02-16 02:03:48','2003-02-16 02:36:38',1,1,90,3,CONCAT(MD5(RAND()),MD5(NOW())));
 
