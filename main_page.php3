@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -14,13 +14,15 @@
 	}
 
 	### get news count
-	$query = "SELECT COUNT(id)
-			FROM $g_mantis_news_table";
+	$query = "SELECT COUNT(*)
+			FROM $g_mantis_news_table
+			WHERE project_id='$g_project_cookie_val' OR project_id='0000000'";
 	$result = db_query( $query );
     $total_news_count = db_result( $result, 0 );
 
 	$query = "SELECT *
 			FROM $g_mantis_news_table
+			WHERE project_id='$g_project_cookie_val' OR project_id='0000000'
 			ORDER BY id DESC
 			LIMIT $f_offset, $g_news_view_limit";
 	$result = db_query( $query );
