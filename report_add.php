@@ -18,7 +18,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
-	if ( is_uploaded_file( $f_file ) ) {
+	if ( isset( $f_file) && is_uploaded_file( $f_file ) ) {
 		$query = "SELECT file_path
 				FROM $g_mantis_project_table
 				WHERE id='$g_project_cookie_val'";
