@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.60 2004-09-22 10:03:42 bpfennigschmidt Exp $
+	# $Id: project_api.php,v 1.61 2004-09-27 12:45:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -328,6 +328,23 @@
 	#===================================
 	# Data Access
 	#===================================
+
+	# --------------------
+	# Get the id of the project with the specified name
+	function project_get_id_by_name( $p_project_name ) {
+		$c_project_name = db_prepare_string( $p_project_name );
+	
+		$t_project_table = config_get( 'mantis_project_table' );
+
+		$query = "SELECT id FROM $t_project_table WHERE name = '$c_project_name'";
+		$t_result = db_query( $query, 1 );
+
+		if ( db_num_rows( $t_result ) == 0 ) {
+			return 0;
+		} else {
+			return db_result( $t_result );
+		}
+	}
 
 	# --------------------
 	# Return the row describing the given project
