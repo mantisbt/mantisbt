@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.38 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_view_advanced_page.php,v 1.39 2003-02-20 00:15:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -490,7 +490,8 @@
 	}
 
 	# Bugnotes
-	include( config_get( 'bugnote_include_file' ) );
+	include( config_get( 'bugnote_view_include_file' ) );
+	include( config_get( 'bugnote_add_include_file' ) );
 
 	# History
 	if ( $f_history ) {

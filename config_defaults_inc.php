@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.87 2003-02-19 17:34:18 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.88 2003-02-20 00:15:49 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -818,8 +818,9 @@
 	# meta tags
 	$g_meta_include_file			= $g_absolute_path.'meta_inc.php';
 	#----------------------------------
-	# Internal includes
-	$g_bugnote_include_file			= $g_absolute_path.'bugnote_inc.php';
+	# Internal includes (@@@ Consider getting rid of these configs)
+	$g_bugnote_view_include_file		= $g_absolute_path.'bugnote_view_inc.php';
+	$g_bugnote_add_include_file		= $g_absolute_path.'bugnote_add_inc.php';
 	$g_history_include_file			= $g_absolute_path.'history_inc.php';
 	$g_print_bugnote_include_file	= $g_absolute_path.'print_bugnote_inc.php';
 	$g_view_all_include_file		= $g_absolute_path.'view_all_inc.php';

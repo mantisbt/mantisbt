@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve_page.php,v 1.31 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_resolve_page.php,v 1.32 2003-02-20 00:15:46 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -103,6 +103,9 @@
 </div>
 
 <br />
-<?php include( config_get( 'bug_view_inc' ) ) ?>
+<?php
+	include( config_get( 'bug_view_inc' ) );
+	include( config_get( 'bugnote_view_include_file' ) );
+?>
 
 <?php html_page_bottom1( __FILE__ ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.53 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.54 2003-02-20 00:15:47 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -414,5 +414,7 @@
 
 </table>
 </form>
+
+<?php include( config_get( 'bugnote_view_include_file' ) ); ?>
 
 <?php html_page_bottom1( __FILE__ ) ?>
