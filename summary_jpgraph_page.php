@@ -69,34 +69,34 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_cumulative_bydate.php" border="0">
+		<img src="summary_graph_cumulative_bydate.php" border="0" />
 	</td>
 	<td width="50%">
-		<img src="summary_graph_bydeveloper.php" border="0">
-	</td>
-</tr>
-<tr valign="top">
-	<td width="50%">
-		<img src="summary_graph_byreporter.php" border="0">
-	</td>
-	<td width="50%">
-		<img src="summary_graph_byseverity.php" border="0">
+		<img src="summary_graph_bydeveloper.php" border="0" />
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_bystatus.php" border="0">
+		<img src="summary_graph_byreporter.php" border="0" />
 	</td>
 	<td width="50%">
-		<img src="summary_graph_byresolution.php" border="0">
+		<img src="summary_graph_byseverity.php" border="0" />
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_bycategory.php" border="0">
+		<img src="summary_graph_bystatus.php" border="0" />
 	</td>
 	<td width="50%">
-		<img src="summary_graph_bypriority.php" border="0">
+		<img src="summary_graph_byresolution.php" border="0" />
+	</td>
+</tr>
+<tr valign="top">
+	<td width="50%">
+		<img src="summary_graph_bycategory.php" border="0" />
+	</td>
+	<td width="50%">
+		<img src="summary_graph_bypriority.php" border="0" />
 	</td>
 </tr>
 </table>

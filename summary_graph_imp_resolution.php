@@ -77,17 +77,17 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_byresolution.php" border="0">  
+		<img src="summary_graph_byresolution.php" border="0" />
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_byresolution_pct.php" border="0"> 
+		<img src="summary_graph_byresolution_pct.php" border="0" />
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_byresolution_mix.php" border="0"> 
+		<img src="summary_graph_byresolution_mix.php" border="0" />
 	</td>
 </tr>
 </table>

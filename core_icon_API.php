@@ -44,9 +44,9 @@
 
 		$t_none = NONE;
 		if ( !empty( $g_status_icon_arr[$p_icon] ) ) {
-			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$p_icon]\" ALT=\"\">";
+			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$p_icon]\" ALT=\"\" />";
 		} else {
-			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\">";
+			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\" />";
 		}
 	}
 	# --------------------
@@ -71,9 +71,9 @@
 
 		$t_none = NONE;
 		if ( !empty( $g_sort_icon_arr[$t_dir] ) ) {
-			PRINT "<IMG SRC=\"$g_icon_path$g_sort_icon_arr[$t_dir]\" ALT=\"\">";
+			PRINT "<IMG SRC=\"$g_icon_path$g_sort_icon_arr[$t_dir]\" ALT=\"\" />";
 		} else {
-			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\">";
+			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\" />";
 		}
 	}
 	# --------------------
@@ -84,9 +84,9 @@
 
 		$t_none = NONE;
 		if ( !empty( $g_unread_icon_arr[$p_unread] ) ) {
-			PRINT "<IMG SRC=\"$g_icon_path$g_unread_icon_arr[$p_unread]\" ALT=\"\">";
+			PRINT "<IMG SRC=\"$g_icon_path$g_unread_icon_arr[$p_unread]\" ALT=\"\" />";
 		} else {
-			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\">";
+			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\" />";
 		}
 	}
 	# --------------------

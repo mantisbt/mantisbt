@@ -76,12 +76,12 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_bycategory.php" border=0 align=center> 
+		<img src="summary_graph_bycategory.php" border="0" align="center" />
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_bycategory_pct.php" border=0 align=center>
+		<img src="summary_graph_bycategory_pct.php" border="0" align="center" />
 	</td>
 </tr>
 </table>

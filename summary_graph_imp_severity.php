@@ -76,17 +76,17 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_byseverity.php" border="0">  
+		<img src="summary_graph_byseverity.php" border="0" />
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_byseverity_pct.php" border="0"> 
+		<img src="summary_graph_byseverity_pct.php" border="0" />
 	</td>
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_byseverity_mix.php" border="0">
+		<img src="summary_graph_byseverity_mix.php" border="0" />
 	</td>
 </tr>
 </table>

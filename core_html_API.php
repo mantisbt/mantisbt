@@ -375,15 +375,15 @@
 	### --------------------
 	# prints the links to the graphic pages, in summary_page.php
 	function print_menu_graph() {
-	global $s_synthesis_link, $s_status_link,$s_priority_link,$s_severity_link,$s_category_link,$s_resolution_link, $g_use_jpgraph  ;
+		global $s_synthesis_link, $s_status_link,$s_priority_link,$s_severity_link,$s_category_link,$s_resolution_link, $g_use_jpgraph  ;
 
-	if ( $g_use_jpgraph != 0 ) {
-	PRINT "<a href=\"summary_page.php\"><img src=\"images/synthese.gif\" border=0 align=center>$s_synthesis_link</a> | ";
-	PRINT "<a href=\"summary_graph_imp_status.php\"><img src=\"images/synthgraph.gif\" border=0 align=center>$s_status_link</a> | ";
-	PRINT "<a href=\"summary_graph_imp_priority.php\"><img src=\"images/synthgraph.gif\" border=0 align=center>$s_priority_link</a> | ";
-	PRINT "<a href=\"summary_graph_imp_severity.php\"><img src=\"images/synthgraph.gif\" border=0 align=center>$s_severity_link</a> | ";
-	PRINT "<a href=\"summary_graph_imp_category.php\"><img src=\"images/synthgraph.gif\" border=0 align=center>$s_category_link</a> | ";
-	PRINT "<a href=\"summary_graph_imp_resolution.php\"><img src=\"images/synthgraph.gif\" border=0 align=center>$s_resolution_link</a>";
+		if ( $g_use_jpgraph != 0 ) {
+			PRINT '<a href="summary_page.php"><img src="images/synthese.gif" border="0" align="center" />$s_synthesis_link</a> | ';
+			PRINT '<a href="summary_graph_imp_status.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_status_link</a> | ';
+			PRINT '<a href="summary_graph_imp_priority.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_priority_link</a> | ';
+			PRINT '<a href="summary_graph_imp_severity.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_severity_link</a> | ';
+			PRINT '<a href="summary_graph_imp_category.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_category_link</a> | ';
+			PRINT '<a href="summary_graph_imp_resolution.php"><img src="images/synthgraph.gif" border="0" align="center" />$s_resolution_link</a>';
 		}
 	}
 
