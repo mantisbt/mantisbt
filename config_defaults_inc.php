@@ -6,10 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.161 2004-04-03 20:18:42 narcissus Exp $
+	# $Id: config_defaults_inc.php,v 1.162 2004-04-08 17:40:44 prescience Exp $
 	# --------------------------------------------------------
 
-	
+
 	###########################################################################
 	# CONFIGURATION VARIABLES
 	###########################################################################
@@ -186,7 +186,7 @@
 
 	# Whether user's should receive emails for their own actions
 	$g_email_receive_own	= OFF;
-	
+
 	# set to OFF to disable email check
 	$g_validate_email		= ON;
 	$g_check_mx_record		= OFF;	# Not supported under Windows.
@@ -583,7 +583,7 @@
 	# This is useful for installations where assigned status is to be used when
 	# the bug is in progress, rather than just put in a person's queue.
 	$g_auto_set_status_to_assigned	= ON;
-	
+
 	############################
 	# Bug Attachments Settings
 	############################
@@ -716,13 +716,13 @@
 
 	# Threshold needed to manage user accounts
 	$g_manage_user_threshold = ADMINISTRATOR;
-	
+
 	# Delete bug threshold
 	$g_delete_bug_threshold = DEVELOPER;
-	
+
 	# Delete bugnote threshold
 	$g_delete_bugnote_threshold = $g_delete_bug_threshold;
-	
+
 	# Are users allowed to change and delete their own bugnotes?
 	$g_bugnote_allow_user_edit_delete = ON;
 
@@ -744,7 +744,7 @@
 
 	# Threshold needed to be able to create stored queries
 	$g_stored_query_create_threshold = DEVELOPER;
-	
+
 	# Threshold needed to be able to create shared stored queries
 	$g_stored_query_create_shared_threshold = MANAGER;
 
@@ -1085,4 +1085,28 @@
 					'log' => 'texticon.gif',
 					'eml' => 'mailicon.gif',
 					'?' => 'fileicon.gif' );
+
+	# Icon associative arrays
+	# Status to icon mapping
+	$g_status_icon_arr = array (
+		NONE      => '',
+		LOW       => '',
+		NORMAL    => '',
+		HIGH      => 'priority_1.gif',
+		URGENT    => 'priority_2.gif',
+		IMMEDIATE => 'priority_3.gif'
+	);
+	# --------------------
+	# Sort direction to icon mapping
+	$g_sort_icon_arr = array (
+		ASC        => 'up.gif',
+		DESC       => 'down.gif'
+	);
+	# --------------------
+	# Read status to icon mapping
+	$g_unread_icon_arr = array (
+		READ         => 'mantis-space.gif',
+		UNREAD       => 'unread.gif'
+	);
+	# --------------------
 ?>
