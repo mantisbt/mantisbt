@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.108 2003-03-05 21:37:31 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.109 2003-03-06 12:20:13 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -268,7 +268,7 @@
 	$g_default_language		= 'english';
 
 	# list the choices that the users are allowed to choose
-	$g_language_choices_arr	= array( 'english', 'chinese_simplified', 'chinese_traditional', 'czech', 'danish', 'dutch', 'french', 'german', 'hungarian', 'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard', 'romanian', 'russian', 'russian_koi8', 'spanish', 'swedish', 'turkish' );
+	$g_language_choices_arr	= array( 'english', 'chinese_simplified', 'chinese_traditional', 'czech', 'danish', 'dutch', 'french', 'german', 'hungarian', 'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard', 'romanian', 'russian', 'russian_koi8', 'slovak', 'spanish', 'swedish', 'turkish' );
 
 	###############################
 	# Mantis Display Settings

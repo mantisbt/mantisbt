@@ -3,6 +3,7 @@ Mantis ChangeLog
 2003.??.??  -  0.18.0a4
  * Remove "show source" functionality which was a security hole and of little use
  * Languages: Updated Italian localisation.
+ * Languages: Added Slovak localisation.
  * Enhancement: Field names in bug history are now localized.
  * Fix: 'Display selected only' on print bugs page fixed.
  * Fix: 'Hide resolved' now also works for report printing and export.
