@@ -33,13 +33,19 @@
 	if ( !isset( $f_show_category ) ) {
 		$f_show_category = "any";
 	}
+
 	if ( !isset( $f_show_severity ) ) {
 		$f_show_severity = "any";
 	}
+
 	if ( !isset( $f_show_status ) ) {
 		$f_show_status = "any";
 	}
 	#$f_limit_view
+
+	if ( !isset( $f_offset ) ) {
+		$f_offset = 0;
+	}
 
 	### basically we toggle between ASC and DESC if the user clicks the
 	### same sort order
@@ -106,7 +112,7 @@
 	<tr bgcolor=<? echo $g_category_title_color2 ?> align=center>
 		<td width=8%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=id&f_dir=<? echo $f_dir?>">ID</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=id&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">ID</a>
 			</b>
 		</td>
 		<td width=3%>
@@ -116,27 +122,27 @@
 		</td>
 		<td width=12%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=category&f_dir=<? echo $f_dir?>">Category</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=category&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Category</a>
 			</b>
 		</td>
 		<td width=10%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=severity&f_dir=<? echo $f_dir?>">Severity</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=severity&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Severity</a>
 			</b>
 		</td>
 		<td width=10%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=status&f_dir=<? echo $f_dir?>">Status</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=status&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Status</a>
 			</b>
 		</td>
 		<td width=12%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=last_updated&f_dir=<? echo $f_dir?>">Updated</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=last_updated&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Updated</a>
 			</b>
 		</td>
 		<td width=45%>
 			<b>
-				<a href="<? echo $g_view_bug_all_page ?>?f_sort=summary&f_dir=<? echo $f_dir?>">Summary</a>
+				<a href="<? echo $g_view_bug_all_page ?>?f_sort=summary&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">Summary</a>
 			</b>
 		</td>
 	</tr>
@@ -181,6 +187,8 @@
 		if ( isset( $f_limit_view ) ) {
 			$query = $query." LIMIT $f_offset, $f_limit_view";
 		}
+
+		echo $query;
 
 		### perform query
 	    $result = db_mysql_query( $query );
@@ -306,10 +314,10 @@
 
 <div align=center>
 <? if ( $f_offset_prev >= 0 ) { ?>
-<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>">View Prev <? echo $f_limit_view ?></a>
+<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">View Prev <? echo $f_limit_view ?></a>
 <? } ?>
 <? if ( $row_count == $f_limit_view ) { ?>
-<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>">View Next <? echo $f_limit_view ?></a>
+<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">View Next <? echo $f_limit_view ?></a>
 <? } ?>
 </div>
 
