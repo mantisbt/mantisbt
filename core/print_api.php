@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.76 2004-04-08 22:44:59 prescience Exp $
+	# $Id: print_api.php,v 1.77 2004-05-06 13:17:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -697,7 +697,7 @@
 	}
 	# --------------------
 	# list of projects that a user is NOT in
-	function print_project_user_list( $p_user_id ) {
+	function print_project_user_list( $p_user_id, $p_include_remove_link = true ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
 
 		$c_user_id = db_prepare_int( $p_user_id );
@@ -719,7 +719,12 @@
 			$t_access_level	= $row['access_level'];
 			$t_access_level	= get_enum_element( 'access_levels', $t_access_level );
 			$t_view_state	= get_enum_element( 'project_view_state', $t_view_state );
-			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="manage_user_proj_delete.php?project_id='.$t_project_id.'&amp;user_id='.$p_user_id.'">'. lang_get( 'remove_link' ).'</a>]<br />';
+
+			echo $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.')';
+			if ( $p_include_remove_link && access_has_project_level( config_get( 'project_user_threshold' ), $t_project_id ) ) {
+				echo ' [<a class="small" href="manage_user_proj_delete.php?project_id='.$t_project_id.'&amp;user_id='.$p_user_id.'">'. lang_get( 'remove_link' ).'</a>]';
+			}
+			echo '<br />';
 		}
 	}
 
