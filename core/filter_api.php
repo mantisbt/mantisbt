@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.35 2004-05-21 21:42:51 int2str Exp $
+	# $Id: filter_api.php,v 1.36 2004-05-27 22:09:22 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -64,13 +64,13 @@
 			if ( !current_user_is_administrator() ) {
 				$t_projects = current_user_get_accessible_projects();
 
-				if ( 0 == sizeof( $t_projects ) ) {
+				if ( 0 == count( $t_projects ) ) {
 					return array();  # no accessible projects, return an empty array
 				} else {
 					$t_clauses = array();
 
 					#@@@ use project_id IN (1,2,3,4) syntax if we can
-					for ( $i=0 ; $i < sizeof( $t_projects ) ; $i++) {
+					for ( $i=0 ; $i < count( $t_projects ) ; $i++) {
 						array_push( $t_clauses, "($t_bug_table.project_id='$t_projects[$i]')" );
 					}
 
@@ -97,7 +97,7 @@
 				$t_any_found = true;
 			}
 		}
-		if ( sizeof( $t_filter['reporter_id'] ) == 0 ) {
+		if ( count( $t_filter['reporter_id'] ) == 0 ) {
 			$t_any_found = true;
 		}
 		if ( !$t_any_found ) {
@@ -131,7 +131,7 @@
 				$t_any_found = true;
 			}
 		}
-		if ( sizeof( $t_filter['handler_id'] ) == 0 ) {
+		if ( count( $t_filter['handler_id'] ) == 0 ) {
 			$t_any_found = true;
 		}
 		if ( !$t_any_found ) {
@@ -174,7 +174,7 @@
 				$t_any_found = true;
 			}
 		}
-		if ( sizeof( $t_filter['show_category'] ) == 0 ) {
+		if ( count( $t_filter['show_category'] ) == 0 ) {
 			$t_any_found = true;
 		}
 		if ( !$t_any_found ) {
@@ -194,7 +194,7 @@
 				$t_any_found = true;
 			}
 		}
-		if ( sizeof( $t_filter['show_severity'] ) == 0 ) {
+		if ( count( $t_filter['show_severity'] ) == 0 ) {
 			$t_any_found = true;
 		}
 		if ( !$t_any_found ) {
@@ -239,7 +239,7 @@
 		} else {
 			# advanced filtering: if only showing any, then restrict by the hide status values, otherwise ignore the hide
 			$t_only_any = false;
-			if ( sizeof( $t_filter['show_status'] ) == 1 ) {
+			if ( count( $t_filter['show_status'] ) == 1 ) {
 				if ( ( 'any' == $t_filter['show_status'][0] ) || ( is_blank( $t_filter['show_status'][0] ) ) ) {
 					$t_only_any = true;
 				}
@@ -263,7 +263,7 @@
 			}
 		}
 
-		if ( sizeof( $t_desired_statuses ) > 0 ) {
+		if ( count( $t_desired_statuses ) > 0 ) {
 			$t_clauses = array();
 
 			foreach( $t_desired_statuses as $t_filter_member ) {
@@ -280,7 +280,7 @@
 				$t_any_found = true;
 			}
 		}
-		if ( sizeof( $t_filter['show_resolution'] ) == 0 ) {
+		if ( count( $t_filter['show_resolution'] ) == 0 ) {
 			$t_any_found = true;
 		}
 		if ( !$t_any_found ) {
@@ -300,7 +300,7 @@
 				$t_any_found = true;
 			}
 		}
-		if ( sizeof( $t_filter['show_build'] ) == 0 ) {
+		if ( count( $t_filter['show_build'] ) == 0 ) {
 			$t_any_found = true;
 		}
 		if ( !$t_any_found ) {
@@ -320,7 +320,7 @@
 				$t_any_found = true;
 			}
 		}
-		if ( sizeof( $t_filter['show_version'] ) == 0 ) {
+		if ( count( $t_filter['show_version'] ) == 0 ) {
 			$t_any_found = true;
 		}
 		if ( !$t_any_found ) {
@@ -364,7 +364,7 @@
 						$t_any_found = true;
 					}
 				}
-				if ( sizeof( $t_filter['custom_fields'][$t_cfid] ) == 0 ) {
+				if ( !isset( $t_filter['custom_fields'][$t_cfid] ) ) {
 					$t_any_found = true;
 				}
 				if ( !$t_any_found ) {
@@ -418,7 +418,7 @@
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
 		$t_from		= 'FROM ' . implode( ', ', array_unique( $t_from_clauses ) );
 		$t_join		= implode( ' ', $t_join_clauses );
-		if ( sizeof( $t_where_clauses ) > 0 ) {
+		if ( count( $t_where_clauses ) > 0 ) {
 			$t_where	= 'WHERE ' . implode( ' AND ', $t_where_clauses );
 		} else {
 			$t_where	= '';
@@ -592,11 +592,11 @@
 		<input type="hidden" name="dir" value="<?php PRINT $t_dir ?>" />
 		<input type="hidden" name="page_number" value="<?php PRINT $p_page_number ?>" />
 		<input type="hidden" name="view_type" value="<?php PRINT $t_view_type ?>" />
-		<table class="width100" cellspacing="0">
+		<table class="width100" cellspacing="1">
 
 		<?php
-			$t_filter_cols = 8;
-			$t_custom_cols = 1;
+			$t_filter_cols = 7;
+			$t_custom_cols = $t_filter_cols;
 			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 				$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
 			}
@@ -620,9 +620,9 @@
 					}
 				}
 
-				if ( sizeof( $t_accessible_custom_fields_ids ) > 0 ) {
+				if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
 					$t_per_row = config_get( 'filter_custom_fields_per_row' );
-					$t_num_custom_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
+					$t_num_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 				}
 			}
 
@@ -634,17 +634,41 @@
 		?>
 
 		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'reporter_id[]'; ?>"><?php PRINT lang_get( 'reporter' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'reporter_id[]'; ?>"><?php PRINT lang_get( 'reporter' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'handler_id[]'; ?>"><?php PRINT lang_get( 'assigned_to' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_category[]'; ?>"><?php PRINT lang_get( 'category' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_severity[]'; ?>"><?php PRINT lang_get( 'severity' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_status[]'; ?>"><?php PRINT lang_get( 'status' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_resolution[]'; ?>"><?php PRINT lang_get( 'resolution' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'hide_status[]'; ?>"><?php PRINT lang_get( 'hide_status' ) ?>:</a>
+			</td>
+
+			<?php 
+				if ( $t_custom_cols > $t_filter_cols ) {
+					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
+				}
+			?>
+		</tr>
+
+		<tr class="row-1">
+			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
-								if ( sizeof( $t_filter['reporter_id'] ) == 0 ) {
+								if ( count( $t_filter['reporter_id'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
 									$t_first_flag = true;
@@ -675,21 +699,12 @@
 									}
 								}
 							?>
-						</td>
-					</tr>
-				</table>
 			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'handler_id[]'; ?>"><?php PRINT lang_get( 'assigned_to' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
-								if ( sizeof( $t_filter['handler_id'] ) == 0 ) {
+								if ( count( $t_filter['handler_id'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
 									$t_first_flag = true;
@@ -723,21 +738,12 @@
 									PRINT ' (' . lang_get( 'or_unassigned' ) . ')';
 								}
 							?>
-						</td>
-					</tr>
-				</table>
 			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 2 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'show_category[]'; ?>"><?php PRINT lang_get( 'category' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
-								if ( sizeof( $t_filter['show_category'] ) == 0 ) {
+								if ( count( $t_filter['show_category'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
 									$t_first_flag = true;
@@ -762,21 +768,12 @@
 									}
 								}
 							?>
-						</td>
-					</tr>
-				</table>
 			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'show_severity[]'; ?>"><?php PRINT lang_get( 'severity' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
-								if ( sizeof( $t_filter['show_severity'] ) == 0 ) {
+								if ( count( $t_filter['show_severity'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
 									$t_first_flag = true;
@@ -801,21 +798,12 @@
 									}
 								}
 							?>
-						</td>
-					</tr>
-				</table>
 			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'show_status[]'; ?>"><?php PRINT lang_get( 'status' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
-								if ( sizeof( $t_filter['show_status'] ) == 0 ) {
+								if ( count( $t_filter['show_status'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
 									$t_first_flag = true;
@@ -840,21 +828,12 @@
 									}
 								}
 							?>
-						</td>
-					</tr>
-				</table>
 			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'show_resolution[]'; ?>"><?php PRINT lang_get( 'resolution' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_any_found = false;
-								if ( sizeof( $t_filter['show_resolution'] ) == 0 ) {
+								if ( count( $t_filter['show_resolution'] ) == 0 ) {
 									PRINT lang_get( 'any' );
 								} else {
 									$t_first_flag = true;
@@ -879,21 +858,12 @@
 									}
 								}
 							?>
-						</td>
-					</tr>
-				</table>
 			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'hide_status[]'; ?>"><?php PRINT lang_get( 'hide_status' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top">
 							<?php
 								$t_output = '';
 								$t_none_found = false;
-								if ( sizeof( $t_filter['hide_status'] ) == 0 ) {
+								if ( count( $t_filter['hide_status'] ) == 0 ) {
 									PRINT lang_get( 'none' );
 								} else {
 									$t_first_flag = true;
@@ -912,7 +882,7 @@
 										$t_output = $t_output . $t_this_string;
 									}
 									$t_hide_status_post = '';
-									if ( sizeof( $t_filter['hide_status'] ) == 1 ) {
+									if ( count( $t_filter['hide_status'] ) == 1 ) {
 										$t_hide_status_post = ' (' . lang_get( 'and_above' ) . ')';
 									}
 									if ( true == $t_none_found ) {
@@ -922,20 +892,104 @@
 									}
 								}
 							?>
-						</td>
-					</tr>
-				</table>
 			</td>
+			<?php 
+				if ( $t_custom_cols > $t_filter_cols ) {
+					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
+				}
+			?>
 		</tr>
 
 		<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 2 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'do_filter_by_date'; ?>"><?php PRINT lang_get( 'use_date_filters' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_build[]'; ?>"><?php PRINT lang_get( 'product_build' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_version[]'; ?>"><?php PRINT lang_get( 'product_version' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'per_page'; ?>"><?php PRINT lang_get( 'show' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>"><?php PRINT lang_get( 'changed' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top" colspan="3">
+				<a href="<?php PRINT $t_filters_url . 'do_filter_by_date'; ?>"><?php PRINT lang_get( 'use_date_filters' ) ?>:</a>
+			</td>
+			<?php 
+				if ( $t_custom_cols > $t_filter_cols ) {
+					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
+				}
+			?>
+		</tr>
+		<tr class="row-2">
+			<td class="small-caption" valign="top">
+							<?php
+								$t_output = '';
+								$t_any_found = false;
+								if ( count( $t_filter['show_build'] ) == 0 ) {
+									PRINT lang_get( 'any' );
+								} else {
+									$t_first_flag = true;
+									foreach( $t_filter['show_build'] as $t_current ) {
+										$t_this_string = '';
+										if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
+											$t_any_found = true;
+										} else {
+											$t_this_string = $t_current;
+										}
+										if ( $t_first_flag != true ) {
+											$t_output = $t_output . '<br>';
+										} else {
+											$t_first_flag = false;
+										}
+										$t_output = $t_output . $t_this_string;
+									}
+									if ( true == $t_any_found ) {
+										PRINT lang_get( 'any' );
+									} else {
+										PRINT $t_output;
+									}
+								}
+							?>
+			</td>
+			<td class="small-caption" valign="top">
+							<?php
+								$t_output = '';
+								$t_any_found = false;
+								if ( count( $t_filter['show_version'] ) == 0 ) {
+									PRINT lang_get( 'any' );
+								} else {
+									$t_first_flag = true;
+									foreach( $t_filter['show_version'] as $t_current ) {
+										$t_this_string = '';
+										if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
+											$t_any_found = true;
+										} else {
+											$t_this_string = $t_current;
+										}
+										if ( $t_first_flag != true ) {
+											$t_output = $t_output . '<br>';
+										} else {
+											$t_first_flag = false;
+										}
+										$t_output = $t_output . $t_this_string;
+									}
+									if ( true == $t_any_found ) {
+										PRINT lang_get( 'any' );
+									} else {
+										PRINT $t_output;
+									}
+								}
+							?>
+			</td>
+			<td class="small-caption" valign="top">
+				<?php PRINT $t_filter['per_page']; ?>
+			</td>
+			<td class="small-caption" valign="top">
+				<?php PRINT $t_filter['highlight_changed']; ?>
+			</td>
+			<td class="small-caption" valign="top" colspan="3">
 							<?php
 							if ( 'on' == $t_filter['do_filter_by_date'] ) {
 								$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
@@ -976,205 +1030,130 @@
 								PRINT lang_get( 'no' );
 							}
 							?>
-						</td>
-					</tr>
-				</table>
 			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'show_build[]'; ?>"><?php PRINT lang_get( 'product_build' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
-							<?php
-								$t_output = '';
-								$t_any_found = false;
-								if ( sizeof( $t_filter['show_build'] ) == 0 ) {
-									PRINT lang_get( 'any' );
-								} else {
-									$t_first_flag = true;
-									foreach( $t_filter['show_build'] as $t_current ) {
-										$t_this_string = '';
-										if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
-											$t_any_found = true;
-										} else {
-											$t_this_string = $t_current;
-										}
-										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
-										} else {
-											$t_first_flag = false;
-										}
-										$t_output = $t_output . $t_this_string;
-									}
-									if ( true == $t_any_found ) {
-										PRINT lang_get( 'any' );
-									} else {
-										PRINT $t_output;
-									}
-								}
-							?>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'show_version[]'; ?>"><?php PRINT lang_get( 'product_version' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
-							<?php
-								$t_output = '';
-								$t_any_found = false;
-								if ( sizeof( $t_filter['show_version'] ) == 0 ) {
-									PRINT lang_get( 'any' );
-								} else {
-									$t_first_flag = true;
-									foreach( $t_filter['show_version'] as $t_current ) {
-										$t_this_string = '';
-										if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
-											$t_any_found = true;
-										} else {
-											$t_this_string = $t_current;
-										}
-										if ( $t_first_flag != true ) {
-											$t_output = $t_output . '<br>';
-										} else {
-											$t_first_flag = false;
-										}
-										$t_output = $t_output . $t_this_string;
-									}
-									if ( true == $t_any_found ) {
-										PRINT lang_get( 'any' );
-									} else {
-										PRINT $t_output;
-									}
-								}
-							?>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'per_page'; ?>"><?php PRINT lang_get( 'show' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
-							<?php PRINT $t_filter['per_page']; ?>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<table cellspacing="0">
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-						<td class="small-caption" valign="top">
-							<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>"><?php PRINT lang_get( 'changed' ) ?>:</a>
-						</td>
-						<td class="small-caption" valign="top">
-							<?php PRINT $t_filter['highlight_changed']; ?>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>"></td>
-			<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>"></td>
+			<?php 
+				if ( $t_custom_cols > $t_filter_cols ) {
+					echo '<td colspan="' . ($t_custom_cols - $t_filter_cols) . '">&nbsp;</td>';
+				}
+			?>
 		</tr>
 		<?php
-		if ( ON == config_get( 'filter_by_custom_fields' ) ) {
-		?>
-			<?php # -- Custom Field Searching -- ?>
-			<?php
-			if ( sizeof( $t_accessible_custom_fields_ids ) > 0 ) {
-				$t_per_row = config_get( 'filter_custom_fields_per_row' );
-				$t_num_rows = ceil( sizeof( $t_accessible_custom_fields_ids ) / $t_per_row );
-				$t_base = 0;
 
-				for ( $i = 0; $i < $t_num_rows; $i++ ) {
-					?>
-					<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-					<?php
-					for( $j = 0; $j < $t_per_row; $j++ ) {
-						if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
-							?>
-							<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_filter_cols ); ?>">
-								<table cellspacing="0">
-									<tr <?php PRINT "class=\"" . $t_trclass . "\""; ?>>
-										<td class="small-caption" valign="top">
-										<a href="<?php PRINT $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$t_base + $j] . '[]'; ?>">
-										<?php PRINT $t_accessible_custom_fields_names[$t_base + $j]; ?>
-										</a>
-										</td>
-										<td class="small-caption" valign="top">
-										<?php
-										$t_output = '';
-										$t_any_found = false;
-										if ( sizeof( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$t_base + $j]] ) == 0 ) {
-											PRINT lang_get( 'any' );
-										} else {
-											$t_first_flag = true;
-											foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$t_base + $j]] as $t_current ) {
-												$t_this_string = '';
-												if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
-													$t_any_found = true;
-												} else {
-													$t_this_string = $t_current;
-												}
-												if ( $t_first_flag != true ) {
-													$t_output = $t_output . '<br>';
-												} else {
-													$t_first_flag = false;
-												}
-												$t_output = $t_output . $t_this_string;
-											}
-											if ( true == $t_any_found ) {
-												PRINT lang_get( 'any' );
-											} else {
-												PRINT $t_output;
-											}
-										}
-										?>
-										</td>
-									</tr>
-								</table>
-							</td>
-							<?php
+		if ( ON == config_get( 'filter_by_custom_fields' ) ) {
+
+			# -- Custom Field Searching --
+
+			if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
+				$t_per_row = config_get( 'filter_custom_fields_per_row' );
+				$t_num_fields = count( $t_accessible_custom_fields_ids ) ;
+				$t_row_idx = 0;
+				$t_col_idx = 0;
+
+				$t_fields = "";
+				$t_values = "";
+
+				for ( $i = 0; $i < $t_num_fields; $i++ ) {
+					if ( $t_col_idx == 0 ) {
+						$t_fields = '<tr class="' . $t_trclass . '">';
+						$t_values = '<tr class="row-1">';
+					}
+
+					if ( isset( $t_accessible_custom_fields_names[ $i ] ) ) {
+						$t_fields .= '<td class="small-caption" valign="top"> ';
+						$t_fields .= '<a href="' . $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$i] . '[]">';
+						$t_fields .= $t_accessible_custom_fields_names[$i];
+						$t_fields .= '</a> </td> ';
+					}
+					$t_output = '';
+					$t_any_found = false;
+
+					$t_values .= '<td> ' ; 
+					if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
+						$t_values .= lang_get( 'any' );
+					} else {
+						$t_first_flag = true;
+						foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
+							$t_this_string = '';
+							if ( ( $t_current == 'any' ) || ( is_blank( $t_current ) ) ) {
+								$t_any_found = true;
+							} else {
+								$t_this_string = $t_current;
+							}
+
+							if ( $t_first_flag != true ) {
+								$t_output = $t_output . '<br>';
+							} else {
+								$t_first_flag = false;
+							}
+
+							$t_output = $t_output . $t_this_string;
+						}
+
+						if ( true == $t_any_found ) {
+							$t_values .= lang_get( 'any' );
 						} else {
-							?>
-							<td class="small-caption" valign="top" text-align="right" colspan="<?php PRINT ( 1 * $t_filter_cols ); ?>">&nbsp;</td>
-							<?php
+							$t_values .= $t_output;
 						}
 					}
-					?>
-					</tr>
-					<?php
-					$t_base += $t_per_row;
+					$t_values .= ' </td>';
+
+					$t_col_idx++;
+
+					if ( $t_col_idx == $t_per_row ) {
+						if ( $t_filter_cols > $t_per_row ) {
+							$t_fields .= '<td colspan="' . ($t_filter_cols - $t_per_row ) . '">&nbsp</td> ';
+							$t_values .= '<td colspan="' . ($t_filter_cols - $t_per_row) . '">&nbsp</td> ';
+						}
+
+						$t_fields .= '</tr>' . "\n";
+						$t_values .= '</tr>' . "\n";
+
+						echo $t_fields;
+						echo $t_values; 
+
+						$t_col_idx = 0;
+						$t_row_idx++;
+					}
+				}
+
+
+				if ( $t_col_idx > 0 ) {
+					if ( $t_col_idx < $t_per_row ) {
+						$t_fields .= '<td colspan="' . ($t_per_row - $t_col_idx) . '">&nbsp</td> ';
+						$t_values .= '<td colspan="' . ($t_per_row - $t_col_idx) . '">&nbsp</td> ';
+					}
+
+					if ( $t_filter_cols > $t_per_row ) {
+						$t_fields .= '<td colspan="' . ($t_filter_cols - $t_per_row ) . '">&nbsp</td> ';
+						$t_values .= '<td colspan="' . ($t_filter_cols - $t_per_row) . '">&nbsp</td> ';
+					}
+
+					$t_fields .= '</tr>' . "\n";
+					$t_values .= '</tr>' . "\n";
+
+					echo $t_fields;
+					echo $t_values; 
 				}
 			}
 		}
 		?>
 
 		<tr>
-			<td colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>"><?php PRINT lang_get( 'search' ) ?>: <input type="text" size="16" name="search" value="<?php PRINT $t_filter['search']; ?>" /></td>
-			<!-- SUBMIT button -->
-			<td class="left" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
+			<td colspan="3">
+				<?php PRINT lang_get( 'search' ) ?>: 
+				<input type="text" size="16" name="search" value="<?php PRINT $t_filter['search']; ?>" />
+
 				<input type="submit" name="filter" class="button" value="<?php PRINT lang_get( 'search' ) ?>" />
 			</td>
 			</form>
-			<td colspan="<?php PRINT ( 2 * $t_custom_cols ); ?>"></td>
 
+			<td class="right" colspan="4">
 			<?php
 			$t_stored_queries_arr = array();
 			$t_stored_queries_arr = filter_db_get_available_queries();
 
-			if ( sizeof( $t_stored_queries_arr ) > 0 ) {
+			if ( count( $t_stored_queries_arr ) > 0 ) {
 				?>
-				<td class="right" colspan="<?php PRINT ( 3 * $t_custom_cols ); ?>">
 					<form method="get" name="list_queries" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
 					<select name="source_query_id">
@@ -1191,35 +1170,29 @@
 					<form method="post" name="open_queries" action="query_view_page.php">
 					<input type="submit" name="switch_to_query_button" class="button" value="<?php PRINT lang_get( 'open_queries' ) ?>" />
 					</form>
-				</td>
 				<?php
 			} else {
 				?>
-				<td class="right" colspan="<?php PRINT ( 3 * $t_custom_cols ); ?>">
 					<form method="get" name="reset_query" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
 					<input type="hidden" name="source_query_id" value="-1" />
 					<input type="submit" name="reset_query_button" class="button" value="<?php PRINT lang_get( 'reset_query' ) ?>" />
 					</form>
-				</td>
 				<?php
 			}
 
 			if ( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) {
 			?>
-				<td class="left" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
 					<form method="post" name="save_query" action="query_store_page.php">
 					<input type="submit" name="save_query_button" class="button" value="<?php PRINT lang_get( 'save_query' ) ?>" />
 					</form>
-				</td>
 			<?php
 			} else {
 			?>
-				<td colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">&nbsp;</td>
 			<?php
 			}
 			?>
-
+			</td>
 		</tr>
 		</table>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.167 2004-05-26 00:59:27 int2str Exp $
+	# $Id: config_defaults_inc.php,v 1.168 2004-05-27 22:09:20 int2str Exp $
 	# --------------------------------------------------------
 
 
@@ -910,7 +910,7 @@
 	# Mantis Filter Variables
 	#######################################
 	$g_filter_by_custom_fields = ON;
-	$g_filter_custom_fields_per_row = 10;
+	$g_filter_custom_fields_per_row = 7;
 
 	#######################################
 	# Mantis Database Table Variables
