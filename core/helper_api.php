@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.16 2002-09-07 08:39:58 jfitzell Exp $
+	# $Id: helper_api.php,v 1.17 2002-09-18 04:44:52 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -256,10 +256,17 @@
 	}
 	# --------------------
 	# Return the current project id as stored in a cookie
+	#  If no cookie exists, the user's default project is returned
 	function helper_get_current_project() {
 		$t_cookie_name = config_get( 'project_cookie' );
 
-		return (int)gpc_get_cookie( $t_cookie_name, 0 );
+		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
+
+		if ( null === $t_project_id ) {
+			return (int)current_user_get_pref( 'default_project' );
+		} else {
+			return (int)$t_project_id;
+		}
 	}
 	# --------------------
 	# Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
