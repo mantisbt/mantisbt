@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2004.xx.xx  -  0.18.2
+2004.02.29  -  0.18.2
 
  * Sec #3595: bug_view_page.php: restricted custom fields are shown.
  * Sec #3596: print_bugnote_inc.php: private bugnotes are visible for not granted users (thanks to yarik123).

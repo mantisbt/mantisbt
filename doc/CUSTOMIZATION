@@ -10,7 +10,7 @@ CONFIGURATION
 
 This file contains information to help you customize Mantis.  A more
 detailed doc can be found at:
-http://www.mantisbt.org/manual/manual.customizing.mantis.php
+http://manual.mantisbt.org/manual.customizing.mantis.php
 
 * config_defaults_inc.php
   - this file contains the default values for all the site-wide variables.
