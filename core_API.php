@@ -260,6 +260,12 @@
 			PRINT "[ <a href=\"$g_path.$g_documentation_page\">$s_documentation_link</a> ]";
 		PRINT "</div>";
 	}
+	### --------------------
+	function print_documentaion_link( $p_a_name="" ) {
+		global $g_documentation_html;
+
+		PRINT "<a href=\"$g_documentation_html#$p_a_name\" target=_info>[?]</a>";
+	}
 	###########################################################################
 	# Basic Print API
 	###########################################################################
@@ -427,7 +433,7 @@
 		} ### end for
 	}
 	### --------------------
-	function print_assign_to_option_list() {
+	function print_assign_to_option_list( $p_id ) {
 		global $g_mantis_user_table;
 
 		$query = "SELECT id, username
@@ -440,7 +446,11 @@
 		for ($i=0;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			PRINT "<option value=\"$v_id\">$v_username";
+			if ( $v_id==$p_id ) {
+				PRINT "<option value=\"$v_id\" SELECTED>$v_username";
+			} else {
+				PRINT "<option value=\"$v_id\">$v_username";
+			}
 		} ### end for
 	}
 	### --------------------
@@ -468,14 +478,14 @@
 	}
 	### --------------------
 	# prints the profiles given the user id
-	function print_profile_option_list( $p_id ) {
+	function print_profile_option_list( $p_id, $p_select_id="" ) {
 		global $g_mantis_user_profile_table;
 
 		### Get profiles
 		$query = "SELECT id, platform, os, os_build, default_profile
 			FROM $g_mantis_user_profile_table
 			WHERE user_id='$p_id'
-			ORDER BY id DESC";
+			ORDER BY id";
 	    $result = db_query( $query );
 	    $profile_count = db_num_rows( $result );
 
@@ -488,7 +498,9 @@
 			$v_os		= string_unsafe( $v_os );
 			$v_os_build	= string_unsafe( $v_os_build );
 
-			if ( $v_default_profile=="on" ) {
+			if ( $p_select_id==$v_id ) {
+				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
+			} else if (( $v_default_profile=="on" )&&( empty( $p_select_id ) )) {
 				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
 			} else {
 				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
@@ -496,7 +508,7 @@
 		}
 	}
 	### --------------------
-	function print_project_status_option_list( $p_status ) {
+	function print_project_status_option_list( $p_status="" ) {
 		global $g_mantis_project_table;
 
 		$t_enum_string = get_enum_string( $g_mantis_project_table, "status" );
@@ -591,7 +603,7 @@
 			$row = db_fetch_array( $result );
 			$t_version = $row["version"];
 			if ( $t_version==$p_version ) {
-				PRINT "<option value=\"$t_version\">$t_version";
+				PRINT "<option value=\"$t_version\" SELECTED>$t_version";
 			} else {
 				PRINT "<option value=\"$t_version\">$t_version";
 			}
@@ -1324,7 +1336,7 @@
 	### --------------------
 	### Send password to user
 	function email_signup( $p_user_id, $p_password ) {
-		global $g_mantis_user_table, $g_login_url,
+		global $g_mantis_user_table, $g_mantis_url,
 			$s_new_account_subject,
 			$s_new_account_greeting, $s_new_account_url,
 			$s_new_account_username, $s_new_account_password,
@@ -1339,21 +1351,17 @@
 
 		### Build Welcome Message
 		$t_message = $s_new_account_greeting.
-						$s_new_account_url.$g_login_url."\n".
+						$s_new_account_url.$g_mantis_url."\n".
 						$s_new_account_username.$v_username."\n".
 						$s_new_account_password.$p_password."\n\n".
 						$s_new_account_message.
 						$s_new_account_do_not_reply;
 
-		if ( !email_send( $v_email, $s_new_account_subject, $t_message, $t_headers ) ) {
-			echo "FAILED SENDING MAIL TO: $v_username - $v_email";
-		}
+		email_send( $v_email, $s_new_account_subject, $t_message, $t_headers );
 	}
 	### --------------------
 	### Send new password when user forgets
 	function email_reset( $p_user_id, $p_password ) {
-		global $g_mantis_user_table;
-
 		$query = "SELECT username, email
 				FROM $g_mantis_user_table
 				WHERE id='$p_user_id'";
@@ -1371,33 +1379,29 @@
 	### --------------------
 	### Notify reporter and handler when new bugnote is added
 	function email_bugnote_add( $p_bug_id ) {
-		global $g_mantis_user_table, $g_mantis_bug_table;
-
 		email_bug_info( $p_bug_id, "A BUGNOTE has been added to this bug." );
 	}
 	### --------------------
 	function email_resolved( $p_bug_id ) {
-		global $g_mantis_user_table, $g_mantis_bug_table;
-
 		email_bug_info( $p_bug_id, "The following bug has been RESOLVED." );
 	}
 	### --------------------
 	function email_feedback( $p_bug_id ) {
-		global $g_mantis_user_table, $g_mantis_bug_table;
-
 		email_bug_info( $p_bug_id, "The following bug requires your FEEDBACK." );
 	}
 	### --------------------
 	function email_reopen( $p_bug_id ) {
-		global $g_mantis_user_table, $g_mantis_bug_table;
-
 		email_bug_info( $p_bug_id, "The following bug has been REOPENED." );
+	}
+	### --------------------
+	function email_assign( $p_bug_id ) {
+		email_bug_info( $p_bug_id, "The following bug has been ASSIGNED." );
 	}
 	### --------------------
 	function email_build_bug_message( $p_bug_id ) {
 		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
 				$g_mantis_user_table, $g_complete_date_format,
-				$g_bugnote_order;
+				$g_bugnote_order, $g_mantis_url, $g_view_bug_page;
 
 		$query = "SELECT *
 				FROM $g_mantis_bug_table
@@ -1420,6 +1424,8 @@
 		$v_last_updated = date( $g_complete_date_format, sql_to_unix_time( $v_last_updated ) );
 
 		$t_message = "=======================================================================\n";
+		$t_message .= $g_mantis_url.$g_view_bug_page."?f_id=".$p_bug_id."\n";
+		$t_message .= "=======================================================================\n";
 		$t_message .= "Bug:             $v_id\n";
 		$t_message .= "Category:        $v_category\n";
 		$t_message .= "Reproducibility: $v_reproducibility\n";
@@ -1474,7 +1480,7 @@
 			$t_username = db_result( $result3, 0, 0 );
 
 			$t_note = db_result( $result2, 0, 0 );
-			$t_note = stripslashes( str_replace( "<br>", "", $t_note ) );
+			$t_note = string_edit( $t_note );
 			$t_last_modified = date( $g_complete_date_format, sql_to_unix_time( $t_last_modified ) );
 			$t_string = " ".$t_username." - ".$t_last_modified." ";
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
@@ -1483,7 +1489,6 @@
 			$t_message = $t_message.$t_note."\n\n";
 		}
 
-		$t_message = stripslashes( $t_message );
 		return $t_message;
 	}
 	### --------------------
@@ -1556,39 +1561,43 @@
 	}
 	### --------------------
 	function email_send( $p_recipient, $p_subject, $p_message ) {
-		global $g_from_email;
+		global $g_from_email, $g_enable_email_notification;
 
-		### NEED TO STRIP ALL FIELDS OF INVALID CHARACTERS
+		if ( $g_enable_email_notification==1 ) {
 
-		### Visit http://www.php.net/manual/function.mail.php
-		### if you have problems with mailing
+			### NEED TO STRIP ALL FIELDS OF INVALID CHARACTERS
 
-		$t_recipient = trim( $p_recipient );
+			### Visit http://www.php.net/manual/function.mail.php
+			### if you have problems with mailing
 
-		$t_subject = trim( $p_subject );
+			$t_recipient = trim( $p_recipient );
 
-		$t_message = trim( $p_message );
-		/*if ( floor( phpversion() )>=4 ) {
-			$t_message = trim( wordwrap( $t_message, 72 ) );
-		} else {
-			$t_message = trim( word_wrap( $t_message, 72 ) );
-		}*/
+			$t_subject = trim( $p_subject );
 
-		$t_headers = "From: $g_from_email\n";
-		#$t_headers .= "Reply-To: $p_reply_to_email\n";
-		$t_headers .= "X-Sender: <$g_from_email>\n";
-		$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
-		#$t_headers .= "X-Priority: 1\n"; ### Urgent = 1
-		#$t_headers .= "Return-Path: <$g_return_path_email>\n"; ### return if error
-		### If you want to send foreign charsets
-		#$t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
+			$t_message = trim( $p_message );
+			/*if ( floor( phpversion() )>=4 ) {
+				$t_message = trim( wordwrap( $t_message, 72 ) );
+			} else {
+				$t_message = trim( word_wrap( $t_message, 72 ) );
+			}*/
 
-		#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
-		#exit;
+			$t_headers = "From: $g_from_email\n";
+			#$t_headers .= "Reply-To: $p_reply_to_email\n";
+			$t_headers .= "X-Sender: <$g_from_email>\n";
+			$t_headers .= "X-Mailer: PHP/".phpversion()."\n";
+			#$t_headers .= "X-Priority: 1\n"; ### Urgent = 1
+			#$t_headers .= "Return-Path: <$g_return_path_email>\n"; ### return if error
+			### If you want to send foreign charsets
+			#$t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
 
-		$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
-		if ( !$result ) {
-			PRINT "PROBLEMS SENDING MAIL TO: $t_recipient";
+			#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
+			#exit;
+
+			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
+			if ( !$result ) {
+				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient";
+				exit;
+			}
 		}
 	}
 	### --------------------
