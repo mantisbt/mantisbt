@@ -10,7 +10,7 @@
 <?php
 	$f_project_id	= gpc_get_int( 'f_project_id' );
 	$f_make_default	= gpc_get_bool( 'f_make_default' );
-	$f_ref			= gpc_get_string( 'f_ref', '' );
+	$f_ref			= gpc_get_string( 'ref', '' );
 
 	# Set default project
 	if ( $f_make_default ) {

@@ -23,7 +23,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="f_ref" value="<?php echo $f_ref ?>" />
+		<input type="hidden" name="ref" value="<?php echo $f_ref ?>" />
 		<?php echo lang_get( 'login_title' ) ?>
 	</td>
 </tr>
