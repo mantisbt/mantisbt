@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.128 $
-	# $Author: vboctor $
-	# $Date: 2003-02-26 13:05:41 $
+	# $Revision: 1.129 $
+	# $Author: jfitzell $
+	# $Date: 2003-03-05 21:37:32 $
 	#
-	# $Id: strings_english.txt,v 1.128 2003-02-26 13:05:41 vboctor Exp $
+	# $Id: strings_english.txt,v 1.129 2003-03-05 21:37:32 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -740,11 +740,6 @@
 	# set_project.php
 	$s_selected_project = 'Selected project';
 	$s_valid_project_msg = 'You must choose a valid project';
-
-	# show_source_page.php
-	$s_show_source_for_msg = 'Showing source for';
-	$s_not_supported_part1 = 'This version';
-	$s_not_supported_part2 = 'of php does not support';
 
 	# signup.php
 	$s_invalid_email = 'IS AN INVALID EMAIL ADDRESS';

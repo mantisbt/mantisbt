@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.17 2003-03-05 05:29:08 vboctor Exp $
+	# $Id: obsolete.php,v 1.18 2003-03-05 21:37:31 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -72,4 +72,6 @@
 	config_obsolete( 'view_all_include_file', '' );
 	config_obsolete( 'bug_view_inc', '' );
 	config_obsolete( 'bug_file_upload_inc', '' );
+
+	config_obsolete( 'show_source', '' );
 ?>

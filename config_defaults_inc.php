@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.107 2003-03-05 05:29:08 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.108 2003-03-05 21:37:31 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -880,10 +880,6 @@
 	###########################
 	# Debugging
 	###########################
-	# --- display source code ---------
-	# Display a link at the bottom of the page to allow administrators to view the PHP source
-	# WARNING: Potential security hazard.  Only turn this on when you really need it (for debugging)
-	$g_show_source			= OFF;
 
 	# --- Timer ----------------------
 	# Time page loads.  Shows at the bottom of the page.

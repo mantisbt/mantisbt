@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.58 2003-03-05 02:46:08 jfitzell Exp $
+	# $Id: print_api.php,v 1.59 2003-03-05 21:37:30 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -978,21 +978,6 @@
 	# The $p_a_name is a link into the documentation.html file
 	function print_documentation_link( $p_a_name='' ) {
 		PRINT "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
-	}
-	# --------------------
-	# checks to see whether we need to be displaying the source link
-	# WARNING: displaying source (and the ability to do so) can be a security risk
-	# used in html_footer()
-	function print_source_link( $p_file ) {
-		global $g_show_source;
-
-		if (( ON == $g_show_source )&&
-			( access_has_project_level( ADMINISTRATOR ) )) {
-				PRINT '<br />';
-				PRINT '<div align="center">';
-				PRINT "<a href=\"show_source_page.php?url=$p_file\">Show Source</a>";
-				PRINT '</div>';
-		}
 	}
  	# --------------------
 	# print the hr

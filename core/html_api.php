@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.65 2003-03-03 23:29:30 int2str Exp $
+	# $Id: html_api.php,v 1.66 2003-03-05 21:37:30 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -284,8 +284,6 @@
 	# (13) Print the page footer information
 	function html_footer( $p_file ) {
 		global $g_timer, $g_queries_array;
-
-		print_source_link( $p_file );
 
 		# If a user is logged in, update their last visit time.
 		# We do this at the end of the page so that:
