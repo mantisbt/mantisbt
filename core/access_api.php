@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.29 2004-07-24 13:26:18 vboctor Exp $
+	# $Id: access_api.php,v 1.30 2004-07-27 14:24:57 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -30,17 +30,16 @@
 		}
 
 		if ( !auth_is_user_authenticated() ) {
-			if ( isset( $_SERVER['REQUEST_URI'] ) ) {
-				$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
-				print_header_redirect( 'login_page.php?return=' . $p_return_page );
-			} else {
-				print_header_redirect( 'login_page.php' );
+			if ( !isset( $_SERVER['REQUEST_URI'] ) ) {
+			         $_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'].'?'.$_SERVER['QUERY_STRING'];
 			}
+			$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
+			print_header_redirect( 'login_page.php?return=' . $p_return_page );
 		} else {
-			PRINT '<center>';
-			PRINT '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
+			echo '<center>';
+			echo '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
 			print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
-			PRINT '</center>';
+			echo '</center>';
 		}
 		exit;
 	}
