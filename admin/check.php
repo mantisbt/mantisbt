@@ -41,17 +41,21 @@
 ?>
 <html>
 <head>
-<title>Administrator checks</title>
-<style type="text/css">
-body { background-color: #ffffff; font-family:Verdana, Arial; font-size: 10pt }
-td { font-family:Verdana, Arial; font-size: 10pt }
-p { font-family:Verdana, Arial; font-size: 10pt }
-.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; font-weight: bold; }
-</style>
+<title> Mantis Administration - Check Installation </title>
+<link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>
-
-<h2>Admin Check</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+	<tr class="top-bar">
+		<td class="links">
+			[ <a href="index.php">Back to Administration</a> ]
+		</td>
+		<td class="title">
+			Check Installation
+		</td>
+	</tr>
+</table>
+<br /><br />
 
 <!-- Version Check -->
 <table width="100%" bgcolor="#0000aa" border="0" cellpadding="20" cellspacing="1">
@@ -160,6 +164,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 <?php
 	$t_vars = array( 'magic_quotes_gpc',
 					'gpc_order',
+					'variables_order',
 					'include_path',
 					'short_open_tag');
 
