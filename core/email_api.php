@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.52 2003-02-22 12:02:00 jfitzell Exp $
+	# $Id: email_api.php,v 1.53 2003-02-28 15:55:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -593,7 +593,7 @@
 			# Visit http://phpmailer.sourceforge.net
 			# if you have problems with phpMailer
 
-			include_once('class.phpmailer.php');
+			include_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class.phpmailer.php');
 			$mail = new phpmailer;
 
 			# Select the method to send mail
