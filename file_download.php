@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.30 2004-10-15 18:49:31 thraxisp Exp $
+	# $Id: file_download.php,v 1.31 2004-12-08 16:52:42 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,9 @@
 			access_ensure_project_level( config_get( 'view_proj_doc_threshold' ), $v_project_id );
 			break;
 	}
-	
+
+	# flush output buffer to protect download
+	@ob_end_clean();
 	# Make sure that IE can download the attachments under https.
 	header( 'Pragma: public' );
 	
@@ -99,4 +101,5 @@
 		default:
 			echo $v_content;
 	}
+	exit();
 ?>
