@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_update.php,v 1.22 2003-01-30 09:41:24 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>

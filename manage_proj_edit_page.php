@@ -4,40 +4,27 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_edit_page.php,v 1.52 2003-01-30 09:41:21 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
 	
 	$t_core_path = config_get( 'core_path' );
 	
-	require_once( $t_core_path.'category_api.php' );
-	require_once( $t_core_path.'version_api.php' );
-	require_once( $t_core_path.'custom_field_api.php' );
+	require_once( $t_core_path . 'category_api.php' );
+	require_once( $t_core_path . 'version_api.php' );
+	require_once( $t_core_path . 'custom_field_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_project_id = gpc_get_int( 'project_id' );
-	$f_action = gpc_get_string( 'action', '' );
+	$f_project_id	= gpc_get_int( 'project_id' );
 
-	# If Deleteing item redirect to delete script
-	if ( 'delete' == $f_action ) {
-		print_header_redirect( 'manage_proj_delete.php?project_id='.$f_project_id );
-	}
-
-	$c_project_id = db_prepare_int( $f_project_id );
-
-	$query = "SELECT *
-			FROM $g_mantis_project_table
-			WHERE id='$c_project_id'";
-	$result = db_query( $query );
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-	$v_name 		= string_edit_text( $v_name );
-	$v_description 	= string_edit_textarea( $v_description );
-	$v_file_path    = string_edit_text( $v_file_path );
+	$row = project_get_row( $f_project_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -45,73 +32,88 @@
 <?php print_manage_menu( 'manage_proj_edit_page.php' ) ?>
 
 <br />
+
+
+<!-- PROJECT PROPERTIES -->
 <div align="center">
 <form method="post" action="manage_proj_update.php">
 <table class="width75" cellspacing="1">
+
+<!-- Title -->
 <tr>
 	<td class="form-title" colspan="2">
 		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 		<?php echo lang_get( 'edit_project_title' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+
+<!-- Name -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category" width="25%">
 		<?php echo lang_get( 'project_name' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="name" size="64" maxlength="128" value="<?php echo $v_name ?>" />
+		<input type="text" name="name" size="64" maxlength="128" value="<?php echo string_edit_text( $row['name'] ) ?>" />
 	</td>
 </tr>
-<tr class="row-2">
+
+<!-- Status -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'status' ) ?>
 	</td>
 	<td>
 		<select name="status">
-		<?php print_enum_string_option_list( 'project_status', $v_status ) ?>
+		<?php print_enum_string_option_list( 'project_status', $row['status'] ) ?>
 		</select>
 	</td>
 </tr>
-<tr class="row-1">
+
+<!-- Enabled -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'enabled' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="enabled" <?php check_checked( $v_enabled, ON ); ?> />
+		<input type="checkbox" name="enabled" <?php check_checked( $row['enabled'], ON ); ?> />
 	</td>
 </tr>
-<tr class="row-2">
+
+<!-- View Status (public/private) -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
 		<select name="view_state">
-			<?php print_enum_string_option_list( 'view_state', $v_view_state) ?>
+			<?php print_enum_string_option_list( 'view_state', $row['view_state']) ?>
 		</select>
 	</td>
 </tr>
-<?php
-	if ( config_get( 'allow_file_upload' ) ) {
-	?>
-		<tr class="row-1">
-			<td class="category">
-				<?php echo lang_get( 'upload_file_path' ) ?>
-			</td>
-			<td>
-				<input type="text" name="file_path" size="70" maxlength="250" value="<?php echo $v_file_path ?>" />
-			</td>
-		</tr>
-		<?php
-	}
-?>
-<tr class="row-2">
+
+<!-- File upload path (if uploading is enabled) -->
+<?php if ( file_is_uploading_enabled() ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'upload_file_path' ) ?>
+	</td>
+	<td>
+		<input type="text" name="file_path" size="70" maxlength="250" value="<?php echo string_edit_text( $row['file_path'] ) ?>" />
+	</td>
+</tr>
+<?php } ?>
+
+<!-- Description -->
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td>
-		<textarea name="description" cols="60" rows="5" wrap="virtual"><?php echo $v_description ?></textarea>
+		<textarea name="description" cols="60" rows="5" wrap="virtual"><?php echo string_edit_textarea( $row['description'] ) ?></textarea>
 	</td>
 </tr>
+
+<!-- Submit Button -->
 <tr>
 	<td>&nbsp;</td>
 	<td>
@@ -122,46 +124,52 @@
 </form>
 </div>
 
+
 <br />
 
-<?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { ?>
+
+
+<!-- PROJECT DELETE -->
+<?php if ( access_level_check_greater_or_equal ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <div class="border-center">
 	<form method="post" action="manage_proj_delete.php">
-	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-	<input type="submit" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
+		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
 	</form>
 </div>
 <?php } ?>
 
+
 <br />
+
+
+
+<!-- PROJECT CATEGORIES -->
 <div align="center">
 <table class="width75" cellspacing="1">
+
+<!-- Title -->
 <tr>
 	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'categories_and_version_title' ) ?>
-	</td>
-</tr>
-<tr class="row-category">
-	<td width="100%">
 		<?php echo lang_get( 'categories' ) ?>
 	</td>
 </tr>
+
+<!-- Repeated Info Row -->
 <tr>
 	<td width="100%">
 		<table width="100%" cellspacing="1">
 		<?php
-			$result = category_get_all( $f_project_id );
-			$category_count = db_num_rows( $result );
-			for ($i=0;$i<$category_count;$i++) {
-				$row = db_fetch_array( $result );
+			$rows = category_get_all_rows( $f_project_id );
+
+			foreach ( $rows as $row ) {
 				$t_category = $row['category'];
 				$t2_category = urlencode( $t_category );
-				$c_user_id = (integer)$row['user_id'];
 
-				if ( $c_user_id != 0 ) {
-					$c_user_name = user_get_field( $c_user_id, 'username' );
+				if ( $row['user_id'] != 0  && user_exists( $row['user_id'] )) {
+					$t_user_name = user_get_name( $row['user_id'] );
 				} else {
-					$c_user_name = '';
+					$t_user_name = '';
 				}
 
 		?>
@@ -170,13 +178,13 @@
 				<?php echo $t_category ?>
 			</td>
 			<td width="25%">
-				<?php echo $c_user_name ?>
+				<?php echo $t_user_name ?>
 			</td>
 			<td class="center" width="25%">
 				<?php
-					print_bracket_link( 'manage_proj_cat_edit_page.php?project_id='.$f_project_id.'&amp;category='.$t2_category.'&amp;assigned_to='.$c_user_id, lang_get( 'edit_link' ) );
-					PRINT '&nbsp;';
-					print_bracket_link( 'manage_proj_cat_delete.php?project_id='.$f_project_id.'&amp;category='.$t2_category, lang_get( 'delete_link' ) );
+					print_bracket_link( 'manage_proj_cat_edit_page.php?project_id=' . $f_project_id . '&amp;category=' . $t2_category , lang_get( 'edit_link' ) );
+					echo '&nbsp;';
+					print_bracket_link( 'manage_proj_cat_delete.php?project_id=' . $f_project_id . '&amp;category=' . $t2_category, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
@@ -184,45 +192,55 @@
 		</table>
 	</td>
 </tr>
+
+<!-- Add Category Form -->
 <tr>
 	<td class="left">
 		<form method="post" action="manage_proj_cat_add.php">
-		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-		<input type="text" name="category" size="32" maxlength="64" />
-		<input type="submit" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<input type="text" name="category" size="32" maxlength="64" />
+			<input type="submit" value="<?php echo lang_get( 'add_category_button' ) ?>" />
 		</form>
 	</td>
 </tr>
+
+<!-- Copy Categories Form -->
 <tr>
 	<td class="left">
 		<form method="post" action="manage_proj_cat_copy.php">
-		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-		<select name="other_project_id">
-			<?php print_project_option_list( null, false ) ?>
-		</select>
-		<input type="submit" name="copy_from" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
-		<input type="submit" name="copy_to" value="<?php echo lang_get( 'copy_categories_to' ) ?>" />
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<select name="other_project_id">
+				<?php print_project_option_list( null, false ) ?>
+			</select>
+			<input type="submit" name="copy_from" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
+			<input type="submit" name="copy_to" value="<?php echo lang_get( 'copy_categories_to' ) ?>" />
 		</form>
 	</td>
 </tr>
+</table>
+
+
+<br />
+
+
+
+<!-- PROJECT VERSIONS -->
+<table class="width75" cellspacing="1">
+
+<!-- Title -->
 <tr>
-	<td>
-		<hr />
-	</td>
-</tr>
-<tr class="row-category">
-	<td width="100%">
+	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'versions' ) ?>
 	</td>
 </tr>
+
+<!-- Repeated Info Rows -->
 <tr>
 	<td width="100%">
 		<table width="100%">
 		<?php
-			$result = version_get_all( $f_project_id );
-			$version_count = db_num_rows( $result );
-			for ($i=0;$i<$version_count;$i++) {
-				$row = db_fetch_array( $result );
+			$rows = version_get_all_rows( $f_project_id );
+			foreach ( $rows as $row ) {
 				$t_version = $row['version'];
 				$t2_version = urlencode( $t_version );
 				$t_date_order = $row['date_order'];
@@ -238,9 +256,9 @@
 			</td>
 			<td class="center" width="25%">
 				<?php
-					print_bracket_link( 'manage_proj_ver_edit_page.php?project_id='.$f_project_id.'&amp;version='.$t2_version.'&amp;date_order='.$t2_date_order, lang_get( 'edit_link' ) );
-					PRINT '&nbsp;';
-					print_bracket_link( 'manage_proj_ver_delete.php?project_id='.$f_project_id.'&amp;version='.$t2_version.'&amp;date_order='.$t2_date_order, lang_get( 'delete_link' ) );
+					print_bracket_link( 'manage_proj_ver_edit_page.php?project_id=' . $f_project_id . '&amp;version=' . $t2_version . '&amp;date_order=' . $t2_date_order, lang_get( 'edit_link' ) );
+					echo '&nbsp;';
+					print_bracket_link( 'manage_proj_ver_delete.php?project_id=' . $f_project_id . '&amp;version=' . $t2_version . '&amp;date_order=' . $t2_date_order, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
@@ -248,18 +266,22 @@
 		</table>
 	</td>
 </tr>
+
+<!-- Version Add Form -->
 <tr>
 	<td class="left">
 		<form method="post" action="manage_proj_ver_add.php">
-		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-		<input type="text" name="version" size="32" maxlength="64" />
-		<input type="submit" value="<?php echo lang_get( 'add_version_button' ) ?>" />
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<input type="text" name="version" size="32" maxlength="64" />
+			<input type="submit" value="<?php echo lang_get( 'add_version_button' ) ?>" />
 		</form>
 	</td>
 </tr>
 </table>
 </div>
 
+
+<!-- PROJECT CUSTOM FIELD -->
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <?php
 if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_threshold' ) ) ) {

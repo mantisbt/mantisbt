@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.21 2003-01-29 00:53:04 vboctor Exp $
+	# $Id: file_api.php,v 1.22 2003-01-30 09:41:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -300,6 +300,19 @@
 		}
 
 	}
+	
+	# --------------------
+	# Return true if file uploading is enabled (in our config and PHP's),
+	#  false otherwise
+	function file_is_uploading_enabled() {
+		if ( ini_get_bool( 'file_uploads' ) && 
+			 ON == config_get( 'allow_file_upload' ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	# --------------------
 	# Check if the user can upload files for this project
 	#  return true if they can, false otherwise
@@ -314,8 +327,7 @@
 
 		$t_access = user_get_access_level( $p_user_id, $p_project_id );
 
-		if ( ! ini_get_bool( 'file_uploads' ) ||
-			 OFF == config_get( 'allow_file_upload' ) ||
+		if ( ! file_is_uploading_enabled() ||
 			 $t_access < config_get( 'upload_project_file_threshold' ) ) { 
 			return false;
 		}
@@ -336,8 +348,7 @@
 		}
 
 		# If uploads are disbled just return false
-		if ( ! ini_get_bool( 'file_uploads' ) || 
-			 OFF == config_get( 'allow_file_upload' ) ) {
+		if ( ! file_is_uploading_enabled() ) {
 			return false;
 		}
 		

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.4 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: category_api.php,v 1.5 2003-01-30 09:41:31 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -84,16 +84,30 @@
 	}
 	# --------------------
 	# return all categories for the specified project id
-	function category_get_all( $p_project_id ) {
+	function category_get_all_rows( $p_project_id ) {
 		global $g_mantis_project_category_table;
 
-		$c_project_id = (integer)$p_project_id;
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_project_category_table = config_get( 'mantis_project_category_table' );
 
 		$query = "SELECT category, user_id
-				FROM $g_mantis_project_category_table
+				FROM $t_project_category_table
 				WHERE project_id='$c_project_id'
 				ORDER BY category";
-		return db_query( $query );
+		$result = db_query( $query );
+
+		$count = db_num_rows( $result );
+
+		$rows = array();
+
+		for ( $i = 0 ; $i < $count ; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			$rows[] = $row;
+		}
+
+		return $rows;
 	}
 	# --------------------
 	# delete all categories associated with a project

@@ -12,6 +12,8 @@
 
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_category		= gpc_get_string( 'category' );
+
+	# @@@ we should optain this by looking it up
 	$f_assigned_to	= gpc_get_int( 'assigned_to', 0 );
 ?>
 <?php print_page_top1() ?>

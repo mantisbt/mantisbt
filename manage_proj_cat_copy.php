@@ -31,10 +31,9 @@
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$result = category_get_all( $t_src_project_id );
-	$category_count = db_num_rows( $result );
-	for ($i=0;$i<$category_count;$i++) {
-		$row = db_fetch_array( $result );
+	$rows = category_get_all_rows( $t_src_project_id );
+
+	foreach ( $rows as $row ) {
 		$t_category = $row['category'];
 		$t_category = addslashes( $t_category );
 

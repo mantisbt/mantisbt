@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.5 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: version_api.php,v 1.6 2003-01-30 09:41:39 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -88,16 +88,28 @@
 	}
 	# --------------------
 	# return all categories for the specified project id
-	function version_get_all( $p_project_id ) {
-		$c_project_id = db_prepare_int($p_project_id);
+	function version_get_all_rows( $p_project_id ) {
+		$c_project_id = db_prepare_int( $p_project_id );
 
-		$t_project_version_table = config_get('mantis_project_version_table');
+		$t_project_version_table = config_get( 'mantis_project_version_table' );
 
 		$query = "SELECT version, date_order
 					FROM $t_project_version_table 
 					WHERE project_id='$c_project_id'
 					ORDER BY date_order DESC";
-		return db_query( $query );
+		$result = db_query( $query );
+
+		$count = db_num_rows( $result );
+
+		$rows = array();
+
+		for ( $i = 0 ; $i < $count ; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			$rows[] = $row;
+		}
+
+		return $rows;
 	}
 	# --------------------
 	# delete all versions associated with a project

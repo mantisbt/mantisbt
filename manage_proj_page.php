@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_page.php,v 1.2 2003-01-30 09:41:23 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
@@ -16,8 +20,8 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_sort = gpc_get_string( 'sort', 'name' );
-	$f_dir = gpc_get_string( 'sort', 'ASC' );
+	$f_sort	= gpc_get_string( 'sort', 'name' );
+	$f_dir	= gpc_get_string( 'sort', 'ASC' );
 
 	$c_sort = db_prepare_string( $f_sort );
 
@@ -33,7 +37,7 @@
 
 <?php print_manage_menu( 'manage_proj_page.php' ) ?>
 
-<?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { # Add Project Form BEGIN ?>
+<?php if ( access_level_check_greater_or_equal ( config_get( 'create_project_threshold' ) ) ) { # Add Project Form BEGIN ?>
 <br />
 <div align="center">
 <form method="post" action="manage_proj_add.php">

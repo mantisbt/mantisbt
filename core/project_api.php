@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.25 2003-01-25 18:21:09 jlatour Exp $
+	# $Id: project_api.php,v 1.26 2003-01-30 09:41:35 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -279,9 +279,15 @@
 	#===================================
 
 	# --------------------
+	# Return the row describing the given project
+	function project_get_row( $p_project_id ) {
+		return project_cache_row( $p_project_id );
+	}
+
+	# --------------------
 	# Return the specified field of the specified project
 	function project_get_field( $p_project_id, $p_field_name ) {
-		$row = project_cache_row( $p_project_id );
+		$row = project_get_row( $p_project_id );
 
 		if ( isset( $row[$p_field_name] ) ) {
 			return $row[$p_field_name];

@@ -4,11 +4,15 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_add.php,v 1.25 2003-01-30 09:41:16 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( ADMINISTRATOR );
+	check_access( config_get( 'create_project_threshold' ) );
 
 	$f_name 		= gpc_get_string( 'name' );
 	$f_description 	= gpc_get_string( 'description' );
@@ -30,7 +34,7 @@
 <br />
 <div align="center">
 <?php
-	PRINT lang_get( 'operation_successful' ).'<br />';
+	echo lang_get( 'operation_successful' ) . '<br />';
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>

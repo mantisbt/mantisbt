@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.65 2003-01-25 21:13:16 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.66 2003-01-30 09:41:11 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -567,6 +567,12 @@
 	# Threshold needed to manage a project: add users to the project, edit project
 	# details (not to add/delete projects), upload documentation, news, ...etc.
 	$g_manage_project_threshold = MANAGER;
+
+	# Threshold required to delete a project
+	$g_delete_project_threshold = ADMINISTRATOR;
+
+	# Threshold needed to create a new project
+	$g_create_project_threshold = ADMINISTRATOR;
 
 	# --- login method ----------------
 	# CRYPT or CRYPT_FULL_SALT or PLAIN or MD5 or LDAP or BASIC_AUTH

@@ -4,11 +4,15 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: manage_proj_delete.php,v 1.23 2003-01-30 09:41:20 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( ADMINISTRATOR );
+	check_access( config_get( 'delete_project_threshold' ) );
 	
 	$f_project_id = gpc_get_int( 'project_id' );
 	
