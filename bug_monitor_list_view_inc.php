@@ -6,14 +6,14 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.1 2003-02-24 03:12:43 vboctor Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.2 2003-02-24 03:22:33 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the list of users monitoring the current
 	# bug.	$f_bug_id must be set and be set to the bug id
 ?>
-<?php	if ( ON == config_get( 'show_monitor_list' ) ) { ?>
+<?php	if ( access_has_project_level( config_get( 'show_monitor_list_threshold' ) ) ) { ?>
 <?php
 	$c_bug_id = db_prepare_int( $f_bug_id );
 	$t_bug_monitor_table = config_get( 'mantis_bug_monitor_table' );

@@ -38,7 +38,7 @@ Mantis ChangeLog
  * New config option (display_bug_padding): controls the level of padding on bug ids
  * New config option (display_bugnote_padding): controls the level of padding on bugnote ids
  * New config option (file_type_icons): provides mapping between file extensions and icons to be used for file types.
- * New config option (show_monitor_list): provides a section in the bug view pages that lists the users monitoring the current bug.  The default is OFF.
+ * New config option (show_monitor_list_threshold): threshold needed to view the list of users monitoring a bug.
  * Removed config option (bugnote_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_view_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_add_include_file): Used file path directly since there is no reason to make it configurable.
