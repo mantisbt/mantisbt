@@ -109,8 +109,13 @@
 		<td colspan="7" bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_viewing_bugs_title ?></b>
 			<?
-				$v_start = $f_offset+1;
-				$v_end   = $f_offset+$row_count;
+				if ( $row_count > 0 ) {
+					$v_start = $f_offset+1;
+					$v_end   = $f_offset+$row_count;
+				} else {
+					$v_start = 0;
+					$v_end   = 0;
+				}
 				PRINT "($v_start - $v_end)";
 			?>
 		</td>
