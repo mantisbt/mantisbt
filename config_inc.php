@@ -11,6 +11,8 @@
 	# In general a value of 0 means the feature is disabled and 1 means the
 	# feature is enabled.  Any other cases will have an explanation.
 
+	# Look in configuration.html for more detailed comments.
+
 	#error_reporting(E_ALL ^ E_NOTICE);
 	#error_reporting(E_ALL);
 
@@ -61,8 +63,12 @@
 	$g_administrator_email  = "administrator@nowhere";
 	$g_webmaster_email      = "webmaster@nowhere";
 
-	# the address all emails are sent to (which is why it's from_email)
+	# the "From: " field in emails
 	$g_from_email           = "nobody@nowhere";
+
+	# the "To: " address all emails are sent.  This can be a mailing list or archive address.
+	# Actual users are emailed via the bcc: fields
+	$g_to_email             = "nobody@nowhere";
 
 	# the return address for bounced mail
 	$g_return_path_email    = "admin@nowhere";

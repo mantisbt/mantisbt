@@ -391,7 +391,7 @@
 	### --------------------
 	### Send bug info to reporter and handler
 	function email_bug_info( $p_bug_id, $p_message, $p_headers="" ) {
-		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table, $g_from_email;
+		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table, $g_to_email;
 
 		# build subject
 		$p_subject = email_build_subject( $p_bug_id );
@@ -406,7 +406,7 @@
 		$res2 = 1;
 
 		### Send Email
-		$res1 = email_send( $g_from_email, $p_subject, $t_message, $p_headers );
+		$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers );
 	}
 	### --------------------
 	### Send to only the id
@@ -448,9 +448,7 @@
 			# if you have problems with mailing
 
 			$t_recipient = trim( $p_recipient );
-
 			$t_subject = trim( $p_subject );
-
 			$t_message = trim( $p_message );
 
 			# @@@ Is it important to wordwrap???

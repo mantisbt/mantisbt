@@ -216,7 +216,15 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		$g_from_email
 	</td>
 	<td bgcolor="#ffffff">
-		This is the email address displayed in the "From: " field.  The email system sends a email "To: " this email address and also uses this as the "From: ".  The actually email to users is sent via the "bcc: " field.  This is to help cut down on the number of emails sent per incident.
+		This is the email address displayed in the "From: " field.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_to_email
+	</td>
+	<td bgcolor="#ffffff">
+		This is the email address displayed in the "To: " field.  The email system sends a email to this email address.  The actually email to users is sent via the "bcc: " field.  This is to help cut down on the number of emails sent per incident.  A good use of this would be to use this as a mailing list or archive email address.
 	</td>
 </tr>
 <tr>
