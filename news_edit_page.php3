@@ -72,7 +72,7 @@
 			Body
 		</td>
 		<td>
-			<textarea name=f_body cols=60 rows=5><? echo $v_body ?></textarea>
+			<textarea name=f_body cols=60 rows=10><? echo $v_body ?></textarea>
 		</td>
 	</tr>
 	<tr>

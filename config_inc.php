@@ -170,6 +170,9 @@
 	$g_news_delete_page            = "news_delete_page".$g_php;
 	$g_news_delete                 = "news_delete".$g_php;
 
+	# userland documentation
+	$g_usage_doc_page              = "documentation.html";
+
 	# login
 	$g_login                       = "login".$g_php;
 	$g_login_page                  = "login_page".$g_php;

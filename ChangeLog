@@ -38,6 +38,9 @@ To Do:
  * Added 'feedback' status - indicates that it requires more information
  * Added show Mantis version capability
  * Added string_display_with_br() for displaying text with line breaks
+ * Added userland documentation (documentation.html)
+ * Added $g_usage_doc_page for userland documentation
+ * Added Docs to the menu
  * Fixed bug with Bugnote Add button showing up in the wrong places
  * Fixed bug with SQL queries updating both submitted and last updated dates on bugs
  * Fixed bug with SQL queries updating both submitted and last access dates on users
