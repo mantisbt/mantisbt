@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.1 2002-10-18 23:04:30 jfitzell Exp $
+	# $Id: user_pref_api.php,v 1.2 2002-10-18 23:36:51 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -85,7 +85,7 @@
 	# --------------------
 	# return true if the user has prefs assigned for the given project,
 	#  false otherwise
-	function user_has_prefs( $p_user_id, $p_project_id = 0 ) {
+	function user_pref_exists( $p_user_id, $p_project_id = 0 ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_user_id = db_prepare_int( $p_user_id );
 
@@ -109,7 +109,7 @@
 
 	# --------------------
 	# create a set of default preferences for the project
-	function user_create_prefs( $p_user_id, $p_project_id = 0 ) {
+	function user_pref_create( $p_user_id, $p_project_id = 0 ) {
 		$c_user_id 		= db_prepare_int( $p_user_id );
 		$c_project_id 	= db_prepare_int( $p_project_id );
 
@@ -159,7 +159,7 @@
 	# --------------------
 	# delete a preferencess row
 	# returns true when the prefs wer successfully deleted
-	function user_delete_prefs( $p_user_id, $p_project_id = 0 ) {
+	function user_pref_delete( $p_user_id, $p_project_id = 0 ) {
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
 
@@ -183,7 +183,7 @@
 
 	# --------------------
 	# return the user's preferences
-	function user_get_pref_row( $p_user_id ) {
+	function user_pref_get_row( $p_user_id ) {
 		return user_pref_cache_row( $p_user_id );
 	}
 
@@ -192,17 +192,17 @@
 	# If the preference can't be found try to return a defined default
 	# If that fails, trigger a WARNING and return ''
 	# @@@ needs extension for project-specific preferences
-	function user_get_pref( $p_user_id, $p_field_name ) {
+	function user_pref_get( $p_user_id, $p_pref_name ) {
 		$row = user_pref_cache_row( $p_user_id, false );
 
-		if ( false !== $row && isset( $row[$p_field_name] ) ) {
-			return $row[$p_field_name];
+		if ( false !== $row && isset( $row[$p_pref_name] ) ) {
+			return $row[$p_pref_name];
 		} else {
 			# new accounts should have had prefs created for them but older accoutns
 			#  might not yet
 
 			# try to get a default value
-			$t_default = config_get( 'default_' . $p_field_name, null );
+			$t_default = config_get( 'default_' . $p_pref_name, null );
 
 			if ( null !== $t_default ) {
 				return $t_default;
@@ -219,15 +219,15 @@
 
 	# --------------------
 	# Set a user preference
-	function user_set_pref( $p_user_id, $p_pref_name, $p_pref_value ) {
+	function user_pref_set( $p_user_id, $p_pref_name, $p_pref_value ) {
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_pref_name	= db_prepare_string( $p_pref_name );
 		$c_pref_value	= db_prepare_string( $p_pref_value );
 
 		# in case the user doesn't have a prefs table yet (an old account perhaps?)
 		#  create a default one now
-		if ( ! user_has_prefs( $p_user_id ) ) {
-			user_create_prefs( $p_user_id );
+		if ( ! user_pref_exists( $p_user_id ) ) {
+			user_pref_create( $p_user_id );
 		}
 
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );

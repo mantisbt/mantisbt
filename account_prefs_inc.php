@@ -18,12 +18,12 @@
 			}
 		}
 
-	    if ( ! user_has_prefs( $p_user_id ) ) {
-			user_create_prefs( $p_user_id );
+	    if ( ! user_pref_exists( $p_user_id ) ) {
+			user_pref_create( $p_user_id );
 	    }
 
 	    # prefix data with u_
-		$row = user_get_pref_row( $p_user_id );
+		$row = user_pref_get_row( $p_user_id );
 		extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
 <?php # Account Preferences Form BEGIN ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.36 2002-10-18 23:04:30 jfitzell Exp $
+	# $Id: user_api.php,v 1.37 2002-10-18 23:36:51 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -216,7 +216,7 @@
 
 		# Create preferences for the user
 		$t_user_id = db_insert_id();
-		user_create_prefs( $t_user_id );
+		user_pref_create( $t_user_id );
 
 		# Send notification email
 		if ( $p_email ) {
@@ -572,7 +572,7 @@
 	# --------------------
 	# Set the user's default project
 	function user_set_default_project( $p_user_id, $p_project_id ) {
-		return user_set_pref( $p_user_id, 'default_project', (int)$p_project_id );
+		return user_pref_set( $p_user_id, 'default_project', (int)$p_project_id );
 	}
 	# --------------------
 	# Reset the user's password

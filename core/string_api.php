@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.8 2002-10-10 12:42:23 vboctor Exp $
+	# $Id: string_api.php,v 1.9 2002-10-18 23:36:51 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -164,7 +164,7 @@
 
 		switch ( config_get( 'show_' . $p_action ) ) {
 			case BOTH:
-				if ( ON == user_get_pref( $p_user_id, 'advanced_' . $p_action ) ) {
+				if ( ON == user_pref_get( $p_user_id, 'advanced_' . $p_action ) ) {
 					return 'bug_' . $p_action . '_advanced_page.php';
 				} else {
 					return 'bug_' . $p_action . '_page.php';
