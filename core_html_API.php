@@ -5,7 +5,7 @@
 	# See the files README and LICENSE for details
 
 	###########################################################################
-	# Core HTML API                                                         ###
+	# Core HTML API
 	###########################################################################
 
 	# These functions control the display of each page
@@ -160,7 +160,8 @@
 	# (11) Prints the bottom of page information
 	function print_footer( $p_file ) {
 		global 	$g_string_cookie_val, $g_webmaster_email,
-				$g_menu_include_file, $g_show_footer_menu;
+				$g_menu_include_file, $g_show_footer_menu,
+				$g_mantis_version, $g_show_version;
 
 		if (isset($g_string_cookie_val)&&!empty($g_string_cookie_val)) {
 			if ( $g_show_footer_menu ) {
@@ -172,7 +173,9 @@
 
 		PRINT "<p>";
 		PRINT "<hr size=\"1\">";
-		print_mantis_version();
+		if ( ON == $g_show_version ) {
+			PRINT "<span class=\"italic\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
+		}
 		PRINT "<address>Copyright (C) 2000, 2001</address>";
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 	}
@@ -248,16 +251,6 @@
 				PRINT "<div align=\"center\">";
 				PRINT "<a href=\"$g_show_source_page?f_url=$p_file\">Show Source</a>";
 				PRINT "</div>";
-		}
-	}
-	# --------------------
-	# checks to see whether we need to be displaying the version number
-	# used in print_footer()
-	function print_mantis_version() {
-		global $g_mantis_version, $g_show_version;
-
-		if ( ON == $g_show_version ) {
-			PRINT "<span class=\"italic\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
 		}
 	}
 	# --------------------
