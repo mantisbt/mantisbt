@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.19 2004-09-21 07:35:09 jlatour Exp $
+	# $Id: bugnote_view_inc.php,v 1.20 2004-09-27 19:04:47 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -109,9 +109,8 @@
 			$t_bugnote_note_css	= 'bugnote-note-public';
 		}
 ?>
-<tr class="bugnote">
-	<td class="<?php echo $t_bugnote_css ?>">
-		<a name="<?php echo $v3_id ?>" id="<?php echo $v3_id ?>" />
+<tr class="bugnote" name="<?php echo $v3_id ?>" id="<?php echo $v3_id ?>">
+        <td class="<?php echo $t_bugnote_css ?>">
 		<span class="small">(<?php echo $t_bugnote_id_formatted ?>)</span><br />
 		<?php print_user( $v3_reporter_id ) ?>
 		<?php if ( VS_PRIVATE == $v3_view_state ) { ?>
