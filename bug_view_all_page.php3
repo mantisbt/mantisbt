@@ -42,9 +42,9 @@
 <table bgcolor=<? echo $g_primary_border_color ?> width=100%>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100% cols=9>
+	<table width=100% cols=7>
 	<tr>
-		<td colspan=9>
+		<td colspan=7>
 			<b>Viewing Bugs</b>
 		</td>
 	</tr>
