@@ -17,10 +17,28 @@ CREATE TABLE mantis_bug_file_table (
    filename varchar(250) NOT NULL,
    folder varchar(250) NOT NULL,
    filesize int(11) DEFAULT '0' NOT NULL,
-   date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   file_type varchar(250) NOT NULL default '',
+   date_added datetime DEFAULT '1970-01-01 00:00:01' NOT NULL,
    content blob NOT NULL,
    PRIMARY KEY (id)
 );
+
+
+# --------------------------------------------------------
+#
+# Table structure for table `mantis_bug_history_table`
+#
+
+CREATE TABLE mantis_bug_history_table (
+  user_id int(7) unsigned zerofill NOT NULL default '0000000',
+  bug_id int(7) unsigned zerofill NOT NULL default '0000000',
+  date_modified datetime NOT NULL default '1970-01-01 00:00:01',
+  field_name varchar(32) NOT NULL default '',
+  old_value varchar(128) NOT NULL default '',
+  new_value varchar(128) NOT NULL default '',
+  KEY bug_id (bug_id),
+  KEY user_id (user_id)
+)
 
 
 # --------------------------------------------------------
@@ -46,11 +64,11 @@ CREATE TABLE mantis_bug_table (
    eta int(2) DEFAULT '10' NOT NULL,
    bug_text_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
    os varchar(32) NOT NULL,
-   os_build varchar(16) NOT NULL,
+   os_build varchar(32) NOT NULL,
    platform varchar(32) NOT NULL,
    version varchar(32) NOT NULL,
-   build tinyint(4) DEFAULT '0' NOT NULL,
-   votes tinyint(4) DEFAULT '0' NOT NULL,
+   build varchar(32) DEFAULT '0' NOT NULL,
+   votes int(4) DEFAULT '0' NOT NULL,
    profile_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
    summary varchar(128) NOT NULL,
    PRIMARY KEY (id)
@@ -145,7 +163,8 @@ CREATE TABLE mantis_project_file_table (
    filename varchar(250) NOT NULL,
    folder varchar(250) NOT NULL,
    filesize int(11) DEFAULT '0' NOT NULL,
-   date_added datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   file_type varchar(250) NOT NULL default '',
+   date_added datetime DEFAULT '1970-01-01 00:00:01' NOT NULL,
    content blob NOT NULL,
    PRIMARY KEY (id)
 );
@@ -192,7 +211,8 @@ INSERT INTO mantis_project_user_list_table (project_id, user_id, access_level) V
 
 CREATE TABLE mantis_project_version_table (
    project_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
-   version varchar(32) NOT NULL
+   version varchar(32) NOT NULL default '',
+   date_order datetime NOT NULL default '1970-01-01 00:00:01'
 );
 
 INSERT INTO mantis_project_version_table (project_id, version) VALUES ( '0000001', '0.14.0');
@@ -221,7 +241,7 @@ CREATE TABLE mantis_user_pref_table (
    email_on_bugnote int(1) DEFAULT '0' NOT NULL,
    email_on_status int(1) DEFAULT '0' NOT NULL,
    email_on_priority int(1) DEFAULT '0' NOT NULL,
-   language varchar(16) DEFAULT 'english' NOT NULL,
+   language varchar(32) DEFAULT 'english' NOT NULL,
    PRIMARY KEY (id)
 );
 
@@ -237,7 +257,7 @@ CREATE TABLE mantis_user_profile_table (
    user_id int(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
    platform varchar(32) NOT NULL,
    os varchar(32) NOT NULL,
-   os_build varchar(16) NOT NULL,
+   os_build varchar(32) NOT NULL,
    description text NOT NULL,
    PRIMARY KEY (id)
 );

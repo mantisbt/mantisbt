@@ -10,8 +10,10 @@ If an error occurs you can re-create your previous database by just importing yo
 <p>
 <font face="courier new">mysql -u[username] -p[password] [database_name] < [filename]</font>
 <p>
-<a href="admin_upgrade_0_14_0.php3">Upgrade to 0.14.x</a>
+<a href="admin_upgrade_0_16_0.php3">Upgrade to 0.16.x</a>
 <p>
 <a href="admin_upgrade_0_15_0.php3">Upgrade to 0.15.x</a>
+<p>
+<a href="admin_upgrade_0_14_0.php3">Upgrade to 0.14.x</a>
 <p>
 Upgrades may take several minutes.
