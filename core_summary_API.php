@@ -55,10 +55,10 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad );
-			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad );
-			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad );
-			$t_enum_count = str_pd( $t_enum_count, "&nbsp;", $g_summary_pad );
+			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$t_enum_count = str_pd( $t_enum_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			### alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
@@ -167,10 +167,10 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad );
-			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad );
-			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad );
-			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad );
+			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			### alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
@@ -241,10 +241,10 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad );
-			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad );
-			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad );
-			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad );
+			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			### alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
@@ -311,10 +311,10 @@
 			$result2 = db_query( $query );
 			$resolved_bug_count = db_result( $result2, 0, 0 );
 
-			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad );
-			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad );
-			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad );
-			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad );
+			$open_bug_count = str_pd( $open_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$resolved_bug_count = str_pd( $resolved_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$closed_bug_count = str_pd( $closed_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
+			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			### alternate row colors
 			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
