@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.227 $
-	# $Author: bpfennigschmidt $
-	# $Date: 2004-12-18 19:32:28 $
+	# $Revision: 1.228 $
+	# $Author: thraxisp $
+	# $Date: 2004-12-23 15:43:17 $
 	#
-	# $Id: strings_english.txt,v 1.227 2004-12-18 19:32:28 bpfennigschmidt Exp $
+	# $Id: strings_english.txt,v 1.228 2004-12-23 15:43:17 thraxisp Exp $
 	###########################################################################
 
 # Charset
@@ -372,7 +372,7 @@ $s_bugnote_order = 'Notes Sort Order';
 $s_bugnote_order_asc = 'Ascending';
 $s_bugnote_order_desc = 'Descending';
 $s_email_on_new = 'Email on New';
-$s_email_on_assigned = 'Email on Assigned';
+$s_email_on_assigned = 'Email on Change of Handler';
 $s_email_on_feedback = 'Email on Feedback';
 $s_email_on_resolved = 'Email on Resolved';
 $s_email_on_closed = 'Email on Closed';

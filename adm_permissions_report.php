@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_permissions_report.php,v 1.4 2004-11-02 19:50:45 marcelloscata Exp $
+	# $Id: adm_permissions_report.php,v 1.5 2004-12-23 15:43:09 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -213,7 +213,7 @@
 		echo get_section_begin_for_email( lang_get( 'email_notification' ) );
 		echo get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );
 		echo get_capability_row_for_email( lang_get( 'email_on_assigned' ), 'owner' );
-		echo get_capability_row_for_email( lang_get( 'email_on_reopened' ), 'reopen' );
+		echo get_capability_row_for_email( lang_get( 'email_on_reopened' ), 'reopened' );
 		echo get_capability_row_for_email( lang_get( 'email_on_deleted' ), 'deleted' );
 		echo get_capability_row_for_email( lang_get( 'email_on_bugnote_added' ), 'bugnote' );
 		if( config_get( 'enable_sponsorship' ) == ON ) {
