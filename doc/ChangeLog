@@ -53,6 +53,7 @@ Mantis
  * Modified delete file attachments to chmod( 0775 ) so write permissions are granted.
  * Modified get_view_redirect_url() call on bug_assign.php to handle redirects better.
  * Modified search to look in bugnotes.
+ * Modified is_duplicate_category().  Reversed the arguments.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added Czech translation.

@@ -15,7 +15,7 @@
 	$result = 0;
 	$query = "";
 	# check for duplicate
-	if ( !is_duplicate_category( $f_category, $f_project_id ) ) {
+	if ( !is_duplicate_category( $f_project_id, $f_category ) ) {
 		# update category
 		$query = "UPDATE $g_mantis_project_category_table
 				SET category='$f_category'
@@ -58,7 +58,7 @@
 <?php
 	if ( $result ) {					# SUCCESS
 		PRINT "$s_operation_successful<p>";
-	} else if ( is_duplicate_category( $f_category, $f_project_id )) {
+	} else if ( is_duplicate_category( $f_project_id, $f_category )) {
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY]."<p>";
 	} else {							# FAILURE
 		print_sql_error( $query );

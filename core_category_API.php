@@ -10,7 +10,7 @@
 	# --------------------
 	# checks to see if the category is a duplicate
 	# we do it this way because each different project can have the same category names
-	function is_duplicate_category( $p_category, $p_project_id ) {
+	function is_duplicate_category( $p_project_id, $p_category ) {
 		global $g_mantis_project_category_table;
 
 		$query = "SELECT COUNT(*)

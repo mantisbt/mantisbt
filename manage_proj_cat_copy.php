@@ -17,7 +17,7 @@
 		$t_category = $row["category"];
 		$t_category = addslashes( $t_category );
 
-		if ( !is_duplicate_category( $t_category, $f_new_project_id ) ) {
+		if ( !is_duplicate_category( $f_new_project_id, $t_category ) ) {
 			category_add( $f_new_project_id, $t_category );
 		}
 	}
