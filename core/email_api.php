@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.51 2003-02-20 15:38:53 jlatour Exp $
+	# $Id: email_api.php,v 1.52 2003-02-22 12:02:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -143,12 +143,12 @@
 		}
 	}
 	# --------------------
-	# get_notify_flag
+	# email_notify_flag
 	# Get the value associated with the specific action and flag.
 	# For example, you can get the value associated with notifying "admin"
 	# on action "new", i.e. notify administrators on new bugs which can be
 	# ON or OFF.
-	function get_notify_flag( $action, $flag ) {
+	function email_notify_flag( $action, $flag ) {
 		global	$g_notify_flags, $g_default_notify_flags;
 
 		if ( isset ( $g_notify_flags[$action][$flag] ) ) {
@@ -159,184 +159,137 @@
 
 		return OFF;
 	}
-	# --------------------
-	# build the bcc list
 
-	# UGLY function: here's how it works:
-	# We store all the email addresses in an array.  First we grab the reporter.
-	# If the handler is assigned then we add that.
+	function email_collect_recipients( $p_bug_id, $p_notify_type ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
 
-	# The next part is only for NEW bugs.
-	# We add all ADMINISTRATORs then add DEVELOPERs.
-	# Lastly, we do a bit of post processing and return the bcc string.
-	function build_bcc_list( $p_bug_id, $p_notify_type ) {
-		global $g_mantis_bug_table, $g_mantis_user_table, $g_mantis_bugnote_table,
-				$g_mantis_project_table, $g_mantis_user_pref_table,
-				$g_mantis_project_user_list_table,
-				$g_use_bcc, $g_use_phpMailer,
-				$g_mantis_bug_monitor_table;
+		$t_recipients = array();
 
-		$c_bug_id = (integer)$p_bug_id;
-
-		# setup the array of email entries
-		$send_arr = array();
-
-		# Get Reporter Email
-		if ( ON == get_notify_flag( $p_notify_type, 'reporter' )) {
-			$v_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
-
-			if ( user_exists( $v_reporter_id ) && user_is_enabled( $v_reporter_id ) ) {
-				$t_pref_field = 'email_on_' . $p_notify_type;
-				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-					$t_notify_reporter = user_pref_get_pref( $v_reporter_id, $t_pref_field );
-					if ( ON == $t_notify_reporter ) {
-						$send_arr[] = user_get_email( $v_reporter_id );
-					}
-				} else {
-					$send_arr[] = user_get_email( $v_reporter_id );
-				}
-			}
+		# Reporter
+		if ( ON == email_notify_flag( $p_notify_type, 'reporter' ) ) {
+			$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
+			$t_recipients[$t_reporter_id] = true;
 		}
 
-		# Get Handler Email
-		if ( ON == get_notify_flag( $p_notify_type, 'handler' )) {
-			$v_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-			if ( user_exists( $v_handler_id ) && user_is_enabled( $v_handler_id ) ) {
-				$t_pref_field = 'email_on_' . $p_notify_type;
-				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-					$t_notify_handler = user_pref_get_pref( $v_handler_id, $t_pref_field );
-					if ( ON == $t_notify_handler ) {
-						$send_arr[] = user_get_email( $v_handler_id );
-					}
-				} else {
-					$send_arr[] = user_get_email( $v_handler_id );
-				}
-			}
+		# Handler
+		if ( ON == email_notify_flag( $p_notify_type, 'handler' )) {
+			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
+			$t_recipients[$t_handler_id] = true;
 		}
 
-		# Check if we want to broadcast to all developers on a NEW bug
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-		$t_project_view_state = project_get_field( $t_project_id, 'view_state' );
 
-		#@@@@@@@
-		$temp_arr = array();
-		# grab the administrators
-		$query = "SELECT id, email
-				FROM $g_mantis_user_table
-				WHERE enabled = 1
-				ORDER BY username";
-		$result = db_query( $query );
-		$user_count = db_num_rows( $result );
-		for ($i=0;$i<$user_count;$i++) {
-			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
-			$temp_arr[$v_email] = array( $v_email, $v_id );
+		# monitor
+		$t_bug_monitor_table = config_get( 'mantis_bug_monitor_table' );
+		if ( ON == email_notify_flag( $p_notify_type, 'monitor' ) ) {
+			$query = "SELECT DISTINCT user_id
+					  FROM $t_bug_monitor_table
+					  WHERE bug_id=$c_bug_id";
+			$result = db_query( $query );
+
+			$count = db_num_rows( $result );
+			for ( $i=0 ; $i < $count ; $i++ ) {
+				$t_user_id = db_result( $result, $i );
+				$t_recipients[$t_user_id] = true;
+			}
 		}
 
-		foreach ( $temp_arr as $key => $val ) {
-			$v_id = $val[1];
-			$v_email = $val[0];
+		# bugnotes
+		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
+		if ( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) ) {
+			$query = "SELECT DISTINCT reporter_id
+					  FROM $t_bugnote_table
+					  WHERE bug_id = $c_bug_id";
+			$result = db_query( $query );
+			
+			$count = db_num_rows( $result );
+			for( $i=0 ; $i < $count ; $i++ ) {
+				$t_user_id = db_result( $result, $i );
+				$t_recipients[$t_user_id] = true;
+			}
+		}
 
-			# add all administrators if notification flag enabled
-			$t_access_level = user_get_field( $v_id, 'access_level' );
+		# threshold
+		$t_threshold_min = email_notify_flag( $p_notify_type, 'threshold_min' );
+		$t_threshold_max = email_notify_flag( $p_notify_type, 'threshold_max' );
+		$t_threshold_users = project_get_all_user_rows( $t_project_id, $t_threshold_min );
+		foreach( $t_threshold_users as $t_user ) {
+			if ( $t_user['access_level'] <= $t_threshold_max ) {
+				$t_recipients[$t_user['id']] = true;
+			}
+		}
 
-			if ( ($t_access_level == ADMINISTRATOR) && (ON == get_notify_flag( $p_notify_type, 'admin' ))) {
-				$send_arr[] = $v_email;
+		$t_pref_field = 'email_on_' . $p_notify_type;
+		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
+		if ( ! db_field_exists( $t_pref_field, $t_user_pref_table ) ) {
+			$t_pref_field = false;
+		}
+
+		# @@@ we could optimize by modifiying user_cache() to take an array
+		#  of user ids so we could pull them all in.  We'll see if it's necessary
+
+		# Check whether users should receive the emails
+		foreach ( $t_recipients as $t_id => $t_ignore ) {
+			# Possibly eliminate the current user
+			if ( auth_get_current_user_id() == $t_id &&
+				 OFF == config_get( 'email_receive_own' ) ) {
+				unset( $t_recipients[$t_id] );
 				continue;
 			}
 
-			# Get authors of bug notes
-			if ( ON == get_notify_flag( $p_notify_type, 'bugnotes' )) {
-				$query = "SELECT 1 ".
-						"FROM $g_mantis_bugnote_table ".
-						"WHERE (bug_id = $p_bug_id) AND (reporter_id = $v_id) ".
-						"LIMIT 1";
-				$result = db_query( $query );
-				if ( db_num_rows( $result ) > 0 ) {
-					$send_arr[] = $v_email;
-				}
+			# Eliminate users who don't exist anymore or who are disabled
+			if ( ! user_exists( $t_id ) ||
+				 ! user_is_enabled( $t_id ) ) {
+				unset( $t_recipients[$t_id] );
+				continue;
 			}
 
-			# see if users belong
-			$t_project_view_state = project_get_field( $t_project_id, 'view_state' );
-			if ( PUBLIC == $t_project_view_state ) {
-				$query = "SELECT l.access_level
-						FROM	$g_mantis_project_user_list_table l,
-								$g_mantis_project_table p
-						WHERE	l.project_id='$t_project_id' AND
-								p.id=l.project_id AND
-								l.user_id='$v_id'
-						LIMIT 1";
-				$result = db_query( $query );
-				$count = db_num_rows( $result );
-				if ( $count > 0 ){
-					$t_access_level = db_result( $result );
-				}
-
-				if ( $t_access_level >= get_notify_flag($p_notify_type, 'threshold')) {
-					$send_arr[] = $v_email;
-				}
-			} else {
-				$query = "SELECT 1
-						FROM	$g_mantis_project_user_list_table l,
-								$g_mantis_project_table p
-						WHERE	l.project_id='$t_project_id' AND
-								p.id=l.project_id AND
-								l.user_id='$v_id' AND
-								l.access_level>='" . get_notify_flag($p_notify_type, 'threshold') ."'
-						LIMIT 1";
-				$result = db_query( $query );
-				if ( db_num_rows( $result ) > 0 ) {
-					$send_arr[] = $v_email;
+			# Exclude users who have this notification type turned off
+			if ( $t_pref_field ) {
+				$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
+				if ( OFF == $t_notify ) {
+					unset( $t_recipients[$t_id] );
 					continue;
 				}
 			}
-		}
 
-		if ( ON == get_notify_flag( $p_notify_type, 'monitor' )) {
-			# grab all users MONITORING bug
-			$query = "SELECT DISTINCT m.user_id, u.email
-					FROM $g_mantis_bug_monitor_table m,
-						$g_mantis_user_table u
-					WHERE m.bug_id=$c_bug_id AND
-							m.user_id=u.id AND u.enabled = 1";
-			$result = db_query( $query );
-			$monitor_user_count = db_num_rows( $result );
-			for ($i=0;$i<$monitor_user_count;$i++) {
-				$row = db_fetch_array( $result );
-
-				# @@@ This check seem to be redundant, since the user list
-				#     retrieved from the query result should all be enabled/exists
-				if ( user_exists( $row['user_id'] ) && user_is_enabled( $row['user_id'] ) ) {
-					$t_pref_field = 'email_on_' . $p_notify_type;
-					if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-						# if the user's notification is on then add to the list
-						$t_notify = user_pref_get_pref( $row['user_id'], $t_pref_field );
-						if ( ON == $t_notify ) {
-							$send_arr[] = $row['email'];
-						}
-					}
-				}
-			} # end MONITORING
-		}
-
-		$t_bcc = ( $g_use_bcc && !$g_use_phpMailer ) ? 'Bcc: ' : '';
-		## win-bcc-bug
-
-		$send_arr = array_unique( $send_arr );
-		foreach ( $send_arr as $send_val ) {
-			if (strlen($send_val) != 0) {
-				$t_bcc .= $send_val.', ';
+			# Finally, let's get their emails, if they've set one
+			$t_email = user_get_email( $t_id );
+			if ( is_blank( $t_email ) ) {
+				unset( $t_recipients[$t_id] );
+			} else {
+				# @@@ we could check the emails for validity again but I think
+				#   it would be too slow
+				$t_recipients[$t_id] = $t_email;
 			}
 		}
 
-		# chop off the last comma and add a \n
-		if ( strlen( $t_bcc ) > 5 ) {
-			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? "\n" : '');  ## win-bcc-bug
-		} else {
-			return '';
-		}
+		return $t_recipients;
 	}
+
+	# --------------------
+	# Build the bcc list
+	function email_build_bcc_list( $p_bug_id, $p_notify_type ) {
+		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type );
+
+		$t_use_bcc			= config_get( 'use_bcc' );
+		$t_use_phpMailer	= config_get( 'use_phpMailer' );
+		
+		## win-bcc-bug
+		$t_bcc = ( $t_use_bcc && !$t_use_phpMailer ) ? 'Bcc: ' : '';
+
+		$t_emails = array_values( $t_recipients );
+
+		$t_bcc .= implode( ', ', $t_emails );
+
+		## win-bcc-bug
+		if ( $t_use_bcc ) {
+			$t_bcc .= "\n";
+		}
+
+		return $t_bcc;
+	}
+
 	# --------------------
 	# Send password to user
 	function email_signup( $p_user_id, $p_password ) {
@@ -386,84 +339,62 @@
 	# --------------------
 	# send notices when a new bug is added
 	function email_new_bug( $p_bug_id ) {
-		$t_bcc = build_bcc_list( $p_bug_id, 'new' );
+		$t_bcc = email_build_bcc_list( $p_bug_id, 'new' );
 		email_bug_info( $p_bug_id, lang_get( 'new_bug_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a new bugnote
 	function email_bugnote_add( $p_bug_id ) {
-		$t_bcc = build_bcc_list( $p_bug_id, 'bugnote' );
+		$t_bcc = email_build_bcc_list( $p_bug_id, 'bugnote' );
 		email_bug_info( $p_bug_id, lang_get( 'email_bugnote_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is RESOLVED
 	function email_resolved( $p_bug_id ) {
-		$t_bcc = build_bcc_list( $p_bug_id, 'resolved' );
+		$t_bcc = email_build_bcc_list( $p_bug_id, 'resolved' );
 		email_bug_info( $p_bug_id, lang_get( 'email_resolved_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is CLOSED
 	function email_close( $p_bug_id ) {
-		$t_bcc = build_bcc_list( $p_bug_id, 'closed' );
+		$t_bcc = email_build_bcc_list( $p_bug_id, 'closed' );
 		email_bug_info( $p_bug_id, lang_get( 'email_close_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is set to FEEDBACK
 	function email_feedback( $p_bug_id ) {
-		$t_bcc = build_bcc_list( $p_bug_id, 'feedback' );
+		$t_bcc = email_build_bcc_list( $p_bug_id, 'feedback' );
 		email_bug_info( $p_bug_id, lang_get( 'email_feedback_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is REOPENED
 	function email_reopen( $p_bug_id ) {
-		$t_bcc = build_bcc_list( $p_bug_id, 'reopened' );
+		$t_bcc = email_build_bcc_list( $p_bug_id, 'reopened' );
 		email_bug_info( $p_bug_id, lang_get( 'email_reopen_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is ASSIGNED
 	function email_assign( $p_bug_id ) {
-		$t_bcc = build_bcc_list( $p_bug_id, 'assigned' );
+		$t_bcc = email_build_bcc_list( $p_bug_id, 'assigned' );
 		email_bug_info( $p_bug_id, lang_get( 'email_assigned_msg' ), $t_bcc );
 	}
 	# --------------------
 	# send notices when a bug is DELETED
 	function email_bug_deleted( $p_bug_id ) {
-		$t_bcc = build_bcc_list( $p_bug_id, 'deleted' );
+		$t_bcc = email_build_bcc_list( $p_bug_id, 'deleted' );
 		email_bug_info( $p_bug_id, lang_get( 'email_bug_deleted_msg' ), $t_bcc );
 	}
 	# --------------------
 	# Build the bug info part of the message
 	function email_build_bug_message( $p_bug_id, $p_message, &$p_category ) {
-		global 	$g_mantis_bug_table, $g_mantis_bug_text_table,
-				$g_mantis_project_table,
-				$g_complete_date_format, $g_show_view,
+		global 	$g_complete_date_format, $g_show_view,
 				$g_bugnote_order, $g_path,
 				$g_email_separator1, $g_email_padding_length;
 
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
-		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-				UNIX_TIMESTAMP(last_updated) as last_updated
-				FROM $g_mantis_bug_table
-				WHERE id='$c_bug_id'
-				ORDER BY date_submitted $g_bugnote_order";
-		$result = db_query( $query );
-		$row = db_fetch_array( $result );
+		$row = bug_get_extended_row( $p_bug_id );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-		$query = "SELECT *
-				FROM $g_mantis_bug_text_table
-				WHERE id='$v_bug_text_id'";
-		$result = db_query( $query );
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v2' );
-
-		$query = "SELECT name
-				FROM $g_mantis_project_table
-				WHERE id='$v_project_id'";
-		$result = db_query( $query );
-		$t_project_name = db_result( $result, 0, 0 );
-
+		$t_project_name = project_get_field( $v_project_id, 'name' );
 		$t_reporter_name = user_get_name( $v_reporter_id );
 
 		if ( 0 != $v_handler_id ) {
@@ -524,7 +455,7 @@
 		$t_message .= str_pad( lang_get( 'email_last_modified' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
 		$t_message .= $g_email_separator1."\n";
 		$t_message .= str_pad( lang_get( 'email_summary' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
-		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $v2_description )."\n";
+		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $v_description )."\n";
 		$t_message .= $g_email_separator1."\n\n";
 
 		$p_category = '';
@@ -788,19 +719,6 @@
 		}
 	}
 	# --------------------
-	# helper function
-	function get_bug_summary( $p_bug_id ) {
-		global $g_mantis_bug_table;
-
-		$c_bug_id = (integer)$p_bug_id;
-
-		$query = "SELECT summary
-				FROM $g_mantis_bug_table
-				WHERE id='$c_bug_id'";
-		$result = db_query( $query );
-		return db_result( $result, 0, 0 );
-	}
-	# --------------------
 	# formats the subject correctly
 	# we include the project name, bug id, and summary.
 	function email_build_subject( $p_bug_id ) {
@@ -808,7 +726,7 @@
 		$p_project_name = project_get_field( bug_get_field( $p_bug_id, 'project_id' ), 'name' );
 
 		# grab the subject (summary)
-		$p_subject = get_bug_summary( $p_bug_id );
+		$p_subject = bug_get_field( $p_bug_id, 'summary' );
 
 		# padd the bug id with zeros
 		$p_bug_id = bug_format_id( $p_bug_id );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.89 2003-02-21 00:32:38 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.90 2003-02-22 12:02:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -137,7 +137,8 @@
 									'monitor'	=> ON,
 									'admin'		=> ON,
 									'bugnotes'	=> ON,
-									'threshold'	=> NOBODY);
+									'threshold_min'	=> NOBODY,
+									'threshold_max' => NOBODY);
 
 	# Following is the definition of the differences between the "new" action and the default.
 	# In case you need to override the threshold for the new action in custom_config_inc.php, use:
@@ -145,6 +146,9 @@
 	$g_notify_flags['new']	= array('bugnotes'	=> OFF,
 									'monitor'	=> OFF);
 
+	# Whether user's should receive emails for their own actions
+	$g_email_receive_own	= OFF;
+	
 	# set to OFF to disable email check
 	$g_validate_email		= ON;
 	$g_check_mx_record		= ON;
