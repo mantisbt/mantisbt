@@ -24,6 +24,7 @@ Mantis ChangeLog
  * Enh #3735: New CSS class for HTML Form Buttons
  * Enh #3765: Change title on bug details page to bug summary line.
  * Enh #3801: Add "myself" meta filter options.
+ * Enh #3802: Auto-use filter selection on change.
  * Enh #3808: Ability to sponsor (fund) a bug or feature request.
  * Enh #3811: Allow private flag to be unset on resolved bugs.
  * Enh #3841: Add real name ability to mantis.

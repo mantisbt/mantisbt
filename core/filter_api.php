@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.38 2004-06-08 05:52:13 narcissus Exp $
+	# $Id: filter_api.php,v 1.39 2004-06-08 06:07:24 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1156,7 +1156,13 @@
 				?>
 					<form method="get" name="list_queries" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
-					<select name="source_query_id">
+					<?php
+					if ( ON == config_get( 'use_javascript' ) ) {
+						PRINT '<select name="source_query_id" onchange="document.forms.list_queries.submit();">';
+					} else {
+						PRINT '<select name="source_query_id">';
+					}
+					?>
 					<option value="-1"><?php PRINT '[' . lang_get( 'reset_query' ) . ']' ?></option>
 					<option value="-1"></option>
 					<?php
