@@ -108,7 +108,47 @@
 	$query = "SELECT *, UNIX_TIMESTAMP(last_updated) as last_updated
 			 FROM $g_mantis_bug_table";
 
-	$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
+	# project selection
+	if ( "0000000" == $g_project_cookie_val ) { # ALL projects
+		$t_access_level = get_current_user_field( "access_level" );
+		$t_user_id = get_current_user_field( "id" );
+
+		$t_pub = PUBLIC;
+		$t_prv = PRIVATE;
+		$query2 = "SELECT DISTINCT( p.id )
+			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
+			WHERE (p.enabled=1 AND
+				p.view_state='$t_pub') OR
+				(p.enabled=1 AND
+				p.view_state='$t_prv' AND
+				p.access_min<='$t_access_level') OR
+				(p.enabled=1 AND
+				p.view_state='$t_prv' AND
+				u.user_id='$t_user_id'  AND
+                            u.project_id=p.id)
+			ORDER BY p.name";
+		$result2 = db_query( $query2 );
+		$project_count = db_num_rows( $result2 );
+
+		if ( 0 == $project_count ) {
+			$t_where_clause = " WHERE 1=1";
+		} else {
+			$t_where_clause = " WHERE (";
+			for ($i=0;$i<$project_count;$i++) {
+				$row = db_fetch_array( $result2 );
+				extract( $row, EXTR_PREFIX_ALL, "v" );
+
+				$t_where_clause .= "(project_id='$v_id')";
+				if ( $i < $project_count - 1 ) {
+					$t_where_clause .= " OR ";
+				}
+			} # end for
+			$t_where_clause .= ")";
+		}
+	} else {
+		$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
+	}
+	# end project selection
 
 	if ( $f_user_id != "any" ) {
 		$t_where_clause .= " AND reporter_id='$f_user_id'";
@@ -343,6 +383,9 @@
 
 		# grab the bugnote count
 		$bugnote_count = get_bugnote_count( $v_id );
+		
+		# grab the project name
+		$project_name = get_project_field($v_project_id,"NAME");
 
 		$query = "SELECT MAX(last_modified)
 				FROM $g_mantis_bugnote_table
@@ -356,6 +399,9 @@
 	</td>
 	<td class="print">
 		<?php echo $v_id ?>
+		<?php # type project name if viewing 'all projects'?>
+		<?php if ( "0000000" == $g_project_cookie_val ) {?>
+		<BR><?php print "[$project_name]"; }?>
 	</td>
 	<td class="print">
 		<?php

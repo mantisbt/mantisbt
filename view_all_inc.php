@@ -201,12 +201,16 @@
 
 		# grab the bugnote count
 		$bugnote_count = get_bugnote_count( $v_id );
-
+		
+		# grab the project name
+		$project_name = get_project_field($v_project_id,"NAME");
+		
 		$query = "SELECT MAX(last_modified)
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$v_id'";
 		$res2 = db_query( $query );
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
+
 ?>
 <tr bgcolor="<?php echo $status_color ?>">
 	<td>
@@ -226,7 +230,10 @@
 		?>
 	</td>
 	<td class="center">
-		<?php print_bug_link( $v_id ) ?>
+		<?php print_bug_link( $v_id )?>
+		<?php # type project name if viewing 'all projects'?>
+		<?php if ( "0000000" == $g_project_cookie_val ) {?>
+		<BR><?php print "[$project_name]"; }?>
 	</td>
 	<td class="center">
 		<?php
