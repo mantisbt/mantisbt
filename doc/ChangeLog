@@ -14,6 +14,7 @@ Mantis ChangeLog
  * Fix #3537: Rewriting custom values with 0 when updating a bug.
  * Fix #3539: Simple view page shows advanced custom fields.
  * Fix #3541: link to documentation wrong.
+ * Fix #3568: Monitor deleted bugs? [monitor records are not deleted on bug deletion]
  * Fix #3572: The summary_graph_imp_* pages have shortcut PHP tags.
  * Fix #3575: Missing german translation for $s_email_assigned_msg.
  * Fix #3577: Unselecting custom fields causes undesired break lines in Excel.

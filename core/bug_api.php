@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.47 2004-02-11 22:16:29 vboctor Exp $
+	# $Id: bug_api.php,v 1.48 2004-02-19 13:54:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -366,6 +366,9 @@
 		history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
 
 		email_bug_deleted( $p_bug_id );
+
+		# Unmonitor bug for all users
+		bug_unmonitor( $p_bug_id, null );
 
 		# Delete custom fields
 		custom_field_delete_all_values( $p_bug_id );
@@ -913,7 +916,8 @@
 	}
 
 	# --------------------
-	# dsable monitoring of this bug for the user
+	# disable monitoring of this bug for the user
+	# if $p_user_id = null, then bug is unmonitored for all users.
 	function bug_unmonitor( $p_bug_id, $p_user_id ) {
 		$c_bug_id	= db_prepare_int( $p_bug_id );
 		$c_user_id	= db_prepare_int( $p_user_id );
@@ -923,7 +927,12 @@
 		# Delete monitoring record
 		$query ="DELETE ".
 				"FROM $t_bug_monitor_table ".
-				"WHERE user_id = '$c_user_id' AND bug_id = '$c_bug_id'";
+				"WHERE bug_id = '$c_bug_id'";
+
+		if ( $p_user_id !== null ) {
+			$query .= " AND user_id = '$c_user_id'";
+		}
+
 		db_query( $query );
 
 		# log new un-monitor action
