@@ -662,6 +662,7 @@
 	}
 	# --------------------
 	# grabs the access level of the current user
+	# this function accounts for private project and the project user lists
 	function get_current_user_access_level() {
 		global $g_string_cookie_val;
 

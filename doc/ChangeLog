@@ -48,6 +48,7 @@ Mantis
  * Added print report link to view all bug page.
  * Added g_allowed_files and g_disallowed_files to control what files types may be uploaded.
  * Added user to project multi-select listbox in manage section.
+ * Added list of projects  a user is assigned to to the account page.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
  * Removed proj_user_delete_page.php.

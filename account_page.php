@@ -93,6 +93,22 @@
 		<?php echo get_enum_element( "access_levels", $u_access_level ) ?>
 	</td>
 </tr>
+<tr class="row-2">
+	<td class="category">
+		<?php echo $s_access_level_project ?>:
+	</td>
+	<td>
+		<?php echo get_enum_element( "access_levels", get_current_user_access_level() ) ?>
+	</td>
+</tr>
+<tr class="row-1" valign="top">
+	<td class="category">
+		<?php echo $s_assigned_projects ?>:
+	</td>
+	<td>
+		<?php print_project_user_list( get_current_user_field( "id" ) ) ?>
+	</td>
+</tr>
 <tr>
 	<td class="center">
 		<input type="submit" value="<?php echo $s_update_user_button ?>">
@@ -153,6 +169,14 @@
 	</td>
 	<td>
 		<?php echo get_enum_element( "access_levels", get_current_user_access_level() ) ?>
+	</td>
+</tr>
+<tr class="row-1" valign="top">
+	<td class="category">
+		<?php echo $s_assigned_projects ?>:
+	</td>
+	<td>
+		<?php print_project_user_list( get_current_user_field( "id" ) ) ?>
 	</td>
 </tr>
 <tr>
