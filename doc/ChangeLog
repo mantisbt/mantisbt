@@ -29,7 +29,7 @@ Mantis ChangeLog
  * Fix #3140: attachment.png is corrupt in CVS.
  * Fix #3143: Show a padlock instead of "p".
  * Fix #3155: Field 'date_added' (for attachments) not correctly printed in print_bug_page.php.
- * Languages: Updated Italian, Slovak and Dutch localisations.
+ * Languages: Updated Italian, Spanish, Slovak and Dutch localisations.
  * Languages: Synchronised localisation files with English localisation.
 
 2003.03.22  -  0.18.0a4

@@ -7,12 +7,13 @@
 
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
+	#          Luis Miguel Cruz Miranda - luismi@b2bi.es 
 	# -------------------------------------------------
-	# $Revision: 1.51 $
+	# $Revision: 1.52 $
 	# $Author: jlatour $
-	# $Date: 2003-04-01 15:59:43 $
+	# $Date: 2003-05-07 15:48:29 $
 	#
-	# $Id: strings_spanish.txt,v 1.51 2003-04-01 15:59:43 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.52 2003-05-07 15:48:29 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -52,59 +53,59 @@
 	$s_field = 'Campo';
 	$s_old_value = 'Valor Anterior';
 	$s_new_value = 'Nuevo Valor';
-	$s_date_modified = 'Date Modified';
+	$s_date_modified = 'Fecha Modificacion';
 	$s_bugnote = 'Bugnote';
 	$s_change = 'Change';
 	$s_bugnote_view_state = 'Bugnote View State';
-	$s_bug_monitor = 'Bug Monitored';
-	$s_bug_end_monitor = 'Bug End Monitor';
+	$s_bug_monitor = 'Bug Monitorizado';
+	$s_bug_end_monitor = 'Terminar monitor';
 	$s_announcement = 'Anuncio';
-	$s_stays_on_top = 'Stays on Top';
+	$s_stays_on_top = 'Siempre Encima';
 	$s_delete_bugnote_button = 'Delete Bugnote';
-	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
-	$s_bug_relationships = 'Relationships';
-	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-	$s_empty_password_button = 'Use Empty Password';
+	$s_delete_bugnote_sure_msg = '¿Seguro que quieres borrar esta bugnote?';
+	$s_bug_relationships = 'Relaciones';
+	$s_empty_password_sure_msg = 'El usuario tiene una contraseña vacia. ¿Seguro que quieres eso?';
+	$s_empty_password_button = 'Usar Contraseña en Blanco';
 
-	$s_duplicate_of = 'duplicate of %id';
-	$s_has_duplicate = 'has duplicate %id';
-	$s_related_to = 'related to %id';
-	$s_dependant_on = 'dependant on %id';
+	$s_duplicate_of = 'Duplicado en %id';
+	$s_has_duplicate = 'Tiene duplicado en %id';
+	$s_related_to = 'relacionado con %id';
+	$s_dependant_on = 'depende de %id';
 	$s_blocks = 'blocks %id';
 
-	$s_new_bug = 'New Bug';
+	$s_new_bug = 'Nuevo bug';
 	$s_bugnote_added = 'Bugnote Added';
 	$s_bugnote_edited = 'Bugnote Edited';
 	$s_bugnote_deleted = 'Bugnote Deleted';
-	$s_summary_updated = 'Summary Updated';
-	$s_description_updated = 'Description Updated';
-	$s_additional_information_updated = 'Additional Information Updated';
-	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
+	$s_summary_updated = 'Sumario Actualizado';
+	$s_description_updated = 'Descripcion Actualizada';
+	$s_additional_information_updated = 'Informacion Adicional Actualizada';
+	$s_steps_to_reproduce_updated = 'Pasos para reproducirlo, actualizados';
+	$s_file_added = 'Fichero Añadido: ';
+	$s_file_deleted = 'Fichero Borrado: ';
 
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
+	$s_make_private = 'Hacerlo Privado';
+	$s_make_public = 'Hacerlo Publico';
 
-	$s_create_new_project_link = 'Create New Project';
+	$s_create_new_project_link = 'Crear Nuevo Proyecto';
 
 	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-	$s_move_bugs_conf_msg = 'Move bugs to';
-	$s_assign_bugs_conf_msg = 'Assign bugs to';
-	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-	$s_priority_bugs_conf_msg = 'Choose bugs priority';
-	$s_status_bugs_conf_msg = 'Choose bugs status';
-	$s_close_group_bugs_button = 'Close Bugs' ;
-	$s_delete_group_bugs_button = 'Delete Bugs' ;
-	$s_move_group_bugs_button = 'Move Bugs' ;
-	$s_assign_group_bugs_button = 'Assign Bugs' ;
-	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-	$s_priority_group_bugs_button = 'Update Priority' ;
+	$s_close_bugs_conf_msg = '¿Seguro que quieres cerrar estos bugs ?';
+	$s_delete_bugs_conf_msg = '¿Seguro que quieres borrar estos bugs ?';
+	$s_move_bugs_conf_msg = 'Mover bugs a';
+	$s_assign_bugs_conf_msg = 'Asignar bugs a';
+	$s_resolve_bugs_conf_msg = 'Cambiar resolucion bug';
+	$s_priority_bugs_conf_msg = 'Cambiar resolucion bug';
+	$s_status_bugs_conf_msg = 'Cambiar estado bug';
+	$s_close_group_bugs_button = 'Cerrar Bugs' ;
+	$s_delete_group_bugs_button = 'Borrar Bugs' ;
+	$s_move_group_bugs_button = 'Mover Bugs' ;
+	$s_assign_group_bugs_button = 'Asignar Bugs' ;
+	$s_resolve_group_bugs_button = 'Resolver Bugs' ;
+	$s_priority_group_bugs_button = 'Actualizar Prioridad' ;
 	$s_status_group_bugs_button = 'Update Status' ;
 
 	# improved JPgraphs strings
@@ -129,16 +130,18 @@
 	$s_resolution_link = 'Per resolution';
 
 	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Display selected only';
+	$s_hide_button = 'Mostrar solo seleccionados';
 
 	# print_all_bug_options.php : printing preferences
 	$s_printing_preferences_title = 'Choose fields to print';
-	$s_printing_options_link = 'Printing Options';
+	$s_printing_options_link = 'Opciones de Imprimir';
 
 	# word and excel export
 	$s_bugnote_title = 'Bugnote handler' ;
 	$s_bugnote_date = 'Date of bugnote';
 	$s_bugnote_description = 'Bugnote description';
+
+	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: Un error ocurrio durante esta accion. Reporte este error a su administrador local.';
@@ -148,54 +151,54 @@
 	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: Este tipo de archivo no esta permitido';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERROR: El directorio no existe. Por favor revise la configuracion del proyecto.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: Este es un archivo duplicado. Por favor borre el archivo primero.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: Ya existe un proyecto con este nombre.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: Un campo necesario estaba vacio. Por favor compruebe los datos.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: Esta cuenta esta protegida. Ud. no tiene permitido accesar esto hasta que la proteccion de la cuenta haya sido retirada.';
-	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
+	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Acceso Denegado.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
+	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: Se precisa un parametro que no se encontro.';
+	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: Ese usuario ya existe. Por favor retrocede y selecciona otro nombre.';
+	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Opcion de configuracion no encontrada.';
+	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: Cadena no encontrada.';
 	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
+	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Proyecto no encontrado';
 	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
+	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Imposible conectar con el FTP.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: Ya existe un proyecto con ese nombre. Regresa y selecciona un nombre diferente.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Nombre del proyecto incorrecto. No puede queda en blanco.';
+	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: No se encuentra el usuario.';
+	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: La informacion almacenada en tu navegador es incorrecta. Quizas tu cuenta ha sido borrada?';
+	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: No se encuentran las preferencias de este usuario.';
 	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
+	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Las contraseñas no coinciden.';
 	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
 	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
+	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: No se encuentra el bug.';
+	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Email incorrecto.';
+	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: No se encuentra el perfil.';
+	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads';
 	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
 	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: Nombre duplicado.';
 	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Valor incorrecto para este campo';
+	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: Falla la validacion LDAP';
+	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: Falla la conexion al servidor LDAP';
 	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
 	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
 	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
+	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Falla la conexion a la base de datos.';
+	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Falla la consulta a la base de datos.';
+	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Falla la seleccion de la base de datos.';
 	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: Esta es una categoria duplicada.';
 	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Categoria no encontrada.';
 	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: Esta es una version duplicada.';
-	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version no encontrada.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: El usuario es incorrecto.';
 
 	$s_login_error = 'ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña que ingreso son incorrectos.';
 	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -226,26 +229,26 @@
 	$s_eta_enum_string                = '10:ninguno,20:< 1 dia,30:2-3 dias,40:< 1 semana,50:< 1 mes,60:> 1 mes';
 
 	# Email Strings
-	$s_new_account_subject = 'BugTracker - Nuevo Usuario!';
+	$s_new_account_subject = 'Gestor Incidencias B2B: Nuevo Usuario!';
 	$s_new_account_greeting = 'Por favor, tome nota de la informacion que necesitara para conectarse.' . "\n\n";
 	$s_new_account_url = 'La URL es: ';
 	$s_new_account_username = 'Usuario: ';
 	$s_new_account_password = 'Clave: ';
-	$s_new_account_message = 'Luego de conectarse al sitio, por favor cambie su clave.  Su clave sera almacenada en forma encriptada.' . "\n\n";
+	$s_new_account_message = 'Cuando se conecte por primera vez por favor cambie su clave.  Su clave sera almacenada en forma encriptada.' . "\n\n";
 	$s_new_account_do_not_reply = 'Por favor, no conteste a este mensaje.' . "\n";
 
-    $s_reset_request_msg = 'Ocurrio un pedido para resetear su clave.';
+    $s_reset_request_msg = 'Se solicito para resetear su clave.';
     $s_account_name_msg = 'Su nombre de cuenta es';
     $s_news_password_msg = 'Aqui esta su nueva clave';
 
 	$s_new_bug_msg = 'El siguiente NUEVO bug ha sido AGREGADO.';
     $s_email_bugnote_msg = 'Una NOTA ha sido agregada a este bug.';
-    $s_email_resolved_msg = 'El siguinte bug ha sido RESUELTO.';
-	$s_email_close_msg = 'The following bug has beeen CLOSED';
-    $s_email_feedback_msg = 'El siguiente bug requiere su FEEDBACK.';
+    $s_email_resolved_msg = 'El siguiente bug ha sido RESUELTO.';
+	$s_email_close_msg = 'El siguiente bug ha sido CERRADO';
+    $s_email_feedback_msg = 'El siguiente bug requiere su OPINION.';
     $s_email_reopen_msg = 'El siguiente bug ha sido RE-ABIERTO.';
     $s_email_assigned_msg = 'El siguiente bug ha sido ASIGNADO.';
-	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+	$s_email_bug_deleted_msg = 'El siguiente bug ha sido BORRADO.';
 
     $s_email_reporter = 'Reportero';
     $s_email_handler = 'Encargado';
@@ -466,7 +469,7 @@
 	# login.php
 
 	# login_page.php
-	$s_login_page_info = 'Bienvenido a BugTracker.';
+	$s_login_page_info = 'Bienvenido al Gesto de Incidencias.';
 	$s_login_title = 'Login';
 	$s_save_login = 'Grabar Login';
 	$s_choose_project = 'Seleccione Proyecto';
@@ -822,39 +825,39 @@
 	$s_viewing_bug_simple_details_title = 'Vista Simple.';
 
 	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-	$s_users_monitoring_bug = 'Users monitoring this bug';
-	$s_monitoring_user_list = 'User List';
+	$s_no_users_monitoring_bug = 'No hay usuarios monitorizando este bug.';
+	$s_users_monitoring_bug = 'Usuarios monitorizando este bug.';
+	$s_monitoring_user_list = 'Lista de Usuarios';
 
 	# custom field strings
-	$s_add_custom_field_button = 'New Custom Field';
-	$s_delete_custom_field_button = 'Delete Custom Field';
+	$s_add_custom_field_button = 'Nuevo campo de usuario';
+	$s_delete_custom_field_button = 'Borrar campo de usuario';
 	$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-	$s_update_custom_field_button = 'Update Custom Field';
-	$s_add_existing_custom_field = 'Add This Existing Custom Field';
-	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_field = 'Field';
-	$s_custom_fields_setup = 'Custom Fields';
-	$s_custom_field_name = 'Name';
+	$s_update_custom_field_button = 'Actualizar campo de usuario';
+	$s_add_existing_custom_field = 'Aádir este campo de usuario';
+	$s_edit_custom_field_title = 'Editar campo de usuario';
+	$s_custom_field = 'Campo';
+	$s_custom_fields_setup = 'Campo propio';
+	$s_custom_field_name = 'Nombre';
 	$s_custom_field_project_count = 'Project Count';
-	$s_custom_field_type = 'Type';
-	$s_custom_field_possible_values = 'Possible Values';
-	$s_custom_field_default_value = 'Default Value';
-	$s_custom_field_valid_regexp = 'Regular Expression';
-	$s_custom_field_access_level_r = 'Read Access';
-	$s_custom_field_access_level_rw = 'Write Access';
-	$s_custom_field_length_min = 'Min. Length';
-	$s_custom_field_length_max = 'Max. Length';
-	$s_custom_field_advanced = 'Advanced';
-	$s_custom_field_sequence = 'Sequence';
-	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+	$s_custom_field_type = 'Tipo';
+	$s_custom_field_possible_values = 'Valores posibles';
+	$s_custom_field_default_value = 'Valor por defecto';
+	$s_custom_field_valid_regexp = 'Expresion regular';
+	$s_custom_field_access_level_r = 'Acceso lectura';
+	$s_custom_field_access_level_rw = 'Acceso escritura';
+	$s_custom_field_length_min = 'Long. Minima';
+	$s_custom_field_length_max = 'Long. Maxima';
+	$s_custom_field_advanced = 'Avanzado';
+	$s_custom_field_sequence = 'Secuencia';
+	$s_custom_field_type_enum_string = '0:Cadena,1:Numerico,2:Flotante,3:Enumeracion,4:Email';
 
 	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-	$s_field_delete_button = 'Delete Field';
+	$s_confirm_custom_field_deletion = '¿Estas seguro de borra este campo y todos los valores asociados?';
+	$s_field_delete_button = 'Borrar campo';
 
-	$s_hide_status = 'Hide Status';
-	$s_filter_closed = "Closed";
+	$s_hide_status = 'Ocultar Status';
+	$s_filter_closed = "Cerrado";
 	$s_filter_resolved = "Resolved";
 
 	$s_attachments = "attachment(s)";

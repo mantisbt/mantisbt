@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.51 $
+	# $Revision: 1.52 $
 	# $Author: jlatour $
-	# $Date: 2003-04-01 15:59:41 $
+	# $Date: 2003-05-07 15:48:27 $
 	#
-	# $Id: strings_dutch.txt,v 1.51 2003-04-01 15:59:41 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.52 2003-05-07 15:48:27 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -141,6 +141,8 @@
 	$s_bugnote_title = 'Afhandelaar aantekening' ;
 	$s_bugnote_date = 'Datum van aantekening';
 	$s_bugnote_description = 'Beschrijving van aantekening';
+
+	$s_error_no_proceed = 'Gebruik alstublieft de "Terug" knop in uw web browser om terug te keren naar de vorige pagina. Daar kunt u de in deze fout aangegeven problemen oplossen of een andere actie selecteren. U kunt ook een optie in de menubalk selecteren om direct naar een nieuwe sectie te gaan.';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'FOUT: Deze actie had een fout tot gevolg. Zou u dit willen melden aan uw systeembeheerder?';

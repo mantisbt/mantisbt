@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.57 $
+	# $Revision: 1.58 $
 	# $Author: jlatour $
-	# $Date: 2003-04-01 15:59:41 $
+	# $Date: 2003-05-07 15:48:27 $
 	#
-	# $Id: strings_french.txt,v 1.57 2003-04-01 15:59:41 jlatour Exp $
+	# $Id: strings_french.txt,v 1.58 2003-05-07 15:48:27 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -143,6 +143,8 @@
 	$s_bugnote_title = 'Auteur de la note' ;
 	$s_bugnote_date = 'Date de la note';
 	$s_bugnote_description = 'Description de la note';
+
+	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERREUR: Une erreur s\'est produite.  Merci de contacter votre administrateur.';

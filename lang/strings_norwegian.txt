@@ -7,11 +7,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.50 $
+	# $Revision: 1.51 $
 	# $Author: jlatour $
-	# $Date: 2003-04-01 15:59:43 $
+	# $Date: 2003-05-07 15:48:28 $
 	#
-	# $Id: strings_norwegian.txt,v 1.50 2003-04-01 15:59:43 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.51 2003-05-07 15:48:28 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -138,6 +138,8 @@
 	$s_bugnote_title = 'Bugnote handler' ;
 	$s_bugnote_date = 'Date of bugnote';
 	$s_bugnote_description = 'Bugnote description';
+
+	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEIL: Det oppstod en en feil. Du kan rapportere feilen til din administrator.';

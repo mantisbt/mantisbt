@@ -7,11 +7,11 @@
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # -------------------------------------------------
-  # $Revision: 1.40 $
+  # $Revision: 1.41 $
   # $Author: jlatour $
-  # $Date: 2003-04-01 15:59:41 $
+  # $Date: 2003-05-07 15:48:27 $
   #
-  # $Id: strings_hungarian.txt,v 1.40 2003-04-01 15:59:41 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.41 2003-05-07 15:48:27 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -138,6 +138,8 @@
 	$s_bugnote_title = 'Bugnote handler' ;
 	$s_bugnote_date = 'Date of bugnote';
 	$s_bugnote_description = 'Bugnote description';
+
+	$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
 	# ERROR strings
   $MANTIS_ERROR[ERROR_GENERIC] = 'HIBA: Hiba történt a végrehajtás során.  Kérjük jelentse a hibát a helyi adminisztrátornak.';
