@@ -30,10 +30,10 @@
 <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { # Add Project Form BEGIN ?>
 <br />
 <div align="center">
+<form method="post" action="manage_proj_add.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="manage_proj_add.php">
 		<?php echo lang_get( 'add_project_title' ) ?>
 	</td>
 </tr>
@@ -90,10 +90,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'add_project_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 <?php } # Add Project Form END ?>
 

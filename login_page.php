@@ -45,10 +45,10 @@
 <?php # Login Form BEGIN ?>
 <br />
 <div align="center">
+<form name="f_login_form" method="post" action="login.php">
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form name="f_login_form" method="post" action="login.php">
 		<?php
 			if ( !empty($f_return) ) {
 			?>
@@ -99,17 +99,19 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'login_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 <?php # Login Form END ?>
 
 <?php print_signup_link() ?>
 
 <script type="text/javascript" language="JavaScript">
-window.document.f_login_form.f_username.focus();
+<!--
+	window.document.f_login_form.f_username.focus();
+//-->
 </script>
 
 <?php print_page_bot1( __FILE__ ) ?>

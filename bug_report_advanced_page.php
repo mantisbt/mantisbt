@@ -45,10 +45,10 @@
 
 <br />
 <div align="center">
+<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">
@@ -261,10 +261,10 @@
 	</td>
 	<td class="center">
 		<input tabindex="20" type="submit" value="<?php echo $s_submit_report_button ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 
 <script language="JavaScript">

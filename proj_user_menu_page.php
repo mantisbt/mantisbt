@@ -51,10 +51,10 @@
 
 <br />
 <div align="center">
+<form method="post" action="proj_user_add.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="5">
-		<form method="post" action="proj_user_add.php">
 		<?php echo $s_add_user_title ?>
 	</td>
 </tr>
@@ -78,10 +78,10 @@
 	</td>
 	<td>
 		<input type="submit" value="<?php echo $s_add_user_button ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 
 <br />

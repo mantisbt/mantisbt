@@ -14,19 +14,15 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<table class="hide">
-<tr>
-	<td class="quick-summary-left">
+<div class="quick-summary-left">
 		<?php echo $s_open_and_assigned_to_me ?>:
 		<?php PRINT '<a href="view_all_set.php?f_type=1&amp;f_reporter_id=any&amp;f_show_status=any&amp;f_show_severity=any&amp;f_show_category=any&amp;f_handler_id=' .  auth_get_current_user_id() . '&amp;f_hide_closed=on">' . current_user_get_assigned_open_bug_count() . '</a>' ?>
-	</td>
-	<td class="quick-summary-right">
+</div>
+<div class="quick-summary-right">
 		<?php echo $s_open_and_reported_to_me ?>:
 		<?php PRINT '<a href="view_all_set.php?f_type=1&amp;f_reporter_id=' . auth_get_current_user_id() . '&amp;f_show_status=any&amp;f_show_severity=any&amp;f_show_category=any&amp;f_handler_id=any&amp;f_hide_closed=on">' . current_user_get_reported_open_bug_count() . '</a>' ?>
-		<?php echo  ?>
-	</td>
-</tr>
-</table>
+</div>
+<br />
 
 <?php
 	# Check to see if variable is set

@@ -17,10 +17,10 @@
 
 <br />
 <div align="center">
+<form method="post" action="manage_user_create.php">
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="manage_user_create.php">
 		<?php echo lang_get( 'create_new_account_title' ) ?>
 	</td>
 </tr>
@@ -85,10 +85,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'create_user_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

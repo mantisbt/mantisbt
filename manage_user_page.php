@@ -23,10 +23,10 @@
 
 <br />
 <div align="center">
+<form method="post" action="manage_user_update.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="3">
-		<form method="post" action="manage_user_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
 		<?php echo lang_get( 'edit_user_title' ) ?>
 	</td>

@@ -121,10 +121,10 @@
 		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
 <br />
+<form method="post" action="bugnote_add.php">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="bugnote_add.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
 		<?php echo $s_add_bugnote_title ?>
 	</td>
@@ -150,9 +150,9 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_add_bugnote_button ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 <?php # Bugnote Add Form END ?>
 <?php } ?>

@@ -29,10 +29,10 @@
 <?php # Signup form BEGIN ?>
 <br />
 <div align="center">
+<form method="post" action="signup.php">
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="signup.php">
 		<?php echo lang_get( 'signup_title' ) ?>
 	</td>
 	<td class="right">
@@ -58,10 +58,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'signup_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 <?php # Signup form END ?>
 

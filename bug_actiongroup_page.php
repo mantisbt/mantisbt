@@ -72,9 +72,9 @@
 ?>
 <br />
 <div align="center">
-<table class="width75" cellspacing="1">
 <form method="POST" action="bug_actiongroup.php">
 <input type="hidden" name="f_action" value="<?php echo $f_action ?>" />
+<table class="width75" cellspacing="1">
 <?php foreach( $f_bug_arr as $t_bug_id ) { ?>
 		<input type="hidden" name="f_bug_arr[]" value="<?php echo $t_bug_id ?>" />
 <?php } ?>
@@ -105,8 +105,8 @@
 		<input type="submit" value="<?php echo $t_button_title ?>" />
 	</td>
 </tr>
-</form>
 </table>
+</form>
 </div>
 <?php # Choices Form END ?>
 <?php

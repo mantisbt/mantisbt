@@ -18,10 +18,10 @@
 ?>
 <br />
 <div align="center">
+<form method="post" enctype="multipart/form-data" action="bug_file_add.php">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" enctype="multipart/form-data" action="bug_file_add.php">
 		<?php echo $s_upload_file ?>
 	</td>
 </tr>
@@ -35,10 +35,10 @@
 		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>" />
 		<input name="f_file" type="file" size="60" />
 		<input type="submit" value="<?php echo $s_upload_file_button ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 <?php } ?>
 <?php # Upload File Form END ?>

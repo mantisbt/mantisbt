@@ -184,10 +184,10 @@
 <?php print_head_bottom() ?>
 <?php print_body_top() ?>
 
+<form method="post" action="view_all_set.php">
 <table class="width100">
 <tr>
     <td class="print">
-		<form method="post" action="view_all_set.php">
 		<input type="hidden" name="f_type" value="1" />
 		<input type="hidden" name="f_print" value="1" />
 		<input type="hidden" name="f_offset" value="0" />
@@ -274,9 +274,9 @@
 	</td>
 	<td>
 		<input type="submit" value="<?php echo $s_filter_button ?>" />
-		</form>
 	</td>
 </tr>
+</form>
 
 <?php
 	#<SQLI> Excel & Print export
@@ -306,7 +306,6 @@
 </table>
 
 <form method="post" action="print_all_bug_page.php">
-
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="7">
@@ -465,4 +464,6 @@
 <input type="hidden" name="t_show_flag" value="1" />
 </table>
 <input type="submit" value="<?php echo $s_hide_button ?>" />
+</form>
+
 <?php # @@@ BUG ?  Where is the closing FORM tag??? ?>

@@ -27,10 +27,10 @@
 <?php # Add Profile Form BEGIN ?>
 <br />
 <div align="center">
+<form method="post" action="account_prof_add.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="account_prof_add.php">
 		<input type="hidden" name="f_user_id" value="<?php echo auth_get_current_user_id() ?>" />
 		<?php echo lang_get( 'add_profile_title' ) ?>
 	</td>
@@ -76,18 +76,18 @@
 	</td>
 	<td class="center">
 		<input type="submit" value="<?php echo lang_get( 'add_profile_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 <?php # Add Profile Form END ?>
 
 <?php # Edit or Delete Profile Form BEGIN ?>
 <br />
 <div align="center">
-<table class="width75" cellspacing="1">
 <form method="post" action="account_prof_edit_page.php">
+<table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'edit_or_delete_profiles_title' ) ?>
@@ -113,10 +113,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'submit_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 <?php # Edit or Delete Profile Form END ?>
 

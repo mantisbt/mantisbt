@@ -15,10 +15,10 @@
 
 <br />
 <div align="center">
+<form method="post" enctype="multipart/form-data" action="proj_doc_add.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" enctype="multipart/form-data" action="proj_doc_add.php">
 		<?php echo $s_upload_file_title ?>
 	</td>
 	<td class="right">
@@ -53,10 +53,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_upload_file_button ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

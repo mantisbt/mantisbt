@@ -19,10 +19,10 @@
 <?php # Project Select Form BEGIN ?>
 <br />
 <div align="center">
+<form method="post" action="set_project.php">
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="set_project.php">
 		<input type="hidden" name="f_ref" value="<?php echo $f_ref ?>" />
 		<?php echo lang_get( 'login_title' ) ?>
 	</td>
@@ -49,10 +49,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'select_project_button') ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 <?php # Project Select Form END ?>
 

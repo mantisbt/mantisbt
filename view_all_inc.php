@@ -4,21 +4,18 @@
 	$t_sort = $t_filter['sort'];
 	$t_dir = $t_filter['dir'];
 ?>
-<br />
-
 <!-- ====================== FILTER FORM ========================= -->
-
+<br />
+<form method="post" action="view_all_set.php?f=3">
+<input type="hidden" name="f_type" value="1" />
+<input type="hidden" name="f_sort" value="<?php echo $t_sort ?>" />
+<input type="hidden" name="f_dir" value="<?php echo $t_dir ?>" />
+<input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>" />
+<input type="hidden" name="f_per_page" value="<?php echo $t_filter['per_page'] ?>" />
 <table class="width100" cellspacing="0">
-
 <!-- Filter Form Header Row -->
 <tr class="row-category2">
 	<td class="small-caption">
-		<form method="post" action="view_all_set.php?f=3">
-		<input type="hidden" name="f_type" value="1" />
-		<input type="hidden" name="f_sort" value="<?php echo $t_sort ?>" />
-		<input type="hidden" name="f_dir" value="<?php echo $t_dir ?>" />
-		<input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>" />
-		<input type="hidden" name="f_per_page" value="<?php echo $t_filter['per_page'] ?>" />
 		<?php echo lang_get( 'reporter' ) ?>
 	</td>
 	<td class="small-caption"><?php echo lang_get( 'assigned_to' ) ?></td>
@@ -29,8 +26,6 @@
 	<td class="small-caption"><?php echo lang_get( 'changed' ) ?></td>
 	<td class="small-caption"><?php echo lang_get( 'hide_closed' ) ?></td>
 </tr>
-
-
 <!-- Filter Form Fields -->
 <tr>
 	<!-- Reporter -->
@@ -146,14 +141,11 @@
 	<!-- SUBMIT button -->
 	<td class="right" colspan="7">
 		<input type="submit" name="f_filter" value="<?php echo lang_get( 'filter_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 <!-- ====================== end of FILTER FORM ========================= -->
-
-
-
 
 <!-- ====================== BUG LIST ========================= -->
 <?php
@@ -172,13 +164,12 @@
 ?>
 
 <br />
+<form method="get" action="bug_actiongroup_page.php">
 <table class="width100" cellspacing="1">
-
 <!-- Navigation header row -->
 <tr>
 	<!-- Viewing range info -->
 	<td class="form-title" colspan="<?php echo $col_count ?>">
-		<form method="get" action="bug_actiongroup_page.php">
 		<?php echo lang_get( 'viewing_bugs_title' ) ?>
 		<?php
 			if ( sizeof( $rows ) > 0 ) {
@@ -193,7 +184,7 @@
 
 		<!-- Print and Export links -->
 		<span class="small">
-		<?php 
+		<?php
 			print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
 			echo '&nbsp;';
 			print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
@@ -208,8 +199,6 @@
 		<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number ) ?>
 	</td>
 </tr>
-
-
 <!-- Bug list column header row -->
 <tr class="row-category"> <?php
 	if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) ) ) { ?>
@@ -219,7 +208,7 @@
 		 access_level_check_greater_or_equal( UPDATER ) ) {	?>
 		<td class="center" width="2%">&nbsp;</td> <?php
 	} ?>
-	
+
 	<!-- Priority column -->
 	<td class="center" width="5%">
 		<?php print_view_bug_sort_link( 'P', 'priority', $t_sort, $t_dir ) ?>
@@ -267,19 +256,13 @@
 		<?php print_sort_icon( $t_dir, $t_sort, 'summary' ) ?>
 	</td>
 </tr>
-
-
 <!-- Spacer row -->
 <tr>
 	<td class="spacer" colspan="<?php echo $col_count ?>">
 		&nbsp;
 	</td>
 </tr>
-
-
 <?php mark_time( 'begin loop' ); ?>
-
-
 <!-- Loop over bug rows and create $v_* variables -->
 <?php
 	for($i=0; $i < sizeof( $rows ); $i++) {
@@ -303,7 +286,6 @@
 			$v_bugnote_updated = bug_get_newest_bugnote_timestamp( $v_id );
 		}
 ?>
-
 <!-- Repeating bug row -->
 <tr> <?php
 	if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) ) ) { ?>
@@ -330,12 +312,12 @@
 			}
 		?>
 	</td>
-	
+
 	<!-- Bug ID and details link -->
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php print_bug_link( $v_id ) ?>
 	</td>
-	
+
 	<!-- Bugnote count -->
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
@@ -352,7 +334,7 @@
 			}
 		?>
 	</td>
-	
+
 	<!-- Category -->
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
@@ -367,12 +349,10 @@
 			echo $v_category;
 		?>
 	</td>
-	
 	<!-- Severity -->
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
-
 	<!-- Status / Handler -->
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
@@ -383,7 +363,6 @@
 			}
 		?>
 	</td>
-
 	<!-- Last Updated -->
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
@@ -394,7 +373,6 @@
 			}
 		?>
 	</td>
-
 	<!-- Summary -->
 	<td class="left" bgcolor="<?php echo $status_color ?>">
 		<?php
@@ -410,8 +388,6 @@
 	}
 ?>
 <!-- ====================== end of BUG LIST ========================= -->
-
-
 
 <!-- ====================== MASS BUG MANIPULATION ========================= -->
 <?php
@@ -430,10 +406,9 @@ if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) 
 ?>
 <!-- ====================== end of MASS BUG MANIPULATION ========================= -->
 </table>
-
+</form>
 
 <?php mark_time( 'end loop' ); ?>
-
 
 <!-- ======================= NEXT / PREV LINKS ======================= -->
 <br />
@@ -457,8 +432,6 @@ if ( access_level_check_greater_or_equal( config_get( 'bug_move_access_level' ) 
 ?>
 </div>
 <!-- ======================= end of NEXT / PREV LINKS ======================= -->
-
-
 
 <?php
 	if ( STATUS_LEGEND_POSITION_BOTTOM == config_get( 'status_legend_position' ) ) {

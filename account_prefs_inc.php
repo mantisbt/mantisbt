@@ -1,41 +1,38 @@
 <?php
-
-function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '')
-{
-	if ( null === $p_user_id ) {
-		$p_user_id = auth_get_current_user_id();
-	}
-
-	$t_redirect_url = $p_redirect_url;
-	if ( empty( $t_redirect_url ) ) {
-		$t_redirect_url = 'account_prefs_page.php';
-	}
-
-	# protected account check
-	if ( user_is_protected( $p_user_id ) ) {
-		if ( $p_error_if_protected ) {
-			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-		} else {
-			return;
+	function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
+		if ( null === $p_user_id ) {
+			$p_user_id = auth_get_current_user_id();
 		}
-	}
 
-    if ( ! user_has_prefs( $p_user_id ) ) {
-		user_create_prefs( $p_user_id );
-    }
-	
-    # prefix data with u_
-	$row = user_get_pref_row( $p_user_id );
-	extract( $row, EXTR_PREFIX_ALL, 'u' );
+		$t_redirect_url = $p_redirect_url;
+		if ( empty( $t_redirect_url ) ) {
+			$t_redirect_url = 'account_prefs_page.php';
+		}
+
+		# protected account check
+		if ( user_is_protected( $p_user_id ) ) {
+			if ( $p_error_if_protected ) {
+				trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+			} else {
+				return;
+			}
+		}
+
+	    if ( ! user_has_prefs( $p_user_id ) ) {
+			user_create_prefs( $p_user_id );
+	    }
+
+	    # prefix data with u_
+		$row = user_get_pref_row( $p_user_id );
+		extract( $row, EXTR_PREFIX_ALL, 'u' );
 ?>
-
 <?php # Account Preferences Form BEGIN ?>
 <br />
 <div align="center">
+<form method="post" action="account_prefs_update.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="account_prefs_update.php">
 		<input type="hidden" name="f_user_id" value="<?php echo $p_user_id ?>" />
 		<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
 		<?php echo lang_get( 'default_account_preferences_title' ) ?>
@@ -211,4 +208,6 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 </tr>
 </table>
 </div>
-<?php } # end of edit_account_prefs() ?>
+<?php
+	} # end of edit_account_prefs()
+?>

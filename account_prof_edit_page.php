@@ -57,10 +57,10 @@
 <?php # Edit Profile Form BEGIN ?>
 <br />
 <div align="center">
+<form method="post" action="account_prof_update.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="account_prof_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $v_id ?>" />
 		<?php echo lang_get( 'edit_profile_title' ) ?>
 	</td>
@@ -103,10 +103,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
 <?php # Edit Profile Form END ?>
 
