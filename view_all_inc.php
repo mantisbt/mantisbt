@@ -101,10 +101,8 @@
 
 	<!-- Hide closed bugs -->
 	<td>
-		<input type="checkbox" name="hide_resolved" <?php check_checked( $t_filter['hide_resolved'], 'on' ); ?> />
-		<?php echo lang_get( 'filter_resolved' ); ?>
-		<input type="checkbox" name="hide_closed" <?php check_checked( $t_filter['hide_closed'], 'on' ); ?> />
-		<?php echo lang_get( 'filter_closed' ); ?>
+		<input type="checkbox" name="hide_resolved" <?php check_checked( $t_filter['hide_resolved'], 'on' ); ?> />&nbsp;<?php echo lang_get( 'filter_resolved' ); ?>
+		<input type="checkbox" name="hide_closed" <?php check_checked( $t_filter['hide_closed'], 'on' ); ?> />&nbsp;<?php echo lang_get( 'filter_closed' ); ?>
 	</td>
 </tr>
 

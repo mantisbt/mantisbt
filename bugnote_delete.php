@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_delete.php,v 1.33 2003-02-20 07:30:04 jfitzell Exp $
+	# $Id: bugnote_delete.php,v 1.34 2003-02-26 06:50:15 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,11 +20,18 @@
 	
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
+	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );
 
-	access_ensure_bugnote_level( config_get( 'delete_bugnote_threshold' ), $f_bugnote_id );
+	# Check if the current user is allowed to delete the bugnote
+	$t_user_id = current_user_get_field( 'id' );
+	$t_bugnote_user = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
+
+	if ( $t_user_id != $t_bugnote_user ) {
+		access_ensure_bugnote_level( config_get( 'delete_bugnote_threshold' ), $f_bugnote_id );
+	}
 
 	helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ),
 							 lang_get( 'delete_bugnote_button' ) );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.39 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bugnote_edit_page.php,v 1.40 2003-02-26 06:50:15 int2str Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -28,11 +28,18 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'string_api.php' );
+	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );
 
-	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
+	# Check if the current user is allowed to edit the bugnote
+	$t_user_id = current_user_get_field( 'id' );
+	$t_bugnote_user = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
+
+	if ( $t_user_id != $t_bugnote_user ) {
+		access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
+	}
 
 	# Check if the bug has been resolved
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
