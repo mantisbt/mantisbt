@@ -29,7 +29,7 @@
 	$s_copy_categories = "Копировать категории";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = "ОШИБКА: в процессе выполнения операции произошла ошибка.  Вы может быть захотите сообщить об этом вашему локальному администратору.";
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ОШИБКА: в процессе выполнения операции произошла ошибка. Вы может быть захотите сообщить об этом вашему локальному администратору.";
 	$MANTIS_ERROR[ERROR_SQL] = "ОШИБКА: Обнаружена ошибка SQL . Пожалуйста, сообщите об этом ";
 	$MANTIS_ERROR[ERROR_LOGIN] = "ОШИБКА: Ваш бюджет может быть заблокирован или имя пользователя/пароль неправилен.";
 	$MANTIS_ERROR[ERROR_REPORT] = "ОШИБКА: В вашем рапорте обнаружены ошибки.";
@@ -39,7 +39,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ОШИБКА: Дубликат категории.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ОШИБКА: Дубликат версии.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ОШИБКА: Дубликат файла. Сначала удалите старый файл.";
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ОШИБКА: Необходимые поля не заполнены.  Проверьте правильность ввода.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.";
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.";
 
 	# General Strings
@@ -96,7 +96,7 @@
 	$s_email_severity = "Критичность";
 	$s_email_priority = "Приоритет";
 	$s_email_status = "Статус";
-	$s_email_resolution = "Решение";
+	$s_email_resolution = "Состояние";
 	$s_email_duplicate = "Дубликаты";
 	$s_email_date_submitted = "Дата создания";
 	$s_email_last_modified = "Последнее обновление";
@@ -133,8 +133,8 @@
 	$s_email_on_new = "Уведомлять о новых";
 	$s_email_on_assigned = "Уведомлять при назначении";
 	$s_email_on_feedback = "Уведомлять при статусе Доп. информация";
-	$s_email_on_resolved = "Уведомлять при решении?";
-	$s_email_on_closed = "Уведомлять при закрытии?";
+	$s_email_on_resolved = "Уведомлять при решении";
+	$s_email_on_closed = "Уведомлять при закрытии";
 	$s_email_on_reopened = "Уведомлять при повторном открытии";
 	$s_email_on_bugnote_added = "Уведомлять при новом комментарии";
 	$s_email_on_status_change = "Уведомлять при изменении статуса";
@@ -209,8 +209,8 @@
 
 	# bug_reopen.php3
 	$s_bug_reopened_msg = "Баг открыт повторно...";
-	$s_reopen_add_bugnote_title = "Добавить причину повторного открытия";
-	$s_bugnote_add_reopen_button = "Добавить комментарий и повторно открыть";
+	$s_reopen_add_bugnote_title = "Добавление причины повторного открытия";
+	$s_bugnote_add_reopen_button = "Прокомментировать и переоткрыть";
 
 	# bug_resolve_page.php3
 	$s_resolve_bug_title = "Решить баг";
@@ -218,7 +218,7 @@
 
 	# bug_resolve_page2.php3
 	$s_bug_resolved_msg = "Баг разрешен. Добавьте комментарий...";
-	$s_resolve_add_bugnote_title = "Добавьте причину решения";
+	$s_resolve_add_bugnote_title = "Добавьте комментарий к решению";
 	$s_bugnote_add_resolve_button = "Добавить комментарий";
 
 	# bug_update.php3
@@ -237,7 +237,7 @@
 	$s_reporter = "Репортер";
 	$s_assigned_to = "Ответственный";
 	$s_priority = "Приоритет";
-	$s_resolution = "Решение";
+	$s_resolution = "Состояние";
 	$s_status = "Cтатус";
 	$s_duplicate_id = "Дубликаты";
 	$s_os = "ОС";
@@ -351,7 +351,7 @@
 	$s_category_deleted_msg = "Категория удалена...";
 
 	# manage_project_category_delete_page.php3
-	$s_category_delete_sure_msg = "Вы уверены, что желаете удалить соответствующую категорию? Все соответсвующие категории баги будут удалены.";
+	$s_category_delete_sure_msg = "Вы уверены, что желаете удалить категорию? Все соответствующие категории баги будут удалены.";
 	$s_delete_category_button = "Удалить категорию";
 
 	# manage_project_category_edit_page.php3
@@ -365,7 +365,7 @@
 	$s_project_deleted_msg = "Проект успешно удален...";
 
 	# manage_project_delete_page.php3
-	$s_project_delete_msg = "Вы уверены, что желаете удалить это проект и соответсвующие проекту баги?";
+	$s_project_delete_msg = "Вы уверены, что желаете удалить это проект и соответствующие проекту баги?";
 	$s_project_delete_button = "Удалить проект";
 
 	# manage_project_edit_page.php3
@@ -533,7 +533,7 @@
 	$s_must_enter_reproducibility = "Вы полжны ввести повторяемость";
 	$s_must_enter_summary = "Вы должны ввести краткую сводку";
 	$s_must_enter_description = "Вы должны ввести описание";
-	$s_report_more_bugs = "Добавлять еще обращения?";
+	$s_report_more_bugs = "Добавлять еще рапорты?";
 	$s_submission_thanks_msg = "Спасибо за Ваш рапорт";
 
 	# report_bug_advanced_page.php3
@@ -550,7 +550,7 @@
 	$s_check_report_more_bugs = "отметьте, если будете вводить несколько рапортов";
 
 	# report_bug_page.php3
-	$s_advanced_report_link = "Расширенная форма обращения";
+	$s_advanced_report_link = "Расширенная форма рапорта";
 	$s_report_stay = "Пролжить ввод следующих багов";
 
 	# set_project.php3
@@ -564,11 +564,11 @@
 
 	# signup.php3
 	$s_invalid_email = "НЕПРАВИЛЬНЫЙ E-MAIL адрес";
-	$s_duplicate_username = "ТАКОЙ ИМЯ ПОЛЬЗОВАТЕЛЯ УЖЕ ИСПОЛЬЗУЕТСЯ.  ВЫБЕРИТЕ ДРУГОЕ ИМЯ";
+	$s_duplicate_username = "ТАКОЕ ИМЯ ПОЛЬЗОВАТЕЛЯ УЖЕ ИСПОЛЬЗУЕТСЯ.  ВЫБЕРИТЕ ДРУГОЕ ИМЯ";
 	$s_account_create_fail = "НЕ УДАЛОСЬ СОЗДАТЬ БЮДЖЕТ";
 	$s_account_added = "Бюджет добавлен.";
 	$s_password_emailed_msg = "Ваш пароль будет отправлен Вам по email.";
-	$s_no_reponse_msg = "Если Вы не войдете в систему в течении недели, то Ваша регистрационная запись будет удалена.";
+	$s_no_reponse_msg = "Если Вы не войдете в систему в течении недели, то Ваш бюджет будет удален.";
 
 	# signup_page.php3
 	$s_signup_info = "Выберите Ваше имя пользователя и введите правильный email. Сгенерированный пароль будет выслан Вам на Ваш адрес.";
@@ -592,19 +592,19 @@
 	$s_summary_jpgraph_link = "Графическая статистика";
 	$s_by_status = "По статусу";
 	$s_by_date = "По дате (дням)";
-	$s_by_severity = "по критичности";
-	$s_by_resolution = "по решению";
+	$s_by_severity = "По критичности";
+	$s_by_resolution = "По решению";
 	$s_by_category = "По категориям";
 	$s_by_priority = "По приоритету";
-	$s_by_developer = "по разработчикам";
-	$s_by_reporter ="по пользователям";
+	$s_by_developer = "По разработчикам";
+	$s_by_reporter ="По пользователям";
 	$s_time_stats = "Статистика продолжительности решения багов (в днях)";
 	$s_longest_open_bug = "Наиболее долгий баг";
 	$s_longest_open = "Максимальное время";
 	$s_average_time = "Среднее время";
-	$s_total_time = "Сумманое время";
-	$s_developer_stats = "статистика разработчика";
-	$s_reporter_stats = "статистика репортера";
+	$s_total_time = "Суммарное время";
+	$s_developer_stats = "Статистика разработчика";
+	$s_reporter_stats = "Статистика репортера";
 	$s_orct = "открытых/решенных/закрытых/всего)";
 
 	# view_all_bug_page.php3
@@ -623,17 +623,19 @@
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "Простой просмотр";
-	$s_viewing_bug_advanced_details_title = "Расширенный просмотр информации об обращении";
+	$s_viewing_bug_advanced_details_title = "Расширенный просмотр информации о баге";
 	$s_product_build = "Подверсия продукта";
 	$s_system_profile = "Описание системы";
 	$s_update_bug_button = "Обновить информацию";
 	$s_bug_assign_button    = "Назначить себе";
 	$s_reopen_bug_button = "Открыть повторно";
+	$s_monitor_bug_button = "Следить";
+	$s_unmonitor_bug_button = "Не следить";
 	$s_attached_files = "Присоединенные файлы";
 
 	# view_bug_inc.php
 
 	# view_bug_page.php3
-	$s_view_advanced_link = "Посмотреть расширенную информацию";
-	$s_viewing_bug_simple_details_title = "Простой просмотр информации";
+	$s_view_advanced_link = "Расширенный просмотр";
+	$s_viewing_bug_simple_details_title = "Простой просмотр";
 ?>

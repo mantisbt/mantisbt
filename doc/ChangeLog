@@ -7,6 +7,7 @@ Mantis
  * Added validation checks for all inputs that are passed on to database queries.
  * Updated Hungarian localization.
  * Updated Russian localization.
+ * Updated Romanian localization.
 
 05.19.2002  -   0.17.3
 
