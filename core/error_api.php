@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.23 2003-04-23 22:17:22 jfitzell Exp $
+	# $Id: error_api.php,v 1.24 2003-04-23 23:00:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -288,9 +288,17 @@
 	# ---------------
 	# Return an error string (in the current language) for the given error
 	function error_string( $p_error ) {
+		global $g_error_parameters;
+	
 		$MANTIS_ERROR = lang_get( 'MANTIS_ERROR' );
 		
-		return $MANTIS_ERROR[$p_error];
+		# We pad the parameter array to make sure that we don't get errors if
+		#  the caller didn't give enough parameters for the error string
+		$t_padding = array_pad( array(), 10, '' );
+		
+		$t_error = $MANTIS_ERROR[$p_error];
+		
+		return call_user_func_array( 'sprintf', array_merge( $t_error, $g_error_parameters, $t_padding ) );
 	}
 
 	# ---------------
@@ -305,6 +313,10 @@
 	# ---------------
 	# Set additional info parameters to be used when displaying the next error
 	# This function takes a variable number of parameters
+	#
+	# When writing internationalized error strings, note that you can change the
+	#  order of parameters in the string.  See the PHP manual page for the
+	#  sprintf() function for more details.
 	function error_parameters() {
 		global $g_error_parameters;
 

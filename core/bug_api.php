@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.42 2003-04-17 06:07:13 vboctor Exp $
+	# $Id: bug_api.php,v 1.43 2003-04-23 23:00:24 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -93,6 +93,7 @@
 			$g_cache_bug[$c_bug_id] = false;
 
 			if ( $p_trigger_errors ) {
+				error_parameters( $p_bug_id );
 				trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
 			} else {
 				return false;
@@ -148,6 +149,7 @@
 			$g_cache_bug_text[$c_bug_id] = false;
 
 			if ( $p_trigger_errors ) {
+				error_parameters( $p_bug_id );
 				trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
 			} else {
 				return false;
@@ -197,6 +199,7 @@
 	#  otherwise let execution continue undisturbed
 	function bug_ensure_exists( $p_bug_id ) {
 		if ( ! bug_exists( $p_bug_id ) ) {
+			error_parameters( $p_bug_id );
 			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
 		}
 	}
