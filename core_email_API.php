@@ -55,7 +55,7 @@
 	# --------------------
 	# build the bcc list
 
-	# @@@ ugly function: here's how it works:
+	# UGLY function: here's how it works:
 	# We store all the email addresses in an array.  First we grab the reporter.
 	# If the handler is assigned then we add that.
 
@@ -462,23 +462,6 @@
 		}
 	}
 	# --------------------
-	# Send to only the id
-	# @@@ UNUSED
-	function email_bug_info_to_id( $p_bug_id, $p_message, $p_user_id ) {
-		# build subject
-		$p_subject = email_build_subject( $p_bug_id );
-
-		# build message
-		$t_message = $p_message."\n";
-		$t_message .= email_build_bug_message( $p_bug_id );
-		$t_message .= email_build_bugnote_message( $p_bug_id );
-
-		$p_user_email = get_user_info( $p_user_id, "email" );
-
-		# send mail
-		$res = email_send( $p_user_email, $p_subject, $t_message, $p_bcc_header );
-	}
-	# --------------------
 	# this function sends the actual email
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header="" ) {
 		global $g_from_email, $g_enable_email_notification,
@@ -494,7 +477,7 @@
 		$t_subject   = trim( $p_subject );
 		$t_message   = trim( $p_message );
 
-		# @@@ for debugging only
+		# for debugging only
 		#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
 		#exit;
 		#echo "<br>xxxRecipient =".$t_recipient."<br>";
@@ -597,7 +580,6 @@
 	# --------------------
 	# formats the subject correctly
 	# we include the project name, bug id, and summary.
-	# @@@ NOTE: Is there a limit to the length of the subject field?
 	function email_build_subject( $p_bug_id ) {
 		# grab the project name
 		$p_project_name = get_project_name( get_bug_project_id( $p_bug_id ) );

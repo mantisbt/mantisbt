@@ -275,24 +275,6 @@
 		}
 	}
 	# --------------------
-	# @@@ UNUSED
-	function is_project_manager( $p_project_id ) {
-		global $g_mantis_project_table, $g_mantis_project_user_list_table;
-
-		$t_user_id = get_current_user_field( "id" );
-		$query = "SELECT COUNT(*)
-				FROM $g_mantis_project_user_list_table
-				WHERE project_id='$p_project_id' AND user_id='$t_user_id' AND
-					access_level='manager'";
-		$result = db_query( $query );
-		$t_count = db_result( $result );
-		if ($t_count > 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	# --------------------
 	# Checks to see if the user should be here.  If not then log the user out.
 	function check_access( $p_access_level ) {
 		global $g_logout_page;

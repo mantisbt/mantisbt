@@ -293,7 +293,7 @@
 		return explode( ":", $p_enum_elem );
 	}
 	# --------------------
-	# Given a enum string and num, return the appriate string @@@ localize for display
+	# Given a enum string and num, return the appriate string
 	function get_enum_element( $p_enum_string, $p_val ) {
 		$arr = explode_enum_string( $p_enum_string );
 		for ( $i=0;$i<count( $arr );$i++ ) {

@@ -157,7 +157,6 @@ $query[83] = "ALTER TABLE mantis_bug_table CHANGE projection projection INT (2) 
 $query[84] = "ALTER TABLE mantis_bug_table CHANGE resolution resolution INT (2) DEFAULT '10' not null";
 $query[85] = "ALTER TABLE mantis_bug_table CHANGE priority priority INT (2) DEFAULT '30' not null";
 $query[86] = "ALTER TABLE mantis_bug_table CHANGE status status INT (2) DEFAULT '10' not null";
-# @@@ more near bottom
 
 # Update dates to be legal
 

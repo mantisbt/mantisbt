@@ -28,8 +28,7 @@
 	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<input type="hidden" name="f_orig_version" value="<?php echo $f_version ?>">
 	<td class="category">
-		<?php # @@@ localize ?>
-		Version
+		<?php echo $s_version ?>
 	</td>
 	<td>
 		<input type="text" name="f_version" size="32" maxlength="64" value="<?php echo urldecode( $f_version ) ?>">
@@ -37,8 +36,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php # @@@ localize ?>
-		Date Order
+		<?php echo $s_date_order ?>
 	</td>
 	<td>
 		<input type="text" name="f_date_order" size="32" value="<?php echo urldecode( $f_date_order ) ?>">

@@ -399,11 +399,6 @@
 		} # end for
 	}
 	# --------------------
-	# @@@ Unused
-	function print_enum_string( $p_value, $p_string ) {
-		global $s_status_enum_string;
-	}
-	# --------------------
 	function print_project_user_option_list( $p_val=0 ) {
 		global $g_mantis_project_table, $s_access_levels_enum_string;
 
@@ -667,7 +662,7 @@
 		return $p_string;
 	}
 	# --------------------
-	# @@@ does nothing
+	# @@@ currently does nothing
 	function filter_img_tags( $p_string ) {
 		return $p_string;
 	}
@@ -710,7 +705,7 @@
 			$p_string = filter_href_tags( $p_string );
 		}
 
-		#@@@$p_string = filter_img_tags( $p_string );
+		$p_string = filter_img_tags( $p_string );
 		$p_string = addslashes( $p_string );
 		return $p_string;
 	}
@@ -732,7 +727,7 @@
 			$p_string = filter_href_tags( $p_string );
 		}
 
-		#@@@$p_string = filter_img_tags( $p_string );
+		$p_string = filter_img_tags( $p_string );
 		$p_string = addslashes( $p_string );
 		return $p_string;
 	}
@@ -761,7 +756,7 @@
 	# Process a string for display in a textarea box
 	function string_edit_textarea( $p_string ) {
 		$p_string = stripslashes( $p_string );
-		#@@@$p_string = str_replace( "<br>", "",  $p_string );
+		$p_string = str_replace( "<br>", "",  $p_string );
 		$p_string = unfilter_href_tags( $p_string );
 		$p_string = str_replace( "<br />", "\n",  $p_string );
 		$p_string = str_replace( "&lt;", "<",  $p_string );
@@ -773,7 +768,7 @@
 	# Process a string for display in a text box
 	function string_edit_text( $p_string ) {
 		$p_string = stripslashes( $p_string );
-		#@@@$p_string = str_replace( "<br>", "",  $p_string );
+		$p_string = str_replace( "<br>", "",  $p_string );
 		$p_string = unfilter_href_tags( $p_string );
 		$p_string = str_replace( "&lt;", "<",  $p_string );
 		$p_string = str_replace( "&gt;", ">",  $p_string );

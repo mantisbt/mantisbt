@@ -16,7 +16,7 @@
 	check_access( REPORTER );
 
 	# $f_bug_id is the bug id
-	# @@@ WHat does this do?
+	# @@@ What does this do?
 	check_bugnote_exists( $f_id );
 
 	# grab the bugnote text id

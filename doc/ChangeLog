@@ -35,6 +35,7 @@ Mantis
  * Removed sql_to_unix_time() function.  Unecessary with removal of TIMESTAMPS.
  * Removed menu_inc.php file and related variable.  Moved this into print_menu().
  * Removed print_mantis_version().  Moved it into print_foooter().
+ * Removed some unused code.
  * Renamed g_store_file_to to g_file_upload_method.
  * Renamed files to .php
  * Removed admin_cookiecheck.php3

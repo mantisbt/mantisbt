@@ -442,10 +442,7 @@
 		global	$g_summary_page, $s_summary_link,
 				$g_use_jpgraph, $s_summary_jpgraph_link,
 				$g_print_all_bug_page, $s_print_all_bug_page_link,
-				$g_summary_jpgraph_page;
-
-		# @@@ LOCALIZE
-		$s_print_all_bug_page_link = "Print Reports";
+				$g_summary_jpgraph_page, $s_print_reports;
 
 		PRINT "<p><div align=\"center\">";
 		print_bracket_link( $g_print_all_bug_page, $s_print_all_bug_page_link );
