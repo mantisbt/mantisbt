@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.56 $
+	# $Revision: 1.57 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 13:23:55 $
+	# $Date: 2004-02-26 16:39:54 $
 	#
-	# $Id: strings_danish.txt,v 1.56 2004-02-26 13:23:55 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.57 2004-02-26 16:39:54 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -23,7 +23,7 @@ $s_actiongroup_menu_move = 'Flyt';
 $s_actiongroup_menu_assign = 'Tildel';
 $s_actiongroup_menu_close = 'Luk';
 $s_actiongroup_menu_delete = 'Slet';
-$s_actiongroup_menu_resolve = 'Bestem';
+$s_actiongroup_menu_resolve = 'Løs';
 $s_actiongroup_menu_update_priority = 'Opdater Prioritering';
 $s_actiongroup_menu_update_status = 'Opdater Status';
 
@@ -97,14 +97,14 @@ $s_close_bugs_conf_msg = 'Ønsker du at lukke disse fejl ?';
 $s_delete_bugs_conf_msg = 'Ønsker du at slette disse fejl ?';
 $s_move_bugs_conf_msg = 'Flyt fejlene til';
 $s_assign_bugs_conf_msg = 'Tildel fejlene til';
-$s_resolve_bugs_conf_msg = 'Vælg fejlenes bestemmelse';
+$s_resolve_bugs_conf_msg = 'Vælg fejlenes løsning';
 $s_priority_bugs_conf_msg = 'Vælg fejlenes prioritering';
 $s_status_bugs_conf_msg = 'Vælg fejlenes status';
 $s_close_group_bugs_button = 'Luk Fejlene' ;
 $s_delete_group_bugs_button = 'Slet Fejlene' ;
 $s_move_group_bugs_button = 'Flyt Fejlene' ;
 $s_assign_group_bugs_button = 'Tildel Fejlene' ;
-$s_resolve_group_bugs_button = 'Bestem Fejlene' ;
+$s_resolve_group_bugs_button = 'Løs Fejlene' ;
 $s_priority_group_bugs_button = 'Opdater Prioritering' ;
 $s_status_group_bugs_button = 'Opdater Status' ;
 
@@ -113,21 +113,21 @@ $s_graph_imp_status_title = 'Sammenfattende grafik efter status' ;
 $s_graph_imp_priority_title = 'Sammenfattende grafik efter prioritering' ;
 $s_graph_imp_severity_title = 'Sammenfattende grafik efter alvorlighed';
 $s_graph_imp_category_title = 'Sammenfattende grafik efter kategori';
-$s_graph_imp_resolution_title = 'Sammenfattende grafik efter bestemmelse';
+$s_graph_imp_resolution_title = 'Sammenfattende grafik efter løsning';
 $s_by_status_pct = 'efter status i procent';
 $s_by_priority_pct = 'efter prioritering i procent';
 $s_by_severity_pct = 'efter alvorlighed i procent';
 $s_by_category_pct = 'efter kategori i procent';
-$s_by_resolution_pct = 'efter bestemmelse i procent';
+$s_by_resolution_pct = 'efter løsning i procent';
 $s_by_severity_mix = 'efter alvorlighed og status';
 $s_by_priority_mix = 'efter prioritering og status';
-$s_by_resolution_mix = 'efter bestemmelse og status';
+$s_by_resolution_mix = 'efter løsning og status';
 $s_synthesis_link = 'Sammenfatning';
 $s_status_link = 'efter status';
 $s_priority_link = 'efter prioritering';
 $s_severity_link = 'efter alvorlighed';
 $s_category_link = 'efter kategori';
-$s_resolution_link = 'efter bestemmelse';
+$s_resolution_link = 'efter løsning';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Vis kun valgte';
@@ -190,7 +190,7 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'FEJL: LDAP Godkendelse mislykkedes';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'FEJL: LDAP Server forbindelse mislykkedes';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'FEJL: LDAP Record Update mislykkedes.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'FEJL: LDAP User Record ikke fundet.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'FEJL: Denne handling kan ikke udføres fordi fejlen er blevet bestemt';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'FEJL: Denne handling kan ikke udføres fordi fejlen er blevet løst';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'FEJL: Database forbindelse mislykkedes.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'FEJL: Database forespørgsel mislykkedes.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'FEJL: Database valg mislykkedes.';
@@ -226,7 +226,7 @@ $s_view_state_enum_string = '10:offentlig,50:privat';
 $s_priority_enum_string = '10:ingen,20:lav,30:normal,40:høj,50:haster,60:straks!';
 $s_severity_enum_string = '10:indslag,20:triviel,30:tekst,40:tilpasses,50:mindre,60:større,70:crash,80:block';
 $s_reproducibility_enum_string = '10:altid,30:af og til,50:sjældent,70:har ikke prøvet,90:kan ikke genskabe,100:ikke tilgængelig';
-$s_status_enum_string = '10:ny,20:tilbagemelding,30:modtaget,40:bekræftet,50:tildelt,80:bestemt,90:lukket';
+$s_status_enum_string = '10:ny,20:tilbagemelding,30:modtaget,40:bekræftet,50:tildelt,80:løst,90:lukket';
 $s_resolution_enum_string = '10:åben,20:rettet,30:genåbnet,40:kan ikke genskabe,50:kun ikke rettes,60:findes i forvejen,70:ikke en fejl,80:stillet i bero,90:vil ikke rette';
 $s_projection_enum_string = '10:ingen,30:tilpasses,50:mindre rettelse,70:større omskrivning,90:omstrukturering';
 $s_eta_enum_string = '10:ingen,20:< 1 dag,30:2-3 dage,40:< 1 uge,50:< 1 måned,60:> 1 måned';
@@ -267,7 +267,7 @@ $s_email_reproducibility = 'Genfrembringelse';
 $s_email_severity = 'Alvorlighed';
 $s_email_priority = 'Prioritet';
 $s_email_status = 'Status';
-$s_email_resolution = 'Bestemmelse';
+$s_email_resolution = 'Løsning';
 $s_email_duplicate = 'Dobbelt';
 $s_email_date_submitted = 'Afsendt Dato';
 $s_email_last_modified = 'Sidst Ændret';
@@ -304,7 +304,7 @@ $s_redirect_delay = 'Forsinkelse ved Omadressering';
 $s_email_on_new = 'E-mail ved Ny';
 $s_email_on_assigned = 'E-mail ved Tildeling';
 $s_email_on_feedback = 'E-mail ved Tilbagemelding';
-$s_email_on_resolved = 'E-mail ved Bestemmelse';
+$s_email_on_resolved = 'E-mail ved Løsning';
 $s_email_on_closed = 'E-mail ved Lukket';
 $s_email_on_reopened = 'E-mail ved Genåbnet';
 $s_email_on_bugnote_added = 'E-mail ved Tilføjelse af Fejlnote';
@@ -390,12 +390,12 @@ $s_reopen_add_bugnote_title = 'Tilføj Fejlnote begrundelse for at Genåbne fejlen
 $s_bugnote_add_reopen_button = 'Tilføj Fejlnote og Genåbn fejlen';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Bestem Fejl';
-$s_resolve_bug_button = 'Bestem Fejl';
+$s_resolve_bug_title = 'Løs Fejl';
+$s_resolve_bug_button = 'Løs Fejl';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Fejlen er blevet bestemt. Skriv Fejlnote herunder...';
-$s_resolve_add_bugnote_title = 'Tilføj Fejlnote begrundelse for at bestemme fejlen';
+$s_bug_resolved_msg = 'Fejlen er blevet løst. Skriv Fejlnote herunder...';
+$s_resolve_add_bugnote_title = 'Tilføj Fejlnote begrundelse for at Løse fejlen';
 $s_bugnote_add_resolve_button = 'Tilføj Fejlnote';
 
 # bug_reminder_page.php
@@ -424,7 +424,7 @@ $s_last_update = 'Sidst Opdateret';
 $s_reporter = 'Rapporter';
 $s_assigned_to = 'Tildelt';
 $s_priority = 'Prioritet';
-$s_resolution = 'Bestemmelse';
+$s_resolution = 'Løsning';
 $s_status = 'Status';
 $s_duplicate_id = 'ID findes allerede';
 $s_os = 'OS';
@@ -784,7 +784,7 @@ $s_by_project = 'efter projekt';
 $s_by_status = 'efter status';
 $s_by_date = 'efter dato (dage)';
 $s_by_severity = 'efter alvorlighed';
-$s_by_resolution = 'efter bestemmelse';
+$s_by_resolution = 'efter løsning';
 $s_by_category = 'efter kategori';
 $s_by_priority = 'efter prioritet';
 $s_by_developer = 'efter udvikler';
@@ -803,7 +803,7 @@ $s_average_time = 'gennemsnitlig tid';
 $s_total_time = 'tid i alt';
 $s_developer_stats = 'udvikler stats';
 $s_reporter_stats = 'reporter stats';
-$s_orct = '(åben/bestemt/lukket/total)';
+$s_orct = '(åben/løst/lukket/total)';
 
 # view_all_bug_page.php
 $s_any = 'enhver';
@@ -874,7 +874,7 @@ $s_field_delete_button = 'Slet Felt';
 
 $s_hide_status = 'Skjul Status';
 $s_filter_closed = "Lukkede";
-$s_filter_resolved = "Bestemte";
+$s_filter_resolved = "Løste";
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";

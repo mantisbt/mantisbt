@@ -31,7 +31,8 @@ Mantis ChangeLog
  * Fix #3598: bug history: consuming custom fields or not?
  * Fix #3602: Problems with Mantis 0.18.1 localization (partial fix).
  * Fix #3603: Missing german strings in localisation file (thanks to Dr. Jürgen Kehrel).
- * Languages: Added Lithuanian - Updated Norwegian, Korean and German localisations.
+ * Languages: Added Lithuanian and Serbian localisations.
+ * Languages: Updated Chinese (simplified), Danish, German, Korean, Norwegian and Spanish localisations.
  * Mantis website moved to http://www.mantisbt.org
 
 2004.02.06  -  0.18.1

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.140 2004-02-24 22:57:12 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.141 2004-02-26 16:39:53 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -284,8 +284,8 @@
 		'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian', 
 		'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'lithuanian', 
 		'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard', 
-		'romanian', 'russian', 'russian_koi8', 'slovak', 'spanish', 'swedish', 
-		'turkish' );
+		'romanian', 'russian', 'russian_koi8', 'serbian', 'slovak', 'spanish', 
+		'swedish', 'turkish' );
 
 	###############################
 	# Mantis Display Settings
