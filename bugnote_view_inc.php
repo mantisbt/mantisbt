@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.9 2003-03-22 21:42:22 jlatour Exp $
+	# $Id: bugnote_view_inc.php,v 1.10 2003-08-22 05:53:42 beerfrick Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -61,6 +61,9 @@
 </tr>
 <?php
 	for ( $i=0; $i < $num_notes; $i++ ) {
+		# Bugnote Numbering
+		$t_bugnote_number = $i + 1;
+
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v3' );
@@ -86,6 +89,7 @@
 ?>
 <tr class="bugnote">
 	<td class="<?php echo $t_bugnote_css ?>">
+		<a name="bn<?php echo $t_bugnote_number; ?>" href="#bn<?php echo $t_bugnote_number; ?>">#<?php echo $t_bugnote_number; ?></a>
 		<?php print_user( $v3_reporter_id ) ?>
 		<?php if ( VS_PRIVATE == $v3_view_state ) { ?>
 		<span class="small">[ <?php echo lang_get( 'private' ) ?> ]</span>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.49 2003-07-25 17:34:47 beerfrick Exp $
+	# $Id: bug_view_page.php,v 1.50 2003-08-22 05:53:41 beerfrick Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -418,7 +418,12 @@
 	# Bugnotes
 	include( $t_mantis_dir . 'bugnote_add_inc.php' );
 	include( $t_mantis_dir . 'bugnote_view_inc.php' );
-
+?>
+	<!-- Jump to Bugnote add form -->
+	<br />
+	<span class="small"><?php print_bracket_link( "#addbugnote", lang_get( 'add_bugnote_button' ) ) ?></span>
+	<br />
+<?php
 	# History
 	if ( $f_history ) {
 		include( $t_mantis_dir . 'history_inc.php' );
