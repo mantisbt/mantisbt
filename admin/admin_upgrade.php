@@ -1,8 +1,3 @@
-<?php
-	require( "../constant_inc.php" );
-	require( "../config_inc.php" );
-	require( "../core_database_API.php" );
-?>
 <h1>Mantis Database Upgrade</h1>
 <b>WARNING:</b> - Always backup your database data before upgrading.  From the command line you can do this with the mysqldump command.
 <p>

@@ -12,7 +12,7 @@
 	$upgrade_obj->AddItem();
 
 	$upgrade_obj->AddItem( "# Auto-assigning of bugs for a default user per category" );
-	$upgrade_obj->AddItem( "ALTER TABLE mantis_bug_history_table ADD type INT(2) NOT NULL" );
+	$upgrade_obj->AddItem( "ALTER TABLE mantis_project_category_table ADD user_id INT(7) NOT NULL" );
 	$upgrade_obj->AddItem();
 
 	$upgrade_obj->AddItem( "# Private news support" );
