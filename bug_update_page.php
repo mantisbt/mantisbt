@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.84 2004-09-28 13:40:20 thraxisp Exp $
+	# $Id: bug_update_page.php,v 1.85 2004-09-28 15:03:30 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -177,8 +177,7 @@
 	<td colspan="5">
 		<select name="handler_id">
 			<option value="0"></option>
-			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id, 
-									access_get_status_threshold( $t_bug->status, $t_bug->project_id ) ) ?>
+			<?php print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id ) ?>
 		</select>
 	</td>
 
