@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_list_page.php,v 1.28 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: news_list_page.php,v 1.29 2004-02-08 08:00:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,9 +51,10 @@
 			$t_note_string = '['.implode( ' ', $t_notes ).']';
 		}
 
-		echo "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?news_id=$v_id\">$v_headline</a></span> <span class=\"small\">$t_note_string ";
+		echo "<li><span class=\"italic-small\">$v_date_posted</span> - <span class=\"bold\"><a href=\"news_view_page.php?news_id=$v_id\">$v_headline</a></span> <span class=\"small\"> ";
 		
 		print_user( $v_poster_id );
+		echo ' ' . $t_note_string;
 		
 		echo "</span></li>";
 	}  # end for loop

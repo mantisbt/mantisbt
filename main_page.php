@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.45 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: main_page.php,v 1.46 2004-02-08 08:00:06 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,6 +21,7 @@
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'date_api.php' );
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'news_inc.php' );
 ?>
 <?php
 	access_ensure_project_level( VIEWER );
@@ -59,7 +60,7 @@
 	$t_project_id = helper_get_current_project();
 
 	# get news count (project plus sitewide posts)
-    $total_news_count = news_get_count( $t_project_id );
+	$total_news_count = news_get_count( $t_project_id );
 
 	$t_news_table			= config_get( 'mantis_news_table' );
 	$t_news_view_limit		= config_get( 'news_view_limit' );
@@ -84,16 +85,12 @@
 			break;
 	} # end switch
 	$result = db_query( $query );
-    $news_count = db_num_rows( $result );
+	$news_count = db_num_rows( $result );
 
-    # Loop through results
-	for ($i=0;$i<$news_count;$i++) {
+	# Loop through results
+	for ( $i = 0; $i < $news_count; $i++ ) {
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-		$v_headline 	= string_display_links( $v_headline );
-		$v_body 		= string_display_links( $v_body );
-		$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
 
 		# only show VS_PRIVATE posts to configured threshold and above
 		if ( ( VS_PRIVATE == $v_view_state ) &&
@@ -101,47 +98,12 @@
 			continue;
 		}
 
-		if ( VS_PRIVATE == $v_view_state ) {
-			$t_news_css = 'news-heading-private';
-		} else {
-			$t_news_css = 'news-heading-public';
-		}
-?>
-<br />
-<div align="center">
-<table class="width75" cellspacing="0">
-<tr>
-	<td class="<?php echo $t_news_css ?>">
-		<span class="bold"><?php echo $v_headline ?></span> -
-		<span class="italic-small"><?php echo $v_date_posted ?></span> -
-		<?php print_user( $v_poster_id ) ?>
-		<span class='small'>
-		<?php
-			if ( 1 == $v_announcement ) {
-				PRINT '[' . lang_get( 'announcement' ) . ']';
-			}
-		?>
-		<?php
-			if ( VS_PRIVATE == $v_view_state ) {
-				PRINT '[' . lang_get( 'private' ) . ']';
-			}
-		?>
-		</span>
-	</td>
-</tr>
-<tr>
-	<td class="news-body">
-		<?php echo $v_body ?>
-	</td>
-</tr>
-</table>
-</div>
-<?php
+		print_news_entry( $v_headline, $v_body, $v_poster_id, $v_view_state, $v_announcement, $v_date_posted );
+		echo '<br />';
 	}  # end for loop
 ?>
 
 <?php # Print NEXT and PREV links if necessary ?>
-<br />
 <div align="center">
 <?php
 	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
