@@ -6,6 +6,7 @@ Mantis
  * Added view by page feature.
  * Added edit new link in news update page.
  * Removed site_settings pages.
+ * Removed unused cookie varaibles.
 
 12.01.2001  -   0.16.1
 
