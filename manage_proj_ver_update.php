@@ -22,8 +22,8 @@
 			break;
 		}
 
-		$c_version = addslashes($f_version);
-		$c_orig_version = addslashes($f_orig_version);
+		$c_version		= addslashes($f_version);
+		$c_orig_version	= addslashes($f_orig_version);
 
 		$query2 = "UPDATE $g_mantis_bug_table
 				SET version='$f_version'

@@ -27,7 +27,7 @@
 				WHERE id='$c_id'";
 	$result = db_query( $query );
 	$t_bug_text_id = db_result( $result, 0, 0 );
-	
+
     if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) ) {
         $f_status = ASSIGNED;
     }
@@ -73,30 +73,38 @@
 	$c_description 				= string_prepare_textarea( $f_description );
 	$c_additional_information 	= string_prepare_textarea( $f_additional_information );
 
-	$c_status = (integer)$f_status;
-	$c_category = addslashes($f_category);
-	$c_severity = (integer)$f_severity;
-	$c_resolution = (integer)$f_resolution;
-	$c_projection = (integer)$f_projection;
-	$c_eta = (integer)$f_eta;
-	$c_priority = (integer)$f_priority;
-	$c_reproducibility = (integer)$f_reproducibility;
-	$c_status = (integer)$f_status;
-	$c_duplicate_id = (integer)$f_duplicate_id;
-	$c_handler_id = (integer)$f_handler_id;
-	$c_view_state = (integer)$f_view_state;
+	$c_status			= (integer)$f_status;
+	$c_category			= addslashes($f_category);
+	$c_severity			= (integer)$f_severity;
+	$c_resolution		= (integer)$f_resolution;
+	$c_projection		= (integer)$f_projection;
+	$c_eta				= (integer)$f_eta;
+	$c_priority			= (integer)$f_priority;
+	$c_reproducibility	= (integer)$f_reproducibility;
+	$c_status			= (integer)$f_status;
+	$c_duplicate_id		= (integer)$f_duplicate_id;
+	$c_handler_id		= (integer)$f_handler_id;
+	$c_view_state		= (integer)$f_view_state;
 
 	# Update all fields
     $query = "UPDATE $g_mantis_bug_table
-    		SET category='$c_category', severity='$c_severity',
+    		SET category='$c_category',
+    			severity='$c_severity',
     			reproducibility='$c_reproducibility',
-				priority='$c_priority', status='$c_status',
-				projection='$c_projection', duplicate_id='$c_duplicate_id',
-				resolution='$c_resolution', handler_id='$c_handler_id',
-				eta='$c_eta', summary='$c_summary',
-				os='$c_os', os_build='$c_os_build',
-				platform='$c_platform', build='$c_build',
-				version='$c_version', view_state='$c_view_state'
+				priority='$c_priority',
+				status='$c_status',
+				projection='$c_projection',
+				duplicate_id='$c_duplicate_id',
+				resolution='$c_resolution',
+				handler_id='$c_handler_id',
+				eta='$c_eta',
+				summary='$c_summary',
+				os='$c_os',
+				os_build='$c_os_build',
+				platform='$c_platform',
+				build='$c_build',
+				version='$c_version',
+				view_state='$c_view_state'
     		WHERE id='$c_id'";
    	$result = db_query($query);
 

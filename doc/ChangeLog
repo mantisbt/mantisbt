@@ -14,6 +14,8 @@ Mantis
  * Updated Hungarian localization.
  * Updated Russian localization.
  * Updated Romanian localization.
+ * Modified input checked varaibles to be prefixed by $c_.
+ * Reworked code formating for $c_ variables.
 
 2002.05.19  -  0.17.3
 

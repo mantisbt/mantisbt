@@ -14,6 +14,7 @@
 	# updates the last_updated field
 	function bug_date_update( $p_bug_id ) {
 		global $g_mantis_bug_table;
+
 		$c_bug_id = (integer)$p_bug_id;
 
 		$query = "UPDATE $g_mantis_bug_table
@@ -25,6 +26,7 @@
 	# updates the last_modified field
 	function bugnote_date_update( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table;
+
 		$c_bugnote_id = (integer)$p_bugnote_id;
 
 		$query = "UPDATE $g_mantis_bugnote_table
@@ -37,6 +39,7 @@
 	function get_bug_field( $p_bug_id, $p_field_name ) {
 		global 	$g_string_cookie_val,
 				$g_mantis_bug_table;
+
 		$c_bug_id = (integer)$p_bug_id;
 
 		# get info
@@ -76,6 +79,7 @@
 	# otherwise let execution continue undisturbed
 	function check_bug_exists( $p_bug_id ) {
 		global $g_mantis_bug_table, $g_main_page;
+
 		$c_bug_id = (integer)$p_bug_id;
 
 		$query = "SELECT *
@@ -92,6 +96,7 @@
 	# otherwise let execution continue undisturbed
 	function check_bugnote_exists( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table, $g_main_page;
+
 		$c_bugnote_id = (integer)$p_bugnote_id;
 
 		$query = "SELECT *
@@ -108,6 +113,7 @@
 	# otherwise let execution continue undisturbed
 	function check_user_exists( $p_user_id ) {
 		global $g_mantis_user_table, $g_main_page;
+
 		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT *
@@ -124,6 +130,7 @@
 	# otherwise let execution continue undisturbed
 	function check_project_exists( $p_project_id ) {
 		global $g_mantis_project_table, $g_main_page;
+
 		$c_project_id = (integer)$p_project_id;
 
 		$query = "SELECT COUNT(*)
@@ -155,8 +162,9 @@
 	# retrieve the number of open assigned bugs to a user in a project
 	function get_assigned_open_bug_count( $p_project_id, $p_cookie_str ) {
 		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
-		$c_project_id = (integer)$p_project_id;
-		$c_cookie_str = addslashes($p_cookie_str);
+
+		$c_project_id	= (integer)$p_project_id;
+		$c_cookie_str	= addslashes($p_cookie_str);
 
 		$query = "SELECT id
 				FROM $g_mantis_user_table
@@ -180,8 +188,9 @@
 	# retrieve the number of open reported bugs by a user in a project
 	function get_reported_open_bug_count( $p_project_id, $p_cookie_str ) {
 		global $g_mantis_bug_table, $g_mantis_user_table, $g_project_cookie_val;
-		$c_project_id = (integer)$p_project_id;
-		$c_cookie_str = addslashes($p_cookie_str);
+
+		$c_project_id	= (integer)$p_project_id;
+		$c_cookie_str	= addslashes($p_cookie_str);
 
 		$query = "SELECT id
 				FROM $g_mantis_user_table
@@ -311,6 +320,7 @@
 	# Get the default project of a user
 	function get_default_project( $p_user_id ) {
 		global $g_mantis_user_pref_table;
+
 		$c_user_id = (integer)$p_user_id;
 
 		$query = "SELECT default_project
@@ -366,6 +376,7 @@
 	# Returns the number of bugntoes for the given bug_id
 	function get_bugnote_count( $p_id ) {
 		global $g_mantis_bugnote_table;
+
 		$c_id = (integer)$p_id;
 
 		$query = "SELECT COUNT(*)
@@ -378,6 +389,7 @@
 	# Returns the number of bugntoes for the given bug_id
 	function get_bugnote_field( $p_bugnote_id, $p_field_name ) {
 		global $g_mantis_bugnote_table;
+
 		$c_bugnote_id = (integer)$p_bugnote_id;
 
 		$query = "SELECT $p_field_name
@@ -401,6 +413,7 @@
 	# Returns the specified field of the project
 	function get_project_field( $p_project_id, $p_field_name ) {
 		global $g_mantis_project_table;
+
 		$c_project_id = (integer)$p_project_id;
 
 		$query = "SELECT $p_field_name

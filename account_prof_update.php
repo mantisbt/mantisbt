@@ -21,8 +21,8 @@
 		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
 	}
 
-	$c_user_id = (integer)get_current_user_field( "id" );
-	$c_id = (integer)$f_id;
+	$c_user_id	= (integer)get_current_user_field( "id" );
+	$c_id		= (integer)$f_id;
 
 	# " character poses problem when editting so let's just convert them
 	$c_platform		= string_prepare_text( $f_platform );

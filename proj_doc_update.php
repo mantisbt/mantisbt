@@ -9,8 +9,8 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
-	$c_id = (integer)$f_id;
 
+	$c_id			= (integer)$f_id;
 	$c_title 		= string_prepare_text( $f_title );
 	$c_description 	= string_prepare_textarea( $f_description );
 

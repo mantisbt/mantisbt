@@ -21,8 +21,8 @@
 			break;
 		}
 
-		$c_category = addslashes($f_category);
-		$c_orig_category = addslashes($f_orig_category);
+		$c_category			= addslashes($f_category);
+		$c_orig_category	= addslashes($f_orig_category);
 
 		$query = "UPDATE $g_mantis_bug_table
 				SET category='$c_category'

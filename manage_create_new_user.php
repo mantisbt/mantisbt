@@ -46,10 +46,10 @@
 	}
 
 	# create the almost unique string for each user then insert into the table
-	$t_cookie_string = create_cookie_string();
-	$t_password = process_plain_password( $f_password );
-	$c_email = addslashes($f_email);
-	$c_access_level = (integer)$f_access_level;
+	$t_cookie_string	= create_cookie_string();
+	$t_password			= process_plain_password( $f_password );
+	$c_email			= addslashes($f_email);
+	$c_access_level		= (integer)$f_access_level;
 
     $query = "INSERT
     		INTO $g_mantis_user_table

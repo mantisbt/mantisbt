@@ -11,8 +11,8 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_access( REPORTER );
-	$c_id = (integer)$f_id;
-	$c_vote = (integer)$f_vote;
+	$c_id	= (integer)$f_id;
+	$c_vote	= (integer)$f_vote;
 
 	# increase vote count and update in table
 	$f_vote++;

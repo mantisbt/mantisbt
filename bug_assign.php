@@ -19,6 +19,7 @@
 	project_access_check( $f_id );
 	check_access( DEVELOPER );
 	check_bug_exists( $f_id );
+
 	$c_id = (integer)$f_id;
 
     $t_ass_val = ASSIGNED;

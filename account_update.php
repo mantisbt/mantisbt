@@ -26,9 +26,9 @@
 	$result = 0;
 	if ( OFF == $f_protected ) {
 
-	$c_username = addslashes($f_username);
-	$c_email = addslashes($f_email);
-	$c_id = (integer)$f_id;
+		$c_username	= addslashes($f_username);
+		$c_email	= addslashes($f_email);
+		$c_id		= (integer)$f_id;
 
 		# Update everything except password
 	    $query = "UPDATE $g_mantis_user_table

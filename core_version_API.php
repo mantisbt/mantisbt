@@ -12,9 +12,10 @@
 	# we do it this way because each different project can have the same category names
 	function is_duplicate_version( $p_project_id, $p_version, $p_date_order='0' ) {
 		global $g_mantis_project_version_table;
-		$c_project_id = (integer)$p_project_id;
-		$c_version = addslashes($p_version);
-		$c_date_order = addslashes($p_date_order);
+
+		$c_project_id	= (integer)$p_project_id;
+		$c_version		= addslashes($p_version);
+		$c_date_order	= addslashes($p_date_order);
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_version_table
@@ -32,8 +33,9 @@
 	# --------------------
 	function version_add( $p_project_id, $p_version ) {
 		global $g_mantis_project_version_table;
-		$c_project_id = (integer)$p_project_id;
-		$c_version = addslashes($p_version);
+
+		$c_project_id	= (integer)$p_project_id;
+		$c_version		= addslashes($p_version);
 
 		$query = "INSERT
 				INTO $g_mantis_project_version_table
@@ -45,10 +47,11 @@
 	# --------------------
 	function version_update( $p_project_id, $p_version, $p_date_order, $p_orig_version ) {
 		global $g_mantis_project_version_table;
-		$c_project_id = (integer)$p_project_id;
-		$c_version = addslashes($p_version);
-		$c_date_order = addslashes($p_date_order);
-		$c_orig_version = addslashes($p_orig_version);
+
+		$c_project_id	= (integer)$p_project_id;
+		$c_version		= addslashes($p_version);
+		$c_date_order	= addslashes($p_date_order);
+		$c_orig_version	= addslashes($p_orig_version);
 
 		$query = "UPDATE $g_mantis_project_version_table
 				SET version='$c_version',
@@ -60,8 +63,9 @@
 	# --------------------
 	function version_delete( $p_project_id, $p_version ) {
 		global $g_mantis_project_version_table;
-		$c_project_id = (integer)$p_project_id;
-		$c_version = addslashes($p_version);
+
+		$c_project_id	= (integer)$p_project_id;
+		$c_version		= addslashes($p_version);
 
 		$query = "DELETE
 				FROM $g_mantis_project_version_table
@@ -73,6 +77,7 @@
 	# return all categories for the specified project id
 	function version_get_all( $p_project_id ) {
 		global $g_mantis_project_version_table;
+
 		$c_project_id = (integer)$p_project_id;
 
 		$query = "SELECT version, date_order

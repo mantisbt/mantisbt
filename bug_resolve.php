@@ -16,9 +16,9 @@
 	check_access( DEVELOPER );
 	check_bug_exists( $f_id );
 
-	$c_id = (integer)$f_id;
-	$c_resolution = (integer)$f_resolution;
-	$c_duplicate_id = (integer)$f_duplicate_id;
+	$c_id			= (integer)$f_id;
+	$c_resolution	= (integer)$f_resolution;
+	$c_duplicate_id	= (integer)$f_duplicate_id;
 
 	$t_handler_id = get_current_user_field( "id" );
 

@@ -14,10 +14,11 @@
 	project_access_check( $f_id );
 	check_access( REPORTER );
 
-	$f_bugnote_text = $f_bugnote_text."\n\n";
-	$f_bugnote_text = $f_bugnote_text.$s_edited_on.date( $g_normal_date_format );
-	$c_bugnote_text = string_prepare_textarea( $f_bugnote_text );
-	$c_bugnote_text_id = (integer)$f_bugnote_text_id;
+	$f_bugnote_text		= $f_bugnote_text."\n\n";
+	$f_bugnote_text		= $f_bugnote_text.$s_edited_on.date( $g_normal_date_format );
+	$c_bugnote_text		= string_prepare_textarea( $f_bugnote_text );
+	$c_bugnote_text_id	= (integer)$f_bugnote_text_id;
+
     $query = "UPDATE $g_mantis_bugnote_text_table
     		SET note='$c_bugnote_text'
     		WHERE id='$c_bugnote_text_id'";

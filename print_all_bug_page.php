@@ -45,7 +45,7 @@
 	$f_end_month 			= $t_setting_arr[14];
 	$f_end_day				= $t_setting_arr[15];
 	$f_end_year				= $t_setting_arr[16];
-	
+
 	# Clean input
 	$c_offset 				= (integer)$f_offset;
 	$c_user_id				= (integer)$f_user_id;
@@ -56,7 +56,12 @@
 	$c_search				= addslashes($f_search);
 	$c_sort					= addslashes($f_sort);
 	$c_limit_view			= (integer)$f_limit_view;
-	if ($f_dir == 'DESC') $c_dir = 'DESC'; else $c_dir = 'ASC';
+
+	if ('DESC' == $f_dir) {
+		$c_dir = 'DESC';
+	} else {
+		$c_dir = 'ASC';
+	}
 
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&

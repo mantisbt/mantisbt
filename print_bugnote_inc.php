@@ -10,8 +10,8 @@
 ?>
 <?php
 	# grab the user id currently logged in
-	$t_user_id = get_current_user_field( "id " );
-	$c_id = (integer)$f_id;
+	$t_user_id	= get_current_user_field( "id " );
+	$c_id		= (integer)$f_id;
 
 	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
