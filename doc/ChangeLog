@@ -18,6 +18,7 @@ Mantis ChangeLog
  * Fix #2626: $g_primary_table_tags is documented and in config files but never used 
  * Fix #2839: 'Join incorrect in print_reporter_options and print_assign_to_option_list'
  * Fix #2902: Project name is not printed on bug list report.
+ * Fix #2953: 'View all bugs page empty'.  We now disabled compression if zlib isn't available to php.  See notes in the config_defaults_inc.php for information on enabling zlib on Windows.
  * Fix #3011: 'Hide resolved' flag is now preserved when re-sorting bug list.
  * Fix #3019: Application Error 200 after updating a bug.
  * Fix #3020: Error when deleting a bug with bugnotes.
@@ -27,7 +28,6 @@ Mantis ChangeLog
  * Fix #3050: Setting Assigned To to null causes Status to change to assigned
  * Fix #3055: (Non-email) URLs containing '@' characters are now linked correctly.
  * Fix #3058: Clicking on view_all_bug_page.php results in 'file download' popup.
- * Fix #2953: 'View all bugs page empty'.  We now disabled compression if zlib isn't available to php.  See notes in the config_defaults_inc.php for information on enabling zlib on Windows.
 	
 2003.02.26  -  0.18.0a3
 
