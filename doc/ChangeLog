@@ -8,12 +8,14 @@ Mantis
  * Fixed summary stats for developers when they are assigned with "developer" rights at a project and do not have default profile >="developer".
  * Fixed reporter poplist filter in buglist when users are assigned >="reporter" at a project and do not have default profile >="reporter".
  * Fixed summary page for "All projects" option
+ * Fixed printable buglist for "All projects" option
  * Fixed document links (ChangeLog, README, etc.)
  * Fixed problem where portuguese_brazil localization did not appear correctly.
  * Removed site_settings link in print_manage_doc_menu().
  * Modified edit user links to use the username instead of the [edit] link.
  * Modified edit project links to use the project name instead of the [edit] link.
  * Modified default/config_inc1.php to have more more css global variables.
+ * Added project name as supplementary info next to bug id in buglist for "All projects" option
 
 01.23.2002  -   0.17.0
 
