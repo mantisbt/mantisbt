@@ -120,7 +120,7 @@
 		<?php echo $v_platform ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -137,7 +137,7 @@
 		<?php echo $v_os ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -154,7 +154,7 @@
 		<?php echo $v_os_build ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -171,7 +171,7 @@
 		<?php echo $v_version ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -188,7 +188,7 @@
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -205,7 +205,7 @@
 		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -216,7 +216,7 @@
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
 	<td class="print" colspan="4">&nbsp;
-		
+
 	</td>
 </tr>
 <tr>
@@ -306,7 +306,7 @@
 				}
 
 				if ( $i != ($num_files - 1) ) {
-					PRINT '<br>';
+					PRINT '<br />';
 				}
 			}
 		?>

@@ -20,7 +20,7 @@
 		header('Content-Type: application/msword');
 		header('Content-Disposition: attachment; filename="' . $t_export_title . '.doc"');
 	}
-	
+
 	# check to see if the cookie does not exist
 	if ( empty( $g_view_all_cookie_val ) ) {
 		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
@@ -183,7 +183,7 @@
 	# perform query
     $result = db_query( $query );
 	$row_count = db_num_rows( $result );
-	
+
 ?>
 
 <?php # Word Export ?>
@@ -195,10 +195,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <?php print_head_bottom() ?>
 <?php print_body_top() ?>
 
-<?php 
+<?php
 	//$t_bug_arr_sort[$row_count]=-1;
 	$f_bug_arr = explode_enum_string( $f_export );
-	
+
 	# $t_bug_arr_sort contains 1 if the field as been selected, 0 if not
 	for($i=0; $i < $row_count; $i++) {
 		if ( isset($f_bug_arr[$i]) ) {
@@ -206,16 +206,16 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			$t_bug_arr_sort[$index]=1;
 		}
 	}
-	 
+
 	for($j=0; $j < $row_count; $j++) {
-	
+
 		# prefix bug data with v_
 		$row = db_fetch_array($result);
-		
+
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 		$v_summary = string_display( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
-	
+
 		# grab the bugnote count
 		$bugnote_count = get_bugnote_count( $v_id );
 
@@ -313,7 +313,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $v_platform ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -330,7 +330,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $v_os ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -347,7 +347,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $v_os_build ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -364,7 +364,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $v_version ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -381,7 +381,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -398,7 +398,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
 	<td class="print" colspan="2">&nbsp;
-		
+
 	</td>
 </tr>
 <tr class="print">
@@ -409,7 +409,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
 	<td class="print" colspan="4">&nbsp;
-		
+
 	</td>
 </tr>
 <tr>
@@ -479,10 +479,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $s_attached_files ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php					
+		<?php
 			$query5 = "SELECT *
 					FROM $g_mantis_bug_file_table
-					WHERE bug_id='$v_id'";         
+					WHERE bug_id='$v_id'";
 			$result5 = db_query( $query5 );
 			$num_files = db_num_rows( $result5 );
 			for ($i=0;$i<$num_files;$i++) {
@@ -499,7 +499,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 				}
 
 				if ( $i != ($num_files - 1) ) {
-					PRINT '<br>';
+					PRINT '<br />';
 				}
 			}
 		?>
@@ -527,7 +527,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo $s_no_bugnotes_msg ?>
 	</td>
 </tr>
-	<?php } 
+	<?php }
 		else { # print bugnotes ?>
 <tr>
 	<td class="form-title" colspan="2">
@@ -582,7 +582,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	</td>
 </tr>
 <?php
-		} # end for 
+		} # end for
 	} # end else
 ?>
 
@@ -592,7 +592,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 
 <?php
-echo '<BR><BR>';
+echo '<br /><br />';
 		} # end isset
 }  # end main loop
 ?>

@@ -50,7 +50,7 @@
 ?>
 <tr class="row-2">
 	<td colspan="2">
-		The password settings are controlled by your LDAP entry,<BR>
+		The password settings are controlled by your LDAP entry,<br />
 		hence cannot be edited here.
 	</td>
 </tr>
