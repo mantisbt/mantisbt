@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.26 2004-12-11 03:14:47 thraxisp Exp $
+	# $Id: graph_api.php,v 1.27 2004-12-14 22:16:07 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -112,33 +112,31 @@
 		$graph->yscale->SetGrace(10);
 
 		#adds on the same graph
-		$tot = new LinePlot($enum_name_count);
-        $tot->SetColor('black');
-        $tot->SetWeight(2);
-        $tot->mark->SetType(MARK_DIAMOND);
-
-		$tot->SetLegend( lang_get( 'legend_still_open' ) );
+		$tot = new BarPlot($enum_name_count);
+		$tot->SetFillColor('lightblue');
+		$tot->SetWidth(0.7);
+		$tot->SetLegend( lang_get( 'legend_total' ) );
 		$graph->Add($tot);
 
 		$p1 = new BarPlot($open_bug_count);
 		$p1->SetFillColor('yellow');
-		$p1->SetWidth(0.8);
+		$p1->SetWidth(1);
 		$p1->SetLegend( lang_get( 'legend_opened' ) );
 
 		$p2 = new BarPlot($closed_bug_count);
 		$p2->SetFillColor('blue');
-		$p2->SetWidth(0.8);
+		$p2->SetWidth(1);
 		$p2->SetLegend( lang_get( 'legend_closed' ) );
 
 		$p3 = new BarPlot($resolved_bug_count);
 		$p3->SetFillColor('red');
-		$p3->SetWidth(0.8);
+		$p3->SetWidth(1);
 		$p3->SetLegend( lang_get( 'legend_resolved' ) );
 
-	    $gbplot = new GroupBarPlot(array($p1,$p2,$p3));
-        $graph->Add($gbplot);
+		$gbplot = new GroupBarPlot(array($p1,$p3,$p2));
+		$graph->Add($gbplot);
 		if ( ON == config_get( 'show_queries_count' ) ) {
-			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique)' );
+			$graph->subtitle->Set( db_count_queries() . ' queries (' . db_count_unique_queries() . ' unique) (' . db_time_queries() . 'sec)' );
 		}
 		$graph->Stroke();
 
