@@ -4,6 +4,10 @@
 	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: main_page.php,v 1.31 2003-01-18 02:14:12 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# This is the first page a user sees when they login to the bugtracker

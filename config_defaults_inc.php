@@ -5,6 +5,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
+	# --------------------------------------------------------
+	# $Id: config_defaults_inc.php,v 1.57 2003-01-18 02:14:11 jfitzell Exp $
+	# --------------------------------------------------------
+
+	
 	###########################################################################
 	# CONFIGURATION VARIABLES
 	###########################################################################

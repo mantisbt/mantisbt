@@ -6,11 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.6 $
-	# $Author: jfitzell $
-	# $Date: 2003-01-08 02:44:39 $
-	#
-	# $Id: csv_export.php,v 1.6 2003-01-08 02:44:39 jfitzell Exp $
+	# $Id: csv_export.php,v 1.7 2003-01-18 02:14:12 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
