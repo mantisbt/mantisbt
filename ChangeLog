@@ -1,6 +1,6 @@
 Mantis
 
-11.xx.2001  -   0.16.0
+11.28.2001  -   0.16.0
 
  * Fixed minor HTML errors in core_html_API.php.
  * Fixed the view, report, and update pages to honor the forces advanced/simple modes.
@@ -13,10 +13,10 @@ Mantis
  * Modified config_inc.php to properly support all localized langauges.
  * Updated Korean localization.
  * Updated Polish localization.
+ * Updated Spanish localization.
  * Updated TROUBLESHOOTING file.
  * Added file_type field to mantis_bug_file_table and mantis_project_file_table.
  * Added LDAP login support.
- * Added CSV export support.
 
 11.04.2001  -   0.15.12
 
