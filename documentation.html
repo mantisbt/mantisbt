@@ -1,0 +1,383 @@
+<html>
+<head>
+<title>Mantis User Documentation</title>
+<style>
+body { background-color:<? echo $g_white_color ?>; font-family:Verdana, Arial; font-size=10pt }
+td {  font-family:Verdana, Arial; font-size=10pt }
+p {  font-family:Verdana, Arial; font-size=10pt }
+</style>
+</head>
+<body>
+
+<div align=center>
+	<h1>Mantis User Documentation</h1>
+	by Kenzaburo Ito (prescience@300baud.org)
+</div>
+
+<h2>Introduction and background</h2>
+
+<p>
+This is the Mantis user and system documentation.  Configuration and customization will be covered in another document
+<p>
+As this is the initial version of the specification and we
+want to get a working version ready, it doesn't have all the
+features we want or need. In the second part, some pages will
+have possible future features listed, in this form:
+<p>
+
+<h2>Part 1: Index</h2>
+
+Each major section is partitioned via the menu.  Every section is treated as a page; some pages have multiple actions or purposes.
+<p>
+<ul>
+<li><a href="#login">Login</a>
+<li><a href="#main">Main</a>
+<li><a href="#view_bugs">View Bugs</a>
+	<ul>
+	<li><a href="#view_bug_simple">View Bug Simple</a>
+	<li><a href="#view_bug_advanced">View Bug Advanced</a>
+	</ul>
+<li><a href="#editing_bugs">Editing Bugs</a>
+	<ul>
+	<li><a href="#delete_bug">Delete Bug</a>
+	<li><a href="#update_bug_simple">Update Bug Simple</a>
+	<li><a href="#update_bug_advanced">Update Bug Advanced</a>
+		<ul>
+		<li><a href="#add_vote">Add Vote</a>
+		</ul>
+	</ul>
+<li><a href="#bugnotes">Bugnotes</a>
+	<ul>
+	<li><a href="#add_bugnote">Add Bugnote</a>
+	<li><a href="#delete_bugnote">Delete Bugnote</a>
+	<li><a href="#reopen_bug">Reopen Bug</a>
+	</ul>
+<li><a href="#report_bug">Report Bug</a>
+	<ul>
+	<li><a href="#report_bug_simple">Report Bug Simple</a>
+	<li><a href="#report_bug_advanced">Report Bug Advanced</a>
+	</ul>
+<li><a href="#summary">Summary</a>
+<li><a href="#account">Account</a>
+	<ul>
+	<li><a href="#manage_profiles">Manage Profiles</a>
+	<li><a href="#change_preferences">Change Preferences</a>
+	</ul>
+<li><a href="#manage">Manage</a>
+	<ul>
+	<li><a href="#create_new_account">Create New Account</a>
+	<li><a href="#manage_categories">Manage Categories</a>
+	<li><a href="#manage_product_version">Manage Product Versions</a>
+	<li><a href="#documentation">Documentation</a>
+	</ul>
+<li><a href="#edit_news">Edit News</a>
+<li><a href="#logout">Logout</a>
+</ul>
+
+<p>
+<h2>Part 2: Pages</h2>
+
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=login>[ Login ]</a></h3>
+<p>
+This is the login page.  Just enter your username and password and hit the login button.  There is also a <u>Save Login</u> checkbox to have the package remember that you are logged in between browser sessions.  You will have to have cookies enabled to login.
+<p>
+If the account doesn't exist, the account is disabled, or the password is incorrect you will be forwarded to a re-login screen.
+
+<p>
+<i>*** Suggested feature</i>: <u>Session support</u> :
+<blockquote>
+This would allow those that dislike cookies or are behind very unfriendly firewalls/proxies to be able to use the package.  Sessions requires PHP4.
+</blockquote>
+
+<p>
+<i>*** Suggested feature</i>: <u>New account creation</u> :
+<blockquote>
+Let new users create their own accounts.  This would require an <a href="#email_module">email module</a> to work.  The email module would mail the new user a randomly generated password.  This can, of course, be changed after login.
+</blockquote>
+
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=main>[ Main ]</a></h3>
+<p>
+This is the first page you see upon logging in.  It shows you the latest news updates for the bugtracker.  This is a simple news module (based off of work by Scott Roberts) and is to keep users abreast of changes in the bugtracker or even project.
+<p>
+The number of news posts is controlled by a package global.  When the number of posts is more than the limit a link to show "older news" is displayed at the bottom.  Similarly a "newer news" is displayed when you have clicked on "older news".
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=view_bugs>[ View Bugs ]</a></h3>
+<p>
+Here we can view the bug listings.  The page has a set of viewing filters at the top and the bugs are listed below.
+<p>
+<h5>Filters</h5>
+<p>
+The filters control the behavior of the Bug List.  In order from left to right is:
+
+<ul>
+	<li>category
+	<li>severity
+	<li>status
+	<li>show - show only XYZ bugs
+	<li>changed(hrs) - highlight threshold for updated column.  6 means highlight (in bold) all bugs updated within the last 6 hours.
+</ul>
+
+<p>
+If the number of bugs exceeds the "Show" count in the filter a link for the "Next XYZ" bugs will be displayed at the bottom.  Appropriate "Prev XYZ" bug links will also be displayed.
+<p>
+<h5>Bug List</h5>
+<p>
+The bugs are listed in a table and the attributes are listed in the following order: id, number of bugnotes, category, severity, status, last updated, and summary.  Each (except for number of bugnotes) can be clicked on to sort by that column.  Clicking again will reverse the direction of the sort.  The default is to sort by id in descending order.
+
+<p>
+<i>*** Suggested feature</i>: <u>Use glyphs to show sort direction</u> :
+<blockquote>
+A little glyph/bitmap would be a good way to indicate which column the bugs are being sorted by and in what direction.
+</blockquote>
+
+<p>
+The bug id is made into a link that leads to a more detailed report about the bug.  Depending on what you have set in your <a href="#change_preferences">Account Preferences</a> you will be sent to the simple or advanced view.  You can also <a href="#add_bugnotes">add bugnotes</a> here.
+<p>
+The text in the "Severity" column will be bold if the severity is major, crash, or block and the bug not resolved.
+<p>
+The text in the "Updated" column will be bold if the bug has changed in the last "Changed(hrs)" field which is specified in the viewing filters.
+<p>
+Each table row is color coded according to the bug status.  Here is an explanation of the default colorings:
+
+<ul>
+	<li>red: new - bug is new
+	<li>purple: feedback - bug requires more feedback before work can proceed
+	<li>orange: acknowledged - lets the user know that the bug has been examined but probably not by the proper developer
+	<li>yellow: confirmed - bug has been confirmed by an updater or developer
+	<li>blue: assigned - bug is currently being worked on by a developer
+	<li>gray: resolved - bug is closed
+	<li>light gray: resolved - bug is closed
+</ul>
+
+<p>
+<blockquote>
+<h4><a name=view_bug_simple>[ View Bug Simple ]</a></h4>
+<p>
+Here is the simple listing of the bug report.  Most of the fields are self-explanatory.  "Assigned To" will contain the developer assigned to handle the bug.  Priority is fully functional but currently does nothing of importance.  Duplicate ID is used when a bug is a duplicate of another.  It links to the duplicate bug which allows users to read up on the original bug report.
+<p>
+Users with an access level of Updater, Developer and Administrator can also <a href="#editing_bugs">Update Bug</a> or <a href="#delete_bug">Delete Bug</a>.  It is recommended against deleting bugs unless the bug is frivolous.  Instead bugs should be set to resolved and an appropriate resolution category chosen.
+<p>
+At the bottom of the bug report are any attached <a href="#bugnotes">Bugnotes</a>.  Only users with Viewer access are precluded from adding <a href="#bugnotes">Bugnotes</a>.
+<p>
+If the bug is resolved then there will be a <a href="#reopen_bug">Reopen Bug</a> button instead of an <a href="#add_bugnote">Add Bugnote</a> button.
+
+<p>
+<h4><a name=view_bug_advanced>[ View Bug Advanced ]</a></h4>
+<p>
+The Advanced View is much the same as the Simple View with a few additional fields.  Here you can see Projection, ETA, Votes (all which currently have no real effect), Platform, OS, OSBuild, Product Version, Product Build, and Steps to Reproduce.  There is also an <a href="#add_vote">Add Vote</a> button.
+<p>
+	<blockquote>
+	<h4><a name=add_vote>[ Add Vote ]</a></h4>
+	<p>
+	This increases the vote tally.  There is currently no IP spam protection for vote adding.  The idea behind the vote counter is to have duplicate reports instead increase the vote count.  As the number of reports increase the relative importance of the bug becomes clear.  This is somewhat useful in prioritizing the order in which to give attention to bugs.  NOTE: currently there is very little feedback given to developers about vote count.
+	<p>
+	</blockquote>
+</blockquote>
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=editing_bugs>[ Editing Bugs ]</a></h3>
+<p>
+These options are only available to Updaters, Developers, and Administrators.
+<blockquote>
+<h4><a name=delete_bug>[ Delete Bug ]</a></h4>
+<p>
+This option on the <a href="#view_bug">View Bugs</a> page allows you to delete an existing bug.  This should only be used on frivolous or test bugs.  A confirmation screen will prompt you if you really want to delete the bug.
+<p>
+<h4><a name=update_bug_simple>[ Update Bug Simple ]</a></h4>
+<p>
+Here you can update various bug fields.  The Category, Severity, and Reproducibility fields are editable but shouldn't be unless there is a gross miscategorization.
+<p>
+Also modifiable are the Assigned To, Priority, Projection, ETA, Resolution, and Duplicate ID fields.
+
+<p>
+<i>*** Suggested feature</i>: <u>force a dialog when closing a bug</u> :
+<blockquote>
+Closing a bug (setting to resolved) should check to see if the proper resolution is selected and also force the user to add a note on the closure.
+</blockquote>
+
+<p>
+<h4><a name=update_bug_advanced>[ Update Bug Advanced ]</a></h4>
+<p>
+Projection and ETA are the only current fields that are unique and modifiable to Update Bug Advanced.
+<p>
+</blockquote>
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=bugnotes>[ Bugnotes ]</a></h3>
+<p>
+Everyone except Viewers can add and delete bugnotes.  If the bug is closed then you cannot <a href="#add_bugnote">Add Bugnotes</a>.  You will have to <a href="#reopen_bug">Reopen Bug</a> before you can add another bugnote.
+<p>
+<i>*** Suggested feature</i>: <u>limit delete access</u> :
+<blockquote>
+Currently anyone can delete another person's bugnotes.  Only administrators should have this capability.
+</blockquote>
+<p>
+<blockquote>
+<h4><a name=add_bugnote>[ Add Bugnote ]</a></h4>
+<p>
+Type in what additional notes.  Line breaks are preserved (converted to &lt;br&gt;) and no html is allowed.
+<p>
+<h4><a name=delete_bugnote>[ Delete Bugnote ]</a></h4>
+<p>
+Just click on the Delete link to remove an unwanted bugnote.  There is no confirmation screen.
+<p>
+<h4><a name=reopen_bug>[ Reopen Bug ]</a></h4>
+<p>
+If the bug is currently resolved you can use this to reopen the bug.  Then you will be allowed to enter bugnotes.  The bug will automatically be put into Feedback status.
+<p>
+</blockquote>
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=report_bug>[ Report Bug ]</a></h3>
+<p>
+Here you can report new bugs.  Depending on your <a href="#change_preferences">Account Preferences</a> you will be sent to the advanced or simple report forms.  Newly reported bugs are, naturally, put into the new bug status.
+
+<p>
+<blockquote>
+<h4><a name=report_bug_simple>[ Report Bug Simple ]</a></h4>
+<p>
+The simple form lets you report the category, reproducibility, severity, summary, description, and additional information category.  All but Additional information are *required* fields.
+<p>
+Summary should be a short, one sentence description of the problem.  It has a limit of 128 characters.
+<p>
+
+<p>
+<h4><a name=report_bug_advanced>[ Report Bug Advanced ]</a></h4>
+<p>
+The advanced form has, of course, more fields to fill in than the simple version.  It has, in addition to the simple form fields, an option to choose between choosing an existing <a href="#manage_profiles">Account Profile</a> or filling in the computer platform, operating system, and operating system version/build, product version, product build, and steps to reproduce.
+</blockquote>
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=summary>[ Summary ]</a></h3>
+<p>
+This shows a detailed summary of the state of the bugtracker according to several (hopefully) useful metrics.
+
+<p>
+<i>*** Suggested feature</i>: <u>Show reported/assigned bugs for logged in user</u> :
+<blockquote>
+Display a listing of the bugs that the user has reporter or has had assigned to him/her.
+</blockquote>
+
+<p>
+<i>*** Suggested feature</i>: <u>Show additional metrics</u> :
+<blockquote>
+Average time to close a bug; longest time open.
+</blockquote>
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=account>[ Account ]</a></h3>
+<p>
+This page allows the user to change his username, email, and password.  It also has subsections to Manage Profiles and Change Preferences.  If an admin has "protected" the account then the user is not allowed to change his username, email or password.  This is to allow single access public accounts (like a guest account).
+
+<blockquote>
+<h4><a name=manage_profiles>[ Manage Profiles ]</a></h4>
+<p>
+Here you can add new profiles.  This is useful when you don't want to keep re-entering your system configuration in the <a href="#advanced_bug_reports">Advanced Bug Reports</a>.  It allows for multiple bug reports for multiple system configurations.  There is a "Description" field for more details; however, it is currently unused.
+<p>
+You can also edit, set different profiles to be defaults and delete profiles.  To reset profiles to have no default just select the blank profile and choose "Make Default".
+<p>
+
+<p>
+<h4><a name=change_preferences>[ Change Preferences ]</a></h4>
+<p>
+This page allows the user to specify which page (simple or advanced) will be the default page when viewing a bug and reporting a bug.  You can reset the defaults with the "Reset Prefs" button.
+<p>
+Future user level default preferences will be implemented here.
+<p>
+</blockquote>
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=manage>[ Manage ]</a></h3>
+<p>
+This section is reserved exclusively for administrators.  The main Manage page shows a list of users and their relevant info.  Username, email, access level, enabled status, protected status, date created, and last visit.  From here the admin can choose to edit the user's info.
+<p>
+Also available are <a href="#create_new_account">Create New Account</a>, <a href="#report_bug">Report Bug</a>, <a href="#manage_product_version">Manage Product Version</a>, and <a href="#documentation">Documentation</a>
+
+<blockquote>
+<h4><a name=create_new_account>[ Create New Account ]</a></h4>
+<p>
+Create a new account in this section.  Default is to have the account enabled and set to reporter.
+
+<p>
+<i>*** Suggested feature</i>: <u>Random password generation and mailing</u> :
+<blockquote>
+Create a randomly generated password that would be mailed to the email specified.
+</blockquote>
+<p>
+
+<p>
+<h4><a name=manage_categories>[ Manage Categories ]</a></h4>
+<p>
+Here you can edit the categories.  They must be comma separated and enclosed in quotes.  You cannot have a blank entry for the categories.  If you delete a category that has been used before you will erase all bug category information in bug reports that were reported with that category (eg. if you remove 'bugtracker' then all existing bug reports that had category='bugtracker' will be blank).  They will not be affected if you merely add entries.
+<p>
+
+<p>
+<h4><a name=manage_product_version>[ Manage Product Version ]</a></h4>
+<p>
+Manage product version works just like <a href="#manage_categories">Manage Categories</a>.  This will be selectable from the Advanced Report section.
+<p>
+<h4><a name=documentation>[ Documentation ]</a></h4>
+<p>
+This is just a page with hard coded links to ChangeLog, README, INSTALL, UPGRADING, and CONFIGURATION.
+<p>
+</blockquote>
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=edit_news>[ Edit News ]</a></h3>
+<p>
+Developers and administrators are allowed to make news posts from this section.  These posts show up in the <a href="#main">Main</a> section.
+<p>
+Enter a headline and then the post.  Line breaks will be preserved (converted to &lt;br&gt; tags).  Do not put " in the headline.  It will be converted to a ' if you do.  This is because it screws up the Edit Post drop down list.
+<p>
+At the bottom you can either edit the selected post or delete it.  Default action, of course, is to edit the post.  You will be taken to a screen where you can edit the post.  If you choose delete then you will be taken to a page requiring confirmation.
+
+<p>
+<i>*** Suggested feature</i>: <u>Force safe strings by filtering</u> :
+<blockquote>
+Put more restrictive filtering on the news.  It's unlikely that a developer of admin would purposefully screw up things but it shouldn't be allowed.
+</blockquote>
+
+<p>
+<i>*** Suggested feature</i>: <u>Allow limited HTML in news posts</u> :
+<blockquote>
+Allow certain HTML tags in news post body.  Specifically &lt;A&gt;, &lt;B&gt;, &lt;I&gt;, &lt;U&gt;, and &lt;LI&gt;
+</blockquote>
+
+<!-- ---------------------------------------------------------------------- -->
+<p>
+<h3><a name=logout>[ Logout ]</a></h3>
+<p>
+This deletes the user cookie and redirects the user to a specified page (default is to redirect to the index page which redirects the user to the <a href="#login">Login</a> page)
+
+<p>
+<hr size=1>
+<p>
+
+<font size=-1>
+<b>ChangeLog</b>
+<p>
+
+<li>version 1.0  December 12, 2000 - Kenzaburo Ito (prescience@300baud.org)<br>
+<i>Initial creation</i>
+
+</font>
+<p>
+<hr size=1>
+
+</body>
+</html>
