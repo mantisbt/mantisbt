@@ -295,7 +295,6 @@
 			for ($i=0;$i<$num_files;$i++) {
 				$row = db_fetch_array( $result );
 				extract( $row, EXTR_PREFIX_ALL, 'v2' );
-				$v2_diskfile = str_replace( $DOCUMENT_ROOT, '', $v2_diskfile );
 				$v2_filesize = round( $v2_filesize / 1024 );
 				$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
 
