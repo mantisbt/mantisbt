@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.130 $
+	# $Revision: 1.131 $
 	# $Author: int2str $
-	# $Date: 2003-03-10 11:51:30 $
+	# $Date: 2003-03-12 18:27:13 $
 	#
-	# $Id: strings_english.txt,v 1.130 2003-03-10 11:51:30 int2str Exp $
+	# $Id: strings_english.txt,v 1.131 2003-03-12 18:27:13 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -799,6 +799,10 @@
 	$s_search ='Search';
 	$s_view_prev_link = 'View Prev';
 	$s_view_next_link = 'View Next';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'View Simple';

@@ -177,7 +177,7 @@
 <!-- Navigation header row -->
 <tr>
 	<!-- Viewing range info -->
-	<td class="form-title" colspan="<?php echo $col_count ?>">
+	<td class="form-title" colspan="<?php echo $col_count - 2; ?>">
 		<?php echo lang_get( 'viewing_bugs_title' ) ?>
 		<?php
 			if ( sizeof( $rows ) > 0 ) {
@@ -192,19 +192,20 @@
 
 		<!-- Print and Export links -->
 		<span class="small">
-		<?php
-			print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
-			echo '&nbsp;';
-			print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
-		?>
+			<?php
+				print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
+				echo '&nbsp;';
+				print_bracket_link( 'csv_export.php', lang_get( 'csv_export' ) );
+			?>
 		</span>
 		<!-- end Print and Export links -->
-
 	</td>
 
 	<!-- Page number links -->
-	<td class="right">
-		<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number ) ?>
+	<td class="right" colspan="2">
+		<span class="small">
+			<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number ) ?>
+		</span>
 	</td>
 </tr>
 <!-- Bug list column header row -->
@@ -404,42 +405,25 @@
 <!-- ====================== end of BUG LIST ========================= -->
 
 <!-- ====================== MASS BUG MANIPULATION ========================= -->
-<tr>
-	<td colspan="<?php echo $col_count ?>">
-		<select name="action">
-			<?php print_all_bug_action_option_list() ?>
-		</select>
-		<input type="submit" value="<?php echo 'OK';  ?>" />
-	</td>
-</tr>
+	<tr>
+		<td colspan="<?php echo $col_count-2 ?>">
+			<select name="action">
+				<?php print_all_bug_action_option_list() ?>
+			</select>
+			<input type="submit" value="<?php echo 'OK';  ?>" />
+		</td>
+		<!-- Page number links -->
+		<td class="right" colspan="2">
+			<span class="small">
+				<?php print_page_links( 'view_all_bug_page.php', 1, $t_page_count, $f_page_number ) ?>
+			</span>
+		</td>
+	</tr>
 <!-- ====================== end of MASS BUG MANIPULATION ========================= -->
 </table>
 </form>
 
 <?php mark_time( 'end loop' ); ?>
-
-<!-- ======================= NEXT / PREV LINKS ======================= -->
-<br />
-<div align="center">
-<?php
-	# print the [ prev ] link
-	if ($f_page_number > 1) {
-		$t_prev_page_number = $f_page_number - 1;
-		print_bracket_link( 'view_all_bug_page.php?page_number='.$t_prev_page_number, lang_get( 'view_prev_link' ).' '.$t_filter['per_page'] );
-	} else {
-		print_bracket_link( '', lang_get( 'view_prev_link' ).' '.$t_filter['per_page'] );
-	}
-
-	# print the [ next ] link
-	if ($f_page_number < $t_page_count) {
-		$t_next_page_number = $f_page_number + 1;
-		print_bracket_link( 'view_all_bug_page.php?page_number='.$t_next_page_number, lang_get( 'view_next_link' ).' '.$t_filter['per_page'] );
-	} else {
-		print_bracket_link( '', lang_get( 'view_next_link' ).' '.$t_filter['per_page'] );
-	}
-?>
-</div>
-<!-- ======================= end of NEXT / PREV LINKS ======================= -->
 
 <?php
 	if ( STATUS_LEGEND_POSITION_BOTTOM == config_get( 'status_legend_position' ) ) {
