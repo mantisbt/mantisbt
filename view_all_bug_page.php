@@ -126,6 +126,29 @@
 		}
 	}
 
+	# date values
+	/*if ( !isset( $f_start_month ) ) {
+		$f_start_month = date( "m" );
+	}
+	if ( !isset( $f_end_month ) ) {
+		$f_end_month = date( "m" );
+	}
+	if ( !isset( $f_start_day ) ) {
+		$f_start_day = 1;
+	}
+	if ( !isset( $f_end_day ) ) {
+		$f_end_day = date( "d" );
+	}
+	if ( !isset( $f_start_year ) ) {
+		$f_start_year = date( "Y" );
+	}
+	if ( !isset( $f_end_year ) ) {
+		$f_end_year = date( "Y" );
+	}
+	if ( !isset( $f_status ) ) {
+		$f_status = "open";
+	}*/
+
 	# Build the query string based on the user's viewing criteria.
 	# Build the query up in sections, because two queries need to
 	# be performed.
