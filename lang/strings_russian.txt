@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: vboctor $
-	# $Date: 2004-07-12 22:11:21 $
+	# $Date: 2004-07-18 15:22:05 $
 	#
-	# $Id: strings_russian.txt,v 1.59 2004-07-12 22:11:21 vboctor Exp $
+	# $Id: strings_russian.txt,v 1.60 2004-07-18 15:22:05 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -70,11 +70,11 @@ $s_bug_relationships = 'Связи';
 $s_empty_password_sure_msg = 'У пользователя пустой пароль. Вы уверены, что хотите этого?';
 $s_empty_password_button = 'Использовать пустой пароль';
 
-$s_duplicate_of = 'дубликат %id';
-$s_has_duplicate = 'имеет дубликат %id';
-$s_related_to = 'связан с %id';
-$s_dependant_on = 'зависит от %id';
-$s_blocks = 'блокирует %id';
+$s_duplicate_of = "имеет дубликаты";
+$s_has_duplicate = "дубликаты";
+$s_related_to = "связано с";
+$s_dependant_on = "родитель";
+$s_blocks = "блокирует";
 
 $s_new_bug = 'Новое обращение';
 $s_bugnote_added = 'Комментарий добавлен';
@@ -275,6 +275,7 @@ $s_email_notification_title_for_action_bug_submitted = 'Это обращение было ДОБАВ
 $s_email_notification_title_for_action_bug_assigned = 'Это обращение было НАЗНАЧЕНО.';
 $s_email_notification_title_for_action_bug_reopened = 'Это обращение было ОТКРЫТО ЗАНОВО.';
 $s_email_notification_title_for_action_bug_deleted = 'Это обращение было УДАЛЕНО';
+$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = 'Это обращение было ПРОФИНАНСИРОВАНО';
 $s_email_notification_title_for_action_sponsorship_updated = 'Финансирование этого обращения было изменено.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'Финансирование этого обращения отменено.';
@@ -1002,11 +1003,5 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ВНИМАНИЕ!</b>. Не все
 $s_create_child_bug_button = "Добавить потомка";
 $s_bug_cloned_to = "Обращение клонировано";
 $s_bug_created_from = "Обращение создано из";
-
-$s_duplicate_of = "имеет дубликаты";
-$s_has_duplicate = "дубликаты";
-$s_related_to = "связано с";
-$s_dependant_on = "родитель";
-$s_blocks = "блокирует";
 # MASC RELATIONSHIP
 ?>

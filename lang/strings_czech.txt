@@ -14,11 +14,11 @@
   	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.54 $
+	# $Revision: 1.55 $
 	# $Author: vboctor $
-	# $Date: 2004-07-14 22:36:11 $
+	# $Date: 2004-07-18 15:22:04 $
 	#
-	# $Id: strings_czech.txt,v 1.54 2004-07-14 22:36:11 vboctor Exp $
+	# $Id: strings_czech.txt,v 1.55 2004-07-18 15:22:04 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -221,6 +221,12 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'CHYBA: Øídící n
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'CHYBA: Nepovolený pøístup: Pøidìlení sponzorovaného problému vy¾aduje vy¹¹í pøístupovou úroveò.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'CHYBA: Konfiguraèní volba \'%s\' má nedovolenou hodnotu \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'CHYBA: Tato akce nemù¾e být uskuteènìna, proto¾e problém \'%d\' je ve stavu JEN ÈTENÍ';
+# MASC RELATIONSHIP
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERROR: an issue can't be related to it self.";
+# MASC RELATIONSHIP
 
 $s_login_error = 'CHYBA: vá¹ úèet je zablokován nebo jste zadali chybnou kombinaci login/heslo.';
 $s_login_cookies_disabled = 'CHYBA: Vá¹ prohlí¾eè buï neumí nebo odmítá pracovat s cookies.';
@@ -275,11 +281,18 @@ $s_email_notification_title_for_action_bug_submitted = 'Následující problém byl 
 $s_email_notification_title_for_action_bug_assigned = 'Následující problém byl PØIØAZEN.';
 $s_email_notification_title_for_action_bug_reopened = 'Následující problém byl ZNOVUOTEVØEN.';
 $s_email_notification_title_for_action_bug_deleted = 'Následující problém byl ZRU©EN.';
+$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
 $s_email_notification_title_for_action_sponsorship_added = 'Následující problém je SPONZOROVÁN.';
 $s_email_notification_title_for_action_sponsorship_updated = 'Sponzoring tohoto problému byl zmìnìn.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'Sponzoring tohoto problému byl uzavøen.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'K problému byla pøidána poznámka.';
+# MASC RELATIONSHIP
+$s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
+$s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
+$s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
+$s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
+# MASC RELATIONSHIP
 
 $s_email_reporter = 'Autor';
 $s_email_handler = 'Operátor';
@@ -627,6 +640,7 @@ $s_delete_version_button = 'Smazat verzi';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Upravit verzi projektu';
 $s_update_version_button = 'Aktualizovat verzi';
+$s_released = 'Released';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Verze byla úspì¹nì upravena...';
@@ -955,6 +969,7 @@ $s_hide_resolved = "Skrýt vyøízeno";
 $s_and_above = 'a nad';
 $s_advanced_filters = 'Roz¹íøené filtry';
 $s_simple_filters = 'Jednoduché filtry';
+$s_monitored_by = 'Monitored By';
 
 $s_attachments = "dodatky";
 $s_attachment_alt = "D";
@@ -979,4 +994,20 @@ $s_changelog = 'Protokol o zmìnách';
 
 # Http auth
 $s_http_auth_realm = "Mantis Login";
+
+# MASC RELATIONSHIP
+$s_bug = "issue";
+$s_add_new_relationship = "New relationship";
+$s_add_new_relationship_button = "Add";
+$s_this_bug = "Current issue";
+$s_relationship_added = "Relationship added";
+$s_relationship_deleted = "Relationship deleted";
+$s_delete_relationship_button = "Delete";
+$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
+$s_create_child_bug_button = "Create Child";
+$s_bug_cloned_to = "Issue cloned";
+$s_bug_created_from = "Issue generated from";
+# MASC RELATIONSHIP
 ?>

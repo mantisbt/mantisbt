@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: vboctor $
-	# $Date: 2004-07-16 23:03:10 $
+	# $Date: 2004-07-18 15:22:04 $
 	#
-	# $Id: strings_italian.txt,v 1.69 2004-07-16 23:03:10 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.70 2004-07-18 15:22:04 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -1004,4 +1004,5 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. NON a
 $s_create_child_bug_button = "Genera figlio";
 $s_bug_cloned_to = "Anomalia clonata";
 $s_bug_created_from = "Anomalia generata da";
+# MASC RELATIONSHIP
 ?>
