@@ -10,14 +10,13 @@
 	# Italian: Lele Gaifax, lele@seldati.it
 	# Italian: Marcello Scata' marcello@marcelloscata.com
 	# -------------------------------------------------
-	# $Revision: 1.83 $
+	# $Revision: 1.84 $
 	# $Author: marcelloscata $
-	# $Date: 2004-10-12 20:53:54 $
+	# $Date: 2004-10-14 17:34:14 $
 	#
-	# $Id: strings_italian.txt,v 1.83 2004-10-12 20:53:54 marcelloscata Exp $
+	# $Id: strings_italian.txt,v 1.84 2004-10-14 17:34:14 marcelloscata Exp $
 	###########################################################################
-?>
-<?php
+
 # Charset
 $s_charset = "windows-1252";
 
@@ -609,6 +608,7 @@ $s_filter_button = "Applica il Filtro";
 $s_manage_users_link = "Gestione Utenti";
 $s_manage_projects_link = "Gestione Progetti";
 $s_manage_custom_field_link = "Gestione Campi Personalizzati";
+$s_permissions_summary_report = 'Report Permessi';
 $s_create_new_account_link = "Crea Nuovo Account";
 $s_projects_link = "Progetti";
 $s_documentation_link = "Documentazione";
@@ -1081,4 +1081,63 @@ $s_view_issue = "Dettaglio anomalia";
 
 # Source Control Integration
 $s_checkin = "Checkin";
+
+# Pemissions report
+$s_perm_rpt_capability = 'Funzionalità';
+$s_view = 'Visualizzare';
+$s_issues = 'ANOMALIE';
+$s_report_issue = 'Sottoporre una anomalia';
+$s_update_issue = 'Aggiornare una anomalia';
+$s_monitor_issue = 'Monitorare una anomalia';
+$s_handle_issue = 'Gestire una anomalia';
+$s_move_issue = 'Muovere una anomalia';
+$s_delete_issue = 'Eliminare una anomalia';
+$s_reopen_issue = 'Riaprire una anomalia chiusa';
+$s_view_private_issues = 'Vedere le anomalie private';
+$s_update_readonly_issues = 'Aggiornare anomalie in sola lettura';
+$s_update_issue_status = 'Aggiornare lo stato di una anomalia';
+$s_set_view_status = 'Impostare lo stato di visualizz. (publico o privato)';
+$s_update_view_status = 'Aggiornare lo stato di visualizz. (publico o privato)';
+$s_show_list_of_users_monitoring_issue = 'Visualizzare lista degli utenti che monitorizzano una anomalia';
+$s_notes = 'NOTE';
+$s_add_notes = 'Aggiungere nuove note';
+$s_update_notes = 'Aggiornare una note';
+$s_delete_note = 'Eliminare una note';
+$s_view_private_notes = 'Visualizzare le note private';
+$s_news = 'NEWS';
+$s_view_private_news = 'Visualizzare le news private';
+$s_manage_news = 'Gestire le news';
+$s_view_list_of_attachments = 'Visualizzare gli allegare';
+$s_download_attachments = 'Scaricare gli allegati';
+$s_delete_attachments = 'Eliminare gli allegati';
+$s_upload_issue_attachments = 'Aggiungere allegati ad una anomalia';
+$s_filters = 'filtri';
+$s_save_filters = 'Salvare nuovi filtri';
+$s_save_filters_as_shared = 'Salvare nuovi filtri come condivisi';
+$s_use_saved_filters = 'Utilizzare i filtri salvati';
+$s_create_project = 'Creare nuovi progetti';
+$s_delete_project = 'Eliminare un progetto';
+$s_manage_project = 'Gestire un progetto';
+$s_manage_user_access_to_project = 'Gestire gli accessi utente ai progetti';
+$s_automatically_included_in_private_projects = 'Utenti automaticamente aggiunti ai progetti privati';
+$s_project_documents = 'DOCUMENTAZIONE DI PROGETTO';
+$s_view_project_documents = 'Visualizzare la documentazione di progetto';
+$s_upload_project_documents = 'Aggiornare la documentazione di progetto';
+$s_link_custom_fields_to_projects = 'Aggiungere campi personalizzati ai progetti';
+$s_sponsorships = 'SPONSORIZZAZIONI';
+$s_view_sponsorship_details = 'Visualizzare i dettagli delle sponsorizzazioni';
+$s_view_sponsorship_total = 'Vedere il totale della sponsorizzazione';
+$s_sponsor_issue = 'Sponsorizzare una anomalia';
+$s_assign_sponsored_issue = 'Assegnare una anomalia sponsorizzata';
+$s_handle_sponsored_issue = 'Gestire una anomalia sponsorizzata';
+$s_others = 'ALTRI';
+$s_see_email_addresses_of_other_users = 'Visualizzare indirizzi email degli altri utenti';
+$s_send_reminders = 'Inviare memorandum';
+$s_add_profiles = 'Aggiugnere nuovi profili';
+$s_notify_of_new_user_created = 'Informati della creazione di nuovi utenti';
+$s_email_notification = 'NOTIFICHE VIA EMAIL';
+$s_status_changed_to = 'Email su stato cambiato in';
+$s_email_on_deleted = 'Email su \'Eliminazione\'';
+$s_email_on_sponsorship_changed = 'Email su variazione di sponsorizzazione';
+$s_email_on_relationship_changed = 'Email su variazione delle relazioni';
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.136 2004-10-02 14:53:02 thraxisp Exp $
+	# $Id: html_api.php,v 1.137 2004-10-14 17:34:13 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -528,17 +528,29 @@
 	# --------------------
 	# Print the menu for the manage section
 	# $p_page specifies the current page name so it's link can be disabled
-	function print_manage_menu( $p_page='' ) {
+	function print_manage_menu( $p_page = '' ) {
 		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
+		$t_permissions_summary_report = 'adm_permissions_report.php';
 		# $t_documentation_page 		= 'documentation_page.php';
 
 		switch ( $p_page ) {
-			case $t_manage_user_page				: $t_manage_user_page 				= ''; break;
-			case $t_manage_project_menu_page: $t_manage_project_menu_page 	= ''; break;
-			case $t_manage_custom_field_page: $t_manage_custom_field_page 	= ''; break;
-			# case $t_documentation_page		: $t_documentation_page 		= ''; break;
+			case $t_manage_user_page:
+				$t_manage_user_page = '';
+				break;
+			case $t_manage_project_menu_page:
+				$t_manage_project_menu_page = '';
+				break;
+			case $t_manage_custom_field_page:
+				$t_manage_custom_field_page = '';
+				break;
+			case $t_permissions_summary_report:
+				$t_permissions_summary_report = '';
+				break;
+			case $t_documentation_page:
+				$t_documentation_page = '';
+				break;
 		}
 
 		PRINT '<br /><div align="center">';
@@ -550,6 +562,9 @@
 		}
 		if ( access_has_project_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
 			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
+		}
+		if ( access_has_project_level( ADMINISTRATOR ) ) {
+			print_bracket_link( $t_permissions_summary_report, lang_get( 'permissions_summary_report' ) );
 		}
 			# print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
 		PRINT '</div>';
