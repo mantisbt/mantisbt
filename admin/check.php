@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.12 2004-08-29 04:35:26 vboctor Exp $
+	# $Id: check.php,v 1.13 2004-09-06 00:33:38 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -397,7 +397,7 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
  # @@@ thraxisp - workaround to ensure a language is set without authenticating			
  #  will disappear when this is properly localized
 			lang_push( 'english' );
-			$result = email_send( config_get( 'administrator_email' ), 'Testing PHP mail() function', 'Your PHP mail settings appear to be correctly set.', 'From: ' . config_get( 'administrator_email' ) . "\n" );
+			$result = email_send( config_get( 'administrator_email' ), 'Testing PHP mail() function',	'Your PHP mail settings appear to be correctly set.');
 
 			if ( !$result ) {
 				echo ' PROBLEMS SENDING MAIL TO: ' . config_get( 'administrator_email' ) . '. Please check your php/mail server settings.<br />';

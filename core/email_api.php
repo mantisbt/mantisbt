@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.99 2004-08-31 03:54:47 thraxisp Exp $
+	# $Id: email_api.php,v 1.100 2004-09-06 00:33:38 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -522,6 +522,8 @@
 	# --------------------
 	# this function sends the actual email
 	# if $p_exit_on_error == true (default) - calls exit() on errors, else - returns true on success and false on errors
+	# @@@@ (thraxisp) $p_header doesn't work as expected, it adds a list of names to the bcc list, rather than headers
+	#         this is ok for now as nothing uses it
 	function email_send( $p_recipient, $p_subject, $p_message, $p_header='', $p_category='', $p_exit_on_error=true ) {
 		global $g_phpMailer_smtp;
 
