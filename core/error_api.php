@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.5 2002-08-26 21:31:39 jfitzell Exp $
+	# $Id: error_api.php,v 1.6 2002-08-26 22:38:24 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -82,8 +82,8 @@
 			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
 			
 			# @@@ temp until we get parameterized errors
-			for ( $i = 0 ; $i < sizeof( $g_array_parameters ) ; $i = $i + 1 ) {
-				echo $g_array_parameters[$i].'<br />';
+			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
+				echo $g_error_parameters[$i].'<br />';
 			}
 
 			if ( ON == config_get( 'show_detailed_errors' ) ) {
@@ -99,8 +99,8 @@
 		} else if ( 'inline' == $t_method ) {
 			echo "<p style=\"color:red\">$t_string</p>";
 			# @@@ temp until we get parameterized errors
-			for ( $i = 0 ; $i < sizeof( $g_array_parameters ) ; $i = $i + 1 ) {
-				echo $g_array_parameters[$i].'<br />';
+			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
+				echo $g_error_parameters[$i].'<br />';
 			}
 		} else {
 			# do nothing
