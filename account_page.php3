@@ -38,7 +38,7 @@
 <p>
 <div align=center>
 	[ <a href="<? echo $g_account_profile_manage_page ?>">Manage Profiles</a> ]
-	[ <a href="<? echo $g_account_prefs_page ?>">Change Preferences</a> ]
+<!--	[ <a href="<? echo $g_account_prefs_page ?>">Change Preferences</a> ] -->
 </div>
 <?
 	}

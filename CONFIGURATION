@@ -8,7 +8,13 @@ whatever you need.
   to re-enter all your configuration settings.
 
   NOTE: since the package is still being changed a fair amount I suggest
-  the following
+  the following.  You configure the config_inc.php file but then rename
+  it to something like my_config.php.  Then when you copy a new release
+  over it will overwrite the config_inc.php.  Open up that file and
+  at the very bottom put: include ("my_config.php");
+  This way any new varaibles get setup and then your custom settings
+  overwrite anything else.  After you get up and running you can go back
+  and modify config_inc.php and then repeat the cycle.
 
 * core_API.php - this file contains all the critical functions
 
