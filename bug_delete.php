@@ -14,6 +14,7 @@
 <?php
 	project_access_check( $f_id );
 	check_access( $g_handle_bug_threshold );
+	check_access( $g_allow_bug_delete_access_level );
 	check_bug_exists( $f_id );
 
 	bug_delete( $f_id, $f_bug_text_id );
