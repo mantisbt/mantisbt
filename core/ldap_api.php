@@ -6,14 +6,12 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.4 2002-12-04 03:16:33 jfitzell Exp $
+	# $Id: ldap_api.php,v 1.5 2002-12-04 03:18:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# LDAP API
 	###########################################################################
-
-	# Some simple LDAP stuff that makes the work go 'round
 
  	# --------------------
 	# Connect and bind to the LDAP directory
@@ -71,7 +69,7 @@
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
 		$t_search_filter	= "(&$t_ldap_organisation(uid=$p_username)(assignedgroup=$p_group))";
-		$t_search_attrs		= array( "uid", "dn", "assignedgroup" );
+		$t_search_attrs		= array( 'uid', 'dn', 'assignedgroup' );
 	    $t_ds				= ldap_connect_bind();
 
 		$t_sr		= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
