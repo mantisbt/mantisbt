@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.77 $
-	# $Author: vboctor $
-	# $Date: 2002-08-26 22:42:28 $
+	# $Revision: 1.78 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-27 04:26:43 $
 	#
-	# $Id: strings_english.txt,v 1.77 2002-08-26 22:42:28 vboctor Exp $
+	# $Id: strings_english.txt,v 1.78 2002-08-27 04:26:43 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -169,6 +169,8 @@
 	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
 	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
 	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
 
 	# General Strings
 	$s_go_back = 'Go Back';

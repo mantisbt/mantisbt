@@ -10,7 +10,7 @@
 <?php
 	check_access( MANAGER );
 
-	$result = proj_user_delete( $g_project_cookie_val, $f_user_id );
+	$result = project_remove_user( $g_project_cookie_val, $f_user_id );
 
     $t_redirect_url = 'proj_user_menu_page.php';
 	if ( $result ) {

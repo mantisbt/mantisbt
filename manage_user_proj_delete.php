@@ -10,7 +10,10 @@
 <?php
 	check_access( MANAGER );
 
-	$result = proj_user_delete( $f_project_id, $f_user_id );
+	$f_project_id	= gpc_get_int( 'f_project_id' );
+	$f_user_id		= gpc_get_int( 'f_user_id' );
+
+	$result = project_remove_user( $f_project_id, $f_user_id );
 
     $t_redirect_url = 'manage_user_page.php?f_id='.$f_user_id;
 	if ( $result ) {

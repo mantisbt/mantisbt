@@ -148,7 +148,7 @@
 	</td>
 	<td class="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php
-			if ( is_removable_proj_user( $u_id ) ) {
+			if ( project_includes_user( helper_get_current_project(), $u_id )  ) {
 				print_bracket_link( 'proj_user_delete.php?f_user_id='.$u_id, $s_remove_link );
 			}
 		?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.3 2002-08-25 22:09:17 jfitzell Exp $
+	# $Id: string_api.php,v 1.4 2002-08-27 04:26:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -62,7 +62,7 @@
 	# --------------------
 	# Use this to prepare a string for display to HTML
 	function string_display( $p_string ) {
-		$p_string = stripslashes( $p_string );
+#		$p_string = stripslashes( $p_string );
 		$p_string = string_process_bug_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
 		$p_string = nl2br( $p_string );
@@ -71,7 +71,7 @@
 	# --------------------
 	# Prepare a string for plain text display in email
 	function string_email( $p_string ) {
-		$p_string = stripslashes( $p_string );
+#		$p_string = stripslashes( $p_string );
 		$p_string = unfilter_href_tags( $p_string );
 		$p_string = string_process_bug_link( $p_string, false );
 		$p_string = string_process_cvs_link( $p_string, false );
@@ -85,7 +85,7 @@
 	# --------------------
 	# Process a string for display in a textarea box
 	function string_edit_textarea( $p_string ) {
-		$p_string = stripslashes( $p_string );
+#		$p_string = stripslashes( $p_string );
 		$p_string = str_replace( '<br>', '',  $p_string );
 		$p_string = unfilter_href_tags( $p_string );
 		$p_string = str_replace( '<br />', '\n',  $p_string );
@@ -97,7 +97,7 @@
 	# --------------------
 	# Process a string for display in a text box
 	function string_edit_text( $p_string ) {
-		$p_string = stripslashes( $p_string );
+#		$p_string = stripslashes( $p_string );
 		$p_string = str_replace( '<br>', '',  $p_string );
 		$p_string = unfilter_href_tags( $p_string );
 		$p_string = str_replace( '&lt;', '<',  $p_string );

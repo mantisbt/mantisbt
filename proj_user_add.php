@@ -18,7 +18,7 @@
 	$count = count( $f_user_id );
 	for ($i=0;$i<$count;$i++) {
 		$t_user_id = $f_user_id[$i];
-		$result = proj_user_add( $g_project_cookie_val, $t_user_id, $f_access_level );
+		$result = project_add_user( $g_project_cookie_val, $t_user_id, $f_access_level );
 	}
 
 	$t_redirect_url = 'proj_user_menu_page.php';

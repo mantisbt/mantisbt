@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.3 2002-08-25 09:32:44 jfitzell Exp $
+	# $Id: bug_api.php,v 1.4 2002-08-27 04:26:42 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -113,6 +113,32 @@
 		$retval = $retval && $result;
 
 		return ($retval);
+	}
+	# --------------------
+	# Delete all bugs associated with a project
+	function bug_delete_all( $p_project_id ) {
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_bug_table = config_get( 'mantis_bug_table' );
+
+		$query = "SELECT id, bug_text_id
+				FROM $t_bug_table
+				WHERE project_id='$c_project_id'";
+		$result = db_query( $query );
+
+		$bug_count = db_num_rows( $result );
+
+		for ( $i=0 ; $i < $bug_count ; $i++ ) {	
+			$row = db_fetch_array( $result );
+
+			bug_delete( $row['id'], $row['bug_text_id']);
+		}
+
+		# @@@ should we check the return value of each bug_delete() and 
+		#  return false if any of them return false? Presumable bug_delete()
+		#  will eventually trigger an error on failure so it won't matter...
+
+		return true;
 	}
 	# --------------------
 	# This function assigns the bug to the current user

@@ -10,9 +10,8 @@
 <?php
 	check_access( MANAGER );
 
-	if ( empty( $f_version ) ) {
-		print_mantis_error( ERROR_EMPTY_FIELD );
-	}
+	$f_project_id = gpc_get_int( 'f_project_id' );
+	$f_version = gpc_get_string( 'f_version' );
 
 	$result = 0;
 	# check for empty case or duplicate

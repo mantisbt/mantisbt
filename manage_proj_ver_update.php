@@ -10,13 +10,10 @@
 <?php
 	check_access( MANAGER );
 
-	if ( empty( $f_version ) ) {
-		print_mantis_error( ERROR_EMPTY_FIELD );
-	}
-
-	$f_version 		= urldecode( $f_version );
-	$f_orig_version = urldecode( $f_orig_version );
-	$f_date_order   = urldecode( $f_date_order );
+	$f_project_id	= gpc_get_int( 'f_project_id' );
+	$f_version		= gpc_get_string( 'f_version' );
+	$f_date_order	= gpc_get_string( 'f_date_order' );
+	$f_orig_version	= gpc_get_string( 'f_orig_version' );
 
 	$result = 0;
 	$query = '';
@@ -29,8 +26,8 @@
 			break;
 		}
 
-		$c_version		= addslashes($f_version);
-		$c_orig_version	= addslashes($f_orig_version);
+		$c_version		= db_prepare_string( $f_version );
+		$c_orig_version	= db_prepare_string( $f_orig_version );
 
 		$query = "UPDATE $g_mantis_bug_table
 				SET version='$f_version'

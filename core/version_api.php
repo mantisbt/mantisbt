@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: version_api.php,v 1.3 2002-08-27 04:26:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -102,4 +102,19 @@
 		return db_query( $query );
 	}
 	# --------------------
+	# delete all versions associated with a project
+	function version_delete_all( $p_project_id ) {
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_project_version_table = config_get( 'mantis_project_version_table' );
+
+		$query = "DELETE
+				  FROM $t_project_version_table
+				  WHERE project_id='$c_project_id'";
+
+		db_query( $query );
+
+		# db_query() errors on failure so:
+		return true;
+	}
 ?>

@@ -10,44 +10,27 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	$c_name 		= string_prepare_textarea( $f_name );
-	$c_description 	= string_prepare_textarea( $f_description );
-	$c_view_state	= (integer)$f_view_state;
-	$c_status		= (integer)$f_status;
-	$c_file_path	= addslashes($f_file_path);
+	$f_name 		= gpc_get_string( 'f_name' );
+	$f_description 	= gpc_get_string( 'f_description' );
+	$f_view_state	= gpc_get_int( 'f_view_state' );
+	$f_status		= gpc_get_int( 'f_status' );
+	$f_file_path	= gpc_get_string( 'f_file_path' );
 
-	$result = 0;
-	$t_unique = project_is_unique( $f_name );
-	if ( !empty( $f_name ) && $t_unique ) {
-		# Add item
-		$query = "INSERT
-				INTO $g_mantis_project_table
-				( id, name, status, enabled, view_state, file_path, description )
-				VALUES
-				( null, '$c_name', '$c_status', '1', '$c_view_state', '$c_file_path', '$c_description' )";
-	    $result = db_query( $query );
-	}
+	project_create( $f_name, $f_description, $f_status, $f_view_state, $f_file_path );
 
 	$t_redirect_url = 'manage_proj_menu_page.php';
+
+	print_page_top1();
+
+	print_meta_redirect( $t_redirect_url );
+
+	print_page_top2();
 ?>
-<?php print_page_top1() ?>
-<?php
-	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
-	}
-?>
-<?php print_page_top2() ?>
 
 <p>
 <div align="center">
 <?php
-	if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<p>';
-	} else if ( ! $t_unique ) {			# DUPLICATE
-		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT].'<p>';
-	} else {							# FAILURE
-		print_sql_error( $query );
-	}
+	PRINT $s_operation_successful.'<p>';
 
 	print_bracket_link( $t_redirect_url, $s_proceed );
 ?>

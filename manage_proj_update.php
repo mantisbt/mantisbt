@@ -10,39 +10,16 @@
 <?php
 	check_access( MANAGER );
 
-	if ( !isset( $f_enabled ) ) {
-		$c_enabled = 0;
-	} else {
-		$c_enabled = 1;
-	}
+	$f_project_id 	= gpc_get_int( 'f_project_id' );
+	$f_name 		= gpc_get_string( 'f_name' );
+	$f_description 	= gpc_get_string( 'f_description' );
+	$f_status 		= gpc_get_int( 'f_status' );
+	$f_view_state 	= gpc_get_int( 'f_view_state' );
+	$f_file_path 	= gpc_get_string( 'f_file_path' );
+	$f_enabled	 	= gpc_get_bool( 'f_enabled' );
 
-	# Make sure file path has trailing slash
-	if ( $f_file_path && $f_file_path[strlen($f_file_path)-1] != DIRECTORY_SEPARATOR ) {
-		$f_file_path = $f_file_path.DIRECTORY_SEPARATOR;
-	}
-
-	$c_name 		= string_prepare_textarea( $f_name );
-	$c_description 	= string_prepare_textarea( $f_description );
-	$c_status 		= (integer)$f_status;
-	$c_view_state 	= (integer)$f_view_state;
-	$c_project_id 	= (integer)$f_project_id;
-	$c_file_path 	= addslashes($f_file_path);
-
-	# Update entry
-	$query = "UPDATE $g_mantis_project_table
-			SET name='$c_name',
-				status='$c_status',
-				enabled='$c_enabled',
-				view_state='$c_view_state',
-				file_path='$c_file_path',
-				description='$c_description'
-    		WHERE id='$c_project_id'";
-    $result = db_query( $query );
+	project_update( $f_project_id, $f_name, $f_description, $f_status, $f_view_state, $f_file_path, $f_enabled );
 
     $t_redirect_url = 'manage_proj_menu_page.php';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( $t_redirect_url );
 ?>

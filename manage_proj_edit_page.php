@@ -10,14 +10,15 @@
 <?php
 	check_access( MANAGER );
 
-	check_varset( $f_action, '' );
+	$f_project_id = gpc_get_int( 'f_project_id' );
+	$f_action = gpc_get_string( 'f_action', '' );
 
 	# If Deleteing item redirect to delete script
 	if ( 'delete' == $f_action ) {
 		print_header_redirect( 'manage_proj_delete.php?f_project_id='.$f_project_id );
 	}
 
-	$c_project_id = (integer)$f_project_id;
+	$c_project_id = db_prepare_int( $f_project_id );
 
 	$query = "SELECT *
 			FROM $g_mantis_project_table

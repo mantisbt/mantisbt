@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.4 2002-08-26 00:40:23 jfitzell Exp $
+	# $Id: database_api.php,v 1.5 2002-08-27 04:26:42 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -91,18 +91,12 @@
 	}
 	# --------------------
 	function db_fetch_array( $p_result ) {
-		$row = mysql_fetch_array( $p_result );
-
-		if ( false == $row ) {
-			return false;
-		} else {
-			return db_unprepare_row( $row );
-		}
+		return mysql_fetch_array( $p_result );
 	}
 	# --------------------
 	function db_result( $p_result, $p_index1=0, $p_index2=0 ) {
 		if ( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
-			return db_unprepare( mysql_result( $p_result, $p_index1, $p_index2 ) );
+			return mysql_result( $p_result, $p_index1, $p_index2 );
 		} else {
 			return false;
 		}

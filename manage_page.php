@@ -10,9 +10,10 @@
 <?php
 	check_access( ADMINISTRATOR );
 
-	check_varset( $f_sort, 'username' );
-	check_varset( $f_dir, 'DESC' );
-	check_varset( $f_hide, 0 );
+	$f_sort	= gpc_get_string( 'f_sort', 'username' );
+	$f_dir	= gpc_get_string( 'f_dir', 'DESC' );
+	$f_hide = gpc_get_bool( 'f_hide', false );
+	$f_save = gpc_get_bool( 'f_save', false );
 
 	# set cookie values for hide, sort by, and dir
 	if ( isset( $f_save ) ) {

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.5 2002-08-26 00:40:23 jfitzell Exp $
+	# $Id: helper_api.php,v 1.6 2002-08-27 04:26:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -347,4 +347,19 @@
 		}
 	}
 	# --------------------
+	# Return the current project id as stored in a cookie
+	function helper_get_current_project() {
+		global $g_project_cookie_val;
+
+		return $g_project_cookie_val;
+	}
+	# --------------------
+	# Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
+	function helper_terminate_directory_path( $p_path ) {
+		if ( $p_path && $p_path[strlen($p_path)-1] != DIRECTORY_SEPARATOR ) {
+			$p_path = $p_path.DIRECTORY_SEPARATOR;
+		}
+
+		return $p_path;
+	}
 ?>

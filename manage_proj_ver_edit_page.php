@@ -9,6 +9,10 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
+
+	$f_project_id	= gpc_get_int( 'f_project_id' );
+	$f_version		= gpc_get_string( 'f_version' );
+	$f_date_order	= gpc_get_string( 'f_date_order' );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

@@ -10,10 +10,11 @@
 <?php
 	check_access( MANAGER );
 
-	check_varset( $f_sort, 'name' );
-	$c_sort = addslashes($f_sort);
+	$f_sort = gpc_get_string( 'f_sort', 'name' );
+	$f_dir = gpc_get_string( 'f_sort', 'ASC' );
 
-	check_varset( $f_dir, 'ASC' );
+	$c_sort = db_prepare_string( $f_sort );
+
 	if ( 'ASC' == $f_dir ) {
 		$c_dir = 'ASC';
 	} else {

@@ -10,6 +10,8 @@
 <?php
 	check_access( MANAGER );
 
+	$f_user_id		= gpc_get_int( 'f_user_id' );
+	$f_access_level	= gpc_get_int( 'f_access_level' );
 	# check for no projects
 	check_varset( $f_project_id, array() );
 
@@ -18,7 +20,7 @@
 	$result = ( $count == 0 );
 	for ($i=0;$i<$count;$i++) {
 		$t_project_id = $f_project_id[$i];
-		$result = proj_user_add( $t_project_id, $f_user_id, $f_access_level );
+		$result = project_add_user( $t_project_id, $f_user_id, $f_access_level );
 	}
 
 	$t_redirect_url = 'manage_user_page.php?f_id='.$f_user_id;

@@ -10,21 +10,9 @@
 <?php
 	check_access( MANAGER );
 
-	# Copy all uesrs from current project over to another project ($f_project_id)
-	$result = proj_user_get_all_users( $g_project_cookie_val );
-	$user_count = count( $result );
-	for ($i=0;$i<$user_count;$i++) {
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+	# @@@ check for current project being 0000000 just in case
 
-		# if there is no duplicate then add a new entry
-		# otherwise just update the access level for the existing entry
-		if ( !proj_user_is_duplicate( $f_project_id, $v_user_id ) ) {
-			proj_user_add( $f_project_id, $v_user_id, $v_access_level );
-		} else {
-			proj_user_update( $f_project_id, $v_user_id, $v_access_level );
-		}
-	}
+	project_copy_users( $f_project_id, helper_get_current_project() );
 
 	$t_redirect_url = 'proj_user_menu_page.php';
 	if ( $result ) {

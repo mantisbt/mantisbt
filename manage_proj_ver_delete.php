@@ -9,7 +9,9 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( MANAGER );
-	$f_version = urldecode( $f_version );
+
+	$f_project_id = gpc_get_int( 'f_project_id' );
+	$f_version = gpc_get_string( 'f_version' );
 
 	# delete version
 	$result = version_delete( $f_project_id, $f_version );
