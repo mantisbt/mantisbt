@@ -1,4 +1,3 @@
-<?php_track_vars?>
 <?
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org

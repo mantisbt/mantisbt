@@ -545,6 +545,7 @@
 					FROM $g_mantis_user_pref_table
 					WHERE user_id='$t_id'";
 			$result = db_mysql_query( $query );
+
 			return mysql_result( $result, 0 );
 		}
 		else {
