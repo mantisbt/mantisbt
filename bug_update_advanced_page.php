@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.57 2003-03-12 17:39:47 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.58 2003-03-21 05:33:52 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -87,7 +87,7 @@
 	<!-- Category -->
 	<td>
 		<select name="category">
-			<?php print_category_option_list( $t_bug->category ) ?>
+		<?php print_category_option_list( $t_bug->category, $t_bug->project_id ) ?>
 		</select>
 	</td>
 
@@ -277,7 +277,7 @@
 	</td>
 	<td>
 		<select name="version">
-			<?php print_version_option_list( $t_bug->version ) ?>
+			<?php print_version_option_list( $t_bug->version, $t_bug->project_id ) ?>
 		</select>
 	</td>
 
@@ -358,7 +358,7 @@
 <!-- Custom Fields -->
 <?php
 	$t_custom_fields_found = false;
-	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		if( !custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 			continue;

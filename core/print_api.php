@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.63 2003-03-20 07:27:09 jfitzell Exp $
+	# $Id: print_api.php,v 1.64 2003-03-21 05:33:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -445,16 +445,20 @@
 	# Since categories can be orphaned we need to grab all unique instances of category
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
-	function print_category_option_list( $p_category='' ) {
+	function print_category_option_list( $p_category='', $p_project_id = null ) {
 		global $g_mantis_bug_table, $g_mantis_project_category_table;
 
-		$t_project_id = helper_get_current_project();
+		if ( null === $p_project_id ) {
+			$c_project_id = helper_get_current_project();
+		} else {
+			$c_project_id = db_prepare_int( $p_project_id );
+		}
 
 		# grab all categories in the project category table
 		$cat_arr = array();
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $g_mantis_project_category_table
-				WHERE project_id='$t_project_id'
+				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -475,16 +479,20 @@
 	# Since categories can be orphaned we need to grab all unique instances of category
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
-	function print_category_complete_option_list( $p_category='' ) {
+	function print_category_complete_option_list( $p_category='', $p_project_id = null ) {
 		global $g_mantis_bug_table, $g_mantis_project_category_table;
 
-		$t_project_id = helper_get_current_project();
+		if ( null === $p_project_id ) {
+			$c_project_id = helper_get_current_project();
+		} else {
+			$c_project_id = db_prepare_int( $p_project_id );
+		}
 
 		# grab all categories in the project category table
 		$cat_arr = array();
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $g_mantis_project_category_table
-				WHERE project_id='$t_project_id'
+				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -496,7 +504,7 @@
 		# grab all categories in the bug table
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $g_mantis_bug_table
-				WHERE project_id='$t_project_id'
+				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -515,44 +523,18 @@
 		}
 	}
 	# --------------------
-	function print_category_option_listOLD( $p_category='' ) {
-		global $g_mantis_project_category_table;
-
-		$t_project_id = helper_get_current_project();
-
-		# @@@ not implemented yet
-		if ( ALL_PROJECTS == $t_project_id ) {
-			$query = "SELECT category
-					FROM $g_mantis_project_category_table
-					WHERE project_id='$t_project_id'
-					ORDER BY category";
-
-		} else {
-			$query = "SELECT category
-					FROM $g_mantis_project_category_table
-					WHERE project_id='$t_project_id'
-					ORDER BY category";
-		}
-
-		$result = db_query( $query );
-		$category_count = db_num_rows( $result );
-		for ($i=0;$i<$category_count;$i++) {
-			$row = db_fetch_array( $result );
-			$t_category = $row['category'];
-			echo "<option value=\"$t_category\"";
-			check_selected( $t_category, $p_category );
-			echo ">$t_category</option>";
-		}
-	}
-	# --------------------
-	function print_version_option_list( $p_version='' ) {
+	function print_version_option_list( $p_version='', $p_project_id = null ) {
 		global $g_mantis_project_version_table;
 
-		$t_project_id = helper_get_current_project();
+		if ( null === $p_project_id ) {
+			$c_project_id = helper_get_current_project();
+		} else {
+			$c_project_id = db_prepare_int( $p_project_id );
+		}
 
 		$query = "SELECT *
 				FROM $g_mantis_project_version_table
-				WHERE project_id='$t_project_id'
+				WHERE project_id='$c_project_id'
 				ORDER BY date_order DESC";
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
@@ -778,7 +760,7 @@
 	function print_project_category_string( $p_project_id ) {
 		global $g_mantis_project_category_table, $g_mantis_project_table;
 
-		$c_project_id = (integer)$p_project_id;
+		$c_project_id = db_prepare_int( $p_project_id );
 
 		$query = "SELECT category
 				FROM $g_mantis_project_category_table
@@ -805,7 +787,7 @@
 	function print_project_version_string( $p_project_id ) {
 		global $g_mantis_project_version_table, $g_mantis_project_table;
 
-		$c_project_id = (integer)$p_project_id;
+		$c_project_id = db_prepare_int( $p_project_id );
 
 		$query = "SELECT version
 				FROM $g_mantis_project_version_table
