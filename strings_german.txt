@@ -241,7 +241,7 @@
 	### $s_access_level # defined above
 	$s_enabled = "aktiviert";
 	$s_protected = "geschützt";
-	$s_create_user_button = "Benutzerin anlegen";
+	$s_create_user_button = "Benutzer anlegen";
 
 	### manage_page.php3
 	$s_create_new_account_link = "Neues Konto erstellen";
@@ -276,7 +276,7 @@
 	### $s_delete_account_button # defined above
 
 	### manage_user_page.php3
-	$s_edit_user_title = "Benutzerin ändern";
+	$s_edit_user_title = "Benutzer ändern";
 	### $s_username # defined above
 	### $s_email # defined above
 	### $s_access_level # defined above

@@ -41,7 +41,7 @@
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
 	### SUCCESS
 	if ( $result ) {
@@ -51,15 +51,15 @@
 		$t_body      = stripslashes( string_display_with_br( $f_body ) );
 ?>
 <p>
-<div align=center>
-<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<div align="center">
+<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
-	<td bgcolor=<? echo $g_primary_color_dark ?>>
+	<td bgcolor="<? echo $g_primary_color_dark ?>">
 		<b><? echo string_unsafe( $t_headline ) ?></b>
 	</td>
 </tr>
 <tr>
-	<td bgcolor=<? echo $g_primary_color_light ?>>
+	<td bgcolor="<? echo $g_primary_color_light ?>">
 		<br>
 		<blockquote>
 			<? echo $t_body ?>
@@ -75,6 +75,7 @@
 		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
 	}
 ?>
+
 <p>
 <a href="<? echo $g_news_menu_page ?>"><? echo $s_proceed ?></a>
 </div>

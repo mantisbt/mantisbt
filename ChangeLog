@@ -1,5 +1,19 @@
 Mantis
 
+03.30.2001  -   0.15.0
+
+ * Renamed span.bugnote_delete to span.bugnotedelete for css conformance
+ * Added "" around all width and bgcolor tags for standards compliance
+
+03.06.2001  -   0.14.8
+
+ * Fixed password matching problem with manage create new user
+ * Fixed email bug for assigning bug
+ * Fixed warning in view all pages
+ * Fixed duplicate top_include_pages on view_bug_page
+ * Improved g_show_project_in_title
+ * Updated portuguese trnaslation to handle email text better
+
 03.05.2001  -   0.14.7
 
  * Added Dutch translation

@@ -15,7 +15,7 @@
 		exit;
 	}
 
-	if ( $f_password != $p_password_verify ) {
+	if ( $f_password != $f_password_verify ) {
 		echo "ERROR: passwords do not match";
 		exit;
 	}

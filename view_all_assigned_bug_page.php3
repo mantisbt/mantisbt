@@ -9,6 +9,10 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( !isset( $f_hide_resolved ) ) {
+		$f_hide_resolved = "";
+	}
+
 	if ( isset( $f_save )) {
 		### Save preferences
 		$t_settings_string = $f_assign_id."#".
@@ -58,10 +62,6 @@
 
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
-	}
-
-	if ( !isset( $f_hide_resolved ) ) {
-		$f_hide_resolved = "";
 	}
 
 	### basically we toggle between ASC and DESC if the user clicks the
@@ -180,7 +180,7 @@
 	<tr bgcolor=<? echo $g_category_title_color2 ?> align=center>
 		<td width=8%>
 			<b>
-				<a href="<? echo $g_view_all_bug_page ?>?f_sort=id&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_id ?></a>
+				<a href="<? echo $g_view_all_assigned_bug_page ?>?f_sort=id&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_id ?></a>
 			</b>
 		</td>
 		<td width=3%>
@@ -190,27 +190,27 @@
 		</td>
 		<td width=12%>
 			<b>
-				<a href="<? echo $g_view_all_bug_page ?>?f_sort=category&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_category ?></a>
+				<a href="<? echo $g_view_all_assigned_bug_page ?>?f_sort=category&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_category ?></a>
 			</b>
 		</td>
 		<td width=10%>
 			<b>
-				<a href="<? echo $g_view_all_bug_page ?>?f_sort=severity&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_severity ?></a>
+				<a href="<? echo $g_view_all_assigned_bug_page ?>?f_sort=severity&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_severity ?></a>
 			</b>
 		</td>
 		<td width=10%>
 			<b>
-				<a href="<? echo $g_view_all_bug_page ?>?f_sort=status&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_status ?></a>
+				<a href="<? echo $g_view_all_assigned_bug_page ?>?f_sort=status&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_status ?></a>
 			</b>
 		</td>
 		<td width=12%>
 			<b>
-				<a href="<? echo $g_view_all_bug_page ?>?f_sort=last_updated&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_updated ?></a>
+				<a href="<? echo $g_view_all_assigned_bug_page ?>?f_sort=last_updated&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_updated ?></a>
 			</b>
 		</td>
 		<td width=45%>
 			<b>
-				<a href="<? echo $g_view_all_bug_page ?>?f_sort=summary&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_summary ?></a>
+				<a href="<? echo $g_view_all_assigned_bug_page ?>?f_sort=summary&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_summary ?></a>
 			</b>
 		</td>
 	</tr>

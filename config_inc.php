@@ -74,6 +74,7 @@
 	$g_show_footer_menu          = 0;
 
 	# show the project name in the page title
+	# 0 - no project name, 1 - project name and any additional, 2 - only project name
 	$g_show_project_in_title     = 1;
 
 	# allow users to signup for their own accounts
@@ -99,7 +100,8 @@
 	$g_validate_email            = 1;
 
 	# change to language you want... choices are:
-	# english, spanish, portuguese, german, french, italian, dutch, norwegian
+	# english, dutch, french, german, italian,
+	# norwegian, portuguese, spanish, turkish
 	$g_language                  = "english";
 
 	#--------------------
@@ -111,7 +113,7 @@
 	$g_wait_time                 = 2;            # in seconds
 	#--------------------
 	### minutes to wait before document is stale
-	$g_content_expire            = 0;			 # in minutes
+	$g_content_expire            = 5;			 # in minutes
 
 	#--------------------
 	# limit the number of news items to be displayed on the main page
@@ -124,8 +126,8 @@
 	$g_default_show_changed     = 6;
 
 	# defaults for new account viewing preferences
-	$g_default_advanced_report  = "";  # set to on to enable
-	$g_default_advanced_view    = "";  # set to on to enable
+	$g_default_advanced_report  = "";  # set to "on" to enable
+	$g_default_advanced_view    = "";  # set to "on" to enable
 	#--------------------
 
 	#--------------------
@@ -309,12 +311,12 @@
 	$g_account_delete_page            = "account_delete_page".$g_php;
 	$g_account_delete                 = "account_delete".$g_php;
 
-	$g_account_profile_manage_page    = "account_profile_manage_page".$g_php;
-	$g_account_profile_add            = "account_profile_add".$g_php;
-	$g_account_profile_edit_page      = "account_profile_edit_page".$g_php;
-	$g_account_profile_update         = "account_profile_update".$g_php;
-	$g_account_profile_delete         = "account_profile_delete".$g_php;
-	$g_account_profile_make_default   = "account_profile_make_default".$g_php;
+	$g_account_profile_manage_page    = "account_prof_manage_page".$g_php;
+	$g_account_profile_add            = "account_prof_add".$g_php;
+	$g_account_profile_edit_page      = "account_prof_edit_page".$g_php;
+	$g_account_profile_update         = "account_prof_update".$g_php;
+	$g_account_profile_delete         = "account_prof_delete".$g_php;
+	$g_account_profile_make_default   = "account_prof_make_default".$g_php;
 
 	$g_account_prefs_page             = "account_prefs_page".$g_php;
 	$g_account_prefs_update           = "account_prefs_update".$g_php;
@@ -395,6 +397,6 @@
 
 	#--------------------
 	#version
-	$g_mantis_version = "0.14.7";
+	$g_mantis_version = "0.14.8";
 	#--------------------
 ?>

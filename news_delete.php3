@@ -40,7 +40,7 @@
 <? print_menu( $g_menu_include_file ) ?>
 
 <p>
-<div align=center>
+<div align="center">
 <?
 	if ( $result ) {
 		PRINT "$s_news_deleted_msg<p>";

@@ -125,9 +125,9 @@
 </div>
 
 <p>
-<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<table width=100% bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
-	<td bgcolor=<? echo $g_white_color ?>>
+	<td bgcolor="<? echo $g_white_color ?>">
 	<table width=100%>
 	<tr>
 		<form method=post action="<? echo $g_view_user_reported_bug_page ?>">
@@ -164,16 +164,16 @@
 </table>
 
 <p>
-<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<table width=100% bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
-	<td bgcolor=<? echo $g_white_color ?>>
+	<td bgcolor="<? echo $g_white_color ?>">
 	<table width=100%>
 	<tr>
-		<td colspan=7 bgcolor=<? echo $g_table_title_color ?>>
+		<td colspan=7 bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_viewing_bugs_title ?></b>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_category_title_color2 ?> align=center>
+	<tr bgcolor="<? echo $g_category_title_color2 ?>" align=center>
 		<td width=8%>
 			<b>
 				<a href="<? echo $g_view_bug_all_page ?>?f_sort=id&f_dir=<? echo $f_dir?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>"><? echo $s_id ?></a>
@@ -211,7 +211,7 @@
 		</td>
 	</tr>
 	<tr height=5>
-		<td bgcolor=<? echo $g_white_color ?> colspan=7>
+		<td bgcolor="<? echo $g_white_color ?>" colspan=7>
 		</td>
 	</tr>
 	<?
@@ -254,7 +254,7 @@
 			$res2 = db_query( $query );
 			$v_bugnote_updated = db_result( $res2, 0, 0 );
 	?>
-	<tr bgcolor=<? echo $status_color ?> align=center>
+	<tr bgcolor="<? echo $status_color ?>" align=center>
 		<td>
 			<? print_bug_link( $v_id ) ?>
 		</td>

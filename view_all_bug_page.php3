@@ -9,6 +9,10 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( !isset( $f_hide_resolved ) ) {
+		$f_hide_resolved = "";
+	}
+
 	if ( isset( $f_save )) {
 		### Save preferences
 		$t_settings_string = $f_show_category."#".
@@ -53,10 +57,6 @@
 
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
-	}
-
-	if ( !isset( $f_hide_resolved ) ) {
-		$f_hide_resolved = "";
 	}
 
 	### basically we toggle between ASC and DESC if the user clicks the

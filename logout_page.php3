@@ -28,18 +28,18 @@
 <? print_top_page( $g_top_include_page ) ?>
 
 <p>
-<div align=center>
-<table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<div align="center">
+<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100%>
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table width="100%">
 	<tr>
-		<td bgcolor=<? echo $g_table_title_color ?>>
+		<td bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_logged_out_title ?></b>
 		</td>
 	</tr>
 	<tr>
-		<td align=right bgcolor=<? echo $g_primary_color_dark ?>>
+		<td align="right" bgcolor="<? echo $g_primary_color_dark ?>">
 			<b><? echo $s_redirecting ?> <a href="<? echo $g_logout_redirect_page ?>"><? echo $s_here ?></a></b>
 		</td>
 	</tr>

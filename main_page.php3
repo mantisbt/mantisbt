@@ -62,16 +62,16 @@
 ?>
 <p>
 <div align=center>
-<table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
+<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
-	<td bgcolor=<? echo $g_primary_color_dark ?>>
+	<td bgcolor="<? echo $g_primary_color_dark ?>">
 		<b><? echo $v_headline ?></b> -
 		<i><? echo $v_date_posted ?></i> -
 		<a href="mailto:<? echo $t_poster_email ?>"><? echo $t_poster_name ?></a>
 	</td>
 </tr>
 <tr>
-	<td bgcolor=<? echo $g_primary_color_light ?>>
+	<td bgcolor="<? echo $g_primary_color_light ?>">
 		<br>
 		<blockquote>
 			<? echo $v_body ?>

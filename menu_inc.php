@@ -29,7 +29,7 @@
     $t_access_level = get_current_user_field( "access_level" );
     $t_protected = get_current_user_field( "protected" );
 ?>
-<div align=center>
+<div align="center">
 	<a href="<? echo $g_path.$g_main_page ?>"><? echo $s_main_link ?></a> |
 	<a href="<? echo $g_path.$g_view_all_bug_page ?>"><? echo $s_view_bugs_link ?></a> |
 <?

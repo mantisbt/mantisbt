@@ -96,6 +96,8 @@
 	###########################################################################
 	### --------------------
 	function print_html_top() {
+		#PRINT "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\"> ";
+		PRINT "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
 		PRINT "<html>";
 	}
 	### --------------------
@@ -137,6 +139,14 @@
 			$result = db_query( $query );
 			$t_project_name = db_result( $result, 0, 0 );
 
+			PRINT "<h3>$p_title - $t_project_name</h3>";
+		} else if ( $g_show_project_in_title==2 ) {
+			$query = "SELECT name
+					FROM $g_mantis_project_table
+					WHERE id='$g_project_cookie_val'";
+			$result = db_query( $query );
+			$t_project_name = db_result( $result, 0, 0 );
+
 			PRINT "<h3>$t_project_name</h3>";
 		} else {
 			PRINT "<h3>$p_title</h3>";
@@ -168,7 +178,7 @@
 		print_source_link( $p_file );
 
 		PRINT "<p>";
-		PRINT "<hr size=1>";
+		PRINT "<hr size=\"1\">";
 		print_mantis_version();
 		PRINT "<address>Copyright (C) 2000, 2001</address>";
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
@@ -195,22 +205,26 @@
 
 		$t_username = get_current_user_field( "username" );
 		$t_now = date($g_complete_date_format);
-		PRINT "<table width=100%><tr>";
-		PRINT "<td align=left width=33%>";
-			PRINT "$s_logged_in_as: <i>$t_username</i>";
-		PRINT "</td>";
-		PRINT "<td align=center width=34%>";
-			PRINT "<i>$t_now</i>";
-		PRINT "</td>";
-		PRINT "<td align=right width=33%>";
-			PRINT "<form method=post action=$g_set_project>";
-			PRINT "<select name=f_project_id>";
-				print_project_option_list( $g_project_cookie_val );
-			PRINT "</select>";
-			PRINT "<input type=submit value=\"$s_switch\">";
-		PRINT "</td>";
-			PRINT "</form>";
-		PRINT "</tr></table>";
+		PRINT "<form method=post action=$g_set_project>";
+
+		PRINT "<table width=\"100%\">";
+		PRINT "<tr>";
+			PRINT "<td align=left width=\"33%\">";
+				PRINT "$s_logged_in_as: <i>$t_username</i>";
+			PRINT "</td>";
+			PRINT "<td align=\"center\" width=\"34%\">";
+				PRINT "<i>$t_now</i>";
+			PRINT "</td>";
+			PRINT "<td align=\"right\" width=\"33%\">";
+				PRINT "<select name=f_project_id>";
+					print_project_option_list( $g_project_cookie_val );
+				PRINT "</select>";
+				PRINT "<input type=\"submit\" value=\"$s_switch\">";
+			PRINT "</td>";
+		PRINT "</tr>";
+		PRINT "</table>";
+
+		PRINT "</form>";
 	}
 	### --------------------
 	function print_menu( $p_menu_file="" ) {
@@ -218,9 +232,9 @@
 
 		print_login_info();
 
-		PRINT "<table width=100% bgcolor=$g_primary_border_color>";
-		PRINT "<tr align=center height=20>";
-			PRINT "<td align=center bgcolor=$g_primary_color_light>";
+		PRINT "<table width=\"100%\" bgcolor=\"$g_primary_border_color\">";
+		PRINT "<tr align=\"center\">";
+			PRINT "<td align=\"center\" bgcolor=\"$g_primary_color_light\">";
 				include( $p_menu_file );
 			PRINT "</td>";
 		PRINT "</tr>";
@@ -231,9 +245,9 @@
 		global 	$g_primary_border_color, $g_primary_color_light;
 
 		PRINT "<p>";
-		PRINT "<table width=100% bgcolor=$g_primary_border_color>";
-		PRINT "<tr align=center height=20>";
-			PRINT "<td align=center bgcolor=$g_primary_color_light>";
+		PRINT "<table width=\"100%\" bgcolor=\"$g_primary_border_color\">";
+		PRINT "<tr align=\"center\">";
+			PRINT "<td align=\"center\" bgcolor=\"$g_primary_color_light\">";
 				include( $p_menu_file );
 			PRINT "</td>";
 		PRINT "</tr>";
@@ -251,14 +265,14 @@
 		if ( $g_show_source==1 ) {
 			if ( access_level_check_greater_or_equal( "administrator" ) ) {
 				PRINT "<p>";
-				PRINT "<div align=center>";
+				PRINT "<div align=\"center\">";
 				PRINT "<a href=\"$g_show_source_page?f_url=$p_file\">Show Source</a>";
 				PRINT "</div>";
 			}
 		}
 		else if ( $g_show_source==2 ) {
 			PRINT "<p>";
-			PRINT "<div align=center>";
+			PRINT "<div align=\"center\">";
 			PRINT "<a href=\"$g_show_source_page?f_url=$p_file\">Show Source</a>";
 			PRINT "</div>";
 		}
@@ -280,7 +294,7 @@
 				$s_manage_product_versions_link, $s_documentation_link,
 				$s_projects;
 
-		PRINT "<div align=center>";
+		PRINT "<div align=\"center\">";
 			PRINT "[ <a href=\"$g_path.$g_manage_create_user_page\">$s_create_new_account_link</a> ] ";
 			PRINT "[ <a href=\"$g_path.$g_manage_project_menu_page\">$s_projects</a> ] ";
 			PRINT "[ <a href=\"$g_path.$g_documentation_page\">$s_documentation_link</a> ]";
@@ -351,7 +365,7 @@
 
 	    $query = "SELECT id, username
 	    		FROM $g_mantis_user_table
-	    		WHERE access_level='administrator' OR access_level='developer'
+	    		WHERE access_level='administrator' OR access_level='manager' OR access_level='developer'
 	    		ORDER BY username";
 	    $result = db_query( $query );
 	    $user_count = db_num_rows( $result );
@@ -808,11 +822,11 @@
 				$bgcolor=$g_primary_color_dark;
 			}
 
-			PRINT "<tr align=center bgcolor=$bgcolor>";
-				PRINT "<td width=50%>";
+			PRINT "<tr align=\"center\" bgcolor=\"$bgcolor\">";
+				PRINT "<td width=\"50%\">";
 					echo $t_s;
 				PRINT "</td>";
-				PRINT "<td width=50%>";
+				PRINT "<td width=\"50%\">";
 					echo $t_enum_count;
 				PRINT "</td>";
 			PRINT "</tr>";
@@ -849,11 +863,11 @@
 				$bgcolor=$g_primary_color_dark;
 			}
 
-			PRINT "<tr align=center bgcolor=$bgcolor>";
-				PRINT "<td width=50%>";
+			PRINT "<tr align=\"center\" bgcolor=\"$bgcolor\">";
+				PRINT "<td width=\"50%\">";
 					echo $p_date_array[$i];
 				PRINT "</td>";
-				PRINT "<td width=50%>";
+				PRINT "<td width=\"50%\">";
 					echo $t_enum_count;
 				PRINT "</td>";
 			PRINT "</tr>";
@@ -905,11 +919,11 @@
 				$bgcolor=$g_primary_color_dark;
 			}
 
-			PRINT "<tr align=center bgcolor=$bgcolor>";
-				PRINT "<td width=50%>";
+			PRINT "<tr align=\"center\" bgcolor=\"$bgcolor\">";
+				PRINT "<td width=\"50%\">";
 					echo $v_username;
 				PRINT "</td>";
-				PRINT "<td width=50%>";
+				PRINT "<td width=\"50%\">";
 					PRINT "$open_bug_count / $resolved_bug_count / $total_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
@@ -948,11 +962,11 @@
 				$bgcolor=$g_primary_color_dark;
 			}
 
-			PRINT "<tr align=center bgcolor=$bgcolor>";
-				PRINT "<td width=50%>";
+			PRINT "<tr align=\"center\" bgcolor=\"$bgcolor\">";
+				PRINT "<td width=\"50%\">";
 					echo $t_category;
 				PRINT "</td>";
-				PRINT "<td width=50%>";
+				PRINT "<td width=\"50%\">";
 					PRINT "$catgory_bug_count";
 				PRINT "</td>";
 			PRINT "</tr>";
@@ -1485,22 +1499,22 @@
 	}
 	### --------------------
 	function email_reopen( $p_bug_id ) {
-		global $s_email_resolved_msg, $g_email_update_address;
+		global $s_email_reopened_msg, $g_email_update_address;
 
-		email_bug_info( $p_bug_id, $s_email_resolved_msg );
+		email_bug_info( $p_bug_id, $s_email_reopened_msg );
 
 		if ( !empty($g_email_update_address) ) {
-			email_bug_info3( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
+			email_bug_info3( $p_bug_id, $s_email_reopened_msg, $g_email_update_address );
 		}
 	}
 	### --------------------
 	function email_assign( $p_bug_id ) {
-		global $s_email_resolved_msg, $g_email_update_address;
+		global $s_email_assigned_msg, $g_email_update_address;
 
-		email_bug_info( $p_bug_id, $s_email_resolved_msg );
+		email_bug_info( $p_bug_id, $s_email_assigned_msg );
 
-		if ( !empty($g_email_update_address) ) {
-			email_bug_info3( $p_bug_id, $s_email_resolved_msg, $g_email_update_address );
+		if ( !empty($s_email_assigned_msg) ) {
+			email_bug_info3( $p_bug_id, $s_email_assigned_msg, $g_email_update_address );
 		}
 	}
 	### --------------------
