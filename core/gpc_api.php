@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.17 2003-01-06 00:09:17 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.18 2003-04-06 03:18:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -233,7 +233,8 @@
 		}
 		
 		if ( isset ( $_FILES[$p_var_name] ) ) {
-			$t_result = gpc_strip_slashes( $_FILES[$p_var_name] );
+			# FILES are not escaped even if magic_quotes is ON, this applies to Windows paths.
+			$t_result = $_FILES[$p_var_name];
 		} else if ( func_num_args() > 1 ) { #check for a default passed in (allowing null)
 			$t_result = $p_default;
 		} else {
