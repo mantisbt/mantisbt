@@ -1,5 +1,9 @@
 Mantis
 
+03.XX.2002  -   0.17.2
+
+ *
+
 03.15.2002  -   0.17.1
 
  * Fixed missing closing span tag in view_bug_*page.php.
