@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.14 2002-11-30 21:11:04 jfitzell Exp $
+	# $Id: string_api.php,v 1.15 2002-11-30 21:15:42 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -146,7 +146,7 @@
 
 		if ( $p_include_anchor ) {
 			$t_replace_with = <<< EOT
-' <a href="$t_page_name?f_bug_id=\\2" title="' .
+'\\1<a href="$t_page_name?f_bug_id=\\2" title="' .
 bug_get_field( \\2, 'summary' ) .
 '">#\\2</a>'
 EOT;
