@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.70 $
+	# $Revision: 1.71 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:41 $
+	# $Date: 2004-08-19 10:08:19 $
 	#
-	# $Id: strings_dutch.txt,v 1.70 2004-08-16 13:28:41 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.71 2004-08-19 10:08:19 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -72,11 +72,11 @@ $s_bug_relationships = 'Relaties';
 $s_empty_password_sure_msg = 'De gebruiker heeft een leeg wachtwoord.  Weet u zeker dat dat is wat u wilt?';
 $s_empty_password_button = 'Gebruik leeg wachtwoord';
 
-$s_duplicate_of = 'duplicaat van %id';
-$s_has_duplicate = 'heeft %id als duplicaat';
-$s_related_to = 'gerelateerd aan %id';
-$s_dependant_on = 'afhankelijk van %id';
-$s_blocks = 'blokkeert %id';
+$s_duplicate_of = 'duplicaat van';
+$s_has_duplicate = 'heeft als duplicaat';
+$s_related_to = 'gerelateerd aan';
+$s_dependant_on = 'bevat';
+$s_blocks = 'deel van';
 
 $s_new_bug = 'Nieuwe bug';
 $s_bugnote_added = 'Aantekening toegevoegd';
