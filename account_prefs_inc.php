@@ -30,11 +30,11 @@
 <br />
 <div align="center">
 <form method="post" action="account_prefs_update.php">
+<input type="hidden" name="f_user_id" value="<?php echo $p_user_id ?>" />
+<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_user_id" value="<?php echo $p_user_id ?>" />
-		<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
 		<?php echo lang_get( 'default_account_preferences_title' ) ?>
 	</td>
 	<td class="right">
@@ -194,20 +194,25 @@
 	</td>
 </tr>
 <tr>
-	<td class="center">
+	<td colspan="2" class="center">
 		<input type="submit" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
-		</form>
-	</td>
-	<td class="center">
-		<form method="post" action="account_prefs_reset.php">
-		<input type="hidden" name="f_user_id" value="<?php echo $p_user_id ?>" />
-		<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
-		<input type="submit" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
+
+<br />
+
+<div class="border-center">
+	<form method="post" action="account_prefs_reset.php">
+	<input type="hidden" name="f_user_id" value="<?php echo $p_user_id ?>" />
+	<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
+	<input type="submit" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
+	</form>
 </div>
+
+</div>
+
 <?php
 	} # end of edit_account_prefs()
 ?>

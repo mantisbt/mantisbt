@@ -50,6 +50,10 @@
 
 <br />
 <div align="center">
+<form method="post" action="manage_proj_attribute_update.php">
+<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+<input type="hidden" name="f_orig_attribute" value="<?php echo $f_attribute ?>" />
+<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
@@ -58,10 +62,6 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<form method="post" action="manage_proj_attribute_update.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-		<input type="hidden" name="f_orig_attribute" value="<?php echo $f_attribute ?>" />
-		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
 		<?php echo $t_title ?>
 	</td>
 	<td>
@@ -82,20 +82,27 @@
 	<?php } #if color ?>
 
 <tr>
-	<td class="left" width="50%">
-		<input type="submit" value="<?php echo lang_get( 'update_button' ).' '.$t_title ?>" />
-		</form>
+	<td>
+		&nbsp;
 	</td>
-	<td class="right" width="50%">
-		<form method="post" action="manage_proj_attribute_del_page.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-		<input type="hidden" name="f_attribute" value="<?php echo $f_attribute ?>" />
-		<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
-		<input type="submit" value="<?php echo lang_get( 'delete_button' ).' '.$t_title ?>" />
-		</form>
+	<td>
+		<input type="submit" value="<?php echo lang_get( 'update_button' ).' '.$t_title ?>" />
 	</td>
 </tr>
 </table>
+</form>
+
+<br />
+
+<div class="border-center">
+	<form method="post" action="manage_proj_attribute_del_page.php">
+	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+	<input type="hidden" name="f_attribute" value="<?php echo $f_attribute ?>" />
+	<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
+	<input type="submit" value="<?php echo lang_get( 'delete_button' ).' '.$t_title ?>" />
+	</form>
+</div>
+
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

@@ -125,12 +125,12 @@ function edit_printing_prefs($p_user_id = 0, $p_error_if_protected = true, $p_re
 <?php $t_index_count=0; ?>
 <br />
 <div align="center">
+<form method="post" action="print_all_bug_options_update.php">
+<input type="hidden" name="f_user_id" value="<?php echo $c_user_id ?>" />
+<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="print_all_bug_options_update.php">
-		<input type="hidden" name="f_user_id" value="<?php echo $c_user_id ?>" />
-		<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
 		<?php echo $s_printing_preferences_title ?>
 	</td>
 	<td class="right">
@@ -160,17 +160,25 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 }
 ?>
 <tr>
-	<td class="center">
-		<input type="submit" value="<?php echo $s_update_prefs_button ?>" />
-		</form>
+	<td>
+		&nbsp;
 	</td>
-	<td class="center">
-		<form method="post" action="print_all_bug_options_reset.php">
-		<input type="hidden" name="f_id" value="<?php echo $c_user_id ?>" />
-		<input type="submit" value="<?php echo $s_reset_prefs_button ?>" />
-		</form>
+	<td>
+		<input type="submit" value="<?php echo $s_update_prefs_button ?>" />
 	</td>
 </tr>
 </table>
+
+</form>
+
+<br />
+
+<div class="border-center">
+	<form method="post" action="print_all_bug_options_reset.php">
+	<input type="hidden" name="f_id" value="<?php echo $c_user_id ?>" />
+	<input type="submit" value="<?php echo $s_reset_prefs_button ?>" />
+	</form>
+</div>
+
 </div>
 <?php } # end of edit_printing_prefs() ?>

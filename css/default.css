@@ -76,6 +76,8 @@ img.icon				{ width: 11px; height: 11px; }
 div						{ padding: 3px; }
 div.menu				{ background-color: #e8e8e8; color: #000000; text-align: center; width: 100%; padding: 1px; }
 
+div.border-center		{ background-color: #ffffff; border: solid 1px #000000; text-align: center; width: 50%; position: relative; margin-right: auto; margin-left: auto; }
+
 div.quick-summary-left	{ width: 49%; padding: 2px; text-align: left;  clear: left;  float: left;  display: inline; }
 div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; clear: right; float: right; display: inline; }
 

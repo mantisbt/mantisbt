@@ -38,10 +38,10 @@
 
 <br />
 <div align="center">
+<form method="post" action="manage_proj_update.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="manage_proj_update.php">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 		<?php echo lang_get( 'edit_project_title' ) ?>
 	</td>
@@ -105,20 +105,27 @@
 	</td>
 </tr>
 <tr>
-	<td class="left">
-		<input type="submit" value="<?php echo lang_get( 'update_project_button' ) ?>" />
-		</form>
+	<td>
+		&nbsp;
 	</td>
-	<td class="right">
-       <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { ?>
-		<form method="post" action="manage_proj_delete_page.php">
-		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
-		</form>
-	   <?php } ?>
+	<td>
+		<input type="submit" value="<?php echo lang_get( 'update_project_button' ) ?>" />
 	</td>
 </tr>
 </table>
+</form>
+
+<br />
+
+<?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { ?>
+<div class="border-center">
+	<form method="post" action="manage_proj_delete_page.php">
+	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
+	<input type="submit" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
+	</form>
+</div>
+<?php } ?>
+
 </div>
 
 <br />

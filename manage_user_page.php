@@ -26,7 +26,7 @@
 <form method="post" action="manage_user_update.php">
 <table class="width75" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="3">
+	<td class="form-title" colspan="2">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
 		<?php echo lang_get( 'edit_user_title' ) ?>
 	</td>
@@ -35,7 +35,7 @@
 	<td class="category" width="30%">
 		<?php echo lang_get( 'username' ) ?>:
 	</td>
-	<td colspan="2" width="70%">
+	<td width="70%">
 		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>" />
 	</td>
 </tr>
@@ -43,7 +43,7 @@
 	<td class="category">
 		<?php echo lang_get( 'email' ) ?>:
 	</td>
-	<td colspan="2">
+	<td>
 		<?php print_email_input( 'f_email', $u_email ) ?>
 	</td>
 </tr>
@@ -51,7 +51,7 @@
 	<td class="category">
 		<?php echo lang_get( 'access_level' ) ?>:
 	</td>
-	<td colspan="2">
+	<td>
 		<select name="f_access_level">
 			<?php print_enum_string_option_list( 'access_levels', $u_access_level ) ?>
 		</select>
@@ -61,7 +61,7 @@
 	<td class="category">
 		<?php echo lang_get( 'enabled' ) ?>:
 	</td>
-	<td colspan="2">
+	<td>
 		<input type="checkbox" name="f_enabled" <?php check_checked( $u_enabled, ON ); ?> />
 	</td>
 </tr>
@@ -69,30 +69,37 @@
 	<td class="category">
 		<?php echo lang_get( 'protected' ) ?>:
 	</td>
-	<td colspan="2">
+	<td>
 		<input type="checkbox" name="f_protected" <?php check_checked( $u_protected, ON ); ?> />
 	</td>
 </tr>
 <tr>
-	<td class="center">
+	<td colspan="2" class="center">
 		<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />
-		</form>
-	</td>
-	<td class="center">
-		<form method="post" action="manage_user_reset.php">
-		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
-		<input type="hidden" name="f_email" value="<?php echo $u_email ?>" />
-		<input type="submit" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
-		</form>
-	</td>
-	<td class="center">
-		<form method="post" action="manage_user_delete_page.php">
-		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
+
+<br />
+
+<div class="border-center">
+
+<!-- Reset Button -->
+	<form method="post" action="manage_user_reset.php">
+	<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
+	<input type="hidden" name="f_email" value="<?php echo $u_email ?>" />
+	<input type="submit" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
+	</form>
+
+
+<!-- Delete Button -->
+	<form method="post" action="manage_user_delete_page.php">
+	<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
+	<input type="submit" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
+	</form>
+</div>
+
 </div>
 
 <br />
@@ -109,10 +116,10 @@
 <?php ### BEGIN User to Project Add Form ?>
 <br />
 <div align="center">
+<form method="post" action="manage_user_proj_add.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="manage_user_proj_add.php">
 		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
 		<?php echo lang_get( 'add_user_title' ) ?>
 	</td>
@@ -149,11 +156,12 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo lang_get( 'add_user_button' ) ?>" />
-		</form>
 	</td>
 </tr>
 </table>
+</form>
 </div>
+
 <?php ### END User to Project Add Form ?>
 
 <?php
@@ -162,5 +170,6 @@
 		edit_account_prefs( $u_id, false, false, 'manage_page.php' );
 	}
 ?>
+
 
 <?php print_page_bot1( __FILE__ ) ?>

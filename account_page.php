@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.27 2002-10-01 20:28:19 jfitzell Exp $
+	# $Id: account_page.php,v 1.28 2002-10-04 04:57:32 prescience Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -60,12 +60,12 @@
 <!-- # Edit Account Form BEGIN -->
 <br />
 <div align="center">
+<form method="post" action="account_update.php">
 <table class="width75" cellspacing="1">
 
 	<!-- Headings -->
 	<tr>
 		<td class="form-title">
-			<form method="post" action="account_update.php">
 			<?php echo lang_get( 'edit_account_title' ) ?>
 		</td>
 		<td class="right">
@@ -185,24 +185,34 @@
 
 	<!-- BUTTONS -->
 	<tr>
-		<!-- Update Button -->
-		<td class="left">
-			<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />
-			</form>
+		<td>
+			&nbsp;
 		</td>
-		<?php
-		# check if users can't delete their own accounts
-		if ( ON == config_get( 'allow_account_delete' ) ) { ?>
-			<!-- Delete Button -->
-			<td class="right">
-				<form method="post" action="account_delete_page.php">
-				<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
-				</form>
-			</td>
-		<?php } ?>
+		<!-- Update Button -->
+		<td>
+			<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+		</td>
 	</tr>
-
 </table>
+</form>
+
+<br />
+<?php # Delete Account Form BEGIN ?>
+<?php
+	# check if users can't delete their own accounts
+	if ( ON == config_get( 'allow_account_delete' ) ) {
+?>
+
+<!-- Delete Button -->
+<div class="border-center">
+	<form method="post" action="account_delete_page.php">
+	<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
+	</form>
+</div>
+
+<?php } ?>
+<?php # Delete Account Form END ?>
+
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

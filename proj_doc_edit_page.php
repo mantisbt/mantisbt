@@ -62,18 +62,23 @@
 	</td>
 </tr>
 <tr>
-	<td class="left">
-		<input type="submit" value="<?php echo $s_file_update_button ?>" />
-		</form>
+	<td>
+		&nbsp;
 	</td>
-	<td class="right">
+	<td>
+		<input type="submit" value="<?php echo $s_file_update_button ?>" />
+	</td>
+</tr>
+</table>
+</form>
+
+<br />
+
 		<form method="post" action="proj_doc_delete_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
 		<input type="submit" value="<?php echo $s_file_delete_button ?>" />
 		</form>
-	</td>
-</tr>
-</table>
+
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>
