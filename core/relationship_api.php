@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.22 2004-09-25 14:36:50 prichards Exp $
+	# $Id: relationship_api.php,v 1.23 2004-09-25 15:05:07 prichards Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -584,13 +584,6 @@
 		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) ) ?></span>
 		<?php
 			}
-
-			if ( ON == config_get( 'relationship_graph_enable' ) ) {
-		?>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) ) ?></span>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) ) ?></span>
-		<?php
-			}
 		?>
 	</td>
 </tr>
@@ -633,13 +626,6 @@
 		<?php
 			collapse_icon( 'relationships' );
 			echo lang_get( 'bug_relationships' );
-
-			if ( ON == config_get( 'relationship_graph_enable' ) ) {
-		?>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) ) ?></span>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) ) ?></span>
-		<?php
-			}
 		?>
 	</td>
 </tr>
