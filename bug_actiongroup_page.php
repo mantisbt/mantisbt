@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.41 2004-08-10 14:34:52 thraxisp Exp $
+	# $Id: bug_actiongroup_page.php,v 1.42 2004-08-24 01:44:17 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,6 +23,7 @@
 	if ( ( $f_action=='' ) || 0 == sizeof( $f_bug_arr ) ) {
 		print_header_redirect( 'view_all_bug_page.php' );
 	}
+	$c_project_id = helper_get_current_project();
 
 	$t_finished = false;
 	$t_request = '';
@@ -64,7 +65,6 @@
 			$t_button_title 		= lang_get( 'resolve_group_bugs_button' );
 			$t_form 				= 'resolution';
 			$t_request 				= 'resolution'; # the "request" vars allow to display the adequate list
-			$c_project_id = helper_get_current_project();
 			if ( ALL_PROJECTS != $c_project_id ) {
 				$t_question_title2 = lang_get( 'fixed_in_version' );
 				$t_form2 = 'fixed_in_version';
@@ -136,7 +136,10 @@ if ( !$t_finished ) {
 						print_project_option_list( null, false );
 						break;
 					case 'ASSIGN':
-						print_assign_to_option_list();
+						$t_new_status = ( ON == config_get( 'auto_set_status_to_assigned' ) ) ? config_get( 'bug_assigned_status' ) : NEW_;
+						$t_assign_threshold = access_get_status_threshold( $t_new_status, $c_project_id );
+						# threshold is correct if auto_set_status_to_assigned is set, false thresholds will be caught when the bug is assigned
+						print_assign_to_option_list( 0, $c_project_id, $t_assign_threshold);
 						break;
 					case 'VIEW_STATUS':
 						print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );

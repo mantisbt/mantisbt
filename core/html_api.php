@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.124 2004-08-20 17:27:28 thraxisp Exp $
+	# $Id: html_api.php,v 1.125 2004-08-24 01:44:26 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -749,18 +749,20 @@
 		$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 		$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 		$t_current_user_id = auth_get_current_user_id();
+		$t_new_status = ( ON == config_get( 'auto_set_status_to_assigned' ) ) ? config_get( 'bug_assigned_status' ) : $t_status;
+		$t_assign_threshold = access_get_status_threshold( $t_new_status, bug_get_field( $p_bug_id, 'project_id' ) );
 
 		$t_options = array();
 		$t_default_assign_to = null;
 
 		if ( ( $t_handler_id != $t_current_user_id ) &&
-			( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $t_current_user_id ) ) ) {
+			( access_has_bug_level( $t_assign_threshold, $p_bug_id, $t_current_user_id ) ) ) {
 		    $t_options[] = array( $t_current_user_id, '[' . lang_get( 'myself' ) . ']' );
 			$t_default_assign_to = $t_current_user_id;
 		}
 
 		if ( ( $t_handler_id != $t_reporter_id ) && user_exists( $t_reporter_id ) &&
-			( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $t_reporter_id ) ) ) {
+			( access_has_bug_level( $t_assign_threshold, $p_bug_id, $t_reporter_id ) ) ) {
 		    $t_options[] = array( $t_reporter_id, '[' . lang_get( 'reporter' ) . ']' );
 
 			if ( $t_default_assign_to === null ) {
@@ -804,7 +806,7 @@
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		# 0 means currently selected
-		print_assign_to_option_list( 0, $t_project_id );
+		print_assign_to_option_list( 0, $t_project_id, $t_assign_threshold );
 		PRINT "</select>";
 
 		$t_bug_id = string_attribute( $p_bug_id );

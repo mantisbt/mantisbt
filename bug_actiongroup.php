@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.34 2004-08-10 14:34:52 thraxisp Exp $
+	# $Id: bug_actiongroup.php,v 1.35 2004-08-24 01:44:16 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,8 +80,9 @@
 			} else {
 				$t_ass_val = $t_status;
 			}
-			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) &&
-					access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id, $f_assign ) &&
+			$t_threshold = access_get_status_threshold( $t_ass_val, bug_get_field( $t_bug_id, 'project_id' ) );
+			if ( access_has_bug_level( $t_threshold , $t_bug_id, $f_assign ) &&
+				 access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id ) &&
 					bug_check_workflow($t_status, $t_ass_val )	) {
 				bug_assign( $t_bug_id, $f_assign );
 			} else {
@@ -95,8 +96,7 @@
 
 		case 'RESOLVE':
 			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) &&
-				 access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id ) &&
+			if ( access_has_bug_level( access_get_status_threshold( $t_ass_val, bug_get_field( $t_bug_id, 'project_id' ) ), $t_bug_id ) &&
 				 		( $t_status < $t_resolved_status ) && 
 						bug_check_workflow($t_status, $t_resolved_status ) ) {
 				$f_resolution = gpc_get_int( 'resolution' );

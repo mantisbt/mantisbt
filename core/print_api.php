@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.98 2004-08-21 13:24:44 prichards Exp $
+	# $Id: print_api.php,v 1.99 2004-08-24 01:44:26 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -305,11 +305,15 @@
 		} # end for
 	}
 	# --------------------
-	function print_assign_to_option_list( $p_user_id='', $p_project_id = null ) {
+	function print_assign_to_option_list( $p_user_id='', $p_project_id = null, $p_threshold = null ) {
 		$t_users = array();
 
 		if ( null === $p_project_id ) {
 			$p_project_id = helper_get_current_project();
+		}
+
+		if ( null === $p_threshold ) {
+			$p_threshold = config_get( 'handle_bug_threshold' );
 		}
 
 		# checking if it's per project or all projects
@@ -328,8 +332,8 @@
 							$t_project_user_list_table l,
 							$t_project_table p
 					WHERE	((p.view_state='$t_pub' AND
-							  u.access_level>='$t_dev') OR
-							 (l.access_level>='$t_dev' AND
+							  u.access_level>='$p_threshold') OR
+							 (l.access_level>='$p_threshold' AND
 							  l.user_id=u.id) OR
 							 u.access_level>='$t_adm') AND
 							p.id = l.project_id
@@ -341,8 +345,7 @@
 				$t_users[$row['username']] = $row;
 			}
 		} else {
-			$t_users = project_get_all_user_rows( $p_project_id,
-				config_get( 'handle_bug_threshold' ) );
+			$t_users = project_get_all_user_rows( $p_project_id, $p_threshold );
 		}
 
 		foreach ( $t_users as $t_user ) {
