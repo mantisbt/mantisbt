@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.10 2004-08-21 15:01:59 thraxisp Exp $
+	# $Id: check.php,v 1.11 2004-08-28 14:36:48 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -393,8 +393,10 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 		<p>You can test the mail() function with this form.  Just check the recipient and click submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a>.</p>
 		<?php
 		if ( $f_mail_test ) {
-			echo '<b><font color="#ff0000">Mail sent</font></b> - ';
-			
+			echo '<b><font color="#ff0000">Testing Mail</font></b> - ';
+ # @@@ thraxisp - workaround to ensure a language is set without authenticating			
+ #  will disappear when this is properly localized
+			lang_push( 'english' );
 			$result = email_send( config_get( 'administrator_email' ), 'Testing PHP mail() function', 'Your PHP mail settings appear to be correctly set.', 'From: ' . config_get( 'administrator_email' ) . "\n" );
 
 			if ( !$result ) {
