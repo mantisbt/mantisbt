@@ -263,8 +263,8 @@
 
 	# bug view/update
 	$g_view_all_bug_page              = "view_all_bug_page".$g_php;
-	$g_view_all_assigned_bug_page     = "view_all_assign_bug_page".$g_php;
-	$g_view_all_reported_bug_page     = "view_all_report_bug_page".$g_php;
+	$g_view_all_assigned_bug_page     = "view_all_assigned_bug_page".$g_php;
+	$g_view_all_reported_bug_page     = "view_all_reported_bug_page".$g_php;
 
 	$g_view_bug_page                  = "view_bug_page".$g_php;
 	$g_view_bug_advanced_page         = "view_bug_advanced_page".$g_php;
@@ -336,12 +336,12 @@
 	$g_documentation_page             = "documentation_page".$g_php;
 
 	# multiple projects
-	$g_manage_project_menu_page       = "manage_project_menu_page".$g_php;
-	$g_manage_project_add             = "manage_project_add".$g_php;
-	$g_manage_project_edit_page       = "manage_project_edit_page".$g_php;
-	$g_manage_project_update          = "manage_project_update".$g_php;
-	$g_manage_project_delete          = "manage_project_delete".$g_php;
-	$g_manage_project_delete_page     = "manage_project_delete_page".$g_php;
+	$g_manage_project_menu_page       = "manage_proj_menu_page".$g_php;
+	$g_manage_project_add             = "manage_proj_add".$g_php;
+	$g_manage_project_edit_page       = "manage_proj_edit_page".$g_php;
+	$g_manage_project_update          = "manage_proj_update".$g_php;
+	$g_manage_project_delete          = "manage_proj_delete".$g_php;
+	$g_manage_project_delete_page     = "manage_proj_delete_page".$g_php;
 
 	$g_set_project                    = "set_project".$g_php;
 
@@ -349,26 +349,26 @@
 	#$g_choose_project_page            = "choose_project_page".$g_php;
 
 	# manage multiple project users
-	$g_manage_project_user_menu_page    = "manage_project_user_menu_page".$g_php;
-	$g_manage_project_user_add          = "manage_project_user_add".$g_php;
-	$g_manage_project_user_edit_page    = "manage_project_user_edit_page".$g_php;
-	$g_manage_project_user_update       = "manage_project_user_update".$g_php;
-	$g_manage_project_user_delete       = "manage_project_user_delete".$g_php;
-	$g_manage_project_user_delete_page  = "manage_project_user_delete_page".$g_php;
+	$g_manage_project_user_menu_page    = "manage_proj_user_menu_page".$g_php;
+	$g_manage_project_user_add          = "manage_proj_user_add".$g_php;
+	$g_manage_project_user_edit_page    = "manage_proj_user_edit_page".$g_php;
+	$g_manage_project_user_update       = "manage_proj_user_update".$g_php;
+	$g_manage_project_user_delete       = "manage_proj_user_delete".$g_php;
+	$g_manage_project_user_delete_page  = "manage_proj_user_delete_page".$g_php;
 
 	# project versions
-	$g_manage_project_version_add       = "manage_project_version_add".$g_php;
-	$g_manage_project_version_update    = "manage_project_version_update".$g_php;
-	$g_manage_project_version_delete    = "manage_project_version_delete".$g_php;
-	$g_manage_project_version_delete_page = "manage_project_version_delete_page".$g_php;
-	$g_manage_project_version_edit_page  = "manage_project_version_edit_page".$g_php;
+	$g_manage_project_version_add       = "manage_proj_ver_add".$g_php;
+	$g_manage_project_version_update    = "manage_proj_ver_update".$g_php;
+	$g_manage_project_version_edit_page = "manage_proj_ver_edit_page".$g_php;
+	$g_manage_project_version_delete    = "manage_proj_ver_delete".$g_php;
+	$g_manage_project_version_delete_page = "manage_proj_ver_delete_page".$g_php;
 
-	# project category
-	$g_manage_project_category_add       = "manage_project_category_add".$g_php;
-	$g_manage_project_category_update    = "manage_project_category_update".$g_php;
-	$g_manage_project_category_delete    = "manage_project_category_delete".$g_php;
-	$g_manage_project_category_delete_page = "manage_project_category_delete_page".$g_php;
-	$g_manage_project_category_edit_page  = "manage_project_category_edit_page".$g_php;
+	# project category2
+	$g_manage_project_category_add       = "manage_proj_cat_add".$g_php;
+	$g_manage_project_category_update    = "manage_proj_cat_update".$g_php;
+	$g_manage_project_category_edit_page = "manage_proj_cat_edit_page".$g_php;
+	$g_manage_project_category_delete    = "manage_proj_cat_delete".$g_php;
+	$g_manage_project_category_delete_page = "manage_proj_cat_delete_page".$g_php;
 
 	# news
 	$g_news_menu_page                 = "news_menu_page".$g_php;
