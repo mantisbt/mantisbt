@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.235 2004-12-18 17:03:59 bpfennigschmidt Exp $
+	# $Id: config_defaults_inc.php,v 1.236 2004-12-18 19:17:57 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 
@@ -1442,7 +1442,7 @@
 
 	# Enable support for bug relationships where a bug can be a related, dependent on, or duplicate of another.
 	# See relationship_api.php for more details.
-	$g_enable_relationship = OFF;
+	$g_enable_relationship = ON;
 
 	# --- Relationship Graphs -----------
 	# Show issue relationships using graphs.
