@@ -12,9 +12,11 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	check_bugnote_exists( $f_bugnote_id );
+	$t_bug_id = get_bugnote_field( $f_bugnote_id, 'bug_id' );
+	project_access_check( $t_bug_id );
 	check_access( $g_handle_bug_threshold );
-	check_bug_exists( $f_id );
+	check_bug_exists( $t_bug_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -25,7 +27,6 @@
 	<?php echo $s_delete_bugnote_sure_msg ?>
 
 	<form method="post" action="bugnote_delete.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>">
 		<input type="submit" value="<?php echo $s_delete_bugnote_button ?>">
 	</form>

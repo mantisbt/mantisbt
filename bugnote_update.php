@@ -11,27 +11,20 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	check_bugnote_exists( $f_bugnote_id );
+	$t_bug_id = get_bugnote_field( $f_bugnote_id, 'bug_id' );
+	project_access_check( $t_bug_id );
 	check_access( REPORTER );
+	check_bug_exists( $t_bug_id );
 
 	$f_bugnote_text		= $f_bugnote_text."\n\n";
 	$f_bugnote_text		= $f_bugnote_text.$s_edited_on.date( $g_normal_date_format );
-	$c_bugnote_text		= string_prepare_textarea( $f_bugnote_text );
-	$c_bugnote_text_id	= (integer)$f_bugnote_text_id;
 
-    $query = "UPDATE $g_mantis_bugnote_text_table
-    		SET note='$c_bugnote_text'
-    		WHERE id='$c_bugnote_text_id'";
-   	$result = db_query( $query );
-
-	# updated the last_updated date
-	bugnote_date_update( $f_bugnote_id );
-
-	# log new bugnote
-	history_log_event_special( $f_id, BUGNOTE_UPDATED, $f_bugnote_id );
+#@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
+	$result = bugnote_update_text( $f_bugnote_id, $f_bugnote_text );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_bug_link_plain( $f_id );
+	$t_redirect_url = get_bug_link_plain( $t_bug_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

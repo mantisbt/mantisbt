@@ -12,14 +12,15 @@
 <?php login_cookie_check() ?>
 <?php
 	# make sure the user accessing the note is valid and has proper access
+	check_bugnote_exists( $f_bugnote_id );
 	$t_bugnote_user_id	= get_bugnote_field( $f_bugnote_id, 'reporter_id' );
-	$t_id				= get_bugnote_field( $f_bugnote_id, 'bug_id' );
+	$t_bug_id				= get_bugnote_field( $f_bugnote_id, 'bug_id' );
 	$t_user_id			= get_current_user_field( 'id' );
 	$c_bugnote_id 		= (integer)$f_bugnote_id;
 
-	project_access_check( $t_id );
+	project_access_check( $t_bug_id );
 
-	if ( get_bug_field( $t_id, 'status' ) < RESOLVED ) {
+	if ( get_bug_field( $t_bug_id, 'status' ) < RESOLVED ) {
 		if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 			( $t_bugnote_user_id == $t_user_id )) {
 			# do nothing
@@ -32,22 +33,10 @@
 		print_header_redirect( 'logout_page.php' );
 	}
 
-	if ( 1 == $f_private ) {
-		$c_view_state = PRIVATE;
-	} else {
-		$c_view_state = PUBLIC;
-	}
-
-	# update view_state
-	$query = "UPDATE $g_mantis_bugnote_table
-				SET view_state='$c_view_state'
-				WHERE id='$c_bugnote_id'";
-	$result = db_query( $query );
-
-	history_log_event_special( $t_id, BUGNOTE_STATE_CHANGED, $c_view_state, $c_bugnote_id );
+	$result = bugnote_update_view_state( $f_bugnote_id, $f_private );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $t_id, 1 ) . '#bugnotes';
+	$t_redirect_url = get_view_redirect_url( $t_bug_id, 1 ) . '#bugnotes';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

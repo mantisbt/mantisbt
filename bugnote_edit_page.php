@@ -12,13 +12,16 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	project_access_check( $f_id );
+	check_bugnote_exists( $f_bugnote_id );
+	$t_bug_id = get_bugnote_field( $f_bugnote_id, 'bug_id' );
+	project_access_check( $t_bug_id );
+	check_bug_exists( $t_bug_id );
 
 	# make sure the user accessing the note is valid and has proper access
 	$t_bugnote_user_id	= get_bugnote_field( $f_bugnote_id, 'reporter_id' );
 	$t_user_id			= get_current_user_field( 'id' );
 
-	if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
+	if ( get_bug_field( $t_bug_id, 'status' ) < RESOLVED ) {
 		if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
 			( $t_bugnote_user_id == $t_user_id )) {
 			# do nothing
@@ -28,18 +31,11 @@
 	} else {
 		print_header_redirect( 'logout_page.php' );
 	}
-	$c_bugnote_text_id = (integer)$f_bugnote_text_id;
 
-	# grab the bugnote text
-  	$query = "SELECT note
-			FROM $g_mantis_bugnote_text_table
-			WHERE id='$c_bugnote_text_id'";
-	$result = db_query( $query );
-	$f_bugnote_text = db_result( $result, 0, 0 );
-	$f_bugnote_text = string_edit_textarea( $f_bugnote_text );
+	$t_bugnote_text = string_edit_textarea( get_bugnote_text( $f_bugnote_id ) );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
+	$t_redirect_url = get_view_redirect_url( $t_bug_id, 1 );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
@@ -50,8 +46,6 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="bugnote_update.php">
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
-		<input type="hidden" name="f_bugnote_text_id" value="<?php echo $f_bugnote_text_id ?>">
 		<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>">
 		<?php echo $s_edit_bugnote_title ?>
 	</td>
@@ -61,7 +55,7 @@
 </tr>
 <tr class="row-1">
 	<td class="center" colspan="2">
-		<textarea cols="80" rows="10" name="f_bugnote_text" wrap="virtual"><?php echo $f_bugnote_text ?></textarea>
+		<textarea cols="80" rows="10" name="f_bugnote_text" wrap="virtual"><?php echo $t_bugnote_text ?></textarea>
 	</td>
 </tr>
 <tr>
