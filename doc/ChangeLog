@@ -11,6 +11,7 @@ Mantis ChangeLog
  * Fix #2968: Add query counts to action pages.
  * Fix #2969: Bug not found error when deleting a bugnote.
  * Fix #2970: Sending a reminder sends two notifications.
+ * Fix #2974: Message "APPLICATION WARNING #300" on main page.
  * Languages: Updated German localisation.
 
 2003.02.19  -  0.18.0a2

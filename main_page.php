@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.39 2003-02-19 12:36:48 vboctor Exp $
+	# $Id: main_page.php,v 1.40 2003-02-20 11:50:30 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -142,10 +142,10 @@
 	$f_offset_prev = $f_offset - $t_news_view_limit;
 
 	if ( $f_offset_prev >= 0) {
-		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link ' ) );
+		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
 	}
 	if ( $news_count == $t_news_view_limit ) {
-		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link ' ) );
+		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
 	}
 ?>
 </div>
