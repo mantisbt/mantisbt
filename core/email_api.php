@@ -6,18 +6,75 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.35 2003-01-02 05:47:28 vboctor Exp $
+	# $Id: email_api.php,v 1.36 2003-01-03 02:34:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Email API
 	###########################################################################
 
+
+	# --------------------
+	# Return a perl compatible regular expression that will
+	#  match a valid email address as per RFC 822 (approximately)
+	#
+	# The regex will provide too matched groups: the first will be the
+	#  local part (or mailbox name) and the second will be the domain
+	function email_get_rfc822_regex() {
+		# Build up basic RFC 822 BNF definitions.
+
+		# list of the special characters: ( ) < > @ , ; : \ " . [ ]
+		$t_specials = '\(\)\<\>\@\,\;\:\\\"\.\[\]';
+		# the space character
+		$t_space    = '\040';
+		# valid characters in a quoted string
+		$t_char     = '\000-\177';
+		# control characters
+		$t_ctl      = '\000-\037\177';
+
+		# a chunk of quoted text (anything except " \ \r are valid)
+		$t_qtext_re = '[^"\\\r]+';
+		# match any valid character preceded by a backslash ( mostly for \" )
+		$t_qpair_re = "\\\\[$t_char]";
+
+		# a complete quoted string - " characters with valid characters or
+		#  backslash-escaped characters between them
+		$t_quoted_string_re = "(?:\"(?:$t_qtext_re|$t_qpair_re)*\")";
+
+		# an unquoted atom (anything that isn't a control char, a space, or a
+		#  special char)
+		$t_atom_re  = "(?:[^$t_ctl$t_space$t_specials]+)";
+
+		# a domain ref is an atom
+		$t_domain_ref_re = $t_atom_re;
+
+		# the characters in a domain literal can be anything except: [ ] \ \r
+		$t_dtext_re = "[^\\[\\]\\\\\\r]";
+		# a domain-literal is a sequence of characters or escaped pairs inside
+		#  square brackets
+		$t_domain_literal_re = "\\[(?:$t_dtext_re|$t_qpair_re)*\\]";
+		# a subdomain is a domain ref or a domain literal
+		$t_sub_domain_re = "(?:$t_domain_ref_re|$t_domain_literal_re)";
+		# a domain is at least one subdomain, with optional further subdomains
+		#  separated by periods.  eg: '[1.2.3.4]' or 'foo.bar'
+		$t_domain_re = "$t_sub_domain_re(?:\.$t_sub_domain_re)*";
+
+		# a word is either quoted string or an atom
+		$t_word_re = "(?:$t_atom_re|$t_quoted_string_re)";
+
+		# the local part of the address spec (the mailbox name)
+		#  is one or more words separated by periods
+		$t_local_part_re = "$t_word_re(?:\.$t_word_re)*";
+
+		# the address spec is made up of a local part, and @ symbol,
+		#  and a domain
+		$t_addr_spec_re = "/^($t_local_part_re)\@($t_domain_re)$/";
+
+		return $t_addr_spec_re;
+	}
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
 	function email_is_valid( $p_email ) {
-		global $g_validate_email, $g_check_mx_record;
-
 		# if we don't validate then just accept
 		if ( OFF == config_get( 'validate_email' ) ) {
 			return true;
@@ -29,21 +86,32 @@
 
 		# Use a regular expression to check to see if the email is in valid format
 		#  x-xx.xxx@yyy.zzz.abc etc.
-		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+)\.([a-z]{2,6}$)", $p_email, $check)) {
+		if ( preg_match( email_get_rfc822_regex(), $p_email, $t_check ) ) {
+			$t_local = $t_check[1];
+			$t_domain = $t_check[2];
+
 			# see if we're limited to one domain
-			$t_limit_email_domain = config_get( 'limit_email_domain' );
-			if ( $t_limit_email_domain ) {
-				if ( 0 != strcasecmp( $t_limit_email_domain, $check[1].'.'.$check[2] ) ) {
+			if ( ON == config_get( 'limit_email_domain' ) ) {
+				if ( 0 != strcasecmp( $t_limit_email_domain, $t_domain ) ) {
 					return false;
 				}
 			}
 
-			# passed format check. see if we should check the mx records
-			if ( ON == $g_check_mx_record ) {	# Check for valid mx records
-				if (getmxrr($check[1].'.'.$check[2], $temp)) {
+			if ( preg_match( '/\\[(\d+)\.(\d+)\.(\d+)\.(\d+)\\]/', $t_domain, $t_check ) ) {
+				# Handle domain-literals of the form '[1.2.3.4]'
+				#  as long as each segment is less than 255, we're ok
+				if ( $t_check[1] <= 255 &&
+					 $t_check[2] <= 255 &&
+					 $t_check[3] <= 255 &&
+					 $t_check[4] <= 255 ) {
+					return true;
+				}
+			} else if ( ON == config_get( 'check_mx_record' ) ) {
+				# Check for valid mx records
+				if ( getmxrr( $t_domain, $temp ) ) {
 					return true;
 				} else {
-					$host = substr( strstr( $check[0], '@' ), 1 ).'.';
+					$host = $t_domain . '.';
 
 					# for no mx record... try dns check
 					if (checkdnsrr ( $host, 'ANY' ))
@@ -54,7 +122,8 @@
 				return true;
 			}
 		}
-		# Everything failed.  Bad email.
+
+		# Everything failed.  The email is invalid
 		return false;
 	}
 	# --------------------
