@@ -137,23 +137,37 @@
 	# Simple Text Search - Thnaks to Alan Knowles
 	if ( $f_search ) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
-		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table";
-		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%') OR
+		/*$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%') OR
 							(description LIKE '%".addslashes($f_search)."%') OR
 							(steps_to_reproduce LIKE '%".addslashes($f_search)."%') OR
 							(additional_information LIKE '%".addslashes($f_search)."%') OR
+							($g_mantis_bugnote_text_table.note LIKE '%".addslashes($f_search)."%')) OR
 							($g_mantis_bug_table.id LIKE '%".addslashes($f_search)."%')) AND
-							$g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
+							$g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id ";*/
+
+		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%')
+							OR (description LIKE '%".addslashes($f_search)."%')
+							OR (steps_to_reproduce LIKE '%".addslashes($f_search)."%')
+							OR (additional_information LIKE '%".addslashes($f_search)."%')
+							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search)."%')
+							OR ($g_mantis_bugnote_text_table.note LIKE '%".addslashes($f_search)."%'))
+							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
+
+
+		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
+							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
+							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
+
 	} else {
 		$t_columns_clause = " *";
 		$t_from_clause = " FROM $g_mantis_bug_table";
 	}
 
 	# Get the total number of bugs that meet the criteria.
-	$query3 = "SELECT count(*) " . $t_from_clause . $t_where_clause;
+	$query3 = "SELECT COUNT( DISTINCT ( $g_mantis_bug_table.id ) ) as count " . $t_from_clause . $t_where_clause;
 	$result3 = db_query( $query3 );
 	$row = db_fetch_array( $result3 );
-	$t_query_count = $row['count(*)'];
+	$t_query_count = $row['count'];
 
 	# Guard against silly values of $f_per_page.
 	if ( 0 == $f_per_page ) {
@@ -176,7 +190,7 @@
 		$f_page_number = $t_page_count;
 	}
 
-	$query  = "SELECT ".$t_columns_clause.", UNIX_TIMESTAMP(last_updated) as last_updated";
+	$query  = "SELECT DISTINCT ".$t_columns_clause.", UNIX_TIMESTAMP(last_updated) as last_updated";
 	$query .= $t_from_clause;
 	$query .= $t_where_clause;
 
