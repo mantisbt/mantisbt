@@ -1,0 +1,35 @@
+-------------------------------------------------------------------------------
+### Troubleshooting ###
+-------------------------------------------------------------------------------
+
+Make sure you ran the upgrade steps (UPGRADING) if you run into new problems
+after installing a new version.
+
+* PROBLEM:  Warning: Undefined index: MANTIS_STRING_COOKIE in config_inc.php
+on line 197 (and similar warnings)
+
+	SOLUTION: Your error_level is too high.  Open up your php3.ini (or php.ini)
+	and lower it.  There should be enough comments around the variable to help
+	you out.
+
+
+* PROBLEM: Cannot login.  It just redirects me to the login page with no errors
+or messages.
+
+	SOLUTION 1: You may have track_vars set to Off (or 0).  Set this to On in
+	your php3.ini or (php.ini) file.  As of version 4.0.3 it is permanently set
+	to On.
+
+	SOLUTION 2: You may not have DES installed on your system.  As a direct
+	result the crypt() funtion may not work properly.  If possible install DES
+	encryption support for your operating system.
+
+
+* PROBLEM: I get warning messages when I post bugnotes.  Everything seems fine
+but the errors happen everytime I post a bugnote.
+
+	SOLUTION: The error is harmless. There was a bug in the pre 0.14.0 versions
+	of Mantis where account preferences were not properly created.  To fix it
+	go to your Account and click on Change Preferences.
+
+-------------------------------------------------------------------------------
