@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.26 2002-10-23 02:18:11 jfitzell Exp $
+	# $Id: print_api.php,v 1.27 2002-11-12 10:10:35 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -627,6 +627,8 @@
 				ORDER BY date_order DESC";
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
+
+		echo "<option value=\"\">\n";
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_version = $row['version'];
