@@ -124,6 +124,9 @@
 			<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<? echo $u_redirect_delay ?>">
 		</td>
 	</tr>
+<?
+	if ( $g_enable_email_notification==1 ) {
+?>
 	<tr bgcolor="<? echo $g_primary_color_dark ?>">
 		<td>
 			<? echo $s_email_on_new ?>
@@ -196,6 +199,21 @@
 			<input type="checkbox" name="f_email_on_priority" <? if ( $u_email_on_priority=="1" ) echo "CHECKED" ?>>
 		</td>
 	</tr>
+<?
+	} else {
+?>
+	<input type="hidden" name="f_email_on_new" value="<? echo $u_email_on_new ?>">
+	<input type="hidden" name="f_email_on_assigned" value="<? echo $u_email_on_assigned ?>">
+	<input type="hidden" name="f_email_on_feedback" value="<? echo $u_email_on_feedback ?>">
+	<input type="hidden" name="f_email_on_resolved" value="<? echo $u_email_on_resolved ?>">
+	<input type="hidden" name="f_email_on_closed" value="<? echo $u_email_on_closed ?>">
+	<input type="hidden" name="f_email_on_reopened" value="<? echo $u_email_on_reopened ?>">
+	<input type="hidden" name="f_email_on_bugnote" value="<? echo $u_email_on_bugnote ?>">
+	<input type="hidden" name="f_email_on_status" value="<? echo $u_email_on_status ?>">
+	<input type="hidden" name="f_email_on_priority" value="<? echo $u_email_on_priority ?>">
+<?
+	}
+?>
 	<tr bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $s_language ?>

@@ -14,73 +14,73 @@
 
 	### A bunch of existance checks; necessary to prevent warnings
 
-	if ( !isset( $f_advanced_report ) ) {
+	if ( !isset( $f_advanced_report ) || ( $f_advanced_report==0 ) ) {
 		$f_advanced_report = 0;
 	} else {
 		$f_advanced_report = 1;
 	}
 
-	if ( !isset( $f_advanced_view ) ) {
+	if ( !isset( $f_advanced_view ) || ( $f_advanced_view==0 ) ) {
 		$f_advanced_view = 0;
 	} else {
 		$f_advanced_view = 1;
 	}
 
-	if ( !isset( $f_advanced_update ) ) {
+	if ( !isset( $f_advanced_update ) || ( $f_advanced_update==0 ) ) {
 		$f_advanced_update = 0;
 	} else {
 		$f_advanced_update = 1;
 	}
 
-	if ( !isset( $f_email_on_new ) ) {
+	if ( !isset( $f_email_on_new ) || ( $f_email_on_new==0 ) ) {
 		$f_email_on_new = 0;
 	} else {
 		$f_email_on_new = 1;
 	}
 
-	if ( !isset( $f_email_on_assigned ) ) {
+	if ( !isset( $f_email_on_assigned ) || ( $f_email_on_assigned==0 ) ) {
 		$f_email_on_assigned = 0;
 	} else {
 		$f_email_on_assigned = 1;
 	}
 
-	if ( !isset( $f_email_on_feedback ) ) {
+	if ( !isset( $f_email_on_feedback ) || ( $f_email_on_feedback==0 ) ) {
 		$f_email_on_feedback = 0;
 	} else {
 		$f_email_on_feedback = 1;
 	}
 
-	if ( !isset( $f_email_on_resolved ) ) {
+	if ( !isset( $f_email_on_resolved ) || ( $f_email_on_resolved==0 ) ) {
 		$f_email_on_resolved = 0;
 	} else {
 		$f_email_on_resolved = 1;
 	}
 
-	if ( !isset( $f_email_on_closed ) ) {
+	if ( !isset( $f_email_on_closed ) || ( $f_email_on_closed==0 ) ) {
 		$f_email_on_closed = 0;
 	} else {
 		$f_email_on_closed = 1;
 	}
 
-	if ( !isset( $f_email_on_reopened ) ) {
+	if ( !isset( $f_email_on_reopened ) || ( $f_email_on_reopened==0 ) ) {
 		$f_email_on_reopened = 0;
 	} else {
 		$f_email_on_reopened = 1;
 	}
 
-	if ( !isset( $f_email_on_bugnote ) ) {
+	if ( !isset( $f_email_on_bugnote ) || ( $f_email_on_bugnote==0 ) ) {
 		$f_email_on_bugnote = 0;
 	} else {
 		$f_email_on_bugnote = 1;
 	}
 
-	if ( !isset( $f_email_on_status ) ) {
+	if ( !isset( $f_email_on_status ) || ( $f_email_on_status==0 ) ) {
 		$f_email_on_status = 0;
 	} else {
 		$f_email_on_status = 1;
 	}
 
-	if ( !isset( $f_email_on_priority ) ) {
+	if ( !isset( $f_email_on_priority ) || ( $f_email_on_priority==0 ) ) {
 		$f_email_on_priority = 0;
 	} else {
 		$f_email_on_priority = 1;

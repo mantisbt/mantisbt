@@ -8,6 +8,7 @@ Mantis
  * Fixed redirect problem when bug report not correctly filled out.
  * Added commented out examples for alternate links in css_inc.php
  * Added closing option tags.
+ * Email prefs do not display when $g_enable_email_notification is 0
 
 08.19.2001  -   0.15.4
 
