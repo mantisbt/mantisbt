@@ -13,6 +13,7 @@ Mantis
  * Fixed bugnote update to check for proper access.
  * Fixed bug_file_upload_inc to user $g_max_file_size.
  * Fixed CSV exporting to not have SPAN tags.
+ * Fixed CSV export MIME type.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.

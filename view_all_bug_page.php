@@ -299,7 +299,7 @@
 		# Send headers to browser to active mime loading
 		# Leigh Morresi <leighm@linuxbandwagon.com>
 
-		header( "Content-Type: plain/text; name=$g_page_title.csv" );
+		header( "Content-Type: text/plain; name=$g_page_title.csv" );
 		header( "Content-Transfer-Encoding: BASE64;" );
 		header( "Content-Disposition: attachment; filename=$g_page_title.csv" );
 
