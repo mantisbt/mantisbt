@@ -79,6 +79,7 @@ Mantis ChangeLog
  * Added $g_view_attachments_threshold to control the access level required to view attachments.  This is useful when there is a need to share the knowledge about the defects, but to secure customer data.
  * Added the support to upload attachments to an FTP server (so now there is DISK, DATABASE, and FTP).  Recently uploaded/downloaded attachments are cached at the web server.
  * Added support for modifying the reporter of a bug.
+ * Added word2k and excel export in print_all_bug_page.php. Users can choose the bugs to display/print, and the fields to export with the 'Printing Options' link
 
 2002.05.19  -  0.17.3
 
