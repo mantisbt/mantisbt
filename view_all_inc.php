@@ -138,6 +138,8 @@
 		print_status_colors();
 	}
 ?>
+<? # Mass treatment page ?>
+<form method="get" action="bug_actiongroup_page.php">
 
 <p>
 <table class="width100" cellspacing="1">
@@ -175,6 +177,11 @@
 </tr>
 <tr class="row-category">
 <?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
+	<td class="center" width="2%">
+		&nbsp;
+	</td>
+<?php	} ?>
+<?php	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
 	<td class="center" width="2%">
 		&nbsp;
 	</td>
@@ -220,6 +227,7 @@
 	for($i=0; $i < $row_count; $i++) {
 		# prefix bug data with v_
 		$row = db_fetch_array($result);
+		
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$v_summary = string_display( $v_summary );
@@ -247,9 +255,18 @@
 <tr>
 	<?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
 	<td bgcolor="<?php echo $status_color ?>">
-			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $v_id ?>">
+			<?php $t_transf="$v_id".','."$v_bug_text_id"; ?>
+			<input type="checkbox" name="f_bug_arr[]" value="<?php echo $t_transf ?>">  
 	</td>
 	<?php	} ?>
+
+	<?php # the pencil shortcut 
+			if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
+	<td bgcolor="<?php echo $status_color ?>">
+			<?php print " <input type=\"image\" name=\"update_$v_id\" src=\"images/update.png\" width=\"11\" height=\"11\">"; ?>
+	</td>
+	<?php	} ?>
+	
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			if ( ON == $g_show_priority_text ) {
@@ -326,20 +343,21 @@
 <?php
 	}
 ?>
+<? # Mass treatment ?>
 <?php	if ( access_level_check_greater_or_equal( $g_bug_move_access_level ) ) { ?>
 <tr>
 	<td colspan="9">
+	
+		<!--
 		<select name="f_project_id">
 		<?php print_project_option_list() ?>
 		</select>
-		<!--
-		# @@@ not functional yet
+		-->
+
 		<select name="f_action">
 		<?php print_all_bug_action_option_list() ?>
 		</select>
-		-->
-		<input type="submit" value="<?php echo $s_move_bugs ?>">
-		</form>
+		<input type="submit" value="<?php echo 'OK';  ?>" > 
 	</td>
 </tr>
 <?php } ?>

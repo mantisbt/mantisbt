@@ -15,6 +15,10 @@
 	check_access( $g_handle_bug_threshold );
 	check_bug_exists( $f_id );
 
+	deleteBug($f_id, $f_bug_text_id);
+
+	# function put in core_helper_API.php
+	/*
 	$c_id			= (integer)$f_id;
 	$c_bug_text_id	= (integer)$f_bug_text_id;
 
@@ -83,7 +87,7 @@
 	$query = "DELETE
 		FROM $g_mantis_bug_history_table
 		WHERE bug_id='$c_id'";
-	$result = db_query($query);
+	$result = db_query($query); */
 
 	$t_redirect_url = 'view_all_bug_page.php';
 	if ( $result ) {

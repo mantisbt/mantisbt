@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.48 $
-	# $Author: vboctor $
-	# $Date: 2002-06-17 22:40:53 $
+	# $Revision: 1.49 $
+	# $Author: jctrosset $
+	# $Date: 2002-06-20 14:45:39 $
 	#
-	# $Id: core_helper_API.php,v 1.48 2002-06-17 22:40:53 vboctor Exp $
+	# $Id: core_helper_API.php,v 1.49 2002-06-20 14:45:39 jctrosset Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -146,6 +146,84 @@
 			print_header_redirect( 'main_page.php' );
 		}
 	}
+
+	
+	# --------------------
+	# 
+	# allows bug deletion :
+	# delete the bug, bugtext, bugnote, and bugtexts selected
+	# used in bug_delete.php & mass treatments
+	function deleteBug( $p_id, $p_bug_text_id ) {
+		global $g_mantis_bug_file_table, $g_mantis_bug_table, $g_mantis_bug_text_table,
+			   $g_mantis_bugnote_table, $g_mantis_bugnote_text_table, $g_mantis_project_table;
+	
+	$c_id			= (integer)$p_id;
+	$c_bug_text_id	= (integer)$p_bug_text_id;
+
+	# Delete the bug entry
+		$query = "DELETE
+				FROM $g_mantis_bug_table
+				WHERE id='$c_id'";
+		$result = db_query($query);
+
+	# Delete the corresponding bug text
+		$query = "DELETE
+				FROM $g_mantis_bug_text_table
+				WHERE id='$c_bug_text_id'";
+		$result = db_query($query);
+
+	# Delete the bugnote text items
+		$query = "SELECT bugnote_text_id
+				FROM $g_mantis_bugnote_table
+				WHERE bug_id='$c_id'";
+		$result = db_query($query);
+		$bugnote_count = db_num_rows( $result );
+		for ($i=0;$i<$bugnote_count;$i++){
+			$row = db_fetch_array( $result );
+			$t_bugnote_text_id = $row['bugnote_text_id'];
+
+			# Delete the corresponding bugnote texts
+			$query = "DELETE
+					FROM $g_mantis_bugnote_text_table
+					WHERE id='$t_bugnote_text_id'";
+			$result2 = db_query( $query );
+		}
+
+	# Delete the corresponding bugnotes
+		$query = "DELETE
+				FROM $g_mantis_bugnote_table
+				WHERE bug_id='$c_id'";
+		$result = db_query($query);
+
+	if ( DISK == $g_file_upload_method ) {
+		# Delete files from disk
+		$query = "SELECT diskfile
+			FROM $g_mantis_bug_file_table
+			WHERE bug_id='$c_id'";
+		$result = db_query($query);
+		$file_count = db_num_rows( $result );
+
+		# there may be more than one file
+		for ($i=0;$i<$file_count;$i++){
+			$row = db_fetch_array( $result );
+			$t_diskfile = $row['diskfile'];
+
+			# use this instead of delete;
+			# in windows replace with system("del $t_diskfile");
+			chmod( $t_diskfile, 0775 );
+			if ( file_exists($t_diskfile)  )
+			unlink( $t_diskfile );
+		}
+	}
+
+	# Delete the corresponding files
+		$query = "DELETE
+			FROM $g_mantis_bug_file_table
+			WHERE bug_id='$c_id'";
+		$result = db_query($query);
+	} 
+	
+
 	# --------------------
 	# check to see if bugnote exists
 	# if it doesn't exist then redirect to the main page

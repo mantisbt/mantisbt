@@ -694,15 +694,16 @@
 	# --------------------
 	# @@@ preliminary support for multiple bug actions.
 	function print_all_bug_action_option_list() {
-		$zook_arr[0] = 'Move Bugs';
-		$zook_arr[1] = 'Assign';
-		$zook_arr[3] = 'Resolve';
-		$zook_arr[4] = 'Update Priority';
-		$zook_arr[4] = 'Update Status';
+		$commands = array(  'MOVE' => 'Move Bugs',
+							'ASSIGN' => 'Assign',
+							'CLOSE' => 'Close',
+							'DELETE' => 'Delete',
+							'RESOLVE' => 'Resolve',
+							'UP_PRIOR' => 'Update Priority',
+							'UP_STATUS' => 'Update Status' );
 
-		$t_count = count( $zook_arr );
-		for ($i=0;$i<$t_count;$i++) {
-			PRINT '<option value="">'.$zook_arr[$i].'</option>';
+		while (list ($key,$val) = each ($commands)) {
+			PRINT "<option value=\"".$key."\">".$val."</option>";
 		}
 	}
 	# --------------------
