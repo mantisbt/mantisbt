@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.4 2004-08-21 13:54:28 prichards Exp $
+ * $Id: common.js,v 1.5 2005-01-31 21:34:14 prichards Exp $
  * --------------------------------------------------------
  */
 
@@ -53,7 +53,7 @@ function GetCookie( p_cookie ) {
 
 	t_cookies = t_cookies.split( ";" );
 
-	i = 0;
+	var i = 0;
 	while( i < t_cookies.length ) {
 		var t_cookie = t_cookies[ i ];
 
