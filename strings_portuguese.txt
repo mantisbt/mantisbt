@@ -495,7 +495,7 @@
         $s_account_create_fail = "FALHA AO CRIAR A CONTA";
 
         ### signup_page.php3
-        $s_signup_info = "Escolha seu usuário e entre com um e-mail valido.  Um endereco geredo automatico sera enviado para seu e-mail.";
+        $s_signup_info = "Escolha seu usuário e entre com um e-mail valido.  Uma senha gereda automaticamente sera enviado para seu e-mail.";
         $s_signup_title = "Assinar";
         ### $s_username = ""; # defined above
         ### $s_email = ""; # defined above

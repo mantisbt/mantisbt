@@ -493,7 +493,7 @@
 	$s_account_create_fail = "FAILED TO CREATE USER ACCOUNT";
 
 	### signup_page.php3
-	$s_signup_info = "Choose your login name and enter a valid email address.  A randomnly generated address will be send to your address.";
+	$s_signup_info = "Choose your login name and enter a valid email address.  A randomnly generated password will be send to your address.";
 	$s_signup_title = "Signup";
 	### $s_username = ""; # defined above
 	### $s_email = ""; # defined above
