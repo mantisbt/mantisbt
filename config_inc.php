@@ -187,9 +187,9 @@
 	$g_default_email_on_closed    = 1;
 	$g_default_email_on_reopened  = 1;
 	$g_default_email_on_bugnote   = 1;
-	$g_default_email_on_status    = 0;
-	$g_default_email_on_priority  = 0;
-	$g_default_language           = "english";
+	$g_default_email_on_status    = 0; # @@@ Unused
+	$g_default_email_on_priority  = 0; # @@@ Unused
+	# default_language - is set to site language
 
 	###############################
 	### Mantis Summary Settings ###
@@ -233,7 +233,7 @@
 
 	# --- file upload settings --------
 	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
-	$g_allow_file_upload    = 0;
+	$g_allow_file_upload    = 1;
 	# "disk" or "database" (currently only disk is supported)
 	$g_store_file_to        = "disk";
 

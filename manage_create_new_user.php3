@@ -43,12 +43,25 @@
 	$t_user_id = db_insert_id();
 
 	### Create preferences
+
     $query = "INSERT
     		INTO $g_mantis_user_pref_table
-    		(id, user_id, advanced_report, advanced_view)
+    		(id, user_id, advanced_report, advanced_view, advanced_update,
+    		refresh_delay, redirect_delay,
+    		email_on_new, email_on_assigned,
+    		email_on_feedback, email_on_resolved,
+    		email_on_closed, email_on_reopened,
+    		email_on_bugnote, email_on_status,
+    		email_on_priority, language)
     		VALUES
-    		(null, '$t_user_id',
-    		'$g_default_advanced_report', '$g_default_advanced_view')";
+    		(null, '$t_user_id', '$g_default_advanced_report',
+    		'$g_default_advanced_view', '$g_default_advanced_update',
+    		'$g_default_refresh_delay', '$g_default_redirect_delay',
+    		'$g_default_email_on_new', '$g_default_email_on_assigned',
+    		'$g_default_email_on_feedback', '$g_default_email_on_resolved',
+    		'$g_default_email_on_closed', '$g_default_email_on_reopened',
+    		'$g_default_email_on_bugnote', '$g_default_email_on_status',
+    		'$g_default_email_on_priority', '$g_default_language')";
     $result = db_query($query);
 
 	### Add profile

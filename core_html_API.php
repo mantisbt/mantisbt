@@ -85,7 +85,7 @@
 	# (9) $p_page is included.  This allows for the admin to have a nice baner or
 	# graphic at the top of every page
 	function print_top_page( $p_page ) {
-		if (( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
+		if (( !empty( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
 			include( $p_page );
 		}
 	}
@@ -93,7 +93,7 @@
 	# (10) $p_page is included.  This allows for the admin to have a nice baner or
 	# graphic at the bottom of every page
 	function print_bottom_page( $p_page ) {
-		if (( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
+		if (( !empty( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
 			include( $p_page );
 		}
 	}
@@ -302,7 +302,7 @@
 		PRINT "<p><div align=\"center\">";
 			print_bracket_link( $g_documentation_html, $s_user_documentation );
 			print_bracket_link( $g_proj_doc_page, $s_project_documentation );
-			if ( $g_allow_file_upload==1 ) {
+			if (( $g_allow_file_upload==1 )&&( access_level_check_greater_or_equal( MANAGER ) )) {
 				print_bracket_link( $g_proj_doc_add_page, $s_add_file );
 			}
 		PRINT "</div>";

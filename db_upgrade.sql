@@ -57,7 +57,7 @@ CREATE TABLE mantis_user_pref_table (
 
 # Add a new field to store profile descriptions
 
-ALTER TABLE mantis_bug_table ADD profile_id INT (7) UNSIGNED ZEROFILL not null AFTER votes
+ALTER TABLE mantis_bug_table ADD profile_id INT (7) UNSIGNED ZEROFILL not null;
 
 # =================
 # 0.12.x to 0.14.0
@@ -102,8 +102,8 @@ CREATE TABLE mantis_project_version_table (
 
 # Add new project_id fields for our tables
 
-ALTER TABLE mantis_bug_table ADD project_id INT (7) UNSIGNED ZEROFILL not null AFTER id;
-ALTER TABLE mantis_news_table ADD project_id INT (7) UNSIGNED ZEROFILL not null AFTER id;
+ALTER TABLE mantis_bug_table ADD project_id INT (7) UNSIGNED ZEROFILL not null;
+ALTER TABLE mantis_news_table ADD project_id INT (7) UNSIGNED ZEROFILL not null;
 
 # make changes to bug_table
 
@@ -112,7 +112,7 @@ ALTER TABLE mantis_bug_table CHANGE version version VARCHAR (32) DEFAULT 'none' 
 
 # make changes to user_table
 
-ALTER TABLE mantis_user_table ADD login_count INT not null DEFAULT '0' AFTER access_level;
+ALTER TABLE mantis_user_table ADD login_count INT not null DEFAULT '0';
 ALTER TABLE mantis_user_table CHANGE access_level access_level ENUM ('viewer','reporter','updater','developer','manager','administrator') DEFAULT 'viewer' not null;
 ALTER TABLE mantis_user_table ADD UNIQUE(username);
 
@@ -261,28 +261,27 @@ ALTER TABLE mantis_user_table CHANGE cookie_string cookie_string VARCHAR (64) no
 
 # Add file_path to projects, also min access
 
-ALTER TABLE mantis_project_table ADD file_path VARCHAR (250) not null AFTER view_state;
-ALTER TABLE mantis_project_table ADD access_min INT (2) DEFAULT '10' not null AFTER view_state;
+ALTER TABLE mantis_project_table ADD file_path VARCHAR (250) not null;
+ALTER TABLE mantis_project_table ADD access_min INT (2) DEFAULT '10' not null;
 
 # Add new user prefs
 
 ALTER TABLE mantis_user_pref_table ADD refresh_delay INT (4) not null;
 ALTER TABLE mantis_user_pref_table ADD language VARCHAR (16)DEFAULT 'english' not null;
-ALTER TABLE mantis_user_pref_table ADD email_on_new INT (1) not null AFTER refresh_wait;
-ALTER TABLE mantis_user_pref_table ADD email_on_assigned INT (1) not null AFTER email_on_new;
-ALTER TABLE mantis_user_pref_table ADD email_on_feedback INT (1) not null AFTER email_on_assigned;
-ALTER TABLE mantis_user_pref_table ADD email_on_resolved INT (1) not null AFTER email_on_feedback;
-ALTER TABLE mantis_user_pref_table ADD email_on_closed INT (1) not null AFTER email_on_resolved;
-ALTER TABLE mantis_user_pref_table ADD email_on_reopened INT (1) not null AFTER email_on_closed;
-ALTER TABLE mantis_user_pref_table ADD email_on_bugnote INT (1) not null AFTER email_on_reopened;
-ALTER TABLE mantis_user_pref_table ADD email_on_status INT (1) not null AFTER email_on_bugnote;
-ALTER TABLE mantis_user_pref_table ADD redirect_delay INT (1) not null AFTER refresh_wait;
-ALTER TABLE mantis_user_pref_table ADD email_on_priority INT (1) not null AFTER email_on_status;
-ALTER TABLE mantis_user_pref_table ADD advanced_update INT (1) not null AFTER advanced_view;
-ALTER TABLE mantis_user_pref_table ADD default_profile INT (7) UNSIGNED ZEROFILL DEFAULT '0' not null AFTER user_id;
-ALTER TABLE mantis_user_pref_table ADD default_project INT (7) UNSIGNED ZEROFILL not null AFTER default_profile;
+ALTER TABLE mantis_user_pref_table ADD email_on_new INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD email_on_assigned INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD email_on_feedback INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD email_on_resolved INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD email_on_closed INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD email_on_reopened INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD email_on_bugnote INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD email_on_status INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD redirect_delay INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD email_on_priority INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD advanced_update INT (1) not null;
+ALTER TABLE mantis_user_pref_table ADD default_profile INT (7) UNSIGNED ZEROFILL DEFAULT '0' not null;
+ALTER TABLE mantis_user_pref_table ADD default_project INT (7) UNSIGNED ZEROFILL not null;
 ALTER TABLE mantis_user_profile_table DROP default_profile;
-ALTER TABLE mantis_user_pref_table DROP default_project_id;
 
 # Make new project level user access table
 
@@ -328,8 +327,8 @@ CREATE TABLE mantis_bug_file_table (
 
 # Add a ordering field for versions
 
-ALTER TABLE mantis_project_version_table ADD ver_order INT (7) not null
+ALTER TABLE mantis_project_version_table ADD ver_order INT (7) not nul;
 
 # Make the cookie string unique
 
-ALTER TABLE mantis_user_table ADD UNIQUE(cookie_string) 
+ALTER TABLE mantis_user_table ADD UNIQUE(cookie_string);

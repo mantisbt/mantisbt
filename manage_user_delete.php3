@@ -30,6 +30,11 @@
     			FROM $g_mantis_user_pref_table
     			WHERE user_id='$f_id'";
     	$result = db_query( $query );
+
+    	$query = "DELETE
+    			FROM $g_mantis_project_user_list_table
+	    		WHERE user_id='$f_id'";
+	    $result = db_query( $query );
     }
 ?>
 <? print_html_top() ?>

@@ -270,7 +270,7 @@
 			<b><? echo $s_steps_to_reproduce ?></b>
 		</td>
 		<td colspan=5 bgcolor=<? echo $g_primary_color_dark ?>>
-			<textarea cols=60 rows=5 name=f_steps_to_reproduce><? echo $v2_steps_to_reproduce ?></textarea>
+			<textarea wrap=virtual cols=60 rows=5 name=f_steps_to_reproduce><? echo $v2_steps_to_reproduce ?></textarea>
 		</td>
 	</tr>
 	<tr>

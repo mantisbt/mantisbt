@@ -2,7 +2,7 @@ NOTE: Currently Mantis is still in heavy development.  Drastic changes may
 occur negating large amounts of customization that you may implement.
 When the package is functionally more mature we will concentrate on
 making the interface more customizable.  Keep this in mind before you
-put in a lot of effort into custmizing the look/feel of the product.
+put in a lot of effort into customizing the look/feel of the product.
 
 
 
@@ -10,29 +10,20 @@ This file contains information to help you customize Mantis.  A more
 detailed doc is in the works.
 
 * config_inc.php - this file contains all the site-wide variables.
-  It is advisable to rename this to something else then change the
-  require() statement in core_API.php to point to this new file.  This
-  way you can easily upgrade your installations while not having
-  to re-enter all your configuration settings.
 
   NOTE: since the package is still being changed a fair amount I suggest
   the following.  You configure the config_inc.php file but then rename
   it to something like my_config.php.  When you copy a new release
   over it will overwrite the config_inc.php.  Open up that file and
   at the very bottom put: include("my_config.php");
-  This way any new varaibles get setup and then your custom settings
+  This way any new variables get setup and then your custom settings
   overwrite anything else.  After you get up and running you can go back
   and modify config_inc.php and then repeat the cycle.
 
   The file contains several setting variables that you can configure.  Most of
-  it should be self explanatory
+  it should be self explanatory.
 
-* core_API.php - this file contains all the functions
-
-* To add more categories just edit through the manage area.  The format must
-  be separated by , and enclosed in ''.
-
-  eg.  'bugtracker','other','display','core','loader'
+* core_*_API.php - these files contains all the functions.
 
 * global variables are prefixed by g_
 * parameters in functions are prefixed with p_
@@ -45,9 +36,9 @@ More detail can be seen in the coding guidelines at:
 http://mantisbt.sourceforge.net/guidelines.php3
 
 Also at:
-http://utvikler.start.no/code/php_coding_standard.html (excellent)
+http://utvikler.start.no/code/php_coding_standard.html
 
-* The files are split into three basic catgories, viewable pages,
+* The files are split into three basic categories, viewable pages,
 include files and pure scripts. Examining the viewable pages (suffix _page)
 should make the basic file format fairly easy to see.  The file names
 themselves should make their purpose apparent.  I decided to break the
@@ -55,7 +46,7 @@ work into many small files rather than have a small number of really
 large files.
 
 * Most of the action scripts have a confirmation page to make sure the action
-completed sucessfully.  The pages will automatically redirect you after a
+completed successfully.  The pages will automatically redirect you after a
 short amount of time.  You can shorten of lengthen the time by editing
 $g_wait_time in config_inc.php.
 
@@ -64,7 +55,7 @@ $g_wait_time in config_inc.php.
 * You can edit the print_header() and print_footer() functions in core_API.php
   to alter what should be visible at the top and bottom of each page.
 
-* All files were editted with TAB SPACES set to 4.  I'm sorry if this causes
+* All files were edited with TAB SPACES set to 4.  I'm sorry if this causes
 a problem, but I can't stand 8 (wastes space) and tabs are helpful.  I've
 tried to alleviate this in the config file by using spaces for the most part.
 

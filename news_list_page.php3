@@ -47,7 +47,7 @@
 			$t_poster_email	= $row2["email"];
 		}
 
-		PRINT "<i>$v_date_posted</i> - <b><a href=\"$g_news_view_page?f_id$v_id\">$v_headline</a></b> - $t_poster_name<br>";
+		PRINT "<i>$v_date_posted</i> - <b><a href=\"$g_news_view_page?f_id=$v_id\">$v_headline</a></b> - $t_poster_name<br>";
 	}  ### end for loop
 ?>
 

@@ -304,12 +304,12 @@
 		global 	$g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie;
 
-		$t_user_id = get_current_user_field( "id" );
 		if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
 			$query = "SELECT *
 					FROM $g_mantis_project_table
 					ORDER BY name";
 		} else {
+			$t_user_id = get_current_user_field( "id" );
 			$query = "SELECT p.id, p.name
 					FROM $g_mantis_project_table p, $g_mantis_project_user_list_table m
 					WHERE 	p.id=m.project_id AND

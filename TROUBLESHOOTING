@@ -5,14 +5,6 @@
 Make sure you ran the upgrade steps (UPGRADING) if you run into new problems
 after installing a new version.
 
-* PROBLEM:  Warning: Undefined index: MANTIS_STRING_COOKIE in config_inc.php
-on line 197 (and similar warnings)
-
-	SOLUTION: Your error_level is too high.  Open up your php3.ini (or php.ini)
-	and lower it.  There should be enough comments around the variable to help
-	you out.
-
-
 * PROBLEM: Cannot login.  It just redirects me to the login page with no errors
 or messages.
 
@@ -24,6 +16,8 @@ or messages.
 	result the crypt() funtion may not work properly.  If possible install DES
 	encryption support for your operating system.
 
+	SOLUTION 3: You do not have require_globals enabled. Set this to on in
+	your php.ini file.
 
 * PROBLEM: I get warning messages when I post bugnotes.  Everything seems fine
 but the errors happen everytime I post a bugnote.

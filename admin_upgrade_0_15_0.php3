@@ -171,26 +171,26 @@ $query[90] = "ALTER TABLE mantis_user_table CHANGE cookie_string cookie_string V
 
 # Add file_path to projects, also min access
 
-$query[91] = "ALTER TABLE mantis_project_table ADD file_path VARCHAR (250) not null AFTER view_state";
-$query[92] = "ALTER TABLE mantis_project_table ADD access_min INT (2) DEFAULT '10' not null AFTER view_state";
+$query[91] = "ALTER TABLE mantis_project_table ADD file_path VARCHAR (250) not null";
+$query[92] = "ALTER TABLE mantis_project_table ADD access_min INT (2) DEFAULT '10' not null";
 
 # Add new user prefs
 
 $query[93] = "ALTER TABLE mantis_user_pref_table ADD refresh_delay INT (4) not null";
 $query[94] = "ALTER TABLE mantis_user_pref_table ADD language VARCHAR (16)DEFAULT 'english' not null";
-$query[95] = "ALTER TABLE mantis_user_pref_table ADD email_on_new INT (1) not null AFTER refresh_delay";
-$query[96] = "ALTER TABLE mantis_user_pref_table ADD email_on_assigned INT (1) not null AFTER email_on_new";
-$query[97] = "ALTER TABLE mantis_user_pref_table ADD email_on_feedback INT (1) not null AFTER email_on_assigned";
-$query[98] = "ALTER TABLE mantis_user_pref_table ADD email_on_resolved INT (1) not null AFTER email_on_feedback";
-$query[99] = "ALTER TABLE mantis_user_pref_table ADD email_on_closed INT (1) not null AFTER email_on_resolved";
-$query[100] = "ALTER TABLE mantis_user_pref_table ADD email_on_reopened INT (1) not null AFTER email_on_closed";
-$query[101] = "ALTER TABLE mantis_user_pref_table ADD email_on_bugnote INT (1) not null AFTER email_on_reopened";
-$query[102] = "ALTER TABLE mantis_user_pref_table ADD email_on_status INT (1) not null AFTER email_on_bugnote";
-$query[103] = "ALTER TABLE mantis_user_pref_table ADD redirect_delay INT (1) not null AFTER refresh_delay";
-$query[104] = "ALTER TABLE mantis_user_pref_table ADD email_on_priority INT (1) not null AFTER email_on_status";
-$query[105] = "ALTER TABLE mantis_user_pref_table ADD advanced_update INT (1) not null AFTER advanced_view";
-$query[106] = "ALTER TABLE mantis_user_pref_table ADD default_profile INT (7) UNSIGNED ZEROFILL DEFAULT '0' not null AFTER user_id";
-$query[107] = "ALTER TABLE mantis_user_pref_table ADD default_project INT (7) UNSIGNED ZEROFILL not null AFTER default_profile";
+$query[95] = "ALTER TABLE mantis_user_pref_table ADD email_on_new INT (1) not null";
+$query[96] = "ALTER TABLE mantis_user_pref_table ADD email_on_assigned INT (1) not null";
+$query[97] = "ALTER TABLE mantis_user_pref_table ADD email_on_feedback INT (1) not null";
+$query[98] = "ALTER TABLE mantis_user_pref_table ADD email_on_resolved INT (1) not null";
+$query[99] = "ALTER TABLE mantis_user_pref_table ADD email_on_closed INT (1) not null";
+$query[100] = "ALTER TABLE mantis_user_pref_table ADD email_on_reopened INT (1) not null";
+$query[101] = "ALTER TABLE mantis_user_pref_table ADD email_on_bugnote INT (1) not null";
+$query[102] = "ALTER TABLE mantis_user_pref_table ADD email_on_status INT (1) not null";
+$query[103] = "ALTER TABLE mantis_user_pref_table ADD redirect_delay INT (1) not null";
+$query[104] = "ALTER TABLE mantis_user_pref_table ADD email_on_priority INT (1) not null";
+$query[105] = "ALTER TABLE mantis_user_pref_table ADD advanced_update INT (1) not null";
+$query[106] = "ALTER TABLE mantis_user_pref_table ADD default_profile INT (7) UNSIGNED ZEROFILL DEFAULT '0' not null";
+$query[107] = "ALTER TABLE mantis_user_pref_table ADD default_project INT (7) UNSIGNED ZEROFILL not null";
 $query[108] = "ALTER TABLE mantis_user_profile_table DROP default_profile";
 
 
@@ -235,19 +235,18 @@ $query[111] = "CREATE TABLE mantis_bug_file_table (
 
 $query[112] = "ALTER TABLE mantis_bug_table CHANGE severity severity INT (2) DEFAULT '50' not null";
 $query[113] = "ALTER TABLE mantis_bug_table CHANGE reproducibility reproducibility INT (2) DEFAULT '10' not null";
-$query[114] = "ALTER TABLE mantis_user_pref_table DROP default_project_id";
 
 # Need this entry for the project listing to work
 
-$query[115] = "INSERT INTO mantis_project_user_list_table (project_id, user_id, access_level) VALUES ('0000000','0000000','00')";
+$query[114] = "INSERT INTO mantis_project_user_list_table (project_id, user_id, access_level) VALUES ('0000000','0000000','00')";
 
 # Add ordering field for versions
 
-$query[116] = "ALTER TABLE mantis_project_version_table ADD ver_order INT (7) not null";
+$query[115] = "ALTER TABLE mantis_project_version_table ADD ver_order INT (7) not null";
 
 # Make the cookie string unique
 
-$query[117] = "ALTER TABLE mantis_user_table ADD UNIQUE(cookie_string)";
+$query[116] = "ALTER TABLE mantis_user_table ADD UNIQUE(cookie_string)";
 
 # ---------------
 # run queries

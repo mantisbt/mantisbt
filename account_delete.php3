@@ -42,6 +42,11 @@
     			WHERE user_id='$t_user_id'";
     	$result = db_query( $query );
 
+    	$query = "DELETE
+    			FROM $g_mantis_project_user_list_table
+	    		WHERE user_id='$f_id'";
+	    $result = db_query( $query );
+
 		### delete cookies
 		setcookie( $g_string_cookie );
 		setcookie( $g_project_cookie );
