@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2003.??.??  -  0.18.0a3
+2003.02.26  -  0.18.0a3
 
  * Behaviour change: allow bug IDs to get replaced when they are preceeded by any character that is not a letter, a number, or an underscore instead of requiring them to be preceeded by whitespace
  * Enhancement: Added "Hide resolved" functionality to bug list page.

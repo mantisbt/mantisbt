@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.104 2003-02-26 08:23:58 int2str Exp $
+	# $Id: config_defaults_inc.php,v 1.105 2003-02-26 14:14:56 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -257,7 +257,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version		= '0.18.0-CVS';
+	$g_mantis_version		= '0.18.0a3';
 	$g_show_version			= ON;
 
 	################################
