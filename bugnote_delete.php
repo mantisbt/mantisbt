@@ -40,7 +40,7 @@
 	history_log_event_special( $f_id, BUGNOTE_DELETED, $f_bugnote_id );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id );
+	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

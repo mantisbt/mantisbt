@@ -6,11 +6,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.23 $
+	# $Revision: 1.24 $
 	# $Author: prescience $
-	# $Date: 2002-06-08 04:11:02 $
+	# $Date: 2002-06-11 01:14:52 $
 	#
-	# $Id: strings_romanian.txt,v 1.23 2002-06-08 04:11:02 prescience Exp $
+	# $Id: strings_romanian.txt,v 1.24 2002-06-11 01:14:52 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -47,6 +47,10 @@
 	$s_bugnote_view_state = 'Bugnote View State';
 	$s_bug_monitor = 'Bug Monitored';
 	$s_bug_end_monitor = 'Bug End Monitor';
+	$s_announcement = 'Announcement';
+	$s_stays_on_top = 'Stays on Top';
+	$s_delete_bugnote_button = 'Bugnote Delete';
+	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bug?';
 
 	$s_new_bug = 'New Bug';
 	$s_bugnote_added = 'Bugnote Added';
