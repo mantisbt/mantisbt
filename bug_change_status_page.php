@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.19 2005-03-18 03:40:19 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.20 2005-04-03 12:43:30 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 	$f_new_status = gpc_get_int( 'new_status' );
 	$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
-	
+
 	if ( ! ( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
 				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
 						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||

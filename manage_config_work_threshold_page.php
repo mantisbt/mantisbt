@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_page.php,v 1.3 2005-03-23 23:57:50 thraxisp Exp $
+	# $Id: manage_config_work_threshold_page.php,v 1.4 2005-04-03 12:43:31 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -29,7 +29,7 @@
 
 	function get_section_begin( $p_section_name ) {
 		global $t_access_levels;
-		
+
 		echo '<table class="width100">';
 		echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 2 ) . '">' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</td>';
@@ -44,9 +44,9 @@
 
 	function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=false ) {
 	    global $t_user, $t_project, $t_show_submit, $t_access_levels;
-		
+
 		$t_needed_access = config_get( $p_threshold );
-		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user ) 
+		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
@@ -84,8 +84,8 @@
 
 	function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
 	    global $t_user, $t_project, $t_show_submit, $t_access_levels;
-	    
-		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user ) 
+
+		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
@@ -112,11 +112,11 @@
 
 		echo '</tr>' . "\n";
 	}
-	
+
 	function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
 	    global $t_user, $t_project, $t_show_submit, $t_access_levels;
-	    
-		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user ) 
+
+		$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project, $t_user )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only );
 
 		echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
@@ -144,20 +144,20 @@
 
 		echo '</tr>' . "\n";
 	}
-	
+
 	function get_section_end() {
 		echo '</table><br />' . "\n";
 	}
 
     echo "<br /><br />\n";
-    
+
 	if ( ALL_PROJECTS == $t_project ) {
 	    $t_project_title = lang_get( 'config_all_projects' );
 	} else {
 	    $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
-	
+
 	echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 
 	# Issues

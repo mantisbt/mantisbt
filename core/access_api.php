@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.40 2005-03-31 02:32:32 thraxisp Exp $
+	# $Id: access_api.php,v 1.41 2005-04-03 12:43:33 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -143,7 +143,7 @@
 		    return ( $p_user_access_level >= $p_threshold );
 		}
 	}
-	
+
 	# --------------------
 	# Get the current user's access
 	#
@@ -263,7 +263,7 @@
 		}
 
 		$t_access_level = access_get_project_level( $p_project_id, $p_user_id );
-		
+
 		return access_compare_level( $t_access_level, $p_access_level ) ;
 	}
 

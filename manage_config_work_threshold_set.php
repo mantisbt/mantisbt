@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_work_threshold_set.php,v 1.3 2005-03-23 23:57:51 thraxisp Exp $
+	# $Id: manage_config_work_threshold_set.php,v 1.4 2005-04-03 12:43:31 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -25,17 +25,17 @@
 
 	function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
 	    global $t_access, $t_project;
-	    
+
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
 	        $f_threshold = gpc_get( 'flag_thres_' . $p_threshold );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
-            # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_threshold, $f_access); echo '<br />';	       
+            # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_threshold, $f_access); echo '<br />';
 		    $t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
-		    
+
 		    $t_lower_threshold = ANYBODY;
 		    $t_array_threshold = array();
-		
+
 		    foreach( $t_access_levels as $t_access_level ) {
 			    $t_entry_array = explode_enum_arr( $t_access_level );
 		        $t_set = $t_entry_array[0];
@@ -55,31 +55,31 @@
 		        config_set( $p_threshold, $t_array_threshold, NO_USER, $t_project, $f_access );
 		    } else {
 		        config_set( $p_threshold, $t_lower_threshold, NO_USER, $t_project, $f_access );
-		    } 
+		    }
 		}
 	}
 
 	function set_capability_boolean( $p_threshold, $p_all_projects_only=false ) {
 	    global $t_access, $t_project;
-	    
+
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
 	        $f_flag = gpc_get( 'flag_' . $p_threshold, OFF );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
-            # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';	       
-		    
+            # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';
+
 		    config_set( $p_threshold, $f_flag, NO_USER, $t_project, $f_access );
 		}
 	}
 
 	function set_capability_enum( $p_threshold, $p_all_projects_only=false ) {
 	    global $t_access, $t_project;
-	    
+
 	    if ( ( $t_access >= config_get_access( $p_threshold ) )
 		          && ( ( ALL_PROJECTS == $t_project ) || ! $p_all_projects_only ) ) {
 	        $f_flag = gpc_get( 'flag_' . $p_threshold );
 	        $f_access = gpc_get_int( 'access_' . $p_threshold );
-            # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';	       
+            # @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';
 
 		    config_set( $p_threshold, $f_flag, NO_USER, $t_project, $f_access );
 		}

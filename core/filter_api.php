@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.94 2005-04-01 02:43:16 thraxisp Exp $
+	# $Id: filter_api.php,v 1.95 2005-04-03 12:43:34 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -757,7 +757,7 @@
 
 		if ( ( 'on' == $t_filter['sticky_issues'] ) && ( NULL !== $p_show_sticky ) ) {
 			$t_order_array[] = "sticky DESC";
-		} 
+		}
 		for ( $i=0; $i < count( $t_sort_fields ); $i++ ) {
 			$c_sort = db_prepare_string( $t_sort_fields[$i] );
 
@@ -780,7 +780,7 @@
 		}
 		$t_order = " ORDER BY " . implode( ', ', $t_order_array );
 		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
-		
+
 		$query2  = "SELECT DISTINCT $t_select
 					$t_from
 					$t_join
@@ -1263,7 +1263,7 @@
 			</td>
 			<td class="small-caption" valign="top" id="hide_status_filter_target">
 							<?php
-								if ( 'simple' == $t_view_type ) { 
+								if ( 'simple' == $t_view_type ) {
 									$t_output = '';
 									$t_none_found = false;
 									if ( count( $t_filter['hide_status'] ) == 0 ) {
@@ -1768,7 +1768,7 @@
 						$f_switch_view_link = 'view_all_set.php?type=6&view_type=';
 					} else {
 						$f_switch_view_link = 'view_filters_page.php?view_type=';
-					}					
+					}
 
 					if ( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
 						if ( 'advanced' == $t_view_type ) {

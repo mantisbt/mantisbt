@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.23 2005-03-23 22:32:36 thraxisp Exp $
+	# $Id: config_api.php,v 1.24 2005-04-03 12:43:33 jlatour Exp $
 	# --------------------------------------------------------
 
 	# cache for config variables
@@ -72,9 +72,9 @@
 			} else {
 				$t_project_clause = "project_id=$t_projects[0]";
 			}
-			
-			# @@@ thraxisp @@@ this code is required to handle the change in field name in the database. 
-			# @@@ It can probably be removed after the next release , if the upgrade is fixed 
+
+			# @@@ thraxisp @@@ this code is required to handle the change in field name in the database.
+			# @@@ It can probably be removed after the next release , if the upgrade is fixed
 			# @@@ i.e. the only people that may need this are using CVS now.
 			if ( db_field_exists( 'access_reqd', $t_config_table ) ) {
 				$t_access_field = 'access_reqd';

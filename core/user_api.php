@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.92 2005-03-28 21:36:00 jlatour Exp $
+	# $Id: user_api.php,v 1.93 2005-04-03 12:43:36 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -631,14 +631,14 @@
 			$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS );
 		} else {
 			$c_user_id = db_prepare_int( $p_user_id );
-	
+
 			$t_project_table			= config_get( 'mantis_project_table' );
 			$t_project_user_list_table	= config_get( 'mantis_project_user_list_table' );
 			$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
-	
+
 			$t_public	= VS_PUBLIC;
 			$t_private	= VS_PRIVATE;
-		
+
 			$query = "SELECT DISTINCT( p.id ), p.name
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
@@ -656,12 +656,12 @@
 
 			$result = db_query( $query );
 			$row_count = db_num_rows( $result );
-	
+
 			$t_projects = array();
-	
+
 			for ( $i=0 ; $i < $row_count ; $i++ ) {
 				$row = db_fetch_array( $result );
-	
+
 				array_push( $t_projects, $row['id'] );
 			}
 		}

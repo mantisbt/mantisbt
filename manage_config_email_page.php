@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_page.php,v 1.5 2005-03-23 23:57:48 thraxisp Exp $
+	# $Id: manage_config_email_page.php,v 1.6 2005-04-03 12:43:31 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -104,7 +104,7 @@
 	        $t_project_title = sprintf( lang_get( 'config_project' ) , project_get_name( $t_project ) );
 	    }
 	    echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
-	    
+
 		get_section_begin_for_email( lang_get( 'email_notification' ) );
 		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );
 		get_capability_row_for_email( lang_get( 'email_on_assigned' ), 'owner' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.16 2005-03-31 02:32:32 thraxisp Exp $
+	# $Id: manage_proj_page.php,v 1.17 2005-04-03 12:43:31 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -92,7 +92,7 @@
 
 		# only print row if user has project management privileges
 		if (access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) {
-		
+
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td>
@@ -114,7 +114,7 @@
 <?php
 		}
 		$t_subprojects = project_hierarchy_get_subprojects( $t_project_id );
-	
+
 		if ( 0 < count( $t_projects ) || 0 < count( $t_subprojects ) ) {
 			array_unshift( $t_stack, $t_projects );
 		}

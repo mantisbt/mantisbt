@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_hierarchy_api.php,v 1.3 2005-03-23 23:24:57 jlatour Exp $
+	# $Id: project_hierarchy_api.php,v 1.4 2005-04-03 12:43:36 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Project Hierarchy API ###
@@ -62,46 +62,46 @@
 	# --------------------
 	function project_hierarchy_is_toplevel( $p_project_id ) {
 		global $g_cache_project_hierarchy;
-		
+
 		if ( null === $g_cache_project_hierarchy ) {
 			project_hierarchy_cache();
 		}
-		
+
 		if ( isset( $g_cache_project_hierarchy[ ALL_PROJECTS ] ) ) {
 			return in_array( $p_project_id, $g_cache_project_hierarchy[ ALL_PROJECTS ] );
 		} else {
 			return false;
 		}
 	}
-	
+
 	$g_cache_project_hierarchy = null;
-	
+
 	# --------------------
 	function project_hierarchy_cache() {
 		global $g_cache_project_hierarchy;
-		
+
 		$t_project_table			= config_get( 'mantis_project_table' );
 		$t_project_hierarchy_table	= config_get( 'mantis_project_hierarchy_table' );
-		
+
 		$query = "SELECT DISTINCT( p.id ), ph.parent_id, p.name
 				  FROM $t_project_table p
 				  LEFT JOIN $t_project_hierarchy_table ph
 				    ON ph.child_id = p.id
 				  WHERE p.enabled = 1
 				  ORDER BY p.name";
-		
+
 		$result = db_query( $query );
 		$row_count = db_num_rows( $result );
 
 		$g_cache_project_hierarchy = array();
-		
+
 		for ( $i=0 ; $i < $row_count ; $i++ ){
 			$row = db_fetch_array( $result );
-			
+
 			if ( null == $row['parent_id'] ) {
 				$row['parent_id'] = ALL_PROJECTS;
 			}
-			
+
 			if ( isset( $g_cache_project_hierarchy[ $row['parent_id'] ] ) ) {
 				$g_cache_project_hierarchy[ $row['parent_id'] ][] = $row['id'];
 			} else {
@@ -109,16 +109,16 @@
 			}
 		}
 	}
-		
+
 
 	# --------------------
 	function project_hierarchy_get_subprojects( $p_project_id ) {
 		global $g_cache_project_hierarchy;
-		
+
 		if ( null === $g_cache_project_hierarchy ) {
 			project_hierarchy_cache();
 		}
-		
+
 		if ( isset( $g_cache_project_hierarchy[ $p_project_id ] ) ) {
 			return $g_cache_project_hierarchy[ $p_project_id ];
 		} else {

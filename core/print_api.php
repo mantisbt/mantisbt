@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.120 2005-03-21 23:17:53 thraxisp Exp $
+	# $Id: print_api.php,v 1.121 2005-04-03 12:43:35 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1172,7 +1172,7 @@
 	# --------------------
 	# prints the signup link
 	function print_signup_link() {
-		if( ( ON == config_get( 'allow_signup' ) ) && 
+		if( ( ON == config_get( 'allow_signup' ) ) &&
 		    ( ON == config_get( 'enable_email_notification' ) ) ) {
 			print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.158 2005-03-23 22:07:56 vwegert Exp $
+	# $Id: html_api.php,v 1.159 2005-04-03 12:43:35 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -481,7 +481,7 @@
 						$t_link = 'manage_user_page.php';
 					} else {
 						if ( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project )
-								&& ( $t_current_project <> ALL_PROJECTS ) ) { 
+								&& ( $t_current_project <> ALL_PROJECTS ) ) {
 							$t_link = 'manage_proj_edit_page.php?project_id=' . $t_current_project;
 						} else {
 							$t_link = 'manage_proj_page.php';

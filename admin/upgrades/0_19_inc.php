@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.9 2005-03-23 22:32:34 thraxisp Exp $
+	# $Id: 0_19_inc.php,v 1.10 2005-04-03 12:43:32 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,19 +65,19 @@
 			  INDEX (config_id),
 			  UNIQUE config ( config_id, project_id, user_id ) )"
 		);
-		
+
 	$upgrades[] = new SQLUpgrade(
 			'field_shorten-1',
 			'shorten field names: lost_password_in_progress_count',
 			"ALTER TABLE $t_user_table CHANGE lost_password_in_progress_count lost_password_request_count INT(2) DEFAULT '0' NOT NULL"
 		);
-		
+
 	$upgrades[] = new SQLUpgrade(
 			'field_naming-1',
 			'DBMS compatibility: access is a reserved word',
 			"ALTER TABLE $t_config_table CHANGE access access_reqd INT DEFAULT '0'"
 		);
-		
+
 
 	return $upgrades;
 ?>
