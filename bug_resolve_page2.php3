@@ -19,6 +19,9 @@
 
 	### Update fields
 	$t_res_val = RESOLVED;
+	if ( isset( $f_close_now ) ) {
+		$t_res_val = CLOSED;
+	}
     $query = "UPDATE $g_mantis_bug_table
     		SET handler_id='$t_handler_id',
     			status='$t_res_val',
