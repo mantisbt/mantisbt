@@ -23,10 +23,10 @@
 <table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>
-	<table cols=2 width=100%>
+	<table width=100%>
 	<form method=post action="<? echo $g_login ?>">
 	<tr>
-		<td bgcolor=<? echo $g_table_title_color ?>>
+		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_login_title ?></b>
 		</td>
 	</tr>
@@ -35,7 +35,7 @@
 			<? echo $s_username ?>:
 		</td>
 		<td width=75%>
-			<input type=text name=f_username size=32>
+			<input type=text name=f_username size=32 maxlength=32>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -43,7 +43,7 @@
 			<? echo $s_password ?>:
 		</td>
 		<td>
-			<input type=password name=f_password size=16>
+			<input type=password name=f_password size=16 maxlength=32>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -51,7 +51,7 @@
 			<? echo $s_save_login ?>:
 		</td>
 		<td>
-			<input type=checkbox name=f_perm_login size=16>
+			<input type=checkbox name=f_perm_login>
 		</td>
 	</tr>
 	<tr>
@@ -64,6 +64,10 @@
 	</td>
 </tr>
 </table>
+<? if ( $g_allow_signup != "0" ) { ?>
+<p>
+<a href="<? echo $g_signup_page ?>"><? echo $s_signup_link ?></a>
+<? } ?>
 </div>
 
 <? print_footer(__FILE__) ?>

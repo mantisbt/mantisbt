@@ -27,7 +27,7 @@
 	if( password_match( $f_password, $u_password ) && ( $u_enabled=="on" ) ) {
 		### set permanent cookie (1 year)
 		if ( $f_perm_login=="on") {
-			setcookie( $g_string_cookie, $u_cookie_string, time()+$g_time_length );
+			setcookie( $g_string_cookie, $u_cookie_string, time()+$g_cookie_time_length );
 		}
 		### set temp cookie, cookie dies after browser closes
 		else {
