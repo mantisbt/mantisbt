@@ -24,7 +24,7 @@
 	$f_bugnote_text = string_edit_textarea( $f_bugnote_text );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id );
+	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
