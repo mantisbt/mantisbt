@@ -12,11 +12,11 @@
 	# Czech: Pøemek Brada, brada@kiv.zcu.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.65 $
+	# $Revision: 1.66 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:18 $
+	# $Date: 2004-10-01 23:03:36 $
 	#
-	# $Id: strings_czech.txt,v 1.65 2004-09-22 16:08:18 bigbadger Exp $
+	# $Id: strings_czech.txt,v 1.66 2004-10-01 23:03:36 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -142,6 +142,15 @@ $s_priority_link = 'podle priority';
 $s_severity_link = 'podle dùle¾itosti';
 $s_category_link = 'podle kategorie';
 $s_resolution_link = 'podle øe¹ení';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Zobrazit pouze vybrané';
@@ -179,6 +188,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'CHYBA: Report nenalezen.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'CHYBA: Projekt nenalezen.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'CHYBA: Pole v databázi nenalezeno.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'CHYBA: Nelze se spojit s FTP serverem.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'CHYBA: Projekt tohoto jména ji¾ existuje.  Prosím vra»te se a zadejte jiné jméno.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'CHYBA: Zadáno nepøípustné jméno projektu. Jméno projektu nesmí být prázdné.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'CHYBA: U¾ivatel nenalezen.';
@@ -278,6 +288,7 @@ $s_new_account_signup_msg = 'Byt vytvoøen následující úèet:';
 $s_reset_request_msg = 'Nìkdo (doufáme ¾e vy) po¾ádal o zmìnu hesla s ovìøením dopisem. Pokud jste to vy nebyl, ignorujte tento dopis a nic se nestane.' . "\n\n" . 'Pokud jste si skuteèn¹ pøáli tuto zmìnu, nav¹tivte následující stránku a dokonèete zmìnu pøístupového hesla:';
 $s_reset_request_in_progress_msg = 'Pokud byla zadána správná kombinace u¾ivatelského jména a elektronické adresy pro vá¹ úèet, ode¹leme vám na tuto adresu potvrzovací dopis. A¾ tento dopis dostanete, øiïte se pokyny v nìm pro dokonèení zmìny pøístupového hesla.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Následující problém vy¾aduje va¹i ODEZVU.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Následující problém byl PØIJAT.';
 $s_email_notification_title_for_status_bug_confirmed = 'Následující problém byl POTVRZEN.';
@@ -333,6 +344,7 @@ $s_username = 'U¾ivatelské jméno';
 $s_realname = 'Skuteèné jméno';
 $s_email = 'Elektronická adresa';
 $s_password = 'Heslo';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'Heslo znovu';
 $s_access_level = 'Úroveò pøístupu';
 $s_update_user_button = 'Aktualizovat u¾ivatele';
@@ -845,6 +857,7 @@ $s_signup_captcha_request = 'Zadejte kód který vidíte v rámeèku na pravé stranì'
 $s_signup_info = 'Po dokonèení této kontroly va¹ich odpovìdí vám po¹leme kontrolní elektronický dopis.<br/>Pou¾itím tohoto kontrolního dopisu budete moci aktivovat vá¹ úèet. Nepodaøí-li se vám aktivovat úèet v prùbìhu sedmi dní, bude úèet smazán.<br/>Abyste dostali tento kontrolní dopis, musí být vámi zadaná elektronická adresa platná.';
 $s_signup_title = 'Vytvoøení u¾ivatele';
 $s_signup_button = 'Vytvoøit';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Nastavení stránky';
@@ -1041,6 +1054,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>P O Z O R</b>. Ne v¹e
 $s_create_child_bug_button = "Vytvoøit potomka";
 $s_bug_cloned_to = "Problém je klonován";
 $s_bug_created_from = "Problém generován z";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

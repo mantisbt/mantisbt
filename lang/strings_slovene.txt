@@ -135,6 +135,15 @@ $s_priority_link = 'Per priority';
 $s_severity_link = 'Per severity';
 $s_category_link = 'Per category';
 $s_resolution_link = 'Per resolution';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Pokaži samo izbrane';
@@ -172,6 +181,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Beležka ni bila najdena.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt ni bil najden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Nisem našel polja \'%s\' v podatkovni bazi.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Dostop do FTP serverja je onemogočen.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ime projekta je že v uporabi. Vrnite se nazaj in izberite drugega.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ime projekta je neveljavno. Ime projekta ne sme biti prazno.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Uporabnika ni bilo mogoče najti.';
@@ -272,6 +282,7 @@ $s_new_account_signup_msg = 'The following account has been created:';
 $s_reset_request_msg = 'Prišlo je do zahteve po ponastavitvi vašega gesla';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Naslednja zadeva zahteva vašo POVRATNO INFORMACIJO.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Naslednja zadeva je bila PRIZNANA.';
 $s_email_notification_title_for_status_bug_confirmed = 'Naslednja zadeva je bila POTRJENA.';
@@ -327,6 +338,7 @@ $s_username = 'Uporabniško ime';
 $s_realname = 'Pravo ime';
 $s_email = 'Email';
 $s_password = 'Geslo';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Potrditev gesla';
 $s_access_level = 'Nivo dostopa';
 $s_update_user_button = 'Posodobi uporabnika';
@@ -840,6 +852,7 @@ $s_signup_captcha_request = 'Enter the code as it is shown in the box on the rig
 $s_signup_info = 'Vnesite uporabniško ime in veljaven elektronski naslov. Na ta naslov bomo poslali naključne ustvarjeno geslo.';
 $s_signup_title = 'Prijava';
 $s_signup_button = 'Prijava';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Edit Site Settings';
@@ -1036,6 +1049,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>POZOR</b>. Niso vsi p
 $s_create_child_bug_button = "Ustvari potomca";
 $s_bug_cloned_to = "Zadeva klonirana";
 $s_bug_created_from = "Zadeva ustvarjena iz";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

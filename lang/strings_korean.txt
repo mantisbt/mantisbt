@@ -7,13 +7,13 @@
 
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
-	#             hardkoder@gmail.com - 2004/09 현재 수정중 입니다. 중복 수정을 피하기 위해서 수정시 연락 바랍니다.
+	#             hardkoder@gmail.com - (마지막 수정일:2004/09/22)
 	# -------------------------------------------------
-	# $Revision: 1.74 $
+	# $Revision: 1.75 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:21 $
+	# $Date: 2004-10-01 23:03:37 $
 	#
-	# $Id: strings_korean.txt,v 1.74 2004-09-22 16:08:21 bigbadger Exp $
+	# $Id: strings_korean.txt,v 1.75 2004-10-01 23:03:37 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -68,14 +68,15 @@ $s_stays_on_top = '맨 위로';
 $s_delete_bugnote_button = '이슈노트 삭제';
 $s_delete_bugnote_sure_msg = '이 이슈노트를 삭제하겠습니까?';
 $s_bug_relationships = '관계';
-$s_empty_password_sure_msg = '암호가 설정되지 않았습니다. 이대로 사용하시겠습니까?';
-$s_empty_password_button = '암호없이 사용';
+$s_empty_password_sure_msg = '비밀번호가 설정되지 않았습니다. 이대로 사용하시겠습니까?';
+$s_empty_password_button = '비밀번호없이 사용';
 
-$s_duplicate_of = "다음과 중복됨";
-$s_has_duplicate = "다음에 중복됨";
-$s_related_to = "다음과 관련됨";
-$s_dependant_on = "다음에 종속됨";
-$s_blocks = "다음에서 파생됨";
+$s_duplicate_of = "다음 이슈와 동일함";
+$s_has_duplicate = "다음 이슈는 이 이슈와 동일함";
+$s_related_to = "다음 이슈와 관련됨";
+$s_dependant_on = "다음 이슈의 원인";
+$s_blocks = "다음 이슈때문에 발생";
+
 
 $s_new_bug = '새 이슈';
 $s_bugnote_added = '이슈노트 추가됨';
@@ -99,7 +100,7 @@ $s_login_link = '로그인';
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = '이 동작을 실행할 권한이 없습니다. 오류는 다음과 같습니다: ';
 $s_bug_actiongroup_access = '이 동작을 실행할 권한이 없습니다.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_status = '이 이슈의 상태를 바꿀 수 없습니다.';
 $s_close_bugs_conf_msg = '이 이슈를 폐쇄하시겠습니까 ?';
 $s_delete_bugs_conf_msg = '이 이슈를 삭제하시겠습니까 ?';
 $s_move_bugs_conf_msg = '이슈 이동: ';
@@ -139,6 +140,15 @@ $s_priority_link = '우선순위';
 $s_severity_link = '심각도';
 $s_category_link = '카테고리';
 $s_resolution_link = '해결도';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = '선택된 것만 표시';
@@ -176,6 +186,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = '오류: 이슈노트를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = '오류: 프로젝트를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '오류: 데이타베이스 필드를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= '오류: FTP 서버에 연결할 수 없습니다.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '오류: 이미 사용중인 프로젝트 이름입니다.  다른 이름을 사용하세요.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '올바르지 않은 프로젝트 이름입니다. 프로젝트 이름은 비워둘 수 없습니다.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= '오류: 사용자를 찾을 수 없습니다.';
@@ -227,12 +238,12 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itsel
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '입력된 정보가 바르지 않습니다. 해당 계정으로 등록된 적이 없습니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '이 주소는 이미 사용되었습니다. 다시 확인하여 주시기 바랍니다.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = '요청이 한계 범위를 초과 하였습니다. 관리자에게 문의하시기 바랍니다.';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
-$s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/암호가 올바르지 않습니다.';
+$s_login_error = '오류: 계정이 사용정지되었거나, 사용자이름/비밀번호가 올바르지 않습니다.';
 $s_login_cookies_disabled = '오류: 쿠키를 사용할 수 없거나 허용하지 않는 브라우저를 사용하고 있습니다.';
 
 # General Strings
@@ -246,7 +257,6 @@ $s_prefix_for_deleted_users = '사용자';
 
 $s_administrator = '관리자';
 $s_myself = "나";
-$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
@@ -258,45 +268,46 @@ $s_priority_enum_string           = '10:없음,20:낮음,30:보통,40:높음,50:긴급,60:
 $s_severity_enum_string           = '10:새 기능 요구,20:사소함,30:오타,40:기능 개선,50:보통,60:중요함,70:충돌,80:장애';
 $s_reproducibility_enum_string    = '10:항상발생,30:가끔발생,50:불규칙적,70:아직 시도되지 않음,90:다시 만들수 없음,100:N/A';
 $s_status_enum_string             = '10:새로운 이슈,20:추가정보(필요),30:이슈 인정,40:이슈 확인,50:할당된 이슈,80:해결된 이슈,90:폐쇄된 이슈';
-$s_resolution_enum_string         = '10:개설,20:수정됨,30:다시 발생,40:재현할 수 없음,50:수정할 수 없음,60:중복,70:이슈 아님,80:보류(suspended),90:해결할 수 없음';
+$s_resolution_enum_string         = '10:개설,20:수정됨,30:문제제기,40:재현할 수 없음,50:수정할 수 없음,60:중복,70:이슈 아님,80:보류(suspended),90:해결할 수 없음';
 $s_projection_enum_string         = '10:없음,30:조정,50:작은 수정,70:새로 작성,90:재설계';
 $s_eta_enum_string                = '10:없음,20:< 1 일,30:2-3 일,40:< 1 주,50:< 1 달 ,60:> 1 달';
 
 # Email Strings
-$s_new_account_subject = 'Account registration';
-$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
-$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_subject = '계정 등록';
+$s_new_account_greeting = '등록해 주셔서 감사합니다. 등록하신 아이디는 \'';
+$s_new_account_greeting2 = '\' 입니다. 등록을 완료하기 위해서 아래 링크를 방문하셔서 비밀번호를 설정하시기 바랍니다.';
 $s_new_account_username = '사용자 ID: ';
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
-$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_message = '만일 사용자 등록을 하신적이 없으시다면, 그냥 무시하시면 됩니다.' . "\n\n";
+$s_new_account_do_not_reply = '이 메일에 대한 답장을 보내지 마세요. - DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
-$s_new_account_signup_msg = 'The following account has been created:';
+$s_new_account_IP = '접속 IP : ';
+$s_new_account_signup_msg = '다음 계정이 생성 되었습니다 :';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
-$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
+$s_reset_request_msg = '비밀번호 변경을 요청하셨습니다. 만일 본인이 요청하신 적이 없다면 이 메일을 무시하시기 바랍니다.' .  "\n\n"  . '만일 본인이 요청하셨다면 아래 링크를 클릭하셔서 비밀번호를 변경하시기 바랍니다. ';
+$s_reset_request_in_progress_msg = '입력하신 메일 내용을 확인하셔서 비밀번호를 변경하시면 됩니다.';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following isse has been CLOSED';
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
+$s_email_notification_title_for_status_bug_feedback = '다음 이슈는 [추가 정보]가 필요합니다.';
+$s_email_notification_title_for_status_bug_acknowledged = '다음 이슈는 [인정] 되었습니다.';
+$s_email_notification_title_for_status_bug_confirmed = '다음 이슈는 [확인] 되었습니다.';
+$s_email_notification_title_for_status_bug_assigned = '다음 이슈는 [할당] 되었습니다.';
+$s_email_notification_title_for_status_bug_resolved = '다음 이슈는 [해결] 되었습니다.';
+$s_email_notification_title_for_status_bug_closed = '다음 이슈는 [폐쇠] 되었습니다.';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
-$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
+$s_email_notification_title_for_action_bug_submitted = '다음 이슈가 [보고] 되었습니다.';
+$s_email_notification_title_for_action_bug_assigned = '다음 이슈가 [할당] 되었습니다.';
+$s_email_notification_title_for_action_bug_reopened = '다음 이슈가 [문제제기] 되었습니다.';
+$s_email_notification_title_for_action_bug_deleted = '다음 이슈가 [삭제] 되었습니다.';
+$s_email_notification_title_for_action_bug_updated = '다음 이슈가 [갱신] 되었습니다.';
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
-$s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
-$s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
-$s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
+$s_email_notification_title_for_action_bugnote_submitted = '이 이슈에 노트가 추가 되었습니다.';
+$s_email_notification_title_for_action_relationship_added = "다음 이슈에 [관계]가 추가 되었습니다.";
+$s_email_notification_title_for_action_relationship_deleted = "다음 이슈에서 [관계]가 삭제 되었습니다.";
+$s_email_notification_title_for_action_relationship_child_resolved = "관계된 이슈가 해결 되었습니다.";
+$s_email_notification_title_for_action_relationship_child_closed = "관계된 이슈가 폐쇄 되었습니다.";
 
 $s_email_reporter = '보고자';
 $s_email_handler = '조작자';
@@ -330,8 +341,9 @@ $s_edit_account_title = '계정 편집';
 $s_username = '사용자 ID';
 $s_realname = '별명';
 $s_email = '이메일';
-$s_password = '암호';
-$s_confirm_password  = '암호 확인';
+$s_password = '비밀번호';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
+$s_confirm_password  = '비밀번호 확인';
 $s_access_level = '접근 레벨';
 $s_update_user_button = '정보 갱신';
 
@@ -341,12 +353,12 @@ $s_default_project = '기본 프로젝트';
 $s_advanced_report = '상세 보고';
 $s_advanced_view = '자세히 보기';
 $s_advanced_update = '상세한 업데이트';
-$s_refresh_delay = '리플레시 하지 않음 ';
-$s_redirect_delay = '리다이렉트 하지 않음';
-$s_with_minimum_severity = 'With Mimimum Severity of';
-$s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
+$s_refresh_delay = '새로고침 간격';
+$s_redirect_delay = '리다이렉트 간격';
+$s_with_minimum_severity = '최소한 다음의 경우에 :';
+$s_bugnote_order = '노트의 정렬 방식';
+$s_bugnote_order_asc = '오름차순';
+$s_bugnote_order_desc = '내림차순';
 $s_email_on_new = '새로운 이슈에 대한 이메일';
 $s_email_on_assigned = '할당(Assign)에 대한 이메일';
 $s_email_on_feedback = '반영(Feedback)에 대한 이메일';
@@ -401,19 +413,19 @@ $s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
 $s_email_updated = '이메일 주소가 변경되었습니다...';
 $s_realname_duplicated = '이 별명은 다른 사용자가 쓰고 있습니다.';
 $s_realname_updated = '별명이 수정 되었습니다.';
-$s_password_updated = '암호가 변경되었습니다...';
+$s_password_updated = '비밀번호가 변경되었습니다...';
 
 # bug_assign.php
 $s_bug_assign_msg = '이슈가 할당되었습니다...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_feedback_bug_title = 'Request Feedback on Issue';
 $s_acknowledged_bug_title = 'Acknowledge Issue';
 $s_confirmed_bug_title = 'Confirm Issue';
 $s_assigned_bug_title = 'Assign Issue';
 $s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
+$s_feedback_bug_button = 'Request Feedback';
 $s_acknowledged_bug_button = 'Acknowledge Issue';
 $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
@@ -443,7 +455,7 @@ $s_file_upload_msg = '파일이 업로드되었습니다.';
 $s_upload_file = '파일 업로드';
 $s_select_file = '파일 선택';
 $s_upload_file_button = '파일 업로드';
-$s_max_file_size = 'Max size';
+$s_max_file_size = '최대 크기';
 
 # bug_reopen.php
 $s_bug_reopened_msg = '이슈가 다시 발생했습니다...';
@@ -543,7 +555,7 @@ $s_save_login = '로그인 정보 저장';
 $s_choose_project = '프로젝트 선택';
 $s_login_button = '로그인';
 $s_signup_link = '사용자 신규 등록';
-$s_lost_password_link = 'Lost your password?';
+$s_lost_password_link = '비밀번호 찾기';
 
 # login_select_proj_page.php
 $s_select_project_button = '프로젝트 선택';
@@ -554,11 +566,11 @@ $s_redirecting = '...리다이렉팅';
 $s_here = '여기';
 
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = "비밀번호 초기화";
+$s_lost_password_done_title = "비밀번호 변경 메일이 보내졌습니다.";
+$s_lost_password_subject = "비밀번호 변경 확인 메일입니다.";
+$s_lost_password_info = "비밀 번호를 찾기 원하시면 가입할때 사용하셨던 아이디와 메일 주소를 입력하시기 바랍니다.<br/><br/>메일 주소를 입력하시면 비밀번호를 변경할 수 있는 코드가 포함된 주소를 메일로 받으실 수 있습니다. ";
+$s_lost_password_confirm_hash_OK = "요청이 수락 되었습니다. 비밀번호를 변경하시기 바랍니다.";
 
 # main_page.php
 $s_open_and_assigned_to_me = '나에게 할당되고 진행중인 이슈';
@@ -574,7 +586,7 @@ $s_created_user_part2 = '접근 레벨로 생성되었습니다.';
 
 # manage_create_user_page.php
 $s_create_new_account_title = '새로운 계정 생성';
-$s_verify_password = '암호 검증';
+$s_verify_password = '비밀번호 확인';
 $s_enabled = '사용가능';
 $s_protected = '계정 보호';
 $s_create_user_button = '사용자 생성';
@@ -639,7 +651,6 @@ $s_categories = '분류';
 $s_add_category_button = '분류 추가';
 $s_versions = '버전';
 $s_add_version_button = '버전 추가';
-$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = '편집';
 $s_actions = '실행';
 $s_version = '버전/빌드번호';
@@ -688,19 +699,19 @@ $s_confirm_account_pruning = '한번도 로그인하지 않은 계정을 삭제하시겠습니까?';
 
 # manage_user_page.php
 $s_edit_user_title = '사용자 편집';
-$s_reset_password_button = '암호 초기화';
+$s_reset_password_button = '비밀번호 초기화';
 $s_delete_user_button = '사용자 삭제';
-$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
-$s_reset_password_msg2 = '암호 초기화는 암호를 공백으로 만듭니다.';
-$s_show_all_users = 'ALL';
+$s_reset_password_msg = '비밀번호를 변경할경우 사용자에게 확인 메일이 보내지게 됩니다.';
+$s_reset_password_msg2 = '비밀번호 초기화는 비밀번호를 공백으로 만듭니다.';
+$s_show_all_users = '모두';
 
 # manage_user_reset.php
-$s_account_reset_protected_msg = '보호된 계정입니다. 암호를 초기화할수 없습니다.';
-$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
-$s_account_reset_msg2 = '계정 암호가 없는 상태로 초기화합니다...';
+$s_account_reset_protected_msg = '보호된 계정입니다. 비밀번호를 초기화 할 수 없습니다.';
+$s_account_reset_msg = '비밀번호 변경 메일이 발송 되었습니다...';
+$s_account_reset_msg2 = '계정을 비밀번호가 없는 상태로 초기화합니다...';
 
 # manage_user_update.php
-$s_manage_user_protected_msg = '보호된 계정입니다. 접근레벨이 보호중입니다. 그렇지 않다면, 현재 계정상태가 변경중입니다.....';
+$s_manage_user_protected_msg = '보호된 계정입니다. 접근레벨이 보호상태 이거나 현재 계정상태가 변경중입니다.....';
 $s_manage_user_updated_msg = '계정이 갱신되었습니다...';
 
 # menu_inc.php
@@ -799,7 +810,6 @@ $s_add_user_title = '프로젝트에 사용자 추가';
 $s_add_user_button = '사용자 추가';
 $s_project_selection_title = '프로젝트 선택';
 $s_remove_link = '삭제';
-$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = '사용자 정보가 갱신되었습니다.';
@@ -836,14 +846,15 @@ $s_valid_project_msg = '올바른 프로젝트를 선택해야 합니다.';
 
 # signup.php
 $s_signup_done_title = '계정이 등록 되었습니다.';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
-$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
+$s_password_emailed_msg = '축하합니다. 계정이 성공적으로 등록되었습니다. 확인 메일이 발송되었으므로, 메일을 확인하여서 계정 등록을 마무리 하시기 바랍니다. ';
+$s_no_reponse_msg = '일주일이 지나도 등록을 하지 않으시면 등록된 계정 정보는 자동으로 지워 집니다.';
 
 # signup_page.php
 $s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
+$s_signup_info = '위 사항을 입력후 등록을 하시면 확인 메시지를 메일로 받게 됩니다. <br>확인메일을 통해서 계정을 등록할 수 있으므로, 반드시 정확한 메일 주소를 입력해 주셔야 합니다. <br>만일, 일주일이 지나도 확인이 되지 않으면 등록된 정보는 자동으로 사라집니다.';
 $s_signup_title = '신규등록';
 $s_signup_button = '신규등록';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = '사이트 설정 수정';
@@ -872,10 +883,10 @@ $s_by_reporter ='보고자별';
 $s_reporter_by_resolution = 'Reporter By Resolution';
 $s_reporter_effectiveness = 'Reporter Effectiveness';
 $s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
-$s_total = 'Total';
+$s_percentage_fixed = '수정됨 %';
+$s_percentage_errors = '수정안됨 %';
+$s_errors = '실패';
+$s_total = '전부';
 $s_time_stats = '시간 통계';
 $s_longest_open_bug = '가장 오래 해결되지 않은 이슈';
 $s_longest_open = '가장 오래된 시간';
@@ -904,10 +915,10 @@ $s_last = '마지막';
 $s_start_date = '시작 날짜';
 $s_end_date = '끝 날짜';
 $s_use_date_filters = '날짜 필터 사용';
-$s_yes = 'Yes';
-$s_no = 'No';
+$s_yes = '예';
+$s_no = '아니요';
 $s_open_filters = '필터 바꾸기';
-$s_or_unassigned = 'Or Unassigned';
+$s_or_unassigned = '혹은 할당되지 않은 이슈';
 $s_ok = '확인';
 $s_select_all = '전부 선택';
 
@@ -1001,7 +1012,7 @@ $s_hide_resolved = "해결된 것 숨김";
 $s_and_above = 'And Above';
 $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
-$s_monitored_by = '모니터 대상';
+$s_monitored_by = '감시자';
 
 $s_attachments = "첨부파일";
 $s_attachment_alt = "A";
@@ -1037,10 +1048,17 @@ $s_delete_relationship_button = "삭제";
 $s_delete_relationship_sure_msg = "이 관계를 삭제합니까?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
 $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Child";
+$s_create_child_bug_button = "추가 정보 입력";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
 
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 # Source Control Integration
 $s_checkin = 'Checkin';
 ?>

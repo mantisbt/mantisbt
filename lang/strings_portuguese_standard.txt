@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:22 $
+	# $Date: 2004-10-01 23:03:48 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.69 2004-09-22 16:08:22 bigbadger Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.70 2004-10-01 23:03:48 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -138,6 +138,15 @@ $s_priority_link = 'Por Prioridade';
 $s_severity_link = 'Por Importância';
 $s_category_link = 'Por Categoria';
 $s_resolution_link = 'Por Resolução';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Mostar Apenas os Selecionados';
@@ -175,6 +184,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';
@@ -275,6 +285,7 @@ $s_new_account_signup_msg = 'The following account has been created:';
 $s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
 $s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
@@ -330,6 +341,7 @@ $s_username = 'Utilizador';
 $s_realname = 'Real Name';
 $s_email = 'E-mail';
 $s_password = 'Senha de acesso';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Confirme a Senha';
 $s_access_level = 'Nível de Acesso';
 $s_update_user_button = 'Actualiza Utilizador';
@@ -842,6 +854,7 @@ $s_signup_captcha_request = 'Enter the code as it is shown in the box on the rig
 $s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Criar Utilizador pela 1ª vez';
 $s_signup_button = 'Criar Utilizador';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Editar Configurações do Site';
@@ -1038,6 +1051,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

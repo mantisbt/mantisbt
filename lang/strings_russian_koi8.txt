@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.56 $
+	# $Revision: 1.57 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:23 $
+	# $Date: 2004-10-01 23:03:48 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.56 2004-09-22 16:08:23 bigbadger Exp $
+	# $Id: strings_russian_koi8.txt,v 1.57 2004-10-01 23:03:48 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -137,6 +137,15 @@ $s_priority_link = 'По приоритету';
 $s_severity_link = 'По критичности';
 $s_category_link = 'По категориям';
 $s_resolution_link = 'По результату';
+$s_legend_still_open = 'До сих пор открытые';
+$s_legend_resolved = 'Решенные;
+$s_legend_assigned = Назначенные';
+$s_legend_total = 'Всего';
+$s_legend_opened = 'Открытых';
+$s_legend_closed = 'Закрытых';
+$s_legend_reported = 'Задокументированных;
+$s_cumulative = 'Суммарно';
+$s_not_enough_data = 'Недостаточно данных для построения графика';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Показывать только выбранные';
@@ -174,6 +183,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Комментарий не найден.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Проект не найден.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Поле БД \'%s\' не найдено.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Не могу соединиться с FTP-сервером.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Ответственный не имеет достаточно прав для обработки обращения с таким статусом.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Проект с таким именем уже существует.  Вернитесь назад и введите другое имя.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Некорректное имя проекта.  Имена проектов не могут быть пустыми.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Пользователь не найден.';
@@ -244,7 +254,7 @@ $s_prefix_for_deleted_users = 'пользователь';
 
 $s_administrator = 'администратор';
 $s_myself = "Себе";
-$s_default_access_level = 'Стандартный ровень доступа';
+$s_default_access_level = 'Стандартный уровень доступа';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:зритель,25:автор,40:редактор,55:разработчик,70:менеджер,90:администратор';
@@ -274,6 +284,7 @@ $s_new_account_signup_msg = 'Создан новый бюджет:';
 $s_reset_request_msg = 'Был получен запрос на изменение пароля с помощью e-mail верификации';
 $s_reset_request_in_progress_msg = 'Если вы ввели корректное имя и e-mail вашего бюджета, то вам высылается подтверждающее сообщение на этот адрес. После получения сообщения следуйте инструкциям для смены пароля вашего бюджета.';
 
+$s_email_notification_title_for_status_bug_new = 'Это обращение в статусе НОВОЕ (снова)';
 $s_email_notification_title_for_status_bug_feedback = 'Это обращение требует Вашего ответа.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Это обращение было ПРИЗНАНО.';
 $s_email_notification_title_for_status_bug_confirmed = 'Это обращение было ПОДТВЕРЖДЕНО.';
@@ -329,6 +340,7 @@ $s_username = 'Имя пользователя';
 $s_realname = 'Настоящее имя';
 $s_email = 'Email';
 $s_password = 'Пароль';
+$s_no_password_change = 'Пароль контролируется другой системой и не может быть изменен здесь.';
 $s_confirm_password = 'Подтверждение пароля';
 $s_access_level = 'Уровень доступа';
 $s_update_user_button = 'Обновить пользователя';
@@ -841,6 +853,7 @@ $s_signup_captcha_request = 'Ввведите код, как он показан в прямоугольнике справ
 $s_signup_info = 'После заполнения этой формы и проверки ваших ответов, вам будет выслано подтверждающее сообщеение на указанный вами адрес.<br/>Используя это сообщение вы сможете активировать ваш бюджет. Если вы не активируете бюджет в течение 7 дней,он может быть удален.<br/>Вы должны использовать работоспособный e-mail адрес, чтобы получить подтверждающее сообщение.';
 $s_signup_title = 'Регистрация';
 $s_signup_button = 'Зарегистрироваться';
+$s_no_password_request = 'Пароль управляется другой системой. Свяжитесь с системным администратором.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Редактировать настройки сервера';
@@ -1037,6 +1050,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ВНИМАНИЕ</b>. Не все 
 $s_create_child_bug_button = "Создать потомка";
 $s_bug_cloned_to = "Обращение клонировано";
 $s_bug_created_from = "Обращение создано из";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Граф связей";
+$s_relation_graph = "Граф связей";
+$s_dependency_graph = "Граф зависимостей";
+$s_vertical = "Вериткальный";
+$s_horizontal = "Горизонтальный";
+$s_view_issue = "Просмотр обращения";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

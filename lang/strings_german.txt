@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.113 $
-	# $Author: bpfennigschmidt $
-	# $Date: 2004-09-23 18:24:03 $
+	# $Revision: 1.114 $
+	# $Author: bigbadger $
+	# $Date: 2004-10-01 23:03:36 $
 	#
-	# $Id: strings_german.txt,v 1.113 2004-09-23 18:24:03 bpfennigschmidt Exp $
+	# $Id: strings_german.txt,v 1.114 2004-10-01 23:03:36 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -288,6 +288,7 @@ $s_new_account_signup_msg = 'Das folgende Konto wurde angelegt:';
 $s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch Emailbestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.' . "\n\n" . 'Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL um ihr Passwort zu ändern:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Das folgende Problem benötigt Ihre Rückmeldung.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Das folgende Problem wurde anerkannt.';
 $s_email_notification_title_for_status_bug_confirmed = 'Das folgende Problem wurde bestätigt.';
@@ -346,6 +347,7 @@ $s_password = 'Passwort';
 $s_confirm_password = 'Bestätige Passwort';
 $s_access_level = 'Zugangsberechtigung';
 $s_update_user_button = 'Benutzer aktualisieren';
+$s_update_user_button = 'Update User';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Kontoeinstellungen';
@@ -855,6 +857,7 @@ $s_signup_captcha_request = 'Geben Sie den Code ein, den Sie im Rahmen auf der r
 $s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten, wird Ihnen einen Bestätigungsmail an die angegebene Adresse geschickt.<br/>Benutzen Sie diese E-Mail um Ihr Konto zu aktivieren. Wenn Sie Ihr Konto nicht innerhalb von sieben Tagen freischalten wird das Konto entfernt.<br/>Sie müssen eine gültige E-Mail Adresse angeben um die Bestätigungsmail zu erhalten.';
 $s_signup_title = 'Anmeldung';
 $s_signup_button = 'Anmelden';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Eigenschaften bearbeiten';
@@ -1051,6 +1054,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ACHTUNG</b>. Nicht al
 $s_create_child_bug_button = "Nachkomme erstellen";
 $s_bug_cloned_to = "Problem dupliziert";
 $s_bug_created_from = "Problem angelegt von";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Einchecken';

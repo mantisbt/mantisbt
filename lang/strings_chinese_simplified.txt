@@ -12,11 +12,11 @@
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# Chinese_Simplified: Hacked by justin schnell_18@yahoo.com
 	# -------------------------------------------------
-	# $Revision: 1.53 $
+	# $Revision: 1.54 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:18 $
+	# $Date: 2004-10-01 23:03:35 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.53 2004-09-22 16:08:18 bigbadger Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.54 2004-10-01 23:03:35 bigbadger Exp $
 	###########################################################################
 
 	###########################################################################
@@ -155,6 +155,15 @@ $s_priority_link = '按优先级别统计';
 $s_severity_link = '按严重性统计';
 $s_category_link = '按分类统计';
 $s_resolution_link = '按完成度统计';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected Issues
 $s_hide_button = '只显示选中内容';
@@ -192,6 +201,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
@@ -292,6 +302,7 @@ $s_new_account_signup_msg = '以下账号已创建:';
 $s_reset_request_msg = '你请求了通过电子邮件确认的密码变更(如果你从未请求请忽略此信息)， 请访问以下网页修改你的密码:';
 $s_reset_request_in_progress_msg = '请填好你的用户名和邮件地址，系统将自动发确认邮件到你的信箱，收到邮件后请按邮件里的步骤修改你的密码。';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = '下列 Issue 需要您的反馈。';
 $s_email_notification_title_for_status_bug_acknowledged = '下列 Issue 已经被公认。';
 $s_email_notification_title_for_status_bug_confirmed = '下列 Issue 已经被确认。';
@@ -347,6 +358,7 @@ $s_username = "帐号";
 $s_realname = '真实姓名';
 $s_email = "Email";
 $s_password = "密码";
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = "确认密码";
 $s_access_level = "存取权限";
 $s_update_user_button = "更新帐号信息";
@@ -1055,6 +1067,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b>. 当前 Issue 
 $s_create_child_bug_button = "创建子项 Issue";
 $s_bug_cloned_to = "Issue 已复制";
 $s_bug_created_from = "Issue 产生于";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

@@ -12,11 +12,11 @@
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# Spanish: Javier Poveda - javierpoveda@arsystel.com
 	# -------------------------------------------------
-	# $Revision: 1.74 $
+	# $Revision: 1.75 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:24 $
+	# $Date: 2004-10-01 23:03:48 $
 	#
-	# $Id: strings_spanish.txt,v 1.74 2004-09-22 16:08:24 bigbadger Exp $
+	# $Id: strings_spanish.txt,v 1.75 2004-10-01 23:03:48 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -142,6 +142,15 @@ $s_priority_link = 'Por prioridad';
 $s_severity_link = 'Por gravedad';
 $s_category_link = 'Por categoría';
 $s_resolution_link = 'Por resolución';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Mostrar sólo seleccionados';
@@ -179,6 +188,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Nota no encontrada.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Proyecto no encontrado';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo de base de datos no encontrado.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Imposible conectar con el servidor de FTP.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ya existe un proyecto con ese nombre. Por favor, regrese y seleccione un nombre diferente.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nombre de proyecto no válido. Los nombres de proyecto no pueden estar en blanco.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Usuario no encontrado.';
@@ -279,6 +289,7 @@ $s_new_account_signup_msg = 'La siguiente cuenta ha sido creada:';
 $s_reset_request_msg = 'Alguien (supuestamente usted) ha solicitado el cambio de contraseña mediante la verificación por email. Si no fue usted, simplemente ignore este mensaje.' . "\n\n" . 'Si solicitó este cambio, visite esta URL para cambiar la contraseña:';
 $s_reset_request_in_progress_msg = 'Si ha proporcionado un nombre de usuario y contraseña correctos, recibirá un mensaje de confirmación en su email. Cuando reciba este mensaje, siga las instrucciones para cambiar la contraseña de su cuenta.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'El siguiente bug requiere su OPINIÓN.';
 $s_email_notification_title_for_status_bug_acknowledged = 'El siguiente bug ha sido NOTIFICADO.';
 $s_email_notification_title_for_status_bug_confirmed = 'El siguiente bug ha sido CONFIRMADO.';
@@ -334,6 +345,7 @@ $s_username = 'Usuario';
 $s_realname = 'Nombre real';
 $s_email = 'Email';
 $s_password = 'Contraseña';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'Confirmar contraseña';
 $s_access_level = 'Nivel de Acceso';
 $s_update_user_button = 'Actualizar Usuario';
@@ -846,6 +858,7 @@ $s_signup_captcha_request = 'Introduzca el código tal y como lo ve en la caja de
 $s_signup_info = 'Para completar este proceso, recibirá un email de confirmación en la dirección especificada.<br/>Mediante este email podrá activar su cuenta. Si esta verificación no se efectúa en siete días, la cuenta será eliminada.<br/>Debe consignar una dirección de email válida para recibir el mensaje de verificación.';
 $s_signup_title = 'Suscribirse';
 $s_signup_button = 'Suscribirse';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Editar configuración del sitio';
@@ -1042,6 +1055,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATENCIÓN</b>. No todo
 $s_create_child_bug_button = "Crear hijo";
 $s_bug_cloned_to = "Bug clonado";
 $s_bug_created_from = "Bug generado desde";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

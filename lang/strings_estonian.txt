@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.17 $
+	# $Revision: 1.18 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:19 $
+	# $Date: 2004-10-01 23:03:36 $
 	#
-	# $Id: strings_estonian.txt,v 1.17 2004-09-22 16:08:19 bigbadger Exp $
+	# $Id: strings_estonian.txt,v 1.18 2004-10-01 23:03:36 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,6 +139,15 @@ $s_priority_link = 'Prioriteedi järgi';
 $s_severity_link = 'Raskusastme järgi';
 $s_category_link = 'Kategooria järgi';
 $s_resolution_link = 'Lahenduse järgi';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Kuva ainult valitud';
@@ -176,6 +185,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Märkust ei leitud.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekti ei leitud.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Andmebaasi välja ei leitud.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Ei õnnestu ühenduda FTP serveriga.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Sellise nimega projekt on juba olemas.  Palun mine tagasi ja sisesta mõni teine nimi.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Lubamatu kujuga projekti nimi.  Projekti nimed ei tohi sisaldada tühikuid.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Kasutajat ei leitud.';
@@ -276,6 +286,7 @@ $s_new_account_signup_msg = 'Loodud on järgmine kasutajakonto:';
 $s_reset_request_msg = 'Keegi (loodetavasti sina) soovis vahetada parooli e-posti kontrollimeetodil. Kui see polnud sina, ignoreeri seda teadet ja midagi ei juhtu.' . "\n\n" . 'Kui sa soovisid seda uuendust, siis külasta järgmist URL-i, et vahetada oma parool:';
 $s_reset_request_in_progress_msg = 'Kui sa esitasid oma kasutajakonto õige kasutajanime ja e-posti aadressi, saadame me sellele aadressile kinnitusteate. Kui teade on saabunud, järgi selles esitatud instruktsioone, et muuta oma kasutajakonto parool.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Järgmine kanne vajab sinu TAGASISIDET.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Järgnev kanne on TUNNISTATUD.';
 $s_email_notification_title_for_status_bug_confirmed = 'Järgmine kanne on KINNITATUD.';
@@ -331,6 +342,7 @@ $s_username = 'Kasutaja';
 $s_realname = 'Tegelik Nimi';
 $s_email = 'E-post';
 $s_password = 'Parool';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Kinnita parool';
 $s_access_level = 'Pöördusõiguste tase';
 $s_update_user_button = 'Uuenda kasutaja';
@@ -843,6 +855,7 @@ $s_signup_captcha_request = 'Sisesta kood, mida näed paremal kastis';
 $s_signup_info = 'Selle vormi vastustega täitmise järel saadetakse sulle kinnituseks e-posti kiri sellele aadressile, millise esitasid.<br/> Kasutades kinnituseks saadetud e-posti kirja, saad aktiveerida oma kasutajakonto. Kui sul ei õnnestu aktiveerida kasutajakontot seitsme päeva jooksul, siis kasutajakonto hävitatakse.<br/>Pead esitama eksisteeriva e-posti aadressi, et saaksid oma kasutajakonto aktiveerida.';
 $s_signup_title = 'Registreeru';
 $s_signup_button = 'Registreeru';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Redigeeri saidi seadeid';
@@ -1039,6 +1052,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>TÄHELEPANU</b>. Mitte
 $s_create_child_bug_button = "Loo laps";
 $s_bug_cloned_to = "Kanne kloonitud";
 $s_bug_created_from = "Kanne genereeritud lähtekandest";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Sissevormistus';

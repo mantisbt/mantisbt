@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.75 $
+	# $Revision: 1.76 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:22 $
+	# $Date: 2004-10-01 23:03:46 $
 	#
-	# $Id: strings_norwegian.txt,v 1.75 2004-09-22 16:08:22 bigbadger Exp $
+	# $Id: strings_norwegian.txt,v 1.76 2004-10-01 23:03:46 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,6 +139,15 @@ $s_priority_link = 'Per prioritet';
 $s_severity_link = 'Per vanskelighetsgrad';
 $s_category_link = 'Per kategori';
 $s_resolution_link = 'Per løsning';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Vis kun valgte';
@@ -176,6 +185,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Finner ikke notat.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Finner ikke prosjektet.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Finner ikke database-feltet.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Kan ikke koble til FTP-server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Et prosjekt med det samme navnet eksisterer fra før. Vennligst gå tilbake og angi et nytt navn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Det ble oppgitt ugyldig prosjektnavn.  Prosjektnavn kan ikke være tomt.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Finner ikke bruker.';
@@ -276,6 +286,7 @@ $s_new_account_signup_msg = 'Følgende konto har blitt lagd:';
 $s_reset_request_msg = 'Noen (antakelig du) har bedt om passordbytte med epostbekreftelse.  Hvis dette ikke var deg, ignorer denne beskjeden og det vil ikke skje noe mer.' . "\n\n" . 'Hvis du ba om denne bekreftelsen, gå til følgende  URL for å forandre passordet:';
 $s_reset_request_in_progress_msg = 'Hvis du oppga korrekte brukernavn og epostadresse for kontoen din har vi nå sendt en bekreftelsesepost til den adressen. Når eposten er mottatt, følg instruksjonene for å endre kontopassordet ditt.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Følgende sak krever din TILBAKEMELDING.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Følgende sak har blitt GODKJENT.';
 $s_email_notification_title_for_status_bug_confirmed = 'Følgende sak har blitt BEKREFTET.';
@@ -331,6 +342,7 @@ $s_username = 'Brukernavn';
 $s_realname = 'Navn';
 $s_email = 'Epost';
 $s_password = 'Passord';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'Bekreft passord';
 $s_access_level = 'Tilgangsnivå';
 $s_update_user_button = 'Oppdater bruker';
@@ -843,6 +855,7 @@ $s_signup_captcha_request = 'Tast inn koden slik den er vist i boksen til høyre'
 $s_signup_info = 'Ved fullførelse av denne inntastinga og verifisering av svaret ditt, vil det bli sendt en bekreftelsesmail til den epostadressen du har oppgitt.</br>Ved å bruke bekreftelseseposten kan du aktivisere kontoen din. Hvis du ikke aktiviserer kontoen innen sju dager, vil den bli slettet.</br>Du må oppgi en gyldig epostadressen for å kunne motta kontobekreftelseseposten.';
 $s_signup_title = 'Registrering';
 $s_signup_button = 'Registrer';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Redigere nettstedinnstillinger';
@@ -1039,6 +1052,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<strong>MERK</strong>. I
 $s_create_child_bug_button = "Lag barn";
 $s_bug_cloned_to = "Sak klonet";
 $s_bug_created_from = "Sak klonet fra";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Sjekk inn';

@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.70 $
+	# $Revision: 1.71 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:19 $
+	# $Date: 2004-10-01 23:03:36 $
 	#
-	# $Id: strings_danish.txt,v 1.70 2004-09-22 16:08:19 bigbadger Exp $
+	# $Id: strings_danish.txt,v 1.71 2004-10-01 23:03:36 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -137,6 +137,15 @@ $s_priority_link = 'efter prioritering';
 $s_severity_link = 'efter alvorlighed';
 $s_category_link = 'efter kategori';
 $s_resolution_link = 'efter løsning';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Vis kun valgte';
@@ -174,6 +183,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'FEJL: Fejlnote ikke fundet.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'FEJL: Projekt ikke fundet.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEJL: Database felt ikke fundet.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'FEJL: Kunne ikke opnå forbindelse til FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEJL: Der findes allerede et projekt med dette navn. Gå venligst tilbage og vælg et andet navn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'FEJL: Ugyldigt projektnavn. Navn på et projekt må ikke være tomt.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'FEJL: Bruger ikke fundet.';
@@ -274,6 +284,7 @@ $s_new_account_signup_msg = 'The following account has been created:';
 $s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
 $s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
 $s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
@@ -329,6 +340,7 @@ $s_username = 'Brugernavn';
 $s_realname = 'Real Name';
 $s_email = 'E-mail';
 $s_password = 'Adgangskode';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Bekræft Adgangskode';
 $s_access_level = 'Rettigheder';
 $s_update_user_button = 'Opdater Bruger';
@@ -841,6 +853,7 @@ $s_signup_captcha_request = 'Enter the code as it is shown in the box on the rig
 $s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
 $s_signup_title = 'Tilmeld';
 $s_signup_button = 'Tilmeld';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Rediger Webstedets Indstillinger';
@@ -1037,6 +1050,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not al
 $s_create_child_bug_button = "Create Child";
 $s_bug_cloned_to = "Issue cloned";
 $s_bug_created_from = "Issue generated from";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

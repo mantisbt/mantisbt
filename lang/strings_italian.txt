@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.80 $
+	# $Revision: 1.81 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:20 $
+	# $Date: 2004-10-01 23:03:36 $
 	#
-	# $Id: strings_italian.txt,v 1.80 2004-09-22 16:08:20 bigbadger Exp $
+	# $Id: strings_italian.txt,v 1.81 2004-10-01 23:03:36 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,6 +139,15 @@ $s_priority_link = "Per priorità";
 $s_severity_link = "Per severità";
 $s_category_link = "Per categoria";
 $s_resolution_link = "Per motivazione";
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = "Mostra solo quelli selezionati";
@@ -176,6 +185,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists.  Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'User not found.';
@@ -276,6 +286,7 @@ $s_new_account_signup_msg = "E' stato creato il seguente account:";
 $s_reset_request_msg = "Qualcuno (probabilmente te) ha richiesto di cambiare la password di accesso attraverso una procedura di verifica via email. Se questa richiesta non é stata fatta da te, ignora semplicemente questo messaggio.\n\nSe invece hai effettivamente richiesto tu la verifica, visita l'indirizzo di seguito riportato e potrai cambiare la tua password:";
 $s_reset_request_in_progress_msg = "Se hai fornito il corretto nome utente e indirizzo email del tuo account, ti verrà inviata una email all'indirizzo del tuo account con un codice di convalida. Quando riceverai questa email, segui le istruzioni in essa riportate.";
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = "La seguente anomalia richiede il tuo FEEDBACK.";
 $s_email_notification_title_for_status_bug_acknowledged = "La seguente anomalia é stata RICONOSCIUTA.";
 $s_email_notification_title_for_status_bug_confirmed = "La seguente anomalia é stata CONFERMATA.";
@@ -331,6 +342,7 @@ $s_username = "Nome Utente";
 $s_realname = "Nominativo";
 $s_email = "Email";
 $s_password = "Password";
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = "Conferma Password";
 $s_access_level = "Livello di Accesso";
 $s_update_user_button = "Aggiorna Account";
@@ -843,6 +855,7 @@ $s_signup_captcha_request = "Inserire il codice alfanumerico come appare nel box
 $s_signup_info = "Dopo aver completato il form di registrazione, ti verrà inviata una email di conferma per verificare che l'indirizzo email da te indicato sia corretto ed esistente.<br/>L'email conterrà le istruzioni per attivare l'account appena creato. Non rispondendo a questo messaggio entro una settimana, l'account potrebbe essere eliminato.<br/><b>Occorre indicare un indirizzo email valido ed esistente per poter ricevere l'email di conferma.</b>";
 $s_signup_title = "Registrazione";
 $s_signup_button = "Registrati";
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = "Modifica Impostazioni Sito";
@@ -1039,6 +1052,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENZIONE</b>. NON a
 $s_create_child_bug_button = "Genera figlio";
 $s_bug_cloned_to = "Anomalia clonata";
 $s_bug_created_from = "Anomalia generata da";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

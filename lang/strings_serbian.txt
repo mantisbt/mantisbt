@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.16 $
+	# $Revision: 1.17 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:23 $
+	# $Date: 2004-10-01 23:03:48 $
 	#
-	# $Id: strings_serbian.txt,v 1.16 2004-09-22 16:08:23 bigbadger Exp $
+	# $Id: strings_serbian.txt,v 1.17 2004-10-01 23:03:48 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,6 +139,15 @@ $s_priority_link = 'Po prioritetu';
 $s_severity_link = 'po težini';
 $s_category_link = 'Po kategoriji';
 $s_resolution_link = 'Po rešenju';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Prikaz samo izabranih';
@@ -176,6 +185,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Komentar uz gresku nije pronadjen.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekat nije pronadjen.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Polje u bazi nije pronadjeno.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Ne mogu da se konektujem na FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekat pod tim imenom vec postoji. Molim vratite se i unesite novo ime.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Pogresno ime projekta.  Imena projekta ne mogu biti prazni stringovi.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Korisnik nije pronadjen.';
@@ -276,6 +286,7 @@ $s_new_account_signup_msg = 'Sledeci nalog je kreiran:';
 $s_reset_request_msg = 'Neko (najverovatnije vi) je podneo zahtev za promenu lozinke putem provere elektronske poste. Ukoliko to niste bili vi, ignorisite ovu poruku i nista se nece desiti.' . "\n\n" . 'Ukoliko ste vi zatrazili proveru, molim posetite sledecu adresu radi promene lozinke:';
 $s_reset_request_in_progress_msg = 'Ukoliko ste pravilno uneli korisnicko ime i email adresu vaseg naloga, sada cemo vam poslati poruku na unetu adresu. Nakon sto ste primili poruku sledite uputstva u njoj da biste promenili lozinku vaseg naloga.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Sledeca greška zahteva vašu POVRATNU INFORMACIJU.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Sledeca greška je PRIMLJENA.';
 $s_email_notification_title_for_status_bug_confirmed = 'Sledeca greška je POTVRDJENA.';
@@ -331,6 +342,7 @@ $s_username = 'Korisnicko ime';
 $s_realname = 'Pravo Ime';
 $s_email = 'Email';
 $s_password = 'Lozinka';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password = 'Potvrdite lozinku';
 $s_access_level = 'Pristupni nivo';
 $s_update_user_button = 'ažuriranje naloga';
@@ -843,6 +855,7 @@ $s_signup_captcha_request = 'Unesite kod tacno kako je prikazan u prozoru na des
 $s_signup_info = 'Po popunjavanju ove prijave i provera vasih odgovora, bice vam poslata poruka radi provere e-mail adrese.<br/>Koristeci tu poruku, moci cete da aktivirate vas nalog. Ukoliko ne aktivirate nalog u roku od sedam dana on ce biti izbrisan.<br/>Da biste primili e-mail sa aktivacijom naloga morate da unesete aktivnu e-mail adresu.';
 $s_signup_title = 'Prijava';
 $s_signup_button = 'Prijava';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Izmena posesavanja sajta';
@@ -1039,6 +1052,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>UPOZORENJE</b>. Nisu 
 $s_create_child_bug_button = "Kreiraj potomka";
 $s_bug_cloned_to = "Greska klonirana";
 $s_bug_created_from = "Greska generisana iz";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';

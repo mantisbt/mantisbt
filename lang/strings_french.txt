@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.84 $
+	# $Revision: 1.85 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:19 $
+	# $Date: 2004-10-01 23:03:36 $
 	#
-	# $Id: strings_french.txt,v 1.84 2004-09-22 16:08:19 bigbadger Exp $
+	# $Id: strings_french.txt,v 1.85 2004-10-01 23:03:36 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -144,6 +144,15 @@ $s_priority_link = 'Par priorité';
 $s_severity_link = 'Par sévérité';
 $s_category_link = 'Par catégorie';
 $s_resolution_link = 'Par résolution';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Afficher seulement les sélectionnés';
@@ -181,6 +190,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERREUR : Note non trouvée.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERREUR : Projet non trouvé.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERREUR : Champ de base de données non trouvé.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERREUR : Impossible de se connecter au serveur FTP.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERREUR : Un projet ayant ce nom existe déjà.  Merci de revenir en arrière et de saisir un autre nom.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'ERREUR : Nom de projet spécifié non valide.  Les noms de projet ne peuvent être vides.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERREUR : Utilisateur non trouvé.';
@@ -281,6 +291,7 @@ $s_new_account_signup_msg = 'Le compte suivant a été créé :';
 $s_reset_request_msg = 'Quelqu\'un (probablement vous) a demandé un changement de mot de passe avec vérification par email. Si ce n\'était pas vous, ignorez ce message et rien ne sera fait.' . "\n\n" . 'Si vous avez demandé cette vérification, visitez l\'URL suivante pour changer votre mot de passe :';
 $s_reset_request_in_progress_msg = 'Si vous avez fourni le nom d\'utilisateur et l\'adresse email corrects pour votre compte, nous vous avons maintenant envoyé un message de confirmation à cette adresse email. Une fois le message reçu, suivez les instructions fournies pour changer le mot de passe de votre compte.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Le bug suivant nécessite votre commentaire.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Le bug suivant a été accepté.';
 $s_email_notification_title_for_status_bug_confirmed = 'Le bug suivant a été confirmé.';
@@ -336,6 +347,7 @@ $s_username = 'Utilisateur';
 $s_realname = 'Nom réel';
 $s_email = 'Email'; // 'Mél' pour les puristes
 $s_password = 'Mot de passe';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'Confirmation du mot de passe';
 $s_access_level = 'Droits d\'accès';
 $s_update_user_button = 'Mettre à jour l\'utilisateur';
@@ -848,6 +860,7 @@ $s_signup_captcha_request = 'Entrez le code comme indiqué dans la case à droite'
 $s_signup_info = 'Pour compléter ce formulaire et vérifier vos réponses, il vous sera envoyé un email de confirmation à l\'adresse email spécifié.<br/>En utilisant l\'email de confirmation, vous serez capable d\'activer votre compte. Si vous ne parvenez pas à activer votre compte en sept jours, il sera purgé.<br/>Vous devez spécifier une adresse email valide pour recevoir l\'email de confirmation du compte.';
 $s_signup_title = 'Inscription';
 $s_signup_button = 'Inscrire';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Modifier la configuration du site';
@@ -1044,6 +1057,14 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Tous l
 $s_create_child_bug_button = "Créer un fils";
 $s_bug_cloned_to = "Bug cloné";
 $s_bug_created_from = "Bug généré depuis";
+
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Control';

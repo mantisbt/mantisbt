@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.61 $
+	# $Revision: 1.62 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:20 $
+	# $Date: 2004-10-01 23:03:36 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.61 2004-09-22 16:08:20 bigbadger Exp $
+	# $Id: strings_japanese_euc.txt,v 1.62 2004-10-01 23:03:36 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,6 +139,15 @@ $s_priority_link = '優先度別';
 $s_severity_link = '重要度別';
 $s_category_link = 'カテゴリ別';
 $s_resolution_link = '分析状況別';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = '選択項目のみ表示する';
@@ -176,6 +185,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'コメントがありません。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'プロジェクトがありません。';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'データベースの項目「%s」がありません。';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'FTP サーバに接続できません。';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'プロジェクト名は既に使用されています。戻って違うプロジェクト名を入力して下さい。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'プロジェクト名が無効です。プロジェクト名はブランクではいけません。';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'ユーザーがありません。';
@@ -276,6 +286,7 @@ $s_new_account_signup_msg = '次のアカウントが作成されました:';
 $s_reset_request_msg = '誰か(推測上あなた)が電子メール立証を通じてパスワード変更を要求しました。これがあなたでなかった場合は、このメッセージを無視してください。そうすれば、何も起こりません。' . "\n\n" . 'この要求を確認し、あなたのパスワードを変更するために次のURLを訪てください:';
 $s_reset_request_in_progress_msg = 'もしあなたが正確なユーザー名と電子メールアドレスを入力した場合、私たちは今すぐ、その電子メールアドレスへ確認メッセージを送るでしょう。一通のメッセージが受け取られたならば、あなたのアカウント上のパスワードを変更するための提供されたリンクに従ってください。';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = '次の改善要求について、もっと情報が必要です。';
 $s_email_notification_title_for_status_bug_acknowledged = '次の改善要求の内容が確認されました。';
 $s_email_notification_title_for_status_bug_confirmed = '次の改善要求の再現を確認しました。';
@@ -331,6 +342,7 @@ $s_username = 'ユーザー名';
 $s_realname = '本名';
 $s_email = '電子メール';
 $s_password = 'パスワード';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'パスワード(確認)';
 $s_access_level = 'アクセス権';
 $s_update_user_button = '更新';
@@ -844,6 +856,7 @@ $s_signup_captcha_request = '右側上の箱の中で表示されたコードを入力します。';
 $s_signup_info = 'このフォームの完成および回答の確認は、指定した電子メールアドレスへ確認電子メールが送られるでしょう。<br />確認メールを用いることであなたのアカウントは有効になります。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去されるかもしれません。<br />アカウント確認電子メールを受け取るために有効な電子メールアドレスを指定しなければなりません。';
 $s_signup_title = 'ユーザー登録';
 $s_signup_button = '登録';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'サイト設定の編集';
@@ -1040,6 +1053,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求
 $s_create_child_bug_button = "子の作成";
 $s_bug_cloned_to = "改善要求を複製しました";
 $s_bug_created_from = "改善要求を生成しました。 対象";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'チェックイン';

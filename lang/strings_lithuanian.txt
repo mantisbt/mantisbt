@@ -9,11 +9,11 @@
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# Lithuanian: Vilius Ðumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
 	# -------------------------------------------------
-	# $Revision: 1.15 $
+	# $Revision: 1.16 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:21 $
+	# $Date: 2004-10-01 23:03:41 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.15 2004-09-22 16:08:21 bigbadger Exp $
+	# $Id: strings_lithuanian.txt,v 1.16 2004-10-01 23:03:41 bigbadger Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -150,6 +150,15 @@ $s_priority_link = 'Pagal prioritetà';
 $s_severity_link = 'Pagal svarbà';
 $s_category_link = 'Pagal kategorijà';
 $s_resolution_link = 'Pagal sprendimà';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Rodyti tik pasirinktas';
@@ -187,6 +196,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'Komantaras nerastas.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'Projektas nerastas.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Duomenø bazës laukas \'%s\' nerastas.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'Prisijungti prie FTP serverio nepavyko.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projektas tokiu pavadinimu jau egzistuoja. Gráþkite atgal ir pasirinkite kitoká pavadinimà.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Klaidingas projekto pavadinimas.  Projekto pavadinimas negali bûti tuðèias.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Vartotojas nerastas.';
@@ -287,6 +297,7 @@ $s_new_account_signup_msg = 'Vartotojo vardas sukurtas su þemiau esanèiais param
 $s_reset_request_msg = 'Kaþkas (greièiausiai jûs pats) papraðëte slaptaþodþio pakeitimo. Jeigu tai buvote ne jûs, nekreipkite dëmesio á ðá laiðkà.' . "\n\n" . 'Prieðingu atveju aplankykite puslapá ðiuo adresu:';
 $s_reset_request_in_progress_msg = 'Jeigu ávedëte teisingà vartotojo vardà ir el. paðto adresà, mes jums iðsiuntëme patvirtinimo laiðkà. Kai tik gausite minëtà laiðkà, sekite instrukcijas ekrane.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'Ðiai klaidai reikia Jûsø ATSAKYMO.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Ði klaida buvo UÞREGISTRUOTA.';
 $s_email_notification_title_for_status_bug_confirmed = 'Ði klaida buvo PATVIRTINTA.';
@@ -342,6 +353,7 @@ $s_username = 'Vartotojo vardas';
 $s_realname = 'Tikras vardas';
 $s_email = 'El. paðto adresas';
 $s_password = 'Slaptaþodis';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'Slaptaþodis (dar kartà)';
 $s_access_level = 'Priëjimo lygis';
 $s_update_user_button = 'Atnaujinti vartotojo vardà';
@@ -854,6 +866,7 @@ $s_signup_captcha_request = 'Áraðykite kodà, kuris rodomas deþinëje';
 $s_signup_info = 'Uþpildæ ðià formà gausite patvirtinimo laiðkà.<br/>Pasinaudodami minëtu laiðku galësite aktyvuoti savo vartotojo vardà. Jeigu per septynias dienas nespësite to padaryti, jûsø vartotojo vardas bus iðtrintas.<br/>Norëdami gauti patvirtinimo laiðkà, turi ávesti tikrà el. paðto adresà.';
 $s_signup_title = 'Registracija';
 $s_signup_button = 'Pegistruotis';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Tinklapio nustatymø redagavimas';
@@ -1050,6 +1063,13 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>DËMESIO</b>. Ne visos
 $s_create_child_bug_button = "Sukurti sàryðá";
 $s_bug_cloned_to = "Klaida klonuota";
 $s_bug_created_from = "Klaida sukurta ið";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Patikrinimas';

@@ -8,12 +8,13 @@
 	# Dutch: Jan-Bart de Vreede, jvreede@outdare.nl
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
+	# Dutch: Hans van Zijst, hzi@syncera.nl
 	# -------------------------------------------------
-	# $Revision: 1.74 $
+	# $Revision: 1.75 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-22 16:08:19 $
+	# $Date: 2004-10-01 23:03:36 $
 	#
-	# $Id: strings_dutch.txt,v 1.74 2004-09-22 16:08:19 bigbadger Exp $
+	# $Id: strings_dutch.txt,v 1.75 2004-10-01 23:03:36 bigbadger Exp $
 	###########################################################################
 
 ?>
@@ -140,6 +141,15 @@ $s_priority_link = 'Per prioriteit';
 $s_severity_link = 'Per omvang';
 $s_category_link = 'Per categorie';
 $s_resolution_link = 'Per afhandeling';
+$s_legend_still_open = 'Still Open';
+$s_legend_resolved = 'Resolved';
+$s_legend_assigned = 'Assigned';
+$s_legend_total = 'Total';
+$s_legend_opened = 'Opened';
+$s_legend_closed = 'Closed';
+$s_legend_reported = 'Reported';
+$s_cumulative = 'Cumulative';
+$s_not_enough_data = 'Not enough data to create graph';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Toon alleen geselecteerde';
@@ -161,7 +171,7 @@ $MANTIS_ERROR[ERROR_SQL]                = 'SQL fout ontdekt.  Meld dit alstublie
 $MANTIS_ERROR[ERROR_REPORT]             = 'Er is een fout in uw rapport gevonden..';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED]  = 'Geen bestand opgegeven.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FOUT: Het bestandstype is niet toegestaan';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'De directory bestaat niet. Controleer alstublieft the projectinstellingen.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'De directory bestaat niet. Controleer alstublieft de projectinstellingen.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'Dit bestand bestaat al.  Verwijder het bestaande bestand eerst.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FOUT: Dit project bestaat al.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'Een verplicht veld was niet ingevuld.  Controleer alstublieft uw invoer.';
@@ -177,6 +187,7 @@ $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FOUT: Bug notitie niet gevonden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'FOUT: Project niet gevonden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FOUT: Database veld niet gevonden.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FOUT: Kan geen verbinding maken met de FTP server';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW]	 = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FOUT: Er bestaat al een project met die naam.  Ga alstublieft terug om terug om een nieuwe naam te kiezen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Foute project naam opgegeven. Deze naam kan niet blanco zijn.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'Gebruiker niet gevonden.';
@@ -185,7 +196,7 @@ $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Instellingen voor deze gebruiker ku
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'Nieuws niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Wachtwoord komt niet overeen met verificatie.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FOUT: Een array werd verwacht, maar een string werd ontvangen.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Een string werd verwaacht maar een array ontvangen.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Een string werd verwacht maar een array ontvangen.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'Bug %d niet gevonden.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'Ongeldig e-mail adres.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profiel niet gevonden.';
@@ -211,19 +222,19 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FOUT: Categorie niet gevonden.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'Een versie met die naam bestaat al.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FOUT: Versie niet gevonden.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FOUT: De gebruikersnaam is ongeldig.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'FOUT: Gebruiker heeft onjuiste toegangs nivo.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'FOUT: Gebruiker heeft onjuist toegangs niveau.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'De gekozen "echte naam" is gelijk aan een andere gebruikers inlog naam. Kies een andere naam.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsoring ondersteuning niet beschikbaar.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsoring %d niet gevonden.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsoring (%s) is beneden minimum bedrag (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Behandelaar heeft geen toegang tot aanpassen gesponsorde bugs.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Toegang geweigerd: Voor toewijzen van gesponsorede bugs is een hoger toegangsnivo nodig.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Toegang geweigerd: Voor toewijzen van gesponsorde bugs is een hoger toegangsniveau nodig.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor heeft geen e-mail adres. Pas uw instellingen aan om dit te corrigeren.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuratie optie \'%s\' heeft foutieve waarde \'%s\'';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'De actie kan niet worden uitgevoerd omdat bug \'%d\' alleen-lezen is';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "FOUT: Er is al een relatie tussen deze twee bugs.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "FOUT: Relatie niet gevonden.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Toegang geweigerd: Bug %d heeft een hoger toegangsnivo nodig.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Toegang geweigerd: Bug %d heeft een hoger toegangsniveau nodig.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Een bug kan niet aan zichzelf gerelateerd worden.";
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Bevestiging controle komt niet overeen. Probeer opnieuw.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'De \'wachtwoord verloren\' optie is niet beschikbaar.';
@@ -246,7 +257,6 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = 'Beheerder';
 $s_myself = "Mijzelf";
-$s_default_access_level = 'Default access level';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:kijker,25:rapporteur,40:bewerker,55:ontwikkelaar,70:manager,90:beheerder';
@@ -254,7 +264,7 @@ $s_project_status_enum_string     = '10:ontwikkeling,30:release,50:stabiel,70:ou
 $s_project_view_state_enum_string = '10:publiek,50:intern';
 $s_view_state_enum_string         = '10:publiek,50:intern';
 
-$s_priority_enum_string           = '10:geen,20:laag,30:normaal,40:hoog,50:urgent,60:onmiddelijk';
+$s_priority_enum_string           = '10:geen,20:laag,30:normaal,40:hoog,50:urgent,60:onmiddellijk';
 $s_severity_enum_string           = '10:feature,20:triviaal,30:tekst,40:tweak,50:klein,60:groot,70:crash,80:blokkeert';
 $s_reproducibility_enum_string    = '10:altijd,30:soms,50:willekeurig,70:niet geprobeerd,90:niet te dupliceren,100:N.V.T.';
 $s_status_enum_string             = '10:nieuw,20:feedback,30:onderkend,40:bevestigd,50:toegewezen,80:opgelost,90:afgesloten';
@@ -265,17 +275,18 @@ $s_eta_enum_string                = '10:geen,20:< 1 dag,30:2-3 dagen,40:< 1 week
 # Email Strings
 $s_new_account_subject = 'Account registratie';
 $s_new_account_greeting = 'Bedankt voor het aanmelden. Uw gebruikersnaam is \'';
-$s_new_account_greeting2 = '\'. Om uw registratie af te maken bezoekt u de volgende link om uw eigen wachtwoord in te stellen:';
+$s_new_account_greeting2 = '\'. Om uw registratie af te maken, bezoekt u de volgende link om uw eigen wachtwoord in te stellen:';
 $s_new_account_username = 'Gebruikersnaam: ';
-$s_new_account_message = 'Als u geen aanmelding verstuurd hebt kan u dit bericht negeren. Er zal dan niets gebeuren.' . "\n\n";
+$s_new_account_message = 'Als u geen aanmelding verstuurd heeft, kan u dit bericht negeren. Er zal dan niets gebeuren.' . "\n\n";
 $s_new_account_do_not_reply = 'VERSTUUR GEEN ANTWOORD OP DIT BERICHT';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'IP adres: ';
 $s_new_account_signup_msg = 'Het volgende account is aangemaakt:';
 
 $s_reset_request_msg = 'Iemand (waarschijnlijk uzelf) heeft een wachtwoord wijziging aangevraagd met e-mail bevestiging. Als u dit niet was kan u dit bericht negeren.' . "\n\n" . 'Als u deze wijziging voort wil zetten, bezoekt u de volgende URL om uw wachtwoord te wijzigen:';
-$s_reset_request_in_progress_msg = 'Als u de juiste gebruikersnaam en e-mail adres gegevens heeft opgegeven sturen wij u een bevestigings e-mail. Dit bericht bevat instructies waarmee u uw wachtwoord kan aanpassen.';
+$s_reset_request_in_progress_msg = 'Als u de juiste gebruikersnaam en e-mail adres gegevens heeft opgegeven, sturen wij u een bevestigings e-mail. Dit bericht bevat instructies waarmee u uw wachtwoord kunt aanpassen.';
 
+$s_email_notification_title_for_status_bug_new = 'The following issue is now in status NEW (again)';
 $s_email_notification_title_for_status_bug_feedback = 'De volgende bug wacht op uw feedback.';
 $s_email_notification_title_for_status_bug_acknowledged = 'De volgende bug is onderkend.';
 $s_email_notification_title_for_status_bug_confirmed = 'De volgende bug is bevestigd.';
@@ -289,8 +300,8 @@ $s_email_notification_title_for_action_bug_reopened = 'De volgende bug is herope
 $s_email_notification_title_for_action_bug_deleted = 'De volgende bug is verwijderd.';
 $s_email_notification_title_for_action_bug_updated = 'De volgende bug is aangepast.';
 $s_email_notification_title_for_action_sponsorship_added = 'De volgende bug is GESPONSORD.';
-$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+$s_email_notification_title_for_action_sponsorship_updated = 'Een sponsoring van de volgende bug is gewijzigd.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'Een sponsoring van de volgende bug is geannuleerd.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Aan deze bug is een aantekening toegevoegd.';
 $s_email_notification_title_for_action_relationship_added = "Deze bug is gerelateerd aan een andere.";
@@ -331,6 +342,7 @@ $s_username = 'Gebruikersnaam';
 $s_realname = 'Echte naam';
 $s_email = 'E-mail';
 $s_password = 'Wachtwoord';
+$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
 $s_confirm_password  = 'Bevestig wachtwoord';
 $s_access_level = 'Toegangsniveau';
 $s_update_user_button = 'Aanpassen gebruiker';
@@ -556,7 +568,7 @@ $s_here = 'Hier';
 $s_lost_password_title = "Wachtwoord reset";
 $s_lost_password_done_title = "Wachtwoord bericht verstuurd";
 $s_lost_password_subject = "Wachtwoord reset";
-$s_lost_password_info = "Om uw verloren wachtwoord opnieuw in te stellen moet u hier uw naam en e-mail adres invullen.<br/><br/>Als de gegevens overeen komen met een geldig account zal u een link met validatie code  ontvangen via e-mail. Volg deze link om uw wachtwoord aan te passen.";
+$s_lost_password_info = "Om uw verloren wachtwoord opnieuw in te stellen, moet u hier uw naam en e-mail adres invullen.<br/><br/>Als de gegevens overeen komen met een geldig, account zal u een link met validatie code  ontvangen via e-mail. Volg deze link om uw wachtwoord aan te passen.";
 $s_lost_password_confirm_hash_OK = "Uw bevestiging is geaccepteerd. Pas uw wachtwoord aan.";
 
 # main_page.php
@@ -638,7 +650,6 @@ $s_categories = 'Categorie&euml;n';
 $s_add_category_button = 'Toevoegen categorie';
 $s_versions = 'Versies';
 $s_add_version_button = 'Toevoegen versie';
-$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Aanpassen';
 $s_actions = 'Acties';
 $s_version = 'Versie/Fabrikant';
@@ -689,7 +700,7 @@ $s_confirm_account_pruning = 'Weet u zeker dat u oude nooit gebruikte accounts w
 $s_edit_user_title = 'Aanpassen gebruiker';
 $s_reset_password_button = 'Reset wachtwoord';
 $s_delete_user_button = 'Verwijder gebruiker';
-$s_reset_password_msg = 'Reset watchwoord verstuurt een nieuw wachtwoord via email.';
+$s_reset_password_msg = 'Reset wachtwoord verstuurt een nieuw wachtwoord via e-mail.';
 $s_reset_password_msg2 = 'Zetten van wachtwoord op begininstellingen zet het wachtwoord op blanco.';
 $s_show_all_users = 'ALLE';
 
@@ -798,7 +809,6 @@ $s_add_user_title = 'Toevoegen gebruiker aan project';
 $s_add_user_button = 'Toevoegen gebruiker';
 $s_project_selection_title = 'Project selectie';
 $s_remove_link = 'Verwijderen';
-$s_remove_all_link = 'Remove all';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Gebruiker gegevens zijn bijgewerkt';
@@ -840,9 +850,10 @@ $s_no_reponse_msg = 'U heeft zeven dagen om de bevestiging te versturen. Wanneer
 
 # signup_page.php
 $s_signup_captcha_request = 'Vul de code in zoals deze rechts in beeld getoond wordt';
-$s_signup_info = 'Wanneer dit formulier is ingevuld en opgestuurd wordt een bevestigings mail verstuurd naar het door u opgegeven e-mail adres.<br/>Door de instructies in deze mail te volgen kan u uw account activeren. U heeft zeven dagen om de bevestiging te versturen. Wanneer u dit niet doet binnen deze tijd kan het nieuwe account verwijderd worden.<br/>U moet een geldig e-mail adres opgeven om de bevestiging te kunnen ontvangen.';
+$s_signup_info = 'Wanneer dit formulier is ingevuld en opgestuurd, wordt een bevestigings e-mail verstuurd naar het door u opgegeven e-mail adres.<br/>Door de instructies in deze mail te volgen, kunt u uw account activeren. U heeft zeven dagen om de bevestiging te versturen. Wanneer u dit niet doet binnen deze tijd, kan het nieuwe account verwijderd worden.<br/>U moet een geldig e-mail adres opgeven om de bevestiging te kunnen ontvangen.';
 $s_signup_title = 'Inschrijven';
 $s_signup_button = 'Inschrijven';
+$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'Wijzig site instellingen';
@@ -922,7 +933,7 @@ $s_query_dupe_name = 'Een ander filter heeft deze naam al. Kies een andere naam.
 $s_query_blank_name = 'Een filter moet een naam hebben. Geef dit filter een naam om het op te slaan.';
 $s_query_store_error = 'Tijdens het opslaan van dit filter is een fout opgetreden.';
 $s_open_queries = 'Beheer filters';
-$s_query_delete_msg = 'Weet u deze dat u dit filter wil verwijderen?';
+$s_query_delete_msg = 'Weet u zeker dat u dit filter wilt verwijderen?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Eenvoudig overzicht';
@@ -988,7 +999,7 @@ $s_custom_field_require_closed = 'Verplicht bij sluiten';
 $s_custom_field_sequence = 'Rij';
 $s_custom_field_type_enum_string = '0:String,1:Numeriek,2:Drijvende komma,3:Enumeratie,4:E-mail,5:Checkbox,6:List,7:Multiselectie lijst';
 
-$s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste één project.  Als u doorgaat zullen alle waarden voor dit veld permanent verwijderd worden.  Deze actie kan niet ongedaan worden gemaakt.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk om door te gaan op onderstaande button.';
+$s_confirm_used_custom_field_deletion = 'Op dit moment is dit veld verbonden met tenminste &eacute;&eacute;n project.  Als u doorgaat, zullen alle waarden voor dit veld permanent verwijderd worden.  Deze actie kan niet ongedaan gemaakt worden.  Als u dit veld niet wilt verwijderen, druk dan op de Vorige toets in uw browser.  Druk op onderstaande knop om door te gaan.';
 $s_confirm_custom_field_deletion = 'Weet u zeker dat u dit gebruikersveld en alle bijbehorende waarden wilt verwijderen?';
 $s_field_delete_button = 'Verwijder gebruikersveld';
 
@@ -1035,10 +1046,17 @@ $s_relationship_deleted = "Relatie verwijderd";
 $s_delete_relationship_button = "Verwijderen";
 $s_delete_relationship_sure_msg = "Weet u zeker dat u deze relatie wil verwijderen?";
 $s_relationship_warning_blocking_bugs_not_resolved = "Nog niet alle onderliggende bugs van deze bug zijn opgelost of gesloten.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTIE</b>. Nog niet alle onderliggende bugs van deze bug zijn opgelost of gesloten.<br/>Voordat een bovenliggende bug opgelost of gesloten kan worden moeten alle onderliggende bugs opgelost of gesloten zijn.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTIE</b>. Nog niet alle onderliggende bugs van deze bug zijn opgelost of gesloten.<br/>Voordat een bovenliggende bug opgelost of gesloten kan worden, moeten alle onderliggende bugs opgelost of gesloten zijn.";
 $s_create_child_bug_button = "Aanmaken onderliggend";
 $s_bug_cloned_to = "Bug gekloond";
 $s_bug_created_from = "Bug gegenereerd van";
+# Relationship Graphs
+$s_viewing_bug_relationship_graph_title = "Relationship Graph";
+$s_relation_graph = "Relation Graph";
+$s_dependency_graph = "Dependency Graph";
+$s_vertical = "Vertical";
+$s_horizontal = "Horizontal";
+$s_view_issue = "View Issue";
 
 # Source Control Integration
 $s_checkin = 'Checkin';
