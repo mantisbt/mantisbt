@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.21 2003-03-05 11:51:15 vboctor Exp $
+	# $Id: error_api.php,v 1.22 2003-03-05 19:59:26 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -135,7 +135,7 @@
 	}
 
 	# ---------------
-	# helper function to print out the error details including context
+	# Print out the error details including context
 	function error_print_details( $p_file, $p_line, $p_context ) {
 	?>
 		<center>
@@ -157,7 +157,7 @@
 	}
 
 	# ---------------
-	# helper function to print out the variable context
+	# Print out the variable context given
 	function error_print_context( $p_context ) {
 		echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
 
@@ -182,7 +182,7 @@
 	}
 
 	# ---------------
-	# helper function to print out a stack trace if 'xdebug' module is loaded
+	# Print out a stack trace if PHP provides the facility or xdebug is present
 	function error_print_stack_trace() {
 		if ( extension_loaded( 'xdebug' ) ) { #check for xdebug presence
 			$t_stack = xdebug_get_function_stack();
@@ -226,6 +226,8 @@
 		}
 	}
 
+	# ---------------
+	# Build a string describing the parameters to a function
 	function error_build_parameter_string( $p_param ) {
 		if ( is_array( $p_param ) ) {
 			$t_results = array();
@@ -264,7 +266,7 @@
 	}
 	
 	# ---------------
-	# return an error string (in the current language) for the given error
+	# Return an error string (in the current language) for the given error
 	function error_string( $p_error ) {
 		$MANTIS_ERROR = lang_get( 'MANTIS_ERROR' );
 		
@@ -272,13 +274,17 @@
 	}
 
 	# ---------------
-	# return true if we have handled an error on this page
+	# Check if we have handled an error during this page
+	# Return true if an error has been handled, false otherwise
 	function error_handled() {
 		global $g_error_handled;
 
 		return ( true == $g_error_handled );
 	}
 
+	# ---------------
+	# Set additional info parameters to be used when displaying the next error
+	# This function takes a variable number of parameters
 	function error_parameters() {
 		global $g_error_parameters;
 
