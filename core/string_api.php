@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.61 2004-11-06 18:56:35 prichards Exp $
+	# $Id: string_api.php,v 1.62 2004-12-11 03:57:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -176,6 +176,11 @@
 	#  preceeded by a character that is not a letter, a number or an underscore
 	function string_process_bug_link( $p_string, $p_include_anchor=true ) {
 		$t_tag = config_get( 'bug_link_tag' );
+		# bail if the link tag is blank
+		if ( '' == $t_tag ) {
+			return $p_string;
+		}
+		
 		$t_path = config_get( 'path' );
 
 		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag, '/') . '(\d+)|$)/s',
@@ -228,6 +233,11 @@
 	#  preceeded by a character that is not a letter, a number or an underscore
 	function string_process_bugnote_link( $p_string, $p_include_anchor=true ) {
 		$t_tag = config_get( 'bugnote_link_tag' );
+		# bail if the link tag is blank
+		if ( '' == $t_tag ) {
+			return $p_string;
+		}
+
 		$t_path = config_get( 'path' );
 
 		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
