@@ -7,7 +7,10 @@ Mantis
  * Fixed small problem in all localization files (for $s_reset_request_msg).
  * Fixed summary stats for developers when they are assigned with "developer" rights at a project and do not have default profile >"developer".
  * Fixed summary page for "All projects" option
+ * Fixed document links (ChangeLog, README, etc.)
+ * Fixed problem where portuguese_brazil localization did not appear correctly.
  * Removed site_settings link in print_manage_doc_menu().
+ * Modified edit user links to use the username instead of the [edit] link.
 
 01.23.2002  -   0.17.0
 
