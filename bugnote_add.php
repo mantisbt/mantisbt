@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add.php,v 1.40 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bugnote_add.php,v 1.41 2004-03-30 12:08:19 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,7 @@
 ?>
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );
-	$f_private		= gpc_get_bool( 'private' );
+	$f_private		= gpc_get_bool( 'private', config_get( 'default_bugnote_view_status' ) );
 	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
 
 	access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id );

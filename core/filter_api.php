@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.21 2004-03-19 23:14:18 narcissus Exp $
+	# $Id: filter_api.php,v 1.22 2004-03-30 12:08:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -85,8 +85,7 @@
 		# private bug selection
 		if ( ! access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
 			$t_public = VS_PUBLIC;
-			$t_private = VS_PRIVATE;
-			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR ($t_bug_table.view_state='$t_private' AND $t_bug_table.reporter_id='$t_user_id'))" );
+			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR $t_bug_table.reporter_id='$t_user_id')" );
 		}
 
 		# reporter

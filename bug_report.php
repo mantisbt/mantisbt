@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.28 2004-02-06 10:05:38 vboctor Exp $
+	# $Id: bug_report.php,v 1.29 2004-03-30 12:08:19 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,7 +32,7 @@
 	$f_product_version		= gpc_get_string( 'product_version', '' );
 	$f_profile_id			= gpc_get_int( 'profile_id', 0 );
 	$f_handler_id			= gpc_get_int( 'handler_id', 0 );
-	$f_view_state			= gpc_get_int( 'view_state', 0 );
+	$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
 
 	$f_category				= gpc_get_string( 'category', '' );
 	$f_reproducibility		= gpc_get_int( 'reproducibility' );
