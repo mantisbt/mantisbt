@@ -136,7 +136,7 @@ function updateBugLite($p_id, $p_status, $p_request) {
 			break;
 
 		case 'DELETE':
-			deleteBug($t_id_arr[0],$t_id_arr[1]);
+			delete_bug($t_id_arr[0],$t_id_arr[1]);
 			break;
 			
 		case 'MOVE':
