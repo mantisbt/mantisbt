@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.15 2003-02-24 13:09:34 jlatour Exp $
+	# $Id: lang_api.php,v 1.16 2004-01-08 22:01:24 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -29,14 +29,19 @@
 		if ( $g_lang_current == $p_lang ) {
 			return;
 		}
-		
+
 		// define current language here so that when custom_strings_inc is
 		// included it knows the current language
 		$g_lang_current = $p_lang;
 
 		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
+
+
+		if ( strcasecmp( $p_lang, "english" ) !== 0 ) {
+			require_once( $t_lang_dir . 'strings_english.txt' );
+		}
 		require_once( $t_lang_dir . 'strings_'.$p_lang.'.txt' );
-		
+
 		# Allow overriding strings declared in the language file.
 		# custom_strings_inc.php can use $g_active_language
 		$t_custom_strings = dirname ( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'custom_strings_inc.php';

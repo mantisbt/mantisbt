@@ -4,6 +4,7 @@ Mantis ChangeLog
 
  * Fix #3467: Delete user ends up at user not found error.
  * Fix #3479: Reset account preferences of a user results in reset administrators (current) account.
+ * Fix #3493: Missing string $s_bug_deleted in German (and some other) translation
  * Fix #3495: Warning even if administrator account is disabled.
 
 2003.12.08  -  0.18.0
