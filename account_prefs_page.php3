@@ -72,7 +72,7 @@
 			<? echo $s_advanced_report ?>
 		</td>
 		<td>
-			<input type=checkbox name=f_advanced_report size=4 maxlength=4 <? if ( $u_advanced_report=="on" ) echo "CHECKED"?>
+			<input type=checkbox name=f_advanced_report <? if ( $u_advanced_report=="on" ) echo "CHECKED"?>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -80,7 +80,7 @@
 			<? echo $s_advanced_view ?>
 		</td>
 		<td>
-			<input type=checkbox name=f_advanced_view size=4 maxlength=4 <? if ( $u_advanced_view=="on" ) echo "CHECKED"?>
+			<input type=checkbox name=f_advanced_view <? if ( $u_advanced_view=="on" ) echo "CHECKED"?>
 		</td>
 	</tr>
 	<tr align=center>

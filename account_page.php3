@@ -62,7 +62,7 @@
 			<? echo $s_username ?>:
 		</td>
 		<td width=60%>
-			<input type=text size=16 name=f_username value="<? echo $u_username ?>">
+			<input type=text size=16 maxlength=32 name=f_username value="<? echo $u_username ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
@@ -70,7 +70,7 @@
 			<? echo $s_email ?>:
 		</td>
 		<td>
-			<input type=text size=32 name=f_email value="<? echo $u_email ?>">
+			<input type=text size=32 maxlength=64 name=f_email value="<? echo $u_email ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
@@ -78,7 +78,7 @@
 			<? echo $s_password ?>:
 		</td>
 		<td>
-			<input type=password size=32 name=f_password>
+			<input type=password size=32 maxlength=32 name=f_password>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
@@ -86,7 +86,7 @@
 			<? echo $s_confirm_password ?>:
 		</td>
 		<td>
-			<input type=password size=32 name=f_password_confirm>
+			<input type=password size=32 maxlength=32 name=f_password_confirm>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
