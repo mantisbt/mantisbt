@@ -18,6 +18,13 @@
 
 	auth_ensure_user_authenticated();
 
+	$t_query_arr = filter_db_get_available_queries();
+
+	# Special case: if we've deleted our last query, we have nothing to show here.
+	if ( sizeof( $t_query_arr ) < 1 ) {
+		print_header_redirect( 'view_all_bug_page.php' );
+	}
+
 	compress_enable();
 
 	html_page_top1();
@@ -30,13 +37,6 @@
 <div align="center">
 <table class="width75" cellspacing="0">
 <?php
-	$t_query_arr = filter_db_get_available_queries();
-	
-	# Special case: if we've deleted our last query, we have nothing to show here.
-	if ( sizeof( $t_query_arr ) <= 0 ) {
-		print_header_redirect( 'view_all_bug_page.php' );
-	}
-	
 	$t_column_count = 0;
 	$t_max_column_count = 2;
 	

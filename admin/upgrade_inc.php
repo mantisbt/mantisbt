@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_inc.php,v 1.10 2004-03-05 18:54:13 narcissus Exp $
+	# $Id: upgrade_inc.php,v 1.11 2004-03-19 08:40:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -235,7 +235,7 @@
 				# Disable compression so we can stream
 				compress_disable();
 				# Flush the output buffer
-				ob_end_flush();
+				@ob_end_flush();
 				echo '<b>Please be patient, this may take a while...</b>';
 			}
 

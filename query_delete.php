@@ -41,6 +41,5 @@
 		<?php
 		echo '</div>';
 		html_page_bottom1( __FILE__ );
-		print_header_redirect( $t_redirect_url );
 	}
 	?>
