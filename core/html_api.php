@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.16 2002-09-21 23:00:44 jfitzell Exp $
+	# $Id: html_api.php,v 1.17 2002-09-29 23:59:11 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -99,10 +99,13 @@
 	}
 	# --------------------
 	# (5) includes the css include file to use, is likely to be either empty or css_inc.php
-	function print_css( $p_css='' ) {
-		if ( !empty($p_css )) {
-			include( $p_css );
-		}
+	function print_css( $p_css ) {
+		PRINT '<link rel="stylesheet" type="text/css" href="'.$p_css.'" />';
+		PRINT '<script language="JavaScript" type="text/javascript">';
+		PRINT '<!--';
+		PRINT 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}';
+		PRINT '//-->';
+		PRINT '</script>';
 	}
 	# --------------------
 	# (6) OPTIONAL: for pages that require a redirect
@@ -154,7 +157,7 @@
 					break;
 		}
 
-		PRINT "<div align=\"center\"><span class=\"pagetitle\">$t_title</span></div>";
+		PRINT "<div class=\"center\"><span class=\"pagetitle\">$t_title</span></div>";
 	}
 	# --------------------
 	# (10) $p_page is included.  This allows for the admin to have a nice banner or

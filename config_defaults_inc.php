@@ -43,8 +43,8 @@
 	# requires trailing /
 	if ( isset( $_SERVER['SERVER_NAME'] ) && isset ( $_SERVER['PHP_SELF'] ) ) {
 		$g_path	= 'http://' . $_SERVER['SERVER_NAME'] . dirname( $_SERVER['PHP_SELF'] ) . '/';
-	} else { 
-		$g_path	= 'http://yourhostnamehere/mantis/'; 
+	} else {
+		$g_path	= 'http://yourhostnamehere/mantis/';
 	}
 
 	# path to your images directory (for icons)
@@ -534,19 +534,6 @@
 	# Mantis Look and Feel Variables
 	################################
 
-	# --- color values ----------------
-	# you can change the look and feel by modifying these values
-
-	$g_background_color		= '#ffffff'; # white
-	$g_required_color		= '#bb0000'; # red
-	$g_table_border_color	= '#000000'; # black
-	$g_category_title_color	= '#c8c8e8'; # blue
-	$g_primary_color1		= '#d8d8d8'; # dark gray
-	$g_primary_color2		= '#e8e8e8'; # light gray
-	$g_form_title_color		= '#ffffff'; # white
-	$g_spacer_color			= '#ffffff'; # white
-	$g_menu_color			= '#e8e8e8'; # light gray
-
 	# --- status color codes ----------
 	#
 	$g_status_colors		= array('new'			=> '#ffffff', # red,
@@ -583,14 +570,6 @@
 									'#C71585' => 'MEDIUMVIOLETRED');
 	# the 'slots', umber between whic you can insert status. Between 51 and 79 (included)
 	$g_custom_status_slot	= array('59','79');
-
-	# --- fonts ----------
-	#
-	$g_fonts				= 'Verdana, Arial, Helvetica, sans-serif';
-	$g_font_small			= '8pt';
-	$g_font_normal			= '10pt';
-	$g_font_large			= '12pt';
-	$g_font_color			= '#000000'; # black
 
 	###############################
 	# Mantis Cookie Variables
@@ -728,7 +707,7 @@
 	$g_bottom_include_page			= $g_absolute_path."";
 	$g_top_include_page				= $g_absolute_path."";
 	# CSS file
-	$g_css_include_file				= $g_absolute_path."css_inc".$g_php;
+	$g_css_include_file				= $g_path."css/default.css";
 	# meta tags
 	$g_meta_include_file			= $g_absolute_path."meta_inc".$g_php;
 	#----------------------------------
