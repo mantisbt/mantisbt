@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.39 2004-06-08 06:07:24 narcissus Exp $
+	# $Id: filter_api.php,v 1.40 2004-06-24 03:46:45 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -237,29 +237,9 @@
 				$t_desired_statuses[] = $t_this_status;
 			}
 		} else {
-			# advanced filtering: if only showing any, then restrict by the hide status values, otherwise ignore the hide
-			$t_only_any = false;
-			if ( count( $t_filter['show_status'] ) == 1 ) {
-				if ( ( 'any' == $t_filter['show_status'][0] ) || ( is_blank( $t_filter['show_status'][0] ) ) ) {
-					$t_only_any = true;
-				}
-			}
-			if ( $t_only_any ) {
-				foreach( $t_available_statuses as $t_this_status ) {
-					$t_hide_this = false;
-					foreach( $t_filter['hide_status'] as $t_this_hide_status ) {
-						if ( $t_this_status == $t_this_hide_status ) {
-							$t_hide_this = true;
-						}
-					}
-					if ( !$t_hide_this ) {
-						$t_desired_statuses[] = $t_this_status;
-					}
-				}
-			} else {
-				foreach( $t_filter['show_status'] as $t_this_status ) {
-					$t_desired_statuses[] = $t_this_status;
-				}
+			# advanced filtering: ignore the hide
+			foreach( $t_filter['show_status'] as $t_this_status ) {
+				$t_desired_statuses[] = $t_this_status;
 			}
 		}
 

@@ -30,6 +30,7 @@ Mantis ChangeLog
  * Enh #3841: Add real name ability to mantis.
  * Enh #3867: Give the user control whether to open hyperlink in new or current window.
  * Enh #3870: Support for custom functions which provides hooks for customizing behaviour.
+ * Enh #3881: Replace "Hide Status" with "Status" in advanced filter.
  * Enh #3918: Allow restricting filter views to advanced or simple.
  * Enh #3925: New bug group action: Copy.
  * Fix #3094: Switching projects clears filter values.

@@ -162,7 +162,15 @@
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'severity' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'status' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'resolution' ) ?></td>
-	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'hide_status' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<?php
+	if ( 'simple' == $f_view_type ) {
+		echo lang_get( 'hide_status' );
+	} else {
+		echo '&nbsp;';
+	}
+	?>
+	</td>
 </tr>
 <tr class="row-1">
 	<!-- Reporter -->
@@ -238,11 +246,19 @@
 	</td>
 	<!-- Hide closed and resolved bugs -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<?php
+	if ( 'simple' == $f_view_type ) {
+	?>
 		<select <?php PRINT $t_select_modifier;?> name="hide_status[]">
 			<option value="none"><?php echo lang_get( 'none' ) ?></option>
 			<option value="none"></option>
 			<?php print_enum_string_option_list( 'status', $t_filter['hide_status'] ) ?>
 		</select>
+	<?php
+	} else {
+		echo '&nbsp;';
+	}
+	?>
 	</td>
 </tr>
 

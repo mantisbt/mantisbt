@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.62 2004-06-15 02:54:39 narcissus Exp $
+	# $Id: bug_api.php,v 1.63 2004-06-24 03:46:44 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -472,6 +472,8 @@
 			$t_bugnote_text_insert_id = -1;
 			if ( $t_count2 > 0 ) {
 				$t_bugnote_text = db_fetch_array( $result2 );
+				$t_bugnote_text['note'] = db_prepare_string( $t_bugnote_text['note'] );
+
 				$query2 = "INSERT INTO $t_mantis_bugnote_text_table
 						   ( `note` )
 						   VALUES ( '" . $t_bugnote_text['note'] . "' );";
