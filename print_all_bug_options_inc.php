@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_inc.php,v 1.20 2004-02-16 12:49:25 vboctor Exp $
+	# $Id: print_all_bug_options_inc.php,v 1.21 2004-02-16 12:51:10 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -73,13 +73,13 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	$field_name_count = count( $t_field_name_arr );
 
 	# Grab the data
-    $query = "SELECT print_pref
-    		FROM $t_user_print_pref_table
+	$query = "SELECT print_pref
+			FROM $t_user_print_pref_table
 			WHERE user_id='$c_user_id'";
-    $result = db_query( $query );
+	$result = db_query( $query );
 
-    ## OOPS, No entry in the database yet.  Lets make one
-    if ( 0 == db_num_rows( $result ) ) {
+	## OOPS, No entry in the database yet.  Lets make one
+	if ( 0 == db_num_rows( $result ) ) {
 
 		# create a default array, same size than $t_field_name
 		for ($i=0 ; $i<$field_name_count ; $i++) {
@@ -97,13 +97,13 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 		$result = db_query( $query );
 
 		# Rerun select query
-	    $query = "SELECT print_pref
-	    		FROM $t_user_print_pref_table
+		$query = "SELECT print_pref
+				FROM $t_user_print_pref_table
 				WHERE user_id='$c_user_id'";
-	    $result = db_query( $query );
-    }
+		$result = db_query( $query );
+	}
 
-    # putting the query result into an array with the same size as $t_fields_arr
+	# putting the query result into an array with the same size as $t_fields_arr
 	$row = db_fetch_array( $result );
 	$t_prefs = $row[0];
 
