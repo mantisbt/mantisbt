@@ -95,8 +95,8 @@
 	}
 
 	$c_project_id		= (integer)$f_project_id;
-	$c_language			= addslashes($f_language);
 	$c_redirect_delay	= (integer)$f_redirect_delay;
+	$c_language			= addslashes($f_language);
 
 	# make sure the delay isn't too low
 	if (( $g_min_refresh_delay > $f_refresh_delay )&&
