@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.3 2004-08-05 23:37:43 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.4 2004-08-09 16:29:36 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,7 +25,7 @@
 
 	access_ensure_bug_level( access_get_status_threshold( $f_new_status ), $f_bug_id );
 
-	$t_status_label = get_enum_element( 'status', $f_new_status );
+	$t_status_label = get_enum_to_string( config_get( 'status_enum_string' ), $f_new_status );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 	
 	$t_bug = bug_get( $f_bug_id );

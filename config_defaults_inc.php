@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.194 2004-08-08 11:39:00 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.195 2004-08-09 16:29:36 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1056,6 +1056,9 @@
 	$g_severity_enum_string				= '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block';
 	$g_reproducibility_enum_string		= '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A';
 	$g_status_enum_string				= '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed';
+	  # @@@ for documentation, the values in this list are also used to define variables in the language files
+	  #  thus they cannot have embedded spaces. (e.g., $s_new_bug_title referenced in bug_change_status_page.php )
+	  # they are also expected to be english names for the states
 	$g_resolution_enum_string			= '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix';
 	$g_projection_enum_string			= '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
 	$g_eta_enum_string					= '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
