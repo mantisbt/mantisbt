@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.7 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.8 2004-03-30 12:17:38 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,7 +42,7 @@
  		for ( $i = 0; $i < $num_users; $i++ ) {
  			$row = db_fetch_array( $result );
 			echo ($i > 0) ? ', ' : '';
-			echo print_user( $row[0] );
+			echo print_user( $row['user_id'] );
  		}
 
 		echo '</td></tr>';
