@@ -44,7 +44,7 @@ table.width50		{ width: 50%;  border: solid 1px <?php echo $g_table_border_color
 td.center			{ text-align: center; }
 td.left				{ text-align: left; }
 td.right			{ text-align: right; }
-td.category			{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; }
+td.category			{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; vertical-align : top; }
 td.col-1			{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; }
 td.col-2			{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; }
 td.form-title		{ background-color: <?php echo $g_form_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; }
