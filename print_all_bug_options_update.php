@@ -52,7 +52,7 @@
 	PRINT '<br /><div align="center">';
 
 	if ( $result ) {
-		print lang_get( 'operation_succesful' );
+		print lang_get( 'operation_successful' );
 	} else {
 		print error_string( ERROR_GENERIC );
 	}

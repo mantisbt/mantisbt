@@ -7,7 +7,8 @@ Mantis ChangeLog
  * Fix #3072: Attached file should be opened up in a new browser window.
  * Fix #3080: project menu bar shows extra links
  * Fix #3089: Hide link to Profiles management on account page based on access level.
-	
+ * Fix #3092: Problem changing printing prefs.
+
 2003.03.22  -  0.18.0a4
 
  * Check whether other forms of compression are enabled before we turn on ob_gzhandler() in our output handler.  This should hopefully avoid problems people have had with blank pages resulting from compression problems.
