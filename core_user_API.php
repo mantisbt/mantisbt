@@ -126,17 +126,35 @@
 	# Authentication API
 	###########################################################################
 	### --------------------
-	# Checks for match using crypt()
-	# If this is not available (via DES) then you will need significant modifications
-	# future releases may have alternate encryption methods
+	# Checks for password match using the globally specified login method
 	function is_password_match( $p_test_password, $p_password ) {
-		$salt = substr( $p_password, 0, 2 );
-		if ( crypt( $p_test_password, $salt ) == $p_password ) {
-			return true;
+		global $g_login_method;
+
+		switch ( $g_login_method ) {
+			case CRYPT:
+						$salt = substr( $p_password, 0, 2 );
+						if ( crypt( $p_test_password, $salt ) == $p_password ) {
+							return true;
+						} else {
+							return false;
+						}
+
+			case PLAIN:
+
+						if ( $p_test_password == $p_password ) {
+							return true;
+						} else {
+							return false;
+						}
+
+			case CRYPT:
+						if ( md5( $p_test_password ) == $p_password ) {
+							return true;
+						} else {
+							return false;
+						}
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 	### --------------------
 	# This function is only called from the login.php3 script
@@ -151,7 +169,13 @@
 	### --------------------
 	#
 	function process_plain_password( $p_password ) {
-		return crypt( $p_password );
+		global $g_login_method;
+
+		switch ( $g_login_method ) {
+			case CRYPT:	return crypt( $p_password );
+			case PLAIN:	return $p_password;
+			case MD5:	return md5( $p_password );
+		}
 	}
 	### --------------------
 	###########################################################################
@@ -160,22 +184,21 @@
 	### --------------------
 	# creates a random 12 character password
 	function create_random_password( $p_email ) {
-		mt_srand( time() );
+		mt_srand( microtime() );
 		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
-		return substr( crypt( md5( $p_email.$t_val ) ), 0, 12 );
+		$t_val = md5( $t_val );
+
+		return substr( $t_val, 0, 12 );
 	}
 	### --------------------
 	# This string is used to use as the login identified for the web cookie
 	# It is not guarranteed to be unique but should be good enough
-	# It is chopped to be 64 characters in length to fit into the database
+	# The string returned should be 64 characters in length
 	function create_cookie_string( $p_email ) {
-		mt_srand( time() );
-		$t_val = mt_rand( 1000, mt_getrandmax() ) + mt_rand( 1000, mt_getrandmax() );
-		$t_string = $p_email.$t_val;
-		$t_cookie_string = crypt( $t_string ).md5( time() );
-		$t_cookie_string = $t_cookie_string.crypt( $t_string, $t_string ).md5( $t_string ).mt_rand( 1000, mt_getrandmax() );
-		$t_cookie_string = str_pd( $t_cookie_string, "Z", 64 );
-		return substr( $t_cookie_string, 0, 64 );
+		mt_srand( microtime() );
+		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
+		$t_val = md5( $t_val ).md5( time() );
+		return substr( $t_val, 0, 64 );
 	}
 	### --------------------
 	###########################################################################
@@ -259,11 +282,6 @@
 	# translate the access level number to a name
 	# @@@ UNUSED
 	function trans_access_level( $p_num ) {
-		global $s;
-
-		switch( $p_num ) {
-		case 1:
-		}
 	}
 	### --------------------
 	# return the project access level for the current user/project key pair
