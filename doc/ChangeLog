@@ -3,6 +3,7 @@ Mantis
 03.XX.2002  -   0.17.2
 
  * Fixed error in set_project where setting a project would result in a loop.
+ * Modified accounts so that protected accounts are not accessible by the user.
 
 03.15.2002  -   0.17.1
 

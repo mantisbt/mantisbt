@@ -13,6 +13,14 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	# get protected state
+	$t_protected = get_current_user_field( "protected" );
+
+	# protected account check
+	if ( ON == $t_protected ) {
+		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	}
+
 	# extracts the user information for the currently logged in user
 	# and prefixes it with u_
     $query = "SELECT *
@@ -144,19 +152,22 @@
 		<input type="submit" value="<?php echo $s_update_user_button ?>">
 	</td>
 </form>
-<?php 	if ( ON == $g_allow_account_delete ) { ?>
+<?php
+		# check if users can't delete their own accounts
+		if ( ON == $g_allow_account_delete ) {
+?>
 <form method="post" action="<?php echo $g_account_delete_page ?>">
 	<td class="right">
 		<input type="submit" value="<?php echo $s_delete_account_button ?>">
 	</td>
 </form>
-<?php } else { ?>
+<?php 	} else { ?>
 	<td>
 		&nbsp;
 	</td>
-<?php } ?>
+<?php 	} ?>
 </tr>
-<?php } ?>
+<?php } # end LDAP else ?>
 </table>
 </div>
 <?php # Edit Account Form END ?>

@@ -16,6 +16,11 @@
 	$f_id 			= get_current_user_field( "id" );
 	$f_protected 	= get_current_user_field( "protected" );
 
+	# protected account check
+	if ( ON == $f_protected ) {
+		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	}
+
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
 	$result = 0;
@@ -50,9 +55,7 @@
 <p>
 <div align="center">
 <?php
-	if ( ON == $f_protected ) {				# PROTECTED
-		PRINT "$s_account_protected_msg<p>";
-	} else if ( $result ) {					# SUCCESS
+	if ( $result ) {						# SUCCESS
 		PRINT "$s_operation_successful<p>";
 	} else {								# FAILURE
 		print_sql_error( $query );

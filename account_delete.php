@@ -13,6 +13,7 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	# check if users can't delete their own accounts
 	if ( OFF == $g_allow_account_delete ) {
 		print_header_redirect( $g_account_page );
 	}
@@ -20,10 +21,15 @@
 	# get protected state
 	$t_protected = get_current_user_field( "protected" );
 
+	# protected account check
+	if ( ON == $t_protected ) {
+		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	}
+
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
 	$result = 0;
-	if ( 0 == $t_protected ) {
+	if ( OFF == $t_protected ) {
 
 		# get user id
 		$t_user_id = get_current_user_field( "id" );

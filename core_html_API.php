@@ -196,7 +196,6 @@
 	# --------------------
 	# prints the user that is logged in and the date/time
 	# it also creates the form where users can switch projects
-	# this is used by print_menu()
 	function print_login_info() {
 		global 	$g_mantis_user_table,
 				$g_string_cookie_val, $g_project_cookie_val,
@@ -300,7 +299,12 @@
 				}
 
 				PRINT "<a href=\"$g_summary_page\">$s_summary_link</a> | ";
-				PRINT "<a href=\"$g_account_page\">$s_account_link</a> | ";
+
+				# only show accounts that are NOT protected
+				if ( OFF == $t_protected ) {
+					PRINT "<a href=\"$g_account_page\">$s_account_link</a> | ";
+				}
+
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {
 					if ( "0000000" != $g_project_cookie_val ) {
 						PRINT "<a href=\"$g_proj_user_menu_page\">$s_users_link</a> | ";
@@ -486,6 +490,17 @@
 		}
 		print_bracket_link( $p_link, $s_proceed );
 		PRINT "</div>";
+	}
+	# --------------------
+	# This is our generic error printing function
+	# Errors should terminate the script immediately
+	function print_mantis_error( $p_error_num=0 ) {
+		global $MANTIS_ERROR;
+
+		PRINT "<html><head></head><body>";
+		PRINT $MANTIS_ERROR[$p_error_num];
+		PRINT "</body></html>";
+		exit;
 	}
 	# --------------------
 ?>

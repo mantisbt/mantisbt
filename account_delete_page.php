@@ -13,6 +13,19 @@
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	# check if users can't delete their own accounts
+	if ( OFF == $g_allow_account_delete ) {
+		print_header_redirect( $g_account_page );
+	}
+
+	# get protected state
+	$t_protected = get_current_user_field( "protected" );
+
+	# protected account check
+	if ( ON == $t_protected ) {
+		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+	}
+
 	if ( OFF == $g_allow_account_delete ) {
 		print_header_redirect( $g_account_page );
 	}
