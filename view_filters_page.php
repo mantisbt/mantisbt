@@ -38,7 +38,7 @@
 			}
 			?>
 			if ( field_to_focus ) {
-				eval( "document.filters." + field_to_focus + ".focus()" );
+				eval( "document.filters['" + field_to_focus + "'].focus()" );
 			}
 			
 			SwitchDateFields();
