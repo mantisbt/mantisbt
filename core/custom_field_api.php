@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.40 2004-08-21 13:07:14 prichards Exp $
+	# $Id: custom_field_api.php,v 1.41 2004-08-27 23:05:33 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -248,7 +248,7 @@
 
 		db_query( $query );
 
-		return db_insert_id($t_custom_field_table);
+		return db_insert_id( $t_custom_field_table );
 	}
 
 	# --------------------
@@ -1011,7 +1011,7 @@
 			db_query( $query );
 
 			$row = db_fetch_array( $result );
-			history_log_event_direct( $c_bug_id, $t_name, $row['value'], $p_value);
+			history_log_event_direct( $c_bug_id, $t_name, custom_field_database_to_value( $row['value'], $t_type ), $p_value );
 		} else {
 			# Always store the value, even if it's the dafault value
 			# This is important, as the definitions might change but the
@@ -1021,7 +1021,7 @@
 					  VALUES
 						( '$c_field_id', '$c_bug_id', '$c_value' )";
 			db_query( $query );
-			history_log_event_direct( $c_bug_id, $t_name, '', $p_value);
+			history_log_event_direct( $c_bug_id, $t_name, '', $p_value );
 		}
 
 		custom_field_clear_cache( $p_field_id );
