@@ -316,7 +316,7 @@
 	if ( helper_get_current_project() != 0 &&
 		 access_level_check_greater_or_equal( UPDATER ) ) {	?>
 		<td bgcolor="<?php echo $status_color ?>">
-			<a href="<?php echo get_bug_update_link_plain( $v_id ) ?>"><img border="0" src="images/update.png" /></a>
+			<a href="<?php echo get_bug_update_link_plain( $v_id ) ?>"><img border="0" src="<?php echo config_get( 'icon_path' ).'update.png' ?>" /></a>
 		</td> <?php
 	} ?>
 
