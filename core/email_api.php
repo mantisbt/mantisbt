@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.26 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: email_api.php,v 1.27 2002-12-06 15:01:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -419,6 +419,25 @@
 		$t_message .= str_pad( lang_get( 'email_severity' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
 		$t_message .= str_pad( lang_get( 'email_priority' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
 		$t_message .= str_pad( lang_get( 'email_status' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
+
+		# @@@ Add support for access levels, possible only send the ones that are available for access level EVERYBODY
+		if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
+			$t_related_custom_field_ids = custom_field_get_ids( $v_project_id );
+			foreach( $t_related_custom_field_ids as $t_id ) {
+				$t_def = custom_field_get_definition( $t_id );
+
+				$t_message .= str_pad( $t_def['name'] . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT );
+
+				$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );
+				if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {
+					$t_message .= "mailto:$t_custom_field_value";
+				} else {
+					$t_message .= $t_custom_field_value;
+				}
+				$t_message .= "\n";
+			}       // foreach
+		}
+
 		if ( RESOLVED == $v_status ) {
 			$t_res_str = get_enum_element( 'resolution', $v_resolution );
 			$t_message .= str_pad( lang_get( 'email_resolution' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
