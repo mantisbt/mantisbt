@@ -3,6 +3,14 @@
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Revision: 1.7 $
+	# $Author: vboctor $
+	# $Date: 2002-06-13 10:02:38 $
+	#
+	# $Id: account_delete_page.php,v 1.7 2002-06-13 10:02:38 vboctor Exp $
+	# --------------------------------------------------------
 ?>
 <?php
 	# This is the delete confirmation page
@@ -24,10 +32,6 @@
 	# protected account check
 	if ( ON == $t_protected ) {
 		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
-	}
-
-	if ( OFF == $g_allow_account_delete ) {
-		print_header_redirect( 'account_page.php' );
 	}
 ?>
 <?php print_page_top1() ?>
