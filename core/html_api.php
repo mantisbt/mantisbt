@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.99 2004-05-25 13:38:50 vboctor Exp $
+	# $Id: html_api.php,v 1.100 2004-05-26 04:45:08 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -731,6 +731,18 @@
 	}
 
 	# --------------------
+	# Print a button to move the given bug to a different project
+	function html_button_bug_move( $p_bug_id ) {
+		$t_status = bug_get_field( $p_bug_id, 'status' );
+
+		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
+			html_button( 'bug_actiongroup_page.php',
+						 lang_get( 'move_bug_button' ),
+						 array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
+		}
+	}
+
+	# --------------------
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id ) ||
@@ -803,6 +815,9 @@
 
 			# RESOLVE button
 			html_button_bug_resolve( $p_bug_id );
+
+			# MOVE button
+			html_button_bug_move( $p_bug_id );
 		} else {
 			# REOPEN button
 			html_button_bug_reopen( $p_bug_id );

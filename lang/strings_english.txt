@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.175 $
+	# $Revision: 1.176 $
 	# $Author: int2str $
-	# $Date: 2004-05-26 02:28:55 $
+	# $Date: 2004-05-26 04:45:08 $
 	#
-	# $Id: strings_english.txt,v 1.175 2004-05-26 02:28:55 int2str Exp $
+	# $Id: strings_english.txt,v 1.176 2004-05-26 04:45:08 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -29,6 +29,7 @@ $s_actiongroup_menu_resolve = 'Resolve';
 $s_actiongroup_menu_update_priority = 'Update Priority';
 $s_actiongroup_menu_update_status = 'Update Status';
 $s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
 $s_all_projects = 'All Projects';
@@ -872,6 +873,7 @@ $s_system_profile = 'System Description';
 $s_update_bug_button = 'Update Issue';
 $s_bug_assign_to_button = 'Assign To:';
 $s_reopen_bug_button = 'Reopen Issue';
+$s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
 $s_cached = 'Cached';

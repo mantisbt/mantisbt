@@ -6,15 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.35 2004-05-18 12:28:49 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.36 2004-05-26 04:44:58 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This page allows actions to be performed on an array of bugs
-?>
-<?php require_once( 'core.php' ) ?>
-<?php auth_ensure_user_authenticated() ?>
-<?php
+
+	require_once( 'core.php' );
+
+	auth_ensure_user_authenticated(); 
+
 	$f_action = gpc_get_string( 'action', '' );
 	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
@@ -82,20 +83,34 @@
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
+
+	html_page_top1();
+	html_page_top2();
 ?>
-<?php html_page_top1() ?>
-<?php html_page_top2() ?>
-<?php  # displays the choices popup menus
-	if ( ! $t_finished ) {
-?>
+
 <br />
+
 <div align="center">
 <form method="POST" action="bug_actiongroup.php">
 <input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
 <table class="width75" cellspacing="1">
-<?php foreach( $f_bug_arr as $t_bug_id ) { ?>
-		<input type="hidden" name="bug_arr[]" value="<?php echo $t_bug_id ?>" />
-<?php } ?>
+<?php 
+
+$t_bug_rows = "";
+$t_i = 1;
+
+foreach( $f_bug_arr as $t_bug_id ) { 
+	$t_class = sprintf( "row-%d", ($t_i++ % 2) + 1 );
+	$t_bug_rows .= sprintf( "<tr class=\"%s\"> <td>%d</td> <td>%s</td> </tr>\n"
+		, $t_class, $t_bug_id, bug_get_field( $t_bug_id, 'summary' ) 
+    );
+	echo '<input type="hidden" name="bug_arr[]" value="' . $t_bug_id . '" />' . "\n";
+}
+?>
+
+<?php
+if ( !$t_finished ) {
+?>
 <tr class="row-1">
 	<td class="category">
 		<?php echo $t_question_title ?>
@@ -121,37 +136,42 @@
 		</select>
 	</td>
 </tr>
+<?php
+} else {
+?>
+
+<tr class="row-1">
+	<td class="category" colspan="2">
+		<?php echo $t_question_title; ?>
+	</td>
+</tr>
+<?php
+}
+?>
+
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" class="button" value="<?php echo $t_button_title ?>" />
 	</td>
 </tr>
 </table>
+
+<br />
+
+<table class="width75" cellspacing="1">
+<tr class="row-1">
+	<td class="category" colspan="2">
+		<?php echo lang_get( 'actiongroup_bugs' ); ?>
+	</td>
+</tr>
+<?php
+	echo $t_bug_rows;
+?>
+</table>
 </form>
 </div>
-<?php # Choices Form END ?>
+
+
 <?php
-	} else {
-		# else, asks for a simple confirmation to close or delete
+	html_page_bottom1( __FILE__ );
 ?>
-<br />
-<div align="center">
-	<?php print_hr() ?>
-	<?php echo $t_question_title . '<br /><br />' ?>
-
-	<form method="post" action="bug_actiongroup.php">
-		<input type="hidden" name="action" value="<?php echo $f_action ?>" />
-
-	<?php foreach( $f_bug_arr as $value ) { ?>
-		<input type="hidden" name="bug_arr[]" value="<?php echo $value ?>" />
-	<?php } ?>
-
-		<input type="submit" class="button" value="<?php echo $t_button_title ?>" />
-	</form>
-
-	<?php print_hr() ?>
-</div>
-<?php
-	}
-?>
-<?php html_page_bottom1( __FILE__ ) ?>
