@@ -79,12 +79,12 @@ div.menu				{ background-color: #e8e8e8; color: #000000; text-align: center; wid
 
 div.border-center		{ background-color: #ffffff; border: solid 1px #000000; text-align: center; width: 50%; position: relative; margin-right: auto; margin-left: auto; }
 
-div.quick-summary-left	{ width: 49%; padding: 2px; text-align: left;  clear: left;  float: left;  display: inline; }
-div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; clear: right; float: right; display: inline; }
+div.quick-summary-left	{ width: 49%; padding: 2px; text-align: left;  }
+div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; }
 
 .center					{ text-align: center; }
-.left					{ text-align: left;   float: left; }
-.right					{ text-align: right;  float: right; }
+.left					{ text-align: left; }
+.right					{ text-align: right; }
 .small					{ font-size: 8pt; }
 .small-normal 			{ font-size: 8pt; font-weight: normal; }
 .bold					{ font-weight: bold; }
