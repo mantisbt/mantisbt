@@ -29,7 +29,7 @@
 	$query = "select LAST_INSERT_ID()";
 	$result = db_query( $query );
 	if ( $result ) {
-		$t_bugnote_text_id = db_result( $result, 0 );
+		$t_bugnote_text_id = db_result( $result, 0, 0 );
 	}
 
 	### insert bugnote info
@@ -45,7 +45,7 @@
 			FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
    	$result = db_query( $query );
-   	$t_date_submitted = db_result( $result, 0 );
+   	$t_date_submitted = db_result( $result, 0, 0 );
 
 	### update bug last updated
 	$query = "UPDATE $g_mantis_bug_table
