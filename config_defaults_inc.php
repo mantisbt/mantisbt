@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.227 2004-12-11 20:22:24 prichards Exp $
+	# $Id: config_defaults_inc.php,v 1.228 2004-12-12 14:10:37 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1100,6 +1100,8 @@
 	$g_filter_by_custom_fields = ON;
 	$g_filter_custom_fields_per_row = 7;
 	$g_view_filters = SIMPLE_DEFAULT;
+
+	$g_dhtml_filters = OFF;
 
 	#######################################
 	# Mantis Database Table Variables

@@ -172,81 +172,27 @@
 <tr class="row-1">
 	<!-- Reporter -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="reporter_id[]">
-			<option value="any" <?php check_selected( $t_filter['reporter_id'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php
-				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) { 
-					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
-					check_selected( $t_filter['reporter_id'], META_FILTER_MYSELF );
-					PRINT '>[' . lang_get( 'myself' ) . ']</option>';
-				} 
-			?>
-			<?php print_reporter_option_list( $t_filter['reporter_id'] ) ?>
-		</select>
+		<?php print_filter_reporter_id(); ?>
 	</td>
 	<!-- Monitored by -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="user_monitor[]">
-			<option value="any" <?php check_selected( $t_filter['user_monitor'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php
-				if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
-					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
-					check_selected( $t_filter['user_monitor'], META_FILTER_MYSELF );
-					PRINT '>[' . lang_get( 'myself' ) . ']</option>';
-				}
-			?>
-			<?php print_reporter_option_list( $t_filter['user_monitor'] ) ?>
-		</select>
+		<?php print_filter_user_monitor(); ?>
 	</td>
 	<!-- Handler -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="handler_id[]">
-			<option value="any" <?php check_selected( $t_filter['handler_id'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="none" <?php check_selected( $t_filter['handler_id'], 'none' ); ?>><?php echo lang_get( 'none' ) ?></option>
-			<option value="any"></option>
-			<?php
-				if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { 
-					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
-					check_selected( $t_filter['handler_id'], META_FILTER_MYSELF );
-					PRINT '>[' . lang_get( 'myself' ) . ']</option>';
-				} 
-			?>
-			<?php print_assign_to_option_list( $t_filter['handler_id'] ) ?>
-		</select>
-		<?php
-			if ( 'simple' == $f_view_type ) {
-			?>
-        		<br /><input type="checkbox" name="and_not_assigned" <?php check_checked( $t_filter['and_not_assigned'], 'on' ); ?> /> <?php echo lang_get( 'or_unassigned' ) ?>
-        	<?php
-        	}
-        ?>
+		<?php print_filter_handler_id(); ?>
 	</td>
 	<!-- Category -->
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="show_category[]">
-			<option value="any" <?php check_selected( $t_filter['show_category'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php # This shows orphaned categories as well as selectable categories ?>
-			<?php print_category_complete_option_list( $t_filter['show_category'] ) ?>
-		</select>
+		<?php print_filter_show_category(); ?>
 	</td>
     <!-- Severity -->
     <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-        <select <?php PRINT $t_select_modifier;?> name="show_severity[]">
-			<option value="any" <?php check_selected( $t_filter['show_severity'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-            <option value="any"></option>
-            <?php print_enum_string_option_list( 'severity', $t_filter['show_severity'] ) ?>
-        </select>
+		<?php print_filter_show_severity(); ?>
     </td>
 	<!-- Resolution -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="show_resolution[]">
-			<option value="any" <?php check_selected( $t_filter['show_resolution'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_enum_string_option_list( 'resolution', $t_filter['show_resolution'] ) ?>
-		</select>
+		<?php print_filter_show_resolution(); ?>
 	</td>
 </tr>
 
@@ -269,23 +215,13 @@
 <tr class="row-1">
 	<!-- Status -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="show_status[]">
-			<option value="any" <?php check_selected( $t_filter['show_status'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
-		</select>
+		<?php print_filter_show_status(); ?>
 	</td>
 	<!-- Hide Status -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 	<?php
 	if ( 'simple' == $f_view_type ) {
-	?>
-		<select <?php PRINT $t_select_modifier;?> name="hide_status[]">
-			<option value="none"><?php echo lang_get( 'none' ) ?></option>
-			<option value="none"></option>
-			<?php print_enum_string_option_list( 'status', $t_filter['hide_status'] ) ?>
-		</select>
-	<?php
+		print_filter_hide_status();
 	} else {
 		echo '&nbsp;';
 	}
@@ -293,36 +229,20 @@
 	</td>
 	<!-- Build -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="show_build[]">
-			<option value="any" <?php check_selected( $t_filter['show_build'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_build_option_list( $t_filter['show_build'] ) ?>
-		</select>
+ 		<?php print_filter_show_build(); ?>
 	</td>
 	<!-- Version -->
 	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
-			<option value="any" <?php check_selected( $t_filter['show_version'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED ) ?>
-		</select>
+ 		<?php print_filter_show_version(); ?>
 	</td>
 	<!-- Fixed in Version -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
-			<option value="any" <?php check_selected( $t_filter['fixed_in_version'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL ) ?>
-		</select>
-	</td>
+ 		<?php print_filter_fixed_in_version(); ?>
+ 	</td>
 	<!-- Priority -->
-        <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-                <select <?php PRINT $t_select_modifier;?> name="show_priority[]">
-                        <option value="any" <?php check_selected( $t_filter['show_priority'], 'any' ); ?>><?php echo lang_get( 'any' ) ?></option>
-                        <option value="any"></option>
-			<?php print_enum_string_option_list( 'priority', $t_filter['show_priority'] ) ?>
-                </select>
-        </td>
+  <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+ 		<?php print_filter_show_priority(); ?>
+   </td>
 </tr>
 
 <tr class="row-category2">
@@ -340,88 +260,18 @@
 <tr class="row-2">
 	<!-- Number of bugs per page -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<input type="text" name="per_page" size="3" maxlength="7" value="<?php echo $t_filter['per_page'] ?>" />
+		<?php print_filter_per_page(); ?>
 	</td>
 	<!-- View Status -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<select name="view_state">
-			<?php
-			PRINT '<option value="any" ';
-			check_selected( $t_filter['view_state'], 'any' );
-			PRINT '>' . lang_get( 'any' ) . '</option>';
-			PRINT '<option value="any"></option>';
-			PRINT '<option value="' . VS_PUBLIC . '" ';
-			check_selected( $t_filter['view_state'], VS_PUBLIC );
-			PRINT '>' . lang_get( 'public' ) . '</option>';
-			PRINT '<option value="' . VS_PRIVATE . '" ';
-			check_selected( $t_filter['view_state'], VS_PRIVATE );
-			PRINT '>' . lang_get( 'private' ) . '</option>';
-			?>
-		</select>
+		<?php print_filter_view_state(); ?>
 	</td>
 	<!-- Highlight changed bugs -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $t_filter['highlight_changed'] ?>" />
+		<?php print_filter_highlight_changed(); ?>
 	</td>
 	<td valign="top" class="left" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
-	<table cellspacing="0" cellpadding="0">
-	<!-- Start date -->
-	<tr>
-		<td>
-		<?php echo lang_get( 'start_date' ) ?>:
-		</td>
-		<td>
-		<?php
-		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
-		foreach( $t_chars as $t_char ) {
-			if ( strcasecmp( $t_char, "M" ) == 0 ) {
-				print "<select name=\"start_month\">";
-				print_month_option_list( $t_filter['start_month'] );
-				print "</select>\n";
-			}
-			if ( strcasecmp( $t_char, "D" ) == 0 ) {
-				print "<select name=\"start_day\">";
-				print_day_option_list( $t_filter['start_day'] );
-				print "</select>\n";
-			}
-			if ( strcasecmp( $t_char, "Y" ) == 0 ) {
-				print "<select name=\"start_year\">";
-				print_year_option_list( $t_filter['start_year'] );
-				print "</select>\n";
-			}
-		}
-		?>
-		</td>
-	</tr>
-	<!-- End date -->
-	<tr>
-		<td>
-		<?php echo lang_get( 'end_date' ) ?>:
-		</td>
-		<td>
-		<?php
-		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
-		foreach( $t_chars as $t_char ) {
-			if ( strcasecmp( $t_char, "M" ) == 0 ) {
-				print "<select name=\"end_month\">";
-				print_month_option_list( $t_filter['end_month'] );
-				print "</select>\n";
-			}
-			if ( strcasecmp( $t_char, "D" ) == 0 ) {
-				print "<select name=\"end_day\">";
-				print_day_option_list( $t_filter['end_day'] );
-				print "</select>\n";
-			}
-			if ( strcasecmp( $t_char, "Y" ) == 0 ) {
-				print "<select name=\"end_year\">";
-				print_year_option_list( $t_filter['end_year'] );
-				print "</select>\n";
-			}
-		}
-		?>
-		</td>
-	</tr>
-	</table>
+		<?php print_filter_do_filter_by_date(); ?>
 	</td>
 </tr>
 
@@ -454,22 +304,8 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 			<?php
 			for ( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<td colspan="' . ( 1 * $t_filter_cols ) . '">';
-				if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
-					echo '<select ' . $t_select_modifier . ' name="custom_field_' . $t_accessible_custom_fields_ids[$t_base + $j] .'[]">';
-					echo '<option value="any" ';
-					check_selected( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[$t_base + $j] ], 'any' );
-					echo '>' . lang_get( 'any' ) .'</option>';
-					echo '<option value=""></option>';
-					foreach( $t_accessible_custom_fields_values[$t_base + $j] as $t_item ) {
-						if ( ( strtolower( $t_item ) != "any" ) && ( trim( $t_item ) != "" ) ) {
-							echo '<option value="' .  htmlentities( $t_item )  . '" ';
-							if ( isset( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[$t_base + $j] ] ) ) {
-								check_selected( $t_filter['custom_fields'][ $t_accessible_custom_fields_ids[$t_base + $j] ], $t_item );
-							}
-							echo '>' . $t_item  . '</option>' . "\n";
-						}
-					}
-					echo '</select>';
+				if ( isset( $t_accessible_custom_fields_ids[$t_base + $j] ) ) {
+					print_filter_custom_field($t_accessible_custom_fields_ids[$t_base + $j]);
 				} else {
 					echo '&nbsp;';
 				}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.17 2004-12-11 04:00:37 thraxisp Exp $
+	# $Id: check.php,v 1.18 2004-12-12 14:10:37 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -255,6 +255,9 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 				'' <> config_get( 'bug_link_tag' ) );
 		print_test_row( '$g_bugnote_link_tag is not empty ("' . config_get( 'bugnote_link_tag' ) . '")', 
 				'' <> config_get( 'bugnote_link_tag' ) );
+
+		print_test_row( 'filters: dhtml_filters = ON requires use_javascript = ON', 
+				( OFF == config_get( 'dhtml_filters' ) ) || ( ON == config_get( 'use_javascript' ) ) );
 ?>
 </table>
 

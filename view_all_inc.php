@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.146 2004-11-28 02:59:57 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.147 2004-12-12 14:10:37 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,8 +49,19 @@
 	if ( ON == $t_enable_sponsorship ) {
 		$col_count++;
 	}
-?>
 
+# @@@ (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
+	if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ){
+		?>
+		<script type="text/javascript">
+			var string_loading = '<?php echo lang_get( 'loading' );?>';
+		</script>
+		<script type="text/javascript" src="javascript/xmlhttprequest.js"></script>
+		<script type="text/javascript" src="javascript/addLoadEvent.js"></script>
+		<script type="text/javascript" src="javascript/dynamic_filters.js"></script>
+		<?php
+	}
+?>
 <br />
 <form name="bug_action" method="get" action="bug_actiongroup_page.php">
 <table id="buglist" class="width100" cellspacing="1">

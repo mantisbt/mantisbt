@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.221 $
-	# $Author: marcelloscata $
-	# $Date: 2004-12-08 21:41:12 $
+	# $Revision: 1.222 $
+	# $Author: thraxisp $
+	# $Date: 2004-12-12 14:10:39 $
 	#
-	# $Id: strings_english.txt,v 1.221 2004-12-08 21:41:12 marcelloscata Exp $
+	# $Id: strings_english.txt,v 1.222 2004-12-12 14:10:39 thraxisp Exp $
 	###########################################################################
 
 # Charset
@@ -1141,4 +1141,9 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
+
+
+# DHTML filters
+$s_loading = 'Loading...';
+
 ?>
