@@ -177,7 +177,7 @@
 	$g_mantis_news_table              = $g_db_table_prefix."_news_table";
 	$g_mantis_project_category_table  = $g_db_table_prefix."_project_category_table";
 	$g_mantis_project_table           = $g_db_table_prefix."_project_table";
-	$g_mantis_project_user_list_table = $g_db_table_prefix."_project_user_list_table";
+	#$g_mantis_project_user_list_table = $g_db_table_prefix."_project_user_list_table";
 	$g_mantis_project_version_table   = $g_db_table_prefix."_project_version_table";
 	$g_mantis_user_table              = $g_db_table_prefix."_user_table";
 	$g_mantis_user_profile_table      = $g_db_table_prefix."_user_profile_table";

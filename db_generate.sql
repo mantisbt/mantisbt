@@ -91,12 +91,6 @@ CREATE TABLE mantis_news_table (
    KEY id (id)
 );
 
-#
-# Dumping data for table 'mantis_news_table'
-#
-
-INSERT INTO mantis_news_table (id, project_id, poster_id, date_posted, last_modified, headline, body) VALUES ( '0000001', '0000002', '0000004', NOW(), NOW(), 'Welcome', 'Welcome');
-
 # --------------------------------------------------------
 #
 # Table structure for table 'mantis_project_category_table'
@@ -152,7 +146,7 @@ CREATE TABLE mantis_project_version_table (
 # Dumping data for table 'mantis_project_version_table'
 #
 
-INSERT INTO mantis_project_version_table (project_id, version) VALUES ( '0000002', '0.14.0');
+INSERT INTO mantis_project_version_table (project_id, version) VALUES ( '0000001', '0.14.0');
 
 # --------------------------------------------------------
 #

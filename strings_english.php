@@ -96,7 +96,7 @@
 	### $s_account_protected_msg # defined above
 	$s_account_updated_msg = "Your account has been successfully updated...";
 
-    ### bug_assign.php3
+	### bug_assign.php3
     $s_bug_assign_msg       = "Bug has been successfully assigned...";
 
 	### bug_delete.php3
