@@ -17,9 +17,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 -------------------------------------------------------------------------------
 
-INSTALL          - installation instructions
+INSTALL          - installation and upgrade instructions
 CONFIGURATION    - help on custom configuration
 LICENSE          - GPL license
+Changlog         - List of fixes, additions, and todo items
+config_inc.php3  - global configuration options
 db_generate.sql  - SQL tables
 core_API.php3    - core functions
 

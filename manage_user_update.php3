@@ -23,6 +23,8 @@
 		    			protected='$f_protected'
 		    		WHERE id='$f_id'";
 		}
+		### administrator is not allowed to change access level or enabled
+		### this is to prevent screwing your own account
 		else {
 		    $query = "UPDATE $g_mantis_user_table
 		    		SET username='$f_username', email='$f_email',

@@ -1,5 +1,6 @@
+-------------------------------------------------------------------------------
 ### Installation steps ###
-
+-------------------------------------------------------------------------------
 *** REQUIREMENTS: mysql database, php 3.0.7+, a webserver (tested on Apache,
 should work with IIS or anything else php will run with).
 
@@ -42,7 +43,19 @@ of the site (including renaming the database tables) please read the
 CONFIGURATION file.  You'll probably want to add more bug catgories which
 is covered in CONFIGURATION.
 
-* Useful links:
+-------------------------------------------------------------------------------
+### Upgrading ###
+-------------------------------------------------------------------------------
+0.9.x to 0.10.x
+
+You will need to add a 'protected' field in the mantis_user_table.
+This command will do the trick:
+
+ALTER TABLE mantis_user_table ADD protected VARCHAR (3) not null
+
+-------------------------------------------------------------------------------
+### Useful links ###
+-------------------------------------------------------------------------------
 
 http://www.mysql.com/      -  good documentation.
 http://www.php.net/        -  excellent documentation.
