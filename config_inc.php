@@ -220,7 +220,6 @@
 	# defaults for viewing preferences
 	$g_default_limit_view       = 50;
 	$g_default_show_changed     = 6;
-	$g_default_hide_resolved    = "";  # set to on to enable
 	$g_default_advanced_report  = "";  # set to on to enable
 	$g_default_advanced_view    = "";  # set to on to enable
 	#--------------------

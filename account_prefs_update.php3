@@ -9,14 +9,6 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### Some sensible defaults
-	if ( empty( $f_limit_view ) ) {
-		$f_limit_view = $g_default_limit_view;
-	}
-	if ( empty( $f_show_last ) ) {
-		$f_show_last = $g_default_show_last;
-	}
-
 	if ( $f_action="update" ) {
 		## update preferences
 		$query = "UPDATE $g_mantis_user_pref_table

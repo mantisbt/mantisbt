@@ -42,6 +42,9 @@
 			$t_bug_id = $row["id"];
 		}
 	}
+	if ( $bug_count < 1 ) {
+		$bug_count = 1;
+	}
 	$t_average_time = $t_total_time / $bug_count;
 
 	$t_largest_diff = number_format( $t_largest_diff / 86400, 2 );

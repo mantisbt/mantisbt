@@ -136,10 +136,9 @@ CREATE TABLE mantis_user_profile_table (
 CREATE TABLE mantis_user_pref_table (
    id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL auto_increment,
    user_id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL,
-   hide_resolved char(3) NOT NULL,
-   limit_view int(11) DEFAULT '0' NOT NULL,
-   show_last char(3) NOT NULL,
    advanced_report char(3) NOT NULL,
    advanced_view char(3) NOT NULL,
    PRIMARY KEY (id)
 );
+
+INSERT INTO mantis_user_pref_table VALUES ( '0000000001', '0000000001', '', '');

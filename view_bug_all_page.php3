@@ -36,15 +36,10 @@
 	if ( !isset( $f_show_status ) ) {
 		$f_show_status = "any";
 	}
-	#$f_limit_view
 
 	if ( !isset( $f_offset ) ) {
 		$f_offset = 0;
 	}
-
-#	if ( $f_show_status!="any" ) {
-#		$f_hide_resolved = "";
-#	}
 
 	### basically we toggle between ASC and DESC if the user clicks the
 	### same sort order
