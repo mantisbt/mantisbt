@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.37 2004-08-18 13:54:41 narcissus Exp $
+	# $Id: bug_report.php,v 1.38 2004-08-21 13:27:25 prichards Exp $
 	# --------------------------------------------------------
 
 	# This page stores the reported bug
@@ -155,9 +155,12 @@
 <div align="center">
 <?php
 	echo lang_get( 'operation_successful' ) . '<br />';
+	print_bracket_link( string_get_bug_view_url( $t_bug_id ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id", true );
+	print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 
 	if ( $f_report_stay ) {
 ?>
+	<p>
 	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
 		<input type="hidden" name="category" 		value="<?php echo $t_bug_data->category ?>" />
 		<input type="hidden" name="severity" 		value="<?php echo $t_bug_data->severity ?>" />
@@ -172,10 +175,8 @@
 		<input type="hidden" name="view_state"		value="<?php echo $t_bug_data->view_state ?>" />
 		<input type="submit" class="button" 		value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
 	</form>
+	</p>
 <?php
-	} else {
-		print_bracket_link( string_get_bug_view_url( $t_bug_id ), lang_get( 'view_submitted_bug_link' ) . " $t_bug_id" );
-		print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 	}
 ?>
 </div>
