@@ -26,33 +26,39 @@
 
 	### Add item
 	setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length );
+
+	# redirect to 'same page' when switching projects.
+	# view_all_* pages, and summary
+	if ( $valid_project==1 ) {
+		if (!isset($HTTP_REFERER)) {
+			$t_redirect_url = $g_main_page;
+		} else if (eregi($g_view_all_bug_page,$HTTP_REFERER)){
+			$t_redirect_url = $g_view_all_bug_page;
+		} else if (eregi($g_view_all_assigned_bug_page,$HTTP_REFERER)){
+			$t_redirect_url = $g_view_all_assigned_bug_page;
+		} else if (eregi($g_view_all_reported_bug_page,$HTTP_REFERER)){
+			$t_redirect_url = $g_view_all_reported_bug_page;
+		} else if (eregi($g_view_all_unassign_bug_page,$HTTP_REFERER)){
+			$t_redirect_url = $g_view_all_unassign_bug_page;
+		} else if (eregi($g_summary_page,$HTTP_REFERER)){
+			$t_redirect_url = $g_summary_page;
+		} else if (eregi($g_summary_page,$HTTP_REFERER)){
+			$t_redirect_url = $g_summary_page;
+		} else {
+			$t_redirect_url = $g_main_page;
+		}
+	}
+
+	if (( $g_quick_proceed == 1 )&&( $result )) {
+		print_header_redirect( $t_redirect_url );
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
 <?
-	# redirect to 'same page' when switching projects.
-	# view_all_* pages, and summary
-	if ( $valid_project==1 ) {
-		if (!isset($HTTP_REFERER)) {
-			print_meta_redirect( $g_main_page, $g_wait_time );
-		} else if (eregi($g_view_all_bug_page,$HTTP_REFERER)){
-			print_meta_redirect( $g_view_all_bug_page, $g_wait_time );
-		} else if (eregi($g_view_all_assigned_bug_page,$HTTP_REFERER)){
-			print_meta_redirect( $g_view_all_assigned_bug_page, $g_wait_time );
-		} else if (eregi($g_view_all_reported_bug_page,$HTTP_REFERER)){
-			print_meta_redirect( $g_view_all_reported_bug_page, $g_wait_time );
-		} else if (eregi($g_view_all_unassign_bug_page,$HTTP_REFERER)){
-			print_meta_redirect( $g_view_all_unassign_bug_page, $g_wait_time );
-		} else if (eregi($g_summary_page,$HTTP_REFERER)){
-			print_meta_redirect( $g_summary_page, $g_wait_time );
-		} else if (eregi($g_summary_page,$HTTP_REFERER)){
-			print_meta_redirect( $g_summary_page, $g_wait_time );
-		} else {
-			print_meta_redirect( $g_main_page, $g_wait_time );
-		}
-	}
+	print_meta_redirect( $t_redirect_url, $g_wait_time );
 ?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>

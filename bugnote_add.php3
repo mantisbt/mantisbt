@@ -61,14 +61,8 @@
    	} else {
    		email_bugnote_add( $f_id );
    	}
-?>
-<? print_html_top() ?>
-<? print_head_top() ?>
-<? print_title( $g_window_title ) ?>
-<? print_css( $g_css_include_file ) ?>
-<?
-	if ( $result ) {
-		switch ( $g_show_view ) {
+
+	switch ( $g_show_view ) {
 		case 0:	if ( get_current_user_pref_field( "advanced_view" )==1 ) {
 					$t_redirect_url = $g_view_bug_page;
 				} else {
@@ -79,8 +73,19 @@
 				break;
 		case 2:	$t_redirect_url = $g_view_bug_advanced_page;
 				break;
-		}
-		$t_redirect_url = $t_redirect_url."?f_id=".$f_id;
+	}
+	$t_redirect_url = $t_redirect_url."?f_id=".$f_id;
+
+	if (( $g_quick_proceed == 1 )&&( $result )) {
+		print_header_redirect( $t_redirect_url );
+	}
+?>
+<? print_html_top() ?>
+<? print_head_top() ?>
+<? print_title( $g_window_title ) ?>
+<? print_css( $g_css_include_file ) ?>
+<?
+	if ( $result ) {
 		print_meta_redirect( $t_redirect_url, $g_wait_time );
 	}
 ?>

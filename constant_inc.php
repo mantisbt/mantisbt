@@ -71,4 +71,8 @@
 	# unread status
 	define( "READ",     201 );
 	define( "UNREAD",   202 );
+
+	# unread status
+	define( "CRYPT",     	1 );
+	define( "PLAIN_TEXT",   0 );
 ?>
