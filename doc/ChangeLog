@@ -148,6 +148,7 @@ Mantis ChangeLog
  * Removed config option (allow_html_tags): see new option html_valid_tags
  * Removed config option (html_tags): see new option html_valid_tags
  * Removed config option (register_globals): just check the actual value of the PHP config variable
+ * Removed config option (php): this variable containing the file extensions (php3 of php) was only used in config, so do a search and replace if you need it
  * Removed file: proj_user_api.php
  * Renamed file: manage_create_new_user.php to manage_user_create.php
  * Renamed file: manage_create_new_user_page.php to manage_user_create_page.php 

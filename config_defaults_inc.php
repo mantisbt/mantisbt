@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.73 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.74 2003-02-15 20:56:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -780,12 +780,6 @@
 	# Mantis Page Variables
 	#############################
 
-	#----------------------------------
-	# extensions for php 3 and php 4
-	# set this to php for php4 or whatever your webserver needs
-	$g_php					= '.php';
-	#----------------------------------
-
 	#############################
 	# Mantis Javascript Variables
 	#############################
@@ -817,15 +811,15 @@
 	# CSS file
 	$g_css_include_file				= $g_path."css/default.css";
 	# meta tags
-	$g_meta_include_file			= $g_absolute_path."meta_inc".$g_php;
+	$g_meta_include_file			= $g_absolute_path."meta_inc.php";
 	#----------------------------------
 	# Internal includes
-	$g_bugnote_include_file			= $g_absolute_path."bugnote_inc".$g_php;
-	$g_history_include_file			= $g_absolute_path."history_inc".$g_php;
-	$g_print_bugnote_include_file	= $g_absolute_path."print_bugnote_inc".$g_php;
-	$g_view_all_include_file		= $g_absolute_path."view_all_inc".$g_php;
-	$g_bug_view_inc					= $g_absolute_path."bug_view_inc".$g_php;
-	$g_bug_file_upload_inc			= $g_absolute_path."bug_file_upload_inc".$g_php;
+	$g_bugnote_include_file			= $g_absolute_path."bugnote_inc.php";
+	$g_history_include_file			= $g_absolute_path."history_inc.php";
+	$g_print_bugnote_include_file	= $g_absolute_path."print_bugnote_inc.php";
+	$g_view_all_include_file		= $g_absolute_path."view_all_inc.php";
+	$g_bug_view_inc					= $g_absolute_path."bug_view_inc.php";
+	$g_bug_file_upload_inc			= $g_absolute_path."bug_file_upload_inc.php";
 	#----------------------------------
 
 	###########################
@@ -833,7 +827,7 @@
 	###########################
 	# ---------------------------------
 	# Specify where the user should be sent after logging out.
-	$g_logout_redirect_page			= $g_path."login_page".$g_php;
+	$g_logout_redirect_page			= $g_path."login_page.php";
 
 	###########################
 	# Headers
