@@ -2,6 +2,8 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.2
 
+ * Sec #3595: bug_view_page.php: restricted custom fields are shown.
+ * Sec #3596: print_bugnote_inc.php: private bugnotes are visible for not granted users.
  * Enh #1088: formatting of text in bugnotes, description areas.
  * Enh #1649: Replace 'Assign to Me' with 'Assign To:' and dropdown of developers.
  * Enh #3362: Generic email notifications.
