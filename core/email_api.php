@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.56 2003-04-09 19:39:13 jfitzell Exp $
+	# $Id: email_api.php,v 1.57 2003-04-17 06:25:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -512,15 +512,15 @@
 	function email_build_history_message( $p_bug_id ) {
 		$history = history_get_events_array( $p_bug_id );
 		$t_message = lang_get( 'bug_history' ) . "\n";
-		$t_message .=	str_pad( lang_get( 'date_modified' ), 20 ) .
-						str_pad( lang_get( 'username' ), 20 ) .
-						str_pad( lang_get( 'field' ), 20 ) .
+		$t_message .=	str_pad( lang_get( 'date_modified' ), 15 ) .
+						str_pad( lang_get( 'username' ), 15 ) .
+						str_pad( lang_get( 'field' ), 25 ) .
 						str_pad( lang_get( 'change' ), 20 ). "\n";
 		$t_message .= config_get( 'email_separator1' ) . "\n";
 		for ( $i = 0; $i < count($history); $i++ ) {
-			$t_message .=	str_pad( $history[$i]['date'], 20 ) .
-							str_pad( $history[$i]['username'], 20 ) .
-							str_pad( $history[$i]['note'], 20 ) .
+			$t_message .=	str_pad( $history[$i]['date'], 15 ) .
+							str_pad( $history[$i]['username'], 15 ) .
+							str_pad( $history[$i]['note'], 25 ) .
 							str_pad( $history[$i]['change'], 20 ). "\n";
 		}
 

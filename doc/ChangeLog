@@ -5,6 +5,7 @@ Mantis ChangeLog
  * Enhancement: Show file attachment indicator on bug list page (#3088).
  * Fix: Improved adherance to the XHTML standard.
  * Fix #2992: Unable to attach files to bugs on Windows servers with magic quotes ON.
+ * Fix #3027: History summary a little bit too wide in emails.
  * Fix #3064: view bug buttons in vertical column
  * Fix #3072: Attached file should be opened up in a new browser window.
  * Fix #3076: Bug reports are added to the "wrong" project.
