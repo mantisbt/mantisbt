@@ -104,6 +104,8 @@
 	$g_manage_user_page            = "manage_user_page".$g_php;
 	$g_manage_user_update          = "manage_user_update".$g_php;
 
+	$g_documentation_page          = "documentation_page.php3";
+
 	# category management
 	$g_manage_category_page        = "manage_category_page".$g_php;
 	$g_manage_category_update      = "manage_category_update".$g_php;
