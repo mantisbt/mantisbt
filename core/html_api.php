@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.72 2003-03-24 06:26:42 jfitzell Exp $
+	# $Id: html_api.php,v 1.73 2003-03-25 09:56:31 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -414,7 +414,7 @@
 						WHERE p.enabled=1
 						ORDER BY p.name";
 		} else {
-			$query = "SELECT p.id, p.name
+			$query = "SELECT DISTINCT(p.id), p.name
 						FROM $t_project_table p, $t_project_user_list_table u
 						WHERE p.enabled=1
 						  AND p.id=u.project_id

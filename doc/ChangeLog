@@ -5,6 +5,7 @@ Mantis ChangeLog
  * Fix: Improved adherance to the XHTML standard.
  * Fix #3072: Attached file should be opened up in a new browser window.
  * Fix #3064: view bug buttons in vertical column
+ * Fix #3080: project menu bar shows extra links
 	
 2003.03.22  -  0.18.0a4
 
