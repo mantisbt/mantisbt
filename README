@@ -51,6 +51,10 @@ Features:
 - Projection / ETA
 - Items updated since last visit indicators
 
+The release numbering convention I'm using is major.minor.micro.
+Major indicates a large change in the core package, minor a significant
+amount of feature addition/modification, micro for mostly bug fixes.
+
 I'd appreciate an email letting me know if you find this program useful.
 I won't publish any information without permission, I'd just like an idea
 and knowing I'm helping people will only motivate me more.

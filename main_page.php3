@@ -47,8 +47,8 @@
 	for ($i=0;$i<$news_count;$i++) {
 		$row = mysql_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, "v" );
-		$v_headline = string_unsafe( $v_headline );
-		$v_body = string_unsafe( $v_body );
+		$v_headline = string_display( $v_headline );
+		$v_body = string_display( $v_body );
 		$v_date_posted = date( "m-d H:i", sql_to_unix_time( $v_date_posted ) );
 
 		## grab the username and email of the poster
@@ -67,7 +67,7 @@
 <table width=75% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <tr>
 	<td bgcolor=<? echo $g_primary_color_dark ?>>
-		<b><? echo string_unsafe( $v_headline ) ?></b> -
+		<b><? echo $v_headline ?></b> -
 		<i><? echo $v_date_posted ?></i> -
 		<a href="mailto:<? echo $t_poster_email ?>"><? echo $t_poster_name ?></a>
 	</td>

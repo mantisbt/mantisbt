@@ -26,7 +26,7 @@ CREATE TABLE mantis_bug_table (
    os varchar(32) NOT NULL,
    os_build varchar(16) NOT NULL,
    platform varchar(32) NOT NULL,
-   version varchar(16) NOT NULL,
+   version enum ('none') NOT NULL,
    build tinyint(4) DEFAULT '0' NOT NULL,
    votes tinyint(4) DEFAULT '0' NOT NULL,
    summary varchar(128) NOT NULL,
@@ -125,5 +125,20 @@ CREATE TABLE mantis_user_profile_table (
    os_build varchar(16) NOT NULL,
    description text NOT NULL,
    default_profile char(3) NOT NULL,
+   PRIMARY KEY (id)
+);
+
+#
+# Table structure for table 'mantis_user_defaults_table'
+#
+
+CREATE TABLE mantis_user_defaults_table (
+   id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL auto_increment,
+   user_id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL,
+   hide_resolved char(3) NOT NULL,
+   limit_view int(11) DEFAULT '0' NOT NULL,
+   show_last char(3) NOT NULL,
+   advanced_report char(3) NOT NULL,
+   advanced_view char(3) NOT NULL,
    PRIMARY KEY (id)
 );

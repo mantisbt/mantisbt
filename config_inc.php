@@ -19,7 +19,7 @@
 
 	#--------------------
 	# file path variables
-	$g_path            = "/mantisbt/";   # requires trailing /
+	$g_path            = "/mantis/";   # requires trailing /
 	#--------------------
 
 	#--------------------
@@ -150,6 +150,9 @@
 	$g_manage_category_page        = "manage_category_page".$g_php;
 	$g_manage_category_update      = "manage_category_update".$g_php;
 
+	$g_manage_product_versions_page   = "manage_product_versions_page".$g_php;
+	$g_manage_product_versions_update = "manage_product_versions_update".$g_php;
+
 	# news
 	$g_news_menu_page              = "news_menu_page".$g_php;
 	$g_news_edit_page              = "news_edit_page".$g_php;
@@ -201,11 +204,12 @@
 	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
 	#--------------------
 
+	$g_product_versions = "0.9.0,0.9.1,0.10.0,0.10.1,0.10.2,0.10.3";
+
 	#--------------------
 	# html table appearance variables
 	$g_primary_table_tags        = "";
 	#--------------------
-
 
 	#--------------------
 	# color values

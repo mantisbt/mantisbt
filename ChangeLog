@@ -36,6 +36,9 @@ To Do:
  * Split manage user actions into separate files
  * Added several ; in core_API.php that caused errors on some servers
  * Added view next/prev XYZ bugs on bug viewing page
+ * Added a string_display() function to prevent HTML tags from screwing up display
+ * Modified version to be an enum.
+ * Added version editing capability
 
 12.06.2000	-	0.10.2
 

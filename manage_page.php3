@@ -44,6 +44,7 @@
 <div align=center>
 	[ <a href="<? echo $g_manage_create_user_page ?>">Create New Account</a> ]
 	[ <a href="<? echo $g_manage_category_page ?>">Manage Categories</a> ]
+	[ <a href="<? echo $g_manage_product_versions_page ?>">Manage Product Versions</a> ]
 	[ <a href="<? echo $g_documentation_page ?>">Documentation</a> ]
 </div>
 

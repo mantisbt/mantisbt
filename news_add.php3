@@ -48,8 +48,8 @@
 <?
 	### SUCCESS
 	if ( $result ) {
-		$t_headline  = string_unsafe( $f_headline );
-		$t_body      = string_unsafe( $f_body );
+		$t_headline  = string_display( $f_headline );
+		$t_body      = string_display( $f_body );
 ?>
 <p>
 <div align=center>

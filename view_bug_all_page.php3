@@ -90,7 +90,7 @@
 		</td>
 	</tr>
 	<tr height=5>
-		<td bgcolor=<? echo $g_white_color ?> colspan=9>
+		<td bgcolor=<? echo $g_white_color ?> colspan=7>
 		</td>
 	</tr>
 	<?
@@ -119,7 +119,7 @@
 			$row = mysql_fetch_array($result);
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
-			$v_summary = string_unsafe( $v_summary );
+			$v_summary = string_display( $v_summary );
 			$lastupdated = date( "m-d", sql_to_unix_time( $v_last_updated ) );
 
 			### alternate row colors

@@ -133,8 +133,10 @@
 	    } ### end for
 	}
 	#--------------------
-	function get_enum_count( $t_enum_string ) {
-		return count(explode(",",$t_enum_string));
+	# returns the number of items in a list
+	# default delimiter is a ,
+	function get_list_item_count( $t_enum_string, $p_delim_char="," ) {
+		return count(explode($p_delim_char,$t_enum_string));
 	}
 	#--------------------
 	### Used for update pages
@@ -143,7 +145,7 @@
 
 		$t_category_string = get_enum_string( "category" );
 	    $t_str = $t_category_string.",";
-		$cat_count = get_enum_count($t_str)-1;
+		$cat_count = get_list_item_count($t_str)-1;
 		for ($i=0;$i<$cat_count;$i++) {
 			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
 			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
@@ -162,9 +164,27 @@
 
 		$t_category_string = get_enum_string( $p_list );
 	    $t_str = $t_category_string.",";
-		$entry_count = get_enum_count($t_str)-1;
+		$entry_count = get_list_item_count($t_str)-1;
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
+			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
+			if ( $p_item==$t_s ) {
+				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
+			}
+			else {
+				PRINT "<option value=\"$t_s\">$t_s";
+			}
+		} ### end for
+	}
+	#--------------------
+	### Used for update pages
+	function print_list2( $p_list,  $p_item="" ) {
+		global $g_mantis_bug_table;
+
+	    $t_str = $p_list.",";
+		$entry_count = get_list_item_count( $t_str )-1;
+		for ($i=0;$i<$entry_count;$i++) {
+			$t_s = substr( $t_str, 0, strpos($t_str, ",") );
 			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
 			if ( $p_item==$t_s ) {
 				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
@@ -181,7 +201,7 @@
 
 		$t_enum_string = get_enum_string( $p_enum );
 	    $t_str = $t_enum_string.",";
-		$enum_count = get_enum_count($t_str)-1;
+		$enum_count = get_list_item_count($t_str)-1;
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
 			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
@@ -461,6 +481,10 @@
 	#--------------------
 	function string_unsafe( $p_string ) {
 		return stripslashes( $p_string );
+	}
+	#--------------------
+	function string_display( $p_string ) {
+		return htmlspecialchars(stripslashes( $p_string ));
 	}
 	#--------------------
 	function string_edit( $p_string ) {

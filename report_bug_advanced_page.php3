@@ -132,7 +132,9 @@
 			Product Version
 		</td>
 		<td>
-			<input type=text name=f_version size=16 maxlength=16>
+			<select name=f_product_version>
+				<? print_list( "version" ) ?>
+			</select>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
