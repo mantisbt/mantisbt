@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.18 2004-08-08 11:39:00 jlatour Exp $
+	# $Id: user_pref_api.php,v 1.19 2004-08-12 22:56:47 vboctor Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -112,6 +112,7 @@
 			if ( $p_trigger_errors ) {
 				trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
 			} else {
+				$g_cache_user_pref[$c_user_id][$c_project_id] = false;
 				return false;
 			}
 		}

@@ -56,6 +56,7 @@ Mantis ChangeLog
 - 0002220: [installation] usage of consistent naming schema for images (vboctor)
 - 0003307: [installation] check.php always checks mail() rather than the config (thraxisp)
 - 0004163: [other] Unreadable error messages in some languages (vboctor)
+- 0003904: [sql] cache missing 'user pref' rows (thraxisp)
 - 0004222: [sql] Should mantis_project_category_table.user_id be UNSIGNED? (vboctor)
 - New Config: main_menu_custom_options (default empty) - Allow addition of custom menu options to main menu (vboctor)
 - New Config: show_realname (default OFF) - show realname in all places instead of username (thraxisp)

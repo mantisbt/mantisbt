@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.28 2004-08-08 11:39:00 jlatour Exp $
+	# $Id: account_prefs_inc.php,v 1.29 2004-08-12 22:56:47 vboctor Exp $
 	# --------------------------------------------------------
 	
 	$t_core_path = config_get( 'core_path' );
@@ -37,8 +37,7 @@
 	    }
 
 	    # prefix data with u_
-		$row = user_pref_get_row( $p_user_id );
-		extract( $row, EXTR_PREFIX_ALL, 'u' );
+		$t_pref = user_pref_get( $p_user_id );
 ?>
 <?php # Account Preferences Form BEGIN ?>
 <br />
@@ -65,7 +64,7 @@
 	</td>
 	<td width="50%">
 		<select name="default_project">
-			<?php print_project_option_list( $u_default_project ) ?>
+			<?php print_project_option_list( $t_pref->default_project ) ?>
 		</select>
 	</td>
 </tr>
@@ -74,7 +73,7 @@
 		<?php echo lang_get( 'advanced_report' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="advanced_report" <?php check_checked( $u_advanced_report, ON ); ?> />
+		<input type="checkbox" name="advanced_report" <?php check_checked( $t_pref->advanced_report, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -82,7 +81,7 @@
 		<?php echo lang_get( 'advanced_view' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="advanced_view" <?php check_checked( $u_advanced_view, ON ); ?> />
+		<input type="checkbox" name="advanced_view" <?php check_checked( $t_pref->advanced_view, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-2">
@@ -90,7 +89,7 @@
 		<?php echo lang_get( 'advanced_update' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="advanced_update" <?php check_checked( $u_advanced_update, ON ); ?> />
+		<input type="checkbox" name="advanced_update" <?php check_checked( $t_pref->advanced_update, ON ); ?> />
 	</td>
 </tr>
 <tr class="row-1">
@@ -98,7 +97,7 @@
 		<?php echo lang_get( 'refresh_delay' ) ?>
 	</td>
 	<td>
-		<input type="text" name="refresh_delay" size="4" maxlength="4" value="<?php echo $u_refresh_delay ?>" />
+		<input type="text" name="refresh_delay" size="4" maxlength="4" value="<?php echo $t_pref->refresh_delay ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -106,7 +105,7 @@
 		<?php echo lang_get( 'redirect_delay' ) ?>
 	</td>
 	<td>
-		<input type="text" name="redirect_delay" size="1" maxlength="1" value="<?php echo $u_redirect_delay ?>" />
+		<input type="text" name="redirect_delay" size="1" maxlength="1" value="<?php echo $t_pref->redirect_delay ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -114,8 +113,8 @@
 		<?php echo lang_get( 'bugnote_order' ) ?>
 	</td>
 	<td>
-		<input type="radio" name="bugnote_order" value="ASC" <?php check_checked( $u_bugnote_order, 'ASC' ); ?> /><?php echo lang_get( 'bugnote_order_asc' ) ?>
-		<input type="radio" name="bugnote_order" value="DESC" <?php check_checked( $u_bugnote_order, 'DESC' ); ?> /><?php echo lang_get( 'bugnote_order_desc' ) ?>
+		<input type="radio" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> /><?php echo lang_get( 'bugnote_order_asc' ) ?>
+		<input type="radio" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> /><?php echo lang_get( 'bugnote_order_desc' ) ?>
 	</td>
 </tr>
 <?php
@@ -126,12 +125,12 @@
 		<?php echo lang_get( 'email_on_new' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_new" <?php check_checked( $u_email_on_new, ON ); ?> />
+		<input type="checkbox" name="email_on_new" <?php check_checked( $t_pref->email_on_new, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_new_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_new_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_new_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -140,12 +139,12 @@
 		<?php echo lang_get( 'email_on_assigned' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_assigned" <?php check_checked( $u_email_on_assigned, ON ); ?> />
+		<input type="checkbox" name="email_on_assigned" <?php check_checked( $t_pref->email_on_assigned, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_assigned_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_assigned_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_assigned_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -154,12 +153,12 @@
 		<?php echo lang_get( 'email_on_feedback' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_feedback" <?php check_checked( $u_email_on_feedback, ON ); ?> />
+		<input type="checkbox" name="email_on_feedback" <?php check_checked( $t_pref->email_on_feedback, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_feedback_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_feedback_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_feedback_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -168,12 +167,12 @@
 		<?php echo lang_get( 'email_on_resolved' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_resolved" <?php check_checked( $u_email_on_resolved, ON ); ?> />
+		<input type="checkbox" name="email_on_resolved" <?php check_checked( $t_pref->email_on_resolved, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_resolved_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_resolved_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_resolved_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -182,12 +181,12 @@
 		<?php echo lang_get( 'email_on_closed' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_closed" <?php check_checked( $u_email_on_closed, ON ); ?> />
+		<input type="checkbox" name="email_on_closed" <?php check_checked( $t_pref->email_on_closed, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_closed_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_closed_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_closed_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -196,12 +195,12 @@
 		<?php echo lang_get( 'email_on_reopened' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_reopened" <?php check_checked( $u_email_on_reopened, ON ); ?> />
+		<input type="checkbox" name="email_on_reopened" <?php check_checked( $t_pref->email_on_reopened, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_reopened_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_reopened_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_reopened_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -210,12 +209,12 @@
 		<?php echo lang_get( 'email_on_bugnote_added' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_bugnote" <?php check_checked( $u_email_on_bugnote, ON ); ?> />
+		<input type="checkbox" name="email_on_bugnote" <?php check_checked( $t_pref->email_on_bugnote, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_bugnote_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_bugnote_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_bugnote_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -224,12 +223,12 @@
 		<?php echo lang_get( 'email_on_status_change' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_status" <?php check_checked( $u_email_on_status, ON ); ?> />
+		<input type="checkbox" name="email_on_status" <?php check_checked( $t_pref->email_on_status, ON ); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_status_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_status_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_status_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -238,12 +237,12 @@
 		<?php echo lang_get( 'email_on_priority_change' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="email_on_priority" <?php check_checked( $u_email_on_priority , ON); ?> />
+		<input type="checkbox" name="email_on_priority" <?php check_checked( $t_pref->email_on_priority , ON); ?> />
 		<?php echo lang_get( 'with_minimum_severity' ) ?>
 		<select name="email_on_priority_minimum_severity">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $u_email_on_priority_minimum_severity ) ?>
+			<?php print_enum_string_option_list( 'severity', $t_pref->email_on_priority_minimum_severity ) ?>
 		</select>
 	</td>
 </tr>
@@ -252,28 +251,28 @@
 		<?php echo lang_get( 'email_bugnote_limit' ) ?>
 	</td>
 	<td>
-		<input type="text" name="email_bugnote_limit" maxlength="2" size="2" value="<?php echo $u_email_bugnote_limit ?>">
+		<input type="text" name="email_bugnote_limit" maxlength="2" size="2" value="<?php echo $t_pref->email_bugnote_limit ?>">
 	</td>
 </tr>
 <?php } else { ?>
-		<input type="hidden" name="email_on_new"      value="<?php echo $u_email_on_new ?>" />
-		<input type="hidden" name="email_on_assigned" value="<?php echo $u_email_on_assigned ?>" />
-		<input type="hidden" name="email_on_feedback" value="<?php echo $u_email_on_feedback ?>" />
-		<input type="hidden" name="email_on_resolved" value="<?php echo $u_email_on_resolved ?>" />
-		<input type="hidden" name="email_on_closed"   value="<?php echo $u_email_on_closed ?>" />
-		<input type="hidden" name="email_on_reopened" value="<?php echo $u_email_on_reopened ?>" />
-		<input type="hidden" name="email_on_bugnote"  value="<?php echo $u_email_on_bugnote ?>" />
-		<input type="hidden" name="email_on_status"   value="<?php echo $u_email_on_status ?>" />
-		<input type="hidden" name="email_on_priority" value="<?php echo $u_email_on_priority ?>" />
-		<input type="hidden" name="email_on_new_minimum_severity"      value="<?php echo $u_email_on_new_minimum_severity ?>" />
-		<input type="hidden" name="email_on_assigned_minimum_severity" value="<?php echo $u_email_on_assigned_minimum_severity ?>" />
-		<input type="hidden" name="email_on_feedback_minimum_severity" value="<?php echo $u_email_on_feedback_minimum_severity ?>" />
-		<input type="hidden" name="email_on_resolved_minimum_severity" value="<?php echo $u_email_on_resolved_minimum_severity ?>" />
-		<input type="hidden" name="email_on_closed_minimum_severity"   value="<?php echo $u_email_on_closed_minimum_severity ?>" />
-		<input type="hidden" name="email_on_reopened_minimum_severity" value="<?php echo $u_email_on_reopened_minimum_severity ?>" />
-		<input type="hidden" name="email_on_bugnote_minimum_severity"  value="<?php echo $u_email_on_bugnote_minimum_severity ?>" />
-		<input type="hidden" name="email_on_status_minimum_severity"   value="<?php echo $u_email_on_status_minimum_severity ?>" />
-		<input type="hidden" name="email_on_priority_minimum_severity" value="<?php echo $u_email_on_priority_minimum_severity ?>" />
+		<input type="hidden" name="email_on_new"      value="<?php echo $t_pref->email_on_new ?>" />
+		<input type="hidden" name="email_on_assigned" value="<?php echo $t_pref->email_on_assigned ?>" />
+		<input type="hidden" name="email_on_feedback" value="<?php echo $t_pref->email_on_feedback ?>" />
+		<input type="hidden" name="email_on_resolved" value="<?php echo $t_pref->email_on_resolved ?>" />
+		<input type="hidden" name="email_on_closed"   value="<?php echo $t_pref->email_on_closed ?>" />
+		<input type="hidden" name="email_on_reopened" value="<?php echo $t_pref->email_on_reopened ?>" />
+		<input type="hidden" name="email_on_bugnote"  value="<?php echo $t_pref->email_on_bugnote ?>" />
+		<input type="hidden" name="email_on_status"   value="<?php echo $t_pref->email_on_status ?>" />
+		<input type="hidden" name="email_on_priority" value="<?php echo $t_pref->email_on_priority ?>" />
+		<input type="hidden" name="email_on_new_minimum_severity"      value="<?php echo $t_pref->email_on_new_minimum_severity ?>" />
+		<input type="hidden" name="email_on_assigned_minimum_severity" value="<?php echo $t_pref->email_on_assigned_minimum_severity ?>" />
+		<input type="hidden" name="email_on_feedback_minimum_severity" value="<?php echo $t_pref->email_on_feedback_minimum_severity ?>" />
+		<input type="hidden" name="email_on_resolved_minimum_severity" value="<?php echo $t_pref->email_on_resolved_minimum_severity ?>" />
+		<input type="hidden" name="email_on_closed_minimum_severity"   value="<?php echo $t_pref->email_on_closed_minimum_severity ?>" />
+		<input type="hidden" name="email_on_reopened_minimum_severity" value="<?php echo $t_pref->email_on_reopened_minimum_severity ?>" />
+		<input type="hidden" name="email_on_bugnote_minimum_severity"  value="<?php echo $t_pref->email_on_bugnote_minimum_severity ?>" />
+		<input type="hidden" name="email_on_status_minimum_severity"   value="<?php echo $t_pref->email_on_status_minimum_severity ?>" />
+		<input type="hidden" name="email_on_priority_minimum_severity" value="<?php echo $t_pref->email_on_priority_minimum_severity ?>" />
 <?php } ?>
 <tr class="row-2">
 	<td class="category">
@@ -281,7 +280,7 @@
 	</td>
 	<td>
 		<select name="language">
-			<?php print_language_option_list( $u_language ) ?>
+			<?php print_language_option_list( $t_pref->language ) ?>
 		</select>
 	</td>
 </tr>
