@@ -288,10 +288,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		<?php echo get_enum_element( 'reproducibility', $v_reproducibility ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( $g_normal_date_format, $v_last_updated ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -489,7 +489,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 				$row = db_fetch_array( $result5 );
 				extract( $row, EXTR_PREFIX_ALL, 'v2' );
 				$v2_filesize = round( $v2_filesize / 1024 );
-				$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
+				$v2_date_added = date( config_get( 'normal_date_format' ), ( $v2_date_added ) );
 
 				switch ( $g_file_upload_method ) {
 					case DISK:	PRINT "$v2_filename ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";
@@ -539,7 +539,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			# prefix all bugnote data with v3_
 			$row = db_fetch_array( $result6 );
 			extract( $row, EXTR_PREFIX_ALL, 'v3' );
-			$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
+			$v3_date_submitted = date( config_get( 'normal_date_format' ), ( $v3_date_submitted ) );
 
 			# grab the bugnote text and id and prefix with v3_
 			$query6 = "SELECT note, id

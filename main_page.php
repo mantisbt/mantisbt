@@ -64,7 +64,7 @@
 
 		$v_headline 	= string_display( $v_headline );
 		$v_body 		= string_display( $v_body );
-		$v_date_posted 	= date( $g_normal_date_format, $v_date_posted );
+		$v_date_posted 	= date( config_get( 'normal_date_format' ), $v_date_posted );
 
 		# only show PIRVATE posts to configured threshold and above
 		if (( PRIVATE == $v_view_state ) &&

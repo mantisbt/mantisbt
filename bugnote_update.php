@@ -18,7 +18,7 @@
 	check_bug_exists( $t_bug_id );
 
 	$f_bugnote_text		= $f_bugnote_text."\n\n";
-	$f_bugnote_text		= $f_bugnote_text.$s_edited_on.date( $g_normal_date_format );
+	$f_bugnote_text		= $f_bugnote_text.$s_edited_on.date( config_get( 'normal_date_format' ) );
 
 #@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
 	$result = bugnote_update_text( $f_bugnote_id, $f_bugnote_text );

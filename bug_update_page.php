@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.24 $
+	# $Revision: 1.25 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:56 $
+	# $Date: 2002-08-28 10:07:56 $
 	#
-	# $Id: bug_update_page.php,v 1.24 2002-08-25 21:04:56 jfitzell Exp $
+	# $Id: bug_update_page.php,v 1.25 2002-08-28 10:07:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -123,10 +123,10 @@
 		</select>
 	</td>
 	<td>
-		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
 	</td>
 	<td>
-		<?php print_date( $g_normal_date_format, $v_last_updated ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
 	</td>
 </tr>
 <tr>

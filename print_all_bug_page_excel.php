@@ -322,14 +322,14 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 	<?php if (( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
-	<?php echo date($g_normal_date_format,$v_date_submitted);
+	<?php echo date(config_get( 'normal_date_format' ),$v_date_submitted);
 			}
 	$name_index++;  ?>
 	</td>
 
 	<?php if (( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
-	<?php echo date($g_normal_date_format,$v_last_updated);
+	<?php echo date(config_get( 'normal_date_format' ),$v_last_updated);
 			}
 	$name_index++;  ?>
 	</td>
@@ -466,7 +466,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 				$row = db_fetch_array( $result5 );
 				extract( $row, EXTR_PREFIX_ALL, 'v2' );
 				$v2_filesize = round( $v2_filesize / 1024 );
-				$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
+				$v2_date_added = date( config_get( 'normal_date_format' ), ( $v2_date_added ) );
 					switch ( $g_file_upload_method ) {
 					case DISK:	PRINT "$v2_filename ($v2_filesize KB) $v2_date_added";
 							break;
@@ -502,7 +502,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			# prefix all bugnote data with v3_
 			$row = db_fetch_array( $result6 );
 			extract( $row, EXTR_PREFIX_ALL, 'v3' );
-			$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
+			$v3_date_submitted = date( config_get( 'normal_date_format' ), ( $v3_date_submitted ) );
 
 			# grab the bugnote text and id and prefix with v3_
 			$query6 = "SELECT note, id

@@ -190,8 +190,8 @@ for ($i=0;$i<$new_user_count;$i++) {
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, 'u' );
 
-		$u_date_created  = date( $g_normal_date_format, $u_date_created );
-		$u_last_visit    = date( $g_normal_date_format, $u_last_visit );
+		$u_date_created  = date( config_get( 'normal_date_format' ), $u_date_created );
+		$u_last_visit    = date( config_get( 'normal_date_format' ), $u_last_visit );
 
 		# alternate row colors
 		$t_bgcolor = alternate_colors( $i );

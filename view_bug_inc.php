@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.20 $
-	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:03 $
+	# $Revision: 1.21 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-28 10:07:56 $
 	#
-	# $Id: view_bug_inc.php,v 1.20 2002-08-15 20:35:03 jlatour Exp $
+	# $Id: view_bug_inc.php,v 1.21 2002-08-28 10:07:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -86,10 +86,10 @@
 		<?php echo get_enum_element( 'reproducibility', $v_reproducibility ) ?>
 	</td>
 	<td>
-		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
 	</td>
 	<td>
-		<?php print_date( $g_normal_date_format, $v_last_updated ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
 	</td>
 </tr>
 <tr height="5" class="spacer">

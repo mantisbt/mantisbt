@@ -95,10 +95,10 @@
 		<?php echo get_enum_element( 'reproducibility', $v_reproducibility ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( $g_normal_date_format, $v_date_submitted ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
 	</td>
 	<td class="print">
-		<?php print_date( $g_normal_date_format, $v_last_updated ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -296,7 +296,7 @@
 				$row = db_fetch_array( $result );
 				extract( $row, EXTR_PREFIX_ALL, 'v2' );
 				$v2_filesize = round( $v2_filesize / 1024 );
-				$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
+				$v2_date_added = date( config_get( 'normal_date_format' ), ( $v2_date_added ) );
 
 				switch ( $g_file_upload_method ) {
 					case DISK:	PRINT "$v2_filename ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";

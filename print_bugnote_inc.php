@@ -46,7 +46,7 @@
 		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v3' );
-		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
+		$v3_date_submitted = date( config_get( 'normal_date_format' ), ( $v3_date_submitted ) );
 
 		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note, id
