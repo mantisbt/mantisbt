@@ -23,7 +23,7 @@ a					{}
 a.small-link		{ font-size: <?php echo $g_font_small ?>; }
 
 input.small			{ font-size: <?php echo $g_font_small ?>; }
-select.small			{ font-size: <?php echo $g_font_small ?>; }
+select.small		{ font-size: <?php echo $g_font_small ?>; }
 
 span.print			{ font-size: <?php echo $g_font_small ?>; }
 
@@ -62,21 +62,17 @@ tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; colo
 tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; }
 tr.print-category	{ color: <?php echo $g_font_color ?>; font-weight: bold; }
 
-/* Login Info */
 td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle{ width: 33%; padding: 0px; text-align: center; }
 td.login-info-right	{ width: 33%; padding: 0px; text-align: right; }
 span.login-username	{ font-style: italic; }
 span.login-time		{ font-size: <?php echo $g_font_small ?>; font-style: italic; }
 
-/* Menu */
 td.menu				{ background-color: <?php echo $g_menu_color ?>; color: <?php echo $g_font_color ?>; text-align: center; width: 100%; padding: 1px; }
 
-/* Quick Summary */
 td.quick-summary-left	{ width: 50%; text-align: left; }
 td.quick-summary-right	{ width: 50%; text-align: right; }
 
-/* News */
 td.news-heading		{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
 td.news-body		{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; padding: 16px; }
 span.news-headline	{ font-weight: bold; }
