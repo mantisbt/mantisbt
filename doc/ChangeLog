@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+2004.08.xx  -  0.19.0xx
+
+
+
 2004.07.20  -  0.19.0a2
 
 This is the second alpha release for 0.19.0a, if there is not much issues with it then rc1 will probably follow.  The main features in this release are issue relationships and simple workflow control.  Also version handling was almost re-implemented to support released vs. future versions and also allow adding a description to versions.
