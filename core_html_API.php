@@ -426,11 +426,11 @@
 		PRINT "<p><div align=\"center\">";
 			print_bracket_link( $t_documentation_page, $s_system_info_link );
 			print_bracket_link( $t_site_settings_page, $s_site_settings_link );
-			print_bracket_link( "ChangeLog", "ChangeLog" );
-			print_bracket_link( "README", "README" );
-			print_bracket_link( "INSTALL", "INSTALL" );
-			print_bracket_link( "UPGRADING", "UPGRADING" );
-			print_bracket_link( "CONFIGURATION", "CONFIGURATION" );
+			print_bracket_link( "doc/ChangeLog", "ChangeLog" );
+			print_bracket_link( "doc/README", "README" );
+			print_bracket_link( "doc/INSTALL", "INSTALL" );
+			print_bracket_link( "doc/UPGRADING", "UPGRADING" );
+			print_bracket_link( "doc/CONFIGURATION", "CONFIGURATION" );
 		PRINT "</div>";
 	}
 	# --------------------
