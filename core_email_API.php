@@ -93,7 +93,7 @@
 		}
 
 		### Get Developer Email
-		if ( $g_notify_developers_on_new==1 ) {
+		if (( $g_notify_developers_on_new==1 )&&( $p_notify_type=="email_on_new")) {
 			# get the project id
 			$p_project_id = get_bug_project_id( $p_bug_id );
 
@@ -504,7 +504,6 @@
 			# if you have problems with phpMailer
 
 			include("class.phpmailer.php");
-
 			$mail = new phpmailer;
 
 			# Select the method to send mail
