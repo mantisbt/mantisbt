@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.51 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.52 2003-02-15 22:20:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -351,7 +351,6 @@
 
 
 <!-- Custom Fields -->
-<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <tr>
 	<td class="spacer" colspan="6">&nbsp;</td>
 </tr>
@@ -359,7 +358,6 @@
 	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if( !$t_def['advanced'] ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -372,10 +370,8 @@
 	</td>
 </tr>
 <?php
-		} # !$t_def['advanced']
 	} # foreach( $t_related_custom_field_ids as $t_id )
 ?>
-<?php } # ON = config_get( 'use_experimental_custom_fields' ) ?>
 
 
 <!-- spacer -->

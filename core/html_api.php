@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.47 2003-02-15 10:25:21 jfitzell Exp $
+	# $Id: html_api.php,v 1.48 2003-02-15 22:20:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -467,9 +467,7 @@
 		PRINT '<br /><div align="center">';
 			print_bracket_link( $t_manage_user_page, lang_get( 'manage_users_link' ) );
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
-			if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
-				print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
-			}		
+			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
 			print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
 		PRINT '</div>';
 	}

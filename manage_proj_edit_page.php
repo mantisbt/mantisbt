@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.62 2003-02-15 14:13:53 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.63 2003-02-15 22:20:32 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -313,7 +313,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 ?>
 
 <!-- PROJECT CUSTOM FIELD -->
-<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <?php
 # You need either global permissions or project-specific permissions to link
 #  custom fields
@@ -397,7 +396,6 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 <?php
 }
 ?>
-<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
 
 
 <!-- PROJECT VIEW STATUS -->

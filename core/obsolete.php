@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.12 2003-02-15 20:56:12 jlatour Exp $
+	# $Id: obsolete.php,v 1.13 2003-02-15 22:20:32 vboctor Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -41,4 +41,5 @@
 	config_obsolete( 'show_user_email', 'show_user_email_threshold' );
 	
 	config_obsolete( 'php', '' );
+	config_obsolete( 'use_experimental_custom_fields', '' );
 ?>

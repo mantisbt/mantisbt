@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.52 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_update.php,v 1.53 2003-02-15 22:20:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,16 +65,14 @@
 	# Update the bug entry
 	bug_update( $f_bug_id, $t_bug_data, true );
 
-	if( ON == config_get( 'use_experimental_custom_fields' ) ) {
-		$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
+	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 
-		foreach( $t_related_custom_field_ids as $t_id ) {
-			$t_def = custom_field_get_definition( $t_id );
-			if ( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_string( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
-				trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
-			}
+	foreach( $t_related_custom_field_ids as $t_id ) {
+		$t_def = custom_field_get_definition( $t_id );
+		if ( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_string( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
+			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
-	} # ON = config_get( 'use_experimental_custom_fields' )
+	}
 
 	# Add a bugnote if there is one
 	$f_bugnote_text = trim( $f_bugnote_text );

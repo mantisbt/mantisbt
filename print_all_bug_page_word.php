@@ -408,7 +408,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	</td>
 	<td class="print" colspan="4">&nbsp;</td>
 </tr>
-<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <?php
 $t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
 foreach( $t_related_custom_field_ids as $t_id ) {
@@ -427,7 +426,6 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 <?php
 }       // foreach
 ?>
-<?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
 <tr>
 	<td class="print-spacer" colspan="6">
 		<hr size="1" />

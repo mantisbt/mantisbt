@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.75 2003-02-15 21:11:58 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.76 2003-02-15 22:20:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -898,15 +898,9 @@
 	# Only turn this option on for debugging
 	$g_stop_on_errors		= OFF;
 
-	###########################
-	# Experimental features
-	###########################
-	# --- custom fields ---------
-	# allow the user / administrator to create custom fields for each project
-	# WARNING: this feature is in heavy development and is subject to change.
-	#   There will be no upgrade path for this stuff as it is being developed.
-	#   So don't enable it now unless you're developing on it.
-	$g_use_experimental_custom_fields = OFF;
+	##################
+	# Custom Fields
+	##################
 
 	# Threshold needed to manage custom fields
 	$g_manage_custom_fields = ADMINISTRATOR;

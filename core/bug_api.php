@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.35 2003-02-15 10:25:21 jfitzell Exp $
+	# $Id: bug_api.php,v 1.36 2003-02-15 22:20:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -365,9 +365,7 @@
 		email_bug_deleted( $p_bug_id );
 
 		# Delete custom fields
-		if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
-			custom_field_delete_all_values( $p_bug_id );
-		}
+		custom_field_delete_all_values( $p_bug_id );
 
 		# Delete bugnotes
 		bugnote_delete_all( $p_bug_id );

@@ -61,6 +61,7 @@ Mantis ChangeLog
  * Enhancement: warn the user if his browser does not support cookies, either because it's too old or because it was disabled
  * Enhancement: you can add multiple categories in one step. This is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
  * Enhancement: you can monitor bugs even when not reporter or handler
+ * Enhancement: support for custom fields.
  * Fix: Account pruning now also removes profiles, preferences and such.
  * Fix: all string files use single quotes instead of double quotes
  * Fix: bug that let you change your username to that of an already existing user

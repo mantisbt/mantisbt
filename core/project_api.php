@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.32 2003-02-15 07:49:00 jfitzell Exp $
+	# $Id: project_api.php,v 1.33 2003-02-15 22:20:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -231,9 +231,7 @@
 		bug_delete_all( $p_project_id );
 
 		# Delete associations with custom field definitions.
-		if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
-		    custom_field_unlink_all( $p_project_id );
-		}
+		custom_field_unlink_all( $p_project_id );
 
 		# Delete the project categories
 		category_remove_all( $p_project_id );

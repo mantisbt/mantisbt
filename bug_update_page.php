@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.52 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_update_page.php,v 1.53 2003-02-15 22:20:31 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -263,7 +263,6 @@
 
 
 <!-- Custom Fields -->
-<?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <tr>
 	<td class="spacer" colspan="6">&nbsp;</td>
 </tr>
@@ -287,7 +286,6 @@
 		} # !$t_def['advanced']
 	} # foreach( $t_related_custom_field_ids as $t_id )
 ?>
-<?php } # ON = config_get( 'use_experimental_custom_fields' ) ?>
 
 
 <!-- spacer -->
