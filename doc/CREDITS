@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------------
 Mantis - a PHP based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
+Copyright (C) 2002       Mantis Team   - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
 *** Please contact me if you should be on this list!
@@ -17,6 +18,7 @@ Developers
 ----------
 
 James Beard
+Julian Fitzell
 Ludwig Ruderstaller
 Niels Andersen
 Victor Boctor
@@ -44,7 +46,6 @@ Jan Derk
 Jaroslaw Lewandowski
 Jason Stewart
 Jon Maltz
-Julian Fitzell
 Leigh Morresi
 Martin Wickmann
 Matthiaus Bauer
