@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.56 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: helper_api.php,v 1.57 2005-02-27 21:20:35 prichards Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -291,7 +291,7 @@
 			$t_project_ids = array_unique( $t_project_ids );
 		} else {
 			access_ensure_project_level( config_get( 'view_changelog_threshold' ), $p_project_id );
-			$t_project_ids = user_get_all_accessible_subprojects( $t_user_id, $p_project_id );
+			$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
 			array_unshift( $t_project_ids, $p_project_id );
 		}
 
