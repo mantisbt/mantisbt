@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_page.php,v 1.44 2004-12-18 13:53:35 marcelloscata Exp $
+	# $Id: proj_doc_page.php,v 1.45 2005-02-27 21:25:36 prichards Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -21,18 +21,19 @@
 	}
 
 	$t_project_id = helper_get_current_project();
+	$t_mantis_project_file_table = config_get( 'mantis_project_file_table' );
 
 	if( $t_project_id != ALL_PROJECTS ) {
 		# Select all the project files
 		$query = "SELECT *
-				FROM $g_mantis_project_file_table
+				FROM $t_mantis_project_file_table
 				WHERE project_id='$t_project_id' or project_id='". ALL_PROJECTS . "'
 				ORDER BY project_id, title ASC";
 	}
 	else {
 		# Select the project files (specific project + all-projects docs)
 		$query = "SELECT *
-				FROM $g_mantis_project_file_table
+				FROM $t_mantis_project_file_table
 				ORDER BY project_id, title ASC";
 	}
 	$result = db_query( $query );
