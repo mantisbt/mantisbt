@@ -435,7 +435,7 @@
 			print_bracket_link( $g_path."README", "README" );
 			print_bracket_link( $g_path."INSTALL", "INSTALL" );
 			print_bracket_link( $g_path."UPGRADING", "UPGRADING" );
-			print_bracket_link( $g_path."CONFIGURATION", "CONFIGURATION" );
+			print_bracket_link( $g_path."CUSTOMIZATION", "CUSTOMIZATION" );
 		PRINT "</div>";
 	}
 	# --------------------
