@@ -308,12 +308,13 @@
 						PRINT "<a href=\"$g_login_select_proj_page\">$s_users_link</a> | ";
 					}
 				}
-			if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-				PRINT "<a href=\"$g_manage_page\">$s_manage_link</a> | ";
-			}
-			if ( access_level_check_greater_or_equal( MANAGER ) ) {
-				PRINT "<a href=\"$g_news_menu_page\">$s_edit_news_link</a> | ";
-			}
+
+				if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
+					PRINT "<a href=\"$g_manage_page\">$s_manage_link</a> | ";
+				}
+				if ( access_level_check_greater_or_equal( MANAGER ) ) {
+					PRINT "<a href=\"$g_news_menu_page\">$s_edit_news_link</a> | ";
+				}
 
 				PRINT "<a href=\"$g_proj_doc_page\">$s_docs_link</a> | ";
 				PRINT "<a href=\"$g_logout_page\">$s_logout_link</a>";
