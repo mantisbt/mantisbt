@@ -10,11 +10,11 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 	#          Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:34 $
+	# $Date: 2003-02-26 16:40:44 $
 	#
-	# $Id: strings_italian.txt,v 1.47 2003-02-26 14:25:34 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.48 2003-02-26 16:40:44 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -65,8 +65,8 @@
 	$s_delete_bugnote_button = "Elimina la Nota al Bug";
 	$s_delete_bugnote_sure_msg = "Sei sicuro di voler eliminare questa Nota?";
 	$s_bug_relationships = "Relazioni";
-	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-	$s_empty_password_button = 'Use Empty Password';
+	$s_empty_password_sure_msg = "L'utente ha una password vuota.  Sei sicuro sia quello che vuoi?";
+	$s_empty_password_button = 'Usa una Password Vuota';
 
 	$s_duplicate_of = "duplicato del %id";
 	$s_has_duplicate = "duplica il %id";
@@ -75,25 +75,25 @@
 	$s_blocks = "blocca il %id";
 
 	$s_new_bug = "Nuovo Bug";
-	$s_bugnote_added = "La Nota è stata Aggiunta";
-	$s_bugnote_edited = "La Nota è stata Modificata";
-	$s_bugnote_deleted = "La Nota è stata Cancellata";
-	$s_summary_updated = "Il Sommario è stato Aggiornato";
-	$s_description_updated = "La Descrizione è stata Aggiornata";
-	$s_additional_information_updated = "Le Informazioni Addizionali sono state Aggiornate";
-	$s_steps_to_reproduce_updated = "I Passi per Riprodurlo sono stati Aggiornati";
+	$s_bugnote_added = "Aggiunta la Nota";
+	$s_bugnote_edited = "Modificata la Nota";
+	$s_bugnote_deleted = "Eliminata la Nota";
+	$s_summary_updated = "Le Statistiche sono state aggiornate";
+	$s_description_updated = "Modificata la Descrizione";
+	$s_additional_information_updated = "Modificate le Informazioni Addizionali";
+	$s_steps_to_reproduce_updated = "Modificati i Passi per Riprodurlo";
 	$s_file_added = "File Aggiunto: ";
 	$s_file_deleted = "File Eliminato: ";
 
 	$s_make_private = "Rendi Privato";
 	$s_make_public = "Rendi Pubblico";
 
-	$s_create_new_project_link = 'Create New Project';
+	$s_create_new_project_link = 'Crea Nuovo Progetto';
 
-	$s_login_link = 'Login';
+	$s_login_link = 'Accedi';
 
 	# bug_actiongroup_page.php : mass treatment
-	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
+	$s_bug_actiongroup_failed = "Non disponi dell'autorizzazione necessaria per eseguire questa azione sui seguenti Bug: ";
 	$s_close_bugs_conf_msg = "Confermi di voler chiudere questi Bug ?";
 	$s_delete_bugs_conf_msg = "Confermi di voler eliminare questi Bug ?";
 	$s_move_bugs_conf_msg = "Sposta i Bug su";
@@ -236,7 +236,7 @@
 	$s_new_account_message = "Dopo il login si prega di cambiare la password. Da notare che la password è salvata in maniera cifrata e non può essere recuperata nemmeno dallo staff. Nel caso la si dimentichi, è necessario resettarla.\n\n";
 	$s_new_account_do_not_reply = "Non rispondere a questo messaggio.\n";
 
-	$s_reset_request_msg = "E' stato richiesto un reset della tua password".
+	$s_reset_request_msg = "È stato richiesto un reset della tua password".
 	$s_account_name_msg = "Il Nome del tuo Account è";
 	$s_news_password_msg = "La tua nuova Password";
 
@@ -247,7 +247,7 @@
 	$s_email_feedback_msg = "Il seguente bug necessita un tuo commento.";
 	$s_email_reopen_msg = "Il seguente bug è stato RIAPERTO.";
 	$s_email_assigned_msg = "Il seguente bug è stato ASSEGNATO.";
-	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+	$s_email_bug_deleted_msg = "Il seguente bug è stato ELIMINATO.";
 
 	$s_email_reporter = "Segnalato da";
 	$s_email_handler = "In carico a";
@@ -262,7 +262,7 @@
 	$s_email_duplicate = "Duplicato";
 	$s_email_date_submitted = "Data di inserimento";
 	$s_email_last_modified = "Ultima modifica";
-	$s_email_summary =  "Sommario";
+	$s_email_summary =  "Riassunto";
 	$s_email_description = "Descrizione";
 
 	# account_delete.php
@@ -398,7 +398,7 @@
 	$s_bug_reminder = "Spedisci una nota";
 	$s_reminder_sent_to = "Spedita nota a";
 	$s_bug_send_button = "Invia";
-	$s_reminder = 'Reminder';
+	$s_reminder = "Nota";
 
 	# bug_update.php
 	$s_bug_updated_msg = "Il Bug è stato aggiornato correttamente...";
@@ -426,7 +426,7 @@
 	$s_product_version = "Versione Prodotto";
 	$s_build = "Release";
 	$s_votes = "Voti";
-	$s_summary = "Sommario";
+	$s_summary = "Riassunto";
 	$s_description = "Descrizione";
 	$s_steps_to_reproduce = "Passaggi per Riprodurre il Bug";
 	$s_additional = "Aggiuntiva";
@@ -562,10 +562,10 @@
 	$s_versions = "Versioni";
 	$s_add_version_button = "Nuova Versione";
 	$s_edit_link = "modifica";
-	$s_actions = 'Actions';
+	$s_actions = 'Azioni';
 	$s_version = "Versione";
 	$s_timestamp = 'Timestamp';
-	$s_update = 'Update';
+	$s_update = 'Aggiorna';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = "Inserisci Progetto";
@@ -604,7 +604,7 @@
 	# manage_user_prune.php
 	$s_accounts_pruned_msg = "Tutti gli Account che non hanno mai effettuato il login e sono più vecchi di 1 settimana sono stati rimossi";
 	$s_prune_accounts_button = 'Prune';
-	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+	$s_confirm_account_pruning = "Sei sicuro di voler eliminare i vecchi account che non sono mai stati utilizzati?";
 
 	# manage_user_page.php
 	$s_edit_user_title = "Elimina Utente";
@@ -626,7 +626,7 @@
 	$s_main_link = "Principale";
 	$s_view_bugs_link = "Visualizza i Bug";
 	$s_report_bug_link = "Inserisci Bug";
-	$s_summary_link = "Sommario";
+	$s_summary_link = "Statistiche";
 	$s_account_link = "Account";
 	$s_users_link = "Utenti";
 	$s_manage_link = "Amministra";
@@ -716,7 +716,7 @@
 	$s_must_enter_category = "Devi selezionare una categoria";
 	$s_must_enter_severity = "Devi selezionare un livello di problematica";
 	$s_must_enter_reproducibility = "Devi selezionare la riproducibilità";
-	$s_must_enter_summary = "Devi inserire un testo descrittivo in modo sommario";
+	$s_must_enter_summary = "Devi inserire un testo riassuntivo del problema";
 	$s_must_enter_description = "Devi inserire una descrizione";
 	$s_report_more_bugs = "Notifica più Bug";
 	$s_submission_thanks_msg = "Grazie per il tuo interesse!.";
@@ -773,8 +773,8 @@
 	$s_site_settings_updated_msg = "Impostazioni Sito aggiornate";
 
 	# summary_page.php
-	$s_summary_title = "Sommario";
-	$s_summary_jpgraph_link = "Sommario avanzato";
+	$s_summary_title = "Statistiche";
+	$s_summary_jpgraph_link = "Grafici";
 	$s_by_status = "per status";
 	$s_by_date = "per data";
 	$s_by_severity = "per gravità";
@@ -785,9 +785,9 @@
 	$s_by_reporter = "per segnalatore";
 	$s_time_stats = "Statistiche in giorni per la risoluzione dei bug";
 	$s_longest_open_bug = "bug più lungo nella risoluzione";
-	$s_longest_open = "La più lunga apertura";
-	$s_average_time = "Tempo medio";
-	$s_total_time = "Tempo totale";
+	$s_longest_open = "durata massima in stato Aperto";
+	$s_average_time = "tempo medio";
+	$s_total_time = "tempo totale";
 	$s_developer_stats = "statistiche per sviluppatore";
 	$s_reporter_stats = "statistiche per segnalatore";
 	$s_orct = "(aperti/risolti/chiusi/totale)";
@@ -796,7 +796,7 @@
 	$s_any = "Qualsiasi";
 	$s_show = "Visualizza";
 	$s_changed = "Modificato (ore)";
-	$s_viewing_bugs_title = "Visualizza i Bug";
+	$s_viewing_bugs_title = "Elenco dei Bug";
 	$s_updated = "Aggiornato";
 
 	# view_all_inc.php
@@ -808,7 +808,7 @@
 	# view_bug_advanced_page.php
 	$s_view_simple_link = "Visualizzazione Semplice";
 	$s_viewing_bug_advanced_details_title = "Dettaglio Visualizzazione Avanzata del Bug";
-	$s_product_build = "Versione del Progetto";
+	$s_product_build = "Versione del Prodotto";
 	$s_system_profile = "Descrizione del Sistema";
 	$s_update_bug_button = "Aggiorna il Bug";
 	$s_bug_assign_button = "Assegnami il lavoro";
@@ -824,9 +824,9 @@
 	$s_viewing_bug_simple_details_title = "Dettaglio Visualizzazione Semplice del Bug";
 
 	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-	$s_users_monitoring_bug = 'Users monitoring this bug';
-	$s_monitoring_user_list = 'User List';
+	$s_no_users_monitoring_bug = "Nessun utente sta monitorando questo bug.";
+	$s_users_monitoring_bug = "Questo bug è monitorato da";
+	$s_monitoring_user_list = "Elenco Utenti";
 
 	# custom field strings
 	$s_add_custom_field_button = "Nuovo Campo Personalizzato";
@@ -835,7 +835,7 @@
 	$s_update_custom_field_button = "Aggiorna Campo Personalizzato";
 	$s_add_existing_custom_field = "Aggiungi questo Campo Personalizzato";
 	$s_edit_custom_field_title = "Modifica Campo Personalizzato";
-	$s_custom_field = 'Field';
+	$s_custom_field = 'Campo';
 	$s_custom_fields_setup = "Campi Personalizzati";
 	$s_custom_field_name = "Nome";
 	$s_custom_field_project_count = 'Project Count';
@@ -855,7 +855,7 @@
 	$s_confirm_custom_field_deletion = "Sei sicuro di voler eliminare questo Campo Personalizzato e tutti i valori associati?";
 	$s_field_delete_button = "Elimina Campo";
 
-	$s_hide_status = 'Hide Status';
-	$s_filter_closed = "Closed";
-	$s_filter_resolved = "Resolved";
+	$s_hide_status = "Non mostrare quelli";
+	$s_filter_closed = "Chiusi";
+	$s_filter_resolved = "Risolti";
 ?>
