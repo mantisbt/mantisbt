@@ -13,40 +13,40 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_access( UPDATER );
-	check_bug_exists( $f_id );
+
+	# extract current extended information into history variables
+	$result = get_bug_row_ex ( $f_id );
+	if ( 0 == db_num_rows( $result ) ) {
+		# speed is not an issue in this case, so re-use code
+		check_bug_exists( $f_id );
+	}
+
+	$row = db_fetch_array( $result );
+	extract( $row, EXTR_PREFIX_ALL, 'h' );
+
 	$c_id = (integer)$f_id;
 
 	# set variable to be valid if necessary
 	check_varset( $f_duplicate_id, '' );
 	check_varset( $f_category, '' );
 
-	# grab the bug_text_id
-	$query = "SELECT bug_text_id
-				FROM $g_mantis_bug_table
-				WHERE id='$c_id'";
-	$result = db_query( $query );
-	$t_bug_text_id = db_result( $result, 0, 0 );
-
     if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) ) {
         $f_status = ASSIGNED;
     }
 
 	# prevent warnings
-	check_varset( $f_os,         get_bug_field( $f_id, 'os' ) );
-	check_varset( $f_os_build,   get_bug_field( $f_id, 'os_build' ) );
-	check_varset( $f_platform,   get_bug_field( $f_id, 'platform' ) );
-	check_varset( $f_version,    get_bug_field( $f_id, 'version' ) );
-	check_varset( $f_build,      get_bug_field( $f_id, 'build' ) );
-	check_varset( $f_eta,        get_bug_field( $f_id, 'eta' ) );
-	check_varset( $f_projection, get_bug_field( $f_id, 'projection' ) );
-	check_varset( $f_resolution, get_bug_field( $f_id, 'resolution' ) );
-	check_varset( $f_os_build,   get_bug_field( $f_id, 'os_build' ) );
-	check_varset( $f_os_build,   get_bug_field( $f_id, 'os_build' ) );
-	check_varset( $f_os_build,   get_bug_field( $f_id, 'os_build' ) );
-	check_varset( $f_os_build,   get_bug_field( $f_id, 'os_build' ) );
+	check_varset( $f_os,         $h_os );
+	check_varset( $f_os_build,   $h_os_build );
+	check_varset( $f_platform,   $h_platform );
+	check_varset( $f_version,    $h_version );
+	check_varset( $f_build,      $h_build );
+	check_varset( $f_eta,        $h_eta );
+	check_varset( $f_projection, $h_projection );
+	check_varset( $f_resolution, $h_resolution );
+	check_varset( $f_os_build,   $h_os_build );
 
 	if ( !isset( $f_steps_to_reproduce ) ) {
-		$c_steps_to_reproduce = get_bug_text_field( $f_id, 'steps_to_reproduce' );
+		$c_steps_to_reproduce = $h_steps_to_reproduce;
 	} else {
 		$c_steps_to_reproduce = string_prepare_textarea( $f_steps_to_reproduce );
 	}
@@ -74,27 +74,9 @@
 	$c_handler_id				= (integer)$f_handler_id;
 	$c_view_state				= (integer)$f_view_state;
 
-	$h_category					= get_bug_field( $c_id, 'category' );
-	$h_severity					= get_bug_field( $c_id, 'severity' );
-	$h_reproducibility			= get_bug_field( $c_id, 'reproducibility' );
-	$h_priority					= get_bug_field( $c_id, 'priority' );
-	$h_status					= get_bug_field( $c_id, 'status' );
-	$h_projection				= get_bug_field( $c_id, 'projection' );
-	$h_duplicate_id				= get_bug_field( $c_id, 'duplicate_id' );
-	$h_resolution				= get_bug_field( $c_id, 'resolution' );
-	$h_handler_id				= get_bug_field( $c_id, 'handler_id' );
-	$h_eta						= get_bug_field( $c_id, 'eta' );
-	$h_summary					= get_bug_field( $c_id, 'summary' );
-	$h_os						= get_bug_field( $c_id, 'os' );
-	$h_os_build					= get_bug_field( $c_id, 'os_build' );
-	$h_platform					= get_bug_field( $c_id, 'platform' );
-	$h_build					= get_bug_field( $c_id, 'build' );
-	$h_version					= get_bug_field( $c_id, 'version' );
-	$h_view_state				= get_bug_field( $c_id, 'view_state' );
-
-	$h_description				= string_prepare_textarea( get_bug_text_field( $c_id, 'description' ) );
-	$h_steps_to_reproduce		= string_prepare_textarea( get_bug_text_field( $c_id, 'steps_to_reproduce' ) );
-	$h_additional_information	= string_prepare_textarea( get_bug_text_field( $c_id, 'additional_information' ) );
+	$h_description 				= string_prepare_textarea( $h_description );
+	$h_steps_to_reproduce		= string_prepare_textarea( $h_steps_to_reproduce );
+	$h_additional_information	= string_prepare_textarea( $h_additional_information );
 
 	# Update all fields
     $query = "UPDATE $g_mantis_bug_table
@@ -118,31 +100,35 @@
     		WHERE id='$c_id'";
    	$result = db_query($query);
 
-    $query = "UPDATE $g_mantis_bug_text_table
-    		SET description='$c_description',
-				steps_to_reproduce='$c_steps_to_reproduce',
-				additional_information='$c_additional_information'
-    		WHERE id='$t_bug_text_id'";
-   	$result = db_query($query);
+	# These fields are not changed as often as the assigned person, priority, status, etc.
+	if ( ( $c_description != $h_description ) || ( $c_steps_to_reproduce != $h_steps_to_reproduce ) || ( $c_additional_information != $h_additional_information ) ) {
+	    $query = "UPDATE $g_mantis_bug_text_table ".
+					"SET description='$c_description', ".
+					"steps_to_reproduce='$c_steps_to_reproduce', ".
+					"additional_information='$c_additional_information' ".
+					"WHERE id='$h_bug_text_id'";
+	   	$result = db_query($query);
+	}
 
 	# log changes
-	history_log_event( $c_id, 'category',        $h_category );
-	history_log_event( $c_id, 'severity',        $h_severity );
-	history_log_event( $c_id, 'reproducibility', $h_reproducibility );
-	history_log_event( $c_id, 'priority',        $h_priority );
-	history_log_event( $c_id, 'status',          $h_status );
-	history_log_event( $c_id, 'projection',      $h_projection );
-	history_log_event( $c_id, 'duplicate_id',    $h_duplicate_id );
-	history_log_event( $c_id, 'resolution',      $h_resolution );
-	history_log_event( $c_id, 'handler_id',      $h_handler_id );
-	history_log_event( $c_id, 'eta',             $h_eta );
-	history_log_event( $c_id, 'summary',         $h_summary );
-	history_log_event( $c_id, 'os',              $h_os );
-	history_log_event( $c_id, 'os_build',        $h_os_build );
-	history_log_event( $c_id, 'platform',        $h_platform );
-	history_log_event( $c_id, 'build',           $h_build );
-	history_log_event( $c_id, 'version',         $h_version );
-	history_log_event( $c_id, 'view_state',      $h_view_state );
+	$t_user_id = get_current_user_field( 'id' );
+	history_log_event_direct( $c_id, 'category',        $h_category, $c_category, $t_user_id );
+	history_log_event_direct( $c_id, 'severity',        $h_severity, $c_severity, $t_user_id );
+	history_log_event_direct( $c_id, 'reproducibility', $h_reproducibility, $c_reproducibility, $t_user_id );
+	history_log_event_direct( $c_id, 'priority',        $h_priority, $c_priority, $t_user_id );
+	history_log_event_direct( $c_id, 'status',          $h_status, $c_status, $t_user_id );
+	history_log_event_direct( $c_id, 'projection',      $h_projection, $c_projection, $t_user_id );
+	history_log_event_direct( $c_id, 'duplicate_id',    $h_duplicate_id, $c_duplicate_id, $t_user_id );
+	history_log_event_direct( $c_id, 'resolution',      $h_resolution, $c_resolution, $t_user_id );
+	history_log_event_direct( $c_id, 'handler_id',      $h_handler_id, $c_handler_id, $t_user_id );
+	history_log_event_direct( $c_id, 'eta',             $h_eta, $c_eta, $t_user_id );
+	history_log_event_direct( $c_id, 'summary',         $h_summary, $c_summary, $t_user_id );
+	history_log_event_direct( $c_id, 'os',              $h_os, $c_os, $t_user_id );
+	history_log_event_direct( $c_id, 'os_build',        $h_os_build, $c_os_build, $t_user_id );
+	history_log_event_direct( $c_id, 'platform',        $h_platform, $c_platform, $t_user_id );
+	history_log_event_direct( $c_id, 'build',           $h_build, $c_build, $t_user_id );
+	history_log_event_direct( $c_id, 'version',         $h_version, $c_version, $t_user_id );
+	history_log_event_direct( $c_id, 'view_state',      $h_view_state, $c_view_state, $t_user_id );
 
 	if ( $h_description != $c_description ) {
 		history_log_event_special( $c_id, DESCRIPTION_UPDATED );

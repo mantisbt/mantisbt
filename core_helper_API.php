@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.46 $
+	# $Revision: 1.47 $
 	# $Author: vboctor $
-	# $Date: 2002-06-13 10:18:14 $
+	# $Date: 2002-06-13 12:11:05 $
 	#
-	# $Id: core_helper_API.php,v 1.46 2002-06-13 10:18:14 vboctor Exp $
+	# $Id: core_helper_API.php,v 1.47 2002-06-13 12:11:05 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -40,6 +40,40 @@
 		$query ="UPDATE $g_mantis_bugnote_table ".
 				"SET last_modified=NOW() ".
 				"WHERE id='$c_bugnote_id'";
+		return db_query( $query );
+	}
+	# --------------------
+	# Returns the record of the specified bug
+	function get_bug_row( $p_bug_id ) {
+		global $g_mantis_bug_table;
+
+		$c_bug_id = (integer)$p_bug_id;
+
+		# get info
+		$query ="SELECT * ".
+				"FROM $g_mantis_bug_table ".
+				"WHERE id='$c_bug_id' ".
+				"LIMIT 1";
+
+		return db_query( $query );
+	}
+	# --------------------
+	# Returns the extended record of the specified bug, this includes
+	# the bug text fields
+	# @@@ include reporter name and handler name, the problem is that
+	#      handler can be 0, in this case no corresponding name will be
+	#      found.  Use equivalent of (+) in Oracle.
+	function get_bug_row_ex( $p_bug_id ) {
+		global $g_mantis_bug_table, $g_mantis_bug_text_table;
+
+		$c_bug_id = (integer)$p_bug_id;
+
+		# get info
+		$query ="SELECT b.*, bt.*, b.id as id ".
+				"FROM $g_mantis_bug_table b, $g_mantis_bug_text_table bt ".
+				"WHERE b.id='$c_bug_id' AND b.bug_text_id = bt.id ".
+				"LIMIT 1";
+
 		return db_query( $query );
 	}
 	# --------------------
