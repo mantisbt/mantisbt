@@ -10,21 +10,15 @@
 <?php
 	check_access( MANAGER );
 
-	# check for no users
-	check_varset( $f_user_id, '' );
+	$f_user_id		= gpc_get_int_array( 'f_user_id', array() );
+	$f_access_level	= gpc_get_int( 'f_access_level' );
 
 	# Add user(s) to the current project
-	$result = 0;
 	$count = count( $f_user_id );
 	for ($i=0;$i<$count;$i++) {
 		$t_user_id = $f_user_id[$i];
-		$result = project_add_user( $g_project_cookie_val, $t_user_id, $f_access_level );
+		project_add_user( helper_get_current_project(), $t_user_id, $f_access_level );
 	}
 
-	$t_redirect_url = 'proj_user_menu_page.php';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( 'proj_user_menu_page.php' );
 ?>

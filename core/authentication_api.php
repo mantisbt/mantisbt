@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.4 2002-08-30 05:35:18 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.5 2002-08-30 07:20:15 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -240,7 +240,7 @@
 	function auth_get_current_user_cookie() {
 		$t_cookie_name = config_get( 'string_cookie' );
 
-		$t_cookie = gpc_get_string( $t_cookie_name, '' );
+		$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 		return $t_cookie;
 	}
