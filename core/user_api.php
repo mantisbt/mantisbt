@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.57 2003-04-06 23:43:10 vboctor Exp $
+	# $Id: user_api.php,v 1.58 2003-04-23 19:32:40 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -148,7 +148,7 @@
 		}
 
 		# Only allow a basic set of characters
-		if ( 0 == preg_match( '/^\w+$/', $p_username ) ) {
+		if ( 0 == preg_match( config_get( 'user_login_valid_regex' ), $p_username ) ) {
 			return false;
 		}
 

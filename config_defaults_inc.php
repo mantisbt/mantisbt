@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.117 2003-03-27 22:34:04 int2str Exp $
+	# $Id: config_defaults_inc.php,v 1.118 2003-04-23 19:32:39 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -718,6 +718,13 @@
 	# This is useful for installations where assigned status is to be used when
 	# the bug is in progress, rather than just put in a person's queue.
 	$g_auto_set_status_to_assigned	= ON;
+	
+	# The regular expression to use when validating new user login names
+	# The default regular expression allows a-z, A-z, 0-9, as well as space and
+	#  underscore.  If you change this, you may want to update the
+	#  ERROR_USER_NAME_INVALID string in the language files to explain
+	#  the rules you are using on your site
+	$g_user_login_valid_regex = '/^[\w \-]+$/';
 
 	################################
 	# Mantis Look and Feel Variables
