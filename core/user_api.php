@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.31 2002-09-18 20:13:49 jfitzell Exp $
+	# $Id: user_api.php,v 1.32 2002-09-22 05:26:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -328,36 +328,36 @@
 		$t_user_pref_table 			= config_get('mantis_user_pref_table');
 		$t_project_user_list_table 	= config_get('mantis_project_user_list_table');
 
-	    if ( !user_get_field( $p_user_id, 'protected' ) ) {
-			# Remove account
-			$query = "DELETE
-    				  FROM $t_user_table
-    				  WHERE id='$c_user_id'";
-	    	db_query( $query );
-
-			# Remove associated profiles
-			$query = "DELETE
-	    			  FROM $t_user_profile_table
-	    			  WHERE user_id='$c_user_id'";
-			db_query( $query );
-
-			# Remove associated preferences
-			$query = "DELETE
-    				  FROM $t_user_pref_table
-    				  WHERE user_id='$c_user_id'";
-    		db_query( $query );
-
-			$query = "DELETE
-    				  FROM $t_project_user_list_table
-	    			  WHERE user_id='$c_user_id'";
-			db_query( $query );
-
-			user_clear_cache( $p_user_id );
-
-			return true;
-		} else {
+	    if ( ON == user_get_field( $p_user_id, 'protected' ) ) {
 			return false;
 		}
+
+		# Remove account
+		$query = "DELETE
+				  FROM $t_user_table
+				  WHERE id='$c_user_id'";
+		db_query( $query );
+
+		# Remove associated profiles
+		$query = "DELETE
+				  FROM $t_user_profile_table
+				  WHERE user_id='$c_user_id'";
+		db_query( $query );
+
+		# Remove associated preferences
+		$query = "DELETE
+				  FROM $t_user_pref_table
+				  WHERE user_id='$c_user_id'";
+		db_query( $query );
+
+		$query = "DELETE
+				  FROM $t_project_user_list_table
+				  WHERE user_id='$c_user_id'";
+		db_query( $query );
+
+		user_clear_cache( $p_user_id );
+
+		return true;
     }
 	# --------------------
 	# create a set of default preferences for the project
