@@ -29,7 +29,7 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( $g_manage_category_page, $g_wait_time );
+		print_meta_redirect( $g_manage_product_versions_page, $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -52,7 +52,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_manage_category_page ?>"><? echo $s_proceed ?></a>
+<a href="<? echo $g_manage_product_versions_page ?>"><? echo $s_proceed ?></a>
 </div>
 
 <? print_footer(__FILE__) ?>

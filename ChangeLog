@@ -41,6 +41,9 @@ To Do:
  * Renamed db_mysql_connect() to db_connect()
  * Renamed db_mysql_query() to db_query()
  * Added several db_ functions in preparation for database abstraction
+ * Fixed manage product versions update redirect
+ * Added $g_bugnote_order to allow custom bugnote ordering
+
 
 12.20.2000	-	0.12.0
 
