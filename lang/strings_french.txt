@@ -10,11 +10,11 @@
 	# French: Quentin Delance, quentin.delance@insalien.org
 	# French: Roland Meyer, Daniel Coquette
 	# -------------------------------------------------
-	# $Revision: 1.29 $
+	# $Revision: 1.30 $
 	# $Author: jctrosset $
-	# $Date: 2002-06-20 14:36:49 $
+	# $Date: 2002-06-24 10:04:09 $
 	#
-	# $Id: strings_french.txt,v 1.29 2002-06-20 14:36:49 jctrosset Exp $
+	# $Id: strings_french.txt,v 1.30 2002-06-24 10:04:09 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -78,20 +78,41 @@
 	$s_make_public = 'Make Public';
 
 	# bug_actiongroup_page.php : mass treatment
-	$s_close_bugs_conf_msg = "Voulez-vous vraiment fermer ces bugs ?";
-	$s_delete_bugs_conf_msg = "Voulez-vous vraiment supprimer ces bugs ?";
-	$s_move_bugs_conf_msg = "Déplacer vers";
-	$s_assign_bugs_conf_msg = "Assigner à";
-	$s_resolve_bugs_conf_msg = "Résolution";
-	$s_priority_bugs_conf_msg = "Priorité des bugs";
-	$s_status_bugs_conf_msg = "Statut des bugs";
-	$s_close_group_bugs_button = "Fermer les bugs" ;
-	$s_delete_group_bugs_button = "Supprimer les bugs" ;
-	$s_move_group_bugs_button = "Déplacer les bugs" ;
-	$s_assign_group_bugs_button = "Assigner les bugs" ;
-	$s_resolve_group_bugs_button = "Résoudre les bugs" ;
-	$s_priority_group_bugs_button = "Màj priorité" ;
-	$s_status_group_bugs_button = "Màj statut" ;
+	$s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bugs ?';
+	$s_delete_bugs_conf_msg = 'Voulez-vous vraiment supprimer ces bugs ?';
+	$s_move_bugs_conf_msg = 'Déplacer vers';
+	$s_assign_bugs_conf_msg = 'Assigner à';
+	$s_resolve_bugs_conf_msg = 'Résolution';
+	$s_priority_bugs_conf_msg = 'Priorité des bugs';
+	$s_status_bugs_conf_msg = 'Statut des bugs';
+	$s_close_group_bugs_button = 'Fermer les bugs' ;
+	$s_delete_group_bugs_button = 'Supprimer les bugs' ;
+	$s_move_group_bugs_button = 'Déplacer les bugs' ;
+	$s_assign_group_bugs_button = 'Assigner les bugs' ;
+	$s_resolve_group_bugs_button = 'Résoudre les bugs' ;
+	$s_priority_group_bugs_button = 'Màj priorité' ;
+	$s_status_group_bugs_button = 'Màj statut' ;
+
+	# improved JPgraphs strings
+	$s_graph_imp_status_title = 'Graphiques par états' ;
+	$s_graph_imp_priority_title = 'Graphiques par priorités' ;
+	$s_graph_imp_severity_title = 'Graphiques par sévérité';
+	$s_graph_imp_category_title = 'Graphiques par catégories';
+	$s_graph_imp_resolution_title = 'Graphiques par résolution';
+	$s_by_status_pct = 'pourcentage par état';
+	$s_by_priority_pct = 'pourcentage par priorité';
+	$s_by_severity_pct = 'pourcentage par sévérité';
+	$s_by_category_pct = 'pourcentage par catégorie';
+	$s_by_resolution_pct = 'pourcentage par résolution';
+	$s_by_severity_mix = 'par sévérité et état';
+	$s_by_priority_mix = 'par priorité et état';
+	$s_by_resolution_mix = 'par résolution et état';
+        $s_synthesis_link = 'Synthese';
+        $s_status_link = 'Par état';
+	$s_priority_link = 'Par priorité';
+	$s_severity_link = 'Par sévérité';
+	$s_category_link = 'Par catégorie';
+	$s_resolution_link = 'Par résolution';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';

@@ -4,18 +4,18 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# Russian (WindowsKOI8-R): Alexander Leschinsky aml@lair.pp.ru
+	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.18 $
-	# $Author: prescience $
-	# $Date: 2002-06-13 04:02:08 $
+	# $Revision: 1.19 $
+	# $Author: jctrosset $
+	# $Date: 2002-06-24 10:04:09 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.18 2002-06-13 04:02:08 prescience Exp $
+	# $Id: strings_russian_koi8.txt,v 1.19 2002-06-24 10:04:09 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
     # Charset
-	$s_charset = 'koi8-r';
+	$s_charset = 'koi8-r'; 
 
 	# new strings:
 	$s_all_projects = 'Все проекты';
@@ -51,13 +51,13 @@
 	$s_stays_on_top = 'Поверх всех';
 	$s_delete_bugnote_button = 'Удалить заметку';
 	$s_delete_bugnote_sure_msg = 'Вы уверены, что хотите удалить баг?';
-	$s_bug_relationships = 'Relationships';
+	$s_bug_relationships = 'Связи';
 
-	$s_duplicate_of = 'duplicate of %id';
-	$s_has_duplicate = 'has duplicate %id';
-	$s_related_to = 'related to %id';
-	$s_dependant_on = 'dependant on %id';
-	$s_blocks = 'blocks %id';
+	$s_duplicate_of = 'дубликат %id';
+	$s_has_duplicate = 'имеет дубликат %id';
+	$s_related_to = 'связан с %id';
+	$s_dependant_on = 'зависит от %id';
+	$s_blocks = 'блокирует %id';
 
 	$s_new_bug = 'Новый баг';
 	$s_bugnote_added = 'Заметка добавлена';
@@ -73,6 +73,21 @@
 	$s_make_private = 'Сделать частным';
 	$s_make_public = 'Сделать общедоступным';
 
+	# bug_actiongroup_page.php : mass treatment
+	$s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти баги ?';
+	$s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти баги ?';
+	$s_move_bugs_conf_msg = 'Перенести баги в';
+	$s_assign_bugs_conf_msg = 'Назначить баги';
+	$s_resolve_bugs_conf_msg = 'Выберите состояние багов';
+	$s_priority_bugs_conf_msg = 'Выберите приоритет багов';
+	$s_status_bugs_conf_msg = 'Выберите статус багов';
+	$s_close_group_bugs_button = 'Закрыть баги' ;
+	$s_delete_group_bugs_button = 'Удалить баги' ;
+	$s_move_group_bugs_button = 'Перенести баги' ;
+	$s_assign_group_bugs_button = 'Назначить баги' ;
+	$s_resolve_group_bugs_button = 'Разрешить баги' ;
+	$s_priority_group_bugs_button = 'Обновить приоритет' ;
+	$s_status_group_bugs_button = 'Обновить статус' ;
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ОШИБКА: в процессе выполнения операции произошла ошибка. Вы может быть захотите сообщить об этом вашему локальному администратору.';
