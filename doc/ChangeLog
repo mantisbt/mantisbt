@@ -1,6 +1,6 @@
 Mantis ChangeLog
 
-2003.10.??  -  0.18.0
+2003.12.08  -  0.18.0
 
  * Fix #3207: LDAP mail lookup was looking for the 'email' attribute instead of the 'mail' attribute.
  * Enh #3335: Added Estonian Language (thanks to Villem Vannas).
@@ -48,7 +48,7 @@ Mantis ChangeLog
  * Fix #3097: App Error 700 in project_api.php when viewing certain bugs.
  * Fix #3108: No custom fields are shown in the details, if you are in "All Projects"
  * Fix #3109: Error when adding protected users.
- * Fix #3110: "Print reports" preview in explorer is not possible unless you select "Display selected only" 
+ * Fix #3110: "Print reports" preview in explorer is not possible unless you select "Display selected only"
  * Fix #3111: Bug links in bugnotes do not contain the FQDN as they do in the full reference.
  * Fix #3115: manage_proj_cat_edit_page.php uses the wrong project id.
  * Fix #3120: Missing "Assign To" field on "Report Bug" screen.
@@ -66,7 +66,7 @@ Mantis ChangeLog
  * Fix #3225: Row with the "private" checkbox hasn't got a colspan of 6.
  * Fix #3231: Redirect problem when user clicks on a bug link while not logged in.
  * Fix #3230: German translation [corrections].
- * Fix #3232: Signup or password reset emails were not being sent if email notifications were turned off 
+ * Fix #3232: Signup or password reset emails were not being sent if email notifications were turned off
  * Fix #3252: Category not selected on update if "&" is used in category name.
  * Fix #3266: Possible patches against CVS (Not all changes were applied, see bug for details)
  * Enh #3276: Add bugnote numbering and the ability to link to bugnotes directly using configured tags like with buglinks
@@ -94,7 +94,7 @@ Mantis ChangeLog
  * Fix: 'Hide resolved' now also works for report printing and export.
  * Fix: Do not call custom_field_set_value() in bug report and bug update if user has no write access.
  * Fix: Printing context in case of errors is not working properly (a lot of notices are generated).
- * Fix #2626: $g_primary_table_tags is documented and in config files but never used 
+ * Fix #2626: $g_primary_table_tags is documented and in config files but never used
  * Fix #2839: 'Join incorrect in print_reporter_options and print_assign_to_option_list'
  * Fix #2902: Project name is not printed on bug list report.
  * Fix #2953: 'View all bugs page empty'.  We now disabled compression if zlib isn't available to php.  See notes in the config_defaults_inc.php for information on enabling zlib on Windows.
@@ -177,7 +177,7 @@ Mantis ChangeLog
 
  * Behaviour change: Project documentation is now sorted by title
  * Enhancement: Project name is shown in print_bug_page
- * Fix: #2938: 'Double quotes not handled correctly in manage_custom_field_edit_page' 
+ * Fix: #2938: 'Double quotes not handled correctly in manage_custom_field_edit_page'
  * Fix: handle special characters correctly in the rest of the manage_custom_field_* pages
  * Fix: #2937: 'Double quotes not handled correctly in version names'
  * Fix: #2936: 'SYSTEM WARNING: ob_gzhandler() used twice'
@@ -332,13 +332,13 @@ Mantis ChangeLog
  * New config option (manage_user_threshold): access level required to modify/create/delete users
  * New config option (notify_admin_on_new): enable/disable notifications to admins on arrival of new bugs
  * New config option (notify_on_new_threshold): the access level above which users will be notified of new bugs
- * New config option (project_user_threshold): access level required to add/remove users to/from a project 
+ * New config option (project_user_threshold): access level required to add/remove users to/from a project
  * New config option (reminder_recipents_monitor_bug): To automatically add recipients of bug reminders to the monitor list of the defect.  This is done if the access level is greater than or equal to monitor threshold and the recipient is not the handler or the reporter.
  * New config option (show_detailed_errors):
  * New config option (show_notices):
  * New config option (show_project_menu_bar): adds a menu bar with all the projects as links
  * New config option (show_queries_count and show_queries_list): track the executed queries and display their total count, unique queries count, and the actual list of queries executed
- * New config option (show_warnings): 
+ * New config option (show_warnings):
  * New config option (smtp_password): password to use when connection to an smtp server with phpMailer
  * New config option (smtp_username): username to use when connection to an smtp server with phpMailer
  * New config option (store_reminders): controls whether to store sent reminders as a bugnote
@@ -356,7 +356,7 @@ Mantis ChangeLog
  * Renamed config option: allow_bug_delete_access_level to delete_bug_threshold
  * Renamed config option: bug_move_access_level to move_bug_threshold
  * Renamed file: manage_create_new_user.php to manage_user_create.php
- * Renamed file: manage_create_new_user_page.php to manage_user_create_page.php 
+ * Renamed file: manage_create_new_user_page.php to manage_user_create_page.php
  * Renamed file: report_add.php to bug_add.php
  * Renamed file: report_bug_advanced_page.php to bug_add_advanced_page.php
  * Renamed file: report_bug_page.php to bug_add_page.php
