@@ -84,7 +84,7 @@
 					ON p.id=u.project_id AND p.enabled=1
 					WHERE p.view_state='$t_pub' OR
 						(p.view_state='$t_prv' AND
-						u.user_id IS NOT NULL)
+						u.user_id='$t_user_id')
 					ORDER BY p.id";
 		}
 		$result2 = db_query( $query2 );
