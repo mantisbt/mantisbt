@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.18 $
+	# $Revision: 1.19 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:56 $
+	# $Date: 2002-08-29 02:56:23 $
 	#
-	# $Id: bug_resolve.php,v 1.18 2002-08-25 21:04:56 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.19 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,7 +44,7 @@
 	$h_resolution	= get_bug_field( $f_id, 'resolution' );
 	$h_duplicate_id	= get_bug_field( $f_id, 'duplicate_id' );
 
-	$t_handler_id   = get_current_user_field( 'id' );
+	$t_handler_id   = current_user_get_field( 'id' );
 
 	# Update fields
 	$t_status_val = RESOLVED;

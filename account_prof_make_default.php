@@ -13,14 +13,14 @@
 <?php login_cookie_check() ?>
 <?php
 	# get protected state
-	$t_protected = get_current_user_field( 'protected' );
+	$t_protected = current_user_get_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
 		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
 	}
 
-	$c_user_id = (integer)get_current_user_field( 'id' );
+	$c_user_id = (integer)current_user_get_field( 'id' );
 	$c_id = (integer)$f_id;
 
     # Set Defaults

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.8 2002-08-28 22:16:50 jfitzell Exp $
+	# $Id: helper_api.php,v 1.9 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -231,7 +231,7 @@
 			 ( 1 == $p_no_referer ) ) {
 			switch ( $g_show_view ) {
 				case BOTH:
-						if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
+						if ( ON == current_user_get_pref( 'advanced_view' ) ) {
 							return 'view_bug_advanced_page.php?f_id='.$p_bug_id;
 						} else {
 							return 'view_bug_page.php?f_id='.$p_bug_id;
@@ -258,7 +258,7 @@
 			 ( 1 == $p_no_referer ) ) {
 			switch( $g_show_report ) {
 				case BOTH:
-						if ( ON == get_current_user_pref_field( 'advanced_report' ) ) {
+						if ( ON == current_user_get_pref( 'advanced_report' ) ) {
 							return 'bug_add_advanced_page.php';
 		 				} else {
 							return 'bug_add_page.php';

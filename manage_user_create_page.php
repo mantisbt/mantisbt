@@ -13,14 +13,14 @@
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
-<?php print_manage_menu( 'manage_create_user_page.php' ) ?>
+<?php print_manage_menu( 'manage_user_create_page.php' ) ?>
 
 <p>
 <div align="center">
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<form method="post" action="manage_create_new_user.php">
+		<form method="post" action="manage_user_create.php">
 		<?php echo $s_create_new_account_title ?>
 	</td>
 </tr>

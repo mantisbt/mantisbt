@@ -54,7 +54,7 @@
 	$result = 0;
 	if ( !$check_failed ) {
 		# Get user id
-		$u_id = get_current_user_field( 'id' );
+		$u_id = current_user_get_field( 'id' );
 
 		# Make strings safe for database
 		$c_summary 				= string_prepare_text( $f_summary );

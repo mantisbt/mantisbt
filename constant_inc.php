@@ -133,57 +133,57 @@
 	define( 'BUG_DEPENDANT', 2 );
 
 	# error messages
-	define( 'ERROR_GENERIC',					0 );
-	define( 'ERROR_SQL',						1 );
-	define( 'ERROR_LOGIN',						2 );
-	define( 'ERROR_REPORT',						3 );
-	define( 'ERROR_NO_FILE_SPECIFIED',			4 );
-	define( 'ERROR_FILE_DISALLOWED',			5 );
-	define( 'ERROR_NO_DIRECTORY',				6 );
-	define( 'ERROR_DUPLICATE_CATEGORY',			7 );
-	define( 'ERROR_DUPLICATE_VERSION',			8 );
-	define( 'ERROR_DUPLICATE_FILE',				9 );
-	define( 'ERROR_DUPLICATE_PROJECT',			10 );
-	define( 'ERROR_EMPTY_FIELD',				11 );
-	define( 'ERROR_PROTECTED_ACCOUNT',			12 );
-	define( 'ERROR_ACCESS_DENIED',				13 );
-	define( 'ERROR_COOKIES_DISABLED',			14 );
-	define( 'ERROR_UPLOAD_FAILURE',				15 );
-	define( 'ERROR_FTP_CONNECT_ERROR',          16 );
+	define( 'ERROR_GENERIC',						0 );
+	define( 'ERROR_SQL',							1 );
+	define( 'ERROR_LOGIN',							2 );
+	define( 'ERROR_REPORT',							3 );
+	define( 'ERROR_NO_FILE_SPECIFIED',				4 );
+	define( 'ERROR_FILE_DISALLOWED',				5 );
+	define( 'ERROR_NO_DIRECTORY',					6 );
+	define( 'ERROR_DUPLICATE_CATEGORY',				7 );
+	define( 'ERROR_DUPLICATE_VERSION',				8 );
+	define( 'ERROR_DUPLICATE_FILE',					9 );
+	define( 'ERROR_DUPLICATE_PROJECT',				10 );
+	define( 'ERROR_EMPTY_FIELD',					11 );
+	define( 'ERROR_PROTECTED_ACCOUNT',				12 );
+	define( 'ERROR_ACCESS_DENIED',					13 );
+	define( 'ERROR_COOKIES_DISABLED',				14 );
+	define( 'ERROR_UPLOAD_FAILURE',					15 );
+	define( 'ERROR_FTP_CONNECT_ERROR',				16 );
 
 	# ERROR_CONFIG_*
-	define( 'ERROR_CONFIG_OPT_NOT_FOUND',		100 );
+	define( 'ERROR_CONFIG_OPT_NOT_FOUND',			100 );
 
 	# ERROR_GPC_*
-	define( 'ERROR_GPC_VAR_NOT_FOUND',			200 );
+	define( 'ERROR_GPC_VAR_NOT_FOUND',				200 );
 
 	# ERROR_LANG_*
-	define( 'ERROR_LANG_STRING_NOT_FOUND',		300 );
+	define( 'ERROR_LANG_STRING_NOT_FOUND',			300 );
 
 	# ERROR_DB_*
-	define( 'ERROR_DB_FIELD_NOT_FOUND',			400 );
+	define( 'ERROR_DB_FIELD_NOT_FOUND',				400 );
 
 	# ERROR_FILE_*
-	define( 'ERROR_FILE_TOO_BIG',				500 );
+	define( 'ERROR_FILE_TOO_BIG',					500 );
 
 	# ERROR_BUGNOTE_*
-	define( 'ERROR_BUGNOTE_NOT_FOUND',			600 );
+	define( 'ERROR_BUGNOTE_NOT_FOUND',				600 );
 
 	# ERROR_PROJECT_*
-	define( 'ERROR_PROJECT_NOT_FOUND',			700 );
-	define( 'ERROR_PROJECT_NAME_NOT_UNIQUE',	701 );
-	define( 'ERROR_PROJECT_NAME_INVALID',		702 );
+	define( 'ERROR_PROJECT_NOT_FOUND',				700 );
+	define( 'ERROR_PROJECT_NAME_NOT_UNIQUE',		701 );
+	define( 'ERROR_PROJECT_NAME_INVALID',			702 );
 
 	# ERROR_USER_*
-	define( 'ERROR_USER_NAME_NOT_UNIQUE',		800 );
-	define( 'ERROR_USER_NOT_FOUND',				801 );
-	define( 'ERROR_USER_PREFS_NOT_FOUND',		802 );
-
+	define( 'ERROR_USER_NAME_NOT_UNIQUE',			800 );
+	define( 'ERROR_USER_NOT_FOUND',					801 );
+	define( 'ERROR_USER_PREFS_NOT_FOUND',			802 );
+	define( 'ERROR_USER_CREATE_PASSWORD_MISMATCH',	803 );
 	# ERROR_AUTH_*
-	define( 'ERROR_AUTH_INVALID_COOKIE',		800 );
+	define( 'ERROR_AUTH_INVALID_COOKIE',			800 );
 
 	# ERROR_NEWS_*
-	define( 'ERROR_NEWS_NOT_FOUND',				900 );
+	define( 'ERROR_NEWS_NOT_FOUND',					900 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

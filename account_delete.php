@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.12 $
+	# $Revision: 1.13 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:55 $
+	# $Date: 2002-08-29 02:56:22 $
 	#
-	# $Id: account_delete.php,v 1.12 2002-08-25 21:04:55 jfitzell Exp $
+	# $Id: account_delete.php,v 1.13 2002-08-29 02:56:22 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,7 +26,7 @@
 	}
 
 	# get protected state
-	$t_protected = get_current_user_field( 'protected' );
+	$t_protected = current_user_get_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -35,7 +35,7 @@
 
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
-	$t_user_id = get_current_user_field( 'id' );
+	$t_user_id = current_user_get_field( 'id' );
 	
 	if (user_delete( $t_user_id )) {
 		# delete cookies

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.5 2002-08-28 14:10:11 vboctor Exp $
+	# $Id: bug_api.php,v 1.6 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -161,7 +161,7 @@
 			$t_ass_val = $h_status;
 		}
 
-		$t_handler_id = get_current_user_field( 'id' );
+		$t_handler_id = current_user_get_field( 'id' );
 
 		if ( ( $t_ass_val != $h_status ) || ( $t_handler_id != $h_handler_id ) ) {
 			$c_id = (integer)$p_bug_id;

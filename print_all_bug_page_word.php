@@ -74,7 +74,7 @@
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
 		( !access_level_check_greater_or_equal( UPDATER  ) )) {
-		$c_user_id = get_current_user_field( 'id' );
+		$c_user_id = current_user_get_field( 'id' );
 	}
 
 	# Build our query string based on our viewing criteria
@@ -84,8 +84,8 @@
 
 	# project selection
 	if ( '0000000' == $g_project_cookie_val ) { # ALL projects
-		$t_access_level = get_current_user_field( 'access_level' );
-		$t_user_id = get_current_user_field( 'id' );
+		$t_access_level = current_user_get_field( 'access_level' );
+		$t_user_id = current_user_get_field( 'id' );
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;

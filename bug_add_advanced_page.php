@@ -112,7 +112,7 @@
 	</td>
 	<td>
 		<select tabindex="5" name="f_profile_id">
-			<?php print_profile_option_list( get_current_user_field( 'id' ), $f_profile_id ) ?>
+			<?php print_profile_option_list( current_user_get_field( 'id' ), $f_profile_id ) ?>
 		</select>
 	</td>
 </tr>
@@ -174,7 +174,7 @@
 	</td>
 </tr>
 <?php # reporters should not be able to assign to develoeprs ?>
-<?php if ( get_current_user_field( 'access_level' ) > REPORTER ) { ?>
+<?php if ( current_user_get_field( 'access_level' ) > REPORTER ) { ?>
 <tr class="row-2">
 	<td class="category">
 		<?php echo $s_assign_to ?>

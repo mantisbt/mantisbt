@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.6 2002-08-26 21:58:47 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.7 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -85,7 +85,7 @@
 			}
 
 			# get user information
-			$u_id = get_current_user_field( 'id' );
+			$u_id = current_user_get_field( 'id' );
 
 			# insert bugnote info
 			$query = "INSERT

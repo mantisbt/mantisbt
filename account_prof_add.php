@@ -14,7 +14,7 @@
 	check_access( REPORTER );
 
 	# get protected state
-	$t_protected = get_current_user_field( 'protected' );
+	$t_protected = current_user_get_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -42,7 +42,7 @@
 		$c_description	= string_prepare_textarea( $f_description );
 
 		# get user id
-		$c_user_id = (integer)get_current_user_field( 'id' );
+		$c_user_id = (integer)current_user_get_field( 'id' );
 
 		# Add profile
 		$query = "INSERT

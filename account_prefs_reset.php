@@ -12,7 +12,7 @@
 <?php login_cookie_check() ?>
 <?php
 	# get protected state
-	$t_protected = get_current_user_field( 'protected' );
+	$t_protected = current_user_get_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -20,7 +20,7 @@
 	}
 
 	# get user id
-	$t_user_id = get_current_user_field( 'id' );
+	$t_user_id = current_user_get_field( 'id' );
 
 	## reset to defaults
 	$query = "UPDATE $g_mantis_user_pref_table

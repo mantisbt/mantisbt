@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.1 2002-08-26 22:35:05 jfitzell Exp $
+	# $Id: access_api.php,v 1.2 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -32,7 +32,7 @@
 			return false;
 		}
 
-		$t_access_level = get_current_user_field( 'access_level' );
+		$t_access_level = current_user_get_field( 'access_level' );
 		$t_access_level2 = get_project_access_level( $p_project_id );
 
 		if ( $t_access_level2 == $p_access_level ) {
@@ -73,11 +73,11 @@
 		}
 
 		# Administrators ALWAYS pass.
-		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return true;
 		}
 
-		$t_access_level = get_current_user_field( 'access_level' );
+		$t_access_level = current_user_get_field( 'access_level' );
 		$t_access_level2 = get_project_access_level( $p_project_id );
 
 		# use the project level access level instead of the global access level
@@ -105,7 +105,7 @@
 		}
 
 		# Administrators ALWAYS pass.
-		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return true;
 		}
 
@@ -115,7 +115,7 @@
 		# use the project level access level instead of the global access level
 		# if the project level is not specified then use the global access level
 		if ( ( -1 == $t_access_level ) && ( PUBLIC == $t_project_view_state ) ) {
-			$t_access_level = get_current_user_field( 'access_level' );
+			$t_access_level = current_user_get_field( 'access_level' );
 		}
 
 		return ( $t_access_level >= $p_access_level );
@@ -129,7 +129,7 @@
 			return false;
 		}
 
-		$t_access_level = get_current_user_field( 'access_level' );
+		$t_access_level = current_user_get_field( 'access_level' );
 		if ( $t_access_level == $p_access_level ) {
 			return true;
 		} else {
@@ -148,7 +148,7 @@
 			return false;
 		}
 
-		$t_access_level = get_current_user_field( 'access_level' );
+		$t_access_level = current_user_get_field( 'access_level' );
 
 		if ( $t_access_level >= $p_access_level ) {
 			return true;
@@ -160,7 +160,7 @@
 	# Checks to see if the user should be here.  If not then log the user out.
 	function check_access( $p_access_level ) {
 		# Administrators ALWAYS pass.
-		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return;
 		}
 		if ( !access_level_check_greater_or_equal( $p_access_level ) ) {
@@ -179,7 +179,7 @@
 		project_check( $p_bug_id );
 
 		# Administrators ALWAYS pass.
-		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return;
 		}
 
@@ -223,7 +223,7 @@
 		$t_project_view_state = project_get_field( $p_project_id, 'view_state' );
 
 		# Administrators ALWAYS pass.
-		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {
+		if ( current_user_get_field( 'access_level' ) >= ADMINISTRATOR ) {
 			return;
 		}
 
@@ -250,7 +250,7 @@
 
 		$c_project_id = (integer)$p_project_id;
 
-		$t_user_id = get_current_user_field( 'id' );
+		$t_user_id = current_user_get_field( 'id' );
 		if ( 0 == $p_project_id ) {
 			if ( (integer)$g_project_cookie_val == 0 ) {
 				return -1;
@@ -281,7 +281,7 @@
 
 		# use the current user unless otherwise specified
 		if ( 0 == $p_user_id ) {
-			$t_user_id = get_current_user_field( 'id' );
+			$t_user_id = current_user_get_field( 'id' );
 		} else {
 			$t_user_id = (integer)$p_user_id;
 		}

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.4 2002-08-26 00:40:23 jfitzell Exp $
+	# $Id: html_api.php,v 1.5 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -238,8 +238,8 @@
 				$s_access_levels_enum_string,
 				$g_use_javascript;
 
-		$t_username = get_current_user_field( 'username' );
-		$t_access_level = get_enum_element( 'access_levels', get_current_user_access_level() );
+		$t_username = current_user_get_field( 'username' );
+		$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
 		$t_now = date( $g_complete_date_format );
 
 		PRINT '<table class="hide">';
@@ -313,7 +313,7 @@
 				$s_jump, $s_logout_link;
 
 		if ( isset( $g_string_cookie_val ) ) {
-			$t_protected = get_current_user_field( 'protected' );
+			$t_protected = current_user_get_field( 'protected' );
 			PRINT '<table class="width100" cellspacing="0">';
 			PRINT '<tr>';
 				PRINT '<td class="menu">';
@@ -406,20 +406,20 @@
 
 		$t_manage_page 				= 'manage_page.php';
 		$t_manage_project_menu_page = 'manage_proj_menu_page.php';
-		$t_manage_create_user_page 	= 'manage_create_user_page.php';
+		$t_manage_user_create_page 	= 'manage_user_create_page.php';
 		$t_documentation_page 		= 'documentation_page.php';
 
 		switch ( $p_page ) {
 			case $t_manage_page				: $t_manage_page 				= ''; break;
 			case $t_manage_project_menu_page: $t_manage_project_menu_page 	= ''; break;
-			case $t_manage_create_user_page	: $t_manage_create_user_page 	= ''; break;
+			case $t_manage_user_create_page	: $t_manage_user_create_page 	= ''; break;
 			case $t_documentation_page		: $t_documentation_page 		= ''; break;
 		}
 
 		PRINT '<p><div align="center">';
 			print_bracket_link( $t_manage_page, $s_manage_users_link );
 			print_bracket_link( $t_manage_project_menu_page, $s_manage_projects_link );
-			print_bracket_link( $t_manage_create_user_page, $s_create_new_account_link );
+			print_bracket_link( $t_manage_user_create_page, $s_create_new_account_link );
 			print_bracket_link( $t_documentation_page, $s_documentation_link );
 		PRINT '</div>';
 	}

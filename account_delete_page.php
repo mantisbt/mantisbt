@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.10 $
+	# $Revision: 1.11 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:56 $
+	# $Date: 2002-08-29 02:56:22 $
 	#
-	# $Id: account_delete_page.php,v 1.10 2002-08-25 21:04:56 jfitzell Exp $
+	# $Id: account_delete_page.php,v 1.11 2002-08-29 02:56:22 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,7 +26,7 @@
 	}
 
 	# get protected state
-	$t_protected = get_current_user_field( 'protected' );
+	$t_protected = current_user_get_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.8 2002-08-27 10:08:08 jfitzell Exp $
+	# $Id: project_api.php,v 1.9 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -276,6 +276,30 @@
 		} else {
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 			return '';
+		}
+	}
+	# --------------------
+	# Return the user's access level on the project or false
+	#  if the user is not listed on the project
+	function project_get_user_access_level( $p_project_id, $p_user_id ) {
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_user_id		= db_prepare_int( $p_user_id );
+
+		if ( 0 == $c_project_id ) {
+			return false;
+		}
+
+		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+
+		$query = "SELECT access_level
+				  FROM $t_project_user_list_table
+				  WHERE user_id='$c_user_id' AND project_id='$c_project_id'";
+		$result = db_query( $query );
+
+		if ( db_num_rows( $result ) > 0 ) {
+			return db_result( $result );
+		} else {
+			return false;
 		}
 	}
 	# --------------------

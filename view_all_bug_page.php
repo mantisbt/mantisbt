@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.38 $
+	# $Revision: 1.39 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-27 10:08:07 $
+	# $Date: 2002-08-29 02:56:23 $
 	#
-	# $Id: view_all_bug_page.php,v 1.38 2002-08-27 10:08:07 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.39 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -66,7 +66,7 @@
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
 		( !access_level_check_greater_or_equal( UPDATER  ) )) {
-		$c_user_id = get_current_user_field( 'id' );
+		$c_user_id = current_user_get_field( 'id' );
 	}
 
 	# Build the query string based on the user's viewing criteria.
@@ -76,13 +76,13 @@
 	# 1) count of all the rows
 	# 2) listing of the current page of rows, ordered appropriately
 
-	$t_user_id = get_current_user_field( 'id' );
+	$t_user_id = current_user_get_field( 'id' );
 
 	$t_pub = PUBLIC;
 	$t_prv = PRIVATE;
 	# project selection
 	if ( '0' == $g_project_cookie_val ) { # ALL projects
-		$t_access_level = get_current_user_field( 'access_level' );
+		$t_access_level = current_user_get_field( 'access_level' );
 		if ( ADMINISTRATOR == $t_access_level ) {
 			$query2 =	"SELECT DISTINCT( id ) ".
 					"FROM $g_mantis_project_table ".
@@ -262,8 +262,8 @@
 ?>
 <?php print_page_top1() ?>
 <?php
-	if ( get_current_user_pref_field( 'refresh_delay' ) > 0 ) {
-		print_meta_redirect( 'view_all_bug_page.php?f_page_number='.$f_page_number, get_current_user_pref_field( 'refresh_delay' )*60 );
+	if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
+		print_meta_redirect( 'view_all_bug_page.php?f_page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
 	}
 ?>
 <?php print_page_top2() ?>

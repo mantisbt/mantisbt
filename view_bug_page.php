@@ -203,7 +203,7 @@
 	</td>
 </tr>
 <?php
-	$t_user_id = get_current_user_field ( 'id' ); 
+	$t_user_id = current_user_get_field ( 'id' ); 
 	$t_show_attachments = ( ( $v_reporter_id == $t_user_id ) || access_level_check_greater_or_equal( $g_view_attachments_threshold ) );
 
 	if ( $t_show_attachments ) {

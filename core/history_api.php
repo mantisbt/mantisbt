@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: history_api.php,v 1.3 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -27,7 +27,7 @@
 			$c_bug_id		= (integer)$p_bug_id;
 			$c_user_id 		= (integer)$p_user_id;
 			if ( 0 == $c_user_id ) {
-				$c_user_id	= get_current_user_field( 'id' );
+				$c_user_id	= current_user_get_field( 'id' );
 			};
 			
 			$query = "INSERT INTO $g_mantis_bug_history_table
@@ -54,7 +54,7 @@
 		$c_type			= (integer)$p_type;
 		$c_optional		= string_prepare_text( $p_optional );
 		$c_optional2	= string_prepare_text( $p_optional2 );
-		$t_user_id		= get_current_user_field( 'id' );
+		$t_user_id		= current_user_get_field( 'id' );
 		
 		$query = "INSERT INTO $g_mantis_bug_history_table
 				( user_id, bug_id, date_modified, type, old_value, new_value )

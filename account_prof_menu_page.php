@@ -17,7 +17,7 @@
 	check_access( REPORTER );
 
 	# get protected state
-	$t_protected = get_current_user_field( 'protected' );
+	$t_protected = current_user_get_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -34,7 +34,7 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="account_prof_add.php">
-		<input type="hidden" name="f_user_id" value="<?php echo get_current_user_field( 'id' ) ?>">
+		<input type="hidden" name="f_user_id" value="<?php echo current_user_get_field( 'id' ) ?>">
 		<?php echo $s_add_profile_title ?>
 	</td>
 	<td class="right">
@@ -109,7 +109,7 @@
 	</td>
 	<td width="75%">
 		<select name="f_id">
-			<?php print_profile_option_list( get_current_user_field( 'id' ) ) ?>
+			<?php print_profile_option_list( current_user_get_field( 'id' ) ) ?>
 		</select>
 	</td>
 </tr>

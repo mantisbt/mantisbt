@@ -60,7 +60,7 @@ function edit_printing_prefs($p_user_id = 0, $p_error_if_protected = true, $p_re
 	$c_user_id = (integer)$p_user_id;
 
 	if ($c_user_id == 0) {
-		$c_user_id = get_current_user_field( 'id' );
+		$c_user_id = current_user_get_field( 'id' );
 	}
 
 	$t_redirect_url = $p_redirect_url;

@@ -19,7 +19,7 @@
 
 	# Set default project
 	if ( isset( $f_make_default ) ) {
-		$t_user_id = get_current_user_field( 'id' );
+		$t_user_id = current_user_get_field( 'id' );
 		$query = "UPDATE $g_mantis_user_pref_table
 				SET default_project='$c_project_id'
 				WHERE user_id='$t_user_id'";

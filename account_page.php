@@ -13,7 +13,7 @@
 <?php login_cookie_check() ?>
 <?php
 	# get protected state
-	$t_protected = get_current_user_field( 'protected' );
+	$t_protected = current_user_get_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
@@ -97,7 +97,7 @@
 		<?php echo $s_access_level_project ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( 'access_levels', get_current_user_access_level() ) ?>
+		<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ) ?>
 	</td>
 </tr>
 <tr class="row-1" valign="top">
@@ -105,7 +105,7 @@
 		<?php echo $s_assigned_projects ?>:
 	</td>
 	<td>
-		<?php print_project_user_list( get_current_user_field( 'id' ) ) ?>
+		<?php print_project_user_list( current_user_get_field( 'id' ) ) ?>
 	</td>
 </tr>
 <tr>
@@ -167,7 +167,7 @@
 		<?php echo $s_access_level_project ?>:
 	</td>
 	<td>
-		<?php echo get_enum_element( 'access_levels', get_current_user_access_level() ) ?>
+		<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ) ?>
 	</td>
 </tr>
 <tr class="row-1" valign="top">
@@ -175,7 +175,7 @@
 		<?php echo $s_assigned_projects ?>:
 	</td>
 	<td>
-		<?php print_project_user_list( get_current_user_field( 'id' ) ) ?>
+		<?php print_project_user_list( current_user_get_field( 'id' ) ) ?>
 	</td>
 </tr>
 <tr>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.5 2002-08-27 04:26:42 jfitzell Exp $
+	# $Id: database_api.php,v 1.6 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -161,7 +161,7 @@
 	# --------------------
 	# prepare a boolean before DB insertion
 	function db_prepare_bool( $p_bool ) {
-		return (bool)$p_bool;
+		return (int)(bool)$p_bool;
 	}
 
 	# --------------------

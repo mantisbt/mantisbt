@@ -13,9 +13,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$f_id 			= get_current_user_field( 'id' );
-	$f_protected 	= get_current_user_field( 'protected' );
-	$f_old_username = stripslashes( get_current_user_field( 'username' ) );
+	$f_id 			= current_user_get_field( 'id' );
+	$f_protected 	= current_user_get_field( 'protected' );
+	$f_old_username = stripslashes( current_user_get_field( 'username' ) );
 
 	# protected account check
 	if ( ON == $f_protected ) {
@@ -52,7 +52,6 @@
 			$result = db_query( $query );
 		}
 
-		drop_user_info_cache();
 	} # end if protected
 
 	$t_redirect_url = 'account_page.php';

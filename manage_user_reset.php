@@ -46,8 +46,6 @@
 		    		WHERE id='$c_id'";
 		    $result = db_query( $query );
 		}
-			
-		drop_user_info_cache();
 	}
 
 	$t_redirect_url = 'manage_page.php';

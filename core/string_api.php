@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.4 2002-08-27 04:26:43 jfitzell Exp $
+	# $Id: string_api.php,v 1.5 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -135,7 +135,7 @@
 		$t_tag = config_get( 'bug_link_tag' );
 		$t_path = config_get( 'path' );
 
-		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
+		if ( ON == current_user_get_pref( 'advanced_view' ) ) {
 			$t_page_name = 'view_bug_advanced_page.php';
 		} else {
 			$t_page_name = 'view_bug_page.php';

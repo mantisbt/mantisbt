@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.29 $
+	# $Revision: 1.30 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:56 $
+	# $Date: 2002-08-29 02:56:23 $
 	#
-	# $Id: bug_update.php,v 1.29 2002-08-25 21:04:56 jfitzell Exp $
+	# $Id: bug_update.php,v 1.30 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -124,7 +124,7 @@
 	}
 
 	# log changes
-	$t_user_id = get_current_user_field( 'id' );
+	$t_user_id = current_user_get_field( 'id' );
 	history_log_event_direct( $c_id, 'category',        $h_category, $f_category, $t_user_id );
 	history_log_event_direct( $c_id, 'severity',        $h_severity, $c_severity, $t_user_id );
 	history_log_event_direct( $c_id, 'reproducibility', $h_reproducibility, $c_reproducibility, $t_user_id );

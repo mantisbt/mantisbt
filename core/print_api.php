@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.5 2002-08-28 09:58:32 jfitzell Exp $
+	# $Id: print_api.php,v 1.6 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -83,7 +83,7 @@
 	# --------------------
 	function print_duplicate_id( $p_duplicate_id ) {
 		if ( $p_duplicate_id != '0000000' ) {
-			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
+			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
 				PRINT "<a href=\"view_bug_advanced_page.php?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
 			} else {
 				PRINT "<a href=\"view_bug_page.php?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
@@ -396,8 +396,8 @@
 		global $g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie_val;
 
-		$t_user_id = get_current_user_field( 'id' );
-		$t_access_level = get_current_user_field( 'access_level' );
+		$t_user_id = current_user_get_field( 'id' );
+		$t_access_level = current_user_get_field( 'access_level' );
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;
@@ -478,7 +478,7 @@
 					FROM $g_mantis_project_table
 					ORDER BY name";
 		} else {
-			$t_user_id = get_current_user_field( 'id' );
+			$t_user_id = current_user_get_field( 'id' );
 			$query = "SELECT p.id, p.name
 					FROM $g_mantis_project_table p, $g_mantis_project_user_list_table m
 					WHERE 	p.id=m.project_id AND
@@ -805,7 +805,7 @@
 
 		switch ( $g_show_view ) {
 		case BOTH:
-			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
+			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
 				PRINT "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
 			} else {
 				PRINT "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
@@ -827,7 +827,7 @@
 
 		switch ( $g_show_update ) {
 		case BOTH:
-			if ( ON == get_current_user_pref_field( 'advanced_update' ) ) {
+			if ( ON == current_user_get_pref( 'advanced_update' ) ) {
 				return 'bug_update_advanced_page.php';
 			} else {
 				return 'bug_update_page.php';
@@ -849,7 +849,7 @@
 
 		switch ( $g_show_view ) {
 		case BOTH:
-			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
+			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
 				return "<a href=\"view_bug_advanced_page.php?f_id=$p_id\">$p_id</a>";
 			} else {
 				return "<a href=\"view_bug_page.php?f_id=$p_id\">$p_id</a>";
@@ -871,7 +871,7 @@
 
 		switch ( $g_show_view ) {
 		case BOTH:
-			if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
+			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
 				return 'view_bug_advanced_page.php?f_id='.$p_id;
 			} else {
 				return 'view_bug_page.php?f_id='.$p_id;
@@ -1031,12 +1031,12 @@
 		switch ( $g_show_user_email ) {
 			case NONE:	return $p_text;
 			case ALL:	return "<a href=\"mailto:$p_email\">$p_text</a>";
-			case NO_ANONYMOUS:	if ( get_current_user_field( 'username' ) != $g_anonymous_account ) {
+			case NO_ANONYMOUS:	if ( current_user_get_field( 'username' ) != $g_anonymous_account ) {
 									return "<a href=\"mailto:$p_email\">$p_text</a>";
 								} else {
 									return $p_text;
 								}
-			case ADMIN_ONLY:	if ( ADMINISTRATOR == get_current_user_field( 'access_level' ) ) {
+			case ADMIN_ONLY:	if ( ADMINISTRATOR == current_user_get_field( 'access_level' ) ) {
 									return "<a href=\"mailto:$p_email\">$p_text</a>";
 								} else {
 									return $p_text;
@@ -1061,12 +1061,12 @@
 		switch ( $g_show_user_email ) {
 			case NONE:	return $p_text;
 			case ALL:	return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
-			case NO_ANONYMOUS:	if ( get_current_user_field( 'username' ) != $g_anonymous_account ) {
+			case NO_ANONYMOUS:	if ( current_user_get_field( 'username' ) != $g_anonymous_account ) {
 									return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
 								} else {
 									return $p_text;
 								}
-			case ADMIN_ONLY:	if ( ADMINISTRATOR == get_current_user_field( 'access_level' ) ) {
+			case ADMIN_ONLY:	if ( ADMINISTRATOR == current_user_get_field( 'access_level' ) ) {
 									return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
 								} else {
 									return $p_text;

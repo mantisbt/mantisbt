@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.21 2002-08-26 22:14:49 jfitzell Exp $
+	# $Id: bugnote_edit_page.php,v 1.22 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -30,7 +30,7 @@
 
 	# make sure the user accessing the note is valid and has proper access
 	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );
-	$t_user_id			= get_current_user_field( 'id' );
+	$t_user_id			= current_user_get_field( 'id' );
 
 	if ( get_bug_field( $t_bug_id, 'status' ) < RESOLVED ) {
 		if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||

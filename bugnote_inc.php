@@ -11,7 +11,7 @@
 ?>
 <?php
 	# grab the user id currently logged in
-	$t_user_id = get_current_user_field( 'id' );
+	$t_user_id = current_user_get_field( 'id' );
 
 	if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
 		$t_restriction = 'AND view_state=' . PUBLIC;

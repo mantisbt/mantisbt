@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.10 $
+	# $Revision: 1.11 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:56 $
+	# $Date: 2002-08-29 02:56:23 $
 	#
-	# $Id: bug_monitor.php,v 1.10 2002-08-25 21:04:56 jfitzell Exp $
+	# $Id: bug_monitor.php,v 1.11 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,7 +35,7 @@
 	$c_id = (integer)$f_id;
 
 	# get user information
-	$u_id = get_current_user_field( 'id' );
+	$u_id = current_user_get_field( 'id' );
 
 	if ( 'add' == $f_action ) {
 		# Make sure we aren't already monitoring this bug

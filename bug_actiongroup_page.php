@@ -17,7 +17,7 @@
 		foreach( $f_qsValues as $value ) {
 			$val = split( '=', $value );
 			if ( 'update' == substr( $val[0], 0, 6 ) ) {
-				if ( ON == get_current_user_pref_field( 'advanced_update' ) ) {
+				if ( ON == current_user_get_pref( 'advanced_update' ) ) {
 					print_meta_redirect( 'bug_update_advanced_page.php?f_id='.substr( $val[0], 7, strlen( $val[0] )-9 ), 0 );
 				} else {
 					print_meta_redirect( 'bug_update_page.php?f_id='.substr( $val[0], 7, strlen( $val[0] )-9 ), 0 );

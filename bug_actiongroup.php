@@ -15,7 +15,7 @@
 	function updateBugLite($p_id, $p_status, $p_request) {
 		global $g_mantis_bug_table;
 
-		$t_handler_id = get_current_user_field( 'id' );
+		$t_handler_id = current_user_get_field( 'id' );
 		$t_query = '';
 
 		# history treatment

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.2 2002-08-27 10:08:07 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.3 2002-08-29 02:56:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -26,7 +26,7 @@
 		if ( !empty( $g_string_cookie_val ) ) {
 			$t_user_id = auth_get_current_user_id();
 			# get user info
-			$t_enabled = get_current_user_field( 'enabled' );
+			$t_enabled = current_user_get_field( 'enabled' );
 			# check for access enabled
 			if ( OFF == $t_enabled ) {
 				print_header_redirect( 'logout_page.php' );
@@ -72,7 +72,7 @@
 			# set last visit cookie
 
 			# get user info
-			$t_enabled = get_current_user_field( 'enabled' );
+			$t_enabled = current_user_get_field( 'enabled' );
 
 			# check for acess enabled
 			if ( OFF == $t_enabled ) {
@@ -101,7 +101,7 @@
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
 			# get user info
-			$t_enabled = get_current_user_field( 'enabled' );
+			$t_enabled = current_user_get_field( 'enabled' );
 			# check for acess enabled
 			if ( OFF == $t_enabled ) {
 				print_header_redirect( 'logout_page.php' );
