@@ -50,6 +50,7 @@ Mantis ChangeLog
  * Fixed defects with updating project categories and versions.
  * Fixed problem deleting bugnotes.
  * Fixed problem in core_API.php where constants were used before declaration
+ * Fixed problem in core_user_API.php which caused an infinite redirect in some browsers (such as Mozilla).
  * Fixed problem with ambiguous column names in queries when using the text search or applying filters
  * Fixed problem with print_assign_to_option_list() not selecting the current user.
  * Fixed security hole in summary_graph_functions.php (Joao Gouveia: tharbad@kaotik.org)

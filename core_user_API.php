@@ -494,7 +494,7 @@
 		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
 		if ( $t_project_id != $g_project_cookie_val ) {
 			setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length, $g_cookie_path );
-			setcookie( $g_view_all_cookie );
+			setcookie( $g_view_all_cookie, '' );
 
 			$t_redirect_url = get_view_redirect_url( $p_bug_id, 1 );
 			print_header_redirect( $t_redirect_url );
