@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.175 2004-07-13 12:16:10 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.176 2004-07-15 13:32:11 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1218,7 +1218,8 @@
 		'unassigned'    => '2',
 		'reported'      => '3',
 		'resolved'      => '4',
-		'recent'	=> '5'
+		'recent_mod'	=> '5',
+		'monitored'	=> '6'
 	);
 
 	# Default page after Login or Set Project
