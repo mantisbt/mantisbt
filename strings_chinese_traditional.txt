@@ -1,0 +1,603 @@
+<?
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# This program is distributed under the terms and conditions of the GPL
+	# See the README and LICENSE files for details
+
+	# Chinese_Traditional: Pao-Hsi Huang
+?>
+<?
+	# General Strings
+	$s_go_back = "回上頁";
+	$s_proceed = "按這裡繼續";
+	$s_sql_error_detected = "嚴重錯誤: 發現 SQL 錯誤，請回報至 ";
+
+	$s_switch = "切換";
+	$s_logged_in_as = "登入為";
+
+	$s_user_no_longer_exists = "user no longer exists";
+
+	$s_administrator = "administrator";
+
+	# Enum Strings
+	$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
+	$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
+	$s_project_view_state_enum_string = "10:public,50:private";
+
+	$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
+	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
+	$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate";
+	$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
+	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
+	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
+	$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+
+	# Email Strings
+	$s_new_account_subject = "你的新使用者帳號";
+	$s_new_account_greeting = "很高興與歡迎來到臭蟲回報中心  這是你需要登入的資訊\n\n";
+	$s_new_account_url = "你可以在這裡登入臭蟲回報中心: ";
+	$s_new_account_username = "帳號: ";
+	$s_new_account_password = "密碼: ";
+	$s_new_account_message = "在登入這個站後，請記得變更你的密碼! 當然，您的密碼是以「單向編碼」的方式儲存，所以員工無法取得您的密碼，如果你忘記你的密碼，你一定要重設.\n\n";
+	$s_new_account_do_not_reply = "不要回覆此訊息.\n";
+
+	$s_reset_request_msg = "這有一個密碼重設的要求";
+	$s_account_name_msg = "你的帳戶姓名是";
+	$s_news_password_msg = "這裡是你的新密碼";
+
+	$s_new_bug_msg = "以下的 '新' 臭蟲已經被新增";
+	$s_email_bugnote_msg = "'臭蟲筆記' 已經被新增到這個臭蟲";
+	$s_email_resolved_msg = "以下的臭蟲已經被解決";
+	$s_email_close_msg = "The following bug has beeen CLOSED";
+	$s_email_feedback_msg = "以下的臭蟲需要你的 '回饋'";
+	$s_email_reopen_msg = "以下的臭蟲已經被 '重開'";
+	$s_email_assigned_msg = "以下的臭蟲已經被 '指定'";
+
+	$s_email_reporter = "回報人";
+	$s_email_handler = "主持人(Handler)";
+	$s_email_project = "專案";
+	$s_email_bug = "臭蟲編號";
+	$s_email_category = "類別";
+	$s_email_reproducibility = "出現頻率";
+	$s_email_severity = "嚴重性";
+	$s_email_priority = "優先權";
+	$s_email_status = "狀態";
+	$s_email_resolution = "解析度";
+	$s_email_duplicate = "複製";
+	$s_email_date_submitted = "回報日期";
+	$s_email_last_modified = "上次更新";
+	$s_email_summary =  "摘要";
+	$s_email_description = "說明";
+
+	# account_delete.php3
+	$s_account_protected_msg = "帳號被保護. 無法變更設定...";
+	$s_account_removed_msg = "你的帳號已經被移除...";
+
+	# account_delete_page.php3
+	$s_confirm_delete_msg = "您確定要刪除你的帳號?";
+	$s_delete_account_button = "刪除帳號";
+
+	# account_page.php3
+	$s_manage_profiles_link = "管理個人設定";
+	$s_change_preferences_link = "變更喜好設定";
+	$s_edit_account_title = "編輯帳號";
+	$s_username = "帳號";
+	$s_email = "Email";
+	$s_password = "密碼";
+	$s_confirm_password  = "確認密碼";
+	$s_access_level = "存取權限";
+	$s_update_user_button = "更新使用者";
+	# $s_delete_account_button
+
+	# account_prefs_page.php3
+	$s_default_account_preferences_title = "預設帳號喜好設定";
+	$s_default_project = "預設專案";
+	$s_advanced_report = "進階報告";
+	$s_advanced_view = "進階檢視";
+	$s_advanced_update = "Advanced Update";
+	$s_refresh_delay = "Refresh Delay";
+	$s_redirect_delay = "Redirect Delay";
+	$s_email_on_new = "Email on New";
+	$s_email_on_assigned = "Email on Assigned";
+	$s_email_on_feedback = "Email on Feedback";
+	$s_email_on_resolved = "Email on Resolved";
+	$s_email_on_closed = "Email on Closed";
+	$s_email_on_reopened = "Email on Reopened";
+	$s_email_on_bugnote_added = "Email on Bugnote Added";
+	$s_email_on_status_change = "Email on Status Change";
+	$s_email_on_priority_change = "Email on Priority Change";
+	$s_language = "Language";
+	$s_default_project = "預設專案";
+	$s_update_prefs_button = "更新喜好";
+	$s_reset_prefs_button = "重設喜好";
+
+	# account_prefs_reset.php3
+	$s_prefs_reset_msg = "喜好設定已經重設...";
+
+	# account_prefs_update.php3
+	$s_prefs_updated_msg = "喜好設定已經更新...";
+
+	# account_profile_add.php3
+	$s_profile_added_msg = "個人設定已新增...";
+
+	# account_profile_delete.php3
+	$s_profile_deleted_msg = "刪除個人設定...";
+
+	# account_profile_edit_page.php3
+	$s_edit_profile_title = "編輯個人設定";
+	$s_platform = "作業平台";
+	$s_operating_system = "作業系統";
+	$s_version = "版本/建立";
+	$s_additional_description = "額外說明";
+	$s_update_profile_button = "更新個人設定";
+
+	# account_profile_make_default.php3
+	$s_profile_defaulted_msg = "預設profile 更新...";
+
+	# account_profile_manage_page.php3
+	$s_add_profile_title = "新增個人設定";
+	$s_add_profile_button = "新增個人設定";
+	$s_edit_or_delete_profiles_title = "編輯或刪除個人設定";
+	$s_edit_profile = "編輯個人設定";
+	$s_make_default = "指定預設值";
+	$s_delete_profile = "刪除個人設定";
+	$s_select_profile = "選擇個人設定";
+	$s_submit_button = "送出";
+
+	# account_profile_update.php3
+	$s_profile_updated_msg = "個人設定更新...";
+
+	# account_update.php3
+	# $s_account_protected_msg
+	$s_account_updated_msg = "你的帳戶已經成功更新...";
+
+	# bug_assign.php3
+	$s_bug_assign_msg       = "臭蟲已經成功被指定...";
+
+	# bug_close.php3
+	$s_bug_close_msg       = "Bug has been closed...";
+
+	# bug_delete.php3
+	$s_bug_deleted_msg = "臭蟲已經被刪除...";
+
+	# bug_delete_page.php3
+	$s_delete_bug_sure_msg = "你確定要刪除此臭蟲?";
+	$s_delete_bug_button = "刪除臭蟲";
+
+	# bug_file_add.php3
+	$s_file_upload_msg = "File upload successful";
+
+	# bug_file_upload_inc.php3
+	$s_upload_file = "Upload File";
+	$s_select_file = "Select File";
+	$s_upload_file_button = "Upload File";
+
+	# bug_reopen_page.php3
+	$s_bug_reopened_msg = "臭蟲已經被重開...";
+	$s_reopen_add_bugnote_title = "新增臭蟲筆記理由 For 重開臭蟲";
+	$s_bugnote_add_reopen_button = "新增臭蟲筆記且重開臭蟲";
+
+	# bug_resolve_page.php3
+	$s_resolve_bug_title = "解決臭蟲";
+	# $s_resolution
+	# $s_duplicate_id
+	$s_resolve_bug_button = "解決臭蟲";
+
+	# bug_resolve_page2.php3
+	$s_bug_resolved_msg = "臭蟲已經被解決. 請在下方輸入臭蟲筆記...";
+	$s_resolve_add_bugnote_title = "新增臭蟲筆記理由 For 解決臭蟲";
+	$s_bugnote_add_resolve_button = "新增臭蟲筆記";
+
+	# bug_update.php3
+	$s_bug_updated_msg = "臭蟲已經成功被更新...";
+
+	# bug_update_advanced_page.php3
+	$s_back_to_bug_link = "回到臭蟲";
+	$s_update_simple_link = "簡易更新";
+	$s_updating_bug_advanced_title = "正在更新臭蟲資訊";
+	$s_id = "編號";
+	$s_category = "類別";
+	$s_severity = "嚴重性";
+	$s_reproducibility = "出現頻率";
+	$s_date_submitted = "回報日期";
+	$s_last_update = "上次更新";
+	$s_reporter = "回報人";
+	$s_assigned_to = "指定給";
+	$s_priority = "優先權";
+	$s_resolution = "解析度";
+	# $s_platform
+	$s_status = "狀態";
+	$s_duplicate_id = "複製編號";
+	$s_os = "作業系統";
+	$s_projection = "規劃等級";
+	$s_os_version = "版本";
+	$s_eta = "ETA";
+	$s_product_version = "產品版本";
+	$s_build = "建立";
+	$s_votes = "投票";
+	$s_summary = "摘要";
+	$s_description = "說明";
+	$s_steps_to_reproduce = "臭蟲發生的 步驟說明";
+	$s_additional = "額外";
+	$s_information = "資訊";
+	$s_update_information_button = "更新資訊";
+
+	# bug_update_page.php3
+	$s_update_advanced_link = "進階更新";
+	$s_updating_bug_simple_title = "正在更新臭蟲資訊";
+
+	# bug_vote_add.php3
+	$s_vote_added_msg = "投票已新增...";
+
+	# bugnote_add.php3
+	$s_bugnote_added_msg = "臭蟲筆記已新增...";
+
+	# bugnote_delete.php3
+	$s_bugnote_deleted_msg = "臭蟲筆記已刪除...";
+	$s_bug_notes_title = "臭蟲筆記";
+
+	# bugnote_inc.php
+	$s_no_bugnotes_msg = "沒有筆記附在次臭蟲身上";
+	$s_delete_link = "刪除";
+	$s_add_bugnote_title = "新增臭蟲筆記";
+	$s_add_bugnote_button = "新增臭蟲筆記";
+
+	# index.php3
+	$s_click_to_login = "點選這裡登入";
+
+	# login.php3
+	$s_login_error_msg = "這是一個錯誤: 你的帳號可能被註銷或您輸入的帳號/密碼輸入不正確";
+
+	# login_page.php3
+	$s_login_page_info = "歡迎來到臭蟲追蹤中心";
+	$s_login_title = "登入";
+	$s_save_login = "記住此次登入";
+	$s_choose_project = "選擇專案";
+	$s_login_button = "登入";
+	$s_signup_link = "註冊一個新帳號";
+
+	# login_select_proj_page.php3
+	$s_select_project_button = "選擇專案";
+
+	# logout_page.php3
+	$s_logged_out_title = "登出中...";
+	$s_redirecting = "...轉址中";
+	$s_here = "到這裡";
+
+	# main_page.php3
+	$s_open_and_assigned_to_me = "Open and assigned to me";
+	$s_open_and_reported_to_me = "Open and reported by me";
+	$s_newer_news_link = "更新的新聞";
+	$s_older_news_link = "稍早的新聞";
+
+	# manage_create_new_user.php3
+	$s_created_user_part1 = "建立使用者";
+	$s_created_user_part2 = "存取權限為";
+
+	# manage_create_user_page.php3
+	$s_create_new_account_title = "建立使用者帳號";
+	$s_verify_password = "確認密碼";
+	$s_enabled = "啟用";
+	$s_protected = "保護";
+	$s_create_user_button = "建立使用者";
+
+	# manage_page.php3
+	$s_hide_disabled = "Hide Disabled";
+	$s_filter_button = "Filter";
+	$s_create_new_account_link = "建立帳號";
+	$s_projects_link = "建立專案";
+	$s_documentation_link = "說明";
+	$s_new_accounts_title = "新帳號";
+	$s_1_week_title = "一週內";
+	$s_never_logged_in_title = "從未登入";
+	$s_manage_accounts_title = "管理帳號";
+	$s_p = "p";
+	$s_date_created = "建立日期";
+	$s_last_visit = "最後一次瀏覽";
+	$s_edit_user_link = "編輯使用者";
+
+	# manage_project_add.php3
+	$s_project_added_msg = "專案已新增...";
+
+	# manage_project_category_add.php3
+	$s_duplicate_category = "ERROR: This is a duplicate category.";
+	$s_category_added_msg = "類別已新增...";
+
+	# manage_project_category_delete.php3
+	$s_category_deleted_msg = "類別已刪除...";
+
+	# manage_project_category_delete_page.php3
+	$s_category_delete_sure_msg = "你確定要刪除此類別? 所有相關連的臭蟲將會被刪除!!";
+	$s_delete_category_button = "刪除類別";
+
+	# manage_project_category_edit_page.php3
+	$s_edit_project_category_title = "編輯專案 類別";
+	$s_update_category_button = "更新類別";
+
+	# manage_project_category_update.php3
+	$s_category_updated_msg = "類別已經成功更新...";
+
+	# manage_project_delete.php3
+	$s_project_deleted_msg = "專案已經成功刪除...";
+
+	# manage_project_delete_page.php3
+	$s_project_delete_msg = "你確定要刪除此專案和所有附屬的臭蟲?";
+	$s_project_delete_button = "刪除專案";
+
+	# manage_project_edit_page.php3
+	$s_edit_project_title = "編輯專案";
+	$s_project_name = "專案名稱";
+	$s_view_status = "檢視狀態";
+	$s_public = "公開";
+	$s_private = "私人";
+	$s_update_project_button = "更新專案";
+	$s_delete_project_button = "刪除專案";
+	$s_categories_and_version_title = "類別與版本資訊";
+	$s_categories = "Categories";
+	$s_add_category_button = "新增類別";
+	$s_versions = "版本";
+	$s_add_version_button = "新增版本";
+	$s_edit_link = "編輯";
+
+	# manage_project_menu_page.php3
+	$s_add_project_title = "新增專案";
+	$s_access_threshold = "Access Threshold";
+	$s_upload_file_path = "Upload File Path";
+	$s_add_project_button = "新增專案";
+	$s_projects_title = "所有專案";
+	$s_name = "名稱";
+
+	# manage_project_update.php3
+	$s_project_updated_msg = "專案已經成功更新...";
+
+	# manage_project_version_add.php3
+	$s_duplicate_version = "ERROR: This is a duplicate version.";
+	$s_version_added_msg = "版本已經成功已新增...";
+
+	# manage_project_version_delete.php3
+	$s_version_deleted_msg = "版本已經成功已刪除...";
+
+	# manage_project_version_delete_page.php3
+	$s_version_delete_sure = "你確定要刪除此版本? 所有相關連的臭蟲將會被刪除!!";
+	$s_delete_version_button = "刪除版本";
+
+	# manage_project_version_edit_page.php3
+	$s_edit_project_version_title = "編輯專案 版本";
+	$s_update_version_button = "更新版本";
+
+	# manage_project_version_update.php3
+	$s_version_updated_msg = "版本已經成功更新...";
+
+	# manage_user_delete.php3
+	$s_account_delete_protected_msg = "帳號受保護，無法刪除此帳號";
+	$s_account_deleted_msg = "帳號已刪除...";
+
+	# manage_user_delete_page.php3
+	$s_delete_account_sure_msg = "你確定要刪除此一帳號?";
+	# $s_delete_account_button
+
+	# manage_prune.php3
+	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
+
+	# manage_user_page.php3
+	$s_edit_user_title = "編輯使用者";
+	$s_reset_password_button = "重設密碼";
+	$s_delete_user_button = "刪除使用者";
+	$s_reset_password_msg = "重設密碼 sets the password to be blank.";
+
+	# manage_user_reset.php3
+	$s_account_reset_protected_msg = "帳號受保護. Cannot reset the password.";
+	$s_account_reset_msg = "帳號密碼重設...";
+
+	# manage_user_update.php3
+	$s_manage_user_protected_msg = "帳號受保護. 存取權限且保護功能已啟動. 否則，帳號將會被更新...";
+	$s_manage_user_updated_msg = "帳號成功更新...";
+
+	# menu_inc.php
+	$s_main_link = "首頁";
+	$s_view_bugs_link = "檢視臭蟲";
+	$s_report_bug_link = "回報臭蟲";
+	$s_summary_link = "摘要";
+	$s_account_link = "個人帳號";
+	$s_manage_link = "管理";
+	$s_edit_news_link = "編輯新聞";
+	$s_docs_link = "使用說明";
+	$s_logout_link = "登出";
+
+	# meta_inc.php
+
+	# news_add.php3
+	$s_news_added_msg = "新聞項目已新增...";
+
+	# news_delete.php3
+	$s_news_deleted_msg = "已刪除新聞項目...";
+
+	# news_delete_page.php3
+	$s_delete_news_sure_msg = "你確定要刪除此新聞項目?";
+	$s_delete_news_item_button = "刪除新聞項目";
+
+	# news_edit_page.php3
+	$s_edit_news_title = "編輯新聞";
+	$s_headline = "標題";
+	$s_body = "內文";
+	$s_update_news_button = "更新新聞";
+
+	# news_menu_page.php3
+	$s_add_news_title = "新增新聞";
+	$s_do_not_use = "不要使用";
+	$s_post_to = "發表到";
+	$s_post_news_button = "發表新聞";
+	$s_edit_or_delete_news_title = "編輯或刪除新聞";
+	$s_edit_post = "編輯發表";
+	$s_delete_post = "刪除發表";
+	$s_select_post = "選擇發表";
+
+	# news_update.php3
+	$s_news_updated_msg = "新聞項目已更新...";
+
+	# news_view_page.php3
+	$s_back_link = "Back";
+
+	# proj_doc_add.php3
+	$s_file_uploaded_msg = "File upload successful";
+
+	# proj_doc_add_page.php3
+	$s_upload_file_title = "Upload File";
+	$s_title = "Title";
+	$s_select_file = "Select File";
+	$s_upload_file_button = "Upload File";
+
+	# proj_doc_delete.php3
+	$s_project_file_deleted_msg = "Project file deleted";
+
+	# proj_doc_delete_page.php3
+	$s_confirm_file_delete_msg = "Are you sure you wish to delete this file?";
+
+	# proj_doc_edit_page.php3
+	$s_upload_file_title = "Upload File";
+	$s_filename = "Filename";
+	$s_file_update_button = "Update File";
+	$s_file_delete_button = "Delete File";
+
+	# proj_doc_page.php3
+	$s_project_documentation_title = "Project Documentation";
+	$s_user_documentation = "User Documentation";
+	$s_project_documentation = "Project Documentation";
+	$s_add_file = "Add File";
+
+	# proj_doc_update.php3
+	$s_project_document_updated = "Project update successful";
+
+	# proj_user_add.php3
+	$s_project_user_added_msg = "Successfully added user to project";
+
+	# proj_user_delete.php3
+	$s_project_removed_user_msg = "Successfully removed user from project";
+
+	# proj_user_delete_page.php3
+	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
+
+	# proj_user_menu_page.php3
+	$s_add_user_title = "Add user to project";
+	$s_add_user_button = "Add User";
+	$s_project_selection_title = "Project Selection";
+	$s_remove_link = "remove";
+
+	# proj_user_update.php3
+	$s_updated_user_msg = "Successfully updated user";
+
+	# report_add.php3
+	$s_report_add_error_msg = "錯誤發生: 有一個錯誤發生在你的回報中";
+	$s_must_enter_category = "您必須選擇類別";
+	$s_must_enter_severity = "您必須選擇嚴重性";
+	$s_must_enter_reproducibility = "您必須選擇出現頻率";
+	$s_must_enter_summary = "您必須輸入摘要";
+	$s_must_enter_description = "您必須輸入說明";
+	$s_report_more_bugs = "Report More Bugs";
+	$s_submission_thanks_msg = "感謝您的意見! ^_^";
+
+	# report_bug_advanced_page.php3
+	$s_simple_report_link = "簡易報告";
+	$s_enter_report_details_title = "輸入回報詳細資料";
+	$s_required = "必填";
+	$s_select_category = "選擇類別";
+	$s_select_reproducibility = "選擇出現頻率";
+	$s_select_severity = "選擇嚴重性";
+	$s_or_fill_in = "或填入";
+	$s_assign_to = "指定給";
+	$s_steps_to_reproduce = "臭蟲出現步驟";
+	$s_additional_information = "額外資訊";
+	$s_submit_report_button = "送出回報";
+	$s_check_report_more_bugs = "check to report more bugs";
+
+	# report_bug_page.php3
+	$s_advanced_report_link = "進階報告";
+	$s_upload_file = "Upload File";
+	$s_report_stay = "Report Stay";
+
+	# set_project.php3
+	$s_selected_project = "Selected project";
+	$s_valid_project_msg = "You must choose a valid project";
+
+	# show_source_page.php3
+	$s_show_source_for_msg = "顯示原始碼給";
+	$s_not_supported_part1 = "此版本";
+	$s_not_supported_part2 = "的 PHP 並沒有支援!!";
+
+	# signup.php3
+	$s_invalid_email = "是一個無效的 EMIAL 地址!!";
+	$s_duplicate_username = "帳號名稱已經有人使用了. 請選擇其他的使用者名稱";
+	$s_account_create_fail = "建立使用者帳號失敗";
+	$s_account_added = "Account was successfully added.";
+	$s_password_emailed_msg = "Your password will be emailed to you.";
+	$s_no_reponse_msg = "If you do not respond within a week your account may be deleted.";
+
+	# signup_page.php3
+	$s_signup_info = "選擇你的登入名稱和輸入您有效的Email位址，一個亂數產生的密碼將會送到您的信箱中!";
+	$s_signup_title = "註冊";
+	$s_signup_button = "註冊";
+
+	# site_settings_edit_page.php3
+	$s_edit_site_settings_title = "Edit Site Settings";
+	$s_save_settings_button = "Save Settings";
+
+	# site_settings_page.php3
+	$s_site_settings_title = "Site Settings";
+	$s_system_info_link = "System Info";
+	$s_site_settings_link = "Site Settings";
+
+	# site_settings_update.php3
+	$s_site_settings_updated_msg = "Site settings have been updated";
+
+	# summary_page.php3
+	$s_summary_title = "摘要";
+	$s_by_status = "依狀態";
+	$s_by_date = "依日期";
+	$s_by_severity = "依嚴重性";
+	$s_by_resolution = "依解析度";
+	$s_by_category = "依類別";
+	$s_by_priority = "依優先權";
+	$s_time_stats = "已解決臭蟲(天數)的時間狀態";
+	$s_longest_open_bug = "最長的開啟臭蟲";
+	$s_longest_open = "最長的開啟時間";
+	$s_average_time = "平均時間";
+	$s_total_time = "總共時間";
+	$s_developer_stats = "發展者狀態 (開啟/已解決/所有)";
+
+	# view_all_assign_bug_page.php3
+
+	# view_bug_all_page.php3
+	$s_all_bugs_link = "所有臭蟲";
+	$s_reported_bugs_link = "已回報臭蟲";
+	$s_assigned_bugs_link = "已指定臭蟲";
+	$s_unassigned_bugs_link = "Unassigned Bugs";
+	$s_any = "任意";
+	$s_show = "顯示";
+	$s_changed = "已變更(小時)";
+	$s_hide_closed = "Hide Closed";
+	$s_hide_resolved = "隱藏已解決";
+	$s_filter_button = "過濾條件";
+	$s_viewing_bugs_title = "檢視臭蟲";
+	$s_updated = "已更新";
+
+	# view_all_inc.php
+
+	# view_user_reported_bug_page.php3
+
+	# view_all_unassign_bug_page.php3
+
+	# view_bug_advanced_page.php3
+	$s_view_simple_link = "簡易檢視";
+	$s_viewing_bug_advanced_details_title = "檢視臭蟲進階詳細資料";
+	$s_product_build = "產品Build";
+	$s_system_profile = "系統說明";
+	$s_update_bug_button = "更新臭蟲";
+	$s_bug_assign_button    = "指定給我";
+	$s_reopen_bug_button = "重開臭蟲";
+
+	# view_bug_inc.php
+
+	# view_bug_page.php3
+	$s_view_advanced_link = "進階檢視";
+	$s_viewing_bug_simple_details_title = "檢視臭蟲詳細資料(簡式)";
+?>
