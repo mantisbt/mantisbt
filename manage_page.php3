@@ -48,19 +48,6 @@
 
 <? print_manage_menu( $g_manage_page ) ?>
 
-<p>
-<div align="center">
-<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
-<tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_new_accounts_title ?> (<? echo $s_1_week_title ?>)</b>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="<? echo $g_primary_color_dark ?>">
 <?
 	### Get the user data in $f_sort order
 	$days_old = 7;
@@ -71,15 +58,26 @@
 //		WHERE UNIX_TIMESTAMP(date_created)>$one_week_ago
 	$result = db_query( $query );
 	$new_user_count = db_num_rows( $result );
+?>
+<p>
+<div align="center">
+<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<tr>
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table width="100%">
+	<tr>
+		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
+			<b><? echo $s_new_accounts_title ?> (<? echo $s_1_week_title ?>)</b> <? echo " [".$new_user_count."]" ?>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="<? echo $g_primary_color_dark ?>">
+<?
 	for ($i=0;$i<$new_user_count;$i++) {
 		$row = db_fetch_array( $result );
 		$t_username = $row["username"];
 
-		if ( $i+1 < $new_user_count ) {
-			echo $t_username." : ";
-		} else {
-			echo $t_username;
-		}
+		echo $t_username." : ";
 	}
 ?>
 		</td>
@@ -90,19 +88,6 @@
 </table>
 </div>
 
-<p>
-<div align="center">
-<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
-<tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_never_logged_in_title ?></b> <? print_bracket_link( $g_manage_prune, $s_prune_accounts ) ?>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="<? echo $g_primary_color_dark ?>">
 <?
 	### Get the user data in $f_sort order
 	$query = "SELECT *
@@ -111,15 +96,26 @@
 		ORDER BY date_created";
 	$result = db_query( $query );
 	$user_count = db_num_rows( $result );
+?>
+<p>
+<div align="center">
+<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<tr>
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table width="100%">
+	<tr>
+		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
+			<b><? echo $s_never_logged_in_title ?></b> <? echo " [".$user_count."]" ?> <? print_bracket_link( $g_manage_prune, $s_prune_accounts ) ?>
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor="<? echo $g_primary_color_dark ?>">
+<?
 	for ($i=0;$i<$user_count;$i++) {
 		$row = db_fetch_array( $result );
 		$t_username = $row["username"];
 
-		if ( $i+1 < $user_count ) {
-			echo $t_username." : ";
-		} else {
-			echo $t_username;
-		}
+		echo $t_username." : ";
 	}
 ?>
 		</td>
@@ -149,7 +145,22 @@
 </table>
 </form>
 </div>
+<?
+	### Get the user data in $f_sort order
+	if ( $f_hide==0 ) {
+		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
+				FROM $g_mantis_user_table
+				ORDER BY '$f_sort' $f_dir";
+	} else {
+		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
+				FROM $g_mantis_user_table
+				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old')
+				ORDER BY '$f_sort' $f_dir";
+	}
 
+    $result = db_query($query);
+	$user_count = db_num_rows( $result );
+?>
 <p>
 <div align="center">
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
@@ -158,7 +169,7 @@
 	<table width="100%">
 	<tr>
 		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_manage_accounts_title ?></b>
+			<b><? echo $s_manage_accounts_title ?></b> <? echo "[".$user_count."]" ?>
 		</td>
 	</tr>
 	<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
@@ -194,20 +205,6 @@
 		</td>
 	</tr>
 <?
-	### Get the user data in $f_sort order
-	if ( $f_hide==0 ) {
-		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
-				FROM $g_mantis_user_table
-				ORDER BY '$f_sort' $f_dir";
-	} else {
-		$query = "SELECT *,  UNIX_TIMESTAMP(date_created) as date_created
-				FROM $g_mantis_user_table
-				WHERE (TO_DAYS(NOW()) - TO_DAYS(last_visit) < '$days_old')
-				ORDER BY '$f_sort' $f_dir";
-	}
-
-    $result = db_query($query);
-	$user_count = db_num_rows( $result );
 	for ($i=0;$i<$user_count;$i++) {
 		### prefix user data with u_
 		$row = db_fetch_array($result);
