@@ -54,7 +54,7 @@
 						}
 						break;
 			case DATABASE:
-						$t_content = addslashes( fread ( fopen( $f_file, 'rb' ), $t_file_size ) );
+						$t_content = addslashes( fread ( fopen( $f_tmp_name, 'rb' ), $t_file_size ) );
 						$query = "INSERT INTO mantis_project_file_table
 								(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 								VALUES
