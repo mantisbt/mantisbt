@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.14 2002-09-16 02:36:33 jfitzell Exp $
+	# $Id: project_api.php,v 1.15 2002-09-16 06:53:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -180,8 +180,8 @@
 
 		db_query( $query );
 
-		# db_query errors on failure so:
-		return true;
+		# return the id of the new project
+		return db_insert_id();
 	}
 	# --------------------
 	# Delete a project
