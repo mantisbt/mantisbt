@@ -398,7 +398,8 @@
 	$s_edit_user_title = "Ret Bruger";
 	$s_reset_password_button = "Nulstil Password";
 	$s_delete_user_button = "Slet Bruger";
-	$s_reset_password_msg = "Nulstil Password stiller password til at v&aelig;re tomt.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Nulstil Password stiller password til at v&aelig;re tomt.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Konto beskyttet. Kan ikke nulstille password.";

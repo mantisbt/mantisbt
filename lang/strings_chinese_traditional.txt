@@ -397,7 +397,8 @@
 	$s_edit_user_title = "編輯使用者";
 	$s_reset_password_button = "重設密碼";
 	$s_delete_user_button = "刪除使用者";
-	$s_reset_password_msg = "重設密碼 sets the password to be blank.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "重設密碼 sets the password to be blank.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "帳號受保護. Cannot reset the password.";

@@ -397,7 +397,8 @@
 	$s_edit_user_title = "Redigere bruker";
 	$s_reset_password_button = "Nullstille passord";
 	$s_delete_user_button = "Slette bruker";
-	$s_reset_password_msg = "Nullstille passord setter passordet til blank.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Nullstille passord setter passordet til blank.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Kontoen er beskyttet. Kan ikke nullstille passord.";

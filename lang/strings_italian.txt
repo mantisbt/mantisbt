@@ -399,7 +399,8 @@
 	$s_edit_user_title = "Elimina Utente";
 	$s_reset_password_button = "Resetta Password";
 	$s_delete_user_button = "Elimina Utente";
-	$s_reset_password_msg = "Resetta le Password e imposta il valore a 'nullo'.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Resetta le Password e imposta il valore a 'nullo'.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Account Protetto. Non e' possibile resettare la password.";

@@ -403,7 +403,8 @@
 	$s_edit_user_title = "Edycja U¿ytkownika";
 	$s_reset_password_button = "Nowe has³o";
 	$s_delete_user_button = "Usuñ U¿ytkownika";
-	$s_reset_password_msg = "Po operacji 'Nowe has³o' u¿ytkownik nie bêdzie musia³ podawaæ has³a przy logowaniu.";
+	$s_reset_password_msg = "Operacja 'Nowe has³o' ustawia losowo wygenerowane has³o";
+	$s_reset_password_msg2 = "Po operacji 'Nowe has³o' u¿ytkownik nie bêdzie musia³ podawaæ has³a przy logowaniu.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Konto jest zabezpieczone. Nie mo¿na przypisaæ nowego has³a.";

@@ -101,7 +101,13 @@
 
 <p>
 <div align="center">
-	<?php echo $s_reset_password_msg ?>
+<?php
+	if ( ON == $g_allow_signup ) {
+		PRINT "$s_reset_password_msg";
+	} else {
+		PRINT "$s_reset_password_msg2";
+	}
+?>
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

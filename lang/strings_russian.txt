@@ -397,7 +397,8 @@
 	$s_edit_user_title = "Редактирование пользователя";
 	$s_reset_password_button = "Обнулить пароль";
 	$s_delete_user_button = "Удалить пользователя";
-	$s_reset_password_msg = "Обнуление пароле привело к тому, что сейчас пароль равен пустой строке.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Обнуление пароле привело к тому, что сейчас пароль равен пустой строке.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Аккаунт защищен. невозможно обнулить пароль.";

@@ -398,7 +398,8 @@
 	$s_edit_user_title = "Editar Usuario";
 	$s_reset_password_button = "Restear Clave";
 	$s_delete_user_button = "Eliminar Usuario";
-	$s_reset_password_msg = "Resetar la clave significa blanquear clave.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Resetar la clave significa blanquear clave.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Cuenta Protegida. Imposible resetear la clave.";

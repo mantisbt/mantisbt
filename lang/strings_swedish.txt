@@ -397,7 +397,8 @@
 	$s_edit_user_title = "Redigera användarkonto";
 	$s_reset_password_button = "Nollställ lösenord";
 	$s_delete_user_button = "Ta bort kontot";
-	$s_reset_password_msg = "Nollställ lösenordet sätter ett tomt lösenord.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Nollställ lösenordet sätter ett tomt lösenord.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Kontot skyddat. Kan inte nollställa lösenordet.";

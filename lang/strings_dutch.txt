@@ -397,7 +397,8 @@
 	$s_edit_user_title = "Pas gebruiker aan";
 	$s_reset_password_button = "Zet wachtwoord terug op begininstellingen";
 	$s_delete_user_button = "Verwijder gebruiker";
-	$s_reset_password_msg = "Zetten van wachtwoord op begininstellingen zet het wachtwoord op blanco.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Zetten van wachtwoord op begininstellingen zet het wachtwoord op blanco.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Account beschermt. Wachtwoord kan niet op begininstellingen worden teruggezet.";

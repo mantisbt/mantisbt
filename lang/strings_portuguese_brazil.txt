@@ -397,7 +397,8 @@
 	$s_edit_user_title = "Editar usuário";
 	$s_reset_password_button = "Limpar Senha";
 	$s_delete_user_button = "Remover Usuário";
-	$s_reset_password_msg = "Limpar Senha configura a senha para em branco.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Limpar Senha configura a senha para em branco.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Conta Protegida. Não é possível limpar a senha.";

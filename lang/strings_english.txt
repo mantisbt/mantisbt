@@ -402,7 +402,8 @@
 	$s_edit_user_title = "Edit User";
 	$s_reset_password_button = "Reset Password";
 	$s_delete_user_button = "Delete User";
-	$s_reset_password_msg = "Reset Password sets the password to be blank.";
+	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg2 = "Reset Password sets the password to be blank.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Account protected. Cannot reset the password.";
