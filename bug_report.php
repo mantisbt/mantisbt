@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.7 2002-12-17 11:35:28 jfitzell Exp $
+	# $Id: bug_report.php,v 1.8 2002-12-22 01:55:44 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -40,7 +40,7 @@
 	$f_steps_to_reproduce	= gpc_get_string( 'f_steps_to_reproduce', '' );
 	$f_additional_info		= gpc_get_string( 'f_additional_info', '' );
 
-	$f_file					= gpc_get_file( 'f_file' );
+	$f_file					= gpc_get_file( 'f_file', null );
 	$f_report_stay			= gpc_get_bool( 'f_report_stay' );
 
 	$t_reporter_id		= auth_get_current_user_id();
