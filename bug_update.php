@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.67 2004-08-04 15:02:22 vboctor Exp $
+	# $Id: bug_update.php,v 1.68 2004-08-18 17:13:01 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,6 +28,7 @@
 
 	# extract current extended information
 	$t_bug_data = bug_get( $f_bug_id, true );
+	$t_old_bug_status = $t_bug_data->status;
 
 	$t_bug_data->reporter_id		= gpc_get_int( 'reporter_id', $t_bug_data->reporter_id );
 	$t_bug_data->handler_id			= gpc_get_int( 'handler_id', $t_bug_data->handler_id );
@@ -55,6 +56,7 @@
 
 	$f_private						= gpc_get_bool( 'private' );
 	$f_bugnote_text					= gpc_get_string( 'bugnote_text', '' );
+	$f_close_now					= gpc_get_string( 'close_now', false );
 
 	# Handle auto-assigning
 	if ( ( NEW_ == $t_bug_data->status )
@@ -99,14 +101,36 @@
 		}
 	}
 
-	# Add a bugnote if there is one
-	$f_bugnote_text = trim( $f_bugnote_text );
-	if ( !is_blank( $f_bugnote_text ) ) {
-		bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
-	}
+	switch ( $t_bug_data->status ) {
+		case config_get( 'bug_resolved_status_threshold' ):
+			bug_resolve( $f_bug_id, $t_bug_data->resolution, $t_bug_data->fixed_in_version, 
+						$f_bugnote_text, $t_bug_data->duplicate_id, $t_bug_data->handler_id);
 
-	# Update the bug entry
-	bug_update( $f_bug_id, $t_bug_data, true );
+			if ( $f_close_now ) {
+				bug_set_field( $f_bug_id, 'status', CLOSED );
+			}
+			break;
+
+		case CLOSED:
+			bug_close( $f_bug_id, $f_bugnote_text );
+			break;
+
+		case config_get( 'bug_reopen_status' ):
+			if ( $t_old_bug_status >= config_get( 'bug_resolved_status_threshold' ) ) {
+				bug_reopen( $f_bug_id, $f_bugnote_text );
+				break;
+			} # else fall through to default
+
+		default:				
+			# Add a bugnote if there is one
+			if ( !is_blank( $f_bugnote_text ) ) {
+				bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
+			}
+
+			# Update the bug entry
+			bug_update( $f_bug_id, $t_bug_data, true );
+			break;
+	}
 
 	helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
   
