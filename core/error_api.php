@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.33 2004-08-15 22:21:53 thraxisp Exp $
+	# $Id: error_api.php,v 1.34 2004-08-22 01:19:30 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -59,7 +59,7 @@
 				$t_error_type = 'SYSTEM NOTICE';
 				$t_error_description = $p_error;
 				if ( ON == config_get( 'show_notices' ) ) {
-					$t_method = 'halt'; // 'inline';
+					$t_method = 'inline';
 				}
 				break;
 			case E_USER_ERROR:

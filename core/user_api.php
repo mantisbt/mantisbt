@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.77 2004-08-14 16:46:20 thraxisp Exp $
+	# $Id: user_api.php,v 1.78 2004-08-22 01:19:31 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -136,7 +136,50 @@
 	}
 
 	# --------------------
-	# Check if the username is a valid username (does not account for uniqueness)
+	# Check if the realname is a valid username (does not account for uniqueness)
+	# Return 0 if it is invalid, The number of matches + 1 
+	function user_is_realname_unique( $p_username, $p_realname ) {
+		$c_realname = db_prepare_string( $p_realname );
+		# allow realname to match username
+		if ( $p_realname <> $p_username ) {
+			# check realname does not match an existing username
+			if ( user_get_id_by_name( $p_realname ) ) {
+				return 0;
+			}
+
+			# check to see if the realname is unique
+			$t_user_table 		= config_get( 'mantis_user_table' );
+			$query = "SELECT id
+				FROM $t_user_table
+				WHERE realname='$c_realname'";
+			$result = db_query( $query );
+			$t_count = db_num_rows( $result );
+			if ( $t_count > 0 ) {
+				# set flags for non-unique realnames
+				if ( config_get( 'differentiate_duplicates' ) ) {
+					user_set_field( $t_user_id, 'duplicate_realname', ON );
+					for ( $i=0 ; $i < $count ; $i++ ) {
+						$t_id = db_result( $result, $i );
+						user_set_field( $t_id, 'duplicate_realname', ON );
+					}
+				}
+			}
+		}
+		return $t_count + 1;
+	}
+
+	# --------------------
+	# Check if the realname is a unique
+	# Trigger an error if the username is not valid
+	function user_ensure_realname_unique( $p_username, $p_realname ) {
+		if ( 0 == user_is_name_valid( $p_username, $p_realname ) ) {
+			trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
+		}
+	}
+
+	# --------------------
+	# Check if the username is a valid username (does not account for uniqueness) 
+	#  realname can match
 	# Return true if it is, false otherwise
 	function user_is_name_valid( $p_username ) {
 		# The DB field is only 32 characters
@@ -160,7 +203,7 @@
 		if ( !user_is_name_valid( $p_username ) ) {
 			trigger_error( ERROR_USER_NAME_INVALID, ERROR );
 		}
-	}
+	}	
 
 	# --------------------
 	# return whether user is monitoring bug for the user id and bug id
@@ -247,6 +290,7 @@
 
 		user_ensure_name_valid( $p_username );
 		user_ensure_name_unique( $p_username );
+		user_ensure_realname_unique( $p_username, $p_realname );
 		email_ensure_valid( $p_email );
 
 		$t_seed				= $p_email . $p_username;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.37 2004-07-30 21:13:30 thraxisp Exp $
+	# $Id: account_update.php,v 1.38 2004-08-22 01:19:29 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -49,7 +49,6 @@
 	# @@@ Listing what fields were updated is not standard behaviour of Mantis
 	#     it also complicates the code.
 
-	echo lang_get( 'operation_successful' ) . '<br />';
 	if ( $f_email != user_get_email( $t_user_id ) ) {
 		user_set_email( $t_user_id, $f_email );
 		echo lang_get( 'email_updated' ) . '<br />';
@@ -58,33 +57,14 @@
 	if ( $f_realname != user_get_field( $t_user_id, 'realname' ) ) {
 		# checks for problems with realnames
 		$t_username = user_get_field( $t_user_id, 'username' );
-
-		# allow realname to match username
-		if ( $f_realname <> $t_username ) {
-			# check realname does not match an existing username
-			if ( user_get_id_by_name( $f_realname ) ) {
+		switch ( user_is_realname_unique( $t_username, $f_realname ) ) {
+			case 0:
 				trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
-			}
-
-			# check to see if the realname is unique
-			$t_user_table 		= config_get( 'mantis_user_table' );
-			$query = "SELECT id
-				FROM $t_user_table
-				WHERE realname='$c_realname'";
-			$result = db_query( $query );
-			$count = db_num_rows( $result );
-			if ( $count > 0 ) {
-				# set flags for non-unique realnames
-				$t_count = db_num_rows( $result );
+				break;
+			case 1:
+				break;
+			default:			
 				echo lang_get( 'realname_duplicated' ) . '<br />';
-				if ( config_get( 'differentiate_duplicates' ) ) {
-					user_set_field( $t_user_id, 'duplicate_realname', ON );
-					for ( $i=0 ; $i < $count ; $i++ ) {
-						$t_id = db_result( $result, $i );
-						user_set_field( $t_id, 'duplicate_realname', ON );
-					}
-				}
-			}
 		}
 		user_set_realname( $t_user_id, $f_realname );
 		echo lang_get( 'realname_updated' ) . '<br />';
@@ -102,6 +82,7 @@
 		}
 	}
 
+	echo lang_get( 'operation_successful' ) . '<br />';
 	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
 	echo '</div>';
 	html_page_bottom1( __FILE__ );
