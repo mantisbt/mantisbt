@@ -35,8 +35,8 @@
 		WHERE username='$c_username'";
     $result = db_query( $query );
     if ( db_num_rows( $result ) > 0 ) {
-    	PRINT $f_username $s_duplicate_username.'<p>';
-		PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
+    	PRINT $f_username . $s_duplicate_username . '<p>';
+	PRINT "<a href=\"signup_page.php\">$s_proceed</a>";
     	exit;
     }
 
