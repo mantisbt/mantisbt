@@ -6,13 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.46 2004-04-08 20:52:50 prescience Exp $
+	# $Id: file_api.php,v 1.47 2004-05-21 21:42:51 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
+
+	$g_cache_file_count = array();
 
 	### File API ###
 
@@ -33,15 +35,36 @@
 	# --------------------
 	# Check the number of attachments a bug has (if any)
 	function file_bug_attachment_count( $p_bug_id ) {
+		global $g_cache_file_count;
+
 		$c_bug_id			= db_prepare_int( $p_bug_id );
 		$t_bug_file_table	= config_get( 'mantis_bug_file_table' );
 
-		$query = "SELECT bug_id
+		# First check if we have a cache hit
+		if ( isset( $g_cache_file_count[ $p_bug_id ] ))
+			return $g_cache_file_count[ $p_bug_id ];
+
+		# If there is no cache hit, check if there is anything in
+		#   the cache. If the cache isn't empty and we didn't have
+		#   a hit, then there are not attachments for this bug.
+		if ( count( $g_cache_file_count ) > 0 )
+			return 0;
+
+		# Otherwise build the cache and return the attachment count
+		#   for the given bug (if any).
+		$query = "SELECT bug_id, COUNT(bug_id) AS attachments
 				FROM $t_bug_file_table
-				WHERE bug_id='$c_bug_id'";
+				GROUP BY bug_id";
 		$result = db_query( $query );
 
-		return db_num_rows( $result );
+		$t_file_count = 0;
+		while( $row = db_fetch_array( $result )) {
+			$g_cache_file_count[ $row['bug_id'] ] = $row['attachments'];
+			if ( $p_bug_id == $row['bug_id'] )
+				$t_file_count = $row['attachments'];
+		}
+
+		return $t_file_count;
 	}
 
 	# --------------------

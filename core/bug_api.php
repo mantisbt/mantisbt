@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.59 2004-05-17 11:39:07 vboctor Exp $
+	# $Id: bug_api.php,v 1.60 2004-05-21 21:42:51 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -83,7 +83,7 @@
 			return $g_cache_bug[$c_bug_id];
 		}
 
-		$query = "SELECT *, date_submitted, last_updated
+		$query = "SELECT *
 				  FROM $t_bug_table
 				  WHERE id='$c_bug_id'";
 		$result = db_query( $query );
@@ -105,6 +105,20 @@
 		$g_cache_bug[$c_bug_id] = $row;
 
 		return $row;
+	}
+
+	# --------------------
+	# Inject a bug into the bug cache
+	function bug_add_to_cache( $p_bug_row ) {
+		global $g_cache_bug;
+
+		if ( !is_array( $p_bug_row ) )
+			return false;
+
+		$c_bug_id = db_prepare_int( $p_bug_row['id'] );
+		$g_cache_bug[ $c_bug_id ] = $p_bug_row;
+
+		return true;
 	}
 
 	# --------------------
@@ -693,6 +707,30 @@
 		} else {
 			return db_unixtimestamp( $row );
 		}
+	}
+
+	# --------------------
+	# return the timestamp for the most recent time at which a bugnote
+	#  associated wiht the bug was modified and the total bugnote 
+	#  count in one db query
+	function bug_get_bugnote_stats( $p_bug_id ) {
+		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$t_bugnote_table	= config_get( 'mantis_bugnote_table' );
+
+		$query = "SELECT last_modified
+				  FROM $t_bugnote_table
+				  WHERE bug_id='$c_bug_id'
+				  ORDER BY last_modified DESC";
+		$result = db_query( $query );
+		$row = db_fetch_array( $result );
+
+		if ( false === $row )
+			return false;
+
+		$t_stats['last_modified'] = db_unixtimestamp( $row['last_modified'] );
+		$t_stats['count'] = db_num_rows( $result );
+
+		return $t_stats;
 	}
 
 	#===================================

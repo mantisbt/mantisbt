@@ -6,12 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.34 2004-05-18 19:32:56 narcissus Exp $
+	# $Id: filter_api.php,v 1.35 2004-05-21 21:42:51 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'bug_api.php' );
 
 	###########################################################################
 	# Filter API
@@ -511,7 +512,9 @@
 			$row = db_fetch_array( $result2 );
 			$row['date_submitted'] = db_unixtimestamp ( $row['date_submitted'] );
 			$row['last_updated'] = db_unixtimestamp ( $row['last_updated'] );
+	
 			array_push( $rows, $row );
+			bug_add_to_cache( $row );
 		}
 
 		return $rows;

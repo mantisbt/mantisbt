@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.137 2004-05-18 12:28:50 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.138 2004-05-21 21:42:50 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -180,7 +180,13 @@
 		$status_color = get_status_color( $v_status );
 
 		# grab the bugnote count
-		$bugnote_count = bug_get_bugnote_count( $v_id );
+		$t_bugnote_stats = bug_get_bugnote_stats( $v_id );
+		if ( NULL != $t_bugnote_stats ) {
+			$bugnote_count = $t_bugnote_stats['count'];
+			$v_bugnote_updated = $t_bugnote_stats['last_modified'];
+		} else {
+			$bugnote_count = 0;
+		}
 
 		# Check for attachments
 		$t_attachment_count = 0;
@@ -190,10 +196,6 @@
 
 		# grab the project name
 		$project_name = project_get_field( $v_project_id, 'name' );
-
-		if ( $bugnote_count > 0 ) {
-			$v_bugnote_updated = bug_get_newest_bugnote_timestamp( $v_id );
-		}
 ?>
 <tr bgcolor="<?php echo $status_color ?>">
 	<?php # -- Checkbox -- ?>
