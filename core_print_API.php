@@ -249,7 +249,8 @@
 				p.access_min<='$t_access_level') OR
 				(p.enabled=1 AND
 				p.view_state='$t_prv' AND
-				u.user_id='$t_user_id')
+				u.user_id='$t_user_id'  AND
+                            u.project_id=p.id)
 			ORDER BY p.name";
 		$result = db_query( $query );
 		$project_count = db_num_rows( $result );
