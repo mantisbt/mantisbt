@@ -84,8 +84,8 @@
     <td class="small-caption">
         <?php echo $s_search ?>
     </td>
-<!--	<td class="small-caption" colspan="2">Start Date</td>
-	<td class="small-caption" colspan="2">End Date</td>-->
+	<td class="small-caption" colspan="2"><!--Start Date--></td>
+	<td class="small-caption" colspan="2"><!--End Date--></td>
 	<td class="small-caption" colspan="7">
 		&nbsp;
 	</td>
@@ -94,7 +94,8 @@
 	<td>
 	    <input type="text" size="16" name="f_search" value="<?php echo $f_search; ?>">
 	</td>
-<!--	<td class="left" colspan="2">
+	<td class="left" colspan="2">
+	<!--	
 		<select name="f_start_month">
 			<?php print_month_option_list( $f_start_month ) ?>
 		</select>
@@ -104,8 +105,10 @@
 		<select name="f_start_year">
 			<?php print_year_option_list( $f_start_year ) ?>
 		</select>
+	-->
 	</td>
 	<td class="left" colspan="2">
+	<!--
 		<select name="f_end_month">
 			<?php print_month_option_list( $f_end_month ) ?>
 		</select>
@@ -115,7 +118,8 @@
 		<select name="f_end_year">
 			<?php print_year_option_list( $f_end_year ) ?>
 		</select>
-	</td>-->
+	-->
+	</td>
 	<td class="right" colspan="7">
 		<input type="submit" name="f_filter" value="<?php echo $s_filter_button ?>">
 		<input type="submit" name="f_csv" value="<?php echo $s_csv_export ?>">
