@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.55 2004-07-22 13:42:02 vboctor Exp $
+	# $Id: string_api.php,v 1.56 2004-08-01 05:53:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -46,6 +46,16 @@
 		}
 		return implode( "\n", $lines );
 	}
+	# --------------------
+	# Prepare a string to be printed without being broken into multiple lines
+	function string_no_break( $p_string ) {
+		if ( strpos( $p_string, ' ' ) !== false ) {
+			return "<nobr>$p_string</nobr>";
+		} else {
+			return $p_string;
+		}
+	}
+
 	# --------------------
 	# Prepare a string for display to HTML
 	function string_display( $p_string ) {

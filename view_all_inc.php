@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.141 2004-05-26 05:25:18 int2str Exp $
+	# $Id: view_all_inc.php,v 1.142 2004-08-01 05:53:01 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -241,7 +241,8 @@
 		if ( $t_enable_sponsorship == ON ) {
 			echo "\t<td class=\"right\">";
 			if ( $v_sponsorship_total > 0 ) {
-				echo sponsorship_format_amount( $v_sponsorship_total );
+				$t_sponsorship_amount = sponsorship_format_amount( $v_sponsorship_total );
+				echo string_no_break( $t_sponsorship_amount );
 			}
 			echo "</td>\n";
 		}

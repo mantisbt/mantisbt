@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.16 2004-08-01 05:20:08 vboctor Exp $
+	# $Id: relationship_api.php,v 1.17 2004-08-01 05:53:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -392,11 +392,12 @@
 				# get the information from the related bug and prepare the link
 				$t_bug = bug_prepare_display( bug_get( $t_related_bug_id, true ) );
 				$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
+				$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
 
-				$t_relationship_info_html = $t_relationship_descr . '</td>';
+				$t_relationship_info_html = '<nobr>' . $t_relationship_descr . '</nobr></td>';
 				if ( $p_html_preview == false ) {
 					$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
-					$t_relationship_info_html .= '<td bgcolor="' . get_status_color( $t_bug->status ) . '">' . $t_status . '&nbsp;</td>' . $t_td;
+					$t_relationship_info_html .= '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>' . $t_td;
 				}
 				else {
 					$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';
@@ -498,7 +499,7 @@
 		}
 
 		if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="print"><td class="print" colspan=5><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+			$t_summary .= '<tr class="print"><td class="print" colspan="5"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
 		}
 
 		if ( !is_blank( $t_summary ) ) {
