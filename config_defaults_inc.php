@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.236 2004-12-18 19:17:57 bpfennigschmidt Exp $
+	# $Id: config_defaults_inc.php,v 1.237 2004-12-23 14:43:15 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1298,10 +1298,10 @@
 	#	);
 
 	$g_display_errors = array(
-		E_WARNING => 'none',
+		E_WARNING => 'inline',
 		E_NOTICE => 'none',
 		E_USER_ERROR => 'halt',
-		E_USER_WARNING => 'none',
+		E_USER_WARNING => 'inline',
 		E_USER_NOTICE => 'none'
 	);
 
