@@ -7,14 +7,13 @@
 
 	# Italian: Luca Pescatore, l.pescatore@network.it
 	# Italian: Marco Vassura,  m.vassura@itools.it
-	# Italian: Stefano Mazzocchi, stefano@apache.org
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.61 $
-	# $Author: jlatour $
-	# $Date: 2004-02-26 13:24:11 $
+	# $Revision: 1.62 $
+	# $Author: vboctor $
+	# $Date: 2004-02-26 22:25:20 $
 	#
-	# $Id: strings_italian.txt,v 1.61 2004-02-26 13:24:11 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.62 2004-02-26 22:25:20 vboctor Exp $
 	###########################################################################
 ?>
 <?php
