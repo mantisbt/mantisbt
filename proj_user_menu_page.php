@@ -37,7 +37,12 @@
 <?php
 	$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
 	if ( PUBLIC == $t_project_view_state ) {
-		echo $s_public_project_msg;
+?>
+<p>
+<div align="center">
+<?php echo $s_public_project_msg ?>
+</div>
+<?php
 	} else {
 ?>
 <p>
