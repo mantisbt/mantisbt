@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.13 2003-02-15 22:20:32 vboctor Exp $
+	# $Id: obsolete.php,v 1.14 2003-02-16 13:53:34 jlatour Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -39,6 +39,10 @@
 	config_obsolete( 'allow_html_tags', 'html_valid_tags' );
 	config_obsolete( 'html_tags', 'html_valid_tags' );
 	config_obsolete( 'show_user_email', 'show_user_email_threshold' );
+	
+	config_obsolete( 'manage_custom_fields', 'manage_custom_fields_threshold' );
+	config_obsolete( 'allow_bug_delete_access_level', 'delete_bug_threshold' );
+	config_obsolete( 'bug_move_access_level', 'move_bug_threshold' );
 	
 	config_obsolete( 'php', '' );
 	config_obsolete( 'use_experimental_custom_fields', '' );
