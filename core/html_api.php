@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.30 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: html_api.php,v 1.31 2003-01-08 02:37:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -29,7 +29,7 @@
 		include( $g_meta_include_file );
 	}
 	# --------------------
-	# second part of the html, comes after the meta tags
+	# core part of page top but without login info and menu - used in login pages
 	function print_page_top2a() {
 		global $g_page_title, $g_top_include_page;
 
@@ -40,6 +40,7 @@
 	}
 	# --------------------
 	# second part of the html, comes after the meta tags
+	#  includes the complete page top, including print_page_top2a()
 	function print_page_top2() {
 		print_page_top2a();
 		print_login_info();
@@ -51,8 +52,18 @@
 	}
 	# --------------------
 	# comes at the bottom of the html
-	# $p_file should always be the __FILE__ variable. This is passed to show source.
+	# $p_file should always be the __FILE__ variable. This is passed to show source
 	function print_page_bot1( $p_file = null ) {
+		if ( config_get( 'show_footer_menu' ) ) {
+			echo '<br />';
+			print_menu();
+		}
+
+		print_page_bot1a( $p_file );
+	}
+	# --------------------
+	# core page bottom - used in login pages
+	function print_page_bot1a( $p_file = null ) {
 		global $g_bottom_include_page;
 
 		if ( null === $p_file ) {
@@ -191,16 +202,6 @@
 				$g_mantis_version, $g_show_version,
 				$g_timer, $g_show_timer,
 				$g_show_queries_count, $g_show_queries_list, $g_queries_array;
-
-		# @@@ this hack is so the menu doesn't show up in the login page
-		#  we need a less hackish solution - maybe split up the footer into
-		#  more functions so the login page doesn't have to use them all?
-		if (isset($g_string_cookie_val)&&!is_blank($g_string_cookie_val)) {
-			if ( $g_show_footer_menu ) {
-				PRINT '<br />';
-				print_menu();
-			}
-		}
 
 		print_source_link( $p_file );
 
