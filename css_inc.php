@@ -17,10 +17,13 @@ p 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_norm
 p.center			{ text-align: center }
 address 			{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_small ?> }
 span				{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; }
+form				{ margin: 0px; }
 table				{ }
 td 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; padding: 4px; text-align: left }
 a					{}
 a.small				{ font-size: <?php echo $g_font_small ?>; }
+
+
 
 input.small			{ font-size: <?php echo $g_font_small ?>; }
 select.small		{ font-size: <?php echo $g_font_small ?>; }
@@ -66,7 +69,7 @@ tr.print-category	{ color: <?php echo $g_font_color ?>; font-weight: bold; }
 
 td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle{ width: 33%; padding: 0px; text-align: center; }
-td.login-info-right	{ width: 33%; padding: 0px; text-align: right; }
+td.login-info-right	{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
 span.login-username	{ font-style: italic; }
 span.login-time		{ font-size: <?php echo $g_font_small ?>; font-style: italic; }
 
@@ -83,7 +86,6 @@ a.news-email		{ font-size: <?php echo $g_font_small ?>; }
 </style>
 <script language="JavaScript" type="text/javascript">
 <!--
-if(document.layers) {document.write('<style>td{padding:0px;}</style>')}
+if(document.layers) {document.write('<style>td{padding:0px;}<\/style>')}
 //-->
 </script>
-<noscript></noscript>

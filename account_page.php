@@ -37,9 +37,9 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_account_update ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_account_update ?>">
 		<?php echo $s_edit_account_title ?>
 	</td>
 	<td class="right">
@@ -112,13 +112,13 @@
 <tr>
 	<td class="center">
 		<input type="submit" value="<?php echo $s_update_user_button ?>">
+		</form>
 	</td>
-</form>
-<form method="post" action="<?php echo $g_account_delete_page ?>">
 	<td class="center">
+		<form method="post" action="<?php echo $g_account_delete_page ?>">
 		<input type="submit" value="<?php echo $s_delete_account_button ?>">
+		</form>
 	</td>
-</form>
 </tr>
 
 <?php 	} else { # end LDAP section ?>
@@ -182,17 +182,17 @@
 <tr>
 	<td class="left">
 		<input type="submit" value="<?php echo $s_update_user_button ?>">
+		</form>
 	</td>
-</form>
 <?php
 		# check if users can't delete their own accounts
 		if ( ON == $g_allow_account_delete ) {
 ?>
-<form method="post" action="<?php echo $g_account_delete_page ?>">
 	<td class="right">
+		<form method="post" action="<?php echo $g_account_delete_page ?>">
 		<input type="submit" value="<?php echo $s_delete_account_button ?>">
+		</form>
 	</td>
-</form>
 <?php 	} else { ?>
 	<td>
 		&nbsp;

@@ -24,10 +24,10 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<form method="post" action="<?php echo $g_manage_project_version_update ?>">
-	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-	<input type="hidden" name="f_orig_version" value="<?php echo $f_version ?>">
 	<td class="category">
+		<form method="post" action="<?php echo $g_manage_project_version_update ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+		<input type="hidden" name="f_orig_version" value="<?php echo $f_version ?>">
 		<?php echo $s_version ?>
 	</td>
 	<td>
@@ -45,15 +45,15 @@
 <tr>
 	<td class="left" width="50%">
 		<input type="submit" value="<?php echo $s_update_version_button ?>">
+		</form>
 	</td>
-	</form>
-	<form method="post" action="<?php echo $g_manage_project_version_delete_page ?>">
-	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-	<input type="hidden" name="f_version" value="<?php echo $f_version ?>">
 	<td class="right" width="50%">
+		<form method="post" action="<?php echo $g_manage_project_version_delete_page ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+		<input type="hidden" name="f_version" value="<?php echo $f_version ?>">
 		<input type="submit" value="<?php echo $s_delete_version_button ?>">
+		</form>
 	</td>
-	</form>
 </tr>
 </table>
 </div>

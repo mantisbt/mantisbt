@@ -19,10 +19,10 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_bug_reopen ?>">
-<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <tr>
 	<td class="form-title" colspan="2">
+		<form method="post" action="<?php echo $g_bug_reopen ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<?php echo $s_reopen_add_bugnote_title ?>
 	</td>
 </tr>
@@ -34,14 +34,12 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_reopen_bug_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 <?php # Resolve Form END ?>
-</form>
-</table>
 
 <?php include( $g_view_bug_inc ) ?>
 

@@ -31,10 +31,10 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_account_profile_add ?>">
-<input type="hidden" name="f_user_id" value="<?php echo get_current_user_field( "id " ) ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_account_profile_add ?>">
+		<input type="hidden" name="f_user_id" value="<?php echo get_current_user_field( "id " ) ?>">
 		<?php echo $s_add_profile_title ?>
 	</td>
 	<td class="right">
@@ -79,9 +79,9 @@
 	</td>
 	<td class="center">
 		<input type="submit" value="<?php echo $s_add_profile_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 <?php # Add Profile Form END ?>
@@ -116,8 +116,8 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_submit_button ?>">
+		</form>
 	</td>
-	</form>
 </tr>
 </table>
 </div>

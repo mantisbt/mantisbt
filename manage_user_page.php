@@ -27,10 +27,10 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_manage_user_update ?>">
-<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 <tr>
 	<td class="form-title" colspan="3">
+		<form method="post" action="<?php echo $g_manage_user_update ?>">
+		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 		<?php echo $s_edit_user_title ?>
 	</td>
 </tr>
@@ -79,23 +79,23 @@
 <tr>
 	<td class="center">
 		<input type="submit" value="<?php echo $s_update_user_button ?>">
+		</form>
 	</td>
-</form>
-	<form method="post" action="<?php echo $g_manage_user_reset ?>">
 	<td class="center">
+		<form method="post" action="<?php echo $g_manage_user_reset ?>">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 		<input type="hidden" name="f_email" value="<?php echo $u_email ?>">
 		<input type="hidden" name="f_protected" value="<?php echo $u_protected ?>">
 		<input type="submit" value="<?php echo $s_reset_password_button ?>">
+		</form>
 	</td>
-	</form>
-	<form method="post" action="<?php echo $g_manage_user_delete_page ?>">
 	<td class="center">
+		<form method="post" action="<?php echo $g_manage_user_delete_page ?>">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 		<input type="hidden" name="f_protected" value="<?php echo $u_protected ?>">
 		<input type="submit" value="<?php echo $s_delete_user_button ?>">
+		</form>
 	</td>
-	</form>
 </tr>
 </table>
 </div>
@@ -115,10 +115,10 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_manage_user_proj_add ?>">
-<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>">
 <tr>
 	<td class="form-title" colspan="2">
+		<form method="post" action="<?php echo $g_manage_user_proj_add ?>">
+		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>">
 		<?php echo $s_add_user_title ?>
 	</td>
 </tr>
@@ -154,9 +154,9 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_add_user_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 <?php ### END User to Project Add Form ?>

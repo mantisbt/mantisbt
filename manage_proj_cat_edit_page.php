@@ -24,27 +24,26 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<form method="post" action="<?php echo $g_manage_project_category_update ?>">
-	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-	<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>">
 	<td class="center" colspan="2">
+		<form method="post" action="<?php echo $g_manage_project_category_update ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+		<input type="hidden" name="f_orig_category" value="<?php echo $f_category ?>">
 		<input type="text" name="f_category" size="32" maxlength="64" value="<?php echo urldecode( stripslashes( $f_category ) ) ?>">
 	</td>
 </tr>
 <tr>
 	<td class="left" width="50%">
 		<input type="submit" value="<?php echo $s_update_category_button ?>">
+		</form>
 	</td>
-	</form>
-	<form method="post" action="<?php echo $g_manage_project_category_delete_page ?>">
-	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-	<input type="hidden" name="f_category" value="<?php echo $f_category ?>">
 	<td class="right" width="50%">
+		<form method="post" action="<?php echo $g_manage_project_category_delete_page ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+		<input type="hidden" name="f_category" value="<?php echo $f_category ?>">
 		<input type="submit" value="<?php echo $s_delete_category_button ?>">
+		</form>
 	</td>
-	</form>
 </tr>
-</form>
 </table>
 </div>
 

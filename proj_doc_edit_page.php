@@ -26,11 +26,11 @@
 
 <p>
 <div align="center">
-<form method="post" action="<?php echo $g_proj_doc_update ?>">
-<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_proj_doc_update ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<?php echo $s_upload_file_title ?>
 	</td>
 	<td class="right">
@@ -64,17 +64,16 @@
 <tr>
 	<td class="left">
 		<input type="submit" value="<?php echo $s_file_update_button ?>">
+		</form>
 	</td>
-	</form>
-	<form method="post" action="<?php echo $g_proj_doc_delete_page ?>">
-	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="right">
+		<form method="post" action="<?php echo $g_proj_doc_delete_page ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<input type="submit" value="<?php echo $s_file_delete_button ?>">
+		</form>
 	</td>
-	</form>
 </tr>
 </table>
-</form>
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

@@ -40,10 +40,10 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_manage_project_update ?>">
-<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 <tr>
 	<td class="form-title" colspan="2">
+		<form method="post" action="<?php echo $g_manage_project_update ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<?php echo $s_edit_project_title ?>
 	</td>
 </tr>
@@ -101,14 +101,14 @@
 <tr>
 	<td class="left">
 		<input type="submit" value="<?php echo $s_update_project_button ?>">
+		</form>
 	</td>
-	</form>
-	<form method="post" action="<?php echo $g_manage_project_delete_page?>">
-	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<td class="right">
+		<form method="post" action="<?php echo $g_manage_project_delete_page?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="submit" value="<?php echo $s_delete_project_button ?>">
+		</form>
 	</td>
-	</form>
 </tr>
 </table>
 </div>
@@ -153,24 +153,24 @@
 	</td>
 </tr>
 <tr>
-<form method="post" action="<?php echo $g_manage_project_category_add ?>">
-<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<td class="left">
+		<form method="post" action="<?php echo $g_manage_project_category_add ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="text" name="f_category" size="32" maxlength="64">
 		<input type="submit" value="<?php echo $s_add_category_button ?>">
+		</form>
 	</td>
-</form>
 </tr>
 <tr>
-<form method="post" action="<?php echo $g_manage_project_category_copy ?>">
-<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<td class="left">
+		<form method="post" action="<?php echo $g_manage_project_category_copy ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<select name="f_new_project_id">
 			<?php print_project_option_list() ?>
 		</select>
 		<input type="submit" value="<?php echo $s_copy_categories ?>">
+		</form>
 	</td>
-</form>
 </tr>
 <tr>
 	<td>
@@ -214,13 +214,13 @@
 	</td>
 </tr>
 <tr>
-<form method="post" action="<?php echo $g_manage_project_version_add ?>">
-<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 	<td class="center">
+		<form method="post" action="<?php echo $g_manage_project_version_add ?>">
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<input type="text" name="f_version" size="32" maxlength="64">
 		<input type="submit" value="<?php echo $s_add_version_button ?>">
+		</form>
 	</td>
-</form>
 </tr>
 </table>
 </div>

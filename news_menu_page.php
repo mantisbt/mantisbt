@@ -16,11 +16,11 @@
 <?php # Add News Form BEGIN ?>
 <p>
 <div align="center">
-<form method="post" action="<?php echo $g_news_add ?>">
-<input type="hidden" name="f_poster_id" value="<?php echo get_current_user_field( "id " ) ?>">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
+		<form method="post" action="<?php echo $g_news_add ?>">
+		<input type="hidden" name="f_poster_id" value="<?php echo get_current_user_field( "id " ) ?>">
 		<?php echo $s_add_news_title ?>
 	</td>
 </tr>
@@ -59,20 +59,20 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_post_news_button ?>">
+		</form>
 	</td>
 </tr>
 </table>
-</form>
 </div>
 <?php # Add News Form END ?>
 
 <?php # Edit/Delete News Form BEGIN ?>
 <p>
 <div align="center">
-<form method="post" action="<?php echo $g_news_edit_page ?>">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
+		<form method="post" action="<?php echo $g_news_edit_page ?>">
 		<?php echo $s_edit_or_delete_news_title ?>
 	</td>
 </tr>
@@ -95,10 +95,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_submit_button ?>">
+		</form>
 	</td>
 </tr>
 </table>
-</form>
 </div>
 <?php # Edit/Delete News Form END ?>
 

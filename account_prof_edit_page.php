@@ -58,10 +58,10 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_account_profile_update ?>">
-<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_account_profile_update ?>">
+		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
 		<?php echo $s_edit_profile_title ?>
 	</td>
 	<td class="right">
@@ -103,9 +103,9 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_update_profile_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 <?php # Edit Profile Form END ?>

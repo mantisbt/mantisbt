@@ -38,9 +38,9 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_manage_project_add ?>">
 <tr>
 	<td class="form-title" colspan="2">
+		<form method="post" action="<?php echo $g_manage_project_add ?>">
 		<?php echo $s_add_project_title ?>
 	</td>
 </tr>
@@ -90,9 +90,9 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_add_project_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 <?php # Add Project Form END ?>

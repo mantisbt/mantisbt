@@ -16,9 +16,9 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" enctype="multipart/form-data" action="<?php echo $g_proj_doc_add ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" enctype="multipart/form-data" action="<?php echo $g_proj_doc_add ?>">
 		<?php echo $s_upload_file_title ?>
 	</td>
 	<td class="right">
@@ -54,6 +54,7 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_upload_file_button ?>">
+		</form>
 	</td>
 </tr>
 </table>

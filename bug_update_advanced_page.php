@@ -49,12 +49,12 @@
 
 <p>
 <table class="width100" cellspacing="1">
-<form method="post" action="<?php echo $g_bug_update ?>">
-<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
-<input type="hidden" name="f_old_status" value="<?php echo $v_status ?>">
-<input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>">
 <tr>
 	<td class="form-title" colspan="3">
+		<form method="post" action="<?php echo $g_bug_update ?>">
+		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
+		<input type="hidden" name="f_old_status" value="<?php echo $v_status ?>">
+		<input type="hidden" name="f_old_handler_id" value="<?php echo $v_handler_id ?>">
 		<?php echo $s_updating_bug_advanced_title ?>
 	</td>
 	<td class="right" colspan="3">
@@ -301,9 +301,9 @@
 <tr>
 	<td class="center" colspan="6"">
 		<input type="submit" value="<?php echo $s_update_information_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 
 <?php print_page_bot1( __FILE__ ) ?>

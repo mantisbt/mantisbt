@@ -1,13 +1,13 @@
 <p>
 <table class="width100" cellspacing="0">
-<form method="post" action="<?php echo $g_view_all_set ?>?f=3">
-<input type="hidden" name="f_type" value="1">
-<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
-<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
-<input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>">
-<input type="hidden" name="f_per_page" value="<?php echo $f_per_page ?>">
 <tr class="row-category2">
     <td class="small-caption">
+		<form method="post" action="<?php echo $g_view_all_set ?>?f=3">
+		<input type="hidden" name="f_type" value="1">
+		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
+		<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
+		<input type="hidden" name="f_page_number" value="<?php echo $f_page_number ?>">
+		<input type="hidden" name="f_per_page" value="<?php echo $f_per_page ?>">
 		<?php echo $s_reporter ?>
 	</td>
     <td class="small-caption">
@@ -95,7 +95,7 @@
 	    <input type="text" size="16" name="f_search" value="<?php echo $f_search; ?>">
 	</td>
 	<td class="left" colspan="2">
-	<!--	
+	<!--
 		<select name="f_start_month">
 			<?php print_month_option_list( $f_start_month ) ?>
 		</select>
@@ -123,9 +123,9 @@
 	<td class="right" colspan="7">
 		<input type="submit" name="f_filter" value="<?php echo $s_filter_button ?>">
 		<input type="submit" name="f_csv" value="<?php echo $s_csv_export ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 
 <?php
@@ -136,10 +136,10 @@
 ?>
 
 <p>
-<form method="post" action="<?php echo $g_view_all_bug_update ?>">
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="<?php echo $col_count ?>">
+		<form method="post" action="<?php echo $g_view_all_bug_update ?>">
 		<?php echo $s_viewing_bugs_title ?>
 		<?php
 			if ( $row_count > 0 ) {
@@ -332,11 +332,11 @@
 		</select>
 		-->
 		<input type="submit" value="<?php echo $s_move_bugs ?>">
+		</form>
 	</td>
 </tr>
 <?php } ?>
 </table>
-</form>
 
 <?php # Show NEXT and PREV links as needed ?>
 <p>

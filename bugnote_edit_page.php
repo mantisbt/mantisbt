@@ -46,12 +46,12 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_bugnote_update ?>">
-<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
-<input type="hidden" name="f_bugnote_text_id" value="<?php echo $f_bugnote_text_id ?>">
-<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_bugnote_update ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
+		<input type="hidden" name="f_bugnote_text_id" value="<?php echo $f_bugnote_text_id ?>">
+		<input type="hidden" name="f_bugnote_id" value="<?php echo $f_bugnote_id ?>">
 		<?php echo $s_edit_bugnote_title ?>
 	</td>
 	<td class="right">
@@ -66,9 +66,9 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_update_information_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 

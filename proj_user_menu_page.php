@@ -56,9 +56,9 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_proj_user_add ?>">
 <tr>
 	<td class="form-title" colspan="5">
+		<form method="post" action="<?php echo $g_proj_user_add ?>">
 		<?php echo $s_add_user_title ?>
 	</td>
 </tr>
@@ -82,9 +82,9 @@
 	</td>
 	<td>
 		<input type="submit" value="<?php echo $s_add_user_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 

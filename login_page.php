@@ -36,13 +36,13 @@
 <?php # Login Form BEGIN ?>
 <p>
 <div align="center">
-<form method="post" action="<?php echo $g_login ?>">
-<?php	if (isset($f_project_id)) { ?>
-<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-<?php } ?>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_login ?>">
+		<?php	if (isset($f_project_id)) { ?>
+		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+		<?php } ?>
 		<?php echo $s_login_title ?>
 	</td>
 	<td class="right">
@@ -80,10 +80,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_login_button ?>">
+		</form>
 	</td>
 </tr>
 </table>
-</form>
 </div>
 <?php # Login Form END ?>
 

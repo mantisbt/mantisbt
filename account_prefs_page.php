@@ -61,9 +61,9 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" action="<?php echo $g_account_prefs_update ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_account_prefs_update ?>">
 		<?php echo $s_default_account_preferences_title ?>
 	</td>
 	<td class="right">
@@ -221,14 +221,14 @@
 <tr>
 	<td class="center">
 		<input type="submit" value="<?php echo $s_update_prefs_button ?>">
+		</form>
 	</td>
-	</form>
-	<form method="post" action="<?php echo $g_account_prefs_reset ?>">
-		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 	<td class="center">
+		<form method="post" action="<?php echo $g_account_prefs_reset ?>">
+		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 		<input type="submit" value="<?php echo $s_reset_prefs_button ?>">
+		</form>
 	</td>
-	</form>
 </tr>
 </table>
 </div>

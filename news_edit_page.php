@@ -31,11 +31,11 @@
 <?php # Edit News Form BEGIN ?>
 <p>
 <div align="center">
-<form method="post" action="<?php echo $g_news_update ?>">
-<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_news_update ?>">
+		<input type="hidden" name="f_id" value="<?php echo $v_id ?>">
 		<?php echo $s_edit_news_title ?>
 	</td>
 	<td class="right">
@@ -76,10 +76,10 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_update_news_button ?>">
+		</form>
 	</td>
 </tr>
 </table>
-</form>
 </div>
 <?php # Edit News Form END ?>
 

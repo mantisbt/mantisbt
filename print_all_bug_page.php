@@ -182,15 +182,15 @@
 <?php print_head_bottom() ?>
 <?php print_body_top() ?>
 
-<form method="post" action="<?php echo $g_view_all_set ?>">
-<input type="hidden" name="f_type" value="1">
-<input type="hidden" name="f_print" value="1">
-<input type="hidden" name="f_offset" value="0">
-<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
-<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
 <table class="width100">
 <tr>
     <td class="print">
+		<form method="post" action="<?php echo $g_view_all_set ?>">
+		<input type="hidden" name="f_type" value="1">
+		<input type="hidden" name="f_print" value="1">
+		<input type="hidden" name="f_offset" value="0">
+		<input type="hidden" name="f_sort" value="<?php echo $f_sort ?>">
+		<input type="hidden" name="f_dir" value="<?php echo $f_dir ?>">
         <?php echo $s_search ?>
     </td>
     <td class="print">
@@ -272,10 +272,10 @@
 	</td>
 	<td>
 		<input type="submit" value="<?php echo $s_filter_button ?>">
+		</form>
 	</td>
 </tr>
 </table>
-</form>
 
 <table class="width100" cellspacing="1">
 <tr>

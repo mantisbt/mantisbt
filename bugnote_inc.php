@@ -113,10 +113,10 @@
 <?php # Bugnote Add Form BEGIN ?>
 <p>
 <table class="width100" cellspacing="1">
-<form method="post" action="<?php echo $g_bugnote_add ?>">
-<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_bugnote_add ?>">
+		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<?php echo $s_add_bugnote_title ?>
 	</td>
 </tr>
@@ -128,9 +128,9 @@
 <tr>
 	<td class="center">
 		<input type="submit" value="<?php echo $s_add_bugnote_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 <?php # Bugnote Add Form END ?>
 <?php } ?>

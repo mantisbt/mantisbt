@@ -15,8 +15,9 @@ Mantis
  * Updated Russian localization.
  * Updated Romanian localization.
  * Updated German localization.
- * Modified input checked variables to be prefixed by $c_.
- * Reworked code formating for $c_ variables.
+ * Modified input checked varaibles to be prefixed by $c_.
+ * Reworked code formatting for $c_ variables.
+ * Modified form elements to be standards compliant.
 
 2002.05.19  -  0.17.3
 

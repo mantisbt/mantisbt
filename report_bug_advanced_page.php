@@ -91,9 +91,9 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo "enctype=\"multipart/form-data\""; } ?> action="<?php echo $g_report_add ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo "enctype=\"multipart/form-data\""; } ?> action="<?php echo $g_report_add ?>">
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">
@@ -306,6 +306,7 @@
 	</td>
 	<td class="center">
 		<input type="submit" value="<?php echo $s_submit_report_button ?>">
+		</form>
 	</td>
 </tr>
 </table>

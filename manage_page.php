@@ -157,13 +157,13 @@ for ($i=0;$i<$new_user_count;$i++) {
 	<td class="form-title" colspan="5">
 		<?php echo $s_manage_accounts_title ?> [<?php echo $user_count ?>]
 	</td>
-	<form method="post" action="<?php echo $g_manage_page ?>">
 	<td class="center" colspan="2">
+		<form method="post" action="<?php echo $g_manage_page ?>">
 		<input type="hidden" name="f_save" value="1">
 		<input type="checkbox" name="f_hide" <?php if ( 1 == $f_hide ) echo "CHECKED" ?>> <?php echo $s_hide_inactive ?>
 		<input type="submit" value="<?php echo $s_filter_button ?>">
+		</form>
 	</td>
-	</form>
 </tr>
 <tr class="row-category">
 	<td>

@@ -31,9 +31,9 @@
 <p>
 <div align="center">
 <table class="width50" cellspacing="1">
-<form method="post" action="<?php echo $g_signup ?>">
 <tr>
 	<td class="form-title">
+		<form method="post" action="<?php echo $g_signup ?>">
 		<?php echo $s_signup_title ?>
 	</td>
 	<td class="right">
@@ -59,9 +59,9 @@
 <tr>
 	<td class="center" colspan="2">
 		<input type="submit" value="<?php echo $s_signup_button ?>">
+		</form>
 	</td>
 </tr>
-</form>
 </table>
 </div>
 <?php # Signup form END ?>
