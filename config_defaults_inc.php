@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.232 2004-12-17 23:43:18 bpfennigschmidt Exp $
+	# $Id: config_defaults_inc.php,v 1.233 2004-12-18 13:44:06 prichards Exp $
 	# --------------------------------------------------------
 
 
@@ -1451,7 +1451,7 @@
 	# core/relationship_graph_api.php for more information.
 
 	# Enable relationship graphs support.
-	$g_relationship_graph_enable		= ON;
+	$g_relationship_graph_enable		= OFF;
 
 	# Font name and size, as required by Graphviz. If Graphviz fails to run
 	# for you, you are probably using a font name that gd can't find. On
