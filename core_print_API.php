@@ -128,8 +128,10 @@
 	}
 	# --------------------
 	function print_reporter_option_list( $p_user_id ) {
-		global $g_mantis_user_table;
+		global $g_mantis_user_table, $g_project_cookie_val, $g_mantis_project_user_list_table;
 
+		#"global" reporters
+		$lst_global = array();
 		$t_rep = REPORTER;
 	    $query = "SELECT id, username
 	    		FROM $g_mantis_user_table
@@ -139,9 +141,31 @@
 	    $user_count = db_num_rows( $result );
 	    for ($i=0;$i<$user_count;$i++) {
 	    	$row = db_fetch_array( $result );
-	    	$t_user_id   = $row["id"];
-	    	$t_user_name = $row["username"];
-
+	    	$lst_global[$row["id"]] = $row["username"];
+		}
+	    
+	    #"project-specific" reporters
+	    $lst_specific = array();
+	    #checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		else $specific_where = " p.project_id='$g_project_cookie_val'";
+	    $query = "SELECT u.id, u.username
+			    FROM $g_mantis_project_user_list_table p, $g_mantis_user_table u
+			    WHERE $specific_where AND p.access_level>='$t_rep' AND
+			    p.user_id = u.id ORDER BY u.username";
+		$result = db_query( $query );
+		$user_count = db_num_rows( $result );
+	    for ($i=0;$i<$user_count;$i++) {
+	    	$row = db_fetch_array( $result );
+	    	$lst_specific[$row["id"]] = $row["username"];
+		}	    
+	    
+	   	#merge arrays, sort upon value (username) then reposition at first element
+	    $lst_merged = array_merge($lst_global,$lst_specific);
+	    asort($lst_merged);
+	    reset($lst_merged);
+	    
+	    while (list ($t_user_id, $t_user_name) = each ($lst_merged)) {
 	    	if ( $t_user_id == $p_user_id ) {
 				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name."</option>";
 			}
