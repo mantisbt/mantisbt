@@ -166,6 +166,11 @@
 
 	$link_page = $g_view_all_bug_page;
 	$page_type = "all";
+
+    /*if ( isset( $f_export_csv )&&( $f_export_csv=="on" ) ) {
+    	include( $g_csv_export_inc );
+		die;
+    }*/
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

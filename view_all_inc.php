@@ -89,6 +89,9 @@
 		<td>
 			<input type="checkbox" name="f_hide_closed" <? if ($f_hide_closed=="on") echo "CHECKED"?>>
 		</td>
+<!--		<td>
+			<input type="checkbox" name="f_export_csv">
+		</td>-->
 		<td>
 			<input type="submit" value="<? echo $s_filter_button ?>">
 		</td>
