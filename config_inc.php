@@ -79,10 +79,13 @@
 
 	# Allow email
 	$g_enable_email_notification = 1;
+
+	# set to 0 to disable email check
+	$g_validate_email            = 1;
 	#--------------------
 
 	#--------------------
-	# time for coookie to live in seconds
+	# time for 'permanent' cookie to live in seconds
 	$g_cookie_time_length        = 30000000;     # 1 year
 	# time to delay between page redirects
 	$g_wait_time                 = 2;            # in seconds
@@ -344,6 +347,6 @@
 
 	#--------------------
 	#version
-	$g_mantis_version       = "0.14.0";
+	$g_mantis_version = "0.14.0";
 	#--------------------
 ?>

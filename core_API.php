@@ -571,7 +571,7 @@
 			$row = db_fetch_array( $result );
 			$t_category = $row["category"];
 			if ( $t_category==$p_category ) {
-				PRINT "<option value=\"$t_category\">$t_category";
+				PRINT "<option value=\"$t_category\" SELECTED>$t_category";
 			} else {
 				PRINT "<option value=\"$t_category\">$t_category";
 			}
@@ -1018,8 +1018,7 @@
 
 			### go to redirect
 			if ( !empty( $p_redirect_url ) ) {
-				#header( "Location: $p_redirect_url" );
-				header( "Location: $g_logout_page" );
+				header( "Location: $p_redirect_url" );
 				exit;
 			}
 			### continue with current page
@@ -1483,7 +1482,6 @@
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
 			$t_message = $t_message.$t_note."\n\n";
 		}
-		$t_message = $t_message."-----------------------------------------------------------------------\n";
 
 		$t_message = stripslashes( $t_message );
 		return $t_message;
@@ -1491,14 +1489,22 @@
 	### --------------------
 	### Send bug info to reporter and handler
 	function email_bug_info( $p_bug_id, $p_message ) {
-		global $g_mantis_user_table, $g_mantis_bug_table;
+		global $g_mantis_user_table, $g_mantis_bug_table, $g_mantis_project_table;
 
 		### Get Subject
-		$query = "SELECT summary
+		$query = "SELECT project_id, summary
 				FROM $g_mantis_bug_table
 				WHERE id='$p_bug_id'";
 		$result = db_query( $query );
-		$p_subject = db_result( $result, 0, 0 );
+		$row = db_fetch_array( $result );
+		$p_subject = $row["summary"];
+		$t_project_id = $row["project_id"];
+
+		$query = "SELECT name
+				FROM $g_mantis_project_table
+				WHERE id='$t_project_id'";
+		$result = db_query( $query );
+		$t_project_name = db_result( $result, 0, 0 );
 
 		### Get Reporter and Handler IDs
 		$query = "SELECT reporter_id, handler_id
@@ -1523,6 +1529,9 @@
 			$result = db_query( $query );
 			$t_handler_email = db_result( $result, 0, 0 );
 		}
+
+		### Build subject
+		$p_subject = "[".$t_project_name." ".$p_bug_id."]: ".$p_subject;
 
 		### build message
 		$t_message = $p_message."\n";
@@ -1585,15 +1594,25 @@
 	### --------------------
 	# check to see that the format is valid and that the mx record exists
 	function is_valid_email( $p_email ) {
+		global $g_validate_email;
+
+		### if we don't validate then just accept
+		if ( $g_validate_email==0 ) {
+			return true;
+		}
+
 		if (eregi("^[_\.0-9a-z-]+@([0-9a-z][-0-9a-z\.]+)\.([a-z]{2,3}$)", $p_email, $check)) {
 			if (getmxrr($check[1].".".$check[2], $temp)) {
 				return true;
 			} else {
-				return false;
+				$host = substr(strstr($check[0], '@'), 1).".";
+				#### for no mx record... try dns
+				if (checkdnsrr ( $host, "ANY" ))
+					return true;
 			}
-		} else {
-			return false;
 		}
+		### Everything failed.  Bad email.
+		return false;
 	}
 	### --------------------
 	###########################################################################
