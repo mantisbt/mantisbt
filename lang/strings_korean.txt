@@ -7,6 +7,9 @@
 	# 한글 번역   aporie@kornet.net
 ?>
 <?php
+	# Charset
+	$s_charset = 'euc-kr';
+
 	# new strings:
 	$s_all_projects = '모든 프로젝트';
 	$s_move_bugs = '버그 이동';

@@ -8,6 +8,9 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 ?>
 <?php
+	# Charset
+	$s_charset = 'iso-8859-2';
+
 	# new strings:
 	$s_all_projects = 'Wszystkie projekty';
 	$s_move_bugs = 'Przenie¶ b³êdy';

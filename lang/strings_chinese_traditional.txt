@@ -7,6 +7,9 @@
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 ?>
 <?php
+    # Charset
+	$s_charset = 'big5';
+
 	# new strings:
 	$s_all_projects = 'All Projects';
 	$s_move_bugs = 'Move Bugs';

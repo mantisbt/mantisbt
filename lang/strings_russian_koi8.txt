@@ -7,6 +7,9 @@
 	# Russian (WindowsKOI8-R): Alexander Leschinsky aml@lair.pp.ru
 ?>
 <?php
+	# Charset
+	$s_charset = 'koi8';
+
 	# new strings:
 	$s_all_projects = 'Все проекты';
 	$s_move_bugs = 'Переместить баги';

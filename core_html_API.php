@@ -18,6 +18,7 @@
 
 		print_html_top();
 		print_head_top();
+		print_content_type();
 		print_title( $g_window_title );
 		print_css( $g_css_include_file );
 		include( $g_meta_include_file );
@@ -62,12 +63,18 @@
 		PRINT '<html>';
 	}
 	# --------------------
-	# (2)
+	# (2) Opens the <HEAD> section
 	function print_head_top() {
 	   PRINT '<head>';
 	}
 	# --------------------
-	# (3)
+	# (3) Prints the content-type
+	function print_content_type() {
+	   PRINT '<META HTTP-EQUIV="Content-type" CONTENT="text/html;charset=' . $s_charset . '">';
+	}
+	
+	# --------------------
+	# (4) Prints the <TITLE> tag
 	function print_title( $p_title ) {
 		global 	$g_show_project_in_title,
 				$g_project_cookie_val;
@@ -89,14 +96,14 @@
 		}
 	}
 	# --------------------
-	# (4) the css include file to use, is likely to be either empty or css_inc.php
+	# (5) includes the css include file to use, is likely to be either empty or css_inc.php
 	function print_css( $p_css='' ) {
 		if ( !empty($p_css )) {
 			include( $p_css );
 		}
 	}
 	# --------------------
-	# (5) OPTIONAL: for pages that require a redirect
+	# (6) OPTIONAL: for pages that require a redirect
 	# The time field is the number of seconds to wait before redirecting
 	function print_meta_redirect( $p_url, $p_time='' ) {
 		global $g_wait_time;
@@ -108,18 +115,18 @@
 		PRINT "<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\">";
 	}
 	# --------------------
-	# (6)
+	# (7) Ends the <HEAD> section
 	function print_head_bottom() {
 	   PRINT '</head>';
 	}
 	# --------------------
-	# (7)
+	# (8) Starts the <BODY> of the page
 	function print_body_top() {
 		PRINT '<body>';
 	}
 	# --------------------
-	# (8) This prints the title that is visible in the main panel of the browser
-	# We use a temporary vairable to create the title then print it.
+	# (9) Prints the title that is visible in the main panel of the browser
+	# We use a temporary variable to create the title then print it.
 	function print_header( $p_title='Mantis' ) {
 		global 	$g_show_project_in_title,
 				$g_project_cookie_val;
@@ -142,7 +149,7 @@
 		PRINT "<div align=\"center\"><span class=\"pagetitle\">$t_title</span></div>";
 	}
 	# --------------------
-	# (9) $p_page is included.  This allows for the admin to have a nice baner or
+	# (10) $p_page is included.  This allows for the admin to have a nice banner or
 	# graphic at the top of every page
 	function print_top_page( $p_page ) {
 		if (( !empty( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
@@ -150,7 +157,7 @@
 		}
 	}
 	# --------------------
-	# (10) $p_page is included.  This allows for the admin to have a nice baner or
+	# (11) $p_page is included.  This allows for the admin to have a nice baner or
 	# graphic at the bottom of every page
 	function print_bottom_page( $p_page ) {
 		if (( !empty( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
@@ -158,7 +165,7 @@
 		}
 	}
 	# --------------------
-	# (11) Prints the bottom of page information
+	# (12) Prints the bottom of page information
 	function print_footer( $p_file ) {
 		global 	$g_string_cookie_val, $g_webmaster_email,
 				$g_menu_include_file, $g_show_footer_menu,
@@ -188,12 +195,12 @@
 		}
 	}
 	# --------------------
-	# (12)
+	# (13) Ends the <BODY> section.
 	function print_body_bottom() {
 		PRINT '</body>';
 	}
 	# --------------------
-	# (13)  The very last text that is sent in a html page
+	# (14) The very last text that is sent in a html page.
 	function print_html_bottom() {
 		PRINT '</html>';
 	}

@@ -7,6 +7,9 @@
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 ?>
 <?php
+	# Charset
+	$s_charset = 'iso-8859-2';
+
 	# new strings:
 	$s_all_projects = 'Toate proiectele';
 	$s_move_bugs = 'Muta bug-urile';

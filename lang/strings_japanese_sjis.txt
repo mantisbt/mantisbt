@@ -7,6 +7,9 @@
 	# Japanese: Takeshi Hachikawa, hachikawa@sesys.co.jp
 ?>
 <?php
+	# Charset
+	$s_charset = 'x-sjis';
+
 	# new strings:
 	$s_all_projects = '全プロジェクト';
 	$s_move_bugs = 'バグの移動';

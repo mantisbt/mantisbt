@@ -7,6 +7,9 @@
 	# Norwegian: Espen Holje, eh@escio.no
 ?>
 <?php
+	# Charset
+	$s_charset = 'iso-8859-1';
+
 	# new strings:
 	$s_all_projects = 'Alle prosjekter';
 	$s_move_bugs = 'Flytte saker';

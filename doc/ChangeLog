@@ -16,12 +16,15 @@ Mantis
  * Updated Romanian localization.
  * Updated German localization.
  * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
+ * Removed HTML entities from all localization files.
+ * Added $s_charset to all localization files.
  * Modified input checked variables to be prefixed by $c_.
  * Reworked code formatting for $c_ variables.
  * Modified form elements to be standards compliant.
  * Modified core_print_API.php to escape double quotes in text fields, instead of replacing them by single quotes.
  * Modified all string files to use single quotes instead of double quotes.
  * Modified all php files to use single quotes where double quotes were unnecessary.
+ * Modified core_html_API.php to print a META-tag defining the charset.
 
 2002.05.19  -  0.17.3
 

@@ -8,6 +8,9 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
 ?>
 <?php
+  # Charset
+  $s_charset = 'iso-8859-2';
+
   # new strings:
   $s_all_projects = 'Összes projekt';
   $s_move_bugs = 'Hibák áthelyezése';

@@ -8,6 +8,9 @@
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 ?>
 <?php
+	# Charset
+	$s_charset = 'iso-8859-5';
+
 	# new strings:
 	$s_all_projects = 'Все проекты';
 	$s_move_bugs = 'Переместить баги';
