@@ -56,6 +56,7 @@
 </tr>
 </table>
 </form>
+</div>
 
 <br />
 
@@ -65,8 +66,6 @@
 	<input type="hidden" name="f_version" value="<?php echo $f_version ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
 	</form>
-</div>
-
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

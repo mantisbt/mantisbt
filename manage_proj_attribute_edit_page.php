@@ -91,6 +91,7 @@
 </tr>
 </table>
 </form>
+</div>
 
 <br />
 
@@ -101,8 +102,6 @@
 	<input type="hidden" name="f_parameter" value="<?php echo $f_parameter ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_button' ).' '.$t_title ?>" />
 	</form>
-</div>
-
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

@@ -80,6 +80,7 @@
 </tr>
 </table>
 </form>
+</div>
 
 <br />
 
@@ -98,8 +99,6 @@
 	<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>
-</div>
-
 </div>
 
 <br />

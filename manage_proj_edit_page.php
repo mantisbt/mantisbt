@@ -114,6 +114,7 @@
 </tr>
 </table>
 </form>
+</div>
 
 <br />
 
@@ -125,8 +126,6 @@
 	</form>
 </div>
 <?php } ?>
-
-</div>
 
 <br />
 <div align="center">

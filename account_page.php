@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.28 2002-10-04 04:57:32 prescience Exp $
+	# $Id: account_page.php,v 1.29 2002-10-05 02:38:31 prescience Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -56,6 +56,11 @@
 	print_page_top1();
 	print_page_top2();
 ?>
+<div class="c1">
+		<span class="news-headline">alfkhds jfkh</span> -
+		<span class="news-date">09-19 22:13</span> -
+		<a class="news-email" href="mailto:admin">administrator</a>
+</div>
 
 <!-- # Edit Account Form BEGIN -->
 <br />
@@ -195,6 +200,7 @@
 	</tr>
 </table>
 </form>
+</div>
 
 <br />
 <?php # Delete Account Form BEGIN ?>
@@ -212,7 +218,5 @@
 
 <?php } ?>
 <?php # Delete Account Form END ?>
-
-</div>
 
 <?php print_page_bot1( __FILE__ ) ?>

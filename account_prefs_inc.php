@@ -200,6 +200,7 @@
 </tr>
 </table>
 </form>
+</div>
 
 <br />
 
@@ -209,8 +210,6 @@
 	<input type="hidden" name="f_redirect_url" value="<?php echo $t_redirect_url ?>" />
 	<input type="submit" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</form>
-</div>
-
 </div>
 
 <?php
