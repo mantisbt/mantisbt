@@ -295,7 +295,7 @@
 						$t_report_url = get_report_redirect_url( 1 );
 						PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
 					} else {
-						PRINT "<a href=\"$g_login_select_proj_page?ref=".get_report_redirect_url( 1 )."\">$s_report_bug_link</a> | ";
+						PRINT "<a href=\"$g_login_select_proj_page?f_ref=".get_report_redirect_url( 1 )."\">$s_report_bug_link</a> | ";
 					}
 				}
 

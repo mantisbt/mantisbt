@@ -11,6 +11,10 @@
 <?php login_user_check_only() ?>
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	if ( !isset( $f_ref ) ) {
+		$f_ref = "";
+	}
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2a() ?>
@@ -19,7 +23,7 @@
 <p>
 <div align="center">
 <form method="post" action="<?php echo $g_set_project ?>">
-<input type="hidden" name="ref" value="<?php echo $ref ?>">
+<input type="hidden" name="f_ref" value="<?php echo $f_ref ?>">
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">

@@ -15,6 +15,10 @@
 		$valid_project = 0;
 	}
 
+	if ( !isset( $f_ref ) ) {
+		$f_ref = "";
+	}
+
 	# Set default project
 	if ( isset( $f_make_default ) ) {
 		$t_user_id = get_current_user_field( "id" );
@@ -44,10 +48,9 @@
 		}
 	}
 
-	if($ref > "")
-		{
-			$t_redirect_url = $ref;
-		}
+	if ( empty( $f_ref ) ) {
+		$t_redirect_url = $f_ref;
+	}
 
 	# clear view filter between projects
 	setcookie( $g_view_all_cookie );
