@@ -312,10 +312,10 @@
 
 <div align=center>
 <? if ( $f_offset_prev >= 0 ) { ?>
-<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">View Prev <? echo $f_limit_view ?></a>
+ [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">View Prev <? echo $f_limit_view ?></a> ]
 <? } ?>
 <? if ( $row_count == $f_limit_view ) { ?>
-<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">View Next <? echo $f_limit_view ?></a>
+ [ <a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>&f_show_category=<? echo $f_show_category ?>&f_show_severity=<? echo $f_show_severity ?>&f_show_status=<? echo $f_show_status ?>&f_limit_view=<? echo $f_limit_view ?>&f_show_changed=<? echo $f_show_changed ?>">View Next <? echo $f_limit_view ?></a> ]
 <? } ?>
 </div>
 

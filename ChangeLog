@@ -8,7 +8,6 @@ To Do:
  * Add ip tracking/banning capability
  * Add file upload module
  * Add postgreSQL support and/or a Database abstraction layer
- * Refine viewing preferences
  * Refine viewing news archives
  * Make priority useful
  * Force some sort of dialog when closing a bug (resolved)

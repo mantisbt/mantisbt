@@ -17,25 +17,20 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	if ( !isset( $f_offset ) ) {
+		$f_offset = 0;
+	}
+
 	### get news count
 	$query = "SELECT COUNT(id)
 			FROM $g_mantis_news_table";
 	$result = mysql_query( $query );
     $total_news_count = mysql_result( $result, 0 );
 
-	### Show all news items
-	if ( isset( $f_show ) ) {
-		$query = "SELECT *
-				FROM $g_mantis_news_table
-				ORDER BY id DESC";
-	}
-	### Show only $g_limit items
-	else {
-		$query = "SELECT *
-				FROM $g_mantis_news_table
-				ORDER BY id DESC
-				LIMIT $g_news_view_limit";
-	}
+	$query = "SELECT *
+			FROM $g_mantis_news_table
+			ORDER BY id DESC
+			LIMIT $f_offset, $g_news_view_limit";
 	$result = db_mysql_query( $query );
     $news_count = mysql_num_rows( $result );
 ?>
@@ -87,12 +82,18 @@
 ?>
 
 <?
-	if ( $total_news_count > $news_count ) {
-		PRINT "<p>";
-		PRINT "<div align=center>";
-		PRINT "<a href=\"$g_main_page?f_show=all\">more news</a>";
-		PRINT "</div>";
+	$f_offset_next = $f_offset + $g_news_view_limit;
+	$f_offset_prev = $f_offset - $g_news_view_limit;
+
+	PRINT "<p>";
+	PRINT "<div align=center>";
+	if ( $f_offset_prev >= 0) {
+		PRINT "[ <a href=\"$g_main_page?f_offset=$f_offset_prev\">newer news</a> ]";
 	}
+	if ( $news_count==$g_news_view_limit ) {
+		PRINT " [ <a href=\"$g_main_page?f_offset=$f_offset_next\">older news</a> ]";
+	}
+	PRINT "</div>";
 ?>
 
 <? print_footer() ?>
