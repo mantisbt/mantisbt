@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: file_api.php,v 1.3 2002-08-26 22:42:26 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -23,13 +23,10 @@
 	# List the attachments belonging to the specified bug.  This is used from within
 	# view_bug_page.php and view_bug_advanced_page.php
 	function file_list_attachments ( $p_bug_id ) {
-		global	$g_mantis_bug_file_table, $g_normal_date_format, $g_handle_bug_threshold,
-				$g_file_upload_method, $s_delete_link;
-	
 		$c_id = (integer) $p_bug_id;
 
 		$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added ".
-				"FROM $g_mantis_bug_file_table ".
+				"FROM " . config_get('mantis_bug_file_table') . ' '.
 				"WHERE bug_id='$c_id'";
 		$result = db_query( $query );
 		$num_files = db_num_rows( $result );
@@ -37,15 +34,15 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 			$v_filesize = number_format( $v_filesize );
-			$v_date_added = date( $g_normal_date_format, ( $v_date_added ) );
+			$v_date_added = date( config_get( 'normal_date_format' ), ( $v_date_added ) );
 
 			PRINT "<a href=\"file_download.php?f_id=$v_id&amp;f_type=bug\">".file_get_display_name($v_filename)."</a> ($v_filesize bytes) <span class=\"italic\">$v_date_added</span>";
 
-			if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) ) {
-				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?f_id=$p_bug_id&amp;f_file_id=$v_id\">$s_delete_link</a>]";
+			if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) {
+				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?f_id=$p_bug_id&amp;f_file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
 			}
 			
-			if ( ( FTP == $g_file_upload_method ) && file_exists ( $v_diskfile ) ) {
+			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
 				PRINT " (cached)";
 			}
 
@@ -62,13 +59,11 @@
 	# --------------------
 	# Connect to ftp server using configured server address, user name, and password.
 	function file_ftp_connect() {
-		global $g_file_upload_ftp_server, $g_file_upload_ftp_user, $g_file_upload_ftp_pass;
-
-		$conn_id = ftp_connect($g_file_upload_ftp_server); 
-		$login_result = ftp_login($conn_id, $g_file_upload_ftp_user, $g_file_upload_ftp_pass); 
+		$conn_id = ftp_connect( config_get( 'file_upload_ftp_server' ) ); 
+		$login_result = ftp_login( $conn_id, config_get( 'file_upload_ftp_user' ), config_get( 'file_upload_ftp_pass' ) );
 
 		if ( ( !$conn_id ) || ( !$login_result ) ) {
-			# @@@ handle error
+			trigger_error( ERROR_FTP_CONNECT_ERROR, ERROR );
 		}
 
 		return $conn_id;

@@ -157,6 +157,7 @@
 	define( 'ERROR_BUGNOTE_NOT_FOUND',			21 );
 	define( 'ERROR_PROJECT_NOT_FOUND',			22 );
 	define( 'ERROR_DB_FIELD_NOT_FOUND',			23 );
+	define( 'ERROR_FTP_CONNECT_ERROR',          24 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

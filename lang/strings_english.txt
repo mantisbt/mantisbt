@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.76 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-26 00:40:23 $
+	# $Revision: 1.77 $
+	# $Author: vboctor $
+	# $Date: 2002-08-26 22:42:28 $
 	#
-	# $Id: strings_english.txt,v 1.76 2002-08-26 00:40:23 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.77 2002-08-26 22:42:28 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -168,6 +168,7 @@
 	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
 	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
 	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
+	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
 
 	# General Strings
 	$s_go_back = 'Go Back';
