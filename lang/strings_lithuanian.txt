@@ -1,18 +1,18 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	##########################################################################
-	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.1)
+	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# -------------------------------------------------
-	# $Revision: 1.2 $
+	# $Revision: 1.3 $
 	# $Author: jlatour $
-	# $Date: 2004-02-26 13:24:12 $
+	# $Date: 2004-02-27 10:22:09 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.2 2004-02-26 13:24:12 jlatour Exp $
+	# $Id: strings_lithuanian.txt,v 1.3 2004-02-27 10:22:09 jlatour Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -94,7 +94,7 @@ $s_additional_information_updated = 'Papildoma informacija atnaujinta';
 $s_steps_to_reproduce_updated = 'Atkartojimo þingsniai atnaujinti';
 $s_file_added = 'Failas pridëtas';
 $s_file_deleted = 'Failas iðtrintas';
-$s_bug_deleted = 'Bug Deleted';
+$s_bug_deleted = 'Problema iðtrinta';
 
 $s_make_private = 'Padaryti uþdaru';
 $s_make_public = 'Padaryti vieðu';
@@ -153,7 +153,7 @@ $s_bugnote_title = 'Komentaro antraðtë' ;
 $s_bugnote_date = 'Komentaro data';
 $s_bugnote_description = 'Komentaro apraðymas';
 
-$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'Praðome paspausti mygtukà "Atgal (Back)" Jûsø interneto narðyklëje, kad gráþtumëte á ankstesná puslapá.  Tuomet galësite iðtaisyti prieþastis, dël kuriø atsirado ði klaida, arba pasirinkti kità veiksmà.  Jûs tai pat galite pasirinkti kità sekcijà ið meniu.';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC]            = 'KLAIDA: Klaida atliekant ðá veiksmà. Susisiekite su Jûsø administratoriumi.';
@@ -165,7 +165,7 @@ $MANTIS_ERROR[ERROR_NO_DIRECTORY]       = 'KLAIDA: Katalogas neegzistuoja. Praðo
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'KLAIDA: Failas dubliuojasi.  Praðome pirmiau iðtrinti failà.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'KLAIDA: Projektas tokiu pavadinimu jau yra.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'KLAIDA: Reikalingi laukai neuþpildyti. Perþiûrëkite ávedimo duomenis.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'KLAIDA: Ðis prisijungimas apsaugotas.  Jûs neturite teisiø prie jo prieiti, kol prisijingimo apsauga nebus  pakeista.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'KLAIDA: Ðis prisijungimas apsaugotas.  Jûs neturite teisiø prie jo prieiti, kol prisijungimo apsauga nebus  pakeista.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'KLAIDA: Priëjimas uþdraustas.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'KLAIDA: Failo ákrovimas sustabdytas.  Failo ákrovimo galimybë PHP gali bûti iðjungta.  Papraðykite savo administratoriaus paleisti admin_check skriptà (debug) ðios problemos sprendimui.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'KLAIDA: Failo ákrovimas sustabdytas.  Failo dydis virðija ðios PHP instaliacijos leidþiamà apimtá.';
@@ -197,7 +197,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'KLAIDA: Papildomas laukas nerastas
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'KLAIDA: Pavadinimas kartojasi.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'KLAIDA: Bent vienas projektas dar naudoja ðità laukà.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'KLAIDA: Neteisinga reikðmë laukui';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Neteisingas papildomo lauko apibrëþimas';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'KLAIDA: LDAP autentifikavimo klaida';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'KLAIDA: Prarastas ryðys su LDAP serveriu';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'KLAIDA: LDAP áraðo atnaujinimas neávykdytas.';
@@ -212,7 +212,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'KLAIDA: Kategorija nerasta.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE]  = 'KLAIDA: Versija tokiu pavadinimu jau yra.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'KLAIDA: Versija nerasta.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'KLAIDA: Vartotojo vardas neteisingas.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Vartotojas neturi reikalingø teisiø (priëjimo lygio)';
 
 $s_login_error = 'KLAIDA: Jûsø prisijungimas panaikintas arba neteisingas vartotojo vardas arba slaptaþodis.';
 $s_login_cookies_disabled = 'KLAIDA: Jûsø narðyklë nepalaiko slapukø (cookies) arba juos atmeta.';
@@ -227,7 +227,7 @@ $s_logged_in_as = 'Vartotojas';
 $s_prefix_for_deleted_users = 'vartotojas';
 
 $s_administrator = 'administratorius';
-$s_myself = "Myself";
+$s_myself = "Að pats";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:stebëtojas,25:praneðëjas,40:atnaujintojas,55:sprendëjas,70:vadovas,90:administratorius';
@@ -249,26 +249,26 @@ $s_new_account_greeting = 'Sveikiname uþsiregistravus problemø kontrolës puslapy
 $s_new_account_url = 'Jûs galite prisijungti èia: ';
 $s_new_account_username = 'Vartotojo vardas: ';
 $s_new_account_password = 'Slaptaþodis: ';
-$s_new_account_message = 'Po prisijungimo praðome pakeisti slaptaþodá.  Jûsø slaptaþodis bus saugomas uþðifruotas vienkrypèiu algoritmu.  Jo nebus galima atstatyti.  Jei pamirðite savo slaptaþodá, jis bus pakeistas.' . "\n\n";
+$s_new_account_message = 'Po prisijungimo praðome pakeisti slaptaþodá.  Jûsø slaptaþodis bus saugomas uþðifruotas vienakrypèiu algoritmu.  Jo nebus galima atstatyti.  Jei pamirðite savo slaptaþodá, jis bus pakeistas.' . "\n\n";
 $s_new_account_do_not_reply = 'Neatsakykite á ðià þinutæ.' . "\n";
 
 $s_reset_request_msg = 'Uþklausa pakeisti Jûsø slaptaþodá';
 $s_account_name_msg = 'Jûsø prisijungimo vardas yra';
 $s_news_password_msg = 'Jûsø naujas slaptaþodis';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'Ðiai problemai reikia Jûsø ATSAKYMO.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Ði problema UÞREGISTRUOTA.';
+$s_email_notification_title_for_status_bug_confirmed = 'Ði problema yra PATVIRTINTA.';
+$s_email_notification_title_for_status_bug_assigned = 'Ði problema PASKIRTA.';
+$s_email_notification_title_for_status_bug_resolved = 'Ði problema IÐSPRÆSTA.';
+$s_email_notification_title_for_status_bug_closed = 'Ði problema UÞDARYTA.';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'Ði problema PATVIRTINTA.';
+$s_email_notification_title_for_action_bug_assigned = 'Ði problema PRISKIRTA.';
+$s_email_notification_title_for_action_bug_reopened = 'Ði problema VËL ATIDARYTA.';
+$s_email_notification_title_for_action_bug_deleted = 'Ði problema IÐTRINTA.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'KOMENTARAS pridëtas ðiai problemai.';
 
 $s_email_reporter = 'Praneðëjas';
 $s_email_handler = 'Patarëjas';
@@ -283,7 +283,7 @@ $s_email_resolution = 'Sprendimas';
 $s_email_duplicate = 'Pasikartojantis';
 $s_email_date_submitted = 'Patvirtinimo data';
 $s_email_last_modified = 'Paskutiniai pakeitimai';
-$s_email_summary =  'Sàntrauka';
+$s_email_summary =  'Santrauka';
 $s_email_description = 'Apraðymas';
 
 # account_delete.php
@@ -446,7 +446,7 @@ $s_eta = 'ETA';
 $s_product_version = 'Produkto versija';
 $s_build = 'Trumpalaikë versija (build)';
 $s_votes = 'Balsai';
-$s_summary = 'Statistika';
+$s_summary = 'Santrauka';
 $s_description = 'Apraðymas';
 $s_steps_to_reproduce = 'Þingsniai atgaminimui';
 $s_additional = 'Papildoma';
@@ -801,13 +801,13 @@ $s_by_category = 'pagal kategorijà';
 $s_by_priority = 'pagal prioritetà';
 $s_by_developer = 'pagal sprendëjà';
 $s_by_reporter ='pagal praneðëjà';
-$s_reporter_by_resolution = 'Reporter By Resolution';
-$s_reporter_effectiveness = 'Reporter Effectiveness';
-$s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
-$s_total = 'Total';
+$s_reporter_by_resolution = 'Praneðëjas pagal sprendimus';
+$s_reporter_effectiveness = 'Praneðëjo naðumas';
+$s_developer_by_resolution = 'Sprendëjas pagal sprendimus';
+$s_percentage_fixed = '% Iðspræsta';
+$s_percentage_errors = '% Klaidinga';
+$s_errors = 'Klaidinga';
+$s_total = 'Ið viso';
 $s_time_stats = 'laiko statistika pagal iðspræstas problemas (dienomis)';
 $s_longest_open_bug = 'ilgiausiai atidaryta problema';
 $s_longest_open = 'ilgiausiai atidaryta';
@@ -840,7 +840,7 @@ $s_viewing_bug_advanced_details_title = 'Papildomø problemos detaliø perþiûra';
 $s_product_build = 'Produkto trumpalaikë versija (build)';
 $s_system_profile = 'Sistemos apraðymas';
 $s_update_bug_button = 'Atnaujinti problemà';
-$s_bug_assign_to_button = 'Assign To:';
+$s_bug_assign_to_button = 'Priskirti kam:';
 $s_reopen_bug_button = 'Vël atidaryti problemà';
 $s_attached_files = 'Pridëti failai';
 $s_publish = 'Publikuota';
