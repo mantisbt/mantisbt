@@ -105,15 +105,15 @@
 	$s_email_summary =  '요약';
 	$s_email_description = '설명';
 
-	# account_delete.php3
+	# account_delete.php
 	$s_account_protected_msg = '계정이 보호되었습니다. 정보를 변경할수 없습니다....';
 	$s_account_removed_msg = '당신의 계정이 삭제되었습니다...';
 
-	# account_delete_page.php3
+	# account_delete_page.php
 	$s_confirm_delete_msg = '계정을 삭제하시기를 원하십니까?';
 	$s_delete_account_button = '계정 삭제';
 
-	# account_page.php3
+	# account_page.php
 	$s_manage_profiles_link = '프로파일 관리';
 	$s_change_preferences_link = '설정상태 변경';
 	$s_edit_account_title = '계정 편집';
@@ -124,7 +124,7 @@
 	$s_access_level = '접근 레벨';
 	$s_update_user_button = '사용자 갱신';
 
-	# account_prefs_page.php3
+	# account_prefs_page.php
 	$s_default_account_preferences_title = '기본 계정 설정상태';
 	$s_default_project = '기본 프로젝트';
 	$s_advanced_report = '상세 보고';
@@ -145,19 +145,19 @@
 	$s_update_prefs_button = '설정상태 갱신';
 	$s_reset_prefs_button = '설정상태 초기화';
 
-	# account_prefs_reset.php3
+	# account_prefs_reset.php
 	$s_prefs_reset_msg = '설정상태가 초기화되었습니다....';
 
-	# account_prefs_update.php3
+	# account_prefs_update.php
 	$s_prefs_updated_msg = '설정상태가 갱신되었습니다...';
 
-	# account_profile_add.php3
+	# account_profile_add.php
 	$s_profile_added_msg = '프로파일 추가...';
 
-	# account_profile_delete.php3
+	# account_profile_delete.php
 	$s_profile_deleted_msg = '프로파일 삭제...';
 
-	# account_profile_edit_page.php3
+	# account_profile_edit_page.php
 	$s_edit_profile_title = '프로파일 편집';
 	$s_platform = '플랫폼';
 	$s_operating_system = '운영 체제';
@@ -165,10 +165,10 @@
 	$s_additional_description = '부연 설명';
 	$s_update_profile_button = '프로파일 갱신';
 
-	# account_profile_make_default.php3
+	# account_profile_make_default.php
 	$s_profile_defaulted_msg = '기본 프로파일 갱신...';
 
-	# account_profile_manage_page.php3
+	# account_profile_manage_page.php
 	$s_add_profile_title = '프로파일 추가';
 	$s_add_profile_button = '프로파일 추가';
 	$s_edit_or_delete_profiles_title = '프로파일 편집/삭제';
@@ -178,59 +178,59 @@
 	$s_select_profile = '프로파일 편집';
 	$s_submit_button = '확인';
 
-	# account_profile_update.php3
+	# account_profile_update.php
 	$s_profile_updated_msg = '프로파일 갱신....';
 
-	# account_update.php3
+	# account_update.php
 	$s_account_updated_msg = '당신의 계정 정보가  변경되었습니다...';
 
-	# bug_assign.php3
+	# bug_assign.php
 	$s_bug_assign_msg       = '버그가 할당되었습니다...';
 
-	# bug_close.php3
+	# bug_close.php
 	$s_bug_close_msg       = '버그가 해결(close)되었습니다...';
 	$s_close_immediately   = '지금 폐쇄:';
 
-	# bug_close_page.php3
+	# bug_close_page.php
 	$s_close_bug_title = 'Close Bug';
 
-	# bug_delete.php3
+	# bug_delete.php
 	$s_bug_deleted_msg = '버그정보가 삭제되었습니다...';
 
-	# bug_delete_page.php3
+	# bug_delete_page.php
 	$s_delete_bug_sure_msg = '이 버그정보를 삭제하시겠습니까?';
 	$s_delete_bug_button = '버그 삭제';
 
-	# bug_monitor.php3
+	# bug_monitor.php
 	$s_monitor_bug_button = 'Monitor Bug';
 	$s_unmonitor_bug_button = 'End Monitoring';
 
-	# bug_file_add.php3
+	# bug_file_add.php
 	$s_file_upload_msg = '파일이 업로드되었습니다.';
 
-	# bug_file_upload_inc.php3
+	# bug_file_upload_inc.php
 	$s_upload_file = '파일 업로드';
 	$s_select_file = '파일 선택';
 	$s_upload_file_button = '파일 업로드';
 
-	# bug_reopen.php3
+	# bug_reopen.php
 	$s_bug_reopened_msg = '버그가 다시 발생했습니다...';
 	$s_reopen_add_bugnote_title = '재발생한 버그에 대하여 버그노트에 사유 추가';
 	$s_bugnote_add_reopen_button = '재발생한 버그와 버그 노트 추가';
 
-	# bug_resolve_page.php3
+	# bug_resolve_page.php
 	$s_resolve_bug_title = '버그 해결';
 	$s_resolve_bug_button = '버그 해결';
 
-	# bug_resolve_page2.php3
+	# bug_resolve_page2.php
 	$s_bug_resolved_msg = '버그가 해결되었습니다. 아래의 버그노트를 입력하세요.';
 	$s_resolve_add_bugnote_title = '버그 해결을 위한 버그노트 사유 추가';
 	$s_bugnote_add_resolve_button = '버그노트 추가';
 
-	# bug_update.php3
+	# bug_update.php
 	$s_bug_updated_msg = '버그정보가 갱신되었습니다....';
 
-	# bug_update_advanced_page.php3
+	# bug_update_advanced_page.php
 	$s_back_to_bug_link = '버그정보로 돌아가기';
 	$s_update_simple_link = '정보사항 갱신';
 	$s_updating_bug_advanced_title = '버그 정보 갱신';
@@ -260,21 +260,21 @@
 	$s_information = '정보';
 	$s_update_information_button = '정보사항 변경';
 
-	# bug_update_page.php3
+	# bug_update_page.php
 	$s_update_advanced_link = '정보사항 갱신';
 	$s_updating_bug_simple_title = '버그 정보 갱신';
 
-	# bug_vote_add.php3
+	# bug_vote_add.php
 	$s_vote_added_msg = '투표수 추가...';
 
-	# bugnote_add.php3
+	# bugnote_add.php
 	$s_bugnote_added_msg = '버그노트 추가...';
 
-	# bugnote_delete.php3
+	# bugnote_delete.php
 	$s_bugnote_deleted_msg = '버그노트가 삭제되었습니다....';
 	$s_bug_notes_title = '버그 노트';
 
-	# bugnote_edit_page.php3
+	# bugnote_edit_page.php
 	$s_edit_bugnote_title = 'Edit Bugnote';
 
 	# bugnote_inc.php
@@ -285,16 +285,16 @@
 	$s_bugnote_edit_link = '수정';
 	$s_close_bug_button = '버그 폐쇄';
 
-	# bugnote_update.php3
+	# bugnote_update.php
 	$s_bugnote_updated_msg = '버그노트가 수정되었습니다....';
 	$s_edited_on = '수정일자: ';
 
-	# index.php3
+	# index.php
 	$s_click_to_login = '로그인';
 
-	# login.php3
+	# login.php
 
-	# login_page.php3
+	# login_page.php
 	$s_login_page_info = '버그 관리시스템입니다.';
 	$s_login_title = '로그인';
 	$s_save_login = '로그인 정보 저장';
@@ -302,33 +302,33 @@
 	$s_login_button = '로그인';
 	$s_signup_link = '사용자 신규 등록';
 
-	# login_select_proj_page.php3
+	# login_select_proj_page.php
 	$s_select_project_button = '프로젝트 선택';
 
-	# logout_page.php3
+	# logout_page.php
 	$s_logged_out_title = '로그 아웃...';
 	$s_redirecting = '...리다이렉팅';
 	$s_here = '여기';
 
-	# main_page.php3
+	# main_page.php
 	$s_open_and_assigned_to_me = '나에게 할당된 버그';
 	$s_open_and_reported_to_me = '내가 보고한 버그';
 	$s_newer_news_link = '새로운 뉴스';
 	$s_older_news_link = '이전 뉴스';
 	$s_archives = '아카이브';
 
-	# manage_create_new_user.php3
+	# manage_create_new_user.php
 	$s_created_user_part1 = '사용자가 ';
 	$s_created_user_part2 = '접근 레벨로 생성되었습니다.';
 
-	# manage_create_user_page.php3
+	# manage_create_user_page.php
 	$s_create_new_account_title = '새로운 계정 생성';
 	$s_verify_password = '암호 검증';
 	$s_enabled = '사용가능';
 	$s_protected = '계정 보호';
 	$s_create_user_button = '사용자 생성';
 
-	# manage_page.php3
+	# manage_page.php
 	$s_hide_disabled = 'Disabled 숨기기';
 	$s_filter_button = '필터';
 	$s_manage_users_link = '사용자 관리';
@@ -347,34 +347,34 @@
 	$s_last_visit = '마지막 로그인';
 	$s_edit_user_link = '사용자 편집';
 
-	# manage_project_add.php3
+	# manage_project_add.php
 	$s_project_added_msg = '프로젝트가 추가되었습니다....';
 
-	# manage_project_category_add.php3
+	# manage_project_category_add.php
 	$s_category_added_msg = '카테고리가 추가되었습니다...';
 
-	# manage_project_category_delete.php3
+	# manage_project_category_delete.php
 	$s_category_deleted_msg = '카테고리가 삭제되었습니다...';
 
-	# manage_project_category_delete_page.php3
+	# manage_project_category_delete_page.php
 	$s_category_delete_sure_msg = '이 카테고리를 삭제하시겠습니까? 이 카테고리와 관련된 모든 버그가 삭제될것입니다.';
 	$s_delete_category_button = '카테고리 삭제';
 
-	# manage_project_category_edit_page.php3
+	# manage_project_category_edit_page.php
 	$s_edit_project_category_title = '프로젝트 카테고리 편집';
 	$s_update_category_button = '카테고리 갱신';
 
-	# manage_project_category_update.php3
+	# manage_project_category_update.php
 	$s_category_updated_msg = '카테고리가 갱신되었습니다....';
 
-	# manage_project_delete.php3
+	# manage_project_delete.php
 	$s_project_deleted_msg = '프로젝트가 삭제되었습니다...';
 
-	# manage_project_delete_page.php3
+	# manage_project_delete_page.php
 	$s_project_delete_msg = '이 프로젝트와 관련된 모든 버그를 삭제하시겠습니까?';
 	$s_project_delete_button = '프로젝트 삭제';
 
-	# manage_project_edit_page.php3
+	# manage_project_edit_page.php
 	$s_edit_project_title = '프로젝트 편집';
 	$s_project_name = '프로젝트 이름';
 	$s_view_status = '상태 보기';
@@ -389,56 +389,56 @@
 	$s_add_version_button = '버전 추가';
 	$s_edit_link = '편집';
 
-	# manage_project_menu_page.php3
+	# manage_project_menu_page.php
 	$s_add_project_title = '프로젝트 추가';
 	$s_upload_file_path = '업르드 파일 경로';
 	$s_add_project_button = '프로젝트 추가';
 	$s_projects_title = '프로젝트';
 	$s_name = '이름';
 
-	# manage_project_update.php3
+	# manage_project_update.php
 	$s_project_updated_msg = '프로젝트가 갱신되었습니다....';
 
-	# manage_project_version_add.php3
+	# manage_project_version_add.php
 	$s_version_added_msg = '버전 정보가 추가되었습니다....';
 
-	# manage_project_version_delete.php3
+	# manage_project_version_delete.php
 	$s_version_deleted_msg = '버전 정보가 삭제되었습니다....';
 
-	# manage_project_version_delete_page.php3
+	# manage_project_version_delete_page.php
 	$s_version_delete_sure = '이 버전을 삭제하시겠습니까? 관련된 모든 버그정보가 삭제됩니다.';
 	$s_delete_version_button = '버전 삭제';
 
-	# manage_project_version_edit_page.php3
+	# manage_project_version_edit_page.php
 	$s_edit_project_version_title = '프로젝트 버전 편집';
 	$s_update_version_button = '버전 갱신';
 
-	# manage_project_version_update.php3
+	# manage_project_version_update.php
 	$s_version_updated_msg = '버전정보가 갱신되었습니다...';
 
-	# manage_user_delete.php3
+	# manage_user_delete.php
 	$s_account_delete_protected_msg = '계정이 보호되었습니다. 이 계정을 삭제할수 없습니다.';
 	$s_account_deleted_msg = '계정이 삭제되었습니다....';
 
-	# manage_user_delete_page.php3
+	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = '이 계정을 삭제하시겠습니까?';
 
-	# manage_prune.php3
+	# manage_prune.php
 	$s_accounts_pruned_msg = '한번도 로그인하지 않은 모든 사용자는 1주일후에 삭제됩니다.';
 
-	# manage_user_page.php3
+	# manage_user_page.php
 	$s_edit_user_title = '사용자 편집';
 	$s_reset_password_button = '암호 초기화';
 	$s_delete_user_button = '사용자 삭제';
 	$s_reset_password_msg = '임의로 생성된 암호로 암호를 초기화합니다.';
 	$s_reset_password_msg2 = '암호 초기화는 암호를 공백으로 만듭니다.';
 
-	# manage_user_reset.php3
+	# manage_user_reset.php
 	$s_account_reset_protected_msg = '보호된 계정입니다. 암호를 초기화할수 없습니다.';
 	$s_account_reset_msg = '계정 암호 초기화...';
 	$s_account_reset_msg2 = '계정 암호가 없는 상태로 초기화합니다...';
 
-	# manage_user_update.php3
+	# manage_user_update.php
 	$s_manage_user_protected_msg = '보호된 계정입니다. 접근레벨이 보호중입니다. 그렇지 않다면, 현재 계정상태가 변경중입니다.....';
 	$s_manage_user_updated_msg = '계정이 갱신되었습니다...';
 
@@ -456,23 +456,23 @@
 
 	# meta_inc.php
 
-	# news_add.php3
+	# news_add.php
 	$s_news_added_msg = '뉴스가 추가됩니다...';
 
-	# news_delete.php3
+	# news_delete.php
 	$s_news_deleted_msg = '뉴스 기사 삭제......';
 
-	# news_delete_page.php3
+	# news_delete_page.php
 	$s_delete_news_sure_msg = '이 뉴스 기사를 삭제하시겠습니까?';
 	$s_delete_news_item_button = '뉴스 기사 삭제';
 
-	# news_edit_page.php3
+	# news_edit_page.php
 	$s_edit_news_title = '뉴스 편집';
 	$s_headline = '헤드라인';
 	$s_body = '본문';
 	$s_update_news_button = '뉴스 갱신';
 
-	# news_menu_page.php3
+	# news_menu_page.php
 	$s_add_news_title = '뉴스 추가';
 	$s_do_not_use = '사용금지 문자: ';
 	$s_post_to = '포스팅 대상';
@@ -482,58 +482,58 @@
 	$s_delete_post = '뉴스 삭제';
 	$s_select_post = '뉴스 선택';
 
-	# news_update.php3
+	# news_update.php
 	$s_news_updated_msg = '새로운 기사가 갱신되었습니다...';
 
-	# news_view_page.php3
+	# news_view_page.php
 	$s_back_link = '뒤로';
 
-	# proj_doc_add.php3
+	# proj_doc_add.php
 	$s_file_uploaded_msg = '파일이 업로드되었습니다.';
 
-	# proj_doc_add_page.php3
+	# proj_doc_add_page.php
 	$s_upload_file_title = '파일 업로드';
 	$s_title = '제목';
 
-	# proj_doc_delete.php3
+	# proj_doc_delete.php
 	$s_project_file_deleted_msg = '프로제트 파일 삭제됨';
 
-	# proj_doc_delete_page.php3
+	# proj_doc_delete_page.php
 	$s_confirm_file_delete_msg = '이 파일을 삭제하시겠습니까?';
 
-	# proj_doc_edit_page.php3
+	# proj_doc_edit_page.php
 	$s_filename = '파일 이름';
 	$s_file_update_button = '파일 갱신';
 	$s_file_delete_button = '파일 삭제';
 
-	# proj_doc_page.php3
+	# proj_doc_page.php
 	$s_project_documentation_title = '프로젝트 문서화';
 	$s_user_documentation = '사용자 문서';
 	$s_project_documentation = '프로젝트 문서';
 	$s_add_file = '파일 추가';
 
-	# proj_doc_update.php3
+	# proj_doc_update.php
 	$s_project_document_updated = '프로젝트가 갱신되었습니다.';
 
-	# proj_user_add.php3
+	# proj_user_add.php
 	$s_project_user_added_msg = '프로젝트에 사용자가 추가되었습니다.';
 
-	# proj_user_delete.php3
+	# proj_user_delete.php
 	$s_project_removed_user_msg = '프로젝트에 사용자가 제거되었습니다.';
 
-	# proj_user_delete_page.php3
+	# proj_user_delete_page.php
 	$s_remove_user_sure_msg = '현재 사용자를 제거하시겠습니까?';
 
-	# proj_user_menu_page.php3
+	# proj_user_menu_page.php
 	$s_add_user_title = '프로젝트에 사용자 추가';
 	$s_add_user_button = '사용자 추가';
 	$s_project_selection_title = '프로젝트 선택';
 	$s_remove_link = '삭제';
 
-	# proj_user_update.php3
+	# proj_user_update.php
 	$s_updated_user_msg = '사용자 정보가 갱신되었습니다.';
 
-	# report_add.php3
+	# report_add.php
 	$s_must_enter_category = '카테고리를 선택해야 합니다.';
 	$s_must_enter_severity = '중요도를 선택해야 합니다.';
 	$s_must_enter_reproducibility = '재발생가능성을 선택해야 합니다.';
@@ -542,7 +542,7 @@
 	$s_report_more_bugs = '또다른 버그 보고';
 	$s_submission_thanks_msg = '버그 리포팅을 해주셔서 감사합니다.';
 
-	# report_bug_advanced_page.php3
+	# report_bug_advanced_page.php
 	$s_simple_report_link = '간단한 보고서';
 	$s_enter_report_details_title = '상세 보고내역을 입력하세요';
 	$s_required = '필수';
@@ -555,20 +555,20 @@
 	$s_submit_report_button = '보고서 제출';
 	$s_check_report_more_bugs = '또다른 버그 보고 확인';
 
-	# report_bug_page.php3
+	# report_bug_page.php
 	$s_advanced_report_link = '상세 보고';
 	$s_report_stay = 'Stay 리포트';
 
-	# set_project.php3
+	# set_project.php
 	$s_selected_project = '현재 프로젝트';
 	$s_valid_project_msg = '올바른 프로젝트를 선택해야 합니다.';
 
-	# show_source_page.php3
+	# show_source_page.php
 	$s_show_source_for_msg = '소스를 보는기능은 ';
 	$s_not_supported_part1 = 'php의 이버전에서는 ';
 	$s_not_supported_part2 = '지원되지 않습니다.';
 
-	# signup.php3
+	# signup.php
 	$s_invalid_email = '이메일 주소가 올바릅니까';
 	$s_duplicate_username = '중복된 사용자입니다. 다른 이름을 선택하세요';
 	$s_account_create_fail = '사용자 계정생성에 실패했습니다.';
@@ -576,24 +576,24 @@
 	$s_password_emailed_msg = '암호가 메일로 전송될 것입니다.';
 	$s_no_reponse_msg = '만약 1주일안에 응답하지 않으면 계정이 삭제될 것입니다.';
 
-	# signup_page.php3
+	# signup_page.php
 	$s_signup_info = '로그인 이름과 올바른 이메일 주소를 선택하세요. 무작위로 생성된 주소가 당신의 주소로 전송될겁니다.';
 	$s_signup_title = '사인업';
 	$s_signup_button = '사인업';
 
-	# site_settings_edit_page.php3
+	# site_settings_edit_page.php
 	$s_edit_site_settings_title = '사이트 설정 수정';
 	$s_save_settings_button = '변경상태 저장';
 
-	# site_settings_page.php3
+	# site_settings_page.php
 	$s_site_settings_title = '사이트 설정';
 	$s_system_info_link = '시스템 정보';
 	$s_site_settings_link = '사이트 설정';
 
-	# site_settings_update.php3
+	# site_settings_update.php
 	$s_site_settings_updated_msg = '사이트 설정상태가 변경되었습니다.';
 
-	# summary_page.php3
+	# summary_page.php
 	$s_summary_title = '요약';
 	$s_summary_jpgraph_link = '자세한 요약';
 	$s_by_status = '상태별';
@@ -613,7 +613,7 @@
 	$s_reporter_stats = '보고자 통계';
 	$s_orct = '(신규/해결/폐쇄/전체)';
 
-	# view_all_bug_page.php3
+	# view_all_bug_page.php
 	$s_any = '모두';
 	$s_show = '갯수';
 	$s_changed = '변경된(시간)';
@@ -627,7 +627,7 @@
 	$s_view_prev_link = '이전';
 	$s_view_next_link = '다음';
 
-	# view_bug_advanced_page.php3
+	# view_bug_advanced_page.php
 	$s_view_simple_link = '간략히 보기';
 	$s_viewing_bug_advanced_details_title = '버그 자세히 보기';
 	$s_product_build = '제품 빌드번호';
@@ -639,7 +639,7 @@
 
 	# view_bug_inc.php
 
-	# view_bug_page.php3
+	# view_bug_page.php
 	$s_view_advanced_link = '자세히 보기';
 	$s_viewing_bug_simple_details_title = '간략히 보기';
 ?>

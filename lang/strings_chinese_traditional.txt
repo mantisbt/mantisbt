@@ -105,15 +105,15 @@
 	$s_email_summary =  '摘要';
 	$s_email_description = '說明';
 
-	# account_delete.php3
+	# account_delete.php
 	$s_account_protected_msg = '帳號被保護. 無法變更設定...';
 	$s_account_removed_msg = '你的帳號已經被移除...';
 
-	# account_delete_page.php3
+	# account_delete_page.php
 	$s_confirm_delete_msg = '您確定要刪除你的帳號?';
 	$s_delete_account_button = '刪除帳號';
 
-	# account_page.php3
+	# account_page.php
 	$s_manage_profiles_link = '管理個人設定';
 	$s_change_preferences_link = '變更喜好設定';
 	$s_edit_account_title = '編輯帳號';
@@ -124,7 +124,7 @@
 	$s_access_level = '存取權限';
 	$s_update_user_button = '更新使用者';
 
-	# account_prefs_page.php3
+	# account_prefs_page.php
 	$s_default_account_preferences_title = '預設帳號喜好設定';
 	$s_default_project = '預設專案';
 	$s_advanced_report = '進階報告';
@@ -145,19 +145,19 @@
 	$s_update_prefs_button = '更新喜好';
 	$s_reset_prefs_button = '重設喜好';
 
-	# account_prefs_reset.php3
+	# account_prefs_reset.php
 	$s_prefs_reset_msg = '喜好設定已經重設...';
 
-	# account_prefs_update.php3
+	# account_prefs_update.php
 	$s_prefs_updated_msg = '喜好設定已經更新...';
 
-	# account_profile_add.php3
+	# account_profile_add.php
 	$s_profile_added_msg = '個人設定已新增...';
 
-	# account_profile_delete.php3
+	# account_profile_delete.php
 	$s_profile_deleted_msg = '刪除個人設定...';
 
-	# account_profile_edit_page.php3
+	# account_profile_edit_page.php
 	$s_edit_profile_title = '編輯個人設定';
 	$s_platform = '作業平台';
 	$s_operating_system = '作業系統';
@@ -165,10 +165,10 @@
 	$s_additional_description = '額外說明';
 	$s_update_profile_button = '更新個人設定';
 
-	# account_profile_make_default.php3
+	# account_profile_make_default.php
 	$s_profile_defaulted_msg = '預設profile 更新...';
 
-	# account_profile_manage_page.php3
+	# account_profile_manage_page.php
 	$s_add_profile_title = '新增個人設定';
 	$s_add_profile_button = '新增個人設定';
 	$s_edit_or_delete_profiles_title = '編輯或刪除個人設定';
@@ -178,59 +178,59 @@
 	$s_select_profile = '選擇個人設定';
 	$s_submit_button = '送出';
 
-	# account_profile_update.php3
+	# account_profile_update.php
 	$s_profile_updated_msg = '個人設定更新...';
 
-	# account_update.php3
+	# account_update.php
 	$s_account_updated_msg = '你的帳戶已經成功更新...';
 
-	# bug_assign.php3
+	# bug_assign.php
 	$s_bug_assign_msg       = '臭蟲已經成功被指定...';
 
-	# bug_close.php3
+	# bug_close.php
 	$s_bug_close_msg       = 'Bug has been closed...';
 	$s_close_immediately   = 'Close immediately:';
 
-	# bug_close_page.php3
+	# bug_close_page.php
 	$s_close_bug_title = 'Close Bug';
 
-	# bug_delete.php3
+	# bug_delete.php
 	$s_bug_deleted_msg = '臭蟲已經被刪除...';
 
-	# bug_delete_page.php3
+	# bug_delete_page.php
 	$s_delete_bug_sure_msg = '你確定要刪除此臭蟲?';
 	$s_delete_bug_button = '刪除臭蟲';
 
-	# bug_monitor.php3
+	# bug_monitor.php
 	$s_monitor_bug_button = 'Monitor Bug';
 	$s_unmonitor_bug_button = 'End Monitoring';
 
-	# bug_file_add.php3
+	# bug_file_add.php
 	$s_file_upload_msg = 'File upload successful';
 
-	# bug_file_upload_inc.php3
+	# bug_file_upload_inc.php
 	$s_upload_file = 'Upload File';
 	$s_select_file = 'Select File';
 	$s_upload_file_button = 'Upload File';
 
-	# bug_reopen.php3
+	# bug_reopen.php
 	$s_bug_reopened_msg = '臭蟲已經被重開...';
 	$s_reopen_add_bugnote_title = '新增臭蟲筆記理由 For 重開臭蟲';
 	$s_bugnote_add_reopen_button = '新增臭蟲筆記且重開臭蟲';
 
-	# bug_resolve_page.php3
+	# bug_resolve_page.php
 	$s_resolve_bug_title = '解決臭蟲';
 	$s_resolve_bug_button = '解決臭蟲';
 
-	# bug_resolve_page2.php3
+	# bug_resolve_page2.php
 	$s_bug_resolved_msg = '臭蟲已經被解決. 請在下方輸入臭蟲筆記...';
 	$s_resolve_add_bugnote_title = '新增臭蟲筆記理由 For 解決臭蟲';
 	$s_bugnote_add_resolve_button = '新增臭蟲筆記';
 
-	# bug_update.php3
+	# bug_update.php
 	$s_bug_updated_msg = '臭蟲已經成功被更新...';
 
-	# bug_update_advanced_page.php3
+	# bug_update_advanced_page.php
 	$s_back_to_bug_link = '回到臭蟲';
 	$s_update_simple_link = '簡易更新';
 	$s_updating_bug_advanced_title = '正在更新臭蟲資訊';
@@ -260,21 +260,21 @@
 	$s_information = '資訊';
 	$s_update_information_button = '更新資訊';
 
-	# bug_update_page.php3
+	# bug_update_page.php
 	$s_update_advanced_link = '進階更新';
 	$s_updating_bug_simple_title = '正在更新臭蟲資訊';
 
-	# bug_vote_add.php3
+	# bug_vote_add.php
 	$s_vote_added_msg = '投票已新增...';
 
-	# bugnote_add.php3
+	# bugnote_add.php
 	$s_bugnote_added_msg = '臭蟲筆記已新增...';
 
-	# bugnote_delete.php3
+	# bugnote_delete.php
 	$s_bugnote_deleted_msg = '臭蟲筆記已刪除...';
 	$s_bug_notes_title = '臭蟲筆記';
 
-	# bugnote_edit_page.php3
+	# bugnote_edit_page.php
 	$s_edit_bugnote_title = 'Edit Bugnote';
 
 	# bugnote_inc.php
@@ -285,16 +285,16 @@
 	$s_bugnote_edit_link = 'Edit';
 	$s_close_bug_button = 'Close Bug';
 
-	# bugnote_update.php3
+	# bugnote_update.php
 	$s_bugnote_updated_msg = 'Bugnote has been successfully updated...';
 	$s_edited_on = 'edited on: ';
 
-	# index.php3
+	# index.php
 	$s_click_to_login = '點選這裡登入';
 
-	# login.php3
+	# login.php
 
-	# login_page.php3
+	# login_page.php
 	$s_login_page_info = '歡迎來到臭蟲追蹤中心';
 	$s_login_title = '登入';
 	$s_save_login = '記住此次登入';
@@ -302,33 +302,33 @@
 	$s_login_button = '登入';
 	$s_signup_link = '註冊一個新帳號';
 
-	# login_select_proj_page.php3
+	# login_select_proj_page.php
 	$s_select_project_button = '選擇專案';
 
-	# logout_page.php3
+	# logout_page.php
 	$s_logged_out_title = '登出中...';
 	$s_redirecting = '...轉址中';
 	$s_here = '到這裡';
 
-	# main_page.php3
+	# main_page.php
 	$s_open_and_assigned_to_me = 'Open and assigned to me';
 	$s_open_and_reported_to_me = 'Open and reported by me';
 	$s_newer_news_link = '更新的新聞';
 	$s_older_news_link = '稍早的新聞';
 	$s_archives = 'Archives';
 
-	# manage_create_new_user.php3
+	# manage_create_new_user.php
 	$s_created_user_part1 = '建立使用者';
 	$s_created_user_part2 = '存取權限為';
 
-	# manage_create_user_page.php3
+	# manage_create_user_page.php
 	$s_create_new_account_title = '建立使用者帳號';
 	$s_verify_password = '確認密碼';
 	$s_enabled = '啟用';
 	$s_protected = '保護';
 	$s_create_user_button = '建立使用者';
 
-	# manage_page.php3
+	# manage_page.php
 	$s_hide_disabled = 'Hide Disabled';
 	$s_filter_button = 'Filter';
 	$s_manage_users_link = 'Manage Users';
@@ -347,34 +347,34 @@
 	$s_last_visit = '最後一次瀏覽';
 	$s_edit_user_link = '編輯使用者';
 
-	# manage_project_add.php3
+	# manage_project_add.php
 	$s_project_added_msg = '專案已新增...';
 
-	# manage_project_category_add.php3
+	# manage_project_category_add.php
 	$s_category_added_msg = '類別已新增...';
 
-	# manage_project_category_delete.php3
+	# manage_project_category_delete.php
 	$s_category_deleted_msg = '類別已刪除...';
 
-	# manage_project_category_delete_page.php3
+	# manage_project_category_delete_page.php
 	$s_category_delete_sure_msg = '你確定要刪除此類別? 所有相關連的臭蟲將會被刪除!!';
 	$s_delete_category_button = '刪除類別';
 
-	# manage_project_category_edit_page.php3
+	# manage_project_category_edit_page.php
 	$s_edit_project_category_title = '編輯專案 類別';
 	$s_update_category_button = '更新類別';
 
-	# manage_project_category_update.php3
+	# manage_project_category_update.php
 	$s_category_updated_msg = '類別已經成功更新...';
 
-	# manage_project_delete.php3
+	# manage_project_delete.php
 	$s_project_deleted_msg = '專案已經成功刪除...';
 
-	# manage_project_delete_page.php3
+	# manage_project_delete_page.php
 	$s_project_delete_msg = '你確定要刪除此專案和所有附屬的臭蟲?';
 	$s_project_delete_button = '刪除專案';
 
-	# manage_project_edit_page.php3
+	# manage_project_edit_page.php
 	$s_edit_project_title = '編輯專案';
 	$s_project_name = '專案名稱';
 	$s_view_status = '檢視狀態';
@@ -389,56 +389,56 @@
 	$s_add_version_button = '新增版本';
 	$s_edit_link = '編輯';
 
-	# manage_project_menu_page.php3
+	# manage_project_menu_page.php
 	$s_add_project_title = '新增專案';
 	$s_upload_file_path = 'Upload File Path';
 	$s_add_project_button = '新增專案';
 	$s_projects_title = '所有專案';
 	$s_name = '名稱';
 
-	# manage_project_update.php3
+	# manage_project_update.php
 	$s_project_updated_msg = '專案已經成功更新...';
 
-	# manage_project_version_add.php3
+	# manage_project_version_add.php
 	$s_version_added_msg = '版本已經成功已新增...';
 
-	# manage_project_version_delete.php3
+	# manage_project_version_delete.php
 	$s_version_deleted_msg = '版本已經成功已刪除...';
 
-	# manage_project_version_delete_page.php3
+	# manage_project_version_delete_page.php
 	$s_version_delete_sure = '你確定要刪除此版本? 所有相關連的臭蟲將會被刪除!!';
 	$s_delete_version_button = '刪除版本';
 
-	# manage_project_version_edit_page.php3
+	# manage_project_version_edit_page.php
 	$s_edit_project_version_title = '編輯專案 版本';
 	$s_update_version_button = '更新版本';
 
-	# manage_project_version_update.php3
+	# manage_project_version_update.php
 	$s_version_updated_msg = '版本已經成功更新...';
 
-	# manage_user_delete.php3
+	# manage_user_delete.php
 	$s_account_delete_protected_msg = '帳號受保護，無法刪除此帳號';
 	$s_account_deleted_msg = '帳號已刪除...';
 
-	# manage_user_delete_page.php3
+	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = '你確定要刪除此一帳號?';
 
-	# manage_prune.php3
+	# manage_prune.php
 	$s_accounts_pruned_msg = 'All accounts that have never logged in and are older than 1 week have been removed';
 
-	# manage_user_page.php3
+	# manage_user_page.php
 	$s_edit_user_title = '編輯使用者';
 	$s_reset_password_button = '重設密碼';
 	$s_delete_user_button = '刪除使用者';
 	$s_reset_password_msg = 'Reset Password sets the randomly generated password.';
 	$s_reset_password_msg2 = '重設密碼 sets the password to be blank.';
 
-	# manage_user_reset.php3
+	# manage_user_reset.php
 	$s_account_reset_protected_msg = '帳號受保護. Cannot reset the password.';
 	$s_account_reset_msg = '帳號密碼重設...';
 	$s_account_reset_msg2 = 'Account password set to blank...';
 
-	# manage_user_update.php3
+	# manage_user_update.php
 	$s_manage_user_protected_msg = '帳號受保護. 存取權限且保護功能已啟動. 否則，帳號將會被更新...';
 	$s_manage_user_updated_msg = '帳號成功更新...';
 
@@ -456,23 +456,23 @@
 
 	# meta_inc.php
 
-	# news_add.php3
+	# news_add.php
 	$s_news_added_msg = '新聞項目已新增...';
 
-	# news_delete.php3
+	# news_delete.php
 	$s_news_deleted_msg = '已刪除新聞項目...';
 
-	# news_delete_page.php3
+	# news_delete_page.php
 	$s_delete_news_sure_msg = '你確定要刪除此新聞項目?';
 	$s_delete_news_item_button = '刪除新聞項目';
 
-	# news_edit_page.php3
+	# news_edit_page.php
 	$s_edit_news_title = '編輯新聞';
 	$s_headline = '標題';
 	$s_body = '內文';
 	$s_update_news_button = '更新新聞';
 
-	# news_menu_page.php3
+	# news_menu_page.php
 	$s_add_news_title = '新增新聞';
 	$s_do_not_use = '不要使用';
 	$s_post_to = '發表到';
@@ -482,58 +482,58 @@
 	$s_delete_post = '刪除發表';
 	$s_select_post = '選擇發表';
 
-	# news_update.php3
+	# news_update.php
 	$s_news_updated_msg = '新聞項目已更新...';
 
-	# news_view_page.php3
+	# news_view_page.php
 	$s_back_link = 'Back';
 
-	# proj_doc_add.php3
+	# proj_doc_add.php
 	$s_file_uploaded_msg = 'File upload successful';
 
-	# proj_doc_add_page.php3
+	# proj_doc_add_page.php
 	$s_upload_file_title = 'Upload File';
 	$s_title = 'Title';
 
-	# proj_doc_delete.php3
+	# proj_doc_delete.php
 	$s_project_file_deleted_msg = 'Project file deleted';
 
-	# proj_doc_delete_page.php3
+	# proj_doc_delete_page.php
 	$s_confirm_file_delete_msg = 'Are you sure you wish to delete this file?';
 
-	# proj_doc_edit_page.php3
+	# proj_doc_edit_page.php
 	$s_filename = 'Filename';
 	$s_file_update_button = 'Update File';
 	$s_file_delete_button = 'Delete File';
 
-	# proj_doc_page.php3
+	# proj_doc_page.php
 	$s_project_documentation_title = 'Project Documentation';
 	$s_user_documentation = 'User Documentation';
 	$s_project_documentation = 'Project Documentation';
 	$s_add_file = 'Add File';
 
-	# proj_doc_update.php3
+	# proj_doc_update.php
 	$s_project_document_updated = 'Project update successful';
 
-	# proj_user_add.php3
+	# proj_user_add.php
 	$s_project_user_added_msg = 'Successfully added user to project';
 
-	# proj_user_delete.php3
+	# proj_user_delete.php
 	$s_project_removed_user_msg = 'Successfully removed user from project';
 
-	# proj_user_delete_page.php3
+	# proj_user_delete_page.php
 	$s_remove_user_sure_msg = 'Are you sure you wish to remove this user?';
 
-	# proj_user_menu_page.php3
+	# proj_user_menu_page.php
 	$s_add_user_title = 'Add user to project';
 	$s_add_user_button = 'Add User';
 	$s_project_selection_title = 'Project Selection';
 	$s_remove_link = 'remove';
 
-	# proj_user_update.php3
+	# proj_user_update.php
 	$s_updated_user_msg = 'Successfully updated user';
 
-	# report_add.php3
+	# report_add.php
 	$s_must_enter_category = '您必須選擇類別';
 	$s_must_enter_severity = '您必須選擇嚴重性';
 	$s_must_enter_reproducibility = '您必須選擇出現頻率';
@@ -542,7 +542,7 @@
 	$s_report_more_bugs = 'Report More Bugs';
 	$s_submission_thanks_msg = '感謝您的意見! ^_^';
 
-	# report_bug_advanced_page.php3
+	# report_bug_advanced_page.php
 	$s_simple_report_link = '簡易報告';
 	$s_enter_report_details_title = '輸入回報詳細資料';
 	$s_required = '必填';
@@ -555,20 +555,20 @@
 	$s_submit_report_button = '送出回報';
 	$s_check_report_more_bugs = 'check to report more bugs';
 
-	# report_bug_page.php3
+	# report_bug_page.php
 	$s_advanced_report_link = '進階報告';
 	$s_report_stay = 'Report Stay';
 
-	# set_project.php3
+	# set_project.php
 	$s_selected_project = 'Selected project';
 	$s_valid_project_msg = 'You must choose a valid project';
 
-	# show_source_page.php3
+	# show_source_page.php
 	$s_show_source_for_msg = '顯示原始碼給';
 	$s_not_supported_part1 = '此版本';
 	$s_not_supported_part2 = '的 PHP 並沒有支援!!';
 
-	# signup.php3
+	# signup.php
 	$s_invalid_email = '是一個無效的 EMIAL 地址!!';
 	$s_duplicate_username = '帳號名稱已經有人使用了. 請選擇其他的使用者名稱';
 	$s_account_create_fail = '建立使用者帳號失敗';
@@ -576,24 +576,24 @@
 	$s_password_emailed_msg = 'Your password will be emailed to you.';
 	$s_no_reponse_msg = 'If you do not respond within a week your account may be deleted.';
 
-	# signup_page.php3
+	# signup_page.php
 	$s_signup_info = '選擇你的登入名稱和輸入您有效的Email位址，一個亂數產生的密碼將會送到您的信箱中!';
 	$s_signup_title = '註冊';
 	$s_signup_button = '註冊';
 
-	# site_settings_edit_page.php3
+	# site_settings_edit_page.php
 	$s_edit_site_settings_title = 'Edit Site Settings';
 	$s_save_settings_button = 'Save Settings';
 
-	# site_settings_page.php3
+	# site_settings_page.php
 	$s_site_settings_title = 'Site Settings';
 	$s_system_info_link = 'System Info';
 	$s_site_settings_link = 'Site Settings';
 
-	# site_settings_update.php3
+	# site_settings_update.php
 	$s_site_settings_updated_msg = 'Site settings have been updated';
 
-	# summary_page.php3
+	# summary_page.php
 	$s_summary_title = '摘要';
               $s_summary_jpgraph_link = 'Advanced summary';
               $s_by_status = '依狀態';
@@ -613,7 +613,7 @@
 	$s_reporter_stats = 'reporter stats';
 	$s_orct = '(open/resolved/closed/total)';
 
-	# view_all_bug_page.php3
+	# view_all_bug_page.php
 	$s_any = '任意';
 	$s_show = '顯示';
 	$s_changed = '已變更(小時)';
@@ -627,7 +627,7 @@
 	$s_view_prev_link = 'View Prev';
 	$s_view_next_link = 'View Next';
 
-	# view_bug_advanced_page.php3
+	# view_bug_advanced_page.php
 	$s_view_simple_link = '簡易檢視';
 	$s_viewing_bug_advanced_details_title = '檢視臭蟲進階詳細資料';
 	$s_product_build = '產品Build';
@@ -639,7 +639,7 @@
 
 	# view_bug_inc.php
 
-	# view_bug_page.php3
+	# view_bug_page.php
 	$s_view_advanced_link = '進階檢視';
 	$s_viewing_bug_simple_details_title = '檢視臭蟲詳細資料(簡式)';
 ?>

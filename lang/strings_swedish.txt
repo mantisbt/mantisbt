@@ -105,15 +105,15 @@
 	$s_email_summary =  'Sammanfattning';
 	$s_email_description = 'Beskrivning';
 
-	# account_delete.php3
+	# account_delete.php
 	$s_account_protected_msg = 'Skyddat konto. Kan inte ändra inställningar...';
 	$s_account_removed_msg = 'Ditt konto har tagits bort...';
 
-	# account_delete_page.php3
+	# account_delete_page.php
 	$s_confirm_delete_msg = 'Är du säker på att du vill ta bort ditt konto?';
 	$s_delete_account_button = 'Ta bort konto';
 
-	# account_page.php3
+	# account_page.php
 	$s_manage_profiles_link = 'Hantera Profiler';
 	$s_change_preferences_link = 'Ändra inställningar';
 	$s_edit_account_title = 'Ändra konto';
@@ -124,7 +124,7 @@
 	$s_access_level = 'Tillgångsnivå';
 	$s_update_user_button = 'Uppdatera användare';
 
-	# account_prefs_page.php3
+	# account_prefs_page.php
 	$s_default_account_preferences_title = 'Standard konto inställningar';
 	$s_default_project = 'Standard projekt';
 	$s_advanced_report = 'Avancerad rapport';
@@ -145,19 +145,19 @@
 	$s_update_prefs_button = 'Uppdatera inställningar';
 	$s_reset_prefs_button = 'Nollställ inställningar';
 
-	# account_prefs_reset.php3
+	# account_prefs_reset.php
 	$s_prefs_reset_msg = 'Inställningarna har nollställts...';
 
-	# account_prefs_update.php3
+	# account_prefs_update.php
 	$s_prefs_updated_msg = 'Inställningarna har uppdaterats...';
 
-	# account_profile_add.php3
+	# account_profile_add.php
 	$s_profile_added_msg = 'Lade till profil...';
 
-	# account_profile_delete.php3
+	# account_profile_delete.php
 	$s_profile_deleted_msg = 'Tog bort profil...';
 
-	# account_profile_edit_page.php3
+	# account_profile_edit_page.php
 	$s_edit_profile_title = 'Redigera profile';
 	$s_platform = 'Plattform';
 	$s_operating_system = 'Operativsystem';
@@ -165,10 +165,10 @@
 	$s_additional_description = 'Ytterligare information';
 	$s_update_profile_button = 'Uppdatera profil';
 
-	# account_profile_make_default.php3
+	# account_profile_make_default.php
 	$s_profile_defaulted_msg = 'Standardprofil uppdaterad...';
 
-	# account_profile_manage_page.php3
+	# account_profile_manage_page.php
 	$s_add_profile_title = 'Lägg till profil';
 	$s_add_profile_button = 'Lägg till profil';
 	$s_edit_or_delete_profiles_title = 'Redigera eller ta bort profiler';
@@ -178,59 +178,59 @@
 	$s_select_profile = 'Välj profil';
 	$s_submit_button = 'Skicka';
 
-	# account_profile_update.php3
+	# account_profile_update.php
 	$s_profile_updated_msg = 'Profil uppdaterad...';
 
-	# account_update.php3
+	# account_update.php
 	$s_account_updated_msg = 'Ditt konto har uppdaterats...';
 
-	# bug_assign.php3
+	# bug_assign.php
 	$s_bug_assign_msg       = 'Buggen har tilldelats...';
 
-	# bug_close.php3
+	# bug_close.php
 	$s_bug_close_msg       = 'Buggen har stängts...';
 	$s_close_immediately   = 'Stäng omedelbart:';
 
-	# bug_close_page.php3
+	# bug_close_page.php
 	$s_close_bug_title = 'Close Bug';
 
-	# bug_delete.php3
+	# bug_delete.php
 	$s_bug_deleted_msg = 'Buggen har tagits bort...';
 
-	# bug_delete_page.php3
+	# bug_delete_page.php
 	$s_delete_bug_sure_msg = 'Är du säker på att du vill ta bort den här buggen?';
 	$s_delete_bug_button = 'Ta bort bug';
 
-	# bug_monitor.php3
+	# bug_monitor.php
 	$s_monitor_bug_button = 'Monitor Bug';
 	$s_unmonitor_bug_button = 'End Monitoring';
 
-	# bug_file_add.php3
+	# bug_file_add.php
 	$s_file_upload_msg = 'Fil skickning lyckades';
 
-	# bug_file_upload_inc.php3
+	# bug_file_upload_inc.php
 	$s_upload_file = 'Skicka upp fil';
 	$s_select_file = 'Välj fil';
 	$s_upload_file_button = 'Skicka fil';
 
-	# bug_reopen.php3
+	# bug_reopen.php
 	$s_bug_reopened_msg = 'Buggen har återöppnats...';
 	$s_reopen_add_bugnote_title = 'Lägg till bugmeddelande om anledning till återöppning';
 	$s_bugnote_add_reopen_button = 'Lägg till bugmeddelande och återöppna bug';
 
-	# bug_resolve_page.php3
+	# bug_resolve_page.php
 	$s_resolve_bug_title = 'Lös bug';
 	$s_resolve_bug_button = 'Lös bug';
 
-	# bug_resolve_page2.php3
+	# bug_resolve_page2.php
 	$s_bug_resolved_msg = 'Buggen har lösts. Skriv bugmeddelande nedan...';
 	$s_resolve_add_bugnote_title = 'Lägg till bugmeddelande om anledning till lösning';
 	$s_bugnote_add_resolve_button = 'Lägg till bugmeddelande och lös bug';
 
-	# bug_update.php3
+	# bug_update.php
 	$s_bug_updated_msg = 'Buggen har uppdaterats...';
 
-	# bug_update_advanced_page.php3
+	# bug_update_advanced_page.php
 	$s_back_to_bug_link = 'Tillbaka till bug';
 	$s_update_simple_link = 'Uppdatera enkel';
 	$s_updating_bug_advanced_title = 'Uppdatera bug-information';
@@ -260,21 +260,21 @@
 	$s_information = 'Information';
 	$s_update_information_button = 'Uppdatera information';
 
-	# bug_update_page.php3
+	# bug_update_page.php
 	$s_update_advanced_link = 'Uppdatera advancerad';
 	$s_updating_bug_simple_title = 'Uppdaterar bug-information';
 
-	# bug_vote_add.php3
+	# bug_vote_add.php
 	$s_vote_added_msg = 'Röst har lagts till...';
 
-	# bugnote_add.php3
+	# bugnote_add.php
 	$s_bugnote_added_msg = 'Lade till bugmeddelande...';
 
-	# bugnote_delete.php3
+	# bugnote_delete.php
 	$s_bugnote_deleted_msg = 'Bugmeddelandet har raderats...';
 	$s_bug_notes_title = 'Bugmeddelanden';
 
-	# bugnote_edit_page.php3
+	# bugnote_edit_page.php
 	$s_edit_bugnote_title = 'Redigera bugmeddelande';
 
 	# bugnote_inc.php
@@ -285,16 +285,16 @@
 	$s_bugnote_edit_link = 'Redigera';
 	$s_close_bug_button = 'Stäng bug';
 
-	# bugnote_update.php3
+	# bugnote_update.php
 	$s_bugnote_updated_msg = 'Bugmeddelandet har uppdaterats...';
 	$s_edited_on = 'redierad: ';
 
-	# index.php3
+	# index.php
 	$s_click_to_login = 'Klicka här för att logga in';
 
-	# login.php3
+	# login.php
 
-	# login_page.php3
+	# login_page.php
 	$s_login_page_info = 'Välkommen till bug-hanteraren.';
 	$s_login_title = 'Logga in';
 	$s_save_login = 'Spara inloggning';
@@ -302,33 +302,33 @@
 	$s_login_button = 'Logga in';
 	$s_signup_link = 'skapa ett nytt konto';
 
-	# login_select_proj_page.php3
+	# login_select_proj_page.php
 	$s_select_project_button = 'Välj projekt';
 
-	# logout_page.php3
+	# logout_page.php
 	$s_logged_out_title = 'Utloggad...';
 	$s_redirecting = '...Omdirigerar';
 	$s_here = 'Här';
 
-	# main_page.php3
+	# main_page.php
 	$s_open_and_assigned_to_me = 'Öppna och tilldelade till mig';
 	$s_open_and_reported_to_me = 'Öppna och rapporterade av mig';
 	$s_newer_news_link = 'Nyare nyheter';
 	$s_older_news_link = 'Äldre nyheter';
 	$s_archives = 'Arkiv';
 
-	# manage_create_new_user.php3
+	# manage_create_new_user.php
 	$s_created_user_part1 = 'Skapade användare';
 	$s_created_user_part2 = 'med tillgångsnivån';
 
-	# manage_create_user_page.php3
+	# manage_create_user_page.php
 	$s_create_new_account_title = 'Skapa ett nytt användarkonto';
 	$s_verify_password = 'Verifiera lösenord';
 	$s_enabled = 'Aktiverad';
 	$s_protected = 'Skyddad';
 	$s_create_user_button = 'Skapa konto';
 
-	# manage_page.php3
+	# manage_page.php
 	$s_hide_disabled = 'Göm avaktiverade';
 	$s_filter_button = 'Filtrera';
 	$s_manage_users_link = 'Hantera användarkonton';
@@ -347,34 +347,34 @@
 	$s_last_visit = 'Senast inloggad';
 	$s_edit_user_link = 'Redigera';
 
-	# manage_project_add.php3
+	# manage_project_add.php
 	$s_project_added_msg = 'Projektet har lagts till...';
 
-	# manage_project_category_add.php3
+	# manage_project_category_add.php
 	$s_category_added_msg = 'Kategorin har lagts till...';
 
-	# manage_project_category_delete.php3
+	# manage_project_category_delete.php
 	$s_category_deleted_msg = 'Katergorin har tagits bort...';
 
-	# manage_project_category_delete_page.php3
+	# manage_project_category_delete_page.php
 	$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin? Alla associerade bugrapporter kommer att tas bort.';
 	$s_delete_category_button = 'Ta bort kategori';
 
-	# manage_project_category_edit_page.php3
+	# manage_project_category_edit_page.php
 	$s_edit_project_category_title = 'Redigera projekt-kategori';
 	$s_update_category_button = 'Uppdatera kategori';
 
-	# manage_project_category_update.php3
+	# manage_project_category_update.php
 	$s_category_updated_msg = 'Kategorin har uppdaterats...';
 
-	# manage_project_delete.php3
+	# manage_project_delete.php
 	$s_project_deleted_msg = 'Projektet har tagits bort...';
 
-	# manage_project_delete_page.php3
+	# manage_project_delete_page.php
 	$s_project_delete_msg = 'Är du säker på att du vill ta bort det här projektet och alla dess bugrapporter?';
 	$s_project_delete_button = 'Ta bort projektet';
 
-	# manage_project_edit_page.php3
+	# manage_project_edit_page.php
 	$s_edit_project_title = 'Redigera projekt';
 	$s_project_name = 'Projektnamn';
 	$s_view_status = 'Visa status';
@@ -389,56 +389,56 @@
 	$s_add_version_button = 'Lägg till version';
 	$s_edit_link = 'redigera';
 
-	# manage_project_menu_page.php3
+	# manage_project_menu_page.php
 	$s_add_project_title = 'Lägg till projekt';
 	$s_upload_file_path = 'KAtalog för uppskickade filer';
 	$s_add_project_button = 'Lägg till projekt';
 	$s_projects_title = 'Projekt';
 	$s_name = 'Namn';
 
-	# manage_project_update.php3
+	# manage_project_update.php
 	$s_project_updated_msg = 'Projektet har uppdaterats...';
 
-	# manage_project_version_add.php3
+	# manage_project_version_add.php
 	$s_version_added_msg = 'Lade till version...';
 
-	# manage_project_version_delete.php3
+	# manage_project_version_delete.php
 	$s_version_deleted_msg = 'Tog bort version...';
 
-	# manage_project_version_delete_page.php3
+	# manage_project_version_delete_page.php
 	$s_version_delete_sure = 'Är du säker på att du vill ta bort versionen? Alla associerade bugrapporter kommer att tas bort.';
 	$s_delete_version_button = 'Ta bort versionen';
 
-	# manage_project_version_edit_page.php3
+	# manage_project_version_edit_page.php
 	$s_edit_project_version_title = 'Redigera projekt-version';
 	$s_update_version_button = 'Uppdatera version';
 
-	# manage_project_version_update.php3
+	# manage_project_version_update.php
 	$s_version_updated_msg = 'Uppdaterade version...';
 
-	# manage_user_delete.php3
+	# manage_user_delete.php
 	$s_account_delete_protected_msg = 'Kontot skyddat. Kan inte ta bort kontot.';
 	$s_account_deleted_msg = 'Kontot borttaget...';
 
-	# manage_user_delete_page.php3
+	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = 'Är du säker på att du vill ta bort kontot?';
 
-	# manage_prune.php3
+	# manage_prune.php
 	$s_accounts_pruned_msg = 'Alla konton som aldrig loggat in och är äldre än en vecka har tagits bort';
 
-	# manage_user_page.php3
+	# manage_user_page.php
 	$s_edit_user_title = 'Redigera användarkonto';
 	$s_reset_password_button = 'Nollställ lösenord';
 	$s_delete_user_button = 'Ta bort kontot';
 	$s_reset_password_msg = 'Reset Password sets the randomly generated password.';
 	$s_reset_password_msg2 = 'Nollställ lösenordet sätter ett tomt lösenord.';
 
-	# manage_user_reset.php3
+	# manage_user_reset.php
 	$s_account_reset_protected_msg = 'Kontot skyddat. Kan inte nollställa lösenordet.';
 	$s_account_reset_msg = 'Lösenordet nollställt...';
 	$s_account_reset_msg2 = 'Lösenordet är tomt...';
 
-	# manage_user_update.php3
+	# manage_user_update.php
 	$s_manage_user_protected_msg = 'Kontot skyddat. Tillgångsnivå och aktivering skyddade. Utöver det har kontot uppdaterats...';
 	$s_manage_user_updated_msg = 'Kontot uppdaterat...';
 
@@ -456,23 +456,23 @@
 
 	# meta_inc.php
 
-	# news_add.php3
+	# news_add.php
 	$s_news_added_msg = 'Lade till nyhet...';
 
-	# news_delete.php3
+	# news_delete.php
 	$s_news_deleted_msg = 'Tog bort nyhet...';
 
-	# news_delete_page.php3
+	# news_delete_page.php
 	$s_delete_news_sure_msg = 'Är du säker på att du vill ta bort denna nyhet?';
 	$s_delete_news_item_button = 'Ta bort nyhet';
 
-	# news_edit_page.php3
+	# news_edit_page.php
 	$s_edit_news_title = 'Redigera nyhet';
 	$s_headline = 'Rubrik';
 	$s_body = 'Kropp';
 	$s_update_news_button = 'Uppdatera nyhet';
 
-	# news_menu_page.php3
+	# news_menu_page.php
 	$s_add_news_title = 'Lägg till nyhet';
 	$s_do_not_use = 'Använd inte';
 	$s_post_to = 'Koppla till';
@@ -482,58 +482,58 @@
 	$s_delete_post = 'Ta bort nyhet';
 	$s_select_post = 'Välj nyhet';
 
-	# news_update.php3
+	# news_update.php
 	$s_news_updated_msg = 'Nyheten uppdaterad...';
 
-	# news_view_page.php3
+	# news_view_page.php
 	$s_back_link = 'Tillbaka';
 
-	# proj_doc_add.php3
+	# proj_doc_add.php
 	$s_file_uploaded_msg = 'Fil uppskickad';
 
-	# proj_doc_add_page.php3
+	# proj_doc_add_page.php
 	$s_upload_file_title = 'Skicka upp fil';
 	$s_title = 'Titel';
 
-	# proj_doc_delete.php3
+	# proj_doc_delete.php
 	$s_project_file_deleted_msg = 'Projektfil borttagen';
 
-	# proj_doc_delete_page.php3
+	# proj_doc_delete_page.php
 	$s_confirm_file_delete_msg = 'Är du säker på att du vill ta bort filen?';
 
-	# proj_doc_edit_page.php3
+	# proj_doc_edit_page.php
 	$s_filename = 'Filnamn';
 	$s_file_update_button = 'Uppdatera fil';
 	$s_file_delete_button = 'Ta bort fil';
 
-	# proj_doc_page.php3
+	# proj_doc_page.php
 	$s_project_documentation_title = 'Projektdokumentation';
 	$s_user_documentation = 'Användardokumentation';
 	$s_project_documentation = 'Projektdokumentation';
 	$s_add_file = 'Lägg till fil';
 
-	# proj_doc_update.php3
+	# proj_doc_update.php
 	$s_project_document_updated = 'Uppdaterade projektet';
 
-	# proj_user_add.php3
+	# proj_user_add.php
 	$s_project_user_added_msg = 'La till användaren till projektet';
 
-	# proj_user_delete.php3
+	# proj_user_delete.php
 	$s_project_removed_user_msg = 'Tog bort användaren från projektet';
 
-	# proj_user_delete_page.php3
+	# proj_user_delete_page.php
 	$s_remove_user_sure_msg = 'Är du säker på att du vill ta bort användaren?';
 
-	# proj_user_menu_page.php3
+	# proj_user_menu_page.php
 	$s_add_user_title = 'Lägg till användare till projektet';
 	$s_add_user_button = 'Lägg till användarkonto';
 	$s_project_selection_title = 'Välj projekt';
 	$s_remove_link = 'ta bort';
 
-	# proj_user_update.php3
+	# proj_user_update.php
 	$s_updated_user_msg = 'Uppdaterade användaren';
 
-	# report_add.php3
+	# report_add.php
 	$s_must_enter_category = 'Du måste välja en kategori';
 	$s_must_enter_severity = 'Du måste välja allvarlighetsgrad';
 	$s_must_enter_reproducibility = 'Du måste välja reproducerbarhet';
@@ -542,7 +542,7 @@
 	$s_report_more_bugs = 'Rapportera flera buggar';
 	$s_submission_thanks_msg = 'Tack för din rapport';
 
-	# report_bug_advanced_page.php3
+	# report_bug_advanced_page.php
 	$s_simple_report_link = 'Enkel rapport';
 	$s_enter_report_details_title = 'Ange rapport';
 	$s_required = 'obligatoriskt';
@@ -555,20 +555,20 @@
 	$s_submit_report_button = 'Skicka rapport';
 	$s_check_report_more_bugs = 'kryssa i för att rapportera fler buggar';
 
-	# report_bug_page.php3
+	# report_bug_page.php
 	$s_advanced_report_link = 'Avancerad rapport';
 	$s_report_stay = 'Fortsätt rapportera';
 
-	# set_project.php3
+	# set_project.php
 	$s_selected_project = 'Valt projekt';
 	$s_valid_project_msg = 'Du måste välja ett giltigt projekt';
 
-	# show_source_page.php3
+	# show_source_page.php
 	$s_show_source_for_msg = 'Visar källkod för';
 	$s_not_supported_part1 = 'Denna version';
 	$s_not_supported_part2 = 'av PHP stöder inte';
 
-	# signup.php3
+	# signup.php
 	$s_invalid_email = 'ÄR INTE EN GILTIG EPOST-ADRESS';
 	$s_duplicate_username = 'ÄR REDAN UPPTAGET.  VÄLJ ETT ANNAT KONTONAMN';
 	$s_account_create_fail = 'GICK INTE ATT SKAPA KONTO';
@@ -576,24 +576,24 @@
 	$s_password_emailed_msg = 'Ditt lösenord kommer att skickas till dig via epost.';
 	$s_no_reponse_msg = 'Om du inte loggar in inom en vecka kan ditt konto tas bort.';
 
-	# signup_page.php3
+	# signup_page.php
 	$s_signup_info = 'Välj kontonamn och ange en giltig epost-adress.  Ett slumpvis genererat lösenord kommer att skickas till din adress..';
 	$s_signup_title = 'Skapa ett användarkonto';
 	$s_signup_button = 'Skapa kontot';
 
-	# site_settings_edit_page.php3
+	# site_settings_edit_page.php
 	$s_edit_site_settings_title = 'Redigera globala inställningar';
 	$s_save_settings_button = 'Spara inställningar';
 
-	# site_settings_page.php3
+	# site_settings_page.php
 	$s_site_settings_title = 'Globala inställningar';
 	$s_system_info_link = 'Systeminfo';
 	$s_site_settings_link = 'Globala inställningar';
 
-	# site_settings_update.php3
+	# site_settings_update.php
 	$s_site_settings_updated_msg = 'Uppdaterade globala inställningar';
 
-	# summary_page.php3
+	# summary_page.php
 	$s_summary_title = 'Sammanfattning';
 	$s_summary_jpgraph_link = 'Avancerad sammanfattning';
 	$s_by_status = 'status';
@@ -613,7 +613,7 @@
 	$s_reporter_stats = 'rapporterarstatistik';
 	$s_orct = '(öppna/lösta/stängda/totalt)';
 
-	# view_all_bug_page.php3
+	# view_all_bug_page.php
 	$s_any = 'alla';
 	$s_show = 'Visa';
 	$s_changed = 'Ändrad(timmar)';
@@ -627,7 +627,7 @@
 	$s_view_prev_link = 'Visa föregående';
 	$s_view_next_link = 'Visa nästa';
 
-	# view_bug_advanced_page.php3
+	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Visa enkel';
 	$s_viewing_bug_advanced_details_title = 'Visar bug, avancerad';
 	$s_product_build = 'Produkt build';
@@ -639,7 +639,7 @@
 
 	# view_bug_inc.php
 
-	# view_bug_page.php3
+	# view_bug_page.php
 	$s_view_advanced_link = 'Visa advancerad';
 	$s_viewing_bug_simple_details_title = 'Visar bug, enkel';
 ?>

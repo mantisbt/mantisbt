@@ -109,15 +109,15 @@
 	$s_email_summary =  'Résumé';
 	$s_email_description = 'Description';
 
-	# account_delete.php3
+	# account_delete.php
 	$s_account_protected_msg = 'Ce compte est protégé en écriture. Impossible de modifier sa configuration...';
 	$s_account_removed_msg = 'Votre compte a été supprimé...';
 
-	# account_delete_page.php3
+	# account_delete_page.php
 	$s_confirm_delete_msg = 'Voulez-vous vraiment supprimer ce compte ?';
 	$s_delete_account_button = 'Supprimer le compte';
 
-	# account_page.php3
+	# account_page.php
 	$s_manage_profiles_link = 'Profils';
 	$s_change_preferences_link = 'Préférences';
 	$s_edit_account_title = 'Editer un compte';
@@ -128,7 +128,7 @@
 	$s_access_level = 'Droits d\'accès';
 	$s_update_user_button = 'Mettre à jour l\'utilisateur';
 
-	# account_prefs_page.php3
+	# account_prefs_page.php
 	$s_default_account_preferences_title = 'Préférences par défaut pour ce compte';
 	$s_default_project = 'Projet par défaut';
 	$s_advanced_report = 'Rapport détaillé';
@@ -149,19 +149,19 @@
 	$s_update_prefs_button = 'Mettre à jour les préférences';
 	$s_reset_prefs_button = 'Réinitialiser les préférences';
 
-	# account_prefs_reset.php3
+	# account_prefs_reset.php
 	$s_prefs_reset_msg = 'Les préférences ont été réinitialisées...';
 
-	# account_prefs_update.php3
+	# account_prefs_update.php
 	$s_prefs_updated_msg = 'Les préférences ont été mises à jour...';
 
-	# account_profile_add.php3
+	# account_profile_add.php
 	$s_profile_added_msg = 'Profil ajouté...';
 
-	# account_profile_delete.php3
+	# account_profile_delete.php
 	$s_profile_deleted_msg = 'Profil supprimé...';
 
-	# account_profile_edit_page.php3
+	# account_profile_edit_page.php
 	$s_edit_profile_title = 'Editer un profil';
 	$s_platform = 'Plate-forme';
 	$s_operating_system = 'Système d\'exploitation';
@@ -169,10 +169,10 @@
 	$s_additional_description = 'Description supplémentaire';
 	$s_update_profile_button = 'Mettre à jour le profil';
 
-	# account_profile_make_default.php3
+	# account_profile_make_default.php
 	$s_profile_defaulted_msg = 'Profil par défaut mis à jour...';
 
-	# account_profile_manage_page.php3
+	# account_profile_manage_page.php
 	$s_add_profile_title = 'Ajouter un profil';
 	$s_add_profile_button = 'Ajouter le profil';
 	$s_edit_or_delete_profiles_title = 'Modifier ou supprimer des profils';
@@ -182,59 +182,59 @@
 	$s_select_profile = 'Sélectionner un profil';
 	$s_submit_button = 'Envoi';
 
-	# account_profile_update.php3
+	# account_profile_update.php
 	$s_profile_updated_msg = 'Profil mis à jour...';
 
-	# account_update.php3
+	# account_update.php
 	$s_account_updated_msg = 'Votre compte a été mis à jour...';
 
-	# bug_assign.php3
+	# bug_assign.php
 	$s_bug_assign_msg       = 'Le bug a été assigné...';
 
-	# bug_close.php3
+	# bug_close.php
 	$s_bug_close_msg       = 'Le bug a été fermé...';
 	$s_close_immediately   = 'Fermer immédiatement';
 
-	# bug_close_page.php3
+	# bug_close_page.php
 	$s_close_bug_title = 'Close Bug';
 
-	# bug_delete.php3
+	# bug_delete.php
 	$s_bug_deleted_msg = 'Le bug a été supprimé...';
 
-	# bug_delete_page.php3
+	# bug_delete_page.php
 	$s_delete_bug_sure_msg = 'Voulez-vous vraiment supprimer ce bug ?';
 	$s_delete_bug_button = 'Supprimer le bug';
 
-	# bug_monitor.php3
+	# bug_monitor.php
 	$s_monitor_bug_button = 'Monitor Bug';
 	$s_unmonitor_bug_button = 'End Monitoring';
 
-	# bug_file_add.php3
+	# bug_file_add.php
 	$s_file_upload_msg = 'Fichier envoyé avec succès...';
 
-	# bug_file_upload_inc.php3
+	# bug_file_upload_inc.php
 	$s_upload_file = 'Envoyer un fichier';
 	$s_select_file = 'Sélectionner un fichier';
 	$s_upload_file_button = 'Envoyer le fichier';
 
-	# bug_reopen.php3
+	# bug_reopen.php
 	$s_bug_reopened_msg = 'Le bug a été réouvert...';
 	$s_reopen_add_bugnote_title = 'Ajouter une note pour la réouverture du bug';
 	$s_bugnote_add_reopen_button = 'Ajouter une note et réouvrir le bug';
 
-	# bug_resolve_page.php3
+	# bug_resolve_page.php
 	$s_resolve_bug_title = 'Résolution de bug';
 	$s_resolve_bug_button = 'Resoudre ce bug';
 
-	# bug_resolve_page2.php3
+	# bug_resolve_page2.php
 	$s_bug_resolved_msg = 'Le bug a été résolu. Entrez une note ci-dessous...';
 	$s_resolve_add_bugnote_title = 'Ajouter une note pour la résolution du bug';
 	$s_bugnote_add_resolve_button = 'Ajouter une note';
 
-	# bug_update.php3
+	# bug_update.php
 	$s_bug_updated_msg = 'Le bug a été mis à jour...';
 
-	# bug_update_advanced_page.php3
+	# bug_update_advanced_page.php
 	$s_back_to_bug_link = 'Retour au bug';
 	$s_update_simple_link = 'Mise à jour simple';
 	$s_updating_bug_advanced_title = 'Mise à jour de l\'information sur le bug';
@@ -264,21 +264,21 @@
 	$s_information = 'Information';
 	$s_update_information_button = 'Mettre à jour l\'information';
 
-	# bug_update_page.php3
+	# bug_update_page.php
 	$s_update_advanced_link = 'Mise à jour détaillée';
 	$s_updating_bug_simple_title = 'Mise à jour de l\'information du bug';
 
-	# bug_vote_add.php3
+	# bug_vote_add.php
 	$s_vote_added_msg = 'Vote ajouté...';
 
-	# bugnote_add.php3
+	# bugnote_add.php
 	$s_bugnote_added_msg = 'Note ajoutée...';
 
-	# bugnote_delete.php3
+	# bugnote_delete.php
 	$s_bugnote_deleted_msg = 'Note supprimée...';
 	$s_bug_notes_title = 'Notes sur les bugs';
 
-	# bugnote_edit_page.php3
+	# bugnote_edit_page.php
 	$s_edit_bugnote_title = 'Editer la note';
 
 	# bugnote_inc.php
@@ -289,16 +289,16 @@
 	$s_bugnote_edit_link = 'Editer';
 	$s_close_bug_button = 'Fermer le bug';
 
-	# bugnote_update.php3
+	# bugnote_update.php
 	$s_bugnote_updated_msg = 'La note a été mise à jour...';
 	$s_edited_on = 'édité le: ';
 
-	# index.php3
+	# index.php
 	$s_click_to_login = 'Cliquer pour vous identifier';
 
-	# login.php3
+	# login.php
 
-	# login_page.php3
+	# login_page.php
 	$s_login_page_info = 'Bienvenue sur le bugTracker.';
 	$s_login_title = 'Identifiant';
 	$s_save_login = 'Mémoriser l\'identifiant';
@@ -306,33 +306,33 @@
 	$s_login_button = 'Se connecter';
 	$s_signup_link = 'Ouvrir un nouveau compte';
 
-	# login_select_proj_page.php3
+	# login_select_proj_page.php
 	$s_select_project_button = 'Choisir un projet';
 
-	# logout_page.php3
+	# logout_page.php
 	$s_logged_out_title = 'Déconnexion...';
 	$s_redirecting = '... Redirection en cours';
 	$s_here = 'Ici';
 
-	# main_page.php3
+	# main_page.php
 	$s_open_and_assigned_to_me = 'Bug ouverts et qui me sont assignés';
 	$s_open_and_reported_to_me = 'Bug ouverts dont je suis le rapporteur';
 	$s_newer_news_link = 'Nouvelles récentes';
 	$s_older_news_link = 'Anciennes nouvelles';
 	$s_archives = 'Archives';
 
-	# manage_create_new_user.php3
+	# manage_create_new_user.php
 	$s_created_user_part1 = 'Utilisateur créé';
 	$s_created_user_part2 = 'avec une accréditation';
 
-	# manage_create_user_page.php3
+	# manage_create_user_page.php
 	$s_create_new_account_title = 'Créer un nouveau compte';
 	$s_verify_password = 'Vérifier le mot de passe';
 	$s_enabled = 'Activé';
 	$s_protected = 'Protégé';
 	$s_create_user_button = 'Créer l\'utilisateur';
 
-	# manage_page.php3
+	# manage_page.php
 	$s_hide_disabled = 'Cacher désactivés';
 	$s_filter_button = 'Filtrer';
 	$s_manage_users_link = 'Gérer les utilisateurs';
@@ -351,34 +351,34 @@
 	$s_last_visit = 'Dernière visite';
 	$s_edit_user_link = 'Editer l\'utilisateur';
 
-	# manage_project_add.php3
+	# manage_project_add.php
 	$s_project_added_msg = 'Nouveau projet installé...';
 
-	# manage_project_category_add.php3
+	# manage_project_category_add.php
 	$s_category_added_msg = 'Nouvelle catégorie créée...';
 
-	# manage_project_category_delete.php3
+	# manage_project_category_delete.php
 	$s_category_deleted_msg = 'Catégorie effacée...';
 
-	# manage_project_category_delete_page.php3
+	# manage_project_category_delete_page.php
 	$s_category_delete_sure_msg = 'Voulez-vous vraiment supprimer cette catégorie ? Tous les bugs associés seront perdus.';
 	$s_delete_category_button = 'Supprimer la catégorie';
 
-	# manage_project_category_edit_page.php3
+	# manage_project_category_edit_page.php
 	$s_edit_project_category_title = 'Editer les catégories du projet';
 	$s_update_category_button = 'Mettre à jour la catégorie';
 
-	# manage_project_category_update.php3
+	# manage_project_category_update.php
 	$s_category_updated_msg = 'La catégorie a été modifiée...';
 
-	# manage_project_delete.php3
+	# manage_project_delete.php
 	$s_project_deleted_msg = 'Le projet a été supprimé...';
 
-	# manage_project_delete_page.php3
+	# manage_project_delete_page.php
 	$s_project_delete_msg = 'Voulez-vous vraiment supprimer ce projet et tous les rapports de bugs associés ?';
 	$s_project_delete_button = 'Supprimer le projet';
 
-	# manage_project_edit_page.php3
+	# manage_project_edit_page.php
 	$s_edit_project_title = 'Editer un projet';
 	$s_project_name = 'Nom du projet';
 	$s_view_status = 'Afficher l\'état';
@@ -393,56 +393,56 @@
 	$s_add_version_button = 'Ajouter de versions';
 	$s_edit_link = 'Editer';
 
-	# manage_project_menu_page.php3
+	# manage_project_menu_page.php
 	$s_add_project_title = 'Ajouter un projet';
 	$s_upload_file_path = 'Chemin pour le dépôt de fichier';
 	$s_add_project_button = 'Ajouter le projet';
 	$s_projects_title = 'Projets';
 	$s_name = 'Nom';
 
-	# manage_project_update.php3
+	# manage_project_update.php
 	$s_project_updated_msg = 'Le projet a été mis à jour...';
 
-	# manage_project_version_add.php3
+	# manage_project_version_add.php
 	$s_version_added_msg = 'La version a été enregistrée...';
 
-	# manage_project_version_delete.php3
+	# manage_project_version_delete.php
 	$s_version_deleted_msg = 'La version a été supprimée...';
 
-	# manage_project_version_delete_page.php3
+	# manage_project_version_delete_page.php
 	$s_version_delete_sure = 'Voulez-vous vraiment supprimer cette version ? Tous les rapports de bugs associés seront perdus.';
 	$s_delete_version_button = 'Supprimer la version';
 
-	# manage_project_version_edit_page.php3
+	# manage_project_version_edit_page.php
 	$s_edit_project_version_title = 'Editer la version du projet';
 	$s_update_version_button = 'Mettre à jour la version';
 
-	# manage_project_version_update.php3
+	# manage_project_version_update.php
 	$s_version_updated_msg = 'La version a été mise à jour...';
 
-	# manage_user_delete.php3
+	# manage_user_delete.php
 	$s_account_delete_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas le supprimer.';
 	$s_account_deleted_msg = 'Compte supprimé...';
 
-	# manage_user_delete_page.php3
+	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = 'Voulez-vous vraiment supprimer ce compte ?';
 
-	# manage_prune.php3
+	# manage_prune.php
 	$s_accounts_pruned_msg = 'Tous les comptes de plus d\'une semaine et qui ne se sont jamais connectés ont été effacés.';
 
-	# manage_user_page.php3
+	# manage_user_page.php
 	$s_edit_user_title = 'Editer un utilisateur';
 	$s_reset_password_button = 'Effacer le mot de passe';
 	$s_delete_user_button = 'Supprimer l\'utilisateur';
 	$s_reset_password_msg = 'Réinitialiser le mot de passe le remplace par un mot de passe généré aléatoirement';
 	$s_reset_password_msg2 = 'Réinitialiser le mot de passe le remplace par \'\' (vide)).';
 
-	# manage_user_reset.php3
+	# manage_user_reset.php
 	$s_account_reset_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas réinitialiser le mot de passe.';
 	$s_account_reset_msg = 'Le mot de passe est réinitialisé...';
 	$s_account_reset_msg2 = 'Mot de passe mis à \'\' (vide)...';
 
-	# manage_user_update.php3
+	# manage_user_update.php
 	$s_manage_user_protected_msg = 'Compte protégé. Accréditation et activation protégés. Autrement, le compte a été mis à jour...';
 	$s_manage_user_updated_msg = 'Le compte a été mis à jour...';
 
@@ -460,23 +460,23 @@
 
 	# meta_inc.php
 
-	# news_add.php3
+	# news_add.php
 	$s_news_added_msg = 'Nouvelle ajoutée...';
 
-	# news_delete.php3
+	# news_delete.php
 	$s_news_deleted_msg = 'Nouvelle supprimée...';
 
-	# news_delete_page.php3
+	# news_delete_page.php
 	$s_delete_news_sure_msg = 'Voulez-vous vraiment supprimer cette nouvelle ?';
 	$s_delete_news_item_button = 'Supprimer cette nouvelle';
 
-	# news_edit_page.php3
+	# news_edit_page.php
 	$s_edit_news_title = 'Editer les nouvelles';
 	$s_headline = 'Titre';
 	$s_body = 'Message';
 	$s_update_news_button = 'Mettre à jour les nouvelles';
 
-	# news_menu_page.php3
+	# news_menu_page.php
 	$s_add_news_title = 'Ajouter une nouvelle';
 	$s_do_not_use = 'Ne pas utiliser';
 	$s_post_to = 'Poster dans';
@@ -486,58 +486,58 @@
 	$s_delete_post = 'Supprimer la nouvelle';
 	$s_select_post = 'Sélectionner la nouvelle';
 
-	# news_update.php3
+	# news_update.php
 	$s_news_updated_msg = 'Les nouvelles ont été mises à jour...';
 
-	# news_view_page.php3
+	# news_view_page.php
 	$s_back_link = 'Retour';
 
-	# proj_doc_add.php3
+	# proj_doc_add.php
 	$s_file_uploaded_msg = 'Le fichier a bien été envoyé.';
 
-	# proj_doc_add_page.php3
+	# proj_doc_add_page.php
 	$s_upload_file_title = 'Attacher un fichier';
 	$s_title = 'Titre';
 
-	# proj_doc_delete.php3
+	# proj_doc_delete.php
 	$s_project_file_deleted_msg = 'Fichier projet supprimé';
 
-	# proj_doc_delete_page.php3
+	# proj_doc_delete_page.php
 	$s_confirm_file_delete_msg = 'Voulez-vous vraiment supprimer ce fichier ?';
 
-	# proj_doc_edit_page.php3
+	# proj_doc_edit_page.php
 	$s_filename = 'Nom du fichier';
 	$s_file_update_button = 'Modifier le fichier';
 	$s_file_delete_button = 'Supprimer le fichier';
 
-	# proj_doc_page.php3
+	# proj_doc_page.php
 	$s_project_documentation_title = 'Documentation du projet';
 	$s_user_documentation = 'Documentation pour l\'utilisateur';
 	$s_project_documentation = 'Documentation du projet';
 	$s_add_file = 'Ajouter un fichier';
 
-	# proj_doc_update.php3
+	# proj_doc_update.php
 	$s_project_document_updated = 'Le projet a été modifié';
 
-	# proj_user_add.php3
+	# proj_user_add.php
 	$s_project_user_added_msg = 'L\'utilisateur a été ajouté au projet';
 
-	# proj_user_delete.php3
+	# proj_user_delete.php
 	$s_project_removed_user_msg = 'L\'utilisateur a été supprimé du projet';
 
-	# proj_user_delete_page.php3
+	# proj_user_delete_page.php
 	$s_remove_user_sure_msg = 'Voulez-vous vraiment enlever cet utilisateur du projet ?';
 
-	# proj_user_menu_page.php3
+	# proj_user_menu_page.php
 	$s_add_user_title = 'Ajouter un utilisateur au projet';
 	$s_add_user_button = 'Ajouter l\'utilisateur';
 	$s_project_selection_title = 'Choix du projet';
 	$s_remove_link = 'Supprimer';
 
-	# proj_user_update.php3
+	# proj_user_update.php
 	$s_updated_user_msg = 'Utilisateur modifié avec succès';
 
-	# report_add.php3
+	# report_add.php
 	$s_must_enter_category = 'Vous devez choisir une catégorie';
 	$s_must_enter_severity = 'Vous devez choisir une sévérité';
 	$s_must_enter_reproducibility = 'Vous devez choisir une reproductibilité';
@@ -546,7 +546,7 @@
 	$s_report_more_bugs = 'Saisir un nouveau bug';
 	$s_submission_thanks_msg = 'Merci de votre contribution.';
 
-	# report_bug_advanced_page.php3
+	# report_bug_advanced_page.php
 	$s_simple_report_link = 'Rapport simplifié';
 	$s_enter_report_details_title = 'Saisir les détails du rapport';
 	$s_required = 'obligatoire';
@@ -559,20 +559,20 @@
 	$s_submit_report_button = 'Envoyer le rapport';
 	$s_check_report_more_bugs = 'Cocher pour saisir d\'autres bugs';
 
-	# report_bug_page.php3
+	# report_bug_page.php
 	$s_advanced_report_link = 'Rapport détaillé';
 	$s_report_stay = 'Garder le rapport';
 
-	# set_project.php3
+	# set_project.php
 	$s_selected_project = 'Projet en cours';
 	$s_valid_project_msg = 'Vous devez choisir un projet valide';
 
-	# show_source_page.php3
+	# show_source_page.php
 	$s_show_source_for_msg = 'Source du fichier';
 	$s_not_supported_part1 = 'La version';
 	$s_not_supported_part2 = 'de PHP ne supporte pas';
 
-	# signup.php3
+	# signup.php
 	$s_invalid_email = 'EST UNE ADRESSE EMAIL INVALIDE';
 	$s_duplicate_username = 'EST DEJA DANS LA BASE. CHOISISSEZ UN AUTRE IDENTIFIANT';
 	$s_account_create_fail = 'ERREUR : CREATION DU COMPTE ABANDONNEE';
@@ -580,24 +580,24 @@
   	$s_password_emailed_msg = 'Votre mot de passe vous sera communiqué par email';
   	$s_no_reponse_msg = 'Si vous ne répondez pas sous une semaine, votre compte sera supprimé.';
 
-	# signup_page.php3
+	# signup_page.php
 	$s_signup_info = 'Choisir un identifiant et entrer une adresse valide. Un mot de passe vous sera transmis par email.';
 	$s_signup_title = 'Inscription';
 	$s_signup_button = 'Inscription';
 
-	# site_settings_edit_page.php3
+	# site_settings_edit_page.php
 	$s_edit_site_settings_title = 'Modifier la configuration du site';
 	$s_save_settings_button = 'Sauvegarder les modifications';
 
-	# site_settings_page.php3
+	# site_settings_page.php
 	$s_site_settings_title = 'Configuration du site';
 	$s_system_info_link = 'Information système';
 	$s_site_settings_link = 'Modifier la configuration du site';
 
-	# site_settings_update.php3
+	# site_settings_update.php
 	$s_site_settings_updated_msg = 'Les modifications ont bien été prises en compte.';
 
-	# summary_page.php3
+	# summary_page.php
 	$s_summary_title = 'Synthèse';
 	$s_summary_jpgraph_link = 'Advanced summary';
 	$s_by_status = 'par état';
@@ -617,7 +617,7 @@
 	$s_reporter_stats = 'statistiques par rapporteur';
 	$s_orct = '(ouvert/résolu/fermé/total)';
 
-	# view_all_bug_page.php3
+	# view_all_bug_page.php
 	$s_any = 'tous';
 	$s_show = 'Afficher';
 	$s_changed = 'Modifiés (heures)';
@@ -631,7 +631,7 @@
 	$s_view_prev_link = 'Voir les précédents';
 	$s_view_next_link = 'Voir les suivants';
 
-	# view_bug_advanced_page.php3
+	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Rapport simplifié';
 	$s_viewing_bug_advanced_details_title = 'Afficher le rapport détaillé';
 	$s_product_build = 'Build';
@@ -643,7 +643,7 @@
 
 	# view_bug_inc.php
 
-	# view_bug_page.php3
+	# view_bug_page.php
 	$s_view_advanced_link = 'Rapport détaillé';
 	$s_viewing_bug_simple_details_title = 'Afficher le rapport simplifié';
 ?>

@@ -106,15 +106,15 @@
 	$s_email_summary =  'Podsumowanie';
 	$s_email_description = 'Opis';
 
-	# account_delete.php3
+	# account_delete.php
 	$s_account_protected_msg = 'Konto jest zabezpieczone. Nie mo¿na zmieniæ ustawieñ...';
 	$s_account_removed_msg = 'Twoje konto zosta³o usuniête...';
 
-	# account_delete_page.php3
+	# account_delete_page.php
 	$s_confirm_delete_msg = 'Czy na pewno chcesz usun±æ swoje konto ?';
 	$s_delete_account_button = 'Usuñ Konto';
 
-	# account_page.php3
+	# account_page.php
 	$s_manage_profiles_link = 'Profile';
 	$s_change_preferences_link = 'Preferencje';
 	$s_edit_account_title = 'Edytycja konta';
@@ -125,7 +125,7 @@
 	$s_access_level = 'Poziom dostêpu';
 	$s_update_user_button = 'Aktualizuj';
 
-	# account_prefs_page.php3
+	# account_prefs_page.php
 	$s_default_account_preferences_title = 'Preferencje konta';
 	$s_default_project = 'Domy¶lny Projekt';
 	$s_advanced_report = 'Zg³oszenie zaawansowane';
@@ -146,19 +146,19 @@
 	$s_update_prefs_button = 'Aktualizuj';
 	$s_reset_prefs_button = 'Przywróæ ustawienia';
 
-	# account_prefs_reset.php3
+	# account_prefs_reset.php
 	$s_prefs_reset_msg = 'Preferencje zosta³y przywrócone...';
 
-	# account_prefs_update.php3
+	# account_prefs_update.php
 	$s_prefs_updated_msg = 'Preferencje zosta³y zaktualizowane...';
 
-	# account_profile_add.php3
+	# account_profile_add.php
 	$s_profile_added_msg = 'Profil zosta³ dodany...';
 
-	# account_profile_delete.php3
+	# account_profile_delete.php
 	$s_profile_deleted_msg = 'Profil zosta³ usuniêty...';
 
-	# account_profile_edit_page.php3
+	# account_profile_edit_page.php
 	$s_edit_profile_title = 'Edycja profilu';
 	$s_platform = 'Platforma';
 	$s_operating_system = 'System operacyjny';
@@ -166,10 +166,10 @@
 	$s_additional_description = 'Dodatkowy opis';
 	$s_update_profile_button = 'Zaktualizuj';
 
-	# account_profile_make_default.php3
+	# account_profile_make_default.php
 	$s_profile_defaulted_msg = 'Standardowy profil zosta³ zaktualizowany...';
 
-	# account_profile_manage_page.php3
+	# account_profile_manage_page.php
 	$s_add_profile_title = 'Dodawanie profilu';
 	$s_add_profile_button = 'Dodaj profil';
 	$s_edit_or_delete_profiles_title = 'Edycja lub usuniêcie profilu';
@@ -179,59 +179,59 @@
 	$s_select_profile = 'Wybierz profil';
 	$s_submit_button = 'Wy¶lij';
 
-	# account_profile_update.php3
+	# account_profile_update.php
 	$s_profile_updated_msg = 'Profil zosta³ zaktualizowany...';
 
-	# account_update.php3
+	# account_update.php
 	$s_account_updated_msg = 'Twoje konto zosta³o zaktualizowane...';
 
-	# bug_assign.php3
+	# bug_assign.php
 	$s_bug_assign_msg       = 'B³±d zosta³ pomy¶lnie przypisany...';
 
-	# bug_close.php3
+	# bug_close.php
 	$s_bug_close_msg       = 'B³±d zosta³ zamkniêty...';
 	$s_close_immediately   = 'Zamknij natychmiast:';
 
-	# bug_close_page.php3
+	# bug_close_page.php
 	$s_close_bug_title = 'Zamykanie B³êdu';
 
-	# bug_delete.php3
+	# bug_delete.php
 	$s_bug_deleted_msg = 'B³±d zosta³ usuniêty...';
 
-	# bug_delete_page.php3
+	# bug_delete_page.php
 	$s_delete_bug_sure_msg = 'Czy na pewno chcesz usun±æ ten b³±d ?';
 	$s_delete_bug_button = 'Usuñ B³±d';
 
-	# bug_monitor.php3
+	# bug_monitor.php
 	$s_monitor_bug_button = 'Monitor Bug';
 	$s_unmonitor_bug_button = 'End Monitoring';
 
-	# bug_file_add.php3
+	# bug_file_add.php
 	$s_file_upload_msg = 'Plik zosta³ pomy¶lnie przes³any';
 
-	# bug_file_upload_inc.php3
+	# bug_file_upload_inc.php
 	$s_upload_file = 'Prze¶lij plik';
 	$s_select_file = 'Wybierz plik';
 	$s_upload_file_button = 'Prze¶lij plik';
 
-	# bug_reopen.php3
+	# bug_reopen.php
 	$s_bug_reopened_msg = 'B³±d zosta³ ponownie otwarty...';
 	$s_reopen_add_bugnote_title = 'Dodaj komentarz z wyja¶nieniem powodu, dla którego ponownie otwierasz b³±d';
 	$s_bugnote_add_reopen_button = 'Dodaj komentarz i ponownie otwórz b³±d';
 
-	# bug_resolve_page.php3
+	# bug_resolve_page.php
 	$s_resolve_bug_title = 'Rozwi±zanie b³êdu';
 	$s_resolve_bug_button = 'Rozwi±¿ b³±d';
 
-	# bug_resolve_page2.php3
+	# bug_resolve_page2.php
 	$s_bug_resolved_msg = 'B³±d zosta³ rozwi±zany. Poni¿ej wprowad¼ komentarz...';
 	$s_resolve_add_bugnote_title = 'Dodawanie komentarza z wyja¶nieniem rozwi±zania b³êdu';
 	$s_bugnote_add_resolve_button = 'Dodaj komentarz';
 
-	# bug_update.php3
+	# bug_update.php
 	$s_bug_updated_msg = 'B³±d zosta³ pomy¶lnie zaktualizowany...';
 
-	# bug_update_advanced_page.php3
+	# bug_update_advanced_page.php
 	$s_back_to_bug_link = 'Powrót do \'b³êdu\'';
 	$s_update_simple_link = 'Aktualizacja prosta';
 	$s_updating_bug_advanced_title = 'Aktualizacja informacji o b³êdzie';
@@ -261,21 +261,21 @@
 	$s_information = 'Informacja';
 	$s_update_information_button = 'Aktualizuj informacjê';
 
-	# bug_update_page.php3
+	# bug_update_page.php
 	$s_update_advanced_link = 'Aktualizacja Zaawansowana';
 	$s_updating_bug_simple_title = 'Aktualizacja Informacji o B³êdzie';
 
-	# bug_vote_add.php3
+	# bug_vote_add.php
 	$s_vote_added_msg = 'G³os zosta³ dodany..';
 
-	# bugnote_add.php3
+	# bugnote_add.php
 	$s_bugnote_added_msg = 'Komentarz zosta³ dodany...';
 
-	# bugnote_delete.php3
+	# bugnote_delete.php
 	$s_bugnote_deleted_msg = 'Komentarz zosta³ pomy¶lnie usuniêty...';
 	$s_bug_notes_title = 'Komentarze';
 
-	# bugnote_edit_page.php3
+	# bugnote_edit_page.php
 	$s_edit_bugnote_title = 'Edytuj Komentarz';
 
 	# bugnote_inc.php
@@ -286,16 +286,16 @@
 	$s_bugnote_edit_link = 'Edytuj';
 	$s_close_bug_button = 'Zamknij B³±d';
 
-	# bugnote_update.php3
+	# bugnote_update.php
 	$s_bugnote_updated_msg = 'Komentarz zosta³ pomy¶lnie zaktualizowany...';
 	$s_edited_on = 'edytowano: ';
 
-	# index.php3
+	# index.php
 	$s_click_to_login = 'Kilknij tutaj, by siê zalogowaæ';
 
-	# login.php3
+	# login.php
 
-	# login_page.php3
+	# login_page.php
 	$s_login_page_info = 'Witaj w programie do ¶ledzenia b³êdów.';
 	$s_login_title = 'Logowanie';
 	$s_save_login = 'Zapamiêtaj has³o';
@@ -303,33 +303,33 @@
 	$s_login_button = 'Zaloguj siê';
 	$s_signup_link = 'Za³ó¿ nowe konto';
 
-	# login_select_proj_page.php3
+	# login_select_proj_page.php
 	$s_select_project_button = 'Wybierz projekt';
 
-	# logout_page.php3
+	# logout_page.php
 	$s_logged_out_title = 'Wylogowany...';
 	$s_redirecting = '...Przekierowujê';
 	$s_here = 'Tutaj';
 
-	# main_page.php3
+	# main_page.php
 	$s_open_and_assigned_to_me = 'Otwarte i przypisane do mnie';
 	$s_open_and_reported_to_me = 'Otwarte i zg³oszone przeze mnie';
 	$s_newer_news_link = 'Nowsze wiadomo¶ci';
 	$s_older_news_link = 'Starsze wiadomo¶ci';
 	$s_archives = 'Archiwum';
 
-	# manage_create_new_user.php3
+	# manage_create_new_user.php
 	$s_created_user_part1 = 'Zosta³ stworzony u¿ytkownik';
 	$s_created_user_part2 = 'z poziomem dostêpu';
 
-	# manage_create_user_page.php3
+	# manage_create_user_page.php
 	$s_create_new_account_title = 'Tworzenie nowego konta';
 	$s_verify_password = 'Potwierd¼ has³o';
 	$s_enabled = 'Aktywne';
 	$s_protected = 'Zabezpieczone';
 	$s_create_user_button = 'Stwórz U¿ytkownika';
 
-	# manage_page.php3
+	# manage_page.php
 	$s_hide_disabled = 'Ukryj zablokowane';
 	$s_filter_button = 'Filtruj';
 	$s_manage_users_link = 'Zarz±dzanie U¿ytkownikami';
@@ -348,34 +348,34 @@
 	$s_last_visit = 'Ostatnia wizyta';
 	$s_edit_user_link = 'Edytuj dane';
 
-	# manage_project_add.php3
+	# manage_project_add.php
 	$s_project_added_msg = 'Projekt zosta³ pomy¶lnie dodany...';
 
-	# manage_project_category_add.php3
+	# manage_project_category_add.php
 	$s_category_added_msg = 'Kategoria zosta³a pomy¶lnie dodana...';
 
-	# manage_project_category_delete.php3
+	# manage_project_category_delete.php
 	$s_category_deleted_msg = 'Kategoria zosta³a pomy¶lnie usuniêta...';
 
-	# manage_project_category_delete_page.php3
+	# manage_project_category_delete_page.php
 	$s_category_delete_sure_msg = 'Czy napewno chcesz usun±æ t± kategoriê ? Wszystkie przypisane do niej b³êdy zostan± usuniête.';
 	$s_delete_category_button = 'Usuñ kategoriê';
 
-	# manage_project_category_edit_page.php3
+	# manage_project_category_edit_page.php
 	$s_edit_project_category_title = 'Edycja kategorii';
 	$s_update_category_button = 'Aktualizuj Kategoriê';
 
-	# manage_project_category_update.php3
+	# manage_project_category_update.php
 	$s_category_updated_msg = 'Kategoria zosta³a pomy¶lnie zaktualizowana...';
 
-	# manage_project_delete.php3
+	# manage_project_delete.php
 	$s_project_deleted_msg = 'Projekt zosta³ usuniêty...';
 
-	# manage_project_delete_page.php3
+	# manage_project_delete_page.php
 	$s_project_delete_msg = 'Czy na pewno chcesz usun±æ ten projekt i wszystkie zg³oszone do tego projektu b³êdy?';
 	$s_project_delete_button = 'Usuñ projekt';
 
-	# manage_project_edit_page.php3
+	# manage_project_edit_page.php
 	$s_edit_project_title = 'Edycja projektu';
 	$s_project_name = 'Nazwa projektu';
 	$s_view_status = 'Status';
@@ -390,56 +390,56 @@
 	$s_add_version_button = 'Dodaj wersjê';
 	$s_edit_link = 'edytuj';
 
-	# manage_project_menu_page.php3
+	# manage_project_menu_page.php
 	$s_add_project_title = 'Dodawanie projektu';
 	$s_upload_file_path = 'Katalog dla przesy³anych plików';
 	$s_add_project_button = 'Dodaj projekt';
 	$s_projects_title = 'Projekty';
 	$s_name = 'Nazwa';
 
-	# manage_project_update.php3
+	# manage_project_update.php
 	$s_project_updated_msg = 'Projekt zosta³ zaktualizowany...';
 
-	# manage_project_version_add.php3
+	# manage_project_version_add.php
 	$s_version_added_msg = 'Nowa wersja zosta³a pomy¶lnie dodana...';
 
-	# manage_project_version_delete.php3
+	# manage_project_version_delete.php
 	$s_version_deleted_msg = 'Wersja zosta³a pomy¶lnie usuniêta...';
 
-	# manage_project_version_delete_page.php3
+	# manage_project_version_delete_page.php
 	$s_version_delete_sure = 'Czy na pewno chcesz usun±æ t± wersjê ? Wszystkie zg³oszone do tej wersji b³êdy zostan± usuniête.';
 	$s_delete_version_button = 'Usuñ wersjê';
 
-	# manage_project_version_edit_page.php3
+	# manage_project_version_edit_page.php
 	$s_edit_project_version_title = 'Edycja wersji projektu';
 	$s_update_version_button = 'Aktualizuj wersjê';
 
-	# manage_project_version_update.php3
+	# manage_project_version_update.php
 	$s_version_updated_msg = 'Wersja zosta³a pomy¶lnie zaktualizowana...';
 
-	# manage_user_delete.php3
+	# manage_user_delete.php
 	$s_account_delete_protected_msg = 'Konto jest zabezpieczone. Nie mo¿na usun±æ tego konta.';
 	$s_account_deleted_msg = 'Konto zosta³o usuniête...';
 
-	# manage_user_delete_page.php3
+	# manage_user_delete_page.php
 	$s_delete_account_sure_msg = 'Czy na pewno chcesz usun±æ to konto ?';
 
-	# manage_prune.php3
+	# manage_prune.php
 	$s_accounts_pruned_msg = 'Wszystkie konta na które nikt siê nie logowa³ i starsze ni¿ tydzieñ zosta³y usuniête.';
 
-	# manage_user_page.php3
+	# manage_user_page.php
 	$s_edit_user_title = 'Edycja U¿ytkownika';
 	$s_reset_password_button = 'Nowe has³o';
 	$s_delete_user_button = 'Usuñ U¿ytkownika';
 	$s_reset_password_msg = 'Operacja \'Nowe has³o\' ustawia losowo wygenerowane has³o';
 	$s_reset_password_msg2 = 'Po operacji \'Nowe has³o\' u¿ytkownik nie bêdzie musia³ podawaæ has³a przy logowaniu.';
 
-	# manage_user_reset.php3
+	# manage_user_reset.php
 	$s_account_reset_protected_msg = 'Konto jest zabezpieczone. Nie mo¿na przypisaæ nowego has³a.';
 	$s_account_reset_msg = 'Nowe has³o zosta³o przypisane...';
 	$s_account_reset_msg2 = 'Konto nie wymaga podawania has³a...';
 
-	# manage_user_update.php3
+	# manage_user_update.php
 	$s_manage_user_protected_msg = 'Konto jest zabezpieczone. Za wyj±tkiem Poziomu dostêpu i Aktywno¶æci dane zosta³y zatualizowane...';
 	$s_manage_user_updated_msg = 'Konto zosta³o zaktualizowane...';
 
@@ -457,23 +457,23 @@
 
 	# meta_inc.php
 
-	# news_add.php3
+	# news_add.php
 	$s_news_added_msg = 'Nowa wiadomo¶æ zosta³a dodana...';
 
-	# news_delete.php3
+	# news_delete.php
 	$s_news_deleted_msg = 'Wiadomo¶æ zosta³a usuniêta...';
 
-	# news_delete_page.php3
+	# news_delete_page.php
 	$s_delete_news_sure_msg = 'Czy na pewno chcesz usun±æ wiadomo¶æ ?';
 	$s_delete_news_item_button = 'Usuñ wiadomo¶æ';
 
-	# news_edit_page.php3
+	# news_edit_page.php
 	$s_edit_news_title = 'Edycja wiadomo¶ci';
 	$s_headline = 'Nag³ówek';
 	$s_body = 'Tre¶æ';
 	$s_update_news_button = 'Aktualizuj Wiadomo¶æ';
 
-	# news_menu_page.php3
+	# news_menu_page.php
 	$s_add_news_title = 'Dodawanie wiadomo¶ci';
 	$s_do_not_use = 'Nie u¿ywaj';
 	$s_post_to = 'Wy¶lij do';
@@ -483,58 +483,58 @@
 	$s_delete_post = 'Usuñ wiadomo¶æ';
 	$s_select_post = 'Wybierz wiadomo¶æ';
 
-	# news_update.php3
+	# news_update.php
 	$s_news_updated_msg = 'Wiadomo¶æ zosta³a zaktualizowana...';
 
-	# news_view_page.php3
+	# news_view_page.php
 	$s_back_link = 'Powrót';
 
-	# proj_doc_add.php3
+	# proj_doc_add.php
 	$s_file_uploaded_msg = 'Plik zosta³ pomy¶lnie przes³any';
 
-	# proj_doc_add_page.php3
+	# proj_doc_add_page.php
 	$s_upload_file_title = 'Przesy³anie pliku';
 	$s_title = 'Tytu³';
 
-	# proj_doc_delete.php3
+	# proj_doc_delete.php
 	$s_project_file_deleted_msg = 'Plik projektu zosta³ usuniêty';
 
-	# proj_doc_delete_page.php3
+	# proj_doc_delete_page.php
 	$s_confirm_file_delete_msg = 'Czy na pewno chcesz usun±æ ten plik ?';
 
-	# proj_doc_edit_page.php3
+	# proj_doc_edit_page.php
 	$s_filename = 'Nazwa pliku';
 	$s_file_update_button = 'Aktualizuj plik';
 	$s_file_delete_button = 'Usuñ plik';
 
-	# proj_doc_page.php3
+	# proj_doc_page.php
 	$s_project_documentation_title = 'Dokumentacja projektu';
 	$s_user_documentation = 'Dokumentacja u¿ytkownika';
 	$s_project_documentation = 'Dokumentacja projektu';
 	$s_add_file = 'Dodaj plik';
 
-	# proj_doc_update.php3
+	# proj_doc_update.php
 	$s_project_document_updated = 'Projekt zosta³ pomy¶lnie zaktualizowany';
 
-	# proj_user_add.php3
+	# proj_user_add.php
 	$s_project_user_added_msg = 'U¿ytkownik zosta³ pomy¶lnie dodany do projektu';
 
-	# proj_user_delete.php3
+	# proj_user_delete.php
 	$s_project_removed_user_msg = 'U¿ytkownik zosta³ pomy¶lnie usuniêty z projektu';
 
-	# proj_user_delete_page.php3
+	# proj_user_delete_page.php
 	$s_remove_user_sure_msg = 'Czy na pewno chcesz usun±æ tego u¿ytkownika?';
 
-	# proj_user_menu_page.php3
+	# proj_user_menu_page.php
 	$s_add_user_title = 'Dodawanie u¿ytkownika do projektu';
 	$s_add_user_button = 'Dodaj u¿ytkownika';
 	$s_project_selection_title = 'Wybór projektu';
 	$s_remove_link = 'usuñ';
 
-	# proj_user_update.php3
+	# proj_user_update.php
 	$s_updated_user_msg = 'U¿ytkownik zosta³ pomy¶lnie zaktualizowany';
 
-	# report_add.php3
+	# report_add.php
 	$s_must_enter_category = 'Powiniene¶ wybraæ kategoriê';
 	$s_must_enter_severity = 'Powiniene¶ wybraæ wa¿no¶æ b³êdu';
 	$s_must_enter_reproducibility = 'Powiniene¶ wybraæ powtarzalno¶æ b³êdu';
@@ -543,7 +543,7 @@
 	$s_report_more_bugs = 'Zg³o¶ wiêcej b³êdów';
 	$s_submission_thanks_msg = 'Dziêkujemy za zg³oszenie b³êdu';
 
-	# report_bug_advanced_page.php3
+	# report_bug_advanced_page.php
 	$s_simple_report_link = 'Zg³oszenie proste';
 	$s_enter_report_details_title = 'Wprowadzanie szczegó³ów zg³oszenia';
 	$s_required = 'wymagane';
@@ -556,20 +556,20 @@
 	$s_submit_report_button = 'Wy¶lij zg³oszenie';
 	$s_check_report_more_bugs = 'zaznacz, je¶li chcesz zg³osiæ wiêcej b³êdów';
 
-	# report_bug_page.php3
+	# report_bug_page.php
 	$s_advanced_report_link = 'Zg³oszenie zaawansowane';
 	$s_report_stay = 'Pozostañ w zg³oszeniu';
 
-	# set_project.php3
+	# set_project.php
 	$s_selected_project = 'Wybrany projekt';
 	$s_valid_project_msg = 'Musisz wybraæ prawid³owy projekt';
 
-	# show_source_page.php3
+	# show_source_page.php
 	$s_show_source_for_msg = 'Poka¿ ¼ród³a dla';
 	$s_not_supported_part1 = 'Ta wersja';
 	$s_not_supported_part2 = 'php nie wspiera';
 
-	# signup.php3
+	# signup.php
 	$s_invalid_email = 'NIE JEST PRAWID£OWYM ADRESEM EMAIL';
 	$s_duplicate_username = 'JU¯ ISTNIEJE.  WYBIERZ INN¡ NAZWÊ U¯YTKOWNIKA';
 	$s_account_create_fail = 'STWORZENIE KONTA NIE POWIOD£O SIÊ';
@@ -577,24 +577,24 @@
 	$s_password_emailed_msg = 'Twoje has³o zostanie wys³ane na podany adres email.';
 	$s_no_reponse_msg = 'Je¿eli nie zalogujesz siê w przeci±gu tygodnia, twoje konto mo¿e zostaæ skasowane.';
 
-	# signup_page.php3
+	# signup_page.php
 	$s_signup_info = 'Wybierz nazwê u¿ytkownika i podaj prawid³owy adres email. Losowo wygenerowane has³o zostanie wys³ane na podany adres email.';
 	$s_signup_title = 'Zapisywanie siê';
 	$s_signup_button = 'Zapisz siê';
 
-	# site_settings_edit_page.php3
+	# site_settings_edit_page.php
 	$s_edit_site_settings_title = 'Edycja ustawieñ strony';
 	$s_save_settings_button = 'Zapisz ustawienia';
 
-	# site_settings_page.php3
+	# site_settings_page.php
 	$s_site_settings_title = 'Ustawienia strony';
 	$s_system_info_link = 'Informacja o systemie';
 	$s_site_settings_link = 'Ustawienia strony';
 
-	# site_settings_update.php3
+	# site_settings_update.php
 	$s_site_settings_updated_msg = 'Ustawienia strony zosta³y zaktualizowane';
 
-	# summary_page.php3
+	# summary_page.php
 	$s_summary_title = 'Statystyki';
 	$s_summary_jpgraph_link = 'Zaawansowane statystyki';
 	$s_by_status = 'wg statusu';
@@ -614,7 +614,7 @@
 	$s_reporter_stats = 'statystyki zg³aszaj±cych';
 	$s_orct = '(otwarty/rozwi±zany/zamkniêty/suma)';
 
-	# view_all_bug_page.php3
+	# view_all_bug_page.php
 	$s_any = 'dowolny';
 	$s_show = 'Poka¿';
 	$s_changed = 'Zmienione (w godzinach)';
@@ -628,7 +628,7 @@
 	$s_view_prev_link = 'Poprzednie';
 	$s_view_next_link = 'Nastêpne';
 
-	# view_bug_advanced_page.php3
+	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Widok prosty';
 	$s_viewing_bug_advanced_details_title = 'Widok zaawansowany';
 	$s_product_build = 'Kompilacja produktu';
@@ -640,7 +640,7 @@
 
 	# view_bug_inc.php
 
-	# view_bug_page.php3
+	# view_bug_page.php
 	$s_view_advanced_link = 'Widok zaawansowany';
 	$s_viewing_bug_simple_details_title = 'Widok prosty';
 ?>
