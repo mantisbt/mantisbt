@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.61 2004-12-17 01:44:51 thraxisp Exp $
+	# $Id: file_api.php,v 1.62 2004-12-18 09:50:46 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -361,27 +361,27 @@
 	}
 	# --------------------
 	function file_delete( $p_file_id, $p_table = 'bug' ) {
-		$c_file_id			= db_prepare_int( $p_file_id );
 		$t_upload_method	= config_get( 'file_upload_method' );
-		$t_filename			= file_get_field( $p_file_id, 'filename' );
 
-		if ( ( DISK == $t_upload_method ) || ( FTP == $t_upload_method ) ) {
-			$t_diskfile = file_get_field( $p_file_id, 'diskfile' );
+		$c_file_id = db_prepare_int( $p_file_id );
+		$t_filename = file_get_field( $p_file_id, 'filename', $p_table );
+		$t_diskfile = file_get_field( $p_file_id, 'diskfile', $p_table );
 
+		if( ( DISK == $t_upload_method ) || ( FTP == $t_upload_method ) ) {
 			if ( FTP == $t_upload_method ) {
 				$ftp = file_ftp_connect();
-				file_ftp_delete ( $ftp, $t_diskfile );
+				file_ftp_delete( $ftp, $t_diskfile );
 				file_ftp_disconnect( $ftp );
 			}
-
+		
 			if ( file_exists( $t_diskfile ) ) {
-				file_delete_local ( $t_diskfile );
+				file_delete_local( $t_diskfile );
 			}
 		}
 
-		if ( 'bug' == $p_table ) {
-			$t_bug_id			= file_get_field( $p_file_id, 'bug_id', 'bug' );
+		if( 'bug' == $p_table ) {
 			# log file deletion
+			$t_bug_id			= file_get_field( $p_file_id, 'bug_id', 'bug' );
 			history_log_event_special( $t_bug_id, FILE_DELETED, file_get_display_name ( $t_filename ) );
 		}
 
