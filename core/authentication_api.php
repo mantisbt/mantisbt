@@ -6,12 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.45 2004-08-14 15:26:20 thraxisp Exp $
+	# $Id: authentication_api.php,v 1.46 2005-01-28 21:56:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Authentication API ###
 
 	$g_script_login_cookie = null;
+	$g_cache_anonymous_user_cookie_string = null;
 
 	#===================================
 	# Boolean queries and ensures
@@ -146,7 +147,7 @@
 			return false;
 		}
 
-		# validate password if supplied	
+		# validate password if supplied
 		if ( null !== $p_password ) {
 			if ( !auth_does_password_match( $t_user_id, $p_password ) ) {
 				return false;
@@ -344,7 +345,7 @@
 	# if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
 	# otherwise returns '' (an empty string)
 	function auth_get_current_user_cookie() {
-		global $g_script_login_cookie;
+		global $g_script_login_cookie, $g_cache_anonymous_user_cookie_string;
 
 		$t_cookie_name = config_get( 'string_cookie' );
 		$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
@@ -355,13 +356,20 @@
 				return $g_script_login_cookie;
 			} else {
 				if ( ON == config_get( 'allow_anonymous_login' ) ) {
-					$query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
-							config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
-					$result = db_query( $query );
+					if ( $g_cache_anonymous_user_cookie_string == null ) {
+						$query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
+								config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
+						$result = db_query( $query );
 
-					if ( 1 == db_num_rows( $result ) ) {
-						$row		= db_fetch_array( $result );
-						$t_cookie	= $row['cookie_string'];
+						if ( 1 == db_num_rows( $result ) ) {
+							$row		= db_fetch_array( $result );
+							$t_cookie	= $row['cookie_string'];
+
+							$g_cache_anonymous_user_cookie_string = $t_cookie;
+							$g_cache_current_user_id = $row['id'];
+						}
+					} else {
+						$t_cookie = $g_cache_anonymous_user_cookie_string;
 					}
 				}
 			}
