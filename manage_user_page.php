@@ -103,7 +103,7 @@
 <p>
 <div align="center">
 <?php
-	if ( ON == $g_allow_signup ) {
+	if ( ON == $g_send_reset_password ) {
 		PRINT "$s_reset_password_msg";
 	} else {
 		PRINT "$s_reset_password_msg2";
