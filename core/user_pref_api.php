@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.19 2004-08-12 22:56:47 vboctor Exp $
+	# $Id: user_pref_api.php,v 1.20 2004-08-13 02:03:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### User Preferences API ###
@@ -287,6 +287,8 @@
 
 	# --------------------
 	# return the user's preferences
+	# @@@ (this should be a private interface as it doesn't have the benefit of applying
+	#  global defaults before returning values.
 	function user_pref_get_row( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		return user_pref_cache_row( $p_user_id, $p_project_id );
 	}
