@@ -2,7 +2,9 @@ Mantis ChangeLog
 
 2004.08.xx  -  0.19.0xx
 
+- 0003880: [filters] Ordering doesnt take last_updated into account
 - 0004073: [filters] Edit filter page now too wide. 'Apply filter' button is drawn off screen.
+- 0004093: [filters] Custom field values are a larger type size in view_all_bug_page
 - 0004122: [relationships] Upgrade script seems to swap the duplicate relationship (masc)
 - Updated Brazilian Portuguese language.
 

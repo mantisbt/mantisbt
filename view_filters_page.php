@@ -61,6 +61,7 @@
 	}
 	
 	$t_filter = current_user_get_bug_filter();
+	$t_filter = filter_ensure_valid_filter( $t_filter );
 	$t_project_id = helper_get_current_project();
 
 	$t_sort = $t_filter['sort'];

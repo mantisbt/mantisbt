@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.49 2004-07-19 09:46:40 narcissus Exp $
+	# $Id: filter_api.php,v 1.50 2004-07-20 11:02:16 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -535,6 +535,12 @@
 		}
 
 		$query2 .= " ORDER BY $c_sort $c_dir";
+		if ( $c_sort != 'last_updated' ) {
+            $query2 .= ', last_updated DESC, date_submitted DESC';
+        }
+        else {
+            $query2 .= ', date_submitted DESC';
+        }
 
 		# Figure out the offset into the db query
 		#
@@ -622,6 +628,7 @@
 		$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
 
 		$t_filter = current_user_get_bug_filter();
+		$t_filter = filter_ensure_valid_filter( $t_filter );
 		$t_project_id = helper_get_current_project();
 
 		$t_sort = $t_filter['sort'];
@@ -1221,7 +1228,7 @@
 					$t_output = '';
 					$t_any_found = false;
 
-					$t_values .= '<td> ' ; 
+					$t_values .= '<td class="small-caption" valign="top"> ' ; 
 					if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
 						$t_values .= lang_get( 'any' );
 					} else {
