@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -16,7 +16,8 @@
 
 	$result = 0;
 	if ( !is_valid_email( $f_email ) ) {
-		echo $f_email." IS INVALID";
+		PRINT "$f_email $s_invalid_email<p>";
+		PRINT "<a href=\"$g_signup_page\">$s_proceed</a>";
 		exit;
 	}
 
@@ -26,7 +27,8 @@
 		WHERE username='$f_username'";
     $result = db_query( $query );
     if ( db_num_rows( $result ) > 0 ) {
-    	echo "DUPLICATE ID.  CHOOSE ANOTHER USERNAME";
+    	PRINT "$f_username $s_duplicate_username<p>";
+		PRINT "<a href=\"$g_signup_page\">$s_proceed</a>";
     	exit;
     }
 
@@ -47,7 +49,8 @@
 			'reporter', 'on', '', '$t_cookie_string')";
     $result = db_query( $query );
     if ( !$result ) {
-    	echo "FAILED TO CREATE USER ACCOUNT";
+    	PRINT "$s_account_create_fail<p>";
+		PRINT "<a href=\"$g_signup_page\">$s_proceed</a>";
     	exit;
     }
 
