@@ -11,10 +11,10 @@
 <?
 #	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### grab the user id currently logged in
+	# grab the user id currently logged in
 	$t_user_id = get_current_user_field( "id " );
 
-	### get the bugnote data
+	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$f_id'
@@ -137,7 +137,7 @@
 <? ### Bugnote Add Form END ?>
 <?
 	} else if (( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) )||
-		( $v3_reporter_id==$t_user_id )) {
+		( $v_reporter_id == $t_user_id )) {
 ?>
 <? ### Bugnote Reopen Form BEGIN ?>
 <p>
