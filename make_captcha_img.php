@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: make_captcha_img.php,v 1.3 2004-08-16 02:14:55 thraxisp Exp $
+	# $Id: make_captcha_img.php,v 1.4 2004-08-17 23:25:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# --------------------------------------------------------
@@ -31,6 +31,32 @@
 	$captcha =& new masc_captcha( $t_captcha_init );
 	$captcha->make_captcha( $t_key );
 
+# 
+# The class below was derived from
+# http://www.phpclasses.org/browse/package/1163.html
+#
+# *** 3.0 Author
+# Pascal Rehfeldt
+# Pascal@Pascal-Rehfeldt.com
+#
+# http://www.phpclasses.org/browse.html/author/102754.html
+#
+#
+# *** 3.1 License
+# GNU General Public License (Version 2, June 1991)
+# 
+# This program is free software; you can redistribute
+# it and/or modify it under the terms of the GNU
+# General Public License as published by the Free
+# Software Foundation; either version 2 of the License,
+# or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will
+# be useful, but WITHOUT ANY WARRANTY; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE. See the GNU General Public License
+# for more details.
+# 
 
 	class masc_captcha
 	{
