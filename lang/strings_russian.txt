@@ -7,6 +7,12 @@
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 ?>
 <?
+	# new strings:
+	$s_no_file_specified = "ERROR: No file specified";
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+
 	# General Strings
 	$s_go_back = "Назад";
 	$s_proceed = "Нажмите, чтобы продолжить";

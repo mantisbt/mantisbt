@@ -8,6 +8,12 @@
 
 ?>
 <?
+	# new strings:
+	$s_no_file_specified = "ERROR: No file specified";
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+
 	# General Strings
 	$s_go_back = "Tilbage";
 	$s_proceed = "Klik her for at forts&aelig;tte ...";
@@ -434,7 +440,6 @@
 	$s_update_news_button = "Ajourf&oslash;r Nyheder";
 
 	# news_menu_page.php3
-	$g_sitewide = "Alle projekter";
 	$s_add_news_title = "Tilf&oslash;j Nyheder";
 	$s_do_not_use = "Brug ikke";
 	$s_post_to = "Send til";
@@ -608,24 +613,4 @@
 	# view_bug_page.php3
 	$s_view_advanced_link = "Vis avanceret";
 	$s_viewing_bug_simple_details_title = "Enkel oversigt over fejl i dette projekt";
-?>
-<?
-  # MISSING TRANSLATIONS:
-
-  #core_email_API.php
-  # LINE 537 & LINE 558:
-  $s_problems_sending  = "PROBLEMER MED AT SENDE EMAIL TIL";   # "PROBLEMS SENDING MAIL TO";
-
-  # LINE 538:
-  $s_mailer_error = "Mail Fejl";                               # "Mailer Error";
-
-  # core_html_API.php
-  # LINE 260:
-  $s_manage_users = "Administrer Brugere";                     # "Manage Users"
-  # LINE 261:
-  $s_manage_projects = "Administrer Projekter";                # "Manage Projects"
-  # And dont forget to add them as globas on LINE 247
-
-  # main_page.php
-  #LINE 106:
 ?>

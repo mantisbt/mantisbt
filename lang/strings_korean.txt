@@ -8,6 +8,12 @@
 	# 번역 수정   yjseo@mizi.com
 ?>
 <?
+	# new strings:
+	$s_no_file_specified = "ERROR: No file specified";
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+
 	# General Strings
 	$s_go_back = "뒤로";
 	$s_proceed = "계속 진행";
@@ -171,7 +177,7 @@
 	$s_select_file = "파일 선택";
 	$s_upload_file_button = "파일 업로드";
 
-	# bug_reopen_page.php3
+	# bug_reopen.php3
 	$s_bug_reopened_msg = "버그가 다시 발생했습니다...";
 	$s_reopen_add_bugnote_title = "재발생한 버그에 대하여 버그노트에 사유 추가";
 	$s_bugnote_add_reopen_button = "재발생한 버그와 버그 노트 추가";

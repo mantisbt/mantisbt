@@ -7,6 +7,12 @@
 	# Swedish: Ludvig Omholt, ludde@restamus.se
 ?>
 <?
+	# new strings:
+	$s_no_file_specified = "ERROR: No file specified";
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+
 	# General Strings
 	$s_go_back = "Gå tillbaks";
 	$s_proceed = "Klicka här för att fortsätta";

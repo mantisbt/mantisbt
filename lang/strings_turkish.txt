@@ -8,6 +8,12 @@
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 ?>
 <?
+	# new strings:
+	$s_no_file_specified = "ERROR: No file specified";
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+
 	# General Strings
 	$s_go_back = "Geri Git";
 	$s_proceed = "Devam etmek için buraya týklayýnýz";
@@ -171,7 +177,7 @@
 	$s_select_file = "Dosya Seç";
 	$s_upload_file_button = "Dosya Gönder";
 
-	# bug_reopen_page.php3
+	# bug_reopen.php3
 	$s_bug_reopened_msg = "Bug yeniden açýldý...";
 	$s_reopen_add_bugnote_title = "Bug'ý yeniden açma sebebini giriniz";
 	$s_bugnote_add_reopen_button = "Bug Notu ekle ve Bug'ý yeniden aç";

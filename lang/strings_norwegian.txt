@@ -7,6 +7,12 @@
 	# Norwegian: Espen Holje, espen.holje@auto-net.no
 ?>
 <?
+	# new strings:
+	$s_no_file_specified = "ERROR: No file specified";
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+
 	# General Strings
 	$s_go_back = "Tilbake";
 	$s_proceed = "Klikk for å fortsette";
@@ -170,7 +176,7 @@
 	$s_select_file = "Velg fil";
 	$s_upload_file_button = "Laste opp fil";
 
-	# bug_reopen_page.php3
+	# bug_reopen.php3
 	$s_bug_reopened_msg = "Feilen har blitt gjenåpnet...";
 	$s_reopen_add_bugnote_title = "Legg til beskjed om årsaken til gjenåpning";
 	$s_bugnote_add_reopen_button = "Legg til beskjed og gjenåpne feil";

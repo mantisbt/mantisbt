@@ -7,6 +7,12 @@
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 ?>
 <?
+	# new strings:
+	$s_no_file_specified = "ERROR: No file specified";
+	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_operation_successful = "Operation successful.";
+
 	# General Strings
 	$s_go_back = "回上頁";
 	$s_proceed = "按這裡繼續";
@@ -170,7 +176,7 @@
 	$s_select_file = "Select File";
 	$s_upload_file_button = "Upload File";
 
-	# bug_reopen_page.php3
+	# bug_reopen.php3
 	$s_bug_reopened_msg = "臭蟲已經被重開...";
 	$s_reopen_add_bugnote_title = "新增臭蟲筆記理由 For 重開臭蟲";
 	$s_bugnote_add_reopen_button = "新增臭蟲筆記且重開臭蟲";
@@ -577,7 +583,7 @@
 	$s_reporter_stats = "reporter stats";
 	$s_orct = "(open/resolved/closed/total)";
 
-	# view_bug_all_page.php3
+	# view_all_bug_page.php3
 	$s_any = "任意";
 	$s_show = "顯示";
 	$s_changed = "已變更(小時)";
