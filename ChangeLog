@@ -7,10 +7,8 @@ To Do:
  * Add mailing module
  * Add ip tracking/banning capability
  * Add file upload module
- * Force resolution to go through a dialog
  * Add postgreSQL support and/or a Database abstraction layer
  * Refine viewing preferences
- * Add profiles for each user
  * Refine viewing news archives
  * Make priority useful
  * Force some sort of dialog when closing a bug (resolved)
@@ -21,7 +19,7 @@ To Do:
  * Further document core_API.php
  * Add changed in last X minutes/hours/days option
 
-12.08.2000	-	0.10.3
+12.09.2000	-	0.10.3
 
  * Added summary by date
  * Fixed bug with Bugnote Add button showing up i the wrong places
@@ -35,6 +33,8 @@ To Do:
  * Removed the destructive DROP table in db_generate.sql
  * Added 'feedback' status - indicates that it requires more information
  * Added a confirmation before an admin can delete an account
+ * Split manage user actions into separate files
+ * Added several ; in core_API.php that caused errors on some servers
 
 12.06.2000	-	0.10.2
 

@@ -8,14 +8,8 @@
 <? login_cookie_check() ?>
 <?
 	if ( $f_action="update" ) {
-		if ( $f_save_prefs=="on" ) {
-			setcookie( $g_hide_resolved_cookie, $f_hide_resolved, $g_time_length );
-			setcookie( $g_view_limit_cookie, $f_view_limit, $g_time_length );
-		}
-		else {
-			setcookie( $g_hide_resolved_cookie, $f_hide_resolved );
-			setcookie( $g_view_limit_cookie, $f_view_limit );
-		}
+		setcookie( $g_hide_resolved_cookie, $f_hide_resolved );
+		setcookie( $g_view_limit_cookie, $f_view_limit );
 	}
 	else if ( $f_action="reset" ) {
 		setcookie( $g_hide_resolved_cookie );

@@ -55,19 +55,11 @@
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
-		<td width=40%>
+		<td>
 			Limit
 		</td>
-		<td width=60%>
+		<td>
 			<input type=text name=f_view_limit size=7 maxlength=7 value="<? echo $g_view_limit_val ?>">
-		</td>
-	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
-		<td width=40%>
-			Save Prefs
-		</td>
-		<td width=60%>
-			<input type=checkbox name=f_save_prefs>
 		</td>
 	</tr>
 	<tr align=center>
