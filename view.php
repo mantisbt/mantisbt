@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view.php,v 1.1 2004-07-20 15:31:04 vboctor Exp $
+	# $Id: view.php,v 1.2 2004-07-21 10:23:36 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,5 +20,5 @@
 	// Copy 'id' parameter into 'bug_id' so it is found by the simple/advanced view page.
 	$_GET['bug_id'] = gpc_get_int( 'id' );
 
-	include string_get_bug_view_page( $p_user_id );
+	include string_get_bug_view_page();
 ?>
