@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# provided by Griff Miller
+
+# If you need to do this in Windows just open up the command shell
+# (Start | Run | cmd (or command) ENTER) then change to the mantis
+# directory then execute:
+# "ren *.php3 *.php" or "ren *.php *.php3" .
+
+# Get around problems with which echo command we get.
+
+if [ "`echo -n`" = "-n" ]; then
+	C='\c'
+	N=
+else
+	C=
+	N='-n'
+fi
+
+# Figure out what mode we are in.
+
+WHATAMI=`basename $0`
+case $WHATAMI in
+	convertToPHP4)
+		from=php3
+		to=php
+		;;
+	convertToPHP3)
+		from=php
+		to=php3
+		;;
+	*)
+		echo I don\'t know what to do when called as \"${WHATAMI}\" .
+		exit 1
+		;;
+esac
+
+echo "Converting all $from files to $to files..."
+filenames=`ls -la |grep "${from}\$" | awk '{print $NF}'`
+for filename in $filenames ; do
+	filename2=`echo $filename | sed -e "s/\.${from}\$/.${to}/"`
+	echo $N "  renaming $filename  -->  ${filename2}... $C"
+	mv "$filename" "$filename2"
+	echo done.
+done
+echo done.
+
+exit
