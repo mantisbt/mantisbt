@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.13 2003-01-28 05:27:28 vboctor Exp $
+	# $Id: core.php,v 1.14 2003-01-28 23:23:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,20 +18,20 @@
 	ob_start();
 
         # Include compatibility file before anything else
-        require_once( 'core/php_api.php' );
+        require_once( dirname( __FILE__ ).'/core/php_api.php' );
 
 	# Load constants and configuration files
-  	require_once( 'constant_inc.php' );
-	if ( file_exists( 'custom_constant_inc.php' ) ) {
-		require_once( 'custom_constant_inc.php' );
+  	require_once( dirname( __FILE__ ).'/constant_inc.php' );
+	if ( file_exists( dirname( __FILE__ ).'/custom_constant_inc.php' ) ) {
+		require_once( dirname( __FILE__ ).'/custom_constant_inc.php' );
 	}
-	require_once( 'config_defaults_inc.php' );
-	if ( file_exists( 'custom_config_inc.php' ) ) {
-		require_once( 'custom_config_inc.php' );
+	require_once( dirname( __FILE__ ).'/config_defaults_inc.php' );
+	if ( file_exists( dirname( __FILE__ ).'/custom_config_inc.php' ) ) {
+		require_once( dirname( __FILE__ ).'/custom_config_inc.php' );
 	}
 	# for backward compatability
-	if ( file_exists( 'config_inc.php' ) ) {
-		require_once( 'config_inc.php' );
+	if ( file_exists( dirname( __FILE__ ).'config_inc.php' ) ) {
+		require_once( dirname( __FILE__ ).'config_inc.php' );
 	}
 
 	# Allow an environment variable (defined in an Apache vhost for example)
@@ -51,7 +51,7 @@
 	}
 
 	# Attempt to find the location of the core files.	
-	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core';
+	$t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
 	if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) && !isset( $HTTP_POST_VARS['g_core_path'] ) && !isset( $HTTP_COOKIE_VARS['g_core_path'] ) ) {
 		$t_core_path = $g_core_path;
 	}
