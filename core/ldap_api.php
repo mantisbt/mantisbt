@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: ldap_api.php,v 1.16 2004-08-06 17:17:06 jlatour Exp $
+	# $Id: ldap_api.php,v 1.17 2004-12-08 13:21:07 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -27,7 +27,7 @@
 				$p_binddn	= config_get( 'ldap_bind_dn', '' );
 				$p_password	= config_get( 'ldap_bind_passwd', '' );
 			}
-			
+
 			if ( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
 				$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
 			} else {
@@ -36,7 +36,7 @@
 			}
 			if ( !$t_br ) {
 				trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
-			}		
+			}
 		} else {
 			trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 		}
@@ -93,11 +93,18 @@
 			return false;
 		}
 	}
-	
+
 	# --------------------
 	# Attempt to authenticate the user against the LDAP directory
 	#  return true on successful authentication, false otherwise
 	function ldap_authenticate( $p_user_id, $p_password ) {
+		# if password is empty and ldap allows anonymous login, then
+		# the user will be able to login, hence, we need to check
+		# for this special case.
+		if ( is_blank( $p_password ) ) {
+			return false;
+		}
+
 		$t_ldap_organization	= config_get( 'ldap_organization' );
 		$t_ldap_root_dn			= config_get( 'ldap_root_dn' );
 
@@ -106,13 +113,13 @@
 		$t_search_filter 	= "(&$t_ldap_organization($t_ldap_uid_field=$t_username))";
 		$t_search_attrs  	= array( $t_ldap_uid_field, 'dn' );
 		$t_ds            	= ldap_connect_bind();
-		
+
 		# Search for the user id
 		$t_sr	= ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
 		$t_info	= ldap_get_entries( $t_ds, $t_sr );
 
 		$t_authenticated = false;
-		
+
 		if ( $t_info ) {
 			# Try to authenticate to each until we get a match
 			for ( $i = 0 ; $i < $t_info['count'] ; $i++ ) {
@@ -122,21 +129,22 @@
 				if ( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
 					$t_authenticated = true;
 					break; # Don't need to go any further
-				} 
+				}
 			}
 		}
+
 		ldap_free_result( $t_sr );
 		ldap_unbind( $t_ds );
 
 		return $t_authenticated;
 	}
-	
+
 	# --------------------
 	# Create a new user account in the LDAP Directory.
-	
+
 	# --------------------
 	# Update the user's account in the LDAP Directory
-	
+
 	# --------------------
 	# Change the user's password in the LDAP Directory
 ?>
