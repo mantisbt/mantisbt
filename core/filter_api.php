@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.52 2004-07-27 11:44:26 narcissus Exp $
+	# $Id: filter_api.php,v 1.53 2004-07-31 13:16:38 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -693,7 +693,7 @@
 				}
 			}
 
-			$t_filters_url = config_get( 'path' ) . 'view_filters_page.php?for_screen=' . $p_for_screen;
+			$t_filters_url = 'view_filters_page.php?for_screen=' . $p_for_screen;
 			if ( 'advanced' == $t_view_type ) {
 				$t_filters_url = $t_filters_url . '&amp;view_type=advanced';
 			}
