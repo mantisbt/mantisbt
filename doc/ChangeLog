@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.08.xx  -  0.19.0xx
 
+- 0004266: [feature] Update project documentation file (Bastian Pfenningschmidt)
 - 0004062: [security] Multiple Cross Site Scripting Vulnerabilities (vboctor)
 - 0003371: [feature] CVS Integration - general source control integration implemented (vboctor)
 - 0004137: [feature] Support a simple "view" URL (vboctor)

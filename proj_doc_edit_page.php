@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.33 2004-04-12 21:04:36 jlatour Exp $
+	# $Id: proj_doc_edit_page.php,v 1.34 2004-08-05 17:34:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,7 +44,7 @@
 
 <br />
 <div align="center">
-<form method="post" action="proj_doc_update.php">
+<form method="post" enctype="multipart/form-data" action="proj_doc_update.php">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
@@ -84,6 +84,13 @@
 		?>
 	</td>
 </tr>
+<tr class="row-2">
+	<td class="category"><?php echo lang_get( 'select_file' ) ?></td>
+	<td>
+		<input name="file" type="file" size="70" />
+	</td>
+	
+<tr>
 <tr>
 	<td class="left">
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
