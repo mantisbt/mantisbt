@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.79 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: html_api.php,v 1.80 2004-02-05 12:15:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -255,7 +255,14 @@
 		echo '<table class="hide">';
 		echo '<tr>';
 			echo '<td class="login-info-left">';
-				echo lang_get( 'logged_in_as' ) . ": <span class=\"italic\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
+				if ( current_user_is_anonymous() ) {
+					echo lang_get( 'anonymous' ) . ' | <a href="login_page.php">' . lang_get( 'login_link' ) . '</a>';
+					if ( config_get( 'allow_signup' ) == ON ) {
+						echo ' | <a href="signup_page.php">' . lang_get( 'signup_link' ) . '</a>';
+					}
+				} else {
+					echo lang_get( 'logged_in_as' ) . ": <span class=\"italic\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
+				}
 			echo '</td>';
 			echo '<td class="login-info-middle">';
 				echo "<span class=\"italic\">$t_now</span>";
@@ -357,49 +364,65 @@
 			$t_protected = current_user_get_field( 'protected' );
 			echo '<table class="width100" cellspacing="0">';
 			echo '<tr>';
-				echo '<td class="menu">';
-				echo '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a> | ';
-				echo '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a> | ';
+			echo '<td class="menu">';
+				$t_menu_options = array();
+
+				# Main Page
+				$t_menu_options[] = '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a>';
+
+				# View Bugs
+				$t_menu_options[] = '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a>';
+
+				# Report Bugs
 				if ( access_has_project_level( REPORTER ) ) {
-					echo string_get_bug_report_link() . ' | ';
+					$t_menu_options[] = string_get_bug_report_link();
 				}
 
+				# Summary Page
 				if ( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
-					echo '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a> | ';
+					$t_menu_options[] = '<a href="summary_page.php">' . lang_get( 'summary_link' ) . '</a>';
 				}
 
-				echo '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a> | ';
+				# Documentation Page
+				$t_menu_options[] = '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a>';
 
+				# Manage Users (admins) or Manage Project (managers)
 				if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
 					if ( access_has_project_level( ADMINISTRATOR ) ) {
-					  $t_link = 'manage_user_page.php';
+						$t_link = 'manage_user_page.php';
 					} else {
-					  $t_link = 'manage_proj_page.php';
+						$t_link = 'manage_proj_page.php';
 					}
-					echo "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a> | ';
+					$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
 				}
+
+				# News Page
 				if ( access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
 					# Admin can edit news for All Projects (site-wide)
 					if ( ( ALL_PROJECTS != helper_get_current_project() ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
-						echo '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
+						$t_menu_options[] = '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a>';
 					} else {
-						echo '<a href="login_select_proj_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
+						$t_menu_options[] = '<a href="login_select_proj_page.php">' . lang_get( 'edit_news_link' ) . '</a>';
 					}
 				}
 
-				# only show accounts that are NOT protected
+				# Account Page (only show accounts that are NOT protected)
 				if ( OFF == $t_protected ) {
-					echo '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a> | ';
+					$t_menu_options[] = '<a href="account_page.php">' . lang_get( 'account_link' ) . '</a>';
 				}
 
-				echo '<a href="logout_page.php">' . lang_get( 'logout_link' ) . '</a>';
-				echo '</td>';
-				echo '<td class="right" style="white-space: nowrap;">';
-					echo '<form method="post" action="jump_to_bug.php">';
-					echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
-					echo '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
-					echo '</form>';
-				echo '</td>';
+				# Logout (no if anonymously logged in)
+				if ( !current_user_is_anonymous() ) {
+					$t_menu_options[] = '<a href="logout_page.php">' . lang_get( 'logout_link' ) . '</a>';
+				}
+				echo implode( $t_menu_options, ' | ' );
+			echo '</td>';
+			echo '<td class="right" style="white-space: nowrap;">';
+				echo '<form method="post" action="jump_to_bug.php">';
+				echo "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
+				echo '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
+				echo '</form>';
+			echo '</td>';
 			echo '</tr>';
 			echo '</table>';
 		}
@@ -720,10 +743,12 @@
 
 		# MONITOR/UNMONITOR button
 		echo '<td>';
-		if ( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
-			html_button_bug_unmonitor( $p_bug_id );
-		} else {
-			html_button_bug_monitor( $p_bug_id );
+		if ( !current_user_is_anonymous() ) {
+			if ( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
+				html_button_bug_unmonitor( $p_bug_id );
+			} else {
+				html_button_bug_monitor( $p_bug_id );
+			}
 		}
 		echo '</td>';
 

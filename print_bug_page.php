@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.42 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: print_bug_page.php,v 1.43 2004-02-05 12:15:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -68,11 +68,8 @@
 	</td>
 </tr>
 <tr>
-	<td class="form-title" colspan="3">
+	<td class="form-title" colspan="6">
 		<?php echo lang_get( 'viewing_bug_advanced_details_title' ) ?>
-	</td>
-	<td class="right" colspan="3">
-		<span class="small"><?php print_bracket_link( 'bug_view_page.php?bug_id='.$f_bug_id, lang_get( 'go_back' ) ) ?></span>
 	</td>
 </tr>
 <tr>

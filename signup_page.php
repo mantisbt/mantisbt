@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup_page.php,v 1.26 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: signup_page.php,v 1.27 2004-02-05 12:15:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -30,11 +30,8 @@
 <form method="post" action="signup.php">
 <table class="width50" cellspacing="1">
 <tr>
-	<td class="form-title">
+	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'signup_title' ) ?>
-	</td>
-	<td class="right">
-		<?php print_bracket_link( 'login_page.php', lang_get( 'go_back' ) ) ?>
 	</td>
 </tr>
 <tr class="row-1">

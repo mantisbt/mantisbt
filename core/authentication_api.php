@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.31 2004-01-25 17:00:13 jlatour Exp $
+	# $Id: authentication_api.php,v 1.32 2004-02-05 12:15:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -289,11 +289,29 @@
 	}	
 
 	# --------------------
-	# Return the current user login cookie string, or '' if none exists
+	# Return the current user login cookie string,
+	# if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
+	# otherwise returns '' (an empty string)
 	function auth_get_current_user_cookie() {
 		$t_cookie_name = config_get( 'string_cookie' );
+		$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
-		return gpc_get_cookie( $t_cookie_name, '' );
+		# if cookie not found, and anonymous login enabled, use cookie of anonymous account.
+		if ( '' === $t_cookie ) {
+			if ( ON == config_get( 'allow_anonymous_login' ) ) {
+				$query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
+						config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
+
+				$result = db_query( $query );
+
+                                if ( db_num_rows( $result ) == 1 ) {
+					$row = db_fetch_array( $result );
+					$t_cookie = $row['cookie_string'];
+				}
+			}
+		}
+
+		return $t_cookie;
 	}
 
 

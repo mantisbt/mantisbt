@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.146 $
+	# $Revision: 1.147 $
 	# $Author: vboctor $
-	# $Date: 2004-02-03 13:06:14 $
+	# $Date: 2004-02-05 12:15:17 $
 	#
-	# $Id: strings_english.txt,v 1.146 2004-02-03 13:06:14 vboctor Exp $
+	# $Id: strings_english.txt,v 1.147 2004-02-05 12:15:17 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -37,6 +37,7 @@ $s_date_order = 'Date Order';
 $s_print_all_bug_page_link = 'Print Reports';
 $s_csv_export = 'CSV Export';
 $s_login_anonymously = 'Login Anonymously';
+$s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Jump to Bugnotes';
 $s_public_project_msg = 'This project is PUBLIC.  All users have access.';
 $s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
