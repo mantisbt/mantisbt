@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.13 2004-09-06 00:33:38 thraxisp Exp $
+	# $Id: check.php,v 1.14 2004-09-22 17:49:18 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -283,6 +283,18 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	<?php
 		if ( ( ON == config_get( 'allow_signup' ) ) &&
 				( ON != config_get( 'send_reset_password' ) ) ) {
+			print_test_result( BAD );
+		} else {
+			print_test_result( GOOD );
+		}
+	?>
+</tr>
+<tr>
+	<td bgcolor="#ffffff">
+		check language configuration: fallback_language &lt;&gt; 'auto' </>
+	</td>
+	<?php
+		if ( 'auto' == config_get( 'fallback_language' ) ) {
 			print_test_result( BAD );
 		} else {
 			print_test_result( GOOD );

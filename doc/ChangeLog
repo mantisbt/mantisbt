@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2004.10.xx  -  0.19.1
 
+- 0004528: [localization] Error on logout page with language=auto (thraxisp)
 - 0004393: [feature] Version should be add with advanced options (bpfennig)
 - 0004363: [bugtracker] "Add user to project" should have an additional button (bpfennig)
 - 0004377: [bugtracker] $g_bug_submit_status should depends on user level (bpfennig)
@@ -18,6 +19,9 @@ Mantis ChangeLog
 - 0004383: [localization] Editing a note has language specific note at end of note (bpfennig)
 - 0004526: [other] Spaces needed after colons on main page (vboctor)
 - 0004558: [custom fields] Custom Fields doesn't display links (bpfennig)
+- New Config: $g_display_errors - controlls error handler display
+- Removed config option ($g_show_notices, $g_show_warnings): subsumed into $g_display_errors
+
 Updated Norwegian, Serbian, Chinese Simplified and Estonian translations
 
 2004.09.12  -  0.19.0

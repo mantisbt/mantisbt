@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.32 2004-08-31 15:22:30 thraxisp Exp $
+	# $Id: lang_api.php,v 1.33 2004-09-22 17:49:18 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -65,13 +65,13 @@
 			$t_lang = user_pref_get_language( auth_get_current_user_id() );
 		}
 
-		if ( 'auto' == $t_lang ) {
-			$t_lang = lang_map_auto();
-		}
-
 		# Otherwise fall back to default
 		if ( false === $t_lang ) {
 			$t_lang = config_get( 'default_language' );
+		}
+
+		if ( 'auto' == $t_lang ) {
+			$t_lang = lang_map_auto();
 		}
 
 		# Remember the language
@@ -205,6 +205,8 @@
 		#  because we don't have a concept of falling back on a language.  The
 		#  language files actually *contain* English strings if none has been
 		#  defined in the correct language
+		# @@@ thraxisp - not sure if this is still true. Strings from last language loaded 
+		#      may still be in memeory if a new language is loaded.
 
 		if ( lang_exists( $p_string, $t_lang ) ) {
 			return $g_lang_strings[ $t_lang ][ $p_string];
