@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.59 2003-02-13 00:42:34 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.60 2003-02-13 07:11:17 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -156,49 +156,55 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 		<?php echo lang_get( 'categories' ) ?>
 	</td>
 </tr>
-<tr class="row-category">
-	<td width="50%">
-		<?php echo lang_get( 'category' ) ?>
-	</td>
-	<td width="25%">
-		<?php echo lang_get( 'assign_to' ) ?>
-	</td>
-	<td class="center" width="25%">
-		<?php echo lang_get( 'actions' ) ?>
-	</td>
-</tr>
+<?php
+	$t_categories = category_get_all_rows( $f_project_id );
 
+	if ( count( $t_categories ) > 0 ) {
+?>
+		<tr class="row-category">
+			<td width="50%">
+				<?php echo lang_get( 'category' ) ?>
+			</td>
+			<td width="25%">
+				<?php echo lang_get( 'assign_to' ) ?>
+			</td>
+			<td class="center" width="25%">
+				<?php echo lang_get( 'actions' ) ?>
+			</td>
+		</tr>
+<?php
+	}
+	
+	foreach ( $t_categories as $t_category ) {
+		$t_name = $t_category['category'];
+
+		if ( $t_category['user_id'] != 0  && user_exists( $t_category['user_id'] )) {
+			$t_user_name = user_get_name( $t_category['user_id'] );
+		} else {
+			$t_user_name = '';
+		}
+?>
 <!-- Repeated Info Row -->
-		<?php
-			$rows = category_get_all_rows( $f_project_id );
-
-			foreach ( $rows as $row ) {
-				$t_category = $row['category'];
-				$t2_category = urlencode( $t_category );
-
-				if ( $row['user_id'] != 0  && user_exists( $row['user_id'] )) {
-					$t_user_name = user_get_name( $row['user_id'] );
-				} else {
-					$t_user_name = '';
-				}
-
-		?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php echo string_display( $t_category ) ?>
+				<?php echo string_display( $t_name ) ?>
 			</td>
 			<td>
 				<?php echo $t_user_name ?>
 			</td>
 			<td class="center">
 				<?php
-					print_bracket_link( 'manage_proj_cat_edit_page.php?project_id=' . $f_project_id . '&amp;category=' . $t2_category , lang_get( 'edit_link' ) );
+					$t_name = urlencode( $t_name );
+
+					print_bracket_link( 'manage_proj_cat_edit_page.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_bracket_link( 'manage_proj_cat_delete.php?project_id=' . $f_project_id . '&amp;category=' . $t2_category, lang_get( 'delete_link' ) );
+					print_bracket_link( 'manage_proj_cat_delete.php?project_id=' . $f_project_id . '&amp;category=' . $t_name, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
-		<?php 	} # end for loop ?>
+<?php
+	} # end for loop
+?>
 
 <!-- Add Category Form -->
 <tr>
@@ -242,44 +248,51 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 		<?php echo lang_get( 'versions' ) ?>
 	</td>
 </tr>
-<tr class="row-category">
-	<td>
-		<?php echo lang_get( 'version' ) ?>
-	</td>
-	<td class="center">
-		<?php echo lang_get( 'timestamp' ) ?>
-	</td>
-	<td class="center">
-		<?php echo lang_get( 'actions' ) ?>
-	</td>
-</tr>
+<?php
+	$t_versions = version_get_all_rows( $f_project_id );
 
+	if ( count( $t_versions ) > 0 ) {
+?>
+		<tr class="row-category">
+			<td>
+				<?php echo lang_get( 'version' ) ?>
+			</td>
+			<td class="center">
+				<?php echo lang_get( 'timestamp' ) ?>
+			</td>
+			<td class="center">
+				<?php echo lang_get( 'actions' ) ?>
+			</td>
+		</tr>
+<?php
+	}
+
+	foreach ( $t_versions as $t_version ) {
+		$t_name = $t_version['version'];
+		$t_date_order = $t_version['date_order'];
+?>
 <!-- Repeated Info Rows -->
-		<?php
-			$rows = version_get_all_rows( $f_project_id );
-			foreach ( $rows as $row ) {
-				$t_version = $row['version'];
-				$t2_version = urlencode( $t_version );
-				$t_date_order = $row['date_order'];
-				$t2_date_order = urlencode( $t_date_order );
-
-		?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php echo string_display( $t_version ) ?>
+				<?php echo string_display( $t_name ) ?>
 			</td>
 			<td class="center">
 				<?php echo $t_date_order ?>
 			</td>
 			<td class="center">
 				<?php
-					print_bracket_link( 'manage_proj_ver_edit_page.php?project_id=' . $f_project_id . '&amp;version=' . $t2_version . '&amp;date_order=' . $t2_date_order, lang_get( 'edit_link' ) );
+					$tname = urlencode( $t_name );
+					$t_date_order = urlencode( $t_date_order );
+
+					print_bracket_link( 'manage_proj_ver_edit_page.php?project_id=' . $f_project_id . '&amp;version=' . $t_name . '&amp;date_order=' . $t_date_order, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
-					print_bracket_link( 'manage_proj_ver_delete.php?project_id=' . $f_project_id . '&amp;version=' . $t2_version . '&amp;date_order=' . $t2_date_order, lang_get( 'delete_link' ) );
+					print_bracket_link( 'manage_proj_ver_delete.php?project_id=' . $f_project_id . '&amp;version=' . $t_name . '&amp;date_order=' . $t_date_order, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
-		<?php } # end for loop ?>
+<?php
+	} # end for loop
+?>
 
 <!-- Version Add Form -->
 <tr>
@@ -315,23 +328,28 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 			<?php echo lang_get( 'custom_fields_setup' ) ?>
 		</td>
 	</tr>
-	<tr class="row-category">
-		<td width="50%">
-			<?php echo lang_get( 'custom_fields' ) ?>
-		</td>
-		<td width="25%">
-			<?php echo lang_get( 'custom_field_sequence' ) ?>
-		</td>
-		<td class="center" width="25%">
-			<?php echo lang_get( 'actions' ); ?>
-		</td>
-	</tr>
-			<?php
-				$t_custom_fields = custom_field_get_linked_ids( $f_project_id );
+	<?php
+		$t_custom_fields = custom_field_get_linked_ids( $f_project_id );
 
-				foreach( $t_custom_fields as $t_field_id ) {
-					$t_desc = custom_field_get_definition( $t_field_id );
-			?>
+		if ( count( $t_custom_fields ) > 0 ) {
+	?>
+			<tr class="row-category">
+				<td width="50%">
+					<?php echo lang_get( 'custom_field' ) ?>
+				</td>
+				<td width="25%">
+					<?php echo lang_get( 'custom_field_sequence' ) ?>
+				</td>
+				<td class="center" width="25%">
+					<?php echo lang_get( 'actions' ); ?>
+				</td>
+			</tr>
+	<?php
+		}
+
+		foreach( $t_custom_fields as $t_field_id ) {
+			$t_desc = custom_field_get_definition( $t_field_id );
+	?>
 			<tr <?php echo helper_alternate_class() ?>>
 				<td>
 					<?php echo $t_desc['name'] ?>
@@ -340,17 +358,19 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 					<?php echo $t_field_id ?>
 				</td>
 				<td class="center">
-					<?php
-						# You need global permissions to edit custom field defs
-						if ( absolute_access_level_check_greater_or_equal( config_get( 'manage_custom_fields' ) ) ) {
-							print_bracket_link( "manage_custom_field_edit_page.php?field_id=$t_field_id&amp;return=manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'edit_link' ) );
-							echo '&nbsp;';
-						}
-						print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$t_field_id&amp;project_id=$f_project_id", lang_get( 'remove_link' ) );
-					?>
+				<?php
+					# You need global permissions to edit custom field defs
+					if ( absolute_access_level_check_greater_or_equal( config_get( 'manage_custom_fields' ) ) ) {
+						print_bracket_link( "manage_custom_field_edit_page.php?field_id=$t_field_id&amp;return=manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'edit_link' ) );
+						echo '&nbsp;';
+					}
+					print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$t_field_id&amp;project_id=$f_project_id", lang_get( 'remove_link' ) );
+				?>
 				</td>
 			</tr>
-			<?php 	} # end for loop ?>
+	<?php
+		} # end for loop
+	?>
 	<tr>
 		<td class="left" colspan="3">
 			<form method="post" action="manage_proj_custom_field_add_existing.php">

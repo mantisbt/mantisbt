@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.114 $
-	# $Author: vboctor $
-	# $Date: 2003-02-13 00:42:34 $
+	# $Revision: 1.115 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-13 07:11:17 $
 	#
-	# $Id: strings_english.txt,v 1.114 2003-02-13 00:42:34 vboctor Exp $
+	# $Id: strings_english.txt,v 1.115 2003-02-13 07:11:17 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -825,7 +825,7 @@
 	$s_update_custom_field_button = 'Update Custom Field';
 	$s_add_existing_custom_field = 'Add This Existing Custom Field';
 	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_fields = 'Fields';
+	$s_custom_field = 'Field';
 	$s_custom_fields_setup = 'Custom Fields';
 	$s_custom_field_name = 'Name';
 	$s_custom_field_project_count = 'Project Count';
