@@ -20,8 +20,8 @@
 		print_header_redirect( $g_view_all_set."?f_type=0&f_print=1" );
 	}
 
-	if( !isset( $f_search_text ) ) {
-		$f_search_text = false;
+	if( !isset( $f_search ) ) {
+		$f_search = false;
 	}
 
 	if ( !isset( $f_offset ) ) {
@@ -53,7 +53,7 @@
 
 	# Build our query string based on our viewing criteria
 
-	$query = "SELECT *, UNIX_TIMESTAMP(last_updated) as last_updated
+	$query = "SELECT DISTINCT *, UNIX_TIMESTAMP(last_updated) as last_updated
 			 FROM $g_mantis_bug_table";
 
 	# project selection
@@ -121,22 +121,32 @@
 	}
 
 	# Simple Text Search - Thnaks to Alan Knowles
-	if ($f_search_text) {
-		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search_text)."%')
-							OR (description LIKE '%".addslashes($f_search_text)."%')
-							OR (steps_to_reproduce LIKE '%".addslashes($f_search_text)."%')
-							OR (additional_information LIKE '%".addslashes($f_search_text)."%')
-							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search_text)."%'))
+	if ($f_search) {
+		$t_columns_clause = " $g_mantis_bug_table.*";
+
+		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%')
+							OR (description LIKE '%".addslashes($f_search)."%')
+							OR (steps_to_reproduce LIKE '%".addslashes($f_search)."%')
+							OR (additional_information LIKE '%".addslashes($f_search)."%')
+							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search)."%')
+							OR ($g_mantis_bugnote_text_table.note LIKE '%".addslashes($f_search)."%'))
 							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
-		$query = "SELECT $g_mantis_bug_table.*, $g_mantis_bug_text_table.description
-				FROM $g_mantis_bug_table, $g_mantis_bug_text_table ".$t_where_clause;
+
+		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
+							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
+							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
 	} else {
-		$query = $query.$t_where_clause;
+		$t_columns_clause = " *";
+		$t_from_clause = " FROM $g_mantis_bug_table";
 	}
 
 	if ( !isset( $f_sort ) ) {
 		$f_sort="last_updated";
 	}
+	$query  = "SELECT DISTINCT ".$t_columns_clause.", UNIX_TIMESTAMP(last_updated) as last_updated";
+	$query .= $t_from_clause;
+	$query .= $t_where_clause;
+
 	$query = $query." ORDER BY '$f_sort' $f_dir";
 	if ( $f_sort != "priority" ) {
 		$query = $query.", priority DESC";
@@ -195,7 +205,7 @@
 </tr>
 <tr>
 	<td>
-	    <input type="text" name="f_search_text" value="<?php echo $f_search_text; ?>">
+	    <input type="text" name="f_search" value="<?php echo $f_search; ?>">
 	</td>
 	<td>
 		<select name="f_user_id">
@@ -265,7 +275,8 @@
 		?>
 	</td>
 	<td class="right">
-		<a href="<?php echo $g_summary_page ?>"><?php echo $s_summary ?></a>
+		<?php print_bracket_link( $g_view_all_bug_page, $s_view_bugs_link ) ?>
+		<?php print_bracket_link( $g_summary_page, $s_summary ) ?>
 	</td>
 <p>
 </tr>

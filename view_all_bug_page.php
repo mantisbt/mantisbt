@@ -137,13 +137,6 @@
 	# Simple Text Search - Thnaks to Alan Knowles
 	if ( $f_search ) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
-		/*$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%') OR
-							(description LIKE '%".addslashes($f_search)."%') OR
-							(steps_to_reproduce LIKE '%".addslashes($f_search)."%') OR
-							(additional_information LIKE '%".addslashes($f_search)."%') OR
-							($g_mantis_bugnote_text_table.note LIKE '%".addslashes($f_search)."%')) OR
-							($g_mantis_bug_table.id LIKE '%".addslashes($f_search)."%')) AND
-							$g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id ";*/
 
 		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search)."%')
 							OR (description LIKE '%".addslashes($f_search)."%')
@@ -153,11 +146,9 @@
 							OR ($g_mantis_bugnote_text_table.note LIKE '%".addslashes($f_search)."%'))
 							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
 
-
 		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
 							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
 							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
-
 	} else {
 		$t_columns_clause = " *";
 		$t_from_clause = " FROM $g_mantis_bug_table";
@@ -207,7 +198,6 @@
 	#     t_offset = 0
 	# for example page number 2, per page 5:
 	#     t_offset = 5
-	#
 	$t_offset = ( ( $f_page_number - 1 ) * $f_per_page );
 	if ( isset( $f_per_page ) ) {
 		$query = $query." LIMIT $t_offset, $f_per_page";

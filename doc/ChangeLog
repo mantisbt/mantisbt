@@ -56,6 +56,7 @@ Mantis
  * Modified is_duplicate_category().  Reversed the arguments.
  * Modified to use core_project_API.php.
  * Modified to use core_version_API.php.
+ * Modified print_all_bug_page.php to seach bugnotes.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added Czech translation.
