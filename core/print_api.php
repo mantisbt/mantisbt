@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.77 2004-05-06 13:17:18 vboctor Exp $
+	# $Id: print_api.php,v 1.78 2004-05-18 05:04:47 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -523,7 +523,7 @@
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
 
-		PRINT "<option value=\"\">\n";
+		PRINT "<option value=\"\"></option>\n";
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_version = string_attribute( $row['version'] );
