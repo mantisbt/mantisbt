@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.30 2004-04-08 20:52:50 prescience Exp $
+	# $Id: error_api.php,v 1.31 2004-08-01 12:51:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -84,7 +84,7 @@
 				$t_error_description = $p_error;
 		}
 
-		$t_error_description = nl2br( htmlentities( $t_error_description ) );
+		$t_error_description = nl2br( $t_error_description );
 
 		if ( 'halt' == $t_method ) {
 			$t_old_contents = ob_get_contents();
