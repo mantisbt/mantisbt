@@ -495,7 +495,7 @@
 			 ( $p_severity==CRASH ) ||
 			 ( $p_severity==BLOCK ) )&&
 			 ( $p_status!=CLOSED ) ) {
-			PRINT "<b>$t_sev_str</b>";
+			PRINT "<span class=\"bold\">$t_sev_str</span>";
 		}
 		else {
 			PRINT "$t_sev_str";
@@ -565,18 +565,18 @@
 				$p_dir = "ASC";
 			}
 
-			PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=2\">$p_string</a></b>";
+			PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=2\">$p_string</a>";
 		} else {
-			PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_save=2\">$p_string</a></b>";
+			PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_save=2\">$p_string</a>";
 		}
 	}
 	### --------------------
 	function print_manage_user_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir, $p_hide=0 ) {
-		PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=1&f_hide=$p_hide\">$p_string</a></b>";
+		PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=1&f_hide=$p_hide\">$p_string</a>";
 	}
 	### --------------------
 	function print_manage_project_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir ) {
-		PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir\">$p_string</a></b>";
+		PRINT "<a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir\">$p_string</a>";
 	}
 	### --------------------
 	# print the bracketed links used near the top

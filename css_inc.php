@@ -22,6 +22,7 @@ span.required 		{ font-size: 8pt; color: #aa0000 }
 span.small 			{ font-size: 8pt }
 span.pagetitle		{ font-size: 12pt; font-weight: bold; text-align: center }
 span.bold			{ font-weight: bold; }
+span.italic			{ font-style: italic; }
 
 table.hide			{ width: 100%; border-color: #ffffff; }
 table.width100		{ width: 100%; border-color: #000000; border-style: solid; border-width: 1px; }
@@ -39,6 +40,7 @@ td.form-title		{ background-color: <? echo $g_white_color ?>; font-weight: bold;
 td.nopad			{ padding: 0px; }
 td.spacer			{ font-size: 1pt; line-height: 0.1; }
 td.small-caption	{ font-size: 8pt }
+td.print			{ font-size: 8pt }
 
 tr.center			{ text-align: center; }
 tr.row-1			{ background-color: <? echo $g_primary_color_dark ?>; }

@@ -185,40 +185,40 @@
 <input type="hidden" name="f_save" value="1">
 <input type="hidden" name="f_sort" value="<? echo $f_sort ?>">
 <input type="hidden" name="f_dir" value="<? echo $f_dir ?>">
-<table width="100%">
-<tr align="center">
-    <td class="small-caption">
+<table class="width100">
+<tr>
+    <td class="print">
         <? echo $s_search ?>
     </td>
-    <td class="small-caption">
+    <td class="print">
 		<? echo $s_reporter ?>
 	</td>
-    <td class="small-caption">
+    <td class="print">
 		<? echo $s_assigned_to ?>
 	</td>
-    <td class="small-caption">
+    <td class="print">
 		<? echo $s_category ?>
 	</td>
-    <td class="small-caption">
+    <td class="print">
 		<? echo $s_severity ?>
 	</td>
-    <td class="small-caption">
+    <td class="print">
 		<? echo $s_status ?>
 	</td>
-    <td class="small-caption">
+    <td class="print">
 		<? echo $s_show ?>
 	</td>
-    <td class="small-caption">
+    <td class="print">
 		<? echo $s_changed ?>
 	</td>
-    <td class="small-caption">
+    <td class="print">
 		<? echo $s_hide_closed ?>
 	</td>
-    <td class="small-caption">
+    <td class="print">
 		&nbsp;
 	</td>
 </tr>
-<tr align="center">
+<tr>
 	<td>
 	    <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
 	</td>
@@ -274,10 +274,10 @@
 </table>
 </form>
 
-<table width="100%" cellpadding="0">
+<table class="width100" cellspacing="1">
 <tr>
-	<td colspan="7" bgcolor="<? echo $g_table_title_color ?>">
-		<b><? echo $s_viewing_bugs_title ?></b>
+	<td class="form-title" colspan="7">
+		<? echo $s_viewing_bugs_title ?>
 		<?
 			if ( $row_count > 0 ) {
 				$v_start = $f_offset+1;
@@ -289,12 +289,12 @@
 			PRINT "($v_start - $v_end)";
 		?>
 	</td>
-	<td align="right">
+	<td class="right">
 		<a href="<? echo $g_summary_page ?>">Back to Summary</a>
 	</td>
 <p>
 </tr>
-<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
+<tr class="row-category">
 	<td width="8%">
 		<? print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
@@ -304,9 +304,7 @@
 		<? print_sort_icon( $f_dir, $f_sort, "id" ) ?>
 	</td>
 	<td width="3%">
-		<b>
-			#
-		</b>
+		#
 	</td>
 	<td width="12%">
 		<? print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
@@ -329,8 +327,9 @@
 		<? print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 	</td>
 </tr>
-<tr height="5">
-	<td colspan="7" bgcolor="<? echo $g_white_color ?>">
+<tr>
+	<td class="spacer" colspan="8">
+		&nbsp;
 	</td>
 </tr>
 <?
@@ -354,19 +353,19 @@
 		$res2 = db_query( $query );
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 ?>
-<tr align="center" bgcolor="<? echo $status_color ?>">
-	<td>
+<tr bgcolor="<? echo $status_color ?>">
+	<td class="print">
 		<? echo get_enum_element($s_priority_enum_string, $v_priority) ?>
 	</td>
-	<td>
+	<td class="print">
 		<? echo $v_id ?>
 	</td>
-	<td>
+	<td class="print">
 		<?
 			if ($bugnote_count > 0){
 				if ( sql_to_unix_time( $v_bugnote_updated ) >
 					strtotime( "-$f_highlight_changed hours" ) ) {
-					PRINT "<b>$bugnote_count</b>";
+					PRINT "<span class=\"bold\">$bugnote_count</span>";
 				} else {
 					PRINT "$bugnote_count";
 				}
@@ -375,13 +374,13 @@
 			}
 		?>
 	</td>
-	<td>
+	<td class="print">
 		<? echo $v_category ?>
 	</td>
-	<td>
+	<td class="print">
 		<? print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
-	<td>
+	<td class="print">
 		<?
 			# print username instead of status
 			if (( $g_show_assigned_names==1 )&&( $v_handler_id > 0 )&&
@@ -392,20 +391,18 @@
 			}
 		?>
 	</td>
-	<td>
-		<i>
+	<td class="print">
 		<?
 			if ( sql_to_unix_time( $v_last_updated ) >
 				strtotime( "-$f_highlight_changed hours" ) ) {
 
-				PRINT "<b>$t_last_updated</b>";
+				PRINT "<span class=\"bold\">$t_last_updated</span>";
 			} else {
 				PRINT "$t_last_updated";
 			}
 		?>
-		</i>
 	</td>
-	<td align="left">
+	<td class="print">
 		<? echo $v_summary ?>
 	</td>
 </tr>

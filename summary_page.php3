@@ -62,89 +62,92 @@
 <p>
 <table class="width100" cellspacing="1">
 <tr>
-	<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-		<b><? echo $s_summary_title ?></b> <? echo $s_orct ?>
+	<td class="form-title" colspan="2">
+		<? echo $s_summary_title ?> <? echo $s_orct ?>
 	</td>
 </tr>
-<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-	<td width="50%">
-		<b><? echo $s_by_status ?>:</b>
-	</td>
-	<td width="50%">
-		<b><? echo $s_by_date ?>:</b>
-	</td>
-</tr>
-<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td width="50%">
 		<? ### STATUS ### ?>
-		<table width="97%">
-			<? print_bug_enum_summary( $s_status_enum_string, "status" ) ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<? echo $s_by_status ?>:
+			</td>
+		</tr>
+		<? print_bug_enum_summary( $s_status_enum_string, "status" ) ?>
 		</table>
 	</td>
 	<td width="50%">
 		<? ### DATE ### ?>
-		<table width="97%">
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<? echo $s_by_date ?>:
+			</td>
+		</tr>
 		<? print_bug_date_summary( $g_date_partitions ) ?>
 		</table>
 	</td>
 </tr>
-<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-	<td width="50%">
-		<b><? echo $s_by_severity ?>:</b>
-	</td>
-	<td width="50%">
-		<b><? echo $s_by_resolution ?>:</b>
-	</td>
-</tr>
-<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td>
 		<? ### SEVERITY ### ?>
-		<table width="97%">
-			<? print_bug_enum_summary( $s_severity_enum_string, "severity" ) ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<? echo $s_by_severity ?>:
+			</td>
+		</tr>
+		<? print_bug_enum_summary( $s_severity_enum_string, "severity" ) ?>
 		</table>
 	</td>
 	<td>
 		<? ### RESOLUTION ### ?>
-		<table width="97%">
-			<? print_bug_enum_summary( $s_resolution_enum_string, "resolution" ) ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<? echo $s_by_resolution ?>:
+			</td>
+		</tr>
+		<? print_bug_enum_summary( $s_resolution_enum_string, "resolution" ) ?>
 		</table>
 	</td>
 </tr>
-<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-	<td>
-		<b><? echo $s_by_category ?>:</b>
-	</td>
-	<td>
-		<b><? echo $s_by_priority ?>:</b>
-	</td>
-</tr>
-<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td>
 		<? ### CATEGORY ### ?>
-		<table width="97%">
-			<? print_category_summary() ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<? echo $s_by_category ?>:
+			</td>
+		</tr>
+		<? print_category_summary() ?>
 		</table>
 	</td>
 	<td>
 		<? ### PRIORITY ### ?>
-		<table width="97%">
-			<? print_bug_enum_summary( $s_priority_enum_string, "priority" ) ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<? echo $s_by_priority ?>:
+			</td>
+		</tr>
+		<? print_bug_enum_summary( $s_priority_enum_string, "priority" ) ?>
 		</table>
 	</td>
 </tr>
-<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-	<td>
-		<b><? echo $s_time_stats ?>:</b>
-	</td>
-	<td>
-		&nbsp;
-	</td>
-</tr>
-<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td>
 		<? ### MISCELLANEOUS ### ?>
-		<table width="97%">
-		<tr align="center" bgcolor="<? echo $g_primary_color_dark ?>">
+		<table class="width100">
+		<tr>
+			<td class="form-title">
+				<? echo $s_time_stats ?>:
+			</td>
+		</tr>
+		<tr class="row-1">
 			<td width="50%">
 				<? echo $s_longest_open_bug ?>
 			</td>
@@ -158,7 +161,7 @@
 				<? } ?>
 			</td>
 		</tr>
-		<tr align="center" bgcolor="<? echo $g_primary_color_light ?>">
+		<tr class="row-2">
 			<td>
 				<? echo $s_longest_open ?>
 			</td>
@@ -166,7 +169,7 @@
 				<? echo $t_largest_diff ?>
 			</td>
 		</tr>
-		<tr align="center" bgcolor="<? echo $g_primary_color_dark ?>">
+		<tr class="row-1">
 			<td>
 				<? echo $s_average_time ?>
 			</td>
@@ -174,7 +177,7 @@
 				<? echo $t_average_time ?>
 			</td>
 		</tr>
-		<tr align="center" bgcolor="<? echo $g_primary_color_light ?>">
+		<tr class="row-2">
 			<td>
 				<? echo $s_total_time ?>
 			</td>
@@ -188,24 +191,27 @@
 		&nbsp;
 	</td>
 </tr>
-
-<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td>
-		<b><? echo $s_developer_stats ?>:</b>
-	</td>
-	<td>
-		<b><? echo $s_reporter_stats ?>: </b> <? #@@@ OOPS - localize ?>
-	</td>
-</tr>
-<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
-	<td>
-		<table width="97%">
-			<? print_developer_summary() ?>
+		<? ### DEVELOPER ### ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<? echo $s_developer_stats ?>:
+			</td>
+		</tr>
+		<? print_developer_summary() ?>
 		</table>
 	</td>
 	<td>
-		<table width="97%">
-			<? print_reporter_summary() ?>
+		<? ### REPORTER ### ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<? echo $s_reporter_stats ?>:
+			</td>
+		</tr>
+		<? print_reporter_summary() ?>
 		</table>
 	</td>
 </tr>

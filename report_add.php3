@@ -196,7 +196,7 @@
 	### FORM ERROR
 	### required fields not entered
 	if ( $check_failed ) {
-		PRINT "<b>$s_report_add_error_msg</b><p>";
+		PRINT "<span class=\"bold\">$s_report_add_error_msg</span><p>";
 		if ( $f_category=="" ) {
 			PRINT "$s_must_enter_category<br>";
 		}

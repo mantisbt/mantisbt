@@ -3,7 +3,7 @@
 	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
-	
+
 	# Initial code for this addon cames from Duncan Lisset
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 ?>
@@ -59,57 +59,49 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
-<p>
 <? print_menu( $g_menu_include_file ) ?>
-<? print_summary_menu( $g_summary_jpgraph_page ) ?>
-<p>
-<table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
-<tr>
-	<td bgcolor=<? echo $g_white_color ?>>
-	<table width=100% cols=2>
-	<tr>
-		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b><? echo $s_summary_title ?></b>
-		</td>
-	</tr>
-	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
-		<td width=50%>
-			<img src="<? echo $g_summary_jpgraph_cumulative_bydate ?>" border=0>
-		</td>
-		<td width=50%>
-			<img src="<? echo $g_summary_jpgraph_bydeveloper ?>" border=0>
-		</td>
-	</tr>
-	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
-		<td width=50%>
-			<img src="<? echo $g_summary_jpgraph_byreporter ?>" border=0>
-		</td>
-		<td width=50%>
-			<img src="<? echo $g_summary_jpgraph_byseverity ?>" border=0>
-		</td>
-	</tr>
-	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
-		<td width=50%>
-			<img src="<? echo $g_summary_jpgraph_bystatus ?>" border=0>
-		</td>
-		<td width=50%>
-			<img src="<? echo $g_summary_jpgraph_byresolution ?>" border=0>
-		</td>
-	</tr>
-	<tr align=center valign=top height=28 bgcolor=<? echo $g_white_color ?>>
-		<td width=50%>
-			<img src="<? echo $g_summary_jpgraph_bycategory ?>" border=0>
-		</td>
-		<td width=50%>
-			<img src="<? echo $g_summary_jpgraph_bypriority ?>" border=0>
-		</td>
-	</tr>
 
-	</table>		
+<? print_summary_menu( $g_summary_jpgraph_page ) ?>
+
+<p>
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title" colspan="2">
+		<? echo $s_summary_title ?>
 	</td>
 </tr>
-
+<tr valign="top" bgcolor="<? echo $g_white_color ?>">
+	<td width="50%">
+		<img src="<? echo $g_summary_jpgraph_cumulative_bydate ?>" border="0">
+	</td>
+	<td width="50%">
+		<img src="<? echo $g_summary_jpgraph_bydeveloper ?>" border="0">
+	</td>
+</tr>
+<tr valign="top" bgcolor="<? echo $g_white_color ?>">
+	<td width="50%">
+		<img src="<? echo $g_summary_jpgraph_byreporter ?>" border="0">
+	</td>
+	<td width="50%">
+		<img src="<? echo $g_summary_jpgraph_byseverity ?>" border="0">
+	</td>
+</tr>
+<tr valign="top" bgcolor="<? echo $g_white_color ?>">
+	<td width="50%">
+		<img src="<? echo $g_summary_jpgraph_bystatus ?>" border="0">
+	</td>
+	<td width="50%">
+		<img src="<? echo $g_summary_jpgraph_byresolution ?>" border="0">
+	</td>
+</tr>
+<tr valign="top" bgcolor="<? echo $g_white_color ?>">
+	<td width="50%">
+		<img src="<? echo $g_summary_jpgraph_bycategory ?>" border="0">
+	</td>
+	<td width="50%">
+		<img src="<? echo $g_summary_jpgraph_bypriority ?>" border="0">
+	</td>
+</tr>
 </table>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

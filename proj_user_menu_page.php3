@@ -46,7 +46,7 @@
 
 <p>
 <div align="center">
-	<? echo $s_automatic_access_level ?>: <b><? echo $t_access_min ?></b>
+	<? echo $s_automatic_access_level ?>: <span class="bold"><? echo $t_access_min ?></span>
 </div>
 
 <p>
