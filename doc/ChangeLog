@@ -2,6 +2,7 @@
 
 2005.02.xx  -  0.19.3
 
+- Support customizing which fields/custom fields should be shown in the View Issues page via custom functions (vboctor)
 - Support for dynamically populated custom fields (use =versions_enum or =categories_enum or =anyfunc in possible values field) (vboctor)
 - New Config: $g_graph_font - truetype font for graphs(thraxisp)
 - New Config: $g_graph_window_width - window width is used to scale the graphs(thraxisp)

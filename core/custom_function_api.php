@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.12 2005-01-22 02:20:23 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.13 2005-01-25 12:44:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -133,6 +133,78 @@
 			return true;
 		}else{
 			return false;
+		}
+	}
+
+	# --------------------
+	# returns an array of the column names to be displayed.
+	# The column names to use are those of the field names in the bug table.
+	# In addition, you can use the following:
+	# - "selection" for selection checkboxes.
+	# - "edit" for icon to open the edit page.
+	# - "custom_xxxx" were xxxx is the name of the custom field that is valid for the
+	#   current project.  In case of "All Projects, the field will be empty where it is
+	#   not applicable.
+	function custom_function_default_get_columns_to_view() {
+		$t_columns = array( 'selection', 'edit', 'priority', 'bug_id', 'sponsorship',
+				'bugnotes_count', 'attachment', 'category', 'severity',
+				'status', 'last_updated', 'summary' );
+
+		return $t_columns;
+	}
+
+	# --------------------
+	# Print the title of a column given its name.
+	# $p_column: custom_xxx for custom field xxx, or otherwise field name as in bug table.
+	function custom_function_default_print_column_title( $p_column ) {
+		if ( strpos( $p_column, 'custom_' ) === 0 ) {
+			$t_custom_field = substr( $p_column, 7 );
+
+			$t_field_id = custom_field_get_id_from_name( $t_custom_field );
+			if ( $t_field_id === false ) {
+				echo '@', $t_custom_field, '@';
+			} else {
+				$t_def = custom_field_get_definition( $t_field_id );
+				$t_custom_field = lang_get_defaulted( $t_def['name'] );
+
+				echo '<td>', $t_custom_field, '</td>';
+			}
+		} else {
+			$t_function = 'print_column_title_' . $p_column;
+			$t_function();
+		}
+	}
+
+	# --------------------
+	# Print the value of the custom field (if the field is applicable to the project of
+	# the specified issue and the current user has read access to it.
+	# see custom_function_default_print_column_title() for rules about column names.
+	# $p_column: name of field to show in the column.
+	# $p_row: the row from the bug table that belongs to the issue that we should print the values for.
+	function custom_function_default_print_column_value( $p_column, $p_issue_row ) {
+		if ( strpos( $p_column, 'custom_' ) === 0 ) {
+			echo '<td>';
+			$t_custom_field = substr( $p_column, 7 );
+
+			$t_field_id = custom_field_get_id_from_name( $t_custom_field );
+			if ( $t_field_id === false ) {
+				echo '@', $t_custom_field, '@';
+			} else {
+				$t_issue_id = $p_issue_row['id'];
+				$t_project_id = $p_issue_row['project_id'];
+		
+				if ( custom_field_is_linked( $t_field_id, $t_project_id ) ) {
+					$t_def = custom_field_get_definition( $t_field_id );
+					print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
+				} else {
+					// field is not linked to project
+					echo '&nbsp;';
+				}
+			}
+			echo '</td>';
+		} else {
+			$t_function = 'print_column_' . $p_column;
+			$t_function( $p_issue_row );
 		}
 	}
 
