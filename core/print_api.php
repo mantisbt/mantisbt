@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.119 2005-03-21 20:48:57 vwegert Exp $
+	# $Id: print_api.php,v 1.120 2005-03-21 23:17:53 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -531,7 +531,7 @@
 	# $p_version = currently selected version.
 	# $p_project_id = project id, otherwise current project will be used.
 	# $p_released = null to get all, 1: only released, 0: only future versions
-	function print_version_option_list( $p_version='', $p_project_id = null, $p_released = null ) {
+	function print_version_option_list( $p_version='', $p_project_id = null, $p_released = null, $p_leading_blank = true ) {
 		if ( null === $p_project_id ) {
 			$c_project_id = helper_get_current_project();
 		} else {
@@ -540,7 +540,9 @@
 
 		$versions = version_get_all_rows( $c_project_id, $p_released );
 
-		echo '<option value=""></option>';
+		if ( $p_leading_blank ) {
+			echo '<option value=""></option>';
+		}
 		foreach( $versions as $version ) {
 			$t_version = string_shorten( string_attribute( $version['version'] ) );
 			echo "<option value=\"$t_version\"";

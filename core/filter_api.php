@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.89 2005-03-14 11:41:22 vboctor Exp $
+	# $Id: filter_api.php,v 1.90 2005-03-21 23:17:54 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1107,8 +1107,6 @@
 										$t_this_string = '';
 										if ( ( $t_current == META_FILTER_ANY ) || ( is_blank( $t_current ) ) ) {
 											$t_any_found = true;
-										} else if ( META_FILTER_NONE == $t_current ) {
-											$t_this_string = lang_get( 'none' );
 										} else {
 											$t_this_string = $t_current;
 										}
@@ -2328,7 +2326,6 @@
 		<!-- Category -->
 		<select <?php PRINT $t_select_modifier;?> name="show_category[]">
 			<option value="[any]" <?php check_selected( $t_filter['show_category'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
-			<option value="[none]" <?php check_selected( $t_filter['show_category'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php # This shows orphaned categories as well as selectable categories ?>
 			<?php print_category_complete_option_list( $t_filter['show_category'] ) ?>
 		</select>
@@ -2392,7 +2389,7 @@
 		<select <?php PRINT $t_select_modifier;?> name="show_version[]">
 			<option value="[any]" <?php check_selected( $t_filter['show_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<option value="[none]" <?php check_selected( $t_filter['show_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
-			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED ) ?>
+			<?php print_version_option_list( $t_filter['show_version'], null, VERSION_RELEASED, false ) ?>
 		</select>
 		<?php
 	}
@@ -2403,7 +2400,7 @@
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">
 			<option value="[any]" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_ANY ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<option value="[none]" <?php check_selected( $t_filter['fixed_in_version'], META_FILTER_NONE ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
-			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL ) ?>
+			<?php print_version_option_list( $t_filter['fixed_in_version'], null, VERSION_ALL, false ) ?>
 		</select>
 		<?php
 	}
@@ -2563,12 +2560,12 @@
 			} else {
 				echo '<select ' . $t_select_modifier . ' name="custom_field_' . $p_field_id .'[]">';
 				echo '<option value="[any]" ';
-				check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );
+				check_selected( $t_filter['custom_fields'][ $p_field_id ], '[any]' );
 				echo '>[' . lang_get( 'any' ) .']</option>';
 				# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
 				if ( ! in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
 					echo '<option value="[none]" ';
-					check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );
+					check_selected( $t_filter['custom_fields'][ $p_field_id ], '[none]' );
 					echo '>[' . lang_get( 'none' ) .']</option>';
 				}
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
