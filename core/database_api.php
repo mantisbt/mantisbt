@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.15 2003-02-17 13:16:28 jlatour Exp $
+	# $Id: database_api.php,v 1.16 2003-02-18 00:06:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -83,7 +83,6 @@
 		# @@@ remove p_error_on_failure and use @ in every caller that used to use it
 		if ( !$t_result && $p_error_on_failure ) {
 			db_error($p_query);
-			var_dump($p_query);
 			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 			return false;
 		} else {
