@@ -50,6 +50,9 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
+	
+	$s_make_private = 'Make Private';
+	$s_make_public = 'Make Public';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';

@@ -90,6 +90,13 @@
 							( $v3_reporter_id == $t_user_id )) {
 							print_bracket_link( 'bugnote_edit_page.php?f_bugnote_text_id='.$v3_bugnote_text_id.'&amp;f_id='.$f_id.'&amp;f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
 							print_bracket_link( 'bugnote_delete.php?f_bugnote_id='.$v3_id.'&amp;f_id='.$f_id, $s_delete_link );
+							if ( access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
+								if ( PRIVATE == $v3_view_state ) {
+									print_bracket_link('bugnote_set_private.php?f_private=0&f_bugnote_id='.$v3_id, $s_make_public);
+								} else {
+									print_bracket_link('bugnote_set_private.php?f_private=1&f_bugnote_id='.$v3_id, $s_make_private);
+								}
+							}
 						}
 					}
 				?>
