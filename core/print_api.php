@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.122 2005-04-03 12:51:06 jlatour Exp $
+	# $Id: print_api.php,v 1.123 2005-04-04 21:07:02 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -791,7 +791,6 @@
 				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id AND u.user_id='$c_user_id'
 				WHERE p.enabled=1 AND
-					p.view_state='$t_prv' AND
 					u.user_id IS NULL
 				ORDER BY p.name";
 		$result = db_query( $query );
