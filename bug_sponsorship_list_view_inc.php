@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.7 2004-07-12 04:37:43 int2str Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.8 2004-07-17 23:52:56 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,6 +14,7 @@
 	# bug.	$f_bug_id must be set to the bug id
 
 	require_once( $t_core_path . 'sponsorship_api.php' );
+	require_once( $t_core_path . 'collapse_api.php' );
 
 	#
 	# Determine whether the sponsorship section should be shown.
@@ -39,40 +40,10 @@
 
 <a name="sponsorships" id="sponsorships"></a> <br />
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<div id="sponsorship_closed" style="display: none;">
-<table class="width100" cellspacing="1">
-	<tr>
-		<td class="form-title">
-			<a href="" onClick="ToggleDiv( 'sponsorship', g_div_sponsorship ); return false;"
-				><img border="0" src="images/plus.png" alt="+" /></a>
-<?php
-			echo lang_get( 'users_sponsoring_bug' );
-
-			$t_details_url = lang_get( 'sponsorship_process_url' );
-			if ( !is_blank( $t_details_url ) ) {
-				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">' 
-					. lang_get( 'sponsorship_more_info' ) . '</a>]';
-			}
+<?php 
+	collapse_open( 'sponsorship' );
 ?>
 
-<?php
-	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
-	if ( $t_total_sponsorship > 0 ) {
-		echo ' <span style="font-weight: normal;">(';
-		echo sprintf( lang_get( 'total_sponsorship_amount' ), 
-			sponsorship_format_amount( $t_total_sponsorship ) );
-		echo ')</span>';
-	}
-?>
-		</td>
-	</tr>
-</table>
-
-</div>
-<?php } ?>
-
-<div id="sponsorship_open">
 <table class="width100" cellspacing="1">
 	<tr>
 		<td width="50" rowspan="3">
@@ -144,13 +115,47 @@
 		}
 ?>
 </table>
-</div>
+
+<?php
+	collapse_closed( 'sponsorship' );
+?>
+
+<table class="width100" cellspacing="1">
+	<tr>
+		<td class="form-title">
+			<a href="" onClick="ToggleDiv( 'sponsorship', g_div_sponsorship ); return false;"
+				><img border="0" src="images/plus.png" alt="+" /></a>
+<?php
+			echo lang_get( 'users_sponsoring_bug' );
+
+			$t_details_url = lang_get( 'sponsorship_process_url' );
+			if ( !is_blank( $t_details_url ) ) {
+				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">' 
+					. lang_get( 'sponsorship_more_info' ) . '</a>]';
+			}
+?>
+
+<?php
+	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
+	if ( $t_total_sponsorship > 0 ) {
+		echo ' <span style="font-weight: normal;">(';
+		echo sprintf( lang_get( 'total_sponsorship_amount' ), 
+			sponsorship_format_amount( $t_total_sponsorship ) );
+		echo ')</span>';
+	}
+?>
+		</td>
+	</tr>
+</table>
+
+<?php collapse_end( 'sponsorship' ); ?>
+<?php } ?>
+
 
 <?php if ( ON == config_get( 'use_javascript' ) ) { ?>
 <script type="text/JavaScript">
 	SetDiv( "sponsorship", g_div_sponsorship );
 </script>
-<?php } ?>
 
 <?php
 } # If sponsorship enabled

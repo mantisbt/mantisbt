@@ -6,13 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.47 2004-07-17 12:48:17 narcissus Exp $
+	# $Id: filter_api.php,v 1.48 2004-07-17 23:52:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
+	require_once( $t_core_dir . 'collapse_api.php' );
 
 	###########################################################################
 	# Filter API
@@ -601,11 +602,25 @@
 	}
 
 	# --------------------
+	# Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
+	# filter display.
+	function filter_draw_selection_area( $p_page_number, $p_for_screen = true )
+	{
+		collapse_open( 'filter' );
+		filter_draw_selection_area2( $p_page_number, $p_for_screen, true );
+		collapse_closed( 'filter' );
+		filter_draw_selection_area2( $p_page_number, $p_for_screen, false );
+		collapse_end( 'filter' );
+	}
+
+	# --------------------
 	# Will print the filter selection area for both the bug list view screen, as well
 	# as the bug list print screen. This function was an attempt to make it easier to
 	# add new filters and rearrange them on screen for both pages.
-	function filter_draw_selection_area( $p_page_number, $p_for_screen = true )
+	function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_expanded = true )
 	{
+		$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
+
 		$t_filter = current_user_get_bug_filter();
 		$t_project_id = helper_get_current_project();
 
@@ -639,6 +654,7 @@
 		<table class="width100" cellspacing="1">
 
 		<?php
+		if ( $p_expanded ) {
 			$t_filter_cols = 9;
 			$t_custom_cols = $t_filter_cols;
 			if ( ON == config_get( 'filter_by_custom_fields' ) ) {
@@ -1268,11 +1284,15 @@
 				}
 			}
 		}
+		} // expanded
 		?>
 
 		<tr>
 			<td colspan="3">
-				<?php PRINT lang_get( 'search' ) ?>: 
+				<?php
+					collapse_icon( 'filter' );
+					echo lang_get( 'search' );
+				?>: 
 				<input type="text" size="16" name="search" value="<?php PRINT $t_filter['search']; ?>" />
 
 				<input type="submit" name="filter" class="button" value="<?php PRINT lang_get( 'search' ) ?>" />
@@ -1286,11 +1306,11 @@
 
 			if ( count( $t_stored_queries_arr ) > 0 ) {
 				?>
-					<form method="get" name="list_queries" action="view_all_set.php">
+					<form method="get" name="list_queries<?php echo $t_form_name_suffix; ?>" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
 					<?php
 					if ( ON == config_get( 'use_javascript' ) ) {
-						PRINT '<select name="source_query_id" onchange="document.forms.list_queries.submit();">';
+						echo "<select name=\"source_query_id\" onchange=\"document.forms.list_queries$t_form_name_suffix.submit();\">";
 					} else {
 						PRINT '<select name="source_query_id">';
 					}

@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.2 2004-07-12 04:37:44 int2str Exp $
+ * $Id: common.js,v 1.3 2004-07-17 23:52:57 vboctor Exp $
  * --------------------------------------------------------
  */
 
@@ -89,6 +89,7 @@ var g_div_upload_form	= 0x0010;
 var g_div_monitoring	= 0x0020;
 var g_div_sponsorship	= 0x0040;
 var g_div_relationships	= 0x0080;
+var g_div_filter        = 0x0100;
 
 function GetViewSettings() {
 	var t_cookie = GetCookie( "VIEW_SETTINGS" );
