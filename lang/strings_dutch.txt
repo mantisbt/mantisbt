@@ -454,8 +454,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Upload File";
 	$s_title = "Title";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Project file deleted";
@@ -464,7 +462,6 @@
 	$s_confirm_file_delete_msg = "Are you sure you wish to delete this file?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Upload File";
 	$s_filename = "Filename";
 	$s_file_update_button = "Update File";
 	$s_file_delete_button = "Delete File";
@@ -518,14 +515,12 @@
 	$s_select_severity = "Selecteer Serieusheid";
 	$s_or_fill_in = "OR vul in";
 	$s_assign_to = "Wijs toe aan";
-	$s_steps_to_reproduce = "Stappen om te reproduceren";
 	$s_additional_information = "Additionele informatie";
 	$s_submit_report_button = "Verstuur rapport";
 	$s_check_report_more_bugs = "check to report more bugs";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Gevorderd rapport";
-	$s_upload_file = "Upload File";
 	$s_report_stay = "Report Stay";
 
 	# set_project.php3
@@ -587,7 +582,6 @@
 	$s_show = "Laat zien";
 	$s_changed = "Veranderd(uren)";
 	$s_hide_closed = "Verberg afgeronde opdrachten";
-	$s_filter_button = "Filter";
 	$s_viewing_bugs_title = "Bekijken opdrachten";
 	$s_updated = "Ge-updated";
 

@@ -454,8 +454,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Laste opp fil";
 	$s_title = "Tittel";
-	$s_select_file = "Velg fil";
-	$s_upload_file_button = "Last opp fil";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Prosjektfil er slettet";
@@ -464,7 +462,6 @@
 	$s_confirm_file_delete_msg = "Er du sikker på at du ønsker å slette denne filen?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Laste opp fil";
 	$s_filename = "Filnavn";
 	$s_file_update_button = "Oppdatere fil";
 	$s_file_delete_button = "Slette fil";
@@ -518,14 +515,12 @@
 	$s_select_severity = "Velg alvorlighetsgrad";
 	$s_or_fill_in = "ELLER angi";
 	$s_assign_to = "Deleger til";
-	$s_steps_to_reproduce = "Skritt for å reprodusere";
 	$s_additional_information = "Tilleggsinformasjon";
 	$s_submit_report_button = "Legg inn rapport";
 	$s_check_report_more_bugs = "kryss av for å legge inn flere feil";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Avansert rapport";
-	$s_upload_file = "Laste opp fil";
 	$s_report_stay = "Report Stay";
 
 	# set_project.php3
@@ -587,7 +582,6 @@
 	$s_show = "Vis";
 	$s_changed = "Endret(timer)";
 	$s_hide_closed = "Skjule løste";
-	$s_filter_button = "Filter";
 	$s_viewing_bugs_title = "Oversikt over feil";
 	$s_updated = "Oppdatert";
 

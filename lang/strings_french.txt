@@ -456,8 +456,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Attacher un fichier";
 	$s_title = "Titre";
-	$s_select_file = "Sélectionner le fichier";
-	$s_upload_file_button = "Envoyer le fichier";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Projet supprimé";
@@ -466,7 +464,6 @@
 	$s_confirm_file_delete_msg = "Voulez-vous vraiment supprimer ce fichier ?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Envoyer un fichier";
 	$s_filename = "Nom du fichier";
 	$s_file_update_button = "Modifier le fichier";
 	$s_file_delete_button = "Supprimer le fichier";
@@ -520,14 +517,12 @@
 	$s_select_severity = "Choisir une sévérité";
 	$s_or_fill_in = "OU Remplir";
 	$s_assign_to = "Assigné à";
-	$s_steps_to_reproduce = "Etapes à suivre pour reproduire le bug";
 	$s_additional_information = "Information complémentaire";
 	$s_submit_report_button = "Envoyer le rapport";
 	$s_check_report_more_bugs = "Cocher pour saisir d'autres bugs";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Rapport détaillé";
-	$s_upload_file = "Fichier uploadé";
 	$s_report_stay = "Report Stay";
 
 	# set_project.php3
@@ -589,7 +584,6 @@
 	$s_show = "Afficher";
 	$s_changed = "Modifiés (heures)";
 	$s_hide_closed = "Masquer les bugs résolus";
-	$s_filter_button = "Filtrer";
 	$s_viewing_bugs_title = "Liste des bugs";
 	$s_updated = "Mis à jour";
 

@@ -454,8 +454,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Загрузить файл";
 	$s_title = "Title";
-	$s_select_file = "Выберите файл";
-	$s_upload_file_button = "Загрузить файл";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Файл проекта был удален";
@@ -464,7 +462,6 @@
 	$s_confirm_file_delete_msg = "Вы уверены, что желаете удалить это файл?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Обновить файл";
 	$s_filename = "Filename";
 	$s_file_update_button = "Обновить файл";
 	$s_file_delete_button = "Удалить файл";
@@ -518,14 +515,12 @@
 	$s_select_severity = "Выберите критичность";
 	$s_or_fill_in = "или заполните";
 	$s_assign_to = "Назначить";
-	$s_steps_to_reproduce = "Steps To Reproduce";
 	$s_additional_information = "Дополнительная информация";
 	$s_submit_report_button = "Отправить обращение";
 	$s_check_report_more_bugs = "отметьте, если будете вводить несколько обращений";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Подробная форма обращения";
-	$s_upload_file = "Загрузить файл";
 	$s_report_stay = "Вернуться на эту форму";
 
 	# set_project.php3
@@ -587,7 +582,6 @@
 	$s_show = "Показать";
 	$s_changed = "Изменены за (час)";
 	$s_hide_closed = "Убрать закрытые";
-	$s_filter_button = "Фильтровать";
 	$s_viewing_bugs_title = "Просмотр обращений";
 	$s_updated = "Обновлен";
 

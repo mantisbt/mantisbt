@@ -455,8 +455,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Datei hochladen";
 	$s_title = "Titel";
-	$s_select_file = "Datei auswählen";
-	$s_upload_file_button = "Datei hochladen";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Projekt-Datei gelöscht";
@@ -465,7 +463,6 @@
 	$s_confirm_file_delete_msg = "Soll diese Datei wirklich gelöscht werden?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Datei hochladen";
 	$s_filename = "Dateiname";
 	$s_file_update_button = "Datei aktualisieren";
 	$s_file_delete_button = "Datei löschen";
@@ -519,14 +516,12 @@
 	$s_select_severity = "Schwere wählen";
 	$s_or_fill_in = "ODER ausfüllen";
 	$s_assign_to = "Zuordnung an ";
-	$s_steps_to_reproduce = "Schritte zur Reproduzierung";
 	$s_additional_information = "Zusätzliche Information";
 	$s_submit_report_button = "Bericht absenden";
 	$s_check_report_more_bugs = "weitere Fehler eintragen";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Erweiterter Bericht";
-	$s_upload_file = "Datei übertragen";
 	$s_report_stay = "Report Stay";
 
 	# set_project.php3
@@ -589,7 +584,6 @@
 	$s_show = "Zeige";
 	$s_changed = "geändert (Std.)";
 	$s_hide_closed = "bereinigte ausblenden";
-	$s_filter_button = "filtern";
 	$s_viewing_bugs_title = "Fehler anzeigen";
 	$s_updated = "aktualisiert";
 

@@ -456,8 +456,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Upload File";
 	$s_title = "Title";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "File del progetto eliminato";
@@ -466,7 +464,6 @@
 	$s_confirm_file_delete_msg = "Sicuro di voler eliminare questo file?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Upload File";
 	$s_filename = "Filename";
 	$s_file_update_button = "Update File";
 	$s_file_delete_button = "Eliminazione File";
@@ -520,14 +517,12 @@
 	$s_select_severity = "Livello di Problematica";
 	$s_or_fill_in = "O Riempi in ";
 	$s_assign_to = "Assegnato a ";
-	$s_steps_to_reproduce = "Passi per la riproduzione dell'errore";
 	$s_additional_information = "Informazioni addizionali";
 	$s_submit_report_button = "Invia Report";
 	$s_check_report_more_bugs = "Notifica piu' bugs";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Report Avanzato";
-	$s_upload_file = "Upload File";
 	$s_report_stay = "Rimani nel report";
 
 	# set_project.php3
@@ -589,7 +584,6 @@
 	$s_show = "Visualizza";
 	$s_changed = "Modificato(ore)";
 	$s_hide_closed = "Nascondi la Risoluzione";
-	$s_filter_button = "Filtra";
 	$s_viewing_bugs_title = "Visualizza i Bug";
 	$s_updated = "Aggiornato";
 

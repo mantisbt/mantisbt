@@ -455,8 +455,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "파일 업로드";
 	$s_title = "제목";
-	$s_select_file = "파일 선택";
-	$s_upload_file_button = "파일 업로드";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "프로제트 파일 삭제됨";
@@ -465,7 +463,6 @@
 	$s_confirm_file_delete_msg = "이 파일을 삭제하시겠습니까?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "파일 업로드";
 	$s_filename = "파일 이름";
 	$s_file_update_button = "파일 갱신";
 	$s_file_delete_button = "파일 삭제";
@@ -519,14 +516,12 @@
 	$s_select_severity = "중요도(심각성) 선택";
 	$s_or_fill_in = "OR Fill In";
 	$s_assign_to = "할당하기";
-	$s_steps_to_reproduce = "재발생 스탭";
 	$s_additional_information = "추가 정보사항";
 	$s_submit_report_button = "보고서 제출";
 	$s_check_report_more_bugs = "또다른 버그 보고 확인";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "상세 보고";
-	$s_upload_file = "파일 업로드";
 	$s_report_stay = "Stay 리포트";
 
 	# set_project.php3
@@ -588,7 +583,6 @@
 	$s_show = "갯수";
 	$s_changed = "변경된(시간)";
 	$s_hide_closed = "폐쇄된 버그 숨김";
-	$s_filter_button = "필터";
 	$s_viewing_bugs_title = "버그 보기";
 	$s_updated = "최종 갱신";
 

@@ -455,8 +455,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Subir Archivo";
 	$s_title = "Titulo";
-	$s_select_file = "Seleccione Archivo";
-	$s_upload_file_button = "Subir Archivo";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Archivo de Proyecto borrado...";
@@ -465,7 +463,6 @@
 	$s_confirm_file_delete_msg = "Esta seguro que desea eliminar este archivo?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Subir Archivo";
 	$s_filename = "Nombre de Archivo";
 	$s_file_update_button = "Actualizar Archivo";
 	$s_file_delete_button = "Borrar Archivo";
@@ -519,14 +516,12 @@
 	$s_select_severity = "Seleccione Severidad";
 	$s_or_fill_in = "O llene los siguientes campos";
 	$s_assign_to = "Asignar a";
-	$s_steps_to_reproduce = "Pasos para reproducirlo";
 	$s_additional_information = "Informacion Adicional";
 	$s_submit_report_button = "Enviar Reporte";
 	$s_check_report_more_bugs = "seleccione para reportar mas bugs";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Reporte Avanzado";
-	$s_upload_file = "Subir Archivo";
 	$s_report_stay = "Permanecer en Reporte";
 
 	# set_project.php3
@@ -588,7 +583,6 @@
 	$s_show = "Ver";
 	$s_changed = "Cambiado(hrs)";
 	$s_hide_closed = "Ocultar Resueltos";
-	$s_filter_button = "Filtrar";
 	$s_viewing_bugs_title = "Bugs";
 	$s_updated = "Actualizado";
 

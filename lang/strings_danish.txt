@@ -456,8 +456,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Upload Fil";
 	$s_title = "Titel";
-	$s_select_file = "V&aelig;lg Fil";
-	$s_upload_file_button = "Upload Fil";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Projekt filer slettet";
@@ -466,7 +464,6 @@
 	$s_confirm_file_delete_msg = "Er du sikker p&aring; du vil slette denne fil?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Upload Fil";
 	$s_filename = "Filnavn";
 	$s_file_update_button = "Ajourf&oslash;r Fil";
 	$s_file_delete_button = "Slet Fil";
@@ -520,14 +517,12 @@
 	$s_select_severity = "V&aelig;lg Alvorlighed";
 	$s_or_fill_in = "ELLER udfyld";
 	$s_assign_to = "Overdraget til";
-	$s_steps_to_reproduce = "Handlinger for at genfrembringe";
 	$s_additional_information = "Yderligere information";
 	$s_submit_report_button = "Send Rapport";
 	$s_check_report_more_bugs = "afm&aelig;rk for at rapporterer flere fejl";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Avanceret Rapport";
-	$s_upload_file = "Upload Fil";
 	$s_report_stay = "Rapport Ops&aelig;tning";
 
 	# set_project.php3
@@ -589,7 +584,6 @@
 	$s_show = "Vis";
 	$s_changed = "&AElig;ndret(time)";
 	$s_hide_closed = "Skjul Lukket";
-	$s_filter_button = "Filter";
 	$s_viewing_bugs_title = "Vis Fejl";
 	$s_updated = "Ajourf&oslash;rt";
 
@@ -634,5 +628,4 @@
 
   # main_page.php
   #LINE 106:
-  $s_archives = "Arkiver";                                      # "Archives"
 ?>

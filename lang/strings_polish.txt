@@ -454,8 +454,6 @@
 	# proj_doc_add_page.php3
 	$s_upload_file_title = "Wysy³anie pliku";
 	$s_title = "Tytu³";
-	$s_select_file = "Wybierz plik";
-	$s_upload_file_button = "Wy¶lij plik";
 
 	# proj_doc_delete.php3
 	$s_project_file_deleted_msg = "Plik projektu skasowany";
@@ -464,7 +462,6 @@
 	$s_confirm_file_delete_msg = "Czy na pewno chcesz skasowaæ ten plik ?";
 
 	# proj_doc_edit_page.php3
-	$s_upload_file_title = "Wysy³anie pliku";
 	$s_filename = "Nazwa pliku";
 	$s_file_update_button = "Modyfikuj plik";
 	$s_file_delete_button = "Skasuj plik";
@@ -518,14 +515,12 @@
 	$s_select_severity = "Wybierz wagê b³êdu";
 	$s_or_fill_in = "Lub wype³nij";
 	$s_assign_to = "Przypisz do";
-	$s_steps_to_reproduce = "Kroki aby b³±d powtórzyæ";
 	$s_additional_information = "Dodatkowe informacje";
 	$s_submit_report_button = "Wy¶lij zg³oszenie";
 	$s_check_report_more_bugs = "zaznacz, je¶li chcesz zg³osiæ wiêcej b³êdów";
 
 	# report_bug_page.php3
 	$s_advanced_report_link = "Zaawansowane zg³oszenie";
-	$s_upload_file = "Wy¶lij plik";
 	$s_report_stay = "Pozostaw formularz";
 
 	# set_project.php3
@@ -587,7 +582,6 @@
 	$s_show = "Poka¿";
 	$s_changed = "Zmienione (w godzinach)";
 	$s_hide_closed = "Ukryj zamkniête";
-	$s_filter_button = "Filtr";
 	$s_viewing_bugs_title = "Przegl±danie b³edów";
 	$s_updated = "Zmodyfikowany";
 
