@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.23 2002-10-20 20:42:57 jfitzell Exp $
+	# $Id: account_update.php,v 1.24 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,7 +38,7 @@
 	echo '<li>' . lang_get( 'email_updated' ) . '</li>';
 
 	# Update password if the two match and are not empty
-	if ( !empty( $f_password ) ) {
+	if ( !is_blank( $f_password ) ) {
 		if ( $f_password != $f_password_confirm ) {
 			trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 		} else {

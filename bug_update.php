@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.38 2002-10-29 08:03:01 jfitzell Exp $
+	# $Id: bug_update.php,v 1.39 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -64,7 +64,7 @@
 	bug_update( $f_bug_id, $t_bug_data, true );
 
 	$f_bugnote_text = trim( $f_bugnote_text );
-	if ( !empty( $f_bugnote_text ) ) {
+	if ( !is_blank( $f_bugnote_text ) ) {
 		bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
 	}
 

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.7 2002-09-21 10:17:14 jfitzell Exp $
+	# $Id: access_api.php,v 1.8 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -50,7 +50,7 @@
 	function access_bug_check( $p_bug_id, $p_view_state='' ) {
 		global $g_private_bug_threshold;
 
-		if ( empty ( $p_view_state ) ) {
+		if ( is_blank( $p_view_state ) ) {
 			$t_view_state = bug_get_field( $p_bug_id, 'view_state' );
 		} else {
 			$t_view_state = (integer)$p_view_state;
@@ -68,7 +68,7 @@
 		global $g_string_cookie_val;
 
 		# user isn't logged in
-		if (( !isset( $g_string_cookie_val ) )||( empty( $g_string_cookie_val ) )) {
+		if (( !isset( $g_string_cookie_val ) )||( is_blank( $g_string_cookie_val ) )) {
 			return false;
 		}
 
@@ -100,7 +100,7 @@
 		global $g_string_cookie_val;
 
 		# user isn't logged in
-		if (( !isset( $g_string_cookie_val ) )||( empty( $g_string_cookie_val ) )) {
+		if (( !isset( $g_string_cookie_val ) )||( is_blank( $g_string_cookie_val ) )) {
 			return false;
 		}
 
@@ -144,7 +144,7 @@
 
 		# user isn't logged in
 		if (( !isset( $g_string_cookie_val ) ) ||
-			( empty( $g_string_cookie_val ) )) {
+			( is_blank( $g_string_cookie_val ) )) {
 			return false;
 		}
 

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.22 2002-10-30 10:42:07 jfitzell Exp $
+	# $Id: html_api.php,v 1.23 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -167,7 +167,7 @@
 	# (10) $p_page is included.  This allows for the admin to have a nice banner or
 	# graphic at the top of every page
 	function print_top_page( $p_page ) {
-		if (( !empty( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
+		if (( !is_blank( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
 			include( $p_page );
 		}
 	}
@@ -175,7 +175,7 @@
 	# (11) $p_page is included.  This allows for the admin to have a nice baner or
 	# graphic at the bottom of every page
 	function print_bottom_page( $p_page ) {
-		if (( !empty( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
+		if (( !is_blank( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
 			include( $p_page );
 		}
 	}
@@ -189,7 +189,7 @@
 				$g_show_queries_count, $g_show_queries_list, $g_queries_array;
 
 		# @@@
-		if (isset($g_string_cookie_val)&&!empty($g_string_cookie_val)) {
+		if (isset($g_string_cookie_val)&&!is_blank($g_string_cookie_val)) {
 			if ( $g_show_footer_menu ) {
 				PRINT '<br />';
 				print_menu();

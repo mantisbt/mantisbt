@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.25 2002-10-20 22:12:46 jfitzell Exp $
+	# $Id: email_api.php,v 1.26 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -23,7 +23,7 @@
 			return true;
 		}
 
-		if ( empty( $p_email ) && ON == config_get( 'allow_blank_email' ) ) {
+		if ( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) ) {
 			return true;
 		}
 
@@ -589,14 +589,14 @@
 			# add to the Recipient list
 			$t_recipient_list = split(',', $t_recipient);
 			while ( list( , $t_recipient ) = each( $t_recipient_list ) ) {
-				if ( !empty( $t_recipient ) ) {
+				if ( !is_blank( $t_recipient ) ) {
 					$mail->AddAddress( $t_recipient, '' );
 				}
 			}
 			# add to the BCC list
 			$t_bcc_list = split(',', $p_header);
 			while(list(, $t_bcc) = each($t_bcc_list)) {
-				if ( !empty( $t_bcc ) ) {
+				if ( !is_blank( $t_bcc ) ) {
 					$mail->AddBCC($t_bcc, '');
 				}
 			}
@@ -699,7 +699,7 @@
 	# Check limit_email_domain option and append the domain name if it is set
 	function email_append_domain( $p_email ) {
 		$t_limit_email_domain = config_get( 'limit_email_domain' );
-		if ( $t_limit_email_domain && !empty( $p_email ) ) {
+		if ( $t_limit_email_domain && !is_blank( $p_email ) ) {
 			$p_email = "$p_email@$t_limit_email_domain";
 		}
 

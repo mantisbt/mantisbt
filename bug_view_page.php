@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.9 2002-10-30 10:42:07 jfitzell Exp $
+	# $Id: bug_view_page.php,v 1.10 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -305,7 +305,7 @@
 </table>
 
 <?php
-	if ( empty( $f_check ) && $t_show_attachments && $t_bug->status < RESOLVED && access_level_check_greater_or_equal( REPORTER ) ) {
+	if ( is_blank( $f_check ) && $t_show_attachments && $t_bug->status < RESOLVED && access_level_check_greater_or_equal( REPORTER ) ) {
 		include( config_get( 'bug_file_upload_inc' ) );
 	}
 

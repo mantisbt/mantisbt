@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.27 2002-11-12 10:10:35 jfitzell Exp $
+	# $Id: print_api.php,v 1.28 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -960,7 +960,7 @@
 	# print the bracketed links used near the top
 	# if the $p_link is blank then the text is printed but no link is created
 	function print_bracket_link( $p_link, $p_url_text ) {
-		if (empty( $p_link )) {
+		if (is_blank( $p_link )) {
 			PRINT "[ $p_url_text ]";
 		} else {
 			PRINT "[ <a href=\"$p_link\">$p_url_text</a> ]";

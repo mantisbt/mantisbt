@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.9 2002-10-30 10:42:07 jfitzell Exp $
+	# $Id: bug_view_advanced_page.php,v 1.10 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -23,14 +23,14 @@
 	if ( SIMPLE_ONLY == config_get( 'show_view' ) ) {
 		$t_simple_url = 'bug_view_page.php?f_bug_id=' . $f_bug_id;
 
-		if ( !empty( $f_check ) ) {
+		if ( !is_blank( $f_check ) ) {
 			$t_simple_url .= '&amp;f_check=' . $f_check;
 		}
 
 		print_header_redirect ( $t_simple_url );
 	}
 
-	if ( !empty( $f_check ) ) {
+	if ( !is_blank( $f_check ) ) {
 		if ( $f_check != helper_calc_crc( $f_bug_id, __FILE__ ) ) {
 		  access_denied();
 		}
@@ -48,7 +48,7 @@
 
 	print_page_top1();
 
-	if ( empty ( $f_check ) ) {
+	if ( is_blank( $f_check ) ) {
 		print_page_top2();
 	} else {
 		print_page_top2a();
@@ -64,16 +64,16 @@
 	</td>
 	<td class="right" colspan="2">
 
-<?php if ( empty( $f_check ) ) { ?>
+<?php if ( is_blank( $f_check ) ) { ?>
 	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id . '&amp;f_check=' . helper_calc_crc( $f_bug_id, __FILE__ ), lang_get( 'publish' ) )?></span>
 <?php }?>
 
-<?php if ( empty( $f_check ) && ( BOTH == config_get( 'show_view' ) ) ) { ?>
+<?php if ( is_blank( $f_check ) && ( BOTH == config_get( 'show_view' ) ) ) { ?>
 		<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_bug_id=' . $f_bug_id, lang_get( 'view_simple_link' ) ) ?></span>
 <?php } ?>
 
 <?php
-	if ( !empty ( $f_check ) ) {
+	if ( !is_blank( $f_check ) ) {
 		$t_check = '&amp;f_check=' . $f_check;
 	} else {
 		$t_check = '';
@@ -320,7 +320,7 @@
 <?php
 	}
 
-	if ( !empty( $f_check ) ) {
+	if ( !is_blank( $f_check ) ) {
 		$t_show_attachments = true;
 	} else {
 		$t_show_attachments = ( ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_level_check_greater_or_equal( config_get( 'view_attachments_threshold' ) ) );
@@ -401,7 +401,7 @@
 </table>
 
 <?php
-	if ( empty( $f_check ) && $t_show_attachments && $t_bug->status < RESOLVED && access_level_check_greater_or_equal( REPORTER ) ) {
+	if ( is_blank( $f_check ) && $t_show_attachments && $t_bug->status < RESOLVED && access_level_check_greater_or_equal( REPORTER ) ) {
 		include( config_get( 'bug_file_upload_inc' ) );
 	}
 

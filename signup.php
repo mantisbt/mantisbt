@@ -18,7 +18,7 @@
 
 	# check for empty username
 	$f_username = trim( $f_username );
-	if ( empty( $f_username ) ) {
+	if ( is_blank( $f_username ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
 
@@ -26,7 +26,7 @@
 
 	# Check for a properly formatted email with valid MX record
 	#  Don't allow blank emails when signing up though, no matter what.
-	if ( !email_is_valid( $f_email ) || empty( $f_email ) ) {
+	if ( !email_is_valid( $f_email ) || is_blank( $f_email ) ) {
 		echo $f_email.' '.lang_get( 'invalid_email' ).'<br />';
 		echo '<a href="signup_page.php">'.lang_get( 'proceed' ).'</a>';
 		exit;

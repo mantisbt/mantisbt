@@ -5,7 +5,7 @@
 		}
 
 		$t_redirect_url = $p_redirect_url;
-		if ( empty( $t_redirect_url ) ) {
+		if ( is_blank( $t_redirect_url ) ) {
 			$t_redirect_url = 'account_prefs_page.php';
 		}
 

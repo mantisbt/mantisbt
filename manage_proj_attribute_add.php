@@ -39,7 +39,7 @@
 			break;
 	} // end switch
 
-	if ( empty( $f_attribute ) ) {
+	if ( is_blank( $f_attribute ) ) {
 		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
 

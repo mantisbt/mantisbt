@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.17 2002-11-12 12:08:36 vboctor Exp $
+	# $Id: project_api.php,v 1.18 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -166,7 +166,7 @@
 		$c_file_path	= db_prepare_string( $p_file_path );
 		$c_enabled		= db_prepare_bool( $p_enabled );
 
-		if ( empty( $p_name ) ) {
+		if ( is_blank( $p_name ) ) {
 			trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
 		}
 
@@ -236,7 +236,7 @@
 		$c_file_path	= db_prepare_string( $p_file_path );
 		$c_enabled		= db_prepare_bool( $p_enabled );
 
-		if ( empty( $p_name ) ) {
+		if ( is_blank( $p_name ) ) {
 			trigger_error( ERROR_PROJECT_NAME_INVALID, ERROR );
 		}
 

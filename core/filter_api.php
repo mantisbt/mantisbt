@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.1 2002-09-07 08:36:19 jfitzell Exp $
+	# $Id: filter_api.php,v 1.2 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -102,7 +102,7 @@
 		}
 
 		# Simple Text Search - Thnaks to Alan Knowles
-		if ( !empty( $t_filter['search'] ) ) {
+		if ( !is_blank( $t_filter['search'] ) ) {
 			$c_search = db_prepare_string( $t_filter['search'] );
 			array_push( $t_where_clauses,
 							"((summary LIKE '%$c_search%')
@@ -215,7 +215,7 @@
 		$t_view_all_cookie = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 
 		# check to see if the cookie does not exist
-		if ( empty( $t_view_all_cookie ) ) {
+		if ( is_blank( $t_view_all_cookie ) ) {
 			return false;
 		}
 

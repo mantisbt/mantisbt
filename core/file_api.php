@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.14 2002-10-23 04:54:01 jfitzell Exp $
+	# $Id: file_api.php,v 1.15 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -215,7 +215,7 @@
 		}
 
 		# if the allowed list is note populated then the file must be allowed
-		if ( empty( $t_allowed_files ) ) {
+		if ( is_blank( $t_allowed_files ) ) {
 			return true;
 		}
 		# check against allowed files

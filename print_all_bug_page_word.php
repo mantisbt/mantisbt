@@ -22,7 +22,7 @@
 	}
 
 	# check to see if the cookie does not exist
-	if ( empty( $g_view_all_cookie_val ) ) {
+	if ( is_blank( $g_view_all_cookie_val ) ) {
 		print_header_redirect( 'view_all_set.php?f_type=0&amp;f_print=1' );
 	}
 
@@ -166,7 +166,7 @@
 		$t_from_clause = " FROM $g_mantis_bug_table";
 	}
 
-	if ( empty($c_sort) ) {
+	if ( is_blank( $c_sort ) ) {
 		$c_sort='last_updated';
 	}
 	$query  = 'SELECT DISTINCT '.$t_columns_clause.', UNIX_TIMESTAMP(last_updated) as last_updated, UNIX_TIMESTAMP(date_submitted) as date_submitted';

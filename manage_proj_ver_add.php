@@ -15,7 +15,7 @@
 
 	$result = 0;
 	# check for empty case or duplicate
-	if ( !empty( $f_version )&&( !version_is_duplicate( $f_project_id, $f_version ) ) ) {
+	if ( !is_blank( $f_version )&&( !version_is_duplicate( $f_project_id, $f_version ) ) ) {
 		$result = version_add( $f_project_id, $f_version );
 	}
 

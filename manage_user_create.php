@@ -20,7 +20,7 @@
 
 	# check for empty username
 	$f_username = trim( $f_username );
-	if ( empty( $f_username ) ) {
+	if ( is_blank( $f_username ) ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 

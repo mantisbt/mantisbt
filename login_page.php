@@ -14,7 +14,7 @@
 	require_once( $g_core_path . 'obsolete.php' );
 
 	# Check to see if the user is logged in and then validate the cookie value
-	if ( !empty( $g_string_cookie_val ) ) {
+	if ( !is_blank( $g_string_cookie_val ) ) {
 		login_cookie_check( 'main_page.php' );
 	}
 ?>
@@ -50,7 +50,7 @@
 <tr>
 	<td class="form-title">
 		<?php
-			if ( !empty($f_return) ) {
+			if ( !is_blank($f_return) ) {
 			?>
 				<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>" />
 				<?php

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.27 $
+	# $Revision: 1.28 $
 	# $Author: jfitzell $
-	# $Date: 2002-10-20 23:59:48 $
+	# $Date: 2002-11-27 02:45:20 $
 	#
-	# $Id: bugnote_add.php,v 1.27 2002-10-20 23:59:48 jfitzell Exp $
+	# $Id: bugnote_add.php,v 1.28 2002-11-27 02:45:20 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,7 +30,7 @@
 	$f_bugnote_text = trim( $f_bugnote_text );
 
 	# check for blank bugnote
-	if ( !empty( $f_bugnote_text ) ) {
+	if ( !is_blank( $f_bugnote_text ) ) {
 		$result = bugnote_add( $f_bug_id, $f_bugnote_text, (bool)$f_private );
 
 		# notify reporter and handler
