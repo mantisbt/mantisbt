@@ -8,6 +8,7 @@ Mantis ChangeLog
  * Fix: #2936: 'SYSTEM WARNING: ob_gzhandler() used twice'
  * Fix: #2941: Checking that project upload path exists and is writable to webserver
  * Removed config option (mail_send_crlf): having this option off (default) violated RFC 822bis and there shouldn't be any server which required it to be set to off
+ * Languages: Updated German and Italian localizations.
 
 2003.02.16  -  0.18.0a1
 
