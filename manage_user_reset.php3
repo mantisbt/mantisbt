@@ -13,25 +13,34 @@
 	# Either generate a random password and email it if emailing is enabled.
 	# Otherwise make a blank one.
 
-	### Go with random password and email it to the user
-    if ( $f_protected==0 ) {
-		if ( $g_allow_signup==1 ) {
-			### Create random password
+	# Go with random password and email it to the user
+    if ( 0 == $f_protected ) {
+		if ( 1 == $g_allow_signup ) {
+			# Create random password
 			$t_password = create_random_password( $f_email );
 
-			### create the almost unique string for each user then insert into the table
+			# create the almost unique string for each user then insert into the table
 			$t_password2 = process_plain_password( $t_password );
 		    $query = "UPDATE $g_mantis_user_table
 		    		SET password='$t_password2'
 		    		WHERE id='$f_id'";
 		    $result = db_query( $query );
 
-			### Send notification email
+			# Send notification email
 			email_reset( $f_id, $t_password );
-		} else {  		### use blank password, no emailing
-			### password is blank password
+		} else { # use blank password, no emailing
+			switch ( $g_login_method ) {
+				case CRYPT: $t_password = "4nPtPLdAFdoxA";
+							break;
+				case PLAIN: $t_password = "";
+							break;
+				case MD5:	$t_password = "d41d8cd98f00b204e9800998ecf8427e";
+							break;
+				default:	$t_password = "";
+			}
+			# password is blank password
 		    $query = "UPDATE $g_mantis_user_table
-		    		SET password='4nPtPLdAFdoxA'
+		    		SET password='$t_password'
 		    		WHERE id='$f_id'";
 		    $result = db_query( $query );
 		}

@@ -10,7 +10,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
 
-	### grab user data and prefix with u_
+	# grab user data and prefix with u_
     $query = "SELECT *
     		FROM $g_mantis_user_table
 			WHERE id='$f_id'";
