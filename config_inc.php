@@ -194,8 +194,12 @@
 	$g_last_access_cookie       = $g_cookie_prefix."_LAST_ACCESS_COOKIE";
 
 	# cookie values
-	$g_string_cookie_val        = $HTTP_COOKIE_VARS[$g_string_cookie];
-	$g_last_access_cookie_val   = $HTTP_COOKIE_VARS[$g_last_access_cookie];
+	if (isset($HTTP_COOKIE_VARS[$g_string_cookie])) {
+		$g_string_cookie_val        = $HTTP_COOKIE_VARS[$g_string_cookie];
+	}
+	if (isset($HTTP_COOKIE_VARS[$g_last_access_cookie])) {
+		$g_last_access_cookie_val   = $HTTP_COOKIE_VARS[$g_last_access_cookie];
+	}
 	#--------------------
 
 	#--------------------
@@ -208,7 +212,7 @@
 	#--------------------
 	# defaults for viewing preferences
 	$g_default_limit_view       = 50;
-	$g_default_show_changed     = 1;
+	$g_default_show_changed     = 6;
 	$g_default_hide_resolved    = "";  # set to on to enable
 	$g_default_advanced_report  = "";  # set to on to enable
 	$g_default_advanced_view    = "";  # set to on to enable

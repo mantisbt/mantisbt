@@ -8,7 +8,6 @@ To Do:
  * Add ip tracking/banning capability
  * Add file upload module
  * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
- * Refine viewing news archives
  * Make priority useful
  * Force some sort of dialog when closing a bug
  * Force some sort of dialog when reopening a bug
@@ -20,6 +19,11 @@ To Do:
  * Multiple project support with userland partitioning
  * Move as much of the config_inc.php varaibles into a database table.
    Then build a nice interface into it.
+
+12.X.2000	-	0.11.1
+
+ * Wrapped the global cookie _val variables in if (isset)) blocks.
+ * Fixed a missing </TD> tag on the report bug pages.
 
 12.12.2000	-	0.11.0
 

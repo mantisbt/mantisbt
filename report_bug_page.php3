@@ -72,6 +72,7 @@
 		<td>
 			Severity:<br>
 			<font color=<? echo $g_required_field_color ?> size=-1>[*required*]</font>
+		</td>
 		<td>
 			<select name=f_severity>
 				<option value="" selected>Select Severity
