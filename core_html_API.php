@@ -152,7 +152,7 @@
 		$t_username = get_current_user_field( "username" );
 		$t_now = date($g_complete_date_format);
 
-		PRINT "<form method=post action=\"$g_set_project\">";
+		PRINT "<form method=\"post\" action=\"$g_set_project\">";
 		PRINT "<table width=\"100%\">";
 		PRINT "<tr>";
 			PRINT "<td align=left width=\"33%\">";
