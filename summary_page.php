@@ -88,21 +88,9 @@
 		</tr>
 		<?php print_bug_enum_summary( config_get( 'status_enum_string' ), 'status' ) ?>
 		</table>
-	</td>
-	<td width="50%">
-		<?php # DATE # ?>
-		<table class="width100" cellspacing="1">
-		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_date' ) ?>:
-			</td>
-		</tr>
-		<?php print_bug_date_summary( config_get( 'date_partitions' ) ) ?>
-		</table>
-	</td>
-</tr>
-<tr valign="top">
-	<td>
+
+		<br />
+
 		<?php # SEVERITY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
@@ -112,21 +100,9 @@
 		</tr>
 		<?php print_bug_enum_summary( config_get( 'severity_enum_string' ), 'severity' ) ?>
 		</table>
-	</td>
-	<td>
-		<?php # RESOLUTION # ?>
-		<table class="width100" cellspacing="1">
-		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_resolution' ) ?>:
-			</td>
-		</tr>
-		<?php print_bug_enum_summary( config_get( 'resolution_enum_string' ), 'resolution' ) ?>
-		</table>
-	</td>
-</tr>
-<tr valign="top">
-	<td>
+
+		<br />
+
 		<?php # CATEGORY # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
@@ -136,21 +112,9 @@
 		</tr>
 		<?php print_category_summary() ?>
 		</table>
-	</td>
-	<td>
-		<?php # PRIORITY # ?>
-		<table class="width100" cellspacing="1">
-		<tr>
-			<td class="form-title" colspan="2">
-				<?php echo lang_get( 'by_priority' ) ?>:
-			</td>
-		</tr>
-		<?php print_bug_enum_summary( config_get( 'priority_enum_string' ), 'priority' ) ?>
-		</table>
-	</td>
-</tr>
-<tr valign="top">
-	<td>
+
+		<br />
+
 		<?php # MISCELLANEOUS # ?>
 		<table class="width100">
 		<tr>
@@ -195,11 +159,9 @@
 			</td>
 		</tr>
 		</table>
-	</td>
-	<td>&nbsp;</td>
-</tr>
-<tr valign="top">
-	<td>
+
+		<br />
+
 		<?php # DEVELOPER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
@@ -210,7 +172,46 @@
 		<?php print_developer_summary() ?>
 		</table>
 	</td>
-	<td>
+
+
+
+	<td width="50%">
+		<?php # DATE # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<?php echo lang_get( 'by_date' ) ?>:
+			</td>
+		</tr>
+		<?php print_bug_date_summary( config_get( 'date_partitions' ) ) ?>
+		</table>
+
+		<br />
+
+		<?php # RESOLUTION # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<?php echo lang_get( 'by_resolution' ) ?>:
+			</td>
+		</tr>
+		<?php print_bug_enum_summary( config_get( 'resolution_enum_string' ), 'resolution' ) ?>
+		</table>
+
+		<br />
+
+		<?php # PRIORITY # ?>
+		<table class="width100" cellspacing="1">
+		<tr>
+			<td class="form-title" colspan="2">
+				<?php echo lang_get( 'by_priority' ) ?>:
+			</td>
+		</tr>
+		<?php print_bug_enum_summary( config_get( 'priority_enum_string' ), 'priority' ) ?>
+		</table>
+
+		<br />
+
 		<?php # REPORTER # ?>
 		<table class="width100" cellspacing="1">
 		<tr>
