@@ -5,7 +5,13 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	$t_core_path = config_get( 'core_path' );
+	
+	require_once( $t_core_path.'summary_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.
@@ -189,9 +195,7 @@
 		</tr>
 		</table>
 	</td>
-	<td>
-		&nbsp;
-	</td>
+	<td>&nbsp;</td>
 </tr>
 <tr valign="top">
 	<td>
