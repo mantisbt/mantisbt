@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+2004.xx.xx  -  0.18.1
+
+
+
 2003.12.08  -  0.18.0
 
  * Fix #3207: LDAP mail lookup was looking for the 'email' attribute instead of the 'mail' attribute.
