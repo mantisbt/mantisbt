@@ -1,5 +1,9 @@
 Mantis ChangeLog
 
+2004.xx.xx  -  0.19.0
+
+
+
 2004.02.29  -  0.18.2
 
  * Sec #3595: bug_view_page.php: restricted custom fields are shown.
