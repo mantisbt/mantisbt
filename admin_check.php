@@ -165,7 +165,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 	</td>
 	<?php
 		$test_val = get_cfg_var( "register_globals" );
-		if ( ( 1 == $test_val ) || ( "On" === $test_val ) ) {
+		if ( ( 1 == $test_val ) || ( "On" == $test_val ) ) {
 			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD );

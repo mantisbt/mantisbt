@@ -12,7 +12,7 @@ If an error occurs you can re-create your previous database by just importing yo
 <font face="courier new">mysql -u[username] -p[password] [database_name] < [filename]</font>
 <p>
 <hr>
-If you are more than one minor version behind then you will need to run upgrades sequentially.  SO to jump from 0.15.1 to 0.17.0 you would run 0.15.x to 0.16.x then 0.16.x to 0.17.x
+If you are more than one minor version behind then you will need to run upgrades sequentially.  So to jump from 0.15.1 to 0.17.0 you would run 0.15.x to 0.16.x then 0.16.x to 0.17.x
 <hr>
 <p>
 <a href="admin_upgrade_0_17_0<?php echo $g_php ?>">Upgrade from 0.16.x to 0.17.x</a>
