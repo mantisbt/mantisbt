@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.235 $
-	# $Author: vboctor $
-	# $Date: 2005-02-02 10:38:56 $
+	# $Revision: 1.236 $
+	# $Author: thraxisp $
+	# $Date: 2005-02-07 22:04:18 $
 	#
-	# $Id: strings_english.txt,v 1.235 2005-02-02 10:38:56 vboctor Exp $
+	# $Id: strings_english.txt,v 1.236 2005-02-07 22:04:18 thraxisp Exp $
 	###########################################################################
 
 # Charset
@@ -930,6 +930,7 @@ $s_changed = 'Changed(hrs)';
 $s_viewing_bugs_title = 'Viewing Issues';
 $s_updated = 'Updated';
 $s_sticky = 'Show Sticky Issues';
+$s_sort = 'Sort by';
 
 # view_all_inc.php
 $s_none = 'none';

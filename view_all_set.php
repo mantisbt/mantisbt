@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.42 2005-01-12 23:23:12 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.43 2005-02-07 22:04:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -120,8 +120,13 @@
 	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
 	$f_sticky_issues		= gpc_get_bool( 'sticky_issues' );
 	# sort direction
-	$f_sort					= gpc_get_string( 'sort', 'last_updated' );
-	$f_dir					= gpc_get_string( 'dir', 'DESC' );
+	$f_sort					= gpc_get_string( 'sort', '' );
+	$f_dir					= gpc_get_string( 'dir', '' );
+	$f_sort_1				= gpc_get_string( 'sort_1', 'last_updated' );
+	$f_dir_1				= gpc_get_string( 'dir_1', 'DESC' );
+	$f_sort_2				= gpc_get_string( 'sort_2', '' );
+	$f_dir_2				= gpc_get_string( 'dir_2', '' );
+	
 	# date values
 	$f_start_month			= gpc_get_string( 'start_month', date( 'm' ) );
 	$f_end_month			= gpc_get_string( 'end_month', date( 'm' ) );
@@ -173,6 +178,11 @@
 	if ( $f_per_page < 1 ) {
 		$f_per_page = config_get( 'default_limit_view' );
 	}
+	
+	# combine sort settings 
+	#  (f_sort overrides f_sort_1 if set to keep old sorting code working in view_all_bug_inc)
+	$f_sort = ( ( $f_sort != "" ) ? $f_sort : $f_sort_1 ) . ( ( $f_sort_2 != "" ) ? "," . $f_sort_2 : "" );
+	$f_dir = ( ( $f_dir != "" ) ? $f_dir : $f_dir_1 ) . ( ( $f_dir_2 != "" ) ? "," . $f_dir_2 : "" );
 
 	# -1 is a special case stored query: it means we want to reset our filter
 	if ( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {

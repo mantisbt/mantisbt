@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.79 2005-01-29 18:38:13 prichards Exp $
+	# $Id: filter_api.php,v 1.80 2005-02-07 22:04:10 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -686,36 +686,44 @@
 		}
 
 		# Now add the rest of the criteria i.e. sorting, limit.
-		$c_sort = db_prepare_string( $t_filter['sort'] );
 
 		# if sort is blank then default the sort and direction.  This is to fix the
 		# symptoms of #3953.  Note that even if the main problem is fixed, we may
 		# have to keep this code for a while to handle filters saved with this blank field.
-		if ( is_blank( $c_sort ) ) {
-			$c_sort = 'last_updated';
+		if ( is_blank( $t_filter['sort'] ) ) {
+			$t_filter['sort'] = 'last_updated';
 			$t_filter['dir'] = 'DESC';
 		}
 
-        # if sorting by a custom field
-        if ( strpos( $c_sort, 'custom_' ) === 0 ) {
-        	$t_custom_field = substr( $c_sort, strlen( 'custom_' ) );
-        	$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
-        	$t_join .= " LEFT JOIN $t_custom_field_string_table ON ( ( $t_custom_field_string_table.bug_id = $t_bug_table.id ) AND ( $t_custom_field_string_table.field_id = $t_custom_field_id ) )";
-        	$c_sort = "$t_custom_field_string_table.value";
-        }
+		$t_sort_fields = split( ',', $t_filter['sort'] );
+		$t_dir_fields = split( ',', $t_filter['dir'] );
 
-		if ( 'DESC' == $t_filter['dir'] ) {
-			$c_dir = 'DESC';
-		} else {
-			$c_dir = 'ASC';
+		$t_order = " ORDER BY $t_sticky_order";
+
+		for ( $i=0; $i < count( $t_sort_fields ); $i++ ) {
+			$c_sort = db_prepare_string( $t_sort_fields[$i] );
+
+        	# if sorting by a custom field
+        	if ( strpos( $c_sort, 'custom_' ) === 0 ) {
+        		$t_custom_field = substr( $c_sort, strlen( 'custom_' ) );
+        		$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
+        		$t_join .= " LEFT JOIN $t_custom_field_string_table ON ( ( $t_custom_field_string_table.bug_id = $t_bug_table.id ) AND ( $t_custom_field_string_table.field_id = $t_custom_field_id ) )";
+        		$c_sort = "$t_custom_field_string_table.value";
+        	}
+
+			if ( 'DESC' == $t_dir_fields[$i] ) {
+				$c_dir = 'DESC';
+			} else {
+				$c_dir = 'ASC';
+			}
+			
+			$t_order .= "$c_sort $c_dir, ";
 		}
 
-		$t_order = " ORDER BY $t_sticky_order $c_sort $c_dir";
-
-		if ( $c_sort != 'last_updated' ) {
-            $t_order .= ', last_updated DESC, date_submitted DESC';
+		if ( ( $c_sort != 'last_updated' ) && ( 1 == count( $t_sort_fields ) ) ) {
+            $t_order .= 'last_updated DESC, date_submitted DESC';
         } else {
-            $t_order .= ', date_submitted DESC';
+            $t_order .= 'date_submitted DESC';
         }
 
 		$query2  = "SELECT DISTINCT $t_select
@@ -837,8 +845,6 @@
 				PRINT '<input type="hidden" name="offset" value="0" />';
 			}
 		?>
-		<input type="hidden" name="sort" value="<?php PRINT $t_sort ?>" />
-		<input type="hidden" name="dir" value="<?php PRINT $t_dir ?>" />
 		<input type="hidden" name="page_number" value="<?php PRINT $p_page_number ?>" />
 		<input type="hidden" name="view_type" value="<?php PRINT $t_view_type ?>" />
 		<table class="width100" cellspacing="1">
@@ -1560,9 +1566,33 @@
 				}
 			}
 		}
+		?>
+		<tr class="row-1">
+			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'show_sort'; ?>" id="show_sort_filter"><?php PRINT lang_get( 'sort' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top" colspan="4" id="show_sort_filter_target">
+				<?php 
+					$t_sort_fields = split( ',', $t_filter['sort'] );
+					$t_dir_fields = split( ',', $t_filter['dir'] );
+					
+					echo string_get_field_name( $t_sort_fields[0] ) . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[0] ) );
+					echo "<input type=\"hidden\" name=\"sort_1\" value=\"$t_sort_fields[0]\" />";
+					echo "<input type=\"hidden\" name=\"dir_1\" value=\"$t_dir_fields[0]\" />";
+
+					if ( isset( $t_sort_fields[1] ) ) {
+						echo ", " . string_get_field_name( $t_sort_fields[1] ) . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[1] ) );
+						echo "<input type=\"hidden\" name=\"sort_1\" value=\"$t_sort_fields[1]\" />";
+						echo "<input type=\"hidden\" name=\"dir_1\" value=\"$t_dir_fields[1]\" />";
+					}
+				?>
+			</td>
+			<td class="small-caption" valign="top" colspan="2">
+			</td>
+		</tr>		
+		<?php
 		} // expanded
 		?>
-
 		<tr>
 			<td colspan="2">
 				<?php
@@ -2369,5 +2399,72 @@
 		}
 
 	}
+	
+	function print_filter_show_sort() {
+		global $t_filter;
+		
+		# get all of the displayed fields for sort, then drop ones that
+		#  are not appropriate and translate the rest
+		$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
+		$t_n_fields = count( $t_fields );
+		$t_shown_fields[""] = "";
+		for ( $i=0; $i < $t_n_fields; $i++ ) {
+			if ( !in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
+				$t_shown_fields[$t_fields[$i]] = string_get_field_name( $t_fields[$i] );
+			}
+		}
+		$t_shown_dirs[""] = "";
+		$t_shown_dirs["ASC"] = lang_get( 'bugnote_order_asc' ); 
+		$t_shown_dirs["DESC"] = lang_get( 'bugnote_order_desc' ); 
+		
+		# get default values from filter structure
+		$t_sort_fields = split( ',', $t_filter['sort'] );
+		$t_dir_fields = split( ',', $t_filter['dir'] );
+		if ( !isset( $t_sort_fields[1] ) ) {
+			$t_sort_fields[1] = '';
+			$t_dir_fields[1] = '';
+		}
 
+		# if there are fields to display, show the dropdowns
+		if ( count( $t_fields ) > 0 ) {
+			# display a primary and secondary sort fields
+			echo '<select name="sort_1">';
+			foreach ( $t_shown_fields as $key => $val ) {
+				echo "<option value=\"$key\"";
+				check_selected( $key, $t_sort_fields[0] );
+				echo ">$val</option>";
+			}
+			echo '</select>';
+			
+			echo '<select name="dir_1">';
+			foreach ( $t_shown_dirs as $key => $val ) {
+				echo "<option value=\"$key\"";
+				check_selected( $key, $t_dir_fields[0] );
+				echo ">$val</option>";
+			}
+			echo '</select>';
+			
+			echo ', ';
+			
+			# for secondary sort
+			echo '<select name="sort_2">';
+			foreach ( $t_shown_fields as $key => $val ) {
+				echo "<option value=\"$key\"";
+				check_selected( $key, $t_sort_fields[1] );
+				echo ">$val</option>";
+			}
+			echo '</select>';
+			echo '<select name="dir_2">';
+			foreach ($t_shown_dirs as $key => $val ) {
+				echo "<option value=\"$key\"";
+				check_selected( $key, $t_dir_fields[1] );
+				echo ">$val</option>";
+			}
+			echo '</select>';
+		} else {
+			echo lang_get_defaulted( 'last_updated' ) . lang_get( 'bugnote_order_desc' );
+			echo "<input type=\"hidden\" name=\"sort_1\" value=\"last_updated\" />";
+			echo "<input type=\"hidden\" name=\"dir_1\" value=\"DESC\" />";
+		}
+	}
 ?>

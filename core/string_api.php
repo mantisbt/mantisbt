@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.65 2005-01-29 03:10:04 thraxisp Exp $
+	# $Id: string_api.php,v 1.66 2005-02-07 22:04:18 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -586,6 +586,22 @@
 		} else {
 			return $p_string;
 		}
+	}
+
+	# --------------------
+	# remap a field name to a string name (for sort filter)
+	
+	function string_get_field_name( $p_string ) {
+	
+		$t_map = array(
+				'last_updated' => 'last_update'
+				);
+				
+		$t_string = $p_string;
+		if ( isset( $t_map[ $p_string ] ) ) {
+			$t_string = $t_map[ $p_string ];
+		}
+		return lang_get_defaulted( $t_string );
 	}
 
 ?>

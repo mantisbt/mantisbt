@@ -103,8 +103,6 @@
 
 	$f_for_screen = gpc_get_bool( 'for_screen', true );
 
-	$t_sort = $t_filter['sort'];
-	$t_dir = $t_filter['dir'];
 	$t_action  = "view_all_set.php?f=3";
 
 	if ( $f_for_screen == false ) 
@@ -326,6 +324,18 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 }
 ?>
 
+<tr class="row-1">
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>" valign="top">
+		<?php PRINT lang_get( 'sort' ) ?>:
+	</td>
+	<td valign="top" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
+		<?php 
+			print_filter_show_sort();
+		?>
+	</td>
+	<td valign="top" colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
+	</td>
+</tr>		
 <tr class="row-category2">
 <td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></td>
 <td class="small-caption" colspan="<?php echo ( 6 * $t_custom_cols ); ?>"></td>
