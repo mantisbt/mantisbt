@@ -70,11 +70,7 @@
 		</td>
 		<td colspan=2>
 			<select name=f_access_level>
-				<option value="viewer" <? if ( $u_access_level=="viewer" ) echo "SELECTED" ?>>viewer
-				<option value="reporter" <? if ( $u_access_level=="reporter" ) echo "SELECTED" ?>>reporter
-				<option value="updater" <? if ( $u_access_level=="updater" ) echo "SELECTED" ?>>updater
-				<option value="developer" <? if ( $u_access_level=="developer" ) echo "SELECTED" ?>>developer
-				<option value="administrator" <? if ( $u_access_level=="administrator" ) echo "SELECTED" ?>>administrator
+				<? print_table_field_option_list( $g_mantis_user_table, "access_level", $u_access_level ) ?>
 			</select>
 		</td>
 	</tr>
@@ -125,6 +121,7 @@
 <? echo $s_reset_password_msg ?>
 </div>
 
+<!--
 <p>
 <div align=center>
 <table width=50% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
@@ -136,7 +133,7 @@
 			<b>Projects</b>
 		</td>
 	</tr>
-	<?
+		<?
 		$query = "SELECT p.name, u.name
 				FROM
 				WHERE u.id=";
@@ -159,7 +156,7 @@
 	</td>
 </tr>
 </table>
-</div>
+</div>-->
 
 <? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>

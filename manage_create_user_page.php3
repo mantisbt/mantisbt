@@ -77,11 +77,7 @@
 		</td>
 		<td>
 			<select name=f_access_level>
-				<option value="viewer">viewer
-				<option value="reporter" SELECTED>reporter
-				<option value="updater">updater
-				<option value="developer">developer
-				<option value="administrator">administrator
+				<? print_table_field_option_list( $g_mantis_user_table, "access_level", "reporter" ) ?>
 			</select>
 		</td>
 	</tr>
