@@ -11,6 +11,11 @@ To Do:
  * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
  * More documentation on installation, configuration, and customization
 
+02.XX.2001  -   0.14.1
+
+ * Fixed error where ducplicate categories were added
+ * Fixed error in advanced_bug_view where bug delete had no confirmation
+
 02.10.2001	-	0.14.0
 
  * Fixed error in print_html_bottom

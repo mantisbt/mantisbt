@@ -1599,12 +1599,12 @@
 	###########################################################################
 	### END                                                                 ###
 	###########################################################################
-	function is_duplicate_category( $p_category ) {
-		global $g_mantis_project_category_table, $g_project_cookie_val;
+	function is_duplicate_category( $p_category, $p_project_id ) {
+		global $g_mantis_project_category_table;
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_category_table
-				WHERE project_id='$g_project_cookie_val' AND
+				WHERE project_id='$p_project_id' AND
 					category='$p_category'";
 		$result = db_query( $query );
 		$category_count =  db_result( $result, 0, 0 );
@@ -1615,12 +1615,12 @@
 		}
 	}
 	### --------------------
-	function is_duplicate_version( $p_version ) {
-		global $g_mantis_project_version_table, $g_project_cookie_val;
+	function is_duplicate_version( $p_version, $p_project_id ) {
+		global $g_mantis_project_version_table;
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_project_version_table
-				WHERE project_id='$g_project_cookie_val' AND
+				WHERE project_id='$p_project_id' AND
 					version='$p_version'";
 		$result = db_query( $query );
 		$version_count =  db_result( $result, 0, 0 );
