@@ -311,13 +311,14 @@
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			$t_last_updated		= date( $g_short_date_format, $v_last_updated );
-			$t_priority			= get_enum_element($s_priority_enum_string, $v_priority);
+			$t_priority			= get_enum_element( $s_priority_enum_string, $v_priority );
+			$t_severity			= get_enum_element( $s_severity_enum_string, $v_severity );
 			$t_status			= get_enum_element( $s_status_enum_string, $v_status );
 			$t_hander_name		= get_user_info( $v_handler_id, "username" );
 			$t_reporter_name	= get_user_info( $v_reporter_id, "username" );
 			$v_summary			= string_display( $v_summary );
 
-			echo "$t_priority,$v_id,",print_formatted_severity_string( $v_status, $v_severity ),",$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
+			echo "$t_priority,$v_id,$t_severity,$t_status,$v_version,$t_hander_name,$t_reporter_name,$t_last_updated,\"$v_summary\"\r\n";
 		}
 		die; #end here, maybe redirect back to the current page?
 	}
