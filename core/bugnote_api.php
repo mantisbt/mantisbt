@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.14 2003-02-15 10:25:21 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.15 2003-02-20 03:32:26 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -74,7 +74,7 @@
 	# Add a bugnote to a bug
 	#
 	# return the ID of the new bugnote
-	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_private=false )
+	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_private=false)
 	{
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_bugnote_text	= db_prepare_string( $p_bugnote_text );
@@ -120,8 +120,6 @@
 
 		# log new bug
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
-
-		email_bugnote_add( $p_bug_id );
 
 		return $t_bugnote_id;
 	}

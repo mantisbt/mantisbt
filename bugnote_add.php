@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add.php,v 1.37 2003-02-20 02:49:31 vboctor Exp $
+	# $Id: bugnote_add.php,v 1.38 2003-02-20 03:32:25 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,6 +32,7 @@
 	# check for blank bugnote
 	if ( !is_blank( $f_bugnote_text ) ) {
 		bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
+		email_bugnote_add( $f_bug_id );
 	}
 
 	print_success_and_redirect( $f_bug_id );

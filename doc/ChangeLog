@@ -10,6 +10,7 @@ Mantis ChangeLog
  * Fix #2967: Make bugnotes visible while updating bugs (updating, resolving, and closing)
  * Fix #2968: Add query counts to action pages.
  * Fix #2969: Bug not found error when deleting a bugnote.
+ * Fix #2970: Sending a reminder sends two notifications.
  * Languages: Updated German localisation.
 
 2003.02.19  -  0.18.0a2
