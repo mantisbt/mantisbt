@@ -10,6 +10,10 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
+	if ( 1 == $g_show_report ) {
+		print_header_redirect ( $g_report_bug_page );
+	}
+
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 

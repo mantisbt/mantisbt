@@ -10,6 +10,10 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
+	if ( 2 == $g_show_report ) {
+		print_header_redirect ( $g_report_bug_advanced_page );
+	}
+
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
@@ -51,7 +55,7 @@
 
 <? print_menu( $g_menu_include_file ) ?>
 
-<? if ( $g_show_report==0) { ?>
+<? if ( $g_show_report==0 ) { ?>
 <p>
 <div align="center">
 	<? print_bracket_link( $g_report_bug_advanced_page, $s_advanced_report_link ) ?>
