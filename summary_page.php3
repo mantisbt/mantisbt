@@ -11,7 +11,7 @@
 
 	$query = "SELECT id, date_submitted, last_updated
 			FROM $g_mantis_bug_table
-			WHERE status='resolved'";
+			WHERE project_id='$g_project_cookie_val' AND status='resolved'";
 	$result = db_query( $query );
 	$bug_count = db_num_rows( $result );
 
@@ -27,6 +27,7 @@
 			$t_last_updated = 0;
 			$t_date_submitted = 0;
 		}
+
 		$t_diff = $t_last_updated - $t_date_submitted;
 		$t_total_time = $t_total_time + $t_diff;
 		if ( $t_diff > $t_largest_diff ) {
