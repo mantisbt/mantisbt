@@ -154,5 +154,27 @@
 			array( 'platform', 'os', 'os_build', 'description' ) );
 	}
 
+	$upgrades[] = new FunctionUpgrade( 
+		'escaping-fix-9',
+		'Fix double escaped data in mantis_bug_history_table',
+		'upgrade_escaping_fix_9' );
+	
+	function upgrade_escaping_fix_9() {
+		global $t_bug_history_table;
+
+		if ( db_field_exists( 'id', $t_bug_history_table ) ) {
+			return upgrade_fix_strings( $t_bug_history_table, 'id',
+				array( 'field_name', 'old_value', 'new_value' ) );
+		}
+
+		return false;
+	}
+
+	$upgrades[] = new SQLUpgrade( 
+		'escaping-fix-10',
+		'Remove history entries where type=0 and the old value = new value.  These existed because of escaping errors',
+		"DELETE FROM $t_bug_history_table
+		  WHERE (type = 0) AND (old_value = new_value)");
+
 	return $upgrades;
 ?>

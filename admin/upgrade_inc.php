@@ -139,9 +139,8 @@
 		}
 
 		function display() {
-			$t_description = "# Upgrade $this->id: $this->description\r\n";
-
-			$t_description .= $this->query . "\r\n\r\n";
+			$t_description = "# Upgrade $this->id: $this->description<br />";
+			$t_description .= $this->query . "<br /><br />";
 
 			return $t_description;
 		}
@@ -168,15 +167,18 @@
 				$this->set_applied();
 			} else {
 				$this->error = "Function $this->function_name() returned false<br />";
-				$this->error .= "Last database error (may not be applicable) was: "
-								. db_error_msg();
+				$t_db_error = db_error_msg();
+				if ( !is_blank( $t_db_error ) ) {
+					$this->error .= "Last database error (may not be applicable) was: "
+									. $t_db_error;
+				}
 			}
 
 			return $result;
 		}
 
 		function display() {
-			return "# Upgrade $this->id: $this->description\n#\n# Execute function $this->function_name()\n\n";
+			return "# Upgrade $this->id: $this->description<br /># Execute function $this->function_name()<br /><br />";
 		}
 	}
 
@@ -243,7 +245,7 @@
 			# Execute All Button
 			echo "<input type=\"submit\" name=\"{$this->upgrade_file}_execute_all\" value=\"Execute All\" />";
 			# Print All Button
-			echo "<input type=\"submit\" name=\"{$this->upgrade_file}_print_all\" value=\"Print All\" />";
+			echo "<input type=\"submit\" name=\"{$this->upgrade_file}_print_all\" value=\"Print All\" /><br /><br />";
 
 			if ( $p_advanced ) {
 				# Execute Selected Button
@@ -317,7 +319,7 @@
 			echo '</table>';
 
 			# Execute All Button
-			echo "<input type=\"submit\" name=\"{$this->upgrade_file}_execute_all\" value=\"Execute All\" />";
+			echo "<br /><input type=\"submit\" name=\"{$this->upgrade_file}_execute_all\" value=\"Execute All\" />";
 			# Print All Button
 			echo "<input type=\"submit\" name=\"{$this->upgrade_file}_print_all\" value=\"Print All\" />";
 

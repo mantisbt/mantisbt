@@ -623,5 +623,26 @@
 		"DELETE FROM $t_project_user_list_table
 		  WHERE project_id=0" );
 
+	$upgrades[] = new FunctionUpgrade( 
+		'0.17-vb-19',
+		'Add id field to bug history table',
+		'upgrade_0_17_vb_19' );
+	
+	function upgrade_0_17_vb_19() {
+		global $t_bug_history_table;
+		
+		if ( !db_field_exists( 'id', $t_bug_history_table ) ) {
+			$query = "ALTER TABLE $t_bug_history_table ADD id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST";
+	
+			$result = @db_query( $query );
+	
+			if ( false == $result ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	return $upgrades;
 ?>

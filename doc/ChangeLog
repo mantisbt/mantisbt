@@ -7,6 +7,7 @@ Mantis ChangeLog
  * Fix: $g_lang_current was not available to custom_strings_inc.php
  * Fix: reduced the executed number of queries throughout the interface
  * Fix: improved handling of bad cookies (you now get a chance to log in again)
+ * Fix: Added the removal of invalid history entries that were added due to escaping errors to the string escaping fixes.
  * Fix #2944: Project files are not deleted when project is deleted.
  * Fix #2939: Confusing file names for uploaded project documents.
  * Fix #2954: Bgcolor attribute on TD in view_all_bug_page (moved to TR) [optimisation]
@@ -20,7 +21,9 @@ Mantis ChangeLog
  * Fix #2974: Message "APPLICATION WARNING #300" on main page.
  * Fix #2976: Incorrect handling of URLs.
  * Fix #2978: URLs not hyperlinked in news_add page.
+ * Fix #2980: Escaping fixes are not applied to the bug history table.
  * Fix #2982: Having email_set_category set to EMAIL_CATEGORY_PROJECT_CATEGORY erased various mail headers.
+ * DB Upgrade: Added "id" primary key to bug history table.
  * Languages: Updated German localisation.
  * Removed config option (bugnote_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_view_include_file): Used file path directly since there is no reason to make it configurable.
