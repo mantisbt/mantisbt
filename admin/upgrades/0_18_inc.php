@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.15 2004-07-30 21:13:31 thraxisp Exp $
+	# $Id: 0_18_inc.php,v 1.16 2004-08-01 14:42:53 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -473,7 +473,10 @@
 	}
 
 
-
+	$upgrades[] = new SQLUpgrade(
+			'cat_user_id_unsigned',
+			'Change the user_id in mantis_project_category_table to unsigned int.',
+			"ALTER TABLE mantis_project_category_table CHANGE user_id user_id INT( 7 ) UNSIGNED DEFAULT '0' NOT NULL" );
 
 	return $upgrades;
 ?>
