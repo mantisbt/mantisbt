@@ -9,8 +9,10 @@
 <?
 	# new strings:
 	$s_no_file_specified = "ERROR: No file specified";
-	$s_file_deleted_msg = "File deletion successful";
+	$s_file_deleted_msg = "File deletion successful.";
 	$s_all_projects = "All Projects";
+	$s_move_bugs = "Move Bugs";
+	$s_bugs_moved_msg = "Bugs have been successfully moved.";
 
 	# General Strings
 	$s_go_back = "Go Back";

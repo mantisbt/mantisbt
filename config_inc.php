@@ -756,4 +756,5 @@
 	# New files
 	$g_bug_file_delete                = $g_path."bug_file_delete".$g_php;
 	$g_csv_export_inc                 = $g_path."view_csv_export_inc".$g_php;
+	$g_view_all_bug_update            = $g_path."view_all_bug_update".$g_php;
 ?>

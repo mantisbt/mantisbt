@@ -100,9 +100,10 @@
 </table>
 
 <p>
+<form method="post" action="<? echo $g_view_all_bug_update ?>">
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="7">
+	<td class="form-title" colspan="8">
 		<? echo $s_viewing_bugs_title ?>
 		<?
 			if ( $row_count > 0 ) {
@@ -123,12 +124,10 @@
 			#
 			for ($i = 1; $i <= $t_page_count; $i ++) {
 				if ($i == $f_page_number) {
-		?>
-		<?= $i ?>
-		<?
+					echo $i;
 				} else {
 		?>
-		<a href="<?= $PHP_SELF ?>?f_page_number=<?= $i ?>"><?= $i ?></a>
+				<a href="<?= $g_view_all_bug_page ?>?f_page_number=<?= $i ?>"><?= $i ?></a>
 		<?
 				}
 			}
@@ -137,6 +136,9 @@
 	</td>
 </tr>
 <tr class="row-category">
+	<td class="center" width="2%">
+		&nbsp;
+	</td>
 	<td class="center" width="5%">
 		<? print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
@@ -164,13 +166,13 @@
 		<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 	</td>
-	<td class="center" width="40%">
+	<td class="center" width="38%">
 		<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
 		<? print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 	</td>
 </tr>
 <tr>
-	<td class="spacer" colspan="8">
+	<td class="spacer" colspan="9">
 		&nbsp;
 	</td>
 </tr>
@@ -207,6 +209,13 @@
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 ?>
 <tr bgcolor="<? echo $status_color ?>">
+	<td>
+		<?	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
+			<input type="checkbox" name="f_bug_arr[]" value="<? echo $v_id ?>">
+		<?	} else { ?>
+			&nbsp;
+		<?	} ?>
+	</td>
 	<td class="center">
 		<?
 			if ( $g_show_priority_text == 0 ) {
@@ -268,6 +277,11 @@
 	}
 ?>
 </table>
+<select name="f_project_id">
+<? print_project_option_list() ?>
+</select>
+<input type="submit" value="<? echo $s_move_bugs ?>">
+</form>
 
 <? # Show NEXT and PREV links as needed ?>
 <p>

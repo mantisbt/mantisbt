@@ -17,6 +17,7 @@ Mantis
  * Added support for date_order field for version.
  * Added delete file capability.
  * Added view all projects capability.
+ * Added support to move bugs from one project to another.
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Renamed g_store_file_to to g_file_upload_method.
