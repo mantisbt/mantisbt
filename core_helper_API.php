@@ -272,11 +272,11 @@
 
 		if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
 			return preg_replace("/#([0-9]+)/",
-								"http://$g_view_bug_advanced_page?f_id=\\1",
+								"$g_view_bug_advanced_page?f_id=\\1",
 								$p_string);
 		} else {
 			return preg_replace("/#([0-9]+)/",
-								"http://$g_view_bug_page?f_id=\\1",
+								"$g_view_bug_page?f_id=\\1",
 								$p_string);
 		}
 	}

@@ -383,7 +383,6 @@
 			$t_message = $t_message.$g_email_separator2."\n";
 			$t_message = $t_message.wordwrap( $t_note )."\n\n";
 		}
-
 		return $t_message;
 	}
 	# --------------------
