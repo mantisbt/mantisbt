@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.204 2004-08-29 06:23:34 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.205 2004-09-02 22:00:15 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -543,7 +543,7 @@
 	$g_summary_category_include_project	= OFF;
 
 	# threshold for viewing summary
-	$g_view_summary_threshold	= VIEWER;
+	$g_view_summary_threshold	= MANAGER;
 
 	###############################
 	# Mantis Bugnote Settings
