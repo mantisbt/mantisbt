@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.34 2004-09-27 19:33:09 prichards Exp $
+	# $Id: database_api.php,v 1.35 2004-11-06 18:44:39 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -28,10 +28,10 @@
 
 	# --------------------
 	# Make a connection to the database
-	function db_connect( $p_hostname, $p_username, $p_password, $g_database_name ) {
+	function db_connect( $p_hostname, $p_username, $p_password, $p_database_name ) {
 		global $g_db_connected, $g_db;
 
-		$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $g_database_name );
+		$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $p_database_name );
 
 		if ( !$t_result ) {
 			db_error();
@@ -46,10 +46,10 @@
 
 	# --------------------
 	# Make a persistent connection to the database
-	function db_pconnect( $p_hostname, $p_username, $p_password, $p_port, $g_database_name ) {
+	function db_pconnect( $p_hostname, $p_username, $p_password, $p_database_name ) {
 		global $g_db_connected, $g_db;
 
-		$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password, $g_database_name );
+		$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password, $p_database_name );
 		if ( !$t_result ) {
 			db_error();
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
