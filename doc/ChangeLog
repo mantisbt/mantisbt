@@ -20,6 +20,7 @@ Mantis ChangeLog
  * Fix #3080: project menu bar shows extra links
  * Fix #3089: Hide link to Profiles management on account page based on access level.
  * Fix #3092: Problem changing printing prefs.
+ * Fix #3097: App Error 700 in project_api.php when viewing certain bugs.
  * Fix #3108: No custom fields are shown in the details, if you are in "All Projects"
  * Fix #3109: Error when adding protected users.
  * Fix #3110: "Print reports" preview in explorer is not possible unless you select "Display selected only" 

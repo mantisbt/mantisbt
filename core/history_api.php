@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.14 2003-03-03 18:33:38 int2str Exp $
+	# $Id: history_api.php,v 1.15 2003-07-26 13:50:20 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -147,8 +147,19 @@
 				$t_field_localized = lang_get( 'projection' );
 				break;
 			case 'project_id':
-				$v_old_value = project_get_field( $v_old_value, 'name' );
-				$v_new_value = project_get_field( $v_new_value, 'name' );
+				if ( project_exists( $v_old_value ) ) {
+					$v_old_value = project_get_field( $v_old_value, 'name' );
+				} else {
+					$v_old_value = '@'.$v_old_value.'@';
+				}
+
+				// Note that the new value maybe an intermediately project and not the 
+				// current one.
+				if ( project_exists( $v_new_value ) ) {
+					$v_new_value = project_get_field( $v_new_value, 'name' );
+				} else {
+					$v_new_value = '@'.$v_new_value.'@';
+				}
 				$t_field_localized = lang_get( 'email_project' );
 				break;
 			case 'handler_id':
