@@ -25,7 +25,7 @@
 	# Only echo error message if error variable is set
 	if ( isset( $f_error ) ) {
 		PRINT $MANTIS_ERROR[ERROR_LOGIN].'<p>';
-	} 
+	}
 	if ( isset( $f_cookie_error ) ) {
 		PRINT $MANTIS_ERROR[ERROR_COOKIES_DISABLED] . '<p>';
 	}
@@ -41,7 +41,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form method="post" action="login.php">
+		<form name="f_login_form" method="post" action="login.php">
 		<?php	if (isset($f_return)) { ?>
 		<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>">
 		<?php	} ?>
@@ -93,5 +93,11 @@
 <?php # Login Form END ?>
 
 <?php print_signup_link() ?>
+
+<script language="JavaScript">
+<!--
+	window.document.f_login_form.f_username.focus();
+//-->
+</script>
 
 <?php print_page_bot1( __FILE__ ) ?>
