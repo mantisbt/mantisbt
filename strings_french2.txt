@@ -126,7 +126,7 @@
 	$s_edit_profile_title = "Editer le Profil";
 	$s_platform = "Plate-forme";
 	$s_operating_system = "syst&egrave;me d'exploitation";
-	$s_version = "Version/Build";
+	$s_version = "Version/Compil.";
 	$s_additional_description = "Description suppl&eacute;mentaire";
 	$s_update_profile_button = "Mettre &agrave; jour le profil";
 
@@ -208,7 +208,7 @@
 	$s_os_version = "Version";
 	$s_eta = "ETA";
 	$s_product_version = "Version du produit";
-	$s_build = "Build";
+	$s_build = "Compilation";
 	$s_votes = "Votes";
 	$s_summary = "R&eacute;sum&eacute;";
 	$s_description = "Description";
@@ -477,7 +477,7 @@
 	# proj_user_menu_page.php3
 	$s_add_user_title = "Int&eacute;grer un utilisateur au projet";
 	$s_add_user_button = "Ajouter l'utilisateur";
-	$s_project_selection_title = "Project Selection";
+	$s_project_selection_title = "Sélection de projet";
 	$s_remove_link = "Supprimer";
 
 	# proj_user_update.php3
@@ -548,16 +548,16 @@
 
 	# summary_page.php3
 	$s_summary_title = "Synth&egrave;se";
+	$s_summary_jpgraph_link = "Advanced summary";
 	$s_by_status = "par &eacute;tat";
-              $s_summary_jpgraph_link = "Advanced summary";
-              $s_by_date = "par date";
+	$s_by_date = "par date";
 	$s_by_severity = "par s&eacute;v&eacute;rit&eacute;";
 	$s_by_resolution = "par r&eacute;solution";
 	$s_by_category = "par cat&eacute;gorie";
 	$s_by_priority = "par priorit&eacute;";
-              $s_by_developer = "by developer";
-              $s_by_reporter ="by reporter";
-              $s_time_stats = "statistiques (en jours) pour les r&eacute;solutions";
+	$s_by_developer = "par dévelopeur";
+	$s_by_reporter = "par rapporteur";
+	$s_time_stats = "statistiques (en jours) pour les r&eacute;solutions";
 	$s_longest_open_bug = "bug ouvert le plus longtemps";
 	$s_longest_open = "temps maximal";
 	$s_average_time = "temps moyen";
@@ -581,7 +581,7 @@
 	$s_updated = "Mis &agrave; jour";
 
 	# view_all_inc.php
-        $s_search ="Search";
+	$s_search ="Chercher";
 
 	# view_user_reported_bug_page.php3
 
@@ -590,7 +590,7 @@
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "rapport simplifi&eacute;";
 	$s_viewing_bug_advanced_details_title = "Rapport d&eacute;taill&eacute; du bug";
-	$s_product_build = "Product Build";
+	$s_product_build = "Compilation";
 	$s_system_profile = "Description du syst&egrave;me";
 	$s_update_bug_button = "Mettre &agrave; jour ce bug";
 	$s_bug_assign_button    = "Prendre l'assignation";

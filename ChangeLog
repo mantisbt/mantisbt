@@ -6,11 +6,12 @@ Mantis
  * Fixed Warning: Missing argument 5 for print_manage_user_sort_link() in core_print_API.php
  * Fixed sorting in buglist is now preserved when going to next or prev page.
  * Fixed sorting in buglist. Bugs with high priority is now always first.
+ * Replaced header( "Location: " ) calls with print_header_redirect().
 
 07.29.2001  -   0.15.3
 
  * Added wordwrap() to text formatting in email messages.  Affects description and bugnotes.
- * Added new function process_plain_password().  This, in conjunction with $g_@@@@@@@@@@@@@, allows you to bypass crypt().
+ * Added new function process_plain_password().  Not used yet.
  * Added N/A to reproducibility
  * Added PHP version check to admin_check.php3
  * Added simple text search field to all view_all* pages.  This can also be used to lookup a bug by id
