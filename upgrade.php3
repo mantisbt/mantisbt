@@ -1,13 +1,6 @@
 <? include( "core_API.php" ) ?>
-<? #login_cookie_check() ?>
 <?
         db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-/*
-        if ( !access_level_check_greater_or_equal( "administrator" ) ) {
-                ### need to replace with access error page
-                header( "Location: $g_logout_page" );
-                exit;
-        }*/
 ?>
 <?
 	if ( $f_action=="upgrade" ) {
@@ -106,7 +99,7 @@ if ( $result3 ) {
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			
 			$query2 = "UPDATE $g_mantis_bug_table
-				SET date_submitted='$v_date_submitted', last_updated='$v_last_updated'
+				SET date_submitted='$v_date_submitted', last_updated='$v_last_updated', project_id='0000001'
 				WHERE id='$v_id'";
 			$result2 = db_query( $query2 );
 		}
@@ -134,7 +127,7 @@ if ( $result3 ) {
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			
 			$query2 = "UPDATE $g_mantis_news_table
-				SET date_posted='$v_date_posted', last_modified='$v_last_modified'
+				SET date_posted='$v_date_posted', last_modified='$v_last_modified', project_id='0000001'
 				WHERE id='$v_id'";
 			$result2 = db_query( $query2 );
 		}
