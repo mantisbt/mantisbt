@@ -303,10 +303,11 @@
 	# --------------------
 	function print_assign_to_option_list( $p_user_id='' ) {
 		global $g_mantis_user_table, $g_mantis_project_table,
-				$g_mantis_project_user_list_table, $g_project_cookie_val;
+				$g_mantis_project_user_list_table, $g_project_cookie_val,
+				$g_handle_bug_threshold;
 
 		$t_adm = ADMINISTRATOR;
-		$t_dev = DEVELOPER;
+		$t_dev = $g_handle_bug_threshold;
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;
 		$user_arr = array();
@@ -370,7 +371,7 @@
 					if ( $count > 0 ){
 						$t_access_level = db_result( $result );
 					}
-					if ( $t_access_level >= DEVELOPER ) {
+					if ( $t_access_level >= $t_dev ) {
 						$user_arr[$v_username] = array( $v_username, $v_id );
 					}
 

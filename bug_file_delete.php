@@ -11,7 +11,7 @@
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_access( DEVELOPER );
+	check_access( $g_handle_bug_threshold );
 
 	$c_file_id = (integer)$f_file_id;
 

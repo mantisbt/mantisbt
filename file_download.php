@@ -11,7 +11,7 @@
 <?php login_cookie_check() ?>
 <?php
 	$c_id = (integer)$f_id;
-	#check_access( DEVELOPER );
+	#check_access( $g_handle_bug_threshold );
 
 	# we handle the case where the file is attached to a bug
 	# or attached to a project as a project doc.

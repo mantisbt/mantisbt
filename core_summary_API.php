@@ -121,9 +121,9 @@
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 				$g_primary_color1, $g_primary_color2,
 				$g_project_cookie_val,
-				$g_summary_pad;
+				$g_summary_pad, $g_handle_bug_threshold;
 
-		$t_dev = DEVELOPER;
+		$t_dev = $g_handle_bug_threshold;
 		$t_man = MANAGER;
 		$t_adm = ADMINISTRATOR;
 

@@ -217,7 +217,7 @@
 
 			PRINT "<a href=\"file_download.php?f_id=$v2_id&amp;f_type=bug\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
 
-			if ( access_level_check_greater_or_equal( DEVELOPER ) ) {
+			if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) ) {
 				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?f_id=$f_id&amp;f_file_id=$v2_id\">$s_delete_link</a>]";
 			}
 
@@ -296,7 +296,7 @@
 	# UPDATE form END
 ?>
 <?php # ASSIGN form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<?php #check if current user already assigned to the bug ?>
 		<?php if ( $t_user_id != $v_handler_id ) { ?>
@@ -311,7 +311,7 @@
 	} # ASSIGN form END
 ?>
 <?php # RESOLVE form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_resolve_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">

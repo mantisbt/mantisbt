@@ -88,7 +88,7 @@
 		</select>
 	</td>
 </tr>
-<? if ( access_level_check_greater_or_equal( DEVELOPER ) ) { ?>
+<? if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) ) { ?>
 <tr class="row-2">
 	<td class="category">
 		<?php echo $s_priority ?> <?php print_documentation_link( 'priority' ) ?>:

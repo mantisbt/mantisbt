@@ -111,8 +111,6 @@
 	</td>
 </tr>
 <?php
-	$t_dev = DEVELOPER;
-	$t_man = MANAGER;
 	$t_adm = ADMINISTRATOR;
 	$t_pub = PUBLIC;
 

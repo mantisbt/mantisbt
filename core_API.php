@@ -9,7 +9,14 @@
 	###########################################################################
 
   	require( 'constant_inc.php' );
+	if ( file_exists( 'custom_constant_inc.php' ) ) {
+		include( 'custom_constant_inc.php' );
+	}
 	require( './default/config_inc1.php' );
+	if ( file_exists( 'custom_config_inc.php' ) ) {
+		include( 'custom_config_inc.php' );
+	}
+	# for backward compatability
 	if ( file_exists( 'config_inc.php' ) ) {
 		include( 'config_inc.php' );
 	}
@@ -70,10 +77,10 @@
 
 	include( 'lang/strings_'.$g_active_language.'.txt' );
 	
-	# Allow overriding strings declared in the language file
-	# strings_inc.php can use $g_active_language
-	if ( file_exists( 'strings_inc.php' ) ) {
-		include ( 'strings_inc.php' );
+	# Allow overriding strings declared in the language file.
+	# custom_strings_inc.php can use $g_active_language
+	if ( file_exists( 'custom_strings_inc.php' ) ) {
+		include ( 'custom_strings_inc.php' );
 	}
 
 	require( 'core_html_API.php' );

@@ -9,11 +9,11 @@
 	# Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
 	# --------------------------------------------------------
-	# $Revision: 1.16 $
+	# $Revision: 1.17 $
 	# $Author: vboctor $
-	# $Date: 2002-06-14 05:36:48 $
+	# $Date: 2002-06-14 12:35:50 $
 	#
-	# $Id: bug_assign.php,v 1.16 2002-06-14 05:36:48 vboctor Exp $
+	# $Id: bug_assign.php,v 1.17 2002-06-14 12:35:50 vboctor Exp $
 	# --------------------------------------------------------
 
 	# Assign bug to user then redirect to viewing page
@@ -22,7 +22,7 @@
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_access( DEVELOPER );
+	check_access( $g_handle_bug_threshold );
 
 	# extract current information into history variables
 	$result = get_bug_row ( $f_id );
