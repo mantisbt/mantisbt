@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.9 2003-01-12 07:13:44 jfitzell Exp $
+	# $Id: obsolete.php,v 1.10 2003-01-23 06:24:55 robertjf Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -32,6 +32,7 @@
 	config_obsolete( 'notify_admin_on_new', 'notify_flags' );
 	config_obsolete( 'view_bug_inc', 'bug_view_inc' );
 	config_obsolete( 'ldap_organisation', 'ldap_organization' );
+	config_obsolete( 'ldapauth_type', '' );
 	config_obsolete( 'summary_product_colon_category', 'summary_category_include_project' );
 
 	config_obsolete( 'allow_href_tags', 'html_make_links' );
