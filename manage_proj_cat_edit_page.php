@@ -10,7 +10,9 @@
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
-	$f_assigned_to = gpc_get_int( 'assigned_to', 0 );
+	$f_project_id	= gpc_get_int( 'project_id' );
+	$f_category		= gpc_get_string( 'category' );
+	$f_assigned_to	= gpc_get_int( 'assigned_to', 0 );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

@@ -11,7 +11,7 @@
 	check_access( config_get( 'manage_project_threshold' ) );
 
 	$f_project_id	= gpc_get_int( 'project_id' );
-	$f_category		= gpc_get_int( 'category' );
+	$f_category		= gpc_get_string( 'category' );
 
 	$f_category = urldecode( $f_category );
 
