@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.42 2003-02-10 21:59:43 jfitzell Exp $
+	# $Id: html_api.php,v 1.43 2003-02-11 08:59:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,6 +14,8 @@
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
+	require_once( $t_core_dir . 'project_api.php' );
+	require_once( $t_core_dir . 'helper_api.php' );
 
 	###########################################################################
 	# HTML API
@@ -25,23 +27,23 @@
 	# --------------------
 	# first part of the html followed by meta tags then the second part
 	function print_page_top1() {
-		global $g_window_title, $g_css_include_file, $g_meta_include_file;
+		global $g_css_include_file, $g_meta_include_file;
 
 		print_html_top();
 		print_head_top();
 		print_content_type();
-		print_title( $g_window_title );
+		print_title();
 		print_css( $g_css_include_file );
 		include( $g_meta_include_file );
 	}
 	# --------------------
 	# core part of page top but without login info and menu - used in login pages
 	function print_page_top2a() {
-		global $g_page_title, $g_top_include_page;
+		global $g_top_include_page;
 
 		print_head_bottom();
 		print_body_top();
-		print_header( $g_page_title );
+		print_header();
 		print_top_page( $g_top_include_page );
 	}
 	# --------------------
@@ -104,24 +106,18 @@
 
 	# --------------------
 	# (4) Prints the <TITLE> tag
-	function print_title( $p_title ) {
-		global 	$g_show_project_in_title,
-				$g_project_cookie_val;
+	function print_title() {
+		$t_title = config_get( 'window_title' );
 
-		# Handle the absence of the project API, to allow errors in database queries to be
-		# handled with grace.
-		if ( 0 == $g_project_cookie_val || !function_exists('project_get_field')) {
-			$t_project_name = lang_get( 'all_projects' );
-		} else {
-			$t_project_name = project_get_field( $g_project_cookie_val, 'name' );
+		if ( auth_is_user_authenticated() &&
+			 ON == config_get( 'show_project_in_title' ) ) {
+			if ( ! is_blank( $t_title ) ) {
+				$t_title .= ' - ';
+			}
+			$t_title .= project_get_name( helper_get_current_project() );
 		}
-		if ( 1 == $g_show_project_in_title ) {
-			PRINT "<title>$p_title - $t_project_name</title>";
-		} else if ( 2 == $g_show_project_in_title ) {
-			PRINT "<title>$t_project_name</title>";
-		} else {
-			PRINT "<title>$p_title</title>";
-		}
+		
+		echo '<title>' . string_display( $t_title ) . "</title>\n";
 	}
 	# --------------------
 	# (5) includes the css include file to use, is likely to be either empty or css_inc.php
@@ -163,26 +159,15 @@
 	}
 	# --------------------
 	# (9) Prints the title that is visible in the main panel of the browser
-	# We use a temporary variable to create the title then print it.
-	function print_header( $p_title='Mantis' ) {
-		global 	$g_show_project_in_title, $g_project_cookie_val;
+	function print_header() {
+		$t_title = config_get( 'page_title' );
 
-		# Handle the absence of the project API, to allow errors in database queries to be
-		# handled with grace.
-		if ( 0 == $g_project_cookie_val || !function_exists('project_get_field') ) {
-			$t_project_name = lang_get( 'all_projects' );
-		} else {
-			$t_project_name = project_get_field( $g_project_cookie_val, 'name' );
-		}
-
-		$t_title = '';
-		switch ( $g_show_project_in_title ) {
-			case 1:	$t_title = $p_title.' - '.$t_project_name;
-					break;
-			case 2:	$t_title = $t_project_name;
-					break;
-			default:$t_title = $p_title;
-					break;
+		if ( auth_is_user_authenticated() &&
+			 ON == config_get( 'show_project_in_title' ) ) {
+			if ( ! is_blank( $t_title ) ) {
+				$t_title .= ' - ';
+			}
+			$t_title .= project_get_name( helper_get_current_project() );
 		}
 
 		echo '<div class="center"><span class="pagetitle">' . string_display( $t_title ) . '</span></div>';
@@ -213,6 +198,15 @@
 				$g_show_queries_count, $g_show_queries_list, $g_queries_array;
 
 		print_source_link( $p_file );
+
+		# If a user is logged in, update their last visit time.
+		# We do this at the end of the page so that:
+		#  1) we can display the user's last visit time on a page before updating it
+		#  2) we don't invalidate the user cache immediately after fetching it
+		if ( auth_is_user_authenticated() ) {
+			$t_user_id = auth_get_current_user_id();
+			user_update_last_visit( $t_user_id );
+		}
 
 		PRINT '<br />';
 		PRINT '<hr size="1" />';

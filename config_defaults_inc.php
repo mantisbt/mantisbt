@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.70 2003-02-11 07:36:01 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.71 2003-02-11 08:59:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -245,9 +245,9 @@
 
 	# --- project name -----------------
 	# show the project name in the page title
-	# 0 / OFF : no project name
-	# 1 / ON : project name and any additional
-	# 2 : only project name
+	# OFF/ON
+	# Previous versions supported a third value that displayed only the project
+	#  name.  If you want this behaviour, simply set the titles above to ''
 	$g_show_project_in_title	= ON;
 
 	# --- advanced views --------------

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.30 2003-02-09 21:55:53 jfitzell Exp $
+	# $Id: project_api.php,v 1.31 2003-02-11 08:59:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -328,6 +328,17 @@
 		} else {
 			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 			return '';
+		}
+	}
+
+	# --------------------
+	# Return the name of the project
+	# Handles project 0 by returning the internationalized string for All Projects
+	function project_get_name( $p_project_id ) {
+		if ( 0 == $p_project_id ) {
+			return lang_get( 'all_projects' );
+		} else {
+			return project_get_field( $p_project_id, 'name' );
 		}
 	}
 
