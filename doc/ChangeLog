@@ -1,6 +1,6 @@
 Mantis
 
-02.XX.2002  -   0.17.1
+03.XX.2002  -   0.17.1
 
  * Fixed missing closing span tag in view_bug_*page.php.
  * Fixed advanced summaries (jpgraph) for general statistics for all projects.
@@ -16,6 +16,7 @@ Mantis
  * Fixed admin_check.php to check for Windows style \.
  * Fixed file dates to display correctly.
  * Fixed bug update button to go to proper simple or advanced page.
+ * Fixed a problem where users could not report bugs if uploading was disabled.
  * Removed site_settings link in print_manage_doc_menu().
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.

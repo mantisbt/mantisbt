@@ -54,7 +54,7 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" enctype="multipart/form-data" action="<?php echo $g_report_add ?>">
+<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo "enctype=\"multipart/form-data\""; } ?> action="<?php echo $g_report_add ?>">
 <input type="hidden" name="f_assign_id" value="0000000">
 <tr>
 	<td class="form-title">

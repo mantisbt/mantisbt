@@ -87,7 +87,7 @@
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
-<form method="post" enctype="multipart/form-data" action="<?php echo $g_report_add ?>">
+<form method="post" <?php if ( ON == $g_allow_file_upload ) { echo "enctype=\"multipart/form-data\""; } ?> action="<?php echo $g_report_add ?>">
 <tr>
 	<td class="form-title">
 		<?php echo $s_enter_report_details_title ?>
