@@ -44,7 +44,7 @@
 	#--------------------
 	# enter the exact url where the bugtracker is located
 	# used in the emailing system
-	$g_login_url            = "http://www.mydomain.com/mantis/";
+	$g_mantis_url            = "http://www.mydomain.com/mantis/";
 	#--------------------
 
 	#--------------------
@@ -164,11 +164,28 @@
 	$g_view_assigned_cookie           = $g_cookie_prefix."_VIEW_ASSIGNED_COOKIE";
 
 	# cookie values
-	$g_string_cookie_val              = $HTTP_COOKIE_VARS[$g_string_cookie];
-	$g_project_cookie_val             = $HTTP_COOKIE_VARS[$g_project_cookie];
-	$g_view_all_cookie_val            = $HTTP_COOKIE_VARS[$g_view_all_cookie];
-	$g_view_reported_cookie_val       = $HTTP_COOKIE_VARS[$g_view_reported_cookie];
-	$g_view_assigned_cookie_val       = $HTTP_COOKIE_VARS[$g_view_assigned_cookie];
+
+	$g_string_cookie_val              = "";
+	$g_project_cookie_val             = "";
+	$g_view_all_cookie_val            = "";
+	$g_view_reported_cookie_val       = "";
+	$g_view_assigned_cookie_val       = "";
+
+	if ( isset( $g_string_cookie ) ) {
+		$g_string_cookie_val              = $HTTP_COOKIE_VARS[$g_string_cookie];
+	}
+	if ( isset( $g_project_cookie ) ) {
+		$g_project_cookie_val             = $HTTP_COOKIE_VARS[$g_project_cookie];
+	}
+	if ( isset( $g_view_all_cookie ) ) {
+		$g_view_all_cookie_val            = $HTTP_COOKIE_VARS[$g_view_all_cookie];
+	}
+	if ( isset( $g_view_reported_cookie ) ) {
+		$g_view_reported_cookie_val       = $HTTP_COOKIE_VARS[$g_view_reported_cookie];
+	}
+	if ( isset( $g_view_assigned_cookie ) ) {
+		$g_view_assigned_cookie_val       = $HTTP_COOKIE_VARS[$g_view_assigned_cookie];
+	}
 	#--------------------
 
 	#--------------------
@@ -238,6 +255,9 @@
 	$g_bugnote_add_page               = "bugnote_add_page".$g_php;
 	$g_bugnote_add                    = "bugnote_add".$g_php;
 	$g_bugnote_delete                 = "bugnote_delete".$g_php;
+
+	# documentation
+	$g_documentation_html             = "documentation.html";
 
 	# report bug
 	$g_report_bug_page                = "report_bug_page".$g_php;

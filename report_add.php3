@@ -8,7 +8,8 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
+?>
+<?
 	if ( !access_level_check_greater_or_equal( "viewer" ) ) {
 		# should be an access error page
 		header( "Location: $g_logout_page" );
@@ -140,7 +141,28 @@
 			PRINT "$s_must_enter_description<br>";
 		}
 		PRINT "<p>";
-		PRINT "$s_hit_back_msg";
+
+?>
+		<form method=post action="<? echo $HTTP_REFERER ?>">
+		<input type=hidden name=f_category value="<? echo $f_category ?>">
+		<input type=hidden name=f_severity value="<? echo $f_severity ?>">
+		<input type=hidden name=f_reproducibility value="<? echo $f_reproducibility ?>">
+
+		<input type=hidden name=f_profile_id value="<? echo $f_profile_id ?>">
+		<input type=hidden name=f_platform value="<? echo $f_platform ?>">
+		<input type=hidden name=f_os value="<? echo $f_os ?>">
+		<input type=hidden name=f_osbuild value="<? echo $f_osbuild ?>">
+		<input type=hidden name=f_product_version value="<? echo $f_product_version ?>">
+		<input type=hidden name=f_build value="<? echo $f_build ?>">
+		<input type=hidden name=f_assign_id value="<? echo $f_assign_id ?>">
+
+		<input type=hidden name=f_summary value="<? echo $f_summary ?>">
+		<input type=hidden name=f_description value="<? echo $f_description ?>">
+		<input type=hidden name=f_steps_to_reproduce value="<? echo $f_steps_to_reproduce ?>">
+		<input type=hidden name=f_additional_info value="<? echo $f_additional_info ?>">
+		<input type=submit value="<? echo $s_go_back ?>">
+		</form>
+<?
 	}
 	### MYSQL ERROR
 	else if ( !$result ) {

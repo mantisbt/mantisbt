@@ -58,6 +58,15 @@ Each major section is partitioned via the menu.  Every section is treated as a p
 	<ul>
 	<li><a href="#report_bug_simple">Report Bug Simple</a>
 	<li><a href="#report_bug_advanced">Report Bug Advanced</a>
+		<ul>
+			<li><a href="#category">Category</a>
+			<li><a href="#reproducibility">Reproducibility</a>
+			<li><a href="#severity">Severity</a>
+			<li><a href="#summary">Summary</a>
+			<li><a href="#description">Description</a>
+			<li><a href="#steps_to_reproduce">Steps to Reproduce</a>
+			<li><a href="#additional_information">Additional Information</a>
+		</ul>
 	</ul>
 <li><a href="#summary">Summary</a>
 <li><a href="#account">Account</a>
@@ -302,6 +311,56 @@ The simple form lets you report the category, reproducibility, severity, summary
 <p>
 Summary should be a short, one sentence description of the problem.  It has a limit of 128 characters.
 <p>
+<blockquote>
+<h5><a name=category>[ Category ]</a></h5>
+<p>
+Select the most apprpriate category for the report.  These categories are defined per project by the project administrator
+<p>
+<h5><a name=reproducibility>[ Reproducibility ]</a></h5>
+<p>
+Reproducibilty is the key to being able to quickly fix a bug.
+<ul>
+	<li>always
+	<li>sometimes
+	<li>random
+	<li>have not tried
+	<li>unable to duplicate
+</ul>
+<p>
+<h5><a name=severity>[ Severity ]</a></h5>
+<p>
+<ul>
+	<li>block - prevents further work/progress from being made
+	<li>crash - crashes the application or OS
+	<li>major - major bug
+	<li>minor - minor bug
+	<li>tweak - needs tweaking
+	<li>text - error in the text
+	<li>trivial - being nitpicky
+	<li>feature - requesting new feature
+</ul>
+<p>
+<h5><a name=summary>[ Summary ]</a></h5>
+<p>
+A brief one line description of the problem
+<p>
+<h5><a name=description>[ Description ]</a></h5>
+<p>
+A detailed description of the problem
+<p>
+<h5><a name=steps_to_reproduce>[ Steps to Reproduce ]</a></h5>
+<p>
+List the detailed steps to reproduce a problem.  This is useful for bugs that take a while to show up or tricky cases.  It would be best to use a format that looks like
+<p>
+1. step 1<br>
+2. step 2<br>
+3. step 3
+<p>
+<h5><a name=additional_information>[ Additional Information ]</a></h5>
+<p>
+Anything extra information that you didn't put into the Description should go here.
+<p>
+</blockquote>
 
 <p>
 <h4><a name=report_bug_advanced>[ Report Bug Advanced ]</a></h4>

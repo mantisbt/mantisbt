@@ -47,64 +47,64 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td valign=top width=25%>
-			<? echo $s_category ?>:<br>
-			<span class="required">[*<? echo $s_required ?>*]</span>
+			<? echo $s_category ?> <? print_documentaion_link( "category" ) ?>:<br>
+			<span class="required">*<? echo $s_required ?>*</span>
 		</td>
 		<td>
 			<select name=f_category>
 				<option value="" selected><? echo $s_select_category ?>
-				<? print_category_option_list() ?>
+				<? print_category_option_list( $f_category ) ?>
 			</select>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			<? echo $s_reproducibility ?>:<br>
-			<span class="required">[*<? echo $s_required ?>*]</span>
+			<? echo $s_reproducibility ?> <? print_documentaion_link( "reproducibility" ) ?>:<br>
+			<span class="required">*<? echo $s_required ?>*</span>
 		</td>
 		<td>
 			<select name=f_reproducibility>
 				<option value="" SELECTED><? echo $s_select_reproducibility ?>
-				<? print_field_option_list( "reproducibility" ) ?>
+				<? print_field_option_list( "reproducibility",  $f_reproducibility  ) ?>
 			</select>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			<? echo $s_severity ?>:<br>
-			<span class="required">[*<? echo $s_required ?>*]</span>
+			<? echo $s_severity ?> <? print_documentaion_link( "severity" ) ?>:<br>
+			<span class="required">*<? echo $s_required ?>*</span>
 		</td>
 		<td>
 			<select name=f_severity>
 				<option value="" selected><? echo $s_select_severity ?>
-				<? print_field_option_list( "severity" ) ?>
+				<? print_field_option_list( "severity", $f_severity ) ?>
 			</select>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			<? echo $s_summary ?>:<br>
-			<span class="required">[*<? echo $s_required ?>*]</span>
+			<? echo $s_summary ?> <? print_documentaion_link( "summary" ) ?>:<br>
+			<span class="required">*<? echo $s_required ?>*</span>
 		</td>
 		<td>
-			<input type=text name=f_summary size=80 maxlength=128>
+			<input type=text name=f_summary size=80 maxlength=128 value="<? echo $f_summary ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			<? echo $s_description ?>:<br>
-			<span class="required">[*<? echo $s_required ?>*]</span>
+			<? echo $s_description ?> <? print_documentaion_link( "description" ) ?>:<br>
+			<span class="required">*<? echo $s_required ?>*</span>
 		</td>
 		<td>
-			<textarea name=f_description cols=60 rows=5></textarea>
+			<textarea name=f_description cols=60 rows=5><? echo $f_description ?></textarea>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			<? echo $s_additional_information ?>:
+			<? echo $s_additional_information ?> <? print_documentaion_link( "additional_information" ) ?>:
 		</td>
 		<td>
-			<textarea name=f_additional_info cols=60 rows=5></textarea>
+			<textarea name=f_additional_info cols=60 rows=5><? echo $f_additional_info ?></textarea>
 		</td>
 	</tr>
 	<tr>
