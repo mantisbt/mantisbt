@@ -62,7 +62,7 @@
 <br />
 <?php print_summary_menu( 'summary_page.php' ) ?>
 
-<? print_menu_graph() ?>
+<?php print_menu_graph() ?>
 <br />
 <table class="width100" cellspacing="1">
 <tr>

@@ -63,9 +63,9 @@
 <?php print_page_top2() ?>
 
 
-<? print_summary_menu( 'summary_page.php' ) ?>
+<?php print_summary_menu( 'summary_page.php' ) ?>
 <br />
-<? print_menu_graph() ?>
+<?php print_menu_graph() ?>
 
 <br />
 <table class="width100" cellspacing="1">
