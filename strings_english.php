@@ -221,6 +221,7 @@
 	### $s_username # defined above
 	### $s_password # defined above
 	$s_save_login = "Save Login";
+	### $s_choose_project # defined above
 	$s_login_button = "Login";
 
 	### login_page.php3

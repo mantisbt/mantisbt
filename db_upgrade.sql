@@ -76,7 +76,8 @@ CREATE TABLE mantis_project_table (
    view_state set('public','private') DEFAULT 'public' NOT NULL,
    description text NOT NULL,
    PRIMARY KEY (id),
-   KEY id (id)
+   KEY id (id),
+   UNIQUE name (name)
 );
 
 INSERT INTO mantis_project_table VALUES ( '0000001', 'mantis', 'development', 'on', 'public', 'Mantis.  Report problems with the actual bug tracker here. (Do not remove this account.  You can set it to be disabled if you do not wish to see it)');
@@ -107,9 +108,10 @@ ALTER TABLE mantis_news_table ADD project_id INT (7) UNSIGNED ZEROFILL not null 
 # make changes to bug_table
 
 ALTER TABLE mantis_bug_table CHANGE category category VARCHAR (32) not null;
-ALTER TABLE mantis_bug_table CHANGE version version VARCHAR (32) DEFAULT 'none' not null
+ALTER TABLE mantis_bug_table CHANGE version version VARCHAR (32) DEFAULT 'none' not null;
 
 # make changes to user_table
 
 ALTER TABLE mantis_user_table ADD login_count INT not null DEFAULT '0' AFTER access_level;
-ALTER TABLE mantis_user_table CHANGE access_level access_level ENUM ('viewer','reporter','updater','developer','manager','administrator') DEFAULT 'viewer' not null 
+ALTER TABLE mantis_user_table CHANGE access_level access_level ENUM ('viewer','reporter','updater','developer','manager','administrator') DEFAULT 'viewer' not null;
+ALTER TABLE mantis_user_table ADD UNIQUE(username);

@@ -5,6 +5,9 @@
 	# See the README and LICENSE files for details
 ?>
 <? include( "core_API.php" ) ?>
+<?
+	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
@@ -52,6 +55,16 @@
 		</td>
 		<td>
 			<input type=checkbox name=f_perm_login>
+		</td>
+	</tr>
+	<tr bgcolor=<? echo $g_primary_color_light ?>>
+		<td>
+			<? echo $s_choose_project ?>:
+		</td>
+		<td>
+			<select name=f_project_id>
+			<? print_project_option_list() ?>
+			</select>
 		</td>
 	</tr>
 	<tr>
