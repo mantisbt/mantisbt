@@ -1,0 +1,99 @@
+<?php
+	# Mantis - a php based bugtracking system
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
+	# This program is distributed under the terms and conditions of the GPL
+	# See the files README and LICENSE for details
+?>
+<?php
+	# This include file prints out the list of bugnotes attached to the bug
+	# $f_id must be set and be set to the bug id
+?>
+<?php
+	# grab the user id currently logged in
+	$t_user_id = get_current_user_field( "id " );
+
+	# get the bugnote data
+	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
+			FROM $g_mantis_bugnote_table
+			WHERE bug_id='$f_id'
+			ORDER BY date_submitted $g_bugnote_order";
+	$result = db_query($query);
+	$num_notes = db_num_rows($result);
+?>
+
+<?php # Bugnotes BEGIN ?>
+<p>
+<table class="width100" cellspacing="1">
+<?php
+	# no bugnotes
+	if ( 0 == $num_notes ) {
+?>
+<tr>
+	<td class="print" colspan="2">
+		<?php echo $s_no_bugnotes_msg ?>
+	</td>
+</tr>
+<?php } else { # print bugnotes ?>
+<tr>
+	<td class="form-title" colspan="2">
+		<?php echo $s_bug_notes_title ?>
+		<hr size="1">
+	</td>
+</tr>
+<?php
+	for ( $i=0; $i < $num_notes; $i++ ) {
+		# prefix all bugnote data with v3_
+		$row = db_fetch_array( $result );
+		extract( $row, EXTR_PREFIX_ALL, "v3" );
+		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
+
+		# grab the bugnote text and id and prefix with v3_
+		$query = "SELECT note, id
+				FROM $g_mantis_bugnote_text_table
+				WHERE id='$v3_bugnote_text_id'";
+		$result2 = db_query( $query );
+		$v3_note = db_result( $result2, 0, 0 );
+		$v3_bugnote_text_id = db_result( $result2, 0, 1 );
+
+		$v3_note = string_display( $v3_note );
+?>
+<tr>
+	<td class="nopad" valign="top" width="15%">
+		<table class="hide" cellspacing="1">
+		<tr>
+			<td class="print">
+				<?php print_user( $v3_reporter_id ) ?>&nbsp;&nbsp;&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td class="print">
+				<?php echo $v3_date_submitted ?>&nbsp;&nbsp;&nbsp;
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="nopad" valign="top" width="85%">
+		<table class="hide" cellspacing="1">
+		<tr>
+			<td class="print">
+				<?php echo $v3_note ?>
+			</td>
+		</tr>
+		</table>
+	</td>
+<tr>
+	<td class="spacer" colspan="2">
+		<hr size="1">
+	</td>
+</tr>
+<?php
+		} # end for loop
+	} # end else
+?>
+</table>
+<?php # Bugnotes END ?>
+
+<?php if ( ( ( $v_status < RESOLVED ) ||
+		  ( isset( $f_resolve_note ) ) ) &&
+		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
+<?php } ?>

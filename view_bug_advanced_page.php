@@ -54,6 +54,7 @@
 	if ( BOTH == $g_show_view ) {
 		print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_view_simple_link );
 	}
+	print_bracket_link( $g_print_bug_page."?f_id=".$f_id, $s_print );
 ?>
 	</td>
 </tr>

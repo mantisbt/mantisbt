@@ -46,7 +46,8 @@ td.form-title		{ background-color: <?php echo $g_form_title_color ?>; color: <?p
 td.nopad			{ padding: 0px; }
 td.spacer			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; font-size: 1pt; line-height: 0.1; }
 td.small-caption	{ font-size: <?php echo $g_font_small ?>; }
-td.print			{ font-size: <?php echo $g_font_small ?>; text-align: center; }
+td.print			{ font-size: <?php echo $g_font_small ?>; text-align: left; padding: 2px; }
+td.print-category	{ font-size: <?php echo $g_font_small ?>; color: <?php echo $g_font_color ?>; font-weight: bold; text-align: right; padding: 2px; }
 
 tr.center			{ text-align: center; }
 tr.row-1			{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; }
@@ -54,6 +55,7 @@ tr.row-2			{ background-color: <?php echo $g_primary_color2 ?>; color: <?php ech
 tr.spacer			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; }
 tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; }
 tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; }
+tr.print-category	{ color: <?php echo $g_font_color ?>; font-weight: bold; }
 
 /* Login Info */
 td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }

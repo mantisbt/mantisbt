@@ -48,5 +48,6 @@
 	require( "core_news_API.php" );
 	require( "core_icon_API.php" );
 	require( "core_ldap_API.php" );
+	#require( "core_history_API.php" );
 	# --------------------
 ?>
