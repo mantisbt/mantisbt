@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.55 2003-03-12 19:41:59 int2str Exp $
+	# $Id: email_api.php,v 1.56 2003-04-09 19:39:13 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -685,7 +685,6 @@
 			if ( ON == $g_use_x_priority ) {
 				$t_headers .= "X-Priority: $g_mail_priority\n";    # Urgent = 1, Not Urgent = 5, Disable = 0
 			}
-			$t_headers .= "Return-Path: <$g_return_path_email>\n";          # return email if error
 			$t_headers .= 'Content-Type: text/plain; charset=' . lang_get( 'charset' ) . "\n";
 
 			if ( EMAIL_CATEGORY_PROJECT_CATEGORY == config_get( 'email_set_category' ) ) {
