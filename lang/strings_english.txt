@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.170 $
+	# $Revision: 1.171 $
 	# $Author: vboctor $
-	# $Date: 2004-05-24 12:23:19 $
+	# $Date: 2004-05-24 12:45:40 $
 	#
-	# $Id: strings_english.txt,v 1.170 2004-05-24 12:23:19 vboctor Exp $
+	# $Id: strings_english.txt,v 1.171 2004-05-24 12:45:40 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -283,6 +283,7 @@ $s_email_priority = 'Priority';
 $s_email_status = 'Status';
 $s_email_resolution = 'Resolution';
 $s_email_duplicate = 'Duplicate';
+$s_email_fixed_in_version = 'Fixed in Version';
 $s_email_date_submitted = 'Date Submitted';
 $s_email_last_modified = 'Last Modified';
 $s_email_summary = 'Summary';
