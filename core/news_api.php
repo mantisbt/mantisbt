@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.19 2005-02-13 21:36:38 jlatour Exp $
+	# $Id: news_api.php,v 1.20 2005-03-21 11:57:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	### News API ###
@@ -25,7 +25,13 @@
 		$c_headline		= db_prepare_string( $p_headline );
 		$c_body			= db_prepare_string( $p_body );
 
-		if ( is_blank( $c_headline ) || is_blank( $c_body ) ) {
+		if ( is_blank( $c_headline ) ) {
+			error_parameters( lang_get( 'headline' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		if ( is_blank( $c_body ) ) {
+			error_parameters( lang_get( 'body' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 

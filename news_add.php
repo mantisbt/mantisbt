@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_add.php,v 1.30 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: news_add.php,v 1.31 2005-03-21 11:58:02 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,8 +21,8 @@
 
 	$f_view_state	= gpc_get_int( 'view_state' );
 	$f_headline		= gpc_get_string( 'headline' );
-	$f_announcement	= gpc_get_string( 'announcement', '' );
-	$f_body			= gpc_get_string( 'body', '' );
+	$f_announcement	= gpc_get_bool( 'announcement' );
+	$f_body			= gpc_get_string( 'body' );
 
 	news_create( helper_get_current_project(), auth_get_current_user_id(), $f_view_state, $f_announcement, $f_headline, $f_body );
 	$f_headline = string_display_links( $f_headline );
