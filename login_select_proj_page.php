@@ -19,7 +19,7 @@
 <p>
 <div align="center">
 <form method="post" action="<?php echo $g_set_project ?>">
-<input type=hidden name=ref value="<?php echo $ref ?>">
+<input type="hidden" name="ref" value="<?php echo $ref ?>">
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
