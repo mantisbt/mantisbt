@@ -6,37 +6,34 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: columns_api.php,v 1.1 2005-01-25 13:57:29 vboctor Exp $
+	# $Id: columns_api.php,v 1.2 2005-01-28 21:58:16 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
-	function print_column_title_selection( $p_print = false ) {
+
+	function print_column_title_selection( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td> &nbsp; </td>';
 	}
 
-	function print_column_title_edit( $p_print = false ) {
+	function print_column_title_edit( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td> &nbsp; </td>';
 	}
 
-	function print_column_title_bug_id( $p_print = false ) {
-		global $t_sort, $t_dir;
-
+	function print_column_title_bug_id( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td>';
-		print_view_bug_sort_link( lang_get( 'id' ), 'id', $t_sort, $t_dir, $p_print );
-		print_sort_icon( $t_dir, $t_sort, 'id' );
+		print_view_bug_sort_link( lang_get( 'id' ), 'id', $p_sort, $p_dir, $p_print );
+		print_sort_icon( $p_dir, $p_sort, 'id' );
 		echo '</td>';
 	}
 
-	function print_column_title_priority( $p_print = false ) {
-		global $t_sort, $t_dir;
-
+	function print_column_title_priority( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td>';
-		print_view_bug_sort_link( 'P', 'priority', $t_sort, $t_dir, $p_print );
-		print_sort_icon( $t_dir, $t_sort, 'priority' );
+		print_view_bug_sort_link( 'P', 'priority', $p_sort, $p_dir, $p_print );
+		print_sort_icon( $p_dir, $p_sort, 'priority' );
 		echo '</td>';
 	}
 
-	function print_column_title_attachment( $p_print = false  ) {
+	function print_column_title_attachment( $p_sort, $p_dir, $p_print = false  ) {
 		$t_show_attachments = config_get( 'show_attachment_indicator' );
 
 		if ( ON == $t_show_attachments ) {
@@ -46,65 +43,53 @@
 		}
 	}
 
-	function print_column_title_category( $p_print = false ) {
-		global $t_sort, $t_dir;
-
+	function print_column_title_category( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td>';
-		print_view_bug_sort_link( lang_get( 'category' ), 'category', $t_sort, $t_dir, $p_print );
-		print_sort_icon( $t_dir, $t_sort, 'category' );
+		print_view_bug_sort_link( lang_get( 'category' ), 'category', $p_sort, $p_dir, $p_print );
+		print_sort_icon( $p_dir, $p_sort, 'category' );
 		echo '</td>';
 	}
 
-	function print_column_title_sponsorship( $p_print = false ) {
-		global $t_sort, $t_dir;
-
+	function print_column_title_sponsorship( $p_sort, $p_dir, $p_print = false ) {
 		$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 
 		if ( ON == $t_enable_sponsorship ) {
 			echo "\t<td>";
-			print_view_bug_sort_link( sponsorship_get_currency(), 'sponsorship_total', $t_sort, $t_dir, $p_print );
-			print_sort_icon( $t_dir, $t_sort, 'sponsorship_total' );
+			print_view_bug_sort_link( sponsorship_get_currency(), 'sponsorship_total', $p_sort, $p_dir, $p_print );
+			print_sort_icon( $p_dir, $p_sort, 'sponsorship_total' );
 			echo "</td>\n";
 		}
 	}
 
-	function print_column_title_severity( $p_print = false ) {
-		global $t_sort, $t_dir;
-
+	function print_column_title_severity( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td>';
-		print_view_bug_sort_link( lang_get( 'severity' ), 'severity', $t_sort, $t_dir, $p_print );
-		print_sort_icon( $t_dir, $t_sort, 'severity' );
+		print_view_bug_sort_link( lang_get( 'severity' ), 'severity', $p_sort, $p_dir, $p_print );
+		print_sort_icon( $p_dir, $p_sort, 'severity' );
 		echo '</td>';
 	}
 
-	function print_column_title_status( $p_print = false ) {
-		global $t_sort, $t_dir;
-
+	function print_column_title_status( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td>';
-		print_view_bug_sort_link( lang_get( 'status' ), 'status', $t_sort, $t_dir, $p_print );
-		print_sort_icon( $t_dir, $t_sort, 'status' );
+		print_view_bug_sort_link( lang_get( 'status' ), 'status', $p_sort, $p_dir, $p_print );
+		print_sort_icon( $p_dir, $p_sort, 'status' );
 		echo '</td>';
 	}
 
-	function print_column_title_last_updated( $p_print = false ) {
-		global $t_sort, $t_dir;
-
+	function print_column_title_last_updated( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td>';
-		print_view_bug_sort_link( lang_get( 'updated' ), 'last_updated', $t_sort, $t_dir, $p_print );
-		print_sort_icon( $t_dir, $t_sort, 'last_updated' );
+		print_view_bug_sort_link( lang_get( 'updated' ), 'last_updated', $p_sort, $p_dir, $p_print );
+		print_sort_icon( $p_dir, $p_sort, 'last_updated' );
 		echo '</td>';
 	}
 
-	function print_column_title_summary( $p_print = false ) {
-		global $t_sort, $t_dir;
-
+	function print_column_title_summary( $p_sort, $p_dir, $p_print = false ) {
 		echo '<td>';
-		print_view_bug_sort_link( lang_get( 'summary' ), 'summary', $t_sort, $t_dir, $p_print );
-		print_sort_icon( $t_dir, $t_sort, 'summary' );
+		print_view_bug_sort_link( lang_get( 'summary' ), 'summary', $p_sort, $p_dir, $p_print );
+		print_sort_icon( $p_dir, $p_sort, 'summary' );
 		echo '</td>';
 	}
 
-	function print_column_title_bugnotes_count( $p_print = false  ) {
+	function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_print = false  ) {
 		echo '<td> # </td>';
 	}
 
@@ -180,10 +165,10 @@
 
 		echo '<td class="center">';
 		if ( $bugnote_count > 0 ) {
-			$t_bugnote_link = '<a href="' . string_get_bug_view_url( $p_row['id'] ) 
-				. '&amp;nbn=' . $bugnote_count . '#bugnotes">' 
-				. $bugnote_count . '</a>'; 
-	
+			$t_bugnote_link = '<a href="' . string_get_bug_view_url( $p_row['id'] )
+				. '&amp;nbn=' . $bugnote_count . '#bugnotes">'
+				. $bugnote_count . '</a>';
+
 			if ( $v_bugnote_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
 				printf( '<span class="bold">%s</span>', $t_bugnote_link );
 			} else {
@@ -200,11 +185,11 @@
 
 		# Check for attachments
 		$t_attachment_count = 0;
-		if ( ( ON == $t_show_attachments ) 
+		if ( ( ON == $t_show_attachments )
 		  && ( file_can_view_bug_attachments( $p_row['id'] ) ) ) {
 			$t_attachment_count = file_bug_attachment_count( $p_row['id'] );
 		}
-	
+
 		if ( ON == $t_show_attachments ) {
 			echo "\t<td>";
 			if ( 0 < $t_attachment_count ) {
@@ -230,7 +215,7 @@
 		echo '<td class="center">';
 
 		# type project name if viewing 'all projects'
-		if ( ON == config_get( 'show_bug_project_links' ) 
+		if ( ON == config_get( 'show_bug_project_links' )
 		  && helper_get_current_project() == ALL_PROJECTS ) {
 			echo '<small>[';
 			print_view_bug_sort_link( $t_project_name, 'project_id', $t_sort, $t_dir, $p_print );
@@ -250,14 +235,14 @@
 	function print_column_status( $p_row, $p_print = false ) {
 		echo '<td class="center">';
 		printf( '<u><a title="%s">%s</a></u>'
-			, get_enum_element( 'resolution', $p_row['resolution'] ) 
+			, get_enum_element( 'resolution', $p_row['resolution'] )
 			, get_enum_element( 'status', $p_row['status'] )
 		);
-	
+
 		# print username instead of status
-		if ( ON == config_get( 'show_assigned_names' ) 
+		if ( ON == config_get( 'show_assigned_names' )
 		  && $p_row['handler_id'] > 0 ) {
-			printf( ' (%s)', $p_row['handler_id'] );
+			printf( ' (%s)', prepare_user_name( $p_row['handler_id'] ) );
 		}
 		echo '</td>';
 	}

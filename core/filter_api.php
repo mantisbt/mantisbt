@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.75 2005-01-15 23:19:11 thraxisp Exp $
+	# $Id: filter_api.php,v 1.76 2005-01-28 21:58:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -58,13 +58,13 @@
 		$t_report_bug_threshold		= config_get( 'report_bug_threshold' );
 
 		$t_current_user_id = auth_get_current_user_id();
-		
+
 		if ( null === $p_user_id ) {
 			$t_user_id = $t_current_user_id;
 		} else {
 			$t_user_id = $p_user_id;
 		}
-		
+
 		$c_user_id = db_prepare_int( $t_user_id );
 
 		if ( null === $p_project_id ) {
@@ -84,7 +84,7 @@
 		} else {
 			$t_filter = $custom_filter;
 		}
-		
+
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 
 		if ( false === $t_filter ) {
@@ -320,7 +320,7 @@
 			array_push( $t_where_clauses, '('. implode( ' OR ', $t_clauses ) .')' );
 		}
 
-		# priority 
+		# priority
 		$t_any_found = false;
 		foreach( $t_filter['show_priority'] as $t_filter_member ) {
 				if ( ( '[any]' == $t_filter_member ) || ( 0 === $t_filter_member ) ) {
@@ -481,19 +481,19 @@
 					$t_any_found = true;
 				}
 				if ( !$t_any_found ) {
-					$t_def = custom_field_get_definition( $t_cfid );				
+					$t_def = custom_field_get_definition( $t_cfid );
 					$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
 					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 					foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
 						if ( isset( $t_filter_member ) &&
 							( '[any]' != strtolower( $t_filter_member ) ) &&
-							( !is_blank( trim( $t_filter_member ) ) ) ) {	
-							
+							( !is_blank( trim( $t_filter_member ) ) ) ) {
+
 							$t_filter_member = stripslashes( $t_filter_member );
 							if ( '[none]' == $t_filter_member ) { # coerce filter value if selecting 'none'
 								$t_filter_member = '';
 							}
-							
+
 							if( $t_first_time ) {
 								$t_first_time = false;
 								$t_custom_where_clause = '(';
@@ -541,7 +541,7 @@
 							 OR ($t_bug_text_table.additional_information LIKE '%$c_search%')
 							 OR ($t_bug_table.id LIKE '%$c_search%')
 							 OR ($t_bugnote_text_table.note LIKE '%$c_search%'))";
-							 
+
 			array_push( $t_where_clauses, "($t_bug_text_table.id = $t_bug_table.bug_text_id)" );
 
 			$t_from_clauses = array( $t_bug_text_table, $t_project_table, $t_bug_table );
@@ -558,18 +558,18 @@
 		} else {
 			$t_where	= '';
 		}
-		
+
 		if ( null === $p_show_sticky ) {
 			$t_where .= " AND $t_bug_table.sticky = 0";
 		}
 		else {
 			$t_where .= " AND $t_bug_table.sticky = 1";
 		}
-		
+
 		if ( false === $t_filter['sticky_issues'] && true === $p_show_sticky ) {
 			$t_where .= " AND 1 = 0";
 		}
-		
+
 		# Possibly do two passes. First time, grab the IDs of issues that match the filters. Second time, grab the IDs of issues that
 		# have bugnotes that match the text search if necessary.
 		$t_id_array = array();
@@ -606,7 +606,7 @@
 		} else {
 			$t_where = "WHERE 1 != 1";
 		}
-		
+
 		$t_from = 'FROM ' . $t_bug_table;
 
 		# Get the total number of bugs that meet the criteria.
@@ -650,11 +650,6 @@
 			$p_page_number = 1;
 		}
 
-		$query2  = "SELECT DISTINCT $t_select
-					$t_from
-					$t_join
-					$t_where";
-					
 		# Now add the rest of the criteria i.e. sorting, limit.
 		$c_sort = db_prepare_string( $t_filter['sort'] );
 
@@ -666,19 +661,32 @@
 			$t_filter['dir'] = 'DESC';
 		}
 
+        # if sorting by a custom field
+        if ( strpos( $c_sort, 'custom_' ) === 0 ) {
+        	$t_custom_field = substr( $c_sort, strlen( 'custom_' ) );
+        	$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
+        	$t_join .= " LEFT JOIN $t_custom_field_string_table ON ( ( $t_custom_field_string_table.bug_id = $t_bug_table.id ) AND ( $t_custom_field_string_table.field_id = $t_custom_field_id ) )";
+        	$c_sort = "$t_custom_field_string_table.value";
+        }
+
 		if ( 'DESC' == $t_filter['dir'] ) {
 			$c_dir = 'DESC';
 		} else {
 			$c_dir = 'ASC';
 		}
 
-		$query2 .= " ORDER BY $c_sort $c_dir";
+		$t_order = " ORDER BY $c_sort $c_dir";
 		if ( $c_sort != 'last_updated' ) {
-            $query2 .= ', last_updated DESC, date_submitted DESC';
+            $t_order .= ', last_updated DESC, date_submitted DESC';
+        } else {
+            $t_order .= ', date_submitted DESC';
         }
-        else {
-            $query2 .= ', date_submitted DESC';
-        }
+
+		$query2  = "SELECT DISTINCT $t_select
+					$t_from
+					$t_join
+					$t_where
+					$t_order";
 
 		# Figure out the offset into the db query
 		#
@@ -701,7 +709,7 @@
 			$row = db_fetch_array( $result2 );
 			$row['date_submitted'] = db_unixtimestamp ( $row['date_submitted'] );
 			$row['last_updated'] = db_unixtimestamp ( $row['last_updated'] );
-	
+
 			array_push( $rows, $row );
 			bug_add_to_cache( $row );
 		}
@@ -776,13 +784,13 @@
 		$t_tdclass = 'small-caption';
 		$t_trclass = 'row-category2';
 		$t_action  = 'view_all_set.php?f=3';
-		
+
 		if ( $p_for_screen == false ) {
 			$t_tdclass = 'print';
 			$t_trclass = '';
 			$t_action  = 'view_all_set.php';
 		}
-?> 
+?>
 
 		<br />
 		<form method="post" name="filters" id="filters_form" action="<?php PRINT $t_action; ?>">
@@ -798,7 +806,7 @@
 		<input type="hidden" name="page_number" value="<?php PRINT $p_page_number ?>" />
 		<input type="hidden" name="view_type" value="<?php PRINT $t_view_type ?>" />
 		<table class="width100" cellspacing="1">
-		
+
 		<?php
 		if ( $p_expanded ) {
 			$t_filter_cols = 7;
@@ -1140,7 +1148,7 @@
 									}
 								}
 							?>
-			</td>		
+			</td>
 			<td class="small-caption" valign="top" id="hide_status_filter_target">
 							<?php
 								$t_output = '';
@@ -1443,7 +1451,7 @@
 					$t_output = '';
 					$t_any_found = false;
 
-					$t_values .= '<td class="small-caption" valign="top" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter_target"> ' ; 
+					$t_values .= '<td class="small-caption" valign="top" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter_target"> ' ;
 					if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
 						$t_values .= lang_get( 'any' );
 					} else {
@@ -1489,7 +1497,7 @@
 						$t_values .= '</tr>' . "\n";
 
 						echo $t_fields;
-						echo $t_values; 
+						echo $t_values;
 
 						$t_col_idx = 0;
 						$t_row_idx++;
@@ -1512,7 +1520,7 @@
 					$t_values .= '</tr>' . "\n";
 
 					echo $t_fields;
-					echo $t_values; 
+					echo $t_values;
 				}
 			}
 		}
@@ -1612,7 +1620,7 @@
 		$t_filters_table = config_get( 'mantis_filters_table' );
 
 		# check that the user can save non current filters (if required)
-		if ( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) && 
+		if ( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) &&
 		     ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
 			return -1;
 		}
@@ -1678,7 +1686,7 @@
 		if ( isset( $g_cache_filter_db_filters[$p_filter_id] ) ) {
 			return $g_cache_filter_db_filters[$p_filter_id];
 		}
-		
+
 		if ( null === $p_user_id ) {
 			$t_user_id = auth_get_current_user_id();
 		} else {
@@ -1813,7 +1821,7 @@
 		$t_all_id = ALL_PROJECTS;
 
 		$query = "DELETE FROM $t_filters_table
-					WHERE project_id<='$t_all_id' 
+					WHERE project_id<='$t_all_id'
 					AND name=''";
 		$result = db_query( $query );
 	}
@@ -1821,7 +1829,7 @@
 	function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
 		$t_filters_table = config_get( 'mantis_filters_table' );
 		$t_overall_query_arr = array();
-		
+
 		if ( null === $p_project_id ) {
 			$t_project_id = helper_get_current_project();
 		} else {
@@ -2004,7 +2012,7 @@
 		return $p_filter_arr;
 	}
 
-	
+
 	/**
 	 * The following functions each print out an individual filter field.
 	 * They are derived from view_filters_page.php
@@ -2014,11 +2022,11 @@
 	 *   print_filter_[filter_name]
 	 *
 	 * Where [filter_name] is the same as the "name" of the form element for
-	 * that filter. This naming convention is depended upon by the controller 
+	 * that filter. This naming convention is depended upon by the controller
 	 * at the end of the script.
 	 */
 	/**
-	 * I expect that this code could be made simpler by refactoring into a 
+	 * I expect that this code could be made simpler by refactoring into a
 	 * class so as to avoid all those calls to global(which are pretty ugly)
 	 *
 	 * These functions could also be shared by view_filters_page.php
@@ -2030,18 +2038,18 @@
 		<select <?php PRINT $t_select_modifier;?> name="reporter_id[]">
 			<option value="[any]" <?php check_selected( $t_filter['reporter_id'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php
-				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) { 
+				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
 					check_selected( $t_filter['reporter_id'], META_FILTER_MYSELF );
 					PRINT '>[' . lang_get( 'myself' ) . ']</option>';
-				} 
+				}
 			?>
 			<?php print_reporter_option_list( $t_filter['reporter_id'] ) ?>
 		</select>
 		<?php
 	}
-	
-	
+
+
 	function print_filter_user_monitor(){
 		global $t_select_modifier, $t_filter;
 		?>
@@ -2068,17 +2076,17 @@
 			<option value="[any]" <?php check_selected( $t_filter['handler_id'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<option value="[none]" <?php check_selected( $t_filter['handler_id'], '[none]' ); ?>>[<?php echo lang_get( 'none' ) ?>]</option>
 			<?php
-				if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { 
+				if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
 					check_selected( $t_filter['handler_id'], META_FILTER_MYSELF );
 					PRINT '>[' . lang_get( 'myself' ) . ']</option>';
-				} 
+				}
 			?>
 			<?php print_assign_to_option_list( $t_filter['handler_id'] ) ?>
 		</select>
 		<?php
 	}
-	
+
 	function print_filter_show_category(){
 		global $t_select_modifier, $t_filter;
 		?>
@@ -2091,7 +2099,7 @@
 		</select>
 		<?php
 	}
-	
+
 	function print_filter_show_severity(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Severity -->
@@ -2101,7 +2109,7 @@
 			</select>
 		<?php
 	}
-	
+
 	function print_filter_show_resolution(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Resolution -->
@@ -2111,7 +2119,7 @@
 			</select>
 		<?php
 	}
-	
+
 	function print_filter_show_status(){
 		global $t_select_modifier, $t_filter;
 		?>	<!-- Status -->
@@ -2121,7 +2129,7 @@
 			</select>
 		<?php
 	}
-	
+
 	function print_filter_hide_status(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Hide Status -->
@@ -2222,11 +2230,11 @@
 		<?php if ( ! $p_hide_checkbox ) {
 		?>
 		<tr>
-			<input type="checkbox" name="do_filter_by_date" <?php 
-				check_checked( $t_filter['do_filter_by_date'], 'on' ); 
-				if ( ON == config_get( 'use_javascript' ) ) { 
+			<input type="checkbox" name="do_filter_by_date" <?php
+				check_checked( $t_filter['do_filter_by_date'], 'on' );
+				if ( ON == config_get( 'use_javascript' ) ) {
 					print "onclick=\"SwitchDateFields();\""; } ?> />
-			<?php echo lang_get( 'use_date_filters' ) ?>			
+			<?php echo lang_get( 'use_date_filters' ) ?>
 		</tr>
 		<?php }
 		?>
@@ -2295,7 +2303,7 @@
 		global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
 
 		$j = array_search($p_field_id, $t_accessible_custom_fields_ids);
-		if($j === null || $j === false){ 
+		if($j === null || $j === false){
 			# Note: Prior to PHP 4.2.0, array_search() returns NULL on failure instead of FALSE.
 			?>
 			<span style="color:red;weight:bold;">

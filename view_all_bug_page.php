@@ -6,18 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.58 $
-	# $Author: bpfennigschmidt $
-	# $Date: 2004-12-13 17:03:56 $
+	# $Revision: 1.59 $
+	# $Author: vboctor $
+	# $Date: 2005-01-28 21:58:17 $
 	#
-	# $Id: view_all_bug_page.php,v 1.58 2004-12-13 17:03:56 bpfennigschmidt Exp $
+	# $Id: view_all_bug_page.php,v 1.59 2005-01-28 21:58:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'filter_api.php' );
 ?>
@@ -29,18 +29,19 @@
 	$t_bug_count = null;
 	$t_page_count = null;
 
+	# @@@ It should be possible to have more sticky pages than the number of issues per page.
 	if ( 1 == $f_page_number ) {
 		$sticky_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
 		if ( $sticky_rows === false ) {
 			print_header_redirect( 'view_all_set.php?type=0' );
 		}
 	}
-	
+
 	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	if ( $rows === false ) {
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
-	
+
 	$t_bugslist = Array();
 	for($i=0; $i < sizeof( $rows ); $i++) {
 		array_push($t_bugslist, $rows[$i]["id"] );

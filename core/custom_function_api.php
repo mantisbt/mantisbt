@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.14 2005-01-25 13:57:28 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.15 2005-01-28 21:58:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -181,8 +181,12 @@
 	# Print the title of a column given its name.
 	# $p_column: custom_xxx for custom field xxx, or otherwise field name as in bug table.
 	function custom_function_default_print_column_title( $p_column, $p_print = false ) {
+		global $t_sort, $t_dir;
+
 		if ( strpos( $p_column, 'custom_' ) === 0 ) {
 			$t_custom_field = substr( $p_column, 7 );
+
+			echo '<td>';
 
 			$t_field_id = custom_field_get_id_from_name( $t_custom_field );
 			if ( $t_field_id === false ) {
@@ -191,11 +195,14 @@
 				$t_def = custom_field_get_definition( $t_field_id );
 				$t_custom_field = lang_get_defaulted( $t_def['name'] );
 
-				echo '<td>', $t_custom_field, '</td>';
+				print_view_bug_sort_link( $t_custom_field, $p_column, $t_sort, $t_dir, $p_print );
+				print_sort_icon( $t_dir, $t_sort, $p_column );
 			}
+
+			echo '</td>';
 		} else {
 			$t_function = 'print_column_title_' . $p_column;
-			$t_function();
+			$t_function( $t_sort, $t_dir, $p_print );
 		}
 	}
 
@@ -216,7 +223,7 @@
 			} else {
 				$t_issue_id = $p_issue_row['id'];
 				$t_project_id = $p_issue_row['project_id'];
-		
+
 				if ( custom_field_is_linked( $t_field_id, $t_project_id ) ) {
 					$t_def = custom_field_get_definition( $t_field_id );
 					print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
@@ -228,7 +235,7 @@
 			echo '</td>';
 		} else {
 			$t_function = 'print_column_' . $p_column;
-			$t_function( $p_issue_row );
+			$t_function( $p_issue_row, $p_print );
 		}
 	}
 
