@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.24 2003-04-23 23:00:28 jfitzell Exp $
+	# $Id: error_api.php,v 1.25 2003-04-23 23:03:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -112,13 +112,6 @@
 			}
 			echo '</p></td></tr>';
 			
-			# @@@ temp until we get parameterized errors
-			echo '<tr><td>';
-			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
-				echo $g_error_parameters[$i].'<br />';
-			}
-			echo '</td></tr>';
-
 			if ( ON == config_get( 'show_detailed_errors' ) ) {
 				echo '<tr><td>';
 				error_print_details( $p_file, $p_line, $p_context );
@@ -141,10 +134,6 @@
 			exit();
 		} else if ( 'inline' == $t_method ) {
 			echo "<p style=\"color:red\">$t_error_type: $t_error_description</p>";
-			# @@@ temp until we get parameterized errors
-			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
-				echo $g_error_parameters[$i].'<br />';
-			}
 		} else {
 			# do nothing
 		}
