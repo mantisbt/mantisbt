@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.134 2004-09-30 20:35:34 thraxisp Exp $
+	# $Id: html_api.php,v 1.135 2004-10-01 16:57:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -689,7 +689,7 @@
 		
 		$t_enum_list = get_status_option_list( $t_current_access, $t_bug_current_state, false, 
 				( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() && ( ON == config_get( 'allow_reporter_close' ) ) ) );
-		
+
 		if ( count( $t_enum_list ) > 0 ) {
 			echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
 
@@ -698,9 +698,7 @@
 
 			echo " <select name=\"new_status\">"; # space at beginning of line is important
 			foreach ( $t_enum_list as $key => $val ) {
-				echo "<option value=\"$key\"";
-				check_selected( $val, $t_bug_current_state );  # select current status which doesn't exist, hence no selection
-				echo ">$val</option>";
+				echo "<option value=\"$key\">$val</option>";
 			}
 			echo '</select>';
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.103 2004-09-27 01:17:59 thraxisp Exp $
+	# $Id: print_api.php,v 1.104 2004-10-01 16:57:49 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -633,8 +633,6 @@
 		if ( ( true == $p_add_close ) && ( $p_current_value >= config_get( 'bug_resolved_status_threshold' ) ) ) {
 				$t_enum_list[CLOSED] = get_enum_element( 'status', CLOSED );
 			}
-		ksort( $t_enum_list );
-		reset ( $t_enum_list );
 		return $t_enum_list;
 	}
 	# --------------------
