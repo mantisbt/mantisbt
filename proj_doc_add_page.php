@@ -46,7 +46,6 @@
 		<?php echo $s_select_file ?>
 	</td>
 	<td>
-		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 		<input type="hidden" name="max_file_size" value="<?php echo $g_max_file_size ?>">
 		<input name="f_file" type="file" size="70">
 	</td>
