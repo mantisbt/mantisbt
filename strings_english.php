@@ -48,6 +48,7 @@
 	$s_default_account_preferences_title = "Default Account Preferences";
 	$s_advanced_report = "Advanced Report";
 	$s_advanced_view = "Advanced View";
+	$s_default_project = "Default Project";
 	$s_update_prefs_button = "Update Prefs";
 	$s_reset_prefs_button = "Reset Prefs";
 
@@ -223,6 +224,7 @@
 	### $s_username # defined above
 	### $s_password # defined above
 	### $s_save_login # defined above
+	$s_choose_project = "Choose Project";
 	### $s_login_button # defined above
 	$s_signup_link = "signup for a new account";
 

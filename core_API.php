@@ -170,16 +170,16 @@
 		$t_username = get_current_user_field( "username" );
 		$t_now = date($g_complete_date_format);
 		PRINT "<table width=100%><tr>";
-		PRINT "<td align=left width=25%>";
+		PRINT "<td align=left width=33%>";
 			PRINT "$s_logged_in_as: <i>$t_username</i>";
 		PRINT "</td>";
-		PRINT "<td align=center width=50%>";
+		PRINT "<td align=center width=34%>";
 			PRINT "<i>$t_now</i>";
 		PRINT "</td>";
-		PRINT "<td align=right width=25%>";
+		PRINT "<td align=right width=33%>";
 			PRINT "<form method=post action=$g_set_project>";
 			PRINT "<select name=f_project_id>";
-				print_projects_option_list( $g_project_cookie_val );
+				print_project_option_list( $g_project_cookie_val );
 			PRINT "</select>";
 			PRINT "<input type=submit value=\"$s_switch\">";
 		PRINT "</td>";
@@ -442,7 +442,7 @@
 		} ### end for
 	}
 	### --------------------
-	function print_projects_option_list( $p_project_id="" ) {
+	function print_project_option_list( $p_project_id="" ) {
 		global $g_mantis_project_table,
 				$g_project_cookie_val;
 

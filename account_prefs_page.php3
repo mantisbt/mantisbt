@@ -83,6 +83,17 @@
 			<input type=checkbox name=f_advanced_view <? if ( $u_advanced_view=="on" ) echo "CHECKED"?>
 		</td>
 	</tr>
+	<tr bgcolor=<? echo $g_primary_color_light ?>>
+		<td>
+			<? echo $s_default_project ?>
+		</td>
+		<td>
+			<select name=f_project_id>
+				<option value="0000000">
+				<? print_project_option_list( $u_default_project_id  ) ?>
+			</select>
+		</td>
+	</tr>
 	<tr align=center>
 		<td>
 			<input type=submit value="<? echo $s_update_prefs_button ?>">

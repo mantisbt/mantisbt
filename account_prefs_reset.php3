@@ -12,7 +12,8 @@
 	## reset to defaults
 	$query = "UPDATE $g_mantis_user_pref_table
 			SET advanced_report='$g_default_advanced_report',
-				advanced_view='$g_default_advanced_view'
+				advanced_view='$g_default_advanced_view',
+				default_project_id=''
 			WHERE id='$f_id'";
 	$result = db_query( $query );
 ?>

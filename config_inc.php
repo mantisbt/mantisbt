@@ -162,10 +162,6 @@
 	$g_view_reported_cookie_val       = $HTTP_COOKIE_VARS[$g_view_reported_cookie];
 	$g_view_assigned_cookie_val       = $HTTP_COOKIE_VARS[$g_view_assigned_cookie];
 	#--------------------
-	if ( empty( $g_project_cookie_val ) ) {
-		$g_project_cookie_val = "0000000";
-	}
-	#--------------------
 
 	#--------------------
 	# database table names
