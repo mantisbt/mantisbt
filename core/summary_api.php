@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.21 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: summary_api.php,v 1.22 2004-03-24 00:30:28 narcissus Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -109,7 +109,7 @@
 
 		$query = "SELECT COUNT(*)
 				FROM $t_mantis_bug_table
-				WHERE ".db_helper_compare_days("date_submitted",db_now(),"<= '$c_time_length'")." AND $specific_where";
+				WHERE ".db_helper_compare_days(db_now(),"date_submitted","<= '$c_time_length'")." AND $specific_where";
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}

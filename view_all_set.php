@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.21 2004-03-18 23:40:35 narcissus Exp $
+	# $Id: view_all_set.php,v 1.22 2004-03-24 00:30:29 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -178,7 +178,7 @@
 				$t_setting_arr['show_status'] = $f_show_status;
 				$t_setting_arr['per_page'] = $f_per_page;
 				$t_setting_arr['highlight_changed'] = $t_default_show_changed;
-				$t_setting_arr['hide_closed'] = $t_hide_closed_default;
+				$t_setting_arr['hide_closed'] = $f_hide_closed;
 				$t_setting_arr['reporter_id'] = $f_reporter_id;
 				$t_setting_arr['handler_id'] = $f_handler_id;
 				$t_setting_arr['sort'] = $f_sort;
