@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.28 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: error_api.php,v 1.29 2004-02-29 03:59:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -176,7 +176,15 @@
 		# print normal variables
 		foreach ( $p_context as $t_var => $t_val ) {
 			if ( !is_array( $t_val ) && !is_object( $t_val ) ) {
-				echo "<tr><td>$t_var</td><td>" . htmlentities( (string)$t_val ) . '</td><td>' . gettype( $t_val ) . "</td></tr>\n";
+				$t_val = htmlentities( (string)$t_val );
+				$t_type = gettype( $t_val );
+
+				# Mask Passwords
+				if ( strpos( $t_var, 'password' ) !== false ) {
+					$t_val = '**********';
+				}
+
+				echo "<tr><td>$t_var</td><td>$t_val</td><td>$t_type</td></tr>\n";
 			}
 		}
 
