@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.55 2003-03-09 03:08:59 jfitzell Exp $
+	# $Id: user_api.php,v 1.56 2003-03-12 07:56:12 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -395,8 +395,8 @@
 	# --------------------
 	# return the specified user field for the user id
 	function user_get_field( $p_user_id, $p_field_name ) {
-		if ( 0 == $p_user_id ) {
-			trigger_error( 'user-id of 0', WARNING );
+		if ( NO_USER == $p_user_id ) {
+			trigger_error( 'user_get_field() for NO_USER', WARNING );
 			return "@null@";
 		}
 

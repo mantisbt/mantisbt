@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.5 2003-03-09 03:08:58 jfitzell Exp $
+	# $Id: constant_inc.php,v 1.6 2003-03-12 07:56:12 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -113,6 +113,9 @@
 
 	# all projects
 	define( 'ALL_PROJECTS',	0 );
+
+	# no user
+	define( 'NO_USER',		0 );
 
 	# history constants
 	define( 'NORMAL_TYPE',					0 );

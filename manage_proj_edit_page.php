@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.68 2003-03-03 23:29:28 int2str Exp $
+	# $Id: manage_proj_edit_page.php,v 1.69 2003-03-12 07:56:10 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -177,7 +177,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	foreach ( $t_categories as $t_category ) {
 		$t_name = $t_category['category'];
 
-		if ( $t_category['user_id'] != 0  && user_exists( $t_category['user_id'] )) {
+		if ( NO_USER != $t_category['user_id'] && user_exists( $t_category['user_id'] )) {
 			$t_user_name = user_get_name( $t_category['user_id'] );
 		} else {
 			$t_user_name = '';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.40 2003-03-09 03:08:58 jfitzell Exp $
+	# $Id: bug_api.php,v 1.41 2003-03-12 07:56:12 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -760,7 +760,8 @@
 		$h_status		= bug_get_field( $p_bug_id, 'status' );
 		$h_handler_id	= bug_get_field( $p_bug_id, 'handler_id' );
 
-		if ( ON == config_get( 'auto_set_status_to_assigned' ) ) {
+		if ( ON == config_get( 'auto_set_status_to_assigned' ) &&
+			 NO_USER != $p_user_id ) {
 			$t_ass_val = ASSIGNED;
 		} else {
 			$t_ass_val = $h_status;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.60 2003-03-09 03:08:58 jfitzell Exp $
+	# $Id: print_api.php,v 1.61 2003-03-12 07:56:12 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -99,8 +99,8 @@
 	# --------------------
 	# prints the name of the user given the id.  also makes it an email link.
 	function print_user( $p_user_id ) {
-		# Catch a user_id of 0 (like when a handler hasn't been assigned)
-		if ( 0 == $p_user_id ) {
+		# Catch a user_id of NO_USER (like when a handler hasn't been assigned)
+		if ( NO_USER == $p_user_id ) {
 			return;
 		}
 
@@ -121,7 +121,7 @@
 	function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		$c_user_id = db_prepare_int( $p_user_id );
 
-		if ( 0 == $p_user_id ) {
+		if ( NO_USER == $p_user_id ) {
 			return;
 		}
 		
