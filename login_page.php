@@ -40,6 +40,9 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="<?php echo $g_login ?>">
+		<?php	if (isset($f_return)) { ?>
+		<input type="hidden" name="f_return" value="<?php echo htmlentities($f_return) ?>">
+		<?php	} ?>
 		<?php	if (isset($f_project_id)) { ?>
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
 		<?php } ?>

@@ -72,9 +72,13 @@
 		# invalid login
 		$login_result = 0;
 	}
-	# goto main_page or back to login_page
+	# goto $f_return, main_page or back to login_page
 	if ( $t_project_id > -1 ) {
-		$t_redirect_url = $g_main_page;
+		if ( !empty($f_return) ) {
+			$t_redirect_url = $f_return;
+		} else {
+			$t_redirect_url = $g_main_page;
+		}
 	} else if ( $login_result ) {
 		if ( isset($f_project_id) ) {
 			$t_redirect_url = $g_set_project.'?f_project_id='.$f_project_id;
@@ -93,7 +97,12 @@
 <?php
 	# goto main_page or back to login_page
 	if ( $t_project_id > 0 ) {
-		print_meta_redirect( $g_main_page, 0 );
+		if ( !empty($f_return) ) {
+			$t_redirect_url = $f_return;
+		} else {
+			$t_redirect_url = $g_main_page;
+		}
+		print_meta_redirect( $t_redirect_url, 0 );
 	} else if ( $login_result ) {
 		if ( isset($f_project_id) ) {
 			print_meta_redirect( $g_set_project.'?f_project_id='.$f_project_id, 0 );

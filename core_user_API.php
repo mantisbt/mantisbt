@@ -12,11 +12,11 @@
 	# if the user is and the account is enabled then let them pass
 	# otherwise redirect them to the login page
 	# if $p_redirect_url is specifed then redirect them to that page
-	function login_cookie_check( $p_redirect_url='' ) {
+	function login_cookie_check( $p_redirect_url='', $p_return_page='' ) {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
 				$g_login_page, $g_logout_page, $g_login_select_proj_page,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
-				$g_mantis_user_table;
+				$g_mantis_user_table, $REQUEST_URI;
 
 		# if logged in
 		if ( !empty( $g_string_cookie_val ) ) {
@@ -24,7 +24,7 @@
 
 			# get user info
 			$t_enabled = get_current_user_field( 'enabled' );
-			# check for acess enabled
+			# check for access enabled
 			if ( OFF == $t_enabled ) {
 				print_header_redirect( $g_logout_page );
 			}
@@ -47,7 +47,11 @@
 				return;
 			}
 		} else {				# not logged in
-			print_header_redirect( $g_login_page );
+			if ( empty ( $p_return_page ) ) {
+				$p_return_page = $REQUEST_URI;
+			}
+			$p_return_page = htmlentities(urlencode($p_return_page));
+			print_header_redirect( $g_login_page . '?f_return=' . $p_return_page );
 			exit;
 		}
 	}
