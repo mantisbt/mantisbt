@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.103 2005-01-05 20:57:03 thraxisp Exp $
+	# $Id: email_api.php,v 1.104 2005-01-05 23:31:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -323,8 +323,8 @@
 		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
 		$t_message = lang_get( 'new_account_greeting' ) . $t_username .
-						lang_get( 'new_account_greeting2' ) . "\n\n" .
-						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" .
+						lang_get( 'new_account_greeting2' ) . " \n\n" .
+						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" .
 						lang_get( 'new_account_message' ) .
 						lang_get( 'new_account_do_not_reply' );
 
@@ -353,10 +353,10 @@
 
 		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'lost_password_subject' );
 
-		$t_message = lang_get( 'reset_request_msg' ) . "\n\n" .
-						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . "\n\n" .
-						lang_get( 'new_account_username' ) . $t_username . "\n" .
-						lang_get( 'new_account_IP' ) . $_SERVER["REMOTE_ADDR"] . "\n\n" .
+		$t_message = lang_get( 'reset_request_msg' ) . " \n\n" .
+						string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) . " \n\n" .
+						lang_get( 'new_account_username' ) . $t_username . " \n" .
+						lang_get( 'new_account_IP' ) . $_SERVER["REMOTE_ADDR"] . " \n\n" .
 						lang_get( 'new_account_do_not_reply' );
 
 		# Send password reset regardless of mail notification prefs
@@ -382,10 +382,10 @@
 			$t_recipient_email = user_get_email( $t_user['id'] );
 			$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
-			$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" .
-						lang_get( 'new_account_username' ) . $p_username . "\n" .
-						lang_get( 'new_account_email' ) . $p_email . "\n" .
-						lang_get( 'new_account_IP' ) . $_SERVER["REMOTE_ADDR"] . "\n" .
+			$t_message = lang_get( 'new_account_signup_msg' ) . " \n\n" .
+						lang_get( 'new_account_username' ) . $p_username . " \n" .
+						lang_get( 'new_account_email' ) . $p_email . " \n" .
+						lang_get( 'new_account_IP' ) . $_SERVER["REMOTE_ADDR"] . " \n" .
 						$g_path . "\n\n" .
 						lang_get( 'new_account_do_not_reply' );
 
@@ -792,13 +792,13 @@
 						current_user_get_field( 'email' ) . '>' ;
 			$t_date = date( config_get( 'normal_date_format' ) );
 			$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender " .
-						lang_get( 'sent_you_this_reminder_about' ) . ":\n\n";
+						lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
 
 			$t_email = user_get_email( $t_recipient );
 			$result[] = user_get_name( $t_recipient );
 			$t_contents = $t_header .
 							string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) .
-							"\n\n$p_message";
+							" \n\n$p_message";
 
 			if( ON == config_get( 'enable_email_notification' ) ) {
 				email_send( $t_email, $t_subject, $t_contents );
@@ -835,11 +835,11 @@
 		$t_message = lang_get_defaulted( $p_message_id, null );
 
 		if ( is_array( $p_header_optional_params ) ) {
-			$t_message = vsprintf( $t_message, $p_header_optional_params );
+			$t_message .= vsprintf( $t_message, $p_header_optional_params );
 		}
 
 		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
-			$t_message .= "\n";
+			$t_message .= " \n";
 		}
 
 		$t_message .= email_format_bug_message(  $p_visible_bug_data );
@@ -874,16 +874,16 @@
 		$p_visible_bug_data['email_priority'] = get_enum_element( 'priority', $p_visible_bug_data['email_priority'] );
 		$p_visible_bug_data['email_reproducibility'] = get_enum_element( 'reproducibility', $p_visible_bug_data['email_reproducibility'] );
 
-		$t_message = $t_email_separator1."\n";
+		$t_message = $t_email_separator1 . " \n";
 
 		if ( isset( $p_visible_bug_data['email_bug_view_url'] ) ) {
-			$t_message .= '<' . $p_visible_bug_data['email_bug_view_url'] . "> \n";
-			$t_message .= $t_email_separator1."\n";
+			$t_message .= $p_visible_bug_data['email_bug_view_url'] . " \n";
+			$t_message .= $t_email_separator1 . " \n";
 		}
 
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reporter' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_handler' );
-		$t_message .= $t_email_separator1."\n";
+		$t_message .= $t_email_separator1 . " \n";
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_project' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_bug' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_category' );
@@ -896,7 +896,7 @@
 		foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
 			$t_message .= str_pad( lang_get_defaulted( $t_custom_field_name, null ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
 			$t_message .= string_custom_field_value_for_email ( $t_custom_field_data['value'], $t_custom_field_data['type'] );
-			$t_message .= "\n";
+			$t_message .= " \n";
 		} # end foreach custom field
 
 		if ( config_get( 'bug_resolved_status_threshold' ) <= $t_status ) {
@@ -905,11 +905,11 @@
 			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_duplicate' );
 			$t_message .= email_format_attribute( $p_visible_bug_data, 'email_fixed_in_version' );
 		}
-		$t_message .= $t_email_separator1."\n";
+		$t_message .= $t_email_separator1 . " \n";
 
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_date_submitted' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_last_modified' );
-		$t_message .= $t_email_separator1."\n";
+		$t_message .= $t_email_separator1 . " \n";
 
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
 
@@ -925,7 +925,7 @@
 
 		# Sponsorship
 		if ( isset( $p_visible_bug_data['sponsorship_total'] ) && ( $p_visible_bug_data['sponsorship_total'] > 0 ) ) {
-			$t_message .= $t_email_separator1."\n";
+			$t_message .= $t_email_separator1 . " \n";
 			$t_message .= sprintf( lang_get( 'total_sponsorship_amount' ), sponsorship_format_amount( $p_visible_bug_data['sponsorship_total'] ) ) . "\n" . "\n";
 
 			if ( isset( $p_visible_bug_data['sponsorships'] ) ) {
@@ -934,33 +934,33 @@
 
 					$t_message .= $t_date_added . ': ';
 					$t_message .= user_get_name( $t_sponsorship->user_id );
-					$t_message .= ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')' . "\n";
+					$t_message .= ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')' . " \n";
 				}
 			}
 		}
 
-		$t_message .= $t_email_separator1."\n\n";
+		$t_message .= $t_email_separator1 . " \n\n";
 
 		# format bugnotes
 		foreach ( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
 			$t_last_modified = date( $t_normal_date_format, $t_bugnote->last_modified );
 			$t_string = ' '.$t_bugnote->reporter_name.' - '.$t_last_modified.' ';
 
-			$t_message .= $t_email_separator2."\n";
-			$t_message .= $t_string."\n";
-			$t_message .= $t_email_separator2."\n";
-			$t_message .= wordwrap( $t_bugnote->note )."\n\n";
+			$t_message .= $t_email_separator2 . " \n";
+			$t_message .= $t_string . " \n";
+			$t_message .= $t_email_separator2 . " \n";
+			$t_message .= wordwrap( $t_bugnote->note ) . " \n\n";
 		}
 
 		# format history
 		if ( array_key_exists( 'history', $p_visible_bug_data ) ) {
-			$t_message .=	lang_get( 'bug_history' ) . "\n";
+			$t_message .=	lang_get( 'bug_history' ) . " \n";
 			$t_message .=	str_pad( lang_get( 'date_modified' ), 15 ) .
 							str_pad( lang_get( 'username' ), 15 ) .
 							str_pad( lang_get( 'field' ), 25 ) .
-							str_pad( lang_get( 'change' ), 20 ). "\n";
+							str_pad( lang_get( 'change' ), 20 ). " \n";
 
-			$t_message .= $t_email_separator1."\n";
+			$t_message .= $t_email_separator1 . " \n";
 
 			foreach ( $p_visible_bug_data['history'] as $t_raw_history_item ) {
 				$t_localized_item = history_localize_item(	$t_raw_history_item['field'],
@@ -971,9 +971,9 @@
 				$t_message .=	str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 15 ) .
 								str_pad( $t_raw_history_item['username'], 15 ) .
 								str_pad( $t_localized_item['note'], 25 ) .
-								str_pad( $t_localized_item['change'], 20 ). "\n";
+								str_pad( $t_localized_item['change'], 20 ) . "\n";
 			}
-			$t_message .= $t_email_separator1."\n\n";
+			$t_message .= $t_email_separator1 . " \n\n";
 		}
 
 		return $t_message;
