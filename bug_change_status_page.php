@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.11 2004-11-22 13:25:45 vboctor Exp $
+	# $Id: bug_change_status_page.php,v 1.12 2004-12-01 13:20:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,7 +24,7 @@
 	$f_new_status = gpc_get_int( 'new_status' );
 
 	if ( ! ( ( access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ||
-				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) && 
+				( ( bug_get_field( $f_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
 						( ( ON == config_get( 'allow_reporter_reopen' ) ) ||
 								( ON == config_get( 'allow_reporter_close' ) ) ) ) ) ) {
 		access_denied();
@@ -32,7 +32,7 @@
 
 	$t_status_label = str_replace( " ", "_", get_enum_to_string( config_get( 'status_enum_string' ), $f_new_status ) );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	
+
 	$t_bug = bug_get( $f_bug_id );
 ?>
 <?php html_page_top1(bug_format_summary( $f_bug_id, SUMMARY_CAPTION )) ?>
@@ -155,11 +155,11 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 
 <?php
-if (  $f_new_status >= $t_resolved ) { 
-	$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
-		|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+if (  $f_new_status >= $t_resolved ) {
+	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+		|| ( ( AUTO == config_get( 'show_product_version' ) )
 					&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
-	if ( $t_show_version ) { 
+	if ( $t_show_version ) {
 ?>
 <!-- Fixed in Version -->
 <tr <?php echo helper_alternate_class() ?>>
@@ -173,11 +173,11 @@ if (  $f_new_status >= $t_resolved ) {
 		</select>
 	</td>
 </tr>
-<?php } 
+<?php }
 	} ?>
 
 <?php
-if ( $f_new_status >= $t_resolved ) { ?>
+if ( ( $f_new_status >= $t_resolved ) && ( CLOSED > $f_new_status ) ) { ?>
 <!-- Close Immediately (if enabled) -->
 <?php if ( ( ON == config_get( 'allow_close_immediately' ) )
 				&& ( access_has_bug_level( access_get_status_threshold( CLOSED ), $f_bug_id ) ) ) { ?>
@@ -193,7 +193,7 @@ if ( $f_new_status >= $t_resolved ) { ?>
 <?php } ?>
 
 <?php
-	if ( ( bug_get_field( $f_bug_id, 'status' ) == $t_resolved ) 
+	if ( ( bug_get_field( $f_bug_id, 'status' ) == $t_resolved )
 			&& ( $f_new_status == config_get( 'bug_reopen_status' ) ) ) {
 		# bug was re-opened
 		printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
