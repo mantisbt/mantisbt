@@ -9,10 +9,11 @@
 	###########################################################################
 
 	ini_set("magic_quotes_runtime", 0);
-	extract( $HTTP_POST_VARS );
-	extract( $HTTP_GET_VARS );
-	extract( $HTTP_SERVER_VARS );
-	extract( $HTTP_POST_FILES );
+	if ( OFF == $g_register_globals ) {
+		extract( $HTTP_POST_VARS );
+		extract( $HTTP_GET_VARS );
+		extract( $HTTP_SERVER_VARS );
+	}
 	/*foreach ( $HTTP_POST_VARS as $key => $value) {
 		$$key = $value;
 	}
