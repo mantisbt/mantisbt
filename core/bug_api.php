@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.70 2004-07-16 23:03:09 vboctor Exp $
+	# $Id: bug_api.php,v 1.71 2004-07-18 00:07:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1108,32 +1108,42 @@
 	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
-		if ( null !== $p_duplicate_id ) {
+		if( !is_blank( $p_duplicate_id ) ) {
 			# MASC RELATIONSHIP
 
 			# the related bug exists...
 			bug_ensure_exists( $p_duplicate_id );
 
-			# @@@ Would be nice if we don't generate an error if the relationship
-			# @@@ is the same as the one we are trying to add.
-			# there is no other relationship between the same bugs...
-			if ( relationship_exists( $p_bug_id, $p_duplicate_id ) ) {
-				trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
-			}
+			if( ON == config_get( 'enable_relationship' ) ) {
+				$t_relationship_id = relationship_exists( $p_bug_id, $p_duplicate_id );
+				if( $t_relationship_id > 0 ) {
+					# there is already a relationship between the bugs... we check if it's of the right type (otherwise error)
 
-			# user can access to the related bug at least as viewer...
-			if ( !access_has_bug_level( VIEWER, $p_duplicate_id ) ) {
-				error_parameters( $p_duplicate_id );
-				trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
-			}
+					$t_relationship = relationship_get( $t_relationship_id );
+					if( $t_relationship != null ) {
+						if( ( $t_relationship->type != BUG_DUPLICATE ) && ( $t_relationship->type != BUG_HAS_DUPLICATE )) {
+							# the relationship is not duplicates/has duplicated -> error
+							trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
+						}
+					}
 
+				}
+				else {
+					# no relationship found... we add the duplicate relationship
+
+					# user can access to the related bug at least as viewer...
+					if( !access_has_bug_level( VIEWER, $p_duplicate_id ) ) {
+						error_parameters( $p_duplicate_id );
+						trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
+					}
+
+					# Relationship feature active
+					relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
+					history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
+					history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
+				}
+			}
 			bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
-			if ( ON == config_get( 'enable_relationship' ) ) {
-				# Relationship feature active
-				relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
-				history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
-				history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-			}
 			# MASC RELATIONSHIP
 		}
 

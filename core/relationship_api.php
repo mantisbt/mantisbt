@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.11 2004-07-16 23:03:09 vboctor Exp $
+	# $Id: relationship_api.php,v 1.12 2004-07-18 00:07:44 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -90,8 +90,8 @@
 	}
 
 	# --------------------
-	function relationship_update( $p_relation_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
-		$c_relation_id = db_prepare_int( $p_relation_id );
+	function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
+		$c_relationship_id = db_prepare_int( $p_relationship_id );
 		$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 		$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
 		$c_relationship_type = db_prepare_int( $p_relationship_type );
@@ -102,7 +102,7 @@
 				SET source_bug_id='$c_src_bug_id',
 					destination_bug_id='$c_dest_bug_id',
 					relationship_type='$c_relationship_type'
-				WHERE id='$c_relation_id'";
+				WHERE id='$c_relationship_id'";
 		$result = db_query( $query );
 		$t_relationship = db_fetch_array( $result );
 
@@ -116,13 +116,13 @@
 	}
 
 	# --------------------
-	function relationship_delete( $p_relation_id ) {
-		$c_relation_id = db_prepare_int( $p_relation_id );
+	function relationship_delete( $p_relationship_id ) {
+		$c_relationship_id = db_prepare_int( $p_relationship_id );
 
 		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
 		$query = "DELETE FROM $t_mantis_bug_relationship_table
-				WHERE id='$c_relation_id'";
+				WHERE id='$c_relationship_id'";
 		$result = db_query( $query );
 	}
 
@@ -163,22 +163,30 @@
 	}
 
 	# --------------------
-	function relationship_get( $p_relation_id ) {
-		$c_relation_id = db_prepare_int( $p_relation_id );
+	function relationship_get( $p_relationship_id ) {
+		$c_relationship_id = db_prepare_int( $p_relationship_id );
 
 		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
 		$query = "SELECT *
 				FROM $t_mantis_bug_relationship_table
-				WHERE id='$c_relation_id'";
+				WHERE id='$c_relationship_id'";
 		$result = db_query( $query, 1 );
-		$t_relationship = db_fetch_array( $result );
 
-		$t_bug_relationship_data = new BugRelationshipData;
-		$t_bug_relationship_data->id = $t_relationship['id'];
-		$t_bug_relationship_data->src_bug_id = $t_relationship['source_bug_id'];
-		$t_bug_relationship_data->dest_bug_id = $t_relationship['destination_bug_id'];
-		$t_bug_relationship_data->type = $t_relationship['relationship_type'];
+		$t_relationship_count = db_num_rows( $result );
+
+		if ( $t_relationship_count == 1 ) {
+			$t_relationship = db_fetch_array( $result );
+
+			$t_bug_relationship_data = new BugRelationshipData;
+			$t_bug_relationship_data->id = $t_relationship['id'];
+			$t_bug_relationship_data->src_bug_id = $t_relationship['source_bug_id'];
+			$t_bug_relationship_data->dest_bug_id = $t_relationship['destination_bug_id'];
+			$t_bug_relationship_data->type = $t_relationship['relationship_type'];
+		}
+		else {
+			$t_bug_relationship_data = null;
+		}
 
 		return $t_bug_relationship_data;
 	}
@@ -237,6 +245,7 @@
 
 	# --------------------
 	# check if there is a relationship between two bugs
+	# return id if found 0 otherwise
 	function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 		$c_src_bug_id = db_prepare_int( $p_src_bug_id );
 		$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
@@ -251,10 +260,19 @@
 				OR
 				(source_bug_id='$c_dest_bug_id'
 				AND destination_bug_id='$c_src_bug_id')";
-		$t_result = db_query( $t_query );
+		$result = db_query( $t_query, 1 );
 
-		# TRUE if the bugs are already related
-		return (db_num_rows( $t_result ) > 0);
+		$t_relationship_count = db_num_rows( $result );
+
+		if ( $t_relationship_count == 1 ) {
+			# return the first id
+			$row = db_fetch_array( $result );
+			return $row['id'];
+		}
+		else {
+			# no relationship found
+			return 0;
+		}
 	}
 
 	# --------------------

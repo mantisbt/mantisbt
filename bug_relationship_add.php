@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_add.php,v 1.1 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: bug_relationship_add.php,v 1.2 2004-07-18 00:07:44 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,7 +52,7 @@
 	}
 
 	# there is no other relationship between the same bugs...
-	if ( relationship_exists($f_src_bug_id, $f_dest_bug_id) ) {
+	if ( relationship_exists($f_src_bug_id, $f_dest_bug_id) > 0 ) {
 		trigger_error( ERROR_RELATIONSHIP_ALREADY_EXISTS, ERROR );
 	}
 
