@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.13 2002-11-10 23:29:02 jfitzell Exp $
+	# $Id: string_api.php,v 1.14 2002-11-30 21:11:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -145,12 +145,16 @@
 		}
 
 		if ( $p_include_anchor ) {
-			$t_replace_with = ' <a href="'.$t_page_name.'?f_bug_id=\\2">#\\2</a>';
+			$t_replace_with = <<< EOT
+' <a href="$t_page_name?f_bug_id=\\2" title="' .
+bug_get_field( \\2, 'summary' ) .
+'">#\\2</a>'
+EOT;
 		} else {
 			$t_replace_with = $t_path.$t_page_name.'?f_bug_id=\\2';
 		}
 		
-		return preg_replace('/(\W|^)' . $t_tag . '([0-9]+)/',
+		return preg_replace('/(\W|^)' . $t_tag . '([0-9]+)/e',
 								$t_replace_with,
 								$p_string);
 	}
