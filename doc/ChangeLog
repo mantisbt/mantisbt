@@ -47,25 +47,19 @@ Mantis ChangeLog
  * Added view_state to news.  News can now be made private.
  * Added word2k and excel export in print_all_bug_page.php. Users can choose the bugs to display/print, and the fields to export with the 'Printing Options' link.
  * Administrators can now modify the preferences for all users that are not protected.  Protected users need to be unprotected first.
- * Closed a security problem with print_all_bug_page.php which allowed reporters to see bug summaries of bugs they hadn't reported.
- * Database upgrade scripts can no longer be applied on an already upgraded database, either by accident or by a malicious user. It might still run for people who upgrade their database manually and partially (i.e. CVS users).
  * Early 2002, an extraordinary thing happened. While Kenzaburo Ito had been maintaining Mantis mostly on his own for years, suddenly others started to help with the development. To reflect/celebrate that, copyright on Mantis for the years 2002 and onward is transferred to the 'Mantis Group', consisting of all of Mantis' developers. All files have had their copyright notices changed to reflect this.
  * Enhanced the admin_upgrade.php script, and supported auto-generation of SQL files.
  * Fixed defects with updating project categories and versions.
  * Fixed problem deleting bugnotes.
  * Fixed problem in core_API.php where constants were used before declaration
  * Fixed problem in core_email_API.php where an email could be send to noone at all, in rare cases.
- * Fixed problem in core_user_API.php which caused an infinite redirect in some browsers (such as Mozilla).
  * Fixed problem in manage_proj_update.php which gave a warning when editing projects with empty upload file paths.
  * Fixed problem with ambiguous column names in queries when using the text search or applying filters
  * Fixed problem with print_assign_to_option_list() not selecting the current user.
- * Fixed security hole in config_defaults_inc.php (reported by Andrew Johnson)
- * Fixed security hole in summary_graph_functions.php (Joao Gouveia: tharbad@kaotik.org)
  * Improved the behaviour of sorting the tables of users and projects in 'Manage'.
  * In the view bugs, when all projects is selected the project name is now displayed in smaller font over the category.
  * Made 'light grey' the default color for 'closed'.
  * Made 'normal' default priority for new bugs.
- * Made it impossible to (ab)use the admin_check.php script to send spam/email to anyone except the server administrator.
  * Mantis will now warn the user if his browser does not support cookies, either because it's too old or because it was disabled.
  * Merged default/config_inc1.php and default/config_inc2.php in config_defaults_inc.php
  * Modified & in URLs &amp; to conform with standards.
@@ -93,6 +87,17 @@ Mantis ChangeLog
  * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
  * Added the ability to enter a bugnote when you update a bug
  * Added core_bugnote_API.php
+
+2002.08.18  -  0.17.4
+ * This is a maintenance release. It patches up several vulnerabilities in 0.17.3. No features have been added.
+ * Fixed a problem in config_inc2.php, which would allow a malicious user to execute arbitrary code and view any local file available to the webserver-user.
+ * Fixed a problem in summary_graph_functions.php, which just allowed a malicious user to execute arbitrary code.
+ * Fixed a problem in print_all_bug_page.php, which allowed reporters to see bugs they hadn't reported, even when $g_limit_reporters is set to ON.
+ * Fixed a problem in view_all_bug_page.php, which allowed any user to see the summaries of public bugs in private projects, by manipulation of the project cookie.
+ * Modified admin_check.php to prevent use by spammers.
+ * Modified the database upgrade script to prevent someone from accidentally or intentionally running the scripts on an updated database.
+ * Fixed a problem in core_user_API.php, which probably caused the infinite-redirect problem in Mozilla/Opera browsers.
+ * Fixed a problem with ambigious columns in view_all_bug_page.php
 
 2002.05.19  -  0.17.3
 
