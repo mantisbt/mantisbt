@@ -15,11 +15,11 @@
 	project_access_check( $f_id );
 
 	# make sure the user accessing the note is valid and has proper access
-	$t_reporter_id = get_bug_field( $f_id, "reporter_id" );
+	$t_bugnote_user_id = get_bugnote_field( $f_bugnote_id, "reporter_id" );
 	$t_user_id = get_current_user_field( "id" );
 	if ( get_bug_field( $f_id, "status" ) < RESOLVED ) {
 		if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
-			( $t_reporter_id == $t_user_id )) {
+			( $t_bugnote_user_id == $t_user_id )) {
 			# do nothing
 		} else {
 			print_header_redirect( $g_logout_page );
