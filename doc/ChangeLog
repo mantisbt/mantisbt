@@ -103,7 +103,7 @@ Mantis ChangeLog
  * New config option (allow_reporter_reopen): allows reporters to reopen closed bugs that they reported if they are unhappy with the resolution (defaults to ON) (see issue #2108)
  * New config option (auto_set_status_to_assigned): automatically set the status to ASSIGNED when an issue is assigned.  Default is ON.
  * New config option (compress_html): optional compression of html output
- * New config option (custom_headers config): contains a list of headers to prepend to each outgoing HTTP response.  This can be used for P3P policy headers among other things (see issue #2649)
+ * New config option (custom_headers): contains a list of headers to prepend to each outgoing HTTP response.  This can be used for P3P policy headers among other things (see issue #2649)
  * New config option (debug_email): allows debugging e-mail messages during development by only sending them to the specified e-mail while including the original to, cc, bcc in the message body (currently supported only when phpmailer is used).
  * New config option (default_notify_flags and notify_flags): these replace $g_notify_developers_on_new, $g_notify_on_new_threshold, and $g_notify_admin_on_new.  The old flags are no longer supported.  The new ones provide full control on who should be notified on each event/action.
  * New config option (delete_bugnote_threshold): the access level required to delete a bug
