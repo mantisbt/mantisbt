@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.84 2003-02-19 06:55:31 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.85 2003-02-19 10:20:05 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -595,6 +595,9 @@
 
 	# Threshold needed to create a new project
 	$g_create_project_threshold = ADMINISTRATOR;
+
+	# Threshold needed to be automatically included in private projects
+	$g_private_project_threshold = ADMINISTRATOR;
 
 	# Threshold needed to manage user access to a project
 	$g_project_user_threshold = MANAGER;

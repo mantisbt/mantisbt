@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.37 2003-02-19 01:37:22 vboctor Exp $
+	# $Id: project_api.php,v 1.38 2003-02-19 10:20:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -410,7 +410,9 @@
 	# --------------------
 	# Return an array of info about users who have access to the the given project
 	# For each user we have 'id', 'username', and 'access_level' (overall access level)
-	function project_get_all_user_rows( $p_project_id ) {
+	# If the second parameter is given, return only users with an access level
+	#  higher than the given value.
+	function project_get_all_user_rows( $p_project_id, $p_access_level=0 ) {
 		$c_project_id	= db_prepare_int( $p_project_id );
 
 		$t_user_table = config_get( 'mantis_user_table' );
@@ -418,14 +420,20 @@
 
 		$t_on = ON;
 
-		if ( PUBLIC == project_get_field( $p_project_id, 'view_state' ) ) {
-			$t_access_clause = '';
-		} else {
+		$t_access_level = $p_access_level;
+
+		if ( PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
 			# @@@ we need to get this logic out somewhere else.
 			#   I was getting access_min from the project but apparently we got
 			#   rid of that in 0.17.2.  The user docs claim developers and higher
 			#   get into private projects but the code seems to only allow administrators in
-			$t_access_clause = 'AND access_level >= ' . ADMINISTRATOR;
+			$t_access_level = max( $t_access_level, config_get( 'private_project_threshold' ) );
+		}
+
+		$t_access_clause = '';
+
+		if ( $t_access_level > 0 ) {
+			$t_access_clause = ' AND access_level >= ' . $t_access_level;
 		}
 
 		$t_users = array();
@@ -455,7 +463,14 @@
 		$t_row_count = db_num_rows( $result );
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
 			$row = db_fetch_array( $result );
-			$t_users[$row['id']] = $row;
+
+			if ( $row['access_level'] >= $p_access_level ) {
+				$t_users[$row['id']] = $row;
+			} else {
+				# If user's overridden level is lower than required, so remove
+				#  them from the list if they were previously there
+				unset( $t_users[$row['id']] );
+			}
 		}
 
 		return multi_sort( array_values($t_users), 'username' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.44 2003-02-19 07:36:28 jfitzell Exp $
+	# $Id: print_api.php,v 1.45 2003-02-19 10:20:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -139,23 +139,32 @@
 	# --------------------
 	# ugly functions  need to be refactored
 	# This populates the reporter option list with the appropriate users
+	#
+	# @@@ This function really ought to print out all the users, I think.
+	#  I just encountered a situation where a project used to be public and
+	#  was made private, so now I can't filter on any of the reporters who
+	#  actually reported the bugs at the time. Maybe we could get all user
+	#  who are listed as the reporter in any bug?  It would probably be a
+	#  faster query actually.
 	function print_reporter_option_list( $p_user_id ) {
-		global	$g_mantis_user_table, $g_mantis_project_user_list_table,
-				$g_mantis_project_table, $g_project_cookie_val;
-
-		$t_adm = ADMINISTRATOR;
-		$t_rep = REPORTER;
-		$t_pub = PUBLIC;
-		$t_prv = PRIVATE;
-		$user_arr = array();
+		$t_users = array();
 
 		# checking if it's per project or all projects
 		# 0 is all projects
-		if ( '0000000' == $g_project_cookie_val ) {
-			$query = "SELECT DISTINCT u.id, u.username, u.email
-					FROM 	$g_mantis_user_table u,
-							$g_mantis_project_user_list_table l,
-							$g_mantis_project_table p
+		if ( 0 == helper_get_current_project() ) {
+			$t_adm = ADMINISTRATOR;
+			$t_rep = config_get( 'report_bug_threshold' );
+			$t_pub = PUBLIC;
+			$t_prv = PRIVATE;
+
+			$t_user_table = config_get( 'mantis_user_table' );
+			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+			$t_project_table = config_get( 'mantis_project_table' );
+
+			$query = "SELECT DISTINCT u.id, u.username
+					FROM 	$t_user_table u,
+							$t_project_user_list_table l,
+							$t_project_table p
 					WHERE	(p.view_state='$t_pub' AND
 							u.access_level>='$t_rep') OR
 							(l.access_level>='$t_rep' AND
@@ -164,77 +173,21 @@
 					ORDER BY u.username";
 			$result = db_query( $query );
 			$user_count = db_num_rows( $result );
-			for ($i=0;$i<$user_count;$i++) {
+			for ( $i=0 ; $i < $user_count ; $i++ ) {
 				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v' );
-				$user_arr[$v_username] = array( $v_username, $v_id );
+				$t_users[] = $row;
 			}
 		} else {
-			$temp_arr = array();
-			# grab the administrators
-			$query = "SELECT id, username
-					FROM $g_mantis_user_table
-					ORDER BY username";
-			$result = db_query( $query );
-			$user_count = db_num_rows( $result );
-			for ($i=0;$i<$user_count;$i++) {
-				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v' );
-				$temp_arr[$v_username] = array( $v_username, $v_id );
-			}
-
-			foreach ( $temp_arr as $key => $val ) {
-				$v_id = $val[1];
-				$v_username = $val[0];
-
-				# always add all administrators
-				$t_access_level = user_get_field( $v_id, 'access_level' );
-				if ( ADMINISTRATOR == $t_access_level ) {
-					$user_arr[$v_username] = array( $v_username, $v_id );
-					continue;
-				}
-
-				# see if users belong
-				$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
-				if ( PUBLIC == $t_project_view_state ) {
-					$query = "SELECT l.access_level
-							FROM	$g_mantis_project_user_list_table
-							WHERE	project_id='$g_project_cookie_val' AND
-									user_id='$v_id'";
-					$result = db_query( $query );
-					$count = db_num_rows( $result );
-					if ( $count > 0 ){
-						$t_access_level = db_result( $result );
-					}
-					if ( $t_access_level >= REPORTER ) {
-						$user_arr[$v_username] = array( $v_username, $v_id );
-					}
-
-				} else {
-					$query = "SELECT COUNT(*)
-							FROM	$g_mantis_project_user_list_table
-							WHERE	project_id='$g_project_cookie_val' AND
-									user_id='$v_id' AND
-									access_level>='$t_rep'";
-					$result = db_query( $query );
-					$count = db_result( $result, 0, 0 );
-					if ( $count > 0 ) {
-						$user_arr[$v_username] = array( $v_username, $v_id );
-						continue;
-					}
-				}
-			}
+			$t_users = project_get_all_user_rows( helper_get_current_project() );
 		}
 
-		asort( $user_arr, SORT_STRING );
-		foreach ( $user_arr as $key => $val ) {
-			$v_id = $val[1];
-			$v_username = $val[0];
-			echo "<option value=\"$v_id\"";
-			check_selected( $v_id, $p_user_id );
-			echo ">$v_username</option>";
-		} # end foreach
+		foreach ( $t_users as $t_user ) {
+			echo '<option value="' . $t_user['id'] . '" ';
+			check_selected( $t_user['id'], $p_user_id );
+			echo '>' . $t_user['username'] . '</option>';
+		}
 	}
+
 	# --------------------
 	function print_duplicate_id_option_list() {
 	    $query = "SELECT id
@@ -305,23 +258,24 @@
 	}
 	# --------------------
 	function print_assign_to_option_list( $p_user_id='' ) {
-		global $g_mantis_user_table, $g_mantis_project_table,
-				$g_mantis_project_user_list_table, $g_project_cookie_val,
-				$g_handle_bug_threshold;
-
-		$t_adm = ADMINISTRATOR;
-		$t_dev = $g_handle_bug_threshold;
-		$t_pub = PUBLIC;
-		$t_prv = PRIVATE;
-		$user_arr = array();
+		$t_users = array();
 
 		# checking if it's per project or all projects
 		# 0 is all projects
-		if ( '0000000' == $g_project_cookie_val ) {
-			$query = "SELECT DISTINCT u.id, u.username, u.email
-					FROM 	$g_mantis_user_table u,
-							$g_mantis_project_user_list_table l,
-							$g_mantis_project_table p
+		if ( 0 == helper_get_current_project() ) {
+			$t_adm = ADMINISTRATOR;
+			$t_dev = config_get( 'handle_bug_threshold' );
+			$t_pub = PUBLIC;
+			$t_prv = PRIVATE;
+
+			$t_user_table = config_get( 'mantis_user_table' );
+			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+			$t_project_table = config_get( 'mantis_project_table' );
+
+			$query = "SELECT DISTINCT u.id, u.username
+					FROM 	$t_user_table u,
+							$t_project_user_list_table l,
+							$t_project_table p
 					WHERE	(p.view_state='$t_pub' AND
 							u.access_level>='$t_dev') OR
 							(l.access_level>='$t_dev' AND
@@ -330,80 +284,22 @@
 					ORDER BY u.username";
 			$result = db_query( $query );
 			$user_count = db_num_rows( $result );
-			for ($i=0;$i<$user_count;$i++) {
+			for ( $i=0 ; $i < $user_count ; $i++ ) {
 				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v' );
-				$user_arr[$v_username] = array( $v_username, $v_id );
+				$t_users[$row['username']] = $row;
 			}
 		} else {
-			$temp_arr = array();
-			# grab the administrators
-			$query = "SELECT id, username
-					FROM $g_mantis_user_table
-					ORDER BY username";
-			$result = db_query( $query );
-			$user_count = db_num_rows( $result );
-			for ($i=0;$i<$user_count;$i++) {
-				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v' );
-				$temp_arr[$v_username] = array( $v_username, $v_id );
-			}
-
-			foreach ( $temp_arr as $key => $val ) {
-				$v_id = $val[1];
-				$v_username = $val[0];
-
-				# always add all administrators
-				$t_access_level = user_get_field( $v_id, 'access_level' );
-				if ( ADMINISTRATOR == $t_access_level ) {
-					$user_arr[$v_username] = array( $v_username, $v_id );
-					continue;
-				}
-
-				# see if users belong
-				$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
-				if ( PUBLIC == $t_project_view_state ) {
-					$query = "SELECT l.access_level
-							FROM	$g_mantis_project_user_list_table l,
-									$g_mantis_project_table p
-							WHERE	l.project_id='$g_project_cookie_val' AND
-									p.id=l.project_id AND
-									l.user_id='$v_id'";
-					$result = db_query( $query );
-					$count = db_num_rows( $result );
-					if ( $count > 0 ){
-						$t_access_level = db_result( $result );
-					}
-					if ( $t_access_level >= $t_dev ) {
-						$user_arr[$v_username] = array( $v_username, $v_id );
-					}
-
-				} else {
-					$query = "SELECT COUNT(*)
-							FROM	$g_mantis_project_user_list_table l,
-									$g_mantis_project_table p
-							WHERE	l.project_id='$g_project_cookie_val' AND
-									p.id=l.project_id AND
-									l.user_id='$v_id' AND
-									l.access_level>='$t_dev'";
-					$result = db_query( $query );
-					$count = db_result( $result, 0, 0 );
-					if ( $count > 0 ) {
-						$user_arr[$v_username] = array( $v_username, $v_id );
-						continue;
-					}
-				}
-			}
+			$t_users = project_get_all_user_rows( helper_get_current_project(),
+												config_get( 'handle_bug_threshold' ) );
 		}
 
-		asort( $user_arr, SORT_STRING );
-		foreach ( $user_arr as $key => $val ) {
+		foreach ( $t_users as $t_user ) {
 			$v_id = $val[1];
 			$v_username = $val[0];
-			echo "<option value=\"$v_id\"";
-			check_selected( $v_id, $p_user_id );
-			echo ">$v_username</option>";
-		} # end foreach
+			echo '<option value="' . $t_user['id'] . '" ';
+			check_selected( $t_user['id'], $p_user_id );
+			echo '>' . $t_user['username'] . '</option>';
+		}
 	}
 	# --------------------
 	# List projects that the current user has access to

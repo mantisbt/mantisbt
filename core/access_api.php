@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.18 2003-02-18 01:41:50 jfitzell Exp $
+	# $Id: access_api.php,v 1.19 2003-02-19 10:20:06 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -40,6 +40,92 @@
 		}
 		print '</center>';
 		exit;
+	}
+
+
+	#===================================
+	# Caching
+	#===================================
+
+	#########################################
+	# SECURITY NOTE: cache globals are initialized here to prevent them
+	#   being spoofed if register_globals is turned on
+	#
+	$g_cache_access_matrix = array();
+	$g_cache_access_matrix_project_ids = array();
+	$g_cache_access_matrix_user_ids = array();
+
+	function access_cache_matrix_project( $p_project_id ) {
+		global $g_cache_access_matrix, $g_cache_access_matrix_project_ids;
+
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		if ( 0 == $c_project_id ) {
+			return array();
+		}
+
+		if ( ! in_array( (int)$p_project_id, $g_cache_access_matrix_project_ids ) ) {
+			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+
+			$query = "SELECT user_id, access_level
+					  FROM $t_project_user_list_table
+					  WHERE project_id='$c_project_id'";
+			$result = db_query( $query );
+
+			$count = db_num_rows( $result );
+
+			for ( $i=0 ; $i < $count ; $i++ ) {
+				$row = db_fetch_array( $result );
+				
+				$g_cache_access_matrix[$row['user_id']][(int)$p_project_id] = $row['access_level'];
+			}
+
+			$g_cache_access_matrix_project_ids[] = (int)$p_project_id;
+		}
+
+		$t_results = array();
+
+		foreach( $g_cache_access_matrix as $t_user ) {
+			if ( isset( $t_user[(int)$p_project_id] ) ) {
+				$t_results[(int)$p_project_id] = $t_user[(int)$p_project_id];
+			}
+		}
+
+		return $t_results;
+	}
+
+	function access_cache_matrix_user( $p_user_id ) {
+		global $g_cache_access_matrix, $g_cache_access_matrix_user_ids;
+
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		if ( ! in_array( (int)$p_user_id, $g_cache_access_matrix_user_ids ) ) {
+			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+
+			$query = "SELECT project_id, access_level
+					  FROM $t_project_user_list_table
+					  WHERE user_id='$c_user_id'";
+			$result = db_query( $query );
+
+			$count = db_num_rows( $result );
+
+			# make sure we always have an array to return
+			$g_cache_access_matrix[(int)$p_user_id] = array();
+
+			for ( $i=0 ; $i < $count ; $i++ ) {
+				$row = db_fetch_array( $result );
+				
+				$g_cache_access_matrix[(int)$p_user_id][$row['project_id']] = $row['access_level'];
+			}
+
+			$g_cache_access_matrix_user_ids[] = (int)$p_user_id;
+		}
+
+		return $g_cache_access_matrix[(int)$p_user_id];
+	}
+
+	function access_cache_matrix() {
+
 	}
 
 	#===================================
@@ -111,8 +197,8 @@
 			return access_has_global_level( $p_access_level );
 		}
 
-		$t_access_level = project_get_local_user_access_level( $p_project_id,
-																auth_get_current_user_id() );
+		$t_access_level = access_get_local_level( auth_get_current_user_id(),
+													$p_project_id );
 		
 		# Try to use the project access level.
 		# If the user is not listed in the project, then try to fall back
@@ -249,6 +335,21 @@
 	function access_ensure_can_reopen_bug( $p_bug_id ) {
 		if ( !access_can_reopen_bug( $p_bug_id ) ) {
 			access_denied();
+		}
+	}
+
+
+	#===================================
+	# Data Access
+	#===================================
+
+	function access_get_local_level( $p_user_id, $p_project_id ) {
+		$t_project_level = access_cache_matrix_user( $p_user_id );
+
+		if ( isset( $t_project_level[$p_project_id] ) ) {
+			return $t_project_level[$p_project_id];
+		} else {
+			return false;
 		}
 	}
 ?>
