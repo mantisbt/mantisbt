@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.17 2002-09-29 23:59:11 prescience Exp $
+	# $Id: html_api.php,v 1.18 2002-10-19 04:11:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -344,7 +344,7 @@
 					if ( "0000000" != $g_project_cookie_val ) {
 						PRINT '<a href="proj_user_menu_page.php">' . lang_get( 'users_link' ) . '</a> | ';
 					} else {
-						PRINT '<a href="login_select_proj_page.php">' . lang_get( 'users_link' ) . '</a> | ';
+						PRINT '<a href="login_select_proj_page.php?ref=proj_user_menu_page.php">' . lang_get( 'users_link' ) . '</a> | ';
 					}
 				}
 
