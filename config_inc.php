@@ -485,7 +485,7 @@
 	#----------------------------------
 	# extensions for php 3 and php 4
 	# set this to php for php4 or whatever your webserver needs
-	$g_php             = ".php3";
+	$g_php             = ".php";
 	#----------------------------------
 
 	#----------------------------------
