@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.93 $
-	# $Author: vboctor $
-	# $Date: 2004-07-07 12:48:57 $
+	# $Revision: 1.94 $
+	# $Author: int2str $
+	# $Date: 2004-07-07 20:31:58 $
 	#
-	# $Id: strings_german.txt,v 1.93 2004-07-07 12:48:57 vboctor Exp $
+	# $Id: strings_german.txt,v 1.94 2004-07-07 20:31:58 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -867,18 +867,18 @@ $s_or_unassigned = 'Oder nicht zugeordnet';
 $s_ok = 'OK';
 
 # stored query strings
-$s_use_query = 'Use Filter';
-$s_delete_query = 'Delete Filter';
-$s_query_deleted = 'Filter Deleted';
-$s_save_query = 'Save Current Filter';
-$s_reset_query = 'Reset Filter';
+$s_use_query = 'Filter benutzen';
+$s_delete_query = 'Filter l&ouml;schen';
+$s_query_deleted = 'Filter gel&ouml;scht';
+$s_save_query = 'Filter speichern';
+$s_reset_query = 'Filter zur&uuml;cksetzen';
 $s_query_name = 'Filter Name';
-$s_query_exists = 'This particular query appears to already exist.';
-$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
-$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
-$s_query_store_error = 'There was an error saving this query.';
-$s_open_queries = 'Manage Filters';
-$s_query_delete_msg = 'Are you sure you wish to delete this query?';
+$s_query_exists = 'Ein Filter mit diesen Optionen existiert bereits.';
+$s_query_dupe_name = 'Ein Filter mit diesem Namen existiert bereits. Bitte geben Sie einen anderen Namen ein.';
+$s_query_blank_name = 'Bitte geben Sie einen Namen f&uuml;r diesen Filter ein.';
+$s_query_store_error = 'Ein Fehler ist beim Speichern des Filters aufgetreten.';
+$s_open_queries = 'Filter verwalten';
+$s_query_delete_msg = 'M&ouml;chten Sie diesen Filter wirklich l&ouml;schen?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'einfache Anzeige';
@@ -950,9 +950,9 @@ $s_filter_closed = 'Geschlossen';
 $s_filter_resolved = 'Gelöst';
 $s_hide_closed = "Geschlossene Reports ausblenden";
 $s_hide_resolved = "Gelöste Reports ausblenden";
-$s_and_above = 'And Above';
-$s_advanced_filters = 'Advanced Filters';
-$s_simple_filters = 'Simple Filters';
+$s_and_above = 'und dar&uuml;ber';
+$s_advanced_filters = 'Erweiterte Filter';
+$s_simple_filters = 'Einfache Filter';
 
 $s_attachments = 'Angehängte Datei(en)';
 $s_attachment_alt = 'D';
@@ -961,11 +961,11 @@ $s_attachment_alt = 'D';
 $s_phpmailer_language = 'de';
 
 # Sponsorship Strings
-$s_sponsors = '%d sponsor(s)';
-$s_sponsorship_added = 'Sponsorship Added';
-$s_sponsorship_updated = 'Sponsorship Updated';
-$s_sponsorship_deleted = 'Sponsorship Deleted';
-$s_sponsorship_more_info = 'More information about sponsorship';
+$s_sponsors = '%d Sponsor(en)';
+$s_sponsorship_added = 'Sponsorship hinzugef&uuml;gt';
+$s_sponsorship_updated = 'Sponsorship aktualisiert';
+$s_sponsorship_deleted = 'Sponsorship gel&ouml;scht';
+$s_sponsorship_more_info = 'Mehr Informationen &uuml;ber die Sponsorship';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
