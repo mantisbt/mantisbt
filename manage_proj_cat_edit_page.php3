@@ -36,7 +36,7 @@
 	<input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
 	<input type="hidden" name="f_orig_category" value="<? echo $f_category ?>">
 	<td class="center" colspan="2">
-		<input type="text" name="f_category" size="32" maxlength="32" value="<? echo urldecode( $f_category ) ?>">
+		<input type="text" name="f_category" size="32" maxlength="64" value="<? echo urldecode( $f_category ) ?>">
 	</td>
 </tr>
 <tr>
