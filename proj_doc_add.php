@@ -44,7 +44,7 @@
 		$f_title 	= db_prepare_string( $f_title );
 		$f_description 	= db_prepare_string( $f_description );
 
-		$f_file_name = lang_get( 'document_files_prefix' ) . '-' . project_format_id ( $t_project_id ) . '-' . $f_name;
+		$f_file_name = config_get( 'document_files_prefix' ) . '-' . project_format_id ( $t_project_id ) . '-' . $f_name;
 		$t_file_size = $f_size;
 
 		switch ( $g_file_upload_method ) {

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.125 $
+	# $Revision: 1.126 $
 	# $Author: vboctor $
-	# $Date: 2003-02-24 03:22:33 $
+	# $Date: 2003-02-25 08:50:48 $
 	#
-	# $Id: strings_english.txt,v 1.125 2003-02-24 03:22:33 vboctor Exp $
+	# $Id: strings_english.txt,v 1.126 2003-02-25 08:50:48 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -667,7 +667,6 @@
 
 	# proj_doc_add.php
 	$s_file_uploaded_msg = 'File upload successful';
-	$s_document_files_prefix = 'doc';
 
 	# proj_doc_add_page.php
 	$s_upload_file_title = 'Upload File';

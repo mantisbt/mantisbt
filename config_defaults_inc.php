@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.100 2003-02-24 10:19:33 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.101 2003-02-25 08:50:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -503,6 +503,10 @@
 	# $g_disallowed_files takes precedence over $g_allowed_files
 	$g_allowed_files		= '';
 	$g_disallowed_files		= '';
+
+	# prefix to be used for the file system names of files uploaded to projects.
+	# Eg: doc-001-myprojdoc.zip
+	$g_document_files_prefix = 'doc';
 
 	############################
 	# Mantis HTML Settings

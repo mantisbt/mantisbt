@@ -32,15 +32,16 @@ Mantis ChangeLog
  * Fix #2982: Having email_set_category set to EMAIL_CATEGORY_PROJECT_CATEGORY erased various mail headers.
  * Fix #2989: Allow managers to manage bugnotes.
  * Fix #2993: Read/Write access levels not checked in custom fields.
- * DB Upgrade: Added "id" primary key to bug history table.
+ * DB Upgrade: Added "id" primary key to bug history table (needed for #2980).
  * Languages: Updated German localisation.
- * Changed confit option (default_notify_flags): remove 'admin', 'manager', and 'threshold' categories and add 'threshold_min' and 'threshold_max'
+ * Changed config option (default_notify_flags): remove 'admin', 'manager', and 'threshold' categories and add 'threshold_min' and 'threshold_max'
  * New config option (email_receive_own): controls whether users receive emails for changes they make
  * New config option (display_project_padding): controls the level of padding on project ids
  * New config option (display_bug_padding): controls the level of padding on bug ids
  * New config option (display_bugnote_padding): controls the level of padding on bugnote ids
  * New config option (file_type_icons): provides mapping between file extensions and icons to be used for file types.
  * New config option (show_monitor_list_threshold): threshold needed to view the list of users monitoring a bug.
+ * New config option (document_files_prefix): prefix to be used for file system names for documents uploaded to projects (eg: doc-001-myprojdoc.zip when using prefix 'doc').
  * Removed config option (bugnote_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_view_include_file): Used file path directly since there is no reason to make it configurable.
  * Removed config option (bugnote_add_include_file): Used file path directly since there is no reason to make it configurable.
