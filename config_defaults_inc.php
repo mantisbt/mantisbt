@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.74 2003-02-15 20:56:10 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.75 2003-02-15 21:11:58 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -437,7 +437,7 @@
 	# This is the master setting to disable *all* file uploading functionality
 	#
 	# If you want to allow file uploads, you must also make sure that they are
-	#  enabled in php.  You may need to add "file_uploads = TRUE" to your php.ini
+	#  enabled in php.  You may need to add 'file_uploads = TRUE' to your php.ini
 	#
 	# See also: $g_upload_project_file_threshold, $g_upload_bug_file_threshold,
 	#   $g_allow_reporter_upload
@@ -475,7 +475,7 @@
 
 	# do NOT include href or img tags here
 	# do NOT include tags that have parameters (eg. <font face="arial">)
-	$g_html_valid_tags		= "p, li, ul, ol, br, pre, i, b, u";
+	$g_html_valid_tags		= 'p, li, ul, ol, br, pre, i, b, u';
 
 	# --- table tags ------------------
 	# this is inserted into the outermost tables ( tags like border, cellspacing, etc)
@@ -806,20 +806,20 @@
 	###########################
 	#----------------------------------
 	# Specify your top/bottom include file (logos, banners, etc)
-	$g_bottom_include_page			= $g_absolute_path."";
-	$g_top_include_page				= $g_absolute_path."";
+	$g_bottom_include_page			= $g_absolute_path.'';
+	$g_top_include_page				= $g_absolute_path.'';
 	# CSS file
-	$g_css_include_file				= $g_path."css/default.css";
+	$g_css_include_file				= $g_path.'css/default.css';
 	# meta tags
-	$g_meta_include_file			= $g_absolute_path."meta_inc.php";
+	$g_meta_include_file			= $g_absolute_path.'meta_inc.php';
 	#----------------------------------
 	# Internal includes
-	$g_bugnote_include_file			= $g_absolute_path."bugnote_inc.php";
-	$g_history_include_file			= $g_absolute_path."history_inc.php";
-	$g_print_bugnote_include_file	= $g_absolute_path."print_bugnote_inc.php";
-	$g_view_all_include_file		= $g_absolute_path."view_all_inc.php";
-	$g_bug_view_inc					= $g_absolute_path."bug_view_inc.php";
-	$g_bug_file_upload_inc			= $g_absolute_path."bug_file_upload_inc.php";
+	$g_bugnote_include_file			= $g_absolute_path.'bugnote_inc.php';
+	$g_history_include_file			= $g_absolute_path.'history_inc.php';
+	$g_print_bugnote_include_file	= $g_absolute_path.'print_bugnote_inc.php';
+	$g_view_all_include_file		= $g_absolute_path.'view_all_inc.php';
+	$g_bug_view_inc					= $g_absolute_path.'bug_view_inc.php';
+	$g_bug_file_upload_inc			= $g_absolute_path.'bug_file_upload_inc.php';
 	#----------------------------------
 
 	###########################
@@ -827,7 +827,7 @@
 	###########################
 	# ---------------------------------
 	# Specify where the user should be sent after logging out.
-	$g_logout_redirect_page			= $g_path."login_page.php";
+	$g_logout_redirect_page			= $g_path.'login_page.php';
 
 	###########################
 	# Headers
