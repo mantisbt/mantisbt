@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.81 2004-05-17 11:39:07 vboctor Exp $
+	# $Id: email_api.php,v 1.82 2004-05-22 07:33:17 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -219,12 +219,15 @@
 		}
 
 		# threshold
+		$t_bug_is_private = bug_get_field( $p_bug_id, 'view_state' ) == VS_PRIVATE;
 		$t_threshold_min = email_notify_flag( $p_notify_type, 'threshold_min' );
 		$t_threshold_max = email_notify_flag( $p_notify_type, 'threshold_max' );
 		$t_threshold_users = project_get_all_user_rows( $t_project_id, $t_threshold_min );
 		foreach( $t_threshold_users as $t_user ) {
 			if ( $t_user['access_level'] <= $t_threshold_max ) {
-				$t_recipients[$t_user['id']] = true;
+				if ( !$t_bug_is_private || $t_user['access_level'] >= config_get( 'private_bug_threshold' ) ) {
+					$t_recipients[$t_user['id']] = true;
+				}
 			}
 		}
 
