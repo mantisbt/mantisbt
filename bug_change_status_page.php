@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.16 2005-01-27 12:19:48 vboctor Exp $
+	# $Id: bug_change_status_page.php,v 1.17 2005-02-07 22:26:09 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -231,15 +231,33 @@ if ( ( $f_new_status >= $t_resolved ) && ( CLOSED > $f_new_status ) ) { ?>
 
 <!-- Bugnote -->
 <tr <?php echo helper_alternate_class() ?>>
-	<td class="category" colspan="2">
+	<td class="category">
 		<?php echo lang_get( 'add_bugnote_title' ) ?>
 	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="center" colspan="2">
+	<td class="center">
 		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
+<?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'view_status' ) ?>
+	</td>
+	<td>
+<?php
+		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+?>
+			<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+<?php
+			echo lang_get( 'private' );
+		} else {
+			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+		}
+?>
+	</td>
+</tr>
+<?php } ?>
 
 
 <!-- Submit Button -->
