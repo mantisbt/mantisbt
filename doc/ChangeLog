@@ -4,6 +4,7 @@ Mantis ChangeLog
 
  * Behaviour change: made 'normal' the default priority for new bugs
  * Behaviour change: Merged default/config_inc1.php and default/config_inc2.php in config_defaults_inc.php
+ * Behaviour change: Removed f_ prefix from POST and GET field names
  * Changed config options (default_advanced_report, default_advanced_view, default_advanced_update): now ON/OFF instead of BOTH/SIMPLE/ADVANCED (they never worked the other way anyway)
  * Changed config options (*_color): now use $g_status_colors['<status color>'] array. For example, $g_new_color is replaced with $g_status_colors['new'].
  * Code cleanup: added validation checks for all inputs that are passed on to database queries
