@@ -8,6 +8,10 @@
 	# INCLUDES
 	###########################################################################
 
+	include( "core_timer_API.php" );
+	$g_timer = new BC_Timer;
+	$g_timer->start_time();
+
   	require( "constant_inc.php" );
 	require( "./default/config_inc1.php" );
 	if ( file_exists( "config_inc.php" ) ) {

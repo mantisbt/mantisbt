@@ -32,6 +32,7 @@ span.small 			{ font-size: <?php echo $g_font_small ?>; font-weight: normal; }
 span.pagetitle		{ font-size: <?php echo $g_font_large ?>; font-weight: bold; text-align: center }
 span.bold			{ font-weight: bold; }
 span.italic			{ font-style: italic; }
+span.italic			{ font-style: italic; font-size: 8pt; }
 
 table.hide			{ width: 100%; border-color: <?php echo $g_background_color ?>; }
 table.width100		{ width: 100%; border-color: <?php echo $g_table_border_color ?>; border-style: solid; border-width: 1px; }

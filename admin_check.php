@@ -1,5 +1,6 @@
 <?php
 	error_reporting( E_ALL );
+
 	# mail test
 	if ( isset( $f_mail_test ) ) {
 		$result = mail( $f_to_email, "Testing PHP mail() function", $f_message, "From: $f_to_email\n" );
@@ -12,9 +13,8 @@
 		switch( $p_type ) {
 		case CRYPT:	$salt = substr( $p_test_password, 0, 2 );
 					return crypt( $p_test_password, $salt );
-		case CRYPT2:$salt = $p_test_password;
+		case CRYPT_FULL_SALT:$salt = $p_test_password;
 					return crypt( $p_test_password, $salt );
-		case CRYPT3:return crypt( $p_test_password);
 		case PLAIN:	return $p_test_password;
 		case MD5:	return md5( $p_test_password );
 		#case LDAP:	if ( ldap_uid_pass( $f_username, $p_test_password ) ) {
@@ -185,7 +185,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 
 <p>
 <?php # ---- Windows ? ---- ?>
-<table width="100%" bgcolor="#00aa00" border="0" cellpadding="20" cellspacing="1">
+<table width="100%" bgcolor="#008800" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#f4fff4">
 		<span class="title">Using Windows?</span>
@@ -230,7 +230,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 
 <a name="password"><p></a>
 <?php # ---- Password ---- ?>
-<table width="100%" bgcolor="#00bb00" border="0" cellpadding="20" cellspacing="1">
+<table width="100%" bgcolor="#008800" border="0" cellpadding="20" cellspacing="1">
 <tr>
 	<td bgcolor="#f4fff4">
 
@@ -242,12 +242,11 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 		</form>
 		<?php
 				if ( isset( $f_password_test ) ) {
-					echo get_password( $f_password, PLAIN )."<br />";
+					echo "Password: ".get_password( $f_password, PLAIN )."<br />";
 
 					$crypt_pass = get_password( $f_password, CRYPT );
 					echo "CRYPT: ".get_password( $crypt_pass, CRYPT )."<br />";
-					echo "CRYPT2: ".get_password( $f_password, CRYPT2 )."<br />";
-					echo "CRYPT3: ".get_password( $f_password, CRYPT3 )."<br />";
+					echo "CRYPT_FULL_SALT: ".get_password( $f_password, CRYPT_FULL_SALT )."<br />";
 					echo "MD5: ".get_password( $f_password, MD5 )."<br />";
 				}
 		?>

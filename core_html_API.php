@@ -162,7 +162,9 @@
 	function print_footer( $p_file ) {
 		global 	$g_string_cookie_val, $g_webmaster_email,
 				$g_menu_include_file, $g_show_footer_menu,
-				$g_mantis_version, $g_show_version;
+				$g_mantis_version, $g_show_version,
+				$g_timer, $g_show_timer;
+
 		# @@@
 		if (isset($g_string_cookie_val)&&!empty($g_string_cookie_val)) {
 			if ( $g_show_footer_menu ) {
@@ -176,10 +178,14 @@
 		PRINT "<p>";
 		PRINT "<hr size=\"1\">";
 		if ( ON == $g_show_version ) {
-			PRINT "<span class=\"italic\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
+			PRINT "<span class=\"timer\"><a href=\"http://mantisbt.sourceforge.net/\">Mantis $g_mantis_version</a></span>";
 		}
 		PRINT "<address>Copyright (C) 2000 - 2002</address>";
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
+		if ( ON == $g_show_timer ) {
+			$g_timer->end_time();
+			PRINT "<span class=\"italic\">Time: ".$g_timer->elapsed_time()." seconds</span><br />";
+		}
 	}
 	# --------------------
 	# (12)
