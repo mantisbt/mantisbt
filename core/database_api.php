@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.36 2004-11-20 14:06:02 prichards Exp $
+	# $Id: database_api.php,v 1.37 2004-11-30 11:00:49 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -237,6 +237,7 @@
 	# prepare a string before DB insertion
 	# @@@ should default be return addslashes( $p_string ); or generate an error
 	function db_prepare_string( $p_string ) {
+		global $g_db;
 		$t_db_type = config_get( 'db_type' );
 
 		switch( $t_db_type ) {
@@ -247,8 +248,12 @@
 			case 'mysql':
 				return mysql_escape_string( $p_string );
 
+			# For some reason mysqli_escape_string( $p_string ) always returns an empty
+			# string.  This is happening with PHP v5.0.2.
+			# @@@ Consider using ADODB escaping for all databases.
 			case 'mysqli':
-				return mysqli_escape_string( $p_string );
+				$t_escaped = $g_db->qstr( $p_string, false );
+				return substr( $t_escaped, 1, strlen( $t_escaped ) - 2 );
 
 			case 'postgres':
 			case 'postgres64':
