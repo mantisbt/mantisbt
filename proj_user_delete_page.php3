@@ -23,7 +23,7 @@
 
 <p>
 <div align="center">
-	<? print_bracket_link( $HTTP_REFERER, "Back" ) ?>
+	<? print_bracket_link( $proj_user_menu_page, "Back" ) ?>
 </div>
 
 <p>
