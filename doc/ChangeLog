@@ -47,6 +47,7 @@ Mantis
  * Added g_allowed_files and g_disallowed_files to control what files types may be uploaded.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
+ * Removed proj_user_delete_page.php.
  * Updated Copyright to 2002.
 
 03.15.2002  -   0.17.1
