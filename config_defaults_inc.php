@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.185 2004-07-30 12:58:33 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.186 2004-07-30 21:13:31 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -355,6 +355,10 @@
 	#  OFF suppresses display
 	#  AUTO suppresses the display if there are no versions defined for the project
 	$g_show_product_version = AUTO;
+
+	# -- show users with their real name or not
+	$g_show_realname = OFF;
+	$g_differentiate_duplicates = OFF;  # leave off for now
 
 	############################
 	# Mantis JPGRAPH Addon

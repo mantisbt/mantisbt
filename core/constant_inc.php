@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.25 2004-07-30 12:46:09 vboctor Exp $
+	# $Id: constant_inc.php,v 1.26 2004-07-30 21:13:31 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -201,6 +201,7 @@
 	define( 'ERROR_USER_PROFILE_NOT_FOUND',			804 );
 	define( 'ERROR_USER_NAME_INVALID',				805 );
 	define( 'ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS',		806 );
+	define( 'ERROR_USER_REAL_MATCH_USER',		807 );
 
 	# ERROR_AUTH_*
 	define( 'ERROR_AUTH_INVALID_COOKIE',			900 );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.74 2004-07-10 23:38:02 vboctor Exp $
+	# $Id: user_api.php,v 1.75 2004-07-30 21:13:31 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -364,6 +364,7 @@
 	# returns true when the account was successfully deleted
 	function user_delete( $p_user_id ) {
 		$c_user_id 					= db_prepare_int($p_user_id);
+		$t_user_table = config_get('mantis_user_table');
 
 		user_ensure_unprotected( $p_user_id );
 
@@ -376,9 +377,25 @@
 		# Remove project specific access levels
 		user_delete_project_specific_access_levels( $p_user_id );
 
-		user_clear_cache( $p_user_id );
+		#unset non-unique realname flags if necessary
+		if ( config_get( 'differentiate_duplicates' ) ) {
+			$c_realname = db_prepare_string( user_get_field( $p_user_id, 'realname' ) );
+			$query = "SELECT id
+					FROM $t_user_table
+					WHERE realname='$c_realname'";
+			$result = db_query( $query );
+			$t_count = db_num_rows( $result );
 
-		$t_user_table = config_get('mantis_user_table');
+			if ( $t_count == 2 ) {
+				# unset flags if there are now only 2 unique names
+				for ( $i=0 ; $i < $t_count ; $i++ ) {
+					$t_user_id = db_result( $result, $i );
+					user_set_field( $t_user_id, 'duplicate_realname', OFF );
+				}
+			}
+		}
+
+		user_clear_cache( $p_user_id );
 
 		# Remove account
 		$query = "DELETE FROM $t_user_table
@@ -474,13 +491,26 @@
 
 	# --------------------
 	# return the username or a string "user<id>" if the user does not exist
+	# if show_realname is set, replace the name with a realname (if set)
 	function user_get_name( $p_user_id ) {
 		$row = user_cache_row( $p_user_id, false );
 
 		if ( false == $row ) {
 			return lang_get( 'prefix_for_deleted_users' ) . (int)$p_user_id;
 		} else {
-			return is_blank( $row['realname'] ) ? $row['username'] : $row['realname'];
+			if ( ON == config_get( 'show_realname' ) ) {
+				if ( is_blank( $row['realname'] ) ) {
+					return $row['username'];
+				}else{
+					if ( isset( $row['duplicate_realname'] ) && ( ON == $row['duplicate_realname'] ) ) {
+						return $row['realname'] . ' (' . $row['username'] . ')';
+					}else{
+						return $row['realname'];
+					}
+				}
+			}else{
+				return $row['username'];
+			}
 		}
 	}
 

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.190 $
-	# $Author: vboctor $
-	# $Date: 2004-07-30 12:46:10 $
+	# $Revision: 1.191 $
+	# $Author: thraxisp $
+	# $Date: 2004-07-30 21:13:32 $
 	#
-	# $Id: strings_english.txt,v 1.190 2004-07-30 12:46:10 vboctor Exp $
+	# $Id: strings_english.txt,v 1.191 2004-07-30 21:13:32 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -209,6 +209,7 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exist
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain letters, numbers, spaces, hyphens, and underscores.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
@@ -383,6 +384,7 @@ $s_profile_updated_msg = 'Profile updated...';
 # account_update.php
 $s_account_updated_msg = 'Your account has been successfully updated...';
 $s_email_updated = 'Email address successfully updated';
+$s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 

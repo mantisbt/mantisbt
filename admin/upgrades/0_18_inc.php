@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.14 2004-07-19 12:54:54 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.15 2004-07-30 21:13:31 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -261,7 +261,7 @@
 	# MASC RELATIONSHIP
 
 	# --------------------------------------------------------
-	# Author: Marcello Scatà marcello@marcelloscata.com
+	# Author: Marcello Scatâ€¡ marcello@marcelloscata.com
 	# UPGRADE THE DATABASE TO IMPLEMENT THE RELATIONSHIPS
 	# --------------------------------------------------------
 	# The script executes the following steps:
@@ -438,6 +438,42 @@
 		return true;
 	}
 	# MASC RELATIONSHIP
+
+		if ( config_get( 'differentiate_duplicates' ) ) {
+			$upgrades[] = new SQLUpgrade( 
+				'user-duplicate',
+				'Add realname duplicate field to user table',
+				"ALTER TABLE $t_user_table ADD duplicate_realname INT( 1 ) DEFAULT '0'" );
+
+			$upgrades[] = new FunctionUpgrade(
+				'user-duplicate-fix',
+				'set values for duplicate_realname',
+				'upgrade_0_18_user_duplicate' );
+		}
+
+	function upgrade_0_18_user_duplicate() {
+		global $t_user_table;
+
+		$query = "SELECT realname FROM $t_user_table 
+								WHERE realname != '' 
+								GROUP BY realname 
+								HAVING count(realname) > 1";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+		for ( $i = 0 ; $i < $t_count ; $i++ ) {
+			$t_row = db_fetch_array( $result );
+			$t_name = $t_row['realname'];
+			$query = "UPDATE $t_user_table
+				SET duplicate_realname = 'Y'
+				WHERE realname='$t_name'";
+			db_query( $query );
+		}
+
+		return true;
+	}
+
+
+
 
 	return $upgrades;
 ?>

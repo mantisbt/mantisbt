@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.26 2004-07-30 12:46:09 vboctor Exp $
+	# $Id: history_api.php,v 1.27 2004-07-30 21:13:31 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -109,10 +109,8 @@
 		$c_bug_id					= db_prepare_int( $p_bug_id );
 
 		# grab history and display by date_modified then field_name
-		$query = "SELECT b.*, u.username
-				FROM $t_mantis_bug_history_table b
-				LEFT JOIN $t_mantis_user_table u
-				ON b.user_id=u.id
+		$query = "SELECT *
+				FROM $t_mantis_bug_history_table
 				WHERE bug_id='$c_bug_id'
 				ORDER BY date_modified $t_history_order, field_name ASC";
 		$result = db_query( $query );
@@ -126,12 +124,8 @@
 			$raw_history[$i]['date']	= db_unixtimestamp( $v_date_modified );
 			$raw_history[$i]['userid']	= $v_user_id;
 
-			# $v_username will be empty, if user no longer exists.
-			if ( is_blank( $v_username ) ) {
-				$raw_history[$i]['username'] = user_get_name( $v_user_id );
-			} else {
-				$raw_history[$i]['username'] = $v_username;
-			}
+			# user_get_name handles deleted users, and username vs realname
+			$raw_history[$i]['username'] = user_get_name( $v_user_id );
 
 			$raw_history[$i]['field']		= $v_field_name;
 			$raw_history[$i]['type']		= $v_type;
