@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.73 2003-03-25 09:56:31 jfitzell Exp $
+	# $Id: html_api.php,v 1.74 2003-03-27 00:55:25 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -500,7 +500,9 @@
 
 		print_bracket_link( $t_account_page, lang_get( 'account_link' ) );
 		print_bracket_link( $t_account_prefs_page, lang_get( 'change_preferences_link' ) );
-		print_bracket_link( $t_account_profile_menu_page, lang_get( 'manage_profiles_link' ) );
+		if ( access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
+			print_bracket_link( $t_account_profile_menu_page, lang_get( 'manage_profiles_link' ) );
+		}
 	}
 
 	# --------------------

@@ -3,9 +3,10 @@ Mantis ChangeLog
 2003.??.??  -  0.18.0a5
 
  * Fix: Improved adherance to the XHTML standard.
- * Fix #3072: Attached file should be opened up in a new browser window.
  * Fix #3064: view bug buttons in vertical column
+ * Fix #3072: Attached file should be opened up in a new browser window.
  * Fix #3080: project menu bar shows extra links
+ * Fix #3089: Hide link to Profiles management on account page based on access level.
 	
 2003.03.22  -  0.18.0a4
 
