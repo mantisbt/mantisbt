@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.39 2003-01-25 18:21:08 jlatour Exp $
+	# $Id: email_api.php,v 1.40 2003-01-29 00:12:10 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -619,7 +619,7 @@
 		## win-bcc-bug
 		if ( OFF == $g_use_bcc ) {
 			## list of receivers
-			$to = $g_to_email.(($p_headers && $g_to_email) ? ', ' : '').$p_headers;
+			$to = $g_to_email.( ( is_blank( $p_headers ) || is_blank( $g_to_email ) ) ? '' : ', ').$p_headers;
 			# echo '<br />email_bug_info::Sending email to :'.$to;
 			$res1 = email_send( $to, $p_subject, $t_message, '', $t_category );
 		} else {
@@ -645,7 +645,7 @@
 		$t_message   = trim( $p_message );
 
 		# short-circuit if no recipient is defined
-		if (!$p_recipient) {
+		if ( is_blank( $p_recipient ) && ( OFF == config_get('use_bcc') ) ) {
 			return;
 		}
 
@@ -691,7 +691,8 @@
 					if ( OFF === $t_debug_email ) {
 						$mail->AddAddress( $t_recipient, '' );
 					} else {
-						$t_debug_to .= $t_recipient . ', ';
+						$t_debug_to .= !is_blank( $t_debug_to ) ? ', ' : '';
+						$t_debug_to .= $t_recipient;
 					}
 				}
 			}
@@ -704,7 +705,8 @@
 					if ( OFF === $t_debug_email ) {
 						$mail->AddBCC( $t_bcc, '' );
 					} else {
-						$t_debug_bcc .= $t_bcc . ', ';
+						$t_debug_bcc .= !is_blank( $t_debug_bcc ) ? ', ' : '';
+						$t_debug_bcc .= $t_bcc;
 					}
 				}
 			}
