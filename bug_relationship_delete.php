@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_relationship_delete.php,v 1.3 2004-09-12 00:17:56 thraxisp Exp $
+	# $Id: bug_relationship_delete.php,v 1.4 2004-09-16 13:56:48 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# --------------------------------------------------------
@@ -70,7 +70,7 @@
 			history_log_event_special( $f_bug_id, BUG_DEL_RELATIONSHIP, BUG_BLOCKS, $t_dest_bug_id );
 			email_relationship_deleted( $f_bug_id );
 
-	if ( bug_exists( $t_dest_bug_id )) {
+			if ( bug_exists( $t_dest_bug_id )) {
 				history_log_event_special( $t_dest_bug_id, BUG_DEL_RELATIONSHIP, BUG_DEPENDANT, $f_bug_id );
 				email_relationship_deleted( $t_dest_bug_id );
 			}
