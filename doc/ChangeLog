@@ -17,6 +17,7 @@ Mantis ChangeLog
  * Fix #3064: view bug buttons in vertical column
  * Fix #3072: Attached file should be opened up in a new browser window.
  * Fix #3076: Bug reports are added to the "wrong" project.
+ * Fix #3079: Error when using phpMailer.
  * Fix #3080: project menu bar shows extra links
  * Fix #3089: Hide link to Profiles management on account page based on access level.
  * Fix #3092: Problem changing printing prefs.

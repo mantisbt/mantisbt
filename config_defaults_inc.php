@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.120 2003-05-23 11:52:27 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.121 2003-07-27 03:17:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -224,6 +224,12 @@
 	# PhpMailer comes with a detailed documentation in phpdoc format.
 
 	$g_use_phpMailer		= OFF;
+
+	# Path to phpMailer directory.  The directory that includes class.phpmailer.hpp
+	# and class.smtp.php.  The empty default should work if the phpMailer directory 
+	# is in the include_path.  If a path is specified, it should be terminated by
+	# a directory separator.
+	$g_phpMailer_path		= '';
 
 	# select the method to mail by:
 	# 0 - mail()
