@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_page.php,v 1.3 2004-07-05 13:50:53 vboctor Exp $
+	# $Id: my_view_page.php,v 1.4 2004-07-05 19:53:08 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,6 +20,8 @@
 	if ( current_user_is_anonymous() ) {
 		access_denied();
 	}
+
+	$t_current_user_id = auth_get_current_user_id();
 
 	compress_enable();
 
