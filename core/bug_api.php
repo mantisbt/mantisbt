@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.56 2004-04-08 22:44:59 prescience Exp $
+	# $Id: bug_api.php,v 1.57 2004-04-29 23:26:43 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -802,10 +802,15 @@
 			bug_set_field( $p_bug_id, 'duplicate_id', (int)$p_duplicate_id );
 		}
 
+		# only set handler if specified explicitly or if bug was not assigned to a handler
 		if ( null == $p_handler_id ) {
-			$p_handler_id = auth_get_current_user_id();
+			if ( bug_get_field( $p_bug_id, 'handler_id' ) == 0 ) {
+				$p_handler_id = auth_get_current_user_id();
+				bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
+			}
+		} else {
+			bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 		}
-		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 
 		# Add bugnote if supplied
 		if ( !is_blank( $p_bugnote_text ) ) {

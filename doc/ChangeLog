@@ -30,6 +30,7 @@ Mantis ChangeLog
  * Fix #3691: Parse error in Romanian localisation.
  * Fix #3723: No ability to edit or even delete news is associated project was deleted.
  * Fix #3728: CSV export shows &quot; instead of real quotes in bug title.
+ * Fix #3795: Resolve should not overwrite handler, if already set.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).
