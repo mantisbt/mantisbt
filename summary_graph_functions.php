@@ -136,7 +136,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		$graph->legend->Pos(0.1,0.8,"right","top");
 		$graph->legend->SetShadow(false);
-		$graph->legend->SetBackground("white");
+		$graph->legend->SetFillColor("white");
 		$graph->legend->SetLayout(LEGEND_HOR);
 
 		$p1 = new BarPlot($open_bug_count);
@@ -389,7 +389,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->title->Set("cumulative $s_by_date");
 		$graph->legend->Pos(0.1,0.6,"right","top");
 		$graph->legend->SetShadow(false);
-		$graph->legend->SetBackground("white");
+		$graph->legend->SetFillColor("white");
 		$graph->legend->SetLayout(LEGEND_HOR);
 		$graph->xaxis->Hide();
 #		$graph->xaxis->SetFont(FF_VERDANA, FS_NORMAL, 10);
