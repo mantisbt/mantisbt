@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.7 2002-09-16 04:16:59 jfitzell Exp $
+	# $Id: history_api.php,v 1.8 2002-09-16 06:05:39 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -19,14 +19,15 @@
 	function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_new_value, $p_user_id = null ) {
 		# Only log events that change the value
 		if ( $p_new_value != $p_old_value ) {
+			if ( null === $p_user_id ) {
+				$p_user_id	= auth_get_current_user_id();
+			};
+
 			$c_field_name	= db_prepare_string( $p_field_name );
 			$c_old_value	= db_prepare_string( $p_old_value );
 			$c_new_value	= db_prepare_string( $p_new_value );
 			$c_bug_id		= db_prepare_int( $p_bug_id );
 			$c_user_id		= db_prepare_int( $p_user_id );
-			if ( null === $c_user_id ) {
-				$c_user_id	= auth_get_current_user_id();
-			};
 			
 			$query = "INSERT INTO " . config_get( 'mantis_bug_history_table' ) . "
 					( user_id, bug_id, date_modified, field_name, old_value, new_value )
