@@ -8,11 +8,11 @@
 	##########################################################################
 	# Lithuanian: Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
 	# -------------------------------------------------
-	# $Revision: 1.10 $
+	# $Revision: 1.11 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:15 $
+	# $Date: 2004-08-10 15:03:15 $
 	#
-	# $Id: strings_lithuanian.txt,v 1.10 2004-08-10 10:46:15 jlatour Exp $
+	# $Id: strings_lithuanian.txt,v 1.11 2004-08-10 15:03:15 jlatour Exp $
 	###########################################################################
 	# Problematiðki vertimai
 	# Angliðki terminai - jø vertimas (vertimas pagal kompiuteriniø terminø anglø - lietuviø þodynà, URL http://www.likit.lt/frames/turinys/turinys.htm)
@@ -108,6 +108,8 @@ $s_login_link = 'Prisijungimas';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Jûs neturite pakankamai teisiø atlikti ðá veiksmà su pasirinktomis problemomis: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Ar tikrai norite uþdaryti ðias problemas ?';
 $s_delete_bugs_conf_msg = 'Ar tikrai norite iðtrinti ðias problemas ?';
 $s_move_bugs_conf_msg = 'Perkelti problemas á';

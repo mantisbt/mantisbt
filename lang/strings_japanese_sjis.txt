@@ -8,11 +8,11 @@
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# Japenese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.57 $
+	# $Revision: 1.58 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:15 $
+	# $Date: 2004-08-10 15:03:14 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.57 2004-08-10 10:46:15 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.58 2004-08-10 15:03:14 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -97,6 +97,8 @@ $s_login_link = 'ログイン';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = '改善要求に該当のアクションを行う適切な権限がありません。';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = '改善要求を完了してよろしいですか。';
 $s_delete_bugs_conf_msg = '改善要求を削除してよろしいですか。';
 $s_move_bugs_conf_msg = '改善要求の移動先を選択して下さい。';

@@ -11,11 +11,11 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra,netcobra@gmail.com
 	# -------------------------------------------------
-	# $Revision: 1.48 $
+	# $Revision: 1.49 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:12 $
+	# $Date: 2004-08-10 15:03:10 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.48 2004-08-10 10:46:12 jlatour Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.49 2004-08-10 15:03:10 jlatour Exp $
 	###########################################################################
 
 	###########################################################################
@@ -113,6 +113,8 @@ $s_login_link = '登录';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = '对于这个 Bug 您没有适当的权限以进行这个操作：';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = '确定要关闭这些 Bug 吗？';
 $s_delete_bugs_conf_msg = '你确定要删除这些 Bug 吗？';
 $s_move_bugs_conf_msg = '将 Bug 移动到';

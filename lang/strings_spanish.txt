@@ -11,11 +11,11 @@
 	# Spanish: Bernardo Hernández - b.magno@terra.es
 	# Spanish: Alberto Serrano - apserrano@grupobbva.net
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:17 $
+	# $Date: 2004-08-10 15:03:17 $
 	#
-	# $Id: strings_spanish.txt,v 1.69 2004-08-10 10:46:17 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.70 2004-08-10 15:03:17 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -100,6 +100,8 @@ $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'No tiene los permisos necesarios para realizar esta acción en los siguientes bugs: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = '¿Seguro que desea cerrar estos bugs?';
 $s_delete_bugs_conf_msg = '¿Seguro que desea eliminar estos bugs?';
 $s_move_bugs_conf_msg = 'Mover bugs a';

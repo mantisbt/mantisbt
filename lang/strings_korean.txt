@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.68 $
+	# $Revision: 1.69 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:15 $
+	# $Date: 2004-08-10 15:03:15 $
 	#
-	# $Id: strings_korean.txt,v 1.68 2004-08-10 10:46:15 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.69 2004-08-10 15:03:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -97,6 +97,8 @@ $s_login_link = '로그인';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = '이 동작을 실행할 적당한 권한이 없습니다. 오류는 다음과 같습니다: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = '이 이슈를 폐쇄하시겠습니까 ?';
 $s_delete_bugs_conf_msg = '이 이슈를 삭제하시겠습니까 ?';
 $s_move_bugs_conf_msg = '이슈 이동: ';

@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.74 $
+	# $Revision: 1.75 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:14 $
+	# $Date: 2004-08-10 15:03:13 $
 	#
-	# $Id: strings_italian.txt,v 1.74 2004-08-10 10:46:14 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.75 2004-08-10 15:03:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -98,6 +98,8 @@ $s_login_link = "Accedi";
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = "Non disponi dell'autorizzazione necessaria per eseguire questa azione sulle seguenti anomalie: ";
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = "Confermi di voler chiudere queste anomalie?";
 $s_delete_bugs_conf_msg = "Confermi di voler eliminare queste anomalie?";
 $s_move_bugs_conf_msg = "Sposta anomalia su";

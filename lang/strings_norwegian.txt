@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.70 $
+	# $Revision: 1.71 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:15 $
+	# $Date: 2004-08-10 15:03:15 $
 	#
-	# $Id: strings_norwegian.txt,v 1.70 2004-08-10 10:46:15 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.71 2004-08-10 15:03:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -98,6 +98,8 @@ $s_login_link = 'Logg inn';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Du hadde ikke rettighet til å utføre den handlinga på de følgende sakene: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Er du sikker på at du vil lukke disse sakene?';
 $s_delete_bugs_conf_msg = 'Er du sikker på at du vil slette disse sakene?';
 $s_move_bugs_conf_msg = 'Flytt saker til';

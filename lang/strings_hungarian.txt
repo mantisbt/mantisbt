@@ -8,11 +8,11 @@
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # Hungarian: Gergõ Bácskai, gergo@bacskai.hu
   # -------------------------------------------------
-  # $Revision: 1.54 $
+  # $Revision: 1.55 $
   # $Author: jlatour $
-  # $Date: 2004-08-10 10:46:14 $
+  # $Date: 2004-08-10 15:03:13 $
   #
-  # $Id: strings_hungarian.txt,v 1.54 2004-08-10 10:46:14 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.55 2004-08-10 15:03:13 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -97,6 +97,8 @@ $s_login_link = 'Belépés';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Önnek nincs elegendõ jogosultsága megtenni a kért módosítást a következõ hibán: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Biztos be akarja zárni ezeket a hibákat ?';
 $s_delete_bugs_conf_msg = 'Biztos törölni akarja ezeket a hibákat ?';
 $s_move_bugs_conf_msg = 'Hibák Mozgatása ide:';

@@ -7,11 +7,11 @@
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
 	# -------------------------------------------------
-	# $Revision: 1.61 $
+	# $Revision: 1.62 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:13 $
+	# $Date: 2004-08-10 15:03:10 $
 	#
-	# $Id: strings_chinese_traditional.txt,v 1.61 2004-08-10 10:46:13 jlatour Exp $
+	# $Id: strings_chinese_traditional.txt,v 1.62 2004-08-10 15:03:10 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -96,6 +96,8 @@ $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
 $s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
 $s_move_bugs_conf_msg = 'Move bugs to';

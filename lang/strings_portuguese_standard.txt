@@ -8,11 +8,11 @@
 	# Portuguese Standard: Luís Martins, lmar@ualg.pt
 	#                      Rui Alexandre Coelho, rac@iosoft.pt
 	# -------------------------------------------------
-	# $Revision: 1.65 $
+	# $Revision: 1.66 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:16 $
+	# $Date: 2004-08-10 15:03:16 $
 	#
-	# $Id: strings_portuguese_standard.txt,v 1.65 2004-08-10 10:46:16 jlatour Exp $
+	# $Id: strings_portuguese_standard.txt,v 1.66 2004-08-10 15:03:16 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -97,6 +97,8 @@ $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Desculpe mas NÃO tem as Permissões Necessárias Para Efectuar a Acção Pretendida nos Seguintes Bugs: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Tem a Certeza de querer FECHAR os Bugs Selecionados ?';
 $s_delete_bugs_conf_msg = 'Tem a Certeza de querer APAGAR os Bugs Selecionados ?';
 $s_move_bugs_conf_msg = 'Mover os Bugs Selecionados para o Projecto ...';

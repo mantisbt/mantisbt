@@ -9,11 +9,11 @@
 	###########################################################################
 	# Latvian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.15 $
+	# $Revision: 1.16 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:15 $
+	# $Date: 2004-08-10 15:03:15 $
 	#
-	# $Id: strings_latvian.txt,v 1.15 2004-08-10 10:46:15 jlatour Exp $
+	# $Id: strings_latvian.txt,v 1.16 2004-08-10 15:03:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -98,6 +98,8 @@ $s_login_link = 'Pieslçgties';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Jums nav tiesîbu veukt darbîbas ar sekojoðiem bugiem: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Vai jûs esat pârliecinâti, ka vçlaties aizvçrt visus ðos bugus ?';
 $s_delete_bugs_conf_msg = 'Vai jûs esat pârliecinâti, ka vçlaties dzçst visus ðos bugus ?';
 $s_move_bugs_conf_msg = 'Pârvietot uz';

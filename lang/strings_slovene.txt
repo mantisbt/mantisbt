@@ -94,6 +94,8 @@ $s_login_link = 'Prijava';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Nimate ustreznih pravic za izvr.itev tega dejanja pri slede.ih zadevah:';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Ali ste prepri.ani, da .elite zapreti naslednje zadeve?';
 $s_delete_bugs_conf_msg = 'Ali ste prepri.ani, da .elite izbrisati naslednje zadeve?';
 $s_move_bugs_conf_msg = 'Premakni zadeve v';

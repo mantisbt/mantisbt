@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.77 $
+	# $Revision: 1.78 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:14 $
+	# $Date: 2004-08-10 15:03:12 $
 	#
-	# $Id: strings_french.txt,v 1.77 2004-08-10 10:46:14 jlatour Exp $
+	# $Id: strings_french.txt,v 1.78 2004-08-10 15:03:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -103,6 +103,8 @@ $s_login_link = 'Connexion';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Vous n\'aviez pas les permissions appropriées pour agir sur les bugs suivants : ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bugs ?';
 $s_delete_bugs_conf_msg = 'Voulez-vous vraiment supprimer ces bugs ?';
 $s_move_bugs_conf_msg = 'Déplacer vers';

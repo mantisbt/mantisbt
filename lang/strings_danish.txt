@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.66 $
+	# $Revision: 1.67 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:13 $
+	# $Date: 2004-08-10 15:03:11 $
 	#
-	# $Id: strings_danish.txt,v 1.66 2004-08-10 10:46:13 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.67 2004-08-10 15:03:11 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -96,6 +96,8 @@ $s_login_link = 'Log ind';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Du havde ikke tilstrækkelige rettigheder til at udføre denne handling på følgende fejl: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Ønsker du at lukke disse fejl ?';
 $s_delete_bugs_conf_msg = 'Ønsker du at slette disse fejl ?';
 $s_move_bugs_conf_msg = 'Flyt fejlene til';

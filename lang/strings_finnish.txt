@@ -10,11 +10,11 @@
 	###########################################################################
 	# Finnish strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.14 $
+	# $Revision: 1.15 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:14 $
+	# $Date: 2004-08-10 15:03:12 $
 	#
-	# $Id: strings_finnish.txt,v 1.14 2004-08-10 10:46:14 jlatour Exp $
+	# $Id: strings_finnish.txt,v 1.15 2004-08-10 15:03:12 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -99,6 +99,8 @@ $s_login_link = 'Sisäänkirjoittaudu';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Sinulla ei ole tarvittavia oikeuksia suorittaa tätä komentoa näille bugeille: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Oletko varma, että haluat sulkea nämä bugit ?';
 $s_delete_bugs_conf_msg = 'Oletko varma, että haluat poistaa nämä bugit ?';
 $s_move_bugs_conf_msg = 'Siirrä bugit tänne';

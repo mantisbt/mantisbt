@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.11 $
+	# $Revision: 1.12 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:17 $
+	# $Date: 2004-08-10 15:03:16 $
 	#
-	# $Id: strings_serbian.txt,v 1.11 2004-08-10 10:46:17 jlatour Exp $
+	# $Id: strings_serbian.txt,v 1.12 2004-08-10 15:03:16 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -98,6 +98,8 @@ $s_login_link = 'Prijava';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Niste imali odgovarajuce dozvole za izvršenje akcije nad sledecim greškama: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Da li ste sigurni da zelite da zatvorite sledece greske ?';
 $s_delete_bugs_conf_msg = 'Da li ste siturni da zelite da izbrisete sledece greske ?';
 $s_move_bugs_conf_msg = 'Premesti grešku u';

@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.105 $
+	# $Revision: 1.106 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:14 $
+	# $Date: 2004-08-10 15:03:13 $
 	#
-	# $Id: strings_german.txt,v 1.105 2004-08-10 10:46:14 jlatour Exp $
+	# $Id: strings_german.txt,v 1.106 2004-08-10 15:03:13 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -101,6 +101,8 @@ $s_login_link = 'Anmelden';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Sie haben nicht die notwendigen Berechtigungen, um die gewählte Aktion mit den folgenden Problemen auszuführen: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich schließen?';
 $s_delete_bugs_conf_msg = 'Möchten Sie alle ausgewählten Probleme wirklich löschen?';
 $s_move_bugs_conf_msg = 'Probleme verschieben zu Projekt:';

@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:16 $
+	# $Date: 2004-08-10 15:03:15 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.67 2004-08-10 10:46:16 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.68 2004-08-10 15:03:15 jlatour Exp $
 	# -------------------------------------------------
 	# Up-to-date with strings_english.txt revision 1.187 -- jferraz 2004/07/11
 	###########################################################################
@@ -100,6 +100,8 @@ $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Você não possui as permissões apropriadas para realizar esta ação nos seguintes casos: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Você tem certeza que deseja fechar estes casos ?';
 $s_delete_bugs_conf_msg = 'Você tem certeza que deseja apagar estes casos ?';
 $s_move_bugs_conf_msg = 'Mover casos para';

@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.68 $
+	# $Revision: 1.69 $
 	# $Author: jlatour $
-	# $Date: 2004-08-10 10:46:13 $
+	# $Date: 2004-08-10 15:03:12 $
 	#
-	# $Id: strings_dutch.txt,v 1.68 2004-08-10 10:46:13 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.69 2004-08-10 15:03:12 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -99,6 +99,8 @@ $s_login_link = 'Inloggen';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Bij de volgende bugs had u niet genoeg permissies om die actie uit te voeren: ';
+$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
+$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
 $s_close_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil sluiten?';
 $s_delete_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil verwijderen?';
 $s_move_bugs_conf_msg = 'Verplaats bugs naar';
