@@ -229,8 +229,8 @@
 		</td>
 		</form>
 
-<?	if ($v_status!=RESOLVED) {
-		if ( access_level_check_greater_or_equal( UPDATER ) ) {
+<?		if ($v_status!=RESOLVED) {
+			if ( access_level_check_greater_or_equal( DEVELOPER ) ) {
 ?>
 		<form method=post action="<? echo $g_bug_assign ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
@@ -238,10 +238,10 @@
 		<td valign=top bgcolor=<? echo $g_white_color ?>>
 			<input type=submit value="<? echo $s_bug_assign_button ?>">
 		</td>
-<?		} else { ?>
+<?			} else { ?>
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 		</td>
-<?		} ?>
+<?			} # endif DEVELOPER ?>
 		</form>
 		<form method=post action="<? echo $g_bug_resolve_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
@@ -249,21 +249,30 @@
 			<input type=submit value="<? echo $s_resolve_bug_button ?>">
 		</td>
 		</form>
-<?	} else { ?>
+<?		} else { ?>
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 			&nbsp;
 		</td>
-<?	} ?>
+<?		} #endif RESOLVED ?>
+
+<?
+		if ( access_level_check_greater_or_equal( DEVELOPER ) ) {
+?>
 		<form method=post action="<? echo $g_bug_delete_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
 			<input type=hidden name=f_bug_text_id value="<? echo $v_bug_text_id ?>">
 		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
 			<input type=submit value="<? echo $s_delete_bug_button ?>">
 		</td>
+<?		} else { ?>
+		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+			&nbsp;
+		</td>
+<?		} #endif DEVELOPER ?>
 	</form>
 	</tr>
 <?
-	}
+	} # endif UPDATER
 ?>
 	</table>
 	</td>
