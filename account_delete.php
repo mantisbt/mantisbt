@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_delete.php,v 1.20 2002-09-22 05:57:18 jfitzell Exp $
+	# $Id: account_delete.php,v 1.21 2002-09-22 09:35:06 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
-	#	This page is submitted to by the following pages:
+	#	This page is called from:
 	#	- account_delete_page.php
 
 	# EXPECTED BEHAVIOUR
