@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: make_captcha_img.php,v 1.4 2004-08-17 23:25:39 thraxisp Exp $
+	# $Id: make_captcha_img.php,v 1.5 2004-08-27 23:34:16 prichards Exp $
 	# --------------------------------------------------------
 
 	# --------------------------------------------------------
@@ -116,7 +116,7 @@
 					}
 					$this->TTF_RANGE = $temp;
 					if($this->debug) echo "\n<br>-Captcha-Debug: Valid TrueType-files: (".count($this->TTF_RANGE).")";
-					if(count($this->TTF_RANGE) < 1) die('No Truetypefont available for the CaptchaClass.');
+					//if(count($this->TTF_RANGE) < 1) die('No Truetypefont available for the CaptchaClass.');
 				}
 				else
 				{
@@ -187,7 +187,11 @@
 						$color	= $func2($image, $this->r, $this->g, $this->b);
 						srand((double)microtime()*1000000);
 						$text	= chr(intval(rand(45,250)));
-						@ImageTTFText($image, $size, $angle, $x, $y, $color, $this->change_TTF(), $text);
+						if(count ($this->TTF_RANGE)>0){
+							@ImageTTFText($image, $size, $angle, $x, $y, $color, $this->change_TTF(), $text);
+						} else {
+							imagestring($image,5,$x,$y,$text,$color);
+						}
 					}
 				}
 				else
@@ -224,8 +228,14 @@
 					$color	=  $func2($image, $this->r, $this->g, $this->b);
 					$this->random_color(0, 127);
 					$shadow = $func2($image, $this->r + 127, $this->g + 127, $this->b + 127);
-					@ImageTTFText($image, $size, $angle, $x + (int)($size / 15), $y, $shadow, $this->change_TTF(), $text);
-					@ImageTTFText($image, $size, $angle, $x, $y - (int)($size / 15), $color, $this->TTF_file, $text);
+					if(count($this->TTF_RANGE) > 0){
+						@ImageTTFText($image, $size, $angle, $x + (int)($size / 15), $y, $shadow, $this->change_TTF(), $text);
+						@ImageTTFText($image, $size, $angle, $x, $y - (int)($size / 15), $color, $this->TTF_file, $text);
+					} else {
+						$t_font = rand(3,5);
+						imagestring($image,$t_font,$x + (int)($size / 15),$y-20,$text,$color);
+						imagestring($image,$t_font,$x,$y - (int)($size / 15)-20,$text,$color);
+					}
 					$x += (int)($size + ($this->minsize / 5));
 				}
 				header('Content-type: image/jpeg');
@@ -263,17 +273,19 @@
 
 			function change_TTF()
 			{
-				if(is_array($this->TTF_RANGE))
-				{
-					srand((float)microtime() * 10000000);
-					$key = array_rand($this->TTF_RANGE);
-					$this->TTF_file = $this->TTF_folder.$this->TTF_RANGE[$key];
+				if(count($this->TTF_RANGE) > 0){
+					if(is_array($this->TTF_RANGE))
+					{
+						srand((float)microtime() * 10000000);
+						$key = array_rand($this->TTF_RANGE);
+						$this->TTF_file = $this->TTF_folder.$this->TTF_RANGE[$key];
+					}
+					else
+					{
+						$this->TTF_file = $this->TTF_folder.$this->TTF_RANGE;
+					}
+					return $this->TTF_file;
 				}
-				else
-				{
-					$this->TTF_file = $this->TTF_folder.$this->TTF_RANGE;
-				}
-				return $this->TTF_file;
 			}
 
 	} // END CLASS masc_captcha
