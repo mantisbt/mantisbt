@@ -45,8 +45,8 @@
 	function history_log_event_special( $p_bug_id, $p_type, $p_optional='',  $p_optional2='' ) {
 		global $g_mantis_bug_history_table;
 
-		$c_bug_id		= (integer)$c_bug_id;
-		$c_type			= (integer)$c_type;
+		$c_bug_id		= (integer)$p_bug_id;
+		$c_type			= (integer)$p_type;
 		$c_optional		= string_prepare_text( $p_optional );
 		$c_optional2	= string_prepare_text( $p_optional2 );
 		$t_user_id		= get_current_user_field( 'id' );
