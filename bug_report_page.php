@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.30 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.31 2004-02-05 10:57:01 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -111,7 +111,7 @@
 
 
 <!-- Priority (if permissions allow) -->
-<?php if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) { ?>
+<?php if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'priority' ) ?> <?php print_documentation_link( 'priority' ) ?>

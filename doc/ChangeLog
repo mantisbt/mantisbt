@@ -16,6 +16,7 @@ Mantis ChangeLog
  * Fix #3495: Warning even if administrator account is disabled.
  * Fix #3501: No output for print_all_bug_page.php when status=closed, and Hide Status Closed is selected.
  * Fix #3506: PHP error if "duplicate id" refers to a bug that does not exist.
+ * Fix #3525: Priority field incorrectly shown on Simple Report page.
  * Fix #3530: Custom fields definitions are not validated.
  * Opt #0000: Added an index on bug_id field in the mantis_bug_file_table.
  * Opt #0000: Removed filtering code redundancy in print report pages (thanks to Lincoln Maskey)
