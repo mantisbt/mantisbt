@@ -16,6 +16,7 @@ Mantis ChangeLog
 - 0004507: [graph] No time-line in the summary for cumulative by days (thraxisp)
 - 0004429: [localization] Slovene national characters not displayed correctly (Jeroen Latour)
 - 0004423: [localization] Parse error in strings_hungarian.txt line 974 (Victor Boctor)
+- 0004509: [localization] Request rather than "Provide Feedback to Issue" (thraxisp)
 - 0004435: [other] Auto-preview of attached images is broken (Victor Boctor)
 - 0004478: [upgrade] database upgrade from 0.18.3 problem: upgrade-ID "filters-db1" does not work on mySQL4.1.3b-beta (Jeroen Latour)
 - Updated Lithuanian, Korean, Czech, Swedish, Spanish, German and Dutch translations

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.205 $
-	# $Author: bigbadger $
-	# $Date: 2004-09-01 18:12:39 $
+	# $Revision: 1.206 $
+	# $Author: thraxisp $
+	# $Date: 2004-09-09 23:14:25 $
 	#
-	# $Id: strings_english.txt,v 1.205 2004-09-01 18:12:39 bigbadger Exp $
+	# $Id: strings_english.txt,v 1.206 2004-09-09 23:14:25 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -407,12 +407,12 @@ $s_bug_assign_msg = 'Issue has been successfully assigned...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
+$s_feedback_bug_title = 'Request Feedback on Issue';
 $s_acknowledged_bug_title = 'Acknowledge Issue';
 $s_confirmed_bug_title = 'Confirm Issue';
 $s_assigned_bug_title = 'Assign Issue';
 $s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
+$s_feedback_bug_button = 'Request Feedback';
 $s_acknowledged_bug_button = 'Acknowledge Issue';
 $s_confirmed_bug_button = 'Confirm Issue';
 $s_assigned_bug_button = 'Assign Issue';
