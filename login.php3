@@ -5,20 +5,20 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Check login then redirect to main_page.php3 or to login_page.php3
+	# Check login then redirect to main_page.php3 or to login_page.php3
 ?>
 <? include( "core_API.php" ) ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-   	### get user info
+   	# get user info
 	$row = get_user_info_by_name_arr( $f_username );
 
 	$login_result = 1;
 	if ( $row ) {
 		extract( $row, EXTR_PREFIX_ALL, "u" );
 	} else {
-		### invalid login
+		# invalid login
 		$login_result = 0;
 	}
 
@@ -27,31 +27,48 @@
 		( $u_enabled==1 )&&
 		is_password_match( $f_password, $u_password )) {
 
-		### increment login count
+		# increment login count
 		increment_login_count( $u_id );
 
 		$t_project_id = get_default_project( $u_id );
 
 		if (( isset( $f_perm_login ) )&&( $f_perm_login=="on")) {
-			### set permanent cookie (1 year)
+			# set permanent cookie (1 year)
 			setcookie( $g_string_cookie, $u_cookie_string, time()+$g_cookie_time_length );
 
 			if ( $t_project_id > 0 ) {
 				setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length );
 			}
 		} else {
-			### set temp cookie, cookie dies after browser closes
+			# set temp cookie, cookie dies after browser closes
 			setcookie( $g_string_cookie, $u_cookie_string );
 			if ( $t_project_id > 0 ) {
 				setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length+$g_cookie_time_length );
 			}
 		}
 
-		### login good
+		# login good
 		$login_result = 1;
 	} else {
-		### invalid login
+		# invalid login
 		$login_result = 0;
+	}
+
+	# goto main_page or back to login_page
+	if ( $t_project_id > 0 ) {
+		$t_redirect_url = $g_main_page;
+	} else if ( $login_result ) {
+		if ( isset($f_project_id) ) {
+			$t_redirect_url = $g_set_project."?f_project_id=".$f_project_id;
+		} else {
+			$t_redirect_url = $g_login_select_proj_page;
+		}
+	} else {
+		$t_redirect_url = $g_login_page."?f_error=1";
+	}
+
+	if (( $g_quick_proceed == 1 )&&( $login_result )) {
+		print_header_redirect( $t_redirect_url );
 	}
 ?>
 <? print_html_top() ?>
@@ -59,7 +76,7 @@
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
 <?
-	### goto main_page or back to login_page
+	# goto main_page or back to login_page
 	if ( $t_project_id > 0 ) {
 		print_meta_redirect( $g_main_page, 0 );
 	} else if ( $login_result ) {
@@ -81,11 +98,11 @@
 <p>
 <div align="center">
 <?
-	if ( $t_project_id > 0 ) {							### SUCCESS
+	if ( $t_project_id > 0 ) {							# SUCCESS
 		print_bracket_link( $g_main_page, $s_proceed );
-	} else if ( $login_result ) {						### SUCCESS
+	} else if ( $login_result ) {						# SUCCESS
 		print_bracket_link( $g_login_select_proj_page, $s_proceed );
-	} else {											### FAILURE
+	} else {											# FAILURE
 		echo $s_login_error_msg;
 
 		print_bracket_link( $g_login_page."?f_error=1", $s_proceed );
