@@ -331,8 +331,9 @@
 					PRINT "<a href=\"$t_link\">$s_manage_link</a> | ";
 				}
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {
-					if ( "0000000" != $g_project_cookie_val ) {
-					PRINT "<a href=\"news_menu_page.php\">$s_edit_news_link</a> | ";
+					# Admin can edit news for All Projects (site-wide)
+					if ( ( "0000000" != $g_project_cookie_val ) || ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ) {
+						PRINT "<a href=\"news_menu_page.php\">$s_edit_news_link</a> | ";
 					} else {
 						PRINT "<a href=\"login_select_proj_page.php\">$s_edit_news_link</a> | ";
 					}

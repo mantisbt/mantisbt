@@ -66,9 +66,9 @@
 		$v_body 		= string_display( $v_body );
 		$v_date_posted 	= date( $g_normal_date_format, $v_date_posted );
 
-		# only show PIRVATE posts to DEVELOPERS and above
+		# only show PIRVATE posts to configured threshold and above
 		if (( PRIVATE == $v_view_state ) &&
-			!access_level_check_greater_or_equal( DEVELOPER )) {
+			!access_level_check_greater_or_equal( $g_private_news_threshold )) {
 			continue;
 		}
 
