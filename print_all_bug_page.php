@@ -23,7 +23,7 @@
 	require_once( $t_core_path.'icon_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php auth_ensure_user_authenticated() ?>
+<?php auth_ensure_user_authenticated( ) ?>
 <?php
 	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
 	$f_offset		= gpc_get_int( 'offset', 0 );
@@ -65,21 +65,21 @@
 	$c_user_id				= (integer)$f_reporter_id;
 	$c_assign_id			= (integer)$f_handler_id;
 	$c_per_page				= (integer)$f_per_page;
-	$c_show_category		= addslashes($f_show_category);
-	$c_show_severity		= addslashes($f_show_severity);
-	$c_show_status			= addslashes($f_show_status);
-	$c_search				= addslashes($f_search);
-	$c_sort					= addslashes($f_sort);
+	$c_show_category		= addslashes( $f_show_category );
+	$c_show_severity		= addslashes( $f_show_severity );
+	$c_show_status			= addslashes( $f_show_status );
+	$c_search				= addslashes( $f_search );
+	$c_sort					= addslashes( $f_sort );
 
-	if ('DESC' == $f_dir) {
+	if ( 'DESC' == $f_dir ) {
 		$c_dir = 'DESC';
 	} else {
 		$c_dir = 'ASC';
 	}
 
 	# Limit reporters to only see their reported bugs
-	if (( ON == $g_limit_reporters ) &&
-		( !access_has_project_level( UPDATER ) )) {
+	if ( ( ON == $g_limit_reporters ) &&
+		( !access_has_project_level( UPDATER ) ) ) {
 		$c_user_id = current_user_get_field( 'id' );
 	}
 
@@ -88,7 +88,7 @@
 	$query = 'SELECT DISTINCT *, UNIX_TIMESTAMP(last_updated) as last_updated
 			 FROM $g_mantis_bug_table';
 
-	$t_project_id = helper_get_current_project();
+	$t_project_id = helper_get_current_project( );
 
 	# project selection
 	if ( 0 == $t_project_id ) { # ALL projects
@@ -97,7 +97,7 @@
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;
-		$query2 = "SELECT DISTINCT( p.id )
+		$query2 = "SELECT DISTINCT(p.id)
 			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
 			WHERE (p.enabled=1 AND
 				p.view_state='$t_pub') OR
@@ -113,7 +113,7 @@
 			$t_where_clause = ' WHERE 1=1';
 		} else {
 			$t_where_clause = ' WHERE (';
-			for ($i=0;$i<$project_count;$i++) {
+			for ( $i=0;$i<$project_count;$i++ ) {
 				$row = db_fetch_array( $result2 );
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
 
@@ -140,12 +140,12 @@
 	}
 
 	$t_clo_val = CLOSED;
-	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status )) {
+	if ( ( 'on' == $f_hide_closed ) && ( 'closed' != $f_show_status ) ) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
 
 	$t_resolved_val = RESOLVED;
-	if ( ( 'on' == $f_hide_resolved  )&&( 'resolved' != $f_show_status )) {
+	if ( ( 'on' == $f_hide_resolved ) && ( 'resolved' != $f_show_status ) ) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_resolved_val'";
 	}
 
@@ -160,7 +160,7 @@
 	}
 
 	# Simple Text Search - Thnaks to Alan Knowles
-	if ($f_search) {
+	if ( $f_search ) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
 
 		$t_where_clause .= " AND ((summary LIKE '%$c_search%')
@@ -200,9 +200,9 @@
 	# for export
 	check_varset( $t_show_flag, 0 );
 ?>
-<?php html_page_top1() ?>
-<?php html_head_end() ?>
-<?php html_body_begin() ?>
+<?php html_page_top1( ) ?>
+<?php html_head_end( ) ?>
+<?php html_body_begin( ) ?>
 
 <table class="width100"><tr><td class="form-title">
 	<div class="center">
@@ -309,13 +309,13 @@
 
 	$f_bug_arr[$row_count]=-1;
 
-	for($i=0; $i < $row_count; $i++) {
-		if ( isset($f_bug_arr[$i]) ) {
+	for( $i=0; $i < $row_count; $i++ ) {
+		if ( isset( $f_bug_arr[$i] ) ) {
 			$index = $f_bug_arr[$i];
 			$t_bug_arr_sort[$index]=1;
 		}
 	}
-	$f_export = implode(',',$f_bug_arr);
+	$f_export = implode( ',', $f_bug_arr );
 
 	$t_icon_path = config_get( 'icon_path' );
 ?>
@@ -374,7 +374,7 @@
 				$v_start = 0;
 				$v_end   = 0;
 			}
-			PRINT "($v_start - $v_end)";
+			PRINT "( $v_start - $v_end )";
 		?>
 	</td>
 	<td class="right" colspan="3">
@@ -421,9 +421,9 @@
 	<td class="spacer" colspan="9">&nbsp;</td>
 </tr>
 <?php
-	for($i=0; $i < $row_count; $i++) {
+	for( $i=0; $i < $row_count; $i++ ) {
 		# prefix bug data with v_
-		$row = db_fetch_array($result);
+		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		$v_summary = string_display_links( $v_summary );
@@ -438,13 +438,13 @@
 		# grab the project name
 		$project_name = project_get_field( $v_project_id, 'name' );
 
-		$query = "SELECT MAX(last_modified)
+		$query = "SELECT MAX( last_modified )
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$v_id'";
 		$res2 = db_query( $query );
 		$v_bugnote_updated = db_result( $res2, 0, 0 );
 
-		if (isset($t_bug_arr_sort[$i])||($t_show_flag==0)) {
+		if ( isset( $t_bug_arr_sort[$i] ) || ( $t_show_flag==0 ) ) {
 ?>
 
 <tr>
@@ -459,7 +459,7 @@
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php
-			if ($bugnote_count > 0){
+			if ( $bugnote_count > 0 ){
 				if ( $v_bugnote_updated >
 					strtotime( "-$f_highlight_changed hours" ) ) {
 					PRINT "<span class=\"bold\">$bugnote_count</span>";
@@ -488,7 +488,7 @@
 			echo get_enum_element( 'status', $v_status );
 			# print username instead of status
 			if ( $v_handler_id > 0 && ON == config_get( 'show_assigned_names' ) ) {
-				echo ' (' . user_get_name( $v_handler_id ) . ')';
+				echo '(' . user_get_name( $v_handler_id ) . ')';
 			}
 		?>
 	</td>

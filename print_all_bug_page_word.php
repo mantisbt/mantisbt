@@ -27,13 +27,14 @@
 	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
 	$f_offset		= gpc_get_int( 'offset', 0 );
 	$f_export		= gpc_get_string( 'export' );
+	$f_show_flag	= gpc_get_bool( 'show_flag' );
 
 	# word or html export
 	if ( $f_type_page != 'html' ) {
 		$t_export_title = $g_page_title."_word";
-		$t_export_title = ereg_replace('[\/:*?"<>|]', '', $t_export_title);
-		header('Content-Type: application/msword');
-		header('Content-Disposition: attachment; filename="' . $t_export_title . '.doc"');
+		$t_export_title = ereg_replace( '[\/:*?"<>|]', '', $t_export_title );
+		header( 'Content-Type: application/msword' );
+		header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.doc"' );
 	}
 
 	$t_cookie_value = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
@@ -73,21 +74,21 @@
 	$c_user_id				= (integer)$f_reporter_id;
 	$c_assign_id			= (integer)$f_handler_id;
 	$c_per_page				= (integer)$f_per_page;
-	$c_show_category		= addslashes($f_show_category);
-	$c_show_severity		= addslashes($f_show_severity);
-	$c_show_status			= addslashes($f_show_status);
-	$c_search				= addslashes($f_search);
-	$c_sort					= addslashes($f_sort);
+	$c_show_category		= addslashes( $f_show_category );
+	$c_show_severity		= addslashes( $f_show_severity );
+	$c_show_status			= addslashes( $f_show_status );
+	$c_search				= addslashes( $f_search );
+	$c_sort					= addslashes( $f_sort );
 
-	if ('DESC' == $f_dir) {
+	if ( 'DESC' == $f_dir ) {
 		$c_dir = 'DESC';
 	} else {
 		$c_dir = 'ASC';
 	}
 
 	# Limit reporters to only see their reported bugs
-	if (( ON == $g_limit_reporters ) &&
-		( !access_has_project_level( UPDATER  ) )) {
+	if ( ( ON == $g_limit_reporters ) &&
+		( !access_has_project_level( UPDATER ) ) ) {
 		$c_user_id = current_user_get_field( 'id' );
 	}
 
@@ -121,7 +122,7 @@
 			$t_where_clause = ' WHERE 1=1';
 		} else {
 			$t_where_clause = ' WHERE (';
-			for ($i=0;$i<$project_count;$i++) {
+			for ( $i=0;$i<$project_count;$i++ ) {
 				$row = db_fetch_array( $result2 );
 				extract( $row, EXTR_PREFIX_ALL, 'v' );
 
@@ -148,12 +149,12 @@
 	}
 
 	$t_clo_val = CLOSED;
-	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status )) {
+	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status ) ) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
 	}
 
 	$t_resolved_val = RESOLVED;
-	if ( ( 'on' == $f_hide_resolved  )&&( 'resolved' != $f_show_status )) {
+	if ( ( 'on' == $f_hide_resolved  )&&( 'resolved' != $f_show_status ) ) {
 		$t_where_clause = $t_where_clause." AND status<>'$t_resolved_val'";
 	}
 
@@ -168,7 +169,7 @@
 	}
 
 	# Simple Text Search - Thnaks to Alan Knowles
-	if ($f_search) {
+	if ( $f_search ) {
 		$t_columns_clause = " $g_mantis_bug_table.*";
 
 		$t_where_clause .= " AND ((summary LIKE '%$c_search%')
@@ -221,17 +222,17 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	$f_bug_arr = explode_enum_string( $f_export );
 
 	# $t_bug_arr_sort contains 1 if the field as been selected, 0 if not
-	for($i=0; $i < $row_count; $i++) {
-		if ( isset($f_bug_arr[$i]) ) {
+	for( $i=0; $i < $row_count; $i++ ) {
+		if ( isset( $f_bug_arr[$i] ) ) {
 			$index = $f_bug_arr[$i];
 			$t_bug_arr_sort[$index]=1;
 		}
 	}
 
-	for($j=0; $j < $row_count; $j++) {
+	for( $j=0; $j < $row_count; $j++ ) {
 
 		# prefix bug data with v_
-		$row = db_fetch_array($result);
+		$row = db_fetch_array( $result );
 
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
@@ -260,7 +261,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		$v2_additional_information 	= string_display_links( $v2_additional_information );
 
 		# display the available and selected bugs
-		if (isset($t_bug_arr_sort[$j])||($f_show_flag==0)) {
+		if ( isset( $t_bug_arr_sort[$j] ) || ( $f_show_flag==0 )) {
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -509,7 +510,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 					WHERE bug_id='$v_id'";
 			$result5 = db_query( $query5 );
 			$num_files = db_num_rows( $result5 );
-			for ($i=0;$i<$num_files;$i++) {
+			for ( $i=0;$i<$num_files;$i++ ) {
 				$row = db_fetch_array( $result5 );
 				extract( $row, EXTR_PREFIX_ALL, 'v2' );
 				$v2_filesize = round( $v2_filesize / 1024 );
@@ -522,7 +523,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 							break;
 				}
 
-				if ( $i != ($num_files - 1) ) {
+				if ( $i != ( $num_files - 1 ) ) {
 					PRINT '<br />';
 				}
 			}
@@ -535,8 +536,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$v_id'
 			ORDER BY date_submitted $g_bugnote_order";
-	$result6 = db_query($query6);
-	$num_notes = db_num_rows($result6);
+	$result6 = db_query( $query6 );
+	$num_notes = db_num_rows( $result6 );
 ?>
 
 <?php # Bugnotes BEGIN ?>
