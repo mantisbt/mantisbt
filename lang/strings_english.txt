@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.229 $
+	# $Revision: 1.230 $
 	# $Author: thraxisp $
-	# $Date: 2004-12-28 15:19:42 $
+	# $Date: 2005-01-05 23:23:20 $
 	#
-	# $Id: strings_english.txt,v 1.229 2004-12-28 15:19:42 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.230 2005-01-05 23:23:20 thraxisp Exp $
 	###########################################################################
 
 # Charset
@@ -429,6 +429,7 @@ $s_password_updated = 'Password successfully updated';
 
 # adm_permission_report.php
 $s_users_added_bugnote = 'Users added Bugnote';
+$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Issue has been successfully assigned...';

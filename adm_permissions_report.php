@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: adm_permissions_report.php,v 1.6 2004-12-28 15:19:26 thraxisp Exp $
+	# $Id: adm_permissions_report.php,v 1.7 2005-01-05 23:23:19 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# ======================================================================
@@ -122,7 +122,7 @@
 	echo get_capability_row( lang_get( 'update_issue' ), config_get( 'update_bug_threshold' ) );
 	echo get_capability_row( lang_get( 'monitor_issue' ), config_get( 'monitor_bug_threshold' ) );
 	echo get_capability_row( lang_get( 'handle_issue' ), config_get( 'handle_bug_threshold' ) );
-	echo get_capability_row( lang_get( 'move_issue' ), config_get( 'move_bug_threshold' ) );
+ 	echo get_capability_row( lang_get( 'assign_issue' ), config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) );	echo get_capability_row( lang_get( 'move_issue' ), config_get( 'move_bug_threshold' ) );
 	echo get_capability_row( lang_get( 'delete_issue' ), config_get( 'delete_bug_threshold' ) );
 	echo get_capability_row( lang_get( 'reopen_issue' ), config_get( 'reopen_bug_threshold' ) );
 	echo get_capability_row( lang_get( 'view_private_issues' ), config_get( 'private_bug_threshold' ) );
