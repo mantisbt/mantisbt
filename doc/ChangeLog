@@ -11,6 +11,7 @@ Mantis
  * Fixed problem where portuguese_brazil localization did not appear correctly.
  * Removed site_settings link in print_manage_doc_menu().
  * Modified edit user links to use the username instead of the [edit] link.
+ * Modified edit project links to use the project name instead of the [edit] link.
 
 01.23.2002  -   0.17.0
 

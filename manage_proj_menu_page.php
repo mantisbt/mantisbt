@@ -110,12 +110,12 @@
 <p>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
+	<td class="form-title" colspan="5">
 		<?php echo $s_projects_title ?>
 	</td>
 </tr>
 <tr class="row-category">
-	<td width="15%">
+	<td width="20%">
 		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_name, "name", $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "name" ) ?>
 	</td>
@@ -123,20 +123,17 @@
 		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_status, "status", $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "status" ) ?>
 	</td>
-	<td width="8%">
+	<td width="10%">
 		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_enabled, "enabled", $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "enabled" ) ?>
 	</td>
-	<td width="12%">
+	<td width="10%">
 		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_view_status, "view_state", $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "view_state" ) ?>
 	</td>
 	<td width="40%">
 		<?php print_manage_project_sort_link(  $g_manage_project_menu_page, $s_description, "description", $f_dir ) ?>
 		<?php print_sort_icon( $f_dir, $f_sort, "description" ) ?>
-	</td>
-	<td width="4%">
-		&nbsp;
 	</td>
 </tr>
 <?php
@@ -157,7 +154,7 @@
 ?>
 <tr bgcolor="<?php echo $t_bgcolor ?>">
 	<td>
-		<?php echo $v_name ?>
+		<a href="<?php echo $g_manage_project_edit_page."?f_project_id=".$v_id ?>"><?php echo $v_name ?></a>
 	</td>
 	<td>
 		<?php echo get_enum_element( $s_project_status_enum_string, $v_status ) ?>
@@ -170,9 +167,6 @@
 	</td>
 	<td align="left">
 		<?php echo $v_description ?>
-	</td>
-	<td>
-		<?php print_bracket_link( $g_manage_project_edit_page."?f_project_id=".$v_id,  $s_edit_link ) ?>
 	</td>
 </tr>
 <?php
