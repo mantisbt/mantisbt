@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.145 2004-10-17 15:38:19 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.146 2004-11-28 02:59:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -215,8 +215,9 @@
 		if ( !bug_is_readonly( $v_id ) 
 		  && access_has_bug_level( $t_update_bug_threshold, $v_id ) ) {
 			echo '<a href="' . string_get_bug_update_url( $v_id ) . '">';
-			echo '<img border="0" src="' . $t_icon_path . 'update.png';
-			echo '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
+			echo '<img border="0" width="16" height="16" src="' . $t_icon_path . 'update.png';
+			echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
+			echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
 		} else {
 			echo '&nbsp;';
 		}
