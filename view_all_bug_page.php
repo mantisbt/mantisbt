@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.55 $
-	# $Author: prichards $
-	# $Date: 2004-09-25 13:34:25 $
+	# $Revision: 1.56 $
+	# $Author: thraxisp $
+	# $Date: 2004-10-17 00:14:27 $
 	#
-	# $Id: view_all_bug_page.php,v 1.55 2004-09-25 13:34:25 prichards Exp $
+	# $Id: view_all_bug_page.php,v 1.56 2004-10-17 00:14:27 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -39,7 +39,7 @@
 		array_push($t_bugslist, $rows[$i]["id"] );
 	}
 
-	gpc_set_cookie( 'bugslist', implode( ',', $t_bugslist ) );
+	gpc_set_cookie( config_get( 'bug_list_cookie' ), implode( ',', $t_bugslist ) );
 
 	compress_enable();
 

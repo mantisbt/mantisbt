@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.69 2004-10-16 15:32:26 thraxisp Exp $
+	# $Id: bug_view_page.php,v 1.70 2004-10-17 00:14:27 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,6 +38,8 @@
 	$t_can_view_history = access_has_bug_level( $t_access_level_needed, $f_bug_id );
 
 	compress_enable();
+
+	$t_bugslist = gpc_get_cookie( config_get( 'bug_list_cookie' ), false );
 ?>
 <?php html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) ) ?>
 <?php html_page_top2() ?>
@@ -49,7 +51,7 @@
 <tr>
 
 	<!-- Title -->
-	<td class="form-title" colspan="3">
+	<td class="form-title" colspan="<?php echo $t_bugslist ? '3' : '4' ?>">
 		<?php echo lang_get( 'viewing_bug_simple_details_title' ) ?>
 
 		<!-- Jump to Bugnotes -->
@@ -67,20 +69,20 @@
 		}
 	?>
 	</td>
-		<!-- prev/next links -->
-		<?php if( $t_bugslist = gpc_get_cookie( 'bugslist', false ) ) { ?>
-		<td class="center"><span class="small"> 			
-			<?php 
-				$t_bugslist = explode( ',', $t_bugslist );
-				$t_index = array_search( $f_bug_id, $t_bugslist );
-				if( false != $t_index ) {
-					if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '<<' ); 
-					if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '>>' ); 
-				}
-			?>
-		</span></td>
-		<?php } ?>
-	</td>
+
+	<!-- prev/next links -->
+	<?php if( $t_bugslist ) { ?>
+	<td class="center"><span class="small"> 			
+		<?php 
+			$t_bugslist = explode( ',', $t_bugslist );
+			$t_index = array_search( $f_bug_id, $t_bugslist );
+			if( false !== $t_index ) {
+				if( isset( $t_bugslist[$t_index-1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index-1], '&lt;&lt;' ); 
+				if( isset( $t_bugslist[$t_index+1] ) ) print_bracket_link( 'bug_view_page.php?bug_id='.$t_bugslist[$t_index+1], '&gt;&gt;' ); 
+			}
+		?>
+	</span></td>
+	<?php } ?>
 
 	<!-- Links -->
 	<td class="right" colspan="2">
