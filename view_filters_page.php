@@ -248,6 +248,7 @@
 <tr class="row-category2">
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'show' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'view_status' ) ?></td>
+	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 4 * $t_custom_cols ); ?>">
 		<input type="checkbox" name="do_filter_by_date" <?php 
@@ -265,6 +266,10 @@
 	<!-- View Status -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_view_state(); ?>
+	</td>
+	<!-- Show Sticky bugs -->
+	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+		<?php print_filter_sticky_issues(); ?>
 	</td>
 	<!-- Highlight changed bugs -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.224 $
-	# $Author: marcelloscata $
-	# $Date: 2004-12-14 20:37:07 $
+	# $Revision: 1.225 $
+	# $Author: bpfennigschmidt $
+	# $Date: 2004-12-15 17:05:01 $
 	#
-	# $Id: strings_english.txt,v 1.224 2004-12-14 20:37:07 marcelloscata Exp $
+	# $Id: strings_english.txt,v 1.225 2004-12-15 17:05:01 bpfennigschmidt Exp $
 	###########################################################################
 
 # Charset
@@ -921,6 +921,7 @@ $s_show = 'Show';
 $s_changed = 'Changed(hrs)';
 $s_viewing_bugs_title = 'Viewing Issues';
 $s_updated = 'Updated';
+$s_sticky = 'Show Sticky Issues';
 
 # view_all_inc.php
 $s_none = 'none';

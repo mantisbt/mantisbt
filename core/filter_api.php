@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.67 2004-12-13 23:10:21 thraxisp Exp $
+	# $Id: filter_api.php,v 1.68 2004-12-15 17:04:20 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -540,13 +540,18 @@
 		} else {
 			$t_where	= '';
 		}
+		
 		if ( null === $p_show_sticky ) {
 			$t_where .= " AND $t_bug_table.sticky = 0";
 		}
 		else {
 			$t_where .= " AND $t_bug_table.sticky = 1";
 		}
-
+		
+		if ( false === $t_filter['sticky_issues'] && true === $p_show_sticky ) {
+			$t_where .= " AND 1 = 0";
+		}
+		
 		# Possibly do two passes. First time, grab the IDs of issues that match the filters. Second time, grab the IDs of issues that
 		# have bugnotes that match the text search if necessary.
 		$t_id_array = array();
@@ -1295,6 +1300,9 @@
 				<a href="<?php PRINT $t_filters_url . 'view_state'; ?>" id="view_state_filter"><?php PRINT lang_get( 'view_status' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top">
+				<a href="<?php PRINT $t_filters_url . 'sticky_issues'; ?>" id="sticky_issues_filter"><?php PRINT lang_get( 'sticky' ) ?>:</a>
+			</td>
+			<td class="small-caption" valign="top">
 				<a href="<?php PRINT $t_filters_url . 'highlight_changed'; ?>" id="highlight_changed_filter"><?php PRINT lang_get( 'changed' ) ?>:</a>
 			</td>
 			<td class="small-caption" valign="top" colspan="4">
@@ -1317,6 +1325,9 @@
 				}
 				?>
 				<input type="hidden" name="view_state" value="<?php echo $t_filter['view_state'];?>" />
+			</td>
+			<td class="small-caption" valign="top" id="sticky_issues_filter_target">
+				<?php PRINT $t_filter['sticky_issues']; ?>
 			</td>
 			<td class="small-caption" valign="top" id="highlight_changed_filter_target">
 				<?php PRINT $t_filter['highlight_changed']; ?>
@@ -1836,6 +1847,9 @@
 		if ( !isset( $p_filter_arr['highlight_changed'] ) ) {
 			$p_filter_arr['highlight_changed'] = config_get( 'default_show_changed' );
 		}
+		if ( !isset( $p_filter_arr['sticky_issues'] ) ) {
+			$p_filter_arr['sticky_issues'] = config_get( 'show_sticky_issues' );
+		}
 		if ( !isset( $p_filter_arr['sort'] ) ) {
 			$p_filter_arr['sort'] = "last_updated";
 		}
@@ -2154,6 +2168,13 @@
 			PRINT '>' . lang_get( 'private' ) . '</option>';
 			?>
 		</select>
+		<?php
+	}
+
+	function print_filter_sticky_issues(){
+		global $t_filter;
+		?><!-- Show or hide sticky bugs -->
+			<input type="checkbox" name="sticky_issues" <?php check_checked( $t_filter['sticky_issues'], 'on' ); ?> />
 		<?php
 	}
 

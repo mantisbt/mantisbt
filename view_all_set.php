@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.39 2004-12-11 20:22:23 prichards Exp $
+	# $Id: view_all_set.php,v 1.40 2004-12-15 17:03:34 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -119,6 +119,7 @@
 	# these are only single values, even when doing advanced filtering
 	$f_per_page				= gpc_get_int( 'per_page', -1 );
 	$f_highlight_changed	= gpc_get_string( 'highlight_changed', config_get( 'default_show_changed' ) );
+	$f_sticky_issues		= gpc_get_bool( 'sticky_issues' );
 	# sort direction
 	$f_sort					= gpc_get_string( 'sort', 'last_updated' );
 	$f_dir					= gpc_get_string( 'dir', 'DESC' );
@@ -157,6 +158,10 @@
 
 	if ( $f_do_filter_by_date ) {
 		$f_do_filter_by_date = 'on';
+	}
+	
+	if ( $f_sticky_issues ) {
+		$f_sticky_issues = 'on';
 	}
 
 	if ( $f_type < 0 ) {
@@ -270,6 +275,7 @@
 				$t_setting_arr['user_monitor'] = $f_user_monitor;
 				$t_setting_arr['view_state'] = $f_view_state;
 				$t_setting_arr['custom_fields'] = $f_custom_fields_data;
+				$t_setting_arr['sticky_issues'] = $f_sticky_issues;
 
 				break;
 		# Set the sort order and direction

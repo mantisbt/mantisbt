@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.228 2004-12-12 14:10:37 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.229 2004-12-15 17:02:55 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 
@@ -528,6 +528,7 @@
 	$g_default_limit_view	= 50;
 	$g_default_show_changed	= 6;
 	$g_hide_status_default 	= CLOSED;
+	$g_show_sticky_issues   = 'on';
 
 	# make sure people aren't refreshing too often
 	$g_min_refresh_delay	= 10;    # in minutes
@@ -940,6 +941,9 @@
 
 	# access level needed to re-open bugs
 	$g_reopen_bug_threshold			= DEVELOPER;
+	
+	# access level needed to set a bug sticky
+	$g_set_bug_sticky_threshold			= MANAGER;
 
 	# this array sets the access thresholds needed to enter each status listed.
 	# if a status is not listed, it falls back to $g_update_bug_status_threshold
