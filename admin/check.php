@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.14 2004-09-22 17:49:18 thraxisp Exp $
+	# $Id: check.php,v 1.15 2004-10-12 20:34:24 marcelloscata Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -151,10 +151,10 @@
 <!-- Test DATABASE part 1 -->
 <tr>
 	<td bgcolor="#ffffff">
-		Opening connection to database on host [<?php echo config_get( 'hostname' ) . ':' . config_get( 'port' ) ?>] with username [<?php echo config_get( 'db_username' ) ?>]
+		Opening connection to database on host [<?php echo config_get( 'hostname' ) ?>] with username [<?php echo config_get( 'db_username' ) ?>]
 	</td>
 	<?php
-		$result = @db_connect( config_get( 'hostname' ), config_get( 'db_username' ), config_get( 'db_password' ), config_get( 'port' ) );
+		$result = @db_connect( config_get( 'hostname' ), config_get( 'db_username' ), config_get( 'db_password' ) );
 		if ( false == $result ) {
 			print_test_result( BAD );
 		} else {
