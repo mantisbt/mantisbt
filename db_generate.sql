@@ -1,4 +1,3 @@
-Database bugtracker
 # phpMyAdmin MySQL-Dump
 # http://phpwizard.net/phpMyAdmin/
 #
