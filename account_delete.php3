@@ -60,19 +60,22 @@
 	}
 	### FAILURE
 	else {
-		PRINT "ERROR!!!  An error has occured.  Email the <a href=\"mailto:$g_administrator_email\">administrator</a> with this query:<p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 		echo $query;
 	}
 ?>
 <p>
 
-<? if ( $f_protected=="on" ) { ?>
-<a href="<? echo $g_account_page ?>"><? echo $s_go_back ?></a>
-<? } else { ?>
-<a href="<? echo $g_logout_page ?>"><? echo $s_proceed ?></a>
-<? } ?>
+<?
+	if ( $f_protected=="on" ) {
+		PRINT "<a href=\"$g_account_page\">$s_go_back</a>";
+	}
+	else {
+		PRINT "<a href=\"$g_logout_page\">$s_proceed</a>";
+	}
+?>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

@@ -7,12 +7,13 @@
 <?
 	# This file is to aid in localization
 
-	### account_delete_page.php3
-	$s_confirm_delete = "Are you sure you wish to delete your account?";
-
 	### account_delete.php3
 	$s_account_protected = "Account protected. Cannot change settings...";
 	$s_account_removed = "Your account has been removed...";
+
+	### account_delete_page.php3
+	$s_confirm_delete = "Are you sure you wish to delete your account?";
+	$s_delete_account_button = "Delete Account";
 
 	### account_page.php3
 	$s_manage_profiles_link = "Manage Profiles";
@@ -134,6 +135,7 @@
 
 	### bugnote_inc.php
 	$s_no_bugnotes = "There are no notes attached to this bug.";
+	$s_delete = "Delete";
 
 	### index.php3
 	$s_click_to_login = "Click here to login";
@@ -267,7 +269,19 @@
 	$s_submission_thanks = "Thank you for your submission.";
 
 	### report_bug_advanced_page.php3
+	$s_simple_report_link = "Simple Report";
+	$s_select_profile = "Select Profile";
+	$s_or_fill_in = "OR Fill In";
+	$s_steps_to_reproduce = "Steps To Reproduce";
+
 	### report_bug_page.php3
+	$s_advanced_report_link = "Advanced Report";
+	$s_enter_report_details_title = "Enter Report Details";
+	$s_category = "Category";
+	$s_required = "required";
+	$s_additional_information = "Additional Information";
+	$s_submit_report_button = "Submit Report";
+
 	### show_source_page.php3
 	$s_show_source_for = "Showing source for";
 	$s_not_supported_part1 = "This version";
@@ -296,4 +310,5 @@
 	### General Strings
 	$s_go_back = "Go Back";
 	$s_proceed = "Click here to proceed";
+	$s_sql_error_detected = "$s_sql_error_detected";
 ?>

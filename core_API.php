@@ -74,7 +74,7 @@
 		}
 	}
 	#--------------------
-	function print_meta_redirect( $p_url, $p_time=0 ) {
+	function print_meta_redirect( $p_url, $p_time ) {
 	   PRINT "<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$p_url\">";
 	}
 	#--------------------
@@ -90,11 +90,10 @@
 		PRINT "<div align=center><h3>$p_title</h3></div>";
 	}
 	#--------------------
-	function print_footer() {
+	function print_footer( $p_file ) {
 		global 	$g_string_cookie_val, $g_webmaster_email, $g_show_source;
-		global  $DOCUMENT_ROOT, $PHP_SELF;
 
-		print_source_link();
+		print_source_link( $p_file );
 
 		PRINT "<hr size=1>";
 		print_mantis_version();
@@ -109,6 +108,10 @@
 	function print_html_bottom() {
 		PRINT "<html>";
 	}
+	#--------------------
+	############################
+	# HTML Appearance Helper API
+	############################
 	#--------------------
 	# prints the user that is logged in and the date/time
 	function print_login_info() {
@@ -149,21 +152,21 @@
 	}
 	#--------------------
 	### checks to see whether we need to be displaying the source link
-	function print_source_link() {
-		global $g_show_source, $g_show_source_page, $PHP_SELF;
+	function print_source_link( $p_file ) {
+		global $g_show_source, $g_show_source_page;
 
 		if ( $g_show_source==1 ) {
 			if ( access_level_check_greater_or_equal( "administrator" ) ) {
 				PRINT "<p>";
 				PRINT "<div align=center>";
-				PRINT "<a href=\"$g_show_source_page?f_url=$PHP_SELF\">Show Source</a>";
+				PRINT "<a href=\"$g_show_source_page?f_url=$p_file\">Show Source</a>";
 				PRINT "</div>";
 			}
 		}
 		else if ( $g_show_source==2 ) {
 			PRINT "<p>";
 			PRINT "<div align=center>";
-			PRINT "<a href=\"$g_show_source_page?f_url=$PHP_SELF\">Show Source</a>";
+			PRINT "<a href=\"$g_show_source_page?f_url=$p_file\">Show Source</a>";
 			PRINT "</div>";
 		}
 	}
@@ -176,6 +179,10 @@
 			PRINT "<i>Mantis version $g_mantis_version</i>";
 		}
 	}
+	#--------------------
+	##########################
+	# Option List Printing API
+	##########################
 	#--------------------
 	function print_handler_option_list( $p_handler_id ) {
 		global $g_mantis_user_table;
@@ -222,6 +229,49 @@
 		}
 	}
 	#--------------------
+	### Get current headlines and id  prefix with v_
+	function print_news_item_option_list() {
+		global $g_mantis_news_table;
+
+		$query = "SELECT id, headline
+			FROM $g_mantis_news_table
+			ORDER BY id DESC";
+	    $result = db_mysql_query( $query );
+	    $news_count = mysql_num_rows( $result );
+
+		for ($i=0;$i<$news_count;$i++) {
+			$row = mysql_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+			$v_headline = string_unsafe( $v_headline );
+			$v_headline = htmlspecialchars( $v_headline );
+
+			PRINT "<option value=\"$v_id\">$v_headline";
+		}
+	}
+	#--------------------
+	### Used for update pages
+	function print_field_option_list( $p_list, $p_item="" ) {
+		global $g_mantis_bug_table;
+
+		$t_category_string = get_enum_string( $p_list );
+	    $t_str = $t_category_string.",";
+		$entry_count = get_list_item_count($t_str)-1;
+		for ($i=0;$i<$entry_count;$i++) {
+			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
+			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
+			if ( $p_item==$t_s ) {
+				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
+			}
+			else {
+				PRINT "<option value=\"$t_s\">$t_s";
+			}
+		} ### end for
+	}
+	#--------------------
+	######################
+	# Print API
+	######################
+	#--------------------
 	function print_user( $p_user_id ) {
 		global $g_mantis_user_table;
 
@@ -257,10 +307,39 @@
 		}
 	}
 	#--------------------
+	# prints the profiles given the user id
+	function print_profile_option_list( $p_id ) {
+		global $g_mantis_user_profile_table;
+
+		### Get profiles
+		$query = "SELECT id, platform, os, os_build, default_profile
+			FROM $g_mantis_user_profile_table
+			WHERE user_id='$p_id'
+			ORDER BY id DESC";
+	    $result = db_mysql_query( $query );
+	    $profile_count = mysql_num_rows( $result );
+
+		PRINT "<option value=\"\">";
+		for ($i=0;$i<$profile_count;$i++) {
+			### prefix data with v_
+			$row = mysql_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+			$v_platform	= string_unsafe( $v_platform );
+			$v_os		= string_unsafe( $v_os );
+			$v_os_build	= string_unsafe( $v_os_build );
+
+			if ( $v_default_profile=="on" ) {
+				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
+			}
+			else {
+				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
+			}
+		}
+	}
 	#--------------------
-	####################
+	#####################
 	# String printing API
-	####################
+	#####################
 	#--------------------
 	function get_enum_string( $p_field_name ) {
 		global $g_mantis_bug_table;
@@ -283,25 +362,6 @@
 	# default delimiter is a ,
 	function get_list_item_count( $t_enum_string, $p_delim_char="," ) {
 		return count(explode($p_delim_char,$t_enum_string));
-	}
-	#--------------------
-	### Used for update pages
-	function print_field_option_list( $p_list, $p_item="" ) {
-		global $g_mantis_bug_table;
-
-		$t_category_string = get_enum_string( $p_list );
-	    $t_str = $t_category_string.",";
-		$entry_count = get_list_item_count($t_str)-1;
-		for ($i=0;$i<$entry_count;$i++) {
-			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
-			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
-			if ( $p_item==$t_s ) {
-				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
-			}
-			else {
-				PRINT "<option value=\"$t_s\">$t_s";
-			}
-		} ### end for
 	}
 	#--------------------
 	### Used in summary reports
@@ -378,36 +438,8 @@
 		} ### end for
 	}
 	#--------------------
-	# prints the profiles given the user id
-	function print_profile_option_list( $p_id ) {
-		global $g_mantis_user_profile_table;
-
-		### Get profiles
-		$query = "SELECT id, platform, os, os_build, default_profile
-			FROM $g_mantis_user_profile_table
-			WHERE user_id='$p_id'
-			ORDER BY id DESC";
-	    $result = db_mysql_query( $query );
-	    $profile_count = mysql_num_rows( $result );
-
-		PRINT "<option value=\"\">";
-		for ($i=0;$i<$profile_count;$i++) {
-			### prefix data with v_
-			$row = mysql_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, "v" );
-			$v_platform	= string_unsafe( $v_platform );
-			$v_os		= string_unsafe( $v_os );
-			$v_os_build	= string_unsafe( $v_os_build );
-
-			if ( $v_default_profile=="on" ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
-			}
-			else {
-				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
-			}
-		}
-	}
-	#--------------------
+	### prints a link to a bug given an ID
+	### it accounts for the user preference
 	function print_bug_link( $p_id ) {
 		global $g_mantis_user_pref_table, $g_view_bug_page, $g_view_bug_advanced_page;
 
@@ -419,7 +451,8 @@
 		}
 	}
 	#--------------------
-	function print_formatted_status( $p_status, $p_severity ) {
+	### formats the severity given the status
+	function print_formatted_severity( $p_status, $p_severity ) {
 		if ( ( ( $p_severity=="major" ) ||
 			 ( $p_severity=="crash" ) ||
 			 ( $p_severity=="block" ) )&&
@@ -611,7 +644,6 @@
 					FROM $g_mantis_user_pref_table
 					WHERE user_id='$t_id'";
 			$result = db_mysql_query( $query );
-
 			return mysql_result( $result, 0 );
 		}
 		else {

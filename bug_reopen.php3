@@ -9,7 +9,7 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### Update all fields
+	### Update fields
     $query = "UPDATE $g_mantis_bug_table
     		SET status='feedback',
 				resolution='reopened',
@@ -23,7 +23,12 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( "$g_view_bug_page?f_id=$f_id", $g_wait_time );
+		if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
+			print_meta_redirect( "$g_view_bug_advanced_page?f_id=$f_id", $g_wait_time );
+		}
+		else {
+			print_meta_redirect( "$g_view_bug_page?f_id=$f_id", $g_wait_time );
+		}
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -42,14 +47,21 @@
 	}
 	### FAILURE
 	else {
-		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 		echo $query;
 	}
 ?>
 <p>
-<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>"><? echo $s_proceed ?></a>
+<?
+	if ( get_current_user_profile_field( "advanced_view" )=="on" ) {
+		PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$f_id\">$s_proceed</a>";
+	}
+	else {
+		PRINT "<a href=\"$g_view_bug_page?f_id=$f_id\">$s_proceed</a>";
+	}
+?>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

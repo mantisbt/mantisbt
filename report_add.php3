@@ -73,7 +73,7 @@
 		$result = mysql_query( $query );
 
 		### Get the id of the text information we just inserted
-		### NOTE: this is not guarranteed to be the correct one.
+		### NOTE: this is guarranteed to be the correct one.
 		### The value LAST_INSERT_ID is stored on a per connection basis.
 
 		$query = "select LAST_INSERT_ID()";
@@ -142,7 +142,7 @@
 	}
 	### MYSQL ERROR
 	else if ( !$result ) {
-		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 		PRINT $query;
 	}
 	### OK!!!
@@ -154,6 +154,6 @@
 <a href="<? echo $g_view_bug_all_page ?>"><? echo $s_proceed ?></a>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

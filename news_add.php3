@@ -63,7 +63,7 @@
 	<td bgcolor=<? echo $g_primary_color_light ?>>
 		<br>
 		<blockquote>
-		<? echo $t_body ?>
+			<? echo $t_body ?>
 		</blockquote>
 	</td>
 </tr>
@@ -73,13 +73,13 @@
 	}
 	### FAILURE
 	else {
-		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 	}
 ?>
 <p>
 <a href="<? echo $g_news_menu_page ?>"><? echo $s_proceed ?></a>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

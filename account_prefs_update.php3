@@ -25,16 +25,15 @@
 				WHERE id='$f_id'";
 		$result = mysql_query( $query );
 	}
-	else {
-		echo "ERROR: invalid action";
-	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
 <?
-	print_meta_redirect( $g_account_prefs_page, $g_wait_time );
+	if ( $result ) {
+		print_meta_redirect( $g_account_prefs_page, $g_wait_time );
+	}
 ?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
@@ -45,11 +44,20 @@
 
 <p>
 <div align=center>
-<? echo $s_prefs_updated ?>
-<p>
+<?
+	### SUCCESS
+	if ( $result ) {
+		PRINT "$s_prefs_updated<p>";
+	}
+	### FAILURE
+	else {
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		echo $query;
+	}
+?>
 <a href="<? echo $g_account_prefs_page ?>"><? echo $s_proceed ?></a>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

@@ -244,7 +244,7 @@
 			<? echo $v_category ?>
 		</td>
 		<td>
-			<? print_formatted_status( $v_status, $v_severity ) ?>
+			<? print_formatted_severity( $v_status, $v_severity ) ?>
 		</td>
 		<td>
 			<? echo $v_status ?>
@@ -291,6 +291,6 @@
 <? } ?>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

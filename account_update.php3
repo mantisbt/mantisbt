@@ -18,7 +18,7 @@
 	    		WHERE id='$f_id'";
 		$result = mysql_query( $query );
 
-		### Update password if changed and the two match
+		### Update password if changed and the two match and not empty
 		if ( !empty( $f_password ) ) {
 			if ( $f_password==$f_password_confirm ) {
 				$t_password = crypt( $f_password );
@@ -59,7 +59,7 @@
 	}
 	### FAILURE
 	else {
-		PRINT "ERROR!!!  An error has occured.  Email the <a href=\"mailto:$g_administrator_email\">administrator</a> with this query:<p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 		echo $query;
 	}
 ?>
@@ -67,6 +67,6 @@
 <a href="<? echo $g_account_page ?>"><? echo $s_proceed ?></a>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

@@ -14,7 +14,7 @@
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
-<? print_meta_redirect( $g_login_page, $p_time=0 ) ?>
+<? print_meta_redirect( $g_login_page, $g_wait_time ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
@@ -23,6 +23,6 @@
 <div align=center>
 <a href="<? echo $g_login_page ?>"><? echo $s_click_to_login ?></a>
 </div>
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

@@ -310,8 +310,6 @@
 	PRINT "<p>";
 
 	if ( $v_status=="resolved" ) {
-		include( $g_bugnote_include_file );
-		PRINT "<p>";
 		PRINT "<div align=center>";
 		PRINT "<form method=post action=\"$g_bug_reopen\">";
 			PRINT "<input type=hidden name=f_id value=\"$v_id\">";
@@ -323,6 +321,6 @@
 	}
 ?>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

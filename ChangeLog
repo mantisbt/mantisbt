@@ -20,6 +20,10 @@ To Do:
 12.XX.2000	-	0.12.1
 
  * Fixed bug in vote adding with inccorect variable name.
+ * Fixed bug where bugnote text not properl deleted when bug deleted
+ * Uncluttered large portions of code
+ * Fixed another problem with the date created being updated improperly when
+   dealing with bugnotes.
 
 12.20.2000	-	0.12.0
 

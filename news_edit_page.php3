@@ -53,7 +53,8 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_news_update ?>">
-	<input type=hidden name=f_id value="<? echo $v_id ?>">
+		<input type=hidden name=f_id value="<? echo $v_id ?>">
+		<input type=hidden name=f_date_posted value="<? echo $v_date_posted ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_edit_news_title ?></b>
@@ -87,6 +88,6 @@
 </table>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

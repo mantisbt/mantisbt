@@ -95,6 +95,7 @@
 
 <? print_menu( $g_menu_include_file ) ?>
 
+<p>
 <div align=center>
 	[ <a href="<? echo $g_view_user_reported_bug_page ?>">Reported Bugs</a> ]
 	[ <a href="<? echo $g_view_user_assigned_bug_page ?>">Assigned Bugs</a> ]
@@ -231,7 +232,7 @@
 			<? echo $v_category ?>
 		</td>
 		<td>
-			<? print_formatted_status( $v_status, $v_severity ) ?>
+			<? print_formatted_severity( $v_status, $v_severity ) ?>
 		</td>
 		<td>
 			<? echo $v_status ?>
@@ -278,6 +279,6 @@
 <? } ?>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

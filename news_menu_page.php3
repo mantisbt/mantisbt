@@ -14,16 +14,6 @@
 		header( "Location: $g_logout_page" );
 		exit;
 	}
-
-	### Get user information and prefix with u_
-	$query = "SELECT *
-		FROM $g_mantis_user_table
-		WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_mysql_query($query);
-	$row = mysql_fetch_array($result);
-	if ( $row ) {
-		extract( $row, EXTR_PREFIX_ALL, "u" );
-	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -44,7 +34,7 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_news_add ?>">
-	<input type=hidden name=f_poster_id value="<? echo $u_id ?>">
+	<input type=hidden name=f_poster_id value="<? echo get_current_user_id() ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_add_news_title ?></b>
@@ -52,8 +42,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td width=25%>
-			<? echo $s_headline ?><br>
-			<? echo $s_do_not_use ?> "
+			<? echo $s_headline ?><br><? echo $s_do_not_use ?> "
 		</td>
 		<td width=75%>
 			<input type=text name=f_headline size=64 maxlength=64>
@@ -103,22 +92,7 @@
 		</td>
 		<td width=75%>
 			<select name=f_id>
-			<?
-				### Get current headlines and id  prefix with v_
-				$query = "SELECT id, headline
-					FROM $g_mantis_news_table
-					ORDER BY id DESC";
-			    $result = db_mysql_query( $query );
-			    $news_count = mysql_num_rows( $result );
-
-				for ($i=0;$i<$news_count;$i++) {
-					$row = mysql_fetch_array( $result );
-					extract( $row, EXTR_PREFIX_ALL, "v" );
-					$v_headline = string_unsafe( $v_headline );
-
-					PRINT "<option value=\"$v_id\">$v_headline";
-				}
-			?>
+				<? print_news_item_option_list() ?>
 			</select>
 		</td>
 	</tr>
@@ -134,6 +108,6 @@
 </table>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

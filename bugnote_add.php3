@@ -10,13 +10,7 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### get user information
-    $query = "SELECT id
-    		FROM $g_mantis_user_table
-			WHERE cookie_string='$g_string_cookie_val'";
-    $result = mysql_query($query);
-    if ( $result ) {
-		$u_id = mysql_result( $result, "id" );
-	}
+	$u_id = get_current_user_id();
 
 	$f_bugnote_text = string_safe( $f_bugnote_text );
 	### insert bugnote text
@@ -28,7 +22,7 @@
 	$result = mysql_query( $query );
 
 	### retrieve bugnote text id number
-	### NOTE: this is not guarranteed to be the correct one.
+	### NOTE: this is guarranteed to be the correct one.
 	### The value LAST_INSERT_ID is stored on a per connection basis.
 
 	$query = "select LAST_INSERT_ID()";
@@ -45,10 +39,17 @@
 			( null, '$f_bug_id', '$u_id','$t_bugnote_text_id',NOW(), NOW() )";
 	$result = mysql_query( $query );
 
-	### set last updated
+	### get date submitted (weird bug in mysql)
+	$query = "SELECT date_submitted
+			FROM $g_mantis_bug_table
+    		WHERE id='$f_id'";
+   	$result = mysql_query( $query );
+   	$t_date_submitted = mysql_result( $result, 0 );
+
+	### update bug last updated
 	$query = "UPDATE $g_mantis_bug_table
-    		SET last_updated=NOW()
-    		WHERE id='$f_bug_id'";
+    		SET date_submitted='$t_date_submitted', last_updated=NOW()
+    		WHERE id='$f_id'";
    	$result = mysql_query($query);
 ?>
 <? print_html_top() ?>
@@ -81,7 +82,7 @@
 	}
 	### OK!!!
 	else {
-		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 		PRINT $query;
 	}
 ?>
@@ -93,6 +94,6 @@
 <? } ?>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

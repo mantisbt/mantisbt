@@ -82,7 +82,7 @@
 
 	#--------------------
 	# css
-	$g_css_include_file     = "css_inc.php";
+	$g_css_include_file          = "css_inc.php";
 	#--------------------
 
 	#--------------------
@@ -188,6 +188,7 @@
 	$g_login_error_page            = "login_error_page".$g_php;
 	$g_login_success_page          = "index".$g_php;
 	$g_logout_page                 = "logout_page".$g_php;
+	$g_logout_redirect_page        = ".";
 
 	# debug only
 	$g_show_source_page            = "show_source_page".$g_php;

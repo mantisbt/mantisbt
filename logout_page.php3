@@ -13,7 +13,7 @@
 <? print_head_top() ?>
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
-<? print_meta_redirect( $g_index, $p_time=1 ) ?>
+<? print_meta_redirect( $g_logout_redirect_page, $g_wait_time ) ?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
@@ -32,7 +32,7 @@
 	</tr>
 	<tr>
 		<td align=right bgcolor=<? echo $g_primary_color_dark ?>>
-			<b><? echo $s_redirecting ?> <a href="<? echo $g_index ?>"><? echo $s_here ?></a></b>
+			<b><? echo $s_redirecting ?> <a href="<? echo $g_logout_redirect_page ?>"><? echo $s_here ?></a></b>
 		</td>
 	</tr>
 	</table>
@@ -41,6 +41,6 @@
 </table>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

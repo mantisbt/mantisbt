@@ -30,7 +30,7 @@
 
 <p>
 <div align=center>
-[ <a href="<? echo $g_report_bug_page ?>">Simple Report</a> ]
+[ <a href="<? echo $g_report_bug_page ?>"><? echo $s_simple_report_link ?></a> ]
 </div>
 
 <p>
@@ -42,13 +42,13 @@
 	<form method=post action="<? echo $g_report_add ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
-			<b>Enter Report Details</b>
+			<b><? echo $s_enter_report_details ?></b>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td valign=top width=25%>
-			Category:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*required*]</font>
+			<? echo $s_category ?>:<br>
+			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
 		</td>
 		<td>
 			<select name=f_category>
@@ -59,8 +59,8 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Reproducibility:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*required*]</font>
+			<? echo $s_reproducibility ?>:<br>
+			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
 		</td>
 		<td>
 			<select name=f_reproducibility>
@@ -71,8 +71,8 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Severity:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*required*]</font>
+			<? echo $s_severity ?>:<br>
+			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
 		</td>
 		<td>
 			<select name=f_severity>
@@ -87,7 +87,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Select Profile:
+			<? echo $s_select_profile ?>:
 		</td>
 		<td>
 			<select name=f_profile_id>
@@ -97,12 +97,12 @@
 	</tr>
 	<tr height=10 bgcolor=<? echo $g_white_color ?>>
 		<td colspan=2>
-		<b>OR</b> Fill in
+		<? echo $s_or_fill_in ?>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Platform:
+			<? echo $s_platform ?>:
 		</td>
 		<td>
 			<input type=text name=f_platform size=32 maxlength=32>
@@ -110,7 +110,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			OS:
+			<? echo $s_os ?>:
 		</td>
 		<td>
 			<input type=text name=f_os size=32 maxlength=32>
@@ -118,7 +118,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			OS Version/Build:
+			<? echo $s_os_version ?>:
 		</td>
 		<td>
 			<input type=text name=f_osbuild size=16 maxlength=16>
@@ -130,7 +130,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Product Version
+			<? echo $s_product_version ?>
 		</td>
 		<td>
 			<select name=f_product_version>
@@ -140,7 +140,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Product Build
+			<? echo $s_product_build ?>
 		</td>
 		<td>
 			<input type=text name=f_build size=4 maxlength=4>
@@ -148,8 +148,8 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Summary:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*required*]</font>
+			<? echo $s_summary ?>:<br>
+			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
 		</td>
 		<td>
 			<input type=text name=f_summary size=80 maxlength=128>
@@ -157,8 +157,8 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Description:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*required*]</font>
+			<? echo $s_description ?>:<br>
+			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
 		</td>
 		<td>
 			<textarea name=f_description cols=60 rows=5></textarea>
@@ -166,7 +166,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
-			Steps to Reproduce:
+			<? echo $s_steps_to_reproduce ?>:
 		</td>
 		<td>
 			<textarea name=f_steps_to_reproduce cols=60 rows=5></textarea>
@@ -174,7 +174,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			Additional Information:
+			<? echo $s_additional_information ?>:
 		</td>
 		<td>
 			<textarea name=f_additional_info cols=60 rows=5></textarea>
@@ -182,7 +182,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value="  Submit Report  ">
+			<input type=submit value="<? echo $s_submit_report_button ?>">
 		</td>
 	</tr>
 	</form>
@@ -192,6 +192,6 @@
 </table>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

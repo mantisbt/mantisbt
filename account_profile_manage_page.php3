@@ -14,13 +14,6 @@
 		header( "Location: $g_logout_page" );
 		exit;
 	}
-
-	### Get user information and prefix with u_
-	$query = "SELECT id
-		FROM $g_mantis_user_table
-		WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_mysql_query($query);
-    $u_id = mysql_result( $result, 0 );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -41,7 +34,7 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table cols=2 width=100%>
 	<form method=post action="<? echo $g_account_profile_add ?>">
-	<input type=hidden name=f_user_id value="<? echo $u_id ?>">
+	<input type=hidden name=f_user_id value="<? echo get_current_user_id() ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_add_profile ?></b>
@@ -98,7 +91,7 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100%>
 	<form method=post action="<? echo $g_account_profile_edit_page ?>">
-	<input type=hidden name=f_user_id value="<? echo $u_id ?>">
+	<input type=hidden name=f_user_id value="<? echo get_current_user_id() ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_edit_or_delete_profiles ?></b>
@@ -133,6 +126,6 @@
 </table>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

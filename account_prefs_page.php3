@@ -18,11 +18,7 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### grab the user id
-    $query = "SELECT id
-    		FROM $g_mantis_user_table
-			WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_mysql_query($query);
-    $u_id = mysql_result( $result, 0 );
+    $u_id = get_current_user_id();
 
 	### Grab the data
     $query = "SELECT *
@@ -64,9 +60,9 @@
 	<td bgcolor=<? echo $g_white_color ?>>
 	<table width=100% cols=2>
 	<form method=post action="<? echo $g_account_prefs_update ?>">
-	<input type=hidden name=f_action value="update">
-	<input type=hidden name=f_id value="<? echo $u_id ?>">
-	<input type=hidden name=f_user_id value="<? echo $u_user_id ?>">
+		<input type=hidden name=f_action value="update">
+		<input type=hidden name=f_id value="<? echo $u_id ?>">
+		<input type=hidden name=f_user_id value="<? echo $u_user_id ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b><? echo $s_default_account_preferences ?></b>
@@ -108,6 +104,6 @@
 </table>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

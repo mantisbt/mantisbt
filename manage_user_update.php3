@@ -16,14 +16,14 @@
 	}
 
 	### update action
+	### administrator is not allowed to change access level or enabled
+	### this is to prevent screwing your own account
 	if ( $f_protected=="on" ) {
 	    $query = "UPDATE $g_mantis_user_table
 	    		SET username='$f_username', email='$f_email',
 	    			protected='$f_protected'
 	    		WHERE id='$f_id'";
 	}
-	### administrator is not allowed to change access level or enabled
-	### this is to prevent screwing your own account
 	else {
 	    $query = "UPDATE $g_mantis_user_table
 	    		SET username='$f_username', email='$f_email',
@@ -61,7 +61,7 @@
 		PRINT "$s_manage_user_updated<p>";
 	}
 	else {
-		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 		echo $query;
 	}
 ?>
@@ -69,6 +69,6 @@
 <a href="<? echo $g_manage_page ?>"><? echo $s_proceed ?></a>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

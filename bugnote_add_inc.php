@@ -6,6 +6,7 @@
 ?>
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
 	### check access level
 	if ( access_level_check_greater_or_equal( "reporter" ) ) {
 ?>

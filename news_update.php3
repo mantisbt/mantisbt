@@ -18,9 +18,11 @@
 	### " character poses problem when editting so let's just convert them
 	$f_headline	= string_safe( str_replace( "\"", "'", $f_headline ) );
 	$f_body		= string_safe( $f_body );
+
 	### Update entry
 	$query = "UPDATE $g_mantis_news_table
-			SET headline='$f_headline', body='$f_body', last_modified=NOW()
+			SET headline='$f_headline', body='$f_body',
+				date_posted='$f_date_posted', last_modified=NOW()
     		WHERE id='$f_id'";
     $result = mysql_query( $query );
 ?>
@@ -32,7 +34,7 @@
 	if ( $result ) {
 		print_meta_redirect( $g_news_menu_page, $g_wait_time );
 	}
- ?>
+?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
 <? print_body_top() ?>
@@ -48,13 +50,13 @@
 		PRINT "$s_news_updated<p>";
 	}
 	else {
-		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 	}
 ?>
 <p>
 <a href="<? echo $g_news_menu_page ?>"><? echo $s_proceed ?></a>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

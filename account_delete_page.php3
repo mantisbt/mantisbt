@@ -30,12 +30,12 @@
 <form method=post action="<? echo $g_account_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">
 	<input type=hidden name=f_protected value="<? echo $f_protected ?>">
-	<input type=submit value="<? echo $s_delete_account ?>">
+	<input type=submit value="<? echo $s_delete_account_button ?>">
 </form>
 
 <hr size=1 width=50%>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>

@@ -15,7 +15,18 @@
 			WHERE id='$f_bug_id'";
 	$result = mysql_query($query);
 
-	#header( "Location: $g_view_bug_page?f_id=$f_id" );
+	### get date submitted (weird bug in mysql)
+	$query = "SELECT date_submitted
+			FROM $g_mantis_bug_table
+    		WHERE id='$f_id'";
+   	$result = mysql_query( $query );
+   	$t_date_submitted = mysql_result( $result, 0 );
+
+	### update bug last updated
+	$query = "UPDATE $g_mantis_bug_table
+    		SET date_submitted='$t_date_submitted', last_updated=NOW()
+    		WHERE id='$f_id'";
+   	$result = mysql_query($query);
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -47,7 +58,7 @@
 	}
 	### FAILURE
 	else {
-		PRINT "ERROR DETECTED: Report this sql statement to <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
 		echo $query;
 	}
 ?>
@@ -60,6 +71,6 @@
 <? } ?>
 </div>
 
-<? print_footer() ?>
+<? print_footer(__FILE__) ?>
 <? print_body_bottom() ?>
 <? print_html_bottom() ?>
