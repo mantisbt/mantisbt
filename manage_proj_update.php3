@@ -19,6 +19,11 @@
 	$f_name 		= string_prepare_textarea( $f_name );
 	$f_description 	= string_prepare_textarea( $f_description );
 
+	# Make sure file path has trailing slash
+	if ( $f_file_path[strlen($f_file_path)-1] != "/" ) {
+		$f_file_path = $f_file_path."/";
+	}
+
 	### Update entry
 	$query = "UPDATE $g_mantis_project_table
 			SET name='$f_name',

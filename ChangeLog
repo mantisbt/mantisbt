@@ -25,6 +25,7 @@ Mantis
  * Added ability to limit reporters to see only their bugs.  Security will need to be tightened later.
  * Added a legend for the status colors.
  * Added a empty string check before the AddBCC function when buidling the bcc list
+ * Added a check to automatically add the trailing slash to the file path.
 
 11.04.2001  -   0.15.12
 
