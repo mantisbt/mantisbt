@@ -6,12 +6,13 @@
 
 	# Dutch: Jan-Bart de Vreede, jvreede@outdare.nl
 	# Dutch: Klaasjan Brand, kjb@dds.nl
+	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 00:22:03 $
+	# $Date: 2002-08-15 08:07:16 $
 	#
-	# $Id: strings_dutch.txt,v 1.32 2002-08-15 00:22:03 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.33 2002-08-15 08:07:16 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -27,117 +28,117 @@
 	$s_print_all_bug_page_link = 'Print rapporten';
 	$s_csv_export = 'CSV exporteren';
 	$s_login_anonymously = 'Anoniem inloggen';
-	$s_jump_to_bugnotes = 'Jump to Bugnotes';
-	$s_public_project_msg = 'This project is PUBLIC.  All users have access to this project.';
-	$s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
-	$s_access_level_project = 'Project Access Level';
-	$s_view_submitted_bug_link = 'View Submitted Bug';
-	$s_assigned_projects = 'Assigned Projects';
-	$s_unassigned_projects = 'Unassigned Projects';
+	$s_jump_to_bugnotes = 'Spring naar Aantekeningen';
+	$s_public_project_msg = 'Dit project is PUBLIEK. Alle gebruikers hebben toegang tot dit project.';
+	$s_private_project_msg = 'Dit project is PRIVE. Alleen beheerders en handmatig toegevoegde gebruikers hebben toegang.';
+	$s_access_level_project = 'Project Toegangsniveau';
+	$s_view_submitted_bug_link = 'Bekijk gemeldde bug';
+	$s_assigned_projects = 'Toegewezen projecten';
+	$s_unassigned_projects = 'Niet-toegewezen projecten';
 	$s_print = 'Print';
-	$s_jump = 'Jump';
-	$s_copy_users = 'Copy Users';
-	$s_copy_categories_from = 'Copy Categories From';
-	$s_copy_categories_to = 'Copy Categories To';
-	$s_bug_history = 'Bug History';
-	$s_field = 'Field';
-	$s_old_value = 'Old Value';
-	$s_new_value = 'New Value';
+	$s_jump = 'Spring';
+	$s_copy_users = 'Kopieer gebruikers';
+	$s_copy_categories_from = 'Kopieer categorieëen van';
+	$s_copy_categories_to = 'Kopieer categorieëen naar';
+	$s_bug_history = 'Bug Geschiedenis';
+	$s_field = 'Veld';
+	$s_old_value = 'Oude waarde';
+	$s_new_value = 'Nieuwe waarde';
 	$s_date_modified = 'Date Modified';
-	$s_bugnote = 'Bugnote';
-	$s_change = 'Change';
-	$s_bugnote_view_state = 'Bugnote View State';
+	$s_bugnote = 'Aantekening';
+	$s_change = 'Verandering';
+	$s_bugnote_view_state = 'Status aantekening';
 	$s_bug_monitor = 'Bug Monitored';
-	$s_bug_end_monitor = 'Bug End Monitor';
-	$s_announcement = 'Announcement';
-	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Bugnote Delete';
-	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
-	$s_bug_relationships = 'Relationships';
+	$s_bug_end_monitor = 'Bug Stop Monitor';
+	$s_announcement = 'Aankondiging';
+	$s_stays_on_top = 'Blijft bovenop';
+	$s_delete_bugnote_button = 'Verwijder aantekening';
+	$s_delete_bugnote_sure_msg = 'Weet u zeker dat u deze aantekening wilt verwijderen?';
+	$s_bug_relationships = 'Relaties';
 
-	$s_duplicate_of = 'duplicate of %id';
-	$s_has_duplicate = 'has duplicate %id';
-	$s_related_to = 'related to %id';
-	$s_dependant_on = 'dependant on %id';
-	$s_blocks = 'blocks %id';
+	$s_duplicate_of = 'duplicaat van %id';
+	$s_has_duplicate = 'heeft %id als duplicaat';
+	$s_related_to = 'gerelateerd aan %id';
+	$s_dependant_on = 'afhankelijk van %id';
+	$s_blocks = 'blokkeert %id';
 
-	$s_new_bug = 'New Bug';
-	$s_bugnote_added = 'Bugnote Added';
-	$s_bugnote_edited = 'Bugnote Edited';
-	$s_bugnote_deleted = 'Bugnote Deleted';
-	$s_summary_updated = 'Summary Updated';
-	$s_description_updated = 'Description Updated';
-	$s_additional_information_updated = 'Additional Information Updated';
-	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
+	$s_new_bug = 'Nieuwe Bug';
+	$s_bugnote_added = 'Aantekening toegevoegd';
+	$s_bugnote_edited = 'Aantekening bewerkt';
+	$s_bugnote_deleted = 'Aantekening verwijderd';
+	$s_summary_updated = 'Samenvatting aangepast';
+	$s_description_updated = 'Beschrijving aangepast';
+	$s_additional_information_updated = 'Extra informatie aangepast';
+	$s_steps_to_reproduce_updated = 'Stappen om te reproduceren aangepast';
+	$s_file_added = 'Bestand toegevoegd: ';
+	$s_file_deleted = 'Bestand verwijderd: ';
 
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
+	$s_make_private = 'Maak Privé';
+	$s_make_public = 'Maak Publiekelijk';
 
 	# bug_actiongroup_page.php : mass treatment
-	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-	$s_move_bugs_conf_msg = 'Move bugs to';
-	$s_assign_bugs_conf_msg = 'Assign bugs to';
-	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-	$s_priority_bugs_conf_msg = 'Choose bugs priority';
-	$s_status_bugs_conf_msg = 'Choose bugs status';
-	$s_close_group_bugs_button = 'Close Bugs' ;
-	$s_delete_group_bugs_button = 'Delete Bugs' ;
-	$s_move_group_bugs_button = 'Move Bugs' ;
-	$s_assign_group_bugs_button = 'Assign Bugs' ;
-	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-	$s_priority_group_bugs_button = 'Update Priority' ;
-	$s_status_group_bugs_button = 'Update Status' ;
+	$s_close_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil sluiten?';
+	$s_delete_bugs_conf_msg = 'Weet u zeker dat u deze bugs wil verwijderen?';
+	$s_move_bugs_conf_msg = 'Verplaats bugs naar';
+	$s_assign_bugs_conf_msg = 'Wijs bugs toe aan';
+	$s_resolve_bugs_conf_msg = 'Kies afronding van bugs';
+	$s_priority_bugs_conf_msg = 'Kies prioriteit van bugs';
+	$s_status_bugs_conf_msg = 'Kies status van bugs';
+	$s_close_group_bugs_button = 'Sluit bugs' ;
+	$s_delete_group_bugs_button = 'Verwijder bugs' ;
+	$s_move_group_bugs_button = 'Verplaats bugs' ;
+	$s_assign_group_bugs_button = 'Wijs bugs toe' ;
+	$s_resolve_group_bugs_button = 'Los bugs op' ;
+	$s_priority_group_bugs_button = 'Pas prioriteit aan' ;
+	$s_status_group_bugs_button = 'Pas status aan' ;
 
 	# improved JPgraphs strings
-	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-	$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-	$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-	$s_graph_imp_category_title = 'Synthesis graphs by category';
-	$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-	$s_by_status_pct = 'by status percentage';
-	$s_by_priority_pct = 'by priority percentage';
-	$s_by_severity_pct = 'by severity percentage';
-	$s_by_category_pct = 'by category percentage';
-	$s_by_resolution_pct = 'by resolution percentage';
-	$s_by_severity_mix = 'by severity and status';
-	$s_by_priority_mix = 'by priority and status';
-	$s_by_resolution_mix = 'by resolution and status';
-        $s_synthesis_link = 'Synthesis';
-        $s_status_link = 'Per state';
-	$s_priority_link = 'Per priority';
-	$s_severity_link = 'Per severity';
-	$s_category_link = 'Per category';
-	$s_resolution_link = 'Per resolution';
+	$s_graph_imp_status_title = 'Synthese grafieken: Status' ;
+	$s_graph_imp_priority_title = 'Synthese grafieken: Prioriteit' ;
+	$s_graph_imp_severity_title = 'Synthese grafieken: Ernstigheid';
+	$s_graph_imp_category_title = 'Synthese grafieken: Categorie';
+	$s_graph_imp_resolution_title = 'Synthese grafieken: Afronding';
+	$s_by_status_pct = 'per status percentage';
+	$s_by_priority_pct = 'per prioriteit percentage';
+	$s_by_severity_pct = 'per ernstigheid percentage';
+	$s_by_category_pct = 'per categorie percentage';
+	$s_by_resolution_pct = 'per afronding percentage';
+	$s_by_severity_mix = 'per ernstigheid en status';
+	$s_by_priority_mix = 'per prioriteit en status';
+	$s_by_resolution_mix = 'per oplossing en status';
+	$s_synthesis_link = 'Synthese';
+	$s_status_link = 'Per status';
+	$s_priority_link = 'Per prioriteit';
+	$s_severity_link = 'Per ernstigheid';
+	$s_category_link = 'Per categorie';
+	$s_resolution_link = 'Per afronding';
 
 	#print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Display selected only';
+	$s_hide_button = 'Toon alleen geselecteerden';
 
 	# print_all_bug_options.php : printing preferences
-	$s_printing_preferences_title = 'Choose fields to print';
-	$s_printing_options_link = 'Printing Options';
+	$s_printing_preferences_title = 'Kies velden om te printen';
+	$s_printing_options_link = 'Print opties';
 
 	# word and excel export
-	$s_bugnote_title = 'Bugnote handler' ;
-	$s_bugnote_date = 'Date of bugnote';
-	$s_bugnote_description = 'Bugnote description';
+	$s_bugnote_title = 'Afhandelaar aantekening' ;
+	$s_bugnote_date = 'Datum van aantekening';
+	$s_bugnote_description = 'Beschrijving van aantekening';
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
+	$MANTIS_ERROR[ERROR_GENERIC]            = 'FOUT: Deze actie had een fout tot gevolg. Zou u dit willen melden aan uw systeembeheerder?';
 	$MANTIS_ERROR[ERROR_SQL] = 'FOUT: SQL fout gevonden.  Zou u dit willen melden aan ';
 	$MANTIS_ERROR[ERROR_LOGIN] = 'FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.';
 	$MANTIS_ERROR[ERROR_REPORT] = 'FOUT: Er is een fout in uw rapport.';
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FOUT: Geen bestand opgegeven.';
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FOUT: Het bestandstype is niet toegestaan';
 	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FOUT: De folder bestaat niet.  Controleer de project instellingen.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'FOUT: Deze categorie bestaat al.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'FOUT: Deze versie bestaat al.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FOUT: Dit bestand bestaat al. Verwijder het bestand eerst.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FOUT: Dit project bestaat al.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FOUT: Een benodigd veld is niet ingevuld. Controleer a.u.b. uw invoer.';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FOUT: This account wordt beschermd. U heeft geen toegang hiertoe totdat de bescherming is opgeheven.';
 
 	# General Strings
 	$s_go_back = 'Ga terug';
@@ -191,7 +192,7 @@
 	$s_email_bug = 'Bug nummer';
 	$s_email_category = 'Categorie';
 	$s_email_reproducibility = 'Reproduceerbaarheid';
-	$s_email_severity = 'Omvang';
+	$s_email_severity = 'Ernstigheid';
 	$s_email_priority = 'Prioriteit';
 	$s_email_status = 'Status';
 	$s_email_resolution = 'Afronding';
@@ -218,10 +219,10 @@
 	$s_password = 'Wachtwoord';
 	$s_confirm_password  = 'Bevestig wachtwoord';
 	$s_access_level = 'Toegangsniveau';
-	$s_update_user_button = 'Update gebruiker';
+	$s_update_user_button = 'Pas gebruiker aan';
 
 	# account_prefs_page.php
-	$s_default_account_preferences_title = 'Default account instellingen';
+	$s_default_account_preferences_title = 'Standaard account instellingen';
 	$s_default_project = 'Standaardproject';
 	$s_advanced_report = 'Uitgebreid rapport';
 	$s_advanced_view = 'Uitgebreide informatie';
@@ -245,7 +246,7 @@
 	$s_prefs_reset_msg = 'Instellingen zijn terug gezet op begininstellingen...';
 
 	# account_prefs_update.php
-	$s_prefs_updated_msg = 'Instellingen zijn ge-updated...';
+	$s_prefs_updated_msg = 'Instellingen zijn aangepast...';
 
 	# account_profile_add.php
 	$s_profile_added_msg = 'Profiel toegevoegd...';
@@ -262,23 +263,23 @@
 	$s_update_profile_button = 'Update profiel';
 
 	# account_profile_make_default.php
-	$s_profile_defaulted_msg = 'Default profiel ge-updated...';
+	$s_profile_defaulted_msg = 'Standaard profiel aangepast...';
 
 	# account_profile_manage_page.php
 	$s_add_profile_title = 'Voeg profiel toe';
 	$s_add_profile_button = 'Voeg profiel toe';
 	$s_edit_or_delete_profiles_title = 'Aanpassen of verwijderen profiel';
 	$s_edit_profile = 'Pas profiel aan';
-	$s_make_default = 'Maak default';
+	$s_make_default = 'Maak standaard';
 	$s_delete_profile = 'Verwijder profiel';
 	$s_select_profile = 'Selecteer profiel';
 	$s_submit_button = 'Verder';
 
 	# account_profile_update.php
-	$s_profile_updated_msg = 'Profiel ge-updated...';
+	$s_profile_updated_msg = 'Profiel aangepast...';
 
 	# account_update.php
-	$s_account_updated_msg = 'Uw account is succesvol ge-updated...';
+	$s_account_updated_msg = 'Uw account is succesvol aangepast...';
 
 	# bug_assign.php
 	$s_bug_assign_msg       = 'Bug is toegewezen...';
@@ -299,7 +300,7 @@
 
 	# bug_monitor.php
 	$s_monitor_bug_button = 'Monitor Bug';
-	$s_unmonitor_bug_button = 'End Monitoring';
+	$s_unmonitor_bug_button = 'Stop Monitoring';
 
 	# bug_file_add.php
 	$s_file_upload_msg = 'Bestand is ge-upload';
@@ -324,7 +325,7 @@
 	$s_bugnote_add_resolve_button = 'Toevoegen aantekening';
 
 	# bug_update.php
-	$s_bug_updated_msg = 'Bug succesvol ge-updated...';
+	$s_bug_updated_msg = 'Bug succesvol aangepast...';
 
 	# bug_update_advanced_page.php
 	$s_back_to_bug_link = 'Terug naar bug';
@@ -332,7 +333,7 @@
 	$s_updating_bug_advanced_title = 'Bijwerken bug informatie';
 	$s_id = 'Identificatie nummer';
 	$s_category = 'Categorie';
-	$s_severity = 'Omvang';
+	$s_severity = 'Ernstigheid';
 	$s_reproducibility = 'Reproduceerbaarheid';
 	$s_date_submitted = 'Datum verstuurd';
 	$s_last_update = 'Laatste update';
@@ -354,7 +355,7 @@
 	$s_steps_to_reproduce = 'Stappen om te reproduceren';
 	$s_additional = 'Additioneel';
 	$s_information = 'Informatie';
-	$s_update_information_button = 'Update informatie';
+	$s_update_information_button = 'Pas informatie aan';
 
 	# bug_update_page.php
 	$s_update_advanced_link = 'Update uitgebreid';
@@ -461,7 +462,7 @@
 	$s_update_category_button = 'Update categorie';
 
 	# manage_proj_category_update.php
-	$s_category_updated_msg = 'Categorie is ge-updated...';
+	$s_category_updated_msg = 'Categorie is aangepast...';
 
 	# manage_proj_delete.php
 	$s_project_deleted_msg = 'Project succesvol verwijderd...';
@@ -493,7 +494,7 @@
 	$s_name = 'Naam';
 
 	# manage_proj_update.php
-	$s_project_updated_msg = 'Project is succesvol ge-updated...';
+	$s_project_updated_msg = 'Project is succesvol aangepast...';
 
 	# manage_proj_version_add.php
 	$s_version_added_msg = 'Versie is succesvol toegevoegd...';
@@ -510,10 +511,10 @@
 	$s_update_version_button = 'Update versie';
 
 	# manage_proj_version_update.php
-	$s_version_updated_msg = 'Versie is succesvol ge-updated...';
+	$s_version_updated_msg = 'Versie is succesvol aangepast...';
 
 	# manage_user_delete.php
-	$s_account_delete_protected_msg = 'Account beschermt. Dit account kan niet worden verwijderd.';
+	$s_account_delete_protected_msg = 'Account beschermd. Dit account kan niet worden verwijderd.';
 	$s_account_deleted_msg = 'Account verwijderd...';
 
 	# manage_user_delete_page.php
@@ -535,7 +536,7 @@
 	$s_account_reset_msg2 = 'Account wachtwoord uitgeschakeld...';
 
 	# manage_user_update.php
-	$s_manage_user_protected_msg = 'Account beschermd. Toegangsniveau en beschermt tegen activeren. Anders is account ge-updated...';
+	$s_manage_user_protected_msg = 'Account beschermd. Toegangsniveau en beschermt tegen activeren. Verder is account aangepast...';
 	$s_manage_user_updated_msg = 'Account bijgewerkt...';
 
 	# menu_inc.php
@@ -579,7 +580,7 @@
 	$s_select_post = 'Selecteer bericht';
 
 	# news_update.php
-	$s_news_updated_msg = 'Nieuws item ge-updated...';
+	$s_news_updated_msg = 'Nieuws item aangepast...';
 
 	# news_view_page.php
 	$s_back_link = 'terug';
@@ -631,7 +632,7 @@
 
 	# report_add.php
 	$s_must_enter_category = 'U moet een categorie selecteren';
-	$s_must_enter_severity = 'U moet een omvang selecteren';
+	$s_must_enter_severity = 'U moet de ernstigheid selecteren';
 	$s_must_enter_reproducibility = 'U moet een reproduceerbaarheid selecteren';
 	$s_must_enter_summary = 'U moet een samenvatting invoeren';
 	$s_must_enter_description = 'U moet een beschrijving invoeren';
@@ -644,7 +645,7 @@
 	$s_required = 'Verplicht';
 	$s_select_category = 'Selecteer categorie';
 	$s_select_reproducibility = 'Selecteer reproduceerbaarheid';
-	$s_select_severity = 'Selecteer omvang';
+	$s_select_severity = 'Selecteer ernstigheid';
 	$s_or_fill_in = 'of vul in';
 	$s_assign_to = 'Toewijzen aan';
 	$s_additional_information = 'Additionele informatie';
@@ -694,7 +695,7 @@
 	$s_summary_jpgraph_link = 'Uitgebreid overzicht';
 	$s_by_status = 'naar status';
 	$s_by_date = 'naar datum';
-	$s_by_severity = 'naar omvang';
+	$s_by_severity = 'naar ernstigheid';
 	$s_by_resolution = 'naar afronding';
 	$s_by_category = 'naar categorie';
 	$s_by_priority = 'naar prioriteit';
@@ -712,10 +713,10 @@
 	# view_all_bug_page.php
 	$s_any = 'elke';
 	$s_show = 'Laat zien';
-	$s_changed = 'Veranderd(uren)';
-	$s_hide_closed = 'Verberg afgeronde bugs';
+	$s_changed = 'Aangepast (uren)';
+	$s_hide_closed = 'Verberg gesloten bugs';
 	$s_viewing_bugs_title = 'Bekijken bugs';
-	$s_updated = 'Ge-updated';
+	$s_updated = 'Aangepast';
 
 	# view_all_inc.php
 	$s_none = 'geen';

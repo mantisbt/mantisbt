@@ -23,12 +23,7 @@ Mantis ChangeLog
  * Added a remove link next to the edit link in the project categories and project versions to all deleting without going into edit.
  * Administrators can now modify the preferences for all users that are not protected.  Protected users need to be unprotected first.
  * Quoted various text values retrieved from a database and used in a database query.
- * Updated Hungarian localization.
- * Updated Russian localizations.
- * Updated Romanian localization.
- * Updated German localization.
- * Updated Danish lozalization.
- * Updated Norwegian localization.
+ * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
  * Updated comments in all localization files to point to correct file names.
  * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
  * Removed HTML entities from all localization files.
