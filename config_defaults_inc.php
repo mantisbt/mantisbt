@@ -12,10 +12,10 @@
 	# config_defaults_inc.php
 
 	# This file should not be changed. If you want to override any of the values
-	# defined here, define them in a file called config_inc.php, which will be loaded
-	# after this file.
+	# defined here, define them in a file called custom_config_inc.php, which will 
+	# be loaded after this file.
 
-	# In general a value of 0 means the feature is disabled and 1 means the
+	# In general a value of OFF means the feature is disabled and ON means the
 	# feature is enabled.  Any other cases will have an explanation.
 
 	# Look in configuration.html for more detailed comments.
@@ -51,16 +51,15 @@
 	# requires trailing /
 	$g_icon_path     = $g_path.'images/';
 
-	# absolute path to your installation.  *NO* symlinks allowed (causes problems with file downloads)
-	# requires trailing /
+	# absolute path to your installation.  Requires trailing /
+	# Symbolic links are allowed since release 0.17.3
 	$g_absolute_path = dirname( __FILE__ ) . '/';
 
 	#############################
 	# Web Server
 	#############################
 
-	# --- using MS IIS ----------------
-	# set to ON if you use IIS
+	# Using Microsoft Internet Information Server (IIS)
 	$g_use_iis = OFF;
 
 	#############################
@@ -182,7 +181,7 @@
 	###############################
 	# Mantis Display Settings
 	###############################
-
+#MANUAL---------------------------------------STOPPED HERE-------------------------
 	# --- sitewide variables ----------
 	$g_window_title = 'Mantis';     # browser window title
 	$g_page_title   = 'Mantis';     # title at top of html page

@@ -33,10 +33,11 @@ not reflect the db tables):
   - Project Id
   - Regular Expression (to be used for validation)
   - Type (0-string, 1-numeric, 2-float, 3-enum, 4-email?) (eg: 3)
-  - Value (possible values (if type = 3) / default (otherwise) (eg: RED|YELLOW|BLUE)
+  - Value (possible values (if type = 3) / default (otherwise) (eg: RED|_YELLOW_|BLUE)
+    In this example, yellow is the default option.
 - All custom fields of type VARCHAR(255).
 - If the value of a custom field for a certain defect is empty, then it
-shouldn't be stored in the db.
+shouldn't be stored in the db (consider saving anyway for speed!). 
 - If the value of a custom field for a certain defect is not found, then it
 should be assumed to be empty ('').
 - If the value of a custom field is equal to the default, then it should still
@@ -51,23 +52,47 @@ DATABASE CHANGES
 ----------------
 ... this section still needs to be detailed ... will go in 0.18.0 ...
 
-MANTIS_PROJECT_CUSTOM_FIELDS
-- id: int: counter
-- project_id:
-- variable_name: $s_xxxxxx
-- type: smallint: (0-string, 1-numeric, 2-float, 3-enum)
-- value: varchar: 255
-- regexp: varchar: 255
-- read_access: 
-- write_access:
+#
+# Table structure for table `mantis_custom_fields`
+#
 
-The combination of project_id/variable name is unique.
+CREATE TABLE mantis_custom_fields (
+  id int(3) NOT NULL auto_increment,
+  project_id int(7) NOT NULL default '0',
+  var_name varchar(64) NOT NULL default '',
+  type int(2) NOT NULL default '0',
+  value varchar(255) NOT NULL default '',
+  regexp varchar(255) NOT NULL default '',
+  access_level_r int(2) NOT NULL default '0',
+  access_level_rw int(2) NOT NULL default '0',
+  PRIMARY KEY  (id),
+  UNIQUE KEY project_id (project_id,var_name)
+) TYPE=MyISAM COMMENT='Table to contain per project custom field definitions';
+# --------------------------------------------------------
 
-MANTIS_BUG_CUSTOM_FIELDS(_STRINGS)
-- id: int: counter
-- bug_id: : foreign key to MANTIS_BUG_TABLE
-- field_id: int: foreign key to MANTIS_PROJECT_CUSTOM_FIELDS.id
-- value: varchar 255
+#
+# Table structure for table `mantis_custom_fields_strings`
+#
+
+CREATE TABLE mantis_custom_fields_strings (
+  id int(7) NOT NULL auto_increment,
+  bug_id int(7) NOT NULL default '0',
+  field_id int(3) NOT NULL default '0',
+  value varchar(255) NOT NULL default '',
+  PRIMARY KEY  (id),
+  UNIQUE KEY field (bug_id,field_id)
+) TYPE=MyISAM COMMENT='Table containing values for custom fields saved as strings.';
+
+#
+# Relationships
+#
+
+- mantis_custom_fields.type: 0-string, 1-numeric, 2-float, 3-enum
+- mantis_custom_fields_strings.bug_id: foreign key to mantis_bug_table
+- mantis_custom_fields_strings.field_id: foreign key to mantis_custom_fields
+- mantis_custom_fields.project_id: foreign key to mantis_project_table
+- var_name is the portion after the. For example, $s_custom_field_caption, would be
+  "custom_field_caption".
 
 core_custom_fields_API.php
 --------------------------
