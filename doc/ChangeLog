@@ -45,6 +45,9 @@ Mantis ChangeLog
  * New Config: default_bug_view_status (default VS_PUBLIC).  Default view status for bugs.
  * New Config: default_bugnote_view_status (default VS_PUBLIC).  Default view status for bugnotes.
  * New Config: default_reminder_view_status (default VS_PUBLIC).  Default view status for reminders.
+ * New Config: stored_query_use_threshold (default REPORTER).  Threshold needed to be able to use stored queries.
+ * New Config: stored_query_create_threshold (default DEVELOPER).  Threshold needed to be able to create stored queries.
+ * New Config: stored_query_create_shared_threshold (default MANAGER).  Threshold needed to be able to create shared stored queries.
  * Removed config option (use_phpMailer): phpMailer has always been used
  * Removed config option (phpMailer_path): phpMailer has been included to Mantis distribution
  * Removed config option (use_x_priority): phpMailer always puts X-Priority header
