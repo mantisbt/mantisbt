@@ -12,6 +12,12 @@
 # significant releases (like 0.14.x to 0.15.0).
 
 # =================
+# 0.15.x to 0.15.8
+# =================
+
+New encryption methods have been added.  Check INSTALL (2a and 2b) for details.
+
+# =================
 # 0.14.x to 0.15.0
 # =================
 
