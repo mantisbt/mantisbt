@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.21 2003-02-15 22:54:52 jlatour Exp $
+	# $Id: authentication_api.php,v 1.22 2003-02-15 23:37:33 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -148,7 +148,7 @@
 		if ( LDAP == $t_login_method ) {
 			return ldap_authenticate( $p_user_id, $p_test_password );
 		}
-
+		
 		$t_password = user_get_field( $p_user_id, 'password' );
 		
 		$t_login_methods = Array(MD5, CRYPT, PLAIN);
@@ -157,7 +157,10 @@
 			
 			# pass the stored password in as the salt
 			if ( auth_process_plain_password( $p_test_password, $t_password, $t_login_method ) == $t_password ) {
-				if ( $t_login_method != $t_configured_login_method ) {
+				# Check for migration to another login method and test whether the password was encrypted
+				# with our previously insecure implemention of the CRYPT method
+				if ( $t_login_method != $t_configured_login_method 
+					|| ( CRYPT == $t_configured_login_method && substr( $t_password, 0, 2 ) == substr( $p_test_password, 0, 2 ) ) ) {
 					user_set_password( $p_user_id, $p_test_password, true );
 				}
 				
@@ -184,14 +187,8 @@
 
 		switch ( $t_login_method ) {
 			case CRYPT:
-			# @@@ jlatour says we shouldn't be providing a salt when encrypting
-			#     and certainly not the password since it appears plaintext in the
-			#     encrypted form.  That means I don't understand why we have
-			#     CRYPT_FULL_SALT at all.  For now it just behaves the same way
-			#     as CRYPT but we should change it or phase it out or something - jf
-			case CRYPT_FULL_SALT:
 				# a null salt is the same as no salt, which causes a salt to be generated
-				# otherwise, us the salt given
+				# otherwise, use the salt given
 				$t_processed_password = crypt( $p_password, $p_salt );
 				break;
 			case MD5:

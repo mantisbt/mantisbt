@@ -7,6 +7,7 @@ Mantis ChangeLog
  * Behaviour change: Removed f_ prefix from POST and GET field names
  * Changed config options (*_color): now use $g_status_colors['<status color>'] array. For example, $g_new_color is replaced with $g_status_colors['new'].
  * Changed config options (default_advanced_report, default_advanced_view, default_advanced_update): now ON/OFF instead of BOTH/SIMPLE/ADVANCED (they never worked the other way anyway)
+ * Changed config options (login_method): CRYPT_FULL_SALT is now deprecated and should be replaced with CRYPT or MD5
  * Code cleanup: added validation checks for all inputs that are passed on to database queries
  * Code cleanup: db_prepare_string(), db_prepare_int(), and db_prepare_bool() to be called on data before it goes into the database
  * Code cleanup: modified input-checked variables to be prefixed by $c_

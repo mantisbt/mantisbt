@@ -205,6 +205,43 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	}
 ?>
 
+<!-- login_method check -->
+<?php
+	if ( CRYPT_FULL_SALT == config_get( 'login_method' ) ) { ?>
+		<br />
+
+		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
+		<tr>
+			<td bgcolor="#ff0088">
+				<span class="title">WARNING - login_method - WARNING</span><br /><br />
+
+				You are using CRYPT_FULL_SALT as your login method. This login method is deprecated and you should change the login method to either CRYPT (which is compatible) or MD5 (which is more secure). CRYPT_FULL_SALT will be removed in the next major release.
+
+				You can simply change the login_method in your configuration file. You don't need to do anything else, even if you migrate to MD5 (which produces incompatible hashes). This is because Mantis will automatically convert the passwords as users log in.
+			</td>
+		</tr>
+		</table>
+
+		<br /><?php
+	} else if ( MD5 != config_get( 'login_method' ) ) { ?>
+		<br />
+
+		<table width="100%" bgcolor="#222222" border="0" cellpadding="20" cellspacing="1">
+		<tr>
+			<td bgcolor="#ffcc22">
+				<span class="title">NOTICE - login_method - NOTICE</span><br /><br />
+
+				You are not using MD5 as your login_method. The other login methods are mostly provided for backwards compatibility, but we recommend migrating to the more secure MD5.
+
+				You can simply change the login_method in your configuration file to MD5. Mantis will automatically convert the passwords as users log in.
+			</td>
+		</tr>
+		</table>
+
+		<br /><?php
+	}
+?>
+
 <br />
 
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.76 2003-02-15 22:20:32 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.77 2003-02-15 23:37:32 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -598,8 +598,8 @@
 	$g_manage_user_threshold = ADMINISTRATOR;
 
 	# --- login method ----------------
-	# CRYPT or CRYPT_FULL_SALT or PLAIN or MD5 or LDAP or BASIC_AUTH
-	# If you were using CRYPT and it now fails, try CRYPT_FULL_SALT
+	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
+	# You can simply change this at will. Mantis will try to figure out how the passwords were encrypted.
 	$g_login_method				= MD5;
 
 	# --- limit reporters -------------
