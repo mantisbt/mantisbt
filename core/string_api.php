@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.51 2004-05-27 23:53:23 int2str Exp $
+	# $Id: string_api.php,v 1.52 2004-07-10 23:02:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -198,7 +198,7 @@
 		# This is based on the description in RFC 2396 which specifies how
 		#  to match URLs generically without knowing their type
 		# vboctor: I added # to hyperlink bookmarks.
-		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?:@&=+$#,[:alnum:]])+)/s',
+		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?:@&=+$#\(\),[:alnum:]])+)/s',
 								'<a href="\1">\1</a> [<a href="\1" target="blank">^</a>]',
 								$p_string);
 
