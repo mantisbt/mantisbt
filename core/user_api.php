@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.62 2003-11-20 10:38:07 vboctor Exp $
+	# $Id: user_api.php,v 1.63 2003-12-17 22:20:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -366,14 +366,6 @@
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_user_table 				= config_get('mantis_user_table');
-
-		# Remove account
-		$query = "DELETE
-				  FROM $t_user_table
-				  WHERE id='$c_user_id'";
-		db_query( $query );
-
 		# Remove associated profiles
 		user_delete_profiles( $p_user_id );
 
@@ -384,6 +376,14 @@
 		user_delete_project_specific_access_levels( $p_user_id );
 
 		user_clear_cache( $p_user_id );
+
+		$t_user_table 				= config_get('mantis_user_table');
+
+		# Remove account
+		$query = "DELETE
+				  FROM $t_user_table
+				  WHERE id='$c_user_id'";
+		db_query( $query );
 
 		return true;
 	}
