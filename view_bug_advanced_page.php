@@ -13,7 +13,6 @@
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
-	check_bug_exists( $f_id );
 	$c_id = (integer)$f_id;
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
@@ -21,6 +20,13 @@
     		FROM $g_mantis_bug_table
     		WHERE id='$c_id'";
     $result = db_query( $query );
+
+	# check bug exists here, rather than calling check_bug_exists() and executing
+	# the query twice.
+	if ( 0 == db_num_rows( $result ) ) {
+		print_header_redirect( 'main_page.php' );
+	}
+
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 

@@ -378,13 +378,19 @@
 	# --------------------
 	# Returns the number of bugntoes for the given bug_id
 	function get_bugnote_count( $p_id ) {
-		global $g_mantis_bugnote_table;
+		global $g_mantis_bugnote_table, $g_private_bugnote_threshold;
 
 		$c_id = (integer)$p_id;
 
+		if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
+			$t_restriction = 'AND view_state=' . PUBLIC;
+		} else {
+			$t_restriction = '';
+		}
+
 		$query = "SELECT COUNT(*)
 					FROM $g_mantis_bugnote_table
-					WHERE bug_id ='$c_id'";
+					WHERE bug_id ='$c_id' $t_restriction";
 		$result = db_query( $query );
 		return db_result( $result, 0 );
 	}

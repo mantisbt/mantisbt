@@ -13,15 +13,15 @@
 	$t_user_id = get_current_user_field( 'id' );
 
 	if ( !access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
-		$s_restriction = 'AND view_state=' . PRIVATE;
+		$t_restriction = 'AND view_state=' . PUBLIC;
 	} else {
-		$s_restriction = '';
+		$t_restriction = '';
 	}
 
 	# get the bugnote data
 	$query = "SELECT *,UNIX_TIMESTAMP(date_submitted) as date_submitted
 			FROM $g_mantis_bugnote_table
-			WHERE bug_id='$f_id' $s_restriction
+			WHERE bug_id='$f_id' $t_restriction
 			ORDER BY date_submitted $g_bugnote_order";
 	$result = db_query($query);
 	$num_notes = db_num_rows($result);

@@ -55,7 +55,7 @@
 	if ( !empty( $g_string_cookie_val ) ) {
 		$t_language = '';
 		db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-		$query = "SELECT language
+		$query = "SELECT DISTINCT language
 				FROM $g_mantis_user_pref_table pref, $g_mantis_user_table user
 				WHERE user.cookie_string='$g_string_cookie_val' AND
 						user.id=pref.user_id";
