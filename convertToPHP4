@@ -5,7 +5,7 @@
 # execute: ren *.php43 *.php
 
 echo "Converting all php3 files to php files"
-for filename in $(ls *.php3); do
+for filename in $(find * -name "*php3"); do
 	echo "renaming $filename  -->  $(echo $filename | sed -e "s/.php3/.php/")"
 	mv "$filename" "$(echo $filename | sed -e "s/.php3/.php/")"
 done
