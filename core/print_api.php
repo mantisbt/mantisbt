@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.7 2002-08-30 13:42:34 vboctor Exp $
+	# $Id: print_api.php,v 1.8 2002-08-31 03:32:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -201,7 +201,9 @@
 		foreach ( $user_arr as $key => $val ) {
 			$v_id = $val[1];
 			$v_username = $val[0];
-			echo "<option value=\"$v_id\"" . check_selected( $v_id, $p_user_id ) . ">$v_username</option>";
+			echo "<option value=\"$v_id\"";
+			check_selected( $v_id, $p_user_id );
+			echo ">$v_username</option>";
 		} # end foreach
 	}
 	# --------------------
@@ -267,7 +269,9 @@
 		$entry_count = count( $t_arr );
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = str_replace( '\'', '', $t_arr[$i] );
-			echo "<option value=\"$t_s\"" . check_selected( $p_item, $t_s ) . ">$t_s</option>";
+			echo "<option value=\"$t_s\"";
+			check_selected( $p_item, $t_s );
+			echo ">$t_s</option>";
 		} # end for
 	}
 	# --------------------
@@ -367,7 +371,9 @@
 		foreach ( $user_arr as $key => $val ) {
 			$v_id = $val[1];
 			$v_username = $val[0];
-			echo "<option value=\"$v_id\"" . check_selected( $v_id, $p_user_id ) . ">$v_username</option>";
+			echo "<option value=\"$v_id\"";
+			check_selected( $v_id, $p_user_id );
+			echo ">$v_username</option>";
 		} # end foreach
 	}
 	# --------------------
@@ -404,7 +410,9 @@
 		for ($i=0;$i<$project_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
-			echo "<option value=\"$v_id\"" . check_selected( $p_project_id, $v_id ) . ">$v_name</option>";
+			echo "<option value=\"$v_id\"";
+			check_selected( $p_project_id, $v_id );
+			echo ">$v_name</option>";
 		}
 	}
 	# --------------------
@@ -437,7 +445,9 @@
 			$v_os		= string_display( $v_os );
 			$v_os_build	= string_display( $v_os_build );
 
-			echo "<option value=\"$v_id\"" . check_selected( $v_id, $v_default_profile ) . ">$v_platform $v_os $v_os_build</option>";
+			echo "<option value=\"$v_id\"";
+			check_selected( $v_id, $v_default_profile );
+			echo ">$v_platform $v_os $v_os_build</option>";
 		}
 	}
 	# --------------------
@@ -463,7 +473,9 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			echo "<option value=\"$v_id\"" . check_selected( $v_id, $p_id ) . ">$v_name</option>";
+			echo "<option value=\"$v_id\"";
+			check_selected( $v_id, $p_id );
+			echo ">$v_name</option>";
 		} # end for
 	}
 	# --------------------
@@ -489,7 +501,9 @@
 		$cat_arr = array_unique( $cat_arr );
 
 		foreach( $cat_arr as $t_category ) {
-			echo "<option value=\"$t_category\"" . check_selected( $t_category, $p_category ) . ">$t_category</option>";
+			echo "<option value=\"$t_category\"";
+			check_selected( $t_category, $p_category );
+			echo ">$t_category</option>";
 		}
 	}
 	# --------------------
@@ -528,7 +542,9 @@
 		$cat_arr = array_unique( $cat_arr );
 
 		foreach( $cat_arr as $t_category ) {
-			echo "<option value=\"$t_category\"" . check_selected( $t_category, $p_category ) . ">$t_category</option>";
+			echo "<option value=\"$t_category\"";
+			check_selected( $t_category, $p_category );
+			echo ">$t_category</option>";
 		}
 	}
 	# --------------------
@@ -554,7 +570,9 @@
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_category = $row['category'];
-			echo "<option value=\"$t_category\"" . check_selected( $t_category, $p_category ) . ">$t_category</option>";
+			echo "<option value=\"$t_category\"";
+			check_selected( $t_category, $p_category );
+			echo ">$t_category</option>";
 		}
 	}
 	# --------------------
@@ -570,7 +588,9 @@
 		for ($i=0;$i<$version_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_version = $row['version'];
-			echo "<option value=\"$t_version\"" . check_selected( $t_version, $p_version ) . ">$t_version</option>";
+			echo "<option value=\"$t_version\"";
+			check_selected( $t_version, $p_version );
+			echo ">$t_version</option>";
 		}
 	}
 	# --------------------
@@ -593,7 +613,9 @@
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
 			$t_elem2 = get_enum_element( $p_enum_name, $t_elem[0] );
-			echo "<option value=\"$t_elem[0]\"" . check_selected( $t_elem[0], $p_val ) . ">$t_elem2</option>";
+			echo "<option value=\"$t_elem[0]\"";
+			check_selected( $t_elem[0], $p_val );
+			echo ">$t_elem2</option>";
 		} # end for
 	}
 	# --------------------
@@ -612,7 +634,9 @@
 			}
 
 			$t_access_level = get_enum_element( 'access_levels', $t_elem[0] );
-			echo "<option value=\"$t_elem[0]\"" . check_selected( $p_val, $t_elem[0] ) . ">$t_access_level</option>";
+			echo "<option value=\"$t_elem[0]\"";
+			check_selected( $p_val, $t_elem[0] );
+			echo ">$t_access_level</option>";
 		} # end for
 	}
 	# --------------------
@@ -622,7 +646,9 @@
 		$t_arr = $g_language_choices_arr;
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
-			echo "<option value=\"$t_arr[$i]\"" . check_selected( $t_arr[$i], $p_language ) . ">$t_arr[$i]</option>";
+			echo "<option value=\"$t_arr[$i]\"";
+			check_selected( $t_arr[$i], $p_language );
+			echo ">$t_arr[$i]</option>";
 		} # end for
 	}
 	# --------------------

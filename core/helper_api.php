@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.13 2002-08-30 09:37:41 jfitzell Exp $
+	# $Id: helper_api.php,v 1.14 2002-08-31 03:32:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -242,7 +242,7 @@
 	# option element is selected
 	function check_selected( $p_var, $p_val ) {
 		if ( $p_var == $p_val ) {
-			echo 'selected="selected"';
+			echo ' selected="selected" ';
 		}
 	}
 	# --------------------
@@ -251,7 +251,7 @@
 	# element is checked
 	function check_checked( $p_var, $p_val ) {
 		if ( $p_var == $p_val ) {
-			echo 'checked="checked"';
+			echo ' checked="checked" ';
 		}
 	}
 	# --------------------
