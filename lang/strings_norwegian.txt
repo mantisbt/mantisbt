@@ -9,11 +9,11 @@
 	# Norwegian: Ingvald Skaug, dev@skaug.no
 	# Norwegian: Alf-Ivar Holm, affi@csc.no
 	# -------------------------------------------------
-	# $Revision: 1.76 $
+	# $Revision: 1.77 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:46 $
+	# $Date: 2004-10-04 22:15:17 $
 	#
-	# $Id: strings_norwegian.txt,v 1.76 2004-10-01 23:03:46 bigbadger Exp $
+	# $Id: strings_norwegian.txt,v 1.77 2004-10-04 22:15:17 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -71,10 +71,10 @@ $s_bug_relationships = 'Relasjoner';
 $s_empty_password_sure_msg = 'Brukeren har et blankt passord. Er du sikker på at du ønsker dette?';
 $s_empty_password_button = 'Bruk blankt passord';
 
-$s_duplicate_of = 'duplikat av %id';
+$s_duplicate_of = 'er duplikat av %id';
 $s_has_duplicate = 'har duplikat %id';
-$s_related_to = 'relatert til %id';
-$s_dependant_on = 'avhengig av %id';
+$s_related_to = 'er relatert til %id';
+$s_dependant_on = 'er avhengig av %id';
 $s_blocks = 'blokkerer %id';
 
 $s_new_bug = 'Ny sak';
@@ -256,7 +256,7 @@ $s_prefix_for_deleted_users = 'bruker';
 
 $s_administrator = 'administrator';
 $s_myself = "Meg selv";
-$s_default_access_level = 'Default access level';
+$s_default_access_level = 'Standard tilgangsnivå';
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:Leser,25:Raportør,40:Superbruker,55:Utvikler,70:Prosjektleder,90:Administrator';
@@ -420,12 +420,12 @@ $s_bug_assign_msg       = 'Saken har blitt delegert ...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Ny sak';
-$s_feedback_bug_title = 'Gi tilbakemelding på sak';
+$s_feedback_bug_title = 'Be om tilbakemelding på sak';
 $s_acknowledged_bug_title = 'Godkjenne sak';
 $s_confirmed_bug_title = 'Bekrefte sak';
 $s_assigned_bug_title = 'Tilordne sak';
 $s_new_bug_button = 'Ny sak';
-$s_feedback_bug_button = 'Gi tilbakemelding';
+$s_feedback_bug_button = 'Be om tilbakemelding';
 $s_acknowledged_bug_button = 'Godkjenn sak';
 $s_confirmed_bug_button = 'Bekreft sak';
 $s_assigned_bug_button = 'Tilordn sak';
@@ -624,7 +624,7 @@ $s_category_delete_sure_msg = 'Er du sikker på at du ønsker å slette denne kateg
 $s_delete_category_button = 'Slett kategori';
 
 # manage_proj_category_edit_page.php
-$s_edit_project_category_title = 'Redigere prosjekt kategorier';
+$s_edit_project_category_title = 'Redigere prosjektkategorier';
 $s_update_category_button = 'Oppdater kategori';
 
 # manage_proj_category_update.php
@@ -650,7 +650,7 @@ $s_categories = 'Kategorier';
 $s_add_category_button = 'Ny kategori';
 $s_versions = 'Versjoner';
 $s_add_version_button = 'Legg til versjon';
-$s_add_and_edit_version_button = 'Add and Edit Version';
+$s_add_and_edit_version_button = 'Legg til og endr versjon';
 $s_edit_link = 'Rediger';
 $s_actions = 'Valg';
 $s_version = 'Versjon';
@@ -678,7 +678,7 @@ $s_version_delete_sure = 'Er du sikker på at du ønsker å slette dette versjonsnu
 $s_delete_version_button = 'Slett versjon';
 
 # manage_proj_version_edit_page.php
-$s_edit_project_version_title = 'Redigere prosjekt versjon';
+$s_edit_project_version_title = 'Redigere prosjektversjon';
 $s_update_version_button = 'Oppdater versjon';
 $s_released = 'Released';
 
@@ -731,8 +731,8 @@ $s_my_view_link = 'Min oversikt';
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Ikke delegert';
-$s_my_view_title_recent_mod = 'Nylight modifisert';
+$s_my_view_title_unassigned = 'Ikke delegerte';
+$s_my_view_title_recent_mod = 'Nylig modifiserte';
 $s_my_view_title_reported = 'Rapportert av meg';
 $s_my_view_title_assigned = 'Delegert til meg (Uløste)';
 $s_my_view_title_resolved = 'Løste';
@@ -810,7 +810,7 @@ $s_add_user_title = 'Legg bruker til prosjekt';
 $s_add_user_button = 'Legg til bruker';
 $s_project_selection_title = 'Prosjektvalg';
 $s_remove_link = 'Fjern';
-$s_remove_all_link = 'Remove all';
+$s_remove_all_link = 'Fjern alle';
 
 # proj_user_update.php
 $s_updated_user_msg = 'Oppdatert bruker OK';
@@ -927,7 +927,7 @@ $s_select_all = 'Velg alle';
 $s_use_query = 'Bruk filter';
 $s_delete_query = 'Slett filter';
 $s_query_deleted = 'Filter slettet';
-$s_save_query = 'Lagre dette filteret';
+$s_save_query = 'Lagr dette filteret';
 $s_reset_query = 'Nullstill filter';
 $s_query_name = 'Filternavn';
 $s_query_exists = 'Dette søket ser ut til å eksistere allerede..';
