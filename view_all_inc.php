@@ -265,10 +265,10 @@
 	}
 
 	if ( $f_offset_prev >= 0 ) {
-		print_bracket_link( $link_page."?f_sort=".$f_sort."&f_dir=".$f_dir."&f_offset=".$f_offset_prev, "View Prev ".$f_limit_view );
+		print_bracket_link( $link_page."?f_sort=".$f_sort."&f_dir=".$f_dir."&f_offset=".$f_offset_prev, $s_view_prev_link." ".$f_limit_view );
 	}
 	if ( $row_count == $f_limit_view ) {
-		print_bracket_link( $link_page."?f_sort=".$f_sort."&f_dir=".$f_dir."&f_offset=".$f_offset_next, "View Next ".$f_limit_view );
+		print_bracket_link( $link_page."?f_sort=".$f_sort."&f_dir=".$f_dir."&f_offset=".$f_offset_next, $s_view_next_link." ".$f_limit_view );
 	}
 ?>
 </div>

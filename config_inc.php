@@ -543,6 +543,8 @@
 	# bugnote
 	$g_bugnote_add                    = $g_path."bugnote_add".$g_php;
 	$g_bugnote_delete                 = $g_path."bugnote_delete".$g_php;
+	$g_bugnote_edit_page              = $g_path."bugnote_edit_page".$g_php;
+	$g_bugnote_update                 = $g_path."bugnote_update".$g_php;
 	#----------------------------------
 
 	#----------------------------------

@@ -231,11 +231,19 @@
 	$s_bugnote_deleted_msg = "Bugnote has been successfully deleted...";
 	$s_bug_notes_title = "Bug Notes";
 
+	# bugnote_edit_page.php3
+	$s_edit_bugnote_title = "Edit Bugnote";
+
 	# bugnote_inc.php
 	$s_no_bugnotes_msg = "There are no notes attached to this bug.";
+	$s_bugnote_edit_link = "Edit";
 	$s_delete_link = "Delete";
 	$s_add_bugnote_title = "Add Bugnote";
 	$s_add_bugnote_button = "Add Bugnote";
+
+	# bugnote_update.php3
+	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
+	$s_edited_on = "edited on: ";
 
 	# index.php3
 	$s_click_to_login = "Click here to login";
@@ -586,7 +594,9 @@
 	$s_updated = "Updated";
 
 	# view_all_inc.php
-        $s_search ="Search";
+	$s_search ="Search";
+	$s_view_prev_link = "View Prev";
+	$s_view_next_link = "View Next";
 
 	# view_user_reported_bug_page.php3
 

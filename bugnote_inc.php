@@ -49,12 +49,13 @@
 		extract( $row, EXTR_PREFIX_ALL, "v3" );
 		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
 
-		### grab the bugnote text and prefix with v3_
-		$query = "SELECT note
+		### grab the bugnote text and id and prefix with v3_
+		$query = "SELECT note, id
 				FROM $g_mantis_bugnote_text_table
 				WHERE id='$v3_bugnote_text_id'";
-		$result2 = db_query($query);
-		$v3_note = db_result( $result2, 0);
+		$result2 = db_query( $query );
+		$v3_note = db_result( $result2, 0, 0 );
+		$v3_bugnote_text_id = db_result( $result2, 0, 1 );
 
 		$v3_note = string_display( $v3_note );
 ?>
@@ -81,6 +82,9 @@
 			if (( access_level_check_greater_or_equal( ADMINISTRATOR ) )||
 				( $v3_reporter_id==$t_user_id )) {
 		?>
+			<span class="bugnotedelete">
+				<? print_bracket_link( $g_bugnote_edit_page."?f_bugnote_text_id=".$v3_bugnote_text_id."&f_id=".$f_id, $s_bugnote_edit_link ) ?>
+			</span>
 			<span class="bugnotedelete">
 				<? print_bracket_link( $g_bugnote_delete."?f_bug_id=".$v3_id, $s_delete_link ) ?>
 			</span>
