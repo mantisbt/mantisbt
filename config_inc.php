@@ -18,21 +18,15 @@
 	#--------------------
 
 	#--------------------
-	# file path variables
+	# path to your installation as seen from the web browser
 	$g_path            = "/mantis/";   # requires trailing /
 	#--------------------
 
 	#--------------------
 	# extensions for php 3 and php 4
-	$g_php             = ".php3";        # set this to php for php4
+	# set this to php for php4 or whatever your webserver needs
+	$g_php             = ".php3";
 	#--------------------
-	                                     # or whatever your webserver needs
-
-	#--------------------
-	$g_cookie_prefix     = "MANTIS";     # set this to a unique identifier
-	                                     # this allows you to have multiple
-	#--------------------
-	                                     # installations on one site.
 
 	#--------------------
 	# table name prefix
@@ -80,7 +74,7 @@
 	#--------------------
 
 	#--------------------
-	# news
+	# limit the number of news items to be displayed on the main page
 	$g_news_view_limit      = 5;
 	#--------------------
 
@@ -93,7 +87,7 @@
 	#--------------------
 
 	#--------------------
-	# date lengths to bount bugs by
+	# date lengths to count bugs by
 	# folows the english required by strtotime()
 	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
 	#--------------------
@@ -126,7 +120,8 @@
 	#--------------------
 
 	#--------------------
-	# cookies
+	# set this to a unique identifier
+	$g_cookie_prefix     = "MANTIS";
 
 	# cookie names
 	$g_string_cookie            = $g_cookie_prefix."_STRING_COOKIE";

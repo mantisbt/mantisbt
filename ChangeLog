@@ -24,6 +24,7 @@ To Do:
  * Uncluttered large portions of code
  * Fixed another problem with the date created being updated improperly when
    dealing with bugnotes.
+ * Reordered the config_inc.php file items
 
 12.20.2000	-	0.12.0
 
