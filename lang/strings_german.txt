@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.95 $
+	# $Revision: 1.96 $
 	# $Author: int2str $
-	# $Date: 2004-07-07 20:38:16 $
+	# $Date: 2004-07-07 20:45:09 $
 	#
-	# $Id: strings_german.txt,v 1.95 2004-07-07 20:38:16 int2str Exp $
+	# $Id: strings_german.txt,v 1.96 2004-07-07 20:45:09 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -324,7 +324,7 @@ $s_advanced_view = 'Erweiterte Darstellung';
 $s_advanced_update = 'Erweitertes Update';
 $s_refresh_delay = 'Aktualisierungsverzögerung';
 $s_redirect_delay = 'Verzögerung für Weiterleitung';
-$s_with_minimum_severity = 'With Mimimum Severity of';
+$s_with_minimum_severity = 'mit Auswirkung (oder h&ouml;her)';
 $s_email_on_new = 'Email bei Neueintrag';
 $s_email_on_assigned = 'Email bei Zuweisung';
 $s_email_on_feedback = 'Email bei Aktualisierung';
