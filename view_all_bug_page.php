@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.48 $
+	# $Revision: 1.49 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-18 02:18:01 $
+	# $Date: 2003-02-20 08:11:26 $
 	#
-	# $Id: view_all_bug_page.php,v 1.48 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.49 2003-02-20 08:11:26 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,10 +30,11 @@
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 
+	$t_per_page = null;
 	$t_bug_count = null;
 	$t_page_count = null;
 
-	$rows = filter_get_bug_rows( &$f_page_number, null, &$t_page_count, &$t_bug_count );
+	$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
 
 	compress_enable();
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.13 2003-02-11 09:08:41 jfitzell Exp $
+	# $Id: csv_export.php,v 1.14 2003-02-20 08:11:26 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,10 +23,12 @@
 		print_header_redirect( 'view_all_set.php?type=0' );
 	}
 
+	$t_page_number = 1;
+	$t_per_page = -1;
 	$t_bug_count = null;
 	$t_page_count = null;
 
-	$rows = filter_get_bug_rows( 1, -1, &$t_page_count, &$t_bug_count );
+	$rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 
 	echo lang_get('email_project') . ',' . config_get('page_title') . "\r\n\r\n";
 	echo lang_get( 'priority' ) . ',' .

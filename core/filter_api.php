@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.7 2003-02-19 16:19:18 jlatour Exp $
+	# $Id: filter_api.php,v 1.8 2003-02-20 08:11:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -17,7 +17,25 @@
 	# Filter API
 	###########################################################################
 
-	function filter_get_bug_rows( $p_page_number, $p_per_page = null, $p_page_count=null, $p_bug_count=null ) {
+	# @@@ Had to make all these parameters required because we can't use
+	#  call-time pass by reference anymore.  I really preferred not having
+	#  to pass all the params in if you didn't want to, but I wanted to get
+	#  rid of the errors for now.  If we can think of a better way later
+	#  (maybe return an object) that would be great.
+	#
+	# $p_page_numer
+	#   - the page you want to see (set to the actual page on return)
+	# $p_per_page
+	#   - the number of bugs to see per page (set to actual on return)
+	#     -1   indicates you want to see all bugs
+	#     null indicates you want to use the value specified in the filter
+	# $p_page_count
+	#   - you don't need to give a value here, the number of pages will be
+	#     stored here on return
+	# $p_bug_count
+	#   - you don't need to give a value here, the number of bugs will be
+	#     stored here on return
+	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count ) {
 		$t_bug_table			= config_get( 'mantis_bug_table' );
 		$t_bug_text_table		= config_get( 'mantis_bug_text_table' );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
