@@ -56,7 +56,7 @@ package has been looked through a few times.
 
 You will need to have php 4.0.6 or higher, mysql 3.23.2 and higher, and a webserver.  You don't
 need to know too much about any of them other than how to set them up and some
-basic administraton commands.
+basic administration commands.
 
 The release numbering convention I'm using is major.minor.micro.
 Major indicates a large change in the core package, minor a significant
