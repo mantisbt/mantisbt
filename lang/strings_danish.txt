@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.60 $
-	# $Author: jlatour $
-	# $Date: 2004-03-17 14:24:15 $
+	# $Revision: 1.61 $
+	# $Author: vboctor $
+	# $Date: 2004-07-07 12:48:57 $
 	#
-	# $Id: strings_danish.txt,v 1.60 2004-03-17 14:24:15 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.61 2004-07-07 12:48:57 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -20,12 +20,15 @@ $s_charset = 'iso-8859-15';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Flyt';
+$s_actiongroup_menu_copy = 'Copy';
 $s_actiongroup_menu_assign = 'Tildel';
 $s_actiongroup_menu_close = 'Luk';
 $s_actiongroup_menu_delete = 'Slet';
 $s_actiongroup_menu_resolve = 'Løs';
 $s_actiongroup_menu_update_priority = 'Opdater Prioritering';
 $s_actiongroup_menu_update_status = 'Opdater Status';
+$s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
 $s_all_projects = 'Alle Projekter';
@@ -96,17 +99,21 @@ $s_bug_actiongroup_failed = 'Du havde ikke tilstrækkelige rettigheder til at udf
 $s_close_bugs_conf_msg = 'Ønsker du at lukke disse fejl ?';
 $s_delete_bugs_conf_msg = 'Ønsker du at slette disse fejl ?';
 $s_move_bugs_conf_msg = 'Flyt fejlene til';
+$s_copy_bugs_conf_msg = 'Copy issues to';
 $s_assign_bugs_conf_msg = 'Tildel fejlene til';
 $s_resolve_bugs_conf_msg = 'Vælg fejlenes løsning';
 $s_priority_bugs_conf_msg = 'Vælg fejlenes prioritering';
 $s_status_bugs_conf_msg = 'Vælg fejlenes status';
+$s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_close_group_bugs_button = 'Luk Fejlene' ;
 $s_delete_group_bugs_button = 'Slet Fejlene' ;
 $s_move_group_bugs_button = 'Flyt Fejlene' ;
+$s_copy_group_bugs_button = 'Copy Issues' ;
 $s_assign_group_bugs_button = 'Tildel Fejlene' ;
 $s_resolve_group_bugs_button = 'Løs Fejlene' ;
 $s_priority_group_bugs_button = 'Opdater Prioritering' ;
 $s_status_group_bugs_button = 'Opdater Status' ;
+$s_view_status_group_bugs_button = 'Update View Status';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Sammenfattende grafik efter status' ;
@@ -190,7 +197,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'FEJL: LDAP Godkendelse mislykkedes';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'FEJL: LDAP Server forbindelse mislykkedes';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'FEJL: LDAP Record Update mislykkedes.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'FEJL: LDAP User Record ikke fundet.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'FEJL: Denne handling kan ikke udføres fordi fejlen er blevet løst';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'FEJL: Database forbindelse mislykkedes.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'FEJL: Database forespørgsel mislykkedes.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'FEJL: Database valg mislykkedes.';
@@ -201,6 +207,13 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEJL: Denne version findes allerede.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'FEJL: Version ikke fundet.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'FEJL: Brugernavnet er ugyldigt.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
 
 $s_login_error = 'FEJL: Der opstod en fejl: Din konto er måske deaktiveret eller du har måske skrevet forkert brugernavn/adgangskode.';
 $s_login_cookies_disabled = 'FEJL: Enten kan din browser ikke arbejde med cookies eller nægtede at udføre dem.';
@@ -255,6 +268,9 @@ $s_email_notification_title_for_action_bug_submitted = 'The following bug has be
 $s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
 $s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
 $s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
+$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
 
@@ -269,6 +285,7 @@ $s_email_priority = 'Prioritet';
 $s_email_status = 'Status';
 $s_email_resolution = 'Løsning';
 $s_email_duplicate = 'Dobbelt';
+$s_email_fixed_in_version = 'Fixed in Version';
 $s_email_date_submitted = 'Afsendt Dato';
 $s_email_last_modified = 'Sidst Ændret';
 $s_email_summary = 'Opsummering';
@@ -287,6 +304,7 @@ $s_manage_profiles_link = 'Administrer Profiler';
 $s_change_preferences_link = 'Rediger Præferencer';
 $s_edit_account_title = 'Rediger konto';
 $s_username = 'Brugernavn';
+$s_realname = 'Real Name';
 $s_email = 'E-mail';
 $s_password = 'Adgangskode';
 $s_confirm_password = 'Bekræft Adgangskode';
@@ -301,6 +319,7 @@ $s_advanced_view = 'Avanceret Oversigt';
 $s_advanced_update = 'Avanceret Opdatering';
 $s_refresh_delay = 'Forsinkelse ved Opdatering';
 $s_redirect_delay = 'Forsinkelse ved Omadressering';
+$s_with_minimum_severity = 'With Mimimum Severity of';
 $s_email_on_new = 'E-mail ved Ny';
 $s_email_on_assigned = 'E-mail ved Tildeling';
 $s_email_on_feedback = 'E-mail ved Tilbagemelding';
@@ -352,6 +371,7 @@ $s_profile_updated_msg = 'Profil opdateret...';
 # account_update.php
 $s_account_updated_msg = 'Din konto er blevet opdateret...';
 $s_email_updated = 'Vellykket opdatering af E-mail adresse';
+$s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Vellykket opdatering af Adgangskode';
 
 # bug_assign.php
@@ -433,6 +453,7 @@ $s_os_version = 'Version';
 $s_eta = 'Anslået';
 $s_product_version = 'Produkt Version';
 $s_build = 'Udgave';
+$s_fixed_in_version = 'Fixed in Version';
 $s_votes = 'Stemmer';
 $s_summary = 'Opsummering';
 $s_description = 'Beskrivelse';
@@ -636,6 +657,7 @@ $s_manage_user_updated_msg = 'Kontoen er blevet opdateret...';
 $s_main_link = 'Start';
 $s_view_bugs_link = 'Vis Fejl';
 $s_report_bug_link = 'Rapporter Fejl';
+$s_changelog_link = 'Change Log';
 $s_summary_link = 'Opsummering';
 $s_account_link = 'Min Konto';
 $s_users_link = 'Bruger';
@@ -643,8 +665,17 @@ $s_manage_link = 'Administrer';
 $s_edit_news_link = 'Rediger Nyheder';
 $s_docs_link = 'Dokumentation';
 $s_logout_link = 'Log Af';
+$s_my_view_link = 'My View';
 
 # meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Unassigned';
+$s_my_view_title_recent_mod = 'Recently Modified';
+$s_my_view_title_reported = 'Reported by Me';
+$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
+$s_my_view_title_resolved = 'Resolved';
+$s_my_view_title_monitored = 'Monitored by Me';
 
 # news_add.php
 $s_news_added_msg = 'Nyhed tilføjet...';
@@ -828,6 +859,21 @@ $s_yes = 'Yes';
 $s_no = 'No';
 $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
+$s_ok = 'OK';
+
+# stored query strings
+$s_use_query = 'Use Filter';
+$s_delete_query = 'Delete Filter';
+$s_query_deleted = 'Filter Deleted';
+$s_save_query = 'Save Current Filter';
+$s_reset_query = 'Reset Filter';
+$s_query_name = 'Filter Name';
+$s_query_exists = 'This particular query appears to already exist.';
+$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
+$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
+$s_query_store_error = 'There was an error saving this query.';
+$s_open_queries = 'Manage Filters';
+$s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Vis Enkel';
@@ -837,6 +883,7 @@ $s_system_profile = 'System Beskrivelse';
 $s_update_bug_button = 'Opdater Fejl';
 $s_bug_assign_to_button = 'Tildel til:';
 $s_reopen_bug_button = 'Genåben Fejl';
+$s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Vedhæftede Filer';
 $s_publish = 'Udgivet';
 $s_cached = 'Lagret';
@@ -851,6 +898,13 @@ $s_viewing_bug_simple_details_title = 'Enkel oversigt over fejl i dette projekt'
 $s_no_users_monitoring_bug = 'Denne fejl bliver ikke overvåget af nogen bruger.';
 $s_users_monitoring_bug = 'Brugere overvåger denne fejl';
 $s_monitoring_user_list = 'Bruger liste';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
+$s_users_sponsoring_bug = 'Users sponsoring this issue';
+$s_sponsors_list = 'Sponsors List';
+$s_total_sponsorship_amount = 'Total Sponsorship = %s';
+$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = 'Nyt Brugerdefineret Felt';
@@ -872,6 +926,13 @@ $s_custom_field_access_level_rw = 'Skrive Rettighed';
 $s_custom_field_length_min = 'Min. Længde';
 $s_custom_field_length_max = 'Max. Længde';
 $s_custom_field_advanced = 'Avanceret';
+$s_custom_field_display_resolve = 'Display When Resolving Issues';
+$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_require_report = 'Required On Report';
+$s_custom_field_require_update = 'Required On Update';
+$s_custom_field_require_resolve = 'Required On Resolve';
+$s_custom_field_require_close = 'Required On Close';
+
 $s_custom_field_sequence = 'Sekvens';
 $s_custom_field_type_enum_string = '0:Streng,1:Nummerisk,2:Kommatal,3:Optælling,4:E-mail';
 
@@ -884,10 +945,31 @@ $s_filter_closed = "Lukkede";
 $s_filter_resolved = "Løste";
 $s_hide_closed = "Hide Closed";
 $s_hide_resolved = "Hide Resolved";
+$s_and_above = 'And Above';
+$s_advanced_filters = 'Advanced Filters';
+$s_simple_filters = 'Simple Filters';
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
 
 # PHPMailer
 $s_phpmailer_language = 'en';
+
+# Sponsorship Strings
+$s_sponsors = '%d sponsor(s)';
+$s_sponsorship_added = 'Sponsorship Added';
+$s_sponsorship_updated = 'Sponsorship Updated';
+$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_more_info = 'More information about sponsorship';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Change Log';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
 ?>

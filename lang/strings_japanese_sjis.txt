@@ -8,11 +8,11 @@
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# Japenese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.50 $
-	# $Author: jlatour $
-	# $Date: 2004-03-14 20:10:48 $
+	# $Revision: 1.51 $
+	# $Author: vboctor $
+	# $Date: 2004-07-07 12:48:57 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.50 2004-03-14 20:10:48 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.51 2004-07-07 12:48:57 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -21,12 +21,15 @@ $s_charset = "Shift_JIS";
 
 # Group commands menuitems
 $s_actiongroup_menu_move = "ˆÚ“®";
+$s_actiongroup_menu_copy = 'Copy';
 $s_actiongroup_menu_assign = "’S“–ŽÒŒˆ’è";
 $s_actiongroup_menu_close = "Š®—¹";
 $s_actiongroup_menu_delete = "íœ";
 $s_actiongroup_menu_resolve = "ŽÀ‘•Ï";
 $s_actiongroup_menu_update_priority = "d—v“xXV";
 $s_actiongroup_menu_update_status = "ƒXƒe[ƒ^ƒXXV";
+$s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
 $s_all_projects = "‘SƒvƒƒWƒFƒNƒg";
@@ -97,17 +100,21 @@ $s_bug_actiongroup_failed = "‰üC—v–]‚ÉŠY“–‚ÌƒAƒNƒVƒ‡ƒ“‚ðs‚¤“KØ‚ÈŒ ŒÀ‚ª‚ ‚è‚Ü‚
 $s_close_bugs_conf_msg = "‰üC—v–]‚ðŠ®—¹‚µ‚Ä‚æ‚ë‚µ‚¢‚Å‚·‚©B";
 $s_delete_bugs_conf_msg = "‰üC—v–]‚ðíœ‚µ‚Ä‚æ‚ë‚µ‚¢‚Å‚·‚©B";
 $s_move_bugs_conf_msg = "‰üC—v–]‚ÌˆÚ“®æ‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B";
+$s_copy_bugs_conf_msg = 'Copy issues to';
 $s_assign_bugs_conf_msg = "’S“–ŽÒ‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B";
 $s_resolve_bugs_conf_msg = "•ªÍó‹µ‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B";
 $s_priority_bugs_conf_msg = "d—v“x‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B";
 $s_status_bugs_conf_msg = "ƒXƒe[ƒ^ƒX‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B";
+$s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_close_group_bugs_button = "‰üC—v–]‚ÌŠ®—¹" ;
 $s_delete_group_bugs_button = "‰üC—v–]‚Ìíœ" ;
 $s_move_group_bugs_button = "‰üC—v–]‚ÌˆÚ“®";
+$s_copy_group_bugs_button = 'Copy Issues' ;
 $s_assign_group_bugs_button = "‰üC—v–]‚ÌŠ„‚è“–‚Ä";
 $s_resolve_group_bugs_button = "‰üC—v–]‚ÌŽÀ‘•";
 $s_priority_group_bugs_button = "d—v“x‚ÌXV" ;
 $s_status_group_bugs_button = "ƒXƒe[ƒ^ƒX‚ÌXV" ;
+$s_view_status_group_bugs_button = 'Update View Status';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = "ƒXƒe[ƒ^ƒX‚É‚æ‚éƒOƒ‰ƒt";
@@ -159,9 +166,9 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = "ƒGƒ‰[FƒAƒNƒZƒX‚ª‹‘”Û‚³‚ê‚Ü‚µ‚½B";
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = "ƒGƒ‰[Fƒtƒ@ƒCƒ‹‚ÌƒAƒbƒvƒ[ƒh‚ÉŽ¸”s‚µ‚Ü‚µ‚½BŠÇ—ŽÒ‚É‚±‚Ì–â‘è‚ðƒfƒoƒbƒO‚·‚é‚½‚ß‚Éadmin_checkƒXƒNƒŠƒvƒg‚ðŽÀs‚·‚é‚æ‚¤ˆË—Š‚µ‚Ä‰º‚³‚¢B";
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = "ƒGƒ‰[Fƒtƒ@ƒCƒ‹‚ÌƒAƒbƒvƒ[ƒh‚ÉŽ¸”s‚µ‚Ü‚µ‚½BPHP‚ÅÝ’è‚³‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹ƒTƒCƒY‚æ‚è‘å‚«‚¢‚±‚Æ‚ª–â‘è‚Å‚·BÝ’è‚ðŠm”F‚µ‚Ä‰º‚³‚¢B";
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = "ƒGƒ‰[F‚±‚Ìƒy[ƒW‚Å•K{‚Èƒpƒ‰ƒ[ƒ^‚ª‚ ‚è‚Ü‚¹‚ñB";
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= "ƒGƒ‰[Fƒ†[ƒU–¼‚ÍŠù‚ÉŽg—p‚³‚ê‚Ä‚¢‚Ü‚·B–ß‚Á‚Ä•Ê‚Ìƒ†[ƒU–¼‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B";
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]="ƒGƒ‰[FÝ’è€–Ú‚ª‚ ‚è‚Ü‚¹‚ñB";
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]="ƒGƒ‰[FString‚ª‚ ‚è‚Ü‚¹‚ñB";
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = "ƒGƒ‰[FƒRƒƒ“ƒg‚ª‚ ‚è‚Ü‚¹‚ñB";
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = "ƒGƒ‰[FƒvƒƒWƒFƒNƒg‚ª‚ ‚è‚Ü‚¹‚ñB";
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = "ƒGƒ‰[Fƒf[ƒ^ƒx[ƒX‚Ì€–Ú‚ª‚ ‚è‚Ü‚¹‚ñB";
@@ -169,29 +176,28 @@ $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= "ƒGƒ‰[FFTPƒT[ƒo‚ÉÚ‘±‚Å‚«‚Ü‚¹‚ñB";
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = "ƒGƒ‰[FƒvƒƒWƒFƒNƒg–¼‚ÍŠù‚ÉŽg—p‚³‚ê‚Ä‚¢‚Ü‚·B–ß‚Á‚Äˆá‚¤ƒvƒƒWƒFƒNƒg–¼‚ð“ü—Í‚µ‚Ä‰º‚³‚¢B";
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = "ƒGƒ‰[FƒvƒƒWƒFƒNƒg–¼‚ª–³Œø‚Å‚·BƒvƒƒWƒFƒNƒg–¼‚Íƒuƒ‰ƒ“ƒN‚Å‚Í‚¢‚¯‚Ü‚¹‚ñB";
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= "ƒ†[ƒU‚ª‚ ‚è‚Ü‚¹‚ñB";
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= "ƒGƒ‰[Fƒuƒ‰ƒEƒU‚©‚ç‘—M‚³‚ê‚½ƒƒOƒCƒ“î•ñ‚Í–³Œø‚Å‚·B‚¨‚»‚ç‚­A‚ ‚È‚½‚ÌƒAƒJƒEƒ“ƒg‚Ííœ‚³‚ê‚Ä‚¢‚Ü‚·B";
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]= "ƒGƒ‰[Fƒ†[ƒU‚Ì•\Ž¦Ý’è‚ª‚ ‚è‚Ü‚¹‚ñB";
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= "ƒGƒ‰[Fƒjƒ…[ƒX‚ª‚ ‚è‚Ü‚¹‚ñB";
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]="ƒGƒ‰[FƒpƒXƒ[ƒh‚ªˆê’v‚µ‚Ü‚¹‚ñB";
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= "ƒGƒ‰[Farray‚ðŠú‘Ò‚µ‚Ü‚µ‚½‚ªAstring‚ðŽæ“¾‚µ‚Ü‚µ‚½B";
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]="ƒGƒ‰[Fstring‚ðŠú‘Ò‚µ‚Ü‚µ‚½‚ªAarray‚ðŽæ“¾‚µ‚Ü‚µ‚½B";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= "ƒGƒ‰[F‰üC—v–]‚ª‚ ‚è‚Ü‚¹‚ñB";
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= "ƒGƒ‰[F–³Œø‚Èƒ[ƒ‹ƒAƒhƒŒƒX‚Å‚·B";
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= "ƒGƒ‰[FƒvƒƒtƒB[ƒ‹‚ª‚ ‚è‚Ü‚¹‚ñB";
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= "ƒGƒ‰[F‚±‚Ìƒtƒ@ƒCƒ‹Ží•Ê‚ÍƒAƒbƒvƒ[ƒh‚Å‚«‚Ü‚¹‚ñB";
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= "ƒGƒ‰[Fƒtƒ@ƒCƒ‹‚ªd•¡‚µ‚Ä‚¢‚Ü‚·B‚Ü‚¸Aƒtƒ@ƒCƒ‹‚ðíœ‚µ‚Ä‰º‚³‚¢B";
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = "ƒGƒ‰[F–³Œø‚ÈƒAƒbƒvƒ[ƒhƒpƒX‚Å‚·BƒfƒBƒŒƒNƒgƒŠ‚ª‘¶Ý‚µ‚È‚¢‚©‘‚«ž‚Ý‚Å‚«‚Ü‚¹‚ñB";
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= "ƒGƒ‰[Fd•¡‚µ‚Ä‚¢‚éID‚É“–ŠY‰üC—v–]‚ðÝ’è‚Å‚«‚Ü‚¹‚ñB";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= "ƒGƒ‰[FƒJƒXƒ^ƒ€€–Ú‚ª‚ ‚è‚Ü‚¹‚ñB";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= "ƒGƒ‰[FƒJƒXƒ^ƒ€€–Ú–¼‚ªd•¡‚µ‚Ä‚¢‚Ü‚·B";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= "ƒGƒ‰[F­‚È‚­‚Æ‚à1‚Â‚ÌƒvƒƒWƒFƒNƒg‚ª‚±‚ÌƒJƒXƒ^ƒ€€–Ú‚ðŽg—p‚µ‚Ä‚¢‚Ü‚·B";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "ƒGƒ‰[F–³Œø‚È’l‚Å‚·B";
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = "ƒGƒ‰[FƒXƒ^ƒ€€–Ú’è‹`‚ª–³Œø‚Å‚·B";
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= "ƒGƒ‰[FLDAP”FØ‚ÉŽ¸”s‚µ‚Ü‚µ‚½B";
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= "ƒGƒ‰[FLDAPƒT[ƒo‚Æ‚ÌÚ‘±‚ÉŽ¸”s‚µ‚Ü‚µ‚½B";
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= "ƒGƒ‰[FLDAPƒŒƒR[ƒh‚ÌXV‚ÉŽ¸”s‚µ‚Ü‚µ‚½B";
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= "ƒGƒ‰[FLDAP‚Ìƒ†[ƒUƒŒƒR[ƒh‚ª‚ ‚è‚Ü‚¹‚ñB";
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= "ƒGƒ‰[F‰üC—v–]‚ÍŠ®—¹‚µ‚Ä‚¢‚é‚Ì‚ÅAƒAƒNƒVƒ‡ƒ“‚ÍŽÀs‚³‚ê‚Ü‚¹‚ñB";
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= "ƒGƒ‰[Fƒf[ƒ^ƒx[ƒX‚Æ‚ÌÚ‘±‚ÉŽ¸”s‚µ‚Ü‚µ‚½B";
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= "ƒGƒ‰[Fƒf[ƒ^ƒx[ƒX‚ÌŒŸõ‚ÉŽ¸”s‚µ‚Ü‚µ‚½B";
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= "ƒGƒ‰[Fƒf[ƒ^ƒx[ƒX‚Ì‘I‘ð‚ÉŽ¸”s‚µ‚Ü‚µ‚½B";
@@ -202,6 +208,13 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "ƒGƒ‰[Fƒo[ƒWƒ‡ƒ“‚ªd•¡‚µ‚Ä‚¢‚Ü‚·B";
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = "ƒGƒ‰[Fƒo[ƒWƒ‡ƒ“‚ª‚ ‚è‚Ü‚¹‚ñB";
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = "ƒGƒ‰[Fƒ†[ƒU–¼‚ª–³Œø‚Å‚·B";
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "ƒ†[ƒU‚ª•K—v‚ÈƒAƒNƒZƒXŒ ŒÀ‚ðŽ‚Á‚Ä‚¢‚Ü‚¹‚ñB";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
 
 $s_login_error = "ƒGƒ‰[Fƒ†[ƒU–¼^ƒpƒXƒ[ƒh‚ªŠÔˆá‚¦‚Ä‚¢‚Ü‚·B";
 $s_login_cookies_disabled = "ƒGƒ‰[FŽg—p‚µ‚Ä‚¢‚éƒuƒ‰ƒEƒU‚ªƒNƒbƒL[‚É‘Î‰ž‚µ‚Ä‚¢‚È‚¢‚©AƒNƒbƒL[‚ð–³Œø‚É‚µ‚Ä‚¢‚Ü‚·B";
@@ -256,6 +269,9 @@ $s_email_notification_title_for_action_bug_submitted = "ŽŸ‚Ì‰üC—v–]‚ª“o˜^‚³‚ê‚Ü
 $s_email_notification_title_for_action_bug_assigned = "ŽŸ‚Ì‰üC—v–]‚Ì’S“–‚ªŠ„‚è“–‚Ä‚ç‚ê‚Ü‚µ‚½B";
 $s_email_notification_title_for_action_bug_reopened = "ŽŸ‚Ì‰üC—v–]‚ª·–ß‚³‚ê‚Ü‚µ‚½B";
 $s_email_notification_title_for_action_bug_deleted = "ŽŸ‚Ì‰üC—v–]‚ªíœ‚³‚ê‚Ü‚µ‚½B";
+$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
+$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = "ƒRƒƒ“ƒg‚ª’Ç‰Á‚³‚ê‚Ü‚µ‚½B";
 
@@ -270,6 +286,7 @@ $s_email_priority = "—Dæ“x";
 $s_email_status = "ƒXƒe[ƒ^ƒX";
 $s_email_resolution = "•ªÍó‹µ";
 $s_email_duplicate = "2d“o˜^";
+$s_email_fixed_in_version = 'Fixed in Version';
 $s_email_date_submitted = "“o˜^“ú";
 $s_email_last_modified = "ÅIXV“ú";
 $s_email_summary =  "—v–ñ";
@@ -288,6 +305,7 @@ $s_manage_profiles_link = "ƒvƒƒtƒB[ƒ‹";
 $s_change_preferences_link = "•\Ž¦Ý’è";
 $s_edit_account_title = "ƒAƒJƒEƒ“ƒg‚Ì•ÒW";
 $s_username = "ƒ†[ƒU–¼";
+$s_realname = 'Real Name';
 $s_email = "E-mail";
 $s_password = "ƒpƒXƒ[ƒh";
 $s_confirm_password  = "ƒpƒXƒ[ƒh(Šm”F)";
@@ -302,6 +320,7 @@ $s_advanced_view = "‚“x‚È•\Ž¦";
 $s_advanced_update = "‚“x‚ÈXV";
 $s_refresh_delay = "Ä•\Ž¦ŽžŠÔ";
 $s_redirect_delay = "ƒŠƒ_ƒCƒŒƒNƒgŽžŠÔ";
+$s_with_minimum_severity = 'With Mimimum Severity of';
 $s_email_on_new = "V‹K—v–]’Ê’mƒ[ƒ‹";
 $s_email_on_assigned = "’S“–ŽÒŒˆ’è’Ê’mƒ[ƒ‹";
 $s_email_on_feedback = "ƒtƒB[ƒhƒoƒbƒN’Ê’mƒ[ƒ‹";
@@ -353,6 +372,7 @@ $s_profile_updated_msg = "ƒvƒƒtƒB[ƒ‹‚ªXV‚³‚ê‚Ü‚µ‚½B";
 # account_update.php
 $s_account_updated_msg = "ƒAƒJƒEƒ“ƒg‚ª³í‚ÉXV‚³‚ê‚Ü‚µ‚½B";
 $s_email_updated = "EmailƒAƒhƒŒƒX‚ª³í‚ÉXV‚³‚ê‚Ü‚µ‚½B";
+$s_realname_updated = 'Real name successfully updated';
 $s_password_updated = "ƒpƒXƒ[ƒh‚ª³í‚ÉXV‚³‚ê‚Ü‚µ‚½B";
 
 # bug_assign.php
@@ -434,6 +454,7 @@ $s_os_version = "ƒo[ƒWƒ‡ƒ“";
 $s_eta = "—\’èH”";
 $s_product_version = "»•iƒo[ƒWƒ‡ƒ“";
 $s_build = "ƒrƒ‹ƒh";
+$s_fixed_in_version = 'Fixed in Version';
 $s_votes = "ŽÀ‘•Šó–]“¾•[”";
 $s_summary = "—v–ñ";
 $s_description = "Ú×";
@@ -637,6 +658,7 @@ $s_manage_user_updated_msg = "ƒAƒJƒEƒ“ƒg‚ªXV‚³‚ê‚Ü‚µ‚½B";
 $s_main_link = "ƒƒCƒ“";
 $s_view_bugs_link = "ŒŸõ";
 $s_report_bug_link = "“o˜^";
+$s_changelog_link = 'Change Log';
 $s_summary_link = "ƒTƒ}ƒŠ";
 $s_account_link = "ƒAƒJƒEƒ“ƒgÝ’è";
 $s_users_link = "ƒvƒƒWƒFƒNƒgÝ’è";
@@ -644,8 +666,17 @@ $s_manage_link = "ƒVƒXƒeƒ€ŠÇ—";
 $s_edit_news_link = "ƒjƒ…[ƒX•ÒW";
 $s_docs_link = "ƒhƒLƒ…ƒƒ“ƒg";
 $s_logout_link = "ƒƒOƒAƒEƒg";
+$s_my_view_link = 'My View';
 
 # meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Unassigned';
+$s_my_view_title_recent_mod = 'Recently Modified';
+$s_my_view_title_reported = 'Reported by Me';
+$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
+$s_my_view_title_resolved = 'Resolved';
+$s_my_view_title_monitored = 'Monitored by Me';
 
 # news_add.php
 $s_news_added_msg = "ƒjƒ…[ƒX‚ª’Ç‰Á‚³‚ê‚Ü‚µ‚½B";
@@ -829,6 +860,21 @@ $s_yes = 'Yes';
 $s_no = 'No';
 $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
+$s_ok = 'OK';
+
+# stored query strings
+$s_use_query = 'Use Filter';
+$s_delete_query = 'Delete Filter';
+$s_query_deleted = 'Filter Deleted';
+$s_save_query = 'Save Current Filter';
+$s_reset_query = 'Reset Filter';
+$s_query_name = 'Filter Name';
+$s_query_exists = 'This particular query appears to already exist.';
+$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
+$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
+$s_query_store_error = 'There was an error saving this query.';
+$s_open_queries = 'Manage Filters';
+$s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = "ŠÈ’P‚È•\Ž¦";
@@ -838,6 +884,7 @@ $s_system_profile = "ƒVƒXƒeƒ€‚ÌÚ×à–¾";
 $s_update_bug_button = "XV";
 $s_bug_assign_to_button = "’S“–ŽÒ‚ÌŠ„‚è“–‚Ä";
 $s_reopen_bug_button = "·–ß‚µ";
+$s_move_bug_button = 'Move Issue';
 $s_attached_files = "“Y•tƒtƒ@ƒCƒ‹";
 $s_publish = "Publish";
 $s_cached = "Cached";
@@ -852,6 +899,13 @@ $s_viewing_bug_simple_details_title = "‰üC—v–]‚Ì“à—e(ŠÈ’P‚È•\Ž¦)";
 $s_no_users_monitoring_bug = "‚±‚Ì‰üC—v–]‚ðƒ‚ƒjƒ^[‚µ‚Ä‚¢‚éƒ†[ƒU‚Í‚¢‚Ü‚¹‚ñB";
 $s_users_monitoring_bug = "‚±‚Ì‰üC—v–]‚ðƒ‚ƒjƒ^[‚µ‚Ä‚¢‚éƒ†[ƒU";
 $s_monitoring_user_list = "ƒ†[ƒUˆê——";
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
+$s_users_sponsoring_bug = 'Users sponsoring this issue';
+$s_sponsors_list = 'Sponsors List';
+$s_total_sponsorship_amount = 'Total Sponsorship = %s';
+$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = "ƒJƒXƒ^ƒ€€–Ú‚Ì“o˜^";
@@ -873,6 +927,13 @@ $s_custom_field_access_level_rw = "“Ç‚Ý‘‚«Œ ŒÀ";
 $s_custom_field_length_min = "€–Ú’·(Å¬’l)";
 $s_custom_field_length_max = "€–Ú’·(Å‘å’l)";
 $s_custom_field_advanced = "‚“x‚È‰æ–Ê‚Å•\Ž¦";
+$s_custom_field_display_resolve = 'Display When Resolving Issues';
+$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_require_report = 'Required On Report';
+$s_custom_field_require_update = 'Required On Update';
+$s_custom_field_require_resolve = 'Required On Resolve';
+$s_custom_field_require_close = 'Required On Close';
+
 $s_custom_field_sequence = "•\Ž¦‡";
 $s_custom_field_type_enum_string = "0:String,1:Numeric,2:Float,3:Enumeration,4:Email";
 
@@ -885,10 +946,31 @@ $s_filter_closed = "Š®—¹";
 $s_filter_resolved = "‰ðŒˆÏ";
 $s_hide_closed = "Hide Closed";
 $s_hide_resolved = "Hide Resolved";
+$s_and_above = 'And Above';
+$s_advanced_filters = 'Advanced Filters';
+$s_simple_filters = 'Simple Filters';
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
 
 # PHPMailer
 $s_phpmailer_language = "en";
+
+# Sponsorship Strings
+$s_sponsors = '%d sponsor(s)';
+$s_sponsorship_added = 'Sponsorship Added';
+$s_sponsorship_updated = 'Sponsorship Updated';
+$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_more_info = 'More information about sponsorship';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Change Log';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
 ?>

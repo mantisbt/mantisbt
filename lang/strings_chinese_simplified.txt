@@ -11,11 +11,11 @@
 	# Chinese_Simplified: liaobin@jite.net
 	# Chinese_Simplified: NetCobra,turbonetcobra@hotmai.com
 	# -------------------------------------------------
-	# $Revision: 1.41 $
+	# $Revision: 1.42 $
 	# $Author: vboctor $
-	# $Date: 2004-06-26 10:12:49 $
+	# $Date: 2004-07-07 12:48:57 $
 	#
-	# $Id: strings_chinese_simplified.txt,v 1.41 2004-06-26 10:12:49 vboctor Exp $
+	# $Id: strings_chinese_simplified.txt,v 1.42 2004-07-07 12:48:57 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -24,12 +24,15 @@ $s_charset = 'GB2312';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = '移动';
+$s_actiongroup_menu_copy = 'Copy';
 $s_actiongroup_menu_assign = '指派';
 $s_actiongroup_menu_close = '关闭';
 $s_actiongroup_menu_delete = '删除';
 $s_actiongroup_menu_resolve = '解决';
 $s_actiongroup_menu_update_priority = '更新优先级';
 $s_actiongroup_menu_update_status = '更新状态';
+$s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
 $s_all_projects = "所有的项目";
@@ -57,7 +60,7 @@ $s_field = '字段';
 $s_old_value = '旧的值';
 $s_new_value = '新的值';
 $s_date_modified = '日期修正';
-$s_Bugnote = '注解';
+$s_bugnote = 'Note';
 $s_change = '改变';
 $s_bugnote_view_state = '查看注解状态';
 $s_bug_monitor = 'Issue 监视人';
@@ -100,17 +103,21 @@ $s_bug_actiongroup_failed = '对于这个 Issue 您没有适当的权限以进行这个操作：';
 $s_close_bugs_conf_msg = '确定要关闭这些 Issue 吗？';
 $s_delete_bugs_conf_msg = '你确定要删除这些 Issue 吗？';
 $s_move_bugs_conf_msg = '将 Issue 移动到';
+$s_copy_bugs_conf_msg = 'Copy issues to';
 $s_assign_bugs_conf_msg = '将 Issue 分派给';
 $s_resolve_bugs_conf_msg = '选择相关 Issue';
 $s_priority_bugs_conf_msg = '选择 Issue 优先级别';
 $s_status_bugs_conf_msg = '选择 Issue 状态';
+$s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_close_group_bugs_button = '关闭 Issue' ;
 $s_delete_group_bugs_button = '删除 Issue' ;
 $s_move_group_bugs_button = '移动 Issue' ;
+$s_copy_group_bugs_button = 'Copy Issues' ;
 $s_assign_group_bugs_button = '分派 Issue' ;
 $s_resolve_group_bugs_button = '解决 Issue' ;
 $s_priority_group_bugs_button = '修改优先级别' ;
 $s_status_group_bugs_button = '修改状态' ;
+$s_view_status_group_bugs_button = 'Update View Status';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = '综合报表（按 Issue 状态）' ;
@@ -133,7 +140,7 @@ $s_severity_link = '按严重性统计';
 $s_category_link = '按类别统计';
 $s_resolution_link = '按完成度统计';
 
-# print_all_bug_page.php : display selected issues
+# print_all_bug_page.php : display selected bugs
 $s_hide_button = '只显示选中内容';
 
 # print_all_bug_options.php : printing preferences
@@ -162,39 +169,38 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Issue not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set an issue as a duplicate of itself.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the issue has been resolved';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
@@ -205,6 +211,13 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "ERROR: This is a duplicate version.";
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
 
 $s_login_error = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
 $s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
@@ -259,6 +272,9 @@ $s_email_notification_title_for_action_bug_submitted = '下列 Issue 已经提交。';
 $s_email_notification_title_for_action_bug_assigned = '下列 Issue 已经被指派';
 $s_email_notification_title_for_action_bug_reopened = '下列 Issue 重新打开。';
 $s_email_notification_title_for_action_bug_deleted = '下列 Issue 已经被删除';
+$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
+$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = '这个 Issue 中新增加了一个注解。';
 
@@ -273,6 +289,7 @@ $s_email_priority = "优先级";
 $s_email_status = "状态";
 $s_email_resolution = "完成度";
 $s_email_duplicate = "复制";
+$s_email_fixed_in_version = 'Fixed in Version';
 $s_email_date_submitted = "报告日期";
 $s_email_last_modified = "上次更新";
 $s_email_summary =  "摘要";
@@ -291,6 +308,7 @@ $s_manage_profiles_link = "管理平台配置";
 $s_change_preferences_link = "更改个人设置";
 $s_edit_account_title = "编辑帐号";
 $s_username = "帐号";
+$s_realname = 'Real Name';
 $s_email = "Email";
 $s_password = "密码";
 $s_confirm_password  = "确认密码";
@@ -305,6 +323,7 @@ $s_advanced_view = "高级查看";
 $s_advanced_update = "高级更新";
 $s_refresh_delay = "刷新延迟";
 $s_redirect_delay = "重定向延时(秒";
+$s_with_minimum_severity = 'With Mimimum Severity of';
 $s_email_on_new = "当新建Issue时发送Email提醒";
 $s_email_on_assigned = "当指派Issue时发送Email提醒";
 $s_email_on_feedback = "当反馈Issue时发送Email提醒";
@@ -356,6 +375,7 @@ $s_profile_updated_msg = "平台配置更新...";
 # account_update.php
 $s_account_updated_msg = "帐号信息更新成功...";
 $s_email_updated = 'Email地址更新成功';
+$s_realname_updated = 'Real name successfully updated';
 $s_password_updated = '密码更新成功';
 
 # bug_assign.php
@@ -437,6 +457,7 @@ $s_os_version = "版本";
 $s_eta = "估计完成时间";
 $s_product_version = "产品版本";
 $s_build = "创建";
+$s_fixed_in_version = 'Fixed in Version';
 $s_votes = "投票";
 $s_summary = "摘要";
 $s_description = "说明";
@@ -452,17 +473,17 @@ $s_updating_bug_simple_title = "正在更新 Issue 信息";
 # bug_vote_add.php
 $s_vote_added_msg = "投票已添加...";
 
-# Bugnote_add.php
+# bugnote_add.php
 $s_bugnote_added_msg = "已添加注解...";
 
-# Bugnote_delete.php
+# bugnote_delete.php
 $s_bugnote_deleted_msg = "已删除注解...";
 $s_bug_notes_title = "注解";
 
-# Bugnote_edit_page.php
+# bugnote_edit_page.php
 $s_edit_bugnote_title = "编辑注解";
 
-# Bugnote_inc.php
+# bugnote_inc.php
 $s_no_bugnotes_msg = "这个 Issue 没有注解信息";
 $s_delete_link = "删除";
 $s_add_bugnote_title = "添加注解";
@@ -470,7 +491,7 @@ $s_add_bugnote_button = "添加注解";
 $s_bugnote_edit_link = "编辑";
 $s_close_bug_button = "关闭 Issue";
 
-# Bugnote_update.php
+# bugnote_update.php
 $s_bugnote_updated_msg = "已经被成功更新注解...";
 $s_edited_on = "编辑于：";
 
@@ -640,6 +661,7 @@ $s_manage_user_updated_msg = "帐号成功更新...";
 $s_main_link = "首页";
 $s_view_bugs_link = "查看 Issue";
 $s_report_bug_link = "报告 Issue";
+$s_changelog_link = 'Change Log';
 $s_summary_link = "统计报表";
 $s_account_link = "个人帐号";
 $s_users_link = "用户";
@@ -647,8 +669,17 @@ $s_manage_link = "管理";
 $s_edit_news_link = "编辑公告";
 $s_docs_link = "使用说明";
 $s_logout_link = "注销";
+$s_my_view_link = 'My View';
 
 # meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Unassigned';
+$s_my_view_title_recent_mod = 'Recently Modified';
+$s_my_view_title_reported = 'Reported by Me';
+$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
+$s_my_view_title_resolved = 'Resolved';
+$s_my_view_title_monitored = 'Monitored by Me';
 
 # news_add.php
 $s_news_added_msg = "公告项目已添加...";
@@ -832,6 +863,21 @@ $s_yes = '是';
 $s_no = '否';
 $s_open_filters = '修改过滤器';
 $s_or_unassigned = '或未指派的';
+$s_ok = 'OK';
+
+# stored query strings
+$s_use_query = 'Use Filter';
+$s_delete_query = 'Delete Filter';
+$s_query_deleted = 'Filter Deleted';
+$s_save_query = 'Save Current Filter';
+$s_reset_query = 'Reset Filter';
+$s_query_name = 'Filter Name';
+$s_query_exists = 'This particular query appears to already exist.';
+$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
+$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
+$s_query_store_error = 'There was an error saving this query.';
+$s_open_queries = 'Manage Filters';
+$s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = "简易查看";
@@ -841,6 +887,7 @@ $s_system_profile = "系统说明";
 $s_update_bug_button = "修改 Issue";
 $s_bug_assign_to_button = '指派给：';
 $s_reopen_bug_button = "重新打开 Issue";
+$s_move_bug_button = 'Move Issue';
 $s_attached_files = "附件";
 $s_publish = '发布';
 $s_cached = '已缓存';
@@ -855,6 +902,13 @@ $s_viewing_bug_simple_details_title = "查看Issue详细资料(简易)";
 $s_no_users_monitoring_bug = '当前没有用户在监视这个 Issue。';
 $s_users_monitoring_bug = '正在监视这个 Issue 的用户';
 $s_monitoring_user_list = '用户列表';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
+$s_users_sponsoring_bug = 'Users sponsoring this issue';
+$s_sponsors_list = 'Sponsors List';
+$s_total_sponsorship_amount = 'Total Sponsorship = %s';
+$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = '新建自定义字段';
@@ -876,6 +930,13 @@ $s_custom_field_access_level_rw = '写权限';
 $s_custom_field_length_min = '最小长度';
 $s_custom_field_length_max = '最大长度';
 $s_custom_field_advanced = '高级';
+$s_custom_field_display_resolve = 'Display When Resolving Issues';
+$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_require_report = 'Required On Report';
+$s_custom_field_require_update = 'Required On Update';
+$s_custom_field_require_resolve = 'Required On Resolve';
+$s_custom_field_require_close = 'Required On Close';
+
 $s_custom_field_sequence = '顺序';
 $s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类型,4:Email';
 
@@ -888,10 +949,31 @@ $s_filter_closed = "已关闭";
 $s_filter_resolved = "已解决";
 $s_hide_closed = "隐藏已关闭的 Issue";
 $s_hide_resolved = "隐藏已解决的 Issue";
+$s_and_above = 'And Above';
+$s_advanced_filters = 'Advanced Filters';
+$s_simple_filters = 'Simple Filters';
 
 $s_attachments = "附件";
 $s_attachment_alt = "A";
 
 # PHPMailer
 $s_phpmailer_language = 'cn';
+
+# Sponsorship Strings
+$s_sponsors = '%d sponsor(s)';
+$s_sponsorship_added = 'Sponsorship Added';
+$s_sponsorship_updated = 'Sponsorship Updated';
+$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_more_info = 'More information about sponsorship';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Change Log';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
 ?>

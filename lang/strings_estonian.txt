@@ -9,11 +9,11 @@
 	###########################################################################
 	# Estonian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.6 $
-	# $Author: jlatour $
-	# $Date: 2004-03-14 20:10:41 $
+	# $Revision: 1.7 $
+	# $Author: vboctor $
+	# $Date: 2004-07-07 12:48:57 $
 	#
-	# $Id: strings_estonian.txt,v 1.6 2004-03-14 20:10:41 jlatour Exp $
+	# $Id: strings_estonian.txt,v 1.7 2004-07-07 12:48:57 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -22,12 +22,15 @@ $s_charset = 'Windows-1257';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Liiguta';
+$s_actiongroup_menu_copy = 'Copy';
 $s_actiongroup_menu_assign = 'Määra';
 $s_actiongroup_menu_close = 'Sulge';
 $s_actiongroup_menu_delete = 'Kustuta';
 $s_actiongroup_menu_resolve = 'Lahenda';
 $s_actiongroup_menu_update_priority = 'Uuenda prioriteet';
 $s_actiongroup_menu_update_status = 'Uuenda olek';
+$s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
 $s_all_projects = 'Kõik projektid';
@@ -98,17 +101,21 @@ $s_bug_actiongroup_failed = 'Sul pole vajalikke õigusi järgmise bugiga tegelemis
 $s_close_bugs_conf_msg = 'Oled kindel, et soovid sulgeda need bugid ?';
 $s_delete_bugs_conf_msg = 'Oled kindel, et soovid kustutada need bugid ?';
 $s_move_bugs_conf_msg = 'Liiguta bugid sinna';
+$s_copy_bugs_conf_msg = 'Copy issues to';
 $s_assign_bugs_conf_msg = 'Määra bugid kasutajale';
 $s_resolve_bugs_conf_msg = 'Vali bugi lahendus';
 $s_priority_bugs_conf_msg = 'Vali bugi prioriteet';
 $s_status_bugs_conf_msg = 'Vali bugi olek';
+$s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_close_group_bugs_button = 'Sulge bugid' ;
 $s_delete_group_bugs_button = 'Kustuta bugid' ;
 $s_move_group_bugs_button = 'Liiguta bugid' ;
+$s_copy_group_bugs_button = 'Copy Issues' ;
 $s_assign_group_bugs_button = 'Määra bugid' ;
 $s_resolve_group_bugs_button = 'Lahenda bugid' ;
 $s_priority_group_bugs_button = 'Uuenda prioriteeti' ;
 $s_status_group_bugs_button = 'Uuenda olekut' ;
+$s_view_status_group_bugs_button = 'Update View Status';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Graafikute süntees oleku järgi' ;
@@ -192,7 +199,6 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP autentimine ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Serveri ühendus ebaõnnestus';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Kirje uuendamine ebaõnnestus.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Kasutaja kirjet ei leitud.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'Toimingut ei saa teostada, sest bugi on juba lahendatud';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Andmebaasi ühendus ebaõnnestus. Andmebaasist tagastatud viga #%d: %s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Andmebaasi päring ebaõnnestus.  Andmebaasist tagastatud viga #%d: %s päringule: %s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Andmebaasi valik ebaõnnestus.  Andmebaasist tagastatud viga #%d: %s';
@@ -203,6 +209,13 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Selle nimega versioon juba eksisteerib
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versiooni ei leitud.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Kasutajanimi on vigane. Kasutajanimi võib sisaldada tähti, numbreid, tühikuid, sidekriipsu ja allkriipsu.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Kasutaja ei oma vajalikku kasutajaõiguste taset';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
 
 $s_login_error = 'VIGA: Sinu kasutajakonto võib olla blokeeritud või sisestasid vale kasutajanime/parooli.';
 $s_login_cookies_disabled = 'VIGA: Su veebilehitseja kas ei oska küpsiseid kasutada või on see omadus keelatud.';
@@ -257,6 +270,9 @@ $s_email_notification_title_for_action_bug_submitted = 'Järgmine bugi on TEATATU
 $s_email_notification_title_for_action_bug_assigned = 'Järgmine bugi on MÄÄRATUD.';
 $s_email_notification_title_for_action_bug_reopened = 'Järgmine bugi on UUESTIAVATUD.';
 $s_email_notification_title_for_action_bug_deleted = 'Järgmine bugi on KUSTUTATUD.';
+$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
+$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'MÄRKUS on lisatud sellele bugile.';
 
@@ -271,6 +287,7 @@ $s_email_priority = 'Prioriteet';
 $s_email_status = 'Olek';
 $s_email_resolution = 'Lahendus';
 $s_email_duplicate = 'Duplikaatne';
+$s_email_fixed_in_version = 'Fixed in Version';
 $s_email_date_submitted = 'Laekumise kuupäev';
 $s_email_last_modified = 'Viimati muudetud';
 $s_email_summary = 'Kokkuvõte';
@@ -289,6 +306,7 @@ $s_manage_profiles_link = 'Profiilid';
 $s_change_preferences_link = 'Eelistused';
 $s_edit_account_title = 'Redigeeri kasutajakontot';
 $s_username = 'Kasutaja';
+$s_realname = 'Real Name';
 $s_email = 'E-post';
 $s_password = 'Parool';
 $s_confirm_password = 'Kinnita parool';
@@ -303,6 +321,7 @@ $s_advanced_view = 'Näita bugide detaile';
 $s_advanced_update = 'Näita bugide detailset uuendust';
 $s_refresh_delay = 'uuenduse viivitus';
 $s_redirect_delay = 'Ümbersuunamise viivitus';
+$s_with_minimum_severity = 'With Mimimum Severity of';
 $s_email_on_new = 'Saada E-mail uue bugi ilmumise kohta';
 $s_email_on_assigned = 'Saada E-mail bugi määramise kohta';
 $s_email_on_feedback = 'Saada E-mail bugile tagasiside andmise kohta';
@@ -354,6 +373,7 @@ $s_profile_updated_msg = 'Profiil uuendatud...';
 # account_update.php
 $s_account_updated_msg = 'Sinu kasutajakonto on uuendatud...';
 $s_email_updated = 'Sinu E-posti aadress on uuendatud';
+$s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Sinu parool on vahetatud';
 
 # bug_assign.php
@@ -435,6 +455,7 @@ $s_os_version = 'Opsüsteemi versioon';
 $s_eta = 'ETA';
 $s_product_version = 'Tooteversioon';
 $s_build = 'Järk';
+$s_fixed_in_version = 'Fixed in Version';
 $s_votes = 'Hääli';
 $s_summary = 'Kokkuvõte';
 $s_description = 'Kirjeldus';
@@ -638,6 +659,7 @@ $s_manage_user_updated_msg = 'Kasutaja andmed uuendatud...';
 $s_main_link = 'Pealeht';
 $s_view_bugs_link = 'Bugide vaatamine';
 $s_report_bug_link = 'Bugidest teatamine';
+$s_changelog_link = 'Change Log';
 $s_summary_link = 'Kokkuvõte';
 $s_account_link = 'Minu andmed';
 $s_users_link = 'Kasutajad';
@@ -645,8 +667,17 @@ $s_manage_link = 'Haldus';
 $s_edit_news_link = 'Uudiste redigeerimine';
 $s_docs_link = 'Dokumendid';
 $s_logout_link = 'Logi välja';
+$s_my_view_link = 'My View';
 
 # meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Unassigned';
+$s_my_view_title_recent_mod = 'Recently Modified';
+$s_my_view_title_reported = 'Reported by Me';
+$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
+$s_my_view_title_resolved = 'Resolved';
+$s_my_view_title_monitored = 'Monitored by Me';
 
 # news_add.php
 $s_news_added_msg = 'Lisatud uudised...';
@@ -830,6 +861,21 @@ $s_yes = 'Yes';
 $s_no = 'No';
 $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
+$s_ok = 'OK';
+
+# stored query strings
+$s_use_query = 'Use Filter';
+$s_delete_query = 'Delete Filter';
+$s_query_deleted = 'Filter Deleted';
+$s_save_query = 'Save Current Filter';
+$s_reset_query = 'Reset Filter';
+$s_query_name = 'Filter Name';
+$s_query_exists = 'This particular query appears to already exist.';
+$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
+$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
+$s_query_store_error = 'There was an error saving this query.';
+$s_open_queries = 'Manage Filters';
+$s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Näita tavalist';
@@ -839,6 +885,7 @@ $s_system_profile = 'Süsteemikirjeldus';
 $s_update_bug_button = 'Uuenda bugi';
 $s_bug_assign_to_button = 'Määra:';
 $s_reopen_bug_button = 'Ava bugi uuesti';
+$s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Lisatud failid';
 $s_publish = 'Avalda';
 $s_cached = 'Vahemälus';
@@ -853,6 +900,13 @@ $s_viewing_bug_simple_details_title = 'Bugi tavaandmete vaatamine';
 $s_no_users_monitoring_bug = 'Ükski kasutaja ei tegele selle bugiga.';
 $s_users_monitoring_bug = 'Selle bugiga tegelevad kasutajad';
 $s_monitoring_user_list = 'Kasutajate loend';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
+$s_users_sponsoring_bug = 'Users sponsoring this issue';
+$s_sponsors_list = 'Sponsors List';
+$s_total_sponsorship_amount = 'Total Sponsorship = %s';
+$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = 'Uus kohandatud väli';
@@ -874,6 +928,13 @@ $s_custom_field_access_level_rw = 'Kirjutamisõigus';
 $s_custom_field_length_min = 'Min. pikkus';
 $s_custom_field_length_max = 'Max. pikkus';
 $s_custom_field_advanced = 'Detailne';
+$s_custom_field_display_resolve = 'Display When Resolving Issues';
+$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_require_report = 'Required On Report';
+$s_custom_field_require_update = 'Required On Update';
+$s_custom_field_require_resolve = 'Required On Resolve';
+$s_custom_field_require_close = 'Required On Close';
+
 $s_custom_field_sequence = 'Jada';
 $s_custom_field_type_enum_string = '0:String,1:Numbriline,2:Ujuv,3:Nummerdus,4:E-mail';
 
@@ -886,10 +947,31 @@ $s_filter_closed = "Suletud";
 $s_filter_resolved = "Lahendatud";
 $s_hide_closed = "Hide Closed";
 $s_hide_resolved = "Hide Resolved";
+$s_and_above = 'And Above';
+$s_advanced_filters = 'Advanced Filters';
+$s_simple_filters = 'Simple Filters';
 
 $s_attachments = "Lisa(d)";
 $s_attachment_alt = "A";
 
 # PHPMailer
 $s_phpmailer_language = 'en';
+
+# Sponsorship Strings
+$s_sponsors = '%d sponsor(s)';
+$s_sponsorship_added = 'Sponsorship Added';
+$s_sponsorship_updated = 'Sponsorship Updated';
+$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_more_info = 'More information about sponsorship';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Change Log';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
 ?>

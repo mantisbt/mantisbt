@@ -9,11 +9,11 @@
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# Polish: Kacper Kruszewski <kacper@netcetera.pl>
 	# -------------------------------------------------
-	# $Revision: 1.64 $
+	# $Revision: 1.65 $
 	# $Author: vboctor $
-	# $Date: 2004-05-10 11:18:33 $
+	# $Date: 2004-07-07 12:48:57 $
 	#
-	# $Id: strings_polish.txt,v 1.64 2004-05-10 11:18:33 vboctor Exp $
+	# $Id: strings_polish.txt,v 1.65 2004-07-07 12:48:57 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -22,12 +22,15 @@ $s_charset = 'iso-8859-2';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Przenie¶';
+$s_actiongroup_menu_copy = 'Copy';
 $s_actiongroup_menu_assign = 'Przypisz';
 $s_actiongroup_menu_close = 'Zamknij';
 $s_actiongroup_menu_delete = 'Usuñ';
 $s_actiongroup_menu_resolve = 'Rozwi±¿';
 $s_actiongroup_menu_update_priority = 'Aktualizuj priorytet';
 $s_actiongroup_menu_update_status = 'Aktualizuj status';
+$s_actiongroup_menu_update_view_status = 'Update View Status';
+$s_actiongroup_bugs = 'Selected Issues';
 
 # new strings:
 $s_all_projects = 'Wszystkie projekty';
@@ -98,17 +101,21 @@ $s_bug_actiongroup_failed = 'Nie masz wystarczaj±cych uprawnieñ by wykonaæ t± ak
 $s_close_bugs_conf_msg = 'Czy jeste¶ pewny, ¿e chcesz Zamkn±æ te Zagadnienia?';
 $s_delete_bugs_conf_msg = 'Czy jeste¶ pewny, ¿e chesz Usun±æ te Zagadnienia?';
 $s_move_bugs_conf_msg = 'Przenie¶ Zagadnienia do';
+$s_copy_bugs_conf_msg = 'Copy issues to';
 $s_assign_bugs_conf_msg = 'Przypisz Zagadnienia do';
 $s_resolve_bugs_conf_msg = 'Wybierz rozwi±zanie Zagadnieñ';
 $s_priority_bugs_conf_msg = 'Wybierz priorytet Zagadnieñ';
 $s_status_bugs_conf_msg = 'Wybierz status Zagadnieñ';
+$s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_close_group_bugs_button = 'Zamknij Zagadnienia' ;
 $s_delete_group_bugs_button = 'Usuñ Zagadnienia' ;
 $s_move_group_bugs_button = 'Przenie¶ Zagadnienia' ;
+$s_copy_group_bugs_button = 'Copy Issues' ;
 $s_assign_group_bugs_button = 'Przypisz Zagadnienia' ;
 $s_resolve_group_bugs_button = 'Rozwi±¿ Zagadnienia' ;
 $s_priority_group_bugs_button = 'Aktualizuj Priorytet' ;
 $s_status_group_bugs_button = 'Aktualizuj Status' ;
+$s_view_status_group_bugs_button = 'Update View Status';
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = 'Wykres podsumowuj±cy wg statusu' ;
@@ -160,39 +167,38 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'B£¡D: Brak dostêpu.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'B£¡D: Przesy³anie pliku nie powiod³o siê.  Mo¿liwo¶æ publikowania plików mo¿e byæ wy³±czona w PHP.  Nale¿y poprosiæ administratora, aby uruchomi³ skrypt sprawdzaj±cy konfiguracjê serwera.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'B£¡D: Przesy³anie pliku nie powiod³o siê.  Prawdopodobnie jest to spowodowane rozmiarem pliku przekraczaj±cym maksymalny dozwolony na tym serwerze.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'B£¡D: Nie znaleziono parametru wymaganego przez t± stronê.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'B£¡D: Ta nazwa u¿ytkownika jest ju¿ u¿yeana. Proszê wróciæ i wybraæ inn±.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='B£¡D: Nie znaleziono opcji konfiguracyjnej \'%s\'.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='B£¡D: Nie znaleziono tekstu.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'B£¡D: Nie znaleziono komentarza.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'B£¡D: Nie znaleziono projektu.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'B£¡D: Nie znaleziono pola \'%s\' w bazie danych.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'B£¡D: Nie mo¿na nawi±zaæ po³±czenia z serwerem FTP.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'B£¡D: Projekt o tej nazwie ju¿ istnieje.  Proszê wróciæ i podaæ inn± nazwê.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='B£¡D: B³êdna nazwa projektu. Nazwa projektu nie mo¿e byæ pusta.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'B£¡D: Nie znaleziono u¿ytkownika.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'B£¡D: Informacje logowania przechowywane w twojej przegl±darce s± nieprawid³owe.  Czy twoje konto nie zosta³o skasowane?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='B£¡D: Nie znaleziono ustawieñ dla tego u¿ytkownika.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'B£¡D: Nie znaleziono wiadomo¶ci.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='B£¡D: Has³o i potwierdzenie nie zgadzaj± siê.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'B£¡D: Ci±g zamiast tablicy.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='B£¡D: Tablica zamiast ci±gu.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'B£¡D: Nie znaleziono Zagadnienia.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'B£¡D: Nieprawid³owy email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'B£¡D: Nie znaleziono profilu.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'B£¡D: Pliki tego typu nie mog± byæ przesy³ane.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'B£¡D: Plik o tej nazwie ju¿ istnieje, proszê usun± najpierw plik oryginalny.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'B£¡D: B³êdny katalog na pliki.  Katalog nie istnieje lub serwer www nie ma uprawnieñ by do niego zapisywaæ';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'B£¡D: Nie mo¿na wskazaæ jako duplikat Zagadnienia tego samego Zagadnienia.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'B£¡D: Pole dodatkowe nie znalezione';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'B£¡D: Ta nazwa ju¿ istnieje.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'B£¡D: Przynajmniej jeden projekt korysta z tego pola.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'B£¡D: B³êdna warto¶æ dla pola';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'B³êdna definicja pola dodatkowego';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'B£¡D: Autentykacja LDAP nie powiod³a siê.';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'B£¡D: Nie mo¿na nawi±zaæ po³±czenia z serwerm LDAP.';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'B£¡D: Nie uda³o siê uaktualniæ rekordu LDAP .';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'B£¡D: U¿ytkownik LDAP nie zosta³ znaleziony.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'B£¡D: Akcja nie mo¿e byæ wkonana, poniewa¿ Zagadnienie zosta³o ju¿ Rozwi±zane';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'B£¡D: B³±d po³±czenia z baz± danych: #%d: %s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'B£¡D: B³±d bazy danych #%d: %s dla zapytania %s.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'B£¡D: B³±d bazy danych: #%d: %s';
@@ -203,6 +209,13 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'B£¡D: Podana wersja ju¿ istnieje.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'B£¡D: Nie znaleziono wersji.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'B£¡D: Nieprawid³owa nazwa u¿ytkownika.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'B£¡D: U¿ytkownik nie posiada wymaganego poziomu dostêpu';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
 
 $s_login_error = 'B£¡D: Twoje konto mo¿e byæ wy³±czone lub nazwa u¿ytkownika/has³o nie s± poprawne.';
 $s_login_cookies_disabled = 'B£¡D: Twoja przegl±darka nie obs³uguje cookies lub ich obs³uga zosta³a wy³±czona.';
@@ -257,6 +270,9 @@ $s_email_notification_title_for_action_bug_submitted = 'Nastêpuj±ce Zagadnienie 
 $s_email_notification_title_for_action_bug_assigned = 'Nastêpuj±ce Zagadnienie zosta³o PRZYPISANE.';
 $s_email_notification_title_for_action_bug_reopened = 'Nastêpuj±ce Zagadnienie zosta³o PONOWNIE OTWARTE.';
 $s_email_notification_title_for_action_bug_deleted = 'Nastêpuj±ce Zagadnienie zosta³o SKASOWANE.';
+$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
+$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'Do nastêpuj±cego Zagadnienia DODANO KOMENTARZ.';
 
@@ -271,6 +287,7 @@ $s_email_priority = 'Priorytet';
 $s_email_status = 'Status';
 $s_email_resolution = 'Rozwi±zanie';
 $s_email_duplicate = 'Duplikat Zagadnienia';
+$s_email_fixed_in_version = 'Fixed in Version';
 $s_email_date_submitted = 'Data zg³oszenia';
 $s_email_last_modified = 'Data modyfikacji';
 $s_email_summary =  'Podsumowanie';
@@ -289,6 +306,7 @@ $s_manage_profiles_link = 'Profile';
 $s_change_preferences_link = 'Preferencje';
 $s_edit_account_title = 'Edytycja konta';
 $s_username = 'Nazwa u¿ytkownika';
+$s_realname = 'Real Name';
 $s_email = 'Email';
 $s_password = 'Has³o';
 $s_confirm_password  = 'Potwierd¼ has³o';
@@ -355,6 +373,7 @@ $s_profile_updated_msg = 'Profil zosta³ zaktualizowany...';
 # account_update.php
 $s_account_updated_msg = 'Twoje konto zosta³o zaktualizowane...';
 $s_email_updated = 'Adres email zosta³ zaktualizowany';
+$s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Has³o zosta³o zaktualizowane';
 
 # bug_assign.php
@@ -436,6 +455,7 @@ $s_os_version = 'Wersja systemu';
 $s_eta = 'Szacowany termin rozwi±zania';
 $s_product_version = 'Wersja produktu';
 $s_build = 'Kompilacja';
+$s_fixed_in_version = 'Fixed in Version';
 $s_votes = 'G³osy';
 $s_summary = 'Podsumowanie';
 $s_description = 'Opis';
@@ -639,6 +659,7 @@ $s_manage_user_updated_msg = 'Konto zosta³o zaktualizowane...';
 $s_main_link = 'G³ówna';
 $s_view_bugs_link = 'Zobacz';
 $s_report_bug_link = 'Dodaj';
+$s_changelog_link = 'Change Log';
 $s_summary_link = 'Statystyki';
 $s_account_link = 'Twoje konto';
 $s_users_link = 'U¿ytkownicy';
@@ -646,8 +667,17 @@ $s_manage_link = 'Zarz±dzanie';
 $s_edit_news_link = 'Wiadomo¶ci';
 $s_docs_link = 'Dokumentacja';
 $s_logout_link = 'Wyloguj';
+$s_my_view_link = 'My View';
 
 # meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Unassigned';
+$s_my_view_title_recent_mod = 'Recently Modified';
+$s_my_view_title_reported = 'Reported by Me';
+$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
+$s_my_view_title_resolved = 'Resolved';
+$s_my_view_title_monitored = 'Monitored by Me';
 
 # news_add.php
 $s_news_added_msg = 'Nowa wiadomo¶æ zosta³a dodana...';
@@ -831,6 +861,7 @@ $s_yes = 'Tak';
 $s_no = 'Nie';
 $s_open_filters = 'Zmieñ filtr';
 $s_or_unassigned = 'lub nieprzypisane';
+$s_ok = 'OK';
 
 # stored query strings
 $s_use_query = 'U¿yj filtru';
@@ -854,6 +885,7 @@ $s_system_profile = 'Opis systemu';
 $s_update_bug_button = 'Aktualizuj Zagadnienie';
 $s_bug_assign_to_button = 'Przypisz do:';
 $s_reopen_bug_button = 'Otwórz Ponownie Zagadnienie';
+$s_move_bug_button = 'Move Issue';
 $s_attached_files = 'Do³±czone Pliki';
 $s_publish = 'Opublikuj';
 $s_cached = 'Przechowywany';
@@ -868,6 +900,13 @@ $s_viewing_bug_simple_details_title = 'Widok prosty';
 $s_no_users_monitoring_bug = '.¯aden u¿ytkownik nie monitoruje tego Zagadnienia.';
 $s_users_monitoring_bug = 'U¿ytkownicy monitoruj±cy to Zagadnienie';
 $s_monitoring_user_list = 'Lista u¿ytkowników';
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
+$s_users_sponsoring_bug = 'Users sponsoring this issue';
+$s_sponsors_list = 'Sponsors List';
+$s_total_sponsorship_amount = 'Total Sponsorship = %s';
+$s_sponsor_issue = 'Sponsor Issue';
 
 # custom field strings
 $s_add_custom_field_button = 'Nowe \'Dodatkowe pole\'';
@@ -889,6 +928,13 @@ $s_custom_field_access_level_rw = 'Prawo zapisu';
 $s_custom_field_length_min = 'Min. d³ugo¶æ';
 $s_custom_field_length_max = 'Maks. d³ugo¶æ';
 $s_custom_field_advanced = 'Zaawansowane';
+$s_custom_field_display_resolve = 'Display When Resolving Issues';
+$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_require_report = 'Required On Report';
+$s_custom_field_require_update = 'Required On Update';
+$s_custom_field_require_resolve = 'Required On Resolve';
+$s_custom_field_require_close = 'Required On Close';
+
 $s_custom_field_sequence = 'Sekwencja';
 $s_custom_field_type_enum_string = '0:£añcuch znaków,1:Liczba ca³kowita,2:Liczba zmiennoprzecinkowa,3:Wyliczenie,4:Email';
 
@@ -901,10 +947,31 @@ $s_filter_closed = "Zamkniête";
 $s_filter_resolved = "Rozwi±zane";
 $s_hide_closed = "Ukryj Zamkniête";
 $s_hide_resolved = "Ukryj Rozwi±zane";
+$s_and_above = 'And Above';
+$s_advanced_filters = 'Advanced Filters';
+$s_simple_filters = 'Simple Filters';
 
 $s_attachments = "za³±cznik (-i)";
 $s_attachment_alt = "A";
 
 # PHPMailer
 $s_phpmailer_language = 'en';
+
+# Sponsorship Strings
+$s_sponsors = '%d sponsor(s)';
+$s_sponsorship_added = 'Sponsorship Added';
+$s_sponsorship_updated = 'Sponsorship Updated';
+$s_sponsorship_deleted = 'Sponsorship Deleted';
+$s_sponsorship_more_info = 'More information about sponsorship';
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = '';
+
+# Changelog
+$s_changelog = 'Change Log';
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
 ?>

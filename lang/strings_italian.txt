@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.64 $
+	# $Revision: 1.65 $
 	# $Author: vboctor $
-	# $Date: 2004-06-20 21:40:12 $
+	# $Date: 2004-07-07 12:48:57 $
 	#
-	# $Id: strings_italian.txt,v 1.64 2004-06-20 21:40:12 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.65 2004-07-07 12:48:57 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -167,39 +167,38 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = "ERROR: Access Denied.";
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = "ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.";
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = "ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.";
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = "ERROR: A required parameter to this page was not found.";
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= "ERROR: That username is already being used.  Please go back and select another one.";
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]="ERROR: Configuration option not found.";
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]="ERROR: String not found.";
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = "ERROR: Bugnote not found.";
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = "ERROR: Project not found.";
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = "ERROR: Database field not found.";
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= "ERROR: Unable to connect to FTP server.";
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = "ERROR: A project with that name already exists.  Please go back and enter a different name.";
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]="ERROR: Invalid project name specified.  Project names cannot be blank.";
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= "ERROR: User not found.";
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= "ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?";
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]="ERROR: Preferences could not be found for this user.";
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= "ERROR: News item not found.";
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]="ERROR: Password does not match verification.";
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= "ERROR: An array was expected but a string was received.";
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]="ERROR: A string was expected but an array was received.";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= "ERROR: anomalia not found.";
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= "ERROR: Invalid email.";
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= "ERROR: Profile not found.";
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= "ERROR: File type not allowed for uploads.";
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= "ERROR: This is a duplicate file.  Please delete the file first.";
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = "ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver";
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= "ERROR: You cannot set a anomalia as a duplicate of itself.";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= "ERROR: Custom field not found";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= "ERROR: This is a duplicate name.";
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= "ERROR: At least one project still uses this field.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "ERROR: Invalid value for field";
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = "Invalid custom field definition";
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= "ERROR: LDAP Authentication Failed";
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= "ERROR: LDAP Server Connection Failed";
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= "ERROR: LDAP Record Update has failed.";
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= "ERROR: LDAP User Record Not Found.";
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= "ERROR: The action cannot be performed because the anomalia has been resolved";
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= "ERROR: Database connection failed.";
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= "ERROR: Database query failed.";
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= "ERROR: Database selection failed.";
@@ -374,6 +373,7 @@ $s_profile_updated_msg = "Profilo Aggiornato...";
 # account_update.php
 $s_account_updated_msg = "Il tuo Account è stato aggiornato con successo...";
 $s_email_updated = "L'indirizzo email è stato aggiornato con successo";
+$s_realname_updated = 'Real name successfully updated';
 $s_password_updated = "La password è stata aggiornata correttamente";
 
 # bug_assign.php
@@ -667,8 +667,17 @@ $s_manage_link = "Amministra";
 $s_edit_news_link = "Modifica Notizie";
 $s_docs_link = "Documentazione";
 $s_logout_link = "Esci";
+$s_my_view_link = 'My View';
 
 # meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Unassigned';
+$s_my_view_title_recent_mod = 'Recently Modified';
+$s_my_view_title_reported = 'Reported by Me';
+$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
+$s_my_view_title_resolved = 'Resolved';
+$s_my_view_title_monitored = 'Monitored by Me';
 
 # news_add.php
 $s_news_added_msg = "Notizia Inserita...";
@@ -919,6 +928,13 @@ $s_custom_field_access_level_rw = "Modificabile";
 $s_custom_field_length_min = "Lunghezza min.";
 $s_custom_field_length_max = "Lunghezza max.";
 $s_custom_field_advanced = "Avanzato";
+$s_custom_field_display_resolve = 'Display When Resolving Issues';
+$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_require_report = 'Required On Report';
+$s_custom_field_require_update = 'Required On Update';
+$s_custom_field_require_resolve = 'Required On Resolve';
+$s_custom_field_require_close = 'Required On Close';
+
 $s_custom_field_sequence = "Sequenza";
 $s_custom_field_type_enum_string = "0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email";
 

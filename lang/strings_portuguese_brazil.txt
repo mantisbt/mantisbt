@@ -9,11 +9,11 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: vboctor $
-	# $Date: 2004-06-21 12:30:34 $
+	# $Date: 2004-07-07 12:48:58 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.59 2004-06-21 12:30:34 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.60 2004-07-07 12:48:58 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -667,8 +667,17 @@ $s_manage_link = 'Gerenciar';
 $s_edit_news_link = 'Alterar Notícias';
 $s_docs_link = 'Docs';
 $s_logout_link = 'Sair';
+$s_my_view_link = 'My View';
 
 # meta_inc.php
+
+# my_view_page.php
+$s_my_view_title_unassigned = 'Unassigned';
+$s_my_view_title_recent_mod = 'Recently Modified';
+$s_my_view_title_reported = 'Reported by Me';
+$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
+$s_my_view_title_resolved = 'Resolved';
+$s_my_view_title_monitored = 'Monitored by Me';
 
 # news_add.php
 $s_news_added_msg = 'Notícia adicionada...';
@@ -919,6 +928,13 @@ $s_custom_field_access_level_rw = 'Acesso de Escrita';
 $s_custom_field_length_min = 'Tamanho Mínimo';
 $s_custom_field_length_max = 'Tamanho Máximo';
 $s_custom_field_advanced = 'Avançado';
+$s_custom_field_display_resolve = 'Display When Resolving Issues';
+$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_require_report = 'Required On Report';
+$s_custom_field_require_update = 'Required On Update';
+$s_custom_field_require_resolve = 'Required On Resolve';
+$s_custom_field_require_close = 'Required On Close';
+
 $s_custom_field_sequence = 'Seqüência';
 $s_custom_field_type_enum_string = '0:String,1:Numérico,2:Ponto-flutuante,3:Enumeração,4:E-Mail';
 
