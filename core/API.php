@@ -42,7 +42,6 @@
 	require_once( $t_core_dir . 'email_api.php' );
 	require_once( $t_core_dir . 'news_api.php' );
 	require_once( $t_core_dir . 'icon_api.php' );
-	require_once( $t_core_dir . 'ldap_api.php' );
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'proj_user_api.php' );
 	require_once( $t_core_dir . 'category_api.php' );
@@ -54,6 +53,11 @@
 	require_once( $t_core_dir . 'bugnote_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'project_api.php' );
+
+	# Include LDAP only if needed.
+	if ( ( ON == config_get( 'use_ldap_email' ) ) || ( LDAP == config_get ( 'login_method' ) ) ) {
+		require_once( $t_core_dir . 'ldap_api.php' );
+	}
 
 	if (ON == $g_use_jpgraph) {
 		require_once( $t_core_dir . 'graph_api.php' );
