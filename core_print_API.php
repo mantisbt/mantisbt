@@ -42,6 +42,7 @@
 		}
 	}
 	### --------------------
+	# same as print_user() but fills in the subject with the bug summary
 	function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		global $g_mantis_user_table, $s_user_no_longer_exists;
 
@@ -609,7 +610,7 @@
 		}
 	}
 	### --------------------
-	# print a mailto: href link
+	# print a mailto: href link with subject
 	function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
 		global $g_mantis_bug_table;
 
@@ -624,6 +625,7 @@
 	}
 	### --------------------
 	# return the mailto: href string link instead of printing it
+	# add subject line
 	function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
 		global $g_hide_user_email;
 
