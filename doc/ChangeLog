@@ -1,6 +1,6 @@
 Mantis
 
-03.XX.2002  -   0.17.1
+03.15.2002  -   0.17.1
 
  * Fixed missing closing span tag in view_bug_*page.php.
  * Fixed advanced summaries (jpgraph) for general statistics for all projects.
