@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.111 2004-07-15 13:32:12 vboctor Exp $
+	# $Id: html_api.php,v 1.112 2004-07-24 14:17:12 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -323,7 +323,7 @@
 		if ( ON == config_get( 'show_version' ) ) {
 			echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/">Mantis ', config_get( 'mantis_version' ), '</a></span>', "\n";
 		}
-		echo "\t", '<address>Copyright &copy; 2000 - 2004</address>', "\n";
+		echo "\t", '<address>Copyright &copy; 2000 - 2004 Mantis Group</address>', "\n";
 		echo "\t", '<address><a href="mailto:', config_get( 'webmaster_email' ), '">', config_get( 'webmaster_email' ), '</a></address>', "\n";
 
 		# print timings
