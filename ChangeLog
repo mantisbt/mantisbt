@@ -1,5 +1,6 @@
 Mantis
 
+ * Fixed sorting in buglist is now preserved when going to next or prev page.
  * Fixed sorting in buglist. Bugs with high priority is now always first.
 
 07.29.2001  -   0.15.3
