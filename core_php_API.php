@@ -33,7 +33,7 @@
 	# --------------------
 
 	# Enforce our minimum requirements
-	if ( ! php_version_at_least( '4.2.2' ) ) {
+	if ( ! php_version_at_least( PHP_MIN_VERSION ) ) {
 		ob_end_clean();
 		echo "<b>Your version of PHP is too old.  Mantis requires PHP version 4.0.3 or newer to operate</b>";
 		die();
