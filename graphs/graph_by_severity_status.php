@@ -16,6 +16,8 @@
 	# Grab Data
 	# ---
 
+	$t_project_id = helper_get_current_project();
+
 	$critical_count_arr 	= array(2);
 	$high_count_arr 		= array(2);
 	$medium_count_arr 		= array(2);
@@ -51,7 +53,7 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$g_project_cookie_val' AND
+				WHERE project_id='$t_project_id' AND
 						status<80 AND
 						severity='$t_severity'";
 		$result = db_query( $query );
@@ -77,7 +79,7 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$g_project_cookie_val' AND
+				WHERE project_id='$t_project_id' AND
 						status=80 AND
 						severity='$t_severity'";
 		$result = db_query( $query );
@@ -104,7 +106,7 @@
 		$t_severity = $t_severity_arr[0];
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$g_project_cookie_val' AND
+				WHERE project_id='$t_project_id' AND
 						status=90 AND
 						severity='$t_severity'";
 		$result = db_query( $query );
@@ -126,7 +128,7 @@
 		}
 	}
 
-	$proj_name = project_get_field( $g_project_cookie_val, 'name' );
+	$proj_name = project_get_field( $t_project_id, 'name' );
 
 	# Setup Graph
 	# ---

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.9 2003-02-11 09:04:56 jfitzell Exp $
+	# $Id: summary_api.php,v 1.10 2003-02-24 09:44:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,14 +18,16 @@
 	# Given the enum string this function prints out the summary for each enum setting
 	# The enum field name is passed in through $p_enum
 	function print_bug_enum_summary( $p_enum_string, $p_enum ) {
-		global 	$g_mantis_bug_table, $g_project_cookie_val, $g_summary_pad;
+		global 	$g_mantis_bug_table, $g_summary_pad;
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
 
+		$t_project_id = helper_get_current_project();
+
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
-		else $specific_where = " project_id='$g_project_cookie_val'";
+		if ($t_project_id=='0000000') $specific_where = ' 1=1';
+		else $specific_where = " project_id='$t_project_id'";
 
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_s = explode_enum_arr( $t_arr[$i] );
@@ -80,13 +82,15 @@
 	# prints the bugs submitted in the last X days (default is 1 day) for the
 	# current project
 	function get_bug_count_by_date( $p_time_length=1 ) {
-		global $g_mantis_bug_table, $g_project_cookie_val;
+		global $g_mantis_bug_table;
 
 		$c_time_length = (integer)$p_time_length;
 
+		$t_project_id = helper_get_current_project();
+
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
-		else $specific_where = " project_id='$g_project_cookie_val'";
+		if ($t_project_id=='0000000') $specific_where = ' 1=1';
+		else $specific_where = " project_id='$t_project_id'";
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
@@ -116,7 +120,6 @@
 	# print bug counts by assigned to each developer
 	function print_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
-				$g_project_cookie_val,
 				$g_summary_pad, $g_handle_bug_threshold;
 
 		$t_dev = $g_handle_bug_threshold;
@@ -129,9 +132,11 @@
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
 
+		$t_project_id = helper_get_current_project();
+
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
-		else $specific_where = " project_id='$g_project_cookie_val'";
+		if ($t_project_id=='0000000') $specific_where = ' 1=1';
+		else $specific_where = " project_id='$t_project_id'";
 
 		$t_row_count = 0;
 
@@ -192,12 +197,13 @@
 	function print_reporter_summary() {
 		global 	$g_mantis_bug_table, 
 				$g_reporter_summary_limit,
-				$g_project_cookie_val,
 				$g_summary_pad;
 
+		$t_project_id = helper_get_current_project();
+
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1';
-		else $specific_where = " project_id='$g_project_cookie_val'";
+		if ($t_project_id=='0000000') $specific_where = ' 1=1';
+		else $specific_where = " project_id='$t_project_id'";
 
 		$t_view = VIEWER;
 		$query = "SELECT reporter_id, COUNT(*) as num
@@ -261,14 +267,16 @@
 	# print a bug count per category
 	function print_category_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_project_table,
-				$g_mantis_project_category_table, $g_project_cookie_val,
+				$g_mantis_project_category_table,
 				$g_summary_pad, $g_summary_category_include_project;
 
+		$t_project_id = helper_get_current_project();
+
 		#checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') {
+		if ($t_project_id=='0000000') {
 			$specific_where = '';
 		} else {
-			$specific_where = " AND (project_id='$g_project_cookie_val')";
+			$specific_where = " AND (project_id='$t_project_id')";
 		}
 
 		$query = "SELECT name as project, category
@@ -320,7 +328,7 @@
 
 			print '<tr align="center" ' . helper_alternate_class( $i ) . '>';
 			PRINT "<td width=\"50%\">";
-			if ( ( ON == $g_summary_category_include_project ) && ( $g_project_cookie_val=='0000000' ) ) {
+			if ( ( ON == $g_summary_category_include_project ) && ( $t_project_id=='0000000' ) ) {
 				PRINT "[$t_project] ";
 			}
 			PRINT "$t_category</td><td width=\"50%\">";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.96 2003-02-24 03:22:33 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.97 2003-02-24 09:44:02 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -759,15 +759,11 @@
 	#@@@ this code can be removed after full conversion to
 	#@@@ the gpc_api
 	$g_string_cookie_val	= '';
-	$g_project_cookie_val	= '0';  #use a default so we don't have to force the user to choose one
 	$g_view_all_cookie_val	= '';
 	$g_manage_cookie_val	= '';
 
 	if ( isset( $HTTP_COOKIE_VARS[$g_string_cookie] ) ) {
 		$g_string_cookie_val	= $HTTP_COOKIE_VARS[$g_string_cookie];
-	}
-	if ( isset( $HTTP_COOKIE_VARS[$g_project_cookie] ) ) {
-		$g_project_cookie_val	= $HTTP_COOKIE_VARS[$g_project_cookie];
 	}
 	if ( isset( $HTTP_COOKIE_VARS[$g_view_all_cookie] ) ) {
 		$g_view_all_cookie_val	= $HTTP_COOKIE_VARS[$g_view_all_cookie];

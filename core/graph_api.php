@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.7 2003-01-25 21:34:57 jlatour Exp $
+	# $Id: graph_api.php,v 1.8 2003-02-24 09:44:07 jfitzell Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -25,12 +25,14 @@
 
 	# Function which gives the absolute values according to the status (opened/closed/resolved)
 	function enum_bug_group( $p_enum_string, $p_enum ) {
-		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
+		global $g_mantis_bug_table, $enum_name, $enum_name_count;
 		#these vars are set global so that the other functions can use them
 		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
 
 		$enum_name = Null;
 		$enum_name_count = Null;
+
+		$t_project_id = helper_get_current_project();
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -38,8 +40,8 @@
 			$t_s = explode( ':', $t_arr[$i] );
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
-			if ($g_project_cookie_val=='0000000') $specific_where = '';
-			else $specific_where = " AND project_id='$g_project_cookie_val'";
+			if ($t_project_id=='0000000') $specific_where = '';
+			else $specific_where = " AND project_id='$t_project_id'";
 
 			# Calculates the number of bugs with $p_enum and puts the results in a table
 			$query = "SELECT COUNT(*)
@@ -135,17 +137,19 @@
 
 	# Function which finds the % according to the status
 	function enum_bug_group_pct( $p_enum_string, $p_enum ) {
-		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
+		global $g_mantis_bug_table, $enum_name, $enum_name_count;
 		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
 		$enum_name = Null;
 		$enum_name_count = Null;
+
+		$t_project_id = helper_get_current_project();
 
 		 #calculation per status
 		 $t_res_val = RESOLVED;
 		 $t_clo_val = CLOSED;
 
-		if ($g_project_cookie_val=='0000000') $specific_where = '';
-		else $specific_where = " AND project_id='$g_project_cookie_val'";
+		if ($t_project_id=='0000000') $specific_where = '';
+		else $specific_where = " AND project_id='$t_project_id'";
 
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
@@ -248,12 +252,14 @@
 
 	# Function which gets the values in %
 	function create_bug_enum_summary_pct( $p_enum_string, $p_enum ) {
-		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count, $total;
+		global $g_mantis_bug_table, $enum_name, $enum_name_count, $total;
 		$enum_name = Null;
 		$enum_name_count = Null;
 
-		if ($g_project_cookie_val=='0000000') $specific_where = '1=1';
-		else $specific_where = " project_id='$g_project_cookie_val'";
+		$t_project_id = helper_get_current_project();
+
+		if ($t_project_id=='0000000') $specific_where = '1=1';
+		else $specific_where = " project_id='$t_project_id'";
 
 		$query = "SELECT COUNT(*)
 	                      FROM $g_mantis_bug_table
@@ -311,11 +317,13 @@
 
 	function create_category_summary_pct() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
-				$g_mantis_project_category_table, $g_project_cookie_val,
+				$g_mantis_project_category_table,
 				$category_name, $category_bug_count;
 
-		if ($g_project_cookie_val=='0000000') $specific_where = '1=1';
-		else $specific_where = " project_id='$g_project_cookie_val'";
+		$t_project_id = helper_get_current_project();
+
+		if ($t_project_id=='0000000') $specific_where = '1=1';
+		else $specific_where = " project_id='$t_project_id'";
 
 		$query = "SELECT COUNT(*)
 	                      FROM $g_mantis_bug_table
@@ -376,9 +384,11 @@
 	}
 
 	function create_bug_enum_summary( $p_enum_string, $p_enum ) {
-		global $g_mantis_bug_table, $g_project_cookie_val, $enum_name, $enum_name_count;
+		global $g_mantis_bug_table, $enum_name, $enum_name_count;
 		$enum_name = Null;
 		$enum_name_count = Null;
+
+		$t_project_id = helper_get_current_project();
 
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -387,8 +397,8 @@
 			$c_s[0] = addslashes($t_s[0]);
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
-			if ($g_project_cookie_val=='0000000') $specific_where = '';
-			else $specific_where = " AND project_id='$g_project_cookie_val'";
+			if ($t_project_id=='0000000') $specific_where = '';
+			else $specific_where = " AND project_id='$t_project_id'";
 
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -425,8 +435,10 @@
 
 	function create_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table, $g_mantis_project_user_list_table,
-				$g_project_cookie_val, $developer_name, $open_bug_count,
+				$developer_name, $open_bug_count,
 				$resolved_bug_count, $total_bug_count;
+
+		$t_project_id = helper_get_current_project();
 
 		# selecting all users, some of them might not have a proper default access
 		# but be assigned on some particular projects
@@ -440,8 +452,8 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ($g_project_cookie_val=='0000000') $specific_where = '';
-			else $specific_where = " AND project_id='$g_project_cookie_val'";
+			if ($t_project_id=='0000000') $specific_where = '';
+			else $specific_where = " AND project_id='$t_project_id'";
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE handler_id='$v_id' $specific_where";
@@ -514,9 +526,10 @@
 
 	function create_reporter_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
-			$g_project_cookie_val,
 			$reporter_name, $reporter_count;
 
+
+		$t_project_id = helper_get_current_project();
 
 		$query = "SELECT id, username
 				FROM $g_mantis_user_table
@@ -528,8 +541,8 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ($g_project_cookie_val=='0000000') $specific_where = '';
-			else $specific_where = " AND project_id='$g_project_cookie_val'";
+			if ($t_project_id=='0000000') $specific_where = '';
+			else $specific_where = " AND project_id='$t_project_id'";
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
 					WHERE reporter_id ='$v_id' $specific_where";
@@ -568,11 +581,13 @@
 
 	function create_category_summary() {
 		global 	$g_mantis_bug_table,
-				$g_mantis_project_category_table, $g_project_cookie_val,
+				$g_mantis_project_category_table,
 				$category_name, $category_bug_count;
 
-		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1 ';
-		else $specific_where = " project_id='$g_project_cookie_val'";
+		$t_project_id = helper_get_current_project();
+
+		if ($t_project_id=='0000000') $specific_where = ' 1=1 ';
+		else $specific_where = " project_id='$t_project_id'";
 		$query = "SELECT DISTINCT category
 				FROM $g_mantis_project_category_table
 				WHERE $specific_where
@@ -635,13 +650,15 @@
 	}
 
 	function create_cumulative_bydate(){
-		global $metrics, $g_mantis_bug_table, $g_project_cookie_val;
+		global $metrics, $g_mantis_bug_table;
 
 		$t_clo_val = CLOSED;
 		$t_res_val = RESOLVED;
 
-		if ($g_project_cookie_val=='0000000') $specific_where = ' 1=1 ';
-			else $specific_where = " project_id='$g_project_cookie_val' ";
+		$t_project_id = helper_get_current_project();
+
+		if ($t_project_id=='0000000') $specific_where = ' 1=1 ';
+			else $specific_where = " project_id='$t_project_id' ";
 
 		### Get all the submitted dates
 		$query = "SELECT UNIX_TIMESTAMP(date_submitted) as date_submitted

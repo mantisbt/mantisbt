@@ -85,8 +85,10 @@
 	$query = 'SELECT DISTINCT *, UNIX_TIMESTAMP(last_updated) as last_updated
 			 FROM $g_mantis_bug_table';
 
+	$t_project_id = helper_get_current_project();
+
 	# project selection
-	if ( '0000000' == $g_project_cookie_val ) { # ALL projects
+	if ( '0000000' == $t_project_id ) { # ALL projects
 		$t_access_level = current_user_get_field( 'access_level' );
 		$t_user_id = current_user_get_field( 'id' );
 
@@ -120,7 +122,7 @@
 			$t_where_clause .= ')';
 		}
 	} else {
-		$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
+		$t_where_clause = " WHERE project_id='$t_project_id'";
 	}
 	# end project selection
 
@@ -438,7 +440,7 @@
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_id ?>
 		<?php # type project name if viewing 'all projects'?>
-		<?php if ( '0000000' == $g_project_cookie_val ) {?>
+		<?php if ( '0000000' == $t_project_id ) {?>
 		<br /><?php print "[$project_name]"; }?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">

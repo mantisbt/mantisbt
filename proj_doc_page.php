@@ -15,10 +15,12 @@
 <?php
 	access_ensure_project_level( config_get( 'view_proj_doc_threshold' ) );
 
+	$t_project_id = helper_get_current_project();
+
 	# Select project files
 	$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
 			FROM $g_mantis_project_file_table
-			WHERE project_id='$g_project_cookie_val'
+			WHERE project_id='$t_project_id'
 			ORDER BY title ASC";
 	$result = db_query( $query );
 	$num_files = db_num_rows( $result );

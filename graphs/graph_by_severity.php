@@ -16,12 +16,14 @@
 	# Grab Data
 	# ---
 
+	$t_project_id = helper_get_current_project();
+
 	$data_category_arr = array();
 	$data_count_arr = array();
 	$query = "SELECT severity, COUNT(severity) as count
 				FROM mantis_bug_table
 				WHERE status<80 AND
-				      project_id='$g_project_cookie_val'
+				      project_id='$t_project_id'
 				GROUP BY severity
 				ORDER BY severity";
 	$result = db_query( $query );
@@ -52,7 +54,7 @@
 		}
 	}
 
-	$proj_name = project_get_field( $g_project_cookie_val, 'name' );
+	$proj_name = project_get_field( $t_project_id, 'name' );
 
 	# Setup Graph
 	# ---

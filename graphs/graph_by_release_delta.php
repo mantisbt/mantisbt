@@ -16,10 +16,12 @@
 	$data_category_arr = array();
 	$data_count_arr = array();
 
+	$t_project_id = helper_get_current_project();
+
 	# Grab the Projections/Releases
 	$query = "SELECT DISTINCT( projection )
 			FROM mantis_bug_table
-			WHERE project_id='$g_project_cookie_val'
+			WHERE project_id='$t_project_id'
 			ORDER BY projection";
 	$result = db_query( $query );
 	$projection_count = db_num_rows( $result );
@@ -38,7 +40,7 @@
 		# OPEN
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$g_project_cookie_val' AND
+				WHERE project_id='$t_project_id' AND
 					projection='$t_projection' AND
 					status<80";
 		$result = db_query ( $query );
@@ -47,7 +49,7 @@
 		# RESOLVED
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$g_project_cookie_val' AND
+				WHERE project_id='$t_project_id' AND
 					projection='$t_projection' AND
 					status=80";
 		$result = db_query ( $query );
@@ -56,14 +58,14 @@
 		# CLOSED
 		$query = "SELECT COUNT(*) as count
 				FROM mantis_bug_table
-				WHERE project_id='$g_project_cookie_val' AND
+				WHERE project_id='$t_project_id' AND
 					projection='$t_projection' AND
 					status=90";
 		$result = db_query ( $query );
 		$closed_count_arr[] = db_result( $result, 0, 0 );
 	}
 
-	$proj_name = get_project_field( $g_project_cookie_val, 'name' );
+	$proj_name = get_project_field( $t_project_id, 'name' );
 
 	$graph = new Graph(800,600,'auto');
 	$graph->SetScale("textlin");

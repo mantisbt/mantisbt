@@ -16,13 +16,15 @@
 	# Grab Data
 	# ---
 
+	$t_project_id = helper_get_current_project();
+
 	$g_start_date = date( 'Y-m-d', strtotime("-1 Month"));
 
 	$query = "SELECT status,
 					UNIX_TIMESTAMP(date_submitted) as date_submitted,
 					UNIX_TIMESTAMP(last_updated) as last_updated
 			FROM mantis_bug_table
-			WHERE project_id='$g_project_cookie_val' AND
+			WHERE project_id='$t_project_id' AND
 					date_submitted>='$g_start_date'
 			ORDER BY date_submitted ASC";
 	$result = db_query( $query );
@@ -38,21 +40,21 @@
 
 	# get total bugs before a date
 	function get_total_count_by_date( $p_date ) {
-		global $g_project_cookie_val;
+		$t_project_id = helper_get_current_project();
 
 		$d_arr = explode( '/', $p_date );
 		$p_date = $d_arr[2].'-'.$d_arr[0].'-'.$d_arr[1];
 		$query = "SELECT COUNT(*)
 				FROM mantis_bug_table
 				WHERE date_submitted<='$p_date' AND
-					project_id='$g_project_cookie_val'";
+					project_id='$t_project_id'";
 		$result = db_query ( $query );
 		return db_result( $result, 0, 0 );
 	}
 
 	# get resolved bugs before a date
 	function get_resolved_count_by_date( $p_date ) {
-		global $g_project_cookie_val;
+		$t_project_id = helper_get_current_project();
 
 		$d_arr = explode( '/', $p_date );
 		$p_date = $d_arr[2].'-'.$d_arr[0].'-'.$d_arr[1];
@@ -60,14 +62,14 @@
 				FROM mantis_bug_table
 				WHERE last_updated<='$p_date' AND
 					status='80' AND
-					project_id='$g_project_cookie_val'";
+					project_id='$t_project_id'";
 		$result = db_query ( $query );
 		return db_result( $result, 0, 0 );
 	}
 
 	# get closed bugs before a date
 	function get_closed_count_by_date( $p_date ) {
-		global $g_project_cookie_val;
+		$t_project_id = helper_get_current_project();
 
 		$d_arr = explode( '/', $p_date );
 		$p_date = $d_arr[2].'-'.$d_arr[0].'-'.$d_arr[1];
@@ -75,7 +77,7 @@
 				FROM mantis_bug_table
 				WHERE last_updated<='$p_date' AND
 					status='90' AND
-					project_id='$g_project_cookie_val'";
+					project_id='$t_project_id'";
 		$result = db_query ( $query );
 		return db_result( $result, 0, 0 );
 	}
@@ -145,7 +147,7 @@
 		$data_date_arr[$key] = substr( $val, 0, 5 ).' ';
 	}
 
-	$proj_name = project_get_field( $g_project_cookie_val, 'name' );
+	$proj_name = project_get_field( $t_project_id, 'name' );
 
 	# Setup Graph
 	# ---

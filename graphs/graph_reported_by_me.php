@@ -16,12 +16,14 @@
 	# Grab Data
 	# ---
 
+	$t_project_id = helper_get_current_project();
+
 	$data_category_arr = array();
 	$data_count_arr = array();
 	$t_user_id = auth_get_current_user_id();
 	$query = "SELECT status, COUNT( status ) as count
 			FROM mantis_bug_table
-			WHERE project_id='$g_project_cookie_val' AND
+			WHERE project_id='$t_project_id' AND
 				  reporter_id='$t_user_id'
 			GROUP BY status
 			ORDER BY status";

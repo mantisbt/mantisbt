@@ -15,11 +15,13 @@
 <?php
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
+	$t_project_id = helper_get_current_project();
+
 	#checking if it's a per project statistic or all projects
-	if ($g_project_cookie_val=='0000000') {
+	if ($t_project_id=='0000000') {
 		$specific_where = ' 1=1';
 	} else {
-		$specific_where = " project_id='$g_project_cookie_val'";
+		$specific_where = " project_id='$t_project_id'";
 	}
 	$t_clo_val = CLOSED;
 	$query = "SELECT id, UNIX_TIMESTAMP(date_submitted) as date_submitted,

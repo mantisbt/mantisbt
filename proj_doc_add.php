@@ -35,6 +35,8 @@
 	} else if ( is_uploaded_file( $f_tmp_name ) ) {
 		$good_upload = 1;
 
+		$t_project_id = helper_get_current_project();
+
 		# grab the file path
 		$t_file_path = project_get_field( helper_get_current_project(), 'file_path' );
 
@@ -42,7 +44,7 @@
 		$f_title 	= db_prepare_string( $f_title );
 		$f_description 	= db_prepare_string( $f_description );
 
-		$f_file_name = lang_get( 'document_files_prefix' ) . '-' . project_format_id ( $g_project_cookie_val ) . '-' . $f_name;
+		$f_file_name = lang_get( 'document_files_prefix' ) . '-' . project_format_id ( $t_project_id ) . '-' . $f_name;
 		$t_file_size = $f_size;
 
 		switch ( $g_file_upload_method ) {
@@ -52,7 +54,7 @@
 							$query = "INSERT INTO mantis_project_file_table
 									(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 									VALUES
-									(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '')";
+									(null, $t_project_id, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '')";
 						} else {
 							trigger_error( ERROR_DUPLICATE_FILE, ERROR );
 						}
@@ -62,7 +64,7 @@
 						$query = "INSERT INTO mantis_project_file_table
 								(id, project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 								VALUES
-								(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '$t_content')";
+								(null, $t_project_id, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '$t_content')";
 						break;
 		}
 		$result = db_query( $query );

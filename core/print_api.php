@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.50 2003-02-24 03:38:49 int2str Exp $
+	# $Id: print_api.php,v 1.51 2003-02-24 09:44:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -238,7 +238,9 @@
 	# --------------------
 	# Get current headlines and id  prefix with v_
 	function print_news_item_option_list() {
-		global	$g_mantis_news_table, $g_project_cookie_val;
+		global	$g_mantis_news_table;
+
+		$t_project_id = helper_get_current_project();
 
 		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			$query = "SELECT id, headline, announcement, view_state
@@ -247,7 +249,7 @@
 		} else {
 			$query = "SELECT id, headline, announcement, view_state
 				FROM $g_mantis_news_table
-				WHERE project_id='$g_project_cookie_val'
+				WHERE project_id='$t_project_id'
 				ORDER BY date_posted DESC";
 		}
 	    $result = db_query( $query );
@@ -335,8 +337,7 @@
 	# --------------------
 	# List projects that the current user has access to
 	function print_project_option_list( $p_project_id = null, $p_include_all_projects = true ) {
-		global $g_mantis_project_table, $g_mantis_project_user_list_table,
-				$g_project_cookie_val;
+		global $g_mantis_project_table, $g_mantis_project_user_list_table;
 
 		$t_user_id = current_user_get_field( 'id' );
 		$t_access_level = current_user_get_field( 'access_level' );
@@ -445,13 +446,15 @@
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
 	function print_category_option_list( $p_category='' ) {
-		global $g_mantis_bug_table, $g_mantis_project_category_table, $g_project_cookie_val;
+		global $g_mantis_bug_table, $g_mantis_project_category_table;
+
+		$t_project_id = helper_get_current_project();
 
 		# grab all categories in the project category table
 		$cat_arr = array();
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $g_mantis_project_category_table
-				WHERE project_id='$g_project_cookie_val'
+				WHERE project_id='$t_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -473,13 +476,15 @@
 	# We check in the project category table and in the bug table
 	# We put them all in one array and make sure the entries are unique
 	function print_category_complete_option_list( $p_category='' ) {
-		global $g_mantis_bug_table, $g_mantis_project_category_table, $g_project_cookie_val;
+		global $g_mantis_bug_table, $g_mantis_project_category_table;
+
+		$t_project_id = helper_get_current_project();
 
 		# grab all categories in the project category table
 		$cat_arr = array();
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $g_mantis_project_category_table
-				WHERE project_id='$g_project_cookie_val'
+				WHERE project_id='$t_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -491,7 +496,7 @@
 		# grab all categories in the bug table
 		$query = "SELECT DISTINCT( category ) as category
 				FROM $g_mantis_bug_table
-				WHERE project_id='$g_project_cookie_val'
+				WHERE project_id='$t_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
@@ -511,19 +516,21 @@
 	}
 	# --------------------
 	function print_category_option_listOLD( $p_category='' ) {
-		global $g_mantis_project_category_table, $g_project_cookie_val;
+		global $g_mantis_project_category_table;
+
+		$t_project_id = helper_get_current_project();
 
 		# @@@ not implemented yet
-		if ( '0000000' == $g_project_cookie_val ) {
+		if ( '0000000' == $t_project_id ) {
 			$query = "SELECT category
 					FROM $g_mantis_project_category_table
-					WHERE project_id='$g_project_cookie_val'
+					WHERE project_id='$t_project_id'
 					ORDER BY category";
 
 		} else {
 			$query = "SELECT category
 					FROM $g_mantis_project_category_table
-					WHERE project_id='$g_project_cookie_val'
+					WHERE project_id='$t_project_id'
 					ORDER BY category";
 		}
 
@@ -539,11 +546,13 @@
 	}
 	# --------------------
 	function print_version_option_list( $p_version='' ) {
-		global $g_mantis_project_version_table, $g_project_cookie_val;
+		global $g_mantis_project_version_table;
+
+		$t_project_id = helper_get_current_project();
 
 		$query = "SELECT *
 				FROM $g_mantis_project_version_table
-				WHERE project_id='$g_project_cookie_val'
+				WHERE project_id='$t_project_id'
 				ORDER BY date_order DESC";
 		$result = db_query( $query );
 		$version_count = db_num_rows( $result );
@@ -641,11 +650,10 @@
 	# list of users that are NOT in the specified project
 	# if no project is specified use the current project
 	function print_project_user_list_option_list( $p_project_id=0 ) {
-		global	$g_mantis_project_user_list_table, $g_mantis_user_table,
-				$g_project_cookie_val;
+		global	$g_mantis_project_user_list_table, $g_mantis_user_table;
 
 		if ( 0 == $p_project_id ) {
-			$p_project_id = $g_project_cookie_val;
+			$p_project_id = helper_get_current_project();
 		}
 		$c_project_id = (integer)$p_project_id;
 
