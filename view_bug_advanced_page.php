@@ -377,7 +377,10 @@
 	} # REOPEN form END
 ?>
 <?php # CLOSE form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( $g_close_bug_threshold ) && ( RESOLVED == $v_status ) ) { ?>
+<?php if ( ( access_level_check_greater_or_equal( $g_close_bug_threshold ) ||
+		( ON == $g_allow_reporter_close && 
+		  $v_reporter_id == $t_user_id ) ) && 
+		( RESOLVED == $v_status ) ) { ?>
 	<td class="center">
 		<form method="post" action="<?php echo $g_bug_close_page ?>">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
