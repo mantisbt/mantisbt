@@ -263,7 +263,7 @@
 					ORDER BY u.username";
 		} else {
 			$query = "SELECT DISTINCT u.id, u.username, u.email
-					FROM 	$g_mantis_user_table u,
+					FROM	$g_mantis_user_table u,
 							$g_mantis_project_user_list_table l,
 							$g_mantis_project_table p
 					WHERE	(p.view_state='$t_pub' AND

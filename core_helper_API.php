@@ -271,9 +271,19 @@
 		# then references that color variable
 		# You could replace this with a bunch of if... then... else
 		# statements
-		$t_color_str = get_enum_element( "status", $p_status );
-		$t_color_variable_name = "g_".$t_color_str."_color";
+		$t_color_str = "closed";
+		$t_arr = explode_enum_string( $g_status_enum_string );
+		$t_arr_count = count( $t_arr );
+		for ( $i=0;$i<$t_arr_count;$i++ ) {
+			$elem_arr = explode_enum_arr( $t_arr[$i] );
+			if ( $elem_arr[0] == $p_status ) {
+				# now get the appropriate translation
+				$t_color_str = $elem_arr[1];
+				break;
+			}
+		}
 
+		$t_color_variable_name = "g_".$t_color_str."_color";
 		global $$t_color_variable_name;
 		return $$t_color_variable_name;
 	}

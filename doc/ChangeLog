@@ -14,6 +14,7 @@ Mantis
  * Updated PHP and MySQL requirements.
  * Updated Norwegian, Russian, Danish translations.
  * Added russian_koi8 translation.
+ * Fixed no colors when using non-English languages.
 
 05.12.2002  -   0.17.2
 
