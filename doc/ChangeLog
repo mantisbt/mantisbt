@@ -40,6 +40,7 @@ Mantis
  * Made 'light grey' the default color for 'closed'.
  * Added $g_notify_admin_on_new to allow enabling/disable of notifications to admins on arrival of new bugs.
  * Added $g_notify_on_new_threshold to allow controlling the threshold of notification on arrival of new bugs.
+ * Added support for "product : category" rather than "category" only in summary for "All Products" ($g_summary_product_colon_category)
 
 2002.05.19  -  0.17.3
 
