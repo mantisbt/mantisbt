@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.245 $
+	# $Revision: 1.246 $
 	# $Author: thraxisp $
-	# $Date: 2005-03-19 16:26:01 $
+	# $Date: 2005-03-20 14:34:03 $
 	#
-	# $Id: strings_english.txt,v 1.245 2005-03-19 16:26:01 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.246 2005-03-20 14:34:03 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -643,6 +643,8 @@ $s_last_visit = 'Last Visit';
 $s_edit_user_link = 'Edit User';
 
 # manage_config_email_page
+$s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
+$s_config_project = 'Note: These configurations affect only the %s project.';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
