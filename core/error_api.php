@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.14 2003-01-23 21:44:43 jlatour Exp $
+	# $Id: error_api.php,v 1.15 2003-02-08 22:31:29 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -46,13 +46,13 @@
 		# build an appropriate error string
 		switch ( $p_type ) {
 			case E_WARNING:
-				$t_string = "SYSTEM WARNING: $p_error <br /> ($t_short_file: line $p_line)";
+				$t_string = "SYSTEM WARNING: $p_error\n$t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
 				break;
 			case E_NOTICE:
-				$t_string = "SYSTEM NOTICE: $p_error <br /> ($t_short_file: line $p_line)";
+				$t_string = "SYSTEM WARNING: $p_error\n$t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_notices' ) ) {
 					$t_method = 'inline';
 				}
@@ -60,13 +60,13 @@
 			case E_USER_ERROR:
 				$t_string = "MANTIS ERROR #$p_error: " .
 							error_string( $p_error ) .
-							"<br />($t_short_file: line $p_line)";
+							"\n($t_short_file: line $p_line)";
 				$t_method = 'halt';
 				break;
 			case E_USER_WARNING:
 				$t_string = "MANTIS WARNING #$p_error: " .
 							error_string( $p_error ) .
-							"<br />($t_short_file: line $p_line)";
+							"\n($t_short_file: line $p_line)";
 				if ( ON == config_get( 'show_warnings' ) ) {
 					$t_method = 'inline';
 				}
@@ -91,7 +91,7 @@
 			print_page_top1();
 			print_page_top2a();
 
-			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
+			echo '<p class="center" style="color:red">' . nl2br( htmlentities( $t_string ) ) . '</p>';
 
 			# @@@ temp until we get parameterized errors
 			for ( $i = 0 ; $i < sizeof( $g_error_parameters ) ; $i = $i + 1 ) {
@@ -134,7 +134,7 @@
 		<center>
 			<table class="width75">
 				<tr>
-					<td>Full path: <?php echo $p_file ?></td>
+					<td>Full path: <?php echo htmlentities( $p_file ) ?></td>
 				</tr>
 				<tr>
 					<td>Line: <?php echo $p_line ?></td>
@@ -154,7 +154,7 @@
 	function error_print_context( $p_context ) {
 		echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
 		while ( list( $t_var, $t_val ) = each( $p_context ) ) {
-			echo "<tr><td>$t_var</td><td>$t_val</td><td>" . gettype( $t_val ) . "</td></tr>\n";
+			echo "<tr><td>$t_var</td><td>" . htmlentities( (string)$t_val ) . '</td><td>' . gettype( $t_val ) . "</td></tr>\n";
 		}
 		echo '</table>';
 	}
@@ -173,7 +173,7 @@
 			echo '<center><table class="width75">';
 
 			for ( $i = 0 ; $i < sizeof( $t_stack ) ; $i = $i + 1 ) {
-				echo '<tr ' . helper_alternate_class( $i ) . '"><td>'.$t_stack[$i].'</td></tr>';
+				echo '<tr ' . helper_alternate_class( $i ) . '"><td>' . htmlentities( $t_stack[$i] ) . '</td></tr>';
 			}
 
 			echo '</table></center>';
@@ -187,8 +187,8 @@
 			echo '<tr><th>Filename</th><th>Line</th><th>Function</th><th>Args</th></tr>';
 
 			foreach ( $t_stack as $t_frame ) {
-				echo '<tr ' . helper_alternate_class( $i ) . '">';
-				echo "<td>$t_frame[file]</td><td>$t_frame[line]</td><td>$t_frame[function]</td>";
+				echo '<tr ' . helper_alternate_class() . '">';
+				echo '<td>' . htmlentities( $t_frame[file] ) . "</td><td>$t_frame[line]</td><td>$t_frame[function]</td>";
 
 				$t_args = array();
 				if ( isset( $t_frame['args'] ) ) {
@@ -197,7 +197,7 @@
 					}
 				}
 
-				echo '<td>( ' . implode( $t_args, ', ' ). ' )</td></tr>';
+				echo '<td>( ' . htmlentities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
 			}
 
 			echo '</table></center>';
