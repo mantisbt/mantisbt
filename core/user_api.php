@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.20 2002-08-30 09:02:38 jfitzell Exp $
+	# $Id: user_api.php,v 1.21 2002-09-03 00:54:20 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -40,8 +40,8 @@
 			return $g_cache_user[$c_user_id];
 		}
 
-		$query = "SELECT * 
-				  FROM $t_user_table 
+		$query = "SELECT *
+				  FROM $t_user_table
 				  WHERE id='$c_user_id'";
 		$result = db_query( $query );
 
@@ -63,7 +63,7 @@
 	# Clear the user cache (or just the given id if specified)
 	function user_clear_cache( $p_user_id = null ) {
 		global $g_cache_user;
-		
+
 		if ( $p_user_id === null ) {
 			$g_cache_user = array();
 		} else {
@@ -91,9 +91,9 @@
 			return $g_cache_user_pref[$c_user_id];
 		}
 
-		$query = "SELECT * 
-				  FROM $t_user_pref_table 
-				  WHERE id='$c_user_id'";
+		$query = "SELECT *
+				  FROM $t_user_pref_table
+				  WHERE user_id='$c_user_id'";
 		$result = db_query( $query );
 
 		if ( 0 == db_num_rows( $result ) ) {
@@ -116,7 +116,7 @@
 	# @@@ needs extension for per-project prefs
 	function user_pref_clear_cache( $p_user_id = null ) {
 		global $g_cache_user_pref;
-		
+
 		if ( $p_user_id === null ) {
 			$g_cache_user_pref = array();
 		} else {
@@ -329,7 +329,7 @@
 	# returns true when the account was successfully deleted
 	function user_delete( $p_user_id ) {
 		$c_user_id 					= db_prepare_int($p_user_id);
-		
+
 		$t_user_table 				= config_get('mantis_user_table');
 		$t_user_profile_table 		= config_get('mantis_user_profile_table');
 		$t_user_pref_table 			= config_get('mantis_user_pref_table');
@@ -341,13 +341,13 @@
     				  FROM $t_user_table
     				  WHERE id='$c_user_id'";
 	    	db_query( $query );
-			
+
 			# Remove associated profiles
 			$query = "DELETE
 	    			  FROM $t_user_profile_table
 	    			  WHERE user_id='$c_user_id'";
 			db_query( $query );
-			
+
 			# Remove associated preferences
 			$query = "DELETE
     				  FROM $t_user_pref_table
@@ -358,9 +358,9 @@
     				  FROM $t_project_user_list_table
 	    			  WHERE user_id='$c_user_id'";
 			db_query( $query );
-			
+
 			user_clear_cache( $p_user_id );
-			
+
 			return true;
 		} else {
 			return false;
@@ -371,7 +371,7 @@
 	function user_create_project_prefs( $p_user_id, $p_project_id ) {
 		$c_user_id 		= db_prepare_int( $p_user_id );
 		$c_project_id 	= db_prepare_int( $p_project_id );
-		
+
 		$t_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 
 		$t_default_advanced_report			= config_get( 'default_advanced_report');
@@ -425,7 +425,7 @@
 		$c_username = db_prepare_string( $p_username );
 
 		$t_user_table = config_get( 'mantis_user_table' );
-		
+
 		$query = "SELECT id
 				  FROM $t_user_table
 				  WHERE username='$c_username'";
@@ -530,7 +530,7 @@
 	function user_get_assigned_open_bug_count( $p_user_id, $p_project_id=0 ) {
 		$c_user_id		= db_prepare_int($p_user_id);
 		$c_project_id	= db_prepare_int($p_project_id);
-		
+
 		$t_bug_table	= config_get('mantis_bug_table');
 
 		if ( 0 == $p_project_id ) {
@@ -556,7 +556,7 @@
 	function user_get_reported_open_bug_count( $p_user_id, $p_project_id=0 ) {
 		$c_user_id		= db_prepare_int($p_user_id);
 		$c_project_id	= db_prepare_int($p_project_id);
-		
+
 		$t_bug_table	= config_get('mantis_bug_table');
 
 		if ( 0 == $p_project_id ) {
@@ -588,11 +588,11 @@
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		$t_user_table = config_get( 'mantis_user_table' );
-		
+
 		$query = "UPDATE $t_user_table
 				  SET last_visit=NOW()
 				  WHERE id='$c_user_id'";
-		
+
 		db_query( $query );
 
 		user_clear_cache( $p_user_id );
