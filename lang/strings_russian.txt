@@ -7,11 +7,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.29 $
+	# $Revision: 1.30 $
 	# $Author: prescience $
-	# $Date: 2002-06-12 01:03:18 $
+	# $Date: 2002-06-13 04:02:08 $
 	#
-	# $Id: strings_russian.txt,v 1.29 2002-06-12 01:03:18 prescience Exp $
+	# $Id: strings_russian.txt,v 1.30 2002-06-13 04:02:08 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -36,22 +36,22 @@
 	$s_print = 'Печать';
 	$s_jump = 'Перейти';
 	$s_copy_users = 'Копировать пользователей';
-	$s_copy_categories_from = 'Copy Categories From';
-	$s_copy_categories_to = 'Copy Categories To';
-	$s_bug_history = 'Bug History';
-	$s_field = 'Field';
-	$s_old_value = 'Old Value';
-	$s_new_value = 'New Value';
-	$s_date_modified = 'Date Modified';
-	$s_bugnote = 'Bugnote';
-	$s_change = 'Change';
-	$s_bugnote_view_state = 'Bugnote View State';
-	$s_bug_monitor = 'Bug Monitored';
-	$s_bug_end_monitor = 'Bug End Monitor';
-	$s_announcement = 'Announcement';
-	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Bugnote Delete';
-	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bug?';
+	$s_copy_categories_from = 'Копировать категории из';
+	$s_copy_categories_to = 'Копировать категории в';
+	$s_bug_history = 'История бага';
+	$s_field = 'Поле';
+	$s_old_value = 'Старое значение';
+	$s_new_value = 'Новое значение';
+	$s_date_modified = 'Дата изменения';
+	$s_bugnote = 'Заметка';
+	$s_change = 'Изменить';
+	$s_bugnote_view_state = 'Состояние просмотра заметок';
+	$s_bug_monitor = 'Баг отслеживается';
+	$s_bug_end_monitor = 'Закрытие бага отслеживается';
+	$s_announcement = 'Анонс';
+	$s_stays_on_top = 'Поверх всех';
+	$s_delete_bugnote_button = 'Удалить заметку';
+	$s_delete_bugnote_sure_msg = 'Вы уверены, что хотите удалить баг?';
 	$s_bug_relationships = 'Relationships';
 
 	$s_duplicate_of = 'duplicate of %id';
@@ -60,19 +60,19 @@
 	$s_dependant_on = 'dependant on %id';
 	$s_blocks = 'blocks %id';
 
-	$s_new_bug = 'New Bug';
-	$s_bugnote_added = 'Bugnote Added';
-	$s_bugnote_edited = 'Bugnote Edited';
-	$s_bugnote_deleted = 'Bugnote Deleted';
-	$s_summary_updated = 'Summary Updated';
-	$s_description_updated = 'Description Updated';
-	$s_additional_information_updated = 'Additional Information Updated';
-	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
+	$s_new_bug = 'Новый баг';
+	$s_bugnote_added = 'Заметка добавлена';
+	$s_bugnote_edited = 'Заметка отредактирована';
+	$s_bugnote_deleted = 'Заметка удалена';
+	$s_summary_updated = 'Сводка обновлена';
+	$s_description_updated = 'Описание обновлено';
+	$s_additional_information_updated = 'Дополнительная информация обновлена';
+	$s_steps_to_reproduce_updated = 'Шаги по воспроизведению обновлены';
+	$s_file_added = 'Файл добавлен: ';
+	$s_file_deleted = 'Файл удален: ';
 
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
+	$s_make_private = 'Сделать частным';
+	$s_make_public = 'Сделать общедоступным';
 
 
 	# ERROR strings
@@ -86,7 +86,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'ОШИБКА: Дубликат категории.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ОШИБКА: Дубликат версии.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ОШИБКА: Дубликат файла. Сначала удалите старый файл.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ОШИБКА: Это имя проекта.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
 
@@ -105,7 +105,7 @@
 	$s_access_levels_enum_string      = '10:зритель,25:репортер,40:редактор,55:разработчик,70:менеджер,90:администратор';
 	$s_project_status_enum_string     = '10:бета,30:релиз,50:стабильный,70:устаревший';
 	$s_project_view_state_enum_string = '10:общедоступный,50:частный';
-	$s_view_state_enum_string         = '10:public,50:private';
+	$s_view_state_enum_string         = '10:общедоступный,50:частный';
 
 	$s_priority_enum_string           = '10:нет,20:низкий,30:нормальный,40:высокий,50:важный,60:безотлагательный';
 	$s_severity_enum_string           = '10:дополнение,20:тривиально,30:текст,40:минимально,50:незначительный,60:значительный,70:авария,80:блокировка';
@@ -185,7 +185,7 @@
 	$s_email_on_resolved = 'Уведомлять при решении';
 	$s_email_on_closed = 'Уведомлять при закрытии';
 	$s_email_on_reopened = 'Уведомлять при повторном открытии';
-	$s_email_on_bugnote_added = 'Уведомлять при новом комментарии';
+	$s_email_on_bugnote_added = 'Уведомлять при новой заметке';
 	$s_email_on_status_change = 'Уведомлять при изменении статуса';
 	$s_email_on_priority_change = 'Уведомлять при измении приоритета';
 	$s_language = 'Язык';
@@ -481,7 +481,7 @@
 	$s_reset_password_msg2 = 'сброс пароля привел к тому, что сейчас пароль - пустая строка.';
 
 	# manage_user_reset.php
-	$s_account_reset_protected_msg = 'Аккаунт защищен. невозможно обнулить пароль.';
+	$s_account_reset_protected_msg = 'Бюджет защищен. невозможно обнулить пароль.';
 	$s_account_reset_msg = 'Пароль бюджета сброшен...';
 	$s_account_reset_msg2 = 'Пароль бюджета установлен пустым...';
 
