@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.18 2004-08-01 17:28:58 prichards Exp $
+	# $Id: relationship_api.php,v 1.19 2004-08-02 11:02:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -18,7 +18,7 @@
 	# MASC RELATIONSHIP
 
 	# --------------------------------------------------------
-	# Author: Marcello Scat‡ marcello@marcelloscata.com
+	# Author: Marcello Scata' marcello@marcelloscata.com
 	#
 	# --------------------------------------------------------
 	# RELATIONSHIP DEFINITIONS
@@ -368,13 +368,6 @@
 			$p_user_id = auth_get_current_user_id();
 		}
 
-		if ( $p_html_preview == false ) {
-			$t_td = '<td>';
-		}
-		else {
-			$t_td = '<td class="print">';
-		}
-
 		if ( $p_bug_id == $p_relationship->src_bug_id ) {
 			# root bug is in the src side, related bug in the dest side
 			$t_related_bug_id = $p_relationship->dest_bug_id;
@@ -386,49 +379,49 @@
 			$t_relationship_descr = relationship_get_description_dest_side( $p_relationship->type );
 		}
 
-		if ( bug_exists( $t_related_bug_id ) ) {
-			# related bug existing...
-			if ( access_has_bug_level( VIEWER, $t_related_bug_id ) ) {
-				# user can access to the related bug at least as a viewer
+		# related bug not existing...
+		if ( !bug_exists( $t_related_bug_id ) ) {
+			return '';
+		}
 
-				# get the information from the related bug and prepare the link
-				$t_bug = bug_prepare_display( bug_get( $t_related_bug_id, true ) );
-				$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
-				$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
+		# user can access to the related bug at least as a viewer
+		if ( !access_has_bug_level( VIEWER, $t_related_bug_id ) ) {
+			return '';
+		}
 
-				$t_relationship_info_html = '<nobr>' . $t_relationship_descr . '</nobr></td>';
-				if ( $p_html_preview == false ) {
-					$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
-					$t_relationship_info_html .= '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>' . $t_td;
-				}
-				else {
-					$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';
-					$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>' . $t_td;
-				}
-
-				$t_relationship_info_text = str_pad( $t_relationship_descr,25);
-				$t_relationship_info_text .= str_pad( bug_format_id( $t_related_bug_id ),8 );
-				$t_relationship_info_text .= str_pad( $t_status,15 );
-
-				# get the handler name of the related bug
-				if ( $t_bug->handler_id > 0 )  {
-					$t_relationship_info_html .= '<nobr>' . string_attribute( user_get_name(  $t_bug->handler_id ) ) . '<nobr>';
-				}
-
-				# add summary
-				$t_relationship_info_html .= '&nbsp;</td>' . $t_td . string_attribute( $t_bug->summary );
-			}
-			else {
-				# no viewer access to the related bug
-				$t_relationship_info_html = bug_format_id( $t_related_bug_id ) . '</td>' . $t_td . '&nbsp;</td>' . $t_td . '&nbsp;</td>' . $t_td;
-				$t_relationship_info_text = str_pad( bug_format_id( $t_related_bug_id ),8 );
-			}
+		if ( $p_html_preview == false ) {
+			$t_td = '<td>';
 		}
 		else {
-			# related bug not found...
-			$t_relationship_info_html = bug_format_id( $t_related_bug_id ) . '</td>' . $t_td . '&nbsp;</td>' . $t_td . '&nbsp;</td>' . $t_td;
-			$t_relationship_info_text = str_pad( bug_format_id( $t_related_bug_id ),8 );
+			$t_td = '<td class="print">';
 		}
+
+		# get the information from the related bug and prepare the link
+		$t_bug = bug_prepare_display( bug_get( $t_related_bug_id, true ) );
+		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status ) );
+		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution ) );
+
+		$t_relationship_info_html = '<nobr>' . $t_relationship_descr . '</nobr></td>';
+		if ( $p_html_preview == false ) {
+			$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
+			$t_relationship_info_html .= '<td><a title="' . $t_resolution . '"><u>' . $t_status . '</u>&nbsp;</a></td>' . $t_td;
+		}
+		else {
+			$t_relationship_info_html .= $t_td . bug_format_id( $t_related_bug_id ) . '</td>';
+			$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>' . $t_td;
+		}
+
+		$t_relationship_info_text = str_pad( $t_relationship_descr,25);
+		$t_relationship_info_text .= str_pad( bug_format_id( $t_related_bug_id ),8 );
+		$t_relationship_info_text .= str_pad( $t_status,15 );
+
+		# get the handler name of the related bug
+		if ( $t_bug->handler_id > 0 )  {
+			$t_relationship_info_html .= '<nobr>' . user_get_name(  $t_bug->handler_id ) . '</nobr>';
+		}
+
+		# add summary
+		$t_relationship_info_html .= '&nbsp;</td>' . $t_td . $t_bug->summary;
 
 		# add delete link if bug not read only and user has access level
 		if ( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
@@ -472,11 +465,10 @@
 			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship[$i], true, false );
 		}
 
-		if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="row-2"><td colspan="5"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
-		}
-
 		if ( !is_blank( $t_summary ) ) {
+			if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
+				$t_summary .= '<tr class="row-2"><td colspan="5"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+			}
 			$t_summary = '<table border="0" width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 		}
 
@@ -500,12 +492,11 @@
 			$t_summary .= relationship_get_details ( $p_bug_id, $t_relationship[$i], true, true );
 		}
 
-		if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="print"><td class="print" colspan="5"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
-		}
-
 		if ( !is_blank( $t_summary ) ) {
-			$t_summary = '<table class="width100">' . $t_summary . '</table>';
+			if ( relationship_can_resolve_bug( $p_bug_id ) == false ) {
+				$t_summary .= '<tr class="print"><td class="print" colspan="5"><b>' . lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</b></td></tr>';
+			}
+			$t_summary = '<table border="0" width="100%" cellpadding="0" cellspacing="1">' . $t_summary . '</table>';
 		}
 
 		return $t_summary;

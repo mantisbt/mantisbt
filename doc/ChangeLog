@@ -19,6 +19,8 @@ Mantis ChangeLog
 - 0004183: [filters] HTML entities in search text (narcissus)
 - 0004207: [filters] Mantis forgets user filter after logout (narcissus)
 - 0004122: [relationships] Upgrade script seems to swap the duplicate relationship (masc)
+- 0004146: [relationships] Summary doesn't unescape(?) characters (masc)
+- 0004161: [relationships] Relations to private issues must only appear to user with appropriate access level (masc)
 - 0004083: [sponsorships] Users without email address must not be able to sponsor issues (thraxisp)
 - 0002861: [bugtracker] misleading 'copyright' at the pages' bottom (vboctor)
 - 0003710: [bugtracker] time stats in summary to use resolved (thraxisp)
