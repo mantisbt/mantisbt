@@ -42,6 +42,7 @@ Mantis
  * Modified br tags to be new xml style tags.
  * Modified time stats in summary to use CLOSED instead of resolved.
  * Modified setcookie() to use g_cookie_path when unsetting.
+ * Modified set_project.php to avoid double refresh when using IIS.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added Czech translation.
@@ -57,6 +58,7 @@ Mantis
  * Added list of projects  a user is assigned to to the account page.
  * Added print bug view.
  * Added jump to bug form.
+ * Added core_proj_user_API.php.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
  * Removed proj_user_delete_page.php.

@@ -38,7 +38,7 @@
 		if ( !isset( $HTTP_REFERER ) || empty( $HTTP_REFERER ) ) {
 			$t_redirect_url = $g_main_page;
 		} else if ( eregi( $g_view_all_bug_page, $HTTP_REFERER ) ){
-			$t_redirect_url = $g_view_all_bug_page;
+			$t_redirect_url = $g_view_all_set."?f_type=0";
 		} else if ( eregi( $g_summary_page, $HTTP_REFERER ) ){
 			$t_redirect_url = $g_summary_page;
 		} else if ( eregi( $g_manage_project_user_menu_page, $HTTP_REFERER ) ){
