@@ -56,6 +56,7 @@ Mantis ChangeLog
  * Fix #3886: Custom HTML page title not displayed.
  * Fix #3920: Two missing graphs in advanced summary.
  * Fix #3923: "By Developer" and "By Reporter" graphs rewritten to reduce SQL impact.
+ * Fix #3924: Graphs did not show query counts when flag was set.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).

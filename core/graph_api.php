@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.17 2004-06-10 23:54:51 narcissus Exp $
+	# $Id: graph_api.php,v 1.18 2004-06-11 00:17:22 narcissus Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -87,7 +87,7 @@
 	# Function which displays the charts using the absolute values according to the status (opened/closed/resolved)
 	function graph_group( $p_title='' ){
 		global $enum_name, $enum_name_count;
-		global $open_bug_count, $closed_bug_count, $resolved_bug_count,$height;
+		global $open_bug_count, $closed_bug_count, $resolved_bug_count,$height, $g_queries_array;
 
 		#defines margin according to height
 		$graph = new Graph(350,400);
@@ -130,6 +130,10 @@
 
 	    $gbplot = new GroupBarPlot(array($p1,$p2,$p3));
         $graph->Add($gbplot);
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 		$graph->Stroke();
 
 	}
@@ -219,7 +223,7 @@
 	# Function that displays charts in % according to the status
 	function graph_group_pct( $p_title='' ){
 		global $enum_name, $enum_name_count;
-		global $open_bug_count, $closed_bug_count, $resolved_bug_count;
+		global $open_bug_count, $closed_bug_count, $resolved_bug_count, $g_queries_array;
 
 		$graph = new Graph(250,400);
 		$graph->img->SetMargin(35,35,35,150);
@@ -251,6 +255,10 @@
         $gbplot = new GroupBarPlot(array($p1,$p2,$p3));
 
         $graph->Add($gbplot);
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 		$graph->Stroke();
 	}
 
@@ -298,7 +306,7 @@
 	# --------------------
 	# Function that displays pie charts
 	function graph_bug_enum_summary_pct( $p_title=''){
-		global $enum_name, $enum_name_count, $center, $poshorizontal, $posvertical;
+		global $enum_name, $enum_name_count, $center, $poshorizontal, $posvertical, $g_queries_array;
 
 		$graph = new PieGraph(500,350);
 		$graph->img->SetMargin(40,40,40,100);
@@ -321,6 +329,10 @@
 		$p1->value->Show();
 
 		$graph->Add($p1);
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 		$graph->Stroke();
 	}
 
@@ -371,7 +383,7 @@
 	# --------------------
 	# Pie chart which dispays by categories
 	function graph_category_summary_pct( $p_title=''){
-		global $category_name, $category_bug_count;
+		global $category_name, $category_bug_count, $g_queries_array;
 
 		$graph = new PieGraph(600,450);
 		$graph->img->SetMargin(40,40,40,100);
@@ -393,6 +405,10 @@
 		$p1->value->Show();
 
 		$graph->Add($p1);
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 		$graph->Stroke();
 
 	}
@@ -428,7 +444,7 @@
 
 	# --------------------
 	function graph_bug_enum_summary( $p_title='' ){
-		global $enum_name, $enum_name_count;
+		global $enum_name, $enum_name_count, $g_queries_array;
 
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
@@ -446,6 +462,10 @@
 		$p1->SetFillColor('yellow');
 		$p1->SetWidth(0.8);
 		$graph->Add($p1);
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 
 		$graph->Stroke();
 
@@ -518,7 +538,7 @@
 
 	# --------------------
 	function graph_developer_summary( ){
-		global $developer_name, $total_bug_count, $open_bug_count, $resolved_bug_count;
+		global $developer_name, $total_bug_count, $open_bug_count, $resolved_bug_count, $g_queries_array;
 
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
@@ -550,6 +570,10 @@
 
 		$gbplot =  new GroupBarPlot( array($p1, $p2, $p3));
 		$graph->Add($gbplot);
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 
 		$graph->Stroke();
 
@@ -611,7 +635,7 @@
 
 	# --------------------
 	function graph_reporter_summary( ){
-		global $reporter_name, $reporter_count;
+		global $reporter_name, $reporter_count, $g_queries_array;
 
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
@@ -629,6 +653,10 @@
 		$p1->SetWidth(0.8);
 		$graph->Add($p1);
 
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 		$graph->Stroke();
 
 	}
@@ -670,7 +698,7 @@
 
 	# --------------------
 	function graph_category_summary(){
-		global $category_name, $category_bug_count;
+		global $category_name, $category_bug_count, $g_queries_array;
 
 		$graph = new Graph(300,380);
 		$graph->img->SetMargin(40,40,40,170);
@@ -688,6 +716,10 @@
 		$p1->SetWidth(0.8);
 		$graph->Add($p1);
 
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 		$graph->Stroke();
 
 	}
@@ -788,7 +820,7 @@
 
 	# --------------------
 	function graph_cumulative_bydate(){
-		global $metrics;
+		global $metrics, $g_queries_array;
 
 		for ($i=0;$i<count($metrics);$i++) {
 			$plot_date[] = strtotime($metrics[$i][0]);
@@ -831,6 +863,10 @@
 		$graph->Add($p2);
 
 
+		if ( ON == config_get( 'show_queries_count' ) ) {
+			$t_count = count( $g_queries_array );
+			$graph->subtitle->Set( $t_count . ' queries (' . count( array_unique ( $g_queries_array ) ) . ' unique)' );
+		}
 		$graph->Stroke();
 	}
 ?>
