@@ -32,12 +32,12 @@ doc/CREDITS             - List of contributors
 doc/Changelog           - List of fixes, additions, and todo items
 doc/documentation.html  - Help on general use
 doc/configuration.html  - Help on configuration options for config_inc.php
-default/config_inc1.php - Configuration file - part 1
-default/config_inc2.php - Configuration file - part 2
-core_*_API.php          - Core functions
+config_inc.php          - Configuration
+config_defaults_inc.php - Configuration defaults - Check to see what else you can configure but do not edit
+core/                   - Core functions
 sql/db_generate.sql     - SQL table statements
-sql/db_upgrade.sql      - SQL upgrade statements
-admin_upgrade.php3      - SQL upgrade script (see doc/UPGRADING)
+admin/upgrade.php       - Upgrade script
+admin/check.php         - Verifies your installation
 lang/                   - Localization string files
 
 -------------------------------------------------------------------------------
