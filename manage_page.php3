@@ -157,7 +157,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	$user_count = db_num_rows( $result );
 ?>
 <p>
-<table class="width100" cellspacing="0">
+<table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="6">
 		<? echo $s_manage_accounts_title ?> [<? echo $user_count ?>]

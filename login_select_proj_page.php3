@@ -33,7 +33,7 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td width="40%">
+	<td class="category" width="40%">
 		<? echo $s_choose_project ?>:
 	</td>
 	<td width="60%">
@@ -43,7 +43,7 @@
 	</td>
 </tr>
 <tr class="row-2">
-	<td>
+	<td class="category">
 		<? echo $s_make_default ?>:
 	</td>
 	<td>
