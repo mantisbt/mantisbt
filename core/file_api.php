@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.11 2002-09-21 10:17:14 jfitzell Exp $
+	# $Id: file_api.php,v 1.12 2002-10-10 12:42:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -208,7 +208,7 @@
 			# grab the file path
 			$t_file_path = project_get_field( $t_project_id, 'file_path' );
 
-			$t_bug_id = str_pad( $p_bug_id, '0', 7, STR_PAD_LEFT );
+			$t_bug_id = bug_format_id( $p_bug_id );
 
 			# prepare variables for insertion
 			$t_new_file_name = $t_bug_id.'-'.$c_file_name;

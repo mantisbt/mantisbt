@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.20 2002-10-10 02:02:46 vboctor Exp $
+	# $Id: email_api.php,v 1.21 2002-10-10 12:42:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -666,7 +666,7 @@
 		$p_subject = string_email( get_bug_summary( $p_bug_id ) );
 
 		# padd the bug id with zeros
-		$p_bug_id = str_pad( $p_bug_id, '0', 7, STR_PAD_LEFT );
+		$p_bug_id = bug_format_id( $p_bug_id );
 
 		return '['.$p_project_name.' '.$p_bug_id.']: '.$p_subject;
 	}

@@ -8,11 +8,13 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_id		= gpc_get_int( 'f_id' );
+	$f_id		= bug_format_id( $f_id );
+
 	if ( ADVANCED_ONLY == $g_show_view ) {
 		print_header_redirect ( 'bug_view_advanced_page.php?f_id='.$f_id );
 	}
 
-	$f_id		= gpc_get_int( 'f_id' );
 	$f_history	= gpc_get_bool( 'f_history' );
 
 	$c_id = (integer)$f_id;

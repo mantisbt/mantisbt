@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.8 2002-09-16 04:16:59 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.9 2002-10-10 12:42:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -27,6 +27,11 @@
 
 		# db_query() errors if there was a problem so:
 		return true;
+	}
+	# --------------------
+	# Pads the bugnote id with the appropriate number of zeros.
+	function bugnote_format_id( $p_bug_id ) {
+		return( str_pad( $p_bug_id, 7, '0', STR_PAD_LEFT ) );
 	}
 	# --------------------
 	# returns true if the bugnote exists, false otherwise
@@ -101,7 +106,7 @@
 
 				if ( $result ) {
 					# get bugnote id
-					$t_bugnote_id = str_pad( db_insert_id(), '0', 7, STR_PAD_LEFT );
+					$t_bugnote_id = bugnote_format_id( db_insert_id() );
 
 					# log new bug
 					history_log_event_special( $p_bug_id, BUGNOTE_ADDED , $t_bugnote_id );
@@ -139,7 +144,7 @@
 
 			if ( $result ) {
 				# log deletion of bug
-				$t_bugnote_id = str_pad( $c_bugnote_id, '0', 7, STR_PAD_LEFT );
+				$t_bugnote_id = bugnote_format_id( $c_bugnote_id );
 				history_log_event_special( $t_bug_id, BUGNOTE_DELETED, $t_bugnote_id );
 				return true;
 			}

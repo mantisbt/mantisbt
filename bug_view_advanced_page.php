@@ -13,6 +13,7 @@
 	# @@@@ Bug History - consider logging the fact that defect was published and by who.
 
 	$f_id		= gpc_get_int( 'f_id' );
+	$f_id		= bug_format_id ( $f_id );
 	$f_check	= gpc_get_string( 'f_check', '' );
 	$f_history	= gpc_get_bool( 'f_history' );
 

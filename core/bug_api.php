@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.13 2002-09-20 20:00:21 jfitzell Exp $
+	# $Id: bug_api.php,v 1.14 2002-10-10 12:42:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -57,6 +57,11 @@
 		$g_cache_bug[$c_bug_id] = $row;
 
 		return $row;
+	}
+	# --------------------
+	# Pads the bug id with the appropriate number of zeros.
+	function bug_format_id( $p_bug_id ) {
+		return( str_pad( $p_bug_id, 7, '0', STR_PAD_LEFT ) );
 	}
 	# --------------------
 	# Clear the bug cache (or just the given id if specified)

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.7 2002-09-21 10:17:14 jfitzell Exp $
+	# $Id: string_api.php,v 1.8 2002-10-10 12:42:23 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -183,13 +183,13 @@
 	#  account for the user preference and site override
 	function string_get_bug_view_link( $p_bug_id, $p_user_id=null ) {
 		$t_summary = bug_get_field( $p_bug_id, 'summary' );
-		return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . $p_bug_id . '</a>';
+		return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 	}
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_view_url( $p_bug_id, $p_user_id=null ) {
-		return string_get_bug_view_page( $p_user_id ) . '?f_id=' . $p_bug_id;
+		return string_get_bug_view_page( $p_user_id ) . '?f_id=' . bug_format_id( $p_bug_id );
 	}
 	# --------------------
 	# return the name of a bug VIEW page for the user
@@ -202,13 +202,13 @@
 	#  account for the user preference and site override
 	function string_get_bug_update_link( $p_bug_id, $p_user_id=null ) {
 		$t_summary = bug_get_field( $p_bug_id, 'summary' );
-		return '<a href="' . string_get_bug_update_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . $p_bug_id . '</a>';
+		return '<a href="' . string_get_bug_update_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 	}
 	# --------------------
 	# return the name and GET parameters of a bug UPDATE page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_update_url( $p_bug_id, $p_user_id=null ) {
-		return string_get_bug_update_page( $p_user_id ) . '?f_id=' . $p_bug_id;
+		return string_get_bug_update_page( $p_user_id ) . '?f_id=' . bug_format_id( $p_bug_id );
 	}
 	# --------------------
 	# return the name of a bug UPDATE page for the user
