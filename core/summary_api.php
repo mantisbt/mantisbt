@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.10 2003-02-24 09:44:09 jfitzell Exp $
+	# $Id: summary_api.php,v 1.11 2003-02-24 10:32:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -26,7 +26,7 @@
 		$t_project_id = helper_get_current_project();
 
 		#checking if it's a per project statistic or all projects
-		if ($t_project_id=='0000000') $specific_where = ' 1=1';
+		if ($t_project_id==0) $specific_where = ' 1=1';
 		else $specific_where = " project_id='$t_project_id'";
 
 		for ($i=0;$i<$enum_count;$i++) {
@@ -89,7 +89,7 @@
 		$t_project_id = helper_get_current_project();
 
 		#checking if it's a per project statistic or all projects
-		if ($t_project_id=='0000000') $specific_where = ' 1=1';
+		if ($t_project_id==0) $specific_where = ' 1=1';
 		else $specific_where = " project_id='$t_project_id'";
 
 		$query = "SELECT COUNT(*)
@@ -135,7 +135,7 @@
 		$t_project_id = helper_get_current_project();
 
 		#checking if it's a per project statistic or all projects
-		if ($t_project_id=='0000000') $specific_where = ' 1=1';
+		if ($t_project_id==0) $specific_where = ' 1=1';
 		else $specific_where = " project_id='$t_project_id'";
 
 		$t_row_count = 0;
@@ -202,7 +202,7 @@
 		$t_project_id = helper_get_current_project();
 
 		#checking if it's a per project statistic or all projects
-		if ($t_project_id=='0000000') $specific_where = ' 1=1';
+		if ($t_project_id==0) $specific_where = ' 1=1';
 		else $specific_where = " project_id='$t_project_id'";
 
 		$t_view = VIEWER;
@@ -273,7 +273,7 @@
 		$t_project_id = helper_get_current_project();
 
 		#checking if it's a per project statistic or all projects
-		if ($t_project_id=='0000000') {
+		if ($t_project_id==0) {
 			$specific_where = '';
 		} else {
 			$specific_where = " AND (project_id='$t_project_id')";
@@ -328,7 +328,7 @@
 
 			print '<tr align="center" ' . helper_alternate_class( $i ) . '>';
 			PRINT "<td width=\"50%\">";
-			if ( ( ON == $g_summary_category_include_project ) && ( $t_project_id=='0000000' ) ) {
+			if ( ( ON == $g_summary_category_include_project ) && ( $t_project_id==0 ) ) {
 				PRINT "[$t_project] ";
 			}
 			PRINT "$t_category</td><td width=\"50%\">";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.25 2003-02-23 14:18:00 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.26 2003-02-24 10:32:25 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -233,7 +233,7 @@
 	</td>
 	<td>
 		<select tabindex="11" name="handler_id">
-			<option value="0000000" selected="selected"></option>
+			<option value="0" selected="selected"></option>
 			<?php print_assign_to_option_list( $f_handler_id ) ?>
 		</select>
 	</td>

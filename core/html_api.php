@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.61 2003-02-22 22:14:08 jfitzell Exp $
+	# $Id: html_api.php,v 1.62 2003-02-24 10:32:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -431,7 +431,7 @@
 		echo '<table class="width100" cellspacing="0">';
 		echo '<tr>';
 			echo '<td class="menu">';
-			echo '<a href="set_project.php?project_id=0000000">' . lang_get( 'all_projects' ) . '</a>';
+			echo '<a href="set_project.php?project_id=0">' . lang_get( 'all_projects' ) . '</a>';
 			for ( $i=0 ; $i < $project_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 				extract( $row, EXTR_PREFIX_ALL, 'v' );

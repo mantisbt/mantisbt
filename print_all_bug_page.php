@@ -90,7 +90,7 @@
 	$t_project_id = helper_get_current_project();
 
 	# project selection
-	if ( '0000000' == $t_project_id ) { # ALL projects
+	if ( 0 == $t_project_id ) { # ALL projects
 		$t_access_level = current_user_get_field( 'access_level' );
 		$t_user_id = current_user_get_field( 'id' );
 
@@ -442,7 +442,7 @@
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_id ?>
 		<?php # type project name if viewing 'all projects'?>
-		<?php if ( '0000000' == $t_project_id ) {?>
+		<?php if ( 0 == $t_project_id ) {?>
 		<br /><?php print "[$project_name]"; }?>
 	</td>
 	<td class="print" bgcolor="<?php echo $status_color ?>">

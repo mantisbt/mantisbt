@@ -14,9 +14,9 @@
 			</td>
 			<td class="login-info-right">
 				<select name="f_project_id" class="small">
-					<option value="0000000">All Projects</option>
-					<option value="0000001">mantis</option>
-					<option value="0000003">public</option>
+					<option value="0">All Projects</option>
+					<option value="1">mantis</option>
+					<option value="3">public</option>
 					</select>
 				<input type="submit" value="Switch" class="small">
 			</td>
@@ -62,9 +62,9 @@
 		</div>
 		<div class="login-info-right">
 			<select name="f_project_id" class="small">
-				<option value="0000000">All Projects</option>
-				<option value="0000001">mantis</option>
-				<option value="0000003">public</option>
+				<option value="0">All Projects</option>
+				<option value="1">mantis</option>
+				<option value="3">public</option>
 				</select>
 			<input type="submit" value="Switch" class="small">
 		</div>

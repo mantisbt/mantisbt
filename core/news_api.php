@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.9 2003-02-19 13:14:37 vboctor Exp $
+	# $Id: news_api.php,v 1.10 2003-02-24 10:32:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -119,7 +119,7 @@
 				  WHERE project_id='$c_project_id'";
 				  
 		if ( $p_sitewide ) {
-			$query .= " OR project_id='0000000'";
+			$query .= " OR project_id=0";
 		}
 
 		$result = db_query( $query );

@@ -98,7 +98,7 @@
 	$t_project_id = helper_get_current_project();
 
 	# project selection
-	if ( '0000000' == $t_project_id ) { # ALL projects
+	if ( 0 == $t_project_id ) { # ALL projects
 		$t_access_level = current_user_get_field( 'access_level' );
 		$t_user_id = current_user_get_field( 'id' );
 

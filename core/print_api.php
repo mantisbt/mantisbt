@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.52 2003-02-24 09:52:07 jfitzell Exp $
+	# $Id: print_api.php,v 1.53 2003-02-24 10:32:32 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -135,7 +135,7 @@
 	}
 	# --------------------
 	function print_duplicate_id( $p_duplicate_id ) {
-		if ( $p_duplicate_id != '0000000' ) {
+		if ( $p_duplicate_id != 0 ) {
 			echo string_get_bug_view_link( $p_duplicate_id );
 		}
 	}
@@ -226,7 +226,7 @@
 	    		ORDER BY id ASC";
 	    $result = db_query( $query );
 	    $duplicate_id_count = db_num_rows( $result );
-	    PRINT '<option value="0000000"></option>';
+	    PRINT '<option value="0"></option>';
 
 	    for ($i=0;$i<$duplicate_id_count;$i++) {
 	    	$row = db_fetch_array( $result );
@@ -521,7 +521,7 @@
 		$t_project_id = helper_get_current_project();
 
 		# @@@ not implemented yet
-		if ( '0000000' == $t_project_id ) {
+		if ( 0 == $t_project_id ) {
 			$query = "SELECT category
 					FROM $g_mantis_project_category_table
 					WHERE project_id='$t_project_id'
