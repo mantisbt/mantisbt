@@ -19,8 +19,8 @@
 	$g_timer = new BC_Timer;
 
 	# seed random number generator
-	list($usec,$sec)=explode(' ',microtime());
-	mt_srand($sec*$usec);
+	list( $usec, $sec ) = explode( ' ', microtime() );
+	mt_srand( $sec*$usec );
 
 	# DATABASE WILL BE OPENED HERE!!  THE DATABASE SHOULDN'T BE EXPLICITLY
 	# OPENED ANYWHERE ELSE.
