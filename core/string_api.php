@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.25 2003-02-10 21:59:44 jfitzell Exp $
+	# $Id: string_api.php,v 1.26 2003-02-15 01:52:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -125,9 +125,7 @@
 				if ( isset( $t_match[2] ) ) {
 					$t_bug_id = $t_match[2];
 					if ( bug_exists( $t_bug_id ) ) {
-						$t_result .= '<a href="' . $t_page_name . '?bug_id=' . $t_bug_id . 
-									'" title="' . bug_get_field( $t_bug_id, 'summary' ) .
-									'">#' . $t_bug_id . '</a>';
+						$t_result .= string_get_bug_view_link( $t_bug_id );
 					} else {
 						$t_result .= $t_tag . $t_bug_id;
 					}
