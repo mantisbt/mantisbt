@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.87 $
+	# $Revision: 1.88 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:07 $
+	# $Date: 2004-12-24 20:25:56 $
 	#
-	# $Id: strings_french.txt,v 1.87 2004-10-15 07:07:07 bigbadger Exp $
+	# $Id: strings_french.txt,v 1.88 2004-12-24 20:25:56 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -1059,7 +1059,7 @@ $s_http_auth_realm = "Connexion Mantis";
 $s_bug = "bug";
 $s_add_new_relationship = "Nouvelle relation";
 $s_add_new_relationship_button = "Ajouter";
-$s_this_bug = "Bug courrant";
+$s_this_bug = "Bug courant";
 $s_relationship_added = "Relation ajoutée";
 $s_relationship_deleted = "Relation supprimée";
 $s_no_relationship = "no relationship";
