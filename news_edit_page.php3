@@ -47,7 +47,7 @@
 		<? echo $s_edit_news_title ?>
 	</td>
 	<td class="right">
-		<? print_bracket_link( $g_news_menu_page, "Back" ) ?>
+		<? print_bracket_link( $g_news_menu_page, $s_go_back ) ?>
 	</td>
 </tr>
 <tr class="row-1">

@@ -34,15 +34,18 @@
 <table class="width50" cellspacing="0">
 <form method="post" action="<? echo $g_signup ?>">
 <tr>
-	<td class="form-title" colspan="2">
+	<td class="form-title">
 		<? echo $s_signup_title ?>
+	</td>
+	<td class="right">
+		<? print_bracket_link( $g_login_page, $s_go_back ) ?>
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category" width="25%">
+	<td class="category" width="30%">
 		<? echo $s_username ?>:
 	</td>
-	<td width="75%">
+	<td width="70%">
 		<input type="text" name="f_username" size="32" maxlength="32">
 	</td>
 </tr>

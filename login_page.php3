@@ -53,7 +53,7 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td width="25%">
+	<td class="category" width="25%">
 		<? echo $s_username ?>:
 	</td>
 	<td width="75%">
@@ -61,7 +61,7 @@
 	</td>
 </tr>
 <tr class="row-2">
-	<td>
+	<td class="category">
 		<? echo $s_password ?>:
 	</td>
 	<td>
@@ -69,7 +69,7 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td>
+	<td class="category">
 		<? echo $s_save_login ?>:
 	</td>
 	<td>

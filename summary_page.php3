@@ -60,159 +60,153 @@
 <? print_summary_menu( $g_summary_page ) ?>
 
 <p>
-<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width100" cellspacing="1">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_summary_title ?></b> <? echo $s_orct ?>
-		</td>
-	</tr>
-	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td width="50%">
-			<b><? echo $s_by_status ?>:</b>
-		</td>
-		<td width="50%">
-			<b><? echo $s_by_date ?>:</b>
-		</td>
-	</tr>
-	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td width="50%">
-			<? ### STATUS ### ?>
-			<table width="97%">
-				<? print_bug_enum_summary( $s_status_enum_string, "status" ) ?>
-			</table>
-		</td>
-		<td width="50%">
-			<? ### DATE ### ?>
-			<table width="97%">
-			<? print_bug_date_summary( $g_date_partitions ) ?>
-			</table>
-		</td>
-	</tr>
-	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td width="50%">
-			<b><? echo $s_by_severity ?>:</b>
-		</td>
-		<td width="50%">
-			<b><? echo $s_by_resolution ?>:</b>
-		</td>
-	</tr>
-	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td>
-			<? ### SEVERITY ### ?>
-			<table width="97%">
-				<? print_bug_enum_summary( $s_severity_enum_string, "severity" ) ?>
-			</table>
-		</td>
-		<td>
-			<? ### RESOLUTION ### ?>
-			<table width="97%">
-				<? print_bug_enum_summary( $s_resolution_enum_string, "resolution" ) ?>
-			</table>
-		</td>
-	</tr>
-	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td>
-			<b><? echo $s_by_category ?>:</b>
-		</td>
-		<td>
-			<b><? echo $s_by_priority ?>:</b>
-		</td>
-	</tr>
-	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td>
-			<? ### CATEGORY ### ?>
-			<table width="97%">
-				<? print_category_summary() ?>
-			</table>
-		</td>
-		<td>
-			<? ### PRIORITY ### ?>
-			<table width="97%">
-				<? print_bug_enum_summary( $s_priority_enum_string, "priority" ) ?>
-			</table>
-		</td>
-	</tr>
-	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td>
-			<b><? echo $s_time_stats ?>:</b>
-		</td>
-		<td>
-			&nbsp;
-		</td>
-	</tr>
-	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td>
-			<? ### MISCELLANEOUS ### ?>
-			<table width="97%">
-			<tr align="center" bgcolor="<? echo $g_primary_color_dark ?>">
-				<td width="50%">
-					<? echo $s_longest_open_bug ?>
-				</td>
-				<td width="50%">
-					<? if ($t_bug_id>0) { ?>
-						<? if ( get_current_user_pref_field( "advanced_view" )==1 ) { ?>
-							<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
-						<? } else {?>
-							<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
-						<? } ?>
+	<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
+		<b><? echo $s_summary_title ?></b> <? echo $s_orct ?>
+	</td>
+</tr>
+<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td width="50%">
+		<b><? echo $s_by_status ?>:</b>
+	</td>
+	<td width="50%">
+		<b><? echo $s_by_date ?>:</b>
+	</td>
+</tr>
+<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td width="50%">
+		<? ### STATUS ### ?>
+		<table width="97%">
+			<? print_bug_enum_summary( $s_status_enum_string, "status" ) ?>
+		</table>
+	</td>
+	<td width="50%">
+		<? ### DATE ### ?>
+		<table width="97%">
+		<? print_bug_date_summary( $g_date_partitions ) ?>
+		</table>
+	</td>
+</tr>
+<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td width="50%">
+		<b><? echo $s_by_severity ?>:</b>
+	</td>
+	<td width="50%">
+		<b><? echo $s_by_resolution ?>:</b>
+	</td>
+</tr>
+<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td>
+		<? ### SEVERITY ### ?>
+		<table width="97%">
+			<? print_bug_enum_summary( $s_severity_enum_string, "severity" ) ?>
+		</table>
+	</td>
+	<td>
+		<? ### RESOLUTION ### ?>
+		<table width="97%">
+			<? print_bug_enum_summary( $s_resolution_enum_string, "resolution" ) ?>
+		</table>
+	</td>
+</tr>
+<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td>
+		<b><? echo $s_by_category ?>:</b>
+	</td>
+	<td>
+		<b><? echo $s_by_priority ?>:</b>
+	</td>
+</tr>
+<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td>
+		<? ### CATEGORY ### ?>
+		<table width="97%">
+			<? print_category_summary() ?>
+		</table>
+	</td>
+	<td>
+		<? ### PRIORITY ### ?>
+		<table width="97%">
+			<? print_bug_enum_summary( $s_priority_enum_string, "priority" ) ?>
+		</table>
+	</td>
+</tr>
+<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td>
+		<b><? echo $s_time_stats ?>:</b>
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
+<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td>
+		<? ### MISCELLANEOUS ### ?>
+		<table width="97%">
+		<tr align="center" bgcolor="<? echo $g_primary_color_dark ?>">
+			<td width="50%">
+				<? echo $s_longest_open_bug ?>
+			</td>
+			<td width="50%">
+				<? if ($t_bug_id>0) { ?>
+					<? if ( get_current_user_pref_field( "advanced_view" )==1 ) { ?>
+						<a href="<? echo $g_view_bug_advanced_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
+					<? } else {?>
+						<a href="<? echo $g_view_bug_page ?>?f_id=<? echo $t_bug_id ?>"><? echo $t_bug_id ?></a>
 					<? } ?>
-				</td>
-			</tr>
-			<tr align="center" bgcolor="<? echo $g_primary_color_light ?>">
-				<td>
-					<? echo $s_longest_open ?>
-				</td>
-				<td>
-					<? echo $t_largest_diff ?>
-				</td>
-			</tr>
-			<tr align="center" bgcolor="<? echo $g_primary_color_dark ?>">
-				<td>
-					<? echo $s_average_time ?>
-				</td>
-				<td>
-					<? echo $t_average_time ?>
-				</td>
-			</tr>
-			<tr align="center" bgcolor="<? echo $g_primary_color_light ?>">
-				<td>
-					<? echo $s_total_time ?>
-				</td>
-				<td>
-					<? echo $t_total_time ?>
-				</td>
-			</tr>
-			</table>
-		</td>
-		<td>
-			&nbsp;
-		</td>
-	</tr>
+				<? } ?>
+			</td>
+		</tr>
+		<tr align="center" bgcolor="<? echo $g_primary_color_light ?>">
+			<td>
+				<? echo $s_longest_open ?>
+			</td>
+			<td>
+				<? echo $t_largest_diff ?>
+			</td>
+		</tr>
+		<tr align="center" bgcolor="<? echo $g_primary_color_dark ?>">
+			<td>
+				<? echo $s_average_time ?>
+			</td>
+			<td>
+				<? echo $t_average_time ?>
+			</td>
+		</tr>
+		<tr align="center" bgcolor="<? echo $g_primary_color_light ?>">
+			<td>
+				<? echo $s_total_time ?>
+			</td>
+			<td>
+				<? echo $t_total_time ?>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
 
-	<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td>
-			<b><? echo $s_developer_stats ?>:</b>
-		</td>
-		<td>
-			<b><? echo $s_reporter_stats ?>: </b> <? #@@@ OOPS - localize ?>
-		</td>
-	</tr>
-	<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
-		<td>
-			<table width="97%">
-				<? print_developer_summary() ?>
-			</table>
-		</td>
-		<td>
-			<table width="97%">
-				<? print_reporter_summary() ?>
-			</table>
-		</td>
-	</tr>
-	</table>
+<tr valign="bottom" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td>
+		<b><? echo $s_developer_stats ?>:</b>
+	</td>
+	<td>
+		<b><? echo $s_reporter_stats ?>: </b> <? #@@@ OOPS - localize ?>
+	</td>
+</tr>
+<tr align="center" valign="top" height="28" bgcolor="<? echo $g_white_color ?>">
+	<td>
+		<table width="97%">
+			<? print_developer_summary() ?>
+		</table>
+	</td>
+	<td>
+		<table width="97%">
+			<? print_reporter_summary() ?>
+		</table>
 	</td>
 </tr>
 </table>
