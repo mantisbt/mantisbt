@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.48 2003-02-15 22:20:32 vboctor Exp $
+	# $Id: html_api.php,v 1.49 2003-02-16 13:37:00 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -718,7 +718,7 @@
 	# --------------------
 	# Print a button to delete the given bug
 	function html_button_bug_delete( $p_bug_id ) {
-		if ( access_has_project_level( config_get( 'allow_bug_delete_access_level' ) ) ) {
+		if ( access_has_project_level( config_get( 'delete_bug_threshold' ) ) ) {
 			echo '<td class="center">';
 			html_button( 'bug_delete.php',
 						 lang_get( 'delete_bug_button' ), 

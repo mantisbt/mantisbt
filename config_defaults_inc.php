@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.78 2003-02-16 13:20:04 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.79 2003-02-16 13:36:59 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -596,6 +596,15 @@
 
 	# Threshold needed to manage user accounts
 	$g_manage_user_threshold = ADMINISTRATOR;
+	
+	# Delete bug threshold
+	$g_delete_bug_threshold = DEVELOPER;
+	
+	# Delete bugnote threshold
+	$g_delete_bugnote_threshold = $g_delete_bug_threshold;
+	
+	# Move bug threshold
+	$g_move_bug_threshold = DEVELOPER;
 
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
@@ -621,18 +630,6 @@
 	# --- reporter can upload ---------
 	# Allow reporters to upload attachments to bugs they reported.
 	$g_allow_reporter_upload	= ON;
-
-	# --- bug delete -----------
-	# Allow the specified access level and higher to delete bugs
-	$g_allow_bug_delete_access_level	= DEVELOPER;
-
-	# --- bug note delete ------
-	# Specify the required access level to delete bug notes.
-	$g_delete_bugnote_threshold	= $g_allow_bug_delete_access_level;
-
-	# --- move bugs -----------
-	# Allow the specified access level and higher to move bugs between projects
-	$g_bug_move_access_level	= DEVELOPER;
 
 	# --- account delete -----------
 	# Allow users to delete their own accounts

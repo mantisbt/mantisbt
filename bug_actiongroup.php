@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.23 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_actiongroup.php,v 1.24 2003-02-16 13:36:59 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -40,7 +40,7 @@
 			break;
 
 		case 'DELETE':
-			if ( access_has_bug_level( config_get( 'allow_bug_delete_access_level' ), $t_bug_id ) ) {
+			if ( access_has_bug_level( config_get( 'delete_bug_threshold' ), $t_bug_id ) ) {
 				bug_delete( $t_bug_id );
 			} else {
 				$t_failed_ids[] = $t_bug_id;
@@ -48,7 +48,7 @@
 			break;
 
 		case 'MOVE':
-			if ( access_has_bug_level( config_get( 'bug_move_access_level' ), $t_bug_id ) ) {
+			if ( access_has_bug_level( config_get( 'move_bug_threshold' ), $t_bug_id ) ) {
 				$f_project_id = gpc_get_int( 'project_id' );
 				bug_set_field( $t_bug_id, 'project_id', $f_project_id );
 			} else {

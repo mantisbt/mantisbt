@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_delete.php,v 1.33 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_delete.php,v 1.34 2003-02-16 13:36:59 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,7 @@
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
-	access_ensure_bug_level( config_get( 'allow_bug_delete_access_level' ), $f_bug_id );
+	access_ensure_bug_level( config_get( 'delete_bug_threshold' ), $f_bug_id );
 
 	helper_ensure_confirmed( lang_get( 'delete_bug_sure_msg' ), lang_get( 'delete_bug_button' ) );
 
