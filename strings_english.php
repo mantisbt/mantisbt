@@ -205,6 +205,11 @@
 	### $s_bug_notes_title # defined above
 	$s_delete_link = "Delete";
 
+	### choose_project_page.php3
+	$s_choose_project_title = "Choose Project";
+	$s_projects = "Projects";
+	$s_select_project_button = "Select Project";
+
 	### index.php3
 	$s_click_to_login = "Click here to login";
 
@@ -432,8 +437,8 @@
 
 	### project_menu_page.php3
 	$s_project_selection_title = "Project Selection";
-	$s_projects = "Projects";
-	$s_select_project_button = "Select Project";
+	### $s_projects # defined above
+	### $s_select_project_button # defined above
 
 	### report_add.php3
 	$s_report_add_error_msg = "ERROR: There was an error in your report.";

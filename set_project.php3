@@ -9,6 +9,12 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### Check for invalid project_id selection
+	if ( empty( $f_project_id ) || ( $project_id="0000000" ) ) {
+		PRINT "You must choose a valid project";
+		exit;
+	}
+
 	### Add item
 	setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length );
 
