@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_add.php,v 1.31 2005-03-21 11:58:02 vboctor Exp $
+	# $Id: news_add.php,v 1.32 2005-03-21 12:09:37 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,6 +15,7 @@
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'news_api.php' );
+	require_once( $t_core_path.'print_api.php' );
 ?>
 <?php
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
@@ -24,9 +25,9 @@
 	$f_announcement	= gpc_get_bool( 'announcement' );
 	$f_body			= gpc_get_string( 'body' );
 
-	news_create( helper_get_current_project(), auth_get_current_user_id(), $f_view_state, $f_announcement, $f_headline, $f_body );
-	$f_headline = string_display_links( $f_headline );
-	$f_body	= string_display_links( $f_body );
+	$t_news_id = news_create( helper_get_current_project(), auth_get_current_user_id(), $f_view_state, $f_announcement, $f_headline, $f_body );
+
+	$t_news_row = news_get_row( $t_news_id );
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
@@ -36,20 +37,11 @@
 <?php
 	echo lang_get( 'operation_successful' ) . '<br />';
 	print_bracket_link( 'news_menu_page.php', lang_get( 'proceed' ) );
+
+	echo '<br /><br />';
+
+	print_news_entry_from_row( $t_news_row );
 ?>
-<br /><br />
-<table class="width75" cellspacing="1">
-<tr>
-	<td class="news-heading">
-		<span class="bold"><?php echo $f_headline ?></span>
-	</td>
-</tr>
-<tr>
-	<td class="news-body">
-		<?php echo $f_body ?>
-	</td>
-</tr>
-</table>
 </div>
 
 <?php html_page_bottom1( __FILE__ ) ?>

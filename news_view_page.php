@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_view_page.php,v 1.33 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: news_view_page.php,v 1.34 2005-03-21 12:09:37 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,7 @@
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'news_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'news_inc.php' );
+	require_once( $t_core_path . 'print_api.php' );
 ?>
 <?php
 	$f_news_id = gpc_get_int( 'news_id', null );

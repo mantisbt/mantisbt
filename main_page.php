@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.56 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: main_page.php,v 1.57 2005-03-21 12:09:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This is the first page a user sees when they login to the bugtracker
@@ -19,7 +19,7 @@
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'date_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'news_inc.php' );
+	require_once( $t_core_path.'print_api.php' );
 
 	access_ensure_project_level( VIEWER );
 

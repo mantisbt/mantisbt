@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_rss.php,v 1.3 2005-02-12 20:01:06 jlatour Exp $
+	# $Id: news_rss.php,v 1.4 2005-03-21 12:09:37 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,7 +17,7 @@
 	require_once( $t_core_path . 'class.RSSBuilder.inc.php' );
 	require_once( $t_core_path . 'news_api.php' );
 	require_once( $t_core_path . 'project_api.php' );
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'news_inc.php' );
+	require_once( $t_core_path . 'print_api.php' );
 
 	# only allow RSS generation of anonymous login is enabled.
 	# @@@ consider adding an explicit option to enable/disable RSS syndication.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.20 2005-03-21 11:57:55 vboctor Exp $
+	# $Id: news_api.php,v 1.21 2005-03-21 12:09:30 vboctor Exp $
 	# --------------------------------------------------------
 
 	### News API ###
@@ -48,7 +48,7 @@
 		db_query( $query );
 
 		# db_query() errors on failure so:
-		return true;
+		return db_insert_id();
 	}
 	# --------------------
 	# Delete the news entry
@@ -90,7 +90,13 @@
 		$c_headline		= db_prepare_string( $p_headline );
 		$c_body			= db_prepare_string( $p_body );
 
-		if ( is_blank( $c_headline ) || is_blank( $c_body ) ) {
+		if ( is_blank( $c_headline ) ) {
+			error_parameters( lang_get( 'headline' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		if ( is_blank( $c_body ) ) {
+			error_parameters( lang_get( 'body' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
