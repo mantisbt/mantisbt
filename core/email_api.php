@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.32 2002-12-22 21:47:20 vboctor Exp $
+	# $Id: email_api.php,v 1.33 2002-12-30 07:04:53 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -664,11 +664,6 @@
 			# Visit http://www.php.net/manual/function.mail.php
 			# if you have problems with mailing
 
-			if ( OFF !== $t_debug_email ) {
-				$t_message = 'To: ' . $t_recipient . "\n$t_message";
-				$t_recipient = $t_debug_email;
-			}
-
 			$t_headers = "From: $g_from_email\n";
 			#$t_headers .= "Reply-To: $p_reply_to_email\n";
 
@@ -684,7 +679,12 @@
 				$t_headers = "Keywords: $p_category\n";
 			}
 
-			$t_headers .= $p_header;
+			if ( OFF === $t_debug_email ) {
+				$t_headers .= $p_header;
+			} else {
+				$t_message = "To: $t_recipient\n$p_header\n\n$t_message";
+				$t_recipient = $t_debug_email;
+			}
 
 			$t_recipient = make_lf_crlf( $t_recipient );
 			$t_subject = make_lf_crlf( $t_subject );
