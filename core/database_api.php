@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.27 2004-05-09 19:28:00 prichards Exp $
+	# $Id: database_api.php,v 1.28 2004-05-10 13:03:55 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -317,7 +317,7 @@
 
 		switch( $t_db_type ) {
 			case 'mssql':
-				return "(DATEDIFF(day, $p_date1,$p_date2) ". $p_limitstring . ")";
+				return "(DATEDIFF(day, $p_date2, $p_date1) ". $p_limitstring . ")";
 
 			case 'mysql':
 				return "(TO_DAYS($p_date1) - TO_DAYS($p_date2) ". $p_limitstring . ")";
