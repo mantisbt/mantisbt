@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.47 2004-10-24 19:04:36 thraxisp Exp $
+	# $Id: bug_report_page.php,v 1.48 2004-10-24 19:28:46 thraxisp Exp $
 	# --------------------------------------------------------
 
 	# This file POSTs data to report_bug.php
@@ -281,7 +281,7 @@
 		<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 	</td>
 	<td>
-		<input type="hidden" name="max_file_size" value="<?php $t_max_file_size ?>" />
+		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 		<input tabindex="8" name="file" type="file" size="60" />
 	</td>
 </tr>

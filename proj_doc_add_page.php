@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add_page.php,v 1.29 2004-10-08 19:57:46 thraxisp Exp $
+	# $Id: proj_doc_add_page.php,v 1.30 2004-10-24 19:28:46 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,6 +28,9 @@
 	}
 
 	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
+
+	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
@@ -63,8 +66,10 @@
 <tr class="row-1">
 	<td class="category">
 		<span class="required">*</span><?php echo lang_get( 'select_file' ) ?>
+		<?php echo '<br /><span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
 	</td>
 	<td>
+		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 		<input name="file" type="file" size="70" />
 	</td>
 </tr>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.34 2004-08-05 17:34:16 jlatour Exp $
+	# $Id: proj_doc_edit_page.php,v 1.35 2004-10-24 19:28:46 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,6 +38,9 @@
 
 	$v_title		= string_attribute( $v_title );
 	$v_description 	= string_textarea( $v_description );
+
+	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
@@ -85,8 +88,12 @@
 	</td>
 </tr>
 <tr class="row-2">
-	<td class="category"><?php echo lang_get( 'select_file' ) ?></td>
+	<td class="category">
+		<?php echo lang_get( 'select_file' ) ?>
+		<?php echo '<br /><span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size/1000 ) . 'k)</span>'?>
+	</td>
 	<td>
+		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 		<input name="file" type="file" size="70" />
 	</td>
 	
