@@ -303,7 +303,6 @@
 ?>
 <?php print_page_top2() ?>
 
-
 <?php include( $g_view_all_include_file ) ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

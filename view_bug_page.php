@@ -239,7 +239,7 @@
 	<td class="center">
 		<?php #check if current user already assigned to the bug ?>
 		<?php $t_user_id = get_current_user_field ( "id" ); ?>
-		<?php if ($t_user_id != $v_handler_id) { ?>
+		<?php if ( $t_user_id != $v_handler_id ) { ?>
 		<input type="submit" value="<?php echo $s_bug_assign_button ?>">
 		<?php } #end of checking if current user already assigned ?>&nbsp;
 	</td>
