@@ -11,7 +11,7 @@
 	check_access( VIEWER );
 
 	# Select project files
-	$query = "SELECT *
+	$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
 			FROM $g_mantis_project_file_table
 			WHERE project_id='$g_project_cookie_val'";
 	$result = db_query( $query );
@@ -38,6 +38,7 @@
 		$v_filesize 	= number_format( $v_filesize );
 		$v_title 		= string_display( $v_title );
 		$v_description 	= string_display( $v_description );
+      $v_date_added = date( $g_complete_date_format, $v_date_added );
 
 		# alternate row colors
 		$status_color = alternate_colors( $i );
@@ -52,7 +53,7 @@
 		}
 ?>
 		<br />
-		<span class="small">(<?php echo $v_filesize ?> bytes)</span>
+		<span class="small">(<?php echo $v_date_added ?>)</span>
 	</td>
 	<td bgcolor="<?php echo $status_color ?>">
 		<?php echo $v_description ?>
