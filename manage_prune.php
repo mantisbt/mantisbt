@@ -13,10 +13,15 @@
 	# Delete the users who have never logged in and are older than 1 week
 	$days_old = 7;
 	$days_old = (integer)$days_old;
-	$query = "DELETE
+	$query = "SELECT id
 			FROM $g_mantis_user_table
 			WHERE login_count=0 AND TO_DAYS(NOW()) - '$days_old' > TO_DAYS(date_created)";
 	$result = db_query($query);
+
+	for ($i=0; $i < db_num_rows( $result ); $i++) {
+		$row = db_fetch_array( $result );
+		delete_user($row['id']);
+	}
 
 	$t_redirect_url = 'manage_page.php';
 	if ( $result ) {

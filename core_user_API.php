@@ -320,6 +320,48 @@
 		return $t_cookie_string;
 	}
 	# --------------------
+	# delete an account
+	# returns true when the account was successfully deleted
+	function delete_user( $p_user_id ) {
+		global $g_mantis_user_table, $g_mantis_user_profile_table,
+		       $g_mantis_user_pref_table, $g_mantis_project_user_list_table;
+
+		$c_user_id = (integer)$p_user_id;
+
+	    if ( !get_user_field( $p_user_id, 'protected' ) ) {
+		    # Remove account
+	    	$query = "DELETE
+    				FROM $g_mantis_user_table
+    				WHERE id='$c_user_id'";
+	    	$result = db_query( $query );
+			$success = db_affected_rows();
+
+		    # Remove associated profiles
+		    $query = "DELETE
+	    			FROM $g_mantis_user_profile_table
+	    			WHERE user_id='$c_user_id'";
+		    $result = db_query( $query );
+	
+			# Remove associated preferences
+    		$query = "DELETE
+    				FROM $g_mantis_user_pref_table
+    				WHERE user_id='$c_user_id'";
+    		$result = db_query( $query );
+
+	    	$query = "DELETE
+    				FROM $g_mantis_project_user_list_table
+	    			WHERE user_id='$c_user_id'";
+		    $result = db_query( $query );
+
+			drop_user_info_cache();
+			
+			return $success;
+		} else {
+			return 0;
+		}
+    }
+
+	# --------------------
 	###########################################################################
 	# Access Control API
 	###########################################################################

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.10 $
+	# $Revision: 1.11 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:00 $
+	# $Date: 2002-08-15 22:21:11 $
 	#
-	# $Id: account_delete.php,v 1.10 2002-08-15 20:35:00 jlatour Exp $
+	# $Id: account_delete.php,v 1.11 2002-08-15 22:21:11 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,42 +35,14 @@
 
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
-	$result = 0;
-	if ( OFF == $t_protected ) {
-
-		# get user id
-		$t_user_id = get_current_user_field( 'id' );
-
-		# Remove account
-		$query ="DELETE ".
-				"FROM $g_mantis_user_table ".
-				"WHERE id='$t_user_id'";
-		$result = db_query( $query );
-
-		# Remove associated profiles
-		$query ="DELETE ".
-				"FROM $g_mantis_user_profile_table ".
-				"WHERE user_id='$t_user_id'";
-		$result = db_query( $query );
-
-		# Remove associated preferences
-		$query ="DELETE ".
-				"FROM $g_mantis_user_pref_table ".
-				"WHERE user_id='$t_user_id'";
-		$result = db_query( $query );
-
-		$query ="DELETE ".
-				"FROM $g_mantis_project_user_list_table ".
-				"WHERE user_id='$f_id'";
-		$result = db_query( $query );
-
+	$t_user_id = get_current_user_field( 'id' );
+	
+	if (user_delete( $t_user_id )) {
 		# delete cookies
 		setcookie( $g_string_cookie );
 		setcookie( $g_project_cookie );
 		setcookie( $g_view_all_cookie );
-
-		drop_user_info_cache();
-	} # end if protected
+	}
 ?>
 <?php print_page_top1() ?>
 <?php

@@ -20,7 +20,6 @@
 
 	<form method="post" action="manage_user_delete.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
-		<input type="hidden" name="f_protected" value="<?php echo $f_protected ?>">
 		<input type="submit" value="<?php echo $s_delete_account_button ?>">
 	</form>
 

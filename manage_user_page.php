@@ -80,14 +80,12 @@
 		<form method="post" action="manage_user_reset.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 		<input type="hidden" name="f_email" value="<?php echo $u_email ?>">
-		<input type="hidden" name="f_protected" value="<?php echo $u_protected ?>">
 		<input type="submit" value="<?php echo $s_reset_password_button ?>">
 		</form>
 	</td>
 	<td class="center">
 		<form method="post" action="manage_user_delete_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>">
-		<input type="hidden" name="f_protected" value="<?php echo $u_protected ?>">
 		<input type="submit" value="<?php echo $s_delete_user_button ?>">
 		</form>
 	</td>

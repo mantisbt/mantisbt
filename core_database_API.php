@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.15 $
+	# $Revision: 1.16 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:02 $
+	# $Date: 2002-08-15 22:21:11 $
 	#
-	# $Id: core_database_API.php,v 1.15 2002-08-15 20:35:02 jlatour Exp $
+	# $Id: core_database_API.php,v 1.16 2002-08-15 22:21:11 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -88,6 +88,10 @@
 	# --------------------
 	function db_num_rows( $p_result ) {
 		return mysql_num_rows( $p_result );
+	}
+	# --------------------
+	function db_affected_rows() {
+		return mysql_affected_rows();
 	}
 	# --------------------
 	function db_fetch_array( $p_result ) {

@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2002.08.??  -  0.18.0
 
+ * Account pruning now also removes profiles, preferences and such.
  * Added $g_auto_set_status_to_assigned to allow enabling/disabling of automatically setting the status to ASSIGNED when the defect is assigned.  Default is ON.
  * Added $g_default_notify_flags and $g_notify_flags which replace $g_notify_developers_on_new, $g_notify_on_new_threshold, and $g_notify_admin_on_new.  The old flags are no longer supported.  The new ones provide full control on who should be notified on each event/action.
  * Added $g_handle_bug_threshold to allow controlling the access level required for a user to appear in the assign to list and be able to handle bugs.
@@ -20,9 +21,10 @@ Mantis ChangeLog
  * Added button to copy categories from another project, in addition to the current 'copy to'.
  * Added capability to monitor bugs even when not reporter or handler
  * Added check_varset() function to replace if isset() else checks.
- * Added Chinese Simplified transaltion.
+ * Added Chinese Simplified translation.
  * Added configuration flags ($g_show_queries_count and $g_show_queries_list) that track the executed queries and display their total count, unique queries count, and the actual list of queries executed.
  * Added custom attributes for the 7 ones in config_inc.php : priority, severity, status (with colors), etc... Define it in manage_proj_menu_page.php ; implementation has been thought in a 'per project Settings' conception, but only available for all projects right now.
+ * Added delete_user() function to core_user_API.php and replaced this functionality in other files with a call to this function.
  * Added links from the counters of bugs reported and assigned to logged in user to their corresponding filtered view.
  * Added more visual graph pages in summary_page.php. Caution, old versions of JPGraph may cause problems, use v1.6.3 or above if you can.
  * Added multiple bug actions in view_all_bug_page.php.
@@ -46,6 +48,7 @@ Mantis ChangeLog
  * Added word2k and excel export in print_all_bug_page.php. Users can choose the bugs to display/print, and the fields to export with the 'Printing Options' link.
  * Administrators can now modify the preferences for all users that are not protected.  Protected users need to be unprotected first.
  * Closed a security problem with print_all_bug_page.php which allowed reporters to see bug summaries of bugs they hadn't reported.
+ * Early 2002, an extraordinary thing happened. While Kenzaburo Ito had been maintaining Mantis mostly on his own for years, suddenly others started to help with the development. To reflect/celebrate that, copyright on Mantis for the years 2002 and onward is transferred to the 'Mantis Group', consisting of all of Mantis' developers. All files have had their copyright notices changed to reflect this.
  * Enhanced the admin_upgrade.php script, and supported auto-generation of SQL files.
  * Fixed defects with updating project categories and versions.
  * Fixed problem deleting bugnotes.
@@ -75,11 +78,11 @@ Mantis ChangeLog
  * Removed HTML entities from all localization files.
  * Removed most file variables from default/config_inc2.php.
  * Removed special status of 'closed' concerning colors. 'View all bugs' will use the configured background color.
+ * Removed the f_protected hidden form fields in user delete/update/etc. and let the scripts check it directly.
  * Replaced $g_<status>_color variables with $g_status_colors['<status color>'] array in the configuration.  For example, $g_new_color is replaced with $g_status_colors['new'].
  * Reworked !isset() checks to use check_varset().
  * Reworked BCTimer class to be more useful for debugging.
  * Reworked code formatting for $c_ variables.
- * Early 2002, an extraordinary thing happened. While Kenzaburo Ito had been maintaining Mantis mostly on his own for years, suddenly others started to help with the development. To reflect/celebrate that, copyright on Mantis for the years 2002 and onward is transferred to the 'Mantis Group', consisting of all of Mantis' developers. All files have had their copyright notices changed to reflect this.
  * Updated comments in all localization files to point to correct file names.
  * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
 
