@@ -5,13 +5,13 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# Swedish: Ludvig Omholt, ludde@restamus.se
+	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.45 $
-	# $Author: jlatour $
-	# $Date: 2003-02-26 14:25:38 $
+	# $Revision: 1.46 $
+	# $Author: jfitzell $
+	# $Date: 2003-03-04 20:54:23 $
 	#
-	# $Id: strings_swedish.txt,v 1.45 2003-02-26 14:25:38 jlatour Exp $
+	# $Id: strings_swedish.txt,v 1.46 2003-03-04 20:54:23 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -19,92 +19,92 @@
 	$s_charset = 'iso-8859-15';
 
 	# Group commands menuitems
-	$s_actiongroup_menu_move = 'Move';
-	$s_actiongroup_menu_assign = 'Assign';
-	$s_actiongroup_menu_close = 'Close';
-	$s_actiongroup_menu_delete = 'Delete';
-	$s_actiongroup_menu_resolve = 'Resolve';
-	$s_actiongroup_menu_update_priority = 'Update Priority';
-	$s_actiongroup_menu_update_status = 'Update Status';
+	$s_actiongroup_menu_move = 'Flytta';
+	$s_actiongroup_menu_assign = 'Tilldela';
+	$s_actiongroup_menu_close = 'Stäng';
+	$s_actiongroup_menu_delete = 'Ta bort';
+	$s_actiongroup_menu_resolve = 'Lös';
+	$s_actiongroup_menu_update_priority = 'Uppdatera prioritet';
+	$s_actiongroup_menu_update_status = 'Uppdatera status';
 
 	# new strings:
-	$s_all_projects = 'All Projects';
-	$s_move_bugs = 'Move Bugs';
-	$s_operation_successful = 'Operation successful.';
-	$s_date_order = 'Date Order';
-	$s_print_all_bug_page_link = 'Print Reports';
-	$s_csv_export = 'CSV Export';
-	$s_login_anonymously = 'Login Anonymously';
-	$s_jump_to_bugnotes = 'Jump to Bugnotes';
-	$s_public_project_msg = 'This project is PUBLIC.  All users have access to this project.';
-	$s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
-	$s_access_level_project = 'Project Access Level';
-	$s_view_submitted_bug_link = 'View Submitted Bug';
-	$s_assigned_projects = 'Assigned Projects';
-	$s_unassigned_projects = 'Unassigned Projects';
-	$s_print = 'Print';
-	$s_jump = 'Jump';
-	$s_copy_users = 'Copy Users';
-	$s_copy_categories_from = 'Copy Categories From';
-	$s_copy_categories_to = 'Copy Categories To';
-	$s_bug_history = 'Bug History';
-	$s_field = 'Field';
-	$s_old_value = 'Old Value';
-	$s_new_value = 'New Value';
-	$s_date_modified = 'Date Modified';
-	$s_bugnote = 'Bugnote';
-	$s_change = 'Change';
-	$s_bugnote_view_state = 'Bugnote View State';
-	$s_bug_monitor = 'Bug Monitored';
-	$s_bug_end_monitor = 'Bug End Monitor';
-	$s_announcement = 'Announcement';
-	$s_stays_on_top = 'Stays on Top';
-	$s_delete_bugnote_button = 'Delete Bugnote';
-	$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
-	$s_bug_relationships = 'Relationships';
-	$s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
-	$s_empty_password_button = 'Use Empty Password';
+	$s_all_projects = 'Alla Projekt';
+	$s_move_bugs = 'Flytta buggar';
+	$s_operation_successful = 'Operationen lyckades.';
+	$s_date_order = 'Datumordning';
+	$s_print_all_bug_page_link = 'Skriv ut rapporter';
+	$s_csv_export = 'CSV export';
+	$s_login_anonymously = 'Logga in anonymt';
+	$s_jump_to_bugnotes = 'Hoppa till buggmeddelanden';
+	$s_public_project_msg = 'Det här projektet är PUBLIKT.  Alla användare har tillgång till det här projektet.';
+	$s_private_project_msg = 'Det här projektet är PRIVAT.  Endast administratörer och manuellt tillagda användare har tillgång.';
+	$s_access_level_project = 'Projektets tillgångsnivå';
+	$s_view_submitted_bug_link = 'Visa rapporterad bugg';
+	$s_assigned_projects = 'Tilldelade projekt';
+	$s_unassigned_projects = 'Icke tilldelade projekt';
+	$s_print = 'Skriv ut';
+	$s_jump = 'Hoppa';
+	$s_copy_users = 'Kopiera användare';
+	$s_copy_categories_from = 'Kopiera kategorier från';
+	$s_copy_categories_to = 'Kopiera kategorier till';
+	$s_bug_history = 'Bugghistorik';
+	$s_field = 'Fält';
+	$s_old_value = 'Gammalt värde';
+	$s_new_value = 'Nytt värde';
+	$s_date_modified = 'Ändrad datum';
+	$s_bugnote = 'Buggmeddelande';
+	$s_change = 'Ändring';
+	$s_bugnote_view_state = 'Buggmeddelande visa status';
+	$s_bug_monitor = 'Buggen övervakas';
+	$s_bug_end_monitor = 'Buggen övervakas ej';
+	$s_announcement = 'Tillkännagivande';
+	$s_stays_on_top = 'Stannar högt upp';
+	$s_delete_bugnote_button = 'Ta bort buggmeddelande';
+	$s_delete_bugnote_sure_msg = 'Är du säker på att du vill ta bort detta buggmeddelande?';
+	$s_bug_relationships = 'Samband';
+	$s_empty_password_sure_msg = 'Användaren har ett tomt lösenord.  Är du säker på att detta är vad du vill?';
+	$s_empty_password_button = 'Använd tomt lösenord';
 
-	$s_duplicate_of = 'duplicate of %id';
-	$s_has_duplicate = 'has duplicate %id';
-	$s_related_to = 'related to %id';
-	$s_dependant_on = 'dependant on %id';
-	$s_blocks = 'blocks %id';
+	$s_duplicate_of = 'kopia av %id';
+	$s_has_duplicate = 'har kopia %id';
+	$s_related_to = 'relaterad till %id';
+	$s_dependant_on = 'beroende av %id';
+	$s_blocks = 'blockerar %id';
 
-	$s_new_bug = 'New Bug';
-	$s_bugnote_added = 'Bugnote Added';
-	$s_bugnote_edited = 'Bugnote Edited';
-	$s_bugnote_deleted = 'Bugnote Deleted';
-	$s_summary_updated = 'Summary Updated';
-	$s_description_updated = 'Description Updated';
-	$s_additional_information_updated = 'Additional Information Updated';
-	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
-	$s_file_added = 'File Added: ';
-	$s_file_deleted = 'File Deleted: ';
+	$s_new_bug = 'Ny bugg';
+	$s_bugnote_added = 'La till buggmeddelande';
+	$s_bugnote_edited = 'Buggmeddelandet ändrat';
+	$s_bugnote_deleted = 'Tog bort buggmeddelande';
+	$s_summary_updated = 'Sammanfattning ändrad';
+	$s_description_updated = 'Beskrivning ändrad';
+	$s_additional_information_updated = 'Ytterligare information ändrad';
+	$s_steps_to_reproduce_updated = 'Steg för att reproducera ändrad';
+	$s_file_added = 'La till fil: ';
+	$s_file_deleted = 'Raderade fil: ';
 
-	$s_make_private = 'Make Private';
-	$s_make_public = 'Make Public';
+	$s_make_private = 'Gör privat';
+	$s_make_public = 'Gör publik';
 
-	$s_create_new_project_link = 'Create New Project';
+	$s_create_new_project_link = 'Skapa nytt projekt';
 
-	$s_login_link = 'Login';
+	$s_login_link = 'Logga in';
 
 	# bug_actiongroup_page.php : mass treatment
-	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-	$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-	$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-	$s_move_bugs_conf_msg = 'Move bugs to';
-	$s_assign_bugs_conf_msg = 'Assign bugs to';
-	$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-	$s_priority_bugs_conf_msg = 'Choose bugs priority';
-	$s_status_bugs_conf_msg = 'Choose bugs status';
-	$s_close_group_bugs_button = 'Close Bugs' ;
-	$s_delete_group_bugs_button = 'Delete Bugs' ;
-	$s_move_group_bugs_button = 'Move Bugs' ;
-	$s_assign_group_bugs_button = 'Assign Bugs' ;
-	$s_resolve_group_bugs_button = 'Resolve Bugs' ;
-	$s_priority_group_bugs_button = 'Update Priority' ;
-	$s_status_group_bugs_button = 'Update Status' ;
+	$s_bug_actiongroup_failed = 'Du hade inte tillräckliga rättigheter för att ändra följande buggar: ';
+	$s_close_bugs_conf_msg = 'Är du säker på att du vill stänga dessa buggar?';
+	$s_delete_bugs_conf_msg = 'Är du säker på att du vill ta bort dessa buggar?';
+	$s_move_bugs_conf_msg = 'Flytta buggar till';
+	$s_assign_bugs_conf_msg = 'Tilldela buggar till';
+	$s_resolve_bugs_conf_msg = 'Välj hur buggarna lösts';
+	$s_priority_bugs_conf_msg = 'Välj prioritet för buggar';
+	$s_status_bugs_conf_msg = 'Välj status för buggar';
+	$s_close_group_bugs_button = 'Stäng buggar' ;
+	$s_delete_group_bugs_button = 'Ta bort buggar' ;
+	$s_move_group_bugs_button = 'Flytta buggar' ;
+	$s_assign_group_bugs_button = 'Tilldela buggar' ;
+	$s_resolve_group_bugs_button = 'Lös buggar' ;
+	$s_priority_group_bugs_button = 'Uppdatera prioritet' ;
+	$s_status_group_bugs_button = 'Uppdatera status' ;
 
 	# improved JPgraphs strings
 	$s_graph_imp_status_title = 'Synthesis graphs by status' ;
@@ -128,76 +128,76 @@
 	$s_resolution_link = 'Per resolution';
 
 	# print_all_bug_page.php : display selected bugs
-	$s_hide_button = 'Display selected only';
+	$s_hide_button = 'Visa bara valda';
 
 	# print_all_bug_options.php : printing preferences
-	$s_printing_preferences_title = 'Choose fields to print';
-	$s_printing_options_link = 'Printing Options';
+	$s_printing_preferences_title = 'Välj fält att skriva ut';
+	$s_printing_options_link = 'Utskriftsinställningar';
 
 	# word and excel export
-	$s_bugnote_title = 'Bugnote handler' ;
-	$s_bugnote_date = 'Date of bugnote';
-	$s_bugnote_description = 'Bugnote description';
+	$s_bugnote_title = 'Hanterare för buggmeddelande' ;
+	$s_bugnote_date = 'Datum för buggmeddelande';
+	$s_bugnote_description = 'Beskrivning av buggmeddelande';
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
-	$MANTIS_ERROR[ERROR_SQL] = 'ERROR: SQL error detected.  Please report this to ';
-	$MANTIS_ERROR[ERROR_REPORT] = 'ERROR: There was an error in your report.';
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERROR: No file specified';
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERROR: The directory does not exist. Please check the project settings.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
-	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
-	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
-	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
+	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEL: Ett fel uppstod.  Du kan rapportera detta fel till din lokala administratör.';
+	$MANTIS_ERROR[ERROR_SQL] = 'FEL: Ett SQL-fel uppstod.  Var god rapportera detta till ';
+	$MANTIS_ERROR[ERROR_REPORT] = 'FEL: Det fanns ett fel i din rapport.';
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEL: Ingen fil angiven';
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FEL: Filtypen är inte tillåten';
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEL: Katalogen finns inte. Var god kontrollera projetinställningarna.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEL: Filen finns redan.  Var god ta bort den andra filen först.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FEL: Ett projekt med det namnet finns redan.';
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEL: Ett obligatoriskt fält var tomt.  Var god försök igen.';
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEL: Detta konto är skyddat.  Du har inte tillgång till det innan skyddet är borttaget.';
+	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'FEL: Åtkomst nekas.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'FEL: Skicka fil misslyckades.  Be din administratör köra skriptet admin_check för att se vad som är fel.';
+	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'FEL: Skicka fil misslyckades.  Det beror troligen på att filen var större än vad denna PHP-installation tillåter.';
+	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'FEL: Ett obligatoriskt värde för den här sidan saknas.';
+	$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'FEL: Det användarnamnet används redan.  Gå tillbaka och välj ett annat.';
+	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='FEL: Konfigurationsvärde saknas.';
+	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='FEL: Stängen saknas.';
+	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FEL: Buggmeddelandet saknas.';
+	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'FEL: Projektet saknas.';
+	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEL: Databasfältet saknas.';
+	$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FEL: Kan inte ansluta till FTP-servern.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEL: Ett projekt med det namnet finns redan.  Gå tillbaka och välj ett annat.';
+	$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='FEL: Ogiltigt projektnamn angivet.  Projektnamn kan inte vara tomma.';
+	$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'FEL: Användaren finns inte.';
+	$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'FEL: Logininformationen i din bläddrare är ogiltig.  Ditt konto kanske har tagit bort?';
+	$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='FEL: Hittar inte inställningar för den här användaren.';
+	$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'FEL: Hittar inte nyheten.';
+	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='FEL: Lösenorden är inte liakadana.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FEL: En array förväntades men fick en sträng.';
+	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='FEL: En sträng förväntades men fick en array.';
+	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'FEL: Buggen kan inte hittas.';
+	$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'FEL: Ogiltig e-postadress.';
+	$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'FEL: Profilen kan inte hittas.';
+	$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FEL: Filtypen är inte tillåten.';
+	$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'FEL: Filen finns redan.  Var god ta bort den andra filen först.';
+	$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEL: Ogiltig sökväg för skickade filer.  Katalogen finns inte eller är inte skrivbar av webservern.';
+	$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FEL: Kan inte ange en bugg som kopia av sig själv.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'FEL: Skräddarsytt fält kan inte hittas';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'FEL: Namnet finns redan.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'FEL: Fältet används av åtminstone ett projekt.';
+	$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FEL: Ogiltigt fältvärde';
+	$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'FEL: LDAP Autentisiering Misslyckades,';
+	$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'FEL: LDAP Kan inte ansluta till servern';
+	$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'FEL: LDAP Uppdatering misslyckades.';
+	$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'FEL: LDAP Användaren kan inte hittas.';
+	$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'FEL: Kan inte utföra ändringen för att buggen är löst';
+	$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'FEL: Kan inte ansluta till databasen.';
+	$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'FEL: Databasfråga misslyckades.';
+	$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'FEL: Databassökning misslyckades.';
+	$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'FEL: Kategorin finns redan.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'FEL: Ingen kopieringsändring angiven.';
+	$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'FEL: Kategorin finns inte.';
+	$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'FEL: Versionen finns redan.';
+	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FEL: Versionen finns inte.';
+	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FEL: Användarnamnet är ogiltigt.';
 
-	$s_login_error = 'ERROR: your account may be disabled or the username/password you entered is incorrect.';
-	$s_login_cookies_disabled = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$s_login_error = 'FEL: ditt användarkonto kan vara avstängt eller så har du angivit ett felaktigt användarnamn eller lösenord.';
+	$s_login_cookies_disabled = 'FEL: Din bläddrare kan inte hantera cookies eller vägrar använda dem.';
 
 	# General Strings
 	$s_go_back = 'Gå tillbaks';
@@ -208,7 +208,7 @@
 
 	$s_prefix_for_deleted_users = 'user';
 
-	$s_administrator = 'administrator';
+	$s_administrator = 'administratör';
 
 	# Enum Strings
 	$s_access_levels_enum_string      = '10:läsare,25:rapporterare,40:uppdaterare,55:utvecklare,70:projektledare,90:administratör';
@@ -226,7 +226,7 @@
 
 	# Email Strings
 	$s_new_account_subject = 'Ditt nya användarkonto';
-	$s_new_account_greeting = 'Välkommen till bugtrackern.  Här är informationen du behöver för att logga in' . "\n\n";
+	$s_new_account_greeting = 'Välkommen till bugghanteraren.  Här är informationen du behöver för att logga in\n\n';
 	$s_new_account_url = 'Du kan logga in till sajten här: ';
 	$s_new_account_username = 'Användarnamn: ';
 	$s_new_account_password = 'Lösenord: ';
@@ -237,19 +237,19 @@
 	$s_account_name_msg = 'Ditt användarnamn är';
 	$s_news_password_msg = 'Här är ditt nya lösenord';
 
-	$s_new_bug_msg = 'Följande NYA bug har LAGTS TILL.';
-	$s_email_bugnote_msg = 'Ett BUGMEDDELANDE har lagts till den här buggen.';
-	$s_email_resolved_msg = 'Följande bug har blivit LÖST.';
-	$s_email_close_msg = 'Följande bug har blivit STÄNGD.';
-	$s_email_feedback_msg = 'Följande bug kräver ÅTERKOPPLING från dig.';
-	$s_email_reopen_msg = 'Följande bug har blivit ÅTERÖPPNAD.';
-	$s_email_assigned_msg = 'Följande bug har blivit TILLDELAD.';
-	$s_email_bug_deleted_msg = 'The following bug has been DELETED.';
+	$s_new_bug_msg = 'Följande NYA bugg har LAGTS TILL.';
+	$s_email_bugnote_msg = 'Ett BUGGMEDDELANDE har lagts till den här buggen.';
+	$s_email_resolved_msg = 'Följande bugg har blivit LÖST.';
+	$s_email_close_msg = 'Följande bugg har blivit STÄNGD.';
+	$s_email_feedback_msg = 'Följande bugg kräver ÅTERKOPPLING från dig.';
+	$s_email_reopen_msg = 'Följande bugg har blivit ÅTERÖPPNAD.';
+	$s_email_assigned_msg = 'Följande bugg har blivit TILLDELAD.';
+	$s_email_bug_deleted_msg = 'Följande bugg har RADERATS.';
 
 	$s_email_reporter = 'Rapporterare';
 	$s_email_handler = 'Ansvarig';
 	$s_email_project = 'Projekt';
-	$s_email_bug = 'Bug ID';
+	$s_email_bug = 'Bugg ID';
 	$s_email_category = 'Kategori';
 	$s_email_reproducibility = 'Reproducerbarhet';
 	$s_email_severity = 'Allvarlighetsgrad';
@@ -282,8 +282,8 @@
 	$s_update_user_button = 'Uppdatera användare';
 
 	# account_prefs_page.php
-	$s_default_account_preferences_title = 'Standard konto inställningar';
-	$s_default_project = 'Standard projekt';
+	$s_default_account_preferences_title = 'Kontoinställningar';
+	$s_default_project = 'Förvalt projekt';
 	$s_advanced_report = 'Avancerad rapport';
 	$s_advanced_view = 'Avancerad visning';
 	$s_advanced_update = 'Avancerad uppdatering';
@@ -295,7 +295,7 @@
 	$s_email_on_resolved = 'Epost om löst';
 	$s_email_on_closed = 'Epost om stängd';
 	$s_email_on_reopened = 'Epost om återöppnad';
-	$s_email_on_bugnote_added = 'Epost vid nytt bugmeddelande';
+	$s_email_on_bugnote_added = 'Epost vid nytt buggmeddelande';
 	$s_email_on_status_change = 'Epost vid statusändring';
 	$s_email_on_priority_change = 'Epost vid prioriteringsändring';
 	$s_language = 'Språk';
@@ -309,7 +309,7 @@
 	$s_prefs_updated_msg = 'Inställningarna har uppdaterats...';
 
 	# account_profile_add.php
-	$s_profile_added_msg = 'Lade till profil...';
+	$s_profile_added_msg = 'La till profil...';
 
 	# account_profile_delete.php
 	$s_profile_deleted_msg = 'Tog bort profil...';
@@ -318,12 +318,12 @@
 	$s_edit_profile_title = 'Redigera profile';
 	$s_platform = 'Plattform';
 	$s_operating_system = 'Operativsystem';
-	$s_version = 'Version/Build';
+	$s_version = 'Version/bygge';
 	$s_additional_description = 'Ytterligare information';
 	$s_update_profile_button = 'Uppdatera profil';
 
 	# account_profile_make_default.php
-	$s_profile_defaulted_msg = 'Standardprofil uppdaterad...';
+	$s_profile_defaulted_msg = 'Förvald profil uppdaterad...';
 
 	# account_profile_manage_page.php
 	$s_add_profile_title = 'Lägg till profil';
@@ -340,8 +340,8 @@
 
 	# account_update.php
 	$s_account_updated_msg = 'Ditt konto har uppdaterats...';
-	$s_email_updated = 'Email address successfully updated';
-	$s_password_updated = 'Password successfully updated';
+	$s_email_updated = 'Epostadressen har uppdaterats';
+	$s_password_updated = 'Lösenordet har uppdaterats';
 
 	# bug_assign.php
 	$s_bug_assign_msg       = 'Buggen har tilldelats...';
@@ -351,59 +351,59 @@
 	$s_close_immediately   = 'Stäng omedelbart:';
 
 	# bug_close_page.php
-	$s_close_bug_title = 'Close Bug';
+	$s_close_bug_title = 'Stäng bugg';
 
 	# bug_delete.php
 	$s_bug_deleted_msg = 'Buggen har tagits bort...';
 
 	# bug_delete_page.php
 	$s_delete_bug_sure_msg = 'Är du säker på att du vill ta bort den här buggen?';
-	$s_delete_bug_button = 'Ta bort bug';
+	$s_delete_bug_button = 'Ta bort bugg';
 
 	# bug_monitor.php
-	$s_monitor_bug_button = 'Monitor Bug';
-	$s_unmonitor_bug_button = 'End Monitoring';
+	$s_monitor_bug_button = 'Övervaka buggen';
+	$s_unmonitor_bug_button = 'Sluta övervaka buggen';
 
 	# bug_file_add.php
-	$s_file_upload_msg = 'Fil skickning lyckades';
+	$s_file_upload_msg = 'Skicka fil lyckades';
 
 	# bug_file_upload_inc.php
 	$s_upload_file = 'Skicka upp fil';
 	$s_select_file = 'Välj fil';
 	$s_upload_file_button = 'Skicka fil';
-	$s_max_file_size = 'Max size';
+	$s_max_file_size = 'Max storlek';
 
 	# bug_reopen.php
 	$s_bug_reopened_msg = 'Buggen har återöppnats...';
-	$s_reopen_add_bugnote_title = 'Lägg till bugmeddelande om anledning till återöppning';
-	$s_bugnote_add_reopen_button = 'Lägg till bugmeddelande och återöppna bug';
+	$s_reopen_add_bugnote_title = 'Lägg till buggmeddelande om anledning till återöppning';
+	$s_bugnote_add_reopen_button = 'Lägg till buggmeddelande och återöppna bug';
 
 	# bug_resolve_page.php
-	$s_resolve_bug_title = 'Lös bug';
-	$s_resolve_bug_button = 'Lös bug';
+	$s_resolve_bug_title = 'Lös bugg';
+	$s_resolve_bug_button = 'Lös bugg';
 
 	# bug_resolve_page2.php
-	$s_bug_resolved_msg = 'Buggen har lösts. Skriv bugmeddelande nedan...';
-	$s_resolve_add_bugnote_title = 'Lägg till bugmeddelande om anledning till lösning';
-	$s_bugnote_add_resolve_button = 'Lägg till bugmeddelande och lös bug';
+	$s_bug_resolved_msg = 'Buggen har lösts. Skriv buggmeddelande nedan...';
+	$s_resolve_add_bugnote_title = 'Lägg till buggmeddelande om anledning till lösning';
+	$s_bugnote_add_resolve_button = 'Lägg till buggmeddelande och lös bugg';
 
 	# bug_reminder_page.php
-	$s_from = 'From';
-	$s_to = 'To';
-	$s_on = 'On';
-	$s_sent_you_this_reminder_about = 'sent you this reminder about';
-	$s_bug_reminder = 'Send a reminder';
-	$s_reminder_sent_to = 'Reminder sent to';
-	$s_bug_send_button = 'Send';
-	$s_reminder = 'Reminder';
+	$s_from = 'Från';
+	$s_to = 'Till';
+	$s_on = 'Den';
+	$s_sent_you_this_reminder_about = ' har skickat denna påminnelse till dig angående';
+	$s_bug_reminder = 'Skicka en påminnelse';
+	$s_reminder_sent_to = 'Påminnelse skickad till';
+	$s_bug_send_button = 'Skicka';
+	$s_reminder = 'Påminnelse';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Buggen har uppdaterats...';
 
 	# bug_update_advanced_page.php
-	$s_back_to_bug_link = 'Tillbaka till bug';
+	$s_back_to_bug_link = 'Tillbaka till bugg';
 	$s_update_simple_link = 'Uppdatera enkel';
-	$s_updating_bug_advanced_title = 'Uppdatera bug-information';
+	$s_updating_bug_advanced_title = 'Uppdatera bugginformation';
 	$s_id = 'ID';
 	$s_category = 'Kategori';
 	$s_severity = 'Allvarlighetsgrad';
@@ -418,10 +418,10 @@
 	$s_duplicate_id = 'Kopia av';
 	$s_os = 'OS';
 	$s_projection = 'Omfattning';
-	$s_os_version = 'Version';
+	$s_os_version = 'OS-Version';
 	$s_eta = 'Tidsuppskattning';
 	$s_product_version = 'Produktversion';
-	$s_build = 'Build';
+	$s_build = 'Bygge';
 	$s_votes = 'Röster';
 	$s_summary = 'Sammanfattning';
 	$s_description = 'Beskrivning';
@@ -432,32 +432,32 @@
 
 	# bug_update_page.php
 	$s_update_advanced_link = 'Uppdatera advancerad';
-	$s_updating_bug_simple_title = 'Uppdaterar bug-information';
+	$s_updating_bug_simple_title = 'Uppdaterar bugginformation';
 
 	# bug_vote_add.php
 	$s_vote_added_msg = 'Röst har lagts till...';
 
 	# bugnote_add.php
-	$s_bugnote_added_msg = 'Lade till bugmeddelande...';
+	$s_bugnote_added_msg = 'La till bugmeddelande...';
 
 	# bugnote_delete.php
-	$s_bugnote_deleted_msg = 'Bugmeddelandet har raderats...';
-	$s_bug_notes_title = 'Bugmeddelanden';
+	$s_bugnote_deleted_msg = 'Buggmeddelandet har raderats...';
+	$s_bug_notes_title = 'Buggmeddelanden';
 
 	# bugnote_edit_page.php
-	$s_edit_bugnote_title = 'Redigera bugmeddelande';
+	$s_edit_bugnote_title = 'Redigera buggmeddelande';
 
 	# bugnote_inc.php
-	$s_no_bugnotes_msg = 'Det finns inga bugmeddelanden kopplade till denna bug.';
+	$s_no_bugnotes_msg = 'Det finns inga buggmeddelanden kopplade till denna bugg.';
 	$s_delete_link = 'Ta bort';
-	$s_add_bugnote_title = 'Lägg till bugmeddelande';
-	$s_add_bugnote_button = 'Lägg till bugmeddelande';
+	$s_add_bugnote_title = 'Lägg till buggmeddelande';
+	$s_add_bugnote_button = 'Lägg till buggmeddelande';
 	$s_bugnote_edit_link = 'Redigera';
-	$s_close_bug_button = 'Stäng bug';
+	$s_close_bug_button = 'Stäng bugg';
 
 	# bugnote_update.php
 	$s_bugnote_updated_msg = 'Bugmeddelandet har uppdaterats...';
-	$s_edited_on = 'redierad: ';
+	$s_edited_on = 'redigerad: ';
 
 	# index.php
 	$s_click_to_login = 'Klicka här för att logga in';
@@ -465,7 +465,7 @@
 	# login.php
 
 	# login_page.php
-	$s_login_page_info = 'Välkommen till bug-hanteraren.';
+	$s_login_page_info = 'Välkommen till bugghanteraren.';
 	$s_login_title = 'Logga in';
 	$s_save_login = 'Spara inloggning';
 	$s_choose_project = 'Välj projekt';
@@ -503,7 +503,7 @@
 	$s_filter_button = 'Filtrera';
 	$s_manage_users_link = 'Hantera användarkonton';
 	$s_manage_projects_link = 'Hantera projekt';
-	$s_manage_custom_field_link = 'Manage Custom Fields';
+	$s_manage_custom_field_link = 'Hantera skräddarsydda fält';
 	$s_create_new_account_link = 'Skapa nytt konto';
 	$s_projects_link = 'Projekt';
 	$s_documentation_link = 'Dokumentation';
@@ -513,7 +513,7 @@
 	$s_prune_accounts = 'Ta bort inaktiva konton';
 	$s_hide_inactive = 'Göm inaktiva';
 	$s_manage_accounts_title = 'Hantera konton';
-	$s_p = 'p';
+	$s_p = 'Skyddad';
 	$s_date_created = 'Skapad';
 	$s_last_visit = 'Senast inloggad';
 	$s_edit_user_link = 'Redigera';
@@ -525,14 +525,14 @@
 	$s_category_added_msg = 'Kategorin har lagts till...';
 
 	# manage_proj_category_delete.php
-	$s_category_deleted_msg = 'Katergorin har tagits bort...';
+	$s_category_deleted_msg = 'Kategorin har tagits bort...';
 
 	# manage_proj_category_delete_page.php
-	$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin? Alla associerade bugrapporter kommer att tas bort.';
+	$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin? Alla associerade buggrapporter kommer att tas bort.';
 	$s_delete_category_button = 'Ta bort kategori';
 
 	# manage_proj_category_edit_page.php
-	$s_edit_project_category_title = 'Redigera projekt-kategori';
+	$s_edit_project_category_title = 'Redigera projektkategori';
 	$s_update_category_button = 'Uppdatera kategori';
 
 	# manage_proj_category_update.php
@@ -542,7 +542,7 @@
 	$s_project_deleted_msg = 'Projektet har tagits bort...';
 
 	# manage_proj_delete_page.php
-	$s_project_delete_msg = 'Är du säker på att du vill ta bort det här projektet och alla dess bugrapporter?';
+	$s_project_delete_msg = 'Är du säker på att du vill ta bort det här projektet och alla dess buggrapporter?';
 	$s_project_delete_button = 'Ta bort projektet';
 
 	# manage_proj_edit_page.php
@@ -554,19 +554,19 @@
 	$s_update_project_button = 'Uppdatera projekt';
 	$s_delete_project_button = 'Ta bort projekt';
 	$s_categories_and_version_title = 'Kategorier och versioner';
-	$s_categories = 'KAtegorier';
+	$s_categories = 'Kategorier';
 	$s_add_category_button = 'Lägg till kategori';
 	$s_versions = 'Versioner';
 	$s_add_version_button = 'Lägg till version';
 	$s_edit_link = 'redigera';
-	$s_actions = 'Actions';
-	$s_version = 'Version/Build';
-	$s_timestamp = 'Timestamp';
-	$s_update = 'Update';
+	$s_actions = 'Ändringar';
+	$s_version = 'Version/bygge';
+	$s_timestamp = 'Tidsstämpel';
+	$s_update = 'Uppdatera';
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Lägg till projekt';
-	$s_upload_file_path = 'KAtalog för uppskickade filer';
+	$s_upload_file_path = 'Katalog för uppskickade filer';
 	$s_add_project_button = 'Lägg till projekt';
 	$s_projects_title = 'Projekt';
 	$s_name = 'Namn';
@@ -575,13 +575,13 @@
 	$s_project_updated_msg = 'Projektet har uppdaterats...';
 
 	# manage_proj_version_add.php
-	$s_version_added_msg = 'Lade till version...';
+	$s_version_added_msg = 'La till version...';
 
 	# manage_proj_version_delete.php
 	$s_version_deleted_msg = 'Tog bort version...';
 
 	# manage_proj_version_delete_page.php
-	$s_version_delete_sure = 'Är du säker på att du vill ta bort versionen? Alla associerade bugrapporter kommer att tas bort.';
+	$s_version_delete_sure = 'Är du säker på att du vill ta bort versionen? Alla associerade buggrapporter kommer att tas bort.';
 	$s_delete_version_button = 'Ta bort versionen';
 
 	# manage_proj_version_edit_page.php
@@ -600,14 +600,14 @@
 
 	# manage_user_prune.php
 	$s_accounts_pruned_msg = 'Alla konton som aldrig loggat in och är äldre än en vecka har tagits bort';
-	$s_prune_accounts_button = 'Prune';
-	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
+	$s_prune_accounts_button = 'Ta bort';
+	$s_confirm_account_pruning = 'Är du säker på att du vill ta bort äldre konton som aldrig loggat in?';
 
 	# manage_user_page.php
 	$s_edit_user_title = 'Redigera användarkonto';
 	$s_reset_password_button = 'Nollställ lösenord';
 	$s_delete_user_button = 'Ta bort kontot';
-	$s_reset_password_msg = 'Reset Password sets the randomly generated password.';
+	$s_reset_password_msg = 'Nollställ lösenord sätter ett slumpgenererat lösenord.';
 	$s_reset_password_msg2 = 'Nollställ lösenordet sätter ett tomt lösenord.';
 
 	# manage_user_reset.php
@@ -622,7 +622,7 @@
 	# menu_inc.php
 	$s_main_link = 'Huvudsida';
 	$s_view_bugs_link = 'Visa Buggar';
-	$s_report_bug_link = 'Rapportera bug';
+	$s_report_bug_link = 'Rapportera bugg';
 	$s_summary_link = 'Sammanfattning';
 	$s_account_link = 'Användarkonto';
 	$s_users_link = 'Användare';
@@ -634,7 +634,7 @@
 	# meta_inc.php
 
 	# news_add.php
-	$s_news_added_msg = 'Lade till nyhet...';
+	$s_news_added_msg = 'La till nyhet...';
 
 	# news_delete.php
 	$s_news_deleted_msg = 'Tog bort nyhet...';
@@ -745,10 +745,10 @@
 	$s_not_supported_part2 = 'av PHP stöder inte';
 
 	# signup.php
-	$s_invalid_email = 'ÄR INTE EN GILTIG EPOST-ADRESS';
+	$s_invalid_email = 'ÄR INTE EN GILTIG EPOSTADRESS';
 	$s_duplicate_username = 'ÄR REDAN UPPTAGET.  VÄLJ ETT ANNAT KONTONAMN';
 	$s_account_create_fail = 'GICK INTE ATT SKAPA KONTO';
-	$s_account_added = 'Lade till kontot.';
+	$s_account_added = 'La till kontot.';
 	$s_password_emailed_msg = 'Ditt lösenord kommer att skickas till dig via epost.';
 	$s_no_reponse_msg = 'Om du inte loggar in inom en vecka kan ditt konto tas bort.';
 
@@ -781,7 +781,7 @@
 	$s_by_developer = 'utvecklare';
 	$s_by_reporter ='rapporterare';
 	$s_time_stats = 'tidsstatistik för lösta buggar(dagar)';
-	$s_longest_open_bug = 'längsta öppna bug';
+	$s_longest_open_bug = 'längsta öppna bugg';
 	$s_longest_open = 'längsta öppna';
 	$s_average_time = 'tid i snitt';
 	$s_total_time = 'total tid';
@@ -804,55 +804,55 @@
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Visa enkel';
-	$s_viewing_bug_advanced_details_title = 'Visar bug, avancerad';
+	$s_viewing_bug_advanced_details_title = 'Visar bugg, avancerad';
 	$s_product_build = 'Produkt build';
 	$s_system_profile = 'Systembeskrivning';
-	$s_update_bug_button = 'Uppdatera bug';
+	$s_update_bug_button = 'Uppdatera bugg';
 	$s_bug_assign_button    = 'Tilldela till mig';
-	$s_reopen_bug_button = 'Återöppna bug';
+	$s_reopen_bug_button = 'Återöppna bugg';
 	$s_attached_files = 'Associerade filer';
-	$s_publish = 'Publish';
-	$s_cached = 'Cached';
+	$s_publish = 'Publicera';
+	$s_cached = 'Cachad';
 
 	# view_bug_inc.php
 
 	# view_bug_page.php
 	$s_view_advanced_link = 'Visa advancerad';
-	$s_viewing_bug_simple_details_title = 'Visar bug, enkel';
+	$s_viewing_bug_simple_details_title = 'Visar bugg, enkel';
 
 	# bug_monitor_list_view_inc.php
-	$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-	$s_users_monitoring_bug = 'Users monitoring this bug';
-	$s_monitoring_user_list = 'User List';
+	$s_no_users_monitoring_bug = 'Inga användare övervakar denna bugg.';
+	$s_users_monitoring_bug = 'Användare som övervakar denna bugg';
+	$s_monitoring_user_list = 'Användarlista';
 
 	# custom field strings
-	$s_add_custom_field_button = 'New Custom Field';
-	$s_delete_custom_field_button = 'Delete Custom Field';
-	$s_delete_custom_field_everywhere = 'Delete Custom Field Everywhere';
-	$s_update_custom_field_button = 'Update Custom Field';
-	$s_add_existing_custom_field = 'Add This Existing Custom Field';
-	$s_edit_custom_field_title = 'Edit custom field';
-	$s_custom_field = 'Field';
-	$s_custom_fields_setup = 'Custom Fields';
-	$s_custom_field_name = 'Name';
-	$s_custom_field_project_count = 'Project Count';
-	$s_custom_field_type = 'Type';
-	$s_custom_field_possible_values = 'Possible Values';
-	$s_custom_field_default_value = 'Default Value';
-	$s_custom_field_valid_regexp = 'Regular Expression';
-	$s_custom_field_access_level_r = 'Read Access';
-	$s_custom_field_access_level_rw = 'Write Access';
-	$s_custom_field_length_min = 'Min. Length';
-	$s_custom_field_length_max = 'Max. Length';
-	$s_custom_field_advanced = 'Advanced';
-	$s_custom_field_sequence = 'Sequence';
-	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+	$s_add_custom_field_button = 'Nytt skräddarsytt fält';
+	$s_delete_custom_field_button = 'Ta bort skräddarsytt fält';
+	$s_delete_custom_field_everywhere = 'Ta bort skräddarsytt fält överallt';
+	$s_update_custom_field_button = 'Uppdatera skrädarsytt fält';
+	$s_add_existing_custom_field = 'Lägg till existerande skräddarsytt fält';
+	$s_edit_custom_field_title = 'Redigera skräddarsytt fält';
+	$s_custom_field = 'Fält';
+	$s_custom_fields_setup = 'Skräddarsydda fält';
+	$s_custom_field_name = 'Namn';
+	$s_custom_field_project_count = 'Projekträknare';
+	$s_custom_field_type = 'Typ';
+	$s_custom_field_possible_values = 'Möjliga värden';
+	$s_custom_field_default_value = 'Förvalt värde';
+	$s_custom_field_valid_regexp = 'Reguljärt uttryck';
+	$s_custom_field_access_level_r = 'Läsrättighet';
+	$s_custom_field_access_level_rw = 'Skrivrättighet';
+	$s_custom_field_length_min = 'Min. längd';
+	$s_custom_field_length_max = 'Max. längd';
+	$s_custom_field_advanced = 'Avancerad';
+	$s_custom_field_sequence = 'Serie';
+	$s_custom_field_type_enum_string = '0:Sträng,1:Numerisk,2:Flyttal,3:Uppräkning,4:Epost';
 
-	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
-	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
-	$s_field_delete_button = 'Delete Field';
+	$s_confirm_used_custom_field_deletion = 'Detta fält är för närvarande länkat till åtminstone ett projekt.  Om du fortsätter kommer alla värden för dett fält att tas bort permanent.  Denna åtgärd kan inte ångras.  Om du inte vill ta bort detta fält, tryck Back i din bläddrare.  För att fortsätta, tryck på knappen nedan';
+	$s_confirm_custom_field_deletion = 'Är du säker på att du vill ta bort detta skräddarsydda fält och alla aAre you sure you want to delete this custom field and all associerade värden?';
+	$s_field_delete_button = 'Ta bort fält';
 
-	$s_hide_status = 'Hide Status';
-	$s_filter_closed = "Closed";
-	$s_filter_resolved = "Resolved";
+	$s_hide_status = 'Göm status';
+	$s_filter_closed = "stängda";
+	$s_filter_resolved = "lösta";
 ?>
