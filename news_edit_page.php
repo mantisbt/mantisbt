@@ -80,7 +80,7 @@
 		<span class="small"><?php echo $s_stays_on_top ?></span>
 	</td>
 	<td>
-		<input type="checkbox" name="f_announcement" <?php check_checked( $v_announcement, 1 ); } ?>>
+		<input type="checkbox" name="f_announcement" <?php check_checked( $v_announcement, 1 ); ?>>
 	</td>
 </tr>
 <tr class="row-1">
