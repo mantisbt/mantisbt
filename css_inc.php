@@ -20,7 +20,7 @@ span				{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_nor
 table				{ }
 td 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; padding: 4px; text-align: left }
 a					{}
-a.small-link		{ font-size: <?php echo $g_font_small ?>; }
+a.small				{ font-size: <?php echo $g_font_small ?>; }
 
 input.small			{ font-size: <?php echo $g_font_small ?>; }
 select.small		{ font-size: <?php echo $g_font_small ?>; }
