@@ -54,7 +54,7 @@
 
 	# Limit reporters to only see their reported bugs
 	if (( ON == $g_limit_reporters ) &&
-		( get_current_user_field( "access_level" ) <= REPORTER )) {
+		( !access_level_check_greater_or_equal( UPDATER  ) )) {
 		$f_user_id = get_current_user_field( "id" );
 	}
 

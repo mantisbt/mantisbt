@@ -22,6 +22,7 @@ Mantis
  * Fixed problem with bottom page menu not displaying when turned on.
  * Fixed warning message on report. Warning: Undefined variable: f_file_name ...
  * Fixed edit bugnote to allow the correct users to edit and update.
+ * Fixed g_limit_reporters to work properly for project users.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.
