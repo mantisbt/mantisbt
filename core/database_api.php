@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.16 2003-02-18 00:06:14 jfitzell Exp $
+	# $Id: database_api.php,v 1.17 2003-02-19 18:06:07 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -129,11 +129,12 @@
 
 	# --------------------
 	# return the last inserted id
-	# For MS SQL use: SELECT @@IDENTITY AS 'id'
 	function db_insert_id() {
-		$query = 'SELECT LAST_INSERT_ID()';
-		$t_result = db_query( $query );
-		return db_result( $t_result, 0, 0 );
+		if ( mysql_affected_rows() > 0 ) {
+			return mysql_insert_id(); 
+		} else  {
+			return false; 
+		}
 	}
 
 	# --------------------

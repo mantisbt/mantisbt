@@ -3,6 +3,7 @@ Mantis ChangeLog
 2003.??.??  -  0.18.0a3
 
  * Fix: META redirects were not XHTML-compliant
+ * Fix: db_insert_id() did not use mysql_insert_id(), but executed another query (which is probably slower)
  * Languages: Updated German localisation.
 
 2003.02.19  -  0.18.0a2
