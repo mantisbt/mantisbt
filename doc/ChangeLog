@@ -6,6 +6,8 @@ Mantis ChangeLog
 - New Config: $g_graph_window_width - window width is used to scale the graphs(thraxisp)
 - New Config: $g_graph_bar_aspect - bar graph aspect ration (height / width)(thraxisp)
 - New Config: $g_graph_summary_graphs_per_row - graphs to put in each row in the advanced summary page (thraxisp)
+- removed config option - $g_relationship_graph_fontpath replaced by $g_system_font_folder (bpfennig)
+
 
 
 2004.12.11  -  0.19.2
