@@ -23,7 +23,7 @@
 
 <br />
 <div align="center">
-<?php echo $s_signup_info ?>
+<?php echo lang_get( 'signup_info' ) ?>
 </div>
 
 <?php # Signup form BEGIN ?>
@@ -33,15 +33,15 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="signup.php">
-		<?php echo $s_signup_title ?>
+		<?php echo lang_get( 'signup_title' ) ?>
 	</td>
 	<td class="right">
-		<?php print_bracket_link( 'login_page.php', $s_go_back ) ?>
+		<?php print_bracket_link( 'login_page.php', lang_get( 'go_back' ) ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<?php echo $s_username ?>:
+		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="70%">
 		<input type="text" name="f_username" size="32" maxlength="32" />
@@ -49,7 +49,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_email ?>:
+		<?php echo lang_get( 'email' ) ?>:
 	</td>
 	<td>
 		<?php print_email_input( 'f_email', '' ) ?>
@@ -57,7 +57,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_signup_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'signup_button' ) ?>" />
 		</form>
 	</td>
 </tr>

@@ -64,14 +64,14 @@
 <div align="center">
 <?php
 	if ( ON == $f_protected ) {				# PROTECTED
-		PRINT $s_manage_user_protected_msg.'<br />';
+		echo lang_get( 'manage_user_protected_msg' ).'<br />';
 	} else if ( $result ) {					# SUCCESS
-		PRINT $s_operation_successful.'<br />';
+		echo lang_get( 'operation_successful' ).'<br />';
 	} else {								# FAILURE
 		print_sql_error( $query );
 	}
 
-	print_bracket_link( $t_redirect_url, $s_proceed );
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>
 </div>
 

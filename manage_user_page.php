@@ -28,12 +28,12 @@
 	<td class="form-title" colspan="3">
 		<form method="post" action="manage_user_update.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
-		<?php echo $s_edit_user_title ?>
+		<?php echo lang_get( 'edit_user_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<?php echo $s_username ?>:
+		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td colspan="2" width="70%">
 		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>" />
@@ -41,7 +41,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_email ?>:
+		<?php echo lang_get( 'email' ) ?>:
 	</td>
 	<td colspan="2">
 		<?php print_email_input( 'f_email', $u_email ) ?>
@@ -49,7 +49,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_access_level ?>:
+		<?php echo lang_get( 'access_level' ) ?>:
 	</td>
 	<td colspan="2">
 		<select name="f_access_level">
@@ -59,7 +59,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_enabled ?>:
+		<?php echo lang_get( 'enabled' ) ?>:
 	</td>
 	<td colspan="2">
 		<input type="checkbox" name="f_enabled" <?php check_checked( $u_enabled, ON ); ?> />
@@ -67,7 +67,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_protected ?>:
+		<?php echo lang_get( 'protected' ) ?>:
 	</td>
 	<td colspan="2">
 		<input type="checkbox" name="f_protected" <?php check_checked( $u_protected, ON ); ?> />
@@ -75,20 +75,20 @@
 </tr>
 <tr>
 	<td class="center">
-		<input type="submit" value="<?php echo $s_update_user_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 		</form>
 	</td>
 	<td class="center">
 		<form method="post" action="manage_user_reset.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
 		<input type="hidden" name="f_email" value="<?php echo $u_email ?>" />
-		<input type="submit" value="<?php echo $s_reset_password_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
 		</form>
 	</td>
 	<td class="center">
 		<form method="post" action="manage_user_delete_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $u_id ?>" />
-		<input type="submit" value="<?php echo $s_delete_user_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 		</form>
 	</td>
 </tr>
@@ -99,9 +99,9 @@
 <div align="center">
 <?php
 	if ( ON == $g_send_reset_password ) {
-		PRINT "$s_reset_password_msg";
+		echo lang_get( 'reset_password_msg' );
 	} else {
-		PRINT "$s_reset_password_msg2";
+		echo lang_get( 'reset_password_msg2' );
 	}
 ?>
 </div>
@@ -114,12 +114,12 @@
 	<td class="form-title" colspan="2">
 		<form method="post" action="manage_user_proj_add.php">
 		<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
-		<?php echo $s_add_user_title ?>
+		<?php echo lang_get( 'add_user_title' ) ?>
 	</td>
 </tr>
 <tr class="row-1" valign="top">
 	<td class="category" width="30%">
-		<?php echo $s_assigned_projects ?>:
+		<?php echo lang_get( 'assigned_projects' ) ?>:
 	</td>
 	<td width="70%">
 		<?php print_project_user_list( $u_id ) ?>
@@ -127,7 +127,7 @@
 </tr>
 <tr class="row-2" valign="top">
 	<td class="category">
-		<?php echo $s_unassigned_projects ?>:
+		<?php echo lang_get( 'unassigned_projects' ) ?>:
 	</td>
 	<td>
 		<select name="f_project_id[]" multiple size="5">
@@ -137,7 +137,7 @@
 </tr>
 <tr class="row-1" valign="top">
 	<td class="category">
-		<?php echo $s_access_level ?>:
+		<?php echo lang_get( 'access_level' ) ?>:
 	</td>
 	<td>
 		<select name="f_access_level">
@@ -148,7 +148,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo $s_add_user_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'add_user_button' ) ?>" />
 		</form>
 	</td>
 </tr>

@@ -39,7 +39,7 @@
 <tr>
 	<td class="form-title">
 		<form method="post" action="account_update.php">
-		<?php echo $s_edit_account_title ?>
+		<?php echo lang_get( 'edit_account_title' ) ?>
 	</td>
 	<td class="right">
 		<?php print_account_menu( 'account_page.php' ) ?>
@@ -56,7 +56,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category" width="25%">
-	    <?php echo $s_username ?>:
+	    <?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="75%">
 	    <?php echo $u_username ?>
@@ -68,7 +68,7 @@
 ?>
 <tr class="row-2">
 	<td class="category">
-	    <?php echo $s_email ?>:
+	    <?php echo lang_get( 'email' ) ?>:
 	</td>
 	<td>
 	    <?php echo $u_email ?>
@@ -77,7 +77,7 @@
 <?php } else { ?>
 <tr class="row-2">
 	<td class="category">
-	    <?php echo $s_email ?>:
+	    <?php echo lang_get( 'email' ) ?>:
 	</td>
 	<td>
 	    <?php print_email_input( 'f_email', $u_email ) ?>
@@ -86,7 +86,7 @@
 <?php } ?>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_access_level ?>:
+		<?php echo lang_get( 'access_level' ) ?>:
 	</td>
 	<td>
 		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
@@ -94,7 +94,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_access_level_project ?>:
+		<?php echo lang_get( 'access_level_project' ) ?>:
 	</td>
 	<td>
 		<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ) ?>
@@ -102,7 +102,7 @@
 </tr>
 <tr class="row-1" valign="top">
 	<td class="category">
-		<?php echo $s_assigned_projects ?>:
+		<?php echo lang_get( 'assigned_projects' ) ?>:
 	</td>
 	<td>
 		<?php print_project_user_list( current_user_get_field( 'id' ) ) ?>
@@ -110,12 +110,12 @@
 </tr>
 <tr>
 	<td class="center">
-		<input type="submit" value="<?php echo $s_update_user_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 		</form>
 	</td>
 	<td class="center">
 		<form method="post" action="account_delete_page.php">
-		<input type="submit" value="<?php echo $s_delete_account_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 		</form>
 	</td>
 </tr>
@@ -124,7 +124,7 @@
 
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_username ?>:
+		<?php echo lang_get( 'username' ) ?>:
 	</td>
 	<td width="75%">
 		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>" />
@@ -132,7 +132,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_password ?>:
+		<?php echo lang_get( 'password' ) ?>:
 	</td>
 	<td>
 		<input type="password" size="32" maxlength="32" name="f_password" />
@@ -140,7 +140,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_confirm_password ?>:
+		<?php echo lang_get( 'confirm_password' ) ?>:
 	</td>
 	<td>
 		<input type="password" size="32" maxlength="32" name="f_password_confirm" />
@@ -148,7 +148,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-	    <?php echo $s_email ?>:
+	    <?php echo lang_get( 'email' ) ?>:
 	</td>
 	<td>
 		<?php print_email_input( 'f_email', $u_email ) ?>
@@ -156,7 +156,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_access_level ?>:
+		<?php echo lang_get( 'access_level' ) ?>:
 	</td>
 	<td>
 		<?php echo get_enum_element( 'access_levels', $u_access_level ) ?>
@@ -164,7 +164,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_access_level_project ?>:
+		<?php echo lang_get( 'access_level_project' ) ?>:
 	</td>
 	<td>
 		<?php echo get_enum_element( 'access_levels', current_user_get_access_level() ) ?>
@@ -172,7 +172,7 @@
 </tr>
 <tr class="row-1" valign="top">
 	<td class="category">
-		<?php echo $s_assigned_projects ?>:
+		<?php echo lang_get( 'assigned_projects' ) ?>:
 	</td>
 	<td>
 		<?php print_project_user_list( current_user_get_field( 'id' ) ) ?>
@@ -180,7 +180,7 @@
 </tr>
 <tr>
 	<td class="left">
-		<input type="submit" value="<?php echo $s_update_user_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 		</form>
 	</td>
 <?php
@@ -189,7 +189,7 @@
 ?>
 	<td class="right">
 		<form method="post" action="account_delete_page.php">
-		<input type="submit" value="<?php echo $s_delete_account_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 		</form>
 	</td>
 <?php 	} else { ?>
