@@ -1,7 +1,7 @@
 BuildArchitectures: noarch
 Summary: Mantis Bug Tracker
 Name: mantis
-Version: 0.18.0rc1
+Version: 0.18.0-CVS
 Release: 1
 License: GPL
 Group: Development/Tools
