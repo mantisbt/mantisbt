@@ -20,22 +20,22 @@
 		</td>
 		<? } ?>
 		<td>
-		<span class="smallcaption"><? echo $s_category ?></span>
+			<span class="smallcaption"><? echo $s_category ?></span>
 		</td>
 		<td>
-		<span class="smallcaption"><? echo $s_severity ?></span>
+			<span class="smallcaption"><? echo $s_severity ?></span>
 		</td>
 		<td>
-		<span class="smallcaption"><? echo $s_status ?></span>
+			<span class="smallcaption"><? echo $s_status ?></span>
 		</td>
 		<td>
-			&nbsp;
+			<span class="smallcaption"><? echo $s_show ?></span>
 		</td>
 		<td>
-			&nbsp;
+			<span class="smallcaption"><? echo $s_changed ?></span>
 		</td>
 		<td>
-			&nbsp;
+			<span class="smallcaption"><? echo $s_hide_closed ?></span>
 		</td>
 		<td>
 			&nbsp;
@@ -83,13 +83,13 @@
 			</select>
 		</td>
 		<td>
-			<? echo $s_show ?>: <input type="text" name="f_limit_view" size="3" maxlength="7" value="<? echo $f_limit_view ?>">
+			<input type="text" name="f_limit_view" size="3" maxlength="7" value="<? echo $f_limit_view ?>">
 		</td>
 		<td>
-			<? echo $s_changed ?>: <input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<? echo $f_highlight_changed ?>">
+			<input type="text" name="f_highlight_changed" size="3" maxlength="7" value="<? echo $f_highlight_changed ?>">
 		</td>
 		<td>
-			<? echo $s_hide_closed ?>: <input type="checkbox" name="f_hide_closed" <? if ($f_hide_closed=="on") echo "CHECKED"?>>
+			<input type="checkbox" name="f_hide_closed" <? if ($f_hide_closed=="on") echo "CHECKED"?>>
 		</td>
 		<td>
 			<input type="submit" value="<? echo $s_filter_button ?>">
