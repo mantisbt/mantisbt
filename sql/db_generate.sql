@@ -1,11 +1,11 @@
 #
 # Table structure for table `mantis_bug_file_table`
 # --------------------------------------------------------
-# $Revision: 1.7 $
+# $Revision: 1.8 $
 # $Author: vboctor $
-# $Date: 2002-08-24 02:42:12 $
+# $Date: 2002-08-27 22:33:07 $
 #
-# $Id: db_generate.sql,v 1.7 2002-08-24 02:42:12 vboctor Exp $
+# $Id: db_generate.sql,v 1.8 2002-08-27 22:33:07 vboctor Exp $
 # --------------------------------------------------------
 #
 
@@ -294,7 +294,7 @@ CREATE TABLE mantis_user_pref_table (
   email_on_status int(1) NOT NULL default '0',
   email_on_priority int(1) NOT NULL default '0',
   language varchar(32) NOT NULL default 'english',
-  PRIMARY KEY  (id),
+  PRIMARY KEY  (id)
 ) TYPE=MyISAM;
 
 INSERT INTO mantis_user_pref_table (id, user_id, advanced_report, advanced_view) VALUES ( '0000001', '0000001', '', '');
