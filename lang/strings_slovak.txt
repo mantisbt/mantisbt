@@ -9,11 +9,11 @@
 	# Code page: ISO-8859-2
 	# Translation was developed for Platon SDG, http://www.platon.sk/
 	# -------------------------------------------------
-	# $Revision: 1.5 $
+	# $Revision: 1.6 $
 	# $Author: jlatour $
-	# $Date: 2003-04-01 15:59:43 $
+	# $Date: 2003-04-12 12:49:20 $
 	#
-	# $Id: strings_slovak.txt,v 1.5 2003-04-01 15:59:43 jlatour Exp $
+	# $Id: strings_slovak.txt,v 1.6 2003-04-12 12:49:20 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -38,15 +38,15 @@
 	$s_csv_export = 'CSV Export';
 	$s_login_anonymously = 'Prihlási» sa anonymne';
 	$s_jump_to_bugnotes = 'Preskoèi» na poznámky k bugom';
-	$s_public_project_msg = 'Tento projekt je VEREJNÝ.  V¹etci u¾ívatelia majú prístup k tomuto projektu..';
-	$s_private_project_msg = 'Tento projekt je PRIVÁTNY.  Iba administrátori a manuálne pridaní u¾ívatelia majú prístup k tomuto projektu.';
+	$s_public_project_msg = 'Tento projekt je VEREJNÝ.  V¹etci pou¾ívatelia majú prístup k tomuto projektu..';
+	$s_private_project_msg = 'Tento projekt je PRIVÁTNY.  Iba administrátori a manuálne pridaní pou¾ívatelia majú prístup k tomuto projektu.';
 	$s_access_level_project = 'Úroveò prístupových práv ku projektu';
 	$s_view_submitted_bug_link = 'Pozrie» odoslaný bug';
 	$s_assigned_projects = 'Priradené projekty';
 	$s_unassigned_projects = 'Nepriradené projekty';
 	$s_print = 'Vytlaèi»';
 	$s_jump = 'Preskoèi»';
-	$s_copy_users = 'Kopírova» u¾ívateµov';
+	$s_copy_users = 'Kopírova» pou¾ívateµov';
 	$s_copy_categories_from = 'Kopírova» kategórie z';
 	$s_copy_categories_to = 'Kopírova» kategórie do';
 	$s_bug_history = 'História bugov';
@@ -198,7 +198,7 @@
 	$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
 	$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
 
-	$s_login_error = 'CHYBA: va¹e konto mô¾e by» vypnuté, alebo u¾ívatµské meno/heslo ktoré ste zadali nie je správne.';
+	$s_login_error = 'CHYBA: va¹e konto mô¾e by» vypnuté, alebo pou¾ívatµské meno/heslo ktoré ste zadali nie je správne.';
 	$s_login_cookies_disabled = 'CHYBA: Vá¹ browser nepodporuje cookies, alebo ich zamietol.';
 
 	# General Strings
@@ -227,16 +227,16 @@
 	$s_eta_enum_string                = '10:¾iadny,20:< 1 deò,30:2-3 dni,40:< 1 tý¾deò,50:< 1 mesiac,60:> 1 mesiac';
 
 	# Email Strings
-	$s_new_account_subject = 'Vá¹ nový u¾ívateµský úèet';
+	$s_new_account_subject = 'Vá¹ nový pou¾ívateµský úèet';
 	$s_new_account_greeting = 'Vitajte do bugtrackeru. Tu sú informácie potrebné na prihlásenie' . "\n\n";
 	$s_new_account_url = 'Tu sa mô¾te prihlási»: ';
-	$s_new_account_username = 'U¾ívateµské meno: ';
+	$s_new_account_username = 'Pou¾ívateµské meno: ';
 	$s_new_account_password = 'Heslo: ';
 	$s_new_account_message = 'Po prihlásení na túto stránku si prosím zmente Va¹e heslo. Va¹e heslo je ulo¾ené jednosmerným za¹ifrovaním. Správci nemô¾u vidie» Va¹e heslo. Pokiaµ zabudnete heslo, bude musie» by» znovu nastavené.' . "\n\n";
 	$s_new_account_do_not_reply = 'Neodpovedajte na túto správu.' . "\n";
 
 	$s_reset_request_msg = '®iados» o vynlovanie Va¹eho hesla bola vyrie¹ená.';
-	$s_account_name_msg = 'Va¹e u¾ívateµské meno je';
+	$s_account_name_msg = 'Va¹e pou¾ívateµské meno je';
 	$s_news_password_msg = 'Tu je Va¹e nové heslo';
 
 	$s_new_bug_msg = 'Nasledujúci NOVÝ bug bol pridaný.';
@@ -276,12 +276,12 @@
 	$s_manage_profiles_link = 'Profily';
 	$s_change_preferences_link = 'Nastavenia';
 	$s_edit_account_title = 'Upravi» úèet';
-	$s_username = 'U¾ívateµské meno';
+	$s_username = 'Pou¾ívateµské meno';
 	$s_email = 'Email';
 	$s_password = 'Heslo';
 	$s_confirm_password  = 'Heslo znovu';
 	$s_access_level = 'Úroveò prístupu';
-	$s_update_user_button = 'Aktualizova» u¾ívateµa';
+	$s_update_user_button = 'Aktualizova» pou¾ívateµa';
 
 	# account_prefs_page.php
 	$s_default_account_preferences_title = 'Nastavenia úètu';
@@ -490,7 +490,7 @@
 	$s_archives = 'Archív';
 
 	# manage_create_new_user.php
-	$s_created_user_part1 = 'Vytvorený u¾ívateµ';
+	$s_created_user_part1 = 'Vytvorený pou¾ívateµ';
 	$s_created_user_part2 = 's prístupovou úrovòou';
 
 	# manage_create_user_page.php
@@ -503,7 +503,7 @@
 	# manage_page.php
 	$s_hide_disabled = 'Skri» nepovolené';
 	$s_filter_button = 'Pou¾i» filter';
-	$s_manage_users_link = 'Správa u¾ívateµov';
+	$s_manage_users_link = 'Správa pou¾ívateµov';
 	$s_manage_projects_link = 'Správa projektov';
 	$s_manage_custom_field_link = 'Manage Custom Fields';
 	$s_create_new_account_link = 'Vytvori» úèet';
@@ -606,9 +606,9 @@
 	$s_confirm_account_pruning = 'Are you sure you want to delete old accounts that have never logged in?';
 
 	# manage_user_page.php
-	$s_edit_user_title = 'Úpravy u¾ívateµa';
+	$s_edit_user_title = 'Úpravy pou¾ívateµa';
 	$s_reset_password_button = 'Vynulova» heslo';
-	$s_delete_user_button = 'Zmaza» u¾ívateµa';
+	$s_delete_user_button = 'Zmaza» pou¾ívateµa';
 	$s_reset_password_msg = 'Nastavi» heslo na náhodne vygenerovanú hodnotu.';
 	$s_reset_password_msg2 = 'Nastavi» heslo na prázdne.';
 
@@ -627,7 +627,7 @@
 	$s_report_bug_link = 'Vlo¾i» bug';
 	$s_summary_link = 'Zhrnutie';
 	$s_account_link = 'Úèet';
-	$s_users_link = 'U¾ívatelia';
+	$s_users_link = 'Pou¾ívatelia';
 	$s_manage_link = 'Správa';
 	$s_edit_news_link = 'Upravi» novinky';
 	$s_docs_link = 'Dokumenty';
@@ -686,7 +686,7 @@
 
 	# proj_doc_page.php
 	$s_project_documentation_title = 'Projektová dokumentácia';
-	$s_user_documentation = 'U¾ívateµská dokumentácia';
+	$s_user_documentation = 'Pou¾ívateµská dokumentácia';
 	$s_project_documentation = 'Projektová dokumentácia';
 	$s_add_file = 'Prida» súbor';
 
@@ -694,22 +694,22 @@
 	$s_project_document_updated = 'Projekt bol úspe¹ne aktualizovný';
 
 	# proj_user_add.php
-	$s_project_user_added_msg = 'U¾ívateµ bol úspe¹ne priradený k projektu';
+	$s_project_user_added_msg = 'Pou¾ívateµ bol úspe¹ne priradený k projektu';
 
 	# proj_user_delete.php
-	$s_project_removed_user_msg = 'U¾ívateµ bol úspe¹ne odobratý z projektu';
+	$s_project_removed_user_msg = 'Pou¾ívateµ bol úspe¹ne odobratý z projektu';
 
 	# proj_user_delete_page.php
-	$s_remove_user_sure_msg = 'Naozaj odobra» tohto u¾ívateµa?';
+	$s_remove_user_sure_msg = 'Naozaj odobra» tohto pou¾ívateµa?';
 
 	# proj_user_menu_page.php
-	$s_add_user_title = 'Prida» u¾ívateµa k projektu';
-	$s_add_user_button = 'Pridaj u¾ívateµa';
+	$s_add_user_title = 'Prida» pou¾ívateµa k projektu';
+	$s_add_user_button = 'Pridaj pou¾ívateµa';
 	$s_project_selection_title = 'Výber projektu';
 	$s_remove_link = 'odstráni»';
 
 	# proj_user_update.php
-	$s_updated_user_msg = 'Aktualizácia u¾ívateµa prebehla úspe¹ne.';
+	$s_updated_user_msg = 'Aktualizácia pou¾ívateµa prebehla úspe¹ne.';
 
 	# report_add.php
 	$s_must_enter_category = 'Musíte vybra» kategóriu';
@@ -750,8 +750,8 @@
 	$s_no_reponse_msg = 'Pokiaµ neodpoviete do jedného tý¾dòa, Vá¹ úèet bude zmazaný.';
 
 	# signup_page.php
-	$s_signup_info = 'Vyberte si u¾ívateµské meno a zadajte platnoú emailovoú adresu.  Na Va¹u adresu Vám bude zaslaté náhodne vygenerované heslo.';
-	$s_signup_title = 'Vytvorenie u¾ívateµa';
+	$s_signup_info = 'Vyberte si pou¾ívateµské meno a zadajte platnoú emailovoú adresu.  Na Va¹u adresu Vám bude zaslaté náhodne vygenerované heslo.';
+	$s_signup_title = 'Vytvorenie pou¾ívateµa';
 	$s_signup_button = 'Vytvori»';
 
 	# site_settings_edit_page.php
