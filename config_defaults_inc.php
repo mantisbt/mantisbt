@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.182 2004-07-24 15:20:36 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.183 2004-07-25 21:09:39 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -340,6 +340,12 @@
 	# --- Position of the status colour legend, can be: STATUS_LEGEND_POSITION_*
 	# --- see constant_inc.php. (*: BOTTOM or TOP)
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
+
+	# --- show product versions in create, view and update screens
+	#  ON forces display even if none are defined
+	#  OFF suppresses display
+	#  AUTO suppresses the display if there are no versions defined for the project
+	$g_show_product_version = AUTO;
 
 	############################
 	# Mantis JPGRAPH Addon

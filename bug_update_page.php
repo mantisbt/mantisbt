@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.75 2004-07-18 10:22:21 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.76 2004-07-25 21:09:38 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -238,7 +238,12 @@
 			echo '<td colspan="2">&nbsp;</td>';
 		}
 	?>
-
+<?php
+	$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
+			|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+	if ( $t_show_version ) { 
+?>
 	<!-- Product Version -->
 	<td class="category">
 		<?php echo lang_get( 'product_version' ) ?>
@@ -250,6 +255,9 @@
 	</td>
 </tr>
 
+<?php
+	}
+?>
 <?php /*
 <tr <?php echo helper_alternate_class() ?>>
 	<!-- Fixed in Version -->

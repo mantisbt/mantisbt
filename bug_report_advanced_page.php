@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.39 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.40 2004-07-25 21:09:37 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -198,6 +198,12 @@
 </tr>
 
 
+<?php
+	$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
+			|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+	if ( $t_show_version ) { 
+?>
 <!-- Product Version -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -209,7 +215,9 @@
 		</select>
 	</td>
 </tr>
-
+<?php
+	} 
+?>
 
 <!-- Product Build -->
 <tr <?php echo helper_alternate_class() ?>>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.72 2004-07-16 23:03:08 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.73 2004-07-25 21:09:38 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -282,6 +282,7 @@
 
 	<!-- ETA -->
 	<td class="category">
+	<!-- Fixed in Version -->
 		<?php echo lang_get( 'eta' ) ?>
 	</td>
 	<td>
@@ -291,26 +292,59 @@
 	</td>
 
 	<td class="category">
-		<?php echo lang_get( 'fixed_in_version' ) ?>
+		<?php
+			$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
+					|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+								&& ( count( version_get_all_rows( $t_bug->project_id ) ) > 0 ) );
+			if ( $t_show_version ) { 
+				echo lang_get( 'fixed_in_version' ); 
+			}
+		?>
 	</td>
 	<td>
+		<?php
+			if ( $t_show_version ) { 
+		?>
 		<select name="fixed_in_version">
 			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
 		</select>
+		<?php
+			}
+		?>
 	</td>
 
-	<!-- Product Version -->
+	<!-- Product Version  or Product Build, if version is suppressed -->
 	<td class="category">
-		<?php echo lang_get( 'product_version' ) ?>
+		<?php 
+			if ( $t_show_version ) { 
+				echo lang_get( 'product_version' );
+			}else{
+				echo lang_get( 'build' );
+			}
+		?>
 	</td>
 	<td>
+		<?php 
+			if ( $t_show_version ) { 
+		?>
 		<select name="version">
 			<?php print_version_option_list( $t_bug->version, $t_bug->project_id, VERSION_RELEASED ) ?>
 		</select>
+		<?php
+			}else{
+		?>
+		<input type="text" name="build" size="16" maxlength="32" value="<?php echo $t_bug->build ?>" />
+		<?php
+			}
+		?>
+		
 	</td>
 
 </tr>
 
+<?php 
+	if ( $t_show_version ) { 
+?>
 
 <tr <?php echo helper_alternate_class() ?>>
 
@@ -326,6 +360,9 @@
 	</td>
 
 </tr>
+<?php
+	}
+?>
 
 
 <!-- spacer -->

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.41 2004-07-20 15:51:50 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.42 2004-07-25 21:09:38 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -131,7 +131,12 @@
 	<td class="spacer" colspan="2">&nbsp;</td>
 </tr>
 
-
+<?php
+	$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
+			|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+	if ( $t_show_version ) { 
+?>
 <!-- Product Version -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
@@ -143,6 +148,9 @@
 		</select>
 	</td>
 </tr>
+<?php
+	} 
+?>
 
 <!-- spacer -->
 <tr>

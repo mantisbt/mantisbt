@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.23 2004-07-20 11:11:14 vboctor Exp $
+	# $Id: constant_inc.php,v 1.24 2004-07-25 21:09:41 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -16,6 +16,8 @@
 	# magic numbers
 	define( 'ON',	1 );
 	define( 'OFF',	0 );
+	define( 'AUTO', 3 );
+
 
 	# error types
 	define( 'ERROR',	E_USER_ERROR );
