@@ -6,6 +6,7 @@ Mantis ChangeLog
  * Fix: db_insert_id() did not use mysql_insert_id(), but executed another query (which is probably slower)
  * Fix #2939: Confusing file names for uploaded project documents.
  * Fix #2954: Bgcolor attribute on TD in view_all_bug_page (moved to TR) [optimisation]
+ * Fix #2964: proj_doc_add.php is empty if document file already exists
  * Languages: Updated German localisation.
 
 2003.02.19  -  0.18.0a2

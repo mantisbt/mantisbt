@@ -54,7 +54,7 @@
 									VALUES
 									(null, $g_project_cookie_val, '$f_title', '$f_description', '$t_file_path$f_file_name', '$f_file_name', '$t_file_path', $t_file_size, '$f_type', NOW(), '')";
 						} else {
-							print_mantis_error( ERROR_DUPLICATE_FILE );
+							trigger_error( ERROR_DUPLICATE_FILE, ERROR );
 						}
 						break;
 			case DATABASE:
