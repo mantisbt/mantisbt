@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.25 2004-04-08 22:44:59 prescience Exp $
+	# $Id: gpc_api.php,v 1.26 2004-06-29 22:29:15 prichards Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -209,12 +209,22 @@
 	# ------------------
 	# Clear a cookie variable
 	function gpc_clear_cookie( $p_name, $p_path=null, $p_domain=null ) {
+		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
+		if ( !php_version_at_least( '4.1.0' ) ) {
+			global $_COOKIE;
+		}
+		
 		if ( null === $p_path ) {
 			$p_path = config_get( 'cookie_path' );
 		}
 		if ( null === $p_domain ) {
 			$p_domain = config_get( 'cookie_domain' );
 		}
+	
+		if ( isset( $_COOKIE[$p_name] ) ) {
+			unset( $_COOKIE[$p_name] ) ;
+		}
+		
 		return setcookie( $p_name, '', -1, $p_path, $p_domain );
 	}
 
