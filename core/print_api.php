@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.17 2002-09-21 10:17:14 jfitzell Exp $
+	# $Id: print_api.php,v 1.18 2002-09-21 22:09:28 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,7 +16,10 @@
 	###########################################################################
 
 	# --------------------
-	function print_header_redirect( $p_url ) {
+	# Print the headers to cause the page to redirect to $p_url
+	# If $p_die is true (default), terminate the execution of the script
+	#  immediately
+	function print_header_redirect( $p_url, $p_die=true ) {
 		$t_use_iis = config_get( 'use_iis');
 
 		if ( OFF == $t_use_iis ) {
@@ -31,7 +34,10 @@
 		} else {
 			header( "Location: $p_url" );
 		}
-		die; # additional output can cause problems so let's just stop output here
+
+		if ( $p_die ) {
+			die; # additional output can cause problems so let's just stop output here
+		}
 	}
 	# --------------------
 	# Print a redirect header to view a bug
