@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.66 2004-12-12 20:33:25 bpfennigschmidt Exp $
+	# $Id: filter_api.php,v 1.67 2004-12-13 23:10:21 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -2108,7 +2108,7 @@
 		<?php
 	}
 
-	function print_filter_fixed_in_version(){
+	function print_filter_show_fixed_in_version(){
 		global $t_select_modifier, $t_filter;
 		?><!-- Fixed in Version -->
 		<select <?php PRINT $t_select_modifier;?> name="fixed_in_version[]">

@@ -237,7 +237,7 @@
 	</td>
 	<!-- Fixed in Version -->
 	<td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
- 		<?php print_filter_fixed_in_version(); ?>
+ 		<?php print_filter_show_fixed_in_version(); ?>
  	</td>
 	<!-- Priority -->
   <td valign="top" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
