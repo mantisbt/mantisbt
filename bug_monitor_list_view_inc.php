@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_monitor_list_view_inc.php,v 1.8 2004-03-30 12:17:38 vboctor Exp $
+	# $Id: bug_monitor_list_view_inc.php,v 1.9 2004-05-28 00:21:01 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 	$query = "SELECT user_id
 			FROM $t_bug_monitor_table m, $t_user_table u
 			WHERE m.bug_id=$c_bug_id AND m.user_id = u.id
-			ORDER BY u.username";
+			ORDER BY u.realname, u.username";
 	$result = db_query($query);
 	$num_users = db_num_rows($result);
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.84 2004-05-27 01:07:36 int2str Exp $
+	# $Id: print_api.php,v 1.85 2004-05-28 00:21:02 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -209,7 +209,7 @@
 							  l.user_id=u.id) OR
 							 u.access_level>='$t_adm') AND
 							p.id=l.project_id
-					ORDER BY u.username";
+					ORDER BY u.realname, u.username";
 			$result = db_query( $query );
 			$user_count = db_num_rows( $result );
 			for ( $i=0 ; $i < $user_count ; $i++ ) {
@@ -331,7 +331,7 @@
 							  l.user_id=u.id) OR
 							 u.access_level>='$t_adm') AND
 							p.id = l.project_id
-					ORDER BY u.username";
+					ORDER BY u.realname, u.username";
 			$result = db_query( $query );
 			$user_count = db_num_rows( $result );
 			for ( $i=0 ; $i < $user_count ; $i++ ) {
@@ -598,6 +598,9 @@
 		foreach ( $t_rows as $t_row ) {
 			$t_user_id = $t_row['id'];
 			$t_username = string_attribute( $t_row['username'] );
+			if ( isset( $t_row['realname'] ) && $t_row['realname'] > "" ) {
+				$t_username = string_attribute( $t_row['realname'] );
+			}
 			PRINT "<option value=\"$t_user_id\">$t_username</option>";
 		}
 	}
@@ -671,7 +674,7 @@
 					u.enabled = 1 AND
 					p.user_id IS NULL AND
 					u.access_level<'$t_adm'
-				ORDER BY u.username";
+				ORDER BY u.realname, u.username";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.55 2004-05-26 03:22:17 int2str Exp $
+	# $Id: project_api.php,v 1.56 2004-05-28 00:21:02 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -455,7 +455,7 @@
 					FROM $t_user_table
 					WHERE enabled = $t_on
 					  $t_access_clause
-					ORDER BY username";
+					ORDER BY realname, username";
 
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
@@ -470,7 +470,7 @@
 					WHERE l.user_id = u.id
 					  AND u.enabled = $t_on
 					  AND l.project_id = $c_project_id
-					ORDER BY u.username";
+					ORDER BY u.realname, u.username";
 
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
