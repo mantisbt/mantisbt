@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.4 2002-08-26 00:40:23 jfitzell Exp $
+	# $Id: error_api.php,v 1.5 2002-08-26 21:31:39 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -89,34 +89,10 @@
 			if ( ON == config_get( 'show_detailed_errors' ) ) {
 				if (isset($php_errormsg))
 					echo "okie dokie";
-			?>
-				<center>
-					<table class="width75">
-						<tr>
-							<td>Full path: <?php echo $p_file ?></td>
-						</tr>
-						<tr>
-							<td>Line: <?php echo $p_line ?></td>
-						</tr>
-						<tr>
-							<td>
-								<table class="width100">
-									<tr>
-										<th>Variable</th>
-										<th>Value</th>
-										<th>Type</th>
-									</tr>
-			<?php
-				while ( list( $t_var, $t_val ) = each( $p_context ) ) {
-					echo "<tr><td>$t_var</td><td>$t_val</td><td>" . gettype( $t_val ) . "</td></tr>\n";
-				}
-			?>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</center>
-			<?php
+
+				error_print_details( $p_file, $p_line, $p_context );
+				echo '<br />';
+				error_print_stack_trace();
 			}
 
 			die();
@@ -132,6 +108,60 @@
 
 		$g_error_parameters = array();
 	}
+
+	# ---------------
+	# helper function to print out the error details including context
+	function error_print_details( $p_file, $p_line, $p_context ) {
+	?>
+		<center>
+			<table class="width75">
+				<tr>
+					<td>Full path: <?php echo $p_file ?></td>
+				</tr>
+				<tr>
+					<td>Line: <?php echo $p_line ?></td>
+				</tr>
+				<tr>
+					<td>
+						<?php error_print_context( $p_context ) ?>
+					</td>
+				</tr>
+			</table>
+		</center>
+	<?php
+	}
+
+	# ---------------
+	# helper function to print out the variable context
+	function error_print_context( $p_context ) {
+		echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
+		while ( list( $t_var, $t_val ) = each( $p_context ) ) {
+			echo "<tr><td>$t_var</td><td>$t_val</td><td>" . gettype( $t_val ) . "</td></tr>\n";
+		}
+		echo '</table>';
+	}
+
+	# ---------------
+	# helper function to print out a stack trace if 'xdebug' module is loaded
+	function error_print_stack_trace() {
+		if ( extension_loaded( 'xdebug' ) ) { #check for xdebug presence
+			$t_stack = xdebug_get_function_stack();
+			
+			# reverse the array in a separate line of code so the
+			#  array_reverse() call doesn't appear in the stack
+			$t_stack = array_reverse( $t_stack );
+			array_shift( $t_stack ); #remove the call to this function from the stack trace
+
+			echo '<center><table class="width75">';
+
+			for ( $i = 0 ; $i < sizeof( $t_stack ) ; $i = $i + 1 ) {
+				echo '<tr bgcolor="'.alternate_colors( $i).'"><td>'.$t_stack[$i].'</td></tr>';
+			}
+
+			echo '</table></center>';
+		}
+	}
+
 	# ---------------
 	# returns an error string (in the current language) for the given error
 	function error_string( $p_error ) {
