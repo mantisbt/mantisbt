@@ -388,7 +388,6 @@
 				( $v_status!=CLOSED )&&( $v_status!=RESOLVED )) {
 				echo "(".get_user_info( $v_handler_id, "username" ).")";
 			} else {
-				#echo get_enum_element( $g_status_enum_string, $v_status );
 				echo get_enum_element( $s_status_enum_string, $v_status );
 			}
 		?>
