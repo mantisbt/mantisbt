@@ -396,6 +396,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Conta Protegida. Não é possível limpar a senha.";
 	$s_account_reset_msg = "Senha da conta foi limpa...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Conta Protegida. Nível de Acesso habilitado e protegido. Caso Contrario a conta foi atualizada...";

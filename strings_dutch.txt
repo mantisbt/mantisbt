@@ -396,6 +396,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Account beschermt. Wachtwoord kan niet op begininstellingen worden teruggezet.";
 	$s_account_reset_msg = "Account wachtwoord op begininstellingen terug gezet...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Account beschermt. Toegangsniveau en beschermt tegen activeren. Anders is account ge-updated...";

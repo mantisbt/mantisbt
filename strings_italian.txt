@@ -398,6 +398,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Account Protetto. Non e' possibile resettare la password.";
 	$s_account_reset_msg = "Password resettata...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Account Protetto per il livello di accesso....";

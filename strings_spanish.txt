@@ -396,6 +396,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Cuenta Protegida. Imposible resetear la clave.";
 	$s_account_reset_msg = "Restear clave de cuenta...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Cuenta Protegida. Nivel de acceso y Activacion Protegida. La cuenta ha sido actualizada...";

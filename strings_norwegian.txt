@@ -396,6 +396,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Kontoen er beskyttet. Kan ikke nullstille passord.";
 	$s_account_reset_msg = "Passordet er nullstilt...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Kontoen er beskyttet. Tilgangsnivå beskyttet. Hvis ikke har kontoen blit oppdatert...";

@@ -397,6 +397,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "보호된 계정입니다. 패스워드를 초기화할수 없습니다.";
 	$s_account_reset_msg = "계정 패스워드 초기화...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "보호된 계정입니다. 접근레벨이 보호중입니다. 그렇지 않다면, 현재 계정상태가 변경중입니다.....";

@@ -396,6 +396,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "帳號受保護. Cannot reset the password.";
 	$s_account_reset_msg = "帳號密碼重設...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "帳號受保護. 存取權限且保護功能已啟動. 否則，帳號將會被更新...";

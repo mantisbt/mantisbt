@@ -396,6 +396,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Аккаунт защищен. невозможно обнулить пароль.";
 	$s_account_reset_msg = "Account password reset...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Аккаунт защищен. Access level and enabled protected. Otherwise, account has been updated...";

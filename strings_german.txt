@@ -397,6 +397,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Konto geschützt. Passwort-Löschung nicht möglich.";
 	$s_account_reset_msg = "Passwort zurückgesetzt...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Konto geschützt. Access level and enabled protected. Otherwise, account has been updated...";

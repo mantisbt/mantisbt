@@ -396,6 +396,7 @@
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Ce compte est prot&eacute;g&eacute; : impossible de modifier le mot de passe.";
 	$s_account_reset_msg = "Le mot de passe est modifi&eacute;...";
+	$s_account_reset_msg2 = "Account password set to blank...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Compte prot&eacute;g&eacute; : accr&eacute;ditation et activation prot&eacute;g&eacute;s. Autrement, le compte est mis &agrave; jour...";
