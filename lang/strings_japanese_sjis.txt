@@ -8,11 +8,11 @@
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# Japenese: Seiji Sogabe, sogabe@alles.or.jp
 	# -------------------------------------------------
-	# $Revision: 1.54 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-05 04:42:13 $
+	# $Revision: 1.55 $
+	# $Author: jlatour $
+	# $Date: 2004-08-08 09:00:27 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.54 2004-08-05 04:42:13 bigbadger Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.55 2004-08-08 09:00:27 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -389,6 +389,7 @@ $s_password_updated = 'パスワードが正常に更新されました。';
 
 # bug_assign.php
 $s_bug_assign_msg       = '改善要求が担当者に割り当てられました。';
+
 # bug_change_status_page.php
 $s_new_bug_title = 'New Issue';
 $s_feedback_bug_title = 'Provide Feedback to Issue';
@@ -1015,6 +1016,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求
 $s_create_child_bug_button = "子の作成";
 $s_bug_cloned_to = "改善要求を複製しました";
 $s_bug_created_from = "改善要求を生成しました。 対象";
+
 # Source Control Integration
 $s_checkin = 'Checkin';
 ?>
