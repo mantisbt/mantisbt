@@ -6,13 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.32 2005-02-12 20:01:05 jlatour Exp $
+	# $Id: file_download.php,v 1.33 2005-03-27 19:26:27 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Add file and redirect to the referring page
 ?>
 <?php
+	$g_bypass_headers = true; # suppress headers as we will send our own later
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
@@ -75,10 +76,17 @@
 	header( 'Content-Length: ' . $v_filesize );
 
 	# Added Quotes (") around file name.
-	header( 'Content-Disposition: filename="' . file_get_display_name( $v_filename ) . '"' );
+	header( 'Content-Disposition: attachment; filename="' . file_get_display_name( $v_filename ) . '"' );
 	header( 'Content-Description: Download Data' );
-	# prevent file caching @@@ (thraxisp) we may want to suppress this for small files
-	header( 'Pragma: no-cache' );
+
+	# To fix an IE bug which causes problems when downloading
+	# attached files via HTTPS, we disable the "Pragma: no-cache"
+	# command when IE is used over HTTPS.
+	if ( ( "on" == $_SERVER["HTTPS"] ) && preg_match( "/MSIE/", $_SERVER["HTTP_USER_AGENT"] ) ) {
+		# Suppress "Pragma: no-cache" header.
+	} else {
+		header( 'Pragma: no-cache' );
+	}
 	header( 'Expires: 0' );
 
 	# dump file content to the connection.
