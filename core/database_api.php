@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.29 2004-06-01 13:43:50 prichards Exp $
+	# $Id: database_api.php,v 1.30 2004-06-29 14:08:28 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -29,7 +29,7 @@
 	function db_connect( $p_hostname, $p_username, $p_password, $p_port, $g_database_name ) {
 		global $g_db_connected, $g_db;
 
-		$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $g_database_name);
+		$t_result = $g_db->Connect($p_hostname, $p_username, $p_password, $g_database_name );
 
 		if ( !$t_result ) {
 			db_error();
@@ -44,10 +44,10 @@
 
 	# --------------------
 	# Make a persistent connection to the database
-	function db_pconnect( $p_hostname, $p_username, $p_password, $p_port ) {
+	function db_pconnect( $p_hostname, $p_username, $p_password, $p_port, $g_database_name ) {
 		global $g_db_connected, $g_db;
 
-		$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password);
+		$t_result = $g_db->PConnect($p_hostname, $p_username, $p_password, $g_database_name );
 		if ( !$t_result ) {
 			db_error();
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
@@ -158,22 +158,10 @@
 	}
 
 	# --------------------
-	function db_field_exists( $p_field_name, $p_table_name, $p_db_name = '') {
-		global $g_database_name;
+	function db_field_exists( $p_field_name, $p_table_name ) {
+		global $g_db;
 
-		if ( is_blank( $p_db_name ) ) {
-			$p_db_name = $g_database_name;
-		}
-
-		$fields	 = mysql_list_fields( $p_db_name, $p_table_name );
-		$columns	= mysql_num_fields( $fields );
-		for ($i = 0; $i < $columns; $i++) {
-			if ( mysql_field_name( $fields, $i ) == $p_field_name ) {
-				return true;
-			}
-		}
-
-		return false;
+		return in_array ( $p_field_name , $g_db->MetaColumnNames( $p_table_name) ) ;
 	}
 
 	# --------------------
