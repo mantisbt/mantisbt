@@ -32,6 +32,7 @@ Mantis ChangeLog
  * Fix #3629: Duplicate Error ID.
  * Fix #3641: 'Date submited' in reports is always '12-31-69'.
  * Fix #3723: No ability to edit or even delete news is associated project was deleted.
+ * Fix #3781: Fixed external URL in admin/check.php
  * Fix #3824: Private bug reports and bugnotes are sent out as notifications to everyone.
  * Fix #3826: Allow case of project name to be changed.
  * Fix #3837: Bugs can be edited after being closed.
