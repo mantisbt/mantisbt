@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.159 $
-	# $Author: narcissus $
-	# $Date: 2004-04-03 20:18:42 $
+	# $Revision: 1.160 $
+	# $Author: vboctor $
+	# $Date: 2004-04-25 23:37:06 $
 	#
-	# $Id: strings_english.txt,v 1.159 2004-04-03 20:18:42 narcissus Exp $
+	# $Id: strings_english.txt,v 1.160 2004-04-25 23:37:06 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -31,18 +31,18 @@ $s_actiongroup_menu_update_status = 'Update Status';
 
 # new strings:
 $s_all_projects = 'All Projects';
-$s_move_bugs = 'Move Bugs';
+$s_move_bugs = 'Move Issues';
 $s_operation_successful = 'Operation successful.';
 $s_date_order = 'Date Order';
 $s_print_all_bug_page_link = 'Print Reports';
 $s_csv_export = 'CSV Export';
 $s_login_anonymously = 'Login Anonymously';
 $s_anonymous = 'Anonymous';
-$s_jump_to_bugnotes = 'Jump to Bugnotes';
+$s_jump_to_bugnotes = 'Jump to Notes';
 $s_public_project_msg = 'This project is PUBLIC.  All users have access.';
 $s_private_project_msg = 'This project is PRIVATE.  Only administrators and manually added users have access.';
 $s_access_level_project = 'Project Access Level';
-$s_view_submitted_bug_link = 'View Submitted Bug';
+$s_view_submitted_bug_link = 'View Submitted Issue';
 $s_assigned_projects = 'Assigned Projects';
 $s_unassigned_projects = 'Unassigned Projects';
 $s_print = 'Print';
@@ -50,20 +50,20 @@ $s_jump = 'Jump';
 $s_copy_users = 'Copy Users';
 $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
-$s_bug_history = 'Bug History';
+$s_bug_history = 'Issue History';
 $s_field = 'Field';
 $s_old_value = 'Old Value';
 $s_new_value = 'New Value';
 $s_date_modified = 'Date Modified';
-$s_bugnote = 'Bugnote';
+$s_bugnote = 'Note';
 $s_change = 'Change';
-$s_bugnote_view_state = 'Bugnote View State';
-$s_bug_monitor = 'Bug Monitored';
-$s_bug_end_monitor = 'Bug End Monitor';
+$s_bugnote_view_state = 'Note View State';
+$s_bug_monitor = 'Issue Monitored';
+$s_bug_end_monitor = 'Issue End Monitor';
 $s_announcement = 'Announcement';
 $s_stays_on_top = 'Stays on Top';
-$s_delete_bugnote_button = 'Delete Bugnote';
-$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this bugnote?';
+$s_delete_bugnote_button = 'Delete Note';
+$s_delete_bugnote_sure_msg = 'Are you sure you wish to delete this note?';
 $s_bug_relationships = 'Relationships';
 $s_empty_password_sure_msg = 'The user has an empty password.  Are you sure that is what you want?';
 $s_empty_password_button = 'Use Empty Password';
@@ -74,17 +74,17 @@ $s_related_to = 'related to %id';
 $s_dependant_on = 'dependant on %id';
 $s_blocks = 'blocks %id';
 
-$s_new_bug = 'New Bug';
-$s_bugnote_added = 'Bugnote Added';
-$s_bugnote_edited = 'Bugnote Edited';
-$s_bugnote_deleted = 'Bugnote Deleted';
+$s_new_bug = 'New Issue';
+$s_bugnote_added = 'Note Added';
+$s_bugnote_edited = 'Note Edited';
+$s_bugnote_deleted = 'Note Deleted';
 $s_summary_updated = 'Summary Updated';
 $s_description_updated = 'Description Updated';
 $s_additional_information_updated = 'Additional Information Updated';
 $s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 $s_file_added = 'File Added';
 $s_file_deleted = 'File Deleted';
-$s_bug_deleted = 'Bug Deleted';
+$s_bug_deleted = 'Issue Deleted';
 
 $s_make_private = 'Make Private';
 $s_make_public = 'Make Public';
@@ -94,19 +94,19 @@ $s_create_new_project_link = 'Create New Project';
 $s_login_link = 'Login';
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';
-$s_close_bugs_conf_msg = 'Are you sure you wish to close these bugs ?';
-$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these bugs ?';
-$s_move_bugs_conf_msg = 'Move bugs to';
-$s_assign_bugs_conf_msg = 'Assign bugs to';
-$s_resolve_bugs_conf_msg = 'Choose bugs resolution';
-$s_priority_bugs_conf_msg = 'Choose bugs priority';
-$s_status_bugs_conf_msg = 'Choose bugs status';
-$s_close_group_bugs_button = 'Close Bugs' ;
-$s_delete_group_bugs_button = 'Delete Bugs' ;
-$s_move_group_bugs_button = 'Move Bugs' ;
-$s_assign_group_bugs_button = 'Assign Bugs' ;
-$s_resolve_group_bugs_button = 'Resolve Bugs' ;
+$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following issues: ';
+$s_close_bugs_conf_msg = 'Are you sure you wish to close these issues?';
+$s_delete_bugs_conf_msg = 'Are you sure you wish to delete these issues?';
+$s_move_bugs_conf_msg = 'Move issues to';
+$s_assign_bugs_conf_msg = 'Assign issues to';
+$s_resolve_bugs_conf_msg = 'Choose issues resolution';
+$s_priority_bugs_conf_msg = 'Choose issues priority';
+$s_status_bugs_conf_msg = 'Choose issues status';
+$s_close_group_bugs_button = 'Close Issues' ;
+$s_delete_group_bugs_button = 'Delete Issues' ;
+$s_move_group_bugs_button = 'Move Issues' ;
+$s_assign_group_bugs_button = 'Assign Issues' ;
+$s_resolve_group_bugs_button = 'Resolve Issues' ;
 $s_priority_group_bugs_button = 'Update Priority' ;
 $s_status_group_bugs_button = 'Update Status' ;
 
@@ -139,9 +139,9 @@ $s_printing_preferences_title = 'Choose fields to print';
 $s_printing_options_link = 'Printing Options';
 
 # word and excel export
-$s_bugnote_title = 'Bugnote handler' ;
-$s_bugnote_date = 'Date of bugnote';
-$s_bugnote_description = 'Bugnote description';
+$s_bugnote_title = 'Note handler' ;
+$s_bugnote_date = 'Date of note';
+$s_bugnote_description = 'Note description';
 
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
 
@@ -163,7 +163,7 @@ $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page was 
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Bugnote not found.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%s\' not found.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Unable to connect to FTP server.';
@@ -176,13 +176,13 @@ $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	 = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	 = 'An array was expected but a string was received.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Bug %d not found.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	 = 'Issue %d not found.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	 = 'Invalid email.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	 = 'File type not allowed for uploads.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	 = 'This is a duplicate file.  Please delete the file first.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path.  Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set a bug as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	 = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
@@ -192,7 +192,7 @@ $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	 = 'LDAP Authentication Failed';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	 = 'LDAP Record Update has failed.';
 $MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'The action cannot be performed because the bug has been resolved';
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED] = 'The action cannot be performed because the issue has been resolved';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	 = 'Database connection failed. Error received from database was #%d: %s';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	 = 'Database query failed.  Error received from database was #%d: %s for the query: %s';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	 = 'Database selection failed.  Error received from database was #%d: %s';
@@ -229,13 +229,13 @@ $s_priority_enum_string = '10:none,20:low,30:normal,40:high,50:urgent,60:immedia
 $s_severity_enum_string = '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block';
 $s_reproducibility_enum_string = '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A';
 $s_status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed';
-$s_resolution_enum_string = '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won\'t fix';
+$s_resolution_enum_string = '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not an issue,80:suspended,90:won\'t fix';
 $s_projection_enum_string = '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
 $s_eta_enum_string = '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
 
 # Email Strings
 $s_new_account_subject = 'Your new user account';
-$s_new_account_greeting = 'Greetings and welcome to the bugtracker.  Here is the information you need to login' . "\n\n";
+$s_new_account_greeting = 'Greetings and welcome to the Issue Tracker.  Here is the information you need to login' . "\n\n";
 $s_new_account_url = 'You can login to the site here: ';
 $s_new_account_username = 'Username: ';
 $s_new_account_password = 'Password: ';
@@ -246,24 +246,24 @@ $s_reset_request_msg = 'There was a request to have your password reset';
 $s_account_name_msg = 'Your account name is';
 $s_news_password_msg = 'Here is your new password';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'The following issue requires your FEEDBACK.';
+$s_email_notification_title_for_status_bug_acknowledged = 'The following issue has been ACKNOWLEDGED.';
+$s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
+$s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
+$s_email_notification_title_for_status_bug_closed = 'The following isse has been CLOSED';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
+$s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
+$s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
 
 $s_email_reporter = 'Reported By';
 $s_email_handler = 'Assigned To';
 $s_email_project = 'Project';
-$s_email_bug = 'Bug ID';
+$s_email_bug = 'Issue ID';
 $s_email_category = 'Category';
 $s_email_reproducibility = 'Reproducibility';
 $s_email_severity = 'Severity';
@@ -310,7 +310,7 @@ $s_email_on_feedback = 'Email on Feedback';
 $s_email_on_resolved = 'Email on Resolved';
 $s_email_on_closed = 'Email on Closed';
 $s_email_on_reopened = 'Email on Reopened';
-$s_email_on_bugnote_added = 'Email on Bugnote Added';
+$s_email_on_bugnote_added = 'Email on note Added';
 $s_email_on_status_change = 'Email on Status Change';
 $s_email_on_priority_change = 'Email on Priority Change';
 $s_language = 'Language';
@@ -358,24 +358,24 @@ $s_email_updated = 'Email address successfully updated';
 $s_password_updated = 'Password successfully updated';
 
 # bug_assign.php
-$s_bug_assign_msg = 'Bug has been successfully assigned...';
+$s_bug_assign_msg = 'Issue has been successfully assigned...';
 
 # bug_close.php
-$s_bug_close_msg = 'Bug has been closed...';
+$s_bug_close_msg = 'Issue has been closed...';
 $s_close_immediately = 'Close immediately:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Close Bug';
+$s_close_bug_title = 'Close Issue';
 
 # bug_delete.php
-$s_bug_deleted_msg = 'Bug has been deleted...';
+$s_bug_deleted_msg = 'Issue has been deleted...';
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = 'Are you sure you wish to delete this bug?';
-$s_delete_bug_button = 'Delete Bug';
+$s_delete_bug_sure_msg = 'Are you sure you wish to delete this issue?';
+$s_delete_bug_button = 'Delete Issue';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Monitor Bug';
+$s_monitor_bug_button = 'Monitor Issue';
 $s_unmonitor_bug_button = 'End Monitoring';
 
 # bug_file_add.php
@@ -388,18 +388,18 @@ $s_upload_file_button = 'Upload File';
 $s_max_file_size = 'Max size';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Bug has been reopened...';
-$s_reopen_add_bugnote_title = 'Add Bugnote Reason For Reopening Bug';
-$s_bugnote_add_reopen_button = 'Add Bugnote and Reopen Bug';
+$s_bug_reopened_msg = 'Issue has been reopened...';
+$s_reopen_add_bugnote_title = 'Add Note Reason For Reopening Issue';
+$s_bugnote_add_reopen_button = 'Add Note and Reopen Issue';
 
 # bug_resolve_page.php
-$s_resolve_bug_title = 'Resolve Bug';
-$s_resolve_bug_button = 'Resolve Bug';
+$s_resolve_bug_title = 'Resolve Issue';
+$s_resolve_bug_button = 'Resolve Issue';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Bug has been resolved. Enter bugnote below...';
-$s_resolve_add_bugnote_title = 'Add Bugnote Reason For Resolving Bug';
-$s_bugnote_add_resolve_button = 'Add Bugnote';
+$s_bug_resolved_msg = 'Issue has been resolved. Enter note below...';
+$s_resolve_add_bugnote_title = 'Add Note Reason For Resolving Issue';
+$s_bugnote_add_resolve_button = 'Add Note';
 
 # bug_reminder_page.php
 $s_from = 'From';
@@ -412,12 +412,12 @@ $s_bug_send_button = 'Send';
 $s_reminder = 'Reminder';
 
 # bug_update.php
-$s_bug_updated_msg = 'Bug has been successfully updated...';
+$s_bug_updated_msg = 'Issue has been successfully updated...';
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = 'Back To Bug';
+$s_back_to_bug_link = 'Back To Issue';
 $s_update_simple_link = 'Update Simple';
-$s_updating_bug_advanced_title = 'Updating Bug Information';
+$s_updating_bug_advanced_title = 'Updating Issue Information';
 $s_id = 'ID';
 $s_category = 'Category';
 $s_severity = 'Severity';
@@ -446,31 +446,31 @@ $s_update_information_button = 'Update Information';
 
 # bug_update_page.php
 $s_update_advanced_link = 'Update Advanced';
-$s_updating_bug_simple_title = 'Updating Bug Information';
+$s_updating_bug_simple_title = 'Updating Issue Information';
 
 # bug_vote_add.php
 $s_vote_added_msg = 'Vote has been added...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'Bugnote added...';
+$s_bugnote_added_msg = 'Note added...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Bugnote has been successfully deleted...';
-$s_bug_notes_title = 'Bug Notes';
+$s_bugnote_deleted_msg = 'Note has been successfully deleted...';
+$s_bug_notes_title = 'Notes';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = 'Edit Bugnote';
+$s_edit_bugnote_title = 'Edit Note';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'There are no notes attached to this bug.';
+$s_no_bugnotes_msg = 'There are no notes attached to this issue.';
 $s_delete_link = 'Delete';
-$s_add_bugnote_title = 'Add Bugnote';
-$s_add_bugnote_button = 'Add Bugnote';
+$s_add_bugnote_title = 'Add Note';
+$s_add_bugnote_button = 'Add Note';
 $s_bugnote_edit_link = 'Edit';
-$s_close_bug_button = 'Close Bug';
+$s_close_bug_button = 'Close Issue';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Bugnote has been successfully updated...';
+$s_bugnote_updated_msg = 'Note has been successfully updated...';
 $s_edited_on = 'edited on: ';
 
 # index.php
@@ -479,7 +479,7 @@ $s_click_to_login = 'Click here to login';
 # login.php
 
 # login_page.php
-$s_login_page_info = 'Welcome to the bugtracker.';
+$s_login_page_info = 'Welcome to the Issue Tracker.';
 $s_login_title = 'Login';
 $s_save_login = 'Save Login';
 $s_choose_project = 'Choose Project';
@@ -557,7 +557,7 @@ $s_category_updated_msg = 'Category has been successfully updated...';
 $s_project_deleted_msg = 'Project successfully removed...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Are you sure you want to delete this project and all attached bug reports?';
+$s_project_delete_msg = 'Are you sure you want to delete this project and all attached issue reports?';
 $s_project_delete_button = 'Delete Project';
 
 # manage_proj_edit_page.php
@@ -637,8 +637,8 @@ $s_manage_user_updated_msg = 'Account successfully updated...';
 
 # menu_inc.php
 $s_main_link = 'Main';
-$s_view_bugs_link = 'View Bugs';
-$s_report_bug_link = 'Report Bug';
+$s_view_bugs_link = 'View Issues';
+$s_report_bug_link = 'Report Issue';
 $s_summary_link = 'Summary';
 $s_account_link = 'My Account';
 $s_users_link = 'Users';
@@ -731,7 +731,7 @@ $s_must_enter_severity = 'You must select a severity';
 $s_must_enter_reproducibility = 'You must select a reproducibility';
 $s_must_enter_summary = 'You must enter a summary';
 $s_must_enter_description = 'You must enter a description';
-$s_report_more_bugs = 'Report More Bugs';
+$s_report_more_bugs = 'Report More Issues';
 $s_submission_thanks_msg = 'Thank you for your submission';
 
 # report_bug_advanced_page.php
@@ -745,7 +745,7 @@ $s_or_fill_in = 'OR Fill In';
 $s_assign_to = 'Assign To';
 $s_additional_information = 'Additional Information';
 $s_submit_report_button = 'Submit Report';
-$s_check_report_more_bugs = 'check to report more bugs';
+$s_check_report_more_bugs = 'check to report more issues';
 
 # report_bug_page.php
 $s_advanced_report_link = 'Advanced Report';
@@ -799,8 +799,8 @@ $s_percentage_fixed = '% Fixed';
 $s_percentage_errors = '% False';
 $s_errors = 'False';
 $s_total = 'Total';
-$s_time_stats = 'Time Stats For Resolved Bugs (days)';
-$s_longest_open_bug = 'Longest open bug';
+$s_time_stats = 'Time Stats For Resolved Issues (days)';
+$s_longest_open_bug = 'Longest open issue';
 $s_longest_open = 'Longest open';
 $s_average_time = 'Average time';
 $s_total_time = 'Total time';
@@ -812,7 +812,7 @@ $s_orct = '(open/resolved/closed/total)';
 $s_any = 'any';
 $s_show = 'Show';
 $s_changed = 'Changed(hrs)';
-$s_viewing_bugs_title = 'Viewing Bugs';
+$s_viewing_bugs_title = 'Viewing Issues';
 $s_updated = 'Updated';
 
 # view_all_inc.php
@@ -847,12 +847,12 @@ $s_query_delete_msg = 'Are you sure you wish to delete this query?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'View Simple';
-$s_viewing_bug_advanced_details_title = 'Viewing Bug Advanced Details';
+$s_viewing_bug_advanced_details_title = 'Viewing Issue Advanced Details';
 $s_product_build = 'Product Build';
 $s_system_profile = 'System Description';
-$s_update_bug_button = 'Update Bug';
+$s_update_bug_button = 'Update Issue';
 $s_bug_assign_to_button = 'Assign To:';
-$s_reopen_bug_button = 'Reopen Bug';
+$s_reopen_bug_button = 'Reopen Issue';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
 $s_cached = 'Cached';
@@ -861,11 +861,11 @@ $s_cached = 'Cached';
 
 # view_bug_page.php
 $s_view_advanced_link = 'View Advanced';
-$s_viewing_bug_simple_details_title = 'Viewing Bug Simple Details';
+$s_viewing_bug_simple_details_title = 'Viewing Issue Simple Details';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
+$s_no_users_monitoring_bug = 'There are no users monitoring this issue.';
+$s_users_monitoring_bug = 'Users monitoring this issue';
 $s_monitoring_user_list = 'User List';
 
 # custom field strings
