@@ -26,18 +26,6 @@
 	}
 	# --------------------
 	# second part of the html, comes after the meta tags
-	function print_page_top2() {
-		global $g_page_title, $g_top_include_page;
-
-		print_head_bottom();
-		print_body_top();
-		print_header( $g_page_title );
-		print_top_page( $g_top_include_page );
-		print_login_info();
-		print_menu();
-	}
-	# --------------------
-	# second part of the html, comes after the meta tags
 	function print_page_top2a() {
 		global $g_page_title, $g_top_include_page;
 
@@ -45,6 +33,13 @@
 		print_body_top();
 		print_header( $g_page_title );
 		print_top_page( $g_top_include_page );
+	}
+	# --------------------
+	# second part of the html, comes after the meta tags
+	function print_page_top2() {
+		print_page_top2a();
+		print_login_info();
+		print_menu();
 	}
 	# --------------------
 	# comes at the bottom of the html

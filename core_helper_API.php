@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.63 $
-	# $Author: prescience $
-	# $Date: 2002-08-19 03:11:07 $
+	# $Revision: 1.64 $
+	# $Author: vboctor $
+	# $Date: 2002-08-23 16:40:53 $
 	#
-	# $Id: core_helper_API.php,v 1.63 2002-08-19 03:11:07 prescience Exp $
+	# $Id: core_helper_API.php,v 1.64 2002-08-23 16:40:53 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -19,6 +19,14 @@
 
 	# These are miscellaneous functions to help the package
 
+	# --------------------
+	# Calculates the CRC given bug id and calling file name (use __FILE__).
+	# It uses a configuration variable as a seed.
+	function calcCRC ( $p_bug_id, $p_file ) {
+		global $g_admin_crypt_word;
+		$crcStr = sprintf("%s%s%07d", $g_admin_crypt_word, basename($p_file), (integer)$p_bug_id);
+		return crc32($crcStr);
+	}
 	# --------------------
 	# Returns the specified field value of the specified bug text
 	function get_file_field( $p_file_id, $p_field_name ) {
