@@ -61,6 +61,7 @@ Mantis
  * Removed site_settings link in print_manage_doc_menu().
  * Removed action confirmations in Account pages.
  * Removed action confirmations in Bug/Bugnote pages.
+ * Removed action confirmations in Login/Logout pages.
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.
  * Modified edit project links to use the project name instead of the [edit] link.

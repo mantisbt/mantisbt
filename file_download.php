@@ -33,5 +33,6 @@
 	header( "Content-Disposition: filename=$v_filename" );
 	header( "Content-Description: Download Data" );
 
+	# dump file content to the connection.
 	echo $v_content;
 ?>
