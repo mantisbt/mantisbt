@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.125 2004-08-24 01:44:26 thraxisp Exp $
+	# $Id: html_api.php,v 1.126 2004-08-27 13:24:11 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -338,15 +338,16 @@
 			echo "\t",  count( array_unique ( $g_queries_array ) ).' unique queries executed.<br />', "\n";
 			if ( ON == config_get( 'show_queries_list' ) ) {
 				echo "\t",  '<table>', "\n";
-				$t_shown_queries = array();
+				$t_total = 0;				$t_shown_queries = array();
 				for ( $i = 0; $i < $t_count; $i++ ) {
-					if ( in_array( $g_queries_array[$i], $t_shown_queries ) ) {
-						echo "\t",  '<tr><td style="color: red">', ($i+1), '</td><td style="color: red">', htmlspecialchars($g_queries_array[$i]), '</td></tr>', "\n";
+					$t_time = $g_queries_array[$i][1];					$t_total += $t_time;					if ( in_array( $g_queries_array[$i][0], $t_shown_queries ) ) {
+						echo "\t",  '<tr><td style="color: red">', ($i+1), '</td><td style="color: red">', $t_time , '</td><td style="color: red">', htmlspecialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 					} else {
-						array_push( $t_shown_queries, $g_queries_array[$i] );
-						echo "\t",  '<tr><td>', ($i+1), '</td><td>', htmlspecialchars($g_queries_array[$i]), '</td></tr>', "\n";
+						array_push( $t_shown_queries, $g_queries_array[$i][0] );
+						echo "\t",  '<tr><td>', ($i+1), '</td><td>'. $t_time . '</td><td>', htmlspecialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 					}
 				}
+				echo "\t", '<tr><td></td><td>', $t_total, '</td><td></td></tr>', "\n";
 				echo "\t",  '</table>', "\n";
 			}
 		}

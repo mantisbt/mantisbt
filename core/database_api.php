@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.31 2004-08-24 13:24:35 thraxisp Exp $
+	# $Id: database_api.php,v 1.32 2004-08-27 13:24:10 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -84,19 +84,25 @@
 	}
 
 	# --------------------
+	# timer analysis 
+	function microtime_float() {
+		list( $usec, $sec ) = explode( " ", microtime() );
+		return ( (float)$usec + (float)$sec );
+	}
+		# --------------------
 	# execute query, requires connection to be opened
 	# If $p_error_on_failure is true (default) an error will be triggered
 	#  if there is a problem executing the query.
 	function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 		global $g_queries_array, $g_db;
 
-		array_push ( $g_queries_array, $p_query );
-
+		$t_start = microtime_float();
 		if ( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
 			$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
 		} else {
 			$t_result = $g_db->Execute( $p_query );
 		}
+		$t_elapsed = number_format( microtime_float() - $t_start, 4);		array_push ( $g_queries_array, array( $p_query, $t_elapsed ) );
 
 		if ( !$t_result ) {
 			db_error($p_query);

@@ -70,6 +70,7 @@ Mantis ChangeLog
 - 0004163: [other] Unreadable error messages in some languages (vboctor)
 - 0003904: [sql] cache missing 'user pref' rows (thraxisp)
 - 0004222: [sql] Should mantis_project_category_table.user_id be UNSIGNED? (vboctor)
+- 0004348: [performance] Show queries with runtime (paulr)
 - New Config: main_menu_custom_options (default empty) - Allow addition of custom menu options to main menu (vboctor)
 - New Config: show_realname (default OFF) - show realname in all places instead of username (thraxisp)
 - New Config: max_failed_login_count -	Max. attempts to login using a wrong password before lock the account.
