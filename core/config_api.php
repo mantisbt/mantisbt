@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.5 2002-08-29 09:46:16 jfitzell Exp $
+	# $Id: config_api.php,v 1.6 2002-08-29 09:47:17 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -70,9 +70,9 @@
 	# admin_check.php.
 	function config_obsolete($var, $replace) {
 		if ( config_is_set( $var ) ) {
-			PRINT '$g_' . $var . ' is now obsolete';
+			echo '$g_' . $var . ' is now obsolete';
 			if ($replace != '') {
-				PRINT ', please use $g_' . $replace;
+				echo ', please use $g_' . $replace;
 			}
 			exit;
 		}
