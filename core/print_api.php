@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.99 2004-08-24 01:44:26 thraxisp Exp $
+	# $Id: print_api.php,v 1.100 2004-09-22 10:03:42 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -658,6 +658,11 @@
 	function print_project_access_levels_option_list( $p_val ) {
 		global $g_mantis_project_table, $g_access_levels_enum_string;
 
+		# Add [default access level] to add the user to a project
+		# with his default access level.
+		PRINT "<option value=\"" . DEFAULT_ACCESS_LEVEL . "\"";
+		PRINT ">[" . lang_get( 'default_access_level' ) . "]</option>";
+		
 		$t_arr = explode_enum_string( $g_access_levels_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {

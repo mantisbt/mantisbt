@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.59 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: project_api.php,v 1.60 2004-09-22 10:03:42 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -509,6 +509,11 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_access_level	= db_prepare_int( $p_access_level );
 
+		if ( DEFAULT_ACCESS_LEVEL == $p_access_level ) {
+			# Default access level for this user
+			$c_access_level = db_prepare_int( user_get_access_level ( $p_user_id ) );
+		}
+		
 		$query = "INSERT
 				  INTO $t_project_user_list_table
 				    ( project_id, user_id, access_level )
