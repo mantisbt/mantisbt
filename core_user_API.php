@@ -659,4 +659,22 @@
 	    $result = db_query($query);
 	}
 	# --------------------
+	# grabs the access level of the current user
+	function get_current_user_access_level() {
+		global $g_string_cookie_val;
+
+		$t_access_level = get_current_user_field( "access_level" );
+		$t_access_level2 = get_project_access_level();
+
+		if ( $t_access_level >= ADMINISTRATOR ) {
+			return $t_access_level;
+		}
+
+		if ( $t_access_level2 > -1 ) {
+			return $t_access_level;
+		} else {
+			return $t_access_level2;
+		}
+	}
+	# --------------------
 ?>

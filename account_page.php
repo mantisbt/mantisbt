@@ -147,6 +147,14 @@
 		<?php echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
 	</td>
 </tr>
+<tr class="row-2">
+	<td class="category">
+		<?php echo $s_access_level_project ?>:
+	</td>
+	<td>
+		<?php echo get_enum_element( $s_access_levels_enum_string, get_current_user_access_level() ) ?>
+	</td>
+</tr>
 <tr>
 	<td class="left">
 		<input type="submit" value="<?php echo $s_update_user_button ?>">

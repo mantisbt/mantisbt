@@ -200,16 +200,18 @@
 		global 	$g_mantis_user_table,
 				$g_string_cookie_val, $g_project_cookie_val,
 				$g_complete_date_format, $g_set_project,
-				$s_switch, $s_logged_in_as, $s_all_projects;
+				$s_switch, $s_logged_in_as, $s_all_projects,
+				$s_access_levels_enum_string;
 
 		$t_username = get_current_user_field( "username" );
+		$t_access_level = get_enum_element( $s_access_levels_enum_string, get_current_user_access_level() );
 		$t_now = date( $g_complete_date_format );
 
 		PRINT "<table class=\"hide\">";
 		PRINT "<form method=\"post\" action=\"$g_set_project\">";
 		PRINT "<tr>";
 			PRINT "<td class=\"login-info-left\">";
-				PRINT "$s_logged_in_as: <span class=\"login-username\">$t_username</span>";
+				PRINT "$s_logged_in_as: <span class=\"login-username\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
 			PRINT "</td>";
 			PRINT "<td class=\"login-info-middle\">";
 				PRINT "<span class=\"login-time\">$t_now</span>";

@@ -17,6 +17,7 @@
 	$s_login_anonymously = "Login Anonymously";
 	$s_jump_to_bugnotes = "Jump to Bugnotes";
 	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
+	$s_access_level_project = "Project Access Level";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
@@ -107,7 +108,7 @@
 	$s_email = "Email";
 	$s_password = "Password";
 	$s_confirm_password  = "Confirm Password";
-	$s_access_level = "Access Level";
+	$s_access_level = "Default Access Level";
 	$s_update_user_button = "Update User";
 
 	# account_prefs_page.php3
