@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.84 2004-09-24 08:42:08 bpfennigschmidt Exp $
+	# $Id: bug_api.php,v 1.85 2004-10-04 16:53:13 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -693,7 +693,7 @@
 	# --------------------
 	# Update a bug from the given data structure
 	#  If the third parameter is true, also update the longer strings table
-	function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false ) {
+	function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false, $p_bypass_mail = false ) {
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_bug_data		= bug_prepare_db( $p_bug_data );
 
@@ -799,27 +799,29 @@
 		# Update the last update date
 		bug_update_date( $p_bug_id );
 
-		$t_action_prefix = 'email_notification_title_for_action_bug_';
-		$t_status_prefix = 'email_notification_title_for_status_bug_';
+		if ( false == $p_bypass_mail ) {		# allow bypass if user is sending mail separately
+			$t_action_prefix = 'email_notification_title_for_action_bug_';
+			$t_status_prefix = 'email_notification_title_for_status_bug_';
 
-		# bug assigned
-		if ( $t_old_data->handler_id != $p_bug_data->handler_id ) {
-			email_generic( $p_bug_id, 'owner', $t_action_prefix . 'assigned' );
-			return true;
+			# bug assigned
+			if ( $t_old_data->handler_id != $p_bug_data->handler_id ) {
+				email_generic( $p_bug_id, 'owner', $t_action_prefix . 'assigned' );
+				return true;
+			}
+
+			# status changed
+			if ( $t_old_data->status != $p_bug_data->status ) {
+				$t_status = get_enum_to_string( config_get( 'status_enum_string' ), $p_bug_data->status );
+				$t_status = str_replace( ' ', '_', $t_status );
+				email_generic( $p_bug_id, $t_status, $t_status_prefix . $t_status );
+				return true;
+			}
+
+			# @@@ handle priority change if it requires special handling
+
+			# generic update notification
+			email_generic( $p_bug_id, 'updated', $t_action_prefix . 'updated' );
 		}
-
-		# status changed
-		if ( $t_old_data->status != $p_bug_data->status ) {
-			$t_status = get_enum_to_string( config_get( 'status_enum_string' ), $p_bug_data->status );
-			$t_status = str_replace( ' ', '_', $t_status );
-			email_generic( $p_bug_id, $t_status, $t_status_prefix . $t_status );
-			return true;
-		}
-
-		# @@@ handle priority change if it requires special handling
-
-		# generic update notification
-		email_generic( $p_bug_id, 'updated', $t_action_prefix . 'updated' );
 
 		return true;
 	}
