@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.194 $
-	# $Author: vboctor $
-	# $Date: 2004-08-03 13:47:49 $
+	# $Revision: 1.195 $
+	# $Author: prichards $
+	# $Date: 2004-08-03 23:44:47 $
 	#
-	# $Id: strings_english.txt,v 1.194 2004-08-03 13:47:49 vboctor Exp $
+	# $Id: strings_english.txt,v 1.195 2004-08-03 23:44:47 prichards Exp $
 	###########################################################################
 ?>
 <?php
@@ -956,12 +956,12 @@ $s_custom_field_length_max = 'Max. Length';
 $s_custom_field_advanced = 'Display Only On Advanced Page';
 $s_custom_field_display_report = 'Display When Reporting Issues';
 $s_custom_field_display_update = 'Display When Updating Issues';
-$s_custom_field_display_resolve = 'Display When Resolving Issues';
-$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_display_resolved = 'Display When Resolving Issues';
+$s_custom_field_display_closed = 'Display When Closing Issues';
 $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolve = 'Required On Resolve';
-$s_custom_field_require_close = 'Required On Close';
+$s_custom_field_require_resolved = 'Required On Resolve';
+$s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = 'Sequence';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.37 2004-08-02 18:17:11 prichards Exp $
+	# $Id: custom_field_api.php,v 1.38 2004-08-03 23:45:57 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -268,12 +268,12 @@
 		$c_advanced			= db_prepare_bool(   $p_def_array['advanced']        );
 		$c_display_report	= db_prepare_bool( 	 $p_def_array['display_report'] );
 		$c_display_update	= db_prepare_bool( 	 $p_def_array['display_update'] );
-		$c_display_resolve	= db_prepare_bool( 	 $p_def_array['display_resolve'] );
-		$c_display_close	= db_prepare_bool( 	 $p_def_array['display_close']   );
+		$c_display_resolved	= db_prepare_bool( 	 $p_def_array['display_resolved'] );
+		$c_display_closed	= db_prepare_bool( 	 $p_def_array['display_closed']   );
 		$c_require_report	= db_prepare_bool( 	 $p_def_array['require_report']  );
 		$c_require_update	= db_prepare_bool( 	 $p_def_array['require_update']  );
-		$c_require_resolve  = db_prepare_bool( 	 $p_def_array['require_resolve'] );
-		$c_require_close	= db_prepare_bool( 	 $p_def_array['require_close']   );
+		$c_require_resolved = db_prepare_bool( 	 $p_def_array['require_resolved'] );
+		$c_require_closed	= db_prepare_bool( 	 $p_def_array['require_closed']   );
 
 		if (( is_blank( $c_name ) ) ||
 			( $c_access_level_rw < $c_access_level_r ) ||
@@ -391,21 +391,21 @@
 			}
 			$query .= "display_update='$c_display_update'";
 		}
-		if( array_key_exists( 'display_resolve', $p_def_array ) ) {
+		if( array_key_exists( 'display_resolved', $p_def_array ) ) {
 			if ( !$t_update_something ) {
 				$t_update_something = true;
 			} else {
 				$query .= ', ';
 			}
-			$query .= "display_resolve='$c_display_resolve'";
+			$query .= "display_resolved='$c_display_resolved'";
 		}
-		if( array_key_exists( 'display_close', $p_def_array ) ) {
+		if( array_key_exists( 'display_closed', $p_def_array ) ) {
 			if ( !$t_update_something ) {
 				$t_update_something = true;
 			} else {
 				$query .= ', ';
 			}
-			$query .= "display_close='$c_display_close'";
+			$query .= "display_closed='$c_display_closed'";
 		}
 		if( array_key_exists( 'require_report', $p_def_array ) ) {
 			if ( !$t_update_something ) {
@@ -423,21 +423,21 @@
 			}
 			$query .= "require_update='$c_require_update'";
 		}
-		if( array_key_exists( 'require_resolve', $p_def_array ) ) {
+		if( array_key_exists( 'require_resolved', $p_def_array ) ) {
 			if ( !$t_update_something ) {
 				$t_update_something = true;
 			} else {
 				$query .= ', ';
 			}
-			$query .= "require_resolve='$c_require_resolve'";
+			$query .= "require_resolved='$c_require_resolved'";
 		}
-		if( array_key_exists( 'require_close', $p_def_array ) ) {
+		if( array_key_exists( 'require_closed', $p_def_array ) ) {
 			if ( !$t_update_something ) {
 				$t_update_something = true;
 			} else {
 				$query .= ', ';
 			}
-			$query .= "require_close='$c_require_close'";
+			$query .= "require_closed='$c_require_closed'";
 		}
 
 

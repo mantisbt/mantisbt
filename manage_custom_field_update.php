@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_update.php,v 1.16 2004-08-02 18:16:20 prichards Exp $
+	# $Id: manage_custom_field_update.php,v 1.17 2004-08-03 23:43:49 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,12 +33,12 @@
 	$t_values['advanced']			= gpc_get_bool( 'advanced' );
 	$t_values['display_report']	= gpc_get_bool( 'display_report' );
 	$t_values['display_update']	= gpc_get_bool( 'display_update' );
-	$t_values['display_resolve']	= gpc_get_bool( 'display_resolve' );
-	$t_values['display_close']		= gpc_get_bool( 'display_close' );
+	$t_values['display_resolved']	= gpc_get_bool( 'display_resolved' );
+	$t_values['display_closed']		= gpc_get_bool( 'display_closed' );
 	$t_values['require_report']		= gpc_get_bool( 'require_report' );
 	$t_values['require_update']		= gpc_get_bool( 'require_update' );
-	$t_values['require_resolve']	= gpc_get_bool( 'require_resolve' );
-	$t_values['require_close']		= gpc_get_bool( 'require_close' );
+	$t_values['require_resolved']	= gpc_get_bool( 'require_resolved' );
+	$t_values['require_closed']		= gpc_get_bool( 'require_closed' );
 
 	custom_field_update( $f_field_id, $t_values );
 

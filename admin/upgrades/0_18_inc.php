@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.17 2004-08-02 18:16:47 prichards Exp $
+	# $Id: 0_18_inc.php,v 1.18 2004-08-03 23:45:15 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -487,6 +487,66 @@
 			'custom_fields-8',
 			'Allow custom fields to be hidden/displayed for report/update',
 			"ALTER TABLE mantis_custom_field_table ADD display_update BOOL NOT NULL default '1'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-9',
+			'Rename Column',
+			"ALTER TABLE mantis_custom_field_table ADD require_resolved BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-10',
+			'Rename Column',
+			"Update mantis_custom_field_table SET require_resolved = require_resolve" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-11',
+			'Rename Column',
+			"ALTER TABLE mantis_custom_field_table DROP require_resolve" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-12',
+			'Rename Column',
+			"ALTER TABLE mantis_custom_field_table ADD display_resolved BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-13',
+			'Rename Column',
+			"Update mantis_custom_field_table SET display_resolved = display_resolve" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-14',
+			'Rename Column',
+			"ALTER TABLE mantis_custom_field_table DROP display_resolve" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-15',
+			'Rename Column',
+			"ALTER TABLE mantis_custom_field_table ADD display_closed BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-16',
+			'Rename Column',
+			"Update mantis_custom_field_table SET display_closed = display_close" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-17',
+			'Rename Column',
+			"ALTER TABLE mantis_custom_field_table DROP display_close" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-18',
+			'Rename Column',
+			"ALTER TABLE mantis_custom_field_table ADD require_closed BOOL NOT NULL default '0'" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-19',
+			'Rename Column',
+			"Update mantis_custom_field_table SET require_closed = require_close" );
+
+	$upgrades[] = new SQLUpgrade(
+			'custom_fields-20',
+			'Rename Column',
+			"ALTER TABLE mantis_custom_field_table DROP require_close" );
 
 	return $upgrades;
 ?>
