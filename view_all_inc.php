@@ -2,6 +2,9 @@
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
+	<form method="post" action="<? echo $link_page ?>">
+	<input type="hidden" name="f_offset" value="0">
+	<input type="hidden" name="f_save" value="1">
 	<table width="100%">
 	<tr align="center">
         <td>
@@ -39,9 +42,6 @@
 	</td>
 	</tr>
 	<tr align="center">
-		<form method="post" action="<? echo $link_page ?>">
-		<input type="hidden" name="f_offset" value="0">
-		<input type="hidden" name="f_save" value="1">
               <td>
                     <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
               </td>
@@ -94,9 +94,9 @@
 		<td>
 		<input type="submit" value="<? echo $s_filter_button ?>">
 		</td>
-		</form>
 	</tr>
 	</table>
+	</form>
 </tr>
 </table>
 
@@ -120,8 +120,11 @@
 			&nbsp;
 		</td>
 		<td width="8%">
-			<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_dir_new ) ?>
-			<? print_sort_icon( $f_dir_new, $f_sort, "id" ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "id" ) ?>
+
+			<? #print_view_bug_sort_link( $link_page, $s_id, "id", $f_dir_new ) ?>
+			<? #print_sort_icon( $f_dir_new, $f_sort, "id" ) ?>
 		</td>
 		<td width="3%">
 			<b>
