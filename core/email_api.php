@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.87 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: email_api.php,v 1.88 2004-07-24 15:35:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -740,7 +740,7 @@
 
 		# build message
 
-		$t_message = lang_get_defaulted( $p_message_id );
+		$t_message = lang_get_defaulted( $p_message_id, null, $g_email_lang );
 		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
 			$t_message .= "\n";
 		}
@@ -800,7 +800,7 @@
 		# custom fields formatting
 		foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
 
-			$t_message .= str_pad( lang_get_defaulted( $t_custom_field_name ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
+			$t_message .= str_pad( lang_get_defaulted( $t_custom_field_name, null, $g_email_lang ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
 
 			if ( CUSTOM_FIELD_TYPE_EMAIL === $t_custom_field_data['type'] ) {
 				$t_message .= 'mailto:'.$t_custom_field_data['value'];
