@@ -601,7 +601,7 @@
 	# http://www.php.net/manual/en/function.setcookie.php
 	$g_cookie_path			= '/';
 	# unused
-	$g_cookie_domain		= '.mydomain.extension';
+	$g_cookie_domain		= '';
 	# cookie version for view_all_page
 	$g_cookie_version		= 'v3';
 
@@ -616,8 +616,10 @@
 	$g_manage_cookie		= $g_cookie_prefix.'_MANAGE_COOKIE';
 
 	# --- cookie values ---------------
+	#@@@ this code can be removed after full conversion to
+	#@@@ the gpc_api
 	$g_string_cookie_val	= '';
-	$g_project_cookie_val	= '';
+	$g_project_cookie_val	= '0';  #use a default so we don't have to force the user to choose one
 	$g_view_all_cookie_val	= '';
 	$g_manage_cookie_val	= '';
 
@@ -633,6 +635,8 @@
 	if ( isset( $HTTP_COOKIE_VARS[$g_manage_cookie] ) ) {
 		$g_manage_cookie_val	= $HTTP_COOKIE_VARS[$g_manage_cookie];
 	}
+	#@@@ end removable code block
+	#@@@
 
 	#######################################
 	# Mantis Database Table Variables

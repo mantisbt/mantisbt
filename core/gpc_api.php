@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.8 2002-09-17 20:27:39 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.9 2002-09-18 04:24:03 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -174,6 +174,38 @@
 		}
 		
 		return $t_result;
+	}
+
+	# ------------------
+	# Set a cookie variable
+	# If $p_expire is false instead of a number, the cookie will expire when
+	#  the browser is closed; if it is true, the default time from the config
+	#  file will be used
+	# If $p_path or $p_domaain are omitted, defaults are used
+	#
+	# @@@ this function is to be modified by Victor to add CRC... for now it
+	#  just passes the parameters through to setcookie()
+	function gpc_set_cookie( $p_name, $p_value, $p_expire=false, $p_path=null, $p_domain=null ) {
+		if ( false === $p_expire ) {
+			$p_expire = 0;
+		} else if (true === $p_expire ) {
+			$t_cookie_length = config_get( 'cookie_time_length' );
+			$p_expire = time()+$t_cookie_length;
+		}
+		if ( null === $p_path ) {
+			$p_path = config_get( 'cookie_path' );
+		}
+		if ( null === $p_domain ) {
+			$p_domain = config_get( 'cookie_domain' );
+		}
+
+		return setcookie( $p_name, $p_value, $p_expire, $p_path, $p_domain );
+	}
+
+	# ------------------
+	# Clear a cookie variable
+	function gpc_clear_cookie( $p_name, $p_path ) {
+		return setcookie( $p_name, '', -1, $p_path );
 	}
 
 	#===================================

@@ -18,7 +18,7 @@
 	}
 
 	# Add item
-	setcookie( $g_project_cookie, $f_project_id, time()+$g_cookie_time_length, $g_cookie_path );
+	gpc_set_cookie( $g_project_cookie, $f_project_id, true );
 
 	# redirect to 'same page' when switching projects.
 	# view_all_* pages, and summary
@@ -38,7 +38,7 @@
 	}
 
 	# clear view filter between projects
-	setcookie( $g_view_all_cookie,	'', -1, $g_cookie_path );
+	gpc_clear_cookie( $g_view_all_cookie );
 
 	print_header_redirect( $t_redirect_url );
 ?>
