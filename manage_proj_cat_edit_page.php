@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_edit_page.php,v 1.27 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: manage_proj_cat_edit_page.php,v 1.28 2003-04-09 10:06:36 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -58,7 +58,7 @@
 	<td>
 		<select name="assigned_to">
 			<option value="0"></option>
-			<?php print_assign_to_option_list( $t_assigned_to ) ?>
+			<?php print_assign_to_option_list( $t_assigned_to, $f_project_id ) ?>
 		</select>
 	</td>
 </tr>
