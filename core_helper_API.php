@@ -43,7 +43,7 @@
 		$c_bug_id = (integer)$p_bug_id;
 
 		# get info
-		$query = "SELECT $p_field_name
+		$query = "SELECT DISTINCT $p_field_name
 				FROM $g_mantis_bug_table
 				WHERE id='$c_bug_id'";
 		$result = db_query( $query );
@@ -57,7 +57,7 @@
 
 		$t_bug_text_id = get_bug_field( $p_bug_id, 'bug_text_id' );
 		# get info
-		$query = "SELECT $p_field_name
+		$query = "SELECT DISTINCT $p_field_name
 				FROM $g_mantis_bug_text_table
 				WHERE id='$t_bug_text_id'";
 		$result = db_query( $query );
@@ -66,11 +66,10 @@
 	# --------------------
 	# Returns the specified field value of the specified bug text
 	function get_file_field( $p_file_id, $p_field_name ) {
-		global 	$g_string_cookie_val,
-				$g_mantis_bug_file_table;
+		global $g_mantis_bug_file_table;
 
 		# get info
-		$query = "SELECT $p_field_name
+		$query = "SELECT DISTINCT $p_field_name
 				FROM $g_mantis_bug_file_table
 				WHERE id='$p_file_id'";
 		$result = db_query( $query );
@@ -95,11 +94,11 @@
 
 		$c_bug_id = (integer)$p_bug_id;
 
-		$query = "SELECT *
+		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
 				WHERE id='$c_bug_id'";
 		$result = db_query( $query );
-		if ( 0 == db_num_rows( $result ) ) {
+		if ( 0 == db_result( $result, 0, 0 ) ) {
 			print_header_redirect( 'main_page.php' );
 		}
 	}
@@ -112,11 +111,11 @@
 
 		$c_bugnote_id = (integer)$p_bugnote_id;
 
-		$query = "SELECT *
+		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bugnote_table
 				WHERE id='$c_bugnote_id'";
 		$result = db_query( $query );
-		if ( 0 == db_num_rows( $result ) ) {
+		if ( 0 == db_result( $result, 0, 0 ) ) {
 			print_header_redirect( 'main_page.php' );
 		}
 	}
@@ -129,11 +128,11 @@
 
 		$c_user_id = (integer)$p_user_id;
 
-		$query = "SELECT *
+		$query = "SELECT COUNT(*)
 				FROM $g_mantis_user_table
 				WHERE id='$c_user_id'";
 		$result = db_query( $query );
-		if ( 0 == db_num_rows( $result ) ) {
+		if ( 0 == db_result( $result, 0, 0 ) ) {
 			print_header_redirect( 'main_page.php' );
 		}
 	}
@@ -165,11 +164,7 @@
 				FROM $g_mantis_project_table
 				WHERE name='$p_name'";
 		$result = db_query( $query );
-		if ( 0 == db_result( $result, 0, 0 ) ) {
-			return false;
-		} else {
-			return true;
-		}
+		return ( 0 != db_result( $result, 0, 0 ) );
 	}
 	# --------------------
 	# retrieve the number of open assigned bugs to a user in a project
@@ -185,13 +180,16 @@
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
-		if ( '0000000' == $g_project_cookie_val ) $t_where_prj = ' 1=1 ';
-		else $t_where_prj = "project_id='$c_project_id'";
+		if ( '0000000' == $g_project_cookie_val ) {
+			$t_where_prj = '';
+		} else {
+			$t_where_prj = "project_id='$c_project_id' AND";
+		}
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
-				WHERE $t_where_prj AND
+				WHERE $t_where_prj 
 						status<>'$t_res' AND status<>'$t_clo' AND
 						handler_id='$t_id'";
 		$result = db_query( $query );
@@ -211,13 +209,16 @@
 		$result = db_query( $query );
 		$t_id = db_result( $result );
 
-		if ( '0000000' == $g_project_cookie_val ) $t_where_prj = ' 1=1 ';
-		else $t_where_prj = "project_id='$c_project_id'";
+		if ( '0000000' == $g_project_cookie_val ) {
+			$t_where_prj = '';
+		} else {
+			$t_where_prj = "project_id='$c_project_id' AND";
+		}
 		$t_res = RESOLVED;
 		$t_clo = CLOSED;
 		$query = "SELECT COUNT(*)
 				FROM $g_mantis_bug_table
-				WHERE $t_where_prj AND
+				WHERE $t_where_prj 
 						status<>'$t_res' AND status<>'$t_clo' AND
 						reporter_id='$t_id'";
 		$result = db_query( $query );
@@ -326,7 +327,7 @@
 
 		$c_user_id = (integer)$p_user_id;
 
-		$query = "SELECT default_project
+		$query = "SELECT DISTINCT default_project
 				FROM $g_mantis_user_pref_table
 				WHERE user_id='$c_user_id'";
 		$result = db_query( $query );
@@ -401,7 +402,7 @@
 
 		$c_bugnote_id = (integer)$p_bugnote_id;
 
-		$query = "SELECT $p_field_name
+		$query = "SELECT DISTINCT $p_field_name
 					FROM $g_mantis_bugnote_table
 					WHERE id ='$c_bugnote_id'";
 		$result = db_query( $query );
@@ -412,7 +413,7 @@
 	function get_current_project_field( $p_field_name ) {
 		global $g_mantis_project_table, $g_project_cookie_val;
 
-		$query = "SELECT $p_field_name
+		$query = "SELECT DISTINCT $p_field_name
 				FROM $g_mantis_project_table
 				WHERE id='$g_project_cookie_val'";
 		$result = db_query( $query );
@@ -425,7 +426,7 @@
 
 		$c_project_id = (integer)$p_project_id;
 
-		$query = "SELECT $p_field_name
+		$query = "SELECT DISTINCT $p_field_name
 				FROM $g_mantis_project_table
 				WHERE id='$c_project_id'";
 		$result = db_query( $query );
