@@ -76,6 +76,8 @@ Mantis ChangeLog
  * Added more visual graph pages in summary_page.php. Caution, old versions of JPGraph may cause problems, use v1.6.3 or above if you can.
  * Added $g_default_notify_flags and $g_notify_flags which replace $g_notify_developers_on_new, $g_notify_on_new_threshold, and $g_notify_admin_on_new.  The old flags are no longer supported.  The new ones provide full control on who should be notified on each event/action.
  * Added notifications when a bug is deleted.
+ * Added $g_view_attachments_threshold to control the access level required to view attachments.  This is useful when there is a need to share the knowledge about the defects, but to secure customer data.
+ * Added the support to upload attachments to an FTP server (so now there is DISK, DATABASE, and FTP).  Recently uploaded/downloaded attachments are cached at the web server.
 
 2002.05.19  -  0.17.3
 

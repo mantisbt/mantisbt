@@ -34,9 +34,17 @@
 		$t_file_size = filesize( $f_file );
 
 		switch ( $g_file_upload_method ) {
+			case FTP:
 			case DISK:	if ( !file_exists( $t_file_path.$f_file_name ) ) {
+							if ( FTP == $g_file_upload_method ) {
+								$conn_id = file_ftp_connect();
+								file_ftp_put ( $conn_id, $f_file_name, $f_file );
+								file_ftp_disconnect ( $conn_id );
+							}
+
 							umask( 0333 );  # make read only
 							copy( $f_file, $t_file_path.$f_file_name );
+
 							$query = "INSERT INTO $g_mantis_bug_file_table
 									(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 									VALUES
@@ -59,7 +67,7 @@
 		$result = bug_date_update( $f_id );
 
 		# log new file
-		history_log_event_special( $f_id, FILE_ADDED, $f_file_name );
+		history_log_event_special( $f_id, FILE_ADDED, file_get_display_name( $f_file_name ) );
 	}
 
 	# Determine which view page to redirect back to.

@@ -10,11 +10,11 @@
 	check_access( MANAGER );
 
 	# check for no projects
-	check_varset( $f_project_id, '' );
+	check_varset( $f_project_id, array() );
 
 	# Add a user to project(s)
-	$result = 0;
 	$count = count( $f_project_id );
+	$result = ( $count == 0 );
 	for ($i=0;$i<$count;$i++) {
 		$t_project_id = $f_project_id[$i];
 		$result = proj_user_add( $t_project_id, $f_user_id, $f_access_level );

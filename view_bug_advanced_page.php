@@ -297,42 +297,26 @@
 </tr>
 <?php
 	}
+
+	$t_user_id = get_current_user_field ( 'id' ); 
+	$t_show_attachments = ( ( $v_reporter_id == $t_user_id ) || access_level_check_greater_or_equal( $g_view_attachments_threshold ) );
+
+	if ( $t_show_attachments ) {
 ?>
 <tr class="row-2">
 	<td class="category">
 		<?php echo $s_attached_files ?>
 	</td>
 	<td colspan="5">
-		<?php
-			$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
-					FROM $g_mantis_bug_file_table
-					WHERE bug_id='$f_id'";
-			$result = db_query( $query );
-			$num_files = db_num_rows( $result );
-			for ($i=0;$i<$num_files;$i++) {
-				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v2' );
-				$v2_filesize = number_format( $v2_filesize );
-				$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
-
-				PRINT "<a href=\"file_download.php?f_id=$v2_id&amp;f_type=bug\">$v2_filename</a> ($v2_filesize bytes) <span class=\"italic\">$v2_date_added</span>";
-
-				if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) ) {
-					PRINT " [<a class=\"small\" href=\"bug_file_delete.php?f_id=$f_id&amp;f_file_id=$v2_id\">$s_delete_link</a>]";
-				}
-				if ( $i != ($num_files - 1) ) {
-					PRINT '<br />';
-				}
-			}
-		?>
+		<?php file_list_attachments ( $f_id ); ?>
 	</td>
 </tr>
+<?php } ?>
 <tr align="center">
 	<td colspan="6">
 		<table width="100%">
 			<tr align="center">
 <?php # UPDATE form BEGIN ?>
-<?php $t_user_id = get_current_user_field ( 'id' ); ?>
 <?php if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="<?php echo get_bug_update_page() ?>">
@@ -445,7 +429,10 @@
 </table>
 
 <?php
-	include( $g_bug_file_upload_inc );
+	if ( $t_show_attachments ) {
+		include( $g_bug_file_upload_inc );
+	}
+
 	include( $g_bugnote_include_file );
 
 	if ( isset( $f_history ) ) {

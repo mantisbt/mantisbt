@@ -117,5 +117,6 @@
 	require( 'core_version_API.php' );
 	require( 'core_compress_API.php' );
 	require( 'core_relationship_API.php' );
+	require( 'core_file_API.php' );
 	# --------------------
 ?>

@@ -31,13 +31,27 @@
 
 	header( 'Content-type: '.$v_file_type );
 	header( 'Content-Length: '.$v_filesize );
-	header( 'Content-Disposition: filename='.$v_filename );
+	header( 'Content-Disposition: filename='.file_get_display_name($v_filename));
 	header( 'Content-Description: Download Data' );
 
 	# dump file content to the connection.
-	if ( DISK == $g_file_upload_method ) {
-		readfile( $v_diskfile );
-	} else {
-		echo $v_content;
+	switch ( $g_file_upload_method ) {
+		case DISK:
+			if ( file_exists( $v_diskfile ) ) {
+				readfile( $v_diskfile );
+			}
+		break;
+		case FTP:
+			if ( file_exists( $v_diskfile ) ) {
+				readfile( $v_diskfile );
+			} else {
+				$ftp = file_ftp_connect();
+				file_ftp_get ( $ftp, $v_diskfile, $v_filename );
+				file_ftp_disconnect( $ftp );
+				readfile( $v_diskfile );
+			}
+		break;
+		default:
+			echo $v_content;
 	}
 ?>

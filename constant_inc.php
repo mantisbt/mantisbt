@@ -91,6 +91,7 @@
 	# file upload methods
 	define( 'DISK',       1 );
 	define( 'DATABASE',   2 );
+	define( 'FTP',        3 );
 
 	# show variable values
 	define( 'BOTH',             0 );
