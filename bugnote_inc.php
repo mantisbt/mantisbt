@@ -47,48 +47,41 @@
 		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
 
 		# grab the bugnote text and id and prefix with v3_
-		$query = "SELECT note, id
+		$query = "SELECT id, note
 				FROM $g_mantis_bugnote_text_table
 				WHERE id='$v3_bugnote_text_id'";
 		$result2 = db_query( $query );
-		$v3_note = db_result( $result2, 0, 0 );
-		$v3_bugnote_text_id = db_result( $result2, 0, 1 );
+		$row = db_fetch_array( $result2 );
+
+		$v3_view_state = $row['id'];
+		$v3_note = $row['note'];
 
 		$v3_note = string_display( $v3_note );
 ?>
 <tr>
-	<td class="nopad" valign="top" width="25%">
+	<td class="nopad" valign="top" width="100%">
 		<table class="hide" cellspacing="1">
-		<tr>
-			<td class="category" colspan="2">
-				<?php print_user( $v3_reporter_id ) ?>
-			</td>
-		</tr>
-		<tr class="row-1">
-			<td class="small-caption">
-				<?php echo $v3_date_submitted ?>
-			</td>
-			<td class="small-caption">
-			<?php
-				# check access level
-				# only admins and the bugnote creator can delete this bugnote
-				# bug must be open to be editable
-				if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
-					if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
-						( $v3_reporter_id == $t_user_id )) {
-						print_bracket_link( 'bugnote_edit_page.php?f_bugnote_text_id='.$v3_bugnote_text_id.'&amp;f_id='.$f_id.'&amp;f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
-						print_bracket_link( 'bugnote_delete.php?f_bugnote_id='.$v3_id.'&amp;f_id='.$f_id, $s_delete_link );
+		<tr valign="top">
+			<td class="category" colspan="2" width="25%">
+				<?php print_user( $v3_reporter_id ) ?><br />
+				<hr color="#eeeeee" size="1">
+				<span class="small"><?php echo $v3_date_submitted ?>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<?php
+					# check access level
+					# only admins and the bugnote creator can delete this bugnote
+					# bug must be open to be editable
+					if ( get_bug_field( $f_id, 'status' ) < RESOLVED ) {
+						if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
+							( $v3_reporter_id == $t_user_id )) {
+							print_bracket_link( 'bugnote_edit_page.php?f_bugnote_text_id='.$v3_bugnote_text_id.'&amp;f_id='.$f_id.'&amp;f_bugnote_id='.$v3_id, $s_bugnote_edit_link );
+							print_bracket_link( 'bugnote_delete.php?f_bugnote_id='.$v3_id.'&amp;f_id='.$f_id, $s_delete_link );
+						}
 					}
-				}
-			?>
+				?>
+				</span>
 			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="nopad" valign="top" width="75%">
-		<table class="hide" cellspacing="1">
-		<tr class="row-2">
-			<td>
+			<td class="col-2" width="75%">
 				<?php echo $v3_note ?>
 			</td>
 		</tr>
