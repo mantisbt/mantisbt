@@ -1,6 +1,12 @@
 Mantis
 
-11.05.2001  -   0.15.12
+11.xx.2001  -   0.16.0
+
+ * Fixed minor HTML errors in core_html_API.php
+ * Updated Korean localization
+ * Added LDAP login support
+
+11.04.2001  -   0.15.12
 
  * Added Swedish localization
  * Added print bugs feature

@@ -76,6 +76,7 @@
 	define( "PLAIN",	0 );
 	define( "CRYPT",	1 );
 	define( "MD5",		2 );
+	define( "LDAP",		3 );
 
 	# email padding
 	define( "EMAIL_PAD_LENGTH", 28 );

@@ -127,10 +127,11 @@
 	###########################################################################
 	### --------------------
 	# Checks for password match using the globally specified login method
-	function is_password_match( $p_test_password, $p_password ) {
+	function is_password_match( $f_username, $p_test_password, $p_password ) {
 		global $g_login_method;
 
 		switch ( $g_login_method ) {
+
 			case CRYPT:
 						$salt = substr( $p_password, 0, 2 );
 						if ( crypt( $p_test_password, $salt ) == $p_password ) {
@@ -138,17 +139,20 @@
 						} else {
 							return false;
 						}
-
 			case PLAIN:
-
 						if ( $p_test_password == $p_password ) {
 							return true;
 						} else {
 							return false;
 						}
-
 			case MD5:
 						if ( md5( $p_test_password ) == $p_password ) {
+							return true;
+						} else {
+							return false;
+						}
+			case LDAP:
+						if ( ldap_uid_pass( $f_username, $p_test_password ) ) {
 							return true;
 						} else {
 							return false;
@@ -175,6 +179,7 @@
 			case CRYPT:	return crypt( $p_password );
 			case PLAIN:	return $p_password;
 			case MD5:	return md5( $p_password );
+			defaut:		return $p_password;
 		}
 	}
 	### --------------------
@@ -378,14 +383,21 @@
 	}
 	### --------------------
 	# return the specified user field for the user id
+	# exception for LDAP email
 	function get_user_info( $p_user_id, $p_field ) {
-		global $g_mantis_user_table;
+		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
 
-	    $query = "SELECT $p_field
-	    		FROM $g_mantis_user_table
-	    		WHERE id='$p_user_id'";
-	    $result =  db_query( $query );
-	    return db_result( $result, 0, 0 );
+		if ( ( $g_use_ldap_email == 1 ) && ( $p_field == "email" ) ) {
+		    # Find out what username belongs to the p_user_id and ask ldap
+		    return ldap_emailaddy("$p_user_id");
+		}
+
+		$query = "SELECT $p_field
+				FROM $g_mantis_user_table
+				WHERE id='$p_user_id'";
+		$result =  db_query( $query );
+		return db_result( $result, 0, 0 );
+
 	}
 	###########################################################################
 	# Miscellaneous User API
