@@ -4,6 +4,7 @@ Mantis ChangeLog
 
  * Fix: META redirects were not XHTML-compliant
  * Fix: db_insert_id() did not use mysql_insert_id(), but executed another query (which is probably slower)
+ * Fix #2939: Confusing file names for uploaded project documents.
  * Fix #2954: Bgcolor attribute on TD in view_all_bug_page (moved to TR) [optimisation]
  * Languages: Updated German localisation.
 
