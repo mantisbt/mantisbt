@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.17 2003-01-31 07:43:54 jlatour Exp $
+	# $Id: core.php,v 1.18 2003-02-14 19:06:54 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -26,11 +26,11 @@
 		}
 	}
 
-     # Include compatibility file before anything else
-        require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
+	# Include compatibility file before anything else
+		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
 
 	# Load constants and configuration files
-  	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'constant_inc.php' );
+  	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );
 	if ( file_exists( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' ) ) {
 		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'custom_constant_inc.php' );
 	}
