@@ -4,8 +4,11 @@ Mantis ChangeLog
 
  * Enh #3974: Make Mantis issues searchable by Search Engine
  * Enh #4016: Automatic language selection based on browser preferences
+ * Enh #4038: Add icon to sponsorships to attract attention (vboctor)
  * Fix #4005: Signup for new account - invalid username generates crash
  * Fix #4018: Real name field allows potentially dangerous HTML
+ * Fix #4020: Database field 'realname' not found after plain installation (vboctor)
+ * Fix #4040: Sponsorship timestamp is not displayed correctly in sponsorship list (vboctor)
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection..
 
 2004.07.07  -  0.19.0a1
