@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.4 2002-08-25 21:04:59 jfitzell Exp $
+	# $Id: lang_api.php,v 1.5 2002-11-10 22:43:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -37,9 +37,9 @@
 	# Nasty code to select the proper language file
 	if ( !empty( $g_string_cookie_val ) ) {
 		$query = "SELECT DISTINCT language
-				FROM $g_mantis_user_pref_table pref, $g_mantis_user_table user
-				WHERE user.cookie_string='$g_string_cookie_val' AND
-						user.id=pref.user_id";
+				FROM $g_mantis_user_pref_table p, $g_mantis_user_table u
+				WHERE u.cookie_string='$g_string_cookie_val' AND
+						u.id=p.user_id";
 		$result = db_query( $query );
 		$g_active_language = db_result( $result, 0 , 0 );
 		if (empty( $g_active_language )) {
