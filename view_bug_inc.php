@@ -80,7 +80,7 @@
 		<? print_date( $g_normal_date_format, $v_last_updated ) ?>
 	</td>
 </tr>
-<tr height="5" class="white">
+<tr height="5" class="spacer">
 	<td colspan="6">
 		&nbsp;
 	</td>
@@ -135,7 +135,7 @@
 		&nbsp;
 	</td>
 </tr>
-<tr height="5" class="white">
+<tr height="5" class="spacer">
 	<td colspan="6">
 		&nbsp;
 	</td>

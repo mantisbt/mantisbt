@@ -151,7 +151,7 @@
 		</select>
 	</td>
 </tr>
-<tr class="white">
+<tr class="spacer">
 	<td colspan="2">
 		<? echo $s_or_fill_in ?>
 	</td>
@@ -224,8 +224,9 @@
 <? } else { ?>
 <input type="hidden" name="f_assign_id" value="0000000">
 <? } ?>
-<tr height="10" bgcolor="<? echo $g_white_color ?>">
-	<td colspan="2">
+<tr>
+	<td class="spacer" colspan="2">
+		&nbsp;
 	</td>
 </tr>
 <tr class="row-1">

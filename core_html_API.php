@@ -333,8 +333,6 @@
 	# this is the same as print_menu except without the login info
 	# this is set by setting $g_show_footer_menu to 1
 	function print_bottom_menu( $p_menu_file="" ) {
-		global 	$g_primary_border_color, $g_primary_color_light;
-
 		PRINT "<p>";
 		PRINT "<table class=\"menu\" cellspacing=\"0\">";
 		PRINT "<tr>";

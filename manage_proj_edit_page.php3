@@ -153,7 +153,7 @@
 				$t2_category = urlencode( $t_category );
 
 				# alternate row colors
-				$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+				$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 		?>
 		<tr bgcolor="<? echo $t_bgcolor ?>">
 			<td width="75%">
@@ -183,7 +183,7 @@
 				$t2_date_order = urlencode( $t_date_order );
 
 				# alternate row colors
-				$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+				$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 		?>
 		<tr bgcolor="<? echo $t_bgcolor ?>">
 			<td width="75%">
@@ -200,14 +200,14 @@
 <tr>
 <form method="post" action="<? echo $g_manage_project_category_add ?>">
 <input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
-	<td align="center" bgcolor="<? echo $g_white_color ?>">
+	<td class="center">
 		<input type="text" name="f_category" size="32" maxlength="64">
 		<input type="submit" value="<? echo $s_add_category_button ?>">
 	</td>
 </form>
 <form method="post" action="<? echo $g_manage_project_version_add ?>">
 <input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
-	<td align="center" bgcolor="<? echo $g_white_color ?>">
+	<td class="center">
 		<input type="text" name="f_version" size="32" maxlength="64">
 		<input type="submit" value="<? echo $s_add_version_button ?>">
 	</td>

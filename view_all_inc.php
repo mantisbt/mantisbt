@@ -186,7 +186,7 @@
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# alternate row colors
-		$status_color = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+		$status_color = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 
 		# choose color based on status only if not resolved
 		# The code creates the appropriate variable name

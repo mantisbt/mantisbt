@@ -286,7 +286,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="center" colspan="6" bgcolor="<? echo $g_white_color ?>">
+	<td class="center" colspan="6"">
 		<input type="submit" value="<? echo $s_update_information_button ?>">
 	</td>
 </tr>

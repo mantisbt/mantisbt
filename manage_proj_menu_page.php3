@@ -97,7 +97,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="center" colspan="2" bgcolor="<? echo $g_white_color ?>">
+	<td class="center" colspan="2">
 		<input type="submit" value="<? echo $s_add_project_button ?>">
 	</td>
 </tr>
@@ -153,7 +153,7 @@
 		$v_description 	= string_display( $v_description );
 
 		# alternate row colors
-		$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+		$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 ?>
 <tr bgcolor="<? echo $t_bgcolor ?>">
 	<td>

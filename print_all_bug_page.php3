@@ -339,7 +339,7 @@
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# alternate row colors
-		$status_color = alternate_colors( $i, "#ffffff", $g_primary_color_light );
+		$status_color = alternate_colors( $i, "#ffffff", $g_primary_color2 );
 
 		# grab the bugnote count
 		$bugnote_count = get_bugnote_count( $v_id );

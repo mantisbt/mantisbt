@@ -12,9 +12,8 @@
 	# Given the enum string this function prints out the summary for each enum setting
 	# The enum field name is passed in through $p_enum
 	function print_bug_enum_summary( $p_enum_string, $p_enum ) {
-		global 	$g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark,
-				$g_project_cookie_val,
-				$g_summary_pad;
+		global 	$g_mantis_bug_table, $g_primary_color1, $g_primary_color2,
+				$g_project_cookie_val, $g_summary_pad;
 
 		$t_arr = explode( ",", $p_enum_string );
 		$enum_count = count( $t_arr );
@@ -61,7 +60,7 @@
 			$t_enum_count = str_pd( $t_enum_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
@@ -91,14 +90,14 @@
 	# This funciton shows the number of bugs submitted in the last X days
 	# An array of integers representing days is passed in
 	function print_bug_date_summary( $p_date_array ) {
-		global $g_primary_color_light, $g_primary_color_dark;
+		global $g_primary_color1, $g_primary_color2;
 
 		$arr_count = count( $p_date_array );
 		for ($i=0;$i<$arr_count;$i++) {
 			$t_enum_count = get_bug_count_by_date( $p_date_array[$i] );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
@@ -114,7 +113,7 @@
 	# print bug counts by assigned to each developer
 	function print_developer_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
-				$g_primary_color_light, $g_primary_color_dark,
+				$g_primary_color1, $g_primary_color2,
 				$g_project_cookie_val,
 				$g_summary_pad;
 
@@ -173,7 +172,7 @@
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
@@ -189,7 +188,7 @@
 	# print bug counts by reporter id
 	function print_reporter_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
-				$g_primary_color_light, $g_primary_color_dark,
+				$g_primary_color1, $g_primary_color2,
 				$g_reporter_summary_limit,
 				$g_project_cookie_val,
 				$g_summary_pad;
@@ -247,7 +246,7 @@
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";
@@ -264,7 +263,7 @@
 	function print_category_summary() {
 		global 	$g_mantis_bug_table, $g_mantis_user_table,
 				$g_mantis_project_category_table, $g_project_cookie_val,
-				$g_primary_color_light, $g_primary_color_dark,
+				$g_primary_color1, $g_primary_color1,
 				$g_summary_pad;
 
 		$query = "SELECT category
@@ -317,7 +316,7 @@
 			$total_bug_count = str_pd( $total_bug_count, "&nbsp;", $g_summary_pad, STR_PAD_LEFT );
 
 			# alternate row colors
-			$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+			$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 
 			PRINT "<tr align=\"center\" bgcolor=\"$t_bgcolor\">";
 				PRINT "<td width=\"50%\">";

@@ -205,7 +205,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		$u_last_visit    = date( $g_normal_date_format, $u_last_visit );
 
 		# alternate row colors
-		$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+		$t_bgcolor = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 ?>
 <tr bgcolor="<? echo $t_bgcolor ?>">
 	<td>

@@ -63,7 +63,7 @@
 		<? echo $s_summary_title ?>
 	</td>
 </tr>
-<tr valign="top" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td width="50%">
 		<img src="<? echo $g_summary_jpgraph_cumulative_bydate ?>" border="0">
 	</td>
@@ -71,7 +71,7 @@
 		<img src="<? echo $g_summary_jpgraph_bydeveloper ?>" border="0">
 	</td>
 </tr>
-<tr valign="top" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td width="50%">
 		<img src="<? echo $g_summary_jpgraph_byreporter ?>" border="0">
 	</td>
@@ -79,7 +79,7 @@
 		<img src="<? echo $g_summary_jpgraph_byseverity ?>" border="0">
 	</td>
 </tr>
-<tr valign="top" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td width="50%">
 		<img src="<? echo $g_summary_jpgraph_bystatus ?>" border="0">
 	</td>
@@ -87,7 +87,7 @@
 		<img src="<? echo $g_summary_jpgraph_byresolution ?>" border="0">
 	</td>
 </tr>
-<tr valign="top" bgcolor="<? echo $g_white_color ?>">
+<tr valign="top">
 	<td width="50%">
 		<img src="<? echo $g_summary_jpgraph_bycategory ?>" border="0">
 	</td>

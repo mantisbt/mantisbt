@@ -102,10 +102,10 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td align="center" bgcolor="<? echo $g_category_title_color ?>">
+	<td class="category">
 		<? echo $s_reporter ?>
 	</td>
-	<td colspan="5" bgcolor="<? echo $g_primary_color_dark ?>">
+	<td colspan="5">
 		<? print_user_with_subject( $v_reporter_id, $f_id ) ?>
 	</td>
 </tr>
@@ -314,11 +314,6 @@
 				}
 			}
 		?>
-	</td>
-</tr>
-<tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
 	</td>
 </tr>
 <tr align="center">

@@ -41,7 +41,7 @@
 		$v_description 	= string_display( $v_description );
 
 		# alternate row colors
-		$status_color = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
+		$status_color = alternate_colors( $i, $g_primary_color1, $g_primary_color2 );
 ?>
 <tr valign="top" bgcolor="<? echo $status_color ?>">
 	<td>
