@@ -62,6 +62,14 @@ Mantis ChangeLog
 - 0004222: [sql] Should mantis_project_category_table.user_id be UNSIGNED? (vboctor)
 - New Config: main_menu_custom_options (default empty) - Allow addition of custom menu options to main menu (vboctor)
 - New Config: show_realname (default OFF) - show realname in all places instead of username (thraxisp)
+- New Config: max_failed_login_count -	Max. attempts to login using a wrong password before lock the account.
+- New Config:	notify_new_user_created_threshold_min - access level required to be notified when a new user has been created
+- New Config:	password_confirm_hash_magic_string - String used to generate the confirm_hash for the 'lost password' feature
+- New Config:	signup_use_captcha	- use image to validate subscription
+- New Config:	system_font_folder	- absolute path  to folder which contains your TrueType-Font files
+- New Config:	font_per_captcha	- font name used to create the captcha image
+- New Config:	lost_password_feature - enable lost password feature
+- New Config:	max_lost_password_in_progress_count - Max. simultaneous requests of 'lost password'
 - Updated German, French, Brazilian Portuguese, japanese_euc, japanese_sjis, Korean, Russian and japanese_utf8 language.
 - Added Slovene language.
 
