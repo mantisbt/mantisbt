@@ -1,6 +1,10 @@
 Mantis ChangeLog
 
-2005.12.11  -  0.19.2
+2005.01.xx  -  0.19.3
+
+
+
+2004.12.11  -  0.19.2
 
 - 0003113: [security] LDAP authentication failure (vboctor)
 - 0004921: [security] Webmaster email address is exposed to SPAM in html_api.php (vboctor)
