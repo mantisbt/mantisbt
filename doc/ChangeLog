@@ -32,7 +32,7 @@ Mantis ChangeLog
 - Removed config option ($g_show_notices, $g_show_warnings): subsumed into $g_display_errors
 - Removed config option ($g_port): $if requried, g_hostname should supply the port e.g. localhost:3306
 
-Updated Norwegian, Serbian, Chinese Simplified and Estonian translations
+Updated Finnish, Slovak, Norwegian, Serbian, Chinese Simplified and Estonian translations
 
 2004.09.12  -  0.19.0
 
