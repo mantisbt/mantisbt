@@ -16,7 +16,7 @@ Mantis
  * Modified disk uploads to use the file_download.php script.
  * Modified bugnote last_modified query slightly.
  * Updated PHP and MySQL requirements.
- * Updated Norwegian, Russian, Danish translations.
+ * Updated Norwegian, Russian, Danish and Dutch translations.
  * Added die to print_header_redirect().
  * Added russian_koi8 translation.
  * Added HTTP_POST_FILES to core_API.php.

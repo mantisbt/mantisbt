@@ -125,7 +125,7 @@
 
 	# account_prefs_page.php3
 	$s_default_account_preferences_title = "Default account instellingen";
-	$s_default_project = "Default Project";
+	$s_default_project = "Standaardproject";
 	$s_advanced_report = "Uitgebreid rapport";
 	$s_advanced_view = "Uitgebreide informatie";
 	$s_advanced_update = "Uitgebreide update";
@@ -191,7 +191,7 @@
 	$s_close_immediately   = "Sluit direct:";
 
 	# bug_close_page.php3
-	$s_close_bug_title = "Close Bug";
+	$s_close_bug_title = "Sluit bug";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Bug is verwijderd...";
@@ -314,7 +314,7 @@
 	$s_open_and_reported_to_me = "Open en door mij gemeld";
 	$s_newer_news_link = "Nieuwer nieuws";
 	$s_older_news_link = "Ouder nieuws";
-	$s_archives = "Archives";
+	$s_archives = "Archieven";
 
 	# manage_create_new_user.php3
 	$s_created_user_part1 = "Aangemaakte gebruiker";
