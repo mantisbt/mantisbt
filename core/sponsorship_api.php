@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: sponsorship_api.php,v 1.1 2004-05-09 02:24:19 vboctor Exp $
+	# $Id: sponsorship_api.php,v 1.2 2004-05-26 06:25:58 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -190,7 +190,7 @@
 	function sponsorship_format_amount( $amount ) {
 		# @@@ add some currency formating in the future
 		$t_currency = sponsorship_get_currency();
-		return "$t_currency $amount";
+		return "$t_currency&nbsp;$amount";
 	}
 
 	# --------------------
