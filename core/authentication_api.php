@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.12 2002-09-21 20:15:03 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.13 2002-09-21 21:02:51 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -67,7 +67,7 @@
 
 
 	#===================================
-	# Login
+	# Login / Logout
 	#===================================
 
 	# --------------------
@@ -135,6 +135,17 @@
 		return true;
 	}
 
+	# --------------------
+	# Logout the current user and remove any remaining cookies from their browser
+	# Returns true on success, false otherwise
+	function auth_logout() {
+		# delete cookies then redirect to $g_logout_redirect_page
+		auth_clear_cookies();
+
+		helper_clear_pref_cookies();
+
+		return true;
+	}
 
 	#===================================
 	# Password functions

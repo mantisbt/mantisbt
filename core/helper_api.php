@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.18 2002-09-21 10:17:14 jfitzell Exp $
+	# $Id: helper_api.php,v 1.19 2002-09-21 21:02:51 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -214,5 +214,12 @@
 		}
 
 		return $p_path;
+	}
+	# --------------------
+	# Clear all known user preference cookies
+	function helper_clear_pref_cookies() {
+		gpc_clear_cookie( 'project_cookie' );
+		gpc_clear_cookie( 'view_all_cookie' );
+		gpc_clear_cookie( 'manage_cookie' );
 	}
 ?>
