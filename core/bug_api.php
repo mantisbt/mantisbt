@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.24 2002-12-06 09:12:56 vboctor Exp $
+	# $Id: bug_api.php,v 1.25 2002-12-17 11:06:16 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -198,6 +198,29 @@
 			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
 		}
 	}
+
+	# --------------------
+	# check if the given user is the reporter of the bug
+	# return true if the user is the reporter, false otherwise
+	function bug_is_user_reporter( $p_bug_id, $p_user_id ) {
+		if ( bug_get_field( $p_bug_id, 'reporter_id' ) == $p_user_id ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	# --------------------
+	# check if the given user is the handler of the bug
+	# return true if the user is the handler, false otherwise
+	function bug_is_user_handler( $p_bug_id, $p_user_id ) {
+		if ( bug_get_field( $p_bug_id, 'handler_id' ) == $p_user_id ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 
 	#===================================
 	# Creation / Deletion / Updating
