@@ -6,11 +6,11 @@
 
 	# Portuguese Brazil: Felipe Tonioli, tonioli@easyline.com.br  V0.2
 	# -------------------------------------------------
-	# $Revision: 1.30 $
+	# $Revision: 1.31 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 00:22:04 $
+	# $Date: 2002-08-15 08:18:51 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.30 2002-08-15 00:22:04 jlatour Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.31 2002-08-15 08:18:51 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -133,7 +133,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'ERROR: This is a duplicate category.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ERROR: This is a duplicate version.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 

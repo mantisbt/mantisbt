@@ -7,11 +7,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.35 $
+	# $Revision: 1.36 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 00:22:04 $
+	# $Date: 2002-08-15 08:18:51 $
 	#
-	# $Id: strings_polish.txt,v 1.35 2002-08-15 00:22:04 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.36 2002-08-15 08:18:51 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -134,7 +134,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'B£¡D: Podana kategoria ju¿ istnieje.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'B£¡D: Podana wersja ju¿ istnieje.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'B£¡D: Plik o podanej nazwie ju¿ istnieje. Usuñ najpierw istniej±cy plik.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'B£¡D: Wymagane pole nie jest wype³nione. Sprawd¼ wprowadzone dane.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'B£¡D: To konto jest zabezpieczone. Nie masz praw dostêpu do tego konta póki zabezpieczenie jest aktywne.';
 

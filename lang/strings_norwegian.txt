@@ -6,11 +6,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.32 $
+	# $Revision: 1.33 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 00:22:04 $
+	# $Date: 2002-08-15 08:18:51 $
 	#
-	# $Id: strings_norwegian.txt,v 1.32 2002-08-15 00:22:04 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.33 2002-08-15 08:18:51 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -133,7 +133,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'FEIL: Kategorien eksisterer fra før.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'FEIL: Versjonen eksisterer fra før.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEIL: Filen eksisterer fra før. Vennligst slett filen først.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEIL: En påkrevd felt er ikke fylt ut. Vennligst sjekk feltene for manglende input.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEIL: Denne kontoen er beskyttet.  Du kan ikke bruke kontoen inntil beskyttelsen er fjernet.';
 

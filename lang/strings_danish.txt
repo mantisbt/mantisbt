@@ -6,11 +6,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.30 $
+	# $Revision: 1.31 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 00:22:03 $
+	# $Date: 2002-08-15 08:18:49 $
 	#
-	# $Id: strings_danish.txt,v 1.30 2002-08-15 00:22:03 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.31 2002-08-15 08:18:49 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -133,7 +133,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'FEJL: Denne kategori findes allerede.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION]  = 'FEJL: Denne version findes allerede.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE]     = 'FEJL: Denne fil findes allerede. Slet den gamle fil først.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD]        = 'FEJL: Et påkrævert felt er ikke udfyldt.  Ret venligst dette.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEJL: Denne konto er beskyttet.  Du har ikke adgang før kontoens beskyttelse er ophævet.';
 

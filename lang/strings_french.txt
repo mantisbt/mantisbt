@@ -11,11 +11,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French : Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.34 $
+	# $Revision: 1.35 $
 	# $Author: jlatour $
-	# $Date: 2002-08-15 00:22:04 $
+	# $Date: 2002-08-15 08:18:50 $
 	#
-	# $Id: strings_french.txt,v 1.34 2002-08-15 00:22:04 jlatour Exp $
+	# $Id: strings_french.txt,v 1.35 2002-08-15 08:18:50 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -153,7 +153,7 @@
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = 'ERROR: This is a duplicate category.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = 'ERROR: This is a duplicate version.';
 	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: This is a duplicate file.  Please delete the file first.';
-	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: This is a project name.';
+	$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 
