@@ -6,12 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_upload_inc.php,v 1.28 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: bug_file_upload_inc.php,v 1.29 2003-01-23 23:02:54 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the bug file upload form
 	# It POSTs to bug_file_add.php
+?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'file_api.php' );
 ?>
 <?php
 	# check if we can allow the upload... bail out if we can't

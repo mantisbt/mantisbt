@@ -6,13 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.35 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: bug_file_add.php,v 1.36 2003-01-23 23:02:53 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Add file to a bug and then view the bug
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'file_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );

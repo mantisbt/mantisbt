@@ -6,13 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.44 2003-01-09 03:59:16 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.45 2003-01-23 23:02:57 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Show the advanced update bug options
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'custom_field_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
@@ -118,8 +124,8 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 
@@ -148,8 +154,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 </tr>
 
@@ -245,8 +251,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 
 	<!-- OS Version -->
@@ -273,8 +279,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 
 	<!-- Product Version -->
@@ -293,8 +299,8 @@
 <tr <?php echo helper_alternate_class() ?>>
 
 	<!-- spacer -->
-	<td colspan="4">
-		&nbsp;
+	<td colspan="4">&nbsp;
+		
 	</td>
 
 	<!-- Build -->
@@ -310,8 +316,8 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 
@@ -363,8 +369,8 @@
 <!-- Custom Fields -->
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 <?php
@@ -392,8 +398,8 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 

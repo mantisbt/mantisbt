@@ -6,13 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.23 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: account_prefs_update.php,v 1.24 2003-01-23 23:02:47 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Updates prefs then redirect to account_prefs_page.php3
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php 
+	require_once( 'core.php' );
+		
+	require_once( $g_core_path . 'user_pref_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_user_id					= gpc_get_int( 'user_id' );

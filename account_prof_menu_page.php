@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.23 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: account_prof_menu_page.php,v 1.24 2003-01-23 23:02:49 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -15,7 +15,11 @@
 
 	# Users can also manage their profiles
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( config_get( 'add_profile_threshold' ) );

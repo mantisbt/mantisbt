@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.27 2003-01-18 02:09:47 jfitzell Exp $
+	# $Id: bug_actiongroup_page.php,v 1.28 2003-01-23 23:02:51 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,23 +25,26 @@
 
 	$t_finished = false;
 	switch ( $f_action )  {
-		case 'CLOSE' :
 		# Use a simple confirmation page, if close or delete...
+		case 'CLOSE' :
 			$t_finished 			= true;
 			$t_question_title 		= lang_get( 'close_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'close_group_bugs_button' );
 			break;
+
 		case 'DELETE' :
 			$t_finished 			= true;
 			$t_question_title		= lang_get( 'delete_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'delete_group_bugs_button' );
 			break;
+
 		# ...else we define the variables used in the form
 		case 'MOVE' :
 			$t_question_title 		= lang_get( 'move_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'move_group_bugs_button' );
 			$t_form					= 'project_id';
 			break;
+
 		case 'ASSIGN' :
 			$t_question_title 		= lang_get( 'assign_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'assign_group_bugs_button' );
@@ -54,12 +57,14 @@
 			$t_form 				= 'resolution';
 			$t_request 				= 'resolution'; # the "request" vars allow to display the adequate list
 			break;
+
 		case 'UP_PRIOR' :
 			$t_question_title 		= lang_get( 'priority_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'priority_group_bugs_button' );
 			$t_form 				= 'priority';
 			$t_request 				= 'priority';
 			break;
+
 		case 'UP_STATUS' :
 			$t_question_title 		= lang_get( 'status_bugs_conf_msg' );
 			$t_button_title 		= lang_get( 'status_group_bugs_button' );

@@ -6,14 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_update.php,v 1.20 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: account_prof_update.php,v 1.21 2003-01-23 23:02:50 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This page updates the users profile information then redirects to
 	# account_prof_menu_page.php
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'profile_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_profile_id	= gpc_get_int( 'profile_id' );

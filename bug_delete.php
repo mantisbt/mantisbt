@@ -6,13 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_delete.php,v 1.28 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: bug_delete.php,v 1.29 2003-01-23 23:02:52 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Deletes the bug and re-directs to view_all_bug_page.php 
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );

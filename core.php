@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.8 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: core.php,v 1.9 2003-01-23 23:03:03 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -48,7 +48,7 @@
 
 
 	# Load rest of core in seperate directory.
-	require_once( $g_core_path . 'API.php');
+	require_once( $g_core_path . 'API.php' );
 
 	chdir( $t_cwd );
 ?>

@@ -6,13 +6,20 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.14 2003-01-09 03:59:16 vboctor Exp $
+	# $Id: bug_report.php,v 1.15 2003-01-23 23:02:55 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This page stores the reported bug
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'string_api.php' );
+	require_once( $g_core_path . 'file_api.php' );
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'custom_field_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	# this page is invalid for the 'All Project' selection

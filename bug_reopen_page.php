@@ -6,10 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen_page.php,v 1.22 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: bug_reopen_page.php,v 1.23 2003-01-23 23:02:55 jlatour Exp $
 	# --------------------------------------------------------
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );

@@ -6,13 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.45 2003-01-09 03:59:16 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.46 2003-01-23 23:02:58 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Show the simple update bug options
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'custom_field_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
@@ -121,8 +127,8 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 
@@ -151,8 +157,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 </tr>
 
@@ -194,8 +200,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 
 </tr>
@@ -222,8 +228,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 
 </tr>
@@ -231,8 +237,8 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 
@@ -273,8 +279,8 @@
 <!-- Custom Fields -->
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 <?php
@@ -302,8 +308,8 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="6">
-		&nbsp;
+	<td class="spacer" colspan="6">&nbsp;
+		
 	</td>
 </tr>
 

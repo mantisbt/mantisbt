@@ -6,8 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.19 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: account_prefs_inc.php,v 1.20 2003-01-23 23:02:46 jlatour Exp $
 	# --------------------------------------------------------
+	
+	require_once( 'core.php' );
 
 	function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
 		if ( null === $p_user_id ) {

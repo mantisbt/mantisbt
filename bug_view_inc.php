@@ -6,12 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_inc.php,v 1.6 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: bug_view_inc.php,v 1.7 2003-01-23 23:03:00 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the bug information
 	# $f_bug_id MUST be specified before the file is included
+?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
 ?>
 <?php
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
@@ -110,8 +115,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 
 </tr>
@@ -146,8 +151,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 </tr>
 
@@ -171,8 +176,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 
 </tr>

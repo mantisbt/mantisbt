@@ -6,13 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_add.php,v 1.18 2002-12-29 10:26:07 jfitzell Exp $
+	# $Id: account_prof_add.php,v 1.19 2003-01-23 23:02:48 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This file adds a new profile and redirects to account_proj_menu_page.php
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php 
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'profile_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( config_get( 'add_profile_threshold' ) );

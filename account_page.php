@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.33 2002-12-30 09:44:43 jfitzell Exp $
+	# $Id: account_page.php,v 1.34 2003-01-23 23:02:45 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -31,6 +31,8 @@
 	#	- The user's account must not be protected
 
 	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
 
 	#============ Parameters ============
 	# (none)
@@ -185,8 +187,8 @@
 
 	<!-- BUTTONS -->
 	<tr>
-		<td>
-			&nbsp;
+		<td>&nbsp;
+			
 		</td>
 		<!-- Update Button -->
 		<td>

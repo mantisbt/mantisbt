@@ -6,10 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.24 2003-01-09 03:59:16 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.25 2003-01-23 23:03:03 jlatour Exp $
 	# --------------------------------------------------------
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'custom_field_api.php' );
+	require_once( $g_core_path . 'compress_api.php' );
+	require_once( $g_core_path . 'current_user_api.php' );
+	require_once( $g_core_path . 'file_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
@@ -160,8 +169,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 
 </tr>
@@ -197,8 +206,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 </tr>
 
@@ -222,8 +231,8 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">
-		&nbsp;
+	<td colspan="2">&nbsp;
+		
 	</td>
 
 </tr>

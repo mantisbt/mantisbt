@@ -6,13 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.15 2003-01-09 03:59:16 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.16 2003-01-23 23:02:56 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This file POSTs data to report_bug.php
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'file_api.php' );
+	require_once( $g_core_path . 'custom_field_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	# this page is invalid for the 'All Project' selection
@@ -118,8 +123,8 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="2">
-		&nbsp;
+	<td class="spacer" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 
@@ -166,8 +171,8 @@
 	if ( count( $t_related_custom_field_ids ) > 0 ) {
 ?>
 <tr>
-	<td class="spacer" colspan="2">
-		&nbsp;
+	<td class="spacer" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <?php
@@ -194,8 +199,8 @@
 
 <!-- spacer -->
 <tr>
-	<td class="spacer" colspan="2">
-		&nbsp;
+	<td class="spacer" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 

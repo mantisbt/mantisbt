@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_reset.php,v 1.18 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: account_prefs_reset.php,v 1.19 2003-01-23 23:02:47 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -24,6 +24,8 @@
 	#	- User must be authenticated
 
 	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'user_pref_api.php' );
 
 	#============ Parameters ============
 	$f_redirect_url	= gpc_get_string( 'redirect_url', 'account_prefs_page.php' );

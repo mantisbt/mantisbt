@@ -6,14 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_make_default.php,v 1.19 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: account_prof_make_default.php,v 1.20 2003-01-23 23:02:49 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Make the specified profile the default
 	# Redirect to account_prof_menu_page.php
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_profile_id	= gpc_get_int( 'profile_id' );

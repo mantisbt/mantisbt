@@ -6,13 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.18 2002-12-30 09:44:44 jfitzell Exp $
+	# $Id: bug_actiongroup.php,v 1.19 2003-01-23 23:02:50 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This page allows actions to be performed an an array of bugs
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_action	= gpc_get_string( 'action' );
