@@ -369,9 +369,17 @@
 				header( "Location: $g_logout_page" );
 			}
 
+			### grab creation date to protect from change
+			### Suspect a bug in mysql.. not sure.  Same deal for bug updates
+			$query = "SELECT date_created
+					FROM $g_mantis_user_table
+					WHERE cookie_string='$g_string_cookie_val'";
+			$result = mysql_query( $query );
+			$t_date_created = mysql_result( $result, 0 );
+
 			### update last_visit date
 			$query = "UPDATE $g_mantis_user_table
-					SET last_visit=NOW()
+					SET last_visit=NOW(), date_created='$t_date_created'
 					WHERE cookie_string='$g_string_cookie_val'";
 			$result = mysql_query( $query );
 			db_mysql_close();

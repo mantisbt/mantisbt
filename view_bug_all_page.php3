@@ -90,7 +90,7 @@
 			<? print_list( "status", $f_show_status ) ?>
 		</select>
 		Show: <input type=text name=f_limit_view size=3 maxlength=7 value="<? echo $f_limit_view ?>">
-		Changed: <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
+		Changed(hrs): <input type=text name=f_show_changed size=3 maxlength=7 value="<? echo $f_show_changed ?>">
 		<input type=submit value=" Filter ">
 		</td>
 		</form>
