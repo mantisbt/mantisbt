@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.20 2003-02-19 01:37:21 vboctor Exp $
+	# $Id: error_api.php,v 1.21 2003-03-05 11:51:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -160,9 +160,24 @@
 	# helper function to print out the variable context
 	function error_print_context( $p_context ) {
 		echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
-		while ( list( $t_var, $t_val ) = each( $p_context ) ) {
-			echo "<tr><td>$t_var</td><td>" . htmlentities( (string)$t_val ) . '</td><td>' . gettype( $t_val ) . "</td></tr>\n";
+
+		# print normal variables
+		foreach ( $p_context as $t_var => $t_val ) {
+			if ( !is_array( $t_val ) && !is_object( $t_val ) ) {
+				echo "<tr><td>$t_var</td><td>" . htmlentities( (string)$t_val ) . '</td><td>' . gettype( $t_val ) . "</td></tr>\n";
+			}
 		}
+
+		# print arrays
+		foreach ( $p_context as $t_var => $t_val ) {
+			if ( is_array( $t_val ) && ( $t_var != 'GLOBALS' ) ) {
+			    echo "<tr><td colspan=\"3\" align=\"left\"><br /><strong>$t_var</strong></td></tr>";
+				echo "<tr><td colspan=\"3\">";
+				error_print_context( $t_val );
+				echo "</td></tr>";
+			}
+		}
+
 		echo '</table>';
 	}
 
@@ -195,7 +210,7 @@
 
 			foreach ( $t_stack as $t_frame ) {
 				echo '<tr ' . helper_alternate_class() . '">';
-				echo '<td>' . htmlentities( $t_frame[file] ) . "</td><td>$t_frame[line]</td><td>$t_frame[function]</td>";
+				echo '<td>' . htmlentities( $t_frame['file'] ) . "</td><td>$t_frame[line]</td><td>$t_frame[function]</td>";
 
 				$t_args = array();
 				if ( isset( $t_frame['args'] ) ) {

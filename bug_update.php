@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.55 2003-02-20 07:30:04 jfitzell Exp $
+	# $Id: bug_update.php,v 1.56 2003-03-05 11:51:15 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,8 +66,12 @@
 	bug_update( $f_bug_id, $t_bug_data, true );
 
 	$t_related_custom_field_ids = custom_field_get_linked_ids( helper_get_current_project() );
-
 	foreach( $t_related_custom_field_ids as $t_id ) {
+		# Do not set custom field value if user has no write access.
+		if( !custom_field_has_write_access( $t_id, $f_bug_id ) ) {
+			continue;
+		}
+
 		$t_def = custom_field_get_definition( $t_id );
 		if ( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_string( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
