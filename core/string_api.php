@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.12 2002-10-20 23:59:49 jfitzell Exp $
+	# $Id: string_api.php,v 1.13 2002-11-10 23:29:02 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -133,6 +133,7 @@
 	# default is the # symbol.  You may substitue any pattern you want.
 	# if $p_include_anchor is true, include an <a href="..."> tag,
 	#  otherwise, just insert the URL as text
+	# The symbol must be at the beginning of the string or preceeded by whitespace
 	function string_process_bug_link( $p_string, $p_include_anchor=true ) {
 		$t_tag = config_get( 'bug_link_tag' );
 		$t_path = config_get( 'path' );
@@ -144,12 +145,12 @@
 		}
 
 		if ( $p_include_anchor ) {
-			$t_replace_with = '<a href="'.$t_page_name.'?f_bug_id=\\1">#\\1</a>';
+			$t_replace_with = ' <a href="'.$t_page_name.'?f_bug_id=\\2">#\\2</a>';
 		} else {
-			$t_replace_with = $t_path.$t_page_name.'?f_bug_id=\\1';
+			$t_replace_with = $t_path.$t_page_name.'?f_bug_id=\\2';
 		}
 		
-		return preg_replace("/$t_tag([0-9]+)/",
+		return preg_replace('/(\W|^)' . $t_tag . '([0-9]+)/',
 								$t_replace_with,
 								$p_string);
 	}
