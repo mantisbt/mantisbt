@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.101 2004-09-23 21:22:12 thraxisp Exp $
+	# $Id: print_api.php,v 1.102 2004-09-23 22:04:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -601,7 +601,12 @@
 			$t_arr  = explode_enum_string( $t_config_var_value );
 		} else {
 			# workflow defined - find allowed states
-			$t_arr  = explode_enum_string( $t_enum_workflow[$p_current_value] );
+			if ( isset( $t_enum_workflow[$p_current_value] ) ) {
+				$t_arr  = explode_enum_string( $t_enum_workflow[$p_current_value] );
+			}else{
+				# workflow was not set for this status, this shouldn't happen
+				$t_arr  = explode_enum_string( $t_config_var_value );
+			}
 		}
 
 		$t_enum_count = count( $t_arr );
@@ -609,7 +614,8 @@
 
 		for ( $i = 0; $i < $t_enum_count; $i++ ) {
 			$t_elem  = explode_enum_arr( $t_arr[$i] );
-			if ( $p_user_auth >= access_get_status_threshold( $t_elem[0] ) ) {
+			if ( ( $p_user_auth >= access_get_status_threshold( $t_elem[0] ) ) &&
+						( ! ( ( false == $p_show_current ) && ( $p_current_value == $t_elem[0] ) ) ) ) {
 				$t_enum_list[$t_elem[0]] = get_enum_element( 'status', $t_elem[0] );
 			}
 		} # end for
