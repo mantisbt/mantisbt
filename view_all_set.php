@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.27 2004-04-03 20:18:42 narcissus Exp $
+	# $Id: view_all_set.php,v 1.28 2004-04-14 19:26:46 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -228,6 +228,24 @@
 
 				break;
 			}
+		# Generalise the filter
+		case '4':
+				$t_setting_arr['show_category']	= "any";
+				$t_setting_arr['reporter_id'] 	= "any";
+				$t_setting_arr['handler_id'] 	= "any";
+				$t_setting_arr['show_build'] 	= "any";
+				$t_setting_arr['show_version'] 	= "any";
+
+				$t_custom_fields 		= custom_field_get_ids();
+				$t_custom_fields_data 	= array();
+				if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+					foreach( $t_custom_fields as $t_cfid ) {
+						$t_custom_fields_data[$t_cfid] =  "any";
+					}
+				}
+				$t_setting_arr['custom_fields'] = $t_custom_fields_data;
+
+				break;
 			
 		# does nothing. catch all case
 		default:
