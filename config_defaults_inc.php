@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.222 2004-11-16 20:47:05 prichards Exp $
+	# $Id: config_defaults_inc.php,v 1.223 2004-11-19 12:54:13 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1039,6 +1039,10 @@
 	# letter) if you have a lot of users in the system and loading
 	# the manage users page takes a long time.
 	$g_default_manage_user_prefix = 'ALL';
+
+	# --- CSV Export ---------------
+	# Set the csv separator
+	$g_csv_separator = ',';
 
 	################################
 	# Mantis Look and Feel Variables

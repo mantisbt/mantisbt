@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.4 2004-07-16 23:03:09 vboctor Exp $
+	# $Id: csv_api.php,v 1.5 2004-11-19 12:54:13 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CSV API ###
@@ -20,7 +20,7 @@
 	# --------------------
 	# get the csv file separator, can be moved to config in the future
 	function csv_get_separator() {
-		return ',';
+		return config_get( 'csv_separator' );
 	}
 
 	# --------------------

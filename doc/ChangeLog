@@ -1,7 +1,7 @@
 Mantis ChangeLog
 
 2005.01.xx  -  0.19.2
-
+- New Config: $g_csv_separator - specify separated to be used in exported csv files (vboctor)
 
 
 2004.11.06  -  0.19.1
