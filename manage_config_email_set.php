@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_set.php,v 1.3 2005-03-19 23:00:22 thraxisp Exp $
+	# $Id: manage_config_email_set.php,v 1.4 2005-03-21 23:19:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -22,7 +22,6 @@
 
 	$f_flags			= gpc_get( 'flag' );
 	$f_thresholds		= gpc_get( 'flag_threshold' );
-	$f_default_access	= gpc_get_int( 'notify_defaults_access' );
 	$f_actions_access	= gpc_get_int( 'notify_actions_access' );
 
 	html_page_top1( lang_get( 'manage_email_config' ) );
@@ -97,7 +96,7 @@
 		$t_default_flags['threshold_min'] = $t_default_min;
 		$t_default_flags['threshold_max'] = $t_default_max;
 
-		config_set( 'default_notify_flags', $t_default_flags, NO_USER, $t_project, $f_default_access );
+		config_set( 'default_notify_flags', $t_default_flags, NO_USER, $t_project, $f_actions_access );
 	} else {
 		$t_default_flags = config_get( 'default_notify_flags' );
 	}

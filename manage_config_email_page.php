@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_page.php,v 1.3 2005-03-20 14:34:03 thraxisp Exp $
+	# $Id: manage_config_email_page.php,v 1.4 2005-03-21 23:19:04 thraxisp Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -55,8 +55,7 @@
 		global $t_project;
 		$t_access_levels = explode_enum_string( config_get( 'access_levels_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan=' . ( count( $t_access_levels ) + 7 ) . '>' . strtoupper( $p_section_name )
-			. '<br />' . lang_get( 'project_name' ) . ': ' . project_get_name( $t_project ) . '</td></tr>' . "\n";
+		echo '<tr><td class="form-title" colspan=' . ( count( $t_access_levels ) + 7 ) . '>' . strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%">Message</td>';
 		echo'<td class="form-title" style="text-align:center">&nbsp;' . lang_get( 'reporter' ) . '&nbsp;</td>';
 		echo '<td class="form-title" style="text-align:center">&nbsp;' . lang_get( 'assigned_to' ) . '&nbsp;</td>';
@@ -126,19 +125,10 @@
 		get_section_end_for_email();
 
 		if ( $t_can_change_flags  || $t_can_change_defaults ) {
-			if ( $t_can_change_defaults ) {
-				echo '<p>' . lang_get( 'notify_defaults_change_access' ) . ':';
-				echo '<select name="notify_defaults_access">';
-				print_enum_string_option_list( 'access_levels', config_get_access( 'default_notify_flags' ) );
-				echo '</select> </p>';
-			}
-
-			if ( $t_can_change_flags ) {
-				echo '<p>' . lang_get( 'notify_actions_change_access' ) . ':';
-				echo '<select name="notify_actions_access">';
-				print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
-				echo '</select> </p>';
-			}
+			echo '<p>' . lang_get( 'notify_actions_change_access' ) . ':';
+			echo '<select name="notify_actions_access">';
+			print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
+			echo '</select> </p>';
 
 			echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
 
