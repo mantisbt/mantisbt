@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.8 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: summary_api.php,v 1.9 2003-02-11 09:04:56 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -212,7 +212,7 @@
 			$row = db_fetch_array( $result );
 
 			$v_id = $row['reporter_id'];
-			$v_username = user_get_field( $v_id, 'username' );
+			$v_username = user_get_name( $v_id );
 
 			$t_res_val = RESOLVED;
 			$t_clo_val = CLOSED;
