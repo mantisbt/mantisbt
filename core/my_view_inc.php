@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.5 2004-12-17 02:42:10 thraxisp Exp $
+	# $Id: my_view_inc.php,v 1.6 2004-12-18 01:44:26 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -168,7 +168,7 @@
 
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
 
-		$v_summary = string_display_links( $v_summary );
+		$t_summary = string_attribute( $v_summary );
 		$t_last_updated = date( config_get( 'normal_date_format' ), $v_last_updated );
 
 		# choose color based on status
@@ -223,7 +223,7 @@
 	<td class="left" valign="top" width="100%">
 		<span class="small">
 		<?php
-			echo string_attribute( $v_summary );
+			echo $t_summary;
 		?>
 		<br />
 		<?php

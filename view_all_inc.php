@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.149 2004-12-17 02:42:08 thraxisp Exp $
+	# $Id: view_all_inc.php,v 1.150 2004-12-18 01:44:26 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -195,7 +195,7 @@
 	
 			extract( $p_rows[$i], EXTR_PREFIX_ALL, 'v' );
 	
-			$v_summary = string_display_links( $v_summary );
+			$t_summary = string_attribute( $v_summary );
 			$t_last_updated = date( config_get( 'short_date_format' ), $v_last_updated );
 	
 			# choose color based on status
@@ -351,7 +351,7 @@
 		<td class="left"> <?php 
 			# -- Summary --
 	
-			echo string_attribute( $v_summary );
+			echo $t_summary;
 			if ( VS_PRIVATE == $v_view_state ) {
 				printf( ' <img src="%s" alt="(%s)" title="%s" />'
 					, $t_icon_path . 'protected.gif'
