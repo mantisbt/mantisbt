@@ -31,41 +31,35 @@
 <? ### Signup form BEGIN ?>
 <p>
 <div align="center">
-<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width50" cellspacing="0">
+<form method="post" action="<? echo $g_signup ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table cols="2" width="100%">
-	<form method="post" action="<? echo $g_signup ?>">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_signup_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dark ?>>
-		<td width="25%">
-			<? echo $s_username ?>:
-		</td>
-		<td width="75%">
-			<input type="text" name="f_username" size="32" maxlength="32">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_email ?>:
-		</td>
-		<td>
-			<input type="text" name="f_email" size="32" maxlength="64">
-		</td>
-	</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<input type="submit" value="<? echo $s_signup_button ?>">
-		</td>
-	</tr>
-	</form>
-	</table>
+	<td class="form-title" colspan="2">
+		<? echo $s_signup_title ?>
 	</td>
 </tr>
+<tr class="row-1">
+	<td class="category" width="25%">
+		<? echo $s_username ?>:
+	</td>
+	<td width="75%">
+		<input type="text" name="f_username" size="32" maxlength="32">
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_email ?>:
+	</td>
+	<td>
+		<input type="text" name="f_email" size="32" maxlength="64">
+	</td>
+</tr>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<? echo $s_signup_button ?>">
+	</td>
+</tr>
+</form>
 </table>
 </div>
 <? ### Signup form END ?>
