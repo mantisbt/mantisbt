@@ -9,11 +9,11 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.66 $
+	# $Revision: 1.67 $
 	# $Author: vboctor $
-	# $Date: 2004-07-09 11:32:54 $
+	# $Date: 2004-07-09 11:39:45 $
 	#
-	# $Id: strings_italian.txt,v 1.66 2004-07-09 11:32:54 vboctor Exp $
+	# $Id: strings_italian.txt,v 1.67 2004-07-09 11:39:45 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -950,6 +950,7 @@ $s_hide_resolved = "Nascondi risolte";
 $s_and_above = "e sopra";
 $s_advanced_filters = "Filtro avanzato";
 $s_simple_filters = "Filtro semplice";
+$s_monitored_by = 'Controllato da (Monitored By)';
 
 $s_attachments = "Allegati";
 $s_attachment_alt = "A";
