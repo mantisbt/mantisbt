@@ -340,6 +340,8 @@
 
 <p>
 <? include( $g_bugnote_include_file ) ?>
+<p>
+<? include( $g_bugnote_add_include_file ) ?>
 
 <? print_footer() ?>
 <? print_body_bottom() ?>

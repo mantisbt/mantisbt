@@ -15,6 +15,11 @@ To Do:
  * Make priority useful
  * Force some sort of dialog when closing a bug (resolved)
 
+12.XX.2000	-	1.0.0
+
+ * Added summary by date
+ * Fixed bug with Bugnote Add button showing up i the wrong places
+
 12.06.2000	-	0.10.2
 
  * Fixed Reporter Field on update page
