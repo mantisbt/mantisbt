@@ -255,70 +255,78 @@
 </div>
 
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
-<br />
-<div align="center">
-<table class="width75" cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'custom_fields_setup' ) ?>
-	</td>
-</tr>
-<tr class="row-category">
-	<td width="100%">
-		<?php echo lang_get( 'custom_fields' ) ?>
-	</td>
-</tr>
-<tr>
-	<td width="100%">
-		<table width="100%" cellspacing="1">
-		<?php
-			$t_custom_fields = custom_field_get_linked_ids( $f_project_id );
-
-			foreach( $t_custom_fields as $t_field_id ) {
-				$t_desc = custom_field_get_definition( $t_field_id );
-		?>
-		<tr <?php echo helper_alternate_class() ?>>
-			<td width="50%">
-				<?php echo $t_desc['name'] ?>
-			</td>
-			<td width="25%">
-				<?php echo $t_field_id ?>
-			</td>
-			<td class="center" width="25%">
-				<?php
-					print_bracket_link( "manage_custom_field_edit_page.php?field_id=$t_field_id", lang_get( 'edit_link' ) );
-					echo '&nbsp;';
-					print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$t_field_id&amp;project_id=$f_project_id", lang_get( 'remove_link' ) );
-				?>
-			</td>
-		</tr>
-		<?php 	} # end for loop ?>
-		</table>
-	</td>
-</tr>
-<tr>
-	<td class="left">
-		<form method="post" action="manage_proj_custom_field_add_existing.php">
-		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-		<select name="field_id">
+<?php
+if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_threshold' ) ) ) {
+?>
+	<br />
+	<div align="center">
+	<table class="width75" cellspacing="1">
+	<tr>
+		<td class="form-title" colspan="2">
+			<?php echo lang_get( 'custom_fields_setup' ) ?>
+		</td>
+	</tr>
+	<tr class="row-category">
+		<td width="100%">
+			<?php echo lang_get( 'custom_fields' ) ?>
+		</td>
+	</tr>
+	<tr>
+		<td width="100%">
+			<table width="100%" cellspacing="1">
 			<?php
-				$t_custom_fields = custom_field_get_ids();
+				$t_custom_fields = custom_field_get_linked_ids( $f_project_id );
 
-				foreach( $t_custom_fields as $t_field_id )
-				{
-					if( !custom_field_is_linked( $t_field_id, $f_project_id ) ) {
-						$t_desc = custom_field_get_definition( $t_field_id );
-						echo "<option value=\"$t_field_id\">" . $t_desc['name'] . '</option>' ;
-					}
-				}
+				foreach( $t_custom_fields as $t_field_id ) {
+					$t_desc = custom_field_get_definition( $t_field_id );
 			?>
-		</select>
-		<input type="submit" value="<?php echo lang_get( 'add_existing_custom_field' ) ?>" />
-		</form>
-	</td>
-</tr>
-</table>
-</div>
+			<tr <?php echo helper_alternate_class() ?>>
+				<td width="50%">
+					<?php echo $t_desc['name'] ?>
+				</td>
+				<td width="25%">
+					<?php echo $t_field_id ?>
+				</td>
+				<td class="center" width="25%">
+					<?php
+						if ( access_level_check_greater_or_equal( config_get( 'manage_custom_fields' ) ) ) {
+							print_bracket_link( "manage_custom_field_edit_page.php?field_id=$t_field_id&amp;return=manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'edit_link' ) );
+							echo '&nbsp;';
+						}
+						print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$t_field_id&amp;project_id=$f_project_id", lang_get( 'remove_link' ) );
+					?>
+				</td>
+			</tr>
+			<?php 	} # end for loop ?>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="left">
+			<form method="post" action="manage_proj_custom_field_add_existing.php">
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<select name="field_id">
+				<?php
+					$t_custom_fields = custom_field_get_ids();
+
+					foreach( $t_custom_fields as $t_field_id )
+					{
+						if( !custom_field_is_linked( $t_field_id, $f_project_id ) ) {
+							$t_desc = custom_field_get_definition( $t_field_id );
+							echo "<option value=\"$t_field_id\">" . $t_desc['name'] . '</option>' ;
+						}
+					}
+				?>
+			</select>
+			<input type="submit" value="<?php echo lang_get( 'add_existing_custom_field' ) ?>" />
+			</form>
+		</td>
+	</tr>
+	</table>
+	</div>
+<?php
+}
+?>
 <?php } // ON = config_get( 'use_experimental_custom_fields' ) ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

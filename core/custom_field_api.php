@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.13 2003-01-12 06:23:12 jfitzell Exp $
+	# $Id: custom_field_api.php,v 1.14 2003-01-16 10:36:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -247,6 +247,10 @@ CREATE TABLE mantis_custom_field_project_table (
 	# return the ID of the new definition
 	function custom_field_create( $p_name ) {
 		$c_name = db_prepare_string( $p_name );
+
+		if ( is_blank( $p_name ) ) {
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
 
 		custom_field_ensure_name_unique( $p_name );
 

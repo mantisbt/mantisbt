@@ -10,42 +10,36 @@
 <?php
 	check_access( config_get( 'manage_custom_fields' ) );
 
-	$f_name			= gpc_get_string( 'name' );
+	$f_name	= gpc_get_string( 'name' );
 
-	$t_names_array = explode( '|', $f_name );
-	$t_duplicate = false;
-
-	$t_count_added = 0;
-	foreach ( $t_names_array as $t_name ) {
-		$t_name = trim( $t_name );
-		if ( is_blank( $t_name ) ) {
-			continue;
-		}
-
-		if ( custom_field_is_name_unique( $t_name ) ) {
-			$t_count_added++;
-			custom_field_create( $t_name );
-		} else {
-			$t_duplicate = true;
-		}
-	}
-
-	$t_redirect_url = 'manage_custom_field_page.php';
-?>
-<?php print_page_top1() ?>
-<?php
-		print_meta_redirect( $t_redirect_url );
-?>
-<?php print_page_top2() ?>
-
-<br />
-<div align="center">
-<?php
-	if ( $t_duplicate ) {		# DUPLICATE
-		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] . '<br />';
-	} else if ( 0 == $t_count_added ) {
+	$f_name = trim( $f_name );
+	if ( is_blank( $f_name ) ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
+
+	if ( ! custom_field_is_name_unique( $f_name ) ) {
+		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
+	}
+
+	$t_field_id = custom_field_create( $f_name );
+
+	if ( ON == config_get( 'custom_field_edit_after_create' ) ) {
+		$t_redirect_url = "manage_custom_field_edit_page.php?field_id=$t_field_id";
+	} else {
+		$t_redirect_url = 'manage_custom_field_page.php';
+	}
+?>
+<?php
+	print_page_top1();
+	print_meta_redirect( $t_redirect_url );
+	print_page_top2();
+?>
+
+<br />
+
+<div align="center">
+<?php
+	echo lang_get( 'operation_successful' ) . '<br />';
 
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 ?>

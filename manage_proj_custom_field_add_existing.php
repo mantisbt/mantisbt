@@ -8,7 +8,11 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	# We should check both since we are in the project section and an
+	#  admin might raise the first threshold and not realize they need
+	#  to raise the second
 	check_access( config_get( 'manage_project_threshold' ) );
+	check_access( config_get( 'custom_field_link_threshold' ) );
 
 	$f_field_id		= gpc_get_int( 'field_id' );
 	$f_project_id	= gpc_get_int( 'project_id' );

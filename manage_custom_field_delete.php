@@ -10,33 +10,32 @@
 <?php
 	check_access( config_get( 'manage_custom_fields' ) );
 
-	$f_field_id		= gpc_get_int( 'field_id' );
+	$f_field_id	= gpc_get_int( 'field_id' );
+	$f_return	= gpc_get_string( 'return', 'manage_custom_field_page.php' );
 
-	if( 0 == count( custom_field_get_project_ids( $f_field_id ) ) ) {
-		$result = custom_field_destroy( $f_field_id );
+	if( 0 < count( custom_field_get_project_ids( $f_field_id ) ) ) {
+		helper_ensure_confirmed( lang_get( 'confirm_used_custom_field_deletion' ),
+								 lang_get( 'field_delete_button' ) );
 	} else {
-		$result = false;
+		helper_ensure_confirmed( lang_get( 'confirm_custom_field_deletion' ),
+								 lang_get( 'field_delete_button' ) );
 	}
 
-	$t_redirect_url = 'manage_custom_field_page.php';
+	custom_field_destroy( $f_field_id );
+
+	print_page_top1();
+	print_meta_redirect( $f_return );
+	print_page_top2();
 ?>
-<?php print_page_top1() ?>
-<?php
-	if ( $result ) {
-		print_meta_redirect( $t_redirect_url );
-	}
-?>
-<?php print_page_top2() ?>
 
 <br />
+
 <div align="center">
 <?php
-	if ( $result ) {				# SUCCESS
-		echo lang_get( 'operation_successful' ) . '<br />';
-	} else {
-		echo $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] . '<br />';
-	}
+	echo lang_get( 'operation_successful' ) . '<br />';
 
-	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	print_bracket_link( $f_return, lang_get( 'proceed' ) );
 ?>
 </div>
+
+<?php print_page_bot1( __FILE__ ) ?>

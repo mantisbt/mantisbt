@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.104 $
+	# $Revision: 1.105 $
 	# $Author: jfitzell $
-	# $Date: 2003-01-12 07:40:20 $
+	# $Date: 2003-01-16 10:36:20 $
 	#
-	# $Id: strings_english.txt,v 1.104 2003-01-12 07:40:20 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.105 2003-01-16 10:36:20 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -806,6 +806,7 @@
 	$s_custom_fields = 'Fields';
 	$s_custom_fields_setup = 'Custom Fields';
 	$s_custom_field_name = 'Name';
+	$s_custom_field_project_count = 'Project Count';
 	$s_custom_field_type = 'Type';
 	$s_custom_field_possible_values = 'Possible Values';
 	$s_custom_field_default_value = 'Default Value';
@@ -817,4 +818,8 @@
 	$s_custom_field_advanced = 'Advanced';
 	$s_custom_field_sequence = 'Sequence';
 	$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
+
+	$s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
+	$s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
+	$s_field_delete_button = 'Delete Field';
 ?>

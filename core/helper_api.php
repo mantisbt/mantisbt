@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.33 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: helper_api.php,v 1.34 2003-01-16 10:36:20 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -174,6 +174,10 @@
 
 		print_page_top1();
 		print_page_top2();
+
+		# @@@ we need to improve this formatting.  I'd like the text to only
+		#  be about 50% the width of the screen so that it doesn't become to hard
+		#  to read.
 
 		echo "<br />\n<div align=\"center\">\n";
 		print_hr();

@@ -885,4 +885,10 @@
 
 	# Threshold needed to manage custom fields
 	$g_manage_custom_fields = ADMINISTRATOR;
+
+	# Threshold needed to link/unlink custom field to/from a project
+	$g_custom_field_link_threshold = MANAGER;
+
+	# Whether to start editng a custom field immediately after creating it
+	$g_custom_field_edit_after_create = ON;
 ?>
