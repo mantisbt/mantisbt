@@ -198,7 +198,7 @@
 
 		$arr_count = count( $p_date_array );
 		for ($i=0;$i<$arr_count;$i++) {
-			$t_enum_count = get_bug_count_by_date2( $p_date_array[$i] );
+			$t_enum_count = get_bug_count_by_date( $p_date_array[$i] );
 
 			### alternate row colors
 			if ( $i % 2 == 1) {
@@ -378,19 +378,9 @@
 					   substr( $p_timeString, 0, 4 ) );
 	}
 	#--------------------
-	function get_bug_count_by_date( $p_num_days=1 ) {
-		global $g_mantis_bug_table;
-
-		#$day = strtotime( "-1 month" );
-		$day = time() - 86400*$p_num_days;
-		$query = "SELECT COUNT(id)
-				FROM $g_mantis_bug_table
-				WHERE UNIX_TIMESTAMP(last_updated)>$day";
-		$result = mysql_query( $query );
-		return mysql_result( $result, 0 );
-	}
-	#--------------------
-	function get_bug_count_by_date2( $p_time_length="day" ) {
+	# expects the paramter to be neutral in time length
+	# automatically adds the -
+	function get_bug_count_by_date( $p_time_length="day" ) {
 		global $g_mantis_bug_table;
 
 		$day = strtotime( "-".$p_time_length );
