@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.14 2003-02-24 10:11:06 jfitzell Exp $
+	# $Id: lang_api.php,v 1.15 2003-02-24 13:09:34 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -57,7 +57,7 @@
 	# ------------------
 	# Loads the user's language or, if the database is unavailable, the default language
 	function lang_load_default() {
-		$t_cookie_string = gpc_get_cookie( config_get( 'string_cookie' ) );
+		$t_cookie_string = gpc_get_cookie( config_get( 'string_cookie' ), '' );
 
 		# Confirm that the user's language can be determined
 		if ( db_is_connected() && !is_blank( $t_cookie_string ) ) {
