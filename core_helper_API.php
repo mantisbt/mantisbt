@@ -523,4 +523,13 @@
 		return false;
 	}
 	# --------------------
+	# This function checks to see if a variable is set
+	# if it is not then it assigns the default value
+	# otherwise it does nothing
+	function check_varset( &$p_var, $p_default_value ) {
+	     if ( !isset( $p_var ) ) {
+	         $p_var = $p_default_value;
+	     }
+	}
+	# --------------------
 ?>

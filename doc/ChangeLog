@@ -11,6 +11,7 @@ Mantis
  * Added capability to monitor bugs even when not reporter or handler
  * Added basic private bug functionality
  * Added validation checks for all inputs that are passed on to database queries.
+ * Added check_varset() function to replace if isset() else checks.
  * Updated Hungarian localization.
  * Updated Russian localization.
  * Updated Romanian localization.
