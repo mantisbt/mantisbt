@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.22 2004-05-09 02:24:19 vboctor Exp $
+	# $Id: history_api.php,v 1.23 2004-06-20 21:51:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -228,6 +228,15 @@
 				} else {
 					$p_new_value = user_get_name( $p_new_value );
 				}
+				break;
+			case 'fixed_in_version':
+				$t_field_localized = lang_get( 'fixed_in_version' );
+				break;
+			case 'date_submitted':
+				$t_field_localized = lang_get( 'date_submitted' );
+				break;
+			case 'last_updated':
+				$t_field_localized = lang_get( 'last_update' );
 				break;
 		}
 
