@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.12 2002-10-23 00:57:20 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.13 2002-10-23 01:17:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -264,9 +264,8 @@
 		} else {
 			foreach ( $p_var as $key => $value ) {
 				$p_var[$key] = gpc_strip_slashes( $value );
-
-				return $p_var;
 			}
+			return $p_var;
 		}
 	}
 ?>
