@@ -72,18 +72,23 @@
 
 		$t_pub = PUBLIC;
 		$t_prv = PRIVATE;
-		$query2 = "SELECT DISTINCT( p.id )
-			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
-			WHERE (p.enabled=1 AND
-				p.view_state='$t_pub') OR
-				(p.enabled=1 AND
-				p.view_state='$t_prv' AND
-				u.user_id='$t_user_id'  AND
-                u.project_id=p.id)
-			ORDER BY p.name";
+		if ( ADMINISTRATOR == $t_access_level ) {
+			$query2 = "SELECT DISTINCT( id )
+					FROM $g_mantis_project_table
+					WHERE enabled=1
+					ORDER BY id";
+		} else {
+			$query2 = "SELECT DISTINCT( p.id )
+					FROM $g_mantis_project_table p
+					LEFT JOIN $g_mantis_project_user_list_table u
+					ON p.id=u.project_id AND p.enabled=1
+					WHERE p.view_state='$t_pub' OR
+						(p.view_state='$t_prv' AND
+						u.user_id IS NOT NULL)
+					ORDER BY p.id";
+		}
 		$result2 = db_query( $query2 );
 		$project_count = db_num_rows( $result2 );
-
 		if ( 0 == $project_count ) {
 			$t_where_clause = " WHERE 1=1";
 		} else {

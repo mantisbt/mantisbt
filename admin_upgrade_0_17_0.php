@@ -22,13 +22,13 @@
 
 		function PrintAll() {
 			for ( $i=0; $i<$this->item_count; $i++ ) {
-				echo "ONLY PRINTING: ".$this->query_arr[$i]."<br>";
+				echo "ONLY PRINTING: ".$this->query_arr[$i]."<br />";
 			}
 		}
 
 		function PerformAll() {
 			for ( $i=0; $i<$this->item_count; $i++ ) {
-				PRINT "Executing upgrade #".$i.": ".$this->query_arr[$i]."<br>";
+				PRINT "Executing upgrade #".$i.": ".$this->query_arr[$i]."<br />";
 				$result = db_query( $this->query_arr[$i] );
 			}
 		}

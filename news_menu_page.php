@@ -26,7 +26,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="25%">
-		<?php echo $s_headline ?><br>
+		<?php echo $s_headline ?><br />
 		<?php echo $s_do_not_use ?> "
 	</td>
 	<td width="75%">

@@ -58,7 +58,7 @@
 			print_bracket_link( $g_proj_doc_edit_page."?f_id=".$v_id, "edit" );
 		}
 ?>
-		<br>
+		<br />
 		<span class="small">(<?php echo $v_filesize ?> bytes)</span>
 	</td>
 	<td bgcolor="<?php echo $status_color ?>">

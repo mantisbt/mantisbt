@@ -213,7 +213,7 @@
 			}
 
 			if ( $i != ($num_files - 1) ) {
-				PRINT "<br>";
+				PRINT "<br />";
 			}
 		}
 ?>

@@ -219,7 +219,7 @@ span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
 <p>
 <hr size=1 width="100%">
 <p>
-<b>Testing Email</b><br>
+<b>Testing Email</b><br />
 You can test the mail() function with this form.  Just fill in the adddress and submit.  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings.  More help can be found at the <a href="http://www.php.net">PHP website</a>.
 <p>
 <?php if ( isset( $f_mail_test ) ) { ?>
@@ -233,8 +233,8 @@ You can test the mail() function with this form.  Just fill in the adddress and 
 	}
 ?>
 <form method="post" action="<?php echo $PHP_SELF ?>">
-Email Address: <input type="text" size="32" name="f_to_email" value="<?php if ( isset( $f_to_email ) ) echo $f_to_email ?>"><br>
-<textarea name="f_message" cols="60" rows="5">Test message text</textarea><br>
+Email Address: <input type="text" size="32" name="f_to_email" value="<?php if ( isset( $f_to_email ) ) echo $f_to_email ?>"><br />
+<textarea name="f_message" cols="60" rows="5">Test message text</textarea><br />
 <input type="submit" name="f_mail_test">
 </form>
 

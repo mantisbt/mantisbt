@@ -458,7 +458,8 @@
 	# If there is no match then the project cookie will be set to the bug project id
 	# No access check is done.  It is expected to be checked afterwards.
 	function project_check( $p_bug_id ) {
-		global	$g_project_cookie, $g_project_cookie_val, $g_cookie_time_length;
+		global	$g_project_cookie, $g_project_cookie_val,
+				$g_cookie_time_length, $g_cookie_path;
 
 		$t_project_id = get_bug_field( $p_bug_id, "project_id" );
 		if ( $t_project_id != $g_project_cookie_val ) {

@@ -548,7 +548,7 @@
 			$t_project_name = $row["name"];
 			$t_access_level = $row["access_level"];
 			$t_access_level = get_enum_element( "access_levels", $t_access_level );
-			PRINT "$t_project_name [$t_access_level]<br>";
+			PRINT "$t_project_name [$t_access_level]<br />";
 		}
 	}
 	# --------------------

@@ -210,19 +210,19 @@
 	if ( $check_failed ) {
 		PRINT "<span class=\"bold\">".$MANTIS_ERROR[ERROR_REPORT]."</span><p>";
 		if ( empty( $f_category ) ) {
-			PRINT "$s_must_enter_category<br>";
+			PRINT "$s_must_enter_category<br />";
 		}
 		if ( empty( $f_severity ) ) {
-			PRINT "$s_must_enter_severity<br>";
+			PRINT "$s_must_enter_severity<br />";
 		}
 		if ( empty( $f_reproducibility ) ) {
-			PRINT "$s_must_enter_reproducibility<br>";
+			PRINT "$s_must_enter_reproducibility<br />";
 		}
 		if ( empty( $f_summary ) ) {
-			PRINT "$s_must_enter_summary<br>";
+			PRINT "$s_must_enter_summary<br />";
 		}
 		if ( empty( $f_description ) ) {
-			PRINT "$s_must_enter_description<br>";
+			PRINT "$s_must_enter_description<br />";
 		}
 ?>
 		<p>

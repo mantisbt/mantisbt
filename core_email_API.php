@@ -402,11 +402,11 @@
 		if ( OFF == $g_use_bcc ) {
 			## list of receivers
 			$to = $g_to_email.(($p_headers && $g_to_email) ? ", " : "").$p_headers;
-			# echo "<br>email_bug_info::Sending email to :" . $to;
+			# echo "<br />email_bug_info::Sending email to :" . $to;
 			$res1 = email_send( $to, $p_subject, $t_message, "" );
 		} else {
 			# Send Email
-			# echo "<br>email_bug_info::Sending email to : ".$g_to_email;
+			# echo "<br />email_bug_info::Sending email to : ".$g_to_email;
 			$res1 = email_send( $g_to_email, $p_subject, $t_message, $p_headers );
 		}
 	}
@@ -427,12 +427,12 @@
 		$t_message   = trim( $p_message );
 
 		# for debugging only
-		#echo $t_recipient."<BR>".$t_subject."<BR>".$t_message."<BR>".$t_headers;
+		#echo $t_recipient."<br />".$t_subject."<br />".$t_message."<br />".$t_headers;
 		#exit;
-		#echo "<br>xxxRecipient =".$t_recipient."<br>";
-		#echo "Headers =".nl2br($t_headers)."<br>";
-		#echo $t_subject."<br>";
-		#echo nl2br($t_message)."<br>";
+		#echo "<br />xxxRecipient =".$t_recipient."<br />";
+		#echo "Headers =".nl2br($t_headers)."<br />";
+		#echo $t_subject."<br />";
+		#echo nl2br($t_message)."<br />";
 		#exit;
 
 		if ( ON == $g_use_phpMailer )  {
@@ -477,8 +477,8 @@
 			$mail->Body    = "\n".$t_message;
 
 			if( !$mail->Send() ) {
-				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br>";
-				PRINT "Mailer Error: ".$mail->ErrorInfo."<br>";
+				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<br />";
+				PRINT "Mailer Error: ".$mail->ErrorInfo."<br />";
 				exit;
 			}
 		} else {
@@ -501,9 +501,9 @@
 			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( TRUE != $result ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<p>";
-				PRINT htmlspecialchars($t_recipient)."<br>";
+				PRINT htmlspecialchars($t_recipient)."<br />";
 				PRINT htmlspecialchars($t_subject)."<p>";
-				PRINT nl2br(htmlspecialchars($t_headers))."<br>";
+				PRINT nl2br(htmlspecialchars($t_headers))."<br />";
 				PRINT nl2br(htmlspecialchars($t_message))."<p>";
 				exit;
 			}

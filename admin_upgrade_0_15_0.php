@@ -254,9 +254,9 @@ $query[116] = "ALTER TABLE mantis_user_table ADD UNIQUE(cookie_string)";
 for ($i=0;$i<count($query0);$i++) {
 	$result = db_query( $query0[$i] );
 	if ( $result <= 0 ) {
-		PRINT "ERROR: $query0[$i]<br>";
+		PRINT "ERROR: $query0[$i]<br />";
 	} else {
-		PRINT "<span class=\"bold\">$i</span>: $query0[$i]<br>";
+		PRINT "<span class=\"bold\">$i</span>: $query0[$i]<br />";
 	}
 }
 
@@ -264,9 +264,9 @@ PRINT "<p>";
 for ($i=0;$i<count($query);$i++) {
 	$result = db_query( $query[$i] );
 	if ( $result <= 0 ) {
-		PRINT "ERROR: $query[$i]<br>";
+		PRINT "ERROR: $query[$i]<br />";
 	} else {
-		PRINT "<span class=\"bold\">$i</span>: $query[$i]<br>";
+		PRINT "<span class=\"bold\">$i</span>: $query[$i]<br />";
 	}
 }
 

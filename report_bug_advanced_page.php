@@ -102,7 +102,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<?php echo $s_category ?> <?php print_documentaion_link( "category" ) ?>:<br>
+		<?php echo $s_category ?> <?php print_documentaion_link( "category" ) ?>:<br />
 		<span class="required">*<?php echo $s_required ?>*</span>
 	</td>
 	<td width="70%">
@@ -114,7 +114,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_reproducibility ?> <?php print_documentaion_link( "reproducibility" ) ?>:<br>
+		<?php echo $s_reproducibility ?> <?php print_documentaion_link( "reproducibility" ) ?>:<br />
 		<span class="required">*<?php echo $s_required ?>*</span>
 	</td>
 	<td>
@@ -126,7 +126,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_severity ?> <?php print_documentaion_link( "severity" ) ?>:<br>
+		<?php echo $s_severity ?> <?php print_documentaion_link( "severity" ) ?>:<br />
 		<span class="required">*<?php echo $s_required ?>*</span>
 	</td>
 	<td>
@@ -231,7 +231,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo $s_summary ?> <?php print_documentaion_link( "summary" ) ?>:<br>
+		<?php echo $s_summary ?> <?php print_documentaion_link( "summary" ) ?>:<br />
 		<span class="required">*<?php echo $s_required ?>*</span>
 	</td>
 	<td>
@@ -240,7 +240,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo $s_description ?> <?php print_documentaion_link( "description" ) ?>:<br>
+		<?php echo $s_description ?> <?php print_documentaion_link( "description" ) ?>:<br />
 		<span class="required">*<?php echo $s_required ?>*</span>
 	</td>
 	<td>

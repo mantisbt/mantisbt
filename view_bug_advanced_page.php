@@ -312,7 +312,7 @@
 					PRINT " [<a class=\"small-link\" href=\"$g_bug_file_delete?f_id=$f_id&f_file_id=$v2_id\">$s_delete_link</a>]";
 				}
 				if ( $i != ($num_files - 1) ) {
-					PRINT "<br>";
+					PRINT "<br />";
 				}
 			}
 		?>
