@@ -6,12 +6,49 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.16 2002-10-27 22:53:04 jfitzell Exp $
+	# $Id: bug_api.php,v 1.17 2002-10-29 08:03:03 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Bug API
 	###########################################################################
+
+	#===================================
+	# Bug Data Structure Definition
+	#===================================
+	class BugData {
+		var $project_id = 0;
+		var $reporter_id = 0;
+		var $handler_id = 0;
+		var $duplicate_id = 0;
+		var $priority = NORMAL;
+		var $severity = MINOR;
+		var $reproducibility = 10;
+		var $status = NEW_;
+		var $resolution = OPEN;
+		var $projection = 10;
+		var $category = '';
+		var $date_submitted = '';
+		var $last_updated = '';
+		var $eta = 10;
+		var $os = '';
+		var $os_build = '';
+		var $platform = '';
+		var $version = '';
+		var $build = '';
+		var $votes = 0;
+		var $view_state = PUBLIC;
+		var $summary = '';
+
+		# omitted:
+		# var $bug_text_id
+		# var $profile_id
+
+		# extended info
+		var $description = '';
+		var $steps_to_reproduce = '';
+		var $additional_information = '';
+	}
 
 	#===================================
 	# Caching
@@ -58,11 +95,7 @@
 
 		return $row;
 	}
-	# --------------------
-	# Pads the bug id with the appropriate number of zeros.
-	function bug_format_id( $p_bug_id ) {
-		return( str_pad( $p_bug_id, 7, '0', STR_PAD_LEFT ) );
-	}
+
 	# --------------------
 	# Clear the bug cache (or just the given id if specified)
 	function bug_clear_cache( $p_bug_id = null ) {
@@ -77,6 +110,8 @@
 
 		return true;
 	}
+
+	# --------------------
 	# Cache a bug text row if necessary and return the cached copy
 	#  If the second parameter is true (default), trigger an error
 	#  if the bug text can't be found.  If the second parameter is
@@ -113,6 +148,7 @@
 
 		return $row;
 	}
+
 	# --------------------
 	# Clear the bug text cache (or just the given id if specified)
 	function bug_text_clear_cache( $p_bug_id = null ) {
@@ -151,6 +187,7 @@
 			return false;
 		}
 	}
+
 	# --------------------
 	# check to see if bug exists by id
 	# if it doesn't exist then error
@@ -282,6 +319,7 @@
 
 		return $t_bug_id;
 	}
+
 	# --------------------
 	# allows bug deletion :
 	# delete the bug, bugtext, bugnote, and bugtexts selected
@@ -323,6 +361,7 @@
 		# db_query() errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# Delete all bugs associated with a project
 	function bug_delete_all( $p_project_id ) {
@@ -349,14 +388,157 @@
 
 		return true;
 	}
+
 	# --------------------
-	function bug_update() {
+	# Update a bug from the given data structure
+	#  If the third parameter is true, also update the longer strings table
+	function bug_update( $p_bug_id, $p_bug_data, $p_update_extended = false ) {
+		$c_bug_id		= db_prepare_int( $p_bug_id );
+		$c_bug_data		= bug_clean( $p_bug_data );
+
+		$t_old_data = bug_get( $p_bug_id, true );
+
+		$t_bug_table = config_get( 'mantis_bug_table' );
+
+		# Update all fields
+		$query = "UPDATE $t_bug_table
+				SET project_id='$c_bug_data->project_id',
+					reporter_id='$c_bug_data->reporter_id',
+					handler_id='$c_bug_data->handler_id',
+					duplicate_id='$c_bug_data->duplicate_id',
+					priority='$c_bug_data->priority',
+					severity='$c_bug_data->severity',
+					reproducibility='$c_bug_data->reproducibility',
+					status='$c_bug_data->status',
+					resolution='$c_bug_data->resolution',
+					projection='$c_bug_data->projection',
+					category='$c_bug_data->category',
+					date_submitted='$c_bug_data->date_submitted',
+					last_updated='$c_bug_data->last_updated',
+					eta='$c_bug_data->eta',
+					os='$c_bug_data->os',
+					os_build='$c_bug_data->os_build',
+					platform='$c_bug_data->platform',
+					version='$c_bug_data->version',
+					build='$c_bug_data->build',
+					votes='$c_bug_data->votes',
+					view_state='$c_bug_data->view_state',
+					summary='$c_bug_data->summary'
+				WHERE id='$c_bug_id'";
+		db_query($query);
+
+		# log changes
+		history_log_event_direct( $p_bug_id, 'project_id',
+									$t_old_data->project_id, $p_bug_data->project_id );
+		history_log_event_direct( $p_bug_id, 'reporter_id',
+									$t_old_data->reporter_id, $p_bug_data->reporter_id );
+		history_log_event_direct( $p_bug_id, 'handler_id', 
+									$t_old_data->handler_id, $p_bug_data->handler_id );
+		history_log_event_direct( $p_bug_id, 'duplicate_id', 
+									$t_old_data->duplicate_id, $p_bug_data->duplicate_id );
+		history_log_event_direct( $p_bug_id, 'priority', 
+									$t_old_data->priority, $p_bug_data->priority );
+		history_log_event_direct( $p_bug_id, 'severity', 
+									$t_old_data->severity, $p_bug_data->severity );
+		history_log_event_direct( $p_bug_id, 'reproducibility', 
+									$t_old_data->reproducibility, $p_bug_data->reproducibility );
+		history_log_event_direct( $p_bug_id, 'status', 
+									$t_old_data->status, $p_bug_data->status );
+		history_log_event_direct( $p_bug_id, 'resolution', 
+									$t_old_data->resolution, $p_bug_data->resolution );
+		history_log_event_direct( $p_bug_id, 'projection', 
+									$t_old_data->projection, $p_bug_data->projection );
+		history_log_event_direct( $p_bug_id, 'category', 
+									$t_old_data->category, $p_bug_data->category );
+		history_log_event_direct( $p_bug_id, 'date_submitted', 
+									$t_old_data->date_submitted, $p_bug_data->date_submitted );
+		history_log_event_direct( $p_bug_id, 'last_updated', 
+									$t_old_data->last_updated, $p_bug_data->last_updated );
+		history_log_event_direct( $p_bug_id, 'eta', 
+									$t_old_data->eta, $p_bug_data->eta );
+		history_log_event_direct( $p_bug_id, 'os', 
+									$t_old_data->os, $p_bug_data->os );
+		history_log_event_direct( $p_bug_id, 'os_build', 
+									$t_old_data->os_build, $p_bug_data->os_build );
+		history_log_event_direct( $p_bug_id, 'platform', 
+									$t_old_data->platform, $p_bug_data->platform );
+		history_log_event_direct( $p_bug_id, 'version', 
+									$t_old_data->version, $p_bug_data->version );
+		history_log_event_direct( $p_bug_id, 'build', 
+									$t_old_data->build, $p_bug_data->build );
+		history_log_event_direct( $p_bug_id, 'votes', 
+									$t_old_data->votes, $p_bug_data->votes );
+		history_log_event_direct( $p_bug_id, 'view_state', 
+									$t_old_data->view_state, $p_bug_data->view_state );
+		history_log_event_direct( $p_bug_id, 'summary', 
+									$t_old_data->summary, $p_bug_data->summary );
+
+
+		# Update extended info if requested
+		if ( $p_update_extended ) {
+			$t_bug_text_table = config_get( 'mantis_bug_text_table' );
+
+			$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
+
+			$query = "UPDATE $t_bug_text_table ".
+						"SET description='$c_bug_data->description', ".
+						"steps_to_reproduce='$c_bug_data->steps_to_reproduce', ".
+						"additional_information='$c_bug_data->additional_information' ".
+						"WHERE id='$t_bug_text_id'";
+			db_query($query);
+
+			if ( $t_old_data->description != $p_bug_data->description ) {
+				history_log_event_special( $p_bug_id, DESCRIPTION_UPDATED );
+			}
+			if ( $t_old_data->steps_to_reproduce != $p_bug_data->steps_to_reproduce ) {
+				history_log_event_special( $p_bug_id, STEP_TO_REPRODUCE_UPDATED );
+			}
+			if ( $t_old_data->additional_information != $p_bug_data->additional_information ) {
+				history_log_event_special( $p_bug_id, ADDITIONAL_INFO_UPDATED );
+			}
+		}
+
+		# Update the last update date
+		bug_update_date( $p_bug_id );
+
+		# If we should notify and it's in feedback state then send an email
+		switch ( $p_bug_data->status ) {
+			case NEW_:
+				# This will be used in the case where auto-assign = OFF, in this case the bug can be 
+				# assigned/unassigned while the status is NEW.
+				# @@@ In case of unassigned, the e-mail will still say ASSIGNED, but it will be shown
+				# that the handler is empty + history ( old_handler => @null@ ).
+				if ( $p_bug_data->handler_id != $t_old_data->handler_id ) {
+					email_assign( $p_bug_id );
+				}
+				break;
+			case FEEDBACK:
+				if ( $p_bug_data->status!= $t_old_data->status ) {
+					email_feedback( $p_bug_id );
+				}
+				break;
+			case ASSIGNED:
+				if ( ( $p_bug_data->handler_id != $t_old_data->handler_id )
+				  || ( $p_bug_data->status != $t_old_data->status ) ) {
+					email_assign( $p_bug_id );
+				}
+				break;
+			case RESOLVED:
+				email_resolved( $p_bug_id );
+				break;
+			case CLOSED:
+				email_close( $p_bug_id );
+				break;
+		}
+	
+		return true;
 	}
 
 	#===================================
 	# Data Access
 	#===================================
 
+	# --------------------
 	# Returns the extended record of the specified bug, this includes
 	# the bug text fields
 	# @@@ include reporter name and handler name, the problem is that
@@ -369,11 +551,40 @@
 		# merge $t_text first so that the 'id' key has the bug id not the bug text id
 		return array_merge( $t_text, $t_base );
 	}
+
 	# --------------------
 	# Returns the record of the specified bug
 	function bug_get_row( $p_bug_id ) {
 		return bug_cache_row( $p_bug_id );
 	}
+
+	# --------------------
+	# Returns an object representing the specified bug
+	function bug_get( $p_bug_id, $p_get_extended = false ) {
+		if ( $p_get_extended ) {
+			$row = bug_get_extended_row( $p_bug_id );
+		} else {
+			$row = bug_get_row( $p_bug_id );
+		}
+
+		$t_bug_data = new BugData;
+
+		$t_row_keys = array_keys( $row );
+
+		$t_vars = get_object_vars( $t_bug_data );
+
+		# Check each variable in the class
+		foreach ( $t_vars as $var => $val ) {
+			# If we got a field from the DB with the same name
+			if ( in_array( $var, $t_row_keys ) ) {
+				# Store that value in the object
+				$t_bug_data->$var = $row[$var];
+			}
+		}
+
+		return $t_bug_data;
+	}
+
 	# --------------------
 	# return the specified field of the given bug
 	#  if the field does not exist, display a warning and return ''
@@ -387,6 +598,7 @@
 			return '';
 		}
 	}
+
 	# --------------------
 	# return the specified text field of the given bug
 	#  if the field does not exist, display a warning and return ''
@@ -400,6 +612,7 @@
 			return '';
 		}
 	}
+
 	# --------------------
 	# Returns the number of bugnotes for the given bug_id
 	function bug_get_bugnote_count( $p_bug_id ) {
@@ -422,6 +635,7 @@
 
 		return db_result( $result );
 	}
+
 	# --------------------
 	# return the timestamp for the most recent time at which a bugnote
 	#  associated wiht the bug was modified
@@ -476,6 +690,7 @@
 
 		return true;
 	}
+
 	# --------------------
 	# assign the bug to the given user
 	function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text='' ) {
@@ -522,6 +737,7 @@
 
 		return true;
 	}
+
 	# --------------------
 	# close the given bug
 	function bug_close( $p_bug_id, $p_bugnote_text='' ) {
@@ -538,6 +754,7 @@
 
 		return true;
 	}
+
 	# --------------------
 	# resolve the given bug
 	function bug_resolve( $p_bug_id, $p_resolution, $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
@@ -564,6 +781,7 @@
 
 		return true;
 	}
+
 	# --------------------
 	# reopen the given bug
 	function bug_reopen( $p_bug_id, $p_bugnote_text='' ) {
@@ -581,6 +799,7 @@
 
 		return true;
 	}
+
 	# --------------------
 	# updates the last_updated field
 	function bug_update_date( $p_bug_id ) {
@@ -597,7 +816,7 @@
 	}
 
 	# --------------------
-	# 
+	# enable monitoring of this bug for the user
 	function bug_monitor( $p_bug_id, $p_user_id ) {
 		$c_bug_id	= db_prepare_int( $p_bug_id );
 		$c_user_id	= db_prepare_int( $p_user_id );
@@ -624,7 +843,7 @@
 	}
 
 	# --------------------
-	# 
+	# dsable monitoring of this bug for the user
 	function bug_unmonitor( $p_bug_id, $p_user_id ) {
 		$c_bug_id	= db_prepare_int( $p_bug_id );
 		$c_user_id	= db_prepare_int( $p_user_id );
@@ -642,4 +861,50 @@
 
 		return true;
 	}
+
+	#===================================
+	# Other
+	#===================================
+
+	# --------------------
+	# Pads the bug id with the appropriate number of zeros.
+	function bug_format_id( $p_bug_id ) {
+		return( str_pad( $p_bug_id, 7, '0', STR_PAD_LEFT ) );
+	}
+
+	# --------------------
+	# Return a copy of the bug structure with all the instvars prepared for db insertion
+	function bug_clean( $p_bug_data ) {
+		$c_bug_data = new BugData;
+
+		$c_bug_data->project_id			= db_prepare_int( $p_bug_data->project_id );
+		$c_bug_data->reporter_id		= db_prepare_int( $p_bug_data->reporter_id );
+		$c_bug_data->handler_id			= db_prepare_int( $p_bug_data->handler_id );
+		$c_bug_data->duplicate_id		= db_prepare_int( $p_bug_data->duplicate_id );
+		$c_bug_data->priority			= db_prepare_int( $p_bug_data->priority );
+		$c_bug_data->severity			= db_prepare_int( $p_bug_data->severity );
+		$c_bug_data->reproducibility	= db_prepare_int( $p_bug_data->reproducibility );
+		$c_bug_data->status				= db_prepare_int( $p_bug_data->status );
+		$c_bug_data->resolution			= db_prepare_int( $p_bug_data->resolution );
+		$c_bug_data->projection			= db_prepare_int( $p_bug_data->projection );
+		$c_bug_data->category			= db_prepare_string( $p_bug_data->category );
+		$c_bug_data->date_submitted		= db_prepare_string( $p_bug_data->date_submitted );
+		$c_bug_data->last_updated		= db_prepare_string( $p_bug_data->last_updated );
+		$c_bug_data->eta				= db_prepare_int( $p_bug_data->eta );
+		$c_bug_data->os					= db_prepare_string( $p_bug_data->os );
+		$c_bug_data->os_build			= db_prepare_string( $p_bug_data->os_build );
+		$c_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
+		$c_bug_data->version			= db_prepare_string( $p_bug_data->version );
+		$c_bug_data->build				= db_prepare_string( $p_bug_data->build );
+		$c_bug_data->votes				= db_prepare_int( $p_bug_data->votes );
+		$c_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
+		$c_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
+
+		$c_bug_data->description		= db_prepare_string( $p_bug_data->description );
+		$c_bug_data->steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
+		$c_bug_data->additional_information	= db_prepare_string( $p_bug_data->additional_information );
+
+		return $c_bug_data;
+	}
+
 ?>
