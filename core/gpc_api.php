@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.7 2002-09-16 10:03:22 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.8 2002-09-17 20:27:39 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -47,11 +47,8 @@
 	function gpc_get_string( $p_var_name, $p_default = null ) {
 		# Don't pass along a default unless one was given to us
 		#  otherwise we prevent an error being triggered
-		if ( func_num_args() > 1 ) {
-			$t_result = gpc_get( $p_var_name, $p_default );
-		} else {
-			$t_result = gpc_get( $p_var_name );
-		}
+		$args = func_get_args();
+		$t_result = call_user_func_array( 'gpc_get', $args );
 
 		if ( is_array( $t_result ) ) {
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
@@ -66,11 +63,8 @@
 	function gpc_get_int( $p_var_name, $p_default = null ) {
 		# Don't pass along a default unless one was given to us
 		#  otherwise we prevent an error being triggered
-		if ( func_num_args() > 1 ) {
-			$t_result = gpc_get( $p_var_name, $p_default );
-		} else {
-			$t_result = gpc_get( $p_var_name );
-		}
+		$args = func_get_args();
+		$t_result = call_user_func_array( 'gpc_get', $args );
 
 		if ( is_array( $t_result ) ) {
 			trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
@@ -106,11 +100,8 @@
 	function gpc_get_string_array( $p_var_name, $p_default = null ) {
 		# Don't pass along a default unless one was given to us
 		#  otherwise we prevent an error being triggered
-		if ( func_num_args() > 1 ) {
-			$t_result = gpc_get( $p_var_name, $p_default );
-		} else {
-			$t_result = gpc_get( $p_var_name );
-		}
+		$args = func_get_args();
+		$t_result = call_user_func_array( 'gpc_get', $args );
 		
 		if ( ! is_array( $t_result ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
@@ -125,11 +116,8 @@
 	function gpc_get_int_array( $p_var_name, $p_default = null ) {
 		# Don't pass along a default unless one was given to us
 		#  otherwise we prevent an error being triggered
-		if ( func_num_args() > 1 ) {
-			$t_result = gpc_get( $p_var_name, $p_default );
-		} else {
-			$t_result = gpc_get( $p_var_name );
-		}
+		$args = func_get_args();
+		$t_result = call_user_func_array( 'gpc_get', $args );
 		
 		if ( ! is_array( $t_result ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
@@ -148,11 +136,8 @@
 	function gpc_get_bool_array( $p_var_name, $p_default = null ) {
 		# Don't pass along a default unless one was given to us
 		#  otherwise we prevent an error being triggered
-		if ( func_num_args() > 1 ) {
-			$t_result = gpc_get( $p_var_name, $p_default );
-		} else {
-			$t_result = gpc_get( $p_var_name );
-		}
+		$args = func_get_args();
+		$t_result = call_user_func_array( 'gpc_get', $args );
 		
 		if ( ! is_array( $t_result ) ) {
 			trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR);
@@ -197,6 +182,9 @@
 
 	# ------------------
 	# Retrieve a file variable
+	#  You may pass in any variable as a default (including null) but if
+	#  you pass in *no* default then an error will be triggered if the file
+	#  cannot be found
 	function gpc_get_file( $p_var_name, $p_default = null ) {
 		# simulate auto-globals from PHP v4.1.0 (see also code in php_api.php)
 		if ( ! php_version_at_least( '4.1.0' ) ) {
