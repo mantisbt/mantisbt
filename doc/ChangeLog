@@ -54,6 +54,7 @@ Mantis ChangeLog
  * Fix #3873: Invalid queries being generated from old filters.
  * Fix #3879: Empty entry in project select field can cause bugs to be moved to non-existing project.
  * Fix #3886: Custom HTML page title not displayed.
+ * Fix #3920: Two missing graphs in advanced summary.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.
  * New Config: change_view_status_threshold (default UPDATER) - threshold needed to update the view status while updating a bug / bugnote.
  * New Config: view_handler_threshold (default VIEWER) - threshold needed to view the bug handler (now works for emails only).

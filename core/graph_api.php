@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.15 2004-04-08 22:44:59 prescience Exp $
+	# $Id: graph_api.php,v 1.16 2004-06-10 06:51:57 narcissus Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -620,7 +620,7 @@
 		if ( ALL_PROJECTS == $t_project_id ) {
 			$specific_where = ' 1=1';
 		} else {
-			$specific_where = " AND project_id='$t_project_id'";
+			$specific_where = " project_id='$t_project_id'";
 		}
 
 		$query = "SELECT DISTINCT category
@@ -701,7 +701,7 @@
 		if ( ALL_PROJECTS == $t_project_id ) {
 			$specific_where = ' 1=1';
 		} else {
-			$specific_where = " AND project_id='$t_project_id'";
+			$specific_where = " project_id='$t_project_id'";
 		}
 
 		# Get all the submitted dates
