@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_delete.php,v 1.23 2002-10-23 02:49:05 jfitzell Exp $
+	# $Id: account_delete.php,v 1.24 2002-10-23 02:53:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
 	#	This page is called from:
-	#	- account_delete.php
+	#	- account_page.php
 
 	# EXPECTED BEHAVIOUR
 	#	- Delete the currently logged in user account
