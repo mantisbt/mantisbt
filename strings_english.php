@@ -258,11 +258,34 @@
 	$s_protected = "Protected";
 	$s_create_user_button = "Create User";
 
+	### manage_project_add.php3
+	$s_project_added_msg = "Project has been successfully added...";
+
+	### manage_project_category_add.php3
+	$s_category_added_msg = "Category hass been successfully added...";
+
+	### manage_project_category_delete.php3
+	$s_category_deleted_msg = "Category has been successfully deleted...";
+
+	### manage_project_category_delete_page.php3
+	$s_category_delete_sure_msg = "Are you sure you want to delete this category?";
+	$s_delete_category_button = "Delete Category";
+
+	### manage_project_category_edit_page.php3
+	$s_edit_project_category_title = "Edit Project Category";
+	$s_update_category_button = "Update Category";
+	### $s_delete_category_button # defined above
+
+	### manage_project_category_update.php3
+	$s_category_updated_msg = "Category has been successfully updated...";
+
 	### manage_page.php3
 	$s_create_new_account_link = "Create Account";
-	$s_manage_categories_link = "Categories";
-	$s_manage_product_versions_link = "Product Versions";
+	$s_projects_link = "Projects";
 	$s_documentation_link = "Documentation";
+	$s_new_accounts_title = "New Accounts";
+	$s_1_week_title = "1 Week";
+	$s_never_logged_in_title = "Never Logged In";
 	$s_manage_accounts_title = "Manage Accounts";
 	### $s_username # defined above
 	### $s_email # defined above
@@ -273,13 +296,65 @@
 	$s_last_visit = "Last Visit";
 	$s_edit_user_link = "Edit User";
 
-	### manage_product_versions_page.php3
-	$s_edit_product_versions_title = "Edit Product Versions";
-	$s_versions = "Versions";
-	$s_update_versions_button = "Update Versions";
+	### manage_project_delete.php3
+	$s_project_deleted_msg = "Project successfully removed...";
 
-	### manage_product_versions_update.php3
-	$s_product_version_updated_msg = "Product versions successfully updated...";
+	### manage_project_delete_page.php3
+	$s_project_delete_msg = "Are you sure you want to delete this project and all attached bug reports?";
+	$s_project_delete_button = "Delete Project";
+
+	### manage_project_edit_page.php3
+	$s_edit_project_title = "Edit Project";
+	$s_project_name = "Project Name";
+	### $s_status # defined above
+	### $s_enbaled # defined above
+	$s_view_status = "View Status";
+	$s_public = "public";
+	$s_private = "private";
+	### $s_description # defined above;
+	$s_update_project_button = "Update Project";
+	$s_categories_and_version_title = "Categories and Versions";
+	$s_categories = "Categories";
+	$s_add_category_button = "Add Category";
+	$s_versions = "Versions";
+	$s_add_version_button = "Add Version";
+	$s_edit_link = "edit";
+
+	### manage_project_menu_page.php3
+	$s_add_project_title = "Add Project";
+	### $s_project_name # defined above;
+	### $s_status # defined above;
+	### $s_view_status # defined above;
+	### $s_public # defined above;
+	### $s_private # defined above;
+	### $s_description # defined above;
+	$s_name = "Name";
+	### $s_status # defined above;
+	### $s_enabed # defined above;
+	### $s_view_status # defined above;
+	### $s_description # defined above;
+	### $s_edit_link # defined above;
+
+	### manage_project_update.php3
+	$s_project_updated_msg = "Project has been successfully updated...";
+
+	### manage_project_version_add.php3
+	$s_version_added_msg = "Version has been successfully added...";
+
+	### manage_project_version_delete.php3
+	$s_version_deleted_msg = "Version has been successfully deleted...";
+
+	### manage_project_version_delete_page.php3
+	$s_version_delete_sure = "Are you sure you want to delete this version?";
+	$s_delete_version_button = "Delete Version";
+
+	### manage_project_version_edit_page.php3
+	$s_edit_project_version_title = "Edit Project Version";
+	$s_update_version_button = "Update Version";
+	### $s_delete_version_button # defined above;
+
+	### manage_project_version_update.php3
+	$s_version_updated_msg = "Version has been successfully updated...";
 
 	### manage_user_delete.php3
 	$s_account_delete_protected_msg = "Account protected. Cannot delete this account.";

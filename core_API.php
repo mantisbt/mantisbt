@@ -448,6 +448,7 @@
 
 		$query = "SELECT id, name
 			FROM $g_mantis_project_table
+			WHERE enabled='on' AND view_state='public'
 			ORDER BY name";
 		$result = db_query( $query );
 		$project_count = db_num_rows( $result );
@@ -949,7 +950,6 @@
 			}
 
 			### grab creation date to protect from change
-			### Suspect a bug in mysql.. not sure.  Same deal for bug updates
 			$t_date_created = get_current_user_field( "date_created" );
 
 			### update last_visit date
@@ -1035,6 +1035,9 @@
 		mt_srand( time() );
 		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 		return substr( crypt( md5( $p_email.$t_val ) ), 0, 12 );
+	}
+	### --------------------
+	function check_project() {
 	}
 	### --------------------
 	###########################################################################
@@ -1578,4 +1581,34 @@
 	###########################################################################
 	### END                                                                 ###
 	###########################################################################
+	function is_not_duplicate_category( $p_category ) {
+		global $g_mantis_project_category_table, $g_project_cookie_val;
+
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_project_category_table
+				WHERE project_id='$g_project_cookie_val' AND
+					category='$p_category'";
+		$result = db_query( $query );
+		$category_count =  db_result( $result, 0, 0 );
+		if ( $category_count > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	function is_not_duplicate_version( $p_version ) {
+		global $g_mantis_project_version_table, $g_project_cookie_val;
+
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_project_version_table
+				WHERE project_id='$g_project_cookie_val' AND
+					version='$p_version'";
+		$result = db_query( $query );
+		$version_count =  db_result( $result, 0, 0 );
+		if ( $version_count > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 ?>

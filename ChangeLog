@@ -39,6 +39,8 @@ To Do:
    is viewing
  * Removed cols=7 in the view bug in list form pages (Netscape problem)
  * Removed mysql_error_page and references
+ * Determined that suspected mysql bug about date updating was proper behavior
+   for timestamps
 
 12.26.2000	-	0.13.1
 
