@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.14 2005-01-08 15:50:26 thraxisp Exp $
+	# $Id: bug_change_status_page.php,v 1.15 2005-01-11 23:40:32 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -87,7 +87,8 @@ if ( ON == config_get( 'enable_relationship' ) ) {
 ?>
 
 <?php
-if ( ( $t_resolved <= $f_new_status ) && ( CLOSED > $f_new_status ) ) { ?>
+$t_current_resolution = $t_bug->resolution;
+if ( ( $t_resolved <= $f_new_status ) && ( ( CLOSED > $f_new_status ) || ( in_array( $t_current_resolution, array( OPEN, REOPENED ) ) ) ) ) { ?>
 <!-- Resolution -->
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
