@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.65 2004-06-29 07:05:59 int2str Exp $
+	# $Id: bug_api.php,v 1.66 2004-07-07 12:01:02 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -296,8 +296,15 @@
 		$c_additional_info		= db_prepare_string( $p_additional_info );
 		$c_sponsorship_total = 0;
 
-		# Summary and description cannot be blank
-		if ( is_blank( $c_summary ) || is_blank( $c_description ) ) {
+		# Summary cannot be blank
+		if ( is_blank( $c_summary ) ) {
+			error_parameters( lang_get( 'summary' ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		# Description cannot be blank
+		if ( is_blank( $c_description ) ) {
+			error_parameters( lang_get( 'description' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
@@ -654,14 +661,16 @@
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_bug_data		= bug_prepare_db( $p_bug_data );
 
-		# Summary field cannot be empty
+		# Summary cannot be blank
 		if ( is_blank( $c_bug_data->summary ) ) {
+			error_parameters( lang_get( 'summary' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
 		if ( $p_update_extended ) {
 			# Description field cannot be empty
 			if ( is_blank( $c_bug_data->description ) ) {
+				error_parameters( lang_get( 'description' ) );
 				trigger_error( ERROR_EMPTY_FIELD, ERROR );
 			}
 		}
