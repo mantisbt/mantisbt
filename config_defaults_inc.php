@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.126 2003-08-22 05:53:42 beerfrick Exp $
+	# $Id: config_defaults_inc.php,v 1.127 2003-08-24 02:59:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -716,13 +716,10 @@
 	$g_cvs_web				= '';
 
 	# --- Bug Linking ---------------
-	# if a number follows this tag it will create a link to a bug. With the
-	# second tag you can link to specific bugnotes.
+	# if a number follows this tag it will create a link to a bug.
 	# eg. for # a link would be #45
 	# eg. for bug: a link would be bug:98
-	# eg. for #45c12 would make a link to bug #45, bugnote #12
 	$g_bug_link_tag			= '#';
-	$g_bugnote_link_tag			= 'c';
 
 	# --- Queries --------------------
 	# Shows the total number/unique number of queries executed to serve the page.

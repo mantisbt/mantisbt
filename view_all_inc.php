@@ -238,7 +238,7 @@
 
 	<?php # -- Bugnote count column -- ?>
 	<td class="center">
-		<?php echo lang_get( 'bugnotes' ); ?>	
+		#
 	</td>
 
 	<?php # -- Attachment indicator --
@@ -362,20 +362,12 @@
 		<?php
 			if ( $bugnote_count > 0 ) {
 				$t_bugnote_link = '<a href="' . string_get_bug_view_url( $v_id ) . '&amp;nbn=' . $bugnote_count . '#bugnotes">' . $bugnote_count . '</a>'; 
-				if ( $bugnote_count > 10 ) {
-					$t_last_bugnote_link = '&nbsp;-&nbsp;<a href="' . string_get_bug_view_url( $v_id ) . '&amp;nbn=' . $bugnote_count . '#bn' . $bugnote_count . '">' . lang_get( 'last_bugnote' ) . '</a>'; 
-				} else {
-					$t_last_bugnote_link = '';
-				}
-
 				if ( $v_bugnote_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
 					echo '<span class="bold">';
 					echo $t_bugnote_link;
-					echo $t_last_bugnote_link;
 					echo '</span>';
 				} else {
 					echo $t_bugnote_link;
-					echo $t_last_bugnote_link;
 				}
 			} else {
 				echo '&nbsp;';

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.39 2003-08-22 06:00:07 beerfrick Exp $
+	# $Id: string_api.php,v 1.40 2003-08-24 02:59:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -115,10 +115,9 @@
 	#  preceeded by a character that is not a letter, a number or an underscore
 	function string_process_bug_link( $p_string, $p_include_anchor=true ) {
 		$t_tag = config_get( 'bug_link_tag' );
-		$t_bugnote_tag = config_get( 'bugnote_link_tag' );
 		$t_path = config_get( 'path' );
 
-		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)(?:'.preg_quote($t_bugnote_tag).'(\d+))*|$)/s',
+		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
 								$p_string, $t_matches, PREG_SET_ORDER );
 		
 		$t_result = '';
@@ -130,15 +129,9 @@
 				if ( isset( $t_match[2] ) ) {
 					$t_bug_id = $t_match[2];
 					if ( bug_exists( $t_bug_id ) ) {
-						# if we got a bugnote reference, include it
-						if ( isset( $t_match[3] ) ) {
-							$t_bugnote_anchor = $t_match[3];
-						} else {
-							$t_bugnote_anchor = null;
-						}
-						$t_result .= string_get_bug_view_link( $t_bug_id, null, $t_bugnote_anchor);
+						$t_result .= string_get_bug_view_link( $t_bug_id, null );
 					} else {
-						$t_result .= $t_tag . $t_bug_id;
+						$t_result .= $t_bug_id;
 					}
 				}
 			}
@@ -154,13 +147,7 @@
 					#  can create the link and by the time it is clicked on, the
 					#  bug may exist.
 
-					# if we got a bugnote reference, include it
-					if ( isset( $t_match[3] ) ) {
-						$t_bugnote_anchor = $t_match[3];
-					} else {
-						$t_bugnote_anchor = null;
-					}
-					$t_result .= string_get_bug_view_url_with_fqdn( $t_bug_id, null, $t_bugnote_anchor );
+					$t_result .= string_get_bug_view_url_with_fqdn( $t_bug_id, null );
 				}
 			}
 		}
@@ -295,28 +282,17 @@
 	# --------------------
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_view_link( $p_bug_id, $p_user_id=null, $p_bugnote_anchor=null ) {
+	function string_get_bug_view_link( $p_bug_id, $p_user_id=null ) {
 		$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 		$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
-		if ( $p_bugnote_anchor != null ) {
-			$t_bugnote_anchor_text = strtolower(lang_get( 'bugnote' )) . ' #' . $p_bugnote_anchor;
-		} else {
-			$t_bugnote_anchor_text = '';
-		}
-		$t_bug_link_tag = config_get( 'bug_link_tag' );
-		return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id, $p_bugnote_anchor) . '" title="[' . $t_status . '] ' . $t_summary . '">' . $t_bug_link_tag . bug_format_id( $p_bug_id ) . ' ' . $t_bugnote_anchor_text . '</a>';
+		return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '" title="[' . $t_status . '] ' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 	}
 
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_view_url( $p_bug_id, $p_user_id=null, $p_bugnote_number=null) {
-		if ( $p_bugnote_number != null ) {
-			$t_bugnote_anchor = '#bn' . $p_bugnote_number;
-		} else {
-			$t_bugnote_anchor = '';
-		}
-		return string_get_bug_view_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id ) . $t_bugnote_anchor;
+	function string_get_bug_view_url( $p_bug_id, $p_user_id=null ) {
+		return string_get_bug_view_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id );
 	}
 
 	# --------------------
@@ -324,8 +300,8 @@
 	#  account for the user preference and site override
 	# The returned url includes the fully qualified domain, hence it is suitable to be included
 	# in emails.
-	function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id=null, $p_bugnote_anchor=null ) {
-		return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id, $p_bugnote_anchor );
+	function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id=null ) {
+		return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id );
 	}
 
 	# --------------------
