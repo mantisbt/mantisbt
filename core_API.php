@@ -110,7 +110,7 @@
 	}
 	### --------------------
 	function print_header( $p_title="Mantis" ) {
-		PRINT "<div align=center><h3>$p_title</h3></div>";
+		PRINT "<h3>$p_title</h3>";
 	}
 	### --------------------
 	function print_footer( $p_file ) {
@@ -120,8 +120,8 @@
 
 		PRINT "<hr size=1>";
 		print_mantis_version();
-		PRINT "<address><font size=-1>Copyright (c) 2000</font></address>";
-		PRINT "<address><font size=-1><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></font></address>";
+		PRINT "<address>Copyright (c) 2000</address>";
+		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 	}
 	### --------------------
 	function print_body_bottom() {

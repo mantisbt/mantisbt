@@ -76,7 +76,7 @@
 			if (( access_level_check_greater_or_equal( "administrator" ) )||
 				( $v3_reporter_id==$t_user_id )) {
 		?>
-			<font size=1><a href="<? echo $g_bugnote_delete ?>?f_id=<? echo $f_id ?>&f_bug_id=<? echo $v3_id ?>"><? echo $s_delete ?></a></font>
+			<span class="bugnote_delete"><a href="<? echo $g_bugnote_delete ?>?f_id=<? echo $f_id ?>&f_bug_id=<? echo $v3_id ?>"><? echo $s_delete ?></a></span>
 		<? } ?>
 		</td>
 	</tr>

@@ -32,7 +32,6 @@
     $t_protected = db_result( $result, 0, 1 );
 ?>
 <div align=center>
-<font face=Verdana size=-1>
 	<a href="<? echo $g_path.$g_main_page ?>"><? echo $s_main_link ?></a> |
 	<a href="<? echo $g_path.$g_view_bug_all_page ?>"><? echo $s_view_bugs_link ?></a> |
 <?
@@ -54,5 +53,4 @@
 <? } ?>
 	<a href="<? echo $g_path.$g_usage_doc_page ?>"><? echo $s_docs_link ?></a> |
 	<a href="<? echo $g_path.$g_logout_page ?>"><? echo $s_logout_link ?></a>
-</font>
 </div>

@@ -115,8 +115,6 @@
 
 	$g_table_title_color     = "#ffffff";    # white
 
-	$g_required_field_color  = "#aa0000";    # redish
-
 	$g_new_color             = "#ffa0a0";    # red
 	$g_feedback_color        = "#ff50a8";    # purple
 	$g_acknowledged_color    = "#ffd850";    # orange

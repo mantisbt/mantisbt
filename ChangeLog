@@ -38,12 +38,12 @@ To Do:
  * Split the account pref modifications into two separate files:
    account_prefs_update.php3 and account_prefs_reset.php3
  * Removed db_mysql_error()
- * Renamed db_mysql_connect() to db_connect()
- * Renamed db_mysql_query() to db_query()
- * Added several db_ functions in preparation for database abstraction
+ * Renamed all mysql_ functions to db_ functions (prepping for db_abstraction)
  * Fixed manage product versions update redirect
  * Added $g_bugnote_order to allow custom bugnote ordering
-
+ * Removed $g_required_field_color and replaced it with a span element in
+   css_inc.php
+ * Removed all FONT tags and replaced them with SPAN and CSS formatting
 
 12.20.2000	-	0.12.0
 

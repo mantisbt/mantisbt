@@ -47,7 +47,7 @@
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td valign=top width=25%>
 			<? echo $s_category ?>:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
+			<span class="required">[*<? echo $s_required ?>*]</span>
 		</td>
 		<td>
 			<select name=f_category>
@@ -59,7 +59,7 @@
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
 			<? echo $s_reproducibility ?>:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
+			<span class="required">[*<? echo $s_required ?>*]</span>
 		</td>
 		<td>
 			<select name=f_reproducibility>
@@ -71,7 +71,7 @@
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
 			<? echo $s_severity ?>:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
+			<span class="required">[*<? echo $s_required ?>*]</span>
 		</td>
 		<td>
 			<select name=f_severity>
@@ -83,7 +83,7 @@
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
 			<? echo $s_summary ?>:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
+			<span class="required">[*<? echo $s_required ?>*]</span>
 		</td>
 		<td>
 			<input type=text name=f_summary size=80 maxlength=128>
@@ -92,7 +92,7 @@
 	<tr bgcolor=<? echo $g_primary_color_dark ?>>
 		<td>
 			<? echo $s_description ?>:<br>
-			<font color=<? echo $g_required_field_color ?> size=-1>[*<? echo $s_required ?>*]</font>
+			<span class="required">[*<? echo $s_required ?>*]</span>
 		</td>
 		<td>
 			<textarea name=f_description cols=60 rows=5></textarea>
