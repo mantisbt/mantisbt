@@ -22,7 +22,7 @@
 <? print_css( $g_css_include_file ) ?>
 <?
 	if ( $result ) {
-		print_meta_redirect( "$g_bug_view_advanced_page?f_id=$f_id", $g_wait_time );
+		print_meta_redirect( "$g_view_bug_yadvanced_page?f_id=$f_id", $g_wait_time );
 	}
 ?>
 <? include( $g_meta_include_file ) ?>
@@ -46,7 +46,7 @@
 	}
 ?>
 <p>
-<a href="<? echo $g_bug_view_advanced_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_yadvanced_page ?>?f_id=<? echo $f_id ?>">Click here to proceed</a>
 </div>
 
 <? print_footer() ?>

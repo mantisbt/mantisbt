@@ -30,7 +30,7 @@
 
 <p>
 <div align=center>
-[ <a href="<? echo $g_bug_view_all_page ?>">View Bugs</a> ]
+[ <a href="<? echo $g_view_bug_all_page ?>">View Bugs</a> ]
 </div>
 
 <p>

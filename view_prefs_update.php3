@@ -30,7 +30,7 @@
 <? print_title( $g_window_title ) ?>
 <? print_css( $g_css_include_file ) ?>
 <?
-	print_meta_redirect( $g_bug_view_all_page, $g_wait_time );
+	print_meta_redirect( $g_view_bug_all_page, $g_wait_time );
 ?>
 <? include( $g_meta_include_file ) ?>
 <? print_head_bottom() ?>
@@ -43,7 +43,7 @@
 <div align=center>
 Preferences have been successfully updated...
 <p>
-<a href="<? echo $g_bug_view_all_page ?>">Click here to proceed</a>
+<a href="<? echo $g_view_bug_all_page ?>">Click here to proceed</a>
 </div>
 
 <? print_footer() ?>

@@ -3,7 +3,7 @@ Mantis
 To Do:
 
  * Inspect security
- * Inspect for unsafe input/output
+ * Inspect for unsafe input/output (mostly done)
  * Add mailing module
  * Add ip tracking/banning capability
  * Add file upload module

@@ -34,6 +34,11 @@
 
 <p>
 <div align=center>
+	[ <a href="<? echo $g_account_manage_profiles ?>">Manage Profiles</a> ]
+</div>
+
+<p>
+<div align=center>
 <table bgcolor=<? echo $g_primary_border_color ?> width=50%>
 <tr>
 	<td bgcolor=<? echo $g_white_color ?>>

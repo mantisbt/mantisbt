@@ -21,7 +21,7 @@
 	<table cols=2 width=100%>
 	<form action="<? echo $g_login ?>" method=post>
 	<tr>
-		<td>
+		<td colspan=2>
 			<b>Login</b>
 		</td>
 	</tr>

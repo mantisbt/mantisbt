@@ -23,7 +23,7 @@
 
 <p>
 <div align=center>
-[ <a href="<? echo $g_bug_view_page ?>?f_id=<? echo $f_id ?>">Back</a> ]
+[ <a href="<? echo $g_view_bug_page ?>?f_id=<? echo $f_id ?>">Back</a> ]
 </div>
 
 <? include( $g_bugnote_include_file ) ?>

@@ -9,7 +9,7 @@
 		### required for variables to get picked up
 		global 	$g_string_cookie_val, $g_mantis_user_table, $g_path,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
-				$g_main_page, $g_bug_view_all_page, $g_report_bug_page,
+				$g_main_page, $g_view_bug_all_page, $g_report_bug_page,
 				$g_summary_page, $g_account_page, $g_manage_page,
 				$g_news_menu_page, $g_logout_page;
 	}
@@ -28,7 +28,7 @@
 <div align=center>
 <font face=Verdana size=-1>
 	<a href="<? echo $g_path.$g_main_page ?>">Main</a> |
-	<a href="<? echo $g_path.$g_bug_view_all_page ?>">View Bugs</a> |
+	<a href="<? echo $g_path.$g_view_bug_all_page ?>">View Bugs</a> |
 <? if ( $t_access_level!="viewer" ) { ?>
 	<a href="<? echo $g_path.$g_report_bug_page ?>">Report Bug</a> |
 <? } ?>
