@@ -103,7 +103,6 @@ CREATE TABLE mantis_project_version_table (
 
 ALTER TABLE mantis_bug_table ADD project_id INT (7) UNSIGNED ZEROFILL not null AFTER id;
 ALTER TABLE mantis_news_table ADD project_id INT (7) UNSIGNED ZEROFILL not null AFTER id;
-ALTER TABLE mantis_user_pref_table CHANGE project_id default_project_id INT (7) UNSIGNED ZEROFILL DEFAULT '0000000000' not null;
 
 # make changes to bug_table
 

@@ -242,14 +242,6 @@
 	$s_newer_news_link = "Newer News";
 	$s_older_news_link = "Older News";
 
-	### manage_category_page.php3
-	$s_edit_categories_title = "Edit Categories";
-	$s_category_names = "Category Names";
-	$s_update_categories_button = "Update Categories";
-
-	### manage_category_update.php3
-	$s_categories_updated_msg = "Cateogries successfully updated...";
-
 	### manage_create_new_user.php3
 	$s_created_user_part1 = "Created user";
 	$s_created_user_part2 = "with an access level of";
@@ -269,13 +261,13 @@
 	$s_project_added_msg = "Project has been successfully added...";
 
 	### manage_project_category_add.php3
-	$s_category_added_msg = "Category hass been successfully added...";
+	$s_category_added_msg = "Category has been successfully added...";
 
 	### manage_project_category_delete.php3
 	$s_category_deleted_msg = "Category has been successfully deleted...";
 
 	### manage_project_category_delete_page.php3
-	$s_category_delete_sure_msg = "Are you sure you want to delete this category?";
+	$s_category_delete_sure_msg = "Are you sure you want to delete this category? All associated bugs will be deleted.";
 	$s_delete_category_button = "Delete Category";
 
 	### manage_project_category_edit_page.php3
@@ -353,7 +345,7 @@
 	$s_version_deleted_msg = "Version has been successfully deleted...";
 
 	### manage_project_version_delete_page.php3
-	$s_version_delete_sure = "Are you sure you want to delete this version?";
+	$s_version_delete_sure = "Are you sure you want to delete this version? All associated bugs will be deleted.";
 	$s_delete_version_button = "Delete Version";
 
 	### manage_project_version_edit_page.php3
