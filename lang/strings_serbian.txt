@@ -9,11 +9,11 @@
 	###########################################################################
 	# Serbian strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.4 $
+	# $Revision: 1.5 $
 	# $Author: jlatour $
-	# $Date: 2004-03-15 16:12:47 $
+	# $Date: 2004-03-15 23:33:55 $
 	#
-	# $Id: strings_serbian.txt,v 1.4 2004-03-15 16:12:47 jlatour Exp $
+	# $Id: strings_serbian.txt,v 1.5 2004-03-15 23:33:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -823,6 +823,13 @@ $s_prev = 'Prethodni';
 $s_next = 'Naredni';
 $s_first = 'Prvi';
 $s_last = 'Poslednji';
+$s_start_date = 'Start Date';
+$s_end_date = 'End Date';
+$s_use_date_filters = 'Use Date Filters';
+$s_yes = 'Yes';
+$s_no = 'No';
+$s_open_filters = 'Change Filter';
+$s_or_unassigned = 'Or Unassigned';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Osnovni pregled';
@@ -877,6 +884,8 @@ $s_field_delete_button = 'Brisanje polja';
 $s_hide_status = 'Skrivanje statusa';
 $s_filter_closed = "Zatvoren";
 $s_filter_resolved = "Rešen";
+$s_hide_closed = "Hide Closed";
+$s_hide_resolved = "Hide Resolved";
 
 $s_attachments = "Prilozi";
 $s_attachment_alt = "A";
