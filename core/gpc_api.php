@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.4 2002-08-27 08:32:30 jfitzell Exp $
+	# $Id: gpc_api.php,v 1.5 2002-08-29 02:31:34 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -49,7 +49,7 @@
 	}
 	# ------------------
 	# Retrieves a boolean GPC variable. Uses gpc_get();
-	function gpc_get_bool( $p_var_name, $p_default = null ) {
+	function gpc_get_bool( $p_var_name, $p_default = false ) {
 		$t_result = gpc_get( $p_var_name, $p_default );
 
 		if ( $t_result === $p_default ) {

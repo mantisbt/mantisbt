@@ -10,13 +10,12 @@
 <?php
 	check_access( MANAGER );
 
-	$f_project_id = gpc_get_int( 'f_project_id' );
-	$f_poster_id = gpc_get_int( 'f_poster_id' );
-	$f_view_state = gpc_get_int( 'f_view_state' );
-	$f_announcement = gpc_get_bool( 'f_announcement', false );
-	$f_headline = gpc_get_string( 'f_headline' );
-	$f_announcement = gpc_get_string( 'f_announcement', '' );
-	$f_body = gpc_get_string( 'f_body', '' );
+	$f_project_id	= gpc_get_int( 'f_project_id' );
+	$f_poster_id	= gpc_get_int( 'f_poster_id' );
+	$f_view_state	= gpc_get_int( 'f_view_state' );
+	$f_headline		= gpc_get_string( 'f_headline' );
+	$f_announcement	= gpc_get_string( 'f_announcement', '' );
+	$f_body			= gpc_get_string( 'f_body', '' );
 
 	news_create( $f_project_id, $f_poster_id, $f_view_state, $f_announcement, $f_headline, $f_body );
     $f_headline = string_display( $f_headline );
