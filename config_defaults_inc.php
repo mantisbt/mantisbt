@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.207 2004-09-12 13:57:21 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.208 2004-09-21 07:35:09 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -966,6 +966,12 @@
 	# eg. for # a link would be #45
 	# eg. for bug: a link would be bug:98
 	$g_bug_link_tag			= '#';
+
+	# --- Bugnote Linking ---------------
+	# if a number follows this tag it will create a link to a bugnote.
+	# eg. for ~ a link would be ~45
+	# eg. for bugnote: a link would be bugnote:98
+	$g_bugnote_link_tag			= '~';
 
 	# --- Bug Count Linking ----------
 	# this is the prefix to use when creating links to bug views from bug counts (eg. on the main

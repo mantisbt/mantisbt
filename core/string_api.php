@@ -6,13 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.58 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: string_api.php,v 1.59 2004-09-21 07:35:10 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'user_pref_api.php' );
+	require_once( $t_core_dir . 'class.urlmatch.php' );
 
 	### String Processing API ###
 
@@ -93,6 +94,7 @@
 		$p_string = string_display( $p_string );
 		$p_string = string_insert_hrefs( $p_string );
 		$p_string = string_process_bug_link( $p_string );
+		$p_string = string_process_bugnote_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
 
 		return $p_string;
@@ -112,6 +114,7 @@
 	function string_email_links( $p_string ) {
 		$p_string = string_email( $p_string );
 		$p_string = string_process_bug_link( $p_string, false );
+		$p_string = string_process_bugnote_link( $p_string, false );
 		$p_string = string_process_cvs_link( $p_string, false );
 
 		return $p_string;
@@ -211,6 +214,62 @@
 
 		return $t_result;
 	}
+	
+	# --------------------
+	# Process $p_string, looking for bugnote ID references and creating bug view
+	#  links for them.
+	#
+	# Returns the processed string.
+	#
+	# If $p_include_anchor is true, include the href tag, otherwise just insert
+	#  the URL
+	#
+	# The bugnote tag ('~' by default) must be at the beginning of the string or
+	#  preceeded by a character that is not a letter, a number or an underscore
+	function string_process_bugnote_link( $p_string, $p_include_anchor=true ) {
+		$t_tag = config_get( 'bugnote_link_tag' );
+		$t_path = config_get( 'path' );
+
+		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
+								$p_string, $t_matches, PREG_SET_ORDER );
+		$t_result = '';
+
+		if ( $p_include_anchor ) {
+			foreach ( $t_matches as $t_match ) {
+				$t_result .= $t_match[1];
+
+				if ( isset( $t_match[2] ) ) {
+					$t_bugnote_id = $t_match[2];
+					if ( bugnote_exists( $t_bugnote_id ) ) {
+						$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
+						if ( bug_exists( $t_bug_id ) ) {
+							$t_result .= string_get_bugnote_view_link( $t_bug_id, $t_bugnote_id, null );
+						} else {
+							$t_result .= $t_bugnote_id;
+						}
+					}
+				}
+			}
+		} else {
+			foreach ( $t_matches as $t_match ) {
+				$t_result .= $t_match[1];
+
+				if ( isset( $t_match[2] ) ) {
+					$t_bugnote_id = $t_match[2];
+					$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
+					# We might as well create the link here even if the bug
+					#  doesn't exist.  In the case above we don't want to do
+					#  the summary lookup on a non-existant bug.  But here, we
+					#  can create the link and by the time it is clicked on, the
+					#  bug may exist.
+
+					$t_result .= string_get_bugnote_view_url_with_fqdn( $t_bug_id, $t_bugnote_id, null );
+				}
+			}
+		}
+
+		return $t_result;
+	}
 
 	#===================================
 	# Tag Processing
@@ -222,21 +281,20 @@
 		if ( !config_get( 'html_make_links' ) ) {
 			return $p_string;
 		}
-
-		# This is based on the description in RFC 2396 which specifies how
-		#  to match URLs generically without knowing their type
-		# vboctor: I added # to hyperlink bookmarks.
-		$p_string = preg_replace( '/(([[:alpha:]][-+.[:alnum:]]*):\/\/(%[[:digit:]A-Fa-f]{2}|[-_.!~*\';\/?:@&=+$#\(\),\[\][:alnum:]])+)/s',
-								'<a href="\1">\1</a> [<a href="\1" target="blank">^</a>]',
-								$p_string);
-
+		# Find any URL in a string and replace it by a clickable link
+		
+		$t_url = new mantisLink();
+		$p_string = $t_url->match($p_string, "[^]");
+				
 		# Set up a simple subset of RFC 822 email address parsing
 		#  We don't allow domain literals or quoted strings
 		#  We also don't allow the & character in domains even though the RFC
 		#  appears to do so.  This was to prevent &gt; etc from being included.
 		#  Note: we could use email_get_rfc822_regex() but it doesn't work well
 		#  when applied to data that has already had entities inserted.
-		$t_atom = '(?:[^()<>@,;:\\\".\[\]\000-\037\177 &]+)';
+		#
+		# bpfennig: '@' doesn't accepted anymore
+		$t_atom = '[^\'@\'](?:[^()<>@,;:\\\".\[\]\000-\037\177 &]+)';
 
 		# In order to avoid selecting URLs containing @ characters as email
 		#  addresses we limit our selection to addresses that are preceded by:
@@ -256,6 +314,7 @@
 		$p_string = preg_replace( '/(?<=^|&lt;|[\s\:\>\n\r])('.$t_atom.'(?:\.'.$t_atom.')*\@'.$t_atom.'(?:\.'.$t_atom.')*)(?=$|&gt;|[\s\,\<\n\r])/s',
 								'<a href="mailto:\1" target="_new">\1</a>',
 								$p_string);
+
 		return $p_string;
 	}
 
@@ -354,14 +413,51 @@
 
 		return $t_link;
 	}
+	
+	# --------------------
+	# return an href anchor that links to a bug VIEW page for the given bug
+	#  account for the user preference and site override
+	function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = null, $p_detail_info = true ) {
+		$t_link = "";
 
+		if ( bug_exists( $p_bug_id ) && bugnote_exists( $p_bugnote_id ) ) {
+			$t_reporter		= string_attribute( user_get_name ( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) ) );
+			$t_update_date	= string_attribute( date( config_get( 'normal_date_format' ), ( db_unixtimestamp( bugnote_get_field( $p_bugnote_id, 'last_modified' ) ) ) ) );
+			$t_link		= '<a href="' . string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id ) . '"';
+			if ( $p_detail_info ) {
+				$t_link .=  ' title="[' . $t_update_date . '] ' . $t_reporter . '"';
+			}
+			$t_link .= '>' . lang_get( 'bugnote' ) . ': ' . bugnote_format_id( $p_bugnote_id) . '</a>';
+		} else {
+			$t_link = lang_get( 'bugnote' ) . ': ' . bugnote_format_id( $p_bugnote_id);
+		}
+
+		return $t_link;
+	}
+	
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
 	function string_get_bug_view_url( $p_bug_id, $p_user_id = null ) {
 		return 'view.php?id=' . $p_bug_id;
 	}
+	
+	# --------------------
+	# return the name and GET parameters of a bug VIEW page for the given bug
+	#  account for the user preference and site override
+	function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
+		return 'view.php?id=' . $p_bug_id . '#'. $p_bugnote_id;
+	}
 
+	# --------------------
+	# return the name and GET parameters of a bug VIEW page for the given bug
+	#  account for the user preference and site override
+	# The returned url includes the fully qualified domain, hence it is suitable to be included
+	# in emails.
+	function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
+		return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id ).'#'.$p_bugnote_id;
+	}
+	
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override

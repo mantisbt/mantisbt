@@ -2,6 +2,10 @@ Mantis ChangeLog
 
 2004.10.xx  -  0.19.1
 
+- 0002091: [bugtracker] Bugnotes containing urls with the '@' sign in them get mangled (bpfennig)
+- 0004326: [bugtracker] Links protected by brackets are not processed properly (bpfennig)
+- 0003276: [feature] Add bugnote numbering and bugnote links. (bpfennig)
+- 0004383: [localization] Editing a note has language specific note at end of note (bpfennig)
 - 0004526: [other] Spaces needed after colons on main page (vboctor)
 - 0004558: [custom fields] Custom Fields doesn't display links (bpfennig)
 Updated Serbian, Chinese Simplified and Estonian translations

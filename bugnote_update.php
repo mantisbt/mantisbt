@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_update.php,v 1.41 2004-05-17 11:47:34 vboctor Exp $
+	# $Id: bugnote_update.php,v 1.42 2004-09-21 07:35:09 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,8 +41,7 @@
 	}
 	
 	$f_bugnote_text = trim( $f_bugnote_text ) . "\n\n";
-	$f_bugnote_text	.= lang_get( 'edited_on' ) . date( config_get( 'normal_date_format' ) );
-
+	
 	bugnote_set_text( $f_bugnote_id, $f_bugnote_text );
 
 	print_successful_redirect( string_get_bug_view_url( $t_bug_id ) . '#bugnotes' );
