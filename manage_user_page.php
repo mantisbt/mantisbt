@@ -19,7 +19,7 @@
 	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 	$f_hide = gpc_get_bool( 'hide' );
 	$f_save = gpc_get_bool( 'save' );
-	$f_letter = strtoupper( gpc_get_string( 'letter', 'A' ) );
+	$f_prefix = strtoupper( gpc_get_string( 'prefix', 'A' ) );
 
 	$t_cookie_name = config_get( 'manage_cookie' );
 	$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" border="0" alt="' . lang_get( 'protected' ) . '" />';
@@ -132,13 +132,22 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 <?php # Manage Form BEGIN ?>
 <?php
-	$t_index_links = '<br /><center><table class="width75"><tr>';
-	$t_index_links .= '<td><a href="manage_user_page.php?letter=ALL">' . lang_get( 'show_all_users' ) . '</a></td>';
+	$t_prefix_array = array( 'ALL' );
+
 	for ( $i = 'A'; $i != 'AA'; $i++ ) {
-		if ( $i == $f_letter ) {
-			$t_link = "<strong>$i</string>";
+		$t_prefix_array[] = $i;
+	}
+
+	for ( $i = 0; $i <= 9; $i++ ) {
+		$t_prefix_array[] = "$i";
+	}
+
+	$t_index_links = '<br /><center><table class="width75"><tr>';
+	foreach ( $t_prefix_array as $t_prefix ) {
+		if ( $t_prefix == $f_prefix ) {
+			$t_link = "<strong>$t_prefix</string>";
 		} else {
-			$t_link = '<a href="manage_user_page.php?letter=' . $i .'">' . $i . '</a>';
+			$t_link = '<a href="manage_user_page.php?prefix=' . $t_prefix .'">' . $t_prefix . '</a>';
 		}
 		$t_index_links .= '<td>' . $t_link . '</td>';
 	}
@@ -146,10 +155,10 @@ for ($i=0;$i<$new_user_count;$i++) {
 
 	echo $t_index_links;
 
-	if ( $f_letter === 'ALL' ) {
+	if ( $f_prefix === 'ALL' ) {
 		$t_where = '(1 = 1)';
 	} else {
-		$t_where = "(username like '$f_letter%')";
+		$t_where = "(username like '$f_prefix%')";
 	}
 
 	# Get the user data in $c_sort order
