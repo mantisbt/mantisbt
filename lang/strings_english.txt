@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.71 $
+	# $Revision: 1.72 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-24 07:24:37 $
+	# $Date: 2002-08-24 21:35:38 $
 	#
-	# $Id: strings_english.txt,v 1.71 2002-08-24 07:24:37 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.72 2002-08-24 21:35:38 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -163,6 +163,7 @@
 	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
 	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
 	$MANTIS_ERROR[ERROR_USERNAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
+	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
 
 	# General Strings
 	$s_go_back = 'Go Back';

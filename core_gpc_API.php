@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-24 09:25:59 $
+	# $Date: 2002-08-24 21:35:38 $
 	#
-	# $Id: core_gpc_API.php,v 1.1 2002-08-24 09:25:59 jfitzell Exp $
+	# $Id: core_gpc_API.php,v 1.2 2002-08-24 21:35:38 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -35,7 +35,7 @@
 		} else if ( null !== $p_default) {
 			$t_result = $p_default;
 		} else {
-			trigger_error(ERROR_GPC_VAR_NOT_FOUND, E_USER_ERROR);
+			trigger_error(ERROR_GPC_VAR_NOT_FOUND, ERROR);
 			$t_result = null;
 		}
 		

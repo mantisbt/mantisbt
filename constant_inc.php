@@ -23,6 +23,9 @@
 	#define( 'SUCCESS', 1 );
 	#define( 'NOERROR', 1 );
 	#define( 'ERROR',   0 );
+	define( 'ERROR', E_USER_ERROR );
+	define( 'WARNING', E_USER_WARNING );
+	define( 'NOTICE', E_USER_NOTICE );
 
 	# access levels
 	define( 'VIEWER',         10 );
@@ -151,6 +154,7 @@
 	define( 'ERROR_FILE_TOO_BIG',        16 );
 	define( 'ERROR_GPC_VAR_NOT_FOUND',   17 );
 	define( 'ERROR_USERNAME_NOT_UNIQUE', 18 );
+	define( 'ERROR_CONFIG_OPT_NOT_FOUND',19 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

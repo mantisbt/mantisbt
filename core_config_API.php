@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-24 09:16:54 $
+	# $Date: 2002-08-24 21:35:38 $
 	#
-	# $Id: core_config_API.php,v 1.1 2002-08-24 09:16:54 jfitzell Exp $
+	# $Id: core_config_API.php,v 1.2 2002-08-24 21:35:38 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -35,10 +35,36 @@
 		if ( isset( $GLOBALS['g_'.$p_option] ) ) {
 			return $GLOBALS['g_'.$p_option];
 		} else {
-			# @@@ trigerring either a NOTICE or a WARNING would be nice here
-			#      if no $p_default was supplied (the common case)
+			# unless we were allowing for the option not to exist by passing
+			#  a default, trigger a NOTICE
+			if ( null == $p_default ) { 
+				trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, NOTICE );
+			}
 			return $p_default;
 		}
 	}
 
+	# ------------------
+	# Returns true if the specified config option exists (ie. a 
+	#  value or default can be found), false otherwise
+	function config_is_set( $p_option ) {
+		if ( isset( $GLOBALS['g_'.$p_option] ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	# ------------------
+	# Sets the value of the given config option to the given value
+	#  If the config option does not exist, an ERROR is triggered
+	function config_set( $p_option, $p_value ) {
+		if ( ! isset( $GLOBALS['g_'.$p_option] ) ) {
+			trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
+		}
+
+		$GLOBALS['g_'.$p_option] = $p_value;
+
+		return true;
+	}
 ?>
