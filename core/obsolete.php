@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.5 2002-12-17 08:08:24 jfitzell Exp $
+	# $Id: obsolete.php,v 1.6 2002-12-17 08:32:58 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -16,6 +16,14 @@
 	###########################################################################
 
 	# Check for obsolete variables
+	config_obsolete( 'new_color', 'status_colors' );
+	config_obsolete( 'feedback_color', 'status_colors' );
+	config_obsolete( 'acknowledged_color', 'status_colors' );
+	config_obsolete( 'confirmed_color', 'status_colors' );
+	config_obsolete( 'assigned_color', 'status_colors' );
+	config_obsolete( 'resolved_color', 'status_colors' );
+	config_obsolete( 'closed_color', 'status_colors' );
+
 	config_obsolete( 'notify_developers_on_new', 'notify_flags' );
 	config_obsolete( 'notify_on_new_threshold', 'notify_flags' );
 	config_obsolete( 'notify_admin_on_new', 'notify_flags' );
