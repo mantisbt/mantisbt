@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.86 2004-02-27 15:39:49 yarick123 Exp $
+	# $Id: html_api.php,v 1.87 2004-02-28 00:10:38 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -374,8 +374,9 @@
 				}
 
 				# Documentation Page
-				if( config_get( 'show_documentation' ) )
+				if( ON == config_get( 'show_documentation' ) ) {
 					$t_menu_options[] = '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a>';
+				}
 
 				# Manage Users (admins) or Manage Project (managers)
 				if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {

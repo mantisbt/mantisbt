@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.142 2004-02-27 15:39:49 yarick123 Exp $
+	# $Id: config_defaults_inc.php,v 1.143 2004-02-28 00:10:37 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -302,6 +302,7 @@
 	$g_show_view			= BOTH;
 
 	# --- top menu items --------------
+	# Specifies whether to show the Doc menu item or not.
 	$g_show_documentation	= ON;
 
 	# --- footer menu -----------------
