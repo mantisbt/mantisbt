@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.81 2005-02-08 16:11:23 thraxisp Exp $
+	# $Id: filter_api.php,v 1.82 2005-02-11 15:38:15 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -517,8 +517,7 @@
 					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 					foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
 						if ( isset( $t_filter_member ) &&
-							( '[any]' != strtolower( $t_filter_member ) ) &&
-							( !is_blank( trim( $t_filter_member ) ) ) ) {
+							( '[any]' != strtolower( $t_filter_member ) ) ) {
 
 							$t_filter_member = stripslashes( $t_filter_member );
 							if ( '[none]' == $t_filter_member ) { # coerce filter value if selecting 'none'
@@ -543,7 +542,7 @@
 								$t_custom_where_clause .= "= '";
 								$t_custom_where_clause_closing = "' )";
 							}
-							$t_custom_where_clause .= db_prepare_string( trim( $t_filter_member ) );
+							$t_custom_where_clause .= db_prepare_string( $t_filter_member );
 							$t_custom_where_clause .= $t_custom_where_clause_closing;
 						}
 					}
@@ -1494,7 +1493,7 @@
 						foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
 							$t_current = stripslashes( $t_current );
 							$t_this_string = '';
-							if ( ( $t_current == '[any]' ) || ( is_blank( $t_current ) ) || ( $t_current === 0 ) ) {
+							if ( ( $t_current == '[any]' ) || ( $t_current === 0 ) ) {
 								$t_any_found = true;
 							} else if ( '[none]' == $t_current ) {
 								$t_this_string = lang_get( 'none' );
@@ -2094,6 +2093,19 @@
 		global $t_select_modifier, $t_filter;
 		?>
 		<select <?php PRINT $t_select_modifier;?> name="reporter_id[]">
+		<?php
+			# if current user is a reporter, and limited reports set to ON, only display that name
+			if ( ( ON == config_get( 'limit_reporters' ) ) && ( current_user_get_access_level() <= config_get( 'report_bug_threshold' ) ) ) {
+				$t_id = auth_get_current_user_id();
+				$t_username = user_get_field( $t_id, 'username' );
+				$t_realname = user_get_field( $t_id, 'realname' );
+				$t_display_name = string_attribute( $t_username );
+				if ( ( isset( $t_realname ) ) && ( $t_realname > "" ) && ( ON == config_get( 'show_realname' ) ) ){
+					$t_display_name = string_attribute( $t_realname );
+				}
+				PRINT '<option value="' . $t_id . '" SELECTED >' . $t_display_name . '</option>';
+			} else {
+		?>
 			<option value="[any]" <?php check_selected( $t_filter['reporter_id'], '[any]' ); ?>>[<?php echo lang_get( 'any' ) ?>]</option>
 			<?php
 				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
@@ -2103,6 +2115,7 @@
 				}
 			?>
 			<?php print_reporter_option_list( $t_filter['reporter_id'] ) ?>
+			<?php } ?>
 		</select>
 		<?php
 	}
@@ -2380,7 +2393,7 @@
 				echo '>[' . lang_get( 'none' ) .']</option>';
 			}
 			foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
-				if ( ( strtolower( $t_item ) != "[any]" ) && ( strtolower( $t_item ) != "[none]" ) && ( trim( $t_item ) != "" ) ) {
+				if ( ( strtolower( $t_item ) != "[any]" ) && ( strtolower( $t_item ) != "[none]" ) ) {
 					echo '<option value="' .  htmlentities( $t_item )  . '" ';
 					if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
 						check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );

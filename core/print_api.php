@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.112 2005-02-02 10:38:56 vboctor Exp $
+	# $Id: print_api.php,v 1.113 2005-02-11 15:38:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -154,6 +154,45 @@
 		}
 	}
 	# --------------------
+	# This populates an option list with the appropriate users by access level
+	#
+	# @@@ from print_reporter_option_list
+	function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
+		$t_users = array();
+
+		if ( null === $p_project_id ) {
+			$p_project_id = helper_get_current_project();
+		}
+
+		$t_users = project_get_all_user_rows( $p_project_id, $p_access ); # handles ALL_PROJECTS case
+
+		$t_display = array();
+		$t_sort = array();
+		foreach ( $t_users as $t_user ) {
+			$t_user_name = string_attribute( $t_user['username'] );
+			$t_sort_name = $t_user_name;
+			if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
+				$t_user_name = string_attribute( $t_user['realname'] );
+				if ( ON == config_get( 'sort_by_last_name') ) {
+					$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
+					$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
+				} else {
+					$t_sort_name = strtolower( $t_user_name );
+				}
+			}
+			$t_display[] = $t_user_name;
+			$t_sort[] = $t_sort_name;
+		}
+		array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+		for ($i = 0; $i < count( $t_sort ); $i++ ) {
+			$t_row = $t_users[$i];
+			PRINT '<option value="' . $t_row['id'] . '" ';
+			check_selected( $p_user_id, $t_row['id'] );
+			PRINT '>' . $t_display[$i] . '</option>';
+		}
+	}
+
+	# --------------------
 	# ugly functions  need to be refactored
 	# This populates the reporter option list with the appropriate users
 	#
@@ -164,66 +203,7 @@
 	#  who are listed as the reporter in any bug?  It would probably be a
 	#  faster query actually.
 	function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
-		$t_users = array();
-
-		if ( null === $p_project_id ) {
-			$p_project_id = helper_get_current_project();
-		}
-
-		# if current user is a reporter, and limited reports set to ON.
-		if ( ( ON == config_get( 'limit_reporters' ) ) && ( current_user_get_access_level() <= config_get( 'report_bug_threshold' ) ) ) {
-			$t_user['id'] = auth_get_current_user_id();
-			$t_user['username'] = user_get_field( $t_user['id'], 'username' );
-			$t_user['realname'] = user_get_field( $t_user['id'], 'realname' );
-			$t_users[] = $t_user;
-		}
-		else
-		# checking if it's per project or all projects
-		if ( ALL_PROJECTS == $p_project_id ) {
-			$t_adm = ADMINISTRATOR;
-			$t_rep = config_get( 'report_bug_threshold' );
-			$t_pub = VS_PUBLIC;
-			$t_prv = VS_PRIVATE;
-
-			$t_user_table = config_get( 'mantis_user_table' );
-			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
-			$t_project_table = config_get( 'mantis_project_table' );
-
-			$query = "SELECT DISTINCT u.id, u.username, u.realname
-					FROM 	$t_user_table u,
-							$t_project_user_list_table l,
-							$t_project_table p
-					WHERE	((p.view_state='$t_pub'
-							  AND u.access_level>='$t_rep') OR
-							 (l.access_level>='$t_rep' AND
-							  l.user_id=u.id) OR
-							 u.access_level>='$t_adm') AND
-							p.id=l.project_id
-					ORDER BY u.realname, u.username";
-			$result = db_query( $query );
-			$user_count = db_num_rows( $result );
-			for ( $i=0 ; $i < $user_count ; $i++ ) {
-				$row = db_fetch_array( $result );
-				$t_users[] = $row;
-			}
-		} else {
-			$t_users = project_get_all_user_rows( $p_project_id );
-		}
-
-		$t_display = array();
-		foreach ( $t_users as $t_user ) {
-			$t_user_name = string_attribute( $t_user['username'] );
-			if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
-				$t_user_name = string_attribute( $t_user['realname'] );
-			}
-			$t_display[$t_user['id']] = $t_user_name;
-		}
-		natcasesort( $t_display );
-		foreach ($t_display as $t_id => $t_name ) {
-			PRINT '<option value="' . $t_id . '" ';
-			check_selected( $p_user_id, $t_id );
-			PRINT '>' . $t_name . '</option>';
-		}
+		print_user_option_list( $p_user_id, $p_project_id, config_get( 'report_bug_threshold' ) );
 	}
 
 	# --------------------
@@ -298,61 +278,12 @@
 	}
 	# --------------------
 	function print_assign_to_option_list( $p_user_id='', $p_project_id = null, $p_threshold = null ) {
-		$t_users = array();
-
-		if ( null === $p_project_id ) {
-			$p_project_id = helper_get_current_project();
-		}
 
 		if ( null === $p_threshold ) {
 			$p_threshold = config_get( 'handle_bug_threshold' );
 		}
 
-		# checking if it's per project or all projects
-		if ( ALL_PROJECTS == $p_project_id ) {
-			$t_adm = ADMINISTRATOR;
-			$t_pub = VS_PUBLIC;
-			$t_prv = VS_PRIVATE;
-
-			$t_user_table = config_get( 'mantis_user_table' );
-			$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
-			$t_project_table = config_get( 'mantis_project_table' );
-
-			$query = "SELECT DISTINCT u.id, u.username, u.realname
-					FROM 	$t_user_table u,
-							$t_project_user_list_table l,
-							$t_project_table p
-					WHERE	((p.view_state='$t_pub' AND
-							  u.access_level>='$p_threshold') OR
-							 (l.access_level>='$p_threshold' AND
-							  l.user_id=u.id) OR
-							 u.access_level>='$t_adm') AND
-							p.id = l.project_id
-					ORDER BY u.realname, u.username";
-			$result = db_query( $query );
-			$user_count = db_num_rows( $result );
-			for ( $i=0 ; $i < $user_count ; $i++ ) {
-				$row = db_fetch_array( $result );
-				$t_users[$row['username']] = $row;
-			}
-		} else {
-			$t_users = project_get_all_user_rows( $p_project_id, $p_threshold );
-		}
-
-		$t_display = array();
-		foreach ( $t_users as $t_user ) {
-			$t_user_name = string_attribute( $t_user['username'] );
-			if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
-				$t_user_name = string_attribute( $t_user['realname'] );
-			}
-			$t_display[$t_user['id']] = $t_user_name;
-		}
-		natcasesort( $t_display );
-		foreach ($t_display as $t_id => $t_name ) {
-			PRINT '<option value="' . $t_id . '" ';
-			check_selected( $p_user_id, $t_id );
-			PRINT '>' . $t_name . '</option>';
-		}
+		print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
 	}
 	# --------------------
 	# List projects that the current user has access to
@@ -646,19 +577,7 @@
 	# prints the list of a project's users
 	# if no project is specified uses the current project
 	function print_project_user_option_list( $p_project_id=null ) {
- 		if ( null === $p_project_id ) {
-			$p_project_id = helper_get_current_project();
-		}
-
-		$t_rows = project_get_all_user_rows( $p_project_id );
-		foreach ( $t_rows as $t_row ) {
-			$t_user_id = $t_row['id'];
-			$t_username = string_attribute( $t_row['username'] );
-			if ( isset( $t_row['realname'] ) && $t_row['realname'] > "" ) {
-				$t_username = string_attribute( $t_row['realname'] );
-			}
-			PRINT "<option value=\"$t_user_id\">$t_username</option>";
-		}
+ 		print_user_option_list( 0, $p_project_id );
 	}
 	# --------------------
 	# prints the list of access levels exluding ADMINISTRATOR

@@ -9,6 +9,7 @@ Mantis ChangeLog
 - New Config: $g_graph_bar_aspect - bar graph aspect ration (height / width)(thraxisp)
 - New Config: $g_graph_summary_graphs_per_row - graphs to put in each row in the advanced summary page (thraxisp)
 - New Config: $g_max_dropdown_length - length to truncate dropdown menu items to for view_all_bugs_page (thraxisp)
+- New Config: $g_sort_by_last_name - sort for names in dropdown lists (thraxisp)
 - removed config option - $g_relationship_graph_fontpath replaced by $g_system_font_folder (bpfennig)
 - Update Estonian language
 

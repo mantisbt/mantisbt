@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.239 2005-01-29 03:10:03 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.240 2005-02-11 15:38:13 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -439,6 +439,9 @@
 	# -- show users with their real name or not
 	$g_show_realname = OFF;
 	$g_differentiate_duplicates = OFF;  # leave off for now
+	
+	# -- sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted with the "D"s
+	$g_sort_by_last_name = OFF;
 
 	############################
 	# Mantis JPGRAPH Addon

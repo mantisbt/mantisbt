@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.62 2004-09-28 00:56:14 thraxisp Exp $
+	# $Id: project_api.php,v 1.63 2005-02-11 15:38:16 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -449,8 +449,11 @@
 
 		$t_user_table = config_get( 'mantis_user_table' );
 		$t_project_user_list_table = config_get( 'mantis_project_user_list_table' );
+		$t_project_table = config_get( 'mantis_project_table' );
 
 		$t_on = ON;
+		$t_adm = ADMINISTRATOR;
+		$t_pub = VS_PUBLIC;
 
 		$t_access_level = $p_access_level;
 
@@ -464,49 +467,23 @@
 			}
 		}
 
-		$t_access_clause = '';
-
-		if ( $t_access_level > 0 ) {
-			$t_access_clause = ' AND access_level >= ' . $t_access_level;
-		}
+		$t_project_clause = ( $c_project_id != ALL_PROJECTS ) ? ' AND p.id = ' . $c_project_id : '';
 
 		$t_users = array();
-
-		$query = "SELECT id, username, realname, access_level
-					FROM $t_user_table
-					WHERE enabled = $t_on
-					$t_access_clause
-					ORDER BY realname, username";
-
+		$query = "SELECT DISTINCT u.id, u.username, u.realname
+					FROM 	$t_user_table u, 
+							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id
+					WHERE	( ( p.view_state='$t_pub' AND u.access_level >= $t_access_level ) 
+							OR ( l.access_level >= $t_access_level AND l.user_id=u.id ) 
+							OR u.access_level>='$t_adm' ) 
+							AND u.enabled = $t_on
+							$t_project_clause
+					ORDER BY u.realname, u.username";
 		$result = db_query( $query );
 		$t_row_count = db_num_rows( $result );
 		for ( $i=0 ; $i < $t_row_count ; $i++ ) {
 			$row = db_fetch_array( $result );
-			$t_users[$row['id']] = $row;
-		}
-
-		if( $c_project_id != ALL_PROJECTS ) {
-			# Get the project overrides
-			$query = "SELECT u.id, u.username, u.realname, l.access_level
-						FROM $t_project_user_list_table l, $t_user_table u
-						WHERE l.user_id = u.id
-						  AND u.enabled = $t_on
-						  AND l.project_id = $c_project_id
-						ORDER BY u.realname, u.username";
-
-			$result = db_query( $query );
-			$t_row_count = db_num_rows( $result );
-			for ( $i=0 ; $i < $t_row_count ; $i++ ) {
-				$row = db_fetch_array( $result );
-
-				if ( $row['access_level'] >= $p_access_level ) {
-					$t_users[$row['id']] = $row;
-				} else {
-					# If user's overridden level is lower than required, so remove
-					#  them from the list if they were previously there
-					unset( $t_users[$row['id']] );
-				}
-			}
+			$t_users[] = $row;
 		}
 
 		return array_values($t_users);
