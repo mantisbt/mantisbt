@@ -28,13 +28,15 @@
 	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
 	$f_offset		= gpc_get_int( 'offset', 0 );
 
+	$t_cookie_value = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+
 	# check to see if the cookie does not exist
-	if ( is_blank( $g_view_all_cookie_val ) ) {
+	if ( is_blank( $t_cookie_value ) ) {
 		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
 
 	# check to see if new cookie is needed
-	$t_setting_arr 			= explode( '#', $g_view_all_cookie_val );
+	$t_setting_arr 			= explode( '#', $t_cookie_value );
 	if ( $t_setting_arr[0] != $g_cookie_version ) {
 		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}

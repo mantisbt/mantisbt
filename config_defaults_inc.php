@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.99 2003-02-24 10:15:04 jfitzell Exp $
+	# $Id: config_defaults_inc.php,v 1.100 2003-02-24 10:19:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -754,17 +754,6 @@
 	$g_project_cookie		= $g_cookie_prefix.'_PROJECT_COOKIE';
 	$g_view_all_cookie		= $g_cookie_prefix.'_VIEW_ALL_COOKIE';
 	$g_manage_cookie		= $g_cookie_prefix.'_MANAGE_COOKIE';
-
-	# --- cookie values ---------------
-	#@@@ this code can be removed after full conversion to
-	#@@@ the gpc_api
-	$g_view_all_cookie_val	= '';
-
-	if ( isset( $HTTP_COOKIE_VARS[$g_view_all_cookie] ) ) {
-		$g_view_all_cookie_val	= $HTTP_COOKIE_VARS[$g_view_all_cookie];
-	}
-	#@@@ end removable code block
-	#@@@
 
 	#######################################
 	# Mantis Database Table Variables
