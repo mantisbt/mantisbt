@@ -63,7 +63,7 @@
 		</td>
 		<td>
 			<select name=f_reproducibility>
-				<option value="" SELECTED>Select Reproducebility
+				<option value="" SELECTED>Select Reproducibility
 				<? print_list( "reproducibility" ) ?>
 			</select>
 		</td>
