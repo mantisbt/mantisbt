@@ -11,12 +11,12 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	# these pages are invalid for the 'All Project' selection
-	if ( '0000000' == $g_project_cookie_val ) {
-		print_header_redirect( 'login_select_proj_page.php' );
+	# this page is invalid for the 'All Project' selection
+	if ( 0 == helper_get_current_project() ) {
+		print_header_redirect( 'login_select_proj_page.php?ref=' . get_report_redirect_url( true ) );
 	}
 
-	if ( ADVANCED_ONLY == $g_show_report ) {
+	if ( ADVANCED_ONLY == config_get( 'show_report' ) ) {
 		print_header_redirect ( 'bug_add_advanced_page.php' );
 	}
 
