@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.37 2003-02-18 02:18:02 jfitzell Exp $
+	# $Id: helper_api.php,v 1.38 2003-02-19 06:55:31 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -121,6 +121,23 @@
 			echo ' checked="checked" ';
 		}
 	}
+
+	# --------------------
+	# Set up PHP for a long process execution
+	# The script timeout is set based on the value of the 
+	#  long_process_timeout config option.
+	# $p_ignore_abort specified whether to ignore user aborts by hitting
+	#  the Stop button (the default is not to ignore user aborts)
+	function helper_begin_long_process( $p_ignore_abort=false ) {
+		$t_timeout = config_get( 'long_process_timeout' );
+
+		set_time_limit( $t_timeout );
+
+		ignore_user_abort( $p_ignore_abort );
+
+		return $t_timeout;
+	}
+
 	# --------------------
 	# Return the current project id as stored in a cookie
 	#  If no cookie exists, the user's default project is returned

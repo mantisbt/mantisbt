@@ -15,6 +15,7 @@ Mantis ChangeLog
  * Fix: obscure error when database connect failed
  * Fix: error when deleting news items
  * New config option (mail_priority): if use_x_priority is set to ON, what should the value of X-Priority be? The default is 3 (instead of 0 in previous version, which was misinterpreted by some MTAs)
+ * New config option (long_process_timeout): the number of seconds to give long executing pages (like database upgrades) to complete before aborting them (defaults to 0 which is unlimited)
  * Removed config option (mail_send_crlf): having this option off (default) violated RFC 822bis and there shouldn't be any server which required it to be set to off
  * Languages: Updated Dutch, French, German and Italian localisations.
  * Languages: Synchronized localisation files with the English localisation.

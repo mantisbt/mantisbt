@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.83 2003-02-17 13:35:49 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.84 2003-02-19 06:55:31 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -308,6 +308,12 @@
 
 	# minutes to wait before document is stale (in minutes)
 	$g_content_expire		= 0;
+
+	# The time (in seconds) to allow for page execution during long processes
+	#  such as upgrading your database.
+	# The default value of 0 indicates that the page should be allowed to
+	#  execute until it is finished.
+	$g_long_process_timeout	= 0;
 
 	############################
 	# Mantis Date Settings

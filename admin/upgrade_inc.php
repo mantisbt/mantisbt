@@ -227,6 +227,16 @@
 				global $_SERVER;
 			}
 
+			if ( $p_execute ) {
+				# Mark this as a long process and ignore user aborts
+				helper_begin_long_process( true );
+				# Disable compression so we can stream
+				compress_disable();
+				# Flush the output buffer
+				ob_end_flush();
+				echo '<b>Please be patient, this may take a while...</b>';
+			}
+
 			# Form
 			echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 
