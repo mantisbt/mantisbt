@@ -37,7 +37,7 @@
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 		$v_diskfile 	= str_replace( $DOCUMENT_ROOT, "", $v_diskfile );
 		$v_diskfile		= dirname( $v_diskfile )."/".rawurlencode( $v_filename );
-		$v_filesize 	= round( $v_filesize / 1024 );
+		$v_filesize 	= number_format( $v_filesize );
 		$v_title 		= string_display( $v_title );
 		$v_description 	= string_display( $v_description );
 

@@ -6,6 +6,7 @@ Mantis
  * Fixed account profiles to check for blank inputs.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
+ * Modified file size reports to show up as bytes.
 
 03.15.2002  -   0.17.1
 

@@ -196,7 +196,7 @@
 			extract( $row, EXTR_PREFIX_ALL, "v2" );
 			$v2_diskfile = str_replace( $DOCUMENT_ROOT, "", $v2_diskfile );
 			$v2_diskfile = dirname( $v2_diskfile )."/".rawurlencode( $v2_filename );
-			$v2_filesize = round( $v2_filesize / 1024 );
+			$v2_filesize = number_format( $v2_filesize );
 			$v2_date_added = date( $g_normal_date_format, ( $v2_date_added ) );
 
 			switch ( $g_file_upload_method ) {
