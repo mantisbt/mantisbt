@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.17 2003-02-27 07:04:57 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.18 2003-03-01 12:11:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -177,7 +177,7 @@
 			$query = "DELETE
 					FROM $t_bugnote_text_table
 					WHERE id='$t_bugnote_text_id'";
-			$result = db_query( $query );
+			db_query( $query );
 		}
 
 		# Delete the corresponding bugnotes
