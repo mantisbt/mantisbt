@@ -55,7 +55,7 @@
 	}
 
 	if ( isset( $f_save ) ) {
-		if ( 1== $f_save ) {
+		if ( 1 == $f_save ) {
 			# We came here via the FILTER form button click
 			# Save preferences
 			$t_settings_string = "v1#".
