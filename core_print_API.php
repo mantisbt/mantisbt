@@ -130,49 +130,30 @@
 	function print_reporter_option_list( $p_user_id ) {
 		global $g_mantis_user_table, $g_project_cookie_val, $g_mantis_project_user_list_table;
 
-		#"global" reporters
-		$lst_global = array();
 		$t_rep = REPORTER;
-	    $query = "SELECT id, username
-	    		FROM $g_mantis_user_table
-	    		WHERE access_level>='$t_rep'
-	    		ORDER BY username";
-	    $result = db_query( $query );
-	    $user_count = db_num_rows( $result );
-	    for ($i=0;$i<$user_count;$i++) {
-	    	$row = db_fetch_array( $result );
-	    	$lst_global[$row["id"]] = $row["username"];
-		}
-	    
-	    #"project-specific" reporters
-	    $lst_specific = array();
+		
 	    #checking if it's a per project statistic or all projects
 		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
-		else $specific_where = " p.project_id='$g_project_cookie_val'";
-	    $query = "SELECT u.id, u.username
-			    FROM $g_mantis_project_user_list_table p, $g_mantis_user_table u
-			    WHERE $specific_where AND p.access_level>='$t_rep' AND
-			    p.user_id = u.id ORDER BY u.username";
+		else $specific_where = " t2.project_id='$g_project_cookie_val'";
+		$query = "SELECT DISTINCT t1.id, t1.username
+				FROM $g_mantis_user_table as t1,
+				$g_mantis_project_user_list_table as t2
+				WHERE ((t1.access_level>=$t_rep) OR
+						(t2.user_id=t1.id AND $specific_where AND
+						t2.access_level>=$t_rep))
+				ORDER BY t1.username";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
-	    for ($i=0;$i<$user_count;$i++) {
-	    	$row = db_fetch_array( $result );
-	    	$lst_specific[$row["id"]] = $row["username"];
-		}	    
-	    
-	   	#merge arrays, sort upon value (username) then reposition at first element
-	    $lst_merged = array_merge($lst_global,$lst_specific);
-	    asort($lst_merged);
-	    reset($lst_merged);
-	    
-	    while (list ($t_user_id, $t_user_name) = each ($lst_merged)) {
-	    	if ( $t_user_id == $p_user_id ) {
-				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name."</option>";
+
+		for ($i=0;$i<$user_count;$i++) {
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+			if ( $v_id == $p_id ) {
+				PRINT "<option value=\"$v_id\" SELECTED>$v_username</option>";
+			} else {
+				PRINT "<option value=\"$v_id\">$v_username</option>";
 			}
-			else {
-				PRINT "<option value=\"$t_user_id\">".$t_user_name."</option>";
-			}
-		}
+		} # end for
 	}
 	# --------------------
 	function print_duplicate_id_option_list() {
@@ -245,12 +226,15 @@
 		$t_man = MANAGER;
 		$t_adm = ADMINISTRATOR;
 
+		#checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
+		else $specific_where = " t2.project_id='$g_project_cookie_val'";
+		
 		$query = "SELECT DISTINCT t1.id, t1.username
 				FROM $g_mantis_user_table as t1,
 				$g_mantis_project_user_list_table as t2
 				WHERE ((t1.access_level>=$t_dev) OR
-						(t2.user_id=t1.id AND
-						t2.project_id=$g_project_cookie_val AND
+						(t2.user_id=t1.id AND $specific_where AND
 						t2.access_level>=$t_dev))
 				ORDER BY t1.username";
 
