@@ -18,6 +18,7 @@ Mantis ChangeLog
  * Fix #2969: Bug not found error when deleting a bugnote.
  * Fix #2970: Sending a reminder sends two notifications.
  * Fix #2974: Message "APPLICATION WARNING #300" on main page.
+ * Fix #2978: URLs not hyperlinked in news_add page.
  * Fix #2982: Having email_set_category set to EMAIL_CATEGORY_PROJECT_CATEGORY erased various mail headers.
  * Languages: Updated German localisation.
  * Removed config option (bugnote_include_file): Used file path directly since there is no reason to make it configurable.

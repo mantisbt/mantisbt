@@ -21,8 +21,8 @@
 	$f_body			= gpc_get_string( 'body', '' );
 
 	news_create( helper_get_current_project(), auth_get_current_user_id(), $f_view_state, $f_announcement, $f_headline, $f_body );
-    $f_headline = string_display( $f_headline );
-    $f_body 	= string_display_links( $f_body );
+	$f_headline = string_display_links( $f_headline );
+	$f_body	= string_display_links( $f_body );
 ?>
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
