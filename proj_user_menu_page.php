@@ -40,10 +40,16 @@
 ?>
 <p>
 <div align="center">
-<?php echo $s_public_project_msg ?>
+<table class="width75" cellspacing="1">
+<tr>
+	<td class="center">
+		<?php echo $s_public_project_msg ?>
+	</td>
+</tr>
+</table>
 </div>
 <?php
-	} else {
+	}
 ?>
 <p>
 <div align="center">
@@ -59,7 +65,7 @@
 		<?php echo $s_username ?>
 	</td>
 	<td>
-		<select name="f_user_id[]" multiple size="5">
+		<select name="f_user_id[]" multiple size="10">
 			<?php print_project_user_list_option_list() ?>
 		</select>
 	</td>
@@ -109,6 +115,7 @@
 	$t_dev = DEVELOPER;
 	$t_man = MANAGER;
 	$t_adm = ADMINISTRATOR;
+	$t_pub = PUBLIC;
 
 	# Get the user data in $f_sort order
 	$query = "SELECT DISTINCT t1.id, t1.username, t1.email, t1.access_level, t2.user_id, t2.access_level
@@ -119,21 +126,25 @@
 				  (t2.project_id=$g_project_cookie_val)
 			ORDER BY '$f_sort' $f_dir";
 
+	$query = "SELECT DISTINCT u.id, u.username, u.email
+			FROM 	$g_mantis_user_table u,
+					$g_mantis_project_user_list_table l,
+					$g_mantis_project_table p
+			WHERE	u.access_level>=$t_adm OR
+					(p.view_state=$t_pub AND
+					p.id=$g_project_cookie_val) OR
+					(u.id=l.user_id AND
+					l.project_id=$g_project_cookie_val)
+			ORDER BY u.username";
+
     $result = db_query($query);
 	$user_count = db_num_rows( $result );
 	for ($i=0;$i<$user_count;$i++) {
-		if ( isset( $u_user_id ) ) {
-			unset( $u_user_id );
-		}
 		# prefix user data with u_
 		$row = db_fetch_array($result);
 		extract( $row, EXTR_PREFIX_ALL, "u" );
 
-		if ( !isset( $u_user_id ) ) {
-			$t_user_id = $u_id;
-		} else {
-			$t_user_id = $u_user_id;
-		}
+		$u_access_level = get_effective_access_level( $u_id );
 
 		# alternate row colors
 		$t_bgcolor = alternate_colors( $i );
@@ -150,8 +161,8 @@
 	</td>
 	<td class="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php
-			if ( isset( $u_user_id ) ) {
-				print_bracket_link( $g_proj_user_delete."?f_user_id=".$t_user_id, $s_remove_link );
+			if ( is_removable_proj_user( $u_id ) ) {
+				print_bracket_link( $g_proj_user_delete."?f_user_id=".$u_id, $s_remove_link );
 			}
 		?>
 	</td>
@@ -161,7 +172,5 @@
 ?>
 </table>
 </div>
-
-<?php } # end public/private else ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

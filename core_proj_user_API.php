@@ -38,6 +38,18 @@
 		return db_query( $query );
 	}
 	# --------------------
+	# update entry
+	# must make sure entry exists beforehand
+	function proj_user_update( $p_project_id, $p_user_id, $p_access_level ) {
+		global $g_mantis_project_user_list_table;
+
+		$query = "UPDATE $g_mantis_project_user_list_table
+				SET		access_level='$p_access_level'
+				WHERE	project_id='$p_project_id' AND
+						user_id='$p_user_id'";
+		return db_query( $query );
+	}
+	# --------------------
 	# remove user from project
 	function proj_user_delete( $p_project_id, $p_user_id ) {
 		global $g_mantis_project_user_list_table;
@@ -67,6 +79,23 @@
 				FROM $g_mantis_project_user_list_table
 				WHERE project_id='$p_project_id'";
 		return db_query( $query );
+	}
+	# --------------------
+	# returns true if the user exists in the project user list.
+	function is_removable_proj_user( $p_user_id ) {
+		global $g_mantis_project_user_list_table, $g_project_cookie_val;
+
+		$query = "SELECT COUNT(*)
+				FROM $g_mantis_project_user_list_table p
+				WHERE	p.project_id='$g_project_cookie_val' AND
+						p.user_id='$p_user_id'";
+		$result = db_query( $query );
+		$count = db_result( $result, 0, 0 );
+		if ( $count>0 ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	# --------------------
 ?>

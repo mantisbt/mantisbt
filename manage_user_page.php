@@ -25,7 +25,7 @@
 
 <p>
 <div align="center">
-<table class="width50" cellspacing="1">
+<table class="width75" cellspacing="1">
 <form method="post" action="<?php echo $g_manage_user_update ?>">
 <input type="hidden" name="f_id" value="<?php echo $u_id ?>">
 <tr>
@@ -34,10 +34,10 @@
 	</td>
 </tr>
 <tr class="row-1">
-	<td class="category">
+	<td class="category" width="30%">
 		<?php echo $s_username ?>:
 	</td>
-	<td colspan="2">
+	<td colspan="2" width="70%">
 		<input type="text" size="16" maxlength="32" name="f_username" value="<?php echo $u_username ?>">
 	</td>
 </tr>
@@ -113,8 +113,8 @@
 <?php ### BEGIN User to Project Add Form ?>
 <p>
 <div align="center">
-<table class="width50" cellspacing="1">
-<form method="post" action="<?php echo $g_proj_user_add2 ?>">
+<table class="width75" cellspacing="1">
+<form method="post" action="<?php echo $g_manage_user_proj_add ?>">
 <input type="hidden" name="f_user_id" value="<?php echo $u_id ?>">
 <tr>
 	<td class="form-title" colspan="2">
@@ -122,18 +122,18 @@
 	</td>
 </tr>
 <tr class="row-1" valign="top">
-	<td class="category" width="50%">
+	<td class="category" width="30%">
 		<?php echo $s_assigned_projects ?>:
 	</td>
-	<td width="50%">
+	<td width="70%">
 		<?php print_project_user_list( $u_id ) ?>
 	</td>
 </tr>
 <tr class="row-2" valign="top">
-	<td class="category" width="50%">
+	<td class="category">
 		<?php echo $s_unassigned_projects ?>:
 	</td>
-	<td width="50%">
+	<td>
 		<select name="f_project_id[]" multiple size="5">
 			<?php print_project_user_list_option_list2( $u_id ) ?>
 		</select>

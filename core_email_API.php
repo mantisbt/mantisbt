@@ -95,6 +95,7 @@
 			$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
 			$t_dev = DEVELOPER;
 			$t_adm = ADMINISTRATOR;
+			$t_public = PUBLIC;
 
 			# grab all the ADMINISTRATORS
 			$query = "SELECT DISTINCT id, email
@@ -124,13 +125,28 @@
 								p.access_level>=$t_dev AND
 								p.user_id=u.id";
 			}
+
+			# grab all users to mail
+			$query = "SELECT DISTINCT u.id, u.email
+					FROM 	$g_mantis_user_table u,
+							$g_mantis_project_user_list_table l,
+							$g_mantis_project_table p
+					WHERE	u.access_level>=$t_adm OR
+							(p.view_state=$t_public AND
+							p.id=$g_project_cookie_val AND
+							u.access_level>=$t_dev) OR
+							(u.id=l.user_id AND
+							l.project_id=$g_project_cookie_val AND
+							l.access_level>=$t_dev)
+					ORDER BY u.username";
+
 			$result = db_query( $query );
 			$proj_user_count = db_num_rows( $result );
 			for ($i=0;$i<$proj_user_count;$i++) {
 				$row = db_fetch_array( $result );
 
 				# if the user's notification is on then add to the list
-				$t_notify = get_user_pref_info( $row["user_id"], $p_notify_type );
+				$t_notify = get_user_pref_info( $row["id"], $p_notify_type );
 				if ( ON == $t_notify ) {
 					$send_arr[] = $row["email"];
 				}
@@ -144,7 +160,6 @@
 		foreach ( $send_arr as $send_val ) {
 			$t_bcc .= $send_val.", ";
 		}
-
 		# chop off the last comma and add a \n
 		if ( strlen( $t_bcc ) > 5 ) {
 			return substr( $t_bcc, 0, strlen( $t_bcc )-2).(($g_use_bcc) ? "\n" : "");  ## win-bcc-bug

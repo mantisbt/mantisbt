@@ -45,6 +45,7 @@ Mantis
  * Modified time stats in summary to use CLOSED instead of resolved.
  * Modified setcookie() to use g_cookie_path when unsetting.
  * Modified set_project.php to avoid double refresh when using IIS.
+ * Modified project user module behavior.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added Czech translation.

@@ -10,9 +10,9 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
-	$result = proj_user_delete( $g_project_cookie_val, $f_user_id );
+	$result = proj_user_delete( $f_project_id, $f_user_id );
 
-    $t_redirect_url = $g_proj_user_menu_page;
+    $t_redirect_url = $g_manage_user_page."?f_id=".$f_user_id;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

@@ -499,19 +499,39 @@
 	# --------------------
 	# Return the project user list access level for the current user/project key pair if it exists.
 	# Otherwise return the default user access level.
-	function get_effective_access_level() {
+	function get_effective_access_level( $p_user_id=0, $p_project_id=-1 ) {
 		global	$g_mantis_project_user_list_table,
 				$g_project_cookie_val;
 
-		$t_user_id = get_current_user_field( "id" );
-		$query = "SELECT access_level
-				FROM $g_mantis_project_user_list_table
-				WHERE user_id='$t_user_id' AND project_id='$g_project_cookie_val'";
+		# use the current user unless otherwise specified
+		if ( 0 == $p_user_id ) {
+			$t_user_id = get_current_user_field( "id" );
+		} else {
+			$t_user_id = $p_user_id;
+		}
+
+		# all projects
+		if ( -1 == $p_project_id ) {
+			$query = "SELECT access_level
+					FROM $g_mantis_project_user_list_table
+					WHERE user_id='$t_user_id' AND project_id='$g_project_cookie_val'";
+		} else if ( 0 == $p_project_id ) {
+			$g_project_cookie_val = p_project_id;
+			$query = "SELECT access_level
+					FROM $g_mantis_project_user_list_table
+					WHERE user_id='$t_user_id'";
+		} else {
+			$query = "SELECT access_level
+					FROM $g_mantis_project_user_list_table
+					WHERE user_id='$t_user_id' AND project_id='$p_project_id'";
+		}
+
 		$result = db_query( $query );
-		if ( db_num_rows( $result )>0 ) {
+		$count = db_num_rows( $result, 0, 0 );
+		if ( $count>0 ) {
 			return db_result( $result, 0, 0 );
 		} else {
-			return get_current_user_field( "access_level" );
+			return get_user_field( $t_user_id, "access_level" );
 		}
 	}
 	# --------------------
@@ -610,6 +630,26 @@
 		return db_result( $result, 0, 0 );
 
 	}
+	# --------------------
+	# return the specified user field for the user id
+	# exception for LDAP email
+	function get_user_field( $p_user_id, $p_field ) {
+		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
+		if ( ( ON == $g_use_ldap_email ) && ( "email" == $p_field  ) ) {
+		    # Find out what username belongs to the p_user_id and ask ldap
+		    return ldap_emailaddy("$p_user_id");
+		}
+
+		$query = "SELECT $p_field
+				FROM $g_mantis_user_table
+				WHERE id='$p_user_id'";
+
+
+		$result =  db_query( $query );
+		return db_result( $result, 0, 0 );
+
+	}
+	# --------------------
 	###########################################################################
 	# Miscellaneous User API
 	###########################################################################

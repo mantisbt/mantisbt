@@ -274,8 +274,7 @@
 		} # end for
 	}
 	# --------------------
-	# If PUBLIC list all enabled projects.
-	# If PRIVATE list only those the user is assigned to.
+	# List projects that the current user has access to
 	function print_project_option_list( $p_project_id="" ) {
 		global $g_mantis_project_table, $g_mantis_project_user_list_table,
 				$g_project_cookie_val;
@@ -554,25 +553,27 @@
 	# --------------------
 	# list of projects that a user is NOT in
 	function print_project_user_list( $p_user_id ) {
-		global	$g_mantis_project_user_list_table, $g_mantis_project_table;
+		global	$g_mantis_project_user_list_table, $g_mantis_project_table,
+				$s_remove_link, $g_manage_user_proj_delete;
 
-		$t_prv = PRIVATE;
-		$query = "SELECT DISTINCT p.name, u.access_level
+		$query = "SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
 				FROM $g_mantis_project_table p
 				LEFT JOIN $g_mantis_project_user_list_table u
 				ON p.id=u.project_id
 				WHERE p.enabled=1 AND
-					p.view_state='$t_prv' AND
 					u.user_id='$p_user_id'
 				ORDER BY p.name";
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
 			$row = db_fetch_array( $result );
+			$t_project_id = $row["id"];
 			$t_project_name = $row["name"];
+			$t_view_state = $row["view_state"];
 			$t_access_level = $row["access_level"];
 			$t_access_level = get_enum_element( "access_levels", $t_access_level );
-			PRINT "$t_project_name [$t_access_level]<br />";
+			$t_view_state = get_enum_element( "project_view_state", $t_view_state );
+			PRINT "$t_project_name [$t_access_level] ($t_view_state) [<a class=\"small\" href=\"$g_manage_user_proj_delete?f_project_id=$t_project_id&f_user_id=$p_user_id\">$s_remove_link</a>]<br />";
 		}
 	}
 	# --------------------
