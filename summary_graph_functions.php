@@ -7,7 +7,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 <?php
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-
+##
 #############################################################
 
 	function create_bug_enum_summary( $p_enum_string, $p_enum ) {
