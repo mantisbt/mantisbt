@@ -115,11 +115,11 @@
 			<? print_user( $v_handler_id ) ?>
 		</td>
 	</tr>
-	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+	<tr align=center>
+		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_priority ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> align=center>
+		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<? echo $v_priority ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
@@ -128,18 +128,18 @@
 		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<? echo $v_resolution ?>
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_platform ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> align=center>
+		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<? echo $v_platform ?>
 		</td>
 	</tr>
-	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+	<tr align=center>
+		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_status ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?> align=center>
+		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<? echo $v_status ?>
 		</td>
 		<td bgcolor=<? echo $g_category_title_color ?>>
@@ -148,27 +148,27 @@
 		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<? print_duplicate_id( $v_duplicate_id ) ?>
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_os ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_light ?> align=center>
+		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<? echo $v_os ?>
 		</td>
 	</tr>
-	<tr>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+	<tr align=center>
+		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_projection ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> align=center>
+		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<? echo $v_projection ?>
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=2>
 
 		</td>
-		<td bgcolor=<? echo $g_category_title_color ?> align=center>
+		<td bgcolor=<? echo $g_category_title_color ?>>
 			<b><? echo $s_os_version ?></b>
 		</td>
-		<td bgcolor=<? echo $g_primary_color_dark ?> align=center>
+		<td bgcolor=<? echo $g_primary_color_dark ?>>
 			<? echo $v_os_build ?>
 		</td>
 	</tr>

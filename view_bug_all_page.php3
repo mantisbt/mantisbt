@@ -69,9 +69,6 @@
 		$f_dir = "DESC";
 	}
 
-	if ( !isset( $f_offset ) ) {
-		$f_offset = 0;
-	}
 	### build our query string based on our viewing criteria
 	$query = "SELECT * FROM $g_mantis_bug_table";
 
