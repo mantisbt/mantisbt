@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.223 2004-11-19 12:54:13 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.224 2004-11-30 10:55:40 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -32,7 +32,7 @@
 	# --- database variables ---------
 
 	# set these values to match your setup
-	
+
 	# hostname should be either a hostname or connection string to supply to adodb.
 	# For example, if you would like to connect to a mysql server on the local machine,
 	# set hostname to 'localhost', and db_type to 'mysql'.
@@ -181,7 +181,7 @@
 
 	# allow email notification
 	#  note that if this is disabled, sign-up and password reset messages will
-	#  not be sent.  
+	#  not be sent.
 	$g_enable_email_notification	= ON;
 
 	# The following two config options allow you to control who should get email
@@ -206,8 +206,8 @@
  	#         'deleted': a bug has been deleted
 	#         'updated': a bug has been updated
 	#         'bugnote': a bugnote has been added to a bug
-	#         'sponsor': sponsorship has changed on this bug 
-	#        'relation': a relationship has changed on this bug 
+	#         'sponsor': sponsorship has changed on this bug
+	#        'relation': a relationship has changed on this bug
 	#        '<status>': eg: 'resolved', 'closed', 'feedback', 'acknowledged', ...etc.
 	#                     this list corresponds to $g_status_enum_string
 
@@ -314,38 +314,38 @@
 
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr	= array(
-		'auto', 
-		'chinese_simplified', 
-		'chinese_traditional', 
+		'auto',
+		'chinese_simplified',
+		'chinese_traditional',
 		'croatian',
 		'czech',
-		'danish', 
-		'dutch', 
-		'english', 
-		'estonian', 
+		'danish',
+		'dutch',
+		'english',
+		'estonian',
 		'finnish',
-		'french', 
-		'german', 
+		'french',
+		'german',
 		'hungarian',
-		'italian', 
-		'japanese_euc', 
-		'japanese_sjis', 
-		'japanese_utf8', 
-		'korean', 
+		'italian',
+		'japanese_euc',
+		'japanese_sjis',
+		'japanese_utf8',
+		'korean',
 		'latvian',
-		'lithuanian', 
-		'norwegian', 
-		'polish', 
-		'portuguese_brazil', 
+		'lithuanian',
+		'norwegian',
+		'polish',
+		'portuguese_brazil',
 		'portuguese_standard',
-		'romanian', 
-		'russian', 
-		'russian_koi8', 
-		'serbian', 
-		'slovak', 
-		'slovene', 
-		'spanish', 
-		'swedish', 
+		'romanian',
+		'russian',
+		'russian_koi8',
+		'serbian',
+		'slovak',
+		'slovene',
+		'spanish',
+		'swedish',
 		'turkish',
 		'ukrainian'
 	);
@@ -381,7 +381,7 @@
 		'tr' => 'turkish'
 	);
 
-	# Fallback for automatic language selection 
+	# Fallback for automatic language selection
 	$g_fallback_language	= 'english';
 
 	###############################
@@ -751,17 +751,17 @@
 	# the bug is in progress, rather than just put in a person's queue.
 	$g_auto_set_status_to_assigned	= ON;
 
-	# 'status_enum_workflow' defines the workflow, and reflects a simple 
+	# 'status_enum_workflow' defines the workflow, and reflects a simple
 	#  2-dimensional matrix. For each existing status, you define which
-	#  statuses you can go to from that status, e.g. from NEW_ you might list statuses 
+	#  statuses you can go to from that status, e.g. from NEW_ you might list statuses
 	#  '10:new,20:feedback,30:acknowledged' but not higher ones.
 	# The following example can be transferred to config_inc.php
-	# $g_status_enum_workflow[NEW_]='10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
-	# $g_status_enum_workflow[FEEDBACK] ='10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
-	# $g_status_enum_workflow[ACKNOWLEDGED] ='20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
-	# $g_status_enum_workflow[CONFIRMED] ='20:feedback,40:confirmed,50:assigned,80:resolved';
-	# $g_status_enum_workflow[ASSIGNED] ='20:feedback,50:assigned,80:resolved,90:closed';
-	# $g_status_enum_workflow[RESOLVED] ='50:assigned,80:resolved,90:closed';
+	# $g_status_enum_workflow[NEW_]='20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
+	# $g_status_enum_workflow[FEEDBACK] ='10:new,30:acknowledged,40:confirmed,50:assigned,80:resolved';
+	# $g_status_enum_workflow[ACKNOWLEDGED] ='20:feedback,40:confirmed,50:assigned,80:resolved';
+	# $g_status_enum_workflow[CONFIRMED] ='20:feedback,50:assigned,80:resolved';
+	# $g_status_enum_workflow[ASSIGNED] ='20:feedback,80:resolved,90:closed';
+	# $g_status_enum_workflow[RESOLVED] ='50:assigned,90:closed';
 	# $g_status_enum_workflow[CLOSED] ='50:assigned';
 	$g_status_enum_workflow = array();
 
@@ -828,7 +828,7 @@
 
 	# access level needed to be able to be listed in the assign to field.
 	$g_handle_bug_threshold			= DEVELOPER;
-	# access level needed to show the Assign To: button bug_view*_page or 
+	# access level needed to show the Assign To: button bug_view*_page or
 	#  the Assigned list in bug_update*_page.
 	#  This allows control over who can route bugs
 	# This defaults to $g_handle_bug_threshold
@@ -928,7 +928,7 @@
 	# Threshold needed to be able to create shared stored queries
 	$g_stored_query_create_shared_threshold = MANAGER;
 
-	# Threshold needed to update readonly bugs.  Readonly bugs are identified via 
+	# Threshold needed to update readonly bugs.  Readonly bugs are identified via
 	# $g_bug_readonly_status_threshold.
 	$g_update_readonly_bug_threshold = MANAGER;
 
@@ -937,7 +937,7 @@
 
 	# status change thresholds
 	$g_update_bug_status_threshold = DEVELOPER;
-	
+
 	# access level needed to re-open bugs
 	$g_reopen_bug_threshold			= DEVELOPER;
 
@@ -945,7 +945,7 @@
 	# if a status is not listed, it falls back to $g_update_bug_status_threshold
 	# example: $g_set_status_threshold = array( ACKNOWLEDGED => MANAGER, CONFIRMED => DEVELOPER, CLOSED => MANAGER );
 	$g_set_status_threshold = array();
-	
+
 	# --- login method ----------------
 	# CRYPT or PLAIN or MD5 or LDAP or BASIC_AUTH
 	# You can simply change this at will. Mantis will try to figure out how the passwords were encrypted.
@@ -984,9 +984,9 @@
 	# insert the URL to your CVSweb or ViewCVS
 	# eg: http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/mantisbt/mantisbt/
 	$g_cvs_web				= '';
-	
+
 	# --- Source Control Integration ------
-	
+
 	# For open source projects it is expected that the notes be public, however,
 	# for non-open source it will probably be VS_PRIVATE.
 	$g_source_control_notes_view_status = VS_PRIVATE;
@@ -996,7 +996,7 @@
 	# private ones (DEVELOPER access recommended).
 	$g_source_control_account           = '';
 
-	# If set to a status, then after a checkin, the issue status is set to the 
+	# If set to a status, then after a checkin, the issue status is set to the
 	# specified status, otherwise if set to OFF, the issue status is not affected.
 	$g_source_control_set_status_to     = OFF;
 
@@ -1153,7 +1153,7 @@
 	$g_status_enum_string				= '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed';
 	  # @@@ for documentation, the values in this list are also used to define variables in the language files
 	  #  (e.g., $s_new_bug_title referenced in bug_change_status_page.php )
-	  # Embedded spaces are converted to underscores (e.g., "working on" references $s_working_on_bug_title). 
+	  # Embedded spaces are converted to underscores (e.g., "working on" references $s_working_on_bug_title).
 	  # they are also expected to be english names for the states
 	$g_resolution_enum_string			= '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix';
 	$g_projection_enum_string			= '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
@@ -1258,7 +1258,7 @@
 	#  'halt' - stop and display traceback
 	#  'inline' - display 1 line error and continue
 	#  'none' - no error displayed
-	# obsoletes $g_show_notices (E_NOTICE and E_USER_NOTICE) and 
+	# obsoletes $g_show_notices (E_NOTICE and E_USER_NOTICE) and
 	#   $g_show_warnings (E_WARNING and E_USER_WARNING)
 	# A developer might set this in config_inc.php as:
 	#	$g_display_errors = array(
@@ -1401,7 +1401,7 @@
 		'recent_mod'	=> '5',
 		'monitored'	=> '6'
 	);
-	
+
 	# Toggle whether 'My View' boxes are shown in a fixed position (i.e. adjacent boxes start at the same vertical position)
 	$g_my_view_boxes_fixed_position = ON;
 
@@ -1438,7 +1438,7 @@
 	$g_relationship_graph_fontsize		= 8;
 
 	# Local path where the above font is found on your system.
-	# 
+	#
 	# You shouldn't care about this on Windows since there is only one system
 	# folder where fonts are installed and Graphviz already knows where it
 	# is. On Linux and other unices, the default font search path is defined
