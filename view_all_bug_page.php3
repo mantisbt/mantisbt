@@ -77,8 +77,8 @@
 		$f_dir = "DESC";
 	}
 
-	### build our query string based on our viewing criteria
-	#$query = "SELECT $g_mantis_bug_table.*, $g_mantis_bug_text_table.description FROM $g_mantis_bug_table, $g_mantis_bug_text_table ";
+	# build our query string based on our viewing criteria
+
 	$query = "SELECT * FROM $g_mantis_bug_table";
 
 	$t_where_clause = " WHERE project_id='$g_project_cookie_val'";
@@ -98,7 +98,7 @@
 		$t_where_clause = $t_where_clause." AND status='$f_show_status'";
 	}
 
-   ### Simple Text Search - Thx to  Alan Knowles
+   # Simple Text Search - Thx to  Alan Knowles
    if ($f_search_text) {
 		$t_where_clause .= " AND ((summary LIKE '%".addslashes($f_search_text)."%')
 							OR (description LIKE '%".addslashes($f_search_text)."%')
@@ -106,7 +106,9 @@
 							OR (additional_information LIKE '%".addslashes($f_search_text)."%')
 							OR ($g_mantis_bug_table.id LIKE '%".addslashes($f_search_text)."%'))
 							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
-		$query .= ", $g_mantis_bug_text_table " . $t_where_clause;
+		$query = "SELECT $g_mantis_bug_table.*, $g_mantis_bug_text_table.description
+				FROM $g_mantis_bug_table, $g_mantis_bug_text_table ".$t_where_clause;
+		#$query .= ", $g_mantis_bug_text_table " . $t_where_clause;
    } else {
 		$query = $query.$t_where_clause;
    }
