@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.73 2004-07-18 14:29:41 vboctor Exp $
+	# $Id: bug_api.php,v 1.74 2004-07-18 14:40:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -424,6 +424,7 @@
 	# MASC RELATIONSHIP
 	function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields = false, $p_copy_relationships = false,
 		$p_copy_history = false, $p_copy_attachments = false, $p_copy_bugnotes = false, $p_copy_monitoring_users = false ) {
+		global $g_db;
 
 		$t_mantis_custom_field_string_table	= config_get( 'mantis_custom_field_string_table' );
 		$t_mantis_bug_file_table			= config_get( 'mantis_bug_file_table' );
@@ -431,7 +432,7 @@
 		$t_mantis_bugnote_text_table		= config_get( 'mantis_bugnote_text_table' );
 		$t_mantis_bug_monitor_table			= config_get( 'mantis_bug_monitor_table' );
 		$t_mantis_bug_history_table			= config_get( 'mantis_bug_history_table' );
-		$t_mantis_db = config_get( 'db' );
+		$t_mantis_db = $g_db;
 
 		$t_bug_id = db_prepare_int( $p_bug_id );
 		$t_target_project_id = db_prepare_int( $p_target_project_id );
@@ -479,7 +480,7 @@
 		bug_set_field( $t_new_bug_id, 'last_updated', $t_mantis_db->DBTimeStamp( $t_bug_data->last_updated ) );
 		bug_set_field( $t_new_bug_id, 'eta', $t_bug_data->eta );
 		bug_set_field( $t_new_bug_id, 'fixed_in_version', $t_bug_data->fixed_in_version );
-		bug_set_field( $t_new_bug_id, 'sponsorship_total', $t_bug_data->sponsorship_total );
+		bug_set_field( $t_new_bug_id, 'sponsorship_total', 0 );
 
 		# COPY CUSTOM FIELDS
 		if ( $p_copy_custom_fields ) {
@@ -534,7 +535,7 @@
 					$t_bugnote_text['note'] = db_prepare_string( $t_bugnote_text['note'] );
 
 					$query2 = "INSERT INTO $t_mantis_bugnote_text_table
-							   ( `note` )
+							   ( note )
 							   VALUES ( '" . $t_bugnote_text['note'] . "' );";
 					db_query( $query2 );
 					$t_bugnote_text_insert_id = db_insert_id( $t_mantis_bugnote_text_table );
@@ -600,7 +601,7 @@
 			for ( $i = 0; $i < $t_count; $i++ ) {
 				$t_bug_monitor = db_fetch_array( $result );
 				$query = "INSERT INTO $t_mantis_bug_monitor_table
-						 ( `user_id`, `bug_id` )
+						 ( user_id, bug_id )
 						 VALUES ( '" . $t_bug_monitor['user_id'] . "', '$t_new_bug_id' );";
 				db_query( $query );
 			}
@@ -611,7 +612,7 @@
 		if ( $p_copy_history ) {
 			$query = "SELECT *
 					  FROM $t_mantis_bug_history_table
-					  WHERE `bug_id` = '$t_bug_id';";
+					  WHERE bug_id = '$t_bug_id';";
 			$result = db_query( $query );
 			$t_count = db_num_rows( $result );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_create_child.php,v 1.1 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: bug_create_child.php,v 1.2 2004-07-18 14:40:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	# MASC RELATIONSHIP
@@ -34,7 +34,8 @@
 	}
 
 	# copy the bug...
-	$t_new_bug_id = bug_copy( $f_bug_id, '', true, false, false, true, false, false );
+	$t_new_bug_id = bug_copy( $f_bug_id, /* project_id = */ null, /* custom_fields = */ true, /* relationships = */ false, 
+				/* history = */ false, /* attachments = */ false, /* bugnotes = */ false, /* monitoring users = */ false );
 
 	# Add log line to record the cloning action
 	history_log_event_special( $t_new_bug_id, NEW_BUG );
