@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.17 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.18 2004-06-26 14:05:42 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
 <?php
@@ -127,6 +127,54 @@
 			</td>
 			<td>
 				<input type="checkbox" name="advanced" value="1" <?php check_checked( $t_definition['advanced'] ) ?>>
+			</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">
+				<?php echo lang_get( 'custom_field_display_resolve' ) ?>
+			</td>
+			<td>
+				<input type="checkbox" name="display_resolve" value="1" <?php check_checked( $t_definition['display_resolve'] ) ?>>
+			</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">
+				<?php echo lang_get( 'custom_field_display_close' ) ?>
+			</td>
+			<td>
+				<input type="checkbox" name="display_close" value="1" <?php check_checked( $t_definition['display_close'] ) ?>>
+			</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">
+				<?php echo lang_get( 'custom_field_require_report' ) ?>
+			</td>
+			<td>
+				<input type="checkbox" name="require_report" value="1" <?php check_checked( $t_definition['require_report'] ) ?>>
+			</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">
+				<?php echo lang_get( 'custom_field_require_update' ) ?>
+			</td>
+			<td>
+				<input type="checkbox" name="require_update" value="1" <?php check_checked( $t_definition['require_update'] ) ?>>
+			</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">
+				<?php echo lang_get( 'custom_field_require_resolve' ) ?>
+			</td>
+			<td>
+				<input type="checkbox" name="require_resolve" value="1" <?php check_checked( $t_definition['require_resolve'] ) ?>>
+			</td>
+		</tr>
+		<tr <?php echo helper_alternate_class() ?>>
+			<td class="category">
+				<?php echo lang_get( 'custom_field_require_close' ) ?>
+			</td>
+			<td>
+				<input type="checkbox" name="require_close" value="1" <?php check_checked( $t_definition['require_close'] ) ?>>
 			</td>
 		</tr>
 		<tr>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.35 2004-04-06 19:38:32 prescience Exp $
+	# $Id: bug_report_advanced_page.php,v 1.36 2004-06-26 14:05:42 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -312,7 +312,7 @@
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
 		<?php print_custom_field_input( $t_def ) ?>

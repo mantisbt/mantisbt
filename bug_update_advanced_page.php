@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.68 2004-05-24 12:23:18 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.69 2004-06-26 14:05:42 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'date_api.php' );
@@ -83,7 +83,7 @@
 
 
 <tr <?php echo helper_alternate_class() ?>>
-	
+
 	<!-- Bug ID -->
 	<td>
 		<?php echo bug_format_id( $f_bug_id ) ?>
@@ -389,7 +389,7 @@
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td colspan="5">
 		<?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close_page.php,v 1.31 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: bug_close_page.php,v 1.32 2004-06-26 14:05:42 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,7 +36,55 @@
 		<?php echo lang_get( 'close_bug_title' ) ?>
 	</td>
 </tr>
-<tr class="row-1">
+<!-- Custom Fields -->
+<?php
+	$t_custom_fields_found = false;
+	$t_related_custom_field_ids = custom_field_get_linked_ids( bug_get_field( $f_bug_id, 'project_id' ) );
+	foreach( $t_related_custom_field_ids as $t_id ) {
+		$t_def = custom_field_get_definition( $t_id );
+		if( ( $t_def['display_close'] || $t_def['require_close'] ) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
+			$t_custom_fields_found = true;
+?>
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php if($t_def['require_close']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
+	</td>
+	<td>
+		<?php
+			print_custom_field_input( $t_def, $f_bug_id );
+		?>
+	</td>
+</tr>
+<?php
+		} # $t_def['display_close'] || $t_def['require_close'] ) && custom_field_has_write_access( $t_id, $f_bug_id )
+		else if( ( $t_def['display_close'] || $t_def['require_close'] ) && custom_field_has_read_access( $t_id, $f_bug_id ) ) {
+?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<td class="category">
+			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		</td>
+		<td>
+			<?php
+				$t_custom_field_value = custom_field_get_value( $t_id, $f_bug_id );
+				if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {
+					echo "<a href=\"mailto:$t_custom_field_value\">$t_custom_field_value</a>";
+				} else {
+					echo $t_custom_field_value;
+				}
+			?>
+		</td>
+	</tr>
+<?php
+		} # $t_def['display_close'] || $t_def['require_close'] ) && custom_field_has_read_access( $t_id, $f_bug_id ) )		
+	} # foreach( $t_related_custom_field_ids as $t_id )
+?>
+<!-- Bugnote -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category" colspan="2">
+		<?php echo lang_get( 'add_bugnote_title' ) ?>
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?>>
 	<td class="center" colspan="2">
 		<textarea name="bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
 	</td>

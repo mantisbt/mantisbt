@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.69 2004-05-23 14:13:47 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.70 2004-06-26 14:05:42 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 	require_once( $t_core_path.'date_api.php' );
@@ -86,7 +86,7 @@
 
 
 <tr <?php echo helper_alternate_class() ?>>
-	
+
 	<!-- Bug ID -->
 	<td>
 		<?php echo bug_format_id( $f_bug_id ) ?>
@@ -299,12 +299,12 @@
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if( !$t_def['advanced'] && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
+		if( ( !$t_def['advanced'] || $t_def['require_report']) && custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 			$t_custom_fields_found = true;
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo lang_get_defaulted( $t_def['name'] ) ?>
+		<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td colspan="5">
 		<?php

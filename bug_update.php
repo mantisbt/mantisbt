@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.62 2004-05-24 12:23:18 vboctor Exp $
+	# $Id: bug_update.php,v 1.63 2004-06-26 14:05:42 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
@@ -71,14 +71,19 @@
 		if ( $t_custom_field_value === null ) {
 			continue;
 		}
-		
+
 		# Do not set custom field value if user has no write access.
 		if( !custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 			continue;
 		}
 
 		$t_def = custom_field_get_definition( $t_id );
+		if ( $t_def['require_update'] && ( gpc_get_string( "custom_field_$t_id", '' ) == '' ) ) {
+			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
+			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
 		if ( !custom_field_set_value( $t_id, $f_bug_id, $t_custom_field_value ) ) {
+			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
 	}

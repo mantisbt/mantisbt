@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_update.php,v 1.13 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_custom_field_update.php,v 1.14 2004-06-26 14:05:42 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
 <?php
@@ -31,6 +31,12 @@
 	$t_values['length_min']			= gpc_get_int( 'length_min' );
 	$t_values['length_max']			= gpc_get_int( 'length_max' );
 	$t_values['advanced']			= gpc_get_bool( 'advanced' );
+	$t_values['display_resolve']	= gpc_get_bool( 'display_resolve' );
+	$t_values['display_close']		= gpc_get_bool( 'display_close' );
+	$t_values['require_report']		= gpc_get_bool( 'require_report' );
+	$t_values['require_update']		= gpc_get_bool( 'require_update' );
+	$t_values['require_resolve']	= gpc_get_bool( 'require_resolve' );
+	$t_values['require_close']		= gpc_get_bool( 'require_close' );
 
 	custom_field_update( $f_field_id, $t_values );
 

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.177 $
-	# $Author: narcissus $
-	# $Date: 2004-06-11 02:00:01 $
+	# $Revision: 1.178 $
+	# $Author: prichards $
+	# $Date: 2004-06-26 14:06:43 $
 	#
-	# $Id: strings_english.txt,v 1.177 2004-06-11 02:00:01 narcissus Exp $
+	# $Id: strings_english.txt,v 1.178 2004-06-26 14:06:43 prichards Exp $
 	###########################################################################
 ?>
 <?php
@@ -161,7 +161,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'This is a duplicate file.  Please delete the file first.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field was empty.  Please recheck your inputs.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%s\' was empty.  Please recheck your inputs.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected.  You are not allowed to access this until the account protection is lifted.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
@@ -918,7 +918,14 @@ $s_custom_field_access_level_r = 'Read Access';
 $s_custom_field_access_level_rw = 'Write Access';
 $s_custom_field_length_min = 'Min. Length';
 $s_custom_field_length_max = 'Max. Length';
-$s_custom_field_advanced = 'Advanced';
+$s_custom_field_advanced = 'Display Only On Advanced Page';
+$s_custom_field_display_resolve = 'Display When Resolving Issues';
+$s_custom_field_display_close = 'Display When Closing Issues';
+$s_custom_field_require_report = 'Required On Report';
+$s_custom_field_require_update = 'Required On Update';
+$s_custom_field_require_resolve = 'Required On Resolve';
+$s_custom_field_require_close = 'Required On Close';
+
 $s_custom_field_sequence = 'Sequence';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email';
 
