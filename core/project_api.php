@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.26 2003-01-30 09:41:35 jfitzell Exp $
+	# $Id: project_api.php,v 1.27 2003-02-08 23:33:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -207,7 +207,7 @@
 		}
 
 		# Delete the project categories
-		category_delete_all( $p_project_id );
+		category_remove_all( $p_project_id );
 
 		# Delete the project versions
 		version_delete_all( $p_project_id );

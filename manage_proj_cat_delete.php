@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_delete.php,v 1.17 2003-02-08 22:47:00 jfitzell Exp $
+	# $Id: manage_proj_cat_delete.php,v 1.18 2003-02-08 23:33:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,11 +22,6 @@
 
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_category		= gpc_get_string( 'category' );
-
-	# Make sure the category exists
-	if ( category_is_unique( $f_project_id, $f_category ) ) {
-		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
-	}
 
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ),
