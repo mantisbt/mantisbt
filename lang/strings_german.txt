@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.97 $
+	# $Revision: 1.98 $
 	# $Author: int2str $
-	# $Date: 2004-07-08 10:47:16 $
+	# $Date: 2004-07-09 02:37:46 $
 	#
-	# $Id: strings_german.txt,v 1.97 2004-07-08 10:47:16 int2str Exp $
+	# $Id: strings_german.txt,v 1.98 2004-07-09 02:37:46 int2str Exp $
 	###########################################################################
 ?>
 <?php
@@ -172,7 +172,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Dateiübertragung fehlgeschlagen. Wahrschein
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ein erforderlicher Parameter für diese Seite wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dieser Benutzername ist schon vergeben. Gehen Sie zurück und wählen Sie einen anderen.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsoption \'%s\' nicht gefunden.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette nicht gefunden.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette \'%s\' nicht gefunden.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Reportnotiz nicht gefunden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt nicht gefunden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Datenbankfeld nicht gefunden.';
@@ -894,6 +894,7 @@ $s_publish = 'Veröffentlichen';
 $s_cached = 'Zwischengespeichert';
 
 # view_bug_inc.php
+$s_monitored_by = "Beobachtet von";
 
 # view_bug_page.php
 $s_view_advanced_link = 'erweiterte Anzeige';
