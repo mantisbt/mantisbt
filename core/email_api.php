@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.71 2004-03-16 11:29:55 yarick123 Exp $
+	# $Id: email_api.php,v 1.72 2004-03-18 12:16:30 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -807,7 +807,7 @@
 			$t_bug_data['email_bug_view_url'] = string_get_bug_view_url_with_fqdn( $p_bug_id );
 		}
 
-		if ( $p_user_access_level >= config_get( 'view_handler_threshold' ) ) {
+		if ( $t_user_access_level >= config_get( 'view_handler_threshold' ) ) {
 			if ( 0 != $row['handler_id'] ) {
 				$t_bug_data['email_handler'] = user_get_name( $row['handler_id'] );
 			} else {
