@@ -198,7 +198,7 @@
 	$row_count = db_num_rows( $result );
 
 	# for export
-	$t_show_flag = gpc_get( 't_show_flag', 0 );
+	$t_show_flag = gpc_get_bool( 'show_flag' );
 ?>
 <?php html_page_top1( ) ?>
 <?php html_head_end( ) ?>
@@ -307,7 +307,7 @@
 	#$t_bug_arr_sort is used for displaying
 	#$f_export is a string for the word and excel pages
 
-	$f_bug_arr = gpc_get( 'bug_arr', NULL );
+	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 	$f_bug_arr[$row_count]=-1;
 
 	for( $i=0; $i < $row_count; $i++ ) {
@@ -512,7 +512,7 @@
 	} # isset_loop
 } # for_loop
 ?>
-<input type="hidden" name="t_show_flag" value="1" />
+<input type="hidden" name="show_flag" value="1" />
 </table>
 
 <br />
