@@ -183,8 +183,8 @@
 	###########################################################################
 	### --------------------
 	# creates a random 12 character password
+	# p_email is unused
 	function create_random_password( $p_email ) {
-		mt_srand( microtime() );
 		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 		$t_val = md5( $t_val );
 
@@ -195,7 +195,6 @@
 	# It is not guarranteed to be unique but should be good enough
 	# The string returned should be 64 characters in length
 	function create_cookie_string( $p_email ) {
-		mt_srand( microtime() );
 		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
 		$t_val = md5( $t_val ).md5( time() );
 		return substr( $t_val, 0, 64 );

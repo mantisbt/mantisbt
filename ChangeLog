@@ -1,10 +1,12 @@
 Mantis
 
-11.xx.2001  -   0.15.12
+11.05.2001  -   0.15.12
 
  * Added Swedish localization
  * Added print bugs feature
- * FIxed error where MD5 wasn't actually being used.
+ * Fixed error where MD5 wasn't actually being used.
+ * Fixed problem with the same password being generated over and over.
+ * Fixed problem with the same cookie being generated over and over.
 
 10.28.2001  -   0.15.11
 
