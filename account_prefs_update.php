@@ -11,99 +11,65 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	# the check for the protected state is already done in the form, there is
-	# no need to duplicate it here.
+	$f_user_id				= gpc_get_int( 'f_user_id' );
+	$f_project_id			= gpc_get_int( 'f_project_id' );
+	$f_redirect_delay		= gpc_get_int( 'f_redirect_delay' );
+	$f_refresh_delay		= gpc_get_int( 'f_refresh_delay' );
+	$f_language				= gpc_get_string( 'f_language' );
+	$f_redirect_url			= gpc_get_string( 'f_redirect_url' );
 
-	# Clean input
+	$f_advanced_report		= gpc_get_bool( 'f_advanced_report' );
+	$f_advanced_view		= gpc_get_bool( 'f_advanced_view' );
+	$f_advanced_update		= gpc_get_bool( 'f_advanced_update' );
+	$f_email_on_new			= gpc_get_bool( 'f_email_on_new' );
+	$f_email_on_assigned	= gpc_get_bool( 'f_email_on_assigned' );
+	$f_email_on_feedback	= gpc_get_bool( 'f_email_on_feedback' );
+	$f_email_on_resolved	= gpc_get_bool( 'f_email_on_resolved' );
+	$f_email_on_closed		= gpc_get_bool( 'f_email_on_closed' );
+	$f_email_on_reopened	= gpc_get_bool( 'f_email_on_reopened' );
+	$f_email_on_bugnote		= gpc_get_bool( 'f_email_on_bugnote' );
+	$f_email_on_status		= gpc_get_bool( 'f_email_on_status' );
+	$f_email_on_priority	= gpc_get_bool( 'f_email_on_priority' );
 
-	if ( !isset( $f_advanced_report ) || ( ON == $f_advanced_report ) ) {
-		$c_advanced_report = 0;
-	} else {
-		$c_advanced_report = 1;
+	# protected account check
+	if ( ON == user_get_field( $f_user_id, 'protected' ) ) {
+		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
-	if ( !isset( $f_advanced_view ) || ( ON == $f_advanced_view ) ) {
-		$c_advanced_view = 0;
-	} else {
-		$c_advanced_view = 1;
+	# prevent users from changing other user's accounts
+	if ( $f_user_id != auth_get_current_user_id() ) {
+		check_access( ADMINISTRATOR );
 	}
-
-	if ( !isset( $f_advanced_update ) || ( ON == $f_advanced_update ) ) {
-		$c_advanced_update = 0;
-	} else {
-		$c_advanced_update = 1;
-	}
-
-	if ( !isset( $f_email_on_new ) || ( ON == $f_email_on_new ) ) {
-		$c_email_on_new = 0;
-	} else {
-		$c_email_on_new = 1;
-	}
-
-	if ( !isset( $f_email_on_assigned ) || ( ON == $f_email_on_assigned ) ) {
-		$c_email_on_assigned = 0;
-	} else {
-		$c_email_on_assigned = 1;
-	}
-
-	if ( !isset( $f_email_on_feedback ) || ( ON == $f_email_on_feedback ) ) {
-		$c_email_on_feedback = 0;
-	} else {
-		$c_email_on_feedback = 1;
-	}
-
-	if ( !isset( $f_email_on_resolved ) || ( ON == $f_email_on_resolved ) ) {
-		$c_email_on_resolved = 0;
-	} else {
-		$c_email_on_resolved = 1;
-	}
-
-	if ( !isset( $f_email_on_closed ) || ( ON == $f_email_on_closed ) ) {
-		$c_email_on_closed = 0;
-	} else {
-		$c_email_on_closed = 1;
-	}
-
-	if ( !isset( $f_email_on_reopened ) || ( ON == $f_email_on_reopened ) ) {
-		$c_email_on_reopened = 0;
-	} else {
-		$c_email_on_reopened = 1;
-	}
-
-	if ( !isset( $f_email_on_bugnote ) || ( ON == $f_email_on_bugnote ) ) {
-		$c_email_on_bugnote = 0;
-	} else {
-		$c_email_on_bugnote = 1;
-	}
-
-	if ( !isset( $f_email_on_status ) || ( ON == $f_email_on_status ) ) {
-		$c_email_on_status = 0;
-	} else {
-		$c_email_on_status = 1;
-	}
-
-	if ( !isset( $f_email_on_priority ) || ( ON == $f_email_on_priority ) ) {
-		$c_email_on_priority = 0;
-	} else {
-		$c_email_on_priority = 1;
-	}
-
-	$c_project_id		= (integer)$f_project_id;
-	$c_redirect_delay	= (integer)$f_redirect_delay;
-	$c_language			= addslashes($f_language);
 
 	# make sure the delay isn't too low
-	if (( $g_min_refresh_delay > $f_refresh_delay )&&
+	if (( config_get( 'min_refresh_delay' ) > $f_refresh_delay )&&
 		( $f_refresh_delay != 0 )) {
-		$f_refresh_delay = $g_min_refresh_delay;
+		$f_refresh_delay = config_get( 'min_refresh_delay' );
 	}
-	$c_refresh_delay = (integer)$f_refresh_delay;
 
-	# get user id
-	$t_user_id = $f_user_id;
+	$c_user_id			= db_prepare_int( $f_user_id );
+	$c_project_id		= db_prepare_int( $f_project_id );
+	$c_redirect_delay	= db_prepare_int( $f_redirect_delay );
+	$c_refresh_delay	= db_prepare_int( $f_refresh_delay );
+	$c_language			= db_prepare_string( $f_language );
+
+	$c_advanced_report		= db_prepare_bool( $f_advanced_report );
+	$c_advanced_view		= db_prepare_bool( $f_advanced_view );
+	$c_advanced_update		= db_prepare_bool( $f_advanced_update );
+	$c_email_on_new			= db_prepare_bool( $f_email_on_new );
+	$c_email_on_assigned	= db_prepare_bool( $f_email_on_assigned );
+	$c_email_on_feedback	= db_prepare_bool( $f_email_on_feedback );
+	$c_email_on_resolved	= db_prepare_bool( $f_email_on_resolved );
+	$c_email_on_closed		= db_prepare_bool( $f_email_on_closed );
+	$c_email_on_reopened	= db_prepare_bool( $f_email_on_reopened );
+	$c_email_on_bugnote		= db_prepare_bool( $f_email_on_bugnote );
+	$c_email_on_status		= db_prepare_bool( $f_email_on_status );
+	$c_email_on_priority	= db_prepare_bool( $f_email_on_priority );
+
+	$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
 	# update preferences
-	$query = "UPDATE $g_mantis_user_pref_table
+	$query = "UPDATE $t_user_pref_table
 			SET default_project='$c_project_id',
 				advanced_report='$c_advanced_report',
 				advanced_view='$c_advanced_view',
@@ -120,22 +86,22 @@
 				email_on_status='$c_email_on_status',
 				email_on_priority='$c_email_on_priority',
 				language='$c_language'
-			WHERE user_id='$t_user_id'";
+			WHERE user_id='$c_user_id'";
 	$result = db_query( $query );
 
 	print_page_top1();
 	print_meta_redirect( $f_redirect_url );
 	print_page_top2();
-	PRINT '<br /><div align="center">';
+	echo '<br /><div align="center">';
 
 	if ( $result ) {
-		PRINT $s_operation_successful;
+		echo lang_get( 'operation_successful' );
 	} else {
-		PRINT $MANTIS_ERROR[ERROR_GENERIC];
+		echo $MANTIS_ERROR[ERROR_GENERIC];
 	}
 
-	PRINT '<br />';
-	print_bracket_link( $f_redirect_url, $s_proceed );
-	PRINT '<br /></div>';
+	echo '<br />';
+	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
+	echo '<br /></div>';
 	print_page_bot1( __FILE__ );
 ?>

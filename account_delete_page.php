@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.14 $
-	# $Author: prescience $
-	# $Date: 2002-09-03 02:41:50 $
+	# $Revision: 1.15 $
+	# $Author: jfitzell $
+	# $Date: 2002-09-16 00:05:44 $
 	#
-	# $Id: account_delete_page.php,v 1.14 2002-09-03 02:41:50 prescience Exp $
+	# $Id: account_delete_page.php,v 1.15 2002-09-16 00:05:44 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 <?php login_cookie_check() ?>
 <?php
 	# check if users can't delete their own accounts
-	if ( OFF == $g_allow_account_delete ) {
+	if ( OFF == config_get( 'allow_account_delete' ) ) {
 		print_header_redirect( 'account_page.php' );
 	}
 
@@ -30,7 +30,7 @@
 
 	# protected account check
 	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 ?>
 <?php print_page_top1() ?>
@@ -38,14 +38,14 @@
 
 <br />
 <div align="center">
-	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
-	<?php echo $s_confirm_delete_msg ?>
+	<?php print_hr() ?>
+	<?php echo lang_get( 'confirm_delete_msg' ) ?>
 
 	<form method="post" action="account_delete.php">
-		<input type="submit" value="<?php echo $s_delete_account_button ?>" />
+		<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
 
-	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
+	<?php print_hr() ?>
 </div>
 
 <?php print_page_bot1( __FILE__ ) ?>

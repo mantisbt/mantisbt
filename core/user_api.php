@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.24 2002-09-07 08:39:21 jfitzell Exp $
+	# $Id: user_api.php,v 1.25 2002-09-16 00:05:45 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -208,8 +208,9 @@
 		}
 	}
 	# --------------------
-	# @@@ unused
-	function user_has_project_prefs( $p_user_id, $p_project_id ) {
+	# return true if the user has prefs assigned for the given project,
+	#  false otherwise
+	function user_has_prefs( $p_user_id, $p_project_id = 0 ) {
 		$c_project_id = db_prepare_int( $p_project_id );
 		$c_user_id = db_prepare_int( $p_user_id );
 
@@ -265,24 +266,7 @@
 		$t_seed = $p_email.$p_username;
 		$t_cookie_string	= create_cookie_string( $t_seed );
 
-		$t_default_advanced_report			= config_get( 'default_advanced_report');
-		$t_default_advanced_view			= config_get( 'default_advanced_view');
-		$t_default_advanced_update			= config_get( 'default_advanced_update');
-		$t_default_refresh_delay			= config_get( 'default_refresh_delay');
-		$t_default_redirect_delay			= config_get( 'default_redirect_delay');
-		$t_default_email_on_new				= config_get( 'default_email_on_new');
-		$t_default_email_on_assigned		= config_get( 'default_email_on_assigned');
-		$t_default_email_on_feedback		= config_get( 'default_email_on_feedback');
-		$t_default_email_on_resolved		= config_get( 'default_email_on_resolved');
-		$t_default_email_on_closed			= config_get( 'default_email_on_closed');
-		$t_default_email_on_reopened		= config_get( 'default_email_on_reopened');
-		$t_default_email_on_bugnote			= config_get( 'default_email_on_bugnote');
-		$t_default_email_on_status			= config_get( 'default_email_on_status');
-		$t_default_email_on_priority		= config_get( 'default_email_on_priority');
-		$t_default_language					= config_get( 'default_language');
-
 		$t_user_table 						= config_get( 'mantis_user_table' );
-		$t_user_pref_table 					= config_get( 'mantis_user_pref_table' );
 
 		$query = "INSERT INTO $t_user_table
 				    ( id, username, email, password, date_created, last_visit,
@@ -294,24 +278,7 @@
 
 		# Create preferences for the user
 		$t_user_id = db_insert_id();
-		$query = "INSERT INTO $t_user_pref_table
-				    (id, user_id, advanced_report, advanced_view, advanced_update,
-				    refresh_delay, redirect_delay,
-				    email_on_new, email_on_assigned,
-				    email_on_feedback, email_on_resolved,
-				    email_on_closed, email_on_reopened,
-				    email_on_bugnote, email_on_status,
-				    email_on_priority, language)
-				  VALUES
-				    (null, '$t_user_id', '$t_default_advanced_report',
-				    '$t_default_advanced_view', '$t_default_advanced_update',
-				    '$t_default_refresh_delay', '$t_default_redirect_delay',
-				    '$t_default_email_on_new', '$t_default_email_on_assigned',
-				    '$t_default_email_on_feedback', '$t_default_email_on_resolved',
-				    '$t_default_email_on_closed', '$t_default_email_on_reopened',
-				    '$t_default_email_on_bugnote', '$t_default_email_on_status',
-				    '$t_default_email_on_priority', '$t_default_language')";
-		db_query($query);
+		user_create_prefs( $t_user_id );
 
 		# Send notification email
 		if ( $p_email ) {
@@ -379,8 +346,8 @@
 		}
     }
 	# --------------------
-	# @@@ unused
-	function user_create_project_prefs( $p_user_id, $p_project_id ) {
+	# create a set of default preferences for the project
+	function user_create_prefs( $p_user_id, $p_project_id = 0 ) {
 		$c_user_id 		= db_prepare_int( $p_user_id );
 		$c_project_id 	= db_prepare_int( $p_project_id );
 
@@ -422,6 +389,26 @@
 				    '$t_default_email_on_bugnote', '$t_default_email_on_status',
 				    '$t_default_email_on_priority', '$t_default_language')";
 		db_query($query);
+
+		# db_query() errors on failure so:
+		return true;
+	}
+	# --------------------
+	# delete a preferencess row
+	# returns true when the prefs wer successfully deleted
+	function user_delete_prefs( $p_user_id, $p_project_id = 0 ) {
+		$c_user_id		= db_prepare_int( $p_user_id );
+		$c_project_id	= db_prepare_int( $p_project_id );
+
+		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
+
+		$query = "DELETE
+				  FROM $t_user_pref_table
+				  WHERE user_id='$c_user_id'
+				    AND project_id='$c_project_id'";
+		db_query( $query );
+
+		user_pref_clear_cache( $p_user_id );
 
 		# db_query() errors on failure so:
 		return true;
@@ -469,9 +456,15 @@
 		return user_cache_row( $p_user_id );
 	}
 	# --------------------
+	# return the user's preferences
+	function user_get_pref_row( $p_user_id ) {
+		return user_pref_cache_row( $p_user_id );
+	}
+	# --------------------
 	# return the specified preference field for the user id
+	# @@@ needs extension for project-specific preferences
 	function user_get_pref( $p_user_id, $p_field_name ) {
-		$row = user_pref_cache_row( $p_user_id );
+		$row = user_get_pref_row( $p_user_id );
 
 		if ( isset( $row[$p_field_name] ) ) {
 			return $row[$p_field_name];

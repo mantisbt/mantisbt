@@ -11,42 +11,25 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_user_id				= gpc_get_int( 'f_user_id' );
+	$f_redirect_url			= gpc_get_string( 'f_redirect_url', 'account_prefs_page.php' );
+
 	# get protected state
 	$t_protected = current_user_get_field( 'protected' );
 
 	# protected account check
 	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
+		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
-	# get user id
-	$t_user_id = current_user_get_field( 'id' );
-
-	## reset to defaults
-	$query = "UPDATE $g_mantis_user_pref_table
-			SET default_project='0000000',
-				advanced_report='$g_default_advanced_report',
-				advanced_view='$g_default_advanced_view',
-				advanced_update='$g_default_advanced_update',
-				refresh_delay='$g_default_refresh_delay',
-				redirect_delay='$g_default_redirect_delay',
-				email_on_new='$g_default_email_on_new',
-				email_on_assigned='$g_default_email_on_assigned',
-				email_on_feedback='$g_default_email_on_feedback',
-				email_on_resolved='$g_default_email_on_resolved',
-				email_on_closed='$g_default_email_on_closed',
-				email_on_reopened='$g_default_email_on_reopened',
-				email_on_bugnote='$g_default_email_on_bugnote',
-				email_on_status='$g_default_email_on_status',
-				email_on_priority='$g_default_email_on_priority',
-				language='$g_default_language'
-			WHERE user_id='$t_user_id'";
-	$result = db_query( $query );
-
-	$t_redirect_url = 'account_prefs_page.php';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
+	# prevent users from changing other user's accounts
+	if ( $f_user_id != auth_get_current_user_id() ) {
+		check_access( ADMINISTRATOR );
 	}
+
+	# delete and then recreate user prefs
+	user_delete_prefs( $f_user_id );
+	user_create_prefs( $f_user_id );
+
+	print_header_redirect( $f_redirect_url );
 ?>
