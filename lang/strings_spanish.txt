@@ -12,7 +12,7 @@
 	$s_all_projects = "Todos los Proyectos";
 	$s_move_bugs = "Mover Bugs";
 	$s_operation_successful = "Operacion Exitosa.";
-	$s_date_order = "Date Order";
+	$s_date_order = "Fecha"; #temporary translation
 	$s_print_all_bug_page_link = "Imprimir Reportes";
 	$s_csv_export = "Exportar a CSV";
 	$s_login_anonymously = "Conectarse Anonimamente";
@@ -29,18 +29,18 @@
 	$s_copy_categories = "Copiar Categorias";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
-	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
-	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
+	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: Un error ocurrio durante esta accion. Reporte este error a su administrador local.";
+	$MANTIS_ERROR[ERROR_SQL] = "ERROR: Error de SQL detectado.  Por favor reporte esto a ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: Su cuenta puede estar deshabilitada o el nombre de usuario/contraseña que ingreso son incorrectos.";
+	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: Se encontro un error en su reporte.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: Archivo no especificado";
+	$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: Este tipo de archivo no esta permitido";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: El directorio no existe. Por favor revise la configuracion del proyecto.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: Esta es una categoria duplicada.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: Esta es una version duplicada.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: Este es un archivo duplicado. Por favor borre el archivo primero.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: Un campo necesario estaba vacio. Por favor compruebe los datos.";
+	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: Esta cuenta esta protegida. Ud. no tiene permitido accesar esto hasta que la proteccion de la cuenta haya sido retirada.";
 
 	# General Strings
 	$s_go_back = "Volver";
@@ -144,7 +144,7 @@
 	$s_reset_prefs_button = "Resetear Preferencias";
 
 	# account_prefs_reset.php3
-	$s_prefs_reset_msg = "Las Preferencias han sito reseteadas...";
+	$s_prefs_reset_msg = "Las Preferencias han sito reestablecidas...";
 
 	# account_prefs_update.php3
 	$s_prefs_updated_msg = "Las Preferencias han sido actualizadas...";
@@ -426,15 +426,15 @@
 
 	# manage_user_page.php3
 	$s_edit_user_title = "Editar Usuario";
-	$s_reset_password_button = "Restear Clave";
+	$s_reset_password_button = "Restear Contraseña";
 	$s_delete_user_button = "Eliminar Usuario";
-	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
-	$s_reset_password_msg2 = "Resetar la clave significa blanquear clave.";
+	$s_reset_password_msg = "Resetear la contraseña significa generar una nueva clave al azar.";
+	$s_reset_password_msg2 = "Resetar la contraseña significa blanquear clave.";
 
 	# manage_user_reset.php3
 	$s_account_reset_protected_msg = "Cuenta Protegida. Imposible resetear la clave.";
 	$s_account_reset_msg = "Restear clave de cuenta...";
-	$s_account_reset_msg2 = "Clave de cuenta blanqueada...";
+	$s_account_reset_msg2 = "Contraseña de cuenta blanqueada...";
 
 	# manage_user_update.php3
 	$s_manage_user_protected_msg = "Cuenta Protegida. Nivel de acceso y Activacion Protegida. La cuenta ha sido actualizada...";
@@ -517,7 +517,7 @@
 	$s_project_user_added_msg = "Usuario agregado al proyecto exitosamente";
 
 	# proj_user_delete.php3
-	$s_project_removed_user_msg = "Successfully removed user from project";
+	$s_project_removed_user_msg = "Usuario removido del proyecto exitosamente";
 
 	# proj_user_delete_page.php3
 	$s_remove_user_sure_msg = "Esta seguro que desea remover este usuario?";
@@ -615,7 +615,7 @@
 	$s_any = "cualquiera";
 	$s_show = "Ver";
 	$s_changed = "Cambiado(hrs)";
-	$s_hide_closed = "Ocultar Resueltos";
+	$s_hide_closed = "Ocultar Bugs Cerrados";
 	$s_viewing_bugs_title = "Bugs";
 	$s_updated = "Actualizado";
 
