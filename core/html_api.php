@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.45 2003-02-14 02:45:28 vboctor Exp $
+	# $Id: html_api.php,v 1.46 2003-02-15 08:12:38 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -686,7 +686,9 @@
 	# --------------------
 	# Print a button to close the given bug
 	function html_button_bug_close( $p_bug_id ) {
-		if ( access_can_close_bug ( $p_bug_id ) && ( $t_bug->status < CLOSED ) ) {
+		$t_status = bug_get_field( $p_bug_id, 'status' );
+
+		if ( access_can_close_bug ( $p_bug_id ) && ( $t_status < CLOSED ) ) {
 			echo '<td class="center">';
 			html_button( 'bug_close_page.php',
 						 lang_get( 'close_bug_button' ), 
@@ -730,8 +732,9 @@
 	# Print all buttons for view bug pages
 	function html_buttons_view_bug_page( $p_bug_id ) {
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
+		$t_status = bug_get_field( $p_bug_id, 'status' );
 
-		if ( $t_bug->status < $t_resolved ) {
+		if ( $t_status < $t_resolved ) {
 			# UPDATE button
 			html_button_bug_update( $p_bug_id );
 
