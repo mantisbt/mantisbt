@@ -10,6 +10,7 @@ Mantis ChangeLog
 - 0004426: [email] Email notifications to users with language set to "auto" causes errors (thraxisp)
 - 0004448: [email] Custom severity and status shown in mail as code (thraxisp)
 - 0004480: [email] admin/check.php - Check email failing. (thraxisp)
+- 0004523: [filters] SYSTEM NOTICE: Undefined variable: t_target_field in view_filters_page.php (Victor Boctor)
 - 0004463: [graph] pie chart of summary graph per category wrong when viewing allprojects (thraxisp)
 - 0004464: [graph] Pie graphs display as error if no issue exist for a specific project (thraxisp)
 - 0004511: [graph] Summary Graph "Cumulative by Date" is blank (process expires) (thraxisp)

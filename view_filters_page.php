@@ -22,7 +22,9 @@
 
 	html_page_top1();
 	html_page_top2();
-	
+
+	$t_target_field = gpc_get_string( 'target_field', '' );
+
 	if ( ON == config_get( 'use_javascript' ) ) {
 		?>
 		<body onload="SetInitialFocus();">
@@ -30,7 +32,7 @@
 		<script language="Javascript">
 		function SetInitialFocus() {
 			<?php
-			$t_target_field = gpc_get_string( 'target_field', '' );
+			global $t_target_field;
 			if ( $t_target_field ) {
 				$f_view_type = gpc_get_string( 'view_type', '' );
 				if ( ( 'hide_status[]' == $t_target_field ) && ( 'advanced' == $f_view_type ) ) {
