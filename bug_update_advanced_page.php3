@@ -140,7 +140,7 @@
 		</td>
 		<td colspan=5 bgcolor=<? echo $g_primary_color_light ?>>
 			<select name=f_handler_id>
-				<option value="">
+				<option value=""></option>
 				<? print_handler_option_list( $v_handler_id ) ?>
 			</select>
 		</td>

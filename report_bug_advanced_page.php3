@@ -110,7 +110,7 @@
 		</td>
 		<td>
 			<select name="f_category">
-				<option value="" SELECTED><? echo $s_select_category ?>
+				<option value="" SELECTED><? echo $s_select_category ?></option>
 				<? print_category_option_list( $f_category ) ?>
 			</select>
 		</td>
@@ -122,7 +122,7 @@
 		</td>
 		<td>
 			<select name="f_reproducibility">
-				<option value="" SELECTED><? echo $s_select_reproducibility ?>
+				<option value="" SELECTED><? echo $s_select_reproducibility ?></option>
 				<? print_enum_string_option_list( $s_reproducibility_enum_string, $f_reproducibility ) ?>
 			</select>
 		</td>
@@ -134,7 +134,7 @@
 		</td>
 		<td>
 			<select name="f_severity">
-				<option value="" SELECTED><? echo $s_select_severity ?>
+				<option value="" SELECTED><? echo $s_select_severity ?></option>
 				<? print_enum_string_option_list( $s_severity_enum_string, $f_severity ) ?>
 			</select>
 		</td>
@@ -214,7 +214,7 @@
 		</td>
 		<td>
 			<select name="f_assign_id">
-				<option value="0000000" SELECTED>
+				<option value="0000000" SELECTED></option>
 				<? print_assign_to_option_list( $f_assign_id ) ?>
 			</select>
 		</td>

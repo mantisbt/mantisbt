@@ -80,7 +80,7 @@
 		<td>
 			<select name="f_project_id">
 			<option value="0000000">
-			<? print_project_option_list( $u_default_project ) ?>
+			<? print_project_option_list( $u_default_project ) ?></option>
 			</select>
 		</td>
 	</tr>

@@ -7,6 +7,7 @@ Mantis
  * Fixed mysterious problem with global variables being set to ""
  * Fixed redirect problem when bug report not correctly filled out.
  * Added commented out examples for alternate links in css_inc.php
+ * Added closing option tags.
 
 08.19.2001  -   0.15.4
 

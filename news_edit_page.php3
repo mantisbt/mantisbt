@@ -78,7 +78,7 @@
 		<td>
 			<select name="f_project_id">
 				<? if( get_current_user_field( "access_level" )=="90") { ?>
-                            <option value="0000000" <? if ( $v_project_id=="0000000" ) echo "SELECTED"?>>Sitewide
+                            <option value="0000000" <? if ( $v_project_id=="0000000" ) echo "SELECTED"?>>Sitewide</option>
                             <? } ?>
 				<? print_news_project_option_list( $v_project_id ) ?>
 			</select>

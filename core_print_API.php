@@ -96,10 +96,10 @@
 	    	$t_handler_name	= $row["username"];
 
 	    	if ( $t_handler_id==$p_handler_id ) {
-				PRINT "<option value=\"$t_handler_id\" SELECTED>".$t_handler_name;
+				PRINT "<option value=\"$t_handler_id\" SELECTED>".$t_handler_name."</option>";
 			}
 			else {
-				PRINT "<option value=\"$t_handler_id\">".$t_handler_name;
+				PRINT "<option value=\"$t_handler_id\">".$t_handler_name."</option>";
 			}
 		}
 	}
@@ -118,10 +118,10 @@
 	    	$t_user_name = $row["username"];
 
 	    	if ( $t_user_id==$p_user_id ) {
-				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name;
+				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name."</option>";
 			}
 			else {
-				PRINT "<option value=\"$t_user_id\">".$t_user_name;
+				PRINT "<option value=\"$t_user_id\">".$t_user_name."</option>";
 			}
 		}
 	}
@@ -142,10 +142,10 @@
 	    	$t_user_name = $row["username"];
 
 	    	if ( $t_user_id==$p_user_id ) {
-				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name;
+				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name."</option>";
 			}
 			else {
-				PRINT "<option value=\"$t_user_id\">".$t_user_name;
+				PRINT "<option value=\"$t_user_id\">".$t_user_name."</option>";
 			}
 		}
 	}
@@ -158,13 +158,13 @@
 	    		ORDER BY id ASC";
 	    $result = db_query( $query );
 	    $duplicate_id_count = db_num_rows( $result );
-	    PRINT "<option value=\"0000000\">";
+	    PRINT "<option value=\"0000000\"></option>";
 
 	    for ($i=0;$i<$duplicate_id_count;$i++) {
 	    	$row = db_fetch_array( $result );
 	    	$t_duplicate_id	= $row["id"];
 
-			PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id;
+			PRINT "<option value=\"$t_duplicate_id\">".$t_duplicate_id."</option>";
 		}
 	}
 	### --------------------
@@ -190,7 +190,7 @@
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			$v_headline = string_display( $v_headline );
 
-			PRINT "<option value=\"$v_id\">$v_headline";
+			PRINT "<option value=\"$v_id\">$v_headline</option>";
 		}
 	}
 	### --------------------
@@ -204,10 +204,10 @@
 		for ($i=0;$i<$entry_count;$i++) {
 			$t_s = str_replace( "'", "", $t_arr[$i] );
 			if ( $p_item==$t_s ) {
-				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
+				PRINT "<option value=\"$t_s\" SELECTED>$t_s</option>";
 			}
 			else {
-				PRINT "<option value=\"$t_s\">$t_s";
+				PRINT "<option value=\"$t_s\">$t_s</option>";
 			}
 		} ### end for
 	}
@@ -232,9 +232,9 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 			if ( $v_id==$p_id ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_username";
+				PRINT "<option value=\"$v_id\" SELECTED>$v_username</option>";
 			} else {
-				PRINT "<option value=\"$v_id\">$v_username";
+				PRINT "<option value=\"$v_id\">$v_username</option>";
 			}
 		} ### end for
 	}
@@ -269,9 +269,9 @@
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			if ( $p_project_id==$v_id ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_name";
+				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
 			} else {
-				PRINT "<option value=\"$v_id\">$v_name";
+				PRINT "<option value=\"$v_id\">$v_name</option>";
 			}
 		} ### end for
 	}
@@ -294,7 +294,7 @@
 	    $result = db_query( $query );
 	    $profile_count = db_num_rows( $result );
 
-		PRINT "<option value=\"\">";
+		PRINT "<option value=\"\"></option>";
 		for ($i=0;$i<$profile_count;$i++) {
 			### prefix data with v_
 			$row = db_fetch_array( $result );
@@ -304,9 +304,9 @@
 			$v_os_build	= string_display( $v_os_build );
 
 			if ( $v_id==$v_default_profile ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build";
+				PRINT "<option value=\"$v_id\" SELECTED>$v_platform $v_os $v_os_build</option>";
 			} else {
-				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build";
+				PRINT "<option value=\"$v_id\">$v_platform $v_os $v_os_build</option>";
 			}
 		}
 	}
@@ -334,9 +334,9 @@
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			if ( $v_id==$p_id ) {
-				PRINT "<option value=\"$v_id\" SELECTED>$v_name";
+				PRINT "<option value=\"$v_id\" SELECTED>$v_name</option>";
 			} else {
-				PRINT "<option value=\"$v_id\">$v_name";
+				PRINT "<option value=\"$v_id\">$v_name</option>";
 			}
 		} ### end for
 	}
@@ -354,9 +354,9 @@
 			$row = db_fetch_array( $result );
 			$t_category = $row["category"];
 			if ( $t_category==$p_category ) {
-				PRINT "<option value=\"$t_category\" SELECTED>$t_category";
+				PRINT "<option value=\"$t_category\" SELECTED>$t_category</option>";
 			} else {
-				PRINT "<option value=\"$t_category\">$t_category";
+				PRINT "<option value=\"$t_category\">$t_category</option>";
 			}
 		}
 	}
@@ -374,9 +374,9 @@
 			$row = db_fetch_array( $result );
 			$t_version = $row["version"];
 			if ( $t_version==$p_version ) {
-				PRINT "<option value=\"$t_version\" SELECTED>$t_version";
+				PRINT "<option value=\"$t_version\" SELECTED>$t_version</option>";
 			} else {
-				PRINT "<option value=\"$t_version\">$t_version";
+				PRINT "<option value=\"$t_version\">$t_version</option>";
 			}
 		}
 	}
@@ -387,9 +387,9 @@
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
 			if ( $t_elem[0]==$p_val ) {
-				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem[1]";
+				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem[1]</option>";
 			} else {
-				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]";
+				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]</option>";
 			}
 		} ### end for
 	}
@@ -410,9 +410,9 @@
 			if ( $t_elem[0]==ADMINISTRATOR ) { continue; }
 
 			if ( $t_elem[0]==$p_val ) {
-				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem[1]";
+				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem[1]</option>";
 			} else {
-				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]";
+				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]</option>";
 			}
 		} ### end for
 	}
@@ -424,9 +424,9 @@
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			if ( $t_arr[$i]==$p_language ) {
-				PRINT "<option value=\"$t_arr[$i]\" SELECTED>$t_arr[$i]";
+				PRINT "<option value=\"$t_arr[$i]\" SELECTED>$t_arr[$i]</option>";
 			} else {
-				PRINT "<option value=\"$t_arr[$i]\">$t_arr[$i]";
+				PRINT "<option value=\"$t_arr[$i]\">$t_arr[$i]</option>";
 			}
 		} ### end for
 	}

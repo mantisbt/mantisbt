@@ -59,7 +59,7 @@
 			<select name="f_project_id">
 				<?
 					if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-						PRINT "<option value=\"0000000\">Sitewide";
+						PRINT "<option value=\"0000000\">Sitewide</option>";
 					}
 				?>
 				<? print_news_project_option_list( $g_project_cookie_val ) ?>

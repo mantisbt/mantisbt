@@ -63,22 +63,22 @@
 <? } ?>
 		<td>
 		<select name="f_show_category">
-			<option value="any"><? echo $s_any ?>
-			<option value="any">
+			<option value="any"><? echo $s_any ?></option>
+			<option value="any"></option>
 			<? print_category_option_list( $f_show_category ) ?>
 		</select>
 		</td>
 		<td>
 		<select name="f_show_severity">
-			<option value="any"><? echo $s_any ?>
-			<option value="any">
+			<option value="any"><? echo $s_any ?></option>
+			<option value="any"></option>
 			<? print_enum_string_option_list( $s_severity_enum_string, $f_show_severity ) ?>
 		</select>
 		</td>
 		<td>
 		<select name="f_show_status">
-			<option value="any"><? echo $s_any ?>
-			<option value="any">
+			<option value="any"><? echo $s_any ?></option>
+			<option value="any"></option>
 			<? print_enum_string_option_list( $s_status_enum_string, $f_show_status ) ?>
 		</select>
 		</td>
