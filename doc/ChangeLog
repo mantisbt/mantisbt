@@ -40,6 +40,7 @@ Mantis ChangeLog
  * Fix #3230: German translation [corrections].
  * Languages: Updated Italian, German, Spanish, Slovak, Swedish and Dutch localisations.
  * Languages: Synchronised localisation files with English localisation.
+ * Fix: Part of filenames with '-'s were being cut off.
 
 2003.03.22  -  0.18.0a4
 
