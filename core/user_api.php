@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.79 2004-08-23 14:13:34 thraxisp Exp $
+	# $Id: user_api.php,v 1.80 2004-11-19 12:29:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -722,6 +722,30 @@
 		$t_lost_password_in_progress_count = user_get_field( $p_user_id, 'lost_password_in_progress_count' );
 		return ( $t_lost_password_in_progress_count < $t_max_lost_password_in_progress_count 
 							|| OFF == $t_max_lost_password_in_progress_count );
+	}
+
+	# --------------------
+	# return the bug filter parameters for the specified user
+	function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
+		if ( null === $p_project_id ) {
+			$t_project_id = helper_get_current_project();
+		} else {
+			$t_project_id = $p_project_id;
+		}
+
+		$t_view_all_cookie_id	= filter_db_get_project_current( $t_project_id, $p_user_id );
+		$t_view_all_cookie		= filter_db_get_filter( $t_view_all_cookie_id, $p_user_id );
+		$t_cookie_detail		= explode( '#', $t_view_all_cookie, 2 );
+
+		if ( !isset( $t_cookie_detail[1] ) ) {
+			return false;
+		}
+
+		$t_filter = unserialize( $t_cookie_detail[1] );
+
+		$t_filter = filter_ensure_valid_filter( $t_filter );
+
+		return $t_filter;
 	}
 
 	#===================================

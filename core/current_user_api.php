@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.22 2004-08-14 15:26:21 thraxisp Exp $
+	# $Id: current_user_api.php,v 1.23 2004-11-19 12:29:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -87,9 +87,7 @@
 	}
 	# --------------------
 	# return the bug filter parameters for the current user
-	#  this could be modified to call a user_api function to get the
-	#  filter out of a db or whatever
-	function current_user_get_bug_filter() {
+	function current_user_get_bug_filter( $p_project_id = null ) {
 		$f_filter_string	= gpc_get_string( 'filter', '' );
 		$t_view_all_cookie	= '';
 		$t_cookie_detail	= '';
@@ -100,15 +98,8 @@
 		} else if ( !filter_is_cookie_valid() ) {
 			return false;
 		} else {
-			$t_view_all_cookie_id	= filter_db_get_project_current( helper_get_current_project() );
-			$t_view_all_cookie		= filter_db_get_filter( $t_view_all_cookie_id );
-			$t_cookie_detail		= explode( '#', $t_view_all_cookie, 2 );
-			
-			if ( !isset( $t_cookie_detail[1] ) ) {
-				return false;
-			}
-
-			$t_filter				= unserialize( $t_cookie_detail[1] );
+			$t_user_id = auth_get_current_user_id();
+			return user_get_bug_filter( $t_user_id, $p_project_id );
 		}
 
 		$t_filter = filter_ensure_valid_filter( $t_filter );

@@ -6,12 +6,13 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.62 2004-10-28 00:31:04 thraxisp Exp $
+	# $Id: filter_api.php,v 1.63 2004-11-19 12:29:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'current_user_api.php' );
+	require_once( $t_core_dir . 'user_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'collapse_api.php' );
 
@@ -37,7 +38,13 @@
 	# $p_bug_count
 	#   - you don't need to give a value here, the number of bugs will be
 	#     stored here on return
-	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $custom_filter = null ) {
+	# $p_custom_filter
+	#   - Filter to use.
+	# $p_project_id
+	#   - project id to use in filtering.
+	# $p_user_id
+	#   - user id to use as current user when filtering.
+	function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $custom_filter = null, $p_project_id = null, $p_user_id = null ) {
 		$t_bug_table			= config_get( 'mantis_bug_table' );
 		$t_bug_text_table		= config_get( 'mantis_bug_text_table' );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
@@ -48,11 +55,34 @@
 		$t_limit_reporters		= config_get( 'limit_reporters' );
 		$t_report_bug_threshold		= config_get( 'report_bug_threshold' );
 
+		$t_current_user_id = auth_get_current_user_id();
+		
+		if ( null === $p_user_id ) {
+			$t_user_id = $t_current_user_id;
+		} else {
+			$t_user_id = $p_user_id;
+		}
+		
+		$c_user_id = db_prepare_int( $t_user_id );
+
+		if ( null === $p_project_id ) {
+			$t_project_id	= helper_get_current_project();
+		} else {
+			$t_project_id	= $p_project_id;
+		}
+
 		if ( $custom_filter == null ) {
-			$t_filter = current_user_get_bug_filter();
+			# Prefer current_user_get_bug_filter() over user_get_filter() when applicable since it supports
+			# cookies set by previous version of the code.
+			if ( $t_user_id == $t_current_user_id ) {
+				$t_filter = current_user_get_bug_filter();
+			} else {
+				$t_filter = user_get_bug_filter( $t_user_id, $t_project_id );
+			}
 		} else {
 			$t_filter = $custom_filter;
 		}
+
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 
 		if ( false === $t_filter ) {
@@ -60,17 +90,14 @@
 			#@@@ error instead?
 		}
 
-		$t_project_id	= helper_get_current_project();
-		$t_user_id		= auth_get_current_user_id();
-
 		$t_where_clauses = array( "$t_project_table.enabled = 1", "$t_project_table.id = $t_bug_table.project_id" );
 		$t_select_clauses = array( "$t_bug_table.*" );
 		$t_join_clauses = array();
 		$t_from_clauses = array();
 
 		if ( ALL_PROJECTS == $t_project_id ) {
-			if ( !current_user_is_administrator() ) {
-				$t_projects = current_user_get_accessible_projects();
+			if ( !user_is_administrator( $t_user_id ) ) {
+				$t_projects = user_get_accessible_projects( $t_user_id );
 
 				if ( 0 == count( $t_projects ) ) {
 					return array();  # no accessible projects, return an empty array
@@ -86,13 +113,13 @@
 				}
 			}
 		} else {
-			access_ensure_project_level( VIEWER, $t_project_id );
+			access_ensure_project_level( VIEWER, $t_project_id, $t_user_id );
 
 			array_push( $t_where_clauses, "($t_bug_table.project_id='$t_project_id')" );
 		}
 
 		# private bug selection
-		if ( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
+		if ( !access_has_project_level( config_get( 'private_bug_threshold' ), $t_project_id, $t_user_id ) ) {
 			$t_public = VS_PUBLIC;
 			array_push( $t_where_clauses, "($t_bug_table.view_state='$t_public' OR $t_bug_table.reporter_id='$t_user_id')" );
 		} else {
@@ -119,8 +146,8 @@
 			foreach( $t_filter['reporter_id'] as $t_filter_member ) {
 				$c_reporter_id = db_prepare_int( $t_filter_member );
 				if ( META_FILTER_MYSELF == $c_reporter_id ) {
-					if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
-						$c_reporter_id = auth_get_current_user_id();
+					if ( access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_user_id ) ) {
+						$c_reporter_id = $c_user_id;
 						array_push( $t_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
 					}
 				} else {
@@ -131,8 +158,8 @@
 		}
 
 		# limit reporter
-		if ( ( ON === $t_limit_reporters ) && ( current_user_get_access_level() <= $t_report_bug_threshold ) ) {
-			$c_reporter_id = db_prepare_int( auth_get_current_user_id() );
+		if ( ( ON === $t_limit_reporters ) && ( user_get_access_level( $t_user_id ) <= $t_report_bug_threshold ) ) {
+			$c_reporter_id = $c_user_id;
 			array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
 		}
 
@@ -159,8 +186,8 @@
 				} else {
 					$c_handler_id = db_prepare_int( $t_filter_member );
 					if ( META_FILTER_MYSELF == $c_handler_id ) {
-						if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
-							$c_handler_id = auth_get_current_user_id();
+						if ( access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_user_id ) ) {
+							$c_handler_id = $c_user_id;
 							if ( 'on' != $t_filter['and_not_assigned'] ) {
 								array_push( $t_clauses, "($t_bug_table.handler_id='$c_handler_id')" );
 							} else {
@@ -409,8 +436,8 @@
 			foreach( $t_filter['user_monitor'] as $t_filter_member ) {
 				$c_user_monitor = db_prepare_int( $t_filter_member );
 				if ( META_FILTER_MYSELF == $c_user_monitor ) {
-					if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
-						$c_user_monitor = auth_get_current_user_id();
+					if ( access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_user_id ) ) {
+						$c_user_monitor = $c_user_id;
 						array_push( $t_clauses, "($t_table_name.user_id='$c_user_monitor')" );
 					}
 				} else {
@@ -423,7 +450,7 @@
 		# custom field filters
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
 			# custom field filtering
-			$t_custom_fields = custom_field_get_ids();
+			$t_custom_fields = custom_field_get_ids();	# @@@@ Shouldn't the filter be on project specific custom fields?
 
 			foreach( $t_custom_fields as $t_cfid ) {
 			$t_first_time = true;
@@ -478,7 +505,7 @@
 
 		$t_textsearch_where_clause = '';
 		$t_textsearch_wherejoin_clause = '';
-		# Simple Text Search - Thnaks to Alan Knowles
+		# Simple Text Search - Thanks to Alan Knowles
 		if ( !is_blank( $t_filter['search'] ) ) {
 			$c_search = db_prepare_string( $t_filter['search'] );
 			$c_search_int = db_prepare_int( $t_filter['search'] );
@@ -1552,13 +1579,19 @@
 	# tied to the unique id parameter. If the user doesn't
 	# have permission to see this filter, the function will
 	# return null
-	function filter_db_get_filter( $p_filter_id ) {
+	function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 		global $g_cache_filter_db_filters;
 		$t_filters_table = config_get( 'mantis_filters_table' );
 		$c_filter_id = db_prepare_int( $p_filter_id );
 
 		if ( isset( $g_cache_filter_db_filters[$p_filter_id] ) ) {
 			return $g_cache_filter_db_filters[$p_filter_id];
+		}
+		
+		if ( null === $p_user_id ) {
+			$t_user_id = auth_get_current_user_id();
+		} else {
+			$t_user_id = $p_user_id;
 		}
 
 		$query = "SELECT *
@@ -1569,14 +1602,14 @@
 		if ( db_num_rows( $result ) > 0 ) {
 			$row = db_fetch_array( $result );
 
-			if ( $row['user_id'] != auth_get_current_user_id() ) {
+			if ( $row['user_id'] != $t_user_id ) {
 				if ( $row['is_public'] != true ) {
 					return null;
 				}
 			}
 
 			# check that the user has access to non current filters
-			if ( ( ALL_PROJECTS <= $row['project_id'] ) && ( !is_blank( $row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) ) {
+			if ( ( ALL_PROJECTS <= $row['project_id'] ) && ( !is_blank( $row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold', $row['project_id'], $t_user_id ) ) ) ) {
 				return null;
 			}
 
@@ -1587,16 +1620,21 @@
 		return null;
 	}
 
-	function filter_db_get_project_current( $p_project_id ) {
+	function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 		$t_filters_table = config_get( 'mantis_filters_table' );
 		$c_project_id 	= db_prepare_int( $p_project_id );
 		$c_project_id 	= $c_project_id * -1;
-		$t_user_id 		= auth_get_current_user_id();
+
+		if ( null === $p_user_id ) {
+			$c_user_id 		= auth_get_current_user_id();
+		} else {
+			$c_user_id		= db_prepare_int( $p_user_id );
+		}
 
 		# we store current filters for each project with a special project index
 		$query = "SELECT *
 				  FROM $t_filters_table
-				  WHERE user_id='$t_user_id'
+				  WHERE user_id='$c_user_id'
 				  	AND project_id='$c_project_id'
 				  	AND name=''";
 		$result = db_query( $query );
