@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.12 2002-09-03 02:21:01 prescience Exp $
+	# $Id: email_api.php,v 1.13 2002-09-05 22:25:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -25,7 +25,15 @@
 
 		# Use a regular expression to check to see if the email is in valid format
 		#  x-xx.xxx@yyy.zzz.abc etc.
-		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+).([a-z]{2,6}$)", $p_email, $check)) {
+		if (eregi("^[_.0-9a-z-]+@([0-9a-z][-0-9a-z.]+)\.([a-z]{2,6}$)", $p_email, $check)) {
+			# see if we're limited to one domain
+			$t_limit_email_domain = config_get( 'limit_email_domain' );
+			if ( $t_limit_email_domain ) {
+				if ( 0 != strcasecmp( $t_limit_email_domain, $check[1].'.'.$check[2] ) ) {
+					return false;
+				}
+			}
+
 			# passed format check. see if we should check the mx records
 			if ( ON == $g_check_mx_record ) {	# Check for valid mx records
 				if (getmxrr($check[1].'.'.$check[2], $temp)) {
