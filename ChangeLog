@@ -12,10 +12,14 @@ To Do:
  * More documentation on installation, configuration, and customization
  * Multiple project support with userland partitioning
 
+12.26.2000	-	0.13.1
+
+ * Fixed bug in bug_delete_page.php3 and manage_user_delete_page.php3
+
 12.25.2000	-	0.13.0
 
- * Fixed bug in vote adding with inccorect variable name.
- * Fixed bug where bugnote text not properl deleted when bug deleted
+ * Fixed bug in vote adding with incorrect variable name.
+ * Fixed bug where bugnote text not properly deleted when bug deleted
  * Fixed manage product versions update redirect
  * Fixed another problem with the date created being updated improperly when
    dealing with bugnotes.
