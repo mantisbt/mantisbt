@@ -327,7 +327,7 @@ CREATE TABLE mantis_bug_file_table (
 
 # Add a ordering field for versions
 
-ALTER TABLE mantis_project_version_table ADD ver_order INT (7) not nul;
+ALTER TABLE mantis_project_version_table ADD ver_order INT (7) not null;
 
 # Make the cookie string unique
 
