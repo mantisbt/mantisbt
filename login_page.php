@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.34 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: login_page.php,v 1.35 2004-04-06 19:38:32 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -130,10 +130,9 @@
 	}
 ?>
 
+<!-- Autofocus JS -->
 <script type="text/javascript" language="JavaScript">
-<!--
-	window.document.login_form.username.focus();
-//-->
+window.document.login_form.username.focus();
 </script>
 
 <?php html_page_bottom1a( __FILE__ ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.35 2004-03-26 10:06:26 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.36 2004-04-06 19:38:32 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'file_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
@@ -240,7 +240,7 @@
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
-<?php 
+<?php
 	if ( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) {
 ?>
 		<input tabindex="9" type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?>
@@ -279,12 +279,9 @@
 </form>
 </div>
 
-
 <!-- Autofocus JS -->
-<script language="JavaScript">
-<!--
-	window.document.report_bug_form.category.focus();
-//-->
+<script type="text/javascript" language="JavaScript">
+window.document.report_bug_form.category.focus();
 </script>
 
 <?php html_page_bottom1( __FILE__ ) ?>

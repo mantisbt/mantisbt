@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.88 2004-02-29 09:07:45 vboctor Exp $
+	# $Id: html_api.php,v 1.89 2004-04-06 19:38:33 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -47,7 +47,7 @@
 	###########################################################################
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
@@ -166,10 +166,8 @@
 	function html_css() {
 		$t_css_url = config_get( 'css_include_file' );
 		echo '<link rel="stylesheet" type="text/css" href="' . $t_css_url . '" />';
-		echo '<script language="JavaScript" type="text/javascript">';
-		echo '<!--';
+		echo '<script type="text/javascript" language="JavaScript">';
 		echo 'if(document.layers) {document.write("<style>td{padding:0px;}<\/style>")}';
-		echo '//-->';
 		echo '</script>';
 	}
 
@@ -649,7 +647,7 @@
 		if ( ( $t_handler_id != $t_reporter_id ) &&
 			( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $t_reporter_id ) ) ) {
 		    $t_options[] = array( $t_reporter_id, '[' . lang_get( 'reporter' ) . ']' );
-			
+
 			if ( $t_default_assign_to === null ) {
 				$t_default_assign_to = $t_reporter_id;
 			}
@@ -661,7 +659,7 @@
 		echo "	<input type=\"submit\" value=\"$t_button_text\" />\n";
 
 		echo "<select name=\"handler_id\">";
-		
+
 		$t_already_selected = false;
 
 		foreach ( $t_options as $t_entry ) {
@@ -675,7 +673,7 @@
 			}
 
 		    echo "<option value=\"$t_id\" ";
-				
+
 			if ( ( $t_id == $t_default_assign_to ) && !$t_already_selected ) {
 				check_selected( $t_id, $t_default_assign_to );
 			    $t_already_selected = true;
@@ -688,7 +686,7 @@
 		if ( $t_handler_id != 0 ) {
 			echo "<option value=\"0\"></option>";
 		}
-		
+
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		print_assign_to_option_list( 0 /* currently selected */, $t_project_id );
 		echo "</select>";
@@ -786,7 +784,7 @@
 			# REOPEN button
 			html_button_bug_reopen( $p_bug_id );
 		}
-		echo '</td>';		
+		echo '</td>';
 
 		# CLOSE button
 		echo '<td>';

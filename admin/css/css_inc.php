@@ -102,10 +102,11 @@ div.login-info-right	{ display: inline; float: both; width: 33%; text-align: rig
 div.news-body		{ padding: 16px; text-align: left; width: 50%; border: solid 1px #000000; }
 
 </style>
+
 <!-- For Netscape 4.x -->
-<script language="JavaScript" type="text/javascript">
-<!--
-if(document.layers) {document.write('<style>td{padding:0px;}</style>')}
-//-->
+<script type="text/javascript" language="JavaScript">
+if (document.layers) {
+	document.write('<style>td{padding:0px;}</style>')
+}
 </script>
 <noscript></noscript>
