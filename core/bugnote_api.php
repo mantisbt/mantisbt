@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.5 2002-08-26 00:40:23 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.6 2002-08-26 21:58:47 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -118,11 +118,11 @@
 	function bugnote_delete( $p_bugnote_id ) {
 		global $g_mantis_bugnote_table, $g_mantis_bugnote_text_table;
 
-		$t_bug_id = bugnote_field( $p_bugnote_id, 'bug_id' );
+		$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 
 		# grab the bugnote text id
-		$t_bugnote_text_id = bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
+		$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 
 		# Remove the bugnote
 		$query = "DELETE
@@ -152,8 +152,8 @@
 	function bugnote_update_text( $p_bugnote_id, $p_bugnote_text ) {
 		global $g_mantis_bugnote_text_table;
 
-		$t_bug_id = bugnote_field( $p_bugnote_id, 'bug_id' );
-		$t_bugnote_text_id = bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
+		$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
+		$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 
 		$c_bugnote_text		= db_prepare_string( $p_bugnote_text );
 
@@ -181,7 +181,7 @@
 	function bugnote_update_view_state( $p_bugnote_id, $p_private ) {
 		global $g_mantis_bugnote_table;
 
-		$t_bug_id = bugnote_field( $p_bugnote_id, 'bug_id' );
+		$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 
 		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 
@@ -206,10 +206,10 @@
 	}
 	# --------------------
 	# Returns the text associated with the bugnote
-	function bugnote_text( $p_bugnote_id ) {
+	function bugnote_get_text( $p_bugnote_id ) {
 		global $g_mantis_bugnote_text_table;
 
-		$c_bugnote_text_id = bugnote_field( $p_bugnote_id, 'bugnote_text_id' );
+		$c_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 
 		# grab the bugnote text
 		$query = "SELECT note
@@ -221,7 +221,7 @@
 	}
 	# --------------------
 	# Returns a field for the given bugnote
-	function bugnote_field( $p_bugnote_id, $p_field_name ) {
+	function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 		global $g_mantis_bugnote_table;
 
 		$c_bugnote_id = db_prepare_int( $p_bugnote_id );

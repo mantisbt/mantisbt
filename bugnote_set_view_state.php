@@ -13,8 +13,8 @@
 <?php
 	# make sure the user accessing the note is valid and has proper access
 	bugnote_ensure_exists( $f_bugnote_id );
-	$t_bugnote_user_id	= bugnote_field( $f_bugnote_id, 'reporter_id' );
-	$t_bug_id				= bugnote_field( $f_bugnote_id, 'bug_id' );
+	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );
+	$t_bug_id				= bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	$t_user_id			= get_current_user_field( 'id' );
 	$c_bugnote_id 		= (integer)$f_bugnote_id;
 

@@ -12,7 +12,7 @@
 <?php login_cookie_check() ?>
 <?php
 	bugnote_ensure_exists( $f_bugnote_id );
-	$t_bug_id = bugnote_field( $f_bugnote_id, 'bug_id' );
+	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );
 	check_access( REPORTER );
 	check_bug_exists( $t_bug_id );

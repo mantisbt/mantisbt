@@ -13,12 +13,12 @@
 <?php login_cookie_check() ?>
 <?php
 	bugnote_ensure_exists( $f_bugnote_id );
-	$t_bug_id = bugnote_field( $f_bugnote_id, 'bug_id' );
+	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );
 	check_bug_exists( $t_bug_id );
 
 	# make sure the user accessing the note is valid and has proper access
-	$t_bugnote_user_id	= bugnote_field( $f_bugnote_id, 'reporter_id' );
+	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 	$t_user_id			= get_current_user_field( 'id' );
 
 	if ( get_bug_field( $t_bug_id, 'status' ) < RESOLVED ) {
@@ -32,7 +32,7 @@
 		print_header_redirect( 'logout_page.php' );
 	}
 
-	$t_bugnote_text = string_edit_textarea( bugnote_text( $f_bugnote_id ) );
+	$t_bugnote_text = string_edit_textarea( bugnote_get_text( $f_bugnote_id ) );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $t_bug_id, 1 );
