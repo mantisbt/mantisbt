@@ -75,7 +75,7 @@
 </tr>
 <tr valign="top">
 	<td width="50%">
-		<img src="summary_graph_bystatus.php" border="0">  
+		 <img src="summary_graph_bystatus.php" border="0">
 	</td>
 </tr>
 <tr valign="top">

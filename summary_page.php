@@ -78,7 +78,16 @@
 				<?php echo $s_by_status ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_status_enum_string, 'status' ) ?>
+		<?php 
+		if ($g_customize_attributes) {
+			# to be deleted when moving to manage_project_page.php	
+			$t_project_id = '0000000';
+
+			# custom attributes insertion
+			insert_attributes( 'status', $t_project_id, 'global' );
+			insert_attributes( 'status', $t_project_id, 'str' ) ;
+		}
+		print_bug_enum_summary( $g_status_enum_string, 'status' ) ?>
 		</table>
 	</td>
 	<td width="50%">
@@ -102,7 +111,16 @@
 				<?php echo $s_by_severity ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_severity_enum_string, 'severity' ) ?>
+		<?php
+		if ($g_customize_attributes) {
+			# to be deleted when moving to manage_project_page.php	
+			$t_project_id = '0000000';
+
+			# custom attributes insertion
+			insert_attributes( 'severity', $t_project_id, 'global' );
+			insert_attributes( 'severity', $t_project_id, 'str' ) ;
+		}
+		print_bug_enum_summary( $g_severity_enum_string, 'severity' ) ?>
 		</table>
 	</td>
 	<td>
@@ -113,7 +131,16 @@
 				<?php echo $s_by_resolution ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_resolution_enum_string, 'resolution' ) ?>
+		<?php 
+		if ($g_customize_attributes) {
+			# to be deleted when moving to manage_project_page.php	
+			$t_project_id = '0000000';
+
+			# custom attributes insertion
+			insert_attributes( 'resolution', $t_project_id, 'global' );
+			insert_attributes( 'resolution', $t_project_id, 'str' ) ;
+		}
+		print_bug_enum_summary( $g_resolution_enum_string, 'resolution' ) ?>
 		</table>
 	</td>
 </tr>
@@ -137,7 +164,16 @@
 				<?php echo $s_by_priority ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $g_priority_enum_string, 'priority' ) ?>
+		<?php 
+		if ($g_customize_attributes) {
+			# to be deleted when moving to manage_project_page.php	
+			$t_project_id = '0000000';
+
+			# custom attributes insertion
+			insert_attributes( 'priority', $t_project_id, 'global' );
+			insert_attributes( 'priority', $t_project_id, 'str' ) ;
+		}
+		print_bug_enum_summary( $g_priority_enum_string, 'priority' ) ?>
 		</table>
 	</td>
 </tr>
