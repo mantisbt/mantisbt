@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.50 2004-07-20 11:02:16 narcissus Exp $
+	# $Id: filter_api.php,v 1.51 2004-07-21 12:48:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1222,7 +1222,7 @@
 					if ( isset( $t_accessible_custom_fields_names[ $i ] ) ) {
 						$t_fields .= '<td class="small-caption" valign="top"> ';
 						$t_fields .= '<a href="' . $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$i] . '[]">';
-						$t_fields .= $t_accessible_custom_fields_names[$i];
+						$t_fields .= lang_get_defaulted( $t_accessible_custom_fields_names[$i] );
 						$t_fields .= '</a> </td> ';
 					}
 					$t_output = '';
