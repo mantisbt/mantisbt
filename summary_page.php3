@@ -49,38 +49,9 @@
 		<td width=50%>
 			<? ### DATE ### ?>
 			<table width=97%>
-			<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
-				<td width=50%>
-					day
-				</td>
-				<td width=50%>
-					<? echo $t_not_fixable_bug_count ?>
-				</td>
-			</tr>
-			<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
-				<td>
-					week
-				</td>
-				<td>
-					<? echo $t_crashing_bug_count ?>
-				</td>
-			</tr>
-			<tr align=center bgcolor=<? echo $g_primary_color_dark ?>>
-				<td>
-					month
-				</td>
-				<td>
-					<? echo $t_not_fixable_bug_count ?>
-				</td>
-			</tr>
-			<tr align=center bgcolor=<? echo $g_primary_color_light ?>>
-				<td>
-					year
-				</td>
-				<td>
-					<? echo $t_crashing_bug_count ?>
-				</td>
-			</tr>
+			<?
+				print_bug_date_summary( $g_date_partitions );
+			?>
 			</table>
 		</td>
 	</tr>

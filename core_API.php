@@ -192,6 +192,33 @@
 		} ### end for
 	}
 	#--------------------
+	### Used in summary reports
+	function print_bug_date_summary( $p_date_array ) {
+		global $g_mantis_bug_table, $g_primary_color_light, $g_primary_color_dark;
+
+		$arr_count = count( $p_date_array );
+		for ($i=0;$i<$arr_count;$i++) {
+			$t_enum_count = get_bug_count_by_date2( $p_date_array[$i] );
+
+			### alternate row colors
+			if ( $i % 2 == 1) {
+				$bgcolor=$g_primary_color_light;
+			}
+			else {
+				$bgcolor=$g_primary_color_dark;
+			}
+
+			PRINT "<tr align=center bgcolor=$bgcolor>";
+				PRINT "<td width=50%>";
+					echo $p_date_array[$i];
+				PRINT "</td>";
+				PRINT "<td width=50%>";
+					echo $t_enum_count;
+				PRINT "</td>";
+			PRINT "</tr>";
+		} ### end for
+	}
+	#--------------------
 	####################
 	# Cookie API
 	####################
@@ -349,6 +376,29 @@
 					   substr( $p_timeString, 4, 2 ),
 					   substr( $p_timeString, 6, 2 ),
 					   substr( $p_timeString, 0, 4 ) );
+	}
+	#--------------------
+	function get_bug_count_by_date( $p_num_days=1 ) {
+		global $g_mantis_bug_table;
+
+		#$day = strtotime( "-1 month" );
+		$day = time() - 86400*$p_num_days;
+		$query = "SELECT COUNT(id)
+				FROM $g_mantis_bug_table
+				WHERE UNIX_TIMESTAMP(last_updated)>$day";
+		$result = mysql_query( $query );
+		return mysql_result( $result, 0 );
+	}
+	#--------------------
+	function get_bug_count_by_date2( $p_time_length="day" ) {
+		global $g_mantis_bug_table;
+
+		$day = strtotime( "-".$p_time_length );
+		$query = "SELECT COUNT(id)
+				FROM $g_mantis_bug_table
+				WHERE UNIX_TIMESTAMP(last_updated)>$day";
+		$result = mysql_query( $query );
+		return mysql_result( $result, 0 );
 	}
 	#--------------------
 	####################

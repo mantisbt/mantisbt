@@ -15,7 +15,7 @@ To Do:
  * Make priority useful
  * Force some sort of dialog when closing a bug (resolved)
 
-XX.XX.2000	-	0.10.2
+12.06.2000	-	0.10.2
 
  * Fixed Reporter Field on update page
  * Fixed variable error preventing Bugnote addition

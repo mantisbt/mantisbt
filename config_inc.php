@@ -151,6 +151,10 @@
 	# time to delay between page redirects
 	$g_wait_time                = 1;            # in seconds
 
+	# date lengths to bount bugs by
+	# folows the english required by strtotime()
+	$g_date_partitions = array("1 day","3 days","1 week","1 month","1 year");
+
 	#--------------------
 	# color values
 	$g_primary_color_dark    = "#d8d8d8";    # gray
