@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.10 2002-09-21 09:00:02 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.11 2002-09-21 14:28:49 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -53,7 +53,7 @@
 			print_header_redirect( 'login_page.php?f_return='.$p_return_page );
 		}
 	}
-	
+
 	# --------------------
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
@@ -73,7 +73,7 @@
 	# --------------------
 	# Attempt to login the user with the given password
 	#  If the user fails validation, false is returned
-	#  If the user passes validation, the cookies are set and 
+	#  If the user passes validation, the cookies are set and
 	#   true is returned.  If $p_perm_login is true, the long-term
 	#   cookie is created.
 	function auth_attempt_login( $p_username, $p_password, $p_perm_login=false ) {
@@ -106,6 +106,7 @@
 			}
 		}
 
+
 		$t_user = user_get_row( $t_user_id );
 
 		# check for disabled account
@@ -118,7 +119,7 @@
 		# check for anonymous login
 		if ( ! ( ON == $t_anon_allowed && $t_anon_account == $p_username ) ) {
 			# anonymous login didn't work, so check the password
-			
+
 			if ( ! auth_does_password_match( $t_user_id, $p_password ) ) {
 				return false;
 			}
@@ -152,13 +153,7 @@
 
 		$t_password = user_get_field( $p_user_id, 'password' );
 
-		# extract a salt of the right length from the password
-		#  it may be that we don't need the salt (only the crypt methods need it)
-		#  but there is no harm in providing it and that way we don't have to check
-		#  the authentication method here as well
-		$t_salt = substr( $t_password, 0, CRYPT_SALT_LENGTH );
-
-		if ( auth_process_plain_password( $p_test_password, $t_salt ) == $t_password ) {
+		if ( auth_process_plain_password( $p_test_password, $t_password ) == $t_password ) {
 			return true;
 		} else {
 			return false;
@@ -168,22 +163,20 @@
 	# --------------------
 	# Encrtpy and return the plain password given, as appropriate for the current
 	#  global login method.
-	function auth_process_plain_password( $p_password, $p_salt=null ) {
+	function auth_process_plain_password( $p_password, $p_salt_password='' ) {
 		$t_login_method = config_get( 'login_method' );
 
 		switch ( $t_login_method ) {
 			case CRYPT:
-			# @@@ jlatour says we shouldn't be providing a salt when encrypting
-			#     and certainly not the password since it appears plaintext in the
-			#     encrypted form.  That means I don't understand why we have
-			#     CRYPT_FULL_SALT at all.  for now it just behaves the same way
-			#     as CRYPT but we should change it or remove it or something - jf
+				$salt = substr( $p_salt_password, 0, 2 );
+				$t_processed_password = crypt( $p_password, $salt );
+				break;
 			case CRYPT_FULL_SALT:
-				if ( null !== $p_salt ) {
-					$t_processed_password = crypt( $p_password, $salt );
-				} else {
-					$t_processed_password = crypt( $p_password );
-				}
+				$salt = $p_salt_password;
+				$t_processed_password = crypt( $p_password, $salt );
+				break;
+			case CRYPT_NO_SALT:
+				$t_processed_password = crypt( $p_password );
 				break;
 			case MD5:
 				$t_processed_password = md5( $p_password );
@@ -195,7 +188,7 @@
 				break;
 		}
 
-		# cut this off to 32 cahracters which the largest possible string in the database
+		# cut this off to 32 characters which the largest possible string in the database
 		return substr( $t_processed_password, 0, 32 );
 	}
 
@@ -280,7 +273,7 @@
 		} else {
 			return true;
 		}
-	}	
+	}
 
 	# --------------------
 	# Return the current user login cookie string, or '' if none exists
@@ -311,7 +304,7 @@
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$t_cookie_string = auth_get_current_user_cookie();
-		
+
 		# @@@ error with an error saying they aren't logged in?
 		#     Or redirect to the login page maybe?
 
