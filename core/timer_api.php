@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: timer_api.php,v 1.3 2003-01-03 03:24:25 jfitzell Exp $
+	# $Id: timer_api.php,v 1.4 2003-01-19 01:35:29 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -56,8 +56,6 @@
 		# print out the timings.  If not in debug then just print out the total time.
 		function print_times() {
 			global $g_debug_timer;
-
-			$t_total_time = 0;
 
 			# store end time
 			$this->atime[] = array( "END", $this->get_microtime() );
