@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.5 2002-12-06 18:48:20 jfitzell Exp $
+	# $Id: bug_report_advanced_page.php,v 1.6 2002-12-08 11:04:35 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,7 +66,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category" width="30%">
-		<?php echo lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>:
+		<?php echo lang_get( 'category' ) ?> <?php print_documentation_link( 'category' ) ?>
 	</td>
 	<td width="70%">
 		<select tabindex="1" name="f_category">
@@ -76,7 +76,7 @@
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'reproducibility' ) ?> <?php print_documentation_link( 'reproducibility' ) ?>:
+		<?php echo lang_get( 'reproducibility' ) ?> <?php print_documentation_link( 'reproducibility' ) ?>
 	</td>
 	<td>
 		<select tabindex="2" name="f_reproducibility">
@@ -86,7 +86,7 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'severity' ) ?> <?php print_documentation_link( 'severity' ) ?>:
+		<?php echo lang_get( 'severity' ) ?> <?php print_documentation_link( 'severity' ) ?>
 	</td>
 	<td>
 		<select tabindex="3" name="f_severity">
@@ -98,7 +98,7 @@
 <?php if ( access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) ) { ?>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'priority' ) ?> <?php print_documentation_link( 'priority' ) ?>:
+		<?php echo lang_get( 'priority' ) ?> <?php print_documentation_link( 'priority' ) ?>
 	</td>
 	<td>
 		<select tabindex="4" name="f_priority">
@@ -121,7 +121,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
-		<?php echo $t_def['name'] ?>:
+		<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
 		<?php
@@ -141,7 +141,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'select_profile' ) ?>:
+		<?php echo lang_get( 'select_profile' ) ?>
 	</td>
 	<td>
 		<select tabindex="5" name="f_profile_id">
@@ -156,7 +156,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'platform' ) ?>:
+		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td>
 		<input tabindex="6" type="text" name="f_platform" size="32" maxlength="32" value="<?php echo $f_platform ?>" />
@@ -164,7 +164,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'os' ) ?>:
+		<?php echo lang_get( 'os' ) ?>
 	</td>
 	<td>
 		<input tabindex="7" type="text" name="f_os" size="32" maxlength="32" value="<?php echo $f_os ?>" />
@@ -172,7 +172,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'os_version' ) ?>:
+		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
 		<input tabindex="8" type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $f_os_build ?>">
@@ -232,7 +232,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>:
+		<span class="required">*</span><?php echo lang_get( 'summary' ) ?> <?php print_documentation_link( 'summary' ) ?>
 	</td>
 	<td>
 		<input tabindex="12" type="text" name="f_summary" size="80" maxlength="128" value="<?php echo $f_summary ?>" />
@@ -240,7 +240,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<span class="required">*</span><?php echo lang_get( 'description' ) ?> <?php print_documentation_link( 'description' ) ?>:
+		<span class="required">*</span><?php echo lang_get( 'description' ) ?> <?php print_documentation_link( 'description' ) ?>
 	</td>
 	<td>
 		<textarea tabindex="13" name="f_description" cols="60" rows="5" wrap="virtual"><?php echo $f_description ?></textarea>
@@ -248,7 +248,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'steps_to_reproduce' ) ?> <?php print_documentation_link( 'steps_to_reproduce' ) ?>:
+		<?php echo lang_get( 'steps_to_reproduce' ) ?> <?php print_documentation_link( 'steps_to_reproduce' ) ?>
 	</td>
 	<td>
 		<textarea tabindex="14" name="f_steps_to_reproduce" cols="60" rows="5" wrap="virtual"><?php echo $f_steps_to_reproduce ?></textarea>
@@ -256,7 +256,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-2">
 	<td class="category">
-		<?php echo lang_get( 'additional_information' ) ?> <?php print_documentation_link( 'additional_information' ) ?>:
+		<?php echo lang_get( 'additional_information' ) ?> <?php print_documentation_link( 'additional_information' ) ?>
 	</td>
 	<td>
 		<textarea tabindex="15" name="f_additional_info" cols="60" rows="5" wrap="virtual"><?php echo $f_additional_info ?></textarea>
@@ -286,7 +286,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 </tr>
 <tr class="row-1">
 	<td class="category">
-		<?php echo lang_get( 'report_stay' ) ?> <?php print_documentation_link( 'report_stay' ) ?>:
+		<?php echo lang_get( 'report_stay' ) ?> <?php print_documentation_link( 'report_stay' ) ?>
 	</td>
 	<td>
 		<input tabindex="19" type="checkbox" name="f_report_stay" <?php if ( $f_report_stay ) echo 'checked="checked"' ?> /> (<?php echo lang_get( 'check_report_more_bugs' ) ?>)
