@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.176 2004-07-15 13:32:11 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.177 2004-07-15 13:41:27 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -1184,7 +1184,7 @@
 	# Status to icon mapping
 	$g_status_icon_arr = array (
 		NONE      => '',
-		LOW       => '',
+		LOW       => 'priority_low_1.gif',
 		NORMAL    => '',
 		HIGH      => 'priority_1.gif',
 		URGENT    => 'priority_2.gif',
