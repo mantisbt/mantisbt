@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_update.php,v 1.32 2004-05-18 03:33:14 int2str Exp $
+	# $Id: manage_user_update.php,v 1.33 2004-05-18 09:19:17 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,8 +32,7 @@
 	$t_old_username = user_get_field( $f_user_id, 'username' );
 
 	# check that the username is unique
-	if ( $t_old_username != $f_username 
-        && 0 != strcasecmp( $t_old_username, $f_username ) 
+	if ( 0 != strcasecmp( $t_old_username, $f_username ) 
         && false == user_is_name_unique( $f_username ) ) {
 		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
 	}
