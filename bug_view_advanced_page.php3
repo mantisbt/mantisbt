@@ -31,7 +31,7 @@
     $query = "SELECT *
     		FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
-    $result = mysql_query( $query );
+    $result = db_mysql_query( $query );
 	$row_count = mysql_num_rows( $result );
 
 	$row = mysql_fetch_array( $result );
@@ -40,11 +40,21 @@
     $query = "SELECT username, email
     		FROM $g_mantis_user_table
     		WHERE id='$v_handler_id'";
-    $result = mysql_query( $query );
+    $result = db_mysql_query( $query );
     if ( $result ) {
-    	$row = mysql_fetch_array( $result );
+   		$row = mysql_fetch_array( $result );
 		$t_handler_name		= $row["username"];
 		$t_handler_email	= $row["email"];
+	}
+
+    $query = "SELECT username, email
+    		FROM $g_mantis_user_table
+    		WHERE id='$v_reporter_id'";
+    $result = db_mysql_query( $query );
+    if ( $result ) {
+   		$row = mysql_fetch_array( $result );
+		$t2_handler_name		= $row["username"];
+		$t2_handler_email		= $row["email"];
 	}
 
     $query = "SELECT *
@@ -128,8 +138,8 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
 			<?
-				if ( $v_reporter_id==$u_id ) {
-					echo "<a href=\"mailto:$u_email\">".$u_username."</a>";
+				if ( isset( $t2_handler_name ) ) {
+					echo "<a href=\"mailto:$t2_handler_email\">".$t2_handler_name."</a>";
 				}
 				else {
 					echo "user no longer exists";
@@ -145,6 +155,9 @@
 			<?
 				if ( isset( $t_handler_email ) ) {
 					echo "<a href=\"mailto:$t_handler_email\">".$t_handler_name."</a>";
+				}
+				else if ( "0000000"==$v_handler_id ) {
+					echo "";
 				}
 				else {
 					echo "user no longer exists";

@@ -8,11 +8,12 @@ To Do:
  * Add ip tracking/banning capability
  * Add file upload module
  * Force resolution to go through a dialog
- * Add postgreSQL support and a Database abstraction layer
+ * Add postgreSQL support and/or a Database abstraction layer
  * Refine viewing preferences
  * Add profiles for each user
  * Refine viewing news archives
  * Make priority useful
+ * Force some sort of dialog when closing a bug (resolved)
 
 XX.XX.2000	-	0.10.2
 
@@ -21,6 +22,7 @@ XX.XX.2000	-	0.10.2
  * Fixed minor viewing bugs related to \ characters
  * Added documentation section
  * Summary is now useful
+ * Fixed a few issues with the Advanced bug view
 
 12.03.2000	-	0.10.1
 
