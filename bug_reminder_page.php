@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.19 2004-08-27 00:29:54 thraxisp Exp $
+	# $Id: bug_reminder_page.php,v 1.20 2004-10-05 17:20:26 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,10 +65,23 @@
 </tr>
 </form>
 </table>
-</div>
-<?php # Send reminder Form END ?>
-</form>
+<br />
+<table class="width75" cellspacing="1">
+<tr>
+	<td>
+		<?php
+			echo lang_get( 'reminder_explain' ) . ' ';
+			if ( ON == config_get( 'reminder_recipents_monitor_bug' ) ) {
+				echo lang_get( 'reminder_monitor' ) . ' ';
+			}
+			if ( ON == config_get( 'store_reminders' ) ) {
+				echo lang_get( 'reminder_store' );
+			}
+		?>
+	</td>
+</tr>
 </table>
+</div>
 
 <br />
 <?php include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' ) ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.21 2004-10-04 15:12:11 thraxisp Exp $
+	# $Id: bugnote_view_inc.php,v 1.22 2004-10-05 17:20:26 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -153,7 +153,20 @@
 		</span>
 	</td>
 	<td class="<?php echo $t_bugnote_note_css ?>">
-		<?php echo $v3_note ?>
+		<?php 
+			switch ( $v3_note_type ) {
+				case REMINDER:
+					echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';
+					$v3_note_attr = substr( $v3_note_attr, 1, strlen( $v3_note_attr ) - 2 );
+					$t_to = array();
+					foreach ( explode( '|', $v3_note_attr ) as $t_recipient ) {
+						$t_to[] = user_get_name( $t_recipient );
+					}
+					echo implode( ', ', $t_to ) . '</div><br />';
+				default:
+					echo $v3_note;
+			}
+		?>
 	</td>
 </tr>
 <tr>

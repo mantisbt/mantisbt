@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.31 2004-09-28 14:09:39 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.32 2004-10-05 17:20:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -297,5 +297,9 @@
 	define( 'SUMMARY_CAPTION', 1 );
 	define( 'SUMMARY_FIELD', 2 );
 	define( 'SUMMARY_EMAIL', 3 );
+
+	# bugnote types
+	define( 'BUGNOTE', 0 );
+	define( 'REMINDER', 1 );
 	
 ?>

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.215 $
+	# $Revision: 1.216 $
 	# $Author: thraxisp $
-	# $Date: 2004-09-28 14:09:40 $
+	# $Date: 2004-10-05 17:20:34 $
 	#
-	# $Id: strings_english.txt,v 1.215 2004-09-28 14:09:40 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.216 2004-10-05 17:20:34 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -480,6 +480,9 @@ $s_bug_reminder = 'Send a reminder';
 $s_reminder_sent_to = 'Reminder sent to';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Reminder';
+$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
+$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
+$s_reminder_store = 'This note will be stored with the issue.';
 
 # bug_update.php
 $s_bug_updated_msg = 'Issue has been successfully updated...';

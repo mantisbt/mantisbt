@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.28 2004-08-08 20:30:19 jlatour Exp $
+	# $Id: bugnote_api.php,v 1.29 2004-10-05 17:20:33 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -24,6 +24,8 @@
 	class BugnoteData {
 		var $note;
 		var $view_state;
+		var $type;
+		var $attr;
 		var $reporter_name;
 		var $last_modified;
 	}
@@ -81,10 +83,12 @@
 	# Add a bugnote to a bug
 	#
 	# return the ID of the new bugnote
-	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_private = false ) {
+	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_private = false, $p_type = 0, $p_attr = '' ) {
 		$c_bug_id            	= db_prepare_int( $p_bug_id );
 		$c_bugnote_text      	= db_prepare_string( $p_bugnote_text );
 		$c_private           	= db_prepare_bool( $p_private );
+		$c_type            	= db_prepare_int( $p_type );
+		$c_attr      	= db_prepare_string( $p_attr );
 
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 		$t_bugnote_table     	= config_get( 'mantis_bugnote_table' );
@@ -111,9 +115,9 @@
 
 		# insert bugnote info
 		$query = "INSERT INTO $t_bugnote_table
-		          		(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
+		          		(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr )
 		          	 VALUES
-		          		('$c_bug_id', '$t_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ")";
+		          		('$c_bug_id', '$t_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ", '$c_type', '$c_attr')";
 		db_query( $query );
 
 		# get bugnote id
@@ -301,6 +305,8 @@
 				$t_bugnote->view_state    = $row['view_state'];
 				$t_bugnote->reporter_name = user_get_name( $row['reporter_id'] );
 				$t_bugnote->last_modified = db_unixtimestamp( $row['last_modified'] );
+				$t_bugnote->type          = $row['note_type'];
+				$t_bugnote->attr          = $row['note_attr'];
 
 				$t_bugnotes[] = $t_bugnote;
 			}
