@@ -556,7 +556,8 @@
 	$s_longest_open = "가장 오래된";
 	$s_average_time = "평균 시간";
 	$s_total_time = "전체 시간";
-	$s_developer_stats = "개발자 통계(개설/해결/전체)";
+	$s_developer_stats = "개발자 통계";
+	$s_orct = "(open/resolved/closed/total)";
 
 	# view_all_assign_bug_page.php3
 

@@ -557,7 +557,8 @@
 	$s_longest_open = "en uzun süredir açýk olan";
 	$s_average_time = "ortalama süre";
 	$s_total_time = "toplam süre";
-	$s_developer_stats = "programcý istatistikleri (açýk/çözümlenmiþ/toplam)";
+	$s_developer_stats = "programcý istatistikleri";
+	$s_orct = "(open/resolved/closed/total)";
 
 	# view_all_assign_bug_page.php3
 

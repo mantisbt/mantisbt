@@ -556,7 +556,8 @@
 	$s_longest_open = "mayor tiempo abierto";
 	$s_average_time = "tiempo promedio";
 	$s_total_time = "tiempo total";
-	$s_developer_stats = "estadisticas de desarrolladores (abierto/resuelto/total)";
+	$s_developer_stats = "estadisticas de desarrolladores";
+	$s_orct = "(open/resolved/closed/total)";
 
 	# view_all_assign_bug_page.php3
 

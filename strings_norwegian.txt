@@ -556,7 +556,8 @@
 	$s_longest_open = "lengste åpne";
 	$s_average_time = "gjennomsnittlig tid";
 	$s_total_time = "total tid";
-	$s_developer_stats = "utvikler statistikk (åpen/løst/totalt)";
+	$s_developer_stats = "utvikler statistikk";
+	$s_orct = "(open/resolved/closed/total)";
 
 	# view_all_assign_bug_page.php3
 
