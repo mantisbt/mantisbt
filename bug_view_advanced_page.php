@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.44 2003-03-10 18:14:08 jfitzell Exp $
+	# $Id: bug_view_advanced_page.php,v 1.45 2003-03-24 06:26:41 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -480,7 +480,7 @@
 
 <!-- Buttons -->
 <tr align="center">
-	<td class="center" colspan="6">
+	<td align="center" colspan="6">
 <?php
 	html_buttons_view_bug_page( $f_bug_id );
 ?>

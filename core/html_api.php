@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.71 2003-03-22 16:30:36 jlatour Exp $
+	# $Id: html_api.php,v 1.72 2003-03-24 06:26:42 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -707,12 +707,17 @@
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 		$t_status = bug_get_field( $p_bug_id, 'status' );
 
+		echo '<table><tr><td>';
 		if ( $t_status < $t_resolved ) {
 			# UPDATE button
 			html_button_bug_update( $p_bug_id );
 
+			echo '</td><td>';
+
 			# ASSIGN button
 			html_button_bug_assign( $p_bug_id );
+
+			echo '</td><td>';
 
 			# RESOLVE button
 			html_button_bug_resolve( $p_bug_id );
@@ -720,18 +725,25 @@
 			# REOPEN button
 			html_button_bug_reopen( $p_bug_id );
 		}
+		echo '</td>';		
 
 		# CLOSE button
+		echo '<td>';
 		html_button_bug_close( $p_bug_id );
+		echo '</td>';
 
 		# MONITOR/UNMONITOR button
+		echo '<td>';
 		if ( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
 			html_button_bug_unmonitor( $p_bug_id );
 		} else {
 			html_button_bug_monitor( $p_bug_id );
 		}
+		echo '</td>';
 
 		# DELETE button
+		echo '<td>';
 		html_button_bug_delete( $p_bug_id );
+		echo '</td></tr></table>';
 	}
 ?>

@@ -4,7 +4,8 @@ Mantis ChangeLog
 
  * Fix: Improved adherance to the XHTML standard.
  * Fix #3072: Attached file should be opened up in a new browser window.
-
+ * Fix #3064: view bug buttons in vertical column
+	
 2003.03.22  -  0.18.0a4
 
  * Check whether other forms of compression are enabled before we turn on ob_gzhandler() in our output handler.  This should hopefully avoid problems people have had with blank pages resulting from compression problems.
