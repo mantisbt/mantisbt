@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.13 $
+	# $Revision: 1.14 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 06:38:34 $
+	# $Date: 2002-08-16 09:26:15 $
 	#
-	# $Id: bug_reopen.php,v 1.13 2002-08-16 06:38:34 jfitzell Exp $
+	# $Id: bug_reopen.php,v 1.14 2002-08-16 09:26:15 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,19 +20,18 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$c_id = (integer)$f_id;
-	project_access_check( $c_id );
+	project_access_check( $f_id );
 	check_access( $g_handle_bug_threshold );
-	check_bug_exists( $c_id );
+	check_bug_exists( $f_id );
 
 	#check variables
 	check_varset( $f_bugnote_text, '' );
 
 	#clean variables
-	$c_bugnote_text = string_prepare_textarea( trim( $f_bugnote_text ) );
+	$c_id = (integer)$f_id;
 
-	$h_status		= get_bug_field( $c_id, 'status' );
-	$h_resolution	= get_bug_field( $c_id, 'resolution' );
+	$h_status		= get_bug_field( $f_id, 'status' );
+	$h_resolution	= get_bug_field( $f_id, 'resolution' );
 
 	# Update fields
 	$t_status_val = FEEDBACK;
@@ -44,20 +43,22 @@
    	$result = db_query($query);
 
 	# log changes
-	history_log_event( $c_id, 'status',     $h_status );
-	history_log_event( $c_id, 'resolution', $h_resolution );
+	history_log_event( $f_id, 'status',     $h_status );
+	history_log_event( $f_id, 'resolution', $h_resolution );
 
+	$f_bugnote_text = trim( $f_bugnote_text );
 	# check for blank bugnote
-	if ( !empty( $c_bugnote_text ) ) {
+	if ( !empty( $f_bugnote_text ) ) {
 		# insert bugnote text
-		$result = add_bugnote( $c_id, $c_bugnote_text );
+#@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
+		$result = add_bugnote( $f_id, $f_bugnote_text );
 
 	   	# notify reporter and handler
-	   	email_reopen( $c_id );
+	   	email_reopen( $f_id );
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $c_id, 1 );
+	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

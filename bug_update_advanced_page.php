@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.20 $
+	# $Revision: 1.21 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 06:38:34 $
+	# $Date: 2002-08-16 09:26:15 $
 	#
-	# $Id: bug_update_advanced_page.php,v 1.20 2002-08-16 06:38:34 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.21 2002-08-16 09:26:15 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,15 +19,15 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$c_id = (integer)$f_id;
-
 	if ( SIMPLE_ONLY == $g_show_update ) {
-		print_header_redirect ( 'bug_update_page.php?f_id='.$c_id );
+		print_header_redirect ( 'bug_update_page.php?f_id='.$f_id );
 	}
 
-	project_access_check( $c_id );
+	project_access_check( $f_id );
 	check_access( UPDATER );
-	check_bug_exists( $c_id );
+	check_bug_exists( $f_id );
+
+	$c_id = (integer)$f_id;
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
@@ -69,16 +69,16 @@
 	<td class="right" colspan="3">
 <?php
 	switch ( $g_show_view ) {
-		case 0: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$c_id, $s_back_to_bug_link );
+		case 0: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_back_to_bug_link );
 				break;
-		case 1: print_bracket_link( 'view_bug_page.php?f_id='.$c_id, $s_back_to_bug_link );
+		case 1: print_bracket_link( 'view_bug_page.php?f_id='.$f_id, $s_back_to_bug_link );
 				break;
-		case 2: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$c_id, $s_back_to_bug_link );
+		case 2: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_back_to_bug_link );
 				break;
 	}
 
 	if ( BOTH == $g_show_update ) {
-		print_bracket_link( 'bug_update_page.php?f_id='.$c_id, $s_update_simple_link );
+		print_bracket_link( 'bug_update_page.php?f_id='.$f_id, $s_update_simple_link );
 	}
 ?>
 	</td>

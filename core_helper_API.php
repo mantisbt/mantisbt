@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.56 $
+	# $Revision: 1.57 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 06:38:34 $
+	# $Date: 2002-08-16 09:26:15 $
 	#
-	# $Id: core_helper_API.php,v 1.56 2002-08-16 06:38:34 jfitzell Exp $
+	# $Id: core_helper_API.php,v 1.57 2002-08-16 09:26:15 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -249,14 +249,12 @@
 	}
 	# --------------------
 	# add a bugnote to a bug
-	# if $p_bugnote_text is coming from a form it should have
-	#  been cleaned in the form processing page before being
-	#  passed into the API function
 	function add_bugnote ( $p_bug_id, $p_bugnote_text, $p_private=false )
 	{
 		global $g_mantis_bugnote_text_table, $g_mantis_bugnote_table;
 
 		$c_bug_id = (integer)$p_bug_id;
+		$c_bugnote_text = addslashes( $p_bugnote_text );
 		$c_private = (bool)$p_private;
 
 		# insert bugnote text
@@ -264,7 +262,7 @@
 				INTO $g_mantis_bugnote_text_table
 				( id, note )
 				VALUES
-				( null, '$p_bugnote_text' )";
+				( null, '$c_bugnote_text' )";
 		$result = db_query( $query );
 
 		# retrieve bugnote text id number
@@ -292,10 +290,10 @@
 		$t_bugnote_id = str_pd( db_insert_id(), '0', 7, STR_PAD_LEFT );
 
 		# log new bug
-		history_log_event_special( $c_bug_id, BUGNOTE_ADDED , $t_bugnote_id );
+		history_log_event_special( $f_bug_id, BUGNOTE_ADDED , $t_bugnote_id );
 
 		# update bug last updated
-	   	$result = bug_date_update( $c_bug_id );
+	   	$result = bug_date_update( $f_bug_id );
 
 		return $result;
 	}

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.20 $
+	# $Revision: 1.21 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 06:46:28 $
+	# $Date: 2002-08-16 09:26:15 $
 	#
-	# $Id: bugnote_add.php,v 1.20 2002-08-16 06:46:28 jfitzell Exp $
+	# $Id: bugnote_add.php,v 1.21 2002-08-16 09:26:15 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,31 +19,29 @@
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	$c_id = (integer)$f_id;
-	project_access_check( $c_id );
+	project_access_check( $f_id );
 	check_access( REPORTER );
-	check_bug_exists( $c_id );
+	check_bug_exists( $f_id );
 
 	#check variables
-	check_varset( $f_private, false );
+	check_varset( $f_private, false ); #if it doesn't exist, the checkbox wasn't checked
 	check_varset( $f_bugnote_text, '' );
 
-	#clean variables
-	$c_private = (bool)$f_private;
-	$c_bugnote_text = string_prepare_textarea( trim( $f_bugnote_text ) );
+	$f_bugnote_text = trim( $f_bugnote_text );
 
 	# check for blank bugnote
-	if ( !empty( $c_bugnote_text ) ) {
-		$result = add_bugnote( $c_id, $c_bugnote_text, $c_private );
+	if ( !empty( $f_bugnote_text ) ) {
+#@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
+		$result = add_bugnote( $f_id, $f_bugnote_text, (bool)$f_private );
 
 		# notify reporter and handler
 		if ( $result ) {
-			email_bugnote_add( $c_id );
+			email_bugnote_add( $f_id );
 		}
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $c_id, 1 );
+	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {
