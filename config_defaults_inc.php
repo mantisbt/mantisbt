@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.141 2004-02-26 16:39:53 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.142 2004-02-27 15:39:49 yarick123 Exp $
 	# --------------------------------------------------------
 
 	
@@ -123,7 +123,7 @@
 	$g_allow_signup			= ON;
 
 	# if ON users will be sent their password when reset.
-	# if OFF the password will be set to blank. If set to ON, mail settings must be 
+	# if OFF the password will be set to blank. If set to ON, mail settings must be
 	# correctly configured.
 	$g_send_reset_password	= ON;
 
@@ -134,18 +134,18 @@
 	# notifications on different actions/statuses.  The first option (default_notify_flags)
 	# sets the default values for different user categories.  The user categories
 	# are:
-	# 
+	#
 	#      'reporter': the reporter of the bug
 	#       'handler': the handler of the bug
 	#       'monitor': users who are monitoring a bug
 	#      'bugnotes': users who have added a bugnote to the bug
 	# 'threshold_max': all users with access <= max
 	# 'threshold_min': ..and with access >= min
-	# 
+	#
 	# The second config option (notify_flags) sets overrides for specific actions/statuses.
 	# If a user category is not listed for an action, the default from the config
 	# option above is used.  The possible actions are:
-	# 
+	#
 	#             'new': a new bug has been added
  	#        'assigned': a bug has been assigned
 	#        'reopened': a bug has been reopened
@@ -154,17 +154,17 @@
 	#         'bugnote': a bugnote has been added to a bug
 	# 'status_<status>': eg: 'status_resolved', 'status_closed', 'status_feedback', 'status_acknowledged', ...etc.
 
-	# 
+	#
 	# If you wanted to have all developers get notified of new bugs you might add
 	# the following lines to your config file:
-	# 
+	#
 	# $g_notify_flags['new']['threshold_min'] = DEVELOPER;
 	# $g_notify_flags['new']['threshold_max'] = DEVELOPER;
-	# 
+	#
 	# You might want to do something similar so all managers are notified when a
 	# bug is closed.  If you didn't want reporters to be notified when a bug is
 	# closed (only when it is resolved) you would use:
-	# 
+	#
 	# $g_notify_flags['closed']['reporter'] = OFF;
 
 	$g_default_notify_flags	= array('reporter'	=> ON,
@@ -231,7 +231,7 @@
 	$g_use_phpMailer		= OFF;
 
 	# Path to phpMailer directory.  The directory that includes class.phpmailer.hpp
-	# and class.smtp.php.  The empty default should work if the phpMailer directory 
+	# and class.smtp.php.  The empty default should work if the phpMailer directory
 	# is in the include_path.  If a path is specified, it should be terminated by
 	# a directory separator.
 	$g_phpMailer_path		= '';
@@ -280,11 +280,11 @@
 
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr	= array(
-		'english', 'chinese_simplified', 'chinese_traditional', 'czech', 
-		'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian', 
-		'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'lithuanian', 
-		'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard', 
-		'romanian', 'russian', 'russian_koi8', 'serbian', 'slovak', 'spanish', 
+		'english', 'chinese_simplified', 'chinese_traditional', 'czech',
+		'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian',
+		'italian', 'japanese_euc', 'japanese_sjis', 'korean', 'lithuanian',
+		'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard',
+		'romanian', 'russian', 'russian_koi8', 'serbian', 'slovak', 'spanish',
 		'swedish', 'turkish' );
 
 	###############################
@@ -300,6 +300,9 @@
 	$g_show_report			= BOTH;
 	$g_show_update			= BOTH;
 	$g_show_view			= BOTH;
+
+	# --- top menu items --------------
+	$g_show_documentation	= ON;
 
 	# --- footer menu -----------------
 	# Display another instance of the menu at the bottom.  The top menu will still remain.
@@ -325,7 +328,7 @@
 	$g_status_legend_position	= STATUS_LEGEND_POSITION_BOTTOM;
 
 	# --- Show an attachment indicator on bug list ---
-	# Show a clickable attachment indicator on the bug 
+	# Show a clickable attachment indicator on the bug
 	# list page if the bug has one or more files attached.
 	# Note: This option is disabled by default since it adds
 	# 1 database query per bug listed and thus might slow
@@ -873,7 +876,7 @@
 
 	# Use compression of generated html if browser supports it
 	# If you already have compression enabled in your php.ini file
-	#  (either with zlib.output_compression or 
+	#  (either with zlib.output_compression or
 	#  output_handler=ob_gzhandler) this option will be ignored.
 	#
 	# If you do not have zlib enabled in your PHP installation
@@ -988,7 +991,7 @@
 	# Icons
 	##########
 
-	# Maps a file extension to a file type icon.  These icons are printed 
+	# Maps a file extension to a file type icon.  These icons are printed
 	# next to project documents and bug attachments.
 	# Note:
 	# - Extensions must be in lower case

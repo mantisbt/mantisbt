@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.85 2004-02-14 01:10:14 vboctor Exp $
+	# $Id: html_api.php,v 1.86 2004-02-27 15:39:49 yarick123 Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -33,9 +33,9 @@
 	#     html_login_info
 	#    (print_project_menu_bar)
 	#     print_menu
-	#  
+	#
 	#  ...Page content here...
-	#  
+	#
 	#   html_page_bottom1
 	#    (print_menu)
 	#     html_page_bottom1a
@@ -374,7 +374,8 @@
 				}
 
 				# Documentation Page
-				$t_menu_options[] = '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a>';
+				if( config_get( 'show_documentation' ) )
+					$t_menu_options[] = '<a href="proj_doc_page.php">' . lang_get( 'docs_link' ) . '</a>';
 
 				# Manage Users (admins) or Manage Project (managers)
 				if ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
@@ -421,7 +422,7 @@
 	# --------------------
 	# Print the menu bar with a list of projects to which the user has access
 	function print_project_menu_bar() {
-		$t_project_ids = current_user_get_accessible_projects(); 
+		$t_project_ids = current_user_get_accessible_projects();
 
 		echo '<table class="width100" cellspacing="0">';
 		echo '<tr>';
@@ -618,7 +619,7 @@
 	function html_button_bug_update( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			html_button( string_get_bug_update_page(),
-						 lang_get( 'update_bug_button' ), 
+						 lang_get( 'update_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
@@ -702,7 +703,7 @@
 	function html_button_bug_resolve( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'bug_resolve_page.php',
-						 lang_get( 'resolve_bug_button' ), 
+						 lang_get( 'resolve_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
@@ -711,10 +712,10 @@
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id )
-			 || ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() 
+			 || ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id()
 				  && ON == config_get( 'allow_reporter_reopen' ) ) ) {
 			html_button( 'bug_reopen_page.php',
-						 lang_get( 'reopen_bug_button' ), 
+						 lang_get( 'reopen_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
@@ -726,7 +727,7 @@
 
 		if ( access_can_close_bug ( $p_bug_id ) && ( $t_status < CLOSED ) ) {
 			html_button( 'bug_close_page.php',
-						 lang_get( 'close_bug_button' ), 
+						 lang_get( 'close_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}
@@ -736,7 +737,7 @@
 	function html_button_bug_monitor( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'bug_monitor.php',
-						 lang_get( 'monitor_bug_button' ), 
+						 lang_get( 'monitor_bug_button' ),
 						 array( 'bug_id' => $p_bug_id, 'action' => 'add' ) );
 		}
 	}
@@ -746,7 +747,7 @@
 	#  no reason to ever disallow someone from unmonitoring a bug
 	function html_button_bug_unmonitor( $p_bug_id ) {
 		html_button( 'bug_monitor.php',
-					 lang_get( 'unmonitor_bug_button' ), 
+					 lang_get( 'unmonitor_bug_button' ),
 					 array( 'bug_id' => $p_bug_id, 'action' => 'delete' ) );
 	}
 
@@ -755,7 +756,7 @@
 	function html_button_bug_delete( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'bug_delete.php',
-						 lang_get( 'delete_bug_button' ), 
+						 lang_get( 'delete_bug_button' ),
 						 array( 'bug_id' => $p_bug_id ) );
 		}
 	}

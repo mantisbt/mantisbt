@@ -4,6 +4,7 @@ Mantis ChangeLog
 
  * Sec #3595: bug_view_page.php: restricted custom fields are shown.
  * Sec #3596: print_bugnote_inc.php: private bugnotes are visible for not granted users (thanks to yarik123).
+ * Enh #3609: added new configuration variable $g_show_documentation with default value ON to show/hide 'Docs' menu item.
  * Enh #1088: Formatting of text in bugnotes, description areas.
  * Enh #1649: Replace 'Assign to Me' with 'Assign To:' and dropdown of developers.
  * Enh #3362: Generic email notifications.
@@ -23,7 +24,7 @@ Mantis ChangeLog
  * Fix #3569: Wrong number of search results displayed
  * Fix #3572: The summary_graph_imp_* pages have shortcut PHP tags.
  * Fix #3577: Unselecting custom fields causes undesired break lines in Excel.
- * Fix #3579: In the German localisation, $s_reset_request_msg was incorrectly terminated. 
+ * Fix #3579: In the German localisation, $s_reset_request_msg was incorrectly terminated.
  * Fix #3590: News displayed wrong in Firebird/Firefox.
  * Fix #3594: Incorrect encoding for Turkish localization.
  * Fix #3597: Custom fields names are not translated in email (thanks to yarik123).
