@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.66 2003-03-27 00:07:31 int2str Exp $
+	# $Id: print_api.php,v 1.67 2003-05-01 18:29:54 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -828,8 +828,11 @@
 			} else {
 				$p_dir = 'ASC';
 			}
+		} else {                        # Otherwise always start with ASCending
+			$t_dir = 'ASC';
 		}
-		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
+
+		echo '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_view_bug_sort_link2( $p_string, $p_sort_field, $p_sort, $p_dir ) {
@@ -840,8 +843,11 @@
 			} else {
 				$p_dir = 'ASC';
 			}
+		} else {                        # Otherwise always start with ASCending
+			$t_dir = 'ASC';
 		}
-		PRINT '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
+
+		echo '<a href="view_all_set.php?sort='.$p_sort_field.'&amp;dir='.$p_dir.'&amp;type=2&amp;print=1">'.$p_string.'</a>';
 	}
 	# --------------------
 	function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide=0 ) {
