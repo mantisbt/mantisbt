@@ -11,9 +11,9 @@ If an error occurs you can re-create your previous database by just importing yo
 <p>
 <font face="courier new">mysql -u[username] -p[password] [database_name] < [filename]</font>
 <p>
-<hr>
+<hr />
 If you are more than one minor version behind then you will need to run upgrades sequentially.  So to jump from 0.15.1 to 0.17.0 you would run 0.15.x to 0.16.x then 0.16.x to 0.17.x
-<hr>
+<hr />
 <p>
 <table border="0" width="75%">
 <?php require_once ( 'admin_upgrade_0_18_0.php' ) ?>
@@ -23,6 +23,6 @@ If you are more than one minor version behind then you will need to run upgrades
 <tr><td nowrap>Upgrade to 0.14.x</td><td nowrap>[ <a href="admin_upgrade_0_14_0<?php echo $g_php ?>">Upgrade Now</a> ]</td></tr>
 </table>
 <p>
-<hr>
+<hr />
 <p>
 Upgrades may take several minutes depending on the size of your database.

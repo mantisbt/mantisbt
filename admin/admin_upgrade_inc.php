@@ -97,7 +97,7 @@
 				}
 			}
 
-			PRINT "</code><hr>";
+			PRINT "</code><hr />";
 		}
 	}
 ?>
