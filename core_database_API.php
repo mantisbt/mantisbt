@@ -4,6 +4,14 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
+	# --------------------------------------------------------
+	# $Revision: 1.10 $
+	# $Author: vboctor $
+	# $Date: 2002-06-14 05:54:42 $
+	#
+	# $Id: core_database_API.php,v 1.10 2002-06-14 05:54:42 vboctor Exp $
+	# --------------------------------------------------------
+
 	###########################################################################
 	# Database
 	###########################################################################
@@ -14,38 +22,9 @@
 
 	# --------------------
 	# connect to database and select database
-	function db_connect($p_hostname='', $p_username='',
-						$p_password='', $p_database='',
-						$p_port='' ) {
+	function db_connect($p_hostname, $p_username, $p_password, $p_database,	$p_port ) {
 
-		global $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_port,
-			$g_use_persistent_connections;
-
-		if ( empty( $p_hostname ) ) {
-			$p_hostname = $g_hostname;
-		}
-		if ( empty( $p_username ) ) {
-			$p_username = $g_db_username;
-		}
-		if ( empty( $p_password ) ) {
-			$p_password = $g_db_password;
-		}
-		if ( empty( $p_database ) ) {
-			$p_database = $g_database_name;
-		}
-		if ( empty( $p_port ) ) {
-			$p_port = $g_port;
-		}
-
-		# @@@ Will change this hack, when I combine all database opens
-		#     in one place.
-		if ( OFF == $g_use_persistent_connections ) {
-			$t_result = mysql_connect(  $p_hostname.':'.$p_port,
-									$p_username, $p_password );
-		} else {
-			$t_result = mysql_pconnect(  $p_hostname.':'.$p_port,
-									$p_username, $p_password );
-		}
+		$t_result = mysql_connect(  $p_hostname.':'.$p_port, $p_username, $p_password );
 
 		if ( !$t_result ) {
 			echo 'ERROR: FAILED CONNECTION TO DATABASE: ';
@@ -63,12 +42,9 @@
 	}
 	# --------------------
 	# persistent connect to database and select database
-	function db_pconnect($p_hostname='localhost', $p_username='root',
-						$p_password='', $p_database='mantis',
-						$p_port=3306 ) {
+	function db_pconnect($p_hostname, $p_username, $p_password, $p_database, $p_port ) {
 
-		$t_result = mysql_pconnect(  $p_hostname.':'.$p_port,
-									$p_username, $p_password );
+		$t_result = mysql_pconnect(  $p_hostname.':'.$p_port, $p_username, $p_password );
 
 		if ( !$t_result ) {
 			echo 'ERROR: FAILED CONNECTION TO DATABASE: ';
@@ -148,5 +124,9 @@
 	}
 	# --------------------
 
-	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	if ( OFF == $g_use_persistent_connections ) {
+		db_connect( $g_hostname, $g_db_username, $g_db_password, g_database_name, $g_port );
+	} else {
+		db_pconnect( $g_hostname, $g_db_username, $g_db_password, g_database_name, $g_port );
+	}
 ?>
