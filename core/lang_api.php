@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.22 2004-05-09 02:24:19 vboctor Exp $
+	# $Id: lang_api.php,v 1.23 2004-05-17 12:53:45 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -137,6 +137,10 @@
 		if ( $t_last_index >= 0 ) {
 			lang_set( $g_language_stack[$t_last_index] );
 			unset( $g_language_stack[$t_last_index] );
+
+			# do this to avoid defragmentation in the array.  Defragmentation was causing an error
+			# where the number of languages is 1, but the language is stored in position 1.
+			$g_language_stack = array_values( $g_language_stack );
 		}
 	}
 
