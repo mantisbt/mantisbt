@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.14 2003-02-13 13:24:19 vboctor Exp $
+	# $Id: access_api.php,v 1.15 2003-02-13 14:04:10 vboctor Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -308,18 +308,18 @@
 	# it assumes that the user has access to the project
 	function access_can_close_bug ( $p_bug_id ) {
 		// Allow closing defects if reporter of the bug and reporter can close or if above threshold
-		if ( OFF == config_get( 'allow_reporter_close' ) ||
-			!bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() ) ) {
-			return access_level_check_greater_or_equal( config_get( 'close_bug_threshold' ) );
+		if ( ON == config_get( 'allow_reporter_close' ) &&
+			bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() ) ) {
+			return true;
 		}
 
-		return true;
+		return access_level_check_greater_or_equal( config_get( 'close_bug_threshold' ) );
 	}
 	# --------------------
 	# Make sure that the current user can close the specified bug
 	# See access_can_close_bug() for details.
 	function access_ensure_can_close_bug( $p_bug_id ) {
-		if (!access_can_close_bug( $p_bug_id ) ) {
+		if ( !access_can_close_bug( $p_bug_id ) ) {
 			access_denied();
 		}
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.31 2003-02-13 13:24:18 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.32 2003-02-13 14:04:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -477,62 +477,38 @@
 
 <!-- Buttons -->
 <tr align="center">
-	<td colspan="6">
-		<table width="100%">
+	<td class="center" colspan="6">
+		<table>
 			<tr align="center">
 <?php
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
-	# UPDATE button
 	if ( $t_bug->status < $t_resolved ) {
-		echo '<td class="center">';
+		# UPDATE button
 		html_button_bug_update( $f_bug_id );
-		echo '</td>';
-	}
 
-	# ASSIGN button
-	if ( $t_bug->status < $t_resolved ) {
-		echo '<td class="center">';
+		# ASSIGN button
 		html_button_bug_assign( $f_bug_id );
-		echo '</td>';
-	}
 
-	# RESOLVE button
-	if ( $t_bug->status < $t_resolved ) {
-		echo '<td class="center">';
+		# RESOLVE button
 		html_button_bug_resolve( $f_bug_id );
-		echo '</td>';
-	}
-
-	# REOPEN button
-	if ( $t_bug->status >= $t_resolved ) {
-		echo '<td class="center">';
+	} else {
+		# REOPEN button
 		html_button_bug_reopen( $f_bug_id );
-		echo '</td>';
 	}
 
 	# CLOSE button
-	if ( access_can_close_bug ( $f_bug_id ) ) {
-		echo '<td class="center">';
-		html_button_bug_close( $f_bug_id );
-		echo '</td>';
-	}
+	html_button_bug_close( $f_bug_id );
 
 	# MONITOR/UNMONITOR button
 	if ( user_is_monitoring_bug( auth_get_current_user_id(), $f_bug_id ) ) {
-		echo '<td class="center">';
 		html_button_bug_unmonitor( $f_bug_id );
-		echo '</td>';
 	} else {
-		echo '<td class="center">';
 		html_button_bug_monitor( $f_bug_id );
-		echo '</td>';
 	}
 
 	# DELETE button
-	echo '<td class="center">';
 	html_button_bug_delete( $f_bug_id );
-	echo '</td>';
 ?>
 			</tr>
 		</table>
