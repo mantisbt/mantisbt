@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_page.php,v 1.11 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: manage_custom_field_page.php,v 1.12 2003-02-16 13:20:04 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,7 +17,7 @@
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
 <?php 
-	access_ensure_global_level( config_get( 'manage_custom_fields' ) );
+	access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
 	print_page_top1();
 	print_page_top2();

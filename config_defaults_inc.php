@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.77 2003-02-15 23:37:32 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.78 2003-02-16 13:20:04 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -903,7 +903,7 @@
 	##################
 
 	# Threshold needed to manage custom fields
-	$g_manage_custom_fields = ADMINISTRATOR;
+	$g_manage_custom_fields_threshold = ADMINISTRATOR;
 
 	# Threshold needed to link/unlink custom field to/from a project
 	$g_custom_field_link_threshold = MANAGER;
