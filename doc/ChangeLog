@@ -67,10 +67,10 @@ Mantis ChangeLog
  * Added $g_handle_bug_threshold to allow controlling the access level required for a user to appear in the assign to list and be able to handle bugs.
  * Added support for custom_constants_inc.php, if this file is found in main directory it gets included after constants_inc.php.  It is useful to define constants for custom enumerations.
  * Added support for custom_config_inc.php, this is to replace config_inc.php.  Although config_inc.php is still supported, it is recommended to use the new name.
- * Replaced $g_<status>_color variables with $g_status_colors['<status color>'] array in the configuration.  For example, $g_new_color is replaced with $g_status_colors['new']. 
+ * Replaced $g_<status>_color variables with $g_status_colors['<status color>'] array in the configuration.  For example, $g_new_color is replaced with $g_status_colors['new'].
  * Added support for adding multiple categories in one step, this is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
- * Added multiple bug actions in view_all_bug_page.php. 
- * Added a direct link, with a small icon, on each bug row, so that users on a selected project can switch directly to the update bug page (simple/advanced depending on user preferences). 
+ * Added multiple bug actions in view_all_bug_page.php.
+ * Added a direct link, with a small icon, on each bug row, so that users on a selected project can switch directly to the update bug page (simple/advanced depending on user preferences).
  * Added automatic defaults for $g_path and $g_absolute_path rather than dummy values.  This should avoid the need of redefining these values in custom_config_inc.php and also support multiple domains.
  * Added configuration flags ($g_show_queries_count and $g_show_queries_list) that track the executed queries and display their total count, unique queries count, and the actual list of queries executed.
  * Added more visual graph pages in summary_page.php. Caution, old versions of JPGraph may cause problems, use v1.6.3 or above if you can.
@@ -81,6 +81,7 @@ Mantis ChangeLog
  * Added support for modifying the reporter of a bug.
  * Added word2k and excel export in print_all_bug_page.php. Users can choose the bugs to display/print, and the fields to export with the 'Printing Options' link.
  * Added custom attributes for the 7 ones in config_inc.php : priority, severity, status (with colors), etc... Define it in manage_proj_menu_page.php ; implementation has been thought in a 'per project Settings' conception, but only available for all projects right now.
+ * Fixed security hole in summary_graph_functions.php (Joao Gouveia: tharbad@kaotik.org)
 
 2002.05.19  -  0.17.3
 
