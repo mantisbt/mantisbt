@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.140 2004-12-05 01:32:53 vboctor Exp $
+	# $Id: html_api.php,v 1.141 2004-12-12 21:49:57 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -931,9 +931,9 @@
 	# Print a button to delete the given bug
 	function html_button_bug_delete( $p_bug_id ) {
 		if ( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
-			html_button( 'bug_delete.php',
+			html_button( 'bug_actiongroup_page.php',
 						 lang_get( 'delete_bug_button' ),
-						 array( 'bug_id' => $p_bug_id ) );
+						 array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
 		}
 	}
 
