@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.39 2005-03-21 02:03:12 thraxisp Exp $
+	# $Id: access_api.php,v 1.40 2005-03-31 02:32:32 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -214,29 +214,35 @@
 			$p_project_id = helper_get_current_project();
 		}
 
+		$t_global_access_level = access_get_global_level( $p_user_id );
 		if ( ALL_PROJECTS == $p_project_id ) {
-			$t_access_level = access_get_global_level( $p_user_id );
+            return $t_global_access_level;
 		} else {
-			$t_access_level = access_get_local_level( $p_user_id, $p_project_id );
-		}
+			$t_project_access_level = access_get_local_level( $p_user_id, $p_project_id );
+            $t_project_view_state = project_get_field( $p_project_id, 'view_state' );
 
-		# Try to use the project access level.
-		# If the user is not listed in the project, then try to fall back
-		#  to the global access level
-		if ( false === $t_access_level ) {
-			$t_project_view_state = project_get_field( $p_project_id, 'view_state' );
+            # Try to use the project access level.
+            # If the user is not listed in the project, then try to fall back
+            #  to the global access level
+            if ( false === $t_project_access_level ) {
 
-			# If the project is private and the user isn't listed, then they
-			# must have the private_project_threshold access level to get in.
-			if ( VS_PRIVATE == $t_project_view_state ) {
-				return ( access_has_global_level( 
-				    config_get( 'private_project_threshold', null, $p_user_id, $p_project_id ), $p_user_id ) );
-			} else {
-				$t_access_level = user_get_field( $p_user_id, 'access_level' );
+                # If the project is private and the user isn't listed, then they
+                # must have the private_project_threshold access level to get in.
+                if ( VS_PRIVATE == $t_project_view_state ) {
+				    if ( access_compare_level( $t_global_access_level, config_get( 'private_project_threshold', null, null, ALL_PROJECTS ) ) ) {
+				        return $t_global_access_level;
+				    } else {
+				        return ANYBODY;
+				    }
+				} else {
+				    # project access not set, but the project is public
+				    return $t_global_access_level;
+				}
+            } else {
+                # project specific access was set
+				return $t_project_access_level;
 			}
 		}
-
-		return $t_access_level;
 	}
 
 	# --------------------

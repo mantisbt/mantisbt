@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.67 2005-02-28 00:33:49 jlatour Exp $
+	# $Id: project_api.php,v 1.68 2005-03-31 02:32:32 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -458,7 +458,8 @@
 		$t_adm = ADMINISTRATOR;
 		$t_pub = VS_PUBLIC;
 
-		$t_access_level = $p_access_level;
+		$t_project_access_level = $p_access_level;
+		$t_global_access_level = $p_access_level;
 
 		if( $c_project_id != ALL_PROJECTS ) {
 			if ( VS_PRIVATE == project_get_field( $p_project_id, 'view_state' ) ) {
@@ -466,7 +467,7 @@
 				#   I was getting access_min from the project but apparently we got
 				#   rid of that in 0.17.2.  The user docs claim developers and higher
 				#   get into private projects but the code seems to only allow administrators in
-				$t_access_level = max( $t_access_level, config_get( 'private_project_threshold' ) );
+				$t_global_access_level = max( $p_access_level, config_get( 'private_project_threshold' ) );
 			}
 		}
 
@@ -476,8 +477,8 @@
 		$query = "SELECT DISTINCT u.id, u.username, u.realname
 					FROM 	$t_user_table u,
 							$t_project_table p LEFT JOIN $t_project_user_list_table l ON p.id=l.project_id
-					WHERE	( ( p.view_state='$t_pub' AND u.access_level >= $t_access_level )
-							OR ( l.access_level >= $t_access_level AND l.user_id=u.id )
+					WHERE	( ( p.view_state='$t_pub' AND u.access_level >= $t_global_access_level )
+							OR ( l.access_level >= $t_project_access_level AND l.user_id=u.id )
 							OR u.access_level>='$t_adm' )
 							AND u.enabled = $t_on
 							$t_project_clause

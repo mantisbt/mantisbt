@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.15 2005-03-22 19:13:54 vwegert Exp $
+	# $Id: manage_proj_page.php,v 1.16 2005-03-31 02:32:32 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -72,8 +72,11 @@
 <?php
 	$t_manage_project_threshold = config_get( 'manage_project_threshold' );
 	$t_projects = current_user_get_accessible_projects();
-	$t_projects = multi_sort( $t_projects, $f_sort, $t_direction );
-
+	$t_full_projects = array();
+	foreach ( $t_projects as $t_project_id ) {
+		$t_full_projects[] = project_get_row( $t_project_id );
+	}
+	$t_projects = multi_sort( $t_full_projects, $f_sort, $t_direction );
 	$t_stack 	= array( $t_projects );
 
 	while ( 0 < count( $t_stack ) ) {
@@ -83,10 +86,9 @@
 			continue;
 		}
 
-		$t_project_id = array_shift( $t_projects );
+		$t_project = array_shift( $t_projects );
+		$t_project_id = $t_project['id'];
 		$t_level      = count( $t_stack );
-
-		$t_project = project_get_row( $t_project_id );
 
 		# only print row if user has project management privileges
 		if (access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) {
@@ -118,7 +120,11 @@
 		}
 
 		if ( 0 < count( $t_subprojects ) ) {
-			$t_subprojects = multi_sort( $t_subprojects, $f_sort, $t_direction );
+            $t_full_projects = array();
+		    foreach ( $t_subprojects as $t_project_id ) {
+                $t_full_projects[] = project_get_row( $t_project_id );
+            }
+			$t_subprojects = multi_sort( $t_full_projects, $f_sort, $t_direction );
 			array_unshift( $t_stack, $t_subprojects );
 		}
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.85 2005-03-20 13:11:26 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.86 2005-03-31 02:32:30 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -617,20 +617,34 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 		</tr>
 <?php
 	$t_users = project_get_all_user_rows( $f_project_id );
+	$t_display = array();
+	$t_sort = array();
+	foreach ( $t_users as $t_user ) {
+		$t_user_name = string_attribute( $t_user['username'] );
+		$t_sort_name = $t_user_name;
+		if ( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
+			$t_user_name = string_attribute( $t_user['realname'] ) . " (" . $t_user_name . ")";
+			if ( ON == config_get( 'sort_by_last_name') ) {
+				$t_sort_name_bits = split( ' ', strtolower( $t_user_name ), 2 );
+				$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
+			} else {
+				$t_sort_name = strtolower( $t_user_name );
+			}
+		}
+		$t_display[] = $t_user_name;
+		$t_sort[] = $t_sort_name;
+	}
+	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 
 	# reset the class counter
 	helper_alternate_class( 0 );
 
-	foreach ( $t_users as $t_user ) {
+	for ($i = 0; $i < count( $t_sort ); $i++ ) {
+		$t_user = $t_users[$i];
 ?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php
-					echo $t_user['username'];
-					if ( isset( $t_user['realname'] ) && $t_user['realname'] > "" ) {
-						echo " (" . $t_user['realname'] . ")";
-					}
-				?>
+				<?php echo $t_display[$i] ?>
 			</td>
 			<td>
 			<?php
