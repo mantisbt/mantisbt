@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.61 2003-07-30 02:59:59 beerfrick Exp $
+	# $Id: email_api.php,v 1.62 2003-08-31 10:17:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -770,8 +770,7 @@
 					current_user_get_field( 'email' ) . '>' ;
 		$t_date = date( config_get( 'normal_date_format' ) );
 		$t_header = "\n" . lang_get( 'on' ) . " $t_date, $t_sender " .
-					lang_get( 'sent_you_this_reminder_about' ) . ":\n\n" .
-					config_get( 'path' );
+					lang_get( 'sent_you_this_reminder_about' ) . ":\n\n";
 
 		$result = array();
 		foreach ( $p_recipients as $t_recipient ) {

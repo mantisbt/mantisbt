@@ -3,6 +3,7 @@ Mantis ChangeLog
 2003.09.??  -  0.18.0??
 
  * Fix #3310: Sorting of projects in menu bar.
+ * Fix #3334: Invalid links in bug reminder emails.
 
 2003.08.24  -  0.18.0rc1
 
