@@ -1,7 +1,12 @@
-# --------------------------------------------------------
-
 #
 # Table structure for table `mantis_bug_file_table`
+# --------------------------------------------------------
+# $Revision: 1.4 $
+# $Author: jhuggins $
+# $Date: 2002-06-05 15:32:46 $
+#
+# $Id: db_generate.sql,v 1.4 2002-06-05 15:32:46 jhuggins Exp $
+# --------------------------------------------------------
 #
 
 CREATE TABLE mantis_bug_file_table (
