@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.78 2004-07-11 07:09:52 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.79 2004-07-14 22:16:34 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -281,8 +281,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			</td>
 			<td class="center">
 				<?php
-					$t_name = urlencode( $t_name );
-					$t_date_order = urlencode( $t_date_order );
 					$t_version_id = version_get_id( $t_name, $f_project_id );
 
 					print_bracket_link( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
