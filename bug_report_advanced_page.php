@@ -6,56 +6,102 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.41 2004-08-02 18:16:20 prichards Exp $
+	# $Id: bug_report_advanced_page.php,v 1.42 2004-08-17 18:01:18 thraxisp Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	# This file POSTs data to report_bug.php
-?>
-<?php
+
 	require_once( 'core.php' );
 
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path.'file_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
-?>
-<?php
-	# this page is invalid for the 'All Project' selection
-	if ( ALL_PROJECTS == helper_get_current_project() ) {
+
+	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
+
+	# this page is invalid for the 'All Project' selection except if this is a clone
+	if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id ) ) {
 		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_advanced_page.php' );
 	}
 
 	if ( SIMPLE_ONLY == config_get( 'show_report' ) ) {
-		print_header_redirect ( 'bug_report_page.php' );
+		print_header_redirect ( 'bug_report_page.php' .
+						( 0 == $f_master_bug_id ) ? '' : '?m_id=' . $f_master_bug_id );
 	}
 
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
-	$f_build				= gpc_get_string( 'build', '' );
-	$f_platform				= gpc_get_string( 'platform', '' );
-	$f_os					= gpc_get_string( 'os', '' );
-	$f_os_build				= gpc_get_string( 'os_build', '' );
-	$f_product_version		= gpc_get_string( 'product_version', '' );
-	$f_profile_id			= gpc_get_int( 'profile_id', 0 );
-	$f_handler_id			= gpc_get_int( 'handler_id', 0 );
+	if( $f_master_bug_id > 0 ) {
+		# master bug exists...
+		bug_ensure_exists( $f_master_bug_id );
 
-	$f_category				= gpc_get_string( 'category', '' );
-	$f_reproducibility		= gpc_get_int( 'reproducibility', 0 );
-	$f_severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
-	$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
-	$f_summary				= gpc_get_string( 'summary', '' );
-	$f_description			= gpc_get_string( 'description', '' );
-	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
-	$f_additional_info		= gpc_get_string( 'additional_info', '' );
-	$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
+		# master bug is not read-only...
+		if ( bug_is_readonly( $f_master_bug_id ) ) {
+			error_parameters( $f_master_bug_id );
+			trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+		}
+
+		# the user can at least update the master bug (needed to add the relationship)...
+		access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_master_bug_id );
+
+		$t_bug = bug_prepare_display( bug_get( $f_master_bug_id, true ) );
+
+		$f_build				= $t_bug->build;
+		$f_platform				= $t_bug->platform;
+		$f_os					= $t_bug->os;
+		$f_os_build				= $t_bug->os_build;
+		$f_product_version		= $t_bug->version;
+		$f_profile_id			= 0;
+		$f_handler_id			= $t_bug->handler_id;
+
+		$f_category				= $t_bug->category;
+		$f_reproducibility		= $t_bug->reproducibility;
+		$f_severity				= $t_bug->severity;
+		$f_priority				= $t_bug->priority;
+		$f_summary				= $t_bug->summary;
+		$f_description			= $t_bug->description;
+		$f_steps_to_reproduce	= $t_bug->steps_to_reproduce;
+		$f_additional_info		= $t_bug->additional_information;
+		$f_view_state			= $t_bug->view_state;
+
+		$t_project_id			= $t_bug->project_id;
+
+		if( $t_project_id != helper_get_current_project() ) {
+			# in case the current project is not the same project of the bug we are cloning...
+			# ...se set on fly the current project. This to avoid problems with categories and handlers lists etc.
+			$t_redirect_url = "set_project.php?project_id=" . $t_project_id .
+				"&make_default=no&ref=" . urlencode( "bug_report_advanced_page.php?m_id=" . $f_master_bug_id );
+			print_header_redirect( $t_redirect_url );
+		}
+	}
+	else {
+		$f_build				= gpc_get_string( 'build', '' );
+		$f_platform				= gpc_get_string( 'platform', '' );
+		$f_os					= gpc_get_string( 'os', '' );
+		$f_os_build				= gpc_get_string( 'os_build', '' );
+		$f_product_version		= gpc_get_string( 'product_version', '' );
+		$f_profile_id			= gpc_get_int( 'profile_id', 0 );
+		$f_handler_id			= gpc_get_int( 'handler_id', 0 );
+
+		$f_category				= gpc_get_string( 'category', '' );
+		$f_reproducibility		= gpc_get_int( 'reproducibility', 0 );
+		$f_severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
+		$f_priority				= gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
+		$f_summary				= gpc_get_string( 'summary', '' );
+		$f_description			= gpc_get_string( 'description', '' );
+		$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
+		$f_additional_info		= gpc_get_string( 'additional_info', '' );
+		$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
+
+		$t_project_id			= helper_get_current_project();
+	}
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
 
-	$t_project_id			= helper_get_current_project();
+	html_page_top1( lang_get( 'report_bug_link' ) );
+	html_page_top2();
 ?>
-<?php html_page_top1( lang_get( 'report_bug_link' ) ) ?>
-<?php html_page_top2() ?>
 
 <br />
 <div align="center">
@@ -66,13 +112,15 @@
 <!-- Title -->
 <tr>
 	<td class="form-title">
+		<input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 		<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 		<?php echo lang_get( 'enter_report_details_title' ) ?>
 	</td>
 	<td class="right">
 		<?php
 			if ( BOTH == config_get( 'show_report' ) ) {
-				print_bracket_link( 'bug_report_page.php', lang_get( 'simple_report_link' ) );
+				print_bracket_link( 'bug_report_page.php' .
+					( $f_master_bug_id > 0 ? '?m_id=' . $f_master_bug_id : '' ), lang_get( 'simple_report_link' ) );
 			}
 		?>
 	</td>
@@ -199,10 +247,10 @@
 
 
 <?php
-	$t_show_version = ( ON == config_get( 'show_product_version' ) ) 
-			|| ( ( AUTO == config_get( 'show_product_version' ) ) 
+	$t_show_version = ( ON == config_get( 'show_product_version' ) )
+			|| ( ( AUTO == config_get( 'show_product_version' ) )
 						&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
-	if ( $t_show_version ) { 
+	if ( $t_show_version ) {
 ?>
 <!-- Product Version -->
 <tr <?php echo helper_alternate_class() ?>>
@@ -216,7 +264,7 @@
 	</td>
 </tr>
 <?php
-	} 
+	}
 ?>
 
 <!-- Product Build -->
@@ -313,14 +361,14 @@
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
 		if( ( $t_def['display_report'] || $t_def['require_report']) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
-			$t_custom_fields_found = true;			
+			$t_custom_fields_found = true;
 ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?><?php echo lang_get_defaulted( $t_def['name'] ) ?>
 	</td>
 	<td>
-		<?php print_custom_field_input( $t_def ) ?>
+		<?php print_custom_field_input( $t_def, $f_master_bug_id ) ?>
 	</td>
 </tr>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.27 2004-07-30 21:13:31 thraxisp Exp $
+	# $Id: history_api.php,v 1.28 2004-08-17 18:01:18 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -109,10 +109,15 @@
 		$c_bug_id					= db_prepare_int( $p_bug_id );
 
 		# grab history and display by date_modified then field_name
+		# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
+		# date, it's better to respect the storing order otherwise we should risk to mix different information
+		# I give you an example. We create a child of a bug with different custom fields. In the history of the child
+		# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
+		# for the new bug with the same timestamp...)
 		$query = "SELECT *
 				FROM $t_mantis_bug_history_table
 				WHERE bug_id='$c_bug_id'
-				ORDER BY date_modified $t_history_order, field_name ASC";
+				ORDER BY date_modified $t_history_order,id";
 		$result = db_query( $query );
 		$raw_history_count = db_num_rows( $result );
 		$raw_history = array();
@@ -297,16 +302,20 @@
 					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
 					break;
 				case BUG_ADD_RELATIONSHIP:
-					$t_note = lang_get( 'relationship_added' ) . ': ' . lang_get( 'bug' ) . ' ' . bug_format_id( $p_new_value );
+					$t_note = lang_get( 'relationship_added' );
+					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
 					break;
 				case BUG_DEL_RELATIONSHIP:
-					$t_note = lang_get( 'relationship_deleted' ) . ': ' . lang_get( 'bug' ) . ' ' . bug_format_id( $p_new_value );
+					$t_note = lang_get( 'relationship_deleted' );
+					$t_change = relationship_get_description_for_history( $p_old_value ) . ' ' . bug_format_id( $p_new_value );
 					break;
 				case BUG_CLONED_TO:
-					$t_note = lang_get( 'bug_cloned_to' ) . ': ' . bug_format_id( $p_new_value );
+					$t_note = lang_get( 'bug_cloned_to' );
+					$t_change = bug_format_id( $p_new_value );
 					break;
 				case BUG_CREATED_FROM:
-					$t_note = lang_get( 'bug_created_from' ) . ': ' . bug_format_id( $p_new_value );
+					$t_note = lang_get( 'bug_created_from' );
+					$t_change = bug_format_id( $p_new_value );
 					break;
 				case CHECKIN:
 					$t_note = lang_get( 'checkin' );

@@ -35,6 +35,7 @@ Mantis ChangeLog
 - 0004122: [relationships] Upgrade script seems to swap the duplicate relationship (masc)
 - 0004146: [relationships] Summary doesn't unescape(?) characters (masc)
 - 0004161: [relationships] Relations to private issues must only appear to user with appropriate access level (masc)
+- 0004200: [relationships] Create Child should use Report Page (masc)
 - 0004083: [sponsorships] Users without email address must not be able to sponsor issues (thraxisp)
 - 0000633: [bugtracker] email lost password page (masc)
 - 0002861: [bugtracker] misleading 'copyright' at the pages' bottom (vboctor)

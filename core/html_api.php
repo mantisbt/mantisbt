@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.121 2004-08-08 13:42:52 prichards Exp $
+	# $Id: html_api.php,v 1.122 2004-08-17 18:01:18 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -842,17 +842,15 @@
 
 	# --------------------
 	# Print a button to move the given bug to a different project
-	# MASC RELATIONSHIP
 	function html_button_bug_create_child( $p_bug_id ) {
 		if ( ON == config_get( 'enable_relationship' ) ) {
 			if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-				html_button( 'bug_create_child.php',
+				html_button( string_get_bug_report_url(),
 							 lang_get( 'create_child_bug_button' ),
-							 array( 'bug_id' => $p_bug_id ) );
+							 array( 'm_id' => $p_bug_id ) );
 			}
 		}
 	}
-	# MASC RELATIONSHIP
 
 	# --------------------
 	# Print a button to reopen the given bug
@@ -939,10 +937,10 @@
 			# MOVE button
 			html_button_bug_move( $p_bug_id );
 
-			# # CREATE CHILD button
-			# PRINT '</td><td>';
-			# html_button_bug_create_child( $p_bug_id );
-		 
+			# CREATE CHILD button
+			PRINT '</td><td>';
+			html_button_bug_create_child( $p_bug_id );
+
 			PRINT '</td>';
 		} 
 		if ( $t_resolved <= $t_status ) { # resolved is not the same as readonly

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.19 2004-08-02 11:02:15 vboctor Exp $
+	# $Id: relationship_api.php,v 1.20 2004-08-17 18:01:19 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -333,6 +333,30 @@
 	}
 
 	# --------------------
+	# get class description of a relationship as it's stored in the history
+	function relationship_get_description_for_history( $p_relationship_code ) {
+		switch ( $p_relationship_code ) {
+			case BUG_HAS_DUPLICATE:
+				return lang_get( 'has_duplicate' ) ;
+				break;
+			case BUG_DUPLICATE:
+				return lang_get( 'duplicate_of' );
+				break;
+			case BUG_BLOCKS:
+				return lang_get( 'blocks' ) ;
+				break;
+			case BUG_DEPENDANT:
+				return lang_get( 'dependant_on' ) ;
+				break;
+			case BUG_RELATED:
+				return lang_get( 'related_to' ) ;
+				break;
+			default:
+				trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		}
+	}
+
+	# --------------------
 	# return false if there are child bugs not resolved/closed
 	# N.B. we don't check if the parent bug is read-only. This is because the answer of this function is indepent from
 	# the state of the parent bug itself.
@@ -363,6 +387,7 @@
 	# --------------------
 	# return formatted string with all the details on the requested relationship
 	function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, $p_html_preview = false, $p_user_id = null ) {
+		$t_summary_wrap_at = strlen( config_get( 'email_separator2' ) ) - 28;
 
 		if ( $p_user_id === null ) {
 			$p_user_id = auth_get_current_user_id();
@@ -411,9 +436,8 @@
 			$t_relationship_info_html .= $t_td . $t_status . '&nbsp;</td>' . $t_td;
 		}
 
-		$t_relationship_info_text = str_pad( $t_relationship_descr,25);
-		$t_relationship_info_text .= str_pad( bug_format_id( $t_related_bug_id ),8 );
-		$t_relationship_info_text .= str_pad( $t_status,15 );
+		$t_relationship_info_text = str_pad( $t_relationship_descr, 20 );
+		$t_relationship_info_text .= str_pad( bug_format_id( $t_related_bug_id ), 8 );
 
 		# get the handler name of the related bug
 		if ( $t_bug->handler_id > 0 )  {
@@ -422,6 +446,12 @@
 
 		# add summary
 		$t_relationship_info_html .= '&nbsp;</td>' . $t_td . $t_bug->summary;
+		if( strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
+			$t_relationship_info_text .= $t_bug->summary;
+		}
+		else {
+			$t_relationship_info_text .= substr( $t_bug->summary, 0, $t_summary_wrap_at - 3 ) . '...';
+		}
 
 		# add delete link if bug not read only and user has access level
 		if ( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
@@ -525,9 +555,9 @@
 		if ($t_summary != "") {
 			$t_summary =
 				$t_email_separator1 . "\n" .
-				str_pad( lang_get( 'bug_relationships' ),25 ) .
-				str_pad( lang_get( 'id' ),8 ) .
-				str_pad( lang_get( 'status' ),15 ) . "\n" .
+				str_pad( lang_get( 'bug_relationships' ), 20 ) .
+				str_pad( lang_get( 'id' ), 8 ) .
+				lang_get( 'summary' ) . "\n" .
 				$t_email_separator2 . "\n" . $t_summary;
 		}
 
