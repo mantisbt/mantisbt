@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.19 2002-08-30 07:38:14 jfitzell Exp $
+	# $Id: user_api.php,v 1.20 2002-08-30 09:02:38 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -131,6 +131,34 @@
 	# Boolean queries and ensures
 	#===================================
 
+	# --------------------
+	# check to see if user exists by id
+	# return true if it does, false otherwise
+	function user_exists( $p_user_id ) {
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		$query = "SELECT COUNT(*)
+				  FROM $t_user_table
+				  WHERE id='$c_user_id'";
+		$result = db_query( $query );
+
+		if ( db_result( $result ) > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	# --------------------
+	# check to see if project exists by id
+	# if it doesn't exist then error
+	#  otherwise let execution continue undisturbed
+	function user_ensure_exists( $p_user_id ) {
+		if ( ! user_exists( $p_user_id ) ) {
+			trigger_error( ERROR_USER_NOT_FOUND, ERROR );
+		}
+	}
 	# --------------------
 	# return true if the username is unique, false if there is already a user
 	#  with that username

@@ -58,7 +58,7 @@
 		# increment login count
 		user_increment_login_count( $u_id );
 
-		$t_project_id = get_default_project( $u_id );
+		$t_project_id = user_get_pref( $u_id, 'default_project' );
 
 		if ( ( isset( $f_perm_login ) )&&( 'on' == $f_perm_login ) ) {
 			# set permanent cookie (1 year)

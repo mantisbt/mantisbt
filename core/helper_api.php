@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.11 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: helper_api.php,v 1.12 2002-08-30 09:02:37 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -31,23 +31,6 @@
 			return '&nbsp;';
 		} else {
 			return 'X';
-		}
-	}
-	# --------------------
-	# check to see if user exists
-	# if it doesn't exist then redirect to the main page
-	# otherwise let execution continue undisturbed
-	function check_user_exists( $p_user_id ) {
-		global $g_mantis_user_table;
-
-		$c_user_id = (integer)$p_user_id;
-
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_user_table ".
-				"WHERE id='$c_user_id'";
-		$result = db_query( $query );
-		if ( 0 == db_result( $result, 0, 0 ) ) {
-			print_header_redirect( 'main_page.php' );
 		}
 	}
 	# --------------------
@@ -115,20 +98,6 @@
 				}
 		}
 		return '#ffffff';
-	}
-	# --------------------
-	# Get the default project of a user
-	function get_default_project( $p_user_id ) {
-		global $g_mantis_user_pref_table;
-
-		$c_user_id = (integer)$p_user_id;
-
-		$query ="SELECT default_project ".
-				"FROM $g_mantis_user_pref_table ".
-				"WHERE user_id='$c_user_id' ".
-				"LIMIT 1";
-		$result = db_query( $query );
-		return db_result( $result, 0, 0 );
 	}
 	# --------------------
 	# Get the string associated with the $p_enum value
@@ -257,37 +226,6 @@
 			}
 		}
 		return( $output );
-	}
-	# --------------------
-	# File type check
-	function file_type_check( $p_file_name ) {
-		global $g_allowed_files, $g_disallowed_files;
-
-		# grab extension
-		$t_ext_array = explode( '.', $p_file_name );
-		$last_position = count( $t_ext_array )-1;
-		$t_extension = $t_ext_array[$last_position];
-
-		# check against disallowed files
-		$t_disallowed_arr =  explode_enum_string( $g_disallowed_files );
-		foreach ( $t_disallowed_arr as $t_val ) {
-		    if ( $t_val == $t_extension ) {
-		    	return false;
-		    }
-		}
-
-		# check against allowed files
-		$t_allowed_arr = explode_enum_string( $g_allowed_files );
-		# if the allowed list is populated then the file must be in the list.
-		if ( empty( $g_allowed_files ) ) {
-			return true;
-		}
-		foreach ( $t_allowed_arr as $t_val ) {
-		    if ( $t_val == $t_extension ) {
-				return true;
-		    }
-		}
-		return false;
 	}
 	# --------------------
 	# This function checks to see if a variable is set

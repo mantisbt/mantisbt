@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.7 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: file_api.php,v 1.8 2002-08-30 09:02:37 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -119,6 +119,38 @@
 		$result = db_query( $query );
 
 		return db_result( $result );
+	}
+	# --------------------
+	# File type check
+	function file_type_check( $p_file_name ) {
+		$t_allowed_files = config_get( 'allowed_files' );
+		$t_disallowed_files = config_get( 'disallowed_files' );;
+
+		# grab extension
+		$t_ext_array = explode( '.', $p_file_name );
+		$last_position = count( $t_ext_array )-1;
+		$t_extension = $t_ext_array[$last_position];
+
+		# check against disallowed files
+		$t_disallowed_arr =  explode_enum_string( $t_disallowed_files );
+		foreach ( $t_disallowed_arr as $t_val ) {
+		    if ( $t_val == $t_extension ) {
+		    	return false;
+		    }
+		}
+
+		# if the allowed list is note populated then the file must be allowed
+		if ( empty( $t_allowed_files ) ) {
+			return true;
+		}
+		# check against allowed files
+		$t_allowed_arr = explode_enum_string( $t_allowed_files );
+		foreach ( $t_allowed_arr as $t_val ) {
+		    if ( $t_val == $t_extension ) {
+				return true;
+		    }
+		}
+		return false;
 	}
 
 ?>

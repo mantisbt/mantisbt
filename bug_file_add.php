@@ -36,7 +36,7 @@
 		$good_upload = 1;
 
 		# grab the file path
-		$t_file_path = get_current_project_field( 'file_path' );
+		$t_file_path = project_get_field( helper_get_current_project(), 'file_path' );
 
 		# prepare variables for insertion
 		$f_file_name = $f_id.'-'.$f_file_name;

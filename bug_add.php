@@ -182,7 +182,7 @@
 			$t_bug_id = str_pad( $t_bug_id, '0', 7, STR_PAD_LEFT );
 
 			# grab the file path
-			$t_file_path = get_current_project_field( 'file_path' );
+			$t_file_path = project_get_field( helper_get_current_project(), 'file_path' );
 
 			# prepare variables for insertion
 			$f_file_name = $t_bug_id.'-'.$f_file_name;
