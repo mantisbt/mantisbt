@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.3 2003-02-09 10:20:38 jfitzell Exp $
+	# $Id: manage_proj_page.php,v 1.4 2003-02-09 22:15:52 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,21 +14,19 @@
 	
 	$t_core_path = config_get( 'core_path' );
 
-	require_once( $t_core_path.'icon_api.php' );
+	require_once( $t_core_path . 'icon_api.php' );
 ?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 
 	$f_sort	= gpc_get_string( 'sort', 'name' );
-	$f_dir	= gpc_get_string( 'sort', 'ASC' );
-
-	$c_sort = db_prepare_string( $f_sort );
+	$f_dir	= gpc_get_string( 'dir', 'ASC' );
 
 	if ( 'ASC' == $f_dir ) {
-		$c_dir = 'ASC';
+		$t_direction = ASC;
 	} else {
-		$c_dir = 'DESC';
+		$t_direction = DESC;
 	}
 
 ?>
@@ -52,65 +50,61 @@
 </tr>
 <tr class="row-category">
 	<td width="20%">
-		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'name' ), 'name', $c_dir, $c_sort ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'name' ) ?>
+		<?php print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort ) ?>
+		<?php print_sort_icon( $t_direction, $f_sort, 'name' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'status' ), 'status', $c_dir, $c_sort ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'status' ) ?>
+		<?php print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort ) ?>
+		<?php print_sort_icon( $t_direction, $f_sort, 'status' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $c_dir, $c_sort ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'enabled' ) ?>
+		<?php print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort ) ?>
+		<?php print_sort_icon( $t_direction, $f_sort, 'enabled' ) ?>
 	</td>
 	<td width="10%">
-		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $c_dir, $c_sort ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'view_state' ) ?>
+		<?php print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort ) ?>
+		<?php print_sort_icon( $t_direction, $f_sort, 'view_state' ) ?>
 	</td>
 	<td width="40%">
-		<?php print_manage_project_sort_link(  'manage_proj_page.php', lang_get( 'description' ), 'description', $c_dir, $c_sort ) ?>
-		<?php print_sort_icon( $c_dir, $c_sort, 'description' ) ?>
+		<?php print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort ) ?>
+		<?php print_sort_icon( $t_direction, $f_sort, 'description' ) ?>
 	</td>
 </tr>
 <?php
-	$query = "SELECT *
-			FROM $g_mantis_project_table
-			ORDER BY '$c_sort' $c_dir";
-	$result = db_query( $query );
-	$project_count = db_num_rows( $result );
-	for ($i=0;$i<$project_count;$i++) {
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+	$t_projects = project_get_all_rows();
 
-        if ( !access_level_ge_no_default_for_private ( MANAGER, $v_id ) ) {
+	$t_projects = multi_sort( $t_projects, $f_sort, $t_direction );
+
+	foreach ( $t_projects as $t_project ) {
+		extract( $t_project, EXTR_PREFIX_ALL, 'v' );
+
+        if ( !access_level_ge_no_default_for_private ( config_get( 'manage_project_threshold' ), $v_id ) ) {
 		  continue;
 		}
 
-		$v_name 		= string_display( $v_name );
 		$v_description 	= string_display( $v_description );
 
 ?>
-<tr <?php echo helper_alternate_class( $i ) ?>>
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
-		<a href="manage_proj_edit_page.php?project_id=<?php echo $v_id ?>"><?php echo $v_name ?></a>
+		<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo string_display( $t_project['name'] ) ?></a>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'project_status', $v_status ) ?>
+		<?php echo get_enum_element( 'project_status', $t_project['status'] ) ?>
 	</td>
 	<td>
-		<?php echo trans_bool( $v_enabled ) ?>
+		<?php echo trans_bool( $t_project['enabled'] ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'project_view_state', $v_view_state ) ?>
+		<?php echo get_enum_element( 'project_view_state', $t_project['view_state'] ) ?>
 	</td>
 	<td>
-		<?php echo $v_description ?>
+		<?php echo string_display( $t_project['description'] ) ?>
 	</td>
 </tr>
 <?php
-	}
+	} # End of foreach loop over projects
 ?>
 </table>
-<?php # Project Menu Form END ?>
 
 <?php print_page_bot1( __FILE__ ) ?>
