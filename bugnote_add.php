@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.19 $
+	# $Revision: 1.20 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 06:38:34 $
+	# $Date: 2002-08-16 06:46:28 $
 	#
-	# $Id: bugnote_add.php,v 1.19 2002-08-16 06:38:34 jfitzell Exp $
+	# $Id: bugnote_add.php,v 1.20 2002-08-16 06:46:28 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,15 +38,7 @@
 
 		# notify reporter and handler
 		if ( $result ) {
-			if ( get_bug_field( $c_id, 'status' ) == FEEDBACK ) {
-				if ( get_bug_field( $c_id, 'resolution' ) == REOPENED ) {
-					email_reopen( $c_id );
-				} else {
-					email_feedback( $c_id );
-				}
-			} else {
-				email_bugnote_add( $c_id );
-			}
+			email_bugnote_add( $c_id );
 		}
 	}
 
