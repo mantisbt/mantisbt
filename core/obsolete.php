@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.24 2004-04-08 18:04:53 prescience Exp $
+	# $Id: obsolete.php,v 1.25 2004-05-08 23:57:21 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Obsolete API ###
@@ -86,4 +86,6 @@
 	config_obsolete( 'summary_pad', '' );
 
 	config_obsolete( 'show_project_in_title', '' );
+
+	config_obsolete( 'hide_closed_default', 'hide_status_default' );
 ?>
