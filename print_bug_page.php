@@ -55,6 +55,11 @@
 		<span class="small"><?php print_bracket_link( $g_view_bug_page."?f_id=".$f_id, $s_go_back ) ?></span>
 	</td>
 </tr>
+<tr>
+	<td class="print-spacer" colspan="6">
+		<hr size="1">
+	</td>
+</tr>
 <tr class="print-category">
 	<td class="print" width="16%">
 		<?php echo $s_id ?>:
@@ -96,7 +101,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="spacer" colspan="6">
+	<td class="print-spacer" colspan="6">
 		<hr size="1">
 	</td>
 </tr>
@@ -113,6 +118,9 @@
 	<td class="print">
 		<?php echo $v_platform ?>
 	</td>
+	<td class="print" colspan="2">
+		&nbsp;
+	</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -127,19 +135,25 @@
 	<td class="print">
 		<?php echo $v_os ?>
 	</td>
+	<td class="print" colspan="2">
+		&nbsp;
+	</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
 		<?php echo $s_priority ?>:
 	</td>
 	<td class="print">
-		<?php echo $v_priority ?>
+		<?php echo get_enum_element( "priority", $v_priority ) ?>
 	</td>
 	<td class="print-category">
 		<?php echo $s_os_version ?>:
 	</td>
 	<td class="print">
 		<?php echo $v_os_build ?>
+	</td>
+	<td class="print" colspan="2">
+		&nbsp;
 	</td>
 </tr>
 <tr class="print">
@@ -155,6 +169,26 @@
 	<td class="print">
 		<?php echo $v_version ?>
 	</td>
+	<td class="print" colspan="2">
+		&nbsp;
+	</td>
+</tr>
+<tr class="print">
+	<td class="print-category">
+		<?php echo $s_product_build ?>:
+	</td>
+	<td class="print">
+		<?php echo $v_build?>
+	</td>
+	<td class="print-category">
+		<?php echo $s_resolution ?>:
+	</td>
+	<td class="print">
+		<?php echo get_enum_element( "resolution", $v_resolution ) ?>
+	</td>
+	<td class="print" colspan="2">
+		&nbsp;
+	</td>
 </tr>
 <tr class="print">
 	<td class="print-category">
@@ -164,16 +198,13 @@
 		<?php echo get_enum_element( "projection", $v_projection ) ?>
 	</td>
 	<td class="print-category">
-		<?php echo $s_resolution ?>:
+		<?php echo $s_duplicate_id ?>:
 	</td>
 	<td class="print">
-		<?php echo get_enum_element( "resolution", $v_resolution ) ?>
+		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
-	<td class="print-category">
-		<?php echo $s_product_build ?>:
-	</td>
-	<td class="print">
-		<?php echo $v_build?>
+	<td class="print" colspan="2">
+		&nbsp;
 	</td>
 </tr>
 <tr class="print">
@@ -183,16 +214,12 @@
 	<td class="print">
 		<?php echo get_enum_element( "eta", $v_eta ) ?>
 	</td>
-	<td class="print-category">
-		<?php echo $s_duplicate_id ?>:
+	<td class="print" colspan="4">
+		&nbsp;
 	</td>
-	<td class="print">
-		<?php print_duplicate_id( $v_duplicate_id ) ?>
-	</td>
-	<td colspan="2">
 </tr>
 <tr>
-	<td class="spacer" colspan="6">
+	<td class="print-spacer" colspan="6">
 		<hr size="1">
 	</td>
 </tr>
@@ -200,7 +227,7 @@
 	<td class="print-category">
 		<?php echo $s_summary ?>:
 	</td>
-	<td class="print-left" colspan="5">
+	<td class="print" colspan="5">
 		<?php echo $v_summary ?>
 	</td>
 </tr>
@@ -208,7 +235,7 @@
 	<td class="print-category">
 		<?php echo $s_description ?>:
 	</td>
-	<td class="print-left" colspan="5">
+	<td class="print" colspan="5">
 		<?php echo $v2_description ?>
 	</td>
 </tr>
@@ -216,7 +243,7 @@
 	<td class="print-category">
 		<?php echo $s_steps_to_reproduce ?>:
 	</td>
-	<td class="print-left" colspan="5">
+	<td class="print" colspan="5">
 		<?php echo $v2_steps_to_reproduce ?>
 	</td>
 </tr>
@@ -224,7 +251,7 @@
 	<td class="print-category">
 		<?php echo $s_additional_information ?>:
 	</td>
-	<td class="print-left" colspan="5">
+	<td class="print" colspan="5">
 		<?php echo $v2_additional_information ?>
 	</td>
 </tr>
@@ -246,7 +273,7 @@
 	<td class="print-category">
 		<?php echo $s_system_profile ?>:
 	</td>
-	<td class="print-left" colspan="5">
+	<td class="print" colspan="5">
 		<?php echo $t_profile_description ?>
 	</td>
 </tr>
@@ -257,7 +284,7 @@
 	<td class="print-category">
 		<?php echo $s_attached_files ?>:
 	</td>
-	<td class="print-left" colspan="5">
+	<td class="print" colspan="5">
 		<?php
 			$query = "SELECT *
 					FROM $g_mantis_bug_file_table

@@ -48,6 +48,8 @@ td.spacer			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo
 td.small-caption	{ font-size: <?php echo $g_font_small ?>; }
 td.print			{ font-size: <?php echo $g_font_small ?>; text-align: left; padding: 2px; }
 td.print-category	{ font-size: <?php echo $g_font_small ?>; color: <?php echo $g_font_color ?>; font-weight: bold; text-align: right; padding: 2px; }
+td.print-bottom		{ border-bottom: 1px solid #000000; }
+td.print-spacer		{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; font-size: 1pt; line-height: 0.1; padding: 0px;}
 
 tr.center			{ text-align: center; }
 tr.row-1			{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; }

@@ -37,7 +37,6 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo $s_bug_notes_title ?>
-		<hr size="1">
 	</td>
 </tr>
 <?php
@@ -57,6 +56,11 @@
 
 		$v3_note = string_display( $v3_note );
 ?>
+<tr>
+	<td class="print-spacer" colspan="2">
+		<hr size="1">
+	</td>
+</tr>
 <tr>
 	<td class="nopad" valign="top" width="15%">
 		<table class="hide" cellspacing="1">
@@ -80,10 +84,6 @@
 			</td>
 		</tr>
 		</table>
-	</td>
-<tr>
-	<td class="spacer" colspan="2">
-		<hr size="1">
 	</td>
 </tr>
 <?php
