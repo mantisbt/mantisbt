@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.130 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: view_all_inc.php,v 1.131 2004-02-05 00:34:38 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,145 +29,7 @@
 	$t_icon_path = config_get( 'icon_path' );
 ?>
 <?php # -- ====================== FILTER FORM ========================= -- ?>
-<br />
-<form method="post" action="view_all_set.php?f=3">
-<input type="hidden" name="type" value="1" />
-<input type="hidden" name="sort" value="<?php echo $t_sort ?>" />
-<input type="hidden" name="dir" value="<?php echo $t_dir ?>" />
-<input type="hidden" name="page_number" value="<?php echo $f_page_number ?>" />
-<input type="hidden" name="per_page" value="<?php echo $t_filter['per_page'] ?>" />
-<table class="width100" cellspacing="0">
-<?php # -- Filter Form Header Row -- ?>
-<tr class="row-category2">
-	<td class="small-caption"><?php echo lang_get( 'reporter' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'assigned_to' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'category' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'severity' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'status' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'show' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'changed' ) ?></td>
-	<td class="small-caption"><?php echo lang_get( 'hide_status' ) ?></td>
-</tr>
-<?php # -- Filter Form Fields -- ?>
-<tr>
-	<?php # -- Reporter -- ?>
-	<td>
-		<select name="reporter_id">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_reporter_option_list( $t_filter['reporter_id'] ) ?>
-		</select>
-	</td>
-
-	<?php # -- Handler -- ?>
-	<td>
-		<select name="handler_id">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="none" <?php check_selected( $t_filter['handler_id'], 'none' ); ?>><?php echo lang_get( 'none' ) ?></option>
-			<option value="any"></option>
-			<?php print_assign_to_option_list( $t_filter['handler_id'] ) ?>
-		</select>
-	</td>
-
-	<?php # -- Category -- ?>
-	<td>
-		<select name="show_category">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php # This shows orphaned categories as well as selectable categories ?>
-			<?php print_category_complete_option_list( $t_filter['show_category'] ) ?>
-		</select>
-	</td>
-
-	<?php # -- Severity -- ?>
-	<td>
-		<select name="show_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $t_filter['show_severity'] ) ?>
-		</select>
-	</td>
-
-	<?php # -- Status -- ?>
-	<td>
-		<select name="show_status">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_enum_string_option_list( 'status', $t_filter['show_status'] ) ?>
-		</select>
-	</td>
-
-	<?php # -- Number of bugs per page -- ?>
-	<td>
-		<input type="text" name="per_page" size="3" maxlength="7" value="<?php echo $t_filter['per_page'] ?>" />
-	</td>
-
-	<?php # -- Highlight changed bugs -- ?>
-	<td>
-		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $t_filter['highlight_changed'] ?>" />
-	</td>
-
-	<?php # -- Hide closed bugs -- ?>
-	<td>
-		<input type="checkbox" name="hide_resolved" <?php check_checked( $t_filter['hide_resolved'], 'on' ); ?> />&nbsp;<?php echo lang_get( 'filter_resolved' ); ?>
-		<input type="checkbox" name="hide_closed" <?php check_checked( $t_filter['hide_closed'], 'on' ); ?> />&nbsp;<?php echo lang_get( 'filter_closed' ); ?>
-	</td>
-</tr>
-
-
-<?php # -- Search and Date Header Row -- ?>
-<tr class="row-category2">
-	<td class="small-caption" colspan="2"><?php echo lang_get( 'search' ) ?></td>
-	<td class="small-caption" colspan="2"><!--Start Date--></td>
-	<td class="small-caption" colspan="2"><!--End Date--></td>
-	<td class="small-caption" colspan="2">&nbsp;</td>
-</tr>
-
-
-<?php # -- Search and Date fields -- ?>
-<tr>
-	<?php # -- Text search -- ?>
-	<td colspan="2">
-	    <input type="text" size="16" name="search" value="<?php echo $t_filter['search']; ?>" />
-	</td>
-
-	<?php # -- Start date -- ?>
-	<td class="left" colspan="2">
-	<!--
-		<select name="start_month">
-			<?php print_month_option_list( $t_filter['start_month'] ) ?>
-		</select>
-		<select name="start_day">
-			<?php print_day_option_list( $t_filter['start_day'] ) ?>
-		</select>
-		<select name="start_year">
-			<?php print_year_option_list( $t_filter['start_year'] ) ?>
-		</select>
-	-->
-	</td>
-
-	<?php # -- End date -- ?>
-	<td class="left" colspan="2">
-	<!--
-		<select name="end_month">
-			<?php print_month_option_list( $t_filter['end_month'] ) ?>
-		</select>
-		<select name="end_day">
-			<?php print_day_option_list( $t_filter['end_day'] ) ?>
-		</select>
-		<select name="end_year">
-			<?php print_year_option_list( $t_filter['end_year'] ) ?>
-		</select>
-	-->
-	</td>
-
-	<?php # -- SUBMIT button -- ?>
-	<td class="right" colspan="2">
-		<input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
+<?php filter_draw_selection_area( $f_page_number ); ?>
 <?php # -- ====================== end of FILTER FORM ========================= -- ?>
 
 <?php # -- ====================== BUG LIST ========================= -- ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.41 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: print_all_bug_page_word.php,v 1.42 2004-02-05 00:34:38 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,6 +32,7 @@
 	$f_offset		= gpc_get_int( 'offset', 0 );
 	$f_export		= gpc_get_string( 'export' );
 	$f_show_flag	= gpc_get_bool( 'show_flag' );
+	$t_project_id 	= helper_get_current_project( );
 
 	# word or html export
 	if ( $f_type_page != 'html' ) {
@@ -54,161 +55,14 @@
 		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
 
-	# Load preferences
-	$f_show_category 		= $t_setting_arr[1];
-	$f_show_severity	 	= $t_setting_arr[2];
-	$f_show_status 			= $t_setting_arr[3];
-	$f_per_page 			= $t_setting_arr[4];
-	$f_highlight_changed 	= $t_setting_arr[5];
-	$f_hide_closed 			= $t_setting_arr[6];
-	$f_reporter_id 				= $t_setting_arr[7];
-	$f_handler_id 			= $t_setting_arr[8];
-	$f_sort 				= $t_setting_arr[9];
-	$f_dir		 			= $t_setting_arr[10];
-	$f_start_month			= $t_setting_arr[11];
-	$f_start_day 			= $t_setting_arr[12];
-	$f_start_year 			= $t_setting_arr[13];
-	$f_end_month 			= $t_setting_arr[14];
-	$f_end_day				= $t_setting_arr[15];
-	$f_end_year				= $t_setting_arr[16];
-	$f_hide_resolved 			= $t_setting_arr[18];
-
-	# Clean input
-	$c_offset 				= (integer)$f_offset;
-	$c_user_id				= (integer)$f_reporter_id;
-	$c_assign_id			= (integer)$f_handler_id;
-	$c_per_page				= (integer)$f_per_page;
-	$c_show_category		= addslashes( $f_show_category );
-	$c_show_severity		= addslashes( $f_show_severity );
-	$c_show_status			= addslashes( $f_show_status );
-	$c_search				= addslashes( $f_search );
-	$c_sort					= addslashes( $f_sort );
-
-	if ( 'DESC' == $f_dir ) {
-		$c_dir = 'DESC';
-	} else {
-		$c_dir = 'ASC';
-	}
-
-	# Limit reporters to only see their reported bugs
-	if ( ( ON == $g_limit_reporters ) &&
-		( !access_has_project_level( UPDATER ) ) ) {
-		$c_user_id = auth_get_current_user_id();
-	}
-
-	# Build our query string based on our viewing criteria
-
-	$query = 'SELECT DISTINCT *, UNIX_TIMESTAMP(last_updated) as last_updated, UNIX_TIMESTAMP(date_submitted) as date_submitted
-			 FROM $g_mantis_bug_table';
-
-	$t_project_id = helper_get_current_project();
-
-	# project selection
-	if ( ALL_PROJECTS == $t_project_id ) { # ALL projects
-		$t_access_level = current_user_get_field( 'access_level' );
-		$t_user_id = auth_get_current_user_id();
-
-		$t_pub = VS_PUBLIC;
-		$t_prv = VS_PRIVATE;
-		$query2 = "SELECT DISTINCT( p.id )
-			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
-			WHERE (p.enabled=1 AND
-				p.view_state='$t_pub') OR
-				(p.enabled=1 AND
-				p.view_state='$t_prv' AND
-				u.user_id='$t_user_id'  AND
-				u.project_id=p.id)
-			ORDER BY p.name";
-		$result2 = db_query( $query2 );
-		$project_count = db_num_rows( $result2 );
-
-		if ( 0 == $project_count ) {
-			$t_where_clause = ' WHERE 1=0';
-		} else {
-			$t_where_clause = ' WHERE (';
-			for ( $i=0;$i<$project_count;$i++ ) {
-				$row = db_fetch_array( $result2 );
-				extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-				$t_where_clause .= "(project_id='$v_id')";
-				if ( $i < $project_count - 1 ) {
-					$t_where_clause .= ' OR ';
-				}
-			} # end for
-			$t_where_clause .= ')';
-		}
-	} else {
-		$t_where_clause = " WHERE project_id='$t_project_id'";
-	}
-	# end project selection
-
-	if ( $f_reporter_id != 'any' ) {
-		$t_where_clause .= " AND reporter_id='$c_user_id'";
-	}
-
-	if ( 'none' == $f_handler_id ) {
-		$t_where_clause .= ' AND handler_id=0';
-	} else if ( $f_handler_id != 'any' ) {
-		$t_where_clause .= " AND handler_id='$c_assign_id'";
-	}
-
-	$t_clo_val = CLOSED;
-	if ( ( 'on' == $f_hide_closed  )&&( 'closed' != $f_show_status ) ) {
-		$t_where_clause = $t_where_clause." AND status<>'$t_clo_val'";
-	}
-
-	$t_resolved_val = RESOLVED;
-	if ( ( 'on' == $f_hide_resolved  )&&( 'resolved' != $f_show_status ) ) {
-		$t_where_clause = $t_where_clause." AND status<>'$t_resolved_val'";
-	}
-
-	if ( $f_show_category != 'any' ) {
-		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
-	}
-	if ( $f_show_severity != 'any' ) {
-		$t_where_clause = $t_where_clause." AND severity='$c_show_severity'";
-	}
-	if ( $f_show_status != 'any' ) {
-		$t_where_clause = $t_where_clause." AND status='$c_show_status'";
-	}
-
-	# Simple Text Search - Thnaks to Alan Knowles
-	if ( $f_search ) {
-		$t_columns_clause = " $g_mantis_bug_table.*";
-
-		$t_where_clause .= " AND ((summary LIKE '%$c_search%')
-							OR (description LIKE '%$c_search%')
-							OR (steps_to_reproduce LIKE '%$c_search%')
-							OR (additional_information LIKE '%$c_search%')
-							OR ($g_mantis_bug_table.id LIKE '%$c_search%')
-							OR ($g_mantis_bugnote_text_table.note LIKE '%$c_search%'))
-							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
-
-		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
-							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
-							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
-	} else {
-		$t_columns_clause = ' *';
-		$t_from_clause = " FROM $g_mantis_bug_table";
-	}
-
-	if ( is_blank( $c_sort ) ) {
-		$c_sort='last_updated';
-	}
-	$query  = 'SELECT DISTINCT '.$t_columns_clause.', UNIX_TIMESTAMP(last_updated) as last_updated, UNIX_TIMESTAMP(date_submitted) as date_submitted';
-	$query .= $t_from_clause;
-	$query .= $t_where_clause;
-
-	$query = $query." ORDER BY '$c_sort' $c_dir";
-	if ( $f_sort != 'priority' ) {
-		$query = $query.', priority DESC';
-	}
-
-	$query = $query." LIMIT $c_offset, $c_per_page";
-
-	# perform query
-	$result = db_query( $query );
-	$row_count = db_num_rows( $result );
+	# This is where we used to do the entire actual filter ourselves
+	$t_page_number = gpc_get_int( 'page_number', 1 );
+	$t_per_page = null;
+	$t_bug_count = null;
+	$t_page_count = null;
+	
+	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+	$row_count = sizeof( $result );
 
 ?>
 
@@ -236,9 +90,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	for( $j=0; $j < $row_count; $j++ ) {
 
 		# prefix bug data with v_
-		$row = db_fetch_array( $result );
+		extract( $result[$j], EXTR_PREFIX_ALL, 'v' );
 
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
 		# grab the bugnote count

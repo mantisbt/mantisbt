@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.72 2004-01-25 10:34:08 vboctor Exp $
+	# $Id: print_all_bug_page.php,v 1.73 2004-02-05 00:34:37 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,162 +44,19 @@
 	if ( $t_setting_arr[0] != $g_cookie_version ) {
 		print_header_redirect( 'view_all_set.php?type=0&amp;print=1' );
 	}
-
-	# Load preferences
-	$f_show_category 		= $t_setting_arr[1];
-	$f_show_severity	 	= $t_setting_arr[2];
-	$f_show_status 			= $t_setting_arr[3];
-	$f_per_page 			= $t_setting_arr[4];
 	$f_highlight_changed 	= $t_setting_arr[5];
-	$f_hide_closed 			= $t_setting_arr[6];
-	$f_reporter_id 			= $t_setting_arr[7];
-	$f_handler_id 			= $t_setting_arr[8];
 	$f_sort 				= $t_setting_arr[9];
 	$f_dir		 			= $t_setting_arr[10];
-	$f_start_month			= $t_setting_arr[11];
-	$f_start_day 			= $t_setting_arr[12];
-	$f_start_year 			= $t_setting_arr[13];
-	$f_end_month 			= $t_setting_arr[14];
-	$f_end_day				= $t_setting_arr[15];
-	$f_end_year				= $t_setting_arr[16];
-	$f_hide_resolved 		= $t_setting_arr[18];
-
-	# Clean input
-	$c_offset 				= (integer)$f_offset;
-	$c_user_id				= (integer)$f_reporter_id;
-	$c_assign_id			= (integer)$f_handler_id;
-	$c_per_page				= (integer)$f_per_page;
-	$c_show_category		= addslashes( $f_show_category );
-	$c_show_severity		= addslashes( $f_show_severity );
-	$c_show_status			= addslashes( $f_show_status );
-	$c_search				= addslashes( $f_search );
-	$c_sort					= addslashes( $f_sort );
-
-	if ( 'DESC' == $f_dir ) {
-		$c_dir = 'DESC';
-	} else {
-		$c_dir = 'ASC';
-	}
-
-	# Limit reporters to only see their reported bugs
-	if ( ( ON == $g_limit_reporters ) &&
-		( !access_has_project_level( UPDATER ) ) ) {
-		$c_user_id = auth_get_current_user_id();
-	}
-
-	# Build our query string based on our viewing criteria
-
-	$query = 'SELECT DISTINCT *, UNIX_TIMESTAMP(last_updated) as last_updated
-			 FROM $g_mantis_bug_table';
-
 	$t_project_id = helper_get_current_project( );
 
-	# project selection
-	if ( ALL_PROJECTS == $t_project_id ) { # ALL projects
-		$t_access_level = current_user_get_field( 'access_level' );
-		$t_user_id = auth_get_current_user_id();
-
-		$t_pub = VS_PUBLIC;
-		$t_prv = VS_PRIVATE;
-		$query2 = "SELECT DISTINCT(p.id)
-			FROM $g_mantis_project_table p, $g_mantis_project_user_list_table u
-			WHERE (p.enabled=1 AND
-				p.view_state='$t_pub') OR
-				(p.enabled=1 AND
-				p.view_state='$t_prv' AND
-				u.user_id='$t_user_id'  AND
-				u.project_id=p.id)
-			ORDER BY p.name";
-		$result2 = db_query( $query2 );
-		$project_count = db_num_rows( $result2 );
-
-		if ( 0 == $project_count ) {
-			$t_where_clause = ' WHERE 1=0';
-		} else {
-			$t_where_clause = ' WHERE (';
-			for ( $i=0;$i<$project_count;$i++ ) {
-				$row = db_fetch_array( $result2 );
-				extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-				$t_where_clause .= "(project_id='$v_id')";
-				if ( $i < $project_count - 1 ) {
-					$t_where_clause .= ' OR ';
-				}
-			} # end for
-			$t_where_clause .= ')';
-		}
-	} else {
-		$t_where_clause = " WHERE project_id='$t_project_id'";
-	}
-	# end project selection
-
-	if ( $c_user_id != 'any' ) {
-		$t_where_clause .= " AND reporter_id='$c_user_id'";
-	}
-
-	if ( 'none' == $f_handler_id ) {
-		$t_where_clause .= ' AND handler_id=0';
-	} else if ( $f_handler_id != 'any' ) {
-		$t_where_clause .= " AND handler_id='$c_assign_id'";
-	}
-
-	$t_closed_val = CLOSED;
-	if ( ( 'on' == $f_hide_closed ) && ( $t_closed_val != $f_show_status ) ) {
-		$t_where_clause = $t_where_clause." AND status<>'$t_closed_val'";
-	}
-
-	$t_resolved_val = RESOLVED;
-	if ( ( 'on' == $f_hide_resolved ) && ( $t_resolved_val != $f_show_status ) ) {
-		$t_where_clause = $t_where_clause." AND status<>'$t_resolved_val'";
-	}
-
-	if ( $f_show_category != 'any' ) {
-		$t_where_clause = $t_where_clause." AND category='$c_show_category'";
-	}
-	if ( $f_show_severity != 'any' ) {
-		$t_where_clause = $t_where_clause." AND severity='$c_show_severity'";
-	}
-	if ( $f_show_status != 'any' ) {
-		$t_where_clause = $t_where_clause." AND status='$c_show_status'";
-	}
-
-	# Simple Text Search - Thnaks to Alan Knowles
-	if ( $f_search ) {
-		$t_columns_clause = " $g_mantis_bug_table.*";
-
-		$t_where_clause .= " AND ((summary LIKE '%$c_search%')
-							OR (description LIKE '%$c_search%')
-							OR (steps_to_reproduce LIKE '%$c_search%')
-							OR (additional_information LIKE '%$c_search%')
-							OR ($g_mantis_bug_table.id LIKE '%$c_search%')
-							OR ($g_mantis_bugnote_text_table.note LIKE '%$c_search%'))
-							AND $g_mantis_bug_text_table.id = $g_mantis_bug_table.bug_text_id";
-
-		$t_from_clause = " FROM $g_mantis_bug_table, $g_mantis_bug_text_table
-							LEFT JOIN $g_mantis_bugnote_table      ON $g_mantis_bugnote_table.bug_id  = $g_mantis_bug_table.id
-							LEFT JOIN $g_mantis_bugnote_text_table ON $g_mantis_bugnote_text_table.id = $g_mantis_bugnote_table.bugnote_text_id ";
-	} else {
-		$t_columns_clause = ' *';
-		$t_from_clause = " FROM $g_mantis_bug_table";
-	}
-
-	if ( is_blank( $c_sort ) ) {
-		$c_sort='last_updated';
-	}
-	$query  = 'SELECT DISTINCT '.$t_columns_clause.', UNIX_TIMESTAMP(last_updated) as last_updated';
-	$query .= $t_from_clause;
-	$query .= $t_where_clause;
-
-	$query = $query." ORDER BY '$c_sort' $c_dir";
-	if ( $f_sort != 'priority' ) {
-		$query = $query.', priority DESC';
-	}
-
-	$query = $query." LIMIT $c_offset, $c_per_page";
-
-	# perform query
-	$result = db_query( $query );
-	$row_count = db_num_rows( $result );
+	# This replaces the actual search that used to be here
+	$f_page_number = gpc_get_int( 'page_number', 1 );
+	$t_per_page = null;
+	$t_bug_count = null;
+	$t_page_count = null;
+	
+	$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+	$row_count = sizeof( $result );
 
 	# for export
 	$t_show_flag = gpc_get_int( 'show_flag', 0 );
@@ -216,6 +73,8 @@
 
 <br />
 
+<?php filter_draw_selection_area( $f_page_number, false ); ?>
+
 <form method="post" action="view_all_set.php">
 <input type="hidden" name="type" value="1" />
 <input type="hidden" name="print" value="1" />
@@ -224,87 +83,6 @@
 <input type="hidden" name="dir" value="<?php echo $f_dir ?>" />
 
 <table class="width100">
-<tr>
-	<td class="print">
-		<?php echo lang_get( 'search' ) ?>
-	</td>
-	<td class="print">
-		<?php echo lang_get( 'reporter' ) ?>
-	</td>
-	<td class="print">
-		<?php echo lang_get( 'assigned_to' ) ?>
-	</td>
-	<td class="print">
-		<?php echo lang_get( 'category' ) ?>
-	</td>
-	<td class="print">
-		<?php echo lang_get( 'severity' ) ?>
-	</td>
-	<td class="print">
-		<?php echo lang_get( 'status' ) ?>
-	</td>
-	<td class="print">
-		<?php echo lang_get( 'show' ) ?>
-	</td>
-	<td class="print">
-		<?php echo lang_get( 'changed' ) ?>
-	</td>
-	<td class="print">
-		<?php echo lang_get( 'hide_status' ) ?>
-	</td>
-</tr>
-<tr>
-	<td>
-	    <input type="text" name="search" size="15" value="<?php echo $f_search; ?>" />
-	</td>
-	<td>
-		<select name="reporter_id">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_reporter_option_list( $f_reporter_id ) ?>
-		</select>
-	</td>
-	<td>
-		<select name="handler_id">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="none" <?php check_selected( $f_handler_id, 'none' ); ?>><?php echo lang_get( 'none' ) ?></option>
-			<option value="any"></option>
-			<?php print_assign_to_option_list( $f_handler_id ) ?>
-		</select>
-	</td>
-	<td>
-		<select name="show_category">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_category_option_list( $f_show_category ) ?>
-		</select>
-	</td>
-	<td>
-		<select name="show_severity">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_enum_string_option_list( 'severity', $f_show_severity ) ?>
-		</select>
-	</td>
-	<td>
-		<select name="show_status">
-			<option value="any"><?php echo lang_get( 'any' ) ?></option>
-			<option value="any"></option>
-			<?php print_enum_string_option_list( 'status', $f_show_status ) ?>
-		</select>
-	</td>
-	<td>
-		<input type="text" name="per_page" size="3" maxlength="7" value="<?php echo $f_per_page ?>" />
-	</td>
-	<td>
-		<input type="text" name="highlight_changed" size="3" maxlength="7" value="<?php echo $f_highlight_changed ?>" />
-	</td>
-	<td>
-		<input type="checkbox" name="hide_resolved" <?php check_checked( $f_hide_resolved, 'on' ); ?> />&nbsp;<?PHP echo lang_get( 'filter_resolved' ); ?>
-		<input type="checkbox" name="hide_closed" <?php check_checked( $f_hide_closed, 'on' ); ?> />&nbsp;<?PHP echo lang_get( 'filter_closed' ); ?>
-	</td>
-</tr>
-
 <?php
 	#<SQLI> Excel & Print export
 	#$f_bug_array stores the number of the selected rows
@@ -354,9 +132,6 @@
 				'<img src="' . $t_icon_path . $t_icon[3] . '" border="0" align="absmiddle" alt="' . $t_icon[4] . '"></a> ';
 		}
 ?>
-	</td>
-	<td class="right">
-		<input type="submit" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
 </tr>
 <?php #<SQLI> ?>
@@ -428,8 +203,7 @@
 <?php
 	for( $i=0; $i < $row_count; $i++ ) {
 		# prefix bug data with v_
-		$row = db_fetch_array( $result );
-		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		extract( $result[$i], EXTR_PREFIX_ALL, 'v' );
 
 		$v_summary = string_display_links( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
