@@ -4,7 +4,6 @@ Mantis ChangeLog
 
 These two will probably be removed before release:
  * Added custom attributes for the 7 ones in config_inc.php : priority, severity, status (with colors), etc... Define it in manage_proj_menu_page.php ; implementation has been thought in a 'per project Settings' conception, but only available for all projects right now.
- * Enhancement: partial support to "Publish Bugs".  A user can publish a bug by generating a URL for it which includes CRC checksum, this link can then be used to open this bug even if the user is not logged into Mantis or does not even have an account.
 
  * Behaviour change: made 'normal' the default priority for new bugs
  * Behaviour change: Merged default/config_inc1.php and default/config_inc2.php in config_defaults_inc.php

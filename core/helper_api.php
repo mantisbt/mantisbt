@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.28 2002-11-27 03:07:25 jfitzell Exp $
+	# $Id: helper_api.php,v 1.29 2002-12-17 22:30:42 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -15,13 +15,6 @@
 
 	# These are miscellaneous functions to help the package
 
-	# --------------------
-	# Calculates the CRC given bug id and calling file name (use __FILE__).
-	# It uses a configuration variable as a seed.
-	function helper_calc_crc ( $p_bug_id, $p_file ) {
-		$t_crc_str = sprintf("%s%s%07d", config_get( 'admin_crypt_word' ), basename($p_file), (integer)$p_bug_id);
-		return crc32($t_crc_str);
-	}
 	# --------------------
 	# alternate color function
 	#  If no index is given, continue alternating based on the last index given

@@ -6,53 +6,30 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.16 2002-12-17 11:35:29 jfitzell Exp $
+	# $Id: bug_view_advanced_page.php,v 1.17 2002-12-17 22:30:41 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php # Login check is delayed, since this page can be viewed with no login (CRC needed) ?>
+<?php login_cookie_check() ?>
 <?php
-	# @@@@ Print - still needs to be implemented for published defects
-	# @@@@ Simple - still needs to be implemented for published defects
-	# @@@@ Bug History - consider logging the fact that defect was published and by who.
-
 	$f_bug_id		= gpc_get_int( 'f_bug_id' );
-	$f_check		= gpc_get_string( 'f_check', '' );
 	$f_history		= gpc_get_bool( 'f_history' );
 
 	if ( SIMPLE_ONLY == config_get( 'show_view' ) ) {
-		$t_simple_url = 'bug_view_page.php?f_bug_id=' . $f_bug_id;
-
-		if ( !is_blank( $f_check ) ) {
-			$t_simple_url .= '&amp;f_check=' . $f_check;
-		}
-
-		print_header_redirect ( $t_simple_url );
+		print_header_redirect ( 'bug_view_page.php?f_bug_id=' . $f_bug_id );
 	}
 
-	if ( !is_blank( $f_check ) ) {
-		if ( $f_check != helper_calc_crc( $f_bug_id, __FILE__ ) ) {
-		  access_denied();
-		}
-	}
-	else
-	{
-		login_cookie_check();
-		project_access_check( $f_bug_id );
-		access_bug_check( $f_bug_id );
-	}
+	project_access_check( $f_bug_id );
+
+	# if bug is private, make sure user can view private bugs
+	access_bug_check( $f_bug_id );
 
 	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
 
 	compress_start();
 
 	print_page_top1();
-
-	if ( is_blank( $f_check ) ) {
-		print_page_top2();
-	} else {
-		print_page_top2a();
-	}
+	print_page_top2();
 ?>
 
 <br />
@@ -64,22 +41,11 @@
 	</td>
 	<td class="right" colspan="2">
 
-<?php if ( is_blank( $f_check ) ) { ?>
-	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id . '&amp;f_check=' . helper_calc_crc( $f_bug_id, __FILE__ ), lang_get( 'publish' ) )?></span>
-<?php }?>
-
-<?php if ( is_blank( $f_check ) && ( BOTH == config_get( 'show_view' ) ) ) { ?>
+<?php if ( BOTH == config_get( 'show_view' ) ) { ?>
 		<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_bug_id=' . $f_bug_id, lang_get( 'view_simple_link' ) ) ?></span>
 <?php } ?>
 
-<?php
-	if ( !is_blank( $f_check ) ) {
-		$t_check = '&amp;f_check=' . $f_check;
-	} else {
-		$t_check = '';
-	}
-?>
-	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id . $t_check . '&amp;f_history=1#history', lang_get( 'bug_history' ) ) ?></span>
+	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id . '&amp;f_history=1#history', lang_get( 'bug_history' ) ) ?></span>
 	<span class="small"><?php print_bracket_link( 'print_bug_page.php?f_bug_id=' . $f_bug_id, lang_get( 'print' ) ) ?></span>
 	</td>
 </tr>

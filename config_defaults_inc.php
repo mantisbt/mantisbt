@@ -852,11 +852,6 @@
 	# Only turn this option on for debugging
 	$g_stop_on_errors		= OFF;
 
-	# seed to be used to generate CRC checksums for view-only-defects
-	# Assign to this variable a keyword that won't change.  If this value changes
-	# all hyper links to defects will be not work.
-	$g_admin_crypt_word		= $g_path;
-
 	###########################
 	# Experimental features
 	###########################
