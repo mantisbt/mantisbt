@@ -4,10 +4,11 @@ Mantis
 
  * Fixed missing closing span tag in view_bug_*page.php.
  * Removed site_settings link in print_manage_doc_menu().
+ * Fixed advanced summaries (jpgraph) for general statistics for all projects
 
 01.23.2002  -   0.17.0
 
- * Fixed poential problems with proxies and HTTP_REFERER not being properly sent.
+ * Fixed potential problems with proxies and HTTP_REFERER not being properly sent.
  * Fixed bugnote editing to be unavailable when bug is resolved or closed.
  * Fixed viewing bugs to automatically switch projects if you view a bug from another project (often done through a link).
  * Fixed file uploads to report an error when a blank file is uploaded.
@@ -16,6 +17,7 @@ Mantis
  * Fixed admin_upgrade.php to honor the $g_php global.
  * Fixed access checks to see if viewer has permission to view the bug.
  * Fixed project list drop down to work even if project user list is empty.
+ * Fixed advaced summary compatibility with the latest JPGraph release (1.4)
  * Modified many files for extensive use of CSS.
  * Modified BLOB field to LONGBLOB.
  * Modified bug action buttons to be more consistent.
