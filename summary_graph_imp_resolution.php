@@ -1,7 +1,7 @@
 <?
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# <SQLI>
@@ -12,7 +12,7 @@
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.
 	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {
-		print_header_redirect( 'main_page.php' );
+		access_denied();
 	}
 
 	#checking if it's a per project statistic or all projects

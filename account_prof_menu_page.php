@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.21 2002-10-20 22:52:52 jfitzell Exp $
+	# $Id: account_prof_menu_page.php,v 1.22 2002-12-23 01:51:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,7 +18,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( REPORTER );
+	check_access( config_get( 'add_profile_threshold' ) );
 
 	# protected account check
 	current_user_ensure_unprotected();

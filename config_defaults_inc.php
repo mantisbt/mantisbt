@@ -1,7 +1,7 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the files README and LICENSE for details
 
@@ -195,8 +195,8 @@
 	$g_email_set_category		= OFF;
 
 	# --- email separator and padding ------------
-	$g_email_separator1		= '=======================================================================';
-	$g_email_separator2		= '-----------------------------------------------------------------------';
+	$g_email_separator1		= str_pad('', 70, '=');
+	$g_email_separator2		= str_pad('', 70, '-');
 	$g_email_padding_length	= 28;
 
 	#############################
@@ -484,6 +484,9 @@
 
 	# --- threshold -------------------
 
+	# access level needed to report a bug
+	$g_report_bug_threshold			= REPORTER;
+
 	# access level needed to update bugs
 	$g_update_bug_threshold			= UPDATER;
 
@@ -529,6 +532,22 @@
 	# See also: $g_upload_project_file_threshold, $g_allow_file_upload,
 	#			$g_allow_reporter_upload
 	$g_upload_bug_file_threshold	= REPORTER;
+
+	# Add bugnote threshold
+	$g_add_bugnote_threshold = REPORTER;
+
+	# Update bugnote threshold (assuming that
+	$g_update_bugnote_threshold = REPORTER;
+
+	# Add profile threshold
+	$g_add_profile_threshold = REPORTER;
+
+	# Threshold needed to view project documentation
+	$g_view_proj_doc_threshold = ANYBODY;
+
+	# Threshold needed to manage a project: add users to the project, edit project
+	# details (not to add/delete projects), upload documentation, news, ...etc.
+	$g_manage_project_threshold = MANAGER;
 
 	# --- login method ----------------
 	# CRYPT or CRYPT_FULL_SALT or PLAIN or MD5 or LDAP or BASIC_AUTH
@@ -877,4 +896,7 @@
 	#   There will be no upgrade path for this stuff as it is being developed.
 	#   So don't enable it now unless you're developing on it.
 	$g_use_experimental_custom_fields = OFF;
+
+	# Threshold needed to manage custom fields
+	$g_manage_custom_fields = ADMINISTRATOR;
 ?>

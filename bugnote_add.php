@@ -1,16 +1,16 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.28 $
-	# $Author: jfitzell $
-	# $Date: 2002-11-27 02:45:20 $
+	# $Revision: 1.29 $
+	# $Author: vboctor $
+	# $Date: 2002-12-23 01:51:55 $
 	#
-	# $Id: bugnote_add.php,v 1.28 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: bugnote_add.php,v 1.29 2002-12-23 01:51:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,7 +24,7 @@
 	$f_bugnote_text = gpc_get_string( 'f_bugnote_text', '' );
 
 	project_access_check( $f_bug_id );
-	check_access( REPORTER );
+	check_access( config_get( 'add_bugnote_threshold' ) );
 	bug_ensure_exists( $f_bug_id );
 
 	$f_bugnote_text = trim( $f_bugnote_text );

@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_vote_add.php,v 1.15 2002-10-30 10:42:07 jfitzell Exp $
+	# $Id: bug_vote_add.php,v 1.16 2002-12-23 01:51:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php die('Not in use.'); ?>
@@ -16,7 +16,7 @@
 	$f_bug_id = gpc_get_int( 'f_bug_id' );
 
 	project_access_check( $f_bug_id );
-	check_access( REPORTER );
+	check_access( config_get( 'report_bug_threshold' ) );
 
 	$t_votes = bug_get_field( $f_bug_id, 'votes' );
 

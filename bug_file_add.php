@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.33 2002-12-17 11:35:28 jfitzell Exp $
+	# $Id: bug_file_add.php,v 1.34 2002-12-23 01:51:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,7 @@
 	}
 
 	project_access_check( $f_bug_id );
-	check_access( REPORTER );
+	check_access( config_get( 'upload_bug_file_threshold' ) );
 
 	if ( !is_uploaded_file( $f_file['tmp_name'] ) || 0 == $f_file['size'] ) {
 		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );

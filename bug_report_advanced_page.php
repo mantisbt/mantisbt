@@ -1,12 +1,12 @@
 <?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
+	# Copyright (C) 2002 - 2003  Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.7 2002-12-17 11:35:28 jfitzell Exp $
+	# $Id: bug_report_advanced_page.php,v 1.8 2002-12-23 01:51:55 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,7 +24,7 @@
 		print_header_redirect ( 'bug_report_page.php' );
 	}
 
-	check_access( REPORTER );
+	check_access( config_get( 'report_bug_threshold' ) );
 
 	$f_build				= gpc_get_string( 'f_build', '' );
 	$f_platform				= gpc_get_string( 'f_platform', '' );

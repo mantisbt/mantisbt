@@ -8,7 +8,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( VIEWER );
+	check_access( config_get( 'view_proj_doc_threshold' ) );
 
 	# Select project files
 	$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
