@@ -31,7 +31,7 @@
 			FROM $g_mantis_news_table
 			ORDER BY id DESC
 			LIMIT $f_offset, $g_news_view_limit";
-	$result = db_mysql_query( $query );
+	$result = db_query( $query );
     $news_count = mysql_num_rows( $result );
 ?>
 

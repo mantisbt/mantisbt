@@ -20,7 +20,7 @@
     $query = "SELECT *
     		FROM $g_mantis_bug_table
     		WHERE id='$f_id'";
-    $result = db_mysql_query( $query );
+    $result = db_query( $query );
 	$row = mysql_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );
 

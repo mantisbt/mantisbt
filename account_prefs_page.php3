@@ -24,7 +24,7 @@
     $query = "SELECT *
     		FROM $g_mantis_user_pref_table
 			WHERE user_id='$u_id'";
-    $result = db_mysql_query($query);
+    $result = db_query($query);
 
     ## OOPS, No entry in the database yet.  Lets make one
     if ( mysql_num_rows( $result )==0 ) {
@@ -36,13 +36,13 @@
 	    		VALUES
 	    		(null, '$u_id',
 	    		'$g_default_advanced_report', '$g_default_advanced_view')";
-	    $result = db_mysql_query($query);
+	    $result = db_query($query);
 
 		### Rerun select query
 	    $query = "SELECT *
 	    		FROM $g_mantis_user_pref_table
 				WHERE user_id='$u_id'";
-	    $result = db_mysql_query($query);
+	    $result = db_query($query);
     }
 
     ### prefix data with u_

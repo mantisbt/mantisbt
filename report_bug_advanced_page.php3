@@ -21,7 +21,7 @@
 	$query = "SELECT id
 		FROM $g_mantis_user_table
 		WHERE cookie_string='$g_string_cookie_val'";
-    $result = db_mysql_query($query);
+    $result = db_query($query);
     $u_id = mysql_result( $result, 0 );
 ?>
 

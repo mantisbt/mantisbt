@@ -189,7 +189,7 @@
 	</tr>
 	<?
 		### perform query
-	    $result = db_mysql_query( $query );
+	    $result = db_query( $query );
 		$row_count = mysql_num_rows( $result );
 
 		for($i=0; $i < $row_count; $i++) {

@@ -21,7 +21,7 @@
 	$query = "SELECT id
 			FROM $g_mantis_user_table
 			WHERE cookie_string='$g_string_cookie_val'";
-	$result = db_mysql_query( $query );
+	$result = db_query( $query );
 	$t_user_id = mysql_result( $result, 0);
 
 	if ( !isset( $f_limit_view ) ) {
@@ -200,7 +200,7 @@
 	</tr>
 	<?
 		### perform query
-	    $result = db_mysql_query( $query );
+	    $result = db_query( $query );
 		$row_count = mysql_num_rows( $result );
 
 		for($i=0; $i < $row_count; $i++) {

@@ -32,12 +32,15 @@ To Do:
  * Added reopen bug dialog
  * Added $g_bug_reopen_page and removed $g_bug_reopen
  * Added bug_reopen_page.php3 and removed bug_reopen.php3
+ * Added resolve bug dialog
  * Added $g_bug_resolve_page and bug_resolve_page.php3
  * Modified the appearance of the advanced view and update
- * Split the account pref modifications into two spearate files:
+ * Split the account pref modifications into two separate files:
    account_prefs_update.php3 and account_prefs_reset.php3
  * Removed db_mysql_error()
- *
+ * Renamed db_mysql_connect() to db_connect()
+ * Renamed db_mysql_query() to db_query()
+ * Added several db_ functions in preparation for database abstraction
 
 12.20.2000	-	0.12.0
 

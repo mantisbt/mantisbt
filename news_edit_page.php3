@@ -25,7 +25,7 @@
 	$query = "SELECT *
 		FROM $g_mantis_news_table
 		WHERE id='$f_id'";
-    $result = db_mysql_query( $query );
+    $result = db_query( $query );
 	$row = mysql_fetch_array( $result );
 	if ( $row ) {
     	extract( $row, EXTR_PREFIX_ALL, "v" );

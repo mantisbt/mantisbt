@@ -12,7 +12,7 @@
 	$query = "SELECT *
 			FROM $g_mantis_user_table
 			WHERE username='$f_username'";
-	$result = db_mysql_query( $query );
+	$result = db_query( $query );
 	$row = mysql_fetch_array( $result );
 
 	if ( $row ) {

@@ -16,7 +16,7 @@
 	###########################################################################
 
 	###########################################################################
-	# MySQL
+	# Database : MYSQL for now
 	###########################################################################
 	### --------------------
 	# connect to database
@@ -29,7 +29,7 @@
 		$t_result = mysql_select_db( $p_database );
 	}
 	### --------------------
-	# connect to database
+	# persistent connect to database
 	function db_pconnect($p_hostname="localhost", $p_username="root",
 						$p_password="", $p_database="mantis",
 						$p_port=3306 ) {
@@ -42,7 +42,7 @@
 	# execute query, requires connection to be opened,
 	# goes to error page if error occurs
 	# Use this when you don't want to handler an error yourself
-	function db_mysql_query( $p_query ) {
+	function db_query( $p_query ) {
 		global $g_mysql_error_page;
 
 		$t_result = mysql_query( $p_query );
@@ -57,10 +57,6 @@
 	### --------------------
 	function db_select_db( $p_db_name ) {
 		mysql_select_db( $p_db_name );
-	}
-	### --------------------
-	function db_query( $p_query ) {
-		return mysql_query( $p_query );
 	}
 	### --------------------
 	function db_num_rows( $p_result ) {
@@ -147,7 +143,7 @@
 		$query = "SELECT username
 				FROM $g_mantis_user_table
 				WHERE cookie_string='$g_string_cookie_val'";
-		$result = db_mysql_query( $query );
+		$result = db_query( $query );
 		$t_username = mysql_result( $result, 0 );
 
 		$t_now = date("d-m-y h:m T");
@@ -263,7 +259,7 @@
 		$query = "SELECT id, headline
 			FROM $g_mantis_news_table
 			ORDER BY id DESC";
-	    $result = db_mysql_query( $query );
+	    $result = db_query( $query );
 	    $news_count = mysql_num_rows( $result );
 
 		for ($i=0;$i<$news_count;$i++) {
@@ -308,7 +304,7 @@
 	    $query = "SELECT username, email
 	    		FROM $g_mantis_user_table
 	    		WHERE id='$p_user_id'";
-	    $result = db_mysql_query( $query );
+	    $result = db_query( $query );
 	    if ( mysql_num_rows( $result )>0 ) {
 			$t_handler_username	= mysql_result( $result, 0, 0 );
 			$t_handler_email	= mysql_result( $result, 0, 1 );
@@ -343,7 +339,7 @@
 			FROM $g_mantis_user_profile_table
 			WHERE user_id='$p_id'
 			ORDER BY id DESC";
-	    $result = db_mysql_query( $query );
+	    $result = db_query( $query );
 	    $profile_count = mysql_num_rows( $result );
 
 		PRINT "<option value=\"\">";
@@ -373,7 +369,7 @@
 
 		$query = "SHOW FIELDS
 				FROM $g_mantis_bug_table";
-		$result = db_mysql_query( $query );
+		$result = db_query( $query );
 		$entry_count = mysql_num_rows( $result );
 		for ($i=0;$i<$entry_count;$i++) {
 			$row = mysql_fetch_array( $result );
@@ -512,7 +508,7 @@
 			$query = "SELECT enabled
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_mysql_query( $query );
+			$result = db_query( $query );
 			$row = mysql_fetch_array( $result );
 			if ( $row ) {
 				$t_enabled = $row["enabled"];
@@ -573,7 +569,7 @@
 			$query = "SELECT enabled
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_mysql_query( $query );
+			$result = db_query( $query );
 			$row = mysql_fetch_array( $result );
 			if ( $row ) {
 				$t_enabled = $row["enabled"];
@@ -623,7 +619,7 @@
 			$query = "SELECT $p_field_name
 					FROM $g_mantis_user_table
 					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_mysql_query( $query );
+			$result = db_query( $query );
 			return mysql_result( $result, 0 );
 		}
 		else {
@@ -647,7 +643,7 @@
 			$query = "SELECT $p_field_name
 					FROM $g_mantis_user_pref_table
 					WHERE user_id='$t_id'";
-			$result = db_mysql_query( $query );
+			$result = db_query( $query );
 			return mysql_result( $result, 0 );
 		}
 		else {
@@ -662,7 +658,7 @@
 		$query = "SELECT COUNT(id)
 					FROM $g_mantis_bugnote_table
 					WHERE bug_id ='$p_id'";
-		$result = db_mysql_query( $query );
+		$result = db_query( $query );
 		return mysql_result( $result, 0 );
 	}
 	### --------------------
@@ -713,7 +709,7 @@
 			$query = "SELECT $p_table_field
 					FROM $p_table_name
 					WHERE user_id='$u_id'";
-			$result = db_mysql_query( $query );
+			$result = db_query( $query );
 
 			if ( mysql_num_rows( $result ) > 0 ) {
 				return mysql_result( $result, 0 );

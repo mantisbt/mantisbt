@@ -47,7 +47,7 @@
     		FROM $g_mantis_user_table
 			ORDER BY '$f_sort' $f_dir";
 
-    $result = db_mysql_query($query);
+    $result = db_query($query);
 	$user_count = mysql_num_rows($result);
 ?>
 

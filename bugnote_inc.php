@@ -15,7 +15,7 @@
 			FROM $g_mantis_bugnote_table
 			WHERE bug_id='$f_id'
 			ORDER BY date_submitted $g_bugnote_order";
-	$result = db_mysql_query($query);
+	$result = db_query($query);
 	$num_notes = mysql_num_rows($result);
 ?>
 
@@ -50,7 +50,7 @@
 		$query = "SELECT note
 				FROM $g_mantis_bugnote_text_table
 				WHERE id='$v3_bugnote_text_id'";
-		$result2 = db_mysql_query($query);
+		$result2 = db_query($query);
 		$v3_note = mysql_result( $result2, 0);
 ?>
 <tr height=5 bgcolor=<? echo $g_white_color ?>>
