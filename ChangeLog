@@ -1,5 +1,7 @@
 Mantis
 
+ * Fixed sorting in buglist. Bugs with high priority is now always first.
+
 07.29.2001  -   0.15.3
 
  * Added wordwrap() to text formatting in email messages.  Affects description and bugnotes.
