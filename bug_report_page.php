@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.36 2004-04-06 19:38:32 prescience Exp $
+	# $Id: bug_report_page.php,v 1.37 2004-05-10 14:06:08 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,6 +32,7 @@
 
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
+	$f_product_version		= gpc_get_string( 'product_version', '' );
 	$f_category				= gpc_get_string( 'category', '' );
 	$f_reproducibility		= gpc_get_int( 'reproducibility', 0 );
 	$f_severity				= gpc_get_int( 'severity', config_get( 'default_bug_severity' ) );
