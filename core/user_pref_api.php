@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.16 2004-04-08 02:42:27 prescience Exp $
+	# $Id: user_pref_api.php,v 1.17 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# User Preferences API
-	###########################################################################
+	### User Preferences API ###
 
 	#===================================
 	# Preference Structure Definition
@@ -81,7 +79,7 @@
 	#########################################
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
-	#
+
 	$g_cache_user_pref = array();
 
 	# --------------------
@@ -179,24 +177,21 @@
 
 		$t_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 
-		$t_vars = get_object_vars( $p_prefs );
-		$t_values = array();
+		$t_vars		= get_object_vars( $p_prefs );
+		$t_values	= array();
 
 		foreach ( $t_vars as $var => $val ) {
 			array_push( $t_values, '\'' . db_prepare_string( $p_prefs->$var ) . '\'' );
 		}
 
-		$t_vars_string = implode( ', ', array_keys( $t_vars ) );
-		$t_values_string = implode( ', ', $t_values );
+		$t_vars_string		= implode( ', ', array_keys( $t_vars ) );
+		$t_values_string	= implode( ', ', $t_values );
 
-	    $query = "INSERT
-				  INTO $t_user_pref_table
-				    (user_id, project_id,
-					  $t_vars_string)
+	    $query = "INSERT INTO $t_user_pref_table
+				    (user_id, project_id, $t_vars_string)
 				  VALUES
-				    ('$c_user_id', '$c_project_id',
-					  $t_values_string)";
-		db_query($query);
+				    ('$c_user_id', '$c_project_id', $t_values_string)";
+		db_query( $query );
 
 		# db_query() errors on failure so:
 		return true;
@@ -212,9 +207,8 @@
 
 		user_ensure_unprotected( $p_user_id );
 
-		$t_user_pref_table 	= config_get( 'mantis_user_pref_table' );
-
-		$t_vars = get_object_vars( $p_prefs );
+		$t_user_pref_table	= config_get( 'mantis_user_pref_table' );
+		$t_vars				= get_object_vars( $p_prefs );
 
 		$t_pairs = array();
 
@@ -226,8 +220,8 @@
 
 	    $query = "UPDATE $t_user_pref_table
 				  SET $t_pairs_string
-				  WHERE user_id = '$c_user_id' AND project_id = '$c_project_id'";
-		db_query($query);
+				  WHERE user_id='$c_user_id' AND project_id='$c_project_id'";
+		db_query( $query );
 
 		user_pref_clear_cache( $p_user_id, $p_project_id );
 
@@ -246,10 +240,9 @@
 
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
-		$query = "DELETE
-				  FROM $t_user_pref_table
-				  WHERE user_id='$c_user_id'
-				    AND project_id='$c_project_id'";
+		$query = "DELETE FROM $t_user_pref_table
+				  WHERE user_id='$c_user_id' AND
+				  		project_id='$c_project_id'";
 		db_query( $query );
 
 		user_pref_clear_cache( $p_user_id, $p_project_id );
@@ -266,14 +259,13 @@
 	#  call user_pref_delete() for each one and the code is short so that's
 	#  what we do
 	function user_pref_delete_all( $p_user_id ) {
-		$c_user_id		= db_prepare_int( $p_user_id );
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		user_ensure_unprotected( $p_user_id );
 
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
-		$query = "DELETE
-				  FROM $t_user_pref_table
+		$query = "DELETE FROM $t_user_pref_table
 				  WHERE user_id='$c_user_id'";
 		db_query( $query );
 
@@ -315,9 +307,8 @@
 			}
 		}
 
-		$t_row_keys = array_keys( $row );
-
-		$t_vars = get_object_vars( $t_prefs );
+		$t_row_keys	= array_keys( $row );
+		$t_vars		= get_object_vars( $t_prefs );
 
 		# Check each variable in the class
 		foreach ( $t_vars as $var => $val ) {

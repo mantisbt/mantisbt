@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.34 2004-04-08 16:46:09 prescience Exp $
+	# $Id: authentication_api.php,v 1.35 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Authentication API
-	###########################################################################
+	### Authentication API ###
 
 	#===================================
 	# Boolean queries and ensures
@@ -23,7 +21,7 @@
 	#  If there is no user logged in, redirect to the login page
 	#  If parameter is given it is used as a URL to redirect to following
 	#   successful login.  If none is given, the URL of the current page is used
-	function auth_ensure_user_authenticated( $p_return_page='' ) {
+	function auth_ensure_user_authenticated( $p_return_page = '' ) {
 		if ( !php_version_at_least( '4.1.0' ) ) {
 			global $_SERVER;
 		}
@@ -35,8 +33,8 @@
 			if ( OFF == current_user_get_field( 'enabled' ) ) {
 				print_header_redirect( 'logout_page.php' );
 			}
-		} else {				# not logged in
-			if ( '' == $p_return_page ) {
+		} else { # not logged in
+			if ( is_blank( $p_return_page ) ) {
 				$p_return_page = $_SERVER['REQUEST_URI'];
 			}
 			$p_return_page = string_url( $p_return_page );
@@ -105,7 +103,7 @@
 		$t_anon_account = config_get( 'anonymous_account' );
 		$t_anon_allowed = config_get( 'allow_anonymous_login' );
 		# check for anonymous login
-		if ( !( ON == $t_anon_allowed && $t_anon_account == $p_username ) ) {
+		if ( !( ( ON == $t_anon_allowed ) && ( $t_anon_account == $p_username)  ) ) {
 			# anonymous login didn't work, so check the password
 
 			if ( !auth_does_password_match( $t_user_id, $p_password ) ) {
@@ -129,9 +127,7 @@
 	# Returns true on success, false otherwise
 	function auth_logout() {
 		auth_clear_cookies();
-
 		helper_clear_pref_cookies();
-
 		return true;
 	}
 
@@ -149,10 +145,8 @@
 			return ldap_authenticate( $p_user_id, $p_test_password );
 		}
 
-		$t_password = user_get_field( $p_user_id, 'password' );
-
-		$t_login_methods = Array(MD5, CRYPT, PLAIN);
-
+		$t_password			= user_get_field( $p_user_id, 'password' );
+		$t_login_methods	= Array(MD5, CRYPT, PLAIN);
 		foreach ( $t_login_methods as $t_login_method ) {
 
 			# pass the stored password in as the salt
@@ -252,7 +246,7 @@
 	# The string returned should be 64 characters in length
 	function auth_generate_cookie_string() {
 		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
-		$t_val = md5( $t_val ).md5( time() );
+		$t_val = md5( $t_val ) . md5( time() );
 
 		return substr( $t_val, 0, 64 );
 	}
@@ -301,12 +295,11 @@
 			if ( ON == config_get( 'allow_anonymous_login' ) ) {
 				$query = sprintf('SELECT id, cookie_string FROM %s WHERE username = "%s"',
 						config_get( 'mantis_user_table' ), config_get( 'anonymous_account' ) );
-
 				$result = db_query( $query );
 
-                                if ( db_num_rows( $result ) == 1 ) {
-					$row = db_fetch_array( $result );
-					$t_cookie = $row['cookie_string'];
+				if ( 1 == db_num_rows( $result ) ) {
+					$row		= db_fetch_array( $result );
+					$t_cookie	= $row['cookie_string'];
 				}
 			}
 		}
@@ -344,7 +337,6 @@
 		$query = "SELECT id
 				  FROM $t_user_table
 				  WHERE cookie_string='$c_cookie_string'";
-
 		$result = db_query( $query );
 
 		# The cookie was invalid. Clear the cookie (to allow people to log in again)
@@ -356,7 +348,6 @@
 		}
 
 		$t_user_id = (int)db_result( $result );
-
 		$g_cache_current_user_id = $t_user_id;
 
 		return $t_user_id;

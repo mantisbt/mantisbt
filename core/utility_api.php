@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.12 2004-04-08 18:04:53 prescience Exp $
+	# $Id: utility_api.php,v 1.13 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
 	### Utility API ###
@@ -106,7 +106,8 @@
 	#  containing only whitespace, false otherwise
 	function is_blank( $p_var ) {
 		$p_var = trim( $p_var );
-		if ( empty( $p_var ) ) {
+		$str_len = strlen( $p_var );
+		if ( 0 == $str_len ) {
 			return true;
 		}
 		return false;

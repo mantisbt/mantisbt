@@ -6,19 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.44 2004-04-08 16:46:09 prescience Exp $
+	# $Id: helper_api.php,v 1.45 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Helper API
-	###########################################################################
+	### Helper API ###
 
-	# These are miscellaneous functions to help the package
+	# These are miscellaneous functions
 
 	# --------------------
 	# alternate color function
 	#  If no index is given, continue alternating based on the last index given
-	function helper_alternate_colors( $p_index=null, $p_odd_color, $p_even_color ) {
+	function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
 		static $t_index = 1;
 
 		if ( null !== $p_index ) {
@@ -50,18 +48,18 @@
 	# --------------------
 	# get the color string for the given status
 	function get_status_color( $p_status ) {
-		$t_status_enum_string = config_get( 'status_enum_string' );
-		$t_status_colors = config_get( 'status_colors' );
+		$t_status_enum_string	= config_get( 'status_enum_string' );
+		$t_status_colors		= config_get( 'status_colors' );
 
 		# This code creates the appropriate variable name
 		# then references that color variable
 		# You could replace this with a bunch of if... then... else
 		# statements
 
-		$t_color_str = 'closed';
-		$t_arr = explode_enum_string( $t_status_enum_string );
-		$t_arr_count = count( $t_arr );
-		for ( $i=0;$i<$t_arr_count;$i++ ) {
+		$t_color_str	= 'closed';
+		$t_arr			= explode_enum_string( $t_status_enum_string );
+		$t_arr_count	= count( $t_arr );
+		for ( $i=0; $i < $t_arr_count ;$i++ ) {
 			$elem_arr = explode_enum_arr( $t_arr[$i] );
 			if ( $elem_arr[0] == $p_status ) {
 				# now get the appropriate translation
@@ -86,9 +84,9 @@
 		$string_var = lang_get(  $p_enum_name.'_enum_string' );
 
 		# use the global enum string to search
-		$t_arr = explode_enum_string( $config_var );
-		$t_arr_count = count( $t_arr );
-		for ( $i=0;$i<$t_arr_count;$i++ ) {
+		$t_arr			= explode_enum_string( $config_var );
+		$t_arr_count	= count( $t_arr );
+		for ( $i=0; $i < $t_arr_count ;$i++ ) {
 			$elem_arr = explode_enum_arr( $t_arr[$i] );
 			if ( $elem_arr[0] == $p_val ) {
 				# now get the appropriate translation
@@ -98,7 +96,7 @@
 		return '@' . $p_val . '@';
 	}
 	# --------------------
-	# If $p_var and $p_val are euqal to each other then we echo SELECTED
+	# If $p_var and $p_val are euqal to each other then we PRINT SELECTED
 	# This is used when we want to know if a variable indicated a certain
 	# option element is selected
 	#
@@ -106,11 +104,11 @@
 	#  to the boolean value true
 	function check_selected( $p_var, $p_val=true ) {
 		if ( $p_var == $p_val ) {
-			echo ' selected="selected" ';
+			PRINT ' selected="selected" ';
 		}
 	}
 	# --------------------
-	# If $p_var and $p_val are equal to each other then we echo CHECKED
+	# If $p_var and $p_val are equal to each other then we PRINT CHECKED
 	# This is used when we want to know if a variable indicated a certain
 	# element is checked
 	#
@@ -118,7 +116,7 @@
 	#  to the boolean value true
 	function check_checked( $p_var, $p_val=true ) {
 		if ( $p_var == $p_val ) {
-			echo ' checked="checked" ';
+			PRINT ' checked="checked" ';
 		}
 	}
 
@@ -132,9 +130,7 @@
 		$t_timeout = config_get( 'long_process_timeout' );
 
 		set_time_limit( $t_timeout );
-
 		ignore_user_abort( $p_ignore_abort );
-
 		return $t_timeout;
 	}
 
@@ -202,21 +198,21 @@
 		#  be about 50% the width of the screen so that it doesn't become to hard
 		#  to read.
 
-		echo "<br />\n<div align=\"center\">\n";
+		PRINT "<br />\n<div align=\"center\">\n";
 		print_hr();
-		echo "\n$p_message\n";
+		PRINT "\n$p_message\n";
 
-		echo '<form method="post" action="' . $PHP_SELF . "\">\n";
+		PRINT '<form method="post" action="' . $PHP_SELF . "\">\n";
 
 		print_hidden_inputs( gpc_strip_slashes( $_POST ) );
 		print_hidden_inputs( gpc_strip_slashes( $_GET ) );
 
-		echo "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
-		echo '<br /><br /><input type="submit" value="' . $p_button_label . '" />';
-		echo "\n</form>\n";
+		PRINT "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
+		PRINT '<br /><br /><input type="submit" value="' . $p_button_label . '" />';
+		PRINT "\n</form>\n";
 
 		print_hr();
-		echo "</div>\n";
+		PRINT "</div>\n";
 		html_page_bottom1();
 		exit;
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.45 2004-04-08 16:46:09 prescience Exp $
+	# $Id: string_api.php,v 1.46 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,29 +14,27 @@
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'user_pref_api.php' );
 
-	###########################################################################
-	# String Processing API
-	###########################################################################
+	### String Processing API ###
 
 	### --------------------
 	# Preserve spaces at beginning of lines.
 	# Lines must be separated by \n rather than <br />
 	function string_preserve_spaces_at_bol( $p_string ) {
-		$lines = explode("\n", $p_string);
-		for ( $i = 0; $i < count( $lines ); $i++ ) {
-			$count = 0;
-			$prefix = '';
+		$lines = explode( "\n", $p_string );
+		$line_count = count( $lines );
+		for ( $i = 0; $i < $line_count; $i++ ) {
+			$count	= 0;
+			$prefix	= '';
 			while ( substr($lines[$i], $count, 1) == ' ' ) {
 			  $count++;
 			}
-			for ($j = 0; $j < $count; $j++) {
+			for ( $j = 0; $j < $count; $j++ ) {
 			  $prefix .= '&nbsp;';
 			}
 			$lines[$i] = $prefix . substr( $lines[$i], $count );
 
 		}
-		$result = implode( "\n", $lines );
-		return $result;
+		return implode( "\n", $lines );
 	}
 	# --------------------
 	# Prepare a string for display to HTML
@@ -55,7 +53,6 @@
 	#  bug references, and cvs references
 	function string_display_links( $p_string ) {
 		$p_string = string_display( $p_string );
-
 		$p_string = string_insert_hrefs( $p_string );
 		$p_string = string_process_bug_link( $p_string );
 		$p_string = string_process_cvs_link( $p_string );
@@ -76,7 +73,6 @@
 	#  links and cvs links
 	function string_email_links( $p_string ) {
 		$p_string = string_email( $p_string );
-
 		$p_string = string_process_bug_link( $p_string, false );
 		$p_string = string_process_cvs_link( $p_string, false );
 
@@ -87,6 +83,7 @@
 	# Process a string for display in a textarea box
 	function string_textarea( $p_string ) {
 		$p_string = htmlspecialchars( $p_string );
+
 		return $p_string;
 	}
 
@@ -94,6 +91,7 @@
 	# Process a string for display in a text box
 	function string_attribute( $p_string ) {
 		$p_string = htmlspecialchars( $p_string );
+
 		return $p_string;
 	}
 
@@ -101,6 +99,7 @@
 	# Process a string for inclusion in a URL as a GET parameter
 	function string_url( $p_string ) {
 		$p_string = rawurlencode( $p_string );
+
 		return $p_string;
 	}
 
@@ -140,7 +139,6 @@
 
 		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
 								$p_string, $t_matches, PREG_SET_ORDER );
-
 		$t_result = '';
 
 		if ( $p_include_anchor ) {
@@ -245,8 +243,7 @@
 	function string_restore_valid_html_tags( $p_string ) {
 		$t_html_valid_tags = config_get( 'html_valid_tags' );
 
-		if ( OFF === $t_html_valid_tags ||
-			 is_blank( $t_html_valid_tags ) ) {
+		if ( OFF === $t_html_valid_tags || is_blank( $t_html_valid_tags ) ) {
 			return $p_string;
 		}
 
@@ -282,7 +279,8 @@
 			}
 		}
 
-		switch ( config_get( 'show_' . $p_action ) ) {
+		$g_show_action = config_get( 'show_' . $p_action );
+		switch ( $g_show_action ) {
 			case BOTH:
 					if ( ( null !== $p_user_id ) &&
 						 ( ON == user_pref_get_pref( $p_user_id, 'advanced_' . $p_action ) ) ) {
@@ -300,10 +298,10 @@
 	# --------------------
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_view_link( $p_bug_id, $p_user_id=null ) {
+	function string_get_bug_view_link( $p_bug_id, $p_user_id = null ) {
 		if ( bug_exists( $p_bug_id ) ) {
-			$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-			$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
+			$t_summary	= string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
+			$t_status	= string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ) ) );
 			return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '" title="[' . $t_status . '] ' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 		} else {
 			return bug_format_id( $p_bug_id );
@@ -313,7 +311,7 @@
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_view_url( $p_bug_id, $p_user_id=null ) {
+	function string_get_bug_view_url( $p_bug_id, $p_user_id = null ) {
 		return string_get_bug_view_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id );
 	}
 
@@ -322,21 +320,21 @@
 	#  account for the user preference and site override
 	# The returned url includes the fully qualified domain, hence it is suitable to be included
 	# in emails.
-	function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id=null ) {
+	function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id = null ) {
 		return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id );
 	}
 
 	# --------------------
 	# return the name of a bug VIEW page for the user
 	#  account for the user preference and site override
-	function string_get_bug_view_page( $p_user_id=null ) {
+	function string_get_bug_view_page( $p_user_id = null ) {
 		return string_get_bug_page( 'view', $p_user_id );
 	}
 
 	# --------------------
 	# return an href anchor that links to a bug UPDATE page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_update_link( $p_bug_id, $p_user_id=null ) {
+	function string_get_bug_update_link( $p_bug_id, $p_user_id = null ) {
 		$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 		return '<a href="' . string_get_bug_update_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 	}
@@ -344,35 +342,35 @@
 	# --------------------
 	# return the name and GET parameters of a bug UPDATE page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_update_url( $p_bug_id, $p_user_id=null ) {
+	function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
 		return string_get_bug_update_page( $p_user_id ) . '?bug_id=' . bug_format_id( $p_bug_id );
 	}
 
 	# --------------------
 	# return the name of a bug UPDATE page for the user
 	#  account for the user preference and site override
-	function string_get_bug_update_page( $p_user_id=null ) {
+	function string_get_bug_update_page( $p_user_id = null ) {
 		return string_get_bug_page( 'update', $p_user_id );
 	}
 
 	# --------------------
 	# return an href anchor that links to a bug REPORT page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_report_link( $p_user_id=null ) {
+	function string_get_bug_report_link( $p_user_id = null ) {
 		return '<a href="' . string_get_bug_report_url( $p_user_id ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
 	}
 
 	# --------------------
 	# return the name and GET parameters of a bug REPORT page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_report_url( $p_user_id=null ) {
+	function string_get_bug_report_url( $p_user_id = null ) {
 		return string_get_bug_report_page( $p_user_id );
 	}
 
 	# --------------------
 	# return the name of a bug REPORT page for the user
 	#  account for the user preference and site override
-	function string_get_bug_report_page( $p_user_id=null ) {
+	function string_get_bug_report_page( $p_user_id = null ) {
 		return string_get_bug_page( 'report', $p_user_id );
 	}
 ?>

@@ -6,23 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.11 2004-03-03 13:31:40 vboctor Exp $
+	# $Id: constant_inc.php,v 1.12 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# CONFIGURATION VARIABLES
-	###########################################################################
-
-
-	########################
-	# Mantis Constants
-	########################
+	### CONSTANTS  ###
 
 	# --- constants -------------------
 
 	# magic numbers
-	define( 'ON',		1 );
-	define( 'OFF',		0 );
+	define( 'ON',	1 );
+	define( 'OFF',	0 );
 
 	# error types
 	define( 'ERROR',	E_USER_ERROR );
@@ -175,7 +168,7 @@
 	define( 'ERROR_FILE_TOO_BIG',					500 );
 	define( 'ERROR_FILE_NOT_ALLOWED',				501 );
 	define( 'ERROR_FILE_DUPLICATE',					502 );
-	define( 'ERROR_FILE_INVALID_UPLOAD_PATH',			503 );
+	define( 'ERROR_FILE_INVALID_UPLOAD_PATH',		503 );
 
 	# ERROR_BUGNOTE_*
 	define( 'ERROR_BUGNOTE_NOT_FOUND',				600 );
@@ -213,14 +206,14 @@
 	define( 'ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE',   1301 );
 	define( 'ERROR_CUSTOM_FIELD_IN_USE',			1302 );
 	define( 'ERROR_CUSTOM_FIELD_INVALID_VALUE',		1303 );
-	define( 'ERROR_CUSTOM_FIELD_INVALID_DEFINITION',	1304 );
+	define( 'ERROR_CUSTOM_FIELD_INVALID_DEFINITION',1304 );
 
 	# ERROR_LDAP_*
 	define( 'ERROR_LDAP_AUTH_FAILED',				1400 );
 	define( 'ERROR_LDAP_SERVER_CONNECT_FAILED',		1401 );
 	define( 'ERROR_LDAP_UPDATE_FAILED',				1402 );
 	define( 'ERROR_LDAP_USER_NOT_FOUND',			1403 );
-	
+
 	# ERROR_CATEGORY_*
 	define( 'ERROR_CATEGORY_DUPLICATE',				1500 );
 	define( 'ERROR_CATEGORY_NO_ACTION',				1501 );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.27 2004-04-08 16:46:09 prescience Exp $
+	# $Id: access_api.php,v 1.28 2004-04-08 20:52:49 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -18,9 +18,7 @@
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'project_api.php' );
 
-	###########################################################################
-	# Access Control API
-	###########################################################################
+	### Access Control API ###
 
 	# --------------------
 	# Function to be called when a user is attempting to access a page that
@@ -33,16 +31,15 @@
 
 		if ( !auth_is_user_authenticated() ) {
 			$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
-			print_header_redirect( 'login_page.php?return='.$p_return_page );
+			print_header_redirect( 'login_page.php?return=' . $p_return_page );
 		} else {
-			print '<center>';
-			print '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
+			PRINT '<center>';
+			PRINT '<p>'.error_string(ERROR_ACCESS_DENIED).'</p>';
 			print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
-			print '</center>';
+			PRINT '</center>';
 		}
 		exit;
 	}
-
 
 	#===================================
 	# Caching
@@ -50,10 +47,10 @@
 
 	# SECURITY NOTE: cache globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
-	#
-	$g_cache_access_matrix = array();
-	$g_cache_access_matrix_project_ids = array();
-	$g_cache_access_matrix_user_ids = array();
+
+	$g_cache_access_matrix				= array();
+	$g_cache_access_matrix_project_ids	= array();
+	$g_cache_access_matrix_user_ids		= array();
 
 	# --------------------
 	function access_cache_matrix_project( $p_project_id ) {
@@ -72,9 +69,7 @@
 					  FROM $t_project_user_list_table
 					  WHERE project_id='$c_project_id'";
 			$result = db_query( $query );
-
 			$count = db_num_rows( $result );
-
 			for ( $i=0 ; $i < $count ; $i++ ) {
 				$row = db_fetch_array( $result );
 

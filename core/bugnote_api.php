@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.24 2004-04-08 16:46:09 prescience Exp $
+	# $Id: bugnote_api.php,v 1.25 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -16,9 +16,7 @@
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 
-	###########################################################################
-	# Bugnote API
-	###########################################################################
+	### Bugnote API ###
 
 	#===================================
 	# Bugnote Data Structure Definition
@@ -43,9 +41,9 @@
 
 		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
 
-		$query ="SELECT COUNT(*) ".
-				"FROM $t_bugnote_table ".
-				"WHERE id='$c_bugnote_id'";
+		$query ="SELECT COUNT(*)
+				FROM $t_bugnote_table
+				WHERE id='$c_bugnote_id'";
 		$result = db_query( $query );
 
 		if ( 0 == db_result( $result ) ) {
@@ -84,8 +82,7 @@
 	# Add a bugnote to a bug
 	#
 	# return the ID of the new bugnote
-	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_private=false)
-	{
+	function bugnote_add ( $p_bug_id, $p_bugnote_text, $p_private = false ) {
 		$c_bug_id		= db_prepare_int( $p_bug_id );
 		$c_bugnote_text	= db_prepare_string( $p_bugnote_text );
 		$c_private		= db_prepare_bool( $p_private );
@@ -94,11 +91,10 @@
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
 
 		# insert bugnote text
-		$query = "INSERT
-				INTO $t_bugnote_text_table
-				( note )
-				VALUES
-				( '$c_bugnote_text' )";
+		$query = "INSERT INTO $t_bugnote_text_table
+					( note )
+				  VALUES
+					( '$c_bugnote_text' )";
 		db_query( $query );
 
 		# retrieve bugnote text id number
@@ -115,15 +111,14 @@
 		$t_user_id = auth_get_current_user_id();
 
 		# insert bugnote info
-		$query = "INSERT
-				INTO $t_bugnote_table
-				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
-				VALUES
-				('$c_bug_id', '$t_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ")";
+		$query = "INSERT INTO $t_bugnote_table
+					(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
+				  VALUES
+					('$c_bug_id', '$t_user_id','$t_bugnote_text_id', '$t_view_state', " . db_now() . "," . db_now() . ")";
 		db_query( $query );
 
 		# get bugnote id
-		$t_bugnote_id = db_insert_id($t_bugnote_table);
+		$t_bugnote_id = db_insert_id( $t_bugnote_table );
 
 		# update bug last updated
 		bug_update_date( $p_bug_id );
@@ -137,23 +132,19 @@
 	# --------------------
 	# Delete a bugnote
 	function bugnote_delete( $p_bugnote_id ) {
-		$c_bugnote_id	= db_prepare_int( $p_bugnote_id );
-
-		$t_bug_id		= bugnote_get_field( $p_bugnote_id, 'bug_id' );
-		$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
-
+		$c_bugnote_id			= db_prepare_int( $p_bugnote_id );
+		$t_bug_id				= bugnote_get_field( $p_bugnote_id, 'bug_id' );
+		$t_bugnote_text_id		= bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
 
 		# Remove the bugnote
-		$query = "DELETE
-				FROM $t_bugnote_table
+		$query = "DELETE FROM $t_bugnote_table
 				WHERE id='$c_bugnote_id'";
 		db_query( $query );
 
 		# Remove the bugnote text
-		$query = "DELETE
-				FROM $t_bugnote_text_table
+		$query = "DELETE FROM $t_bugnote_text_table
 				WHERE id='$t_bugnote_text_id'";
 		db_query( $query );
 
@@ -166,8 +157,7 @@
 	# --------------------
 	# delete all bugnotes associated with the given bug
 	function bugnote_delete_all( $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-
+		$c_bug_id				= db_prepare_int( $p_bug_id );
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 
@@ -175,26 +165,22 @@
 		$query = "SELECT bugnote_text_id
 				FROM $t_bugnote_table
 				WHERE bug_id='$c_bug_id'";
-		$result = db_query($query);
-
+		$result = db_query( $query );
 		$bugnote_count = db_num_rows( $result );
-
 		for ( $i = 0 ; $i < $bugnote_count ; $i++ ) {
 			$row = db_fetch_array( $result );
 			$t_bugnote_text_id = $row['bugnote_text_id'];
 
 			# Delete the corresponding bugnote texts
-			$query = "DELETE
-					FROM $t_bugnote_text_table
+			$query = "DELETE FROM $t_bugnote_text_table
 					WHERE id='$t_bugnote_text_id'";
 			db_query( $query );
 		}
 
 		# Delete the corresponding bugnotes
-		$query = "DELETE
-				FROM $t_bugnote_table
+		$query = "DELETE FROM $t_bugnote_table
 				WHERE bug_id='$c_bug_id'";
-		$result = db_query($query);
+		$result = db_query( $query );
 
 		# db_query() errors on failure so:
 		return true;
@@ -208,9 +194,8 @@
 	# --------------------
 	# Get the text associated with the bugnote
 	function bugnote_get_text( $p_bugnote_id ) {
-		$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
-
-		$t_bugnote_text_table = config_get( 'mantis_bugnote_text_table' );
+		$t_bugnote_text_id		= bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
+		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 
 		# grab the bugnote text
 		$query = "SELECT note
@@ -224,14 +209,13 @@
 	# --------------------
 	# Get a field for the given bugnote
 	function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
-		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
-		$c_field_name = db_prepare_string( $p_field_name );
+		$c_bugnote_id		= db_prepare_int( $p_bugnote_id );
+		$c_field_name		= db_prepare_string( $p_field_name );
+		$t_bugnote_table 	= config_get( 'mantis_bugnote_table' );
 
-		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
-
-		$query ="SELECT $c_field_name ".
-				"FROM $t_bugnote_table ".
-				"WHERE id='$c_bugnote_id' ";
+		$query ="SELECT $c_field_name
+				FROM $t_bugnote_table
+				WHERE id='$c_bugnote_id' ";
 		$result = db_query( $query, 1 );
 
 		return db_result( $result );
@@ -244,14 +228,17 @@
 	# Return BugnoteData class object with raw values from the tables except the field
 	# last_modified - it is UNIX_TIMESTAMP.
 	function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_access_level ) {
-		$t_all_bugnotes = bugnote_get_all_bugnotes( $p_bug_id );
-		$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
-		$t_private_bugnote_visible = ( $p_user_access_level >= $t_private_bugnote_threshold );
+		$t_all_bugnotes					= bugnote_get_all_bugnotes( $p_bug_id );
+		$t_private_bugnote_threshold	= config_get( 'private_bugnote_threshold' );
+		if ( $p_user_access_level >= $t_private_bugnote_threshold ) {
+			$t_private_bugnote_visible = true;
+		} else {
+			$t_private_bugnote_visible = false ;
+		}
 
 		$t_bugnotes = array();
-
 		foreach ( $t_all_bugnotes as $t_note_index => $t_bugnote ) {
-			if ( $t_private_bugnote_visible || VS_PUBLIC == $t_bugnote->view_state ) {
+			if ( $t_private_bugnote_visible || ( VS_PUBLIC == $t_bugnote->view_state ) ) {
 				$t_bugnotes[$t_note_index] = $t_bugnote;
 			}
 		}
@@ -272,29 +259,30 @@
 		}
 
 		if ( !isset( $g_cache_bugnotes[$p_bug_id] ) )  {
-			$c_bug_id = db_prepare_int( $p_bug_id );
-
-			$t_bugnote_table = config_get( 'mantis_bugnote_table' );
-			$t_bugnote_text_table = config_get( 'mantis_bugnote_text_table' );
-
-			$t_bugnote_order = config_get( 'bugnote_order' );
+			$c_bug_id				= db_prepare_int( $p_bug_id );
+			$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
+			$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
+			$t_bugnote_order		= config_get( 'bugnote_order' );
 
 			$query = "SELECT b.*, t.note
 						FROM 	  $t_bugnote_table AS b
 						LEFT JOIN $t_bugnote_text_table AS t ON b.bugnote_text_id = t.id
 						WHERE b.bug_id = '$c_bug_id'
 						ORDER BY b.date_submitted $t_bugnote_order";
-
 			$t_bugnotes = array();
 
 			# BUILD bugnotes array
-			for ( $result = db_query( $query ); !$result->EOF; $result->MoveNext() )  {
+			$result	= db_query( $query );
+			$count	= db_num_rows( $result );
+			for ( $i=0; $i < $count; $i++ ) {
+				$row = db_fetch_array( $result );
+
 				$t_bugnote = new BugnoteData;
 
-				$t_bugnote->note          = $result->fields['note'];
-				$t_bugnote->view_state    = $result->fields['view_state'];
-				$t_bugnote->reporter_name = user_get_name( $result->fields['reporter_id'] );
-				$t_bugnote->last_modified = db_unixtimestamp( $result->fields['last_modified'] );
+				$t_bugnote->note          = $row['note'];
+				$t_bugnote->view_state    = $row['view_state'];
+				$t_bugnote->reporter_name = user_get_name( $row['reporter_id'] );
+				$t_bugnote->last_modified = db_unixtimestamp( $row['last_modified'] );
 
 				$t_bugnotes[] = $t_bugnote;
 			}
@@ -311,9 +299,8 @@
 	# --------------------
 	# Update the last_modified field of the bugnote
 	function bugnote_date_update( $p_bugnote_id ) {
-		$c_bugnote_id = db_prepare_int( $p_bugnote_id );
-
-		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
+		$c_bugnote_id		= db_prepare_int( $p_bugnote_id );
+		$t_bugnote_table	= config_get( 'mantis_bugnote_table' );
 
 		$query = "UPDATE $t_bugnote_table
 				  SET last_modified=" . db_now() . "
@@ -327,12 +314,10 @@
 	# --------------------
 	# Set the bugnote text
 	function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
-		$c_bugnote_text	= db_prepare_string( $p_bugnote_text );
-
-		$t_bug_id			= bugnote_get_field( $p_bugnote_id, 'bug_id' );
-		$t_bugnote_text_id	= bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
-
-		$t_bugnote_text_table = config_get( 'mantis_bugnote_text_table' );
+		$c_bugnote_text			= db_prepare_string( $p_bugnote_text );
+		$t_bug_id				= bugnote_get_field( $p_bugnote_id, 'bug_id' );
+		$t_bugnote_text_id		= bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
+		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 
 		$query = "UPDATE $t_bugnote_text_table
 				SET note='$c_bugnote_text'
@@ -383,6 +368,6 @@
 	# Pad the bugnote id with the appropriate number of zeros for printing
 	function bugnote_format_id( $p_bugnote_id ) {
 		$t_padding = config_get( 'display_bugnote_padding' );
-		return( str_pad( $p_bugnote_id, $t_padding, '0', STR_PAD_LEFT ) );
+		return str_pad( $p_bugnote_id, $t_padding, '0', STR_PAD_LEFT );
 	}
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.45 2004-04-08 16:46:09 prescience Exp $
+	# $Id: file_api.php,v 1.46 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,30 +14,31 @@
 	require_once( $t_core_dir . 'history_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 
-	###########################################################################
-	# File API
-	###########################################################################
+	### File API ###
 
 	# --------------------
 	# Gets the filename without the bug id prefix.
 	function file_get_display_name( $p_filename ) {
-		$t_array = explode ('-', $p_filename, 2);
+		$t_array = explode( '-', $p_filename, 2 );
 
 		# Check if it's a project document filename (doc-000-filename)
 		# or a bug attachment filename (000-filename)
 		# This is important to handle filenames with '-'s properly
 		if ( $t_array[0] == config_get( 'document_files_prefix' ) ) {
-			$t_array = explode ('-', $p_filename, 3);
+			$t_array = explode( '-', $p_filename, 3 );
 		}
-		return $t_array[count( $t_array ) - 1];
+		$count = count( $t_array );
+		return $t_array[$count-1];
 	}
 	# --------------------
 	# Check the number of attachments a bug has (if any)
 	function file_bug_attachment_count( $p_bug_id ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+		$c_bug_id			= db_prepare_int( $p_bug_id );
+		$t_bug_file_table	= config_get( 'mantis_bug_file_table' );
 
-		$query = "SELECT bug_id FROM $t_bug_file_table WHERE bug_id='$c_bug_id'";
+		$query = "SELECT bug_id
+				FROM $t_bug_file_table
+				WHERE bug_id='$c_bug_id'";
 		$result = db_query( $query );
 
 		return db_num_rows( $result );
@@ -46,24 +47,32 @@
 	# --------------------
 	# Check if a specific bug has attachments
 	function file_bug_has_attachments( $p_bug_id ) {
-		return ( file_bug_attachment_count( $p_bug_id ) > 0 );
+		if ( file_bug_attachment_count( $p_bug_id ) > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	# --------------------
 	# Check if the current user can view attachments for the specified bug.
 	function file_can_view_bug_attachments( $p_bug_id ) {
-		$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
-		$t_can_view     = access_has_bug_level( config_get( 'view_attachments_threshold' ), $p_bug_id );
-		$t_can_view     = $t_can_view || ( $t_reported_by_me && config_get( 'allow_view_own_attachments' ) );
+		$t_reported_by_me	= bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
+		$t_can_view     	= access_has_bug_level( config_get( 'view_attachments_threshold' ), $p_bug_id );
+# @@@ Fix this to be readable
+		$t_can_view     	= $t_can_view || ( $t_reported_by_me && config_get( 'allow_view_own_attachments' ) );
+
 		return $t_can_view;
 	}
 
 	# --------------------
 	# Check if the current user can download attachments for the specified bug.
 	function file_can_download_bug_attachments( $p_bug_id ) {
-		$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
-		$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
-		$t_can_download = $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
+		$t_reported_by_me	= bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
+		$t_can_download		= access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
+# @@@ Fix this to be readable
+		$t_can_download		= $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
+
 		return $t_can_download;
 	}
 
@@ -74,9 +83,11 @@
 			return false;
 		}
 
-		$t_reported_by_me = bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
-		$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
-		$t_can_download = $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
+		$t_reported_by_me	= bug_is_user_reporter( $p_bug_id, auth_get_current_user_id() );
+		$t_can_download		= access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
+# @@@ Fix this to be readable
+		$t_can_download		= $t_can_download || ( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
+
 		return $t_can_download;
 	}
 
@@ -109,45 +120,46 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$t_filesize = number_format( $v_filesize );
-			$t_date_added = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v_date_added ) ) );
+			$t_filesize		= number_format( $v_filesize );
+			$t_date_added	= date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
 
 			if ( $image_previewed ) {
 				$image_previewed = false;
-				echo '<br />';
+				PRINT '<br />';
 			}
 
 			if ( $t_can_download ) {
-				$t_href_start = "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">";
-				$t_href_end   = '</a>';
+				$t_href_start	= "<a href=\"file_download.php?file_id=$v_id&amp;type=bug\" target=\"_blank\">";
+				$t_href_end		= '</a>';
 			} else {
-				$t_href_start = '';
-				$t_href_end = '';
+				$t_href_start	= '';
+				$t_href_end		= '';
 			}
 
-			echo $t_href_start;
+			PRINT $t_href_start;
 			print_file_icon ( file_get_display_name( $v_filename ) );
-			echo $t_href_end . '</a>&nbsp;' . $t_href_start . file_get_display_name( $v_filename ) .
+			PRINT $t_href_end . '</a>&nbsp;' . $t_href_start . file_get_display_name( $v_filename ) .
 				$t_href_end . " ($t_filesize bytes) <span class=\"italic\">$t_date_added</span>";
 
 			if ( $t_can_delete ) {
-				echo " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
+				PRINT " [<a class=\"small\" href=\"bug_file_delete.php?file_id=$v_id\">" . lang_get('delete_link') . '</a>]';
 			}
 
 			if ( ( FTP == config_get( 'file_upload_method' ) ) && file_exists ( $v_diskfile ) ) {
-				echo ' (' . lang_get( 'cached' ) . ')';
+				PRINT ' (' . lang_get( 'cached' ) . ')';
 			}
 
 			if ( $t_can_download &&
 				( $v_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) &&
 				( $v_filesize != 0 ) &&
 				( in_array( strtolower( file_get_extension( $v_diskfile ) ), array( 'png', 'jpg', 'gif', 'bmp' ), true ) ) ) {
-				echo "<br /><img src=\"file_download.php?file_id=$v_id&amp;type=bug\" />";
+
+				PRINT "<br /><img src=\"file_download.php?file_id=$v_id&amp;type=bug\" />";
 				$image_previewed = true;
 			}
 
-			if ( $i != ($num_files - 1) ) {
-				echo '<br />';
+			if ( $i != ( $num_files - 1 ) ) {
+				PRINT '<br />';
 			}
 		}
 	}
@@ -162,8 +174,8 @@
 
 		# Delete files from disk
 		$query = "SELECT diskfile, filename
-			FROM $t_bug_file_table
-			WHERE bug_id='$c_bug_id'";
+				FROM $t_bug_file_table
+				WHERE bug_id='$c_bug_id'";
 		$result = db_query( $query );
 
 		$file_count = db_num_rows( $result );
@@ -194,24 +206,24 @@
 		}
 
 		# Delete the corresponding db records
-		$query = "DELETE
-			FROM $t_bug_file_table
-			WHERE bug_id='$c_bug_id'";
-		$result = db_query($query);
+		$query = "DELETE FROM $t_bug_file_table
+				  WHERE bug_id='$c_bug_id'";
+		$result = db_query( $query );
 
 		# db_query() errors on failure so:
 		return true;
 	}
 	# --------------------
 	function file_delete_project_files( $p_project_id ) {
-		$t_project_file_table = config_get( 'mantis_project_file_table' );
-		$t_method = config_get( 'file_upload_method' );
+		$t_project_file_table	= config_get( 'mantis_project_file_table' );
+		$t_method				= config_get( 'file_upload_method' );
 
 		# Delete the file physically (if stored via DISK or FTP)
 		if ( ( DISK == $t_method ) || ( FTP == $t_method ) ) {
 			# Delete files from disk
-			$query = "SELECT diskfile, filename FROM $t_project_file_table"
-				. " WHERE project_id=$p_project_id";
+			$query = "SELECT diskfile, filename
+					FROM $t_project_file_table
+					WHERE project_id=$p_project_id";
 			$result = db_query( $query );
 
 			$file_count = db_num_rows( $result );
@@ -237,7 +249,8 @@
 		}
 
 		# Delete the corresponding db records
-		$query = "DELETE FROM $t_project_file_table WHERE project_id=$p_project_id";
+		$query = "DELETE FROM $t_project_file_table
+				WHERE project_id=$p_project_id";
 		$result = db_query($query);
 	}
 	# --------------------
@@ -260,13 +273,13 @@
 	# --------------------
 	# Put a file to the ftp server.
 	function file_ftp_put ( $p_conn_id, $p_remote_filename, $p_local_filename ) {
-		set_time_limit(0);
+		set_time_limit( 0 );
 		$upload = ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename, FTP_BINARY);
 	}
 	# --------------------
 	# Get a file from the ftp server.
 	function file_ftp_get ( $p_conn_id, $p_local_filename, $p_remote_filename ) {
-		set_time_limit(0);
+		set_time_limit( 0 );
 		$download = ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename, FTP_BINARY);
 	}
 	# --------------------
@@ -291,10 +304,9 @@
 	# --------------------
 	# Return the specified field value
 	function file_get_field( $p_file_id, $p_field_name ) {
-		$c_file_id		= db_prepare_int( $p_file_id );
-		$c_field_name	= db_prepare_string( $p_field_name );
-
-		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+		$c_file_id			= db_prepare_int( $p_file_id );
+		$c_field_name		= db_prepare_string( $p_field_name );
+		$t_bug_file_table	= config_get( 'mantis_bug_file_table' );
 
 		# get info
 		$query = "SELECT $c_field_name
@@ -306,13 +318,11 @@
 	}
 	# --------------------
 	function file_delete( $p_file_id ) {
-		$c_file_id = db_prepare_int( $p_file_id );
-
-		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
-
-		$t_upload_method = config_get( 'file_upload_method' );
-		$t_filename = file_get_field( $p_file_id, 'filename' );
-		$t_bug_id = file_get_field( $p_file_id, 'bug_id' );
+		$c_file_id			= db_prepare_int( $p_file_id );
+		$t_bug_file_table	= config_get( 'mantis_bug_file_table' );
+		$t_upload_method	= config_get( 'file_upload_method' );
+		$t_filename			= file_get_field( $p_file_id, 'filename' );
+		$t_bug_id			= file_get_field( $p_file_id, 'bug_id' );
 
 		if ( ( DISK == $t_upload_method ) || ( FTP == $t_upload_method ) ) {
 			$t_diskfile = file_get_field( $p_file_id, 'diskfile' );
@@ -341,18 +351,18 @@
 	# --------------------
 	# File type check
 	function file_type_check( $p_file_name ) {
-		$t_allowed_files = config_get( 'allowed_files' );
-		$t_disallowed_files = config_get( 'disallowed_files' );;
+		$t_allowed_files	= config_get( 'allowed_files' );
+		$t_disallowed_files	= config_get( 'disallowed_files' );;
 
 		# grab extension
-		$t_ext_array = explode( '.', $p_file_name );
-		$last_position = count( $t_ext_array )-1;
-		$t_extension = $t_ext_array[$last_position];
+		$t_ext_array	= explode( '.', $p_file_name );
+		$last_position	= count( $t_ext_array )-1;
+		$t_extension	= $t_ext_array[$last_position];
 
 		# check against disallowed files
-		$t_disallowed_arr =  explode_enum_string( $t_disallowed_files );
+		$t_disallowed_arr = explode_enum_string( $t_disallowed_files );
 		foreach ( $t_disallowed_arr as $t_val ) {
-			if ( strcasecmp( $t_val, $t_extension ) == 0 ) {
+			if ( 0 == strcasecmp( $t_val, $t_extension ) ) {
 				return false;
 			}
 		}
@@ -365,7 +375,7 @@
 		# check against allowed files
 		$t_allowed_arr = explode_enum_string( $t_allowed_files );
 		foreach ( $t_allowed_arr as $t_val ) {
-			if ( strcasecmp( $t_val, $t_extension ) == 0 ) {
+			if ( 0 == strcasecmp( $t_val, $t_extension ) ) {
 				return true;
 			}
 		}
@@ -380,8 +390,8 @@
 		if ( !file_type_check( $p_file_name ) ) {
 			trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
 		} else if ( is_uploaded_file( $p_tmp_file ) ) {
-			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-			$t_bug_id = bug_format_id( $p_bug_id );
+			$t_project_id	= bug_get_field( $p_bug_id, 'project_id' );
+			$t_bug_id		= bug_format_id( $p_bug_id );
 
 			# prepare variables for insertion
 			$t_file_path = project_get_field( $t_project_id, 'file_path' );
@@ -393,8 +403,8 @@
 			$t_file_size = filesize( $p_tmp_file );
 			$c_file_size = db_prepare_int( $t_file_size );
 
-			$t_method = config_get( 'file_upload_method' );
-			$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+			$t_method			= config_get( 'file_upload_method' );
+			$t_bug_file_table	= config_get( 'mantis_bug_file_table' );
 
 			switch ( $t_method ) {
 				case FTP:
@@ -425,7 +435,7 @@
 
 			$query = "INSERT INTO $t_bug_file_table
 						(bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
-						VALUES
+					  VALUES
 						($c_bug_id, '', '', '$c_file_path$c_new_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
 			db_query( $query );
 
@@ -442,8 +452,7 @@
 	# Return true if file uploading is enabled (in our config and PHP's),
 	#  false otherwise
 	function file_is_uploading_enabled() {
-		if ( ini_get_bool( 'file_uploads' ) &&
-			 ( ON == config_get( 'allow_file_upload' ) ) ) {
+		if ( ini_get_bool( 'file_uploads' ) && ( ON == config_get( 'allow_file_upload' ) ) ) {
 			return true;
 		} else {
 			return false;
@@ -504,7 +513,7 @@
 		# *** If we ever wanted to have a per-project setting enabling file
 		#     uploads, we'd want to check it here before exempting the reporter
 
-		if ( $t_reporter && ON == config_get( 'allow_reporter_upload' ) ) {
+		if ( $t_reporter && ( ON == config_get( 'allow_reporter_upload' ) ) ) {
 			return true;
 		}
 
@@ -530,21 +539,21 @@
 	# --------------------
 	# Get extension given the filename or its full path.
 	function file_get_extension( $p_filename ) {
-		$ext = '';
-		$dot_found = false;
-		$i = strlen( $p_filename ) - 1;
+		$ext		= '';
+		$dot_found	= false;
+		$i			= strlen( $p_filename ) - 1;
 		while ( $i >= 0 ) {
-			if ( $p_filename[$i] == '.' ) {
+			if ( '.' == $p_filename[$i] ) {
 				$dot_found = true;
 				break;
 			}
 
+			# foung a directoryarker before a period.
 			if ( ( $p_filename[$i] == "/" ) || ( $p_filename[$i] == "\\" ) ) {
 				return '';
 			}
 
 			$ext = $p_filename[$i] . $ext;
-
 			$i--;
 		}
 

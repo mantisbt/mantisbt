@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.23 2004-04-08 16:46:09 prescience Exp $
+	# $Id: gpc_api.php,v 1.24 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# GET, POST, and Cookie API
-	###########################################################################
+	### GET, POST, and Cookie API ###
 
 	# ---------------
 	# Retrieve a GPC variable.
@@ -268,7 +266,7 @@
 	# ------------------
 	# Strip slashes if necessary (supports arrays)
 	function gpc_strip_slashes( $p_var ) {
-		if (get_magic_quotes_gpc() == 0) {
+		if ( 0 == get_magic_quotes_gpc() ) {
 			return $p_var;
 		} else if ( !is_array( $p_var ) ){
 			return stripslashes( $p_var );

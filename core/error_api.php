@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.29 2004-02-29 03:59:52 vboctor Exp $
+	# $Id: error_api.php,v 1.30 2004-04-08 20:52:50 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Error API
-	###########################################################################
+	### Error API ###
 
 	# set up error_handler() as the new default error handling function
 	set_error_handler( 'error_handler' );
@@ -20,9 +18,9 @@
 	# SECURITY NOTE: these globals are initialized here to prevent them
 	#   being spoofed if register_globals is turned on
 	#
-	$g_error_parameters = array();
-	$g_error_handled = false;
-	$g_error_proceed_url = null;
+	$g_error_parameters		= array();
+	$g_error_handled		= false;
+	$g_error_proceed_url	= null;
 
 	# ---------------
 	# Default error handler
@@ -35,14 +33,14 @@
 	#
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
-		
+
 		# check if errors were disabled with @ somewhere in this call chain
 		if ( 0 == error_reporting() ) {
 			return;
 		}
 
-		$t_short_file = basename( $p_file );
-		$t_method = 'none';
+		$t_short_file	= basename( $p_file );
+		$t_method		= 'none';
 
 		# build an appropriate error string
 		switch ( $p_type ) {
@@ -96,47 +94,47 @@
 			#  we need to disable compression.
 			compress_disable();
 
-			if ( ob_get_length() ) { 
+			if ( ob_get_length() ) {
 				ob_end_clean();
 			}
 
 			html_page_top1();
 			html_page_top2();
 
-			echo '<br /><div align="center"><table class="width50" cellspacing="1">';
-			echo "<tr><td class=\"form-title\">$t_error_type</td></tr>";
-			echo "<tr><td><p class=\"center\" style=\"color:red\">$t_error_description</p></td></tr>";
-			
-			echo '<tr><td><p class="center">';
+			PRINT '<br /><div align="center"><table class="width50" cellspacing="1">';
+			PRINT "<tr><td class=\"form-title\">$t_error_type</td></tr>";
+			PRINT "<tr><td><p class=\"center\" style=\"color:red\">$t_error_description</p></td></tr>";
+
+			PRINT '<tr><td><p class="center">';
 			if ( null === $g_error_proceed_url ) {
-				echo lang_get( 'error_no_proceed' );
+				PRINT lang_get( 'error_no_proceed' );
 			} else {
-				echo "<a href=\"$g_error_proceed_url\">" . lang_get( 'proceed' ) . '</a>';
+				PRINT "<a href=\"$g_error_proceed_url\">" . lang_get( 'proceed' ) . '</a>';
 			}
-			echo '</p></td></tr>';
-			
+			PRINT '</p></td></tr>';
+
 			if ( ON == config_get( 'show_detailed_errors' ) ) {
-				echo '<tr><td>';
+				PRINT '<tr><td>';
 				error_print_details( $p_file, $p_line, $p_context );
-				echo '</td></tr>';
-				echo '<tr><td>';
+				PRINT '</td></tr>';
+				PRINT '<tr><td>';
 				error_print_stack_trace();
-				echo '</td></tr>';
+				PRINT '</td></tr>';
 			}
-			echo '</table></div>';
+			PRINT '</table></div>';
 
 			if ( $g_error_handled ) {
-				echo '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
+				PRINT '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
 
-				echo '<div style="border: solid 1px black;padding: 4px">';
-				echo $t_old_contents;
-				echo '</div>';
+				PRINT '<div style="border: solid 1px black;padding: 4px">';
+				PRINT $t_old_contents;
+				PRINT '</div>';
 			}
 
 			html_page_bottom1();
 			exit();
 		} else if ( 'inline' == $t_method ) {
-			echo "<p style=\"color:red\">$t_error_type: $t_error_description</p>";
+			PRINT "<p style=\"color:red\">$t_error_type: $t_error_description</p>";
 		} else {
 			# do nothing
 		}
@@ -149,14 +147,14 @@
 	# ---------------
 	# Print out the error details including context
 	function error_print_details( $p_file, $p_line, $p_context ) {
-	?>
+?>
 		<center>
 			<table class="width75">
 				<tr>
-					<td>Full path: <?php echo htmlentities( $p_file ) ?></td>
+					<td>Full path: <?php PRINT htmlentities( $p_file ) ?></td>
 				</tr>
 				<tr>
-					<td>Line: <?php echo $p_line ?></td>
+					<td>Line: <?php PRINT $p_line ?></td>
 				</tr>
 				<tr>
 					<td>
@@ -165,13 +163,13 @@
 				</tr>
 			</table>
 		</center>
-	<?php
+<?php
 	}
 
 	# ---------------
 	# Print out the variable context given
 	function error_print_context( $p_context ) {
-		echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
+		PRINT '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
 
 		# print normal variables
 		foreach ( $p_context as $t_var => $t_val ) {
@@ -184,21 +182,21 @@
 					$t_val = '**********';
 				}
 
-				echo "<tr><td>$t_var</td><td>$t_val</td><td>$t_type</td></tr>\n";
+				PRINT "<tr><td>$t_var</td><td>$t_val</td><td>$t_type</td></tr>\n";
 			}
 		}
 
 		# print arrays
 		foreach ( $p_context as $t_var => $t_val ) {
 			if ( is_array( $t_val ) && ( $t_var != 'GLOBALS' ) ) {
-			    echo "<tr><td colspan=\"3\" align=\"left\"><br /><strong>$t_var</strong></td></tr>";
-				echo "<tr><td colspan=\"3\">";
+			    PRINT "<tr><td colspan=\"3\" align=\"left\"><br /><strong>$t_var</strong></td></tr>";
+				PRINT "<tr><td colspan=\"3\">";
 				error_print_context( $t_val );
-				echo "</td></tr>";
+				PRINT "</td></tr>";
 			}
 		}
 
-		echo '</table>';
+		PRINT '</table>';
 	}
 
 	# ---------------
@@ -212,11 +210,11 @@
 			$t_stack = array_reverse( $t_stack );
 			array_shift( $t_stack ); #remove the call to this function from the stack trace
 
-			echo '<center><table class="width75">';
+			PRINT '<center><table class="width75">';
 
 			foreach ( $t_stack as $t_frame ) {
-				echo '<tr ' . helper_alternate_class() . '>';
-				echo '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
+				PRINT '<tr ' . helper_alternate_class() . '>';
+				PRINT '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['params'] ) ) {
@@ -225,21 +223,21 @@
 					}
 				}
 
-				echo '<td>( ' . htmlentities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
+				PRINT '<td>( ' . htmlentities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
 			}
-			echo '</table></center>';
+			PRINT '</table></center>';
 		} else if ( php_version_at_least( '4.3' ) ) {
 			$t_stack = debug_backtrace();
 
 			array_shift( $t_stack ); #remove the call to this function from the stack trace
 			array_shift( $t_stack ); #remove the call to the error handler from the stack trace
 
-			echo '<center><table class="width75">';
-			echo '<tr><th>Filename</th><th>Line</th><th>Function</th><th>Args</th></tr>';
+			PRINT '<center><table class="width75">';
+			PRINT '<tr><th>Filename</th><th>Line</th><th>Function</th><th>Args</th></tr>';
 
 			foreach ( $t_stack as $t_frame ) {
-				echo '<tr ' . helper_alternate_class() . '>';
-				echo '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
+				PRINT '<tr ' . helper_alternate_class() . '>';
+				PRINT '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['args'] ) ) {
@@ -248,10 +246,10 @@
 					}
 				}
 
-				echo '<td>( ' . htmlentities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
+				PRINT '<td>( ' . htmlentities( implode( $t_args, ', ' ) ) . ' )</td></tr>';
 			}
 
-			echo '</table></center>';
+			PRINT '</table></center>';
 		}
 	}
 
@@ -279,7 +277,7 @@
 			return 'null';
 		} else if ( is_object( $p_param ) ) {
 			$t_results = array();
-			
+
 			$t_class_name = get_class( $p_param );
 			$t_inst_vars = get_object_vars( $p_param );
 
@@ -293,20 +291,20 @@
 			return "'$p_param'";
 		}
 	}
-	
+
 	# ---------------
 	# Return an error string (in the current language) for the given error
 	function error_string( $p_error ) {
 		global $g_error_parameters;
-	
+
 		$MANTIS_ERROR = lang_get( 'MANTIS_ERROR' );
-		
+
 		# We pad the parameter array to make sure that we don't get errors if
 		#  the caller didn't give enough parameters for the error string
 		$t_padding = array_pad( array(), 10, '' );
-		
+
 		$t_error = $MANTIS_ERROR[$p_error];
-		
+
 		return call_user_func_array( 'sprintf', array_merge( $t_error, $g_error_parameters, $t_padding ) );
 	}
 
@@ -331,12 +329,12 @@
 
 		$g_error_parameters = func_get_args();
 	}
-	
+
 	# ---------------
 	# Set a url to give to the user to proceed after viewing the error
 	function error_proceed_url( $p_url ) {
 		global $g_error_proceed_url;
-		
+
 		$g_error_proceed_url = $p_url;
 	}
 ?>
