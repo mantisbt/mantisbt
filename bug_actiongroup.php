@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.30 2004-06-11 02:00:00 narcissus Exp $
+	# $Id: bug_actiongroup.php,v 1.31 2004-06-15 02:54:39 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -60,58 +60,7 @@
 			$f_project_id = gpc_get_int( 'project_id' );
 
 			if ( access_has_project_level( config_get( 'report_bug_threshold' ), $f_project_id ) ) {
-				$t_bug_data = new BugData;
-				$t_bug_data = bug_get($t_bug_id, true);
-
-				$t_new_bug_id =  bug_create(
-								/* Change project */
-								$f_project_id,
-								$t_bug_data->reporter_id,
-								$t_bug_data->handler_id,
-								$t_bug_data->priority,
-								$t_bug_data->severity,
-								$t_bug_data->reproducibility,
-								$t_bug_data->category,
-								$t_bug_data->os,
-								$t_bug_data->os_build,
-								$t_bug_data->platform,
-								$t_bug_data->version,
-								$t_bug_data->build,
-								bug_get_field( $t_bug_id, 'profile_id' ),
-								$t_bug_data->summary,
-								$t_bug_data->view_state,
-								$t_bug_data->description,
-								$t_bug_data->steps_to_reproduce,
-								$t_bug_data->additional_information );
-
-				bug_set_field( $t_new_bug_id, 'duplicate_id', bug_get_field( $t_bug_id, 'duplicate_id' ) );
-				bug_set_field( $t_new_bug_id, 'status', bug_get_field( $t_bug_id, 'status' ) );
-				bug_set_field( $t_new_bug_id, 'resolution', bug_get_field( $t_bug_id, 'resolution' ) );
-				bug_set_field( $t_new_bug_id, 'projection', bug_get_field( $t_bug_id, 'projection' ) );
-				bug_set_field( $t_new_bug_id, 'date_submitted', bug_get_field( $t_bug_id, 'date_submitted' ) );
-				bug_set_field( $t_new_bug_id, 'last_updated', bug_get_field( $t_bug_id, 'last_updated' ) );
-				bug_set_field( $t_new_bug_id, 'eta', bug_get_field( $t_bug_id, 'eta' ) );
-				bug_set_field( $t_new_bug_id, 'fixed_in_version', bug_get_field( $t_bug_id, 'fixed_in_version' ) );
-				bug_set_field( $t_new_bug_id, 'sponsorship_total', bug_get_field( $t_bug_id, 'sponsorship_total' ) );
-
-				# Get custom field values
-				$query = "SELECT field_id, bug_id, value
-						   FROM mantis_custom_field_string_table
-						   WHERE bug_id = '$t_bug_id';";
-				$result = db_query( $query );
-				$t_count = db_num_rows( $result );
-
-				$t_bug_customs = array();
-				for ( $i = 0 ; $i < $t_count ; $i++ ) {
-					$t_bug_customs[] = db_fetch_array( $result );
-				}
-
-				foreach( $t_bug_customs as $t_bug_custom ) {
-					$query = "INSERT INTO `mantis_custom_field_string_table` 
-							   (`field_id`, `bug_id`, `value`)
-							   VALUES ('" . $t_bug_custom['field_id'] . "', '$t_new_bug_id', '" . $t_bug_custom['value'] . "');";
-					db_query( $query );
-				}
+				bug_copy( $t_bug_id, $f_project_id );
 			} else {
 				$t_failed_ids[] = $t_bug_id;
 			}

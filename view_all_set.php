@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.32 2004-06-08 05:52:14 narcissus Exp $
+	# $Id: view_all_set.php,v 1.33 2004-06-15 02:54:39 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -303,7 +303,7 @@
 		$t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_settings_string );
 	
 		# set cookie values
-		setcookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
+		gpc_set_cookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
 	}
 	
 	# redirect to print_all or view_all page

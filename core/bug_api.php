@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.61 2004-05-24 12:23:18 vboctor Exp $
+	# $Id: bug_api.php,v 1.62 2004-06-15 02:54:39 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -378,6 +378,193 @@
 		history_log_event_special( $t_bug_id, NEW_BUG );
 
 		return $t_bug_id;
+	}
+
+	# --------------------
+	# Copy a bug from one project to another. Also make copies of issue notes, attachments, history,
+	# email notifications etc.
+	function bug_copy( $p_bug_id, $p_target_project_id ) {
+		global $g_db;
+
+		$t_bug_id = db_prepare_int( $p_bug_id );
+		$t_target_project_id = db_prepare_int( $p_target_project_id );
+		$t_mantis_custom_field_string_table	= config_get( 'mantis_custom_field_string_table' );
+		$t_mantis_bug_file_table			= config_get( 'mantis_bug_file_table' );
+		$t_mantis_bugnote_table				= config_get( 'mantis_bugnote_table' );
+		$t_mantis_bugnote_text_table		= config_get( 'mantis_bugnote_text_table' );
+		$t_mantis_bug_monitor_table			= config_get( 'mantis_bug_monitor_table' );
+		$t_mantis_bug_history_table			= config_get( 'mantis_bug_history_table' );
+
+		$t_bug_data = new BugData;
+		$t_bug_data = bug_get( $t_bug_id, true );
+
+		$t_new_bug_id =  bug_create(
+						/* Change project */
+						$t_target_project_id,
+						$t_bug_data->reporter_id,
+						$t_bug_data->handler_id,
+						$t_bug_data->priority,
+						$t_bug_data->severity,
+						$t_bug_data->reproducibility,
+						$t_bug_data->category,
+						$t_bug_data->os,
+						$t_bug_data->os_build,
+						$t_bug_data->platform,
+						$t_bug_data->version,
+						$t_bug_data->build,
+						bug_get_field( $t_bug_id, 'profile_id' ),
+						$t_bug_data->summary,
+						$t_bug_data->view_state,
+						$t_bug_data->description,
+						$t_bug_data->steps_to_reproduce,
+						$t_bug_data->additional_information );
+
+		bug_set_field( $t_new_bug_id, 'duplicate_id', $t_bug_data->duplicate_id );
+		bug_set_field( $t_new_bug_id, 'status', $t_bug_data->status );
+		bug_set_field( $t_new_bug_id, 'resolution', $t_bug_data->resolution );
+		bug_set_field( $t_new_bug_id, 'projection', $t_bug_data->projection );
+		bug_set_field( $t_new_bug_id, 'date_submitted', $g_db->DBTimeStamp( $t_bug_data->date_submitted ) );
+		bug_set_field( $t_new_bug_id, 'last_updated', $g_db->DBTimeStamp( $t_bug_data->last_updated ) );
+		bug_set_field( $t_new_bug_id, 'eta', $t_bug_data->eta );
+		bug_set_field( $t_new_bug_id, 'fixed_in_version', $t_bug_data->fixed_in_version );
+		bug_set_field( $t_new_bug_id, 'sponsorship_total', $t_bug_data->sponsorship_total );
+
+		# Get custom field values
+		$query = "SELECT field_id, bug_id, value
+				   FROM $t_mantis_custom_field_string_table
+				   WHERE bug_id = '$t_bug_id';";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+
+		$t_bug_customs = array();
+		for ( $i = 0 ; $i < $t_count ; $i++ ) {
+			$t_bug_customs[] = db_fetch_array( $result );
+		}
+
+		foreach( $t_bug_customs as $t_bug_custom ) {
+			$query = "INSERT INTO $t_mantis_custom_field_string_table 
+					   (`field_id`, `bug_id`, `value`)
+					   VALUES ('" . $t_bug_custom['field_id'] . "', '$t_new_bug_id', '" . $t_bug_custom['value'] . "');";
+			db_query( $query );
+		}
+
+		# Copy bugnotes
+		$query = "SELECT * 
+				  FROM $t_mantis_bugnote_table
+				  WHERE bug_id = '$t_bug_id';";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+
+		$t_bug_note_arr = array();
+		for ( $i = 0; $i < $t_count; $i++ ) {
+			$t_bug_note_arr[] = db_fetch_array( $result );
+		}
+
+		foreach( $t_bug_note_arr as $t_bug_note ) {
+			$t_bugnote_text_id = $t_bug_note['bugnote_text_id'];
+
+			$query2 = "SELECT *
+					   FROM $t_mantis_bugnote_text_table
+					   WHERE id = '$t_bugnote_text_id';";
+			$result2 = db_query( $query2 );
+			$t_count2 = db_num_rows( $result2 );
+
+			$t_bugnote_text_insert_id = -1;
+			if ( $t_count2 > 0 ) {
+				$t_bugnote_text = db_fetch_array( $result2 );
+				$query2 = "INSERT INTO $t_mantis_bugnote_text_table
+						   ( `note` )
+						   VALUES ( '" . $t_bugnote_text['note'] . "' );";
+				db_query( $query2 );
+				$t_bugnote_text_insert_id = db_insert_id( $t_mantis_bugnote_text_table );
+			}
+
+			$query2 = "INSERT INTO $t_mantis_bugnote_table
+					   ( `bug_id`, `reporter_id`, `bugnote_text_id`, `view_state`, `date_submitted`, `last_modified` )
+					   VALUES ( '$t_new_bug_id', 
+					   			'" . $t_bug_note['reporter_id'] . "', 
+					   			'$t_bugnote_text_insert_id', 
+					   			'" . $t_bug_note['view_state'] . "', 
+					   			'" . $t_bug_note['date_submitted'] . "', 
+					   			'" . $t_bug_note['last_modified'] . "' );";
+			db_query( $query2 );
+		}
+
+		# Copy attachments
+		$query = "SELECT * 
+				  FROM $t_mantis_bug_file_table
+				  WHERE bug_id = '$t_bug_id';";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+
+		$t_bug_file_arr = array();
+		for ( $i = 0; $i < $t_count; $i++ ) {
+			$t_bug_file_arr[] = db_fetch_array( $result );
+		}
+
+		foreach( $t_bug_file_arr as $t_bug_file ) {
+			$query = "INSERT INTO $t_mantis_bug_file_table
+					( `bug_id`, `title`, `description`, `diskfile`, `filename`, `folder`, `filesize`, `file_type`, `date_added`, `content` )
+					VALUES ( '$t_new_bug_id', 
+							 '" . db_prepare_string( $t_bug_file['title'] ) . "', 
+							 '" . db_prepare_string( $t_bug_file['description'] ) . "', 
+							 '" . db_prepare_string( $t_bug_file['diskfile'] ) . "', 
+							 '" . db_prepare_string( $t_bug_file['filename'] ) . "', 
+							 '" . db_prepare_string( $t_bug_file['folder'] ) . "', 
+							 '" . db_prepare_int( $t_bug_file['filesize'] ) . "', 
+							 '" . db_prepare_string( $t_bug_file['file_type'] ) . "', 
+							 '" . db_prepare_string( $t_bug_file['date_added'] ) . "', 
+							 '" . db_prepare_string( $t_bug_file['content'] ) . "');";
+			db_query( $query );
+		}
+
+		# Copy users monitoring bug
+		$query = "SELECT *
+				  FROM $t_mantis_bug_monitor_table
+				  WHERE bug_id = '$t_bug_id';";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+
+		$t_bug_monitor_arr = array();
+		for ( $i = 0; $i < $t_count; $i++ ) {
+			$t_bug_monitor_arr[] = db_fetch_array( $result );
+		}
+
+		foreach( $t_bug_monitor_arr as $t_bug_monitor ) {
+			$query = "INSERT INTO $t_mantis_bug_monitor_table
+					 ( `user_id`, `bug_id` )
+					 VALUES ( '" . $t_bug_monitor['user_id'] . "', '$t_new_bug_id' );";
+			db_query( $query );
+		}
+
+		# Rewrite history
+		$query = "DELETE FROM $t_mantis_bug_history_table
+				  WHERE `bug_id` = '$t_new_bug_id';";
+		db_query( $query );
+
+		$query = "SELECT *
+				  FROM $t_mantis_bug_history_table
+				  WHERE `bug_id` = '$t_bug_id';";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+
+		$t_bug_history_arr = array();
+		for ( $i = 0; $i < $t_count; $i++ ) {
+			$t_bug_history_arr[] = db_fetch_array( $result );
+		}
+
+		foreach( $t_bug_history_arr as $t_bug_history ) {
+			$query = "INSERT INTO $t_mantis_bug_history_table
+					  ( `user_id`, `bug_id`, `date_modified`, `field_name`, `old_value`, `new_value`, `type` )
+					  VALUES ( '" . db_prepare_int( $t_bug_history['user_id'] ) . "',
+					  		   '$t_new_bug_id',
+					  		   '" . db_prepare_string( $t_bug_history['date_modified'] ) . "',
+					  		   '" . db_prepare_string( $t_bug_history['field_name'] ) . "',
+					  		   '" . db_prepare_string( $t_bug_history['old_value'] ) . "',
+					  		   '" . db_prepare_string( $t_bug_history['new_value'] ) . "',
+					  		   '" . db_prepare_int( $t_bug_history['type'] ) . "' );";
+			db_query( $query );
+		}
 	}
 
 	# --------------------
