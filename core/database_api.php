@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.14 2003-02-17 03:42:16 jfitzell Exp $
+	# $Id: database_api.php,v 1.15 2003-02-17 13:16:28 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,10 +18,15 @@
 
 	# An array in which all executed queries are stored.  This is used for profiling
 	$g_queries_array = array();
+	
+	# Stores whether a database connection was succesfully opened.
+	$g_db_connected = false;
 
 	# --------------------
 	# Make a connection to the database
 	function db_connect( $p_hostname, $p_username, $p_password, $p_port ) {
+		global $g_db_connected;
+		
 		$t_result = @mysql_connect( "$p_hostname:$p_port", $p_username, $p_password );
 
 		if ( !$t_result ) {
@@ -29,6 +34,8 @@
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 			return false;
 		}
+		
+		$g_db_connected = true;
 
 		return true;
 	}
@@ -36,6 +43,8 @@
 	# --------------------
 	# Make a persistent connection to the database
 	function db_pconnect( $p_hostname, $p_username, $p_password, $p_port ) {
+		global $g_db_connected;
+		
 		$t_result = @mysql_pconnect( "$p_hostname:$p_port", $p_username, $p_password );
 
 		if ( !$t_result ) {
@@ -43,8 +52,18 @@
 			trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
 			return false;
 		}
+		
+		$g_db_connected = true;
 
 		return true;
+	}
+	
+	# --------------------
+	# Returns whether a connection to the database exists
+	function db_is_connected() {
+		global $g_db_connected;
+		
+		return $g_db_connected;
 	}
 
 	# --------------------
@@ -64,6 +83,7 @@
 		# @@@ remove p_error_on_failure and use @ in every caller that used to use it
 		if ( !$t_result && $p_error_on_failure ) {
 			db_error($p_query);
+			var_dump($p_query);
 			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 			return false;
 		} else {

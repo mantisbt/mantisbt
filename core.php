@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.23 2003-02-17 03:35:26 jfitzell Exp $
+	# $Id: core.php,v 1.24 2003-02-17 13:16:28 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -55,8 +55,10 @@
 	require_once( $t_core_path.'lang_api.php' );
 
 	# error functions should be loaded to allow database to print errors
+	require_once( $t_core_path.'authentication_api.php' );
 	require_once( $t_core_path.'html_api.php' );
 	require_once( $t_core_path.'error_api.php' );
+	require_once( $t_core_path.'gpc_api.php' );
 
 	# initialize our timer
 	$g_timer = new BC_Timer;
@@ -75,8 +77,6 @@
 	}
 
 	require_once( $t_core_path.'project_api.php' );
-	require_once( $t_core_path.'gpc_api.php' );
-	require_once( $t_core_path.'authentication_api.php' );
 	require_once( $t_core_path.'access_api.php' );
 	require_once( $t_core_path.'print_api.php' );
 	require_once( $t_core_path.'helper_api.php' );

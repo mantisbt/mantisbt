@@ -6,12 +6,92 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.9 2003-01-23 21:44:44 jlatour Exp $
+	# $Id: lang_api.php,v 1.10 2003-02-17 13:16:28 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Language (Internationalization) API
 	###########################################################################
+	
+	# Cache of localization strings in the language specified by the last 
+	# lang_load call
+	$g_lang_strings = array();
+	
+	# Currently loaded language
+	$g_lang_current = '';
+	
+	# ------------------
+	# Loads the specified language and stores it in $g_lang_strings,
+	# to be used by lang_get
+	function lang_load( $p_lang ) {
+		global $g_lang_strings, $g_lang_current;
+		
+		if ($g_lang_current == $p_lang) {
+			return;
+		}
+		
+		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
+		require_once( $t_lang_dir . 'strings_'.$p_lang.'.txt' );
+		
+		# Allow overriding strings declared in the language file.
+		# custom_strings_inc.php can use $g_active_language
+		$t_custom_strings = dirname ( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'custom_strings_inc.php';
+		if ( file_exists( $t_custom_strings ) ) {
+			require_once( $t_custom_strings );
+		}
+		
+		$t_vars = get_defined_vars();
+		
+		foreach ( array_keys( $t_vars ) as $t_var ) {
+			$t_lang_var = ereg_replace( '^s_', '', $t_var );
+			if ( $t_lang_var != $t_var ) {
+				$g_lang_strings[$t_lang_var] = $$t_var;
+			}
+		}
+		
+		$g_lang_current = $p_lang;
+	}
+	
+	# ------------------
+	# Loads the user's language or, if the database is unavailable, the default language
+	function lang_load_default() {
+		global $g_string_cookie_val;
+		
+		# Confirm that the user's language can be determined
+		if ( db_is_connected() && !is_blank( $g_string_cookie_val ) ) {
+			
+			$t_mantis_user_pref_table 	= config_get( 'mantis_user_pref_table' );
+			$t_mantis_user_table		= config_get( 'mantis_user_table' );
+			
+			$query = "SELECT DISTINCT language
+					FROM $t_mantis_user_pref_table p, $t_mantis_user_table u
+					WHERE u.cookie_string='$g_string_cookie_val' AND
+							u.id=p.user_id";
+
+			$result = db_query( $query );
+			$t_active_language = db_result( $result, 0 , 0 );
+
+			if ( false == $t_active_language ) {
+				$t_active_language = config_get( 'default_language' );
+			}
+			
+		} else {
+			$t_active_language = config_get( 'default_language' );
+		}
+		
+		lang_load( $t_active_language );
+	}
+	
+	# ------------------
+	# Ensures that a language file has been loaded
+	function lang_ensure_loaded() {
+		global $g_lang_current;
+		
+		# Load the language, if necessary
+		if ( '' == $g_lang_current ) {
+			lang_load_default();
+		}
+	}
 
 	# ------------------
 	# Retrieves an internationalized string
@@ -19,6 +99,9 @@
 	#    1. The string in the current user's preferred language (if defined)
 	#    2. The string in English
 	function lang_get( $p_string ) {
+		global $g_lang_strings;
+		
+		lang_ensure_loaded();
 		
 		# note in the current implementation we always return the same value
 		#  because we don't have a concept of falling back on a language.  The
@@ -26,7 +109,7 @@
 		#  defined in the correct language
 
 		if ( lang_exists( $p_string ) ) {
-			return $GLOBALS['s_'.$p_string];
+			return $g_lang_strings[$p_string];
 		} else {
 			trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
 			return '';
@@ -36,7 +119,11 @@
 	# ------------------
 	# Check the language entry, if found return true, otherwise return false.
 	function lang_exists( $p_string ) {
-		return ( isset( $GLOBALS['s_' . $p_string] ) );
+		global $g_lang_strings;
+		
+		lang_ensure_loaded();
+		
+		return ( isset( $g_lang_strings[$p_string] ) );
 	}
 
 	# ------------------
@@ -54,42 +141,5 @@
 				return $p_default;
 			}
 		}
-	}
-
-	# ------------------
-	# MAIN CODE
-	# ------------------
-
-	# Nasty code to select the proper language file
-	# Default language is used if database is unavailable (for error handling)
-	if ( function_exists('db_query') && !is_blank( $g_string_cookie_val ) ) {
-		$query = "SELECT DISTINCT language
-				FROM $g_mantis_user_pref_table p, $g_mantis_user_table u
-				WHERE u.cookie_string='$g_string_cookie_val' AND
-						u.id=p.user_id";
-		$result = db_query( $query );
-		$g_active_language = db_result( $result, 0 , 0 );
-		if ( false == $g_active_language ) {
-			$g_active_language = $g_default_language;
-		}
-	} else {
-		$g_active_language = $g_default_language;
-	}
-
-	# in most scenarios English is done first, then translated,
-	# hence including the English first would show non-translated
-	# strings in English rather than giving errors (if the copying 
-	# script is not used)
-	$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
-	if ( $g_active_language != 'english' ) {
-		require_once( $t_lang_dir . 'strings_english.txt' );
-	}
-	require_once( $t_lang_dir . 'strings_'.$g_active_language.'.txt' );
-
-	# Allow overriding strings declared in the language file.
-	# custom_strings_inc.php can use $g_active_language
-	$t_custom_strings = dirname ( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'custom_strings_inc.php';
-	if ( file_exists( $t_custom_strings ) ) {
-		require_once( $t_custom_strings );
 	}
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.23 2003-02-16 10:52:17 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.24 2003-02-17 13:16:28 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -48,7 +48,7 @@
 	# Return true if there is a currently logged in and authenticated user,
 	#  false otherwise
 	function auth_is_user_authenticated() {
-		if ( '' == auth_get_current_user_cookie() ) {
+		if ( !db_is_connected() || '' == auth_get_current_user_cookie() ) {
 			return false;
 		} else {
 			return true;
