@@ -151,7 +151,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 					'include_path',
 					'short_open_tag');
 	
-	while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
+	while ( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 ?>
 <tr>
 	<td bgcolor="#ffffff">
@@ -173,7 +173,7 @@ span.title    { font-family:Verdana, Arial; font-size: 12pt; color: #000000; fon
 	<td bgcolor="#f4f4f4">
 		<span class="title">File Uploads</span><br />
 		<?php
-			if( ini_get( 'file_uploads' ) ) {
+			if ( ini_get( 'file_uploads' ) ) {
 		?>
 				<p>File uploads are ENABLED</p>
 

@@ -21,7 +21,7 @@
 	$good_upload = 0;
 	$disallowed = 0;
 
-	if( !isset( $HTTP_POST_FILES['f_file'] ) ) {
+	if ( !isset( $HTTP_POST_FILES['f_file'] ) ) {
 		print_mantis_error( ERROR_UPLOAD_FAILURE );
 	}
 

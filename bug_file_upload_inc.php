@@ -12,6 +12,7 @@
 <?php # Upload File Form BEGIN ?>
 <?php
 	if ( ( ON == $g_allow_file_upload )&&
+		( ini_get( 'file_uploads' ) ) &&
 		( $v_status < RESOLVED )&&
 		( access_level_check_greater_or_equal( REPORTER ) ) ) {
 ?>
