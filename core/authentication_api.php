@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.9 2002-09-18 07:15:20 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.10 2002-09-21 09:00:02 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -152,7 +152,13 @@
 
 		$t_password = user_get_field( $p_user_id, 'password' );
 
-		if ( auth_process_plain_password( $p_test_password ) == $t_password ) {
+		# extract a salt of the right length from the password
+		#  it may be that we don't need the salt (only the crypt methods need it)
+		#  but there is no harm in providing it and that way we don't have to check
+		#  the authentication method here as well
+		$t_salt = substr( $t_password, 0, CRYPT_SALT_LENGTH );
+
+		if ( auth_process_plain_password( $p_test_password, $t_salt ) == $t_password ) {
 			return true;
 		} else {
 			return false;
@@ -162,17 +168,22 @@
 	# --------------------
 	# Encrtpy and return the plain password given, as appropriate for the current
 	#  global login method.
-	function auth_process_plain_password( $p_password ) {
+	function auth_process_plain_password( $p_password, $p_salt=null ) {
 		$t_login_method = config_get( 'login_method' );
 
 		switch ( $t_login_method ) {
 			case CRYPT:
-				$salt = substr( $p_password, 0, 2 );
-				$t_processed_password = crypt( $p_password, $salt );
-				break;
+			# @@@ jlatour says we shouldn't be providing a salt when encrypting
+			#     and certainly not the password since it appears plaintext in the
+			#     encrypted form.  That means I don't understand why we have
+			#     CRYPT_FULL_SALT at all.  for now it just behaves the same way
+			#     as CRYPT but we should change it or remove it or something - jf
 			case CRYPT_FULL_SALT:
-				$salt = $p_password;
-				$t_processed_password = crypt( $p_password, $salt );
+				if ( null !== $p_salt ) {
+					$t_processed_password = crypt( $p_password, $salt );
+				} else {
+					$t_processed_password = crypt( $p_password );
+				}
 				break;
 			case MD5:
 				$t_processed_password = md5( $p_password );
