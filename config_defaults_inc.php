@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.202 2004-08-28 13:50:57 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.203 2004-08-28 13:57:19 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -247,7 +247,7 @@
 	# note if you allow users to create their own accounts, they
 	#  must specify an email at that point, no matter what the value
 	#  of this option is.  Otherwise they wouldn't get their passwords.
-	$g_allow_blank_email	= ON;
+	$g_allow_blank_email	= OFF;
 
 	# Only allow and send email to addresses in the given domain
 	# For example:
