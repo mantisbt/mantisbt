@@ -84,6 +84,7 @@ Mantis ChangeLog
  * Reworked !isset() checks to use check_varset().
  * Reworked BCTimer class to be more useful for debugging.
  * Reworked code formatting for $c_ variables.
+ * Rewrote large parts of Mantis to improve security.
  * Updated comments in all localization files to point to correct file names.
  * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
  * Added the ability to enter a bugnote when you update a bug.

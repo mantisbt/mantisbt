@@ -55,6 +55,24 @@
 			extract( $HTTP_SERVER_VARS );
 		}
 	}
+	
+	# Experimental support for $_* variables in PHP < 4.1.0
+	if ( $t_phpversion[0] < 4 || $t_phpversion[1] < 1 ) {
+		global $_REQUEST, $_GET, $_POST, $_COOKIE, $_SERVER;
+		
+		$_GET = $HTTP_GET_VARS;
+		$_POST = $HTTP_POST_VARS;
+		$_COOKIE = $HTTP_COOKIE_VARS;
+		$_SERVER = $HTTP_SERVER_VARS;
+		
+		$_REQUEST = $HTTP_COOKIE_VARS;
+		foreach ($HTTP_POST_VARS as $key => $value) {
+			$_REQUEST[$key] = $value;
+		}
+		foreach ($HTTP_GET_VARS as $key => $value) {
+			$_REQUEST[$key] = $value;
+		}
+	}
 
 	include( 'core_timer_API.php' );
 
@@ -92,6 +110,7 @@
 		include ( 'custom_strings_inc.php' );
 	}
 
+	require( 'core_security_API.php' );
 	require( 'core_html_API.php' );
 	require( 'core_print_API.php' );
 	require( 'core_helper_API.php' );
