@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: check.php,v 1.9 2004-08-06 17:19:50 thraxisp Exp $
+	# $Id: check.php,v 1.10 2004-08-21 15:01:59 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -240,6 +240,56 @@ if ( substr( php_uname(), 0, 7 ) == 'Windows' ) {
 	test_bug_download_threshold();
 	test_bug_attachments_allow_flags();
 ?>
+<tr>
+	<td bgcolor="#ffffff">
+		check mail configuration: send_reset_password = ON requires allow_blank_email = OFF
+	</td>
+	<?php
+		if ( ( ON == config_get( 'send_reset_password' ) ) &&
+				( OFF != config_get( 'allow_blank_email' ) ) ) {
+			print_test_result( BAD );
+		} else {
+			print_test_result( GOOD );
+		}
+	?>
+<tr>
+	<td bgcolor="#ffffff">
+		check mail configuration: send_reset_password = ON requires enable_email_notification = ON
+	</td>
+	<?php
+		if ( ( ON == config_get( 'send_reset_password' ) ) &&
+				( ON != config_get( 'enable_email_notification' ) ) ) {
+			print_test_result( BAD );
+		} else {
+			print_test_result( GOOD );
+		}
+	?>
+<tr>
+	<td bgcolor="#ffffff">
+		check mail configuration: allow_signup = ON requires enable_email_notification = ON
+	</td>
+	<?php
+		if ( ( ON == config_get( 'allow_signup' ) ) &&
+				( ON != config_get( 'enable_email_notification' ) ) ) {
+			print_test_result( BAD );
+		} else {
+			print_test_result( GOOD );
+		}
+	?>
+<tr>
+	<td bgcolor="#ffffff">
+		check mail configuration: allow_signup = ON requires send_reset_password = ON
+	</td>
+	<?php
+		if ( ( ON == config_get( 'allow_signup' ) ) &&
+				( ON != config_get( 'send_reset_password' ) ) ) {
+			print_test_result( BAD );
+		} else {
+			print_test_result( GOOD );
+		}
+	?>
+</tr>
+
 </table>
 
 
