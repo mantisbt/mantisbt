@@ -5,8 +5,12 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# <SQLI>
-	# This page allows the close / suppress / others mass treatments, and display the adequate page
+	# --------------------------------------------------------
+	# $Id: bug_actiongroup_page.php,v 1.24 2002-10-23 00:50:53 jfitzell Exp $
+	# --------------------------------------------------------
+?>
+<?php
+	# This page allows actions to be performed an an array of bugs
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>

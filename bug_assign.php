@@ -5,18 +5,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
-	# This module is based on bug_update.php and provides a quick method
-	# for assigning a call to the currently signed on user.
-	# Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
-
 	# --------------------------------------------------------
-	# $Revision: 1.23 $
-	# $Author: jfitzell $
-	# $Date: 2002-10-20 23:59:48 $
-	#
-	# $Id: bug_assign.php,v 1.23 2002-10-20 23:59:48 jfitzell Exp $
+	# $Id: bug_assign.php,v 1.24 2002-10-23 00:50:53 jfitzell Exp $
 	# --------------------------------------------------------
-
+?>
+<?php
 	# Assign bug to user then redirect to viewing page
 ?>
 <?php require_once( 'core.php' ) ?>

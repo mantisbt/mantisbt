@@ -4,9 +4,13 @@
 	# Copyright (C) 2002         Mantis Team   - mantisbt-dev@lists.sourceforge.net
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
+
+	# --------------------------------------------------------
+	# $Id: bug_actiongroup.php,v 1.16 2002-10-23 00:50:53 jfitzell Exp $
+	# --------------------------------------------------------
 ?>
 <?php
-	# This page allows the close / suppress / others mass treatments, and display the adequate page
+	# This page allows actions to be performed an an array of bugs
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
@@ -62,5 +66,5 @@
 		}
 	}
 
-	print_meta_redirect( 'view_all_bug_page.php',0 );
+	print_meta_redirect( 'view_all_bug_page.php', 0 );
 ?>

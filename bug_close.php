@@ -6,11 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.25 $
-	# $Author: jfitzell $
-	# $Date: 2002-10-20 23:59:48 $
-	#
-	# $Id: bug_close.php,v 1.25 2002-10-20 23:59:48 jfitzell Exp $
+	# $Id: bug_close.php,v 1.26 2002-10-23 00:50:53 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,17 +16,14 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_bug_id		= gpc_get_int( 'f_bug_id' );
+	$f_bugnote_text	= gpc_get_string( 'f_bugnote_text', '' );
+
 	project_access_check( $f_bug_id );
-	check_access( $g_close_bug_threshold );
+	check_access( config_get( 'close_bug_threshold' ) );
 	bug_ensure_exists( $f_bug_id );
 
-	# check variables
-	check_varset( $f_bugnote_text, '' );
+	bug_close( $f_bug_id, $f_bugnote_text );
 
-	$result = bug_close( $f_bug_id, $f_bugnote_text );
-	if ( $result ) {
-		print_header_redirect( 'view_all_bug_page.php' );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( 'view_all_bug_page.php' );
 ?>
