@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.80 2004-09-21 07:39:39 jlatour Exp $
+	# $Id: manage_proj_edit_page.php,v 1.81 2004-09-22 10:15:33 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -299,7 +299,8 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		<form method="post" action="manage_proj_ver_add.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="version" size="32" maxlength="64" />
-			<input type="submit" class="button" value="<?php echo lang_get( 'add_version_button' ) ?>" />
+			<input type="submit" name="add_version" class="button" value="<?php echo lang_get( 'add_version_button' ) ?>" />
+			<input type="submit" name="add_and_edit_version" class="button" value="<?php echo lang_get( 'add_and_edit_version_button' ) ?>" />
 		</form>
 	</td>
 </tr>

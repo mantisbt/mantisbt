@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.208 $
+	# $Revision: 1.209 $
 	# $Author: bpfennigschmidt $
-	# $Date: 2004-09-22 10:10:09 $
+	# $Date: 2004-09-22 10:14:59 $
 	#
-	# $Id: strings_english.txt,v 1.208 2004-09-22 10:10:09 bpfennigschmidt Exp $
+	# $Id: strings_english.txt,v 1.209 2004-09-22 10:14:59 bpfennigschmidt Exp $
 	###########################################################################
 ?>
 <?php
@@ -639,6 +639,7 @@ $s_categories = 'Categories';
 $s_add_category_button = 'Add Category';
 $s_versions = 'Versions';
 $s_add_version_button = 'Add Version';
+$s_add_and_edit_version_button = 'Add and Edit Version';
 $s_edit_link = 'Edit';
 $s_actions = 'Actions';
 $s_version = 'Version';
