@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.30 2003-02-11 09:08:39 jfitzell Exp $
+	# $Id: bug_view_page.php,v 1.31 2003-02-11 14:08:46 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -58,7 +58,7 @@
 
 		<!-- Send Bug Reminder -->
 	<?php
-		if ( current_user_is_anonymous() &&
+		if ( !current_user_is_anonymous() &&
 			  access_level_check_greater_or_equal( config_get( 'bug_reminder_threshold' ) ) ) {
 	?>
 		<span class="small">
