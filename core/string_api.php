@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.50 2004-05-26 05:25:32 int2str Exp $
+	# $Id: string_api.php,v 1.51 2004-05-27 23:53:23 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -400,4 +400,12 @@
 	function string_repeat_char( $p_character, $p_repeats ) {
 		return str_pad( '', $p_repeats, $p_character );
 	}
+
+	# --------------------
+	# Format date for display
+	function string_format_complete_date( $p_date ) {
+		$t_timestamp = db_unixtimestamp( $p_date );
+		return date( config_get( 'complete_date_format' ), $t_timestamp );
+	}
+
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.14 2004-05-27 02:00:57 int2str Exp $
+	# $Id: version_api.php,v 1.15 2004-05-27 23:53:23 int2str Exp $
 	# --------------------------------------------------------
 
 	### Version API ###
@@ -217,12 +217,5 @@
 			$rows[] = $row;
 		}
 		return $rows;
-	}
-
-	# --------------------
-	# Format timestamp for display
-	function version_format_date( $p_date_order ) {
-		$t_timestamp = db_unixtimestamp( $p_date_order );
-		return date( config_get( 'complete_date_format' ), $t_timestamp );
 	}
 ?>
