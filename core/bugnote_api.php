@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.9 2002-10-10 12:42:23 vboctor Exp $
+	# $Id: bugnote_api.php,v 1.10 2002-12-30 08:09:24 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -83,7 +83,7 @@
 			$t_bugnote_text_id = db_insert_id();
 
 			# Check for private bugnotes.
-			if ( $c_private && access_level_check_greater_or_equal( $g_private_bugnote_threshold ) ) {
+			if ( $c_private && access_level_check_greater_or_equal( config_get( 'private_bugnote_threshold' ) ) ) {
 				$t_view_state = PRIVATE;
 			} else {
 				$t_view_state = PUBLIC;
