@@ -199,11 +199,6 @@
 	$g_show_update = BOTH;
 	$g_show_view   = BOTH;
 
-	# --- display source code ---------
-	# Display a link at the bottom of the page to allow administrators to view the PHP source
-	# WARNING: Potential security hazard.  Only turn this on when you really need it (for debugging)
-	$g_show_source = OFF;
-
 	# --- footer menu -----------------
 	# Display another instance of the menu at the bottom.  The top menu will still remain.
 	$g_show_footer_menu = OFF;
@@ -499,28 +494,10 @@
 	# eg. for bug: a link would be bug:98
 	$g_bug_link_tag = '#';
 
-	# --- Timer ----------------------
-	# Time page loads.  Shows at the bottom of the page.
-	$g_show_timer   = OFF;
-
-	# used for development only.  Leave OFF
-	$g_debug_timer = OFF;
-	
 	# --- Queries --------------------
 	# Shows the total number/unique number of queries executed to serve the page.
 	$g_show_queries_count = ON;
 	
-	# Shows the list of all queries that are executed in chronological order from top
-	# to bottom.  This option is only effective when $g_show_queries_count is ON.
-	# WARNING: Potential security hazard.  Only turn this on when you really
-	# need it (for debugging/profiling)
-	$g_show_queries_list = OFF;
-
-	# --- register globals -----------
-	# @@@ experimental
-	# if your register_globals is Off then set this to OFF
-	$g_register_globals          = ON;
-
 	# Automatically set status to ASSIGNED whenever a bug is assigned to a person.
 	# This is useful for installations where assigned status is to be used when
 	# the defect is in progress, rather than just put in a person's queue.
@@ -743,4 +720,43 @@
 	# ---------------------------------
 	# Specify where the user should be sent after logging out.
 	$g_logout_redirect_page           = $g_path."login_page".$g_php;
+
+	###########################
+	# Debugging
+	###########################
+	# --- display source code ---------
+	# Display a link at the bottom of the page to allow administrators to view the PHP source
+	# WARNING: Potential security hazard.  Only turn this on when you really need it (for debugging)
+	$g_show_source = OFF;
+
+	# --- Timer ----------------------
+	# Time page loads.  Shows at the bottom of the page.
+	$g_show_timer   = OFF;
+
+	# used for development only.  Leave OFF
+	$g_debug_timer = OFF;
+
+	# Shows the list of all queries that are executed in chronological order from top
+	# to bottom.  This option is only effective when $g_show_queries_count is ON.
+	# WARNING: Potential security hazard.  Only turn this on when you really
+	# need it (for debugging/profiling)
+	$g_show_queries_list = OFF;
+
+	# --- detailed error messages -----
+	# Shows a list of variables and their values when an error is triggered
+	# Only applies to error types configured to 'halt' in $g_display_errors, below
+	# WARNING: Potential security hazard.  Only turn this on when you really
+	# need it for debugging
+	$g_show_detailed_errors = ON;
+
+	# --- error dsiplay configuration ---
+	# Control which errors are ignored ('none'), which are displayed
+	#  in the middle of the page ('inline'), and which cause execution
+	#  to be halted ('halt')
+	$g_display_errors = array();
+	$g_display_errors[E_NOTICE] = 'none';
+	$g_display_errors[E_WARNING] = 'inline';
+	$g_display_errors[E_USER_NOTICE] = 'none';
+	$g_display_errors[E_USER_WARNING] = 'inline';
+	$g_display_errors[E_USER_ERROR] = 'halt';
 ?>

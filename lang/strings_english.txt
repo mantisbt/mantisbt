@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.69 $
+	# $Revision: 1.70 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-22 00:02:30 $
+	# $Date: 2002-08-23 04:04:09 $
 	#
-	# $Id: strings_english.txt,v 1.69 2002-08-22 00:02:30 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.70 2002-08-23 04:04:09 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -161,6 +161,7 @@
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
 	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
 	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+	$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
 
 	# General Strings
 	$s_go_back = 'Go Back';

@@ -149,6 +149,7 @@
 	define( 'ERROR_COOKIES_DISABLED',    14 );
 	define( 'ERROR_UPLOAD_FAILURE',      15 );
 	define( 'ERROR_FILE_TOO_BIG',        16 );
+	define( 'ERROR_GPC_VAR_NOT_FOUND',   17 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);
