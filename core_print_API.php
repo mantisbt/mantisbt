@@ -496,7 +496,7 @@
 
 		$t_count = count( $zook_arr );
 		for ($i=0;$i<$t_count;$i++) {
-			PRINT "<option value=\"".ACTION."\">".$zook_arr[$i]."</option>";
+			PRINT "<option value=\""."\">".$zook_arr[$i]."</option>";
 		}
 	}
 	# --------------------
