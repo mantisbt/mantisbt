@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.116 2004-08-03 13:47:48 vboctor Exp $
+	# $Id: html_api.php,v 1.117 2004-08-04 02:47:44 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -858,9 +858,11 @@
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
 		$t_status = bug_get_field( $p_bug_id, 'status' );
+		$t_reopen_status = config_get( 'bug_reopen_status' );
+		$t_project = bug_get_field( $p_bug_id, 'project_id' );
 
-		if ( bug_check_workflow( $t_status, config_get( 'bug_reopen_status' ) ) &&
-			( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id ) ||
+		if ( bug_check_workflow( $t_status, $t_reopen_status ) &&
+			( access_has_bug_level( access_get_status_threshold( $t_reopen_status, $p_project ), $p_bug_id ) ||
 			( ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() ) &&
 	 		  ( ON == config_get( 'allow_reporter_reopen' ) ) 
 			 	) )
