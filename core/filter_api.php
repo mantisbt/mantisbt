@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.90 2005-03-21 23:17:54 thraxisp Exp $
+	# $Id: filter_api.php,v 1.91 2005-03-23 18:40:14 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -652,12 +652,6 @@
 			$t_where	= '';
 		}
 
-		if ( ( 'on' == $t_filter['sticky_issues'] ) && ( NULL !== $p_show_sticky ) ) {
-			$t_sticky_order = " sticky DESC, ";
-		} else {
-			$t_sticky_order = "";
-		}
-
 		# Possibly do two passes. First time, grab the IDs of issues that match the filters. Second time, grab the IDs of issues that
 		# have bugnotes that match the text search if necessary.
 		$t_id_array = array();
@@ -748,11 +742,22 @@
 			$t_filter['dir'] = 'DESC';
 		}
 
+		$t_order_array = array();
 		$t_sort_fields = split( ',', $t_filter['sort'] );
 		$t_dir_fields = split( ',', $t_filter['dir'] );
 
-		$t_order = " ORDER BY $t_sticky_order";
+		if ( ! in_array( 'last_updated', $t_sort_fields ) ) {
+			$t_sort_fields[] = 'last_updated';
+			$t_dir_fields[] = 'DESC';
+        }
+		if ( ! in_array( 'date_submitted', $t_sort_fields ) ) {
+			$t_sort_fields[] = 'date_submitted';
+			$t_dir_fields[] = 'DESC';
+        }
 
+		if ( ( 'on' == $t_filter['sticky_issues'] ) && ( NULL !== $p_show_sticky ) ) {
+			$t_order_array[] = "sticky DESC";
+		} 
 		for ( $i=0; $i < count( $t_sort_fields ); $i++ ) {
 			$c_sort = db_prepare_string( $t_sort_fields[$i] );
 
@@ -762,6 +767,7 @@
         		$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
         		$t_join .= " LEFT JOIN $t_custom_field_string_table ON ( ( $t_custom_field_string_table.bug_id = $t_bug_table.id ) AND ( $t_custom_field_string_table.field_id = $t_custom_field_id ) )";
         		$c_sort = "$t_custom_field_string_table.value";
+        		$t_select_clauses[] = "$t_custom_field_string_table.value";
         	}
 
 			if ( 'DESC' == $t_dir_fields[$i] ) {
@@ -770,15 +776,11 @@
 				$c_dir = 'ASC';
 			}
 
-			$t_order .= "$c_sort $c_dir, ";
+			$t_order_array[] = "$c_sort $c_dir";
 		}
-
-		if ( ( $c_sort != 'last_updated' ) && ( 1 == count( $t_sort_fields ) ) ) {
-            $t_order .= 'last_updated DESC, date_submitted DESC';
-        } else {
-            $t_order .= 'date_submitted DESC';
-        }
-
+		$t_order = " ORDER BY " . implode( ', ', $t_order_array );
+		$t_select	= implode( ', ', array_unique( $t_select_clauses ) );
+		
 		$query2  = "SELECT DISTINCT $t_select
 					$t_from
 					$t_join
@@ -1723,14 +1725,19 @@
 					$t_sort_fields = split( ',', $t_filter['sort'] );
 					$t_dir_fields = split( ',', $t_filter['dir'] );
 
-					echo string_get_field_name( $t_sort_fields[0] ) . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[0] ) );
-					echo "<input type=\"hidden\" name=\"sort_1\" value=\"$t_sort_fields[0]\" />";
-					echo "<input type=\"hidden\" name=\"dir_1\" value=\"$t_dir_fields[0]\" />";
+					for ( $i=0; $i<2; $i++ ) {
+						if ( isset( $t_sort_fields[$i] ) ) {
+							$t_sort = $t_sort_fields[$i];
+        					if ( strpos( $t_sort, 'custom_' ) === 0 ) {
+        						$t_field_name = string_display( lang_get_defaulted( substr( $t_sort, strlen( 'custom_' ) ) ) );
+        					} else {
+        						$t_field_name = string_get_field_name( $t_sort );
+        					}
 
-					if ( isset( $t_sort_fields[1] ) ) {
-						echo ", " . string_get_field_name( $t_sort_fields[1] ) . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[1] ) );
-						echo "<input type=\"hidden\" name=\"sort_2\" value=\"$t_sort_fields[1]\" />";
-						echo "<input type=\"hidden\" name=\"dir_2\" value=\"$t_dir_fields[1]\" />";
+							echo $t_field_name . " " . lang_get( 'bugnote_order_' . strtolower( $t_dir_fields[$i] ) );
+							echo "<input type=\"hidden\" name=\"sort_$i\" value=\"$t_sort_fields[$i]\" />";
+							echo "<input type=\"hidden\" name=\"dir_$i\" value=\"$t_dir_fields[$i]\" />";
+						}
 					}
 				?>
 			</td>
@@ -2589,11 +2596,17 @@
 		# get all of the displayed fields for sort, then drop ones that
 		#  are not appropriate and translate the rest
 		$t_fields = helper_call_custom_function( 'get_columns_to_view', array() );
+$t_fields[] = 'custom_How Found';
 		$t_n_fields = count( $t_fields );
 		$t_shown_fields[""] = "";
 		for ( $i=0; $i < $t_n_fields; $i++ ) {
 			if ( !in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment' ) ) ) {
-				$t_shown_fields[$t_fields[$i]] = string_get_field_name( $t_fields[$i] );
+        		if ( strpos( $t_fields[$i], 'custom_' ) === 0 ) {
+        			$t_field_name = string_display( lang_get_defaulted( substr( $t_fields[$i], strlen( 'custom_' ) ) ) );
+        		} else {
+        			$t_field_name = string_get_field_name( $t_fields[$i] );
+        		}
+				$t_shown_fields[$t_fields[$i]] = $t_field_name;
 			}
 		}
 		$t_shown_dirs[""] = "";
