@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.33 2005-03-27 19:26:27 thraxisp Exp $
+	# $Id: file_download.php,v 1.34 2005-03-31 01:08:37 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -87,7 +87,7 @@
 	} else {
 		header( 'Pragma: no-cache' );
 	}
-	header( 'Expires: 0' );
+	header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 
 	# dump file content to the connection.
 	switch ( config_get( 'file_upload_method' ) ) {
