@@ -218,7 +218,7 @@
 			$result = db_query( $query );
 
 			# log new bug
-			history_log_event_special( $f_id, FILE_ADDED, file_get_display_name( $f_file_name ) );
+			history_log_event_special( $t_bug_id, FILE_ADDED, file_get_display_name( $f_file_name ) );
 		}
 
 		# Notify users of new bug report

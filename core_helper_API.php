@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.51 $
+	# $Revision: 1.52 $
 	# $Author: vboctor $
-	# $Date: 2002-07-04 10:00:59 $
+	# $Date: 2002-07-07 06:28:14 $
 	#
-	# $Id: core_helper_API.php,v 1.51 2002-07-04 10:00:59 vboctor Exp $
+	# $Id: core_helper_API.php,v 1.52 2002-07-07 06:28:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -195,9 +195,9 @@
 			WHERE bug_id='$c_id'";
 	$result = db_query($query);
 
-	if ( DISK == $g_file_upload_method ) {
+	if ( ( DISK == $g_file_upload_method ) || ( FTP == $g_file_upload_method ) ) {
 		# Delete files from disk
-		$query = "SELECT diskfile
+		$query = "SELECT diskfile, filename
 			FROM $g_mantis_bug_file_table
 			WHERE bug_id='$c_id'";
 		$result = db_query($query);
@@ -206,12 +206,14 @@
 		# there may be more than one file
 		for ($i=0;$i<$file_count;$i++){
 			$row = db_fetch_array( $result );
-			$t_diskfile = $row['diskfile'];
 
-			# use this instead of delete;
-			# in windows replace with system("del $t_diskfile");
-			chmod( $t_diskfile, 0775 );
-			unlink( $t_diskfile );
+			file_delete_local ( $row['diskfile'] );
+
+			if ( FTP == $g_file_upload_method ) {
+				$ftp = file_ftp_connect();
+				file_ftp_delete ( $ftp, $row['filename'] );
+				file_ftp_disconnect( $ftp );
+			}
 		}
 	}
 

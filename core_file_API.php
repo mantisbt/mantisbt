@@ -4,11 +4,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
+	# $Revision: 1.2 $
 	# $Author: vboctor $
-	# $Date: 2002-07-06 15:02:43 $
+	# $Date: 2002-07-07 06:28:14 $
 	#
-	# $Id: core_file_API.php,v 1.1 2002-07-06 15:02:43 vboctor Exp $
+	# $Id: core_file_API.php,v 1.2 2002-07-07 06:28:14 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -91,7 +91,7 @@
 	# --------------------
 	# Delete a file from the ftp server
 	function file_ftp_delete ( $p_conn_id, $p_filename ) {
-		ftp_delete( $p_conn_id, $p_filename );
+		@ftp_delete( $p_conn_id, $p_filename );
 	}
 	# --------------------
 	# Disconnect from the ftp server
@@ -102,7 +102,9 @@
 	# Delete a local file even if it is read-only.
 	function file_delete_local( $p_filename ) {
 		# in windows replace with system("del $t_diskfile");
-		chmod( $p_filename, 0775 );
-		unlink( $p_filename );
+		if ( file_exists( $p_filename ) ) {
+			chmod( $p_filename, 0775 );
+			unlink( $p_filename );
+		}
 	}
 ?>
