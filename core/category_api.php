@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.8 2003-02-08 23:34:46 jfitzell Exp $
+	# $Id: category_api.php,v 1.9 2003-02-08 23:37:44 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -147,7 +147,7 @@
 		$query = "UPDATE $t_bug_table
 				  SET category='$c_new_category'
 				  WHERE category='$c_category'
-					AND project_id='$c_project_id'
+					AND project_id='$c_project_id'";
 		db_query( $query );
 
 		# db_query() errors on failure so:
@@ -161,7 +161,7 @@
 
 		project_ensure_exists( $p_project_id );
 
-		$t_project_category_table = config_get( 'mantis_project_category_table' );
+		$t_project_category_table	= config_get( 'mantis_project_category_table' );
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "DELETE
@@ -171,7 +171,7 @@
 
 		$query = "UPDATE $t_bug_table
 				  SET category=''
-				  WHERE project_id='$c_project_id'
+				  WHERE project_id='$c_project_id'";
 		db_query( $query );
 
 		# db_query() errors on failure so:
