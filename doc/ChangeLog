@@ -2,16 +2,15 @@ Mantis ChangeLog
 
 2004.xx.xx  -  0.18.2
 
- * Fix #1479: Users receive foreign-language e-mail. Now it is used default language for all e-mails.
  * Sec #3595: bug_view_page.php: restricted custom fields are shown.
  * Sec #3596: print_bugnote_inc.php: private bugnotes are visible for not granted users (thanks to yarik123).
- * Enh #1088: formatting of text in bugnotes, description areas.
+ * Enh #1088: Formatting of text in bugnotes, description areas.
  * Enh #1649: Replace 'Assign to Me' with 'Assign To:' and dropdown of developers.
  * Enh #3362: Generic email notifications.
  * Enh #3548: Support RSS for news syndication.
  * Enh #3552: Improved layout of Summary page and added 'Reporter / Resolution', 'Developer / Resolution' and 'Reporter Effectiveness' reports. (thanks to Lincoln Maskey)
- * Enh #3564: In annonymous mode, login should remember the current page.
- * Enh #3601: Translation to Lithuanian language for Mantis.
+ * Enh #3564: In anonymous mode, login should remember the current page.
+ * Fix #1479: Users receive foreign-language e-mail. Now it is used default language for all e-mails.
  * Fix #3077: Inconsistency: "Assigned To" versus "Handler".
  * Fix #3118: My Account: after update of password, wrong information is given.
  * Fix #3135: Changing Print-Options does not work.
@@ -19,18 +18,16 @@ Mantis ChangeLog
  * Fix #3522: /news_update.php looks different from /main_page.php.
  * Fix #3537: Rewriting custom values with 0 when updating a bug.
  * Fix #3539: Simple view page shows advanced custom fields.
- * Fix #3541: link to documentation wrong.
+ * Fix #3541: Link to documentation refers to old website.
  * Fix #3568: Monitor deleted bugs? [monitor records are not deleted on bug deletion]
  * Fix #3572: The summary_graph_imp_* pages have shortcut PHP tags.
- * Fix #3575: Missing german translation for $s_email_assigned_msg.
  * Fix #3577: Unselecting custom fields causes undesired break lines in Excel.
- * Fix #3579: in the german language file strings_german.txt $s_reset_request_msg has a little problem.
- * Fix #3590: News displayed wrong in Firebird/Firefox
+ * Fix #3579: In the German localisation, $s_reset_request_msg was incorrectly terminated. 
+ * Fix #3590: News displayed wrong in Firebird/Firefox.
  * Fix #3594: Incorrect encoding for Turkish localization.
- * Fix #3597: custom fields names are not translaten in email (thanks to yarik123).
- * Fix #3598: bug history: consuming custom fields or not?
+ * Fix #3597: Custom fields names are not translated in email (thanks to yarik123).
+ * Fix #3598: Bug history: consuming custom fields or not?
  * Fix #3602: Problems with Mantis 0.18.1 localization (partial fix).
- * Fix #3603: Missing german strings in localisation file (thanks to Dr. Jürgen Kehrel).
  * Languages: Added Lithuanian and Serbian localisations.
  * Languages: Updated Chinese (simplified), Danish, German, Korean, Norwegian, Portuguese and Spanish localisations.
  * Mantis website moved to http://www.mantisbt.org
