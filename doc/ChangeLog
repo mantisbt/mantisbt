@@ -30,6 +30,7 @@ Mantis
  * Added support to move bugs from one project to another.
  * Added email check to admin_check.php3
  * Added a check to make sure the cookie_string really is unique.
+ * Added a check for a duplciate user in the manage create user page.
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Removed sql_to_unix_time() function.  Unecessary with removal of TIMESTAMPS.

@@ -10,6 +10,17 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
 
+	# Check for duplicate username
+	$query = "SELECT username
+		FROM $g_mantis_user_table
+		WHERE username='$f_username'";
+    $result = db_query( $query );
+    if ( db_num_rows( $result ) > 0 ) {
+    	PRINT "$f_username $s_duplicate_username<p>";
+		PRINT "<a href=\"$g_manage_create_user_page\">$s_proceed</a>";
+    	exit;
+    }
+
 	if ( $f_password != $f_password_verify ) {
 		echo "ERROR: passwords do not match";
 		exit;
