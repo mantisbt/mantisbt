@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.2 $
-	# $Author: jlatour $
-	# $Date: 2002-08-22 18:15:10 $
+	# $Revision: 1.3 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-23 01:34:08 $
 	#
-	# $Id: core_security_API.php,v 1.2 2002-08-22 18:15:10 jlatour Exp $
+	# $Id: core_security_API.php,v 1.3 2002-08-23 01:34:08 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -22,7 +22,10 @@
 	# If the variable is not set, the default is returned. 
 	# If magic_quotes_gpc is on, slashes will be stripped from the value before being returned.
 	function get_var( $p_var_name, $p_default = 'nil' ) {
-		global $_REQUEST;
+		# simulate auto-globals from PHP v4.1.0 (see also code in core_php_API.php)
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_REQUEST;
+		}
 
 		if ( isset( $_REQUEST[$p_var_name] ) ) {
 			$t_result = $_REQUEST[$p_var_name];

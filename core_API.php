@@ -9,6 +9,13 @@
 	# INCLUDES
 	###########################################################################
 
+	# Before doing anything else, start output buffering so we don't prevent
+	#  headers from being sent if there's a blank line in an included file
+	ob_start();
+
+	# Include compatibility file before anything else
+	include( 'core_php_API.php' );
+
   	require( 'constant_inc.php' );
 	if ( file_exists( 'custom_constant_inc.php' ) ) {
 		include( 'custom_constant_inc.php' );
@@ -39,40 +46,6 @@
 	obsolete_config_variable('g_notify_developers_on_new', 'g_notify_flags');
 	obsolete_config_variable('g_notify_on_new_threshold', 'g_notify_flags');
 	obsolete_config_variable('g_notify_admin_on_new', 'g_notify_flags');
-
-	ini_set('magic_quotes_runtime', 0);
-
-	# @@@ Experimental
-	# deal with register_globals being Off
-	$t_phpversion = explode('.', phpversion());
-	if ( OFF == $g_register_globals ) {
-		if ( $t_phpversion[0] == 4 && $t_phpversion[1] >= 1 ) {
-			extract( $_REQUEST );
-			extract( $_SERVER );
-		} else {
-			extract( $HTTP_POST_VARS );
-			extract( $HTTP_GET_VARS );
-			extract( $HTTP_SERVER_VARS );
-		}
-	}
-	
-	# Experimental support for $_* variables in PHP < 4.1.0
-	if ( $t_phpversion[0] < 4 || $t_phpversion[1] < 1 ) {
-		global $_REQUEST, $_GET, $_POST, $_COOKIE, $_SERVER;
-		
-		$_GET = $HTTP_GET_VARS;
-		$_POST = $HTTP_POST_VARS;
-		$_COOKIE = $HTTP_COOKIE_VARS;
-		$_SERVER = $HTTP_SERVER_VARS;
-		
-		$_REQUEST = $HTTP_COOKIE_VARS;
-		foreach ($HTTP_POST_VARS as $key => $value) {
-			$_REQUEST[$key] = $value;
-		}
-		foreach ($HTTP_GET_VARS as $key => $value) {
-			$_REQUEST[$key] = $value;
-		}
-	}
 
 	include( 'core_timer_API.php' );
 
