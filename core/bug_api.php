@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.7 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bug_api.php,v 1.8 2002-09-07 08:40:30 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -343,5 +343,22 @@
 		if ( ! bug_exists( $p_bug_id ) ) {
 			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
 		}
+	}
+	# --------------------
+	# return the timestamp for the most recent time at which a bugnote
+	#  associated wiht the bug was modified
+	function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
+
+		$t_bugnote_table = config_get( 'mantis_bugnote_table' );
+
+		$query = "SELECT UNIX_TIMESTAMP(last_modified) as last_modified
+				  FROM $t_bugnote_table
+				  WHERE bug_id='$c_bug_id'
+				  ORDER BY last_modified DESC
+				  LIMIT 1";
+		$result = db_query( $query );
+		
+		return db_result( $result );
 	}
 ?>
