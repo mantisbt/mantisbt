@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.63 2004-09-26 01:57:25 thraxisp Exp $
+	# $Id: bug_view_advanced_page.php,v 1.64 2004-10-16 00:22:39 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,6 +37,9 @@
 
 	html_page_top1( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	html_page_top2();
+
+	$t_access_level_needed = config_get( 'view_history_threshold' );
+	$t_can_view_history = access_has_bug_level( $t_access_level_needed, $f_bug_id );
 ?>
 
 <br />
@@ -86,8 +89,10 @@
 			<span class="small"><?php print_bracket_link( 'bug_view_page.php?bug_id=' . $f_bug_id, lang_get( 'view_simple_link' ) ) ?></span>
 	<?php } ?>
 
+	<?php if ( $t_can_view_history ) { ?>
 		<!-- History -->
 		<span class="small"><?php print_bracket_link( 'bug_view_page.php?bug_id=' . $f_bug_id . '&amp;history=1#history', lang_get( 'bug_history' ) ) ?></span>
+	<?php } ?>
 
 		<!-- Print Bug -->
 		<span class="small"><?php print_bracket_link( 'print_bug_page.php?bug_id=' . $f_bug_id, lang_get( 'print' ) ) ?></span>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.24 2004-09-22 08:55:35 bpfennigschmidt Exp $
+	# $Id: history_inc.php,v 1.25 2004-10-16 00:22:39 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,6 +18,13 @@
 	$t_core_path = config_get( 'core_path' );
 	
 	require_once( $t_core_path.'history_api.php' );
+?>
+
+<?php
+	$t_access_level_needed = config_get( 'view_history_threshold' );
+	if ( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
+		return;
+	}
 ?>
 
 <a name="history" id="history" /><br />
