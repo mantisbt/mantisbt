@@ -1,6 +1,6 @@
 Mantis
 
-03.XX.2002  -   0.17.2
+03.31.2002  -   0.17.2
 
  * Fixed error in set_project where setting a project would result in a loop.
  * Fixed account profiles to check for blank inputs.
