@@ -13,7 +13,7 @@ Mantis ChangeLog
  * Fix #3646: Error in core/obsolete.php.
  * Opt #0000: new config option view_handler_threshold - threshold needed to view the bug handler (now works for emails only).
  * Opt #0000: new config option view_history_threshold - threshold needed to view the bug history (now works for emails only).
- * Languages: Updated Czech, Estonian, Japanese (EUC and SJIS), Serbian and Spanish localisations.
+ * Languages: Updated Czech, Danish, Estonian, Japanese (EUC and SJIS), Serbian and Spanish localisations.
 
 2004.02.29  -  0.18.2
 

@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.59 $
+	# $Revision: 1.60 $
 	# $Author: jlatour $
-	# $Date: 2004-03-14 20:10:40 $
+	# $Date: 2004-03-17 14:24:15 $
 	#
-	# $Id: strings_danish.txt,v 1.59 2004-03-14 20:10:40 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.60 2004-03-17 14:24:15 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -619,13 +619,13 @@ $s_confirm_account_pruning = 'Ønsker du virkelig at slette gamle konti, der aldr
 $s_edit_user_title = 'Rediger Bruger';
 $s_reset_password_button = 'Nulstil Adgangskode';
 $s_delete_user_button = 'Slet Bruger';
-$s_reset_password_msg = 'Nulstil Adgangskode stiller adgangskoden til at være tom.';
+$s_reset_password_msg = 'Danner tilfældig adgangskodes og sender den til brugeren.';
 $s_reset_password_msg2 = 'Nulstil Adgangskode stiller adgangskoden til at være tom.';
 $s_show_all_users = 'ALL';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Konto beskyttet. Kan ikke nulstille adgangskode.';
-$s_account_reset_msg = 'Konto adgangskode nulstillet...';
+$s_account_reset_msg = 'Nyt kodeord er genereret og sendt til brugeren...';
 $s_account_reset_msg2 = 'Konto adgangskode nulstillet...';
 
 # manage_user_update.php
@@ -835,7 +835,7 @@ $s_viewing_bug_advanced_details_title = 'Avanceret oversigt over fejl i dette pr
 $s_product_build = 'Produkt Udgave';
 $s_system_profile = 'System Beskrivelse';
 $s_update_bug_button = 'Opdater Fejl';
-$s_bug_assign_to_button = 'Assign To:';
+$s_bug_assign_to_button = 'Tildel til:';
 $s_reopen_bug_button = 'Genåben Fejl';
 $s_attached_files = 'Vedhæftede Filer';
 $s_publish = 'Udgivet';
