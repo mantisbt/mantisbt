@@ -4,13 +4,13 @@ Mantis ChangeLog
 
  * Sec #3595: bug_view_page.php: restricted custom fields are shown.
  * Sec #3596: print_bugnote_inc.php: private bugnotes are visible for not granted users (thanks to yarik123).
- * Enh #3609: added new configuration variable $g_show_documentation with default value ON to show/hide 'Docs' menu item.
  * Enh #1088: Formatting of text in bugnotes, description areas.
  * Enh #1649: Replace 'Assign to Me' with 'Assign To:' and dropdown of developers.
  * Enh #3362: Generic email notifications.
  * Enh #3548: Support RSS for news syndication.
  * Enh #3552: Improved layout of Summary page and added 'Reporter / Resolution', 'Developer / Resolution' and 'Reporter Effectiveness' reports. (thanks to Lincoln Maskey)
  * Enh #3564: In anonymous mode, login should remember the current page.
+ * Enh #3609: added new configuration variable $g_show_documentation with default value ON to show/hide 'Docs' menu item.
  * Fix #1479: Users receive foreign-language e-mail. Now it is used default language for all e-mails.
  * Fix #3077: Inconsistency: "Assigned To" versus "Handler".
  * Fix #3118: My Account: after update of password, wrong information is given.
