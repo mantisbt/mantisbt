@@ -5,14 +5,14 @@
 	# See the README and LICENSE files for details
 ?>
 <?
-	### Login page POSTs results to login.php
-	### Check to see if the user is already logged in via login_cookie_check()
+	# Login page POSTs results to login.php
+	# Check to see if the user is already logged in via login_cookie_check()
 ?>
 <? include( "core_API.php" ) ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### Check to see if the user is logged in and then validate the cookie value
+	# Check to see if the user is logged in and then validate the cookie value
 	if ( !empty( $g_string_cookie_val ) ) {
 		login_cookie_check( $g_main_page );
 	}

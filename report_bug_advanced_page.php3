@@ -10,6 +10,11 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
+	# these pages are invalid for the "All Project" selection
+	if ( "0000000" == $g_project_cookie_val ) {
+		print_header_redirect( $g_login_select_proj_page );
+	}
+
 	if ( 1 == $g_show_report ) {
 		print_header_redirect ( $g_report_bug_page );
 	}

@@ -35,14 +35,13 @@
 		if (( isset( $f_perm_login ) )&&( $f_perm_login=="on")) {
 			# set permanent cookie (1 year)
 			setcookie( $g_string_cookie, $u_cookie_string, time()+$g_cookie_time_length );
-
-			if ( $t_project_id > 0 ) {
+			if ( $t_project_id > -1 ) {
 				setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length );
 			}
 		} else {
 			# set temp cookie, cookie dies after browser closes
 			setcookie( $g_string_cookie, $u_cookie_string );
-			if ( $t_project_id > 0 ) {
+			if ( $t_project_id > -1 ) {
 				setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length+$g_cookie_time_length );
 			}
 		}
@@ -55,7 +54,7 @@
 	}
 
 	# goto main_page or back to login_page
-	if ( $t_project_id > 0 ) {
+	if ( $t_project_id > -1 ) {
 		$t_redirect_url = $g_main_page;
 	} else if ( $login_result ) {
 		if ( isset($f_project_id) ) {

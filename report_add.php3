@@ -10,10 +10,15 @@
 <? include( "core_API.php" ) ?>
 <? login_cookie_check() ?>
 <?
+	# these pages are invalid for the "All Project" selection
+	if ( "0000000" == $g_project_cookie_val ) {
+		print_header_redirect( $g_login_select_proj_page );
+	}
+
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( REPORTER );
 
-	### We check to see if the variable exists to avoid warnings
+	# We check to see if the variable exists to avoid warnings
 
 	if ( !isset( $f_steps_to_reproduce ) ) {
 		$f_steps_to_reproduce = "";

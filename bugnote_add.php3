@@ -64,8 +64,8 @@
    	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_no_referer_redirect_url( $f_id );
-	if (( $g_quick_proceed == 1 )&&( $result )) {
+	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
+	if (( 1 == $g_quick_proceed )&&( $result )) {
 		print_header_redirect( $t_redirect_url );
 	}
 ?>

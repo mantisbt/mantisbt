@@ -76,7 +76,8 @@
 	</td>
 	<td width="50%">
 		<select name="f_project_id">
-			<option value="0000000">
+			<option value="-1"></option>
+			<option value="00000000"><? echo $s_all_projects ?></option>
 			<? print_project_option_list( $u_default_project ) ?></option>
 		</select>
 	</td>

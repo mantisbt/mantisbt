@@ -7,7 +7,7 @@
 <?
 	if ( !isset( $g_string_cookie_val ) ) {
 		### required for variables to get picked up
-		global 	$g_string_cookie_val,
+		global 	$g_string_cookie_val, $g_project_cookie_val,
 				$g_mantis_user_table, $g_mantis_user_pref_table,
 				$g_hostname, $g_db_username, $g_db_password, $g_database_name,
 
@@ -27,33 +27,21 @@
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	### grab the access level and protected information for the
-	### currently logged in user
-    #@@@ $t_access_level = get_current_user_field( "access_level" );
+	# grab the access level and protected information for the
+	# currently logged in user
     $t_protected = get_current_user_field( "protected" );
 ?>
 	<a href="<? echo $g_main_page ?>"><? echo $s_main_link ?></a> |
 	<a href="<? echo $g_view_all_bug_page ?>"><? echo $s_view_bugs_link ?></a> |
 <?
-	### REPORT link
-	if ( access_level_check_greater_or_equal( REPORTER ) ) {
-		switch( $g_show_report ) {
-		case 0: if ( get_current_user_pref_field( "advanced_report" )==1 ) {
-					PRINT "<a href=\"$g_report_bug_advanced_page\">$s_report_bug_link</a> | ";
- 				} else {
-					PRINT "<a href=\"$g_report_bug_page\">$s_report_bug_link</a> | ";
-				}
-				break;
-		case 1: PRINT "<a href=\"$g_report_bug_page\">$s_report_bug_link</a> | ";
-				break;
-		case 2: PRINT "<a href=\"$g_report_bug_advanced_page\">$s_report_bug_link</a> | ";
-				break;
-		}  # end report/viewer switch
-	}  # end report/viewer if
+	if ( ( access_level_check_greater_or_equal( REPORTER ) ) && ( "0000000" != $g_project_cookie_val ) ) {
+		$t_report_url = get_report_redirect_url( 1 );
+		PRINT "<a href=\"$t_report_url\">$s_report_bug_link</a> | ";
+	}
 ?>
 	<a href="<? echo $g_summary_page ?>"><? echo $s_summary_link ?></a> |
 	<a href="<? echo $g_account_page ?>"><? echo $s_account_link ?></a> |
-<? if ( access_level_check_greater_or_equal( MANAGER ) ) { ?>
+<? if ( ( access_level_check_greater_or_equal( MANAGER ) ) && ( "0000000" != $g_project_cookie_val ) ) { ?>
 	<a href="<? echo $g_proj_user_menu_page ?>"><? echo $s_users_link ?></a> |
 <?	} ?>
 

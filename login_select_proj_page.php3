@@ -38,6 +38,7 @@
 	</td>
 	<td width="60%">
 		<select name="f_project_id">
+		<option value="00000000"><? echo $s_all_projects ?></option>
 		<? print_project_option_list() ?>
 		</select>
 	</td>

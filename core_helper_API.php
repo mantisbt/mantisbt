@@ -301,10 +301,12 @@
 	# Some proxies strip out HTTP_REFERER.
 	# This function helps determine which pages to redirect to
 	# based on site and user preference.
-	function get_view_redirect_url( $p_bug_id ) {
+	function get_view_redirect_url( $p_bug_id, $p_no_referer=0 ) {
 		global $HTTP_REFERER, $g_show_view, $g_view_bug_page, $g_view_bug_advanced_page;
 
-		if ( ( !isset( $HTTP_REFERER ) ) || ( empty( $HTTP_REFERER )) ) {
+		if ( ( !isset( $HTTP_REFERER ) ) ||
+			 ( empty( $HTTP_REFERER ) ) ||
+			 ( 1 == $p_no_referer ) ) {
 			switch ( $g_show_view ) {
 				case 0:	if ( 1 == get_current_user_pref_field( "advanced_view" ) ) {
 							return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
@@ -320,31 +322,15 @@
 		}
 	}
 	# --------------------
-	# Some proxies strip outf HTTP_REFERER.
-	# This function helps determine which pages to redirect to
-	# based on site and user preference.
-	function get_no_referer_redirect_url( $p_bug_id ) {
-		global $g_show_view, $g_view_bug_page, $g_view_bug_advanced_page;
-
-		switch ( $g_show_view ) {
-			case 0:	if ( 1 == get_current_user_pref_field( "advanced_view" ) ) {
-						return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
-					} else {
-						return $g_view_bug_page."?f_id=".$p_bug_id;
-					}
-			case 1:	return $g_view_bug_page."?f_id=".$p_bug_id;
-			case 2:	return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
-			default:return $g_view_bug_page."?f_id=".$p_bug_id;
-		}
-	}
-	# --------------------
 	# Some proxies strip out HTTP_REFERER.
 	# This function helps determine which pages to redirect to
 	# based on site and user preference.
-	function get_report_redirect_url() {
+	function get_report_redirect_url( $p_no_referer=0 ) {
 		global $HTTP_REFERER, $g_show_report, $g_report_bug_page, $g_report_bug_advanced_page;
 
-		if ( ( !isset( $HTTP_REFERER ) ) || ( empty( $HTTP_REFERER )) ) {
+		if ( ( !isset( $HTTP_REFERER ) ) ||
+			 ( empty( $HTTP_REFERER ) ) ||
+			 ( 1 == $p_no_referer ) ) {
 			switch( $g_show_report ) {
 				case 0: if ( 1 == get_current_user_pref_field( "advanced_report" ) ) {
 							return $g_report_bug_advanced_page;

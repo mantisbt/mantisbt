@@ -10,6 +10,11 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( MANAGER );
 
+	# these pages are invalid for the "All Project" selection
+	if ( "0000000" == $g_project_cookie_val ) {
+		print_header_redirect( $g_login_select_proj_page );
+	}
+
 	if ( !isset( $f_sort ) ) {
 		$f_sort = "username";
 	}
