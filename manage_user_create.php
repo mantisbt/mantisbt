@@ -38,7 +38,7 @@
 
 	user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled );
 
-	$t_redirect_url = 'manage_page.php';
+	$t_redirect_url = 'manage_user_page.php';
 
 	print_page_top1();
 

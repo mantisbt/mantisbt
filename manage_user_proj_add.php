@@ -23,7 +23,7 @@
 		$result = project_add_user( $t_project_id, $f_user_id, $f_access_level );
 	}
 
-	$t_redirect_url = 'manage_user_page.php?user_id='.$f_user_id;
+	$t_redirect_url = 'manage_user_edit_page.php?user_id='.$f_user_id;
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

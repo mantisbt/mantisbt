@@ -14,7 +14,7 @@
 
 	$t_result = user_reset_password( $f_user_id );
 
-	$t_redirect_url = 'manage_page.php';
+	$t_redirect_url = 'manage_user_page.php';
 ?>
 <?php print_page_top1() ?>
 <?php

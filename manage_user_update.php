@@ -63,7 +63,7 @@
 	}
 
     $result = db_query( $query );
-    $t_redirect_url = 'manage_page.php';
+    $t_redirect_url = 'manage_user_page.php';
 ?>
 <?php print_page_top1() ?>
 <?php

@@ -23,7 +23,7 @@
 		user_delete($row['id']);
 	}
 
-	$t_redirect_url = 'manage_page.php';
+	$t_redirect_url = 'manage_user_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

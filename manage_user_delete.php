@@ -17,7 +17,7 @@
 
 	user_delete( $f_user_id );
 
-    $t_redirect_url = 'manage_page.php';
+    $t_redirect_url = 'manage_user_page.php';
 
 	print_page_top1();
 

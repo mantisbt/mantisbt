@@ -43,8 +43,8 @@
 		$t_redirect_url =  'summary_page.php';
 	} else if ( eregi( 'proj_user_menu_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url = 'proj_user_menu_page.php';
-	} else if ( eregi( 'manage_page.php', $_SERVER['HTTP_REFERER'] ) ){
-		$t_redirect_url = 'manage_page.php';
+	} else if ( eregi( 'manage_user_page.php', $_SERVER['HTTP_REFERER'] ) ){
+		$t_redirect_url = 'manage_user_page.php';
 	} else {
 		$t_redirect_url = 'main_page.php';
 	}

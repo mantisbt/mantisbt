@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.37 2003-01-25 21:13:20 jlatour Exp $
+	# $Id: html_api.php,v 1.38 2003-01-30 06:32:51 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -369,7 +369,7 @@
 
 				if ( access_level_check_greater_or_equal( MANAGER ) ) {
 					if ( access_level_check_greater_or_equal( ADMINISTRATOR ) ) {
-					  $t_link = 'manage_page.php';
+					  $t_link = 'manage_user_page.php';
 					} else {
 					  $t_link = 'manage_proj_menu_page.php';
 					}
@@ -465,20 +465,20 @@
 			return;
 		}
 
-		$t_manage_page 				= 'manage_page.php';
+		$t_manage_user_page 				= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_menu_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
 		$t_documentation_page 		= 'documentation_page.php';
 
 		switch ( $p_page ) {
-			case $t_manage_page				: $t_manage_page 				= ''; break;
+			case $t_manage_user_page				: $t_manage_user_page 				= ''; break;
 			case $t_manage_project_menu_page: $t_manage_project_menu_page 	= ''; break;
 			case $t_manage_custom_field_page: $t_manage_custom_field_page 	= ''; break;
 			case $t_documentation_page		: $t_documentation_page 		= ''; break;
 		}
 
 		PRINT '<br /><div align="center">';
-			print_bracket_link( $t_manage_page, lang_get( 'manage_users_link' ) );
+			print_bracket_link( $t_manage_user_page, lang_get( 'manage_users_link' ) );
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
 			if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
 				print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
