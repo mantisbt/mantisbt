@@ -24,7 +24,7 @@ CREATE TABLE mantis_bug_table (
    last_updated timestamp(14),
    eta enum('none','< 1 day','2-3 days','< 1 week','< 1 month','> 1 month') DEFAULT 'none' NOT NULL,
    bug_text_id mediumint(7) unsigned zerofill DEFAULT '0000000' NOT NULL,
-   os varchar(64) NOT NULL,
+   os varchar(32) NOT NULL,
    os_build varchar(16) NOT NULL,
    platform varchar(32) NOT NULL,
    version varchar(16) NOT NULL,

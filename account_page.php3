@@ -32,11 +32,16 @@
 <p>
 <? print_menu( $g_menu_include_file ) ?>
 
+<?
+	if ( access_level_check_greater( "reporter" ) ) {
+?>
 <p>
 <div align=center>
-	[ <a href="<? echo $g_account_manage_profiles ?>">Manage Profiles</a> ]
+	[ <a href="<? echo $g_account_profile_manage_page ?>">Manage Profiles</a> ]
 </div>
-
+<?
+	}
+?>
 <p>
 <div align=center>
 <table bgcolor=<? echo $g_primary_border_color ?> width=50%>
@@ -45,7 +50,6 @@
 	<table width=100% cols=3>
 	<form method=post action="<? echo $g_account_update ?>">
 	<input type=hidden name=f_id value="<? echo $u_id ?>">
-	<input type=hidden name=f_action value="update">
 	<tr>
 		<td>
 			<b>Edit Account</b>
@@ -98,8 +102,8 @@
 			</form>
 		<td align=right>
 			<form method=post action="<? echo $g_account_delete_page ?>">
-			<input type=hidden name=f_id value="<? echo $u_id ?>">
-			<input type=submit value="Delete Account">
+				<input type=hidden name=f_id value="<? echo $u_id ?>">
+				<input type=submit value="Delete Account">
 		</td>
 			</form>
 	</tr>

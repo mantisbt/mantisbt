@@ -55,16 +55,16 @@
 			Headline<br>
 			Do not use "
 		</td>
-		<td>
+		<td width=75%>
 			<input type=text name=f_headline size=64 maxlength=64>
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
-		<td width=75%>
+		<td>
 			Body
 		</td>
 		<td>
-			<textarea name=f_body cols=60 rows=5></textarea>
+			<textarea name=f_body cols=60 rows=8></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -124,7 +124,7 @@
 	</tr>
 	<tr>
 		<td align=center colspan=2>
-			<input type=submit value=" Edit Post ">
+			<input type=submit value=" Submit ">
 		</td>
 		</form>
 	</tr>

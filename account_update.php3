@@ -12,34 +12,21 @@
 	### If an account is protected then no one can change the information
 	### This is useful for shared accounts or for demo purposes
 	if ( $f_protected!="on" ) {
-		if ( $f_action=="update" ) {
-			### Update everything except password
-		    $query = "UPDATE $g_mantis_user_table
-		    		SET username='$f_username', email='$f_email'
-		    		WHERE id='$f_id'";
-			$result = mysql_query( $query );
+		### Update everything except password
+	    $query = "UPDATE $g_mantis_user_table
+	    		SET username='$f_username', email='$f_email'
+	    		WHERE id='$f_id'";
+		$result = mysql_query( $query );
 
-			### Update password if changed and the two match
-			if ( !empty( $f_password ) ) {
-				if ( $f_password==$f_password_confirm ) {
-					$t_password = crypt( $f_password );
-					$query = "UPDATE $g_mantis_user_table
-							SET password='$t_password'
-							WHERE id='$f_id'";
-					$result = mysql_query( $query );
-		    	}
-			}
-		} ### end update
-		else if ( $f_action=="delete" ) {
-		    $query = "DELETE
-		    		FROM $g_mantis_user_table
-		    		WHERE id='$f_id'";
-		    $result = mysql_query( $query );
-		    ### Account is invalid so logout user
-		    header( "Location: $g_logout_page" );
-		} ### end delete
-		else {
-			echo "ERROR: INVALID ACTION";
+		### Update password if changed and the two match
+		if ( !empty( $f_password ) ) {
+			if ( $f_password==$f_password_confirm ) {
+				$t_password = crypt( $f_password );
+				$query = "UPDATE $g_mantis_user_table
+						SET password='$t_password'
+						WHERE id='$f_id'";
+				$result = mysql_query( $query );
+	    	}
 		}
 	} ### end if protected
 ?>

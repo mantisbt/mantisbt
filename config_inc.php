@@ -64,6 +64,7 @@
 	$g_mantis_bugnote_text_table   = $g_db_table_prefix."_bugnote_text_table";
 	$g_mantis_news_table           = $g_db_table_prefix."_news_table";
 	$g_mantis_user_table           = $g_db_table_prefix."_user_table";
+	$g_mantis_user_profile_table   = $g_db_table_prefix."_user_profile_table";
 
 	#--------------------
 	# page names
@@ -73,7 +74,7 @@
 	# bug view/update
 	$g_view_bug_all_page           = "view_bug_all_page".$g_php;
 	$g_view_bug_page               = "view_bug_page".$g_php;
-	$g_view_bug_yadvanced_page      = "view_bug_advanced_page".$g_php;
+	$g_view_bug_yadvanced_page     = "view_bug_advanced_page".$g_php;
 
 	$g_bug_delete_page             = "bug_delete_page".$g_php;
 	$g_bug_delete                  = "bug_delete".$g_php;
@@ -99,8 +100,16 @@
 
 	# account
 	$g_account_page                = "account_page".$g_php;
-	$g_account_delete_page         = "account_delete_page".$g_php;
 	$g_account_update              = "account_update".$g_php;
+	$g_account_delete_page         = "account_delete_page".$g_php;
+	$g_account_delete              = "account_delete".$g_php;
+
+	$g_account_profile_manage_page    = "account_profile_manage_page".$g_php;
+	$g_account_profile_add            = "account_profile_add".$g_php;
+	$g_account_profile_edit_page      = "account_profile_edit_page".$g_php;
+	$g_account_profile_update         = "account_profile_update".$g_php;
+	$g_account_profile_delete         = "account_profile_delete".$g_php;
+	$g_account_profile_make_default   = "account_profile_make_default".$g_php;
 
 	# site management
 	$g_manage_page                 = "manage_page".$g_php;
@@ -120,6 +129,8 @@
 	$g_news_edit_page              = "news_edit_page".$g_php;
 	$g_news_add                    = "news_add".$g_php;
 	$g_news_update                 = "news_update".$g_php;
+	$g_news_delete_page            = "news_delete_page".$g_php;
+	$g_news_delete                 = "news_delete".$g_php;
 
 	# login
 	$g_login                       = "login".$g_php;
