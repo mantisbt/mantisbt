@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.27 2002-09-16 04:16:58 jfitzell Exp $
+	# $Id: bugnote_edit_page.php,v 1.28 2002-09-21 10:17:13 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -46,7 +46,7 @@
 	$t_bugnote_text = string_edit_textarea( bugnote_get_text( $f_bugnote_id ) );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $t_bug_id, 1 );
+	$t_redirect_url = string_get_bug_view_url( $t_bug_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

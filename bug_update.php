@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.33 $
+	# $Revision: 1.34 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-16 04:16:58 $
+	# $Date: 2002-09-21 10:17:13 $
 	#
-	# $Id: bug_update.php,v 1.33 2002-09-16 04:16:58 jfitzell Exp $
+	# $Id: bug_update.php,v 1.34 2002-09-21 10:17:13 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -156,7 +156,6 @@
 
 	$f_bugnote_text = trim( $f_bugnote_text );
 	if ( !empty( $f_bugnote_text ) ) {
-#@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
 		$result = bugnote_add( $f_id, $f_bugnote_text, (bool)$f_private );
 	}
 
@@ -180,7 +179,7 @@
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
+	$t_redirect_url = string_get_bug_view_url( $f_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

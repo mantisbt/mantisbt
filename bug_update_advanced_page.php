@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.30 $
+	# $Revision: 1.31 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-07 10:06:53 $
+	# $Date: 2002-09-21 10:17:13 $
 	#
-	# $Id: bug_update_advanced_page.php,v 1.30 2002-09-07 10:06:53 jfitzell Exp $
+	# $Id: bug_update_advanced_page.php,v 1.31 2002-09-21 10:17:13 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -73,14 +73,7 @@
 	</td>
 	<td class="right" colspan="3">
 <?php
-	switch ( $g_show_view ) {
-		case 0: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_back_to_bug_link );
-				break;
-		case 1: print_bracket_link( 'view_bug_page.php?f_id='.$f_id, $s_back_to_bug_link );
-				break;
-		case 2: print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_back_to_bug_link );
-				break;
-	}
+	print_bracket_link( string_get_bug_view_url( $f_id ), $s_back_to_bug_link );
 
 	if ( BOTH == $g_show_update ) {
 		print_bracket_link( 'bug_update_page.php?f_id='.$f_id, $s_update_simple_link );

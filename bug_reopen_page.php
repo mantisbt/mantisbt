@@ -41,6 +41,6 @@
 </div>
 <?php # Resolve Form END ?>
 
-<?php include( $g_view_bug_inc ) ?>
+<?php include( $g_bug_view_inc ) ?>
 
 <?php print_page_bot1( __FILE__ ) ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.17 2002-09-16 04:16:59 jfitzell Exp $
+	# $Id: email_api.php,v 1.18 2002-09-21 10:17:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -401,12 +401,7 @@
 		$t_message = $g_email_separator1."\n";
 		if ( $p_message != lang_get( 'email_bug_deleted_msg' ) ) {
 			$t_message .= $g_path;
-			if ( ADVANCED_ONLY == $g_show_view || ( BOTH == $g_show_view && ON == current_user_get_pref( 'advanced_view' ) ) ) {
-				$t_message .= 'view_bug_advanced_page.php';
-			} else {
-				$t_message .= 'view_bug_page.php';
-			}
-			$t_message .= '?f_id='.$p_bug_id."\n";
+			$t_message .= string_get_bug_view_url( $p_bug_id ) . "\n";
 			$t_message .= $g_email_separator1."\n";
 		}
 		$t_message .= str_pad( lang_get( 'email_reporter' ) . ': ', ' ', $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";

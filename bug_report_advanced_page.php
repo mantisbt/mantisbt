@@ -13,11 +13,11 @@
 <?php
 	# this page is invalid for the 'All Project' selection
 	if ( 0 == helper_get_current_project() ) {
-		print_header_redirect( 'login_select_proj_page.php?ref=' . get_report_redirect_url( true ) );
+		print_header_redirect( 'login_select_proj_page.php?ref=' . string_get_bug_report_url() );
 	}
 
 	if ( SIMPLE_ONLY == config_get( 'show_report' ) ) {
-		print_header_redirect ( 'bug_add_page.php' );
+		print_header_redirect ( 'bug_report_page.php' );
 	}
 
 	check_access( REPORTER );
@@ -48,13 +48,13 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_add.php">
+		<form name="f_report_bug_form" method="post" <?php if ( ON == $g_allow_file_upload ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 		<?php echo $s_enter_report_details_title ?>
 	</td>
 	<td class="right">
 		<?php
 			if ( BOTH == $g_show_report ) {
-				print_bracket_link( 'bug_add_page.php', $s_simple_report_link );
+				print_bracket_link( 'bug_report_page.php', $s_simple_report_link );
 			}
 		?>
 	</td>

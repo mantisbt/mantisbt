@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.16 2002-09-20 21:07:57 jfitzell Exp $
+	# $Id: print_api.php,v 1.17 2002-09-21 10:17:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -32,6 +32,21 @@
 			header( "Location: $p_url" );
 		}
 		die; # additional output can cause problems so let's just stop output here
+	}
+	# --------------------
+	# Print a redirect header to view a bug
+	function print_header_redirect_view( $p_bug_id ) {
+		print_header_redirect( string_get_bug_view_url( $p_bug_id ) );
+	}
+	# --------------------
+	# Print a redirect header to update a bug
+	function print_header_redirect_update( $p_bug_id ) {
+		print_header_redirect( string_get_bug_update_url( $p_bug_id ) );
+	}
+	# --------------------
+	# Print a redirect header to update a bug
+	function print_header_redirect_report() {
+		print_header_redirect( string_get_bug_report_url() );
 	}
 	# --------------------
 	# prints the name of the user given the id.  also makes it an email link.
@@ -79,11 +94,7 @@
 	# --------------------
 	function print_duplicate_id( $p_duplicate_id ) {
 		if ( $p_duplicate_id != '0000000' ) {
-			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-				PRINT "<a href=\"view_bug_advanced_page.php?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
-			} else {
-				PRINT "<a href=\"view_bug_page.php?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
-			}
+			echo string_get_view_bug_link( $p_duplicate_id );
 		}
 	}
 	# --------------------
@@ -777,7 +788,7 @@
 	# prints a link to VIEW a bug given an ID
 	#  account for the user preference and site override
 	function print_bug_link( $p_bug_id ) {
-		echo string_get_bug_link( $p_bug_id );
+		echo string_get_bug_view_link( $p_bug_id );
 	}
 
 	# --------------------

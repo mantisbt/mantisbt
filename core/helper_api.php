@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.17 2002-09-18 04:44:52 jfitzell Exp $
+	# $Id: helper_api.php,v 1.18 2002-09-21 10:17:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -149,68 +149,6 @@
 			}
 		}
 		return '@null@';
-	}
-	# --------------------
-	# Some proxies strip out HTTP_REFERER.
-	# This function helps determine which pages to redirect to
-	# based on site and user preference.
-	function get_view_redirect_url( $p_bug_id, $p_no_referer=false ) {
-		if ( ! php_version_at_least( '4.1.0' ) ) {
-			global $_SERVER;
-		}
-
-		$t_show_view = config_get( 'show_view' );
-
-		if ( ( !isset( $_SERVER['HTTP_REFERER'] ) ) ||
-			 ( empty( $_SERVER['HTTP_REFERER'] ) ) ||
-			 ( true == $p_no_referer ) ) {
-			switch ( $t_show_view ) {
-				case BOTH:
-						if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-							return 'view_bug_advanced_page.php?f_id='.$p_bug_id;
-						} else {
-							return 'view_bug_page.php?f_id='.$p_bug_id;
-						}
-				case SIMPLE_ONLY:
-						return 'view_bug_page.php?f_id='.$p_bug_id;
-				case ADVANCED_ONLY:
-						return 'view_bug_advanced_page.php?f_id='.$p_bug_id;
-				default:return 'view_bug_page.php?f_id='.$p_bug_id;
-			}
-		} else {
-			return $_SERVER['HTTP_REFERER'];
-		}
-	}
-	# --------------------
-	# Some proxies strip out HTTP_REFERER.
-	# This function helps determine which pages to redirect to
-	# based on site and user preference.
-	function get_report_redirect_url( $p_no_referer=false ) {
-		if ( ! php_version_at_least( '4.1.0' ) ) {
-			global $_SERVER;
-		}
-
-		$t_show_report = config_get( 'show_report' );
-
-		if ( ( !isset( $_SERVER['HTTP_REFERER'] ) ) ||
-			 ( empty( $_SERVER['HTTP_REFERER'] ) ) ||
-			 ( true == $p_no_referer ) ) {
-			switch( $t_show_report ) {
-				case BOTH:
-						if ( ON == current_user_get_pref( 'advanced_report' ) ) {
-							return 'bug_add_advanced_page.php';
-		 				} else {
-							return 'bug_add_page.php';
-						}
-				case SIMPLE_ONLY:
-						return 'bug_add_page.php';
-				case ADVANCED_ONLY:
-						return 'bug_add_advanced_page.php';
-				default:return 'bug_add_page.php';
-			}
-		} else {
-			return $_SERVER['HTTP_REFERER'];
-		}
 	}
 	# --------------------
 	# Contributed by Peter Palmreuther

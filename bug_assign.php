@@ -10,11 +10,11 @@
 	# Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
 	# --------------------------------------------------------
-	# $Revision: 1.21 $
+	# $Revision: 1.22 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-16 04:16:58 $
+	# $Date: 2002-09-21 10:17:13 $
 	#
-	# $Id: bug_assign.php,v 1.21 2002-09-16 04:16:58 jfitzell Exp $
+	# $Id: bug_assign.php,v 1.22 2002-09-21 10:17:13 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# Assign bug to user then redirect to viewing page
@@ -22,18 +22,14 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+	$f_id = gpc_get_int( 'f_id' );
+
 	project_access_check( $f_id );
-	check_access( $g_handle_bug_threshold );
+	check_access( config_get( 'handle_bug_threshold' ) );
 
-	bug_ensure_exists( $p_bug_id );
+	bug_ensure_exists( $f_id );
 
-	$result = bug_assign( $f_id, auth_get_current_user_id() );
+	bug_assign( $f_id, auth_get_current_user_id() );
 
-	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect_view( $f_id );
 ?>

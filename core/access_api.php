@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.6 2002-09-16 04:16:59 jfitzell Exp $
+	# $Id: access_api.php,v 1.7 2002-09-21 10:17:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -213,8 +213,7 @@
 			setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length, $g_cookie_path );
 			setcookie( $g_view_all_cookie, '' );
 
-			$t_redirect_url = get_view_redirect_url( $p_bug_id, 1 );
-			print_header_redirect( $t_redirect_url );
+			print_header_redirect_view( $p_bug_id );
 		}
 	}
 	# --------------------

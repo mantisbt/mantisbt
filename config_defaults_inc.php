@@ -737,7 +737,7 @@
 	$g_history_include_file			= $g_absolute_path."history_inc".$g_php;
 	$g_print_bugnote_include_file	= $g_absolute_path."print_bugnote_inc".$g_php;
 	$g_view_all_include_file		= $g_absolute_path."view_all_inc".$g_php;
-	$g_view_bug_inc					= $g_absolute_path."view_bug_inc".$g_php;
+	$g_bug_view_inc					= $g_absolute_path."bug_view_inc".$g_php;
 	$g_bug_file_upload_inc			= $g_absolute_path."bug_file_upload_inc".$g_php;
 	#----------------------------------
 

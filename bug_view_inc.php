@@ -6,11 +6,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.23 $
-	# $Author: prescience $
-	# $Date: 2002-09-03 02:41:51 $
+	# $Revision: 1.1 $
+	# $Author: jfitzell $
+	# $Date: 2002-09-21 10:17:13 $
 	#
-	# $Id: view_bug_inc.php,v 1.23 2002-09-03 02:41:51 prescience Exp $
+	# $Id: bug_view_inc.php,v 1.1 2002-09-21 10:17:13 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php

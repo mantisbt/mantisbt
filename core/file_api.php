@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.10 2002-09-16 10:05:46 jfitzell Exp $
+	# $Id: file_api.php,v 1.11 2002-09-21 10:17:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -21,7 +21,7 @@
 	}
 	# --------------------
 	# List the attachments belonging to the specified bug.  This is used from within
-	# view_bug_page.php and view_bug_advanced_page.php
+	# bug_view_page.php and bug_view_advanced_page.php
 	function file_list_attachments ( $p_bug_id ) {
 		$c_bug_id = db_prepare_int( $p_bug_id );
 

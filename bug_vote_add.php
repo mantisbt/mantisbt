@@ -21,7 +21,7 @@
     		WHERE id='$c_id'";
    	$result = db_query($query);
 
-	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
+	$t_redirect_url = string_get_bug_view_url( $f_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

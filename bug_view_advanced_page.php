@@ -6,17 +6,38 @@
 	# See the README and LICENSE files for details
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php # Login check is delayed, since this page can be viewed with no login (CRC needed) ?>
 <?php
-	if ( ADVANCED_ONLY == $g_show_view ) {
-		print_header_redirect ( 'view_bug_advanced_page.php?f_id='.$f_id );
-	}
+	# @@@@ Print - still needs to be implemented for published defects
+	# @@@@ Simple - still needs to be implemented for published defects
+	# @@@@ Bug History - consider logging the fact that defect was published and by who.
 
 	$f_id		= gpc_get_int( 'f_id' );
+	$f_check	= gpc_get_string( 'f_check', '' );
 	$f_history	= gpc_get_bool( 'f_history' );
 
+	if ( SIMPLE_ONLY == $g_show_view ) {
+		$t_simple_url = 'bug_view_page.php?f_id=' . $f_id;
+
+		if ( !empty( $f_check ) ) {
+			$t_simple_url .= '&amp;f_check=' . $f_check;
+		}
+
+		print_header_redirect ( $t_simple_url );
+	}
+
+	if ( !empty( $f_check ) ) {
+		if ( $f_check != helper_calc_crc( $f_id, __FILE__ ) ) {
+		  access_denied();
+		}
+	}
+	else
+	{
+		login_cookie_check();
+		project_access_check( $f_id );
+	}
+
 	$c_id = (integer)$f_id;
-	project_access_check( $f_id );
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
     		UNIX_TIMESTAMP(last_updated) as last_updated
@@ -33,8 +54,10 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-	# if bug is private, make sure user can view private bugs
-	access_bug_check( $f_id, $v_view_state );
+	if ( empty ( $f_check ) ) {
+		# if bug is private, make sure user can view private bugs
+		access_bug_check( $f_id, $v_view_state );
+	}
 
     $query = "SELECT *
     		FROM $g_mantis_bug_text_table
@@ -53,22 +76,40 @@
 	$v2_additional_information 	= string_display( $v2_additional_information );
 
 	compress_start();
+
+	print_page_top1();
+
+	if ( empty ( $f_check ) ) {
+		print_page_top2();
+	} else {
+		print_page_top2a();
+	}
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
 
 <br />
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="3">
-		<?php echo $s_viewing_bug_simple_details_title ?>
-		<span class="small"><?php print_bracket_link( "#bugnotes", $s_jump_to_bugnotes ) ?></span>
+	<td class="form-title" colspan="4">
+		<?php echo $s_viewing_bug_advanced_details_title ?>
+		<span class="small"><?php print_bracket_link( '#bugnotes', $s_jump_to_bugnotes ) ?></span>
 	</td>
-	<td class="right" colspan="3">
-<?php if ( BOTH == $g_show_view ) { ?>
-		<span class="small"><?php print_bracket_link( 'view_bug_advanced_page.php?f_id='.$f_id, $s_view_advanced_link )?></span>
+	<td class="right" colspan="2">
+
+<?php if ( empty( $f_check ) ) { ?>
+	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_id='.$f_id.'&amp;f_check=' . helper_calc_crc( $f_id, __FILE__ ), $s_publish )?></span>
 <?php }?>
-	<span class="small"><?php print_bracket_link( 'view_bug_page.php?f_id='.$f_id.'&amp;f_history=1#history', $s_bug_history ) ?></span>
+
+<?php if ( empty( $f_check ) && ( BOTH == $g_show_view ) ) { ?>
+		<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_id='.$f_id, $s_view_simple_link )?></span>
+<?php }?>
+<?php
+	if ( !empty ( $f_check ) ) {
+		$t_check = '&amp;f_check=' . $f_check;
+	} else {
+		$t_check = '';
+	}
+?>
+	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_id='.$f_id.$t_check.'&amp;f_history=1#history', $s_bug_history ) ?></span>
 	<span class="small"><?php print_bracket_link( 'print_bug_page.php?f_id='.$f_id, $s_print ) ?></span>
 	</td>
 </tr>
@@ -155,8 +196,11 @@
 	<td>
 		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
 	</td>
-	<td colspan="2">
-		&nbsp;
+	<td class="category">
+		<?php echo $s_platform ?>
+	</td>
+	<td>
+		<?php echo $v_platform ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -172,8 +216,67 @@
 	<td>
 		<?php print_duplicate_id( $v_duplicate_id ) ?>
 	</td>
+	<td class="category">
+		<?php echo $s_os ?>
+	</td>
+	<td>
+		<?php echo $v_os ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<?php echo $s_projection ?>
+	</td>
+	<td>
+		<?php echo get_enum_element( 'projection', $v_projection ) ?>
+	</td>
 	<td colspan="2">
+
+	</td>
+	<td class="category">
+		<?php echo $s_os_version ?>
+	</td>
+	<td>
+		<?php echo $v_os_build ?>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<?php echo $s_eta ?>
+	</td>
+	<td>
+		<?php echo get_enum_element( 'eta', $v_eta ) ?>
+	</td>
+	<td colspan="2">
+
+	</td>
+	<td class="category">
+		<?php echo $s_product_version ?>
+	</td>
+	<td>
+		<?php echo $v_version ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td colspan="4">
 		&nbsp;
+	</td>
+	<td class="category">
+		<?php echo $s_product_build ?>
+	</td>
+	<td>
+		<?php echo $v_build?>
+	</td>
+</tr>
+<tr class="row-2">
+	<td colspan="4">
+		&nbsp;
+	</td>
+	<td class="category">
+		<?php echo $s_votes ?>
+	</td>
+	<td>
+		<?php echo $v_votes ?>
 	</td>
 </tr>
 <tr>
@@ -199,6 +302,14 @@
 </tr>
 <tr class="row-1">
 	<td class="category">
+		<?php echo $s_steps_to_reproduce ?>
+	</td>
+	<td colspan="5">
+		<?php echo $v2_steps_to_reproduce ?>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
 		<?php echo $s_additional_information ?>
 	</td>
 	<td colspan="5">
@@ -206,8 +317,41 @@
 	</td>
 </tr>
 <?php
-	$t_user_id = current_user_get_field ( 'id' );
-	$t_show_attachments = ( ( $v_reporter_id == $t_user_id ) || access_level_check_greater_or_equal( $g_view_attachments_threshold ) );
+	# account profile description
+	if ( $v_profile_id > 0 ) {
+		$query = "SELECT description
+				FROM $g_mantis_user_profile_table
+				WHERE id='$v_profile_id'";
+		$result = db_query( $query );
+		$t_profile_description = '';
+		if ( db_num_rows( $result ) > 0 ) {
+			$t_profile_description = db_result( $result, 0 );
+		}
+		$t_profile_description = string_display( $t_profile_description );
+
+?>
+<tr>
+	<td class="spacer" colspan="6">
+		&nbsp;
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<?php echo $s_system_profile ?>
+	</td>
+	<td colspan="5">
+		<?php echo $t_profile_description ?>
+	</td>
+</tr>
+<?php
+	}
+
+	if ( !empty( $f_check ) ) {
+		$t_show_attachments = true;
+	} else {
+		$t_user_id = current_user_get_field ( 'id' );
+		$t_show_attachments = ( ( $v_reporter_id == $t_user_id ) || access_level_check_greater_or_equal( $g_view_attachments_threshold ) );
+	}
 
 	if ( $t_show_attachments ) {
 ?>
@@ -220,55 +364,6 @@
 	</td>
 </tr>
 <?php } ?>
-<tr class="row-1">
-	<td class="category">
-		<?php echo $s_bug_relationships ?>
-	</td>
-	<td colspan="5">
-		<?php
-			$result = relationship_fetch_all_src( $v_id );
-			$relationship_count = db_num_rows( $result );
-			for ($i=0;$i<$relationship_count;$i++) {
-				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v2' );
-
-				$t_bug_link = string_get_bug_link( $v2_destination_bug_id );
-				switch ( $v2_relationship_type ) {
-				case BUG_DUPLICATE:	$t_description = str_replace( '%id', $t_bug_link, $s_duplicate_of );
-									break;
-				case BUG_RELATED:	$t_description = str_replace( '%id', $t_bug_link, $s_related_to );
-									break;
-				case BUG_DEPENDANT:	$t_description = str_replace( '%id', $t_bug_link, $s_dependant_on );
-									break;
-				default:			$t_description = str_replace( '%id', $t_bug_link, $s_duplicate_of );
-				}
-
-				PRINT "$t_description<br />";
-			}
-		?>
-		<?php
-			$result = relationship_fetch_all_dest( $v_id );
-			$relationship_count = db_num_rows( $result );
-			for ($i=0;$i<$relationship_count;$i++) {
-				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v2' );
-
-				$t_bug_link = string_get_bug_link( $v2_source_bug_id );
-				switch ( $v2_relationship_type ) {
-				case BUG_DUPLICATE:	$t_description = str_replace( '%id', $t_bug_link, $s_has_duplicate );
-									break;
-				case BUG_RELATED:	$t_description = str_replace( '%id', $t_bug_link, $s_related_to );
-									break;
-				case BUG_DEPENDANT:	$t_description = str_replace( '%id', $t_bug_link, $s_blocks );
-									break;
-				default:			$t_description = str_replace( '%id', $t_bug_link, $s_has_duplicate );
-				}
-
-				PRINT "$t_description<br />";
-			}
-		?>
-	</td>
-</tr>
 <tr align="center">
 	<td colspan="6">
 		<table width="100%">
@@ -287,7 +382,7 @@
 	# UPDATE form END
 ?>
 <?php # ASSIGN form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<?php #check if current user already assigned to the bug ?>
 		<?php if ( $t_user_id != $v_handler_id ) { ?>
@@ -302,7 +397,7 @@
 	} # ASSIGN form END
 ?>
 <?php # RESOLVE form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( $g_handle_bug_threshold ) && ( $v_status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_resolve_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
@@ -313,7 +408,7 @@
 	} # RESOLVE form END
 ?>
 <?php # REOPEN form BEGIN ?>
-<?php if ( ( $v_status >= RESOLVED ) &&
+<?php if ( empty( $f_check ) && ( $v_status >= RESOLVED ) &&
 		( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) ||
 		( $v_reporter_id == $t_user_id )) ) { ?>
 	<td class="center">
@@ -326,7 +421,7 @@
 	} # REOPEN form END
 ?>
 <?php # CLOSE form BEGIN ?>
-<?php if ( ( access_level_check_greater_or_equal( $g_close_bug_threshold ) ||
+<?php if ( empty( $f_check ) && ( access_level_check_greater_or_equal( $g_close_bug_threshold ) ||
 		( ON == $g_allow_reporter_close &&
 		  $v_reporter_id == $t_user_id ) ) &&
 		( RESOLVED == $v_status ) ) { ?>
@@ -341,7 +436,7 @@
 ?>
 <?php # MONITOR form BEGIN ?>
 <?php
- if ( (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! user_is_monitoring_bug( $t_user_id, $f_id ) ) {
+ if ( empty( $f_check ) && (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( $g_private_bug_threshold ) )) && ! user_is_monitoring_bug( $t_user_id, $f_id ) ) {
 ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
@@ -355,7 +450,7 @@
 	# MONITOR form END
 ?>
 <?php # UNMONITOR form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && user_is_monitoring_bug( $t_user_id, $f_id ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( $g_monitor_bug_threshold ) && user_is_monitoring_bug( $t_user_id, $f_id ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
@@ -368,7 +463,7 @@
 	# MONITOR form END
 ?>
 <?php # DELETE form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_delete_page.php">
 		<input type="hidden" name="f_id" value="<?php echo $f_id ?>" />
@@ -385,7 +480,7 @@
 </table>
 
 <?php
-	if ( $t_show_attachments ) {
+	if ( empty( $f_check) && $t_show_attachments ) {
 		include( $g_bug_file_upload_inc );
 	}
 
@@ -394,6 +489,7 @@
 	if ( $f_history ) {
 		include( $g_history_include_file );
 	}
+
+	print_page_bot1( __FILE__ );
+	compress_stop();
 ?>
-<?php print_page_bot1( __FILE__ ) ?>
-<?php compress_stop(); ?>

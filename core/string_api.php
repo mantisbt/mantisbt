@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.6 2002-09-20 21:07:57 jfitzell Exp $
+	# $Id: string_api.php,v 1.7 2002-09-21 10:17:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -136,9 +136,9 @@
 		$t_path = config_get( 'path' );
 
 		if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-			$t_page_name = 'view_bug_advanced_page.php';
+			$t_page_name = 'bug_view_advanced_page.php';
 		} else {
-			$t_page_name = 'view_bug_page.php';
+			$t_page_name = 'bug_view_page.php';
 		}
 
 		if ( $p_include_anchor ) {
@@ -152,69 +152,86 @@
 								$p_string);
 	}
 	# --------------------
+	# return the name of a bug page for the user
+	#  account for the user preference and site override
+	#
+	# $p_action should be something like 'view', 'update', or 'report'
+	# If $p_user_id is null or not specified, use the current user
+	function string_get_bug_page( $p_action, $p_user_id=null ) {
+		if ( null === $p_user_id ) {
+			$p_user_id = auth_get_current_user_id();
+		}
+
+		switch ( config_get( 'show_' . $p_action ) ) {
+			case BOTH:
+				if ( ON == user_get_pref( $p_user_id, 'advanced_' . $p_action ) ) {
+					return 'bug_' . $p_action . '_advanced_page.php';
+				} else {
+					return 'bug_' . $p_action . '_page.php';
+				}
+				break;
+			case SIMPLE_ONLY:
+					return 'bug_' . $p_action . '_page.php';
+				break;
+			case ADVANCED_ONLY:
+					return 'bug_' . $p_action . '_advanced_page.php';
+				break;
+		}
+	}
+	# --------------------
 	# return an href anchor that links to a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_link( $p_bug_id ) {
+	function string_get_bug_view_link( $p_bug_id, $p_user_id=null ) {
 		$t_summary = bug_get_field( $p_bug_id, 'summary' );
-		return '<a href="'.string_get_bug_link_plain( $p_bug_id ).'" title="'.$t_summary.'">'.$p_bug_id.'</a>';
+		return '<a href="' . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . $p_bug_id . '</a>';
 	}
 	# --------------------
 	# return the name and GET parameters of a bug VIEW page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_link_plain( $p_bug_id ) {
-		return string_get_bug_view_page().'?f_id='.$p_bug_id;
+	function string_get_bug_view_url( $p_bug_id, $p_user_id=null ) {
+		return string_get_bug_view_page( $p_user_id ) . '?f_id=' . $p_bug_id;
 	}
 	# --------------------
 	# return the name of a bug VIEW page for the user
 	#  account for the user preference and site override
-	function string_get_bug_view_page() {
-		switch ( config_get( 'show_view' ) ) {
-		case BOTH:
-			if ( ON == current_user_get_pref( 'advanced_view' ) ) {
-				return 'view_bug_advanced_page.php';
-			} else {
-				return 'view_bug_page.php';
-			}
-			break;
-		case SIMPLE_ONLY:
-				return 'view_bug_page.php';
-			break;
-		case ADVANCED_ONLY:
-				return 'view_bug_advanced_page.php';
-			break;
-		}
+	function string_get_bug_view_page( $p_user_id=null ) {
+		return string_get_bug_page( 'view', $p_user_id );
 	}
 	# --------------------
 	# return an href anchor that links to a bug UPDATE page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_update_link( $p_bug_id ) {
+	function string_get_bug_update_link( $p_bug_id, $p_user_id=null ) {
 		$t_summary = bug_get_field( $p_bug_id, 'summary' );
-		return '<a href="'.string_get_bug_update_link_plain( $p_bug_id ).'" title="'.$t_summary.'">'.$p_bug_id.'</a>';
+		return '<a href="' . string_get_bug_update_url( $p_bug_id, $p_user_id ) . '" title="' . $t_summary . '">' . $p_bug_id . '</a>';
 	}
 	# --------------------
 	# return the name and GET parameters of a bug UPDATE page for the given bug
 	#  account for the user preference and site override
-	function string_get_bug_update_link_plain( $p_bug_id ) {
-		return string_get_bug_update_page().'?f_id='.$p_bug_id;
+	function string_get_bug_update_url( $p_bug_id, $p_user_id=null ) {
+		return string_get_bug_update_page( $p_user_id ) . '?f_id=' . $p_bug_id;
 	}
 	# --------------------
 	# return the name of a bug UPDATE page for the user
 	#  account for the user preference and site override
-	function string_get_bug_update_page() {
-		switch ( config_get( 'show_update' ) ) {
-		case BOTH:
-			if ( ON == current_user_get_pref( 'advanced_update' ) ) {
-				return 'bug_update_advanced_page.php';
-			} else {
-				return 'bug_update_page.php';
-			}
-			break;
-		case SIMPLE_ONLY:
-				return 'bug_update_page.php';
-			break;
-		case ADVANCED_ONLY:
-				return 'bug_update_advanced_page.php';
-			break;
-		}
+	function string_get_bug_update_page( $p_user_id=null ) {
+		return string_get_bug_page( 'update', $p_user_id );
+	}
+	# --------------------
+	# return an href anchor that links to a bug REPORT page for the given bug
+	#  account for the user preference and site override
+	function string_get_bug_report_link( $p_user_id=null ) {
+		return '<a href="' . string_get_bug_report_url( $p_user_id ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
+	}
+	# --------------------
+	# return the name and GET parameters of a bug REPORT page for the given bug
+	#  account for the user preference and site override
+	function string_get_bug_report_url( $p_user_id=null ) {
+		return string_get_bug_report_page( $p_user_id );
+	}
+	# --------------------
+	# return the name of a bug REPORT page for the user
+	#  account for the user preference and site override
+	function string_get_bug_report_page( $p_user_id=null ) {
+		return string_get_bug_page( 'report', $p_user_id );
 	}
 ?>

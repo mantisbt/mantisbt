@@ -21,7 +21,7 @@
 	$result = bugnote_delete( $f_bugnote_id );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $t_bug_id, 1 );
+	$t_redirect_url = string_get_bug_view_url( $t_bug_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

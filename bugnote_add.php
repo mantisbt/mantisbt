@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.24 $
+	# $Revision: 1.25 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-30 08:36:50 $
+	# $Date: 2002-09-21 10:17:13 $
 	#
-	# $Id: bugnote_add.php,v 1.24 2002-08-30 08:36:50 jfitzell Exp $
+	# $Id: bugnote_add.php,v 1.25 2002-09-21 10:17:13 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,7 +41,7 @@
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id, 1 );
+	$t_redirect_url = string_get_bug_view_url( $f_id );
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

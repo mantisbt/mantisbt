@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.14 2002-09-12 05:09:38 prescience Exp $
+	# $Id: html_api.php,v 1.15 2002-09-21 10:17:14 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -319,12 +319,7 @@
 				PRINT '<a href="main_page.php">' . lang_get( 'main_link' ) . '</a> | ';
 				PRINT '<a href="view_all_bug_page.php">' . lang_get( 'view_bugs_link' ) . '</a> | ';
 				if ( access_level_check_greater_or_equal( REPORTER ) ) {
-					if ( "0000000" != $g_project_cookie_val ) {
-						$t_report_url = get_report_redirect_url( 1 );
-						PRINT '<a href="' . $t_report_url . '">' . lang_get( 'report_bug_link' ) . '</a> | ';
-					} else {
-						PRINT '<a href="login_select_proj_page.php?f_ref=' . get_report_redirect_url( 1 ) . '">' . lang_get( 'report_bug_link' ) . '</a> | ';
-					}
+					PRINT string_get_bug_report_link() . ' | ';
 				}
 
 				if ( access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {

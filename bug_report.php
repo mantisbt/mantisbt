@@ -13,7 +13,7 @@
 <?php
 	# this page is invalid for the 'All Project' selection
 	if ( 0 == helper_get_current_project() ) {
-		print_header_redirect( 'login_select_proj_page.php?ref=' . get_report_redirect_url( true ) );
+		print_header_redirect( 'login_select_proj_page.php?ref=' . string_get_bug_report_url() );
 	}
 
 	check_access( REPORTER );
@@ -86,7 +86,7 @@
 	}
 
 	# Determine which report page to redirect back to.
-	$t_redirect_url = get_report_redirect_url();
+	$t_redirect_url = string_get_bug_report_url();
 ?>
 <?php print_page_top1() ?>
 <?php
@@ -118,7 +118,7 @@
 			</form>
 <?php
 	} else {
-		$t_view_bug_url = get_view_redirect_url( $t_bug_id, 1 );
+		$t_view_bug_url = string_get_bug_view_url( $t_bug_id, 1 );
 		print_bracket_link( $t_view_bug_url, lang_get( 'view_submitted_bug_link' ).' '.$t_bug_id );
 		print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 	}

@@ -36,7 +36,7 @@
 	$result = bugnote_update_view_state( $f_bugnote_id, $f_private );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $t_bug_id, 1 ) . '#bugnotes';
+	$t_redirect_url = string_get_bug_view_url( $t_bug_id ) . '#bugnotes';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
 	} else {

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.2 2002-08-29 09:46:16 jfitzell Exp $
+	# $Id: obsolete.php,v 1.3 2002-09-21 10:17:14 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -19,4 +19,5 @@
 	config_obsolete( 'notify_developers_on_new', 'notify_flags' );
 	config_obsolete( 'notify_on_new_threshold', 'notify_flags' );
 	config_obsolete( 'notify_admin_on_new', 'notify_flags' );
+	config_obsolete( 'view_bug_inc', 'bug_view_inc' );
 ?>
