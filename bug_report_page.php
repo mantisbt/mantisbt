@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.26 2003-03-09 03:08:57 jfitzell Exp $
+	# $Id: bug_report_page.php,v 1.27 2003-03-12 08:45:03 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -39,7 +39,7 @@
 	$f_summary				= gpc_get_string( 'summary', '' );
 	$f_description			= gpc_get_string( 'description', '' );
 	$f_additional_info		= gpc_get_string( 'additional_info', '' );
-	$f_view_state			= gpc_get_int( 'view_state', PUBLIC );
+	$f_view_state			= gpc_get_int( 'view_state', VS_PUBLIC );
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
 ?>
