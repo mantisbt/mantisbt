@@ -11,20 +11,13 @@
 	check_access( MANAGER );
 
 	if ( empty( $f_version ) ) {
-		echo $MANTIS_ERROR[ERROR_EMPTY_FIELD];
-		exit;
+		print_mantis_error( ERROR_EMPTY_FIELD );
 	}
 
 	$result = 0;
 	# check for empty case or duplicate
-	if ( !empty( $f_version )&&( !is_duplicate_version( $f_version, $f_project_id ) ) ) {
-		# insert version
-		$query = "INSERT
-				INTO $g_mantis_project_version_table
-				( project_id, version, date_order )
-				VALUES
-				( '$f_project_id', '$f_version', NOW() )";
-		$result = db_query( $query );
+	if ( !empty( $f_version )&&( !is_duplicate_version( $f_project_id, $f_version ) ) ) {
+		$result = version_add( $f_project_id, $f_version );
 	}
 
 	$t_redirect_url = $g_manage_project_edit_page."?f_project_id=".$f_project_id;
@@ -42,7 +35,7 @@
 <?php
 	if ( $result ) {					# SUCCESS
 		PRINT "$s_operation_successful<p>";
-	} else if ( is_duplicate_version( $f_version, $f_project_id )) {
+	} else if ( is_duplicate_version( $f_project_id, $f_version )) {
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION];
 	} else {							# FAILURE
 		print_sql_error( $query );

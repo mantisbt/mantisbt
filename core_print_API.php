@@ -380,7 +380,50 @@
 		} # end for
 	}
 	# --------------------
+	# Since categories can be orphaned we need to grab all unique instances of category
+	# We check in the project category table and in the bug table
+	# We put them all in one array and make sure the entries are unique
 	function print_category_option_list( $p_category="" ) {
+		global $g_mantis_bug_table, $g_mantis_project_category_table, $g_project_cookie_val;
+
+		# grab all categories in the project category table
+		$cat_arr = array();
+		$query = "SELECT DISTINCT( category ) as category
+				FROM $g_mantis_project_category_table
+				WHERE project_id='$g_project_cookie_val'
+				ORDER BY category";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$cat_arr[] = $row["category"];
+		}
+
+		# grab all categories in the bug table
+		$query = "SELECT DISTINCT( category ) as category
+				FROM $g_mantis_bug_table
+				WHERE project_id='$g_project_cookie_val'
+				ORDER BY category";
+		$result = db_query( $query );
+		$category_count = db_num_rows( $result );
+
+		for ($i=0;$i<$category_count;$i++) {
+			$row = db_fetch_array( $result );
+			$cat_arr[] = $row["category"];
+		}
+		sort( $cat_arr );
+		$cat_arr = array_unique( $cat_arr );
+
+		foreach( $cat_arr as $t_category ) {
+			if ( $t_category == $p_category ) {
+				PRINT "<option value=\"$t_category\" SELECTED>$t_category</option>";
+			} else {
+				PRINT "<option value=\"$t_category\">$t_category</option>";
+			}
+		}
+	}
+	# --------------------
+	function print_category_option_listOLD( $p_category="" ) {
 		global $g_mantis_project_category_table, $g_project_cookie_val;
 
 		# @@@ not implemented yet
