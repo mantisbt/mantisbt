@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.31 2003-02-24 06:20:09 jfitzell Exp $
+	# $Id: string_api.php,v 1.32 2003-02-24 10:51:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -22,7 +22,7 @@
 	# Prepare a string for display to HTML
 	function string_display( $p_string ) {
 		$p_string = string_strip_hrefs( $p_string );
-		$p_string = htmlentities( $p_string );
+		$p_string = htmlspecialchars( $p_string );
 		$p_string = string_restore_valid_html_tags( $p_string );
 		$p_string = nl2br( $p_string );
 
@@ -65,21 +65,21 @@
 	# --------------------
 	# Process a string for display in a textarea box
 	function string_textarea( $p_string ) {
-		$p_string = htmlentities( $p_string );
+		$p_string = htmlspecialchars( $p_string );
 		return $p_string;
 	}
 
 	# --------------------
 	# Process a string for display in a text box
 	function string_attribute( $p_string ) {
-		$p_string = htmlentities( $p_string );
+		$p_string = htmlspecialchars( $p_string );
 		return $p_string;
 	}
 
 	# --------------------
 	# Process a string for inclusion in a URL as a GET parameter
 	function string_url( $p_string ) {
-		$p_string = htmlentities( urlencode( $p_string ) );
+		$p_string = rawurlencode( $p_string );
 		return $p_string;
 	}
 
