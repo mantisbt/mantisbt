@@ -311,7 +311,12 @@
 		?>
 	</td>
 	<td class="left" bgcolor="<?php echo $status_color ?>">
-		<?php echo $v_summary ?>
+		<?php 
+			PRINT $v_summary;
+			if ( PRIVATE == $v_view_state ) {
+			  PRINT "  [$s_private]";
+			}
+		 ?>
 	</td>
 </tr>
 <?php
