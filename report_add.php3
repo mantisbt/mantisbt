@@ -55,11 +55,13 @@
 				'$f_additional_info' )";
 		$result = mysql_query( $query );
 
-		### MAJOR BUG!!! WHAT IF MULTIPLE REPORTS AT SAME TIMES?!?!?
-		### FIX ME### FIX ME### FIX ME### FIX ME### FIX ME### FIX ME
 		### Get the id of the text information we just inserted
+		### NOTE: this is not 100% gurrantted to be the correct one.
+		### It will be 99.9% of them time but it is not guarrnteed.
+		### Looking for an elegant workaround w/o having to edit tables
 		$query = "SELECT id
 				FROM $g_mantis_bug_text_table
+				WHERE description='$f_description'
 				ORDER BY id DESC
 				LIMIT 1";
 		$result = mysql_query( $query );
