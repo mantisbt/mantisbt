@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: set_project.php,v 1.48 2004-06-28 10:13:22 vboctor Exp $
+	# $Id: set_project.php,v 1.49 2004-10-24 02:40:01 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -69,6 +69,8 @@
 		$t_redirect_url = 'view_filters_page.php';
 	} else if ( eregi( 'my_view_page.php', $_SERVER['HTTP_REFERER'] ) ){
 		$t_redirect_url = 'my_view_page.php';
+	} else if ( eregi( 'main_page.php', $_SERVER['HTTP_REFERER'] ) ){
+		$t_redirect_url = 'main_page.php';
 	} else {
 		$t_redirect_url = config_get( 'default_home_page' );
 	}

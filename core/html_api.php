@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.137 2004-10-14 17:34:13 marcelloscata Exp $
+	# $Id: html_api.php,v 1.138 2004-10-24 02:39:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -22,6 +22,7 @@
 	#     html_head_begin
 	#     html_css
 	#     html_content_type
+	#     html_rss_link
 	#  (html_meta_redirect)
 	#     html_title
 	#   html_page_top2
@@ -54,6 +55,28 @@
 	require_once( $t_core_dir . 'project_api.php' );
 	require_once( $t_core_dir . 'helper_api.php' );
 
+	$g_rss_feed_url = null;
+
+	# --------------------
+	# Sets the url for the rss link associated with the current page.
+	# null: means no feed (default).
+	function html_set_rss_link( $p_rss_feed_url )
+	{
+		global $g_rss_feed_url;
+		$g_rss_feed_url = $p_rss_feed_url;
+	}
+
+	# --------------------
+	# Prints the link that allows auto-detection of the associated feed.
+	function html_rss_link()
+	{
+		global $g_rss_feed_url;
+
+		if ( $g_rss_feed_url !== null ) {
+			echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"$g_rss_feed_url\" />";
+		}
+	}
+
 	# --------------------
 	# Print the part of the page that comes before meta redirect tags should
 	#  be inserted
@@ -63,6 +86,7 @@
 		html_css();
 		html_content_type();
 		include( config_get( 'meta_include_file' ) );
+		html_rss_link();
 		html_title( $p_page_title );
 		html_head_javascript();
 	}

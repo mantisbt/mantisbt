@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.54 2004-09-13 12:17:19 vboctor Exp $
+	# $Id: main_page.php,v 1.55 2004-10-24 02:40:00 vboctor Exp $
 	# --------------------------------------------------------
 
 	# This is the first page a user sees when they login to the bugtracker
@@ -24,6 +24,12 @@
 	access_ensure_project_level( VIEWER );
 
 	$f_offset = gpc_get_int( 'offset', 0 );
+
+	$t_project_id = helper_get_current_project();
+
+	if ( ( $t_project_id == ALL_PROJECTS ) || ( VS_PRIVATE != project_get_field( $t_project_id, 'view_state' ) ) ) {
+		html_set_rss_link( "news_rss.php?project_id=$t_project_id" );
+	}
 
 	html_page_top1();
 	html_page_top2();
@@ -48,8 +54,6 @@
 	echo '<br />';
 	echo '<br />';
 	echo '<br />';
-
-	$t_project_id = helper_get_current_project();
 
 	$t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
 	$t_news_count = count( $t_news_rows );
