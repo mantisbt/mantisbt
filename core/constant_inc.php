@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.14 2004-05-09 02:24:19 vboctor Exp $
+	# $Id: constant_inc.php,v 1.15 2004-05-10 12:33:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -152,6 +152,7 @@
 
 	# ERROR_CONFIG_*
 	define( 'ERROR_CONFIG_OPT_NOT_FOUND',			100 );
+	define( 'ERROR_CONFIG_OPT_INVALID',			101 );
 
 	# ERROR_GPC_*
 	define( 'ERROR_GPC_VAR_NOT_FOUND',				200 );
