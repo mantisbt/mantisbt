@@ -11,6 +11,7 @@ Mantis ChangeLog
  * Enh #4036: Changelog should not display versions with no issues (vboctor)
  * Enh #4038: Add icon to sponsorships to attract attention (vboctor)
  * Enh #4066: Support "future" versions and a description field (vboctor)
+ * Enh #4072: Make sponsorships and relationships collapsible 
  * Fix #4005: Signup for new account - invalid username generates crash
  * Fix #4017: Random translations popping up
  * Fix #4018: Real name field allows potentially dangerous HTML

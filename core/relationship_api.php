@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.9 2004-07-11 13:24:29 vboctor Exp $
+	# $Id: relationship_api.php,v 1.10 2004-07-12 04:37:43 int2str Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -343,7 +343,7 @@
 	function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, $p_html_preview = false, $p_user_id = null ) {
 
 		if ( $p_user_id === null ) {
-		    $p_user_id = auth_get_current_user_id();
+			$p_user_id = auth_get_current_user_id();
 		}
 
 		if ( $p_bug_id == $p_relationship->src_bug_id ) {
@@ -513,9 +513,30 @@
  	# print HTML relationship form
 	function relationship_view_box( $p_bug_id ) {
 ?>
-<br/><table class="width100" cellspacing="1">
+<br/>
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<div id="relationships_closed">
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title">
+		<a href="" onClick="ToggleDiv( 'relationships', g_div_relationships ); return false;"
+			><img border="0" src="images/plus.png" alt="+" /></a>
+		<?php PRINT lang_get( 'bug_relationships' ) ?>
+	</td>
+</tr>
+</table>
+</div>
+<?php } ?>
+
+<div id="relationships_open">
+<table class="width100" cellspacing="1">
 <tr class="row-2">
-	<td width="15%" class="form-title"><?php PRINT lang_get( 'bug_relationships' ) ?></td>
+	<td width="15%" class="form-title">
+		<a href="" onClick="ToggleDiv( 'relationships', g_div_relationships ); return false;"
+			><img border="0" src="images/minus.png" alt="-" /></a>
+		<?php PRINT lang_get( 'bug_relationships' ) ?>
+	</td>
 	<td><?php PRINT relationship_get_summary_html( $p_bug_id ) ?></td>
 </tr>
 <?php
@@ -546,6 +567,14 @@
 		}
 ?>
 </table>
+</div>
+
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<script type="text/JavaScript">
+	SetDiv( "relationships", g_div_relationships );
+</script>
+<?php } ?>
+
 <?php
 	}
 

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.6 2004-07-11 08:22:59 vboctor Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.7 2004-07-12 04:37:43 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,10 +14,7 @@
 	# bug.	$f_bug_id must be set to the bug id
 
 	require_once( $t_core_path . 'sponsorship_api.php' );
-?>
 
-<?php  ?>
-<?php
 	#
 	# Determine whether the sponsorship section should be shown.
 	#
@@ -38,70 +35,123 @@
 	#
 
 	if ( $t_show_sponsorships ) {
-		echo '<a name="sponsorships" id="sponsorships" /><br />';
- 		echo '<table class="width100" cellspacing="1">';
-		echo '<tr><td width="50"><img src="images/dollars.gif" alt="Sponsor Me" border="0" /></td><td><table border="0" cellpadding="3" width="100%"><tr><td>';
 ?>
-		<tr>
-			<td class="form-title" colspan="2">
-				<?php
-					echo lang_get( 'users_sponsoring_bug' );
-					$t_details_url = lang_get( 'sponsorship_process_url' );
-					if ( !is_blank( $t_details_url ) ) {
-						echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">' . lang_get( 'sponsorship_more_info' ) . '</a>]';
-					}
-				?>
-			</td>
-		</tr>
 
-	<?php 
-		if ( $t_can_sponsor ) {
-	?>
-			<tr class="row-1">
-				<td class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></td>
-				<td>
-					<form method="POST" action="bug_set_sponsorship.php">
-						<?php echo sponsorship_get_currency() ?>
-						<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" size="4" />
-						<input type="text" name="amount" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />
-						<input type="submit" class="button" name="sponsor" value="Sponsor" />
-					</form>
-				</td>
-			</tr>
-	<?php
-		}
+<a name="sponsorships" id="sponsorships"></a> <br />
 
-		$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
-		if ( $t_total_sponsorship > 0 ) {
-	?>
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<div id="sponsorship_closed" style="display: none;">
+<table class="width100" cellspacing="1">
+	<tr>
+		<td class="form-title">
+			<a href="" onClick="ToggleDiv( 'sponsorship', g_div_sponsorship ); return false;"
+				><img border="0" src="images/plus.png" alt="+" /></a>
+<?php
+			echo lang_get( 'users_sponsoring_bug' );
 
-		<tr class="row-2">
-			<td class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></td>
-			<td>
-				<?php
-					echo sprintf( lang_get( 'total_sponsorship_amount' ), sponsorship_format_amount( $t_total_sponsorship ) );
-					if ( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' ), $f_bug_id ) ) {
-						echo '<br /><br />';
-						$i = 0;
-						foreach ( $t_sponsorship_ids as $id ) {
-							$t_sponsorship = sponsorship_get( $id );
-							$t_date_added = date( config_get( 'normal_date_format' ), $t_sponsorship->date_submitted );
+			$t_details_url = lang_get( 'sponsorship_process_url' );
+			if ( !is_blank( $t_details_url ) ) {
+				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">' 
+					. lang_get( 'sponsorship_more_info' ) . '</a>]';
+			}
+?>
 
-							echo ($i > 0) ? '<br />' : '';
-							$i++;
+<?php
+	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
+	if ( $t_total_sponsorship > 0 ) {
+		echo ' <span style="font-weight: normal;">(';
+		echo sprintf( lang_get( 'total_sponsorship_amount' ), 
+			sponsorship_format_amount( $t_total_sponsorship ) );
+		echo ')</span>';
+	}
+?>
+		</td>
+	</tr>
+</table>
 
-							echo $t_date_added . ': ';
-							print_user( $t_sponsorship->user_id );
-							echo ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')';
-						}
-					}
-				?>
-			</td>
+</div>
+<?php } ?>
+
+<div id="sponsorship_open">
+<table class="width100" cellspacing="1">
+	<tr>
+		<td width="50" rowspan="3">
+			<img src="images/dollars.gif" alt="Sponsor Me" border="0" />
+		</td>
+		<td class="form-title" colspan="2">
+			<a href="" onClick="ToggleDiv( 'sponsorship', g_div_sponsorship ); return false;"
+				><img border="0" src="images/minus.png" alt="-" /></a>
+		<?php
+			echo lang_get( 'users_sponsoring_bug' );
+
+			$t_details_url = lang_get( 'sponsorship_process_url' );
+			if ( !is_blank( $t_details_url ) ) {
+				echo '&nbsp;[<a href="' . $t_details_url . '" target="_blank">' 
+					. lang_get( 'sponsorship_more_info' ) . '</a>]';
+			}
+		?>
+		</td>
+	</tr>
+
+<?php 
+	if ( $t_can_sponsor ) {
+?>
+	<tr class="row-1">
+		<td class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></td>
+		<td>
+			<form method="POST" action="bug_set_sponsorship.php">
+				<?php echo sponsorship_get_currency() ?>
+				<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" size="4" />
+				<input type="text" name="amount" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />
+				<input type="submit" class="button" name="sponsor" value="Sponsor" />
+			</form>
+		</td>
+	</tr>
+<?php
+	}
+
+	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
+	if ( $t_total_sponsorship > 0 ) {
+?>
+	<tr class="row-2">
+		<td class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></td>
+		<td>
+		<?php
+			echo sprintf( lang_get( 'total_sponsorship_amount' ), 
+				sponsorship_format_amount( $t_total_sponsorship ) );
+
+			if ( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' )
+				, $f_bug_id ) ) {
+				echo '<br /><br />';
+				$i = 0;
+				foreach ( $t_sponsorship_ids as $id ) {
+					$t_sponsorship = sponsorship_get( $id );
+					$t_date_added = date( config_get( 'normal_date_format' )
+						, $t_sponsorship->date_submitted );
+
+					echo ($i > 0) ? '<br />' : '';
+					$i++;
+
+					echo $t_date_added . ': ';
+					print_user( $t_sponsorship->user_id );
+					echo ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')';
+				}
+			}
+		?>
+		</td>
 		</tr>
 <?php
 		}
+?>
+</table>
+</div>
 
-		echo '</td></tr></table></td></tr>';
-	 	echo '</table>';
-	}
+<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
+<script type="text/JavaScript">
+	SetDiv( "sponsorship", g_div_sponsorship );
+</script>
+<?php } ?>
+
+<?php
+} # If sponsorship enabled
 ?>
