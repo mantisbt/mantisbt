@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.67 $
+	# $Revision: 1.68 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:45 $
+	# $Date: 2004-08-18 09:32:31 $
 	#
-	# $Id: strings_russian.txt,v 1.67 2004-08-16 13:28:45 bigbadger Exp $
+	# $Id: strings_russian.txt,v 1.68 2004-08-18 09:32:31 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -864,7 +864,7 @@ $s_by_category = 'По категориям';
 $s_by_priority = 'По приоритету';
 $s_by_developer = 'По разработчикам';
 $s_by_reporter ='По пользователям';
-$s_reporter_by_resolution = 'авторы по результату';
+$s_reporter_by_resolution = 'Авторы по результату';
 $s_reporter_effectiveness = 'Эффективность авторов';
 $s_developer_by_resolution = 'Разработчики по результату';
 $s_percentage_fixed = '% Исправлений';

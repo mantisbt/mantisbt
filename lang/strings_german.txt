@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.107 $
+	# $Revision: 1.108 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:42 $
+	# $Date: 2004-08-18 09:32:31 $
 	#
-	# $Id: strings_german.txt,v 1.107 2004-08-16 13:28:42 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.108 2004-08-18 09:32:31 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -260,7 +260,7 @@ $s_priority_enum_string = '10:keine,20:niedrig,30:normal,40:hoch,50:dringend,60:
 $s_severity_enum_string = '10:Feature-Wunsch,20:Trivial,30:Fehler im Text,40:Unschönheit,50:kleinerer Fehler,60:schwerer Fehler,70:Absturz,80:Blocker';
 $s_reproducibility_enum_string = '10:immer,30:manchmal,50:zufällig,70:nicht getestet,90:nicht reproduzierbar,100:N/A';
 $s_status_enum_string = '10:neu,20:Rückmeldung,30:anerkannt,40:bestätigt,50:zugewiesen,80:behoben,90:geschlossen';
-$s_resolution_enum_string = '10:offen,20:behoben,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:kein Fehler,80:aufgeschoben,90:wird nicht behoben';
+$s_resolution_enum_string = '10:offen,20:behoben,30:wiedereröffnet,40:nicht reproduzierbar,50:unlösbar,60:doppelt,70:keine Bearbeitung,80:aufgeschoben,90:wird nicht behoben';
 $s_projection_enum_string = '10:keine,30:Kleinigkeit,50:kleinere Änderung,70:größere Änderung,90:Neuentwicklung';
 $s_eta_enum_string = '10:keine,20:< 1 Tag,30:2-3 Tage,40:< 1 Woche,50:< 1 Monat,60:> 1 Monat';
 
