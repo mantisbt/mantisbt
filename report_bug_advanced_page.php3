@@ -117,7 +117,7 @@
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
-			OS Build:
+			OS Version/Build:
 		</td>
 		<td>
 			<input type=text name=f_osbuild size=16 maxlength=16>

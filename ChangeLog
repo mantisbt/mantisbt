@@ -17,6 +17,7 @@ To Do:
  * Add glyphs and icons as optional display feature
  * More documentation on installtion, configuration, and customization
  * Further document core_API.php
+ * Multiple project support with userland partitioning
  * Move as much of the config_inc.php varaibles into a database table.
    Then build a nice interface into it.
 

@@ -32,6 +32,7 @@
 	[ <a href="ChangeLog">ChangeLog</a> ]
 	[ <a href="README">README</a> ]
 	[ <a href="INSTALL">INSTALL</a> ]
+	[ <a href="UPGRADING">UPGRADING</a> ]
 	[ <a href="CONFIGURATION">CONFIGURATION</a> ]
 </div>
 
