@@ -9,19 +9,19 @@
 ?>
 <?php
 	# new strings:
-	$s_all_projects = "All Projects";
-	$s_move_bugs = "Move Bugs";
-	$s_operation_successful = "Operation successful.";
+	$s_all_projects = "Todos los Proyectos";
+	$s_move_bugs = "Mover Bugs";
+	$s_operation_successful = "Operacion Exitosa.";
 	$s_date_order = "Date Order";
 	$s_print_all_bug_page_link = "Print Reports";
-	$s_csv_export = "CSV Export";
-	$s_login_anonymously = "Login Anonymously";
-	$s_jump_to_bugnotes = "Jump to Bugnotes";
-	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
-	$s_access_level_project = "Project Access Level";
-	$s_view_submitted_bug_link = "View Submitted Bug";
-	$s_assigned_projects = "Assigned Projects";
-	$s_unassigned_projects = "Unassigned Projects";
+	$s_csv_export = "Exportar a CSV";
+	$s_login_anonymously = "Conectarse Anonimamente";
+	$s_jump_to_bugnotes = "Saltar a Notas";
+	$s_public_project_msg = "Este proyecto es PUBLICO.  Todos los usuarios tienen acceso a este proyecto.";
+	$s_access_level_project = "Nivel de Acceso de Proyecto";
+	$s_view_submitted_bug_link = "Ver Bug Enviado";
+	$s_assigned_projects = "Proyectos Asignados";
+	$s_unassigned_projects = "Proyectos No Asignados";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
