@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_reset.php,v 1.14 2002-10-18 23:36:51 jfitzell Exp $
+	# $Id: account_prefs_reset.php,v 1.15 2002-10-19 04:26:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -35,9 +35,7 @@
 	current_user_ensure_unprotected();
 ?>
 <?php
-	# delete and then recreate user prefs
-	user_pref_delete( auth_get_current_user_id() );
-	user_pref_create( auth_get_current_user_id() );
+	user_pref_set_default( auth_get_current_user_id() );
 
 	print_header_redirect( $f_redirect_url );
 ?>

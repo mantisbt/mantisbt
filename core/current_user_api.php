@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.6 2002-10-18 23:36:51 jfitzell Exp $
+	# $Id: current_user_api.php,v 1.7 2002-10-19 04:26:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -43,13 +43,13 @@
 	}
 	# --------------------
 	# Return the specified field of the currently logged in user
-	function current_user_get_pref( $p_field_name ) {
-		return user_pref_get( auth_get_current_user_id(), $p_field_name );
+	function current_user_get_pref( $p_pref_name ) {
+		return user_pref_get_pref( auth_get_current_user_id(), $p_pref_name );
 	}
 	# --------------------
 	# Return the specified field of the currently logged in user
 	function current_user_set_pref( $p_pref_name, $p_pref_value ) {
-		return user_pref_set( auth_get_current_user_id(), $p_pref_name, $p_pref_value );
+		return user_pref_set_pref( auth_get_current_user_id(), $p_pref_name, $p_pref_value );
 	}
 	# --------------------
 	# Return the specified field of the currently logged in user

@@ -19,7 +19,7 @@
 		}
 
 	    if ( ! user_pref_exists( $p_user_id ) ) {
-			user_pref_create( $p_user_id );
+			user_pref_set_default( $p_user_id );
 	    }
 
 	    # prefix data with u_
@@ -50,9 +50,8 @@
 		<?php echo lang_get( 'default_project' ) ?>
 	</td>
 	<td width="50%">
-		<select name="f_project_id">
-			<option value="-1"></option>
-			<option value="00000000"><?php echo lang_get( 'all_projects' ) ?></option>
+		<select name="f_default_project">
+			<option value="00000000" <?php check_selected( 0, $u_default_project ) ?> ><?php echo lang_get( 'all_projects' ) ?></option>
 			<?php print_project_option_list( $u_default_project ) ?></option>
 		</select>
 	</td>

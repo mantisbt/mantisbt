@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.37 2002-10-18 23:36:51 jfitzell Exp $
+	# $Id: user_api.php,v 1.38 2002-10-19 04:26:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -216,7 +216,7 @@
 
 		# Create preferences for the user
 		$t_user_id = db_insert_id();
-		user_pref_create( $t_user_id );
+		user_pref_set_default( $t_user_id );
 
 		# Send notification email
 		if ( $p_email ) {
@@ -279,10 +279,7 @@
 		db_query( $query );
 
 		# Remove associated preferences
-		$query = "DELETE
-				  FROM $t_user_pref_table
-				  WHERE user_id='$c_user_id'";
-		db_query( $query );
+		user_pref_delete_all( $p_user_id );
 
 		$query = "DELETE
 				  FROM $t_project_user_list_table
@@ -572,7 +569,7 @@
 	# --------------------
 	# Set the user's default project
 	function user_set_default_project( $p_user_id, $p_project_id ) {
-		return user_pref_set( $p_user_id, 'default_project', (int)$p_project_id );
+		return user_pref_set_pref( $p_user_id, 'default_project', (int)$p_project_id );
 	}
 	# --------------------
 	# Reset the user's password

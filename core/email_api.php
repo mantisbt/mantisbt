@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.23 2002-10-18 23:36:51 jfitzell Exp $
+	# $Id: email_api.php,v 1.24 2002-10-19 04:26:25 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -110,7 +110,7 @@
 			$v_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 			$t_pref_field = 'email_on_' . $p_notify_type;
 			if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-				$t_notify_reporter = user_pref_get( $v_reporter_id, $t_pref_field );
+				$t_notify_reporter = user_pref_get_pref( $v_reporter_id, $t_pref_field );
 				if ( ON == $t_notify_reporter ) {
 					$send_arr[] = user_get_email( $v_reporter_id );
 				}
@@ -125,7 +125,7 @@
 			if ( $v_handler_id > 0 ) {
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
-					$t_notify_handler = user_pref_get( $v_handler_id, $t_pref_field );
+					$t_notify_handler = user_pref_get_pref( $v_handler_id, $t_pref_field );
 					if ( ON == $t_notify_handler ) {
 						$send_arr[] = user_get_email( $v_handler_id );
 					}
@@ -228,7 +228,7 @@
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
 					# if the user's notification is on then add to the list
-					$t_notify = user_pref_get( $row['user_id'], $t_pref_field );
+					$t_notify = user_pref_get_pref( $row['user_id'], $t_pref_field );
 					if ( ON == $t_notify ) {
 						$send_arr[] = $row['email'];
 					}
