@@ -24,7 +24,7 @@
 							$f_show_severity."#".
 							$f_show_status."#".
 							$f_limit_view."#".
-							$f_show_changed."#".
+							$f_highlight_changed."#".
 							$f_hide_closed;
 		setcookie( $g_view_reported_cookie, $t_settings_string, time()+$g_cookie_time_length );
 	}
@@ -36,7 +36,7 @@
 		$f_show_severity 	= $t_setting_arr[2];
 		$f_show_status 		= $t_setting_arr[3];
 		$f_limit_view 		= $t_setting_arr[4];
-		$f_show_changed 	= $t_setting_arr[5];
+		$f_highlight_changed 	= $t_setting_arr[5];
 		$f_hide_closed 	= $t_setting_arr[6];
 	}
 
@@ -48,8 +48,8 @@
 		$f_limit_view = $g_default_limit_view;
 	}
 
-	if ( !isset( $f_show_changed ) ) {
-		$f_show_changed = $g_default_show_changed;
+	if ( !isset( $f_highlight_changed ) ) {
+		$f_highlight_changed = $g_default_show_changed;
 	}
 
 	if ( !isset( $f_show_category ) ) {
