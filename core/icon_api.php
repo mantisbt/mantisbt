@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: icon_api.php,v 1.7 2003-02-09 22:15:17 jfitzell Exp $
+	# $Id: icon_api.php,v 1.8 2003-03-31 07:10:11 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -18,9 +18,9 @@
 	# --------------------
 	# Status to icon mapping
 	$g_status_icon_arr = array (
-		NONE      => 'mantis-space.gif',
-		LOW       => 'mantis-space.gif',
-		NORMAL    => 'mantis-space.gif',
+		NONE      => '',
+		LOW       => '',
+		NORMAL    => '',
 		HIGH      => 'priority_1.gif',
 		URGENT    => 'priority_2.gif',
 		IMMEDIATE => 'priority_3.gif'
@@ -43,15 +43,18 @@
 	###########################################################################
 	# --------------------
 	# prints the staus icon
-	function print_status_icon( $p_icon ) {
+	function icon_get_status_icon( $p_icon ) {
 		global $g_icon_path, $g_status_icon_arr;
 
 		$t_none = NONE;
 		if ( !is_blank( $g_status_icon_arr[$p_icon] ) ) {
-			PRINT "<img src=\"$g_icon_path$g_status_icon_arr[$p_icon]\" alt=\"\" />";
+			return "<img src=\"$g_icon_path$g_status_icon_arr[$p_icon]\" alt=\"\" />";
 		} else {
-			PRINT "<img src=\"$g_icon_path$g_status_icon_arr[$t_none]\" alt=\"\" />";
+			return "&nbsp;";
 		}
+	}
+	function print_status_icon( $p_icon ) {
+	  echo icon_get_status_icon( $p_icon );
 	}
 	# --------------------
 	# The input $p_dir is either ASC or DESC
