@@ -50,12 +50,30 @@
 			WHERE bug_id='$f_id'";
 	$result = db_query($query);
 
-        ### Delete the corresponding files
-       $query = "DELETE
-				FROM $g_mantis_bug_file_table
-				WHERE bug_id='$f_id'";
-       $result = db_query($query);
+	if ( $g_store_file_to==1 ) {
+		### Delete files from disk
+		$query = "SELECT diskfile
+			FROM $g_mantis_bug_file_table
+			WHERE bug_id='$f_id'";
+		$result = db_query($query);
+		$file_count = db_num_rows( $result );
 
+		# there may be more than one file
+		for ($i=0;$i<$file_count;$i++){
+			$row = db_fetch_array( $result );
+			$t_diskfile = $row["diskfile"];
+
+			# use this instead of delete;
+			# in windows replace with system("del $t_diskfile");
+			unlink( $t_diskfile );
+		}
+	}
+
+	### Delete the corresponding files
+	$query = "DELETE
+		FROM $g_mantis_bug_file_table
+		WHERE bug_id='$f_id'";
+	$result = db_query($query);
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
