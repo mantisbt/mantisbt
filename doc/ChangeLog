@@ -47,6 +47,7 @@ Mantis
  * Added g_close_bug_threshold for closing a bug.
  * Added print report link to view all bug page.
  * Added g_allowed_files and g_disallowed_files to control what files types may be uploaded.
+ * Added user to project multi-select listbox in manage section.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
  * Removed proj_user_delete_page.php.

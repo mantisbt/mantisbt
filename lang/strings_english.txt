@@ -19,6 +19,8 @@
 	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
 	$s_access_level_project = "Project Access Level";
 	$s_view_submitted_bug_link = "View Submitted Bug";
+	$s_assigned_projects = "Assigned Projects";
+	$s_unassigned_projects = "Unassigned Projects";
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";

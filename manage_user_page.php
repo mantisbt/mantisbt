@@ -123,7 +123,7 @@
 </tr>
 <tr class="row-1" valign="top">
 	<td class="category" width="50%">
-		<?php echo $s_projects_title ?>:
+		<?php echo $s_assigned_projects ?>:
 	</td>
 	<td width="50%">
 		<?php print_project_user_list( $u_id ) ?>
@@ -131,7 +131,7 @@
 </tr>
 <tr class="row-2" valign="top">
 	<td class="category" width="50%">
-		<?php echo $s_projects_title ?>:
+		<?php echo $s_unassigned_projects ?>:
 	</td>
 	<td width="50%">
 		<select name="f_project_id[]" multiple size="5">
