@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.251 2005-03-18 03:48:17 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.252 2005-03-20 12:39:43 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -875,7 +875,7 @@
 	#  the Assigned list in bug_update*_page.
 	#  This allows control over who can route bugs
 	# This defaults to $g_handle_bug_threshold
-	# $g_update_bug_assign_threshold			= DEVELOPER;
+	$g_update_bug_assign_threshold			= '%handle_bug_threshold%';
 
 	# access level needed to view private bugnotes
 	# Look in the constant_inc.php file if you want to set a different value
