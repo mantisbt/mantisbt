@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.48 2005-02-26 01:00:39 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.49 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -138,7 +138,7 @@
 			return $t_field[ 'type' ] ;
 		}
 	}
-	
+
 	# --------------------
 	# Check to see whether the field id is defined
 	#  return true if the field is defined, error otherwise

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_set.php,v 1.1 2005-02-26 15:16:45 thraxisp Exp $
+	# $Id: manage_config_workflow_set.php,v 1.2 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -18,16 +18,16 @@
 	access_ensure_global_level( $t_can_change_level );
 
 	$t_redirect_url = 'manage_config_workflow_page.php';
-	$t_project = helper_get_current_project(); 
+	$t_project = helper_get_current_project();
 	$t_access = current_user_get_access_level();
-	
+
 	html_page_top1( lang_get( 'manage_workflow_config' ) );
 	html_meta_redirect( $t_redirect_url );
 	html_page_top2();
-	
+
 	# process the changes to threshold values
 	$t_valid_thresholds = array( 'bug_submit_status', 'bug_resolved_status_threshold', 'bug_reopen_status' );
-	
+
 	foreach( $t_valid_thresholds as $t_threshold ) {
 		if( config_get_access( $t_threshold ) <= $t_access ) {
 			$f_value = gpc_get( 'threshold_' . $t_threshold );
@@ -35,13 +35,13 @@
 			config_set( $t_threshold, $f_value, NO_USER, $t_project, $f_access );
 		}
 	}
-			
+
 	# process the workflow by reversing the flags to a matrix and creating the appropriate string
 	if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 		$f_value = gpc_get( 'flag' );
 		$f_access = gpc_get( 'workflow_access' );
 		$t_matrix = array();
-		
+
 		foreach( $f_value as $t_transition ) {
 			list( $t_from, $t_to ) = split( ':', $t_transition );
 			$t_matrix[$t_from][$t_to] = '';
@@ -65,13 +65,13 @@
 			}
 		}
 		config_set( 'status_enum_workflow', $t_workflow, NO_USER, $t_project, $f_access );
-	} 
-	
+	}
+
 	# process the access level changes
 	if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 		# get changes to access level to change these values
 		$f_access = gpc_get( 'status_access' );
-		
+
 		# walk through the status labels to set the status threshold
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		$t_set_status = array();
@@ -84,9 +84,9 @@
 				$t_set_status[$t_status_id] = (int)$f_level;
 			}
 		}
-			
+
 		config_set( 'set_status_threshold', $t_set_status, ALL_USERS, $t_project, $f_access );
-	} 
+	}
 ?>
 
 <br />

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_workflow_page.php,v 1.1 2005-02-26 15:16:45 thraxisp Exp $
+	# $Id: manage_config_workflow_page.php,v 1.2 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -21,7 +21,7 @@
 	print_manage_config_menu( 'manage_config_workflow_page.php' );
 
 	$t_access = current_user_get_access_level();
-	$t_project = helper_get_current_project(); 
+	$t_project = helper_get_current_project();
 	$t_can_change_flags = $t_access >= config_get_access( 'status_enum_workflow' );
 
 	# Get the value associated with the specific action and flag.
@@ -37,24 +37,24 @@
 			} else {
 				$t_value = $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&nbsp;';
 			}
-			
+
 			if ( $t_flag && ( '' != $t_label ) ) {
 				$t_value .= '<br />(' . $t_label . ')';
 			}
 		} else {
 			$t_value = '';
 		}
-		
+
 		return $t_value;
 	}
 
 	function section_begin( $p_section_name ) {
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan=' . ( count( $t_enum_status ) + 1 ) . '>' 
+		echo '<tr><td class="form-title" colspan=' . ( count( $t_enum_status ) + 1 ) . '>'
 			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		echo '<tr><td class="form-title" width="30%">' . lang_get( 'current_status' ) . '</td>';
-		echo '<td class="form-title" colspan="' . ( count( $t_enum_status ) ) . '">' 
+		echo '<td class="form-title" colspan="' . ( count( $t_enum_status ) ) . '">'
 			. lang_get( 'next_status' ) . '</td></tr>';
 		echo "\n<tr><td>&nbsp;</td>";
 		foreach( $t_enum_status as $t_status ) {
@@ -103,7 +103,7 @@
 			echo '<td>' . get_enum_to_string( lang_get( 'status_enum_string' ), config_get( $p_threshold ) ) . '&nbsp;</td>';
 			echo '<td>' . get_enum_to_string( lang_get( 'access_levels_enum_string' ), $t_change_threshold ) . '&nbsp;</td>';
 		}
-		
+
 		echo '</tr>' . "\n";
 	}
 
@@ -114,7 +114,7 @@
 	function access_begin( $p_section_name ) {
 		$t_enum_status = explode_enum_string( config_get( 'status_enum_string' ) );
 		echo '<table class="width100">';
-		echo '<tr><td class="form-title" colspan=' . ( count( $t_enum_status ) + 1 ) . '>' 
+		echo '<tr><td class="form-title" colspan=' . ( count( $t_enum_status ) + 1 ) . '>'
 			. strtoupper( $p_section_name ) . '</td></tr>' . "\n";
 		echo "\n<tr><td>&nbsp;</td>";
 		foreach( $t_enum_status as $t_status ) {
@@ -137,7 +137,7 @@
 				$t_level = access_get_status_threshold( $t_status_id );
 				$t_can_change = ( $t_access <= config_get_access( 'set_status_threshold' ) );
 			}
-			
+
 			if ( $t_can_change ) {
 				echo '<td><select name="access_change_' . $t_status_id . '">';
 				print_enum_string_option_list( 'access_levels', $t_level );
@@ -148,7 +148,7 @@
 		}
 		echo '</tr>' . "\n";
 	}
-		
+
 	echo '<br /><br />';
 
 	# count arcs in and out of each status
@@ -158,7 +158,7 @@
 	$t_extra_enum_status = '0:non-existent,' . $t_enum_status;
 	$t_lang_enum_status = '0:' . lang_get( 'non_existent' ) . ',' . lang_get( 'status_enum_string' );
 	$t_all_status = explode( ',', $t_extra_enum_status);
-	
+
 	$t_status_arr  = explode_enum_string( $t_enum_status );
 	$t_entry = array();
 	$t_exit = array();
@@ -193,8 +193,8 @@
 					$t_exit[$t_status_id][$t_next_id] = '';
 					$t_entry[$t_next_id][$t_status_id] = '';
 					if ( $t_status_id == $t_next_id ) {
-						$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>' 
-							. get_enum_to_string( $t_lang_enum_status, $t_next_id ) 
+						$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
+							. get_enum_to_string( $t_lang_enum_status, $t_next_id )
 							. '</td><td bgcolor="#FFED4F">' . lang_get( 'superfluous' ) . '</td>';
 					}
 				}
@@ -216,7 +216,7 @@
 		list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
 		if ( ( 0 == count( $t_entry[$t_status_id] ) ) && ( 0 < count( $t_exit[$t_status_id] ) ) ){
 			$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
-							. get_enum_to_string( $t_lang_enum_status, $t_status_id ) 
+							. get_enum_to_string( $t_lang_enum_status, $t_status_id )
 							. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '</td>';
 		}
 	}
@@ -226,7 +226,7 @@
 		list( $t_status_id, $t_status_label ) = explode_enum_arr( $t_status );
 		if ( ( 0 == count( $t_exit[$t_status_id] ) ) && ( 0 < count( $t_entry[$t_status_id] ) ) ){
 			$t_validation_result .= '<tr ' . helper_alternate_class() . '><td>'
-							. get_enum_to_string( $t_lang_enum_status, $t_status_id ) 
+							. get_enum_to_string( $t_lang_enum_status, $t_status_id )
 							. '</td><td bgcolor="#FF0088">' . lang_get( 'no_exit' ) . '</td>';
 		}
 	}
@@ -236,7 +236,7 @@
 	}
 	echo '<p class="form-title">' . lang_get( 'project_name' ) . ': ' . project_get_name( $t_project ) . '</p>' . "\n";
 
-	
+
 	# show the settings used to derive the table
 	threshold_begin( lang_get( 'workflow_thresholds' ) );
 	if ( ! is_array( config_get( 'bug_submit_status' ) ) ) {
@@ -245,7 +245,7 @@
 	threshold_row( 'bug_resolved_status_threshold' );
 	threshold_row( 'bug_reopen_status' );
 	threshold_end();
-	
+
 	if ( '' <> $t_validation_result ) {
 		echo '<table class="width100">';
 		echo '<tr><td class="form-title" colspan="3">' . strtoupper( lang_get( 'validation' ) ) . '</td></tr>' . "\n";
@@ -269,7 +269,7 @@
 		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
 		echo '</select> </p>';
 	}
-			
+
 	# display the access levels required to move an issue
 	access_begin( lang_get( 'access_levels' ) );
 	access_row( );
@@ -281,12 +281,12 @@
 		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
 		echo '</select> </p>';
 	}
-		
+
 	if ( $t_can_change_flags ) {
 		echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
 
 		echo "</form>\n";
-	} 
-	
+	}
+
 	html_page_bottom1( __FILE__ );
 ?>

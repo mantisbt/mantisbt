@@ -6,9 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.17 2005-02-27 14:45:00 thraxisp Exp $
+	# $Id: config_api.php,v 1.18 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
-	
+
 	# cache for config variables
 	$g_cache_config = array();
 	$g_cache_config_access = array();
@@ -24,26 +24,26 @@
 	#     if not found, config_id + current user + all_project
 	#     if not found, config_id + default user + current project
 	#     if not found, config_id + default user + all_project.
-	#    3.use GLOBAL[config_id] 
+	#    3.use GLOBAL[config_id]
 	function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
 		global $g_cache_config, $g_cache_config_access;
-		
+
 		if ( isset( $g_cache_config[$p_option] ) ) {
 			return $g_cache_config[$p_option];
 		}
-		
+
 		# bypass table lookup for certain options
 		$t_match_pattern = '/' . implode( '|', config_get_global( 'global_settings' ) ) . '/';
 		$t_bypass_lookup = ( 0 < preg_match( $t_match_pattern, $p_option ) );
 		# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
 		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db"; }
 
-		if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() ) 
+		if ( ( ! $t_bypass_lookup ) && ( TRUE === db_is_connected() )
 				&& ( db_table_exists( config_get_global( 'mantis_config_table' ) ) ) ) {
 			$t_config_table = config_get_global( 'mantis_config_table' );
 			# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes" : "no" );
 			# @@ debug @@ error_print_stack_trace();
-			
+
 			# prepare the user's list
 			$t_users = array( ALL_USERS );
 			if ( ( null == $p_user ) && ( auth_is_user_authenticated() ) ) {
@@ -56,7 +56,7 @@
 			} else {
 				$t_user_clause = "user_id=$t_users[0]";
 			}
-			
+
 			# prepare the projects list
 			$t_projects = array( ALL_PROJECTS );
 			if ( ( null == $p_project ) && ( auth_is_user_authenticated() ) ) {
@@ -72,13 +72,13 @@
 			} else {
 				$t_project_clause = "project_id=$t_projects[0]";
 			}
-			
+
 			$c_option = db_prepare_string( $p_option );
-			# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at 
-			#  once here. we need to reverse the sort, so that the last value overwrites the 
+			# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
+			#  once here. we need to reverse the sort, so that the last value overwrites the
 			#  config table
 			$query = "SELECT type, value, access FROM $t_config_table
-				WHERE config_id = '$p_option' AND 
+				WHERE config_id = '$p_option' AND
 					$t_project_clause AND
 					$t_user_clause
 				ORDER BY user_id DESC, project_id DESC";
@@ -89,7 +89,7 @@
 				$row = db_fetch_array( $result );
 				$t_type = $row['type'];
 				$t_raw_value = $row['value'];
-				
+
 				switch ( $t_type ) {
 					case CONFIG_TYPE_INT:
 						$t_value = (int) $t_raw_value;
@@ -113,7 +113,7 @@
 	# force config variable from a global to avoid recursion
 	function config_get_global( $p_option, $p_default = null ) {
 		global $g_cache_config, $g_cache_config_access;
-		
+
 		if ( isset( $GLOBALS['g_' . $p_option] ) ) {
 			$t_value = config_eval( $GLOBALS['g_' . $p_option] );
 			$g_cache_config[$p_option] = $t_value;
@@ -134,11 +134,11 @@
 	# Retrieves the access level needed to change a config value
 	function config_get_access( $p_option ) {
 		global $g_cache_config, $g_cache_config_access;
-		
+
 		if ( ! isset( $g_cache_config[$p_option] ) ) {
 			$t_value = config_get( $p_option );
 		}
-		
+
 		return $g_cache_config_access[$p_option];
 	}
 
@@ -151,7 +151,7 @@
 			return true;
 		} else {
 			$t_config_table = config_get_global( 'mantis_config_table' );
-			
+
 			# prepare the user's list
 			$t_users = array( ALL_USERS );
 			if ( ( null == $p_user ) && ( auth_is_user_authenticated() ) ) {
@@ -164,7 +164,7 @@
 			} else {
 				$t_user_clause = "user_id=$t_users[0]";
 			}
-			
+
 			# prepare the projects list
 			$t_projects = array( ALL_PROJECTS );
 			if ( ( null == $p_project ) && ( auth_is_user_authenticated() ) ) {
@@ -180,13 +180,13 @@
 			} else {
 				$t_project_clause = "project_id=$t_projects[0]";
 			}
-			
+
 			$c_option = db_prepare_string( $p_option );
-			# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at 
-			#  once here. we need to reverse the sort, so that the last value overwrites the 
+			# @@@ (thraxisp) if performance is a problem, we could fetch all of the configs at
+			#  once here. we need to reverse the sort, so that the last value overwrites the
 			#  config table
 			$query = "SELECT COUNT(*) FROM $t_config_table
-				WHERE config_id = '$p_option' AND 
+				WHERE config_id = '$p_option' AND
 					$t_project_clause AND
 					$t_user_clause";
 
@@ -195,7 +195,7 @@
 			if ( 0 < db_result( $result ) ) {
 				return true;
 			}
-		
+
 			return false;
 		}
 	}
@@ -218,28 +218,28 @@
 		$c_user = db_prepare_int( $p_user );
 		$c_project = db_prepare_int( $p_project );
 		$c_access = db_prepare_int( $p_access );
-		
+
 		$t_config_table = config_get_global( 'mantis_config_table' );
 		$query = "SELECT * from $t_config_table
-			WHERE config_id = '$c_option' AND 
+			WHERE config_id = '$c_option' AND
 				project_id = $c_project AND
 				user_id = $c_user";
 		$result = db_query( $query );
 
 		if ( 0 < db_num_rows( $result ) ) {
-			$t_set_query = "UPDATE $t_config_table 
+			$t_set_query = "UPDATE $t_config_table
 				SET value='$c_value', type=$t_type, access=$c_access
-				WHERE config_id = '$c_option' AND 
+				WHERE config_id = '$c_option' AND
 					project_id = $c_project AND
 					user_id = $c_user";
 		} else {
-			$t_set_query = "INSERT INTO $t_config_table 
+			$t_set_query = "INSERT INTO $t_config_table
 				SET value='$c_value', type=$t_type, access=$c_access,
 					config_id = '$c_option',
 					project_id = $c_project,
 					user_id = $c_user";
 		}
-			
+
 		$result = db_query( $t_set_query );
 
 		return true;
@@ -266,7 +266,7 @@
 			PRINT '</p>';
 		}
 	}
-	
+
 	# ------------------
 	# check for recursion in defining config variables
 	# If there is a %text% in the returned value, re-evaluate the "text" part and replace
@@ -277,7 +277,7 @@
 			if ( 0 < preg_match_all( '/%(.*)%/', $t_value, $t_matches ) ) {
 				for ($i=0; $i< count($t_matches[0]); $i++) {
 					# $t_matches[0][$i] is the matched string including the delimiters
-					# $t_matches[1][$i] is the target parameter string 
+					# $t_matches[1][$i] is the target parameter string
 					$t_repl = config_get( $t_matches[1][$i] );
 					$t_value = str_replace( $t_matches[0][$i], $t_repl, $t_value );
 				}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_set.php,v 1.1 2005-02-26 15:16:45 thraxisp Exp $
+	# $Id: manage_config_email_set.php,v 1.2 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -18,8 +18,8 @@
 	access_ensure_global_level( $t_can_change_level );
 
 	$t_redirect_url = 'manage_config_email_page.php';
-	$t_project = helper_get_current_project(); 
-	
+	$t_project = helper_get_current_project();
+
 	$f_flags			= gpc_get( 'flag' );
 	$f_thresholds		= gpc_get( 'flag_threshold' );
 	$f_default_access	= gpc_get_int( 'notify_defaults_access' );
@@ -28,11 +28,11 @@
 	html_page_top1( lang_get( 'manage_email_config' ) );
 	html_meta_redirect( $t_redirect_url );
 	html_page_top2();
-	
+
 	$t_access = current_user_get_access_level();
 	$t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
 	$t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
-	
+
 	# build a list of the possible actions and flags
 	$t_valid_actions = array( 'new', 'owner', 'reopened', 'deleted', 'bugnote' );
 	if( config_get( 'enable_sponsorship' ) == ON ) {
@@ -47,14 +47,14 @@
 		$t_valid_actions[] = $t_label;
 	}
 	$t_valid_flags = array( 'reporter', 'handler', 'monitor' , 'bugnotes' );
-	
+
 	# initialize the thresholds
 	foreach( $t_valid_actions as $t_action ) {
 		$t_thresholds_min[$t_action] = NOBODY;
 		$t_thresholds_max[$t_action] = ANYBODY;
 	}
-		
-	
+
+
 	# parse flags and thresholds
 	foreach( $f_flags as $t_flag_value ) {
 		list( $t_action, $t_flag ) = split( ':', $t_flag_value );
@@ -69,9 +69,9 @@
 			$t_thresholds_max[$t_action] = $t_threshold;
 		}
 	}
-	
+
 	# if we can set defaults, find them
-	if ( $t_can_change_defaults ) {	
+	if ( $t_can_change_defaults ) {
 		$t_first = true;
 
 		# for flags, assume they are true, unless one of the actions has them off
@@ -96,12 +96,12 @@
 		}
 		$t_default_flags['threshold_min'] = $t_default_min;
 		$t_default_flags['threshold_max'] = $t_default_max;
-		
+
 		config_set( 'default_notify_flags', $t_default_flags, NO_USER, $t_project, $f_default_access );
 	} else {
 		$t_default_flags = config_get( 'default_notify_flags' );
 	}
-	
+
 	# set the values for specific actions if different from the defaults
 	foreach ( $t_valid_actions as $t_action ) {
 		$t_action_printed = false;
@@ -124,15 +124,15 @@
 		config_set( 'notify_flags', $t_notify_flags, NO_USER, $t_project, $f_actions_access );
 	}
 
-	# capture minimum severity settings	
+	# capture minimum severity settings
 	foreach ( $t_valid_actions as $t_action ) {
 		$f_severity = gpc_get( $t_action . '_minimum_severity' );
 		$f_access = gpc_get( $t_action . '_change_severity' );
-		
+
 		config_set( 'default_email_on_' . $t_action . '_minimum_severity', $f_severity, NO_USER, $t_project, $f_access );
 	}
-	
-	
+
+
 ?>
 
 <br />

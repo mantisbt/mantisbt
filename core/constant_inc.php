@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.42 2005-02-26 15:16:46 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.43 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -313,12 +313,12 @@
 	define( 'TOKEN_UNKNOWN',	0 );
 	define( 'TOKEN_FILTER',		1 );
 	define( 'TOKEN_GRAPH',		2 );
-	
+
 	# config types
 	define( 'CONFIG_TYPE_INT', 1 );
 	define( 'CONFIG_TYPE_STRING', 2 );
 	define( 'CONFIG_TYPE_COMPLEX', 3 );
-	
+
 	# Control types for date custom fields.
 	define( 'CUSTOM_FIELD_DATE_ANY',		0 ) ;
 	define( 'CUSTOM_FIELD_DATE_NONE',		1 ) ;

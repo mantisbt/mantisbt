@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_19_inc.php,v 1.6 2005-02-26 15:16:45 thraxisp Exp $
+	# $Id: 0_19_inc.php,v 1.7 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,14 +52,14 @@
 			  parent_id INT UNSIGNED NOT NULL)"
 			);
 
-	$upgrades[] = new SQLUpgrade( 
+	$upgrades[] = new SQLUpgrade(
 			'configdb-1',
 			'Add mantis_config_table',
 			"CREATE TABLE $t_config_table (
 			  config_id VARCHAR(64) NOT NULL,
 			  project_id INT DEFAULT 0,
 			  user_id INT DEFAULT 0,
-			  access INT DEFAULT 0, 
+			  access INT DEFAULT 0,
 			  type INT DEFAULT 90,
 			  value text NOT NULL,
 			  INDEX (config_id),

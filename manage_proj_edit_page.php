@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.83 2005-02-13 21:36:17 jlatour Exp $
+	# $Id: manage_proj_edit_page.php,v 1.84 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -537,9 +537,9 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 ?>
 <br />
 <div align="center">
-	<form method="post" action="manage_proj_user_add.php">
-		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-		<table class="width75" cellspacing="1">
+	<table class="width75" cellspacing="1">
+		<form method="post" action="manage_proj_user_add.php">
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<tr>
 				<td class="form-title" colspan="5">
 					<?php echo lang_get( 'add_user_title' ) ?>
@@ -570,8 +570,21 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 					<input type="submit" class="button" value="<?php echo lang_get( 'add_user_button' ) ?>" />
 				</td>
 			</tr>
-		</table>
-	</form>
+		</form>
+		<!-- Copy Users Form -->
+		<form method="post" action="manage_proj_user_copy.php">
+			<tr>
+				<td class="left" colspan="3">
+						<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+						<select name="other_project_id">
+							<?php print_project_option_list( null, false, $f_project_id ); ?>
+						</select>
+						<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_users_from' ) ?>" />
+						<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_users_to' ) ?>" />
+				</td>
+			</tr>
+		</form>
+	</table>
 </div>
 <?php
 }

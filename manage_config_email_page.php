@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_config_email_page.php,v 1.1 2005-02-26 15:16:45 thraxisp Exp $
+	# $Id: manage_config_email_page.php,v 1.2 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -21,7 +21,7 @@
 	print_manage_config_menu( 'manage_config_email_page.php' );
 
 	$t_access = current_user_get_access_level();
-	$t_project = helper_get_current_project(); 
+	$t_project = helper_get_current_project();
 	$t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
 	$t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
 
@@ -93,7 +93,7 @@
 
 	# Email notifications
 	if( config_get( 'enable_email_notification' ) == ON ) {
-	
+
 		if ( $t_can_change_flags  || $t_can_change_defaults ) {
 			echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_email_set.php\">\n";
 		}
@@ -117,7 +117,7 @@
 		}
 
 		get_section_end_for_email();
-		
+
 		if ( $t_can_change_flags  || $t_can_change_defaults ) {
 			if ( $t_can_change_defaults ) {
 				echo '<p>' . lang_get( 'notify_defaults_change_access' ) . ':';
@@ -125,20 +125,20 @@
 				print_enum_string_option_list( 'access_levels', config_get_access( 'default_notify_flags' ) );
 				echo '</select> </p>';
 			}
-			
+
 			if ( $t_can_change_flags ) {
 				echo '<p>' . lang_get( 'notify_actions_change_access' ) . ':';
 				echo '<select name="notify_actions_access">';
 				print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
 				echo '</select> </p>';
 			}
-			
+
 			echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
 
 			echo "</form>\n";
 		}
 
-	} 
-	
+	}
+
 	html_page_bottom1( __FILE__ );
 ?>

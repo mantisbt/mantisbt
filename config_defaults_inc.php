@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.246 2005-02-26 15:16:45 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.247 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -120,14 +120,14 @@
 	#############################
 
 	# The following list of variables should never be in the database.
-	# These patterns will be concatenated and used as a regular expression 
+	# These patterns will be concatenated and used as a regular expression
 	# to bypass the database lookup and look here for appropriate global settings.
 	$g_global_settings = array(
 		'_table$', 'cookie', 'custom_headers', '^db_', 'hostname', 'database_name',
 		'_path$', 'use_iis', 'language', 'use_javascript', 'display_errors', 'stop_on_errors', 'login_method', '_file$',
 		'_title$', 'anonymous', 'content_expire', 'html_valid_tags', 'default_home_page'
 	);
-	
+
 	#############################
 	# Signup and Lost Password
 	#############################
@@ -1092,7 +1092,7 @@
 	# --- CSV Export ---------------
 	# Set the csv separator
 	$g_csv_separator = ',';
-	
+
 	# threshold for users to view the system configurations
 	$g_view_configuration_threshold = DEVELOPER;
 
@@ -1530,8 +1530,8 @@
 	# NOTE: These are meaningless under Windows! Just ignore them!
 	$g_dot_tool							= '/usr/bin/dot';
 	$g_neato_tool						= '/usr/bin/neato';
-	
-	# Number of years in the future that custom date fields will display in 
+
+	# Number of years in the future that custom date fields will display in
 	# drop down boxes.
 	$g_forward_year_count 				= 4 ;
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.55 2005-02-26 15:16:46 thraxisp Exp $
+	# $Id: helper_api.php,v 1.56 2005-02-27 15:33:01 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -171,7 +171,7 @@
 			 !access_has_project_level( VIEWER, $t_project_id ) ) {
 			$t_project_id = ALL_PROJECTS;
 		}
-		
+
 		return (int)$t_project_id;
 	}
 

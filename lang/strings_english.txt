@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.242 $
-	# $Author: thraxisp $
-	# $Date: 2005-02-26 15:16:47 $
+	# $Revision: 1.243 $
+	# $Author: jlatour $
+	# $Date: 2005-02-27 15:33:02 $
 	#
-	# $Id: strings_english.txt,v 1.242 2005-02-26 15:16:47 thraxisp Exp $
+	# $Id: strings_english.txt,v 1.243 2005-02-27 15:33:02 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -55,6 +55,8 @@ $s_jump = 'Jump';
 $s_copy_users = 'Copy Users';
 $s_copy_categories_from = 'Copy Categories From';
 $s_copy_categories_to = 'Copy Categories To';
+$s_copy_users_from = 'Copy Users From';
+$s_copy_users_to = 'Copy Users To';
 $s_bug_history = 'Issue History';
 $s_field = 'Field';
 $s_old_value = 'Old Value';
