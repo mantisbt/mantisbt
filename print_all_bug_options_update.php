@@ -14,7 +14,7 @@
 <?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_user_id		= gpc_get_int( 'user_id' );
-	$f_redirect_url	= gpc_get_int( 'redirect_url' );
+	$f_redirect_url	= gpc_get_string( 'redirect_url' );
 
 	# the check for the protected state is already done in the form, there is
 	# no need to duplicate it here.
