@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.23 2002-11-29 16:46:47 jfitzell Exp $
+	# $Id: bug_api.php,v 1.24 2002-12-06 09:12:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -337,6 +337,11 @@
 		$t_bug_text_table = config_get( 'mantis_bug_text_table' );
 
 		email_bug_deleted( $p_bug_id );
+
+		# Delete custom fields
+		if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
+			custom_field_delete_all_values( $p_bug_id );
+		}
 
 		# Delete bugnotes
 		bugnote_delete_all( $p_bug_id );

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.19 2002-11-27 03:07:25 jfitzell Exp $
+	# $Id: project_api.php,v 1.20 2002-12-06 09:12:56 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -194,6 +194,11 @@
 
 		# Delete the bugs
 		bug_delete_all( $p_project_id );
+
+		# Delete associations with custom field definitions.
+		if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
+		    custom_field_delete_associations( $p_project_id );
+		}
 
 		# Delete the project categories
 		category_delete_all( $p_project_id );
