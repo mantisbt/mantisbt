@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.86 2004-10-05 21:10:14 prichards Exp $
+	# $Id: bug_api.php,v 1.87 2004-10-17 01:58:56 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -539,12 +539,12 @@
 				$t_bug_file = db_fetch_array( $result );
 
 				# prepare the new diskfile name and then copy the file
+				$t_file_path = dirname( $t_bug_file['folder'] );
+				$t_new_diskfile_name = $t_file_path . file_generate_unique_name( 'bug-' . $p_file_name, $t_file_path );
 				$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
-				$t_new_file_name = bug_format_id( $t_new_bug_id ) . '-' . $t_new_file_name;
-				$t_new_diskfile_name = $t_bug_file['folder'] . $t_new_file_name;
 				if ( ( config_get( 'file_upload_method' ) == DISK ) ) {
-					umask( 0333 );  # make read only
 					copy( $t_bug_file['diskfile'], $t_new_diskfile_name );
+					chmod( $t_new_diskfile_name, 0400 ); # make file read only in the file system
 				}
 
 				$query = "INSERT INTO $t_mantis_bug_file_table

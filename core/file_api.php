@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.59 2004-10-05 14:59:09 thraxisp Exp $
+	# $Id: file_api.php,v 1.60 2004-10-17 01:58:57 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -339,7 +339,6 @@
 	# --------------------
 	# Delete a local file even if it is read-only.
 	function file_delete_local( $p_filename ) {
-		# in windows replace with system("del $t_diskfile");
 		if ( file_exists( $p_filename ) ) {
 			chmod( $p_filename, 0775 );
 			unlink( $p_filename );
@@ -557,8 +556,8 @@
 							file_ftp_disconnect ( $conn_id );
 						}
 
-						umask( 0333 );  # make read only
 						move_uploaded_file( $p_tmp_file, $t_disk_file_name );
+						chmod( $t_disk_file_name, 0400 );
 
 						$c_content = '';
 					} else {
