@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.243 $
-	# $Author: jlatour $
-	# $Date: 2005-02-27 15:33:02 $
+	# $Revision: 1.244 $
+	# $Author: thraxisp $
+	# $Date: 2005-02-28 02:50:07 $
 	#
-	# $Id: strings_english.txt,v 1.243 2005-02-27 15:33:02 jlatour Exp $
+	# $Id: strings_english.txt,v 1.244 2005-02-28 02:50:07 thraxisp Exp $
 	###########################################################################
 ?>
 <?php
@@ -658,7 +658,6 @@ $s_threshold = 'Threshold';
 $s_status_level = 'Status';
 $s_alter_level = 'Who can alter this value';
 $s_validation = 'Workflow Validation';
-$s_status = 'Status';
 $s_comment = 'Validation Comment';
 $s_superfluous = 'Arc from status to itself is implied, and need not be given explicitly';
 $s_unreachable = 'You cannot move an issue into this status';
@@ -1212,7 +1211,7 @@ $s_loading = 'Loading...';
 $s_between = 'Between' ;
 $s_on_or_before = 'On Or Before' ;
 $s_before = 'Before' ;
-$s_on = 'On' ;
+# $s_on = 'On' ; # @@@ (thraxisp) this already exists (~ line 499)
 $s_after = 'After' ;
 $s_on_or_after = 'On Or After' ;
 
