@@ -54,6 +54,8 @@ Mantis
  * Added links from the counters of bugs reported and assigned to logged in user to their corresponding filtered view.
  * Added Chinese Simplified transaltion.
  * Added support for private bugnotes.
+ * Enhanced the admin_upgrade.php script, and supported auto-generation of SQL files.
+ * In the view bugs, when all projects is selected the project name is now displayed in smaller font over the category.
 
 2002.05.19  -  0.17.3
 

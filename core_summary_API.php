@@ -330,15 +330,13 @@
 			$t_bgcolor = alternate_colors( $i );
 
 			PRINT '<tr align="center">';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
-				if ( ( ON == $g_summary_product_colon_category ) && ( $g_project_cookie_val=='0000000' ) ) {
-					echo $t_project . ' : ';
-				}
-				echo $t_category;
-				PRINT '</td>';
-				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
-					PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
-				PRINT '</td>';
+			PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+			if ( ( ON == $g_summary_product_colon_category ) && ( $g_project_cookie_val=='0000000' ) ) {
+				PRINT "[$t_project] ";
+			}
+			PRINT "$t_category</td><td width=\"50%\" bgcolor=\"$t_bgcolor\">";
+			PRINT "$open_bug_count / $resolved_bug_count / $closed_bug_count / $total_bug_count";
+			PRINT '</td>';
 			PRINT '</tr>';
 		} # end for
 	}

@@ -258,12 +258,6 @@
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php
 			print_bug_link( $v_id );
-			# type project name if viewing 'all projects'
-			if (( ON == $g_show_bug_project_links )&&( '0000000' == $g_project_cookie_val )) {
-				echo '<br />[';
-				print_view_bug_sort_link( $project_name, 'project_id', $f_sort, $f_dir );
-				echo ']';
-			}
 		?>
 	</td>
 	<td class="center" bgcolor="<?php echo $status_color ?>">
@@ -281,7 +275,16 @@
 		?>
 	</td>
 	<td class="center" bgcolor="<?php echo $status_color ?>">
-		<?php echo $v_category ?>
+		<?php 
+			# type project name if viewing 'all projects'
+			if (( ON == $g_show_bug_project_links )&&( '0000000' == $g_project_cookie_val )) {
+				echo '<small>[';
+				print_view_bug_sort_link( $project_name, 'project_id', $f_sort, $f_dir );
+				echo ']</small><br />';
+			}
+
+			echo $v_category;
+		?>
 	</td>
 	<td class="center" bgcolor="<?php echo $status_color ?>">
 		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
