@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.112 2003-03-10 09:40:53 int2str Exp $
+	# $Id: config_defaults_inc.php,v 1.113 2003-03-15 22:09:54 jfitzell Exp $
 	# --------------------------------------------------------
 
 	
@@ -831,6 +831,9 @@
 	###########################
 	#----------------------------------
 	# Use compression of generated html if browser supports it
+	# If you already have compression enabled in your php.ini file
+	#  (either with zlib.output_compression or 
+	#  output_handler=ob_gzhandler) this option will have no effect either way.
 	$g_compress_html		= ON;
 	#----------------------------------
 
