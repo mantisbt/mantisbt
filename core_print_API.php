@@ -131,10 +131,12 @@
 		global $g_mantis_user_table, $g_project_cookie_val, $g_mantis_project_user_list_table;
 
 		$t_rep = REPORTER;
-
-	    #checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
-		else $specific_where = " t2.project_id='$g_project_cookie_val'";
+	    # checking if it's a per project statistic or all projects
+		if ( '0000000' == $g_project_cookie_val ) {
+			$specific_where = " 1=1";
+		} else {
+			$specific_where = " t2.project_id='$g_project_cookie_val'";
+		}
 		$query = "SELECT DISTINCT t1.id, t1.username
 				FROM $g_mantis_user_table as t1,
 				$g_mantis_project_user_list_table as t2
