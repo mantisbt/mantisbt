@@ -139,7 +139,7 @@
 	$g_default_language     = "english";
 
 	# list the choices that the users are allowed to choose
-	$g_language_choices_arr = array( "english", "dutch", "french", "french2", "german", "italian", "korean", "norwegian", "portuguese", "spanish", "turkish" );
+	$g_language_choices_arr = array( "english", "chinese_traditional", "dutch", "french", "french2", "german", "italian", "korean", "norwegian", "russian", "polish", "portuguese", "spanish", "swedish", "turkish" );
 
 	###############################
 	### Mantis Display Settings ###
@@ -263,8 +263,8 @@
 	$g_default_advanced_update    = 0;
 	$g_default_refresh_delay      = 30;    # in minutes
 	$g_default_redirect_delay     = 2;     # in seconds
-	$g_default_email_on_new       = 0;
-	$g_default_email_on_assigned  = 0;
+	$g_default_email_on_new       = 1;
+	$g_default_email_on_assigned  = 1;
 	$g_default_email_on_feedback  = 1;
 	$g_default_email_on_resolved  = 1;
 	$g_default_email_on_closed    = 1;
@@ -729,5 +729,7 @@
 	$g_view_bug_page                  = $g_path."view_bug_page".$g_php;
 	$g_view_bug_inc                   = $g_absolute_path."view_bug_inc.php";
 	$g_bug_file_upload_inc            = $g_absolute_path."bug_file_upload_inc.php";
+
+	$g_print_all_bug_page             = $g_path."print_all_bug_page".$g_php;
 	#----------------------------------
 ?>
