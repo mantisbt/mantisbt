@@ -170,7 +170,7 @@ CREATE TABLE mantis_project_table (
    UNIQUE name (name)
 );
 
-INSERT INTO mantis_project_table (id, name, status, enabled, view_state, description) VALUES ( '0000001', 'mantis', 'development', '1', '10', 'Mantis.  Report problems with the actual bug tracker here. (Do not remove this account.  You can set it to be disabled if you do not wish to see it)');
+INSERT INTO mantis_project_table (id, name, status, enabled, view_state, description) VALUES ( '0000001', 'mantis', '10', '1', '10', 'Mantis.  Report problems with the actual bug tracker here. (Do not remove this account.  You can set it to be disabled if you do not wish to see it)');
 
 # --------------------------------------------------------
 #

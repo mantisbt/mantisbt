@@ -12,7 +12,7 @@
 	# feature is enabled.  Any other cases will have an explanation.
 
 	#error_reporting(E_ALL ^ E_NOTICE);
-	error_reporting(E_ALL);
+	#error_reporting(E_ALL);
 
 	################################
 	### Mantis Database Settings ###
@@ -88,7 +88,7 @@
 
 	# set to 0 to disable email check
 	$g_validate_email            = 1;
-	$g_check_mx_record           = 0;
+	$g_check_mx_record           = 1;
 
 	################################
 	### Mantis Language Settings ###
@@ -234,8 +234,9 @@
 	# --- file upload settings --------
 	### @@@ This should be broken into per project settings and split between bug uploads and project document uploads
 	$g_allow_file_upload    = 1;
-	# "disk" or "database" (currently only disk is supported)
-	$g_store_file_to        = "disk";
+	# 1 = "disk"
+	# 2 = "database" (currently only disk is supported)
+	$g_store_file_to        = "1";
 
 	$g_max_file_size = 5000000;
 
