@@ -7,7 +7,7 @@
 	# Japanese: Takeshi Hachikawa, hachikawa@sesys.co.jp
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'x-euc-jp';
 
 	# new strings:
@@ -30,6 +30,22 @@
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -60,6 +76,7 @@
 	$s_access_levels_enum_string      = '10:参照のみ,25:バグ登録,40:バグ編集,55:開発者,70:マネージャ,90:管理者';
 	$s_project_status_enum_string     = '10:開発,30:リリース,50:安定,70:完了';
 	$s_project_view_state_enum_string = '10:公開,50:非公開';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:未定,20:低,30:中,40:高,50:緊急,60:即時';
 	$s_severity_enum_string           = '10:機能,20:しょうもない,30:表示,40:些細,50:マイナー,60:メジャー,70:アプリケーションエラー,80:システム停止';

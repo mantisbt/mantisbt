@@ -8,7 +8,7 @@
 	# Code page: ISO-8259-2
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'iso-8259-2';
 
 	# new strings:
@@ -31,6 +31,22 @@
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -61,6 +77,7 @@
 	$s_access_levels_enum_string      = '10:recenzent,25:reportér,40:aktualizátor,55:vývojáø,70:vedoucí,90:administrátor';
 	$s_project_status_enum_string     = '10:vývoj,30:verze,50:stabilní,70:nepouµívaný';
 	$s_project_view_state_enum_string = '10:veøejný,50:soukromý';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:µádná,20:nízká,30:normální,40:vysoká,50:urgentní,60:okamµitì';
 	$s_severity_enum_string           = '10:feature,20:triviální,30:text,40:slabá,50:malá,60:velká,70:pád applikace,80:blokující';

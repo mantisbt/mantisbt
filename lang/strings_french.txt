@@ -11,7 +11,7 @@
 	# French: Roland Meyer, Daniel Coquette
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'iso-8859-1';
 
 	# new strings:
@@ -34,6 +34,22 @@
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -64,6 +80,7 @@
 	$s_access_levels_enum_string      = '10:invité,25:rapporteur simple,40:rapporteur avec droits,55:dévelopeur,70:chef de projet,90:administrateur';
 	$s_project_status_enum_string     = '10:développement,30:livré,50:stable,70:obsolète';
 	$s_project_view_state_enum_string = '10:public,50:privé';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:aucune,20:basse,30:normale,40:élevée,50:urgent,60:immédiate';
 	$s_severity_enum_string           = '10:fonctionnalité,20:simple,30:texte,40:cosmétique,50:mineur,60:majeur,70:crash,80:bloquant';

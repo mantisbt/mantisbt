@@ -7,7 +7,7 @@
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'iso-8859-2';
 
 	# new strings:
@@ -30,6 +30,22 @@
 	$s_copy_users = 'Copiere utilizatori';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'EROARE: O eroare a aparut in timpul acestei operatiuni. Probabil ca este important sa raportati eroarea administratorului aplicatiei.';
@@ -60,6 +76,7 @@
 	$s_access_levels_enum_string      = '10:spectator,25:reporter,40:modificator,55:dezvoltator,70:manager,90:administrator';
 	$s_project_status_enum_string     = '10:dezvoltare,30:release,50:stabila,70:invechita';
 	$s_project_view_state_enum_string = '10:public,50:privat';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:fara,20:scazuta,30:normala,40:mare,50:urgenta,60:imediata';
 	$s_severity_enum_string           = '10:noutate,20:trivial,30:text,40:optimizare,50:minor,60:major,70:fatal,80:blocant';

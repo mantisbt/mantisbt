@@ -7,7 +7,7 @@
 	# Russian (WindowsKOI8-R): Alexander Leschinsky aml@lair.pp.ru
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'koi8-r';
 
 	# new strings:
@@ -30,6 +30,22 @@
 	$s_copy_users = 'Копировать пользователей';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ОШИБКА: в процессе выполнения операции произошла ошибка.  Вы может быть захотите сообщить об этом вашему локальному администратору.';
@@ -60,6 +76,7 @@
 	$s_access_levels_enum_string      = '10:зритель,25:репортер,40:редактор,55:разработчик,70:менеджер,90:администратор';
 	$s_project_status_enum_string     = '10:бета,30:релиз,50:стабильный,70:устаревший';
 	$s_project_view_state_enum_string = '10:общедоступный,50:частный';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:нет,20:низкий,30:нормальный,40:высокий,50:важный,60:безотлагательный';
 	$s_severity_enum_string           = '10:дополнение,20:тривиально,30:текст,40:минимально,50:незначительный,60:значительный,70:авария,80:блокировка';
@@ -198,13 +215,13 @@
 	# bug_delete.php
 	$s_bug_deleted_msg = 'Баг удален...';
 
-	# bug_monitor.php
-	$s_monitor_bug_button = "Следить";
-	$s_unmonitor_bug_button = "Не следить"; 
-
 	# bug_delete_page.php
 	$s_delete_bug_sure_msg = 'Вы уверены, что желаете обновить баг?';
 	$s_delete_bug_button = 'Удалить баг';
+
+	# bug_monitor.php
+	$s_monitor_bug_button = "Следить";
+	$s_unmonitor_bug_button = "Не следить"; 
 
 	# bug_file_add.php
 	$s_file_upload_msg = 'Файл загружен';

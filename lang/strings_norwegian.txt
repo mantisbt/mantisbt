@@ -7,7 +7,7 @@
 	# Norwegian: Espen Holje, eh@escio.no
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'iso-8859-1';
 
 	# new strings:
@@ -30,6 +30,22 @@
 	$s_copy_users = 'Kopiere brukere';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEIL: Det oppstod en en feil. Du kan rapportere feilen til din administrator.';
@@ -60,6 +76,7 @@
 	$s_access_levels_enum_string      = '10:leser,25:reporter,40:oppdaterer,55:utvikler,70:prosjektleder,90:administrator';
 	$s_project_status_enum_string     = '10:utvikling,30:release,50:stabil,70:uvesentlig';
 	$s_project_view_state_enum_string = '10:offentlig,50:privat';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:ingen,20:lav,30:normal,40:høy,50:haster,60:øyeblikkelig';
 	$s_severity_enum_string           = '10:funksjonalitet,20:triviell,30:tekst,40:kan omgås,50:mindre,60:alvorlig,70:krasj,80:blokkering';

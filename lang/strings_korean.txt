@@ -7,7 +7,7 @@
 	# 한글 번역   aporie@kornet.net
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'euc-kr';
 
 	# new strings:
@@ -30,6 +30,22 @@
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -60,6 +76,7 @@
 	$s_access_levels_enum_string      = '10:볼수만 있음,25:보고가능,40:갱신가능,55:개발자,70:매니저,90:관리자';
 	$s_project_status_enum_string     = '10:개발버전,30:배포판,50:안정버전,70:구버전';
 	$s_project_view_state_enum_string = '10:공개,50:비공개';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:없음,20:낮음,30:보통,40:높음,50:긴급,60:즉시';
 	$s_severity_enum_string           = '10:눈에 띄는 버그,20:사소한 버그,30:문자열 오류,40:트윅,50:중요하지 않은 버그,60:중요한 버그,70:프로그램 크래시,80:프로그램에 큰 장애';

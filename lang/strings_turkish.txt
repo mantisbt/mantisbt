@@ -8,7 +8,7 @@
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'iso-8859-9';
 
 	# new strings:
@@ -31,6 +31,22 @@
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -61,6 +77,7 @@
 	$s_access_levels_enum_string      = '10:izleyici,25:raporcu,40:güncelleyici,55:programcý,70:menejer,90:yönetici';
 	$s_project_status_enum_string     = '10:geliþtirme,30:sürüm,50:tutarlý,70:eski';
 	$s_project_view_state_enum_string = '10:genel,50:özel';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:yok,20:düþük,30:normal,40:yüksek,50:acil,60:derhal';
 	$s_severity_enum_string           = '10:özellik,20:kolay,30:metin,40:ayar,50:küçük,60:büyük,70:çökme,80:engel';

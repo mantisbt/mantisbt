@@ -7,7 +7,7 @@
 	# Danish: Søren Mortensen, sm@artmus.dk
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'iso-8859-1';
 
 	# new strings:
@@ -30,6 +30,22 @@
 	$s_copy_users = 'Kopier Brugere';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEJL: Der opstod en uventet fejl.  Du bedes kontakte din lokale administrator.';
@@ -60,6 +76,7 @@
 	$s_access_levels_enum_string      = '10:betragter,25:rapportør,40:ajourføring,55:udvikler,70:manager,90:administrator';
 	$s_project_status_enum_string     = '10:udvikling,30:udgivelse,50:stabil,70:forældet';
 	$s_project_view_state_enum_string = '10:offentlig,50:privat';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:ingen,20:lav,30:normal,40:høj,50:haster,60:straks!';
 	$s_severity_enum_string           = '10:indslag,20:triviel,30:tekst,40:tilpasses,50:mindre,60:større,70:crash,80:block';
@@ -256,7 +273,7 @@
 	$s_votes = 'Stemmer';
 	$s_summary = 'Opsummering';
 	$s_description = 'Beskrivelse';
-	$s_steps_to_reproduce = 'Skridt til genfrembringelse';
+	$s_steps_to_reproduce = 'Handlinger for at genfrembringe';
 	$s_additional = 'Yderligere';
 	$s_information = 'Information';
 	$s_update_information_button = 'Ajourfør Information';
@@ -352,7 +369,6 @@
 	$s_project_added_msg = 'Projektet er tilføjet...';
 
 	# manage_proj_category_add.php
-	$s_duplicate_category = 'FEJL: Denne kategori findes allerede.';
 	$s_category_added_msg = 'Kategorien er blevet tilføjet...';
 
 	# manage_proj_category_delete.php
@@ -393,7 +409,6 @@
 
 	# manage_proj_menu_page.php
 	$s_add_project_title = 'Tilføj Projekt';
-	$s_access_threshold = 'Adgangsbegrænsning';
 	$s_upload_file_path = 'Upload Fil Sti';
 	$s_add_project_button = 'Tilføj Projekt';
 	$s_projects_title = 'Projekter';
@@ -403,7 +418,6 @@
 	$s_project_updated_msg = 'Projektet er blevet ajourført...';
 
 	# manage_proj_version_add.php
-	$s_duplicate_version = 'FEJL: Dette er en duplikat version.';
 	$s_version_added_msg = 'Version er blevet tilføjet...';
 
 	# manage_proj_version_delete.php
@@ -477,7 +491,6 @@
 	$s_update_news_button = 'Ajourfør Nyheder';
 
 	# news_menu_page.php
-	$g_sitewide = 'Alle projekter';
 	$s_add_news_title = 'Tilføj Nyheder';
 	$s_do_not_use = 'Brug ikke';
 	$s_post_to = 'Send til';
@@ -499,8 +512,6 @@
 	# proj_doc_add_page.php
 	$s_upload_file_title = 'Upload Fil';
 	$s_title = 'Titel';
-	$s_select_file = 'Vælg Fil';
-	$s_upload_file_button = 'Upload Fil';
 
 	# proj_doc_delete.php
 	$s_project_file_deleted_msg = 'Projekt filer slettet';
@@ -509,7 +520,6 @@
 	$s_confirm_file_delete_msg = 'Er du sikker på du vil slette denne fil?';
 
 	# proj_doc_edit_page.php
-	$s_upload_file_title = 'Upload Fil';
 	$s_filename = 'Filnavn';
 	$s_file_update_button = 'Ajourfør Fil';
 	$s_file_delete_button = 'Slet Fil';
@@ -533,19 +543,15 @@
 	$s_remove_user_sure_msg = 'Er du sikker på at du vil fjerne denne bruger?';
 
 	# proj_user_menu_page.php
-	$s_create_user_message = 'BEMÆRK: Brugeren skal være oprette for at kunne tilknyttes et projekt';
-	$s_automatic_access_level = 'Automatisk adgangs-niveau';
 	$s_add_user_title = 'Tilføj bruger til Projekt';
 	$s_add_user_button = 'Tilføj bruger';
 	$s_project_selection_title = 'Projekt Valg';
 	$s_remove_link = 'fjern';
-	$s_automatic_access = 'Brugere med automatisk adgang';
 
 	# proj_user_update.php
 	$s_updated_user_msg = 'Bruger ajourført';
 
 	# report_add.php
-	$s_report_add_error_msg = 'FEJL: Der var en fejl i din rapport.';
 	$s_must_enter_category = 'Du skal vælge en kategori';
 	$s_must_enter_severity = 'Du skal angiv en alvorlighed';
 	$s_must_enter_reproducibility = 'Du skal vælge en genfrembringelse';
@@ -563,14 +569,12 @@
 	$s_select_severity = 'Vælg Alvorlighed';
 	$s_or_fill_in = 'ELLER udfyld';
 	$s_assign_to = 'Overdraget til';
-	$s_steps_to_reproduce = 'Handlinger for at genfrembringe';
 	$s_additional_information = 'Yderligere information';
 	$s_submit_report_button = 'Send Rapport';
 	$s_check_report_more_bugs = 'afmærk for at rapporterer flere fejl';
 
 	# report_bug_page.php
 	$s_advanced_report_link = 'Avanceret Rapport';
-	$s_upload_file = 'Upload Fil';
 	$s_report_stay = 'Rapport Opsætning';
 
 	# set_project.php
@@ -632,7 +636,6 @@
 	$s_show = 'Vis';
 	$s_changed = 'Ændret(time)';
 	$s_hide_closed = 'Skjul Lukket';
-	$s_filter_button = 'Filter';
 	$s_viewing_bugs_title = 'Vis Fejl';
 	$s_updated = 'Ajourført';
 

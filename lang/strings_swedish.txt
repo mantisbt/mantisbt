@@ -7,7 +7,7 @@
 	# Swedish: Ludvig Omholt, ludde@restamus.se
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'iso-8859-1';
 
 	# new strings:
@@ -30,6 +30,22 @@
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -60,6 +76,7 @@
 	$s_access_levels_enum_string      = '10:läsare,25:rapporterare,40:uppdaterare,55:utvecklare,70:projektledare,90:administratör';
 	$s_project_status_enum_string     = '10:utveckling,30:release,50:stabil,70:inaktuell';
 	$s_project_view_state_enum_string = '10:publik,50:privat';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:ingen,20:låg,30:normal,40:hög,50:bråttom,60:omedelbart';
 	$s_severity_enum_string           = '10:funktion,20:trivial,30:text,40:tweak,50:mindre,60:allvarlig,70:krash,80:blockerare';

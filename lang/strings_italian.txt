@@ -9,7 +9,7 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 ?>
 <?php
-	# Charset
+    # Charset
 	$s_charset = 'iso-8859-1';
 
 	# new strings:
@@ -32,6 +32,22 @@
 	$s_copy_users = 'Copy Users';
 	$s_copy_categories_from = 'Copy Categories From';
 	$s_copy_categories_to = 'Copy Categories To';
+	$s_bug_history = 'Bug History';
+	$s_field = 'Field';
+	$s_old_value = 'Old Value';
+	$s_new_value = 'New Value';
+	$s_date_modified = 'Date Modified';
+
+	$s_new_bug = 'New Bug';
+	$s_bugnote_added = 'Bugnote Added';
+	$s_bugnote_edited = 'Bugnote Edited';
+	$s_bugnote_deleted = 'Bugnote Deleted';
+	$s_summary_updated = 'Summary Updated';
+	$s_description_updated = 'Description Updated';
+	$s_additional_information_updated = 'Additional Information Updated';
+	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
+	$s_file_added = 'File Added: ';
+	$s_file_deleted = 'File Deleted: ';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
@@ -62,6 +78,7 @@
 	$s_access_levels_enum_string      = '10:osservatore,25:segnalatore,40:aggiornatore,55:sviluppatore,70:manager,90:amministratore';
 	$s_project_status_enum_string     = '10:sviluppo,30:release,50:stabile,70:obsoleta';
 	$s_project_view_state_enum_string = '10:pubblico,50:privato';
+	$s_view_state_enum_string         = '10:public,50:private';
 
 	$s_priority_enum_string           = '10:nessuna,20:bassa,30:normale,40:alta,50:urgente,60:immediata';
 	$s_severity_enum_string           = '10:caratteristica,20:semplice,30:testo,40:tweak,50:minore,60:maggiore,70:crash,80:blocco';
