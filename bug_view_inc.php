@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_inc.php,v 1.3 2002-10-27 23:35:40 jfitzell Exp $
+	# $Id: bug_view_inc.php,v 1.4 2002-10-29 09:27:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,36 +14,7 @@
 	# $f_bug_id MUST be specified before the file is included
 ?>
 <?php
-	$c_bug_id = (integer)$f_bug_id;
-	$t_bug_table = config_get( 'mantis_bug_table' );
-
-	$query ="SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted, ".
-			"UNIX_TIMESTAMP(last_updated) as last_updated ".
-			"FROM $t_bug_table ".
-			"WHERE id='$c_bug_id' ".
-			"LIMIT 1";
-	$result = db_query( $query );
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
-
-	$query ="SELECT * ".
-			"FROM $t_bug_text_table ".
-			"WHERE id='$v_bug_text_id' ".
-			"LIMIT 1";
-	$result = db_query( $query );
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v2' );
-
-	$v_os 						= string_display( $v_os );
-	$v_os_build					= string_display( $v_os_build );
-	$v_platform					= string_display( $v_platform );
-	$v_version 					= string_display( $v_version );
-	$v_summary 					= string_display( $v_summary );
-	$v2_description 			= string_display( $v2_description );
-	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
-	$v2_additional_information 	= string_display( $v2_additional_information );
+	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
 ?>
 <br />
 <table class="width100" cellspacing="1">
@@ -74,22 +45,22 @@
 </tr>
 <tr class="row-2">
 	<td>
-		<?php echo $v_id ?>
+		<?php echo bug_format_id( $f_bug_id ) ?>
 	</td>
 	<td>
-		<?php echo $v_category ?>
+		<?php echo $t_bug->category ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'severity', $v_severity ) ?>
+		<?php echo get_enum_element( 'severity', $t_bug->severity ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'reproducibility', $v_reproducibility ) ?>
+		<?php echo get_enum_element( 'reproducibility', $t_bug->reproducibility ) ?>
 	</td>
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
 	</td>
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
 	</td>
 </tr>
 <tr height="5" class="spacer">
@@ -102,7 +73,7 @@
 		<?php echo lang_get( 'reporter' ) ?>
 	</td>
 	<td colspan="5">
-		<?php print_user( $v_reporter_id ) ?>
+		<?php print_user( $t_bug->reporter_id ) ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -110,7 +81,7 @@
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td colspan="5">
-		<?php print_user( $v_handler_id ) ?>
+		<?php print_user( $t_bug->handler_id ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -118,13 +89,13 @@
 		<?php echo lang_get( 'priority' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'priority', $v_priority ) ?>
+		<?php echo get_enum_element( 'priority', $t_bug->priority ) ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
+		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -134,14 +105,14 @@
 	<td class="category">
 		<?php echo lang_get( 'status' ) ?>
 	</td>
-	<td bgcolor="<?php echo get_status_color( $v_status ) ?>">
-		<?php echo get_enum_element( 'status', $v_status ) ?>
+	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
+		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
-		<?php print_duplicate_id( $v_duplicate_id ) ?>
+		<?php print_duplicate_id( $t_bug->duplicate_id ) ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -157,7 +128,7 @@
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $v_summary ?>
+		<?php echo $t_bug->summary ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -165,7 +136,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $v2_description ?>
+		<?php echo $t_bug->description ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -173,7 +144,7 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $v2_additional_information ?>
+		<?php echo $t_bug->additional_information ?>
 	</td>
 </tr>
 </table>

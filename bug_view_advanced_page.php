@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.7 2002-10-27 23:35:40 jfitzell Exp $
+	# $Id: bug_view_advanced_page.php,v 1.8 2002-10-29 09:27:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -17,9 +17,8 @@
 	# @@@@ Bug History - consider logging the fact that defect was published and by who.
 
 	$f_bug_id		= gpc_get_int( 'f_bug_id' );
-	$f_bug_id		= bug_format_id ( $f_bug_id );
-	$f_check	= gpc_get_string( 'f_check', '' );
-	$f_history	= gpc_get_bool( 'f_history' );
+	$f_check		= gpc_get_string( 'f_check', '' );
+	$f_history		= gpc_get_bool( 'f_history' );
 
 	if ( SIMPLE_ONLY == config_get( 'show_view' ) ) {
 		$t_simple_url = 'bug_view_page.php?f_bug_id=' . $f_bug_id;
@@ -40,49 +39,10 @@
 	{
 		login_cookie_check();
 		project_access_check( $f_bug_id );
+		access_bug_check( $f_bug_id );
 	}
 
-	$c_bug_id = (integer)$f_bug_id;
-
-	$t_bug_table = config_get( 'mantis_bug_table' );
-
-	$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
-			UNIX_TIMESTAMP(last_updated) as last_updated
-			FROM $t_bug_table
-    		WHERE id='$c_bug_id'";
-    $result = db_query( $query );
-
-	# check bug exists here, rather than calling bug_ensure_exists() and executing
-	# the query twice.
-	if ( 0 == db_num_rows( $result ) ) {
-		print_header_redirect( 'main_page.php' );
-	}
-
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
-
-	if ( empty ( $f_check ) ) {
-		# if bug is private, make sure user can view private bugs
-		access_bug_check( $f_bug_id, $v_view_state );
-	}
-
-	$t_bug_text_table = config_get( 'mantis_bug_text_table' );
-
-	$query = "SELECT *
-    		FROM $t_bug_text_table
-    		WHERE id='$v_bug_text_id'";
-    $result = db_query( $query );
-	$row = db_fetch_array( $result );
-	extract( $row, EXTR_PREFIX_ALL, 'v2' );
-
-	$v_os 						= string_display( $v_os );
-	$v_os_build					= string_display( $v_os_build );
-	$v_platform					= string_display( $v_platform );
-	$v_version 					= string_display( $v_version );
-	$v_summary 					= string_display( $v_summary );
-	$v2_description 			= string_display( $v2_description );
-	$v2_steps_to_reproduce 		= string_display( $v2_steps_to_reproduce );
-	$v2_additional_information 	= string_display( $v2_additional_information );
+	$t_bug = bug_prepare_display( bug_get( $f_bug_id, true ) );
 
 	compress_start();
 
@@ -105,12 +65,13 @@
 	<td class="right" colspan="2">
 
 <?php if ( empty( $f_check ) ) { ?>
-	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id='.$f_bug_id.'&amp;f_check=' . helper_calc_crc( $f_bug_id, __FILE__ ), lang_get( 'publish' ) )?></span>
+	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id . '&amp;f_check=' . helper_calc_crc( $f_bug_id, __FILE__ ), lang_get( 'publish' ) )?></span>
 <?php }?>
 
 <?php if ( empty( $f_check ) && ( BOTH == config_get( 'show_view' ) ) ) { ?>
-		<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_bug_id='.$f_bug_id, lang_get( 'view_simple_link' ) )?></span>
-<?php }?>
+		<span class="small"><?php print_bracket_link( 'bug_view_page.php?f_bug_id=' . $f_bug_id, lang_get( 'view_simple_link' ) ) ?></span>
+<?php } ?>
+
 <?php
 	if ( !empty ( $f_check ) ) {
 		$t_check = '&amp;f_check=' . $f_check;
@@ -118,8 +79,8 @@
 		$t_check = '';
 	}
 ?>
-	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id='.$f_bug_id.$t_check.'&amp;f_history=1#history', lang_get( 'bug_history' ) ) ?></span>
-	<span class="small"><?php print_bracket_link( 'print_bug_page.php?f_bug_id='.$f_bug_id, lang_get( 'print' ) ) ?></span>
+	<span class="small"><?php print_bracket_link( 'bug_view_advanced_page.php?f_bug_id=' . $f_bug_id . $t_check . '&amp;f_history=1#history', lang_get( 'bug_history' ) ) ?></span>
+	<span class="small"><?php print_bracket_link( 'print_bug_page.php?f_bug_id=' . $f_bug_id, lang_get( 'print' ) ) ?></span>
 	</td>
 </tr>
 <tr class="row-category">
@@ -144,22 +105,22 @@
 </tr>
 <tr class="row-2">
 	<td>
-		<?php echo $v_id ?>
+		<?php echo bug_format_id( $f_bug_id ) ?>
 	</td>
 	<td>
-		<?php echo $v_category ?>
+		<?php echo $t_bug->category ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'severity', $v_severity ) ?>
+		<?php echo get_enum_element( 'severity', $t_bug->severity ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'reproducibility', $v_reproducibility ) ?>
+		<?php echo get_enum_element( 'reproducibility', $t_bug->reproducibility ) ?>
 	</td>
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $v_date_submitted ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $t_bug->date_submitted ) ?>
 	</td>
 	<td>
-		<?php print_date( config_get( 'normal_date_format' ), $v_last_updated ) ?>
+		<?php print_date( config_get( 'normal_date_format' ), $t_bug->last_updated ) ?>
 	</td>
 </tr>
 <tr>
@@ -172,13 +133,13 @@
 		<?php echo lang_get( 'reporter' ) ?>
 	</td>
 	<td>
-		<?php print_user_with_subject( $v_reporter_id, $f_bug_id ) ?>
+		<?php print_user_with_subject( $t_bug->reporter_id, $f_bug_id ) ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'view_status' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'project_view_state', $v_view_state ) ?>
+		<?php echo get_enum_element( 'project_view_state', $t_bug->view_state ) ?>
 	</td>
 	<td colspan="2">
 		&nbsp;
@@ -189,7 +150,7 @@
 		<?php echo lang_get( 'assigned_to' ) ?>
 	</td>
 	<td colspan="5">
-		<?php print_user_with_subject( $v_handler_id, $f_bug_id ) ?>
+		<?php print_user_with_subject( $t_bug->handler_id, $f_bug_id ) ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -197,39 +158,39 @@
 		<?php echo lang_get( 'priority' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'priority', $v_priority ) ?>
+		<?php echo get_enum_element( 'priority', $t_bug->priority ) ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'resolution' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'resolution', $v_resolution ) ?>
+		<?php echo get_enum_element( 'resolution', $t_bug->resolution ) ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td>
-		<?php echo $v_platform ?>
+		<?php echo $t_bug->platform ?>
 	</td>
 </tr>
 <tr class="row-2">
 	<td class="category">
 		<?php echo lang_get( 'status' ) ?>
 	</td>
-	<td bgcolor="<?php echo get_status_color( $v_status ) ?>">
-		<?php echo get_enum_element( 'status', $v_status ) ?>
+	<td bgcolor="<?php echo get_status_color( $t_bug->status ) ?>">
+		<?php echo get_enum_element( 'status', $t_bug->status ) ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'duplicate_id' ) ?>
 	</td>
 	<td>
-		<?php print_duplicate_id( $v_duplicate_id ) ?>
+		<?php print_duplicate_id( $t_bug->duplicate_id ) ?>
 	</td>
 	<td class="category">
 		<?php echo lang_get( 'os' ) ?>
 	</td>
 	<td>
-		<?php echo $v_os ?>
+		<?php echo $t_bug->os ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -237,7 +198,7 @@
 		<?php echo lang_get( 'projection' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'projection', $v_projection ) ?>
+		<?php echo get_enum_element( 'projection', $t_bug->projection ) ?>
 	</td>
 	<td colspan="2">
 
@@ -246,7 +207,7 @@
 		<?php echo lang_get( 'os_version' ) ?>
 	</td>
 	<td>
-		<?php echo $v_os_build ?>
+		<?php echo $t_bug->os_build ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -254,7 +215,7 @@
 		<?php echo lang_get( 'eta' ) ?>
 	</td>
 	<td>
-		<?php echo get_enum_element( 'eta', $v_eta ) ?>
+		<?php echo get_enum_element( 'eta', $t_bug->eta ) ?>
 	</td>
 	<td colspan="2">
 
@@ -263,7 +224,7 @@
 		<?php echo lang_get( 'product_version' ) ?>
 	</td>
 	<td>
-		<?php echo $v_version ?>
+		<?php echo $t_bug->version ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -274,7 +235,7 @@
 		<?php echo lang_get( 'product_build' ) ?>
 	</td>
 	<td>
-		<?php echo $v_build?>
+		<?php echo $t_bug->build?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -285,7 +246,7 @@
 		<?php echo lang_get( 'votes' ) ?>
 	</td>
 	<td>
-		<?php echo $v_votes ?>
+		<?php echo $t_bug->votes ?>
 	</td>
 </tr>
 <tr>
@@ -298,7 +259,7 @@
 		<?php echo lang_get( 'summary' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $v_summary ?>
+		<?php echo $t_bug->summary ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -306,7 +267,7 @@
 		<?php echo lang_get( 'description' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $v2_description ?>
+		<?php echo $t_bug->description ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -314,7 +275,7 @@
 		<?php echo lang_get( 'steps_to_reproduce' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $v2_steps_to_reproduce ?>
+		<?php echo $t_bug->steps_to_reproduce ?>
 	</td>
 </tr>
 <tr class="row-2">
@@ -322,17 +283,19 @@
 		<?php echo lang_get( 'additional_information' ) ?>
 	</td>
 	<td colspan="5">
-		<?php echo $v2_additional_information ?>
+		<?php echo $t_bug->additional_information ?>
 	</td>
 </tr>
 <?php
+#@@@ REMOVE THIS CODE!!
 	$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
 	# account profile description
-	if ( $v_profile_id > 0 ) {
+	$t_profile_id = bug_get_field( $f_bug_id, 'profile_id' );
+	if ( $t_profile_id > 0 ) {
 		$query = "SELECT description
 				FROM $t_user_profile_table
-				WHERE id='$v_profile_id'";
+				WHERE id='$t_profile_id'";
 		$result = db_query( $query );
 		$t_profile_description = '';
 		if ( db_num_rows( $result ) > 0 ) {
@@ -360,8 +323,7 @@
 	if ( !empty( $f_check ) ) {
 		$t_show_attachments = true;
 	} else {
-		$t_user_id = current_user_get_field ( 'id' );
-		$t_show_attachments = ( ( $v_reporter_id == $t_user_id ) || access_level_check_greater_or_equal( config_get( 'view_attachments_threshold' ) ) );
+		$t_show_attachments = ( ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_level_check_greater_or_equal( config_get( 'view_attachments_threshold' ) ) );
 	}
 
 	if ( $t_show_attachments ) {
@@ -380,11 +342,10 @@
 		<table width="100%">
 			<tr align="center">
 <?php # UPDATE form BEGIN ?>
-<?php if ( access_level_check_greater_or_equal( config_get( 'update_bug_threshold' ) ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( config_get( 'update_bug_threshold' ) ) && ( $t_bug->status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="<?php echo string_get_bug_update_page() ?>">
 		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>" />
 		<input type="submit" value="<?php echo lang_get( 'update_bug_button' ) ?>" />
 		</form>
 	</td>
@@ -393,13 +354,13 @@
 	# UPDATE form END
 ?>
 <?php # ASSIGN form BEGIN ?>
-<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) && ( $t_bug->status < RESOLVED ) ) { ?>
 	<td class="center">
 		<?php #check if current user already assigned to the bug ?>
-		<?php if ( $t_user_id != $v_handler_id ) { ?>
+		<?php if ( auth_get_current_user_id() != $t_bug->handler_id ) { ?>
 		<form method="post" action="bug_assign.php">
 		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
-		<input type="hidden" name="f_date_submitted" value="<?php echo $v_date_submitted ?>" />
+		<input type="hidden" name="f_date_submitted" value="<?php echo $t_bug->date_submitted ?>" />
 		<input type="submit" value="<?php echo lang_get( 'bug_assign_button' ) ?>" />
 		</form>
 		<?php } #end of checking if current user already assigned ?>
@@ -408,7 +369,7 @@
 	} # ASSIGN form END
 ?>
 <?php # RESOLVE form BEGIN ?>
-<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'handle_bug_threshold' ) ) && ( $t_bug->status < RESOLVED ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_resolve_page.php">
 		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
@@ -419,9 +380,9 @@
 	} # RESOLVE form END
 ?>
 <?php # REOPEN form BEGIN ?>
-<?php if ( empty( $f_check ) && ( $v_status >= RESOLVED ) &&
+<?php if ( empty( $f_check ) && ( $t_bug->status >= RESOLVED ) &&
 		( access_level_check_greater_or_equal( config_get( 'reopen_bug_threshold' ) ) ||
-		( $v_reporter_id == $t_user_id  && ON == config_get( 'allow_reporter_reopen' ) ) ) ) { ?>
+		( $t_bug->reporter_id == $t_user_id  && ON == config_get( 'allow_reporter_reopen' ) ) ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_reopen_page.php">
 		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
@@ -434,8 +395,8 @@
 <?php # CLOSE form BEGIN ?>
 <?php if ( empty( $f_check ) && ( access_level_check_greater_or_equal( config_get( 'close_bug_threshold' ) ) ||
 		( ON == config_get( 'allow_reporter_close' ) &&
-		  $v_reporter_id == $t_user_id ) ) &&
-		( RESOLVED == $v_status ) ) { ?>
+		  $t_bug->reporter_id == $t_user_id ) ) &&
+		( RESOLVED == $t_bug->status ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_close_page.php">
 		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
@@ -447,7 +408,7 @@
 ?>
 <?php # MONITOR form BEGIN ?>
 <?php
- if ( empty( $f_check ) && (( PUBLIC == $v_view_state && access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) ) || ( PRIVATE == $v_view_state && access_level_check_greater_or_equal( config_get( 'private_bug_threshold' ) ) )) && ! user_is_monitoring_bug( $t_user_id, $f_bug_id ) ) {
+ if ( empty( $f_check ) && (( PUBLIC == $t_bug->view_state && access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) ) || ( PRIVATE == $t_bug->view_state && access_level_check_greater_or_equal( config_get( 'private_bug_threshold' ) ) )) && ! user_is_monitoring_bug( auth_get_current_user_id(), $f_bug_id ) ) {
 ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
@@ -461,7 +422,7 @@
 	# MONITOR form END
 ?>
 <?php # UNMONITOR form BEGIN ?>
-<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) && user_is_monitoring_bug( $t_user_id, $f_bug_id ) ) { ?>
+<?php if ( empty( $f_check ) && access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) && user_is_monitoring_bug( auth_get_current_user_id(), $f_bug_id ) ) { ?>
 	<td class="center">
 		<form method="post" action="bug_monitor.php">
 		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
@@ -491,7 +452,7 @@
 </table>
 
 <?php
-	if ( empty( $f_check ) && $t_show_attachments && $v_status < RESOLVED && access_level_check_greater_or_equal( REPORTER ) ) {
+	if ( empty( $f_check ) && $t_show_attachments && $t_bug->status < RESOLVED && access_level_check_greater_or_equal( REPORTER ) ) {
 		include( config_get( 'bug_file_upload_inc' ) );
 	}
 

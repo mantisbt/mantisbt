@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.18 2002-10-29 08:30:22 jfitzell Exp $
+	# $Id: bug_api.php,v 1.19 2002-10-29 09:27:47 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -921,6 +921,27 @@
 		$p_bug_data->description		= string_edit_textarea( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= string_edit_textarea( $p_bug_data->steps_to_reproduce );
 		$p_bug_data->additional_information	= string_edit_textarea( $p_bug_data->additional_information );
+
+		return $p_bug_data;
+	}
+
+	# --------------------
+	# Return a copy of the bug structure with all the instvars prepared for editing
+	#  in an HTML form
+	function bug_prepare_display( $p_bug_data ) {
+		$p_bug_data->category			= string_display( $p_bug_data->category );
+		$p_bug_data->date_submitted		= string_display( $p_bug_data->date_submitted );
+		$p_bug_data->last_updated		= string_display( $p_bug_data->last_updated );
+		$p_bug_data->os					= string_display( $p_bug_data->os );
+		$p_bug_data->os_build			= string_display( $p_bug_data->os_build );
+		$p_bug_data->platform			= string_display( $p_bug_data->platform );
+		$p_bug_data->version			= string_display( $p_bug_data->version );
+		$p_bug_data->build				= string_display( $p_bug_data->build );
+		$p_bug_data->summary			= string_display( $p_bug_data->summary );
+
+		$p_bug_data->description		= string_display( $p_bug_data->description );
+		$p_bug_data->steps_to_reproduce	= string_display( $p_bug_data->steps_to_reproduce );
+		$p_bug_data->additional_information	= string_display( $p_bug_data->additional_information );
 
 		return $p_bug_data;
 	}
