@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.43 2003-02-25 15:50:05 int2str Exp $
+	# $Id: bug_view_advanced_page.php,v 1.44 2003-03-10 18:14:08 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -55,7 +55,7 @@
 		<!-- Send Bug Reminder -->
 	<?php
 		if ( !current_user_is_anonymous() &&
-			  access_has_project_level( config_get( 'bug_reminder_threshold' ) ) ) {
+			  access_has_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id ) ) {
 	?>
 		<span class="small">
 			<?php print_bracket_link( 'bug_reminder_page.php?bug_id='.$f_bug_id, lang_get( 'bug_reminder' ) ) ?>
@@ -403,7 +403,7 @@
 
 <!-- Attachments -->
 <?php
-	$t_show_attachments = ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_has_project_level( config_get( 'view_attachments_threshold' ) );
+	$t_show_attachments = ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_has_bug_level( config_get( 'view_attachments_threshold' ), $f_bug_id );
 
 	if ( $t_show_attachments ) {
 ?>

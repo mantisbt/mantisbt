@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.67 2003-03-09 03:08:58 jfitzell Exp $
+	# $Id: html_api.php,v 1.68 2003-03-10 18:14:11 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -616,7 +616,7 @@
 	# --------------------
 	# Print a button to update the given bug
 	function html_button_bug_update( $p_bug_id ) {
-		if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
+		if ( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			html_button( string_get_bug_update_page(),
 						 lang_get( 'update_bug_button' ), 
 						 array( 'bug_id' => $p_bug_id ) );
@@ -626,7 +626,7 @@
 	# --------------------
 	# Print a button to assign the given bug
 	function html_button_bug_assign( $p_bug_id ) {
-		if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
+		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
 			$t_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
 
 			if ( $t_handler_id != auth_get_current_user_id() ) {
@@ -640,7 +640,7 @@
 	# --------------------
 	# Print a button to resolve the given bug
 	function html_button_bug_resolve( $p_bug_id ) {
-		if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
+		if ( access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'bug_resolve_page.php',
 						 lang_get( 'resolve_bug_button' ), 
 						 array( 'bug_id' => $p_bug_id ) );
@@ -650,7 +650,7 @@
 	# --------------------
 	# Print a button to reopen the given bug
 	function html_button_bug_reopen( $p_bug_id ) {
-		if ( access_has_project_level( config_get( 'reopen_bug_threshold' ) )
+		if ( access_has_bug_level( config_get( 'reopen_bug_threshold' ), $p_bug_id )
 			 || ( bug_get_field( $p_bug_id, 'reporter_id' ) == auth_get_current_user_id() 
 				  && ON == config_get( 'allow_reporter_reopen' ) ) ) {
 			html_button( 'bug_reopen_page.php',
@@ -674,7 +674,7 @@
 	# --------------------
 	# Print a button to monitor the given bug
 	function html_button_bug_monitor( $p_bug_id ) {
-		if ( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
+		if ( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'bug_monitor.php',
 						 lang_get( 'monitor_bug_button' ), 
 						 array( 'bug_id' => $p_bug_id, 'action' => 'add' ) );
@@ -693,7 +693,7 @@
 	# --------------------
 	# Print a button to delete the given bug
 	function html_button_bug_delete( $p_bug_id ) {
-		if ( access_has_project_level( config_get( 'delete_bug_threshold' ) ) ) {
+		if ( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
 			html_button( 'bug_delete.php',
 						 lang_get( 'delete_bug_button' ), 
 						 array( 'bug_id' => $p_bug_id ) );
