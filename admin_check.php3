@@ -28,5 +28,24 @@ Now, we'll do a simple select to see if your tables are accessible.
 <?
 	}
 ?>
+<p>Now, we'll check if your PHP Version is up-to-date enough (=>3.0.13).
+<?
+$ver=explode(".",phpversion());
+
+if($ver[0]==3){
+    if($ver[2]>=13){
+        echo "<br>PHP version OK (".phpversion().")";
+    }else{
+        // Error (pl, rc) or smaller then13
+        if(sub_str($ver[2],1)>=13){
+            echo "<br>PHP version OK (".phpversion().")";
+        }else{
+            echo "<br>you must upgrade your php version to at least 3.0.13 (Current ".phpversion().")";
+        }
+    }
+}else{
+    echo "<br>PHP version OK (".phpversion().")";
+}
+?>
 <p>
 <b>Everything should be working</b>.
