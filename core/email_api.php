@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.30 2002-12-21 10:07:17 jfitzell Exp $
+	# $Id: email_api.php,v 1.31 2002-12-22 05:08:41 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -785,6 +785,15 @@
 							string_get_bug_view_url( $p_bug_id, $t_recipient ) .
 							"\n\n$p_message";
 			email_send( $t_email, $t_subject, $t_contents );
+
+			# Automically add recipients to monitor list if they are above the monitor
+			# threshold, option is enabled, and not reporter or handler.
+			if ( ON == config_get( 'reminder_recipents_monitor_bug' ) &&
+				access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) &&
+				!bug_is_user_handler( $p_bug_id, $t_recipient ) && 
+				!bug_is_user_reporter( $p_bug_id, $t_recipient ) ) {
+				bug_monitor( $p_bug_id, $t_recipient );
+			}
 		}
 		return $result;
 	}

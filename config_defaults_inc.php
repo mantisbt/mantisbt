@@ -391,8 +391,17 @@
 	# change to ASC or DESC
 	$g_history_order		= 'ASC';
 
+	###############################
+	# Mantis Reminder Settings
+	###############################
+
 	# are reminders stored as bugnotes
 	$g_store_reminders		= ON;
+
+	# Automatically add recipients of reminders to monitor list, if they are not
+	# the handler or the reporter (since they automatically get notified, if required)
+	# If recipients of the reminders are below the monitor threshold, they will not be added.
+	$g_reminder_recipents_monitor_bug = ON;
 
 	###################################
 	# Mantis File Upload Settings
