@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.24 2002-12-06 18:48:21 jfitzell Exp $
+	# $Id: html_api.php,v 1.25 2002-12-10 21:02:56 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -422,7 +422,9 @@
 		PRINT '<br /><div align="center">';
 			print_bracket_link( $t_manage_page, lang_get( 'manage_users_link' ) );
 			print_bracket_link( $t_manage_project_menu_page, lang_get( 'manage_projects_link' ) );
-			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
+			if ( ON == config_get( 'use_experimental_custom_fields' ) ) {
+				print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
+			}		
 			print_bracket_link( $t_manage_user_create_page, lang_get( 'create_new_account_link' ) );
 			print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
 		PRINT '</div>';
