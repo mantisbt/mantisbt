@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.34 2004-08-22 01:19:30 thraxisp Exp $
+	# $Id: error_api.php,v 1.35 2004-09-21 17:58:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -44,43 +44,35 @@
 		lang_push( config_get ( 'default_language' ) );
 		
 		$t_short_file	= basename( $p_file );
-		$t_method		= 'none';
+		$t_method_array = config_get( 'display_errors' );
+		if ( isset( $t_method_array[$p_type] ) ) {
+			$t_method = $t_method_array[$p_type];
+		}else{
+			$t_method		= 'none';
+		}
 
 		# build an appropriate error string
 		switch ( $p_type ) {
 			case E_WARNING:
 				$t_error_type = 'SYSTEM WARNING';
 				$t_error_description = $p_error;
-				if ( ON == config_get( 'show_warnings' ) ) {
-					$t_method = 'inline';
-				}
 				break;
 			case E_NOTICE:
 				$t_error_type = 'SYSTEM NOTICE';
 				$t_error_description = $p_error;
-				if ( ON == config_get( 'show_notices' ) ) {
-					$t_method = 'inline';
-				}
 				break;
 			case E_USER_ERROR:
 				$t_error_type = "APPLICATION ERROR #$p_error";
 				$t_error_description = error_string( $p_error );
-				$t_method = 'halt';
 				break;
 			case E_USER_WARNING:
 				$t_error_type = "APPLICATION WARNING #$p_error";
 				$t_error_description = error_string( $p_error );
-				if ( ON == config_get( 'show_warnings' ) ) {
-					$t_method = 'inline';
-				}
 				break;
 			case E_USER_NOTICE:
 				# used for debugging
 				$t_error_type = 'DEBUG';
 				$t_error_description = $p_error;
-				if ( ON == config_get( 'show_notices' ) ) {
-					$t_method = 'inline';
-				}
 				break;
 			default:
 				#shouldn't happen, just display the error just in case

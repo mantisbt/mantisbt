@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.208 2004-09-21 07:35:09 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.209 2004-09-21 17:58:17 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1202,6 +1202,31 @@
 	# WARNING: Potential security hazard.  Only turn this on when you really
 	# need it for debugging
 	$g_show_detailed_errors	= OFF;
+
+	# --- error display ---
+	# what errors are displayed and how?
+	# The options for display are:
+	#  'halt' - stop and display traceback
+	#  'inline' - display 1 line error and continue
+	#  'none' - no error displayed
+	# obsoletes $g_show_notices (E_NOTICE and E_USER_NOTICE) and 
+	#   $g_show_warnings (E_WARNING and E_USER_WARNING)
+	# A developer might set this in config_inc.php as:
+	#	$g_display_errors = array(
+	#		E_WARNING => 'halt',
+	#		E_NOTICE => 'halt',
+	#		E_USER_ERROR => 'halt',
+	#		E_USER_WARNING => 'none',
+	#		E_USER_NOTICE => 'none'
+	#	);
+
+	$g_display_errors = array(
+		E_WARNING => 'none',
+		E_NOTICE => 'none',
+		E_USER_ERROR => 'halt',
+		E_USER_WARNING => 'none',
+		E_USER_NOTICE => 'none'
+	);
 
 	# --- notice display ---
 	# Control whether errors of level NOTICE, the lowest level of error,
