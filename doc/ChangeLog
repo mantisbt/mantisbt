@@ -7,8 +7,9 @@ Mantis ChangeLog
  * Fix #2902: Project name is not printed on bug list report.
  * Fix #3011: 'Hide resolved' flag is now preserved when re-sorting bug list.
  * Fix #3019: Application Error 200 after updating a bug.
- * Fix #3020: Error when deleting a bug.
+ * Fix #3020: Error when deleting a bug with bugnotes.
  * Fix #3021: Error when using phpMailer.
+ * Fix #3022: Add user to project form lists disabled users.
 
 2003.02.26  -  0.18.0a3
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.55 2003-02-28 15:19:52 vboctor Exp $
+	# $Id: print_api.php,v 1.56 2003-03-01 12:22:52 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -647,7 +647,7 @@
 		}
 	}
 	# --------------------
-	# list of users that are NOT in the specified project
+	# list of users that are NOT in the specified project and that are enabled
 	# if no project is specified use the current project
 	function print_project_user_list_option_list( $p_project_id=0 ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_user_table;
@@ -663,6 +663,7 @@
 				LEFT JOIN $g_mantis_project_user_list_table p
 				ON p.user_id=u.id AND p.project_id='$c_project_id'
 				WHERE u.access_level<$t_adm AND
+					u.enabled = 1 AND
 					p.user_id IS NULL AND
 					u.access_level<'$t_adm'
 				ORDER BY u.username";
