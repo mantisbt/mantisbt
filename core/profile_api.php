@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.1 2002-10-20 05:53:38 jfitzell Exp $
+	# $Id: profile_api.php,v 1.2 2002-10-20 22:52:52 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -31,6 +31,8 @@
 		$c_os_build		= db_prepare_string( $p_os_build );
 		$c_description	= db_prepare_string( $p_description );
 
+		user_ensure_unprotected( $p_user_id );
+
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
 		# Add profile
@@ -54,6 +56,8 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_profile_id	= db_prepare_int( $p_profile_id );
 
+		user_ensure_unprotected( $p_user_id );
+
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
 		# Delete the profile
@@ -75,6 +79,8 @@
 		$c_os			= db_prepare_string( $p_os );
 		$c_os_build		= db_prepare_string( $p_os_build );
 		$c_description	= db_prepare_string( $p_description );
+
+		user_ensure_unprotected( $p_user_id );
 
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 

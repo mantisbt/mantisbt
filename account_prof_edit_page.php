@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.21 2002-10-20 20:42:57 jfitzell Exp $
+	# $Id: account_prof_edit_page.php,v 1.22 2002-10-20 22:52:52 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,9 +17,7 @@
 <?php login_cookie_check() ?>
 <?php
 	# protected account check
-	if ( current_user_is_protected() ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	}
+	current_user_ensure_unprotected();
 
 	$f_profile_id	= gpc_get_int( 'f_profile_id' );
 	$f_action		= gpc_get_string( 'f_action' );

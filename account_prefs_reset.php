@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_reset.php,v 1.15 2002-10-19 04:26:25 jfitzell Exp $
+	# $Id: account_prefs_reset.php,v 1.16 2002-10-20 22:52:52 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -22,7 +22,6 @@
 
 	# RESTRICTIONS & PERMISSIONS
 	#	- User must be authenticated
-	#	- The user's account must not be protected
 
 	require_once( 'core.php' );
 
@@ -32,7 +31,6 @@
 	#============ Permissions ============
 	login_cookie_check();
 
-	current_user_ensure_unprotected();
 ?>
 <?php
 	user_pref_set_default( auth_get_current_user_id() );

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.5 2002-10-20 22:51:26 jlatour Exp $
+	# $Id: user_pref_api.php,v 1.6 2002-10-20 22:52:52 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -157,6 +157,8 @@
 		$c_user_id 		= db_prepare_int( $p_user_id );
 		$c_project_id 	= db_prepare_int( $p_project_id );
 
+		user_ensure_unprotected( $p_user_id );
+
 		$t_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 
 		$t_vars = get_object_vars( $p_prefs );
@@ -190,6 +192,8 @@
 		$c_user_id 		= db_prepare_int( $p_user_id );
 		$c_project_id 	= db_prepare_int( $p_project_id );
 
+		user_ensure_unprotected( $p_user_id );
+
 		$t_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 
 		$t_vars = get_object_vars( $p_prefs );
@@ -220,6 +224,8 @@
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
 
+		user_ensure_unprotected( $p_user_id );
+
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 
 		$query = "DELETE
@@ -243,6 +249,8 @@
 	#  what we do
 	function user_pref_delete_all( $p_user_id ) {
 		$c_user_id		= db_prepare_int( $p_user_id );
+
+		user_ensure_unprotected( $p_user_id );
 
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
 

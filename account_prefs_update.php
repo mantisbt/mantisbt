@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.20 2002-10-20 20:42:57 jfitzell Exp $
+	# $Id: account_prefs_update.php,v 1.21 2002-10-20 22:52:52 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,11 +38,6 @@
 	$t_prefs->email_on_bugnote	= gpc_get_bool( 'f_email_on_bugnote' );
 	$t_prefs->email_on_status	= gpc_get_bool( 'f_email_on_status' );
 	$t_prefs->email_on_priority	= gpc_get_bool( 'f_email_on_priority' );
-
-	# protected account check
-	if ( user_is_protected( $f_user_id ) ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	}
 
 	# prevent users from changing other user's accounts
 	if ( $f_user_id != auth_get_current_user_id() ) {

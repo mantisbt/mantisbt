@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_add.php,v 1.15 2002-10-20 20:42:57 jfitzell Exp $
+	# $Id: account_prof_add.php,v 1.16 2002-10-20 22:52:52 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,11 +16,6 @@
 <?php login_cookie_check() ?>
 <?php
 	check_access( REPORTER );
-
-	# protected account check
-	if ( current_user_is_protected() ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	}
 
 	$f_platform		= gpc_get_string( 'f_platform' );
 	$f_os			= gpc_get_string( 'f_os' );

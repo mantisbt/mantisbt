@@ -12,13 +12,8 @@
 <?php require( 'print_all_bug_options_inc.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	# get protected state
-	$t_protected = current_user_get_field( 'protected' );
-
 	# protected account check
-	if ( ON == $t_protected ) {
-		print_mantis_error( ERROR_PROTECTED_ACCOUNT );
-	}
+	current_user_ensure_unprotected();
 
 	# get user id
 	$t_user_id = current_user_get_field( 'id' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.20 2002-10-20 20:42:57 jfitzell Exp $
+	# $Id: account_prof_menu_page.php,v 1.21 2002-10-20 22:52:52 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,9 +21,7 @@
 	check_access( REPORTER );
 
 	# protected account check
-	if ( current_user_is_protected() ) {
-		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
-	}
+	current_user_ensure_unprotected();
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

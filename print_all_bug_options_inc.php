@@ -68,16 +68,9 @@ function edit_printing_prefs($p_user_id = 0, $p_error_if_protected = true, $p_re
 		$t_redirect_url = 'print_all_bug_page.php';
 	}
 
-	# get protected state
-	$t_protected = user_get_field( $c_user_id, 'protected' );
-
 	# protected account check
-	if ( ON == $t_protected ) {
-		if ( $p_error_if_protected ) {
-			print_mantis_error( ERROR_PROTECTED_ACCOUNT );
-		} else {
-			return;
-		}
+	if ( $p_error_if_protected ) {
+		user_ensure_unprotected( $p_user_id );
 	}
 
 	# get the fields list
