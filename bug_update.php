@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.61 2004-02-07 12:00:14 vboctor Exp $
+	# $Id: bug_update.php,v 1.62 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -45,6 +45,7 @@
 	$t_bug_data->platform			= gpc_get_string( 'platform', $t_bug_data->platform );
 	$t_bug_data->version			= gpc_get_string( 'version', $t_bug_data->version );
 	$t_bug_data->build				= gpc_get_string( 'build', $t_bug_data->build );
+	$t_bug_data->fixed_in_version		= gpc_get_string( 'fixed_in_version', $t_bug_data->fixed_in_version );
 	$t_bug_data->view_state			= gpc_get_int( 'view_state', $t_bug_data->view_state );
 	$t_bug_data->summary			= gpc_get_string( 'summary', $t_bug_data->summary );
 

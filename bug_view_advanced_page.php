@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.53 2004-05-23 14:13:47 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.54 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -280,7 +280,12 @@
 	</td>
 
 	<!-- spacer -->
-	<td colspan="2">&nbsp;</td>
+	<td class="category">
+		<?php echo lang_get( 'fixed_in_version' ); ?>
+	</td>
+	<td>
+		<?php echo $t_bug->fixed_in_version ?>
+	</td>
 
 	<!-- Product Version -->
 	<td class="category">

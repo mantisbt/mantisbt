@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.60 2004-05-21 21:42:51 int2str Exp $
+	# $Id: bug_api.php,v 1.61 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -42,6 +42,7 @@
 		var $os_build = '';
 		var $platform = '';
 		var $version = '';
+		var $fixed_in_version = '';
 		var $build = '';
 		var $view_state = VS_PUBLIC;
 		var $summary = '';
@@ -503,6 +504,7 @@
 					platform='$c_bug_data->platform',
 					version='$c_bug_data->version',
 					build='$c_bug_data->build',
+					fixed_in_version='$c_bug_data->fixed_in_version',
 					view_state='$c_bug_data->view_state',
 					summary='$c_bug_data->summary',
 					sponsorship_total='$c_bug_data->sponsorship_total'
@@ -529,6 +531,7 @@
 		history_log_event_direct( $p_bug_id, 'platform', $t_old_data->platform, $p_bug_data->platform );
 		history_log_event_direct( $p_bug_id, 'version', $t_old_data->version, $p_bug_data->version );
 		history_log_event_direct( $p_bug_id, 'build', $t_old_data->build, $p_bug_data->build );
+		history_log_event_direct( $p_bug_id, 'fixed_in_version', $t_old_data->fixed_in_version, $p_bug_data->fixed_in_version );
 		history_log_event_direct( $p_bug_id, 'view_state', $t_old_data->view_state, $p_bug_data->view_state );
 		history_log_event_direct( $p_bug_id, 'summary', $t_old_data->summary, $p_bug_data->summary );
 		history_log_event_direct( $p_bug_id, 'sponsorship_total', $t_old_data->sponsorship_total, $p_bug_data->sponsorship_total );
@@ -841,10 +844,11 @@
 
 	# --------------------
 	# resolve the given bug
-	function bug_resolve( $p_bug_id, $p_resolution, $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
+	function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version, $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null ) {
 		$p_bugnote_text = trim( $p_bugnote_text );
 
 		bug_set_field( $p_bug_id, 'status', config_get( 'bug_readonly_status_threshold' ) );
+		bug_set_field( $p_bug_id, 'fixed_in_version', $p_fixed_in_version );
 		bug_set_field( $p_bug_id, 'resolution', (int)$p_resolution );
 
 		if ( null !== $p_duplicate_id ) {
@@ -992,6 +996,7 @@
 		$p_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
 		$p_bug_data->version			= db_prepare_string( $p_bug_data->version );
 		$p_bug_data->build				= db_prepare_string( $p_bug_data->build );
+		$p_bug_data->fixed_in_version		= db_prepare_string( $p_bug_data->fixed_in_version );
 		$p_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
 		$p_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
 		$p_bug_data->sponsorship_total		= db_prepare_int( $p_bug_data->sponsorship_total );
@@ -1015,6 +1020,7 @@
 		$p_bug_data->platform			= string_attribute( $p_bug_data->platform );
 		$p_bug_data->version			= string_attribute( $p_bug_data->version );
 		$p_bug_data->build				= string_attribute( $p_bug_data->build );
+		$p_bug_data->fixed_in_version		= string_attribute( $p_bug_data->fixed_in_version );
 		$p_bug_data->summary			= string_attribute( $p_bug_data->summary );
 		$p_bug_data->sponsorship_total		= string_attribute( $p_bug_data->sponsorship_total );
 
@@ -1037,6 +1043,7 @@
 		$p_bug_data->platform			= string_display( $p_bug_data->platform );
 		$p_bug_data->version			= string_display( $p_bug_data->version );
 		$p_bug_data->build				= string_display( $p_bug_data->build );
+		$p_bug_data->fixed_in_version		= string_display( $p_bug_data->fixed_in_version );
 		$p_bug_data->summary			= string_display_links( $p_bug_data->summary );
 		$p_bug_data->sponsorship_total		= string_display( $p_bug_data->sponsorship_total );
 

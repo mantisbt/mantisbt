@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve_page.php,v 1.37 2004-04-12 21:04:35 jlatour Exp $
+	# $Id: bug_resolve_page.php,v 1.38 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -60,6 +60,20 @@
 	</td>
 	<td>
 		<input type="text" name="duplicate_id" maxlength="7" />
+	</td>
+</tr>
+
+
+<!-- Fixed in Version -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'fixed_in_version' ) ?>
+	</td>
+	<td>
+		<select name="fixed_in_version">
+			<?php print_version_option_list( bug_get_field( $f_bug_id, 'fixed_in_version' ),
+							bug_get_field( $f_bug_id, 'project_id' ) ) ?>
+		</select>
 	</td>
 </tr>
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.67 2004-05-23 14:13:41 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.68 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -282,8 +282,14 @@
 		</select>
 	</td>
 
-	<!-- spacer -->
-	<td colspan="2">&nbsp;</td>
+	<td class="category">
+		<?php echo lang_get( 'fixed_in_version' ) ?>
+	</td>
+	<td>
+		<select name="fixed_in_version">
+			<?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id ) ?>
+		</select>
+	</td>
 
 	<!-- Product Version -->
 	<td class="category">

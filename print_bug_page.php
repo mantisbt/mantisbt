@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.46 2004-05-23 14:13:47 vboctor Exp $
+	# $Id: print_bug_page.php,v 1.47 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -218,7 +218,13 @@
 	<td class="print">
 		<?php echo get_enum_element( 'eta', $v_eta ) ?>
 	</td>
-	<td class="print" colspan="4">&nbsp;</td>
+	<td class="print-category">
+		<?php echo lang_get( 'fixed_in_version' ) ?>:
+	</td>
+	<td class="print">
+		<?php echo $v_fixed_in_version ?>
+	</td>
+	<td class="print" colspan="2">&nbsp;</td>
 </tr>
 
 <?php

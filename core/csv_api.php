@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.2 2004-04-08 18:04:53 prescience Exp $
+	# $Id: csv_api.php,v 1.3 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CSV API ###
@@ -74,7 +74,8 @@
 								'summary' => 'summary',
 								'status' => 'status',
 								'resolution' => 'resolution',
-								'duplicate_id' => 'duplicate_id' );
+								'duplicate_id' => 'duplicate_id',
+								'fixed_in_version' => 'fixed_in_version' );
 		return $t_columns;
 	}
 
@@ -131,6 +132,12 @@
 	# return the version
 	function csv_format_version( $p_version ) {
 		return csv_escape_string( $p_version );
+	}
+
+	# --------------------
+	# return the fixed_in_version
+	function csv_format_fixed_in_version( $p_fixed_in_version ) {
+		return csv_escape_string( $p_fixed_in_version );
 	}
 
 	# --------------------

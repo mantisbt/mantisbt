@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.6 2004-05-10 13:45:17 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.7 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -187,6 +187,16 @@
 			'sponsorship-3',
 			'Add an index on sponsorship_total in bug table',
 			"ALTER TABLE mantis_bug_table ADD INDEX sponsorship_total ( sponsorship_total )" );
+
+	$upgrades[] = new SQLUpgrade( 
+			'fixed_in_version-1',
+			'Add fixed_in_version field to bug table.',
+			"ALTER TABLE mantis_bug_table ADD fixed_in_version VARCHAR( 64 ) NOT NULL AFTER version" );
+
+	$upgrades[] = new SQLUpgrade( 
+			'fixed_in_version-2',
+			'Add index on fixed_in_version field in bug table.',
+			"ALTER TABLE mantis_bug_table ADD INDEX ( fixed_in_version )" );
 
 	return $upgrades;
 ?>

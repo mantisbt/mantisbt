@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve.php,v 1.39 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_resolve.php,v 1.40 2004-05-24 12:23:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,6 +25,7 @@
 	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );
 	$f_resolution	= gpc_get_int( 'resolution', FIXED );
 	$f_duplicate_id	= gpc_get_int( 'duplicate_id', null );
+	$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
 	$f_close_now	= gpc_get_bool( 'close_now' );
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
@@ -35,7 +36,7 @@
 		trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 	}
 
-	bug_resolve( $f_bug_id, $f_resolution, $f_bugnote_text, $f_duplicate_id );
+	bug_resolve( $f_bug_id, $f_resolution, $f_fixed_in_version, $f_bugnote_text, $f_duplicate_id );
 
 	if ( $f_close_now ) {
 		bug_set_field( $f_bug_id, 'status', CLOSED );

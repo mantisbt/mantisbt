@@ -6,6 +6,7 @@ Mantis ChangeLog
  * Enh #0000: phpMailer 1.71 has been included to Mantis distribution, all the mails are sent now only by phpMailer.
  * Enh #2200: Add Version to simple bug pages.
  * Enh #3152: Adding notes and documents to resolved bugs.
+ * Enh #3164: Added "fixed in version" field, set when resolving a bug.
  * Enh #3300: Add global defaults for priotity and severity of new bugs.
  * Enh #3302: Add global defaults for view state.
  * Enh #3505: Add a Bugnote to a resolved bug.

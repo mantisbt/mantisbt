@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.169 $
-	# $Author: int2str $
-	# $Date: 2004-05-21 18:46:02 $
+	# $Revision: 1.170 $
+	# $Author: vboctor $
+	# $Date: 2004-05-24 12:23:19 $
 	#
-	# $Id: strings_english.txt,v 1.169 2004-05-21 18:46:02 int2str Exp $
+	# $Id: strings_english.txt,v 1.170 2004-05-24 12:23:19 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -448,6 +448,7 @@ $s_os_version = 'OS Version';
 $s_eta = 'ETA';
 $s_product_version = 'Product Version';
 $s_build = 'Build';
+$s_fixed_in_version = 'Fixed in Version';
 $s_votes = 'Votes';
 $s_summary = 'Summary';
 $s_description = 'Description';
