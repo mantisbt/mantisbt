@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.86 2005-02-17 20:46:27 jlatour Exp $
+	# $Id: user_api.php,v 1.87 2005-02-20 14:12:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -268,6 +268,39 @@
 		} else {
 			return false;
 		}
+	}
+
+	# --------------------
+	# Return an array of user ids that are logged in.
+	# A user is considered logged in if the last visit timestamp is within the
+	# specified session duration.
+	# If the session duration is 0, then no users will be returned.
+	function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
+		$t_session_duration_in_minutes = (integer)$p_session_duration_in_minutes;
+
+		# if session duration is 0, then there is no logged in users.
+		if ( $t_session_duration_in_minutes == 0 ) {
+			return array();
+		}
+
+		# Generate timestamp
+		# @@@ The following code may not be portable accross DBMS.
+		$t_last_timestamp_threshold = mktime( date( "H" ), date( "i" ) -1 * $t_session_duration_in_minutes, date("s"), date("m"), date("d"),  date("Y") );
+		$c_last_timestamp_threshold = date( "Y-m-d H:i:s" , $t_last_timestamp_threshold );
+
+		$t_user_table = config_get( 'mantis_user_table' );
+
+		# Execute query
+		$query = "SELECT id FROM $t_user_table WHERE last_visit > '$c_last_timestamp_threshold'";
+		$result = db_query( $query, 1 );
+
+		# Get the list of connected users
+		$t_users_connected = array();
+		while ( $row = db_fetch_array( $result ) ) {
+			$t_users_connected[] = $row['id'];
+		}
+
+		return $t_users_connected;
 	}
 
 	#===================================
