@@ -28,7 +28,8 @@
 	$s_print = 'Tiparire';
 	$s_jump = 'Salt';
 	$s_copy_users = 'Copiere utilizatori';
-	$s_copy_categories = 'Copiere categorii';
+	$s_copy_categories_from = 'Copy Categories From';
+	$s_copy_categories_to = 'Copy Categories To';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'EROARE: O eroare a aparut in timpul acestei operatiuni. Probabil ca este important sa raportati eroarea administratorului aplicatiei.';

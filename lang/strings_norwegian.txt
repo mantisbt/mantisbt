@@ -28,7 +28,8 @@
 	$s_print = 'Utskrift';
 	$s_jump = 'Hopp';
 	$s_copy_users = 'Kopiere brukere';
-	$s_copy_categories = 'Kopiere kategorier';
+	$s_copy_categories_from = 'Copy Categories From';
+	$s_copy_categories_to = 'Copy Categories To';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'FEIL: Det oppstod en en feil. Du kan rapportere feilen til din administrator.';

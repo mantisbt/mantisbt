@@ -29,7 +29,8 @@
 	$s_print = 'Imprimir';
 	$s_jump = 'Saltar a Bug';
 	$s_copy_users = 'Copiar Usuarios';
-	$s_copy_categories = 'Copiar Categorias';
+	$s_copy_categories_from = 'Copy Categories From';
+	$s_copy_categories_to = 'Copy Categories To';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: Un error ocurrio durante esta accion. Reporte este error a su administrador local.';

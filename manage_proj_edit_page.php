@@ -163,10 +163,11 @@
 	<td class="left">
 		<form method="post" action="<?php echo $g_manage_project_category_copy ?>">
 		<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-		<select name="f_new_project_id">
+		<select name="f_other_project_id">
 			<?php print_project_option_list() ?>
 		</select>
-		<input type="submit" value="<?php echo $s_copy_categories ?>">
+		<input type="submit" name="f_copy_from" value="<?php echo $s_copy_categories_from ?>">
+		<input type="submit" name="f_copy_to" value="<?php echo $s_copy_categories_to ?>">
 		</form>
 	</td>
 </tr>

@@ -29,7 +29,8 @@
 	$s_print = 'Печать';
 	$s_jump = 'Перейти';
 	$s_copy_users = 'Копировать пользователей';
-	$s_copy_categories = 'Копировать категории';
+	$s_copy_categories_from = 'Copy Categories From';
+	$s_copy_categories_to = 'Copy Categories To';
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ОШИБКА: в процессе выполнения операции произошла ошибка. Вы может быть захотите сообщить об этом вашему локальному администратору.';
