@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.17 2002-08-29 12:59:10 vboctor Exp $
+	# $Id: user_api.php,v 1.18 2002-08-30 05:35:18 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,6 +16,13 @@
 	#===================================
 	# Caching
 	#===================================
+
+	#########################################
+	# SECURITY NOTE: cache globals are initialized here to prevent them
+	#   being spoofed if register_globals is turned on
+	#
+	$g_cache_user = array();
+	$g_cache_user_pref = array();
 
 	# --------------------
 	# Cache a user row if necessary and return the cached copy
@@ -28,10 +35,6 @@
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		$t_user_table = config_get( 'mantis_user_table' );
-
-		if ( ! isset( $g_cache_user ) ) {
-			$g_cache_user = array();
-		}
 
 		if ( isset ( $g_cache_user[$c_user_id] ) ) {
 			return $g_cache_user[$c_user_id];
@@ -83,10 +86,6 @@
 		$c_user_id = db_prepare_int( $p_user_id );
 
 		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
-
-		if ( ! isset( $g_cache_user_pref ) ) {
-			$g_cache_user_pref = array();
-		}
 
 		if ( isset ( $g_cache_user_pref[$c_user_id] ) ) {
 			return $g_cache_user_pref[$c_user_id];

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.3 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.4 2002-08-30 05:35:18 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -245,16 +245,19 @@
 		return $t_cookie;
 	}
 
+	#########################################
+	# SECURITY NOTE: cache globals are initialized here to prevent them
+	#   being spoofed if register_globals is turned on
+	#
+	$g_cache_current_user_id = null;
+
 	function auth_get_current_user_id() {
-# @@@ caching the current user id is a major security hole until we
-#     turn off register_globals so it's commented out
-/* (caching commented out)
 		global $g_cache_current_user_id;
 
-		if ( isset( $g_cache_current_user_id ) {
+		if ( null !== $g_cache_current_user_id ) {
 			return $g_cache_current_user_id;
 		}
-*/
+
 		$t_user_table = config_get( 'mantis_user_table' );
 
 		$t_cookie_string = auth_get_current_user_cookie();
@@ -277,9 +280,7 @@
 
 		$t_user_id = db_result( $result );
 
-/* (caching commented out)
 		$g_cache_current_user_id = $t_user_id;
-*/
 
 		return $t_user_id;
 	}

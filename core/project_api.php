@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.9 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: project_api.php,v 1.10 2002-08-30 05:35:18 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,6 +16,12 @@
 	#===================================
 	# Caching
 	#===================================
+
+	#########################################
+	# SECURITY NOTE: cache globals are initialized here to prevent them
+	#   being spoofed if register_globals is turned on
+	#
+	$g_cache_project = array();
 
 	# --------------------
 	# Cache a project row if necessary and return the cached copy
@@ -28,10 +34,6 @@
 		$c_project_id = db_prepare_int( $p_project_id );
 
 		$t_project_table = config_get( 'mantis_project_table' );
-
-		if ( ! isset( $g_cache_project ) ) {
-			$g_cache_project = array();
-		}
 
 		if ( isset ( $g_cache_project[$c_project_id] ) ) {
 			return $g_cache_project[$c_project_id];
