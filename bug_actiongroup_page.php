@@ -74,7 +74,7 @@
 			$t_question_title 		= $s_status_bugs_conf_msg;
 			$t_button_title 		= $s_status_group_bugs_button;
 			$t_form 				= 'f_status';
-			$t_request 				= 'status;
+			$t_request 				= 'status';
 			break;
 	}
 ?>
