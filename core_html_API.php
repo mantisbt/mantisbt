@@ -420,25 +420,22 @@
 	# prints the manage doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_manage_doc_menu( $p_page="" ) {
-		global	$g_site_settings_page, $s_site_settings_link,
-				$g_documentation_page, $s_system_info_link;
+		global	$g_documentation_page, $s_system_info_link, $g_path;
 
+		$g_path = $g_path."doc/";
 		$t_documentation_page = $g_documentation_page;
-		$t_site_settings_page = $g_site_settings_page;
 
 		switch ( $p_page ) {
 			case $t_documentation_page: $t_documentation_page = ""; break;
-			case $t_site_settings_page: $t_site_settings_page = ""; break;
 		}
 
 		PRINT "<p><div align=\"center\">";
 			print_bracket_link( $t_documentation_page, $s_system_info_link );
-			print_bracket_link( $t_site_settings_page, $s_site_settings_link );
-			print_bracket_link( "ChangeLog", "ChangeLog" );
-			print_bracket_link( "README", "README" );
-			print_bracket_link( "INSTALL", "INSTALL" );
-			print_bracket_link( "UPGRADING", "UPGRADING" );
-			print_bracket_link( "CONFIGURATION", "CONFIGURATION" );
+			print_bracket_link( $g_path."ChangeLog", "ChangeLog" );
+			print_bracket_link( $g_path."README", "README" );
+			print_bracket_link( $g_path."INSTALL", "INSTALL" );
+			print_bracket_link( $g_path."UPGRADING", "UPGRADING" );
+			print_bracket_link( $g_path."CONFIGURATION", "CONFIGURATION" );
 		PRINT "</div>";
 	}
 	# --------------------
