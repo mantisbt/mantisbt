@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.30 2004-06-29 14:08:28 prichards Exp $
+	# $Id: database_api.php,v 1.31 2004-08-24 13:24:35 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -14,7 +14,9 @@
 	# This is the general interface for all database calls.
 	# Use this as a starting point to port to other databases
 
-	include( 'adodb/adodb.inc.php' );
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+
+	require_once( $t_core_dir . 'adodb/adodb.inc.php' );
 
 	$g_db = $db = ADONewConnection($g_db_type);
 
