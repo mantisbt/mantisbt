@@ -18,25 +18,20 @@ put in a lot of effort into customizing the look/feel of the product.
 This file contains information to help you customize Mantis.  A more
 detailed doc is in the works.
 
-* config_inc.php - this file contains all the site-wide variables.
+* config_defaults_inc.php
+  - this file contains the default values for all the site-wide variables.
+* config_inc.php
+  - You should create this file to change config variable values.  Your
+    values from this file will be used instead of the defaults.  This file
+    will not be overwritten when you upgrade, bug config_defaults_inc.php will.
+    Look at config_inc.php.sample for an example.
 
-  NOTE: since the package is still being changed a fair amount I suggest
-  the following.  You configure the config_inc.php file but then rename
-  it to something like my_config.php.  When you copy a new release
-  over it will overwrite the config_inc.php.  Open up that file and
-  at the very bottom put: include("my_config.php");
-  This way any new variables get setup and then your custom settings
-  overwrite anything else.  After you get up and running you can go back
-  and modify config_inc.php and then repeat the cycle.
-
-  The file contains several setting variables that you can configure.  Most of
-  it should be self explanatory.
-
-* core_*_API.php - these files contains all the functions.
+* core/*_api.php - these files contains all the API library functions.
 
 * global variables are prefixed by g_
 * parameters in functions are prefixed with p_
 * form variables are prefixed with f_
+* variables that have been cleaned for db insertiong are prefixed with c_
 * user related variables are prefixed with u_
 * other variables are usually either prefixed with v_ or t_
 * count variables have the word count in the variable name

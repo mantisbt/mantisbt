@@ -10,8 +10,8 @@ Generally, you can just copy over the current installation.  You may want to
 backup up any customizations that you may have made.  
 Database modifications will occur only between significant releases (like 0.14.x to 0.15.0).
 
-An automated database upgrade script was added in 0.18.0. This script (which can be found at
-admin/upgrade.php) will keep track of the current state of your database and allow you to
+An automated database upgrade script was added in 0.18.0. This script (which can be accessed from
+admin/index.php) will keep track of the current state of your database and allow you to
 convert it to the current version. Make a backup of your database, just in case.
 
 If you are converting from 0.17.x or older, you may have escaped quotes in your databases. If you
