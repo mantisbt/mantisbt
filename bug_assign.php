@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_assign.php,v 1.31 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_assign.php,v 1.32 2003-02-20 02:35:26 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,5 +27,5 @@
 
 	bug_assign( $f_bug_id, auth_get_current_user_id() );
 
-	print_header_redirect_view( $f_bug_id );
+	print_success_and_redirect( $f_bug_id );
 ?>

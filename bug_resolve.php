@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve.php,v 1.34 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_resolve.php,v 1.35 2003-02-20 02:35:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,5 +41,5 @@
 		bug_set_field( $f_bug_id, 'status', CLOSED );
 	}
 
-	print_header_redirect_view( $f_bug_id );
+	print_success_and_redirect( $f_bug_id );
 ?>

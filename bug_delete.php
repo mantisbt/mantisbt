@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_delete.php,v 1.34 2003-02-16 13:36:59 jlatour Exp $
+	# $Id: bug_delete.php,v 1.35 2003-02-20 02:35:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,5 +28,5 @@
 
 	bug_delete( $f_bug_id );
 
-	print_header_redirect( 'view_all_bug_page.php' );
+	print_success_and_redirect( 'view_all_bug_page.php' );
 ?>

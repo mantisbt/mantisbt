@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.53 2003-02-15 22:20:31 vboctor Exp $
+	# $Id: bug_update.php,v 1.54 2003-02-20 02:35:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -80,5 +80,5 @@
 		bugnote_add( $f_bug_id, $f_bugnote_text, $f_private );
 	}
 
-	print_header_redirect_view( $f_bug_id );
+	print_success_and_redirect( $f_bug_id );
 ?>
