@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.63 2004-06-26 14:05:42 prichards Exp $
+	# $Id: bug_update.php,v 1.64 2004-08-01 22:24:58 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,7 +65,8 @@
 
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
-		$t_custom_field_value = gpc_get_string( "custom_field_$t_id", null );
+		$t_def = custom_field_get_definition( $t_id );
+		$t_custom_field_value = gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], null );
 
 		# Only update the field if it is posted
 		if ( $t_custom_field_value === null ) {
@@ -77,8 +78,7 @@
 			continue;
 		}
 
-		$t_def = custom_field_get_definition( $t_id );
-		if ( $t_def['require_update'] && ( gpc_get_string( "custom_field_$t_id", '' ) == '' ) ) {
+		if ( $t_def['require_update'] && ( gpc_get_custom_field( "custom_field_$t_id", '' ) == '' ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}

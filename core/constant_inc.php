@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.26 2004-07-30 21:13:31 thraxisp Exp $
+	# $Id: constant_inc.php,v 1.27 2004-08-01 22:24:59 prichards Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -264,11 +264,14 @@
 	define( 'EMAIL_CATEGORY_PROJECT_CATEGORY',	1);
 
 	# Custom Field types
-	define( 'CUSTOM_FIELD_TYPE_STRING',   0 );
-	define( 'CUSTOM_FIELD_TYPE_NUMERIC',  1 );
-	define( 'CUSTOM_FIELD_TYPE_FLOAT',    2 );
-	define( 'CUSTOM_FIELD_TYPE_ENUM',     3 );
-	define( 'CUSTOM_FIELD_TYPE_EMAIL',    4 );
+	define( 'CUSTOM_FIELD_TYPE_STRING',		0 );
+	define( 'CUSTOM_FIELD_TYPE_NUMERIC',	1 );
+	define( 'CUSTOM_FIELD_TYPE_FLOAT',		2 );
+	define( 'CUSTOM_FIELD_TYPE_ENUM',		3 );
+	define( 'CUSTOM_FIELD_TYPE_EMAIL',		4 );
+	define( 'CUSTOM_FIELD_TYPE_CHECKBOX',	5 );
+	define( 'CUSTOM_FIELD_TYPE_LIST',		6 );
+	define( 'CUSTOM_FIELD_TYPE_MULTILIST',	7 );
 
 	# Meta filter values
 	define( 'META_FILTER_MYSELF',	-1 );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.26 2004-06-29 22:29:15 prichards Exp $
+	# $Id: gpc_api.php,v 1.27 2004-08-01 22:24:59 prichards Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -84,6 +84,25 @@
 			}
 
 			return gpc_string_to_bool( $t_result );
+		}
+	}
+
+	#===================================
+	# Custom Field Functions
+	#===================================
+	
+	# ------------------
+	# Retrieve a custom field variable.  Uses gpc_get().
+	#  If you pass in *no* default, an error will be triggered if
+	#  the variable does not exist
+	function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = null ) {
+		switch ($p_custom_field_type ) { 
+			case CUSTOM_FIELD_TYPE_MULTILIST:
+			case CUSTOM_FIELD_TYPE_CHECKBOX:
+				$t_values = gpc_get_string_array( $p_var_name, $p_default );
+				return implode( '|', $t_values );
+			default:
+				return gpc_get_string( $p_var_name, $p_default);
 		}
 	}
 

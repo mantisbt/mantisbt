@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.50 2004-07-16 23:03:09 vboctor Exp $
+	# $Id: print_all_bug_page_word.php,v 1.51 2004-08-01 22:24:59 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -281,12 +281,10 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo $t_def['name'] ?>:
+		<?php echo lang_get_defaulted( $t_def['name'] ) ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php
-			echo custom_field_get_value( $t_id, $v_id );
-		?>
+		<?php print_custom_field_value( $t_def, $t_id, $v_id ); ?>
 	</td>
 </tr>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_resolve.php,v 1.41 2004-06-26 14:05:42 prichards Exp $
+	# $Id: bug_resolve.php,v 1.42 2004-08-01 22:24:58 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,11 +41,11 @@
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug_data->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
-		if ( $t_def['require_resolve'] && ( gpc_get_string( "custom_field_$t_id", '' ) == '' ) ) {
+		if ( $t_def['require_resolve'] && ( gpc_get_custom_field( "custom_field_$t_id", '' ) == '' ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
-		if ( !custom_field_validate( $t_id, gpc_get_string( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
+		if ( !custom_field_validate( $t_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
@@ -59,7 +59,7 @@
 		}
 
 		$t_def = custom_field_get_definition( $t_id );
-		if( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_string( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
+		if( !custom_field_set_value( $t_id, $f_bug_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['default_value'] ) ) ) {
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}

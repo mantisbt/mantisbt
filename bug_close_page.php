@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_close_page.php,v 1.33 2004-07-11 13:24:28 vboctor Exp $
+	# $Id: bug_close_page.php,v 1.34 2004-08-01 22:24:58 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -76,14 +76,7 @@
 			<?php echo lang_get_defaulted( $t_def['name'] ) ?>
 		</td>
 		<td>
-			<?php
-				$t_custom_field_value = custom_field_get_value( $t_id, $f_bug_id );
-				if( CUSTOM_FIELD_TYPE_EMAIL == $t_def['type'] ) {
-					echo "<a href=\"mailto:$t_custom_field_value\">$t_custom_field_value</a>";
-				} else {
-					echo $t_custom_field_value;
-				}
-			?>
+			<?php print_custom_field_value( $t_def, $t_id, $f_bug_id ); ?>		
 		</td>
 	</tr>
 <?php

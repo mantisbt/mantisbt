@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.35 2004-06-26 14:06:15 prichards Exp $
+	# $Id: custom_field_api.php,v 1.36 2004-08-01 22:24:59 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -854,7 +854,11 @@
 		$row = db_fetch_array( $result );
 
 		# If an enumeration type, we get all possible values, not just used values
-		if ( CUSTOM_FIELD_TYPE_ENUM == $row['type'] ) {
+		if ( CUSTOM_FIELD_TYPE_ENUM == $row['type'] ||
+			 CUSTOM_FIELD_TYPE_CHECKBOX == $row['type'] ||
+			 CUSTOM_FIELD_TYPE_LIST == $row['type'] ||
+			 CUSTOM_FIELD_TYPE_MULTILIST == $row['type'] 
+			) {
 			$t_values_arr = explode( '|', $row['possible_values'] );
 
 			foreach( $t_values_arr as $t_option ) {
@@ -1019,28 +1023,93 @@
 
 		switch ($p_field_def['type']) {
 		case CUSTOM_FIELD_TYPE_ENUM:
-			PRINT "<select name=\"custom_field_$t_id\">";
-			$t_values = explode('|', $p_field_def['possible_values']);
+		case CUSTOM_FIELD_TYPE_LIST:
+		case CUSTOM_FIELD_TYPE_MULTILIST:
+ 			$t_values = explode( '|', $p_field_def['possible_values'] );
+			$t_list_size = $t_possible_values_count = count( $t_values );
+				
+			if ( $t_possible_values_count > 5 ) {
+				$t_list_size = 5;
+			}
+			
+			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ) {
+				$t_list_size = 0;	# for enums the size is 0
+			}
+			
+			if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {	 
+				echo '<select name="custom_field_' . $t_id . '[]" size="' . $t_list_size . '" multiple>';
+			} else {
+				echo '<select name="custom_field_' . $t_id . '" size="' . $t_list_size . '">';
+			}
+			
+			$t_selected_values = explode( '|', $t_custom_field_value );
+ 			foreach( $t_values as $t_option ) {
+				if( in_array( $t_option, $t_selected_values ) ) {
+ 					echo '<option value="' . $t_option . '" selected> ' . $t_option . '</option>';
+ 				} else {
+ 					echo '<option value="' . $t_option . '">' . $t_option . '</option>';
+ 				}
+ 			}
+ 			echo '</select>';
+			break;
+		case CUSTOM_FIELD_TYPE_CHECKBOX:
+			$t_values = explode( '|', $p_field_def['possible_values'] );
+			$t_checked_values = explode( '|', $t_custom_field_value );
 			foreach( $t_values as $t_option ) {
-				if( $t_custom_field_value == $t_option ) {
-					PRINT "<option value=\"$t_option\" selected>$t_option</option>";
+				echo '<input type="checkbox" name="custom_field_' . $t_id . '[]"';
+				if( in_array( $t_option, $t_checked_values ) ) {
+					echo ' value="' . $t_option . '" checked>&nbsp;' . $t_option . '&nbsp;&nbsp;';
 				} else {
-					PRINT "<option value=\"$t_option\">$t_option</option>";
+					echo ' value="' . $t_option . '">&nbsp;' . $t_option . '&nbsp;&nbsp;';
 				}
 			}
-			PRINT '</select>';
-			break;
+ 			break;
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 		case CUSTOM_FIELD_TYPE_FLOAT:
 		case CUSTOM_FIELD_TYPE_EMAIL:
 		case CUSTOM_FIELD_TYPE_STRING:
-			PRINT "<input type=\"text\" name=\"custom_field_$t_id\" size=\"80\"";
+			echo '<input type="text" name="custom_field_' . $t_id . '" size="80"';
 			if( 0 < $p_field_def['length_max'] ) {
-				PRINT ' maxlength="' . $p_field_def['length_max'] . '"';
+				echo ' maxlength="' . $p_field_def['length_max'] . '"';
 			} else {
-				PRINT ' maxlength="255"';
+				echo ' maxlength="255"';
 			}
-			PRINT " value=\"$t_custom_field_value\"></input>";
+			echo ' value="' . $t_custom_field_value .'"></input>';
 		}
 	}
+
+	# --------------------
+	# Prepare a string containing a custom field value for display
+	# $p_def 		contains the definition of the custom field 
+	# $p_field_id 	contains the id of the field
+	# $p_bug_id		contains the bug id to display the custom field value for
+	# NOTE: This probably belongs in the string_api.php
+	function string_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
+		$t_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
+		switch( $p_def['type'] ) {
+			case CUSTOM_FIELD_TYPE_EMAIL:
+				return "<a href=\"mailto:$t_custom_field_value\">$t_custom_field_value</a>";
+				break;
+			case CUSTOM_FIELD_TYPE_ENUM:
+			case CUSTOM_FIELD_TYPE_LIST:
+			case CUSTOM_FIELD_TYPE_MULTILIST:
+			case CUSTOM_FIELD_TYPE_CHECKBOX:
+				return str_replace( '|', ', ', $t_custom_field_value );
+				break;
+			default:
+				return $t_custom_field_value;
+		}	
+	}
+
+	# --------------------
+	# Print a custom field value for display
+	# $p_def 		contains the definition of the custom field 
+	# $p_field_id 	contains the id of the field
+	# $p_bug_id		contains the bug id to display the custom field value for
+	# NOTE: This probably belongs in the print_api.php
+	function print_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
+		echo string_custom_field_value( $p_def, $p_field_id, $p_bug_id );
+	}
+	
+	
 ?>
