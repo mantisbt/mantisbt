@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.34 $
-	# $Author: jfitzell $
-	# $Date: 2002-09-21 10:17:13 $
+	# $Revision: 1.35 $
+	# $Author: vboctor $
+	# $Date: 2002-10-11 10:25:12 $
 	#
-	# $Id: bug_update.php,v 1.34 2002-09-21 10:17:13 jfitzell Exp $
+	# $Id: bug_update.php,v 1.35 2002-10-11 10:25:12 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,7 +38,7 @@
 	check_varset( $f_duplicate_id, '' );
 	check_varset( $f_category, '' );
 
-    if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) AND ( ON == $g_auto_set_status_to_assigned ) ) {
+    if ( ( $f_handler_id != 0 ) AND ( NEW_ == $f_status ) AND ( ON == config_get( 'auto_set_status_to_assigned' ) ) ) {
         $f_status = ASSIGNED;
     }
 
@@ -164,12 +164,20 @@
 
 	# If we should notify and it's in feedback state then send an email
 	switch ( $f_status ) {
+		case NEW_:		# This will be used in the case where auto-assign = OFF, in this case the bug can be 
+						# assigned/unassigned while the status is NEW.
+						# @@@ In case of unassigned, the e-mail will still say ASSIGNED, but it will be shown
+						# that the handler is empty + history ( old_handler => @null@ ).
+						if ( $f_handler_id != $f_old_handler_id ) {
+							email_assign( $f_id );
+						}
+						break;
 		case FEEDBACK:	if ( $f_status!= $f_old_status ) {
    							email_feedback( $f_id );
    						}
 						break;
-		case ASSIGNED:	if ( ( $f_handler_id != $f_old_handler_id ) OR ( $f_status!= $f_old_status ) ) {
-			   				email_assign( $f_id );
+		case ASSIGNED:	if ( ( $f_handler_id != $f_old_handler_id ) OR ( $f_status != $f_old_status ) ) {
+							email_assign( $f_id );
 			   			}
 						break;
 		case RESOLVED:	email_resolved( $f_id );
