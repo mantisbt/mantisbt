@@ -3,6 +3,7 @@ Mantis ChangeLog
 2004.09.xx  -  0.19.0
 
 - 0004425: [bugtracker] Action group page exceeds max execution time (Victor Boctor)
+- 0004437: [bugtracker] Filenames of uploaded attached files are damaged (thraxisp)
 - 0004426: [email] Email notifications to users with language set to "auto" causes errors (thraxisp)
 - 0004429: [localization] Slovene national characters not displayed correctly (Jeroen Latour)
 - 0004423: [localization] Parse error in strings_hungarian.txt line 974 (Victor Boctor)

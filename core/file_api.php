@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.54 2004-08-30 11:56:45 vboctor Exp $
+	# $Id: file_api.php,v 1.55 2004-08-31 13:11:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -149,7 +149,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			$t_file_display_name = file_get_display_name( $v_filename );
+			$t_file_display_name = $v_filename;
 			$t_filesize		= number_format( $v_filesize );
 			$t_date_added	= date( config_get( 'normal_date_format' ), db_unixtimestamp( $v_date_added ) );
 

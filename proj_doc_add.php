@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add.php,v 1.42 2004-08-02 19:06:26 prichards Exp $
+	# $Id: proj_doc_add.php,v 1.43 2004-08-31 13:11:50 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -54,29 +54,32 @@
 		if ( !is_blank( $t_prefix ) ) {
 			$t_prefix .= '-';
 		}
-		$t_file_name = $t_prefix . project_format_id ( $t_project_id ) . '-' . $v_name;
 
 		# prepare variables for insertion
 		$c_title = db_prepare_string( $f_title );
 		$c_description = db_prepare_string( $f_description );
 		$c_file_path = db_prepare_string( $t_file_path );
-		$c_file_name = db_prepare_string( $t_file_name );
+		$c_file_name = db_prepare_string( $v_name );
 		$c_file_type = db_prepare_string( $v_type );
 		$c_file_size = db_prepare_int( $v_size );
+
+		$t_disk_file_name = $t_file_path . file_generate_unique_name( $t_prefix . project_format_id ( $t_project_id ) . '-' . $v_name, $t_file_path );
+		$c_disk_file_name = db_prepare_string( $t_disk_file_name );
+
 
 		$t_method = config_get( 'file_upload_method' );		
 		switch ( $t_method ) {
 			case FTP:
 			case DISK:	file_ensure_valid_upload_path( $t_file_path );
 
-						if ( !file_exists( $t_file_path.$t_file_name ) ) {
+						if ( !file_exists( $t_disk_file_name ) ) {
 							if ( FTP == $t_method ) {
 								$conn_id = file_ftp_connect();
-								file_ftp_put ( $conn_id, $t_file_name, $v_tmp_name );
+								file_ftp_put ( $conn_id, $t_disk_file_name, $v_tmp_name );
 								file_ftp_disconnect ( $conn_id );
 							}
 							umask( 0333 );  # make read only
-							copy( $v_tmp_name, $t_file_path . $t_file_name );
+							move_uploaded_file( $v_tmp_name, $t_disk_file_name );
 							$c_content = '';
 						} else {
 							trigger_error( ERROR_DUPLICATE_FILE, ERROR );
@@ -94,7 +97,7 @@
 		$query = "INSERT INTO $t_project_file_table
 				(project_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 				VALUES
-				($t_project_id, '$c_title', '$c_description', '$c_file_path$c_file_name', '$c_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
+				($t_project_id, '$c_title', '$c_description', '$t_disk_file_name', '$c_file_name', '$c_file_path', $c_file_size, '$c_file_type', " . db_now() .", '$c_content')";
 
 		$result = db_query( $query );
 	}
