@@ -72,6 +72,7 @@
 	}
 
 	# required fields ok, proceeding
+	$result = 0;
 	if ( !$check_failed ) {
 		# Get user id
 		$u_id = get_current_user_field( "id" );
@@ -185,7 +186,7 @@
 		if ( ON == $g_notify_developers_on_new ) {
 			email_new_bug( $t_bug_id );
 		}
-	}
+	} # end if !check_failed
 
 	# Determine which report page to redirect back to.
 	$t_redirect_url = get_report_redirect_url();
