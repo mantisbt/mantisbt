@@ -1,6 +1,6 @@
 -- Just Ideas (feel free to modify) --
 -- david ulevitch <davidu@everydns.net> --
--- $Id: FUTURE,v 1.4 2002-08-21 06:34:06 vboctor Exp $ --
+-- $Id: FUTURE,v 1.5 2002-08-21 08:11:41 jlatour Exp $ --
 
 Mantis rewrite.
 
@@ -8,12 +8,13 @@ Goals:
 -o 	No loss of current functionality
 -o 	No loss of current ease of use
 -o 	No loss of current ease of setup
--o	Make source files clean, consistent, easy to read,
+-o	Make/keep source files clean, consistent, easy to read,
 	and not unnecessarily long
+-o 	Designed with security in mind
 
 Primary:
 -o 	Database abstraction via ADODB (http://php.weblogs.com/ADODB)
--o 	Designed with security in mind
+    Get rid of core_database_API.php
 -o	Every "user operation" API function checks permissions before
 	performing it's operation.  It would be nice if this was done
 	by calling one function that could obtain all the state information
@@ -21,15 +22,24 @@ Primary:
 	more complex and customized rules could be developed later.  The
 	basic idea is let something else decide whether the operation is
 	allowed, not the API function itself.
+	(Why not? Doesn't it complicate it things if you move the rules	elsewhere?)
 -o	Common functions to deal with INPUT, OUTPUT, STORAGE, etc.
--o	Use $_GET/$_POST/$_REQUEST/$_COOKIE
+    -o Input? Isn't that just $_* and core_config_API.php?
+	-o Output? You mean like core_html_API.php et al?
+	-o Storage? As in ADODB's library?
+-o	Use $_GET/$_POST/$_REQUEST/$_COOKIE/$_SERVER
 -o	Consider moving configs to db.
+-o  Create core_config_API.php, with configuration access functions.
+-o  Move all core/function files to a seperate directory
 
 Secondary:
 -o	Source documentation via phpdoc (or similar)
+    -o phpDoc (phpdoc.de)
+	-o phpDocumentor (phpdoc.org)
 -o	Are there any DB schema cleanups that could be done while we're
 	making major changes anyway?  Might be a good time to justify
 	one big change if necessary (not sure if there is, just throwing
 	it out there to think about)
+	-o We can update the version to use an index, while we're at it?
 
 What else?
