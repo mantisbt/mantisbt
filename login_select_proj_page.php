@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.33 2004-08-05 17:58:47 jlatour Exp $
+	# $Id: login_select_proj_page.php,v 1.34 2004-08-05 23:47:46 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,7 +27,7 @@
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
-		<input type="hidden" name="ref" value="<?php echo urlencode( $f_ref ) ?>" />
+		<input type="hidden" name="ref" value="<?php echo htmlspecialchars( $f_ref ) ?>" />
 		<?php echo lang_get( 'login_title' ) ?>
 	</td>
 </tr>

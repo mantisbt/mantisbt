@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.40 2004-08-05 17:58:47 jlatour Exp $
+	# $Id: login_page.php,v 1.41 2004-08-05 23:47:46 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -66,7 +66,7 @@
 		<?php
 			if ( !is_blank( $f_return ) ) {
 			?>
-				<input type="hidden" name="return" value="<?php echo urlencode( $f_return ) ?>" />
+				<input type="hidden" name="return" value="<?php echo htmlspecialchars( $f_return ) ?>" />
 				<?php
 			}
 			echo lang_get( 'login_title' ) ?>
