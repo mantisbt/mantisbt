@@ -46,7 +46,7 @@
 <?
 	### PROTECTED
 	if ( $f_protected=="on" ) {
-		PRINT "Account protected. Cannot change settings.<p>";
+		PRINT "Account protected. Cannot change settings...<p>";
 	}
 	### SUCCESS
 	else if ( $result ) {
@@ -59,7 +59,12 @@
 	}
 ?>
 <p>
+
+<? if ( $f_protected=="on" ) { ?>
+<a href="<? echo $g_account_page ?>">Go back</a>
+<? } else { ?>
 <a href="<? echo $g_logout_page ?>">Click here to proceed</a>
+<? } ?>
 </div>
 
 <? print_footer() ?>

@@ -29,6 +29,7 @@ Are you sure you wish to delete your account?
 
 <form method=post action="<? echo $g_account_delete ?>">
 	<input type=hidden name=f_id value="<? echo $f_id ?>">
+	<input type=hidden name=f_protected value="<? echo $f_protected ?>">
 	<input type=submit value=" Delete Account ">
 </form>
 

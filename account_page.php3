@@ -51,6 +51,7 @@
 	<table cols=2 width=100%>
 	<form method=post action="<? echo $g_account_update ?>">
 	<input type=hidden name=f_id value="<? echo $u_id ?>">
+	<input type=hidden name=f_protected value="<? echo $u_protected ?>">
 	<tr>
 		<td colspan=2 bgcolor=<? echo $g_table_title_color ?>>
 			<b>Edit Account</b>
@@ -104,6 +105,7 @@
 		<td align=right>
 			<form method=post action="<? echo $g_account_delete_page ?>">
 				<input type=hidden name=f_id value="<? echo $u_id ?>">
+				<input type=hidden name=f_protected value="<? echo $u_protected ?>">
 				<input type=submit value="Delete Account">
 		</td>
 			</form>
