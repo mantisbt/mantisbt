@@ -299,6 +299,30 @@
 		}
 	}
 	# --------------------
+	# get the color string for the given status
+	function get_status_color( $p_status ) {
+		global $g_status_enum_string;
+
+		# This code creates the appropriate variable name
+		# then references that color variable
+		# You could replace this with a bunch of if... then... else
+		# statements
+		$t_color_str = get_enum_element( $g_status_enum_string, $p_status );
+		$t_color_variable_name = "g_".$t_color_str."_color";
+
+		global $$t_color_variable_name;
+		return $$t_color_variable_name;
+	}
+	# --------------------
+	# get a bgcolor="" string for the given status or "" if the status is CLOSED
+	function get_status_bgcolor( $p_status ){
+		if ( !( CLOSED == $p_status ) ) {
+			return "bgcolor=\"".get_status_color( $p_status )."\"";
+		} else {
+			return "";
+		}
+	}
+	# --------------------
 	# Get the default project of a user
 	function get_default_project( $p_user_id ) {
 		global $g_mantis_user_pref_table;

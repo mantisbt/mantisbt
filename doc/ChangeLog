@@ -24,6 +24,7 @@ Mantis
  * Modified bug_update_advanced to allow for more fields to be updated.
  * Modified email subject links to match standard Mantis email format.
  * Modified view bug pages to show bug status via color.
+ * Modified more pages to show bug status via color.
  * Modified setcookie() to use paths.
  * Modified fopen() to open with rb instead of r.
  * Modified language files to use long php tags.

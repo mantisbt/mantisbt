@@ -219,18 +219,13 @@
 		$v_summary = string_display( $v_summary );
 		$t_last_updated = date( $g_short_date_format, $v_last_updated );
 
-		# alternate row colors
-		$status_color = alternate_colors( $i );
 
 		# choose color based on status only if not resolved
-		# The code creates the appropriate variable name
-		# then references that color variable
-		# You could replace this with a bunch of if... then... else
-		# statements
 		if ( !( CLOSED == $v_status ) ) {
-			$t_color_str = get_enum_element( $g_status_enum_string, $v_status );
-			$t_color_variable_name = "g_".$t_color_str."_color";
-			$status_color = $$t_color_variable_name;
+			$status_color = get_status_color( $v_status );
+		} else {
+			# alternate row colors
+			$status_color = alternate_colors( $i );
 		}
 
 		# grab the bugnote count
