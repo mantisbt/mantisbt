@@ -35,6 +35,7 @@ Mantis
  * Modified view_all_bug_page to use view_all_set as a pure script to set cookies.
  * Modified g_hide_user_email to be g_show_user_email and have different usage modes.
  * Modified phpmailer AddAddress in email sending to allow for multiple to recipients.
+ * Modified project user adding to use a multi-select list box.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added g_bug_link_tag to let users customize how to create bug links.

@@ -54,12 +54,12 @@
 		<?php echo $s_add_user_title ?>
 	</td>
 </tr>
-<tr class="row-1">
+<tr class="row-1" valign="top">
 	<td class="category">
 		<?php echo $s_username ?>
 	</td>
 	<td>
-		<select name="f_user_id">
+		<select name="f_user_id[]" multiple size="5">
 			<?php print_project_user_list_option_list() ?>
 		</select>
 	</td>
@@ -151,7 +151,7 @@
 	<td class="center" bgcolor="<?php echo $t_bgcolor ?>">
 		<?php
 			if ( isset( $u_user_id ) ) {
-				print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$t_user_id, $s_remove_link );
+				print_bracket_link( $g_proj_user_delete."?f_user_id=".$t_user_id, $s_remove_link );
 			}
 		?>
 	</td>
