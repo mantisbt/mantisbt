@@ -1,31 +1,33 @@
-<?php
+<?
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
 	# Dutch: Jan-Bart de Vreede, jvreede@outdare.nl
+	# Dutch: Klaasjan Brand, kjb@dds.nl
+
 ?>
-<?php
+<?
 	# new strings:
-	$s_all_projects = "All Projects";
-	$s_move_bugs = "Move Bugs";
-	$s_operation_successful = "Operation successful.";
-	$s_date_order = "Date Order";
-	$s_print_all_bug_page_link = "Print Reports";
-	$s_csv_export = "CSV Export";
-	$s_login_anonymously = "Login Anonymously";
+	$s_all_projects = "Alle projecten";
+	$s_move_bugs = "Verplaats bugs";
+	$s_operation_successful = "Actie geslaagd";
+	$s_date_order = "Datum volgorde";
+	$s_print_all_bug_page_link = "Print rapporten";
+	$s_csv_export = "CSV exporteren";
+	$s_login_anonymously = "Anoniem inloggen";
 
 	# ERROR strings
-	$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
-	$MANTIS_ERROR[ERROR_LOGIN] = "ERROR: your account may be disabled or the username/password you entered is incorrect.";
-	$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
-	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
-	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "ERROR: This is a duplicate category.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "ERROR: This is a duplicate version.";
-	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
-	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
+	$MANTIS_ERROR[ERROR_SQL] = "FOUT: SQL fout gevonden.  Zou u dit willen melden aan ";
+	$MANTIS_ERROR[ERROR_LOGIN] = "FOUT: Uw account kan uitgeschakeld zijn of de gebruikersnaam/wachtwoord combinatie die u ingevoerd heeft is niet juist.";
+	$MANTIS_ERROR[ERROR_REPORT] = "FOUT: Er is een fout in uw rapport.";
+	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "FOUT: Geen bestand opgegeven.";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "FOUT: De folder bestaat niet.  Controleer de project instellingen.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "FOUT: Deze categorie bestaat al.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "FOUT: Deze versie bestaat al.";
+	$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "FOUT: Dit bestand bestaat al. Verwijder het bestand eerst.";
+	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "FOUT: Een benodigd veld is niet ingevuld. Controleer a.u.b. uw invoer.";
 
 	# General Strings
 	$s_go_back = "Ga terug";
@@ -34,62 +36,62 @@
 	$s_switch = "Verander";
 	$s_logged_in_as = "Ingelogd als";
 
-	$s_user_no_longer_exists = "user no longer exists";
+	$s_user_no_longer_exists = "gebruiker bestaat niet meer";
 
-	$s_administrator = "administrator";
+	$s_administrator = "beheerder";
 
 	# Enum Strings
-	$s_access_levels_enum_string      = "10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator";
-	$s_project_status_enum_string     = "10:development,30:release,50:stable,70:obsolete";
-	$s_project_view_state_enum_string = "10:public,50:private";
+	$s_access_levels_enum_string      = "10:kijker,25:rapporteur,40:bewerker,55:ontwikkelaar,70:manager,90:beheerder";
+	$s_project_status_enum_string     = "10:ontwikkeling,30:release,50:stabiel,70:oud";
+	$s_project_view_state_enum_string = "10:publiek,50:intern";
 
-	$s_priority_enum_string           = "10:none,20:low,30:normal,40:high,50:urgent,60:immediate";
-	$s_severity_enum_string           = "10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block";
-	$s_reproducibility_enum_string    = "10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A";
-	$s_status_enum_string             = "10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed";
-	$s_resolution_enum_string         = "10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:won't fix";
-	$s_projection_enum_string         = "10:none,30:tweak,50:minor fix,70:major rework,90:redesign";
-	$s_eta_enum_string                = "10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month";
+	$s_priority_enum_string           = "10:geen,20:laag,30:normaal,40:hoog,50:urgent,60:onmiddelijk";
+	$s_severity_enum_string           = "10:feature,20:triviaal,30:tekst,40:tweak,50:klein,60:groot,70:crash,80:blokkeert";
+	$s_reproducibility_enum_string    = "10:altijd,30:soms,50:willekeurig,70:niet geprobeerd,90:niet te dupliceren,100:N.V.T.";
+	$s_status_enum_string             = "10:nieuw,20:feedback,30:onderkend,40:bevestigd,50:toegewezen,80:opgelost,90:afgesloten";
+	$s_resolution_enum_string         = "10:open,20:opgelost,30:heropend,40:niet te dupliceren,50:niet oplosbaar,60:dubbele melding,70:geen bug,80:uitgesteld,90:zal niet opgelost worden";
+	$s_projection_enum_string         = "10:geen,30:tweak,50:eenvoudige oplossing,70:ingewikkelde oplossing,90:herschrijven nodig";
+	$s_eta_enum_string                = "10:geen,20:< 1 dag,30:2-3 dagen,40:< 1 week,50:< 1 maand,60:> 1 maand";
 
 	# Email Strings
 	$s_new_account_subject = "Uw nieuwe gebruikers account";
-	$s_new_account_greeting = "Welkom bij de nieuwe opdrachtentracker. Hier is de informatie die u nodig heeft om in te loggen\n\n";
+	$s_new_account_greeting = "Welkom bij het bug registratie systeem. Hier is de informatie die u nodig heeft om in te loggen\n\n";
 	$s_new_account_url = "U kunt hier inloggen op de pagina ";
 	$s_new_account_username = "Gebruikersnaam: ";
 	$s_new_account_password = "Wachtwoord: ";
-	$s_new_account_message = "Verander uw wachtwoord alstublieft na het inloggen op de pagina.  Vergeet ook niet dat uw wachtwoord wordt opgeslagen via one way encryption.  De staf kan u wachtwoord niet achterhalen.  Als u uw wachtwoord vergeet zal het moeten terug gezet op de begininstellingen.\n\n";
+	$s_new_account_message = "Verander uw wachtwoord alstublieft na het inloggen op de pagina.  Vergeet niet dat uw wachtwoord versleuteld wordt opgeslagen.  De beheerder kan uw wachtwoord niet achterhalen.  Als u uw wachtwoord vergeet zal het terug worden gezet op de begininstellingen.\n\n";
 	$s_new_account_do_not_reply = "Niet antwoorden op dit bericht alstublieft.\n";
 
 	$s_reset_request_msg = "Er was een verzoek tot resetten van uw wachtwoord";
 	$s_account_name_msg = "Uw account naam is";
 	$s_news_password_msg = "Hier is uw nieuwe wachtwoord";
 
-	$s_new_bug_msg = "De onderstaande NIEUWE opdracht is TOEGEVOEGD";
-	$s_email_bugnote_msg = "Een notitie is toegevoegd aan deze opdracht.";
-	$s_email_resolved_msg = "De volgende opdracht is afgerond.";
-	$s_email_close_msg = "The following bug has beeen CLOSED";
-	$s_email_feedback_msg = "Voor de volgende opdracht wordt uw feedback verzocht.";
-	$s_email_reopen_msg = "De volgende opdracht is heropend.";
-	$s_email_assigned_msg = "De volgende opdracht is aan iemand toegekend.";
+	$s_new_bug_msg = "De onderstaande NIEUWE bug is TOEGEVOEGD";
+	$s_email_bugnote_msg = "Aan deze bug is een aantekening toegevoegd.";
+	$s_email_resolved_msg = "De volgende bug is afgerond.";
+	$s_email_close_msg = "De volgende bug is AFGESLOTEN";
+	$s_email_feedback_msg = "Voor de volgende bug wordt uw feedback verzocht.";
+	$s_email_reopen_msg = "De volgende bug is heropend.";
+	$s_email_assigned_msg = "De volgende bug is aan iemand toegekend.";
 
-	$s_email_reporter = "Reporter";
-	$s_email_handler = "Afgehandeld Door:";
+	$s_email_reporter = "Rapporteur";
+	$s_email_handler = "Afgehandeld door:";
 	$s_email_project = "Project";
-	$s_email_bug = "Opdracht nummer";
+	$s_email_bug = "Bug nummer";
 	$s_email_category = "Categorie";
 	$s_email_reproducibility = "Reproduceerbaarheid";
-	$s_email_severity = "Strengheid";
+	$s_email_severity = "Omvang";
 	$s_email_priority = "Prioriteit";
 	$s_email_status = "Status";
-	$s_email_resolution = "Resolutie";
-	$s_email_duplicate = "Dupliceer";
+	$s_email_resolution = "Afronding";
+	$s_email_duplicate = "Dubbele melding";
 	$s_email_date_submitted = "Datum verzonden";
 	$s_email_last_modified = "Laatst veranderd";
 	$s_email_summary =  "Samenvatting";
 	$s_email_description = "Beschrijving";
 
 	# account_delete.php3
-	$s_account_protected_msg = "Account beveiligd. Instellingen kunnen niet worden veranderd...";
+	$s_account_protected_msg = "Account is beveiligd. Instellingen kunnen niet worden veranderd...";
 	$s_account_removed_msg = "Uw account is verwijderd...";
 
 	# account_delete_page.php3
@@ -101,7 +103,7 @@
 	$s_change_preferences_link = "Verander instellingen";
 	$s_edit_account_title = "Pas account aan";
 	$s_username = "Gebruikersnaam";
-	$s_email = "Email";
+	$s_email = "E-mail";
 	$s_password = "Wachtwoord";
 	$s_confirm_password  = "Bevestig wachtwoord";
 	$s_access_level = "Toegangsniveau";
@@ -110,21 +112,21 @@
 	# account_prefs_page.php3
 	$s_default_account_preferences_title = "Default account instellingen";
 	$s_default_project = "Default Project";
-	$s_advanced_report = "Gevorderd rapport";
-	$s_advanced_view = "Gevorderde kijk";
-	$s_advanced_update = "Advanced Update";
-	$s_refresh_delay = "Refresh Delay";
-	$s_redirect_delay = "Redirect Delay";
-	$s_email_on_new = "Email on New";
-	$s_email_on_assigned = "Email on Assigned";
-	$s_email_on_feedback = "Email on Feedback";
-	$s_email_on_resolved = "Email on Resolved";
-	$s_email_on_closed = "Email on Closed";
-	$s_email_on_reopened = "Email on Reopened";
-	$s_email_on_bugnote_added = "Email on Bugnote Added";
-	$s_email_on_status_change = "Email on Status Change";
-	$s_email_on_priority_change = "Email on Priority Change";
-	$s_language = "Language";
+	$s_advanced_report = "Uitgebreid rapport";
+	$s_advanced_view = "Uitgebreide informatie";
+	$s_advanced_update = "Uitgebreide update";
+	$s_refresh_delay = "Verversings snelheid";
+	$s_redirect_delay = "Doorloop snelheid berichten";
+	$s_email_on_new = "E-mail nieuwe bugs";
+	$s_email_on_assigned = "E-mail toegewezen bugs";
+	$s_email_on_feedback = "E-mail feedback";
+	$s_email_on_resolved = "E-mail afgeronde bugs";
+	$s_email_on_closed = "E-mail gesloten bugs";
+	$s_email_on_reopened = "E-mail heropende bugs";
+	$s_email_on_bugnote_added = "E-mail toegevoegde aantekening";
+	$s_email_on_status_change = "E-mail status verandering";
+	$s_email_on_priority_change = "E-mail verandering prioriteit";
+	$s_language = "Taal";
 	$s_update_prefs_button = "Update instellingen";
 	$s_reset_prefs_button = "Begininstellingen";
 
@@ -143,9 +145,9 @@
 	# account_profile_edit_page.php3
 	$s_edit_profile_title = "Pas profiel aan";
 	$s_platform = "Platform";
-	$s_operating_system = "Operatie systeem";
-	$s_version = "Versie/Gemaakt";
-	$s_additional_description = "Additionale beschrijving";
+	$s_operating_system = "Besturingssysteem";
+	$s_version = "Versie/Fabrikant";
+	$s_additional_description = "Extra beschrijving";
 	$s_update_profile_button = "Update profiel";
 
 	# account_profile_make_default.php3
@@ -158,8 +160,8 @@
 	$s_edit_profile = "Pas profiel aan";
 	$s_make_default = "Maak default";
 	$s_delete_profile = "Verwijder profiel";
-	$s_select_profile = "Selecteer Profiel";
-	$s_submit_button = "Versturen";
+	$s_select_profile = "Selecteer profiel";
+	$s_submit_button = "Verder";
 
 	# account_profile_update.php3
 	$s_profile_updated_msg = "Profiel ge-updated...";
@@ -168,51 +170,51 @@
 	$s_account_updated_msg = "Uw account is succesvol ge-updated...";
 
 	# bug_assign.php3
-	$s_bug_assign_msg       = "Opdracht is succesvol toegewezen...";
+	$s_bug_assign_msg       = "Bug is toegewezen...";
 
 	# bug_close.php3
-	$s_bug_close_msg       = "Bug has been closed...";
-	$s_close_immediately   = "Close immediately:";
+	$s_bug_close_msg       = "Bug is afgesloten...";
+	$s_close_immediately   = "Sluit direct:";
 
 	# bug_delete.php3
-	$s_bug_deleted_msg = "Opdracht is verwijderd...";
+	$s_bug_deleted_msg = "Bug is verwijderd...";
 
 	# bug_delete_page.php3
-	$s_delete_bug_sure_msg = "Weet u zeker dat u deze opdracht wilt verwijderen?";
-	$s_delete_bug_button = "Verwijder opdracht";
+	$s_delete_bug_sure_msg = "Weet u zeker dat u deze bug wilt verwijderen?";
+	$s_delete_bug_button = "Verwijder bug";
 
 	# bug_file_add.php3
-	$s_file_upload_msg = "File upload successful";
+	$s_file_upload_msg = "Bestand is ge-upload";
 
 	# bug_file_upload_inc.php3
-	$s_upload_file = "Upload File";
-	$s_select_file = "Select File";
-	$s_upload_file_button = "Upload File";
+	$s_upload_file = "Bijvoegen bestand";
+	$s_select_file = "Selecteer bestand";
+	$s_upload_file_button = "Upload bestand";
 
 	# bug_reopen.php3
-	$s_bug_reopened_msg = "Opdracht is heropend...";
-	$s_reopen_add_bugnote_title = "Voeg notitie reden toe voor heropenen opdracht";
-	$s_bugnote_add_reopen_button = "Voeg opdrachtnotitie toe en heropen opdracht";
+	$s_bug_reopened_msg = "Bug is heropend...";
+	$s_reopen_add_bugnote_title = "Voeg reden toe voor heropenen bug";
+	$s_bugnote_add_reopen_button = "Toevoegen aantekening en heropenen bug";
 
 	# bug_resolve_page.php3
-	$s_resolve_bug_title = "Opdracht afronden";
-	$s_resolve_bug_button = "Opdracht afronden";
+	$s_resolve_bug_title = "Bug afronden";
+	$s_resolve_bug_button = "Bug afronden";
 
 	# bug_resolve_page2.php3
-	$s_bug_resolved_msg = "Opdracht is afgerond. Voer opdrachtnummer hieronder in...";
-	$s_resolve_add_bugnote_title = "Voeg opdrachtnotitie reden in voor afronden opdracht";
-	$s_bugnote_add_resolve_button = "Voeg opdrachtnotitie toe";
+	$s_bug_resolved_msg = "Bug is afgerond. Voer bug nummer hieronder in...";
+	$s_resolve_add_bugnote_title = "Toevoegen reden voor afronden bug";
+	$s_bugnote_add_resolve_button = "Toevoegen aantekening";
 
 	# bug_update.php3
-	$s_bug_updated_msg = "Opdracht succesvol ge-updated...";
+	$s_bug_updated_msg = "Bug succesvol ge-updated...";
 
 	# bug_update_advanced_page.php3
-	$s_back_to_bug_link = "Terug naar opdracht";
-	$s_update_simple_link = "Update simpel";
-	$s_updating_bug_advanced_title = "Updating opdracht informatie";
+	$s_back_to_bug_link = "Terug naar bug";
+	$s_update_simple_link = "Update eenvoudig";
+	$s_updating_bug_advanced_title = "Bijwerken bug informatie";
 	$s_id = "Identificatie nummer";
 	$s_category = "Categorie";
-	$s_severity = "Serieusheid";
+	$s_severity = "Omvang";
 	$s_reproducibility = "Reproduceerbaarheid";
 	$s_date_submitted = "Datum verstuurd";
 	$s_last_update = "Laatste update";
@@ -231,39 +233,39 @@
 	$s_votes = "Stemmen";
 	$s_summary = "Samenvatting";
 	$s_description = "Beschrijving";
-	$s_steps_to_reproduce = "Stappen naar Reproduceer";
+	$s_steps_to_reproduce = "Stappen om te reproduceren";
 	$s_additional = "Additioneel";
 	$s_information = "Informatie";
 	$s_update_information_button = "Update informatie";
 
 	# bug_update_page.php3
-	$s_update_advanced_link = "Update gevorderd";
-	$s_updating_bug_simple_title = "Updaten opdracht informatie";
+	$s_update_advanced_link = "Update uitgebreid";
+	$s_updating_bug_simple_title = "Updaten bug informatie";
 
 	# bug_vote_add.php3
 	$s_vote_added_msg = "Stem is toegevoegd...";
 
 	# bugnote_add.php3
-	$s_bugnote_added_msg = "Opdrachtnotitie toegevoegd...";
+	$s_bugnote_added_msg = "Aantekening toegevoegd...";
 
 	# bugnote_delete.php3
-	$s_bugnote_deleted_msg = "Opdrachtnotitie suvccesvol verwijderd...";
-	$s_bug_notes_title = "Opdrachtnotities";
+	$s_bugnote_deleted_msg = "Aantekening verwijderd...";
+	$s_bug_notes_title = "Aantekeningen";
 
 	# bugnote_edit_page.php3
-	$s_edit_bugnote_title = "Edit Bugnote";
+	$s_edit_bugnote_title = "Aanpassen aantekening";
 
 	# bugnote_inc.php
-	$s_no_bugnotes_msg = "Er zijn geen notities toegevoegd aan deze opdracht.";
-	$s_delete_link = "Verwijder";
-	$s_add_bugnote_title = "Voeg opdrachtnotitie toe";
-	$s_add_bugnote_button = "Voeg opdrachtnotitie toe";
-	$s_bugnote_edit_link = "Edit";
-	$s_close_bug_button = "Close Bug";
+	$s_no_bugnotes_msg = "Er zijn geen aantekeningen toegevoegd aan deze bug.";
+	$s_delete_link = "Verwijderen";
+	$s_add_bugnote_title = "Toevoegen aantekening";
+	$s_add_bugnote_button = "Toevoegen aantekening";
+	$s_bugnote_edit_link = "Aanpassen";
+	$s_close_bug_button = "Sluit bug";
 
 	# bugnote_update.php3
-	$s_bugnote_updated_msg = "Bugnote has been successfully updated...";
-	$s_edited_on = "edited on: ";
+	$s_bugnote_updated_msg = "Aantekening is aangepast...";
+	$s_edited_on = "gewijzigd op: ";
 
 	# index.php3
 	$s_click_to_login = "Klik hier om in te loggen";
@@ -271,7 +273,7 @@
 	# login.php3
 
 	# login_page.php3
-	$s_login_page_info = "Welkom op de opdracht tracker.";
+	$s_login_page_info = "Welkom op de bug database.";
 	$s_login_title = "Login";
 	$s_save_login = "Opslaan login";
 	$s_choose_project = "Kies project";
@@ -279,16 +281,16 @@
 	$s_signup_link = "Schrijf in voor nieuwe account";
 
 	# login_select_proj_page.php3
-	$s_select_project_button = "Select Project";
+	$s_select_project_button = "Selecteer project";
 
 	# logout_page.php3
 	$s_logged_out_title = "Uitgelogd...";
-	$s_redirecting = "...Redirecting";
+	$s_redirecting = "...moment";
 	$s_here = "Hier";
 
 	# main_page.php3
-	$s_open_and_assigned_to_me = "Open and assigned to me";
-	$s_open_and_reported_to_me = "Open and reported by me";
+	$s_open_and_assigned_to_me = "Open en aan mij toegewezen";
+	$s_open_and_reported_to_me = "Open en door mij gemeld";
 	$s_newer_news_link = "Nieuwer nieuws";
 	$s_older_news_link = "Ouder nieuws";
 	$s_archives = "Archives";
@@ -298,30 +300,30 @@
 	$s_created_user_part2 = "met een toegangsniveau van";
 
 	# manage_create_user_page.php3
-	$s_create_new_account_title = "Maak nieuwe account aan";
+	$s_create_new_account_title = "Maak nieuw account aan";
 	$s_verify_password = "Verifieer wachtwoord";
-	$s_enabled = "Ge-activeerd";
+	$s_enabled = "Geactiveerd";
 	$s_protected = "Beschermd";
 	$s_create_user_button = "Maak gebruiker aan";
 
 	# manage_page.php3
-	$s_hide_disabled = "Hide Disabled";
+	$s_hide_disabled = "Verberg uitgeschakelde";
 	$s_filter_button = "Filter";
-	$s_manage_users_link = "Manage Users";
-	$s_manage_projects_link = "Manage Projects";
+	$s_manage_users_link = "Gebruikers beheer";
+	$s_manage_projects_link = "Projecten beheer";
 	$s_create_new_account_link = "Maak account aan";
 	$s_projects_link = "Projecten";
 	$s_documentation_link = "Documentatie";
 	$s_new_accounts_title = "Nieuwe accounts";
-	$s_1_week_title = "1 Week";
+	$s_1_week_title = "1 week";
 	$s_never_logged_in_title = "Nog nooit ingelogd";
-	$s_prune_accounts = "Prune Accounts";
-	$s_hide_inactive = "Hide Inactive";
+	$s_prune_accounts = "Accounts opschonen";
+	$s_hide_inactive = "Verberg inactieve";
 	$s_manage_accounts_title = "Beheer accounts";
 	$s_p = "p";
 	$s_date_created = "Datum aangemaakt";
 	$s_last_visit = "Laatste bezoek";
-	$s_edit_user_link = "Pas gebruiker aan";
+	$s_edit_user_link = "Aanpassen gebruiker";
 
 	# manage_project_add.php3
 	$s_project_added_msg = "Project is succesvol toegevoegd...";
@@ -333,25 +335,25 @@
 	$s_category_deleted_msg = "Categorie is succesvol verwijderd...";
 
 	# manage_project_category_delete_page.php3
-	$s_category_delete_sure_msg = "Weet u zeker dat u deze categorie wilt verwijderen? Alle gerelateerde opdrachten worden verwijderd.";
-	$s_delete_category_button = "verwijder categorie";
+	$s_category_delete_sure_msg = "Weet u zeker dat u deze categorie wilt verwijderen? Alle gerelateerde bugs worden verwijderd.";
+	$s_delete_category_button = "Verwijder categorie";
 
 	# manage_project_category_edit_page.php3
-	$s_edit_project_category_title = "Pas project categorie aan";
+	$s_edit_project_category_title = "Aanpassen project categorie";
 	$s_update_category_button = "Update categorie";
 
 	# manage_project_category_update.php3
-	$s_category_updated_msg = "Categorie is succesvol ge-updated...";
+	$s_category_updated_msg = "Categorie is ge-updated...";
 
 	# manage_project_delete.php3
 	$s_project_deleted_msg = "Project succesvol verwijderd...";
 
 	# manage_project_delete_page.php3
-	$s_project_delete_msg = "Weet u zeker dat u dit project wilt verwijderen en alle aangehechte opdrachten rapporten?";
+	$s_project_delete_msg = "Weet u zeker dat u dit project en alle bijbehorende bug rapporten wilt verwijderen?";
 	$s_project_delete_button = "Verwijder project";
 
 	# manage_project_edit_page.php3
-	$s_edit_project_title = "Pas project aan";
+	$s_edit_project_title = "Aanpassen project";
 	$s_project_name = "Project naam";
 	$s_view_status = "Bekijk status";
 	$s_public = "publiek";
@@ -363,14 +365,14 @@
 	$s_add_category_button = "Voeg categorie toe";
 	$s_versions = "Versies";
 	$s_add_version_button = "Voeg versie toe";
-	$s_edit_link = "Pas aan";
+	$s_edit_link = "Aanpassen";
 
 	# manage_project_menu_page.php3
 	$s_add_project_title = "Voeg project toe";
-	$s_access_threshold = "Access Threshold";
-	$s_upload_file_path = "Upload File Path";
-	$s_add_project_button = "Add Project";
-	$s_projects_title = "Projects";
+	$s_access_threshold = "Minimum toegangsnivo";
+	$s_upload_file_path = "Upload pad voor bestanden";
+	$s_add_project_button = "Toevoegen project";
+	$s_projects_title = "Projecten";
 	$s_name = "Naam";
 
 	# manage_project_update.php3
@@ -383,12 +385,12 @@
 	$s_version_deleted_msg = "Versie is succesvol verwijderd...";
 
 	# manage_project_version_delete_page.php3
-	$s_version_delete_sure = "Weet u zeker dat u deze versie wilt verwijderen? Alle gerelateerde opdrachten zullen worden verwijderd.";
+	$s_version_delete_sure = "Weet u zeker dat u deze versie wilt verwijderen? Alle gerelateerde bug rapporten zullen worden verwijderd.";
 	$s_delete_version_button = "Verwijder versie";
 
 	# manage_project_version_edit_page.php3
 	$s_edit_project_version_title = "Pas project versie aan";
-	$s_update_version_button = "Update Versie";
+	$s_update_version_button = "Update versie";
 
 	# manage_project_version_update.php3
 	$s_version_updated_msg = "Versie is succesvol ge-updated...";
@@ -401,147 +403,147 @@
 	$s_delete_account_sure_msg = "Weet u zeker dat u dit account wilt verwijderen?";
 
 	# manage_prune.php3
-	$s_accounts_pruned_msg = "All accounts that have never logged in and are older than 1 week have been removed";
+	$s_accounts_pruned_msg = "Alle nooit gebruikte accounts ouder dan 1 week zijn verwijderd";
 
 	# manage_user_page.php3
-	$s_edit_user_title = "Pas gebruiker aan";
+	$s_edit_user_title = "Aanpassen gebruiker";
 	$s_reset_password_button = "Zet wachtwoord terug op begininstellingen";
 	$s_delete_user_button = "Verwijder gebruiker";
-	$s_reset_password_msg = "Reset Password sets the randomly generated password.";
+	$s_reset_password_msg = "Terugzetten van het wachtwoord stelt het willekeurig gekozen wachtwoord in";
 	$s_reset_password_msg2 = "Zetten van wachtwoord op begininstellingen zet het wachtwoord op blanco.";
 
 	# manage_user_reset.php3
-	$s_account_reset_protected_msg = "Account beschermt. Wachtwoord kan niet op begininstellingen worden teruggezet.";
-	$s_account_reset_msg = "Account wachtwoord op begininstellingen terug gezet...";
-	$s_account_reset_msg2 = "Account password set to blank...";
+	$s_account_reset_protected_msg = "Account is beschermd. Wachtwoord kan niet op begininstellingen worden teruggezet.";
+	$s_account_reset_msg = "Account wachtwoord op begin instellingen gezet...";
+	$s_account_reset_msg2 = "Account wachtwoord uitgeschakeld...";
 
 	# manage_user_update.php3
-	$s_manage_user_protected_msg = "Account beschermt. Toegangsniveau en beschermt tegen activeren. Anders is account ge-updated...";
-	$s_manage_user_updated_msg = "Account succesvol ge-updated...";
+	$s_manage_user_protected_msg = "Account beschermd. Toegangsniveau en beschermt tegen activeren. Anders is account ge-updated...";
+	$s_manage_user_updated_msg = "Account bijgewerkt...";
 
 	# menu_inc.php
 	$s_main_link = "Welkom";
-	$s_view_bugs_link = "Bekijk opdrachten";
-	$s_report_bug_link = "Rapporteer opdracht";
+	$s_view_bugs_link = "Bekijk bugs";
+	$s_report_bug_link = "Rapporteer bug";
 	$s_summary_link = "Samenvatting";
-	$s_account_link = "Account";
-	$s_users_link = "Users";
+	$s_account_link = "Accounts";
+	$s_users_link = "Gebruikers";
 	$s_manage_link = "Beheer";
-	$s_edit_news_link = "Pas Nieuws aan";
+	$s_edit_news_link = "Aanpassen nieuws";
 	$s_docs_link = "Documenten";
-	$s_logout_link = "Log uit";
+	$s_logout_link = "Uitloggen";
 
 	# meta_inc.php
 
 	# news_add.php3
-	$s_news_added_msg = "News item added...";
+	$s_news_added_msg = "Nieuwsbericht toegevoegd...";
 
 	# news_delete.php3
-	$s_news_deleted_msg = "Verwijderde nieuws item...";
+	$s_news_deleted_msg = "Nieuwsbericht is verwijderd...";
 
 	# news_delete_page.php3
-	$s_delete_news_sure_msg = "Weet u zeker dat u dit nieuws item wilt verwijderen?";
-	$s_delete_news_item_button = "Verwijder nieuws item";
+	$s_delete_news_sure_msg = "Weet u zeker dat u dit nieuwsbericht wilt verwijderen?";
+	$s_delete_news_item_button = "Verwijder nieuwsbericht";
 
 	# news_edit_page.php3
-	$s_edit_news_title = "Pas Nieuws aan";
+	$s_edit_news_title = "Pas nieuws aan";
 	$s_headline = "Koptekst";
-	$s_body = "tekst";
-	$s_update_news_button = "Update Nieuws";
+	$s_body = "Tekst";
+	$s_update_news_button = "Update nieuws";
 
 	# news_menu_page.php3
-	$s_add_news_title = "Voeg Nieuws toe";
-	$s_do_not_use = "Niet gebruiken";
-	$s_post_to = "Posten naar";
-	$s_post_news_button = "Post Nieuws";
-	$s_edit_or_delete_news_title = "Pas Nieuws aan of verwijder Nieuws";
-	$s_edit_post = "Pas Post aan";
-	$s_delete_post = "Verwijder Post";
-	$s_select_post = "Selecteer Post";
+	$s_add_news_title = "Toevoegen bericht";
+	$s_do_not_use = "Geen gebruik maken van";
+	$s_post_to = "Bij project";
+	$s_post_news_button = "Post bericht";
+	$s_edit_or_delete_news_title = "Aanpassen of verwijderen nieuws";
+	$s_edit_post = "Aanpassen bericht";
+	$s_delete_post = "Verwijder bericht";
+	$s_select_post = "Selecteer bericht";
 
 	# news_update.php3
 	$s_news_updated_msg = "Nieuws item ge-updated...";
 
 	# news_view_page.php3
-	$s_back_link = "Back";
+	$s_back_link = "terug";
 
 	# proj_doc_add.php3
-	$s_file_uploaded_msg = "File upload successful";
+	$s_file_uploaded_msg = "Bestand is ge-upload";
 
 	# proj_doc_add_page.php3
-	$s_upload_file_title = "Upload File";
-	$s_title = "Title";
+	$s_upload_file_title = "Upload bestand";
+	$s_title = "Titel";
 
 	# proj_doc_delete.php3
-	$s_project_file_deleted_msg = "Project file deleted";
+	$s_project_file_deleted_msg = "Project bestand verwijderd";
 
 	# proj_doc_delete_page.php3
-	$s_confirm_file_delete_msg = "Are you sure you wish to delete this file?";
+	$s_confirm_file_delete_msg = "Weet u zeker dat u dit bestand wil verwijderen?";
 
 	# proj_doc_edit_page.php3
-	$s_filename = "Filename";
-	$s_file_update_button = "Update File";
-	$s_file_delete_button = "Delete File";
+	$s_filename = "Bestandsnaam";
+	$s_file_update_button = "Bijwerken bestand";
+	$s_file_delete_button = "Verwijder bestand";
 
 	# proj_doc_page.php3
-	$s_project_documentation_title = "Project Documentation";
-	$s_user_documentation = "User Documentation";
-	$s_project_documentation = "Project Documentation";
-	$s_add_file = "Add File";
+	$s_project_documentation_title = "Project documentatie";
+	$s_user_documentation = "Gebruikers documentatie";
+	$s_project_documentation = "Project documentatie";
+	$s_add_file = "Toevoegen bestand";
 
 	# proj_doc_update.php3
-	$s_project_document_updated = "Project update successful";
+	$s_project_document_updated = "Project is bijgewerkt";
 
 	# proj_user_add.php3
-	$s_project_user_added_msg = "Successfully added user to project";
+	$s_project_user_added_msg = "Gebruiker is aan project toegevoegd";
 
 	# proj_user_delete.php3
-	$s_project_removed_user_msg = "Successfully removed user from project";
+	$s_project_removed_user_msg = "Gebruiker van project verwijderd";
 
 	# proj_user_delete_page.php3
-	$s_remove_user_sure_msg = "Are you sure you wish to remove this user?";
+	$s_remove_user_sure_msg = "Weet u zeker dat u deze gebruiker wil verwijderen?";
 
 	# proj_user_menu_page.php3
-	$s_create_user_message = "NOTE: The user must already exist before adding to the project";
-	$s_automatic_access_level = "Automatic access level";
-	$s_add_user_title = "Add user to project";
-	$s_add_user_button = "Add User";
-	$s_project_selection_title = "Project Selection";
-	$s_remove_link = "remove";
-	$s_automatic_access = "Users With Automatic Access";
+	$s_create_user_message = "Let op: Een gebruiker moet bestaan voordat deze aan het project toegevoegd kan worden";
+	$s_automatic_access_level = "Automatisch toegangs nivo";
+	$s_add_user_title = "Toevoegen gebruiker aan project";
+	$s_add_user_button = "Toevoegen gebruiker";
+	$s_project_selection_title = "Project selectie";
+	$s_remove_link = "verwijder";
+	$s_automatic_access = "Gebruikers met automatische toegang";
 
 	# proj_user_update.php3
-	$s_updated_user_msg = "Successfully updated user";
+	$s_updated_user_msg = "Gebruiker gegevens zijn bijgewerkt";
 
 	# report_add.php3
 	$s_must_enter_category = "U moet een categorie selecteren";
-	$s_must_enter_severity = "U moet een serieusheid selecteren";
+	$s_must_enter_severity = "U moet een omvang selecteren";
 	$s_must_enter_reproducibility = "U moet een reproduceerbaarheid selecteren";
 	$s_must_enter_summary = "U moet een samenvatting invoeren";
 	$s_must_enter_description = "U moet een beschrijving invoeren";
-	$s_report_more_bugs = "Report More Bugs";
-	$s_submission_thanks_msg = "Thank you for your submission";
+	$s_report_more_bugs = "Rapporteer meer bugs";
+	$s_submission_thanks_msg = "Bedankt voor uw rapport";
 
 	# report_bug_advanced_page.php3
-	$s_simple_report_link = "Simpel rapport";
+	$s_simple_report_link = "Eenvoudig rapport";
 	$s_enter_report_details_title = "Voer rapport details in";
 	$s_required = "Verplicht";
 	$s_select_category = "Selecteer categorie";
 	$s_select_reproducibility = "Selecteer reproduceerbaarheid";
-	$s_select_severity = "Selecteer Serieusheid";
-	$s_or_fill_in = "OR vul in";
-	$s_assign_to = "Wijs toe aan";
+	$s_select_severity = "Selecteer omvang";
+	$s_or_fill_in = "of vul in";
+	$s_assign_to = "Toewijzen aan";
 	$s_additional_information = "Additionele informatie";
 	$s_submit_report_button = "Verstuur rapport";
-	$s_check_report_more_bugs = "check to report more bugs";
+	$s_check_report_more_bugs = "rapporteer meer bugs";
 
 	# report_bug_page.php3
-	$s_advanced_report_link = "Gevorderd rapport";
-	$s_report_stay = "Report Stay";
+	$s_advanced_report_link = "Uitgebreid rapport";
+	$s_report_stay = "Blijven rapporteren";
 
 	# set_project.php3
-	$s_selected_project = "Selected project";
-	$s_valid_project_msg = "You must choose a valid project";
+	$s_selected_project = "Geselecteerd project";
+	$s_valid_project_msg = "U moet een geldig project kiezen";
 
 	# show_source_page.php3
 	$s_show_source_for_msg = "Laat bron zien voor";
@@ -549,77 +551,77 @@
 	$s_not_supported_part2 = "van php ondersteunt niet";
 
 	# signup.php3
-	$s_invalid_email = "IS EEN ONGELDIG EMAIL ADRES";
-	$s_duplicate_username = "GEBRUIKERSNAAM IS AL IN GEBRUIK. KIES EEN ANDERE GEBRUIKERSNAAM";
-	$s_account_create_fail = "FOUT TIJDENS AANMAKEN NIEUWE GEBRUIKERS ACCOUNT";
-	$s_account_added = "Account was successfully added.";
-	$s_password_emailed_msg = "Your password will be emailed to you.";
-	$s_no_reponse_msg = "If you do not respond within a week your account may be deleted.";
+	$s_invalid_email = "is geen geldig e-mail adres";
+	$s_duplicate_username = "De door u opgegeven gebruikersnaam is al in gebruik. Kies A.U.B. een andere gebruikersnaam";
+	$s_account_create_fail = "FOUT: aanmaken niet gebruikers account mislukt";
+	$s_account_added = "Account is toegevoegd.";
+	$s_password_emailed_msg = "Uw wachtwoord wordt via e-mail naar u verzonden.";
+	$s_no_reponse_msg = "Als u niet binnen een week antwoord kan uw account verwijderd worden.";
 
 	# signup_page.php3
-	$s_signup_info = "Kies uw login naam en vul een geldig email adres in.  Een toevallig gegenereerd adres zal naar uw adres worden gezonden.";
-	$s_signup_title = "Schrijf in";
-	$s_signup_button = "Schrijf in";
+	$s_signup_info = "Kies een login naam en vul een geldig e-mail adres in. Een willekeurig gekozen wachtwoord wordt naar u verzonden";
+	$s_signup_title = "Inschrijven";
+	$s_signup_button = "Inschrijven";
 
 	# site_settings_edit_page.php3
-	$s_edit_site_settings_title = "Edit Site Settings";
-	$s_save_settings_button = "Save Settings";
+	$s_edit_site_settings_title = "Wijzig site instellingen";
+	$s_save_settings_button = "Opslaan instellingen";
 
 	# site_settings_page.php3
-	$s_site_settings_title = "Site Settings";
-	$s_system_info_link = "System Info";
-	$s_site_settings_link = "Site Settings";
+	$s_site_settings_title = "Site instellingen";
+	$s_system_info_link = "Systeem informatie";
+	$s_site_settings_link = "Site instellingen";
 
 	# site_settings_update.php3
-	$s_site_settings_updated_msg = "Site settings have been updated";
+	$s_site_settings_updated_msg = "Site instellingen zijn bijgewerkt";
 
 	# summary_page.php3
 	$s_summary_title = "Samenvatting";
-	$s_summary_jpgraph_link = "Advanced summary";
+	$s_summary_jpgraph_link = "Uitgebreid overzicht";
 	$s_by_status = "naar status";
 	$s_by_date = "naar datum";
-	$s_by_severity = "naar serieusheid";
-	$s_by_resolution = "naar resolutie";
+	$s_by_severity = "naar omvang";
+	$s_by_resolution = "naar afronding";
 	$s_by_category = "naar categorie";
 	$s_by_priority = "naar prioriteit";
-	$s_by_developer = "by developer";
-	$s_by_reporter ="by reporter";
-	$s_time_stats = "tijd status voor afgeronde opdrachten (dagen)";
-	$s_longest_open_bug = "langst openstaande opdracht";
+	$s_by_developer = "naar ontwikkelaar";
+	$s_by_reporter ="naar rapporteur";
+	$s_time_stats = "looptijd voor afgeronde bugs (dagen)";
+	$s_longest_open_bug = "langst openstaande bug";
 	$s_longest_open = "langst openstaand";
 	$s_average_time = "gemiddelde tijd";
 	$s_total_time = "totale tijd";
-	$s_developer_stats = "ontwikkel status";
-	$s_reporter_stats = "reporter stats";
-	$s_orct = "(open/resolved/closed/total)";
+	$s_developer_stats = "ontwikkelaar status";
+	$s_reporter_stats = "rapporteur status";
+	$s_orct = "(open/afgerond/gesloten/totaal)";
 
 	# view_all_bug_page.php3
 	$s_any = "elke";
 	$s_show = "Laat zien";
 	$s_changed = "Veranderd(uren)";
-	$s_hide_closed = "Verberg afgeronde opdrachten";
-	$s_viewing_bugs_title = "Bekijken opdrachten";
+	$s_hide_closed = "Verberg afgeronde bugs";
+	$s_viewing_bugs_title = "Bekijken bugs";
 	$s_updated = "Ge-updated";
 
 	# view_all_inc.php
-	$s_none = "none";
-	$s_search ="Search";
-	$s_view_prev_link = "View Prev";
-	$s_view_next_link = "View Next";
+	$s_none = "geen";
+	$s_search ="Zoeken";
+	$s_view_prev_link = "vorige";
+	$s_view_next_link = "volgende";
 
 	# view_bug_advanced_page.php3
-	$s_view_simple_link = "bekijk Simpel";
-	$s_viewing_bug_advanced_details_title = "Bekijk gevorderde opdrachten details";
+	$s_view_simple_link = "eenvoudig overzicht";
+	$s_viewing_bug_advanced_details_title = "Bekijk uitgebreide bug details";
 	$s_product_build = "Product gemaakt";
 	$s_system_profile = "Systeem beschrijving";
-	$s_update_bug_button = "Update opdracht";
+	$s_update_bug_button = "Update bug";
 	$s_bug_assign_button    = "Wijs toe aan mij";
-	$s_reopen_bug_button = "Heropen opdracht";
-	$s_attached_files = "Attached Files";
+	$s_reopen_bug_button = "Heropen bug";
+	$s_attached_files = "Bijgevoegde bestanden";
 
 	# view_bug_inc.php
 
 	# view_bug_page.php3
-	$s_view_advanced_link = "Bekijk Gevorderd";
-	$s_viewing_bug_simple_details_title = "Bekijk opdracht details";
+	$s_view_advanced_link = "uitgebreid overzicht";
+	$s_viewing_bug_simple_details_title = "Bekijk bug details";
 ?>
