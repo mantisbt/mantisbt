@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.34 2004-08-05 23:47:46 jlatour Exp $
+	# $Id: login_select_proj_page.php,v 1.35 2004-09-26 12:15:26 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,7 +28,7 @@
 <tr>
 	<td class="form-title" colspan="2">
 		<input type="hidden" name="ref" value="<?php echo htmlspecialchars( $f_ref ) ?>" />
-		<?php echo lang_get( 'login_title' ) ?>
+		<?php echo lang_get( 'select_project_button' ) ?>
 	</td>
 </tr>
 <tr class="row-1">
