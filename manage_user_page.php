@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.55 2004-08-12 23:15:27 vboctor Exp $
+	# $Id: manage_user_page.php,v 1.56 2004-12-08 12:52:59 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
 
 	require_once( $t_core_path . 'icon_api.php' );
@@ -93,9 +93,12 @@
 <?php
 for ($i=0;$i<$new_user_count;$i++) {
 	$row = db_fetch_array( $result );
-	$t_username = $row['username'];
 
-	echo $t_username.' : ';
+	if ( $i > 0 ) {
+		echo ' : ';
+	}
+
+	echo '<a href="manage_user_edit_page.php?user_id=', $row['id'], '">', $row['username'], '</a>';
 }
 ?>
 	</td>
@@ -108,7 +111,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 	$query = "SELECT *
 		FROM $t_user_table
 		WHERE login_count=0
-		ORDER BY date_created";
+		ORDER BY date_created DESC";
 	$result = db_query( $query );
 	$user_count = db_num_rows( $result );
 ?>
@@ -124,9 +127,12 @@ for ($i=0;$i<$new_user_count;$i++) {
 <?php
 	for ($i=0;$i<$user_count;$i++) {
 		$row = db_fetch_array( $result );
-		$t_username = $row['username'];
 
-		echo $t_username.' : ';
+		if ( $i > 0 ) {
+			echo ' : ';
+		}
+
+		echo '<a href="manage_user_edit_page.php?user_id=', $row['id'], '">', $row['username'], '</a>';
 	}
 ?>
 	</td>

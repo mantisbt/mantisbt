@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.20 2004-08-20 13:18:09 thraxisp Exp $
+	# $Id: manage_user_create.php,v 1.21 2004-12-08 12:52:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -58,9 +58,15 @@
 		}
 	}
 
-	user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $f_realname );
+	$t_cookie = user_create( $f_username, $f_password, $f_email, $f_access_level, $f_protected, $f_enabled, $f_realname );
 
-	$t_redirect_url = 'manage_user_page.php';
+	if ( $t_cookie === false ) {
+		$t_redirect_url = 'manage_user_page.php';
+	} else {
+		# ok, we created the user, get the row again
+		$t_user_id = user_get_id_by_name( $f_username );
+		$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $t_user_id;
+	}
 
 	html_page_top1();
 	html_meta_redirect( $t_redirect_url );
