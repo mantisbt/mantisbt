@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.204 $
-	# $Author: prichards $
-	# $Date: 2004-08-21 13:52:18 $
+	# $Revision: 1.205 $
+	# $Author: bigbadger $
+	# $Date: 2004-09-01 18:12:39 $
 	#
-	# $Id: strings_english.txt,v 1.204 2004-08-21 13:52:18 prichards Exp $
+	# $Id: strings_english.txt,v 1.205 2004-09-01 18:12:39 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -266,7 +266,7 @@ $s_new_account_subject = 'Account registration';
 $s_new_account_greeting = 'Thank you for registering. You have account with username \'';
 $s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
 $s_new_account_username = 'Username: ';
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
+$s_new_account_message = 'If you didn\'t request any registration, ignore this message and nothing will happen.' . "\n\n";
 $s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
 $s_new_account_email = 'E-mail: ';
 $s_new_account_IP = 'Remote IP address: ';
@@ -280,7 +280,7 @@ $s_email_notification_title_for_status_bug_acknowledged = 'The following issue h
 $s_email_notification_title_for_status_bug_confirmed = 'The following issue has been CONFIRMED.';
 $s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
 $s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following isse has been CLOSED';
+$s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
 
 $s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
 $s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';

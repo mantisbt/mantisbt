@@ -12,11 +12,11 @@
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# German: Dr. Jürgen Kehrel, jkehrel@kehrel.de
 	# -------------------------------------------------
-	# $Revision: 1.109 $
+	# $Revision: 1.110 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:57 $
+	# $Date: 2004-09-01 18:12:40 $
 	#
-	# $Id: strings_german.txt,v 1.109 2004-08-26 17:40:57 bigbadger Exp $
+	# $Id: strings_german.txt,v 1.110 2004-09-01 18:12:40 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -46,7 +46,7 @@ $s_login_anonymously = 'Anonym anmelden';
 $s_anonymous = 'Anonymous';
 $s_jump_to_bugnotes = 'Zu Notizen wechseln';
 $s_public_project_msg = 'Dieses Projekt ist ÖFFENTLICH. Alle Benutzer haben Zugang zu diesem Projekt.';
-$s_private_project_msg = 'Dieses Prokjekt ist PRIVAT. Nur Administratoren und berechtigte Benutzer haben Zugang.';
+$s_private_project_msg = 'Dieses Projekt ist PRIVAT. Nur Administratoren und berechtigte Benutzer haben Zugang.';
 $s_access_level_project = 'Projekt Zugangsstufe';
 $s_view_submitted_bug_link = 'Zeige eingetragenes Problem';
 $s_assigned_projects = 'Zugewiesene Projekte';
@@ -158,12 +158,12 @@ $s_bugnote_description = 'Problemnotiz Beschreibung';
 $s_error_no_proceed = 'Bitte benutzen Sie die "Zurück"-Taste Ihres Browsers, um auf die vorhergehende Seite zurückzukehren. Dort können Sie das hier angezeigte Problem korrigieren oder eine andere Aktion ausführen. Über das Menü können Sie auch direkt in eine neue Abteilung wechseln.';
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'Ein Fehler ist während dieser Aktion aufgetreten. Sie können dies dem Ihnen zugeordneten Adminstrator mitteilen.';
+$MANTIS_ERROR[ERROR_GENERIC] = 'Ein Fehler ist wa"hrend dieser Aktion aufgetreten. Sie ko"nnen dies dem Ihnen zugeordneten Adminstrator mitteilen.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL Fehler entdeckt. Melden Sie dieses an ';
 $MANTIS_ERROR[ERROR_REPORT] = 'Während des Reports trat ein Fehler auf.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Keine Datei angegeben';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Dieser Dateityp ist nicht erlaubt';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Das Verzeichnis exisitiert nicht. Überprüfen Sie die Einstellungen.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Das Verzeichnis existiert nicht. Überprüfen Sie die Einstellungen.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Dies ist eine doppelte Datei. Löschen Sie bitte die erste Datei.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ein Projekt mit diesem Namen ist bereits vorhanden.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Ein notwendiges Feld war leer. Überprüfen Sie Ihre Eingabe.';
@@ -178,7 +178,7 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette \'%s\' nicht gefunden
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Problemnotiz nicht gefunden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt nicht gefunden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Datenbankfeld nicht gefunden.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	 = 'Keine Verbindung zum FTP-Serverr.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Keine Verbindung zum FTP-Server.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ein Projekt mit diesem Namen ist bereits vorhanden. Gehen Sie zurück und wählen Sie einen anderen Namen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ungültiger Projektname.  Projektnamen können nicht leer sein.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	 = 'Benutzer nicht gefunden.';
@@ -217,7 +217,7 @@ $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Benutzer hat nicht die erf
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsor-Unterstützung nicht aktiviert.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsor %d nicht gefunden.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorenschaft (%s) liegt unter dem Mindestbetrag (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorschaft (%s) liegt unter dem Mindestbetrag (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Verwalter hat nicht die benötigten Zugangsrechte für gesponserte Probleme.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zugang verweigert: Zuweisung gesponserter Probleme erfordert höhere Nutzerrechte.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
@@ -960,7 +960,7 @@ $s_sponsor_issue = 'Sponsor Problem';
 $s_add_custom_field_button = 'Neues benutzerdefiniertes Feld';
 $s_delete_custom_field_button = 'Benutzerdefiniertes Feld löschen';
 $s_delete_custom_field_everywhere = 'dieses benutzerdefinierte Feld überall löschen';
-$s_update_custom_field_button = 'Benutzerdefiniertes Feld aktuallisieren';
+$s_update_custom_field_button = 'Benutzerdefiniertes Feld aktualisieren';
 $s_add_existing_custom_field = 'dieses bestehende benutzerdefinierte Feld hinzufügen';
 $s_edit_custom_field_title = 'Benutzerdefiniertes Feld bearbeiten';
 $s_custom_field = 'Feld';
