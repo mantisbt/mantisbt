@@ -107,7 +107,7 @@
 </div>
 <? ### Bugnotes END ?>
 
-<? if (( $v_status < RESOLVED )||( isset( $f_resolve_note ) )) { ?>
+<? if ((( $v_status < RESOLVED )||( isset( $f_resolve_note ) ))&&( access_level_check_greater_or_equal( REPORTER ) )) { ?>
 <? ### Bugnote Add Form BEGIN ?>
 <p>
 <div align="center">
