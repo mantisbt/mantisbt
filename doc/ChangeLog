@@ -16,8 +16,8 @@ Mantis ChangeLog
  * Fix: error deleting bug files fixed
  * Fix: display logical filename rather than file system filename for project documents in project document edit page.
  * Fix #838:  Show attached images as images instead of links.
- * Fix #2944: Project files are not deleted when project is deleted.
  * Fix #2939: Confusing file names for uploaded project documents.
+ * Fix #2944: Project files are not deleted when project is deleted.
  * Fix #2953: View all bugs page empty (temporary fix by disabling compression when running on an IIS server).
  * Fix #2954: Bgcolor attribute on TD in view_all_bug_page (moved to TR) [optimisation]
  * Fix #2956: db_insert_id() did not use mysql_insert_id(), but executed another query (which is probably slower)
@@ -36,6 +36,7 @@ Mantis ChangeLog
  * Fix #2989: Allow managers to manage bugnotes.
  * Fix #2992: Unable to attach files to bugs (or documents to projects) [applicable to Windows servers]
  * Fix #2993: Read/Write access levels not checked in custom fields.
+ * Fix $3001: Users cannot delete/edit their own bugnotes.
  * Fix #3005: custom_field_api.php does not work with PHP 4.0.6.
  * DB Upgrade: Added "id" primary key to bug history table (needed for #2980).
  * Languages: Updated German localisation.
