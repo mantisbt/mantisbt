@@ -146,6 +146,7 @@
 	define( 'ERROR_PROTECTED_ACCOUNT',   12 );
 	define( 'ERROR_ACCESS_DENIED',       13 );
 	define( 'ERROR_COOKIES_DISABLED',    14 );
+	define( 'ERROR_UPLOAD_FAILURE',    15 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

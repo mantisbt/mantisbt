@@ -7,11 +7,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.37 $
-	# $Author: jlatour $
-	# $Date: 2002-08-21 14:11:39 $
+	# $Revision: 1.38 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-21 22:46:29 $
 	#
-	# $Id: strings_norwegian.txt,v 1.37 2002-08-21 14:11:39 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.38 2002-08-21 22:46:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -138,6 +138,7 @@
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEIL: En påkrevd felt er ikke fylt ut. Vennligst sjekk feltene for manglende input.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEIL: Denne kontoen er beskyttet.  Du kan ikke bruke kontoen inntil beskyttelsen er fjernet.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	# General Strings
 	$s_go_back = 'Tilbake';

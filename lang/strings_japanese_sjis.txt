@@ -7,11 +7,11 @@
 
 	# Japanese: Takeshi Hachikawa, seihachi@anet.ne.jp
 	# -------------------------------------------------
-	# $Revision: 1.27 $
-	# $Author: jlatour $
-	# $Date: 2002-08-17 15:22:37 $
+	# $Revision: 1.28 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-21 22:46:29 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.27 2002-08-17 15:22:37 jlatour Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.28 2002-08-21 22:46:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -138,6 +138,7 @@
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "エラー：必須フィールドが入力されていません。入力を確認して下さい。";
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "エラー：権限がありません。アクセスする為には、権限を上げて下さい。";
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	# General Strings
 	$s_go_back = "戻る";

@@ -8,11 +8,11 @@
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
 	# -------------------------------------------------
-	# $Revision: 1.38 $
-	# $Author: jlatour $
-	# $Date: 2002-08-21 14:11:39 $
+	# $Revision: 1.39 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-21 22:46:29 $
 	#
-	# $Id: strings_spanish.txt,v 1.38 2002-08-21 14:11:39 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.39 2002-08-21 22:46:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,6 +139,7 @@
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: Un campo necesario estaba vacio. Por favor compruebe los datos.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: Esta cuenta esta protegida. Ud. no tiene permitido accesar esto hasta que la proteccion de la cuenta haya sido retirada.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	# General Strings
 	$s_go_back = 'Volver';

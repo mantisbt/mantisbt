@@ -10,11 +10,11 @@
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# -------------------------------------------------
-	# $Revision: 1.42 $
-	# $Author: jlatour $
-	# $Date: 2002-08-21 14:11:38 $
+	# $Revision: 1.43 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-21 22:46:29 $
 	#
-	# $Id: strings_german.txt,v 1.42 2002-08-21 14:11:38 jlatour Exp $
+	# $Id: strings_german.txt,v 1.43 2002-08-21 22:46:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -142,6 +142,7 @@
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	# General Strings
 	$s_go_back = 'Zurück';

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.66 $
-	# $Author: jlatour $
-	# $Date: 2002-08-21 14:11:38 $
+	# $Revision: 1.67 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-21 22:46:29 $
 	#
-	# $Id: strings_english.txt,v 1.66 2002-08-21 14:11:38 jlatour Exp $
+	# $Id: strings_english.txt,v 1.67 2002-08-21 22:46:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -159,6 +159,7 @@
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	# General Strings
 	$s_go_back = 'Go Back';

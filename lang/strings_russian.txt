@@ -8,11 +8,11 @@
 	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
 	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
 	# -------------------------------------------------
-	# $Revision: 1.35 $
-	# $Author: jlatour $
-	# $Date: 2002-08-17 15:22:38 $
+	# $Revision: 1.36 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-21 22:46:29 $
 	#
-	# $Id: strings_russian.txt,v 1.35 2002-08-17 15:22:38 jlatour Exp $
+	# $Id: strings_russian.txt,v 1.36 2002-08-21 22:46:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -118,6 +118,7 @@
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ОШИБКА: Необходимые поля не заполнены. Проверьте правильность ввода.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ОШИБКА: Этот бюджет защищен. Вы не можете получить к нему доступ пока защита не будет снята.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	# General Strings
 	$s_go_back = 'Назад';

@@ -8,11 +8,11 @@
 	# Czech: Pavel Loupal, Pavel.Loupal@seznam.cz
 	# Code page: ISO-8259-2
 	# -------------------------------------------------
-	# $Revision: 1.25 $
-	# $Author: jlatour $
-	# $Date: 2002-08-17 15:22:36 $
+	# $Revision: 1.26 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-21 22:46:29 $
 	#
-	# $Id: strings_czech.txt,v 1.25 2002-08-17 15:22:36 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.26 2002-08-21 22:46:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,6 +139,7 @@
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	# General Strings
 	$s_go_back = 'Zpìt';

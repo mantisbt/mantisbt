@@ -20,6 +20,11 @@
 	$result = 0;
 	$good_upload = 0;
 	$disallowed = 0;
+
+	if( !isset( $HTTP_POST_FILES['f_file'] ) ) {
+		print_mantis_error( ERROR_UPLOAD_FAILURE );
+	}
+
 	extract( $HTTP_POST_FILES['f_file'], EXTR_PREFIX_ALL, 'f' );
 
 	if ( !file_type_check( $f_file_name ) ) {

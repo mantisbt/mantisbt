@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.39 $
-	# $Author: jlatour $
-	# $Date: 2002-08-17 15:22:37 $
+	# $Revision: 1.40 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-21 22:46:29 $
 	#
-	# $Id: strings_polish.txt,v 1.39 2002-08-17 15:22:37 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.40 2002-08-21 22:46:29 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -139,6 +139,7 @@
 	$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'B£¡D: Wymagane pole nie jest wype³nione. Sprawd¼ wprowadzone dane.';
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'B£¡D: To konto jest zabezpieczone. Nie masz praw dostêpu do tego konta póki zabezpieczenie jest aktywne.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
 
 	# General Strings
 	$s_go_back = 'Powrót';
