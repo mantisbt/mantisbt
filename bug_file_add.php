@@ -20,6 +20,7 @@
 	$result = 0;
 	$good_upload = 0;
 	$disallowed = 0;
+	$upload_error = 0;
 
 	if ( !isset( $HTTP_POST_FILES['f_file'] ) ) {
 		print_mantis_error( ERROR_UPLOAD_FAILURE );
@@ -27,7 +28,9 @@
 
 	extract( $HTTP_POST_FILES['f_file'], EXTR_PREFIX_ALL, 'f' );
 
-	if ( !file_type_check( $f_file_name ) ) {
+	if ( $HTTP_POST_FILES['f_file']['error'] == 1 ) {
+		$upload_error = 1;
+	} else if ( !file_type_check( $f_file_name ) ) {
 		$disallowed = 1;
 	} else if ( is_uploaded_file( $f_file ) ) {
 		$good_upload = 1;
@@ -93,7 +96,9 @@
 <p>
 <div align="center">
 <?php
-	if ( 1 == $disallowed ) {
+	if ( 1 == $upload_error ) {
+		PRINT $MANTIS_ERROR[ERROR_FILE_TOO_BIG].'<p>';
+	} else if ( 1 == $disallowed ) {
 		PRINT $MANTIS_ERROR[ERROR_FILE_DISALLOWED].'<p>';
 	} else if ( 0 == $good_upload ) {
 		PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED].'<p>';

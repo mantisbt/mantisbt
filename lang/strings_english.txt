@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.68 $
+	# $Revision: 1.69 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-21 23:21:29 $
+	# $Date: 2002-08-22 00:02:30 $
 	#
-	# $Id: strings_english.txt,v 1.68 2002-08-21 23:21:29 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.69 2002-08-22 00:02:30 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -159,7 +159,8 @@
 	$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
 	$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
 	$MANTIS_ERROR[ERROR_COOKIES_DISABLED]   = 'ERROR: Your browser either doesn\'t know how to handle cookies, or refuses to handle them.';
-	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
+	$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  PHP file uploads may be disabled.  Please ask your admin to run the admin_check script to debug this problem.';
+	$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
 
 	# General Strings
 	$s_go_back = 'Go Back';
