@@ -45,7 +45,7 @@
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="none" <?php check_selected( $f_assign_id, 'none' ); ?>><?php echo $s_none ?></option>
 			<option value="any"></option>
-			<?php #print_assign_to_option_list( $f_assign_id ) ?>
+			<?php print_assign_to_option_list( $f_assign_id ) ?>
 		</select>
 	</td>
 	<td>
