@@ -5,4 +5,4 @@
 	# See the files README and LICENSE for details
 ?>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="expires" CONTENT="0">
+<META HTTP-EQUIV="expires" CONTENT="<? echo $g_content_expire ?>">

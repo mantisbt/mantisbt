@@ -44,7 +44,7 @@
 		extract( $row, EXTR_PREFIX_ALL, "v" );
 		$v_headline = string_display( $v_headline );
 		$v_body = string_display_with_br( $v_body );
-		$v_date_posted = date( "m-d H:i", sql_to_unix_time( $v_date_posted ) );
+		$v_date_posted = date( $g_normal_date_format, sql_to_unix_time( $v_date_posted ) );
 
 		## grab the username and email of the poster
 	    $query = "SELECT username, email
