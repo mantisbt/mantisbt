@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.36 2004-12-15 21:40:44 marcelloscata Exp $
+	# $Id: proj_doc_edit_page.php,v 1.37 2004-12-18 13:53:35 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -22,11 +22,12 @@
 		access_denied();
 	}
 
-	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
-
 	$f_file_id = gpc_get_int( 'file_id' );
 
 	$c_file_id = db_prepare_int( $f_file_id );
+	$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
+
+	access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 	$query = "SELECT *
 			FROM $g_mantis_project_file_table

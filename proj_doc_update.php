@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_update.php,v 1.24 2004-12-15 21:40:44 marcelloscata Exp $
+	# $Id: proj_doc_update.php,v 1.25 2004-12-18 13:53:35 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -22,12 +22,14 @@
 		access_denied();
 	}
 
-	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
-
 	$f_file_id = gpc_get_int( 'file_id' );
 	$f_title = gpc_get_string( 'title' );
 	$f_description	= gpc_get_string( 'description' );
 	$f_file = gpc_get_file( 'file' );
+
+	$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
+
+	access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 	if ( is_blank( $f_title ) ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );

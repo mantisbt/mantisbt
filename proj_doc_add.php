@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add.php,v 1.47 2004-12-15 21:40:43 marcelloscata Exp $
+	# $Id: proj_doc_add.php,v 1.48 2004-12-18 13:53:35 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	require_once( 'core.php' );
@@ -16,17 +16,11 @@
 	require_once( $t_core_path.'file_api.php' );
 
 	# Check if project documentation feature is enabled.
-	if ( OFF == config_get( 'enable_project_documentation' ) ||
-		!file_is_uploading_enabled() ||
-		!file_allow_project_upload() ) {
+	if ( OFF == config_get( 'enable_project_documentation' ) ) {
 		access_denied();
 	}
 
 	access_ensure_project_level( config_get( 'upload_project_file_threshold' ) );
-
-	# @@@@ (thraxisp) this needs a filter for project_id == ALL_PROJECTS
-	#  it fails later when it tries to find the 'filepath' to store the document
-	#  see #4664
 
 	$f_title = gpc_get_string( 'title' );
 	$f_description = gpc_get_string( 'description' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.62 2004-12-18 09:50:46 marcelloscata Exp $
+	# $Id: file_api.php,v 1.63 2004-12-18 13:53:35 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -523,7 +523,14 @@
 		$c_file_type	= db_prepare_string( $p_file_type );
 		$c_title = db_prepare_string( $p_title );
 		$c_desc = db_prepare_string( $p_desc );
+
+		if( $t_project_id == ALL_PROJECTS ) {
+			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		}
+		else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
+			if( $t_file_path == '' ) $t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		}
 		$c_file_path = db_prepare_string( $t_file_path );
 		$c_new_file_name = db_prepare_string( $p_file_name );
 

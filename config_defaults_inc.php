@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.233 2004-12-18 13:44:06 prichards Exp $
+	# $Id: config_defaults_inc.php,v 1.234 2004-12-18 13:53:35 marcelloscata Exp $
 	# --------------------------------------------------------
 
 
@@ -697,6 +697,9 @@
 	# prefix to be used for the file system names of files uploaded to projects.
 	# Eg: doc-001-myprojdoc.zip
 	$g_document_files_prefix = 'doc';
+
+	# absolute path to the default upload folder.  Requires trailing / or \
+	$g_absolute_path_default_upload_folder = '';
 
 	############################
 	# Mantis HTML Settings
