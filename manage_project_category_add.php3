@@ -16,7 +16,7 @@
 	}
 
 	### check for empty case or duplicate
-	if ( !empty( $f_category )&&( !is_duplicate_category( $f_category ) ) ) {
+	if ( !empty( $f_category )&&( !is_duplicate_category( $f_category, $f_project_id ) ) ) {
 		### insert category
 		$query = "INSERT
 				INTO $g_mantis_project_category_table
