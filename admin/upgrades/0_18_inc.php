@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.20 2004-08-08 11:39:00 jlatour Exp $
+	# $Id: 0_18_inc.php,v 1.21 2004-08-08 15:46:16 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -181,82 +181,82 @@
 	$upgrades[] = new SQLUpgrade( 
 			'sponsorship-2',
 			'Add sponsorship_total to bug table',
-			"ALTER TABLE mantis_bug_table ADD sponsorship_total INT( 7 ) DEFAULT '0' NOT NULL" );
+			"ALTER TABLE $t_bug_table ADD sponsorship_total INT( 7 ) DEFAULT '0' NOT NULL" );
 
 	$upgrades[] = new SQLUpgrade( 
 			'sponsorship-3',
 			'Add an index on sponsorship_total in bug table',
-			"ALTER TABLE mantis_bug_table ADD INDEX sponsorship_total ( sponsorship_total )" );
+			"ALTER TABLE $t_bug_table ADD INDEX sponsorship_total ( sponsorship_total )" );
 
 	$upgrades[] = new SQLUpgrade( 
 			'fixed_in_version-1',
 			'Add fixed_in_version field to bug table.',
-			"ALTER TABLE mantis_bug_table ADD fixed_in_version VARCHAR( 64 ) NOT NULL AFTER version" );
+			"ALTER TABLE $t_bug_table ADD fixed_in_version VARCHAR( 64 ) NOT NULL AFTER version" );
 
 	$upgrades[] = new SQLUpgrade( 
 			'fixed_in_version-2',
 			'Add index on fixed_in_version field in bug table.',
-			"ALTER TABLE mantis_bug_table ADD INDEX ( fixed_in_version )" );
+			"ALTER TABLE $t_bug_table ADD INDEX ( fixed_in_version )" );
 
 	$upgrades[] = new SQLUpgrade( 
 			'user_realname',
 			'Add real name to user information.',
-			"ALTER TABLE mantis_user_table ADD realname VARCHAR( 64 ) NOT NULL AFTER username" );
+			"ALTER TABLE $t_user_table ADD realname VARCHAR( 64 ) NOT NULL AFTER username" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-1',
 			'Allow custom fields to be set/required for resolve/close/report/update',
-			"ALTER TABLE mantis_custom_field_table ADD display_resolve BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD display_resolve BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-2',
 			'Allow custom fields to be set/required for resolve/close/report/update',
-			"ALTER TABLE mantis_custom_field_table ADD display_close BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD display_close BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-3',
 			'Allow custom fields to be set/required for resolve/close/report/update',
-			"ALTER TABLE mantis_custom_field_table ADD require_report BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD require_report BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-4',
 			'Allow custom fields to be set/required for resolve/close/report/update',
-			"ALTER TABLE mantis_custom_field_table ADD require_update BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD require_update BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-5',
 			'Allow custom fields to be set/required for resolve/close/report/update',
-			"ALTER TABLE mantis_custom_field_table ADD require_resolve BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD require_resolve BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-6',
 			'Allow custom fields to be set/required for resolve/close/report/update',
-			"ALTER TABLE mantis_custom_field_table ADD require_close BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD require_close BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'version_remove_pk',
 			'Remove project_id+version primary key',
-			"ALTER TABLE mantis_project_version_table DROP PRIMARY KEY" );
+			"ALTER TABLE $t_project_version_table DROP PRIMARY KEY" );
 
 	$upgrades[] = new SQLUpgrade(
 			'version_add_version_',
 			'Add id to version table and use it as primary key',
-			"ALTER TABLE mantis_project_version_table ADD id INT( 7 ) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST" );
+			"ALTER TABLE $t_project_version_table ADD id INT( 7 ) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST" );
 
 	$upgrades[] = new SQLUpgrade(
 			'version_add_project_',
 			'Add a unique index for project_id + version combination.',
-			"ALTER TABLE mantis_project_version_table ADD UNIQUE project_version ( project_id , version )" );
+			"ALTER TABLE $t_project_version_table ADD UNIQUE project_version ( project_id , version )" );
 
 	$upgrades[] = new SQLUpgrade(
 			'version_add_descript',
 			'Add description field to versions.',
-			"ALTER TABLE mantis_project_version_table ADD description TEXT NOT NULL" );
+			"ALTER TABLE $t_project_version_table ADD description TEXT NOT NULL" );
 
 	$upgrades[] = new SQLUpgrade(
 			'version_add_released',
 			'Add released flag to determine whether the version was released or still a future release.',
-			"ALTER TABLE mantis_project_version_table ADD released TINYINT( 1 ) DEFAULT '1' NOT NULL" );
+			"ALTER TABLE $t_project_version_table ADD released TINYINT( 1 ) DEFAULT '1' NOT NULL" );
 
 	# MASC RELATIONSHIP
 
@@ -476,81 +476,81 @@
 	$upgrades[] = new SQLUpgrade(
 			'cat_user_id_unsigned',
 			'Change the user_id in mantis_project_category_table to unsigned int.',
-			"ALTER TABLE mantis_project_category_table CHANGE user_id user_id INT( 7 ) UNSIGNED DEFAULT '0' NOT NULL" );
+			"ALTER TABLE $t_project_category_table CHANGE user_id user_id INT( 7 ) UNSIGNED DEFAULT '0' NOT NULL" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-7',
 			'Allow custom fields to be hidden/displayed for report/update',
-			"ALTER TABLE mantis_custom_field_table ADD display_report BOOL NOT NULL default '1'" );
+			"ALTER TABLE $t_custom_field_table ADD display_report BOOL NOT NULL default '1'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-8',
 			'Allow custom fields to be hidden/displayed for report/update',
-			"ALTER TABLE mantis_custom_field_table ADD display_update BOOL NOT NULL default '1'" );
+			"ALTER TABLE $t_custom_field_table ADD display_update BOOL NOT NULL default '1'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-9',
 			'Rename Column',
-			"ALTER TABLE mantis_custom_field_table ADD require_resolved BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD require_resolved BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-10',
 			'Rename Column',
-			"Update mantis_custom_field_table SET require_resolved = require_resolve" );
+			"UPDATE $t_custom_field_table SET require_resolved = require_resolve" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-11',
 			'Rename Column',
-			"ALTER TABLE mantis_custom_field_table DROP require_resolve" );
+			"ALTER TABLE $t_custom_field_table DROP require_resolve" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-12',
 			'Rename Column',
-			"ALTER TABLE mantis_custom_field_table ADD display_resolved BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD display_resolved BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-13',
 			'Rename Column',
-			"Update mantis_custom_field_table SET display_resolved = display_resolve" );
+			"UPDATE $t_custom_field_table SET display_resolved = display_resolve" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-14',
 			'Rename Column',
-			"ALTER TABLE mantis_custom_field_table DROP display_resolve" );
+			"ALTER TABLE $t_custom_field_table DROP display_resolve" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-15',
 			'Rename Column',
-			"ALTER TABLE mantis_custom_field_table ADD display_closed BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD display_closed BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-16',
 			'Rename Column',
-			"Update mantis_custom_field_table SET display_closed = display_close" );
+			"UPDATE $t_custom_field_table SET display_closed = display_close" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-17',
 			'Rename Column',
-			"ALTER TABLE mantis_custom_field_table DROP display_close" );
+			"ALTER TABLE $t_custom_field_table DROP display_close" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-18',
 			'Rename Column',
-			"ALTER TABLE mantis_custom_field_table ADD require_closed BOOL NOT NULL default '0'" );
+			"ALTER TABLE $t_custom_field_table ADD require_closed BOOL NOT NULL default '0'" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-19',
 			'Rename Column',
-			"Update mantis_custom_field_table SET require_closed = require_close" );
+			"UPDATE $t_custom_field_table SET require_closed = require_close" );
 
 	$upgrades[] = new SQLUpgrade(
 			'custom_fields-20',
 			'Rename Column',
-			"ALTER TABLE mantis_custom_field_table DROP require_close" );
+			"ALTER TABLE $t_custom_field_table DROP require_close" );
 
 	$upgrades[] = new FunctionUpgrade(
 			'delete-admin-over',
-			'delete any project level access overrides for admin users',
+			'Delete any project level access overrides for admin users',
 			'upgrade_0_18_del_admin_override' );
 
 	function upgrade_0_18_del_admin_override() {
