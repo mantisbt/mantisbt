@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.47 2004-05-16 12:22:06 vboctor Exp $
+	# $Id: string_api.php,v 1.48 2004-05-17 13:06:06 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -25,14 +25,24 @@
 		for ( $i = 0; $i < $line_count; $i++ ) {
 			$count	= 0;
 			$prefix	= '';
-			while ( substr($lines[$i], $count, 1) == ' ' ) {
-			  $count++;
-			}
-			for ( $j = 0; $j < $count; $j++ ) {
-			  $prefix .= '&nbsp;';
-			}
-			$lines[$i] = $prefix . substr( $lines[$i], $count );
 
+			$t_char = substr( $lines[$i], $count, 1 );
+			$spaces = 0;
+			while ( ( $t_char  == ' ' ) || ( $t_char == "\t" ) ) {
+				if ( $t_char == ' ' )
+					$spaces++;
+				else
+					$spaces += 4; // 1 tab = 4 spaces, can be configurable.
+
+				$count++;
+				$t_char = substr( $lines[$i], $count, 1 );
+			}
+
+			for ( $j = 0; $j < $spaces; $j++ ) {
+				$prefix .= '&nbsp;';
+			}
+
+			$lines[$i] = $prefix . substr( $lines[$i], $count );
 		}
 		return implode( "\n", $lines );
 	}
