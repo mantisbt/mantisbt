@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.15 2004-04-08 18:04:53 prescience Exp $
+	# $Id: news_api.php,v 1.16 2004-04-21 14:15:32 vboctor Exp $
 	# --------------------------------------------------------
 
 	### News API ###
@@ -49,6 +49,21 @@
 
 		$query = "DELETE FROM $t_news_table
 	    		  WHERE id='$c_news_id'";
+
+		db_query( $query );
+
+		# db_query() errors on failure so:
+		return true;
+	}
+	# --------------------
+	# Delete the news entry
+	function news_delete_all( $p_project_id ) {
+		$c_project_id = db_prepare_int( $p_project_id );
+
+		$t_news_table = config_get( 'mantis_news_table' );
+
+		$query = "DELETE FROM $t_news_table
+	    		  WHERE project_id='$c_project_id'";
 
 		db_query( $query );
 

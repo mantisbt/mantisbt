@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.50 2004-04-08 22:44:59 prescience Exp $
+	# $Id: project_api.php,v 1.51 2004-04-21 14:16:01 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -15,6 +15,7 @@
 	require_once( $t_core_dir . 'version_api.php' );
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'file_api.php' );
+	require_once( $t_core_dir . 'news_api.php' );
 
 	### Project API ###
 
@@ -256,6 +257,9 @@
 
 		# Delete the records assigning users to this project
 		project_remove_all_users( $p_project_id );
+
+		# Delete all news entries associated with the project being deleted
+		news_delete_all( $p_project_id );
 
 		# Delete the project entry
 		$query = "DELETE FROM $t_project_table
