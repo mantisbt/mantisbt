@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: upgrade_advanced.php,v 1.3 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: upgrade_advanced.php,v 1.4 2004-02-07 02:06:39 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,6 +19,7 @@
 	$upgrade_set->add_items( include( 'upgrades/0_15_inc.php' ) );
 	$upgrade_set->add_items( include( 'upgrades/0_16_inc.php' ) );
 	$upgrade_set->add_items( include( 'upgrades/0_17_inc.php' ) );
+	$upgrade_set->add_items( include( 'upgrades/0_18_inc.php' ) );
 ?>
 <html>
 <head>
