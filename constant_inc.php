@@ -101,7 +101,7 @@
 	define( "BY_DATE",      1 );
 
 	# show email limits
-	define( "NONE",         0 );
+	#define( "NONE",         0 );
 	define( "ALL",          1 );
 	define( "NO_ANONYMOUS", 2 );
 	define( "ADMIN_ONLY",   3 );
