@@ -8,6 +8,7 @@ Mantis
  * Modified admin_check.php3 to be more informative and useful.
  * Modified upgrade script to preserve timestamp fields.
  * Modified db_generate to enable projects by default.
+ * Modified account_page.php3 to remove EOF usage.
  * Updated upgrade script to be more informative.
  * Updated French localization.
  * Added $g_allow_close_immediately to toggle "close immediately" option when resolving a bug.
