@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_add.php,v 1.25 2005-02-12 20:01:03 jlatour Exp $
+	# $Id: account_prof_add.php,v 1.26 2005-02-25 00:18:38 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,14 +25,27 @@
 	current_user_ensure_unprotected();
 ?>
 <?php
-	access_ensure_project_level( config_get( 'add_profile_threshold' ) );
-
 	$f_platform		= gpc_get_string( 'platform' );
 	$f_os			= gpc_get_string( 'os' );
 	$f_os_build		= gpc_get_string( 'os_build' );
 	$f_description	= gpc_get_string( 'description' );
+	
+	$t_user_id		= gpc_get_int( 'user_id' );
+	if ( ALL_USERS != $t_user_id ) {
+		$t_user_id = auth_get_current_user_id();
+	}
 
-	profile_create( auth_get_current_user_id(), $f_platform, $f_os, $f_os_build, $f_description );
+	if ( ALL_USERS == $t_user_id ) {
+		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+	} else {
+		access_ensure_global_level( config_get( 'add_profile_threshold' ) );
+	}
 
-	print_header_redirect( 'account_prof_menu_page.php' );
+	profile_create( $t_user_id, $f_platform, $f_os, $f_os_build, $f_description );
+
+	if ( ALL_USERS == $t_user_id ) {
+		print_header_redirect( 'manage_prof_menu_page.php' );
+	} else {
+		print_header_redirect( 'account_prof_menu_page.php' );
+	}
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.242 2005-02-13 21:36:16 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.243 2005-02-25 00:18:39 jlatour Exp $
 	# --------------------------------------------------------
 
 
@@ -960,6 +960,9 @@
 	# Threshold needed to update readonly bugs.  Readonly bugs are identified via
 	# $g_bug_readonly_status_threshold.
 	$g_update_readonly_bug_threshold = MANAGER;
+	
+	# Threshold needed to be able to create and modify global profiles
+	$g_manage_global_profile_threshold = MANAGER;
 
 	# threshold for viewing changelog
 	$g_view_changelog_threshold = VIEWER;

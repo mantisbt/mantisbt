@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_update.php,v 1.27 2005-02-12 20:01:03 jlatour Exp $
+	# $Id: account_prof_update.php,v 1.28 2005-02-25 00:18:39 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,7 +32,13 @@
 	$f_os_build		= gpc_get_string( 'os_build' );
 	$f_description	= gpc_get_string( 'description' );
 
-	profile_update( auth_get_current_user_id(), $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
+	if ( profile_is_global( $f_profile_id ) ) {
+		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
-	print_header_redirect( 'account_prof_menu_page.php' );
+		profile_update( ALL_USERS, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
+		print_header_redirect( 'manage_prof_menu_page.php' );
+	} else {
+		profile_update( auth_get_current_user_id(), $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
+		print_header_redirect( 'account_prof_menu_page.php' );
+	}
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.35 2005-02-12 20:01:03 jlatour Exp $
+	# $Id: account_prof_edit_page.php,v 1.36 2005-02-25 00:18:38 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,9 +27,6 @@
 	current_user_ensure_unprotected();
 ?>
 <?php
-	# protected account check
-	current_user_ensure_unprotected();
-
 	$f_profile_id	= gpc_get_int( 'profile_id' );
 	$f_action		= gpc_get_string( 'action' );
 
@@ -42,13 +39,25 @@
 		print_header_redirect( 'account_prof_make_default.php?profile_id=' . $f_profile_id );
 	}
 
-	$row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
+	if ( profile_is_global( $f_profile_id ) ) {
+		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+
+		$row = profile_get_row( ALL_USERS, $f_profile_id );
+	} else {
+		$row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
+	}
 
    	extract( $row, EXTR_PREFIX_ALL, 'v' );
 ?>
 
 <?php html_page_top1() ?>
 <?php html_page_top2() ?>
+
+<?php 
+	if ( profile_is_global( $f_profile_id ) ) {
+		print_manage_menu();
+	}
+?>
 
 <?php # Edit Profile Form BEGIN ?>
 <br />
@@ -61,7 +70,11 @@
 		<?php echo lang_get( 'edit_profile_title' ) ?>
 	</td>
 	<td class="right">
-		<?php print_account_menu() ?>
+		<?php
+			if ( !profile_is_global( $f_profile_id ) ) {
+				print_account_menu();
+			}
+		?>
 	</td>
 </tr>
 <tr class="row-1">

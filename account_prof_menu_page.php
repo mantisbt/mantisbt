@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.34 2005-02-12 20:01:03 jlatour Exp $
+	# $Id: account_prof_menu_page.php,v 1.35 2005-02-25 00:18:38 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,6 +14,13 @@
 	# account_prof_add.php
 
 	# Users can also manage their profiles
+?>
+<?php
+	if ( isset( $g_global_profiles ) ) {
+		$g_global_profiles = true;
+	} else {
+		$g_global_profiles = false;
+	}
 ?>
 <?php
 	require_once( 'core.php' );
@@ -28,13 +35,28 @@
 	current_user_ensure_unprotected();
 ?>
 <?php
-	access_ensure_project_level( config_get( 'add_profile_threshold' ) );
-
-	# protected account check
-	current_user_ensure_unprotected();
+	if ( $g_global_profiles ) {
+		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+	} else {
+		access_ensure_global_level( config_get( 'add_profile_threshold' ) );
+	}
 ?>
 <?php html_page_top1( lang_get( 'manage_profiles_link' ) ) ?>
 <?php html_page_top2() ?>
+
+<?php 
+	if ( $g_global_profiles ) {
+		print_manage_menu( 'manage_prof_menu_page.php' );
+	}
+?>
+
+<?php
+	if ( $g_global_profiles ) {
+		$t_user_id = ALL_USERS;
+	} else {
+		$t_user_id = auth_get_current_user_id();
+	}
+?>
 
 <?php # Add Profile Form BEGIN ?>
 <br />
@@ -43,11 +65,15 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="user_id" value="<?php echo auth_get_current_user_id() ?>" />
+		<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
 		<?php echo lang_get( 'add_profile_title' ) ?>
 	</td>
 	<td class="right">
-		<?php print_account_menu( 'account_prof_menu_page.php' ) ?>
+	<?php
+		if ( !$g_global_profiles ) {
+			print_account_menu( 'account_prof_menu_page.php' );
+		}
+	?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -108,7 +134,13 @@
 <tr class="row-1">
 	<td class="center" colspan="2">
 		<input type="radio" name="action" value="edit" checked="checked" /> <?php echo lang_get( 'edit_profile' ) ?>
+<?php
+	if ( !$g_global_profiles ) {
+?>
 		<input type="radio" name="action" value="default" /> <?php echo lang_get( 'make_default' ) ?>
+<?php
+	}
+?>
 		<input type="radio" name="action" value="delete" /> <?php echo lang_get( 'delete_profile' ) ?>
 	</td>
 </tr>
@@ -118,7 +150,7 @@
 	</td>
 	<td width="75%">
 		<select name="profile_id">
-			<?php print_profile_option_list( auth_get_current_user_id() ) ?>
+			<?php print_profile_option_list( $t_user_id ) ?>
 		</select>
 	</td>
 </tr>

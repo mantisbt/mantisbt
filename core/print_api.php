@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.115 2005-02-20 21:12:07 thraxisp Exp $
+	# $Id: print_api.php,v 1.116 2005-02-25 00:18:40 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -14,6 +14,7 @@
 	require_once( $t_core_dir . 'current_user_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'prepare_api.php' );
+	require_once( $t_core_dir . 'profile_api.php' );
 
 	### Print API ###
 
@@ -334,35 +335,18 @@
 	# --------------------
 	# prints the profiles given the user id
 	function print_profile_option_list( $p_user_id, $p_select_id='' ) {
-		global $g_mantis_user_profile_table, $g_mantis_user_pref_table;
-
-		$c_user_id = db_prepare_int( $p_user_id );
-
-		$query = "SELECT default_profile
-			FROM $g_mantis_user_pref_table
-			WHERE user_id='$c_user_id'";
-	    $result = db_query( $query );
-	    $v_default_profile = db_result( $result, 0, 0 );
-
-		# Get profiles
-		$query = "SELECT id, platform, os, os_build
-			FROM $g_mantis_user_profile_table
-			WHERE user_id='$c_user_id'
-			ORDER BY id";
-	    $result = db_query( $query );
-	    $profile_count = db_num_rows( $result );
+		$t_default_profile = profile_get_default( $p_user_id );
+		$t_profiles = profile_get_all_for_user( $p_user_id );
 
 		PRINT '<option value=""></option>';
-		for ($i=0;$i<$profile_count;$i++) {
-			# prefix data with v_
-			$row = db_fetch_array( $result );
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
+		foreach ( $t_profiles as $t_profile ) {
+			extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
 			$v_platform	= string_display( $v_platform );
 			$v_os		= string_display( $v_os );
 			$v_os_build	= string_display( $v_os_build );
 
 			PRINT "<option value=\"$v_id\"";
-			check_selected( $v_id, $v_default_profile );
+			check_selected( $v_id, $t_default_profile );
 			PRINT ">$v_platform $v_os $v_os_build</option>";
 		}
 	}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_delete.php,v 1.26 2005-02-12 20:01:03 jlatour Exp $
+	# $Id: account_prof_delete.php,v 1.27 2005-02-25 00:18:38 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,7 +28,13 @@
 <?php
 	$f_profile_id	= gpc_get_int( 'profile_id' );
 
-	profile_delete( auth_get_current_user_id(), $f_profile_id );
+	if ( profile_is_global( $f_profile_id ) ) {
+		access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
-	print_header_redirect( 'account_prof_menu_page.php' );
+		profile_delete( ALL_USERS, $f_profile_id );
+		print_header_redirect( 'manage_prof_menu_page.php' );
+	} else {
+		profile_delete( auth_get_current_user_id(), $f_profile_id );
+		print_header_redirect( 'account_prof_menu_page.php' );
+	}
 ?>

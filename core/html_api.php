@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.149 2005-02-17 21:15:57 jlatour Exp $
+	# $Id: html_api.php,v 1.150 2005-02-25 00:18:40 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -566,6 +566,7 @@
 		$t_manage_user_page 		= 'manage_user_page.php';
 		$t_manage_project_menu_page = 'manage_proj_page.php';
 		$t_manage_custom_field_page = 'manage_custom_field_page.php';
+		$t_manage_prof_menu_page    = 'manage_prof_menu_page.php';
 		$t_permissions_summary_report = 'adm_permissions_report.php';
 		# $t_documentation_page 		= 'documentation_page.php';
 
@@ -582,6 +583,9 @@
 			case $t_permissions_summary_report:
 				$t_permissions_summary_report = '';
 				break;
+			case $t_manage_prof_menu_page:
+				$t_manage_prof_menu_page = '';
+				break;
 #			case $t_documentation_page:
 #				$t_documentation_page = '';
 #				break;
@@ -596,6 +600,9 @@
 		}
 		if ( access_has_project_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
 			print_bracket_link( $t_manage_custom_field_page, lang_get( 'manage_custom_field_link' ) );
+		}
+		if ( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
+			print_bracket_link( $t_manage_prof_menu_page, lang_get( 'manage_global_profiles_link' ) );
 		}
 		if ( access_has_project_level( ADMINISTRATOR ) ) {
 			print_bracket_link( $t_permissions_summary_report, lang_get( 'permissions_summary_report' ) );
