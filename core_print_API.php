@@ -1115,7 +1115,7 @@
 	# String Processing API
 	###########################################################################
 	# --------------------
-	# every string that comes form a textarea should be processed through this
+	# every string that comes from a textarea should be processed through this
 	# function *before* insertion into the database.
 	function string_prepare_textarea( $p_string ) {
 		global $g_allow_href_tags, $g_allow_html_tags;
@@ -1135,13 +1135,11 @@
 		return $p_string;
 	}
 	# --------------------
-	# every string that comes form a text field should be processed through this
+	# every string that comes from a text field should be processed through this
 	# function *before* insertion into the database.
 	function string_prepare_text( $p_string ) {
 		global $g_allow_href_tags, $g_allow_html_tags;
-		# the " breaks a text box when you go back to edit so we will convert
-		# it here
-		$p_string = str_replace( "\"", "'", $p_string );
+
 		$p_string = htmlspecialchars( $p_string );
 
 		if ( ON == $g_allow_html_tags ) {
