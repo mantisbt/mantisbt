@@ -506,6 +506,28 @@
 		}
 	}
 	# --------------------
+	# prints a link to the update page given an ID
+	# it accounts for the user preference and site override
+	function get_bug_update_page() {
+		global 	$g_bug_update_page, $g_bug_update_advanced_page, $g_show_update;
+
+		switch ( $g_show_update ) {
+		case BOTH:
+			if ( ON == get_current_user_pref_field( "advanced_update" ) ) {
+				return $g_bug_update_advanced_page;
+			} else {
+				return $g_bug_update_page;
+			}
+			break;
+		case SIMPLE_ONLY:
+				return $g_bug_update_page;
+			break;
+		case ADVANCED_ONLY:
+				return $g_bug_update_advanced_page;
+			break;
+		}
+	}
+	# --------------------
 	# returns a href link to a bug given an ID
 	# it accounts for the user preference and site override
 	function get_bug_link( $p_id ) {

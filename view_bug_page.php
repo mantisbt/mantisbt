@@ -221,7 +221,7 @@
 <tr align="center">
 <?php # UPDATE form BEGIN ?>
 <?php if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
-	<form method="post" action="<?php echo $g_bug_update_page ?>">
+	<form method="post" action="<?php echo get_bug_update_page() ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>">
 	<td class="center">
