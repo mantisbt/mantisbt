@@ -11,6 +11,10 @@ To Do:
  * Add postgreSQL support and a Database abstraction layer
  * Refine viewing preferences
 
+12.03.2000	-	0.10.1
+
+ * Fixed some category bugs
+
 12.03.2000	-	0.10.0
 
  * Moved constant config settings to config_inc.php3
