@@ -430,8 +430,6 @@ $s_realname_updated = 'Pravo ime je bilo uspešno posodobljeno';
 $s_password_updated = 'Geslo je bilo uspešno posodobljeno';
 
 # adm_permission_report.php
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg = 'Zadeva je bila uspešno dodeljena...';
@@ -641,6 +639,9 @@ $s_edit_user_link = 'Uredi uporabnika';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_issue_reporter = 'User who reported issue';
+$s_issue_handler = 'User who is handling the issue';
+$s_users_added_bugnote = 'Users added Bugnote';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -670,6 +671,7 @@ $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
 
 # manage_config_work_threshold_page
+$s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';

@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.74 $
-	# $Author: bigbadger $
-	# $Date: 2005-03-21 04:47:59 $
+	# $Revision: 1.75 $
+	# $Author: jlatour $
+	# $Date: 2005-04-03 12:48:55 $
 	#
-	# $Id: strings_japanese_sjis.txt,v 1.74 2005-03-21 04:47:59 bigbadger Exp $
+	# $Id: strings_japanese_sjis.txt,v 1.75 2005-04-03 12:48:55 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -434,8 +434,6 @@ $s_realname_updated = '本名の更新に成功しました。';
 $s_password_updated = 'パスワードが正常に更新されました。';
 
 # adm_permission_report.php
-$s_users_added_bugnote = 'Users added Bugnote';
-$s_assign_issue = 'Assign an issue';
 
 # bug_assign.php
 $s_bug_assign_msg       = '改善要求が担当者に割り当てられました。';
@@ -645,6 +643,9 @@ $s_edit_user_link = 'ユーザー編集';
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
 $s_config_project = 'Note: These configurations affect only the %s project.';
+$s_issue_reporter = 'User who reported issue';
+$s_issue_handler = 'User who is handling the issue';
+$s_users_added_bugnote = 'Users added Bugnote';
 $s_change_configuration = 'Update Configuration';
 $s_default_notify = 'Setting default notification flags to';
 $s_action_notify = 'Setting action notification flags to';
@@ -674,6 +675,7 @@ $s_workflow_change_access = 'Change users who can change workflow to';
 $s_access_change_access = 'Change users who can change status change access level to';
 
 # manage_config_work_threshold_page
+$s_assign_issue = 'Assign an issue';
 $s_allow_close_immediate = 'Allow issue to be closed on Resolve';
 $s_allow_reporter_close = 'Allow Reporter to close Issue';
 $s_allow_reporter_reopen = 'Allow Reporter to re-open Issue';
