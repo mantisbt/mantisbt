@@ -113,6 +113,7 @@ Mantis ChangeLog
  * Added core_gpc_API.php with functions to safely get POST and GET data and set cookies
  * Added core_security_API.php
  * Got rid of summary_graph_functions.php, in favor of core_graph_API.php.
+ * Moved core_* into a seperate directory, which can be moved out of the webroot.
 
 2002.08.23  -  0.17.5
  * Corrected bug_delete.php and bug_delete_page.php, which ignored the $g_allow_bug_delete_access_level setting.
