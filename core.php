@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.18 2003-02-14 19:06:54 jfitzell Exp $
+	# $Id: core.php,v 1.19 2003-02-15 01:25:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -17,17 +17,8 @@
 	#  headers from being sent if there's a blank line in an included file
 	ob_start();
 
-	# Directory separator was introduced in PHP 4.0.6
-	if ( !defined( 'DIRECTORY_SEPARATOR' ) ) {
-		if (substr(php_uname(), 0, 7) == 'Windows') {
-			define('DIRECTORY_SEPARATOR', '\\');
-		} else {
-			define('DIRECTORY_SEPARATOR', '/');
-		}
-	}
-
 	# Include compatibility file before anything else
-		require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
+	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
 
 	# Load constants and configuration files
   	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );

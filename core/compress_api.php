@@ -6,21 +6,21 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.5 2003-01-03 03:24:24 jfitzell Exp $
+	# $Id: compress_api.php,v 1.6 2003-02-15 01:25:49 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# Compression API
 	#
-	# Starts the buffering/compression (only if the compression option is ON
-	# and PHP version 4.0.4 or above is used).  This method should be called 
-	# after all possible re-directs and access level checks.
+	# Starts the buffering/compression (only if the compression option is ON)
+	# This method should be called after all possible re-directs and
+	#  access level checks.
 	###########################################################################
 
 	# ----------------
 	# Check if compression should be enabled.
 	function compress_is_enabled() {
-		return ( ( ON == config_get( 'compress_html' ) ) && php_version_at_least('4.0.4') );
+		return ( ON == config_get( 'compress_html' ) );
 	}
 	# ----------------
 	# Start output buffering with compression.
