@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky badger@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.57 $
+	# $Revision: 1.58 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-01 23:03:48 $
+	# $Date: 2004-10-03 00:36:25 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.57 2004-10-01 23:03:48 bigbadger Exp $
+	# $Id: strings_russian_koi8.txt,v 1.58 2004-10-03 00:36:25 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -143,7 +143,7 @@ $s_legend_assigned = Назначенные';
 $s_legend_total = 'Всего';
 $s_legend_opened = 'Открытых';
 $s_legend_closed = 'Закрытых';
-$s_legend_reported = 'Задокументированных;
+$s_legend_reported = 'Задокументированных';
 $s_cumulative = 'Суммарно';
 $s_not_enough_data = 'Недостаточно данных для построения графика';
 
