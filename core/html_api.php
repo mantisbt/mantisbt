@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.148 2005-02-13 21:36:37 jlatour Exp $
+	# $Id: html_api.php,v 1.149 2005-02-17 21:15:57 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -528,10 +528,14 @@
 			PRINT '<td class="menu">';
 			PRINT '<a href="set_project.php?project_id=' . ALL_PROJECTS . '">' . lang_get( 'all_projects' ) . '</a>';
 
-			$t_project_count = count( $t_project_ids );
-			for ( $i=0 ; $i < $t_project_count ; $i++ ) {
-				$t_id = $t_project_ids[$i];
+			foreach ( $t_project_ids as $t_id ) {
 				PRINT " | <a href=\"set_project.php?project_id=$t_id\">" . string_display( project_get_field( $t_id, 'name' ) ) . '</a>';
+				$t_subprojects = current_user_get_accessible_subprojects( $t_id );
+				$t_char = ':';
+				foreach ( $t_subprojects as $t_subproject ) {
+					PRINT "$t_char <a href=\"set_project.php?project_id=$t_subproject\">" . string_display( project_get_field( $t_subproject, 'name' ) ) . '</a>';
+					$t_char = ',';
+				}
 			}
 
 			PRINT '</td>';
