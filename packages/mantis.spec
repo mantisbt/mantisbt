@@ -1,17 +1,17 @@
 BuildArchitectures: noarch
-Summary: The Mantis Bug Tracker
+Summary: Mantis Bug Tracker
 Name: mantis
-Version: 0.17.5
+Version: 0.18.0rc1
 Release: 1
 License: GPL
 Group: Development/Tools
-Vendor: Kenzaburo Ito <kenito@300baud.org>
+Vendor: Mantis Team <mantisbt-dev@lists.sourceforge.net>
 Source: mantis-%{version}.tar.gz
 URL: http://mantisbt.sourceforge.net/
 Buildroot: %{_tmppath}/%{name}-root
 Prefix: /var/www/mantis
-Requires: php >= 4.0.3
-Requires: php-mysql >= 4.0.3
+Requires: php >= 4.0.6
+Requires: php-mysql >= 4.0.6
 Requires: mysql >= 3.23.2
 Requires: webserver
 
