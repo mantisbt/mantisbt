@@ -150,13 +150,11 @@
 				<?php echo $s_longest_open_bug ?>
 			</td>
 			<td width="50%">
-				<?php if ($t_bug_id>0) { ?>
-					<?php if ( ON == get_current_user_pref_field( "advanced_view" ) ) { ?>
-						<a href="<?php echo $g_view_bug_advanced_page ?>?f_id=<?php echo $t_bug_id ?>"><?php echo $t_bug_id ?></a>
-					<?php } else {?>
-						<a href="<?php echo $g_view_bug_page ?>?f_id=<?php echo $t_bug_id ?>"><?php echo $t_bug_id ?></a>
-					<?php } ?>
-				<?php } ?>
+				<?php
+					if ($t_bug_id>0) {
+						print_bug_link( $t_bug_id );
+					}
+				?>
 			</td>
 		</tr>
 		<tr class="row-2">

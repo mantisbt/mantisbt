@@ -26,7 +26,7 @@
 	bugnote_date_update( $f_bugnote_id );
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_view_redirect_url( $f_id );
+	$t_redirect_url = get_bug_link_plain( $f_id );
 	if ( ( ON == $g_quick_proceed )&&( $result ) ) {
 		print_header_redirect( $t_redirect_url );
 	}

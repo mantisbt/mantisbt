@@ -9,6 +9,7 @@ Mantis
  * Fixed a few documentation errors in configuration.html.
  * Fixed bug_update to no longer cut off steps_to_reproduce if it has quotation marks.
  * Fixed # bug links in emails.
+ * Fixed bugnote update to redirect properly after update.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.

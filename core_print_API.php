@@ -565,6 +565,28 @@
 		}
 	}
 	# --------------------
+	# returns a href link to a bug given an ID
+	# it accounts for the user preference and site override
+	function get_bug_link_plain( $p_id ) {
+		global 	$g_view_bug_page, $g_view_bug_advanced_page, $g_show_view;
+
+		switch ( $g_show_view ) {
+		case BOTH:
+			if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
+				return "$g_view_bug_advanced_page?f_id=$p_id";
+			} else {
+				return "$g_view_bug_page?f_id=$p_id";
+			}
+			break;
+		case SIMPLE_ONLY:
+			return "$g_view_bug_page?f_id=$p_id";
+			break;
+		case ADVANCED_ONLY:
+			return "$g_view_bug_advanced_page?f_id=$p_id";
+			break;
+		}
+	}
+	# --------------------
 	# formats the severity given the status
 	# shows the severity in BOLD if the bug is NOT closed and is of significant severity
 	function print_formatted_severity_string( $p_status, $p_severity ) {
