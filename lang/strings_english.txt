@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.135 $
-	# $Author: jfitzell $
-	# $Date: 2003-04-23 23:00:36 $
+	# $Revision: 1.136 $
+	# $Author: prescience $
+	# $Date: 2003-06-25 21:43:11 $
 	#
-	# $Id: strings_english.txt,v 1.135 2003-04-23 23:00:36 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.136 2003-06-25 21:43:11 prescience Exp $
 	###########################################################################
 ?>
 <?php
@@ -322,7 +322,6 @@
 	$s_edit_profile_title = 'Edit Profile';
 	$s_platform = 'Platform';
 	$s_operating_system = 'Operating System';
-	$s_version = 'Version/Build';
 	$s_additional_description = 'Additional Description';
 	$s_update_profile_button = 'Update Profile';
 
