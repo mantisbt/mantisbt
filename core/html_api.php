@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.102 2004-05-27 23:33:06 int2str Exp $
+	# $Id: html_api.php,v 1.103 2004-05-28 06:24:00 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -815,6 +815,8 @@
 
 			# RESOLVE button
 			html_button_bug_resolve( $p_bug_id );
+
+			PRINT '</td><td>';
 
 			# MOVE button
 			html_button_bug_move( $p_bug_id );
