@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.25 2004-10-25 19:45:05 marcelloscata Exp $
+	# $Id: relationship_api.php,v 1.26 2004-11-08 19:26:47 prichards Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -737,7 +737,7 @@
 	<td><?php echo lang_get( 'this_bug' ) ?>
 		<form method="POST" action="bug_relationship_add.php">
 		<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id ?>" size="4" />
-		<? relationship_list_box( -1 ) ?>
+		<?php relationship_list_box( -1 ) ?>
 		<input type="text" name="dest_bug_id" value="" maxlength="7" />
 		<input type="submit" name="add_relationship" class="button" value="<?php echo lang_get( 'add_new_relationship_button' ) ?>" />
 		</form>
