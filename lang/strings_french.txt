@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.80 $
+	# $Revision: 1.81 $
 	# $Author: bigbadger $
-	# $Date: 2004-08-26 17:40:57 $
+	# $Date: 2004-09-01 17:56:41 $
 	#
-	# $Id: strings_french.txt,v 1.80 2004-08-26 17:40:57 bigbadger Exp $
+	# $Id: strings_french.txt,v 1.81 2004-09-01 17:56:41 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -112,7 +112,7 @@ $s_copy_bugs_conf_msg = 'Copier bugs vers';
 $s_assign_bugs_conf_msg = 'Assigner à';
 $s_resolve_bugs_conf_msg = 'Résolution';
 $s_priority_bugs_conf_msg = 'Priorité des bugs';
-$s_status_bugs_conf_msg = 'Statut des bugs';
+$s_status_bugs_conf_msg = 'Etat des bugs';
 $s_view_status_bugs_conf_msg = 'Choisir afficher l\'état des bugs';
 $s_close_group_bugs_button = 'Fermer les bugs' ;
 $s_delete_group_bugs_button = 'Supprimer les bugs' ;
@@ -933,7 +933,7 @@ $s_product_build = 'Build';
 $s_system_profile = 'Description du système';
 $s_update_bug_button = 'Mettre à jour le bug';
 $s_bug_assign_to_button = 'Assigné à :';
-$s_bug_status_to_button = 'Changer le statut en :';
+$s_bug_status_to_button = 'Changer l\'e'tat en :';
 $s_reopen_bug_button = 'Réouvrir un bug';
 $s_move_bug_button = 'Déplacer bug';
 $s_attached_files = 'Fichiers attachés';
