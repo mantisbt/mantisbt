@@ -43,7 +43,7 @@ Mantis ChangeLog
  * Fix #3231: Redirect problem when user clicks on a bug link while not logged in.
  * Fix #3230: German translation [corrections].
  * Fix #3232: Signup or password reset emails were not being sent if email notifications were turned off 
- * Languages: Updated Italian, German, Spanish, Slovak, Swedish and Dutch localisations.
+ * Languages: Updated Italian, German, Spanish, Slovak, Swedish, French and Dutch localisations.
  * Languages: Synchronised localisation files with English localisation.
  * Fix: Part of filenames with '-'s were being cut off.
  * Enh #3240: Show last login date in the main page.

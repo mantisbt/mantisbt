@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.60 $
-	# $Author: prescience $
-	# $Date: 2003-07-31 14:41:49 $
+	# $Revision: 1.61 $
+	# $Author: vboctor $
+	# $Date: 2003-08-05 10:41:16 $
 	#
-	# $Id: strings_french.txt,v 1.60 2003-07-31 14:41:49 prescience Exp $
+	# $Id: strings_french.txt,v 1.61 2003-08-05 10:41:16 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -617,7 +617,7 @@ $s_reset_password_button = 'Effacer le mot de passe';
 $s_delete_user_button = 'Supprimer l\'utilisateur';
 $s_reset_password_msg = 'Réinitialiser le mot de passe le remplace par un mot de passe généré aléatoirement';
 $s_reset_password_msg2 = 'Réinitialiser le mot de passe le remplace par \'\' (vide)).';
-$s_show_all_users = 'ALL';
+$s_show_all_users = 'TOUS';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas réinitialiser le mot de passe.';
@@ -830,9 +830,9 @@ $s_view_advanced_link = 'Rapport détaillé';
 $s_viewing_bug_simple_details_title = 'Afficher le rapport simplifié';
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = 'There are no users monitoring this bug.';
-$s_users_monitoring_bug = 'Users monitoring this bug';
-$s_monitoring_user_list = 'User List';
+$s_no_users_monitoring_bug = 'Aucun utilisateur surveillant ce bug.';
+$s_users_monitoring_bug = 'Utilisateurs surveillant ce bug';
+$s_monitoring_user_list = 'Liste d\'utilisateurs';
 
 # custom field strings
 $s_add_custom_field_button = 'Ajouter un champ personnalisé';
@@ -861,10 +861,10 @@ $s_confirm_used_custom_field_deletion = 'Ce champ est actuellement lié à au moin
 $s_confirm_custom_field_deletion = 'Etes vous sûr de vouloir supprimer ce champ personnalisé et toutes les valeurs associées ?';
 $s_field_delete_button = 'Supprimer le champ';
 
-$s_hide_status = 'Hide Status';
-$s_filter_closed = "Closed";
-$s_filter_resolved = "Resolved";
+$s_hide_status = 'Cacher le statut';
+$s_filter_closed = 'Fermé';
+$s_filter_resolved = 'Résolu';
 
-$s_attachments = "attachment(s)";
-$s_attachment_alt = "A";
+$s_attachments = 'attachment(s)';
+$s_attachment_alt = 'A';
 ?>
