@@ -146,7 +146,7 @@ The default config_inc1.php file has some comments which will help explain
 the variables.  You can always add/overwrite more globals in this file as
 well.
 
-You can load up admin_check.php3 to see if you set things up correctly.
+You can load up admin_check.php to see if you set things up correctly.
 
 *** NOTE: admin_check sometimes reports the value of register_globals
 incorrectly.  Create a page with this line in it: <? phpinfo() ?>, save it
