@@ -107,6 +107,7 @@
 	define( "ERROR_LOGIN",                1 );
 	define( "ERROR_REPORT",               2 );
 	define( "ERROR_NO_FILE_SPECIFIED",    3 );
-	define( "ERROR_DUPLICATE_CATEGORY",   4 );
-	define( "ERROR_DUPLICATE_VERSION",    5 );
+	define( "ERROR_NO_DIRECTORY",         4 );
+	define( "ERROR_DUPLICATE_CATEGORY",   5 );
+	define( "ERROR_DUPLICATE_VERSION",    6 );
 ?>

@@ -25,6 +25,11 @@
 		$result = db_query( $query );
 		$t_file_path = db_result( $result );
 
+		if ( !file_exists( $t_file_path ) ) {
+			echo $MANTIS_ERROR[ERROR_NO_DIRECTORY];
+			exit;
+		}
+
 		# prepare variables for insertion
 		$f_file_name = $f_id."-".$f_file_name;
 		$t_file_size = filesize( $f_file );

@@ -20,6 +20,11 @@
 		$result = db_query( $query );
 		$t_file_path = db_result( $result );
 
+		if ( !file_exists( $t_file_path ) ) {
+			echo $MANTIS_ERROR[ERROR_NO_DIRECTORY];
+			exit;
+		}
+
 		$f_title 		= string_prepare_text( $f_title );
 		$f_description 	= string_prepare_textarea( $f_description );
 

@@ -35,6 +35,7 @@ Mantis
  * Added a check for a duplciate user in the manage create user page.
  * Added Romanian translation.
  * Added g_allow_account_delete global to prevent self account deletion.
+ * Added file upload check to see if directory exists.
  * Removed site_settings pages.
  * Removed unused cookie variables.
  * Removed sql_to_unix_time() function.  Unecessary with removal of TIMESTAMPS.
