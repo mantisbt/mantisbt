@@ -586,6 +586,10 @@
 		return htmlspecialchars(stripslashes( $p_string ));
 	}
 	#--------------------
+	function string_display_with_br( $p_string ) {
+		return str_replace( "&lt;br&gt;", "<br>", htmlspecialchars(stripslashes( $p_string )));
+	}
+	#--------------------
 	function string_edit( $p_string ) {
 		return str_replace( "<br>", " ",  stripslashes( $p_string ) );
 	}

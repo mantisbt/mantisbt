@@ -88,7 +88,7 @@
 	<table width=100% align=center>
 	<tr>
 		<td bgcolor=<? echo $g_primary_color_light ?>>
-			<? echo string_display( $v3_note ) ?>
+			<? echo string_display_with_br( $v3_note ) ?>
 		</td>
 	</tr>
 	</table>

@@ -36,6 +36,7 @@ To Do:
  * Added show source debug capability - requires PHP4
  * Added 'feedback' status - indicates that it requires more information
  * Added show Mantis version capability
+ * Added string_display_with_br() for displaying text with line breaks
  * Fixed bug with Bugnote Add button showing up in the wrong places
  * Fixed bug with SQL queries updating both submitted and last updated dates on bugs
  * Fixed bug with SQL queries updating both submitted and last access dates on users

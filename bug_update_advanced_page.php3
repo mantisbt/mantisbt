@@ -75,9 +75,9 @@
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
 	$v_summary = string_display( $v_summary );
-	$v2_description = string_display( $v2_description );
-	$v2_steps_to_reproduce = string_display( $v2_steps_to_reproduce );
-	$v2_additional_information = string_display( $v2_additional_information );
+	$v2_description = string_display_with_br( $v2_description );
+	$v2_steps_to_reproduce = string_display_with_br( $v2_steps_to_reproduce );
+	$v2_additional_information = string_display_with_br( $v2_additional_information );
 	#$v_date_submitted = date( "m-d H:i", sql_to_unix_time( $v_date_submitted ) );
 	#$v_last_updated = date( "m-d H:i", sql_to_unix_time( $v_last_updated ) );
 ?>
