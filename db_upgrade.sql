@@ -350,16 +350,16 @@ ALTER TABLE mantis_user_table ADD UNIQUE(cookie_string);
 # =================
 
 # Add a type field to the file tables
-ALTER TABLE mantis_bug_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize
-ALTER TABLE mantis_project_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize
+ALTER TABLE mantis_bug_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize;
+ALTER TABLE mantis_project_file_table ADD file_type VARCHAR(250) NOT NULL AFTER filesize;
 
 # Make some fields larger
-ALTER TABLE mantis_bug_table CHANGE os_build os_build VARCHAR(32) NOT NULL
-ALTER TABLE mantis_bug_table CHANGE build build VARCHAR(32) NOT NULL
-ALTER TABLE mantis_bug_table CHANGE votes votes INT(4) NOT NULL
+ALTER TABLE mantis_bug_table CHANGE os_build os_build VARCHAR(32) NOT NULL;
+ALTER TABLE mantis_bug_table CHANGE build build VARCHAR(32) NOT NULL;
+ALTER TABLE mantis_bug_table CHANGE votes votes INT(4) NOT NULL;
 
-ALTER TABLE mantis_user_profile_table CHANGE os_build os_build VARCHAR(32) NOT NULL
-ALTER TABLE mantis_user_pref_table CHANGE language language VARCHAR(32) DEFAULT 'english' NOT NULL
+ALTER TABLE mantis_user_profile_table CHANGE os_build os_build VARCHAR(32) NOT NULL;
+ALTER TABLE mantis_user_pref_table CHANGE language language VARCHAR(32) DEFAULT 'english' NOT NULL;
 
 # Table structure for table `mantis_bug_history_table`
 CREATE TABLE mantis_bug_history_table (
@@ -371,7 +371,6 @@ CREATE TABLE mantis_bug_history_table (
   new_value varchar(128) NOT NULL default '',
   KEY bug_id (bug_id),
   KEY user_id (user_id)
-)
+);
 
-ALTER TABLE mantis_project_version_table ADD date_order DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL
-
+ALTER TABLE mantis_project_version_table ADD date_order DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL;

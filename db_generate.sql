@@ -38,7 +38,7 @@ CREATE TABLE mantis_bug_history_table (
   new_value varchar(128) NOT NULL default '',
   KEY bug_id (bug_id),
   KEY user_id (user_id)
-)
+);
 
 
 # --------------------------------------------------------

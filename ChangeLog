@@ -1,6 +1,6 @@
 Mantis
 
-11.28.2001  -   0.16.0
+11.27.2001  -   0.16.0
 
  * Fixed minor HTML errors in core_html_API.php.
  * Fixed the view, report, and update pages to honor the forces advanced/simple modes.
