@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.83 $
-	# $Author: jlatour $
-	# $Date: 2004-02-08 15:56:35 $
+	# $Revision: 1.84 $
+	# $Author: vboctor $
+	# $Date: 2004-02-19 12:50:46 $
 	#
-	# $Id: strings_german.txt,v 1.83 2004-02-08 15:56:35 jlatour Exp $
+	# $Id: strings_german.txt,v 1.84 2004-02-19 12:50:46 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -242,7 +242,7 @@ $s_new_account_password = 'Passwort: ';
 $s_new_account_message = 'ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.' . "\n\n";
 $s_new_account_do_not_reply = 'Bitte antworten Sie nicht auf diese Nachricht.' . "\n";
 
-$s_reset_request_msg = 'Es gab eine Anfrage, Ihr Passwort zurückzusetzen'.
+$s_reset_request_msg = 'Es gab eine Anfrage, Ihr Passwort zurückzusetzen';
 $s_account_name_msg = 'Ihr Benutzername ist';
 $s_news_password_msg = 'Hier ist Ihr neues Passwort';
 

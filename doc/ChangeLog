@@ -15,6 +15,7 @@ Mantis ChangeLog
  * Fix #3539: Simple view page shows advanced custom fields.
  * Fix #3541: link to documentation wrong.
  * Fix #3572: The summary_graph_imp_* pages have shortcut PHP tags.
+ * Fix #3579: in the german language file strings_german.txt $s_reset_request_msg has a little problem.
  * Languages: Updated Norwegian localisation.
  * Mantis website moved to http://www.mantisbt.org
 
