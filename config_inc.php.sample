@@ -71,9 +71,4 @@
 	# These should be OFF for Windows installations
 	$g_validate_email            = OFF;
 	$g_check_mx_record           = OFF;
-
-	# --- register globals -----------
-	# @@@ experimental
-	# if your register_globals is Off then set this to OFF
-	$g_register_globals          = ON;
 ?>

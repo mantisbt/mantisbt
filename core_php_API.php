@@ -46,7 +46,7 @@
 	# @@@ NOTE we want to get rid of this once we start getting all
 	#      our GPC variables with functions.  In fact we may want to
 	#      turn off register_global_variables if we can
-	if ( OFF == $g_register_globals ) {
+	if ( false == ini_get( 'register_globals' ) ) {
 		if ( php_version_at_least( '4.1.0' ) ) {
 			extract( $_REQUEST );
 			extract( $_SERVER );
