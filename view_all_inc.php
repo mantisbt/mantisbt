@@ -103,7 +103,7 @@
 <table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
 <tr>
 	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
+	<table width="100%" cellpadding="2">
 	<tr>
 		<td colspan="7" bgcolor="<? echo $g_table_title_color ?>">
 			<b><? echo $s_viewing_bugs_title ?></b>
@@ -120,8 +120,8 @@
 		</td>
 	</tr>
 	<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
-		<td width="2%">
-			<? print_view_bug_sort_link( $link_page, "p", "priority", $f_sort, $f_dir ) ?>
+		<td width="5%">
+			<? print_view_bug_sort_link( $link_page, "P", "priority", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "priority" ) ?>
 		</td>
 		<td width="8%">
@@ -149,7 +149,7 @@
 			<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 		</td>
-		<td width="43%">
+		<td width="40%">
 			<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 		</td>
@@ -191,8 +191,14 @@
 			$v_bugnote_updated = db_result( $res2, 0, 0 );
 	?>
 	<tr align="center" bgcolor="<? echo $status_color ?>">
-		<td bgcolor="<? echo $g_white_color ?>">
-			<? print_status_icon( $v_priority ) ?>
+		<td>
+			<?
+				if ( $g_show_priority_text == 0 ) {
+					print_status_icon( $v_priority );
+				} else {
+					echo get_enum_element($s_priority_enum_string, $v_priority);
+				}
+			?>
 		</td>
 		<td>
 			<? print_bug_link( $v_id ) ?>

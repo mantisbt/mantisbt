@@ -175,6 +175,10 @@
 		$f_sort="last_updated";
 	}
 	$query = $query." ORDER BY '$f_sort' $f_dir";
+	if ( $f_sort != "priority" ) {
+		$query = $query.", priority DESC";
+	}
+
 	if ( isset( $f_limit_view ) ) {
 		$query = $query." LIMIT $f_offset, $f_limit_view";
 	}
