@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.7 2002-09-03 01:01:23 prescience Exp $
+	# $Id: error_api.php,v 1.8 2002-09-16 00:57:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -15,6 +15,12 @@
 
 	# set up error_handler() as the new default error handling function
 	set_error_handler( 'error_handler' );
+
+	#########################################
+	# SECURITY NOTE: this global is initialized here to prevent it
+	#   being spoofed if register_globals is turned on
+	#
+	$g_error_parameters = array();
 
 	# ---------------
 	# Default error handler
