@@ -65,7 +65,12 @@
 */
 	# Set new filter values.  These are stored in a cookie
 	$t_setting_arr	= explode( '#', $g_view_all_cookie_val );
-	check_varset( $f_highlight_changed, $t_setting_arr[5] );
+
+	if ( isset($t_setting_arr[5]) ) {
+		check_varset( $f_highlight_changed, $t_setting_arr[5] );
+	} else {
+		check_varset( $f_highlight_changed, $g_default_show_changed );
+	}
 
 	switch ( $f_type ) {
 		# New cookie
