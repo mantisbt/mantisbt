@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_inc.php,v 1.29 2004-08-12 22:56:47 vboctor Exp $
+	# $Id: account_prefs_inc.php,v 1.30 2004-08-17 12:08:37 thraxisp Exp $
 	# --------------------------------------------------------
 	
 	$t_core_path = config_get( 'core_path' );
@@ -32,9 +32,9 @@
 			}
 		}
 
-	    if ( ! user_pref_exists( $p_user_id ) ) {
+	  if ( ! user_pref_exists( $p_user_id ) ) {
 			user_pref_set_default( $p_user_id );
-	    }
+	  }
 
 	    # prefix data with u_
 		$t_pref = user_pref_get( $p_user_id );
@@ -273,6 +273,7 @@
 		<input type="hidden" name="email_on_bugnote_minimum_severity"  value="<?php echo $t_pref->email_on_bugnote_minimum_severity ?>" />
 		<input type="hidden" name="email_on_status_minimum_severity"   value="<?php echo $t_pref->email_on_status_minimum_severity ?>" />
 		<input type="hidden" name="email_on_priority_minimum_severity" value="<?php echo $t_pref->email_on_priority_minimum_severity ?>" />
+		<input type="hidden" name="email_bugnote_limit" value="<?php echo $t_pref->email_bugnote_limit ?>" />
 <?php } ?>
 <tr class="row-2">
 	<td class="category">
