@@ -10,6 +10,12 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	check_access( ADMINISTRATOR );
 
+	# check for empty username
+	$f_username = trim( $f_username );
+	if ( empty( $f_username ) ) {
+		print_mantis_error( ERROR_EMPTY_FIELD );
+	}
+
 	# Check for duplicate username
 	$query = "SELECT username
 		FROM $g_mantis_user_table

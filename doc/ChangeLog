@@ -15,6 +15,8 @@ Mantis
  * Fixed CSV exporting to not have SPAN tags.
  * Fixed CSV export MIME type.
  * Fixed potential variable warning in main_page.
+ * Fixed signup to detect empty usernames.
+ * Fixed user creation to detect empty usernames.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.

@@ -14,6 +14,12 @@
 		exit;
 	}
 
+	# check for empty username
+	$f_username = trim( $f_username );
+	if ( empty( $f_username ) ) {
+		print_mantis_error( ERROR_EMPTY_FIELD );
+	}
+
 	# Check for a properly formatted email with valid MX record
 	$result = 0;
 	if ( !is_valid_email( $f_email ) ) {
