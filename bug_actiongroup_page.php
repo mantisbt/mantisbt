@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.31 2003-02-20 05:42:22 vboctor Exp $
+	# $Id: bug_actiongroup_page.php,v 1.32 2003-10-18 16:34:59 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -81,7 +81,7 @@
 <br />
 <div align="center">
 <form method="POST" action="bug_actiongroup.php">
-<input type="hidden" name="action" value="<?php echo $f_action ?>" />
+<input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
 <table class="width75" cellspacing="1">
 <?php foreach( $f_bug_arr as $t_bug_id ) { ?>
 		<input type="hidden" name="bug_arr[]" value="<?php echo $t_bug_id ?>" />

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.17 2003-03-10 19:45:17 int2str Exp $
+	# $Id: summary_api.php,v 1.18 2003-10-18 16:34:59 jlatour Exp $
 	# --------------------------------------------------------
 
 	#######################################################################
@@ -15,7 +15,7 @@
 
 	function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 		printf( '<tr %s>', helper_alternate_class() );
-		printf( '<td width="50%%">%s</td>', $p_label );
+		printf( '<td width="50%%">%s</td>', string_display( $p_label ) );
 		printf( '<td width="12%%" class="right">%d</td>', $p_open );
 		printf( '<td width="12%%" class="right">%d</td>', $p_resolved );
 		printf( '<td width="12%%" class="right">%d</td>', $p_closed );

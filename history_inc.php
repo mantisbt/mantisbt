@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.19 2003-03-22 21:42:22 jlatour Exp $
+	# $Id: history_inc.php,v 1.20 2003-10-18 16:34:59 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -55,10 +55,10 @@
 		<?php print_user( $t_item['userid'] ) ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $t_item['note'] ?>
+		<?php echo string_display( $t_item['note'] ) ?>
 	</td>
 	<td class="small-caption">
-		<?php echo $t_item['change'] ?>
+		<?php echo string_display( $t_item['change'] ) ?>
 	</td>
 </tr>
 <?php

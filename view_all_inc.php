@@ -404,7 +404,7 @@
 				echo ']</small><br />';
 			}
 
-			echo $v_category;
+			echo string_display( $v_category );
 		?>
 	</td>
 	<?php # -- Severity -- ?>

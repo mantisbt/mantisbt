@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.71 2003-03-22 16:30:35 jlatour Exp $
+	# $Id: manage_proj_edit_page.php,v 1.72 2003-10-18 16:34:59 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -383,7 +383,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 					{
 						if( !custom_field_is_linked( $t_field_id, $f_project_id ) ) {
 							$t_desc = custom_field_get_definition( $t_field_id );
-							echo "<option value=\"$t_field_id\">" . $t_desc['name'] . '</option>' ;
+							echo "<option value=\"$t_field_id\">" . string_attribute( $t_desc['name'] ) . '</option>' ;
 						}
 					}
 				?>
