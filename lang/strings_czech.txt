@@ -9,13 +9,14 @@
   	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
   	# Czech: Vít Jurásek, vit.jurasek@vegateam.cz
   	# Czech: Milan Cizek, cizek.milan@seznam.cz
+  	# Czech: Jiri Kuchta, kuchta@feec.vutbr.cz
 	# Code page: ISO-8859-2
 	# -------------------------------------------------
-	# $Revision: 1.48 $
-	# $Author: jlatour $
-	# $Date: 2004-02-26 13:23:55 $
+	# $Revision: 1.49 $
+	# $Author: vboctor $
+	# $Date: 2004-03-01 22:18:52 $
 	#
-	# $Id: strings_czech.txt,v 1.48 2004-02-26 13:23:55 jlatour Exp $
+	# $Id: strings_czech.txt,v 1.49 2004-03-01 22:18:52 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -113,28 +114,28 @@ $s_priority_group_bugs_button = 'Zmìnit prioritu' ;
 $s_status_group_bugs_button = 'Zmìnit stav' ;
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-$s_graph_imp_category_title = 'Synthesis graphs by category';
-$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-$s_by_status_pct = 'by status percentage';
-$s_by_priority_pct = 'by priority percentage';
-$s_by_severity_pct = 'by severity percentage';
-$s_by_category_pct = 'by category percentage';
-$s_by_resolution_pct = 'by resolution percentage';
-$s_by_severity_mix = 'by severity and status';
-$s_by_priority_mix = 'by priority and status';
-$s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
+$s_graph_imp_status_title = 'Graf podle stavu' ;
+$s_graph_imp_priority_title = 'Graf podle priority' ;
+$s_graph_imp_severity_title = 'Graf podle dùle¾itosti';
+$s_graph_imp_category_title = 'Graf podle kategorie';
+$s_graph_imp_resolution_title = 'Graf podle øe¹ení';
+$s_by_status_pct = '% podle stavu';
+$s_by_priority_pct = '% podle priority';
+$s_by_severity_pct = '% podle dùle¾itosti';
+$s_by_category_pct = '% podle kategorie';
+$s_by_resolution_pct = '% podle øe¹ení';
+$s_by_severity_mix = 'podle dùle¾itosti a stavu';
+$s_by_priority_mix = 'podle priority a stavu';
+$s_by_resolution_mix = 'podle øe¹ení a stavu';
+$s_synthesis_link = 'Tvorba';
+$s_status_link = 'podle stavu';
+$s_priority_link = 'podle priority';
+$s_severity_link = 'podle dùle¾itosti';
+$s_category_link = 'podle kategorie';
+$s_resolution_link = 'podle øe¹ení';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Display selected only';
+$s_hide_button = 'Zobrazit pouze vybrané';
 
 # print_all_bug_options.php : printing preferences
 $s_printing_preferences_title = 'Vyberte pole k tisku';
@@ -145,7 +146,7 @@ $s_bugnote_title = 'Operátor reportu' ;
 $s_bugnote_date = 'Datum reportu';
 $s_bugnote_description = 'Popis reportu';
 
-$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = 'K návratu na pøedcházející stránku prosím pou¾ijte tlaèítko "Zpìt" va¹eho prohlí¾eèe.  Mù¾ete tak opravit problémy indikované touto chybovou zprávou, nebo zvolit jiný pokyn.  Mù¾ete také zvolit jinou volbu z nabídky a pøejít pøímo na jinou sekci.';
 
 # ERROR strings
 $MANTIS_ERROR[ERROR_GENERIC]            = 'CHYBA: Pøi této akci se vyskytla chyba. Oznamte to va¹emu lokálnímu správci.';
@@ -189,7 +190,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'CHYBA: U¾ivatelské pole tohoto jmé
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'CHYBA: Toto jméno ji¾ existuje.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'CHYBA: Minimálnì jeden projekt vyu¾ívá toto pole.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'CHYBA: Tato hodnota není pøípustná pro toto pole';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'CHYBA: Nepøípustná definice u¾ivatelského pole';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'CHYBA: LDAP Autentizace se nezdaøila';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'CHYBA: LDAP Chyba spojení se serverem';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'CHYBA: LDAP Chyba pøi aktualizaci záznamu.';
@@ -204,7 +205,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'CHYBA: Kategorie nenalezena.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'CHYBA: Verze tohoto jména ji¾ existuje.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'CHYBA: Verze nenalezena.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'CHYBA: Neplatné u¾ivatelské jméno.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'CHYBA: U¾ivatel nemá potøebnou pøístupovou úroveò';
 
 $s_login_error = 'CHYBA: vá¹ úèet je zablokován nebo jste zadali chybnou kombinaci login/heslo.';
 $s_login_cookies_disabled = 'CHYBA: Vá¹ prohlí¾eè buï neumí nebo odmítá pracovat s cookies.';
@@ -219,7 +220,7 @@ $s_logged_in_as = 'Pøihlá¹en';
 $s_prefix_for_deleted_users = 'u¾ivatel';
 
 $s_administrator = 'správce';
-$s_myself = "Myself";
+$s_myself = "Já sám";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:recenzent,25:reportér,40:aktualizátor,55:vývojáø,70:vedoucí,90:správce';
@@ -248,19 +249,19 @@ $s_reset_request_msg = '®ádost o vynulování Va¹eho hesla byla vyøe¹ena';
 $s_account_name_msg = 'Va¹e u¾ivatelské jméno je';
 $s_news_password_msg = 'Zde je Va¹e nové heslo';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'Následující bug vy¾aduje Va¹i REAKCI.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Následující bug byl UZNÁN.';
+$s_email_notification_title_for_status_bug_confirmed = 'Následující bug byl UZNÁN.';
+$s_email_notification_title_for_status_bug_assigned = 'Následující bug byl PØIØAZEN.';
+$s_email_notification_title_for_status_bug_resolved = 'Následující bug byl VYØE©EN.';
+$s_email_notification_title_for_status_bug_closed = 'Následující bug byl UZAVØEN.';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'Následující bug byl PØIDÁN.';
+$s_email_notification_title_for_action_bug_assigned = 'Následující bug byl PØIØAZEN.';
+$s_email_notification_title_for_action_bug_reopened = 'Následující bug byl ZNOVUOTEVØEN.';
+$s_email_notification_title_for_action_bug_deleted = 'Následující bug byl VYMAZÁN.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'K bugu byla pøidána poznámka.';
 
 $s_email_reporter = 'Autor';
 $s_email_handler = 'Operátor';
@@ -433,7 +434,7 @@ $s_status = 'Stav';
 $s_duplicate_id = 'Duplicitní ID';
 $s_os = 'OS';
 $s_projection = 'Projection';
-$s_os_version = 'Verze';
+$s_os_version = 'Verze OS';
 $s_eta = 'ETA';
 $s_product_version = 'Verze produktu';
 $s_build = 'Build';
@@ -625,7 +626,7 @@ $s_reset_password_button = 'Vynulovat heslo';
 $s_delete_user_button = 'Smazat u¾ivatele';
 $s_reset_password_msg = 'Nastavit heslo na náhodnì vygenerovanou hodnotu.';
 $s_reset_password_msg2 = 'Nastavit heslo na prázdné.';
-$s_show_all_users = 'ALL';
+$s_show_all_users = 'v¹ichni';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Úèet je chránìn. Není mo¾né vynulovat heslo.';
@@ -784,7 +785,7 @@ $s_site_settings_updated_msg = 'Nastavení stránky bylo aktualizováno';
 # summary_page.php
 $s_summary_title = 'Shrnutí';
 $s_summary_jpgraph_link = 'Roz¹íøené shrnutí';
-$s_by_project = 'by project';
+$s_by_project = 'podle projektu';
 $s_by_status = 'podle stavu';
 $s_by_date = 'podle data(dny)';
 $s_by_severity = 'podle dùle¾itosti';
@@ -793,13 +794,13 @@ $s_by_category = 'podle kategorie';
 $s_by_priority = 'podle priority';
 $s_by_developer = 'podle vývojáøe';
 $s_by_reporter ='podle autora';
-$s_reporter_by_resolution = 'Reporter By Resolution';
-$s_reporter_effectiveness = 'Reporter Effectiveness';
-$s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
-$s_total = 'Total';
+$s_reporter_by_resolution = 'Autor podle øe¹ení';
+$s_reporter_effectiveness = 'Autor podle efektivity';
+$s_developer_by_resolution = 'Vývojáø podle øe¹ení';
+$s_percentage_fixed = '% opravených';
+$s_percentage_errors = '% chybných';
+$s_errors = 'Chybné';
+$s_total = 'Celkem';
 $s_time_stats = 'èasové statistiky pro vyøe¹ené bugy(dny)';
 $s_longest_open_bug = 'nejdéle otevøený bug';
 $s_longest_open = 'nejdéle otevøený';
@@ -821,10 +822,10 @@ $s_none = '¾ádný';
 $s_search ='Hledat';
 $s_view_prev_link = 'Pøedchozí';
 $s_view_next_link = 'Následující';
-$s_prev = 'Prev';
-$s_next = 'Next';
-$s_first = 'First';
-$s_last = 'Last';
+$s_prev = 'Zpìt';
+$s_next = 'Dále';
+$s_first = 'První';
+$s_last = 'Poslední';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Jednoduchý pohled';
@@ -832,7 +833,7 @@ $s_viewing_bug_advanced_details_title = 'Roz¹íøené detaily bugu';
 $s_product_build = 'Build produktu';
 $s_system_profile = 'Popis systému';
 $s_update_bug_button = 'Aktualizovat';
-$s_bug_assign_to_button = 'Assign To:';
+$s_bug_assign_to_button = 'Pøiøadit k:';
 $s_reopen_bug_button = 'Znovuotevøít';
 $s_attached_files = 'Pøipojené soubory';
 $s_publish = 'Publikovat';
@@ -880,9 +881,9 @@ $s_hide_status = 'Skrýt stav';
 $s_filter_closed = "Uzavøeno";
 $s_filter_resolved = "Vyøízeno";
 
-$s_attachments = "attachment(s)";
-$s_attachment_alt = "A";
+$s_attachments = "dodatky";
+$s_attachment_alt = "D";
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'cz';
 ?>
