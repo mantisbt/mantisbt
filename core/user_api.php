@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.6 2002-08-25 20:26:03 jfitzell Exp $
+	# $Id: user_api.php,v 1.7 2002-08-25 21:44:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -333,7 +333,7 @@
 
 		$c_user_id = (integer)$p_user_id;
 
-	    if ( !get_user_field( $p_user_id, 'protected' ) ) {
+	    if ( !user_get_field( $p_user_id, 'protected' ) ) {
 		    # Remove account
 	    	$query = "DELETE
     				FROM $g_mantis_user_table
@@ -665,7 +665,7 @@
 		if ( $count>0 ) {
 			return db_result( $result, 0, 0 );
 		} else {
-			return get_user_field( $t_user_id, 'access_level' );
+			return user_get_field( $t_user_id, 'access_level' );
 		}
 	}
 	# --------------------
@@ -806,7 +806,7 @@
 	# --------------------
 	# return the specified user field for the user id
 	# exception for LDAP email
-	function get_user_field( $p_user_id, $p_field ) {
+	function user_get_field( $p_user_id, $p_field ) {
 		global $g_mantis_user_table,$g_use_ldap_email,$g_login_method;
 		if ( ( ON == $g_use_ldap_email ) && ( 'email' == $p_field  ) ) {
 		    # Find out what username belongs to the p_user_id and ask ldap
@@ -821,6 +821,28 @@
 		$result =  db_query( $query );
 		return db_result( $result, 0, 0 );
 
+	}
+	# --------------------
+	# returns username
+	function user_get_name( $p_user_id ) {
+		global $g_mantis_user_table, $s_user_no_longer_exists;
+
+		$c_user_id = db_prepare_int( $p_user_id );
+
+		if ( 0 == $p_user_id ) {
+			return '';
+		}
+
+		$query = "SELECT username
+				FROM $g_mantis_user_table
+				WHERE id='$c_user_id'";
+		$result = db_query( $query );
+
+		if ( db_num_rows( $result ) > 0 ) {
+			return db_result( $result );
+		} else {
+			return $s_user_no_longer_exists;
+		}
 	}
 	# --------------------
 	###########################################################################

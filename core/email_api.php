@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: email_api.php,v 1.3 2002-08-25 21:44:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -138,7 +138,7 @@
 			$v_email = $val[0];
 
 			# add all administrators if notification flag enabled
-			$t_access_level = get_user_field( $v_id, 'access_level' );
+			$t_access_level = user_get_field( $v_id, 'access_level' );
 
 			if ( ($t_access_level == ADMINISTRATOR) && (ON == get_notify_flag( $p_notify_type, 'admin' ))) {
 				$send_arr[] = $v_email;
@@ -392,8 +392,9 @@
 		$result = db_query( $query );
 		$t_project_name = db_result( $result, 0, 0 );
 
-		$t_reporter_name = get_user( $v_reporter_id );
-		$t_handler_name  = get_user( $v_handler_id );
+		$t_reporter_name = user_get_name( $v_reporter_id );
+
+		$t_handler_name  = user_get_name( $v_handler_id );
 
 		$v2_description   = string_email( $v2_description );
 		$v_summary        = string_email( $v_summary );
@@ -473,7 +474,7 @@
 					WHERE id='$t_bugnote_text_id'";
 			$result2 = db_query( $query );
 
-			$t_username = get_user( $t_reporter_id );
+			$t_username = user_get_name( $t_reporter_id );
 
 			$t_note = db_result( $result2, 0, 0 );
 			$t_note = string_email( $t_note );

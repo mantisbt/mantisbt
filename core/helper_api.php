@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.3 2002-08-25 20:23:18 jfitzell Exp $
+	# $Id: helper_api.php,v 1.4 2002-08-25 21:44:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -78,59 +78,6 @@
 		$result = db_query( $query );
 		if ( 0 == db_result( $result, 0, 0 ) ) {
 			print_header_redirect( 'main_page.php' );
-		}
-	}
-	### --------------------
-	# process the $p_string and convert filenames in the format
-	# cvs:filename.ext or cvs:filename.ext:n.nn to a html link
-	function process_cvs_link( $p_string ) {
-		global $g_cvs_web;
-
-		return preg_replace( '/cvs:([^\.\s:,\?!]+(\.[^\.\s:,\?!]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i',
-							 '[CVS] <a href="'.$g_cvs_web.'\\1?rev=\\4" target="_new">\\1</a>\\5',
-							 $p_string );
-	}
-	### --------------------
-	# process the $p_string and convert filenames in the format
-	# cvs:filename.ext or cvs:filename.ext:n.nn to a html link
-	function process_cvs_link_email( $p_string ) {
-		global $g_cvs_web;
-
-		return preg_replace( '/cvs:([^\.\s:,\?!]+(\.[^\.\s:,\?!]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i',
-							 '[CVS] '.$g_cvs_web.'\\1?rev=\\4\\5',
-							 $p_string );
-	}
-	# --------------------
-	# process the $p_string and create links to bugs if warranted
-	# Uses the $g_bug_link_tag variable to determine the bug link tag
-	# eg. #45  or  bug:76
-	# default is the # symbol.  You may substitue any pattern you want.
-	function process_bug_link( $p_string ) {
-		global $g_bug_link_tag;
-
-		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"<a href=\"view_bug_advanced_page.php?f_id=\\1\">#\\1</a>",
-								$p_string);
-		} else {
-			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"<a href=\"view_bug_page.php?f_id=\\1\">#\\1</a>",
-								$p_string);
-		}
-	}
-	# --------------------
-	# process the $p_string and convert bugs in this format #123 to a plain text link
-	function process_bug_link_email( $p_string ) {
-		global	$g_bug_link_tag;
-
-		if ( ON == get_current_user_pref_field( 'advanced_view' ) ) {
-			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"view_bug_advanced_page.php?f_id=\\1",
-								$p_string);
-		} else {
-			return preg_replace("/$g_bug_link_tag([0-9]+)/",
-								"view_bug_page.php?f_id=\\1",
-								$p_string);
 		}
 	}
 	# --------------------

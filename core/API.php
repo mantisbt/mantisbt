@@ -51,6 +51,7 @@
 	require_once( $t_core_dir . 'error_api.php' );
 	require_once( $t_core_dir . 'security_api.php' );
 	require_once( $t_core_dir . 'lang_api.php' );
+	require_once( $t_core_dir . 'string_api.php' );
 	require_once( $t_core_dir . 'html_api.php' );
 	require_once( $t_core_dir . 'print_api.php' );
 	require_once( $t_core_dir . 'helper_api.php' );

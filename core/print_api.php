@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.2 2002-08-25 08:14:59 jfitzell Exp $
+	# $Id: print_api.php,v 1.3 2002-08-25 21:44:48 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -78,26 +78,6 @@
 			print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 		} else {
 			PRINT $s_user_no_longer_exists;
-		}
-	}
-	# --------------------
-	# returns username if account
-	function get_user( $p_user_id ) {
-		global $g_mantis_user_table, $s_user_no_longer_exists;
-
-		$c_user_id = (integer)$p_user_id;
-
-		if ( '0000000' == $p_user_id ) {
-			return '';
-		}
-		$query = "SELECT username
-				FROM $g_mantis_user_table
-				WHERE id='$c_user_id'";
-		$result = db_query( $query );
-		if ( db_num_rows( $result )>0 ) {
-			return db_result( $result, 0, 0 );
-		} else {
-			return $s_user_no_longer_exists;
 		}
 	}
 	# --------------------
@@ -179,7 +159,7 @@
 				$v_username = $val[0];
 
 				# always add all administrators
-				$t_access_level = get_user_field( $v_id, 'access_level' );
+				$t_access_level = user_get_field( $v_id, 'access_level' );
 				if ( ADMINISTRATOR == $t_access_level ) {
 					$user_arr[$v_username] = array( $v_username, $v_id );
 					continue;
@@ -356,7 +336,7 @@
 				$v_username = $val[0];
 
 				# always add all administrators
-				$t_access_level = get_user_field( $v_id, 'access_level' );
+				$t_access_level = user_get_field( $v_id, 'access_level' );
 				if ( ADMINISTRATOR == $t_access_level ) {
 					$user_arr[$v_username] = array( $v_username, $v_id );
 					continue;
@@ -1155,113 +1135,5 @@
 		return $p_string;
 	}
 	# --------------------
-	###########################################################################
-	# String Processing API
-	###########################################################################
-	# --------------------
-	# every string that comes from a textarea should be processed through this
-	# function *before* insertion into the database.
-	function string_prepare_textarea( $p_string ) {
-		global $g_allow_href_tags, $g_allow_html_tags;
 
-		$p_string = htmlspecialchars( $p_string );
-
-		if ( ON == $g_allow_html_tags ) {
-			$p_string = filter_html_tags( $p_string );
-		}
-
-		if ( ON == $g_allow_href_tags ) {
-			$p_string = filter_href_tags( $p_string );
-		}
-
-		$p_string = filter_img_tags( $p_string );
-		$p_string = addslashes( $p_string );
-		return $p_string;
-	}
-	# --------------------
-	# every string that comes from a text field should be processed through this
-	# function *before* insertion into the database.
-	function string_prepare_text( $p_string ) {
-		global $g_allow_href_tags, $g_allow_html_tags;
-
-		$p_string = htmlspecialchars( $p_string );
-
-		if ( ON == $g_allow_html_tags ) {
-			$p_string = filter_html_tags( $p_string );
-		}
-
-		if ( ON == $g_allow_href_tags ) {
-			$p_string = filter_href_tags( $p_string );
-		}
-
-		$p_string = filter_img_tags( $p_string );
-		$p_string = addslashes( $p_string );
-		return $p_string;
-	}
-	# --------------------
-	# Use this to prepare a string for display to HTML
-	function string_display( $p_string ) {
-		$p_string = stripslashes( $p_string );
-		$p_string = process_bug_link( $p_string );
-		$p_string = process_cvs_link( $p_string );
-		$p_string = nl2br( $p_string );
-		return $p_string;
-	}
-	# --------------------
-	# Prepare a string for plain text display in email
-	function string_email( $p_string ) {
-		$p_string = stripslashes( $p_string );
-		$p_string = unfilter_href_tags( $p_string );
-		$p_string = process_bug_link_email( $p_string );
-		$p_string = process_cvs_link_email( $p_string );
-		$p_string = str_replace( '&lt;', '<',  $p_string );
-		$p_string = str_replace( '&gt;', '>',  $p_string );
-		$p_string = str_replace( '&quot;', '"',  $p_string );
-		$p_string = str_replace( '&amp;', '&',  $p_string );
-
-		return $p_string;
-	}
-	# --------------------
-	# Process a string for display in a textarea box
-	function string_edit_textarea( $p_string ) {
-		$p_string = stripslashes( $p_string );
-		$p_string = str_replace( '<br>', '',  $p_string );
-		$p_string = unfilter_href_tags( $p_string );
-		$p_string = str_replace( '<br />', '\n',  $p_string );
-		$p_string = str_replace( '&lt;', '<',  $p_string );
-		$p_string = str_replace( '&gt;', '>',  $p_string );
-		$p_string = str_replace( '&quot;', '"',  $p_string );
-		return $p_string;
-	}
-	# --------------------
-	# Process a string for display in a text box
-	function string_edit_text( $p_string ) {
-		$p_string = stripslashes( $p_string );
-		$p_string = str_replace( '<br>', '',  $p_string );
-		$p_string = unfilter_href_tags( $p_string );
-		$p_string = str_replace( '&lt;', '<',  $p_string );
-		$p_string = str_replace( '&gt;', '>',  $p_string );
-		$p_string = str_replace( '&quot;', '\'',  $p_string );
-		return $p_string;
-	}
-	# --------------------
-	###########################################################################
-	# Miscellaneous String Functions API
-	###########################################################################
-	# --------------------
-	# duplicates str_pad() from PHP4
-	# left pad $p_string with $p_pad until we reach $p_length
-	function str_pd( $p_string, $p_pad, $p_length, $p_dir=STR_PAD_RIGHT ) {
-		$t_num = $p_length - strlen( $p_string );
-		for ($i=0;$i<$t_num;$i++) {
-			switch ( $p_dir ) {
-				case STR_PAD_LEFT: $p_string = $p_pad.$p_string;
-									break;
-				case STR_PAD_RIGHT: $p_string = $p_string.$p_pad;
-									break;
-			}
-		}
-		return $p_string;
-	}
-	# --------------------
 ?>
