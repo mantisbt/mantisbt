@@ -130,7 +130,7 @@
 		<select name=f_show_category>
 			<option value="any"><? echo $s_any ?>
 			<option value="any">
-			<? print_category_option_list() ?>
+			<? print_category_option_list( $f_show_category ) ?>
 		</select>
 		<select name=f_show_severity>
 			<option value="any"><? echo $s_any ?>
