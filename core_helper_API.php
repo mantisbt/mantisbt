@@ -364,13 +364,14 @@
 		$s_var = "s_".$p_enum_name."_enum_string";
 		global $$g_var, $$s_var;
 
-		return get_enum_to_string( $$s_var, $p_val );
+		# use the global enum string to search
 		$t_arr = explode_enum_string( $$g_var );
 		$t_arr_count = count( $t_arr );
 		for ( $i=0;$i<$t_arr_count;$i++ ) {
 			$elem_arr = explode_enum_arr( $t_arr[$i] );
 			if ( $elem_arr[0] == $p_val ) {
-				get_enum_to_string( $$s_var, $elem_arr[0] );
+				# now get the appropriate translation
+				return get_enum_to_string( $$s_var, $p_val );
 			}
 		}
 		return "@null@";

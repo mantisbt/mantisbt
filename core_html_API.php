@@ -508,7 +508,7 @@
 	# --------------------
 	# Print the color legend for the colors
 	function print_status_colors() {
-		global $g_status_enum_string, $s_status_enum_string,
+		global	$g_status_enum_string,
 				$g_new_color, $g_feedback_color,
 				$g_acknowledged_color, $g_confirmed_color,
 				$g_assigned_color, $g_resolved_color,

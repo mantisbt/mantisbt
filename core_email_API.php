@@ -273,11 +273,6 @@
 				$s_email_duplicate, $s_email_date_submitted,
 				$s_email_last_modified, $s_email_summary,
 				$s_email_description,
-				$s_resolution_enum_string,
-				$s_severity_enum_string,
-				$s_priority_enum_string,
-				$s_status_enum_string,
-				$s_reproducibility_enum_string,
 				$g_email_separator1,
 				$g_email_padding_length;
 

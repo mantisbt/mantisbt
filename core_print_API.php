@@ -426,20 +426,25 @@
 		} # end for
 	}
 	# --------------------
-	function print_project_user_option_list( $p_val=0 ) {
-		global $g_mantis_project_table, $s_access_levels_enum_string;
+	# prints the list of access levels exluding ADMINISTRATOR
+	# this is used when adding users to projects
+	function print_project_user_option_list( $p_val ) {
+		global $g_mantis_project_table, $g_access_levels_enum_string;
 
-		$t_arr = explode_enum_string( $s_access_levels_enum_string );
+		$t_arr = explode_enum_string( $g_access_levels_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
 
-			if ( ADMINISTRATOR == $t_elem[0]  ) { continue; }
+			if ( $t_elem[0] >= ADMINISTRATOR ) {
+				continue;
+			}
 
+			$t_access_level = get_enum_element( "access_levels", $t_elem[0] );
 			if ( $p_val == $t_elem[0] ) {
-				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_elem[1]</option>";
+				PRINT "<option value=\"$t_elem[0]\" SELECTED>$t_access_level</option>";
 			} else {
-				PRINT "<option value=\"$t_elem[0]\">$t_elem[1]</option>";
+				PRINT "<option value=\"$t_elem[0]\">$t_access_level</option>";
 			}
 		} # end for
 	}

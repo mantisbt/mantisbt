@@ -65,7 +65,7 @@
 
 			PRINT "<tr align=\"center\">";
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
-					echo get_enum_to_string( $p_enum_string, $t_s[0] );
+					echo get_enum_element( $p_enum, $t_s[0] );
 				PRINT "</td>";
 				PRINT "<td width=\"50%\" bgcolor=\"$t_bgcolor\">";
 					#PRINT "$open_bug_count $resolved_bug_count $closed_bug_count $t_enum_count";

@@ -73,7 +73,7 @@
 				<?php echo $s_by_status ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $s_status_enum_string, "status" ) ?>
+		<?php print_bug_enum_summary( $g_status_enum_string, "status" ) ?>
 		</table>
 	</td>
 	<td width="50%">
@@ -97,7 +97,7 @@
 				<?php echo $s_by_severity ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $s_severity_enum_string, "severity" ) ?>
+		<?php print_bug_enum_summary( $g_severity_enum_string, "severity" ) ?>
 		</table>
 	</td>
 	<td>
@@ -108,7 +108,7 @@
 				<?php echo $s_by_resolution ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $s_resolution_enum_string, "resolution" ) ?>
+		<?php print_bug_enum_summary( $g_resolution_enum_string, "resolution" ) ?>
 		</table>
 	</td>
 </tr>
@@ -132,7 +132,7 @@
 				<?php echo $s_by_priority ?>:
 			</td>
 		</tr>
-		<?php print_bug_enum_summary( $s_priority_enum_string, "priority" ) ?>
+		<?php print_bug_enum_summary( $g_priority_enum_string, "priority" ) ?>
 		</table>
 	</td>
 </tr>
