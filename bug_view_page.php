@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.33 2003-02-13 14:04:09 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.34 2003-02-14 02:45:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -397,34 +397,7 @@
 		<table>
 			<tr align="center">
 <?php
-	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-
-	if ( $t_bug->status < $t_resolved ) {
-		# UPDATE button
-		html_button_bug_update( $f_bug_id );
-
-		# ASSIGN button
-		html_button_bug_assign( $f_bug_id );
-
-		# RESOLVE button
-		html_button_bug_resolve( $f_bug_id );
-	} else {
-		# REOPEN button
-		html_button_bug_reopen( $f_bug_id );
-	}
-
-	# CLOSE button
-	html_button_bug_close( $f_bug_id );
-
-	# MONITOR/UNMONITOR button
-	if ( user_is_monitoring_bug( auth_get_current_user_id(), $f_bug_id ) ) {
-		html_button_bug_unmonitor( $f_bug_id );
-	} else {
-		html_button_bug_monitor( $f_bug_id );
-	}
-
-	# DELETE button
-	html_button_bug_delete( $f_bug_id );
+	html_buttons_view_bug_page( $f_bug_id );
 ?>
 			</tr>
 		</table>
@@ -436,7 +409,7 @@
 
 <?php
 	# File upload box
-	if ( $t_bug->status < $t_resolved ) {
+	if ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) {
 		include( config_get( 'bug_file_upload_inc' ) );
 	}
 

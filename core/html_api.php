@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.44 2003-02-13 14:04:11 vboctor Exp $
+	# $Id: html_api.php,v 1.45 2003-02-14 02:45:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -697,13 +697,7 @@
 	# --------------------
 	# Print a button to monitor the given bug
 	function html_button_bug_monitor( $p_bug_id ) {
-		if ( PUBLIC == bug_get_field( $p_bug_id, 'view_state' ) ) {
-			$t_threshold = config_get( 'monitor_bug_threshold' );
-		} else {
-			$t_threshold = config_get( 'private_bug_threshold' );
-		}
-
-		if ( access_level_check_greater_or_equal( $t_threshold ) ) {
+		if ( access_level_check_greater_or_equal( config_get( 'monitor_bug_threshold' ) ) ) {
 			echo '<td class="center">';
 			html_button( 'bug_monitor.php',
 						 lang_get( 'monitor_bug_button' ), 
@@ -715,9 +709,11 @@
 	# Print a button to unmonitor the given bug
 	#  no reason to ever disallow someone from unmonitoring a bug
 	function html_button_bug_unmonitor( $p_bug_id ) {
+		echo '<td class="center">';
 		html_button( 'bug_monitor.php',
 					 lang_get( 'unmonitor_bug_button' ), 
 					 array( 'bug_id' => $p_bug_id, 'action' => 'delete' ) );
+		echo '</td>';
 	}
 	# --------------------
 	# Print a button to delete the given bug
@@ -729,5 +725,37 @@
 						 array( 'bug_id' => $p_bug_id ) );
 			echo '</td>';
 		}
+	}
+	# --------------------
+	# Print all buttons for view bug pages
+	function html_buttons_view_bug_page( $p_bug_id ) {
+		$t_resolved = config_get( 'bug_resolved_status_threshold' );
+
+		if ( $t_bug->status < $t_resolved ) {
+			# UPDATE button
+			html_button_bug_update( $p_bug_id );
+
+			# ASSIGN button
+			html_button_bug_assign( $p_bug_id );
+
+			# RESOLVE button
+			html_button_bug_resolve( $p_bug_id );
+		} else {
+			# REOPEN button
+			html_button_bug_reopen( $p_bug_id );
+		}
+
+		# CLOSE button
+		html_button_bug_close( $p_bug_id );
+
+		# MONITOR/UNMONITOR button
+		if ( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
+			html_button_bug_unmonitor( $p_bug_id );
+		} else {
+			html_button_bug_monitor( $p_bug_id );
+		}
+
+		# DELETE button
+		html_button_bug_delete( $p_bug_id );
 	}
 ?>
