@@ -156,7 +156,8 @@
 				if ( $i == $f_page_number ) {
 					PRINT "$i&nbsp;";
 				} else {
-					PRINT "<a href=\"$g_view_all_bug_page?f_page_number=$i\">$i</a>&nbsp;";
+					$f_search = urlencode( $f_search );
+					PRINT "<a href=\"$g_view_all_bug_page?f_page_number=$i&f_search=$f_search\">$i</a>&nbsp;";
 				}
 			}
 		?>
