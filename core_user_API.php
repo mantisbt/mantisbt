@@ -147,7 +147,7 @@
 							return false;
 						}
 
-			case CRYPT:
+			case MD5:
 						if ( md5( $p_test_password ) == $p_password ) {
 							return true;
 						} else {
