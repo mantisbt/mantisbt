@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.18 $
+	# $Revision: 1.19 $
 	# $Author: jfitzell $
-	# $Date: 2002-09-16 00:39:19 $
+	# $Date: 2002-09-21 20:56:11 $
 	#
-	# $Id: account_delete.php,v 1.18 2002-09-16 00:39:19 jfitzell Exp $
+	# $Id: account_delete.php,v 1.19 2002-09-21 20:56:11 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,19 +33,17 @@
 	# If an account is protected then no one can change the information
 	# This is useful for shared accounts or for demo purposes
 	$t_user_id = auth_get_current_user_id();
-
 	if ( user_delete( $t_user_id ) ) {
 		# delete cookies
 		#@@@ move these to a function... maybe in the gpc_api ??
-		setcookie( config_get( 'string_cookie' ) );
-		setcookie( config_get( 'project_cookie' ) );
-		setcookie( config_get( 'view_all_cookie' ) );
+		gpc_clear_cookie( config_get( 'string_cookie' ) );
+		gpc_clear_cookie( config_get( 'project_cookie' ) );
+		gpc_clear_cookie( config_get( 'view_all_cookie' ) );
 
 		print_meta_redirect( 'login_page.php' );
 	}
 ?>
 <?php print_page_top1() ?>
-<?php print_page_top2() ?>
 
 <br />
 <div align="center">
