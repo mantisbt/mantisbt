@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?php die('Not in use.'); ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );

@@ -9,7 +9,7 @@
 	# Login page POSTs results to login.php
 	# Check to see if the user is already logged in via login_cookie_check()
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php
 	# Check to see if the user is logged in and then validate the cookie value
 	if ( !empty( $g_string_cookie_val ) ) {

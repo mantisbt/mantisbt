@@ -8,7 +8,7 @@
 <?php
 	# Updates printing prefs then redirect to print_all_bug_page_page.php
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
 
 <?php login_cookie_check() ?>

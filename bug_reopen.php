@@ -6,18 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.16 $
-	# $Author: vboctor $
-	# $Date: 2002-08-23 13:16:51 $
+	# $Revision: 1.17 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-25 21:04:56 $
 	#
-	# $Id: bug_reopen.php,v 1.16 2002-08-23 13:16:51 vboctor Exp $
+	# $Id: bug_reopen.php,v 1.17 2002-08-25 21:04:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This file sets the bug to the chosen resolved state then gives the
 	# user the opportunity to enter a reason for the closure
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );

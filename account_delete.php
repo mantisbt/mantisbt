@@ -6,18 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.11 $
-	# $Author: jlatour $
-	# $Date: 2002-08-15 22:21:11 $
+	# $Revision: 1.12 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-25 21:04:55 $
 	#
-	# $Id: account_delete.php,v 1.11 2002-08-15 22:21:11 jlatour Exp $
+	# $Id: account_delete.php,v 1.12 2002-08-25 21:04:55 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Delete account, remove cookies, and redirect user to logout redirect page
 	# If the account is protected this fails.
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# check if users can't delete their own accounts

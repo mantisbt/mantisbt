@@ -9,7 +9,7 @@
 	# Bugnote delete confirmation page
 	# Page continues to bug_delete.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	bugnote_ensure_exists( $f_bugnote_id );

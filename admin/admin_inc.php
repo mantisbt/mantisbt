@@ -1,14 +1,14 @@
 <?php
 	$t_mantis_path = '..' . DIRECTORY_SEPARATOR;
 
-	require ( $t_mantis_path . 'constant_inc.php' );
+	require_once( $t_mantis_path . 'constant_inc.php' );
 
 	$t_custom_constants = $t_mantis_path . 'custom_constant_inc.php';
 	if ( file_exists( $t_custom_constants )) {
-		include ( $t_custom_constants );
+		require_once( $t_custom_constants );
 	}
 
-	require $t_mantis_path . 'config_defaults_inc.php';
+	require_once( $t_mantis_path . 'config_defaults_inc.php' );
 
 	$t_custom_config = $t_mantis_path . 'custom_config_inc.php';
 	if ( !file_exists( $t_custom_config )) {
@@ -16,10 +16,10 @@
 	}
 	
 	if ( file_exists( $t_custom_config ) ) {
-		include ( $t_custom_config );
+		require_once( $t_custom_config );
 	}
 
-	require $t_mantis_path . 'core' . DIRECTORY_SEPARATOR . 'database_api.php';
+	require_once( $t_mantis_path . 'core' . DIRECTORY_SEPARATOR . 'database_api.php' );
 
 	# Checks whether the specified field in the specified database exists. 
 	# If not, a message is displayed and the script exits.

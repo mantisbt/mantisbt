@@ -8,7 +8,7 @@
 <?php
 	# Removes all the cookies and then redirect to $g_logout_redirect_page
 ?>
-<?php include( 'core_API.php' ); ?>
+<?php require_once( 'core.php' ); ?>
 <?php
 	# delete cookies then redirect to $g_logout_redirect_page
 	setcookie( $g_string_cookie,	'', -1, $g_cookie_path );

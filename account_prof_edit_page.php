@@ -9,7 +9,7 @@
 	# This page allows the user to edit his/her profile
 	# Changes get POSTed to account_prof_update.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# get protected state

@@ -6,17 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.28 $
-	# $Author: vboctor $
-	# $Date: 2002-08-23 13:16:51 $
+	# $Revision: 1.29 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-25 21:04:56 $
 	#
-	# $Id: bug_update.php,v 1.28 2002-08-23 13:16:51 vboctor Exp $
+	# $Id: bug_update.php,v 1.29 2002-08-25 21:04:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Update bug data then redirect to the appropriate viewing page
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );

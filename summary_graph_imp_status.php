@@ -7,7 +7,7 @@
 	# <SQLI>
 	# This page displays "improved" charts on status : the old one and a 3D Pie
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.

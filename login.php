@@ -8,7 +8,7 @@
 <?php
 	# Check login then redirect to main_page.php3 or to login_page.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php
 	if (isset($f_cookietest)) {
 		if (!isset($$g_string_cookie)) {

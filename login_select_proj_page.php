@@ -8,7 +8,7 @@
 <?php
 	# Allows the user to select a project that is visible to him
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_user_check_only() ?>
 <?php
 	check_varset( $f_ref, '' );

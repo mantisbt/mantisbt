@@ -11,7 +11,7 @@
 
 	# Users can also manage their profiles
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( REPORTER );

@@ -9,7 +9,7 @@
 	# Users may change their user information from this page.
 	# The data is POSTed to account_update.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# get protected state

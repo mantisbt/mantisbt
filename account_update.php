@@ -10,7 +10,7 @@
 	# If an account is protected then changes are forbidden
 	# The page gets redirected back to account_page.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	$f_id 			= get_current_user_field( 'id' );

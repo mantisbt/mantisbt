@@ -6,17 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.22 $
+	# $Revision: 1.23 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-16 10:16:25 $
+	# $Date: 2002-08-25 21:04:56 $
 	#
-	# $Id: bugnote_add.php,v 1.22 2002-08-16 10:16:25 jfitzell Exp $
+	# $Id: bugnote_add.php,v 1.23 2002-08-25 21:04:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Insert the bugnote into the database then redirect to the bug page
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );

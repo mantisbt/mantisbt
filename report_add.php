@@ -8,7 +8,7 @@
 <?php
 	# This page stores the reported bug and then redirects to view_all_bug_page.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# these pages are invalid for the 'All Project' selection

@@ -9,7 +9,7 @@
 	# Make the specified profile the default
 	# Redirect to account_prof_menu_page.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# get protected state

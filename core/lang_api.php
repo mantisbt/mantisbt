@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.3 2002-08-25 15:49:47 vboctor Exp $
+	# $Id: lang_api.php,v 1.4 2002-08-25 21:04:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -55,15 +55,15 @@
 	# script is not used)
 	$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 	if ( $g_active_language != 'english' ) {
-		include( $t_lang_dir . 'strings_english.txt' );
+		require_once( $t_lang_dir . 'strings_english.txt' );
 	}
-	include( $t_lang_dir . 'strings_'.$g_active_language.'.txt' );
+	require_once( $t_lang_dir . 'strings_'.$g_active_language.'.txt' );
 
 	# Allow overriding strings declared in the language file.
 	# custom_strings_inc.php can use $g_active_language
 	$t_custom_strings = dirname ( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'custom_strings_inc.php';
 	if ( file_exists( $t_custom_strings ) ) {
-		include ( $t_custom_strings );
+		require_once( $t_custom_strings );
 	}
 
 ?>

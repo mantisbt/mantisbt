@@ -8,7 +8,7 @@
 <?php
 	# Reset prefs to defaults then redirect to account_prefs_page.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
 <?php login_cookie_check() ?>
 <?php

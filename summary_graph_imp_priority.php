@@ -7,7 +7,7 @@
 	# <SQLI>
 	# This page displays "improved" charts on priorities : bars, 3Dpie and a mix priorities per status
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.

@@ -1,5 +1,5 @@
 <?php
-include( 'core_API.php' );
+require_once( 'core.php' );
 
 login_cookie_check();
 

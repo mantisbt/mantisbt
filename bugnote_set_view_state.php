@@ -8,7 +8,7 @@
 <?php
 	# Set an existing bugnote private or public.
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# make sure the user accessing the note is valid and has proper access

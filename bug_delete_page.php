@@ -9,7 +9,7 @@
 	# Bug delete confirmation page
 	# Page contiues to bug_delete.php
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );

@@ -8,7 +8,7 @@
 <?php
 	# This page allows the close / suppress / others mass treatments, and display the adequate page
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 

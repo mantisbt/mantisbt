@@ -8,7 +8,7 @@
 <?php
 	# Add file and redirect to the referring page
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	$c_id = (integer)$f_id;

@@ -7,7 +7,7 @@
 	# <SQLI>
 	# This page displays "improved" charts on categories : categories on bars and 3Dpie
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.

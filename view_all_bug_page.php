@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.35 $
+	# $Revision: 1.36 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-23 09:54:17 $
+	# $Date: 2002-08-25 21:04:58 $
 	#
-	# $Id: view_all_bug_page.php,v 1.35 2002-08-23 09:54:17 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.36 2002-08-25 21:04:58 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# check to see if the cookie does not exist

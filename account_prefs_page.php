@@ -10,7 +10,7 @@
 	# Update is POSTed to acount_prefs_update.php3
 	# Reset is POSTed to acount_prefs_reset.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php require( 'account_prefs_inc.php' ) ?>
 <?php login_cookie_check() ?>
 <?php

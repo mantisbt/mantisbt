@@ -6,17 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.23 $
-	# $Author: vboctor $
-	# $Date: 2002-08-23 13:16:51 $
+	# $Revision: 1.24 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-25 21:04:56 $
 	#
-	# $Id: bug_update_page.php,v 1.23 2002-08-23 13:16:51 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.24 2002-08-25 21:04:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Show the simple update bug options
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	if ( ADVANCED_ONLY == $g_show_update ) {

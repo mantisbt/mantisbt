@@ -14,20 +14,20 @@
 	ob_start();
 
 	# Load constants and configuration files
-  	require( 'constant_inc.php' );
+  	require_once( 'constant_inc.php' );
 	if ( file_exists( 'custom_constant_inc.php' ) ) {
-		include( 'custom_constant_inc.php' );
+		require_once( 'custom_constant_inc.php' );
 	}
-	require( 'config_defaults_inc.php' );
+	require_once( 'config_defaults_inc.php' );
 	if ( file_exists( 'custom_config_inc.php' ) ) {
-		include( 'custom_config_inc.php' );
+		require_once( 'custom_config_inc.php' );
 	}
 	# for backward compatability
 	if ( file_exists( 'config_inc.php' ) ) {
-		include( 'config_inc.php' );
+		require_once( 'config_inc.php' );
 	}
 	
 	# Load rest of core in seperate directory.
-	include( $g_core_path . 'API.php');
+	require_once( $g_core_path . 'API.php');
 	# --------------------
 ?>

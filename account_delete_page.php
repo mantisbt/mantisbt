@@ -6,18 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.9 $
-	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:00 $
+	# $Revision: 1.10 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-25 21:04:56 $
 	#
-	# $Id: account_delete_page.php,v 1.9 2002-08-15 20:35:00 jlatour Exp $
+	# $Id: account_delete_page.php,v 1.10 2002-08-25 21:04:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This is the delete confirmation page
 	# The result is POSTed to account_delete.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# check if users can't delete their own accounts

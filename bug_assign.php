@@ -10,16 +10,16 @@
 	# Copyright (C) 2001  Steve Davies - steved@ihug.co.nz
 
 	# --------------------------------------------------------
-	# $Revision: 1.19 $
-	# $Author: prescience $
-	# $Date: 2002-08-19 02:04:46 $
+	# $Revision: 1.20 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-25 21:04:56 $
 	#
-	# $Id: bug_assign.php,v 1.19 2002-08-19 02:04:46 prescience Exp $
+	# $Id: bug_assign.php,v 1.20 2002-08-25 21:04:56 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# Assign bug to user then redirect to viewing page
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );

@@ -6,18 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.9 $
-	# $Author: jlatour $
-	# $Date: 2002-08-15 20:35:00 $
+	# $Revision: 1.10 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-25 21:04:56 $
 	#
-	# $Id: bug_monitor.php,v 1.9 2002-08-15 20:35:00 jlatour Exp $
+	# $Id: bug_monitor.php,v 1.10 2002-08-25 21:04:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This file sets the bug to the chosen resolved state then gives the
 	# user the opportunity to enter a reason for the closure
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );

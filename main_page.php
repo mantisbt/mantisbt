@@ -9,7 +9,7 @@
 	# This is the first page a user sees when they login to the bugtracker
 	# News is displayed which can notify users of any important changes
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

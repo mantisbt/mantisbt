@@ -12,7 +12,7 @@
 	#	- the bugs displayed in print_all_bug_page.php are saved in a .doc or .xls file
 	#   - the IE icons allows to see or directly print the same result
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# check to see if the cookie does not exist

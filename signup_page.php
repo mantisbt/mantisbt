@@ -5,7 +5,7 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php include( 'core_api.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php
 	# Check for invalid access to signup page
 	if ( OFF == $g_allow_signup ) {

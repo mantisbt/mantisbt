@@ -8,7 +8,7 @@
 <?php
 	# This file POSTs data to report_bug.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# these pages are invalid for the 'All Project' selection

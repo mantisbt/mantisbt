@@ -8,7 +8,7 @@
 	# Initial code for this addon cames from Duncan Lisset
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.

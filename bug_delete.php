@@ -8,7 +8,7 @@
 <?php
 	# Deletes the bug and re-directs to view_all_bug_page.php 
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );

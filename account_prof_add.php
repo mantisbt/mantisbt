@@ -8,7 +8,7 @@
 <?php
 	# This file adds a new profile and redirects to account_proj_menu_page.php3
 ?>
-<?php include( 'core_API.php' ) ?>
+<?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( REPORTER );
