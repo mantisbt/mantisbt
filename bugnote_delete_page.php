@@ -5,8 +5,8 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	# Bug delete confirmation page
-	# Page contiues to bug_delete.php3
+	# Bugnote delete confirmation page
+	# Page continues to bug_delete.php3
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>

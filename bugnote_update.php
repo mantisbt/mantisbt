@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	# Update bug data then redirect to the appropriate viewing page
+	# Update bugnote data then redirect to the appropriate viewing page
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
@@ -13,7 +13,7 @@
 	project_access_check( $f_id );
 	check_access( REPORTER );
 
-	$f_bugnote_text		= $f_bugnote_text.'\n\n';
+	$f_bugnote_text		= $f_bugnote_text."\n\n";
 	$f_bugnote_text		= $f_bugnote_text.$s_edited_on.date( $g_normal_date_format );
 	$c_bugnote_text		= string_prepare_textarea( $f_bugnote_text );
 	$c_bugnote_text_id	= (integer)$f_bugnote_text_id;

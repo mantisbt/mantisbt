@@ -352,7 +352,10 @@
 				if ( !ereg(($g_custom_status_slot[0] + 1),$$t_var) )  {
 					for ($i = 0 ; $i < $att_arr_count ; $i++) {
 						$pos = strpos(($$t_var), ',80');
-						$$t_var = substr($$t_var,0,$pos).','.($g_custom_status_slot[0]+1+$i).':'.$t_attribute_arr[$i].substr($$t_var,$pos);
+						# Prevent empty values
+						if ($t_attribute_arr[$i]) {
+							$$t_var = substr($$t_var,0,$pos).','.($g_custom_status_slot[0]+1+$i).':'.$t_attribute_arr[$i].substr($$t_var,$pos);
+						}
 					} # for loop
 				} # if ereg 
 			} else {   // for other attributes, custom ones are appended after the others, starting with number 110
