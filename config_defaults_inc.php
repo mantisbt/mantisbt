@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.119 2003-04-24 04:00:38 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.120 2003-05-23 11:52:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -48,7 +48,7 @@
 	# requires trailing /
 	if ( isset ( $_SERVER['PHP_SELF'] ) ) {
 		$t_protocol = 'http';
-		if ( isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] != 'off' ) ) {
+		if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 			$t_protocol = 'https';
 		}
 

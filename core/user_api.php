@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.58 2003-04-23 19:32:40 jfitzell Exp $
+	# $Id: user_api.php,v 1.59 2003-05-23 11:52:27 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -117,14 +117,16 @@
 
 		$t_user_table = config_get( 'mantis_user_table' );
 
-		$query = "SELECT COUNT(*)
-				  FROM $t_user_table
-				  WHERE username='$c_username'";
+		$query = "SELECT username
+				FROM $t_user_table
+				WHERE username='$c_username'
+				LIMIT 1";
 
-	    $result = db_query( $query );
+		$result = db_query( $query );
 
-	    if ( db_result( $result ) > 0 ) {
-			return false;
+		if ( db_num_rows( $result ) > 0 ) {
+			$row = db_fetch_array( $result );
+			return (strcmp($row['username'], $p_username) != 0);  // Xyz & xyz shouldn't match
 		} else {
 			return true;
 		}
