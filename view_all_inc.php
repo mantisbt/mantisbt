@@ -229,11 +229,9 @@
 		<td>
 			<?
 				# print username instead of status
-				if (( $g_show_assigned_names==1 )&&( $v_handler_id > 0 )&&
-					( $v_status!=CLOSED )&&( $v_status!=RESOLVED )) {
+				if (( $g_show_assigned_names==1 )&&( $v_handler_id > 0 )) {
 					echo "(".get_user_info( $v_handler_id, "username" ).")";
 				} else {
-					#echo get_enum_element( $g_status_enum_string, $v_status );
 					echo get_enum_element( $s_status_enum_string, $v_status );
 				}
 			?>
@@ -289,3 +287,23 @@
 	}
 ?>
 </div>
+
+<? # print a legend for the status color coding ?>
+<p>
+<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<tr>
+	<td bgcolor="<? echo $g_white_color ?>">
+	<table width="100%">
+	<tr align="center">
+		<td width=10% bgcolor=<? echo $g_new_color?>><? echo get_enum_element( $s_status_enum_string, NEW_ ) ?></td>
+		<td width=10% bgcolor=<? echo $g_feedback_color?>><? echo get_enum_element( $s_status_enum_string, FEEDBACK ) ?></td>
+		<td width=10% bgcolor=<? echo $g_acknowledged_color?>><? echo get_enum_element( $s_status_enum_string, ACKNOWLEDGED ) ?></td>
+		<td width=10% bgcolor=<? echo $g_confirmed_color?>><? echo get_enum_element( $s_status_enum_string, CONFIRMED ) ?></td>
+		<td width=10% bgcolor=<? echo $g_assigned_color?>><? echo get_enum_element( $s_status_enum_string, ASSIGNED ) ?></td>
+		<td width=10% bgcolor=<? echo $g_resolved_color?>><? echo get_enum_element( $s_status_enum_string, RESOLVED ) ?></td>
+		<td width=10% bgcolor=<? echo $g_closed_color?>><? echo get_enum_element( $s_status_enum_string, CLOSED ) ?></td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table>

@@ -20,6 +20,7 @@ Mantis
  * Added file_type field to mantis_bug_file_table and mantis_project_file_table.
  * Added LDAP login support.
  * Added ability to limit reporters to see only their bugs.  Security will need to be tightened later.
+ * Added a legend for the status colors.
 
 11.04.2001  -   0.15.12
 

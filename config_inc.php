@@ -187,7 +187,7 @@
 
 	# --- show assigned to names ------
 	# This is in the view all pages
-	$g_show_assigned_names = 0;
+	$g_show_assigned_names = 1;
 
 	# --- show priority as icon ---
 	# 0: Shows priority as icon in view all bugs page
@@ -374,7 +374,7 @@
 
 	# --- limit reporters -------------
 	# Set to 1 if you wish to limit reporters to only viewing bugs that they report.
-	$g_limit_reporters = 1;
+	$g_limit_reporters = 0;
 
 	##############################
 	### Mantis Color Variables ###
