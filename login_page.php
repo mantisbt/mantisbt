@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.31 2003-08-17 14:28:17 vboctor Exp $
+	# $Id: login_page.php,v 1.32 2003-08-21 14:31:42 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -105,7 +105,7 @@
 	#
 
 	# Warning, if plain passwords are selected
-	if ( config_get( 'login_method' ) == AUTH_PLAIN ) {
+	if ( config_get( 'login_method' ) === PLAIN ) {
 		echo '<div class="warning" align="center">';
 		echo '<p><font color="red"><strong>WARNING:</strong> Plain password authentication is used, this will expose your passwords to administrators.</font></p>';
 		echo '</div>';

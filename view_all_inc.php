@@ -413,7 +413,7 @@
 	<?php # -- Status / Handler -- ?>
 	<td class="center">
 		<?php
-			echo '<a title="' . get_enum_element( 'resolution', $v_resolution ) . '">' . get_enum_element( 'status', $v_status ) . '</a>';
+			echo '<u><a title="' . get_enum_element( 'resolution', $v_resolution ) . '">' . get_enum_element( 'status', $v_status ) . '</a></u>';
 			# print username instead of status
 			if ( $v_handler_id > 0 && ON == config_get( 'show_assigned_names' ) ) {
 				echo ' (';

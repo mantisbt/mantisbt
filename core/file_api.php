@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.38 2003-07-25 21:26:53 beerfrick Exp $
+	# $Id: file_api.php,v 1.39 2003-08-21 14:31:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -26,7 +26,7 @@
 		# Check if it's a project document filename (doc-000-filename)
 		# or a bug attachment filename (000-filename)
 		# This is important to handle filenames with '-'s properly
-		if ($t_array[0] == config_get( document_files_prefix )) {
+		if ( $t_array[0] == config_get( 'document_files_prefix' ) ) {
 			$t_array = explode ('-', $p_filename, 3);
 		}
 		return $t_array[count( $t_array ) - 1];

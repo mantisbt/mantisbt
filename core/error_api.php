@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.26 2003-08-20 14:00:59 vboctor Exp $
+	# $Id: error_api.php,v 1.27 2003-08-21 14:31:42 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -208,7 +208,7 @@
 
 			foreach ( $t_stack as $t_frame ) {
 				echo '<tr ' . helper_alternate_class() . '>';
-				echo '<td>' . htmlentities( $t_frame['file'] ) . "</td><td>$t_frame['line']</td><td>$t_frame['function']</td>";
+				echo '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['params'] ) ) {
@@ -231,7 +231,7 @@
 
 			foreach ( $t_stack as $t_frame ) {
 				echo '<tr ' . helper_alternate_class() . '>';
-				echo '<td>' . htmlentities( $t_frame['file'] ) . "</td><td>$t_frame['line']</td><td>$t_frame['function']</td>";
+				echo '<td>' . htmlentities( $t_frame['file'] ) . '</td><td>' . $t_frame['line'] . '</td><td>' . $t_frame['function'] . '</td>';
 
 				$t_args = array();
 				if ( isset( $t_frame['args'] ) ) {
