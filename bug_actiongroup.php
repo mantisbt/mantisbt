@@ -13,12 +13,23 @@
 <?php login_cookie_check() ?>
 <?php
 
+
 # the queries
 function updateBugLite($p_id, $p_status, $p_request) {
 	global $g_mantis_bug_table;
 
 	$t_handler_id = get_current_user_field( 'id' );
 	$t_query='';
+	
+	# history treatment
+	# extract current extended information into history variables
+	$result = get_bug_row_ex ( $p_id );
+	if ( 0 == db_num_rows( $result ) ) {
+		# speed is not an issue in this case, so re-use code
+		check_bug_exists( $p_id );
+	}
+	$row = db_fetch_array( $result );
+	extract( $row, EXTR_PREFIX_ALL, 'h' );
 
 	switch ($p_status) {
 		
@@ -46,7 +57,6 @@ function updateBugLite($p_id, $p_status, $p_request) {
 		case 'UP_STATUS' :
 			$t_query="status='$p_request'";
 			break ;
-
 	}
 	# Update fields
 	$query = "UPDATE $g_mantis_bug_table ".
@@ -54,6 +64,36 @@ function updateBugLite($p_id, $p_status, $p_request) {
 			"WHERE id='$p_id'";
 
    	$result = db_query($query);
+
+	# history logging should be done after the field updates
+	switch ($p_status) {
+		
+		case 'MOVED' : 
+			history_log_event_direct( $p_id, 'project_id', $h_project_id, $p_request, $t_handler_id );	
+			break;
+				
+		case CLOSED :
+			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
+			break ;
+
+		case ASSIGNED :
+			history_log_event_direct( $p_id, 'handler_id', $h_handler_id, $p_request, $t_handler_id );
+			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
+			break ;
+
+		case RESOLVED :
+			history_log_event_direct( $p_id, 'resolution', $h_resolution, $p_request, $t_handler_id );
+			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
+			break ;
+
+		case 'UP_PRIOR' :
+			history_log_event_direct( $p_id, 'priority', $h_priority, $p_request, $t_handler_id );
+			break ;
+
+		case 'UP_STATUS' :
+			history_log_event_direct( $p_id, 'status', $h_status, $p_request, $t_handler_id ); 
+			break ;
+	}
 
 	# update bug last updated
 	bug_date_update($p_id);
