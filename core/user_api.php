@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.11 2002-08-27 21:51:35 jlatour Exp $
+	# $Id: user_api.php,v 1.12 2002-08-27 21:57:14 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -568,7 +568,7 @@
 		$t_user_table	= config_get('mantis_user_table');
 
 		$query ="SELECT id ".
-				"FROM $g_mantis_user_table ".
+				"FROM $t_user_table ".
 				"WHERE cookie_string='$c_cookie_str'";
 		$result = db_query( $query );
 		$t_id = db_result( $result );
