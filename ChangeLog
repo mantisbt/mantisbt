@@ -1,5 +1,9 @@
 Mantis
 
+08.XX.2001  -   0.15.5
+
+ * Fixed sort problems on view_all_bugs_page.php3
+
 08.19.2001  -   0.15.4
 
  * Added pre-selecting project. Hint: login_page.php3?f_project_id=0000001

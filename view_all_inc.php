@@ -45,9 +45,9 @@
               <td>
                     <input type="text" name="f_search_text" value="<? echo $f_search_text; ?>">
               </td>
-<? ### view mode specific options ?>
+<? # view mode specific options ?>
 <? if ( $page_type=="all" ) { ?>
-<? ### do nothing ?>
+<? # do nothing ?>
 <? } else if ( $page_type=="reported" ) { ?>
 		<td>
 		<select name="f_user_id">
@@ -122,9 +122,6 @@
 		<td width="8%">
 			<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "id" ) ?>
-
-			<? #print_view_bug_sort_link( $link_page, $s_id, "id", $f_dir_new ) ?>
-			<? #print_sort_icon( $f_dir_new, $f_sort, "id" ) ?>
 		</td>
 		<td width="3%">
 			<b>
@@ -132,24 +129,24 @@
 			</b>
 		</td>
 		<td width="12%">
-			<? print_view_bug_sort_link( $link_page, $s_category, "category", $f_dir_new ) ?>
-			<? print_sort_icon( $f_dir_new, $f_sort, "category" ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_category, "category", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "category" ) ?>
 		</td>
 		<td width="10%">
-			<? print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_dir_new ) ?>
-			<? print_sort_icon( $f_dir_new, $f_sort, "severity" ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
 		</td>
 		<td width="10%">
-			<? print_view_bug_sort_link( $link_page, $s_status, "status", $f_dir_new ) ?>
-			<? print_sort_icon( $f_dir_new, $f_sort, "status" ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_status, "status", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "status" ) ?>
 		</td>
 		<td width="12%">
-			<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_dir_new ) ?>
-			<? print_sort_icon( $f_dir_new, $f_sort, "last_updated" ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 		</td>
 		<td width="43%">
-			<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_dir_new ) ?>
-			<? print_sort_icon( $f_dir_new, $f_sort, "summary" ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_dir ) ?>
+			<? print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 		</td>
 	</tr>
 	<tr height="5">
@@ -158,28 +155,28 @@
 	</tr>
 	<?
 		for($i=0; $i < $row_count; $i++) {
-			### prefix bug data with v_
+			# prefix bug data with v_
 			$row = db_fetch_array($result);
 			extract( $row, EXTR_PREFIX_ALL, "v" );
 
 			$v_summary = string_display( $v_summary );
 			$t_last_updated = date( $g_short_date_format, sql_to_unix_time( $v_last_updated ) );
 
-			### alternate row colors
+			# alternate row colors
 			$status_color = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 
-			### choose color based on status only if not resolved
-			### The code creates the appropriate variable name
-			### then references that color variable
-			### You could replace this with a bunch of if... then... else
-			### statements
+			# choose color based on status only if not resolved
+			# The code creates the appropriate variable name
+			# then references that color variable
+			# You could replace this with a bunch of if... then... else
+			# statements
 			if ( !( $v_status==CLOSED ) ) {
 				$t_color_str = get_enum_element( $g_status_enum_string, $v_status );
 				$t_color_variable_name = "g_".$t_color_str."_color";
 				$status_color = $$t_color_variable_name;
 			}
 
-			### grab the bugnote count
+			# grab the bugnote count
 			$bugnote_count = get_bugnote_count( $v_id );
 
 			$query = "SELECT MAX(last_modified)
@@ -250,7 +247,7 @@
 </tr>
 </table>
 
-<? ### Show NEXT and PREV links as needed ?>
+<? # Show NEXT and PREV links as needed ?>
 <p>
 <div align="center">
 <?

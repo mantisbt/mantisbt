@@ -67,15 +67,14 @@
 	### same sort order
 	if ( isset( $f_dir ) ) {
 		if ( $f_dir=="ASC" ) {
-			$f_dir_new = "DESC";
+			$f_dir = "DESC";
 		}
 		else {
-			$f_dir_new = "ASC";
+			$f_dir = "ASC";
 		}
 	}
 	else {
 		$f_dir = "ASC";
-		$f_dir_new = "DESC";
 	}
 
 	### build our query string based on our viewing criteria
@@ -118,7 +117,7 @@
 	if ( !isset( $f_sort ) ) {
 			$f_sort="last_updated";
 	}
-	$query = $query." ORDER BY priority desc, '$f_sort' $f_dir_new";
+	$query = $query." ORDER BY priority desc, '$f_sort' $f_dir";
 	if ( isset( $f_limit_view ) ) {
 		$query = $query." LIMIT $f_offset, $f_limit_view";
 	}
