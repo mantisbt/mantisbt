@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.91 2005-03-23 23:25:03 jlatour Exp $
+	# $Id: user_api.php,v 1.92 2005-03-28 21:36:00 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -628,7 +628,7 @@
 		}
 
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-			$t_projects = project_hierarchy_get_all_subprojects( ALL_PROJECTS );
+			$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS );
 		} else {
 			$c_user_id = db_prepare_int( $p_user_id );
 	
