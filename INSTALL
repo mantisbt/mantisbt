@@ -38,8 +38,34 @@ mv <directoryname> mantis
 
 If you are upgrading see the UPGRADING document.
 
-3. After that you will need to change into the directory and locate the
-db_generate.sql file.  Run the following command:
+2a.  Decide what sort of password encryption you will use.  You must do this
+at install time. Currently, you can choose from:
+
+* plain text
+* crypt
+* MD5
+
+Plain is the least secure and passwords are stored without encryptoin.
+
+MD5 should be supported on all installs of PHP.
+
+Crypt may not be installed on non-Unix operating systems
+
+MD5 and crypt are one-way algorithms: you will not be able to retrive
+the original passwords.  Conversely administrators cannot see what your
+password is.
+
+Crypt is the default method
+
+2b.  Once you have chosen whch method to use, you will need to change into the
+directory and locate the "db_generate.sql" file.  Open up "db_generate.sql"
+and go to the bottom of the file and replace the 4th value in the last line
+with your chosen method. The 3 formats the password is stored in are located
+just above the last few lines of the file.
+
+I'm sorry this is so primitive but it's the way it is at the moment.
+
+3. Next, run the following command:
 
 mysql -u<username> -p<password> <databasename> < db_generate.sql
 
@@ -78,7 +104,7 @@ core_API.php3, and rename config_inc.php to config_inc.php3 in the core_API
 file... and the same for all the other affected files.  If you don't do this
 then anyone can access your database information (and delete it, etc).
 
-The easiest solution is to make your webserver properly support .php and/or
+The easiest solution is to make your webserver properly support .php and
 .php3 files.  For Apache, it is a one line addition in the server configuration
 file.  Let your administrator know that you would like support.  More detailed
 instructions are at http://www.php.net/manual/en/installation.php

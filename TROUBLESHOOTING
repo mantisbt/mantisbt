@@ -18,16 +18,11 @@ or messages.
 
 	SOLUTION 2: You may not have DES installed on your system.  As a direct
 	result the crypt() funtion may not work properly.  If possible install DES
-	encryption support for your operating system.
+	encryption support for your operating system.  Otherwise you will need to
+	either reinstall or manually convert passwords over to another supported
+	encryption system
 
 	SOLUTION 3: You do not have require_globals enabled. Set this to on in
 	your php.ini file.
-
-* PROBLEM: I get warning messages when I post bugnotes.  Everything seems fine
-but the errors happen everytime I post a bugnote.
-
-	SOLUTION: The error is harmless. There was a bug in the pre 0.14.0 versions
-	of Mantis where account preferences were not properly created.  To fix it
-	go to your Account and click on Change Preferences.
 
 -------------------------------------------------------------------------------
