@@ -145,6 +145,21 @@
 				WHERE $specific_where
 					  (t1.access_level>=$t_rep AND t2.access_level IS NULL)
 				ORDER BY t1.username";
+/*
+		$t_rep = REPORTER;
+	    # checking if it's a per project statistic or all projects
+		if ($g_project_cookie_val=='0000000') {
+			$specific_where = " ";
+		} else {
+			$specific_where = " (t2.access_level>=$t_rep AND t2.project_id=$g_project_cookie_val) OR ";
+		}
+		$query = "SELECT DISTINCT t1.id, t1.username
+				FROM $g_mantis_user_table as t1
+				LEFT JOIN $g_mantis_project_user_list_table as t2
+				ON t1.id=t2.user_id
+				WHERE $specific_where
+					  (t1.access_level>=$t_rep AND t2.access_level IS NULL)
+				ORDER BY t1.username";*/
 
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
@@ -230,7 +245,7 @@
 		$t_adm = ADMINISTRATOR;
 
 		# checking if it's a per project statistic or all projects
-		if ($g_project_cookie_val=='0000000') {
+		if ( '0000000' == $g_project_cookie_val ) {
 			$specific_where = " ";
 		} else {
 			$specific_where = " (t2.access_level>=$t_dev AND t2.project_id=$g_project_cookie_val) OR ";
@@ -369,10 +384,20 @@
 	function print_category_option_list( $p_category="" ) {
 		global $g_mantis_project_category_table, $g_project_cookie_val;
 
-		$query = "SELECT *
-				FROM $g_mantis_project_category_table
-				WHERE project_id='$g_project_cookie_val'
-				ORDER BY category";
+		# @@@ not implemented yet
+		if ( '0000000' == $g_project_cookie_val ) {
+			$query = "SELECT category
+					FROM $g_mantis_project_category_table
+					WHERE project_id='$g_project_cookie_val'
+					ORDER BY category";
+
+		} else {
+			$query = "SELECT category
+					FROM $g_mantis_project_category_table
+					WHERE project_id='$g_project_cookie_val'
+					ORDER BY category";
+		}
+
 		$result = db_query( $query );
 		$category_count = db_num_rows( $result );
 		for ($i=0;$i<$category_count;$i++) {
