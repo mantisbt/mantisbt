@@ -212,6 +212,8 @@
 		<td colspan="2">
 		</td>
 	</tr>
+	<? # reporters should not be able to assign to develoeprs ?>
+	<? if ( get_current_user_field( "access_level" ) > REPORTER ) { ?>
 	<tr bgcolor="<? echo $g_primary_color_light ?>">
 		<td>
 			<? echo $s_assign_to ?>
@@ -223,6 +225,9 @@
 			</select>
 		</td>
 	</tr>
+	<? } else { ?>
+	<input type="hidden" name="f_assign_id" value="0000000">
+	<? } ?>
 	<tr height="10" bgcolor="<? echo $g_white_color ?>">
 		<td colspan="2">
 		</td>
