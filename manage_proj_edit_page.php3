@@ -27,8 +27,8 @@
 	$row = db_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v" );
 
-	$v_name 		= string_display( $v_name );
-	$v_description 	= string_display( $v_description );
+	$v_name 		= string_edit_text( $v_name );
+	$v_description 	= string_edit_textarea( $v_description );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>

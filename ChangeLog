@@ -4,17 +4,19 @@ Mantis
 
  * Fixed minor HTML errors in core_html_API.php.
  * Fixed the view, report, and update pages to honor the forces advanced/simple modes.
- * Modified the mantis_bug_table.build field to be a VARCHAR.
- * Modified the mantis_bug_table.votes field to be an INT.
- * Modified the mantis_bug_table.os_build field to be longer.
- * Modified the mantis_user_profile_table.os_build field to be longer.
- * Modified the mantis_user_pref_table.language field to be longer.
+ * Fixed problem with extra br tags being inserted in project descriptions
+ * Modified the mantis_bug_table.build field to be a VARCHAR(32).
+ * Modified the mantis_bug_table.votes field to be an INT(4).
+ * Modified the mantis_bug_table.os_build field to a VARCHAR(32).
+ * Modified the mantis_user_profile_table.os_build field to a VARCHAR(32).
+ * Modified the mantis_user_pref_table.language field to a VARCHAR(32).
  * Modified config_inc.php to properly support all localized langauges.
  * Updated Korean localization.
  * Updated Polish localization.
  * Updated TROUBLESHOOTING file.
  * Added file_type field to mantis_bug_file_table and mantis_project_file_table.
  * Added LDAP login support.
+ * Added CSV export support.
 
 11.04.2001  -   0.15.12
 
