@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.2 2004-07-05 14:45:28 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.3 2004-07-10 12:09:46 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Custom Function API ###
@@ -27,6 +27,6 @@
 	# Prints one entry in the changelog.
 	function custom_function_default_changelog_print_issue( $p_issue_id ) {
 		$t_bug = bug_get( $p_issue_id );
-		echo '- ', string_process_bug_link( '#' . $p_issue_id ), ': ', string_display( $t_bug->summary ), ' (', user_get_name( $t_bug->handler_id ), ')<br />';
+		echo '- ', string_process_bug_link( '#' . $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_display( $t_bug->summary ), ' (', user_get_name( $t_bug->handler_id ), ')<br />';
 	}
 ?>

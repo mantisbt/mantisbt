@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.4 2004-07-05 14:45:27 vboctor Exp $
+	# $Id: changelog_page.php,v 1.5 2004-07-10 12:09:46 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,19 +41,12 @@
 	$i = 0;
 
 	foreach( $t_version_rows as $t_version_row ) {
-		if ( $i > 0 ) {
-			echo '<br />';
-		}
-		$i++;
-
 		$t_version = $t_version_row['version'];
 		$c_version = db_prepare_string( $t_version );
 
 		$query = "SELECT id, view_state FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
 
-		$t_release_title = $t_project_name . ' - ' . $t_version;
-		echo $t_release_title, '<br />';
-		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
+		$t_first_entry = true;
 		
 		for ( $t_result = db_query( $query ); !$t_result->EOF; $t_result->MoveNext() ) {
 			# hide private bugs if user doesn't have access to view them.
@@ -67,8 +60,23 @@
 				continue;
 			}
 
+			if ( $t_first_entry ) {
+				if ( $i > 0 ) {
+					echo '<br />';
+				}
+
+				$t_release_title = $t_project_name . ' - ' . $t_version;
+				echo $t_release_title, '<br />';
+				echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
+
+				$t_first_entry = false;
+			}
+
+
 			helper_call_custom_function( 'changelog_print_issue', array( $t_issue_id ) );
 		}
+
+		$i++;
 	}
 
 	echo '</tt>';
