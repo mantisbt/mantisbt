@@ -6,13 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.9 2004-10-08 17:23:35 thraxisp Exp $
+	# $Id: custom_function_api.php,v 1.10 2004-12-01 13:10:39 vboctor Exp $
 	# --------------------------------------------------------
+
+	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
+
+	require_once( $t_core_dir . 'prepare_api.php' );
 
 	### Custom Function API ###
 
 	# --------------------
-	# Checks the provided bug and determines whether it should be included in the changelog 
+	# Checks the provided bug and determines whether it should be included in the changelog
 	# or not.
 	# returns true: to include, false: to exclude.
 	function custom_function_default_changelog_include_issue( $p_issue_id ) {
@@ -27,9 +31,15 @@
 	# Prints one entry in the changelog.
 	function custom_function_default_changelog_print_issue( $p_issue_id ) {
 		$t_bug = bug_get( $p_issue_id );
-		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_display( $t_bug->summary ), ' (', user_get_name( $t_bug->handler_id ), ')<br />';
+		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_display( $t_bug->summary );
+
+		if ( $t_bug->handler_id != 0 ) {
+			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
+		}
+
+		echo '<br />';
 	}
-	
+
 	# --------------------
 	# format the bug summary.
 	function custom_function_default_format_issue_summary( $p_issue_id, $p_context=0 ) {
@@ -49,10 +59,10 @@
 		}
 		return $t_string;
 	}
-	
+
 	# --------------------
 	# Register a checkin in source control by adding a history entry and a note
-	# This can be overriden to do extra work like changing the issue status to 
+	# This can be overriden to do extra work like changing the issue status to
 	# config_get( 'bug_readonly_status_threshold' );
 	function custom_function_default_checkin( $p_issue_id, $p_comment, $p_file, $p_new_version ) {
 		if ( bug_exists( $p_issue_id ) ) {
@@ -68,7 +78,7 @@
 
 	# --------------------
 	# Hook to validate field issue data before updating
-	# Verify that the proper fields are set with the appropriate values before proceeding 
+	# Verify that the proper fields are set with the appropriate values before proceeding
 	# to change the status.
 	# In case of invalid data, this function should call trigger_error()
 	# p_issue_id is the issue number that can be used to get the existing state
@@ -77,7 +87,7 @@
 	}
 
 	# --------------------
-	# Hook to notify after an issue has been updated. 
+	# Hook to notify after an issue has been updated.
 	# In case of errors, this function should call trigger_error()
 	# p_issue_id is the issue number that can be used to get the existing state
 	function custom_function_default_issue_update_notify( $p_issue_id ) {
