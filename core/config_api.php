@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_api.php,v 1.12 2004-04-08 16:46:09 prescience Exp $
+	# $Id: config_api.php,v 1.13 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Configuration API
-	###########################################################################
+	### Configuration API ###
 
 	# ------------------
 	# Retrieves the value of a config option
@@ -19,7 +17,7 @@
 	#    1. The user-defined value (if set)
 	#    2. The default value (if known)
 	#    3. The value passed as the second parameter of the function
-	function config_get( $p_option, $p_default=null ) {
+	function config_get( $p_option, $p_default = null ) {
 
 		# ------ global variable implementation ------
 		# this function implements getting configuration
@@ -28,8 +26,8 @@
 		#  call out to other functions or replace this code
 		#  to use a DB or some other method
 
-		if ( isset( $GLOBALS['g_'.$p_option] ) ) {
-			return $GLOBALS['g_'.$p_option];
+		if ( isset( $GLOBALS['g_' . $p_option] ) ) {
+			return $GLOBALS['g_' . $p_option];
 		} else {
 			# unless we were allowing for the option not to exist by passing
 			#  a default, trigger a WARNING
@@ -45,7 +43,7 @@
 	# Returns true if the specified config option exists (ie. a
 	#  value or default can be found), false otherwise
 	function config_is_set( $p_option ) {
-		if ( isset( $GLOBALS['g_'.$p_option] ) ) {
+		if ( isset( $GLOBALS['g_' . $p_option] ) ) {
 			return true;
 		} else {
 			return false;
@@ -56,11 +54,11 @@
 	# Sets the value of the given config option to the given value
 	#  If the config option does not exist, an ERROR is triggered
 	function config_set( $p_option, $p_value ) {
-		if ( !isset( $GLOBALS['g_'.$p_option] ) ) {
+		if ( !isset( $GLOBALS['g_' . $p_option] ) ) {
 			trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
 		}
 
-		$GLOBALS['g_'.$p_option] = $p_value;
+		$GLOBALS['g_' . $p_option] = $p_value;
 
 		return true;
 	}
@@ -73,17 +71,17 @@
 		#     new config option names in the warning text)
 
 		if ( config_is_set( $p_var ) ) {
-			echo '<p><b>Warning:</b> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete';
+			PRINT '<p><b>Warning:</b> The configuration option <tt>$g_' . $p_var . '</tt> is now obsolete';
 			if ( is_array( $p_replace ) ) {
-				echo ', please see the following options: <ul>';
+				PRINT ', please see the following options: <ul>';
 				foreach ( $p_replace as $t_option ) {
-					echo '<li>$g_' . $t_option . '</li>';
+					PRINT '<li>$g_' . $t_option . '</li>';
 				}
-				echo '</ul>';
+				PRINT '</ul>';
 			} else if ( !is_blank( $p_replace ) ) {
-				echo ', please use <tt>$g_' . $p_replace . '</tt> instead.';
+				PRINT ', please use <tt>$g_' . $p_replace . '</tt> instead.';
 			}
-			echo '</p>';
+			PRINT '</p>';
 		}
 	}
 ?>

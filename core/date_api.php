@@ -6,22 +6,20 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: date_api.php,v 1.4 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: date_api.php,v 1.5 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Date API
-	###########################################################################
+	### Date API ###
 
 	# --------------------
 	# prints the date given the formating string
 	function print_date( $p_format, $p_date ) {
-		echo date( $p_format, $p_date );
+		PRINT date( $p_format, $p_date );
 	}
 	# --------------------
-	function print_month_option_list( $p_month=0 ) {
+	function print_month_option_list( $p_month = 0 ) {
 		for ($i=1; $i<=12; $i++) {
-			$month_name  = date( 'F', mktime(0,0,0,$i,1,2000) );
+			$month_name = date( 'F', mktime(0,0,0,$i,1,2000) );
 			if ( $i == $p_month ) {
 				PRINT "<option value=\"$i\" selected=\"selected\">$month_name</option>";
 			} else {
@@ -30,7 +28,7 @@
 		}
 	}
 	# --------------------
-	function print_day_option_list( $p_day=0 ) {
+	function print_day_option_list( $p_day = 0 ) {
 		for ($i=1; $i<=31; $i++) {
 			if ( $i == $p_day ) {
 				PRINT "<option value=\"$i\" selected=\"selected\"> $i </option>";
@@ -40,7 +38,7 @@
 		}
 	}
 	# --------------------
-	function print_year_option_list( $p_year=0 ) {
+	function print_year_option_list( $p_year = 0 ) {
 		$current_year = date( "Y" );
 
 		for ($i=$current_year; $i>1999; $i--) {

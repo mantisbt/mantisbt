@@ -6,18 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.15 2004-03-27 20:22:56 narcissus Exp $
+	# $Id: current_user_api.php,v 1.16 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
-	
+
 	require_once( $t_core_dir . 'filter_api.php' );
 
-	###########################################################################
-	# Current User API
-	#
+	### Current User API ###
+
 	# Wrappers around the User API that pass in the logged-in user for you
-	###########################################################################
 
 	# --------------------
 	# Return the access level of the current user in the current project
@@ -97,20 +95,20 @@
 			return false;
 		}
 
-		$f_filter_string = gpc_get_string( 'filter', '' );
-		$t_view_all_cookie = '';
-		$t_cookie_detail = '';
-		$t_filter = '';
+		$f_filter_string	= gpc_get_string( 'filter', '' );
+		$t_view_all_cookie	= '';
+		$t_cookie_detail	= '';
+		$t_filter			= '';
 
 		if ( '' != $f_filter_string ) {
 			$t_filter = unserialize( $f_filter_string );
 		} else {
-			$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
-			$t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
-			$t_cookie_detail = explode( '#', $t_view_all_cookie, 2 );
-			$t_filter = unserialize( $t_cookie_detail[1] );
+			$t_view_all_cookie_id	= gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+			$t_view_all_cookie		= filter_db_get_filter( $t_view_all_cookie_id );
+			$t_cookie_detail		= explode( '#', $t_view_all_cookie, 2 );
+			$t_filter				= unserialize( $t_cookie_detail[1] );
 		}
-		
+
 		return $t_filter;
 	}
 ?>

@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: category_api.php,v 1.12 2004-04-08 16:46:09 prescience Exp $
+	# $Id: category_api.php,v 1.13 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Category API
-	###########################################################################
+	### Category API ###
 
 	#===================================
 	# Boolean queries and ensures
@@ -29,8 +27,7 @@
 		$query = "SELECT COUNT(*)
 				  FROM $t_project_category_table
 				  WHERE project_id='$c_project_id' AND
-					category='$c_category'";
-
+						category='$c_category'";
 		$result = db_query( $query );
 		$category_count =  db_result( $result );
 
@@ -81,8 +78,7 @@
 
 		$t_project_category_table = config_get( 'mantis_project_category_table' );
 
-		$query = "INSERT
-				  INTO $t_project_category_table
+		$query = "INSERT INTO $t_project_category_table
 					( project_id, category )
 				  VALUES
 					( '$c_project_id', '$c_category' )";
@@ -106,16 +102,17 @@
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
 		$query = "UPDATE $t_project_category_table
-				  SET category='$c_new_category', user_id=$c_assigned_to
+				  SET category='$c_new_category',
+				  	  user_id=$c_assigned_to
 				  WHERE category='$c_category' AND
-					project_id='$c_project_id'";
+						project_id='$c_project_id'";
 		db_query( $query );
 
 		if ( $p_category != $p_new_category ) {
 			$query = "UPDATE $t_bug_table
 					  SET category='$c_new_category'
-					  WHERE category='$c_category'
-						AND project_id='$c_project_id'";
+					  WHERE category='$c_category' AND
+					  		project_id='$c_project_id'";
 			db_query( $query );
 		}
 
@@ -138,16 +135,15 @@
 		$t_project_category_table	= config_get( 'mantis_project_category_table' );
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
-		$query = "DELETE
-				  FROM $t_project_category_table
+		$query = "DELETE FROM $t_project_category_table
 				  WHERE project_id='$c_project_id' AND
-					category='$c_category'";
+						category='$c_category'";
 		db_query( $query );
 
 		$query = "UPDATE $t_bug_table
 				  SET category='$c_new_category'
-				  WHERE category='$c_category'
-					AND project_id='$c_project_id'";
+				  WHERE category='$c_category' AND
+				  		project_id='$c_project_id'";
 		db_query( $query );
 
 		# db_query() errors on failure so:
@@ -164,8 +160,7 @@
 		$t_project_category_table	= config_get( 'mantis_project_category_table' );
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
-		$query = "DELETE
-				  FROM $t_project_category_table
+		$query = "DELETE FROM $t_project_category_table
 				  WHERE project_id='$c_project_id'";
 		db_query( $query );
 
@@ -193,12 +188,10 @@
 
 		$query = "SELECT category, user_id
 				FROM $t_project_category_table
-				WHERE project_id='$c_project_id'
-				  AND category='$c_category'";
+				WHERE project_id='$c_project_id' AND
+					category='$c_category'";
 		$result = db_query( $query );
-
 		$count = db_num_rows( $result );
-
 		if ( 0 == $count ) {
 			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
 		}
@@ -218,11 +211,8 @@
 				WHERE project_id='$c_project_id'
 				ORDER BY category";
 		$result = db_query( $query );
-
 		$count = db_num_rows( $result );
-
 		$rows = array();
-
 		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
 

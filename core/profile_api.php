@@ -6,17 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: profile_api.php,v 1.6 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: profile_api.php,v 1.7 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Profile API
-	###########################################################################
+	### Profile API ###
 
 	#===================================
 	# Boolean queries and ensures
 	#===================================
-
 
 	#===================================
 	# Creation / Deletion / Updating
@@ -41,8 +38,7 @@
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
 		# Add profile
-		$query = "INSERT
-				  INTO $t_user_profile_table
+		$query = "INSERT INTO $t_user_profile_table
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
 				    ( '$c_user_id', '$c_platform', '$c_os', '$c_os_build', '$c_description' )";
@@ -66,8 +62,7 @@
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
 		# Delete the profile
-		$query = "DELETE
-				  FROM $t_user_profile_table
+		$query = "DELETE FROM $t_user_profile_table
 				  WHERE id='$c_profile_id' AND user_id='$c_user_id'";
 		db_query( $query );
 
@@ -96,8 +91,10 @@
 
 		# Add item
 		$query = "UPDATE $t_user_profile_table
-				  SET platform='$c_platform', os='$c_os',
-					os_build='$c_os_build', description='$c_description'
+				  SET platform='$c_platform',
+				  	  os='$c_os',
+					  os_build='$c_os_build',
+					  description='$c_description'
 				  WHERE id='$c_profile_id' AND user_id='$c_user_id'";
 		$result = db_query( $query );
 
@@ -128,7 +125,7 @@
 	# --------------------
 	# Return an array containing all rows for a given user
 	function profile_get_all_rows( $p_user_id ) {
-		$c_user_id		= db_prepare_int( $p_user_id );
+		$c_user_id = db_prepare_int( $p_user_id );
 
 		$t_user_profile_table = config_get( 'mantis_user_profile_table' );
 
@@ -144,11 +141,10 @@
 			array_push( $t_rows, db_fetch_array( $result ) );
 		}
 
-		return $t_rows;	
+		return $t_rows;
 	}
 
 	#===================================
 	# Data Modification
 	#===================================
-
 ?>

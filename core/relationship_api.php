@@ -6,18 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.6 2004-01-11 07:16:10 vboctor Exp $
+	# $Id: relationship_api.php,v 1.7 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Relationship API
-	###########################################################################
+	### Relationship API ###
 
 	# --------------------
 	function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
-		global $g_mantis_bug_relationship_table;
+		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
-		$query = "INSERT INTO $g_mantis_bug_relationship_table
+		$query = "INSERT INTO $t_mantis_bug_relationship_table
 				( id, source_bug_id, destination_bug_id, relationship_type )
 				VALUES
 				( null, '$p_src_bug_id', '$p_dest_bug_id', '$p_relationship_type' )";
@@ -25,9 +23,9 @@
 	}
 	# --------------------
 	function relationship_update( $p_relation_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
-		global $g_mantis_bug_relationship_table;
+		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
-		$query = "UPDATE $g_mantis_bug_relationship_table
+		$query = "UPDATE $t_mantis_bug_relationship_table
 				SET source_bug_id='$p_src_bug_id',
 					destination_bug_id='$p_dest_bug_id',
 					relationship_type='$p_relationship_type'
@@ -36,38 +34,38 @@
 	}
 	# --------------------
 	function relationship_delete( $p_relation_id ) {
-		global $g_mantis_bug_relationship_table;
+		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
-		$query = "DELETE FROM $g_mantis_bug_relationship_table
+		$query = "DELETE FROM $t_mantis_bug_relationship_table
 				WHERE id='$p_relation_id'";
 		return db_query( $query );
 	}
 	# --------------------
 	function relationship_fetch( $p_relation_id ) {
-		global $g_mantis_bug_relationship_table;
+		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
 		$query = "SELECT *
-				FROM $g_mantis_bug_relationship_table
+				FROM $t_mantis_bug_relationship_table
 				WHERE id='$p_relation_id'";
 		$result = db_query( $query );
 		return db_fetch_array( $result );
 	}
 	# --------------------
 	function relationship_fetch_all_src( $p_src_bug_id ) {
-		global $g_mantis_bug_relationship_table;
+		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
 		$query = "SELECT *
-				FROM $g_mantis_bug_relationship_table
+				FROM $t_mantis_bug_relationship_table
 				WHERE source_bug_id='$p_src_bug_id'
 				ORDER BY relationship_type";
 		return db_query( $query );
 	}
 	# --------------------
 	function relationship_fetch_all_dest( $p_src_bug_id ) {
-		global $g_mantis_bug_relationship_table;
+		$t_mantis_bug_relationship_table = config_get( 'mantis_bug_relationship_table' );
 
 		$query = "SELECT *
-				FROM $g_mantis_bug_relationship_table
+				FROM $t_mantis_bug_relationship_table
 				WHERE destination_bug_id='$p_src_bug_id'
 				ORDER BY relationship_type";
 		return db_query( $query );

@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_api.php,v 1.1 2004-03-23 14:00:35 vboctor Exp $
+	# $Id: csv_api.php,v 1.2 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# CSV API
-	###########################################################################
+	### CSV API ###
 
 	# --------------------
 	# get the csv file new line, can be moved to config in the future
@@ -30,7 +28,7 @@
 	# <projectname>.csv.
 	function csv_get_default_filename() {
 		$t_current_project_id = helper_get_current_project();
-		
+
 		if ( ALL_PROJECTS == $t_current_project_id ) {
 			$t_filename = user_get_name( auth_get_current_user_id() );
 		} else {
@@ -51,32 +49,32 @@
 	}
 
 	# --------------------
-	# Identified which fields to include, in which order, and the string to 
+	# Identified which fields to include, in which order, and the string to
 	# pass to lang_get() to retrieve the title.
 	# array ( 'column_internal_name' => 'lang str for column title', ... )
 	function csv_get_columns() {
 		# @@@ Support configuration in the future
 	        $t_columns = array(	'id' => 'id',
-					'project_id' => 'email_project',
-					'reporter_id' => 'reporter',
-					'handler_id' => 'assigned_to',
-					'priority' => 'priority',
-					'severity' => 'severity',
-					'reproducibility' => 'reproducibility',
-					'version' => 'version',
-					'projection' => 'projection',
-					'category' => 'category',
-					'date_submitted' => 'date_submitted',
-					'eta' => 'eta',
-					'os' => 'os',
-					'os_build' => 'os_version',
-					'platform' => 'platform',
-					'view_state' => 'view_status',
-					'last_updated' => 'last_update',
-					'summary' => 'summary',
-					'status' => 'status',
-					'resolution' => 'resolution',
-					'duplicate_id' => 'duplicate_id' );
+								'project_id' => 'email_project',
+								'reporter_id' => 'reporter',
+								'handler_id' => 'assigned_to',
+								'priority' => 'priority',
+								'severity' => 'severity',
+								'reproducibility' => 'reproducibility',
+								'version' => 'version',
+								'projection' => 'projection',
+								'category' => 'category',
+								'date_submitted' => 'date_submitted',
+								'eta' => 'eta',
+								'os' => 'os',
+								'os_build' => 'os_version',
+								'platform' => 'platform',
+								'view_state' => 'view_status',
+								'last_updated' => 'last_update',
+								'summary' => 'summary',
+								'status' => 'status',
+								'resolution' => 'resolution',
+								'duplicate_id' => 'duplicate_id' );
 		return $t_columns;
 	}
 
@@ -196,7 +194,7 @@
 	}
 
 	# --------------------
-	# return the status string	
+	# return the status string
 	function csv_format_status( $p_status ) {
 		return csv_escape_string( get_enum_element( 'status', $p_status ) );
 	}

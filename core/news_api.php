@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.14 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: news_api.php,v 1.15 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# News API
-	###########################################################################
+	### News API ###
 
 	# --------------------
 	# Add a news item
@@ -49,8 +47,7 @@
 
 		$t_news_table = config_get( 'mantis_news_table' );
 
-		$query = "DELETE
-				  FROM $t_news_table
+		$query = "DELETE FROM $t_news_table
 	    		  WHERE id='$c_news_id'";
 
 		db_query( $query );
@@ -83,7 +80,7 @@
 					project_id='$c_project_id',
 					last_modified= " . db_now() . "
 				  WHERE id='$c_news_id'";
-		
+
 		db_query( $query );
 
 		# db_query() errors on failure so:
@@ -119,7 +116,7 @@
 		$query = "SELECT COUNT(*)
 				  FROM $t_news_table
 				  WHERE project_id='$c_project_id'";
-				  
+
 		if ( $p_sitewide ) {
 			$query .= ' OR project_id=' . ALL_PROJECTS;
 		}
@@ -138,7 +135,7 @@
 		$query = "SELECT *, date_posted
 				  FROM $t_news_table
 				  WHERE project_id='$c_project_id'";
-		
+
 		if ( $p_sitewide ) {
 			$query .= ' OR project_id=' . ALL_PROJECTS;
 		}
@@ -177,11 +174,11 @@
 			$p_project_id = helper_get_current_project();
 		}
 
-		$c_project_id = db_prepare_int( $p_project_id );
-		$c_offset = db_prepare_int( $p_offset );
+		$c_project_id	= db_prepare_int( $p_project_id );
+		$c_offset		= db_prepare_int( $p_offset );
 
-		$t_news_table = config_get( 'mantis_news_table' );
-		$t_news_view_limit = config_get( 'news_view_limit' );
+		$t_news_table			= config_get( 'mantis_news_table' );
+		$t_news_view_limit		= config_get( 'news_view_limit' );
 		$t_news_view_limit_days = config_get( 'news_view_limit_days' );
 
 		switch ( config_get( 'news_limit_method' ) ) {
@@ -192,16 +189,16 @@
 						WHERE project_id='$c_project_id' OR project_id=" . ALL_PROJECTS . "
 						ORDER BY announcement DESC, id DESC";
 				$result = db_query( $query , $t_news_view_limit , $c_offset);
-			break;
+				break;
 			case 1 :
 				# Select the news posts @@BUGBUG-query
 				$query = "SELECT *, date_posted
 						FROM $t_news_table
 						WHERE ( project_id='$c_project_id' OR project_id=" . ALL_PROJECTS . " ) AND
-						" . db_helper_compare_days( db_now(), 'date_posted', "< $t_news_view_limit_days") . "
+							" . db_helper_compare_days( db_now(), 'date_posted', "< $t_news_view_limit_days") . "
 						ORDER BY announcement DESC, id DESC";
 				$result = db_query( $query );
-			break;
+				break;
 		} # end switch
 
 		$t_row_count = db_num_rows( $result );

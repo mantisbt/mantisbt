@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: version_api.php,v 1.11 2004-04-08 16:46:25 prescience Exp $
+	# $Id: version_api.php,v 1.12 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Version API
-	###########################################################################
+	### Version API ###
 
 	#===================================
 	# Boolean queries and ensures
@@ -29,7 +27,7 @@
 		$query = "SELECT COUNT(*)
 					FROM $t_project_version_table
 					WHERE project_id='$c_project_id' AND
-					version='$c_version'";
+						version='$c_version'";
 
 		$result = db_query( $query );
 		$version_count =  db_result( $result );
@@ -120,8 +118,8 @@
 		if ( $p_version != $p_new_version ) {
 			$query = "UPDATE $t_bug_table
 					  SET version='$c_new_version'
-					  WHERE version='$c_version'
-						AND project_id='$c_project_id'";
+					  WHERE version='$c_version' AND
+					  		project_id='$c_project_id'";
 			db_query( $query );
 		}
 
@@ -141,16 +139,15 @@
 		$t_project_version_table	= config_get( 'mantis_project_version_table' );
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
-		$query = "DELETE
-				  FROM $t_project_version_table
-				  WHERE project_id='$c_project_id'
-				    AND version='$c_version'";
+		$query = "DELETE FROM $t_project_version_table
+				  WHERE project_id='$c_project_id' AND
+				  		version='$c_version'";
 		db_query( $query );
 
 		$query = "UPDATE $t_bug_table
 				  SET version='$c_new_version'
-				  WHERE version='$c_version'
-					AND project_id='$c_project_id'";
+				  WHERE version='$c_version' AND
+				  		project_id='$c_project_id'";
 		db_query( $query );
 
 		# db_query() errors on failure so:
@@ -165,8 +162,7 @@
 		$t_project_version_table	= config_get( 'mantis_project_version_table' );
 		$t_bug_table				= config_get( 'mantis_bug_table' );
 
-		$query = "DELETE
-				  FROM $t_project_version_table
+		$query = "DELETE FROM $t_project_version_table
 	  			  WHERE project_id='$c_project_id'";
 
 		db_query( $query );
@@ -197,17 +193,13 @@
 				  WHERE project_id='$c_project_id'
 				  ORDER BY date_order DESC";
 		$result = db_query( $query );
-
 		$count = db_num_rows( $result );
-
 		$rows = array();
-
 		for ( $i = 0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
 
 			$rows[] = $row;
 		}
-
 		return $rows;
 	}
 ?>

@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.19 2004-04-08 03:31:37 prescience Exp $
+	# $Id: lang_api.php,v 1.20 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Language (Internationalization) API
-	###########################################################################
+	### Language (Internationalization) API ##
 
 	# Cache of localization strings in the language specified by the last
 	# lang_load call
@@ -46,7 +44,6 @@
 
 		$t_lang_dir = dirname ( dirname ( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
 
-
 		if ( strcasecmp( $p_lang, "english" ) !== 0 ) {
 			require_once( $t_lang_dir . 'strings_english.txt' );
 		}
@@ -76,7 +73,6 @@
 
 		# Confirm that the user's language can be determined
 		if ( db_is_connected() && !is_blank( $t_cookie_string ) ) {
-
 			$t_mantis_user_pref_table 	= config_get( 'mantis_user_pref_table' );
 			$t_mantis_user_table		= config_get( 'mantis_user_table' );
 
@@ -91,7 +87,6 @@
 			if ( false == $t_active_language ) {
 				$t_active_language = config_get( 'default_language' );
 			}
-
 		} else {
 			$t_active_language = config_get( 'default_language' );
 		}

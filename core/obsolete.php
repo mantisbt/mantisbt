@@ -6,9 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.23 2004-04-02 11:22:05 yarick123 Exp $
+	# $Id: obsolete.php,v 1.24 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
-	
+
+	### Obsolete API ###
+
 	###########################################################################
 	# Check that obsolete configs are not used.
 	# THIS FILE ASSUMES THAT THE CONFIGURATION IS INCLUDED AS WELL AS THE
@@ -61,11 +63,11 @@
 	config_obsolete( 'allow_html_tags', 'html_valid_tags' );
 	config_obsolete( 'html_tags', 'html_valid_tags' );
 	config_obsolete( 'show_user_email', 'show_user_email_threshold' );
-	
+
 	config_obsolete( 'manage_custom_fields', 'manage_custom_fields_threshold' );
 	config_obsolete( 'allow_bug_delete_access_level', 'delete_bug_threshold' );
 	config_obsolete( 'bug_move_access_level', 'move_bug_threshold' );
-	
+
 	config_obsolete( 'php', '' );
 	config_obsolete( 'use_experimental_custom_fields', '' );
 	config_obsolete( 'mail_send_crlf', '' );

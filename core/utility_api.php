@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: utility_api.php,v 1.11 2004-04-08 03:31:38 prescience Exp $
+	# $Id: utility_api.php,v 1.12 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Utility API
-	###########################################################################
+	### Utility API ###
 
 	# Utility functions are *small* functions that are used often and therefore
 	#  have *no* prefix, to keep their names short.
@@ -50,7 +48,7 @@
 	function get_enum_to_string( $p_enum_string, $p_num ) {
 		$t_arr = explode_enum_string( $p_enum_string );
 		$enum_count = count( $t_arr );
-		for ($i=0;$i<$enum_count;$i++) {
+		for ($i=0; $i < $enum_count;$i++) {
 			$t_s = explode_enum_arr( $t_arr[$i] );
 			if ( $t_s[0] == $p_num ) {
 				return $t_s[1];
@@ -61,9 +59,10 @@
 
 	# --------------------
 	# Contributed by Peter Palmreuther
-	function mime_encode( $p_string='' ) {
+	function mime_encode( $p_string = '' ) {
 		$output = '';
-		for ( $i=0; $i<strlen( $p_string ); $i++ ) {
+		$str_len = strlen( $p_string );
+		for ( $i=0; $i < $str_len; $i++ ) {
 			if (( ord( $p_string[$i] ) < 33 ) ||
 				( ord( $p_string[$i] ) > 127 ) ||
 				( eregi( "[\%\[\]\{\}\(\)]", $p_string[$i] ) )) {
@@ -88,7 +87,8 @@
 	# --------------------
 	# Add a trailing DIRECTORY_SEPARATOR to a string if it isn't present
 	function terminate_directory_path( $p_path ) {
-		if ( $p_path && $p_path[strlen($p_path)-1] != DIRECTORY_SEPARATOR ) {
+		$str_len = strlen($p_path);
+		if ( $p_path && $p_path[$str_len-1] != DIRECTORY_SEPARATOR ) {
 			$p_path = $p_path.DIRECTORY_SEPARATOR;
 		}
 
@@ -105,7 +105,8 @@
 	# Return true if the parameter is an empty string or a string
 	#  containing only whitespace, false otherwise
 	function is_blank( $p_var ) {
-		if ( strlen( trim( $p_var ) ) == 0 ) {
+		$p_var = trim( $p_var );
+		if ( empty( $p_var ) ) {
 			return true;
 		}
 		return false;

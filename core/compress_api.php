@@ -6,17 +6,16 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: compress_api.php,v 1.14 2004-04-08 16:46:09 prescience Exp $
+	# $Id: compress_api.php,v 1.15 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Compression API
-	#
+	### Compression API ###
+
 	# Starts the buffering/compression (only if the compression option is ON)
 	# This method should be called after all possible re-directs and
 	#  access level checks.
-	###########################################################################
 
+	# This variable is used internally.  It is not used for configuration
 	$g_compression_started = false;
 
 	# ----------------
@@ -27,9 +26,9 @@
 		#@@@ temporarily disable compression when using IIS because of
 		#   issue #2953
 		return ( $g_compression_started &&
-				 ON == config_get( 'compress_html' ) &&
+				ON == config_get( 'compress_html' ) &&
 				OFF == config_get( 'use_iis' )  &&
-				'ob_gzhandler' != ini_get('output_handler') &&
+				( 'ob_gzhandler' != ini_get('output_handler') ) &&
 				extension_loaded( 'zlib' ) &&
 				!ini_get('zlib.output_compression') );
 	}

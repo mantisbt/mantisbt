@@ -6,12 +6,10 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: timer_api.php,v 1.6 2004-04-08 02:42:27 prescience Exp $
+	# $Id: timer_api.php,v 1.7 2004-04-08 18:04:53 prescience Exp $
 	# --------------------------------------------------------
 
-	###########################################################################
-	# Timer API
-	###########################################################################
+	### Timer API ###
 
 	# --- BC Timer -------
 	# Charles Killian, modified by Kenzaburo Ito
@@ -59,13 +57,13 @@
 			$this->atime[] = array( "END", $this->get_microtime() );
 
 			# calculate end time
-			$end = count( $this->atime )-1;
-			$total_time = $this->atime[$end][1]-$this->atime[0][1];
+			$timer_count = count( $this->atime );
+			$total_time = $this->atime[$timer_count-1][1] - $this->atime[0][1];
 
 			# if debug then display debug timings
 			if ( ON == $g_debug_timer ) {
-				for ($i=0;$i+1<count($this->atime);$i++) {
-					$time = $this->atime[$i+1][1]-$this->atime[$i][1];
+				for ($i=0; $i+1 < $timer_count; $i++) {
+					$time = $this->atime[$i+1][1] - $this->atime[$i][1];
 					$time_precent = $time / $total_time * 100;
 					PRINT '<span class="italic">Time: '.number_format( $time, 6 ).' seconds ( '.number_format( $time_precent, 2 ).'% ) for '.$this->atime[$i][0].' -to- '.$this->atime[$i+1][0].'</span><br />';
 				}
