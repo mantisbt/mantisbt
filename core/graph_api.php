@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.22 2004-12-08 16:14:35 thraxisp Exp $
+	# $Id: graph_api.php,v 1.23 2004-12-08 18:25:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -809,6 +809,7 @@
 		$t_clo_val = CLOSED;
 		$t_res_val = config_get( 'bug_resolved_status_threshold' );
 		$t_bug_table = config_get( 'mantis_bug_table' );
+		$t_history_table = config_get( 'mantis_bug_history_table' );
 
 		$t_project_id = helper_get_current_project();
 		$t_user_id = auth_get_current_user_id();
@@ -841,7 +842,7 @@
 		}
 
 		### Get all the resolved dates
-		$query = "SELECT last_updated
+		$query = "SELECT last_updated, id, status
 			FROM $t_bug_table
 			WHERE $specific_where AND
 			status >='$t_res_val'
@@ -852,6 +853,25 @@
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
 			$t_date = db_unixtimestamp( $row['last_updated'] );
+			$t_status = $row['status'];
+			$t_id = $row['id'];
+
+			# if the status is not the resolved value, it may have passed through the
+			#  status we consider closed (e.g., bug is CLOSED, not RESOLVED)
+			#  we should look for the last time it was RESOLVED in the history
+			if ( $t_status <> $t_res_val ) {
+				$query2 = "SELECT date_modified
+					FROM " . $t_history_table . "
+					WHERE bug_id=$t_id AND type=" . NORMAL_TYPE . 
+							" AND field_name='status' AND new_value='$t_clo_val'
+					ORDER BY date_modified DESC";
+				$result2 = db_query( $query2 );
+				if ( db_num_rows( $result2 ) >= 1 ) {
+					# if any were found, read the first (newest) one and update the timestamp
+					$row2 = db_fetch_array( $result2 );
+					$t_date   = db_unixtimestamp( $row2['date_modified'] );
+				}
+			}		
 			if ( isset( $metrics[$t_date] ) ){
 				$metrics[$t_date][1]++;
 			} else {
