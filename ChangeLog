@@ -14,6 +14,7 @@ Mantis
  * Added some integration with the documentation and the report form
  * Added include for top and bottom of page.  This lets users add
    customizations
+ * Added Spanish and Portuguese localization
  * Renamed g_login_url to g_mantis_url
  * Renamed string files to have .txt extension
  * Obsoleted s_hit_back_msg

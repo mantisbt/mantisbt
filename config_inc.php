@@ -74,7 +74,7 @@
 	$g_show_footer_menu          = 0;
 
 	# change to language you want... choices are:
-	# english
+	# english, spanish, portuguese
 	$g_language                  = "english";
 
 	# Allow email
@@ -372,6 +372,6 @@
 
 	#--------------------
 	#version
-	$g_mantis_version = "0.14.3";
+	$g_mantis_version = "0.14.4";
 	#--------------------
 ?>
