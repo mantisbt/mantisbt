@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.195 2004-08-09 16:29:36 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.196 2004-08-10 23:56:51 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -1057,7 +1057,8 @@
 	$g_reproducibility_enum_string		= '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A';
 	$g_status_enum_string				= '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed';
 	  # @@@ for documentation, the values in this list are also used to define variables in the language files
-	  #  thus they cannot have embedded spaces. (e.g., $s_new_bug_title referenced in bug_change_status_page.php )
+	  #  (e.g., $s_new_bug_title referenced in bug_change_status_page.php )
+	  # Embedded spaces are converted to underscores (e.g., "working on" references $s_working_on_bug_title). 
 	  # they are also expected to be english names for the states
 	$g_resolution_enum_string			= '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix';
 	$g_projection_enum_string			= '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
