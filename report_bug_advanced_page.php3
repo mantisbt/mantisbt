@@ -115,7 +115,7 @@
 			<input type=text name=f_os size=32 maxlength=32>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_dlight ?>>
+	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td>
 			OS Build:
 		</td>

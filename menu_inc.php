@@ -33,7 +33,7 @@
 	<a href="<? echo $g_path.$g_view_bug_all_page ?>">View Bugs</a> |
 <?
 	if ( $t_access_level!="viewer" ) {
-		if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" )=="on" ) {
+		if ( get_user_value( $g_mantis_user_pref_table, "advanced_report" )=="on" ) {
 ?>
 	<a href="<? echo $g_path.$g_report_bug_advanced_page ?>">Report Bug</a> |
 	<? } else { ?>

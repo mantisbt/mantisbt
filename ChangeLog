@@ -7,15 +7,18 @@ To Do:
  * Add mailing module
  * Add ip tracking/banning capability
  * Add file upload module
- * Add postgreSQL support and/or a Database abstraction layer
+ * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
  * Refine viewing news archives
  * Make priority useful
- * Force some sort of dialog when closing a bug (resolved)
+ * Force some sort of dialog when closing a bug
+ * Force some sort of dialog when reopening a bug
  * Search bugs capability
  * Complex bug criteria searching
  * Add glyphs and icons as optional display feature
  * More documentation on installtion, configuration, and customization
  * Further document core_API.php
+ * Move as much of the config_inc.php varaibles into a database table.
+   Then build a nice interface into it.
 
 12.10.2000	-	0.11.0
 
@@ -44,6 +47,7 @@ To Do:
  * Renamed $g_bug_view_all_page $g_bug_view_all_page $g_bug_view_all_page
    to      $g_view_bug_all_page $g_view_bug_page $g_view_bug_advanced_page
  * Renamed corresponding .php3 files
+ * Refined view next/prev bugs and news items
  * Split manage user actions into separate files
  * Removed the destructive DROP table in db_generate.sql
  * Removed view_prefs_page.php3 and view_prefs_update.php3 and corresponding
@@ -77,7 +81,7 @@ To Do:
  * Viewing filters
  * supports php and php3 extensions (php3/php4)
 
-12.01.2000	-	0.9.1 (Quick fixes)
+12.01.2000	-	0.9.1
 
  * Fixed a link
  * Fixed reporter not showing up properly
