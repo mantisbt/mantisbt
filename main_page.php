@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.38 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: main_page.php,v 1.39 2003-02-19 12:36:48 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -94,10 +94,6 @@
 			continue;
 		}
 
-		## grab the username and email of the poster
-		$t_poster_name	= user_get_name( $v_poster_id );
-		$t_poster_email	= user_get_email( $v_poster_id );
-
 		if ( PRIVATE == $v_view_state ) {
 			$t_news_css = 'news-heading-private';
 		} else {
@@ -111,7 +107,7 @@
 	<td class="<?php echo $t_news_css ?>">
 		<span class="bold"><?php echo $v_headline ?></span> -
 		<span class="italic-small"><?php echo $v_date_posted ?></span> -
-		<a class="small" href="mailto:<?php echo $t_poster_email ?>"><?php echo $t_poster_name ?></a>
+		<?php print_user( $v_poster_id ) ?>
 		<span class='small'>
 		<?php
 			if ( 1 == $v_announcement ) {

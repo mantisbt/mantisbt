@@ -10,6 +10,7 @@ Mantis ChangeLog
  * Fix: #2936: 'SYSTEM WARNING: ob_gzhandler() used twice'
  * Fix: #2941: Checking that project upload path exists and is writable to webserver
  * Fix: #2943: Document title should be mandatory
+ * Fix: #2952: Email address of news poster always visible.
  * Fix: at various places, the currently selected project (as specified by the cookie) was used instead of i.e. a bug's project
  * Fix: lang_api did not load the user's preferred language
  * Fix: obscure error when database connect failed
