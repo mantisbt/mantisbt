@@ -13,8 +13,8 @@
 	#  headers from being sent if there's a blank line in an included file
 	ob_start();
 
-	$t_core_path = dirname ( __FILE__ ) . '/core/';
-	require_once( $t_core_path . 'php_api.php' );
+	$t_core_path = dirname( __FILE__ ).'/core/';
+	require_once( $t_core_path.'php_api.php' );
 
 	# Load constants and configuration files
   	require_once( 'constant_inc.php' );
@@ -29,8 +29,8 @@
 	if ( file_exists( 'config_inc.php' ) ) {
 		require_once( 'config_inc.php' );
 	}
-	
+
 	# Load rest of core in seperate directory.
-	require_once( $g_core_path . 'API.php');
+	require_once( $g_core_path.'API.php');
 	# --------------------
 ?>
