@@ -184,8 +184,6 @@
 					WHERE bug_id='$v_id'";
 			$res2 = db_query( $query );
 			$v_bugnote_updated = db_result( $res2, 0, 0 );
-
-			$v_summary = string_display( $v_summary );
 	?>
 	<tr align="center" bgcolor="<? echo $status_color ?>">
 		<td bgcolor="<? echo $g_white_color ?>">
