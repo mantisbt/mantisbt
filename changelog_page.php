@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.3 2004-06-20 21:59:27 vboctor Exp $
+	# $Id: changelog_page.php,v 1.4 2004-07-05 14:45:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,30 +36,42 @@
 	$t_version_rows = version_get_all_rows( $f_project_id );
 
 	echo '<br /><span class="pagetitle">', lang_get( 'changelog' ), '</span><br /><br />';
+	echo '<tt>';
+
+	$i = 0;
 
 	foreach( $t_version_rows as $t_version_row ) {
+		if ( $i > 0 ) {
+			echo '<br />';
+		}
+		$i++;
+
 		$t_version = $t_version_row['version'];
 		$c_version = db_prepare_string( $t_version );
 
-		$query = "SELECT id, summary, view_state FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
+		$query = "SELECT id, view_state FROM $t_bug_table WHERE project_id='$c_project_id' AND fixed_in_version='$c_version' ORDER BY last_updated DESC";
 
-		echo '<table class="table.width100" width="100%">';
-		echo '<tr><td class="category" colspan="2">', $t_project_name, ' - ', $t_version, '</td></tr>';
+		$t_release_title = $t_project_name . ' - ' . $t_version;
+		echo $t_release_title, '<br />';
+		echo str_pad( '', strlen( $t_release_title ), '=' ), '<br />';
+		
 		for ( $t_result = db_query( $query ); !$t_result->EOF; $t_result->MoveNext() ) {
 			# hide private bugs if user doesn't have access to view them.
 			if ( !$t_can_view_private && ( $t_result->fields['view_state'] == VS_PRIVATE ) ) {
 				continue;
 			}
 
-			if ( !helper_call_custom_function( 'changelog_include_issue', array( $t_result->fields['id'] ) ) ) {
+			$t_issue_id = $t_result->fields['id'];
+
+			if ( !helper_call_custom_function( 'changelog_include_issue', array( $t_issue_id ) ) ) {
 				continue;
 			}
 
-			echo '<tr ', helper_alternate_class(), '><td class="left" width="10%">', string_process_bug_link( '#' . $t_result->fields['id']  ), '</td><td class="left">', string_display( $t_result->fields['summary'] ), '</td></tr>';
+			helper_call_custom_function( 'changelog_print_issue', array( $t_issue_id ) );
 		}
-		echo '</table>';
-		echo '<br />';
 	}
+
+	echo '</tt>';
 
 	html_page_bottom1( __FILE__ );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.1 2004-05-24 22:23:06 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.2 2004-07-05 14:45:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Custom Function API ###
@@ -20,5 +20,13 @@
 
 		return ( ( $t_issue->duplicate_id == 0 ) && ( $t_issue->resolution == FIXED ) &&
 			( $t_issue->status >= config_get( 'bug_resolved_status_threshold' ) ) );
+	}
+
+
+	# --------------------
+	# Prints one entry in the changelog.
+	function custom_function_default_changelog_print_issue( $p_issue_id ) {
+		$t_bug = bug_get( $p_issue_id );
+		echo '- ', string_process_bug_link( '#' . $p_issue_id ), ': ', string_display( $t_bug->summary ), ' (', user_get_name( $t_bug->handler_id ), ')<br />';
 	}
 ?>
