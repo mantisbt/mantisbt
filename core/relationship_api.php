@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.14 2004-07-18 13:40:30 vboctor Exp $
+	# $Id: relationship_api.php,v 1.15 2004-07-29 10:47:25 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
@@ -16,7 +16,7 @@
 	# MASC RELATIONSHIP
 
 	# --------------------------------------------------------
-	# Author: Marcello Scatà marcello@marcelloscata.com
+	# Author: Marcello Scatâ€¡ marcello@marcelloscata.com
 	#
 	# --------------------------------------------------------
 	# RELATIONSHIP DEFINITIONS
@@ -395,7 +395,7 @@
 
 				$t_relationship_info_html = $t_relationship_descr . '</td>';
 				if ( $p_html_preview == false ) {
-					$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a>' . $t_td;
+					$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . bug_format_id( $t_related_bug_id ) . '</a></td>';
 					$t_relationship_info_html .= '<td bgcolor="' . get_status_color( $t_bug->status ) . '">' . $t_status . '&nbsp;</td>' . $t_td;
 				}
 				else {
