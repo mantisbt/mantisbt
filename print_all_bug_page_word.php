@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.46 2004-06-16 04:28:28 robertjf Exp $
+	# $Id: print_all_bug_page_word.php,v 1.47 2004-06-30 22:30:01 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -127,7 +127,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1" />
+		<hr size="1" width="100%" />
 	</td>
 </tr>
 <tr class="print-category">
@@ -172,7 +172,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </tr>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1" />
+		<hr size="1" width="100%" />
 	</td>
 </tr>
 <tr class="print">
@@ -294,7 +294,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 <tr>
 	<td class="print-spacer" colspan="6">
-		<hr size="1" />
+		<hr size="1" width="100%" />
 	</td>
 </tr>
 <tr class="print">
@@ -433,7 +433,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	?>
 <tr>
 	<td class="print-spacer" colspan="2">
-		<hr size="1" />
+		<hr size="1" width="100%" />
 	</td>
 </tr>
 <tr>
