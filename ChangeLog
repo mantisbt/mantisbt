@@ -12,6 +12,7 @@ Mantis
  * Modified config_inc.php to properly support all localized langauges.
  * Updated Korean localization.
  * Updated Polish localization.
+ * Updated TROUBLESHOOTING file.
  * Added file_type field to mantis_bug_file_table and mantis_project_file_table.
  * Added LDAP login support.
 
