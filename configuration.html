@@ -303,10 +303,62 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 	</td>
 </tr>
 <tr>
+	<td bgcolor="#ddddff">
+		$g_use_bcc
+	</td>
+	<td bgcolor="#ffffff">
+		Set to 0 as on Windows systems, as long as php-mail-function has its bcc-bug (~PHP 4.0.5/6).
+		See bug numbers <a href="http://www.php.net/bugs.php?id=10136">10136</a>,
+		<a href="http://www.php.net/bugs.php?id=11349">11349</a>,
+		<a href="http://www.php.net/bugs.php?id=11616">11616</a>,
+		<a href="http://www.php.net/bugs.php?id=11797">11797</a>,
+
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_use_phpMailer
+	</td>
+	<td bgcolor="#ffffff">
+		Use phpMailer instead of standard mail() function (REQUIRES PHP 4.x.x)<p>
+		Get the phpMailer-package from <a href="http://phpmailer.sourceforge.net">http://phpmailer.sourceforge.net</a><br>
+		The installation is very simple you only need 2 plain text php-files<br>
+		<ul>
+			<li>class.smtp.php<br>
+			<li>class.phpmailer.php<br>
+		</ul>
+		Copy these files to your php-include-dir (eg: "c:\php\includes" or "/usr/lib/php/includes") and add this path to the "include_path"-entry  in the php.ini file.<br>
+		The installation is described in the readme and there is also a simple example included.
+		<p>
+		PhpMailer comes with a detailed documentation in phpdoc format.  It is distributed under the LGPL.
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_phpMailer_method
+	</td>
+	<td bgcolor="#ffffff">
+	select the method to mail by:<br>
+	<li>0 - mail()
+	<li>1 - sendmail
+	<li>2 - SMTP
+	</td>
+</tr>
+<tr>
+	<td bgcolor="#ddddff">
+		$g_smtp_host
+	</td>
+	<td bgcolor="#ffffff">
+		This option allows you to use a remote SMTP host if you use the phpMailer script in SMTP mode.
+	</td>
+</tr>
+<tr>
 	<td colspan=2 bgcolor="#eeeeee">
 		The email system allows the package to notify users when significant events occur.  You should have a working Mail Transport Agent (MTA) on your system.  On unix systems this is usually sendmail and usually nothing needs to be done.  For problems regarding mail then visit the support forums or read up on the user notes in the mail() function at: <a href="http://www.php.net/manual/en/function.mail.php">http://www.php.net/manual/en/function.mail.php</a>
 		<p>
 		Users can also signup for their own accounts.  Emails must be valid!
+		<p>
+		You may now use the phpMailer script to send out emails.  It is recommended if you currently use Windows and PHP 4.0.4 or higher.
 	</td>
 </tr>
 </table>
@@ -1262,6 +1314,38 @@ Some variables function as toggles (On/Off).  Unless otherwise noted 0 is Off an
 		File extensions for php 3 and php 4
 		<br>
 		Set this to ".php" for php4 or whatever your webserver is configured for.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_bottom_include_page
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		If this page eixsts it will be displayed at the bottom of every page.  It makes a good company branding include page.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_top_include_page
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		If this page eixsts it will be displayed at the top of every page.  It makes a good company branding include page.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_css_include_file
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Set this to point to the CSS file of your choice.
+	</td>
+</tr>
+<tr>
+	<td width="20%" bgcolor="#ddddff">
+		$g_meta_include_file
+	</td>
+	<td width="80%" bgcolor="#ffffff">
+		Set this to point to the META tag file of your choice.
 	</td>
 </tr>
 <tr>
