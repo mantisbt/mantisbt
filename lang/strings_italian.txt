@@ -9,40 +9,43 @@
 	# Italian: Marco Vassura,  m.vassura@itools.it
 	# Italian: Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.63 $
-	# $Author: jlatour $
-	# $Date: 2004-03-14 20:10:48 $
+	# $Revision: 1.64 $
+	# $Author: vboctor $
+	# $Date: 2004-06-20 21:40:12 $
 	#
-	# $Id: strings_italian.txt,v 1.63 2004-03-14 20:10:48 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.64 2004-06-20 21:40:12 vboctor Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = "windows-1252";
 
 # Group commands menuitems
 $s_actiongroup_menu_move = "Sposta";
+$s_actiongroup_menu_copy = "Copia";
 $s_actiongroup_menu_assign = "Assegna";
 $s_actiongroup_menu_close = "Chiudi";
 $s_actiongroup_menu_delete = "Elimina";
 $s_actiongroup_menu_resolve = "Risolvi";
-$s_actiongroup_menu_update_priority = "Cambia la Priorità";
-$s_actiongroup_menu_update_status = "Cambia lo Stato";
+$s_actiongroup_menu_update_priority = "Cambia priorità";
+$s_actiongroup_menu_update_status = "Cambia stato";
+$s_actiongroup_menu_update_view_status = "Cambio priv/pubbl";
+$s_actiongroup_bugs = "Anomalie selezionate";
 
 # new strings:
 $s_all_projects = "Tutti i Progetti";
-$s_move_bugs = "Sposta i Bug";
+$s_move_bugs = "Sposta anomalia";
 $s_operation_successful = "Operazione completata con successo.";
 $s_date_order = "Ordina per Data";
 $s_print_all_bug_page_link = "Stampa il report";
 $s_csv_export = "Esporta in formato CSV";
 $s_login_anonymously = "Accedi anonimamente";
-$s_anonymous = 'Anonymous';
+$s_anonymous = "Anonymous";
 $s_jump_to_bugnotes = "Vai alle Note";
 $s_public_project_msg = "Questo progetto è PUBBLICO. Tutti gli utenti possono accedervi.";
 $s_private_project_msg = "Questo progetto è PRIVATO. Possono accedervi solo gli amministratori e gli utenti esplicitamente abilitati.";
 $s_access_level_project = "Livello di Accesso al Progetto";
-$s_view_submitted_bug_link = "Consulta il Bug";
+$s_view_submitted_bug_link = "Consulta anomalia";
 $s_assigned_projects = "Progetti assegnati";
 $s_unassigned_projects = "Progetti non assegnati";
 $s_print = "Stampa";
@@ -50,23 +53,23 @@ $s_jump = "Vai";
 $s_copy_users = "Copia gli Utenti";
 $s_copy_categories_from = "Copia le Categorie da";
 $s_copy_categories_to = "Copia le Categorie su";
-$s_bug_history = "Storia del Bug";
+$s_bug_history = "Storia della anomalia";
 $s_field = "Campo";
 $s_old_value = "Valore precedente";
 $s_new_value = "Nuovo valore";
 $s_date_modified = "Data e ora";
-$s_bugnote = "Nota al Bug";
+$s_bugnote = "Testo nota";
 $s_change = "Modifica";
 $s_bugnote_view_state = "Bugnote View State";
-$s_bug_monitor = "Bug Monitored";
-$s_bug_end_monitor = "Bug End Monitor";
+$s_bug_monitor = "Anomalia monitorata";
+$s_bug_end_monitor = "Anomalia non più monitorata";
 $s_announcement = "Annuncio";
 $s_stays_on_top = "Rimani in Primo Piano";
-$s_delete_bugnote_button = "Elimina la Nota al Bug";
+$s_delete_bugnote_button = "Elimina la Nota alla anomalia";
 $s_delete_bugnote_sure_msg = "Sei sicuro di voler eliminare questa Nota?";
 $s_bug_relationships = "Relazioni";
 $s_empty_password_sure_msg = "L'utente ha una password vuota.  Sei sicuro sia quello che vuoi?";
-$s_empty_password_button = 'Usa una Password Vuota';
+$s_empty_password_button = "Usa una Password Vuota";
 
 $s_duplicate_of = "duplicato del %id";
 $s_has_duplicate = "duplica il %id";
@@ -74,62 +77,66 @@ $s_related_to = "relativo al %id";
 $s_dependant_on = "depende dal %id";
 $s_blocks = "blocca il %id";
 
-$s_new_bug = "Nuovo Bug";
-$s_bugnote_added = "Aggiunta la Nota";
-$s_bugnote_edited = "Modificata la Nota";
-$s_bugnote_deleted = "Eliminata la Nota";
-$s_summary_updated = "Le Statistiche sono state aggiornate";
-$s_description_updated = "Modificata la Descrizione";
+$s_new_bug = "Nuova anomalia";
+$s_bugnote_added = "Nota aggiunta";
+$s_bugnote_edited = "Nota modificata";
+$s_bugnote_deleted = "Nota eliminata ";
+$s_summary_updated = "Le statistiche sono state aggiornate";
+$s_description_updated = "Descrizione modificata";
 $s_additional_information_updated = "Modificate le Informazioni Addizionali";
 $s_steps_to_reproduce_updated = "Modificati i Passi per Riprodurlo";
-$s_file_added = "Allegato il File";
-$s_file_deleted = "Eliminato l'Allegato";
-$s_bug_deleted = 'Bug Deleted';
+$s_file_added = "File allegato ";
+$s_file_deleted = "Allegato eliminato";
+$s_bug_deleted = "Anomalia eliminata";
 
 $s_make_private = "Rendi Privato";
 $s_make_public = "Rendi Pubblico";
 
-$s_create_new_project_link = 'Crea Nuovo Progetto';
+$s_create_new_project_link = "Crea Nuovo Progetto";
 
-$s_login_link = 'Accedi';
+$s_login_link = "Accedi";
 
 # bug_actiongroup_page.php : mass treatment
-$s_bug_actiongroup_failed = "Non disponi dell'autorizzazione necessaria per eseguire questa azione sui seguenti Bug: ";
-$s_close_bugs_conf_msg = "Confermi di voler chiudere questi Bug ?";
-$s_delete_bugs_conf_msg = "Confermi di voler eliminare questi Bug ?";
-$s_move_bugs_conf_msg = "Sposta i Bug su";
-$s_assign_bugs_conf_msg = "Assegna i Bug a";
+$s_bug_actiongroup_failed = "Non disponi dell'autorizzazione necessaria per eseguire questa azione sulle seguenti anomalie: ";
+$s_close_bugs_conf_msg = "Confermi di voler chiudere queste anomalie?";
+$s_delete_bugs_conf_msg = "Confermi di voler eliminare queste anomalie?";
+$s_move_bugs_conf_msg = "Sposta anomalia su";
+$s_copy_bugs_conf_msg = "Copia anomalia su";
+$s_assign_bugs_conf_msg = "Assegna anomalia a";
 $s_resolve_bugs_conf_msg = "Scegli la risoluzione";
 $s_priority_bugs_conf_msg = "Scegli la priorità";
 $s_status_bugs_conf_msg = "Scegli lo stato";
-$s_close_group_bugs_button = "Chiudi i Bug";
-$s_delete_group_bugs_button = "Elimina i Bug";
-$s_move_group_bugs_button = "Sposta i Bug";
-$s_assign_group_bugs_button = "Assegna i Bug";
-$s_resolve_group_bugs_button = "Risolvi i Bug";
-$s_priority_group_bugs_button = "Aggiorna la Priorità";
-$s_status_group_bugs_button = "Aggiorna lo Stato";
+$s_view_status_bugs_conf_msg = "seleziona vista priv/pubbl";
+$s_close_group_bugs_button = "Chiudi anomalia";
+$s_delete_group_bugs_button = "Elimina anomalia";
+$s_move_group_bugs_button = "Sposta anomalia";
+$s_copy_group_bugs_button = "Copia anomalie" ;
+$s_assign_group_bugs_button = "Assegna anomalia";
+$s_resolve_group_bugs_button = "Risolvi anomalia";
+$s_priority_group_bugs_button = "Aggiorna priorità";
+$s_status_group_bugs_button = "Aggiorna stato";
+$s_view_status_group_bugs_button = "Cambia priv/pubbl";
 
 # improved JPgraphs strings
 $s_graph_imp_status_title = "Grafico di sintesi per stato";
 $s_graph_imp_priority_title = "Grafico di sintesi per priorità";
 $s_graph_imp_severity_title = "Grafico di sintesi per severità";
 $s_graph_imp_category_title = "Grafico di sintesi per categoria";
-$s_graph_imp_resolution_title = "Grafico di sintesi per risoluzione";
-$s_by_status_pct = "per stato (%)";
-$s_by_priority_pct = "per priorità (%)";
-$s_by_severity_pct = "per severità (%)";
-$s_by_category_pct = "per categoria (%)";
-$s_by_resolution_pct = "per risoluzione (%)";
-$s_by_severity_mix = "per severità e stato";
-$s_by_priority_mix = "per priorità e stato";
-$s_by_resolution_mix = "per risoluzione e stato";
+$s_graph_imp_resolution_title = "Grafico di sintesi per motivazione"; /* MASC */
+$s_by_status_pct = "Per stato (%)";
+$s_by_priority_pct = "Per priorità (%)";
+$s_by_severity_pct = "Per severità (%)";
+$s_by_category_pct = "Per categoria (%)";
+$s_by_resolution_pct = "per motivazione (%)";
+$s_by_severity_mix = "Per severità e stato";
+$s_by_priority_mix = "Per priorità e stato";
+$s_by_resolution_mix = "Per motivazione e stato";
 $s_synthesis_link = "Sintesi";
 $s_status_link = "Per stato";
 $s_priority_link = "Per priorità";
 $s_severity_link = "Per severità";
 $s_category_link = "Per categoria";
-$s_resolution_link = "Per risoluzione";
+$s_resolution_link = "Per motivazione";
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = "Mostra solo quelli selezionati";
@@ -143,80 +150,87 @@ $s_bugnote_title = "Nota";
 $s_bugnote_date = "Data della Nota";
 $s_bugnote_description = "Testo della Nota";
 
-$s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.';
+$s_error_no_proceed = "Please use the 'Back' button in your web browser to return to the previous page.  There you can correct whatever problems were identified in this error or select another action.  You can also click an option from the menu bar to go directly to a new section.";
 
 # ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
-$MANTIS_ERROR[ERROR_SQL] = 'ERROR: SQL error detected.  Please report this to ';
-$MANTIS_ERROR[ERROR_REPORT] = 'ERROR: There was an error in your report.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ERROR: No file specified';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'ERROR: The file type is disallowed';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'ERROR: The directory does not exist. Please check the project settings.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'ERROR: A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'ERROR: A necessary field was empty.  Please recheck your inputs.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'ERROR: Access Denied.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'ERROR: A required parameter to this page was not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'ERROR: Unable to connect to FTP server.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'ERROR: A project with that name already exists.  Please go back and enter a different name.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]='ERROR: Invalid project name specified.  Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'ERROR: User not found.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= 'ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]='ERROR: Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'ERROR: News item not found.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'ERROR: Invalid email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= 'ERROR: Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'ERROR: File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'ERROR: This is a duplicate file.  Please delete the file first.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'ERROR: You cannot set a bug as a duplicate of itself.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= 'ERROR: Custom field not found';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= 'ERROR: This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= 'ERROR: At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'ERROR: Invalid value for field';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'ERROR: LDAP Authentication Failed';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= 'ERROR: LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'ERROR: LDAP Record Update has failed.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= 'ERROR: LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= 'ERROR: The action cannot be performed because the bug has been resolved';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'ERROR: Database connection failed.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'ERROR: Database query failed.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'ERROR: Database selection failed.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'ERROR: This is a duplicate category.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'ERROR: No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'ERROR: Category not found.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ERROR: This is a duplicate version.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'ERROR: Version not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'ERROR: The username is invalid.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level';
+$MANTIS_ERROR[ERROR_GENERIC]            = "ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.";
+$MANTIS_ERROR[ERROR_SQL] = "ERROR: SQL error detected.  Please report this to ";
+$MANTIS_ERROR[ERROR_REPORT] = "ERROR: There was an error in your report.";
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "ERROR: No file specified";
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = "ERROR: The file type is disallowed";
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "ERROR: The directory does not exist. Please check the project settings.";
+$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = "ERROR: This is a duplicate file.  Please delete the file first.";
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = "ERROR: A project with that name already exists.";
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = "ERROR: A necessary field was empty.  Please recheck your inputs.";
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = "ERROR: This account is protected.  You are not allowed to access this until the account protection is lifted.";
+$MANTIS_ERROR[ERROR_ACCESS_DENIED]      = "ERROR: Access Denied.";
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = "ERROR: File upload failed.  Ask your admin to run the admin_check script to debug this problem.";
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = "ERROR: File upload failed.  This is likely because the filesize was larger than is currently allowed by this PHP installation.";
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = "ERROR: A required parameter to this page was not found.";
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE]= "ERROR: That username is already being used.  Please go back and select another one.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]="ERROR: Configuration option not found.";
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]="ERROR: String not found.";
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = "ERROR: Bugnote not found.";
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = "ERROR: Project not found.";
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = "ERROR: Database field not found.";
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= "ERROR: Unable to connect to FTP server.";
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = "ERROR: A project with that name already exists.  Please go back and enter a different name.";
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID]="ERROR: Invalid project name specified.  Project names cannot be blank.";
+$MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= "ERROR: User not found.";
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE]= "ERROR: The login information stored by your browser is invalid.  Perhaps your account was deleted?";
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND]="ERROR: Preferences could not be found for this user.";
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= "ERROR: News item not found.";
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]="ERROR: Password does not match verification.";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= "ERROR: An array was expected but a string was received.";
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]="ERROR: A string was expected but an array was received.";
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= "ERROR: anomalia not found.";
+$MANTIS_ERROR[ERROR_EMAIL_INVALID]	= "ERROR: Invalid email.";
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND]= "ERROR: Profile not found.";
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= "ERROR: File type not allowed for uploads.";
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= "ERROR: This is a duplicate file.  Please delete the file first.";
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = "ERROR: Invalid upload path.  Directory either does not exist or not writable to webserver";
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= "ERROR: You cannot set a anomalia as a duplicate of itself.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND]= "ERROR: Custom field not found";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE]= "ERROR: This is a duplicate name.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE]= "ERROR: At least one project still uses this field.";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = "ERROR: Invalid value for field";
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = "Invalid custom field definition";
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= "ERROR: LDAP Authentication Failed";
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED]= "ERROR: LDAP Server Connection Failed";
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= "ERROR: LDAP Record Update has failed.";
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND]= "ERROR: LDAP User Record Not Found.";
+$MANTIS_ERROR[ERROR_BUG_RESOLVED_ACTION_DENIED]= "ERROR: The action cannot be performed because the anomalia has been resolved";
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= "ERROR: Database connection failed.";
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= "ERROR: Database query failed.";
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= "ERROR: Database selection failed.";
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = "ERROR: This is a duplicate category.";
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = "ERROR: No copy action was specified.";
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = "ERROR: Category not found.";
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = "ERROR: This is a duplicate version.";
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = "ERROR: Version not found.";
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = "ERROR: The username is invalid.";
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = "User does not have required access level";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = "Sponsorship support not enabled.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = "Sponsorship %d not found.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = "Sponsorship (%s) is below minimum amount (%s).";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = "Handler does not have the required access level to handle sponsored issues.";
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = "Access Denied: Assigning sponsored issues requires higher access level.";
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = "Configuration option \"%s\" has invalid value \"%s\"";
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = "The action cannot be performed because issue \"%d\" is read-only";
 
 $s_login_error = "ERRORE: Il tuo account potrebbe essere stato disabilitato oppure puoi aver immesso un nome e/o una password errata.";
 $s_login_cookies_disabled = "ERRORE: Il tuo browser non sembra essere in grado di gestire i cookie, oppure si rifiuta di farlo.";
 
 # General Strings
 $s_go_back = "Indietro";
-$s_proceed = "Clicca qui per continuare";
+$s_proceed = "Clicca per continuare";
 
 $s_switch = "Cambia";
 $s_logged_in_as = "Autenticato come ";
 
-$s_prefix_for_deleted_users = 'user';
+$s_prefix_for_deleted_users = "user";
 
-$s_administrator = "amministratore";
+$s_administrator = "Amministratore";
 $s_myself = "Myself";
 
 # Enum Strings
@@ -246,31 +260,35 @@ $s_reset_request_msg = "È stato richiesto un reset della tua password".
 $s_account_name_msg = "Il Nome del tuo Account è";
 $s_news_password_msg = "La tua nuova Password";
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = "La seguente anomalia richiede il tuo FEEDBACK.";
+$s_email_notification_title_for_status_bug_acknowledged = "La seguente anomalia é stata RICONOSCIUTA.";
+$s_email_notification_title_for_status_bug_confirmed = "La seguente anomalia é stata CONFERMATA.";
+$s_email_notification_title_for_status_bug_assigned = "La seguente anomalia é stata ASSEGNATA.";
+$s_email_notification_title_for_status_bug_resolved = "La seguente anomalia é stata RISOLTA.";
+$s_email_notification_title_for_status_bug_closed = "La seguente anomalia é stata CHIUSA.";
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = "La seguente anomalia é stata SUBMITTED.";
+$s_email_notification_title_for_action_bug_assigned = "La seguente anomalia é stata ASSEGNATA.";
+$s_email_notification_title_for_action_bug_reopened = "La seguente anomalia é stata RIAPERTA.";
+$s_email_notification_title_for_action_bug_deleted = "La seguente anomalia é stata ELIMINATA.";
+$s_email_notification_title_for_action_sponsorship_added = "La seguente anomalia é stata SPONSORIZZATA.";
+$s_email_notification_title_for_action_sponsorship_updated = "Una sponsorizzazione della seguente anomalia é stata modificata.";
+$s_email_notification_title_for_action_sponsorship_deleted = "Una sponsorizzazione della seguente anomalia é stata eliminata.";
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = "Una NOTA é stata aggiunta a questa anomalia.";
 
 $s_email_reporter = "Segnalato da";
 $s_email_handler = "In carico a";
 $s_email_project = "Progetto";
-$s_email_bug = "ID Bug";
+$s_email_bug = "ID anomalia";
 $s_email_category = "Categoria";
 $s_email_reproducibility = "Riproducibilità";
 $s_email_severity = "Severità";
 $s_email_priority = "Priorità";
 $s_email_status = "Stato";
-$s_email_resolution = "Risoluzione";
+$s_email_resolution = "Motivazione";
 $s_email_duplicate = "Duplicato";
+$s_email_fixed_in_version = "Risolto in versione";
 $s_email_date_submitted = "Data di inserimento";
 $s_email_last_modified = "Ultima modifica";
 $s_email_summary =  "Riassunto";
@@ -289,6 +307,7 @@ $s_manage_profiles_link = "Modifica Profili";
 $s_change_preferences_link = "Modifica Preferenze";
 $s_edit_account_title = "Modifica Account";
 $s_username = "Nome Utente";
+$s_realname = "Nominativo";
 $s_email = "Email";
 $s_password = "Password";
 $s_confirm_password  = "Conferma Password";
@@ -303,13 +322,14 @@ $s_advanced_view = "Scheda dettagliata";
 $s_advanced_update = "Aggiornamento dettagliato";
 $s_refresh_delay = "Ritardo di Refresh";
 $s_redirect_delay = "Ritardo di Reindirizzamento";
+$s_with_minimum_severity = "Con severità minima di";
 $s_email_on_new = "Email su 'Novità'";
 $s_email_on_assigned = "Email su 'Assegnato'";
 $s_email_on_feedback = "Email su 'Da Discutere'";
 $s_email_on_resolved = "Email su 'Risolto'";
 $s_email_on_closed = "Email su 'Chiuso'";
 $s_email_on_reopened = "Email su 'Riaperto'";
-$s_email_on_bugnote_added = "Email su 'Aggiunta Nota Bug'";
+$s_email_on_bugnote_added = "Email su 'Aggiunta Nota ad anomalia'";
 $s_email_on_status_change = "Email su 'Cambio Stato'";
 $s_email_on_priority_change = "Email su 'Cambio Priorità'";
 $s_language = "Lingua";
@@ -357,25 +377,25 @@ $s_email_updated = "L'indirizzo email è stato aggiornato con successo";
 $s_password_updated = "La password è stata aggiornata correttamente";
 
 # bug_assign.php
-$s_bug_assign_msg = "Il Bug è stato assegnato correttamente...";
+$s_bug_assign_msg = "L'anomalia è stato assegnato correttamente...";
 
 # bug_close.php
-$s_bug_close_msg = "Il Bug è stato chiuso...";
+$s_bug_close_msg = "L'anomalia è stata chiusa...";
 $s_close_immediately = "Chiudi immediatamente:";
 
 # bug_close_page.php
-$s_close_bug_title = "Chiusura Bug";
+$s_close_bug_title = "Chiusura anomalia";
 
 # bug_delete.php
-$s_bug_deleted_msg = "Il Bug è stato eliminato...";
+$s_bug_deleted_msg = "L'anomalia è stata eliminata...";
 
 # bug_delete_page.php
-$s_delete_bug_sure_msg = "Sei sicuro di voler eliminare questo Bug?";
-$s_delete_bug_button = "Elimina Bug";
+$s_delete_bug_sure_msg = "Sei sicuro di voler eliminare questa anomalia?";
+$s_delete_bug_button = "Elimina";
 
 # bug_monitor.php
-$s_monitor_bug_button = "Tienimi informato sul Bug";
-$s_unmonitor_bug_button = "Smetti di tenermi informato";
+$s_monitor_bug_button = "Monitora";
+$s_unmonitor_bug_button = "Non monitora";
 
 # bug_file_add.php
 $s_file_upload_msg = "File caricato con successo";
@@ -387,36 +407,36 @@ $s_upload_file_button = "Carica File";
 $s_max_file_size = "Dimensione massima";
 
 # bug_reopen.php
-$s_bug_reopened_msg = "Il Bug è stato riaperto...";
-$s_reopen_add_bugnote_title = "Aggiungi una Nota con le ragioni per la Riapertura del Bug";
-$s_bugnote_add_reopen_button = "Aggiungi una Nota e Riapri il Bug";
+$s_bug_reopened_msg = "L'anomalia è stata riaperta...";
+$s_reopen_add_bugnote_title = "Aggiungi una nota con le ragioni per la riapertura dell'anomalia";
+$s_bugnote_add_reopen_button = "Aggiungi una nota e riapri anomalia";
 
 # bug_resolve_page.php
-$s_resolve_bug_title = "Risolvi il Bug";
-$s_resolve_bug_button = "Risolvi il Bug";
+$s_resolve_bug_title = "Risolvi anomalia";
+$s_resolve_bug_button = "Risolvi";
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = "Il Bug è stato risolto. Inserisci una nota...";
-$s_resolve_add_bugnote_title = "Aggiungi una Nota con le ragioni per la Risoluzione del Bug";
+$s_bug_resolved_msg = "L'anomalia è stata risolta. Inserisci nota...";
+$s_resolve_add_bugnote_title = "Aggiungi una nota con le ragioni per la risoluzione dell'anomalia";
 $s_bugnote_add_resolve_button = "Inserisci Nota";
 
 # bug_reminder_page.php
 $s_from = "Da";
 $s_to = "A";
 $s_on = "Il";
-$s_sent_you_this_reminder_about = "ti invia questo memorandum a proposito del bug";
+$s_sent_you_this_reminder_about = "ti invia questo memorandum a proposito dell'anomalia";
 $s_bug_reminder = "Invia un memorandum";
 $s_reminder_sent_to = "Inviato memorandum a";
 $s_bug_send_button = "Invia";
 $s_reminder = "Nota";
 
 # bug_update.php
-$s_bug_updated_msg = "Il Bug è stato aggiornato correttamente...";
+$s_bug_updated_msg = "L'anomalia è stata aggiornata correttamente...";
 
 # bug_update_advanced_page.php
-$s_back_to_bug_link = "Ritorna nei Bug";
+$s_back_to_bug_link = "Ritorna alle anomalie";
 $s_update_simple_link = "Aggiornamento Semplice";
-$s_updating_bug_advanced_title = "Aggiorna l'informazione sul Bug";
+$s_updating_bug_advanced_title = "Aggiorna anomalia";
 $s_id = "ID";
 $s_category = "Categoria";
 $s_severity = "Severità";
@@ -426,7 +446,7 @@ $s_last_update = "Ultimo aggiornamento";
 $s_reporter = "Segnalato da";
 $s_assigned_to = "Assegnato a";
 $s_priority = "Priorità";
-$s_resolution = "Risoluzione";
+$s_resolution = "Motivazione";
 $s_status = "Stato";
 $s_duplicate_id = "ID Duplicato";
 $s_os = "OS";
@@ -435,17 +455,18 @@ $s_os_version = "Versione";
 $s_eta = "Stima tempo necessario";
 $s_product_version = "Versione del Prodotto";
 $s_build = "Release";
+$s_fixed_in_version = "Risolto in versione";
 $s_votes = "Voti";
 $s_summary = "Riassunto";
 $s_description = "Descrizione";
-$s_steps_to_reproduce = "Passaggi per riprodurre il Bug";
+$s_steps_to_reproduce = "Passaggi per riprodurre l'anomalia";
 $s_additional = "Aggiuntiva";
 $s_information = "Informazione";
 $s_update_information_button = "Aggiorna Informazione";
 
 # bug_update_page.php
 $s_update_advanced_link = "Aggiornamento dettagliato";
-$s_updating_bug_simple_title = "Aggiorna le informazioni sul Bug";
+$s_updating_bug_simple_title = "Aggiorna le informazioni sull'anomalia";
 
 # bug_vote_add.php
 $s_vote_added_msg = "Il Voto è stato Aggiunto...";
@@ -455,21 +476,21 @@ $s_bugnote_added_msg = "La Nota è stata Aggiunta...";
 
 # bugnote_delete.php
 $s_bugnote_deleted_msg = "La Nota è stata eliminata correttamente...";
-$s_bug_notes_title = "Annotazioni relative al Bug";
+$s_bug_notes_title = "Annotazioni relative all'anomalia";
 
 # bugnote_edit_page.php
 $s_edit_bugnote_title = "Aggiorna la Nota";
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = "Non ci sono Note relative a questo Bug.";
+$s_no_bugnotes_msg = "Non ci sono Note relative a questa anomalia.";
 $s_delete_link = "Elimina";
-$s_add_bugnote_title = "Inserisci una Nota";
+$s_add_bugnote_title = "Inserisci nota";
 $s_add_bugnote_button = "Inserisci Nota";
 $s_bugnote_edit_link = "Modifica";
-$s_close_bug_button = "Chiudi il Bug";
+$s_close_bug_button = "Chiudi";
 
 # bugnote_update.php
-$s_bugnote_updated_msg = "La nota sul Bug è stata aggiornata con successo...";
+$s_bugnote_updated_msg = "La nota sull'anomalia è stata aggiornata con successo...";
 $s_edited_on = "modificata il: ";
 
 # index.php
@@ -499,7 +520,7 @@ $s_open_and_reported_to_me = "Segnalati da me ancora aperti";
 $s_newer_news_link = "Notizie Recenti";
 $s_older_news_link = "Notizie Precedenti";
 $s_archives = "Archivio";
-$s_rss = 'RSS';
+$s_rss = "RSS";
 
 # manage_create_new_user.php
 $s_created_user_part1 = "Creato Utente";
@@ -542,7 +563,7 @@ $s_category_added_msg = "La Categoria è stata inserita...";
 $s_category_deleted_msg = "La Categoria è stata eliminata...";
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = "Sei sicuro di voler eliminare questa Categoria? Tutti i Bug associati verranno eliminati.";
+$s_category_delete_sure_msg = "Sei sicuro di voler eliminare questa Categoria? Tutte le anomalie associate verranno eliminate.";
 $s_delete_category_button = "Elimina Categoria";
 
 # manage_proj_category_edit_page.php
@@ -556,7 +577,7 @@ $s_category_updated_msg = "La Categoria è stata aggiornata correttamente...";
 $s_project_deleted_msg = "Il progetto è stato rimosso correttamente...";
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = "Sei sicuro di voler eliminare questo progetto e tutti i bug associati?";
+$s_project_delete_msg = "Sei sicuro di voler eliminare questo progetto e tutte le anomalie associate?";
 $s_project_delete_button = "Elimina Progetto";
 
 # manage_proj_edit_page.php
@@ -564,7 +585,7 @@ $s_edit_project_title = "Modifica Progetto";
 $s_project_name = "Nome Progetto";
 $s_view_status = "Visibilità";
 $s_public = "pubblico";
-$s_private = "privato";
+$s_private = "Privato";
 $s_update_project_button = "Aggiorna Progetto";
 $s_delete_project_button = "Elimina Progetto";
 $s_categories_and_version_title = "Categorie e Versioni";
@@ -573,10 +594,10 @@ $s_add_category_button = "Nuova Categoria";
 $s_versions = "Versioni";
 $s_add_version_button = "Nuova Versione";
 $s_edit_link = "modifica";
-$s_actions = 'Azioni';
+$s_actions = "Azioni";
 $s_version = "Versione";
-$s_timestamp = 'Timestamp';
-$s_update = 'Aggiorna';
+$s_timestamp = "Timestamp";
+$s_update = "Aggiorna";
 
 # manage_proj_menu_page.php
 $s_add_project_title = "Inserisci Progetto";
@@ -595,7 +616,7 @@ $s_version_added_msg = "La Versione è stata inserita...";
 $s_version_deleted_msg = "La Versione è stata eliminata correttamente...";
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = "Sei sicuro di voler eliminare questa versione? Tutti i Bug associati verranno eliminati.";
+$s_version_delete_sure = "Sei sicuro di voler eliminare questa versione? Tutte le anomalie associate verranno eliminate.";
 $s_delete_version_button = "Elimina Versione";
 
 # manage_proj_version_edit_page.php
@@ -614,7 +635,7 @@ $s_delete_account_sure_msg = "Sei sicuro di voler eliminare questo Account?";
 
 # manage_user_prune.php
 $s_accounts_pruned_msg = "Tutti gli Account che non hanno mai effettuato il login e sono più vecchi di 1 settimana sono stati rimossi";
-$s_prune_accounts_button = 'Prune';
+$s_prune_accounts_button = "Rimuovi";
 $s_confirm_account_pruning = "Sei sicuro di voler eliminare i vecchi account che non sono mai stati utilizzati?";
 
 # manage_user_page.php
@@ -623,7 +644,7 @@ $s_reset_password_button = "Resetta Password";
 $s_delete_user_button = "Elimina Utente";
 $s_reset_password_msg = "Resettandola, la Password verrà rigenerata a caso.";
 $s_reset_password_msg2 = "Resettando la Password se ne imposterà il valore a 'nullo'.";
-$s_show_all_users = 'ALL';
+$s_show_all_users = "TUTTI";
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = "Account Protetto. Non è possibile resettare la password.";
@@ -636,8 +657,9 @@ $s_manage_user_updated_msg = "Account aggiornato correttamente...";
 
 # menu_inc.php
 $s_main_link = "Principale";
-$s_view_bugs_link = "Visualizza i Bug";
-$s_report_bug_link = "Inserisci nuovo Bug";
+$s_view_bugs_link = "Visualizza anomalia";
+$s_report_bug_link = "Inserisci nuova anomalia";
+$s_changelog_link = "Change Log";
 $s_summary_link = "Statistiche";
 $s_account_link = "Account";
 $s_users_link = "Utenti";
@@ -730,7 +752,7 @@ $s_must_enter_severity = "Devi selezionare una certa severità";
 $s_must_enter_reproducibility = "Devi selezionare la riproducibilità";
 $s_must_enter_summary = "Devi inserire un testo riassuntivo del problema";
 $s_must_enter_description = "Devi inserire una descrizione";
-$s_report_more_bugs = "Notifica più Bug";
+$s_report_more_bugs = "Notifica più anomalie";
 $s_submission_thanks_msg = "Grazie per il tuo interesse!";
 
 # report_bug_advanced_page.php
@@ -744,7 +766,7 @@ $s_or_fill_in = "oppure completa";
 $s_assign_to = "Assegna a";
 $s_additional_information = "Informazioni addizionali";
 $s_submit_report_button = "Invia la segnalazione";
-$s_check_report_more_bugs = "Notifica più bug";
+$s_check_report_more_bugs = "Notifica più Anomalie";
 
 # report_bug_page.php
 $s_advanced_report_link = "Modulo dettagliato";
@@ -782,36 +804,36 @@ $s_site_settings_updated_msg = "Impostazioni Sito aggiornate";
 # summary_page.php
 $s_summary_title = "Statistiche";
 $s_summary_jpgraph_link = "Grafici";
-$s_by_project = "per progetto";
-$s_by_status = "per status";
-$s_by_date = "per data";
-$s_by_severity = "per gravità";
-$s_by_resolution = "per risoluzione";
-$s_by_category = "per categoria";
-$s_by_priority = "per priorità";
-$s_by_developer = "per sviluppatore";
-$s_by_reporter = "per segnalatore";
-$s_reporter_by_resolution = 'Reporter By Resolution';
-$s_reporter_effectiveness = 'Reporter Effectiveness';
-$s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
-$s_total = 'Total';
-$s_time_stats = "Statistiche in giorni per la risoluzione dei bug";
-$s_longest_open_bug = "bug più lungo nella risoluzione";
+$s_by_project = "Per progetto";
+$s_by_status = "Per status";
+$s_by_date = "Per data";
+$s_by_severity = "Per gravità";
+$s_by_resolution = "Per motivazione";
+$s_by_category = "Per categoria";
+$s_by_priority = "Per priorità";
+$s_by_developer = "Per sviluppatore";
+$s_by_reporter = "Per segnalatore";
+$s_reporter_by_resolution = "Reporter per motivazione";
+$s_reporter_effectiveness = "Reporter per efficacia";
+$s_developer_by_resolution = "Developer per motivazione";
+$s_percentage_fixed = "% Fixed";
+$s_percentage_errors = "% False";
+$s_errors = "False";
+$s_total = "Total";
+$s_time_stats = "Statistiche in giorni per la risoluzione delle anomalie";
+$s_longest_open_bug = "anomalia più lunga nella risoluzione";
 $s_longest_open = "durata massima in stato Aperto";
 $s_average_time = "tempo medio";
 $s_total_time = "tempo totale";
-$s_developer_stats = "statistiche per sviluppatore";
-$s_reporter_stats = "statistiche per segnalatore";
+$s_developer_stats = "Statistiche per sviluppatore";
+$s_reporter_stats = "Statistiche per segnalatore";
 $s_orct = "(aperti/risolti/chiusi/totale)";
 
 # view_all_bug_page.php
 $s_any = "Qualsiasi";
-$s_show = "Quanti bug";
+$s_show = "Quante anomalie";
 $s_changed = "Modificato (ore)";
-$s_viewing_bugs_title = "Elenco dei Bug";
+$s_viewing_bugs_title = "Elenco delle anomalie";
 $s_updated = "Aggiornato";
 
 # view_all_inc.php
@@ -819,40 +841,63 @@ $s_none = "nessuno";
 $s_search = "Ricerca";
 $s_view_prev_link = "Precedenti";
 $s_view_next_link = "Successivi";
-$s_prev = 'Precedente';
-$s_next = 'Successiva';
-$s_first = 'Prima pagina';
-$s_last = 'Ultima';
-$s_start_date = 'Start Date';
-$s_end_date = 'End Date';
-$s_use_date_filters = 'Use Date Filters';
-$s_yes = 'Yes';
-$s_no = 'No';
-$s_open_filters = 'Change Filter';
-$s_or_unassigned = 'Or Unassigned';
+$s_prev = "Precedente";
+$s_next = "Successiva";
+$s_first = "Prima pagina";
+$s_last = "Ultima";
+$s_start_date = "Data inizio";
+$s_end_date = "Data fine";
+$s_use_date_filters = "Filtro per data";
+$s_yes = "Si";
+$s_no = "No";
+$s_open_filters = "Cambia filtro";
+$s_or_unassigned = "oppure non assegnato";
+$s_ok = "OK";
+
+# stored query strings
+$s_use_query = "Usa filtro";
+$s_delete_query = "Elimina filtro";
+$s_query_deleted = "Filtro eliminato";
+$s_save_query = "Save filtro corrente";
+$s_reset_query = "Reset filtro";
+$s_query_name = "Nome filtro";
+$s_query_exists = "Questa query sembra già esistere";
+$s_query_dupe_name = "Esiste un'altra query con questo nome. Indicare un nome differente";
+$s_query_blank_name = "Non é possibile memorizzare un filtro senza nome. Indicare un nome";
+$s_query_store_error = "C'é stato un errore durante la memorizzazione del filtro";
+$s_open_queries = "Gestione filtri";
+$s_query_delete_msg = "Sicuro di voler eliminare questo filtro?";
 
 # view_bug_advanced_page.php
 $s_view_simple_link = "Scheda normale";
-$s_viewing_bug_advanced_details_title = "Scheda dettagliata del Bug";
+$s_viewing_bug_advanced_details_title = "Scheda dettagliata anomalia";
 $s_product_build = "Versione del Prodotto";
 $s_system_profile = "Descrizione del Sistema";
-$s_update_bug_button = "Aggiorna il Bug";
-$s_bug_assign_to_button = 'Assign To:';
-$s_reopen_bug_button = "Riapri il Bug";
+$s_update_bug_button = "Aggiorna";
+$s_bug_assign_to_button = "Assegna:";
+$s_reopen_bug_button = "Riapri";
+$s_move_bug_button = "Muove";
 $s_attached_files = "File allegati";
-$s_publish = 'Rendi Pubblico';
-$s_cached = 'Cached';
+$s_publish = "Rendi Pubblico";
+$s_cached = "Cached";
 
 # view_bug_inc.php
 
 # view_bug_page.php
 $s_view_advanced_link = "Scheda dettagliata";
-$s_viewing_bug_simple_details_title = "Scheda del Bug";
+$s_viewing_bug_simple_details_title = "Scheda anomalia";
 
 # bug_monitor_list_view_inc.php
-$s_no_users_monitoring_bug = "Nessuno ha chiesto di essere notificato su questo bug.";
-$s_users_monitoring_bug = "Questo bug è tenuto sotto controllo da";
+$s_no_users_monitoring_bug = "Nessuno ha chiesto di essere notificato su questa anomalia.";
+$s_users_monitoring_bug = "Questa anomalia è tenuta sotto controllo da";
 $s_monitoring_user_list = "Elenco Utenti";
+
+# bug_sponsorship_list_view_inc.php
+$s_no_users_sponsoring_bug = "Non ci sono utenti che sponsorizzano questa anomalia.";
+$s_users_sponsoring_bug = "Utenti che sponsorizzano questa anomalia";
+$s_sponsors_list = "Lista degli sponsorizzatore";
+$s_total_sponsorship_amount = "Total Sponsorizzazione = %s";
+$s_sponsor_issue = "Sponsor Issue";
 
 # custom field strings
 $s_add_custom_field_button = "Nuovo Campo Personalizzato";
@@ -861,10 +906,10 @@ $s_delete_custom_field_everywhere = "Elimina tutti i Campi Personalizzati";
 $s_update_custom_field_button = "Aggiorna Campo Personalizzato";
 $s_add_existing_custom_field = "Aggiungi questo Campo Personalizzato";
 $s_edit_custom_field_title = "Modifica Campo Personalizzato";
-$s_custom_field = 'Campo';
+$s_custom_field = "Campo";
 $s_custom_fields_setup = "Campi Personalizzati";
 $s_custom_field_name = "Nome";
-$s_custom_field_project_count = 'Project Count';
+$s_custom_field_project_count = "Project Count";
 $s_custom_field_type = "Tipo";
 $s_custom_field_possible_values = "Valori permessi";
 $s_custom_field_default_value = "Valore di default";
@@ -873,9 +918,9 @@ $s_custom_field_access_level_r = "Non modificabile";
 $s_custom_field_access_level_rw = "Modificabile";
 $s_custom_field_length_min = "Lunghezza min.";
 $s_custom_field_length_max = "Lunghezza max.";
-$s_custom_field_advanced = 'Avanzato';
-$s_custom_field_sequence = 'Sequenza';
-$s_custom_field_type_enum_string = '0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email';
+$s_custom_field_advanced = "Avanzato";
+$s_custom_field_sequence = "Sequenza";
+$s_custom_field_type_enum_string = "0:Stringa,1:Numerico,2:Virgola mobile,3:Valori prestabiliti,4:Email";
 
 $s_confirm_used_custom_field_deletion = "Questo campo è attualmente utilizzato da almeno un progetto.  Se continui tutti i valori associati a questo campo verranno cancellati.  Si tratta di una azione non reversibile.  Se non desideri eliminare questo campo, clicca sul pulsante Indietro del tuo browser.  Per procedere, clicca sul pulsante qui sotto";
 $s_confirm_custom_field_deletion = "Sei sicuro di voler eliminare questo Campo Personalizzato e tutti i valori associati?";
@@ -884,12 +929,33 @@ $s_field_delete_button = "Elimina Campo";
 $s_hide_status = "Non mostrare quelli";
 $s_filter_closed = "Chiusi";
 $s_filter_resolved = "Risolti";
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
+$s_hide_closed = "Nascondi chiuse";
+$s_hide_resolved = "Nascondi risolte";
+$s_and_above = "e sopra";
+$s_advanced_filters = "Filtro avanzato";
+$s_simple_filters = "Filtro semplice";
 
-$s_attachments = "attachment(s)";
+$s_attachments = "Allegati";
 $s_attachment_alt = "A";
 
 # PHPMailer
-$s_phpmailer_language = 'it';
+$s_phpmailer_language = "it";
+
+# Sponsorship Strings
+$s_sponsors = "%d sponsor(s)";
+$s_sponsorship_added = "Aggiunta sponsorship";
+$s_sponsorship_updated = "Sponsorship modificata";
+$s_sponsorship_deleted = "Sponsorship eliminata";
+$s_sponsorship_more_info = "Maggiori informazioni circa lo sponsorship";
+
+# URL explaining the process of sponsoring an issue.  This is defined here rather than
+# in the config to allow for a URL per language.  This can be set to an empty string if there
+# is not need to provide such process information.
+$s_sponsorship_process_url = "";
+
+# Changelog
+$s_changelog = "Change Log";
+
+# Http auth
+$s_http_auth_realm = "Mantis Login";
 ?>
