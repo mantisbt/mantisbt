@@ -5,38 +5,162 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	# This page stores the reported bug and then redirects to view_all_bug_page.php3
+	# This page allows the close / suppress / others mass treatments, and display the adequate page
 ?>
 <?php include( 'core_API.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
+
+
+# the queries
+function updateBugLite($p_id, $p_status, $p_request) {
+	global $g_mantis_bug_table;
+
+	$t_handler_id = get_current_user_field( 'id' );
+	$t_query='';
+	$result = 1;
+
+	# history treatment
+	# extract current extended information into history variables
+	$result = get_bug_row_ex ( $p_id );
+	if ( 0 == db_num_rows( $result ) ) {
+		# speed is not an issue in this case, so re-use code
+		check_bug_exists( $p_id );
+	}
+	$row = db_fetch_array( $result );
+	extract( $row, EXTR_PREFIX_ALL, 'h' );
+
+	switch ($p_status) {
+		
+		case 'MOVED' : 
+			$t_query = "project_id='$p_request'";
+			break;
+				
+		case CLOSED :
+			$t_query="status='$p_status'";
+			break ;
+
+		case ASSIGNED :
+			$t_handler_id = $p_request ;
+			$t_query="handler_id='$t_handler_id', status='$p_status'";
+			break ;
+
+		case RESOLVED :
+			$t_query=" status='$p_status', resolution='$p_request'";
+			break ;
+
+		case 'UP_PRIOR' :
+			$t_query="priority='$p_request'";
+			break ;
+
+		case 'UP_STATUS' :
+			$t_query="handler_id='$t_handler_id', status='$p_request'";
+			break ;
+	}
+	# Update fields
+	$query = "UPDATE $g_mantis_bug_table ".
+    		"SET $t_query ".
+			"WHERE id='$p_id'";
+	
+   	$result = db_query($query);
+
+	if ( !$result ) {
+		print_mantis_error( ERROR_GENERIC );
+	}
+
+	# history logging should be done after the field updates
+	switch ($p_status) {
+		
+		case 'MOVED' : 
+			history_log_event_direct( $p_id, 'project_id', $h_project_id, $p_request, $t_handler_id );	
+			break;
+				
+		case CLOSED :
+			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
+			break ;
+
+		case ASSIGNED :
+			history_log_event_direct( $p_id, 'handler_id', $h_handler_id, $p_request, $t_handler_id );
+			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
+			break ;
+
+		case RESOLVED :
+			history_log_event_direct( $p_id, 'resolution', $h_resolution, $p_request, $t_handler_id );
+			history_log_event_direct( $p_id, 'status', $h_status, $p_status, $t_handler_id );
+			break ;
+
+		case 'UP_PRIOR' :
+			history_log_event_direct( $p_id, 'priority', $h_priority, $p_request, $t_handler_id );
+			break ;
+
+		case 'UP_STATUS' :
+			history_log_event_direct( $p_id, 'status', $h_status, $p_request, $t_handler_id ); 
+			break ;
+	}
+
+	# update bug last updated
+	bug_date_update($p_id);
+
+   	# notify reporter and handler
+	# currently desactivated
+	/*switch ( $p_status ) {
+
+		case ASSIGNED:	email_assign( $p_id );
+			   			break;
+		case RESOLVED:	email_resolved( $p_id );
+						break;
+		case CLOSED:	email_close( $p_id );
+						break;
+	}*/
+
+}//updateBug 
+
+
+
+	# main
 	check_access( UPDATER );
-	$c_project_id = (integer)$f_project_id;
 
 	# We check to see if the variable exists to avoid warnings
-	$result = 1;
-	if ( isset( $f_bug_arr ) ) {
-		$t_count = count( $f_bug_arr );
-		for ( $i=0; $i < $t_count; $i++ ) {
-			$t_new_id = $f_bug_arr[$i];
-			$query = "UPDATE $g_mantis_bug_table
-					SET project_id='$c_project_id'
-					WHERE id='$t_new_id'";
-			$result = db_query( $query );
+	if ( ( $f_actionconfirmed=='1' )&&( isset( $f_bug_arr ) ) )  {	
+	
+	foreach($f_bug_arr as $value) {
 
-			if ( !$result ) {
-				break;
-			}
+		# get the id and the bug_text_id parameters
+		# the bug_text_id is used only for the delete function
+		$t_id_arr=explode( ',', $value );
 
-			# log new project_id
-			history_log_event( $t_new_id, 'project_id', $g_project_cookie_val );
+		switch ( $f_action ) {
+		
+		case 'CLOSE':
+			updateBugLite($t_id_arr[0],CLOSED,'');
+			break;
+
+		case 'DELETE':
+			deleteBug($t_id_arr[0],$t_id_arr[1]);
+			break;
+			
+		case 'MOVE':
+			updateBugLite($t_id_arr[0],'MOVED',$f_project_id);
+			break;
+	
+		case 'ASSIGN':
+			updateBugLite($t_id_arr[0],ASSIGNED,$f_assign);
+			break;
+
+		case 'RESOLVE':
+			updateBugLite($t_id_arr[0],RESOLVED,$f_resolution);
+			break;
+		
+		case 'UP_PRIOR':
+			updateBugLite($t_id_arr[0],'UP_PRIOR',$f_priority);
+			break;
+
+		case 'UP_STATUS':
+			updateBugLite($t_id_arr[0],'UP_STATUS',$f_status);
+			break;
 		}
 	}
 
-	$t_redirect_url = 'view_all_bug_page.php';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_meta_redirect( 'view_all_bug_page.php',0);
+} 
 ?>

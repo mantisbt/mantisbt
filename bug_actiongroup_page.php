@@ -104,7 +104,7 @@
 <div align="center">
 <table class="width75" cellspacing="1">
 
-<form method="POST" action="bug_actiongroup.php">
+<form method="POST" action="view_all_bug_update.php">
 <input type="hidden" name="f_actionconfirmed" value="1">
 <input type="hidden" name="f_action" value="<?php echo $f_action ?>">
 
@@ -160,7 +160,7 @@ else {
 	<?php print_hr( $g_hr_size, $g_hr_width ) ?>
 	<?php echo $t_question_title ?>
 
-	<form method="post" action="bug_actiongroup.php">
+	<form method="post" action="view_all_bug_update.php">
 		<input type="hidden" name="f_actionconfirmed" value="1">
 		<input type="hidden" name="f_action" value="<?php echo $f_action ?>">
 

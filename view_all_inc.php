@@ -138,14 +138,12 @@
 		print_status_colors();
 	}
 ?>
-<? # Mass treatment page ?>
-<form method="get" action="bug_actiongroup_page.php">
 
 <p>
 <table class="width100" cellspacing="1">
 <tr>
 	<td class="form-title" colspan="<?php echo $col_count ?>">
-		<form method="post" action="view_all_bug_update.php">
+		<form method="get" action="bug_actiongroup_page.php">
 		<?php echo $s_viewing_bugs_title ?>
 		<?php
 			if ( $row_count > 0 ) {
@@ -159,6 +157,13 @@
 		?>
 		<span class="small"><?php print_bracket_link( 'print_all_bug_page.php', $s_print_all_bug_page_link ) ?></span>
 	</td>
+<?php if ($g_project_cookie_val!='0000000') {
+			if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
+	<td class="center" width="5%">
+	&nbsp;		
+	</td>
+<?php		} 
+		}?>
 	<td class="right">
 		[
 		<?php
