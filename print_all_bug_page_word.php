@@ -202,9 +202,9 @@
 xmlns:w="urn:schemas-microsoft-com:office:word"
 xmlns="http://www.w3.org/TR/REC-html40">
 
-<?php print_page_top1() ?>
-<?php print_head_bottom() ?>
-<?php print_body_top() ?>
+<?php html_page_top1() ?>
+<?php html_head_end() ?>
+<?php html_body_begin() ?>
 
 <?php
 	//$t_bug_arr_sort[$row_count]=-1;

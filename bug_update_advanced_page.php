@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_advanced_page.php,v 1.52 2003-02-15 22:20:31 vboctor Exp $
+	# $Id: bug_update_advanced_page.php,v 1.53 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,8 +32,8 @@
 
 	$t_bug = bug_prepare_edit( bug_get( $f_bug_id, true ) );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <br />
 <form method="post" action="bug_update.php">
@@ -415,4 +415,4 @@
 </table>
 </form>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

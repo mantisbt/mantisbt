@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.4 2003-02-15 10:25:17 jfitzell Exp $
+	# $Id: manage_user_edit_page.php,v 1.5 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -17,8 +17,8 @@
 
 	$t_user = user_get_row( $f_user_id );
 
-	print_page_top1();
-	print_page_top2();
+	html_page_top1();
+	html_page_top2();
 
 	print_manage_menu();
 ?>
@@ -201,4 +201,4 @@
 	edit_account_prefs( $t_user['id'], false, false, 'manage_user_page.php' );
 ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

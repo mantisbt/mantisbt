@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.18 2003-02-17 17:12:46 jlatour Exp $
+	# $Id: error_api.php,v 1.19 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -95,8 +95,8 @@
 			compress_disable();
 			ob_end_clean();
 
-			print_page_top1();
-			print_page_top2a();
+			html_page_top1();
+			html_page_top2a();
 
 			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
 

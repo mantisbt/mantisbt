@@ -172,7 +172,7 @@
 	}
 
 	if ( STATUS_LEGEND_POSITION_TOP == config_get( 'status_legend_position' ) ) {
-		print_status_colors();
+		html_status_legend();
 	}
 ?>
 
@@ -456,6 +456,6 @@ if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
 
 <?php
 	if ( STATUS_LEGEND_POSITION_BOTTOM == config_get( 'status_legend_position' ) ) {
-		print_status_colors();
+		html_status_legend();
 	}
 ?>

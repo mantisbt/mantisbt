@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.37 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: main_page.php,v 1.38 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -27,8 +27,8 @@
 	$f_offset = gpc_get_int( 'offset', 0 );
 
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <?php
 	if ( !current_user_is_anonymous() ) {
@@ -154,4 +154,4 @@
 ?>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

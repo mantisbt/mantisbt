@@ -50,10 +50,10 @@
 	$v2_steps_to_reproduce 		= string_display_links( $v2_steps_to_reproduce );
 	$v2_additional_information 	= string_display_links( $v2_additional_information );
 ?>
-<?php print_page_top1() ?>
+<?php html_page_top1() ?>
 <?php
-	print_head_bottom();
-	print_body_top();
+	html_head_end();
+	html_body_begin();
 ?>
 
 <br />

@@ -46,9 +46,9 @@
 
 	$result = db_query( $query );
 
-	print_page_top1();
-	print_meta_redirect( $f_redirect_url );
-	print_page_top2();
+	html_page_top1();
+	html_meta_redirect( $f_redirect_url );
+	html_page_top2();
 	PRINT '<br /><div align="center">';
 
 	if ( $result ) {
@@ -60,5 +60,5 @@
 	PRINT '<br />';
 	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
 	PRINT '<br /></div>';
-	print_page_bot1( __FILE__ );
+	html_page_bottom1( __FILE__ );
 ?>

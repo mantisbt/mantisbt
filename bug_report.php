@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.20 2003-02-15 22:20:31 vboctor Exp $
+	# $Id: bug_report.php,v 1.21 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -113,13 +113,13 @@
 		}
 	}
 
-	print_page_top1();
+	html_page_top1();
 
 	if ( ! $f_report_stay ) {
-		print_meta_redirect( 'view_all_bug_page.php' );
+		html_meta_redirect( 'view_all_bug_page.php' );
 	}
 
-	print_page_top2();
+	html_page_top2();
 ?>
 <br />
 <div align="center">
@@ -150,4 +150,4 @@
 ?>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.29 2003-02-11 09:08:31 jfitzell Exp $
+	# $Id: bug_actiongroup_page.php,v 1.30 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -73,8 +73,8 @@
 			break;
 	}
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 <?php  # displays the choices popup menus
 	if ( ! $t_finished ) {
 ?>
@@ -141,4 +141,4 @@
 <?php
 	}
 ?>
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.47 $
+	# $Revision: 1.48 $
 	# $Author: jfitzell $
-	# $Date: 2003-02-17 01:50:09 $
+	# $Date: 2003-02-18 02:18:01 $
 	#
-	# $Id: view_all_bug_page.php,v 1.47 2003-02-17 01:50:09 jfitzell Exp $
+	# $Id: view_all_bug_page.php,v 1.48 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,15 +37,15 @@
 
 	compress_enable();
 
-	print_page_top1();
+	html_page_top1();
 
 	if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
-		print_meta_redirect( 'view_all_bug_page.php?page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
+		html_meta_redirect( 'view_all_bug_page.php?page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
 	}
 
-	print_page_top2();
+	html_page_top2();
 
 	include( $g_view_all_include_file );
 
-	print_page_bot1( __FILE__ );
+	html_page_bottom1( __FILE__ );
 ?>

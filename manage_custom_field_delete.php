@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_delete.php,v 1.12 2003-02-16 13:20:04 jlatour Exp $
+	# $Id: manage_custom_field_delete.php,v 1.13 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -32,9 +32,9 @@
 
 	custom_field_destroy( $f_field_id );
 
-	print_page_top1();
-	print_meta_redirect( $f_return );
-	print_page_top2();
+	html_page_top1();
+	html_meta_redirect( $f_return );
+	html_page_top2();
 ?>
 
 <br />
@@ -47,4 +47,4 @@
 ?>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

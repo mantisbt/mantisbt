@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.26 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: login_select_proj_page.php,v 1.27 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,8 +17,8 @@
 <?php
 	$f_ref = gpc_get_string( 'ref', '' );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2a() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2a() ?>
 
 <!-- Project Select Form BEGIN -->
 <br />
@@ -58,4 +58,4 @@
 </form>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

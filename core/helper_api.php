@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.36 2003-02-16 10:49:38 jfitzell Exp $
+	# $Id: helper_api.php,v 1.37 2003-02-18 02:18:02 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -177,8 +177,8 @@
 			global $_POST, $_GET;
 		}
 
-		print_page_top1();
-		print_page_top2();
+		html_page_top1();
+		html_page_top2();
 
 		# @@@ we need to improve this formatting.  I'd like the text to only
 		#  be about 50% the width of the screen so that it doesn't become to hard
@@ -199,7 +199,7 @@
 
 		print_hr();
 		echo "</div>\n";
-		print_page_bot1();
+		html_page_bottom1();
 		exit;
 	}
 ?>

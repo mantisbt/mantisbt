@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.53 2003-02-18 01:59:49 jfitzell Exp $
+	# $Id: html_api.php,v 1.54 2003-02-18 02:18:02 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -26,32 +26,32 @@
 
 	# --------------------
 	# first part of the html followed by meta tags then the second part
-	function print_page_top1() {
+	function html_page_top1() {
 		global $g_css_include_file, $g_meta_include_file;
 
-		print_html_top();
-		print_head_top();
-		print_content_type();
-		print_title();
-		print_css( $g_css_include_file );
+		html_begin();
+		html_head_begin();
+		html_content_type();
+		html_title();
+		html_css( $g_css_include_file );
 		include( $g_meta_include_file );
 	}
 	# --------------------
 	# core part of page top but without login info and menu - used in login pages
-	function print_page_top2a() {
+	function html_page_top2a() {
 		global $g_top_include_page;
 
-		print_head_bottom();
-		print_body_top();
-		print_header();
-		print_top_page( $g_top_include_page );
+		html_head_end();
+		html_body_begin();
+		html_header();
+		html_top_banner( $g_top_include_page );
 	}
 	# --------------------
 	# second part of the html, comes after the meta tags
-	#  includes the complete page top, including print_page_top2a()
-	function print_page_top2() {
-		print_page_top2a();
-		print_login_info();
+	#  includes the complete page top, including html_page_top2a()
+	function html_page_top2() {
+		html_page_top2a();
+		html_login_info();
 		if( ON == config_get( 'show_project_menu_bar' ) ) {
 			print_project_menu_bar();
 			echo '<br />';
@@ -61,31 +61,31 @@
 	# --------------------
 	# comes at the bottom of the html
 	# $p_file should always be the __FILE__ variable. This is passed to show source
-	function print_page_bot1( $p_file = null ) {
+	function html_page_bottom1( $p_file = null ) {
 		if ( config_get( 'show_footer_menu' ) ) {
 			echo '<br />';
 			print_menu();
 		}
 
-		print_page_bot1a( $p_file );
+		html_page_bottom1a( $p_file );
 	}
 	# --------------------
 	# core page bottom - used in login pages
-	function print_page_bot1a( $p_file = null ) {
+	function html_page_bottom1a( $p_file = null ) {
 		global $g_bottom_include_page;
 
 		if ( null === $p_file ) {
 			$p_file = basename( $GLOBALS['PHP_SELF'] );
 		}
 
-		print_bottom_page( $g_bottom_include_page );
-		print_footer( $p_file );
-		print_body_bottom();
-		print_html_bottom();
+		html_bottom_banner( $g_bottom_include_page );
+		html_footer( $p_file );
+		html_body_end();
+		html_end();
 	}
 	# --------------------
 	# (1) this is the first text sent by the page
-	function print_html_top() {
+	function html_begin() {
 		# @@@ NOTE make this a configurable global.
 		#echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
 		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
@@ -95,18 +95,18 @@
 	}
 	# --------------------
 	# (2) Opens the <HEAD> section
-	function print_head_top() {
+	function html_head_begin() {
 	   echo '<head>';
 	}
 	# --------------------
 	# (3) Prints the content-type
-	function print_content_type() {
+	function html_content_type() {
 		echo '<meta http-equiv="Content-type" content="text/html;charset=' . lang_get( 'charset' ) . '" />';
 	}
 
 	# --------------------
 	# (4) Prints the <TITLE> tag
-	function print_title() {
+	function html_title() {
 		$t_title = config_get( 'window_title' );
 
 		if ( auth_is_user_authenticated() &&
@@ -122,7 +122,7 @@
 	}
 	# --------------------
 	# (5) includes the css include file to use, is likely to be either empty or css_inc.php
-	function print_css( $p_css ) {
+	function html_css( $p_css ) {
 		echo '<link rel="stylesheet" type="text/css" href="'.$p_css.'" />';
 		echo '<script language="JavaScript" type="text/javascript">';
 		echo '<!--';
@@ -135,7 +135,7 @@
 	# The time field is the number of seconds to wait before redirecting
 	# If we have handled any errors on this page and the 'stop_on_errors' config
 	#  option is turned on, return false and don't redirect.
-	function print_meta_redirect( $p_url, $p_time=null ) {
+	function html_meta_redirect( $p_url, $p_time=null ) {
 		if ( ON == config_get( 'stop_on_errors' ) && error_handled() ) {
 			return false;
 		}
@@ -150,17 +150,17 @@
 	}
 	# --------------------
 	# (7) Ends the <HEAD> section
-	function print_head_bottom() {
+	function html_head_end() {
 		echo '</head>';
 	}
 	# --------------------
 	# (8) Starts the <BODY> of the page
-	function print_body_top() {
+	function html_body_begin() {
 		echo '<body>';
 	}
 	# --------------------
 	# (9) Prints the title that is visible in the main panel of the browser
-	function print_header() {
+	function html_header() {
 		$t_title = config_get( 'page_title' );
 
 		if ( auth_is_user_authenticated() &&
@@ -177,7 +177,7 @@
 	# --------------------
 	# (10) $p_page is included.  This allows for the admin to have a nice banner or
 	# graphic at the top of every page
-	function print_top_page( $p_page ) {
+	function html_top_banner( $p_page ) {
 		if (( !is_blank( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
 			include( $p_page );
 		}
@@ -185,14 +185,14 @@
 	# --------------------
 	# (11) $p_page is included.  This allows for the admin to have a nice baner or
 	# graphic at the bottom of every page
-	function print_bottom_page( $p_page ) {
+	function html_bottom_banner( $p_page ) {
 		if (( !is_blank( $p_page ) )&&( file_exists( $p_page ) )&&( !is_dir( $p_page ) )) {
 			include( $p_page );
 		}
 	}
 	# --------------------
 	# (12) Prints the bottom of page information
-	function print_footer( $p_file ) {
+	function html_footer( $p_file ) {
 		global 	$g_string_cookie_val, $g_webmaster_email,
 				$g_menu_include_file, $g_show_footer_menu,
 				$g_mantis_version, $g_show_version,
@@ -241,12 +241,12 @@
 	}
 	# --------------------
 	# (13) Ends the <BODY> section.
-	function print_body_bottom() {
+	function html_body_end() {
 		echo '</body>';
 	}
 	# --------------------
 	# (14) The very last text that is sent in a html page.
-	function print_html_bottom() {
+	function html_end() {
 		echo '</html>';
 	}
 	# --------------------
@@ -256,7 +256,7 @@
 	# --------------------
 	# prints the user that is logged in and the date/time
 	# it also creates the form where users can switch projects
-	function print_login_info() {
+	function html_login_info() {
 		global 	$g_string_cookie_val, $g_project_cookie_val,
 				$g_complete_date_format, $g_use_javascript;
 
@@ -275,7 +275,7 @@
 			echo '<td class="login-info-right">';
 				echo '<form method="post" name="form_set_project" action="set_project.php">';
 
-				if ( ON == $g_use_javascript) { // use javascript auto-submit -SC 2002.Jun.21
+				if ( ON == $g_use_javascript) {
 					echo '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
 				} else {
 					echo '<select name="project_id" class="small">';
@@ -522,7 +522,7 @@
 	}
 	# --------------------
 	# Print the color legend for the colors
-	function print_status_colors() {
+	function html_status_legend() {
 		global	$g_status_enum_string;
 
 		echo '<br />';

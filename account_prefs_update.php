@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.28 2003-02-15 10:25:15 jfitzell Exp $
+	# $Id: account_prefs_update.php,v 1.29 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -62,9 +62,9 @@
 
 	user_pref_set( $f_user_id, $t_prefs );
 
-	print_page_top1();
-	print_meta_redirect( $f_redirect_url );
-	print_page_top2();
+	html_page_top1();
+	html_meta_redirect( $f_redirect_url );
+	html_page_top2();
 	echo '<br /><div align="center">';
 
 	echo lang_get( 'operation_successful' );
@@ -72,5 +72,5 @@
 	echo '<br />';
 	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
 	echo '<br /></div>';
-	print_page_bot1( __FILE__ );
+	html_page_bottom1( __FILE__ );
 ?>

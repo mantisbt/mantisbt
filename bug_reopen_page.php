@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen_page.php,v 1.27 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_reopen_page.php,v 1.28 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,8 +21,8 @@
 
 	access_ensure_can_reopen_bug( $f_bug_id );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <br />
 <div align="center">
@@ -51,4 +51,4 @@
 <br />
 <?php include( config_get( 'bug_view_inc' ) ) ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

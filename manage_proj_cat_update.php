@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_update.php,v 1.29 2003-02-15 10:25:17 jfitzell Exp $
+	# $Id: manage_proj_cat_update.php,v 1.30 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -42,11 +42,11 @@
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 ?>
 <?php
-	print_page_top1();
+	html_page_top1();
 
-	print_meta_redirect( $t_redirect_url );
+	html_meta_redirect( $t_redirect_url );
 
-	print_page_top2();
+	html_page_top2();
 ?>
 <br />
 <div align="center">
@@ -57,4 +57,4 @@
 ?>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

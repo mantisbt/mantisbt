@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.30 2003-02-15 10:25:15 jfitzell Exp $
+	# $Id: account_prof_edit_page.php,v 1.31 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -47,8 +47,8 @@
    	extract( $row, EXTR_PREFIX_ALL, 'v' );
 ?>
 
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <?php # Edit Profile Form BEGIN ?>
 <br />
@@ -106,4 +106,4 @@
 </div>
 <?php # Edit Profile Form END ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

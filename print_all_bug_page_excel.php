@@ -214,13 +214,13 @@
 xmlns:x="urn:schemas-microsoft-com:office:excel"
 xmlns="http://www.w3.org/TR/REC-html40">
 
-<?php print_page_top1() ?>
+<?php html_page_top1() ?>
 <style id="Classeur1_16681_Styles">
 </style>
 
 
-<?php print_head_bottom() ?>
-<?php print_body_top() ?>
+<?php html_head_end() ?>
+<?php html_body_begin() ?>
 
 <div id="Classeur1_16681" align=center x:publishsource="Excel">
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_page.php,v 1.15 2003-02-11 09:08:26 jfitzell Exp $
+	# $Id: account_prefs_page.php,v 1.16 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -45,10 +45,10 @@
 <?php
 	include( 'account_prefs_inc.php' );
 
-	print_page_top1();
-	print_page_top2();
+	html_page_top1();
+	html_page_top2();
 
 	edit_account_prefs();
 
-	print_page_bot1( __FILE__ );
+	html_page_bottom1( __FILE__ );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.64 2003-02-16 22:35:09 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.65 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -26,8 +26,8 @@
 
 	$row = project_get_row( $f_project_id );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <?php print_manage_menu( 'manage_proj_edit_page.php' ) ?>
 
@@ -525,4 +525,4 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 	</table>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

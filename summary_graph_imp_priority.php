@@ -55,8 +55,8 @@
 	$t_average_time 	= number_format( $t_average_time / 86400, 2 );
 
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 
 <?php print_summary_menu( 'summary_page.php' ) ?>
@@ -87,4 +87,4 @@
 </tr>
 </table>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

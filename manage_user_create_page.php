@@ -6,15 +6,15 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create_page.php,v 1.13 2003-02-15 10:25:17 jfitzell Exp $
+	# $Id: manage_user_create_page.php,v 1.14 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-	print_page_top1();
-	print_page_top2();
+	html_page_top1();
+	html_page_top2();
 
 	print_manage_menu( 'manage_user_create_page.php' );
 ?>
@@ -94,4 +94,4 @@
 </form>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

@@ -33,8 +33,8 @@
    	$v_headline = string_attribute( $v_headline );
    	$v_body 	= string_textarea( $v_body );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <?php # Edit News Form BEGIN ?>
 <br />
@@ -111,4 +111,4 @@
 </div>
 <?php # Edit News Form END ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

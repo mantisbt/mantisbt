@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.28 2003-02-15 10:25:15 jfitzell Exp $
+	# $Id: account_prof_menu_page.php,v 1.29 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,8 +33,8 @@
 	# protected account check
 	current_user_ensure_unprotected();
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <?php # Add Profile Form BEGIN ?>
 <br />
@@ -132,4 +132,4 @@
 </div>
 <?php # Edit or Delete Profile Form END ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

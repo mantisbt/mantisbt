@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.38 2003-02-11 09:08:26 jfitzell Exp $
+	# $Id: account_page.php,v 1.39 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -57,8 +57,8 @@
 	#  that version instead of the one in the DB
 	$u_email = user_get_email( $u_id, $u_username );
 
-	print_page_top1();
-	print_page_top2();
+	html_page_top1();
+	html_page_top2();
 ?>
 
 <!-- # Edit Account Form BEGIN -->
@@ -216,4 +216,4 @@
 <?php } ?>
 <?php # Delete Account Form END ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

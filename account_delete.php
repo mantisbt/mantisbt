@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_delete.php,v 1.27 2003-02-15 10:25:15 jfitzell Exp $
+	# $Id: account_delete.php,v 1.28 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -49,9 +49,9 @@
 
 	$t_redirect = config_get( 'logout_redirect_page' );
 
-	print_meta_redirect( $t_redirect );
+	html_meta_redirect( $t_redirect );
 	
-	print_page_top1();
+	html_page_top1();
 
 ?>
 
@@ -63,4 +63,4 @@
 ?>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

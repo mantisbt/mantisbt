@@ -30,8 +30,8 @@
 	$v_title		= string_attribute( $v_title );
 	$v_description 	= string_textarea( $v_description );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <br />
 <div align="center">
@@ -88,4 +88,4 @@
 
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

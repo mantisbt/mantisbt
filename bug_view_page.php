@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.38 2003-02-17 01:50:08 jfitzell Exp $
+	# $Id: bug_view_page.php,v 1.39 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,8 +36,8 @@
 
 	compress_enable();
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <br />
 <table class="width100" cellspacing="1">
@@ -415,5 +415,5 @@
 		include( config_get( 'history_include_file' ) );
 	}
 	
-	print_page_bot1( __FILE__ );
+	html_page_bottom1( __FILE__ );
 ?>

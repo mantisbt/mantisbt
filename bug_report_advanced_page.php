@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.23 2003-02-15 22:20:31 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.24 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -52,8 +52,8 @@
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <br />
 <div align="center">
@@ -384,4 +384,4 @@
 //-->
 </script>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: documentation_page.php,v 1.17 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: documentation_page.php,v 1.18 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -14,7 +14,7 @@
 	access_ensure_global_level( ADMINISTRATOR );
 ?>
 <?php 
-	print_page_top1();
+	html_page_top1();
 
 	# get the phpinfo() content
 	ob_start();
@@ -29,7 +29,7 @@
 	# output the <style> block
 	echo $style;
 
-	print_page_top2();
+	html_page_top2();
 
 	print_manage_menu( 'documentation_page.php' );
 
@@ -43,4 +43,4 @@
 	echo $body;
 	echo '</div>';
 ?>
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

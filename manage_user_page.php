@@ -56,8 +56,8 @@
 		$c_hide = 1;
 	}
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <?php print_manage_menu( 'manage_user_page.php' ) ?>
 
@@ -228,4 +228,4 @@ for ($i=0;$i<$new_user_count;$i++) {
 </table>
 <?php # Manage Form END ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

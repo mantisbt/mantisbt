@@ -190,9 +190,9 @@
 	# for export
 	check_varset( $t_show_flag, 0 );
 ?>
-<?php print_page_top1() ?>
-<?php print_head_bottom() ?>
-<?php print_body_top() ?>
+<?php html_page_top1() ?>
+<?php html_head_end() ?>
+<?php html_body_begin() ?>
 
 <form method="post" action="view_all_set.php">
 <table class="width100">

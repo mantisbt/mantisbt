@@ -14,8 +14,8 @@
 <?php require( 'print_all_bug_options_inc.php' ) ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
-	print_page_top1();
-	print_page_top2();
+	html_page_top1();
+	html_page_top2();
 	edit_printing_prefs();
-	print_page_bot1( __FILE__ );
+	html_page_bottom1( __FILE__ );
 ?>

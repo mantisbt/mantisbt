@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder.php,v 1.9 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_reminder.php,v 1.10 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,9 +50,9 @@
 		bugnote_add( $f_bug_id, $t_body );
 	}
 
-	print_page_top1();
-	print_meta_redirect( string_get_bug_view_url( $f_bug_id ) );
-	print_page_top2();
+	html_page_top1();
+	html_meta_redirect( string_get_bug_view_url( $f_bug_id ) );
+	html_page_top2();
 ?>
 <br />
 <div align="center">
@@ -61,4 +61,4 @@
 	print_bracket_link( string_get_bug_view_url( $f_bug_id ), lang_get( 'proceed' ) );
 ?>
 </div>
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

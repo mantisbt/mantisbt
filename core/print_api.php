@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.42 2003-02-18 01:58:29 jfitzell Exp $
+	# $Id: print_api.php,v 1.43 2003-02-18 02:18:02 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1041,7 +1041,7 @@
 	# --------------------
 	# checks to see whether we need to be displaying the source link
 	# WARNING: displaying source (and the ability to do so) can be a security risk
-	# used in print_footer()
+	# used in html_footer()
 	function print_source_link( $p_file ) {
 		global $g_show_source, $g_string_cookie_val;
 

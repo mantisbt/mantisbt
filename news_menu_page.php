@@ -9,8 +9,8 @@
 <?php
 	access_ensure_project_level( config_get( 'manage_news_threshold' ) );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <?php # Add News Form BEGIN ?>
 <br />
@@ -104,4 +104,4 @@
 </div>
 <?php # Edit/Delete News Form END ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

@@ -12,8 +12,8 @@
 		print_header_redirect( 'login_page.php' );
 	}
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2a() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2a() ?>
 
 <br />
 <div align="center">
@@ -59,4 +59,4 @@
 </div>
 <?php # Signup form END ?>
 
-<?php print_page_bot1a( __FILE__ ) ?>
+<?php html_page_bottom1a( __FILE__ ) ?>

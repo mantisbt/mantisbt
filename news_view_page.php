@@ -14,8 +14,8 @@
 	require_once( $t_core_path.'string_api.php' );
 ?>
 <?php auth_ensure_user_authenticated() ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 <?php
 	$f_news_id = gpc_get_int( 'news_id' );
 
@@ -59,4 +59,4 @@
 	<?php print_bracket_link( 'news_list_page.php', lang_get( 'back_link' ) ) ?>
 </div>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

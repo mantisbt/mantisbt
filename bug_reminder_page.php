@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.9 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: bug_reminder_page.php,v 1.10 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,8 +21,8 @@
 
 	access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2() ?>
+<?php html_page_top1() ?>
+<?php html_page_top2() ?>
 
 <?php # Send reminder Form BEGIN ?>
 <br />
@@ -65,4 +65,4 @@
 <br />
 <?php include( config_get( 'bug_view_inc' ) ) ?>
 
-<?php print_page_bot1( __FILE__ ) ?>
+<?php html_page_bottom1( __FILE__ ) ?>

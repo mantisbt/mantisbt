@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.27 2003-02-18 01:41:50 jfitzell Exp $
+	# $Id: login_page.php,v 1.28 2003-02-18 02:18:01 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,8 +16,8 @@
 <?php
 	require_once( 'core.php' );
 
-	print_page_top1();
-	print_page_top2a();
+	html_page_top1();
+	html_page_top2a();
 ?>
 
 <br />
@@ -104,4 +104,4 @@
 //-->
 </script>
 
-<?php print_page_bot1a( __FILE__ ) ?>
+<?php html_page_bottom1a( __FILE__ ) ?>

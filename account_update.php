@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.31 2003-02-15 10:25:15 jfitzell Exp $
+	# $Id: account_update.php,v 1.32 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -37,9 +37,9 @@
 
 	$t_redirect = 'account_page.php';
 
-	print_page_top1();
-	print_meta_redirect( $t_redirect );
-	print_page_top2();
+	html_page_top1();
+	html_meta_redirect( $t_redirect );
+	html_page_top2();
 
 	echo '<br /><div align="center">';
 
@@ -62,5 +62,5 @@
 
 	print_bracket_link( $t_redirect, lang_get( 'proceed' ) );
 	echo '</div>';
-	print_page_bot1( __FILE__ );
+	html_page_bottom1( __FILE__ );
 ?>

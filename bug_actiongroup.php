@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.24 2003-02-16 13:36:59 jlatour Exp $
+	# $Id: bug_actiongroup.php,v 1.25 2003-02-18 02:18:00 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -99,8 +99,8 @@
 	$t_redirect_url = 'view_all_bug_page.php';
 
 	if ( count( $t_failed_ids ) > 0 ) {
-		print_page_top1();
-		print_page_top2();
+		html_page_top1();
+		html_page_top2();
 		
 		$t_links = array();		
 		foreach( $t_failed_ids as $t_id ) {
@@ -112,7 +112,7 @@
 		print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 		echo '</div>';
 		
-		print_page_bot1( __FILE__ );	
+		html_page_bottom1( __FILE__ );	
 	} else {
 		print_header_redirect( $t_redirect_url );
 	}
