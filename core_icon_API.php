@@ -8,10 +8,10 @@
 	# Icon API
 	###########################################################################
 
-	### --------------------
-	### Icon associative arrays
-	### --------------------
-	### Status to icon mapping
+	# --------------------
+	# Icon associative arrays
+	# --------------------
+	# Status to icon mapping
 	$g_status_icon_arr = array (
 		NONE      => "blank.gif",
 		LOW       => "blank.gif",
@@ -20,23 +20,23 @@
 		URGENT    => "priority_2.gif",
 		IMMEDIATE => "priority_3.gif"
 	);
-	### --------------------
-	### Sort direction to icon mapping
+	# --------------------
+	# Sort direction to icon mapping (actually backwards is more correct)
 	$g_sort_icon_arr = array (
-		ASC        => "up.gif",
-		DESC       => "down.gif"
+		ASC        => "down.gif",
+		DESC       => "up.gif"
 	);
-	### --------------------
-	### Read status to icon mapping
+	# --------------------
+	# Read status to icon mapping
 	$g_unread_icon_arr = array (
 		READ         => "blank.gif",
 		UNREAD       => "unread.gif"
 	);
-	### --------------------
+	# --------------------
 	###########################################################################
 	# Icon Print API
 	###########################################################################
-	### --------------------
+	# --------------------
 	# prints the staus icon
 	function print_status_icon( $p_icon ) {
 		global $g_icon_path, $g_status_icon_arr;
@@ -48,15 +48,15 @@
 			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\">";
 		}
 	}
-	### --------------------
-	### The input $p_dir is either ASC or DESC
-	### The inputs $p_sort_by and $p_field are compared to see if they match
-	### If the fields match then the sort icon is printed
-	### This is a convenience feature to push the comparison code into this
-	###     function instead of in the page(s)
-	### $p_field is a constant and $p_sort_by is whatever the page happens to
-	###     be sorting by at the moment
-	### Multiple sort keys are not supported
+	# --------------------
+	# The input $p_dir is either ASC or DESC
+	# The inputs $p_sort_by and $p_field are compared to see if they match
+	# If the fields match then the sort icon is printed
+	# This is a convenience feature to push the comparison code into this
+	#     function instead of in the page(s)
+	# $p_field is a constant and $p_sort_by is whatever the page happens to
+	#     be sorting by at the moment
+	# Multiple sort keys are not supported
 	function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 		global $g_icon_path, $g_sort_icon_arr;
 
@@ -75,7 +75,7 @@
 			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\">";
 		}
 	}
-	### --------------------
+	# --------------------
 	# prints the unread icon if the parameter is UNREAD
 	# @@@ UNUSED
 	function print_unread_icon( $p_unread=READ ) {
@@ -88,7 +88,7 @@
 			PRINT "<IMG SRC=\"$g_icon_path$g_status_icon_arr[$t_none]\" ALT=\"\">";
 		}
 	}
-	### --------------------
+	# --------------------
 	###########################################################################
 	### END                                                                 ###
 	###########################################################################

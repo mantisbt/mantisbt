@@ -5,6 +5,8 @@
 	<form method="post" action="<? echo $link_page ?>">
 	<input type="hidden" name="f_offset" value="0">
 	<input type="hidden" name="f_save" value="1">
+	<input type="hidden" name="f_sort" value="<? echo $f_sort ?>">
+	<input type="hidden" name="f_dir" value="<? echo $f_dir ?>">
 	<table width="100%">
 	<tr align="center">
         <td>
@@ -122,7 +124,7 @@
 			&nbsp;
 		</td>
 		<td width="8%">
-			<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_dir ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_id, "id", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "id" ) ?>
 		</td>
 		<td width="3%">
@@ -131,23 +133,23 @@
 			</b>
 		</td>
 		<td width="12%">
-			<? print_view_bug_sort_link( $link_page, $s_category, "category", $f_dir ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_category, "category", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "category" ) ?>
 		</td>
 		<td width="10%">
-			<? print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_dir ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_severity, "severity", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "severity" ) ?>
 		</td>
 		<td width="10%">
-			<? print_view_bug_sort_link( $link_page, $s_status, "status", $f_dir ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_status, "status", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "status" ) ?>
 		</td>
 		<td width="12%">
-			<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_dir ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_updated, "last_updated", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "last_updated" ) ?>
 		</td>
 		<td width="43%">
-			<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_dir ) ?>
+			<? print_view_bug_sort_link( $link_page, $s_summary, "summary", $f_sort, $f_dir ) ?>
 			<? print_sort_icon( $f_dir, $f_sort, "summary" ) ?>
 		</td>
 	</tr>
@@ -260,11 +262,20 @@
 		$f_offset_prev = -1;
 	}
 
+	if ( $f_dir=="DESC" ) {
+		$f_dir = "ASC";
+	} else {
+		$f_dir = "DESC";
+	}
+
+
 	if ( $f_offset_prev >= 0 ) {
-		print_bracket_link( $link_page."?f_sort=".$f_sort."&f_dir=".$f_dir."&f_offset=".$f_offset_prev, $s_view_prev_link." ".$f_limit_view );
+		#print_bracket_link( $link_page."?f_sort=".$f_sort."&f_dir=".$f_dir."&f_offset=".$f_offset_prev, $s_view_prev_link." ".$f_limit_view );
+		print_bracket_link( $link_page."?&f_offset=".$f_offset_prev, $s_view_prev_link." ".$f_limit_view );
 	}
 	if ( $row_count == $f_limit_view ) {
-		print_bracket_link( $link_page."?f_sort=".$f_sort."&f_dir=".$f_dir."&f_offset=".$f_offset_next, $s_view_next_link." ".$f_limit_view );
+		#print_bracket_link( $link_page."?f_sort=".$f_sort."&f_dir=".$f_dir."&f_offset=".$f_offset_next, $s_view_next_link." ".$f_limit_view );
+		print_bracket_link( $link_page."?f_offset=".$f_offset_next, $s_view_next_link." ".$f_limit_view );
 	}
 ?>
 </div>

@@ -9,25 +9,69 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-       if(!isset($f_search_text)){
-            $f_search_text=false;
-       }
+	# check to see if the cookie does not exist
+	if ( empty( $g_view_all_cookie_val ) ) {
+		$t_settings_string = "any#any#any#".$g_default_limit_view."#".
+							$g_default_show_changed."#0#any#any#last_updated#ASC";
+		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+		print_header_redirect( $g_view_all_bug_page );
+	}
 
-       if ( !isset( $f_hide_closed ) ) {
+	if( !isset( $f_search_text ) ) {
+		$f_search_text=false;
+	}
+
+	if ( !isset( $f_hide_closed ) ) {
 		$f_hide_closed = "";
 	}
 
-	if ( isset( $f_save )) {
-		### Save preferences
-		$t_settings_string = $f_show_category."#".
-							$f_show_severity."#".
-							$f_show_status."#".
-							$f_limit_view."#".
-							$f_highlight_changed."#".
-							$f_hide_closed."#".
-							$f_user_id."#".
-							$f_assign_id;
-		setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+	if ( isset( $f_save ) ) {
+		if ( $f_save == 1 ) {
+			### Save preferences
+			$t_settings_string = $f_show_category."#".
+								$f_show_severity."#".
+								$f_show_status."#".
+								$f_limit_view."#".
+								$f_highlight_changed."#".
+								$f_hide_closed."#".
+								$f_user_id."#".
+								$f_assign_id."#".
+								$f_sort."#".
+								$f_dir;
+
+			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+		} else if ( $f_save == 2 ) {
+			### Load preferences
+			$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
+			$f_show_category 		= $t_setting_arr[0];
+			$f_show_severity	 	= $t_setting_arr[1];
+			$f_show_status 			= $t_setting_arr[2];
+			$f_limit_view 			= $t_setting_arr[3];
+			$f_highlight_changed 	= $t_setting_arr[4];
+			$f_hide_closed 			= $t_setting_arr[5];
+			$f_user_id 				= $t_setting_arr[6];
+			$f_assign_id 			= $t_setting_arr[7];
+
+			if ( !isset( $f_sort ) ) {
+				$f_sort		 			= $t_setting_arr[8];
+			}
+			if ( !isset( $f_dir ) ) {
+				$f_dir		 			= $t_setting_arr[9];
+			}
+			### Save preferences
+			$t_settings_string = $f_show_category."#".
+								$f_show_severity."#".
+								$f_show_status."#".
+								$f_limit_view."#".
+								$f_highlight_changed."#".
+								$f_hide_closed."#".
+								$f_user_id."#".
+								$f_assign_id."#".
+								$f_sort."#".
+								$f_dir;
+
+			setcookie( $g_view_all_cookie, $t_settings_string, time()+$g_cookie_time_length );
+		}
 	}
 	else if ( strlen($g_view_all_cookie_val)>6 ) {
 		### Load preferences
@@ -40,8 +84,13 @@
 		$f_hide_closed 			= $t_setting_arr[5];
 		$f_user_id 				= $t_setting_arr[6];
 		$f_assign_id 			= $t_setting_arr[7];
+		if ( !isset( $f_sort ) ) {
+			$f_sort 				= $t_setting_arr[8];
+		}
+		if ( !isset( $f_dir ) ) {
+			$f_dir		 			= $t_setting_arr[9];
+		}
 	}
-
 
 	if ( !isset( $f_limit_view ) ) {
 		$f_limit_view = $g_default_limit_view;
@@ -73,20 +122,6 @@
 
 	if ( !isset( $f_assign_id ) ) {
 		$f_assign_id = "any";
-	}
-
-	### basically we toggle between ASC and DESC if the user clicks the
-	### same sort order
-	if ( isset( $f_dir ) ) {
-		if ( $f_dir=="ASC" ) {
-			$f_dir = "DESC";
-		}
-		else {
-			$f_dir = "ASC";
-		}
-	}
-	else {
-		$f_dir = "DESC";
 	}
 
 	# build our query string based on our viewing criteria

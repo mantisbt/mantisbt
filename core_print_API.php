@@ -575,8 +575,20 @@
 	# Link Printing API
 	###########################################################################
 	### --------------------
-	function print_view_bug_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir ) {
-		PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir\">$p_string</a></b>";
+	function print_view_bug_sort_link(  $p_page, $p_string, $p_sort_field, $p_sort, $p_dir ) {
+		if ( $p_sort_field == $p_sort ) {
+
+			# we toggle between ASC and DESC if the user clicks the same sort order
+			if ( $p_dir=="ASC" ) {
+				$p_dir = "DESC";
+			} else {
+				$p_dir = "ASC";
+			}
+
+			PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_dir=$p_dir&f_save=2\">$p_string</a></b>";
+		} else {
+			PRINT "<b><a href=\"$p_page?f_sort=$p_sort_field&f_save=2\">$p_string</a></b>";
+		}
 	}
 	### --------------------
 	function print_manage_user_sort_link(  $p_page, $p_string, $p_sort_field, $p_dir, $p_hide=0 ) {
