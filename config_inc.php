@@ -307,11 +307,10 @@
 	$g_allow_file_upload    = 1;
 
 	# Upload destination: specify actual location in project settings
-	# 1 = "disk"
-	# 2 = "database" (currently only disk is supported)
-	$g_store_file_to        = 1;
+	# DISK or DATABASE
+	$g_file_upload_method   = DATABASE;
 
-	$g_max_file_size = 5000000;
+	$g_max_file_size = 5000000; # 5 MB
 
 	############################
 	### Mantis HTML Settings ###
@@ -582,7 +581,6 @@
 	#----------------------------------
 	# bugnote includes
 	$g_bugnote_include_file           = $g_absolute_path."bugnote_inc.php";
-	#$g_bugnote_add_include_file       = $g_path."bugnote_add_inc.php";
 	#----------------------------------
 
 	#----------------------------------
@@ -749,6 +747,8 @@
 	$g_view_bug_page                  = $g_path."view_bug_page".$g_php;
 	$g_view_bug_inc                   = $g_absolute_path."view_bug_inc.php";
 	$g_bug_file_upload_inc            = $g_absolute_path."bug_file_upload_inc.php";
+
+	$g_file_download                  = $g_path."file_download".$g_php;
 
 	$g_print_all_bug_page             = $g_path."print_all_bug_page".$g_php;
 

@@ -78,6 +78,10 @@
 	define( "MD5",		2 );
 	define( "LDAP",		3 );
 
+	# file upload methods
+	define( "DISK",       1 );
+	define( "DATABASE",   2 );
+
 	# email padding
 	define( "EMAIL_PAD_LENGTH", 28 );
 ?>

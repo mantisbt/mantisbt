@@ -50,7 +50,7 @@
 			WHERE bug_id='$f_id'";
 	$result = db_query($query);
 
-	if ( $g_store_file_to==1 ) {
+	if ( DISK == $g_file_upload_method ) {
 		### Delete files from disk
 		$query = "SELECT diskfile
 			FROM $g_mantis_bug_file_table

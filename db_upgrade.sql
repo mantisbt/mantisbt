@@ -374,3 +374,11 @@ CREATE TABLE mantis_bug_history_table (
 );
 
 ALTER TABLE mantis_project_version_table ADD date_order DATETIME DEFAULT '1970-01-01 00:00:01' NOT NULL;
+
+# =================
+# 0.16.x to 0.17.0
+# =================
+
+# Allow for files greater than 64KB
+ALTER TABLE mantis_bug_file_table CHANGE content content LONGBLOB NOT NULL;
+ALTER TABLE mantis_project_file_table CHANGE content content LONGBLOB NOT NULL;

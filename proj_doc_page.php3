@@ -55,8 +55,14 @@
 ?>
 <tr valign="top" bgcolor="<? echo $status_color ?>">
 	<td>
-		<a href="<? echo $v_diskfile ?>"><? echo $v_title ?></a>
 <?
+		switch ( $g_file_upload_method ) {
+			case DISK:	PRINT "<a href=\"$v_diskfile\">$v_title</a> ($v_filesize KB)";
+						break;
+			case DATABASE:
+						PRINT "<a href=\"$g_file_download?f_id=$v_id&f_type=doc\">$v_title</a> ($v_filesize KB)";
+						break;
+		}
 		if ( access_level_check_greater_or_equal( MANAGER ) ) {
 			print_bracket_link( $g_proj_doc_edit_page."?f_id=".$v_id, "edit" );
 		}

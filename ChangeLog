@@ -3,10 +3,13 @@ Mantis
 01.01.2001  -   0.17.0
 
  * Modified many files for extensive use of CSS.
+ * Modified BLOB field to LONGBLOB.
  * Added view by page feature.
  * Added edit new link in news update page.
+ * Added file upload into database.
  * Removed site_settings pages.
- * Removed unused cookie varaibles.
+ * Removed unused cookie variables.
+ * Renamed g_store_file_to to g_file_upload_method.
 
 12.01.2001  -   0.16.1
 

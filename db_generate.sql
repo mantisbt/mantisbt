@@ -19,7 +19,7 @@ CREATE TABLE mantis_bug_file_table (
    filesize int(11) DEFAULT '0' NOT NULL,
    file_type varchar(250) NOT NULL default '',
    date_added datetime DEFAULT '1970-01-01 00:00:01' NOT NULL,
-   content blob NOT NULL,
+   content longblob NOT NULL,
    PRIMARY KEY (id)
 );
 
@@ -165,7 +165,7 @@ CREATE TABLE mantis_project_file_table (
    filesize int(11) DEFAULT '0' NOT NULL,
    file_type varchar(250) NOT NULL default '',
    date_added datetime DEFAULT '1970-01-01 00:00:01' NOT NULL,
-   content blob NOT NULL,
+   content longblob NOT NULL,
    PRIMARY KEY (id)
 );
 
