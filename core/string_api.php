@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.59 2004-09-21 07:35:10 jlatour Exp $
+	# $Id: string_api.php,v 1.60 2004-11-06 18:40:15 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -281,11 +281,11 @@
 		if ( !config_get( 'html_make_links' ) ) {
 			return $p_string;
 		}
-		# Find any URL in a string and replace it by a clickable link
-		
-		$t_url = new mantisLink();
-		$p_string = $t_url->match($p_string, "[^]");
-				
+		# Find any URL in a string and replace it by a clickable link		
+		$p_string = preg_replace( '/([a-z]{2,}:\/\/([a-z0-9_-]|\/|\@|:{0,1}\.{0,1}){1,})/',
+									'<a href="\1">\1</a> [<a href="\1" target="blank">^</a>]',   
+									$p_string);
+
 		# Set up a simple subset of RFC 822 email address parsing
 		#  We don't allow domain literals or quoted strings
 		#  We also don't allow the & character in domains even though the RFC
