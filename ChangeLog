@@ -1,5 +1,10 @@
 Mantis
 
+01.01.2001  -   0.17.0
+
+ * Modified many files for extensive use of CSS.
+ * Added view by page feature.
+
 12.01.2001  -   0.16.1
 
  * Fixed SQL error when reporting bug in a private project.

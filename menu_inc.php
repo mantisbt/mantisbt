@@ -32,7 +32,6 @@
     #@@@ $t_access_level = get_current_user_field( "access_level" );
     $t_protected = get_current_user_field( "protected" );
 ?>
-<div align="center">
 	<a href="<? echo $g_main_page ?>"><? echo $s_main_link ?></a> |
 	<a href="<? echo $g_view_all_bug_page ?>"><? echo $s_view_bugs_link ?></a> |
 <?
@@ -68,4 +67,3 @@
 
 	<a href="<? echo $g_proj_doc_page ?>"><? echo $s_docs_link ?></a> |
 	<a href="<? echo $g_logout_page ?>"><? echo $s_logout_link ?></a>
-</div>

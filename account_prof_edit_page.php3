@@ -50,66 +50,60 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
-
-<? print_account_menu() ?>
 
 <? ### Edit Profile Form BEGIN ?>
 <p>
 <div align="center">
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="1">
+<form method="post" action="<? echo $g_account_profile_update ?>">
+<input type="hidden" name="f_id" value="<? echo $v_id ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table cols="2" width="100%">
-	<form method="post" action="<? echo $g_account_profile_update ?>">
-		<input type="hidden" name="f_id" value="<? echo $v_id ?>">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_edit_profile_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td width="25%">
-			<? echo $s_platform ?>
-		</td>
-		<td width="75%">
-			<input type="text" name="f_platform" size="32" maxlength="32" value="<? echo $v_platform ?>">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_operating_system ?>
-		</td>
-		<td>
-			<input type="text" name="f_os" size="32" maxlength="32" value="<? echo $v_os ?>">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_version ?>
-		</td>
-		<td>
-			<input type="text" name="f_os_build" size="16" maxlength="16" value="<? echo $v_os_build ?>">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_additional_description ?>
-		</td>
-		<td>
-			<textarea name="f_description" cols="60" rows="8" wrap="virtual"><? echo $v_description ?></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<input type="submit" value="<? echo $s_update_profile_button ?>">
-		</td>
-	</tr>
-	</form>
-	</table>
+	<td class="form-title">
+		<? echo $s_edit_profile_title ?>
+	</td>
+	<td class="right">
+		<? print_account_menu() ?>
 	</td>
 </tr>
+<tr class="row-1">
+	<td class="category" width="25%">
+		<? echo $s_platform ?>
+	</td>
+	<td width="75%">
+		<input type="text" name="f_platform" size="32" maxlength="32" value="<? echo $v_platform ?>">
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_operating_system ?>
+	</td>
+	<td>
+		<input type="text" name="f_os" size="32" maxlength="32" value="<? echo $v_os ?>">
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_version ?>
+	</td>
+	<td>
+		<input type="text" name="f_os_build" size="16" maxlength="16" value="<? echo $v_os_build ?>">
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_additional_description ?>
+	</td>
+	<td>
+		<textarea name="f_description" cols="60" rows="8" wrap="virtual"><? echo $v_description ?></textarea>
+	</td>
+</tr>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<? echo $s_update_profile_button ?>">
+	</td>
+</tr>
+</form>
 </table>
 </div>
 <? ### Edit Profile Form END ?>

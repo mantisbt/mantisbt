@@ -31,145 +31,136 @@
 <? print_body_top() ?>
 <? print_header( $g_page_title ) ?>
 <? print_top_page( $g_top_include_page ) ?>
-
 <? print_menu( $g_menu_include_file ) ?>
-
-<? print_account_menu( $g_account_page ) ?>
 
 <? ### Edit Account Form BEGIN ?>
 <p>
-
 <div align="center">
-
-<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="1">
+<form method="post" action="<? echo $g_account_update ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table cols="2" width="100%">
-	<form method="post" action="<? echo $g_account_update ?>">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_edit_account_title ?></b>
-		</td>
-	</tr>
+	<td class="form-title">
+		<? echo $s_edit_account_title ?>
+	</td>
+	<td class="right">
+		<? print_account_menu( $g_account_page ) ?>
+	</td>
+</tr>
 <?	# using LDAP accounts
 	if ( $g_login_method == LDAP) {
 ?>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td colspan="2" bgcolor="<? echo $g_primary_color_light ?>">
-			The password settings are controlled by your LDAP entry,<BR>
-			hence cannot be edited here.
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td width="40%" bgcolor="<? echo $g_primary_color_light ?>">
-		    <? echo $s_username ?>:
-		</td>
-		<td width="60%" bgcolor="<? echo $g_primary_color_light ?>">
-		    <? echo $u_username ?>
-		</td>
-	</tr>
+<tr class="row-2">
+	<td colspan="2">
+		The password settings are controlled by your LDAP entry,<BR>
+		hence cannot be edited here.
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category" width="25%">
+	    <? echo $s_username ?>:
+	</td>
+	<td width="75%">
+	    <? echo $u_username ?>
+	</td>
+</tr>
 <?
 	if ( $g_use_ldap_email == 1 ) {
     	$u_email = get_user_info( "$u_username","email" );
 ?>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td width="40%" bgcolor="<? echo $g_primary_color_light ?>">
-		    <? echo $s_email ?>:
-		</td>
-		<td width="60%" bgcolor="<? echo $g_primary_color_light ?>">
-		    <? echo $u_email ?>
-		</td>
-	</tr>
+<tr class="row-2">
+	<td class="category">
+	    <? echo $s_email ?>:
+	</td>
+	<td>
+	    <? echo $u_email ?>
+	</td>
+</tr>
 <?	} else { ?>
-    <tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-		    <? echo $s_email ?>:
-		</td>
-		<td>
-		    <input type="text" size="32" maxlength="64" name="f_email" value="<? echo $u_email ?>">
-		</td>
-    </tr>
+<tr class="row-2">
+	<td class="category">
+	    <? echo $s_email ?>:
+	</td>
+	<td>
+	    <input type="text" size="32" maxlength="64" name="f_email" value="<? echo $u_email ?>">
+	</td>
+</tr>
 <?	} ?>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_access_level ?>:
-		</td>
-		<td>
-			<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			<input type="submit" value="<? echo $s_update_user_button ?>">
-		</td>
-	</form>
-	<form method="post" action="<? echo $g_account_delete_page ?>">
-		<td align="right">
-			<input type="submit" value="<? echo $s_delete_account_button ?>">
-		</td>
-	</form>
-	</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_access_level ?>:
+	</td>
+	<td>
+		<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
+	</td>
+</tr>
+<tr>
+	<td class="center">
+		<input type="submit" value="<? echo $s_update_user_button ?>">
+	</td>
+</form>
+<form method="post" action="<? echo $g_account_delete_page ?>">
+	<td class="center">
+		<input type="submit" value="<? echo $s_delete_account_button ?>">
+	</td>
+</form>
+</tr>
 
 <? 	} else { # end LDAP section ?>
 
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td width="40%">
-			<? echo $s_username ?>:
-		</td>
-		<td width="60%">
-			<input type="text" size="16" maxlength="32" name="f_username" value="<? echo $u_username ?>">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_password ?>:
-		</td>
-		<td>
-			<input type="password" size="32" maxlength="32" name="f_password">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_confirm_password ?>:
-		</td>
-		<td>
-			<input type="password" size="32" maxlength="32" name="f_password_confirm">
-		</td>
-	</tr>
-    <tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-		    <? echo $s_email ?>:
-		</td>
-		<td>
-		    <input type="text" size="32" maxlength="64" name="f_email" value="<? echo $u_email ?>">
-		</td>
-    </tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_access_level ?>:
-		</td>
-		<td>
-			<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
-		</td>
-	</tr>
-	<tr>
-		<td align="left">
-			<input type="submit" value="<? echo $s_update_user_button ?>">
-		</td>
-	</form>
-	<form method="post" action="<? echo $g_account_delete_page ?>">
-		<td align="right">
-			<input type="submit" value="<? echo $s_delete_account_button ?>">
-		</td>
-	</form>
-	</tr>
-<?	} ?>
-	</table>
+<tr class="row-1">
+	<td class="category" width="25%">
+		<? echo $s_username ?>:
+	</td>
+	<td width="75%">
+		<input type="text" size="16" maxlength="32" name="f_username" value="<? echo $u_username ?>">
 	</td>
 </tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_password ?>:
+	</td>
+	<td>
+		<input type="password" size="32" maxlength="32" name="f_password">
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_confirm_password ?>:
+	</td>
+	<td>
+		<input type="password" size="32" maxlength="32" name="f_password_confirm">
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+	    <? echo $s_email ?>:
+	</td>
+	<td>
+	    <input type="text" size="32" maxlength="64" name="f_email" value="<? echo $u_email ?>">
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_access_level ?>:
+	</td>
+	<td>
+		<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
+	</td>
+</tr>
+<tr>
+	<td class="center">
+		<input type="submit" value="<? echo $s_update_user_button ?>">
+	</td>
+</form>
+<form method="post" action="<? echo $g_account_delete_page ?>">
+	<td class="center">
+		<input type="submit" value="<? echo $s_delete_account_button ?>">
+	</td>
+</form>
+</tr>
+<?	} ?>
 </table>
 </div>
-
 <? ### Edit Account Form END ?>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>

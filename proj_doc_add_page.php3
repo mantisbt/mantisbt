@@ -26,49 +26,42 @@
 
 <p>
 <div align="center">
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="0">
+<form method="post" enctype="multipart/form-data" action="<? echo $g_proj_doc_add ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%" bgcolor="<? echo $g_white_color ?>">
-	<form method="post" enctype="multipart/form-data" action="<? echo $g_proj_doc_add ?>">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_upload_file_title ?></b>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" width="15%" bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_title ?></b>
-		</td>
-		<td width="85%" bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="text" name="f_title" size="70" maxlength="250">
-		</td>
-	</tr>
-	<tr>
-		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_description ?></b>
-		</td>
-		<td bgcolor="<? echo $g_primary_color_light ?>">
-			<textarea name="f_description" cols="60" rows="7" wrap="virtual"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_select_file ?></b>
-		</td>
-		<td bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-			<input type="hidden" name="max_file_size" value="5000000">
-			<input name="f_file" type="file" size="70">
-		</td>
-	</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<input type="submit" value="<? echo $s_upload_file_button ?>">
-		</td>
-	</tr>
-	</form>
-	</table>
+	<td class="form-title" colspan="2">
+		<? echo $s_upload_file_title ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td width="25%">
+		<? echo $s_title ?>
+	</td>
+	<td width="75%">
+		<input type="text" name="f_title" size="70" maxlength="250">
+	</td>
+</tr>
+<tr class="row-2">
+	<td>
+		<? echo $s_description ?>
+	</td>
+	<td>
+		<textarea name="f_description" cols="60" rows="7" wrap="virtual"></textarea>
+	</td>
+</tr>
+<tr class="row-1">
+	<td>
+		<? echo $s_select_file ?>
+	</td>
+	<td>
+		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+		<input type="hidden" name="max_file_size" value="5000000">
+		<input name="f_file" type="file" size="70">
+	</td>
+</tr>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<? echo $s_upload_file_button ?>">
 	</td>
 </tr>
 </table>

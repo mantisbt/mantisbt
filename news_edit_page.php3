@@ -42,59 +42,55 @@
 	<? print_bracket_link( $g_news_menu_page, "Back" ) ?>
 </div>
 
+<? ### Edit News Form BEGIN ?>
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_news_update ?>">
 <input type="hidden" name="f_id" value="<? echo $v_id ?>">
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="0">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_edit_news_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td width="25%">
-			<? echo $s_headline ?>
-		</td>
-		<td width="75%">
-			<input type="text" name="f_headline" size="64" maxlength="64" value="<? echo $v_headline ?>">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_body ?>
-		</td>
-		<td>
-			<textarea name="f_body" cols="60" rows="10" wrap="virtual"><? echo $v_body ?></textarea>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_post_to ?>
-		</td>
-		<td>
-			<select name="f_project_id">
-				<? if( get_current_user_field( "access_level" )=="90") { ?>
-                            <option value="0000000" <? if ( $v_project_id=="0000000" ) echo "SELECTED"?>>Sitewide</option>
-                            <? } ?>
-				<? print_news_project_option_list( $v_project_id ) ?>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<input type="submit" value="<? echo $s_update_news_button ?>">
-		</td>
-	</tr>
-	</table>
+	<td class="form-title" colspan="2">
+		<? echo $s_edit_news_title ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td width="25%">
+		<? echo $s_headline ?>
+	</td>
+	<td width="75%">
+		<input type="text" name="f_headline" size="64" maxlength="64" value="<? echo $v_headline ?>">
+	</td>
+</tr>
+<tr class="row-2">
+	<td>
+		<? echo $s_body ?>
+	</td>
+	<td>
+		<textarea name="f_body" cols="60" rows="10" wrap="virtual"><? echo $v_body ?></textarea>
+	</td>
+</tr>
+<tr class="row-1">
+	<td>
+		<? echo $s_post_to ?>
+	</td>
+	<td>
+		<select name="f_project_id">
+			<? if( ADMINISTRATOR == get_current_user_field( "access_level" ) ) { ?>
+				<option value="0000000" <? if ( $v_project_id=="0000000" ) echo "SELECTED"?>>Sitewide</option>
+			<? } ?>
+			<? print_news_project_option_list( $v_project_id ) ?>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<? echo $s_update_news_button ?>">
 	</td>
 </tr>
 </table>
 </form>
 </div>
+<? ### Edit News Form END ?>
 
 <? print_bottom_page( $g_bottom_include_page ) ?>
 <? print_footer(__FILE__) ?>

@@ -26,39 +26,33 @@
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_set_project ?>">
-<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width50" cellspacing="0">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_login_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td width="40%">
-			<? echo $s_choose_project ?>:
-		</td>
-		<td width="60%">
-			<select name="f_project_id">
-			<? print_project_option_list() ?>
-			</select>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td width="40%">
-			<? echo $s_make_default ?>:
-		</td>
-		<td width="60%">
-			<input type="checkbox" name="f_make_default">
-		</td>
-	</tr>
-	<tr align="center">
-		<td colspan="2">
-			<input type="submit" value="<? echo $s_select_project_button ?>">
-		</td>
-	</tr>
-	</table>
+	<td class="form-title" colspan="2">
+		<? echo $s_login_title ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td width="40%">
+		<? echo $s_choose_project ?>:
+	</td>
+	<td width="60%">
+		<select name="f_project_id">
+		<? print_project_option_list() ?>
+		</select>
+	</td>
+</tr>
+<tr class="row-2">
+	<td>
+		<? echo $s_make_default ?>:
+	</td>
+	<td>
+		<input type="checkbox" name="f_make_default">
+	</td>
+</tr>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<? echo $s_select_project_button ?>">
 	</td>
 </tr>
 </table>

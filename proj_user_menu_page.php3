@@ -57,71 +57,62 @@
 
 <p>
 <div align="center">
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="0">
+<form method="post" action="<? echo $g_proj_user_add ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<form method="post" action="<? echo $g_proj_user_add ?>">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_add_user_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td align="center">
-			<? echo $s_username ?>
-		</td>
-		<td>
-			<input type="text" name="f_username" size="32" maxlength="32">
-		</td>
-		<td align="center">
-			<? echo $s_access_level ?>
-		</td>
-		<td>
-			<select name="f_access_level">
-				<? ### No administrator choice ?>
-				<? print_project_user_option_list( REPORTER ) ?>
-			</select>
-		</td>
-		<td align="center">
-			<input type="submit" value="<? echo $s_add_user_button ?>">
-		</td>
-	</tr>
-	</form>
-	</table>
+	<td class="form-title" colspan="5">
+		<? echo $s_add_user_title ?>
 	</td>
 </tr>
+<tr class="row-1">
+	<td>
+		<? echo $s_username ?>
+	</td>
+	<td>
+		<input type="text" name="f_username" size="32" maxlength="32">
+	</td>
+	<td>
+		<? echo $s_access_level ?>
+	</td>
+	<td>
+		<select name="f_access_level">
+			<? ### No administrator choice ?>
+			<? print_project_user_option_list( REPORTER ) ?>
+		</select>
+	</td>
+	<td>
+		<input type="submit" value="<? echo $s_add_user_button ?>">
+	</td>
+</tr>
+</form>
 </table>
 </div>
 
 <p>
 <div align="center">
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="0">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_manage_accounts_title ?></b>
-		</td>
-	</tr>
-	<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
-		<td>
-			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_username, "username", $f_dir ) ?>
-			<? print_sort_icon( $f_dir, $f_sort, "username" ) ?>
-		</td>
-		<td>
-			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_email, "email", $f_dir ) ?>
-			<? print_sort_icon( $f_dir, $f_sort, "email" ) ?>
-		</td>
-		<td>
-			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_access_level, "access_level", $f_dir ) ?>
-			<? print_sort_icon( $f_dir, $f_sort, "access_level" ) ?>
-		</td>
-		<td>
-			&nbsp;
-		</td>
-	</tr>
+	<td class="form-title" colspan="4">
+		<? echo $s_manage_accounts_title ?>
+	</td>
+</tr>
+<tr class="row-category">
+	<td>
+		<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_username, "username", $f_dir ) ?>
+		<? print_sort_icon( $f_dir, $f_sort, "username" ) ?>
+	</td>
+	<td>
+		<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_email, "email", $f_dir ) ?>
+		<? print_sort_icon( $f_dir, $f_sort, "email" ) ?>
+	</td>
+	<td>
+		<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_access_level, "access_level", $f_dir ) ?>
+		<? print_sort_icon( $f_dir, $f_sort, "access_level" ) ?>
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
 <?
 	### Get the user data in $f_sort order
     $query = "SELECT *
@@ -146,57 +137,51 @@
 		### alternate row colors
 		$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 ?>
-	<tr bgcolor="<? echo $t_bgcolor ?>">
-		<td>
-			<? echo $u_username ?>
-		</td>
-		<td>
-			<? print_email_link( $u_email, $u_email ) ?>
-		</td>
-		<td align="center">
-			<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
-		</td>
-		<td align="center">
-			<? print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_user_id, $s_remove_link ) ?>
-		</td>
-	</tr>
+<tr bgcolor="<? echo $t_bgcolor ?>">
+	<td>
+		<? echo $u_username ?>
+	</td>
+	<td>
+		<? print_email_link( $u_email, $u_email ) ?>
+	</td>
+	<td>
+		<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
+	</td>
+	<td>
+		<? print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_user_id, $s_remove_link ) ?>
+	</td>
+</tr>
 <?
 	}  ### end for
 ?>
-	</table>
-	</td>
-</tr>
 </table>
 </div>
 
 <p>
 <div align="center">
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="0">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_automatic_access ?>: (<? echo $t_access_min ?>)</b>
-		</td>
-	</tr>
-	<tr align="center" bgcolor="<? echo $g_category_title_color2 ?>">
-		<td>
-			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_username, "username", $f_dir ) ?>
-			<? print_sort_icon( $f_dir, $f_sort, "username" ) ?>
-		</td>
-		<td>
-			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_email, "email", $f_dir ) ?>
-			<? print_sort_icon( $f_dir, $f_sort, "email" ) ?>
-		</td>
-		<td>
-			<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_access_level, "access_level", $f_dir ) ?>
-			<? print_sort_icon( $f_dir, $f_sort, "access_level" ) ?>
-		</td>
-		<td>
-			&nbsp;
-		</td>
-	</tr>
+	<td class="form-title" colspan="4">
+		<? echo $s_automatic_access ?>: (<? echo $t_access_min ?>)
+	</td>
+</tr>
+<tr class="row-category">
+	<td>
+		<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_username, "username", $f_dir ) ?>
+		<? print_sort_icon( $f_dir, $f_sort, "username" ) ?>
+	</td>
+	<td>
+		<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_email, "email", $f_dir ) ?>
+		<? print_sort_icon( $f_dir, $f_sort, "email" ) ?>
+	</td>
+	<td>
+		<? print_manage_user_sort_link( $g_proj_user_menu_page, $s_access_level, "access_level", $f_dir ) ?>
+		<? print_sort_icon( $f_dir, $f_sort, "access_level" ) ?>
+	</td>
+	<td>
+		&nbsp;
+	</td>
+</tr>
 <?
 	### Get the user data in $f_sort order
     $query = "SELECT DISTINCT u.id
@@ -220,26 +205,23 @@
 		### alternate row colors
 		$t_bgcolor = alternate_colors( $i, $g_primary_color_dark, $g_primary_color_light );
 ?>
-	<tr bgcolor="<? echo $t_bgcolor ?>">
-		<td>
-			<? echo $u_username ?>
-		</td>
-		<td>
-			<? print_email_link( $u_email, $u_email ) ?>
-		</td>
-		<td align="center">
-			<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
-		</td>
-		<td align="center">
-			<? print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_id, $s_remove_link ) ?>
-		</td>
-	</tr>
+<tr bgcolor="<? echo $t_bgcolor ?>">
+	<td>
+		<? echo $u_username ?>
+	</td>
+	<td>
+		<? print_email_link( $u_email, $u_email ) ?>
+	</td>
+	<td>
+		<? echo get_enum_element( $s_access_levels_enum_string, $u_access_level ) ?>
+	</td>
+	<td>
+		<? print_bracket_link( $g_proj_user_delete_page."?f_user_id=".$u_id, $s_remove_link ) ?>
+	</td>
+</tr>
 <?
 	}  ### end for
 ?>
-	</table>
-	</td>
-</tr>
 </table>
 </div>
 

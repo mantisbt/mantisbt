@@ -58,187 +58,177 @@
 
 <? print_menu( $g_menu_include_file ) ?>
 
-<? print_account_menu( $g_account_prefs_page ) ?>
-
 <? ### Account Preferences Form BEGIN ?>
 <p>
 <div align="center">
-<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="1">
+<form method="post" action="<? echo $g_account_prefs_update ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%" cols="2">
-	<form method="post" action="<? echo $g_account_prefs_update ?>">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_default_account_preferences_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_default_project ?>
-		</td>
-		<td>
-			<select name="f_project_id">
+	<td class="form-title">
+		<? echo $s_default_account_preferences_title ?>
+	</td>
+	<td class="right">
+		<? print_account_menu( $g_account_prefs_page ) ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category" width="50%">
+		<? echo $s_default_project ?>
+	</td>
+	<td width="50%">
+		<select name="f_project_id">
 			<option value="0000000">
 			<? print_project_option_list( $u_default_project ) ?></option>
-			</select>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_advanced_report ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_advanced_report" <? if ( $u_advanced_report==1 ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_advanced_view ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_advanced_view" <? if ( $u_advanced_view=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_advanced_update ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_advanced_update" <? if ( $u_advanced_update=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_refresh_delay ?>
-		</td>
-		<td>
-			<input type="text" name="f_refresh_delay" size="4" maxlength="4" value="<? echo $u_refresh_delay ?>">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_redirect_delay ?>
-		</td>
-		<td>
-			<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<? echo $u_redirect_delay ?>">
-		</td>
-	</tr>
+		</select>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_advanced_report ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_advanced_report" <? if ( $u_advanced_report==1 ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_advanced_view ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_advanced_view" <? if ( $u_advanced_view=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_advanced_update ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_advanced_update" <? if ( $u_advanced_update=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_refresh_delay ?>
+	</td>
+	<td>
+		<input type="text" name="f_refresh_delay" size="4" maxlength="4" value="<? echo $u_refresh_delay ?>">
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_redirect_delay ?>
+	</td>
+	<td>
+		<input type="text" name="f_redirect_delay" size="1" maxlength="1" value="<? echo $u_redirect_delay ?>">
+	</td>
+</tr>
 <?
 	if ( $g_enable_email_notification==1 ) {
 ?>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_email_on_new ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_new" <? if ( $u_email_on_new=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_email_on_assigned ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_assigned" <? if ( $u_email_on_assigned=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_email_on_feedback ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_feedback" <? if ( $u_email_on_feedback=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_email_on_resolved ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_resolved" <? if ( $u_email_on_resolved=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_email_on_closed ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_closed" <? if ( $u_email_on_closed=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_email_on_reopened ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_reopened" <? if ( $u_email_on_reopened=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_email_on_bugnote_added ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_bugnote" <? if ( $u_email_on_bugnote=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_email_on_status_change ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_status" <? if ( $u_email_on_status=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_email_on_priority_change ?>
-		</td>
-		<td>
-			<input type="checkbox" name="f_email_on_priority" <? if ( $u_email_on_priority=="1" ) echo "CHECKED" ?>>
-		</td>
-	</tr>
-<?
-	} else {
-?>
-	<input type="hidden" name="f_email_on_new" value="<? echo $u_email_on_new ?>">
-	<input type="hidden" name="f_email_on_assigned" value="<? echo $u_email_on_assigned ?>">
-	<input type="hidden" name="f_email_on_feedback" value="<? echo $u_email_on_feedback ?>">
-	<input type="hidden" name="f_email_on_resolved" value="<? echo $u_email_on_resolved ?>">
-	<input type="hidden" name="f_email_on_closed" value="<? echo $u_email_on_closed ?>">
-	<input type="hidden" name="f_email_on_reopened" value="<? echo $u_email_on_reopened ?>">
-	<input type="hidden" name="f_email_on_bugnote" value="<? echo $u_email_on_bugnote ?>">
-	<input type="hidden" name="f_email_on_status" value="<? echo $u_email_on_status ?>">
-	<input type="hidden" name="f_email_on_priority" value="<? echo $u_email_on_priority ?>">
-<?
-	}
-?>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_language ?>
-		</td>
-		<td>
-			<select name=f_language>
-				<? print_language_option_list( $u_language ) ?>
-			</select>
-		</td>
-	</tr>
-	<tr align="center">
-		<td>
-			<input type="submit" value="<? echo $s_update_prefs_button ?>">
-		</td>
-		</form>
-		<form method="post" action="<? echo $g_account_prefs_reset ?>">
-			<input type="hidden" name="f_id" value="<? echo $u_id ?>">
-		<td>
-			<input type="submit" value="<? echo $s_reset_prefs_button ?>">
-		</td>
-		</form>
-	</tr>
-	</form>
-	</table>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_email_on_new ?>
 	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_new" <? if ( $u_email_on_new=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_email_on_assigned ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_assigned" <? if ( $u_email_on_assigned=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_email_on_feedback ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_feedback" <? if ( $u_email_on_feedback=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_email_on_resolved ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_resolved" <? if ( $u_email_on_resolved=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_email_on_closed ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_closed" <? if ( $u_email_on_closed=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_email_on_reopened ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_reopened" <? if ( $u_email_on_reopened=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_email_on_bugnote_added ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_bugnote" <? if ( $u_email_on_bugnote=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_email_on_status_change ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_status" <? if ( $u_email_on_status=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_email_on_priority_change ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_email_on_priority" <? if ( $u_email_on_priority=="1" ) echo "CHECKED" ?>>
+	</td>
+</tr>
+<?	} else { ?>
+		<input type="hidden" name="f_email_on_new"      value="<? echo $u_email_on_new ?>">
+		<input type="hidden" name="f_email_on_assigned" value="<? echo $u_email_on_assigned ?>">
+		<input type="hidden" name="f_email_on_feedback" value="<? echo $u_email_on_feedback ?>">
+		<input type="hidden" name="f_email_on_resolved" value="<? echo $u_email_on_resolved ?>">
+		<input type="hidden" name="f_email_on_closed"   value="<? echo $u_email_on_closed ?>">
+		<input type="hidden" name="f_email_on_reopened" value="<? echo $u_email_on_reopened ?>">
+		<input type="hidden" name="f_email_on_bugnote"  value="<? echo $u_email_on_bugnote ?>">
+		<input type="hidden" name="f_email_on_status"   value="<? echo $u_email_on_status ?>">
+		<input type="hidden" name="f_email_on_priority" value="<? echo $u_email_on_priority ?>">
+<?	} ?>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_language ?>
+	</td>
+	<td>
+		<select name=f_language>
+			<? print_language_option_list( $u_language ) ?>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="center">
+		<input type="submit" value="<? echo $s_update_prefs_button ?>">
+	</td>
+	</form>
+	<form method="post" action="<? echo $g_account_prefs_reset ?>">
+		<input type="hidden" name="f_id" value="<? echo $u_id ?>">
+	<td class="center">
+		<input type="submit" value="<? echo $s_reset_prefs_button ?>">
+	</td>
+	</form>
 </tr>
 </table>
 </div>

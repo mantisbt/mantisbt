@@ -26,54 +26,48 @@
 <? ### Resolve Form BEGIN ?>
 <p>
 <div align="center">
-<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width50" cellspacing="0">
+<form method="post" action="<? echo $g_bug_resolve_page2 ?>">
+<input type="hidden" name="f_id" value="<? echo $f_id ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table cols="2" width="100%">
-	<form method="post" action="<? echo $g_bug_resolve_page2 ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_resolve_bug_title ?></b>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_resolution ?></b>
-		</td>
-		<td bgcolor="<? echo $g_primary_color_dark ?>">
-			<select name="f_resolution">
-				<? print_enum_string_option_list( $s_resolution_enum_string, FIXED ) ?>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_duplicate_id ?></b>
-		</td>
-		<td bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="text" name="f_duplicate_id" maxlength="7">
-		</td>
-	</tr>
-	<? if ( 1 == $g_allow_close_immediately ) { ?>
-	<tr>
-		<td bgcolor="<? echo $g_category_title_color ?>">
-			<b><? echo $s_close_immediately ?></b>
-		</td>
-		<td bgcolor="<? echo $g_primary_color_dark ?>">
-			<input type="checkbox" name="f_close_now">
-		</td>
-	</tr>
-	<? } ?>
-	<tr>
-		<td align="center" colspan="2" bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="submit" value="<? echo $s_resolve_bug_button ?>">
-		</td>
-	</tr>
-	</form>
-	</table>
+	<td class="form-title" colspan="2">
+		<? echo $s_resolve_bug_title ?>
 	</td>
 </tr>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_resolution ?>
+	</td>
+	<td>
+		<select name="f_resolution">
+			<? print_enum_string_option_list( $s_resolution_enum_string, FIXED ) ?>
+		</select>
+	</td>
+</tr>
+<tr class="row-2">
+	<td class="category">
+		<? echo $s_duplicate_id ?>
+	</td>
+	<td>
+		<input type="text" name="f_duplicate_id" maxlength="7">
+	</td>
+</tr>
+<? if ( 1 == $g_allow_close_immediately ) { ?>
+<tr class="row-1">
+	<td class="category">
+		<? echo $s_close_immediately ?>
+	</td>
+	<td>
+		<input type="checkbox" name="f_close_now">
+	</td>
+</tr>
+<? } ?>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<? echo $s_resolve_bug_button ?>">
+	</td>
+</tr>
+</form>
 </table>
 </div>
 <? ### Resolve Form END ?>

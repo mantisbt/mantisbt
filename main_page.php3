@@ -25,21 +25,18 @@
 
 <? print_menu( $g_menu_include_file ) ?>
 
-<p>
-<div align="center">
-<table width="100%">
+<table class="hide">
 <tr>
-	<td align="left" width="50%">
+	<td class="quick-summary-left">
 		<? echo $s_open_and_assigned_to_me ?>:
 		<? echo get_assigned_open_bug_count($g_project_cookie_val,$g_string_cookie_val) ?>
 	</td>
-	<td align="right" width="50%">
+	<td class="quick-summary-right">
 		<? echo $s_open_and_reported_to_me ?>:
 		<? echo get_reported_open_bug_count($g_project_cookie_val,$g_string_cookie_val) ?>
 	</td>
 </tr>
 </table>
-</div>
 
 <?
 	### Check to see if variable is set
@@ -89,20 +86,17 @@
 ?>
 <p>
 <div align="center">
-<table width="75%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width75" cellspacing="0">
 <tr>
-	<td bgcolor="<? echo $g_primary_color_dark ?>">
-		<b><? echo $v_headline ?></b> -
-		<i><? echo $v_date_posted ?></i> -
-		<a href="mailto:<? echo $t_poster_email ?>"><? echo $t_poster_name ?></a>
+	<td class="news-heading">
+		<span class="news-headline"><? echo $v_headline ?></span> -
+		<span class="news-date"><? echo $v_date_posted ?></span> -
+		<a class="news-email" href="mailto:<? echo $t_poster_email ?>"><? echo $t_poster_name ?></a>
 	</td>
 </tr>
 <tr>
-	<td bgcolor="<? echo $g_primary_color_light ?>">
-		<br>
-		<blockquote>
-			<? echo $v_body ?>
-		</blockquote>
+	<td class="news-body">
+		<? echo $v_body ?>
 	</td>
 </tr>
 </table>

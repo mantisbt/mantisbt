@@ -7,9 +7,6 @@ td { font-family:Verdana, Arial; font-size: 10pt }
 p { font-family:Verdana, Arial; font-size: 10pt }
 address { font-family:Verdana, Arial; font-size: 8pt }
 span.required { font-family:Verdana, Arial; font-size: 10pt; color: #aa0000 }
-span.bugnotedelete { font-family:Verdana, Arial; font-size: 8pt }
-span.small { font-family:Verdana, Arial; font-size: 8pt }
-span.smallcaption { font-family:Verdana, Arial; font-size: 8pt }
 </style>
 </head>
 <body>

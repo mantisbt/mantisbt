@@ -69,25 +69,27 @@
 	}
 	### --------------------
 	# (8) This prints the title that is visible in the main panel of the browser
+	# We use a temporary vairable to create the title then print it.
 	function print_header( $p_title="Mantis" ) {
 		global 	$g_show_project_in_title,
 				$g_project_cookie_val;
 
-		if ( $g_show_project_in_title==1 ) {
-			$t_project_name = get_project_name($g_project_cookie_val);
-
-			if ( empty( $t_project_name ) ) {
-				PRINT "<h3>$p_title</h3>";
-			} else {
-				PRINT "<h3>$p_title - $t_project_name</h3>";
-			}
-		} else if ( $g_show_project_in_title==2 ) {
-			$t_project_name = get_project_name($g_project_cookie_val);
-
-			PRINT "<h3>$t_project_name</h3>";
-		} else {
-			PRINT "<h3>$p_title</h3>";
+		$t_title = "";
+		switch ( $g_show_project_in_title ) {
+			case 1:	$t_project_name = get_project_name( $g_project_cookie_val );
+					if ( empty( $t_project_name ) ) {
+						$t_title = $p_title;
+					} else {
+						$t_title = $p_title." - ".$t_project_name;
+					}
+					break;
+			case 2:	$t_title = get_project_name( $g_project_cookie_val );
+					break;
+			default:$t_title = $p_title;
+					break;
 		}
+
+		PRINT "<div align=\"center\"><span class=\"pagetitle\">$t_title</span></div>";
 	}
 	### --------------------
 	# (9) $p_page is included.  This allows for the admin to have a nice baner or
@@ -152,24 +154,24 @@
 		$t_username = get_current_user_field( "username" );
 		$t_now = date($g_complete_date_format);
 
+		PRINT "<table class=\"hide\">";
 		PRINT "<form method=\"post\" action=\"$g_set_project\">";
-		PRINT "<table width=\"100%\">";
 		PRINT "<tr>";
-			PRINT "<td align=left width=\"33%\">";
-				PRINT "$s_logged_in_as: <i>$t_username</i>";
+			PRINT "<td class=\"login-info-left\">";
+				PRINT "$s_logged_in_as: <span class=\"login-username\">$t_username</span>";
 			PRINT "</td>";
-			PRINT "<td align=\"center\" width=\"34%\">";
-				PRINT "<i>$t_now</i>";
+			PRINT "<td class=\"login-info-middle\">";
+				PRINT "<span class=\"login-time\">$t_now</span>";
 			PRINT "</td>";
-			PRINT "<td align=\"right\" width=\"33%\">";
+			PRINT "<td class=\"login-info-right\">";
 				PRINT "<select name=f_project_id>";
 					print_project_option_list( $g_project_cookie_val );
 				PRINT "</select>";
 				PRINT "<input type=\"submit\" value=\"$s_switch\">";
 			PRINT "</td>";
 		PRINT "</tr>";
-		PRINT "</table>";
 		PRINT "</form>";
+		PRINT "</table>";
 	}
 	### --------------------
 	# This prints the little [?] link for user help
@@ -225,9 +227,9 @@
 
 		print_login_info();
 
-		PRINT "<table width=\"100%\" bgcolor=\"$g_primary_border_color\">";
-		PRINT "<tr align=\"center\">";
-			PRINT "<td align=\"center\" bgcolor=\"$g_primary_color_light\">";
+		PRINT "<table class=\"width100\" cellspacing=\"0\">";
+		PRINT "<tr>";
+			PRINT "<td class=\"menu\">";
 				include( $p_menu_file );
 			PRINT "</td>";
 		PRINT "</tr>";
@@ -240,9 +242,9 @@
 		global 	$g_primary_border_color, $g_primary_color_light;
 
 		PRINT "<p>";
-		PRINT "<table width=\"100%\" bgcolor=\"$g_primary_border_color\">";
-		PRINT "<tr align=\"center\">";
-			PRINT "<td align=\"center\" bgcolor=\"$g_primary_color_light\">";
+		PRINT "<table class=\"menu\" cellspacing=\"0\">";
+		PRINT "<tr>";
+			PRINT "<td class=\"menu\">";
 				include( $p_menu_file );
 			PRINT "</td>";
 		PRINT "</tr>";
@@ -295,11 +297,9 @@
 			case $t_account_profile_menu_page	: $t_account_profile_menu_page 	= ""; break;
 		}
 
-		PRINT "<p><div align=\"center\">";
-			print_bracket_link( $t_account_page, $s_account_link );
-			print_bracket_link( $t_account_prefs_page, $s_change_preferences_link );
-			print_bracket_link( $t_account_profile_menu_page, $s_manage_profiles_link );
-		PRINT "</div>";
+		print_bracket_link( $t_account_page, $s_account_link );
+		print_bracket_link( $t_account_prefs_page, $s_change_preferences_link );
+		print_bracket_link( $t_account_profile_menu_page, $s_manage_profiles_link );
 	}
 	### --------------------
 	# prints the doc menu

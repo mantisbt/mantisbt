@@ -25,31 +25,30 @@
 
 <? ### Bugnotes BEGIN ?>
 <p>
-<div align="center">
-<table width="100%" cols="2" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width100" cellspacing="0">
 <?
 	### no bugnotes
 	if ( $num_notes==0 ) {
 ?>
 <tr>
-	<td align="center" colspan="2" bgcolor="<? echo $g_white_color ?>">
+	<td class="center" colspan="2">
 		<? echo $s_no_bugnotes_msg ?>
 	</td>
 </tr>
-<?	} else { ### print bugnotes ?>
+<?	} else { # print bugnotes ?>
 <tr>
-	<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-		<b><? echo $s_bug_notes_title ?></b>
+	<td class="form-title" colspan="2">
+		<? echo $s_bug_notes_title ?>
 	</td>
 </tr>
 <?
-	for($i=0; $i < $num_notes; $i++) {
-		### prefix all bugnote data with v3_
+	for ($i=0; $i < $num_notes; $i++) {
+		# prefix all bugnote data with v3_
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, "v3" );
 		$v3_date_submitted = date( $g_normal_date_format, ( $v3_date_submitted ) );
 
-		### grab the bugnote text and id and prefix with v3_
+		# grab the bugnote text and id and prefix with v3_
 		$query = "SELECT note, id
 				FROM $g_mantis_bugnote_text_table
 				WHERE id='$v3_bugnote_text_id'";
@@ -59,48 +58,45 @@
 
 		$v3_note = string_display( $v3_note );
 ?>
-<tr height="5" bgcolor="<? echo $g_white_color ?>">
-	<td colspan="2" bgcolor="<? echo $g_white_color ?>">
+<tr>
+	<td class="nopad" valign="top" width="25%">
+		<table class="hide" cellspacing="0">
+		<tr>
+			<td class="category" colspan="2">
+				<? print_user( $v3_reporter_id ) ?>
+			</td>
+		</tr>
+		<tr class="row-1">
+			<td class="small-caption">
+				<? echo $v3_date_submitted ?>
+			</td>
+			<td class="small-caption">
+			<?
+				### check access level
+				### only admins and the bugnote creator can delete this bug
+				if (( access_level_check_greater_or_equal( ADMINISTRATOR ) ) ||
+					( $v3_reporter_id==$t_user_id )) {
+					print_bracket_link( $g_bugnote_edit_page."?f_bugnote_text_id=".$v3_bugnote_text_id."&f_id=".$f_id, $s_bugnote_edit_link );
+					print_bracket_link( $g_bugnote_delete."?f_bug_id=".$v3_id, $s_delete_link );
+				}
+			?>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="nopad" valign="top" width="75%">
+		<table class="hide" cellspacing="0">
+		<tr class="row-2">
+			<td>
+				<? echo $v3_note ?>
+			</td>
+		</tr>
+		</table>
 	</td>
 </tr>
 <tr>
-	<td valign="top" width="25%" bgcolor="<? echo $g_white_color ?>">
-	<table width="100%" cols="2" bgcolor="<? echo $g_white_color ?>">
-	<tr>
-		<td align="center" colspan="2" bgcolor="<? echo $g_category_title_color ?>">
-			<? print_user( $v3_reporter_id ) ?>
-		</td>
-	</tr>
-	<tr align="center">
-		<td bgcolor="<? echo $g_primary_color_dark ?>">
-			<? echo $v3_date_submitted ?>
-		</td>
-		<td bgcolor="<? echo $g_primary_color_dark ?>">
-		<?
-			### check access level
-			### only admins and the bugnote creator can delete this bug
-			if (( access_level_check_greater_or_equal( ADMINISTRATOR ) )||
-				( $v3_reporter_id==$t_user_id )) {
-		?>
-			<span class="bugnotedelete">
-				<? print_bracket_link( $g_bugnote_edit_page."?f_bugnote_text_id=".$v3_bugnote_text_id."&f_id=".$f_id, $s_bugnote_edit_link ) ?>
-			</span>
-			<span class="bugnotedelete">
-				<? print_bracket_link( $g_bugnote_delete."?f_bug_id=".$v3_id, $s_delete_link ) ?>
-			</span>
-		<? } ?>
-		</td>
-	</tr>
-	</table>
-	</td>
-	<td valign="top" width="75%" bgcolor="<? echo $g_white_color ?>">
-	<table width="100%" align="center">
-	<tr>
-		<td bgcolor="<? echo $g_primary_color_light ?>">
-			<? echo $v3_note ?>
-		</td>
-	</tr>
-	</table>
+	<td class="spacer">
+		&nbsp;
 	</td>
 </tr>
 <?
@@ -108,40 +104,33 @@
 	} ### end else
 ?>
 </table>
-</div>
 <? ### Bugnotes END ?>
 
-<? if ((( $v_status < RESOLVED )||( isset( $f_resolve_note ) ))&&( access_level_check_greater_or_equal( REPORTER ) )) { ?>
+<? if ( ( ( $v_status < RESOLVED ) ||
+		  ( isset( $f_resolve_note ) ) ) &&
+		( access_level_check_greater_or_equal( REPORTER ) ) ) { ?>
 <? ### Bugnote Add Form BEGIN ?>
 <p>
-<div align="center">
-<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width100" cellspacing="0">
+<form method="post" action="<? echo $g_bugnote_add ?>">
+<input type="hidden" name="f_id" value="<? echo $f_id ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<form method="post" action="<? echo $g_bugnote_add ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-	<tr>
-		<td bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_add_bugnote_title ?></b>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" bgcolor="<? echo $g_primary_color_dark ?>">
-			<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td align="center" bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="submit" value="<? echo $s_add_bugnote_button ?>">
-		</td>
-	</tr>
-	</form>
-	</table>
+	<td class="form-title">
+		<? echo $s_add_bugnote_title ?>
 	</td>
 </tr>
+<tr class="row-1">
+	<td class="center">
+		<textarea name="f_bugnote_text" cols="80" rows="10" wrap="virtual"></textarea>
+	</td>
+</tr>
+<tr>
+	<td class="center">
+		<input type="submit" value="<? echo $s_add_bugnote_button ?>">
+	</td>
+</tr>
+</form>
 </table>
-</div>
 <? ### Bugnote Add Form END ?>
 <?
 	} else if (( access_level_check_greater_or_equal( $g_reopen_bug_threshold ) )||
@@ -149,30 +138,22 @@
 ?>
 <? ### Bugnote Reopen Form BEGIN ?>
 <p>
-<div align="center">
-<table width="100%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<table class="width100" cellspacing="0">
+<form method="post" action="<? echo $g_bug_reopen_page ?>">
+<input type="hidden" name="f_id" value="<? echo $f_id ?>">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<form method="post" action="<? echo $g_bug_reopen_page ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-	<tr>
-		<td align="center" bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="submit" value="<? echo $s_reopen_bug_button ?>">
-		</td>
-	</form>
-	<? if ( $v_status != CLOSED ) { ?>
-	<form method="post" action="<? echo $g_bug_close ?>">
-	<input type="hidden" name="f_id" value="<? echo $f_id ?>">
-		<td align="center" bgcolor="<? echo $g_primary_color_light ?>">
-			<input type="submit" value="<? echo $s_close_bug_button ?>">
-		</td>
-	</tr>
-	</form>
-	<? } ?>
-	</table>
+	<td class="center">
+		<input type="submit" value="<? echo $s_reopen_bug_button ?>">
+	</td>
+</form>
+<? if ( $v_status != CLOSED ) { ?>
+<form method="post" action="<? echo $g_bug_close ?>">
+<input type="hidden" name="f_id" value="<? echo $f_id ?>">
+	<td class="center">
+		<input type="submit" value="<? echo $s_close_bug_button ?>">
 	</td>
 </tr>
+</form>
+<? } ?>
 </table>
-</div>
 <? } ?>

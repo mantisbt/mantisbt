@@ -78,8 +78,8 @@
 	$s_delete_account_button = "Delete Account";
 
 	# account_page.php3
-	$s_manage_profiles_link = "Manage Profiles";
-	$s_change_preferences_link = "Change Preferences";
+	$s_manage_profiles_link = "Profiles";
+	$s_change_preferences_link = "Preferences";
 	$s_edit_account_title = "Edit Account";
 	$s_username = "Username";
 	$s_email = "Email";
@@ -89,7 +89,7 @@
 	$s_update_user_button = "Update User";
 
 	# account_prefs_page.php3
-	$s_default_account_preferences_title = "Default Account Preferences";
+	$s_default_account_preferences_title = "Account Preferences";
 	$s_default_project = "Default Project";
 	$s_advanced_report = "Advanced Report";
 	$s_advanced_view = "Advanced View";

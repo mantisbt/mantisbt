@@ -43,52 +43,42 @@
 <p>
 <div align="center">
 <form method="post" action="<? echo $g_login ?>">
-<?
-	if (isset($f_project_id)) {
-?>
+<?	if (isset($f_project_id)) { ?>
 <input type="hidden" name="f_project_id" value="<? echo $f_project_id ?>">
-<?
-	}
-?>
-<table width="50%" bgcolor="<? echo $g_primary_border_color ?>" <? echo $g_primary_table_tags ?>>
+<?	} ?>
+<table class="width50" cellspacing="0">
 <tr>
-	<td bgcolor="<? echo $g_white_color ?>">
-	<table width="100%">
-	<tr>
-		<td colspan="2" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_login_title ?></b>
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td width="25%">
-			<? echo $s_username ?>:
-		</td>
-		<td width="75%">
-			<input type="text" name="f_username" size="32" maxlength="32">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_light ?>">
-		<td>
-			<? echo $s_password ?>:
-		</td>
-		<td>
-			<input type="password" name="f_password" size="16" maxlength="32">
-		</td>
-	</tr>
-	<tr bgcolor="<? echo $g_primary_color_dark ?>">
-		<td>
-			<? echo $s_save_login ?>:
-		</td>
-		<td>
-			<input type="checkbox" name="f_perm_login">
-		</td>
-	</tr>
-	<tr>
-		<td align="center" colspan="2">
-			<input type="submit" value="<? echo $s_login_button ?>">
-		</td>
-	</tr>
-	</table>
+	<td class="form-title" colspan="2">
+		<? echo $s_login_title ?>
+	</td>
+</tr>
+<tr class="row-1">
+	<td width="25%">
+		<? echo $s_username ?>:
+	</td>
+	<td width="75%">
+		<input type="text" name="f_username" size="32" maxlength="32">
+	</td>
+</tr>
+<tr class="row-2">
+	<td>
+		<? echo $s_password ?>:
+	</td>
+	<td>
+		<input type="password" name="f_password" size="16" maxlength="32">
+	</td>
+</tr>
+<tr class="row-1">
+	<td>
+		<? echo $s_save_login ?>:
+	</td>
+	<td>
+		<input type="checkbox" name="f_perm_login">
+	</td>
+</tr>
+<tr>
+	<td class="center" colspan="2">
+		<input type="submit" value="<? echo $s_login_button ?>">
 	</td>
 </tr>
 </table>

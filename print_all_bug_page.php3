@@ -187,34 +187,34 @@
 <input type="hidden" name="f_dir" value="<? echo $f_dir ?>">
 <table width="100%">
 <tr align="center">
-    <td>
-        <span class="smallcaption"><? echo $s_search; ?></span>
+    <td class="small-caption">
+        <? echo $s_search ?>
     </td>
-	<td>
-		<span class="smallcaption"><? echo $s_reporter ?></span>
+    <td class="small-caption">
+		<? echo $s_reporter ?>
 	</td>
-	<td>
-		<span class="smallcaption"><? echo $s_assigned_to ?></span>
+    <td class="small-caption">
+		<? echo $s_assigned_to ?>
 	</td>
-	<td>
-		<span class="smallcaption"><? echo $s_category ?></span>
+    <td class="small-caption">
+		<? echo $s_category ?>
 	</td>
-	<td>
-		<span class="smallcaption"><? echo $s_severity ?></span>
+    <td class="small-caption">
+		<? echo $s_severity ?>
 	</td>
-	<td>
-		<span class="smallcaption"><? echo $s_status ?></span>
+    <td class="small-caption">
+		<? echo $s_status ?>
 	</td>
-	<td>
-		<span class="smallcaption"><? echo $s_show ?></span>
+    <td class="small-caption">
+		<? echo $s_show ?>
 	</td>
-	<td>
-		<span class="smallcaption"><? echo $s_changed ?></span>
+    <td class="small-caption">
+		<? echo $s_changed ?>
 	</td>
-	<td>
-		<span class="smallcaption"><? echo $s_hide_closed ?></span>
+    <td class="small-caption">
+		<? echo $s_hide_closed ?>
 	</td>
-	<td>
+    <td class="small-caption">
 		&nbsp;
 	</td>
 </tr>

@@ -116,7 +116,7 @@
 	}
 
 	# Build the query string based on the user's viewing criteria.
-	# Build the query up in sections, because two queries need to 
+	# Build the query up in sections, because two queries need to
 	# be performed.
 	#
 	# 1) count of all the rows
