@@ -692,6 +692,7 @@
 		if ( ON == $g_hide_user_email ){
 			return "$p_text";
 		} else {
+			$p_summary = mime_encode( $p_summary );
 			return "<a href=\"mailto:$p_email?subject=$p_summary\">$p_text</a>";
 		}
 	}

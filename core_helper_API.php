@@ -405,4 +405,19 @@
 		}
 	}
 	# --------------------
+	# Contributed by Peter Palmreuther
+	function mime_encode( $p_string="" ) {
+		$output = "";
+		for ( $i=0; $i<strlen( $p_string ); $i++ ) {
+			if (( ord( $p_string[$i] ) < 33 ) ||
+				( ord( $p_string[$i] ) > 127 ) ||
+				( eregi( "[\%\[\]\{\}\(\)]", $p_string[$i] ) )) {
+				$output .= sprintf( "%%%02X", ord( $p_string[$i] ) );
+			} else {
+				$output .= $p_string[$i];
+			}
+		}
+		return( $output );
+	}
+	# --------------------
 ?>

@@ -34,6 +34,7 @@ Mantis
  * Added CVS linking patch.
  * Added g_hide_closed_default for filter defaults.
  * Added g_show_bug_project_links to toggle project links in All Project mode.
+ * Added mime_encode() to process the email subject text.
 
 01.23.2002  -   0.17.0
 
