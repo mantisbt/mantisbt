@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.189 2004-08-03 13:47:47 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.190 2004-08-03 22:59:53 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -300,7 +300,7 @@
 		'ro-mo, ro' => 'romanian',
 		'ru-mo, ru' => 'russian',
 		'sr' => 'serbian',
-		'sl' => 'slovak',
+		'sk' => 'slovak',
 		'es-mx, es-co, es-ar, es-cl, es-pr, es' => 'spanish',
 		'sv-fi, sv' => 'swedish',
 		'tr' => 'turkish'
