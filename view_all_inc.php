@@ -363,10 +363,10 @@
 			if ( $bugnote_count > 0 ) {
 				if ( $v_bugnote_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
 					echo '<span class="bold">';
-					echo '<a href="' . string_get_bug_view_url( $v_id ) . '#bugnotes">' . $bugnote_count . '</a>';
+					echo '<a href="' . string_get_bug_view_url( $v_id ) . '&amp;nbn=' . $bugnote_count . '#bugnotes">' . $bugnote_count . '</a>';
 					echo '</span>';
 				} else {
-					echo '<a href="' . string_get_bug_view_url( $v_id ) . '#bugnotes">' . $bugnote_count . '</a>';
+					echo '<a href="' . string_get_bug_view_url( $v_id ) . '&amp;nbn=' . $bugnote_count . '#bugnotes">' . $bugnote_count . '</a>';
 				}
 			} else {
 				echo '&nbsp;';
