@@ -16,7 +16,7 @@
 
 	# check to see if new cookie is needed
 	$t_setting_arr 			= explode( "#", $g_view_all_cookie_val );
-	if ( $t_setting_arr[0] != "v3" ) {
+	if ( $t_setting_arr[0] != $g_cookie_version ) {
 		print_header_redirect( $g_view_all_set."?f_type=0&f_print=1" );
 	}
 
