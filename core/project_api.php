@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.52 2004-04-21 14:35:23 vboctor Exp $
+	# $Id: project_api.php,v 1.53 2004-05-18 03:27:59 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -298,7 +298,7 @@
 
 		$t_old_name = project_get_field( $p_project_id, 'name' );
 
-		if ( $p_name != $t_old_name ) {
+		if ( $p_name != $t_old_name && strcasecmp( $p_name, $t_old_name ) != 0 ) {
 			project_ensure_name_unique( $p_name );
 		}
 
