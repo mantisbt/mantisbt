@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -9,13 +9,13 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !access_level_check_greater_or_equal( "developer" ) ) {
+	if ( !access_level_check_greater_or_equal( "manager" ) ) {
 		### need to replace with access error page
 		header( "Location: $g_logout_page" );
 		exit;
 	}
 
-	### " character poses problem when editting so let's just convert them
+	### " character poses problem when editting so let's just convert them to '
 	$f_headline	= string_safe( str_replace( "\"", "'", $f_headline ) );
 	$f_body		= string_safe( $f_body );
 

@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -9,7 +9,7 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !access_level_check_greater_or_equal( "developer" ) ) {
+	if ( !access_level_check_greater_or_equal( "manager" ) ) {
 		### need to replace with access error page
 		header( "Location: $g_logout_page" );
 		exit;
@@ -56,6 +56,17 @@
 			<textarea name=f_body cols=60 rows=8></textarea>
 		</td>
 	</tr>
+	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+		<td>
+			<? echo $s_post_to ?>
+		</td>
+		<td>
+			<select name=f_project_id>
+				<option value="0000000">Sitewide
+				<? print_news_project_option_list( $g_project_cookie_val ) ?>
+			</select>
+		</td>
+	</tr>
 	<tr>
 		<td align=center colspan=2>
 			<input type=submit value="<? echo $s_post_news_button ?>">
@@ -86,7 +97,7 @@
 			<input type=radio name=f_action value="delete"> <? echo $s_delete_post ?>
 		</td>
 	</tr>
-	<tr bgcolor=<? echo $g_primary_color_light ?> align=center>
+	<tr bgcolor=<? echo $g_primary_color_light ?>>
 		<td valign=top width=25%>
 			<? echo $s_select_post ?>
 		</td>

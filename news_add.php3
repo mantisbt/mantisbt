@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -9,7 +9,7 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !access_level_check_greater_or_equal( "developer" ) ) {
+	if ( !access_level_check_greater_or_equal( "manager" ) ) {
 		### need to replace with access error page
 		header( "Location: $g_logout_page" );
 		exit;
@@ -18,12 +18,13 @@
 	### " character poses problem when editting so let's just convert them
 	$f_headline	= string_safe( str_replace( "\"", "'", $f_headline ) );
 	$f_body		= string_safe( $f_body );
+
 	### Add item
 	$query = "INSERT
 			INTO $g_mantis_news_table
-    		( id, poster_id, date_posted, last_modified, headline, body )
+    		( id, project_id, poster_id, date_posted, last_modified, headline, body )
 			VALUES
-			( null, '$f_poster_id', NOW(), NOW(), '$f_headline', '$f_body' )";
+			( null, '$f_project_id', '$f_poster_id', NOW(), NOW(), '$f_headline', '$f_body' )";
     $result = db_query( $query );
 ?>
 <? print_html_top() ?>
@@ -49,7 +50,7 @@
 	### SUCCESS
 	if ( $result ) {
 		$t_headline  = string_display( $f_headline );
-		$t_body      = string_display( $f_body );
+		$t_body      = stripslashes( string_display_with_br( $f_body ) );
 ?>
 <p>
 <div align=center>

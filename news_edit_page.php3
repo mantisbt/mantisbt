@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -9,7 +9,7 @@
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
-	if ( !access_level_check_greater_or_equal( "developer" ) ) {
+	if ( !access_level_check_greater_or_equal( "manager" ) ) {
 		### need to replace with access error page
 		header( "Location: $g_logout_page" );
 		exit;
@@ -64,16 +64,27 @@
 		<td width=25%>
 			<? echo $s_headline ?>
 		</td>
-		<td>
+		<td width=75%>
 			<input type=text name=f_headline size=64 maxlength=64 value="<? echo $v_headline ?>">
 		</td>
 	</tr>
 	<tr bgcolor=<? echo $g_primary_color_light ?>>
-		<td width=75%>
+		<td>
 			<? echo $s_body ?>
 		</td>
 		<td>
 			<textarea name=f_body cols=60 rows=10><? echo $v_body ?></textarea>
+		</td>
+	</tr>
+	<tr bgcolor=<? echo $g_primary_color_dark ?>>
+		<td>
+			<? echo $s_post_to ?>
+		</td>
+		<td>
+			<select name=f_project_id>
+				<option value="0000000" <? if ( $v_project_id=="0000000" ) echo "SELECTED"?>>Sitewide
+				<? print_news_project_option_list( $v_project_id ) ?>
+			</select>
 		</td>
 	</tr>
 	<tr>

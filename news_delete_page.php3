@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -8,6 +8,12 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+
+	if ( !access_level_check_greater_or_equal( "manager" ) ) {
+		### need to replace with access error page
+		header( "Location: $g_logout_page" );
+		exit;
+	}
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
