@@ -86,6 +86,7 @@ Mantis ChangeLog
  * Fix: use single quotes whenever possible if double quotes were unnecessary
  * Fix: Use supervariables ($_SERVER, $_REQUEST, etc.) in PHP >= 4.1.0, since the old variables are deprecated
  * Fix: when viewing all bugs for all projects you no longer see bugs from disabled projects
+ * Fix: Disabled user accounts no longer receive notification emails.
  * Languages: Added $s_charset to all localization files.
  * Languages: Added Chinese Simplified translation.
  * Languages: Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.42 2003-02-10 21:59:43 jfitzell Exp $
+	# $Id: email_api.php,v 1.43 2003-02-11 13:54:36 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -186,7 +186,7 @@
 		if ( ON == get_notify_flag( $p_notify_type, 'reporter' )) {
 			$v_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 
-			if ( user_exists( $v_reporter_id ) ) {
+			if ( user_exists( $v_reporter_id ) && user_is_enabled( $v_reporter_id ) ) {
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
 					$t_notify_reporter = user_pref_get_pref( $v_reporter_id, $t_pref_field );
@@ -202,7 +202,7 @@
 		# Get Handler Email
 		if ( ON == get_notify_flag( $p_notify_type, 'handler' )) {
 			$v_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-			if ( user_exists( $v_handler_id ) ) {
+			if ( user_exists( $v_handler_id ) && user_is_enabled( $v_handler_id ) ) {
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
 					$t_notify_handler = user_pref_get_pref( $v_handler_id, $t_pref_field );
@@ -224,6 +224,7 @@
 		# grab the administrators
 		$query = "SELECT id, email
 				FROM $g_mantis_user_table
+				WHERE enabled = 1
 				ORDER BY username";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
@@ -299,13 +300,15 @@
 					FROM $g_mantis_bug_monitor_table m,
 						$g_mantis_user_table u
 					WHERE m.bug_id=$c_bug_id AND
-							m.user_id=u.id";
+							m.user_id=u.id AND u.enabled = 1";
 			$result = db_query( $query );
 			$monitor_user_count = db_num_rows( $result );
 			for ($i=0;$i<$monitor_user_count;$i++) {
 				$row = db_fetch_array( $result );
 
-				if ( user_exists( $row['user_id'] ) ) {
+				# @@@ This check seem to be redundant, since the user list
+				#     retrieved from the query result should all be enabled/exists
+				if ( user_exists( $row['user_id'] ) && user_is_enabled( $row['user_id'] ) ) {
 					$t_pref_field = 'email_on_' . $p_notify_type;
 					if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
 						# if the user's notification is on then add to the list

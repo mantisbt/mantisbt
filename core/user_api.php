@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.49 2003-02-11 07:36:01 jfitzell Exp $
+	# $Id: user_api.php,v 1.50 2003-02-11 13:54:39 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -212,6 +212,11 @@
 		}
 	}
 
+	# --------------------
+	# return true is the user account is enabled, false otherwise
+	function user_is_enabled( $p_user_id ) {
+		return ( ON == user_get_field( $p_user_id, 'enabled' ) );
+	}
 
 	#===================================
 	# Creation / Deletion / Updating
