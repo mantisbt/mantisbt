@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.47 2005-02-25 00:23:49 jlatour Exp $
+	# $Id: view_all_set.php,v 1.48 2005-02-26 01:00:38 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -143,11 +143,62 @@
 	$f_custom_fields_data 	= array();
 	if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
-			if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, '[any]' );
+			if (custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE) {
+				$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null);
+
+				$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_start_year', null);
+				$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_start_month', null);
+				$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_start_day', null);
+				$t_start_date = mktime(0, 0, 0, $t_month, $t_day, $t_year);
+
+				$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_end_year', null);
+				$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_end_month', null);
+				$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_end_day', null);
+				$t_end_date = mktime(0, 0, 0, $t_month, $t_day, $t_year);
+
+				$f_custom_fields_data[$t_cfid] = array();
+				$f_custom_fields_data[$t_cfid][0] = $t_control;
+				$t_start = 1;
+				$t_end = 1;
+				$t_one_day = 86399;
+
+				switch ($t_control)
+				{
+				case CUSTOM_FIELD_DATE_ANY:
+				case CUSTOM_FIELD_DATE_NONE:
+					break ;
+				case CUSTOM_FIELD_DATE_BETWEEN:
+					$t_start = $t_start_date;
+					$t_end = $t_end_date + $t_one_day;
+					break ;
+				case CUSTOM_FIELD_DATE_ONORBEFORE:
+					$t_end = $t_start_date + $t_one_day;
+					break ;
+				case CUSTOM_FIELD_DATE_BEFORE:
+					$t_end = $t_start_date;
+					break ;
+				case CUSTOM_FIELD_DATE_ON:
+					$t_start = $t_start_date;
+					$t_end = $t_start_date + $t_one_day;
+					break ;
+				case CUSTOM_FIELD_DATE_AFTER:
+					$t_start = $t_start_date + $t_one_day;
+					$t_end = 2147483647; // Some time in 2038, max value of a signed int.
+					break ;
+				case CUSTOM_FIELD_DATE_ONORAFTER:
+					$t_start = $t_start_date;
+					$t_end = 2147483647; // Some time in 2038, max value of a signed int.
+					break ;
+				}
+				$f_custom_fields_data[$t_cfid][1] = $t_start;
+				$f_custom_fields_data[$t_cfid][2] = $t_end;
 			} else {
-				$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, '[any]' );
-				$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
+				if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
+					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, '[any]' );
+				} else {
+					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, '[any]' );
+					$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
+				}
 			}
 		}
 	}

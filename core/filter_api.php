@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.87 2005-02-25 00:23:49 jlatour Exp $
+	# $Id: filter_api.php,v 1.88 2005-02-26 01:00:39 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -553,35 +553,60 @@
 					$t_def = custom_field_get_definition( $t_cfid );
 					$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
 					array_push( $t_join_clauses, "LEFT JOIN $t_custom_field_string_table as $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
-					foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
-						if ( isset( $t_filter_member ) &&
-							( '[any]' != strtolower( $t_filter_member ) ) ) {
 
-							$t_filter_member = stripslashes( $t_filter_member );
-							if ( '[none]' == $t_filter_member ) { # coerce filter value if selecting 'none'
-								$t_filter_member = '';
-							}
+					if ($t_def['type'] == CUSTOM_FIELD_TYPE_DATE) {
+						switch ($t_filter['custom_fields'][$t_cfid][0]) {
+						case CUSTOM_FIELD_DATE_ANY:
+							break ;
+						case CUSTOM_FIELD_DATE_NONE:
+							// need to modify that last join, nasty I know but unless you want to upgrade everyone using mysql to 4.1.....
+							$t_my_join = array_pop($t_join_clauses) ;
+							$t_my_join .= ' AND ' . $t_table_name . '.field_id = ' . $t_cfid ;
+							array_push( $t_join_clauses, $t_my_join ) ;
+							$t_custom_where_clause = '(( ' . $t_table_name . '.bug_id is null) OR ( ' . $t_table_name . '.value = 0)' ;
+							break ;
+						case CUSTOM_FIELD_DATE_BEFORE:
+							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND ' . $t_table_name . '.value != 0 AND (' . $t_table_name . '.value+0) < ' . ($t_filter['custom_fields'][$t_cfid][2]) . ')' ;
+							break ;
+						case CUSTOM_FIELD_DATE_AFTER:
+							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND (' . $t_table_name . '.value+0) > ' . ($t_filter['custom_fields'][$t_cfid][1]+1) . ')' ;
+							break ;
+						default:
+							$t_custom_where_clause = '(( ' . $t_table_name . '.field_id = ' . $t_cfid . ' AND (' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2] . ')' ;
+							break ;
+						}
+					} else {
 
-							if( $t_first_time ) {
-								$t_first_time = false;
-								$t_custom_where_clause = '(';
-							} else {
-								$t_custom_where_clause .= ' OR ';
-							}
+						foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
+							if ( isset( $t_filter_member ) &&
+								( '[any]' != strtolower( $t_filter_member ) ) ) {
 
-							$t_custom_where_clause .= "(  $t_table_name.field_id = $t_cfid AND $t_table_name.value ";
-							switch( $t_def['type'] ) {
-							case CUSTOM_FIELD_TYPE_MULTILIST:
-							case CUSTOM_FIELD_TYPE_CHECKBOX:
-								$t_custom_where_clause .= "LIKE '%|";
-								$t_custom_where_clause_closing = "|%' )";
-								break;
-							default:
-								$t_custom_where_clause .= "= '";
-								$t_custom_where_clause_closing = "' )";
+								$t_filter_member = stripslashes( $t_filter_member );
+								if ( '[none]' == $t_filter_member ) { # coerce filter value if selecting 'none'
+									$t_filter_member = '';
+								}
+
+								if( $t_first_time ) {
+									$t_first_time = false;
+									$t_custom_where_clause = '(';
+								} else {
+									$t_custom_where_clause .= ' OR ';
+								}
+
+								$t_custom_where_clause .= "(  $t_table_name.field_id = $t_cfid AND $t_table_name.value ";
+								switch( $t_def['type'] ) {
+								case CUSTOM_FIELD_TYPE_MULTILIST:
+								case CUSTOM_FIELD_TYPE_CHECKBOX:
+									$t_custom_where_clause .= "LIKE '%|";
+									$t_custom_where_clause_closing = "|%' )";
+									break;
+								default:
+									$t_custom_where_clause .= "= '";
+									$t_custom_where_clause_closing = "' )";
+								}
+								$t_custom_where_clause .= db_prepare_string( $t_filter_member );
+								$t_custom_where_clause .= $t_custom_where_clause_closing;
 							}
-							$t_custom_where_clause .= db_prepare_string( $t_filter_member );
-							$t_custom_where_clause .= $t_custom_where_clause_closing;
 						}
 					}
 					if ( !is_blank( $t_custom_where_clause ) ) {
@@ -900,6 +925,7 @@
 					if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
 						$t_accessible_custom_fields_ids[] = $t_cfid;
 						$t_accessible_custom_fields_names[] = $t_field_info['name'];
+						$t_accessible_custom_fields_types[] = $t_field_info['type'];
 						$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_cfid );
 					}
 				}
@@ -1575,26 +1601,71 @@
 					if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] ) ) {
 						$t_values .= lang_get( 'any' );
 					} else {
-						$t_first_flag = true;
-						foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
-							$t_current = stripslashes( $t_current );
-							$t_this_string = '';
-							if ( ( $t_current == '[any]' ) || ( $t_current === 0 ) ) {
-								$t_any_found = true;
-							} else if ( '[none]' == $t_current ) {
-								$t_this_string = lang_get( 'none' );
-							} else {
-								$t_this_string = $t_current;
+						if ( $t_accessible_custom_fields_types[$i] == CUSTOM_FIELD_TYPE_DATE ) {
+							$t_short_date_format = config_get( 'short_date_format' );
+							if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] ) ) {
+								$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] = 0;
 							}
+							$t_start = date( $t_short_date_format, $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][1] );
 
-							if ( $t_first_flag != true ) {
-								$t_output = $t_output . '<br>';
-							} else {
-								$t_first_flag = false;
+							if ( !isset( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][2] ) ) {
+								$t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][2] = 0;
 							}
+							$t_end = date( $t_short_date_format, $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][2] );
+							switch ($t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]][0]) {
+							case CUSTOM_FIELD_DATE_ANY:
+								$t_values .= lang_get( 'any' ) ;
+								break;
+							case CUSTOM_FIELD_DATE_NONE:
+								$t_values .= lang_get( 'none' ) ;
+								break;
+							case CUSTOM_FIELD_DATE_BETWEEN:
+								$t_values .= lang_get( 'between' ) . '<br />';
+								$t_values .= $t_start . '<br />' . $t_end;
+								break;
+							case CUSTOM_FIELD_DATE_ONORBEFORE:
+								$t_values .= lang_get( 'on_or_before' ) . '<br />';
+								$t_values .= $t_end;
+								break;
+							case CUSTOM_FIELD_DATE_BEFORE:
+								$t_values .= lang_get( 'before' ) . '<br />';
+								$t_values .= $t_end;
+								break;
+							case CUSTOM_FIELD_DATE_ON:
+								$t_values .= lang_get( 'on' ) . '<br />';
+								$t_values .= $t_start;
+								break;
+							case CUSTOM_FIELD_DATE_AFTER:
+								$t_values .= lang_get( 'after' ) . '<br />';
+								$t_values .= $t_start;
+								break ;
+							case CUSTOM_FIELD_DATE_ONORAFTER:
+								$t_values .= lang_get( 'on_or_after' ) . '<br />';
+								$t_values .= $t_start;
+								break ;
+							}
+						} else {
+							$t_first_flag = true;
+							foreach( $t_filter['custom_fields'][$t_accessible_custom_fields_ids[$i]] as $t_current ) {
+								$t_current = stripslashes( $t_current );
+								$t_this_string = '';
+								if ( ( $t_current == '[any]' ) || ( $t_current === 0 ) ) {
+									$t_any_found = true;
+								} else if ( '[none]' == $t_current ) {
+									$t_this_string = lang_get( 'none' );
+								} else {
+									$t_this_string = $t_current;
+								}
 
-							$t_output = $t_output . $t_this_string;
-							$t_values .= '<input type="hidden" name="custom_field_'.$t_accessible_custom_fields_ids[$i].'[]" value="'.$t_current.'" />';
+								if ( $t_first_flag != true ) {
+									$t_output = $t_output . '<br>';
+								} else {
+									$t_first_flag = false;
+								}
+
+								$t_output = $t_output . $t_this_string;
+								$t_values .= '<input type="hidden" name="custom_field_'.$t_accessible_custom_fields_ids[$i].'[]" value="'.$t_current.'" />';
+							}
 						}
 
 						if ( true == $t_any_found ) {
@@ -2487,26 +2558,30 @@
 			</span>
 			<?php
 		} elseif ( isset( $t_accessible_custom_fields_names[$j] ) ) {
-			echo '<select ' . $t_select_modifier . ' name="custom_field_' . $p_field_id .'[]">';
-			echo '<option value="[any]" ';
-			check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );
-			echo '>[' . lang_get( 'any' ) .']</option>';
-			# don't show '[none]' for enumerated types as it's not possible for them to be blank
-			if ( ! in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
-				echo '<option value="[none]" ';
+			if ($t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_DATE) {
+				print_filter_custom_field_date($j, $p_field_id) ;
+			} else {
+				echo '<select ' . $t_select_modifier . ' name="custom_field_' . $p_field_id .'[]">';
+				echo '<option value="[any]" ';
 				check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );
-				echo '>[' . lang_get( 'none' ) .']</option>';
-			}
-			foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
-				if ( ( strtolower( $t_item ) != "[any]" ) && ( strtolower( $t_item ) != "[none]" ) ) {
-					echo '<option value="' .  htmlentities( $t_item )  . '" ';
-					if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
-						check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );
-					}
-					echo '>' . string_shorten( $t_item )  . '</option>' . "\n";
+				echo '>[' . lang_get( 'any' ) .']</option>';
+				# don't show '[none]' for enumerated types as it's not possible for them to be blank
+				if ( ! in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
+					echo '<option value="[none]" ';
+					check_selected( $t_filter['custom_fields'][ $p_field_id ], 'any' );
+					echo '>[' . lang_get( 'none' ) .']</option>';
 				}
+				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
+					if ( ( strtolower( $t_item ) != "[any]" ) && ( strtolower( $t_item ) != "[none]" ) ) {
+						echo '<option value="' .  htmlentities( $t_item )  . '" ';
+						if ( isset( $t_filter['custom_fields'][ $p_field_id ] ) ) {
+							check_selected( $t_filter['custom_fields'][ $p_field_id ], $t_item );
+						}
+						echo '>' . string_shorten( $t_item )  . '</option>' . "\n";
+					}
+				}
+				echo '</select>';
 			}
-			echo '</select>';
 		}
 
 	}
@@ -2577,5 +2652,145 @@
 			echo "<input type=\"hidden\" name=\"sort_1\" value=\"last_updated\" />";
 			echo "<input type=\"hidden\" name=\"dir_1\" value=\"DESC\" />";
 		}
+	}
+
+
+
+	function print_filter_custom_field_date($p_field_num, $p_field_id) {
+		global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
+
+		$t_js_toggle_func = "toggle_custom_date_field_" . $p_field_id . "_controls" ;
+?>
+
+	<script language="Javascript">
+	function <?php echo $t_js_toggle_func . "_start" ; ?>(disable) {
+			document.filters.custom_field_<?php echo $p_field_id ; ?>_start_year.disabled = disable ;
+			document.filters.custom_field_<?php echo $p_field_id ; ?>_start_month.disabled = disable ;
+			document.filters.custom_field_<?php echo $p_field_id ; ?>_start_day.disabled = disable ;
+	} ;
+
+	function <?php echo $t_js_toggle_func . "_end" ; ?>(disable) {
+			document.filters.custom_field_<?php echo $p_field_id ; ?>_end_year.disabled = disable ;
+			document.filters.custom_field_<?php echo $p_field_id ; ?>_end_month.disabled = disable ;
+			document.filters.custom_field_<?php echo $p_field_id ; ?>_end_day.disabled = disable ;
+	} ;
+
+	function <?php echo $t_js_toggle_func ; ?>() {
+		switch (document.filters.custom_field_<?php echo $p_field_id ; ?>_control.selectedIndex) {
+		case <?php echo CUSTOM_FIELD_DATE_ANY ; ?>:
+		case <?php echo CUSTOM_FIELD_DATE_NONE ; ?>:
+			<?php echo $t_js_toggle_func . "_start" ; ?>(true) ;
+			<?php echo $t_js_toggle_func . "_end" ; ?>(true) ;
+			break ;
+		case <?php echo CUSTOM_FIELD_DATE_BETWEEN ; ?>:
+			<?php echo $t_js_toggle_func . "_start" ; ?>(false) ;
+			<?php echo $t_js_toggle_func . "_end" ; ?>(false) ;
+			break ;
+		default:
+			<?php echo $t_js_toggle_func . "_start" ; ?>(false) ;
+			<?php echo $t_js_toggle_func . "_end" ; ?>(true) ;
+			break ;
+		}
+	}
+	</script>
+
+<?php
+		# Resort the values so there ordered numerically, they are sorted as strings otherwise which
+		# may be wrong for dates before early 2001.
+		array_multisort($t_accessible_custom_fields_values[$p_field_num], SORT_NUMERIC, SORT_ASC) ;
+		if (isset($t_accessible_custom_fields_values[$p_field_num][0])) {
+			$t_sel_start_year = date( 'Y', $t_accessible_custom_fields_values[$p_field_num][0]) ;
+		}
+		$t_count = count($t_accessible_custom_fields_values[$p_field_num]) ;
+		if (isset($t_accessible_custom_fields_values[$p_field_num][$t_count-1])) {
+			$t_sel_end_year = date( 'Y', $t_accessible_custom_fields_values[$p_field_num][$t_count-1]) ;
+		}
+
+		$t_start = date( 'U' ); # Default to today in filters..
+		$t_end = $t_start;
+
+		if ( isset( $t_filter['custom_fields'][$p_field_id][1] ) ) {
+			$t_start_time = $t_filter['custom_fields'][$p_field_id][1];
+		} else {
+			$t_start_time = 0;
+		}
+
+		if ( isset( $t_filter['custom_fields'][$p_field_id][2] ) ) {
+			$t_end_time = $t_filter['custom_fields'][$p_field_id][2];
+		} else {
+			$t_end_time = 0;
+		}
+
+		$t_start_disable = true;
+		$t_end_disable = true;
+
+		// if $t_filter['custom_fields'][$p_field_id][0] is not set (ie no filter), we will drop through the
+		// following switch and use the default values above, so no need to check if stuff is set or not.
+		switch ($t_filter['custom_fields'][$p_field_id][0]) {
+		case CUSTOM_FIELD_DATE_ANY:
+		case CUSTOM_FIELD_DATE_NONE:
+			break;
+		case CUSTOM_FIELD_DATE_BETWEEN:
+			$t_start_disable = false;
+			$t_end_disable = false;
+			$t_start = $t_start_time;
+			$t_end = $t_end_time;
+			break;
+		case CUSTOM_FIELD_DATE_ONORBEFORE:
+			$t_start_disable = false;
+			$t_start = $t_end_time;
+			break;
+		case CUSTOM_FIELD_DATE_BEFORE:
+			$t_start_disable = false;
+			$t_start = $t_end_time;
+			break;
+		case CUSTOM_FIELD_DATE_ON:
+			$t_start_disable = false;
+			$t_start = $t_start_time;
+			break;
+		case CUSTOM_FIELD_DATE_AFTER:
+			$t_start_disable = false;
+			$t_start = $t_start_time;
+			break;
+		case CUSTOM_FIELD_DATE_ONORAFTER:
+			$t_start_disable = false;
+			$t_start = $t_start_time;
+			break;
+		}
+
+		echo "\n<table cellspacing=\"0\" cellpadding=\"0\"><tr><td>\n" ;
+		echo "<select size=\"1\" name=\"custom_field_" . $p_field_id . "_control\" OnChange=\"" . $t_js_toggle_func . "();\">\n";
+		echo '<option value="' . CUSTOM_FIELD_DATE_ANY . '"';
+			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
+			echo '>' . lang_get( 'any' ) . '</option>' . "\n";
+		echo '<option value="' . CUSTOM_FIELD_DATE_NONE	. '"';
+			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_NONE );
+			echo '>' . lang_get( 'none' ) . '</option>' . "\n";
+		echo '<option value="' . CUSTOM_FIELD_DATE_BETWEEN . '"';
+			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
+			echo '>' . lang_get( 'between' ) . '</option>' . "\n";
+		echo '<option value="' . CUSTOM_FIELD_DATE_ONORBEFORE . '"';
+			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
+			echo '>' . lang_get( 'on_or_before' ) . '</option>' . "\n";
+		echo '<option value="' . CUSTOM_FIELD_DATE_BEFORE . '"';
+			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
+			echo '>' . lang_get( 'before' ) . '</option>' . "\n";
+		echo '<option value="' . CUSTOM_FIELD_DATE_ON . '"';
+			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
+			echo '>' . lang_get( 'on' ) . '</option>' . "\n";
+		echo '<option value="' . CUSTOM_FIELD_DATE_AFTER . '"';
+			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
+			echo '>' . lang_get( 'after' ) . '</option>' . "\n";
+		echo '<option value="' . CUSTOM_FIELD_DATE_ONORAFTER . '"';
+			check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER	);
+			echo '>' . lang_get( 'on_or_after' ) . '</option>' . "\n";
+		echo '</select>' . "\n";
+
+		echo "</td></tr>\n<tr><td>";
+
+		print_date_selection_set("custom_field_" . $p_field_id . "_start" , config_get( 'short_date_format'), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year);
+		print "</td></tr>\n<tr><td>";
+		print_date_selection_set("custom_field_" . $p_field_id . "_end" , config_get( 'short_date_format'), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year);
+		print "</td></tr>\n</table>";
 	}
 ?>

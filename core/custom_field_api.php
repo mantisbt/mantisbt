@@ -6,13 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.47 2005-01-29 13:56:17 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.48 2005-02-26 01:00:39 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'bug_api.php' );
 	require_once( $t_core_dir . 'helper_api.php' );
+	require_once( $t_core_dir . 'date_api.php' );
 
 	### Custom Fields API ###
 
@@ -127,6 +128,17 @@
 		}
 	}
 
+	# --------------------
+	# Return the type of a custom field if it exists.
+	function custom_field_type( $p_field_id ) {
+		$t_field = custom_field_cache_row( $p_field_id, false ) ;
+		if ( $t_field == false ) {
+			return -1 ;
+		} else {
+			return $t_field[ 'type' ] ;
+		}
+	}
+	
 	# --------------------
 	# Check to see whether the field id is defined
 	#  return true if the field is defined, error otherwise
@@ -1166,6 +1178,11 @@
 				echo ' maxlength="255"';
 			}
 			echo ' value="' . $t_custom_field_value .'"></input>';
+			break ;
+
+		case CUSTOM_FIELD_TYPE_DATE:
+			print_date_selection_set("custom_field_" . $t_id, config_get('short_date_format'), $t_custom_field_value, false, true) ;
+			break ;
 		}
 	}
 
@@ -1187,6 +1204,11 @@
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
 				return str_replace( '|', ', ', $t_custom_field_value );
 				break;
+			case CUSTOM_FIELD_TYPE_DATE:
+				if ($t_custom_field_value != null) {
+					return date( config_get( 'short_date_format'), $t_custom_field_value) ;
+				}
+				break ;
 			default:
 				return string_display_links( $t_custom_field_value );
 		}
@@ -1218,6 +1240,11 @@
 			case CUSTOM_FIELD_TYPE_CHECKBOX:
 				return str_replace( '|', ', ', $p_value );
 				break;
+			case CUSTOM_FIELD_TYPE_DATE:
+				if ($p_value != null) {
+					return date( config_get( 'short_date_format' ), $p_value) ;
+				}
+				break ;
 			default:
 				return $p_value;
 		}

@@ -80,6 +80,7 @@
 	$t_current_user_access_level = current_user_get_access_level();
 	$t_accessible_custom_fields_ids = array();
 	$t_accessible_custom_fields_names = array();
+	$t_accessible_custom_fields_type = array() ;
 	$t_accessible_custom_fields_values = array();
 	$t_filter_cols = 7;
 	$t_custom_cols = 1;
@@ -94,6 +95,7 @@
 			if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
 				$t_accessible_custom_fields_ids[] = $t_cfid;
 				$t_accessible_custom_fields_names[] = $t_field_info['name'];
+				$t_accessible_custom_fields_types[] = $t_field_info['type'];
 				$t_accessible_custom_fields_values[] = custom_field_distinct_values( $t_cfid, $t_project_id );
 			}
 		}

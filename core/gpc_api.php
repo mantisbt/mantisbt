@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: gpc_api.php,v 1.34 2005-02-25 00:23:49 jlatour Exp $
+	# $Id: gpc_api.php,v 1.35 2005-02-26 01:00:40 vboctor Exp $
 	# --------------------------------------------------------
 
 	### GET, POST, and Cookie API ###
@@ -114,6 +114,21 @@
 				} else {
 					return '';
 				}
+				break ;
+			case CUSTOM_FIELD_TYPE_DATE:
+				$t_day = gpc_get_int( $p_var_name . "_day") ;
+				$t_month = gpc_get_int( $p_var_name . "_month") ;
+				$t_year = gpc_get_int( $p_var_name . "_year") ;
+				if (($t_year == 0) || ($t_month == 0) || ($t_day == 0)) {
+					if ($p_default == null) {
+						return '' ;
+					} else {
+						return $p_default ;
+					}
+				} else {
+					return strtotime($t_year . "-" . $t_month . "-" . $t_day) ;
+				}
+				break ;
 			default:
 				return gpc_get_string( $p_var_name, $p_default);
 		}

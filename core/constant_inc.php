@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.40 2005-02-25 00:23:49 jlatour Exp $
+	# $Id: constant_inc.php,v 1.41 2005-02-26 01:00:39 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -290,6 +290,7 @@
 	define( 'CUSTOM_FIELD_TYPE_CHECKBOX',	5 );
 	define( 'CUSTOM_FIELD_TYPE_LIST',		6 );
 	define( 'CUSTOM_FIELD_TYPE_MULTILIST',	7 );
+	define( 'CUSTOM_FIELD_TYPE_DATE',		8 );
 
 	# Meta filter values
 	define( 'META_FILTER_MYSELF',	-1 );
@@ -312,5 +313,15 @@
 	define( 'TOKEN_UNKNOWN',	0 );
 	define( 'TOKEN_FILTER',		1 );
 	define( 'TOKEN_GRAPH',		2 );
+	
+	# Control types for date custom fields.
+	define( 'CUSTOM_FIELD_DATE_ANY',		0 ) ;
+	define( 'CUSTOM_FIELD_DATE_NONE',		1 ) ;
+	define( 'CUSTOM_FIELD_DATE_BETWEEN',	2 ) ;
+	define( 'CUSTOM_FIELD_DATE_ONORBEFORE', 3 ) ;
+	define( 'CUSTOM_FIELD_DATE_BEFORE',		4 ) ;
+	define( 'CUSTOM_FIELD_DATE_ON',			5 ) ;
+	define( 'CUSTOM_FIELD_DATE_AFTER',		6 ) ;
+	define( 'CUSTOM_FIELD_DATE_ONORAFTER',	7 ) ;
 
 ?>

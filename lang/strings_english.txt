@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.240 $
-	# $Author: jlatour $
-	# $Date: 2005-02-25 00:18:41 $
+	# $Revision: 1.241 $
+	# $Author: vboctor $
+	# $Date: 2005-02-26 01:00:40 $
 	#
-	# $Id: strings_english.txt,v 1.240 2005-02-25 00:18:41 jlatour Exp $
+	# $Id: strings_english.txt,v 1.241 2005-02-26 01:00:40 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -1036,7 +1036,7 @@ $s_custom_field_require_resolved = 'Required On Resolve';
 $s_custom_field_require_closed = 'Required On Close';
 
 $s_custom_field_sequence = 'Sequence';
-$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list';
+$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:Email,5:Checkbox,6:List,7:Multiselection list,8:Date';
 
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project.  If you continue all values for this field will be permanently deleted.  This action cannot be undone.  If you do not want to delete this field, hit the Back button in your browser.  To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
@@ -1172,4 +1172,13 @@ $s_email_on_relationship_changed = 'Email on Relationship changed';
 
 # DHTML filters
 $s_loading = 'Loading...';
+
+# filter_api.php
+$s_between = 'Between' ;
+$s_on_or_before = 'On Or Before' ;
+$s_before = 'Before' ;
+$s_on = 'On' ;
+$s_after = 'After' ;
+$s_on_or_after = 'On Or After' ;
+
 ?>
