@@ -19,6 +19,7 @@ Mantis ChangeLog
  * Enh #3690: Request for directly setting reminders private.
  * Enh #3713: Allow users to set severity levels along with email preferences.
  * Enh #3735: New CSS class for HTML Form Buttons
+ * Enh #3801: Add "myself" meta filter options.
  * Fix #3094: Switching projects clears filter values.
  * Fix #3259: Saving CSV file of bugs containning double quotes causes invalid csv.
  * Fix #3397: Delete notification should be off when deleting a project.

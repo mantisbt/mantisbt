@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.3 2004-04-01 18:42:10 narcissus Exp $
+	# $Id: 0_18_inc.php,v 1.4 2004-04-30 23:14:55 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,7 +25,7 @@
 			'filtersdb-1',
 			'Add mantis_filters_table',
 			"CREATE TABLE $t_filters_table (
-			  id int(7) unsigned zerofill DEFAULT '0000001' NOT NULL auto_increment,
+			  id int(7) unsigned DEFAULT '1' NOT NULL auto_increment,
 			  user_id int(7) NOT NULL,
 			  project_id int(7) NOT NULL,
 			  is_public BOOL,

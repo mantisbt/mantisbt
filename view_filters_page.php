@@ -137,6 +137,13 @@
 		<select name="reporter_id">
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="any"></option>
+			<?php
+				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) { 
+					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
+					check_selected( $t_filter['reporter_id'], META_FILTER_MYSELF );
+					PRINT '>[' . lang_get( 'myself' ) . ']</option>';
+				} 
+			?>
 			<?php print_reporter_option_list( $t_filter['reporter_id'] ) ?>
 		</select>
 	</td>
@@ -146,6 +153,13 @@
 			<option value="any"><?php echo lang_get( 'any' ) ?></option>
 			<option value="none" <?php check_selected( $t_filter['handler_id'], 'none' ); ?>><?php echo lang_get( 'none' ) ?></option>
 			<option value="any"></option>
+			<?php
+				if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { 
+					PRINT '<option value="' . META_FILTER_MYSELF . '" ';
+					check_selected( $t_filter['handler_id'], META_FILTER_MYSELF );
+					PRINT '>[' . lang_get( 'myself' ) . ']</option>';
+				} 
+			?>
 			<?php print_assign_to_option_list( $t_filter['handler_id'] ) ?>
 		</select>
         <input type="checkbox" name="and_not_assigned" <?php check_checked( $t_filter['and_not_assigned'], 'on' ); ?> /> <?php echo lang_get( 'or_unassigned' ) ?>

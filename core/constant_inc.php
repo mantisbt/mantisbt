@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.12 2004-04-08 20:52:50 prescience Exp $
+	# $Id: constant_inc.php,v 1.13 2004-04-30 23:14:55 narcissus Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -236,4 +236,7 @@
 	define( 'CUSTOM_FIELD_TYPE_FLOAT',    2 );
 	define( 'CUSTOM_FIELD_TYPE_ENUM',     3 );
 	define( 'CUSTOM_FIELD_TYPE_EMAIL',    4 );
+
+	# Meta filter values
+	define( 'META_FILTER_MYSELF',	-1 );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.30 2004-04-27 00:54:32 narcissus Exp $
+	# $Id: filter_api.php,v 1.31 2004-04-30 23:14:55 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -91,7 +91,14 @@
 		# reporter
 		if ( 'any' != $t_filter['reporter_id'] ) {
 			$c_reporter_id = db_prepare_int( $t_filter['reporter_id'] );
-			array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
+			if ( META_FILTER_MYSELF == $c_reporter_id ) {
+				if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) { 
+					$c_reporter_id = auth_get_current_user_id();
+					array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
+				}
+			} else {
+				array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
+			}
 		}
 
 		# limit reporter
@@ -105,10 +112,21 @@
 			array_push( $t_where_clauses, "$t_bug_table.handler_id=0" );
 		} else if ( 'any' != $t_filter['handler_id'] ) {
 			$c_handler_id = db_prepare_int( $t_filter['handler_id'] );
-			if ( 'on' != $t_filter['and_not_assigned'] ) {
-				array_push( $t_where_clauses, "($t_bug_table.handler_id='$c_handler_id')" );
+			if ( META_FILTER_MYSELF == $c_handler_id ) {
+				if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { 
+					$c_handler_id = auth_get_current_user_id();
+					if ( 'on' != $t_filter['and_not_assigned'] ) {
+						array_push( $t_where_clauses, "($t_bug_table.handler_id='$c_handler_id')" );
+					} else {
+						array_push( $t_where_clauses, "(($t_bug_table.handler_id='$c_handler_id') OR ($t_bug_table.handler_id=0))" );
+					}
+				}
 			} else {
-				array_push( $t_where_clauses, "(($t_bug_table.handler_id='$c_handler_id') OR ($t_bug_table.handler_id=0))" );
+				if ( 'on' != $t_filter['and_not_assigned'] ) {
+					array_push( $t_where_clauses, "($t_bug_table.handler_id='$c_handler_id')" );
+				} else {
+					array_push( $t_where_clauses, "(($t_bug_table.handler_id='$c_handler_id') OR ($t_bug_table.handler_id=0))" );
+				}
 			}
 		}
 
@@ -468,6 +486,12 @@
 				<?php
 					if ( $t_filter['reporter_id'] == 0 ) {
 						PRINT lang_get( 'any' );
+					} else if ( META_FILTER_MYSELF == $t_filter['reporter_id'] ) {
+						if ( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) { 
+							PRINT '[' . lang_get( 'myself' ) . ']';
+						} else {
+							PRINT lang_get( 'any' );
+						}
 					} else {
 						PRINT user_get_field( $t_filter['reporter_id'], 'username' );
 					}
@@ -478,6 +502,12 @@
 				<?php
 					if ( $t_filter['handler_id'] == 0 ) {
 						PRINT lang_get( 'any' );
+					} else if ( META_FILTER_MYSELF == $t_filter['handler_id'] ) {
+						if ( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) { 
+							PRINT '[' . lang_get( 'myself' ) . ']';
+						} else {
+							PRINT lang_get( 'any' );
+						}
 					} else {
 						PRINT user_get_field( $t_filter['handler_id'], 'username' );
 					}
