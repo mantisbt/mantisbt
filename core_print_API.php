@@ -131,7 +131,7 @@
 		global $g_mantis_user_table, $g_project_cookie_val, $g_mantis_project_user_list_table;
 
 		$t_rep = REPORTER;
-		
+
 	    #checking if it's a per project statistic or all projects
 		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
 		else $specific_where = " t2.project_id='$g_project_cookie_val'";
@@ -229,7 +229,7 @@
 		#checking if it's a per project statistic or all projects
 		if ($g_project_cookie_val=='0000000') $specific_where = " 1=1";
 		else $specific_where = " t2.project_id='$g_project_cookie_val'";
-		
+
 		$query = "SELECT DISTINCT t1.id, t1.username
 				FROM $g_mantis_user_table as t1,
 				$g_mantis_project_user_list_table as t2
@@ -785,6 +785,7 @@
 	function string_display( $p_string ) {
 		$p_string = stripslashes( $p_string );
 		$p_string = process_bug_link( $p_string );
+		$p_string = process_cvs_link( $p_string );
 		$p_string = nl2br( $p_string );
 		return $p_string;
 	}
@@ -794,6 +795,7 @@
 		$p_string = stripslashes( $p_string );
 		$p_string = unfilter_href_tags( $p_string );
 		$p_string = process_bug_link_email( $p_string );
+		$p_string = process_cvs_link_email( $p_string );
 		$p_string = str_replace( "&lt;", "<",  $p_string );
 		$p_string = str_replace( "&gt;", ">",  $p_string );
 		$p_string = str_replace( "&quot;", "\"",  $p_string );
@@ -844,7 +846,7 @@
 		return $p_string;
 	}
 	# --------------------
-	/* word_wrap($string, $cols, $prefix)
+	/* wordwrap($string, $cols, $prefix)
 	 *
 	 * Takes $string, and wraps it on a per-word boundary (does not clip
 	 * words UNLESS the word is more than $cols long), no more than $cols per
@@ -854,45 +856,47 @@
 	 * Copyright 1999 Dominic J. Eidson, use as you wish, but give credit
 	 * where credit due.
 	 */
-	function word_wrap ($string, $cols = 72, $prefix = "") {
+	if ( !function_exists( "wordwrap" ) ) {
+		function wordwrap ($string, $cols = 72, $prefix = "") {
 
-		$t_lines = split( "\n", $string);
-		$outlines = "";
+			$t_lines = split( "\n", $string);
+			$outlines = "";
 
-		while(list(, $thisline) = each($t_lines)) {
-		    if(strlen($thisline) > $cols) {
+			while(list(, $thisline) = each($t_lines)) {
+				if(strlen($thisline) > $cols) {
 
-				$newline = "";
-				$t_l_lines = split(" ", $thisline);
+					$newline = "";
+					$t_l_lines = split(" ", $thisline);
 
-				while(list(, $thisword) = each($t_l_lines)) {
-				    while((strlen($thisword) + strlen($prefix)) > $cols) {
-						$cur_pos = 0;
-						$outlines .= $prefix;
+					while(list(, $thisword) = each($t_l_lines)) {
+						while((strlen($thisword) + strlen($prefix)) > $cols) {
+							$cur_pos = 0;
+							$outlines .= $prefix;
 
-						for($num=0; $num < $cols-1; $num++) {
-						    $outlines .= $thisword[$num];
-						    $cur_pos++;
-						} # end for
+							for($num=0; $num < $cols-1; $num++) {
+							    $outlines .= $thisword[$num];
+							    $cur_pos++;
+							} # end for
 
-						$outlines .= "\n";
-						$thisword = substr($thisword, $cur_pos, (strlen($thisword)-$cur_pos));
-				    } # end innermost while
+							$outlines .= "\n";
+							$thisword = substr($thisword, $cur_pos, (strlen($thisword)-$cur_pos));
+						} # end innermost while
 
-				    if((strlen($newline) + strlen($thisword)) > $cols) {
-						$outlines .= $prefix.$newline."\n";
-						$newline = $thisword." ";
-				    } else {
-						$newline .= $thisword." ";
-				    }
-				}  # end while
+						if((strlen($newline) + strlen($thisword)) > $cols) {
+							$outlines .= $prefix.$newline."\n";
+							$newline = $thisword." ";
+						} else {
+							$newline .= $thisword." ";
+						}
+					}  # end while
 
-				$outlines .= $prefix.$newline."\n";
-		    } else {
-				$outlines .= $prefix.$thisline."\n";
-		    }
-		} # end outermost while
-		return $outlines;
-    }
+					$outlines .= $prefix.$newline."\n";
+			    } else {
+					$outlines .= $prefix.$thisline."\n";
+				}
+			} # end outermost while
+			return $outlines;
+		}
+	}
 	# --------------------
 ?>

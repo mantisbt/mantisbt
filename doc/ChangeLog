@@ -20,10 +20,13 @@ Mantis
  * Modified edit user links to use the username instead of the [edit] link.
  * Modified edit project links to use the project name instead of the [edit] link.
  * Modified default/config_inc1.php to have more more css global variables.
+ * Modified wordwrap to use builtin php function if available.
  * Added project name as supplementary info next to bug id in buglist for "All projects" option
  * Added Basic Authentication patch.
  * Added CSV Export patch.
  * Added Anonymous Login patch.
+ * Added CVS linking patch.
+
 
 01.23.2002  -   0.17.0
 

@@ -385,7 +385,7 @@
 		$t_message .= str_pd( $s_email_last_modified.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_last_updated."\n";
 		$t_message .= "=======================================================================\n";
 		$t_message .= str_pd( $s_email_summary.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_summary."\n";
-		$t_message .= "$s_email_description: \n".word_wrap( $v2_description )."\n";
+		$t_message .= "$s_email_description: \n".wordwrap( $v2_description )."\n";
 		$t_message .= "=======================================================================\n\n";
 
 		return $t_message;
@@ -426,7 +426,7 @@
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
 			$t_message = $t_message.$t_string."\n";
 			$t_message = $t_message."-----------------------------------------------------------------------\n";
-			$t_message = $t_message.word_wrap( $t_note )."\n\n";
+			$t_message = $t_message.wordwrap( $t_note )."\n\n";
 		}
 
 		return $t_message;

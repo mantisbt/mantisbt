@@ -200,7 +200,7 @@
 				WHERE cookie_string='$p_cookie_str'";
 		$result = db_query( $query );
 		$t_id = db_result( $result );
-		
+
 		if ( "0000000" == $g_project_cookie_val ) $t_where_prj ="1=1";
 		else $t_where_prj = "project_id='$p_project_id'";
 		$t_res = RESOLVED;
@@ -212,6 +212,26 @@
 						reporter_id='$t_id'";
 		$result = db_query( $query );
 		return db_result( $result, 0, 0 );
+	}
+	### --------------------
+	# process the $p_string and convert filenames in the format
+	# cvs:filename.ext or cvs:filename.ext:n.nn to a html link
+	function process_cvs_link( $p_string ) {
+		global $g_cvs_web;
+
+		return preg_replace( '/cvs:([^\.\s:,\?!]+(\.[^\.\s:,\?!]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i',
+							 '[CVS] <a href="'.$g_cvs_web.'\\1?rev=\\4" target="_new">\\1</a>\\5',
+							 $p_string );
+	}
+	### --------------------
+	# process the $p_string and convert filenames in the format
+	# cvs:filename.ext or cvs:filename.ext:n.nn to a html link
+	function process_cvs_link_email( $p_string ) {
+		global $g_cvs_web;
+
+		return preg_replace( '/cvs:([^\.\s:,\?!]+(\.[^\.\s:,\?!]+)*)(:)?(\d\.[\d\.]+)?([\W\s])?/i',
+							 '[CVS] '.$g_cvs_web.'\\1?rev=\\4\\5',
+							 $p_string );
 	}
 	# --------------------
 	# process the $p_string and convert bugs in this format #123 to a html link
