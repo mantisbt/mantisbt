@@ -808,10 +808,15 @@
 	### --------------------
 	# duplicates str_pad() from PHP4
 	# left pad $p_string with $p_pad until we reach $p_length
-	function str_pd( $p_string, $p_pad, $p_length ) {
+	function str_pd( $p_string, $p_pad, $p_length, $p_dir=STR_PAD_RIGHT ) {
 		$t_num = $p_length - strlen( $p_string );
 		for ($i=0;$i<$t_num;$i++) {
-			$p_string = $p_pad.$p_string;
+			switch ( $p_dir ) {
+				case STR_PAD_LEFT: $p_string = $p_pad.$p_string;
+									break;
+				case STR_PAD_RIGHT: $p_string = $p_string.$p_pad;
+									break;
+			}
 		}
 		return $p_string;
 	}

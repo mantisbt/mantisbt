@@ -226,7 +226,7 @@
 		### Build Welcome Message
 		$t_message = $s_reset_request_msg."\n\n".
 					$s_account_name_msg.": ".$v_username."\n".
-					$s_news_password_msg.": ".$p_password."\n\n";
+					$s_news_password_msg.": ".$p_password."\n\n".
 					$g_path."\n\n";
 
 		email_send( $v_email, "New Password", $t_message );
@@ -345,28 +345,28 @@
 		$t_message = "=======================================================================\n";
 		$t_message .= $g_view_bug_page."?f_id=".$p_bug_id."\n";
 		$t_message .= "=======================================================================\n";
-		$t_message .= "$s_email_reporter:        $t_reporter_name\n";
-		$t_message .= "$s_email_handler:         $t_handler_name\n";
+		$t_message .= str_pd( $s_email_reporter.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_reporter_name."\n";
+		$t_message .= str_pd( $s_email_handler.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_handler_name."\n";
 		$t_message .= "=======================================================================\n";
-		$t_message .= "$s_email_project:         $t_project_name\n";
-		$t_message .= "$s_email_bug:             $v_id\n";
-		$t_message .= "$s_email_category:        $v_category\n";
-		$t_message .= "$s_email_reproducibility: $t_rep_str\n";
-		$t_message .= "$s_email_severity:        $t_sev_str\n";
-		$t_message .= "$s_email_priority:        $t_pri_str\n";
-		$t_message .= "$s_email_status:          $t_sta_str\n";
+		$t_message .= str_pd( $s_email_project.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_project_name."\n";
+		$t_message .= str_pd( $s_email_bug.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_id."\n";
+		$t_message .= str_pd( $s_email_category.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_category."\n";
+		$t_message .= str_pd( $s_email_reproducibility.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_rep_str."\n";
+		$t_message .= str_pd( $s_email_severity.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_sev_str."\n";
+		$t_message .= str_pd( $s_email_priority.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_pri_str."\n";
+		$t_message .= str_pd( $s_email_status.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_sta_str."\n";
 		if ( $v_status==RESOLVED ) {
 			$t_res_str = get_enum_element( $s_resolution_enum_string, $v_resolution );
-			$t_message .= "$s_email_resolution:      $t_res_str\n";
+			$t_message .= str_pd( $s_email_resolution.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_res_str."\n";
 			if ( $v_resolution==DUPLICATE ) {
-				$t_message .= "$s_email_duplicate:      $v_duplicate_id\n";
+				$t_message .= str_pd( $s_email_duplicate.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_duplicate_id."\n";
 			}
 		}
 		$t_message .= "=======================================================================\n";
-		$t_message .= "$s_email_date_submitted:   $v_date_submitted\n";
-		$t_message .= "$s_email_last_modified:    $v_last_updated\n";
+		$t_message .= str_pd( $s_email_date_submitted.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_date_submitted."\n";
+		$t_message .= str_pd( $s_email_last_modified.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_last_updated."\n";
 		$t_message .= "=======================================================================\n";
-		$t_message .= "$s_email_summary:  $v_summary\n\n";
+		$t_message .= str_pd( $s_email_summary.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_summary."\n";
 		$t_message .= "$s_email_description: \n".word_wrap( $v2_description )."\n";
 		$t_message .= "=======================================================================\n\n";
 
@@ -541,8 +541,7 @@
 			# $t_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
 
 			$t_headers .= $p_header;
-			#mail( "kenito@300baud.org", "test", "message" );
-			#$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
+			$result = mail( $t_recipient, $t_subject, $t_message, $t_headers );
 			if ( !$result ) {
 				PRINT "PROBLEMS SENDING MAIL TO: $t_recipient<p>";
 				PRINT htmlspecialchars($t_recipient)."<br>";
@@ -587,7 +586,7 @@
 		$p_subject = string_email( get_bug_summary( $p_bug_id ) );
 
 		# padd the bug id with zeros
-		$p_bug_id = str_pd( $p_bug_id, "0", 7 );
+		$p_bug_id = str_pd( $p_bug_id, "0", 7, STR_PAD_LEFT );
 
 		return "[".$p_project_name." ".$p_bug_id."]: ".$p_subject;
 	}
