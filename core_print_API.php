@@ -458,6 +458,20 @@
 		} # end for
 	}
 	# --------------------
+	# @@@ preliminary support for multiple bug actions.
+	function print_all_bug_action_option_list() {
+		$zook_arr[0] = "Move Bugs";
+		$zook_arr[1] = "Assign";
+		$zook_arr[3] = "Resolve";
+		$zook_arr[4] = "Update Priority";
+		$zook_arr[4] = "Update Status";
+
+		$t_count = count( $zook_arr );
+		for ($i=0;$i<$t_count;$i++) {
+			PRINT "<option value=\"".ACTION."\">".$zook_arr[$i]."</option>";
+		}
+	}
+	# --------------------
 	###########################################################################
 	# String printing API
 	###########################################################################

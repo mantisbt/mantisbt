@@ -280,6 +280,12 @@
 <select name="f_project_id">
 <?php print_project_option_list() ?>
 </select>
+<!--
+# @@@ not functional yet
+<select name="f_action">
+<?php print_all_bug_action_option_list() ?>
+</select>
+-->
 <input type="submit" value="<?php echo $s_move_bugs ?>">
 </form>
 
