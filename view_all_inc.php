@@ -341,9 +341,11 @@
 		<?php
 			if ( $bugnote_count > 0 ) {
 				if ( $v_bugnote_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
-					echo '<span class="bold">'.$bugnote_count.'</span>';
+					echo '<span class="bold">';
+					echo '<a href="' . string_get_bug_view_url( $v_id ) . '#bugnotes">' . $bugnote_count . '</a>';
+					echo '</span>';
 				} else {
-					echo $bugnote_count;
+					echo '<a href="' . string_get_bug_view_url( $v_id ) . '#bugnotes">' . $bugnote_count . '</a>';
 				}
 			} else {
 				echo '&nbsp;';
