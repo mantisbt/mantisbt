@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.16 2003-02-21 00:32:38 vboctor Exp $
+	# $Id: obsolete.php,v 1.17 2003-03-05 05:29:08 vboctor Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -26,6 +26,22 @@
 	config_obsolete( 'assigned_color', 'status_colors' );
 	config_obsolete( 'resolved_color', 'status_colors' );
 	config_obsolete( 'closed_color', 'status_colors' );
+
+	config_obsolete( 'primary_table_tags', '' );
+	config_obsolete( 'background_color', '' );
+	config_obsolete( 'required_color', '' );
+	config_obsolete( 'table_border_color', '' );
+	config_obsolete( 'category_title_color', '' );
+	config_obsolete( 'primary_color1', '' );
+	config_obsolete( 'primary_color2', '' );
+	config_obsolete( 'form_title_color', '' );
+	config_obsolete( 'spacer_color', '' );
+	config_obsolete( 'menu_color', '' );
+	config_obsolete( 'fonts', '' );
+	config_obsolete( 'font_small', '' );
+	config_obsolete( 'font_normal', '' );
+	config_obsolete( 'font_large', '' );
+	config_obsolete( 'font_color', '' );
 
 	config_obsolete( 'notify_developers_on_new', 'notify_flags' );
 	config_obsolete( 'notify_on_new_threshold', 'notify_flags' );

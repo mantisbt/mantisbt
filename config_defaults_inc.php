@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.106 2003-02-26 16:40:40 jlatour Exp $
+	# $Id: config_defaults_inc.php,v 1.107 2003-03-05 05:29:08 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -526,10 +526,6 @@
 	# do NOT include href or img tags here
 	# do NOT include tags that have parameters (eg. <font face="arial">)
 	$g_html_valid_tags		= 'p, li, ul, ol, br, pre, i, b, u';
-
-	# --- table tags ------------------
-	# this is inserted into the outermost tables ( tags like border, cellspacing, etc)
-	$g_primary_table_tags	= '';
 
 	##########################
 	# Mantis HR Settings

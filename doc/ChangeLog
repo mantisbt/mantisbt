@@ -5,13 +5,15 @@ Mantis ChangeLog
  * Enhancement: Field names in bug history are now localized.
  * Fix: 'Display selected only' on print bugs page fixed.
  * Fix: 'Hide resolved' now also works for report printing and export.
+ * Fix #2626: $g_primary_table_tags is documented and in config files but never used 
+ * Fix #2839: 'Join incorrect in print_reporter_options and print_assign_to_option_list'
+
  * Fix #2902: Project name is not printed on bug list report.
  * Fix #3011: 'Hide resolved' flag is now preserved when re-sorting bug list.
  * Fix #3019: Application Error 200 after updating a bug.
  * Fix #3020: Error when deleting a bug with bugnotes.
  * Fix #3021: Error when using phpMailer.
  * Fix #3022: Add user to project form lists disabled users.
- * Fix #2839: 'Join incorrect in print_reporter_options and print_assign_to_option_list'
 
 2003.02.26  -  0.18.0a3
 
