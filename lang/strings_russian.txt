@@ -1,21 +1,4 @@
 <?php
-	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
-	# This program is distributed under the terms and conditions of the GPL
-	# See the README and LICENSE files for details
-
-	# Russian (Windows1251): Alexander Leschinsky aml@lair.pp.ru
-	# Russian (Windows1251): Alex Volkov, alex@volkov.ru
-	# -------------------------------------------------
-	# $Revision: 1.60 $
-	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:05 $
-	#
-	# $Id: strings_russian.txt,v 1.60 2004-07-18 15:22:05 vboctor Exp $
-	###########################################################################
-?>
-<?php
 # Charset
 $s_charset = 'windows-1251';
 
@@ -40,7 +23,7 @@ $s_print_all_bug_page_link = 'Печать отчетов';
 $s_csv_export = 'Экспорт в CSV';
 $s_login_anonymously = 'Войти анонимно';
 $s_anonymous = 'Аноним';
-$s_jump_to_bugnotes = 'К заметкам';
+$s_jump_to_bugnotes = 'Комментарии';
 $s_public_project_msg = 'Этот проект ОБЩЕДОСТУПНЫЙ. Все пользователи имеют доступ к этому проекту.';
 $s_private_project_msg = 'Этот проект ЧАСТНЫЙ. Только Администраторы и добавленные вручную пользователи имеют доступ.';
 $s_access_level_project = 'Уровень доступа к проекту';
@@ -52,7 +35,7 @@ $s_jump = 'Перейти';
 $s_copy_users = 'Копировать пользователей';
 $s_copy_categories_from = 'Копировать категории из';
 $s_copy_categories_to = 'Копировать категории в';
-$s_bug_history = 'История обращения';
+$s_bug_history = 'История';
 $s_field = 'Поле';
 $s_old_value = 'Старое значение';
 $s_new_value = 'Новое значение';
@@ -70,11 +53,11 @@ $s_bug_relationships = 'Связи';
 $s_empty_password_sure_msg = 'У пользователя пустой пароль. Вы уверены, что хотите этого?';
 $s_empty_password_button = 'Использовать пустой пароль';
 
-$s_duplicate_of = "имеет дубликаты";
-$s_has_duplicate = "дубликаты";
-$s_related_to = "связано с";
-$s_dependant_on = "родитель";
-$s_blocks = "блокирует";
+$s_duplicate_of = 'дубликат %id';
+$s_has_duplicate = 'имеет дубликат %id';
+$s_related_to = 'связан с %id';
+$s_dependant_on = 'зависит от %id';
+$s_blocks = 'блокирует %id';
 
 $s_new_bug = 'Новое обращение';
 $s_bugnote_added = 'Комментарий добавлен';
@@ -100,7 +83,7 @@ $s_bug_actiongroup_failed = 'У Вас недостаточно прав для выполнения этой операци
 $s_close_bugs_conf_msg = 'Вы уверены, что хотите закрыть эти обращения?';
 $s_delete_bugs_conf_msg = 'Вы уверены, что хотите удалить эти обращения?';
 $s_move_bugs_conf_msg = 'Перенести обрашения в';
-$s_copy_bugs_conf_msg = 'Копировать обрашения в';
+$s_copy_bugs_conf_msg = 'Копировать обращения в';
 $s_assign_bugs_conf_msg = 'Назначить обращения';
 $s_resolve_bugs_conf_msg = 'Выберите результат для обращений';
 $s_priority_bugs_conf_msg = 'Выберите приоритет обращений';
@@ -109,7 +92,7 @@ $s_view_status_bugs_conf_msg = 'Выберите режим доступа к обращениям';
 $s_close_group_bugs_button = 'Закрыть обращения' ;
 $s_delete_group_bugs_button = 'Удалить обращения' ;
 $s_move_group_bugs_button = 'Перенести обращения' ;
-$s_copy_group_bugs_button = Копировать обращения' ;
+$s_copy_group_bugs_button = 'Копировать обращения' ;
 $s_assign_group_bugs_button = 'Назначить обращения' ;
 $s_resolve_group_bugs_button = 'Решить обращения' ;
 $s_priority_group_bugs_button = 'Обновить приоритет' ;
@@ -208,19 +191,19 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Такая версия уже существует.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Версия не найдена.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Некорректное имя пользователя. Имена могут содержать только буквы, цифры, пробелы, дефисы и подчеркивания.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Пользователь не имеет требуемого уровня доступа';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Выбранное "Реальное имя" уже используется другим пользователем. Выберите другое имя';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Поддержка финансирования не разрешена.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Финансирующий %d не найдено.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Уровень финансирования (%s) меньше требуемого минимума (%s).';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Ответственный не имеет достаточного уровня доступа для обработки профинансированных обращений.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Доступ запрещен: Назначение профинансированных обращений требует более высокого уровня доступа.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Финансирующий обращение не может не иметь e-mail. Пожалуйста, обновите ваш профиль';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Параметр конфигурации "%s" имеет неправильное значение "%s"';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Действие не может быть произведено, потому что обращение \'%d\' в режиме RO';
-# MASC RELATIONSHIP
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "Между этими обращениями уже есть связь.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Связь не найдена.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Доступ запрещен: обращение %d требует более высокого уровня доступа.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Обращение не может быть связано с собой.";
-# MASC RELATIONSHIP
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "Связь не найдена";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Дрступ запрещен: обращение %d требует большего уровня доступа.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "обращение не может быть связано с собой";
 
 $s_login_error = 'ОШИБКА: Ваш бюджет может быть заблокирован или введенное имя пользователя/пароль неправильны.';
 $s_login_cookies_disabled = 'ОШИБКА: Ваш браузер или не знает как обрабатывать куки, или не принимает их.';
@@ -275,18 +258,16 @@ $s_email_notification_title_for_action_bug_submitted = 'Это обращение было ДОБАВ
 $s_email_notification_title_for_action_bug_assigned = 'Это обращение было НАЗНАЧЕНО.';
 $s_email_notification_title_for_action_bug_reopened = 'Это обращение было ОТКРЫТО ЗАНОВО.';
 $s_email_notification_title_for_action_bug_deleted = 'Это обращение было УДАЛЕНО';
-$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
+$s_email_notification_title_for_action_bug_updated = 'Это обращение было ОБНОВЛЕНО';
 $s_email_notification_title_for_action_sponsorship_added = 'Это обращение было ПРОФИНАНСИРОВАНО';
 $s_email_notification_title_for_action_sponsorship_updated = 'Финансирование этого обращения было изменено.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'Финансирование этого обращения отменено.';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'КОММЕНТАРИЙ был добавлен к этому обращению.';
-# MASC RELATIONSHIP
 $s_email_notification_title_for_action_relationship_added = "Новая СВЯЗЬ была добавлена к следующему обращению.";
 $s_email_notification_title_for_action_relationship_deleted = "СВЯЗЬ была удалена из следующего обращения.";
 $s_email_notification_title_for_action_relationship_child_resolved = "СВЯЗАННОЕ обращение было РЕШЕНО.";
-$s_email_notification_title_for_action_relationship_child_closed = "СВЯЗАННОЕ обращение было ЗАКРЫТО
-# MASC RELATIONSHIP
+$s_email_notification_title_for_action_relationship_child_closed = "СВЯЗАННОЕ обращение было ЗАКРЫТО.";
 
 $s_email_reporter = 'Добавлено';
 $s_email_handler = 'Назначено';
@@ -357,7 +338,7 @@ $s_prefs_updated_msg = 'Предпочтения были обновлены...';
 $s_profile_added_msg = 'Профиль добавлен...';
 
 # account_profile_delete.php
-$s_profile_deleted_msg = 'Профиль удален...';
+$s_profile_deleted_msg = 'Профил удален...';
 
 # account_profile_edit_page.php
 $s_edit_profile_title = 'Редактировать профиль';
@@ -372,7 +353,7 @@ $s_profile_defaulted_msg = 'Стандартный профиль обновлен...';
 # account_profile_manage_page.php
 $s_add_profile_title = 'Добавление профиля';
 $s_add_profile_button = 'Добавить профиль';
-$s_edit_or_delete_profiles_title = 'Редактирование или удаление профилей';
+$s_edit_or_delete_profiles_title = 'Редкатирование или удаление профилей';
 $s_edit_profile = 'Редактировать профиль';
 $s_make_default = 'Сделать стандартным';
 $s_delete_profile = 'Удалить профиль';
@@ -385,6 +366,7 @@ $s_profile_updated_msg = 'Профиль обновлен...';
 # account_update.php
 $s_account_updated_msg = 'Ваш бюджет успешно обновлен...';
 $s_email_updated = 'Email адрес успешно обновлен';
+$s_realname_duplicated = 'Реальное имя используется другим пользователем';
 $s_realname_updated = 'Настоящее имя успешно обновлено';
 $s_password_updated = 'Пароль успешно обновлен';
 
@@ -396,7 +378,7 @@ $s_bug_close_msg = 'Обращение было закрыто...';
 $s_close_immediately = 'Закрыть немедленно:';
 
 # bug_close_page.php
-$s_close_bug_title = 'Закрытие обращения';
+$s_close_bug_title = 'Закрытие обращение';
 
 # bug_delete.php
 $s_bug_deleted_msg = 'Обращение было удалено...';
@@ -616,7 +598,7 @@ $s_add_project_title = 'Добавить проект';
 $s_upload_file_path = 'Путь для загружаемых файлов';
 $s_add_project_button = 'Добавить проект';
 $s_projects_title = 'Проекты';
-$s_name = 'Название';
+$s_name = 'Названия';
 
 # manage_proj_update.php
 $s_project_updated_msg = 'Проект обновлен...';
@@ -634,7 +616,6 @@ $s_delete_version_button = 'Удалить версию';
 # manage_proj_version_edit_page.php
 $s_edit_project_version_title = 'Редактирование версий проекта';
 $s_update_version_button = 'Обновить версию';
-$s_released = 'Опубликована';
 
 # manage_proj_version_update.php
 $s_version_updated_msg = 'Версия обновлена...';
@@ -892,13 +873,13 @@ $s_query_delete_msg = 'Вы уверены, что хотите удалить этот запрос?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Простой просмотр';
-$s_viewing_bug_advanced_details_title = 'Просмотр расширенных сведений по обращению';
+$s_viewing_bug_advanced_details_title = 'Расширенный просмотр';
 $s_product_build = 'Подверсия продукта';
 $s_system_profile = 'Профиль системы';
 $s_update_bug_button = 'Обновить информацию';
 $s_bug_assign_to_button = 'Назначить:';
 $s_reopen_bug_button = 'Открыть повторно';
-$s_move_bug_button = 'Перенести';
+$s_move_bug_button = 'Перенести обращение';
 $s_attached_files = 'Присоединенные файлы';
 $s_publish = 'Опубликовать';
 $s_cached = 'Запомнен';
@@ -963,7 +944,7 @@ $s_hide_resolved = "Скрыть решенные";
 $s_and_above = 'И выше';
 $s_advanced_filters = 'Расширенные фильтры';
 $s_simple_filters = 'Простые фильтры';
-$s_monitored_by = 'Следят';
+$s_monitored_by = 'Следящие';
 
 $s_attachments = "attachment(s)";
 $s_attachment_alt = "A";
@@ -989,19 +970,20 @@ $s_changelog = 'Изменения';
 # Http auth
 $s_http_auth_realm = "Mantis Login";
 
-# MASC RELATIONSHIP
 $s_bug = "обращение";
 $s_add_new_relationship = "Новая связь";
 $s_add_new_relationship_button = "Добавить";
-$s_this_bug = "Выбранное обращение";
+$s_this_bug = "Активное обращение";
 $s_relationship_added = "Связь добавлена";
 $s_relationship_deleted = "Связь удалена";
 $s_delete_relationship_button = "Удалить";
 $s_delete_relationship_sure_msg = "Вы уверены, что хотите удалить эту связь?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Еще не все дочерние обращения решены или закрыты.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ВНИМАНИЕ!</b>. Не все дочерние обращения решены/закрыты .<br>До <b>решения/закрытия</b родительского обращения, все обращения, порожденные им, дожны быть решены или закрыты.";
-$s_create_child_bug_button = "Добавить потомка";
+$s_relationship_warning_blocking_bugs_not_resolved = "Не все дочерние обращения решены или закрыты.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ВНИМАНИЕ</b>. Не все потомки этого обращения решены или закрыты.<br>До <b>решения/закрытия</b> родительского обращения, все порожденные обращения должны быть решены или закрыты.";
+$s_create_child_bug_button = "Создать потомка";
 $s_bug_cloned_to = "Обращение клонировано";
 $s_bug_created_from = "Обращение создано из";
-# MASC RELATIONSHIP
+
+# Source Control Integration
+$s_checkin = 'Checkin';
 ?>
