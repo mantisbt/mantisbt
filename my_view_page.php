@@ -6,18 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.1 $
-	# $Author: vboctor $
-	# $Date: 2004-06-28 10:15:18 $
+	# $Revision: 1.2 $
+	# $Author: prichards $
+	# $Date: 2004-06-28 13:05:37 $
 	#
-	# $Id: my_view_page.php,v 1.1 2004-06-28 10:15:18 vboctor Exp $
+	# $Id: my_view_page.php,v 1.2 2004-06-28 13:05:37 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path . 'compress_api.php' );
 	require_once( $t_core_path . 'filter_api.php' );
 
@@ -72,7 +72,7 @@
 				echo '<tr><td valign="top" width="50%">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'my_view_inc_' . $t_box_title . '.php' );
 				echo '</td>';
-			} elseif (t_counter%2 == 0) {
+			} elseif ($t_counter%2 == 0) {
 				echo '<td valign="top" width="50%">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'my_view_inc_' . $t_box_title . '.php' );
 				echo '</td></tr>';
