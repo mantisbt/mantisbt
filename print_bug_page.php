@@ -308,7 +308,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 	<td class="print" colspan="5">
 		<?php
-			$query = "SELECT *
+			$query = "SELECT *, UNIX_TIMESTAMP(date_added) as date_added
 					FROM $g_mantis_bug_file_table
 					WHERE bug_id='$c_bug_id'";
 			$result = db_query( $query );
