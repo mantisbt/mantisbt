@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_assign_reporter.php,v 1.1 2004-02-08 15:56:34 jlatour Exp $
+	# $Id: bug_assign_reporter.php,v 1.2 2004-10-01 18:08:22 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,7 +23,6 @@
 	$f_bug_id = gpc_get_int( 'bug_id' );
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
-	access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id );
 
 	bug_assign( $f_bug_id, bug_get_field( $f_bug_id, 'reporter_id') );
 

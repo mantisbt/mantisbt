@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.214 2004-09-26 09:48:51 prichards Exp $
+	# $Id: config_defaults_inc.php,v 1.215 2004-10-01 18:08:23 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -784,6 +784,8 @@
 	$g_report_bug_threshold			= REPORTER;
 
 	# access level needed to update bugs (i.e., the update_bug_page)
+	#  This controls whether the user sees the "Update Bug" button in bug_view*_page
+	#  and the pencil icon in view_all_bug_page
 	$g_update_bug_threshold			= UPDATER;
 
 	# access level needed to monitor bugs

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.104 2004-10-01 16:57:49 thraxisp Exp $
+	# $Id: print_api.php,v 1.105 2004-10-01 18:08:23 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -323,7 +323,6 @@
 		# checking if it's per project or all projects
 		if ( ALL_PROJECTS == $p_project_id ) {
 			$t_adm = ADMINISTRATOR;
-			$t_dev = config_get( 'handle_bug_threshold' );
 			$t_pub = VS_PUBLIC;
 			$t_prv = VS_PRIVATE;
 
