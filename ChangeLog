@@ -14,10 +14,10 @@ To Do:
  * Force some sort of dialog when closing a bug (resolved)
  * Search bugs
  * Complex bug criteria searching
- * More documentation on installtion, configuration, and customization
  * Add glyphs and icons as optional display feature
+ * Add changed in last X hours option
+ * More documentation on installtion, configuration, and customization
  * Further document core_API.php
- * Add changed in last X minutes/hours/days option
 
 12.09.2000	-	0.10.3
 
@@ -35,6 +35,7 @@ To Do:
  * Added a confirmation before an admin can delete an account
  * Split manage user actions into separate files
  * Added several ; in core_API.php that caused errors on some servers
+ * Added view next/prev XYZ bugs on bug viewing page
 
 12.06.2000	-	0.10.2
 

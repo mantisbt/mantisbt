@@ -87,7 +87,7 @@
 	<td valign=top width=75% bgcolor=<? echo $g_white_color ?>>
 	<table width=100% align=center>
 	<tr>
-		<td bgcolor=<? echo $g_primary_color_dark ?>>
+		<td bgcolor=<? echo $g_primary_color_light ?>>
 			<? echo string_unsafe( $v3_note ) ?>
 		</td>
 	</tr>
