@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_update.php,v 1.36 2003-02-26 06:50:15 int2str Exp $
+	# $Id: bugnote_update.php,v 1.37 2003-02-26 08:23:57 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,7 +29,7 @@
 	$t_user_id = current_user_get_field( 'id' );
 	$t_bugnote_user = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 
-	if ( $t_user_id != $t_bugnote_user ) {
+	if ( ( $t_user_id != $t_bugnote_user ) || ( OFF == config_get( 'bugnote_allow_user_edit_delete' ) )) {
 		access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
 	}
 	

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.103 2003-02-25 15:48:04 int2str Exp $
+	# $Id: config_defaults_inc.php,v 1.104 2003-02-26 08:23:58 int2str Exp $
 	# --------------------------------------------------------
 
 	
@@ -618,8 +618,7 @@
 	# Add bugnote threshold
 	$g_add_bugnote_threshold = REPORTER;
 
-	# Update bugnote threshold (if the bugnote is not your own - users can
-	#  always update their own bugnotes)
+	# Update bugnote threshold (if the bugnote is not your own)
 	$g_update_bugnote_threshold = DEVELOPER;
 
 	# Add profile threshold
@@ -656,6 +655,9 @@
 	# Delete bugnote threshold
 	$g_delete_bugnote_threshold = $g_delete_bug_threshold;
 	
+	# Are users allowed to change and delete their own bugnotes?
+	$g_bugnote_allow_user_edit_delete = ON;
+
 	# Move bug threshold
 	$g_move_bug_threshold = DEVELOPER;
 

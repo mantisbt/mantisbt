@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.2 2003-02-23 12:44:40 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.3 2003-02-26 08:23:57 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -94,7 +94,7 @@
 			# bug must be open to be editable
 			if ( bug_get_field( $f_bug_id, 'status' ) < config_get( 'bug_resolved_status_threshold' ) ) {
 				if ( ( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) ||
-					( $v3_reporter_id == $t_user_id )) {
+					( ( $v3_reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
 					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );
 					print_bracket_link( 'bugnote_delete.php?bugnote_id='.$v3_id, lang_get( 'delete_link' ) );
 					if ( access_has_project_level( $g_private_bugnote_threshold ) ) {
