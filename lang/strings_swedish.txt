@@ -7,28 +7,28 @@
 
 	# Swedish: Ludvig Omholt, ludde@ludde.net
 	# -------------------------------------------------
-	# $Revision: 1.71 $
-	# $Author: vboctor $
-	# $Date: 2004-09-05 11:52:31 $
+	# $Revision: 1.72 $
+	# $Author: bigbadger $
+	# $Date: 2004-09-07 17:56:08 $
 	#
-	# $Id: strings_swedish.txt,v 1.71 2004-09-05 11:52:31 vboctor Exp $
+	# $Id: strings_swedish.txt,v 1.72 2004-09-07 17:56:08 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
 # Charset
-$s_charset = 'iso-8859-15';
+$s_charset = 'iso-8859-1';
 
 # Group commands menuitems
 $s_actiongroup_menu_move = 'Flytta';
-$s_actiongroup_menu_copy = 'Copy';
+$s_actiongroup_menu_copy = 'Kopiera';
 $s_actiongroup_menu_assign = 'Tilldela';
 $s_actiongroup_menu_close = 'Stäng';
 $s_actiongroup_menu_delete = 'Ta bort';
 $s_actiongroup_menu_resolve = 'Lös';
 $s_actiongroup_menu_update_priority = 'Uppdatera prioritet';
 $s_actiongroup_menu_update_status = 'Uppdatera status';
-$s_actiongroup_menu_update_view_status = 'Update View Status';
-$s_actiongroup_bugs = 'Selected Issues';
+$s_actiongroup_menu_update_view_status = 'Uppdatera vy-status';
+$s_actiongroup_bugs = 'Valda ärenden';
 
 # new strings:
 $s_all_projects = 'Alla Projekt';
@@ -39,11 +39,11 @@ $s_print_all_bug_page_link = 'Skriv ut rapporter';
 $s_csv_export = 'CSV export';
 $s_login_anonymously = 'Logga in anonymt';
 $s_anonymous = 'Anonym';
-$s_jump_to_bugnotes = 'Hoppa till ärendemeddelanden';
+$s_jump_to_bugnotes = 'Hoppa till meddelanden';
 $s_public_project_msg = 'Det här projektet är PUBLIKT.  Alla användare har tillgång till det här projektet.';
 $s_private_project_msg = 'Det här projektet är PRIVAT.  Endast administratörer och manuellt tillagda användare har tillgång.';
 $s_access_level_project = 'Projektets tillgångsnivå';
-$s_view_submitted_bug_link = 'Visa rapporterad ärenden';
+$s_view_submitted_bug_link = 'Visa rapporterat ärende';
 $s_assigned_projects = 'Tilldelade projekt';
 $s_unassigned_projects = 'Icke tilldelade projekt';
 $s_print = 'Skriv ut';
@@ -56,15 +56,15 @@ $s_field = 'Fält';
 $s_old_value = 'Gammalt värde';
 $s_new_value = 'Nytt värde';
 $s_date_modified = 'Ändrad datum';
-$s_bugnote = 'Ärendemeddelande';
+$s_bugnote = 'Meddelande';
 $s_change = 'Ändring';
-$s_bugnote_view_state = 'Ärendemeddelande visa status';
+$s_bugnote_view_state = 'Meddelande visa status';
 $s_bug_monitor = 'Ärendet övervakas';
 $s_bug_end_monitor = 'Ärendet övervakas ej';
 $s_announcement = 'Tillkännagivande';
 $s_stays_on_top = 'Stannar högt upp';
-$s_delete_bugnote_button = 'Ta bort ärendemeddelande';
-$s_delete_bugnote_sure_msg = 'Är du säker på att du vill ta bort detta ärendemeddelande?';
+$s_delete_bugnote_button = 'Ta bort meddelande';
+$s_delete_bugnote_sure_msg = 'Är du säker på att du vill ta bort detta meddelande?';
 $s_bug_relationships = 'Samband';
 $s_empty_password_sure_msg = 'Användaren har ett tomt lösenord.  Är du säker på att detta är vad du vill?';
 $s_empty_password_button = 'Använd tomt lösenord';
@@ -76,16 +76,16 @@ $s_dependant_on = 'beroende av %id';
 $s_blocks = 'blockerar %id';
 
 $s_new_bug = 'Nytt ärende';
-$s_bugnote_added = 'La till buggmeddelande';
-$s_bugnote_edited = 'Ärendemeddelandet ändrat';
-$s_bugnote_deleted = 'Tog bort Ärendemeddelande';
+$s_bugnote_added = 'Meddelande tillagt';
+$s_bugnote_edited = 'Meddelandet har ändrats';
+$s_bugnote_deleted = 'Meddelande har tagits bort';
 $s_summary_updated = 'Sammanfattning ändrad';
 $s_description_updated = 'Beskrivning ändrad';
 $s_additional_information_updated = 'Ytterligare information ändrad';
-$s_steps_to_reproduce_updated = 'Steg för att reproducera ändrad';
-$s_file_added = 'La till fil: ';
-$s_file_deleted = 'Raderade fil: ';
-$s_bug_deleted = 'Ärendet raderat';
+$s_steps_to_reproduce_updated = 'Steg för att reproducera har ändrats';
+$s_file_added = 'Lagt till fil: ';
+$s_file_deleted = 'Raderat fil: ';
+$s_bug_deleted = 'Ärendet har raderats';
 
 $s_make_private = 'Gör privat';
 $s_make_public = 'Gör publik';
@@ -96,17 +96,17 @@ $s_login_link = 'Logga in';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Du hade inte tillräckliga rättigheter för att ändra följande ärenden: ';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_access = 'Du hade inte tillräckliga rättigheter för att utföra åtgärden.';
+$s_bug_actiongroup_status = 'Detta ärende kan inte ändras till den valda statusen.';
 $s_close_bugs_conf_msg = 'Är du säker på att du vill stänga dessa ärenden?';
 $s_delete_bugs_conf_msg = 'Är du säker på att du vill ta bort dessa ärenden?';
-$s_move_bugs_conf_msg = 'Flytta buggar till';
-$s_copy_bugs_conf_msg = 'Copy issues to';
+$s_move_bugs_conf_msg = 'Flytta ärenden till';
+$s_copy_bugs_conf_msg = 'Kopiera ärenden till';
 $s_assign_bugs_conf_msg = 'Tilldela ärenden till';
 $s_resolve_bugs_conf_msg = 'Välj hur ärendena har lösts';
-$s_priority_bugs_conf_msg = 'Välj prioritet för ärenden';
-$s_status_bugs_conf_msg = 'Välj status för ärenden';
-$s_view_status_bugs_conf_msg = 'Choose issues view status';
+$s_priority_bugs_conf_msg = 'Välj prioritet för ärendena';
+$s_status_bugs_conf_msg = 'Välj status för ärendena';
+$s_view_status_bugs_conf_msg = 'Välj vy-status för ärenden';
 $s_close_group_bugs_button = 'Stäng ärenden' ;
 $s_delete_group_bugs_button = 'Ta bort ärenden' ;
 $s_move_group_bugs_button = 'Flytta ärenden' ;
@@ -115,28 +115,28 @@ $s_assign_group_bugs_button = 'Tilldela ärenden' ;
 $s_resolve_group_bugs_button = 'Lös ärenden' ;
 $s_priority_group_bugs_button = 'Uppdatera prioritet' ;
 $s_status_group_bugs_button = 'Uppdatera status' ;
-$s_view_status_group_bugs_button = 'Update View Status';
+$s_view_status_group_bugs_button = 'Uppdatera vy-status';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Synthesis graphs by status' ;
-$s_graph_imp_priority_title = 'Synthesis graphs by priority' ;
-$s_graph_imp_severity_title = 'Synthesis graphs by severity';
-$s_graph_imp_category_title = 'Synthesis graphs by category';
-$s_graph_imp_resolution_title = 'Synthesis graphs by resolution';
-$s_by_status_pct = 'by status percentage';
-$s_by_priority_pct = 'by priority percentage';
-$s_by_severity_pct = 'by severity percentage';
-$s_by_category_pct = 'by category percentage';
-$s_by_resolution_pct = 'by resolution percentage';
-$s_by_severity_mix = 'by severity and status';
-$s_by_priority_mix = 'by priority and status';
-$s_by_resolution_mix = 'by resolution and status';
-$s_synthesis_link = 'Synthesis';
-$s_status_link = 'Per state';
-$s_priority_link = 'Per priority';
-$s_severity_link = 'Per severity';
-$s_category_link = 'Per category';
-$s_resolution_link = 'Per resolution';
+$s_graph_imp_status_title = 'Sammanfattningsgraf - status' ;
+$s_graph_imp_priority_title = 'Sammanfattningsgraf - prioritet' ;
+$s_graph_imp_severity_title = 'Sammanfattningsgraf - allvarlighet';
+$s_graph_imp_category_title = 'Sammanfattningsgraf - kategori';
+$s_graph_imp_resolution_title = 'Sammanfattningsgraf - lösning';
+$s_by_status_pct = 'status (%)';
+$s_by_priority_pct = 'prioritet (%)';
+$s_by_severity_pct = 'allvarlighetsgrad (%)';
+$s_by_category_pct = 'kategori (%)';
+$s_by_resolution_pct = 'lösning (%)';
+$s_by_severity_mix = 'allvarlighet och status';
+$s_by_priority_mix = 'prioritet och status';
+$s_by_resolution_mix = 'lösning och status';
+$s_synthesis_link = 'Sammanfattnings';
+$s_status_link = 'Per tillstånd';
+$s_priority_link = 'Per prioritet';
+$s_severity_link = 'Per allvarlighet';
+$s_category_link = 'Per kategori';
+$s_resolution_link = 'Per lösning';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'Visa bara valda';
@@ -146,9 +146,9 @@ $s_printing_preferences_title = 'Välj fält att skriva ut';
 $s_printing_options_link = 'Utskriftsinställningar';
 
 # word and excel export
-$s_bugnote_title = 'Hanterare för ärendemeddelande' ;
-$s_bugnote_date = 'Datum för ärendemeddelande';
-$s_bugnote_description = 'Beskrivning av ärendemeddelande';
+$s_bugnote_title = 'Hanterare för meddelande' ;
+$s_bugnote_date = 'Datum för meddelande';
+$s_bugnote_description = 'Beskrivning av meddelande';
 
 $s_error_no_proceed = 'Använd "back"-knappen i din webbläsare för att återgå till föregående sida. Där kan du rätta de fel som uppstått. Du kan också välja att gå direkt till en annan sida via någon av länkarna i menyn.';
 
@@ -158,47 +158,47 @@ $MANTIS_ERROR[ERROR_SQL] = 'FEL: Ett SQL-fel uppstod.  Var god rapportera detta 
 $MANTIS_ERROR[ERROR_REPORT] = 'FEL: Det fanns ett fel i din rapport.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'FEL: Ingen fil angiven';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED]    = 'FEL: Filtypen är inte tillåten';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEL: Katalogen finns inte. Var god kontrollera projetinställningarna.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'FEL: Katalogen finns inte. Var god kontrollera projektinställningarna.';
 $MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'FEL: Filen finns redan.  Var god ta bort den andra filen först.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT]  = 'FEL: Ett projekt med det namnet finns redan.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'FEL: Ett obligatoriskt fält var tomt.  Var god försök igen.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT]  = 'FEL: Detta konto är skyddat.  Du har inte tillgång till det innan skyddet är borttaget.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED]      = 'FEL: Åtkomst nekas.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'FEL: Skicka fil misslyckades.  Be din administratör köra skriptet admin_check för att se vad som är fel.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'FEL: Skicka fil misslyckades.  Det beror troligen på att filen var större än vad denna PHP-installation tillåter.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE]     = 'FEL: Skickning av filen misslyckades.  Be din administratör köra skriptet admin_check för att se vad som är fel.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG]       = 'FEL: Skickning av filen misslyckades.  Det beror troligen på att filen var större än vad denna PHP-installation tillåter.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND]  = 'FEL: Ett obligatoriskt värde för den här sidan saknas.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used.  Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%s\' not found.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%s\' not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FEL: Ärendemeddelandet saknas.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Användarnamnet finns redan. Var vänlig och välj ett annat användarnamn.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsvalet \'%s\' kunde inte hittas.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strängen \'%s\' kunde inte hittas.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'FEL: meddelandet saknas.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'FEL: Projektet saknas.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'FEL: Databasfältet saknas.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR]	= 'FEL: Kan inte ansluta till FTP-servern.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'FEL: Ett projekt med det namnet finns redan.  Gå tillbaka och välj ett annat.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified.  Project names cannot be blank.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Felaktigt projektname specificerades.  Projektnamn kan inte var tomma.';
 $MANTIS_ERROR[ERROR_USER_NOT_FOUND]	= 'FEL: Användaren finns inte.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid.  Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Inloggningsinformationen som din webbläsare har sparat är ogiltig. Ditt användarekonto har kanske tagits bort?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Användarinställningar kunde inte hittas för detta användarkonto.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND]	= 'FEL: Hittar inte nyheten.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FEL: En array förväntades men fick en sträng.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'FEL: Ärende kan inte hittas.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lösenordet stämmer inte med verifikationen.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'FEL: En array förväntades men en sträng mottogs.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En sträng förväntades med en array mottogs.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'FEL: Ärendet kan inte hittas.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID]	= 'FEL: Ogiltig e-postadress.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilen kan inte hittas.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED]	= 'FEL: Filtypen är inte tillåten.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE]	= 'FEL: Filen finns redan.  Var god ta bort den andra filen först.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'FEL: Ogiltig sökväg för skickade filer.  Katalogen finns inte eller är inte skrivbar av webservern.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF]	= 'FEL: Kan inte ange ett ärende som kopia av sig själv.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Det egendefinierade fältet kunde inte hittas.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Detta namnet är inte unikt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Fältet används av åtminstone ett annat projekt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'FEL: Ogiltigt fältvärde';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Felaktig definition av egendefinierat fält';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED]	= 'FEL: LDAP Autentisiering Misslyckades,';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'FEL: LDAP Uppdatering misslyckades.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Anslutningen till LDAP-servern misslyckades';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED]	= 'FEL: LDAP uppdatering misslyckades.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP förteckning över användaren kunde inte hittas.';
 $MANTIS_ERROR[ERROR_DB_CONNECT_FAILED]	= 'FEL: Kan inte ansluta till databasen.';
 $MANTIS_ERROR[ERROR_DB_QUERY_FAILED]	= 'FEL: Databasfråga misslyckades.';
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED]	= 'FEL: Databassökning misslyckades.';
@@ -210,28 +210,28 @@ $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND]  = 'FEL: Versionen finns inte.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID]  = 'FEL: Användarnamnet är ogiltigt.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Användaren har inte tillräcklig behörighet.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %d not found.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%s) is below minimum amount (%s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%s\' has invalid value \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERROR: There is already a relationship between these two issues.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERROR: Relationship not found.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Access denied: The issue %d requires higher access level.";
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "An issue can't be related to itself.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorstöd är ej påslaget.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsor %d kunde inte hittas.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsring (%s) är mindre än minimalbelopp (%s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Hanteraren har inte rättigheter att hantera sponsrade ärenden.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Åtkomst nekad: tilldelning av sponsrade ärenden kräver högre rättigheter.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsorn har inte angett någon e-postadress. Var vänlig och uppdatera din profil.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Inställningsval \'%s\' har ett ogiltigt värde \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Valet kan inte utföras eftersom ärendet \'%d\' är skrivskyddat.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "FEL: Det finns redan en relation mellan dessa ärenden.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "FEL: Relationen kunde inte hittas.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "Åtkomst nekad: Ärendet %d kräver högre användarrättigheter.";
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "Ett ärende kan inte ha en relation till sig själv.";
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Verifieringshashsumman överenstämmer inte. Var vänlig och försök igen.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funktionalitet för borttappat lösenord är inte tillgänglig.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du måste ange en e-postadress för att kunna återställa lösenordet';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Den angivna informationen överensstämmer inte med något användarkonto!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL:en är ogiltig för verfiering eller används redan. Var vänlig och ansök igen.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max antal samtidiga förfrågningar har uppnåtts. Var vänlig kontakta din systemadministratör.';
 
-#$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
+#$s_login_error = 'Ditt konto kan ha blivit avstängt (p.g.a. för många misslyckade inloggningsförsök) eller så stämmer inte det angivna användarnamnet/lösenordet.';
 $s_login_error = 'FEL: ditt användarkonto kan vara avstängt eller så har du angivit ett felaktigt användarnamn eller lösenord.';
-$s_login_cookies_disabled = 'FEL: Din bläddrare kan inte hantera cookies eller vägrar använda dem.';
+$s_login_cookies_disabled = 'FEL: Din webb-läsare kan inte hantera cookies eller vägrar använda dem (det kan vara avstängt).';
 
 # General Strings
 $s_go_back = 'Gå tillbaks';
@@ -240,10 +240,10 @@ $s_proceed = 'Klicka här för att fortsätta';
 $s_switch = 'Byt';
 $s_logged_in_as = 'Inloggad som';
 
-$s_prefix_for_deleted_users = 'user';
+$s_prefix_for_deleted_users = 'användare';
 
 $s_administrator = 'administratör';
-$s_myself = "Myself";
+$s_myself = "Mig själv";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:läsare,25:rapporterare,40:uppdaterare,55:utvecklare,70:projektledare,90:administratör';
@@ -260,53 +260,53 @@ $s_projection_enum_string         = '10:ingen,30:tweak,50:mindre fix,70:omfattan
 $s_eta_enum_string                = '10:ingen,20:< 1 dag,30:2-3 dagar,40:< 1 vecka,50:< 1 månad,60:> 1 månad';
 
 # Email Strings
-$s_new_account_subject = 'Account registration';
-$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
-$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_subject = 'Registrering av användarkonto';
+$s_new_account_greeting = 'Tack för din registrering. Ditt användarnamn är \'';
+$s_new_account_greeting2 = '\'. För att fullborda din registrering så måste du gå till följande webbadress (tänk på att skriva hela adressen på en rad) och välja ett lösenord:';
 $s_new_account_username = 'Användarnamn: ';
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
-$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
-$s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
-$s_new_account_signup_msg = 'The following account has been created:';
+$s_new_account_message = 'Om du inte har gjort denna registrering, ignorera då detta meddelande så kommer ingenting att hända.' . "\n\n";
+$s_new_account_do_not_reply = 'DETTA ÄR ETT AUTOGENERERAT MEDDELANDE, VAR VÄNLIG OCH SVARA INTE PÅ DET';
+$s_new_account_email = 'E-post: ';
+$s_new_account_IP = 'Din IP-adress:';
+$s_new_account_signup_msg = 'Följande användarkonto har skapats:';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
+$s_reset_request_msg = 'Någon (troligtvis du) har begärt en ändring av lösenordet genom e-postverifikation. Om det inte var du, ignorera då detta meddelande så kommer inget att hända.' . "\n\n" . 'Om du begärde denna verifikation, gå till följande webbadress för att ändra ditt lösenord:';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 
 $s_email_notification_title_for_status_bug_feedback = 'Följande ärende kräver din ÅTERKOPPLING.';
-$s_email_notification_title_for_status_bug_acknowledged = 'Följande ärende har blivit GODKÄNT.';
-$s_email_notification_title_for_status_bug_confirmed = 'Följande ärende har blivit BEKRÄFTAT.';
-$s_email_notification_title_for_status_bug_assigned = 'Följande ärende har blivit TILLDELAT.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Följande ärende har blivit GODKÄND.';
+$s_email_notification_title_for_status_bug_confirmed = 'Följande ärende har blivit BEKRÄFTAD.';
+$s_email_notification_title_for_status_bug_assigned = 'Följande ärende har blivit TILLDELAD.';
 $s_email_notification_title_for_status_bug_resolved = 'Följande ärende har blivit LÖST.';
-$s_email_notification_title_for_status_bug_closed = 'Följande ärende har blivit STÄNGT.';
+$s_email_notification_title_for_status_bug_closed = 'Följande ärende har blivit STÄNGD.';
 
-$s_email_notification_title_for_action_bug_submitted = 'Följande ärende har blivit RAPPORTERAT.';
-$s_email_notification_title_for_action_bug_assigned = 'Följande ärende har blivit TILLDELAT.';
-$s_email_notification_title_for_action_bug_reopened = 'Följande ärende har blivit ÅTERÖPPNAT.';
-$s_email_notification_title_for_action_bug_deleted = 'Följande ärende har blivit RADERAT.';
-$s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
-$s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
-$s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
+$s_email_notification_title_for_action_bug_submitted = 'Följande ärende har blivit RAPPORTERAD.';
+$s_email_notification_title_for_action_bug_assigned = 'Följande ärende har blivit TILLDELAD.';
+$s_email_notification_title_for_action_bug_reopened = 'Följande ärende har blivit ÅTERÖPPNAD.';
+$s_email_notification_title_for_action_bug_deleted = 'Följande ärende har blivit RADERAD.';
+$s_email_notification_title_for_action_bug_updated = 'Följande ärende har blivit UPPDATERAD.';
+$s_email_notification_title_for_action_sponsorship_added = 'Följande ärende har blivit SPONSRAT.';
+$s_email_notification_title_for_action_sponsorship_updated = 'En sponsring av följande ärende har ändrats.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'En sponsring av följande ärende har tagits tillbaka.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'Ett ÄRENDEMEDDELANDE har lagts till dette ärende.';
-$s_email_notification_title_for_action_relationship_added = "A new RELATIONSHIP has been added to the following issue.";
-$s_email_notification_title_for_action_relationship_deleted = "A RELATIONSHIP has been deleted from the following issue.";
-$s_email_notification_title_for_action_relationship_child_resolved = "A RELATED issue has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "A RELATED issue has been CLOSED.";
+$s_email_notification_title_for_action_bugnote_submitted = 'Ett MEDDELANDE har lagts till detta ärende.';
+$s_email_notification_title_for_action_relationship_added = "En ny REALTION har lagts till detta ärende.";
+$s_email_notification_title_for_action_relationship_deleted = "En RELATION har tagits bort från detta ärende.";
+$s_email_notification_title_for_action_relationship_child_resolved = "Ett RELATERAT ärende har blivit LÖST.";
+$s_email_notification_title_for_action_relationship_child_closed = "Ett RELATERAT ärende har STÄNGTS.";
 
 $s_email_reporter = 'Rapporterare';
 $s_email_handler = 'Ansvarig';
 $s_email_project = 'Projekt';
-$s_email_bug = 'Ärende ID';
+$s_email_bug = 'Ärende-ID';
 $s_email_category = 'Kategori';
 $s_email_reproducibility = 'Reproducerbarhet';
 $s_email_severity = 'Allvarlighetsgrad';
 $s_email_priority = 'Prioritet';
 $s_email_status = 'Status';
-$s_email_resolution = 'Resolution';
+$s_email_resolution = 'Lösning';
 $s_email_duplicate = 'Kopia av';
-$s_email_fixed_in_version = 'Fixed in Version';
+$s_email_fixed_in_version = 'Fixad i version';
 $s_email_date_submitted = 'Inlagd datum';
 $s_email_last_modified = 'Senast ändrad';
 $s_email_summary =  'Sammanfattning';
@@ -321,12 +321,12 @@ $s_confirm_delete_msg = 'Är du säker på att du vill ta bort ditt konto?';
 $s_delete_account_button = 'Ta bort konto';
 
 # account_page.php
-$s_manage_profiles_link = 'Hantera Profiler';
+$s_manage_profiles_link = 'Hantera profiler';
 $s_change_preferences_link = 'Ändra inställningar';
 $s_edit_account_title = 'Ändra konto';
 $s_username = 'Användarnamn';
-$s_realname = 'Real Name';
-$s_email = 'Epost';
+$s_realname = 'Riktigt namn';
+$s_email = 'E-post';
 $s_password = 'Lösenord';
 $s_confirm_password  = 'Bekräfta lösenord';
 $s_access_level = 'Tillgångsnivå';
@@ -340,20 +340,20 @@ $s_advanced_view = 'Avancerad visning';
 $s_advanced_update = 'Avancerad uppdatering';
 $s_refresh_delay = 'Uppdateringsfördröjning';
 $s_redirect_delay = 'Omdirigeringsfördröjning';
-$s_with_minimum_severity = 'With Mimimum Severity of';
-$s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
-$s_email_on_new = 'Epost vid ny';
-$s_email_on_assigned = 'Epost vid tilldelning';
-$s_email_on_feedback = 'Epost vid återkoppling';
-$s_email_on_resolved = 'Epost om löst';
-$s_email_on_closed = 'Epost om stängd';
-$s_email_on_reopened = 'Epost om återöppnad';
-$s_email_on_bugnote_added = 'Epost vid nytt ärendemeddelande';
-$s_email_on_status_change = 'Epost vid statusändring';
-$s_email_on_priority_change = 'Epost vid prioriteringsändring';
-$s_email_bugnote_limit = 'Email Bugnotes Limit';
+$s_with_minimum_severity = 'Med lägsta allvarlighetsgrad';
+$s_bugnote_order = 'Sorteringsordning för meddelanden';
+$s_bugnote_order_asc = 'Stigande';
+$s_bugnote_order_desc = 'Fallande';
+$s_email_on_new = 'E-post vid ny';
+$s_email_on_assigned = 'E-post vid tilldelning';
+$s_email_on_feedback = 'E-post vid återkoppling';
+$s_email_on_resolved = 'E-post om löst';
+$s_email_on_closed = 'E-post om stängd';
+$s_email_on_reopened = 'E-post om återöppnad';
+$s_email_on_bugnote_added = 'E-post vid nytt meddelande';
+$s_email_on_status_change = 'E-post vid statusändring';
+$s_email_on_priority_change = 'E-post vid prioriteringsändring';
+$s_email_bugnote_limit = 'Meddelandegräns för E-post';
 $s_language = 'Språk';
 $s_update_prefs_button = 'Uppdatera inställningar';
 $s_reset_prefs_button = 'Nollställ inställningar';
@@ -371,7 +371,7 @@ $s_profile_added_msg = 'La till profil...';
 $s_profile_deleted_msg = 'Tog bort profil...';
 
 # account_profile_edit_page.php
-$s_edit_profile_title = 'Redigera profile';
+$s_edit_profile_title = 'Redigera profil';
 $s_platform = 'Plattform';
 $s_operating_system = 'Operativsystem';
 $s_additional_description = 'Ytterligare information';
@@ -395,25 +395,25 @@ $s_profile_updated_msg = 'Profil uppdaterad...';
 
 # account_update.php
 $s_account_updated_msg = 'Ditt konto har uppdaterats...';
-$s_email_updated = 'Epostadressen har uppdaterats';
-$s_realname_duplicated = 'Real name is used by another user';
-$s_realname_updated = 'Real name successfully updated';
+$s_email_updated = 'E-postadressen har uppdaterats';
+$s_realname_duplicated = 'Riktigt namn används av en annan användare';
+$s_realname_updated = 'Riktigt namn har uppdaterats';
 $s_password_updated = 'Lösenordet har uppdaterats';
 
 # bug_assign.php
 $s_bug_assign_msg       = 'Ärendet har tilldelats...';
 
 # bug_change_status_page.php
-$s_new_bug_title = 'New Issue';
-$s_feedback_bug_title = 'Provide Feedback to Issue';
-$s_acknowledged_bug_title = 'Acknowledge Issue';
-$s_confirmed_bug_title = 'Confirm Issue';
-$s_assigned_bug_title = 'Assign Issue';
-$s_new_bug_button = 'New Issue';
-$s_feedback_bug_button = 'Provide Feedback';
-$s_acknowledged_bug_button = 'Acknowledge Issue';
-$s_confirmed_bug_button = 'Confirm Issue';
-$s_assigned_bug_button = 'Assign Issue';
+$s_new_bug_title = 'Nytt ärende';
+$s_feedback_bug_title = 'Skriv återkoppling till ärende';
+$s_acknowledged_bug_title = 'Acceptera ärende';
+$s_confirmed_bug_title = 'Bekräfta ärende';
+$s_assigned_bug_title = 'Tilldela ärende';
+$s_new_bug_button = 'Nytt ärende';
+$s_feedback_bug_button = 'Tillför återkoppling';
+$s_acknowledged_bug_button = 'Acceptera ärende';
+$s_confirmed_bug_button = 'Bekräfta ärende';
+$s_assigned_bug_button = 'Tilldela ärende';
 
 # bug_close.php
 $s_bug_close_msg       = 'Ärendet har stängts...';
@@ -430,11 +430,11 @@ $s_delete_bug_sure_msg = 'Är du säker på att du vill ta bort det här ärendet?';
 $s_delete_bug_button = 'Ta bort ärende';
 
 # bug_monitor.php
-$s_monitor_bug_button = 'Övervaka ärenden';
+$s_monitor_bug_button = 'Övervaka ärendet';
 $s_unmonitor_bug_button = 'Sluta övervaka ärendet';
 
 # bug_file_add.php
-$s_file_upload_msg = 'Skicka fil lyckades';
+$s_file_upload_msg = 'Filskickningen lyckades';
 
 # bug_file_upload_inc.php
 $s_upload_file = 'Skicka upp fil';
@@ -443,18 +443,18 @@ $s_upload_file_button = 'Skicka fil';
 $s_max_file_size = 'Max storlek';
 
 # bug_reopen.php
-$s_bug_reopened_msg = 'Buggen har återöppnats...';
-$s_reopen_add_bugnote_title = 'Lägg till ärendemeddelande om anledning till återöppning';
-$s_bugnote_add_reopen_button = 'Lägg till ärendemeddelande och återöppna bug';
+$s_bug_reopened_msg = 'Ärendet har återöppnats...';
+$s_reopen_add_bugnote_title = 'Lägg till meddelande om anledning till återöppning';
+$s_bugnote_add_reopen_button = 'Lägg till meddelande och återöppna ärende';
 
 # bug_resolve_page.php
 $s_resolved_bug_title = 'Lös ärende';
 $s_resolved_bug_button = 'Lös ärende';
 
 # bug_resolve_page2.php
-$s_bug_resolved_msg = 'Ärendet har lösts. Skriv ärendemeddelande nedan...';
-$s_resolve_add_bugnote_title = 'Lägg till ärendemeddelande om anledning till lösning';
-$s_bugnote_add_resolve_button = 'Lägg till ärendemeddelande och lös ärende';
+$s_bug_resolved_msg = 'Ärendet har lösts. Skriv meddelande nedan...';
+$s_resolve_add_bugnote_title = 'Lägg till meddelande om anledning till lösning';
+$s_bugnote_add_resolve_button = 'Lägg till meddelande och lös ärende';
 
 # bug_reminder_page.php
 $s_from = 'Från';
@@ -482,16 +482,16 @@ $s_last_update = 'Senaste uppdatering';
 $s_reporter = 'Rapporterad av';
 $s_assigned_to = 'Tilldelad till';
 $s_priority = 'Prioritet';
-$s_resolution = 'Resolution';
+$s_resolution = 'Lösning';
 $s_status = 'Status';
 $s_duplicate_id = 'Kopia av';
 $s_os = 'OS';
 $s_projection = 'Omfattning';
-$s_os_version = 'OS-Version';
+$s_os_version = 'OS-version';
 $s_eta = 'Tidsuppskattning';
 $s_product_version = 'Produktversion';
-$s_build = 'Bygge';
-$s_fixed_in_version = 'Fixed in Version';
+$s_build = 'Byggnummer';
+$s_fixed_in_version = 'Rättad i version';
 $s_votes = 'Röster';
 $s_summary = 'Sammanfattning';
 $s_description = 'Beskrivning';
@@ -506,25 +506,25 @@ $s_updating_bug_simple_title = 'Uppdaterar ärendeinformation';
 $s_vote_added_msg = 'Röst har lagts till...';
 
 # bugnote_add.php
-$s_bugnote_added_msg = 'La till ärendemeddelande...';
+$s_bugnote_added_msg = 'La till meddelande...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Ärendemeddelandet har raderats...';
-$s_bug_notes_title = 'Ärendemeddelanden';
+$s_bugnote_deleted_msg = 'Meddelandet har raderats...';
+$s_bug_notes_title = 'Meddelanden';
 
 # bugnote_edit_page.php
-$s_edit_bugnote_title = 'Redigera ärendemeddelande';
+$s_edit_bugnote_title = 'Redigera meddelande';
 
 # bugnote_inc.php
-$s_no_bugnotes_msg = 'Det finns inga ärendemeddelanden kopplade till detta ärende.';
+$s_no_bugnotes_msg = 'Det finns inga meddelanden kopplade till detta ärende.';
 $s_delete_link = 'Ta bort';
-$s_add_bugnote_title = 'Lägg till ärendemeddelande';
-$s_add_bugnote_button = 'Lägg till ärendemeddelande';
+$s_add_bugnote_title = 'Lägg till meddelande';
+$s_add_bugnote_button = 'Lägg till meddelande';
 $s_bugnote_edit_link = 'Redigera';
 $s_closed_bug_button = 'Stäng ärende';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'Ärendemeddelandet har uppdaterats...';
+$s_bugnote_updated_msg = 'Meddelandet har uppdaterats...';
 $s_edited_on = 'redigerad: ';
 
 # index.php
@@ -534,13 +534,13 @@ $s_click_to_login = 'Klicka här för att logga in';
 
 # login_page.php
 #@@@ should the following string be related to $g_window_title?
-$s_login_page_info = 'Välkommen till ärendehanteraren.';
+$s_login_page_info = 'Välkommen till hanteraren.';
 $s_login_title = 'Logga in';
 $s_save_login = 'Spara inloggning';
 $s_choose_project = 'Välj projekt';
 $s_login_button = 'Logga in';
 $s_signup_link = 'skapa ett nytt konto';
-$s_lost_password_link = 'Lost your password?';
+$s_lost_password_link = 'Förlorat ditt lösenord?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Välj projekt';
@@ -550,11 +550,11 @@ $s_logged_out_title = 'Utloggad...';
 $s_redirecting = '...Omdirigerar';
 $s_here = 'Här';
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = "Återställning av lösenord";
+$s_lost_password_done_title = "E-post med lösenord har skickats";
+$s_lost_password_subject = "Lösenord återställt";
+$s_lost_password_info = "För att återställa det förlorade lösenordet, var vänlig ange användarnamn och e-postadress för kontot.<br/><br/>Om informationen motsvarar ett giltigt konto kommer du att via e-post bli tillsänd en webbadress som innehåller en verifieringskod för ditt konto. Var vänligt följ länken för att ändra ditt lösenord.";
+$s_lost_password_confirm_hash_OK = "Din bekräftelse har accepterats. Var vänlig och uppdatera ditt lösenord.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Öppna och tilldelade till mig';
@@ -605,7 +605,7 @@ $s_category_added_msg = 'Kategorin har lagts till...';
 $s_category_deleted_msg = 'Kategorin har tagits bort...';
 
 # manage_proj_category_delete_page.php
-$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin? Alla associerade ärenderapporter kommer att tas bort.';
+$s_category_delete_sure_msg = 'Är du säker på att du vill ta bort den här kategorin? Alla associerade rapporter kommer att tas bort.';
 $s_delete_category_button = 'Ta bort kategori';
 
 # manage_proj_category_edit_page.php
@@ -619,7 +619,7 @@ $s_category_updated_msg = 'Kategorin har uppdaterats...';
 $s_project_deleted_msg = 'Projektet har tagits bort...';
 
 # manage_proj_delete_page.php
-$s_project_delete_msg = 'Är du säker på att du vill ta bort det här projektet och alla dess ärenderapporter?';
+$s_project_delete_msg = 'Är du säker på att du vill ta bort det här projektet och alla dess rapporter?';
 $s_project_delete_button = 'Ta bort projektet';
 
 # manage_proj_edit_page.php
@@ -658,7 +658,7 @@ $s_version_added_msg = 'La till version...';
 $s_version_deleted_msg = 'Tog bort version...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Är du säker på att du vill ta bort versionen? Alla associerade ärenderapporter kommer att tas bort.';
+$s_version_delete_sure = 'Är du säker på att du vill ta bort versionen? Alla associerade rapporter kommer att tas bort.';
 $s_delete_version_button = 'Ta bort versionen';
 
 # manage_proj_version_edit_page.php
@@ -685,13 +685,13 @@ $s_confirm_account_pruning = 'Är du säker på att du vill ta bort äldre konton so
 $s_edit_user_title = 'Redigera användarkonto';
 $s_reset_password_button = 'Nollställ lösenord';
 $s_delete_user_button = 'Ta bort kontot';
-$s_reset_password_msg = 'Nollställ lösenord sätter ett slumpgenererat lösenord.';
-$s_reset_password_msg2 = 'Nollställ lösenordet sätter ett tomt lösenord.';
-$s_show_all_users = 'ALL';
+$s_reset_password_msg = 'Nollställ lösenord skickar godkännandelänk via e-post.';
+$s_reset_password_msg2 = 'Nollställ lösenord sätter ett tomt lösenord.';
+$s_show_all_users = 'ALLA';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Kontot skyddat. Kan inte nollställa lösenordet.';
-$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
+$s_account_reset_msg = 'Godkännandelänk har blivit skickat till din e-postadress...';
 $s_account_reset_msg2 = 'Lösenordet är tomt...';
 
 # manage_user_update.php
@@ -700,9 +700,9 @@ $s_manage_user_updated_msg = 'Kontot uppdaterat...';
 
 # menu_inc.php
 $s_main_link = 'Huvudsida';
-$s_view_bugs_link = 'Visa Ärenden';
+$s_view_bugs_link = 'Visa ärenden';
 $s_report_bug_link = 'Rapportera ärende';
-$s_changelog_link = 'Change Log';
+$s_changelog_link = 'Versionshistoria';
 $s_summary_link = 'Sammanfattning';
 $s_account_link = 'Användarkonto';
 $s_users_link = 'Användare';
@@ -710,17 +710,17 @@ $s_manage_link = 'Hantera';
 $s_edit_news_link = 'Redigera nyheter';
 $s_docs_link = 'Dokument';
 $s_logout_link = 'Logga ut';
-$s_my_view_link = 'My View';
+$s_my_view_link = 'Min vy';
 
 # meta_inc.php
 
 # my_view_page.php
-$s_my_view_title_unassigned = 'Unassigned';
-$s_my_view_title_recent_mod = 'Recently Modified';
-$s_my_view_title_reported = 'Reported by Me';
-$s_my_view_title_assigned = 'Assigned to Me (Unresolved)';
-$s_my_view_title_resolved = 'Resolved';
-$s_my_view_title_monitored = 'Monitored by Me';
+$s_my_view_title_unassigned = 'Ej tilldelade';
+$s_my_view_title_recent_mod = 'Nyligen ändrade';
+$s_my_view_title_reported = 'Rapporterade av mig';
+$s_my_view_title_assigned = 'Tilldelade till mig (ej lösta)';
+$s_my_view_title_resolved = 'Lösta';
+$s_my_view_title_monitored = 'Bevakade av mig';
 
 # news_add.php
 $s_news_added_msg = 'La till nyhet...';
@@ -829,13 +829,13 @@ $s_selected_project = 'Valt projekt';
 $s_valid_project_msg = 'Du måste välja ett giltigt projekt';
 
 # signup.php
-$s_signup_done_title = 'Account registration processed';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
-$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
+$s_signup_done_title = 'Kontoregistrering behandlad';
+$s_password_emailed_msg = 'Grattis. Du blivit registrerad. Du kommer nu att bli tillsänd en bekräftelse via e-post för att kontrollera din e-postadress. När du besökt länken som du fått i detta e-postmeddelande kommer ditt konto att aktiveras.';
+$s_no_reponse_msg = 'Du har sju dagar på dig att bekräfta ditt konto; om så inte skulle vara fallet kan konton komma att tas bort.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
+$s_signup_captcha_request = 'Mata in koden som den visas i rutan till höger';
+$s_signup_info = 'När du kompletterat detta formulär och dina svar kontrollerats, kommer du att bli tillsänd en bekräftelse via e-post till e-postadressen du angett.<br/>Med detta e-postmeddelande kan du aktivera ditt konto. Om du inte bekräftar ditt konto inom sju dagar, så kan konton komma att tas bort.<br/>Du måste alltså ange en giltig e-postadress för att kunna få bekräftelsemeddelandet.';
 $s_signup_title = 'Skapa ett användarkonto';
 $s_signup_button = 'Skapa kontot';
 
@@ -858,7 +858,7 @@ $s_by_project = 'projekt';
 $s_by_status = 'status';
 $s_by_date = 'datum (dagar)';
 $s_by_severity = 'allvarlighetsgrad';
-$s_by_resolution = 'resolution';
+$s_by_resolution = 'lösning';
 $s_by_category = 'kategori';
 $s_by_priority = 'prioritet';
 $s_by_developer = 'utvecklare';
@@ -895,40 +895,40 @@ $s_prev = 'Föregående';
 $s_next = 'Nästa';
 $s_first = 'Första';
 $s_last = 'Sista';
-$s_start_date = 'Start Date';
-$s_end_date = 'End Date';
-$s_use_date_filters = 'Use Date Filters';
-$s_yes = 'Yes';
-$s_no = 'No';
-$s_open_filters = 'Change Filter';
-$s_or_unassigned = 'Or Unassigned';
+$s_start_date = 'Startdatum';
+$s_end_date = 'Slutdatum';
+$s_use_date_filters = 'Använd datumfilter';
+$s_yes = 'Ja';
+$s_no = 'Nej';
+$s_open_filters = 'Ändra filter';
+$s_or_unassigned = 'eller ej tilldelat';
 $s_ok = 'OK';
-$s_select_all = 'Select All';
+$s_select_all = 'Välj alla';
 
 # stored query strings
-$s_use_query = 'Use Filter';
-$s_delete_query = 'Delete Filter';
-$s_query_deleted = 'Filter Deleted';
-$s_save_query = 'Save Current Filter';
-$s_reset_query = 'Reset Filter';
-$s_query_name = 'Filter Name';
-$s_query_exists = 'This particular query appears to already exist.';
-$s_query_dupe_name = 'Another query already has this name. Please choose a different name for this query.';
-$s_query_blank_name = 'You cannot store a filter without a name. Please give this filter a name before saving it.';
-$s_query_store_error = 'There was an error saving this query.';
-$s_open_queries = 'Manage Filters';
-$s_query_delete_msg = 'Are you sure you wish to delete this query?';
+$s_use_query = 'Använd filter';
+$s_delete_query = 'Radera filter';
+$s_query_deleted = 'Filter raderat';
+$s_save_query = 'Spara aktuellt filter';
+$s_reset_query = 'Nollställ filter';
+$s_query_name = 'Filternamn';
+$s_query_exists = 'Denna förfrågan verkar redan finnas.';
+$s_query_dupe_name = 'En annan förfrågan har redan detta namn. Var vänlig välj ett annat namn för denna förfrågan.';
+$s_query_blank_name = 'Du kan inte spara ett filter utan namn. Var vänlig och ge detta filter ett namn innan du sparar.';
+$s_query_store_error = 'Ett fel uppstod när förfrågan skulle sparas.';
+$s_open_queries = 'Hantera filter';
+$s_query_delete_msg = 'Är du säker på att du vill radera denna förfrågan?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = 'Visa enkel';
 $s_viewing_bug_advanced_details_title = 'Visar ärende, avancerad';
-$s_product_build = 'Produktbygge';
+$s_product_build = 'Produktbyggnummer';
 $s_system_profile = 'Systembeskrivning';
 $s_update_bug_button = 'Uppdatera ärende';
 $s_bug_assign_to_button = 'Tilldela till:';
-$s_bug_status_to_button = 'Change Status To:';
+$s_bug_status_to_button = 'Ändra status till:';
 $s_reopen_bug_button = 'Återöppna ärende';
-$s_move_bug_button = 'Move Issue';
+$s_move_bug_button = 'Flytta ärende';
 $s_attached_files = 'Associerade filer';
 $s_publish = 'Publicera';
 $s_cached = 'Cachad';
@@ -945,11 +945,11 @@ $s_users_monitoring_bug = 'Användare som övervakar detta ärende';
 $s_monitoring_user_list = 'Användarlista';
 
 # bug_sponsorship_list_view_inc.php
-$s_no_users_sponsoring_bug = 'There are no users sponsoring this issue.';
-$s_users_sponsoring_bug = 'Users sponsoring this issue';
-$s_sponsors_list = 'Sponsors List';
-$s_total_sponsorship_amount = 'Total Sponsorship = %s';
-$s_sponsor_issue = 'Sponsor Issue';
+$s_no_users_sponsoring_bug = 'Inga användare sponsrar detta ärende.';
+$s_users_sponsoring_bug = 'Användare som sponsrar detta ärende';
+$s_sponsors_list = 'Sponsorlista';
+$s_total_sponsorship_amount = 'Total sponsorsumma = %s';
+$s_sponsor_issue = 'Sponsorärende';
 
 # custom field strings
 $s_add_custom_field_button = 'Nytt skräddarsytt fält';
@@ -971,31 +971,31 @@ $s_custom_field_access_level_rw = 'Skrivrättighet';
 $s_custom_field_length_min = 'Min. längd';
 $s_custom_field_length_max = 'Max. längd';
 $s_custom_field_advanced = 'Avancerad';
-$s_custom_field_display_report = 'Display When Reporting Issues';
-$s_custom_field_display_update = 'Display When Updating Issues';
-$s_custom_field_display_resolved = 'Display When Resolving Issues';
-$s_custom_field_display_closed = 'Display When Closing Issues';
-$s_custom_field_require_report = 'Required On Report';
-$s_custom_field_require_update = 'Required On Update';
-$s_custom_field_require_resolved = 'Required On Resolve';
-$s_custom_field_require_closed = 'Required On Close';
+$s_custom_field_display_report = 'Visa när ärenden rapporteras';
+$s_custom_field_display_update = 'Visa när ärenden uppdateras';
+$s_custom_field_display_resolved = 'Visa när ärenden löses';
+$s_custom_field_display_closed = 'Visa när ärenden stängs';
+$s_custom_field_require_report = 'Krävs vid rapportering';
+$s_custom_field_require_update = 'Krävs vid uppdatering';
+$s_custom_field_require_resolved = 'Krävs vid lösning';
+$s_custom_field_require_closed = 'Krävs vid stängning';
 
 $s_custom_field_sequence = 'Serie';
-$s_custom_field_type_enum_string = '0:Sträng,1:Numerisk,2:Flyttal,3:Uppräkning,4:Epost,5:Checkbox,6:List,7:Multiselection list';
+$s_custom_field_type_enum_string = '0:Sträng,1:Numerisk,2:Flyttal,3:Uppräkning,4:E-post,5:Checkbox,6:List,7:Flervalslista';
 
-$s_confirm_used_custom_field_deletion = 'Detta fält är för närvarande länkat till åtminstone ett projekt.  Om du fortsätter kommer alla värden för dett fält att tas bort permanent.  Denna åtgärd kan inte ångras.  Om du inte vill ta bort detta fält, tryck Back i din bläddrare.  För att fortsätta, tryck på knappen nedan';
-$s_confirm_custom_field_deletion = 'Är du säker på att du vill ta bort detta skräddarsydda fält och alla aAre you sure you want to delete this custom field and all associerade värden?';
+$s_confirm_used_custom_field_deletion = 'Detta fält är för närvarande länkat till åtminstone ett projekt.  Om du fortsätter kommer alla värden för dett fält att tas bort permanent.  Denna åtgärd kan inte ångras.  Om du inte vill ta bort detta fält, tryck \'Bakåt\' i din webbläsare.  För att fortsätta, tryck på knappen nedan';
+$s_confirm_custom_field_deletion = 'Är du säker på att du vill ta bort detta skräddarsydda fält och alla associerade värden?';
 $s_field_delete_button = 'Ta bort fält';
 
-$s_hide_status = 'Göm status';
+$s_hide_status = 'Dölj status';
 $s_filter_closed = "stängda";
 $s_filter_resolved = "lösta";
-$s_hide_closed = "Hide Closed";
-$s_hide_resolved = "Hide Resolved";
-$s_and_above = 'And Above';
-$s_advanced_filters = 'Advanced Filters';
-$s_simple_filters = 'Simple Filters';
-$s_monitored_by = 'Monitored By';
+$s_hide_closed = "Dölj stängda";
+$s_hide_resolved = "Dölj lösta";
+$s_and_above = 'och över';
+$s_advanced_filters = 'Avancerade filter';
+$s_simple_filters = 'Enkla filter';
+$s_monitored_by = 'Övervakas av';
 
 $s_attachments = "bilagor";
 $s_attachment_alt = "A";
@@ -1004,11 +1004,11 @@ $s_attachment_alt = "A";
 $s_phpmailer_language = 'se';
 
 # Sponsorship Strings
-$s_sponsors = '%d sponsor(s)';
-$s_sponsorship_added = 'Sponsorship Added';
-$s_sponsorship_updated = 'Sponsorship Updated';
-$s_sponsorship_deleted = 'Sponsorship Deleted';
-$s_sponsorship_more_info = 'More information about sponsorship';
+$s_sponsors = '%d sponsor(er)';
+$s_sponsorship_added = 'Sponsring tillagt';
+$s_sponsorship_updated = 'Sponsring uppdaterat';
+$s_sponsorship_deleted = 'Sponsring raderat';
+$s_sponsorship_more_info = 'Mer information om sponsring';
 
 # URL explaining the process of sponsoring an issue.  This is defined here rather than
 # in the config to allow for a URL per language.  This can be set to an empty string if there
@@ -1016,25 +1016,27 @@ $s_sponsorship_more_info = 'More information about sponsorship';
 $s_sponsorship_process_url = '';
 
 # Changelog
-$s_changelog = 'Change Log';
+$s_changelog = 'Versionshistoria';
 
 # Http auth
-$s_http_auth_realm = "Mantis Login";
+$s_http_auth_realm = "Mantis inloggning (Login)";
 
-$s_bug = "issue";
-$s_add_new_relationship = "New relationship";
-$s_add_new_relationship_button = "Add";
-$s_this_bug = "Current issue";
-$s_relationship_added = "Relationship added";
-$s_relationship_deleted = "Relationship deleted";
-$s_delete_relationship_button = "Delete";
-$s_delete_relationship_sure_msg = "Are you sure you wish to delete this relationship?";
-$s_relationship_warning_blocking_bugs_not_resolved = "Not all the children of this issue are yet resolved or closed.";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>ATTENTION</b>. Not all the children of this issue are yet resolved or closed.<br>Before <b>resolving/closing</b> a parent issue, all the issues related as child with this one should be resolved or closed.";
-$s_create_child_bug_button = "Create Child";
-$s_bug_cloned_to = "Issue cloned";
-$s_bug_created_from = "Issue generated from";
+$s_bug = "ärende";
+$s_add_new_relationship = "Nytt förhållande";
+$s_add_new_relationship_button = "Lägg till";
+$s_this_bug = "Aktuellt ärende";
+$s_relationship_added = "Förhållande tillagt";
+$s_relationship_deleted = "Förhållande borttaget";
+$s_delete_relationship_button = "Ta bort";
+$s_delete_relationship_sure_msg = "Är du säker på att du vill bryta detta förhållande?";
+$s_relationship_warning_blocking_bugs_not_resolved = "Alla barn till detta ärende har ännu inte
+lösts eller stängts.";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>VARNING</b>. Alla barn till detta ärende har ännu inte
+lösts eller stängts.<br>Innan du <b>löser/stänger</b> ett föräldraärende, bör barnärendena till denna lösas eller stängas.";
+$s_create_child_bug_button = "Skapa barn";
+$s_bug_cloned_to = "Ärende klonat";
+$s_bug_created_from = "Ärende skapat från";
 
 # Source Control Integration
-$s_checkin = 'Checkin';
+$s_checkin = 'Incheckning';
 ?>
