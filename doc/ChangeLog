@@ -3,6 +3,7 @@ Mantis ChangeLog
 2004.xx.xx  -  0.19.0
 
  * Enh #0000: Generate one email per user. Stage #1 (no send mail optimization).
+ * Enh #3302: Add global defaults for view state.
  * Enh #3620: Redesigned filter interface.
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Fix #3622: Tweak attachment SQL in print bug pages.

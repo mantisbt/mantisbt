@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.16 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bugnote_add_inc.php,v 1.17 2004-03-17 12:42:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
@@ -36,7 +36,7 @@
 		<?php echo lang_get( 'private' ) ?>
 	</td>
 	<td>
-		<input type="checkbox" name="private" />
+		<input type="checkbox" name="private" <?php check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ); ?> />
 	</td>
 </tr>
 <?php } ?>

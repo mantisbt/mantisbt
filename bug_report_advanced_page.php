@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_advanced_page.php,v 1.31 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_report_advanced_page.php,v 1.32 2004-03-17 12:42:26 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -48,7 +48,7 @@
 	$f_description			= gpc_get_string( 'description', '' );
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', '' );
 	$f_additional_info		= gpc_get_string( 'additional_info', '' );
-	$f_view_state			= gpc_get_int( 'view_state', VS_PUBLIC );
+	$f_view_state			= gpc_get_int( 'view_state', config_get( 'default_bug_view_status' ) );
 
 	$f_report_stay			= gpc_get_bool( 'report_stay' );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.63 2004-01-13 13:09:47 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.64 2004-03-17 12:42:27 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -319,7 +319,7 @@
 		<?php echo lang_get( 'private' ) ?>
 	</td>
 	<td colspan="5">
-		<input type="checkbox" name="private" />
+		<input type="checkbox" name="private" <?php check_checked( config_get( 'default_bugnote_view_status' ), VS_PRIVATE ); ?> />
 	</td>
 </tr>
 <?php } ?>

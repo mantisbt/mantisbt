@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.149 2004-03-16 11:29:56 yarick123 Exp $
+	# $Id: config_defaults_inc.php,v 1.150 2004-03-17 12:42:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -412,6 +412,12 @@
 	# --- signup default ---------------
 	# look in constant_inc.php for values
 	$g_default_new_account_access_level	= REPORTER;
+
+        # Default Bug View Status (VS_PUBLIC or VS_PRIVATE)
+        $g_default_bug_view_status = VS_PUBLIC;
+
+        # Default Bugnote View Status (VS_PUBLIC or VS_PRIVATE)
+        $g_default_bugnote_view_status = VS_PUBLIC;
 
 	# --- viewing defaults ------------
 	# site defaults for viewing preferences
