@@ -184,7 +184,7 @@
 
 		switch ( $g_login_method ) {
 			case CRYPT:	$salt = substr( $p_password, 0, 2 );
-					return crypt( $p_password, $salt );
+						return crypt( $p_password, $salt );
 			case PLAIN:	return $p_password;
 			case MD5:	return md5( $p_password );
 			default:	return $p_password;
