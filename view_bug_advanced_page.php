@@ -320,7 +320,7 @@
 </tr>
 <tr align="center">
 <?php # UPDATE form BEGIN ?>
-<?php	if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( UPDATER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<?php echo get_bug_update_page() ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>">
@@ -331,28 +331,29 @@
 <?php
 	} else {
 		PRINT "<td>&nbsp;</td>";
-	} # UPDATE form END
+	}
+	# UPDATE form END
 ?>
 <?php # ASSIGN form BEGIN ?>
-<?php	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_assign ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<input type="hidden" name="f_date_submitted" value="<?php echo $v_date_submitted ?>">
 	<td class="center">
 		<?php #check if current user already assigned to the bug ?>
 		<?php $t_user_id = get_current_user_field ( "id" ); ?>
-		<?php if ($t_user_id != $v_handler_id) { ?>
+		<?php if ( $t_user_id != $v_handler_id ) { ?>
 		<input type="submit" value="<?php echo $s_bug_assign_button ?>">
 		<?php } #end of checking if current user already assigned ?>&nbsp;
 	</td>
 	</form>
 <?php
-	} else { ?>
+	} else {
 		PRINT "<td>&nbsp;</td>";
 	} # ASSIGN form END
 ?>
 <?php # RESOLVE form BEGIN ?>
-<?php	if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( DEVELOPER ) && ( $v_status < RESOLVED ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_resolve_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="center">
@@ -360,7 +361,7 @@
 	</td>
 	</form>
 <?php
-	} else { ?>
+	} else {
 		PRINT "<td>&nbsp;</td>";
 	} # RESOLVE form END
 ?>
@@ -374,13 +375,12 @@
 		<input type="submit" value="<?php echo $s_reopen_bug_button ?>">
 	</td>
 	</form>
-<?php
-	} else {
+<?php } else {
 		PRINT "<td>&nbsp;</td>";
 	} # REOPEN form END
 ?>
 <?php # CLOSE form BEGIN ?>
-<?php	if ( access_level_check_greater_or_equal( $g_close_bug_threshold ) && ( RESOLVED == $v_status ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_close_bug_threshold ) && ( RESOLVED == $v_status ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_close_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<td class="center">
@@ -393,7 +393,7 @@
 	} # CLOSE form END
 ?>
 <?php # DELETE form BEGIN ?>
-<?php	if ( access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
+<?php if ( access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
 	<form method="post" action="<?php echo $g_bug_delete_page ?>">
 	<input type="hidden" name="f_id" value="<?php echo $f_id ?>">
 	<input type="hidden" name="f_bug_text_id" value="<?php echo $v_bug_text_id ?>">
@@ -401,9 +401,8 @@
 		<input type="submit" value="<?php echo $s_delete_bug_button ?>">
 	</td>
 	</form>
-<?php
-	} else {
-		PRINT "<td>&nbsp;</td>";
+<?php } else {
+	PRINT "<td>&nbsp;</td>";
 	} # DELETE form END
 ?>
 </tr>
