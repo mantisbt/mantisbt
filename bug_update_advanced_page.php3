@@ -208,7 +208,7 @@
 		</td>
 	</tr>
 	<tr align="center">
-		<td bgcolor="<? echo $g_category_title_color ?>>"
+		<td bgcolor="<? echo $g_category_title_color ?>">
 			<b><? echo $s_eta ?></b>
 		</td>
 		<td align="left" bgcolor="<? echo $g_primary_color_light ?>">
