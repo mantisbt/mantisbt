@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.11 $
+	# $Revision: 1.12 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-29 02:56:23 $
+	# $Date: 2002-08-30 08:36:50 $
 	#
-	# $Id: bug_monitor.php,v 1.11 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: bug_monitor.php,v 1.12 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_bug_exists( $f_id );
+	bug_ensure_exists( $f_id );
 
 	$t_view_state = get_bug_field( $f_id, 'view_state' );
 

@@ -14,7 +14,7 @@
 <?php
 	project_access_check( $f_id );
 	check_access( $g_allow_bug_delete_access_level );
-	check_bug_exists( $f_id );
+	bug_ensure_exists( $f_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.10 2002-08-30 07:45:02 jfitzell Exp $
+	# $Id: helper_api.php,v 1.11 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -24,19 +24,6 @@
 		return crc32($t_crc_str);
 	}
 	# --------------------
-	# Returns the specified field value of the specified bug text
-	function get_file_field( $p_file_id, $p_field_name ) {
-		global $g_mantis_bug_file_table;
-
-		# get info
-		$query ="SELECT $p_field_name ".
-				"FROM $g_mantis_bug_file_table ".
-				"WHERE id='$p_file_id' ".
-				"LIMIT 1";
-		$result = db_query( $query );
-		return db_result( $result, 0 );
-	}
-	# --------------------
 	# converts a 1 value to X
 	# converts a 0 value to a space
 	function trans_bool( $p_num ) {
@@ -44,23 +31,6 @@
 			return '&nbsp;';
 		} else {
 			return 'X';
-		}
-	}
-	# --------------------
-	# check to see if bug exists
-	# if it doesn't exist then redirect to the main page
-	# otherwise let execution continue undisturbed
-	function check_bug_exists( $p_bug_id ) {
-		global $g_mantis_bug_table;
-
-		$c_bug_id = (integer)$p_bug_id;
-
-		$query ="SELECT COUNT(*) ".
-				"FROM $g_mantis_bug_table ".
-				"WHERE id='$c_bug_id'";
-		$result = db_query( $query );
-		if ( 0 == db_result( $result, 0, 0 ) ) {
-			print_header_redirect( 'main_page.php' );
 		}
 	}
 	# --------------------

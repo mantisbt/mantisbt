@@ -12,7 +12,7 @@
 <?php login_cookie_check() ?>
 <?php
 	project_access_check( $f_id );
-	check_bug_exists( $f_id );
+	bug_ensure_exists( $f_id );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = get_view_redirect_url( $f_id, 1 );

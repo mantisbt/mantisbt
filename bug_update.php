@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.30 $
+	# $Revision: 1.31 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-29 02:56:23 $
+	# $Date: 2002-08-30 08:36:50 $
 	#
-	# $Id: bug_update.php,v 1.30 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: bug_update.php,v 1.31 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,7 +28,7 @@
 	$result = get_bug_row_ex ( $f_id );
 	if ( 0 == db_num_rows( $result ) ) {
 		# speed is not an issue in this case, so re-use code
-		check_bug_exists( $f_id );
+		bug_ensure_exists( $f_id );
 	}
 
 	$row = db_fetch_array( $result );

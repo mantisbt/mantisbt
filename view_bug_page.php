@@ -21,7 +21,7 @@
     		WHERE id='$c_id'";
     $result = db_query( $query );
 
-	# check bug exists here, rather than calling check_bug_exists() and executing
+	# check bug exists here, rather than calling bug_ensure_exists() and executing
 	# the query twice.
 	if ( 0 == db_num_rows( $result ) ) {
 		print_header_redirect( 'main_page.php' );

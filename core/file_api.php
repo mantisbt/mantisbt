@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.6 2002-08-29 10:40:05 smhanson Exp $
+	# $Id: file_api.php,v 1.7 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -103,4 +103,22 @@
 			unlink( $p_filename );
 		}
 	}
+	# --------------------
+	# Return the specified field value
+	function file_get_field( $p_file_id, $p_field_name ) {
+		$c_file_id		= db_prepare_int( $p_file_id );
+		$c_field_name	= db_prepare_string( $p_field_name );
+
+		$t_bug_file_table = config_get( 'mantis_bug_file_table' );
+
+		# get info
+		$query = "SELECT $c_field_name
+				  FROM $t_bug_file_table
+				  WHERE id='$c_file_id'
+				  LIMIT 1";
+		$result = db_query( $query );
+
+		return db_result( $result );
+	}
+
 ?>

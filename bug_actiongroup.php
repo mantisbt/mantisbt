@@ -23,7 +23,7 @@
 		$result = get_bug_row_ex ( $p_id );
 		if ( 0 == db_num_rows( $result ) ) {
 			# speed is not an issue in this case, so re-use code
-			check_bug_exists( $p_id );
+			bug_ensure_exists( $p_id );
 		}
 		$row = db_fetch_array( $result );
 		extract( $row, EXTR_PREFIX_ALL, 'h' );

@@ -13,7 +13,7 @@
 	}
 
 	project_access_check( $f_id );
-	check_bug_exists( $f_id );
+	bug_ensure_exists( $f_id );
 	$c_id = (integer)$f_id;
 
     $query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.22 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: bugnote_edit_page.php,v 1.23 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -26,7 +26,7 @@
 	bugnote_ensure_exists( $f_bugnote_id );
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );
-	check_bug_exists( $t_bug_id );
+	bug_ensure_exists( $t_bug_id );
 
 	# make sure the user accessing the note is valid and has proper access
 	$t_bugnote_user_id	= bugnote_get_field( $f_bugnote_id, 'reporter_id' );

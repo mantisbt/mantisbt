@@ -16,7 +16,7 @@
 
 	$c_file_id = (integer)$f_file_id;
 
-	$t_file_name = get_file_field( $c_file_id, 'filename' );
+	$t_file_name = file_get_field( $c_file_id, 'filename' );
 
 	if ( ( DISK == $g_file_upload_method ) || ( FTP == $g_file_upload_method ) ) {
 		# grab the file name

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.6 2002-08-29 02:56:23 jfitzell Exp $
+	# $Id: bug_api.php,v 1.7 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -149,7 +149,7 @@
 		$result = get_bug_row ( $p_bug_id );
 		if ( 0 == db_num_rows( $result ) ) {
 			# speed is not an issue in this case, so re-use code
-			check_bug_exists( $p_bug_id );
+			bug_ensure_exists( $p_bug_id );
 		}
 
 		$row = db_fetch_array( $result );
@@ -316,5 +316,32 @@
 
 		return db_result( $result, 0 );
 	}
+	# --------------------
+	# check to see if bug exists by id
+	# return true if it does, false otherwise
+	function bug_exists( $p_bug_id ) {
+		$c_bug_id = db_prepare_int( $p_bug_id );
 
+		$t_bug_table = config_get( 'mantis_bug_table' );
+
+		$query = "SELECT COUNT(*)
+				  FROM $t_bug_table
+				  WHERE id='$c_bug_id'";
+		$result = db_query( $query );
+
+		if ( db_result( $result ) > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	# --------------------
+	# check to see if bug exists by id
+	# if it doesn't exist then error
+	#  otherwise let execution continue undisturbed
+	function bug_ensure_exists( $p_bug_id ) {
+		if ( ! bug_exists( $p_bug_id ) ) {
+			trigger_error( ERROR_BUG_NOT_FOUND, ERROR );
+		}
+	}
 ?>

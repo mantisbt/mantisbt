@@ -16,7 +16,7 @@
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );
 	check_access( $g_delete_bugnote_threshold );
-	check_bug_exists( $t_bug_id );
+	bug_ensure_exists( $t_bug_id );
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

@@ -15,7 +15,7 @@
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	project_access_check( $t_bug_id );
 	check_access( REPORTER );
-	check_bug_exists( $t_bug_id );
+	bug_ensure_exists( $t_bug_id );
 
 	$f_bugnote_text		= $f_bugnote_text."\n\n";
 	$f_bugnote_text		= $f_bugnote_text.$s_edited_on.date( config_get( 'normal_date_format' ) );

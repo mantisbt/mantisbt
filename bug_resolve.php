@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.20 $
-	# $Author: vboctor $
-	# $Date: 2002-08-29 14:41:31 $
+	# $Revision: 1.21 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-30 08:36:50 $
 	#
-	# $Id: bug_resolve.php,v 1.20 2002-08-29 14:41:31 vboctor Exp $
+	# $Id: bug_resolve.php,v 1.21 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,7 @@
 <?php
 	project_access_check( $f_id );
 	check_access( $g_handle_bug_threshold );
-	check_bug_exists( $f_id );
+	bug_ensure_exists( $f_id );
 
 	#check variables
 	check_varset( $f_bugnote_text, '' );

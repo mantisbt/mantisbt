@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.25 $
+	# $Revision: 1.26 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-28 10:07:56 $
+	# $Date: 2002-08-30 08:36:50 $
 	#
-	# $Id: bug_update_page.php,v 1.25 2002-08-28 10:07:56 jfitzell Exp $
+	# $Id: bug_update_page.php,v 1.26 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -25,7 +25,7 @@
 
 	project_access_check( $f_id );
 	check_access( $g_update_bug_threshold );
-	check_bug_exists( $f_id );
+	bug_ensure_exists( $f_id );
 
 	$c_id = (integer)$f_id;
 

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.17 $
+	# $Revision: 1.18 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-25 21:04:56 $
+	# $Date: 2002-08-30 08:36:50 $
 	#
-	# $Id: bug_reopen.php,v 1.17 2002-08-25 21:04:56 jfitzell Exp $
+	# $Id: bug_reopen.php,v 1.18 2002-08-30 08:36:50 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,7 @@
 <?php
 	project_access_check( $f_id );
 	check_access( $g_reopen_bug_threshold );
-	check_bug_exists( $f_id );
+	bug_ensure_exists( $f_id );
 
 	#check variables
 	check_varset( $f_bugnote_text, '' );

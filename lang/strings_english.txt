@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.83 $
+	# $Revision: 1.84 $
 	# $Author: jfitzell $
-	# $Date: 2002-08-30 08:15:27 $
+	# $Date: 2002-08-30 08:36:50 $
 	#
-	# $Id: strings_english.txt,v 1.83 2002-08-30 08:15:27 jfitzell Exp $
+	# $Id: strings_english.txt,v 1.84 2002-08-30 08:36:50 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -178,6 +178,7 @@
 	$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH]='ERROR: Password does not match verification.';
 	$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED]	= 'ERROR: An array was expected but a string was received.';
 	$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED]='ERROR: A string was expected but an array was received.';
+	$MANTIS_ERROR[ERROR_BUG_NOT_FOUND]	= 'ERROR: Bug not found.';
 
 	# General Strings
 	$s_go_back = 'Go Back';

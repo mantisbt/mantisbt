@@ -187,6 +187,9 @@
 	# ERROR_NEWS_*
 	define( 'ERROR_NEWS_NOT_FOUND',					900 );
 
+	# ERROR_BUG_*
+	define( 'ERROR_BUG_NOT_FOUND',					1000 );
+
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);
 	define( 'STATUS_LEGEND_POSITION_BOTTOM', 2);

@@ -13,7 +13,7 @@
 <?php
 	project_access_check( $f_id );
 	check_access( $g_allow_bug_delete_access_level );
-	check_bug_exists( $f_id );
+	bug_ensure_exists( $f_id );
 
 	if ( bug_delete( $f_id, $f_bug_text_id ) ) {
 		print_header_redirect( 'view_all_bug_page.php' );
