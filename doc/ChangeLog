@@ -19,6 +19,7 @@ Mantis ChangeLog
 - 0004137: [feature] Support a simple "view" URL (vboctor)
 - 0004145: [feature] Mantis pages should have descriptive titles (vboctor)
 - 0004185: [customization] Support custom menu options (vboctor)
+- 0003766: [email] status notifications are confused and confusing (thraxisp)
 - 0003975: [email] Realname vs username in email history (thraxisp)
 - 0004147: [email] Receiving emails in foreign languages (thraxisp)
 - 0004372: [email] Wrong Reciepients-List in "send a reminder" (thraxisp)

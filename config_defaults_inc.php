@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.200 2004-08-20 12:33:11 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.201 2004-08-23 14:48:07 thraxisp Exp $
 	# --------------------------------------------------------
 
 
@@ -197,12 +197,15 @@
 	# option above is used.  The possible actions are:
 	#
 	#             'new': a new bug has been added
- 	#        'assigned': a bug has been assigned
+ 	#           'owner': a bug has been assigned to a new owner
 	#        'reopened': a bug has been reopened
  	#         'deleted': a bug has been deleted
 	#         'updated': a bug has been updated
 	#         'bugnote': a bugnote has been added to a bug
-	# 'status_<status>': eg: 'status_resolved', 'status_closed', 'status_feedback', 'status_acknowledged', ...etc.
+	#         'sponsor': sponsorship has changed on this bug 
+	#        'relation': a relationship has changed on this bug 
+	#        '<status>': eg: 'resolved', 'closed', 'feedback', 'acknowledged', ...etc.
+	#                     this list corresponds to $g_status_enum_string
 
 	#
 	# If you wanted to have all developers get notified of new bugs you might add

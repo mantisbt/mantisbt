@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.80 2004-08-18 13:54:41 narcissus Exp $
+	# $Id: bug_api.php,v 1.81 2004-08-23 14:48:08 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -804,15 +804,15 @@
 
 		# bug assigned
 		if ( $t_old_data->handler_id != $p_bug_data->handler_id ) {
-			email_generic( $p_bug_id, 'assigned', $t_action_prefix . 'assigned' );
+			email_generic( $p_bug_id, 'owner', $t_action_prefix . 'assigned' );
 			return true;
 		}
 
 		# status changed
 		if ( $t_old_data->status != $p_bug_data->status ) {
 			$t_status = get_enum_to_string( config_get( 'status_enum_string' ), $p_bug_data->status );
-			$t_status = str_replace( ' ', '', $t_status );
-			email_generic( $p_bug_id, 'status_' . $t_status, $t_status_prefix . $t_status );
+			$t_status = str_replace( ' ', '_', $t_status );
+			email_generic( $p_bug_id, $t_status, $t_status_prefix . $t_status );
 			return true;
 		}
 

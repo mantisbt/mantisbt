@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.97 2004-08-21 13:07:14 prichards Exp $
+	# $Id: email_api.php,v 1.98 2004-08-23 14:48:08 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -214,6 +214,7 @@
 			$count = db_num_rows( $result );
 			for( $i=0 ; $i < $count ; $i++ ) {
 				$t_user_id = db_result( $result, $i );
+				# @@@ (thraxisp) check that user can see bugnotes here
 				$t_recipients[$t_user_id] = true;
 			}
 		}
@@ -416,14 +417,14 @@
 	# send notices when a relationship is ADDED
 	# MASC RELATIONSHIP
 	function email_relationship_added( $p_bug_id ) {
-		email_generic( $p_bug_id, 'updated', 'email_notification_title_for_action_relationship_added' );
+		email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_relationship_added' );
 	}
 
 	# --------------------
 	# send notices when a relationship is DELETED
 	# MASC RELATIONSHIP
 	function email_relationship_deleted( $p_bug_id ) {
-		email_generic( $p_bug_id, 'updated', 'email_notification_title_for_action_relationship_deleted' );
+		email_generic( $p_bug_id, 'relation', 'email_notification_title_for_action_relationship_deleted' );
 	}
 
 	# --------------------
@@ -468,19 +469,19 @@
 	# --------------------
 	# send notices when a bug is sponsored
 	function email_sponsorship_added( $p_bug_id ) {
-		email_generic( $p_bug_id, 'sponsorship_added', 'email_notification_title_for_action_sponsorship_added' );
+		email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_added' );
 	}
 
 	# --------------------
 	# send notices when a sponsorship is modified
 	function email_sponsorship_updated( $p_bug_id ) {
-		email_generic( $p_bug_id, 'sponsorship_updated', 'email_notification_title_for_action_sponsorship_updated' );
+		email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_updated' );
 	}
 
 	# --------------------
 	# send notices when a sponsorship is deleted
 	function email_sponsorship_deleted( $p_bug_id ) {
-		email_generic( $p_bug_id, 'sponsorship_deleted', 'email_notification_title_for_action_sponsorship_deleted' );
+		email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_deleted' );
 	}
 
 	# --------------------
@@ -511,7 +512,7 @@
 	# --------------------
 	# send notices when a bug is ASSIGNED
 	function email_assign( $p_bug_id ) {
-		email_generic( $p_bug_id, 'assigned', 'email_notification_title_for_action_bug_assigned' );
+		email_generic( $p_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
 	}
 	# --------------------
 	# send notices when a bug is DELETED
