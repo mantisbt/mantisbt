@@ -640,8 +640,16 @@
 	# we use variable variables in order to achieve this
 	function print_enum_string_option_list( $p_enum_name, $p_val=0 ) {
 		$g_var = 'g_'.$p_enum_name.'_enum_string';
-		global $$g_var;
+		global $$g_var, $g_customize_attributes;
 
+		# custom attributes
+		if ($g_customize_attributes) {
+			# to be deleted when moving to manage_project_page.php	
+			$f_project_id = '0000000';
+
+			# custom attributes insertion
+			insert_attributes( $p_enum_name, $f_project_id, 'global' );
+		}
 		$t_arr  = explode_enum_string( $$g_var );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
@@ -789,6 +797,16 @@
 			PRINT $t_project_name.' ['.$t_access_level.'] ('.$t_view_state.') [<a class="small" href="manage_user_proj_delete.php?f_project_id='.$t_project_id.'&amp;f_user_id='.$p_user_id.'">'.$s_remove_link.'</a>]<br />';
 		}
 	}
+	# --------------------
+	# color list printing options for custom status
+	function print_custom_status_color_list() {
+		global $g_custom_colors ;
+
+		while (list ($key,$val) = each ($g_custom_colors)) {
+			PRINT "<option value=\"".$key."\">".$val."</option>";
+		}
+	}
+
 	# --------------------
 	###########################################################################
 	# String printing API

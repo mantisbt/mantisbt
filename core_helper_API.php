@@ -5,11 +5,11 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.52 $
-	# $Author: vboctor $
-	# $Date: 2002-07-07 06:28:14 $
+	# $Revision: 1.53 $
+	# $Author: jctrosset $
+	# $Date: 2002-08-02 08:18:58 $
 	#
-	# $Id: core_helper_API.php,v 1.52 2002-07-07 06:28:14 vboctor Exp $
+	# $Id: core_helper_API.php,v 1.53 2002-08-02 08:18:58 jctrosset Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -425,12 +425,23 @@
 	# --------------------
 	# get the color string for the given status
 	function get_status_color( $p_status ) {
-		global $g_status_enum_string, $g_status_colors;
-
+		global $g_status_enum_string, $g_status_colors, $g_custom_status_slot, $g_customize_attributes;
+		
+		
 		# This code creates the appropriate variable name
 		# then references that color variable
 		# You could replace this with a bunch of if... then... else
 		# statements
+		
+		if ($g_customize_attributes) {
+			# custom colors : to be deleted when moving to manage_project_page.php	
+			$t_project_id = '0000000';
+
+			# insert attriutes for color displaying in viex_bug_page.php
+			insert_attributes( 'status', $t_project_id, 'global' );
+			insert_attributes( 'status', $t_project_id, 'str' ) ;
+		}
+	
 		$t_color_str = 'closed';
 		$t_arr = explode_enum_string( $g_status_enum_string );
 		$t_arr_count = count( $t_arr );
@@ -447,10 +458,15 @@
 		global $$t_color_variable_name;
 		if ( isset( $$t_color_variable_name ) ) {
 			return $$t_color_variable_name;
+			echo "tiiirii" ;
 		} elseif ( isset ( $g_status_colors[$t_color_str] ) ) {
 			return $g_status_colors[$t_color_str];
+			echo "tato" ;
+		} elseif ($g_customize_attributes) {   // custom attributes
+				# if not found before, look into custom status colors
+				$t_colors_arr = attribute_get_all('colors', $t_project_id);
+				return $t_colors_arr[( $p_status-( $g_custom_status_slot[0]+1 ) )];
 		}
-
 		return '#ffffff';
 	}
 	# --------------------
@@ -496,8 +512,17 @@
 	function get_enum_element( $p_enum_name, $p_val ) {
 		$g_var = 'g_'.$p_enum_name.'_enum_string';
 		$s_var = 's_'.$p_enum_name.'_enum_string';
-		global $$g_var, $$s_var;
+		global $$g_var, $$s_var, $g_customize_attributes;
 
+		# custom attributes
+		if ($g_customize_attributes) {
+			# to be deleted when moving to manage_project_page.php	
+			$t_project_id = '0000000';
+
+			# custom attributes insertion
+			insert_attributes( $p_enum_name, $t_project_id, 'global' );
+			insert_attributes( $p_enum_name, $t_project_id, 'str' ) ;
+		}
 		# use the global enum string to search
 		$t_arr = explode_enum_string( $$g_var );
 		$t_arr_count = count( $t_arr );

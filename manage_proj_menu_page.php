@@ -168,4 +168,41 @@
 </table>
 <?php # Project Menu Form END ?>
 
+<?php # Attribute customization is for all projects at the moment
+	  # Place the following code in manage_proj_edit_page.php when Per Project Settings are ok ?>
+<?php # Attributes customization BEGIN 
+if (($g_customize_attributes)&&(access_level_check_greater_or_equal( ADMINISTRATOR ) ) ) {
+	?>
+	<p>
+	<div align="center">
+	<table class="width75" cellspacing="1">
+	<tr>
+		<td class="form-title" colspan="2">
+			<?php echo $s_attribute_customization_title ?>
+		</td>
+	</tr>
+<?php 
+	# to be deleted when moving to manage_project_page.php	
+	$t_project_id = '0000000';
+
+	#priorities
+	attribute_display('priorities', $s_priority, $t_project_id) ;
+	#severities
+	attribute_display('severities', $s_severity, $t_project_id) ;
+	#reproducibilities
+	attribute_display('reproducibilities', $s_reproducibility, $t_project_id) ;
+	#status
+	attribute_display('states', $s_status, $t_project_id) ;
+	#resolutions
+	attribute_display('resolutions', $s_resolution, $t_project_id) ;
+	#projections
+	attribute_display('projections', $s_projection, $t_project_id) ;
+	#etas
+	attribute_display('etas', $s_eta, $t_project_id) ;
+}
+?>
+</table>
+</div>
+<?php # Attributes customization END ?>
+
 <?php print_page_bot1( __FILE__ ) ?>
