@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.21 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: database_api.php,v 1.22 2004-03-20 02:30:22 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -179,8 +179,8 @@
 		for ( $i=0 ; $i < $count ; $i++ ) {
 			$row = db_fetch_array( $result );
 
-			if ( $row['Field'] == $c_field ) {
-				return ( $row['Key'] == $c_key );
+			if ( $row['field'] == $c_field ) {
+				return ( $row['key'] == $c_key );
 			}
 		}
 
