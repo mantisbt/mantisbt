@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.28 2003-02-18 02:18:01 jfitzell Exp $
+	# $Id: login_page.php,v 1.29 2003-02-18 02:51:21 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -53,7 +53,7 @@
 				<input type="hidden" name="return" value="<?php echo $f_return ?>" />
 				<?php
 			}
-		<?php echo lang_get( 'login_title' ) ?>
+			echo lang_get( 'login_title' ) ?>
 	</td>
 	<td class="right">
 	<?php
