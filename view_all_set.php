@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.38 2004-10-28 00:31:05 thraxisp Exp $
+	# $Id: view_all_set.php,v 1.39 2004-12-11 20:22:23 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -347,10 +347,8 @@
 	}
 
 	if ( $f_temp_filter ) {
-		$t_redirect_url = $t_redirect_url . '?filter=' . $t_settings_serialized;
-		# @@@ jlatour: Why this translation, instead of using urlencode?
-		$t_trans = array( '"' => '%22', ';' => '%3B', '%' => '%25', ' ' => '%20' );
-		$t_redirect_url = strtr( $t_redirect_url, $t_trans );
+		$t_token_id = token_add( $t_settings_serialized, TOKEN_FILTER);
+		$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
 		html_meta_redirect( $t_redirect_url, 0 );
 	} else {
 		print_header_redirect( $t_redirect_url );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.33 2004-10-05 21:10:14 prichards Exp $
+	# $Id: constant_inc.php,v 1.34 2004-12-11 20:20:12 prichards Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -302,5 +302,9 @@
 	# bugnote types
 	define( 'BUGNOTE', 0 );
 	define( 'REMINDER', 1 );
-	
+
+	# token types
+	define( 'TOKEN_UNKNOWN',	0 );
+	define( 'TOKEN_FILTER',		1 );
+
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.226 2004-12-11 10:36:57 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.227 2004-12-11 20:22:24 prichards Exp $
 	# --------------------------------------------------------
 
 
@@ -1134,6 +1134,7 @@
 	$g_mantis_upgrade_table					= $g_db_table_prefix.'_upgrade_table';
 	$g_mantis_filters_table					= $g_db_table_prefix.'_filters_table';
 	$g_mantis_sponsorship_table				= $g_db_table_prefix.'_sponsorship_table';
+	$g_mantis_tokens_table					= $g_db_table_prefix.'_tokens_table';
 
 	###########################
 	# Mantis Enum Strings

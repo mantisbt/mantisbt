@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.23 2004-11-19 12:29:00 vboctor Exp $
+	# $Id: current_user_api.php,v 1.24 2004-12-11 20:20:12 prichards Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -94,7 +94,11 @@
 		$t_filter			= '';
 
 		if ( !is_blank( $f_filter_string ) ) {
-			$t_filter = unserialize( $f_filter_string );
+			if( is_numeric( $f_filter_string ) ) {
+				$t_filter = unserialize( token_get_value( $f_filter_string ) );
+			} else {
+				$t_filter = unserialize( $f_filter_string );
+			}
 		} else if ( !filter_is_cookie_valid() ) {
 			return false;
 		} else {
