@@ -42,7 +42,7 @@
 	$s_new_account_message = "Luego de conectarse al sitio, por favor cambie su clave.  Su clave sera almacenada en forma encriptada.\n\n";
 	$s_new_account_do_not_reply = "Por favor, no conteste a este mensaje.\n";
 
-    $s_reset_request_msg = "Ocurrio un pedido para resetear su clave.".
+    $s_reset_request_msg = "Ocurrio un pedido para resetear su clave.";
     $s_account_name_msg = "Su nombre de cuenta es";
     $s_news_password_msg = "Aqui esta su nueva clave";
 
