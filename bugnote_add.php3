@@ -28,8 +28,12 @@
 	$result = mysql_query( $query );
 
 	### retrieve bugnote text id number
+	### NOTE: this is not 100% gurrantted to be the correct one.
+	### It will be 99.9% of them time but it is not guarrnteed.
+	### Looking for an elegant workaround w/o having to edit tables
 	$query = "SELECT id
 			FROM $g_mantis_bugnote_text_table
+			WHERE note='$f_bugnote_text'
 			ORDER BY id DESC
 			LIMIT 1";
 	$result = mysql_query( $query );

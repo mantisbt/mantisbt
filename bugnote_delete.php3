@@ -9,6 +9,7 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### Remove the bugnote
 	$query = "DELETE
 			FROM $g_mantis_bugnote_table
 			WHERE id='$f_bug_id'";

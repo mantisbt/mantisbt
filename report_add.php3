@@ -130,9 +130,7 @@
 	}
 	### OK!!!
 	else {
-		PRINT "Thank you for your submission.";
-		PRINT "<p>";
-		PRINT "You are now being transported to the Bug Viewing Page in 3 seconds ... <p>";
+		PRINT "Thank you for your submission.<p>";
 	}
 ?>
 <p>

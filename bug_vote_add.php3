@@ -9,6 +9,7 @@
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
+	### increase vote count and update in table
 	$f_vote++;
     $query = "UPDATE $g_mantis_bug_table
     		SET votes=$f_vote
