@@ -52,9 +52,9 @@
 	PRINT '<br /><div align="center">';
 
 	if ( $result ) {
-		PRINT $s_operation_successful;
+		print lang_get( 'operation_succesful' );
 	} else {
-		PRINT $MANTIS_ERROR[ERROR_GENERIC];
+		print error_string( ERROR_GENERIC );
 	}
 
 	PRINT '<br />';

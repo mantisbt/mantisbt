@@ -78,12 +78,12 @@
 <div align="center">
 <?php
 	if ( $result ) {				# SUCCESS
-		PRINT "$s_operation_successful<br />";
+		print lang_get( 'operation_succesful' ) . '<br />';
 	} else {						# FAILURE
 		if ( 1 == $disallowed ) {
-			PRINT $MANTIS_ERROR[ERROR_FILE_DISALLOWED].'<br />';
+			print error_string( ERROR_FILE_DISALLOWED ).'<br />';
 		} else if ( 0 == $good_upload ) {
-			PRINT $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED].'<br />';
+			print error_string( ERROR_NO_FILE_SPECIFIED ).'<br />';
 		} else if ( !$result ) {
 			print_sql_error( $query );
 		}

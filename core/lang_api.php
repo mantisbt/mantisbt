@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.10 2003-02-17 13:16:28 jlatour Exp $
+	# $Id: lang_api.php,v 1.11 2003-02-17 17:12:47 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -44,7 +44,7 @@
 		
 		foreach ( array_keys( $t_vars ) as $t_var ) {
 			$t_lang_var = ereg_replace( '^s_', '', $t_var );
-			if ( $t_lang_var != $t_var ) {
+			if ( $t_lang_var != $t_var || 'MANTIS_ERROR' == $t_var ) {
 				$g_lang_strings[$t_lang_var] = $$t_var;
 			}
 		}

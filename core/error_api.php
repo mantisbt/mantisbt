@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.17 2003-02-17 01:50:09 jfitzell Exp $
+	# $Id: error_api.php,v 1.18 2003-02-17 17:12:46 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -251,8 +251,8 @@
 	# ---------------
 	# return an error string (in the current language) for the given error
 	function error_string( $p_error ) {
-		global $MANTIS_ERROR;
-
+		$MANTIS_ERROR = lang_get( 'MANTIS_ERROR' );
+		
 		return $MANTIS_ERROR[$p_error];
 	}
 
