@@ -32,24 +32,24 @@
 	# --------------------
 	class BC_Timer {
 		var $atime; # this is an array of ( string token => time ) array elements.
-
+		# ---
 		function BC_Timer() {
 			$this->atime   = array();
 			$this->atime[] = array( "START", $this->get_microtime() );
 		}
-
+		# ---
 		# get_microtime function taken from Everett Michaud on Zend.com
 		function get_microtime(){
 			$tmp = split( ' ', microtime() );
 			$rt = $tmp[0] + $tmp[1];
 			return $rt;
 		}
-
+		# ---
 		# create the time entry
 		function mark_time( $p_marker_name ) {
 			$this->atime[] = array( $p_marker_name, $this->get_microtime() );
 		}
-
+		# ---
 		# print out the timings.  If not in debug then just print out the total time.
 		function print_times() {
 			global $g_debug_timer;
@@ -59,19 +59,21 @@
 			# store end time
 			$this->atime[] = array( "END", $this->get_microtime() );
 
+			# calculate end time
+			$end = count( $this->atime )-1;
+			$total_time = $this->atime[$end][1]-$this->atime[0][1];
+
 			# if debug then display debug timings
 			if ( ON == $g_debug_timer ) {
 				for ($i=0;$i+1<count($this->atime);$i++) {
 					$time = $this->atime[$i+1][1]-$this->atime[$i][1];
-					#echo number_format( $time, 5 )." = ".$this->atime[$i][0]." : ".$this->atime[$i+1][0]."<br />";
-					PRINT '<span class="italic">Time: '.number_format( $time, 6 ).' seconds for '.$this->atime[$i][0].' -to- '.$this->atime[$i+1][0].'</span><br />';
+					$time_precent = $time / $total_time * 100;
+					PRINT '<span class="italic">Time: '.number_format( $time, 6 ).' seconds ( '.number_format( $time_precent, 2 ).'% ) for '.$this->atime[$i][0].' -to- '.$this->atime[$i+1][0].'</span><br />';
 				}
 			}
 
 			# display total time
-			$end = count( $this->atime )-1;
-			$time = $this->atime[$end][1]-$this->atime[0][1];
-			PRINT '<span class="italic">Time: '.number_format( $time, 6 ).' seconds.</span><br />';
+			PRINT '<span class="italic">Time: '.number_format( $total_time, 6 ).' seconds.</span><br />';
 		}
 	}
 	# --------------------
