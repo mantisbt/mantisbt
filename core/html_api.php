@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.126 2004-08-27 13:24:11 thraxisp Exp $
+	# $Id: html_api.php,v 1.127 2004-08-27 17:19:15 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -335,15 +335,27 @@
 		if ( ON == config_get( 'show_queries_count' ) ) {
 			$t_count = count( $g_queries_array );
 			echo "\t",  $t_count, ' total queries executed.<br />', "\n";
-			echo "\t",  count( array_unique ( $g_queries_array ) ).' unique queries executed.<br />', "\n";
+			$t_unique_queries = 0;
+			$t_shown_queries = array();
+			for ( $i = 0; $i < $t_count; $i++ ) {
+				if ( ! in_array( $g_queries_array[$i][0], $t_shown_queries ) ) {
+					$t_unique_queries++;
+					$g_queries_array[$i][2] = false;
+					array_push( $t_shown_queries, $g_queries_array[$i][0] );
+				} else {
+					$g_queries_array[$i][2] = true;
+				}
+			}
+			echo "\t",  $t_unique_queries . ' unique queries executed.<br />', "\n";
 			if ( ON == config_get( 'show_queries_list' ) ) {
 				echo "\t",  '<table>', "\n";
-				$t_total = 0;				$t_shown_queries = array();
+				$t_total = 0;
 				for ( $i = 0; $i < $t_count; $i++ ) {
-					$t_time = $g_queries_array[$i][1];					$t_total += $t_time;					if ( in_array( $g_queries_array[$i][0], $t_shown_queries ) ) {
+					$t_time = $g_queries_array[$i][1];
+					$t_total += $t_time;
+					if ( true == $g_queries_array[$i][2] ) {
 						echo "\t",  '<tr><td style="color: red">', ($i+1), '</td><td style="color: red">', $t_time , '</td><td style="color: red">', htmlspecialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 					} else {
-						array_push( $t_shown_queries, $g_queries_array[$i][0] );
 						echo "\t",  '<tr><td>', ($i+1), '</td><td>'. $t_time . '</td><td>', htmlspecialchars($g_queries_array[$i][0]), '</td></tr>', "\n";
 					}
 				}
