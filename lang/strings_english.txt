@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.203 $
-	# $Author: bigbadger $
-	# $Date: 2004-08-16 13:28:41 $
+	# $Revision: 1.204 $
+	# $Author: prichards $
+	# $Date: 2004-08-21 13:52:18 $
 	#
-	# $Id: strings_english.txt,v 1.203 2004-08-16 13:28:41 bigbadger Exp $
+	# $Id: strings_english.txt,v 1.204 2004-08-21 13:52:18 prichards Exp $
 	###########################################################################
 ?>
 <?php
@@ -906,6 +906,7 @@ $s_no = 'No';
 $s_open_filters = 'Change Filter';
 $s_or_unassigned = 'Or Unassigned';
 $s_ok = 'OK';
+$s_select_all = 'Select All';
 
 # stored query strings
 $s_use_query = 'Use Filter';

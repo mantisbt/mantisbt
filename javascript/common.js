@@ -6,7 +6,7 @@
  * See the README and LICENSE files for details
  *
  * --------------------------------------------------------
- * $Id: common.js,v 1.3 2004-07-17 23:52:57 vboctor Exp $
+ * $Id: common.js,v 1.4 2004-08-21 13:54:28 prichards Exp $
  * --------------------------------------------------------
  */
 
@@ -124,3 +124,13 @@ function ToggleDiv( p_div, p_cookie_bit ) {
 	SetDiv( p_div, p_cookie_bit );
 }
 
+/* Check checkboxes */
+function checkall( p_formname, p_state) {
+	var t_elements = (eval("document." + p_formname + ".elements"));
+	
+	for (var i = 0; i < t_elements.length; i++) { 
+    	if(t_elements[i].type == 'checkbox') { 
+      		t_elements[i].checked = p_state;
+   		} 
+  	}
+}
