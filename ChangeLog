@@ -1,11 +1,12 @@
 Mantis
 
-02.16.2001  -   0.14.4
+02.17.2001  -   0.14.4
 
  * Fixed erroneous error message when signing up for new account
  * Fixed error with warning in project_menu_page
  * Fixed error in email bugnotes where slashes weren't showing up
  * Fixed some possible display errors in Netscape
+ * Fixed extra slahes in email subject
  * Added protection around cookie_val variables to prevent unnecessary warnings
  * Added direct link to bug in email
  * Added email to assignee upon assignment

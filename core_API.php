@@ -1548,7 +1548,7 @@
 		}
 
 		### Build subject
-		$p_subject = "[".$t_project_name." ".$p_bug_id."]: ".$p_subject;
+		$p_subject = "[".$t_project_name." ".$p_bug_id."]: ".stripslashes( $p_subject );
 
 		### build message
 		$t_message = $p_message."\n";
