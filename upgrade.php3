@@ -97,7 +97,7 @@ if ( $result3 ) {
 		for ($i;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			
+
 			$query2 = "UPDATE $g_mantis_bug_table
 				SET date_submitted='$v_date_submitted', last_updated='$v_last_updated', project_id='0000001'
 				WHERE id='$v_id'";
@@ -125,7 +125,7 @@ if ( $result3 ) {
 		for ($i;$i<$news_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			
+
 			$query2 = "UPDATE $g_mantis_news_table
 				SET date_posted='$v_date_posted', last_modified='$v_last_modified', project_id='0000001'
 				WHERE id='$v_id'";
@@ -171,9 +171,9 @@ if ( $result3 ) {
 		for ($i;$i<$user_count;$i++) {
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, "v" );
-			
+
 			$query2 = "UPDATE $g_mantis_user_table
-				SET date_submitted='$v_date_submitted', last_visit='$v_last_visit'
+				SET date_created='$v_date_created', last_visit='$v_last_visit'
 				WHERE id='$v_id'";
 			$result2 = db_query( $query2 );
 		}
