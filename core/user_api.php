@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.80 2004-11-19 12:29:00 vboctor Exp $
+	# $Id: user_api.php,v 1.81 2004-12-21 02:16:48 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -640,13 +640,12 @@
 			$t_where_prj = "project_id='$c_project_id' AND";
 		}
 
-		$t_resolved	= RESOLVED;
-		$t_closed	= CLOSED;
+		$t_resolved	= config_get('bug_resolved_status_threshold');
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
-				  		status<>'$t_resolved' AND status<>'$t_closed' AND
+				  		status<'$t_resolved' AND
 				  		handler_id='$c_user_id'";
 		$result = db_query( $query );
 
@@ -667,13 +666,12 @@
 			$t_where_prj = "project_id='$c_project_id' AND";
 		}
 
-		$t_resolved	= RESOLVED;
-		$t_closed	= CLOSED;
+		$t_resolved	= config_get('bug_resolved_status_threshold');
 
 		$query = "SELECT COUNT(*)
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
-						  status<>'$t_resolved' AND status<>'$t_closed' AND
+						  status<'$t_resolved' AND
 						  reporter_id='$c_user_id'";
 		$result = db_query( $query );
 
