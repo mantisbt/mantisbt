@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.25 2002-12-17 11:06:16 jfitzell Exp $
+	# $Id: bug_api.php,v 1.26 2002-12-23 02:12:39 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -550,6 +550,19 @@
 		# Update the last update date
 		bug_update_date( $p_bug_id );
 
+		# @@@ VBOCTOR: I don't like the following code since it hard-codes some assumptions
+		#              about the bug states and when an email should be sent.  There should
+		#              be configuration options that achieves the same in a generic way.
+		# Suggestion:
+		#		- An email should always be sent if the handler is changed, independent
+		#		of whether the status is changed or not.  The configs should specify
+		#		who is to be notified in this case.
+		#		- The first index of $g_notify_flags should be the status id rather
+		#		a string that corresponds to it.  For example, _NEW rather than
+		#		'new'.
+		#               - $s_bug_update_notification[<status>] that is to be used to
+		#		determine the message to be displayed at the top of the email.
+		#
 		# If we should notify and it's in feedback state then send an email
 		switch ( $p_bug_data->status ) {
 			case NEW_:
