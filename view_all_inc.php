@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.143 2004-08-21 15:49:42 prichards Exp $
+	# $Id: view_all_inc.php,v 1.144 2004-08-28 12:24:20 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -351,8 +351,6 @@
 <?php
 		if ( $t_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
 			echo "<input type=\"checkbox\" name=\"all_bugs\" value=\"all\" onClick=\"checkall('bug_action', this.form.all_bugs.checked)\"><span class=\"small\">" . lang_get( 'select_all' ) . '</span>';
-		} else {
-			echo '&nbsp;';
 		}
 
 		if ( $t_checkboxes_exist ) {
