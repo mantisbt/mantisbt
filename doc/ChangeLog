@@ -1,84 +1,84 @@
 Mantis ChangeLog
 
-2002.06.??  -  0.18.0
+2002.08.??  -  0.18.0
 
- * Fixed problem in core_API.php where constants were used before declaration
- * Fixed problem with ambiguous column names in queries when using the text search or applying filters
- * Fixed problem deleting bugnotes.
- * Fixed problem with print_assign_to_option_list() not selecting the current user.
- * Closed a security problem with print_all_bug_page.php which allowed reporters to see bug summaries of bugs they hadn't reported.
- * Made 'normal' default priority for new bugs.
- * Added capability to monitor bugs even when not reporter or handler
- * Added basic private bug functionality
- * Added validation checks for all inputs that are passed on to database queries.
- * Added check_varset() function to replace if isset() else checks.
- * Added $s_charset to all localization files.
- * Added option to allow reporters to close the bugs they reported.
+ * Added $g_auto_set_status_to_assigned to allow enabling/disabling of automatically setting the status to ASSIGNED when the defect is assigned.  Default is ON.
+ * Added $g_default_notify_flags and $g_notify_flags which replace $g_notify_developers_on_new, $g_notify_on_new_threshold, and $g_notify_admin_on_new.  The old flags are no longer supported.  The new ones provide full control on who should be notified on each event/action.
+ * Added $g_handle_bug_threshold to allow controlling the access level required for a user to appear in the assign to list and be able to handle bugs.
  * Added $g_notify_admin_on_new to allow enabling/disable of notifications to admins on arrival of new bugs.
  * Added $g_notify_on_new_threshold to allow controlling the threshold of notification on arrival of new bugs.
- * Added support for "product : category" rather than "category" only in summary for "All Products" ($g_summary_product_colon_category)
- * Added button to copy categories from another project, in addition to the current 'copy to'.
- * Added new localization strings.
- * Added support for allowing managers to update project information, change project user list, add/edit/delete categories and versions.
- * Added a remove link next to the edit link in the project categories and project versions to all deleting without going into edit.
- * Administrators can now modify the preferences for all users that are not protected.  Protected users need to be unprotected first.
- * Quoted various text values retrieved from a database and used in a database query.
- * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
- * Updated comments in all localization files to point to correct file names.
- * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
- * Removed HTML entities from all localization files.
- * Removed get_status_bgcolor from core_helper_API.php and all files using it, in favor of get_status_color.
- * Removed special status of 'closed' concerning colors. 'View all bugs' will use the configured background color.
- * Reworked code formatting for $c_ variables.
- * Reworked !isset() checks to use check_varset().
- * Reworked BCTimer class to be more useful for debugging.
- * Modified input checked variables to be prefixed by $c_.
- * Modified form elements to be standards compliant.
- * Modified core_print_API.php to escape double quotes in text fields, instead of replacing them by single quotes.
- * Modified all string files to use single quotes instead of double quotes.
- * Modified all php files to use single quotes where double quotes were unnecessary.
- * Modified core_html_API.php to print a META-tag defining the charset.
- * Modified core_email_API.php to send a content-type header in emails.
- * Modified core_user_API.php, login.php and login_page.php to send the user back to the referring page after login.
- * Modified & in URLs &amp; to conform with standards.
- * Made 'light grey' the default color for 'closed'.
- * Added bug history functionality.
- * Fixed defects with updating project categories and versions.
- * Removed most file variables from default/config_inc2.php.
- * Added support for auto-assigning of bugs when a default user is specified for the category and if bug is not pre-assigned.
- * Added links from the counters of bugs reported and assigned to logged in user to their corresponding filtered view.
- * Added Chinese Simplified transaltion.
- * Added support for private bugnotes.
- * Enhanced the admin_upgrade.php script, and supported auto-generation of SQL files.
- * In the view bugs, when all projects is selected the project name is now displayed in smaller font over the category.
- * Added support for optional compression of html output ($g_compress_html).  This option is OFF by default since it requires PHP 4.04.
- * Moved admin_* scripts into admin/ folder.
- * Added view_state to news.  News can now be made private.
- * Added announcement flag to news.  Announcements are always kept at the top of the news page.
- * Added $g_view_summary_threshold to configure the access level required for viewing summary page.
- * Added bugnote_dlete_page.php for bugnote delete confirmation.
- * Added $g_auto_set_status_to_assigned to allow enabling/disabling of automatically setting the status to ASSIGNED when the defect is assigned.  Default is ON.
- * Added support for custom_strings_inc.php, if this file is found in main directory it gets included after lang/strings_xxxx.php to allow overriding of strings without modifying the language files.  $g_active_language can be used to check the active language.
- * Added $g_handle_bug_threshold to allow controlling the access level required for a user to appear in the assign to list and be able to handle bugs.
- * Added support for custom_constants_inc.php, if this file is found in main directory it gets included after constants_inc.php.  It is useful to define constants for custom enumerations.
- * Added support for custom_config_inc.php, this is to replace config_inc.php.  Although config_inc.php is still supported, it is recommended to use the new name.
- * Replaced $g_<status>_color variables with $g_status_colors['<status color>'] array in the configuration.  For example, $g_new_color is replaced with $g_status_colors['new'].
- * Added support for adding multiple categories in one step, this is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
- * Added multiple bug actions in view_all_bug_page.php.
- * Added a direct link, with a small icon, on each bug row, so that users on a selected project can switch directly to the update bug page (simple/advanced depending on user preferences).
- * Added automatic defaults for $g_path and $g_absolute_path rather than dummy values.  This should avoid the need of redefining these values in custom_config_inc.php and also support multiple domains.
- * Added configuration flags ($g_show_queries_count and $g_show_queries_list) that track the executed queries and display their total count, unique queries count, and the actual list of queries executed.
- * Added more visual graph pages in summary_page.php. Caution, old versions of JPGraph may cause problems, use v1.6.3 or above if you can.
- * Added $g_default_notify_flags and $g_notify_flags which replace $g_notify_developers_on_new, $g_notify_on_new_threshold, and $g_notify_admin_on_new.  The old flags are no longer supported.  The new ones provide full control on who should be notified on each event/action.
- * Added notifications when a bug is deleted.
  * Added $g_view_attachments_threshold to control the access level required to view attachments.  This is useful when there is a need to share the knowledge about the defects, but to secure customer data.
- * Added the support to upload attachments to an FTP server (so now there is DISK, DATABASE, and FTP).  Recently uploaded/downloaded attachments are cached at the web server.
- * Added support for modifying the reporter of a bug.
- * Added word2k and excel export in print_all_bug_page.php. Users can choose the bugs to display/print, and the fields to export with the 'Printing Options' link.
+ * Added $g_view_summary_threshold to configure the access level required for viewing summary page.
+ * Added $s_charset to all localization files.
+ * Added a direct link, with a small icon, on each bug row, so that users on a selected project can switch directly to the update bug page (simple/advanced depending on user preferences).
+ * Added a remove link next to the edit link in the project categories and project versions to all deleting without going into edit.
+ * Added announcement flag to news.  Announcements are always kept at the top of the news page.
+ * Added automatic defaults for $g_path and $g_absolute_path rather than dummy values.  This should avoid the need of redefining these values in custom_config_inc.php and also support multiple domains.
+ * Added basic private bug functionality
+ * Added bug history functionality.
+ * Added bugnote_delete_page.php for bugnote delete confirmation.
+ * Added button to copy categories from another project, in addition to the current 'copy to'.
+ * Added capability to monitor bugs even when not reporter or handler
+ * Added check_varset() function to replace if isset() else checks.
+ * Added Chinese Simplified transaltion.
+ * Added configuration flags ($g_show_queries_count and $g_show_queries_list) that track the executed queries and display their total count, unique queries count, and the actual list of queries executed.
  * Added custom attributes for the 7 ones in config_inc.php : priority, severity, status (with colors), etc... Define it in manage_proj_menu_page.php ; implementation has been thought in a 'per project Settings' conception, but only available for all projects right now.
+ * Added links from the counters of bugs reported and assigned to logged in user to their corresponding filtered view.
+ * Added more visual graph pages in summary_page.php. Caution, old versions of JPGraph may cause problems, use v1.6.3 or above if you can.
+ * Added multiple bug actions in view_all_bug_page.php.
+ * Added new localization strings.
+ * Added notifications when a bug is deleted.
+ * Added option to allow reporters to close the bugs they reported.
+ * Added support for "product : category" rather than "category" only in summary for "All Products" ($g_summary_product_colon_category)
+ * Added support for adding multiple categories in one step, this is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
+ * Added support for allowing managers to update project information, change project user list, add/edit/delete categories and versions.
+ * Added support for auto-assigning of bugs when a default user is specified for the category and if bug is not pre-assigned.
+ * Added support for custom_config_inc.php, this is to replace config_inc.php.  Although config_inc.php is still supported, it is recommended to use the new name.
+ * Added support for custom_constants_inc.php, if this file is found in main directory it gets included after constants_inc.php.  It is useful to define constants for custom enumerations.
+ * Added support for custom_strings_inc.php, if this file is found in main directory it gets included after lang/strings_xxxx.php to allow overriding of strings without modifying the language files.  $g_active_language can be used to check the active language.
+ * Added support for modifying the reporter of a bug.
+ * Added support for optional compression of html output ($g_compress_html).  This option is OFF by default since it requires PHP 4.04.
+ * Added support for private bugnotes.
+ * Added support for supervariables ($_SERVER, $_REQUEST, etc.) in PHP >= 4.1.0, since the old variables were deprecated. In the future the extract() call should be made obsolete by the use of $_GET and such throughout Mantis.
+ * Added the support to upload attachments to an FTP server (so now there is DISK, DATABASE, and FTP).  Recently uploaded/downloaded attachments are cached at the web server.
+ * Added validation checks for all inputs that are passed on to database queries.
+ * Added view_state to news.  News can now be made private.
+ * Added word2k and excel export in print_all_bug_page.php. Users can choose the bugs to display/print, and the fields to export with the 'Printing Options' link.
+ * Administrators can now modify the preferences for all users that are not protected.  Protected users need to be unprotected first.
+ * Closed a security problem with print_all_bug_page.php which allowed reporters to see bug summaries of bugs they hadn't reported.
+ * Enhanced the admin_upgrade.php script, and supported auto-generation of SQL files.
+ * Fixed defects with updating project categories and versions.
+ * Fixed problem deleting bugnotes.
+ * Fixed problem in core_API.php where constants were used before declaration
+ * Fixed problem with ambiguous column names in queries when using the text search or applying filters
+ * Fixed problem with print_assign_to_option_list() not selecting the current user.
  * Fixed security hole in summary_graph_functions.php (Joao Gouveia: tharbad@kaotik.org)
  * Improved the behaviour of sorting the tables of users and projects in 'Manage'.
- * Added support for supervariables ($_SERVER, $_REQUEST, etc.) in PHP >= 4.1.0, since the old variables were deprecated. In the future the extract() call should be made obsolete by the use of $_GET and such throughout Mantis.
+ * In the view bugs, when all projects is selected the project name is now displayed in smaller font over the category.
+ * Made 'light grey' the default color for 'closed'.
+ * Made 'normal' default priority for new bugs.
+ * Modified & in URLs &amp; to conform with standards.
+ * Modified all php files to use single quotes where double quotes were unnecessary.
+ * Modified all string files to use single quotes instead of double quotes.
+ * Modified core_email_API.php to send a content-type header in emails.
+ * Modified core_html_API.php to print a META-tag defining the charset.
+ * Modified core_print_API.php to escape double quotes in text fields, instead of replacing them by single quotes.
+ * Modified core_user_API.php, login.php and login_page.php to send the user back to the referring page after login.
+ * Modified form elements to be standards compliant.
+ * Modified input checked variables to be prefixed by $c_.
+ * Moved admin_* scripts into admin/ folder.
+ * Quoted various text values retrieved from a database and used in a database query.
+ * Removed French2 localization (out of date, without HTML entities. Replaced by new French localization).
+ * Removed get_status_bgcolor from core_helper_API.php and all files using it, in favor of get_status_color.
+ * Removed HTML entities from all localization files.
+ * Removed most file variables from default/config_inc2.php.
+ * Removed special status of 'closed' concerning colors. 'View all bugs' will use the configured background color.
+ * Replaced $g_<status>_color variables with $g_status_colors['<status color>'] array in the configuration.  For example, $g_new_color is replaced with $g_status_colors['new'].
+ * Reworked !isset() checks to use check_varset().
+ * Reworked BCTimer class to be more useful for debugging.
+ * Reworked code formatting for $c_ variables.
+ * Updated comments in all localization files to point to correct file names.
+ * Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
 
 2002.05.19  -  0.17.3
 
