@@ -32,6 +32,7 @@ Mantis
  * Removed menu_inc.php file and related variable.  Moved this into print_menu().
  * Removed print_mantis_version().  Moved it into print_foooter().
  * Renamed g_store_file_to to g_file_upload_method.
+ * Moved language files into lang/ subdirectory.
 
 12.01.2001  -   0.16.1
 

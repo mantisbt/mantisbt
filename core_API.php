@@ -24,13 +24,13 @@
 		$result = db_query( $query );
 		$t_language = db_result( $result, 0 , 0 );
 		if (!empty( $t_language )) {
-			include( "strings_".$t_language.".txt" );
+			include( "lang/strings_".$t_language.".txt" );
 		} else {
-			include( "strings_".$g_default_language.".txt" );
+			include( "lang/strings_".$g_default_language.".txt" );
 		}
 		db_close();
 	} else {
-		include( "strings_".$g_default_language.".txt" );
+		include( "lang/strings_".$g_default_language.".txt" );
 	}
 
 	require( "core_html_API.php" );
