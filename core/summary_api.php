@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: summary_api.php,v 1.33 2004-10-20 01:11:01 narcissus Exp $
+	# $Id: summary_api.php,v 1.34 2004-12-17 01:31:44 thraxisp Exp $
 	# --------------------------------------------------------
 
 	### Summary printing API ###
@@ -60,7 +60,7 @@
 		$t_bugs_closed = 0;
 		$t_bugs_total = 0;
 
-		$t_resolved_val = RESOLVED;
+		$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
 		$t_closed_val = CLOSED;
 
 		while ( $row = db_fetch_array( $result ) ) {
@@ -79,20 +79,31 @@
 						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_resolution=' . $t_last_value;
 						break;
 					case 'priority':
-						# Currently no filtering by priority :(
-						$t_bug_link = '';
+						$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_priority=' . $t_last_value;
 						break;
 				}
 
 				if ( !is_blank( $t_bug_link ) ) {
 					if ( 0 < $t_bugs_open ) {
 						$t_bugs_open = $t_bug_link . '&amp;hide_status=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+					} else {
+						if ( ( 'status' == $p_enum ) && ( $t_last_value >= $t_resolved_val ) ) {
+							$t_bugs_open = '-';
+						}
 					}
 					if ( 0 < $t_bugs_resolved ) {
 						$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_status=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+					} else {
+						if ( ( 'status' == $p_enum ) && ( ( $t_last_value < $t_resolved_val ) || ( $t_last_value >= $t_closed_val ) ) ) {
+							$t_bugs_resolved = '-';
+						}
 					}
 					if ( 0 < $t_bugs_closed ) {
 						$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_status=">' . $t_bugs_closed . '</a>';
+					} else {
+						if ( ( 'status' == $p_enum ) && ( $t_last_value < $t_closed_val ) ){
+							$t_bugs_closed = '-';
+						}
 					}
 					if ( 0 < $t_bugs_total ) {
 						$t_bugs_total = $t_bug_link . '&amp;hide_status=">' . $t_bugs_total . '</a>';
@@ -108,16 +119,12 @@
 			}
 
 			$t_bugs_total++;
-			switch( $row['status'] ) {
-				case $t_resolved_val:
-					$t_bugs_resolved++;
-					break;
-				case $t_closed_val:
-					$t_bugs_closed++;
-					break;
-				default:
-					$t_bugs_open++;
-					break;
+			if ( $t_closed_val <= $row['status'] ) {
+				$t_bugs_closed++;
+			} else if ( $t_resolved_val <= $row['status'] ) {
+				$t_bugs_resolved++;
+			} else {
+				$t_bugs_open++;
 			}
 			$t_last_value = $row[$p_enum];
 		}
@@ -136,20 +143,31 @@
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_resolution=' . $t_last_value;
 					break;
 				case 'priority':
-					# Currently no filtering by priority :(
-					$t_bug_link = '';
+					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;show_priority=' . $t_last_value;
 					break;
 			}
 
 			if ( !is_blank( $t_bug_link ) ) {
 				if ( 0 < $t_bugs_open ) {
 					$t_bugs_open = $t_bug_link . '&amp;hide_status=' . RESOLVED . '">' . $t_bugs_open . '</a>';
+				} else {
+					if ( ( 'status' == $p_enum ) && ( $t_last_value >= $t_resolved_val ) ) {
+						$t_bugs_open = '-';
+					}
 				}
 				if ( 0 < $t_bugs_resolved ) {
 					$t_bugs_resolved = $t_bug_link . '&amp;show_status=' . RESOLVED . '&amp;hide_status=' . CLOSED . '">' . $t_bugs_resolved . '</a>';
+					} else {
+						if ( ( 'status' == $p_enum ) && ( ( $t_last_value < $t_resolved_val ) || ( $t_last_value >= $t_closed_val ) ) ) {
+							$t_bugs_resolved = '-';
+					}
 				}
 				if ( 0 < $t_bugs_closed ) {
 					$t_bugs_closed = $t_bug_link . '&amp;show_status=' . CLOSED . '&amp;hide_status=">' . $t_bugs_closed . '</a>';
+					} else {
+						if ( ( 'status' == $p_enum ) && ( $t_last_value < $t_closed_val ) ){
+							$t_bugs_closed = '-';
+						}
 				}
 				if ( 0 < $t_bugs_total ) {
 					$t_bugs_total = $t_bug_link . '&amp;hide_status=">' . $t_bugs_total . '</a>';
