@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.81 $
+	# $Revision: 1.82 $
 	# $Author: bigbadger $
-	# $Date: 2004-09-01 17:56:41 $
+	# $Date: 2004-09-11 02:55:16 $
 	#
-	# $Id: strings_french.txt,v 1.81 2004-09-01 17:56:41 bigbadger Exp $
+	# $Id: strings_french.txt,v 1.82 2004-09-11 02:55:16 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -103,16 +103,16 @@ $s_login_link = 'Connexion';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_failed = 'Vous n\'aviez pas les permissions appropriées pour agir sur les bugs suivants : ';
-$s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
-$s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_access = 'Vous n\'aviez pas les permissions appropriées pour effectuer cette action.';
+$s_bug_actiongroup_status = 'Ce bug ne peut pas être changé pour l\'état demandé';
 $s_close_bugs_conf_msg = 'Voulez-vous vraiment fermer ces bugs ?';
 $s_delete_bugs_conf_msg = 'Voulez-vous vraiment supprimer ces bugs ?';
 $s_move_bugs_conf_msg = 'Déplacer vers';
 $s_copy_bugs_conf_msg = 'Copier bugs vers';
 $s_assign_bugs_conf_msg = 'Assigner à';
-$s_resolve_bugs_conf_msg = 'Résolution';
-$s_priority_bugs_conf_msg = 'Priorité des bugs';
-$s_status_bugs_conf_msg = 'Etat des bugs';
+$s_resolve_bugs_conf_msg = 'Choisir la résultion des bugs';
+$s_priority_bugs_conf_msg = 'Choisir la priorité des bugs';
+$s_status_bugs_conf_msg = 'Choisir l\'état des bugs';
 $s_view_status_bugs_conf_msg = 'Choisir afficher l\'état des bugs';
 $s_close_group_bugs_button = 'Fermer les bugs' ;
 $s_delete_group_bugs_button = 'Supprimer les bugs' ;
@@ -125,11 +125,11 @@ $s_status_group_bugs_button = 'Mettre à jour le statut' ;
 $s_view_status_group_bugs_button = 'Mettre à jour Afficher le statut';
 
 # improved JPgraphs strings
-$s_graph_imp_status_title = 'Graphiques par état' ;
-$s_graph_imp_priority_title = 'Graphiques par priorité' ;
-$s_graph_imp_severity_title = 'Graphiques par sévérité';
-$s_graph_imp_category_title = 'Graphiques par catégorie';
-$s_graph_imp_resolution_title = 'Graphiques par résolution';
+$s_graph_imp_status_title = 'Graphiques de synthèse par état' ;
+$s_graph_imp_priority_title = 'Graphiques de synthèse par priorité' ;
+$s_graph_imp_severity_title = 'Graphiques de synthèse par sévérité';
+$s_graph_imp_category_title = 'Graphiques de synthèse par catégorie';
+$s_graph_imp_resolution_title = 'Graphiques de synthèse par résolution';
 $s_by_status_pct = 'pourcentage par état';
 $s_by_priority_pct = 'pourcentage par priorité';
 $s_by_severity_pct = 'pourcentage par sévérité';
@@ -146,7 +146,7 @@ $s_category_link = 'Par catégorie';
 $s_resolution_link = 'Par résolution';
 
 # print_all_bug_page.php : display selected bugs
-$s_hide_button = 'Afficher les bugs sélectionnés';
+$s_hide_button = 'Afficher seulement les sélectionnés';
 
 # print_all_bug_options.php : printing preferences
 $s_printing_preferences_title = 'Choisir les champs à imprimer';
@@ -229,12 +229,12 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = "ERREUR : Il existe déjà une 
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = "ERREUR : Relation non trouvée.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = "ERREUR : Accès Refusé : Le bug %d requiert un niveau d\'accès plus élevé.";
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = "ERREUR :  Un bug ne peut pas être relié à lui-même.";
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Max. number of in-progress requests reached. Please contact the system administrator';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Les éléments de confirmations ne correspondent pas. Merci de réessayer.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'la fonctionnalité \'perdu votre mot de passe\' n\'est pas disponible.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Vous devez fournir une adresse email pour réinitialiser le mot de passe';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Les informations fournies ne correspondent à aucun compte enregistré !';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'L'URL de confirmation n\'est pas valide ou a déjà été utilisée. Merci de s\'inscrire à nouveau.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Nombre Max. de demandes en-cours atteint. Veuillez contacter l\'administrateur du système';
 
 #$s_login_error = 'Your account may be disabled or blocked (due to too many failed login attempts) or the username/password you entered is incorrect.';
 $s_login_error = 'ERREUR : Votre compte est peut être désactivé ou alors l\'utilisateur/le mot de passe que vous avez saisi est incorrect.';
@@ -253,7 +253,7 @@ $s_administrator = 'administrateur';
 $s_myself = "Moi";
 
 # Enum Strings
-$s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:développeur,70:chef de projet,90:administrateur';
+$s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:développeur,70:manageur,90:administrateur';
 $s_project_status_enum_string     = '10:développement,30:livré,50:stable,70:obsolète';
 $s_project_view_state_enum_string = '10:public,50:privé';
 $s_view_state_enum_string         = '10:public,50:privé';
@@ -267,18 +267,18 @@ $s_projection_enum_string         = '10:aucun,30:cosmétique,50:correction mineur
 $s_eta_enum_string                = '10:aucun,20:< 1 jour,30:2-3 jours,40:< 1 semaine,50:< 1 mois,60:> 1 mois';
 
 # Email Strings
-$s_new_account_subject = 'Account registration';
-$s_new_account_greeting = 'Thank you for registering. You have account with username \'';
-$s_new_account_greeting2 = '\'. In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:';
+$s_new_account_subject = 'Enregistrement de compte';
+$s_new_account_greeting = 'Merci de vous être enregistré. Votre compte a pour nom d\'utilisateur \'';
+$s_new_account_greeting2 = '\'. Pour compléter votre enregistrement, visitez l\'URL suivante (vérifiez qu\'elle est donnée sur une seule ligne) et entrer votre propre mot de passe d\'accès :';
 $s_new_account_username = 'Utilisateur : ';
-$s_new_account_message = 'If you didn\'t request any registraion, ignore this message and nothing will happen.' . "\n\n";
-$s_new_account_do_not_reply = 'DO NOT REPLY TO THIS MESSAGE';
+$s_new_account_message = 'Si vous n\'aviez fait aucune demande d\'enregistrement, ignorez ce message et rien ne sera fait.' . "\n\n";
+$s_new_account_do_not_reply = 'NE PAS REPONDRE A CE MESSAGE';
 $s_new_account_email = 'E-mail: ';
-$s_new_account_IP = 'Remote IP address: ';
-$s_new_account_signup_msg = 'The following account has been created:';
+$s_new_account_IP = 'Adresse IP distante : ';
+$s_new_account_signup_msg = 'Le compte suivant a été créé :';
 
-$s_reset_request_msg = 'Someone (presumably you) requested a password change through email verification. If this was not you, ignore this message and nothing will happen.' . "\n\n" . 'If you requested this verification, visit the following URL to change your password:';
-$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
+$s_reset_request_msg = 'Quelqu\'un (probablement vous) a demandé un changement de mot de passe avec vérification par email. Si ce n\'était pas vous, ignorez ce message et rien ne sera fait.' . "\n\n" . 'Si vous avez demandé cette vérification, visitez l\'URL suivante pour changer votre mot de passe :';
+$s_reset_request_in_progress_msg = 'Si vous avez fourni le nom d\'utilisateur et l\'adresse email corrects pour votre compte, nous vous avons maintenant envoyé un message de confirmation à cette adresse email. Une fois le message reçu, suivez les instructions fournies pour changer le mot de passe de votre compte.';
 
 $s_email_notification_title_for_status_bug_feedback = 'Le bug suivant nécessite votre commentaire.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Le bug suivant a été accepté.';
@@ -340,7 +340,7 @@ $s_access_level = 'Droits d\'accès';
 $s_update_user_button = 'Mettre à jour l\'utilisateur';
 
 # account_prefs_page.php
-$s_default_account_preferences_title = 'Préférences du compte par défaut';
+$s_default_account_preferences_title = 'Préférences du compte';
 $s_default_project = 'Projet par défaut';
 $s_advanced_report = 'Rapport détaillé';
 $s_advanced_view = 'Vue détaillée';
@@ -348,9 +348,9 @@ $s_advanced_update = 'Mise à jour avancée';
 $s_refresh_delay = 'Délai de rafraichissement';
 $s_redirect_delay = 'Délai de redirection';
 $s_with_minimum_severity = 'Avec une sévérité minimum de';
-$s_bugnote_order = 'Bugnotes Sort Order';
-$s_bugnote_order_asc = 'Ascending';
-$s_bugnote_order_desc = 'Descending';
+$s_bugnote_order = 'Ordre de classement des Notes';
+$s_bugnote_order_asc = 'Croissant';
+$s_bugnote_order_desc = 'Décroissant';
 $s_email_on_new = 'Email en cas de nouveau bug';
 $s_email_on_assigned = 'Email en cas de nouvelle assignation';
 $s_email_on_feedback = 'Email en cas de commentaire';
@@ -401,7 +401,7 @@ $s_submit_button = 'Soumettre';
 $s_profile_updated_msg = 'Profil mis à jour...';
 
 # account_update.php
-$s_account_updated_msg = 'Votre compte a été mis à jour...';
+$s_account_updated_msg = 'Votre compte a été mis à jour avec succès...';
 $s_email_updated = 'Adresse e-mail mise à jour avec succès';
 $s_realname_duplicated = 'Ce nom réel est utilisé par un autre utilisateur';
 $s_realname_updated = 'Nom réel mis à jour avec succès';
@@ -412,12 +412,12 @@ $s_bug_assign_msg       = 'Le bug a été assigné avec succès...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Nouveau bug';
-$s_feedback_bug_title = 'Fournir un commmentaire sur le bug';
+$s_feedback_bug_title = 'Demander un commmentaire sur le bug';
 $s_acknowledged_bug_title = 'Accepter le bug';
 $s_confirmed_bug_title = 'Confirmer le bug';
 $s_assigned_bug_title = 'Assigner le bug';
 $s_new_bug_button = 'Nouveau bug';
-$s_feedback_bug_button = 'Fournir un commentaire';
+$s_feedback_bug_button = 'Demander un commentaire';
 $s_acknowledged_bug_button = 'Accepter le bug';
 $s_confirmed_bug_button = 'Confirmer le bug';
 $s_assigned_bug_button = 'Assigner le bug';
@@ -516,7 +516,7 @@ $s_vote_added_msg = 'Vote ajouté...';
 $s_bugnote_added_msg = 'Note ajoutée...';
 
 # bugnote_delete.php
-$s_bugnote_deleted_msg = 'Note supprimée...';
+$s_bugnote_deleted_msg = 'Note supprimée avec succès...';
 $s_bug_notes_title = 'Notes';
 
 # bugnote_edit_page.php
@@ -531,7 +531,7 @@ $s_bugnote_edit_link = 'Modifier';
 $s_closed_bug_button = 'Fermer le bug';
 
 # bugnote_update.php
-$s_bugnote_updated_msg = 'La note a été mise à jour...';
+$s_bugnote_updated_msg = 'La note a été mise à jour avec succès...';
 $s_edited_on = 'modifié le : ';
 
 # index.php
@@ -547,7 +547,7 @@ $s_save_login = 'Mémoriser l\'utilisateur';
 $s_choose_project = 'Choisir un projet';
 $s_login_button = 'Se connecter';
 $s_signup_link = 'Ouvrir un nouveau compte';
-$s_lost_password_link = 'Lost your password?';
+$s_lost_password_link = 'Perdu votre mot de passe ?';
 
 # login_select_proj_page.php
 $s_select_project_button = 'Choisir un projet';
@@ -557,11 +557,11 @@ $s_logged_out_title = 'Déconnexion...';
 $s_redirecting = '... Redirection en cours';
 $s_here = 'Ici';
 # lost_pwd_page.php
-$s_lost_password_title = "Password Reset";
-$s_lost_password_done_title = "Password Message Sent";
-$s_lost_password_subject = "Password Reset";
-$s_lost_password_info = "To reinstate your lost password, please supply the name and email address for the account.<br/><br/>If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.";
-$s_lost_password_confirm_hash_OK = "Your confirmation has been accepted. Please update your password.";
+$s_lost_password_title = "Réinitialisation de mot de passe";
+$s_lost_password_done_title = "Message de mot de passe envoyé";
+$s_lost_password_subject = "Réinitialisation de mot de passe";
+$s_lost_password_info = "Pour réinitialiser votre mot de passe, merci d\'indiquer le nom d\'utilisateur et l\'adresse email du compte.<br/><br/>Si les données correspondent à un compte valide, il vous sera envoyé par email une URL spéciale qui contient un code de validation pour votre compte. Merci de suivre ce lien pour changer votre mot de passe.";
+$s_lost_password_confirm_hash_OK = "Votre confirmation a été acceptée. Merci de mettre à jour votre mot de passe.";
 
 # main_page.php
 $s_open_and_assigned_to_me = 'Bug ouverts qui me sont assignés';
@@ -603,13 +603,13 @@ $s_last_visit = 'Dernière visite';
 $s_edit_user_link = 'Modifier l\'utilisateur';
 
 # manage_proj_add.php
-$s_project_added_msg = 'Nouveau projet installé...';
+$s_project_added_msg = 'Nouveau projet installé avec succès...';
 
 # manage_proj_category_add.php
-$s_category_added_msg = 'Nouvelle catégorie créée...';
+$s_category_added_msg = 'Nouvelle catégorie créée avec succès...';
 
 # manage_proj_category_delete.php
-$s_category_deleted_msg = 'Catégorie effacée...';
+$s_category_deleted_msg = 'Catégorie effacée avec succès...';
 
 # manage_proj_category_delete_page.php
 $s_category_delete_sure_msg = 'Voulez-vous vraiment supprimer cette catégorie ? Tous les bugs associés seront perdus.';
@@ -620,10 +620,10 @@ $s_edit_project_category_title = 'Modifier les catégories du projet';
 $s_update_category_button = 'Mettre à jour la catégorie';
 
 # manage_proj_category_update.php
-$s_category_updated_msg = 'La catégorie a été modifiée...';
+$s_category_updated_msg = 'La catégorie a été modifiée avec succès...';
 
 # manage_proj_delete.php
-$s_project_deleted_msg = 'Le projet a été supprimé...';
+$s_project_deleted_msg = 'Le projet a été supprimé avec succès...';
 
 # manage_proj_delete_page.php
 $s_project_delete_msg = 'Voulez-vous vraiment supprimer ce projet et tous les rapports de bug associés ?';
@@ -644,7 +644,7 @@ $s_versions = 'Versions';
 $s_add_version_button = 'Ajouter la version';
 $s_edit_link = 'Modifier';
 $s_actions = 'Actions';
-$s_version = 'Version/Build';
+$s_version = 'Version';
 $s_timestamp = 'Compteur de temps';
 $s_update = 'Mettre à jour';
 
@@ -656,16 +656,16 @@ $s_projects_title = 'Projets';
 $s_name = 'Nom';
 
 # manage_proj_update.php
-$s_project_updated_msg = 'Le projet a été mis à jour...';
+$s_project_updated_msg = 'Le projet a été mis à jour avec succès...';
 
 # manage_proj_version_add.php
-$s_version_added_msg = 'La version a été enregistrée...';
+$s_version_added_msg = 'La version a été enregistrée avec succès...';
 
 # manage_proj_version_delete.php
-$s_version_deleted_msg = 'La version a été supprimée...';
+$s_version_deleted_msg = 'La version a été supprimée avec succès...';
 
 # manage_proj_version_delete_page.php
-$s_version_delete_sure = 'Voulez-vous vraiment supprimer cette version ? Tous les rapports de bugs associés seront perdus.';
+$s_version_delete_sure = 'Voulez-vous vraiment supprimer cette version ?';
 $s_delete_version_button = 'Supprimer la version';
 
 # manage_proj_version_edit_page.php
@@ -674,7 +674,7 @@ $s_update_version_button = 'Mettre à jour la version';
 $s_released = 'Publiée';
 
 # manage_proj_version_update.php
-$s_version_updated_msg = 'La version a été mise à jour...';
+$s_version_updated_msg = 'La version a été mise à jour avec succès...';
 
 # manage_user_delete.php
 $s_account_delete_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas le supprimer.';
@@ -692,14 +692,14 @@ $s_confirm_account_pruning = 'Etes vous sûr de vouloir supprimer les comptes qui
 $s_edit_user_title = 'Modifier un utilisateur';
 $s_reset_password_button = 'Effacer le mot de passe';
 $s_delete_user_button = 'Supprimer l\'utilisateur';
-$s_reset_password_msg = 'Reset Password sends the confirmation URL via email.';
-$s_reset_password_msg2 = 'Réinitialiser le mot de passe le remplace par \'\' (vide)).';
+$s_reset_password_msg = 'La réinitialisation de mot de passe envoie l\'URL de confirmation par email.';
+$s_reset_password_msg2 = 'Réinitialiser le mot de passe le laisse vide.';
 $s_show_all_users = 'TOUS';
 
 # manage_user_reset.php
 $s_account_reset_protected_msg = 'Ce compte est protégé. Vous ne pouvez pas réinitialiser le mot de passe.';
-$s_account_reset_msg = 'Confirmation message has been sent to your email address...';
-$s_account_reset_msg2 = 'Mot de passe mis à \'\' (vide)...';
+$s_account_reset_msg = 'LMe message de confirmation a été envoyé à votre adresse email...';
+$s_account_reset_msg2 = 'Mot de passe du compte a été mis à vide...';
 
 # manage_user_update.php
 $s_manage_user_protected_msg = 'Compte protégé. Accréditation et activation protégées. Autrement, le compte a été mis à jour...';
@@ -709,7 +709,7 @@ $s_manage_user_updated_msg = 'Le compte a été mis à jour...';
 $s_main_link = 'Accueil';
 $s_view_bugs_link = 'Afficher les bugs';
 $s_report_bug_link = 'Rapporter un bug';
-$s_changelog_link = 'Change Log';
+$s_changelog_link = 'Changements';
 $s_summary_link = 'Synthèse';
 $s_account_link = 'Options';
 $s_users_link = 'Utilisateurs';
@@ -836,13 +836,13 @@ $s_selected_project = 'Projet en cours';
 $s_valid_project_msg = 'Vous devez choisir un projet valide';
 
 # signup.php
-$s_signup_done_title = 'Account registration processed';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
-$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
+$s_signup_done_title = 'Enregistrement du compte procédé';
+$s_password_emailed_msg = 'Félicitations. Vous avez été enregistré avec succès. Il vous a maintenant été envoyé un email de confirmation pour vérifier votre adresse email. En visitant le lien qui vous a été envoyé dans cet email votre compte sera activé.';
+$s_no_reponse_msg = 'Vous aurez sept jours pour compléter le processus de confirmation du compte; si vous n\'arrivez pas à compléter la confirmation du compte dans sept jours, ce compte nouvellement crée pourrait être purgé.';
 
 # signup_page.php
-$s_signup_captcha_request = 'Enter the code as it is shown in the box on the right';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation email to the email address you specified.<br/>Using the confirmation email, you will be able activate your account. If you fail to activate your account within seven days, it will be purged.<br/>You must specify a valid email address in order to receive the account confirmation email.';
+$s_signup_captcha_request = 'Entrez le code comme indiqué dans la case à droite';
+$s_signup_info = 'Pour compléter ce formulaire et vérifier vos réponses, il vous sera envoyé un email de confirmation à l\'adresse email spécifié.<br/>En utilisant l\'email de confirmation, vous serez capable d\'activer votre compte. Si vous ne parvenez pas à activer votre compte en sept jours, il sera purgé.<br/>Vous devez spécifier une adresse email valide pour recevoir l\'email de confirmation du compte.';
 $s_signup_title = 'Inscription';
 $s_signup_button = 'Inscrire';
 
@@ -910,7 +910,7 @@ $s_no = 'Non';
 $s_open_filters = 'Changer de filtre';
 $s_or_unassigned = 'Ou non assigné';
 $s_ok = 'OK';
-$s_select_all = 'Select All';
+$s_select_all = 'Selectionner tous';
 
 # stored query strings
 $s_use_query = 'Utiliser le filtre';
@@ -933,7 +933,7 @@ $s_product_build = 'Build';
 $s_system_profile = 'Description du système';
 $s_update_bug_button = 'Mettre à jour le bug';
 $s_bug_assign_to_button = 'Assigné à :';
-$s_bug_status_to_button = 'Changer l\'e'tat en :';
+$s_bug_status_to_button = 'Changer l\'état en :';
 $s_reopen_bug_button = 'Réouvrir un bug';
 $s_move_bug_button = 'Déplacer bug';
 $s_attached_files = 'Fichiers attachés';
@@ -979,7 +979,7 @@ $s_custom_field_length_min = 'Taille min.';
 $s_custom_field_length_max = 'Taille max.';
 $s_custom_field_advanced = 'N\'afficher que sur la page avancée';
 $s_custom_field_display_report = 'Afficher lors de rapport de bugs';
-$s_custom_field_display_update = 'afficher lors de mise à jour de bugs';
+$s_custom_field_display_update = 'Afficher lors de mise à jour de bugs';
 $s_custom_field_display_resolved = 'Montrer lors de résolution de bugs';
 $s_custom_field_display_closed = 'Montrer lors de fermeture de bugs';
 $s_custom_field_require_report = 'Nécessaire au rapport';

@@ -9,13 +9,13 @@
 	# Brazilian Portuguese: Fernando Machado, fm-nospam@fmachado.com
 	# Brazilian Portuguese: Juliano Ravasi Ferraz, jferraz at users sourceforge net
 	# -------------------------------------------------
-	# $Revision: 1.71 $
-	# $Author: vboctor $
-	# $Date: 2004-08-28 14:08:19 $
+	# $Revision: 1.72 $
+	# $Author: bigbadger $
+	# $Date: 2004-09-11 02:55:16 $
 	#
-	# $Id: strings_portuguese_brazil.txt,v 1.71 2004-08-28 14:08:19 vboctor Exp $
+	# $Id: strings_portuguese_brazil.txt,v 1.72 2004-09-11 02:55:16 bigbadger Exp $
 	# -------------------------------------------------
-	# Up-to-date with strings_english.txt revision 1.204 -- jferraz 2004/08/23
+	# Up-to-date with strings_english.txt revision 1.206 -- jferraz 2004/08/23
 	###########################################################################
 ?>
 <?php
@@ -409,12 +409,12 @@ $s_bug_assign_msg = 'O caso foi atribuído com sucesso...';
 
 # bug_change_status_page.php
 $s_new_bug_title = 'Novo Caso';
-$s_feedback_bug_title = 'Fornecer Retorno para o Caso';
+$s_feedback_bug_title = 'Solicitar Retorno para o Caso';
 $s_acknowledged_bug_title = 'Admitir Caso';
 $s_confirmed_bug_title = 'Confirmar Caso';
 $s_assigned_bug_title = 'Atribuir Caso';
 $s_new_bug_button = 'Novo Caso';
-$s_feedback_bug_button = 'Fornecer Retorno';
+$s_feedback_bug_button = 'Solicitar Retorno';
 $s_acknowledged_bug_button = 'Admitir Caso';
 $s_confirmed_bug_button = 'Confirmar Caso';
 $s_assigned_bug_button = 'Atribuir Caso';
