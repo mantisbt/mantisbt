@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.30 2003-02-18 02:18:00 jfitzell Exp $
+	# $Id: bug_actiongroup_page.php,v 1.31 2003-02-20 05:42:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -124,7 +124,7 @@
 <br />
 <div align="center">
 	<?php print_hr() ?>
-	<?php echo $t_question_title ?>
+	<?php echo $t_question_title . '<br /><br />' ?>
 
 	<form method="post" action="bug_actiongroup.php">
 		<input type="hidden" name="action" value="<?php echo $f_action ?>" />
