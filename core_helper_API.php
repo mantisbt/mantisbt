@@ -268,14 +268,15 @@
 	# --------------------
 	# process the $p_string and convert bugs in this format #123 to a plain text link
 	function process_bug_link_email( $p_string ) {
-		global $g_view_bug_page, $g_view_bug_advanced_page;
+		global	$g_view_bug_page, $g_view_bug_advanced_page,
+				$g_bug_link_tag;
 
 		if ( ON == get_current_user_pref_field( "advanced_view" ) ) {
-			return preg_replace("/#([0-9]+)/",
+			return preg_replace("/$g_bug_link_tag([0-9]+)/",
 								"$g_view_bug_advanced_page?f_id=\\1",
 								$p_string);
 		} else {
-			return preg_replace("/#([0-9]+)/",
+			return preg_replace("/$g_bug_link_tag([0-9]+)/",
 								"$g_view_bug_page?f_id=\\1",
 								$p_string);
 		}

@@ -560,9 +560,9 @@
 	# --------------------
 	# clean up LF to CRLF
 	function make_lf_crlf( $p_string ) {
-		global $g_strip_bare_lf;
+		global $g_mail_send_crlf;
 
-		if ( ON == $g_strip_bare_lf ) {
+		if ( ON == $g_mail_send_crlf ) {
 			$p_string = str_replace( "\n", "\r\n", $p_string );
 			return str_replace( "\r\r\n", "\r\n", $p_string );
 		} else {

@@ -231,7 +231,7 @@
 		# grab the project name
 		$project_name = get_project_field($v_project_id,"NAME");
 
-		$query = "SELECT MAX(last_modified)
+		$query = "SELECT UNIX_TIMESTAMP(MAX(last_modified)) as last_modified
 				FROM $g_mantis_bugnote_table
 				WHERE bug_id='$v_id'";
 		$res2 = db_query( $query );
