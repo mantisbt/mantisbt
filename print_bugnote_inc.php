@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bugnote_inc.php,v 1.29 2004-11-30 12:17:03 vboctor Exp $
+	# $Id: print_bugnote_inc.php,v 1.30 2005-01-13 02:24:43 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -88,6 +88,11 @@
 <tr>
 	<td class="nopad" valign="top" width="15%">
 		<table class="hide" cellspacing="1">
+		<tr>
+      <td class="print">
+				(<?php echo bugnote_format_id( $v3_id ) ?>)
+			</td>
+		</tr>
 		<tr>
 			<td class="print">
 				<?php
