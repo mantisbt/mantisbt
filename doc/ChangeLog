@@ -1,40 +1,49 @@
 Mantis ChangeLog
 
-2004.xx.xx  -  0.19.0xx
+2004.07.20  -  0.19.0a2
 
- * Enh #3275: Low priority is not marked in list of bugs (vboctor)
- * Enh #3804: Add ability to filter on view state
- * Enh #3805: Add ability to filter on bugs monitored by a user
- * Enh #3944: Add ability to filter on 'Fixed in Version'
- * Enh #3969: Relationship - Patch available (masc) - partial implementation - disabled by default.
- * Enh #3974: Make Mantis issues searchable by Search Engine
- * Enh #3984: Support definining and enforcing custom workflow (thraxisp)
- * Enh #3996: My View: how about monitored by me? (tazza70)
- * Enh #4016: Automatic language selection based on browser preferences
- * Enh #4036: Changelog should not display versions with no issues (vboctor)
- * Enh #4038: Add icon to sponsorships to attract attention (vboctor)
- * Enh #4066: Support "future" versions and a description field (vboctor)
- * Enh #4072: Make sponsorships and relationships collapsible 
- * Enh #4118: Make filter display at top of View Issues collapsible (vboctor)
- * Enh #4120: Add issue id before summary in issue view pages (vboctor)
- * Fix #4005: Signup for new account - invalid username generates crash
- * Fix #4017: Random translations popping up
- * Fix #4018: Real name field allows potentially dangerous HTML
- * Fix #4020: Database field 'realname' not found after plain installation (vboctor)
- * Fix #4021: The filter section is duplicated on the print page (tazza70)
- * Fix #4027: Database query error on text search
- * Fix #4040: Sponsorship timestamp is not displayed correctly in sponsorship list (vboctor)
- * Fix #4041: Empty "Users sponsoring this issue" (vboctor)
- * Fix #4044: Cross Site Scripting Vulnerability
- * Fix #4052: Not all the buttons are marked as class="button" (vboctor)
- * Fix #4056: Displaying/Reporting Issue -> Application Warning - lang_exists() missing arg 2 (vboctor)
- * Fix #4064: Links are not hyperlinked property if containing () (vboctor)
- * Fix #4065: Issues are not hyperlinked in Changelog if $g_bug_link_tag is not # (vboctor).
- * Fix #4081: mantis_upgrade_table.upgrade_id too small (vboctor).
- * Fix #4104: Product Version Field in simple View (vboctor).
- * New Config: fallback_language (default 'english') - Fallback language for automatic language selection.
- * New Config: status_enum_workflow (default disabled) - Defines the workflow to indicate what are the possible statuses based on the current one.
- * Updated German, Italian, Russian, Czech and Brazilian Portuguese languages.
+This is the second alpha release for 0.19.0a, if there is not much issues with it then rc1 will probably follow.  The main features in this release are issue relationships and simple workflow control.  Also version handling was almost re-implemented to support released vs. future versions and also allow adding a description to versions.
+
+- 0004018: [security] Real name field allows potentially dangerous HTML (int2str)
+- 0004044: [security] Cross Site Scripting Vulnerability (int2str)
+- 0003969: [feature] Issue Relationships Support (masc)
+- 0003984: [feature] Support definining and enforcing custom workflow (thraxisp)
+- 0004057: [feature] Add "notes" for versions (VictorBoctor)
+- 0003974: [feature] Make Mantis issues searchable by Search Engine (int2str)
+- 0004016: [feature] Automatic language selection based on browser preferences (int2str)
+- 0004066: [feature] Support "future" versions and a description field (VictorBoctor)
+- 0001210: [feature] Project Version could use some more details!!! (VictorBoctor)
+- 0004120: [feature] Add issue id before summary in issue view pages (VictorBoctor)
+- 0004104: [feature] Product Version Field in simple View (VictorBoctor)
+- 0004118: [filters] Make filter display at top of View Issues collapsible (VictorBoctor)
+- 0004071: [filters] advanced filtering with status=any fails (Narcissus)
+- 0003804: [filters] Add ability to filter by view state (private/public) (Narcissus)
+- 0003944: [filters] Give the ability to filter on : Fixed in Version value (Narcissus)
+- 0003805: [filters] Add ability to filter on bugs monitored by a user (Narcissus)
+- 0004027: [filters] Database query error in 0.19 alpha1 (Narcissus)
+- 0004088: [filters] My View: Unassigned block shows assigned items (Narcissus)
+- 0004021: [bugtracker] The filter section is duplicated on the print page (tazza70)
+- 0003993: [bugtracker] String missing in strings_english.txt file (email title on updated bug) (VictorBoctor)
+- 0003275: [bugtracker] Low priority is not marked in list of bugs (VictorBoctor)
+- 0003996: [bugtracker] My View: how about monitored by me? (tazza70)
+- 0004052: [bugtracker] Not all the buttons are marked as class="button" (VictorBoctor)
+- 0004036: [bugtracker] Changelog should not display versions with no issues (VictorBoctor)
+- 0004020: [bugtracker] Database field 'realname' not found after plain installation (VictorBoctor)
+- 0004041: [sponsorships] Empty "Users sponsoring this issue" (VictorBoctor)
+- 0004040: [sponsorships] Sponsorship timestamp is not displayed correctly in sponsorship list (VictorBoctor)
+- 0004038: [sponsorships] Add icon to sponsorships to attract attention (VictorBoctor)
+- 0004053: [localization] Italian - Missing $s_monitored_by (VictorBoctor)
+- 0004014: [localization] Italian Version: Build Translated as Version (VictorBoctor)
+- 0004017: [localization] Random translations popping up (int2str)
+- 0004056: [custom fields] Displaying/Reporting Issue -> Application Warning - lang_exists() missing arg 2 (VictorBoctor)
+- 0004081: [upgrade] mantis_upgrade_table.upgrade_id too small (VictorBoctor)
+- 0004072: [webpage] Make sponsorships and relationships collapsible (int2str)
+- 0004065: [other] Issues are not hyperlinked in Changelog if $g_bug_link_tag is not # (VictorBoctor)
+- 0004064: [other] Links are not hyperlinked properly if containing '(' or ')' (VictorBoctor)
+- 0004005: [other] signup for new account - invalid username generates crash (int2str)
+- New Config: fallback_language (default 'english') - Fallback language for automatic language selection.
+- New Config: status_enum_workflow (default disabled) - Defines the workflow to indicate what are the possible statuses based on the current one.
+- Updated German, Italian, Russian, Czech and Brazilian Portuguese languages.
 
 2004.07.07  -  0.19.0a1
 
