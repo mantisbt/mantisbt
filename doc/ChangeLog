@@ -21,6 +21,7 @@ Mantis ChangeLog
  * Enh #3713: Allow users to set severity levels along with email preferences.
  * Enh #3735: New CSS class for HTML Form Buttons
  * Enh #3801: Add "myself" meta filter options.
+ * Enh #3808: Ability to sponsor (fund) a bug or feature request.
  * Fix #3094: Switching projects clears filter values.
  * Fix #3259: Saving CSV file of bugs containning double quotes causes invalid csv.
  * Fix #3397: Delete notification should be off when deleting a project.
@@ -50,6 +51,15 @@ Mantis ChangeLog
  * New Config: stored_query_create_threshold (default DEVELOPER).  Threshold needed to be able to create stored queries.
  * New Config: stored_query_create_shared_threshold (default MANAGER).  Threshold needed to be able to create shared stored queries.
  * New Config: hide_status_default (default CLOSED). Default minimum status to hide in filters.
+ * New Config: enable_sponsorship (default OFF).  Whether to enable/disable the whole issue sponsorship feature.
+ * New Config: sponsorship_currency (default US$).  Currency used for all sponsorships.
+ * New Config: view_sponsorship_total_threshold (default VIEWER).  Access level threshold needed to view the total sponsorship for an issue by all users.
+ * New Config: view_sponsorship_details_threshold (default VIEWER).  Access level threshold needed to view the users sponsoring an issue and the sponsorship amount for each.
+ * New Config: sponsor_threshold (default REPORTER).  Access level threshold needed to allow user to sponsor issues.
+ * New Config: handle_sponsored_bugs_threshold (default DEVELOPER).  Access level required to be able to handle sponsored issues.
+ * New Config: assign_sponsored_bugs_threshold (default MANAGER).  Access level required to be able to assign a sponsored issue to a user with access level greater or equal to 'handle_sponsored_bugs_threshold'.
+ * New Config: minimum_sponsorship_amount (default 5).  Minimum sponsorship amount. If the user enters a value less than this, an error will be prompted.
+ * New Config: mantis_sponsorship_table (default mantis_sponsorship_table).  Name of table containing issue sponsorship information.
  * Removed config option (use_phpMailer): phpMailer has always been used
  * Removed config option (phpMailer_path): phpMailer has been included to Mantis distribution
  * Removed config option (use_x_priority): phpMailer always puts X-Priority header

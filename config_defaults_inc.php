@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.163 2004-05-08 23:25:11 narcissus Exp $
+	# $Id: config_defaults_inc.php,v 1.164 2004-05-09 02:24:18 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -483,6 +483,36 @@
         $g_default_reminder_view_status = VS_PUBLIC;
 
 	###################################
+	# Mantis Sponsorship Settings
+	###################################
+
+	# Whether to enable/disable the whole issue sponsorship feature
+	$g_enable_sponsorship = OFF;
+
+	# Currency used for all sponsorships.
+	$g_sponsorship_currency = 'US$';
+
+	# Access level threshold needed to view the total sponsorship for an issue by all users.
+	$g_view_sponsorship_total_threshold = VIEWER;
+
+	# Access level threshold needed to view the users sponsoring an issue and the sponsorship
+	# amount for each.
+	$g_view_sponsorship_details_threshold = VIEWER;
+
+	# Access level threshold needed to allow user to sponsor issues.
+	$g_sponsor_threshold = REPORTER;
+
+	# Access level required to be able to handle sponsored issues.
+	$g_handle_sponsored_bugs_threshold = DEVELOPER;
+
+	# Access level required to be able to assign a sponsored issue to a user with access level
+	# greater or equal to 'handle_sponsored_bugs_threshold'.
+	$g_assign_sponsored_bugs_threshold = MANAGER;
+
+	# Minimum sponsorship amount. If the user enters a value less than this, an error will be prompted.
+	$g_minimum_sponsorship_amount = 5;
+
+	###################################
 	# Mantis File Upload Settings
 	###################################
 
@@ -902,6 +932,7 @@
 	$g_mantis_custom_field_string_table     = $g_db_table_prefix.'_custom_field_string_table';
 	$g_mantis_upgrade_table					= $g_db_table_prefix.'_upgrade_table';
 	$g_mantis_filters_table					= $g_db_table_prefix.'_filters_table';
+	$g_mantis_sponsorship_table				= $g_db_table_prefix.'_sponsorship_table';
 
 	###########################
 	# Mantis Enum Strings

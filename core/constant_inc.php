@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.13 2004-04-30 23:14:55 narcissus Exp $
+	# $Id: constant_inc.php,v 1.14 2004-05-09 02:24:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	### CONSTANTS  ###
@@ -126,6 +126,9 @@
 	define( 'BUG_MONITOR',					12 );
 	define( 'BUG_UNMONITOR',				13 );
 	define( 'BUG_DELETED',					14 );
+	define( 'BUG_ADD_SPONSORSHIP',				15 );
+	define( 'BUG_UPDATE_SPONSORSHIP',			16 );
+	define( 'BUG_DELETE_SPONSORSHIP',			17 );
 
 	# bug relationship constants
 	define( 'BUG_DUPLICATE',	0 );
@@ -222,6 +225,13 @@
 	# ERROR_VERSION_*
 	define( 'ERROR_VERSION_DUPLICATE',				1600 );
 	define( 'ERROR_VERSION_NOT_FOUND',				1601 );
+
+	# ERROR_SPONSORSHIP_*
+	define( 'ERROR_SPONSORSHIP_NOT_ENABLED',			1700 );
+	define( 'ERROR_SPONSORSHIP_NOT_FOUND',				1701 );
+	define( 'ERROR_SPONSORSHIP_AMOUNT_TOO_LOW',			1702 );
+	define( 'ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW',	1703 );
+	define( 'ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW',	1704 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',		1);

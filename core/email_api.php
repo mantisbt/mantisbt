@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.79 2004-04-08 22:44:59 prescience Exp $
+	# $Id: email_api.php,v 1.80 2004-05-09 02:24:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -373,6 +373,24 @@
 		}
 
 		return $t_ok;
+	}
+
+	# --------------------
+	# send notices when a bug is sponsored
+	function email_sponsorship_added( $p_bug_id ) {
+		email_generic( $p_bug_id, 'sponsorship_added', 'email_notification_title_for_action_sponsorship_added' );
+	}
+
+	# --------------------
+	# send notices when a sponsorship is modified
+	function email_sponsorship_updated( $p_bug_id ) {
+		email_generic( $p_bug_id, 'sponsorship_updated', 'email_notification_title_for_action_sponsorship_updated' );
+	}
+
+	# --------------------
+	# send notices when a sponsorship is deleted
+	function email_sponsorship_deleted( $p_bug_id ) {
+		email_generic( $p_bug_id, 'sponsorship_deleted', 'email_notification_title_for_action_sponsorship_deleted' );
 	}
 
 	# --------------------
@@ -743,8 +761,24 @@
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
 
 		$t_message .= lang_get( 'email_description' ) . ": \n".wordwrap( $p_visible_bug_data['email_description'] )."\n";
-		$t_message .= $t_email_separator1."\n\n";
 
+		# Sponsorship
+		if ( isset( $p_visible_bug_data['sponsorship_total'] ) && ( $p_visible_bug_data['sponsorship_total'] > 0 ) ) {
+			$t_message .= $t_email_separator1."\n";
+			$t_message .= sprintf( lang_get( 'total_sponsorship_amount' ), sponsorship_format_amount( $p_visible_bug_data['sponsorship_total'] ) ) . "\n" . "\n";
+
+			if ( isset( $p_visible_bug_data['sponsorships'] ) ) {
+				foreach ( $p_visible_bug_data['sponsorships'] as $t_sponsorship ) {
+					$t_date_added = date( config_get( 'normal_date_format' ), db_unixtimestamp( $t_sponsorship->date_added ) );
+
+					$t_message .= $t_date_added . ': ';
+					$t_message .= user_get_name( $t_sponsorship->user_id );
+					$t_message .= ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')' . "\n";
+				}
+			}
+		}
+
+		$t_message .= $t_email_separator1."\n\n";
 
 		# format bugnotes
 		foreach ( $p_visible_bug_data['bugnotes'] as $t_bugnote ) {
@@ -852,6 +886,19 @@
 		# put history data
 		if ( ON == config_get( 'history_default_visible' )  &&  $t_user_access_level >= config_get( 'view_history_threshold' ) ) {
 			$t_bug_data['history']  = history_get_raw_events_array( $p_bug_id );
+		}
+
+		# Sponsorship Information
+		if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $p_bug_id, $p_user_id ) ) ) {
+			$t_sponsorship_ids = sponsorship_get_all_ids( $p_bug_id );
+			$t_bug_data['sponsorship_total'] = sponsorship_get_amount( $t_sponsorship_ids );
+
+			if ( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' ), $p_bug_id, $p_user_id ) ) {
+				$t_bug_data['sponsorships'] = array();
+				foreach ( $t_sponsorship_ids as $id ) {
+					$t_bug_data['sponsorships'][] = sponsorship_get( $id );
+				}
+			}
 		}
 
 		return $t_bug_data;

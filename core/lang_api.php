@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: lang_api.php,v 1.21 2004-04-08 22:44:59 prescience Exp $
+	# $Id: lang_api.php,v 1.22 2004-05-09 02:24:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Language (Internationalization) API ##
@@ -158,6 +158,7 @@
 		if ( lang_exists( $p_string ) ) {
 			return $g_lang_strings[$p_string];
 		} else {
+			error_parameters( $p_string );
 			trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
 			return '';
 		}

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_assign.php,v 1.37 2004-02-11 22:16:28 vboctor Exp $
+	# $Id: bug_assign.php,v 1.38 2004-05-09 02:24:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,9 +24,22 @@
 	$f_handler_id = gpc_get_int( 'handler_id', auth_get_current_user_id() );
 
 	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
-	
+
+	$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
+	if ( $t_bug_sponsored ) {
+		if ( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
+			trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
+		}
+	}
+
 	if ( $f_handler_id != NO_USER ) {
 		access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id );
+
+		if ( $t_bug_sponsored ) {
+			if ( !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
+				trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
+			}
+		}
 	}
 
 	bug_assign( $f_bug_id, $f_handler_id );

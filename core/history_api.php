@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.21 2004-04-08 20:52:50 prescience Exp $
+	# $Id: history_api.php,v 1.22 2004-05-09 02:24:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	### History API ###
@@ -148,6 +148,7 @@
 	#
 	function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value ) {
 		$t_note = '';
+		$t_change = '';
 		$t_field_localized = $p_field_name;
 
 		switch ( $p_field_name ) {
@@ -277,13 +278,23 @@
 				case BUG_DELETED:
 					$t_note = lang_get( 'bug_deleted' ) . ": " . $p_old_value;
 					break;
+				case BUG_ADD_SPONSORSHIP:
+					$t_note = lang_get( 'sponsorship_added' );
+					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+					break;
+				case BUG_UPDATE_SPONSORSHIP:
+					$t_note = lang_get( 'sponsorship_updated' );
+					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+					break;
+				case BUG_DELETE_SPONSORSHIP:
+					$t_note = lang_get( 'sponsorship_deleted' );
+					$t_change = user_get_name( $p_old_value ) . ': ' . sponsorship_format_amount( $p_new_value );
+					break;
 			}
 		}
 
 		# output special cases
-		if ( NORMAL_TYPE != $p_type ) {
-			$t_change = '';
-		} else {   # output normal changes
+		if ( NORMAL_TYPE == $p_type ) {
 			$t_note		= $t_field_localized;
 			$t_change	= $p_old_value . ' => ' . $p_new_value;
 		} # end if DEFAULT

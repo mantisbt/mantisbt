@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.57 2004-04-29 23:26:43 vboctor Exp $
+	# $Id: bug_api.php,v 1.58 2004-05-09 02:24:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -16,6 +16,7 @@
 	require_once( $t_core_dir . 'bugnote_api.php' );
 	require_once( $t_core_dir . 'file_api.php' );
 	require_once( $t_core_dir . 'string_api.php' );
+	require_once( $t_core_dir . 'sponsorship_api.php' );
 
 	### Bug API ###
 
@@ -44,6 +45,7 @@
 		var $build = '';
 		var $view_state = VS_PUBLIC;
 		var $summary = '';
+		var $sponsorship_total = 0;
 
 		# omitted:
 		# var $bug_text_id
@@ -229,7 +231,7 @@
 	# through the configuration file.
 	function bug_is_readonly( $p_bug_id ) {
 		$t_status = bug_get_field( $p_bug_id, 'status' );
-		if ( $t_status < config_get( 'bug_resolved_status_threshold' ) ) {
+		if ( $t_status >= config_get( 'bug_resolved_status_threshold' ) ) {
 			return true;
 		} else {
 			return false;
@@ -273,6 +275,7 @@
 		$c_view_state			= db_prepare_int( $p_view_state );
 		$c_steps_to_reproduce	= db_prepare_string( $p_steps_to_reproduce );
 		$c_additional_info		= db_prepare_string( $p_additional_info );
+		$c_sponsorship_total = 0;
 
 		# Summary and description cannot be blank
 		if ( is_blank( $c_summary ) || is_blank( $c_description ) ) {
@@ -334,7 +337,7 @@
 				      os, os_build,
 				      platform, version,
 				      build,
-				      profile_id, summary, view_state )
+				      profile_id, summary, view_state, sponsorship_total )
 				  VALUES
 				    ( '$c_project_id',
 				      '$c_reporter_id', '$c_handler_id',
@@ -347,7 +350,7 @@
 				      '$c_os', '$c_os_build',
 				      '$c_platform', '$c_version',
 				      '$c_build',
-				      '$c_profile_id', '$c_summary', '$c_view_state' )";
+				      '$c_profile_id', '$c_summary', '$c_view_state', '$c_sponsorship_total' )";
 		db_query( $query );
 
 		$t_bug_id = db_insert_id($t_bug_table);
@@ -380,6 +383,9 @@
 
 		# Delete bugnotes
 		bugnote_delete_all( $p_bug_id );
+
+		# Delete all sponsorships
+		sponsorship_delete( sponsorship_get_all_ids( $p_bug_id ) );
 
 		# Delete files
 		file_delete_attachments( $p_bug_id );
@@ -480,7 +486,8 @@
 					version='$c_bug_data->version',
 					build='$c_bug_data->build',
 					view_state='$c_bug_data->view_state',
-					summary='$c_bug_data->summary'
+					summary='$c_bug_data->summary',
+					sponsorship_total='$c_bug_data->sponsorship_total'
 				WHERE id='$c_bug_id'";
 		db_query( $query );
 
@@ -506,7 +513,7 @@
 		history_log_event_direct( $p_bug_id, 'build', $t_old_data->build, $p_bug_data->build );
 		history_log_event_direct( $p_bug_id, 'view_state', $t_old_data->view_state, $p_bug_data->view_state );
 		history_log_event_direct( $p_bug_id, 'summary', $t_old_data->summary, $p_bug_data->summary );
-
+		history_log_event_direct( $p_bug_id, 'sponsorship_total', $t_old_data->sponsorship_total, $p_bug_data->sponsorship_total );
 
 		# Update extended info if requested
 		if ( $p_update_extended ) {
@@ -945,6 +952,7 @@
 		$p_bug_data->build				= db_prepare_string( $p_bug_data->build );
 		$p_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
 		$p_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
+		$p_bug_data->sponsorship_total		= db_prepare_int( $p_bug_data->sponsorship_total );
 
 		$p_bug_data->description		= db_prepare_string( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
@@ -966,6 +974,7 @@
 		$p_bug_data->version			= string_attribute( $p_bug_data->version );
 		$p_bug_data->build				= string_attribute( $p_bug_data->build );
 		$p_bug_data->summary			= string_attribute( $p_bug_data->summary );
+		$p_bug_data->sponsorship_total		= string_attribute( $p_bug_data->sponsorship_total );
 
 		$p_bug_data->description		= string_textarea( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= string_textarea( $p_bug_data->steps_to_reproduce );
@@ -987,6 +996,7 @@
 		$p_bug_data->version			= string_display( $p_bug_data->version );
 		$p_bug_data->build				= string_display( $p_bug_data->build );
 		$p_bug_data->summary			= string_display_links( $p_bug_data->summary );
+		$p_bug_data->sponsorship_total		= string_display( $p_bug_data->sponsorship_total );
 
 		$p_bug_data->description		= string_display_links( $p_bug_data->description );
 		$p_bug_data->steps_to_reproduce	= string_display_links( $p_bug_data->steps_to_reproduce );

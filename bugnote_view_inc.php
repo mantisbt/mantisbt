@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_view_inc.php,v 1.14 2004-03-26 09:29:07 vboctor Exp $
+	# $Id: bugnote_view_inc.php,v 1.15 2004-05-09 02:24:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -96,7 +96,7 @@
 		<?php
 			# only admins and the bugnote creator can edit/delete this bugnote
 			# bug must be open to be editable
-			if ( bug_is_readonly( $f_bug_id ) ) {
+			if ( !bug_is_readonly( $f_bug_id ) ) {
 				if ( ( access_has_bug_level( config_get( 'manage_project_threshold' ), $f_bug_id ) ) ||
 					( ( $v3_reporter_id == $t_user_id ) && ( ON == config_get( 'bugnote_allow_user_edit_delete' ) ) ) ) {
 					print_bracket_link( 'bugnote_edit_page.php?bugnote_id='.$v3_id, lang_get( 'bugnote_edit_link' ) );

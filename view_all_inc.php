@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.133 2004-04-12 21:04:36 jlatour Exp $
+	# $Id: view_all_inc.php,v 1.134 2004-05-09 02:24:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -28,6 +28,7 @@
 
 	$t_icon_path = config_get( 'icon_path' );
 	$t_update_bug_threshold = config_get( 'update_bug_threshold' );
+	$t_enable_sponsorship = config_get( 'enable_sponsorship' );
 ?>
 <?php # -- ====================== FILTER FORM ========================= -- ?>
 <?php filter_draw_selection_area( $f_page_number ); ?>
@@ -102,6 +103,17 @@
 		<?php print_view_bug_sort_link( lang_get( 'id' ), 'id', $t_sort, $t_dir ) ?>
 		<?php print_sort_icon( $t_dir, $t_sort, 'id' ) ?>
 	</td>
+
+	<?php	# -- Sponsorship Amount -- 
+		if ( $t_enable_sponsorship == ON ) {
+	?>
+	<td class="center">
+		<?php
+			print_view_bug_sort_link( sponsorship_get_currency(), 'sponsorship_total', $t_sort, $t_dir );
+			print_sort_icon( $t_dir, $t_sort, 'sponsorship_total' );
+		?>
+	</td>
+	<?php } ?>
 
 	<?php # -- Bugnote count column -- ?>
 	<td class="center">
@@ -221,6 +233,18 @@
 	<td class="center">
 		<?php print_bug_link( $v_id ) ?>
 	</td>
+
+	<?php	# -- Sponsorship Amount -- 
+		if ( $t_enable_sponsorship == ON ) {
+	?>
+	<td class="right">
+		<?php
+			if ( $v_sponsorship_total > 0 ) {
+				echo sponsorship_format_amount( $v_sponsorship_total );
+			}
+		?>
+	</td>
+	<?php } ?>
 
 	<?php # -- Bugnote count -- ?>
 	<td class="center">

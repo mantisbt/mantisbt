@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.69 2004-04-08 22:44:59 prescience Exp $
+	# $Id: user_api.php,v 1.70 2004-05-09 02:24:19 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -465,8 +465,7 @@
 	}
 
 	# --------------------
-	# return the username or a string saying "user no longer exists"
-	#  if the user does not exist
+	# return the username or a string "user<id>" if the user does not exist
 	function user_get_name( $p_user_id ) {
 		$row = user_cache_row( $p_user_id, false );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_advanced_page.php,v 1.50 2004-02-05 12:45:19 vboctor Exp $
+	# $Id: bug_view_advanced_page.php,v 1.51 2004-05-09 02:24:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -494,6 +494,9 @@
 
 <?php
 	$t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+
+	# User list sponsoring the bug
+	include( $t_mantis_dir . 'bug_sponsorship_list_view_inc.php' );
 
 	# File upload box
 	if ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) {
