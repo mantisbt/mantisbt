@@ -25,7 +25,7 @@
 	}
 	else if ( strlen($g_view_unassigned_cookie_val)>6 ) {
 		### Load preferences
-		$t_setting_arr 		= explode( "#", $g_view_assigned_cookie_val );
+		$t_setting_arr 		= explode( "#", $g_view_unassigned_cookie_val );
 		$f_show_category 	= $t_setting_arr[0];
 		$f_show_severity 	= $t_setting_arr[1];
 		$f_show_status 		= $t_setting_arr[2];
