@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.67 $
-	# $Author: jlatour $
-	# $Date: 2004-02-26 13:23:55 $
+	# $Revision: 1.68 $
+	# $Author: vboctor $
+	# $Date: 2004-02-28 23:34:49 $
 	#
-	# $Id: strings_french.txt,v 1.67 2004-02-26 13:23:55 jlatour Exp $
+	# $Id: strings_french.txt,v 1.68 2004-02-28 23:34:49 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -89,7 +89,7 @@ $s_additional_information_updated = 'Information complémentaire mise à jour';
 $s_steps_to_reproduce_updated = 'Etapes pour reproduire mises à jour';
 $s_file_added = 'Fichier ajouté : ';
 $s_file_deleted = 'Fichier supprimé : ';
-$s_bug_deleted = 'Bug Deleted';
+$s_bug_deleted = 'Bug supprimé';
 
 $s_make_private = 'Rendre privé';
 $s_make_public = 'Rendre public';
@@ -219,10 +219,10 @@ $s_proceed = 'Continuer';
 $s_switch = 'Afficher';
 $s_logged_in_as = 'Connecté en tant que';
 
-$s_prefix_for_deleted_users = 'user';
+$s_prefix_for_deleted_users = 'utilisateur';
 
 $s_administrator = 'administrateur';
-$s_myself = "Myself";
+$s_myself = "Moi";
 
 # Enum Strings
 $s_access_levels_enum_string      = '10:invité,25:rapporteur,40:testeur,55:développeur,70:chef de projet,90:administrateur';
@@ -251,19 +251,19 @@ $s_reset_request_msg = 'Une requête a été enregistrée pour réinitialiser votre m
 $s_account_name_msg = 'Votre identifiant est ';
 $s_news_password_msg = 'Voici votre nouveau mot de passe ';
 
-$s_email_notification_title_for_status_bug_feedback = 'The following bug requires your FEEDBACK.';
-$s_email_notification_title_for_status_bug_acknowledged = 'The following bug has been ACKNOWLEDGED.';
-$s_email_notification_title_for_status_bug_confirmed = 'The following bug has been CONFIRMED.';
-$s_email_notification_title_for_status_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_status_bug_resolved = 'The following bug has been RESOLVED.';
-$s_email_notification_title_for_status_bug_closed = 'The following bug has been CLOSED';
+$s_email_notification_title_for_status_bug_feedback = 'Le bug suivant nécessite votre commentaire.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Le bug suivant a été accepté.';
+$s_email_notification_title_for_status_bug_confirmed = 'Le bug suivant a été confirmé.';
+$s_email_notification_title_for_status_bug_assigned = 'Le bug suivant a été assigné.';
+$s_email_notification_title_for_status_bug_resolved = 'Le bug suivant a été résolu.';
+$s_email_notification_title_for_status_bug_closed = 'Le bug suivant a été fermé.';
 
-$s_email_notification_title_for_action_bug_submitted = 'The following bug has been SUBMITTED.';
-$s_email_notification_title_for_action_bug_assigned = 'The following bug has been ASSIGNED.';
-$s_email_notification_title_for_action_bug_reopened = 'The following bug has been REOPENED.';
-$s_email_notification_title_for_action_bug_deleted = 'The following bug has been DELETED.';
+$s_email_notification_title_for_action_bug_submitted = 'Le bug suivant a été soumis.';
+$s_email_notification_title_for_action_bug_assigned = 'Le bug suivant a été assigné.';
+$s_email_notification_title_for_action_bug_reopened = 'Le bug suivant a été réouvert.';
+$s_email_notification_title_for_action_bug_deleted = 'Le bug suivant a été supprimé.';
 
-$s_email_notification_title_for_action_bugnote_submitted = 'A BUGNOTE has been added to this bug.';
+$s_email_notification_title_for_action_bugnote_submitted = 'Une note de bug a été ajoutée à ce bug.';
 
 $s_email_reporter = 'Rapporteur';
 $s_email_handler = 'Responsable';
@@ -787,33 +787,33 @@ $s_site_settings_updated_msg = 'Les modifications ont bien été prises en compte.
 # summary_page.php
 $s_summary_title = 'Synthèse';
 $s_summary_jpgraph_link = 'Synthèse avancée';
-$s_by_project = 'par projet';
-$s_by_status = 'par état';
-$s_by_date = 'par date';
-$s_by_severity = 'par sévérité';
-$s_by_resolution = 'par résolution';
-$s_by_category = 'par catégorie';
-$s_by_priority = 'par priorité';
-$s_by_developer = 'par développeur';
-$s_by_reporter ='par rapporteur';
-$s_reporter_by_resolution = 'Reporter By Resolution';
-$s_reporter_effectiveness = 'Reporter Effectiveness';
-$s_developer_by_resolution = 'Developer By Resolution';
-$s_percentage_fixed = '% Fixed';
-$s_percentage_errors = '% False';
-$s_errors = 'False';
+$s_by_project = 'Par projet';
+$s_by_status = 'Par état';
+$s_by_date = 'Par date';
+$s_by_severity = 'Par sévérité';
+$s_by_resolution = 'Par résolution';
+$s_by_category = 'Par catégorie';
+$s_by_priority = 'Par priorité';
+$s_by_developer = 'Par développeur';
+$s_by_reporter ='Par rapporteur';
+$s_reporter_by_resolution = 'Rapporteurs par résolution';
+$s_reporter_effectiveness = 'Efficacité du rapporteur';
+$s_developer_by_resolution = 'Développeurs par résolution';
+$s_percentage_fixed = '% corrigé';
+$s_percentage_errors = '% faux';
+$s_errors = 'Faux';
 $s_total = 'Total';
-$s_time_stats = 'statistiques (en jours) pour les résolutions';
-$s_longest_open_bug = 'bug ouvert depuis le plus longtemps';
-$s_longest_open = 'temps maximal';
-$s_average_time = 'temps moyen';
-$s_total_time = 'temps total';
-$s_developer_stats = 'statistiques par développeur';
-$s_reporter_stats = 'statistiques par rapporteur';
+$s_time_stats = 'Statistiques (en jours) pour les résolutions';
+$s_longest_open_bug = 'Bug ouvert depuis le plus longtemps';
+$s_longest_open = 'Temps maximal';
+$s_average_time = 'Temps moyen';
+$s_total_time = 'Temps total';
+$s_developer_stats = 'Statistiques par développeur';
+$s_reporter_stats = 'Statistiques par rapporteur';
 $s_orct = '(ouvert/résolu/fermé/total)';
 
 # view_all_bug_page.php
-$s_any = 'tous';
+$s_any = 'Tous';
 $s_show = 'Afficher';
 $s_changed = 'Modifiés (heures)';
 $s_viewing_bugs_title = 'Liste des bugs';
@@ -887,5 +887,5 @@ $s_attachments = 'attachement(s)';
 $s_attachment_alt = 'A';
 
 # PHPMailer
-$s_phpmailer_language = 'en';
+$s_phpmailer_language = 'fr';
 ?>
