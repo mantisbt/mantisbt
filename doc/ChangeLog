@@ -9,6 +9,7 @@ Mantis ChangeLog
  * Fix: #2937: 'Double quotes not handled correctly in version names'
  * Fix: #2936: 'SYSTEM WARNING: ob_gzhandler() used twice'
  * Fix: #2941: Checking that project upload path exists and is writable to webserver
+ * Fix: #2943: Document title should be mandatory
  * Fix: lang_api did not load the user's preferred language
  * Fix: obscure error when database connect failed
  * Fix: error when deleting news items
