@@ -54,7 +54,7 @@
 		print '<br />';
 	}
 	?>
-	<input type="checkbox" name="all_projects" value="on">
+	<input type="checkbox" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> >
 	<?php print lang_get( 'all_projects' ); ?><br /><br />
 	<input type="submit" class="button" value="<?php print lang_get( 'save_query' ); ?>">
 	</form>
