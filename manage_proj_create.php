@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create.php,v 1.5 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_create.php,v 1.6 2004-12-01 12:45:22 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -19,7 +19,13 @@
 	$f_status		= gpc_get_int( 'status' );
 	$f_file_path	= gpc_get_string( 'file_path', '' );
 
-	project_create( $f_name, $f_description, $f_status, $f_view_state, $f_file_path );
+	$t_project_id = project_create( $f_name, $f_description, $f_status, $f_view_state, $f_file_path );
+
+	if ( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
+		$t_access_level = access_get_global_level();
+		$t_current_user_id = auth_get_current_user_id();
+		project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
+	}
 
 	$t_redirect_url = 'manage_proj_page.php';
 
