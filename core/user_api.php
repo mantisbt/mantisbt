@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.60 2003-08-25 22:24:44 vboctor Exp $
+	# $Id: user_api.php,v 1.61 2003-10-28 10:37:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -318,32 +318,14 @@
 	}
 
 	# --------------------
-	# delete an account
-	# returns true when the account was successfully deleted
-	function user_delete( $p_user_id ) {
+	# delete project-specific user access levels.
+	# returns true when successfully deleted
+	function user_delete_project_specific_access_levels( $p_user_id ) {
 		$c_user_id 					= db_prepare_int($p_user_id);
 
-    	user_ensure_unprotected( $p_user_id );
+		user_ensure_unprotected( $p_user_id );
 
-		$t_user_table 				= config_get('mantis_user_table');
-		$t_user_profile_table 		= config_get('mantis_user_profile_table');
-		$t_user_pref_table 			= config_get('mantis_user_pref_table');
 		$t_project_user_list_table 	= config_get('mantis_project_user_list_table');
-
-		# Remove account
-		$query = "DELETE
-				  FROM $t_user_table
-				  WHERE id='$c_user_id'";
-		db_query( $query );
-
-		# Remove associated profiles
-		$query = "DELETE
-				  FROM $t_user_profile_table
-				  WHERE user_id='$c_user_id'";
-		db_query( $query );
-
-		# Remove associated preferences
-		user_pref_delete_all( $p_user_id );
 
 		$query = "DELETE
 				  FROM $t_project_user_list_table
@@ -353,7 +335,58 @@
 		user_clear_cache( $p_user_id );
 
 		return true;
-    }
+	}
+
+	# --------------------
+	# delete profiles for the specified user
+	# returns true when successfully deleted
+	function user_delete_profiles( $p_user_id ) {
+		$c_user_id 					= db_prepare_int($p_user_id);
+
+		user_ensure_unprotected( $p_user_id );
+
+		$t_user_profile_table 		= config_get('mantis_user_profile_table');
+
+		# Remove associated profiles
+		$query = "DELETE
+				  FROM $t_user_profile_table
+				  WHERE user_id='$c_user_id'";
+		db_query( $query );
+
+		user_clear_cache( $p_user_id );
+
+		return true;
+        }
+
+	# --------------------
+	# delete a user account (account, profiles, preferences, project-specific access levels)
+	# returns true when the account was successfully deleted
+	function user_delete( $p_user_id ) {
+		$c_user_id 					= db_prepare_int($p_user_id);
+
+		user_ensure_unprotected( $p_user_id );
+
+		$t_user_table 				= config_get('mantis_user_table');
+
+		# Remove account
+		$query = "DELETE
+				  FROM $t_user_table
+				  WHERE id='$c_user_id'";
+		db_query( $query );
+
+		# Remove associated profiles
+		user_delete_profiles( $p_user_id );
+
+		# Remove associated preferences
+		user_pref_delete_all( $p_user_id );
+
+		# Remove project specific access levels
+		user_delete_project_specific_access_levels( $p_user_id );
+
+		user_clear_cache( $p_user_id );
+
+		return true;
+	}
 
 	#===================================
 	# Data Access

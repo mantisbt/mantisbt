@@ -47,6 +47,12 @@
 
 	$t_old_protected = user_get_field( $f_user_id, 'protected' );
 
+	# Project specific access rights override global levels, hence, for users who are changed
+	# to be administrators, we have to remove project specific rights.
+        if ( ( $c_access_level >= ADMINISTRATOR ) && ( !user_is_administrator( $c_user_id ) ) ) {
+		user_delete_project_specific_access_levels( $c_user_id );
+	}
+
 	# if the user is already protected and the admin is not removing the
 	#  protected flag then don't update the access level and enabled flag.
 	#  If the user was unprotected or the protected flag is being turned off
@@ -64,8 +70,8 @@
 	    		WHERE id='$c_user_id'";
 	}
 
-    $result = db_query( $query );
-    $t_redirect_url = 'manage_user_page.php';
+	$result = db_query( $query );
+	$t_redirect_url = 'manage_user_page.php';
 ?>
 <?php html_page_top1() ?>
 <?php
