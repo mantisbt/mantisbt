@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.59 2003-03-05 21:37:30 jfitzell Exp $
+	# $Id: print_api.php,v 1.60 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -181,8 +181,7 @@
 		$t_users = array();
 
 		# checking if it's per project or all projects
-		# 0 is all projects
-		if ( 0 == helper_get_current_project() ) {
+		if ( ALL_PROJECTS == helper_get_current_project() ) {
 			$t_adm = ADMINISTRATOR;
 			$t_rep = config_get( 'report_bug_threshold' );
 			$t_pub = VS_PUBLIC;
@@ -295,8 +294,7 @@
 		$t_users = array();
 
 		# checking if it's per project or all projects
-		# 0 is all projects
-		if ( 0 == helper_get_current_project() ) {
+		if ( ALL_PROJECTS == helper_get_current_project() ) {
 			$t_adm = ADMINISTRATOR;
 			$t_dev = config_get( 'handle_bug_threshold' );
 			$t_pub = VS_PUBLIC;
@@ -367,8 +365,8 @@
 		$project_count = db_num_rows( $result );
 
 		if ( $p_include_all_projects ) {
-			echo '<option value="0"';
-			check_selected( $p_project_id, 0 );
+			echo '<option value="' . ALL_PROJECTS . '"';
+			check_selected( $p_project_id, ALL_PROJECTS );
 			echo '>' . lang_get( 'all_projects' ) . '</option>';
 		}
 
@@ -523,7 +521,7 @@
 		$t_project_id = helper_get_current_project();
 
 		# @@@ not implemented yet
-		if ( 0 == $t_project_id ) {
+		if ( ALL_PROJECTS == $t_project_id ) {
 			$query = "SELECT category
 					FROM $g_mantis_project_category_table
 					WHERE project_id='$t_project_id'
@@ -651,10 +649,10 @@
 	# --------------------
 	# list of users that are NOT in the specified project and that are enabled
 	# if no project is specified use the current project
-	function print_project_user_list_option_list( $p_project_id=0 ) {
+	function print_project_user_list_option_list( $p_project_id=null ) {
 		global	$g_mantis_project_user_list_table, $g_mantis_user_table;
 
-		if ( 0 == $p_project_id ) {
+		if ( null == $p_project_id ) {
 			$p_project_id = helper_get_current_project();
 		}
 		$c_project_id = (integer)$p_project_id;

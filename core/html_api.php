@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.66 2003-03-05 21:37:30 jfitzell Exp $
+	# $Id: html_api.php,v 1.67 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -371,7 +371,7 @@
 				}
 				if ( access_has_project_level( MANAGER ) ) {
 					# Admin can edit news for All Projects (site-wide)
-					if ( ( 0 != helper_get_current_project() ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
+					if ( ( ALL_PROJECTS != helper_get_current_project() ) || ( access_has_project_level( ADMINISTRATOR ) ) ) {
 						echo '<a href="news_menu_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
 					} else {
 						echo '<a href="login_select_proj_page.php">' . lang_get( 'edit_news_link' ) . '</a> | ';
@@ -429,7 +429,7 @@
 		echo '<table class="width100" cellspacing="0">';
 		echo '<tr>';
 			echo '<td class="menu">';
-			echo '<a href="set_project.php?project_id=0">' . lang_get( 'all_projects' ) . '</a>';
+			echo '<a href="set_project.php?project_id=' . ALL_PROJECTS . '">' . lang_get( 'all_projects' ) . '</a>';
 			for ( $i=0 ; $i < $project_count ; $i++ ) {
 				$row = db_fetch_array( $result );
 				extract( $row, EXTR_PREFIX_ALL, 'v' );

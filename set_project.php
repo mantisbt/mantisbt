@@ -17,7 +17,7 @@
 	$f_make_default	= gpc_get_bool( 'make_default' );
 	$f_ref			= gpc_get_string( 'ref', '' );
 
-	if ( 0 != $f_project_id ) {
+	if ( ALL_PROJECTS != $f_project_id ) {
 		project_ensure_exists( $f_project_id );
 	}
 

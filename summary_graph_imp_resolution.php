@@ -14,7 +14,7 @@
 	$t_project_id = helper_get_current_project();
 
 	#checking if it's a per project statistic or all projects
-	if ($t_project_id==0) {
+	if ( ALL_PROJECTS == $t_project_id ) {
 		$specific_where = ' 1=1';
 	} else {
 		$specific_where = " project_id='$t_project_id'";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.54 2003-03-03 23:29:30 int2str Exp $
+	# $Id: user_api.php,v 1.55 2003-03-09 03:08:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -439,7 +439,7 @@
 	# --------------------
 	# return the user's access level
 	#  account for private project and the project user lists
-	function user_get_access_level( $p_user_id, $p_project_id = 0 ) {
+	function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		$t_access_level  = user_get_field( $p_user_id, 'access_level' );
 
 		if ( $t_access_level >= ADMINISTRATOR ) {
@@ -499,13 +499,13 @@
 
 	# --------------------
 	# return the number of open assigned bugs to a user in a project
-	function user_get_assigned_open_bug_count( $p_user_id, $p_project_id=0 ) {
+	function user_get_assigned_open_bug_count( $p_user_id, $p_project_id=ALL_PROJECTS ) {
 		$c_user_id		= db_prepare_int($p_user_id);
 		$c_project_id	= db_prepare_int($p_project_id);
 
 		$t_bug_table	= config_get('mantis_bug_table');
 
-		if ( 0 == $p_project_id ) {
+		if ( ALL_PROJECTS == $p_project_id ) {
 			$t_where_prj = '';
 		} else {
 			$t_where_prj = "project_id='$c_project_id' AND";
@@ -526,13 +526,13 @@
 
 	# --------------------
 	# return the number of open reported bugs by a user in a project
-	function user_get_reported_open_bug_count( $p_user_id, $p_project_id=0 ) {
+	function user_get_reported_open_bug_count( $p_user_id, $p_project_id=ALL_PROJECTS ) {
 		$c_user_id		= db_prepare_int($p_user_id);
 		$c_project_id	= db_prepare_int($p_project_id);
 
 		$t_bug_table	= config_get('mantis_bug_table');
 
-		if ( 0 == $p_project_id ) {
+		if ( ALL_PROJECTS == $p_project_id ) {
 			$t_where_prj = '';
 		} else {
 			$t_where_prj = "project_id='$c_project_id' AND";

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.19 2003-02-23 14:18:00 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.20 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -757,10 +757,10 @@
 	#              away, it'll default to 0 and thus belongs to a new (i.e.
 	#              non-existant) bug
 	# NOTE: This probably belongs in the print_api.php
-	function print_custom_field_input( $p_field_def, $p_bug_id = 0) {
+	function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 		$t_id = $p_field_def['id'];
 
-		if( 0 == $p_bug_id ) {
+		if( null == $p_bug_id ) {
 			$t_custom_field_value = $p_field_def['default_value'];
 		} else {
 			$t_custom_field_value = custom_field_get_value( $t_id, $p_bug_id );

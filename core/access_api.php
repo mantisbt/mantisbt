@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.20 2003-03-03 23:29:29 int2str Exp $
+	# $Id: access_api.php,v 1.21 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -60,7 +60,7 @@
 
 		$c_project_id = db_prepare_int( $p_project_id );
 
-		if ( 0 == $c_project_id ) {
+		if ( ALL_PROJECTS == $c_project_id ) {
 			return array();
 		}
 
@@ -193,7 +193,7 @@
 			$p_project_id = helper_get_current_project();
 		}
 
-		if ( 0 == $p_project_id ) {
+		if ( ALL_PROJECTS == $p_project_id ) {
 			return access_has_global_level( $p_access_level );
 		}
 

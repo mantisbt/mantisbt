@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_pref_api.php,v 1.9 2003-02-10 23:48:28 jfitzell Exp $
+	# $Id: user_pref_api.php,v 1.10 2003-03-09 03:08:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -37,7 +37,7 @@
 
 		function UserPreferences() {
 			$this->default_profile			= 0;
-			$this->default_project			= 0;
+			$this->default_project			= ALL_PROJECTS;
 			$this->advanced_report			= config_get( 'default_advanced_report');
 			$this->advanced_view			= config_get( 'default_advanced_view');
 			$this->advanced_update			= config_get( 'default_advanced_update');
@@ -68,10 +68,10 @@
 
 	# --------------------
 	# Cache a user preferences row if necessary and return the cached copy
-	#  If the second parameter is true (default), trigger an error
+	#  If the third parameter is true (default), trigger an error
 	#  if the preferences can't be found.  If the second parameter is
 	#  false, return false if the preferences can't be found.
-	function user_pref_cache_row( $p_user_id, $p_project_id = 0, $p_trigger_errors = true) {
+	function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true) {
 		global $g_cache_user_pref;
 
 		$c_user_id		= db_prepare_int( $p_user_id );
@@ -137,7 +137,7 @@
 	# Trying to get the row shouldn't be any slower in the DB than getting COUNT(*)
 	#  and the transfer time is negligable.  So we try to cache the row - it could save
 	#  us another query later.
-	function user_pref_exists( $p_user_id, $p_project_id = 0 ) {
+	function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		if ( false === user_pref_cache_row( $p_user_id, $p_project_id, false ) ) {
 			return false;
 		} else {
@@ -220,7 +220,7 @@
 	# --------------------
 	# delete a preferencess row
 	# returns true if the prefs were successfully deleted
-	function user_pref_delete( $p_user_id, $p_project_id = 0 ) {
+	function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_project_id	= db_prepare_int( $p_project_id );
 
@@ -272,22 +272,22 @@
 
 	# --------------------
 	# return the user's preferences
-	function user_pref_get_row( $p_user_id, $p_project_id = 0 ) {
+	function user_pref_get_row( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		return user_pref_cache_row( $p_user_id, $p_project_id );
 	}
 
 	# --------------------
 	# return the user's preferences in a UserPreferences object
-	function user_pref_get( $p_user_id, $p_project_id = 0 ) {
+	function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		$t_prefs = new UserPreferences;
 
 		$row = user_pref_cache_row( $p_user_id, $p_project_id, false );
 
 		# If the user has no preferences for the given project
 		if ( false === $row ) {
-			if ( 0 != $p_project_id ) {
-				# Try to get the prefs for project 0 (the defaults)
-				$row = user_pref_cache_row( $p_user_id, 0, false );
+			if ( ALL_PROJECTS != $p_project_id ) {
+				# Try to get the prefs for ALL_PROJECTS (the defaults)
+				$row = user_pref_cache_row( $p_user_id, ALL_PROJECTS, false );
 			}
 
 			# If $row is still false (the user doesn't have default preferences)
@@ -317,7 +317,7 @@
 	# Return the specified preference field for the user id
 	# If the preference can't be found try to return a defined default
 	# If that fails, trigger a WARNING and return ''
-	function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = 0 ) {
+	function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJECTS ) {
 		$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
 		$t_vars = get_object_vars( $t_prefs );
@@ -338,11 +338,11 @@
 	# Set a user preference
 	#
 	# By getting the prefs for the project first we deal fairly well with defaults.
-	#  If there are currently no prefs for that project, the project 0 prefs will 
+	#  If there are currently no prefs for that project, the ALL_PROJECTS prefs will 
 	#  be returned so we end up storing a new set of prefs for the given project
-	#  based on the prefs for project 0.  If there isn't even a project 0, we'd get
-	#  returned a default UserPreferences object to modify.
-	function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = 0 ) {
+	#  based on the prefs for ALL_PROJECTS.  If there isn't even an entry for
+	#  ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.
+	function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS ) {
 		$c_user_id		= db_prepare_int( $p_user_id );
 		$c_pref_name	= db_prepare_string( $p_pref_name );
 		$c_pref_value	= db_prepare_string( $p_pref_value );
@@ -360,7 +360,7 @@
 	# --------------------
 	# set the user's preferences for the project from the given preferences object
 	#  Do the work by calling user_pref_update() or user_pref_insert() as appropriate
-	function user_pref_set( $p_user_id, $p_prefs, $p_project_id = 0 ) {
+	function user_pref_set( $p_user_id, $p_prefs, $p_project_id = ALL_PROJECTS ) {
 		if ( user_pref_exists( $p_user_id, $p_project_id ) ) {
 			return user_pref_update( $p_user_id, $p_project_id, $p_prefs );
 		} else {
@@ -370,7 +370,7 @@
 
 	# --------------------
 	# create a set of default preferences for the project
-	function user_pref_set_default( $p_user_id, $p_project_id = 0 ) {
+	function user_pref_set_default( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		# get a default preferences object
 		$t_prefs = new UserPreferences();
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.43 2003-03-03 23:29:30 int2str Exp $
+	# $Id: project_api.php,v 1.44 2003-03-09 03:08:59 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -354,9 +354,9 @@
 
 	# --------------------
 	# Return the name of the project
-	# Handles project 0 by returning the internationalized string for All Projects
+	# Handles ALL_PROJECTS by returning the internationalized string for All Projects
 	function project_get_name( $p_project_id ) {
-		if ( 0 == $p_project_id ) {
+		if ( ALL_PROJECTS == $p_project_id ) {
 			return lang_get( 'all_projects' );
 		} else {
 			return project_get_field( $p_project_id, 'name' );
@@ -370,7 +370,7 @@
 		$c_project_id	= db_prepare_int( $p_project_id );
 		$c_user_id		= db_prepare_int( $p_user_id );
 
-		if ( 0 == $c_project_id ) {
+		if ( ALL_PROJECTS == $c_project_id ) {
 			return false;
 		}
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.11 2003-03-03 23:29:30 int2str Exp $
+	# $Id: filter_api.php,v 1.12 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -57,7 +57,7 @@
 		$t_from_clauses = array( $t_bug_table, $t_project_table );
 		$t_join_clauses = array();
 
-		if ( 0 == $t_project_id ) { # all projects
+		if ( ALL_PROJECTS == $t_project_id ) {
 			if ( ! current_user_is_administrator() ) {
 				$t_projects = current_user_get_accessible_projects();
 

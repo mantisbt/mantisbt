@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.42 2003-03-03 23:29:28 int2str Exp $
+	# $Id: main_page.php,v 1.43 2003-03-09 03:08:57 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -63,7 +63,7 @@
 			# Select the news posts
 			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
 					FROM $t_news_table
-					WHERE project_id='$t_project_id' OR project_id=0
+					WHERE project_id='$t_project_id' OR project_id=" . ALL_PROJECTS . "
 					ORDER BY announcement DESC, id DESC
 					LIMIT $c_offset, $t_news_view_limit";
 			break;
@@ -71,7 +71,7 @@
 			# Select the news posts
 			$query = "SELECT *, UNIX_TIMESTAMP(date_posted) as date_posted
 					FROM $t_news_table
-					WHERE ( project_id='$t_project_id' OR project_id=0 ) AND
+					WHERE ( project_id='$t_project_id' OR project_id=" . ALL_PROJECTS . " ) AND
 						(TO_DAYS(NOW()) - TO_DAYS(date_posted) < '$t_news_view_limit_days')
 					ORDER BY announcement DESC, id DESC";
 			break;

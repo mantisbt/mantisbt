@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_delete.php,v 1.25 2003-02-15 10:25:17 jfitzell Exp $
+	# $Id: manage_proj_delete.php,v 1.26 2003-03-09 03:08:57 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -23,7 +23,7 @@
 	# Don't leave the current project set to a deleted project - 
 	#  set it to All Projects
 	if ( helper_get_current_project() == $f_project_id ) {
-		helper_set_current_project( 0 );
+		helper_set_current_project( ALL_PROJECTS );
 	}
 
     $t_redirect_url = 'manage_proj_page.php';

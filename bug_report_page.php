@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.25 2003-03-03 23:29:28 int2str Exp $
+	# $Id: bug_report_page.php,v 1.26 2003-03-09 03:08:57 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,7 @@
 ?>
 <?php
 	# this page is invalid for the 'All Project' selection
-	if ( 0 == helper_get_current_project() ) {
+	if ( ALL_PROJECTS == helper_get_current_project() ) {
 		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
 	}
 

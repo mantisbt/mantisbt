@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: graph_api.php,v 1.9 2003-02-24 10:32:31 jfitzell Exp $
+	# $Id: graph_api.php,v 1.10 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	if ( ON == config_get( 'use_jpgraph' ) ) {
@@ -40,7 +40,7 @@
 			$t_s = explode( ':', $t_arr[$i] );
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
-			if ($t_project_id==0) $specific_where = '';
+			if ($t_project_id==ALL_PROJECTS) $specific_where = '';
 			else $specific_where = " AND project_id='$t_project_id'";
 
 			# Calculates the number of bugs with $p_enum and puts the results in a table
@@ -148,7 +148,7 @@
 		 $t_res_val = RESOLVED;
 		 $t_clo_val = CLOSED;
 
-		if ($t_project_id==0) $specific_where = '';
+		if ($t_project_id==ALL_PROJECTS) $specific_where = '';
 		else $specific_where = " AND project_id='$t_project_id'";
 
 		$query = "SELECT COUNT(*)
@@ -258,7 +258,7 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ($t_project_id==0) $specific_where = '1=1';
+		if ($t_project_id==ALL_PROJECTS) $specific_where = '1=1';
 		else $specific_where = " project_id='$t_project_id'";
 
 		$query = "SELECT COUNT(*)
@@ -322,7 +322,7 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ($t_project_id==0) $specific_where = '1=1';
+		if ( ALL_PROJECTS == $t_project_id ) $specific_where = '1=1';
 		else $specific_where = " project_id='$t_project_id'";
 
 		$query = "SELECT COUNT(*)
@@ -397,7 +397,7 @@
 			$c_s[0] = addslashes($t_s[0]);
 			$enum_name[] = get_enum_to_string( $p_enum_string, $t_s[0] );
 
-			if ($t_project_id==0) $specific_where = '';
+			if ($t_project_id==ALL_PROJECTS) $specific_where = '';
 			else $specific_where = " AND project_id='$t_project_id'";
 
 			$query = "SELECT COUNT(*)
@@ -452,7 +452,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ($t_project_id==0) $specific_where = '';
+			if ($t_project_id==ALL_PROJECTS) $specific_where = '';
 			else $specific_where = " AND project_id='$t_project_id'";
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -541,7 +541,7 @@
 			$row = db_fetch_array( $result );
 			extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-			if ($t_project_id==0) $specific_where = '';
+			if ($t_project_id==ALL_PROJECTS) $specific_where = '';
 			else $specific_where = " AND project_id='$t_project_id'";
 			$query = "SELECT COUNT(*)
 					FROM $g_mantis_bug_table
@@ -586,7 +586,7 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ($t_project_id==0) $specific_where = ' 1=1 ';
+		if ($t_project_id==ALL_PROJECTS) $specific_where = ' 1=1 ';
 		else $specific_where = " project_id='$t_project_id'";
 		$query = "SELECT DISTINCT category
 				FROM $g_mantis_project_category_table
@@ -657,7 +657,7 @@
 
 		$t_project_id = helper_get_current_project();
 
-		if ($t_project_id==0) $specific_where = ' 1=1 ';
+		if ($t_project_id==ALL_PROJECTS) $specific_where = ' 1=1 ';
 			else $specific_where = " project_id='$t_project_id' ";
 
 		### Get all the submitted dates

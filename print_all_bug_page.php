@@ -91,7 +91,7 @@
 	$t_project_id = helper_get_current_project( );
 
 	# project selection
-	if ( 0 == $t_project_id ) { # ALL projects
+	if ( ALL_PROJECTS == $t_project_id ) { # ALL projects
 		$t_access_level = current_user_get_field( 'access_level' );
 		$t_user_id = auth_get_current_user_id();
 
@@ -475,7 +475,7 @@
 	<td class="print" bgcolor="<?php echo $status_color ?>">
 		<?php 
 			# Print project name if viewing 'all projects'
-			if ( 0 == $t_project_id ) {
+			if ( ALL_PROJECTS == $t_project_id ) {
 				print "[$project_name] <br />"; 
 			} 
 		?>

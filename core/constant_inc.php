@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: constant_inc.php,v 1.4 2003-03-03 23:29:30 int2str Exp $
+	# $Id: constant_inc.php,v 1.5 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -110,6 +110,9 @@
 	# news values
 	define( 'BY_LIMIT',		0 );
 	define( 'BY_DATE',		1 );
+
+	# all projects
+	define( 'ALL_PROJECTS',	0 );
 
 	# history constants
 	define( 'NORMAL_TYPE',					0 );

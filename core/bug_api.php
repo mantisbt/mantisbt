@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.39 2003-03-03 23:29:29 int2str Exp $
+	# $Id: bug_api.php,v 1.40 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -25,7 +25,7 @@
 	# Bug Data Structure Definition
 	#===================================
 	class BugData {
-		var $project_id = 0;
+		var $project_id = null;
 		var $reporter_id = 0;
 		var $handler_id = 0;
 		var $duplicate_id = 0;

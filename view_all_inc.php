@@ -358,7 +358,7 @@
 		<?php
 			# type project name if viewing 'all projects'
 			if ( ON == config_get( 'show_bug_project_links' ) &&
-				 helper_get_current_project() == 0 ) {
+				 helper_get_current_project() == ALL_PROJECTS ) {
 				echo '<small>[';
 				print_view_bug_sort_link( $project_name, 'project_id', $t_sort, $t_dir );
 				echo ']</small><br />';

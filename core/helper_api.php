@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.40 2003-02-20 16:48:23 jlatour Exp $
+	# $Id: helper_api.php,v 1.41 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -153,7 +153,7 @@
 		if ( ! project_exists( $t_project_id ) ||
 			 0 == project_get_field( $t_project_id, 'enabled' ) ||
 			 ! access_has_project_level( VIEWER, $t_project_id ) ) {
-			$t_project_id = 0;
+			$t_project_id = ALL_PROJECTS;
 		}
 		
 		return (int)$t_project_id;

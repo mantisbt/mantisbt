@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_api.php,v 1.10 2003-02-24 10:32:32 jfitzell Exp $
+	# $Id: news_api.php,v 1.11 2003-03-09 03:08:58 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -119,7 +119,7 @@
 				  WHERE project_id='$c_project_id'";
 				  
 		if ( $p_sitewide ) {
-			$query .= " OR project_id=0";
+			$query .= ' OR project_id=' . ALL_PROJECTS;
 		}
 
 		$result = db_query( $query );
@@ -138,7 +138,7 @@
 				  WHERE project_id='$c_project_id'";
 		
 		if ( $p_sitewide ) {
-			$query .= " OR project_id=0";
+			$query .= ' OR project_id=' . ALL_PROJECTS;
 		}
 
 		$query .= " ORDER BY date_posted DESC";
