@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.31 2004-08-03 13:47:48 vboctor Exp $
+	# $Id: access_api.php,v 1.32 2004-10-25 19:47:51 marcelloscata Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -268,6 +268,16 @@
 
 		if ( $p_user_id === null ) {
 		    $p_user_id = auth_get_current_user_id();
+		}
+
+		# check limit_Reporter (Issue #4769)
+		# reporters can view just issues they reported
+		$t_limit_reporters = config_get( 'limit_reporters' );
+		$t_report_bug_threshold = config_get( 'report_bug_threshold' );
+		if ( (ON === $t_limit_reporters) &&
+		     (!bug_is_user_reporter( $p_bug_id, $p_user_id )) &&
+		     ( current_user_get_access_level() <= $t_report_bug_threshold ) ) {
+		  return false;
 		}
 
 		# If the bug is private and the user is not the reporter, then the
