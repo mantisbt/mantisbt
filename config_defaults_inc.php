@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.184 2004-07-30 12:46:09 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.185 2004-07-30 12:58:33 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -266,7 +266,7 @@
 	# If the language is set to 'auto', the actual
 	# language is determined by the user agent (web browser)
 	# language preference.
-	$g_default_language		= 'auto';
+	$g_default_language		= 'english';
 
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr	= array(
