@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.90 2004-12-14 15:34:11 prichards Exp $
+	# $Id: bug_api.php,v 1.91 2004-12-23 01:34:02 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1277,36 +1277,37 @@
 	# --------------------
 	# Return a copy of the bug structure with all the instvars prepared for db insertion
 	function bug_prepare_db( $p_bug_data ) {
-		$p_bug_data->project_id			= db_prepare_int( $p_bug_data->project_id );
-		$p_bug_data->reporter_id		= db_prepare_int( $p_bug_data->reporter_id );
-		$p_bug_data->handler_id			= db_prepare_int( $p_bug_data->handler_id );
-		$p_bug_data->duplicate_id		= db_prepare_int( $p_bug_data->duplicate_id );
-		$p_bug_data->priority			= db_prepare_int( $p_bug_data->priority );
-		$p_bug_data->severity			= db_prepare_int( $p_bug_data->severity );
-		$p_bug_data->reproducibility	= db_prepare_int( $p_bug_data->reproducibility );
-		$p_bug_data->status				= db_prepare_int( $p_bug_data->status );
-		$p_bug_data->resolution			= db_prepare_int( $p_bug_data->resolution );
-		$p_bug_data->projection			= db_prepare_int( $p_bug_data->projection );
-		$p_bug_data->category			= db_prepare_string( $p_bug_data->category );
-		$p_bug_data->date_submitted		= db_prepare_string( $p_bug_data->date_submitted );
-		$p_bug_data->last_updated		= db_prepare_string( $p_bug_data->last_updated );
-		$p_bug_data->eta				= db_prepare_int( $p_bug_data->eta );
-		$p_bug_data->os					= db_prepare_string( $p_bug_data->os );
-		$p_bug_data->os_build			= db_prepare_string( $p_bug_data->os_build );
-		$p_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
-		$p_bug_data->version			= db_prepare_string( $p_bug_data->version );
-		$p_bug_data->build				= db_prepare_string( $p_bug_data->build );
-		$p_bug_data->fixed_in_version	= db_prepare_string( $p_bug_data->fixed_in_version );
-		$p_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
-		$p_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
-		$p_bug_data->sponsorship_total	= db_prepare_int( $p_bug_data->sponsorship_total );
-		$p_bug_data->sticky				= db_prepare_int( $p_bug_data->sticky );
+		$t_bug_data = new BugData;
+		$t_bug_data->project_id			= db_prepare_int( $p_bug_data->project_id );
+		$t_bug_data->reporter_id		= db_prepare_int( $p_bug_data->reporter_id );
+		$t_bug_data->handler_id			= db_prepare_int( $p_bug_data->handler_id );
+		$t_bug_data->duplicate_id		= db_prepare_int( $p_bug_data->duplicate_id );
+		$t_bug_data->priority			= db_prepare_int( $p_bug_data->priority );
+		$t_bug_data->severity			= db_prepare_int( $p_bug_data->severity );
+		$t_bug_data->reproducibility	= db_prepare_int( $p_bug_data->reproducibility );
+		$t_bug_data->status				= db_prepare_int( $p_bug_data->status );
+		$t_bug_data->resolution			= db_prepare_int( $p_bug_data->resolution );
+		$t_bug_data->projection			= db_prepare_int( $p_bug_data->projection );
+		$t_bug_data->category			= db_prepare_string( $p_bug_data->category );
+		$t_bug_data->date_submitted		= db_prepare_string( $p_bug_data->date_submitted );
+		$t_bug_data->last_updated		= db_prepare_string( $p_bug_data->last_updated );
+		$t_bug_data->eta				= db_prepare_int( $p_bug_data->eta );
+		$t_bug_data->os					= db_prepare_string( $p_bug_data->os );
+		$t_bug_data->os_build			= db_prepare_string( $p_bug_data->os_build );
+		$t_bug_data->platform			= db_prepare_string( $p_bug_data->platform );
+		$t_bug_data->version			= db_prepare_string( $p_bug_data->version );
+		$t_bug_data->build				= db_prepare_string( $p_bug_data->build );
+		$t_bug_data->fixed_in_version	= db_prepare_string( $p_bug_data->fixed_in_version );
+		$t_bug_data->view_state			= db_prepare_int( $p_bug_data->view_state );
+		$t_bug_data->summary			= db_prepare_string( $p_bug_data->summary );
+		$t_bug_data->sponsorship_total	= db_prepare_int( $p_bug_data->sponsorship_total );
+		$t_bug_data->sticky				= db_prepare_int( $p_bug_data->sticky );
 
-		$p_bug_data->description		= db_prepare_string( $p_bug_data->description );
-		$p_bug_data->steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
-		$p_bug_data->additional_information	= db_prepare_string( $p_bug_data->additional_information );
+		$t_bug_data->description		= db_prepare_string( $p_bug_data->description );
+		$t_bug_data->steps_to_reproduce	= db_prepare_string( $p_bug_data->steps_to_reproduce );
+		$t_bug_data->additional_information	= db_prepare_string( $p_bug_data->additional_information );
 
-		return $p_bug_data;
+		return $t_bug_data;
 	}
 
 	# --------------------
