@@ -91,9 +91,6 @@
 	define( "DISK",       1 );
 	define( "DATABASE",   2 );
 
-	# email padding
-	define( "EMAIL_PAD_LENGTH", 28 );
-
 	# show variable values
 	define( "BOTH",             0 );
 	define( "SIMPLE_ONLY",      1 );

@@ -9,6 +9,7 @@ Mantis
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.
+ * Modified email string padding and line separation characters.
  * Added Hungarian translation.
  * Added g_bug_link_tag to let users customize how to create bug links.
  * Added a "jump to bugnotes" quicklink at the top of the view bug pages.

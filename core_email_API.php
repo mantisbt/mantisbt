@@ -332,7 +332,9 @@
 				$s_severity_enum_string,
 				$s_priority_enum_string,
 				$s_status_enum_string,
-				$s_reproducibility_enum_string;
+				$s_reproducibility_enum_string,
+				$g_email_separator1,
+				$g_email_padding_length;
 
 		$query = "SELECT *, UNIX_TIMESTAMP(date_submitted) as date_submitted,
 				UNIX_TIMESTAMP(last_updated) as last_updated
@@ -368,33 +370,33 @@
 		$t_pri_str = get_enum_element( $s_priority_enum_string, $v_priority );
 		$t_sta_str = get_enum_element( $s_status_enum_string, $v_status );
 		$t_rep_str = get_enum_element( $s_reproducibility_enum_string, $v_reproducibility );
-		$t_message = "=======================================================================\n";
+		$t_message = $g_email_separator1."\n";
 		$t_message .= $g_view_bug_page."?f_id=".$p_bug_id."\n";
-		$t_message .= "=======================================================================\n";
-		$t_message .= str_pd( $s_email_reporter.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_reporter_name."\n";
-		$t_message .= str_pd( $s_email_handler.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_handler_name."\n";
-		$t_message .= "=======================================================================\n";
-		$t_message .= str_pd( $s_email_project.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_project_name."\n";
-		$t_message .= str_pd( $s_email_bug.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_id."\n";
-		$t_message .= str_pd( $s_email_category.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_category."\n";
-		$t_message .= str_pd( $s_email_reproducibility.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_rep_str."\n";
-		$t_message .= str_pd( $s_email_severity.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_sev_str."\n";
-		$t_message .= str_pd( $s_email_priority.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_pri_str."\n";
-		$t_message .= str_pd( $s_email_status.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_sta_str."\n";
+		$t_message .= $g_email_separator1."\n";
+		$t_message .= str_pd( $s_email_reporter.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_reporter_name."\n";
+		$t_message .= str_pd( $s_email_handler.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_handler_name."\n";
+		$t_message .= $g_email_separator1."\n";
+		$t_message .= str_pd( $s_email_project.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_project_name."\n";
+		$t_message .= str_pd( $s_email_bug.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_id."\n";
+		$t_message .= str_pd( $s_email_category.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_category."\n";
+		$t_message .= str_pd( $s_email_reproducibility.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_rep_str."\n";
+		$t_message .= str_pd( $s_email_severity.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_sev_str."\n";
+		$t_message .= str_pd( $s_email_priority.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_pri_str."\n";
+		$t_message .= str_pd( $s_email_status.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_sta_str."\n";
 		if ( RESOLVED == $v_status ) {
 			$t_res_str = get_enum_element( $s_resolution_enum_string, $v_resolution );
-			$t_message .= str_pd( $s_email_resolution.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$t_res_str."\n";
+			$t_message .= str_pd( $s_email_resolution.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$t_res_str."\n";
 			if ( DUPLICATE == $v_resolution ) {
-				$t_message .= str_pd( $s_email_duplicate.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_duplicate_id."\n";
+				$t_message .= str_pd( $s_email_duplicate.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_duplicate_id."\n";
 			}
 		}
-		$t_message .= "=======================================================================\n";
-		$t_message .= str_pd( $s_email_date_submitted.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_date_submitted."\n";
-		$t_message .= str_pd( $s_email_last_modified.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_last_updated."\n";
-		$t_message .= "=======================================================================\n";
-		$t_message .= str_pd( $s_email_summary.": ", " ", EMAIL_PAD_LENGTH, STR_PAD_RIGHT ).$v_summary."\n";
+		$t_message .= $g_email_separator1."\n";
+		$t_message .= str_pd( $s_email_date_submitted.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_date_submitted."\n";
+		$t_message .= str_pd( $s_email_last_modified.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_last_updated."\n";
+		$t_message .= $g_email_separator1."\n";
+		$t_message .= str_pd( $s_email_summary.": ", " ", $g_email_padding_length, STR_PAD_RIGHT ).$v_summary."\n";
 		$t_message .= "$s_email_description: \n".wordwrap( $v2_description )."\n";
-		$t_message .= "=======================================================================\n\n";
+		$t_message .= $g_email_separator1."\n\n";
 
 		return $t_message;
 	}
@@ -404,7 +406,7 @@
 	function email_build_bugnote_message( $p_bug_id ) {
 		global 	$g_mantis_bugnote_table, $g_mantis_bugnote_text_table,
 				$g_mantis_user_table, $g_complete_date_format,
-				$g_bugnote_order;
+				$g_bugnote_order, $g_email_separator2;
 
 		$t_message = "";
 
@@ -431,9 +433,9 @@
 			$t_note = string_email( $t_note );
 			$t_last_modified = date( $g_complete_date_format, $t_last_modified );
 			$t_string = " ".$t_username." - ".$t_last_modified." ";
-			$t_message = $t_message."-----------------------------------------------------------------------\n";
+			$t_message = $t_message.$g_email_separator2."\n";
 			$t_message = $t_message.$t_string."\n";
-			$t_message = $t_message."-----------------------------------------------------------------------\n";
+			$t_message = $t_message.$g_email_separator2."\n";
 			$t_message = $t_message.wordwrap( $t_note )."\n\n";
 		}
 
