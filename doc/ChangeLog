@@ -11,6 +11,7 @@ Mantis
  * Fixed # bug links in emails.
  * Fixed bugnote update to redirect properly after update.
  * Fixed bugnote update to check for proper access.
+ * Fixed bug_file_upload_inc to user $g_max_file_size.
  * Modified accounts so that protected accounts are not accessible by the user.
  * Modified report page formating.
  * Modified file size reports to show up as bytes.
