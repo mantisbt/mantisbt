@@ -23,5 +23,5 @@
  */
 	require_once( 'core.php' );
 
-	print_header_redirect( 'login.php?f_username='.$g_anonymous_account.'&amp;f_perm_login=false' );
+	print_header_redirect( 'login.php?f_username='.config_get( 'anonymous_account' ).'&amp;f_perm_login=false' );
 ?>
