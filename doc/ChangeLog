@@ -2,6 +2,7 @@ Mantis ChangeLog
 
 2003.??.??  -  0.18.0a3
 
+ * Behaviour change: allow bug IDs to get replaced when they are preceeded by any character that is not a letter, a number, or an underscore instead of requiring them to be preceeded by whitespace
  * Enhancement: When an enumeration is not found, display @<enumid>@ instead of @null@.
  * Enhancement: Added file type icons next to project documents and bug file attachments.  Also provided a set of standard icons.
  * Enhancement: Added a section to the bug view pages that lists the users that are monitoring the current bug.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.30 2003-02-22 08:26:07 jfitzell Exp $
+	# $Id: string_api.php,v 1.31 2003-02-24 06:20:09 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -103,18 +103,21 @@
 	}
 
 	# --------------------
-	# process the $p_string and create links to bugs if warranted
-	# Uses the bug_link_tag config variable to determine the bug link tag
-	# eg. #45  or  bug:76
-	# default is the # symbol.  You may substitue any pattern you want.
-	# if $p_include_anchor is true, include an <a href="..."> tag,
-	#  otherwise, just insert the URL as text
-	# The symbol must be at the beginning of the string or preceeded by whitespace
+	# Process $p_string, looking for bug ID references and creating bug view
+	#  links for them.
+	#
+	# Returns the processed string.
+	#
+	# If $p_include_anchor is true, include the href tag, otherwise just insert
+	#  the URL
+	#
+	# The bug tag ('#' by default) must be at the beginning of the string or
+	#  preceeded by a character that is not a letter, a number or an underscore
 	function string_process_bug_link( $p_string, $p_include_anchor=true ) {
 		$t_tag = config_get( 'bug_link_tag' );
 		$t_path = config_get( 'path' );
 
-		preg_match_all('/(^|.+?)(?:(?<=^|\s)' . preg_quote($t_tag) . '(\d+)|$)/s',
+		preg_match_all( '/(^|.+?)(?:(?<=^|\W)' . preg_quote($t_tag) . '(\d+)|$)/s',
 								$p_string, $t_matches, PREG_SET_ORDER );
 
 		$t_result = '';
