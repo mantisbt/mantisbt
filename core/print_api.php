@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.65 2003-03-21 05:55:52 vboctor Exp $
+	# $Id: print_api.php,v 1.66 2003-03-27 00:07:31 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -335,8 +335,6 @@
 		}
 
 		foreach ( $t_users as $t_user ) {
-			$v_id = $val[1];
-			$v_username = $val[0];
 			echo '<option value="' . $t_user['id'] . '" ';
 			check_selected( $t_user['id'], $p_user_id );
 			echo '>' . $t_user['username'] . '</option>';
@@ -910,6 +908,13 @@
 	function print_page_links( $p_page, $p_start, $p_end, $p_current ) {
 		$t_items = array();
 		$t_link = "";
+
+		# Check if we have more than one page,
+		#  otherwise return without doing anything.
+
+		if ( $p_end - $p_start < 1 ) {
+			return;
+		}
 
 		# Get localized strings 
 		$t_first = lang_get( 'first' );
