@@ -71,6 +71,7 @@
 	$c_status					= (integer)$f_status;
 	$c_duplicate_id				= (integer)$f_duplicate_id;
 	$c_handler_id				= (integer)$f_handler_id;
+	$c_reporter_id              = (integer)$f_reporter_id;
 	$c_view_state				= (integer)$f_view_state;
 
 	$h_description 				= string_prepare_textarea( $h_description );
@@ -88,6 +89,7 @@
 				duplicate_id='$c_duplicate_id',
 				resolution='$c_resolution',
 				handler_id='$c_handler_id',
+				reporter_id='$c_reporter_id',
 				eta='$c_eta',
 				summary='$c_summary',
 				os='$c_os',
@@ -120,6 +122,7 @@
 	history_log_event_direct( $c_id, 'duplicate_id',    $h_duplicate_id, $c_duplicate_id, $t_user_id );
 	history_log_event_direct( $c_id, 'resolution',      $h_resolution, $c_resolution, $t_user_id );
 	history_log_event_direct( $c_id, 'handler_id',      $h_handler_id, $c_handler_id, $t_user_id );
+	history_log_event_direct( $c_id, 'reporter_id',     $h_reporter_id, $c_reporter_id, $t_user_id );
 	history_log_event_direct( $c_id, 'eta',             $h_eta, $c_eta, $t_user_id );
 	history_log_event_direct( $c_id, 'summary',         $h_summary, $c_summary, $t_user_id );
 	history_log_event_direct( $c_id, 'os',              $h_os, $c_os, $t_user_id );

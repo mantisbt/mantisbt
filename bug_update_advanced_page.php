@@ -129,7 +129,9 @@
 		<?php echo $s_reporter ?>
 	</td>
 	<td>
-		<?php print_user( $v_reporter_id ) ?>
+		<select name="f_reporter_id">
+			<?php print_reporter_option_list( $v_reporter_id ) ?>
+		</select>
 	</td>
 	<td class="category">
 		<?php echo $s_view_status ?>
