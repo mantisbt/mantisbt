@@ -16,7 +16,7 @@ Mantis ChangeLog
  * New Config: view_history_threshold (default VIEWER) - threshold needed to view the bug history (now works for emails only).
  * New Config: view_attachments_threshold (default VIEWER).  Access level needed to view bugs attachments.  View means to see the file names sizes, and timestamps of the attachments.
  * New Config: download_attachments_threshold (default VIEWER).  Access level needed to download bug attachments.
- * New Config: delete_attachments_threshold (default VIEWER).  Access level needed to delete bug attachments.
+ * New Config: delete_attachments_threshold (default DEVELOPER).  Access level needed to delete bug attachments.
  * New Config: allow_view_own_attachments (default ON).  Allow users to view attachments uploaded by themselves even if their access level is below view_attachments_threshold.
  * New Config: allow_download_own_attachments (default ON).  Allow users to download attachments uploaded by themselves even if their access level is below download_attachments_threshold.
  * New Config: allow_delete_own_attachments (default OFF).  Allow users to delete attachments uploaded by themselves even if their access level is below delete_attachments_threshold.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.153 2004-03-18 23:40:35 narcissus Exp $
+	# $Id: config_defaults_inc.php,v 1.154 2004-03-19 10:25:03 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -621,7 +621,7 @@
 	$g_download_attachments_threshold	= VIEWER;
 
 	# access level needed to delete bug attachments
-	$g_delete_attachments_threshold	= VIEWER;
+	$g_delete_attachments_threshold	= DEVELOPER;
 
 	# allow users to view attachments uploaded by themselves even if their access
 	# level is below view_attachments_threshold.
