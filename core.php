@@ -6,12 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: core.php,v 1.25 2003-02-19 12:27:26 int2str Exp $
+	# $Id: core.php,v 1.26 2003-02-19 19:22:09 int2str Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
 	# INCLUDES
 	###########################################################################
+
+	# Before doing anything else, start output buffering so we don't prevent
+	#  headers from being sent if there's a blank line in an included file
+	ob_start( 'compress_handler' );
+
+	# Include compatibility file before anything else
+	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
 
 	# Check if Mantis is down for maintenance
 	#
@@ -20,23 +27,13 @@
 	#   Users are redirected to that file if it exists.
 	#   If you have to test Mantis while it's offline, add the
 	#   parameter 'mbadmin=1' to the URL.
-	#   @@@ -> The parameter might not work without register_globals...
 	#
 	$t_mantis_offline = 'mantis_offline.php';
-	if (  file_exists( $t_mantis_offline )
-           && !isset( $mbadmin ) ) {
-		header("Location: http://".$_SERVER['HTTP_HOST']
-                      .dirname( $_SERVER['PHP_SELF'])
-                      ."/".$t_mantis_offline );
+	if ( file_exists( $t_mantis_offline ) && !isset($_GET['mbadmin'])) {
+		include( dirname( __FILE__ ).DIRECTORY_SEPARATOR.$t_mantis_offline);
+		die;
 	}
 
-
-	# Before doing anything else, start output buffering so we don't prevent
-	#  headers from being sent if there's a blank line in an included file
-	ob_start( 'compress_handler' );
-
-	# Include compatibility file before anything else
-	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'php_api.php' );
 
 	# Load constants and configuration files
   	require_once( dirname( __FILE__ ).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR.'constant_inc.php' );
