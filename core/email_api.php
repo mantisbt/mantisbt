@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.69 2004-03-05 01:26:17 jlatour Exp $
+	# $Id: email_api.php,v 1.70 2004-03-14 02:08:18 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -220,6 +220,10 @@
 		}
 
 		$t_pref_field = 'email_on_' . $p_notify_type;
+		$t_user_pref_table = config_get( 'mantis_user_pref_table' );
+		if ( ! db_field_exists( $t_pref_field, $t_user_pref_table ) ) {
+			$t_pref_field = false;
+		}
 
 		# @@@ we could optimize by modifiying user_cache() to take an array
 		#  of user ids so we could pull them all in.  We'll see if it's necessary
@@ -241,11 +245,13 @@
 			}
 
 			# Exclude users who have this notification type turned off
+			if ( $t_pref_field ) {
 				$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
 				if ( OFF == $t_notify ) {
 					unset( $t_recipients[$t_id] );
 					continue;
 				}
+			}
 
 			# Finally, let's get their emails, if they've set one
 			$t_email = user_get_email( $t_id );
@@ -359,12 +365,12 @@
 	# --------------------
 	# send notices when a bug is RESOLVED
 	function email_resolved( $p_bug_id ) {
-		email_generic( $p_bug_id, 'status_resolved', 'email_notification_title_for_status_bug_resolved' );
+		email_generic( $p_bug_id, 'resolved', 'email_notification_title_for_status_bug_resolved' );
 	}
 	# --------------------
 	# send notices when a bug is CLOSED
 	function email_close( $p_bug_id ) {
-		email_generic( $p_bug_id, 'status_closed', 'email_notification_title_for_status_bug_closed' );
+		email_generic( $p_bug_id, 'closed', 'email_notification_title_for_status_bug_closed' );
 	}
 	# --------------------
 	# send notices when a bug is REOPENED

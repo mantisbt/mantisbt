@@ -6,6 +6,7 @@ Mantis ChangeLog
  * Enh #3633: Experimental support for MSSQL, PgSQL and other databases using ADODB.
  * Fix #3622: Tweak attachment SQL in print bug pages.
  * Fix #3629: Duplicate Error ID.
+ * Fix #3635: status_resolved in email_api should be resolved.
  * Fix #3646: Error in core/obsolete.php.
  * Languages: Updated Czech, Estonian and Japanese (EUC and SJIS) localisations.
 
