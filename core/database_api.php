@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.38 2004-12-09 18:55:06 thraxisp Exp $
+	# $Id: database_api.php,v 1.39 2005-01-29 18:31:45 prichards Exp $
 	# --------------------------------------------------------
 
 	### Database ###
@@ -17,8 +17,6 @@
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
 
 	require_once( $t_core_dir . 'adodb/adodb.inc.php' );
-
-	$g_db = $db = ADONewConnection($g_db_type);
 
 	# An array in which all executed queries are stored.  This is used for profiling
 	$g_queries_array = array();
@@ -84,12 +82,12 @@
 	}
 
 	# --------------------
-	# timer analysis 
+	# timer analysis
 	function microtime_float() {
 		list( $usec, $sec ) = explode( " ", microtime() );
 		return ( (float)$usec + (float)$sec );
 	}
-	
+
 	# --------------------
 	# execute query, requires connection to be opened
 	# If $p_error_on_failure is true (default) an error will be triggered
@@ -106,7 +104,7 @@
 		$t_elapsed = number_format( microtime_float() - $t_start, 4);
 		array_push ( $g_queries_array, array( $p_query, $t_elapsed ) );
 
-		if ( !$t_result ) {
+		if ( FALSE === $t_result ) {
 			db_error($p_query);
 			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 			return false;
@@ -379,9 +377,11 @@
 		return $t_total;
 	}
 
-		
+
 	# --------------------
 	if ( !isset( $g_skip_open_db ) ) {
+		$g_db = $db = ADONewConnection($g_db_type);
+
 		if ( OFF == $g_use_persistent_connections ) {
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 		} else {
