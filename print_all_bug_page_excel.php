@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.36 2004-03-05 02:27:51 jlatour Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.37 2004-04-15 09:27:30 yarick123 Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -192,7 +192,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 	<?php if ( ( $name_index < $field_name_count ) && ( !isset( $t_prefs[$name_index] ) || ( 1 == $t_prefs[$name_index] ) ) ) { ?>
 	<td class=xl2216681 nowrap style='border-top:none;border-left:none'>
-	<?php echo date( config_get( 'normal_date_format' ), strtotime($v_date_submitted) );
+	<?php echo date( config_get( 'normal_date_format' ), $v_date_submitted );
 		  echo "</td>";
 			}
 	$name_index++;  ?>
