@@ -14,7 +14,7 @@
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 	project_access_check( $f_id );
 	check_access( REPORTER );
-	check_bugnote_exists( $f_id );
+	check_bugnote_exists( $f_bugnote_id );
 	$f_bugnote_id = (integer)$f_bugnote_id;
 
 	# grab the bugnote text id
