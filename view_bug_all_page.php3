@@ -18,7 +18,15 @@
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 	### check whether the user wanted to hide the results
-	$f_hide_resolved = $g_hide_resolved_val;
+	$f_hide_resolved = get_user_value( $g_mantis_user_pref_table, "hide_resolved" );
+	$f_limit_view = get_user_value( $g_mantis_user_pref_table, "limit_view" );
+
+	if ( isset( $g_hide_resolved_val ) ) {
+		$f_hide_resolved = $g_hide_resolved_val;
+	}
+	if ( isset( $g_view_limit_val ) ) {
+		$f_limit_view = $g_view_limit_val;
+	}
 
 	### basically we toggle between ASC and DESC if the user clicks the
 	### same sort order
@@ -99,15 +107,15 @@
 		}
 		### build our query string based on our viewing criteria
 		$query = "SELECT * FROM $g_mantis_bug_table";
-		if ( $g_hide_resolved_val=="on"  ) {
+		if ( $f_hide_resolved=="on"  ) {
 			$query = $query." WHERE status<>'resolved'";
 		}
 		if ( !isset( $f_sort ) ) {
 				$f_sort="id";
 		}
 		$query = $query." ORDER BY '$f_sort' $f_dir";
-		if ( isset( $g_view_limit_val ) ) {
-			$query = $query." LIMIT $f_offset, $g_view_limit_val";
+		if ( isset( $f_limit_view ) ) {
+			$query = $query." LIMIT $f_offset, $f_limit_view";
 		}
 
 		### perform query
@@ -210,8 +218,8 @@
 </table>
 
 <?
-	$f_offset_next = $f_offset + $g_view_limit_val;
-	$f_offset_prev = $f_offset - $g_view_limit_val;
+	$f_offset_next = $f_offset + $f_limit_view;
+	$f_offset_prev = $f_offset - $f_limit_view;
 
 	if ( $f_offset_prev < 0 ) {
 		$f_offset_prev = -1;
@@ -220,10 +228,10 @@
 
 <div align=center>
 <? if ( $f_offset_prev >= 0 ) { ?>
-<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>">View Prev <? echo $g_view_limit_val ?></a>
+<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_prev ?>">View Prev <? echo $f_limit_view ?></a>
 <? } ?>
-<? if ( $row_count == $g_view_limit_val ) { ?>
-<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>">View Next <? echo $g_view_limit_val ?></a>
+<? if ( $row_count == $f_limit_view ) { ?>
+<a href="<? echo $g_view_bug_all_page ?>?f_offset=<? echo $f_offset_next ?>">View Next <? echo $f_limit_view ?></a>
 <? } ?>
 </div>
 

@@ -39,6 +39,7 @@ To Do:
  * Added a string_display() function to prevent HTML tags from screwing up display
  * Modified version to be an enum.
  * Added version editing capability
+ * Added account preferences
 
 12.06.2000	-	0.10.2
 

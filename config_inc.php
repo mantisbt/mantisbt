@@ -83,6 +83,7 @@
 	$g_mantis_news_table           = $g_db_table_prefix."_news_table";
 	$g_mantis_user_table           = $g_db_table_prefix."_user_table";
 	$g_mantis_user_profile_table   = $g_db_table_prefix."_user_profile_table";
+	$g_mantis_user_pref_table      = $g_db_table_prefix."_user_pref_table";
 	#--------------------
 
 	#--------------------
@@ -196,6 +197,15 @@
 	$g_time_length              = 30000000;     # 1 year
 	# time to delay between page redirects
 	$g_wait_time                = 1;            # in seconds
+	#--------------------
+
+	#--------------------
+	# defaults for viewing preferences
+	$g_default_limit_view       = 50;
+	$g_default_show_last        = 1;
+	$g_default_hide_resolved    = "";  # set to on to enable
+	$g_default_advanced_report  = "";  # set to on to enable
+	$g_default_advanced_view    = "";  # set to on to enable
 	#--------------------
 
 	#--------------------

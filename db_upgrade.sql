@@ -44,7 +44,7 @@ ALTER TABLE mantis_bug_table CHANGE version version ENUM ('none') not null;
 
 # New table for default user preferences
 
-CREATE TABLE mantis_user_defaults_table (
+CREATE TABLE mantis_user_pref_table (
    id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL auto_increment,
    user_id int(10) unsigned zerofill DEFAULT '0000000000' NOT NULL,
    hide_resolved char(3) NOT NULL,
