@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.56 2003-02-18 02:37:07 jfitzell Exp $
+	# $Id: html_api.php,v 1.57 2003-02-18 03:10:04 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -21,11 +21,42 @@
 	# HTML API
 	#
 	# These functions control the display of each page
-	# I've numbered the functions in the order they should appear
+	#
+	# This is the call order of these functions, should you need to figure out
+	#  which to modify or which to leave out.
+	#
+	#   html_page_top1
+	#     html_begin
+	#     html_head_begin
+	#     html_content_type
+	#     html_title
+	#     html_css
+	#  (html_meta_redirect)
+	#   html_page_top2
+	#     html_page_top2a
+	#       html_head_end
+	#       html_body_begin
+	#       html_header
+	#       html_top_banner
+	#     html_login_info
+	#    (print_project_menu_bar)
+	#     print_menu
+	#  
+	#  ...Page content here...
+	#  
+	#   html_page_bottom1
+	#    (print_menu)
+	#     html_page_bottom1a
+	#       html_bottom_banner
+	#  	 html_footer
+	#  	 html_body_end
+	#  	 html_end
+	#
 	###########################################################################
 
 	# --------------------
-	# first part of the html followed by meta tags then the second part
+	# Print the part of the page that comes before meta redirect tags should
+	#  be inserted
 	function html_page_top1() {
 		html_begin();
 		html_head_begin();
@@ -36,17 +67,8 @@
 	}
 
 	# --------------------
-	# core part of page top but without login info and menu - used in login pages
-	function html_page_top2a() {
-		html_head_end();
-		html_body_begin();
-		html_header();
-		html_top_banner();
-	}
-
-	# --------------------
-	# second part of the html, comes after the meta tags
-	#  includes the complete page top, including html_page_top2a()
+	# Print the part of the page that comes after meta tags, but before the
+	#  actual page content
 	function html_page_top2() {
 		html_page_top2a();
 		html_login_info();
@@ -58,7 +80,19 @@
 	}
 
 	# --------------------
-	# comes at the bottom of the html
+	# Print the part of the page that comes after meta tags and before the
+	#  actual page content, but without login info or menus.  This is used
+	#  directly during the login process and other times when the user may
+	#  not be authenticated
+	function html_page_top2a() {
+		html_head_end();
+		html_body_begin();
+		html_header();
+		html_top_banner();
+	}
+
+	# --------------------
+	# Print the part of the page that comes below the page content
 	# $p_file should always be the __FILE__ variable. This is passed to show source
 	function html_page_bottom1( $p_file = null ) {
 		if ( config_get( 'show_footer_menu' ) ) {
@@ -70,7 +104,9 @@
 	}
 
 	# --------------------
-	# core page bottom - used in login pages
+	# Print the part of the page that comes below the page content but leave off
+	#  the menu.  This is used during the login process and other times when the
+	#  user may not be authenticated.
 	function html_page_bottom1a( $p_file = null ) {
 		if ( null === $p_file ) {
 			$p_file = basename( $GLOBALS['PHP_SELF'] );
@@ -83,7 +119,7 @@
 	}
 
 	# --------------------
-	# (1) this is the first text sent by the page
+	# (1) Print the document type and the opening <html> tag
 	function html_begin() {
 		# @@@ NOTE make this a configurable global.
 		#echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
@@ -94,19 +130,19 @@
 	}
 
 	# --------------------
-	# (2) Opens the <HEAD> section
+	# (2) Begin the <head> section
 	function html_head_begin() {
 	   echo '<head>';
 	}
 
 	# --------------------
-	# (3) Prints the content-type
+	# (3) Print the content-type
 	function html_content_type() {
 		echo '<meta http-equiv="Content-type" content="text/html;charset=' . lang_get( 'charset' ) . '" />';
 	}
 
 	# --------------------
-	# (4) Prints the <TITLE> tag
+	# (4) Print the window title
 	function html_title() {
 		$t_title = config_get( 'window_title' );
 
@@ -123,7 +159,7 @@
 	}
 
 	# --------------------
-	# (5) includes the css include file to use, is likely to be either empty or css_inc.php
+	# (5) Print the link to include the css file
 	function html_css() {
 		$t_css_url = config_get( 'css_include_file' );
 		echo '<link rel="stylesheet" type="text/css" href="' . $t_css_url . '" />';
@@ -135,8 +171,9 @@
 	}
 
 	# --------------------
-	# (6) OPTIONAL: for pages that require a redirect
-	# The time field is the number of seconds to wait before redirecting
+	# (6) Print an HTML meta tag to redirect to another page
+	# This function is optional and may be called by pages that need a redirect.
+	# $p_time is the number of seconds to wait before redirecting.
 	# If we have handled any errors on this page and the 'stop_on_errors' config
 	#  option is turned on, return false and don't redirect.
 	function html_meta_redirect( $p_url, $p_time=null ) {
@@ -154,19 +191,19 @@
 	}
 
 	# --------------------
-	# (7) Ends the <HEAD> section
+	# (7) End the <head> section
 	function html_head_end() {
 		echo '</head>';
 	}
 
 	# --------------------
-	# (8) Starts the <BODY> of the page
+	# (8) Begin the <body> section
 	function html_body_begin() {
 		echo '<body>';
 	}
 
 	# --------------------
-	# (9) Prints the title that is visible in the main panel of the browser
+	# (9) Print the title displayed at the top of the page
 	function html_header() {
 		$t_title = config_get( 'page_title' );
 
@@ -183,8 +220,7 @@
 	}
 
 	# --------------------
-	# (10) $p_page is included.  This allows for the admin to have a nice banner or
-	# graphic at the top of every page
+	# (10) Print a user-defined banner at the top of the page if there is one.
 	function html_top_banner() {
 		$t_page = config_get( 'top_include_page' );
 
@@ -196,8 +232,40 @@
 	}
 
 	# --------------------
-	# (11) $p_page is included.  This allows for the admin to have a nice baner or
-	# graphic at the bottom of every page
+	# (11) Print the user's account information
+	# Also print the select box where users can switch projects
+	function html_login_info() {
+		$t_username = current_user_get_field( 'username' );
+		$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
+		$t_now = date( config_get( 'complete_date_format' ) );
+
+		echo '<table class="hide">';
+		echo '<tr>';
+			echo '<td class="login-info-left">';
+				echo lang_get( 'logged_in_as' ) . ": <span class=\"italic\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
+			echo '</td>';
+			echo '<td class="login-info-middle">';
+				echo "<span class=\"italic\">$t_now</span>";
+			echo '</td>';
+			echo '<td class="login-info-right">';
+				echo '<form method="post" name="form_set_project" action="set_project.php">';
+
+				if ( ON == config_get( 'use_javascript' )) {
+					echo '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
+				} else {
+					echo '<select name="project_id" class="small">';
+				}
+				print_project_option_list( helper_get_current_project() );
+				echo '</select>';
+				echo '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small" />';
+				echo '</form>';
+			echo '</td>';
+		echo '</tr>';
+		echo '</table>';
+	}
+
+	# --------------------
+	# (12) Print a user-defined banner at the bottom of the page if there is one.
 	function html_bottom_banner() {
 		$t_page = config_get( 'bottom_include_page' );
 
@@ -209,7 +277,7 @@
 	}
 
 	# --------------------
-	# (12) Prints the bottom of page information
+	# (13) Print the page footer information
 	function html_footer( $p_file ) {
 		global $g_timer, $g_queries_array;
 
@@ -255,53 +323,15 @@
 	}
 
 	# --------------------
-	# (13) Ends the <BODY> section.
+	# (14) End the <body> section
 	function html_body_end() {
 		echo '</body>';
 	}
 
 	# --------------------
-	# (14) The very last text that is sent in a html page.
+	# (15) Print the closing <html> tag
 	function html_end() {
 		echo '</html>';
-	}
-
-
-	###########################################################################
-	# HTML Appearance Helper API
-	###########################################################################
-
-	# --------------------
-	# prints the user that is logged in and the date/time
-	# it also creates the form where users can switch projects
-	function html_login_info() {
-		$t_username = current_user_get_field( 'username' );
-		$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
-		$t_now = date( config_get( 'complete_date_format' ) );
-
-		echo '<table class="hide">';
-		echo '<tr>';
-			echo '<td class="login-info-left">';
-				echo lang_get( 'logged_in_as' ) . ": <span class=\"italic\">$t_username</span> <span class=\"small\">($t_access_level)</span>";
-			echo '</td>';
-			echo '<td class="login-info-middle">';
-				echo "<span class=\"italic\">$t_now</span>";
-			echo '</td>';
-			echo '<td class="login-info-right">';
-				echo '<form method="post" name="form_set_project" action="set_project.php">';
-
-				if ( ON == config_get( 'use_javascript' )) {
-					echo '<select name="project_id" class="small" onchange="document.forms.form_set_project.submit();">';
-				} else {
-					echo '<select name="project_id" class="small">';
-				}
-				print_project_option_list( helper_get_current_project() );
-				echo '</select>';
-				echo '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small" />';
-				echo '</form>';
-			echo '</td>';
-		echo '</tr>';
-		echo '</table>';
 	}
 
 
@@ -310,8 +340,7 @@
 	###########################################################################
 
 	# --------------------
-	# print the standard command menu at the top of the pages
-	# also prints the login info, time, and project select form
+	# Print the main menu
 	function print_menu() {
 		if ( auth_is_user_authenticated() ) {
 			$t_protected = current_user_get_field( 'protected' );
@@ -410,7 +439,7 @@
 	}
 
 	# --------------------
-	# prints the links to the graphic pages, in summary_page.php
+	# Print the menu for the graph summary section
 	function print_menu_graph() {
 		if ( config_get( 'use_jpgraph' ) ) {
 			$t_icon_path = config_get( 'icon_path' );
@@ -425,8 +454,8 @@
 	}
 
 	# --------------------
-	# prints the manage menu
-	# if the $p_page matches a url then don't make that a link
+	# Print the menu for the manage section
+	# $p_page specifies the current page name so it's link can be disabled
 	function print_manage_menu( $p_page='' ) {
 		if ( !access_has_project_level( ADMINISTRATOR ) ) {
 			return;
@@ -451,9 +480,10 @@
 			print_bracket_link( $t_documentation_page, lang_get( 'documentation_link' ) );
 		echo '</div>';
 	}
+
 	# --------------------
-	# prints the account menu
-	# if the $p_page matches a url then don't make that a link
+	# Print the menu for the account section
+	# $p_page specifies the current page name so it's link can be disabled
 	function print_account_menu( $p_page='' ) {
 		$t_account_page 				= 'account_page.php';
 		$t_account_prefs_page 			= 'account_prefs_page.php';
@@ -471,8 +501,8 @@
 	}
 
 	# --------------------
-	# prints the doc menu
-	# if the $p_page matches a url then don't make that a link
+	# Print the menu for the docs section
+	# $p_page specifies the current page name so it's link can be disabled
 	function print_doc_menu( $p_page='' ) {
 		$t_documentation_html 	= 'doc/documentation.html';
 		$t_proj_doc_page 		= 'proj_doc_page.php';
@@ -492,8 +522,8 @@
 	}
 
 	# --------------------
-	# prints the manage doc menu
-	# if the $p_page matches a url then don't make that a link
+	# Print the menu for the management docs section
+	# $p_page specifies the current page name so it's link can be disabled
 	function print_manage_doc_menu( $p_page='' ) {
 		$t_path = config_get( 'path' ).'doc/';
 		$t_documentation_page = 'documentation_page.php';
@@ -513,7 +543,8 @@
 	}
 
 	# --------------------
-	# prints the summary menu
+	# Print the menu for the summary section
+	# $p_page specifies the current page name so it's link can be disabled
 	function print_summary_menu( $p_page='' ) {
 		echo '<div align="center">';
 		print_bracket_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
@@ -533,8 +564,13 @@
 		echo '</div>';
 	}
 
+
+	#=========================
+	# Candidates for moving to print_api
+	#=========================
+
 	# --------------------
-	# Print the color legend for the colors
+	# Print the color legend for the status colors
 	function html_status_legend() {
 		echo '<br />';
 		echo '<table class="width100" cellspacing="1">';
