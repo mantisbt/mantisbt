@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_api.php,v 1.49 2004-02-22 04:26:47 vboctor Exp $
+	# $Id: bug_api.php,v 1.50 2004-02-26 14:36:29 yarick123 Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -242,7 +242,7 @@
 				$p_category,
 				$p_os, $p_os_build,
 				$p_platform, $p_version,
-				$p_build, 
+				$p_build,
 				$p_profile_id, $p_summary, $p_view_state,
 				$p_description, $p_steps_to_reproduce, $p_additional_info ) {
 
@@ -423,7 +423,7 @@
 			bug_delete( $row['id'] );
 		}
 
-		# @@@ should we check the return value of each bug_delete() and 
+		# @@@ should we check the return value of each bug_delete() and
 		#  return false if any of them return false? Presumable bug_delete()
 		#  will eventually trigger an error on failure so it won't matter...
 
@@ -489,39 +489,39 @@
 									$t_old_data->project_id, $p_bug_data->project_id );
 		history_log_event_direct( $p_bug_id, 'reporter_id',
 									$t_old_data->reporter_id, $p_bug_data->reporter_id );
-		history_log_event_direct( $p_bug_id, 'handler_id', 
+		history_log_event_direct( $p_bug_id, 'handler_id',
 									$t_old_data->handler_id, $p_bug_data->handler_id );
-		history_log_event_direct( $p_bug_id, 'duplicate_id', 
+		history_log_event_direct( $p_bug_id, 'duplicate_id',
 									$t_old_data->duplicate_id, $p_bug_data->duplicate_id );
-		history_log_event_direct( $p_bug_id, 'priority', 
+		history_log_event_direct( $p_bug_id, 'priority',
 									$t_old_data->priority, $p_bug_data->priority );
-		history_log_event_direct( $p_bug_id, 'severity', 
+		history_log_event_direct( $p_bug_id, 'severity',
 									$t_old_data->severity, $p_bug_data->severity );
-		history_log_event_direct( $p_bug_id, 'reproducibility', 
+		history_log_event_direct( $p_bug_id, 'reproducibility',
 									$t_old_data->reproducibility, $p_bug_data->reproducibility );
-		history_log_event_direct( $p_bug_id, 'status', 
+		history_log_event_direct( $p_bug_id, 'status',
 									$t_old_data->status, $p_bug_data->status );
-		history_log_event_direct( $p_bug_id, 'resolution', 
+		history_log_event_direct( $p_bug_id, 'resolution',
 									$t_old_data->resolution, $p_bug_data->resolution );
-		history_log_event_direct( $p_bug_id, 'projection', 
+		history_log_event_direct( $p_bug_id, 'projection',
 									$t_old_data->projection, $p_bug_data->projection );
-		history_log_event_direct( $p_bug_id, 'category', 
+		history_log_event_direct( $p_bug_id, 'category',
 									$t_old_data->category, $p_bug_data->category );
-		history_log_event_direct( $p_bug_id, 'eta', 
+		history_log_event_direct( $p_bug_id, 'eta',
 									$t_old_data->eta, $p_bug_data->eta );
-		history_log_event_direct( $p_bug_id, 'os', 
+		history_log_event_direct( $p_bug_id, 'os',
 									$t_old_data->os, $p_bug_data->os );
-		history_log_event_direct( $p_bug_id, 'os_build', 
+		history_log_event_direct( $p_bug_id, 'os_build',
 									$t_old_data->os_build, $p_bug_data->os_build );
-		history_log_event_direct( $p_bug_id, 'platform', 
+		history_log_event_direct( $p_bug_id, 'platform',
 									$t_old_data->platform, $p_bug_data->platform );
-		history_log_event_direct( $p_bug_id, 'version', 
+		history_log_event_direct( $p_bug_id, 'version',
 									$t_old_data->version, $p_bug_data->version );
-		history_log_event_direct( $p_bug_id, 'build', 
+		history_log_event_direct( $p_bug_id, 'build',
 									$t_old_data->build, $p_bug_data->build );
-		history_log_event_direct( $p_bug_id, 'view_state', 
+		history_log_event_direct( $p_bug_id, 'view_state',
 									$t_old_data->view_state, $p_bug_data->view_state );
-		history_log_event_direct( $p_bug_id, 'summary', 
+		history_log_event_direct( $p_bug_id, 'summary',
 									$t_old_data->summary, $p_bug_data->summary );
 
 
@@ -558,10 +558,8 @@
 		$t_status_prefix = 'email_notification_title_for_status_bug_';
 
 		# bug assigned
-		if ( $t_old_data->handler_id != $p_bug_data->handler_id )
-		{
-			$t_message = lang_get_defaulted( $t_action_prefix . 'assigned', '' );
-			email_generic( $p_bug_id, 'assigned', $t_message );
+		if ( $t_old_data->handler_id != $p_bug_data->handler_id ) {
+			email_generic( $p_bug_id, 'assigned', $t_action_prefix . 'assigned' );
 			return true;
 		}
 
@@ -569,16 +567,14 @@
 		if ( $t_old_data->status != $p_bug_data->status ) {
 			$t_status = get_enum_to_string( config_get( 'status_enum_string' ), $p_bug_data->status );
 			$t_status = str_replace( ' ', '', $t_status );
-			$t_message = lang_get_defaulted( $t_status_prefix . $t_status, '' );
-			email_generic( $p_bug_id, 'status_' . $t_status, $t_message );
+			email_generic( $p_bug_id, 'status_' . $t_status, $t_status_prefix . $t_status );
 			return true;
 		}
 
 		# @@@ handle priority change if it requires special handling
 
 		# generic update notification
-		$t_message = lang_get_defaulted( $t_action_prefix . 'updated' , '' );
-		email_generic( $p_bug_id, 'updated', $t_message );
+		email_generic( $p_bug_id, 'updated', $t_action_prefix . 'updated' );
 
 		return true;
 	}

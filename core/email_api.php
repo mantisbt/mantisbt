@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.67 2004-02-24 13:58:21 vboctor Exp $
+	# $Id: email_api.php,v 1.68 2004-02-26 14:36:29 yarick123 Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -316,7 +316,7 @@
 						lang_get( 'new_account_message' ) .
 						lang_get( 'new_account_do_not_reply' );
 		
-		# Send signup email regardless of mail notification pref 
+		# Send signup email regardless of mail notification pref
 		# or else users won't be able to sign up
 		email_send( $v_email, lang_get( 'new_account_subject' ), $t_message );
 	}
@@ -347,49 +347,49 @@
 	# --------------------
 	# send a generic email
 	# $p_notify_type: use check who she get notified of such event.
-	# $p_message: message to be included at the top of the email message.
-	function email_generic( $p_bug_id, $p_notify_type, $p_message = null ) {
+	# $p_message_id: message id to be translated and included at the top of the email message.
+	function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null ) {
 		$t_bcc = email_build_bcc_list( $p_bug_id, $p_notify_type );
-		email_bug_info( $p_bug_id, $p_message, $t_bcc );
+		email_bug_info( $p_bug_id, $p_message_id, $t_bcc );
 	}
 	# --------------------
 	# send notices when a new bug is added
 	function email_new_bug( $p_bug_id ) {
-		email_generic( $p_bug_id, 'new', lang_get( 'email_notification_title_for_action_bug_submitted' ) );
+		email_generic( $p_bug_id, 'new', 'email_notification_title_for_action_bug_submitted' );
 	}
 	# --------------------
 	# send notices when a new bugnote
 	function email_bugnote_add( $p_bug_id ) {
-		email_generic( $p_bug_id, 'bugnote', lang_get( 'email_notification_title_for_action_bugnote_submitted' ) );
+		email_generic( $p_bug_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted' );
 	}
 	# --------------------
 	# send notices when a bug is RESOLVED
 	function email_resolved( $p_bug_id ) {
-		email_generic( $p_bug_id, 'status_resolved', lang_get( 'email_notification_title_for_status_bug_resolved' ) );
+		email_generic( $p_bug_id, 'status_resolved', 'email_notification_title_for_status_bug_resolved' );
 	}
 	# --------------------
 	# send notices when a bug is CLOSED
 	function email_close( $p_bug_id ) {
-		email_generic( $p_bug_id, 'status_closed', lang_get( 'email_notification_title_for_status_bug_closed' ) );
+		email_generic( $p_bug_id, 'status_closed', 'email_notification_title_for_status_bug_closed' );
 	}
 	# --------------------
 	# send notices when a bug is REOPENED
 	function email_reopen( $p_bug_id ) {
-		email_generic( $p_bug_id, 'reopened', lang_get( 'email_notification_title_for_action_bug_reopened' ) );
+		email_generic( $p_bug_id, 'reopened', 'email_notification_title_for_action_bug_reopened' );
 	}
 	# --------------------
 	# send notices when a bug is ASSIGNED
 	function email_assign( $p_bug_id ) {
-		email_generic( $p_bug_id, 'assigned', lang_get( 'email_notification_title_for_action_bug_assigned' ) );
+		email_generic( $p_bug_id, 'assigned', 'email_notification_title_for_action_bug_assigned' );
 	}
 	# --------------------
 	# send notices when a bug is DELETED
 	function email_bug_deleted( $p_bug_id ) {
-		email_generic( $p_bug_id, 'deleted', lang_get( 'email_notification_title_for_action_bug_deleted' ) );
+		email_generic( $p_bug_id, 'deleted', 'email_notification_title_for_action_bug_deleted' );
 	}
 	# --------------------
 	# Build the bug info part of the message
-	function email_build_bug_message( $p_bug_id, $p_message, &$p_category ) {
+	function email_build_bug_message( $p_bug_id, $p_message_id, &$p_category ) {
 		global 	$g_complete_date_format, $g_show_view,
 				$g_bugnote_order,
 				$g_email_separator1, $g_email_padding_length;
@@ -414,7 +414,7 @@
 		$t_sta_str = get_enum_element( 'status', $v_status );
 		$t_rep_str = get_enum_element( 'reproducibility', $v_reproducibility );
 		$t_message = $g_email_separator1."\n";
-		if ( $p_message != lang_get( 'email_notification_title_for_action_bug_deleted' ) ) {
+		if ( $p_message_id !== 'email_notification_title_for_action_bug_deleted' ) {
 			$t_message .= string_get_bug_view_url_with_fqdn( $p_bug_id ) . "\n";
 			$t_message .= $g_email_separator1."\n";
 		}
@@ -531,19 +531,26 @@
 	}
 	# --------------------
 	# Send bug info to reporter and handler
-	function email_bug_info( $p_bug_id, $p_message, $p_headers='' ) {
-		global $g_to_email, $g_use_bcc;
+	function email_bug_info( $p_bug_id, $p_message_id, $p_headers='' ) {
+		global $g_to_email, $g_use_bcc, $g_default_language, $g_lang_current;
+
+		# load default language in order to send all emails with the same language
+		$t_saved_lang_current = $g_lang_current; // save current language before changing to email-language
+		if ( $g_default_language !== $g_lang_current ) {
+			lang_load( $g_default_language );
+		}
 
 		# build subject
 		$t_subject = email_build_subject( $p_bug_id );
 
 		# build message
 		$t_category = '';
-		$t_message = '';
-		if ( ( $p_message !== null ) && ( !is_blank( $p_message ) ) ) {
-			$t_message .= $p_message."\n";
+		## default message == '' not to show internal constants like 'email_notification_title_for_status_bug_confirmed' in email
+		$t_message = lang_get_defaulted( $p_message_id, '' );
+		if ( ( $t_message !== null ) && ( !is_blank( $t_message ) ) ) {
+			$t_message .= "\n";
 		}
-		$t_message .= email_build_bug_message( $p_bug_id, $p_message, $t_category );
+		$t_message .= email_build_bug_message( $p_bug_id, $t_message, $t_category );
 		$t_message .= email_build_bugnote_message( $p_bug_id );
 		$t_message .= email_build_history_message( $p_bug_id );
 
@@ -563,6 +570,11 @@
 			if( ON == config_get( 'enable_email_notification' ) ) {
 				$res1 = email_send( $g_to_email, $t_subject, $t_message, $p_headers, $t_category );
 			}
+		}
+
+		# restore user language after sending email
+		if ( !is_blank( $t_saved_lang_current ) && $t_saved_lang_current !== $g_default_language ) {
+			lang_load( $t_saved_lang_current );
 		}
 	}
 	# --------------------
