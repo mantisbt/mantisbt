@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.29 2003-02-09 10:30:07 jfitzell Exp $
+	# $Id: project_api.php,v 1.30 2003-02-09 21:55:53 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -34,7 +34,7 @@
 	#  If the second parameter is true (default), trigger an error
 	#  if the project can't be found.  If the second parameter is
 	#  false, return false if the project can't be found.
-	function project_cache_row( $p_project_id, $p_trigger_errors=true) {
+	function project_cache_row( $p_project_id, $p_trigger_errors=true ) {
 		global $g_cache_project;
 
 		$c_project_id = db_prepare_int( $p_project_id );
@@ -60,10 +60,33 @@
 
 		$row = db_fetch_array( $result );
 
-		$g_cache_project[$c_project_id] = $row;
+		$g_cache_project[(int)$p_project_id] = $row;
 
 		return $row;
 	}
+
+	# --------------------
+	# Cache all project rows and return an array of them
+	function project_cache_all() {
+		global $g_cache_project;
+		
+		$t_project_table = config_get( 'mantis_project_table' );
+
+		$query = "SELECT * 
+				  FROM $t_project_table";
+		$result = db_query( $query );
+
+		$count = db_num_rows( $result );
+
+		for ( $i = 0 ; $i < $count ; $i++ ) {
+			$row = db_fetch_array( $result );
+
+			$g_cache_project[(int)$row['id']] = $row;
+		}
+
+		return $g_cache_project;
+	}
+
 	# --------------------
 	# Clear the project cache (or just the given id if specified)
 	function project_clear_cache( $p_project_id = null ) {
@@ -72,8 +95,7 @@
 		if ( null === $p_project_id ) {
 			$g_cache_project = array();
 		} else {
-			$c_project_id = db_prepare_int( $p_project_id );
-			unset( $g_cache_project[$c_project_id] );
+			unset( $g_cache_project[(int)$p_project_id] );
 		}
 
 		return true;
@@ -97,6 +119,7 @@
 			return true;
 		}
 	}
+
 	# --------------------
 	# check to see if project exists by id
 	# if it doesn't exist then error
@@ -106,6 +129,7 @@
 			trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
 		}
 	}
+
 	# --------------------
 	# check to see if project exists by name
 	function project_is_name_unique( $p_name ) {
@@ -124,6 +148,7 @@
 			return false;
 		}
 	}
+
 	# --------------------
 	# check to see if project exists by id
 	# if it doesn't exist then error
@@ -133,6 +158,7 @@
 			trigger_error( ERROR_PROJECT_NAME_NOT_UNIQUE, ERROR );
 		}
 	}
+
 	# --------------------
 	# check to see if the user/project combo already exists
 	# returns true is duplicate is found, otherwise false
@@ -191,6 +217,7 @@
 		# return the id of the new project
 		return db_insert_id();
 	}
+
 	# --------------------
 	# Delete a project
 	function project_delete( $p_project_id ) {
@@ -230,6 +257,7 @@
 		# db_query() errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# Update a project
 	function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_view_state, $p_file_path, $p_enabled ) {
@@ -285,6 +313,12 @@
 	}
 
 	# --------------------
+	# Return all rows describing all projects
+	function project_get_all_rows() {
+		return project_cache_all();
+	}
+
+	# --------------------
 	# Return the specified field of the specified project
 	function project_get_field( $p_project_id, $p_field_name ) {
 		$row = project_get_row( $p_project_id );
@@ -296,6 +330,7 @@
 			return '';
 		}
 	}
+
 	# --------------------
 	# Return the user's local (overridden) access level on the project or false
 	#  if the user is not listed on the project
@@ -320,6 +355,7 @@
 			return false;
 		}
 	}
+
 	# --------------------
 	# return the descriptor holding all the info from the project user list
 	# for the specified project
@@ -343,6 +379,7 @@
 
 		return $t_user_rows;
 	}
+
 	# --------------------
 	# Return an array of info about users who have access to the the given project
 	# For each user we have 'id', 'username', and 'access_level' (overall access level)
@@ -396,6 +433,8 @@
 
 		return multi_sort( array_values($t_users), 'username' );
 	}
+
+
 	#===================================
 	# Data Modification
 	#===================================
@@ -420,6 +459,7 @@
 		# db_query errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# update entry
 	# must make sure entry exists beforehand
@@ -440,6 +480,7 @@
 		# db_query errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# update or add the entry as appropriate
 	#  This function involves one more db query than project_update_user_acces() 
@@ -451,6 +492,7 @@
 			return project_add_user( $p_project_id, $p_user_id, $p_access_level );
 		}
 	}
+
 	# --------------------
 	# remove user from project
 	function project_remove_user( $p_project_id, $p_user_id ) {
@@ -468,6 +510,7 @@
 		# db_query errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# delete all users from the project user list for a given project
 	# this is useful when deleting or closing a project
@@ -484,6 +527,7 @@
 		# db_query errors on failure so:
 		return true;
 	}
+
 	# --------------------
 	# Copy all users and their permissions from the source project to the
 	#  destination project
@@ -503,6 +547,7 @@
 			}
 		}
 	}
+
 	# --------------------
 	# Delete all files associated with a project
 	function project_delete_all_files( $p_project_id ) {
