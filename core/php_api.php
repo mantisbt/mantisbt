@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: php_api.php,v 1.8 2003-02-15 01:25:49 jfitzell Exp $
+	# $Id: php_api.php,v 1.9 2003-02-25 23:51:59 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -64,6 +64,13 @@
 		}
 		foreach ($HTTP_GET_VARS as $key => $value) {
 			$_REQUEST[$key] = $value;
+		}
+	}
+
+	# array_key_exists was not available on PHP 4.0.6
+	if ( ! function_exists( 'array_key_exists' ) ) {
+		function array_key_exists( $key, $search ) {
+			return key_exists( $key, $search );
 		}
 	}
 ?>
