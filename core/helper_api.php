@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.21 2002-10-23 02:18:10 jfitzell Exp $
+	# $Id: helper_api.php,v 1.22 2002-11-10 21:38:22 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -201,7 +201,11 @@
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
 		if ( null === $t_project_id ) {
-			return (int)current_user_get_pref( 'default_project' );
+			$t_pref = current_user_get_pref( 'default_project' );
+			if ( '' == $t_pref ) {
+				$t_pref = 0;
+			}
+			return (int)$t_pref;
 		} else {
 			return (int)$t_project_id;
 		}
