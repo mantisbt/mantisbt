@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.18 2004-08-03 23:45:15 prichards Exp $
+	# $Id: 0_18_inc.php,v 1.19 2004-08-07 01:37:43 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -547,6 +547,32 @@
 			'custom_fields-20',
 			'Rename Column',
 			"ALTER TABLE mantis_custom_field_table DROP require_close" );
+
+	$upgrades[] = new FunctionUpgrade(
+				'delete-admin-over',
+				'delete any project level access overrides for admin users',
+				'upgrade_0_18_del_admin_override' );
+
+	function upgrade_0_18_del_admin_override() {
+		global $t_user_table, $t_project_user_list_table;
+
+		$t_admin = ADMINISTRATOR;
+		$query = "select p.user_id
+				FROM $t_project_user_list_table as p, $t_user_table as u
+				WHERE ( ( p.user_id = u.id ) AND ( u.access_level >= $t_admin ) )";
+		$result = db_query( $query );
+		$t_count = db_num_rows( $result );
+		for ( $i = 0 ; $i < $t_count ; $i++ ) {
+			$t_row = db_fetch_array( $result );
+			$t_user = $t_row['user_id'];
+			$query = "DELETE FROM $t_project_user_list_table
+				WHERE user_id=$t_user";
+			db_query( $query );
+		}
+
+		return true;
+	}
+
 
 	return $upgrades;
 ?>

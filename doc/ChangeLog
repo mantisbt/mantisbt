@@ -42,6 +42,7 @@ Mantis ChangeLog
 - 0004255: [localization] Wrong value of $g_language_auto_map (vboctor)
 - 0003714: [upgrade] Please add in a way to transfer attachments from the database to disk (thraxisp)
 - 0004078: [upgrade] Script to import the value of a custom field to a native field (thraxisp) 
+- 0003483: [upgrade] some admin users permissions not completly upgraded from 0.17.5 to 0.18.0 (thraxisp)
 - 0003877: [email] Upgrade to PHPMailer 1.72 (vboctor)
 - 0002220: [installation] usage of consistent naming schema for images (vboctor)
 - 0003307: [installation] check.php always checks mail() rather than the config (thraxisp)
