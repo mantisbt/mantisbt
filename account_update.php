@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.39 2004-11-26 00:14:17 jlatour Exp $
+	# $Id: account_update.php,v 1.40 2004-11-30 13:02:57 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,14 +16,14 @@
 ?>
 <?php
 	require_once( 'core.php' );
-	
+
 	$t_core_path = config_get( 'core_path' );
-	
+
 	require_once( $t_core_path.'email_api.php' );
 ?>
 <?php
 	auth_ensure_user_authenticated();
-	
+
 	current_user_ensure_unprotected();
 ?>
 <?php
@@ -40,34 +40,31 @@
 
 	$t_redirect = 'account_page.php';
 
-	html_page_top1();
-	html_meta_redirect( $t_redirect );
-	html_page_top2();
-
-	echo '<br /><div align="center">';
+	$t_email_updated = false;
+	$t_password_updated = false;
+	$t_realname_updated = false;
 
 	# @@@ Listing what fields were updated is not standard behaviour of Mantis
 	#     it also complicates the code.
 
 	if ( $f_email != user_get_email( $t_user_id ) ) {
 		user_set_email( $t_user_id, $f_email );
-		echo lang_get( 'email_updated' ) . '<br />';
+		$t_email_updated = true;
 	}
 
 	if ( $f_realname != user_get_field( $t_user_id, 'realname' ) ) {
 		# checks for problems with realnames
 		$t_username = user_get_field( $t_user_id, 'username' );
 		switch ( user_is_realname_unique( $t_username, $f_realname ) ) {
-			case 0:
-				trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
-				break;
 			case 1:
 				break;
-			default:			
-				echo lang_get( 'realname_duplicated' ) . '<br />';
+			case 0:
+			default:
+				trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
+				break;
 		}
 		user_set_realname( $t_user_id, $f_realname );
-		echo lang_get( 'realname_updated' ) . '<br />';
+		$t_realname_updated = true;
 	}
 
 	# Update password if the two match and are not empty
@@ -77,9 +74,27 @@
 		} else {
 			if ( !auth_does_password_match( $t_user_id, $f_password ) ) {
 				user_set_password( $t_user_id, $f_password );
-				echo lang_get( 'password_updated' ) . '<br />';
+				$t_password_updated = true;
 			}
 		}
+	}
+
+	html_page_top1();
+	html_meta_redirect( $t_redirect );
+	html_page_top2();
+
+	echo '<br /><div align="center">';
+
+	if ( $t_email_updated ) {
+		echo lang_get( 'email_updated' ) . '<br />';
+	}
+
+	if ( $t_password_updated ) {
+		echo lang_get( 'password_updated' ) . '<br />';
+	}
+
+	if ( $t_realname_updated ) {
+		echo lang_get( 'realname_updated' ) . '<br />';
 	}
 
 	echo lang_get( 'operation_successful' ) . '<br />';

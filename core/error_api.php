@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.36 2004-10-24 14:12:47 vboctor Exp $
+	# $Id: error_api.php,v 1.37 2004-11-30 13:02:57 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Error API ###
@@ -42,7 +42,7 @@
 
 		# flush any language overrides to return to user's natural default
 		lang_push( config_get ( 'default_language' ) );
-		
+
 		$t_short_file	= basename( $p_file );
 		$t_method_array = config_get( 'display_errors' );
 		if ( isset( $t_method_array[$p_type] ) ) {
@@ -84,7 +84,7 @@
 
 		if ( 'halt' == $t_method ) {
 			$t_old_contents = ob_get_contents();
-			# ob_end_clean() still sems to call the output handler which
+			# ob_end_clean() still seems to call the output handler which
 			#  outputs the headers indicating compression. If we had
 			#  PHP > 4.2.0 we could use ob_clean() instead but as it is
 			#  we need to disable compression.
@@ -119,7 +119,7 @@
 			}
 			PRINT '</table></div>';
 
-			if ( $g_error_handled ) {
+			if ( $g_error_handled && !is_blank( $t_old_contents ) ) {
 				PRINT '<p>Previous non-fatal errors occurred.  Page contents follow.</p>';
 
 				PRINT '<div style="border: solid 1px black;padding: 4px">';
