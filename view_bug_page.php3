@@ -27,8 +27,6 @@
 	$v2_description = string_display_with_br( $v2_description );
 	$v2_steps_to_reproduce = string_display_with_br( $v2_steps_to_reproduce );
 	$v2_additional_information = string_display_with_br( $v2_additional_information );
-	$v_date_submitted = date( "m-d H:i", sql_to_unix_time( $v_date_submitted ) );
-	$v_last_updated = date( "m-d H:i", sql_to_unix_time( $v_last_updated ) );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
@@ -91,10 +89,10 @@
 			<? echo $v_reproducibility ?>
 		</td>
 		<td>
-			<? echo $v_date_submitted ?>
+			<? echo date( $g_normal_date_format, sql_to_unix_time( $v_date_submitted ) ) ?>
 		</td>
 		<td>
-			<? echo $v_last_updated ?>
+			<? echo date( $g_normal_date_format, sql_to_unix_time( $v_last_updated ) ) ?>
 		</td>
 	</tr>
 	<tr height=5 bgcolor=<? echo $g_white_color ?>>
@@ -194,10 +192,18 @@
 			<input type=submit value="<? echo $s_update_bug_button ?>">
 		</td>
 		</form>
+
 <?	if ($v_status!='resolved') { ?>
+		<form method=post action="<? echo $g_bug_assign ?>">
+			<input type=hidden name=f_id value="<? echo $f_id ?>">
+			<input type=hidden name=f_date_submitted value="<? echo $v_date_submitted ?>">
+		<td valign=top bgcolor=<? echo $g_white_color ?>>
+			<input type=submit value="<? echo $s_bug_assign_button ?>">
+		</td>
+		</form>
 		<form method=post action="<? echo $g_bug_resolve_page ?>">
 			<input type=hidden name=f_id value="<? echo $f_id ?>">
-		<td valign=top bgcolor=<? echo $g_white_color ?> colspan=2>
+		<td valign=top bgcolor=<? echo $g_white_color ?>>
 			<input type=submit value="<? echo $s_resolve_bug_button ?>">
 		</td>
 		</form>
