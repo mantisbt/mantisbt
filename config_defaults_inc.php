@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.81 2003-02-16 23:59:39 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.82 2003-02-17 08:30:29 jlatour Exp $
 	# --------------------------------------------------------
 
 	
@@ -168,12 +168,6 @@
 
 	# Set to OFF on Windows systems, as long as php-mail-function has its bcc-bug (~PHP 4.0.6)
 	$g_use_bcc				= ON;
-
-	# some Mail transfer agents (MTAs) don't like bare linefeeds...
-	# or they take good input and create barelinefeeds
-	# If problems occur when sending mail through your server try turning this OFF
-	# more here: http://pobox.com/~djb/docs/smtplf.html
-	$g_mail_send_crlf		= OFF;
 
 	# phpMailer instead of standard mail() function (REQUIRES PHP 4.x.x)
 	# Get the phpMailer-package from http://phpmailer.sourceforge.net

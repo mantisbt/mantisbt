@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.46 2003-02-17 08:02:32 jlatour Exp $
+	# $Id: email_api.php,v 1.47 2003-02-17 08:30:30 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -817,14 +817,8 @@
 	# --------------------
 	# clean up LF to CRLF
 	function make_lf_crlf( $p_string ) {
-		global $g_mail_send_crlf;
-
-		if ( ON == $g_mail_send_crlf ) {
-			$p_string = str_replace( "\n", "\r\n", $p_string );
-			return str_replace( "\r\r\n", "\r\n", $p_string );
-		} else {
-			return $p_string;
-		}
+		$t_string = str_replace( "\n", "\r\n", $p_string );
+		return str_replace( "\r\r\n", "\r\n", $t_string );
 	}
 	# --------------------
 	# Check limit_email_domain option and append the domain name if it is set

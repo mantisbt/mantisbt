@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: obsolete.php,v 1.14 2003-02-16 13:53:34 jlatour Exp $
+	# $Id: obsolete.php,v 1.15 2003-02-17 08:30:31 jlatour Exp $
 	# --------------------------------------------------------
 	
 	###########################################################################
@@ -46,4 +46,5 @@
 	
 	config_obsolete( 'php', '' );
 	config_obsolete( 'use_experimental_custom_fields', '' );
+	config_obsolete( 'mail_send_crlf', '' );
 ?>
