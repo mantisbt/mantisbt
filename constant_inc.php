@@ -90,8 +90,6 @@
 	define( 'MD5',		       3 );
 	define( 'LDAP',		       4 );
 	define( 'BASIC_AUTH',      5 );
-	define( 'CRYPT_NO_SALT',   6 );
-
 
 	# file upload methods
 	define( 'DISK',       1 );
