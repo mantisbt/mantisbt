@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: my_view_inc.php,v 1.4 2004-08-11 09:22:23 tazza70 Exp $
+	# $Id: my_view_inc.php,v 1.5 2004-12-17 02:42:10 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -223,7 +223,7 @@
 	<td class="left" valign="top" width="100%">
 		<span class="small">
 		<?php
-			echo $v_summary;
+			echo string_attribute( $v_summary );
 		?>
 		<br />
 		<?php

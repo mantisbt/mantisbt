@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_function_api.php,v 1.10 2004-12-01 13:10:39 vboctor Exp $
+	# $Id: custom_function_api.php,v 1.11 2004-12-17 02:42:09 thraxisp Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -31,7 +31,7 @@
 	# Prints one entry in the changelog.
 	function custom_function_default_changelog_print_issue( $p_issue_id ) {
 		$t_bug = bug_get( $p_issue_id );
-		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_display( $t_bug->summary );
+		echo '- ', string_get_bug_view_link( $p_issue_id ), ': <b>[', $t_bug->category, ']</b> ', string_attribute( $t_bug->summary );
 
 		if ( $t_bug->handler_id != 0 ) {
 			echo ' (', prepare_user_name( $t_bug->handler_id ), ')';

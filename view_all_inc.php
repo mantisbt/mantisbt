@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_inc.php,v 1.148 2004-12-12 20:39:44 bpfennigschmidt Exp $
+	# $Id: view_all_inc.php,v 1.149 2004-12-17 02:42:08 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -351,7 +351,7 @@
 		<td class="left"> <?php 
 			# -- Summary --
 	
-			echo $v_summary;
+			echo string_attribute( $v_summary );
 			if ( VS_PRIVATE == $v_view_state ) {
 				printf( ' <img src="%s" alt="(%s)" title="%s" />'
 					, $t_icon_path . 'protected.gif'
