@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.69 2003-08-04 14:26:14 vboctor Exp $
+	# $Id: print_api.php,v 1.70 2003-08-17 23:08:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -184,6 +184,13 @@
 			$p_project_id = helper_get_current_project();
 		}
 
+		# if current user is a reporter, and limited reports set to ON.
+		if ( ( ON == config_get( 'limit_reporters' ) ) && ( current_user_get_access_level() <= config_get( 'report_bug_threshold' ) ) ) {
+			$t_user['id'] = auth_get_current_user_id();
+			$t_user['username'] = user_get_field( $t_user['id'], 'username' );
+			$t_users[] = $t_user;
+		}
+		else
 		# checking if it's per project or all projects
 		if ( ALL_PROJECTS == $p_project_id ) {
 			$t_adm = ADMINISTRATOR;

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.13 2003-08-05 16:41:16 beerfrick Exp $
+	# $Id: filter_api.php,v 1.14 2003-08-17 23:08:48 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -41,6 +41,8 @@
 		$t_bugnote_table		= config_get( 'mantis_bugnote_table' );
 		$t_bugnote_text_table	= config_get( 'mantis_bugnote_text_table' );
 		$t_project_table		= config_get( 'mantis_project_table' );
+		$t_limit_reporters		= config_get( 'limit_reporters' );
+		$t_report_bug_threshold		= config_get( 'report_bug_threshold' );
 
 		$t_filter = current_user_get_bug_filter();
 
@@ -90,6 +92,12 @@
 		# reporter
 		if ( 'any' != $t_filter['reporter_id'] ) {
 			$c_reporter_id = db_prepare_int( $t_filter['reporter_id'] );
+			array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
+		}
+
+		# limit reporter
+		if ( ( ON === $t_limit_reporters ) && ( current_user_get_access_level() <= $t_report_bug_threshold ) ) {
+			$c_reporter_id = db_prepare_int( auth_get_current_user_id() );
 			array_push( $t_where_clauses, "($t_bug_table.reporter_id='$c_reporter_id')" );
 		}
 
