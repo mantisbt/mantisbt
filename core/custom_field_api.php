@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: custom_field_api.php,v 1.12 2003-01-09 03:59:17 vboctor Exp $
+	# $Id: custom_field_api.php,v 1.13 2003-01-12 06:23:12 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -60,6 +60,67 @@ CREATE TABLE mantis_custom_field_project_table (
 #*******************************************
 
 	#===================================
+	# Caching
+	#===================================
+
+	#########################################
+	# SECURITY NOTE: cache globals are initialized here to prevent them
+	#   being spoofed if register_globals is turned on
+	#
+	$g_cache_custom_field = array();
+	
+	# Cache a custom field row if necessary and return the cached copy
+	#  If the second parameter is true (default), trigger an error
+	#  if the field can't be found.  If the second parameter is
+	#  false, return false if the field can't be found.
+	function custom_field_cache_row( $p_field_id, $p_trigger_errors=true ) {
+		global $g_cache_custom_field;
+
+		$c_field_id = db_prepare_int( $p_field_id );
+
+		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
+
+		if ( isset ( $g_cache_custom_field[$c_field_id] ) ) {
+			return $g_cache_custom_field[$c_field_id];
+		}
+
+		$query = "SELECT *
+				  FROM $t_custom_field_table
+				  WHERE id='$c_field_id'";
+		$result = db_query( $query );
+
+		if ( 0 == db_num_rows( $result ) ) {
+			if ( $p_trigger_errors ) {
+				trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
+			} else {
+				return false;
+			}
+		}
+
+		$row = db_fetch_array( $result );
+
+		$g_cache_custom_field[$c_field_id] = $row;
+
+		return $row;
+	}
+
+	# --------------------
+	# Clear the custom field cache (or just the given id if specified)
+	function custom_field_clear_cache( $p_field_id = null ) {
+		global $g_cache_custom_field;
+
+		if ( null === $p_field_id ) {
+			$g_cache_custom_field = array();
+		} else {
+			$c_field_id = db_prepare_int( $p_field_id );
+			unset( $g_cache_custom_field[$c_field_id] );
+		}
+
+		return true;
+	}
+
+
+	#===================================
 	# Boolean queries and ensures
 	#===================================
 
@@ -92,32 +153,21 @@ CREATE TABLE mantis_custom_field_project_table (
 	# Check to see whether the field id is defined
 	#  return true if the field is defined, false otherwise
 	function custom_field_exists( $p_field_id ) {
-		$c_field_id		= db_prepare_int( $p_field_id );
-
-		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT COUNT(*) FROM
-				  $t_custom_field_table
-				  WHERE id='$c_field_id'";
-		$result = db_query( $query );
-
-		$count = db_result( $result );
-
-		if ( $count > 0 ) {
-			return true;
-		} else {
+		if ( false == custom_field_cache_row( $p_field_id, false ) ) {
 			return false;
+		} else {
+			return true;
 		}
 	}
 
 	# --------------------
 	# Check to see whether the field id is defined
 	#  return true if the field is defined, error otherwise
-	function custom_field_ensure_exists( $p_field_id )
-	{
+	function custom_field_ensure_exists( $p_field_id ) {
 		if ( custom_field_exists( $p_field_id ) ) {
 			return true;
 		} else {
-			trigger_error( ERROR_CUSTOM_FIELD_DOES_NOT_EXIST, ERROR );
+			trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
 		}
 	}
 
@@ -159,7 +209,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	function custom_field_has_read_access( $p_field_id, $p_bug_id, $p_user_id ) {
 		custom_field_ensure_exists( $p_field_id );
 
-		#@@@ get the read access level for the field - we need a function to get fields
+		$t_access_level_r = custom_field_get_field( $p_field_id, 'access_level_r' );
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
@@ -176,7 +226,7 @@ CREATE TABLE mantis_custom_field_project_table (
 	function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id ) {
 		custom_field_ensure_exists( $p_field_id );
 
-		#@@@ get the read access level for the field - we need a function to get fields
+		$t_access_level_rw = custom_field_get_field( $p_field_id, 'access_level_rw' );
 
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
@@ -318,6 +368,7 @@ CREATE TABLE mantis_custom_field_project_table (
 
 		if( $t_update_something ) {
 			db_query( $query );
+			custom_field_clear_cache( $p_field_id );
 		} else {
 			return false;   # there is nothing to update...
 		}
@@ -399,6 +450,8 @@ CREATE TABLE mantis_custom_field_project_table (
 				  $t_custom_field_table
 				  WHERE id='$c_field_id'";
 		db_query( $query );
+
+		custom_field_clear_cache( $p_field_id );
 
 		# db_query() errors on failure so:
 		return true;
@@ -521,19 +574,22 @@ CREATE TABLE mantis_custom_field_project_table (
 	# Return a field definition row for the field or error if the field does
 	#  not exist
 	function custom_field_get_definition( $p_field_id ) {
-		$c_field_id = db_prepare_int( $p_field_id );
+		return custom_field_cache_row( $p_field_id );
+	}
 
-		$t_custom_field_table = config_get( 'mantis_custom_field_table' );
-		$query = "SELECT * FROM
-				  $t_custom_field_table
-				  WHERE id='$c_field_id'";
-		$result = db_query( $query );
+	# --------------------
+	# Return a single database field from a custom field definition row
+	#  for the field
+	# if the database field does not exist, display a warning and return ''
+	function custom_field_get_field( $p_field_id, $p_field_name ) {
+		$row = custom_field_get_definition( $p_field_id );
 
-		if ( db_num_rows( $result ) < 1 ) {
-			trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
+		if ( isset( $row[$p_field_name] ) ) {
+			return $row[$p_field_name];
+		} else {
+			trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+			return '';
 		}
-
-		return db_fetch_array( $result );
 	}
 
 	# --------------------
@@ -653,6 +709,8 @@ CREATE TABLE mantis_custom_field_project_table (
 						( '$c_field_id', '$c_bug_id', '$c_value' )";
 			db_query( $query );
 		}
+
+		custom_field_clear_cache( $p_field_id );
 
 		#db_query() errors on failure so:
 		return true;
