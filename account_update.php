@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_update.php,v 1.34 2004-02-07 12:53:41 vboctor Exp $
+	# $Id: account_update.php,v 1.35 2004-05-26 02:28:55 int2str Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -30,6 +30,7 @@
 	$f_email			= gpc_get_string( 'email', '' );
 	$f_password			= gpc_get_string( 'password', '' );
 	$f_password_confirm	= gpc_get_string( 'password_confirm', '' );
+	$f_realname			= gpc_get_string( 'realname', '' );
 
 	$f_email = email_append_domain( $f_email );
 
@@ -52,6 +53,11 @@
 	if ( $f_email != user_get_email( $t_user_id ) ) {
 		user_set_email( $t_user_id, $f_email );
 		echo lang_get( 'email_updated' ) . '<br />';
+	}
+
+	if ( $f_realname != user_get_name( $t_user_id ) ) {
+		user_set_realname( $t_user_id, $f_realname );
+		echo lang_get( 'realname_updated' ) . '<br />';
 	}
 
 	# Update password if the two match and are not empty

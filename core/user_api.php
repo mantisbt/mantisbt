@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.72 2004-05-25 13:38:50 vboctor Exp $
+	# $Id: user_api.php,v 1.73 2004-05-26 02:28:55 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -465,6 +465,14 @@
 	}
 
 	# --------------------
+	# lookup the user's realname
+	function user_get_realname( $p_user_id ) {
+		$t_realname = user_get_field( $p_user_id, 'realname' );
+
+		return $t_realname;
+	}
+
+	# --------------------
 	# return the username or a string "user<id>" if the user does not exist
 	function user_get_name( $p_user_id ) {
 		$row = user_cache_row( $p_user_id, false );
@@ -716,6 +724,14 @@
 		email_ensure_valid( $p_email );
 
 		return user_set_field( $p_user_id, 'email', $p_email );
+	}
+
+	# --------------------
+	# Set the user's realname to the given string after checking validity
+	function user_set_realname( $p_user_id, $p_realname ) {
+		# @@@ TODO:	ensure_realname_valid( $p_realname );
+
+		return user_set_field( $p_user_id, 'realname', $p_realname );
 	}
 
 	# --------------------

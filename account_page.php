@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.44 2004-05-06 13:09:35 vboctor Exp $
+	# $Id: account_page.php,v 1.45 2004-05-26 02:28:54 int2str Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -156,6 +156,16 @@
 	</tr>
 
 <?php } ?> <!-- End LDAP Email conditional -->
+
+	<!-- Realname -->
+	<tr class="row-1" valign="top">
+		<td class="category">
+			<?php echo lang_get( 'realname' ) ?>
+		</td>
+		<td>
+			<input type="text" size="32" maxlength="64" name="realname" value="<?php echo $u_realname ?>" />
+		</td>
+	</tr>
 
 	<!-- Access level -->
 	<tr class="row-2">
