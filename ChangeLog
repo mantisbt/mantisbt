@@ -4,7 +4,9 @@ Mantis
 
  * Modified advanced report's "assign to" drop down to sort alphabetically
  * Modified bug_update script to send emails and behave better
- * The post-report forms should redirect properly even if a proxy clears the HTTP_REFERER
+ * Modified file upload size to 60 to help out Netscape
+ * Fixed the post-report forms to redirect properly even if a proxy clears the HTTP_REFERER
+
 
 10.28.2001  -   0.15.10
 

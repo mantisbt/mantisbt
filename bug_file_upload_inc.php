@@ -29,7 +29,7 @@
 		<td width="85%" bgcolor="<? echo $g_primary_color_light ?>">
 			<input type="hidden" name="f_id" value="<? echo $f_id ?>">
 			<input type="hidden" name="max_file_size" value="5000000">
-			<input name="f_file" type="file" size="70">
+			<input name="f_file" type="file" size="60">
 		</td>
 	</tr>
 	<tr>
