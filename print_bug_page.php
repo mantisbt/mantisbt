@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_bug_page.php,v 1.51 2004-08-27 00:29:54 thraxisp Exp $
+	# $Id: print_bug_page.php,v 1.52 2004-12-16 16:41:39 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -327,30 +327,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		<?php echo lang_get( 'attached_files' ) ?>:
 	</td>
 	<td class="print" colspan="5">
-		<?php
-			$query = "SELECT filename, filesize, date_added
-					FROM $g_mantis_bug_file_table
-					WHERE bug_id='$c_bug_id'";
-			$result = db_query( $query );
-			$num_files = db_num_rows( $result );
-			for ($i=0;$i<$num_files;$i++) {
-				$row = db_fetch_array( $result );
-				extract( $row, EXTR_PREFIX_ALL, 'v2' );
-				$v2_filesize = round( $v2_filesize / 1024 );
-				$v2_date_added = date( config_get( 'normal_date_format' ), ( db_unixtimestamp( $v2_date_added ) ) );
-
-				switch ( $g_file_upload_method ) {
-					case DISK:	PRINT "$v2_filename ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";
-							break;
-					case DATABASE:	PRINT "$v2_filename ($v2_filesize KB) <span class=\"italic\">$v2_date_added</span>";
-							break;
-				}
-
-				if ( $i != ($num_files - 1) ) {
-					PRINT '<br />';
-				}
-			}
-		?>
+		<?php file_list_attachments ( $f_bug_id ); ?>
 	</td>
 </tr>
 </table>
