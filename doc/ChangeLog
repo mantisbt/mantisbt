@@ -28,7 +28,7 @@ Mantis ChangeLog
  * Fix #4081: mantis_upgrade_table.upgrade_id too small (vboctor).
  * New Config: fallback_language (default 'english') - Fallback language for automatic language selection.
  * New Config: status_enum_workflow (default disabled) - Defines the workflow to indicate what are the possible statuses based on the current one.
- * Updated German, Italian, Russian, and Brazilian Portuguese languages.
+ * Updated German, Italian, Russian, Czech and Brazilian Portuguese languages.
 
 2004.07.07  -  0.19.0a1
 
