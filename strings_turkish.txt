@@ -583,13 +583,7 @@
 	$s_reporter_stats = "reporter stats";
 	$s_orct = "(open/resolved/closed/total)";
 
-	# view_all_assign_bug_page.php3
-
 	# view_all_bug_page.php3
-	$s_all_bugs_link = "Bütün Buglar";
-	$s_reported_bugs_link = "Rapor Edilen Buglar";
-	$s_assigned_bugs_link = "Atanmýþ Buglar";
-	$s_unassigned_bugs_link = "Atanmamýþ Buglar";
 	$s_any = "hepsi";
 	$s_show = "Göster";
 	$s_changed = "Deðiþme(saat)";
@@ -603,10 +597,6 @@
 	$s_search ="Search";
 	$s_view_prev_link = "View Prev";
 	$s_view_next_link = "View Next";
-
-	# view_user_reported_bug_page.php3
-
-	# view_all_unassign_bug_page.php3
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "Basit Ýzle";

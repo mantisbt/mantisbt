@@ -5,7 +5,7 @@
 	# See the README and LICENSE files for details
 
 	# 한글 번역   aporie@kornet.net
-        # 번역 수정   yjseo@mizi.com
+	# 번역 수정   yjseo@mizi.com
 ?>
 <?
 	# General Strings
@@ -583,13 +583,7 @@
 	$s_reporter_stats = "reporter stats";
 	$s_orct = "(신규/해결/폐쇄/전체)";
 
-	# view_all_assign_bug_page.php3
-
 	# view_all_bug_page.php3
-	$s_all_bugs_link = "전체 버그";
-	$s_reported_bugs_link = "보고된 버그";
-	$s_assigned_bugs_link = "할당된 버그";
-	$s_unassigned_bugs_link = "할당되지 않은 버그";
 	$s_any = "모두";
 	$s_show = "갯수";
 	$s_changed = "변경된(시간)";
@@ -603,10 +597,6 @@
 	$s_search ="검색";
 	$s_view_prev_link = "View Prev";
 	$s_view_next_link = "View Next";
-
-	# view_user_reported_bug_page.php3
-
-	# view_all_unassign_bug_page.php3
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "간략히 보기";

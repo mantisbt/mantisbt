@@ -584,13 +584,7 @@
 	$s_reporter_stats = "reporter stats";
 	$s_orct = "(&aring;ben/l&oslash;st/lukket/total)";
 
-	# view_all_assign_bug_page.php3
-
 	# view_all_bug_page.php3
-	$s_all_bugs_link = "Alle Fejl";
-	$s_reported_bugs_link = "Rapporterede Fejl";
-	$s_assigned_bugs_link = "Overdragede Fejl";
-	$s_unassigned_bugs_link = "Ikke Overdragede Fejl";
 	$s_any = "enhver";
 	$s_show = "Vis";
 	$s_changed = "&AElig;ndret(time)";
@@ -604,10 +598,6 @@
 	$s_search ="S&oslash;g";
 	$s_view_prev_link = "View Prev";
 	$s_view_next_link = "View Next";
-
-	# view_user_reported_bug_page.php3
-
-	# view_all_unassign_bug_page.php3
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "Vis Enkel";
@@ -645,5 +635,4 @@
   # main_page.php
   #LINE 106:
   $s_archives = "Arkiver";                                      # "Archives"
-
 ?>

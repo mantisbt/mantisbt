@@ -584,13 +584,7 @@
 	$s_reporter_stats = "reporter stats";
 	$s_orct = "(ouvert/résolu/fermé/total)";
 
-	# view_all_assign_bug_page.php3
-
 	# view_all_bug_page.php3
-	$s_all_bugs_link = "Tous les bugs";
-	$s_reported_bugs_link = "Bugs rapportés";
-	$s_assigned_bugs_link = "Bugs assignés";
-	$s_unassigned_bugs_link = "Bugs non-assignés";
 	$s_any = "tous";
 	$s_show = "Afficher";
 	$s_changed = "Modifiés (heures)";
@@ -604,10 +598,6 @@
 	$s_search ="Chercher";
 	$s_view_prev_link = "View Prev";
 	$s_view_next_link = "View Next";
-
-	# view_user_reported_bug_page.php3
-
-	# view_all_unassign_bug_page.php3
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "rapport simplifié";

@@ -582,13 +582,7 @@
 	$s_reporter_stats = "reporter stats";
 	$s_orct = "(open/resolved/closed/total)";
 
-	# view_all_assign_bug_page.php3
-
 	# view_bug_all_page.php3
-	$s_all_bugs_link = "所有臭蟲";
-	$s_reported_bugs_link = "已回報臭蟲";
-	$s_assigned_bugs_link = "已指定臭蟲";
-	$s_unassigned_bugs_link = "Unassigned Bugs";
 	$s_any = "任意";
 	$s_show = "顯示";
 	$s_changed = "已變更(小時)";
@@ -602,10 +596,6 @@
 	$s_search ="Search";
 	$s_view_prev_link = "View Prev";
 	$s_view_next_link = "View Next";
-
-	# view_user_reported_bug_page.php3
-
-	# view_all_unassign_bug_page.php3
 
 	# view_bug_advanced_page.php3
 	$s_view_simple_link = "簡易檢視";
