@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.145 2004-12-22 20:25:55 marcelloscata Exp $
+	# $Id: html_api.php,v 1.146 2005-01-24 14:18:42 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -730,32 +730,33 @@
 		$t_arr		= explode_enum_string( config_get( 'status_enum_string' ) );
 		$enum_count	= count( $t_arr );
 		
-		echo '<br />';
-		echo '<table class="width100" cellspacing="1">';
-		echo '<tr>';
-		echo '<td colspan="'.$enum_count.'"><strong>'.lang_get( 'issue_status_percentage' ).'</strong></td>';
-		echo '</tr>';
-		echo '<tr>';
+		if ( $t_bug_count > 0 ) {
+			echo '<br />';
+			echo '<table class="width100" cellspacing="1">';
+			echo '<tr>';
+			echo '<td colspan="'.$enum_count.'"><strong>'.lang_get( 'issue_status_percentage' ).'</strong></td>';
+			echo '</tr>';
+			echo '<tr>';
 
-		for ( $i=0; $i < $enum_count; $i++) {
-			$t_s = explode_enum_arr( $t_arr[$i] );
-			$t_color = get_status_color( $t_s[0] );
-			$t_status = $t_s[0];
-
+			for ( $i=0; $i < $enum_count; $i++) {
+				$t_s = explode_enum_arr( $t_arr[$i] );
+				$t_color = get_status_color( $t_s[0] );
+				$t_status = $t_s[0];
 		
-			if ( !isset( $t_status_count_array[ $t_status ] ) ) {
-				$t_status_count_array[ $t_status ] = 0;
+				if ( !isset( $t_status_count_array[ $t_status ] ) ) {
+					$t_status_count_array[ $t_status ] = 0;
+				}
+
+				$width = round( ( $t_status_count_array[ $t_status ] / $t_bug_count ) * 100 );
+
+				if ($width > 0) {
+					echo "<td class=\"small-caption-center\" width=\"$width%\" bgcolor=\"$t_color\">$width%</td>";
+				}
 			}
 
-			$width = round( ( $t_status_count_array[ $t_status ] / $t_bug_count ) * 100 );
-
-			if ($width > 0) {
-				echo "<td class=\"small-caption-center\" width=\"$width%\" bgcolor=\"$t_color\">$width%</td>";
-			}
+			echo '</tr>';
+			echo '</table>';
 		}
-
-		echo '</tr>';
-		echo '</table>';
 	}
 
 	# --------------------
