@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: jump_to_bug.php,v 1.18 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: jump_to_bug.php,v 1.19 2003-02-16 10:06:32 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -17,8 +17,8 @@
 ?>
 <?php auth_ensure_user_authenticated() ?>
 <?php
-	# No need for access checking.  We're just redirecting to another page.
-
 	# Determine which view page to redirect back to.
+	$f_bug_id		= gpc_get_int( 'bug_id' );
+	
 	print_header_redirect_view( $f_bug_id );
 ?>
