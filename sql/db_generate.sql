@@ -1,11 +1,11 @@
 #
 # Table structure for table `mantis_bug_file_table`
 # --------------------------------------------------------
-# $Revision: 1.4 $
+# $Revision: 1.5 $
 # $Author: jhuggins $
-# $Date: 2002-06-05 15:32:46 $
+# $Date: 2002-06-07 14:17:26 $
 #
-# $Id: db_generate.sql,v 1.4 2002-06-05 15:32:46 jhuggins Exp $
+# $Id: db_generate.sql,v 1.5 2002-06-07 14:17:26 jhuggins Exp $
 # --------------------------------------------------------
 #
 
@@ -122,7 +122,8 @@ CREATE TABLE mantis_bugnote_table (
   view_state int(2) NOT NULL default '10',
   date_submitted datetime NOT NULL default '1970-01-01 00:00:01',
   last_modified datetime NOT NULL default '1970-01-01 00:00:01',
-  PRIMARY KEY  (id)
+  PRIMARY KEY  (id),
+  KEY last_modified (last_modified)
 );
 # --------------------------------------------------------
 
