@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.84 2005-02-27 15:33:01 jlatour Exp $
+	# $Id: manage_proj_edit_page.php,v 1.85 2005-03-20 13:11:26 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -252,6 +252,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 </tr>
 
 </table>
+</div>
 
 <br />
 
