@@ -5,7 +5,12 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'news_api.php' );
+	require_once( $g_core_path . 'string_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

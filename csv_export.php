@@ -6,10 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.7 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: csv_export.php,v 1.8 2003-01-24 14:59:27 jlatour Exp $
 	# --------------------------------------------------------
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'filter_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	# check to see if the cookie does not exist

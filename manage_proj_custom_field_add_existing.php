@@ -5,7 +5,11 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'custom_field_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	# We should check both since we are in the project section and an

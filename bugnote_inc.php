@@ -6,12 +6,17 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_inc.php,v 1.75 2003-01-02 05:47:28 vboctor Exp $
+	# $Id: bugnote_inc.php,v 1.76 2003-01-24 14:59:24 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the list of bugnotes attached to the bug
 	# $f_bug_id must be set and be set to the bug id
+?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
 ?>
 <?php
 	# grab the user id currently logged in
@@ -109,8 +114,8 @@
 	</td>
 </tr>
 <tr>
-	<td class="spacer" colspan="2">
-		&nbsp;
+	<td class="spacer" colspan="2">&nbsp;
+		
 	</td>
 </tr>
 <?php

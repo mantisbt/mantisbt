@@ -6,13 +6,18 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: history_inc.php,v 1.15 2003-01-19 23:56:08 vboctor Exp $
+	# $Id: history_inc.php,v 1.16 2003-01-24 14:59:30 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This include file prints out the bug history
 
 	# $f_bug_id must already be defined
+?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'history_api.php' );
 ?>
 
 <a name="history"><br /></a>
@@ -60,4 +65,3 @@
 	} # end for loop
 ?>
 </table>
-

@@ -6,10 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.5 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.6 2003-01-24 14:59:38 jlatour Exp $
 	# --------------------------------------------------------
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'custom_field_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	check_access( config_get( 'manage_custom_fields' ) );
@@ -125,8 +129,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
-				&nbsp;
+			<td>&nbsp;
+				
 			</td>
 			<td>
 				<input type="submit" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />

@@ -6,14 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.31 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: main_page.php,v 1.32 2003-01-24 14:59:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This is the first page a user sees when they login to the bugtracker
 	# News is displayed which can notify users of any important changes
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'current_user_api.php' );
+	require_once( $g_core_path . 'news_api.php' );
+?>
 <?php login_cookie_check();
 
 	$f_offset = gpc_get_int( 'offset', 0 );

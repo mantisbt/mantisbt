@@ -6,13 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_set_view_state.php,v 1.15 2003-01-02 05:47:28 vboctor Exp $
+	# $Id: bugnote_set_view_state.php,v 1.16 2003-01-24 14:59:25 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Set an existing bugnote private or public.
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'bugnote_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );

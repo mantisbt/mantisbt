@@ -6,13 +6,19 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add.php,v 1.31 2002-12-30 10:46:24 jfitzell Exp $
+	# $Id: bugnote_add.php,v 1.32 2003-01-24 14:59:21 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Insert the bugnote into the database then redirect to the bug page
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'bugnote_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );

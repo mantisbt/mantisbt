@@ -6,14 +6,20 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_delete.php,v 1.26 2002-12-30 10:46:24 jfitzell Exp $
+	# $Id: bugnote_delete.php,v 1.27 2003-01-24 14:59:21 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Remove the bugnote and bugnote text and redirect back to
 	# the viewing page
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'bugnote_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );

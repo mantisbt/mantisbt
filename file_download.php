@@ -6,13 +6,17 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.18 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: file_download.php,v 1.19 2003-01-24 14:59:28 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Add file and redirect to the referring page
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'file_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_file_id	= gpc_get_int( 'file_id' );

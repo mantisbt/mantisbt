@@ -5,6 +5,8 @@
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 
+	require_once( 'core.php' );
+
 	# prevent caching
 	global $g_content_expire;
 ?>

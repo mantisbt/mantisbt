@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.32 2003-01-02 05:47:28 vboctor Exp $
+	# $Id: bugnote_edit_page.php,v 1.33 2003-01-24 14:59:23 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -20,7 +20,14 @@
 	# RESTRICTIONS & PERMISSIONS
 	#	- none beyond API restrictions
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'bug_api.php' );
+	require_once( $g_core_path . 'project_api.php' );
+	require_once( $g_core_path . 'bugnote_api.php' );
+	require_once( $g_core_path . 'string_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );

@@ -6,10 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_page.php,v 1.6 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: manage_custom_field_page.php,v 1.7 2003-01-24 14:59:40 jlatour Exp $
 	# --------------------------------------------------------
 ?>
-<?php require_once( 'core.php' ) ?>
+<?php
+	require_once( 'core.php' );
+	
+	require_once( $g_core_path . 'custom_field_api.php' );
+?>
 <?php login_cookie_check() ?>
 <?php 
 	check_access( config_get( 'manage_custom_fields' ) );
