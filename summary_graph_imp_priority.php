@@ -1,4 +1,4 @@
-<?
+<?php
 	# Mantis - a php based bugtracking system
 	# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
 	# Copyright (C) 2002 - 2004  Mantis Team   - mantisbt-dev@lists.sourceforge.net
@@ -8,7 +8,7 @@
 	# This page displays "improved" charts on priorities : bars, 3Dpie and a mix priorities per status
 
 	# --------------------------------------------------------
-	# $Id: summary_graph_imp_priority.php,v 1.17 2004-01-11 07:16:08 vboctor Exp $
+	# $Id: summary_graph_imp_priority.php,v 1.18 2004-02-17 21:57:19 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
