@@ -57,6 +57,7 @@ Mantis
  * Modified to use core_project_API.php.
  * Modified to use core_version_API.php.
  * Modified print_all_bug_page.php to seach bugnotes.
+ * Modified print_reporter and assign_to option_lists() to display lists properly.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added Czech translation.

@@ -16,7 +16,8 @@
 	$s_csv_export = "CSV Export";
 	$s_login_anonymously = "Login Anonymously";
 	$s_jump_to_bugnotes = "Jump to Bugnotes";
-	$s_public_project_msg = "This project is PUBLIC.  All users have access to this project.";
+	$s_public_project_msg = "This project is PUBLIC.  All users have access.";
+	$s_private_project_msg = "This project is PRIVATE.  Only administrators and manually added users have access.";
 	$s_access_level_project = "Project Access Level";
 	$s_view_submitted_bug_link = "View Submitted Bug";
 	$s_assigned_projects = "Assigned Projects";

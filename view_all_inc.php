@@ -52,7 +52,8 @@
 		<select name="f_show_category">
 			<option value="any"><?php echo $s_any ?></option>
 			<option value="any"></option>
-			<?php print_category_option_list( $f_show_category ) ?>
+			<?php # This shows orphaned categories as well as selectable categories ?>
+			<?php print_category_complete_option_list( $f_show_category ) ?>
 		</select>
 	</td>
 	<td>

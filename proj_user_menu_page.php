@@ -37,20 +37,22 @@
 <?php
 	$t_project_view_state = get_project_field( $g_project_cookie_val, "view_state" );
 	if ( PUBLIC == $t_project_view_state ) {
+		$t_msg = $s_public_project_msg;
+	} else {
+		$t_msg = $s_private_project_msg;
+	}
 ?>
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="center">
-		<?php echo $s_public_project_msg ?>
+		<?php echo $t_msg ?>
 	</td>
 </tr>
 </table>
 </div>
-<?php
-	}
-?>
+
 <p>
 <div align="center">
 <table class="width75" cellspacing="1">
@@ -118,13 +120,13 @@
 	$t_pub = PUBLIC;
 
 	# Get the user data in $f_sort order
-	$query = "SELECT DISTINCT t1.id, t1.username, t1.email, t1.access_level, t2.user_id, t2.access_level
+	/*$query = "SELECT DISTINCT t1.id, t1.username, t1.email, t1.access_level, t2.user_id, t2.access_level
 			FROM $g_mantis_user_table as t1
 			LEFT JOIN $g_mantis_project_user_list_table as t2
 			ON t1.id=t2.user_id
 			WHERE (t1.access_level>=$t_adm) OR
 				  (t2.project_id=$g_project_cookie_val)
-			ORDER BY '$f_sort' $f_dir";
+			ORDER BY '$f_sort' $f_dir";*/
 
 	$query = "SELECT DISTINCT u.id, u.username, u.email
 			FROM 	$g_mantis_user_table u,
