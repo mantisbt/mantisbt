@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.10 2002-11-12 05:19:04 jfitzell Exp $
+	# $Id: error_api.php,v 1.11 2002-12-28 09:06:47 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -172,9 +172,70 @@
 			}
 
 			echo '</table></center>';
+		} else if ( php_version_at_least( '4.3' ) ) {
+			$t_stack = debug_backtrace();
+
+			array_shift( $t_stack ); #remove the call to this function from the stack trace
+			array_shift( $t_stack ); #remove the call to the error handler from the stack trace
+
+			echo '<center><table class="width75">';
+			echo '<tr><th>Filename</th><th>Line</th><th>Function</th><th>Args</th></tr>';
+
+			foreach ( $t_stack as $t_frame ) {
+				echo '<tr ' . helper_alternate_class( $i ) . '">';
+				echo "<td>$t_frame[file]</td><td>$t_frame[line]</td><td>$t_frame[function]</td>";
+
+				$t_args = array();
+				if ( isset( $t_frame['args'] ) ) {
+					foreach( $t_frame['args'] as $t_value ) {
+						$t_args[] = error_build_parameter_string( $t_value );
+					}
+				}
+
+				echo '<td>( ' . implode( $t_args, ', ' ). ' )</td></tr>';
+			}
+
+			echo '</table></center>';
 		}
 	}
 
+	function error_build_parameter_string( $p_param ) {
+		if ( is_array( $p_param ) ) {
+			$t_results = array();
+
+			foreach ( $p_param as $t_key => $t_value ) {
+				$t_results[] =	'[' . error_build_parameter_string( $t_key ) . ']' .
+								' => ' . error_build_parameter_string( $t_value );
+			}
+
+			return '{ ' . implode( $t_results, ', ' ) . ' }';
+		} else if ( is_bool( $p_param ) ) {
+			if ( $p_param ) {
+				return 'true';
+			} else {
+				return 'false';
+			}
+		} else if ( is_float( $p_param ) || is_int( $p_param ) ) {
+			return $p_param;
+		} else if ( is_null( $p_param ) ) {
+			return 'null';
+		} else if ( is_object( $p_param ) ) {
+			$t_results = array();
+			
+			$t_class_name = get_class( $p_param );
+			$t_inst_vars = get_object_vars( $p_param );
+
+			foreach ( $t_inst_vars as $t_name => $t_value ) {
+				$t_results[] =	"[$t_name]" .
+								' => ' . error_build_parameter_string( $t_value );
+			}
+
+			return 'Object <$t_class_name> ( ' . implode( $t_results, ', ' ) . ' )';
+		} else if ( is_string( $p_param ) ) {
+			return "'$p_param'";
+		}
+	}
+	
 	# ---------------
 	# return an error string (in the current language) for the given error
 	function error_string( $p_error ) {
