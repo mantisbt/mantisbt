@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.151 2005-02-26 15:16:46 thraxisp Exp $
+	# $Id: html_api.php,v 1.152 2005-02-28 14:40:01 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -58,6 +58,9 @@
 	require_once( $t_core_dir . 'user_api.php' );
 
 	$g_rss_feed_url = null;
+	
+	# flag for error handler to skip header menus
+	$g_error_send_page_header = true;
 
 	# --------------------
 	# Sets the url for the rss link associated with the current page.
@@ -120,8 +123,11 @@
 	#  directly during the login process and other times when the user may
 	#  not be authenticated
 	function html_page_top2a() {
+		global $g_error_send_page_header;
+		
 		html_head_end();
 		html_body_begin();
+		$g_error_send_page_header = false;
 		html_header();
 		html_top_banner();
 	}
