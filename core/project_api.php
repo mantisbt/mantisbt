@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.13 2002-09-06 23:59:00 jfitzell Exp $
+	# $Id: project_api.php,v 1.14 2002-09-16 02:36:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -63,7 +63,7 @@
 	function project_clear_cache( $p_project_id = null ) {
 		global $g_cache_project;
 		
-		if ( $p_project_id === null ) {
+		if ( null === $p_project_id ) {
 			$g_cache_project = array();
 		} else {
 			$c_project_id = db_prepare_int( $p_project_id );

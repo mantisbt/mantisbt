@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.26 2002-09-16 00:50:06 jfitzell Exp $
+	# $Id: user_api.php,v 1.27 2002-09-16 02:36:33 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -64,7 +64,7 @@
 	function user_clear_cache( $p_user_id = null ) {
 		global $g_cache_user;
 
-		if ( $p_user_id === null ) {
+		if ( null === $p_user_id ) {
 			$g_cache_user = array();
 		} else {
 			$c_user_id = db_prepare_int( $p_user_id );
@@ -117,7 +117,7 @@
 	function user_pref_clear_cache( $p_user_id = null ) {
 		global $g_cache_user_pref;
 
-		if ( $p_user_id === null ) {
+		if ( null === $p_user_id ) {
 			$g_cache_user_pref = array();
 		} else {
 			$c_user_id = db_prepare_int( $p_user_id );
