@@ -27,7 +27,7 @@ table.width75		{ width: 75%;  border: solid 1px #000000; }
 table.width60		{ width: 60%;  border: solid 1px #000000; }
 table.width50		{ width: 50%;  border: solid 1px #000000; }
 
-td 					{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; padding: 4px;}
+td 					{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; padding: 4px; text-align:left;}
 td.category			{ background-color: #c8c8e8; color: #000000; font-weight: bold; }
 
 td.center			{ text-align: center; }
@@ -49,7 +49,8 @@ td.print-spacer		{ background-color: #ffffff; color: #000000; font-size: 1pt; li
 tr					{}
 tr.row-1			{ background-color: #d8d8d8; color: #000000; }
 tr.row-2			{ background-color: #e8e8e8; color: #000000; }
-tr.row-category		{ background-color: #c8c8e8; color: #000000; font-weight: bold; text-align:center;}
+tr.row-category		{ background-color: #c8c8e8; color: #000000; font-weight: bold;}
+tr.row-category td  {  text-align:center; }
 tr.row-category2	{ background-color: #c8c8e8; color: #000000; }
 tr.print			{ vertical-align: top; }
 tr.print-category	{ color: #000000; font-weight: bold; }
