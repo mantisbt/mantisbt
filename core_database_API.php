@@ -23,16 +23,16 @@
 		if ( empty( $p_hostname ) ) {
 			$p_hostname = $g_hostname;
 		}
-		if ( empty( $p_hostname ) ) {
+		if ( empty( $p_username ) ) {
 			$p_username = $g_db_username;
 		}
-		if ( empty( $p_hostname ) ) {
+		if ( empty( $p_password ) ) {
 			$p_password = $g_db_password;
 		}
-		if ( empty( $p_hostname ) ) {
+		if ( empty( $p_database ) ) {
 			$p_database = $g_database_name;
 		}
-		if ( empty( $p_hostname ) ) {
+		if ( empty( $p_port ) ) {
 			$p_port = $g_port;
 		}
 
