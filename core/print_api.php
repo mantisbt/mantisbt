@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.49 2003-02-23 04:26:19 vboctor Exp $
+	# $Id: print_api.php,v 1.50 2003-02-24 03:38:49 int2str Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -879,9 +879,9 @@
 	# if the $p_link is blank then the text is printed but no link is created
 	function print_bracket_link( $p_link, $p_url_text ) {
 		if (is_blank( $p_link )) {
-			PRINT "[ $p_url_text ]";
+			PRINT "[&nbsp;$p_url_text&nbsp;]";
 		} else {
-			PRINT "[ <a href=\"$p_link\">$p_url_text</a> ]";
+			PRINT "[&nbsp;<a href=\"$p_link\">$p_url_text</a>&nbsp;]";
 		}
 	}
 	# --------------------
