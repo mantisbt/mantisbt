@@ -10,10 +10,10 @@
 <?php include( "core_API.php" ); ?>
 <?php
 	# delete cookies then redirect to $g_logout_redirect_page
-	setcookie( $g_string_cookie );
-	setcookie( $g_project_cookie );
-	setcookie( $g_view_all_cookie );
-	setcookie( $g_manage_cookie );
+	setcookie( $g_string_cookie,	"", -1, $g_cookie_path );
+	setcookie( $g_project_cookie,	"", -1, $g_cookie_path );
+	setcookie( $g_view_all_cookie,	"", -1, $g_cookie_path );
+	setcookie( $g_manage_cookie,	"", -1, $g_cookie_path );
 
 	print_header_redirect( $g_logout_redirect_page );
 ?>

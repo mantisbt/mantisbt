@@ -39,6 +39,7 @@ Mantis
  * Modified get_enum_string to use the g_ enum string value instead of the s_ enum string value.
  * Modified br tags to be new xml style tags.
  * Modified time stats in summary to use CLOSED instead of resolved.
+ * Modified setcookie() to use g_cookie_path when unsetting.
  * Added Hungarian translation.
  * Added Japanese translation.
  * Added Czech translation.
