@@ -86,7 +86,7 @@
 		<? echo $s_show ?>: <input type="text" name="f_limit_view" size="3" maxlength="7" value="<? echo $f_limit_view ?>">
 		</td>
 		<td>
-		<? echo $s_changed ?>: <input type="text" name="f_show_changed" size="3" maxlength=7 value="<? echo $f_show_changed ?>">
+		<? echo $s_changed ?>: <input type="text" name="f_highlight_changed" size="3" maxlength=7 value="<? echo $f_highlight_changed ?>">
 		</td>
 		<td>
 		<? echo $s_hide_closed ?>: <input type=checkbox name=f_hide_closed <? if ($f_hide_closed=="on") echo "CHECKED"?>>
@@ -198,7 +198,7 @@
 			<?
 				if ($bugnote_count > 0){
 					if ( sql_to_unix_time( $v_bugnote_updated ) >
-						strtotime( "-$f_show_changed hours" ) ) {
+						strtotime( "-$f_highlight_changed hours" ) ) {
 						PRINT "<b>$bugnote_count</b>";
 					}
 					else {
@@ -231,7 +231,7 @@
 		<td>
 			<?
 				if ( sql_to_unix_time( $v_last_updated ) >
-					strtotime( "-$f_show_changed hours" ) ) {
+					strtotime( "-$f_highlight_changed hours" ) ) {
 
 					PRINT "<b>$t_last_updated</b>";
 				}
