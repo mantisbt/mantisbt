@@ -7,7 +7,7 @@
 ?>
 <?php
 	# This page allos users to add a new profile which is POSTed to
-	# account_prof_add.php3
+	# account_prof_add.php
 
 	# Users can also manage their profiles
 ?>
@@ -96,7 +96,7 @@
 <tr class="row-1">
 	<td class="center" colspan="2">
 		<input type="radio" name="f_action" value="edit" checked="checked" /> <?php echo lang_get( 'edit_profile' ) ?>
-		<input type="radio" name="f_action" value="make default" /> <?php echo lang_get( 'make_default' ) ?>
+		<input type="radio" name="f_action" value="default" /> <?php echo lang_get( 'make_default' ) ?>
 		<input type="radio" name="f_action" value="delete" /> <?php echo lang_get( 'delete_profile' ) ?>
 	</td>
 </tr>
@@ -105,7 +105,7 @@
 		<?php echo lang_get( 'select_profile' ) ?>
 	</td>
 	<td width="75%">
-		<select name="f_id">
+		<select name="f_profile_id">
 			<?php print_profile_option_list( auth_get_current_user_id() ) ?>
 		</select>
 	</td>

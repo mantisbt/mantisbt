@@ -40,6 +40,7 @@
 	require_once( $t_core_dir.'date_api.php' );
 	require_once( $t_core_dir.'user_api.php' );
 	require_once( $t_core_dir.'user_pref_api.php' );
+	require_once( $t_core_dir.'profile_api.php' );
 	require_once( $t_core_dir.'current_user_api.php' );
 	require_once( $t_core_dir.'email_api.php' );
 	require_once( $t_core_dir.'news_api.php' );

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?php
-	# This file adds a new profile and redirects to account_proj_menu_page.php3
+	# This file adds a new profile and redirects to account_proj_menu_page.php
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
@@ -23,27 +23,7 @@
 	$f_os_build		= gpc_get_string( 'f_os_build' );
 	$f_description	= gpc_get_string( 'f_description' );
 
-	$c_platform		= db_prepare_string( $f_platform );
-	$c_os			= db_prepare_string( $f_os );
-	$c_os_build		= db_prepare_string( $f_os_build );
-	$c_description	= db_prepare_string( $f_description );
+	profile_create( auth_get_current_user_id(), $f_platform, $f_os, $f_os_build, $f_description );
 
-	# get user id
-	$t_user_id = auth_get_current_user_id();
-
-	$t_user_profile_table = config_get( 'mantis_user_profile_table' );
-
-	# Add profile
-	$query = "INSERT
-			INTO $t_user_profile_table
-			( id, user_id, platform, os, os_build, description )
-			VALUES
-			( null, '$t_user_id', '$c_platform', '$c_os', '$c_os_build', '$c_description' )";
-	$result = db_query( $query );
-
-	if ( $result ) {
-		print_header_redirect( 'account_prof_menu_page.php' );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( 'account_prof_menu_page.php' );
 ?>

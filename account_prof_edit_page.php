@@ -7,7 +7,7 @@
 ?>
 <?php
 	# This page allows the user to edit his/her profile
-	# Changes get POSTed to account_prof_update.php3
+	# Changes get POSTed to account_prof_update.php
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
@@ -17,40 +17,23 @@
 		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
-	$f_id		= gpc_get_int( 'f_id' );
-	$f_action	= gpc_get_string( 'f_action' );
+	$f_profile_id	= gpc_get_int( 'f_profile_id' );
+	$f_action		= gpc_get_string( 'f_action' );
 
 	# If deleteing profile redirect to delete script
 	if ( 'delete' == $f_action) {
-		print_header_redirect( 'account_prof_delete.php?f_id=' . $f_id );
+		print_header_redirect( 'account_prof_delete.php?f_profile_id=' . $f_profile_id );
 	}
 	# If Defaulting profile redirect to make default script
-	else if ( 'make default' == $f_action ) {
-		print_header_redirect( 'account_prof_make_default.php?f_id=' . $f_id );
+	else if ( 'default' == $f_action ) {
+		print_header_redirect( 'account_prof_make_default.php?f_profile_id=' . $f_profile_id );
 	}
 
-	$c_id = db_prepare_int( $f_id );
+	$row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
 
-	$t_user_id = auth_get_current_user_id();
-
-	$t_user_profile_table = config_get( 'mantis_user_profile_table' );
-
-	# Retrieve new item data and prefix with v_
-	$query = "SELECT *
-		FROM $t_user_profile_table
-		WHERE id='$c_id' AND user_id='$t_user_id'";
-    $result = db_query( $query );
-	$row = db_fetch_array( $result );
-	if ( $row ) {
-    	extract( $row, EXTR_PREFIX_ALL, 'v' );
-    }
-
-	# Prepare for edit display
-   	$v_platform 	= string_edit_text( $v_platform );
-   	$v_os 			= string_edit_text( $v_os );
-   	$v_os_build 	= string_edit_text( $v_os_build );
-   	$v_description  = string_edit_textarea( $v_description );
+   	extract( $row, EXTR_PREFIX_ALL, 'v' );
 ?>
+
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 
@@ -61,7 +44,7 @@
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="f_id" value="<?php echo $v_id ?>" />
+		<input type="hidden" name="f_profile_id" value="<?php echo $v_id ?>" />
 		<?php echo lang_get( 'edit_profile_title' ) ?>
 	</td>
 	<td class="right">
@@ -73,7 +56,7 @@
 		<?php echo lang_get( 'platform' ) ?>
 	</td>
 	<td width="75%">
-		<input type="text" name="f_platform" size="32" maxlength="32" value="<?php echo $v_platform ?>" />
+		<input type="text" name="f_platform" size="32" maxlength="32" value="<?php echo string_edit_text( $v_platform ) ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -81,7 +64,7 @@
 		<?php echo lang_get( 'operating_system' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_os" size="32" maxlength="32" value="<?php echo $v_os ?>" />
+		<input type="text" name="f_os" size="32" maxlength="32" value="<?php echo string_edit_text( $v_os ) ?>" />
 	</td>
 </tr>
 <tr class="row-1">
@@ -89,7 +72,7 @@
 		<?php echo lang_get( 'version' ) ?>
 	</td>
 	<td>
-		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo $v_os_build ?>" />
+		<input type="text" name="f_os_build" size="16" maxlength="16" value="<?php echo string_edit_text( $v_os_build ) ?>" />
 	</td>
 </tr>
 <tr class="row-2">
@@ -97,7 +80,7 @@
 		<?php echo lang_get( 'additional_description' ) ?>
 	</td>
 	<td>
-		<textarea name="f_description" cols="60" rows="8" wrap="virtual"><?php echo $v_description ?></textarea>
+		<textarea name="f_description" cols="60" rows="8" wrap="virtual"><?php echo string_edit_textarea( $v_description ) ?></textarea>
 	</td>
 </tr>
 <tr>

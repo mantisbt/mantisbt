@@ -7,7 +7,7 @@
 ?>
 <?php
 	# Make the specified profile the default
-	# Redirect to account_prof_menu_page.php3
+	# Redirect to account_prof_menu_page.php
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
@@ -17,9 +17,9 @@
 		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 	}
 
-	$f_id	= gpc_get_int( 'f_id' );
+	$f_profile_id	= gpc_get_int( 'f_profile_id' );
 
-	current_user_set_pref( 'default_profile', $f_id );
+	current_user_set_pref( 'default_profile', $f_profile_id );
 
 	print_header_redirect( 'account_prof_menu_page.php' );
 ?>
