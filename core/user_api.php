@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.85 2005-02-14 10:21:42 vboctor Exp $
+	# $Id: user_api.php,v 1.86 2005-02-17 20:46:27 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -673,7 +673,7 @@
 		$t_private	= VS_PRIVATE;
 
 		if ( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
-			$query = "SELECT p.id, ph.parent_id
+			$query = "SELECT DISTINCT( p.id ), ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_hierarchy_table ph
 					    ON ph.child_id = p.id
@@ -681,7 +681,7 @@
 					  	AND ph.parent_id IS NOT NULL
 					  ORDER BY p.name";
 		} else {
-			$query = "SELECT p.id, ph.parent_id
+			$query = "SELECT DISTINCT( p.id ), ph.parent_id
 					  FROM $t_project_table p
 					  LEFT JOIN $t_project_user_list_table u
 					    ON p.id = u.project_id
