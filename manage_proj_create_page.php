@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.6 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_create_page.php,v 1.7 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -79,7 +79,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'add_project_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'add_project_button' ) ?>" />
 	</td>
 </tr>
 </table>

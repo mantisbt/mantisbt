@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page.php,v 1.76 2004-03-18 23:40:35 narcissus Exp $
+	# $Id: print_all_bug_page.php,v 1.77 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -298,7 +298,7 @@
 
 <br />
 
-<input type="submit" value="<?php echo lang_get( 'hide_button' ) ?>" />
+<input type="submit" class="button" value="<?php echo lang_get( 'hide_button' ) ?>" />
 </form>
 
 <?php # @@@ BUG ?  Where is the closing FORM tag??? ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.28 2004-04-08 22:44:59 prescience Exp $
+	# $Id: filter_api.php,v 1.29 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -660,7 +660,7 @@
 			<td colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>"><?php PRINT lang_get( 'search' ) ?>: <input type="text" size="16" name="search" value="<?php PRINT $t_filter['search']; ?>" /></td>
 			<!-- SUBMIT button -->
 			<td class="left" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
-				<input type="submit" name="filter" value="<?php PRINT lang_get( 'search' ) ?>" />
+				<input type="submit" name="filter" class="button" value="<?php PRINT lang_get( 'search' ) ?>" />
 			</td>
 			</form>
 			<td colspan="<?php PRINT ( 2 * $t_custom_cols ); ?>"></td>
@@ -683,10 +683,10 @@
 					}
 					?>
 					</select>
-					<input type="submit" name="switch_to_query_button" value="<?php PRINT lang_get( 'use_query' ) ?>" />
+					<input type="submit" name="switch_to_query_button" class="button" value="<?php PRINT lang_get( 'use_query' ) ?>" />
 					</form>
 					<form method="post" name="open_queries" action="query_view_page.php">
-					<input type="submit" name="switch_to_query_button" value="<?php PRINT lang_get( 'open_queries' ) ?>" />
+					<input type="submit" name="switch_to_query_button" class="button" value="<?php PRINT lang_get( 'open_queries' ) ?>" />
 					</form>
 				</td>
 				<?php
@@ -696,7 +696,7 @@
 					<form method="get" name="reset_query" action="view_all_set.php">
 					<input type="hidden" name="type" value="3" />
 					<input type="hidden" name="source_query_id" value="-1" />
-					<input type="submit" name="reset_query_button" value="<?php PRINT lang_get( 'reset_query' ) ?>" />
+					<input type="submit" name="reset_query_button" class="button" value="<?php PRINT lang_get( 'reset_query' ) ?>" />
 					</form>
 				</td>
 				<?php
@@ -706,7 +706,7 @@
 			?>
 				<td class="left" colspan="<?php PRINT ( 1 * $t_custom_cols ); ?>">
 					<form method="post" name="save_query" action="query_store_page.php">
-					<input type="submit" name="save_query_button" value="<?php PRINT lang_get( 'save_query' ) ?>" />
+					<input type="submit" name="save_query_button" class="button" value="<?php PRINT lang_get( 'save_query' ) ?>" />
 					</form>
 				</td>
 			<?php

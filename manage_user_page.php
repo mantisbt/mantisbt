@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_page.php,v 1.51 2004-04-01 12:15:24 yarick123 Exp $
+	# $Id: manage_user_page.php,v 1.52 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -200,7 +200,7 @@ for ($i=0;$i<$new_user_count;$i++) {
 		<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
 		<input type="hidden" name="save" value="1" />
 		<input type="checkbox" name="hide" value="1" <?php check_checked( $c_hide, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
-		<input type="submit" value="<?php echo lang_get( 'filter_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</form>
 	</td>
 </tr>

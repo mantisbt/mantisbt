@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_edit_page.php,v 1.7 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_user_edit_page.php,v 1.8 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -93,7 +93,7 @@
 <!-- Submit Button -->
 <tr>
 	<td colspan="2" class="center">
-		<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -107,13 +107,13 @@
 <!-- Reset Button -->
 	<form method="post" action="manage_user_reset.php">
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-		<input type="submit" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'reset_password_button' ) ?>" />
 	</form>
 
 <!-- Delete Button -->
 	<form method="post" action="manage_user_delete.php">
 		<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-		<input type="submit" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>
 </div>
 <br />
@@ -183,7 +183,7 @@
 <!-- Submit Buttom -->
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'add_user_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'add_user_button' ) ?>" />
 	</td>
 </tr>
 </table>

@@ -35,7 +35,7 @@
 		<div align="center">
 		<center><b><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></b></center>
 		<form method="post" action="<?php print $t_redirect_url; ?>">
-		<input type="submit" value="<?php print lang_get( 'go_back' ); ?>"/>
+		<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
 		</form>
 	
 		<?php

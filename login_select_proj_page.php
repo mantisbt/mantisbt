@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_select_proj_page.php,v 1.30 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: login_select_proj_page.php,v 1.31 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -51,7 +51,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'select_project_button') ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'select_project_button') ?>" />
 	</td>
 </tr>
 </table>

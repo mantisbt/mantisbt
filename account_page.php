@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.42 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_page.php,v 1.43 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -192,7 +192,7 @@
 		<td>&nbsp;</td>
 		<!-- Update Button -->
 		<td>
-			<input type="submit" value="<?php echo lang_get( 'update_user_button' ) ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" />
 		</td>
 	</tr>
 </table>
@@ -209,7 +209,7 @@
 <!-- Delete Button -->
 <div class="border-center">
 	<form method="post" action="account_delete.php">
-	<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
+	<input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
 </div>
 

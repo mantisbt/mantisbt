@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: signup_page.php,v 1.27 2004-02-05 12:15:18 vboctor Exp $
+	# $Id: signup_page.php,v 1.28 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -52,7 +52,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'signup_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" />
 	</td>
 </tr>
 </table>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update_page.php,v 1.66 2004-03-26 10:06:26 vboctor Exp $
+	# $Id: bug_update_page.php,v 1.67 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -357,7 +357,7 @@
 <!-- Submit Button -->
 <tr>
 	<td class="center" colspan="6">
-		<input type="submit" value="<?php echo lang_get( 'update_information_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />
 	</td>
 </tr>
 

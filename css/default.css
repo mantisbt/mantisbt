@@ -11,7 +11,11 @@ a:visited 			{ color: ;   }
 a.subtle			{ color: blue; text-decoration: none; }
 
 form				{ display: inline; }
+
 input				{}
+input.button			{}
+input.button-small		{}
+
 textarea			{}
 select				{}
 

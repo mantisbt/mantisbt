@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_add_inc.php,v 1.18 2004-03-26 09:29:07 vboctor Exp $
+	# $Id: bugnote_add_inc.php,v 1.19 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
@@ -52,7 +52,7 @@
 <?php } ?>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
 	</td>
 </tr>
 </table>

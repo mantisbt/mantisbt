@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.45 2004-04-08 20:52:50 prescience Exp $
+	# $Id: helper_api.php,v 1.46 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 
 	### Helper API ###
@@ -208,7 +208,7 @@
 		print_hidden_inputs( gpc_strip_slashes( $_GET ) );
 
 		PRINT "<input type=\"hidden\" name=\"_confirmed\" value=\"1\" />\n";
-		PRINT '<br /><br /><input type="submit" value="' . $p_button_label . '" />';
+		PRINT '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
 		PRINT "\n</form>\n";
 
 		print_hr();

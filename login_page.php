@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.35 2004-04-06 19:38:32 prescience Exp $
+	# $Id: login_page.php,v 1.36 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -89,7 +89,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'login_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'login_button' ) ?>" />
 	</td>
 </tr>
 </table>

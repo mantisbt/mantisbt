@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_menu_page.php,v 1.31 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_prof_menu_page.php,v 1.32 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -87,7 +87,7 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input type="submit" value="<?php echo lang_get( 'add_profile_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'add_profile_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -124,7 +124,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'submit_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" />
 	</td>
 </tr>
 </table>

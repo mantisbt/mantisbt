@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_edit_page.php,v 1.32 2004-02-29 09:07:45 vboctor Exp $
+	# $Id: proj_doc_edit_page.php,v 1.33 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -89,7 +89,7 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td>
-		<input type="submit" value="<?php echo lang_get( 'file_update_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'file_update_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -99,7 +99,7 @@
 
 		<form method="post" action="proj_doc_delete.php">
 		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
 		</form>
 
 </div>

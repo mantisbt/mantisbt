@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_upload_inc.php,v 1.32 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_file_upload_inc.php,v 1.33 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -44,7 +44,7 @@
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 		<input name="file" type="file" size="60" />
-		<input type="submit" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
 	</td>
 </tr>
 </table>

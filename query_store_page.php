@@ -56,10 +56,10 @@
 	?>
 	<input type="checkbox" name="all_projects" value="on">
 	<?php print lang_get( 'all_projects' ); ?><br /><br />
-	<input type="submit" value="<?php print lang_get( 'save_query' ); ?>">
+	<input type="submit" class="button" value="<?php print lang_get( 'save_query' ); ?>">
 	</form>
 	<form action="view_all_bug_page.php">
-	<input type="submit" value="<?php print lang_get( 'go_back' ); ?>">
+	<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>">
 	</form>
 <?php
 	echo '</div>';

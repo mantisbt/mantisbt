@@ -38,11 +38,11 @@
 	<form method="post" action="<?php print $t_delete_url; ?>">
 	<br /><br />
 	<input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
-	<input type="submit" value="<?php print lang_get( 'delete_query' ); ?>"/>
+	<input type="submit" class="button" value="<?php print lang_get( 'delete_query' ); ?>"/>
 	</form>
 
 	<form method="post" action="<?php print $t_redirect_url; ?>">
-	<input type="submit" value="<?php print lang_get( 'go_back' ); ?>"/>
+	<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
 	</form>
 
 <?php

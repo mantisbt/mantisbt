@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report.php,v 1.29 2004-03-30 12:08:19 vboctor Exp $
+	# $Id: bug_report.php,v 1.30 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -141,16 +141,16 @@
 	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
 		<input type="hidden" name="category" 		value="<?php echo $f_category ?>" />
 		<input type="hidden" name="severity" 		value="<?php echo $f_severity ?>" />
-		<input type="hidden" name="reproducibility" value="<?php echo $f_reproducibility ?>" />
+		<input type="hidden" name="reproducibility" 	value="<?php echo $f_reproducibility ?>" />
 		<input type="hidden" name="profile_id" 		value="<?php echo $f_profile_id ?>" />
 		<input type="hidden" name="platform" 		value="<?php echo $f_platform ?>" />
-		<input type="hidden" name="os" 				value="<?php echo $f_os ?>" />
+		<input type="hidden" name="os" 			value="<?php echo $f_os ?>" />
 		<input type="hidden" name="os_build" 		value="<?php echo $f_os_build ?>" />
-		<input type="hidden" name="product_version" value="<?php echo $f_product_version ?>" />
-		<input type="hidden" name="build" 			value="<?php echo $f_build ?>" />
+		<input type="hidden" name="product_version" 	value="<?php echo $f_product_version ?>" />
+		<input type="hidden" name="build" 		value="<?php echo $f_build ?>" />
 		<input type="hidden" name="report_stay" 	value="1" />
 		<input type="hidden" name="view_state"		value="<?php echo $f_view_state ?>" />
-		<input type="submit" 						value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
+		<input type="submit" class="button" 		value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
 	</form>
 <?php
 	} else {

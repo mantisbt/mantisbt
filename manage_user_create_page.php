@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create_page.php,v 1.15 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_user_create_page.php,v 1.16 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -87,7 +87,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'create_user_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'create_user_button' ) ?>" />
 	</td>
 </tr>
 </table>

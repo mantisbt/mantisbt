@@ -343,7 +343,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 			
 	<!-- Submit button -->
 	<td class="right" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<input type="submit" name="filter" value="<?php echo lang_get( 'filter_button' ) ?>" />
+		<input type="submit" name="filter" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
 	</td>
 </tr>
 <tr>

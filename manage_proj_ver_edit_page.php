@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_edit_page.php,v 1.25 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_ver_edit_page.php,v 1.26 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -54,7 +54,7 @@
 		&nbsp;
 	</td>
 	<td>
-		<input type="submit" value="<?php echo lang_get( 'update_version_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'update_version_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -67,7 +67,7 @@
 	<form method="post" action="manage_proj_ver_delete.php">
 	<input type="hidden" name="project_id" value="<?php echo string_attribute( $f_project_id ) ?>" />
 	<input type="hidden" name="version" value="<?php echo string_attribute( $f_version ) ?>" />
-	<input type="submit" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
+	<input type="submit" class="button" value="<?php echo lang_get( 'delete_version_button' ) ?>" />
 	</form>
 </div>
 

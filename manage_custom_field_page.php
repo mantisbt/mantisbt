@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_page.php,v 1.15 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_custom_field_page.php,v 1.16 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -88,7 +88,7 @@
 
 <form method="post" action="manage_custom_field_create.php">
 		<input type="text" name="name" size="32" maxlength="64" />
-		<input type="submit" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
 </form>
 
 <br />

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_options_inc.php,v 1.21 2004-02-16 12:51:10 vboctor Exp $
+	# $Id: print_all_bug_options_inc.php,v 1.22 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -149,7 +149,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="submit" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'update_prefs_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -160,7 +160,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 
 <div class="border-center">
 	<form method="post" action="print_all_bug_options_reset.php">
-	<input type="submit" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
+	<input type="submit" class="button" value="<?php echo lang_get( 'reset_prefs_button' ) ?>" />
 	</form>
 </div>
 

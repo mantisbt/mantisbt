@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_menu_page.php,v 1.31 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: news_menu_page.php,v 1.32 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -66,7 +66,7 @@
 		<span class="required">* <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input type="submit" value="<?php echo lang_get( 'post_news_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'post_news_button' ) ?>" />
 	</td>
 </tr>
 </form>
@@ -102,7 +102,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'submit_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" />
 	</td>
 </tr>
 </table>

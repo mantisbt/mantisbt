@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_custom_field_edit_page.php,v 1.16 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_custom_field_edit_page.php,v 1.17 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -132,7 +132,7 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>
-				<input type="submit" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
+				<input type="submit" class="button" value="<?php echo lang_get( 'update_custom_field_button' ) ?>" />
 			</td>
 		</tr>
 	</table>
@@ -145,7 +145,7 @@
 	<form method="post" action="manage_custom_field_delete.php">
 		<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
 		<input type="hidden" name="return" value="<?php echo string_attribute( $f_return ) ?>" />
-		<input type="submit" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'delete_custom_field_button' ) ?>" />
 	</form>
 </div>
 

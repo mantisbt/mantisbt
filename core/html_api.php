@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.92 2004-04-08 22:44:59 prescience Exp $
+	# $Id: html_api.php,v 1.93 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -265,7 +265,7 @@
 				}
 				print_project_option_list( helper_get_current_project() );
 				PRINT '</select>';
-				PRINT '<input type="submit" value="' . lang_get( 'switch' ) . '" class="small" />';
+				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" class="small" />';
 				PRINT '</form>';
 			PRINT '</td>';
 		PRINT '</tr>';
@@ -412,7 +412,7 @@
 			PRINT '<td class="right" style="white-space: nowrap;">';
 				PRINT '<form method="post" action="jump_to_bug.php">';
 				PRINT "<input type=\"text\" name=\"bug_id\" size=\"10\" class=\"small\" />&nbsp;";
-				PRINT '<input type="submit" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
+				PRINT '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" class="small" />&nbsp;';
 				PRINT '</form>';
 			PRINT '</td>';
 			PRINT '</tr>';
@@ -615,7 +615,7 @@
 			PRINT "	<input type=\"hidden\" name=\"$key\" value=\"$val\" />\n";
 		}
 
-		PRINT "	<input type=\"submit\" value=\"$p_button_text\" />\n";
+		PRINT "	<input type=\"submit\" class=\"button\" value=\"$p_button_text\" />\n";
 		PRINT "</form>\n";
 	}
 
@@ -662,7 +662,7 @@
 		PRINT "<form method=\"post\" action=\"bug_assign.php\">\n";
 
 		$t_button_text = lang_get( 'bug_assign_to_button' );
-		PRINT "	<input type=\"submit\" value=\"$t_button_text\" />\n";
+		PRINT "	<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />\n";
 
 		PRINT "<select name=\"handler_id\">";
 

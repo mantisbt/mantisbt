@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: news_edit_page.php,v 1.37 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: news_edit_page.php,v 1.38 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -110,7 +110,7 @@
 		<span class="required">* <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input type="submit" value="<?php echo lang_get( 'update_news_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'update_news_button' ) ?>" />
 	</td>
 </tr>
 </table>

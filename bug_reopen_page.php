@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen_page.php,v 1.30 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_reopen_page.php,v 1.31 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,7 +41,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'reopen_bug_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'reopen_bug_button' ) ?>" />
 	</td>
 </tr>
 </table>

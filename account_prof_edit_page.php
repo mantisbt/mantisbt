@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_edit_page.php,v 1.33 2004-01-11 07:16:05 vboctor Exp $
+	# $Id: account_prof_edit_page.php,v 1.34 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -98,7 +98,7 @@
 </tr>
 <tr>
 	<td class="center" colspan="2">
-		<input type="submit" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
 	</td>
 </tr>
 </table>

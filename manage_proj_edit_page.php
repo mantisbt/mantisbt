@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.73 2004-01-11 07:16:07 vboctor Exp $
+	# $Id: manage_proj_edit_page.php,v 1.74 2004-04-12 21:04:35 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -117,7 +117,7 @@
 <tr>
 	<td>&nbsp;</td>
 	<td>
-		<input type="submit" value="<?php echo lang_get( 'update_project_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'update_project_button' ) ?>" />
 	</td>
 </tr>
 </table>
@@ -133,7 +133,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <div class="border-center">
 	<form method="post" action="manage_proj_delete.php">
 		<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-		<input type="submit" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
 	</form>
 </div>
 <?php } ?>
@@ -211,7 +211,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		<form method="post" action="manage_proj_cat_add.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="category" size="32" maxlength="64" />
-			<input type="submit" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
 		</form>
 	</td>
 </tr>
@@ -224,8 +224,8 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			<select name="other_project_id">
 				<?php print_project_option_list( null, false ) ?>
 			</select>
-			<input type="submit" name="copy_from" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
-			<input type="submit" name="copy_to" value="<?php echo lang_get( 'copy_categories_to' ) ?>" />
+			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
+			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_categories_to' ) ?>" />
 		</form>
 	</td>
 </tr>
@@ -299,7 +299,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		<form method="post" action="manage_proj_ver_add.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="version" size="32" maxlength="64" />
-			<input type="submit" value="<?php echo lang_get( 'add_version_button' ) ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'add_version_button' ) ?>" />
 		</form>
 	</td>
 </tr>
@@ -358,7 +358,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 	<input type="hidden" name="field_id" value="<?php echo $t_field_id ?>" />
 	<input type="text" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
-	<input type="submit" value="<?php echo lang_get( 'update' ) ?>" />
+	<input type="submit" class="button" value="<?php echo lang_get( 'update' ) ?>" />
 </form>
 				</td>
 				<td class="center">
@@ -388,7 +388,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 					}
 				?>
 			</select>
-			<input type="submit" value="<?php echo lang_get( 'add_existing_custom_field' ) ?>" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'add_existing_custom_field' ) ?>" />
 			</form>
 		</td>
 	</tr>
@@ -453,7 +453,7 @@ if ( access_has_project_level( config_get( 'project_user_threshold' ), $f_projec
 					</select>
 				</td>
 				<td>
-					<input type="submit" value="<?php echo lang_get( 'add_user_button' ) ?>" />
+					<input type="submit" class="button" value="<?php echo lang_get( 'add_user_button' ) ?>" />
 				</td>
 			</tr>
 		</table>

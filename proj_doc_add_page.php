@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_add_page.php,v 1.27 2004-02-29 09:07:45 vboctor Exp $
+	# $Id: proj_doc_add_page.php,v 1.28 2004-04-12 21:04:36 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -71,7 +71,7 @@
 		<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
 	</td>
 	<td class="center">
-		<input type="submit" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
+		<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' ) ?>" />
 	</td>
 </tr>
 </table>
