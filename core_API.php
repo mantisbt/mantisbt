@@ -8,6 +8,14 @@
 	# INCLUDES
 	###########################################################################
 
+  	require( "constant_inc.php" );
+	require( "./default/config_inc1.php" );
+	if ( file_exists( "config_inc.php" ) ) {
+		include( "config_inc.php" );
+	}
+	# Load file globals # @@@ ugly hack for ugly problem.  Find better solution soon
+	require( "./default/config_inc2.php" );
+
 	ini_set("magic_quotes_runtime", 0);
 	if ( OFF == $g_register_globals ) {
 		extract( $HTTP_POST_VARS );
@@ -28,14 +36,6 @@
 	# seed random number generator
 	list($usec,$sec)=explode(" ",microtime());
 	mt_srand($sec*$usec);
-
-  	require( "constant_inc.php" );
-	require( "./default/config_inc1.php" );
-	if ( file_exists( "config_inc.php" ) ) {
-		include( "config_inc.php" );
-	}
-	# Load file globals # @@@ ugly hack for ugly problem.  Find better solution soon
-	require( "./default/config_inc2.php" );
 
 	# @@@ Experimental
 	# deal with register_globals being Off
