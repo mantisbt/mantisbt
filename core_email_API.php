@@ -463,10 +463,13 @@
 			$mail->From     = $g_from_email;
 			$mail->FromName = "";
 
-			if($t_recipient) {
-				$mail->AddAddress($t_recipient, "");
+			# add to the Recipient list
+			$t_recipient_list = split(",", $t_recipient);
+			while ( list( , $t_recipient ) = each( $t_recipient_list ) ) {
+				if ( !empty( $t_recipient ) ) {
+					$mail->AddAddress( $t_recipient, "" );
+				}
 			}
-
 			# add to the BCC list
 			$t_bcc_list = split(",", $p_header);
 			while(list(, $t_bcc) = each($t_bcc_list)) {
