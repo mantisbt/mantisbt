@@ -1,6 +1,7 @@
 Mantis ChangeLog
 
 2004.xx.xx  -  0.19.0
+ * Enh #0000: Change of terminology, replaced "bug" with "issue" [first step in #2710].
  * Enh #0000: Generate one email per user. Stage #2 (minor send mail optimization - used kept alive SMTP connection).
  * Enh #0000: phpMailer 1.71 has been included to Mantis distribution, all the mails are sent now only by phpMailer.
  * Enh #2200: Add Version to simple bug pages.
@@ -46,7 +47,7 @@ Mantis ChangeLog
  * Removed config option (use_x_priority): phpMailer always puts X-Priority header
  * Languages: Updated Czech, Danish, Estonian, Japanese (EUC and SJIS), Serbian and Spanish localisations.
 
-2004.03.??  -  0.18.2a
+2004.04.??  -  0.18.3
 
  * Sec #3660: Ability to execute arbitrary SQL statement if register_globals = ON.
  * Sec #3661: A logged in user can download any bug attachment or project document.
