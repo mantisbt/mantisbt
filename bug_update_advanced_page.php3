@@ -49,8 +49,20 @@
     		FROM $g_mantis_user_table
     		WHERE id='$v_handler_id'";
     $result = db_mysql_query( $query );
-    if ( mysql_num_rows( $result ) > 0 ) {
-		$t_handler_name = mysql_result( $result, 0 );
+    if ( $result ) {
+   		$row = mysql_fetch_array( $result );
+		$t_handler_name		= $row["username"];
+		$t_handler_email	= $row["email"];
+	}
+
+    $query = "SELECT username, email
+    		FROM $g_mantis_user_table
+    		WHERE id='$v_reporter_id'";
+    $result = db_mysql_query( $query );
+    if ( $result ) {
+   		$row = mysql_fetch_array( $result );
+		$t2_handler_name		= $row["username"];
+		$t2_handler_email	= $row["email"];
 	}
 
     $query = "SELECT *
@@ -62,14 +74,12 @@
 	$row = mysql_fetch_array( $result );
 	extract( $row, EXTR_PREFIX_ALL, "v2" );
 
-	$fbcolor = "4444aa";
-	$v_summary = stripslashes( $v_summary );
-	$v_description = stripslashes( $v_description );
-	$v_steps_to_reproduce = stripslashes( $v_steps_to_reproduce );
-	$v_additional_information = stripslashes( $v_additional_information );
-	$v_date_submitted = date( "m-d H:i", $v_date_submitted );
-	$v_last_updated = date( "m-d H:i", $v_last_updated );
-	$v_eta = date( "m-d H:i", $v_eta );
+	$v_summary = string_unsafe( $v_summary );
+	$v_description = string_unsafe( $v_description );
+	$v_steps_to_reproduce = string_unsafe( $v_steps_to_reproduce );
+	$v_additional_information = string_unsafe( $v_additional_information );
+	$v_date_submitted = date( "m-d H:i", sql_to_unix_time( $v_date_submitted ) );
+	$v_last_updated = date( "m-d H:i", sql_to_unix_time( $v_last_updated ) );
 ?>
 
 <p>
@@ -147,8 +157,8 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_dark ?> colspan=5>
 			<?
-				if ( $v_reporter_id==$u_id ) {
-					echo "<a href=\"mailto:$u_email\">".$u_username."</a>";
+				if ( isset( $t2_handler_name ) ) {
+					echo "<a href=\"mailto:$t2_handler_email\">".$t2_handler_name."</a>";
 				}
 				else {
 					echo "user no longer exists";
@@ -162,6 +172,7 @@
 		</td>
 		<td bgcolor=<? echo $g_primary_color_light ?> colspan=5>
 			<select name=f_handler_id>
+				<option value=""></option>
 			<?
 			    $query = "SELECT id, username
 			    		FROM $g_mantis_user_table
