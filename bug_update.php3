@@ -11,6 +11,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	project_access_check( $f_id );
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
 
@@ -89,8 +90,7 @@
 	}
 
 	# Determine which view page to redirect back to.
-	$t_redirect_url = get_update_redirect_url( $f_id );
-
+	$t_redirect_url = get_no_referer_redirect_url( $f_id );
 	if (( $g_quick_proceed == 1 )&&( $result )) {
 		print_header_redirect( $t_redirect_url );
 	}

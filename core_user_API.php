@@ -132,27 +132,23 @@
 
 		switch ( $g_login_method ) {
 
-			case CRYPT:
-						$salt = substr( $p_password, 0, 2 );
+			case CRYPT:	$salt = substr( $p_password, 0, 2 );
 						if ( crypt( $p_test_password, $salt ) == $p_password ) {
 							return true;
 						} else {
 							return false;
 						}
-			case PLAIN:
-						if ( $p_test_password == $p_password ) {
+			case PLAIN:	if ( $p_test_password == $p_password ) {
 							return true;
 						} else {
 							return false;
 						}
-			case MD5:
-						if ( md5( $p_test_password ) == $p_password ) {
+			case MD5:	if ( md5( $p_test_password ) == $p_password ) {
 							return true;
 						} else {
 							return false;
 						}
-			case LDAP:
-						if ( ldap_uid_pass( $f_username, $p_test_password ) ) {
+			case LDAP:	if ( ldap_uid_pass( $f_username, $p_test_password ) ) {
 							return true;
 						} else {
 							return false;
@@ -283,13 +279,70 @@
 		}
 	}
 	### --------------------
+	# Checks to see if the user has access to this project.  If not then log the user out.
+	function project_access_check( $p_bug_id, $p_project_id="0" ) {
+		global	$g_logout_page, $g_mantis_project_user_list_table,
+				$g_mantis_project_table, $g_mantis_bug_table,
+				$g_project_cookie_val;
+
+		project_check( $p_bug_id );
+		$t_project_id = get_bug_field( "project_id", $p_bug_id );
+		$t_user_id = get_current_user_field( "id" );
+		$t_project_user_access_level = get_project_access_level( $t_project_id );
+		if ( -1 != $t_project_user_access_level ) {
+			return;
+		} else {
+			return;
+			#print_header_redirect( $g_logout_page );
+		}
+	}
+	### --------------------
+	# Check to see if the currently logged in project and bug project id match
+	# If there is no match then the project cookie will be set to the bug project id
+	# No access check is done.  It is expected to be checked afterwards.
+	function project_check( $p_bug_id ) {
+		global	$g_project_cookie, $g_project_cookie_val, $g_cookie_time_length;
+
+		$t_project_id = get_bug_field( "project_id", $p_bug_id );
+		if ( $t_project_id != $g_project_cookie_val ) {
+			setcookie( $g_project_cookie, $t_project_id, time()+$g_cookie_time_length );
+			$t_redirect_url = get_view_redirect_url( $p_bug_id );
+			print_header_redirect( $t_redirect_url );
+		}
+	}
+	### --------------------
 	# translate the access level number to a name
 	# @@@ UNUSED
 	function trans_access_level( $p_num ) {
 	}
 	### --------------------
-	# return the project access level for the current user/project key pair
-	function get_project_access_level() {
+	# return the project access level for the current user/project key pair.
+	# use the project_id if supplied.
+	function get_project_access_level( $p_project_id=0 ) {
+		global	$g_mantis_project_user_list_table,
+				$g_project_cookie_val;
+
+		$t_user_id = get_current_user_field( "id" );
+		if ( 0==$p_project_id ) {
+			$query = "SELECT access_level
+					FROM $g_mantis_project_user_list_table
+					WHERE user_id='$t_user_id' AND project_id='$g_project_cookie_val'";
+		} else {
+			$query = "SELECT access_level
+					FROM $g_mantis_project_user_list_table
+					WHERE user_id='$t_user_id' AND project_id='$p_project_id'";
+		}
+		$result = db_query( $query );
+		if ( db_num_rows( $result )>0 ) {
+			return db_result( $result, 0, 0 );
+		} else {
+			return -1;
+		}
+	}
+	### --------------------
+	# Return the project user list access level for the current user/project key pair if it exists.
+	# Otherwise return the default user access level.
+	function get_effective_access_level() {
 		global	$g_mantis_project_user_list_table,
 				$g_project_cookie_val;
 
@@ -301,7 +354,7 @@
 		if ( db_num_rows( $result )>0 ) {
 			return db_result( $result, 0, 0 );
 		} else {
-			return -1;
+			return get_current_user_field( "access_level" );
 		}
 	}
 	### --------------------

@@ -306,9 +306,9 @@
 		if ( ( !isset( $HTTP_REFERER ) ) || ( empty( $HTTP_REFERER )) ) {
 			switch ( $g_show_view ) {
 				case 0:	if ( 1 == get_current_user_pref_field( "advanced_view" ) ) {
-							return $g_view_bug_page."?f_id=".$p_bug_id;
-						} else {
 							return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
+						} else {
+							return $g_view_bug_page."?f_id=".$p_bug_id;
 						}
 				case 1:	return $g_view_bug_page."?f_id=".$p_bug_id;
 				case 2:	return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
@@ -319,17 +319,17 @@
 		}
 	}
 	# --------------------
-	# Some proxies strip out HTTP_REFERER.
+	# Some proxies strip outf HTTP_REFERER.
 	# This function helps determine which pages to redirect to
 	# based on site and user preference.
-	function get_update_redirect_url( $p_bug_id ) {
+	function get_no_referer_redirect_url( $p_bug_id ) {
 		global $g_show_view, $g_view_bug_page, $g_view_bug_advanced_page;
 
 		switch ( $g_show_view ) {
 			case 0:	if ( 1 == get_current_user_pref_field( "advanced_view" ) ) {
-						return $g_view_bug_page."?f_id=".$p_bug_id;
-					} else {
 						return $g_view_bug_advanced_page."?f_id=".$p_bug_id;
+					} else {
+						return $g_view_bug_page."?f_id=".$p_bug_id;
 					}
 			case 1:	return $g_view_bug_page."?f_id=".$p_bug_id;
 			case 2:	return $g_view_bug_advanced_page."?f_id=".$p_bug_id;

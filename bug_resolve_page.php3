@@ -8,6 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	project_access_check( $f_id );
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
 ?>

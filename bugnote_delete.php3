@@ -12,22 +12,24 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	project_access_check( $f_id );
 	check_access( REPORTER );
 
-	### $f_bug_id is the bug id
-	check_bugnote_exists( $f_bug_id );
+	# $f_bug_id is the bug id
+	# @@@ WHat does this do?
+	check_bugnote_exists( $f_id );
 
 	### grab the bugnote text id
 	$query = "SELECT bugnote_text_id
 			FROM $g_mantis_bugnote_table
-			WHERE id='$f_bug_id'";
+			WHERE id='$f_bugnote_id'";
 	$result = db_query( $query );
 	$t_bugnote_text_id = db_result( $result, 0, 0 );
 
 	### Remove the bugnote
 	$query = "DELETE
 			FROM $g_mantis_bugnote_table
-			WHERE id='$f_bug_id'";
+			WHERE id='$f_bugnote_id'";
 	$result = db_query($query);
 
 	### Remove the bugnote text

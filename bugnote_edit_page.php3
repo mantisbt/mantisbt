@@ -12,6 +12,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
+	project_access_check( $f_id );
 	#check_access( UPDATER );
 
 	# grab the bugnote text
@@ -20,22 +21,10 @@
 			WHERE id='$f_bugnote_text_id'";
 	$result = db_query( $query );
 	$f_bugnote_text = db_result( $result, 0, 0 );
-
 	$f_bugnote_text = string_edit_textarea( $f_bugnote_text );
 
-	switch ( $g_show_view ) {
-		case 0:	if ( get_current_user_pref_field( "advanced_view" )==1 ) {
-					$t_redirect_url = $g_view_bug_page;
-				} else {
-					$t_redirect_url = $g_view_bug_advanced_page;
-				}
-				break;
-		case 1:	$t_redirect_url = $g_view_bug_page;
-				break;
-		case 2:	$t_redirect_url = $g_view_bug_advanced_page;
-				break;
-	}
-	$t_redirect_url = $t_redirect_url."?f_id=".$f_id;
+	# Determine which view page to redirect back to.
+	$t_redirect_url = get_view_redirect_url( $f_id );
 ?>
 <? print_html_top() ?>
 <? print_head_top() ?>
