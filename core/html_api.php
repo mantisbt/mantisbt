@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.9 2002-09-01 21:45:59 prescience Exp $
+	# $Id: html_api.php,v 1.10 2002-09-02 01:11:54 prescience Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -60,6 +60,8 @@
 	# (1) this is the first text sent by the page
 	function print_html_top() {
 		PRINT '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+		#PRINT '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">';
+
 		PRINT '<html>';
 	}
 	# --------------------
