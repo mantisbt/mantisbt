@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -56,6 +56,7 @@
 <table width=100% bgcolor=<? echo $g_primary_border_color." ".$g_primary_table_tags ?>>
 <form method=post action="<? echo $g_bug_update ?>">
 	<input type=hidden name=f_id value="<? echo $v_id ?>">
+	<input type=hidden name=f_resolution value="<? echo $v_resolution ?>">
 	<input type=hidden name=f_projection value="<? echo $v_projection ?>">
 	<input type=hidden name=f_eta value="<? echo $v_eta ?>">
 <tr>
@@ -92,7 +93,7 @@
 		</td>
 		<td>
 			<select name=f_category>
-				<? print_field_option_list( "category", $v_category ) ?>
+				<? print_category_option_list( $v_category ) ?>
 			</select>
 		</td>
 		<td>

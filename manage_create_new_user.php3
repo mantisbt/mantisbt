@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -25,6 +25,21 @@
 			VALUES
 			( null, '$f_username', '$f_email', '$t_password', NOW(), NOW(),
 			'$f_access_level', '$f_enabled', '$f_protected', '$t_cookie_string')";
+    $result = db_query( $query );
+
+   	### Use this for MS SQL: SELECT @@IDENTITY AS 'id'
+	$query = "select LAST_INSERT_ID()";
+	$result = db_query( $query );
+	if ( $result ) {
+		$t_user_id = db_result( $result, 0, 0 );
+	}
+
+	### Add profile
+	$query = "INSERT
+			INTO $g_mantis_user_profile_table
+    		( id, user_id, platform, os, os_build, description, default_profile )
+			VALUES
+			( null, '$f_user_id', '$f_platform', '$f_os', '$f_os_build', '$f_description', '' )";
     $result = db_query( $query );
 ?>
 <? print_html_top() ?>

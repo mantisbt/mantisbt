@@ -1,6 +1,6 @@
 <?
 	# Mantis - a php based bugtracking system
-	# Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
+	# Copyright (C) 2000, 2001  Kenzaburo Ito - kenito@300baud.org
 	# This program is distributed under the terms and conditions of the GPL
 	# See the README and LICENSE files for details
 ?>
@@ -25,6 +25,12 @@
 	}
 
 	if( password_match( $f_password, $u_password ) && ( $u_enabled=="on" ) ) {
+		### increment login count
+		$query = "UPDATE $g_mantis_user_table
+				SET login_count=login_count+1
+				WHERE username='$f_username'";
+		$result = db_query( $query );
+
 		### set permanent cookie (1 year)
 		if ( $f_perm_login=="on") {
 			setcookie( $g_string_cookie, $u_cookie_string, time()+$g_cookie_time_length );
