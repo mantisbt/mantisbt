@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.5 2002-08-25 20:23:18 jfitzell Exp $
+	# $Id: user_api.php,v 1.6 2002-08-25 20:26:03 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -966,7 +966,7 @@
 	# --------------------
 	# returns true if the username is unique, false if there is already a user
 	#  with that username
-	function user_name_unique( $p_username ) {
+	function user_is_name_unique( $p_username ) {
 		global $g_mantis_user_table;
 
 		$c_username = addslashes($p_username);

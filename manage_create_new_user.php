@@ -18,7 +18,7 @@
 	$c_username = addslashes($f_username);
 
 	# Check for duplicate username
-    if ( ! user_name_unique( $f_username ) ) {
+    if ( ! user_is_name_unique( $f_username ) ) {
 		print_mantis_error( ERROR_USERNAME_NOT_UNIQUE );
     }
 

@@ -33,7 +33,7 @@
 
 		# check that the username is unique
 		if ( $f_old_username != $f_username &&
-			 false == user_name_unique( $f_username ) ) {
+			 false == user_is_name_unique( $f_username ) ) {
 			print_mantis_error( ERROR_USERNAME_NOT_UNIQUE );
 		}
 

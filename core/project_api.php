@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.1 2002-08-25 20:23:18 jfitzell Exp $
+	# $Id: project_api.php,v 1.2 2002-08-25 20:26:03 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -32,7 +32,7 @@
 	}
 	# --------------------
 	# check to see if project exists by name
-	function project_is_unique( $p_name ) {
+	function project_is_name_unique( $p_name ) {
 		global $g_mantis_project_table;
 
 		$query ="SELECT COUNT(*) ".
