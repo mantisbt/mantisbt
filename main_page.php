@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.51 2004-05-08 23:25:11 narcissus Exp $
+	# $Id: main_page.php,v 1.52 2004-05-10 13:46:18 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -46,7 +46,7 @@
 
 		echo '<div class="quick-summary-left">';
 		echo lang_get( 'last_visit' ) . ': ';
-		echo print_date( config_get( 'normal_date_format' ), strtotime(current_user_get_field( 'last_visit' )));
+		echo print_date( config_get( 'normal_date_format' ), db_unixtimestamp( current_user_get_field( 'last_visit' ) ) );
 		echo '</div>';
 	}
 ?>
