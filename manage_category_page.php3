@@ -22,22 +22,6 @@
 		header( "Location: $g_logout_page" );
 		exit;
 	}
-
-	$query = "SHOW FIELDS
-			FROM $g_mantis_bug_table";
-	$result = db_mysql_query( $query );
-	$entry_count = mysql_num_rows( $result );
-	$i=0;
-	while ($i<$entry_count) {
-	    $i++;
-		$row = mysql_fetch_array( $result );
-    	$type = stripslashes($row["Type"]);
-    	$field = $row["Field"];
-    	if ( $field=="category" ) {
-	    	break;
-	    }
-    }
-    $str = substr( $type, 5, strlen($type)-6);
 ?>
 
 <p>
@@ -60,7 +44,7 @@
 			Category names
 		</td>
 		<td width=75%>
-			<input type=text name=f_category size=48 maxlength=255 value="<? echo $str ?>">
+			<input type=text name=f_category size=48 maxlength=255 value="<? echo print_category_string() ?>">
 		</td>
 	</tr>
 	<tr>

@@ -112,8 +112,7 @@
 		</td>
 		<td>
 			<select name=f_category>
-				<option value="bugtracker" <? if ( $v_category=="bugtracker" ) echo "SELECTED" ?>>bugtracker
-				<option value="other" <? if ( $v_category=="other" ) echo "SELECTED" ?>>other
+				<? print_categories( $v_category ) ?>
 			</select>
 		</td>
 		<td>

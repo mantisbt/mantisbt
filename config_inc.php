@@ -16,7 +16,7 @@
 	$g_database_name   = "bugtracker";   # set this
 
 	# file path variables
-	$g_path            = "/bugtrack/";   # requires trailing /
+	$g_path            = "/mantisbt/";   # requires trailing /
 
 	# extensions for php 3 and php 4
 	$g_php             = ".php3";        # set this to php for php4

@@ -46,8 +46,7 @@
 		<td>
 			<select name=f_category>
 				<option value="" selected>Select Category
-				<option value="bugtracker">bugtracker
-				<option value="other">other
+				<? print_categories() ?>
 			</select>
 		</td>
 	</tr>

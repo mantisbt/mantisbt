@@ -116,25 +116,51 @@
 		PRINT "</table>";
 	}
 	#--------------------
-	function print_categories() {
+	function print_category_string() {
 		global $g_mantis_bug_table
 
 		$query = "SHOW FIELDS
 				FROM $g_mantis_bug_table";
 		$result = db_mysql_query( $query );
 		$entry_count = mysql_num_rows( $result );
-		$i=0;
-		while ($i<$entry_count) {
-		    $i++;
+		for ($i=0;$i<$entry_count;$i++) {
 			$row = mysql_fetch_array( $result );
-	    	$type = stripslashes($row["Type"]);
-	    	$field = $row["Field"];
-	    	if ( $field=="category" ) {
+	    	$t_type = stripslashes($row["Type"]);
+	    	$t_field = $row["Field"];
+	    	if ( $t_field=="category" ) {
+		    	return substr( $t_type, 5, strlen($t_type)-6);
+		    }
+	    }
+	}
+	#--------------------
+	function print_categories( $p_category="" ) {
+		global $g_mantis_bug_table
+
+		$query = "SHOW FIELDS
+				FROM $g_mantis_bug_table";
+		$result = db_mysql_query( $query );
+		$entry_count = mysql_num_rows( $result );
+		for ($i=0;$i<$entry_count;$i++) {
+			$row = mysql_fetch_array( $result );
+	    	$t_type = stripslashes($row["Type"]);
+	    	$t_field = $row["Field"];
+	    	if ( $t_field=="category" ) {
 		    	break;
 		    }
 	    }
-	    $str = substr( $type, 5, strlen($type)-6);
-		echo $str;
+
+	    $t_str = substr( $t_type, 5, strlen($t_type)-6).",";
+		$cat_count = count(explode(",",$t_str))-1;
+		for ($i=0;$i<$cat_count;$i++) {
+			$t_s = substr( $t_str, 1, strpos($t_str, ",")-2 );
+			$t_str = substr( $t_str, strpos($t_str, ",")+1, strlen($t_str) );
+			if ( $p_category==$t_s ) {
+				PRINT "<option value=\"$t_s\" SELECTED>$t_s";
+			}
+			else {
+				PRINT "<option value=\"$t_s\">$t_s";
+			}
+		}
 	}
 	#--------------------
 	####################
