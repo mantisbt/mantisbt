@@ -149,9 +149,9 @@ eg:
 	$g_show_version   = ON;
 	$g_administrator_email  = "administrator@nowhere";
 	$g_webmaster_email      = "webmaster@nowhere";
-	$g_from_email           = "noreply@300baud.org";
-	$g_to_email             = "nobody@300baud.org";
-	$g_return_path_email    = "admin@300baud.org";
+	$g_from_email           = "noreply@nowhere";
+	$g_to_email             = "nobody@nowhere";
+	$g_return_path_email    = "admin@nowhere";
 
 This example will overwrite the default values with those necessary for my
 setup.  The default config_inc1.php file has some comments which will make the
