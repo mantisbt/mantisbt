@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_delete.php,v 1.28 2004-07-30 12:46:09 vboctor Exp $
+	# $Id: manage_user_delete.php,v 1.29 2004-08-21 00:41:32 prichards Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -15,7 +15,9 @@
 	
 	$f_user_id	= gpc_get_int( 'user_id' );
 
-	helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ),
+	$t_user = user_get_row( $f_user_id );
+
+	helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ) . '<br/>' . lang_get( 'username' ) . ': ' . $t_user['username'],
 							 lang_get( 'delete_account_button' ) );
 
 	user_delete( $f_user_id );
