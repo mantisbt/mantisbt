@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.73 $
+	# $Revision: 1.74 $
 	# $Author: vboctor $
-	# $Date: 2003-07-13 13:39:22 $
+	# $Date: 2003-07-26 12:47:37 $
 	#
-	# $Id: strings_german.txt,v 1.73 2003-07-13 13:39:22 vboctor Exp $
+	# $Id: strings_german.txt,v 1.74 2003-07-26 12:47:37 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -564,7 +564,7 @@ $s_add_category_button = 'Kategorie hinzufügen';
 $s_versions = 'Versionen';
 $s_add_version_button = 'Version hinzufügen';
 $s_edit_link = 'Bearbeiten';
-$s_actions = 'Actions';
+$s_actions = 'Aktionen';
 $s_version = 'Version/Build';
 $s_timestamp = 'Timestamp';
 $s_update = 'Update';
