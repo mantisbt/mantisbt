@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_change_status_page.php,v 1.12 2004-12-01 13:20:17 vboctor Exp $
+	# $Id: bug_change_status_page.php,v 1.13 2004-12-18 00:15:12 bpfennigschmidt Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -29,7 +29,30 @@
 								( ON == config_get( 'allow_reporter_close' ) ) ) ) ) ) {
 		access_denied();
 	}
+	
+	$f_handler_id = gpc_get_int( 'handler_id', auth_get_current_user_id() );
 
+	access_ensure_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id );
+
+	if ( ASSIGNED == $f_new_status ) {
+		$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
+		if ( $t_bug_sponsored ) {
+			if ( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
+				trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
+			}
+		}
+	
+		if ( $f_handler_id != NO_USER ) {
+			access_ensure_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id );
+	
+			if ( $t_bug_sponsored ) {
+				if ( !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
+					trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
+				}
+			}
+		}
+	}
+	
 	$t_status_label = str_replace( " ", "_", get_enum_to_string( config_get( 'status_enum_string' ), $f_new_status ) );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
