@@ -394,6 +394,7 @@
 	$s_report_bug_link = "Bug Rapor Et";
 	$s_summary_link = "Özet";
 	$s_account_link = "Hesap";
+	$s_users_link = "Users";
 	$s_manage_link = "Düzenle";
 	$s_edit_news_link = "Haberleri Düzenle";
 	$s_docs_link = "Dokümantasyon";

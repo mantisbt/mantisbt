@@ -285,6 +285,8 @@
 	$s_new_accounts_title = "새로운 계정";
 	$s_1_week_title = "1 주";
 	$s_never_logged_in_title = "한번도 로그인하지 않은 사용자";
+	$s_prune_accounts = "Prune Accounts";
+	$s_hide_inactive = "Hide Inactive";
 	$s_manage_accounts_title = "계정 관리";
 	$s_p = "p";
 	$s_date_created = "생성된 일자";
@@ -393,6 +395,7 @@
 	$s_report_bug_link = "버그 보고하기";
 	$s_summary_link = "요약";
 	$s_account_link = "계정 편집";
+	$s_users_link = "Users";
 	$s_manage_link = "사용자 관리";
 	$s_edit_news_link = "뉴스 편집";
 	$s_docs_link = "문서";

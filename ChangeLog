@@ -1,6 +1,17 @@
 Mantis
 
-03.30.2001  -   0.15.0
+07.05.2001  -   0.15.1
+
+ * Added configuration.html
+ * Fixed error in print_footer()
+ * Fixed localization error in proj_doc_delete_page.php3
+ * Fixed localization error in proj_users_menu_page.php3
+ * Fixed localization error in view_all_inc.php
+ * Fixed localization error in manage_page.php3
+ * Fixed localization error in summary_page.php3
+ * Fixed localization error in menu_inc.php3
+
+07.02.2001  -   0.15.0
 
  * Renamed span.bugnote_delete to span.bugnotedelete for css conformance
  * Added "" around all width and bgcolor tags for standards compliance

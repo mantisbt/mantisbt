@@ -103,7 +103,7 @@
 		global 	$g_string_cookie_val, $g_webmaster_email, $g_show_source,
 				$g_menu_include_file, $g_show_footer_menu;
 
-		if (isset($g_string_cookie_val)) {
+		if (isset($g_string_cookie_val)&&!empty($g_string_cookie_val)) {
 			if ( $g_show_footer_menu ) {
 				print_bottom_menu( $g_menu_include_file );
 			}

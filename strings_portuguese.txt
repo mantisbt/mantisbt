@@ -285,6 +285,8 @@
 	$s_new_accounts_title = "Novas Contas";
 	$s_1_week_title = "1 Semana";
 	$s_never_logged_in_title = "Nunca Entrou";
+	$s_prune_accounts = "Prune Accounts";
+	$s_hide_inactive = "Hide Inactive";
 	$s_manage_accounts_title = "Gerenciador de Contas";
 	$s_p = "p";
 	$s_date_created = "Data de Criação";
@@ -393,6 +395,7 @@
 	$s_report_bug_link = "Relatar Bugs";
 	$s_summary_link = "Sumário";
 	$s_account_link = "Sua Conta";
+	$s_users_link = "Users";
 	$s_manage_link = "Gerenciador";
 	$s_edit_news_link = "Editar Notícias";
 	$s_docs_link = "Docs.";

@@ -98,7 +98,7 @@
 	<table width="100%">
 	<tr>
 		<td colspan="8" bgcolor="<? echo $g_table_title_color ?>">
-			<b><? echo $s_never_logged_in_title ?></b> <? print_bracket_link( $g_manage_prune, "Prune Accounts" ) ?>
+			<b><? echo $s_never_logged_in_title ?></b> <? print_bracket_link( $g_manage_prune, $s_prune_accounts ) ?>
 		</td>
 	</tr>
 	<tr>
@@ -139,7 +139,7 @@
 	<table width="100%">
 	<tr align="right">
 		<td bgcolor="<? echo $g_table_title_color ?>">
-			<input type=checkbox name=f_hide <? if ( $f_hide==1 ) echo "CHECKED" ?>> Hide Inactive
+			<input type=checkbox name=f_hide <? if ( $f_hide==1 ) echo "CHECKED" ?>> <? echo $s_hide_inactive ?>
 			<input type=submit value="<? echo $s_filter_button ?>">
 		</td>
 	</tr>

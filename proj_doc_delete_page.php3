@@ -30,7 +30,7 @@
 	<form method="post" action="<? echo $g_proj_doc_delete ?>">
 		<input type="hidden" name="f_id" value="<? echo $f_id ?>">
 		<input type="hidden" name="f_protected" value="<? echo $f_protected ?>">
-		<input type="submit" value="<? echo $s_delete_account_button ?>">
+		<input type="submit" value="<? echo $s_file_delete_button ?>">
 	</form>
 
 	<? print_hr( $g_hr_size, $g_hr_width ) ?>

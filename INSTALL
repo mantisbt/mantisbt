@@ -1,6 +1,11 @@
 -------------------------------------------------------------------------------
-### Installation steps ###
+Mantis - a php based bugtracking system
+Copyright (C) 2000  Kenzaburo Ito - kenito@300baud.org
 -------------------------------------------------------------------------------
+
+INSTALLATION
+
+
 
 *** REQUIREMENTS: mysql database, php 3.0.13+, a webserver (tested on Apache
 and BadBlue, should work with IIS or anything else php will run with).

@@ -286,6 +286,8 @@
 	$s_new_accounts_title = "Nieuwe accounts";
 	$s_1_week_title = "1 Week";
 	$s_never_logged_in_title = "Nog nooit ingelogd";
+	$s_prune_accounts = "Prune Accounts";
+	$s_hide_inactive = "Hide Inactive";
 	$s_manage_accounts_title = "Beheer accounts";
 	$s_p = "p";
 	$s_date_created = "Datum aangemaakt";
@@ -394,6 +396,7 @@
 	$s_report_bug_link = "Rapporteer opdracht";
 	$s_summary_link = "Samenvatting";
 	$s_account_link = "Account";
+	$s_users_link = "Users";
 	$s_manage_link = "Beheer";
 	$s_edit_news_link = "Pas Nieuws aan";
 	$s_docs_link = "Documenten";

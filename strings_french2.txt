@@ -285,6 +285,8 @@
 	$s_new_accounts_title = "Nouveaux utilisateurs";
 	$s_1_week_title = "1 semaine";
 	$s_never_logged_in_title = "N'a jamais utilis&eacute; le syst&egrave;me";
+	$s_prune_accounts = "Prune Accounts";
+	$s_hide_inactive = "Hide Inactive";
 	$s_manage_accounts_title = "Administrer les comptes utilisateurs";
 	$s_p = "p";
 	$s_date_created = "Date de cr&eacute;ation";
@@ -393,6 +395,7 @@
 	$s_report_bug_link = "Nouveau bug";
 	$s_summary_link = "Synth&egrave;se";
 	$s_account_link = "Options";
+	$s_users_link = "Users";
 	$s_manage_link = "Administration";
 	$s_edit_news_link = "Editer les nouvelles";
 	$s_docs_link = "Documentation";

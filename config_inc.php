@@ -50,7 +50,7 @@
 	#############################
 
 	# --- version variables -----------
-	$g_mantis_version = "0.15.0";
+	$g_mantis_version = "0.15.1";
 	$g_show_version   = 1;
 
 	#############################
@@ -101,9 +101,9 @@
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr = array( "english", "dutch", "french", "french2", "german", "italian", "korean", "norwegian", "portuguese", "spanish", "turkish" );
 
-	############################
-	### Mantis Show Settings ###
-	############################
+	###############################
+	### Mantis Display Settings ###
+	###############################
 
 	# --- sitewide variables ----------
 	$g_window_title = "Mantis";     # browser window title
@@ -150,6 +150,18 @@
 
 	# minutes to wait before document is stale (in minutes)
 	$g_content_expire     = 0;
+
+	############################
+	### Mantis Date Settings ###
+	############################
+
+	# --- date format settings --------
+	# date format strings (default is 'US' formatting)
+	# go to http://www.php.net/manual/en/function.date.php
+	# for detailed instructions on date formatting
+	$g_short_date_format    = "m-d";
+	$g_normal_date_format   = "m-d H:i";
+	$g_complete_date_format = "m-d-y H:i T";
 
 	############################
 	### Mantis News Settings ###
@@ -202,6 +214,10 @@
 	# default space padding (increase when bug count goes over 100,000)
 	$g_summary_pad = 5;
 
+	# --- summary date displays -------
+	# date lengths to count bugs by (in days)
+	$g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
+
 	###############################
 	### Mantis Bugnote Settings ###
 	###############################
@@ -210,22 +226,6 @@
 	# bugnote ordering
 	# change to ASC or DESC
 	$g_bugnote_order = "ASC";
-
-	############################
-	### Mantis Date Settings ###
-	############################
-
-	# --- date format settings --------
-	# date format strings (default is 'US' formatting)
-	# go to http://www.php.net/manual/en/function.date.php
-	# for detailed instructions on date formatting
-	$g_short_date_format    = "m-d";
-	$g_normal_date_format   = "m-d H:i";
-	$g_complete_date_format = "m-d-y H:i T";
-
-	# --- summary date displays -------
-	# date lengths to count bugs by (in days)
-	$g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
 
 	###################################
 	### Mantis File Upload Settings ###
@@ -236,7 +236,7 @@
 	$g_allow_file_upload    = 1;
 	# 1 = "disk"
 	# 2 = "database" (currently only disk is supported)
-	$g_store_file_to        = "1";
+	$g_store_file_to        = 1;
 
 	$g_max_file_size = 5000000;
 
@@ -245,11 +245,6 @@
 	############################
 
 	# --- html tags -------------------
-	$g_allow_href_tags        = 1;
-
-	# @@@ Not functional
-	#$g_allow_img_tags         = 1;
-
 	$g_allow_html_tags        = 1;
 
 	# do NOT include href or img tags here
@@ -257,6 +252,11 @@
 	$g_html_tags              = array("<p>","</p>","<li>","</li>","<ul>","</ul>",
 									"<ol>","</ol>","<br />","<br>","<pre>","</pre>",
 									"<i>","</i>","<b>","</b>","<u>","</u>");
+
+	$g_allow_href_tags        = 1;
+
+	# @@@ Not functional
+	#$g_allow_img_tags         = 1;
 
 	# --- table tags ------------------
 	# this is inserted into the outermost tables ( tags like border, cellspacing, etc)
@@ -301,7 +301,7 @@
 	$g_acknowledged_color      = "#ffd850";    # orange
 	$g_confirmed_color         = "#ffffb0";    # yellow
 	$g_assigned_color          = "#c8c8ff";    # blue
-	$g_resolved_color          = "#cceedd";    # not used in default
+	$g_resolved_color          = "#cceedd";    # buish-green
 	$g_closed_color            = "#ffffff";    # not used in default
 
 	###############################

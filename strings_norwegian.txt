@@ -285,6 +285,8 @@
 	$s_new_accounts_title = "Nye kontoer";
 	$s_1_week_title = "1 uke";
 	$s_never_logged_in_title = "Aldri logget inn";
+	$s_prune_accounts = "Prune Accounts";
+	$s_hide_inactive = "Hide Inactive";
 	$s_manage_accounts_title = "Administrere kontoer";
 	$s_p = "p";
 	$s_date_created = "Dato opprettet";
@@ -393,6 +395,7 @@
 	$s_report_bug_link = "Rapportere feil";
 	$s_summary_link = "Oppsummering";
 	$s_account_link = "Konto";
+	$s_users_link = "Users";
 	$s_manage_link = "Administrere";
 	$s_edit_news_link = "Redigere nyheter";
 	$s_docs_link = "Dokumentasjon";

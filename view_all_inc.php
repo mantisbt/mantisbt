@@ -6,21 +6,21 @@
 	<tr align="center">
 	<? if ( $page_type=="reported" ) { ?>
 	<td>
-		<span class="smallcaption">Reporter</span>
+		<span class="smallcaption"><? echo $s_reporter ?></span>
 	</td>
 	<? } else if ( $page_type=="assigned" ) { ?>
 	<td>
-		<span class="smallcaption">Assignee</span>
+		<span class="smallcaption"><? echo $s_assigned_to ?></span>
 	</td>
 	<? } ?>
 	<td>
-	<span class="smallcaption">Category</span>
+	<span class="smallcaption"><? echo $s_category ?></span>
 	</td>
 	<td>
-	<span class="smallcaption">Severity</span>
+	<span class="smallcaption"><? echo $s_severity ?></span>
 	</td>
 	<td>
-	<span class="smallcaption">Status</span>
+	<span class="smallcaption"><? echo $s_status ?></span>
 	</td>
 	<td>
 		&nbsp;

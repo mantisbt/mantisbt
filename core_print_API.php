@@ -204,17 +204,18 @@
 	}
 	### --------------------
 	function print_assign_to_option_list( $p_id="" ) {
-		global $g_mantis_user_table;
+		global $g_mantis_user_table, $g_mantis_project_table,
+				$g_mantis_project_user_list_table, $g_project_cookie_val;
 
 		$t_dev = DEVELOPER;
 		$t_man = MANAGER;
 		$t_adm = ADMINISTRATOR;
 
-		$query = "SELECT id, username
+		$query = "SELECT DISTINCT id, username
 			FROM $g_mantis_user_table
-				WHERE 	access_level=$t_dev OR
+				WHERE 	(access_level=$t_dev OR
 						access_level=$t_man OR
-						access_level=$t_adm";
+						access_level=$t_adm)";
 		$result = db_query( $query );
 		$user_count = db_num_rows( $result );
 
@@ -371,10 +372,7 @@
 	}
 	### --------------------
 	function print_enum_string_option_list( $p_enum_string, $p_val=0 ) {
-		global $s_status_enum_string;
-
 		$t_arr = explode_enum_string( $p_enum_string);
-		#$t_arr = explode_enum_string( $s_status_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
@@ -392,9 +390,9 @@
 	}
 	### --------------------
 	function print_project_user_option_list( $p_val=0 ) {
-		global $g_mantis_project_table, $g_access_levels_enum_string;
+		global $g_mantis_project_table, $s_access_levels_enum_string;
 
-		$t_arr = explode_enum_string( $g_access_levels_enum_string );
+		$t_arr = explode_enum_string( $s_access_levels_enum_string );
 		$enum_count = count( $t_arr );
 		for ($i=0;$i<$enum_count;$i++) {
 			$t_elem = explode_enum_arr( $t_arr[$i] );
