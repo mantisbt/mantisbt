@@ -122,7 +122,7 @@
 			# print out a link for each page i.e.
 			#     [ 1 2 3 ]
 			#
-			for ( $i = 0; $i < $t_page_count; $i++ ) {
+			for ( $i = 1; $i <= $t_page_count; $i++ ) {
 				if ( $i == $f_page_number ) {
 					echo $i;
 				} else {
