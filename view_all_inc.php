@@ -298,12 +298,12 @@
 		}
 ?>
 <!-- Repeating bug row -->
-<tr>
+<tr bgcolor="<?php echo $status_color ?>">
 	<!-- Checkbox -->
 <?php
 	if ( access_has_project_level( config_get( 'update_bug_threshold' ) ) ) {
 ?>
-	<td bgcolor="<?php echo $status_color ?>">
+	<td>
 		<input type="checkbox" name="bug_arr[]" value="<?php echo "$v_id" ?>" />
 	</td>
 <?php
@@ -311,7 +311,7 @@
 ?>
 
 	<!-- Pencil shortcut -->
-	<td bgcolor="<?php echo $status_color ?>" class="center">
+	<td class="center">
 	<?php
 		if ( access_has_bug_level( UPDATER, $v_id ) ) {
 			echo '<a href="' . string_get_bug_update_url( $v_id ) . '"><img border="0" src="' . config_get( 'icon_path' ) . 'update.png' . '" /></a>';
@@ -322,7 +322,7 @@
 	</td>
 
 	<!-- Priority -->
-	<td class="center" bgcolor="<?php echo $status_color ?>">
+	<td class="center">
 		<?php
 			if ( ON == config_get( 'show_priority_text' ) ) {
 				print_formatted_priority_string( $v_status, $v_priority );
@@ -333,12 +333,12 @@
 	</td>
 
 	<!-- Bug ID and details link -->
-	<td class="center" bgcolor="<?php echo $status_color ?>">
+	<td class="center">
 		<?php print_bug_link( $v_id ) ?>
 	</td>
 
 	<!-- Bugnote count -->
-	<td class="center" bgcolor="<?php echo $status_color ?>">
+	<td class="center">
 		<?php
 			if ( $bugnote_count > 0 ) {
 				if ( $v_bugnote_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
@@ -355,7 +355,7 @@
 	</td>
 
 	<!-- Category -->
-	<td class="center" bgcolor="<?php echo $status_color ?>">
+	<td class="center">
 		<?php
 			# type project name if viewing 'all projects'
 			if ( ON == config_get( 'show_bug_project_links' ) &&
@@ -369,11 +369,11 @@
 		?>
 	</td>
 	<!-- Severity -->
-	<td class="center" bgcolor="<?php echo $status_color ?>">
+	<td class="center">
 		<?php print_formatted_severity_string( $v_status, $v_severity ) ?>
 	</td>
 	<!-- Status / Handler -->
-	<td class="center" bgcolor="<?php echo $status_color ?>">
+	<td class="center">
 		<?php
 			echo get_enum_element( 'status', $v_status );
 			# print username instead of status
@@ -385,7 +385,7 @@
 		?>
 	</td>
 	<!-- Last Updated -->
-	<td class="center" bgcolor="<?php echo $status_color ?>">
+	<td class="center">
 		<?php
 			if ( $v_last_updated > strtotime( '-'.$t_filter['highlight_changed'].' hours' ) ) {
 				echo '<span class="bold">'.$t_last_updated.'</span>';
@@ -395,7 +395,7 @@
 		?>
 	</td>
 	<!-- Summary -->
-	<td class="left" bgcolor="<?php echo $status_color ?>">
+	<td class="left">
 		<?php
 			echo $v_summary;
 			if ( PRIVATE == $v_view_state ) {
