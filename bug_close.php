@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.19 $
-	# $Author: jfitzell $
-	# $Date: 2002-08-16 10:16:25 $
+	# $Revision: 1.20 $
+	# $Author: prescience $
+	# $Date: 2002-08-19 02:54:09 $
 	#
-	# $Id: bug_close.php,v 1.19 2002-08-16 10:16:25 jfitzell Exp $
+	# $Id: bug_close.php,v 1.20 2002-08-19 02:54:09 prescience Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -24,35 +24,10 @@
 	check_access( UPDATER );
 	check_bug_exists( $f_id );
 
-	#check variables
+	# check variables
 	check_varset( $f_bugnote_text, '' );
 
-	#clean variables
-	$c_id = (integer)$f_id;
-
-	$t_handler_id	= get_current_user_field( 'id' );
-
-	$h_status	= get_bug_field( $f_id, 'status' );
-
-	# Update fields
-	$t_status_val = CLOSED;
-	$query ="UPDATE $g_mantis_bug_table ".
-			"SET status='$t_status_val' ".
-			"WHERE id='$c_id'";
-	$result = db_query($query);
-
-	# log changes
-	history_log_event( $f_id, 'status', $h_status );
-
-	$f_bugnote_text = trim( $f_bugnote_text );
-	# check for blank bugnote
-	if ( !empty( $f_bugnote_text ) ) {
-		# insert bugnote text
-#@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
-		$result = bugnote_add( $f_id, $f_bugnote_text );
-
-		email_close( $f_id );
-	}
+	$result = bug_close( $f_id, $f_bugnote_text );
 
 	$t_redirect_url = 'view_all_bug_page.php';
 	if ( $result ) {

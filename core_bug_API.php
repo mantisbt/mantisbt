@@ -142,6 +142,38 @@
 		return true;
 	}
 	# --------------------
+	function bug_close( $p_bug_id, $p_bugnote_text  ) {
+		global $g_mantis_bug_table;
+
+		#clean variables
+		$c_id = (integer)$p_bug_id;
+
+		$t_handler_id	= get_current_user_field( 'id' );
+
+		$h_status	= get_bug_field( $p_bug_id, 'status' );
+
+		# Update fields
+		$t_status_val = CLOSED;
+		$query ="UPDATE $g_mantis_bug_table ".
+				"SET status='$t_status_val' ".
+				"WHERE id='$c_id'";
+		$result = db_query( $query );
+
+		# log changes
+		history_log_event( $p_bug_id, 'status', $h_status );
+
+		$p_bugnote_text = trim( $p_bugnote_text );
+		# check for blank bugnote
+		if ( !empty( $p_bugnote_text ) ) {
+			# insert bugnote text
+			#@@@ jf - need to add string_prepare_textarea() call or something once that is resolved
+			$result = bugnote_add( $p_bug_id, $p_bugnote_text );
+
+			email_close( $p_bug_id );
+		}
+		return true;
+	}
+	# --------------------
 	function bug_get_field() {
 	}
 	# --------------------
