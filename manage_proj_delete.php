@@ -86,6 +86,9 @@
     		WHERE project_id='$c_project_id'";
     $result = db_query( $query );
 
+	# Delete the records assigning users to this project
+	$result = proj_user_delete_all_users( $f_project_id );
+
     $t_redirect_url = 'manage_proj_menu_page.php';
 	if ( $result ) {
 		print_header_redirect( $t_redirect_url );
