@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_edit_page.php,v 1.58 2003-02-11 09:08:45 jfitzell Exp $
+	# $Id: manage_proj_edit_page.php,v 1.59 2003-02-13 00:42:34 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -125,10 +125,7 @@
 </form>
 </div>
 
-
 <br />
-
-
 
 <!-- PROJECT DELETE -->
 <?php
@@ -142,10 +139,12 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 </div>
 <?php } ?>
 
-
 <br />
 
-
+<?php
+	# reset the class counter
+	helper_alternate_class( 0 );
+?>
 
 <!-- PROJECT CATEGORIES -->
 <div align="center">
@@ -153,15 +152,23 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 
 <!-- Title -->
 <tr>
-	<td class="form-title" colspan="2">
+	<td class="form-title" colspan="3">
 		<?php echo lang_get( 'categories' ) ?>
+	</td>
+</tr>
+<tr class="row-category">
+	<td width="50%">
+		<?php echo lang_get( 'category' ) ?>
+	</td>
+	<td width="25%">
+		<?php echo lang_get( 'assign_to' ) ?>
+	</td>
+	<td class="center" width="25%">
+		<?php echo lang_get( 'actions' ) ?>
 	</td>
 </tr>
 
 <!-- Repeated Info Row -->
-<tr>
-	<td width="100%">
-		<table width="100%" cellspacing="1">
 		<?php
 			$rows = category_get_all_rows( $f_project_id );
 
@@ -177,13 +184,13 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 
 		?>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td width="50%">
+			<td>
 				<?php echo string_display( $t_category ) ?>
 			</td>
-			<td width="25%">
+			<td>
 				<?php echo $t_user_name ?>
 			</td>
-			<td class="center" width="25%">
+			<td class="center">
 				<?php
 					print_bracket_link( 'manage_proj_cat_edit_page.php?project_id=' . $f_project_id . '&amp;category=' . $t2_category , lang_get( 'edit_link' ) );
 					echo '&nbsp;';
@@ -192,13 +199,10 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 			</td>
 		</tr>
 		<?php 	} # end for loop ?>
-		</table>
-	</td>
-</tr>
 
 <!-- Add Category Form -->
 <tr>
-	<td class="left">
+	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_cat_add.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="category" size="32" maxlength="64" />
@@ -209,7 +213,7 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 
 <!-- Copy Categories Form -->
 <tr>
-	<td class="left">
+	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_cat_copy.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<select name="other_project_id">
@@ -222,25 +226,35 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 </tr>
 </table>
 
-
 <br />
 
-
+<?php
+	# reset the class counter
+	helper_alternate_class( 0 );
+?>
 
 <!-- PROJECT VERSIONS -->
 <table class="width75" cellspacing="1">
 
 <!-- Title -->
 <tr>
-	<td class="form-title" colspan="2">
+	<td class="form-title" colspan="3">
 		<?php echo lang_get( 'versions' ) ?>
+	</td>
+</tr>
+<tr class="row-category">
+	<td>
+		<?php echo lang_get( 'version' ) ?>
+	</td>
+	<td class="center">
+		<?php echo lang_get( 'timestamp' ) ?>
+	</td>
+	<td class="center">
+		<?php echo lang_get( 'actions' ) ?>
 	</td>
 </tr>
 
 <!-- Repeated Info Rows -->
-<tr>
-	<td width="100%">
-		<table width="100%">
 		<?php
 			$rows = version_get_all_rows( $f_project_id );
 			foreach ( $rows as $row ) {
@@ -251,13 +265,13 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 
 		?>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td width="50%">
+			<td>
 				<?php echo string_display( $t_version ) ?>
 			</td>
-			<td class="center" width="25%">
+			<td class="center">
 				<?php echo $t_date_order ?>
 			</td>
-			<td class="center" width="25%">
+			<td class="center">
 				<?php
 					print_bracket_link( 'manage_proj_ver_edit_page.php?project_id=' . $f_project_id . '&amp;version=' . $t2_version . '&amp;date_order=' . $t2_date_order, lang_get( 'edit_link' ) );
 					echo '&nbsp;';
@@ -266,13 +280,10 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 			</td>
 		</tr>
 		<?php } # end for loop ?>
-		</table>
-	</td>
-</tr>
 
 <!-- Version Add Form -->
 <tr>
-	<td class="left">
+	<td class="left" colspan="3">
 		<form method="post" action="manage_proj_ver_add.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="version" size="32" maxlength="64" />
@@ -283,6 +294,11 @@ if ( absolute_access_level_check_greater_or_equal ( config_get( 'delete_project_
 </table>
 </div>
 
+
+<?php
+	# reset the class counter
+	helper_alternate_class( 0 );
+?>
 
 <!-- PROJECT CUSTOM FIELD -->
 <?php if( ON == config_get( 'use_experimental_custom_fields' ) ) { ?>
@@ -295,18 +311,21 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 	<div align="center">
 	<table class="width75" cellspacing="1">
 	<tr>
-		<td class="form-title" colspan="2">
+		<td class="form-title" colspan="3">
 			<?php echo lang_get( 'custom_fields_setup' ) ?>
 		</td>
 	</tr>
 	<tr class="row-category">
-		<td width="100%">
+		<td width="50%">
 			<?php echo lang_get( 'custom_fields' ) ?>
 		</td>
+		<td width="25%">
+			<?php echo lang_get( 'custom_field_sequence' ) ?>
+		</td>
+		<td class="center" width="25%">
+			<?php echo lang_get( 'actions' ); ?>
+		</td>
 	</tr>
-	<tr>
-		<td width="100%">
-			<table width="100%" cellspacing="1">
 			<?php
 				$t_custom_fields = custom_field_get_linked_ids( $f_project_id );
 
@@ -314,13 +333,13 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 					$t_desc = custom_field_get_definition( $t_field_id );
 			?>
 			<tr <?php echo helper_alternate_class() ?>>
-				<td width="50%">
+				<td>
 					<?php echo $t_desc['name'] ?>
 				</td>
-				<td width="25%">
+				<td>
 					<?php echo $t_field_id ?>
 				</td>
-				<td class="center" width="25%">
+				<td class="center">
 					<?php
 						# You need global permissions to edit custom field defs
 						if ( absolute_access_level_check_greater_or_equal( config_get( 'manage_custom_fields' ) ) ) {
@@ -332,11 +351,8 @@ if ( access_level_check_greater_or_equal( config_get( 'custom_field_link_thresho
 				</td>
 			</tr>
 			<?php 	} # end for loop ?>
-			</table>
-		</td>
-	</tr>
 	<tr>
-		<td class="left">
+		<td class="left" colspan="3">
 			<form method="post" action="manage_proj_custom_field_add_existing.php">
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<select name="field_id">
@@ -448,7 +464,9 @@ if ( access_level_check_greater_or_equal( config_get( 'project_user_threshold' )
 			<td>
 				<?php echo lang_get( 'access_level' ) ?>
 			</td>
-			<td>&nbsp;</td>
+			<td class="center">
+				<?php echo lang_get( 'actions' ) ?>
+			</td>
 		</tr>
 <?php
 	$t_users = project_get_all_user_rows( $f_project_id );
