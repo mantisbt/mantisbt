@@ -10,11 +10,11 @@
 	# French: Quentin Delance, quentin.delance@insalien.org
 	# French: Roland Meyer, Daniel Coquette
 	# -------------------------------------------------
-	# $Revision: 1.28 $
-	# $Author: prescience $
-	# $Date: 2002-06-12 01:03:18 $
+	# $Revision: 1.29 $
+	# $Author: jctrosset $
+	# $Date: 2002-06-20 14:36:49 $
 	#
-	# $Id: strings_french.txt,v 1.28 2002-06-12 01:03:18 prescience Exp $
+	# $Id: strings_french.txt,v 1.29 2002-06-20 14:36:49 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -77,6 +77,21 @@
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
+	# bug_actiongroup_page.php : mass treatment
+	$s_close_bugs_conf_msg = "Voulez-vous vraiment fermer ces bugs ?";
+	$s_delete_bugs_conf_msg = "Voulez-vous vraiment supprimer ces bugs ?";
+	$s_move_bugs_conf_msg = "Déplacer vers";
+	$s_assign_bugs_conf_msg = "Assigner à";
+	$s_resolve_bugs_conf_msg = "Résolution";
+	$s_priority_bugs_conf_msg = "Priorité des bugs";
+	$s_status_bugs_conf_msg = "Statut des bugs";
+	$s_close_group_bugs_button = "Fermer les bugs" ;
+	$s_delete_group_bugs_button = "Supprimer les bugs" ;
+	$s_move_group_bugs_button = "Déplacer les bugs" ;
+	$s_assign_group_bugs_button = "Assigner les bugs" ;
+	$s_resolve_group_bugs_button = "Résoudre les bugs" ;
+	$s_priority_group_bugs_button = "Màj priorité" ;
+	$s_status_group_bugs_button = "Màj statut" ;
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';

@@ -8,11 +8,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.53 $
-	# $Author: vboctor $
-	# $Date: 2002-06-18 09:11:41 $
+	# $Revision: 1.54 $
+	# $Author: jctrosset $
+	# $Date: 2002-06-20 14:36:49 $
 	#
-	# $Id: strings_english.txt,v 1.53 2002-06-18 09:11:41 vboctor Exp $
+	# $Id: strings_english.txt,v 1.54 2002-06-20 14:36:49 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -75,6 +75,22 @@
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
+
+	# bug_actiongroup_page.php : mass treatment
+	$s_close_bugs_conf_msg = "Are you sure you wish to close these bugs ?";
+	$s_delete_bugs_conf_msg = "Are you sure you wish to delete these bugs ?";
+	$s_move_bugs_conf_msg = "Move bugs to";
+	$s_assign_bugs_conf_msg = "Assign bugs to";
+	$s_resolve_bugs_conf_msg = "Choose bugs resolution";
+	$s_priority_bugs_conf_msg = "Choose bugs priority";
+	$s_status_bugs_conf_msg = "Choose bugs status";
+	$s_close_group_bugs_button = "Close Bugs" ;
+	$s_delete_group_bugs_button = "Delete Bugs" ;
+	$s_move_group_bugs_button = "Move Bugs" ;
+	$s_assign_group_bugs_button = "Assign Bugs" ;
+	$s_resolve_group_bugs_button = "Resolve Bugs" ;
+	$s_priority_group_bugs_button = "Update Priority" ;
+	$s_status_group_bugs_button = "Update Status" ;
 
 	# ERROR strings
 	$MANTIS_ERROR[ERROR_GENERIC]            = 'ERROR: An error occurred during this action.  You may wish to report this error to your local administrator.';
