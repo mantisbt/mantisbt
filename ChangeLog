@@ -23,6 +23,7 @@ Mantis
  * Modified view all filters to remember sort field and order
  * Modified authentication system to no longer require crypt()
  * Modified email formatting to work better with other languages
+ * Modified set project to clear view filters when changing projects
  * Removed email_bug_info_to_address()
 
 08.28.2001  -   0.15.7
