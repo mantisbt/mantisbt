@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup.php,v 1.32 2004-07-24 11:48:33 narcissus Exp $
+	# $Id: bug_actiongroup.php,v 1.33 2004-08-05 10:22:38 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -60,7 +60,7 @@
 			$f_project_id = gpc_get_int( 'project_id' );
 
 			if ( access_has_project_level( config_get( 'report_bug_threshold' ), $f_project_id ) ) {
-				bug_copy( $t_bug_id, $f_project_id );
+				bug_copy( $t_bug_id, $f_project_id, true, true, true, true, true, true );
 			} else {
 				$t_failed_ids[] = $t_bug_id;
 			}
