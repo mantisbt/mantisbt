@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reminder_page.php,v 1.12 2003-02-21 00:32:37 vboctor Exp $
+	# $Id: bug_reminder_page.php,v 1.13 2003-02-26 13:05:40 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -35,19 +35,22 @@
 		<?php echo lang_get( 'bug_reminder' ) ?>
 	</td>
 </tr>
-<tr <?php echo helper_alternate_class() ?>>
+<tr>
 	<td class="category">
 		<?php echo lang_get( 'to' ) ?>
 	</td>
+	<td class="category">
+		<?php echo lang_get( 'reminder' ) ?>
+	</td>
+</tr>
+<tr <?php echo helper_alternate_class() ?>>
 	<td>
 		<select name="to[]" multiple size="10">
 			<?php echo print_project_user_option_list() ?>
 		</select>
 	</td>
-</tr>
-<tr <?php echo helper_alternate_class() ?>>
-	<td class="center" colspan="2">
-		<textarea name="body" cols="80" rows="10" wrap="virtual"></textarea>
+	<td class="center">
+		<textarea name="body" cols="65" rows="10" wrap="virtual"></textarea>
 	</td>
 </tr>
 <tr>

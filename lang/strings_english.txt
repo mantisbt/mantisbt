@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.127 $
-	# $Author: int2str $
-	# $Date: 2003-02-25 15:48:08 $
+	# $Revision: 1.128 $
+	# $Author: vboctor $
+	# $Date: 2003-02-26 13:05:41 $
 	#
-	# $Id: strings_english.txt,v 1.127 2003-02-25 15:48:08 int2str Exp $
+	# $Id: strings_english.txt,v 1.128 2003-02-26 13:05:41 vboctor Exp $
 	###########################################################################
 ?>
 <?php
@@ -397,6 +397,7 @@
 	$s_bug_reminder = 'Send a reminder';
 	$s_reminder_sent_to = 'Reminder sent to';
 	$s_bug_send_button = 'Send';
+	$s_reminder = 'Reminder';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Bug has been successfully updated...';

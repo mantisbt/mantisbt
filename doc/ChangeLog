@@ -7,6 +7,7 @@ Mantis ChangeLog
  * Enhancement: When an enumeration is not found, display @<enumid>@ instead of @null@.
  * Enhancement: Added file type icons next to project documents and bug file attachments.  Also provided a set of standard icons.
  * Enhancement: Added a section to the bug view pages that lists the users that are monitoring the current bug.
+ * Enhancement: Improved the layout of the "Send a reminder" form.
  * Fix: META redirects were not XHTML-compliant
  * Fix: $g_lang_current was not available to custom_strings_inc.php
  * Fix: reduced the executed number of queries throughout the interface
