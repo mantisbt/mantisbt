@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.48 2005-02-26 01:00:38 vboctor Exp $
+	# $Id: view_all_set.php,v 1.49 2005-02-26 01:09:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -169,26 +169,26 @@
 					break ;
 				case CUSTOM_FIELD_DATE_BETWEEN:
 					$t_start = $t_start_date;
-					$t_end = $t_end_date + $t_one_day;
+					$t_end = $t_end_date + $t_one_day - 1;
 					break ;
 				case CUSTOM_FIELD_DATE_ONORBEFORE:
-					$t_end = $t_start_date + $t_one_day;
-					break ;
+					$t_end = $t_start_date + $t_one_day - 1;
+					break;
 				case CUSTOM_FIELD_DATE_BEFORE:
 					$t_end = $t_start_date;
 					break ;
 				case CUSTOM_FIELD_DATE_ON:
 					$t_start = $t_start_date;
-					$t_end = $t_start_date + $t_one_day;
-					break ;
+					$t_end = $t_start_date + $t_one_day - 1;
+					break;
 				case CUSTOM_FIELD_DATE_AFTER:
-					$t_start = $t_start_date + $t_one_day;
+					$t_start = $t_start_date + $t_one_day - 1;
 					$t_end = 2147483647; // Some time in 2038, max value of a signed int.
-					break ;
+					break;
 				case CUSTOM_FIELD_DATE_ONORAFTER:
 					$t_start = $t_start_date;
 					$t_end = 2147483647; // Some time in 2038, max value of a signed int.
-					break ;
+					break;
 				}
 				$f_custom_fields_data[$t_cfid][1] = $t_start;
 				$f_custom_fields_data[$t_cfid][2] = $t_end;
