@@ -8,11 +8,11 @@
 	###########################################################################
 	# Email API
 	# -------------------------------------------------
-	# $Revision: 1.68 $
-	# $Author: jlatour $
-	# $Date: 2002-08-16 07:38:22 $
+	# $Revision: 1.69 $
+	# $Author: vboctor $
+	# $Date: 2002-08-16 08:25:22 $
 	#
-	# $Id: core_email_API.php,v 1.68 2002-08-16 07:38:22 jlatour Exp $
+	# $Id: core_email_API.php,v 1.69 2002-08-16 08:25:22 vboctor Exp $
 	###########################################################################
 	# --------------------
 	# check to see that the format is valid and that the mx record exists
@@ -209,7 +209,7 @@
 				$t_pref_field = 'email_on_' . $p_notify_type;
 				if ( db_field_exists( $t_pref_field, $g_mantis_user_pref_table ) ) {
 					# if the user's notification is on then add to the list
-					$t_notify = get_user_pref_info( $row['user_id'], $p_notify_type );
+					$t_notify = get_user_pref_info( $row['user_id'], $t_pref_field );
 					if ( ON == $t_notify ) {
 						$send_arr[] = $row['email'];
 					}
