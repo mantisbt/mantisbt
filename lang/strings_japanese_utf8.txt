@@ -10,11 +10,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.12 $
+	# $Revision: 1.13 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:08 $
+	# $Date: 2004-11-03 22:04:57 $
 	#
-	# $Id: strings_japanese_utf8.txt,v 1.12 2004-10-15 07:07:08 bigbadger Exp $
+	# $Id: strings_japanese_utf8.txt,v 1.13 2004-11-03 22:04:57 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -42,7 +42,7 @@ $s_print_all_bug_page_link = '一覧印刷';
 $s_csv_export = 'CSV エクスポート';
 $s_login_anonymously = 'ゲストログイン';
 $s_anonymous = '匿名';
-$s_jump_to_bugnotes = 'コメント追加';
+$s_jump_to_bugnotes = 'コメント';
 $s_public_project_msg = '公開プロジェクトです。全ユーザーのアクセスが可能です。';
 $s_private_project_msg = '非公開プロジェクトです。管理者・プロジェクト参加者のアクセスが可能です。';
 $s_access_level_project = 'アクセス権(プロジェクト)';
@@ -72,11 +72,11 @@ $s_bug_relationships = '関連';
 $s_empty_password_sure_msg = 'ユーザーのパスワードが空ですがよろしいですか。';
 $s_empty_password_button = '空のパスワードの使用';
 
-$s_duplicate_of = "複製";
-$s_has_duplicate = "複製所持";
-$s_related_to = "関連番号";
-$s_dependant_on = "親番号";
-$s_blocks = "子番号";
+$s_duplicate_of = "重複";
+$s_has_duplicate = "重複所持";
+$s_related_to = "関連";
+$s_dependant_on = "子番号";
+$s_blocks = "親番号";
 
 $s_new_bug = '新規改善要求';
 $s_bugnote_added = 'コメント追加';
@@ -85,7 +85,7 @@ $s_bugnote_deleted = 'コメント削除';
 $s_summary_updated = '一覧更新';
 $s_description_updated = '詳細更新';
 $s_additional_information_updated = '追加情報更新';
-$s_steps_to_reproduce_updated = '複製の手段を更新しました。';
+$s_steps_to_reproduce_updated = '重複の手段を更新しました。';
 $s_file_added = 'ファイル追加: ';
 $s_file_deleted = 'ファイル削除: ';
 $s_bug_deleted = '改善要求削除';
@@ -148,7 +148,7 @@ $s_legend_opened = 'Opened';
 $s_legend_closed = 'Closed';
 $s_legend_reported = 'Reported';
 $s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
+$s_not_enough_data = '十分なデータがないので、グラフを作成できません。';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = '選択項目のみ表示する';
@@ -257,7 +257,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = '管理者';
 $s_myself = '自身';
-$s_default_access_level = 'Default access level';
+$s_default_access_level = 'デフォルトのアクセス権';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:参照,25:登録,40:編集,55:開発者,70:マネージャ,90:管理者';
@@ -301,27 +301,27 @@ $s_email_notification_title_for_action_bug_reopened = '次の改善要求が差�
 $s_email_notification_title_for_action_bug_deleted = '次の改善要求が削除されました。';
 $s_email_notification_title_for_action_bug_updated = '次の改善要求が更新されました。';
 $s_email_notification_title_for_action_sponsorship_added = '次の改善要求が後援されました。';
-$s_email_notification_title_for_action_sponsorship_updated = '下記改善要求の後援が修正されました。';
-$s_email_notification_title_for_action_sponsorship_deleted = '下記改善要求の後援は世間離れしています。';
+$s_email_notification_title_for_action_sponsorship_updated = '次の改善要求の後援が修正されました。';
+$s_email_notification_title_for_action_sponsorship_deleted = '次の改善要求の後援は世間離れしています。';
 
 $s_email_notification_title_for_action_bugnote_submitted = 'コメントが追加されました。';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "次の改善要求が、改善要求%sの重複改善要求に設定されました。";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "改善要求%sが、次の改善要求の重複改善要求に設定されました。";
+$s_email_notification_title_for_action_related_to_relationship_added = "次の改善要求が、改善要求%sと関連付けられました。";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "次の改善要求が、改善要求%sの親に設定されました。";
+$s_email_notification_title_for_action_blocks_relationship_added = "次の改善要求が、改善要求%sの子に設定されました。";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "次の改善要求が、改善要求%sの重複改善要求から外されました。";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "改善要求%sは、次の改善要求の重複改善要求から外されました。";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "次の改善要求が、改善要求%sの関連から外されました。";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "次の改善要求が、改善要求%sの親から外されました。";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "次の改善要求が、改善要求%sの子から外されました。";
+$s_email_notification_title_for_action_relationship_child_resolved = "関連付けられた改善要求%sが解決されました。";
+$s_email_notification_title_for_action_relationship_child_closed = "関連付けられた改善要求%sが完了しました。";
 
 $s_email_reporter = '登録者';
 $s_email_handler = '担当者';
 $s_email_project = 'プロジェクト';
-$s_email_bug = '要望番号(ID)';
+$s_email_bug = '番号(ID)';
 $s_email_category = 'カテゴリ';
 $s_email_reproducibility = '再現性';
 $s_email_severity = '重要度';
@@ -351,7 +351,7 @@ $s_username = 'ユーザー名';
 $s_realname = '本名';
 $s_email = '電子メール';
 $s_password = 'パスワード';
-$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
+$s_no_password_change = 'パスワードは他のシステムで管理されていますので、ここでは編集できません。';
 $s_confirm_password  = 'パスワード(確認)';
 $s_access_level = 'アクセス権';
 $s_update_user_button = '更新';
@@ -368,7 +368,7 @@ $s_with_minimum_severity = '対象の最小重要度';
 $s_bugnote_order = 'コメントソート順序';
 $s_bugnote_order_asc = '昇順';
 $s_bugnote_order_desc = '降順';
-$s_email_on_new = '新規要望通知メール';
+$s_email_on_new = '新規改善要求通知メール';
 $s_email_on_assigned = '担当者決定通知メール';
 $s_email_on_feedback = 'フィードバック通知メール';
 $s_email_on_resolved = '実装通知メール';
@@ -489,9 +489,9 @@ $s_bug_reminder = 'リマインダーを送る';
 $s_reminder_sent_to = 'リマインダーの送信';
 $s_bug_send_button = '送信';
 $s_reminder = '送信内容';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = '送信内容は、この改善要求のフィードバックを要求する受取人に送られます。';
+$s_reminder_monitor = '受取人は、この改善要求の監視ユーザに追加されます。監視を止める場合は、「監視終了」ボタンを押します。';
+$s_reminder_store = '送信内容は、この改善要求に追加されます。';
 
 # bug_update.php
 $s_bug_updated_msg = '改善要求が正常に更新されました。';
@@ -581,7 +581,7 @@ $s_here = 'Here';
 $s_lost_password_title = "パスワードリセット";
 $s_lost_password_done_title = "パスワードのメッセージを送信しました。";
 $s_lost_password_subject = "パスワードリセット";
-$s_lost_password_info = "あなたの失われたパスワードを回復させるために、アカウントの名前および電子メールアドレスを供給してください。<br /><br />データが有効なアカウントに相当すれば、アカウントのための確認コードを含む電子メールによって特別の URL を送られるでしょう。あなたのパスワードを変更するためにこのリンクに従ってください。";
+$s_lost_password_info = "なくしたパスワードを元に戻すために、アカウントの名前および電子メールアドレスを入力してください。<br /><br />データが有効なアカウントに相当すれば、特別なURLを、アカウントのための確認コードを含む電子メールで送ります。そのリンクに従って、あなたのパスワードを変更してください。";
 $s_lost_password_confirm_hash_OK = "あなたの確認は受理されました。パスワードを更新してください。";
 
 # main_page.php
@@ -609,7 +609,7 @@ $s_filter_button = '表示';
 $s_manage_users_link = 'ユーザー管理';
 $s_manage_projects_link = 'プロジェクト管理';
 $s_manage_custom_field_link = 'カスタム項目管理';
-$s_permissions_summary_report = 'Permissions Report';
+$s_permissions_summary_report = '権限一覧';
 $s_create_new_account_link = 'アカウント作成';
 $s_projects_link = 'プロジェクト';
 $s_documentation_link = 'ドキュメント';
@@ -664,7 +664,7 @@ $s_categories = 'カテゴリ';
 $s_add_category_button = 'カテゴリの追加';
 $s_versions = 'バージョン';
 $s_add_version_button = 'バージョンの追加';
-$s_add_and_edit_version_button = 'Add and Edit Version';
+$s_add_and_edit_version_button = 'バージョンを追加して編集';
 $s_edit_link = '編集';
 $s_actions = '操作';
 $s_version = 'バージョン/ビルド';
@@ -824,7 +824,7 @@ $s_add_user_title = 'プロジェクトへのユーザーを追加';
 $s_add_user_button = '追加';
 $s_project_selection_title = 'プロジェクトを選択';
 $s_remove_link = 'プロジェクトから削除';
-$s_remove_all_link = 'Remove all';
+$s_remove_all_link = '全員削除';
 
 # proj_user_update.php
 $s_updated_user_msg = 'ユーザーが更新されました。';
@@ -869,7 +869,7 @@ $s_signup_captcha_request = '右側上の箱の中で表示されたコードを
 $s_signup_info = 'このフォームの完成および回答の確認は、指定した電子メールアドレスへ確認電子メールが送られるでしょう。<br />確認メールを用いることであなたのアカウントは有効になります。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去されるかもしれません。<br />アカウント確認電子メールを受け取るために有効な電子メールアドレスを指定しなければなりません。';
 $s_signup_title = 'ユーザー登録';
 $s_signup_button = '登録';
-$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
+$s_no_password_request = 'パスワードは他のシステムで管理されています。システム管理者に確認してください。';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = 'サイト設定の編集';
@@ -944,12 +944,12 @@ $s_query_deleted = 'フィルターを削除しました。';
 $s_save_query = '現在のフィルターを保存';
 $s_reset_query = 'フィルターリセット';
 $s_query_name = 'フィルター名';
-$s_query_exists = 'この詳細照会は既に存在するように見えます。';
-$s_query_dupe_name = '別の照会が既にこの名前を持っています。この照会に別の名前を選んでください。';
-$s_query_blank_name = '名前のないフィルターを保管することができません。それを保存する前にこのフィルターに名前を与えてください。';
-$s_query_store_error = 'この紹介の保存に失敗しました。';
+$s_query_exists = 'このフィルターは既に存在するように見えます。';
+$s_query_dupe_name = '別のフィルターが既にこの名前を持っています。別の名前を選んでください。';
+$s_query_blank_name = '名前のないフィルターを保管することができません。保存する前にこのフィルターに名前をつけてください。';
+$s_query_store_error = 'このフィルターの保存に失敗しました。';
 $s_open_queries = 'フィルター管理';
-$s_query_delete_msg = 'この照会を本当に削除しますか?';
+$s_query_delete_msg = 'このフィルターを本当に削除しますか?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = '簡単な表示';
@@ -1022,9 +1022,9 @@ $s_field_delete_button = '項目の削除';
 $s_hide_status = '非表示にするステータス';
 $s_filter_closed = '完了';
 $s_filter_resolved = '解決済';
-$s_hide_closed = '閉じたものを隠す';
-$s_hide_resolved = '解決を隠す';
-$s_and_above = 'And Above';
+$s_hide_closed = '完了を隠す';
+$s_hide_resolved = '解決済を隠す';
+$s_and_above = 'とそれ以上';
 $s_advanced_filters = '高度なフィルター';
 $s_simple_filters = '簡単なフィルター';
 $s_monitored_by = '監視者';
@@ -1056,87 +1056,87 @@ $s_http_auth_realm = "Mantis ログイン";
 $s_bug = "改善要求";
 $s_add_new_relationship = "新規関連";
 $s_add_new_relationship_button = "追加";
-$s_this_bug = "現在の改善要求";
+$s_this_bug = "現在の改善要求の";
 $s_relationship_added = "関連を追加しました。";
 $s_relationship_deleted = "関連を削除しました。";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
+$s_no_relationship = "関連無し";
+$s_relationship_replaced = "関連を差替えました。";
+$s_replace_relationship_button = "差替え";
+$s_replace_relationship_sure_msg = "既に当該改善要求間に関連が設定されています。差し替えてもよろしいですか。?";
+$s_relationship_with_parent = "複製元は";
 $s_delete_relationship_button = "削除";
 $s_delete_relationship_sure_msg = "本当にこの関連を削除しますか?";
-$s_relationship_warning_blocking_bugs_not_resolved = "この改善要求のすべての子はまだ解決か閉じられているとは限りません。";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求のすべての子はまだ解決か閉じられているとは限りません。<br>親改善要求を<b>解決/閉じる</b>前に、子として関連した改善要求はすべて解決されるか閉じられるべきです。";
-$s_create_child_bug_button = "子の作成";
+$s_relationship_warning_blocking_bugs_not_resolved = "この改善要求の子番号に、解決済か完了ではない改善要求があります。";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>注意</b> この改善要求の子番号に、まだ解決済か完了ではない改善要求があります。<br>この改善要求を<b>解決済/完了</b>にする前に、子として関連した改善要求をすべて解決するか完了するべきです。";
+$s_create_child_bug_button = "複製する";
 $s_bug_cloned_to = "改善要求を複製しました";
 $s_bug_created_from = "改善要求を生成しました。 対象";
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_viewing_bug_relationship_graph_title = "関連/依存グラフ";
+$s_relation_graph = "関連グラフ";
+$s_dependency_graph = "依存グラフ";
+$s_vertical = "縦";
+$s_horizontal = "横";
+$s_view_issue = "改善要求を見る";
 
 # Source Control Integration
 $s_checkin = 'チェックイン';
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
-$s_view = 'View';
-$s_issues = 'ISSUES';
-$s_report_issue = 'Report an issue';
-$s_update_issue = 'Update an issue';
-$s_monitor_issue = 'Monitor an issue';
-$s_handle_issue = 'Handle an issue';
-$s_move_issue = 'Move an issue';
-$s_delete_issue = 'Delete an issue';
-$s_reopen_issue = 'Reopen an issue';
-$s_view_private_issues = 'View private issues';
-$s_update_readonly_issues = 'Update readonly issues';
-$s_update_issue_status = 'Update issue status';
-$s_set_view_status = 'Set view status (public vs private)';
-$s_update_view_status = 'Update view status (public vs private)';
-$s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
-$s_notes = 'NOTES';
-$s_add_notes = 'Add notes';
-$s_update_notes = 'Update notes';
-$s_delete_note = 'Delete note';
-$s_view_private_notes = 'View private notes';
-$s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
-$s_download_attachments = 'Download attachments';
-$s_delete_attachments = 'Delete attachments';
-$s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
-$s_save_filters = 'Save filters';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
-$s_create_project = 'Create project';
-$s_delete_project = 'Delete project';
-$s_manage_project = 'Manage project';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
-$s_sponsorships = 'SPONSORSHIPS';
-$s_view_sponsorship_details = 'View sponsorship details';
-$s_view_sponsorship_total = 'View sponsorship total';
-$s_sponsor_issue = 'Sponsor issue';
-$s_assign_sponsored_issue = 'Assign sponsored issue';
-$s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_send_reminders = 'Send reminders';
-$s_add_profiles = 'Add profiles';
-$s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
-$s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_perm_rpt_capability = '機能';
+$s_view = '参照';
+$s_issues = '改善要求';
+$s_report_issue = '改善要求の報告';
+$s_update_issue = '改善要求の更新';
+$s_monitor_issue = '改善要求の監視';
+$s_handle_issue = '改善要求の操作';
+$s_move_issue = '改善要求の移動';
+$s_delete_issue = '改善要求の削除';
+$s_reopen_issue = '改善要求の差戻し';
+$s_view_private_issues = '非公開改善要求の参照';
+$s_update_readonly_issues = '改善要求(リードオンリー)の更新';
+$s_update_issue_status = '改善要求のステータス変更';
+$s_set_view_status = '外部からの参照を設定 (公開 vs 非公開)';
+$s_update_view_status = '外部からの参照を更新 (公開 vs 非公開)';
+$s_show_list_of_users_monitoring_issue = '改善要求を監視しているユーザ一覧の表示';
+$s_notes = 'コメント';
+$s_add_notes = 'コメントの追加';
+$s_update_notes = 'コメントの更新';
+$s_delete_note = 'コメントの削除';
+$s_view_private_notes = '非公開コメントの参照';
+$s_news = 'ニュース';
+$s_view_private_news = '非公開ニュースの参照';
+$s_manage_news = 'ニュースの管理';
+$s_view_list_of_attachments = '添付一覧の参照';
+$s_download_attachments = '添付のダウンロード';
+$s_delete_attachments = '添付の削除';
+$s_upload_issue_attachments = '添付のアップロード';
+$s_filters = 'フィルター';
+$s_save_filters = 'フィルターの保存';
+$s_save_filters_as_shared = 'フィルターを全プロジェクトで保存';
+$s_use_saved_filters = '保存したフィルターの使用';
+$s_create_project = 'プロジェクトの作成';
+$s_delete_project = 'プロジェクトの削除';
+$s_manage_project = 'プロジェクトの管理';
+$s_manage_user_access_to_project = 'プロジェクトにアクセスするユーザの管理';
+$s_automatically_included_in_private_projects = '自動的に非公開プロジェクトに参加';
+$s_project_documents = 'プロジェクトドキュメント';
+$s_view_project_documents = 'プロジェクトドキュメントの参照';
+$s_upload_project_documents = 'プロジェクトドキュメントのアップロード';
+$s_link_custom_fields_to_projects = 'カスタム項目をプロジェクトにリンク';
+$s_sponsorships = '後援';
+$s_view_sponsorship_details = '後援一覧の参照';
+$s_view_sponsorship_total = '総後援数の参照';
+$s_sponsor_issue = '改善要求の後援';
+$s_assign_sponsored_issue = '後援された改善要求のアサイン';
+$s_handle_sponsored_issue = '後援された改善要求の操作';
+$s_others = 'その他';
+$s_see_email_addresses_of_other_users = '他ユーザのメールアドレスを参照';
+$s_send_reminders = 'リマインダーの送信';
+$s_add_profiles = 'プロフィールの追加';
+$s_notify_of_new_user_created = '新規ユーザ作成の通知';
+$s_email_notification = '通知メール';
+$s_status_changed_to = 'ステータス変更';
+$s_email_on_deleted = '削除通知メール';
+$s_email_on_sponsorship_changed = '後援の変更通知メール';
+$s_email_on_relationship_changed = '関連の変更通知メール';
 ?>

@@ -9,11 +9,11 @@
 	# Japanese: Seiji Sogabe, sogabe@alles.or.jp
 	# Japanese: Tadashi Jokagi, elf2000@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.64 $
+	# $Revision: 1.65 $
 	# $Author: bigbadger $
-	# $Date: 2004-10-15 07:07:08 $
+	# $Date: 2004-11-03 22:04:57 $
 	#
-	# $Id: strings_japanese_euc.txt,v 1.64 2004-10-15 07:07:08 bigbadger Exp $
+	# $Id: strings_japanese_euc.txt,v 1.65 2004-11-03 22:04:57 bigbadger Exp $
 	###########################################################################
 ?>
 <?php
@@ -41,7 +41,7 @@ $s_print_all_bug_page_link = '°ìÍ÷°õºþ';
 $s_csv_export = 'CSV ¥¨¥¯¥¹¥Ý¡¼¥È';
 $s_login_anonymously = '¥²¥¹¥È¥í¥°¥¤¥ó';
 $s_anonymous = 'Æ¿Ì¾';
-$s_jump_to_bugnotes = '¥³¥á¥ó¥ÈÄÉ²Ã';
+$s_jump_to_bugnotes = '¥³¥á¥ó¥È';
 $s_public_project_msg = '¸ø³«¥×¥í¥¸¥§¥¯¥È¤Ç¤¹¡£Á´¥æ¡¼¥¶¡¼¤Î¥¢¥¯¥»¥¹¤¬²ÄÇ½¤Ç¤¹¡£';
 $s_private_project_msg = 'Èó¸ø³«¥×¥í¥¸¥§¥¯¥È¤Ç¤¹¡£´ÉÍý¼Ô¡¦¥×¥í¥¸¥§¥¯¥È»²²Ã¼Ô¤Î¥¢¥¯¥»¥¹¤¬²ÄÇ½¤Ç¤¹¡£';
 $s_access_level_project = '¥¢¥¯¥»¥¹¸¢(¥×¥í¥¸¥§¥¯¥È)';
@@ -71,11 +71,11 @@ $s_bug_relationships = '´ØÏ¢';
 $s_empty_password_sure_msg = '¥æ¡¼¥¶¡¼¤Î¥Ñ¥¹¥ï¡¼¥É¤¬¶õ¤Ç¤¹¤¬¤è¤í¤·¤¤¤Ç¤¹¤«¡£';
 $s_empty_password_button = '¶õ¤Î¥Ñ¥¹¥ï¡¼¥É¤Î»ÈÍÑ';
 
-$s_duplicate_of = "Ê£À½";
-$s_has_duplicate = "Ê£À½½ê»ý";
-$s_related_to = "´ØÏ¢ÈÖ¹æ";
-$s_dependant_on = "¿ÆÈÖ¹æ";
-$s_blocks = "»ÒÈÖ¹æ";
+$s_duplicate_of = "½ÅÊ£";
+$s_has_duplicate = "½ÅÊ£½ê»ý";
+$s_related_to = "´ØÏ¢";
+$s_dependant_on = "»ÒÈÖ¹æ";
+$s_blocks = "¿ÆÈÖ¹æ";
 
 $s_new_bug = '¿·µ¬²þÁ±Í×µá';
 $s_bugnote_added = '¥³¥á¥ó¥ÈÄÉ²Ã';
@@ -84,7 +84,7 @@ $s_bugnote_deleted = '¥³¥á¥ó¥Èºï½ü';
 $s_summary_updated = '°ìÍ÷¹¹¿·';
 $s_description_updated = '¾ÜºÙ¹¹¿·';
 $s_additional_information_updated = 'ÄÉ²Ã¾ðÊó¹¹¿·';
-$s_steps_to_reproduce_updated = 'Ê£À½¤Î¼êÃÊ¤ò¹¹¿·¤·¤Þ¤·¤¿¡£';
+$s_steps_to_reproduce_updated = '½ÅÊ£¤Î¼êÃÊ¤ò¹¹¿·¤·¤Þ¤·¤¿¡£';
 $s_file_added = '¥Õ¥¡¥¤¥ëÄÉ²Ã: ';
 $s_file_deleted = '¥Õ¥¡¥¤¥ëºï½ü: ';
 $s_bug_deleted = '²þÁ±Í×µáºï½ü';
@@ -147,7 +147,7 @@ $s_legend_opened = 'Opened';
 $s_legend_closed = 'Closed';
 $s_legend_reported = 'Reported';
 $s_cumulative = 'Cumulative';
-$s_not_enough_data = 'Not enough data to create graph';
+$s_not_enough_data = '½½Ê¬¤Ê¥Ç¡¼¥¿¤¬¤Ê¤¤¤Î¤Ç¡¢¥°¥é¥Õ¤òºîÀ®¤Ç¤­¤Þ¤»¤ó¡£';
 
 # print_all_bug_page.php : display selected bugs
 $s_hide_button = 'ÁªÂò¹àÌÜ¤Î¤ßÉ½¼¨¤¹¤ë';
@@ -256,7 +256,7 @@ $s_prefix_for_deleted_users = 'user';
 
 $s_administrator = '´ÉÍý¼Ô';
 $s_myself = '¼«¿È';
-$s_default_access_level = 'Default access level';
+$s_default_access_level = '¥Ç¥Õ¥©¥ë¥È¤Î¥¢¥¯¥»¥¹¸¢';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:»²¾È,25:ÅÐÏ¿,40:ÊÔ½¸,55:³«È¯¼Ô,70:¥Þ¥Í¡¼¥¸¥ã,90:´ÉÍý¼Ô';
@@ -300,27 +300,27 @@ $s_email_notification_title_for_action_bug_reopened = '¼¡¤Î²þÁ±Í×µá¤¬º¹Ìá¤µ¤ì¤Þ¤
 $s_email_notification_title_for_action_bug_deleted = '¼¡¤Î²þÁ±Í×µá¤¬ºï½ü¤µ¤ì¤Þ¤·¤¿¡£';
 $s_email_notification_title_for_action_bug_updated = '¼¡¤Î²þÁ±Í×µá¤¬¹¹¿·¤µ¤ì¤Þ¤·¤¿¡£';
 $s_email_notification_title_for_action_sponsorship_added = '¼¡¤Î²þÁ±Í×µá¤¬¸å±ç¤µ¤ì¤Þ¤·¤¿¡£';
-$s_email_notification_title_for_action_sponsorship_updated = '²¼µ­²þÁ±Í×µá¤Î¸å±ç¤¬½¤Àµ¤µ¤ì¤Þ¤·¤¿¡£';
-$s_email_notification_title_for_action_sponsorship_deleted = '²¼µ­²þÁ±Í×µá¤Î¸å±ç¤ÏÀ¤´ÖÎ¥¤ì¤·¤Æ¤¤¤Þ¤¹¡£';
+$s_email_notification_title_for_action_sponsorship_updated = '¼¡¤Î²þÁ±Í×µá¤Î¸å±ç¤¬½¤Àµ¤µ¤ì¤Þ¤·¤¿¡£';
+$s_email_notification_title_for_action_sponsorship_deleted = '¼¡¤Î²þÁ±Í×µá¤Î¸å±ç¤ÏÀ¤´ÖÎ¥¤ì¤·¤Æ¤¤¤Þ¤¹¡£';
 
 $s_email_notification_title_for_action_bugnote_submitted = '¥³¥á¥ó¥È¤¬ÄÉ²Ã¤µ¤ì¤Þ¤·¤¿¡£';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = "The following issue has been set as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_added = "The issue %s has been set as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_added = "The following issue has been set as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_added = "The following issue has been set PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_added = "The following issue has been set CHILD OF issue %s.";
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "The following issue has been UNset as DUPLICATE OF issue %s.";
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "The issue %s has been UNset as DUPLICATE OF the following issue.";
-$s_email_notification_title_for_action_related_to_relationship_deleted = "The following issue has been UNset as RELATED TO issue %s.";
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = "The following issue has been UNset PARENT OF issue %s.";
-$s_email_notification_title_for_action_blocks_relationship_deleted = "The following issue has been UNset CHILD OF issue %s.";
-$s_email_notification_title_for_action_relationship_child_resolved = "The RELATED issue %s has been RESOLVED.";
-$s_email_notification_title_for_action_relationship_child_closed = "The RELATED issue %s has been CLOSED.";
+$s_email_notification_title_for_action_duplicate_of_relationship_added = "¼¡¤Î²þÁ±Í×µá¤¬¡¢²þÁ±Í×µá%s¤Î½ÅÊ£²þÁ±Í×µá¤ËÀßÄê¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_has_duplicate_relationship_added = "²þÁ±Í×µá%s¤¬¡¢¼¡¤Î²þÁ±Í×µá¤Î½ÅÊ£²þÁ±Í×µá¤ËÀßÄê¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_related_to_relationship_added = "¼¡¤Î²þÁ±Í×µá¤¬¡¢²þÁ±Í×µá%s¤È´ØÏ¢ÉÕ¤±¤é¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_dependant_on_relationship_added = "¼¡¤Î²þÁ±Í×µá¤¬¡¢²þÁ±Í×µá%s¤Î¿Æ¤ËÀßÄê¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_blocks_relationship_added = "¼¡¤Î²þÁ±Í×µá¤¬¡¢²þÁ±Í×µá%s¤Î»Ò¤ËÀßÄê¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = "¼¡¤Î²þÁ±Í×µá¤¬¡¢²þÁ±Í×µá%s¤Î½ÅÊ£²þÁ±Í×µá¤«¤é³°¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = "²þÁ±Í×µá%s¤Ï¡¢¼¡¤Î²þÁ±Í×µá¤Î½ÅÊ£²þÁ±Í×µá¤«¤é³°¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_related_to_relationship_deleted = "¼¡¤Î²þÁ±Í×µá¤¬¡¢²þÁ±Í×µá%s¤Î´ØÏ¢¤«¤é³°¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = "¼¡¤Î²þÁ±Í×µá¤¬¡¢²þÁ±Í×µá%s¤Î¿Æ¤«¤é³°¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_blocks_relationship_deleted = "¼¡¤Î²þÁ±Í×µá¤¬¡¢²þÁ±Í×µá%s¤Î»Ò¤«¤é³°¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_relationship_child_resolved = "´ØÏ¢ÉÕ¤±¤é¤ì¤¿²þÁ±Í×µá%s¤¬²ò·è¤µ¤ì¤Þ¤·¤¿¡£";
+$s_email_notification_title_for_action_relationship_child_closed = "´ØÏ¢ÉÕ¤±¤é¤ì¤¿²þÁ±Í×µá%s¤¬´°Î»¤·¤Þ¤·¤¿¡£";
 
 $s_email_reporter = 'ÅÐÏ¿¼Ô';
 $s_email_handler = 'Ã´Åö¼Ô';
 $s_email_project = '¥×¥í¥¸¥§¥¯¥È';
-$s_email_bug = 'Í×Ë¾ÈÖ¹æ(ID)';
+$s_email_bug = 'ÈÖ¹æ(ID)';
 $s_email_category = '¥«¥Æ¥´¥ê';
 $s_email_reproducibility = 'ºÆ¸½À­';
 $s_email_severity = '½ÅÍ×ÅÙ';
@@ -350,7 +350,7 @@ $s_username = '¥æ¡¼¥¶¡¼Ì¾';
 $s_realname = 'ËÜÌ¾';
 $s_email = 'ÅÅ»Ò¥á¡¼¥ë';
 $s_password = '¥Ñ¥¹¥ï¡¼¥É';
-$s_no_password_change = 'The password is controlled by another system, hence cannot be edited here.';
+$s_no_password_change = '¥Ñ¥¹¥ï¡¼¥É¤ÏÂ¾¤Î¥·¥¹¥Æ¥à¤Ç´ÉÍý¤µ¤ì¤Æ¤¤¤Þ¤¹¤Î¤Ç¡¢¤³¤³¤Ç¤ÏÊÔ½¸¤Ç¤­¤Þ¤»¤ó¡£';
 $s_confirm_password  = '¥Ñ¥¹¥ï¡¼¥É(³ÎÇ§)';
 $s_access_level = '¥¢¥¯¥»¥¹¸¢';
 $s_update_user_button = '¹¹¿·';
@@ -367,7 +367,7 @@ $s_with_minimum_severity = 'ÂÐ¾Ý¤ÎºÇ¾®½ÅÍ×ÅÙ';
 $s_bugnote_order = '¥³¥á¥ó¥È¥½¡¼¥È½ç½ø';
 $s_bugnote_order_asc = '¾º½ç';
 $s_bugnote_order_desc = '¹ß½ç';
-$s_email_on_new = '¿·µ¬Í×Ë¾ÄÌÃÎ¥á¡¼¥ë';
+$s_email_on_new = '¿·µ¬²þÁ±Í×µáÄÌÃÎ¥á¡¼¥ë';
 $s_email_on_assigned = 'Ã´Åö¼Ô·èÄêÄÌÃÎ¥á¡¼¥ë';
 $s_email_on_feedback = '¥Õ¥£¡¼¥É¥Ð¥Ã¥¯ÄÌÃÎ¥á¡¼¥ë';
 $s_email_on_resolved = '¼ÂÁõÄÌÃÎ¥á¡¼¥ë';
@@ -488,9 +488,9 @@ $s_bug_reminder = '¥ê¥Þ¥¤¥ó¥À¡¼¤òÁ÷¤ë';
 $s_reminder_sent_to = '¥ê¥Þ¥¤¥ó¥À¡¼¤ÎÁ÷¿®';
 $s_bug_send_button = 'Á÷¿®';
 $s_reminder = 'Á÷¿®ÆâÍÆ';
-$s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
-$s_reminder_monitor = 'These recipients will also begin monitoring the issue. They can unsubscribe using the Unmonitor button.';
-$s_reminder_store = 'This note will be stored with the issue.';
+$s_reminder_explain = 'Á÷¿®ÆâÍÆ¤Ï¡¢¤³¤Î²þÁ±Í×µá¤Î¥Õ¥£¡¼¥É¥Ð¥Ã¥¯¤òÍ×µá¤¹¤ë¼õ¼è¿Í¤ËÁ÷¤é¤ì¤Þ¤¹¡£';
+$s_reminder_monitor = '¼õ¼è¿Í¤Ï¡¢¤³¤Î²þÁ±Í×µá¤Î´Æ»ë¥æ¡¼¥¶¤ËÄÉ²Ã¤µ¤ì¤Þ¤¹¡£´Æ»ë¤ò»ß¤á¤ë¾ì¹ç¤Ï¡¢¡Ö´Æ»ë½ªÎ»¡×¥Ü¥¿¥ó¤ò²¡¤·¤Þ¤¹¡£';
+$s_reminder_store = 'Á÷¿®ÆâÍÆ¤Ï¡¢¤³¤Î²þÁ±Í×µá¤ËÄÉ²Ã¤µ¤ì¤Þ¤¹¡£';
 
 # bug_update.php
 $s_bug_updated_msg = '²þÁ±Í×µá¤¬Àµ¾ï¤Ë¹¹¿·¤µ¤ì¤Þ¤·¤¿¡£';
@@ -580,7 +580,7 @@ $s_here = 'Here';
 $s_lost_password_title = "¥Ñ¥¹¥ï¡¼¥É¥ê¥»¥Ã¥È";
 $s_lost_password_done_title = "¥Ñ¥¹¥ï¡¼¥É¤Î¥á¥Ã¥»¡¼¥¸¤òÁ÷¿®¤·¤Þ¤·¤¿¡£";
 $s_lost_password_subject = "¥Ñ¥¹¥ï¡¼¥É¥ê¥»¥Ã¥È";
-$s_lost_password_info = "¤¢¤Ê¤¿¤Î¼º¤ï¤ì¤¿¥Ñ¥¹¥ï¡¼¥É¤ò²óÉü¤µ¤»¤ë¤¿¤á¤Ë¡¢¥¢¥«¥¦¥ó¥È¤ÎÌ¾Á°¤ª¤è¤ÓÅÅ»Ò¥á¡¼¥ë¥¢¥É¥ì¥¹¤ò¶¡µë¤·¤Æ¤¯¤À¤µ¤¤¡£<br /><br />¥Ç¡¼¥¿¤¬Í­¸ú¤Ê¥¢¥«¥¦¥ó¥È¤ËÁêÅö¤¹¤ì¤Ð¡¢¥¢¥«¥¦¥ó¥È¤Î¤¿¤á¤Î³ÎÇ§¥³¡¼¥É¤ò´Þ¤àÅÅ»Ò¥á¡¼¥ë¤Ë¤è¤Ã¤ÆÆÃÊÌ¤Î URL ¤òÁ÷¤é¤ì¤ë¤Ç¤·¤ç¤¦¡£¤¢¤Ê¤¿¤Î¥Ñ¥¹¥ï¡¼¥É¤òÊÑ¹¹¤¹¤ë¤¿¤á¤Ë¤³¤Î¥ê¥ó¥¯¤Ë½¾¤Ã¤Æ¤¯¤À¤µ¤¤¡£";
+$s_lost_password_info = "¤Ê¤¯¤·¤¿¥Ñ¥¹¥ï¡¼¥É¤ò¸µ¤ËÌá¤¹¤¿¤á¤Ë¡¢¥¢¥«¥¦¥ó¥È¤ÎÌ¾Á°¤ª¤è¤ÓÅÅ»Ò¥á¡¼¥ë¥¢¥É¥ì¥¹¤òÆþÎÏ¤·¤Æ¤¯¤À¤µ¤¤¡£<br /><br />¥Ç¡¼¥¿¤¬Í­¸ú¤Ê¥¢¥«¥¦¥ó¥È¤ËÁêÅö¤¹¤ì¤Ð¡¢ÆÃÊÌ¤ÊURL¤ò¡¢¥¢¥«¥¦¥ó¥È¤Î¤¿¤á¤Î³ÎÇ§¥³¡¼¥É¤ò´Þ¤àÅÅ»Ò¥á¡¼¥ë¤ÇÁ÷¤ê¤Þ¤¹¡£¤½¤Î¥ê¥ó¥¯¤Ë½¾¤Ã¤Æ¡¢¤¢¤Ê¤¿¤Î¥Ñ¥¹¥ï¡¼¥É¤òÊÑ¹¹¤·¤Æ¤¯¤À¤µ¤¤¡£";
 $s_lost_password_confirm_hash_OK = "¤¢¤Ê¤¿¤Î³ÎÇ§¤Ï¼õÍý¤µ¤ì¤Þ¤·¤¿¡£¥Ñ¥¹¥ï¡¼¥É¤ò¹¹¿·¤·¤Æ¤¯¤À¤µ¤¤¡£";
 
 # main_page.php
@@ -608,7 +608,7 @@ $s_filter_button = 'É½¼¨';
 $s_manage_users_link = '¥æ¡¼¥¶¡¼´ÉÍý';
 $s_manage_projects_link = '¥×¥í¥¸¥§¥¯¥È´ÉÍý';
 $s_manage_custom_field_link = '¥«¥¹¥¿¥à¹àÌÜ´ÉÍý';
-$s_permissions_summary_report = 'Permissions Report';
+$s_permissions_summary_report = '¸¢¸Â°ìÍ÷';
 $s_create_new_account_link = '¥¢¥«¥¦¥ó¥ÈºîÀ®';
 $s_projects_link = '¥×¥í¥¸¥§¥¯¥È';
 $s_documentation_link = '¥É¥­¥å¥á¥ó¥È';
@@ -663,7 +663,7 @@ $s_categories = '¥«¥Æ¥´¥ê';
 $s_add_category_button = '¥«¥Æ¥´¥ê¤ÎÄÉ²Ã';
 $s_versions = '¥Ð¡¼¥¸¥ç¥ó';
 $s_add_version_button = '¥Ð¡¼¥¸¥ç¥ó¤ÎÄÉ²Ã';
-$s_add_and_edit_version_button = 'Add and Edit Version';
+$s_add_and_edit_version_button = '¥Ð¡¼¥¸¥ç¥ó¤òÄÉ²Ã¤·¤ÆÊÔ½¸';
 $s_edit_link = 'ÊÔ½¸';
 $s_actions = 'Áàºî';
 $s_version = '¥Ð¡¼¥¸¥ç¥ó/¥Ó¥ë¥É';
@@ -823,7 +823,7 @@ $s_add_user_title = '¥×¥í¥¸¥§¥¯¥È¤Ø¤Î¥æ¡¼¥¶¡¼¤òÄÉ²Ã';
 $s_add_user_button = 'ÄÉ²Ã';
 $s_project_selection_title = '¥×¥í¥¸¥§¥¯¥È¤òÁªÂò';
 $s_remove_link = '¥×¥í¥¸¥§¥¯¥È¤«¤éºï½ü';
-$s_remove_all_link = 'Remove all';
+$s_remove_all_link = 'Á´°÷ºï½ü';
 
 # proj_user_update.php
 $s_updated_user_msg = '¥æ¡¼¥¶¡¼¤¬¹¹¿·¤µ¤ì¤Þ¤·¤¿¡£';
@@ -868,7 +868,7 @@ $s_signup_captcha_request = '±¦Â¦¾å¤ÎÈ¢¤ÎÃæ¤ÇÉ½¼¨¤µ¤ì¤¿¥³¡¼¥É¤òÆþÎÏ¤·¤Þ¤¹¡£';
 $s_signup_info = '¤³¤Î¥Õ¥©¡¼¥à¤Î´°À®¤ª¤è¤Ó²óÅú¤Î³ÎÇ§¤Ï¡¢»ØÄê¤·¤¿ÅÅ»Ò¥á¡¼¥ë¥¢¥É¥ì¥¹¤Ø³ÎÇ§ÅÅ»Ò¥á¡¼¥ë¤¬Á÷¤é¤ì¤ë¤Ç¤·¤ç¤¦¡£<br />³ÎÇ§¥á¡¼¥ë¤òÍÑ¤¤¤ë¤³¤È¤Ç¤¢¤Ê¤¿¤Î¥¢¥«¥¦¥ó¥È¤ÏÍ­¸ú¤Ë¤Ê¤ê¤Þ¤¹¡£¤â¤·¤¢¤Ê¤¿¤¬ 7 Æü°ÊÆâ¤Ë³ÎÇ§¤ò¹Ô¤ï¤Ê¤±¤ì¤Ð¡¢¤³¤Î¿·¤·¤¤ÅÐÏ¿¥¢¥«¥¦¥ó¥È¤Ï½üµî¤µ¤ì¤ë¤«¤â¤·¤ì¤Þ¤»¤ó¡£<br />¥¢¥«¥¦¥ó¥È³ÎÇ§ÅÅ»Ò¥á¡¼¥ë¤ò¼õ¤±¼è¤ë¤¿¤á¤ËÍ­¸ú¤ÊÅÅ»Ò¥á¡¼¥ë¥¢¥É¥ì¥¹¤ò»ØÄê¤·¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£';
 $s_signup_title = '¥æ¡¼¥¶¡¼ÅÐÏ¿';
 $s_signup_button = 'ÅÐÏ¿';
-$s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
+$s_no_password_request = '¥Ñ¥¹¥ï¡¼¥É¤ÏÂ¾¤Î¥·¥¹¥Æ¥à¤Ç´ÉÍý¤µ¤ì¤Æ¤¤¤Þ¤¹¡£¥·¥¹¥Æ¥à´ÉÍý¼Ô¤Ë³ÎÇ§¤·¤Æ¤¯¤À¤µ¤¤¡£';
 
 # site_settings_edit_page.php
 $s_edit_site_settings_title = '¥µ¥¤¥ÈÀßÄê¤ÎÊÔ½¸';
@@ -943,12 +943,12 @@ $s_query_deleted = '¥Õ¥£¥ë¥¿¡¼¤òºï½ü¤·¤Þ¤·¤¿¡£';
 $s_save_query = '¸½ºß¤Î¥Õ¥£¥ë¥¿¡¼¤òÊÝÂ¸';
 $s_reset_query = '¥Õ¥£¥ë¥¿¡¼¥ê¥»¥Ã¥È';
 $s_query_name = '¥Õ¥£¥ë¥¿¡¼Ì¾';
-$s_query_exists = '¤³¤Î¾ÜºÙ¾È²ñ¤Ï´û¤ËÂ¸ºß¤¹¤ë¤è¤¦¤Ë¸«¤¨¤Þ¤¹¡£';
-$s_query_dupe_name = 'ÊÌ¤Î¾È²ñ¤¬´û¤Ë¤³¤ÎÌ¾Á°¤ò»ý¤Ã¤Æ¤¤¤Þ¤¹¡£¤³¤Î¾È²ñ¤ËÊÌ¤ÎÌ¾Á°¤òÁª¤ó¤Ç¤¯¤À¤µ¤¤¡£';
-$s_query_blank_name = 'Ì¾Á°¤Î¤Ê¤¤¥Õ¥£¥ë¥¿¡¼¤òÊÝ´É¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤»¤ó¡£¤½¤ì¤òÊÝÂ¸¤¹¤ëÁ°¤Ë¤³¤Î¥Õ¥£¥ë¥¿¡¼¤ËÌ¾Á°¤òÍ¿¤¨¤Æ¤¯¤À¤µ¤¤¡£';
-$s_query_store_error = '¤³¤Î¾Ò²ð¤ÎÊÝÂ¸¤Ë¼ºÇÔ¤·¤Þ¤·¤¿¡£';
+$s_query_exists = '¤³¤Î¥Õ¥£¥ë¥¿¡¼¤Ï´û¤ËÂ¸ºß¤¹¤ë¤è¤¦¤Ë¸«¤¨¤Þ¤¹¡£';
+$s_query_dupe_name = 'ÊÌ¤Î¥Õ¥£¥ë¥¿¡¼¤¬´û¤Ë¤³¤ÎÌ¾Á°¤ò»ý¤Ã¤Æ¤¤¤Þ¤¹¡£ÊÌ¤ÎÌ¾Á°¤òÁª¤ó¤Ç¤¯¤À¤µ¤¤¡£';
+$s_query_blank_name = 'Ì¾Á°¤Î¤Ê¤¤¥Õ¥£¥ë¥¿¡¼¤òÊÝ´É¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤»¤ó¡£ÊÝÂ¸¤¹¤ëÁ°¤Ë¤³¤Î¥Õ¥£¥ë¥¿¡¼¤ËÌ¾Á°¤ò¤Ä¤±¤Æ¤¯¤À¤µ¤¤¡£';
+$s_query_store_error = '¤³¤Î¥Õ¥£¥ë¥¿¡¼¤ÎÊÝÂ¸¤Ë¼ºÇÔ¤·¤Þ¤·¤¿¡£';
 $s_open_queries = '¥Õ¥£¥ë¥¿¡¼´ÉÍý';
-$s_query_delete_msg = '¤³¤Î¾È²ñ¤òËÜÅö¤Ëºï½ü¤·¤Þ¤¹¤«?';
+$s_query_delete_msg = '¤³¤Î¥Õ¥£¥ë¥¿¡¼¤òËÜÅö¤Ëºï½ü¤·¤Þ¤¹¤«?';
 
 # view_bug_advanced_page.php
 $s_view_simple_link = '´ÊÃ±¤ÊÉ½¼¨';
@@ -1021,9 +1021,9 @@ $s_field_delete_button = '¹àÌÜ¤Îºï½ü';
 $s_hide_status = 'ÈóÉ½¼¨¤Ë¤¹¤ë¥¹¥Æ¡¼¥¿¥¹';
 $s_filter_closed = '´°Î»';
 $s_filter_resolved = '²ò·èºÑ';
-$s_hide_closed = 'ÊÄ¤¸¤¿¤â¤Î¤ò±£¤¹';
-$s_hide_resolved = '²ò·è¤ò±£¤¹';
-$s_and_above = 'And Above';
+$s_hide_closed = '´°Î»¤ò±£¤¹';
+$s_hide_resolved = '²ò·èºÑ¤ò±£¤¹';
+$s_and_above = '¤È¤½¤ì°Ê¾å';
 $s_advanced_filters = '¹âÅÙ¤Ê¥Õ¥£¥ë¥¿¡¼';
 $s_simple_filters = '´ÊÃ±¤Ê¥Õ¥£¥ë¥¿¡¼';
 $s_monitored_by = '´Æ»ë¼Ô';
@@ -1055,87 +1055,87 @@ $s_http_auth_realm = "Mantis ¥í¥°¥¤¥ó";
 $s_bug = "²þÁ±Í×µá";
 $s_add_new_relationship = "¿·µ¬´ØÏ¢";
 $s_add_new_relationship_button = "ÄÉ²Ã";
-$s_this_bug = "¸½ºß¤Î²þÁ±Í×µá";
+$s_this_bug = "¸½ºß¤Î²þÁ±Í×µá¤Î";
 $s_relationship_added = "´ØÏ¢¤òÄÉ²Ã¤·¤Þ¤·¤¿¡£";
 $s_relationship_deleted = "´ØÏ¢¤òºï½ü¤·¤Þ¤·¤¿¡£";
-$s_no_relationship = "no relationship";
-$s_relationship_replaced = "Relationship replaced";
-$s_replace_relationship_button = "Replace";
-$s_replace_relationship_sure_msg = "There is already a relationship between the two issues. Are you sure you want to replace it?";
-$s_relationship_with_parent = "Relationship with the parent issue";
+$s_no_relationship = "´ØÏ¢Ìµ¤·";
+$s_relationship_replaced = "´ØÏ¢¤òº¹ÂØ¤¨¤Þ¤·¤¿¡£";
+$s_replace_relationship_button = "º¹ÂØ¤¨";
+$s_replace_relationship_sure_msg = "´û¤ËÅö³º²þÁ±Í×µá´Ö¤Ë´ØÏ¢¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Þ¤¹¡£º¹¤·ÂØ¤¨¤Æ¤â¤è¤í¤·¤¤¤Ç¤¹¤«¡£?";
+$s_relationship_with_parent = "Ê£À½¸µ¤Ï";
 $s_delete_relationship_button = "ºï½ü";
 $s_delete_relationship_sure_msg = "ËÜÅö¤Ë¤³¤Î´ØÏ¢¤òºï½ü¤·¤Þ¤¹¤«?";
-$s_relationship_warning_blocking_bugs_not_resolved = "¤³¤Î²þÁ±Í×µá¤Î¤¹¤Ù¤Æ¤Î»Ò¤Ï¤Þ¤À²ò·è¤«ÊÄ¤¸¤é¤ì¤Æ¤¤¤ë¤È¤Ï¸Â¤ê¤Þ¤»¤ó¡£";
-$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>Ãí°Õ</b> ¤³¤Î²þÁ±Í×µá¤Î¤¹¤Ù¤Æ¤Î»Ò¤Ï¤Þ¤À²ò·è¤«ÊÄ¤¸¤é¤ì¤Æ¤¤¤ë¤È¤Ï¸Â¤ê¤Þ¤»¤ó¡£<br>¿Æ²þÁ±Í×µá¤ò<b>²ò·è/ÊÄ¤¸¤ë</b>Á°¤Ë¡¢»Ò¤È¤·¤Æ´ØÏ¢¤·¤¿²þÁ±Í×µá¤Ï¤¹¤Ù¤Æ²ò·è¤µ¤ì¤ë¤«ÊÄ¤¸¤é¤ì¤ë¤Ù¤­¤Ç¤¹¡£";
-$s_create_child_bug_button = "Create Clone";
+$s_relationship_warning_blocking_bugs_not_resolved = "¤³¤Î²þÁ±Í×µá¤Î»ÒÈÖ¹æ¤Ë¡¢²ò·èºÑ¤«´°Î»¤Ç¤Ï¤Ê¤¤²þÁ±Í×µá¤¬¤¢¤ê¤Þ¤¹¡£";
+$s_relationship_warning_blocking_bugs_not_resolved_2 = "<b>Ãí°Õ</b> ¤³¤Î²þÁ±Í×µá¤Î»ÒÈÖ¹æ¤Ë¡¢¤Þ¤À²ò·èºÑ¤«´°Î»¤Ç¤Ï¤Ê¤¤²þÁ±Í×µá¤¬¤¢¤ê¤Þ¤¹¡£<br>¤³¤Î²þÁ±Í×µá¤ò<b>²ò·èºÑ/´°Î»</b>¤Ë¤¹¤ëÁ°¤Ë¡¢»Ò¤È¤·¤Æ´ØÏ¢¤·¤¿²þÁ±Í×µá¤ò¤¹¤Ù¤Æ²ò·è¤¹¤ë¤«´°Î»¤¹¤ë¤Ù¤­¤Ç¤¹¡£";
+$s_create_child_bug_button = "Ê£À½¤¹¤ë";
 $s_bug_cloned_to = "²þÁ±Í×µá¤òÊ£À½¤·¤Þ¤·¤¿";
 $s_bug_created_from = "²þÁ±Í×µá¤òÀ¸À®¤·¤Þ¤·¤¿¡£ ÂÐ¾Ý";
 # Relationship Graphs
-$s_viewing_bug_relationship_graph_title = "Relationship Graph";
-$s_relation_graph = "Relation Graph";
-$s_dependency_graph = "Dependency Graph";
-$s_vertical = "Vertical";
-$s_horizontal = "Horizontal";
-$s_view_issue = "View Issue";
+$s_viewing_bug_relationship_graph_title = "´ØÏ¢/°ÍÂ¸¥°¥é¥Õ";
+$s_relation_graph = "´ØÏ¢¥°¥é¥Õ";
+$s_dependency_graph = "°ÍÂ¸¥°¥é¥Õ";
+$s_vertical = "½Ä";
+$s_horizontal = "²£";
+$s_view_issue = "²þÁ±Í×µá¤ò¸«¤ë";
 
 # Source Control Integration
 $s_checkin = '¥Á¥§¥Ã¥¯¥¤¥ó';
 # Pemissions report
-$s_perm_rpt_capability = 'Capability';
-$s_view = 'View';
-$s_issues = 'ISSUES';
-$s_report_issue = 'Report an issue';
-$s_update_issue = 'Update an issue';
-$s_monitor_issue = 'Monitor an issue';
-$s_handle_issue = 'Handle an issue';
-$s_move_issue = 'Move an issue';
-$s_delete_issue = 'Delete an issue';
-$s_reopen_issue = 'Reopen an issue';
-$s_view_private_issues = 'View private issues';
-$s_update_readonly_issues = 'Update readonly issues';
-$s_update_issue_status = 'Update issue status';
-$s_set_view_status = 'Set view status (public vs private)';
-$s_update_view_status = 'Update view status (public vs private)';
-$s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
-$s_notes = 'NOTES';
-$s_add_notes = 'Add notes';
-$s_update_notes = 'Update notes';
-$s_delete_note = 'Delete note';
-$s_view_private_notes = 'View private notes';
-$s_news = 'NEWS';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
-$s_view_list_of_attachments = 'View list of attachments';
-$s_download_attachments = 'Download attachments';
-$s_delete_attachments = 'Delete attachments';
-$s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
-$s_save_filters = 'Save filters';
-$s_save_filters_as_shared = 'Save filters as shared';
-$s_use_saved_filters = 'Use saved filters';
-$s_create_project = 'Create project';
-$s_delete_project = 'Delete project';
-$s_manage_project = 'Manage project';
-$s_manage_user_access_to_project = 'Manage user access to a project';
-$s_automatically_included_in_private_projects = 'Automatically included in private projects';
-$s_project_documents = 'PROJECT DOCUMENTS';
-$s_view_project_documents = 'View project documents';
-$s_upload_project_documents = 'Upload project documents';
-$s_link_custom_fields_to_projects = 'Link custom fields to projects';
-$s_sponsorships = 'SPONSORSHIPS';
-$s_view_sponsorship_details = 'View sponsorship details';
-$s_view_sponsorship_total = 'View sponsorship total';
-$s_sponsor_issue = 'Sponsor issue';
-$s_assign_sponsored_issue = 'Assign sponsored issue';
-$s_handle_sponsored_issue = 'Handle sponsored issue';
-$s_others = 'OTHERS';
-$s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_send_reminders = 'Send reminders';
-$s_add_profiles = 'Add profiles';
-$s_notify_of_new_user_created = 'Notify of new user created';
-$s_email_notification = 'EMAIL NOTIFICATION';
-$s_status_changed_to = 'Status changes to';
-$s_email_on_deleted = 'Email on Deleted';
-$s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
-$s_email_on_relationship_changed = 'Email on Relationship changed';
+$s_perm_rpt_capability = 'µ¡Ç½';
+$s_view = '»²¾È';
+$s_issues = '²þÁ±Í×µá';
+$s_report_issue = '²þÁ±Í×µá¤ÎÊó¹ð';
+$s_update_issue = '²þÁ±Í×µá¤Î¹¹¿·';
+$s_monitor_issue = '²þÁ±Í×µá¤Î´Æ»ë';
+$s_handle_issue = '²þÁ±Í×µá¤ÎÁàºî';
+$s_move_issue = '²þÁ±Í×µá¤Î°ÜÆ°';
+$s_delete_issue = '²þÁ±Í×µá¤Îºï½ü';
+$s_reopen_issue = '²þÁ±Í×µá¤Îº¹Ìá¤·';
+$s_view_private_issues = 'Èó¸ø³«²þÁ±Í×µá¤Î»²¾È';
+$s_update_readonly_issues = '²þÁ±Í×µá(¥ê¡¼¥É¥ª¥ó¥ê¡¼)¤Î¹¹¿·';
+$s_update_issue_status = '²þÁ±Í×µá¤Î¥¹¥Æ¡¼¥¿¥¹ÊÑ¹¹';
+$s_set_view_status = '³°Éô¤«¤é¤Î»²¾È¤òÀßÄê (¸ø³« vs Èó¸ø³«)';
+$s_update_view_status = '³°Éô¤«¤é¤Î»²¾È¤ò¹¹¿· (¸ø³« vs Èó¸ø³«)';
+$s_show_list_of_users_monitoring_issue = '²þÁ±Í×µá¤ò´Æ»ë¤·¤Æ¤¤¤ë¥æ¡¼¥¶°ìÍ÷¤ÎÉ½¼¨';
+$s_notes = '¥³¥á¥ó¥È';
+$s_add_notes = '¥³¥á¥ó¥È¤ÎÄÉ²Ã';
+$s_update_notes = '¥³¥á¥ó¥È¤Î¹¹¿·';
+$s_delete_note = '¥³¥á¥ó¥È¤Îºï½ü';
+$s_view_private_notes = 'Èó¸ø³«¥³¥á¥ó¥È¤Î»²¾È';
+$s_news = '¥Ë¥å¡¼¥¹';
+$s_view_private_news = 'Èó¸ø³«¥Ë¥å¡¼¥¹¤Î»²¾È';
+$s_manage_news = '¥Ë¥å¡¼¥¹¤Î´ÉÍý';
+$s_view_list_of_attachments = 'ÅºÉÕ°ìÍ÷¤Î»²¾È';
+$s_download_attachments = 'ÅºÉÕ¤Î¥À¥¦¥ó¥í¡¼¥É';
+$s_delete_attachments = 'ÅºÉÕ¤Îºï½ü';
+$s_upload_issue_attachments = 'ÅºÉÕ¤Î¥¢¥Ã¥×¥í¡¼¥É';
+$s_filters = '¥Õ¥£¥ë¥¿¡¼';
+$s_save_filters = '¥Õ¥£¥ë¥¿¡¼¤ÎÊÝÂ¸';
+$s_save_filters_as_shared = '¥Õ¥£¥ë¥¿¡¼¤òÁ´¥×¥í¥¸¥§¥¯¥È¤ÇÊÝÂ¸';
+$s_use_saved_filters = 'ÊÝÂ¸¤·¤¿¥Õ¥£¥ë¥¿¡¼¤Î»ÈÍÑ';
+$s_create_project = '¥×¥í¥¸¥§¥¯¥È¤ÎºîÀ®';
+$s_delete_project = '¥×¥í¥¸¥§¥¯¥È¤Îºï½ü';
+$s_manage_project = '¥×¥í¥¸¥§¥¯¥È¤Î´ÉÍý';
+$s_manage_user_access_to_project = '¥×¥í¥¸¥§¥¯¥È¤Ë¥¢¥¯¥»¥¹¤¹¤ë¥æ¡¼¥¶¤Î´ÉÍý';
+$s_automatically_included_in_private_projects = '¼«Æ°Åª¤ËÈó¸ø³«¥×¥í¥¸¥§¥¯¥È¤Ë»²²Ã';
+$s_project_documents = '¥×¥í¥¸¥§¥¯¥È¥É¥­¥å¥á¥ó¥È';
+$s_view_project_documents = '¥×¥í¥¸¥§¥¯¥È¥É¥­¥å¥á¥ó¥È¤Î»²¾È';
+$s_upload_project_documents = '¥×¥í¥¸¥§¥¯¥È¥É¥­¥å¥á¥ó¥È¤Î¥¢¥Ã¥×¥í¡¼¥É';
+$s_link_custom_fields_to_projects = '¥«¥¹¥¿¥à¹àÌÜ¤ò¥×¥í¥¸¥§¥¯¥È¤Ë¥ê¥ó¥¯';
+$s_sponsorships = '¸å±ç';
+$s_view_sponsorship_details = '¸å±ç°ìÍ÷¤Î»²¾È';
+$s_view_sponsorship_total = 'Áí¸å±ç¿ô¤Î»²¾È';
+$s_sponsor_issue = '²þÁ±Í×µá¤Î¸å±ç';
+$s_assign_sponsored_issue = '¸å±ç¤µ¤ì¤¿²þÁ±Í×µá¤Î¥¢¥µ¥¤¥ó';
+$s_handle_sponsored_issue = '¸å±ç¤µ¤ì¤¿²þÁ±Í×µá¤ÎÁàºî';
+$s_others = '¤½¤ÎÂ¾';
+$s_see_email_addresses_of_other_users = 'Â¾¥æ¡¼¥¶¤Î¥á¡¼¥ë¥¢¥É¥ì¥¹¤ò»²¾È';
+$s_send_reminders = '¥ê¥Þ¥¤¥ó¥À¡¼¤ÎÁ÷¿®';
+$s_add_profiles = '¥×¥í¥Õ¥£¡¼¥ë¤ÎÄÉ²Ã';
+$s_notify_of_new_user_created = '¿·µ¬¥æ¡¼¥¶ºîÀ®¤ÎÄÌÃÎ';
+$s_email_notification = 'ÄÌÃÎ¥á¡¼¥ë';
+$s_status_changed_to = '¥¹¥Æ¡¼¥¿¥¹ÊÑ¹¹';
+$s_email_on_deleted = 'ºï½üÄÌÃÎ¥á¡¼¥ë';
+$s_email_on_sponsorship_changed = '¸å±ç¤ÎÊÑ¹¹ÄÌÃÎ¥á¡¼¥ë';
+$s_email_on_relationship_changed = '´ØÏ¢¤ÎÊÑ¹¹ÄÌÃÎ¥á¡¼¥ë';
 ?>
