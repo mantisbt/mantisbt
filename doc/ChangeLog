@@ -1,27 +1,39 @@
 Mantis ChangeLog
 
-2003.02.??  -  0.18.0a1
+2003.02.16  -  0.18.0a1
+
+ This release contains literally hundreds, if not thousands, of new features.
+ Upcoming releases will hopefully follow a *much* quicker release cycle now
+ that we are back on track.
+
+ This marks the first release of Mantis with a completely refactored API
+ library.  All the API files are in the core/ directory should you wish to
+ examine them in more detail.  The process of cleaning up the APIs and making
+ sure all the pages use them is still not quite complete, but we are getting
+ close
+
+ Listing every individual change would be unproductive but the key ones are
+ listed or summarized below:
 
  * Behaviour change: made 'normal' the default priority for new bugs
- * Behaviour change: Merged default/config_inc1.php and default/config_inc2.php in config_defaults_inc.php
+ * Behaviour change: Merged default/config_inc1.php and default/config_inc2.php in config_inc.php in the main directory
  * Behaviour change: Removed f_ prefix from POST and GET field names
  * Changed config options (*_color): now use $g_status_colors['<status color>'] array. For example, $g_new_color is replaced with $g_status_colors['new'].
  * Changed config options (default_advanced_report, default_advanced_view, default_advanced_update): now ON/OFF instead of BOTH/SIMPLE/ADVANCED (they never worked the other way anyway)
- * Changed config options (login_method): CRYPT_FULL_SALT is now deprecated and should be replaced with CRYPT or MD5
+ * Changed config options (login_method): the constant CRYPT_FULL_SALT is now deprecated and should be replaced with CRYPT, which behaves exactly the same, or MD5
  * Code cleanup: added validation checks for all inputs that are passed on to database queries
  * Code cleanup: db_prepare_string(), db_prepare_int(), and db_prepare_bool() to be called on data before it goes into the database
  * Code cleanup: modified input-checked variables to be prefixed by $c_
  * Code cleanup: Moved admin_* scripts into admin/ directory
  * Code cleanup: Moved core_* files into core/ directory, which can be moved out of the webroot
  * Code cleanup: Replaced '/' with DIRECTORY_SEPARATOR throughout to make things cross-platform
- * Code cleanup: Reworked code formatting for $c_ variables
  * Code cleanup: Rewrote large parts of Mantis to improve security
  * Copyright transfered by Kenzaburo Ito to 'Mantis Group', consisting of all of Mantis developers, as of 2002. All files have had their copyright notices changed to reflect this.
  * Enhancement: added a button to copy categories from another project, in addition to the current 'copy to'
  * Enhancement: added a direct link, with a small icon, on each bug row, so that users on a selected project can switch directly to the update bug page (simple/advanced depending on user preferences).
- * Enhancement: added a remove link next to the edit link in the project categories and project versions to all deleting without going into edit.
+ * Enhancement: added a remove link next to the edit link in the project categories and project versions to allow deleting without going into edit.
  * Enhancement: added announcement flag to news.  Announcements are always kept at the top of the news page.
- * Enhancement: added file upload setting information to admin_check.php
+ * Enhancement: admin_check script moved to admin/check.php and rewritten to be more complete
  * Enhancement: added javascript autofocus to the login page
  * Enhancement: added javascript autofocus to the report bug pages
  * Enhancement: added links from the counters of bugs reported and assigned to logged in user to their corresponding filtered view
@@ -32,31 +44,31 @@ Mantis ChangeLog
  * Enhancement: Administrators can now modify the preferences for all users that are not protected.  Protected users need to be unprotected first.
  * Enhancement: allow managers to update project information, change project user list, add/edit/delete categories and versions
  * Enhancement: auto-assign bugs when a default user is specified for the category and a bug is not pre-assigned
- * Enhancement: automatic defaults for $g_path and $g_absolute_path rather than dummy values.  This should avoid the need of redefining these values in custom_config_inc.php and also support multiple domains.
- * Enhancement: basic private bug functionality
- * Enhancement: bug history
+ * Enhancement: automatic defaults for $g_path and $g_absolute_path rather than dummy values.  This should avoid the need of redefining these values in config_inc.php and also support multiple domains.
+ * Enhancement: bugs can be marked private
+ * Enhancement: bug change history
  * Enhancement: caching of much DB data to prevent multiple requests for the same information
  * Enhancement: Cleaned up file uploading with better error messages and hiding file upload when it's disabled in PHP
- * Enhancement: confirm bug deletion before doing it
+ * Enhancement: confirm a lot of destructive actions before performing them
  * Enhancement: email_api.php sends a content-type header in emails
  * Enhancement: enter a bugnote when you update a bug
  * Enhancement: html_api.php prints a META-tag defining the charset
  * Enhancement: improved the behaviour of sorting the tables of users and projects in 'Manage'
  * Enhancement: in the view all bugs page, when 'All Projects' is selected, the project name is now displayed in smaller font over the category
  * Enhancement: include tabindexes in the form fields on the bug reporting pages
- * Enhancement: look in environment variable MANTIS_CONFIG to find a config file to load after custom_config_inc.php (useful for vhosts)
+ * Enhancement: look in environment variable MANTIS_CONFIG to find a config file to load after config_inc.php (useful for vhosts)
  * Enhancement: make br, hr, li, img, selected, checked, and other html elements XHTML compliant
  * Enhancement: more visual graph pages in summary_page.php. Caution, old versions of JPGraph may cause problems, use v1.6.3 or above if you can.
  * Enhancement: news can now be made private
- * Enhancement: offer multiple bug actions in view_all_bug_page.php
+ * Enhancement: offer multiple group bug actions in view_all_bug_page.php
  * Enhancement: private bugnotes. At present these bugnotes are omitted from sent emails, a future release will put private bugnotes in emails to those who should see them.
  * Enhancement: provide a notification when a bug is deleted
  * Enhancement: reminder feature to let you send a message about a bug to a list of users
  * Enhancement: reworked BCTimer class to be more useful for debugging
  * Enhancement: send Bug History in e-mails
- * Enhancement: support auto-generation of SQL files.
+ * Enhancement: added new database upgrade system to allow you to easily apply database schema changes when  upgrading.
  * Enhancement: support uploading attachments to an FTP server (so now there is DISK, DATABASE, and FTP).  Recently uploaded/downloaded attachments are cached at the web server.
- * Enhancement: User names are now auto-generated for accounts that no longer exists.  The user names are prefixed by the string (prefix_for_deleted_users).
+ * Enhancement: User names are now auto-generated for accounts that no longer exists.  The user names are prefixed by the string given in the config option prefix_for_deleted_users.
  * Enhancement: user_api.php, login.php and login_page.php send the user back to the referring page after login
  * Enhancement: warn the user if his browser does not support cookies, either because it's too old or because it was disabled
  * Enhancement: you can add multiple categories in one step. This is done by separating category names by the pipe character '|'.  For example to add category 'A' and 'B', add 'A|B'.
@@ -67,7 +79,6 @@ Mantis ChangeLog
  * Fix: all string files use single quotes instead of double quotes
  * Fix: bug that let you change your username to that of an already existing user
  * Fix: bug where upload paths with \'s in them kept getting escaped over and over
- * Fix: db_result() and db_fetch_array() return data with slashes stripped
  * Fix: defects with updating project categories and versions
  * Fix: deleting the current project no longer gives an error (#2808)
  * Fix: email address validation should be much more RFC 822 compliant (#2819)
@@ -77,7 +88,7 @@ Mantis ChangeLog
  * Fix: print_api.php escapes double quotes in text fields, instead of replacing them by single quotes
  * Fix: problem deleting bugnotes
  * Fix: problem in core_API.php where constants were used before declaration
- * Fix: problem in email_api.php where an email could be send to none at all, in rare cases
+ * Fix: problem in email_api.php where an email could be sent to nobody at all, in rare cases
  * Fix: problem in manage_proj_update.php which gave a warning when editing projects with empty upload file paths
  * Fix: problem with ambiguous column names in queries when using the text search or applying filters
  * Fix: problem with print_assign_to_option_list() not selecting the current user
@@ -95,18 +106,7 @@ Mantis ChangeLog
  * Languages: removed HTML entities from all localization files
  * Languages: Updated comments in all localization files to point to correct file names.
  * Languages: Updated Hungarian, Russian, Romanian, German, Danish, Norwegian and Dutch localizations.
- * New API (access_api.php)
- * New API (authentication_api.php)
- * New API (bug_api.php)
- * New API (bugnote_api.php)
- * New API (config_api.php): handle obtaining config information
- * New API (current_user_api.php)
- * New API (error_api.php): with a new pretty error handler and error_string() to obtain internationalized error strings
- * New API (gpc_api.php): functions to safely get POST and GET data and set cookies
- * New API (graph_api.php): replace functionality of summary_graph_functions.php
- * New API (lang_api.php)
- * New API (php_api.php): functions that provide compatibility for php functions we can't use
- * New API (string_api.php)
+ * New APIs: see all the files in core/ ending with _api
  * New config option (allow_blank_email): allow blank email addresses (ie none specified)
  * New config option (allow_reporter_close): allow reporters to close the bugs they reported
  * New config option (allow_reporter_reopen): allows reporters to reopen closed bugs that they reported if they are unhappy with the resolution (defaults to ON) (see issue #2108)
@@ -154,7 +154,6 @@ Mantis ChangeLog
  * Removed config option (html_tags): see new option html_valid_tags
  * Removed config option (register_globals): just check the actual value of the PHP config variable
  * Removed config option (php): this variable containing the file extensions (php3 of php) was only used in config, so do a search and replace if you need it
- * Removed file: proj_user_api.php
  * Renamed config option: allow_bug_delete_access_level to delete_bug_threshold
  * Renamed config option: bug_move_access_level to move_bug_threshold
  * Renamed file: manage_create_new_user.php to manage_user_create.php
