@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: history_api.php,v 1.5 2002-08-29 14:26:45 vboctor Exp $
+	# $Id: history_api.php,v 1.6 2002-08-29 19:26:13 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,16 +16,16 @@
 	# --------------------
 	# log the changes (old / new value are supplied to reduce db access)
 	# events should be logged *after* the modification
-	function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_new_value, $p_user_id = 0 ) {
+	function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_new_value, $p_user_id = null ) {
 		# Only log events that change the value
 		if ( $p_new_value != $p_old_value ) {
-			$c_field_name	= string_prepare_text( $p_field_name );
-			$c_old_value	= string_prepare_text( $p_old_value );
-			$c_new_value	= string_prepare_text( $p_new_value );
-			$c_bug_id = db_prepare_int( $p_bug_id );
-			$c_user_id = db_prepare_int( $p_user_id );
-			if ( 0 == $c_user_id ) {
-				$c_user_id	= current_user_get_field( 'id' );
+			$c_field_name	= db_prepare_string( $p_field_name );
+			$c_old_value	= db_prepare_string( $p_old_value );
+			$c_new_value	= db_prepare_string( $p_new_value );
+			$c_bug_id		= db_prepare_int( $p_bug_id );
+			$c_user_id		= db_prepare_int( $p_user_id );
+			if ( null === $c_user_id ) {
+				$c_user_id	= auth_get_current_user_id();
 			};
 			
 			$query = "INSERT INTO " . config_get( 'mantis_bug_history_table' ) . "
@@ -46,11 +46,11 @@
 	# events should be logged *after* the modification
 	# These are special case logs (new bug, deleted bugnote, etc.)
 	function history_log_event_special( $p_bug_id, $p_type, $p_optional='',  $p_optional2='' ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-		$c_type = db_prepare_int( $p_type );
-		$c_optional = string_prepare_text( $p_optional );
-		$c_optional2 = string_prepare_text( $p_optional2 );
-		$t_user_id = current_user_get_field( 'id' );
+		$c_bug_id		= db_prepare_int( $p_bug_id );
+		$c_type			= db_prepare_int( $p_type );
+		$c_optional		= db_prepare_string( $p_optional );
+		$c_optional2	= db_prepare_string( $p_optional2 );
+		$t_user_id		= auth_get_current_user_id();
 
 		$query = "INSERT INTO " . config_get( 'mantis_bug_history_table' ) . "
 				( user_id, bug_id, date_modified, type, old_value, new_value )
