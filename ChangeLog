@@ -1,5 +1,16 @@
 Mantis
 
+09.xx.2001  -   0.15.8
+
+ * Fixed problem with $g_manage_cookie not being unset on logout
+ * Fixed error in db_upgrade.sql ( nul; should be null; )
+ * Added Russian localization
+ * Updated Italian localization
+
+08.28.2001  -   0.15.7
+
+ * Fixed problem with account prefs not being updated.
+
 08.27.2001  -   0.15.6
 
  * Fixed potential security hole with file uploads.  Users can potentially
@@ -66,7 +77,7 @@ Mantis
  * Fixed bug where news could not be edited to be Sitewide.
  * Fixed private projects being viewable by non-privileged users.
  * Modified set_project.php3 to redirect back to the same page if a view_all* page or the summary page.
- * Added wrap="virtual" tags to <textarea> for old browser users.
+ * Added wrap="virtual" tags to < textarea> for old browser users.
 
 07.05.2001  -   0.15.1
 
@@ -325,7 +336,7 @@ Mantis
 
  * Added projection and eta to be passed as hidden info by the simple update
    page.
- * Fixed a missing </TD> tag on the report bug pages.  Messed up old 4.x unix
+ * Fixed a missing < /TD> tag on the report bug pages.  Messed up old 4.x unix
    Netscape.
  * Modified the priority to print counts of all bugs.
  * Wrapped the global cookie _val variables in if (isset()) blocks.  Seemed to
