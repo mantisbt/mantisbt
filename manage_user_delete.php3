@@ -8,7 +8,6 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-
 	check_access( ADMINISTRATOR );
 
 	### delete account

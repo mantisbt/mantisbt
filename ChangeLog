@@ -8,7 +8,12 @@ Mantis
  * Fixed redirect problem when bug report not correctly filled out.
  * Added commented out examples for alternate links in css_inc.php
  * Added closing option tags.
- * Email prefs do not display when $g_enable_email_notification is 0
+ * Email prefs do not display when $g_enable_email_notification is 0.
+ * Added danish localization.
+ * Fixed where updaters could assign to themselves.
+ * Fixed where updaters could delete bugs.
+ * Fixed where search result numbers correctly displayed.
+ * Raised access required to ADMINISTRATOR for many manage_* pages.
 
 08.19.2001  -   0.15.4
 

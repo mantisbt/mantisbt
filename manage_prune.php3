@@ -8,7 +8,7 @@
 <? login_cookie_check() ?>
 <?
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-	check_access( MANAGER );
+	check_access( ADMINISTRATOR );
 
 	### Delete the users who have never logged in and are older than 1 week
 	$days_old = 7;
