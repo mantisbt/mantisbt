@@ -16,6 +16,7 @@
 	setcookie( $g_view_reported_cookie );
 	setcookie( $g_view_assigned_cookie );
 	setcookie( $g_view_unassigned_cookie );
+	setcookie( $g_manage_cookie );
 
 	db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 ?>
