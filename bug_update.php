@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.73 2004-10-04 16:53:12 thraxisp Exp $
+	# $Id: bug_update.php,v 1.74 2004-10-05 14:59:08 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: proj_doc_delete.php,v 1.20 2004-02-29 09:07:45 vboctor Exp $
+	# $Id: proj_doc_delete.php,v 1.21 2004-10-05 14:59:08 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -21,32 +21,8 @@
 
 	$f_file_id = gpc_get_int( 'file_id' );
 
-	$c_file_id = (integer)$f_file_id;
-
-	helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ),
-							 lang_get( 'file_delete_button' ) );
-
-	if ( DISK == $g_file_upload_method ) {
-		# grab the file name
-		$query = "SELECT diskfile
-				FROM $g_mantis_project_file_table
-				WHERE id='$c_file_id'";
-		$result = db_query( $query );
-		$t_diskfile = db_result( $result );
-
-		# in windows replace with system("del $t_diskfile");
-		chmod( $t_diskfile, 0775 );
-		unlink( $t_diskfile );
-	}
-
-	$query = "DELETE FROM $g_mantis_project_file_table
-			WHERE id='$c_file_id'";
-	$result = db_query( $query );
+	file_delete( $f_file_id, 'project' );
 
 	$t_redirect_url = 'proj_doc_page.php';
-	if ( $result ) {
-		print_header_redirect( $t_redirect_url );
-	} else {
-		print_mantis_error( ERROR_GENERIC );
-	}
+	print_header_redirect( $t_redirect_url );
 ?>

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.44 2004-01-11 07:16:06 vboctor Exp $
+	# $Id: bug_file_add.php,v 1.45 2004-10-05 14:59:08 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -33,9 +33,7 @@
 		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
 	}
 
-	$t_upload_method	= config_get( 'file_upload_method' );
-
-	file_add( $f_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'] );
+	file_add( $f_bug_id, $f_file['tmp_name'], $f_file['name'], $f_file['type'], 'bug' );
 
 	# Determine which view page to redirect back to.
 	$t_redirect_url = string_get_bug_view_url( $f_bug_id );

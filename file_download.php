@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.28 2004-06-16 04:28:29 robertjf Exp $
+	# $Id: file_download.php,v 1.29 2004-10-05 14:59:08 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -88,7 +88,7 @@
 				readfile( $v_diskfile );
 			} else {
 				$ftp = file_ftp_connect();
-				file_ftp_get ( $ftp, $v_diskfile, $v_filename );
+				file_ftp_get ( $ftp, $v_diskfile, $v_diskfile );
 				file_ftp_disconnect( $ftp );
 				readfile( $v_diskfile );
 			}
