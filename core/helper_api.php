@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.26 2002-11-24 20:43:49 jfitzell Exp $
+	# $Id: helper_api.php,v 1.27 2002-11-27 02:42:37 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -282,13 +282,13 @@
 		trigger_error( $p_string, NOTICE );
 	}
 
-	function is_blank( $var ) {
-		if ( ! isset( $var ) ) {
-			return TRUE;
+	# --------------------
+	# Return true if the parameter is an empty string or a string
+	#  containing only whitespace, false otherwise
+	function is_blank( $p_var ) {
+		if ( strlen( trim( $p_var ) ) == 0 ) {
+			return true;
 		}
-		if ( strlen( trim( $var ) ) == 0 ) {
-			return TRUE;
-		}
-		return FALSE;
+		return false;
 	}
 ?>
