@@ -6,6 +6,13 @@
 
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
+	# -------------------------------------------------
+	# $Revision: 1.25 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:12:07 $
+	#
+	# $Id: strings_spanish.txt,v 1.25 2002-06-06 17:12:07 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -47,7 +54,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -93,12 +100,12 @@
 
 	# Email Strings
 	$s_new_account_subject = 'BugTracker - Nuevo Usuario!';
-	$s_new_account_greeting = 'Por favor, tome nota de la informacion que necesitara para conectarse.\n\n';
+	$s_new_account_greeting = 'Por favor, tome nota de la informacion que necesitara para conectarse.' . "\n\n";
 	$s_new_account_url = 'La URL es: ';
 	$s_new_account_username = 'Usuario: ';
 	$s_new_account_password = 'Clave: ';
-	$s_new_account_message = 'Luego de conectarse al sitio, por favor cambie su clave.  Su clave sera almacenada en forma encriptada.\n\n';
-	$s_new_account_do_not_reply = 'Por favor, no conteste a este mensaje.\n';
+	$s_new_account_message = 'Luego de conectarse al sitio, por favor cambie su clave.  Su clave sera almacenada en forma encriptada.' . "\n\n";
+	$s_new_account_do_not_reply = 'Por favor, no conteste a este mensaje.' . "\n";
 
     $s_reset_request_msg = 'Ocurrio un pedido para resetear su clave.';
     $s_account_name_msg = 'Su nombre de cuenta es';

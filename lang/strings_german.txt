@@ -8,6 +8,13 @@
 	# German: Heiko Gierer, gierer@rittershaus.de
 	# German: Stefan Meier, Stefan.Meier@cimsource.com
 	# German: Matthias Bauer, mantis-de@moeffju.de
+	# -------------------------------------------------
+	# $Revision: 1.28 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:11:45 $
+	#
+	# $Id: strings_german.txt,v 1.28 2002-06-06 17:11:45 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -49,7 +56,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -95,12 +102,12 @@
 
 	# Email Strings
 	$s_new_account_subject = 'Ihr neues Benutzerkonto';
-	$s_new_account_greeting = 'Willkommen zum Bugtracker.  Hier sind die zur Anmeldung erforderlichen Informationen.\n\n';
+	$s_new_account_greeting = 'Willkommen zum Bugtracker.  Hier sind die zur Anmeldung erforderlichen Informationen.' . "\n\n";
 	$s_new_account_url = 'Sie können sich hier anmelden: ';
 	$s_new_account_username = 'Benutzername: ';
 	$s_new_account_password = 'Passwort: ';
-	$s_new_account_message = 'ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.\n\n';
-	$s_new_account_do_not_reply = 'Bitte antworten Sie nicht auf diese Nachricht.\n';
+	$s_new_account_message = 'ändern Sie bitte Ihr Passwort nach der Anmeldung. Ihr Passwort wird verschlüsselt gespeichert. Es kann nicht dechiffriert werden. Wenn Sie Ihr Passwort vergessen, muss es zurückgesetzt werden.' . "\n\n";
+	$s_new_account_do_not_reply = 'Bitte antworten Sie nicht auf diese Nachricht.' . "\n";
 
 	$s_reset_request_msg = 'Es gab eine Anfrage, Ihr Passwort zurückzusetzen'.
 	$s_account_name_msg = 'Ihr Benutzername ist';

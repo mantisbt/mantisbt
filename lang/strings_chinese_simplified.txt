@@ -5,6 +5,13 @@
 	# See the README and LICENSE files for details
 
 	# Chinese_Simplified: Kai-Zheng Cheng, neek@sina.com
+	# -------------------------------------------------
+	# $Revision: 1.3 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:11:43 $
+	#
+	# $Id: strings_chinese_simplified.txt,v 1.3 2002-06-06 17:11:43 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -46,7 +53,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 

@@ -7,6 +7,13 @@
 	# Italian: Luca Pescatore, l.pescatore@network.it
 	#          Marco Vassura,  m.vassura@itools.it
 	#          Stefano Mazzocchi, stefano@apache.org
+	# -------------------------------------------------
+	# $Revision: 1.24 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:11:45 $
+	#
+	# $Id: strings_italian.txt,v 1.24 2002-06-06 17:11:45 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -48,7 +55,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -94,12 +101,12 @@
 
 	# Email Strings
 	$s_new_account_subject = 'Il tuo nuovo account utente';
-	$s_new_account_greeting = 'Benvenuto nel software di gestione problematiche e progetti di N&S. Queste sono le informazioni necessarie per utilizzare il servizio\n\n';
+	$s_new_account_greeting = 'Benvenuto nel software di gestione problematiche e progetti di N&S. Queste sono le informazioni necessarie per utilizzare il servizio' . "\n\n";
 	$s_new_account_url = 'Puoi entrare nel sito da: ';
 	$s_new_account_username = 'Nome Utente: ';
 	$s_new_account_password = 'Password: ';
-	$s_new_account_message = 'Dopo il login si prega di cambiare la password. Da notare che la password e\' salvata in maniera cifrata e neppure lo staff non puo\' recuperarla. Nel caso la si dimentichi, e\' necessario resettarla.\n\n';
-	$s_new_account_do_not_reply = 'Non rispondere a questo messaggio.\n';
+	$s_new_account_message = 'Dopo il login si prega di cambiare la password. Da notare che la password e\' salvata in maniera cifrata e neppure lo staff non puo\' recuperarla. Nel caso la si dimentichi, e\' necessario resettarla.' . "\n\n";
+	$s_new_account_do_not_reply = 'Non rispondere a questo messaggio.' . "\n";
 
 	$s_reset_request_msg = 'E\' stato richiesto un reset della tua password'.
 	$s_account_name_msg = 'Il Nome del tuo Account e\'';

@@ -5,6 +5,13 @@
 	# See the README and LICENSE files for details
 
 	# Russian (WindowsKOI8-R): Alexander Leschinsky aml@lair.pp.ru
+	# -------------------------------------------------
+	# $Revision: 1.13 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:12:06 $
+	#
+	# $Id: strings_russian_koi8.txt,v 1.13 2002-06-06 17:12:06 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -46,7 +53,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -92,12 +99,12 @@
 
 	# Email Strings
 	$s_new_account_subject = 'Ваш новый бюджет';
-	$s_new_account_greeting = 'Приветствуем, добро пожаловать в систему Bugtracker. Информация, которая необходима Вам для прохождения авторизации.\n\n';
+	$s_new_account_greeting = 'Приветствуем, добро пожаловать в систему Bugtracker. Информация, которая необходима Вам для прохождения авторизации.' . "\n\n";
 	$s_new_account_url = 'Вы можете зайти в систему по следующему адресу: ';
 	$s_new_account_username = 'Пользователь: ';
 	$s_new_account_password = 'Пароль: ';
-	$s_new_account_message = 'После первого входа в систему, пожалуйста, смените пароль.  Также следует учитывать, что при сохранении пароля используется одностороннее шифрование. Персонал не сможет Вам напомнить пароль.  Если Вы забудете пароль, Вам можно будет его только сменить.\n\n';
-	$s_new_account_do_not_reply = 'Это сообщение создано автоматически, не нужно на него отвечать.\n';
+	$s_new_account_message = 'После первого входа в систему, пожалуйста, смените пароль.  Также следует учитывать, что при сохранении пароля используется одностороннее шифрование. Персонал не сможет Вам напомнить пароль.  Если Вы забудете пароль, Вам можно будет его только сменить.' . "\n\n";
+	$s_new_account_do_not_reply = 'Это сообщение создано автоматически, не нужно на него отвечать.' . "\n";
 
 	$s_reset_request_msg = 'Был получен запрос на изменение пароля';
 	$s_account_name_msg = 'Ваше имя пользователя:';
@@ -225,7 +232,7 @@
 
 	# bug_monitor.php
 	$s_monitor_bug_button = "Следить";
-	$s_unmonitor_bug_button = "Не следить"; 
+	$s_unmonitor_bug_button = "Не следить";
 
 	# bug_file_add.php
 	$s_file_upload_msg = 'Файл загружен';

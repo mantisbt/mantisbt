@@ -6,6 +6,13 @@
 
 	# Czech: Pavel Loupal, Pavel.Loupal@seznam.cz
 	# Code page: ISO-8259-2
+	# -------------------------------------------------
+	# $Revision: 1.14 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:11:43 $
+	#
+	# $Id: strings_czech.txt,v 1.14 2002-06-06 17:11:43 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -47,7 +54,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -93,12 +100,12 @@
 
 	# Email Strings
 	$s_new_account_subject = 'Vá± nový uµivatelský úèet';
-	$s_new_account_greeting = 'Vítejte do bugtrackeru. Zde jsou informace nutné k pøihlá±ení\n\n';
+	$s_new_account_greeting = 'Vítejte do bugtrackeru. Zde jsou informace nutné k pøihlá±ení' . "\n\n";
 	$s_new_account_url = 'Mùµete se pøihlásit zde: ';
 	$s_new_account_username = 'Uµivatelské jméno: ';
 	$s_new_account_password = 'Heslo: ';
-	$s_new_account_message = 'Po pøihlá±ení na tuto stránku si prosím zmìòtì Va±e heslo.  Va±e heslo je uloµeno jednosmìrným za±ifrováním. Správci nemohou vidìt Va±e heslo.  Pokud zapomenete heslo, bude muset být znovu nastaveno.\n\n';
-	$s_new_account_do_not_reply = 'Neodpovídejte na tuto zprávu.\n';
+	$s_new_account_message = 'Po pøihlá±ení na tuto stránku si prosím zmìòtì Va±e heslo.  Va±e heslo je uloµeno jednosmìrným za±ifrováním. Správci nemohou vidìt Va±e heslo.  Pokud zapomenete heslo, bude muset být znovu nastaveno.' . "\n\n";
+	$s_new_account_do_not_reply = 'Neodpovídejte na tuto zprávu.' . "\n";
 
 	$s_reset_request_msg = '®ádost o vynulování Va±eho hesla byla vyøe±ena';
 	$s_account_name_msg = 'Va±e uµivatelské jméno je';

@@ -6,6 +6,13 @@
 
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
+ 	# -------------------------------------------------
+	# $Revision: 1.18 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:11:45 $
+	#
+	# $Id: strings_hungarian.txt,v 1.18 2002-06-06 17:11:45 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -47,7 +54,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -93,12 +100,12 @@
 
 	# Email Strings
   $s_new_account_subject = 'Új felhasználói fiók';
-  $s_new_account_greeting = 'Üdvözöljük a hibakövetô rendszerben.  Az alábbiakban megtalálja a bejelentkezéshez szükséges információkat.\n\n';
+  $s_new_account_greeting = 'Üdvözöljük a hibakövetô rendszerben.  Az alábbiakban megtalálja a bejelentkezéshez szükséges információkat.' . "\n\n";
   $s_new_account_url = 'A rendszert a következõ címen éri el: ';
   $s_new_account_username = 'Felhasználónév: ';
   $s_new_account_password = 'Jelszó: ';
-  $s_new_account_message = 'A rendszerbe való bejelentkezés után változtassa meg a jelszavát.  Jelszavát egyirányú titkosítással tároljuk, így a rendszergazdák sem képesek azt elolvasni.  Ha elfelejti jelszavát, törölnünk kell.\n\n';
-  $s_new_account_do_not_reply = 'Kérjük ne válaszoljon erre az üzenetre.\n';
+  $s_new_account_message = 'A rendszerbe való bejelentkezés után változtassa meg a jelszavát.  Jelszavát egyirányú titkosítással tároljuk, így a rendszergazdák sem képesek azt elolvasni.  Ha elfelejti jelszavát, törölnünk kell.' . "\n\n";
+  $s_new_account_do_not_reply = 'Kérjük ne válaszoljon erre az üzenetre.' . "\n";
 
   $s_reset_request_msg = 'Kérés érkezett hozzánk, hogy jelszavát töröljük';
   $s_account_name_msg = 'A felhasználónév:';

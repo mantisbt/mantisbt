@@ -6,6 +6,13 @@
 
 	# Turkish: Oktay Altunergil - oktay@bellatlantic.net, founder of FreeLinuxCD.org
 	# Türkçe tercüme , FreeLinuxCD.org kurucusu Oktay Altunergil tarafýndan gerçeklestirilmiþtir.
+	# -------------------------------------------------
+	# $Revision: 1.22 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:12:08 $
+	#
+	# $Id: strings_turkish.txt,v 1.22 2002-06-06 17:12:08 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -47,7 +54,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -93,12 +100,12 @@
 
 	# Email Strings
 	$s_new_account_subject = 'Yeni kullanýcý hesabýnýz';
-	$s_new_account_greeting = 'Bug Takip Sistemine hoþgeldiniz.  Sisteme girmek için ihtiyacýnýz olan bilgiler aþaðýdadýr\n\n';
+	$s_new_account_greeting = 'Bug Takip Sistemine hoþgeldiniz.  Sisteme girmek için ihtiyacýnýz olan bilgiler aþaðýdadýr' . "\n\n";
 	$s_new_account_url = 'Sisteme bu adresten ulaþabilirsiniz: ';
 	$s_new_account_username = 'Kullanýcý Adý: ';
 	$s_new_account_password = 'Þifre: ';
-	$s_new_account_message = 'Sisteme girdikten sonra lütfen þifrenizi deðiþtiriniz.  Sistemdeki þifreler tek yönlü bir algoritma kullanarak muhafaza edildiðinden unutulan þifrelerin kullanýcýya gönderilmesi mümkün deðildir. Þifrenizi unuttuðunuz takdirde yenisiyle deðiþtirilecektir.\n\n';
-	$s_new_account_do_not_reply = 'Lütfen bu mesaja cevap göndermeyiniz.\n';
+	$s_new_account_message = 'Sisteme girdikten sonra lütfen þifrenizi deðiþtiriniz.  Sistemdeki þifreler tek yönlü bir algoritma kullanarak muhafaza edildiðinden unutulan þifrelerin kullanýcýya gönderilmesi mümkün deðildir. Þifrenizi unuttuðunuz takdirde yenisiyle deðiþtirilecektir.' . "\n\n";
+	$s_new_account_do_not_reply = 'Lütfen bu mesaja cevap göndermeyiniz.' . "\n";
 
 	$s_reset_request_msg = 'Þifrenizim yenilenmesi için bir istekte bulunuldu';
 	$s_account_name_msg = 'Kullanýcý adýnýz';

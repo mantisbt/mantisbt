@@ -5,6 +5,13 @@
 	# See the README and LICENSE files for details
 
 	# Chinese_Traditional: Pao-Hsi Huang, doggy8088@mail2000.com.tw
+	# -------------------------------------------------
+	# $Revision: 1.22 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:11:43 $
+	#
+	# $Id: strings_chinese_traditional.txt,v 1.22 2002-06-06 17:11:43 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -46,7 +53,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -92,12 +99,12 @@
 
 	# Email Strings
 	$s_new_account_subject = '你的新使用者帳號';
-	$s_new_account_greeting = '很高興與歡迎來到臭蟲回報中心  這是你需要登入的資訊\n\n';
+	$s_new_account_greeting = '很高興與歡迎來到臭蟲回報中心  這是你需要登入的資訊' . "\n\n";
 	$s_new_account_url = '你可以在這裡登入臭蟲回報中心: ';
 	$s_new_account_username = '帳號: ';
 	$s_new_account_password = '密碼: ';
-	$s_new_account_message = '在登入這個站後，請記得變更你的密碼! 當然，您的密碼是以「單向編碼」的方式儲存，所以員工無法取得您的密碼，如果你忘記你的密碼，你一定要重設.\n\n';
-	$s_new_account_do_not_reply = '不要回覆此訊息.\n';
+	$s_new_account_message = '在登入這個站後，請記得變更你的密碼! 當然，您的密碼是以「單向編碼」的方式儲存，所以員工無法取得您的密碼，如果你忘記你的密碼，你一定要重設.' . "\n\n";
+	$s_new_account_do_not_reply = '不要回覆此訊息.' . "\n";
 
 	$s_reset_request_msg = '這有一個密碼重設的要求';
 	$s_account_name_msg = '你的帳戶姓名是';

@@ -9,6 +9,13 @@
 	# French: Samuel Tardieu, sam@rfc1149.net
 	# French: Quentin Delance, quentin.delance@insalien.org
 	# French: Roland Meyer, Daniel Coquette
+	# -------------------------------------------------
+	# $Revision: 1.24 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:11:44 $
+	#
+	# $Id: strings_french.txt,v 1.24 2002-06-06 17:11:44 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -50,7 +57,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -96,12 +103,12 @@
 
 	# Email Strings
 	$s_new_account_subject = 'Votre compte utilisateur';
-	$s_new_account_greeting = 'Bienvenue sur le gestionnaire de bugs.  Voici les informations nécessaires pour vous identifier\n\n';
+	$s_new_account_greeting = 'Bienvenue sur le gestionnaire de bugs.  Voici les informations nécessaires pour vous identifier' . "\n\n";
 	$s_new_account_url = 'vous pouvez vous identifier ici: ';
 	$s_new_account_username = 'Identifiant: ';
 	$s_new_account_password = 'Mot de passe: ';
-	$s_new_account_message = 'Après votre identification, veuillez changer votre mot de passe. Celui-ci est stocké crypté aussi l\'équipe d\'administration du système ne pourra pas vous le transmettre si vous le perdez : il devra être réinitialisé.\n\n';
-	$s_new_account_do_not_reply = 'Merci de ne pas répondre à ce message.\n';
+	$s_new_account_message = 'Après votre identification, veuillez changer votre mot de passe. Celui-ci est stocké crypté aussi l\'équipe d\'administration du système ne pourra pas vous le transmettre si vous le perdez : il devra être réinitialisé.' . "\n\n";
+	$s_new_account_do_not_reply = 'Merci de ne pas répondre à ce message.' . "\n";
 
 	$s_reset_request_msg = 'Une requête a été enregistrée pour réinitialiser votre mot de passe'.
 	$s_account_name_msg = 'Votre identifiant est';

@@ -5,6 +5,13 @@
 	# See the README and LICENSE files for details
 
 	# Danish: Søren Mortensen, sm@artmus.dk
+	# -------------------------------------------------
+	# $Revision: 1.23 $
+	# $Author: jhuggins $
+	# $Date: 2002-06-06 17:11:43 $
+	#
+	# $Id: strings_danish.txt,v 1.23 2002-06-06 17:11:43 jhuggins Exp $
+	###########################################################################
 ?>
 <?php
     # Charset
@@ -46,7 +53,7 @@
 	$s_steps_to_reproduce_updated = 'Steps to Reproduce Updated';
 	$s_file_added = 'File Added: ';
 	$s_file_deleted = 'File Deleted: ';
-	
+
 	$s_make_private = 'Make Private';
 	$s_make_public = 'Make Public';
 
@@ -92,12 +99,12 @@
 
 	# Email Strings
 	$s_new_account_subject = 'Din nye bruger konto';
-	$s_new_account_greeting = 'Velkommen til bugtracker.  Du har brug for disse informationer for at logge ind\n\n';
+	$s_new_account_greeting = 'Velkommen til bugtracker.  Du har brug for disse informationer for at logge ind' . "\n\n";
 	$s_new_account_url = 'Du kan logge ind til siten her: ';
 	$s_new_account_username = 'Brugernavn: ';
 	$s_new_account_password = 'Password: ';
-	$s_new_account_message = 'Du skal ændre dit password når du er logget ind. Bemærk også at dit password bliver gemt via en envejs kryptering.  Det er ikke muligt at genskabe det. Hvis du glemmer dit password er det nødt til at blive slettet.\n\n';
-	$s_new_account_do_not_reply = 'Svar ikke på denne besked.\n';
+	$s_new_account_message = 'Du skal ændre dit password når du er logget ind. Bemærk også at dit password bliver gemt via en envejs kryptering.  Det er ikke muligt at genskabe det. Hvis du glemmer dit password er det nødt til at blive slettet.' . "\n\n";
+	$s_new_account_do_not_reply = 'Svar ikke på denne besked.' . "\n";
 
 	$s_reset_request_msg = 'Der har været en forespørgsel på at nulstille dit password.';
 	$s_account_name_msg = 'Dit brugernvan er';
