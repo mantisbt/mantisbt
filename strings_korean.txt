@@ -154,6 +154,7 @@
 
 	# bug_close.php3
 	$s_bug_close_msg       = "버그가 해결(close)되었습니다...";
+	$s_close_immediately   = "Close immediately:";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "버그정보가 삭제되었습니다...";

@@ -154,6 +154,7 @@
 
 	# bug_close.php3
 	$s_bug_close_msg = "Bug kapatýldý...";
+	$s_close_immediately   = "Close immediately:";
 
 	# bug_delete.php3
 	$s_bug_deleted_msg = "Bug silindi...";
