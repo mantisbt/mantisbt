@@ -8,7 +8,7 @@
 	# Changes applied to 0.13 database to give us 0.14
 
 	# --------------------------------------------------------
-	# $Id: 0_13_inc.php,v 1.4 2004-01-11 07:16:09 vboctor Exp $
+	# $Id: 0_13_inc.php,v 1.5 2004-02-06 14:13:03 jlatour Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -110,7 +110,7 @@
 	$upgrades[] = new SQLUpgrade( 
 			'0.13-13',
 			'Make username unique',
-			"ALTER TABLE $t_user_table ADD UNIQUE(username)"
+			"ALTER IGNORE TABLE $t_user_table ADD UNIQUE(username)"
 		);
 
 	
