@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.2 2004-05-26 03:54:27 int2str Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.3 2004-07-08 13:49:12 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -23,6 +23,7 @@
 
 		echo '<a name="sponsorships" id="sponsorships" /><br />';
  		echo '<table class="width100" cellspacing="1">';
+		echo '<tr><td width="50"><img src="images/dollars.gif" alt="Sponsor Me" border="0" /></td><td><table border="0" cellpadding="3" width="100%"><tr><td>';
 ?>
 		<tr>
 			<td class="form-title" colspan="2">
@@ -83,6 +84,7 @@
 <?php
 		}
 
+		echo '</td></tr></table></td></tr>';
 	 	echo '</table>';
 	}
 ?>
