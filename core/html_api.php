@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.3 2002-08-25 19:44:46 jfitzell Exp $
+	# $Id: html_api.php,v 1.4 2002-08-26 00:40:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -79,19 +79,17 @@
 	# (4) Prints the <TITLE> tag
 	function print_title( $p_title ) {
 		global 	$g_show_project_in_title,
-				$g_project_cookie_val;
+				$g_project_cookie_val, $s_all_projects;
+
+		if ( 0 == $g_project_cookie_val ) {
+			$t_project_name = $s_all_projects;
+		} else {
+			$t_project_name = project_get_field( $g_project_cookie_val, 'name' );
+		}
 
 		if ( 1 == $g_show_project_in_title ) {
-			$t_project_name = get_project_field( $g_project_cookie_val, 'name' );
-
-			if ( empty( $t_project_name ) ) {
-				PRINT "<title>$p_title</title>";
-			} else {
-				PRINT "<title>$p_title - $t_project_name</title>";
-			}
+			PRINT "<title>$p_title - $t_project_name</title>";
 		} else if ( 2 == $g_show_project_in_title ) {
-			$t_project_name = get_project_field( $g_project_cookie_val, 'name' );
-
 			PRINT "<title>$t_project_name</title>";
 		} else {
 			PRINT "<title>$p_title</title>";
@@ -131,18 +129,20 @@
 	# We use a temporary variable to create the title then print it.
 	function print_header( $p_title='Mantis' ) {
 		global 	$g_show_project_in_title,
-				$g_project_cookie_val;
+				$g_project_cookie_val,
+				$s_all_projects;
+
+		if ( 0 == $g_project_cookie_val ) {
+			$t_project_name = $s_all_projects;
+		} else {
+			$t_project_name = project_get_field( $g_project_cookie_val, 'name' );
+		}
 
 		$t_title = '';
 		switch ( $g_show_project_in_title ) {
-			case 1:	$t_project_name = get_project_field( $g_project_cookie_val, 'name' );
-					if ( empty( $t_project_name ) ) {
-						$t_title = $p_title;
-					} else {
-						$t_title = $p_title.' - '.$t_project_name;
-					}
+			case 1:	$t_title = $p_title.' - '.$t_project_name;
 					break;
-			case 2:	$t_title = get_project_field( $g_project_cookie_val, 'name' );
+			case 2:	$t_title = $t_project_name;
 					break;
 			default:$t_title = $p_title;
 					break;
@@ -319,7 +319,6 @@
 				PRINT '<td class="menu">';
 				PRINT "<a href=\"main_page.php\">$s_main_link</a> | ";
 				PRINT "<a href=\"view_all_bug_page.php\">$s_view_bugs_link</a> | ";
-				$t_project_status = get_project_field( $g_project_cookie_val, "status" );
 				if ( access_level_check_greater_or_equal( REPORTER ) ) {
 					if ( "0000000" != $g_project_cookie_val ) {
 						$t_report_url = get_report_redirect_url( 1 );

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_api.php,v 1.4 2002-08-25 21:48:11 jfitzell Exp $
+	# $Id: bugnote_api.php,v 1.5 2002-08-26 00:40:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -23,7 +23,10 @@
 		$query ="UPDATE $g_mantis_bugnote_table ".
 				"SET last_modified=NOW() ".
 				"WHERE id='$c_bugnote_id'";
-		return db_query( $query );
+		$result = db_query( $query );
+
+		# db_query() errors if there was a problem so:
+		return true;
 	}
 	# --------------------
 	# returns true if the bugnote exists, false otherwise
@@ -36,6 +39,7 @@
 				"FROM $g_mantis_bugnote_table ".
 				"WHERE id='$c_bugnote_id'";
 		$result = db_query( $query );
+
 		if ( 0 == db_result( $result ) ) {
 			return false;
 		} else {
@@ -213,13 +217,7 @@
 				WHERE id='$c_bugnote_text_id'";
 		$result = db_query( $query );
 
-		if ( ! $result ) {
-			return false;
-		}
-
-		$f_bugnote_text = db_result( $result, 0, 0 );
-		
-		return db_unprepare_string( $f_bugnote_text );
+		return db_result( $result );
 	}
 	# --------------------
 	# Returns a field for the given bugnote
@@ -234,9 +232,7 @@
 				"LIMIT 1";
 		$result = db_query( $query );
 
-		# @@@ check $result and error or something
-
-		return db_unprepare( db_result( $result ) );
+		return db_result( $result );
 	}
 
 ?>

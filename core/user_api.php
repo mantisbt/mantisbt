@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: user_api.php,v 1.7 2002-08-25 21:44:48 jfitzell Exp $
+	# $Id: user_api.php,v 1.8 2002-08-26 00:40:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -468,7 +468,7 @@
 		}
 
 		$t_access_level = get_project_access_level( $p_project_id );
-		$t_project_view_state = get_project_field( $p_project_id, 'view_state' );
+		$t_project_view_state = project_get_field( $p_project_id, 'view_state' );
 
 		# use the project level access level instead of the global access level
 		# if the project level is not specified then use the global access level
@@ -543,7 +543,7 @@
 
 		# access_level check
 		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
-		$t_project_view_state = get_project_field( $t_project_id, 'view_state' );
+		$t_project_view_state = project_get_field( $t_project_id, 'view_state' );
 
 		# public project accept all users
 		if ( PUBLIC == $t_project_view_state ) {
@@ -578,7 +578,7 @@
 	# --------------------
 	# Check to see if the current user has access on the specified project
 	function check_access_to_project( $p_project_id ) {
-		$t_project_view_state = get_project_field( $p_project_id, 'view_state' );
+		$t_project_view_state = project_get_field( $p_project_id, 'view_state' );
 
 		# Administrators ALWAYS pass.
 		if ( get_current_user_field( 'access_level' ) >= ADMINISTRATOR ) {

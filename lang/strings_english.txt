@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.75 $
-	# $Author: vboctor $
-	# $Date: 2002-08-25 14:26:03 $
+	# $Revision: 1.76 $
+	# $Author: jfitzell $
+	# $Date: 2002-08-26 00:40:23 $
 	#
-	# $Id: strings_english.txt,v 1.75 2002-08-25 14:26:03 vboctor Exp $
+	# $Id: strings_english.txt,v 1.76 2002-08-26 00:40:23 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -165,8 +165,9 @@
 	$MANTIS_ERROR[ERROR_USERNAME_NOT_UNIQUE]= 'ERROR: That username is already being used.  Please go back and select another one.';
 	$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND]='ERROR: Configuration option not found.';
 	$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND]='ERROR: String not found.';
-	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not be found.';
-	
+	$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND]  = 'ERROR: Bugnote not found.';
+	$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND]  = 'ERROR: Project not found.';
+	$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ERROR: Database field not found.';
 
 	# General Strings
 	$s_go_back = 'Go Back';

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: email_api.php,v 1.4 2002-08-25 21:48:12 jfitzell Exp $
+	# $Id: email_api.php,v 1.5 2002-08-26 00:40:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -117,7 +117,7 @@
 
 		# Check if we want to broadcast to all developers on a NEW bug
 		$t_project_id = get_bug_field( $p_bug_id, 'project_id' );
-		$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
+		$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
 
 		#@@@@@@@
 		$temp_arr = array();
@@ -158,7 +158,7 @@
 			}
 
 			# see if users belong
-			$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
+			$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
 			if ( PUBLIC == $t_project_view_state ) {
 				$query = "SELECT l.access_level
 						FROM	$g_mantis_project_user_list_table l,
@@ -643,7 +643,7 @@
 		global $g_project_cookie_val;
 
 		# grab the project name
-		$p_project_name = get_project_field( $g_project_cookie_val, 'name' );
+		$p_project_name = project_get_field( $g_project_cookie_val, 'name' );
 
 		# grab the subject (summary)
 		$p_subject = string_email( get_bug_summary( $p_bug_id ) );

@@ -75,8 +75,8 @@
 		case 'projection':		$v_old_value = get_enum_element( 'projection', $v_old_value );
 								$v_new_value = get_enum_element( 'projection', $v_new_value );
 				break;
-		case 'project_id':		$v_old_value = get_project_field( $v_old_value, 'name' );
-								$v_new_value = get_project_field( $v_new_value, 'name' );
+		case 'project_id':		$v_old_value = project_get_field( $v_old_value, 'name' );
+								$v_new_value = project_get_field( $v_new_value, 'name' );
 				break;
 		case 'handler_id':
 		case 'reporter_id':		$v_old_value = get_user_info( $v_old_value, 'username' );

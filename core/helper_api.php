@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: helper_api.php,v 1.4 2002-08-25 21:44:48 jfitzell Exp $
+	# $Id: helper_api.php,v 1.5 2002-08-26 00:40:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -213,25 +213,11 @@
 		return '@null@';
 	}
 	# --------------------
-	# Returns the specified field of the specified project
-	function get_project_field( $p_project_id, $p_field_name ) {
-		global $g_mantis_project_table;
-
-		$c_project_id = (integer)$p_project_id;
-
-		$query ="SELECT $p_field_name ".
-				"FROM $g_mantis_project_table ".
-				"WHERE id='$c_project_id' ".
-				"LIMIT 1";
-		$result = db_query( $query );
-		return db_result( $result, 0, 0 );
-	}
-	# --------------------
 	# Returns the specified field of the current project
 	function get_current_project_field( $p_field_name ) {
 		global $g_project_cookie_val;
 
-		return get_project_field ( $g_project_cookie_val, $p_field_name );
+		return project_get_field ( $g_project_cookie_val, $p_field_name );
 	}
 	# --------------------
 	# Some proxies strip out HTTP_REFERER.

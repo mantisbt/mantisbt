@@ -388,7 +388,7 @@
 		$bugnote_count = bug_bugnote_count( $v_id );
 
 		# grab the project name
-		$project_name = get_project_field( $v_project_id, 'name' );
+		$project_name = project_get_field( $v_project_id, 'name' );
 
 		$query = "SELECT MAX(last_modified)
 				FROM $g_mantis_bugnote_table

@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: print_api.php,v 1.3 2002-08-25 21:44:48 jfitzell Exp $
+	# $Id: print_api.php,v 1.4 2002-08-26 00:40:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -166,7 +166,7 @@
 				}
 
 				# see if users belong
-				$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
+				$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
 				if ( PUBLIC == $t_project_view_state ) {
 					$query = "SELECT l.access_level
 							FROM	$g_mantis_project_user_list_table l,
@@ -343,7 +343,7 @@
 				}
 
 				# see if users belong
-				$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
+				$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
 				if ( PUBLIC == $t_project_view_state ) {
 					$query = "SELECT l.access_level
 							FROM	$g_mantis_project_user_list_table l,

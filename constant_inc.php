@@ -20,9 +20,7 @@
 	define( 'ON',       1 );
 	define( 'OFF',      0 );
 
-	#define( 'SUCCESS', 1 );
-	#define( 'NOERROR', 1 );
-	#define( 'ERROR',   0 );
+	# error types
 	define( 'ERROR', E_USER_ERROR );
 	define( 'WARNING', E_USER_WARNING );
 	define( 'NOTICE', E_USER_NOTICE );
@@ -157,6 +155,8 @@
 	define( 'ERROR_CONFIG_OPT_NOT_FOUND',		19 );
 	define( 'ERROR_LANG_STRING_NOT_FOUND',		20 );
 	define( 'ERROR_BUGNOTE_NOT_FOUND',			21 );
+	define( 'ERROR_PROJECT_NOT_FOUND',			22 );
+	define( 'ERROR_DB_FIELD_NOT_FOUND',			23 );
 
 	# Status Legend Position
 	define( 'STATUS_LEGEND_POSITION_TOP',    1);

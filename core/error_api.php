@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: error_api.php,v 1.3 2002-08-25 17:06:23 prescience Exp $
+	# $Id: error_api.php,v 1.4 2002-08-26 00:40:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -26,6 +26,8 @@
 	# The others, being system errors, will come with a string in $p_error
 	#
 	function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
+		global $g_error_parameters;
+
 		$t_short_file = basename( $p_file );
 		$t_method = 'none';
 
@@ -78,6 +80,11 @@
 			print_page_top2a();
 
 			echo "<p class=\"center\" style=\"color:red\">$t_string</p>";
+			
+			# @@@ temp until we get parameterized errors
+			for ( $i = 0 ; $i < sizeof( $g_array_parameters ) ; $i = $i + 1 ) {
+				echo $g_array_parameters[$i].'<br />';
+			}
 
 			if ( ON == config_get( 'show_detailed_errors' ) ) {
 				if (isset($php_errormsg))
@@ -115,9 +122,15 @@
 			die();
 		} else if ( 'inline' == $t_method ) {
 			echo "<p style=\"color:red\">$t_string</p>";
+			# @@@ temp until we get parameterized errors
+			for ( $i = 0 ; $i < sizeof( $g_array_parameters ) ; $i = $i + 1 ) {
+				echo $g_array_parameters[$i].'<br />';
+			}
 		} else {
 			# do nothing
 		}
+
+		$g_error_parameters = array();
 	}
 	# ---------------
 	# returns an error string (in the current language) for the given error
@@ -125,5 +138,11 @@
 		global $MANTIS_ERROR;
 
 		return $MANTIS_ERROR[$p_error];
+	}
+
+	function error_parameters() {
+		global $g_error_parameters;
+
+		$g_error_parameters = func_get_args();
 	}
 ?>

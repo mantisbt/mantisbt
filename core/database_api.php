@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: database_api.php,v 1.3 2002-08-25 09:32:44 jfitzell Exp $
+	# $Id: database_api.php,v 1.4 2002-08-26 00:40:23 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -91,12 +91,18 @@
 	}
 	# --------------------
 	function db_fetch_array( $p_result ) {
-		return mysql_fetch_array( $p_result );
+		$row = mysql_fetch_array( $p_result );
+
+		if ( false == $row ) {
+			return false;
+		} else {
+			return db_unprepare_row( $row );
+		}
 	}
 	# --------------------
 	function db_result( $p_result, $p_index1=0, $p_index2=0 ) {
 		if ( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
-			return mysql_result( $p_result, $p_index1, $p_index2 );
+			return db_unprepare( mysql_result( $p_result, $p_index1, $p_index2 ) );
 		} else {
 			return false;
 		}
@@ -185,6 +191,20 @@
 		return (bool)db_unprepare( $p_bool );
 	}
 	# --------------------
+	# calls db_unprepare() on every item in a row
+	function db_unprepare_row( $p_row ) {
+		if ( false == $p_row ) {
+			return false;
+		}
+
+		$t_new_row = array();
+
+		while ( list( $t_key, $t_val ) = each( $p_row ) ) {
+			$t_new_row[$t_key] = db_unprepare( $t_val );
+		}
+
+		return $t_new_row;
+	}
 
 	if ( !isset( $f_skip_open_db ) ) {
 		if ( OFF == $g_use_persistent_connections ) {

@@ -31,7 +31,7 @@
 <?php print_page_top2() ?>
 
 <?php
-	$t_project_view_state = get_project_field( $g_project_cookie_val, 'view_state' );
+	$t_project_view_state = project_get_field( $g_project_cookie_val, 'view_state' );
 	if ( PUBLIC == $t_project_view_state ) {
 		$t_msg = $s_public_project_msg;
 	} else {
