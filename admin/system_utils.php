@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: system_utils.php,v 1.5 2005-02-12 20:01:08 jlatour Exp $
+	# $Id: system_utils.php,v 1.6 2005-03-22 00:52:45 thraxisp Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -74,12 +74,6 @@
 	<input type="submit" class="button" value="Copy" >
 	</form>
 	</center></td></tr>
-
-	<!-- move database project files to disk -->
-	<tr bgcolor="#ffffff"><td>Analyse Workflow</td><td><center>
-	<?php html_button( 'workflow.php', 'Analyse' ); ?>
-	</center></td></tr>
-
 
 </table>
 </body>
