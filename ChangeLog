@@ -3,6 +3,7 @@ Mantis
 03.03.2001  -   0.14.7
 
  * Added Dutch translation
+ * Added Norwegian translation
  * Added g_show_project_in_title to allow project name title display
  * Added login check on login_page.php3
  * Added better email localization
@@ -16,6 +17,7 @@ Mantis
  * Fixed bug where new account prefs were not being created
  * Fixed css : font bug (Netscape)
  * Fixed product version not being logged in bug report
+ * Fixed SQL error link not having "mailto:"
 
 02.23.2001  -   0.14.6
 

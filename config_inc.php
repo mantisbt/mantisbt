@@ -66,7 +66,7 @@
 	# display a link at the bottom of the page to show the PHP source
 	# requires PHP4
 	# 0 = disabled; 1 = admin only; 2 = anyone
-	$g_show_source               = 0;
+	$g_show_source               = 1;
 
 	# Footer Menu
 	# 0 = disabled
@@ -99,7 +99,7 @@
 	$g_validate_email            = 1;
 
 	# change to language you want... choices are:
-	# english, spanish, portuguese, german, french, italian, dutch
+	# english, spanish, portuguese, german, french, italian, dutch, norwegian
 	$g_language                  = "english";
 
 	#--------------------

@@ -205,7 +205,7 @@
 	}
 	### MYSQL ERROR
 	else if ( !$result ) {
-		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
 		echo $query;
 	}
 	### OK!!!

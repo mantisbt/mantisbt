@@ -50,7 +50,7 @@
 		PRINT "$s_project_updated_msg<p>";
 	}
 	else {
-		PRINT "$s_sql_error_detected <a href=\"<? echo $g_administrator_email ?>\">administrator</a><p>";
+		PRINT "$s_sql_error_detected <a href=\"mailto:<? echo $g_administrator_email ?>\">administrator</a><p>";
 	}
 ?>
 <p>
