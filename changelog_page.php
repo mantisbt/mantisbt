@@ -6,10 +6,9 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: changelog_page.php,v 1.8 2004-10-03 12:41:09 vboctor Exp $
+	# $Id: changelog_page.php,v 1.9 2004-10-25 19:51:02 marcelloscata Exp $
 	# --------------------------------------------------------
-?>
-<?php
+
 	require_once( 'core.php' );
 	
 	$t_core_path = config_get( 'core_path' );
@@ -32,8 +31,6 @@
 		}
 	}
 
-?>
-<?php
 	$f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
 
 	# this page is invalid for the 'All Project' selection
@@ -49,6 +46,10 @@
 	$c_project_id   = db_prepare_int( $f_project_id );
 	$t_project_name = project_get_field( $f_project_id, 'name' );
 	$t_can_view_private = access_has_project_level( config_get( 'private_bug_threshold' ), $f_project_id );
+
+	$t_limit_reporters = config_get( 'limit_reporters' );
+	$t_user_id = auth_get_current_user_id();
+	$t_user_access_level_is_reporter = ( current_user_get_access_level() <= config_get( 'report_bug_threshold' ) );
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 	$t_bug_table	= config_get( 'mantis_bug_table' );
@@ -85,6 +86,13 @@
 			# hide private bugs if user doesn't have access to view them.
 			if ( !$t_can_view_private && ( $t_result->fields['view_state'] == VS_PRIVATE ) ) {
 				continue;
+			}
+
+			# check limit_Reporter (Issue #4770)
+			# reporters can view just issues they reported
+			if ( ON === $t_limit_reporters && $t_user_access_level_is_reporter &&
+			     !bug_is_user_reporter( $t_result->fields['id'], $t_user_id )) {
+			  continue;
 			}
 
 			$t_issue_id = $t_result->fields['id'];
