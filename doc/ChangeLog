@@ -72,6 +72,7 @@ Mantis
  * Added make_lf_crlf() to remove bare line feeds.
  * Added g_strip_bare_lf to toggle use of make_lf_crlf().
  * Added priority reporting on the report form for developers.
+ * Added project category copy.
  * Removed access_min and access threshold concepts from the user and project management.
  * Removed extra "echo" in news archive page.
  * Removed proj_user_delete_page.php.

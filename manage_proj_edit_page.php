@@ -157,9 +157,20 @@
 <tr>
 <form method="post" action="<?php echo $g_manage_project_category_add ?>">
 <input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
-	<td class="center">
+	<td class="left">
 		<input type="text" name="f_category" size="32" maxlength="64">
 		<input type="submit" value="<?php echo $s_add_category_button ?>">
+	</td>
+</form>
+</tr>
+<tr>
+<form method="post" action="<?php echo $g_manage_project_category_copy ?>">
+<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>">
+	<td class="left">
+		<select name="f_new_project_id">
+			<?php print_project_option_list() ?>
+		</select>
+		<input type="submit" value="<?php echo $s_copy_categories ?>">
 	</td>
 </form>
 </tr>

@@ -50,5 +50,6 @@
 	require( "core_ldap_API.php" );
 	#require( "core_history_API.php" );
 	require( "core_proj_user_API.php" );
+	require( "core_category_API.php" );
 	# --------------------
 ?>

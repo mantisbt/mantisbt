@@ -58,24 +58,6 @@
 		return db_result( $result, 0 );
 	}
 	# --------------------
-	# checks to see if the category is a duplicate
-	# we do it this way because each different project can have the same category names
-	function is_duplicate_category( $p_category, $p_project_id ) {
-		global $g_mantis_project_category_table;
-
-		$query = "SELECT COUNT(*)
-				FROM $g_mantis_project_category_table
-				WHERE project_id='$p_project_id' AND
-					category='$p_category'";
-		$result = db_query( $query );
-		$category_count =  db_result( $result, 0, 0 );
-		if ( $category_count > 0 ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	# --------------------
 	# checks to see if the version is a duplicate
 	# we do it this way because each different project can have the same category names
 	function is_duplicate_version( $p_version, $p_project_id, $p_date_order='0' ) {
