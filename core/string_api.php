@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.15 2002-11-30 21:15:42 jfitzell Exp $
+	# $Id: string_api.php,v 1.16 2002-12-10 13:49:16 vboctor Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -150,15 +150,16 @@
 bug_get_field( \\2, 'summary' ) .
 '">#\\2</a>'
 EOT;
+			$t_modifier = 'e';
 		} else {
-			$t_replace_with = $t_path.$t_page_name.'?f_bug_id=\\2';
+			$t_replace_with = $t_path . $t_page_name . '?f_bug_id=\2';
+			$t_modifier = '';
 		}
-		
-		return preg_replace('/(\W|^)' . $t_tag . '([0-9]+)/e',
+
+		return preg_replace('/(\W|^)' . $t_tag . '([0-9]+)/' . $t_modifier,
 								$t_replace_with,
 								$p_string);
 	}
-
 
 	#===================================
 	# Tag Processing
