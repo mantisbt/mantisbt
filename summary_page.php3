@@ -16,12 +16,7 @@
 <? print_header( $g_page_title ) ?>
 <?
 	db_mysql_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
-?>
 
-<p>
-<? print_menu( $g_menu_include_file ) ?>
-
-<?
 	### t_active_bug_count
     $query = "SELECT COUNT(id)
     		FROM $g_mantis_bug_table
@@ -51,7 +46,6 @@
 	$t_crashing_bug_count = mysql_result( $result, 0 );
 
 	### t_major_bug_count
-	$t_crashing_bug_count = mysql_result( $result, 0 );
     $query = "SELECT COUNT(id)
     		FROM $g_mantis_bug_table
     		WHERE severity='major'";
@@ -59,13 +53,15 @@
 	$t_major_bug_count = mysql_result( $result, 0 );
 
 	### t_minor_bug_count
-	$t_crashing_bug_count = mysql_result( $result, 0 );
     $query = "SELECT COUNT(id)
     		FROM $g_mantis_bug_table
     		WHERE severity='minor'";
     $result = db_mysql_query( $query );
 	$t_minor_bug_count = mysql_result( $result, 0 );
 ?>
+
+<p>
+<? print_menu( $g_menu_include_file ) ?>
 
 <p>
 <table width=100% bgcolor=<? echo $g_primary_border_color ?>>
