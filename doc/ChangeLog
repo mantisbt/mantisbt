@@ -12,6 +12,8 @@ Mantis
  * Modified core_API.php to always turn magic_quotes_runtime OFF.
  * Added die to print_header_redirect().
  * Updated PHP and MySQL requirements.
+ * Updated Norwegian, Russian, Danish translations.
+ * Added russian_koi8 translation.
 
 05.12.2002  -   0.17.2
 
