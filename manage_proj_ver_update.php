@@ -20,7 +20,7 @@
 
 	# check for duplicate (don't care for date_order at this stage, because no two versions should
 	# have the same name even if they have different time stamps.
-	if ( !is_duplicate_version( $f_project_id, $f_version, '0', $f_orig_version ) ) {
+	if ( !version_is_duplicate( $f_project_id, $f_version, '0', $f_orig_version ) ) {
 		$result = version_update( $f_project_id, $f_version, $f_date_order, $f_orig_version );
 		if ( !$result ) {
 			break;
@@ -50,7 +50,7 @@
 <?php
 	if ( $result ) {				# SUCCESS
 		PRINT $s_operation_successful.'<p>';
-	} else if ( is_duplicate_version( $f_project_id, $f_version, '0', $f_orig_version )) {
+	} else if ( version_is_duplicate( $f_project_id, $f_version, '0', $f_orig_version )) {
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION].'<p>';
 	} else {						# FAILURE
 		print_sql_error( $query );

@@ -15,7 +15,7 @@
 
 	$result = 0;
 	# check for empty case or duplicate
-	if ( !empty( $f_version )&&( !is_duplicate_version( $f_project_id, $f_version ) ) ) {
+	if ( !empty( $f_version )&&( !version_is_duplicate( $f_project_id, $f_version ) ) ) {
 		$result = version_add( $f_project_id, $f_version );
 	}
 
@@ -34,7 +34,7 @@
 <?php
 	if ( $result ) {					# SUCCESS
 		PRINT $s_operation_successful.'<p>';
-	} else if ( is_duplicate_version( $f_project_id, $f_version )) {
+	} else if ( version_is_duplicate( $f_project_id, $f_version )) {
 		PRINT $MANTIS_ERROR[ERROR_DUPLICATE_VERSION] . '<p>';
 	} else {							# FAILURE
 		print_sql_error( $query );
