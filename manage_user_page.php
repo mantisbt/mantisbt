@@ -95,7 +95,7 @@
 
 
 <!-- Delete Button -->
-	<form method="post" action="manage_user_delete_page.php">
+	<form method="post" action="manage_user_delete.php">
 	<input type="hidden" name="f_user_id" value="<?php echo $u_id ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_user_button' ) ?>" />
 	</form>

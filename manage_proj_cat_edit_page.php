@@ -64,7 +64,7 @@
 <br />
 
 <div class="border-center">
-	<form method="post" action="manage_proj_cat_del_page.php">
+	<form method="post" action="manage_proj_cat_delete.php">
 	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 	<input type="hidden" name="f_category" value="<?php echo $f_category ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_category_button' ) ?>" />

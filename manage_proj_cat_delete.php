@@ -11,6 +11,9 @@
 	check_access( MANAGER );
 	$f_category = urldecode( $f_category );
 
+	helper_ensure_confirmed( lang_get( 'category_delete_sure_msg' ),
+							 lang_get( 'delete_category_button' ) );
+
 	$result = category_delete( $f_project_id, $f_category );
 
     $t_redirect_url = 'manage_proj_edit_page.php?f_project_id='.$f_project_id;

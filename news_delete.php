@@ -12,6 +12,9 @@
 
 	$f_news_id = gpc_get_int( 'f_news_id' );
 
+	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ),
+							 lang_get( 'delete_news_item_button' ) );
+
     news_delete( $f_news_id );
 
     $t_redirect_url = 'news_menu_page.php';

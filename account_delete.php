@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_delete.php,v 1.22 2002-10-01 20:28:19 jfitzell Exp $
+	# $Id: account_delete.php,v 1.23 2002-10-23 02:49:05 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
 	#	This page is called from:
-	#	- account_delete_page.php
+	#	- account_delete.php
 
 	# EXPECTED BEHAVIOUR
 	#	- Delete the currently logged in user account
@@ -38,6 +38,8 @@
 	}
 ?>
 <?php
+	helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
+							 lang_get( 'delete_account_button' ) );
 
 	user_delete( auth_get_current_user_id() );
 

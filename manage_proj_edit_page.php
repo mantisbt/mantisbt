@@ -120,7 +120,7 @@
 
 <?php if ( access_level_check_greater_or_equal ( ADMINISTRATOR ) ) { ?>
 <div class="border-center">
-	<form method="post" action="manage_proj_delete_page.php">
+	<form method="post" action="manage_proj_delete.php">
 	<input type="hidden" name="f_project_id" value="<?php echo $f_project_id ?>" />
 	<input type="submit" value="<?php echo lang_get( 'delete_project_button' ) ?>" />
 	</form>
@@ -172,7 +172,7 @@
 				<?php
 					print_bracket_link( 'manage_proj_cat_edit_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category.'&amp;f_assigned_to='.$c_user_id, lang_get( 'edit_link' ) );
 					PRINT '&nbsp;';
-					print_bracket_link( 'manage_proj_cat_del_page.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, lang_get( 'delete_link' ) );
+					print_bracket_link( 'manage_proj_cat_delete.php?f_project_id='.$f_project_id.'&amp;f_category='.$t2_category, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>
@@ -238,7 +238,7 @@
 				<?php
 					print_bracket_link( 'manage_proj_ver_edit_page.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, lang_get( 'edit_link' ) );
 					PRINT '&nbsp;';
-					print_bracket_link( 'manage_proj_ver_del_page.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, lang_get( 'delete_link' ) );
+					print_bracket_link( 'manage_proj_ver_delete.php?f_project_id='.$f_project_id.'&amp;f_version='.$t2_version.'&amp;f_date_order='.$t2_date_order, lang_get( 'delete_link' ) );
 				?>
 			</td>
 		</tr>

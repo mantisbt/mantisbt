@@ -12,9 +12,12 @@
 	
 	$f_user_id	= gpc_get_int( 'f_user_id' );
 
-    $t_redirect_url = 'manage_page.php';
+	helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ),
+							 lang_get( 'delete_account_button' ) );
 
 	user_delete( $f_user_id );
+
+    $t_redirect_url = 'manage_page.php';
 
 	print_page_top1();
 

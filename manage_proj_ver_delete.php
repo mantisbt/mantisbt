@@ -13,6 +13,9 @@
 	$f_project_id = gpc_get_int( 'f_project_id' );
 	$f_version = gpc_get_string( 'f_version' );
 
+	helper_ensure_confirmed( lang_get( 'version_delete_sure' ),
+							 lang_get( 'delete_version_button' ) );
+
 	# delete version
 	$result = version_delete( $f_project_id, $f_version );
 

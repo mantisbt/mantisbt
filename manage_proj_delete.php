@@ -12,6 +12,9 @@
 	
 	$f_project_id = gpc_get_int( 'f_project_id' );
 	
+	helper_ensure_confirmed( lang_get( 'project_delete_msg' ),
+							 lang_get( 'project_delete_button' ) );
+
 	project_delete( $f_project_id );
 
     $t_redirect_url = 'manage_proj_menu_page.php';

@@ -15,7 +15,7 @@
 
 	# If deleting item redirect to delete script
 	if ( 'delete' == $f_action ) {
-		print_header_redirect( 'news_delete_page.php?f_news_id='.$f_news_id );
+		print_header_redirect( 'news_delete.php?f_news_id='.$f_news_id );
 	}
 
 	# Retrieve news item data and prefix with v_

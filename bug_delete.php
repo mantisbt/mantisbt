@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_delete.php,v 1.25 2002-10-23 00:50:53 jfitzell Exp $
+	# $Id: bug_delete.php,v 1.26 2002-10-23 02:49:05 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,6 +20,8 @@
 	project_access_check( $f_bug_id );
 	check_access( config_get( 'allow_bug_delete_access_level' ) );
 	bug_ensure_exists( $f_bug_id );
+
+	helper_ensure_confirmed( lang_get( 'delete_bug_sure_msg' ), lang_get( 'delete_bug_button' ) );
 
 	bug_delete( $f_bug_id );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.30 2002-10-05 03:54:24 prescience Exp $
+	# $Id: account_page.php,v 1.31 2002-10-23 02:49:05 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -24,7 +24,7 @@
 	# CALLS
 	#	This page calls the following pages:
 	#	- account_update.php  (to save changes)
-	#	- account_delete_page.php  (to delete the user's account)
+	#	- account_delete.php  (to delete the user's account)
 
 	# RESTRICTIONS & PERMISSIONS
 	#	- User must be authenticated
@@ -206,7 +206,7 @@
 
 <!-- Delete Button -->
 <div class="border-center">
-	<form method="post" action="account_delete_page.php">
+	<form method="post" action="account_delete.php">
 	<input type="submit" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
 </div>

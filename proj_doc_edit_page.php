@@ -74,7 +74,7 @@
 
 <br />
 
-		<form method="post" action="proj_doc_delete_page.php">
+		<form method="post" action="proj_doc_delete.php">
 		<input type="hidden" name="f_file_id" value="<?php echo $f_file_id ?>" />
 		<input type="submit" value="<?php echo $s_file_delete_button ?>" />
 		</form>

@@ -372,7 +372,7 @@
 <?php # DELETE form BEGIN ?>
 <?php if ( access_level_check_greater_or_equal( $g_allow_bug_delete_access_level ) ) { ?>
 	<td class="center">
-		<form method="post" action="bug_delete_page.php">
+		<form method="post" action="bug_delete.php">
 		<input type="hidden" name="f_bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="submit" value="<?php echo $s_delete_bug_button ?>" />
 		</form>

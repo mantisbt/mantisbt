@@ -20,6 +20,9 @@
 	check_access( $g_delete_bugnote_threshold );
 	bug_ensure_exists( $t_bug_id );
 
+	helper_ensure_confirmed( lang_get( 'delete_bugnote_sure_msg' ),
+							 lang_get( 'delete_bugnote_button' ) );
+
 	$result = bugnote_delete( $f_bugnote_id );
 
 	# Determine which view page to redirect back to.

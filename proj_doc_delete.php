@@ -11,6 +11,9 @@
 	check_access( MANAGER );  # @@@ Need to check that the person is assigned to this project
 	$c_file_id = (integer)$f_file_id;
 
+	helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ),
+							 lang_get( 'file_delete_button' ) );
+
 	if ( DISK == $g_file_upload_method ) {
 		# grab the file name
 		$query = "SELECT diskfile
