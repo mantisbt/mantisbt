@@ -20,6 +20,7 @@
 	$MANTIS_ERROR[ERROR_LOGIN] = "B£¡D: Twoje konto mo¿e byæ wy³±czone lub nazwa u¿ytkownika/has³o nie s± poprawne.";
 	$MANTIS_ERROR[ERROR_REPORT] = "B£¡D: Wyst±pi³ b³±d w twoim zg³oszeniu.";
 	$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = "B£¡D: Nie zosta³ podany ¿aden plik.";
+	$MANTIS_ERROR[ERROR_NO_DIRECTORY] = "B£¡D: Podany katalog nie istnieje. Sprawd¼ ustawienia projektu.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_CATEGORY] = "B£¡D: Podana kategoria ju¿ istnieje.";
 	$MANTIS_ERROR[ERROR_DUPLICATE_VERSION] = "B£¡D: Podana wersja ju¿ istnieje.";
 
