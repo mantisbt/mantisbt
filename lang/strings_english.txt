@@ -8,11 +8,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.58 $
+	# $Revision: 1.59 $
 	# $Author: jctrosset $
-	# $Date: 2002-07-17 15:53:49 $
+	# $Date: 2002-08-02 07:59:42 $
 	#
-	# $Id: strings_english.txt,v 1.58 2002-07-17 15:53:49 jctrosset Exp $
+	# $Id: strings_english.txt,v 1.59 2002-08-02 07:59:42 jctrosset Exp $
 	###########################################################################
 ?>
 <?php
@@ -112,8 +112,26 @@
 	$s_category_link = 'Per category';
 	$s_resolution_link = 'Per resolution';
 
-	#print_all_bug_page.php : display selected bugs
+	# manage_proj_edit_page.php - attribute customization
+	$s_attribute_customization_title = 'Custom attributes';
+	$s_severities = 'severities';
+	$s_states = 'states';
+	$s_add_button = 'Add';
+	$s_del_button = 'Delete';
+	$s_copy_from = 'Copy from';
+	$s_copy_to = 'Copy to';
+	$s_asso_color = 'Associated color : ';
+
+	# manage_proj_attribute_edit_page.php
+	$s_edit_project_title = 'Edit Project';
+	$s_update_button = 'Update';
+	$s_delete_button = 'Delete';
+
+	# print_all_bug_page.php : display selected bugs
 	$s_hide_button = 'Display selected only';
+
+	# manage_proj_attribute_del_page.php
+	$s_attribute_delete_sure_msg = 'Are you sure you want to delete this attribute ?';
 
 	# print_all_bug_options.php : printing preferences
 	$s_printing_preferences_title = 'Choose fields to print';
