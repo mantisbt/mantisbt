@@ -17,7 +17,7 @@
 
 	check_access( REPORTER );
 
-	if ( ( DISK == $g_file_upload_method ) && isset( $f_file ) && is_uploaded_file( $f_file ) ) {
+	if ( ( ( DISK == $g_file_upload_method ) || ( FTP == $g_file_upload_method ) ) && isset( $f_file ) && is_uploaded_file( $f_file ) ) {
 		$query = "SELECT file_path
 				FROM $g_mantis_project_table
 				WHERE id='$g_project_cookie_val'";
@@ -188,9 +188,17 @@
 			$t_file_size = filesize( $f_file );
 
 			switch ( $g_file_upload_method ) {
+				case FTP:
 				case DISK:	if ( !file_exists( $t_file_path.$f_file_name ) ) {
+								if ( FTP == $g_file_upload_method ) {
+									$conn_id = file_ftp_connect();
+									file_ftp_put ( $conn_id, $f_file_name, $f_file );
+									file_ftp_disconnect ( $conn_id );
+								}
+
 								umask( 0333 );  # make read only
 								copy($f_file, $t_file_path.$f_file_name);
+
 								$query = "INSERT INTO $g_mantis_bug_file_table
 										(id, bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content)
 										VALUES
@@ -210,7 +218,7 @@
 			$result = db_query( $query );
 
 			# log new bug
-			history_log_event_special( $t_bug_id, FILE_ADDED );
+			history_log_event_special( $f_id, FILE_ADDED, file_get_display_name( $f_file_name ) );
 		}
 
 		# Notify users of new bug report
