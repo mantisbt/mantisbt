@@ -8,11 +8,11 @@
 	# Spanish: Pablo Corral - PabloCorral@ciudad.com.ar
 	#          Ariel Arjona - beerfrick@users.sf.net
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:38 $
+	# $Date: 2003-03-12 18:58:22 $
 	#
-	# $Id: strings_spanish.txt,v 1.49 2003-03-11 08:16:38 jlatour Exp $
+	# $Id: strings_spanish.txt,v 1.50 2003-03-12 18:58:22 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -798,6 +798,10 @@
 	$s_search ='Buscar';
 	$s_view_prev_link = 'Ver Previos';
 	$s_view_next_link = 'Ver Siguientes';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Cambiar a Vista Simple';

@@ -12,11 +12,11 @@
 	# French: Roland Meyer, Daniel Coquette
 	# French: Jean-Charles Trosset, jean-charles.trosset@laposte.net
 	# -------------------------------------------------
-	# $Revision: 1.55 $
+	# $Revision: 1.56 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:35 $
+	# $Date: 2003-03-12 18:58:21 $
 	#
-	# $Id: strings_french.txt,v 1.55 2003-03-11 08:16:35 jlatour Exp $
+	# $Id: strings_french.txt,v 1.56 2003-03-12 18:58:21 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -802,6 +802,10 @@
 	$s_search ='Chercher';
 	$s_view_prev_link = 'Voir les précédents';
 	$s_view_next_link = 'Voir les suivants';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Rapport simplifié';

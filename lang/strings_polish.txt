@@ -8,11 +8,11 @@
 	# Polish: Adam Bienias <adam@fireworks.atomnet.pl>
 	# Polish: Jaroslaw Lewandowski <jotel@jotel.net>
 	# -------------------------------------------------
-	# $Revision: 1.51 $
+	# $Revision: 1.52 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:36 $
+	# $Date: 2003-03-12 18:58:21 $
 	#
-	# $Id: strings_polish.txt,v 1.51 2003-03-11 08:16:36 jlatour Exp $
+	# $Id: strings_polish.txt,v 1.52 2003-03-12 18:58:21 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -798,6 +798,10 @@
 	$s_search ='Szukaj';
 	$s_view_prev_link = 'Poprzednie';
 	$s_view_next_link = 'Nastêpne';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Widok prosty';

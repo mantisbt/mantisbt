@@ -7,11 +7,11 @@
 
 	# Russian (KOI8-R): Alexander Leschinsky aml@lair.pp.ru
 	# -------------------------------------------------
-	# $Revision: 1.34 $
+	# $Revision: 1.35 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:37 $
+	# $Date: 2003-03-12 18:58:22 $
 	#
-	# $Id: strings_russian_koi8.txt,v 1.34 2003-03-11 08:16:37 jlatour Exp $
+	# $Id: strings_russian_koi8.txt,v 1.35 2003-03-12 18:58:22 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -797,6 +797,10 @@
 	$s_search ='Поиск';
 	$s_view_prev_link = 'Предыдущих';
 	$s_view_next_link = 'Следующих';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Простой просмотр';

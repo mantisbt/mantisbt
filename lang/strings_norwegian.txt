@@ -7,11 +7,11 @@
 
 	# Norwegian: Espen Holje, eh@escio.no
 	# -------------------------------------------------
-	# $Revision: 1.48 $
+	# $Revision: 1.49 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:36 $
+	# $Date: 2003-03-12 18:58:21 $
 	#
-	# $Id: strings_norwegian.txt,v 1.48 2003-03-11 08:16:36 jlatour Exp $
+	# $Id: strings_norwegian.txt,v 1.49 2003-03-12 18:58:21 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -797,6 +797,10 @@
 	$s_search ='Søk';
 	$s_view_prev_link = 'Vis forrige';
 	$s_view_next_link = 'Vis neste';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Vis enkel';

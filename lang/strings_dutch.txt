@@ -9,11 +9,11 @@
 	# Dutch: Klaasjan Brand, kjb@dds.nl
 	# Dutch: Jeroen Latour, jlatour@calaquendi.net
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:34 $
+	# $Date: 2003-03-12 18:58:21 $
 	#
-	# $Id: strings_dutch.txt,v 1.49 2003-03-11 08:16:34 jlatour Exp $
+	# $Id: strings_dutch.txt,v 1.50 2003-03-12 18:58:21 jlatour Exp $
 	###########################################################################
 
 ?>
@@ -391,14 +391,14 @@
 	$s_bugnote_add_resolve_button = 'Toevoegen aantekening';
 
 	# bug_reminder_page.php
-	$s_from = 'From';
-	$s_to = 'To';
-	$s_on = 'On';
-	$s_sent_you_this_reminder_about = 'sent you this reminder about';
-	$s_bug_reminder = 'Send a reminder';
-	$s_reminder_sent_to = 'Reminder sent to';
-	$s_bug_send_button = 'Send';
-	$s_reminder = 'Reminder';
+	$s_from = 'Van';
+	$s_to = 'Naar';
+	$s_on = 'Op';
+	$s_sent_you_this_reminder_about = 'stuurde je deze herinnering over';
+	$s_bug_reminder = 'Stuur een herinnering';
+	$s_reminder_sent_to = 'Herinnering verstuurd aan';
+	$s_bug_send_button = 'Verstuur';
+	$s_reminder = 'Herinnering';
 
 	# bug_update.php
 	$s_bug_updated_msg = 'Bug succesvol aangepast...';
@@ -800,6 +800,10 @@
 	$s_search ='Zoeken';
 	$s_view_prev_link = 'vorige';
 	$s_view_next_link = 'volgende';
+	$s_prev = 'Vorige';
+	$s_next = 'Volgende';
+	$s_first = 'Eerste';
+	$s_last = 'Laatste';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'eenvoudig overzicht';
@@ -810,7 +814,7 @@
 	$s_bug_assign_button    = 'Wijs toe aan mij';
 	$s_reopen_bug_button = 'Heropen bug';
 	$s_attached_files = 'Bijgevoegde bestanden';
-	$s_publish = 'Publish';
+	$s_publish = 'Publiceer';
 	$s_cached = 'Cached';
 
 	# view_bug_inc.php
@@ -831,7 +835,7 @@
 	$s_update_custom_field_button = 'Pas veld aan';
 	$s_add_existing_custom_field = 'Voeg dit bestaande veld toe';
 	$s_edit_custom_field_title = 'Pas veld aan';
-	$s_custom_field = 'Field';
+	$s_custom_field = 'Veld';
 	$s_custom_fields_setup = 'Velden';
 	$s_custom_field_name = 'Veldnaam';
 	$s_custom_field_project_count = 'Aantal projecten';
@@ -851,7 +855,7 @@
 	$s_confirm_custom_field_deletion = 'Weet u zeker dat u dit veld en alle bijbehorende waarden wilt verwijderen?';
 	$s_field_delete_button = 'Verwijder veld';
 
-	$s_hide_status = 'Hide Status';
-	$s_filter_closed = "Closed";
-	$s_filter_resolved = "Resolved";
+	$s_hide_status = 'Verberg Status';
+	$s_filter_closed = 'Gesloten';
+	$s_filter_resolved = 'Afgerond';
 ?>

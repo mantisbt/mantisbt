@@ -11,11 +11,11 @@
 	# German: Matthias Bauer, mantis-de@moeffju.de
 	# German: Andre Eisenbach, andre@eisenbach.com
 	# -------------------------------------------------
-	# $Revision: 1.64 $
+	# $Revision: 1.65 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:35 $
+	# $Date: 2003-03-12 18:58:21 $
 	#
-	# $Id: strings_german.txt,v 1.64 2003-03-11 08:16:35 jlatour Exp $
+	# $Id: strings_german.txt,v 1.65 2003-03-12 18:58:21 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -801,6 +801,10 @@
 	$s_search ='Suche';
 	$s_view_prev_link = 'Zeige vorherige';
 	$s_view_next_link = 'Zeige nächste';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'einfache Anzeige';

@@ -8,11 +8,11 @@
 	# 한글 번역   aporie@kornet.net
 	# 추가 번역   torija@users.sourceforge.net
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:36 $
+	# $Date: 2003-03-12 18:58:21 $
 	#
-	# $Id: strings_korean.txt,v 1.49 2003-03-11 08:16:36 jlatour Exp $
+	# $Id: strings_korean.txt,v 1.50 2003-03-12 18:58:21 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -798,6 +798,10 @@
 	$s_search ='검색';
 	$s_view_prev_link = '이전';
 	$s_view_next_link = '다음';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = '간략히 보기';

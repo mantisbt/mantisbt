@@ -7,11 +7,11 @@
 
 	# Danish: Søren Mortensen, sm@artmus.dk
 	# -------------------------------------------------
-	# $Revision: 1.46 $
+	# $Revision: 1.47 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:34 $
+	# $Date: 2003-03-12 18:58:20 $
 	#
-	# $Id: strings_danish.txt,v 1.46 2003-03-11 08:16:34 jlatour Exp $
+	# $Id: strings_danish.txt,v 1.47 2003-03-12 18:58:20 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -797,6 +797,10 @@
 	$s_search ='Søg';
 	$s_view_prev_link = 'Vis Forrige';
 	$s_view_next_link = 'Vis Næste';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Vis Enkel';

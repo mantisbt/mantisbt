@@ -7,11 +7,11 @@
 
 	# Romanian: Adrian Spinei, aspinei@internal.metawings.com
 	# -------------------------------------------------
-	# $Revision: 1.43 $
+	# $Revision: 1.44 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:37 $
+	# $Date: 2003-03-12 18:58:22 $
 	#
-	# $Id: strings_romanian.txt,v 1.43 2003-03-11 08:16:37 jlatour Exp $
+	# $Id: strings_romanian.txt,v 1.44 2003-03-12 18:58:22 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -797,6 +797,10 @@
 	$s_search ='Cauta';
 	$s_view_prev_link = 'Precedent';
 	$s_view_next_link = 'Urmator';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = 'Vedere simpla';

@@ -2,7 +2,7 @@ Mantis ChangeLog
 
 2003.??.??  -  0.18.0a4
  * Remove "show source" functionality which was a security hole and of little use
- * Languages: Updated Italian localisation.
+ * Languages: Updated Italian and Dutch localisations.
  * Languages: Added Slovak localisation.
  * Languages: Synchronised localisation files with English localisation.
  * Enhancement: Added bug summary by project on summary page (#1759).

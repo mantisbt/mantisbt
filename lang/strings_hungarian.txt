@@ -7,11 +7,11 @@
   # Hungarian: Istvan Back, back@webmuves.hu
   # Hungarian: Attila Vági, avagi@v-comp.hu
   # -------------------------------------------------
-  # $Revision: 1.38 $
+  # $Revision: 1.39 $
   # $Author: jlatour $
-  # $Date: 2003-03-11 08:16:35 $
+  # $Date: 2003-03-12 18:58:21 $
   #
-  # $Id: strings_hungarian.txt,v 1.38 2003-03-11 08:16:35 jlatour Exp $
+  # $Id: strings_hungarian.txt,v 1.39 2003-03-12 18:58:21 jlatour Exp $
   ###########################################################################
 ?>
 <?php
@@ -797,6 +797,10 @@
   $s_search ='Keresés';
   $s_view_prev_link = 'Elõzõ';
   $s_view_next_link = 'Következõ';
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
   $s_view_simple_link = 'Egyszerû nézet';

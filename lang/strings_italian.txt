@@ -10,11 +10,11 @@
 	#          Stefano Mazzocchi, stefano@apache.org
 	#          Lele Gaifax, lele@seldati.it
 	# -------------------------------------------------
-	# $Revision: 1.49 $
+	# $Revision: 1.50 $
 	# $Author: jlatour $
-	# $Date: 2003-03-11 08:16:35 $
+	# $Date: 2003-03-12 18:58:21 $
 	#
-	# $Id: strings_italian.txt,v 1.49 2003-03-11 08:16:35 jlatour Exp $
+	# $Id: strings_italian.txt,v 1.50 2003-03-12 18:58:21 jlatour Exp $
 	###########################################################################
 ?>
 <?php
@@ -800,6 +800,10 @@
 	$s_search = "Ricerca";
 	$s_view_prev_link = "Successivo";
 	$s_view_next_link = "Precedente";
+	$s_prev = 'Prev';
+	$s_next = 'Next';
+	$s_first = 'First';
+	$s_last = 'Last';
 
 	# view_bug_advanced_page.php
 	$s_view_simple_link = "Visualizzazione Semplice";
