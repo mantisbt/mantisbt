@@ -8,7 +8,7 @@
 	# Changes applied to 0.18 database
 
 	# --------------------------------------------------------
-	# $Id: 0_18_inc.php,v 1.5 2004-05-09 02:24:17 vboctor Exp $
+	# $Id: 0_18_inc.php,v 1.6 2004-05-10 13:45:17 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -163,30 +163,30 @@
 	$upgrades[] = new SQLUpgrade( 
 			'sponsorship-1',
 			'Add sponsorships table',
-			"CREATE TABLE 'mantis_sponsorship_table' (
-				'id' int(7) NOT NULL auto_increment,
-				'bug_id' int(7) NOT NULL default '0',
-				'user_id' int(7) NOT NULL default '0',
-				'amount' int(7) NOT NULL default '0',
-				'logo' varchar(128) NOT NULL default '',
-				'url' varchar(128) NOT NULL default '',
-				'paid' int(1) NOT NULL default '0',
-				'date_submitted' datetime NOT NULL default '1970-01-01 00:00:01',
-				'last_updated' datetime NOT NULL default '1970-01-01 00:00:01',
-				PRIMARY KEY  ('id'),
-				KEY 'bug_id' ('bug_id'),
-				KEY 'user_id' ('user_id')
+			"CREATE TABLE mantis_sponsorship_table (
+				id int(7) NOT NULL auto_increment,
+				bug_id int(7) NOT NULL default '0',
+				user_id int(7) NOT NULL default '0',
+				amount int(7) NOT NULL default '0',
+				logo varchar(128) NOT NULL default '',
+				url varchar(128) NOT NULL default '',
+				paid int(1) NOT NULL default '0',
+				date_submitted datetime NOT NULL default '1970-01-01 00:00:01',
+				last_updated datetime NOT NULL default '1970-01-01 00:00:01',
+				PRIMARY KEY  (id),
+				KEY bug_id (bug_id),
+				KEY user_id (user_id)
 				) TYPE=MyISAM COMMENT='A table for sponsorships' AUTO_INCREMENT=1" );
 
 	$upgrades[] = new SQLUpgrade( 
 			'sponsorship-2',
 			'Add sponsorship_total to bug table',
-			"ALTER TABLE 'mantis_bug_table' ADD 'sponsorship_total' INT( 7 ) DEFAULT '0' NOT NULL" );
+			"ALTER TABLE mantis_bug_table ADD sponsorship_total INT( 7 ) DEFAULT '0' NOT NULL" );
 
 	$upgrades[] = new SQLUpgrade( 
 			'sponsorship-3',
 			'Add an index on sponsorship_total in bug table',
-			"ALTER TABLE 'mantis_bug_table' ADD INDEX 'sponsorship_total' ( 'sponsorship_total' )" );
+			"ALTER TABLE mantis_bug_table ADD INDEX sponsorship_total ( sponsorship_total )" );
 
 	return $upgrades;
 ?>
