@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.6 2002-08-30 07:45:02 jfitzell Exp $
+	# $Id: authentication_api.php,v 1.7 2002-09-07 08:37:08 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -19,11 +19,15 @@
 	# otherwise redirect them to the login page
 	# if $p_redirect_url is specifed then redirect them to that page
 	function login_cookie_check( $p_redirect_url='', $p_return_page='' ) {
-		global 	$g_string_cookie_val, $g_project_cookie_val,
-				$REQUEST_URI;
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_SERVER;
+		}
+
+		$t_user_cookie = auth_get_current_user_cookie();
+		$t_project_cookie = gpc_get_cookie( config_get( 'project_cookie' ), '' );
 
 		# if logged in
-		if ( !empty( $g_string_cookie_val ) ) {
+		if ( !empty( $t_user_cookie ) ) {
 			$t_user_id = auth_get_current_user_id();
 			# get user info
 			$t_enabled = current_user_get_field( 'enabled' );
@@ -36,7 +40,7 @@
 			user_update_last_visit( $t_user_id );
 
 			# if no project is selected then go to the project selection page
-			if ( empty( $g_project_cookie_val ) ) {
+			if ( '' == $t_project_cookie ) {
 				print_header_redirect( 'login_select_proj_page.php' );
 			}
 
@@ -48,7 +52,7 @@
 			}
 		} else {				# not logged in
 			if ( empty ( $p_return_page ) ) {
-				$p_return_page = $REQUEST_URI;
+				$p_return_page = $_SERVER['REQUEST_URI'];
 			}
 			$p_return_page = htmlentities(urlencode($p_return_page));
 			print_header_redirect( 'login_page.php?f_return='.$p_return_page );
