@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.17 2003-02-18 01:03:35 jfitzell Exp $
+	# $Id: access_api.php,v 1.18 2003-02-18 01:41:50 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -26,9 +26,18 @@
 	# he/she is not authorised to.  This outputs an access denied message then
 	# re-directs to the mainpage.
 	function access_denied() {
+		if ( ! php_version_at_least( '4.1.0' ) ) {
+			global $_SERVER;
+		}
+
 		print '<center>';
 		print '<br />'.error_string(ERROR_ACCESS_DENIED).'<br />';
-		print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+		if ( ! auth_is_user_authenticated() ) {
+			$p_return_page = string_url( $_SERVER['REQUEST_URI'] );
+			print_header_redirect( 'login_page.php?return=' . $p_return_page );
+		} else {
+			print_bracket_link( 'main_page.php', lang_get( 'proceed' ) );
+		}
 		print '</center>';
 		exit;
 	}
@@ -143,6 +152,13 @@
 	# This function looks up the bug's project and performs an access check
 	#  against that project
 	function access_has_bug_level( $p_access_level, $p_bug_id ) {
+		# Deal with not logged in silently in this case
+		# @@@ we may be able to remove this and just error
+		#     and once we default to anon login, we can remove it for sure
+		if ( ! auth_is_user_authenticated() ) {
+			return false;
+		}
+
 		# If the bug is private and the user is not the reporter, then the
 		#  the user must also have higher access than private_bug_threshold
 		if ( PRIVATE == bug_get_field( $p_bug_id, 'view_state' ) &&

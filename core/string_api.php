@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.27 2003-02-16 19:46:04 jfitzell Exp $
+	# $Id: string_api.php,v 1.28 2003-02-18 01:41:50 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -73,6 +73,13 @@
 	# Process a string for display in a text box
 	function string_attribute( $p_string ) {
 		$p_string = htmlentities( $p_string );
+		return $p_string;
+	}
+
+	# --------------------
+	# Process a string for inclusion in a URL as a GET parameter
+	function string_url( $p_string ) {
+		$p_string = htmlentities( urlencode( $p_string ) );
 		return $p_string;
 	}
 

@@ -9,11 +9,11 @@
 	###########################################################################
 	# English strings for Mantis
 	# -------------------------------------------------
-	# $Revision: 1.120 $
-	# $Author: vboctor $
-	# $Date: 2003-02-17 04:12:16 $
+	# $Revision: 1.121 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-18 01:41:50 $
 	#
-	# $Id: strings_english.txt,v 1.120 2003-02-17 04:12:16 vboctor Exp $
+	# $Id: strings_english.txt,v 1.121 2003-02-18 01:41:50 jfitzell Exp $
 	###########################################################################
 ?>
 <?php
@@ -88,6 +88,8 @@
 	$s_make_public = 'Make Public';
 
 	$s_create_new_project_link = 'Create New Project';
+
+	$s_login_link = 'Login';
 
 	# bug_actiongroup_page.php : mass treatment
 	$s_bug_actiongroup_failed = 'You did not have appropriate permissions to perform that action on the following bugs: ';

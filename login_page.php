@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.26 2003-02-15 10:25:16 jfitzell Exp $
+	# $Id: login_page.php,v 1.27 2003-02-18 01:41:50 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,13 +16,9 @@
 <?php
 	require_once( 'core.php' );
 
-	# Check if the user is already logged in
-	if ( auth_is_user_authenticated() ) {
-		print_header_redirect( 'main_page.php' );
-	}
+	print_page_top1();
+	print_page_top2a();
 ?>
-<?php print_page_top1() ?>
-<?php print_page_top2a() ?>
 
 <br />
 <div align="center">
@@ -30,7 +26,6 @@
 	$f_error		= gpc_get_bool( 'error' );
 	$f_cookie_error	= gpc_get_bool( 'cookie_error' );
 	$f_return		= gpc_get_string( 'return', '' );
-	$f_project_id	= gpc_get_int( 'project_id', -1 );
 
 	# Only echo error message if error variable is set
 	if ( $f_error ) {
@@ -58,13 +53,6 @@
 				<input type="hidden" name="return" value="<?php echo $f_return ?>" />
 				<?php
 			}
-
-			if ( $f_project_id > -1 ) {
-			?>
-				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-				<?php
-			}
-			?>
 		<?php echo lang_get( 'login_title' ) ?>
 	</td>
 	<td class="right">
