@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.56 2004-05-23 14:13:47 vboctor Exp $
+	# $Id: bug_view_page.php,v 1.57 2004-06-20 22:05:03 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -427,8 +427,14 @@
 ?>
 	<!-- Jump to Bugnote add form -->
 	<br />
+<?php
+	if ( ( $t_bug->status < config_get( 'bug_resolved_status_threshold' ) ) &&
+		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) )
+	{
+?>
 	<span class="small"><?php print_bracket_link( "#addbugnote", lang_get( 'add_bugnote_button' ) ) ?></span>
 	<br />
+<?php } ?>
 <?php
 	# History
 	if ( $f_history ) {
