@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_reopen.php,v 1.28 2003-01-25 21:13:15 jlatour Exp $
+	# $Id: bug_reopen.php,v 1.29 2003-02-11 09:08:34 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,7 @@
 	
 	require_once( $t_core_path.'bug_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id		= gpc_get_int( 'bug_id' );
 	$f_bugnote_text	= gpc_get_string( 'bugnote_text', '' );

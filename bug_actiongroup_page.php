@@ -6,14 +6,14 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_actiongroup_page.php,v 1.28 2003-01-23 23:02:51 jlatour Exp $
+	# $Id: bug_actiongroup_page.php,v 1.29 2003-02-11 09:08:31 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# This page allows actions to be performed an an array of bugs
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_action = gpc_get_string( 'action', '' );
 	$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );

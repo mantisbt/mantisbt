@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_edit_page.php,v 1.36 2003-02-10 21:59:33 jfitzell Exp $
+	# $Id: bugnote_edit_page.php,v 1.37 2003-02-11 09:08:40 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -29,7 +29,7 @@
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bugnote_id = gpc_get_int( 'bugnote_id' );
 

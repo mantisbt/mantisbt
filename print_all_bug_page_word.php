@@ -21,7 +21,7 @@
 	require_once( $t_core_path.'string_api.php' );
 	require_once( $t_core_path.'date_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_type_page	= gpc_get_string( 'type_page', 'word' );
 	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default

@@ -13,7 +13,7 @@
 	require_once( $t_core_path.'news_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>
 <?php

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_create.php,v 1.12 2003-02-11 07:36:01 jfitzell Exp $
+	# $Id: manage_user_create.php,v 1.13 2003-02-11 09:08:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 	
 	require_once( $t_core_path.'email_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( config_get( 'manage_user_threshold' ) );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: main_page.php,v 1.35 2003-02-10 21:59:36 jfitzell Exp $
+	# $Id: main_page.php,v 1.36 2003-02-11 09:08:43 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 	require_once( $t_core_path.'current_user_api.php' );
 	require_once( $t_core_path.'news_api.php' );
 ?>
-<?php login_cookie_check();
+<?php auth_ensure_user_authenticated();
 
 	$f_offset = gpc_get_int( 'offset', 0 );
 

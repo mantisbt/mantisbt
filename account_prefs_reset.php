@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_reset.php,v 1.21 2003-01-25 21:13:14 jlatour Exp $
+	# $Id: account_prefs_reset.php,v 1.22 2003-02-11 09:08:27 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -33,7 +33,7 @@
 	$f_redirect_url	= gpc_get_string( 'redirect_url', 'account_prefs_page.php' );
 
 	#============ Permissions ============
-	login_cookie_check();
+	auth_ensure_user_authenticated();
 
 ?>
 <?php

@@ -15,7 +15,7 @@
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 

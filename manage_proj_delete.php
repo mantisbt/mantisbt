@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_delete.php,v 1.23 2003-01-30 09:41:20 jfitzell Exp $
+	# $Id: manage_proj_delete.php,v 1.24 2003-02-11 09:08:45 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( config_get( 'delete_project_threshold' ) );
 	

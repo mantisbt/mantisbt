@@ -6,12 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: login_page.php,v 1.24 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: login_page.php,v 1.25 2003-02-11 09:08:42 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
 	# Login page POSTs results to login.php
-	# Check to see if the user is already logged in via login_cookie_check()
+	# Check to see if the user is already logged in via auth_ensure_user_authenticated()
 ?>
 <?php
 	require_once( 'core.php' );

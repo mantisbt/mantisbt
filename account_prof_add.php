@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_add.php,v 1.21 2003-01-25 21:13:14 jlatour Exp $
+	# $Id: account_prof_add.php,v 1.22 2003-02-11 09:08:29 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,7 @@
 	
 	require_once( $t_core_path.'profile_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( config_get( 'add_profile_threshold' ) );
 

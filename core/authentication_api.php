@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: authentication_api.php,v 1.18 2003-01-23 06:11:46 robertjf Exp $
+	# $Id: authentication_api.php,v 1.19 2003-02-11 09:08:57 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -16,16 +16,6 @@
 	#===================================
 	# Boolean queries and ensures
 	#===================================
-
-	# --------------------
-	# @@@ backwards compatibility function... remove me later
-	function login_cookie_check( $p_return_page='' ) {
-		auth_ensure_user_authenticated( $p_return_page );
-
-		# update last_visit date
-		$t_user_id = auth_get_current_user_id();
-		user_update_last_visit( $t_user_id );
-	}
 
 	# --------------------
 	# Check that there is a user logged-in and authenticated

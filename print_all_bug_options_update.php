@@ -11,7 +11,7 @@
 <?php require_once( 'core.php' ) ?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
 
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_user_id		= gpc_get_int( 'user_id' );
 	$f_redirect_url	= gpc_get_int( 'redirect_url' );

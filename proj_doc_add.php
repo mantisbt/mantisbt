@@ -12,7 +12,7 @@
 	
 	require_once( $t_core_path.'file_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	if ( ! file_allow_project_upload() ) {
 		access_denied();

@@ -23,7 +23,7 @@
 	require_once( $t_core_path.'icon_api.php' );
 	require_once( $t_core_path.'string_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default
 	$f_offset		= gpc_get_int( 'offset', 0 );

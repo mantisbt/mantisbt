@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: access_api.php,v 1.12 2003-01-25 18:21:07 jlatour Exp $
+	# $Id: access_api.php,v 1.13 2003-02-11 09:08:56 jfitzell Exp $
 	# --------------------------------------------------------
 	
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -20,6 +20,7 @@
 	# function to be called when a user is attempting to access a page that
 	# he/she is not authorised to.  This outputs an access denied message then
 	# re-directs to the mainpage.
+	#@@@ rename to access_deny()
 	function access_denied() {
 		global $MANTIS_ERROR;
 		print '<center>';
@@ -29,29 +30,11 @@
 		exit;
 	}
 	# --------------------
-	# check to see if the access level is strictly equal
-	function access_level_check_equal( $p_access_level, $p_project_id=0 ) {
-		global $g_string_cookie_val;
-
-		if ( !isset( $g_string_cookie_val ) ) {
-			return false;
-		}
-
-		$t_access_level = current_user_get_field( 'access_level' );
-		$t_access_level2 = get_project_access_level( $p_project_id );
-
-		if ( $t_access_level2 == $p_access_level ) {
-			return true;
-		} else if ( ( $t_access_level == $p_access_level ) &&
-					( -1 == $t_access_level2 ) ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	# --------------------
 	# check to see if the current user has access to the specified bug.  This assume that the bug exists and
 	# that the user has access to the project (check_bug_exists() and project_access_check()).
+	#@@@ remove 2nd param (unused)
+	#@@@ rename to ...
+	#@@@ use more consistently in user_* pages...?
 	function access_bug_check( $p_bug_id, $p_view_state='' ) {
 		global $g_private_bug_threshold;
 
@@ -69,6 +52,7 @@
 	# --------------------
 	# check to see if the access level is equal or greater
 	# this checks to see if the user has a higher access level for the current project
+	#@@@ most common function
 	function access_level_check_greater_or_equal( $p_access_level, $p_project_id=0 ) {
 		global $g_string_cookie_val;
 
@@ -105,6 +89,7 @@
 	# The return will be true for administrators, will be the project-specific access
 	# right if found, or the default if project is PUBLIC and no specific access right
 	# found, otherwise, (private/not found) will return false
+	#@@@ only used once and I just introduced it
 	function access_level_ge_no_default_for_private ( $p_access_level, $p_project_id ) {
 		global $g_string_cookie_val;
 
@@ -134,24 +119,9 @@
 		return ( $t_access_level >= $p_access_level );
 	}
 	# --------------------
-	# check to see if the access level is strictly equal
-	function absolute_access_level_check_equal( $p_access_level ) {
-		global $g_string_cookie_val;
-
-		if ( !isset( $g_string_cookie_val ) ) {
-			return false;
-		}
-
-		$t_access_level = current_user_get_field( 'access_level' );
-		if ( $t_access_level == $p_access_level ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	# --------------------
 	# check to see if the access level is equal or greater
 	# this checks to see if the user has a higher access level for the current project
+	#@@@ only used in the few places I just added it (in the manage section)
 	function absolute_access_level_check_greater_or_equal( $p_access_level ) {
 		global $g_string_cookie_val;
 
@@ -188,6 +158,8 @@
 	# Checks to see if the user has access to this project
 	# If not then log the user out
 	# If not logged into the project it attempts to log you into that project
+	#@@@ would be nice if this didn't actually set the current project, just
+	#    used the bug's project for permissions
 	function project_access_check( $p_bug_id, $p_project_id='0' ) {
 		global	$g_mantis_project_user_list_table,
 				$g_mantis_project_table, $g_mantis_bug_table,
@@ -221,6 +193,8 @@
 	# Check to see if the currently logged in project and bug project id match
 	# If there is no match then the project cookie will be set to the bug project id
 	# No access check is done.  It is expected to be checked afterwards.
+	#@@@ only called from the function above
+	#@@@ rename to access_force_current_project() or something
 	function project_check( $p_bug_id ) {
 		global	$g_project_cookie, $g_project_cookie_val, $g_view_all_cookie,
 				$g_cookie_time_length, $g_cookie_path;
@@ -235,6 +209,7 @@
 	}
 	# --------------------
 	# Check to see if the current user has access on the specified project
+	#@@@ only used once in filter_api
 	function check_access_to_project( $p_project_id ) {
 		$t_project_view_state = project_get_field( $p_project_id, 'view_state' );
 
@@ -260,6 +235,7 @@
 	# --------------------
 	# return the project access level for the current user/project key pair.
 	# use the project_id if supplied.
+	#@@@ only called internally, should be able to be replaced with project_api calls
 	function get_project_access_level( $p_project_id=0 ) {
 		global	$g_mantis_project_user_list_table,
 				$g_project_cookie_val;
@@ -289,6 +265,7 @@
 	# --------------------
 	# Return the project user list access level for the current user/project key pair if it exists.
 	# Otherwise return the default user access level.
+	#@@@ NEVER used
 	function get_effective_access_level( $p_user_id=0, $p_project_id=-1 ) {
 		global	$g_mantis_project_user_list_table,
 				$g_project_cookie_val;

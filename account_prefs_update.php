@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prefs_update.php,v 1.26 2003-01-25 21:13:14 jlatour Exp $
+	# $Id: account_prefs_update.php,v 1.27 2003-02-11 09:08:27 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,7 @@
 	
 	require_once( $t_core_path.'user_pref_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_user_id					= gpc_get_int( 'user_id' );
 	$f_redirect_url				= gpc_get_string( 'redirect_url' );

@@ -8,7 +8,7 @@
 	# This page displays "improved" charts on categories : categories on bars and 3Dpie
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.
 	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {

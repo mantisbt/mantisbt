@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_user_proj_add.php,v 1.16 2003-02-11 07:36:01 jfitzell Exp $
+	# $Id: manage_user_proj_add.php,v 1.17 2003-02-11 09:08:48 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( config_get( 'manage_user_threshold' ) );
 	check_access( config_get( 'project_user_threshold' ) );

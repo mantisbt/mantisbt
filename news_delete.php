@@ -12,7 +12,7 @@
 	
 	require_once( $t_core_path.'news_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 

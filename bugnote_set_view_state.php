@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bugnote_set_view_state.php,v 1.18 2003-01-25 21:13:16 jlatour Exp $
+	# $Id: bugnote_set_view_state.php,v 1.19 2003-02-11 09:08:41 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 	require_once( $t_core_path.'bug_api.php' );
 	require_once( $t_core_path.'bugnote_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bugnote_id	= gpc_get_int( 'bugnote_id' );
 	$f_private		= gpc_get_bool( 'private' );

@@ -12,7 +12,7 @@
 ?>
 <?php require_once( 'core.php' ) ?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	print_page_top1();
 	print_page_top2();

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_page.php,v 1.6 2003-02-11 07:18:25 jfitzell Exp $
+	# $Id: manage_proj_page.php,v 1.7 2003-02-11 09:08:46 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 
 	require_once( $t_core_path . 'icon_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 

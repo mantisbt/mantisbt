@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.21 2003-01-25 21:13:17 jlatour Exp $
+	# $Id: file_download.php,v 1.22 2003-02-11 09:08:41 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,7 @@
 	
 	require_once( $t_core_path.'file_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_file_id	= gpc_get_int( 'file_id' );
 	$f_type		= gpc_get_string( 'type' );

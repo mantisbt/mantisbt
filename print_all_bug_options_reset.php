@@ -16,7 +16,7 @@
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	# protected account check
 	current_user_ensure_unprotected();

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_create_page.php,v 1.2 2003-02-11 07:18:25 jfitzell Exp $
+	# $Id: manage_proj_create_page.php,v 1.3 2003-02-11 09:08:44 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	# We can't use check_access() because we need absolute access level, not
 	#  project-based access level

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.12 2003-02-10 21:59:35 jfitzell Exp $
+	# $Id: csv_export.php,v 1.13 2003-02-11 09:08:41 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 	
 	require_once( $t_core_path.'filter_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	# check to see if the cookie does not exist
 	if ( !filter_is_cookie_valid() ) {

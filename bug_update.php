@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_update.php,v 1.50 2003-01-25 21:13:16 jlatour Exp $
+	# $Id: bug_update.php,v 1.51 2003-02-11 09:08:37 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 	require_once( $t_core_path.'bugnote_api.php' );
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id = gpc_get_int( 'bug_id' );
 

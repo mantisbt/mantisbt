@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_page.php,v 1.37 2003-01-25 21:13:14 jlatour Exp $
+	# $Id: account_page.php,v 1.38 2003-02-11 09:08:26 jfitzell Exp $
 	# --------------------------------------------------------
 
 	# CALLERS
@@ -40,7 +40,7 @@
 	# (none)
 
 	#============ Permissions ============
-	login_cookie_check();
+	auth_ensure_user_authenticated();
 
 	current_user_ensure_unprotected();
 ?>

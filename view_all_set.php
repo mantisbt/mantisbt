@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_type					= gpc_get_int( 'type', -1 );
 	$f_print				= gpc_get_bool( 'print' );

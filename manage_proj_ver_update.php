@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_ver_update.php,v 1.24 2003-02-09 00:50:59 jfitzell Exp $
+	# $Id: manage_proj_ver_update.php,v 1.25 2003-02-11 09:08:47 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 	
 	require_once( $t_core_path.'version_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 

@@ -9,7 +9,7 @@
 	# Modified and "make mantis codeguidlines compatible" by Rufinus
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.
 	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {

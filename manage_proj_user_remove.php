@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_user_remove.php,v 1.1 2003-02-09 10:30:06 jfitzell Exp $
+	# $Id: manage_proj_user_remove.php,v 1.2 2003-02-11 09:08:46 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	# We should check both since we are in the project section and an
 	#  admin might raise the first threshold and not realize they need

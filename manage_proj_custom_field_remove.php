@@ -12,7 +12,7 @@
 	
 	require_once( $t_core_path.'custom_field_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	# We should check both since we are in the project section and an
 	#  admin might raise the first threshold and not realize they need

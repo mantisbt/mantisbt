@@ -20,7 +20,7 @@
 	require_once( $t_core_path.'string_api.php' );
 ?>
 <?php require( 'print_all_bug_options_inc.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_type_page	= gpc_get_string( 'type_page', 'excel' );
 	$f_search		= gpc_get_string( 'search', false ); # @@@ need a better default

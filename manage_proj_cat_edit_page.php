@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: manage_proj_cat_edit_page.php,v 1.24 2003-02-10 21:59:36 jfitzell Exp $
+	# $Id: manage_proj_cat_edit_page.php,v 1.25 2003-02-11 09:08:43 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -16,7 +16,7 @@
 	
 	require_once( $t_core_path.'category_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( config_get( 'manage_project_threshold' ) );
 

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: account_prof_update.php,v 1.23 2003-01-25 21:13:14 jlatour Exp $
+	# $Id: account_prof_update.php,v 1.24 2003-02-11 09:08:31 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -20,7 +20,7 @@
 	
 	require_once( $t_core_path.'profile_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_profile_id	= gpc_get_int( 'profile_id' );
 	$f_platform		= gpc_get_string( 'platform' );

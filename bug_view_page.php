@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.29 2003-01-25 21:13:16 jlatour Exp $
+	# $Id: bug_view_page.php,v 1.30 2003-02-11 09:08:39 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -22,7 +22,7 @@
 	require_once( $t_core_path.'date_api.php' );
 	require_once( $t_core_path.'relationship_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_bug_id	= gpc_get_int( 'bug_id' );
 	$f_history	= gpc_get_bool( 'history' );

@@ -12,7 +12,7 @@
 	
 	require_once( $t_core_path.'current_user_api.php' );
 ?>
-<?php #login_cookie_check() ?>
+<?php #auth_ensure_user_authenticated() ?>
 <?php
 	$f_project_id	= gpc_get_int( 'project_id' );
 	$f_make_default	= gpc_get_bool( 'make_default' );

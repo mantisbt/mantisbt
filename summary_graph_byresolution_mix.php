@@ -12,7 +12,7 @@
 	
 	require_once( $t_core_path.'graph_api.php' );
 
-	login_cookie_check();
+	auth_ensure_user_authenticated();
 
 	# if user is below view summary threshold, then re-direct to mainpage.
 	if ( !access_level_check_greater_or_equal( config_get( 'view_summary_threshold' ) ) ) {

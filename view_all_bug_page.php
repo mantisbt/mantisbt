@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Revision: 1.45 $
-	# $Author: jlatour $
-	# $Date: 2003-01-25 21:13:20 $
+	# $Revision: 1.46 $
+	# $Author: jfitzell $
+	# $Date: 2003-02-11 09:08:56 $
 	#
-	# $Id: view_all_bug_page.php,v 1.45 2003-01-25 21:13:20 jlatour Exp $
+	# $Id: view_all_bug_page.php,v 1.46 2003-02-11 09:08:56 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -21,7 +21,7 @@
 	require_once( $t_core_path.'compress_api.php' );
 	require_once( $t_core_path.'filter_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_page_number		= gpc_get_int( 'page_number', 1 );
 

@@ -6,11 +6,11 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: documentation_page.php,v 1.15 2003-01-18 02:14:12 jfitzell Exp $
+	# $Id: documentation_page.php,v 1.16 2003-02-11 09:08:41 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	check_access( ADMINISTRATOR );
 ?>

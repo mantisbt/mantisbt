@@ -12,7 +12,7 @@
 	
 	require_once( $t_core_path.'summary_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	# if user below view summary threshold, then re-direct to mainpage.
 	if ( !access_level_check_greater_or_equal( $g_view_summary_threshold ) ) {

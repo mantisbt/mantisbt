@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_delete.php,v 1.23 2003-01-25 21:13:15 jlatour Exp $
+	# $Id: bug_file_delete.php,v 1.24 2003-02-11 09:08:33 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -19,7 +19,7 @@
 	
 	require_once( $t_core_path.'file_api.php' );
 ?>
-<?php login_cookie_check() ?>
+<?php auth_ensure_user_authenticated() ?>
 <?php
 	$f_file_id = gpc_get_int( 'file_id' );
 
