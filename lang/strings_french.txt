@@ -14,11 +14,11 @@
 	# French: Laurent LABAT, wizzz@apinc.org
 	# French: Alexandre Ghisoli, alexandre.ghisoli@ycom.ch
 	# -------------------------------------------------
-	# $Revision: 1.71 $
-	# $Author: vboctor $
-	# $Date: 2004-07-18 15:22:04 $
+	# $Revision: 1.72 $
+	# $Author: prichards $
+	# $Date: 2004-07-20 21:32:47 $
 	#
-	# $Id: strings_french.txt,v 1.71 2004-07-18 15:22:04 vboctor Exp $
+	# $Id: strings_french.txt,v 1.72 2004-07-20 21:32:47 prichards Exp $
 	###########################################################################
 ?>
 <?php
@@ -76,11 +76,11 @@ $s_bug_relationships = 'Relations';
 $s_empty_password_sure_msg = 'L\'utilisateur a un mot de passe vide.  Est ce bien ce que vous voulez ?';
 $s_empty_password_button = 'Utiliser un mot de passe vide';
 
-$s_duplicate_of = 'doublon de %id';
-$s_has_duplicate = 'a pour doublon %id';
-$s_related_to = 'lié à %id';
-$s_dependant_on = 'dépendant de %id';
-$s_blocks = 'bloque %id';
+$s_duplicate_of = 'doublon de';
+$s_has_duplicate = 'a pour doublon';
+$s_related_to = 'lié à';
+$s_dependant_on = 'dépendant de';
+$s_blocks = 'bloque';
 
 $s_new_bug = 'Nouveau bug';
 $s_bugnote_added = 'Note ajoutée';
