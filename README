@@ -20,14 +20,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 -------------------------------------------------------------------------------
+Important Files:
 
 INSTALL          - installation instructions
 UPGRADING        - upgrade instructions
 CONFIGURATION    - help on custom configuration
 LICENSE          - GPL license
 Changelog        - List of fixes, additions, and todo items
-config_inc.php3  - global configuration options
-core_API.php3    - core functions
+config_inc.php   - global configuration options
+core_API.php     - core functions
 db_generate.sql  - SQL table statements
 db_upgrade.sql   - SQL upgrade statements
 
@@ -45,22 +46,32 @@ Security exists though I'm not really in a position to judge how secure.  So,
 if you're going to use this try to use it in a semi-private area until this
 package has been looked through a few times.
 
-You will need to have php, mysql, and a webserver.  You don't need to know too
-much about any of them other than how to set them up and some basic
-administraton commands.
+You will need to have php 3.0.13 or higher , mysql, and a webserver.  You don't
+need to know too much about any of them other than how to set them up and some
+basic administraton commands.
 
 The release numbering convention I'm using is major.minor.micro.
 Major indicates a large change in the core package, minor a significant
 amount of feature addition/modification, micro for mostly bug fixes.
 
 I'd appreciate an email letting me know if you find this program useful.
-I won't publish any information without permission, I'd just like an idea
+I won't publish any information without permission; I'd just like an idea
 and knowing I'm helping people will only motivate me more.
 
 Also, let me know if you see any ways I can improve my code or design.
-I'm by no means an expert in php or code design.
+I'm by no means an expert in php or code design.  Insights into better ways
+to implement functionality and features will only help out everyone using
+the package.
 
-Credits:
+-------------------------------------------------------------------------------
+CREDITS:
 
-Kenzaburo Ito - prescience@300baud.org - programming
+Kenzaburo Ito - kenito@300baud.org - programming
 Hai Nguyen - original implementation
+
+Contributors:
+
+Sean Phelan
+Steve Davies
+Jason Stewart
+Hermann-Josef Beckers
