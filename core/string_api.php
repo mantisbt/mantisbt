@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: string_api.php,v 1.34 2003-03-17 00:25:47 jfitzell Exp $
+	# $Id: string_api.php,v 1.35 2003-04-22 15:42:03 jfitzell Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -205,12 +205,12 @@
 	function string_strip_hrefs( $p_string ) {
 		# First grab mailto: hrefs.  We don't care whether the URL is actually
 		# correct - just that it's inside an href attribute.
-		$p_string = preg_replace( '/<a\s[^\>]*href="mailto:([^\"]+)"[^\"]*>[^\<]*<\/a>/s',
+		$p_string = preg_replace( '/<a\s[^\>]*href="mailto:([^\"]+)"[^\>]*>[^\<]*<\/a>/si',
 								'\1',
 								$p_string);
 
 		# Then grab any other href
-		$p_string = preg_replace( '/<a\s[^\>]*href="([^\"]+)"[^\"]*>[^\<]*<\/a>/s',
+		$p_string = preg_replace( '/<a\s[^\>]*href="([^\"]+)"[^\>]*>[^\<]*<\/a>/si',
 								'\1',
 								$p_string);
 		return $p_string;
