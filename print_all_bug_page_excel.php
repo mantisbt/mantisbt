@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_excel.php,v 1.38 2004-05-30 01:49:31 vboctor Exp $
+	# $Id: print_all_bug_page_excel.php,v 1.39 2004-06-16 04:28:29 robertjf Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -36,6 +36,10 @@
 	if ( $f_type_page != 'html' ) {
 		$t_export_title = $g_page_title."_excel";
 		$t_export_title = ereg_replace( '[\/:*?"<>|]', '', $t_export_title );
+
+		# Make sure that IE can download the attachments under https.
+		header( 'Pragma: public' );
+
 		header( 'Content-Type: application/vnd.ms-excel' );
 		header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.xls"' );
 	}

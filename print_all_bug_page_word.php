@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: print_all_bug_page_word.php,v 1.45 2004-03-05 02:27:51 jlatour Exp $
+	# $Id: print_all_bug_page_word.php,v 1.46 2004-06-16 04:28:28 robertjf Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -38,6 +38,10 @@
 	if ( $f_type_page != 'html' ) {
 		$t_export_title = $g_page_title."_word";
 		$t_export_title = ereg_replace( '[\/:*?"<>|]', '', $t_export_title );
+
+		# Make sure that IE can download the attachments under https.
+		header( 'Pragma: public' );
+		
 		header( 'Content-Type: application/msword' );
 		header( 'Content-Disposition: attachment; filename="' . $t_export_title . '.doc"' );
 	}

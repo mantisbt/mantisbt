@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_download.php,v 1.27 2004-03-18 14:02:28 vboctor Exp $
+	# $Id: file_download.php,v 1.28 2004-06-16 04:28:29 robertjf Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -65,9 +65,15 @@
 			access_ensure_project_level( config_get( 'view_proj_doc_threshold' ), $v_project_id );
 			break;
 	}
+	
+	# Make sure that IE can download the attachments under https.
+	header( 'Pragma: public' );
+	
 	header( 'Content-type: ' . $v_file_type );
 	header( 'Content-Length: ' . $v_filesize );
-	header( 'Content-Disposition: filename=' . file_get_display_name( $v_filename ) );
+	
+	# Added Quotes (") around file name.
+	header( 'Content-Disposition: filename="' . file_get_display_name( $v_filename ) . '"' );
 	header( 'Content-Description: Download Data' );
 
 	# dump file content to the connection.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: csv_export.php,v 1.19 2004-05-30 01:49:31 vboctor Exp $
+	# $Id: csv_export.php,v 1.20 2004-06-16 04:28:29 robertjf Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -41,9 +41,15 @@
         $t_filename = csv_get_default_filename();
 
 	# Send headers to browser to activate mime loading
+
+	# Make sure that IE can download the attachments under https.
+	header( 'Pragma: public' );
+	
 	header( 'Content-Type: text/plain; name=' . $t_filename );
 	header( 'Content-Transfer-Encoding: BASE64;' );
-	header( 'Content-Disposition: attachment; filename=' . $t_filename );
+
+	# Added Quotes (") around file name.
+	header( 'Content-Disposition: attachment; filename="' . $t_filename .'"');
 
 	# Get columns to be exported
 	$t_columns = csv_get_columns();
