@@ -6,10 +6,12 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: relationship_api.php,v 1.12 2004-07-18 00:07:44 vboctor Exp $
+	# $Id: relationship_api.php,v 1.13 2004-07-18 13:22:29 vboctor Exp $
 	# --------------------------------------------------------
 
 	### Relationship API ###
+
+	require_once( $t_core_dir . 'collapse_api.php' );
 
 	# MASC RELATIONSHIP
 
@@ -544,27 +546,14 @@
 ?>
 <br/>
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<div id="relationships_closed">
-<table class="width100" cellspacing="1">
-<tr>
-	<td class="form-title">
-		<a href="" onClick="ToggleDiv( 'relationships', g_div_relationships ); return false;"
-			><img border="0" src="images/plus.png" alt="+" /></a>
-		<?php PRINT lang_get( 'bug_relationships' ) ?>
-	</td>
-</tr>
-</table>
-</div>
-<?php } ?>
-
-<div id="relationships_open">
+<?php collapse_open( 'relationships' ); ?>
 <table class="width100" cellspacing="1">
 <tr class="row-2">
 	<td width="15%" class="form-title">
-		<a href="" onClick="ToggleDiv( 'relationships', g_div_relationships ); return false;"
-			><img border="0" src="images/minus.png" alt="-" /></a>
-		<?php PRINT lang_get( 'bug_relationships' ) ?>
+		<?php
+			collapse_icon( 'relationships' );
+			echo lang_get( 'bug_relationships' );
+		?>
 	</td>
 	<td><?php PRINT relationship_get_summary_html( $p_bug_id ) ?></td>
 </tr>
@@ -596,15 +585,21 @@
 		}
 ?>
 </table>
-</div>
 
-<?php if ( ON == config_get( 'use_javascript' ) ) { ?>
-<script type="text/JavaScript">
-	SetDiv( "relationships", g_div_relationships );
-</script>
-<?php } ?>
+<?php collapse_closed( 'relationships' ); ?>
+<table class="width100" cellspacing="1">
+<tr>
+	<td class="form-title">
+		<?php
+			collapse_icon( 'relationships' );
+			echo lang_get( 'bug_relationships' );
+		?>
+	</td>
+</tr>
+</table>
 
 <?php
+		collapse_end( 'relationships' );
 	}
 
 	# MASC RELATIONSHIP

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: collapse_api.php,v 1.1 2004-07-17 23:52:56 vboctor Exp $
+	# $Id: collapse_api.php,v 1.2 2004-07-18 13:22:28 vboctor Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -73,6 +73,10 @@
 	# This is used within both the open and closed section to identify the location where the
 	# '+'/'-' icon should be placed.
 	function collapse_icon( $p_name ) {
+		if ( OFF == config_get( 'use_javascript' ) ) {
+			return;
+		}
+
 		global $g_open_collapse_section;
 
 		if ( $g_open_collapse_section === true ) {

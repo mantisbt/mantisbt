@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_sponsorship_list_view_inc.php,v 1.8 2004-07-17 23:52:56 vboctor Exp $
+	# $Id: bug_sponsorship_list_view_inc.php,v 1.9 2004-07-18 13:22:28 vboctor Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -50,8 +50,7 @@
 			<img src="images/dollars.gif" alt="Sponsor Me" border="0" />
 		</td>
 		<td class="form-title" colspan="2">
-			<a href="" onClick="ToggleDiv( 'sponsorship', g_div_sponsorship ); return false;"
-				><img border="0" src="images/minus.png" alt="-" /></a>
+			<?php collapse_icon( 'sponsorship' ); ?>
 		<?php
 			echo lang_get( 'users_sponsoring_bug' );
 
@@ -123,9 +122,8 @@
 <table class="width100" cellspacing="1">
 	<tr>
 		<td class="form-title">
-			<a href="" onClick="ToggleDiv( 'sponsorship', g_div_sponsorship ); return false;"
-				><img border="0" src="images/plus.png" alt="+" /></a>
 <?php
+			collapse_icon( 'sponsorship' );
 			echo lang_get( 'users_sponsoring_bug' );
 
 			$t_details_url = lang_get( 'sponsorship_process_url' );
