@@ -27,6 +27,12 @@
 		$t_result = mysql_connect(  $p_hostname.":".$p_port,
 									$p_username, $p_password );
 		$t_result = mysql_select_db( $p_database );
+
+		### Temproary error handling
+		if ( !$t_result ) {
+			echo "ERROR: FAILED CONNECTION TO DATABASE";
+			exit;
+		}
 	}
 	### --------------------
 	# persistent connect to database
@@ -37,6 +43,12 @@
 		$t_result = mysql_pconnect(  $p_hostname.":".$p_port,
 									$p_username, $p_password );
 		$t_result = mysql_select_db( $p_database );
+
+		### Temproary error handling
+		if ( !$t_result ) {
+			echo "ERROR: FAILED CONNECTION TO DATABASE";
+			exit;
+		}
 	}
 	### --------------------
 	# execute query, requires connection to be opened,
@@ -68,7 +80,12 @@
 	}
 	### --------------------
 	function db_result( $p_result, $p_index1=0, $p_index2=0 ) {
-		return mysql_result( $p_result, $p_index1, $p_index2 );
+		if ( $p_result ) {
+			return mysql_result( $p_result, $p_index1, $p_index2 );
+		}
+		else {
+			return false;
+		}
 	}
 	### --------------------
 	function db_close() {
@@ -120,7 +137,7 @@
 
 		PRINT "<hr size=1>";
 		print_mantis_version();
-		PRINT "<address>Copyright (c) 2000</address>";
+		PRINT "<address>Copyright (c) 2000, 2001</address>";
 		PRINT "<address><a href=\"mailto:$g_webmaster_email\">$g_webmaster_email</a></address>";
 	}
 	### --------------------
@@ -129,7 +146,7 @@
 	}
 	### --------------------
 	function print_html_bottom() {
-		PRINT "<html>";
+		PRINT "</html>";
 	}
 	### --------------------
 	###########################################################################
@@ -138,22 +155,25 @@
 	### --------------------
 	# prints the user that is logged in and the date/time
 	function print_login_info() {
-		global 	$g_mantis_user_table, $g_string_cookie_val;
+		global 	$g_mantis_user_table, $g_string_cookie_val, $g_complete_date_format;
 
-		$query = "SELECT username
-				FROM $g_mantis_user_table
-				WHERE cookie_string='$g_string_cookie_val'";
-		$result = db_query( $query );
-		$t_username = db_result( $result, 0 );
-
-		$t_now = date("d-m-y h:m T");
+		$t_username = get_current_user_field( "username" );
+		$t_now = date($g_complete_date_format);
 		PRINT "<table width=100%><tr>";
-		PRINT "<td align=left width=50%>";
+		PRINT "<td align=left width=25%>";
 			PRINT "Logged in as: <i>$t_username</i>";
 		PRINT "</td>";
-		PRINT "<td align=right width=50%>";
+		PRINT "<td align=center width=50%>";
 			PRINT "<i>$t_now</i>";
 		PRINT "</td>";
+		PRINT "<td align=right width=25%>";
+			PRINT "<form method=post action=$g_>";
+			PRINT "<select name=f_project_id>";
+			print_projects_option_list();
+			PRINT "</select>";
+			PRINT "<input type=submit value=\"go\">";
+		PRINT "</td>";
+			PRINT "</form>";
 		PRINT "</tr></table>";
 	}
 	### --------------------
@@ -204,6 +224,56 @@
 	}
 	### --------------------
 	###########################################################################
+	# Basic Print API
+	###########################################################################
+	### --------------------
+	function print_user( $p_user_id ) {
+		global $g_mantis_user_table;
+
+		if ( $p_user_id=="0000000" ) {
+			return;
+		}
+	    $query = "SELECT username, email
+	    		FROM $g_mantis_user_table
+	    		WHERE id='$p_user_id'";
+	    $result = db_query( $query );
+	    if ( db_num_rows( $result )>0 ) {
+			$t_handler_username	= db_result( $result, 0, 0 );
+			$t_handler_email	= db_result( $result, 0, 1 );
+
+			PRINT "<a href=\"mailto:$t_handler_email\">".$t_handler_username."</a>";
+		}
+		else {
+			PRINT "user no longer exists";
+		}
+	}
+	### --------------------
+	function print_duplicate_id( $p_duplicate_id ) {
+		global 	$g_view_bug_page, $g_view_bug_advanced_page,
+				$g_mantis_user_pref_table;
+
+		if ( $p_duplicate_id!='0000000' ) {
+			if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" )=="on" ) {
+				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
+			}
+			else {
+				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
+			}
+		}
+	}
+	### --------------------
+	### Returns the number of bugntoes for the given bug_id
+	function get_bugnote_count( $p_id ) {
+		global $g_mantis_bugnote_table;
+
+		$query = "SELECT COUNT(id)
+					FROM $g_mantis_bugnote_table
+					WHERE bug_id ='$p_id'";
+		$result = db_query( $query );
+		return db_result( $result, 0 );
+	}
+	### --------------------
+	###########################################################################
 	# Option List Printing API
 	###########################################################################
 	### --------------------
@@ -212,7 +282,8 @@
 
 	    $query = "SELECT id, username
 	    		FROM $g_mantis_user_table
-	    		WHERE access_level='administrator' OR access_level='developer'";
+	    		WHERE access_level='administrator' OR access_level='developer'
+	    		ORDER BY username";
 	    $result = db_query( $query );
 	    $user_count = db_num_rows( $result );
 	    for ($i=0;$i<$user_count;$i++) {
@@ -225,6 +296,28 @@
 			}
 			else {
 				PRINT "<option value=\"$t_handler_id\">".$t_handler_name;
+			}
+		}
+	}
+	### --------------------
+	function print_user_option_list( $p_user_id ) {
+		global $g_mantis_user_table;
+
+	    $query = "SELECT id, username
+	    		FROM $g_mantis_user_table
+	    		ORDER BY username";
+	    $result = db_query( $query );
+	    $user_count = db_num_rows( $result );
+	    for ($i=0;$i<$user_count;$i++) {
+	    	$row = db_fetch_array( $result );
+	    	$t_user_id   = $row["id"];
+	    	$t_user_name = $row["username"];
+
+	    	if ( $t_user_id==$p_user_id ) {
+				PRINT "<option value=\"$t_user_id\" SELECTED>".$t_user_name;
+			}
+			else {
+				PRINT "<option value=\"$t_user_id\">".$t_user_name;
 			}
 		}
 	}
@@ -291,43 +384,38 @@
 		} ### end for
 	}
 	### --------------------
-	###########################################################################
-	# Print API
-	###########################################################################
-	### --------------------
-	function print_user( $p_user_id ) {
+	function print_assign_to_option_list() {
 		global $g_mantis_user_table;
 
-		if ( $p_user_id=="0000000" ) {
-			return;
-		}
-	    $query = "SELECT username, email
-	    		FROM $g_mantis_user_table
-	    		WHERE id='$p_user_id'";
-	    $result = db_query( $query );
-	    if ( db_num_rows( $result )>0 ) {
-			$t_handler_username	= db_result( $result, 0, 0 );
-			$t_handler_email	= db_result( $result, 0, 1 );
+		$query = "SELECT id, username
+			FROM $g_mantis_user_table
+			WHERE access_level='developer' OR
+				access_level='administrator'";
+		$result = db_query( $query );
+		$user_count = db_num_rows( $result );
 
-			PRINT "<a href=\"mailto:$t_handler_email\">".$t_handler_username."</a>";
-		}
-		else {
-			PRINT "user no longer exists";
-		}
+		for ($i=0;$i<$user_count;$i++) {
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+			PRINT "<option value=\"$v_id\">$v_username";
+		} ### end for
 	}
 	### --------------------
-	function print_duplicate_id( $p_duplicate_id ) {
-		global 	$g_view_bug_page, $g_view_bug_advanced_page,
-				$g_mantis_user_pref_table;
+	function print_projects_option_list() {
+		global $g_mantis_projects_table;
 
-		if ( $p_duplicate_id!='0000000' ) {
-			if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" )=="on" ) {
-				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
-			}
-			else {
-				PRINT "<a href=\"$g_view_bug_page?f_id=$p_duplicate_id\">".$p_duplicate_id."</a>";
-			}
-		}
+		$query = "SELECT id, name
+			FROM $g_mantis_projects_table
+			ORDER BY name";
+		$result = db_query( $query );
+		$project_count = db_num_rows( $result );
+
+		for ($i=0;$i<$project_count;$i++) {
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+
+			PRINT "<option value=\"$v_id\">$v_name";
+		} ### end for
 	}
 	### --------------------
 	# prints the profiles given the user id
@@ -386,6 +474,36 @@
 	function get_list_item_count( $t_enum_string, $p_delim_char="," ) {
 		return count(explode($p_delim_char,$t_enum_string));
 	}
+	### --------------------
+	### prints a link to a bug given an ID
+	### it accounts for the user preference
+	function print_bug_link( $p_id ) {
+		global $g_mantis_user_pref_table, $g_view_bug_page, $g_view_bug_advanced_page;
+
+		if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" )=="on" ) {
+			PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
+		}
+		else {
+			PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
+		}
+	}
+	### --------------------
+	### formats the severity given the status
+	function print_formatted_severity( $p_status, $p_severity ) {
+		if ( ( ( $p_severity=="major" ) ||
+			 ( $p_severity=="crash" ) ||
+			 ( $p_severity=="block" ) )&&
+			 ( $p_status!="resolved" ) ) {
+			PRINT "<b>$p_severity</b>";
+		}
+		else {
+			PRINT "$p_severity";
+		}
+	}
+	### --------------------
+	###########################################################################
+	# Summary printing API
+	###########################################################################
 	### --------------------
 	### Used in summary reports
 	function print_bug_enum_summary( $p_enum, $p_status="" ) {
@@ -461,30 +579,56 @@
 		} ### end for
 	}
 	### --------------------
-	### prints a link to a bug given an ID
-	### it accounts for the user preference
-	function print_bug_link( $p_id ) {
-		global $g_mantis_user_pref_table, $g_view_bug_page, $g_view_bug_advanced_page;
+	function print_developer_summary() {
+		global 	$g_mantis_bug_table, $g_mantis_user_table,
+				$g_primary_color_light, $g_primary_color_dark;
 
-		if ( get_user_value( $g_mantis_user_pref_table, "advanced_view" )=="on" ) {
-			PRINT "<a href=\"$g_view_bug_advanced_page?f_id=$p_id\">$p_id</a>";
-		}
-		else {
-			PRINT "<a href=\"$g_view_bug_page?f_id=$p_id\">$p_id</a>";
-		}
-	}
-	### --------------------
-	### formats the severity given the status
-	function print_formatted_severity( $p_status, $p_severity ) {
-		if ( ( ( $p_severity=="major" ) ||
-			 ( $p_severity=="crash" ) ||
-			 ( $p_severity=="block" ) )&&
-			 ( $p_status!="resolved" ) ) {
-			PRINT "<b>$p_severity</b>";
-		}
-		else {
-			PRINT "$p_severity";
-		}
+		$query = "SELECT id, username
+				FROM $g_mantis_user_table
+				WHERE access_level='developer' OR access_level='administrator'
+				ORDER BY username";
+		$result = db_query( $query );
+		$user_count = db_num_rows( $result );
+
+		for ($i=0;$i<$user_count;$i++) {
+			$row = db_fetch_array( $result );
+			extract( $row, EXTR_PREFIX_ALL, "v" );
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE handler_id='$v_id'";
+			$result2 = db_query( $query );
+			$total_bug_count = db_result( $result2, 0, 0 );
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE handler_id='$v_id' AND status<>'resolved'";
+			$result2 = db_query( $query );
+			$open_bug_count = db_result( $result2, 0, 0 );
+
+			$query = "SELECT COUNT(*)
+					FROM $g_mantis_bug_table
+					WHERE handler_id='$v_id' AND status='resolved'";
+			$result2 = db_query( $query );
+			$resolved_bug_count = db_result( $result2, 0, 0 );
+
+			### alternate row colors
+			if ( $i % 2 == 1) {
+				$bgcolor=$g_primary_color_light;
+			}
+			else {
+				$bgcolor=$g_primary_color_dark;
+			}
+
+			PRINT "<tr align=center bgcolor=$bgcolor>";
+				PRINT "<td width=50%>";
+					echo $v_username;
+				PRINT "</td>";
+				PRINT "<td width=50%>";
+					PRINT "$open_bug_count / $resolved_bug_count / $total_bug_count";
+				PRINT "</td>";
+			PRINT "</tr>";
+		} ### end for
 	}
 	### --------------------
 	###########################################################################
@@ -505,14 +649,7 @@
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			### get user info
-			$query = "SELECT enabled
-					FROM $g_mantis_user_table
-					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_query( $query );
-			$row = db_fetch_array( $result );
-			if ( $row ) {
-				$t_enabled = $row["enabled"];
-			}
+			$t_enabled = get_current_user_field( "enabled" );
 
 			### check for acess enabled
 			if ( $t_enabled!="on" ) {
@@ -521,11 +658,7 @@
 
 			### grab creation date to protect from change
 			### Suspect a bug in mysql.. not sure.  Same deal for bug updates
-			$query = "SELECT date_created
-					FROM $g_mantis_user_table
-					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_query( $query );
-			$t_date_created = db_result( $result, 0 );
+			$t_date_created = get_current_user_field( "date_created" );
 
 			### update last_visit date
 			$query = "UPDATE $g_mantis_user_table
@@ -566,26 +699,14 @@
 			db_connect( $g_hostname, $g_db_username, $g_db_password, $g_database_name );
 
 			### get user info
-			$query = "SELECT enabled
-					FROM $g_mantis_user_table
-					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_query( $query );
-			$row = db_fetch_array( $result );
-			if ( $row ) {
-				$t_enabled = $row["enabled"];
-			}
+			$t_enabled = get_current_user_field( "enabled" );
 
 			### check for acess enabled
 			if ( $t_enabled!="on" ) {
 				header( "Location: $g_logout_page" );
 			}
 
-			$query = "SELECT last_visit
-					FROM $g_mantis_user_table
-					WHERE cookie_string='$g_string_cookie_val'";
-			$result = db_query( $query );
-			$t_last_access = db_result( $result, "last_visit" );
-			db_close();
+			$t_last_access = get_current_user_field( "last_visit" );
 
 			### go to redirect
 			if ( !empty( $p_redirect_url ) ) {
@@ -602,6 +723,43 @@
 			header( "Location: $g_login_page" );
 			exit;
 		}
+	}
+	### --------------------
+	###########################################################################
+	# Authentication API
+	###########################################################################
+	### --------------------
+	function password_match( $p_test_password, $p_password ) {
+		$salt = substr( $p_password, 0, 2 );
+		if ( crypt( $p_test_password, $salt ) == $p_password ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	### --------------------
+	function create_random_password( $p_email ) {
+		mt_srand( time() );
+		$t_val = mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() );
+		return substr( crypt( md5( $p_email.$t_val ) ), 0, 12 );
+	}
+	### --------------------
+	###########################################################################
+	# User Management API
+	###########################################################################
+	### --------------------
+	# This string is used to use as the login identified for the web cookie
+	# It is not guarranteed to be unique but should be good enough
+	# It is chopped to be 128 characters in length to fit into the database
+	function create_cookie_string( $p_email ) {
+		mt_srand( time() );
+		$t_val = mt_rand( 1000, mt_getrandmax() ) + mt_rand( 1000, mt_getrandmax() );
+		$t_string = $p_email.$t_val;
+		$t_cookie_string = crypt( $t_string ).md5( time() );
+		$t_cookie_string = $t_cookie_string.crypt( $t_string, $t_string ).md5( $t_string ).mt_rand( 1000, mt_getrandmax() );
+
+		return substr( $t_cookie_string, 0, 128 );
 	}
 	### --------------------
 	### Returns the specified field of the currently logged in user, otherwise 0
@@ -651,48 +809,6 @@
 		}
 	}
 	### --------------------
-	### Returns the number of bugntoes for the given bug_id
-	function get_bugnote_count( $p_id ) {
-		global $g_mantis_bugnote_table;
-
-		$query = "SELECT COUNT(id)
-					FROM $g_mantis_bugnote_table
-					WHERE bug_id ='$p_id'";
-		$result = db_query( $query );
-		return db_result( $result, 0 );
-	}
-	### --------------------
-	###########################################################################
-	# Authentication API
-	###########################################################################
-	### --------------------
-	function password_match( $p_test_password, $p_password ) {
-		$salt = substr( $p_password, 0, 2 );
-		if ( crypt( $p_test_password, $salt ) == $p_password ) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	### --------------------
-	###########################################################################
-	# User Management API
-	###########################################################################
-	### --------------------
-	# This string is used to use as the login identified for the web cookie
-	# It is not guarranteed to be unique but should be good enough
-	# It is chopped to be 128 characters in length to fit into the database
-	function create_cookie_string( $p_email ) {
-		mt_srand( time() );
-		$t_val = mt_rand( 1000, mt_getrandmax() ) + mt_rand( 1000, mt_getrandmax() );
-		$t_string = $p_email.$t_val;
-		$t_cookie_string = crypt( $t_string ).md5( time() );
-		$t_cookie_string = $t_cookie_string.crypt( $t_string, $t_string ).md5( $t_string ).mt_rand( 1000, mt_getrandmax() );
-
-		return substr( $t_cookie_string, 0, 128 );
-	}
-	### --------------------
 	###########################################################################
 	# Preferences API
 	###########################################################################
@@ -726,11 +842,6 @@
 	###########################################################################
 	# Date API
 	###########################################################################
-	### --------------------
-	###
-	function days_old( $month, $day, $year ) {
-
-	}
 	### --------------------
 	function sql_to_unix_time( $p_timeString ) {
 		return mktime( substr( $p_timeString, 8, 2 ),
@@ -812,12 +923,7 @@
 			return false;
 		}
 
-		$query = "SELECT access_level
-				FROM $g_mantis_user_table
-				WHERE cookie_string='$g_string_cookie_val'";
-		$result = db_query( $query );
-		$t_access_level = db_result( $result, "access_level" );
-
+		$t_access_level = get_current_user_field( "access_level" );
 		if ( access_level_value( $t_access_level ) == access_level_value( $p_access_level ) ) {
 			return true;
 		}
@@ -835,18 +941,116 @@
 			return false;
 		}
 
-		$query = "SELECT access_level
-				FROM $g_mantis_user_table
-				WHERE cookie_string='$g_string_cookie_val'";
-		$result = db_query( $query );
-		$t_access_level = db_result( $result, "access_level" );
-
+		$t_access_level = get_current_user_field( "access_level" );
 		if ( access_level_value( $t_access_level ) >= access_level_value( $p_access_level ) ) {
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+	### --------------------
+	###########################################################################
+	# Email API
+	###########################################################################
+	### --------------------
+	function email_notify_users( $p_bug_id ) {
+		### build message
+
+		### Get notify list
+
+		### send mail
+	}
+	### --------------------
+	function email_build_message( $p_bug_id ) {
+		$t_message = "";
+
+		$query = "SELECT *
+				FROM $g_bugnote_table
+				WHERE bug_id='$p_bug_id'
+				ORDER BY date_submitted";
+		$result = db_query( $query );
+		$bugnote_count = db_num_rows( $result );
+		for ( $i=0; $i<$bugnote_count; $i++ ) {
+			$row = db_fetch_array( $result );
+			$t_reporter_id = $row["reporter_id"];
+			$t_bugnote_text_id = $row["bugnote_text_id "];
+			$t_date_submitted  = $row["date_submitted "];
+
+			$query2 = "SELECT note
+					FROM $g_bugnote_text_table
+					WHERE id='$t_bugnote_text_id'";
+			$result2 = db_query( $query2 );
+			$t_note = db_result( $result2, 0, 0 );
+			$t_message = $t_message.$t_note;
+			$t_message = $t_message."-----------------------------------------------------------------------\n";
+		}
+
+		### BUILD IT
+
+		return $t_message;
+	}
+	### --------------------
+	function email_send( $p_recipient, $p_subject,
+						$p_cc_list, $p_bcc_list,
+						$p_priority, $p_reply_path,
+						$p_message, $p_headers ) {
+
+		### NEED TO STRIP ALL FIELDS OF INVALID CHARACTERS
+
+		### Visit http://www.php.net/manual/function.mail.php
+		### if you have problems with mailing
+
+		$p_recipient = $p_recipient_name." <".$p_recipient_email.">";
+		$p_recipient = trim( $p_recipient );
+		$p_message = trim( wordwrap( $p_message, 72 ) );
+
+		$p_headers .= "From: $p_sender_name <$p_sender_email>\n";
+		$p_headers .= "Reply-To: $p_reply_to_email\n";
+		$p_headers .= "X-Sender: <$p_sender_email>\n";
+		$p_headers .= "X-Mailer: PHP/".$phpversion()."\n";
+
+		### $p_headers .= "X-Priority: 1\n"; ### Urgent = 1
+		### $p_headers .= "Return-Path: <$p_return_path_email>\n"; ### return if error
+
+		### If you want to send foreign charsets
+		### $p_headers .= "Content-Type: text/html; charset=iso-8859-1\n";
+		$p_headers .= "cc:$p_cc_list\n";
+		$p_headers .= "bcc:$p_bcc_list\n";
+
+		return mail( $p_recipient, $p_subject, $p_message, $p_headers );
+	}
+	### --------------------
+	# check to see that the format is valid and that the mx record exists
+	function is_valid_email( $p_email ) {
+		if (eregi("^[_\.0-9a-z-]+@([0-9a-z][-0-9a-z\.]+)\.([a-z]{2,3}$)", $p_email, $check)) {
+			if (getmxrr($check[1].".".$check[2], $temp)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	### --------------------
+	# send the new users password
+	function send_new_user_password( $p_username, $p_email, $p_password ) {
+		global $g_from_email,$g_login_url,
+			$s_new_account_subject,
+			$s_new_account_greeting,$s_new_account_url,
+			$s_new_account_username,$s_new_account_password,
+			$s_new_account_message,$s_new_account_do_not_reply;
+
+
+		return mail($p_email, $s_new_account_subject,
+			$s_new_account_greeting.
+			$s_new_account_url.$g_login_url."\n".
+			$s_new_account_username.$p_username."\n".
+			$s_new_account_password.$p_password."\n\n".
+			$s_new_account_message.
+			$s_new_account_do_not_reply,
+     		"From: $g_from_email\nX-Mailer: PHP/".phpversion());
 	}
 	### --------------------
 	###########################################################################
