@@ -20,16 +20,16 @@
 	$s_administrator = "administrateur";
 
 	# Enum Strings
-	$s_access_levels_enum_string      = "10:viewer,25:rapporteur,40:updater,55:d&eacute;velopeur,70:manager,90:administrateur";
+	$s_access_levels_enum_string      = "10:lecteur,25:rapporteur,40:support,55:d&eacute;veloppeur,70:chef de projet,90:administrateur";
 	$s_project_status_enum_string     = "10:d&eacute;veloppement,30:release,50:stable,70:obsol&egrave;te";
 	$s_project_view_state_enum_string = "10:public,50:priv&eacute;";
 
 	$s_priority_enum_string           = "10:aucune,20:basse,30:normale,40:&eacute;lev&eacute;e,50:urgent,60:imm&eacute;diate";
-	$s_severity_enum_string           = "10:fonctionnalit&eacute;,20:simple,30:texte,40:tweak,50:mineur,60:majeur,70:crash,80:bloquant";
+	$s_severity_enum_string           = "10:fonctionnalit&eacute;,20:simple,30:texte,40:r&egrave;glage,50:mineur,60:majeur,70:crash,80:bloquant";
 	$s_reproducibility_enum_string    = "10:toujours,30:quelques fois,50:al&eacute;atoire,70:n'a pas essay&eacute;,90:impossible &agrave; reproduire,100:N/A";
 	$s_status_enum_string             = "10:nouveau,20:&agrave; d&eacute;tailler,30:vu,40:confirm&eacute;,50:affect&eacute;,80:r&eacute;solu,90:ferm&eacute;";
 	$s_resolution_enum_string         = "10:ouvert,20:r&eacute;solu,30:r&eacute;ouvert,40:impossible &agrave; reproduire,50:impossible &agrave; corrig&eacute;,60:doublon,70:pas un bug,80:suspendu,90:ne sera pas r&eacute;solu";
-	$s_projection_enum_string         = "10:aucun,30:r&egrave;,50:correction mineur,70:correction majeur,90:refonte de l'application";
+	$s_projection_enum_string         = "10:aucun,30:r&egrave;glage,50:correction mineur,70:correction majeur,90:refonte de l'application";
 	$s_eta_enum_string                = "10:aucun,20:< 1 jour,30:2-3 jours,40:< 1 semaine,50:< 1 mois,60:> 1 mois";
 
 	# Email Strings
