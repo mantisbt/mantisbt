@@ -49,6 +49,7 @@ Mantis ChangeLog
  * Fix #3852: OK button in View Issues page is not localised
  * Fix #3853: Filters sometime generate an invalid query (partial fix).
  * Fix #3866: URLs that include bookmark are not hyperlinked correctly.
+ * Fix #3873: Invalid queries being generated from old filters.
  * Fix #3879: Empty entry in project select field can cause bugs to be moved to non-existing project.
  * Fix #3886: Custom HTML page title not displayed.
  * New Config: set_view_status_threshold (default REPORTER) - threshold needed to set the view status while reporting a bug / bugnote.

@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: view_all_set.php,v 1.31 2004-05-18 19:32:58 narcissus Exp $
+	# $Id: view_all_set.php,v 1.32 2004-06-08 05:52:14 narcissus Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -210,7 +210,7 @@
 	switch ( $f_type ) {
 		# New cookie
 		case '0':
-				unset( $t_setting_arr );
+				$t_setting_arr = array();
 
 				break;
 		# Update filters
@@ -290,81 +290,7 @@
 				break;
 	}
 
-	# Make sure that our filters are entirely correct and complete (it is possible that they are not).
-	# We need to do this to cover cases where we don't have complete control over the filters given.
-	if ( !isset( $t_setting_arr['_version'] ) ) {
-		$t_setting_arr['_version'] = $t_cookie_version;
-	}
-	if ( !isset( $t_setting_arr['_view_type'] ) ) {
-		$t_setting_arr['_view_type'] = $f_view_type;
-	}
-	if ( !isset( $t_setting_arr['per_page'] ) ) {
-		$t_setting_arr['per_page'] = $f_per_page;
-	}
-	if ( !isset( $t_setting_arr['highlight_changed'] ) ) {
-		$t_setting_arr['highlight_changed'] = $t_default_show_changed;
-	}
-	if ( !isset( $t_setting_arr['sort'] ) ) {
-		$t_setting_arr['sort'] = "last_updated";
-	}
-	if ( !isset( $t_setting_arr['dir'] ) ) {
-		$t_setting_arr['dir'] = "DESC";
-	}
-	if ( !isset( $t_setting_arr['start_month'] ) ) {
-		$t_setting_arr['start_month'] = $f_start_month;
-	}
-	if ( !isset( $t_setting_arr['start_day'] ) ) {
-		$t_setting_arr['start_day'] = $f_start_day;
-	}
-	if ( !isset( $t_setting_arr['start_year'] ) ) {
-		$t_setting_arr['start_year'] = $f_start_year;
-	}
-	if ( !isset( $t_setting_arr['end_month'] ) ) {
-		$t_setting_arr['end_month'] = $f_end_month;
-	}
-	if ( !isset( $t_setting_arr['end_day'] ) ) {
-		$t_setting_arr['end_day'] = $f_end_day;
-	}
-	if ( !isset( $t_setting_arr['end_year'] ) ) {
-		$t_setting_arr['end_year'] = $f_end_year;
-	}
-	if ( !isset( $t_setting_arr['search'] ) ) {
-		$t_setting_arr['search'] = '';
-	}
-	if ( !isset( $t_setting_arr['and_not_assigned'] ) ) {
-		$t_setting_arr['and_not_assigned'] = $f_and_not_assigned;
-	}
-	if ( !isset( $t_setting_arr['do_filter_by_date'] ) ) {
-		$t_setting_arr['do_filter_by_date'] = $f_do_filter_by_date;
-	}
-	$t_multi_select_list = array( 'show_category', 'show_severity', 'show_status', 'reporter_id',
-									'handler_id', 'show_resolution', 'show_build', 'show_version', 'hide_status', 'custom_fields' );
-	foreach( $t_multi_select_list as $t_multi_field_name ) {
-		if ( !isset( $t_setting_arr[$t_multi_field_name] ) ) {
-			if ( 'hide_status' == $t_multi_field_name ) {
-				$t_setting_arr[$t_multi_field_name] = $t_hide_status_default;
-			} else if ( 'custom_fields' == $t_multi_field_name ) {
-				$t_setting_arr[$t_multi_field_name] = $f_custom_fields_data;
-			} else {
-				$t_setting_arr[$t_multi_field_name] = array( "any" );
-			}
-		}
-		if ( !is_array( $t_setting_arr[$t_multi_field_name] ) ) {
-			$t_setting_arr[$t_multi_field_name] = array( $t_setting_arr[$t_multi_field_name] );
-		}
-	}
-
-	if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
-		foreach( $t_custom_fields as $t_cfid ) {
-			if ( !isset( $t_setting_arr['custom_fields'][$t_cfid] ) ) {
-				$t_setting_arr['custom_fields'][$t_cfid] = array( "any" );
-			}
-			if ( !is_array( $t_setting_arr['custom_fields'][$t_cfid] ) ) {
-				$t_setting_arr['custom_fields'][$t_cfid] = array( $t_setting_arr['custom_fields'][$t_cfid] );
-			}
-		}
-	}
-	# all of our filter values are now guaranteed to be there, and correct.
+	$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
 	$t_settings_serialized = serialize( $t_setting_arr );
 	$t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;

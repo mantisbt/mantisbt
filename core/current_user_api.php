@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: current_user_api.php,v 1.17 2004-04-08 22:44:59 prescience Exp $
+	# $Id: current_user_api.php,v 1.18 2004-06-08 05:52:13 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -109,6 +109,7 @@
 			$t_filter				= unserialize( $t_cookie_detail[1] );
 		}
 
+		$t_filter = filter_ensure_valid_filter( $t_filter );
 		return $t_filter;
 	}
 ?>

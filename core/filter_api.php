@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: filter_api.php,v 1.37 2004-05-28 06:11:58 int2str Exp $
+	# $Id: filter_api.php,v 1.38 2004-06-08 05:52:13 narcissus Exp $
 	# --------------------------------------------------------
 
 	$t_core_dir = dirname( __FILE__ ).DIRECTORY_SEPARATOR;
@@ -1439,5 +1439,99 @@
 		asort( $t_overall_query_arr );
 
 		return $t_overall_query_arr;
+	}
+
+	# Make sure that our filters are entirely correct and complete (it is possible that they are not).
+	# We need to do this to cover cases where we don't have complete control over the filters given.
+	function filter_ensure_valid_filter( $p_filter_arr ) {
+		if ( !isset( $p_filter_arr['_version'] ) ) {
+			$p_filter_arr['_version'] = config_get( 'cookie_version' );
+		}
+		if ( !isset( $p_filter_arr['_view_type'] ) ) {
+			$p_filter_arr['_view_type'] = gpc_get_string( 'view_type', 'simple' );
+		}
+		if ( !isset( $p_filter_arr['per_page'] ) ) {
+			$p_filter_arr['per_page'] = gpc_get_int( 'per_page', config_get( 'default_limit_view' ) );
+		}
+		if ( !isset( $p_filter_arr['highlight_changed'] ) ) {
+			$p_filter_arr['highlight_changed'] = config_get( 'default_show_changed' );
+		}
+		if ( !isset( $p_filter_arr['sort'] ) ) {
+			$p_filter_arr['sort'] = "last_updated";
+		}
+		if ( !isset( $p_filter_arr['dir'] ) ) {
+			$p_filter_arr['dir'] = "DESC";
+		}
+		if ( !isset( $p_filter_arr['start_month'] ) ) {
+			$p_filter_arr['start_month'] = gpc_get_string( 'start_month', date( 'm' ) );
+		}
+		if ( !isset( $p_filter_arr['start_day'] ) ) {
+			$p_filter_arr['start_day'] = gpc_get_string( 'start_day', 1 );
+		}
+		if ( !isset( $p_filter_arr['start_year'] ) ) {
+			$p_filter_arr['start_year'] = gpc_get_string( 'start_year', date( 'Y' ) );
+		}
+		if ( !isset( $p_filter_arr['end_month'] ) ) {
+			$p_filter_arr['end_month'] = gpc_get_string( 'end_month', date( 'm' ) );
+		}
+		if ( !isset( $p_filter_arr['end_day'] ) ) {
+			$p_filter_arr['end_day'] = gpc_get_string( 'end_day', date( 'd' ) );
+		}
+		if ( !isset( $p_filter_arr['end_year'] ) ) {
+			$p_filter_arr['end_year'] = gpc_get_string( 'end_year', date( 'Y' ) );
+		}
+		if ( !isset( $p_filter_arr['search'] ) ) {
+			$p_filter_arr['search'] = '';
+		}
+		if ( !isset( $p_filter_arr['and_not_assigned'] ) ) {
+			$p_filter_arr['and_not_assigned'] = gpc_get_bool( 'and_not_assigned' );
+		}
+		if ( !isset( $p_filter_arr['do_filter_by_date'] ) ) {
+			$p_filter_arr['do_filter_by_date'] = gpc_get_bool( 'do_filter_by_date' );
+		}
+
+		$t_custom_fields 		= custom_field_get_ids();
+		$f_custom_fields_data 	= array();
+		if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+			foreach( $t_custom_fields as $t_cfid ) {
+				if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
+					$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, 'any' );
+				} else {
+					$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, 'any' );
+					$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );
+				}
+			}
+		}
+
+		$t_multi_select_list = array( 'show_category', 'show_severity', 'show_status', 'reporter_id',
+										'handler_id', 'show_resolution', 'show_build', 'show_version', 'hide_status', 'custom_fields' );
+		foreach( $t_multi_select_list as $t_multi_field_name ) {
+			if ( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
+				if ( 'hide_status' == $t_multi_field_name ) {
+					$p_filter_arr[$t_multi_field_name] = config_get( 'hide_status_default' );
+				} else if ( 'custom_fields' == $t_multi_field_name ) {
+					$p_filter_arr[$t_multi_field_name] = $f_custom_fields_data;
+				} else {
+					$p_filter_arr[$t_multi_field_name] = array( "any" );
+				}
+			}
+			if ( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
+				$p_filter_arr[$t_multi_field_name] = array( $p_filter_arr[$t_multi_field_name] );
+			}
+		}
+
+		if ( is_array( $t_custom_fields ) && ( sizeof( $t_custom_fields ) > 0 ) ) {
+			foreach( $t_custom_fields as $t_cfid ) {
+				if ( !isset( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
+					$p_filter_arr['custom_fields'][$t_cfid] = array( "any" );
+				}
+				if ( !is_array( $p_filter_arr['custom_fields'][$t_cfid] ) ) {
+					$p_filter_arr['custom_fields'][$t_cfid] = array( $p_filter_arr['custom_fields'][$t_cfid] );
+				}
+			}
+		}
+		# all of our filter values are now guaranteed to be there, and correct.
+
+		return $p_filter_arr;
 	}
 ?>
