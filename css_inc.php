@@ -8,22 +8,23 @@
 			$g_table_border_color, $g_category_title_color,
 			$g_primary_color1, $g_primary_color2,
 			$g_form_title_color, $g_spacer_color,
-			$g_menu_color, $g_fonts,
+			$g_menu_color, $g_fonts, $g_font_color,
 			$g_font_small, $g_font_normal, $g_font_large;
 ?>
 <style type="text/css">
-body 				{ background-color: <?php echo $g_background_color ?>; font-family:Verdana, Arial; font-size: <?php echo $g_font_normal ?>; margin: 1px; margin-top: 6px; margin-bottom: 6px; }
+body 				{ background-color: <?php echo $g_background_color ?>; color: <?php echo $g_font_color ?>; font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; margin-left: 1px; margin-right: 1px; margin-top: 6px; margin-bottom: 6px; }
 p 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?> }
 p.center			{ text-align: center }
 address 			{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_small ?> }
 span				{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; }
-table				{}
+table				{ }
 td 					{ font-family: <?php echo $g_fonts ?>; font-size: <?php echo $g_font_normal ?>; padding: 4px; text-align: left }
 a					{}
 a.small-link		{ font-size: <?php echo $g_font_small ?>; }
+
 span.print			{ font-size: <?php echo $g_font_small ?>; }
 
-span.required 		{ font-size: <?php echo $g_font_small ?>; color: <?php echo $g_required_color ?>; }
+span.required 		{ font-size: <?php echo $g_font_small ?>; background-color: <?php echo $g_background_color ?>; color: <?php echo $g_required_color ?>; }
 span.small 			{ font-size: <?php echo $g_font_small ?> }
 span.pagetitle		{ font-size: <?php echo $g_font_large ?>; font-weight: bold; text-align: center }
 span.bold			{ font-weight: bold; }
@@ -38,21 +39,22 @@ table.width50		{ width: 50%;  border-color: <?php echo $g_table_border_color ?>;
 td.center			{ text-align: center; }
 td.left				{ text-align: left; }
 td.right			{ text-align: right; }
-td.category			{ background-color: <?php echo $g_category_title_color ?>; font-weight: bold; }
-td.col-1			{ background-color: <?php echo $g_primary_color1 ?>; }
-td.col-2			{ background-color: <?php echo $g_primary_color2 ?>; }
-td.form-title		{ background-color: <?php echo $g_form_title_color ?>; font-weight: bold; }
+td.category			{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; }
+td.col-1			{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; }
+td.col-2			{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; }
+td.form-title		{ background-color: <?php echo $g_form_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; }
 td.nopad			{ padding: 0px; }
-td.spacer			{ background-color: <?php echo $g_spacer_color ?>; font-size: 1pt; line-height: 0.1; }
+td.spacer			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; font-size: 1pt; line-height: 0.1; }
 td.small-caption	{ font-size: <?php echo $g_font_small ?>; }
 td.print			{ font-size: <?php echo $g_font_small ?>; text-align: center; }
 
 tr.center			{ text-align: center; }
-tr.row-1			{ background-color: <?php echo $g_primary_color1 ?>; }
-tr.row-2			{ background-color: <?php echo $g_primary_color2 ?>; }
-tr.spacer			{ background-color: <?php echo $g_spacer_color ?>; }
-tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; font-weight: bold; }
-tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; }
+tr.row-1			{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; }
+tr.row-2			{ background-color: <?php echo $g_primary_color2 ?>; color: <?php echo $g_font_color ?>; }
+tr.spacer			{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; }
+tr.row-category		{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; font-weight: bold; }
+tr.row-category2	{ background-color: <?php echo $g_category_title_color ?>; color: <?php echo $g_font_color ?>; }
+
 /* Login Info */
 td.login-info-left	{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle{ width: 33%; padding: 0px; text-align: center; }
@@ -61,17 +63,22 @@ span.login-username	{ font-style: italic; }
 span.login-time		{ font-size: <?php echo $g_font_small ?>; font-style: italic; }
 
 /* Menu */
-td.menu				{ background-color: <?php echo $g_menu_color ?>; text-align: center; }
+td.menu				{ background-color: <?php echo $g_menu_color ?>; color: <?php echo $g_font_color ?>; text-align: center; }
 
 /* Quick Summary */
 td.quick-summary-left	{ width: 50%; text-align: left; }
 td.quick-summary-right	{ width: 50%; text-align: right; }
 
 /* News */
-td.news-heading		{ background-color: <?php echo $g_primary_color1 ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
-td.news-body		{ background-color: <?php echo $g_spacer_color ?>; padding: 16px; }
+td.news-heading		{ background-color: <?php echo $g_primary_color1 ?>; color: <?php echo $g_font_color ?>; text-align: left; border-bottom: 1px solid <?php echo $g_table_border_color ?>; }
+td.news-body		{ background-color: <?php echo $g_spacer_color ?>; color: <?php echo $g_font_color ?>; padding: 16px; }
 span.news-headline	{ font-weight: bold; }
 span.news-date		{ font-style: italic; font-size: <?php echo $g_font_small ?>; }
 a.news-email		{ font-size: <?php echo $g_font_small ?>; }
-
 </style>
+<script language="JavaScript" type="text/javascript">
+<!--
+if(document.layers) {document.write('<style>td{padding:0px;}</style>')}
+//-->
+</script>
+<noscript></noscript>

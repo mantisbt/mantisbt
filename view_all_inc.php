@@ -101,8 +101,8 @@
 </table>
 
 <p>
-<form method="post" action="<?php echo $g_view_all_bug_update ?>">
 <table class="width100" cellspacing="1">
+<form method="post" action="<?php echo $g_view_all_bug_update ?>">
 <tr>
 	<td class="form-title" colspan="8">
 		<?php echo $s_viewing_bugs_title ?>
@@ -284,20 +284,24 @@
 <?php
 	}
 ?>
-</table>
 <?php	if ( access_level_check_greater_or_equal( UPDATER ) ) { ?>
-<select name="f_project_id">
-<?php print_project_option_list() ?>
-</select>
-<!--
-# @@@ not functional yet
-<select name="f_action">
-<?php print_all_bug_action_option_list() ?>
-</select>
--->
-<input type="submit" value="<?php echo $s_move_bugs ?>">
+<tr>
+	<td colspan="9">
+		<select name="f_project_id">
+		<?php print_project_option_list() ?>
+		</select>
+		<!--
+		# @@@ not functional yet
+		<select name="f_action">
+		<?php print_all_bug_action_option_list() ?>
+		</select>
+		-->
+		<input type="submit" value="<?php echo $s_move_bugs ?>">
+	</td>
+</tr>
 </form>
 <?php } ?>
+</table>
 
 <?php # Show NEXT and PREV links as needed ?>
 <p>

@@ -18,6 +18,7 @@ Mantis
  * Fixed bug update button to go to proper simple or advanced page.
  * Fixed a problem where users could not report bugs if uploading was disabled.
  * Fixed a minor problem in the print_reporters_option_list().
+ * Fixed more CSS issues.
  * Removed site_settings link in print_manage_doc_menu().
  * Renamed doc/CONFIGURATION to doc/CUSTOMIZATION.
  * Modified edit user links to use the username instead of the [edit] link.
