@@ -27,7 +27,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 					project_id='$g_project_cookie_val'";
 			$result = db_query( $query );
 			$enum_name_count[] = db_result( $result, 0 );
-		} // end for
+		} # end for
 	}
 
 
@@ -111,7 +111,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 				$total_bug_count[]=$total_buff;
 				$developer_name[]=$v_username;
 			}
-		} ### end for
+		} # end for
 	}
 
 
@@ -189,7 +189,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 				$reporter_count[] = $t_count;
 			}
 
-		} ### end for
+		} # end for
 	}
 
 
@@ -249,7 +249,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 			$result2 = db_query( $query );
 			$category_bug_count[] = db_result( $result2, 0, 0 );
 
-		} ### end for
+		} # end for
 	}
 
 
@@ -291,7 +291,6 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 	}
 
 
-
 	function find_date_in_metrics($aDate){
 		global $metrics;
 		$index = -1;
@@ -321,7 +320,6 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
-			### $t_date = sql_to_unix_time($row["date_submitted"]);
  			$t_date = ($row["date_submitted"]);
 			$t_date_string = date("Y-m-d", $t_date);
 
@@ -337,7 +335,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$t_clo_val = CLOSED;
 		$t_res_val = RESOLVED;
 		### Get all the resolved dates
-		$query = "SELECT last_updated
+		$query = "SELECT UNIX_TIMESTAMP(last_updated) as last_updated
 			FROM $g_mantis_bug_table
 			WHERE project_id='$g_project_cookie_val' AND 
 				(status='$t_res_val' OR status='$t_clo_val')
@@ -347,7 +345,7 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 
 		for ($i=0;$i<$bug_count;$i++) {
 			$row = db_fetch_array( $result );
-			$t_date = sql_to_unix_time($row["last_updated"]);
+			$t_date = $row["last_updated"];
 			$t_date_string = date("Y-m-d", $t_date);
 
 			$index = find_date_in_metrics($t_date_string);
@@ -422,7 +420,5 @@ include ($g_jpgraph_path."jpgraph_bar.php");
 		$graph->Stroke();
 	}
 
-
 #############################################################
-
 ?>
