@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: project_api.php,v 1.6 2002-08-27 06:13:58 jfitzell Exp $
+	# $Id: project_api.php,v 1.7 2002-08-27 06:47:43 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -254,6 +254,8 @@
 				  WHERE id='$c_project_id'";
 
 		db_query( $query );
+
+		project_clear_cache( $p_project_id );
 
 		# db_query errors on failure so:
 		return true;
