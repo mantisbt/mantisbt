@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.26 2002-12-17 06:53:12 jfitzell Exp $
+	# $Id: html_api.php,v 1.27 2002-12-17 11:35:29 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -499,8 +499,6 @@
 	# prints the doc menu
 	# if the $p_page matches a url then don't make that a link
 	function print_doc_menu( $p_page='' ) {
-		global $g_allow_file_upload;
-
 		$t_documentation_html 	= 'doc/documentation.html';
 		$t_proj_doc_page 		= 'proj_doc_page.php';
 		$t_proj_doc_add_page 	= 'proj_doc_add_page.php';
@@ -513,7 +511,7 @@
 
 		print_bracket_link( $t_documentation_html, lang_get( 'user_documentation' ) );
 		print_bracket_link( $t_proj_doc_page, lang_get( 'project_documentation' ) );
-		if ( ( ON == $g_allow_file_upload )&&( access_level_check_greater_or_equal( MANAGER ) ) ) {
+		if ( file_allow_project_upload() ) {
 			print_bracket_link( $t_proj_doc_add_page, lang_get( 'add_file' ) );
 		}
 	}

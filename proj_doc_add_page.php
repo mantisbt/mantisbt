@@ -8,7 +8,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( MANAGER );
+	if ( ! file_allow_project_upload() ) {
+		access_denied();
+	}
 ?>
 <?php print_page_top1() ?>
 <?php print_page_top2() ?>

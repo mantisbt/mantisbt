@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_add.php,v 1.32 2002-10-23 04:54:44 jfitzell Exp $
+	# $Id: bug_file_add.php,v 1.33 2002-12-17 11:35:28 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -18,6 +18,10 @@
 	$f_bug_id	= gpc_get_int( 'f_bug_id' );
 	$f_file		= gpc_get_file( 'f_file' );
 	
+	if ( ! file_allow_bug_upload( $f_bug_id ) ) {
+		access_denied();
+	}
+
 	project_access_check( $f_bug_id );
 	check_access( REPORTER );
 

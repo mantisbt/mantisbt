@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_report_page.php,v 1.6 2002-12-08 10:54:53 vboctor Exp $
+	# $Id: bug_report_page.php,v 1.7 2002-12-17 11:35:28 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -158,7 +158,7 @@ foreach( $t_related_custom_field_ids as $id ) {
 	</td>
 </tr>
 
-<?php if ( ON == config_get( 'allow_file_upload' ) ) { ?>
+<?php if ( file_allow_bug_upload() ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'upload_file' ) ?>

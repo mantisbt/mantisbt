@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: bug_view_page.php,v 1.16 2002-12-10 13:06:48 jlatour Exp $
+	# $Id: bug_view_page.php,v 1.17 2002-12-17 11:35:29 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php require_once( 'core.php' ) ?>
@@ -209,7 +209,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	</td>
 </tr>
 <?php
-	$t_show_attachments = ( ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_level_check_greater_or_equal( config_get( 'view_attachments_threshold' ) ) ) && ( ON == config_get( 'allow_file_upload' ) && ini_get( 'file_uploads' ) );
+	$t_show_attachments = ( $t_bug->reporter_id == auth_get_current_user_id() ) || access_level_check_greater_or_equal( config_get( 'view_attachments_threshold' ) );
 
 	if ( $t_show_attachments ) {
 ?>
@@ -334,7 +334,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 </table>
 
 <?php
-	if ( is_blank( $f_check ) && $t_show_attachments && $t_bug->status < RESOLVED && access_level_check_greater_or_equal( REPORTER ) ) {
+	if ( $t_bug->status < RESOLVED ) {
 		include( config_get( 'bug_file_upload_inc' ) );
 	}
 

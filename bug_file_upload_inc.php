@@ -6,7 +6,7 @@
 	# See the files README and LICENSE for details
 
 	# --------------------------------------------------------
-	# $Id: bug_file_upload_inc.php,v 1.25 2002-10-23 04:54:44 jfitzell Exp $
+	# $Id: bug_file_upload_inc.php,v 1.26 2002-12-17 11:35:28 jfitzell Exp $
 	# --------------------------------------------------------
 ?>
 <?php
@@ -14,9 +14,9 @@
 	# It POSTs to bug_file_add.php
 ?>
 <?php
-	if ( OFF == config_get( 'allow_file_upload' ) ||
-		 ! ini_get( 'file_uploads' ) ) { 
-		trigger_error( ERROR_UPLOAD_FAILURE, ERROR );
+	# check if we can allow the upload... bail out if we can't
+	if ( ! file_allow_bug_upload( $f_bug_id ) ) {
+		return false;
 	}
 
 	$t_max_file_size = (int)config_get( 'max_file_size' );

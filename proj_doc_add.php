@@ -8,7 +8,9 @@
 <?php require_once( 'core.php' ) ?>
 <?php login_cookie_check() ?>
 <?php
-	check_access( REPORTER );
+	if ( ! file_allow_project_upload() ) {
+		access_denied();
+	}
 
 	$result = 0;
 	$good_upload = 0;

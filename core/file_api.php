@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: file_api.php,v 1.15 2002-11-27 02:45:20 jfitzell Exp $
+	# $Id: file_api.php,v 1.16 2002-12-17 11:35:29 jfitzell Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -291,4 +291,75 @@
 		}
 
 	}
+	# --------------------
+	# Check if the user can upload files for this project
+	#  return true if they can, false otherwise
+	#  the project defaults to the current project and the user to the current user
+	function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
+		if ( null === $p_project_id ) {
+			$p_project_id = helper_get_current_project();
+		}
+		if ( null === $p_user_id ) {
+			$p_user_id = auth_get_current_user_id();
+		}
+
+		$t_access = user_get_access_level( $p_user_id, $p_project_id );
+
+		if ( false == ini_get( 'file_uploads' ) ||
+			 OFF == config_get( 'allow_file_upload' ) ||
+			 $t_access < config_get( 'upload_project_file_threshold' ) ) { 
+			return false;
+		}
+
+		return true;
+	}
+
+	# --------------------
+	# Check if the user can upload files for this bug
+	#  return true if they can, false otherwise
+	#  the user defaults to the current user
+	#
+	#  if the bug null (the default) we answer whether the user can
+	#   upload a file to a new bug in the current project
+	function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
+		if ( null === $p_user_id ) {
+			$p_user_id = auth_get_current_user_id();
+		}
+
+		# If uploads are disbled just return false
+		if ( false == ini_get( 'file_uploads' ) || 
+			 OFF == config_get( 'allow_file_upload' ) ) {
+			return false;
+		}
+		
+		if ( null === $p_bug_id ) {		# new bug
+			$t_project_id = helper_get_current_project();
+
+			# the user must be the reporter if they're reporting a new bug
+			$t_reporter = true;
+		} else {						# existing bug
+			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+
+			# check if the user is the reporter of the bug
+			$t_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
+		}
+
+		# *** If we ever wanted to have a per-project setting enabling file
+		#     uploads, we'd want to check it here before exempting the reporter
+
+		if ( $t_reporter && ON == config_get( 'allow_reporter_upload' ) ) {
+			return true;
+		}
+
+		# Get the user's access level
+		$t_access = user_get_access_level( $p_user_id, $t_project_id );
+
+		# Check the access level against the config setting
+		if ( $t_access >= config_get( 'upload_bug_file_threshold' ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 ?>

@@ -396,7 +396,10 @@
 	###################################
 
 	# --- file upload settings --------
-	# @@@ This should be broken into per project settings and split between bug uploads and project document uploads
+	# This is the master setting to disable *all* file uploading functionality
+	#
+	# See also: $g_upload_project_file_threshold, $g_upload_bug_file_threshold,
+	#   $g_allow_reporter_upload
 	$g_allow_file_upload	= ON;
 
 	# Upload destination: specify actual location in project settings
@@ -498,6 +501,19 @@
 	# access level needed to view attachments to bugs reported by other users.
 	$g_view_attachments_threshold	= VIEWER;
 
+	# access level needed to upload files to the project documentation section
+	# You can set this to NOBODY to prevent uploads to projects
+	# See also: $g_upload_bug_file_threshold, $g_allow_file_upload
+	$g_upload_project_file_threshold = MANAGER;
+
+	# access level needed to upload files to attach to a bug
+	# You can set this to NOBODY to prevent uploads to bugs but note that
+	#  the reporter of the bug will still be able to upload unless you set
+	#  $g_allow_reporter_upload or $g_allow_file_upload to OFF
+	# See also: $g_upload_project_file_threshold, $g_allow_file_upload,
+	#			$g_allow_reporter_upload
+	$g_upload_bug_file_threshold	= REPORTER;
+
 	# --- login method ----------------
 	# CRYPT or CRYPT_FULL_SALT or PLAIN or MD5 or LDAP or BASIC_AUTH
 	# If you were using CRYPT and it now fails, try CRYPT_FULL_SALT
@@ -518,6 +534,10 @@
 	# --- reporter can reopen ---------
 	# Allow reporters to reopen the bugs they reported, after they're marked resolved.
 	$g_allow_reporter_reopen	= ON;
+
+	# --- reporter can upload ---------
+	# Allow reporters to upload attachments to bugs they reported.
+	$g_allow_reporter_upload	= ON;
 
 	# --- bug delete -----------
 	# Allow the specified access level and higher to delete bugs
