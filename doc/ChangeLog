@@ -23,6 +23,7 @@ Mantis ChangeLog
  * Fix #3022: Add user to project form lists disabled users.
  * Fix #3047: Manually assigned developers cannot resolve in All Projects view.
  * Fix #3050: Setting Assigned To to null causes Status to change to assigned
+ * Fix #3055: (Non-email) URLs containing '@' characters are now linked correctly.
 
 2003.02.26  -  0.18.0a3
 
