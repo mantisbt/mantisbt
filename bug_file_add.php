@@ -54,7 +54,7 @@
 		$result = db_query( $query );
 
 		# updated the last_updated date
-		bug_date_update( $f_id );
+		$result = bug_date_update( $f_id );
 	}
 
 	# Determine which view page to redirect back to.

@@ -94,7 +94,7 @@
    	$result = db_query($query);
 
 	# updated the last_updated date
-	bug_date_update( $f_id );
+	$result = bug_date_update( $f_id );
 
 	# If we should notify and it's in feedback state then send an email
 	switch ( $f_status ) {

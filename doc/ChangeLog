@@ -10,6 +10,7 @@ Mantis
  * Bumped version number.
  * Fixed problem with CSV not downloading.
  * Fixed no colors when using non-English languages (temporary fix).
+ * Fixed bug_close to add bugnote.
  * Modified core_API.php to always turn magic_quotes_runtime OFF.
  * Modified disk uploads to use the file_download.php script.
  * Modified bugnote last_modified query slightly.
@@ -18,6 +19,7 @@ Mantis
  * Added die to print_header_redirect().
  * Added russian_koi8 translation.
  * Added HTTP_POST_FILES to core_API.php.
+ * Added check for empty bugnotes.
  * Removed view_csv_export_inc.php (unused).
 
 05.12.2002  -   0.17.2

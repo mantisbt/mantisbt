@@ -18,37 +18,31 @@
 	# get user information
 	$u_id = get_current_user_field( "id " );
 
-	$f_bugnote_text = string_prepare_textarea( $f_bugnote_text );
-	# insert bugnote text
-	$query = "INSERT
-			INTO $g_mantis_bugnote_text_table
-			( id, note )
-			VALUES
-			( null, '$f_bugnote_text' )";
-	$result = db_query( $query );
+	$f_bugnote_text = trim( $f_bugnote_text );
+	# check for blank bugnote
+	if ( !empty( $f_bugnote_text ) ) {
+		$f_bugnote_text = string_prepare_textarea( $f_bugnote_text );
+		# insert bugnote text
+		$query = "INSERT
+				INTO $g_mantis_bugnote_text_table
+				( id, note )
+				VALUES
+				( null, '$f_bugnote_text' )";
+		$result = db_query( $query );
 
-	# retrieve bugnote text id number
-	$t_bugnote_text_id = db_insert_id();
+		# retrieve bugnote text id number
+		$t_bugnote_text_id = db_insert_id();
 
-	# insert bugnote info
-	$query = "INSERT
-			INTO $g_mantis_bugnote_table
-			( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
-			VALUES
-			( null, '$f_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
-	$result = db_query( $query );
-
-	$query = "SELECT date_submitted
-			FROM $g_mantis_bug_table
-    		WHERE id='$f_id'";
-   	$result = db_query( $query );
-   	$t_date_submitted = db_result( $result, 0, 0 );
-
+		# insert bugnote info
+		$query = "INSERT
+				INTO $g_mantis_bugnote_table
+				( id, bug_id, reporter_id, bugnote_text_id, date_submitted, last_modified )
+				VALUES
+				( null, '$f_id', '$u_id','$t_bugnote_text_id', NOW(), NOW() )";
+		$result = db_query( $query );
+	}
 	# update bug last updated
-	$query = "UPDATE $g_mantis_bug_table
-    		SET date_submitted='$t_date_submitted', last_updated=NOW()
-    		WHERE id='$f_id'";
-   	$result = db_query($query);
+   	$result = bug_date_update( $f_id );
 
    	# notify reporter and handler
    	if ( get_bug_field( $f_id, "status" ) == FEEDBACK ) {

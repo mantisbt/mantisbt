@@ -18,7 +18,7 @@
 		$query = "UPDATE $g_mantis_bug_table
 				SET last_updated=NOW()
 				WHERE id='$p_bug_id'";
-		$result = db_query( $query );
+		return db_query( $query );
 	}
 	# --------------------
 	# updates the last_modified field
