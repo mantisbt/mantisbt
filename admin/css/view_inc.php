@@ -1,10 +1,34 @@
 <!-- Example file to see changes -->
 
+		<div align="center">
+			<span class="pagetitle">Mantis</span>
+		</div>
+		<table class="hide">
+		<tr>
+			<td class="login-info-left">Logged in as:
+				<span class="login-username">test</span>
+				<span class="small">(developer)</span>
+			</td>
+			<td class="login-info-middle">
+				<span class="login-time">09-19-02 04:38 Central Standard Time</span>
+			</td>
+			<td class="login-info-right">
+				<select name="f_project_id" class="small">
+					<option value="0000000">All Projects</option>
+					<option value="0000001">mantis</option>
+					<option value="0000003">public</option>
+					</select>
+				<input type="submit" value="Switch" class="small">
+			</td>
+		</tr>
+		</table>
+
 		<!-- Menu -->
 
 		<table class="width100" cellspacing="0">
 		<tr>
 			<td class="menu">
+				my menu text
 				<a href="">Main</a> |
 				<a href="">View Bugs</a> |
 				<a href="">Report Bug</a> |
@@ -23,6 +47,42 @@
 		</tr>
 		</table>
 
+
+		<br />
+
+		<div align="center">
+			<span class="pagetitle">Mantis</span>
+		</div>
+		<div class="login-info-left">Logged in as:
+			<span class="login-username">test</span>
+			<span class="small">(developer)</span>
+		</div>
+		<div class="login-info-right">
+			<span class="login-time">09-19-02 04:38 Central Standard Time</span>
+		</div>
+		<div class="login-info-right">
+			<select name="f_project_id" class="small">
+				<option value="0000000">All Projects</option>
+				<option value="0000001">mantis</option>
+				<option value="0000003">public</option>
+				</select>
+			<input type="submit" value="Switch" class="small">
+		</div>
+
+		<div class="menu-left">
+			<a href="">Main</a> |
+			<a href="">View Bugs</a> |
+			<a href="">Report Bug</a> |
+			<a href="">Summary</a> |
+			<a href="">Forums</a> |
+			<a href="">Account</a> |
+			<a href="">Documentation</a> |
+			<a href="">Logout</a>
+		</div>
+		<div class="menu-right">
+			&nbsp;<input class="small" type="input" name="f_id" size="6"><input class="small" type="submit" value="Jump">
+		</div>
+
 		<!-- News -->
 
 		<br />
@@ -37,7 +97,9 @@
 		</tr>
 		<tr>
 			<td class="news-body">
-				News Text
+				News Text<br />
+				<br />
+				Blah Blah Blah
 			</td>
 		</tr>
 		</table>
@@ -52,8 +114,16 @@
 			<td class="form-title">
 				Edit Account
 			</td>
-			<td class="right">
+			<td class="form-title">
+				<div class="menu">
 				[ Account ][ <a href="">Change Preferences</a> ][ <a href="">Manage Profiles</a> ]
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="form-title" colspan="2">
+				<div class="left"><span class="bold">Edit Account</span></div>
+				<div class="right">[ Account ][ <a href="">Change Preferences</a> ][ <a href="">Manage Profiles</a> ]</a>
 			</td>
 		</tr>
 		<tr class="row-1">
@@ -119,6 +189,16 @@
 			<td class="right">
 				[
 				1&nbsp;<a target=_top href="">2</a>&nbsp;<a target=_top href="">3</a>&nbsp;		]
+			</td>
+		</tr>
+		<tr>
+			<td class="form-title" colspan="9">
+				<div style="text-align: left; display: inline; float: left;">Viewing Bugs		(1 - 50 / 335)
+				<span class="small">[ <a target=_top href="">Print Reports</a> ]</span>
+				</div>
+				<div style="text-align: right; display: inline; float: right;">[
+				1&nbsp;<a target=_top href="">2</a>&nbsp;<a target=_top href="">3</a>&nbsp;		]
+				</div>
 			</td>
 		</tr>
 		<tr class="row-category">
