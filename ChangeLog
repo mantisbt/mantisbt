@@ -1,15 +1,13 @@
 Mantis
 
-To Do:
+02.14.2001  -   0.14.2
 
- * Search bugs capability
- * Add file upload module
- * Make priority, projection, eta useful
- * Add glyphs and icons as optional display feature
- * Userland partitioning for multiple projects
- * Add ip tracking/banning capability
- * Add postgreSQL support and/or a Database abstraction layer (PHPLib)
- * More documentation on installation, configuration, and customization
+ * Fixed default category in update mode to display correctly
+ * Fixed parse error in manage_user_reset.php3
+ * Fixed view pages to properly show selected category
+ * Altered is_valid_email to check for DNSs w/o MX records
+ * Added option to disable email validation (g_validate_email)
+ * Added project name and bugid in email subject
 
 02.12.2001  -   0.14.1
 
