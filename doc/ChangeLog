@@ -4,6 +4,8 @@ Mantis ChangeLog
 
 - 0004555: [administration] Warnings on set_time_limit() in safe mode (vboctor)
 - 0004528: [localization] Error on logout page with language=auto (thraxisp)
+- 0004667: [localization] croatian and latvian languages missing from config_defaults_inc.php (vboctor)
+- 0004573: [localization] Missing 'finnish' language choice in config_defaults_inc.php (vboctor)
 - 0004393: [feature] Version should be add with advanced options (bpfennig)
 - 0004400: [feature] Changelog should view release notes (vboctor)
 - 0004658: [feature] Changelog should support project_id parameter (vboctor)

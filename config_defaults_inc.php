@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.216 2004-10-02 14:53:02 thraxisp Exp $
+	# $Id: config_defaults_inc.php,v 1.217 2004-10-05 23:10:21 vboctor Exp $
 	# --------------------------------------------------------
 
 
@@ -314,12 +314,40 @@
 
 	# list the choices that the users are allowed to choose
 	$g_language_choices_arr	= array(
-		'auto', 'english', 'chinese_simplified', 'chinese_traditional', 'czech',
-		'danish', 'dutch', 'estonian', 'french', 'german', 'hungarian',
-		'italian', 'japanese_euc', 'japanese_sjis', 'japanese_utf8', 'korean', 
-		'lithuanian', 'norwegian', 'polish', 'portuguese_brazil', 'portuguese_standard',
-		'romanian', 'russian', 'russian_koi8', 'serbian', 'slovak', 'slovene', 
-		'spanish', 'swedish', 'turkish' );
+		'auto', 
+		'chinese_simplified', 
+		'chinese_traditional', 
+		'croatian',
+		'czech',
+		'danish', 
+		'dutch', 
+		'english', 
+		'estonian', 
+		'finnish',
+		'french', 
+		'german', 
+		'hungarian',
+		'italian', 
+		'japanese_euc', 
+		'japanese_sjis', 
+		'japanese_utf8', 
+		'korean', 
+		'latvian',
+		'lithuanian', 
+		'norwegian', 
+		'polish', 
+		'portuguese_brazil', 
+		'portuguese_standard',
+		'romanian', 
+		'russian', 
+		'russian_koi8', 
+		'serbian', 
+		'slovak', 
+		'slovene', 
+		'spanish', 
+		'swedish', 
+		'turkish'
+	);
 
 	# Browser language mapping for 'auto' language selection
 	$g_language_auto_map = array(
@@ -330,6 +358,7 @@
 		'da' => 'danish',
 		'nl-be, nl' => 'dutch',
 		'et' => 'estonian',
+		'fi' => 'finnish',
 		'fr-be, fr-ca, fr-ch, fr' => 'french',
 		'de-de, de-at, de-ch, de' => 'german',
 		'hu' => 'hungarian',
