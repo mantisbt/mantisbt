@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: config_defaults_inc.php,v 1.155 2004-03-26 09:29:07 vboctor Exp $
+	# $Id: config_defaults_inc.php,v 1.156 2004-03-26 09:31:15 vboctor Exp $
 	# --------------------------------------------------------
 
 	
@@ -742,11 +742,11 @@
 	$g_move_bug_threshold = DEVELOPER;
 
 	# Threshold needed to set the view status while reporting a bug or a bug note.
-	$g_set_view_status_threshold = NOBODY;  // REPORTER; // NOBODY; // REPORTER;
+	$g_set_view_status_threshold = REPORTER;
 
 	# Threshold needed to update the view status while updating a bug or a bug note.
 	# This threshold should be greater or equal to $g_set_view_status_threshold.
-	$g_change_view_status_threshold = NOBODY; // UPDATER;
+	$g_change_view_status_threshold = UPDATER;
 
 	# --- Threshold needed to show the list of users montoring a bug on the bug view pages.
 	$g_show_monitor_list_threshold = DEVELOPER;
