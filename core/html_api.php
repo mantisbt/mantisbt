@@ -6,7 +6,7 @@
 	# See the README and LICENSE files for details
 
 	# --------------------------------------------------------
-	# $Id: html_api.php,v 1.123 2004-08-20 12:30:09 vboctor Exp $
+	# $Id: html_api.php,v 1.124 2004-08-20 17:27:28 thraxisp Exp $
 	# --------------------------------------------------------
 
 	###########################################################################
@@ -710,12 +710,12 @@
 		} # end for
 
 		if ( count( $t_enum_list ) > 0 ) {
-			echo "&nbsp;<form method=\"post\" action=\"bug_change_status_page.php\">\n";
+			echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
 
 			$t_button_text = lang_get( 'bug_status_to_button' );
-			echo "	<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />\n";
+			echo "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";
 
-			echo "<select name=\"new_status\">";
+			echo " <select name=\"new_status\">"; # space at beginning of line is important
 			foreach ( $t_enum_list as $key => $val ) {
 				echo "<option value=\"$key\"";
 				check_selected( $val, $t_bug_current_state );  # select current status which doesn't exist, hence no selection
@@ -724,9 +724,9 @@
 			echo '</select>';
 
 			$t_bug_id = string_attribute( $p_bug_id );
-			echo "	<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
+			echo "<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
 
-			echo "</form>&nbsp;\n";
+			echo "</form>\n";
 		}
 	}
 
@@ -768,12 +768,12 @@
 			}
 		}
 
-		PRINT "&nbsp;<form method=\"post\" action=\"bug_assign.php\">\n";
+		PRINT "<form method=\"post\" action=\"bug_assign.php\">";
 
 		$t_button_text = lang_get( 'bug_assign_to_button' );
-		PRINT "	<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />\n";
+		PRINT "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";
 
-		PRINT "<select name=\"handler_id\">";
+		PRINT " <select name=\"handler_id\">"; # space at beginning of line is important
 
 		$t_already_selected = false;
 
@@ -808,9 +808,9 @@
 		PRINT "</select>";
 
 		$t_bug_id = string_attribute( $p_bug_id );
-		PRINT "	<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
+		PRINT "<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
 
-		PRINT "</form>&nbsp;\n";
+		PRINT "</form>\n";
 	}
 
 	# --------------------
@@ -921,42 +921,42 @@
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 		$t_status = bug_get_field( $p_bug_id, 'status' );
 
-		PRINT '<table><tr>';
+		PRINT '<table><tr class="vcenter">';
 		if ( !bug_is_readonly( $p_bug_id ) ) {
-			PRINT '<td>';
+			PRINT '<td class="center">';
 			# UPDATE button
 			html_button_bug_update( $p_bug_id );
 
-			PRINT '</td><td>';
+			PRINT '</td><td class="center">';
 
 			# ASSIGN button
 			html_button_bug_assign_to( $p_bug_id );
 
-			PRINT '</td><td>';
+			PRINT '</td><td class="center">';
 
 			# MOVE button
 			html_button_bug_move( $p_bug_id );
 
 			# CREATE CHILD button
-			PRINT '</td><td>';
+			PRINT '</td><td class="center">';
 			html_button_bug_create_child( $p_bug_id );
 
 			PRINT '</td>';
 		} 
 		if ( $t_resolved <= $t_status ) { # resolved is not the same as readonly
-			PRINT '<td>';
+			PRINT '<td class="center">';
 			# REOPEN button
 			html_button_bug_reopen( $p_bug_id );
 			PRINT '</td>';
 		}
 		
-		PRINT '<td>';
+		PRINT '<td class="center">';
 		# Change State button
 		html_button_bug_change_status( $p_bug_id );
 		PRINT '</td>';
 
 		# MONITOR/UNMONITOR button
-		PRINT '<td>';
+		PRINT '<td class="center">';
 		if ( !current_user_is_anonymous() ) {
 			if ( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
 				html_button_bug_unmonitor( $p_bug_id );
@@ -967,7 +967,7 @@
 		PRINT '</td>';
 
 		# DELETE button
-		PRINT '<td>';
+		PRINT '<td class="center">';
 		html_button_bug_delete( $p_bug_id );
 		PRINT '</td></tr></table>';
 	}
